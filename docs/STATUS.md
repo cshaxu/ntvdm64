@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T112 S1 — unexpected-interrupt mechanical bridge closure.**
+**Active: M0 T113 S1 — original unexpected-interrupt compile projection.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T112 S1, Ordinary Mode. |
-| Admission And Approval | T111 finds the original handler semantically appropriate but not directly linkable: its SoftPC `inb/outb/sas_store` platform calls have no admitted route to Bochs's internal PIC port dispatcher and RAM. This admits a closure specification, not implementation. |
-| Objective | Specify the smallest typed Bochs mechanical port/RAM bridge and the exact original-handler/shim object closure required to evaluate contained reuse of `unexpected_int`. |
-| Non-goals | No Bochs/adapter/source implementation, no exception registration yet, no handler rewrite, no PIC/BIOS semantics in adapter, no build or runtime trace. |
-| Reference Baseline | etc/research/t111-s1-unexpected-interrupt-composition-audit-001.md; original `unexp_nt.c`; Bochs `pic.cc`, `iodev.h`, `devices.cc`, `memory.h`. |
-| Files And ABI Surface | Read-only interface/link-dependency evidence and research/history/status records only. |
+| Identifier Mode | M0 T113 S1, Ordinary Mode. |
+| Admission And Approval | T112 establishes that a generic adapter-callable port API would be re-entrant while Bochs is handling #UD and would improperly widen adapter device authority. Original-handler reuse remains preferred but its compatible compile closure is unproven. |
+| Objective | Produce a no-link compile projection for original `unexp_nt.c`: identify minimal compatibility declarations, historical toolchain requirements and unresolved symbols without writing a shim or invoking Bochs. |
+| Non-goals | No source/Bochs/adapter implementation, no generic port ABI, no exception registration, no linking, runtime build/trace, handler rewrite or device enablement. |
+| Reference Baseline | etc/research/t112-s1-unexpected-interrupt-mechanical-bridge-closure-001.md; original `unexp_nt.c` and include chain; toolchain-island rules. |
+| Files And ABI Surface | Generated preprocessor/compile-projection evidence and research/history/status records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Record each original external symbol/include, the required mechanical operation, its proposed owner/ABI shape, and whether existing Bochs interfaces are accessible without new intrusion. |
-| Expected Markers | A finite link/ABI manifest plus a decision whether one narrowly registered Bochs mechanics intrusion is justified. |
-| Asset Needs | Existing source trees and existing intrusion register only. |
-| Reporting Requirements | Distinguish generic port dispatch from PIC semantic implementation; state every rejected broader interface. |
-| Stop Conditions | Stop before source modification, exception registration, build, runtime observation, feature enablement or a new BOP mapping. |
-| Exit Criteria | The exact next implementation packet or a concrete closure blocker is recorded. |
+| Verification | Record syntax-only command/input identity, include resolution, unresolved identifiers and required compiler mode; do not emit/link an executable. |
+| Expected Markers | A finite original-handler compile manifest or an exact historical-header/toolchain blocker. |
+| Asset Needs | Existing historical source and documented compatible compiler only. |
+| Reporting Requirements | Separate compile-only findings from runtime/link claims and retain output as evidence. |
+| Stop Conditions | Stop before shim code, linking, Bochs invocation, exception registration, runtime observation or semantic implementation. |
+| Exit Criteria | The minimum compile island is proven or its precise blocker is recorded. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check only `unexp_nt.c` compile/link dependencies and the existing intrusion register; do not audit other SoftPC handlers. |
+| Similar-Issue Sweep | Check only duplicate `unexp_nt.c` overlay copies and its exact headers; do not audit other SoftPC handlers. |
 
 ## Current Technical Baseline
 
@@ -119,5 +119,6 @@
 | M0 T109 | Closed: selector 02 is unclaimed; the focused static test proves `52h` XMS and `57h` VdmRedir identities, with no runtime claim. |
 | M0 T110 | Closed: selector 02 is SoftPC `unexpected_int` plus guest IRET, with PIC/BIOS-data side effects; it is not an adapter service. |
 | M0 T111 | Closed: original semantics require Bochs-owned PIC port dispatch and RAM; direct link and adapter reimplementation are both rejected. |
-| M0 T112 S1 | Active: read-only mechanical-bridge and original-handler link-closure specification. |
+| M0 T112 | Closed: source closure is finite but current ABI cannot synchronously transport multi-step native I/O; generic port API is rejected pending original compile proof. |
+| M0 T113 S1 | Active: no-link original-handler compile projection. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
