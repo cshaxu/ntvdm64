@@ -1,8 +1,8 @@
 # Architecture Rules
 
-1. Bochs 2.6 owns guest CPU, RAM/ROM, firmware and PC-device mechanics; guest OpenNT owns DOS/WOW/COMMAND behavior; the adapter host-service plane owns the source-derived replacement of unavailable historical BOP/DEM host composition. Neither Bochs nor guest code may absorb the other's responsibility.
+1. Bochs 2.6 owns guest CPU, RAM/ROM, firmware and PC-device mechanics; guest OpenNT owns DOS/WOW/COMMAND behavior; the adapter host-service plane owns routing to the original OpenNT host provider where it can be independently composed, and the source-derived replacement only where that historical host composition is unavailable. Neither Bochs nor guest code may absorb the other's responsibility.
 2. The Bochs/OpenNT bridge is the only integration point. It uses versioned fixed-width records, validated guest-memory ranges and explicit stop/result dispositions; no host pointer, C++ object or cross-architecture function pointer crosses it.
-3. A local OpenNT recovery requires a reached OpenNT caller, owner analysis, data-layout and failure-behavior evidence, and a bounded fixture.
+3. A local OpenNT recovery requires a reached OpenNT caller, owner analysis, data-layout and failure-behavior evidence, and a bounded fixture. Provider selection is ordered: independently composable original OpenNT host code first; then the same original code with only declared contained host-platform capabilities substituted; then a minimal source-derived rehost; otherwise the original evidenced unavailable/failure behavior or an explicit deferral.
 4. An OpenNT overlay or host seam cannot become a CPU, firmware, device, DOS-kernel/filesystem or WOW implementation. The adapter may dispatch its declared source-derived host-service catalogue, but must not become a Bochs CPU/device substitute or an unbounded DOS product.
 5. `ntvdm64` and other comparison repositories remain read-only evidence. Bochs 2.6 is the sole approved third-party internal-research runtime backend once its pinned import record passes T95.
 6. Default product targets cannot depend on unreviewed artifacts, fixtures, or an unpinned third-party source snapshot.

@@ -7,7 +7,7 @@
 | CLI (`src/cli`) | CLI invocation, BYOB identity admission, contained host policy, diagnostics, and engine launch | Does not interpret guest instructions, read/write guest RAM, or invent DOS behavior. |
 | Bochs 2.6 backend | x86 execution, RAM/ROM, interrupt and PC device mechanics, CPU stop events | Does not implement or dispatch OpenNT DOS/WOW services. |
 | Bochs adapter/shim | Sole integration layer: owns the versioned typed ABI, native-container lifecycle calls, validated guest-memory exchange, and conversion between a Bochs mechanical event and the adapter host-service plane | Does not recreate Bochs `SIM`, CPU, memory, exception, or device behavior. |
-| Adapter NTVDM host-service plane | Coherent, source-derived rehosting of the historical host BOP/DEM composition when that composition cannot be linked without CCPU/SAS | Does not implement DOS kernel/filesystem algorithms, WOW behavior, CPU, firmware, or PC devices. |
+| Adapter NTVDM host-service plane | Coherent routing to independently composable original OpenNT BOP/DEM host providers, with source-derived rehosting only when the historical composition cannot be linked without CCPU/SAS | Does not implement DOS kernel/filesystem algorithms, WOW behavior, CPU, firmware, or PC devices. |
 | OpenNT guest layer | NTDOS, DOS utilities, command programs and WOW payloads | Does not provide an x86 interpreter, firmware replacement, PC devices, or host service composition. |
 | Host compatibility seam | Contained modern host facilities used by the host-service plane | Does not define CPU/device behavior or reach into Bochs internals. |
 | Research fixture | Narrow evidence/probe | Default-disabled; never silently promoted to the product runtime. |
@@ -81,11 +81,22 @@ outside this adoption path; see
 
 Guest OpenNT/DOS behavior stays in guest code. Historical host-service
 contracts retain their original calling conventions, layouts, dispatch order
-and failure outcomes. If the source host composition cannot be linked without
-the rejected CCPU/SAS graph, the adapter host-service plane rehosts that
-specific recorded contract as part of its shared catalogue. It never puts such
-semantics into Bochs, and it never claims the complete historical composition
-has been restored. See `design/ADAPTER-HOST-SERVICE-PLANE.md`.
+and failure outcomes. The adapter's preferred role is parameter/result ABI
+adaptation and routing to original OpenNT host code, not BOP rewriting. Each
+endpoint selects exactly one provider disposition in this order:
+
+1. Independently composable original OpenNT host implementation;
+2. The original implementation with only declared, contained CLI capability
+   backends replacing intrusive NT host facilities;
+3. Minimal source-derived rehost of the recorded original contract when the
+   original composition cannot be linked without CCPU/SAS or obsolete ABI
+   dependencies; or
+4. Original evidenced unavailable/failure behavior, or explicit deferral.
+
+The third option is exceptional: it must name the failed composition edge and
+must not broaden into a free rewrite. No option puts host-service semantics
+into Bochs or claims the complete historical composition has been restored.
+See `design/ADAPTER-HOST-SERVICE-PLANE.md`.
 
 ## Historical Evidence Role
 

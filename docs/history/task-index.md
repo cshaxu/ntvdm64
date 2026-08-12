@@ -7,17 +7,23 @@ during the initial documentation migration. It is retired. `M0`--`M92`,
 `G0.4`, and `R1`--`R5` remain historical record identifiers only; they are not
 available `T` task numbers and do not define the current task sequence.
 
+## Closed Numeric Tasks
+
+| Task | Closure disposition | Record |
+| --- | --- | --- |
+| `M0 T95` | Closed by owner-authorized reprioritization. It delivered the Bochs/adapter mechanics, full BOP observation, selected source-led endpoint evidence, controlled terminal stop, and CLI child-EOF evidence. Its unfinished contained file/search and full real-path closure are transferred as explicitly uncompleted work. | [m0-t95-closure-20260811.md](m0-t95-closure-20260811.md) |
+
 ## Current Numbering Authority
 
 The current task sequence is governed by
 [task-identifier-governance.md](../etc/operations/task-identifier-governance.md).
-Its active implementation packet is **M0 T95**. New task numbers continue
+Its active implementation packet is **M0 T96**. New task numbers continue
 strictly from the last closed numeric `T`; they are never inferred from legacy
 `M`, `G`, or `R` labels.
 
-Lowercase `r<n>` build and fixture labels are also legacy run evidence, not
-task identifiers. Their current `M0 T95 S1` mapping is recorded in
-`../etc/operations/task-identifier-governance.md`.
+Lowercase `r<n>` build and fixture labels remain legacy run evidence, not task
+identifiers. Their T95 mapping is retained in the closed-task record and
+identifier governance record.
 
 ## Historical Lookup
 

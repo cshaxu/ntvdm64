@@ -2,9 +2,9 @@
 
 ## Status
 
-Supporting plan for the active `M0 T95` task package. It is not an active
-packet, queue, or task allocation authority; `STATUS.md` owns the active S and
-`QUEUE.md` owns future T candidates.
+Closed supporting plan for `M0 T95`. It is retained as historical evidence;
+`STATUS.md` owns the active T96 S1 packet and `QUEUE.md` owns future T
+candidates.
 
 ## Evidence And Subtask Sequence
 
@@ -16,10 +16,10 @@ packet, queue, or task allocation authority; `STATUS.md` owns the active S and
 | S4 | Read-only host namespace projection | Evidence complete; P lifecycle remains unbackfilled. |
 | S5 | Paired search transaction bridge | Evidence complete through the native-fixture gate. |
 | S6 | Native minimal-target closure decision | Historical evidence retained; the current detailed ledger records its decision path. |
-| S7 | Contained read-only guest-file capability | **Active.** See `../../STATUS.md`. |
-| S8 | Bounded real-NTIO search trace | Future candidate within T95; admit only after the active S closes. |
-| S9 | CLI engine materialization | Future candidate within T95. |
-| S10 | Capability checkpoint and T95 closure decision | Final candidate within T95. |
+| S7 | Contained read-only guest-file capability | Partially evidenced; not closed as a complete capability. Its uncompleted file/search and trace work is transferred to Queue. |
+| S8 | Bounded real-NTIO search trace | Unadmitted; transferred to Queue as a future candidate. |
+| S9 | CLI engine materialization | Unadmitted; transferred to Queue as a future candidate. |
+| S10 | Capability checkpoint and T95 closure decision | Superseded by the owner-authorized T95 closure record. |
 
 The detailed former status content is retained in
 `../evidence/m0-t95-status-ledger-20260811.md`. New detailed S evidence belongs

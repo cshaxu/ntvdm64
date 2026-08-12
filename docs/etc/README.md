@@ -19,6 +19,7 @@ the documented exporter whenever a governed document changes.
 The identifier and execution model is
 [task-identifier-governance.md](operations/task-identifier-governance.md).
 The active package's detailed subtask plan is
-[m0-t95-subtask-plan.md](operations/m0-t95-subtask-plan.md), and its retained
-chronology is
+[m0-t96-subtask-plan.md](operations/m0-t96-subtask-plan.md). The closed T95
+plan and retained chronology remain
+[m0-t95-subtask-plan.md](operations/m0-t95-subtask-plan.md) and
 [m0-t95-status-ledger-20260811.md](evidence/m0-t95-status-ledger-20260811.md).

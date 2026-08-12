@@ -27,9 +27,10 @@ M<milestone> T<task> S<subtask> P<part>
 - **P** is one accepted, committed, and pushed delivery of an S. Corrections
   use the next P; an accepted P is not rewritten.
 
-The active implementation package is `M0 T95`; its next admitted implementation
-subtask must be formatted `M0 T95 S<n> P<n>`. `T95` is not replaced or
-renumbered by this governance work.
+`M0 T95` closed by owner-authorized reprioritization on 2026-08-11; its
+closure record is `../../history/m0-t95-closure-20260811.md`. The active
+implementation package is `M0 T96`; its next delivery must be formatted
+`M0 T96 S<n> P<n>`.
 
 ## r Run Records
 
@@ -42,7 +43,8 @@ declared accepted P deliveries.
 | Current package | Run range | Classification | Formal P disposition |
 | --- | --- | --- | --- |
 | `M0 T95 S1` | `r1`--`r23` | Historical Bochs/adapter mechanics and first-profile evidence iterations. | Retained as evidence aliases only; no P is backfilled. |
-| Any later `M0 T95 S<n>` | New run(s) | Reproducible build/fixture evidence for the admitted S. | The accepted commit is `P<n>`; it links its run IDs, rather than renaming them. |
+| Later `M0 T95 S<n>` | New run(s) | Retained T95 evidence where present. | No P is backfilled during closure. |
+| `M0 T96 S<n>` | New run(s) | Reproducible build/fixture evidence for the admitted S. | The accepted commit is `P<n>`; it links its run IDs, rather than renaming them. |
 
 A P may cite one or more r runs, including failed diagnostic runs, but P is
 the accepted commit/review boundary. A run cannot allocate a T or S, close an
