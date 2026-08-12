@@ -99,6 +99,15 @@ target_include_directories(byob-launch-declaration-v1-test PRIVATE src/cli)
 target_compile_features(byob-launch-declaration-v1-test PRIVATE c_std_11)
 target_compile_definitions(byob-launch-declaration-v1-test PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
 
+add_executable(byob-launch-plan-v2-test EXCLUDE_FROM_ALL
+    src/cli/byob_launch_declaration_v1.c
+    src/cli/byob_launch_plan_v2.c
+    tests/runner/byob_launch_plan_v2_test.c
+)
+target_include_directories(byob-launch-plan-v2-test PRIVATE src/cli)
+target_compile_features(byob-launch-plan-v2-test PRIVATE c_std_11)
+target_compile_definitions(byob-launch-plan-v2-test PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
+
 add_executable(bx-ntvdm-readonly-namespace-test EXCLUDE_FROM_ALL
     src/cli/byob_image.c
     src/cli/byob_identity.c
