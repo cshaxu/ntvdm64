@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 564 |
+| Documentation records | 565 |
 | --- | --- |
-| Generated UTC | 2026-08-12T05:29:24Z |
+| Generated UTC | 2026-08-12T05:31:09Z |
 
 ## Entries
 
@@ -297,6 +297,7 @@ content-divergent entries.
 | etc/research/t95-s7-top-level-5a-5f-owner-audit-001.md | indexed supporting material | 0ae8ab04fdbaa99f723b9a8986fe2eb570673ea929fee72fd24307ca75f8e7cb |
 | etc/research/t96-s1-opennt-bop-provider-module-map-001.md | indexed supporting material | ab863d4a4717ce375891a4064f2131f577b59b6cdafd8d96aa771ab165d0b5af |
 | etc/research/t96-s2-bop-ingress-abi-001.md | indexed supporting material | 25ad6db0c46703b8b992823380b67aa84607cbf96fbf2375a1c2d60f24807421 |
+| etc/research/t96-s3-dem-component-boundaries-001.md | indexed supporting material | bf524117e2575fff1ea070014f8ee927f7f305687f152768b9bcb48aa739140c |
 | etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | ffa26f7a5c9e29a97273f5b8e1f32b5aa590899d96ae6ddb80d89e2270adf679 |
 | execution-workflow.md | retained pre-governance evidence | e5221d6627b9faad3bea9390561e37cd1ec045064321c9ea0b6a6bd816b6f126 |
 | FIRMWARE-PROFILE-INPUT-ADMISSION-REPORT.md | retained pre-governance evidence | c1f4a17d10761f92fa00e9c3ef8e0103dc739a89e33813e5a810d6cfac3311a4 |
