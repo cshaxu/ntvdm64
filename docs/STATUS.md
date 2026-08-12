@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T179 S4 — normal-return machine-path observation.**
+**Binding active packet: M0 T180 S1 — post-target COMMAND lifecycle map.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T179 S4**; all pre-admission T177/T178/T179-labelled files
+> The binding active packet below is **M0 T180 S1**; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active T177 packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T179 S4, Ordinary Mode. |
-| Admission And Approval | S3 admits exactly one existing-binary observation using retained source-built SHARE, profile, POST ROM and configuration identities. No source/build or semantic change is authorized. |
-| Objective | Observe the existing original `illegal_op_int` machine island once in the normal-return candidate path, classifying `50:3C`, selector `06h` and post-loop continuation only. |
-| Non-goals | No Bochs, adapter, OpenNT or CLI behavior change; no new runtime observation; no result transport; no BOP-provider extension; no synthetic stack/vector state. |
-| Reference Baseline | T176 S19/S20 normal-return candidate evidence, T178 predecessor map, retained OpenNT DOS teardown source and existing Bochs stack mechanics audit. |
-| Files And ABI Surface | Existing T177 binary and retained T182 BYOB/profile/configuration inputs; one fresh evidence directory; Status/plan only. |
+| Identifier Mode | M0 T180 S1, Ordinary Mode. |
+| Admission And Approval | Owner-authorized autonomous prioritization. T179 proves original machine handling removes the vector/stack loop, but the path next reaches COMMAND `54:01` and not `54:11`; Queue candidate 1 is admitted as the required composition predecessor. |
+| Objective | Map the original COMMAND caller, dispatcher and no-next-command/return alternatives for the post-target `54:01` boundary, classifying all host-intrusive dependencies. |
+| Non-goals | No Bochs/adapter/OpenNT/CLI behavior change; no new runtime observation; no result transport; no generic machine BOP handling; no host command queue or synthetic guest state. |
+| Reference Baseline | T179 S4 normal-return machine observation, retained OpenNT COMMAND source, T171--T174 lifecycle audits and current BOP catalogue. |
+| Files And ABI Surface | Read-only OpenNT/adapter source, retained traces and one research record; Status/plan only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Verify all input hashes before launch; one direct-PID record/log; count `50:3C`, selector `06h`, machine outcome/report and terminal markers; run governance checks and `git diff --check`. |
-| Expected Markers | Exact input hashes, one observation record, finite machine-handler disposition, and no CLI result claim. |
+| Verification | Reconcile original `tcode.asm`, `cmddisp.c`, `cmdexec.c` and retained `54:01` trace context; run governance checks and `git diff --check`. |
+| Expected Markers | Finite source/trace lifecycle table, host-intrusive dependency list, and explicit provider/owner disposition. |
 | Asset Needs | Retained source and logs only. |
 | Reporting Requirements | Separate observed facts from source inference; state whether a later implementation package is justified. |
-| Stop Conditions | Hash mismatch, source/build request, device/firmware/vector change, BOP-provider extension, a second observation, or host-result interpretation. |
-| Exit Criteria | One evidence record classifies the existing machine-handler reachability in the normal-return path, without a repair or CLI-result claim. |
+| Stop Conditions | A need to treat `54:01` as generic machine BOP, add a host queue, infer a result from process exit, change runtime behavior, or assert a caller without source/trace support. |
+| Exit Criteria | Post-target `54:01` is source/trace classified and its next finite composition decision is identified without implementation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
