@@ -19,11 +19,12 @@ not a provider build or runtime assertion.
 | not-callable-sentinel | 1 | SVC_DEMLASTSVC is a table boundary, not a callable service. |
 | source-definition-unresolved | 0 | No dispatcher handler lacks a source definition. |
 
-The original unavailable services are 31 GETDRIVEINFO, 36 SETDPB, 38
+The original no-implementation services are 31 GETDRIVEINFO, 36 SETDPB, 38
 SLEAZEFUNC, 40 EXTHANDLE, 43 GSETCDPG, 64 DRIVEFROMHANDLE, 66 FASTREAD, and
-67 FASTWRITE. They retain an unavailable disposition until a separate
-source-proven failure contract is introduced; they must not be implemented
-because an adapter endpoint happens to exist.
+67 FASTWRITE. The historical demNotYetImplemented body is not an error path:
+after optional debug output it executes setCF(0). They must not acquire a
+new service implementation merely because an adapter endpoint happens to
+exist, but their source-proven no-op/CF-clear contract may be rehosted.
 
 ## Consequences
 
@@ -62,3 +63,12 @@ The FASTREAD conflict proves that historical reachability or an old endpoint
 is not enough to admit a provider. No entry in the table currently reports
 original-provider composability, and none may be added to the new DEM module
 until its OpenNT contract and replacement blocker are recorded.
+
+## Original no-implementation provider slice
+
+The adapter-local DEM provider in bx_ntvdm_dem_provider_v1.c now rehosts only
+the exact demNotYetImplemented contract for all eight table slots: validate
+the common DEM selection, resume after the four-byte BOP, and clear CF. It
+does not implement FASTREAD or FASTWRITE, access a file, parse guest memory,
+or alter general-purpose registers. The focused test also proves that service
+22 DEMREAD is not owned by this slice.

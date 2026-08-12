@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 563 |
+| Documentation records | 564 |
 | --- | --- |
-| Generated UTC | 2026-08-12T05:26:15Z |
+| Generated UTC | 2026-08-12T05:29:24Z |
 
 ## Entries
 
@@ -297,7 +297,7 @@ content-divergent entries.
 | etc/research/t95-s7-top-level-5a-5f-owner-audit-001.md | indexed supporting material | 0ae8ab04fdbaa99f723b9a8986fe2eb570673ea929fee72fd24307ca75f8e7cb |
 | etc/research/t96-s1-opennt-bop-provider-module-map-001.md | indexed supporting material | ab863d4a4717ce375891a4064f2131f577b59b6cdafd8d96aa771ab165d0b5af |
 | etc/research/t96-s2-bop-ingress-abi-001.md | indexed supporting material | 25ad6db0c46703b8b992823380b67aa84607cbf96fbf2375a1c2d60f24807421 |
-| etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | 57fcf1af74ed572cb6dac71209954b651efbead9c9b1fe333bed7a0c004cdc16 |
+| etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | ffa26f7a5c9e29a97273f5b8e1f32b5aa590899d96ae6ddb80d89e2270adf679 |
 | execution-workflow.md | retained pre-governance evidence | e5221d6627b9faad3bea9390561e37cd1ec045064321c9ea0b6a6bd816b6f126 |
 | FIRMWARE-PROFILE-INPUT-ADMISSION-REPORT.md | retained pre-governance evidence | c1f4a17d10761f92fa00e9c3ef8e0103dc739a89e33813e5a810d6cfac3311a4 |
 | GFI-MEDIA-HOST-BOUNDARY.md | retained pre-governance evidence | f5f6ab1ae2cb338541e3a173b6a9a22316252f5ec84a03557169ba083987cebf |
@@ -326,6 +326,7 @@ content-divergent entries.
 | history/m0-t96-s2-p2-20260811.md | closed task history | 256c71f39cec0698374b2372175637e9b83b846a6c062adc496c3ef08c771bb8 |
 | history/m0-t96-s3-p1-20260811.md | closed task history | 6a6942b879b5fd9528068a5e1483feece7e5d4ce57da4a91e9cc7ee8901144fd |
 | history/m0-t96-s3-p2-20260811.md | closed task history | 02d8f05adceb07e323dc7844e183d990d32163c751e520a83956bbb395a6a365 |
+| history/m0-t96-s3-p3-20260811.md | closed task history | 4539a38f22402a0f9c530872bbbf85ece8c8945f7fa9562828132c8dd37f8ec5 |
 | history/task-index.md | closed task history | e8ded72d23a4f2913b46b95173b710a16781f44614b98ec6cbcfcaa08233d939 |
 | HOST-APPLINIT-PREFIX-TRACE.md | retained pre-governance evidence | 1d43eca6ad570ac29479420ec0773724a160c058e9cf16bc85e3450f286efabe |
 | HOST-CONSOLE-UI-BOUNDARY.md | retained pre-governance evidence | fb9a692c698c144e8860379aff13d82499d03847a0ddfda1bbf60351ad7d2e2f |
