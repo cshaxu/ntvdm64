@@ -11,11 +11,11 @@ before S8 closes.
 | Source module | Identity | Original owner / target plane | Current status |
 | --- | --- | --- | --- |
 | `dem_readonly_file_service` | 50:00,02,12,16 | DEM namespace | Freeze; source-derived candidate, plane gate pending. |
-| `dem_boot_drive_service` | 50:0D | DEM GSET | Freeze; plane gate pending. |
-| `dem_drive_service` | 50:0F | DEM GSET | Freeze; plane gate pending. |
-| `dem_debug_service` | 50:3B | DEM misc | Freeze; plane gate pending. |
-| `dem_hard_error_service` | 50:32 | DEM error/lock | Freeze; plane gate pending. |
-| `dem_ioctl_changeable_service` | 50:21 / AL=08 | DEM raw-media | Freeze; source pair is incomplete for CLI provider. |
+| `dem_boot_drive_service` | 50:0D | DEM GSET | Plane gate active; source-derived candidate remains frozen. |
+| `dem_drive_service` | 50:0F | DEM GSET | Plane gate active; source-derived candidate remains frozen. |
+| `dem_debug_service` | 50:3B | DEM misc | Plane gate active; source-derived candidate remains frozen. |
+| `dem_hard_error_service` | 50:32 | DEM error/lock | Plane gate active; source-derived candidate remains frozen. |
+| `dem_ioctl_changeable_service` | 50:21 / AL=08 | DEM raw-media | Plane gate active; source pair is incomplete for CLI provider. |
 | `dem_dta_service` | 50:1B | DEM GSET | Freeze; plane gate pending. |
 | `dem_dpb_service` | 50:46 | DEM GSET | Freeze; plane gate pending. |
 | `vdd_create_user_notify_service` | 50:36 | DEM misc / VDD composition | Freeze; no VDD admission. |
@@ -24,7 +24,7 @@ before S8 closes.
 | `cmd_set_info_service` | 54:05 | COMMAND launch | Freeze; no retained guest pointer admission. |
 | `cmd_boot_file_service` | 54:0C,0D | COMMAND config | Freeze; paired source-derived candidate. |
 | `cmd_current_dir_service` | 54:04 | COMMAND launch | Freeze; contained namespace CWD not yet admitted. |
-| `cmd_keyboard_layout_service` | 54:0E | COMMAND console | Freeze; VDD/keyboard dependency. |
+| `cmd_keyboard_layout_service` | 54:0E | COMMAND console | Plane gate active; VDD/keyboard dependency remains deferred. |
 | `bios_memory_service` | BIOS form | Bochs memory | Reject as adapter BIOS provider; retain only evidence test. |
 | `mouse_install1_mapping_service` | BIOS mouse form | Bochs mouse/input/video | Reject as adapter provider; retain only evidence test. |
 | `wait_if_idle_service` | 5A | Top-level VDD idle | Freeze; CLI scheduler contract absent. |
