@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T125 S1 — fixed-bundle native-engine preflight.**
+**Active: M0 T126 S1 — repeated DEM `50:11` source-contract audit.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T125 S1, Ordinary Mode. |
-| Admission And Approval | T124 source/test closure establishes the fixed shim ABI. Owner authorizes ROI-directed sequencing and later human review. |
-| Objective | Assemble and validate one immutable T121-compatible engine bundle, then collect one bounded native Bochs preflight through the shim. |
-| Non-goals | No Bochs/adapter/guest source edit, no BOP/provider change, no arbitrary configuration, device enablement, or continuous-execution claim. |
-| Reference Baseline | etc/research/t123-s1-bochs-engine-shim-startup-descriptor-001.md and history/m0-t124-closure-20260812.md. |
-| Files And ABI Surface | Generated artifact bundle/evidence only; the frozen CLI shim ABI. |
+| Identifier Mode | M0 T126 S1, Ordinary Mode. |
+| Admission And Approval | T125 proves the real shim-to-native launch and reaches a new repeated BOP path. Owner authorizes ROI-directed sequencing and later human review. |
+| Objective | Use OpenNT source, the existing whole BOP catalogue, and the T125 copied register trace to identify `50:11`'s historical owner, input/output/return contract and the smallest missing prerequisite or incorrect result class. |
+| Non-goals | No BOP handler/provider implementation, no Bochs/adapter/guest source edit, no device enablement, no loop suppression, and no rerun beyond T125 evidence. |
+| Reference Baseline | history/m0-t125-closure-20260812.md, T96/T99 DEM provider evidence, and the retained T125 trace. |
+| Files And ABI Surface | Read-only OpenNT/adapter source and a research record only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Record exact bundle hashes; prove the shim reaches the native parser with the fixed argv/config; classify its bounded exit without interpreting it as guest runtime. |
-| Expected Markers | Immutable bundle manifest, private run config, bounded native process result and retained stdout/stderr. |
-| Asset Needs | Retained T121 executable and its three ROM inputs, a valid BYOB profile/root, and modern CLI toolchain. |
-| Reporting Requirements | Keep source/test proof separate from native-engine evidence; record every input identity and resulting stop category. |
-| Stop Conditions | Stop on missing retained input, hash mismatch, required Bochs/adapter change, ambient discovery, arbitrary config, or unbounded guest behavior. |
-| Exit Criteria | One reproducible native preflight is classified, whether it passes to the expected bounded stop or rejects a declared fixed input. |
+| Verification | Reconcile selector/service identity with original source dispatcher and all current provider dispositions; trace the caller/continuation and prove any claimed missing prerequisite from source. |
+| Expected Markers | One source-backed contract table and a disposition: existing provider fault, missing native prerequisite, original unavailable behavior, or insufficient evidence. |
+| Asset Needs | Imported OpenNT source, current BOP catalogue/provider records, and T125 stderr. |
+| Reporting Requirements | Distinguish source fact from trace inference; name the next owner only if the evidence is sufficient. |
+| Stop Conditions | Stop on an unclassified selector/service, a required semantic source change, or evidence that expands into another BOP family. |
+| Exit Criteria | `50:11` is classified with a bounded next action or explicit blocker; no speculative fix is made. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Preserve direct runner-to-Bochs rejection, bundle immutability and arbitrary-config rejection; do not reopen BOP families. |
+| Similar-Issue Sweep | Compare the T125 `50:11` loop with T122's `50:36` controlled stop and existing DEM service-11 entries; do not reopen unrelated BOP families. |
 
 ## Current Technical Baseline
 
@@ -132,4 +132,5 @@
 | M0 T122 | Closed: the frozen deferred image reaches 31 observed BOPs and normal CPU-loop shutdown; `02h` is not observed and no machine handler result is claimed. |
 | M0 T123 | Closed: thin CLI-to-Bochs shim startup descriptor is frozen. |
 | M0 T124 | Closed: CLI-only shim source/test closure verifies the fixed, manifest-identified bundle contract with a fake native parser; real Bochs remains T125 evidence. |
+| M0 T125 | Closed: fixed bundle reaches the native parser/POST and a repeated `50:11` BOP path; watchdog terminates the bounded process tree, so no continuous-execution claim is made. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
