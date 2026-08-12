@@ -10,8 +10,8 @@ semantics.
 | S | Scope | Initial disposition |
 | --- | --- | --- |
 | S1 | Inventory exact v5 profile/root, runner/shim/bundle, target identities and durable controller. | Complete: inputs exist; the previous observer is rejected because it lacks tree cleanup. |
-| S2 | Define one fixed watchdog envelope and its success/unfinished classification rules. | Active in Status. |
-| S3 | Run exactly one watchdog-bounded observation and classify its retained evidence. | Pending S2. |
+| S2 | Define one fixed watchdog envelope and its success/unfinished classification rules. | Complete: static controller captures inputs/streams/outcome and tree-terminates from wrapper PID. |
+| S3 | Run exactly one watchdog-bounded observation and classify its retained evidence. | Complete: watchdog result is durable; `54:0C` loops before `54:01` because v5 lacks boot-file selection projection. |
 
 ## Invariants
 

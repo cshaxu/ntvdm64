@@ -8,7 +8,7 @@ not belong here.
 
 | Order | Candidate T package | Boundary | Admission evidence |
 | --- | --- | --- | --- |
-| 1 | Bounded v5 finite declared-target sequence observation | Launch one watchdog-bounded current runner/shim/fixed-bundle tuple with the fixed two-slot profile and classify only durable process/BOP/transaction markers. | The completed CLI bundle packet proves the current runner, shim, linked engine and fixed ROM bundle compose without passing BYOB arguments to raw Bochs. |
+| 1 | Complete v5 runtime selection projection | Project validated v5 command placement, boot-file materialization and declared slot-zero compatibility fields into adapter runtime selection; retain the existing two-slot contract and boot namespace provider. | The completed bounded observation proves a `54:0C` loop before `54:01`; source audit identifies missing v5 selection fields, not a Bochs or BOP semantic gap. |
 | 2 | Engine-owned declared DOS terminal-result transport | Expose a captured, fixed-width DOS status to the CLI only after normal `54:11` return is runtime-proven and a distinct engine/Bochs transport ABI is designed. | A real normal-return trace, source/test proof of its continuation, and a fixed-width transport that does not overload process exit codes or introduce host broker semantics. |
 
 Queue order expresses priority only. It is neither approval nor a numeric T
