@@ -71,5 +71,5 @@
 | M0 T96 S8 | Complete: legacy recognizers are plane-gated, frozen or rejected; no-bypass verification is active. |
 | M0 T96 S9 | Admitted in Ordinary Mode; full inventory/provider/capability regression begins. |
 | M0 T96 S9 | Complete: 192 callable services traverse ingress, registry and plane classification; inventory counts are independently verified. |
-| M0 T96 S10 | Admitted in Ordinary Mode; real-path trace and T96 closure checkpoint begins. |
+| M0 T96 S10 P1 | Complete checkpoint: r49 linked all T96 plane/gate objects and a fresh bounded NTIO/NTDOS run reached the original-unavailable `50:42` boundary; see etc/research/t96-s10-real-path-checkpoint-001.md. T96 remains active until owner selection/admission of its successor permits formal closure. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
