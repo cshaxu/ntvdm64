@@ -14,7 +14,7 @@ boundary map, not a claim that a group is independently linkable.
 | demfcb.c | 8 | FCB compatibility plane. It shares DOS file structures and guest-memory contracts with file/search; defer as one group, not as FCB one-offs. |
 | demgset.c | 13 | Drive/time/system-information plane. Some operations may become contained CLI capability substitutions, but registry/current-directory mutation and drive/DPB assumptions require individual source-contract review within this group. |
 | demdasd.c | 2 | Absolute disk I/O. Defer: raw host block devices are outside the read-only CLI namespace and must not be exposed by a convenience shim. |
-| demioctl.c | 1 | Device/drive IOCTL. Defer until the selected projected-drive profile has a source-derived device contract. |
+| demioctl.c | 1 | Device/drive IOCTL. The full source contract is recorded in `t96-s3-demioctl-source-contract-001.md`: AL=08/09 form one immutable projected-drive metadata slice; AL=0D/11 form one raw block-media slice and remain deferred. |
 | demerror.c, demlock.c | 3 | DOS error, retry, and locking state. Defer until their guest structure and process-state ownership are closed. |
 | demmisc.c | 13 | Startup, symbols, VDM/WOW, console, debug, output and termination miscellany. Split only by original dependency evidence; do not import VDD/WOW/monitor semantics into the adapter. |
 | demdisp.c | 1 | Set-V86-kernel-address historic monitor bridge. Defer to the native monitor/CPU owner; adapter may not synthesize it. |

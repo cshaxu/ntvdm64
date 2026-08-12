@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 568 |
+| Documentation records | 570 |
 | --- | --- |
-| Generated UTC | 2026-08-12T05:40:38Z |
+| Generated UTC | 2026-08-12T05:46:15Z |
 
 ## Entries
 
@@ -297,9 +297,10 @@ content-divergent entries.
 | etc/research/t95-s7-top-level-5a-5f-owner-audit-001.md | indexed supporting material | 0ae8ab04fdbaa99f723b9a8986fe2eb570673ea929fee72fd24307ca75f8e7cb |
 | etc/research/t96-s1-opennt-bop-provider-module-map-001.md | indexed supporting material | ab863d4a4717ce375891a4064f2131f577b59b6cdafd8d96aa771ab165d0b5af |
 | etc/research/t96-s2-bop-ingress-abi-001.md | indexed supporting material | 25ad6db0c46703b8b992823380b67aa84607cbf96fbf2375a1c2d60f24807421 |
-| etc/research/t96-s3-dem-component-boundaries-001.md | indexed supporting material | bf524117e2575fff1ea070014f8ee927f7f305687f152768b9bcb48aa739140c |
+| etc/research/t96-s3-dem-component-boundaries-001.md | indexed supporting material | 30676b29f40e84119444a1d8a9d51428180cdb564b3c2db9ed8e6d35f94405be |
 | etc/research/t96-s3-demgset-disposition-001.md | indexed supporting material | 45a73927b018f106c0f0a5b3da15e4f01470a84b03b814d3696d48ee6c81304e |
-| etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | ffa26f7a5c9e29a97273f5b8e1f32b5aa590899d96ae6ddb80d89e2270adf679 |
+| etc/research/t96-s3-demioctl-source-contract-001.md | indexed supporting material | 08a3dd65659012643760fe79042dd45cca92e678b3304e9c66a96ffbcafc5d4a |
+| etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | 57c3f24ff606a8f5c86f6e2b5408638007f73ebacbaecb0da505be5cdf326777 |
 | execution-workflow.md | retained pre-governance evidence | e5221d6627b9faad3bea9390561e37cd1ec045064321c9ea0b6a6bd816b6f126 |
 | FIRMWARE-PROFILE-INPUT-ADMISSION-REPORT.md | retained pre-governance evidence | c1f4a17d10761f92fa00e9c3ef8e0103dc739a89e33813e5a810d6cfac3311a4 |
 | GFI-MEDIA-HOST-BOUNDARY.md | retained pre-governance evidence | f5f6ab1ae2cb338541e3a173b6a9a22316252f5ec84a03557169ba083987cebf |
@@ -331,6 +332,7 @@ content-divergent entries.
 | history/m0-t96-s3-p3-20260811.md | closed task history | 4539a38f22402a0f9c530872bbbf85ece8c8945f7fa9562828132c8dd37f8ec5 |
 | history/m0-t96-s3-p5-20260811.md | closed task history | ce0e494e6d87c671d13e902f4607fa6c9647d004637b815ae31fc2b039f5164a |
 | history/m0-t96-s3-p6-20260811.md | closed task history | ba773c270d3d62443b94c28829770bd16efd67c88a8796f3f392920a718160ef |
+| history/m0-t96-s3-p7-20260811.md | closed task history | 0729e94427d33272ea780f85c7837a9a91b4a9f2d4f3aa48d842e4821b2aa124 |
 | history/task-index.md | closed task history | e8ded72d23a4f2913b46b95173b710a16781f44614b98ec6cbcfcaa08233d939 |
 | HOST-APPLINIT-PREFIX-TRACE.md | retained pre-governance evidence | 1d43eca6ad570ac29479420ec0773724a160c058e9cf16bc85e3450f286efabe |
 | HOST-CONSOLE-UI-BOUNDARY.md | retained pre-governance evidence | fb9a692c698c144e8860379aff13d82499d03847a0ddfda1bbf60351ad7d2e2f |
@@ -582,7 +584,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | cfede0bc03499e2dc7ccc9df370002f8e72923d6e5cecbdaea9e0b5fc766ec9a |
+| STATUS.md | principal control document | 26223b2dcc7e5d83633d514455b64dc536cbcef927fca41f6db2e55182278633 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

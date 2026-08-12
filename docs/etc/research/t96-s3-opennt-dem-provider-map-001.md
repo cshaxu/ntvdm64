@@ -53,7 +53,7 @@ below is an audit result, not a migration admission.
 | 18 | read-only file open | demOpen | source-derived candidate; no migration yet |
 | 22 | read-only file read | demRead | source-derived candidate; no migration yet |
 | 27 | DTA registration | demSetDTALocation | source-derived candidate; no migration yet |
-| 33 | IOCTL changeable media | demIOCTL | source-derived candidate; no migration yet |
+| 33 | IOCTL changeable media | demIOCTL | legacy AL=08 only; paired AL=08/09 source-contract slice is recorded, no migration yet |
 | 50 | hard-error registration | demSetHardErrorInfo | source-derived candidate; no migration yet |
 | 59 | non-debug result | demIsDebug | source-derived candidate; no migration yet |
 | 66 | fast read | demNotYetImplemented | conflict: freeze and reject; the original slot is unavailable |
