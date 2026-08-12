@@ -2,8 +2,8 @@
 
 | S | Scope | Disposition |
 | --- | --- | --- |
-| S1 | Map original post-`50:3C` teardown, parent PDB/stack restoration and direct control-flow obligations to the first retained fault boundary. | Active in Status. |
-| S2 | Reconcile required guest state with retained Bochs stack/vector mechanics and classify the first unproven input. | Deferred. |
+| S1 | Map original post-`50:3C` teardown, parent PDB/stack restoration and direct control-flow obligations to the first retained fault boundary. | Complete; the first unproven input is vector-06 state provenance before the self-loop. |
+| S2 | Reconcile required guest state with retained Bochs stack/vector mechanics and classify the first unproven input. | Active in Status. |
 | S3 | Decide whether any separate repair package is justified or close with the attributed missing predecessor. | Deferred. |
 
 This packet is read-only. It cannot add BOP semantics, hardware, vector state,
