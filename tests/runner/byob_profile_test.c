@@ -58,8 +58,8 @@ static int selection_is_zero(const byob_profile_selection *selection)
 int main(void)
 {
     wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], himem[MAX_PATH], manifest[MAX_PATH];
-    wchar_t target[MAX_PATH];
-    char json[4096], valid_json[4096], snapshot_json[4096], inventory_json[4096], *marker;
+    wchar_t target[MAX_PATH], quit[MAX_PATH];
+    char json[4096], valid_json[4096], snapshot_json[4096], inventory_json[4096], v5_json[4096], *marker;
     byob_profile_selection selection;
     byob_image image = { NULL, 0u };
     int failed = 0;
@@ -70,6 +70,7 @@ int main(void)
     swprintf(command, MAX_PATH, L"%ls\\COMMAND.COM", root);
     swprintf(himem, MAX_PATH, L"%ls\\HIMEM.SYS", root);
     swprintf(target, MAX_PATH, L"%ls\\TARGET.COM", root);
+    swprintf(quit, MAX_PATH, L"%ls\\QUIT.COM", root);
     swprintf(manifest, MAX_PATH, L"%ls\\profile.json", root);
     failed |= !write_text_file(ntio, "abc") || !write_text_file(ntdos, "abc") || !write_text_file(command, "abc");
     snprintf(json, sizeof(json),
@@ -137,6 +138,32 @@ int main(void)
         selection.target_metadata.dos_time != 2u ||
         selection.config_metadata.dos_date != 35u ||
         selection.autoexec_metadata.dos_time != 4u;
+    failed |= !write_text_file(quit, "\xc4\xc4\xfe");
+    snprintf(v5_json, sizeof(v5_json),
+        "{\"schema\":\"ntdos64-byob-profile-v5\",\"profile\":\"nt4-en-us-command-smoke-v5\","
+        "\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"owned-test-set\","
+        "\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},"
+        "{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},"
+        "{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},"
+        "{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},"
+        "{\"role\":\"terminal-quit\",\"file_name\":\"QUIT.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"06a37dff559df7325de8b003f4df53c188f733e0ca312aad961c34dae48d7b83\",\"version\":null}],"
+        "\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},"
+        "\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}},"
+        "\"guest_declared_targets\":[{\"role\":\"target\",\"placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2}},{\"role\":\"terminal-quit\",\"placement\":{\"path\":\"\\\\QUIT.COM\",\"drive_index\":2}}],"
+        "\"guest_search_metadata\":{\"command\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":33},\"target\":{\"attributes\":32,\"dos_time\":2,\"dos_date\":34},\"terminal-quit\":{\"attributes\":32,\"dos_time\":3,\"dos_date\":35},\"config\":{\"attributes\":32,\"dos_time\":4,\"dos_date\":36},\"autoexec\":{\"attributes\":32,\"dos_time\":5,\"dos_date\":37}}}",
+        sha256_abc, sha256_abc, sha256_abc, sha256_abc);
+    failed |= !write_text_file(manifest, v5_json) ||
+        byob_profile_validate_file_select(manifest, root, &selection) != BYOB_PROFILE_ACCEPTED;
+    failed |=
+        selection.declared_target_count != 2u || selection.declared_targets[0].terminal != 0u ||
+        selection.declared_targets[1].terminal != 1u ||
+        wcscmp(selection.declared_targets[0].placement.path, L"\\TARGET.COM") != 0 ||
+        wcscmp(selection.declared_targets[1].placement.path, L"\\QUIT.COM") != 0 ||
+        wcscmp(selection.terminal_quit.file_name, L"QUIT.COM") != 0;
+    marker = strstr(v5_json, "terminal-quit");
+    if (marker == NULL) failed = 1; else marker[0] = 'x';
+    failed |= !write_text_file(manifest, v5_json) ||
+        byob_profile_validate_file(manifest, root) != BYOB_PROFILE_ROLE_MISSING_OR_DUPLICATE;
     marker = strstr(json, "\"guest_search_metadata\"");
     if (marker == NULL) failed = 1; else marker[0] = 'x';
     failed |= !write_text_file(manifest, json) ||
@@ -325,7 +352,7 @@ int main(void)
     failed |= !write_text_file(manifest,
         "{\"schema\":\"ntdos64-byob-profile-v1\",\"profile\":\"nt4-en-us-command-smoke-v1\",\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"owned-test-set\",\"components\":[],\"features\":[],\"owner_note\":null}\xFF");
     failed |= byob_profile_validate_file(manifest, root) != BYOB_PROFILE_FORMAT_INVALID;
-    DeleteFileW(manifest); DeleteFileW(target); DeleteFileW(himem); DeleteFileW(command); DeleteFileW(ntdos); DeleteFileW(ntio); RemoveDirectoryW(root);
+    DeleteFileW(manifest); DeleteFileW(quit); DeleteFileW(target); DeleteFileW(himem); DeleteFileW(command); DeleteFileW(ntdos); DeleteFileW(ntio); RemoveDirectoryW(root);
     if (failed) return 1;
     puts("byob-profile-test: owned BYOB profile acceptance and rejection families verified");
     return 0;

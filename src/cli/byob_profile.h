@@ -7,6 +7,7 @@
 #define BYOB_PROFILE_MAX_MACHINE_OBSERVATIONS 4u
 #define BYOB_PROFILE_DRIVE_SLOT_COUNT 26u
 #define BYOB_PROFILE_GUEST_PATH_MAX_CHARS 64u
+#define BYOB_PROFILE_MAX_DECLARED_TARGETS 2u
 
 typedef enum byob_profile_result {
     BYOB_PROFILE_ACCEPTED,
@@ -96,11 +97,21 @@ typedef struct byob_guest_dos_metadata_descriptor {
     uint16_t dos_date;
 } byob_guest_dos_metadata_descriptor;
 
+/* A fixed guest command sequence is profile data, not a host queue.  The
+ * first v5 profile has exactly two entries: the selected target then QUIT. */
+typedef struct byob_declared_target_descriptor {
+    byob_component_descriptor component;
+    byob_guest_artifact_placement_descriptor placement;
+    byob_guest_dos_metadata_descriptor metadata;
+    uint32_t terminal;
+} byob_declared_target_descriptor;
+
 typedef struct byob_profile_selection {
     byob_component_descriptor ntio;
     byob_component_descriptor ntdos;
     byob_component_descriptor command;
     byob_component_descriptor target;
+    byob_component_descriptor terminal_quit;
     uint32_t machine_observation_count;
     byob_machine_observation_descriptor
         machine_observations[BYOB_PROFILE_MAX_MACHINE_OBSERVATIONS];
@@ -126,8 +137,12 @@ typedef struct byob_profile_selection {
     uint32_t has_guest_search_metadata;
     byob_guest_dos_metadata_descriptor command_metadata;
     byob_guest_dos_metadata_descriptor target_metadata;
+    byob_guest_dos_metadata_descriptor terminal_quit_metadata;
     byob_guest_dos_metadata_descriptor config_metadata;
     byob_guest_dos_metadata_descriptor autoexec_metadata;
+    uint32_t declared_target_count;
+    byob_declared_target_descriptor
+        declared_targets[BYOB_PROFILE_MAX_DECLARED_TARGETS];
 } byob_profile_selection;
 
 const char *byob_profile_result_name(byob_profile_result result);
