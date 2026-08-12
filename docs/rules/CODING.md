@@ -11,3 +11,26 @@
   focused verification. Unsupported cases fail explicitly.
 - Generated binaries, logs, object files, and build trees belong below
   `artifacts/` when retained, never as source or default runtime inputs.
+- Keep Bochs upstream files and license notices intact under `src/bochs/`.
+  Put project code in `src/bx-ntvdm-adapter/`; any exception is an explicit patch
+  with upstream path/revision, rationale and focused test, registered in
+  `docs/etc/research/adapter-external-intrusion-exceptions.md` before it is
+  applied. Avoid such exceptions; admit one only when an adapter/build wrapper
+  cannot solve the problem. Distribution review is deferred until a release is
+  considered.
+- The adapter may translate typed machine events and checked memory ranges
+  only. It may additionally identify a BOP selector and catalogued service ID
+  from the already copied bounded instruction window, solely to select an
+  explicitly source-admitted adapter contract or record an unimplemented
+  invocation. It must not use unbounded guest-memory inspection, emulate DOS
+  interrupts, own device policy, or turn the catalogue into a generic
+  historical dispatcher.
+- Keep Bochs feature selection deny-by-default. A configuration addition must
+  name its reached OpenNT caller, the Bochs owner, the boundary impact, and a
+  negative test; do not enable a feature merely because upstream provides it.
+- Do not move historical OpenNT service behavior into Bochs or the adapter.
+  Preserve the original owner's calling convention, layout, dispatch order,
+  and failure semantics; unsupported cases fail explicitly.
+- Do not move Bochs CPU, exception, memory, firmware, device, configuration,
+  or other machine semantics into NTVDM/OpenNT code or the adapter. The
+  boundary transports typed facts; it does not duplicate either side.

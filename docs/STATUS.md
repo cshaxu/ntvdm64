@@ -2,32 +2,43 @@
 
 ## Current Work
 
-**Active: T094 — S5 historical software-monitor host-closure investigation.**
+**Active: M0 T95 S7 — contained read-only guest-file capability.**
 
 ## Active Packet
 
-| Field | Record |
+| Field | Required record |
 | --- | --- |
-| Objective | Establish the next caller-proven historical owner needed for a clean OpenNT CCPU/SoftPC composition; do not create a replacement runtime. |
-| Identifier | `T094`; the completed historical crosswalk ends at `T093` (`M92`). |
-| Scope | Static selector/dynamic reachability and host-owner closure for the retained `BIOS[]` route. |
-| Non-goals | External backend integration, reduced BIOS tables, unresolved-link suppression, device/video shims, or a new BOP/SVC dispatcher. |
-| Current evidence | `etc/research/ccpu-bios-closure/S5-FULL-NOSM0-OWNER-SEAM-LEDGER.md` and `etc/research/ccpu-bios-closure/S5-BIOS-STATIC-DYNAMIC-OWNER-LEDGER.md`. |
-| Applicable rules | `rules/EXECUTION.md`, `rules/ARCHITECTURE.md`, `rules/CODING.md`, and `etc/operations/policy/source-policy.md`. |
-| Verification | Retain exact source/build/probe commands and the first reachable boundary; run focused fixtures without adding them to the default runtime graph. |
-| Stop conditions | Stop when the next requirement lacks a reached historical caller, owner, data-layout evidence, or bounded failure behavior. |
-| Exit criteria | Record an evidence-backed owner disposition or a fail-closed recovery admission with a focused positive and negative fixture. |
+| Identifier Mode | New S within the existing `M0 T95` package; Ordinary Mode. |
+| Admission And Approval | Owner approved the contained CLI-first NTVDM route, immutable BYOB identity admission, no ambient host exposure, and a holistic capability rather than per-BOP hacks. |
+| Objective | Materialize one coherent, read-only guest-file capability for the first contained profile: explicit verified `COMMAND.COM` placement, CONFIG.SYS/AUTOEXEC.BAT materialization, and canonical DEM Open/Seek/Read/Close semantics. |
+| Non-goals | Ambient PIF/SystemRoot/temp/registry behavior; BYOB-root-as-DOS-root; host mutation; arbitrary host reopen; general DOS filesystem; search/redirector/WOW; and Bochs CPU, device, FPU, PIC, or VGA semantics. |
+| Reference Baseline | `design/ADAPTER-BULK-RESULT.md`, `design/HOST-NAMESPACE-CAPABILITY.md`, and the retained [M0 T95 status ledger](etc/evidence/m0-t95-status-ledger-20260811.md). |
+| Files And ABI Surface | Versioned BYOB profile/selection extension; adapter-local immutable placement and read-token state; typed CPU/bulk result records; focused CLI/adapter tests. Bochs receives no path, handle, selector, or configuration term. |
+| Applicable Rules | `rules/EXECUTION.md`, `rules/ARCHITECTURE.md`, `rules/CODING.md`, `rules/DOCUMENT.md`, and `etc/operations/task-identifier-governance.md`. |
+| Verification | Run profile admission, namespace, adapter runtime, read-token lifecycle, CONFIG/AUTOEXEC materialization, boundary, documentation-governance, and diff checks named by the current S7 evidence. |
+| Expected Markers | Placement is rejected before guest execution when invalid; immutable `\COMMAND.COM` reachability; bounded source-shaped service outcomes; and no DOS/file vocabulary across the Bochs seam. |
+| Asset Needs | Existing admitted NTIO/NTDOS/COMMAND profile inputs and retained OpenNT source only. |
+| Reporting Requirements | Record requirement-to-evidence mapping, changed files, verification results, outside-scope disposition, and any material scope/evidence/risk objection before a P delivery. |
+| Stop Conditions | Stop if this needs ambient NT state, a Bochs semantic/device change, unbounded guest-string reading, host mutation, raw pointer/handle crossing, or a special COMMAND/configuration fast path. |
+| Exit Criteria | Explicit reproducible COMMAND placement; paired CONFIG/AUTOEXEC selection; bounded Open/Seek/Read/Close contract and tests; adapter-owned host-resource lifetime; no Bochs/guest semantic leakage; and a fresh trace stating exactly what executed. |
+| Original Owner Request | Continue a non-invasive CLI NTVDM with Bochs as the minimal SoftPC replacement, an adapter as the sole boundary, explicit BOP observation, source-shaped rehosting, and no unprincipled growth. |
+| Similar-Issue Sweep | Review profile admission, runner handoff, namespace roots, bulk-result lifecycle, COMMAND/configuration callers, DEM error/retry behavior, BOP listener/dispatch separation, and the Bochs intrusion registry together. |
 
 ## Current Technical Baseline
 
-- The supported control-flow model is `CCPU -> BIOS[] -> MS_bop_0 -> DemDispatch -> DEM -> NTDOS`.
-- `ntdos64-run` remains an owned non-invasive Windows CLI. PE targets use direct host handoff; DOS MZ/COM requires an explicit user-selected engine; NE/WOW is rejected.
-- `ntvdm64`, Bochs, PCjs, and later source trees are read-only comparison inputs, never build, link, runtime, or acceptance dependencies.
-- Existing expanded status material is retained at `planning/status.md` as a pre-governance historical ledger. It is not a current authority.
+- `M0 T95` is open; `S7` is the sole active subtask. `S1`--`S6` and their
+  `r` observations are retained evidence, not concurrent packets.
+- Bochs 2.6 owns machine mechanics only; OpenNT owns guest DOS/WOW/BOP/DEM/
+  COMMAND semantics; the typed adapter bridge is the only connection.
+- The host namespace is immutable, profile-selected, and adapter-owned. No
+  arbitrary host path, handle, or guest-triggered enumeration is admitted.
+- Detailed historical status, completed increments, and run observations are
+  preserved in [the retained ledger](etc/evidence/m0-t95-status-ledger-20260811.md).
 
-## Recent Closures
+## Recent Progress
 
-- S4 recorded bounded reconstructed-monitor mechanics and retained them default-disabled; it did not admit device, BOP, DEM, or runtime behavior.
-- S5 reached the original NTIO/NTDOS loader and early host-boundary research records, while clean complete-`BIOS[]` composition remains blocked by documented static closure.
-- The native-image handoff record separated NT4 COMMAND `/z` protocol from the runner's host PE dispatch; it made no guest-runtime claim.
-- Historical completed work is indexed by `T001`--`T093` in [history/task-index.md](history/task-index.md).
+| Scope | Compact result |
+| --- | --- |
+| T95 S1--S6 | Historical Bochs/adapter evidence and run records retained in the status ledger; they do not allocate P values retroactively. |
+| T95 S7 | Profile-owned COMMAND/CONFIG/AUTOEXEC placement and bounded adapter read capability are evidenced; real runtime trace closure remains in the active S packet. |
+| M0 Td S1 | Documentation governance is being realigned to the ntvdm64 topology: one active S in Status, T-only Queue, and indexed supporting evidence. |
