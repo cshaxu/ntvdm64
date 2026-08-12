@@ -2,25 +2,25 @@
 
 ## Current Work
 
-**Active: M0 T116 S1 — BOP 02h machine-composition contract and handler-island closure.**
+**Active: M0 T117 S1 — default-off machine-composition seam admission and implementation.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T116 S1, Ordinary Mode. |
-| Admission And Approval | T115 selects a separate machine-composition component and records the narrowed historical-handler exception rule. Selector `02h` is the first reached continuous-execution blocker; the owner authorized prioritization by dependency and ROI. |
-| Objective | Define and source-close the bounded `02h` machine-composition request/result contract, the dynamically scoped three-operation Bochs mechanics context, and the original `unexpected_int` handler-island compile/link recipe. |
-| Non-goals | No #UD-path connection, runtime handler invocation, device initialization, generic port API, full BIOS dispatcher/table import, adapter host-service change, new DEM/COMMAND provider, or optional Bochs feature. |
-| Reference Baseline | etc/research/t115-s1-machine-bop-composition-dispatcher-audit-001.md; t110--t114 evidence; current architecture; exception register. |
-| Files And ABI Surface | New machine-composition contract/build evidence, bounded tests, design/history/status records; imported Bochs/OpenNT source remains unchanged. |
+| Identifier Mode | M0 T117 S1, Ordinary Mode. |
+| Admission And Approval | The owner authorizes individually registered Bochs intrusions; T115 selects the component boundary and T116 proves the exact original handler/object and three-operation contract. `02h` remains the first reached continuous-execution blocker. |
+| Objective | Register and implement one default-off, selector-blind Bochs-to-machine-composition seam that transports copied generic exception/window facts and the exact dynamically scoped mechanics context, then prove decline preserves the old #UD path. |
+| Non-goals | No selector/service branch in Bochs, adapter access to mechanics, new device initialization, generic port API, full BIOS dispatcher/table import, host-service/provider change, optional feature, or guest runtime observation. |
+| Reference Baseline | etc/research/t116-s1-unexpected-int-machine-composition-closure-001.md; t110--t115 evidence; current architecture; exception register. |
+| Files And ABI Surface | Exception register, narrowly named Bochs seam/build membership, machine-composition component/test/build evidence, design/history/status records. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Prove a closed request/result ABI; prove only `_inb`, `_outb`, `_c_sas_store` mechanics imports; prove host-service selectors and unavailable BIOS forms are rejected before handler selection; produce an isolated x86 compile/link observation without a Bochs/exception-path modification. |
-| Expected Markers | Catalogue disposition, request/result/context ABI, original-object recipe, wrapper ownership and negative-boundary test records. |
-| Asset Needs | Existing T113 object projection, OpenNT source/headers, Bochs mechanics declarations, current x86 toolchain and evidence roots. |
-| Reporting Requirements | State exact toolchain, objects, symbols and hashes; distinguish static closure from executable/runtime proof. |
-| Stop Conditions | Stop before registering an intrusion, changing Bochs/OpenNT source, connecting the #UD path, running guest execution, enabling a device, or adding an unrelated BOP provider. |
-| Exit Criteria | A follow-on source-integration packet with an exact exception-register request is ready, or an evidence-backed compile/link blocker is recorded. |
+| Verification | A focused boundary test must prove Bochs contains no BOP selector constant/branch, the component alone declines host/unavailable/non-`02h` requests, and no callback is installed by default. A build/object audit must show the new seam and component only in the named opt-in derivative. |
+| Expected Markers | Pre-change exception-register entry, selector-blind Bochs call surface, component invocation contract, default-off/decline tests, and a two-object-or-smaller derivative build inventory. |
+| Asset Needs | T116 component/object recipe, existing generic #UD seam, Bochs mechanics declarations, current x86 toolchain and evidence roots. |
+| Reporting Requirements | Name every Bochs file/object changed, report default-off negative behavior, and distinguish static/build proof from runtime proof. |
+| Stop Conditions | Stop before calling `unexpected_int`, accepting a machine BOP at runtime, guest execution, device enablement, adapter semantics change, or a new BOP/provider. |
+| Exit Criteria | A source-built default-off derivative and boundary tests are recorded, ready for a separately admitted first-handler invocation packet; or a precise Bochs-link blocker is recorded. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Check only the existing BIOS BOP table categories necessary to distinguish machine handlers from host-service planes; do not redesign all BOP providers. |
 
@@ -123,5 +123,6 @@
 | M0 T113 | Closed: unmodified original handler compiles in fresh clang-cl/x86 OBJECT island; only `_inb`, `_outb`, `_c_sas_store` remain semantically unresolved. |
 | M0 T114 | Closed: three wrapper ABI is finite and same-binary viable, but no owner may currently select/enter an original machine BOP handler. |
 | M0 T115 | Closed: T115 selects a catalogue-driven machine-composition component distinct from the adapter host-service plane and records its exact future seam. |
-| M0 T116 S1 | Active: close the `02h` request/result/context and original handler-island compile/link boundary before any runtime connection. |
+| M0 T116 | Closed: `02h` contract, original object and three wrappers are static/x86-link closed without handler invocation. |
+| M0 T117 S1 | Active: register and implement the default-off, selector-blind machine-composition seam before any handler invocation. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |

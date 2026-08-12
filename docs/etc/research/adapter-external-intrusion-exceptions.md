@@ -63,6 +63,7 @@ OpenNT, or host-service semantics into Bochs.
 | BX-ABI-040 | 2026-08-11: owner requires complete OpenNT BOP inventory, adapter-side connection, and observation before per-BOP implementation | `src/bochs/cpu/exception.cc` | Default-off generic `#UD` notification to the adapter-local BOP identity catalogue; Bochs logs only the returned fixed-width identity and never branches on selector/service or receives a result | Registered before implementation; all entries remain pass-through and no Bochs/OpenNT/host-service semantics enter the CPU. |
 | BX-ABI-041 | 2026-08-11: S7 `DEMREAD` requires the already-declared one-range bulk result to reach ordinary guest RAM without a service-specific Bochs path | `src/bochs/cpu/exception.cc`; `src/bochs/cpu/bx_ntvdm_exception_intercept.h` | Take one opaque copied-boundary bulk result, validate the existing result/resume relation, preflight its full ordinary-RAM range, copy once only when nonempty, then apply the already prepared generic result | Registered before implementation. It must not inspect selector, service, path, token, payload contents, DOS/OpenNT terms, or add a device/memory model. |
 | BX-ABI-042 | 2026-08-11: S7 requires the already admitted v2 namespace and BOP runtime to share the same verified NTIO startup session | `src/bochs/main.cc` | In the existing default-off generic execution-plan consumer only, exchange the obsolete narrow startup-transaction preparation endpoint for adapter runtime's pointer-free `prepare_execution_plan_from_environment`; preserve the plan ABI, RAM preflight/copies and real-mode entry sequence unchanged | Registered before implementation. Bochs receives only ready/absent/rejected and opaque plan/payload records; no BOP, DOS, COMMAND, path, host handle or OpenNT branch is added. |
+| BX-ABI-053 | 2026-08-12: owner authorizes individually registered Bochs intrusions; T115/T116 establish a separate machine-composition boundary and a finite original-handler ABI | `src/bochs/cpu/exception.cc`; `src/bochs/Makefile.in`; named native derivative build script | A default-off, selector-blind call of an external machine-composition component with copied generic exception/window facts and a dynamically scoped three-operation native mechanics context | Registered before implementation; it must decline by default and add no Bochs BOP, OpenNT, DOS, or device semantics. |
 | BX-TRACE-043 | 2026-08-11: trace 007 reaches `DEMIOCTL`, whose historical dispatcher selects solely from AL while the existing identity listener omits all call inputs | `src/bochs/cpu/exception.cc` | Default-off append-only diagnostic fields for the already copied EAX/EBX low words on a BOP identity log | Registered before implementation. The helper remains void; it takes no adapter result, reads no guest memory, performs no selector/service/register branch and changes no CPU, memory, device or exception state. Review/remove after the reached IOCTL subfunction is source-classified. |
 | BX-TRACE-044 | 2026-08-11: r12 reaches `5F`; its historical entry selects an NTIO table through copied register state, but the generic listener currently logs only AX/BX | `src/bochs/cpu/exception.cc` | Default-off append-only diagnostic fields for copied CS/DS/SI/DI/CX/EFLAGS on every already observed BOP identity | Registered before implementation. The helper remains void, has no selector-specific branch, takes no adapter result, reads no guest memory and changes no CPU, memory, device or exception state. It exists solely to correlate a reached BOP with source-owned register ABI. |
 | BX-TRACE-045 | 2026-08-11: r14 reaches guest INT 6 BOP `06`; OpenNT's original illegal-op handler derives the pre-vector CS:IP from the real-mode SS:SP frame | `src/bochs/cpu/exception.cc`; BOP listener boundary test | Default-off append-only real-mode fault-frame diagnostic for every already observed BOP: record SS, SP, four stack bytes, and—only when those bytes form a readable real-mode CS:IP—eight bytes at that derived address | Registered before implementation. The helper is selector-independent, void and read-only; it takes no adapter result and does not alter CPU, exception, memory, device, guest or host state. It must reject non-real mode, wrap/out-of-aperture spans and unreadable RAM by logging no bytes. The stack-derived target is evidence only, never an execution target or decoder input. Review/remove after the original INT 6 opcode is source-correlated. |
@@ -1076,6 +1077,44 @@ existing default-off and generic #UD boundary tests remain required.
 special guest address/byte branch, callback, mapping, device/firmware action,
 or general service facility becomes necessary. Revisit after one separately
 admitted same-version companion observation.
+
+### BX-ABI-053: Default-Off Machine-Composition Mechanical Call
+
+**Need.** T110--T116 prove that reached selector `02h` is a machine operation,
+not an adapter host service, and that the unchanged original handler has only
+three finite mechanical imports. The existing generic adapter seam cannot
+carry synchronous PIC/RAM mechanics without violating the adapter boundary.
+
+**Procedure.** In `cpu/exception.cc`, behind one local macro that defaults to
+`0`, add one selector-blind call to the external machine-composition component.
+It receives only the already copied generic exception/window facts and a
+dynamically scoped context whose callbacks invoke existing registered Bochs
+8-bit port read, 8-bit port write, and checked ordinary-RAM byte write owners.
+It may return only a generic decline or a future separately admitted handled
+disposition. The T117 implementation supplies no original handler and must
+therefore decline every invocation. Add only the component object to the named
+opt-in derivative's `Makefile.in` membership.
+
+**Boundary.** Bochs contains no selector constant, marker-byte decode,
+historical handler name, BIOS table, OpenNT/SoftPC/CCPU/DOS/WOW/DEM term,
+adapter callback, guest address policy, host capability, device initialization
+or changed CPU exception semantics. The mechanics context never enters the
+adapter, cannot escape the call, and delegates rather than reimplements PIC or
+RAM behavior. The component, not Bochs, owns any later catalogue selection.
+
+**Negative cases and verification.** A source boundary test must require the
+default-off guard and one generic external call, reject selector and historical
+semantic terms from the Bochs block, and prove default builds retain neither
+the new object nor call. Component tests must decline host-service,
+unavailable, non-`02h`, missing-handler and failed-mechanics requests. A
+derivative object/build audit must name only `exception.cc` plus the component
+object; no guest execution or handler call is admitted in T117.
+
+**Review condition.** Reject this exception if it needs a second lifecycle
+hook, a generic port/device API, a selector/service branch in Bochs, adapter
+mechanics access, any device enablement, a guest-memory policy, or runtime
+handler invocation. Review before T118; remove if the machine-composition
+boundary cannot remain selector-blind and default-off.
 
 ## OpenNT Intrusions
 
