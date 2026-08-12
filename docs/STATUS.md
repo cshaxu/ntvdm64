@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T181 S3 — contained implementation admission.**
+**Binding active packet: M0 T181 S4 — finite sequence source closure.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T181 S3**; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T181 S4**; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T181 S3, Ordinary Mode. |
-| Admission And Approval | S1/S2 establish the whole two-slot contract and exact replacement set. S3 may admit one contained source/test implementation slice or reject it; it may not start an engine relink or guest runtime run. |
-| Objective | Decide whether the v5 immutable profile/plan, namespace and COMMAND provider form one stable implementation closure, then record its build/test boundaries. |
+| Identifier Mode | M0 T181 S4, Ordinary Mode. |
+| Admission And Approval | S3 admits one complete unit-test-first source slice: v5 profile/plan, two-slot namespace and COMMAND provider, with existing copied mechanics unchanged. |
+| Objective | Implement the holistic two-slot immutable sequence provider and its focused source tests. |
 | Non-goals | No engine relink or runtime observation; no `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, generic machine BOP handling, or Bochs/guest change. |
-| Reference Baseline | T181 S1 contract, S2 ownership audit, current v4 source/tests, T180 closure and source-built `QUIT.COM` evidence. |
-| Files And ABI Surface | Admission record/status/plan and read-only implementation/test inventory only. |
+| Reference Baseline | T181 S1/S2/S3 records, current v4 source/tests, T180 closure and source-built `QUIT.COM` evidence. |
+| Files And ABI Surface | The exact source/test closure enumerated in T181 S3; no engine or Bochs inputs. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile public parser/launch/provider ABI with unit-test and link-object boundaries; run governance checks plus `git diff --check`. |
-| Expected Markers | Explicit admit-or-reject decision, exact source/test files and retained exclusions. |
+| Verification | Focused compile/tests are planned in S5; S4 must preserve source-level bounds and update documentation inventory/governance. |
+| Expected Markers | v5 exact acceptance/rejection, two materialized slots, one commit per `54:01`, terminal `QUIT.COM` slot and no endpoint bypass. |
 | Asset Needs | Retained sources, profiles and existing controlled-stop evidence only. |
 | Reporting Requirements | Separate observed facts from source inference; state whether a bounded implementation slice is justified. |
-| Stop Conditions | A need for a historical host broker, ambient state, synthetic success, a code/build change, or runtime observation. |
-| Exit Criteria | A single implementation slice is admitted with a unit-test-only closure, or T181 closes with implementation returned to Queue. |
+| Stop Conditions | A need for a historical host broker, ambient state, synthetic success, engine/Bochs input, or runtime observation. |
+| Exit Criteria | S4 source implementation is complete and leaves a finite local test closure to S5. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
