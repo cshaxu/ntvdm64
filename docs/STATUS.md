@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T181 S2 — immutable profile/CLI ownership audit.**
+**Binding active packet: M0 T181 S3 — contained implementation admission.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T181 S2**; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T181 S3**; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T181 S2, Ordinary Mode. |
-| Admission And Approval | S1 records the complete two-slot source-derived state and transaction contract. S2 may audit the exact profile, CLI, namespace and adapter replacement surfaces plus rejection cases. |
-| Objective | Define the minimum immutable declaration/schema and owner handoff that can carry the S1 target and terminal slots without ambient host state. |
-| Non-goals | No implementation, build or runtime observation; no `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, generic machine BOP handling, or Bochs/guest change. |
-| Reference Baseline | T181 S1 contract, current v4 profile/CLI/namespace/provider sources, T180 closure, source-built `QUIT.COM` evidence. |
-| Files And ABI Surface | Source audit, design/status/plan only; current profile/CLI/adapter source is read-only evidence. |
+| Identifier Mode | M0 T181 S3, Ordinary Mode. |
+| Admission And Approval | S1/S2 establish the whole two-slot contract and exact replacement set. S3 may admit one contained source/test implementation slice or reject it; it may not start an engine relink or guest runtime run. |
+| Objective | Decide whether the v5 immutable profile/plan, namespace and COMMAND provider form one stable implementation closure, then record its build/test boundaries. |
+| Non-goals | No engine relink or runtime observation; no `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, generic machine BOP handling, or Bochs/guest change. |
+| Reference Baseline | T181 S1 contract, S2 ownership audit, current v4 source/tests, T180 closure and source-built `QUIT.COM` evidence. |
+| Files And ABI Surface | Admission record/status/plan and read-only implementation/test inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace all one-target hard codings through current profile, CLI, namespace and adapter sources; reconcile each with the S1 contract and run governance checks plus `git diff --check`. |
-| Expected Markers | A single immutable schema/owner proposal, exact replacement-surface map and rejection matrix. |
+| Verification | Reconcile public parser/launch/provider ABI with unit-test and link-object boundaries; run governance checks plus `git diff --check`. |
+| Expected Markers | Explicit admit-or-reject decision, exact source/test files and retained exclusions. |
 | Asset Needs | Retained sources, profiles and existing controlled-stop evidence only. |
 | Reporting Requirements | Separate observed facts from source inference; state whether a bounded implementation slice is justified. |
 | Stop Conditions | A need for a historical host broker, ambient state, synthetic success, a code/build change, or runtime observation. |
-| Exit Criteria | S2 establishes a stable, bounded composition boundary that S3 can admit or reject for implementation. |
+| Exit Criteria | A single implementation slice is admitted with a unit-test-only closure, or T181 closes with implementation returned to Queue. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
