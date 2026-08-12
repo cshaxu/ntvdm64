@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T177 S3 — combined native-lifecycle disposition.**
+**Binding active packet: M0 T177 S4 — combined native-lifecycle observation.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T177 S3**; all pre-admission T177-labelled files
+> The binding active packet below is **M0 T177 S4**; all pre-admission T177-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active T177 packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T177 S3, Ordinary Mode. |
-| Admission And Approval | S2 proves that the observed machine-composition derivative retained direct `main.o`, while the existing generator declares a bounded combined native-POST/machine-composition form. S3 may decide whether one exact composition verification is justified. |
-| Objective | Decide whether the existing combined native-POST and machine-composition form is admissible for one no-source-change build and bounded observation, or close this packet with the current attribution. |
-| Non-goals | No new Bochs, adapter, OpenNT, CLI or device semantics; no provider extension; no optional device; no synthetic IVT/vector; no retry; no terminal-result claim. |
+| Identifier Mode | M0 T177 S4, Ordinary Mode. |
+| Admission And Approval | S3 admits one exact existing `-DeferredStartupPlan -MachineComposition` composition verification. It is limited to the native POST lifecycle and existing machine BOP component; no semantic change is authorized. |
+| Objective | Build the existing combined form once and make one bounded observation, classifying native POST reachability and any selector `06h` machine-composition observation. |
+| Non-goals | No source edit; no new Bochs, adapter, OpenNT, CLI or device semantics; no provider extension; no optional device; no synthetic IVT/vector; no retry; no terminal-result claim. |
 | Reference Baseline | T156 stack audit, T158 vector observation, T176 S24 observation, retained OpenNT source and Bochs real-mode interrupt mechanics. |
-| Files And ABI Surface | Decision record only, unless it admits the exact existing two-object composition; Status/plan only. |
+| Files And ABI Surface | Existing derivative generator, two Bochs replacement objects (`main.o`, `cpu\\exception.o`), existing machine component objects, one generated build root and one observation record; Status/plan only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile the retained manifests, generator object limits, source ordering and predecessor evidence; run governance checks and `git diff --check`. |
-| Expected Markers | An explicit admit-or-close decision, exact object/flag boundary if admitted, and retained exclusions for adapter, device and vector synthesis. |
-| Asset Needs | Retained logs and existing source trees only. |
+| Verification | Verify manifest/makefile object limits before linking; preserve archive hashes; record one link/map/hash and one bounded observation; run governance checks and `git diff --check`. |
+| Expected Markers | Native POST marker, no direct execution-plan marker, machine-composition outcome count (including zero), and a finite stop classification. |
+| Asset Needs | Existing r5 build root, retained POST profile/option ROM and existing generator/observer scripts only. |
 | Reporting Requirements | Separate observed facts from source inference; state whether a later implementation package is justified. |
-| Stop Conditions | A need for new semantics, a third Bochs object, archive rebuild, device change, vector synthesis, BOP-provider extension, or a second observation. |
-| Exit Criteria | Either an exact one-build/one-observation boundary is admitted, or the packet is closed with an evidence-backed reason not to perform it. |
+| Stop Conditions | A need for source edit, a third Bochs object, archive rebuild, device/firmware change, vector synthesis, BOP-provider extension, ABI workaround, or a second observation. |
+| Exit Criteria | One manifest-bounded link and one observation record classify whether selector `06h` is reached under native POST, without a repair claim. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
