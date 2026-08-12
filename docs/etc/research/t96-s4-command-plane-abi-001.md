@@ -15,3 +15,9 @@ component contract.
 Focused strict Clang C11 compilation/test covers services 0--16 through common
 ingress/registry and rejects the sentinel. The default MinGW probe remains
 unavailable because MSYS2 cannot create temporary files in `C:\\msys64\\tmp`.
+
+`command_provider_v1` now restores only service 03 `CMDSAVEWORLD`: its
+historical `cmdSaveWorld` body is compiled out under `CHECK_IT_LATER`, so the
+observable source contract is resume without state changes. The provider
+requires the exact COMMAND-plane original-noop record; it does not enable the
+disabled save-world body.

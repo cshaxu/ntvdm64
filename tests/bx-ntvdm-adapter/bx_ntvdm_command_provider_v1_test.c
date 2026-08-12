@@ -1,0 +1,4 @@
+#include "bx_ntvdm_command_provider_v1.h"
+int main(void) { uint8_t b[4]={0xc4,0xc4,0x54,3}; bx_ntvdm_instruction_window_v1 w; bx_ntvdm_bop_ingress_v1 i; bx_ntvdm_bop_provider_selection_v1 s; bx_ntvdm_command_plane_record_v1 p; bx_ntvdm_exception_event_v1 e={BX_NTVDM_EXCEPTION_ABI_MAGIC,BX_NTVDM_EXCEPTION_ABI_VERSION,sizeof(e),BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION,0,6,0,0,0x900}; bx_ntvdm_cpu_state_v1 c; bx_ntvdm_cpu_result_v2 r;
+ bx_ntvdm_cpu_state_v1_initialize(&c,BX_NTVDM_CPU_EXECUTION_REAL); bx_ntvdm_instruction_window_v1_capture(&w,b,4);
+ return !bx_ntvdm_bop_ingress_v1_classify(&w,&i) || !bx_ntvdm_bop_provider_registry_v1_select(&i,&s) || !bx_ntvdm_command_plane_v1_classify(&i,&s,&p) || !bx_ntvdm_command_provider_v1_dispatch(&i,&s,&p,&e,&c,&r) || r.disposition!=BX_NTVDM_CPU_RESULT_V2_RESUME || r.resume_rip!=0x904 ? 1:0; }
