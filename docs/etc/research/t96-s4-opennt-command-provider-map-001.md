@@ -55,6 +55,10 @@ admission. In particular, services 12 and 13 are a paired config-material
 component, while service 01 is the whole launch protocol—not a convenient
 single-command callback.
 
+The paired boot-file replacement itself is reconciled in
+`t96-s4-command-boot-file-reconciliation-001.md`: retain its contained
+namespace semantics, but defer legacy runtime-chain migration to S8.
+
 Confidence is high for table/handler/module mapping and host-dependency
 classification, all directly observed in the pinned source. CLI replacement
 semantics are intentionally only candidates until their copied guest-memory
