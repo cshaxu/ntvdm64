@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 648 |
+| Documentation records | 650 |
 | --- | --- |
-| Generated UTC | 2026-08-12T16:36:12Z |
+| Generated UTC | 2026-08-12T16:40:39Z |
 
 ## Entries
 
@@ -65,10 +65,10 @@ content-divergent entries.
 | design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | 3153c9a36e43d8efc1234879d4c8f76f83dc3a61a766ecdceaa8da6e7f410e45 |
 | design/ADAPTER-STARTUP-SNAPSHOT-EVIDENCE-EXPORT.md | retained pre-governance evidence | a14333ab6812e8d6c59f9cddb22060b41b02b113d1a4ac6a2d9b08eec3db1666 |
 | design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | d1898c127b918240c3ce7eb32ed2efc04caf11f04b5a061060d4c2a0254c1861 |
-| design/ARCHITECTURE.md | current design authority | 6cebe32932d19438c244ae739334fd5a4821c096369870b13d66cc778127da82 |
+| design/ARCHITECTURE.md | current design authority | 5a920c55e255b986ae01426ec6508d171f1f46bc65cd1e593d70b0d4c238c9fb |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | d4cba839d15ee30600996e56cd00e34c07d59bfdcb42b91b06fccbf760c48bd5 |
-| design/CODING.md | current design authority | 5e78e575d948b4a45dba422abeb8a2996826fb85e42e04d5550a14bac1f6e2c1 |
-| design/GOAL.md | current design authority | 2662fa40717054cfd1d6832bf040d475510d16cbed73e3780fd5b64d797c3501 |
+| design/CODING.md | current design authority | a28d3851d99bc7047fda3502d485e6dcf5016eb6ce543c2a46bf18dce975f972 |
+| design/GOAL.md | current design authority | 33409e2f2f4557b0d6f46fb1ab4918936a27b2605e911fddfd85a0e81d2de001 |
 | design/HOST-NAMESPACE-CAPABILITY.md | retained pre-governance evidence | d9647826d75da9b2e9d8a64bb065f2f4d166f64b6f762b60ab2e9a06deda2f49 |
 | design/ROADMAP.md | current design authority | 3af72b403febee1f0dae7b35deaf6e8fe8fe962a30e147eaa2751fb0ae63ea83 |
 | design/STOCK-FIRMWARE-STARTUP-PROBE.md | retained pre-governance evidence | 2f5c8b2de1329fa7c500552229840dcf9c5c5b780aeb73797a84a004e79088c0 |
@@ -153,6 +153,7 @@ content-divergent entries.
 | etc/research/t112-s1-unexpected-interrupt-mechanical-bridge-closure-001.md | indexed supporting material | 0a9f950ab221aed4377d2c8363e50e000d74779757491c12ea0a1faa9969245c |
 | etc/research/t113-s1-unexpected-interrupt-compile-projection-001.md | indexed supporting material | 67aaa0d571a6bcfe118e80914e25d782c76169ff63c3bf53af67c5876645c1ad |
 | etc/research/t114-s1-unexpected-interrupt-abi-link-closure-001.md | indexed supporting material | 32de26d716678031e1c23d3621c5b258453c7de726b7d0e6ecd80cb9c9f9c24d |
+| etc/research/t115-s1-machine-bop-composition-dispatcher-audit-001.md | indexed supporting material | 3b373013b7d85bac99c60eebacb6d439d6ac11403b7127324c699550795c23d5 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -381,6 +382,7 @@ content-divergent entries.
 | history/m0-t112-closure-20260812.md | closed task history | 4ec78c3f4ee99ba8b82ed448a8df4c27092101f72043b0be532ccf227762dc2e |
 | history/m0-t113-closure-20260812.md | closed task history | a62f5e107e0443c017730fb4e9ea538fb703a36ce2b782e48467ba0e90eaa387 |
 | history/m0-t114-closure-20260812.md | closed task history | b832681bb365245b12e1b6bf869cb9421bdb721a12cc3c8fb4564ca7f7f5ae5d |
+| history/m0-t115-closure-20260812.md | closed task history | 335228c00dcb17e3e80d394b0561fe62977842001dd1f3b2906aaa8b374a40f4 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | 9b40b99939aad1233b4901b7f7f6569c64ac90b83a351e9a78268251d63c9154 |
@@ -662,7 +664,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | af6c33e91dae24090e3f8c18ebd5a6c41e3f0cade736dc17fedc2c77e98bcd03 |
+| STATUS.md | principal control document | 0d9bc67aa9ca01398fe45d69abf0f15638200cfaf502cb5988526456492cb651 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

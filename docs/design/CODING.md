@@ -5,6 +5,8 @@ src/
   cli/                    owned non-invasive CLI and BYOB admission boundary
   bochs/                  pinned, third-party Bochs 2.6 source import
   bx-ntvdm-adapter/       project-authored typed Bochs/NTVDM boundary only
+  bx-ntvdm-machine-composition/
+                          source-backed machine-BOP selection/composition only
   opennt/                 imported historical guest/service source
   opennt/overlay/         caller-proven OpenNT compatibility recovery
   opennt/local/compat/    reached modern-host seams for OpenNT owners

@@ -2,25 +2,25 @@
 
 ## Current Work
 
-**Active: M0 T115 S1 — machine-BOP composition dispatcher design audit.**
+**Active: M0 T116 S1 — BOP 02h machine-composition contract and handler-island closure.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T115 S1, Ordinary Mode. |
-| Admission And Approval | T114 proves a finite same-binary C ABI for the three mechanics wrappers, but no allowed owner currently selects and synchronously enters an original SoftPC machine BOP handler. This is a composition-dispatcher design decision, not a new adapter service. |
-| Objective | Define and compare the smallest ownership-correct dispatcher placement for machine BOPs such as `02`: separate composition component, Bochs intrusion, adapter plane, or explicit block. |
-| Non-goals | No dispatcher/handler/shim implementation, no Bochs or adapter source change, no exception registration, linking, runtime build/trace, generic port API or host-service expansion. |
-| Reference Baseline | etc/research/t114-s1-unexpected-interrupt-abi-link-closure-001.md; T110 owner proof; current architecture and Bochs exception seam. |
-| Files And ABI Surface | Read-only architecture/source/interface evidence and design/history/status records only. |
+| Identifier Mode | M0 T116 S1, Ordinary Mode. |
+| Admission And Approval | T115 selects a separate machine-composition component and records the narrowed historical-handler exception rule. Selector `02h` is the first reached continuous-execution blocker; the owner authorized prioritization by dependency and ROI. |
+| Objective | Define and source-close the bounded `02h` machine-composition request/result contract, the dynamically scoped three-operation Bochs mechanics context, and the original `unexpected_int` handler-island compile/link recipe. |
+| Non-goals | No #UD-path connection, runtime handler invocation, device initialization, generic port API, full BIOS dispatcher/table import, adapter host-service change, new DEM/COMMAND provider, or optional Bochs feature. |
+| Reference Baseline | etc/research/t115-s1-machine-bop-composition-dispatcher-audit-001.md; t110--t114 evidence; current architecture; exception register. |
+| Files And ABI Surface | New machine-composition contract/build evidence, bounded tests, design/history/status records; imported Bochs/OpenNT source remains unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare the candidate placements against the hard Bochs/adapter/OpenNT ownership rules and the synchronous handler requirement; identify one admissible component boundary or a precise rule conflict. |
-| Expected Markers | A recommended placement with rejected alternatives, exact dispatch input/output and future exception requirement if any. |
-| Asset Needs | Existing design authorities, source tables and exception register only. |
-| Reporting Requirements | Keep machine BOPs distinct from host-service BOP families and state how the dispatcher avoids per-selector growth. |
-| Stop Conditions | Stop before implementation, exception registration, linking, runtime observation, feature enablement or new BOP mapping. |
-| Exit Criteria | A bounded next architecture/implementation packet or an explicit owner-decision blocker is recorded. |
+| Verification | Prove a closed request/result ABI; prove only `_inb`, `_outb`, `_c_sas_store` mechanics imports; prove host-service selectors and unavailable BIOS forms are rejected before handler selection; produce an isolated x86 compile/link observation without a Bochs/exception-path modification. |
+| Expected Markers | Catalogue disposition, request/result/context ABI, original-object recipe, wrapper ownership and negative-boundary test records. |
+| Asset Needs | Existing T113 object projection, OpenNT source/headers, Bochs mechanics declarations, current x86 toolchain and evidence roots. |
+| Reporting Requirements | State exact toolchain, objects, symbols and hashes; distinguish static closure from executable/runtime proof. |
+| Stop Conditions | Stop before registering an intrusion, changing Bochs/OpenNT source, connecting the #UD path, running guest execution, enabling a device, or adding an unrelated BOP provider. |
+| Exit Criteria | A follow-on source-integration packet with an exact exception-register request is ready, or an evidence-backed compile/link blocker is recorded. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Check only the existing BIOS BOP table categories necessary to distinguish machine handlers from host-service planes; do not redesign all BOP providers. |
 
@@ -122,5 +122,6 @@
 | M0 T112 | Closed: source closure is finite but current ABI cannot synchronously transport multi-step native I/O; generic port API is rejected pending original compile proof. |
 | M0 T113 | Closed: unmodified original handler compiles in fresh clang-cl/x86 OBJECT island; only `_inb`, `_outb`, `_c_sas_store` remain semantically unresolved. |
 | M0 T114 | Closed: three wrapper ABI is finite and same-binary viable, but no owner may currently select/enter an original machine BOP handler. |
-| M0 T115 S1 | Active: read-only machine-BOP composition-dispatcher placement audit. |
+| M0 T115 | Closed: T115 selects a catalogue-driven machine-composition component distinct from the adapter host-service plane and records its exact future seam. |
+| M0 T116 S1 | Active: close the `02h` request/result/context and original handler-island compile/link boundary before any runtime connection. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |

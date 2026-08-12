@@ -8,6 +8,7 @@
 | Bochs 2.6 backend | x86 execution, RAM/ROM, interrupt and PC device mechanics, CPU stop events | Does not implement or dispatch OpenNT DOS/WOW services. |
 | Bochs adapter/shim | Sole integration layer: owns the versioned typed ABI, native-container lifecycle calls, validated guest-memory exchange, and conversion between a Bochs mechanical event and the adapter host-service plane | Does not recreate Bochs `SIM`, CPU, memory, exception, or device behavior. |
 | Adapter NTVDM host-service plane | Coherent routing to independently composable original OpenNT BOP/DEM host providers, with source-derived rehosting only when the historical composition cannot be linked without CCPU/SAS | Does not implement DOS kernel/filesystem algorithms, WOW behavior, CPU, firmware, or PC devices. |
+| Machine-BOP composition | Catalogue-driven selection of individually admitted historical machine BOP handler islands and their synchronous use of a narrow Bochs mechanics context | Does not implement CPU/PIC/RAM/device semantics, become an adapter host-service provider, install `BIOS[]`, or revive SoftPC/CCPU composition. |
 | OpenNT guest layer | NTDOS, DOS utilities, command programs and WOW payloads | Does not provide an x86 interpreter, firmware replacement, PC devices, or host service composition. |
 | Host compatibility seam | Contained modern host facilities used by the host-service plane | Does not define CPU/device behavior or reach into Bochs internals. |
 | Research fixture | Narrow evidence/probe | Default-disabled; never silently promoted to the product runtime. |
@@ -17,24 +18,36 @@
 ```text
 CLI / BYOB profile
   -> Bochs 2.6 CPU + PC machine
-  -> typed adapter event
-  -> adapter NTVDM host-service plane
-  -> original OpenNT owner where linkable, otherwise source-derived host contract
-  -> typed result
+  -> typed adapter event / machine-composition request
+  -> adapter NTVDM host-service plane, or admitted machine-BOP composition
+  -> original OpenNT host owner, source-derived host contract, or isolated machine-handler island
+  -> typed result / bounded machine disposition
   -> Bochs CPU state / guest memory
 ```
 
-The bridge is the sole Bochs/OpenNT integration point. It uses versioned, fixed-width values and validated guest-memory ranges; it passes no C++ object, host pointer, CRT ownership, or raw cross-architecture function pointer. A bridge result may update only fields expressly authorized by its record. `src/bx-ntvdm-adapter` is the only repository area allowed to include both the adapter ABI and Bochs-facing lifecycle glue. `src/cli` may validate and transmit immutable launch/profile metadata only; it must not include Bochs internals or adapter guest-memory APIs.
+The adapter bridge is the sole Bochs/**host-service** integration point. The
+separate machine-composition seam is limited to individually admitted machine
+handlers. Both use versioned, fixed-width values and validated guest-memory
+ranges; neither passes a C++ object, host pointer, CRT ownership, or raw
+cross-architecture function pointer. A bridge result may update only fields
+expressly authorized by its record. `src/bx-ntvdm-adapter` is the only
+repository area allowed to include both the adapter ABI and Bochs-facing
+lifecycle glue. `src/cli` may validate and transmit immutable launch/profile
+metadata only; it must not include Bochs internals or adapter guest-memory APIs.
 
 For `C4 C4 selector` BOPs, Bochs reports only the generic copied exception
 event and instruction window. The adapter owns the source-derived BOP
-catalogue: it may identify a selector and, for a catalogued service family,
-its copied fourth-byte service ID; it observes every recognized invocation.
-An entry cannot resume unless its exact historical owner, ABI and failure
-behavior are separately admitted. Unimplemented entries are logged and pass
-through to Bochs unchanged. This makes BOP identity visible without putting
-DOS/SoftPC/CCPU dispatch semantics into Bochs or treating a catalogue as an
-implementation. See `etc/research/opennt-bop-definition-inventory-001.md`.
+catalogue for host-service families: it may identify a selector and, for a
+catalogued service family, its copied fourth-byte service ID; it observes every
+recognized invocation. Machine-BOP composition consumes the separately pinned
+historical BIOS disposition catalogue and is the only possible owner of an
+individually admitted machine handler island. An entry cannot resume unless
+its exact historical owner, ABI and failure behavior are separately admitted.
+Unimplemented entries are logged and pass through to Bochs unchanged. This
+makes BOP identity visible without putting DOS/SoftPC/CCPU dispatch semantics
+into Bochs or treating a catalogue as an implementation. See
+`etc/research/opennt-bop-definition-inventory-001.md` and
+`etc/research/t115-s1-machine-bop-composition-dispatcher-audit-001.md`.
 
 ## Native Bochs Preservation
 
@@ -100,4 +113,11 @@ See `design/ADAPTER-HOST-SERVICE-PLANE.md`.
 
 ## Historical Evidence Role
 
-The historical SoftPC/CCPU/BIOS source and existing trace fixtures remain behavior and ownership evidence. They are not an execution backend and must not be linked into the Bochs runtime merely to reproduce an old composition. `ntvdm64` is a downstream architecture consumer/comparison subject, not a build or runtime dependency of this repository.
+The historical SoftPC/CCPU/BIOS source and existing trace fixtures remain
+behavior and ownership evidence. They are not an execution backend and must
+not be linked into the Bochs runtime merely to reproduce an old composition.
+The sole exception is an individually admitted, independently compiled
+machine-handler island through the machine-BOP composition boundary; it must
+have exact source/ABI/mechanics proof and a pre-existing exception-register
+entry. `ntvdm64` is a downstream architecture consumer/comparison subject, not
+a build or runtime dependency of this repository.
