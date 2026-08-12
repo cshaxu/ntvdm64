@@ -9,8 +9,8 @@ Bochs, adapter, BOP, DOS, or host-capability semantics.
 | S | Scope | Initial disposition |
 | --- | --- | --- |
 | S1 | Inventory current shim/runner source, T182 engine, exact bundle inputs, manifest and policy closure. | Complete: current source and four bundle inputs form a finite closure. |
-| S2 | Define one current shim/bundle build and assembly recipe, or reject it with the missing dependency. | Active in Status. |
-| S3 | Build and policy-validate the shim/bundle without starting a guest process. | Pending S2. |
+| S2 | Define one current shim/bundle build and assembly recipe, or reject it with the missing dependency. | Complete: a fixed current-target recipe and four-member generator exist. |
+| S3 | Build and policy-validate the shim/bundle without starting a guest process. | Complete: current CLI targets and fake policy pass; the four-member bundle is assembled. |
 
 ## Invariants
 

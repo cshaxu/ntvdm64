@@ -1252,6 +1252,11 @@ static byob_profile_result validate_document(const byob_profile_document *docume
             selection->declared_targets[slot].metadata = slot == 0u ? selection->target_metadata :
                 selection->terminal_quit_metadata;
         }
+        /* The v5 sequence supersedes guest_target_placement, but the runner's
+         * fixed DOS-engine gate still consumes this compatibility projection.
+         * It is exactly slot zero, not a second target declaration. */
+        selection->target_placement = selection->declared_targets[0].placement;
+        selection->has_target_placement = 1u;
     }
     return BYOB_PROFILE_ACCEPTED;
 }

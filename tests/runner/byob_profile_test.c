@@ -157,6 +157,8 @@ int main(void)
     failed |=
         selection.declared_target_count != 2u || selection.declared_targets[0].terminal != 0u ||
         selection.declared_targets[1].terminal != 1u ||
+        !selection.has_target_placement ||
+        wcscmp(selection.target_placement.path, L"\\TARGET.COM") != 0 ||
         wcscmp(selection.declared_targets[0].placement.path, L"\\TARGET.COM") != 0 ||
         wcscmp(selection.declared_targets[1].placement.path, L"\\QUIT.COM") != 0 ||
         wcscmp(selection.terminal_quit.file_name, L"QUIT.COM") != 0;

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 832 |
+| Documentation records | 834 |
 | --- | --- |
-| Generated UTC | 2026-08-12T23:29:55Z |
+| Generated UTC | 2026-08-12T23:36:27Z |
 
 ## Entries
 
@@ -93,7 +93,7 @@ content-divergent entries.
 | etc/operations/m0-t180-post-target-command-lifecycle-subtask-plan.md | indexed supporting material | 161b07e453559c70a9df1de5e0d9b7e529a5142f6d6b64db12b82cba77a7c215 |
 | etc/operations/m0-t181-finite-declared-target-sequence-subtask-plan.md | indexed supporting material | 0d453d6c44deae9ba5664d718ccb044edcbcf2288edfa1ae77fbfccb9542273f |
 | etc/operations/m0-t182-finite-sequence-engine-composition-subtask-plan.md | indexed supporting material | 9b9e2f4ec385dbe8d0f327d72d3223d35b830d6457a9d6100acee1b587cdffb4 |
-| etc/operations/m0-t183-finite-sequence-cli-shim-bundle-subtask-plan.md | indexed supporting material | cc5c7744283c3da14d0a1fc7f1833fe521d8c01802ec5567ca9cc28d6a9146c8 |
+| etc/operations/m0-t183-finite-sequence-cli-shim-bundle-subtask-plan.md | indexed supporting material | 9ba0655fda83cbce17b45a7bd503e047a5a8eb2e5377be4a28cd37d4192e9ea2 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -264,6 +264,7 @@ content-divergent entries.
 | etc/research/t182-s3-finite-sequence-build-and-observation-disposition-001.md | indexed supporting material | 29f873b68d08cd0d8c565ffbd937124d067a235027569b2b1f6788e3d672f6d7 |
 | etc/research/t183-s1-cli-shim-bundle-closure-inventory-001.md | indexed supporting material | 6ae9d769f28d1720743a504050885394ed0a84beed8cc086f948142b5b1d9791 |
 | etc/research/t183-s2-cli-shim-bundle-recipe-001.md | indexed supporting material | 21f9cbab0671283b0136780b820b5e7332d9cde114b075ed9dcc874cbe15499f |
+| etc/research/t183-s3-cli-shim-bundle-build-closure-001.md | indexed supporting material | 8c2679f308116b31bbe76085182942f66d313de69c19c483e15707f9a9001931 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -565,6 +566,7 @@ content-divergent entries.
 | history/m0-t181-closure-20260812.md | closed task history | 97d908aca73af20b49d3b4b97ff6bb0979e94fb9cd25a46c4b09911ba8cce8f0 |
 | history/m0-t181-finite-declared-target-sequence-closure-20260812.md | closed task history | 47f66d97541a270cee1b7a3104ef53d1164a6a0c988c74be2a501bb12245c2ad |
 | history/m0-t182-finite-sequence-engine-composition-closure-20260812.md | closed task history | ba589cbf1c08182ec17fd7348bb5671187337d5b06035a5bbabfd2322d63c140 |
+| history/m0-t183-finite-sequence-cli-shim-bundle-closure-20260812.md | closed task history | 87fa428f87a611cb97588f43351fdc71d41cacd59e05bc68ae89ad5889dac193 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | 9b40b99939aad1233b4901b7f7f6569c64ac90b83a351e9a78268251d63c9154 |
@@ -720,7 +722,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | 93a263d3aa4763d56f28078585a1a12f4ffff831020c2ba428dfb3b36cf16c6d |
-| QUEUE.md | principal control document | 30a9190b86a6a91f82b577acd64419a8fa2677f6f27f42bb3a7cd954edc80103 |
+| QUEUE.md | principal control document | 06499b0e69aad334a4cbe8ea5bac9b48817039356e04e9965a5ddc519d1f308d |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | fef23048d411b355f5c2e08b971fec6370359120e7d9c7da383cb883f1dfa2da |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | dd298ea27d815fb69cc843ecf334a2664ba740bb6ede8e0c90907d918c64086a |
@@ -846,7 +848,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a92221414c0c295ae16df17cc7d9db16fb7b49928f98c1fffd4a1677d41b4b74 |
+| STATUS.md | principal control document | a498523dacf0c3c251571de352f92b686d03a25b2055f40077090942e355e57c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

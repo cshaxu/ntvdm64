@@ -16,9 +16,17 @@ file(WRITE "${root}/NTIO.SYS" "abc")
 file(WRITE "${root}/NTDOS.SYS" "abc")
 file(WRITE "${root}/COMMAND.COM" "abc")
 file(WRITE "${root}/TARGET.COM" "abc")
+execute_process(
+    COMMAND powershell.exe -NoProfile -NonInteractive -Command
+        "[IO.File]::WriteAllBytes('${root}/QUIT.COM', [byte[]](0xC4,0xC4,0xFE))"
+    RESULT_VARIABLE quit_write_result)
+if(NOT quit_write_result EQUAL 0)
+    message(FATAL_ERROR "could not create fixed QUIT.COM fixture")
+endif()
 set(abc_sha256 "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad")
+set(quit_sha256 "06a37dff559df7325de8b003f4df53c188f733e0ca312aad961c34dae48d7b83")
 file(WRITE "${profile}"
-    "{\"schema\":\"ntdos64-byob-profile-v3\",\"profile\":\"nt4-en-us-command-smoke-v3\",\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"bochs-engine-policy-owned\",\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null}],\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},\"guest_target_placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2},\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}}}")
+    "{\"schema\":\"ntdos64-byob-profile-v5\",\"profile\":\"nt4-en-us-command-smoke-v5\",\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"bochs-engine-policy-owned\",\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"terminal-quit\",\"file_name\":\"QUIT.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${quit_sha256}\",\"version\":null}],\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}},\"guest_declared_targets\":[{\"role\":\"target\",\"placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2}},{\"role\":\"terminal-quit\",\"placement\":{\"path\":\"\\\\QUIT.COM\",\"drive_index\":2}}],\"guest_search_metadata\":{\"command\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"target\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"terminal-quit\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"config\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"autoexec\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1}}}")
 file(COPY_FILE "${FAKE_BOCHS}" "${bundle}/ntdos64-bochs.exe")
 file(WRITE "${bundle}/ROM/BIOS-bochs-latest" "fake-bios\n")
 file(WRITE "${bundle}/ROM/VGABIOS-lgpl-latest" "fake-vga\n")

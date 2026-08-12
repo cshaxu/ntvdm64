@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T183 S2 — finite-sequence CLI shim/bundle composition.**
+**Binding active packet: none; M0 T183 is closed.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T183 S2**. M0 T182 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> No new packet is admitted below. M0 T183 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T183 S2, Ordinary Mode. |
-| Admission And Approval | S1 proves the existing shim source and CMake target, T182 engine, three fixed ROM inputs and the fixed manifest contract form a complete finite closure. |
-| Objective | Define one current MinGW runner/shim/probe build and four-member fixed-bundle assembly recipe; no native engine process may start. |
-| Non-goals | No guest launch, Bochs/adapter change, new Bochs configuration language, host capability, `GetNextVDMCommand`, ambient namespace, `54:11` result transport, or guest semantic change. |
-| Reference Baseline | T183 S1 inventory, T182 linked engine, T124 fixed shim contract and current v5 runner sources. |
-| Files And ABI Surface | A bounded CLI build root, bundle assembly script/manifest and the four fixed bundle members only. |
+| Identifier Mode | M0 T183, closed Ordinary Mode packet. |
+| Admission And Approval | S2 defines the current MinGW target set and a fixed four-member identity-checked bundle generator; S3 completes its prescribed CLI-only build/policy/assembly closure. |
+| Objective | Restore the finite v5 CLI-to-native-Bochs process boundary without changing Bochs or adapter semantics. |
+| Non-goals | No guest/engine launch, Bochs/adapter change, new Bochs configuration language, host capability, `GetNextVDMCommand`, ambient namespace, `54:11` result transport, or guest semantic change. |
+| Reference Baseline | T183 S1/S2 records, T182 linked engine and T124 fixed shim policy contract. |
+| Files And ABI Surface | New MinGW CLI build root, fake parser/probes, the generated fixed bundle and its manifest only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Generator-only bundle assembly with four identity checks and one manifest; documentation inventory/governance and `git diff --check` remain required. |
-| Expected Markers | One declared MinGW target set, fixed `ntdos64-bochs.exe` bundle name, exactly three ROM copies and one fixed-order manifest. |
-| Asset Needs | Current source tree, T182 r2 linked engine, fixed BIOS/VGA/option ROM assets and a new empty build/bundle root. |
-| Reporting Requirements | Separate recipe/assembly facts from later compile/test results; record every SHA-256. |
-| Stop Conditions | Any engine launch, Bochs/adapter source alteration, bundle directive expansion, direct raw-Bochs BYOB argument, or host capability addition. |
-| Exit Criteria | A reproducible recipe and generator-only bundle assembly either pass all identity checks or reject with a concrete input error. |
+| Verification | Current MinGW build of four named targets, `ntdos64-bochs-engine-policy` with fake parser only, four verified bundle copies and one fixed-order manifest; documentation inventory/governance and `git diff --check` remain required. |
+| Expected Markers | Policy proves fixed argv/EOF/rejection; bundle has one engine, exactly three ROMs and no caller configuration. |
+| Asset Needs | Current source tree, T182 r2 linked engine, fixed BIOS/VGA/option ROM assets and new empty build/bundle roots. |
+| Reporting Requirements | Record build/test/assembly separately; no result may be characterized as native engine or guest behavior. |
+| Stop Conditions | Any native engine process, Bochs/adapter source alteration, bundle directive expansion, direct raw-Bochs BYOB argument, or host capability addition. |
+| Exit Criteria | Met: all four targets built, the fake parser policy passed, and the manifest-verified bundle exists. A bounded runtime observation is an unnumbered Queue candidate. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
