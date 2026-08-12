@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T180 S2 — post-target COMMAND trace reconciliation.**
+**Binding active packet: M0 T180 S3 — finite COMMAND lifecycle disposition.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T180 S2**; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T180 S3**; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active T177 packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T180 S2, Ordinary Mode. |
-| Admission And Approval | S1 proves `54:01` is a whole historical COMMAND/BASE command-acquisition protocol; the current one-target provider intentionally declines its second request. S2 may reconcile that fact with T179 trace markers only. |
-| Objective | Identify the exact last proven and first declined post-target COMMAND boundary in T179, without interpreting it as `54:11`, a machine BOP, or CLI result. |
+| Identifier Mode | M0 T180 S3, Ordinary Mode. |
+| Admission And Approval | S2 proves that target launch accepts the first `54:01` and the post-target second `54:01` is declined before vector-06 machine handling. S3 may decide the correct next package shape. |
+| Objective | Decide whether a contained whole COMMAND lifecycle provider is source-admissible now, or close T180 and transfer the finite target-sequence design to Queue. |
 | Non-goals | No Bochs/adapter/OpenNT/CLI behavior change; no new runtime observation; no result transport; no generic machine BOP handling; no host command queue or synthetic guest state. |
 | Reference Baseline | T179 S4 normal-return machine observation, retained OpenNT COMMAND source, T171--T174 lifecycle audits and current BOP catalogue. |
-| Files And ABI Surface | Retained T179 trace and one research record; Status/plan only. |
+| Files And ABI Surface | Decision record, Queue and Status/plan only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile T179 `54:01`/selector-06/machine-report records with current state-machine gating; run governance checks and `git diff --check`. |
-| Expected Markers | Exact last accepted/first declined boundary, source/trace confidence, and explicit exclusions. |
+| Verification | Reconcile historical no-next behavior, current one-target state and CLI boundary rules; run governance checks and `git diff --check`. |
+| Expected Markers | Explicit admit-or-close decision, required whole-provider contract if admitted, and retained exclusions. |
 | Asset Needs | Retained source and logs only. |
 | Reporting Requirements | Separate observed facts from source inference; state whether a later implementation package is justified. |
-| Stop Conditions | A need to treat `54:01` as generic machine BOP, add a host queue, infer a result from process exit, change runtime behavior, or assert trace behavior not retained. |
-| Exit Criteria | The first declined second-command boundary is identified and classified without implementation. |
+| Stop Conditions | A need to rehost `GetNextVDMCommand`, add ambient host command state, synthesize a `54:01` success, or change runtime behavior. |
+| Exit Criteria | A next whole-provider package is admitted with an exact finite contract, or T180 closes with the candidate transferred to Queue. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
