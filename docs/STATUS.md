@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T102 S1 — aperture-entry CPU transfer observation design.**
+**Active: M0 T103 S1 — native POST/deferred-handoff composition closure.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T102 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized priority/ROI-based task selection. T101 proves that the `0xAF6AF` stop is a valid native VGA-aperture execution veto, but the retained trace cannot identify the transfer that entered it. This selects the minimum evidence prerequisite before another real run. |
-| Objective | Define and source-close a default-off Bochs-owned observation contract that records fixed-width CPU control-transfer facts sufficient to identify the first transition into the VGA aperture. |
-| Non-goals | No BOP/DOS/DEM decoding, adapter state/result, guest-memory read, CPU semantic change, Bochs feature/device/firmware/memory-map change, host capability, guest retry, or aperture execution. |
-| Reference Baseline | etc/research/t101-s1-post-bop-prefetch-map-audit-001.md; current `cpu.cc` prefetch path; existing default-off mechanical #UD observation precedent and intrusion register. |
-| Files And ABI Surface | Bochs diagnostic boundary and its explicit exception register only if source review proves no adapter/build-only option exists; fixed-width log/record fields only. No OpenNT or adapter ABI. |
+| Identifier Mode | M0 T103 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized priority/ROI-based task selection. T102 establishes that existing trace evidence already identifies direct NTIO entry before native POST as the missing machine prerequisite. This admits the prior registered native POST/deferred-plan design for source/build closure only. |
+| Objective | Inventory and prove the exact existing macro/object/profile closure for native Bochs POST, option-ROM neutral marker and one-shot opaque deferred startup plan; define direct-entry mutual exclusion. |
+| Non-goals | No new Bochs source intrusion, no BOP/DOS/DEM/COMMAND semantic in Bochs, no IVT/BDA synthesis, no device/firmware/map change, no adapter ABI expansion, no compile, and no guest retry. |
+| Reference Baseline | etc/research/t102-s1-aperture-entry-observation-design-audit-001.md; t95-s7-native-firmware-to-ntio-handoff-design-001.md; BX-ABI-052; current r5-derived recipe and source. |
+| Files And ABI Surface | Existing `main.cc` and `exception.cc` conditional seams, adapter deferred-startup API, BYOB handoff descriptor, option-ROM composition asset and narrow recipe records only. No new ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare all existing Bochs/adapter diagnostic hooks and source locations; record exact pre/post-control-state fields, default-off activation, negative behavior and intrusion disposition before implementation. No build or guest run. |
-| Expected Markers | One minimal observation point, an owner/rationale map, proof that it cannot expose service semantics, and an explicit decision whether a Bochs intrusion exception is necessary. |
-| Asset Needs | Existing trace, Bochs 2.6 source, adapter boundary records and intrusion register only. |
-| Reporting Requirements | Distinguish design/source closure from implementation/runtime evidence; register an intrusion before any Bochs edit, or record why no edit is required. |
-| Stop Conditions | Stop and re-admit before any source edit, BOP/service inspection, behavior change, new device/firmware/map, adapter ABI, build or guest run. |
-| Exit Criteria | A reviewed diagnostic contract and either a no-intrusion route or a registered minimal Bochs exception is recorded; no runtime claim. |
+| Verification | Static source/makefile/profile inventory; prove direct and deferred entry cannot both be enabled; compare required objects against the retained r5 recipe; run no compiler or guest. |
+| Expected Markers | One source-owned POST-to-marker path, opaque one-shot adapter handoff, exact macro/object delta, negative mutual-exclusion behavior, and unchanged Bochs feature set. |
+| Asset Needs | Existing Bochs/OpenNT/adapter source, prior native-post evidence and current recipe only. |
+| Reporting Requirements | Separate existing code from missing build closure; record every retained device and no-new-device proof; do not call a design a runnable path. |
+| Stop Conditions | Stop and re-admit before source edits, new option-ROM bytes, compile/link, guest run, device/configuration change, or adapter ABI change. |
+| Exit Criteria | One reproducible build/composition specification and a bounded implementation/test successor are recorded; no runtime claim. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare #UD event hand-off, existing CPU trace/log macros, prefetch translation, TLB/segment transitions, memory direct-access handlers, and external-intrusion register; exclude every service-level input. |
+| Similar-Issue Sweep | Reconcile direct execution plan, deferred arm/take, `main.cc` ordering, exception consumer, option-ROM placement, profile parser, adapter single-use state, r5 objects and native reset-floor devices. |
 
 ## Current Technical Baseline
 
@@ -109,5 +109,6 @@
 | M0 T100 S1 | Complete: whole original-unavailable DEM provider composes through ingress/registry/plane and source/test/build/runtime evidence. |
 | M0 T100 | Closed: all eight original-unavailable DEM slots compose through common selection; trace proves `50:42` resume and later close before the separate Bochs prefetch-map stop. |
 | M0 T101 | Closed: `0xAF6AF` is a native VGA-aperture execution veto, not a missing mapping/device; upstream transfer remains unobserved. |
-| M0 T102 S1 | Active: design/source-close a default-off, Bochs-owned first-aperture-entry observation contract. |
+| M0 T102 | Closed: retained original diagnostics already prove the zero INT10 vector/direct-entry cause; no new Bochs diagnostic is needed. |
+| M0 T103 S1 | Active: source/build closure for native POST plus opaque deferred startup handoff, with direct entry excluded. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
