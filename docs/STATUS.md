@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T123 S1 — Bochs-engine shim startup descriptor audit.**
+**Active: M0 T125 S1 — fixed-bundle native-engine preflight.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T123 S1, Ordinary Mode. |
-| Admission And Approval | T122 reaches normal CPU-loop stop after the existing deferred profile. The CLI source proves EOF child stdin, but real Bochs rejects the runner's non-Bochs engine argv. Owner authorizes ROI-directed sequencing. |
-| Objective | Freeze the thin `ntdos64-bochs-engine` shim's required input descriptor, original Bochs argv, child environment, output and exit contract before any implementation. |
-| Non-goals | No shim implementation, no Bochs source edit, no BOP/adapter/guest change, no generated bochsrc, no guest run, and no new device or host capability. |
-| Reference Baseline | etc/research/bochs-engine-startup-closure.md; runner-adapter-install-contract.md; T121/T122 evidence. |
-| Files And ABI Surface | Read-only CLI/Bochs startup sources and a new design/evidence record only. |
+| Identifier Mode | M0 T125 S1, Ordinary Mode. |
+| Admission And Approval | T124 source/test closure establishes the fixed shim ABI. Owner authorizes ROI-directed sequencing and later human review. |
+| Objective | Assemble and validate one immutable T121-compatible engine bundle, then collect one bounded native Bochs preflight through the shim. |
+| Non-goals | No Bochs/adapter/guest source edit, no BOP/provider change, no arbitrary configuration, device enablement, or continuous-execution claim. |
+| Reference Baseline | etc/research/t123-s1-bochs-engine-shim-startup-descriptor-001.md and history/m0-t124-closure-20260812.md. |
+| Files And ABI Surface | Generated artifact bundle/evidence only; the frozen CLI shim ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Prove every proposed shim input has a declared owner and fixed validation rule; prove BYOB never enters Bochs argv and Bochs options never enter adapter semantics. |
-| Expected Markers | Versioned descriptor, allow-list, rejection behavior and a future test matrix. |
-| Asset Needs | Existing T121 image/ROM/profile evidence and Bochs 2.6 command-line parser source. |
-| Reporting Requirements | Distinguish current runner transport proof from future real-engine proof; preserve CRT and process-lifetime limitations. |
-| Stop Conditions | Stop before code, build or run; stop if any input requires ambient host discovery, a Bochs source switch, or guest semantic parsing. |
-| Exit Criteria | A complete implementation-admission record exists, or an explicit missing-descriptor blocker is recorded. |
+| Verification | Record exact bundle hashes; prove the shim reaches the native parser with the fixed argv/config; classify its bounded exit without interpreting it as guest runtime. |
+| Expected Markers | Immutable bundle manifest, private run config, bounded native process result and retained stdout/stderr. |
+| Asset Needs | Retained T121 executable and its three ROM inputs, a valid BYOB profile/root, and modern CLI toolchain. |
+| Reporting Requirements | Keep source/test proof separate from native-engine evidence; record every input identity and resulting stop category. |
+| Stop Conditions | Stop on missing retained input, hash mismatch, required Bochs/adapter change, ambient discovery, arbitrary config, or unbounded guest behavior. |
+| Exit Criteria | One reproducible native preflight is classified, whether it passes to the expected bounded stop or rejects a declared fixed input. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Inspect only CLI child launch, Bochs parser and existing observer config ownership; do not reopen BOP families. |
+| Similar-Issue Sweep | Preserve direct runner-to-Bochs rejection, bundle immutability and arbitrary-config rejection; do not reopen BOP families. |
 
 ## Current Technical Baseline
 
@@ -130,5 +130,6 @@
 | M0 T120 | Closed: the one direct-start r3 observation ends at the known aperture veto with BOP identity observation disabled; it neither proves nor disproves `02h` reachability. |
 | M0 T121 | Closed: deferred POST, the selector-blind machine seam and existing BOP listener source-build in one no-archive-rebuild derivative. |
 | M0 T122 | Closed: the frozen deferred image reaches 31 observed BOPs and normal CPU-loop shutdown; `02h` is not observed and no machine handler result is claimed. |
-| M0 T123 S1 | Active: define the thin CLI-to-Bochs shim startup descriptor before implementation. |
+| M0 T123 | Closed: thin CLI-to-Bochs shim startup descriptor is frozen. |
+| M0 T124 | Closed: CLI-only shim source/test closure verifies the fixed, manifest-identified bundle contract with a fake native parser; real Bochs remains T125 evidence. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
