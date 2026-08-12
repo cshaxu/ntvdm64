@@ -13,8 +13,8 @@ in `docs/STATUS.md` or allocate later tasks.
 | S4 | COMMAND host-service plane migration | Complete in P1--P5 and closure; see history/m0-t96-s4-closure-20260811.md. |
 | S5 | XMS/DPMI provider and profile disposition | Complete; see history/m0-t96-s5-closure-20260811.md. |
 | S6 | Redirector, debugger, notification, VDD/mouse host-provider dispositions | Complete; see history/m0-t96-s6-closure-20260811.md. |
-| S7 | SoftPC BIOS selector ownership and native-owner reconciliation | Active. |
-| S8 | Existing endpoint migration and no-bypass verification | Pending S7. |
+| S7 | SoftPC BIOS selector ownership and native-owner reconciliation | Complete; see history/m0-t96-s7-closure-20260811.md. |
+| S8 | Existing endpoint migration and no-bypass verification | Active. |
 | S9 | Full inventory/provider/capability regression | Pending S8. |
 | S10 | Real-path trace and T96 closure checkpoint | Pending S9. |
 

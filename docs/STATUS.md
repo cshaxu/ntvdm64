@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T96 S7 — SoftPC BIOS selector ownership and native-owner reconciliation.**
+**Active: M0 T96 S8 — Existing endpoint migration and no-bypass verification.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T96 S7, Ordinary Mode. |
-| Admission And Approval | The owner approved minimal Bochs replacement of SoftPC, preserving Bochs machine ownership and using the adapter only for copied BOP composition boundaries. S7 follows closed S1--S6 source planes. |
-| Objective | Reconcile every inventoried SoftPC BIOS BOP selector/table form with a Bochs-native owner, an explicit non-owner/deferred disposition, or a separately recorded Bochs intrusion exception. |
-| Non-goals | No import of SoftPC BIOS dispatcher/firmware into adapter; no BIOS, PIC, keyboard, mouse, video, disk, CPU or memory reimplementation in adapter; no added Bochs feature without an exception record. |
-| Reference Baseline | history/m0-t96-s6-closure-20260811.md; etc/research/opennt-bop-definition-inventory-001.md; immutable BOP inventory; Bochs boundary and intrusion registers. |
-| Files And ABI Surface | BIOS selector ownership records only; no provider callback, guest pointer, CPU result, firmware or Bochs public API expansion. |
+| Identifier Mode | M0 T96 S8, Ordinary Mode. |
+| Admission And Approval | The owner approved holistic BOP recovery by plane and rejected permanent trace-specific handlers. S8 follows complete source disposition planes S3--S7. |
+| Objective | Inventory every existing adapter runtime/end-point BOP recognizer and migrate it behind its matching closed plane, or freeze/reject it with source evidence; prove no new direct legacy bypass is admitted. |
+| Non-goals | No new host capability, DOS/BIOS/Bochs semantics, OpenNT direct linking, or change to a legacy service merely to make a trace advance. |
+| Reference Baseline | history/m0-t96-s7-closure-20260811.md; histories/m0-t96-s3-closure-20260811.md through m0-t96-s6-closure-20260811.md; existing adapter runtime source/tests. |
+| Files And ABI Surface | Existing adapter runtime/end-point code and plane gates only; fixed-width copied ABI; no Bochs public API expansion. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every inventory BIOS selector/table form obtains an owner/disposition record; no adapter implementation claims a native machine operation; focused record test; documentation governance; git diff --check. |
-| Expected Markers | A complete BIOS owner matrix, no generic BIOS dispatcher, and an explicit list of selector collisions with OpenNT host BOP identities. |
-| Asset Needs | Pinned SoftPC BIOS table and selector headers, existing Bochs boundary/intrusion evidence, and current inventory; no new third-party, firmware, guest media, or Microsoft asset. |
-| Reporting Requirements | Record selector/form, historical owner symbol, Bochs-native domain, collision status, current disposition, evidence confidence, and every unresolved dependency. |
-| Stop Conditions | Stop and revise admission if reconciliation requires guessing a device/firmware contract, importing SoftPC firmware, implementing it in adapter, or an unregistered Bochs change. |
-| Exit Criteria | All inventory BIOS forms have an auditable native-owner/non-owner disposition; overlap with host BOP selectors is explicit; S8 legacy endpoint migration scope is unambiguous. |
+| Verification | Every legacy recognizer has a service/selector owner, original contract citation, target plane, and migration/freeze disposition; focused no-bypass test; documentation governance; git diff --check. |
+| Expected Markers | One complete legacy endpoint register and plane-gated migration changes; no raw selector/service switch survives outside ingress/closed plane modules. |
+| Asset Needs | Existing adapter source/tests, closed plane maps and pinned OpenNT source; no new third-party, firmware, guest media, or Microsoft asset. |
+| Reporting Requirements | Record file/symbol, recognized identity, original source owner, current behavior, conflict, target plane and rejection/migration evidence. |
+| Stop Conditions | Stop and revise admission if migration needs guessed source semantics, a raw guest pointer, a new Bochs feature, or a one-off handler not owned by a closed plane. |
+| Exit Criteria | Every legacy endpoint is plane-gated, explicitly frozen/rejected, or removed; no-bypass verifier covers the resulting adapter source tree; handoff to inventory regression is explicit. |
 | Original Owner Request | Implement BOP holistically, preserve OpenNT semantics, and make adapter route to original OpenNT host code before using minimal source-derived rehosting. |
-| Similar-Issue Sweep | Review all 41 BIOS selector definitions and 349 annotated table rows, collision selectors, mouse/keyboard/video/disk/interrupt/CPU/memory domains, Bochs exceptions, and existing adapter BIOS endpoints together. |
+| Similar-Issue Sweep | Review adapter runtime, all `*_service.c` BOP recognizers, BIOS selector map, host-service catalog and their tests against the four closed source planes together. |
 
 ## Current Technical Baseline
 
@@ -44,6 +44,8 @@
 - M0 T96 S6 is closed: all Redirector and debugger services have source-backed
   profile dispositions; selector-level VDD, mouse and device boundaries remain
   explicitly outside adapter execution.
+- M0 T96 S7 is closed: the complete SoftPC BIOS inventory has native-owner,
+  unavailable or collision disposition, without importing a BIOS dispatcher.
 
 ## Recent Progress
 
@@ -56,5 +58,6 @@
 | M0 T96 S4 | P1--P5 complete: COMMAND map/plane/no-op are closed; CONFIG/AUTOEXEC and target-launch legacy endpoints are reconciled as S8 migration objects. |
 | M0 T96 S5 | Complete: 12 XMS and 25 DPMI services are source-mapped and plane-classified without linking historical dispatchers. |
 | M0 T96 S6 | Complete: Redirector is source-proven unavailable; debugger and native device selectors remain deferred to their proper owners. |
-| M0 T96 S7 | Admitted in Ordinary Mode; SoftPC BIOS selector and Bochs-native ownership reconciliation begins. |
+| M0 T96 S7 | Complete: 41 definitions and 349 historical BIOS table forms have a mechanically verified ownership disposition. |
+| M0 T96 S8 | Admitted in Ordinary Mode; existing endpoint migration and no-bypass verification begins. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
