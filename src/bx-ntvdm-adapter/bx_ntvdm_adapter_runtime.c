@@ -438,7 +438,8 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
             result)) return 1;
     {
         bx_ntvdm_multi_write_transaction_v1 transaction;
-        if (bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(event,
+        if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0fu) &&
+            bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(event,
                 cpu_before, window, &bx_ntvdm_adapter_runtime.cmd_comspec_bootstrap,
                 &transaction, bx_ntvdm_adapter_runtime.multi_write_payload)) {
             if (transaction.writes.write_count == 0u) {
@@ -454,14 +455,17 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
             }
         }
     }
-    if (bx_ntvdm_cmd_set_info_service_v1_dispatch(event, cpu_before, window,
+    if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x05u) &&
+        bx_ntvdm_cmd_set_info_service_v1_dispatch(event, cpu_before, window,
             &bx_ntvdm_adapter_runtime.cmd_set_info_registration, result)) {
         bx_ntvdm_adapter_runtime.has_cmd_set_info_registration = 1;
         return 1;
     }
     {
         bx_ntvdm_multi_write_transaction_v1 transaction;
-        if (bx_ntvdm_cmd_boot_file_service_v1_prepare(
+        if ((bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0cu) ||
+                bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0du)) &&
+            bx_ntvdm_cmd_boot_file_service_v1_prepare(
                 &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
                 window, &transaction, bx_ntvdm_adapter_runtime.multi_write_payload) &&
             bx_ntvdm_host_session_v1_queue_multi_write(
@@ -478,16 +482,19 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
         bx_ntvdm_adapter_runtime.has_dem_hard_error_registration = 1;
         return 1;
     }
-    if (bx_ntvdm_dem_readonly_file_v1_seek(
+    if ((bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x00u) ||
+            bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x02u)) &&
+        (bx_ntvdm_dem_readonly_file_v1_seek(
             &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
             window, result) ||
         bx_ntvdm_dem_readonly_file_v1_close(
             &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
-            window, result)) return 1;
+            window, result))) return 1;
     {
         bx_ntvdm_bulk_result_transaction_v1 transaction;
         bx_ntvdm_cpu_result_v2 direct_result;
-        if (bx_ntvdm_dem_readonly_file_v1_read(
+        if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x16u) &&
+            bx_ntvdm_dem_readonly_file_v1_read(
                 &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
                 window, bx_ntvdm_adapter_runtime.bulk_payload,
                 sizeof(bx_ntvdm_adapter_runtime.bulk_payload), &transaction,
@@ -502,24 +509,8 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
             return bx_ntvdm_cpu_result_v2_valid(result);
         }
     }
-    {
-        bx_ntvdm_bulk_result_transaction_v1 transaction;
-        bx_ntvdm_cpu_result_v2 direct_result;
-        if (bx_ntvdm_dem_fast_read_service_v1_read(
-                &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
-                window, bx_ntvdm_adapter_runtime.bulk_payload,
-                sizeof(bx_ntvdm_adapter_runtime.bulk_payload), &transaction,
-                &direct_result)) {
-            if (transaction.magic == BX_NTVDM_BULK_RESULT_TRANSACTION_V1_MAGIC) {
-                if (!bx_ntvdm_host_session_v1_queue_bulk_result(
-                        &bx_ntvdm_adapter_runtime.session, &transaction,
-                        bx_ntvdm_adapter_runtime.bulk_payload,
-                        transaction.payload_bytes)) return 0;
-                *result = transaction.result;
-            } else *result = direct_result;
-            return bx_ntvdm_cpu_result_v2_valid(result);
-        }
-    }
+    /* S3 records 50:42 FASTREAD as the original demNotYetImplemented slot.
+     * Do not turn the older read helper into a second file-service provider. */
     if (!bx_ntvdm_adapter_runtime.has_host_drive_inventory) return 1;
     if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x21u) &&
         bx_ntvdm_dem_ioctl_changeable_service_v1_dispatch(
@@ -533,7 +524,8 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
             if (bx_ntvdm_adapter_runtime.host_drive_inventory.types[index] != 0u)
                 available_mask |= UINT32_C(1) << index;
         }
-        if (bx_ntvdm_cmd_current_dir_service_v1_prepare(available_mask, event,
+        if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x04u) &&
+            bx_ntvdm_cmd_current_dir_service_v1_prepare(available_mask, event,
                 cpu_before, window, &transaction,
                 bx_ntvdm_adapter_runtime.multi_write_payload)) {
             if (transaction.writes.write_count == 0u) {
@@ -554,7 +546,8 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
         window, result)) return 1;
     {
         bx_ntvdm_multi_write_transaction_v1 transaction;
-        if (bx_ntvdm_dem_dpb_service_v1_prepare(
+        if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x46u) &&
+            bx_ntvdm_dem_dpb_service_v1_prepare(
                 bx_ntvdm_adapter_runtime.host_drive_inventory.types, event,
                 cpu_before, window, &transaction,
                 bx_ntvdm_adapter_runtime.multi_write_payload) &&
@@ -583,7 +576,8 @@ int bx_ntvdm_adapter_runtime_v3_dispatch(
             ((action->cpu_result = result), 1);
     if (result.disposition == BX_NTVDM_CPU_RESULT_V2_STOP)
         return bx_ntvdm_guest_read_action_v1_stop(action);
-    if (bx_ntvdm_dem_dta_service_v1_dispatch(event, cpu_before, window,
+    if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x1bu) &&
+        bx_ntvdm_dem_dta_service_v1_dispatch(event, cpu_before, window,
             action)) {
         if (!bx_ntvdm_adapter_runtime.installed ||
             !bx_ntvdm_host_session_v1_queue_guest_read(
@@ -592,7 +586,8 @@ int bx_ntvdm_adapter_runtime_v3_dispatch(
             return 0;
         return 1;
     }
-    if (bx_ntvdm_dem_readonly_file_v1_prepare_open(event, cpu_before, window,
+    if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x12u) &&
+        bx_ntvdm_dem_readonly_file_v1_prepare_open(event, cpu_before, window,
             action)) {
         if (!bx_ntvdm_adapter_runtime.installed ||
             !bx_ntvdm_host_session_v1_queue_guest_read(
@@ -669,14 +664,16 @@ int bx_ntvdm_adapter_runtime_v4_dispatch(
     (void)bx_ntvdm_adapter_runtime_v1_install_from_environment();
     if (!bx_ntvdm_adapter_runtime.installed)
         return 1;
-    if (bx_ntvdm_cmd_get_next_v1_prepare(&bx_ntvdm_adapter_runtime.cmd_get_next,
+    if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x01u) &&
+        bx_ntvdm_cmd_get_next_v1_prepare(&bx_ntvdm_adapter_runtime.cmd_get_next,
             event, cpu_before, window, action)) {
         if (bx_ntvdm_host_session_v1_queue_guest_gather_read(
                 &bx_ntvdm_adapter_runtime.session, event, cpu_before, action)) return 1;
         bx_ntvdm_guest_gather_read_action_v1_pass_through(action);
         return 1;
     }
-    if (bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(
+    if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x02u) &&
+        bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(
             &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
             window, action)) {
         if (bx_ntvdm_host_session_v1_queue_guest_gather_read(
