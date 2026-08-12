@@ -1,0 +1,2384 @@
+﻿[
+    {
+        "Descriptor":  "bde/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "bde/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=bde"
+                            ],
+        "ToolTokens":  [
+                           "link"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "bin86/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dbg/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dbg/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=dbg"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/command/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/command/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=command"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/dem/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/dem/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=dem"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/append/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=append.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/backup/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/command/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=command.com"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "reloc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/debug/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=debug.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/edlin/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=edlin.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/exe2bin/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=exe2bin.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/fastopen/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=fastopen.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/graphics/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/keyb/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=kb16.com"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/loadfix/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=loadfix.com"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/mem/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=mem.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/nlsfunc/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=nlsfunc.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/qbasic/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/setver/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=setver.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/cmd/share/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=share.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/dev/ansi/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=ansi.sys"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/dev/country/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "reloc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/dev/himem/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=himem.sys"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "reloc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/dev/keyboard/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=keyboard.sys"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/dev/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/doskrnl/bios/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=ntio.sys"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "cl",
+                           "dosmsg",
+                           "link16",
+                           "mapsym",
+                           "reloc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/doskrnl/dos/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=ntdos.sys"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "mapsym",
+                           "reloc",
+                           "stripz"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/doskrnl/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/lib/xmm/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/messages/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/redir/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "target=$(OBJPATH)\\redir.exe"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "masm",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/tools/src/buildidx/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/tools/src/buildidx/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=buildidx"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/tools/src/getsize/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/tools/src/getsize/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=getsize"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/tools/src/stripdd/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/tools/src/stripdd/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=stripdd"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dos/v86/tools/src/stripz/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "stripz"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dos/v86/tools/src/stripz/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=stripz"
+                            ],
+        "ToolTokens":  [
+                           "stripz"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dpmi/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=."
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "dpmi32/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "dpmi32/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=dpmi32"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "fax/wowfax/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "fax/wowfax/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=wowfax"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "fax/wowfaxui/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "fax/wowfaxui/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=wowfaxui"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "ieuvddex/alpha/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "ieuvddex/i386/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "ieuvddex/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "ieuvddex/mips/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "ieuvddex/ppc/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "ieuvddex/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=ntvdm"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "inc/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "oemuni/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "oemuni/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=oemuni"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "sim16/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "sim32/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "sim32/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=sim32"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/bios/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/bios/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=bios"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/ccpu386/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/ccpu386/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=ccpu386"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/comms/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/comms/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=comms"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/cvidc/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/cvidc/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=Cvidc"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/dasm386/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/dasm386/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=dasm386"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/debug/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/debug/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=debug"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/disks/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/disks/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=disks"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/dos/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/dos/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=dos"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/keymouse/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/keymouse/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=keymouse"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/support/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/support/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=support"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/system/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/system/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=system"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/unix/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/unix/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=unix"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/base/video/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/base/video/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=video"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/bios/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+                                "dest=ntio.sys"
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "cl",
+                           "dosmsg",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "reloc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/convert/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=convert"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/dat2obj/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/dat2obj/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=dat2obj"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/data/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/debugger/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/debugger/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=vdmdebug"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/host/link/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/host/link/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=resource"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/host/src/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/host/src/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=src"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/obj.vdm/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "softpc.new/obj.vdm/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=ntvdm"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "softpc.new/rename/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=rename"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "suballoc/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "suballoc/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=suballoc"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "v86/monitor/i386/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "v86/monitor/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "v86/monitor/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=monitor"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "v86/scaffold/i386/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "v86/scaffold/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "v86/scaffold/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=ntvdm"
+                            ],
+        "ToolTokens":  [
+                           "link",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "v86/util/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link16",
+                           "masm",
+                           "rc",
+                           "reloc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/adlibvdd/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/adlibvdd/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=adlibvdd"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdd/samples/hpscan/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "masm",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/mscdex/tsr/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "masm",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/mscdex/vdd/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/mscdex/vdd/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=vcdex"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdd/samples/sample1/fax16/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link16",
+                           "masm",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/sample1/fax32/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/sample1/fax32/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=fax32"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdd/samples/sample2/16bits/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link",
+                           "link16",
+                           "masm",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/sample2/vdd/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/sample2/vdd/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=vdd"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdd/samples/vsbd/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdd/samples/vsbd/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=vsbd"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdmdbg/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdmdbg/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=vdmdbg"
+                            ],
+        "ToolTokens":  [
+                           "link",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdmexts/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdmexts/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=vdmexts"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdmredir/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdmredir/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=vdmredir"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdmutils/forcedos/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdmutils/forcedos/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=forcedos"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdmutils/graftabl/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdmutils/graftabl/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=graftabl"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdmutils/pifedit/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdmutils/pifedit/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=pifedit"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "vdmutils/win/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "vdmutils/win/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=win"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "wow16/commdlg/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/ddeml/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/ddeml/tests/ddestrs/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/ddeml/tests/ddestrs/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=ddestrs"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "wow16/ddeml/tests/src/client/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/ddeml/tests/src/client/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=ddemlcl"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "wow16/ddeml/tests/src/ddemo/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/ddeml/tests/src/ddemo/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=ddemo"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "wow16/ddeml/tests/src/server/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/ddeml/tests/src/server/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=ddemlsv"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "wow16/drivers/comm/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/drivers/display/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/drivers/keyboard/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/drivers/mouse/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/drivers/sound/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/gdi/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/kernel31/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/kernel31/swappro/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link16",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/killwow/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/lib/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/mciole/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/mmsystem/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/mmsystem/mmtask/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/ole/client/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/ole/server/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/rasapi16/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "cl",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/regedit/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/shell/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/sherlock/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "cl",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/system/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/test/hello/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/test/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/test/shell/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/timer/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/toolhelp/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/user/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/wfwnet/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "cl",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/win87em/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "link",
+                           "masm",
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/winoldap/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/winsock/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/winspool/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/wowdeb/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow16/write/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+                           "binplace",
+                           "link",
+                           "link16",
+                           "mapsym",
+                           "masm",
+                           "rc",
+                           "rc16"
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow32/i386/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow32/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "wow32/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=wow32"
+                            ],
+        "ToolTokens":  [
+                           "rc"
+                       ],
+        "HasBuildOutputDeclaration":  true
+    },
+    {
+        "Descriptor":  "xms.486/alpha/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "xms.486/i386/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "xms.486/makefile",
+        "Kind":  "makefile",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "xms.486/mips/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "xms.486/ppc/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  false
+    },
+    {
+        "Descriptor":  "xms.486/sources",
+        "Kind":  "sources",
+        "DeclaredOutputs":  [
+                                "TARGETNAME=xms486"
+                            ],
+        "ToolTokens":  [
+
+                       ],
+        "HasBuildOutputDeclaration":  true
+    }
+]

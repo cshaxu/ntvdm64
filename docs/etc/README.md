@@ -13,6 +13,9 @@ competing current architecture, rule, roadmap, queue, or status.
 Pre-governance records remain in the direct legacy tree until a manifest-backed
 batch moves them here. The migration inventory is
 [governance-migration.md](operations/governance-migration.md).
+The exact-file, SHA-256 snapshot covering every Markdown document is
+[document-inventory.md](operations/document-inventory.md); regenerate it with
+the documented exporter whenever a governed document changes.
 The identifier and execution model is
 [task-identifier-governance.md](operations/task-identifier-governance.md).
 The active package's detailed subtask plan is

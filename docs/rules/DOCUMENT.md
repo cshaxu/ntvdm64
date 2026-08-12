@@ -29,12 +29,14 @@ brief belongs in the fixed Status packet; a multi-S working plan belongs under
 
 ## Migration Exception
 
-The existing direct documents and `architecture/`, `governance/`, `planning/`,
-and `research/` directories predate this topology. They are read-only retained
-evidence during the incremental migration defined in
-`etc/operations/governance-migration.md`. New current policy, status, queue,
-or design content must use the fixed topology. Do not mass-move evidence or
-break inbound links.
+The existing direct evidence documents and `architecture/`, `governance/`,
+`planning/`, and `research/` directories predate this topology. They are
+read-only retained evidence during the incremental migration defined in
+`etc/operations/governance-migration.md`. Every Markdown file, including
+these retained records and non-principal design detail, must appear with its
+SHA-256 in `etc/operations/document-inventory.md`; the gate verifies this
+exact-file snapshot. New current policy, status, queue, or design content must
+use the fixed topology. Do not mass-move evidence or break inbound links.
 
 ## Records
 

@@ -41,4 +41,4 @@
 | --- | --- |
 | T95 S1--S6 | Historical Bochs/adapter evidence and run records retained in the status ledger; they do not allocate P values retroactively. |
 | T95 S7 | Profile-owned COMMAND/CONFIG/AUTOEXEC placement and bounded adapter read capability are evidenced; real runtime trace closure remains in the active S packet. |
-| M0 Td S1 | Documentation governance is being realigned to the ntvdm64 topology: one active S in Status, T-only Queue, and indexed supporting evidence. |
+| M0 Td S1 P1--P3 | Documentation governance now uses one active S in Status, a T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |

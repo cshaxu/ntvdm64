@@ -8,7 +8,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 
 $ErrorActionPreference = 'Stop'
-$docs = Join-Path $RepositoryRoot 'docs'
+$docs = (Resolve-Path -LiteralPath (Join-Path $RepositoryRoot 'docs')).Path
 $requiredFiles = @('README.md', 'STATUS.md', 'QUEUE.md', 'TODO.md')
 $requiredDirectories = @('rules', 'design', 'history', 'etc')
 $requiredRules = @('DOCUMENT.md', 'EXECUTION.md', 'ARCHITECTURE.md', 'CODING.md')
@@ -88,6 +88,58 @@ foreach ($record in @(
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $docs $record) -PathType Leaf)) {
         throw "Missing governance record: docs/$record"
+    }
+}
+
+$inventoryPath = Join-Path $docs 'etc/operations/document-inventory.md'
+if (-not (Test-Path -LiteralPath $inventoryPath -PathType Leaf)) {
+    throw 'Missing exact-file documentation inventory.'
+}
+$inventory = Get-Content -LiteralPath $inventoryPath -Raw
+$inventoryEntries = @{}
+foreach ($match in [regex]::Matches(
+    $inventory,
+    '(?m)^\| (?<path>[^|]+) \| (?<classification>[^|]+) \| (?<hash>[a-f0-9]{64}) \|\s*$'
+)) {
+    $path = $match.Groups['path'].Value.Trim().Replace('/', '\')
+    if ($inventoryEntries.ContainsKey($path)) {
+        throw "Documentation inventory has a duplicate path: $path"
+    }
+    $inventoryEntries[$path] = $match.Groups['hash'].Value
+}
+
+$inventoryRelativePath = 'etc\operations\document-inventory.md'
+$actualDocuments = @{}
+foreach ($document in Get-ChildItem -LiteralPath $docs -Recurse -File |
+    Where-Object { $_.Extension -in @('.md', '.json', '.tsv') }) {
+    $relativePath = $document.FullName.Substring($docs.Length).TrimStart('\')
+    if ($relativePath -eq $inventoryRelativePath) {
+        continue
+    }
+    if ($actualDocuments.ContainsKey($relativePath)) {
+        throw "Duplicate documentation path after normalization: $relativePath"
+    }
+    $actualDocuments[$relativePath] = (Get-FileHash -LiteralPath $document.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+}
+
+$missingInventoryEntries = [System.Collections.Generic.List[string]]::new()
+foreach ($entryPath in $actualDocuments.Keys) {
+    if (-not $inventoryEntries.ContainsKey([string]$entryPath)) {
+        $missingInventoryEntries.Add([string]$entryPath)
+    }
+}
+$staleInventoryEntries = [System.Collections.Generic.List[string]]::new()
+foreach ($entryPath in $inventoryEntries.Keys) {
+    if (-not $actualDocuments.ContainsKey([string]$entryPath)) {
+        $staleInventoryEntries.Add([string]$entryPath)
+    }
+}
+if ($missingInventoryEntries.Count -gt 0 -or $staleInventoryEntries.Count -gt 0) {
+    throw 'Documentation inventory does not exactly match the documentation file set. Regenerate it with tools/Export-DocumentationInventory.ps1.'
+}
+foreach ($path in $actualDocuments.Keys) {
+    if ($inventoryEntries[$path] -ne $actualDocuments[$path]) {
+        throw "Documentation inventory hash is stale for: $path. Regenerate it with tools/Export-DocumentationInventory.ps1."
     }
 }
 

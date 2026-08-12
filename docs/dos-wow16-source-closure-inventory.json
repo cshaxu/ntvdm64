@@ -1,0 +1,2430 @@
+﻿[
+    {
+        "Artifact":  "ANSI.SYS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/dev/ansi",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "C929C0893BBA4C6454632D3408EE4F7661B51CF5C2CE20035DCD4283CD623C85",
+                         "Stage":  "ansi-tools16-opennt-v1",
+                         "OutputBytes":  9029,
+                         "BuildManifest":  "artifacts/toolchain-runs/ansi-tools16-opennt-v1/ansi-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/ansi-tools16-opennt-v1/base/mvdm/dos/v86/dev/ansi/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/ansi-tools16-opennt-v1/base/mvdm/dos/v86/dev/ansi/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/ansi-tools16-opennt-v1/base/mvdm/dos/v86/dev/ansi/historical-masm-manifest.json",
+                                                  "artifacts/toolchain-runs/ansi-tools16-opennt-v1/base/mvdm/dos/v86/dev/ansi/historical-suffix-package-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "APPEND.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/append",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "73D6928246F369AAC5DE742E149196BF4DC3B5801A6EFFEED6D014E52841D0AC",
+                         "Stage":  "append-tools16-opennt-v1",
+                         "OutputBytes":  10790,
+                         "BuildManifest":  "artifacts/toolchain-runs/append-tools16-opennt-v1/append-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/append-tools16-opennt-v1/base/mvdm/dos/v86/cmd/append/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/append-tools16-opennt-v1/base/mvdm/dos/v86/cmd/append/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/append-tools16-opennt-v1/base/mvdm/dos/v86/cmd/append/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "COMMAND.COM",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/command",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43",
+                         "Stage":  "command-tools16-opennt-v1",
+                         "OutputBytes":  50384,
+                         "BuildManifest":  "artifacts/toolchain-runs/command-tools16-opennt-v1/command-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/command-tools16-opennt-v1/base/mvdm/dos/v86/cmd/command/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/command-tools16-opennt-v1/base/mvdm/dos/v86/cmd/command/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/command-tools16-opennt-v1/base/mvdm/dos/v86/cmd/command/historical-masm-manifest.json",
+                                                  "artifacts/toolchain-runs/command-tools16-opennt-v1/base/mvdm/dos/v86/cmd/command/historical-suffix-package-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "COUNTRY.SYS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/dev/country",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "9DDF2B738307B5950699513E6B8221E2044BB686487A8C216AF7C6FD3F853B54",
+                         "Stage":  "country-tools16-opennt-v1",
+                         "OutputBytes":  27097,
+                         "BuildManifest":  "artifacts/toolchain-runs/country-tools16-opennt-v1/country-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/country-tools16-opennt-v1/base/mvdm/dos/v86/dev/country/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/country-tools16-opennt-v1/base/mvdm/dos/v86/dev/country/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/country-tools16-opennt-v1/base/mvdm/dos/v86/dev/country/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "DEBUG.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/debug",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "9C230AA1CAFF2FF9D845514017B3E4BBE7B308AD26AD88740967651F7955CD60",
+                         "Stage":  "debug-tools16-opennt-v1",
+                         "OutputBytes":  20634,
+                         "BuildManifest":  "artifacts/toolchain-runs/debug-tools16-opennt-v1/debug-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/debug-tools16-opennt-v1/base/mvdm/dos/v86/cmd/debug/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/debug-tools16-opennt-v1/base/mvdm/dos/v86/cmd/debug/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/debug-tools16-opennt-v1/base/mvdm/dos/v86/cmd/debug/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "DOSX.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dpmi/486",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "8F21AC29995DADBBD9AC9D8260FD61ED43AC832F4E4BF2F168381524D09916F7",
+                         "Stage":  "dosx-tools16-historical-v6",
+                         "OutputBytes":  36152,
+                         "BuildManifest":  "artifacts/toolchain-runs/dosx-tools16-historical-v6/dosx-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/dosx-tools16-historical-v6/base/mvdm/dpmi/486/historical-link16-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "EDLIN.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/edlin",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "9D835A8A46406FCB01F4509550CC86EA2755C3084C95C744CBEC79D8D94C0477",
+                         "Stage":  "edlin-tools16-opennt-v1",
+                         "OutputBytes":  12642,
+                         "BuildManifest":  "artifacts/toolchain-runs/edlin-tools16-opennt-v1/edlin-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/edlin-tools16-opennt-v1/base/mvdm/dos/v86/cmd/edlin/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/edlin-tools16-opennt-v1/base/mvdm/dos/v86/cmd/edlin/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/edlin-tools16-opennt-v1/base/mvdm/dos/v86/cmd/edlin/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "EXE2BIN.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/exe2bin",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "EDF4009A2AB45A30AE3291B0F8C9585DE9A15B6A1262288AE6694D4693CB737E",
+                         "Stage":  "exe2bin-tools16-opennt-v1",
+                         "OutputBytes":  8424,
+                         "BuildManifest":  "artifacts/toolchain-runs/exe2bin-tools16-opennt-v1/exe2bin-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/exe2bin-tools16-opennt-v1/base/mvdm/dos/v86/cmd/exe2bin/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/exe2bin-tools16-opennt-v1/base/mvdm/dos/v86/cmd/exe2bin/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/exe2bin-tools16-opennt-v1/base/mvdm/dos/v86/cmd/exe2bin/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "FASTOPEN.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/fastopen",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "69DABBDB754B358AC4FE4B22DE04C0E4C93076816F14BB0730CAA9FD223996FC",
+                         "Stage":  "fastopen-tools16-opennt-v1",
+                         "OutputBytes":  882,
+                         "BuildManifest":  "artifacts/toolchain-runs/fastopen-tools16-opennt-v1/fastopen-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/fastopen-tools16-opennt-v1/base/mvdm/dos/v86/cmd/fastopen/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/fastopen-tools16-opennt-v1/base/mvdm/dos/v86/cmd/fastopen/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "GRAPHICS.COM",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/graphics",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "989B38806EC1E1BDD30DA3DC6B41CC85BDC81DDA74F870FCC7DF399876EB2756",
+                         "Stage":  "graphics-tools16-opennt-v1",
+                         "OutputBytes":  19694,
+                         "BuildManifest":  "artifacts/toolchain-runs/graphics-tools16-opennt-v1/graphics-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/graphics-tools16-opennt-v1/base/mvdm/dos/v86/cmd/graphics/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/graphics-tools16-opennt-v1/base/mvdm/dos/v86/cmd/graphics/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/graphics-tools16-opennt-v1/base/mvdm/dos/v86/cmd/graphics/historical-masm-manifest.json",
+                                                  "artifacts/toolchain-runs/graphics-tools16-opennt-v1/base/mvdm/dos/v86/cmd/graphics/historical-suffix-package-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "HIMEM.SYS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/dev/himem",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "08AA2C47D835460ED3067FA7D6F8A3B37EDECA524AD102B0588FDD1BF389CE08",
+                         "Stage":  "himem-tools16-opennt-v1",
+                         "OutputBytes":  4768,
+                         "BuildManifest":  "artifacts/toolchain-runs/himem-tools16-opennt-v1/himem-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/himem-tools16-opennt-v1/base/mvdm/dos/v86/dev/himem/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/himem-tools16-opennt-v1/base/mvdm/dos/v86/dev/himem/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/himem-tools16-opennt-v1/base/mvdm/dos/v86/dev/himem/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       null
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "KB16.COM",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/keyb",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "9C432EA71E0E11BFB2EDF9166C862826115EC4CDF8439F986A5ED71D9A3AF3B9",
+                         "Stage":  "kb16-tools16-opennt-v1",
+                         "OutputBytes":  14710,
+                         "BuildManifest":  "artifacts/toolchain-runs/kb16-tools16-opennt-v1/kb16-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/kb16-tools16-opennt-v1/base/mvdm/dos/v86/cmd/keyb/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/kb16-tools16-opennt-v1/base/mvdm/dos/v86/cmd/keyb/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/kb16-tools16-opennt-v1/base/mvdm/dos/v86/cmd/keyb/historical-masm-manifest.json",
+                                                  "artifacts/toolchain-runs/kb16-tools16-opennt-v1/base/mvdm/dos/v86/cmd/keyb/historical-suffix-package-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "KEYBOARD.SYS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/dev/keyboard",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "96FCAC606683CF262DBC030713A9263731EE83F19A10207E5DD632E5EE06C2AD",
+                         "Stage":  "keyboard-tools16-opennt-v1",
+                         "OutputBytes":  40665,
+                         "BuildManifest":  "artifacts/toolchain-runs/keyboard-tools16-opennt-v1/keyboard-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/keyboard-tools16-opennt-v1/base/mvdm/dos/v86/dev/keyboard/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/keyboard-tools16-opennt-v1/base/mvdm/dos/v86/dev/keyboard/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/keyboard-tools16-opennt-v1/base/mvdm/dos/v86/dev/keyboard/historical-masm-manifest.json",
+                                                  "artifacts/toolchain-runs/keyboard-tools16-opennt-v1/base/mvdm/dos/v86/dev/keyboard/historical-suffix-package-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "LOADFIX.COM",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/loadfix",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "8E62654A49BD88C784C53F25E9FBA13C641624D6A02214385115F66CCF1ECFDB",
+                         "Stage":  "loadfix-tools16-opennt-v1",
+                         "OutputBytes":  1131,
+                         "BuildManifest":  "artifacts/toolchain-runs/loadfix-tools16-opennt-v1/loadfix-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/loadfix-tools16-opennt-v1/base/mvdm/dos/v86/cmd/loadfix/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/loadfix-tools16-opennt-v1/base/mvdm/dos/v86/cmd/loadfix/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/loadfix-tools16-opennt-v1/base/mvdm/dos/v86/cmd/loadfix/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "MEM.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/mem",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "49C144A341ECC22306B767EC7199004C979EC1D09062D2E2EC5B7055E5508180",
+                         "Stage":  "mem-tools16-opennt-v1",
+                         "OutputBytes":  40744,
+                         "BuildManifest":  "artifacts/toolchain-runs/mem-tools16-opennt-v1/mem-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/mem-tools16-opennt-v1/base/mvdm/dos/v86/cmd/mem/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/mem-tools16-opennt-v1/base/mvdm/dos/v86/cmd/mem/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/mem-tools16-opennt-v1/base/mvdm/dos/v86/cmd/mem/historical-masm-manifest.json",
+                                                  "artifacts/toolchain-runs/mem-tools16-opennt-v1/base/mvdm/dos/v86/lib/xmm/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\msdos400\\CL.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LIB16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\msdos400\\BLD\\LIB\\SLIBCE.LIB",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "NLSFUNC.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/nlsfunc",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "A49E8C6C392F0FD323B52C1FA612420A9FC0258BA59413CCB3D2D19B1F229EE8",
+                         "Stage":  "nlsfunc-tools16-opennt-v1",
+                         "OutputBytes":  7052,
+                         "BuildManifest":  "artifacts/toolchain-runs/nlsfunc-tools16-opennt-v1/nlsfunc-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/nlsfunc-tools16-opennt-v1/base/mvdm/dos/v86/cmd/nlsfunc/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/nlsfunc-tools16-opennt-v1/base/mvdm/dos/v86/cmd/nlsfunc/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/nlsfunc-tools16-opennt-v1/base/mvdm/dos/v86/cmd/nlsfunc/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\BUILDMSG.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "NTDOS.SYS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/doskrnl/dos",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+                         "Stage":  "ntdos-tools16-historical-v1",
+                         "OutputBytes":  27858,
+                         "BuildManifest":  "artifacts/toolchain-runs/ntdos-tools16-historical-v1/ntdos-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/ntdos-tools16-historical-v1/base/mvdm/dos/v86/doskrnl/dos/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/ntdos-tools16-historical-v1/base/mvdm/dos/v86/doskrnl/dos/historical-link16-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\NOSRVBLD.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\STRIPZ.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "NTIO.SYS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/doskrnl/bios",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937",
+                         "Stage":  "ntio-tools16-opennt-v1",
+                         "OutputBytes":  33792,
+                         "BuildManifest":  "artifacts/toolchain-runs/ntio-tools16-opennt-v1/ntio-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/ntio-tools16-opennt-v1/base/mvdm/dos/v86/doskrnl/bios/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/ntio-tools16-opennt-v1/base/mvdm/dos/v86/doskrnl/bios/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/ntio-tools16-opennt-v1/base/mvdm/dos/v86/doskrnl/bios/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\NOSRVBLD.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "QUIT.COM",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/v86/util",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "06A37DFF559DF7325DE8B003F4DF53C188F733E0CA312AAD961C34DAE48D7B83",
+                         "Stage":  "quit-tools16-opennt-v1",
+                         "OutputBytes":  3,
+                         "BuildManifest":  "artifacts/toolchain-runs/quit-tools16-opennt-v1/quit-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/quit-tools16-opennt-v1/base/mvdm/v86/util/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/quit-tools16-opennt-v1/base/mvdm/v86/util/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/quit-tools16-opennt-v1/base/mvdm/v86/util/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RELOC.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "REDIR.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/redir/obj",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "B6E9FAD30A5423EAD9ECB45C8E28197EA62A39187D36241F9018DB82FACAC3A7",
+                         "Stage":  "redir-tools16-opennt-v1",
+                         "OutputBytes":  3338,
+                         "BuildManifest":  "artifacts/toolchain-runs/redir-tools16-opennt-v1/redir-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/redir-tools16-opennt-v1/base/mvdm/dos/v86/redir/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/redir-tools16-opennt-v1/base/mvdm/dos/v86/redir/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       null
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "SETVER.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/setver",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "AA4F62283C224E3861FC4F5E864DECFE293C64DF4BC5763569AAE74BE9B3F83E",
+                         "Stage":  "setver-tools16-opennt-v1",
+                         "OutputBytes":  11909,
+                         "BuildManifest":  "artifacts/toolchain-runs/setver-tools16-opennt-v1/setver-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/setver-tools16-opennt-v1/base/mvdm/dos/v86/cmd/setver/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/setver-tools16-opennt-v1/base/mvdm/dos/v86/cmd/setver/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/setver-tools16-opennt-v1/base/mvdm/dos/v86/cmd/setver/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\msdos400\\CL.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\msdos400\\BLD\\LIB\\SLIBCE.LIB",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "SHARE.EXE",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/share",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 null,
+                                                 null
+                                             ],
+                         "OutputSha256":  "69DABBDB754B358AC4FE4B22DE04C0E4C93076816F14BB0730CAA9FD223996FC",
+                         "Stage":  "share-tools16-opennt-v1",
+                         "OutputBytes":  882,
+                         "BuildManifest":  "artifacts/toolchain-runs/share-tools16-opennt-v1/share-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/share-tools16-opennt-v1/base/mvdm/dos/v86/cmd/share/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/share-tools16-opennt-v1/base/mvdm/dos/v86/cmd/share/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "COMM.DRV",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "WOW16 driver",
+        "SourceAnchor":  "base/mvdm/wow16/drivers/comm",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 "wow16/lib/libw.lib",
+                                                 "wow16/lib/snocrtd.lib",
+                                                 "wow16/bin/winstub.exe"
+                                             ],
+                         "OutputSha256":  "EE589C26791B66742F7B5E183A44C56A13053DC584B0DCA3FCC20CD87BDCA69E",
+                         "Stage":  "wow16-comm-tools16-opennt-v1",
+                         "OutputBytes":  10544,
+                         "BuildManifest":  "artifacts/toolchain-runs/wow16-comm-tools16-opennt-v1/comm-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/wow16-comm-tools16-opennt-v1/base/mvdm/wow16/drivers/comm/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-comm-tools16-opennt-v1/base/mvdm/wow16/drivers/comm/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-comm-tools16-opennt-v1/base/mvdm/wow16/drivers/comm/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RC16.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "VGA.DRV",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "WOW16 driver",
+        "SourceAnchor":  "base/mvdm/wow16/drivers/display",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 "wow16/lib/libw.lib",
+                                                 "wow16/lib/snocrt.lib",
+                                                 "wow16/bin/winstub.exe"
+                                             ],
+                         "OutputSha256":  "943C2E3499E64157D11C81C85DB7586E13AF623044880876B390FBFCFAC3CFB6",
+                         "Stage":  "wow16-display-tools16-opennt-v1",
+                         "OutputBytes":  2112,
+                         "BuildManifest":  "artifacts/toolchain-runs/wow16-display-tools16-opennt-v1/display-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/wow16-display-tools16-opennt-v1/base/mvdm/wow16/drivers/display/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-display-tools16-opennt-v1/base/mvdm/wow16/drivers/display/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-display-tools16-opennt-v1/base/mvdm/wow16/drivers/display/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RC16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\artifacts\\toolchain-runs\\exe2bin-tools16-opennt-v1\\base\\mvdm\\dos\\v86\\cmd\\exe2bin\\EXE2BIN.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "KEYBOARD.DRV",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "WOW16 driver",
+        "SourceAnchor":  "base/mvdm/wow16/drivers/keyboard",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 "wow16/lib/libw.lib",
+                                                 "wow16/lib/snocrtd.lib",
+                                                 "wow16/bin/winstub.exe"
+                                             ],
+                         "OutputSha256":  "C34D7D8D71453DD7567C6DB28958A0D4D11E4B198CFC436F4D430D93A5A3584C",
+                         "Stage":  "wow16-keyboard-tools16-opennt-v1",
+                         "OutputBytes":  2000,
+                         "BuildManifest":  "artifacts/toolchain-runs/wow16-keyboard-tools16-opennt-v1/keyboard-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/wow16-keyboard-tools16-opennt-v1/base/mvdm/wow16/drivers/keyboard/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-keyboard-tools16-opennt-v1/base/mvdm/wow16/drivers/keyboard/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-keyboard-tools16-opennt-v1/base/mvdm/wow16/drivers/keyboard/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RC16.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "MOUSE.DRV",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "WOW16 driver",
+        "SourceAnchor":  "base/mvdm/wow16/drivers/mouse",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 "wow16/lib/libw.lib",
+                                                 "wow16/lib/snocrtd.lib",
+                                                 "wow16/bin/winstub.exe"
+                                             ],
+                         "OutputSha256":  "2FA5611BB18EDD9C0F35E0A6B479B9D9DB17549AED811AB692BD79C3E899F890",
+                         "Stage":  "wow16-mouse-tools16-opennt-v1",
+                         "OutputBytes":  2032,
+                         "BuildManifest":  "artifacts/toolchain-runs/wow16-mouse-tools16-opennt-v1/mouse-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/wow16-mouse-tools16-opennt-v1/base/mvdm/wow16/drivers/mouse/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-mouse-tools16-opennt-v1/base/mvdm/wow16/drivers/mouse/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-mouse-tools16-opennt-v1/base/mvdm/wow16/drivers/mouse/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RC16.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "SOUND.DRV",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted by source-build evidence",
+        "Scope":  "WOW16 driver",
+        "SourceAnchor":  "base/mvdm/wow16/drivers/sound",
+        "Evidence":  {
+                         "GeneratedInputs":  [
+                                                 "wow16/lib/libw.lib",
+                                                 "wow16/lib/snocrtd.lib",
+                                                 "wow16/bin/winstub.exe"
+                                             ],
+                         "OutputSha256":  "D5932CBD4E0155A07D4D0F64C0F8AFCDC3AEFE90E06E7265C6651B10C2F03801",
+                         "Stage":  "wow16-sound-tools16-opennt-v1",
+                         "OutputBytes":  1744,
+                         "BuildManifest":  "artifacts/toolchain-runs/wow16-sound-tools16-opennt-v1/sound-build-manifest.json",
+                         "CommandManifests":  [
+                                                  "artifacts/toolchain-runs/wow16-sound-tools16-opennt-v1/base/mvdm/wow16/drivers/sound/historical-dos-tool-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-sound-tools16-opennt-v1/base/mvdm/wow16/drivers/sound/historical-link16-manifest.json",
+                                                  "artifacts/toolchain-runs/wow16-sound-tools16-opennt-v1/base/mvdm/wow16/drivers/sound/historical-masm-manifest.json"
+                                              ],
+                         "Tools":  [
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\MASM.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\LINK16.EXE",
+                                       "D:\\home\\repos\\ntdos64\\tools\\opennt-4.5\\RC16.EXE"
+                                   ]
+                     },
+        "Classification":  "source-built",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "GRAPHICS.PRO",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/{graphics,qbasic}/makefile install rule",
+        "Evidence":  {
+                         "Kind":  "source snapshot companion/data"
+                     },
+        "Classification":  "static-data",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "QBASIC.HLP",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/{graphics,qbasic}/makefile install rule",
+        "Evidence":  {
+                         "Kind":  "source snapshot companion/data"
+                     },
+        "Classification":  "static-data",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "EDIT.HLP",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/{graphics,qbasic}/makefile install rule",
+        "Evidence":  {
+                         "Kind":  "source snapshot companion/data"
+                     },
+        "Classification":  "static-data",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "GORILLA.BAS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/{graphics,qbasic}/makefile install rule",
+        "Evidence":  {
+                         "Kind":  "source snapshot companion/data"
+                     },
+        "Classification":  "static-data",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "MONEY.BAS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/{graphics,qbasic}/makefile install rule",
+        "Evidence":  {
+                         "Kind":  "source snapshot companion/data"
+                     },
+        "Classification":  "static-data",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "NIBBLES.BAS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/{graphics,qbasic}/makefile install rule",
+        "Evidence":  {
+                         "Kind":  "source snapshot companion/data"
+                     },
+        "Classification":  "static-data",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "REMLINE.BAS",
+        "FirstBlocker":  null,
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "base/mvdm/dos/v86/cmd/{graphics,qbasic}/makefile install rule",
+        "Evidence":  {
+                         "Kind":  "source snapshot companion/data"
+                     },
+        "Classification":  "static-data",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "BACKUP.EXE",
+        "FirstBlocker":  "Fixed OpenNT tree has only binplace ownership; matching source/build rule is absent.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "OpenNT makefile: binplace backup.exe",
+        "Evidence":  {
+                         "OutputSha256":  "B692773717380E80558C5CF20BB5C6F9830DFD2EE908058DAA51095955A6F239",
+                         "SourceBuilt":  false,
+                         "OutputBytes":  22966,
+                         "Manifest":  "artifacts/toolchain-runs/nt4-prebuilt-guest-inputs-v1/prebuilt-inputs-manifest.json"
+                     },
+        "Classification":  "excluded-prebuilt",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "QBASIC.EXE",
+        "FirstBlocker":  "Fixed OpenNT tree has only binplace ownership; matching source/build rule is absent.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "OpenNT makefile: binplace qbasic.exe",
+        "Evidence":  {
+                         "OutputSha256":  "E8341B546CC12CFD4D59A7EB24E116F2CFBCAE71779D9A7F712902F65E5DEB6E",
+                         "SourceBuilt":  false,
+                         "OutputBytes":  257824,
+                         "Manifest":  "artifacts/toolchain-runs/nt4-prebuilt-guest-inputs-v1/prebuilt-inputs-manifest.json"
+                     },
+        "Classification":  "excluded-prebuilt",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "MSHERC.COM",
+        "FirstBlocker":  "Fixed OpenNT tree has only binplace ownership; matching source/build rule is absent.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "OpenNT makefile: binplace msherc.com",
+        "Evidence":  {
+                         "OutputSha256":  "EB96EE0E8BE6D4A4332C3E1947D95F9C448A0A8A96B5CD74A38D33A1E0B9405E",
+                         "SourceBuilt":  false,
+                         "OutputBytes":  6934,
+                         "Manifest":  "artifacts/toolchain-runs/nt4-prebuilt-guest-inputs-v1/prebuilt-inputs-manifest.json"
+                     },
+        "Classification":  "excluded-prebuilt",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "EDIT.COM",
+        "FirstBlocker":  "Fixed OpenNT tree has only binplace ownership; matching source/build rule is absent.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "DOS guest payload",
+        "SourceAnchor":  "OpenNT makefile: binplace edit.com",
+        "Evidence":  {
+                         "OutputSha256":  "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46",
+                         "SourceBuilt":  false,
+                         "OutputBytes":  413,
+                         "Manifest":  "artifacts/toolchain-runs/nt4-prebuilt-guest-inputs-v1/prebuilt-inputs-manifest.json"
+                     },
+        "Classification":  "excluded-prebuilt",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "bde/sources:TARGETNAME=bde",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/bde/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "link"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "dbg/sources:TARGETNAME=dbg",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/dbg/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "dos/command/sources:TARGETNAME=command",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/dos/command/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "dos/dem/sources:TARGETNAME=dem",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/dos/dem/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "dos/v86/tools/src/buildidx/sources:TARGETNAME=buildidx",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "non-DOS/WOW16 guest-side candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/dos/v86/tools/src/buildidx/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "dos/v86/tools/src/getsize/sources:TARGETNAME=getsize",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "non-DOS/WOW16 guest-side candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/dos/v86/tools/src/getsize/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "dos/v86/tools/src/stripdd/sources:TARGETNAME=stripdd",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "non-DOS/WOW16 guest-side candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/dos/v86/tools/src/stripdd/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "dos/v86/tools/src/stripz/sources:TARGETNAME=stripz",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "non-DOS/WOW16 guest-side candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/dos/v86/tools/src/stripz/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "stripz"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "dpmi32/sources:TARGETNAME=dpmi32",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "non-DOS/WOW16 guest-side candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/dpmi32/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "fax/wowfax/sources:TARGETNAME=wowfax",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/fax/wowfax/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "fax/wowfaxui/sources:TARGETNAME=wowfaxui",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/fax/wowfaxui/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "ieuvddex/sources:TARGETNAME=ntvdm",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/ieuvddex/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "oemuni/sources:TARGETNAME=oemuni",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/oemuni/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "sim32/sources:TARGETNAME=sim32",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/sim32/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/bios/sources:TARGETNAME=bios",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/bios/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/ccpu386/sources:TARGETNAME=ccpu386",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/ccpu386/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/comms/sources:TARGETNAME=comms",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/comms/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/cvidc/sources:TARGETNAME=Cvidc",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/cvidc/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/dasm386/sources:TARGETNAME=dasm386",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/dasm386/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/debug/sources:TARGETNAME=debug",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/debug/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/disks/sources:TARGETNAME=disks",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/disks/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/dos/sources:TARGETNAME=dos",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/dos/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/keymouse/sources:TARGETNAME=keymouse",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/keymouse/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/support/sources:TARGETNAME=support",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/support/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/system/sources:TARGETNAME=system",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/system/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/unix/sources:TARGETNAME=unix",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/unix/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/base/video/sources:TARGETNAME=video",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/base/video/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/convert/sources:TARGETNAME=convert",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/convert/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/dat2obj/sources:TARGETNAME=dat2obj",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/dat2obj/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/debugger/sources:TARGETNAME=vdmdebug",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/debugger/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/host/link/sources:TARGETNAME=resource",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/host/link/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/host/src/sources:TARGETNAME=src",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/host/src/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/obj.vdm/sources:TARGETNAME=ntvdm",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/obj.vdm/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "softpc.new/rename/sources:TARGETNAME=rename",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/softpc.new/rename/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "suballoc/sources:TARGETNAME=suballoc",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/suballoc/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "v86/monitor/sources:TARGETNAME=monitor",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "non-DOS/WOW16 guest-side candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/v86/monitor/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "v86/scaffold/sources:TARGETNAME=ntvdm",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "non-DOS/WOW16 guest-side candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/v86/scaffold/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "link",
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdd/samples/adlibvdd/sources:TARGETNAME=adlibvdd",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdd/samples/adlibvdd/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdd/samples/mscdex/vdd/sources:TARGETNAME=vcdex",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdd/samples/mscdex/vdd/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdd/samples/sample1/fax32/sources:TARGETNAME=fax32",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdd/samples/sample1/fax32/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdd/samples/sample2/vdd/sources:TARGETNAME=vdd",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdd/samples/sample2/vdd/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdd/samples/vsbd/sources:TARGETNAME=vsbd",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdd/samples/vsbd/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdmdbg/sources:TARGETNAME=vdmdbg",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdmdbg/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "link",
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdmexts/sources:TARGETNAME=vdmexts",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdmexts/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdmredir/sources:TARGETNAME=vdmredir",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdmredir/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdmutils/forcedos/sources:TARGETNAME=forcedos",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdmutils/forcedos/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdmutils/graftabl/sources:TARGETNAME=graftabl",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdmutils/graftabl/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdmutils/pifedit/sources:TARGETNAME=pifedit",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdmutils/pifedit/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "vdmutils/win/sources:TARGETNAME=win",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/vdmutils/win/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "wow16/ddeml/tests/ddestrs/sources:TARGETNAME=ddestrs",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/tests/ddestrs/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "wow16/ddeml/tests/src/client/sources:TARGETNAME=ddemlcl",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/tests/src/client/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "wow16/ddeml/tests/src/ddemo/sources:TARGETNAME=ddemo",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/tests/src/ddemo/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "wow16/ddeml/tests/src/server/sources:TARGETNAME=ddemlsv",
+        "FirstBlocker":  "Excluded from the research runtime profile; no build campaign is admitted.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/tests/src/server/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "sample/development-only",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "wow32/sources:TARGETNAME=wow32",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow32/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "xms.486/sources:TARGETNAME=xms486",
+        "FirstBlocker":  "No standalone installed artifact is defined by the retained target; final historical x86 product composition/runtime admission is unrecovered.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "VDM host/support candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/xms.486/sources",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "host/support",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/commdlg",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/commdlg.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/commdlg/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/ddeml",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/ddeml.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/ddeml/tests/ddestrs",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/ddeml/tests/ddestrs.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/tests/ddestrs/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/ddeml/tests/src/client",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/ddeml/tests/src/client.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/tests/src/client/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/ddeml/tests/src/ddemo",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/ddeml/tests/src/ddemo.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/tests/src/ddemo/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/ddeml/tests/src/server",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/ddeml/tests/src/server.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ddeml/tests/src/server/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/gdi",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/gdi.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/gdi/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/kernel31",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/kernel31.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/kernel31/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/kernel31/swappro",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/kernel31/swappro.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/kernel31/swappro/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "link16",
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/killwow",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/killwow.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/killwow/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/lib",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/lib.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/lib/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/mciole",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/mciole.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/mciole/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/mmsystem",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/mmsystem.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/mmsystem/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/mmsystem/mmtask",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/mmsystem/mmtask.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/mmsystem/mmtask/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/ole/client",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/ole/client.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ole/client/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "link",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/ole/server",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/ole/server.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/ole/server/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/rasapi16",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/rasapi16.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/rasapi16/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "cl",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/regedit",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/regedit.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/regedit/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/shell",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/shell.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/shell/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/sherlock",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/sherlock.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/sherlock/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "cl",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/system",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/system.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/system/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/test/hello",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/test/hello.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/test/hello/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/test",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/test.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/test/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/test/shell",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/test/shell.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/test/shell/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/timer",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/timer.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/timer/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/toolhelp",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/toolhelp.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/toolhelp/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/user",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/user.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/user/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/wfwnet",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/wfwnet.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/wfwnet/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "cl",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/win87em",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/win87em.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/win87em/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "link",
+                                            "masm",
+                                            "rc"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/winoldap",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/winoldap.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/winoldap/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/winsock",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/winsock.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/winsock/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/winspool",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/winspool.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/winspool/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/wowdeb",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/wowdeb.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/wowdeb/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    },
+    {
+        "Artifact":  "WOW16 logical output set: wow16/write",
+        "FirstBlocker":  "First missing input: fixed src/opennt does not contain original descriptor/source directory base/mvdm/wow16/write.",
+        "RuntimeAdmission":  "not runtime-admitted",
+        "Scope":  "WOW16 runtime/tool candidate",
+        "SourceAnchor":  "full-reference descriptor census: base/mvdm/wow16/write/makefile",
+        "Evidence":  {
+                         "ToolTokens":  [
+                                            "binplace",
+                                            "link",
+                                            "link16",
+                                            "mapsym",
+                                            "masm",
+                                            "rc",
+                                            "rc16"
+                                        ],
+                         "DescriptorInventory":  "docs/opennt-mvdm-artifact-inventory.json"
+                     },
+        "Classification":  "source-blocked",
+        "SourceRevision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+    }
+]

@@ -13,6 +13,12 @@ not import `ntvdm64` source, build logic, or runtime architecture.
 
 ## Retained Legacy Inventory
 
+The exact path-and-hash record for every document is
+[document-inventory.md](document-inventory.md). The inventory is a control
+snapshot, not a move authorization: it preserves provenance while each
+admitted migration batch classifies, relocates, and link-verifies a bounded
+family.
+
 | Legacy location | Classification | Target family | Migration condition |
 | --- | --- | --- | --- |
 | `planning/status.md` | Historical expanded status ledger | `history/` or `etc/evidence/` | Extract current facts into `STATUS.md`; preserve all links. |

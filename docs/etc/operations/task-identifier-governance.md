@@ -2,9 +2,14 @@
 
 ## Governance Delivery
 
-This document-governance correction is **M0 Td S1 P2**. It follows the prior
-local documentation-governance delivery P1, does not allocate a numeric T, and
-does not displace the active product packet in Status.
+Documentation governance uses one standalone S sequence without allocating a
+numeric T or displacing the active product packet in Status:
+
+| Delivery | Result |
+| --- | --- |
+| M0 Td S1 P1 | Initial local documentation-governance delivery. |
+| M0 Td S1 P2 | MTSP realignment: single active S, T-only Queue, and retained status ledger. |
+| M0 Td S1 P3 | Complete-document inventory and hash-verified migration control. |
 
 ## Hierarchy
 
