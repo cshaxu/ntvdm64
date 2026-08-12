@@ -1,0 +1,6 @@
+#ifndef NTDOS64_RECONSTRUCTED_CVIDC_VIDEO_TAIL_H
+#define NTDOS64_RECONSTRUCTED_CVIDC_VIDEO_TAIL_H
+
+int ntdos64_reconstructed_cvidc_video_tail_initialize(void);
+
+#endif

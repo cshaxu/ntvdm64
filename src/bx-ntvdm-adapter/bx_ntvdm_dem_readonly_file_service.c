@@ -161,6 +161,20 @@ int bx_ntvdm_dem_readonly_file_v1_read(bx_ntvdm_readonly_namespace_v1 *space,
         0x16u, payload, capacity, transaction, direct_result);
 }
 
+/* Source-derived x86 fast-I/O composition.  The caller ABI is the same
+ * copied handle/position/count/destination contract as demRead, but the
+ * selector remains 50:42 so the original FastOrSlow continuation owns the
+ * SFT update. */
+int bx_ntvdm_dem_readonly_file_v1_fast_read(bx_ntvdm_readonly_namespace_v1 *space,
+    const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window, uint8_t *payload,
+    uint32_t capacity, bx_ntvdm_bulk_result_transaction_v1 *transaction,
+    bx_ntvdm_cpu_result_v2 *direct_result)
+{
+    return bx_ntvdm_dem_readonly_file_v1_read_service(space, event, cpu, window,
+        0x42u, payload, capacity, transaction, direct_result);
+}
+
 int bx_ntvdm_dem_readonly_file_v1_close(bx_ntvdm_readonly_namespace_v1 *space,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_cpu_result_v2 *out)

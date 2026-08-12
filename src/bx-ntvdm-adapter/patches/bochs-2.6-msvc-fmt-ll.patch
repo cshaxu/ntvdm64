@@ -1,0 +1,15 @@
+--- a/gui/siminterface.cc
++++ b/gui/siminterface.cc
+@@ -1299,7 +1299,7 @@
+           fprintf(fp, node->get_format(), value);
+         } else {
+           if ((Bit64u)((bx_param_num_c*)node)->get_max() > BX_MAX_BIT32U) {
+-            fprintf(fp, "0x"FMT_LL"x", (Bit64u) value);
++            fprintf(fp, "0x" FMT_LL "x", (Bit64u) value);
+           } else {
+             fprintf(fp, "0x%x", (Bit32u) value);
+           }
+// Apply the same whitespace normalization to every source occurrence of
+// a string literal immediately followed by FMT_LL when materializing the
+// isolated MSVC build copy.  MSVC 2022 tokenizes that legacy form as a
+// user-defined literal before macro expansion.

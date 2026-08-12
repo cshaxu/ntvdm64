@@ -1,0 +1,441 @@
+{
+    "schema":  "ntdos64-historical-tool-manifest-v1",
+    "component":  "MS-DOS 6 QuickBASIC 4.5 TL historical toolchain",
+    "source_root":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl",
+    "license_status":  "Historical Microsoft tool input; research-only. No redistribution authorization is asserted.",
+    "canonical_use":  "Exact historical toolchain for MS-DOS 6 QBASIC, EDIT, and MSHERC reconstruction probes.",
+    "files":  [
+                  {
+                      "path":  "bin/buildprs.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\buildprs.exe",
+                      "bytes":  194901,
+                      "sha256":  "6C683E034A05D3FF9EA9F13389138D255B08E354AA5CED956525AF97ED786383"
+                  },
+                  {
+                      "path":  "bin/c1.err",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\c1.err",
+                      "bytes":  14393,
+                      "sha256":  "53C4D172D684080C45C1B94F5EEAA7C514CE0147AA2FD2D52CADC29A04671217"
+                  },
+                  {
+                      "path":  "bin/c1.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\c1.exe",
+                      "bytes":  114521,
+                      "sha256":  "8D33C6D87AA74B042B7D7CB01A23241C4CC3B1B8B446B8F1548BD167E3C7BF62"
+                  },
+                  {
+                      "path":  "bin/c2.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\c2.exe",
+                      "bytes":  202919,
+                      "sha256":  "A513C98BC2CE11BD00901B560252B5727AB9B6BACD9319B9EABA08F9E314B99B"
+                  },
+                  {
+                      "path":  "bin/c23.err",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\c23.err",
+                      "bytes":  3272,
+                      "sha256":  "F9EDB742D0B3A4D17E489D672334EF0FAC46767063122D338F55E5933F533B07"
+                  },
+                  {
+                      "path":  "bin/c3.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\c3.exe",
+                      "bytes":  125221,
+                      "sha256":  "C1269628534D5DEB48171BA9E42F761DCB1C28A0087C73780DB0EE2E4352E6FA"
+                  },
+                  {
+                      "path":  "bin/cat.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\cat.exe",
+                      "bytes":  10073,
+                      "sha256":  "1CECA30479748F21389DD014BCAC925B002B48BF4CFD4F96A94C5872BEC487F6"
+                  },
+                  {
+                      "path":  "bin/cl.err",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\cl.err",
+                      "bytes":  2276,
+                      "sha256":  "031C67018AB843DB00765009611EA1FCB70C5FFFD9FB8FA5635FDDD84DC6828F"
+                  },
+                  {
+                      "path":  "bin/cl.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\cl.exe",
+                      "bytes":  31329,
+                      "sha256":  "CAD40CEF732BEEA3455225FBD62286C664166DB7C3F87E2402E22B2E3F107771"
+                  },
+                  {
+                      "path":  "bin/cl.hlp",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\cl.hlp",
+                      "bytes":  2169,
+                      "sha256":  "1443B8E9D7EB34417FB77986EFB9A667B85A489DD7B44A337211D809EFDFA783"
+                  },
+                  {
+                      "path":  "bin/exepack.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\exepack.exe",
+                      "bytes":  14803,
+                      "sha256":  "568554322D29E46F79C0C760AC2391CB0689DC7ACB9AED79A428194EC6FB83E7"
+                  },
+                  {
+                      "path":  "bin/exp.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\exp.exe",
+                      "bytes":  41487,
+                      "sha256":  "D28BB70C77162831D0EE892B38D78BBA2EDEB735B85690A8AEA688BC64C06808"
+                  },
+                  {
+                      "path":  "bin/fgrep.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\fgrep.exe",
+                      "bytes":  12997,
+                      "sha256":  "95797D43A55414D4879BFB56B063784681EAA83F8552E9D293BE04809455F4E4"
+                  },
+                  {
+                      "path":  "bin/lib.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\lib.exe",
+                      "bytes":  34895,
+                      "sha256":  "CB76479346B20FE29CAC2B387E8358CDA2456779213657D1D60B05104B71EFC7"
+                  },
+                  {
+                      "path":  "bin/link.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\link.exe",
+                      "bytes":  65539,
+                      "sha256":  "124A3C800EDC16B60F696D35A9DFEC798B68B78FE2CA90C5988EA76BDEAB1A8A"
+                  },
+                  {
+                      "path":  "bin/makemsgs.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\makemsgs.exe",
+                      "bytes":  17112,
+                      "sha256":  "DD5C39955780420628416273DC149BB03461EDE937E2A4381AC1FB8D1D6E221A"
+                  },
+                  {
+                      "path":  "bin/mapsym.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\mapsym.exe",
+                      "bytes":  18026,
+                      "sha256":  "FBC2A5F04B944DE86011FD3161EF28E88C4B1462D3358D75EEEF56F98B9694E6"
+                  },
+                  {
+                      "path":  "bin/masm.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\masm.exe",
+                      "bytes":  110675,
+                      "sha256":  "3C0DDCB518022025A98770B90DEEF5ABD30B8B87A43859FEF2C187B30E425A5A"
+                  },
+                  {
+                      "path":  "bin/mv.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\mv.exe",
+                      "bytes":  31195,
+                      "sha256":  "2F23F9F957C185681BB940E90FF314F1979BD982AB3295411B55F227487665BD"
+                  },
+                  {
+                      "path":  "bin/nmake.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\nmake.exe",
+                      "bytes":  67975,
+                      "sha256":  "F3820698C686C1BA2FA3B0B8CD3F0E39D67B522211E4CBACA1DAB89B85ABB159"
+                  },
+                  {
+                      "path":  "bin/optabler.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\optabler.exe",
+                      "bytes":  40390,
+                      "sha256":  "4FB4BFA4C869A9BCEEBC0AA9C390A94C4BE47AFD958625B1EDA297E2E08E342F"
+                  },
+                  {
+                      "path":  "bin/redirect.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\redirect.exe",
+                      "bytes":  9288,
+                      "sha256":  "6B13755DDEA3F25B6491352A040849BEEF37E10A1974F9B6942EAF9CCDF3FE86"
+                  },
+                  {
+                      "path":  "bin/results.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\results.exe",
+                      "bytes":  50397,
+                      "sha256":  "A4D87CCD911F8F7475E15F45DA46B63DFF4BB2F6FDD0D3AB8BE6148F0362056B"
+                  },
+                  {
+                      "path":  "bin/sed.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\sed.exe",
+                      "bytes":  19575,
+                      "sha256":  "D086B752B0BF114874D19077D068964C29009A3EBB8BAF71882AC208557C39BF"
+                  },
+                  {
+                      "path":  "bin/szscrn.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\bin\\szscrn.exe",
+                      "bytes":  8120,
+                      "sha256":  "03D2CA42745F3ACE1802F9ADDB34CE6ECD5E8B59D37EE1B607C700CBA0D99DF3"
+                  },
+                  {
+                      "path":  "binb/hlpmake2.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\binb\\hlpmake2.exe",
+                      "bytes":  66893,
+                      "sha256":  "4911FC913DAAE398190DA741939876BFAC22B1635090C8EE8D8E2BE016900157"
+                  },
+                  {
+                      "path":  "binb/link510.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\binb\\link510.exe",
+                      "bytes":  142015,
+                      "sha256":  "163D8B86C18B93CCAE9B2380D850CD42A9A5E1FD89A163B16170979AFBBABB07"
+                  },
+                  {
+                      "path":  "binb/lk.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\binb\\lk.exe",
+                      "bytes":  142015,
+                      "sha256":  "163D8B86C18B93CCAE9B2380D850CD42A9A5E1FD89A163B16170979AFBBABB07"
+                  },
+                  {
+                      "path":  "binb/replace.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\binb\\replace.exe",
+                      "bytes":  28623,
+                      "sha256":  "14204DE06050062B67BCD63B827098BC160C7655A3CE1B8A275571FAFBC107E3"
+                  },
+                  {
+                      "path":  "binb/tok.exe",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\binb\\tok.exe",
+                      "bytes":  45543,
+                      "sha256":  "A3BD1850820F2EC6EEAF0275A3854E82F4B593CB34ED065111CE7A05517023A6"
+                  },
+                  {
+                      "path":  "lib/libh.lib",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\lib\\libh.lib",
+                      "bytes":  14209,
+                      "sha256":  "6729E396014D37921B0B331CD0F9A3A821ABB725FD2EE0E795D71B0E4B627E9C"
+                  },
+                  {
+                      "path":  "lib/lqbem.lib",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\lib\\lqbem.lib",
+                      "bytes":  15897,
+                      "sha256":  "11E1C452D38832AEF3C9FBE56007B18F4CCCE346D5DB1283F1FAEE400705F6D0"
+                  },
+                  {
+                      "path":  "lib/mlibcr.lib",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\lib\\mlibcr.lib",
+                      "bytes":  133071,
+                      "sha256":  "A8C6BF65551559A795F3BDCEF3F70178086BF944296413716E48CBA95814B9CB"
+                  },
+                  {
+                      "path":  "lib/qbblibfp.lib",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\lib\\qbblibfp.lib",
+                      "bytes":  14493,
+                      "sha256":  "B355EA40A994DB2B1FF3F4E6070FD708E9BA88C47E20E984E08221FD75EBD04F"
+                  },
+                  {
+                      "path":  "lib/slibce.lib",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\lib\\slibce.lib",
+                      "bytes":  194437,
+                      "sha256":  "91D9AB878F571A32E048BEBDC039CD0F43F141F53F275803AE0AE705CADAA280"
+                  },
+                  {
+                      "path":  "inc/assert.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\assert.h",
+                      "bytes":  699,
+                      "sha256":  "6A32B3D4B878A7CAFFDB6EA632B951D5A6CAFA4CB1E81E00C112D9DD8FE97CDC"
+                  },
+                  {
+                      "path":  "inc/bios.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\bios.h",
+                      "bytes":  4866,
+                      "sha256":  "E90ADF1F14F8759007492240785FEEFEF435AB1C2D2B6736B2F4B31C625E21BB"
+                  },
+                  {
+                      "path":  "inc/bse.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\bse.h",
+                      "bytes":  1139,
+                      "sha256":  "04B0DD51951C95E828AA2C2D634D1837E9CD13532B4471196BD9D69B57912F09"
+                  },
+                  {
+                      "path":  "inc/bsedos.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\bsedos.h",
+                      "bytes":  17730,
+                      "sha256":  "2440C899FD8D19A6879EBD88E0F2679A60BF5264376A2F85B1B7FCB2BF47F09D"
+                  },
+                  {
+                      "path":  "inc/bseerr.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\bseerr.h",
+                      "bytes":  20940,
+                      "sha256":  "6A01C94D758ACBA3C1EFD8EC5E4F76C2BC623217CC5B9054770A09A843CD4B16"
+                  },
+                  {
+                      "path":  "inc/bsesub.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\bsesub.h",
+                      "bytes":  11512,
+                      "sha256":  "79E9DC2DA95D47DE6343D301587E792BDE13929D3C72505FD18CDAB742E28F57"
+                  },
+                  {
+                      "path":  "inc/cmacros.inc",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\cmacros.inc",
+                      "bytes":  17146,
+                      "sha256":  "5E30EF950B4E1847AADDCB43865A6F09E09AB9A1C290E2B0B03D56F1584ED918"
+                  },
+                  {
+                      "path":  "inc/conio.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\conio.h",
+                      "bytes":  952,
+                      "sha256":  "4C58132772FFB983E70D2EC2F6EAB920E518DE251094623ABC34718618B45EDE"
+                  },
+                  {
+                      "path":  "inc/ctype.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\ctype.h",
+                      "bytes":  2465,
+                      "sha256":  "C96D2C704A0EA7B026B541703A57E2773F3C25D07843273CDC48BDCE5D9D2FF4"
+                  },
+                  {
+                      "path":  "inc/direct.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\direct.h",
+                      "bytes":  690,
+                      "sha256":  "687ECC8484732C72DA3C8B340BB1319A31D0580539BAED457AA73D82A1037B5D"
+                  },
+                  {
+                      "path":  "inc/dos.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\dos.h",
+                      "bytes":  5917,
+                      "sha256":  "DD9F790B37B77707ADCA97D7C9024D3445C80C5401D29ED724B25DFCBA5E283E"
+                  },
+                  {
+                      "path":  "inc/errno.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\errno.h",
+                      "bytes":  1283,
+                      "sha256":  "55E3CED19F97845A0461DC54359C6EC10C3FBC9B893CF64CCBC1CE553BF1642A"
+                  },
+                  {
+                      "path":  "inc/fcntl.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\fcntl.h",
+                      "bytes":  1255,
+                      "sha256":  "79915EE9A0E6D182C4D7F1A0BCA12D3B07CEC3A0DBEA033DBE58821FD99E0857"
+                  },
+                  {
+                      "path":  "inc/float.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\float.h",
+                      "bytes":  6011,
+                      "sha256":  "386D2DD80397DE6A2CB9AB66743878167B253B11F57B19BC6EF00089F03D94BA"
+                  },
+                  {
+                      "path":  "inc/graph.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\graph.h",
+                      "bytes":  13035,
+                      "sha256":  "A8F304F94AE21FE6AB380CA492E07C5C09679C43F34FA8AEFECF7C1BEC5C957F"
+                  },
+                  {
+                      "path":  "inc/io.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\io.h",
+                      "bytes":  1294,
+                      "sha256":  "41A51F1EAB9E46FB62F21C69F2412F02F9D6A2E522734340F222832D565DE9D9"
+                  },
+                  {
+                      "path":  "inc/limits.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\limits.h",
+                      "bytes":  1553,
+                      "sha256":  "AFE7F9B89DED5925DEB4F4FF02C5BD6C7105F5770EE42FA6D6B2ECEFF20C193D"
+                  },
+                  {
+                      "path":  "inc/malloc.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\malloc.h",
+                      "bytes":  3097,
+                      "sha256":  "AA0CB86F9D6B0F475F339F0452FEE810F321C61B3F0C9E23562077A5D32A76E4"
+                  },
+                  {
+                      "path":  "inc/math.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\math.h",
+                      "bytes":  3324,
+                      "sha256":  "4DF668BF2766DCADE39669A9A4DC5280FF7A8C573AF5A71AC8A00F725B93D825"
+                  },
+                  {
+                      "path":  "inc/memory.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\memory.h",
+                      "bytes":  1065,
+                      "sha256":  "AD17BB794DEF6CBFE18A83F786DD1940BED498AF4566F2A5F6242E0E5C7B1BDA"
+                  },
+                  {
+                      "path":  "inc/os2.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\os2.h",
+                      "bytes":  707,
+                      "sha256":  "816695EC1AA1265FD01691E233BCD76C1F3362D36F0D60D816001AA11BC61C5F"
+                  },
+                  {
+                      "path":  "inc/os2def.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\os2def.h",
+                      "bytes":  5891,
+                      "sha256":  "DC9886CF87E8E6863885F03059288F36CEC0A5993605310CF9D390C6434CE677"
+                  },
+                  {
+                      "path":  "inc/process.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\process.h",
+                      "bytes":  1988,
+                      "sha256":  "0D005443E2782762CD7F0146CC570E5E774CCE11D59E91DAC2C07CBE046875FA"
+                  },
+                  {
+                      "path":  "inc/search.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\search.h",
+                      "bytes":  1025,
+                      "sha256":  "2D476B5F3629AB2126835923B724310FED71D0CD5B84408F4C2ED9109358D34A"
+                  },
+                  {
+                      "path":  "inc/setjmp.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\setjmp.h",
+                      "bytes":  907,
+                      "sha256":  "1A3265E579C8C7C226429B67531879D7A750B1756BC3069FAD3CD5DC88093A48"
+                  },
+                  {
+                      "path":  "inc/share.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\share.h",
+                      "bytes":  554,
+                      "sha256":  "F72AFE01CCAFD4541E7289FC2D640056564D3E35A0948A03C8FBFD0368B1312D"
+                  },
+                  {
+                      "path":  "inc/signal.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\signal.h",
+                      "bytes":  1905,
+                      "sha256":  "8ADE415619A7AF677DF7B0B57522DE0A1E25A4B6B17F6B9433948BE80AE04E5E"
+                  },
+                  {
+                      "path":  "inc/stdarg.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\stdarg.h",
+                      "bytes":  614,
+                      "sha256":  "1375A4706D03A1258C7F75F786ABDD645C15B646F1C131F19400BE91A1E19CA3"
+                  },
+                  {
+                      "path":  "inc/stddef.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\stddef.h",
+                      "bytes":  1100,
+                      "sha256":  "EF005074DBC269245308884F36E549698D5791726C0E6F50B7FECD063935701F"
+                  },
+                  {
+                      "path":  "inc/stdio.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\stdio.h",
+                      "bytes":  4500,
+                      "sha256":  "5F33039B1DEEA27B376DC48EBF42D2716AA074C59A520744E01534229D373434"
+                  },
+                  {
+                      "path":  "inc/stdlib.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\stdlib.h",
+                      "bytes":  4900,
+                      "sha256":  "9F2969D0FF20AD4F24506BD3EE06ED04B357894E8B08FB2129D0C705861D026A"
+                  },
+                  {
+                      "path":  "inc/string.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\string.h",
+                      "bytes":  2209,
+                      "sha256":  "B1643C5775110A0222C4B0862EE9C385E8EA58130D19F8E995C31098D9BF9BF0"
+                  },
+                  {
+                      "path":  "inc/style.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\style.h",
+                      "bytes":  5177,
+                      "sha256":  "1BD206F6E99F072CBC0BA117BA9275BBE337E2E1D160103329DE6B3F6E9CDD74"
+                  },
+                  {
+                      "path":  "inc/time.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\time.h",
+                      "bytes":  2342,
+                      "sha256":  "9B26227E1F2EDAA5E428F08D62BAF0C686D89B8D6C0046CE5A3B918C5675B561"
+                  },
+                  {
+                      "path":  "inc/varargs.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\varargs.h",
+                      "bytes":  642,
+                      "sha256":  "9D4D6F8357B276ACDC49E9AB509F6C253A9EEBB5060AD3E29B0215C0669F8005"
+                  },
+                  {
+                      "path":  "inc/windows.h",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\windows.h",
+                      "bytes":  88160,
+                      "sha256":  "8B84127B473F2B007D859C49852845D3A47B9F9841A3B25B449F1F01C18B75CD"
+                  },
+                  {
+                      "path":  "inc/windows.inc",
+                      "source":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl\\inc\\windows.inc",
+                      "bytes":  15542,
+                      "sha256":  "78112209270A28387B90684571D15453BE8FCDF811F3570226E7A63D08B3DEB6"
+                  }
+              ]
+}

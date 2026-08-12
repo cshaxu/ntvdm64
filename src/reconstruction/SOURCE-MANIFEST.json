@@ -1,0 +1,82 @@
+{
+  "schema": "ntdos64-reconstruction-source-manifest-v1",
+  "component": "Independent default-disabled reconstruction mechanics admitted by S4 and R1",
+  "research_restriction": "Default-disabled research code. It is not linked into ntdos64-run and does not implement BIOS, BOP/SVC dispatch, DEM, DOS, PC/AT devices, or host policy.",
+  "authority": "docs/S3-RECONSTRUCTED-MONITOR-SEMANTICS.md, docs/S4-RECONSTRUCTION-ADMISSION.md, and docs/R1-GENERIC-VIDEO-RECONSTRUCTION-ADMISSION.md",
+  "files": [
+    {
+      "path": "monitor/reconstructed_monitor_s4.h",
+      "kind": "reconstruction-monitor-interface",
+      "sha256": "B4CF0F3F59D032EEE0F825269310A19BA03FA71C40578FAA9AE303B030BA5ECA",
+      "bytes": 3635
+    },
+    {
+      "path": "monitor/reconstructed_monitor_s4.c",
+      "kind": "reconstruction-monitor-mechanics",
+      "sha256": "BD855106FB62E780188FD308FC6B646D324F58C3698AC3E15D1F5456FF7A025A",
+      "bytes": 50134
+    },
+    {
+      "path": "transport/historical_transport_v2.h",
+      "kind": "s5-cross-bitness-fixed-record",
+      "sha256": "5089BA0D3E05906ED948639CF7E3CE182A756D4CF8854512FD39BACC9A1B1884",
+      "bytes": 2134
+    },
+    {
+      "path": "transport/shared_aperture_v1.h",
+      "kind": "s5-cross-bitness-shared-backing-layout",
+      "sha256": "28916FDC5B4F663407F6339233B78767ABCC8F42AFDEDBE77244AFA94A14D9A0",
+      "bytes": 837
+    },
+    {
+      "path": "video/reconstructed_cvidc_video_tail.h",
+      "kind": "reconstruction-cvidc-tail-interface",
+      "sha256": "6B0D3D35B2B21E57CFAADA02401904BA3943BDC364CB59E0C2C44CC023B16BA9",
+      "bytes": 168
+    },
+    {
+      "path": "video/reconstructed_cvidc_video_tail.c",
+      "kind": "reconstruction-cvidc-tail-mechanics",
+      "sha256": "9E926DA3EB54E3A9BA881AC0DC018711CC369261E0531545B56CA92B4A1BF3E1",
+      "bytes": 800
+    }
+  ],
+  "verification_files": [
+    {
+      "path": "../../tests/reconstructed_monitor_s4_test.c",
+      "kind": "default-disabled-mechanics-test",
+      "sha256": "3B5F6AE4A8FD778557562980A23F39F8E3212038A2A833E7AC3242262634017B",
+      "bytes": 34503
+    },
+    {
+      "path": "../../tests/reconstructed_monitor_s4_ntio_strategy_fixture.c",
+      "kind": "default-disabled-source-built-ntio-strategy-fixture",
+      "sha256": "AB80AD47A9CD2A12180607714FADAF5C6ADFBA3AF6C38A333BCEC85E216CB771",
+      "bytes": 3163
+    },
+    {
+      "path": "../../tests/historical_transport_v2_layout_test.c",
+      "kind": "default-disabled-cross-bitness-layout-test",
+      "sha256": "66B388D90C1428A5FEADA4988E94A6110403960596E938A3346F89B250A0192E",
+      "bytes": 1918
+    },
+    {
+      "path": "../../tests/historical_transport_v2_pipe_test.c",
+      "kind": "default-disabled-unadmitted-cross-process-fixture",
+      "sha256": "4D77231A54582C714D83544C224D80E4BA6F3AE1710A4FDB8D7F60805F7873FC",
+      "bytes": 3057
+    },
+    {
+      "path": "../../tests/shared_aperture_v1_host_fixture.c",
+      "kind": "default-disabled-cross-bitness-shared-backing-fixture",
+      "sha256": "499D0D1E7724E41062307F4FC3A0CC5950AF99D23FCAEAE0B8F160F1FD612D5D",
+      "bytes": 3368
+    },
+    {
+      "path": "../../tests/shared_aperture_s4_post_sas_fixture.c",
+      "kind": "default-disabled-post-sas-s4-instruction-fixture",
+      "sha256": "233950BB08D54B16EF1C22B09674ACA391D643610DB9E7B75A053211F2622FE6",
+      "bytes": 3585
+    }
+  ]
+}

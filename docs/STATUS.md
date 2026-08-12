@@ -2,27 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T126 S1 — repeated DEM `50:11` source-contract audit.**
+**Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
+
+> **Governance correction:** The title is a retained encoding-damaged locator.
+> The binding active packet below is **M0 T176 S22**; all T177-labelled files
+> are historical evidence locators and do not allocate a current task.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T126 S1, Ordinary Mode. |
-| Admission And Approval | T125 proves the real shim-to-native launch and reaches a new repeated BOP path. Owner authorizes ROI-directed sequencing and later human review. |
-| Objective | Use OpenNT source, the existing whole BOP catalogue, and the T125 copied register trace to identify `50:11`'s historical owner, input/output/return contract and the smallest missing prerequisite or incorrect result class. |
-| Non-goals | No BOP handler/provider implementation, no Bochs/adapter/guest source edit, no device enablement, no loop suppression, and no rerun beyond T125 evidence. |
-| Reference Baseline | history/m0-t125-closure-20260812.md, T96/T99 DEM provider evidence, and the retained T125 trace. |
-| Files And ABI Surface | Read-only OpenNT/adapter source and a research record only. |
+| Identifier Mode | M0 T176 S24, Ordinary Mode. |
+| Admission And Approval | S23 links both unchanged original machine-handler objects in one selector-blind derivative. The T176 plan admits one controlled runtime observation of this exact image. |
+| Objective | Make one bounded observation of the S23 binary and classify `06h` handler entry, its report/PIC mechanics and immediate guest continuation. |
+| Non-goals | No source/build change, no retry, no device enablement, no adapter/provider change, and no CLI completion claim. |
+| Reference Baseline | S19 normal-return observation; S21 source audit; S22 contract test; S23 derivative map and executable. |
+| Files And ABI Surface | One fresh evidence directory with controller result/log and research/status interpretation only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile selector/service identity with original source dispatcher and all current provider dispositions; trace the caller/continuation and prove any claimed missing prerequisite from source. |
-| Expected Markers | One source-backed contract table and a disposition: existing provider fault, missing native prerequisite, original unavailable behavior, or insufficient evidence. |
-| Asset Needs | Imported OpenNT source, current BOP catalogue/provider records, and T125 stderr. |
-| Reporting Requirements | Distinguish source fact from trace inference; name the next owner only if the evidence is sufficient. |
-| Stop Conditions | Stop on an unclassified selector/service, a required semantic source change, or evidence that expands into another BOP family. |
-| Exit Criteria | `50:11` is classified with a bounded next action or explicit blocker; no speculative fix is made. |
+| Verification | Inspect one fresh controller result/log for `06h` entry and original-handler report/outcome markers; correlate the final native fault; run documentation governance checks and `git diff --check`. |
+| Expected Markers | Either one source-owned `06h` result plus continuation evidence, or a reproducible earlier owner boundary with zero false `06h` claims. |
+| Asset Needs | S23 linked derivative, unchanged S19 profile/configuration, and a fresh empty evidence directory. |
+| Reporting Requirements | Distinguish a linked handler from a reached handler and distinguish any observation fact from CLI completion. |
+| Stop Conditions | Any retry, synthetic reachability mechanism, source/build behavior change, device addition, or adapter workaround. |
+| Exit Criteria | One observation is retained and classified; if it stops before `06h`, name the earlier owner boundary and retain T176's no-workaround conclusion. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare the T125 `50:11` loop with T122's `50:36` controlled stop and existing DEM service-11 entries; do not reopen unrelated BOP families. |
+| Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
 ## Current Technical Baseline
 
@@ -133,4 +137,31 @@
 | M0 T123 | Closed: thin CLI-to-Bochs shim startup descriptor is frozen. |
 | M0 T124 | Closed: CLI-only shim source/test closure verifies the fixed, manifest-identified bundle contract with a fake native parser; real Bochs remains T125 evidence. |
 | M0 T125 | Closed: fixed bundle reaches the native parser/POST and a repeated `50:11` BOP path; watchdog terminates the bounded process tree, so no continuous-execution claim is made. |
+| M0 T126 | Closed: `50:11` is original `demLoadDos`; its existing source-derived transaction is linked, but T121 explicitly disabled the generic CPU result bridge required to commit/resume it. |
+| M0 T127 | Closed: one source-identical derivative enables only the generic CPU-result bridge; `cpu/exception.o` and final map build with no archive or device expansion. |
+| M0 T128 | Closed: CPU-result bridge alone remains inert because its call site is nested below `STARTUP_TRANSACTION=0`; the observed `50:11` loop remains a composition fact, not a new BOP. |
+| M0 T129 | Closed: the obsolete parallel startup/result bridge is rejected; its unresolved imports cannot become a second adapter composition. |
+| M0 T130 | Closed: selector-blind machine composition reaches original `unexpected_int` and resumes through native Bochs mechanics; continuous execution remains unproven. |
+| M0 T131 | Closed: full SoftPC BIOS inventory has verified native, unavailable, or collision ownership without a BIOS dispatcher. |
+| M0 T132 | Closed: the sole original handler island has an unresolved CRT-model conflict and cannot be copied as a general provider recipe. |
+| M0 T133 | Closed: the deferred composition already has native POST/IVT/INT10 lifecycle; no reset/device correction is admitted. |
+| M0 T134 | Closed: the late fault is original INT 0Dh/BOP 02 return looping on guest control state; its upstream control transfer remains unobserved. |
+| M0 T145 | Closed: no retained exact COMMAND source-offset map/listing binds the controlled COM image tail to a source label; heuristic attribution remains rejected. |
+| M0 T146 S1 | Complete: one r5-pinned CPU archive enables only BX-TRACE-056 and links against byte-identical T130 non-CPU/mechanics inputs; see etc/research/t146-s1-single-diagnostic-cpu-archive-closure-001.md. |
+| M0 T146 | Closed: its single observation stopped early at `50:36`, so it neither reaches nor explains the late prefetch fault; retry and semantic changes are rejected. |
+| M0 T147 | Closed: full CPU archive recompilation leaves an unresolvable provenance variable; exactly-one archive-member replacement is the next minimal comparison. |
+| M0 T148 | Closed: a one-member CPU archive derivative retains 92 byte-identical CPU members and enables only BX-TRACE-056. |
+| M0 T149 | Closed: the sole extended observation reaches and repeats the known prefetch/#GP/BOP02/IRET loop; watchdog prevents a clean completion claim. |
+| M0 T150 | Closed: original INT 0Dh/BOP02/IRET source proves replay of the existing fault frame, not a new adapter or machine-service failure. |
+| M0 T151 | Closed: exact staged COMMAND image ends at `0BC1:C5CF`; the `0BC1:FFFF` fault lies outside it. |
+| M0 T152 | Closed: original x86 fast-read selects the visible no-op `50:42` result, explaining why the current profile cannot populate the COM image. |
+| M0 T153 | Closed: source-derived fast-I/O contract selects contained `50:42` read only and retains `50:43` unavailable. |
+| M0 T154 | Closed: adapter-only `50:42` fast-read provider is source/test/build and runtime-plane closed; `50:43` remains original-unavailable. |
+| M0 T155 | Closed: a source-built current composition reaches full COMMAND fast-read and EOF; a later stack-prefetch triple fault is separately admitted to T156. |
+| M0 T156 | Closed: recursive stack #SS is correctly enforced by Bochs; the unobserved first vector/control predecessor is transferred to T157 diagnostic design. |
+| M0 T157 | Closed: existing BX-TRACE-049 provides the required generic real-mode vector record; T158 may enable it without a new source intrusion. |
+| M0 T158 | Closed: generic vector trace proves the known direct-pre-POST zero-INT10 path; T159 audits the existing POST/deferred alternative. |
+| M0 T159 | Closed: current adapter retains a no-source-change native POST/deferred closure with exactly two Bochs object replacements; T160 may build and observe that form once. |
+| M0 T160 | Closed: fresh x86 two-object composition reaches full COMMAND fast-read and normal `50:36` resume through native POST; T161 may observe the unchanged binary once at a longer budget. |
+| M0 T161 | Closed: unchanged composition reaches accepted `FE` controlled stop after `50:36`; T162 must source-classify its CLI completion meaning. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |

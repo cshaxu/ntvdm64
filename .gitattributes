@@ -1,0 +1,16 @@
+# Imported historical and third-party trees are preserved byte-for-byte.
+# Their upstream whitespace is not a project-authored formatting violation.
+src/archived/** -whitespace
+src/bochs/** -whitespace
+src/ms-dos-6/** -whitespace
+src/ntvdmx64/** -whitespace
+src/opennt/** -whitespace
+src/opennt-45/** -whitespace
+
+# Imported historical tooling and retained historical evidence are likewise
+# preserved without mechanical whitespace rewriting during baseline recovery.
+tools/msdos400/** -whitespace
+tools/msdos6-qb45/** -whitespace
+tools/opennt-4.5/** -whitespace
+docs/etc/research/t1*.md -whitespace
+docs/history/m0-t1*.md -whitespace

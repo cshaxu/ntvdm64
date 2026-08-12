@@ -67,6 +67,33 @@ int main(void)
         memcmp(payload, command, sizeof(command)) != 0 ||
         result.cpu_delta.gpr16_write_mask != 1u ||
         result.cpu_delta.gpr16_values[0] != sizeof(command)) return 5;
+    if (!bx_ntvdm_readonly_namespace_v1_seek(&space, token, 0u)) return 6;
+    service_window(&window, 0x42u);
+    if (!bx_ntvdm_dem_readonly_file_v1_fast_read(&space, &event, &cpu, &window, payload,
+            sizeof(payload), &transaction, &result) || transaction.payload_bytes != sizeof(command) ||
+        memcmp(payload, command, sizeof(command)) != 0 ||
+        result.cpu_delta.gpr16_write_mask != 1u ||
+        result.cpu_delta.gpr16_values[0] != sizeof(command)) return 7;
+    if (!bx_ntvdm_readonly_namespace_v1_seek(&space, token, sizeof(command) - 1u)) return 8;
+    cpu.ecx = 2u; cpu.eflags = 0x40u;
+    if (!bx_ntvdm_dem_readonly_file_v1_fast_read(&space, &event, &cpu, &window, payload,
+            sizeof(payload), &transaction, &result) || transaction.payload_bytes != 1u ||
+        payload[0] != command[sizeof(command) - 1u] ||
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 1u ||
+        result.eflags_values != 0u) return 9;
+    if (!bx_ntvdm_dem_readonly_file_v1_fast_read(&space, &event, &cpu, &window, payload,
+            sizeof(payload), &transaction, &result) || transaction.payload_bytes != 0u ||
+        transaction.guest_physical_address != 0u || result.cpu_delta.gpr16_write_mask != 1u ||
+        result.cpu_delta.gpr16_values[0] != 0u || result.eflags_values != 0u) return 10;
+    cpu.ds = 0xffffu; cpu.edx = 0xffffu; cpu.ecx = 1u;
+    if (!bx_ntvdm_dem_readonly_file_v1_fast_read(&space, &event, &cpu, &window, payload,
+            sizeof(payload), &transaction, &result) || transaction.magic != 0u ||
+        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 87u) return 11;
+    cpu.ds = 0x1000u; cpu.edx = 0x40u; cpu.ecx = 3u;
+    service_window(&window, 0x43u);
+    if (bx_ntvdm_dem_readonly_file_v1_fast_read(&space, &event, &cpu, &window,
+            payload, sizeof(payload), &transaction, &result)) return 12;
     cpu.eax = token & 0xffffu; cpu.ebp = token >> 16; cpu.ebx = 0x1111u;
     cpu.ecx = 0xffffu; cpu.edx = 0xffffu; cpu.esi = 0x2222u;
     service_window(&window, 0x02u);
@@ -74,14 +101,14 @@ int main(void)
         result.eflags_values != 0u || result.cpu_delta.gpr16_write_mask != 0u ||
         !bx_ntvdm_dem_readonly_file_v1_close(&space, &event, &cpu, &window, &result) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
-        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 6u) return 6;
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 6u) return 13;
     service_window(&window, 0x16u); cpu.ecx = 1u; cpu.edx = 0x40u; cpu.eflags = 0u;
     if (!bx_ntvdm_dem_readonly_file_v1_read(&space, &event, &cpu, &window, payload,
             sizeof(payload), &transaction, &result) ||
         transaction.magic != 0u ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
         result.cpu_delta.gpr16_write_mask != 1u ||
-        result.cpu_delta.gpr16_values[0] != 6u) return 7;
+        result.cpu_delta.gpr16_values[0] != 6u) return 14;
     puts("bx-ntvdm DEM readonly file service: bounded O/S/R/C lifecycle verified");
     return 0;
 }

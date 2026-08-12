@@ -3,7 +3,9 @@ param(
     [string]$RepositoryRoot = '',
     [string]$R5Root = '',
     [Parameter(Mandatory = $true)][string]$BuildRoot,
-    [switch]$DeferredStartupPlan
+    [switch]$DeferredStartupPlan,
+    [switch]$MachineComposition,
+    [switch]$RealModeVectorDiagnostic
 )
 
 $ErrorActionPreference = 'Stop'
@@ -52,7 +54,10 @@ $adapterSources = @(
     'bx_ntvdm_search_transaction_v1.c','bx_ntvdm_dem_path_search_service_v1.c',
     'bx_ntvdm_bop_catalog_v1.c',
     'bx_ntvdm_bop_ingress_v1.c','bx_ntvdm_bop_provider_registry_v1.c',
-    'bx_ntvdm_dem_plane_v1.c','bx_ntvdm_dem_provider_v1.c','bx_ntvdm_command_plane_v1.c',
+    'bx_ntvdm_dem_plane_v1.c','bx_ntvdm_dem_provider_v1.c',
+    'bx_ntvdm_dem_session_lifecycle_provider_v1.c','bx_ntvdm_dem_fastio_provider_v1.c',
+    'bx_ntvdm_command_plane_v1.c',
+    'bx_ntvdm_redir_unavailable_provider_v1.c',
     'bx_ntvdm_legacy_plane_gate_v1.c','bx_ntvdm_bios_memory_service.c',
     'bx_ntvdm_dem_boot_drive_service.c','bx_ntvdm_dem_debug_service.c',
     'bx_ntvdm_emm_unavailable_service.c','bx_ntvdm_mouse_install1_mapping_service.c',
@@ -87,6 +92,8 @@ $manifest = [ordered]@{
     r5BinarySha256 = Get-Sha256 (Join-Path $r5 'ntdos64-s7-runtime-trace.exe')
     buildRoot = $build
     deferredStartupPlan = [bool]$DeferredStartupPlan
+    machineComposition = [bool]$MachineComposition
+    realModeVectorDiagnostic = [bool]$RealModeVectorDiagnostic
     bochsReplacementCount = 0
     bochsReplacements = @()
     adapterSources = @()
@@ -94,9 +101,12 @@ $manifest = [ordered]@{
     retainedEngineInputs = @()
 }
 $bochsObjects = @()
-if ($DeferredStartupPlan) {
-    $bochsSources = @(
-        @{ source = 'src\bochs\main.cc'; destination = 'main.cc'; object = 'main.o' },
+if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic) {
+    $bochsSources = @()
+    if ($DeferredStartupPlan) {
+        $bochsSources += @{ source = 'src\bochs\main.cc'; destination = 'main.cc'; object = 'main.o' }
+    }
+    $bochsSources += @(
         @{ source = 'src\bochs\cpu\exception.cc'; destination = 'cpu\exception.cc'; object = 'cpu\exception.o' },
         @{ source = 'src\bochs\cpu\bx_ntvdm_exception_intercept.h'; destination = 'cpu\bx_ntvdm_exception_intercept.h'; object = '' }
     )
@@ -119,6 +129,16 @@ foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-nt
 }
 foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\cli') -Filter *.h -File) {
     [void](Copy-Verified $header.FullName (Join-Path $build ('cli\' + $header.Name)))
+}
+if ($MachineComposition) {
+    New-Item -ItemType Directory -Path (Join-Path $build 'machine') -Force | Out-Null
+    foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-ntvdm-machine-composition') -File) {
+        [void](Copy-Verified $file.FullName (Join-Path $build ('machine\' + $file.Name)))
+    }
+    $unexpObject = Join-Path $repository 'artifacts\build\current\t119-unexp-mt-projection-r1\CMakeFiles\ntdos64-opennt-system-provider-objects.dir\base\mvdm\softpc.new\base\system\unexp_nt.c.obj'
+    [void](Copy-Verified $unexpObject (Join-Path $build 'machine\unexp_nt.c.obj'))
+    $illegalObject = Join-Path $repository 'artifacts\build\current\t119-unexp-mt-projection-r2\CMakeFiles\ntdos64-opennt-system-provider-objects.dir\overlay\base\mvdm\softpc.new\base\system\illegalp.c.obj'
+    [void](Copy-Verified $illegalObject (Join-Path $build 'machine\illegalp.c.obj'))
 }
 foreach ($name in $adapterSources) {
     $source = Join-Path $repository ('src\bx-ntvdm-adapter\' + $name)
@@ -147,9 +167,30 @@ $make = @(
 if ($DeferredStartupPlan) {
     $make += @(
         'main.o: main.cc',
-        "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXECUTION_PLAN=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /Iadapter /Icli /Tpmain.cc /Fomain.o",'',
+        "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXECUTION_PLAN=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /Iadapter /Icli /Tpmain.cc /Fomain.o",''
+    )
+}
+$exceptionDefines = @('/DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1')
+if ($DeferredStartupPlan) {
+    $exceptionDefines += @('/DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1', '/DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1', '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0', '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0', '/DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1')
+}
+elseif ($RealModeVectorDiagnostic) {
+    $exceptionDefines += @('/DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
+        '/DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
+        '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
+        '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')
+}
+if ($MachineComposition) { $exceptionDefines += '/DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1' }
+if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic) {
+    $make += @(
         'cpu\exception.o: cpu\exception.cc',
-        "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1 /DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1 /DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1 /DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0 /DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /Iadapter /Icli /Tpcpu\exception.cc /Focpu\exception.o",''
+        ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) " + ($exceptionDefines -join ' ') + ' /Iadapter /Icli ' + $(if ($MachineComposition) { '/Imachine ' }) + '/Tpcpu\exception.cc /Focpu\exception.o'),''
+    )
+}
+if ($MachineComposition) {
+    $make += @(
+        'machine\bx_ntvdm_machine_bop_v1.obj: machine\bx_ntvdm_machine_bop_v1.c',
+        "`tcl.exe /nologo /c /MT /W3 /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /Iadapter /Imachine /Fomachine\bx_ntvdm_machine_bop_v1.obj machine\bx_ntvdm_machine_bop_v1.c",''
     )
 }
 foreach ($object in $allObjects) {
@@ -160,13 +201,13 @@ foreach ($object in $allObjects) {
 }
 $make += @(
     '# Deliberately no Bochs archive is a make prerequisite: inherited Makefile rules would recurse into devices.',
-    ('ntdos64-t98-current-adapter.exe: ' + (($bochsObjects + @('$(ADAPTER_OBJS)')) -join ' ')),
-    "`tlink /nologo /subsystem:console /incremental:no /opt:ref /map:ntdos64-t98-current-adapter.map /out:`$@ `$(BX_OBJS) `$(SIMX86_OBJS) cpu\exception.o iodev/libiodev.a iodev/hdimage/libhdimage.a iodev/usb/libusb.a iodev/network/libnetwork.a iodev/sound/libsound.a cpu/libcpu.a cpu/cpudb/libcpudb.a memory/libmemory.a gui/libgui.a `$(DISASM_LIB) `$(FPU_LIB) `$(GUI_LINK_OPTS) `$(MCH_LINK_FLAGS) `$(SIMX86_LINK_FLAGS) `$(READLINE_LIB) `$(EXTRA_LINK_OPTS) `$(LIBS) `$(ADAPTER_OBJS) kernel32.lib bcrypt.lib",''
+    ('ntdos64-t98-current-adapter.exe: ' + (($bochsObjects + $(if ($MachineComposition) { @('machine\bx_ntvdm_machine_bop_v1.obj','machine\unexp_nt.c.obj','machine\illegalp.c.obj') } else { @() }) + @('$(ADAPTER_OBJS)')) -join ' ')),
+    "`tlink /nologo /subsystem:console /incremental:no /opt:ref /map:ntdos64-t98-current-adapter.map /out:`$@ `$(BX_OBJS) `$(SIMX86_OBJS) cpu\exception.o iodev/libiodev.a iodev/hdimage/libhdimage.a iodev/usb/libusb.a iodev/network/libnetwork.a iodev/sound/libsound.a cpu/libcpu.a cpu/cpudb/libcpudb.a memory/libmemory.a gui/libgui.a `$(DISASM_LIB) `$(FPU_LIB) `$(GUI_LINK_OPTS) `$(MCH_LINK_FLAGS) `$(SIMX86_LINK_FLAGS) `$(READLINE_LIB) `$(EXTRA_LINK_OPTS) `$(LIBS) $(if ($MachineComposition) { 'machine\bx_ntvdm_machine_bop_v1.obj machine\unexp_nt.c.obj machine\illegalp.c.obj vcruntime.lib' }) `$(ADAPTER_OBJS) kernel32.lib bcrypt.lib",''
 )
 $shim = Join-Path $build 'ntdos64-t98-current-adapter.mak'
 [IO.File]::WriteAllText($shim, ($make -join "`r`n"), [Text.UTF8Encoding]::new($false))
 
-if (-not $DeferredStartupPlan -and (Get-Content -LiteralPath $shim -Raw) -match '(^|\r?\n)(main\.o|cpu\\exception\.o):') { throw 'Default derivative unexpectedly rebuilds a Bochs object.' }
+if (-not $DeferredStartupPlan -and -not $MachineComposition -and -not $RealModeVectorDiagnostic -and (Get-Content -LiteralPath $shim -Raw) -match '(^|\r?\n)(main\.o|cpu\\exception\.o):') { throw 'Default derivative unexpectedly rebuilds a Bochs object.' }
 if ($DeferredStartupPlan) {
     $shimText = Get-Content -LiteralPath $shim -Raw
     if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)(main\.o|cpu\\exception\.o):').Matches.Count -ne 2) { throw 'Deferred derivative must rebuild exactly two Bochs objects.' }
@@ -174,11 +215,31 @@ if ($DeferredStartupPlan) {
         if ($shimText -notmatch [regex]::Escape($term)) { throw "Deferred derivative lacks macro: $term" }
     }
 }
+if ($MachineComposition) {
+    $shimText = Get-Content -LiteralPath $shim -Raw
+    if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)cpu\\exception\.o:').Matches.Count -ne 1) { throw 'Machine-composition derivative must rebuild exactly one Bochs object.' }
+    if ($shimText -notmatch [regex]::Escape('BX_NTVDM_ENABLE_MACHINE_COMPOSITION=1')) { throw 'Machine-composition derivative lacks opt-in macro.' }
+    if ($shimText -notmatch 'machine\\bx_ntvdm_machine_bop_v1\.obj' -or $shimText -notmatch 'machine\\unexp_nt\.c\.obj' -or $shimText -notmatch 'machine\\illegalp\.c\.obj') { throw 'Machine-composition derivative lacks its exact object triple.' }
+}
+if ($RealModeVectorDiagnostic) {
+    $shimText = Get-Content -LiteralPath $shim -Raw
+    if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)cpu\\exception\.o:').Matches.Count -ne 1 -or
+        $shimText -match '(^|\r?\n)main\.o:') { throw 'Vector diagnostic must rebuild exactly cpu\\exception.o.' }
+    foreach ($term in @('BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
+            'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
+            'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
+            'BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')) {
+        if ($shimText -notmatch [regex]::Escape($term)) { throw "Vector diagnostic lacks macro: $term" }
+    }
+}
 if ((Get-Content -LiteralPath $shim -Raw) -match 'host_namespace') { throw 'Derivative shim unexpectedly admits host namespace.' }
 if ((Get-Content -LiteralPath $shim -Raw) -match '^ntdos64-t98-current-adapter\.exe:.*(?:iodev|cpu\\libcpu|memory|gui)') { throw 'Derivative shim makes a retained Bochs archive a prerequisite.' }
 $retainedEnginePaths = @('main.o','cpu\exception.o','cpu\libcpu.a','iodev\libiodev.a','memory\libmemory.a','gui\libgui.a')
 if ($DeferredStartupPlan) {
     $retainedEnginePaths = @($retainedEnginePaths | Where-Object { $_ -notin @('main.o','cpu\exception.o') })
+}
+elseif ($MachineComposition -or $RealModeVectorDiagnostic) {
+    $retainedEnginePaths = @($retainedEnginePaths | Where-Object { $_ -ne 'cpu\exception.o' })
 }
 foreach ($path in $retainedEnginePaths) {
     $manifest.retainedEngineInputs += [ordered]@{ path=$path; sha256=(Get-Sha256 (Join-Path $build $path)) }

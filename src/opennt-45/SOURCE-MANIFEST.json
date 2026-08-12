@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "source_name": "OpenNT 4.5 local reference subtree",
+  "source_revision": "local read-only snapshot",
+  "source_root": "D:\\home\\repos.hobby\\opennt-4.5\\nt\\private",
+  "usage": "cross-version historical recovery candidate; research-only and default-disabled",
+  "restrictions": [
+    "Not a replacement for the fixed NT4 source input.",
+    "Must not be linked into ntdos64-run, a default engine, or a redistributable artifact.",
+    "Any NT4 runtime admission requires an explicit semantic and profile-compatibility record."
+  ],
+  "files": [
+    {
+      "path": "windows/inc/pmvdm.h",
+      "upstream_path": "windows/inc/pmvdm.h",
+      "kind": "cross-version-recovery-candidate",
+      "sha256": "D9BC8A4E975F9D2BC1AEF89D8E8854F2DC8AD8FAC53B49D6F4998BCCAFD4AFC8",
+      "bytes": 875,
+      "notes": "Defines the Program Manager Reserved-string grammar and PROPERTY_HAS_* flags. Evidence only; it is not admitted into the fixed NT4 input profile."
+    },
+    {
+      "path": "base/mvdm/softpc.new/base/dos/emm_mngr.c",
+      "upstream_path": "mvdm/softpc.new/base/dos/emm_mngr.c",
+      "kind": "cross-version-recovery-candidate",
+      "sha256": "FD73CE7181F7DFB61432D63466C7641C3D010CA0C60BF446666B6C0118DDB8A9",
+      "bytes": 53163
+    },
+    {
+      "path": "overlay/base/mvdm/softpc.new/base/dos/emm_mngr.c",
+      "upstream_path": "mvdm/softpc.new/base/dos/emm_mngr.c",
+      "kind": "local-compiler-compatibility-overlay",
+      "base_sha256": "FD73CE7181F7DFB61432D63466C7641C3D010CA0C60BF446666B6C0118DDB8A9",
+      "sha256": "DE16FF80E0C13AC675757F14A91D601D2474D69CDD1330074A6F2B33D4F772A7",
+      "bytes": 53172,
+      "changes": [
+        "deallocate_altreg_set parameter type changed from short to unsigned short to match the unchanged historical emm.h declaration; both are 16-bit on the x86 target."
+      ]
+    }
+  ]
+}

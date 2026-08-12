@@ -1,0 +1,22 @@
+# Generated execution products and retained local evidence are not source.
+artifacts/*
+!artifacts/README.md
+
+# Local compiler/linker products and scratch output.
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.map
+*.lib
+*.a
+stdout.txt
+stderr.txt
+NUL.obj
+
+# Local diagnostic/probe environments.
+toolchain-probe/
+
+# External comparison/import checkouts and an unadmitted backend snapshot.
+upstream/
+src/bochs-3.0-unadmitted-f5dad7eff8d5/

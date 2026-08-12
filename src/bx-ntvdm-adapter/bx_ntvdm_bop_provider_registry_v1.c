@@ -52,7 +52,10 @@ int bx_ntvdm_bop_provider_registry_v1_select(
         selection->disposition = BX_NTVDM_BOP_PROVIDER_DEFERRED;
         selection->provider_family =
             bx_ntvdm_bop_provider_registry_v1_family(ingress->family);
-        selection->precedence = BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT;
+        selection->precedence = ingress->family == BX_NTVDM_BOP_FAMILY_DEM &&
+            ingress->has_service != 0u && ingress->service == 60u ?
+            BX_NTVDM_BOP_PROVIDER_PRECEDENCE_SOURCE_DERIVED_AFTER_BLOCKER :
+            BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT;
     } else if (ingress->route == BX_NTVDM_BOP_ROUTE_EXPLICIT_UNAVAILABLE) {
         selection->disposition = BX_NTVDM_BOP_PROVIDER_EXPLICIT_UNAVAILABLE;
         selection->provider_family = BX_NTVDM_BOP_PROVIDER_TOP_LEVEL;

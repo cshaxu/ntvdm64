@@ -1,0 +1,89 @@
+{
+    "schema":  "ntdos64-historical-source-manifest-v1",
+    "component":  "NTVDMx64 HAXM monitor reference input set",
+    "upstream_repository":  "https://github.com/leecher1337/ntvdmx64",
+    "upstream_revision":  "84a13d2e7bb1a55d11148971e5b9c8ec99f670bf",
+    "license_status":  "See upstream repository and files; this manifest does not grant redistribution rights.",
+    "research_restriction":  "Research-only HAXM reference. It is not CCPU-compatible, not an execution backend, and not linked into ntdos64-run or any default engine.",
+    "generated_utc":  "2026-08-06T23:50:15.3308658Z",
+    "files":  [
+                  {
+                      "path":  "CMakeLists.txt",
+                      "kind":  "local-build-metadata",
+                      "sha256":  "60F87233AA3ED634FD51CB5F2FD080D25181F7C49024A0C1C1346193DEA37CDC",
+                      "bytes":  750
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/debug.c",
+                      "kind":  "upstream-copy",
+                      "sha256":  "42ED24F6A871CDE66434CA59793BF722451713814784211201EB1922D64EE3BE",
+                      "bytes":  4523
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/haxmvm.h",
+                      "kind":  "upstream-copy",
+                      "sha256":  "4FD524C8A514ED8C90F7F1CFAB56670703803402E8048077FAABED9BCE4A96A6",
+                      "bytes":  17585
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/int.c",
+                      "kind":  "upstream-copy",
+                      "sha256":  "69D99AC6CC877DBF4B1DF8EF7D2C070B831C4722564BE54F7F4D6DA67E9657C7",
+                      "bytes":  13183
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/monitor.c",
+                      "kind":  "upstream-copy",
+                      "sha256":  "8E8EE366F19BC2C3E9D86492C3780C9AFB167B5B1AF8B8324FAECA25BF3C644C",
+                      "bytes":  44060
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/monitorp.h",
+                      "kind":  "upstream-copy",
+                      "sha256":  "0CDFF67EE48663C94179D71DE0591413792148A4E552B6BF293C2920310A2711",
+                      "bytes":  5960
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/sas.c",
+                      "kind":  "upstream-copy",
+                      "sha256":  "DCD0B85BB5907731FC1A070E74C0A4188E91F3CF991FBD68E4029954BEC0DB54",
+                      "bytes":  77552
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/sas4gen.h",
+                      "kind":  "upstream-copy",
+                      "sha256":  "4B3D836BE7A6C34EEC97413C29E2A41EC362FBBFF439E3F67FE8403CC85BDF10",
+                      "bytes":  859
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/sources",
+                      "kind":  "upstream-copy",
+                      "sha256":  "D765571051D202A3032F99C6D9CCABBA919257981A038FEAC3EDCCED13D5D2E9",
+                      "bytes":  153
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/spcstubs.c",
+                      "kind":  "upstream-copy",
+                      "sha256":  "4970A4DCF9B08ADFC65FBC7BCAAC2B34178C5AF92DD03752F7526A4B080230D7",
+                      "bytes":  1256
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/i386/thread.c",
+                      "kind":  "upstream-copy",
+                      "sha256":  "7029EF05D7EEB5D3B3859550BC5C19235F1465C2D83FFE168DFDBA28BE16648F",
+                      "bytes":  6003
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/makefile",
+                      "kind":  "upstream-copy",
+                      "sha256":  "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459",
+                      "bytes":  247
+                  },
+                  {
+                      "path":  "ntvdmpatch/experimental/haxm/v86/haxm/sources",
+                      "kind":  "upstream-copy",
+                      "sha256":  "E4BDDEEAEBD9F33A4060B006726B8296CBEFB4274F061AC48A35EB4E4D0E9F2B",
+                      "bytes":  1006
+                  }
+              ]
+}

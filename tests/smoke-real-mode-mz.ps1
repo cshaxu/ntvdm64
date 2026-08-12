@@ -1,0 +1,14 @@
+param([Parameter(Mandatory = $true)][string]$Nvtdm)
+
+$program = Join-Path $env:TEMP ("nvtdm-mz-" + [guid]::NewGuid() + ".exe")
+try {
+    # MZ header: 2 paragraphs, no relocations, entry 0000:0000, then exit 9.
+    [byte[]]$header = 0x4D,0x5A,0x25,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0xFF,0xFF,0x00,0x00,0xFE,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x1C,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+    [byte[]]$code = 0xB8,0x09,0x4C,0xCD,0x21
+    [System.IO.File]::WriteAllBytes($program, $header + $code)
+    & $Nvtdm --probe-real-mode $program | Out-Null
+    if ($LASTEXITCODE -ne 9) { throw "MZ probe did not return expected exit: $LASTEXITCODE" }
+}
+finally {
+    Remove-Item -LiteralPath $program -Force -ErrorAction SilentlyContinue
+}

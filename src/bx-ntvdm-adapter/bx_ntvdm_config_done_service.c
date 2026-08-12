@@ -1,0 +1,3 @@
+#include "bx_ntvdm_config_done_service.h"
+#include <stdint.h>
+int bx_ntvdm_config_done_service_v1_dispatch(const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r){if(!e||!c||!w||!r||!bx_ntvdm_exception_event_v1_valid(e)||!bx_ntvdm_cpu_state_v1_valid(c)||!bx_ntvdm_instruction_window_v1_valid(w)||e->vector!=6u||c->execution_mode!=BX_NTVDM_CPU_EXECUTION_REAL||(c->eax&0xffu)!=0u||w->valid_bytes<3u||w->bytes[0]!=0xc4u||w->bytes[1]!=0xc4u||w->bytes[2]!=0x5eu||e->fault_rip>UINT64_MAX-3u)return 0;return bx_ntvdm_cpu_result_v2_resume(r,e->fault_rip+3u);}

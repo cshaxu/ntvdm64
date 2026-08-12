@@ -1,0 +1,382 @@
+{
+    "schema":  "ntdos64-opennt-product-host-import-v1",
+    "component":  "OpenNT historical product-host reference inputs",
+    "upstream_repository":  "https://github.com/Paolo-Maffei/OpenNT",
+    "upstream_revision":  "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "source_root":  "D:\\home\\repos.hobby\\opennt",
+    "research_restriction":  "Research-only, default-disabled reference inputs. These files are not added to any ntdos64 runtime or CMake target by this import.",
+    "imported_utc":  "2026-08-08T06:48:30Z",
+    "files":  [
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/c_regs.c",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/c_regs.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  5085,
+                      "sha256":  "9AB5185CD9D8A3CA163BF4654321C31C73ADCF3127BC574A3A4574CC1366DE95"
+                  },
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/cdefine.inc",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/cdefine.inc",
+                      "kind":  "upstream-copy",
+                      "bytes":  1154,
+                      "sha256":  "A5CC355BFAB633968217C85A4BB210F684039E08E7784578800C672F65772F14"
+                  },
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/makefile",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/makefile",
+                      "kind":  "upstream-copy",
+                      "bytes":  247,
+                      "sha256":  "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459"
+                  },
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/makefile.std",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/makefile.std",
+                      "kind":  "upstream-copy",
+                      "bytes":  247,
+                      "sha256":  "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459"
+                  },
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/ntvdm.c",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/ntvdm.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  9110,
+                      "sha256":  "693A169CF1E91435C326EE05A17C928E85AF10982C2C3BB95A5631AE76415A0A"
+                  },
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/ntvdm.prf",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/ntvdm.prf",
+                      "kind":  "upstream-copy",
+                      "bytes":  10776,
+                      "sha256":  "00D94378F996EDD8703F884524398D73F7BFDDB0E5ABBC0CA23633471559937B"
+                  },
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/ntvdm.src",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/ntvdm.src",
+                      "kind":  "upstream-copy",
+                      "bytes":  4278,
+                      "sha256":  "D47400179C1388B58FB8EAEC8331C6EEA16EE548BBA10E7AFBE588E9549BD0BC"
+                  },
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/resource.rc",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/resource.rc",
+                      "kind":  "upstream-copy",
+                      "bytes":  6091,
+                      "sha256":  "3E3AC9B1001127E3900C1BA5A2309C28AAA97ECF2882FA6F4E9F20E600A26D8D"
+                  },
+                  {
+                      "path":  "base/mvdm/softpc.new/obj.vdm/sources",
+                      "source_path":  "base/mvdm/softpc.new/obj.vdm/sources",
+                      "kind":  "upstream-copy",
+                      "bytes":  4503,
+                      "sha256":  "F80C0D8513EA68500C792674D05DEE7F42F1F76AED98F4F5CA6BC409FFD61F3E"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/fakebop.c",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/fakebop.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  17753,
+                      "sha256":  "0E24CD7D4828F3DFBCDB77484816B5F991164E09FB3E6EDAD021A648455118E1"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/fakeinit.c",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/fakeinit.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  3923,
+                      "sha256":  "B749F4EA4B08E51A5C6C7FCDC01C6BE8A28C27A576D75BECEE9692C95A83493B"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/fakekbd.c",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/fakekbd.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  6703,
+                      "sha256":  "A6090B757ED4157BE5D0BB8D0D179F8BA275FB4B3A97F6ED43DAA5368DB06E13"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/fakevid.c",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/fakevid.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  4899,
+                      "sha256":  "303EB5D066D565F6A061A5A7FBA5F4E1D5BC876E0816A809FEDB24AECC2679DC"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/fun.h",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/fun.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  610,
+                      "sha256":  "DFFD43367CB54A386DFB3E0D49FF6A553F9328283D2C53297B4EBCDC36459E5E"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/softpc.c",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/softpc.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  10455,
+                      "sha256":  "4272B1AAFA096106981FB1445846C5E3C317F8849B084734C1C2F472C5C3B3F6"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/sources",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/sources",
+                      "kind":  "upstream-copy",
+                      "bytes":  187,
+                      "sha256":  "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/stubs.c",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/stubs.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  494,
+                      "sha256":  "41825D03737AB8B001993798A2FCD20D752A81BDC8CF95D098B5929E70A97D4B"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/x86.h",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/x86.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  11177,
+                      "sha256":  "EB08D62FBD5FD91535008F8631F33BDEDB685F88A40BA085852F497130B1E734"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/xbios.h",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/xbios.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  4770,
+                      "sha256":  "B402F5C2234279A8AF13EC749CB54EE6AC75A2B0858D55503A56AAB9611F379A"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/xbiosdsk.h",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/xbiosdsk.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  10605,
+                      "sha256":  "124BEB9004CE7370536D2D49811AA0A1841BE01FDD0EF78A8E6A956FE897FAF2"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/xbioskbd.h",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/xbioskbd.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  1054,
+                      "sha256":  "4880BC4E4D5E2FD18F7E6E196B38C9467D03D9F114B940F194D0545D8418FC02"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/xbiosvid.h",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/xbiosvid.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  2004,
+                      "sha256":  "2B80EC8CEC0E389B4A0B269258742C16262A5C6728DF5DEBB7AEF472658BBD87"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/xguest.h",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/xguest.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  12924,
+                      "sha256":  "1FC978BC102B6FE08D5343D680108AC4BF5405DC693D00004622B11D4C564926"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/i386/xwincon.h",
+                      "source_path":  "base/mvdm/v86/scaffold/i386/xwincon.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  6187,
+                      "sha256":  "B4249A9C3B62170E78CC2FF5A287170882115C8407BC899FF270B7D383BE5EE9"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/makefile",
+                      "source_path":  "base/mvdm/v86/scaffold/makefile",
+                      "kind":  "upstream-copy",
+                      "bytes":  247,
+                      "sha256":  "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/ntvdm.def",
+                      "source_path":  "base/mvdm/v86/scaffold/ntvdm.def",
+                      "kind":  "upstream-copy",
+                      "bytes":  1048,
+                      "sha256":  "E1E12B2DEE28FF3DE76805E31E99277E6484E3CF13D426C1D054615A5D0516C6"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/sources",
+                      "source_path":  "base/mvdm/v86/scaffold/sources",
+                      "kind":  "upstream-copy",
+                      "bytes":  4513,
+                      "sha256":  "1E4BC1DD42FA74E7F36FD87C6921BC260AF51A37E378B8C025E82935BC34B571"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/vdm.ico",
+                      "source_path":  "base/mvdm/v86/scaffold/vdm.ico",
+                      "kind":  "upstream-copy",
+                      "bytes":  766,
+                      "sha256":  "B18F345C28A1DCD24B8611A66C33CE469BE4FA13AF79FF575818441C89030E4B"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/vdm.rc",
+                      "source_path":  "base/mvdm/v86/scaffold/vdm.rc",
+                      "kind":  "upstream-copy",
+                      "bytes":  1663,
+                      "sha256":  "3C245BECDC79C0E89CF531776C4BE7391D2B8257C17251C2F44B631E36A1BE38"
+                  },
+                  {
+                      "path":  "base/mvdm/v86/scaffold/wow.ico",
+                      "source_path":  "base/mvdm/v86/scaffold/wow.ico",
+                      "kind":  "upstream-copy",
+                      "bytes":  766,
+                      "sha256":  "DB6FCA1C1A18A5CA7EDF7AC3DD0E66C231881F4113A598BF547FDE931F7A29AF"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/alpha/helpp.c",
+                      "source_path":  "base/mvdm/ieuvddex/alpha/helpp.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  620,
+                      "sha256":  "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/alpha/sources",
+                      "source_path":  "base/mvdm/ieuvddex/alpha/sources",
+                      "kind":  "upstream-copy",
+                      "bytes":  29,
+                      "sha256":  "3EB1457C45EFD8C92FA64699696DE04B30A5134BF3F32DB228E38B23A2900C80"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/data.c",
+                      "source_path":  "base/mvdm/ieuvddex/data.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  698,
+                      "sha256":  "C8545C33806E1CFCFEE94971542232E266A8693F0B41C04A2FD77A3D5232680D"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/help.c",
+                      "source_path":  "base/mvdm/ieuvddex/help.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  1474,
+                      "sha256":  "F27DDDEE55C29F080A4679BC1653384C28147961D497D04F2A7F85C89F3F13E4"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/i386/helpp.c",
+                      "source_path":  "base/mvdm/ieuvddex/i386/helpp.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  1921,
+                      "sha256":  "ABD758FE693D3BBB9DEBD649E890AA425B96A6A780B4E8D466E7A58D21B60D24"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/i386/profile.c",
+                      "source_path":  "base/mvdm/ieuvddex/i386/profile.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  7429,
+                      "sha256":  "04AB8D21C213F98829229C0EAADF5BCE0A2A48F455075998A7B12CC4793ABA6F"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/i386/reflect.c",
+                      "source_path":  "base/mvdm/ieuvddex/i386/reflect.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  5156,
+                      "sha256":  "AB3D3DB2571D39DBA5E6DF8EA51743EF29DDBCB23265A11C4B3E44A8CD5F72A2"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/i386/regs.c",
+                      "source_path":  "base/mvdm/ieuvddex/i386/regs.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  2771,
+                      "sha256":  "49618545C379EC52E42777962062534EABB6086943CCA7E208DC6E04D4AFCE99"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/i386/sources",
+                      "source_path":  "base/mvdm/ieuvddex/i386/sources",
+                      "kind":  "upstream-copy",
+                      "bytes":  139,
+                      "sha256":  "FF2B196A612D536EA3254730F0CE0C0CC36575151D282E8CC088006C779B18EF"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/i386/vdmtib.c",
+                      "source_path":  "base/mvdm/ieuvddex/i386/vdmtib.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  6916,
+                      "sha256":  "F4FB7E8955CACB599D9E360AB0370A4D987C00DA9839B270972DC8A6108E4F07"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/ieuvddex.h",
+                      "source_path":  "base/mvdm/ieuvddex/ieuvddex.h",
+                      "kind":  "upstream-copy",
+                      "bytes":  5078,
+                      "sha256":  "17257EB303D196B6CD7449A7F2F63FF0D3F865DF550C9D760F9D536B17BBCC37"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/makefile",
+                      "source_path":  "base/mvdm/ieuvddex/makefile",
+                      "kind":  "upstream-copy",
+                      "bytes":  247,
+                      "sha256":  "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/mips/helpp.c",
+                      "source_path":  "base/mvdm/ieuvddex/mips/helpp.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  620,
+                      "sha256":  "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/mips/sources",
+                      "source_path":  "base/mvdm/ieuvddex/mips/sources",
+                      "kind":  "upstream-copy",
+                      "bytes":  27,
+                      "sha256":  "95FC212046390F868794E00AE013E9AB1E75E39A47B4BB8184BD0E5E7B512C7F"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/ntvdm.def",
+                      "source_path":  "base/mvdm/ieuvddex/ntvdm.def",
+                      "kind":  "upstream-copy",
+                      "bytes":  390,
+                      "sha256":  "F56160B7111DBBF2F3B4283B0DF29FA7CCEABEFA9B79C34C103E65C2A8103BFF"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/pmode.c",
+                      "source_path":  "base/mvdm/ieuvddex/pmode.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  6542,
+                      "sha256":  "30187F0832C3EA0BC1933321FB247EEC4B6D3D2A4749AD05375DD44409BE0349"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/ppc/helpp.c",
+                      "source_path":  "base/mvdm/ieuvddex/ppc/helpp.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  620,
+                      "sha256":  "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/ppc/sources",
+                      "source_path":  "base/mvdm/ieuvddex/ppc/sources",
+                      "kind":  "upstream-copy",
+                      "bytes":  25,
+                      "sha256":  "01FA076021A5E7603902A736CA60FEEF8CBB66626050B9012C945C35662765C2"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/procdep.c",
+                      "source_path":  "base/mvdm/ieuvddex/procdep.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  15377,
+                      "sha256":  "33912500D91E1C6A59C7986F19C9E7B251371EE54F675407E1CBD90B8AD7910A"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/sources",
+                      "source_path":  "base/mvdm/ieuvddex/sources",
+                      "kind":  "upstream-copy",
+                      "bytes":  930,
+                      "sha256":  "442081D62891ABCE4B675FC23634EC7FC724659483DD56BD67CF65632A6CA41B"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/system.c",
+                      "source_path":  "base/mvdm/ieuvddex/system.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  2555,
+                      "sha256":  "92A40AD25C423891B11F9D8EC993B75603CF01AE1C0A8966E1D5CBA1C63699DD"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/trace.c",
+                      "source_path":  "base/mvdm/ieuvddex/trace.c",
+                      "kind":  "upstream-copy",
+                      "bytes":  8513,
+                      "sha256":  "B1F435775188A93D9BDD20CFDF4DE08E0194D6AA86B695F092336E441A6B9143"
+                  },
+                  {
+                      "path":  "base/mvdm/ieuvddex/vdmdll.rc",
+                      "source_path":  "base/mvdm/ieuvddex/vdmdll.rc",
+                      "kind":  "upstream-copy",
+                      "bytes":  254,
+                      "sha256":  "364A6BB9FA06D46FAFFD8876006501BABEA8CA9F9EB165F28CA47EADD33FB059"
+                  }
+              ]
+}

@@ -1,0 +1,414 @@
+{
+    "SchemaVersion":  1,
+    "Toolchain":  "MS-DOS 4.00 TOOLS",
+    "UpstreamPath":  "D:\\home\\repos\\ntdos64\\toolchain-probe\\reference\\msdos4\\v4.0\\src\\TOOLS",
+    "FileCount":  81,
+    "ByteCount":  2838384,
+    "Files":  [
+                  {
+                      "Path":  "ASC2HLP.EXE",
+                      "Bytes":  62040,
+                      "Sha256":  "5D8AFB2D23A13E93B321AF122DFF443EE25CA5FEDEB5FEEB1A373B9B6E511812"
+                  },
+                  {
+                      "Path":  "ATTRIB.EXE",
+                      "Bytes":  10624,
+                      "Sha256":  "7FC2696A3380B98670CDDE913E3D81EADDAAB6DB8661B8371B5601AF269E7651"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\ASSERT.H",
+                      "Bytes":  699,
+                      "Sha256":  "6A32B3D4B878A7CAFFDB6EA632B951D5A6CAFA4CB1E81E00C112D9DD8FE97CDC"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\BIOS.H",
+                      "Bytes":  4866,
+                      "Sha256":  "E90ADF1F14F8759007492240785FEEFEF435AB1C2D2B6736B2F4B31C625E21BB"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\CONIO.H",
+                      "Bytes":  952,
+                      "Sha256":  "4C58132772FFB983E70D2EC2F6EAB920E518DE251094623ABC34718618B45EDE"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\CTYPE.H",
+                      "Bytes":  2465,
+                      "Sha256":  "C96D2C704A0EA7B026B541703A57E2773F3C25D07843273CDC48BDCE5D9D2FF4"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\DIRECT.H",
+                      "Bytes":  690,
+                      "Sha256":  "687ECC8484732C72DA3C8B340BB1319A31D0580539BAED457AA73D82A1037B5D"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\DOS.H",
+                      "Bytes":  5917,
+                      "Sha256":  "DD9F790B37B77707ADCA97D7C9024D3445C80C5401D29ED724B25DFCBA5E283E"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\ERRNO.H",
+                      "Bytes":  1283,
+                      "Sha256":  "55E3CED19F97845A0461DC54359C6EC10C3FBC9B893CF64CCBC1CE553BF1642A"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\FCNTL.H",
+                      "Bytes":  1255,
+                      "Sha256":  "79915EE9A0E6D182C4D7F1A0BCA12D3B07CEC3A0DBEA033DBE58821FD99E0857"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\FLOAT.H",
+                      "Bytes":  6011,
+                      "Sha256":  "386D2DD80397DE6A2CB9AB66743878167B253B11F57B19BC6EF00089F03D94BA"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\GRAPH.H",
+                      "Bytes":  7480,
+                      "Sha256":  "3A2D85CE58B3C9009E0C57727A84962E167A3F2168C778377A1BFFC4A35875C3"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\IO.H",
+                      "Bytes":  1294,
+                      "Sha256":  "41A51F1EAB9E46FB62F21C69F2412F02F9D6A2E522734340F222832D565DE9D9"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\LIMITS.H",
+                      "Bytes":  1553,
+                      "Sha256":  "AFE7F9B89DED5925DEB4F4FF02C5BD6C7105F5770EE42FA6D6B2ECEFF20C193D"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\MALLOC.H",
+                      "Bytes":  3097,
+                      "Sha256":  "AA0CB86F9D6B0F475F339F0452FEE810F321C61B3F0C9E23562077A5D32A76E4"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\MATH.H",
+                      "Bytes":  3324,
+                      "Sha256":  "4DF668BF2766DCADE39669A9A4DC5280FF7A8C573AF5A71AC8A00F725B93D825"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\MEMORY.H",
+                      "Bytes":  1065,
+                      "Sha256":  "AD17BB794DEF6CBFE18A83F786DD1940BED498AF4566F2A5F6242E0E5C7B1BDA"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\PROCESS.H",
+                      "Bytes":  1988,
+                      "Sha256":  "0D005443E2782762CD7F0146CC570E5E774CCE11D59E91DAC2C07CBE046875FA"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SEARCH.H",
+                      "Bytes":  1025,
+                      "Sha256":  "2D476B5F3629AB2126835923B724310FED71D0CD5B84408F4C2ED9109358D34A"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SETJMP.H",
+                      "Bytes":  907,
+                      "Sha256":  "1A3265E579C8C7C226429B67531879D7A750B1756BC3069FAD3CD5DC88093A48"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SHARE.H",
+                      "Bytes":  554,
+                      "Sha256":  "F72AFE01CCAFD4541E7289FC2D640056564D3E35A0948A03C8FBFD0368B1312D"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SIGNAL.H",
+                      "Bytes":  1905,
+                      "Sha256":  "8ADE415619A7AF677DF7B0B57522DE0A1E25A4B6B17F6B9433948BE80AE04E5E"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\STDARG.H",
+                      "Bytes":  614,
+                      "Sha256":  "1375A4706D03A1258C7F75F786ABDD645C15B646F1C131F19400BE91A1E19CA3"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\STDDEF.H",
+                      "Bytes":  1100,
+                      "Sha256":  "EF005074DBC269245308884F36E549698D5791726C0E6F50B7FECD063935701F"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\STDIO.H",
+                      "Bytes":  4500,
+                      "Sha256":  "5F33039B1DEEA27B376DC48EBF42D2716AA074C59A520744E01534229D373434"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\STDLIB.H",
+                      "Bytes":  4900,
+                      "Sha256":  "9F2969D0FF20AD4F24506BD3EE06ED04B357894E8B08FB2129D0C705861D026A"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\STRING.H",
+                      "Bytes":  2209,
+                      "Sha256":  "B1643C5775110A0222C4B0862EE9C385E8EA58130D19F8E995C31098D9BF9BF0"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SYS\\LOCKING.H",
+                      "Bytes":  573,
+                      "Sha256":  "F44015D9C3EFCC1965D28AE027FBFC9813A807F01C32F601E96565635E3EA118"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SYS\\STAT.H",
+                      "Bytes":  1497,
+                      "Sha256":  "EEA113B024F896A5920AFF276B2859DAC276DCD03C8907E4F1A1366B2EDC7C29"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SYS\\TIMEB.H",
+                      "Bytes":  844,
+                      "Sha256":  "D94AE6AC1CB993610C3F7C664D7B8A5E1B79790BC89D92236943546E27851741"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SYS\\TYPES.H",
+                      "Bytes":  849,
+                      "Sha256":  "AF324B11B71EBFC8404E8F726764F91308C6B3FEA20C9441234087FAFAA724EA"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\SYS\\UTIME.H",
+                      "Bytes":  1061,
+                      "Sha256":  "D83AF1CEE3C85C53DD2766B0B42E672DE6E9B3260236DEF298A371D7DBFD19D5"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\TIME.H",
+                      "Bytes":  2342,
+                      "Sha256":  "9B26227E1F2EDAA5E428F08D62BAF0C686D89B8D6C0046CE5A3B918C5675B561"
+                  },
+                  {
+                      "Path":  "BLD\\INC\\VARARGS.H",
+                      "Bytes":  642,
+                      "Sha256":  "9D4D6F8357B276ACDC49E9AB509F6C253A9EEBB5060AD3E29B0215C0669F8005"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\BINMODE.OBJ",
+                      "Bytes":  127,
+                      "Sha256":  "30C5CD37A76033A243029F1F6B933B911BDC50425914BE251030324F748D853D"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\CLIBCE.LIB",
+                      "Bytes":  205245,
+                      "Sha256":  "30D0BBF9D097B1A3787ED674EF2750EEF75D07CEF1823F425ADA9C0DC92EA5AF"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\CLIBCR.LIB",
+                      "Bytes":  141301,
+                      "Sha256":  "ADEDEF4EA1DEEF051C56D9CF4863FCDC2A3722EDDC3602D0D73DF03B96D4ED0D"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\CLIBFP.LIB",
+                      "Bytes":  38307,
+                      "Sha256":  "412C4BF1866549E0AC0DC8BBE7E33B95751C58E50A1F987F4AA66FFA2CE32178"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\CVARSTCK.OBJ",
+                      "Bytes":  487,
+                      "Sha256":  "4A91FD60365061E64F243ABCD77CF96EEA085C6228B077014223EAAC12D56F7E"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\EM.LIB",
+                      "Bytes":  16921,
+                      "Sha256":  "77620FA639AC91FAD940C3539A66F47ADBBB124958B38E540D386DE79F582403"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\GRAPHICS.LIB",
+                      "Bytes":  59357,
+                      "Sha256":  "4A4FC3A026BF99D503C77BC8208CF3A06BC57188DF4540D705FF57F789189FD0"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\LIBH.LIB",
+                      "Bytes":  14209,
+                      "Sha256":  "6729E396014D37921B0B331CD0F9A3A821ABB725FD2EE0E795D71B0E4B627E9C"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\LLIBCE.LIB",
+                      "Bytes":  210877,
+                      "Sha256":  "5A1B1F376B59A029FD60DCDB3BCB1F1F350786E1442B09529590AAC0C81F156F"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\LLIBCR.LIB",
+                      "Bytes":  142837,
+                      "Sha256":  "7961EAFCE689DBF17ACC3FD6FE34BE6BC000F60D0F02FB1AF2602B09112F3D2E"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\LLIBFP.LIB",
+                      "Bytes":  39331,
+                      "Sha256":  "35769669C1330A4C854CA1C265B78CC25A1D5C2489B0515A89C877D37B68D008"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\LVARSTCK.OBJ",
+                      "Bytes":  487,
+                      "Sha256":  "670A8A7EE92A7CC81D2A7282CB3B756EC207D994AEE6CC214F795F794844A191"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\MLIBCE.LIB",
+                      "Bytes":  196997,
+                      "Sha256":  "FD7775A15C5B94361DC59AD93F1D79F2EEDB0A90CEFC4C47C3483DC4EDDBCAD6"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\MLIBCR.LIB",
+                      "Bytes":  133071,
+                      "Sha256":  "A8C6BF65551559A795F3BDCEF3F70178086BF944296413716E48CBA95814B9CB"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\MLIBFP.LIB",
+                      "Bytes":  38305,
+                      "Sha256":  "A6AED77CAB170658AA7010B297008621E8F4A047553F3E43CAAA00FA8B423314"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\MVARSTCK.OBJ",
+                      "Bytes":  507,
+                      "Sha256":  "F4C9DAFFEAFD50AF0E26E1F8CAE176174E075FC617A2F574463FBC9E79867B9D"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\SETARGV.OBJ",
+                      "Bytes":  143,
+                      "Sha256":  "FADC39236423AD7D6C86A5A6C7C1085C8E619FD5876AF0B4AD2EEBC7E0D09751"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\SLIBCE.LIB",
+                      "Bytes":  194437,
+                      "Sha256":  "D077B91D63D051D3333CA53F81CB15B0597CFDB6EC8A7FADC60F76AB6883E24F"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\SLIBCR.LIB",
+                      "Bytes":  132047,
+                      "Sha256":  "CE2DC6D740AE477135E2D9F11802C2357914994835E82A165423B43CCD30728F"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\SLIBFP.LIB",
+                      "Bytes":  37281,
+                      "Sha256":  "7A712089189BC34D66E579FC76BE411BCD24A39863E6E8FB7203B71A1FCFDC9E"
+                  },
+                  {
+                      "Path":  "BLD\\LIB\\SVARSTCK.OBJ",
+                      "Bytes":  507,
+                      "Sha256":  "8B882552BE5F0D4DEA0608A8DA96021245589FB10BEA5A473300A0B5E345D36A"
+                  },
+                  {
+                      "Path":  "BUILDIDX.EXE",
+                      "Bytes":  15895,
+                      "Sha256":  "10E6FB22DF1521A2B200E708CB4A8E8D1748CC68D1C4ED1E65531596F1B11F0D"
+                  },
+                  {
+                      "Path":  "BUILDMSG.EXE",
+                      "Bytes":  23181,
+                      "Sha256":  "0CDCB1E36D9017F7F0E66FD4C539EB34DDEB74073E74F50733943A54CF7C707C"
+                  },
+                  {
+                      "Path":  "C1.ERR",
+                      "Bytes":  14393,
+                      "Sha256":  "53C4D172D684080C45C1B94F5EEAA7C514CE0147AA2FD2D52CADC29A04671217"
+                  },
+                  {
+                      "Path":  "C1.EXE",
+                      "Bytes":  114521,
+                      "Sha256":  "8D33C6D87AA74B042B7D7CB01A23241C4CC3B1B8B446B8F1548BD167E3C7BF62"
+                  },
+                  {
+                      "Path":  "C1L.EXE",
+                      "Bytes":  149303,
+                      "Sha256":  "BDD8189BE005009331FF61DD3CB7A0CE9B246EA522DD8AB2C83A8339E5C30F09"
+                  },
+                  {
+                      "Path":  "C2.EXE",
+                      "Bytes":  202919,
+                      "Sha256":  "A513C98BC2CE11BD00901B560252B5727AB9B6BACD9319B9EABA08F9E314B99B"
+                  },
+                  {
+                      "Path":  "C23.ERR",
+                      "Bytes":  3272,
+                      "Sha256":  "F9EDB742D0B3A4D17E489D672334EF0FAC46767063122D338F55E5933F533B07"
+                  },
+                  {
+                      "Path":  "C3.EXE",
+                      "Bytes":  125221,
+                      "Sha256":  "C1269628534D5DEB48171BA9E42F761DCB1C28A0087C73780DB0EE2E4352E6FA"
+                  },
+                  {
+                      "Path":  "CL.ERR",
+                      "Bytes":  2276,
+                      "Sha256":  "031C67018AB843DB00765009611EA1FCB70C5FFFD9FB8FA5635FDDD84DC6828F"
+                  },
+                  {
+                      "Path":  "CL.EXE",
+                      "Bytes":  31329,
+                      "Sha256":  "CAD40CEF732BEEA3455225FBD62286C664166DB7C3F87E2402E22B2E3F107771"
+                  },
+                  {
+                      "Path":  "CL.HLP",
+                      "Bytes":  2169,
+                      "Sha256":  "1443B8E9D7EB34417FB77986EFB9A667B85A489DD7B44A337211D809EFDFA783"
+                  },
+                  {
+                      "Path":  "COMPRESS.COM",
+                      "Bytes":  1368,
+                      "Sha256":  "D0DEB39A5D1946FE54A6B0B4CC91FBFC9547703AE1408DC9CE04F876D5DBE8F7"
+                  },
+                  {
+                      "Path":  "CONVERT.EXE",
+                      "Bytes":  16340,
+                      "Sha256":  "26176C60027009F40D51F9ED1271779A3D2953B88DAF559BADAF7FB20D5EC03A"
+                  },
+                  {
+                      "Path":  "DBOF.EXE",
+                      "Bytes":  10262,
+                      "Sha256":  "7F853D1DB3947CEE6612D5A46E262BFF20CFAA8583FDB72BF9C158F56336DE4B"
+                  },
+                  {
+                      "Path":  "EXE2BIN.EXE",
+                      "Bytes":  3050,
+                      "Sha256":  "A66A3875D7F310D95312651F38D0B43246D3BACFA720F28C49445FCC10BBFA8F"
+                  },
+                  {
+                      "Path":  "EXEC.EXE",
+                      "Bytes":  9299,
+                      "Sha256":  "F1BA635FDA038D541645318DE86094E04E69E3BDC4C79896B02B9758666B57DE"
+                  },
+                  {
+                      "Path":  "EXEFIX.EXE",
+                      "Bytes":  11776,
+                      "Sha256":  "6ADE9F789D8F7C6D6834028EAAA0588010581C96062EADB70E859E7DBE65F97B"
+                  },
+                  {
+                      "Path":  "EXEMOD.EXE",
+                      "Bytes":  12336,
+                      "Sha256":  "EFE11A2F61D257C2737CA0AB2B731FD9E2DDCF0F06BB79E77AA6CEFDB4C0C399"
+                  },
+                  {
+                      "Path":  "EXEPACK.EXE",
+                      "Bytes":  14803,
+                      "Sha256":  "568554322D29E46F79C0C760AC2391CB0689DC7ACB9AED79A428194EC6FB83E7"
+                  },
+                  {
+                      "Path":  "LIB.EXE",
+                      "Bytes":  49661,
+                      "Sha256":  "21094B0F11EA0567E4EB71182B2749ADA558BC3C9E9E8F6EF7C149A0E67B7C6F"
+                  },
+                  {
+                      "Path":  "LINK.EXE",
+                      "Bytes":  65539,
+                      "Sha256":  "124A3C800EDC16B60F696D35A9DFEC798B68B78FE2CA90C5988EA76BDEAB1A8A"
+                  },
+                  {
+                      "Path":  "MASM.EXE",
+                      "Bytes":  110703,
+                      "Sha256":  "1C6286C69B616160B8475AD17453EE872702A2C98075C2159EC792A1C745275F"
+                  },
+                  {
+                      "Path":  "MENUBLD.EXE",
+                      "Bytes":  14831,
+                      "Sha256":  "2A81FAF702FB1FC50E49FE80D0F3C5B00509232364823E0C39A47B1A34F3C0A3"
+                  },
+                  {
+                      "Path":  "NMAKE.EXE",
+                      "Bytes":  70795,
+                      "Sha256":  "229F7E7F0AEA1A2204E376B3EC18CAE2D014CD2E59DF05451A9E8837CECFDE7D"
+                  },
+                  {
+                      "Path":  "NOSRVBLD.EXE",
+                      "Bytes":  15607,
+                      "Sha256":  "EACB1DDE40274DD8C6BA4FD5B7C08E44E720FA2B32B147D4012343E68215F80E"
+                  },
+                  {
+                      "Path":  "TOOLS.INI",
+                      "Bytes":  2629,
+                      "Sha256":  "47D66C54A62D1ABDF2D6913C11917DC43DDF4DEAFDE29B57ED64CA5FAE1BC3D8"
+                  }
+              ]
+}

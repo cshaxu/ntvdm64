@@ -1,0 +1,174 @@
+{
+    "SchemaVersion":  1,
+    "Toolchain":  "OpenNT 4.5 tools16",
+    "UpstreamPath":  "D:\\home\\repos.hobby\\opennt-4.5\\nt\\private\\mvdm\\tools16",
+    "FileCount":  33,
+    "ByteCount":  3546665,
+    "Files":  [
+                  {
+                      "Path":  "buildidx.exe",
+                      "Bytes":  16541,
+                      "Sha256":  "6A301EAEE8EA8516E541DA2A61A22F1DB7D09B15C278A88A8D73083AAC0F4D91"
+                  },
+                  {
+                      "Path":  "buildmsg.exe",
+                      "Bytes":  48828,
+                      "Sha256":  "0D8EA59396A769E440549322A2EC9D1AB70423147E702EF1B1F42606CADD50CD"
+                  },
+                  {
+                      "Path":  "c1.err",
+                      "Bytes":  57513,
+                      "Sha256":  "2F6AF4A7CA7DD061E340F517609482FD263845F2F2B9ED837490A3A980D5018D"
+                  },
+                  {
+                      "Path":  "c13216.exe",
+                      "Bytes":  341504,
+                      "Sha256":  "3170A7C6E90FAA3FC593D7B8514C8E23D67E8BD5DE0EB3D8173C8B89BBE1FA1C"
+                  },
+                  {
+                      "Path":  "c1xx3216.exe",
+                      "Bytes":  551936,
+                      "Sha256":  "86F1B2F4411FC9AD48030C0503D92F53D93BE9F020404CE8BD32CF3D67FD41D1"
+                  },
+                  {
+                      "Path":  "c23.err",
+                      "Bytes":  4631,
+                      "Sha256":  "816CF9EE6DEDDD4CBB1655F5ABA516B9471B6CF6494DE9D44E52D9D59D73E6FF"
+                  },
+                  {
+                      "Path":  "c23216.exe",
+                      "Bytes":  502272,
+                      "Sha256":  "153F14C922089C962FE42668BFC38D3A68ADEEAD50D65E0E6A196DFC56B211CC"
+                  },
+                  {
+                      "Path":  "c23pcd.exe",
+                      "Bytes":  331264,
+                      "Sha256":  "5A4820B00A5E6310AE5D2976423B8359E97F475E7F1C597F39CEDD450C975FD8"
+                  },
+                  {
+                      "Path":  "c33216.exe",
+                      "Bytes":  246784,
+                      "Sha256":  "E38B304E6F3F3ABF9B7AFCC2D4867BD19BB89C2789436AA96F91C8333C7AB044"
+                  },
+                  {
+                      "Path":  "cl.def",
+                      "Bytes":  1717,
+                      "Sha256":  "9AEF258DA8E4A37245306B7E238AE89C6099C323149881E1C42E5E0CDDE4E9BA"
+                  },
+                  {
+                      "Path":  "cl.err",
+                      "Bytes":  1792,
+                      "Sha256":  "ABAF652BD8FD8A0CF4241FB58E7DCB420267C0921126F2146D5CEE591C9FC097"
+                  },
+                  {
+                      "Path":  "cl.msg",
+                      "Bytes":  4279,
+                      "Sha256":  "3EF4C6D6DBC46B40B159330300AF63A6EC0093207970FD95266A5267D8F865E8"
+                  },
+                  {
+                      "Path":  "cl16.exe",
+                      "Bytes":  91648,
+                      "Sha256":  "FD857E7B5DF2431B1312B987F3729EE7101AAC59D21CC2E14E82D3F1DD6D97D3"
+                  },
+                  {
+                      "Path":  "cvpack.err",
+                      "Bytes":  2313,
+                      "Sha256":  "B13DB1DB1C6E66F497B569CFE4C039BF64EB3437ACFB158AB531D9DBACE6021F"
+                  },
+                  {
+                      "Path":  "cvpack16.exe",
+                      "Bytes":  79360,
+                      "Sha256":  "73335AB475F1C9D9027A75C137024E0897F8187A1D83F308EC9E79E794921420"
+                  },
+                  {
+                      "Path":  "fixexe.exe",
+                      "Bytes":  22016,
+                      "Sha256":  "0048DC25A8B527A5489779FE95B4B1B9367B8B56B49189FB0ED3B0D76A6B701C"
+                  },
+                  {
+                      "Path":  "getsize.exe",
+                      "Bytes":  14403,
+                      "Sha256":  "496882B8405FE1514ED4DE4F77C6C7AC923420A4D086E94A83562F175028D1C3"
+                  },
+                  {
+                      "Path":  "h2inc.exe",
+                      "Bytes":  27209,
+                      "Sha256":  "FBB1E12752C4C0A7518725EE16F98E10151634BB3840EDA9F1C136551649D189"
+                  },
+                  {
+                      "Path":  "implib.exe",
+                      "Bytes":  71168,
+                      "Sha256":  "45DC9B73FB9A46E213825970CC4E998950BCF3564BFEEFA81E51E2D64610D23C"
+                  },
+                  {
+                      "Path":  "lib16.exe",
+                      "Bytes":  134144,
+                      "Sha256":  "DCADF5E7A21A72B9C98366CEAE307DAE529002F21279B0C697BDB7BDD2B0BC05"
+                  },
+                  {
+                      "Path":  "link_60.exe",
+                      "Bytes":  131072,
+                      "Sha256":  "910ED26E6C8D72D64FAA82A7EEABB6D5C002B347024C8F1D778FDDBBB8AC1B00"
+                  },
+                  {
+                      "Path":  "link16.exe",
+                      "Bytes":  131072,
+                      "Sha256":  "910ED26E6C8D72D64FAA82A7EEABB6D5C002B347024C8F1D778FDDBBB8AC1B00"
+                  },
+                  {
+                      "Path":  "masm.exe",
+                      "Bytes":  208656,
+                      "Sha256":  "E54AFAA9565E046CD862C29A015D685DE43311ACCCF796469030E162CED6D00D"
+                  },
+                  {
+                      "Path":  "mkpublic.exe",
+                      "Bytes":  10217,
+                      "Sha256":  "5C4C7F6CA057A8DED485F6771AC27DFEA689EE9A78632237A34B84E6F55AA1A0"
+                  },
+                  {
+                      "Path":  "nosrvbld.exe",
+                      "Bytes":  16299,
+                      "Sha256":  "E49E569B7E0775BDD731BCF18CEA1D85C29DABC1AA9A7285DE51249387711665"
+                  },
+                  {
+                      "Path":  "q23.exe",
+                      "Bytes":  208384,
+                      "Sha256":  "08CCE8CF3AB01061E22F7612561CD42A0E456D8B61F5BB832BA622786A9F9E8B"
+                  },
+                  {
+                      "Path":  "rc16.exe",
+                      "Bytes":  44099,
+                      "Sha256":  "838455C5EE149D3BC2ADF2A80840E5AC0AAE138D93AC3D8876DEEE16E6833AD3"
+                  },
+                  {
+                      "Path":  "rcpp.exe",
+                      "Bytes":  99499,
+                      "Sha256":  "42268CAE70387E133BA0596B5B50F8878EBA2B6CB85FD1C6F689B2430F7BF720"
+                  },
+                  {
+                      "Path":  "rcqq.err",
+                      "Bytes":  14393,
+                      "Sha256":  "53C4D172D684080C45C1B94F5EEAA7C514CE0147AA2FD2D52CADC29A04671217"
+                  },
+                  {
+                      "Path":  "rcqq.exe",
+                      "Bytes":  99481,
+                      "Sha256":  "AD1C3EA071E9D85EBEDCB4370D6E5B1134F92DFB2065558D06A898926B807EBE"
+                  },
+                  {
+                      "Path":  "reloc.exe",
+                      "Bytes":  15635,
+                      "Sha256":  "300B58668D46C3281EF2C017409AA9300499155D6593A8A9552781D2D96CC2B3"
+                  },
+                  {
+                      "Path":  "stripdd.exe",
+                      "Bytes":  8605,
+                      "Sha256":  "748A4D0F8BF3AFD7CCE867D452EA3C475C267C9A308856C15B872D5A813039D9"
+                  },
+                  {
+                      "Path":  "stripz.exe",
+                      "Bytes":  7931,
+                      "Sha256":  "6D424555368E2F61D201DD249532672A12164C35AFB507A3E3556595511EA689"
+                  }
+              ]
+}

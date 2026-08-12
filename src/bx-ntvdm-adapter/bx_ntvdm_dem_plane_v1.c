@@ -65,7 +65,9 @@ int bx_ntvdm_dem_plane_v1_classify(
         ingress->family != BX_NTVDM_BOP_FAMILY_DEM ||
         selection->disposition != BX_NTVDM_BOP_PROVIDER_DEFERRED ||
         selection->provider_family != BX_NTVDM_BOP_PROVIDER_DEM ||
-        selection->precedence != BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT ||
+        (selection->precedence != BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT &&
+         !(ingress->service == 60u && selection->precedence ==
+            BX_NTVDM_BOP_PROVIDER_PRECEDENCE_SOURCE_DERIVED_AFTER_BLOCKER)) ||
         ingress->service >= 73u ||
         (component = bx_ntvdm_dem_plane_v1_component(ingress->service)) ==
             BX_NTVDM_DEM_COMPONENT_NONE)

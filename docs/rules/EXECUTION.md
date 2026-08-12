@@ -31,7 +31,8 @@ The binding hierarchy is M<milestone> T<task> S<subtask> P<part>.
 - **Td** is standalone documentation/governance work. It may use S and P but
   never allocates a numeric T or displaces the active numeric packet.
 
-The current product package is M0 T96. T95's legacy r1--r23 labels remain
+The current product package is recorded only by the active packet in
+`STATUS.md` (currently M0 T176). T95's legacy r1--r23 labels remain
 run/evidence iterations, not T, S, or P identifiers. Their classification and
 the Td exception are in
 [task-identifier governance](../etc/operations/task-identifier-governance.md).
