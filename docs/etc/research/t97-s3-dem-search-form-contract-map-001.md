@@ -36,6 +36,23 @@ pathname provider may enumerate only the finite BYOB resource declaration,
 copy a private ordered snapshot into adapter-local session state, and place
 opaque non-pointer continuation values in the source-defined DTA fields.
 
+## Fixture Closure Limitation
+
+The existing `search_plan_v1` transaction fixture is not an admissible T97
+provider precursor. It links `host_namespace_v1`, whose test creates and
+enumerates a host temporary directory. A strict current-SDK C11 link also
+stops in `bx_ntvdm_host_namespace.c`: its native directory-query branch names
+`FILE_ID_BOTH_DIR_INFORMATION` and `FileIdBothDirectoryInformation`, neither
+available in the current public SDK headers. The search-request decoder itself
+passes strict syntax checking after an explicit-parentheses correction to its
+existing mixed `||`/`&&` bounds condition.
+
+This is recorded as an architecture limitation, not a request to add a Windows
+native-API compatibility shim. Repairing the host namespace would expand an
+ambient host-directory model expressly excluded by T97. The future S4 provider
+must instead start from BYOB's finite resource declaration and be linkable
+without `host_namespace_v1`.
+
 ## S3 Decision
 
 Pathname search has sufficient evidence for a later contained provider only
