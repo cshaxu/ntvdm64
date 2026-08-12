@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T97 S3 — Pathname/FCB directory-search ABI audit.**
+**Active: M0 T97 S4 — CLI-admitted DOS metadata and pathname provider.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T97 S3, Ordinary Mode. |
-| Admission And Approval | S2 withdrew the partial file candidate rather than misrepresenting it as an OpenNT provider. The owner has authorized dependency- and ROI-based sequencing. |
-| Objective | Establish separate complete source contracts for pathname `50:09/0B` and FCB `50:0A/0C` search: copied inputs, DTA/search-buffer writes, continuation ownership, errors, and immutable-profile disposition. |
-| Non-goals | No search runtime provider, no FCB fallback to pathname behavior, no host enumeration, no guest-triggered scan, no host pointer/handle, no process/PDB emulation, no file-service re-enable, and no Bochs change. |
-| Reference Baseline | etc/research/t97-s1-dem-namespace-component-abi-map-001.md; etc/research/t97-s2-immutable-namespace-token-contract-001.md; `demsrch.c`, `dosdef.h`, existing search transaction fixtures. |
-| Files And ABI Surface | Historical source and existing search types are evidence only. S3 may add research/tests but no runtime dispatch or bridge ABI. |
+| Identifier Mode | M0 T97 S4, Ordinary Mode. |
+| Admission And Approval | S3 establishes that OpenNT pathname search needs immutable DOS metadata that the current BYOB profile does not carry. The owner authorized project-wide dependency and ROI decisions. |
+| Objective | Add a bounded CLI-admitted DOS metadata declaration for the closed BYOB resource set, then integrate one pathname-only `50:09/0B` provider through the common DEM plane or retain an explicit unavailable result. |
+| Non-goals | No host filesystem stat/enumeration, timestamps from the current clock, FCB support, mutation, arbitrary files/drives, host handle/pointer, direct recognizer, Bochs change, or FASTREAD/file-token re-enable. |
+| Reference Baseline | etc/research/t97-s1-dem-namespace-component-abi-map-001.md; t97-s2-immutable-namespace-token-contract-001.md; t97-s3-dem-search-form-contract-map-001.md; existing BYOB profile and search session/result types. |
+| Files And ABI Surface | `src/cli` profile declaration/parser and adapter-local immutable resource metadata. Cross-island bridge ABI is unchanged; metadata is copied within the CLI/adapter island only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace both original forms from dispatcher slot through source buffer accesses and outputs; verify structure sizes/offsets and all branch-specific failure behavior against the existing transaction candidate; prove FCB unresolved outcomes remain rejected. |
-| Expected Markers | A form-separated search ABI/failure map, immutable enumeration policy, and a source-backed S4 integration-or-unavailable decision. |
-| Asset Needs | Existing local OpenNT source and existing static fixtures only; no host directory, media, or Bochs inputs. |
-| Reporting Requirements | Cite source paths/lines, label inference, and identify every unresolved byte/continuation condition rather than borrowing pathname semantics. |
-| Stop Conditions | Stop and revise if closing a required branch needs PDB/CCPU/SAS/VDD recreation, host scanning, an adapter-owned DOS algorithm, or a new direct BOP recognizer. |
-| Exit Criteria | Complete per-form contract/limitations and tested source-shaped static transactions; S4 scope is bounded to a coherent provider or recorded unavailable behavior. |
-| Original Owner Request | Holistic BOP implementation with original OpenNT semantics and a minimum, non-invasive Bochs/adapter boundary. |
-| Similar-Issue Sweep | Compare `demsrch.c`, `dosdef.h`, DTA registration `50:1B`, FCB handlers, current search sessions/results, and COMMAND/NTDOS caller context together. |
+| Verification | Profile rejects absent/invalid metadata; adapter accepts only declared entries and yields source-shaped pathname DTA success/no-more results; no runtime path references host namespace; FCB and non-profile services pass through. |
+| Expected Markers | Fixed profile metadata schema, identity-bound finite snapshot, plane-gated pathname provider, positive/negative fixtures, and a bounded trace result or explicit blocker. |
+| Asset Needs | Existing local source and BYOB profiles only; no new guest media, host directory fixture, third-party input, or Bochs feature. |
+| Reporting Requirements | Record source layout/error mapping, metadata origin, capability boundary, and exact unsupported paths. Do not describe a static fixture as CLI execution. |
+| Stop Conditions | Stop and revise if host metadata/query, time synthesis, PDB/FCB semantics, extra BOP family, new Bochs intrusion, or a new cross-island ABI becomes necessary. |
+| Exit Criteria | A verified pathname-only provider or evidence-backed unavailable decision, with FCB still explicitly deferred and a real-path checkpoint correctly classified. |
+| Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
+| Similar-Issue Sweep | Reconcile BYOB components/placements/boot materialization, readonly namespace, search session/result/request, DTA registration, DEM plane/gate, and runtime source lists together. |
 
 ## Current Technical Baseline
 
