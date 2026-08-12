@@ -37,3 +37,28 @@ or adding a new runtime recognizer.
 Existing adapter endpoints are evidence inputs only. They will be compared to
 their original handler contract and later migrated through the DEM provider;
 they do not become permanent dispatch exceptions.
+
+## Existing adapter endpoint reconciliation
+
+The early adapter contains recognizers for 12 DEM service values. The table
+below is an audit result, not a migration admission.
+
+| Service | Existing adapter role | Original handler | Audit disposition |
+| ---: | --- | --- | --- |
+| 00 | read-only file seek | demChgFilePtr | source-derived candidate; no migration yet |
+| 02 | read-only file close | demClose | source-derived candidate; no migration yet |
+| 13 | boot-drive fallback | demGetBootDrive | source-derived candidate; no migration yet |
+| 15 | drive inventory | demGetDrives | source-derived candidate; no migration yet |
+| 18 | read-only file open | demOpen | source-derived candidate; no migration yet |
+| 22 | read-only file read | demRead | source-derived candidate; no migration yet |
+| 27 | DTA registration | demSetDTALocation | source-derived candidate; no migration yet |
+| 33 | IOCTL changeable media | demIOCTL | source-derived candidate; no migration yet |
+| 50 | hard-error registration | demSetHardErrorInfo | source-derived candidate; no migration yet |
+| 59 | non-debug result | demIsDebug | source-derived candidate; no migration yet |
+| 66 | fast read | demNotYetImplemented | conflict: freeze and reject; the original slot is unavailable |
+| 70 | DPB list materialization | demGetDPBList | source-derived candidate; no migration yet |
+
+The FASTREAD conflict proves that historical reachability or an old endpoint
+is not enough to admit a provider. No entry in the table currently reports
+original-provider composability, and none may be added to the new DEM module
+until its OpenNT contract and replacement blocker are recorded.
