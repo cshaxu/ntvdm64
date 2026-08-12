@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 816 |
+| Documentation records | 819 |
 | --- | --- |
-| Generated UTC | 2026-08-12T22:47:09Z |
+| Generated UTC | 2026-08-12T22:50:55Z |
 
 ## Entries
 
@@ -90,7 +90,8 @@ content-divergent entries.
 | etc/operations/m0-t177-vector-stack-attribution-subtask-plan.md | indexed supporting material | f765d35e5cee7a33b08f446c822728e1fccb0b4fede6fd89119c6480827af8de |
 | etc/operations/m0-t178-normal-dos-return-attribution-subtask-plan.md | indexed supporting material | 575bb906f0e7bca547f4bdf2b21731683810af60e5b9c46e86906693027fe077 |
 | etc/operations/m0-t179-guest-teardown-control-state-attribution-subtask-plan.md | indexed supporting material | 5984b02a8812785c5b52121873f93b6caa95196c29763d86445b2d4a095014e4 |
-| etc/operations/m0-t180-post-target-command-lifecycle-subtask-plan.md | indexed supporting material | e84b2e452d47111549e307aa5652f9a3467de6746f8fc0a6d40bcec91620affa |
+| etc/operations/m0-t180-post-target-command-lifecycle-subtask-plan.md | indexed supporting material | 161b07e453559c70a9df1de5e0d9b7e529a5142f6d6b64db12b82cba77a7c215 |
+| etc/operations/m0-t181-finite-declared-target-sequence-subtask-plan.md | indexed supporting material | 04e3b8be62ffc580ed7c66cf87c9f4a5388e66808f87f2a2f7809467247f4982 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -250,6 +251,7 @@ content-divergent entries.
 | etc/research/t180-s1-post-target-command-lifecycle-map-001.md | indexed supporting material | c73e6eaba0fad0408baa87c09c1a59eb194e9e7a5c7db6d0ac93447b9c55d88c |
 | etc/research/t180-s1-share-direct-observation-prelaunch-result-001.md | indexed supporting material | 99f3a205cbdca1bdb6b5085a04d19b34d5143c8f511a6add18dcbd47a08e34f7 |
 | etc/research/t180-s2-post-target-command-trace-reconciliation-001.md | indexed supporting material | 79b804f07876d600800cacfe4937db2c48ca512f37c8498f8cfa976c8452b66d |
+| etc/research/t180-s3-finite-command-lifecycle-decision-001.md | indexed supporting material | 37aa393337eee4bbe15a10deda692702b5f4bb9554d4f491ab263a6c91b64859 |
 | etc/research/t181-s1-direct-controller-automatic-variable-correction-001.md | indexed supporting material | 3dd2c19acd5357853c09e977489c7b4a3a4bcb58efcec4b2c64e55026eb0be90 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
@@ -548,6 +550,7 @@ content-divergent entries.
 | history/m0-t179-closure-20260812.md | closed task history | 3530f490c4dfa5af04c89d56d36c2fb103d41ea0a01e7182a2510d61be218445 |
 | history/m0-t179-guest-teardown-control-state-closure-20260812.md | closed task history | f8f63a0bd2bf4a5412c4fd1d84040a1603912c11b4bebe6d2b6713b310790be4 |
 | history/m0-t180-closure-20260812.md | closed task history | 8783c15c6a8759506fdc5c57e89f3c321171bd70ae7608402a72e44932a20b54 |
+| history/m0-t180-post-target-command-lifecycle-closure-20260812.md | closed task history | 6bce71d5d6530875da80c5f7ab3a9feab313612099c70621a50e2521556d3d3b |
 | history/m0-t181-closure-20260812.md | closed task history | 97d908aca73af20b49d3b4b97ff6bb0979e94fb9cd25a46c4b09911ba8cce8f0 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
@@ -704,7 +707,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | 93a263d3aa4763d56f28078585a1a12f4ffff831020c2ba428dfb3b36cf16c6d |
-| QUEUE.md | principal control document | 734be39716d6a809f9a7b873516cba14d24523c577d3c1668187455adb266266 |
+| QUEUE.md | principal control document | 42fd6ff2b15a0d757bd43399e0967db98af68ef6667d529b04b749cb2bc94ed5 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | fef23048d411b355f5c2e08b971fec6370359120e7d9c7da383cb883f1dfa2da |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | dd298ea27d815fb69cc843ecf334a2664ba740bb6ede8e0c90907d918c64086a |
@@ -830,7 +833,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 9164b92015af2f9cc8f37c2d8c490c326ddc370a5b671981d899088629ea2010 |
+| STATUS.md | principal control document | a2fc5a821db162bceacd8305d751f879b709025a265c226dd3c914f263d22016 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

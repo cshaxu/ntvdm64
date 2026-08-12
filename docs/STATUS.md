@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Binding active packet: M0 T180 S3 — finite COMMAND lifecycle disposition.**
+**Binding active packet: M0 T181 S1 — finite declared-target-sequence contract.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T180 S3**; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T181 S1**; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
-> the active T177 packet is defined only by the table below.
+> the active packet is defined only by the table below.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T180 S3, Ordinary Mode. |
-| Admission And Approval | S2 proves that target launch accepts the first `54:01` and the post-target second `54:01` is declined before vector-06 machine handling. S3 may decide the correct next package shape. |
-| Objective | Decide whether a contained whole COMMAND lifecycle provider is source-admissible now, or close T180 and transfer the finite target-sequence design to Queue. |
-| Non-goals | No Bochs/adapter/OpenNT/CLI behavior change; no new runtime observation; no result transport; no generic machine BOP handling; no host command queue or synthetic guest state. |
-| Reference Baseline | T179 S4 normal-return machine observation, retained OpenNT COMMAND source, T171--T174 lifecycle audits and current BOP catalogue. |
-| Files And ABI Surface | Decision record, Queue and Status/plan only. |
+| Identifier Mode | M0 T181 S1, Ordinary Mode. |
+| Admission And Approval | T180 proves that the second `54:01` is a valid command-acquisition edge but that its historical host broker is not composable. The owner authorized holistic, source-derived CLI composition without one-off BOP behavior. |
+| Objective | Define one immutable finite DOS target sequence across repeated `54:01` calls, ending in the existing source-built `QUIT.COM` controlled stop. |
+| Non-goals | No implementation, build or runtime observation; no `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, generic machine BOP handling, or Bochs/guest change. |
+| Reference Baseline | T180 closure/decision, current declared-target `54:01` provider, profile/launch declarations, source-built `QUIT.COM` evidence, and retained OpenNT COMMAND source. |
+| Files And ABI Surface | Design/source audit, Status/Queue/plan and retained profile/provider source only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile historical no-next behavior, current one-target state and CLI boundary rules; run governance checks and `git diff --check`. |
-| Expected Markers | Explicit admit-or-close decision, required whole-provider contract if admitted, and retained exclusions. |
-| Asset Needs | Retained source and logs only. |
-| Reporting Requirements | Separate observed facts from source inference; state whether a later implementation package is justified. |
-| Stop Conditions | A need to rehost `GetNextVDMCommand`, add ambient host command state, synthesize a `54:01` success, or change runtime behavior. |
-| Exit Criteria | A next whole-provider package is admitted with an exact finite contract, or T180 closes with the candidate transferred to Queue. |
+| Verification | Reconcile COMMAND caller ABI, current provider state, profile/CLI schema and source-built terminal guest with boundary rules; run governance checks and `git diff --check`. |
+| Expected Markers | A finite state/slot contract, owner map, terminal boundary and rejection matrix for undeclared, duplicate, out-of-order and exhausted requests. |
+| Asset Needs | Retained sources, profiles and existing controlled-stop evidence only. |
+| Reporting Requirements | Separate observed facts from source inference; state whether a bounded implementation slice is justified. |
+| Stop Conditions | A need for a historical host broker, ambient state, synthetic success, a code/build change, or runtime observation. |
+| Exit Criteria | S1 records a complete source-derived sequence contract or rejects this package before implementation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
