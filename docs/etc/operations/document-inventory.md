@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 664 |
+| Documentation records | 665 |
 | --- | --- |
-| Generated UTC | 2026-08-12T17:19:53Z |
+| Generated UTC | 2026-08-12T17:20:39Z |
 
 ## Entries
 
@@ -161,6 +161,7 @@ content-divergent entries.
 | etc/research/t120-s1-bounded-machine-bop02-observation-001.md | indexed supporting material | 0b0775a5aee8138bbee26f63ccbfb4149c44e9ff35061e45e32ba84823c0b055 |
 | etc/research/t121-s1-deferred-machine-composition-build-001.md | indexed supporting material | 559a5c5de97de0f2a4d56ad940d470b02c481d0ed050bbe27c04d36fc6ca3a7e |
 | etc/research/t122-s1-deferred-machine-bop02-observation-001.md | indexed supporting material | 46547be0ad4d37a7e100a2dced9041bce34562767a013af443a7f831c0f0987b |
+| etc/research/t123-s1-bochs-engine-shim-startup-descriptor-001.md | indexed supporting material | cdaf3af4d3a1af6af10a5a5ff8c2ff87afac422f51ae51860892a96e5fadd856 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
