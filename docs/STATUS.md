@@ -2,29 +2,32 @@
 
 ## Current Work
 
+**Binding active packet: M0 T177 S1 — guest vector/stack predecessor attribution.**
+
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T176 S22**; all T177-labelled files
-> are historical evidence locators and do not allocate a current task.
+> The binding active packet below is **M0 T177 S1**; all pre-admission T177-labelled files
+> files are historical evidence locators and do not allocate a current task;
+> the active T177 packet is defined only by the table below.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T176 S24, Ordinary Mode. |
-| Admission And Approval | S23 links both unchanged original machine-handler objects in one selector-blind derivative. The T176 plan admits one controlled runtime observation of this exact image. |
-| Objective | Make one bounded observation of the S23 binary and classify `06h` handler entry, its report/PIC mechanics and immediate guest continuation. |
-| Non-goals | No source/build change, no retry, no device enablement, no adapter/provider change, and no CLI completion claim. |
-| Reference Baseline | S19 normal-return observation; S21 source audit; S22 contract test; S23 derivative map and executable. |
-| Files And ABI Surface | One fresh evidence directory with controller result/log and research/status interpretation only. |
+| Identifier Mode | M0 T177 S1, Ordinary Mode. |
+| Admission And Approval | T176 is source/test/link/one-observation closed at its earlier native stack/control-flow predecessor. The owner authorized autonomous selection of the Queue head once the medium package boundary is reached. |
+| Objective | Produce a source- and IVT-backed ownership map of the reached vector/stack predecessor, from the post-COMMAND state through the first transfer toward `0000:019d`; classify it without proposing a repair. |
+| Non-goals | No Bochs, adapter, OpenNT, CLI or device change; no new runtime trace; no retry; no BOP provider extension; no terminal-result claim. |
+| Reference Baseline | T156 stack audit, T158 vector observation, T176 S24 observation, retained OpenNT source and Bochs real-mode interrupt mechanics. |
+| Files And ABI Surface | Read-only source/log analysis and one research record; Status/plan only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect one fresh controller result/log for `06h` entry and original-handler report/outcome markers; correlate the final native fault; run documentation governance checks and `git diff --check`. |
-| Expected Markers | Either one source-owned `06h` result plus continuation evidence, or a reproducible earlier owner boundary with zero false `06h` claims. |
-| Asset Needs | S23 linked derivative, unchanged S19 profile/configuration, and a fresh empty evidence directory. |
-| Reporting Requirements | Distinguish a linked handler from a reached handler and distinguish any observation fact from CLI completion. |
-| Stop Conditions | Any retry, synthetic reachability mechanism, source/build behavior change, device addition, or adapter workaround. |
-| Exit Criteria | One observation is retained and classified; if it stops before `06h`, name the earlier owner boundary and retain T176's no-workaround conclusion. |
+| Verification | Reconcile source labels, IVT/vector records and Bochs existing mechanics; prove each asserted owner and each excluded owner; run governance checks and `git diff --check`. |
+| Expected Markers | A finite transition table, confidence per edge, and an explicit disposition: guest source, Bochs mechanical delivery, historical host-composition gap, or insufficient evidence. |
+| Asset Needs | Retained logs and existing source trees only. |
+| Reporting Requirements | Separate observed facts from source inference; state whether a later implementation package is justified. |
+| Stop Conditions | A need to invent a vector, change a device/adapter/BOP behavior, or assert an exact guest label without source/offset evidence. |
+| Exit Criteria | One full predecessor map reaches the first unproven edge and explicitly excludes adapter BOP providers and optional devices. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
