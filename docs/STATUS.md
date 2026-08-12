@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T182 S2 — finite declared-target sequence engine composition.**
+**Binding active packet: none; M0 T182 is closed.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T182 S2**; all pre-admission T177/T178/T179/T180-labelled files
+> No new packet is admitted below. M0 T182 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T182 S2, Ordinary Mode. |
-| Admission And Approval | S1 establishes the exact 67-adapter plus five-CLI current closure and identifies the old generator's missing v2 plan object. |
-| Objective | Define and dry-run one fresh derivative recipe that compiles only the current 72 adapter/CLI objects and final-links them to the retained T177 machine derivative. |
-| Non-goals | No compiler/linker invocation yet and no runtime observation; no Bochs object/archive rebuild, device/configuration change, `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, or guest semantic change. |
-| Reference Baseline | T182 S1 inventory, T181 source/test closure, and the byte-identified retained T177 native-POST/machine-composition derivative. |
-| Files And ABI Surface | A new derivative-generator/build shim, its manifest and generated makefile; the listed current adapter/CLI sources only. |
+| Identifier Mode | M0 T182, closed Ordinary Mode packet. |
+| Admission And Approval | S2 generator-only r2 proves the exact 72-object closure, zero new Bochs replacements, zero Bochs build rules and zero archive prerequisites. |
+| Objective | Complete the finite v5 engine closure while preserving the retained native machine boundary. |
+| Non-goals | No retry after build or launch, no Bochs object/archive rebuild, device/configuration change, `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, or guest semantic change. |
+| Reference Baseline | T182 S1/S2 records, T181 source/test closure, and the byte-identified retained T177 native-POST/machine-composition derivative. |
+| Files And ABI Surface | The generated r2 makefile/manifest, current source-built v5 runner, fixed profile/target/QUIT identities, and a new evidence directory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Generator-only execution, manifest and makefile inspection proving 72 object rules, retained machine identity checks, no Bochs build rule, and no archive prerequisite; documentation inventory/governance and `git diff --check` remain required. |
-| Expected Markers | Exact current object list, explicit v2 plan object, unchanged retained machine inputs, and one final-link rule. |
-| Asset Needs | The retained derivative, T181 source tree, and a new empty build root only. |
-| Reporting Requirements | Record generated artifact hashes and dry-run evidence separately from any later compile/link result. |
-| Stop Conditions | A need to replace `main.o`/`cpu\\exception.o`, rebuild an archive, enable a device, change Bochs macros, or perform an observation. |
-| Exit Criteria | A generator-only derivative proves the narrow 72-object closure or rejects it concretely; only then can S3 admit the one actual build/observation. |
+| Verification | One named MSVC x86 build log; if it links, one controller record with binary/profile/input identities, timeout result and BOP markers. Documentation inventory/governance and `git diff --check` remain required. |
+| Expected Markers | 72 current object compilations, a final link against retained inputs, then at most one bounded process-tree launch. |
+| Asset Needs | T182 r2 derivative, installed MSVC x86 toolchain, existing v5 runner/profile and fixed source-built target/QUIT assets. |
+| Reporting Requirements | A failed build is final evidence; a linked binary does not imply runtime. Classify a single runtime stop without diagnosis-by-retry. |
+| Stop Conditions | Any build recipe alteration, a second compile/link attempt, a second launch, a Bochs change/archive rebuild, host capability expansion, or a result-transport claim. |
+| Exit Criteria | Met: one build linked and the observation branch was rejected by the absent current CLI shim/bundle, which is transferred as an unnumbered Queue candidate. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
