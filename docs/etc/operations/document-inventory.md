@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 819 |
+| Documentation records | 820 |
 | --- | --- |
-| Generated UTC | 2026-08-12T22:50:55Z |
+| Generated UTC | 2026-08-12T22:52:46Z |
 
 ## Entries
 
@@ -91,7 +91,7 @@ content-divergent entries.
 | etc/operations/m0-t178-normal-dos-return-attribution-subtask-plan.md | indexed supporting material | 575bb906f0e7bca547f4bdf2b21731683810af60e5b9c46e86906693027fe077 |
 | etc/operations/m0-t179-guest-teardown-control-state-attribution-subtask-plan.md | indexed supporting material | 5984b02a8812785c5b52121873f93b6caa95196c29763d86445b2d4a095014e4 |
 | etc/operations/m0-t180-post-target-command-lifecycle-subtask-plan.md | indexed supporting material | 161b07e453559c70a9df1de5e0d9b7e529a5142f6d6b64db12b82cba77a7c215 |
-| etc/operations/m0-t181-finite-declared-target-sequence-subtask-plan.md | indexed supporting material | 04e3b8be62ffc580ed7c66cf87c9f4a5388e66808f87f2a2f7809467247f4982 |
+| etc/operations/m0-t181-finite-declared-target-sequence-subtask-plan.md | indexed supporting material | dd30e31f037fc851e6b4101f512e409eb06bbcbe4ba2385de3dc58f3a5a36e57 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -253,6 +253,7 @@ content-divergent entries.
 | etc/research/t180-s2-post-target-command-trace-reconciliation-001.md | indexed supporting material | 79b804f07876d600800cacfe4937db2c48ca512f37c8498f8cfa976c8452b66d |
 | etc/research/t180-s3-finite-command-lifecycle-decision-001.md | indexed supporting material | 37aa393337eee4bbe15a10deda692702b5f4bb9554d4f491ab263a6c91b64859 |
 | etc/research/t181-s1-direct-controller-automatic-variable-correction-001.md | indexed supporting material | 3dd2c19acd5357853c09e977489c7b4a3a4bcb58efcec4b2c64e55026eb0be90 |
+| etc/research/t181-s1-finite-declared-target-sequence-contract-001.md | indexed supporting material | 5cced40a838f1c1f1540cabba7c57a91af292af781242feea7c6b2b6628a48df |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -833,7 +834,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a2fc5a821db162bceacd8305d751f879b709025a265c226dd3c914f263d22016 |
+| STATUS.md | principal control document | e541c8d3680d8a6581246d5a5063481896d1a19f35d464d5c7351f217e98164d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

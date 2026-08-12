@@ -10,8 +10,8 @@ admission/design packet, not permission to implement a command broker.
 
 | S | Scope | Initial disposition |
 | --- | --- | --- |
-| S1 | Define the source-derived sequence state machine: slot identity, materialized guest file, command tail, first/repeated `54:01` delivery, commit boundary, and final `QUIT.COM` stop. | Active in Status. |
-| S2 | Audit profile, CLI launch declaration, namespace and current provider ownership; define the minimal immutable schema and rejection rules for undeclared, duplicate, out-of-order and exhausted requests. | Pending S1. |
+| S1 | Define the source-derived sequence state machine: slot identity, materialized guest file, command tail, first/repeated `54:01` delivery, commit boundary, and final `QUIT.COM` stop. | Complete; the two-slot contract and owner/rejection map are recorded in `t181-s1-finite-declared-target-sequence-contract-001.md`. |
+| S2 | Audit profile, CLI launch declaration, namespace and current provider ownership; define the minimal immutable schema and rejection rules for undeclared, duplicate, out-of-order and exhausted requests. | Active in Status. |
 | S3 | Admit or reject a contained implementation/verification slice after S1/S2 prove a stable object and ABI closure. | Pending S2. |
 
 ## Invariants
