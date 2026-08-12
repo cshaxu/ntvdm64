@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 810 |
+| Documentation records | 811 |
 | --- | --- |
-| Generated UTC | 2026-08-12T22:40:10Z |
+| Generated UTC | 2026-08-12T22:41:40Z |
 
 ## Entries
 
@@ -89,7 +89,7 @@ content-divergent entries.
 | etc/operations/m0-t177-normal-dos-return-subtask-plan.md | indexed supporting material | 39b83f263aff7ae5f7882d11f0a98b87d29bc10308cbae2f662739ae29021614 |
 | etc/operations/m0-t177-vector-stack-attribution-subtask-plan.md | indexed supporting material | f765d35e5cee7a33b08f446c822728e1fccb0b4fede6fd89119c6480827af8de |
 | etc/operations/m0-t178-normal-dos-return-attribution-subtask-plan.md | indexed supporting material | 575bb906f0e7bca547f4bdf2b21731683810af60e5b9c46e86906693027fe077 |
-| etc/operations/m0-t179-guest-teardown-control-state-attribution-subtask-plan.md | indexed supporting material | 5445ccfd477cf3766c5a35b809193b7e135a28feb1030b0d735c3d3eaf550074 |
+| etc/operations/m0-t179-guest-teardown-control-state-attribution-subtask-plan.md | indexed supporting material | 5984b02a8812785c5b52121873f93b6caa95196c29763d86445b2d4a095014e4 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -244,6 +244,7 @@ content-divergent entries.
 | etc/research/t179-s1-direct-pid-observation-controller-correction-001.md | indexed supporting material | 9ff448ca983b390b7260306aa23f6dfbbbece48c978051cde2b182f0fc9f51a6 |
 | etc/research/t179-s1-guest-teardown-predecessor-map-001.md | indexed supporting material | 1604aad44d57a8e742d22abb6eca90b73f2e1353ab2fa56e5dda4a422ae00a7d |
 | etc/research/t179-s2-int06-vector-installation-reconciliation-001.md | indexed supporting material | f2811e5e75ed5078a2b194b4d3cc687abf4cf6b369983503de0c52a7a2caf29a |
+| etc/research/t179-s3-normal-return-machine-observation-admission-001.md | indexed supporting material | 2a644a0efcc43e5f55aba19ef7ff5d6ee904e6c76459c3e635b5f0d3124099a2 |
 | etc/research/t180-s1-share-direct-observation-prelaunch-result-001.md | indexed supporting material | 99f3a205cbdca1bdb6b5085a04d19b34d5143c8f511a6add18dcbd47a08e34f7 |
 | etc/research/t181-s1-direct-controller-automatic-variable-correction-001.md | indexed supporting material | 3dd2c19acd5357853c09e977489c7b4a3a4bcb58efcec4b2c64e55026eb0be90 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
@@ -824,7 +825,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | f5f504f3bb3e6d2c7abc4883134f009742278e69c42a2f825c4d1cb769f359a4 |
+| STATUS.md | principal control document | d8eb21a1f1e05bd93c29bc870fd9d6c1e5beaa0bceb6e63c70ab3f62d2463b43 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
