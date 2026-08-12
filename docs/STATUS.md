@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T121 S1 — deferred machine-composition derivative closure.**
+**Active: M0 T123 S1 — Bochs-engine shim startup descriptor audit.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T121 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorizes priority/ROI ordering. T120 proves the direct-start T119 r3 image reaches the known aperture veto before a BOP identity can be observed; existing deferred POST evidence avoids that lifecycle path. |
-| Objective | Create one source-built derivative that combines the existing deferred-POST control path, the default-off machine-composition seam, and existing read-only BOP identity observation. |
-| Non-goals | No guest run, no Bochs source change, no handler semantic change, no new log field, no device, host-service or adapter change, and no BOP provider expansion. |
-| Reference Baseline | etc/research/t120-s1-bounded-machine-bop02-observation-001.md; T104 deferred POST closure; T117--T119 seam/build evidence. |
-| Files And ABI Surface | Named derivative generator/shim and its manifest/build evidence only; existing Bochs `main.cc` and `exception.cc` compilation flags. |
+| Identifier Mode | M0 T123 S1, Ordinary Mode. |
+| Admission And Approval | T122 reaches normal CPU-loop stop after the existing deferred profile. The CLI source proves EOF child stdin, but real Bochs rejects the runner's non-Bochs engine argv. Owner authorizes ROI-directed sequencing. |
+| Objective | Freeze the thin `ntdos64-bochs-engine` shim's required input descriptor, original Bochs argv, child environment, output and exit contract before any implementation. |
+| Non-goals | No shim implementation, no Bochs source edit, no BOP/adapter/guest change, no generated bochsrc, no guest run, and no new device or host capability. |
+| Reference Baseline | etc/research/bochs-engine-startup-closure.md; runner-adapter-install-contract.md; T121/T122 evidence. |
+| Files And ABI Surface | Read-only CLI/Bochs startup sources and a new design/evidence record only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Prove the generated shim rebuilds only `main.o`, `cpu/exception.o`, machine component and current adapter/CLI objects; verify all deferred, machine and listener macros coexist in one exception compile command; link once. |
-| Expected Markers | Fresh manifest, exact object list, successful x86 link and existing boundary tests. |
-| Asset Needs | Retained r5 engine, T119 original handler object, MSVC x86 and the existing derivative generator. |
-| Reporting Requirements | Name all rebuilt/retained objects and preserve CRT warning separately; runtime remains a later packet. |
-| Stop Conditions | Stop on duplicate/ambiguous exception rule, archive rebuild, new Bochs source edit, missing handler object, link failure, or any request to run. |
-| Exit Criteria | A deferred, listener-enabled machine-composition derivative is source-built and ready for one separately admitted observation. |
+| Verification | Prove every proposed shim input has a declared owner and fixed validation rule; prove BYOB never enters Bochs argv and Bochs options never enter adapter semantics. |
+| Expected Markers | Versioned descriptor, allow-list, rejection behavior and a future test matrix. |
+| Asset Needs | Existing T121 image/ROM/profile evidence and Bochs 2.6 command-line parser source. |
+| Reporting Requirements | Distinguish current runner transport proof from future real-engine proof; preserve CRT and process-lifetime limitations. |
+| Stop Conditions | Stop before code, build or run; stop if any input requires ambient host discovery, a Bochs source switch, or guest semantic parsing. |
+| Exit Criteria | A complete implementation-admission record exists, or an explicit missing-descriptor blocker is recorded. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check only composition of the existing deferred and machine macros; reject any widening of Bochs feature or BOP semantics. |
+| Similar-Issue Sweep | Inspect only CLI child launch, Bochs parser and existing observer config ownership; do not reopen BOP families. |
 
 ## Current Technical Baseline
 
@@ -128,5 +128,7 @@
 | M0 T118 | Closed: original `02h` caller/IRET continuation and generic three-byte resume contract are source-proven. |
 | M0 T119 | Closed: original `unexpected_int` and its exact three mechanics imports link into the default-off, selector-blind derivative; no runtime result is claimed. |
 | M0 T120 | Closed: the one direct-start r3 observation ends at the known aperture veto with BOP identity observation disabled; it neither proves nor disproves `02h` reachability. |
-| M0 T121 S1 | Active: compose deferred POST, machine seam and existing BOP listener in one narrow source-built derivative; do not run it. |
+| M0 T121 | Closed: deferred POST, the selector-blind machine seam and existing BOP listener source-build in one no-archive-rebuild derivative. |
+| M0 T122 | Closed: the frozen deferred image reaches 31 observed BOPs and normal CPU-loop shutdown; `02h` is not observed and no machine handler result is claimed. |
+| M0 T123 S1 | Active: define the thin CLI-to-Bochs shim startup descriptor before implementation. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
