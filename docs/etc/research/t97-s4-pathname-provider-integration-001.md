@@ -41,11 +41,12 @@ pathname bytes + 4 DTA-pointer bytes + 2 PDB bytes; it then verifies a matching
 entry's DTA transaction, `C4 C4 50 0B` continuation, the no-more AX `0x12`
 transaction, and rejection of FCB `50:0A`.
 
-The full `bx-ntvdm-adapter-runtime-test` CMake target compiles and links with
-the new provider closure.  Its pre-existing execution fixture still expects
-the T97 S2-withdrawn `50:12/00/16/02` readonly-file lifecycle and therefore
-fails its own obsolete assertions.  It is not evidence against this provider
-and was not re-enabled to make that test pass.
+The full `bx-ntvdm-adapter-runtime-test` CMake target compiles, links, and
+passes. Its default regression no longer asserts the T97 S2-withdrawn
+`50:12/00/16/02/42` file lifecycle. Its `--t97-path-search` scenario installs
+a v4 profile, registers the DTA with `50:1B`, then proves runtime
+`50:09` success and runtime `50:0B` no-more. No withdrawn service was
+re-enabled to make either execution pass.
 
 ## Explicit non-goals
 

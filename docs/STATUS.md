@@ -2,25 +2,25 @@
 
 ## Current Work
 
-**Active: M0 T97 S4 — CLI-admitted DOS metadata and pathname provider.**
+**Active: M0 T97 S5 — pathname profile fixtures and real-path checkpoint.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T97 S4, Ordinary Mode. |
-| Admission And Approval | S3 establishes that OpenNT pathname search needs immutable DOS metadata that the current BYOB profile does not carry. The owner authorized project-wide dependency and ROI decisions. |
-| Objective | Add a bounded CLI-admitted DOS metadata declaration for the closed BYOB resource set, then integrate one pathname-only `50:09/0B` provider through the common DEM plane or retain an explicit unavailable result. |
+| Identifier Mode | M0 T97 S5, Ordinary Mode. |
+| Admission And Approval | S4 has a v4 finite metadata snapshot, source-shaped `50:09/0B` provider, and passing runtime fixture. S5 closes its profile acceptance/rejection and real-guest-path evidence. |
+| Objective | Exercise positive and negative v4 profile fixtures, then run the smallest available real guest path and classify the first boundary after pathname provider availability without overstating continuous execution. |
 | Non-goals | No host filesystem stat/enumeration, timestamps from the current clock, FCB support, mutation, arbitrary files/drives, host handle/pointer, direct recognizer, Bochs change, or FASTREAD/file-token re-enable. |
-| Reference Baseline | etc/research/t97-s1-dem-namespace-component-abi-map-001.md; t97-s2-immutable-namespace-token-contract-001.md; t97-s3-dem-search-form-contract-map-001.md; existing BYOB profile and search session/result types. |
-| Files And ABI Surface | `src/cli` profile declaration/parser and adapter-local immutable resource metadata. Cross-island bridge ABI is unchanged; metadata is copied within the CLI/adapter island only. |
+| Reference Baseline | etc/research/t97-s1-dem-namespace-component-abi-map-001.md; t97-s2-immutable-namespace-token-contract-001.md; t97-s3-dem-search-form-contract-map-001.md; t97-s4-byob-dos-metadata-contract-001.md; t97-s4-pathname-provider-integration-001.md. |
+| Files And ABI Surface | Profile fixtures, bounded runtime trace input/output, and existing adapter/Bochs mechanics only. No new bridge ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Profile rejects absent/invalid metadata; adapter accepts only declared entries and yields source-shaped pathname DTA success/no-more results; no runtime path references host namespace; FCB and non-profile services pass through. |
-| Expected Markers | Fixed profile metadata schema, identity-bound finite snapshot, plane-gated pathname provider, positive/negative fixtures, and a bounded trace result or explicit blocker. |
+| Verification | Positive/negative v4 fixtures prove metadata admission; runtime fixture proves `50:09/0B`; a bounded real-path trace proves whether the live guest reaches that provider or a prior classified boundary. |
+| Expected Markers | Fixture matrix, immutable identity evidence, runtime trace marker, and a source/trace-backed first-stop classification. |
 | Asset Needs | Existing local source and BYOB profiles only; no new guest media, host directory fixture, third-party input, or Bochs feature. |
 | Reporting Requirements | Record source layout/error mapping, metadata origin, capability boundary, and exact unsupported paths. Do not describe a static fixture as CLI execution. |
 | Stop Conditions | Stop and revise if host metadata/query, time synthesis, PDB/FCB semantics, extra BOP family, new Bochs intrusion, or a new cross-island ABI becomes necessary. |
-| Exit Criteria | A verified pathname-only provider or evidence-backed unavailable decision, with FCB still explicitly deferred and a real-path checkpoint correctly classified. |
+| Exit Criteria | S4 evidence is reconciled into a passing profile/runtime fixture set; one real-path checkpoint is correctly classified, with FCB still explicitly deferred. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reconcile BYOB components/placements/boot materialization, readonly namespace, search session/result/request, DTA registration, DEM plane/gate, and runtime source lists together. |
 
@@ -92,4 +92,6 @@
 | M0 T97 S3 P2 | Complete limitation: host-directory fixture is excluded from T97 and its SDK-native query branch is not repaired. |
 | M0 T97 S4 P1 | Complete: v4 BYOB profiles admit an exact, immutable four-entry DOS metadata snapshot; pathname routing remains disabled pending the common-plane integration slice. |
 | M0 T97 S4 P2 | Complete focused closure: common DEM-plane `50:09/0B` routing consumes only copied guest inputs and the immutable v4 snapshot; FCB and ambient host namespace remain excluded. The legacy runtime fixture needs replacement because it asserts the withdrawn file-service path. |
+| M0 T97 S4 P3 | Complete: default runtime regression no longer asserts withdrawn file-token services; its focused v4 mode passes DTA registration, `50:09` success, and `50:0B` no-more. |
+| M0 T97 S5 | Active: profile fixture matrix and real-path checkpoint. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
