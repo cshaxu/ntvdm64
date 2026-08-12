@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: none; M0 T184 is closed.**
+**Binding active packet: M0 T185 S3 — complete v5 runtime selection projection.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> No new packet is admitted below. M0 T184 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T185 S3**. M0 T184 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,12 +15,12 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T184, closed Ordinary Mode packet. |
-| Admission And Approval | S2 closes the one-shot controller; S3 consumed its one permitted invocation. |
-| Objective | Classify one finite v5 runtime path without expanding Bochs or adapter behavior. |
-| Non-goals | No retry, Bochs/adapter change, profile semantic expansion, host capability, `GetNextVDMCommand`, ambient namespace, `54:11` result transport, or guest semantic change. |
-| Reference Baseline | T181 two-slot contract, T182 linked engine, T183 current runner/shim/bundle and T184 S1/S2 input/controller records. |
-| Files And ABI Surface | One new evidence root with fixed v5 profile/inputs, current runner/shim/bundle and the admitted controller only. |
+| Identifier Mode | M0 T185 S3, Ordinary Mode. |
+| Admission And Approval | T184 reaches original `54:0C` before `54:01`; source comparison identifies omitted v5 runtime selection fields. |
+| Objective | Recompose the tested v5 runtime-selection projection into the existing engine without a Bochs rebuild. |
+| Non-goals | No guest observation/retry, Bochs change, new adapter provider, profile capability expansion, host capability, ambient namespace or `54:11` result transport. |
+| Reference Baseline | T185 S1/S2 audit/tests, T182 derivative and T184 observation. |
+| Files And ABI Surface | Current `byob_profile.c` plus the existing narrow engine derivative recipe only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | One controller result with prelaunch input hashes, both streams, terminal outcome JSON and marker classification; documentation inventory/governance and `git diff --check` remain required. |
 | Expected Markers | Exactly one wrapper PID, no retry, and recorded status of `54:01`, commit, `FE` controlled stop and timeout/exit. |

@@ -159,6 +159,11 @@ int main(void)
         selection.declared_targets[1].terminal != 1u ||
         !selection.has_target_placement ||
         wcscmp(selection.target_placement.path, L"\\TARGET.COM") != 0 ||
+        !selection.has_command_placement ||
+        wcscmp(selection.command_placement.path, L"\\COMMAND.COM") != 0 ||
+        !selection.has_guest_boot_files ||
+        wcscmp(selection.config_file.path, L"\\CONFIG.SYS") != 0 ||
+        wcscmp(selection.autoexec_file.path, L"\\AUTOEXEC.BAT") != 0 ||
         wcscmp(selection.declared_targets[0].placement.path, L"\\TARGET.COM") != 0 ||
         wcscmp(selection.declared_targets[1].placement.path, L"\\QUIT.COM") != 0 ||
         wcscmp(selection.terminal_quit.file_name, L"QUIT.COM") != 0;

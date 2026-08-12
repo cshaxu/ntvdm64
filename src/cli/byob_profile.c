@@ -1117,7 +1117,7 @@ static byob_profile_result validate_document(const byob_profile_document *docume
             document->host_drive_inventory.types,
             sizeof(selection->host_drive_inventory.types));
     }
-    if (selection != NULL && (is_v2 || is_v3 || is_v4)) {
+    if (selection != NULL && (is_v2 || is_v3 || is_v4 || is_v5)) {
         if (!ascii_to_wide(document->command_placement.path,
                 selection->command_placement.path,
                 sizeof(selection->command_placement.path) /
