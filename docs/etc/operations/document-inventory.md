@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 585 |
+| Documentation records | 587 |
 | --- | --- |
-| Generated UTC | 2026-08-12T06:17:04Z |
+| Generated UTC | 2026-08-12T06:18:50Z |
 
 ## Entries
 
@@ -304,6 +304,7 @@ content-divergent entries.
 | etc/research/t96-s3-dem-plane-abi-001.md | indexed supporting material | ecd2fd3e2d5f99e7fce38d01f21842b43b87aaeff5fdbcfb25e5207606fd5a82 |
 | etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | 57c3f24ff606a8f5c86f6e2b5408638007f73ebacbaecb0da505be5cdf326777 |
 | etc/research/t96-s4-command-boot-file-reconciliation-001.md | indexed supporting material | 30b3c9940f9984c66d6034a1008f44a570be189d78068a1d730c3caac5e5782c |
+| etc/research/t96-s4-command-launch-composition-blocker-001.md | indexed supporting material | 3ed08df42c03a8ea4f3820b8ad00df2ad3215dc2190d74b207999c304968f8ee |
 | etc/research/t96-s4-command-plane-abi-001.md | indexed supporting material | 117cb6ac032bf519c15f1f18d92932f43e4dd8091ea35cf5319a6cc4d201422f |
 | etc/research/t96-s4-command-start-info-contract-001.md | indexed supporting material | f295788656fcb964abffe249410c14aed012617c3ea095026af0050ebfc98b44 |
 | etc/research/t96-s4-opennt-command-provider-map-001.md | indexed supporting material | 797a4e148f3c15aeea38abfccc1e03c1e6bb0db89bb2660c5a82232dafdc65eb |
@@ -348,6 +349,7 @@ content-divergent entries.
 | history/m0-t96-s4-p2-20260811.md | closed task history | 26443667c4dd94e57b476c4ea25230cba742f28f6647d8a764af72e51dce53fd |
 | history/m0-t96-s4-p3-20260811.md | closed task history | b6d0c037849a21076ba770680b239a20da5e217ba17d533ff9062ae17b0b7fd0 |
 | history/m0-t96-s4-p4-20260811.md | closed task history | e489995d090bdbf203d39c0e2fb2bef873f35dd5936636ec9332ab311ae0aaf8 |
+| history/m0-t96-s4-p5-20260811.md | closed task history | c26a3fc3003f62c1757a0adc9a82944775c42f3527b7ef6210b0c1162cae19a5 |
 | history/task-index.md | closed task history | 650dbf90485884e24494a2c9f18eba6a2c1293eb7dc40af432aad28ebc436377 |
 | HOST-APPLINIT-PREFIX-TRACE.md | retained pre-governance evidence | 1d43eca6ad570ac29479420ec0773724a160c058e9cf16bc85e3450f286efabe |
 | HOST-CONSOLE-UI-BOUNDARY.md | retained pre-governance evidence | fb9a692c698c144e8860379aff13d82499d03847a0ddfda1bbf60351ad7d2e2f |
@@ -599,7 +601,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | c61438286d4e40977d1ea65be8be684d38c6a32572e0059b5547a320e282c8e4 |
+| STATUS.md | principal control document | 64a97dca7213c13a4341141dc84b1449a162be4d3490bbcda5e8c4609c879e37 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
