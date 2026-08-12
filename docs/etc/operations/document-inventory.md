@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 614 |
+| Documentation records | 615 |
 | --- | --- |
-| Generated UTC | 2026-08-12T15:34:52Z |
+| Generated UTC | 2026-08-12T15:40:48Z |
 
 ## Entries
 
@@ -326,6 +326,7 @@ content-divergent entries.
 | etc/research/t98-s2-current-adapter-engine-relink-001.md | indexed supporting material | e35a77d8d86ec032a3159d1df24ee9de5f1e780960e78f5a61d48e32a9034882 |
 | etc/research/t98-s3-current-composition-v4-checkpoint-001.md | indexed supporting material | 397d1a80db48bf8b9e11385fbfdba3ff00434f006b258e2a4e58b61b93447111 |
 | etc/research/t99-s1-opennt-dem-command-composition-map-001.md | indexed supporting material | 49e34fa30cb7865c1a7fe69dd17786b3e08c38d6242acff3c092ee0eb582b753 |
+| etc/research/t99-s2-boot-namespace-provider-state-001.md | indexed supporting material | 7a9bbf07c4b3179a47506dece3161f7f9e2f1e1d694bca9e70d5eb8e887ce590 |
 | execution-workflow.md | retained pre-governance evidence | e5221d6627b9faad3bea9390561e37cd1ec045064321c9ea0b6a6bd816b6f126 |
 | FIRMWARE-PROFILE-INPUT-ADMISSION-REPORT.md | retained pre-governance evidence | c1f4a17d10761f92fa00e9c3ef8e0103dc739a89e33813e5a810d6cfac3311a4 |
 | GFI-MEDIA-HOST-BOUNDARY.md | retained pre-governance evidence | f5f6ab1ae2cb338541e3a173b6a9a22316252f5ec84a03557169ba083987cebf |
@@ -628,7 +629,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 1a098df6e5a51c57b49290e26003a9cdd2dd3a9c7391156e7e227336105bec79 |
+| STATUS.md | principal control document | 14ce9c66d8ceb4d2aec7899a5dcc5ef1c5b23c04fbc2671b923e9c602ebb286d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
