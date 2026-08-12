@@ -117,6 +117,32 @@ static int run_t97_path_search(void)
     return failed;
 }
 
+static int run_t181_v5_install(void)
+{
+    wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], target[MAX_PATH], quit[MAX_PATH], profile[MAX_PATH];
+    char json[4096];
+    int failed = 0;
+    if (GetTempPathW(MAX_PATH, root) == 0 || GetTempFileNameW(root, L"n64", 0u, root) == 0 ||
+        !DeleteFileW(root) || !CreateDirectoryW(root, 0)) return 1;
+    swprintf(ntio,MAX_PATH,L"%ls\\NTIO.SYS",root); swprintf(ntdos,MAX_PATH,L"%ls\\NTDOS.SYS",root);
+    swprintf(command,MAX_PATH,L"%ls\\COMMAND.COM",root); swprintf(target,MAX_PATH,L"%ls\\TARGET.COM",root);
+    swprintf(quit,MAX_PATH,L"%ls\\QUIT.COM",root); swprintf(profile,MAX_PATH,L"%ls\\profile.json",root);
+    snprintf(json,sizeof(json),
+        "{\"schema\":\"ntdos64-byob-profile-v5\",\"profile\":\"nt4-en-us-command-smoke-v5\",\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"t181-install\",\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"terminal-quit\",\"file_name\":\"QUIT.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"06a37dff559df7325de8b003f4df53c188f733e0ca312aad961c34dae48d7b83\",\"version\":null}],\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}},\"guest_declared_targets\":[{\"role\":\"target\",\"placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2}},{\"role\":\"terminal-quit\",\"placement\":{\"path\":\"\\\\QUIT.COM\",\"drive_index\":2}}],\"guest_search_metadata\":{\"command\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"target\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"terminal-quit\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"config\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"autoexec\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1}}}",sha256_abc,sha256_abc,sha256_abc,sha256_abc);
+    failed |= !write_file(ntio,"abc") || !write_file(ntdos,"abc") || !write_file(command,"abc") ||
+        !write_file(target,"abc") || !write_file(quit,"\xc4\xc4\xfe") || !write_file(profile,json) ||
+        !SetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_PLAN",L"2,2,c,00");
+    bx_ntvdm_adapter_runtime_v1_reset();
+    failed |= !bx_ntvdm_adapter_runtime_v1_install(profile,root) ||
+        bx_ntvdm_adapter_runtime_v1_install_diagnostic()!=BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_NONE;
+    bx_ntvdm_adapter_runtime_v1_reset();
+    failed |= !write_file(quit,"bad") || bx_ntvdm_adapter_runtime_v1_install(profile,root) != 0 ||
+        bx_ntvdm_adapter_runtime_v1_install_diagnostic()!=BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_PROFILE_OR_IMAGE;
+    SetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_PLAN",0); bx_ntvdm_adapter_runtime_v1_reset();
+    DeleteFileW(profile); DeleteFileW(quit); DeleteFileW(target); DeleteFileW(command); DeleteFileW(ntdos); DeleteFileW(ntio); RemoveDirectoryW(root);
+    return failed;
+}
+
 int main(int argc, char **argv)
 {
     wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], target[MAX_PATH], profile[MAX_PATH], evidence[MAX_PATH];
@@ -150,6 +176,8 @@ int main(int argc, char **argv)
 
     if (argc == 2 && strcmp(argv[1], "--t97-path-search") == 0)
         return run_t97_path_search();
+    if (argc == 2 && strcmp(argv[1], "--t181-v5-install") == 0)
+        return run_t181_v5_install();
 
     if (argc == 3) {
         wchar_t supplied_profile[MAX_PATH], supplied_root[MAX_PATH];
