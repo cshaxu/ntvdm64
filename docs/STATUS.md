@@ -43,5 +43,5 @@
 | M0 T95 | Closed/replanned; closure facts, transferred backlog, and limitations are in history/m0-t95-closure-20260811.md. |
 | M0 T96 S1 P1 | Complete static BOP selector/service/BIOS provider and module map; local commit pending because no Git remote is configured. |
 | M0 T96 S2 P1--P2 | Complete shared ingress, typed pass-through gate, and provider selection registry; legacy endpoint migration remains S8. |
-| M0 T96 S3 | Admitted in Ordinary Mode; DEM dispatcher, no-op, drive projection, boot-drive, and full IOCTL source-contract slices are recorded; runtime migration remains deferred to S8. |
+| M0 T96 S3 | Admitted in Ordinary Mode; DEM dispatcher, no-op, drive projection, boot-drive, IOCTL, and raw-media source-contract slices are recorded; runtime migration remains deferred to S8. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
