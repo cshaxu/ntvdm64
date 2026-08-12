@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T108 S1 — original VdmRedir-unavailable runtime verification.**
+**Active: M0 T110 S1 — reached selector-02 owner provenance.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T108 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized priority/ROI-based task selection. T107 source/test/build closure is complete but its only short trace did not reach selector 02. This admits one longer unchanged-binary observation. |
-| Objective | Prove or refute runtime reachability of the T107 `MS_bop_2` failure provider using one bounded deferred trace. |
-| Non-goals | No source/build/profile/ROM/device/provider change, no VdmRedir load, redirector/host filesystem capability, INT6 handler, second observation or other selector implementation. |
-| Reference Baseline | etc/research/t107-s1-redir-unavailable-provider-001.md; T105/T106 evidence; T107 binary and manifest. |
-| Files And ABI Surface | One immutable evidence directory and research/history/status records only. |
+| Identifier Mode | M0 T110 S1, Ordinary Mode. |
+| Admission And Approval | T109 withdrew the erroneous adapter route. T108's repeated `C4 C4 02` is the first unclassified runtime boundary, while source proves it is neither the `52h` XMS ingress nor `57h` redirector ingress. This admits a read-only owner-provenance audit. |
+| Objective | Identify the source/table/caller owner of the reached selector `02`, its continuation and failure/return contract, then classify it as Bochs-native, OpenNT host plane, guest component or blocked. |
+| Non-goals | No provider, runtime build/trace, Bochs modification, device enablement, XMS/redirector implementation, adapter BOP behavior or guest image change. |
+| Reference Baseline | etc/research/t108-s1-selector-02-runtime-correction-001.md; artifacts/analysis/t108-s1-redir-unavailable-runtime-001; OpenNT/SoftPC source and existing BOP inventory. |
+| Files And ABI Surface | Read-only source/trace evidence and research/history/status records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Run exactly one 10M/30-second deferred trace with the unchanged T107 binary and compare selector 02/resume markers with T107 contract. |
-| Expected Markers | Selector 02 accepted with CF/AX result and RIP+3, or a different first stable boundary; unchanged binary/profile/ROM identities. |
-| Asset Needs | T107 binary and standard runner inputs only. |
-| Reporting Requirements | Record command, hashes, trace termination and exact selector/resume evidence; do not claim redirector support. |
-| Stop Conditions | Stop before source/build/provider/configuration change, another run, redirector backend or any other selector work. |
-| Exit Criteria | One immutable trace conclusively classifies T107 reachability. |
+| Verification | Trace `073B:03FF` and its BOP bytes must be correlated to a concrete source/table entry or an explicit bounded absence; record its following byte/continuation semantics and owner classification. |
+| Expected Markers | A single evidence-backed owner/disposition for selector `02`, or a precise source-closure blocker with no adapter fallback. |
+| Asset Needs | Existing source tree and immutable T108 evidence only. |
+| Reporting Requirements | Cite source paths/line ranges and distinguish a proven selector owner from assumptions based on numbering. |
+| Stop Conditions | Stop before behavior implementation, another observation, build, profile/ROM change, or a new BOP mapping. |
+| Exit Criteria | Owner provenance, continuation contract and next-owner classification are recorded. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check only selector 02 count, accepted result marker, BOP06 recurrence, termination class and profile/binary identity. |
+| Similar-Issue Sweep | Inspect only aliases/tables that can assign selector `02`; record `55h` ingress mismatch as deferred static debt, without expanding the audit to other service families. |
 
 ## Current Technical Baseline
 
@@ -115,5 +115,7 @@
 | M0 T105 | Closed: one longer unchanged-binary observation reached a stable source-owned INT6/BOP-06 re-entry loop; no service behavior was changed. |
 | M0 T106 | Closed: common gather/read/write/resume bridge is connected; the repeated predecessor is original `MS_bop_2` VdmRedir-unavailable behavior. |
 | M0 T107 | Closed: exact unavailable result is source/test/build closed; short trace did not reach it. |
-| M0 T108 S1 | Active: one longer unchanged-binary trace to verify selector 02 reachability. |
+| M0 T108 | Closed: selector 02 is runtime-reachable, but its accepted result exposed a source-identity error: `02` is XMS, not VdmRedir. |
+| M0 T109 | Closed: selector 02 is unclaimed; the focused static test proves `52h` XMS and `57h` VdmRedir identities, with no runtime claim. |
+| M0 T110 S1 | Active: read-only provenance audit for the reached selector-02 boundary. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
