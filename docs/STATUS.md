@@ -2,25 +2,25 @@
 
 ## Current Work
 
-**Active: M0 T97 S5 — pathname profile fixtures and real-path checkpoint.**
+**Active: M0 T98 S1 — current adapter-to-engine closure inventory.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T97 S5, Ordinary Mode. |
-| Admission And Approval | S4 has a v4 finite metadata snapshot, source-shaped `50:09/0B` provider, and passing runtime fixture. S5 closes its profile acceptance/rejection and real-guest-path evidence. |
-| Objective | Exercise positive and negative v4 profile fixtures, then run the smallest available real guest path and classify the first boundary after pathname provider availability without overstating continuous execution. |
-| Non-goals | No host filesystem stat/enumeration, timestamps from the current clock, FCB support, mutation, arbitrary files/drives, host handle/pointer, direct recognizer, Bochs change, or FASTREAD/file-token re-enable. |
-| Reference Baseline | etc/research/t97-s1-dem-namespace-component-abi-map-001.md; t97-s2-immutable-namespace-token-contract-001.md; t97-s3-dem-search-form-contract-map-001.md; t97-s4-byob-dos-metadata-contract-001.md; t97-s4-pathname-provider-integration-001.md. |
-| Files And ABI Surface | Profile fixtures, bounded runtime trace input/output, and existing adapter/Bochs mechanics only. No new bridge ABI. |
+| Identifier Mode | M0 T98 S1, Ordinary Mode. |
+| Admission And Approval | The owner authorized dependency/ROI-driven task selection. T97 S5 proves that the retained engine rejects the current v4 adapter/profile closure before the CPU loop. T98 selects the resulting engine-composition dependency ahead of further provider expansion. |
+| Objective | Inventory the exact retained engine artifact, its adapter object/link closure, source-to-binary delta, and minimal recomposition entry point for one selected DOS-engine bundle. |
+| Non-goals | No full Bochs configure/build loop, device enablement, new BOP/provider semantics, Bochs feature expansion, guest media, firmware change, or OpenNT/host API import. |
+| Reference Baseline | history/m0-t97-closure-20260812.md; etc/research/t97-s5-profile-and-engine-checkpoint-001.md; T95 minimal-engine evidence and the Bochs intrusion register. |
+| Files And ABI Surface | Build manifests, existing r5 engine artifacts, adapter source/object lists and fixed-width bridge declarations. No ABI change is admitted by S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Positive/negative v4 fixtures prove metadata admission; runtime fixture proves `50:09/0B`; a bounded real-path trace proves whether the live guest reaches that provider or a prior classified boundary. |
-| Expected Markers | Fixture matrix, immutable identity evidence, runtime trace marker, and a source/trace-backed first-stop classification. |
-| Asset Needs | Existing local source and BYOB profiles only; no new guest media, host directory fixture, third-party input, or Bochs feature. |
-| Reporting Requirements | Record source layout/error mapping, metadata origin, capability boundary, and exact unsupported paths. Do not describe a static fixture as CLI execution. |
-| Stop Conditions | Stop and revise if host metadata/query, time synthesis, PDB/FCB semantics, extra BOP family, new Bochs intrusion, or a new cross-island ABI becomes necessary. |
-| Exit Criteria | S4 evidence is reconciled into a passing profile/runtime fixture set; one real-path checkpoint is correctly classified, with FCB still explicitly deferred. |
+| Verification | Hash and inspect the retained binary/input manifest, compare it to the current adapter object set, identify the exact absent/stale object boundary, and verify no full-build or feature patch was invoked. |
+| Expected Markers | Pinned artifact identity, adapter/engine source-object matrix, minimal entry/link closure candidate, and an explicit required/default/rejected classification. |
+| Asset Needs | Existing local Bochs 2.6 source, r5 build/evidence trees, current adapter sources and local toolchains only. |
+| Reporting Requirements | Distinguish source compile/link evidence from runtime evidence; record every excluded default/device and the exact reason for any engine/adapter change. |
+| Stop Conditions | Stop and re-admit before compiling a broad engine target, adding a Bochs capability/device, changing Bochs code, or introducing a bridge ABI. |
+| Exit Criteria | A reproducible minimal composition plan with object/link and owner disposition sufficient to admit a later narrow build slice, or an evidence-backed external blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reconcile BYOB components/placements/boot materialization, readonly namespace, search session/result/request, DTA registration, DEM plane/gate, and runtime source lists together. |
 
@@ -93,5 +93,7 @@
 | M0 T97 S4 P1 | Complete: v4 BYOB profiles admit an exact, immutable four-entry DOS metadata snapshot; pathname routing remains disabled pending the common-plane integration slice. |
 | M0 T97 S4 P2 | Complete focused closure: common DEM-plane `50:09/0B` routing consumes only copied guest inputs and the immutable v4 snapshot; FCB and ambient host namespace remain excluded. The legacy runtime fixture needs replacement because it asserts the withdrawn file-service path. |
 | M0 T97 S4 P3 | Complete: default runtime regression no longer asserts withdrawn file-token services; its focused v4 mode passes DTA registration, `50:09` success, and `50:0B` no-more. |
-| M0 T97 S5 | Active: profile fixture matrix and real-path checkpoint. |
+| M0 T97 S5 | Complete: v4 acceptance/rejection fixtures pass; the retained engine rejects the v4 execution plan before CPU loop, so zero BOP/transaction is correctly classified as stale engine composition. |
+| M0 T97 | Closed: finite profile namespace and pathname provider are source/runtime closed; engine recomposition is transferred to T98. |
+| M0 T98 S1 | Active: retained engine/adapter object and link-closure inventory. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
