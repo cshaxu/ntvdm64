@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T96 S9 — Full inventory/provider/capability regression.**
+**Active: M0 T96 S10 — Real-path trace and T96 closure checkpoint.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T96 S9, Ordinary Mode. |
-| Admission And Approval | The owner approved holistic BOP recovery by original component and rejected trace-specific handlers. S9 follows closed source planes and S8 no-bypass closure. |
-| Objective | Verify every immutable inventory identity receives the expected ingress route, provider disposition, plane classification or explicit non-provider outcome under the first CLI profile. |
-| Non-goals | No new provider, host capability, BIOS/Bochs semantic, OpenNT direct link, or trace-driven behavior change. |
-| Reference Baseline | history/m0-t96-s8-closure-20260811.md; immutable BOP inventory/map; ingress/registry and plane tests. |
-| Files And ABI Surface | Regression harnesses and read-only inventory evidence; no new public ABI or Bochs API. |
+| Identifier Mode | M0 T96 S10, Ordinary Mode. |
+| Admission And Approval | The owner approved holistic BOP recovery and requires that build/classification success never be represented as runtime success. S10 follows S1--S9 closure. |
+| Objective | Run or reproduce the current real NTIO/NTDOS path with the admitted minimal Bochs/adapter composition; correlate every reached BOP to its plane/profile disposition and state the exact T96 runtime boundary. |
+| Non-goals | No trace-driven provider patch, device enablement, BIOS/Bochs semantic change, synthetic guest success, or claim that a classifier/regression run is a CLI runtime. |
+| Reference Baseline | history/m0-t96-s9-closure-20260812.md; current native trace/build evidence; closed plane maps; Bochs intrusion register. |
+| Files And ABI Surface | Existing default-off execution/trace seams and adapter runtime only; no new public ABI, provider or Bochs API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | A complete automated matrix covers all inventory selectors/services and asserts route/selection/plane/non-provider outcomes; focused compile/tests; governance; diff check. |
-| Expected Markers | One reproducible profile-disposition report and no inventory identity that silently receives success or has no classification. |
-| Asset Needs | Immutable inventory/map, source plane code/tests and legacy register; no new third-party, firmware, guest media, or Microsoft asset. |
-| Reporting Requirements | Record total/covered identity counts, expected class, any source-table ambiguity and explicit unavailable/deferred outcomes. |
-| Stop Conditions | Stop and revise admission if regression exposes a missing identity, ambiguous source owner, unintended success, or needs new semantic code to pass. |
-| Exit Criteria | All BOP inventory families and top-level identities have a reproducible profile disposition; S10 real-path trace question is narrowed to admitted providers. |
+| Verification | Trace records selected composition, reached BOP identities, their plane/profile disposition, accepted results, stop/fault reason and reproducible command/artifact location; governance and diff check. |
+| Expected Markers | One evidence-backed runtime outcome: controlled progress, source-proven unavailable/deferred stop, or explicit unrelated machine blocker. |
+| Asset Needs | Existing local Bochs/native build and trace artifacts plus source-built guest plan; no new third-party, firmware, guest media, or Microsoft asset. |
+| Reporting Requirements | Separate build, classifier and runtime evidence; quote no implied execution from static tests; identify the next owner/component only if trace proves it. |
+| Stop Conditions | Stop and revise admission if trace requires an unregistered Bochs change, a new provider, unproved guest asset, or semantic patch merely to pass a reached BOP. |
+| Exit Criteria | A real-path checkpoint is recorded with exact evidence and remaining limiter; T96 can close only if the architectural BOP-plane objective is proven independently of any remaining runtime blocker. |
 | Original Owner Request | Implement BOP holistically, preserve OpenNT semantics, and make adapter route to original OpenNT host code before using minimal source-derived rehosting. |
-| Similar-Issue Sweep | Review inventory JSON, BOP catalogue, ingress, registry, all four plane classifiers, no-bypass register and existing provider tests together. |
+| Similar-Issue Sweep | Review current native runtime command/trace artifacts, startup-plan handoff, generic #UD identity trace, reached services, CPU/device fault traces and all applicable plane records together. |
 
 ## Current Technical Baseline
 
@@ -48,6 +48,8 @@
   unavailable or collision disposition, without importing a BIOS dispatcher.
 - M0 T96 S8 is closed: legacy runtime identities are registered and gated or
   rejected, with a scan preventing unapproved direct BOP recognizers.
+- M0 T96 S9 is closed: complete inventory/profile regression covers all
+  selectors, service identities and BIOS forms without claiming runtime.
 
 ## Recent Progress
 
@@ -68,4 +70,6 @@
 | M0 T96 S8 P4 | Complete: the conflicting legacy DEM FASTREAD path is removed from runtime, preserving its S3 original-no-op disposition. |
 | M0 T96 S8 | Complete: legacy recognizers are plane-gated, frozen or rejected; no-bypass verification is active. |
 | M0 T96 S9 | Admitted in Ordinary Mode; full inventory/provider/capability regression begins. |
+| M0 T96 S9 | Complete: 192 callable services traverse ingress, registry and plane classification; inventory counts are independently verified. |
+| M0 T96 S10 | Admitted in Ordinary Mode; real-path trace and T96 closure checkpoint begins. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
