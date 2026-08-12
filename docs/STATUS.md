@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T101 S1 — post-BOP Bochs prefetch-map mechanics audit.**
+**Active: M0 T102 S1 — aperture-entry CPU transfer observation design.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T101 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized priority/ROI-based task selection. T100 proves `50:42` resumes with its original no-op contract and reaches `50:02`; the remaining stop is a Bochs prefetch-map veto. This selects the next first-profile capability checkpoint as a read-only mechanics audit. |
-| Objective | Correlate the exact post-BOP trace state and physical prefetch address with Bochs memory-map/firmware/device source and reached OpenNT control flow; classify the missing owner, if any, without changing runtime behavior. |
-| Non-goals | No Bochs patch, feature/device enablement, memory mapping, firmware/ROM change, guest-media change, adapter BOP/provider change, host capability, or second guest trace. |
-| Reference Baseline | etc/research/t100-s1-original-unavailable-dem-plane-runtime-001.md; t95 PC reset-floor and memory observations; current Bochs 2.6 source and the local OpenNT sources. |
-| Files And ABI Surface | Evidence and status/history records only unless an already-present, read-only diagnostic parser is used. No source ABI or build recipe modification. |
+| Identifier Mode | M0 T102 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized priority/ROI-based task selection. T101 proves that the `0xAF6AF` stop is a valid native VGA-aperture execution veto, but the retained trace cannot identify the transfer that entered it. This selects the minimum evidence prerequisite before another real run. |
+| Objective | Define and source-close a default-off Bochs-owned observation contract that records fixed-width CPU control-transfer facts sufficient to identify the first transition into the VGA aperture. |
+| Non-goals | No BOP/DOS/DEM decoding, adapter state/result, guest-memory read, CPU semantic change, Bochs feature/device/firmware/memory-map change, host capability, guest retry, or aperture execution. |
+| Reference Baseline | etc/research/t101-s1-post-bop-prefetch-map-audit-001.md; current `cpu.cc` prefetch path; existing default-off mechanical #UD observation precedent and intrusion register. |
+| Files And ABI Surface | Bochs diagnostic boundary and its explicit exception register only if source review proves no adapter/build-only option exists; fixed-width log/record fields only. No OpenNT or adapter ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproducible source/trace address calculation, a source-owner map for every relevant mapping layer, and an explicit admitted/deferred/rejected disposition. No executable build or run. |
-| Expected Markers | The `0xAF6AF` physical address is classified as a required native mapping, invalid/errant guest control flow, or an unresolved evidence gap; every conclusion distinguishes inference from direct proof. |
-| Asset Needs | Existing T100 trace, local Bochs 2.6/OpenNT source and retained evidence only. |
-| Reporting Requirements | Record exact source paths/lines, trace state, calculations, confidence and next action; do not represent an audit conclusion as a repair. |
-| Stop Conditions | Stop and re-admit before source changes, a Bochs/configuration/device/firmware/guest-media change, adapter change, additional trace, or any new capability decision. |
-| Exit Criteria | One reproducible owner/disposition map and a bounded recommended next task are recorded; no repair or runtime claim. |
+| Verification | Compare all existing Bochs/adapter diagnostic hooks and source locations; record exact pre/post-control-state fields, default-off activation, negative behavior and intrusion disposition before implementation. No build or guest run. |
+| Expected Markers | One minimal observation point, an owner/rationale map, proof that it cannot expose service semantics, and an explicit decision whether a Bochs intrusion exception is necessary. |
+| Asset Needs | Existing trace, Bochs 2.6 source, adapter boundary records and intrusion register only. |
+| Reporting Requirements | Distinguish design/source closure from implementation/runtime evidence; register an intrusion before any Bochs edit, or record why no edit is required. |
+| Stop Conditions | Stop and re-admit before any source edit, BOP/service inspection, behavior change, new device/firmware/map, adapter ABI, build or guest run. |
+| Exit Criteria | A reviewed diagnostic contract and either a no-intrusion route or a registered minimal Bochs exception is recorded; no runtime claim. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check CPU prefetch translation, memory handler/map ownership, ROM/RAM/video ranges, reset-floor device mappings, real/protected mode segmentation, and reached OpenNT continuation evidence. |
+| Similar-Issue Sweep | Compare #UD event hand-off, existing CPU trace/log macros, prefetch translation, TLB/segment transitions, memory direct-access handlers, and external-intrusion register; exclude every service-level input. |
 
 ## Current Technical Baseline
 
@@ -106,7 +106,8 @@
 | M0 T99 S2 P2 | Complete: v4 runtime now consumes the provider for CONFIG/AUTOEXEC and pathname-search state; narrow engine relink and one bounded `54:0C` trace pass without a Bochs rebuild. |
 | M0 T99 S2 P3 | Complete: normal DEM open/seek/read/close moved into the same provider/session family; focused lifecycle passes and the r2 bounded run reaches `54:0C`, `50:12`, `50:00`, then original-unavailable `50:42`. |
 | M0 T99 | Closed: finite read-only boot namespace provider is source/test/build closed; one real consumer reaches the next original-unavailable DEM boundary, with no continuous-execution claim. |
-| M0 T100 S1 | Active: compose the complete eight-slot original-unavailable DEM provider through the common plane; no individual FASTREAD substitute. |
+| M0 T100 S1 | Complete: whole original-unavailable DEM provider composes through ingress/registry/plane and source/test/build/runtime evidence. |
 | M0 T100 | Closed: all eight original-unavailable DEM slots compose through common selection; trace proves `50:42` resume and later close before the separate Bochs prefetch-map stop. |
-| M0 T101 S1 | Active: read-only source/trace mechanics audit of the post-BOP `0xAF6AF` prefetch veto. |
+| M0 T101 | Closed: `0xAF6AF` is a native VGA-aperture execution veto, not a missing mapping/device; upstream transfer remains unobserved. |
+| M0 T102 S1 | Active: design/source-close a default-off, Bochs-owned first-aperture-entry observation contract. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
