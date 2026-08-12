@@ -2,7 +2,8 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$R5Root = '',
-    [Parameter(Mandatory = $true)][string]$BuildRoot
+    [Parameter(Mandatory = $true)][string]$BuildRoot,
+    [switch]$DeferredStartupPlan
 )
 
 $ErrorActionPreference = 'Stop'
@@ -29,7 +30,8 @@ function Copy-Verified([string]$Source, [string]$Destination) {
 }
 
 # This is the source list compiled by the current adapter-runtime fixture.  It
-# deliberately includes no host-namespace object and no Bochs source file.
+# deliberately includes no host-namespace object. The optional deferred mode
+# replaces exactly two existing Bochs objects below.
 $adapterSources = @(
     'bx_ntvdm_cpu_state_abi.c','bx_ntvdm_instruction_window_abi.c',
     'bx_ntvdm_guest_range.c','bx_ntvdm_guest_write_abi.c',
@@ -43,13 +45,14 @@ $adapterSources = @(
     'bx_ntvdm_dem_readonly_file_service.c','bx_ntvdm_exception_abi.c',
     'bx_ntvdm_cpu_delta_abi.c','bx_ntvdm_cpu_result_v2.c',
     'bx_ntvdm_guest_read_action_v1.c','bx_ntvdm_guest_gather_read_action_v1.c',
-    'bx_ntvdm_adapter_runtime.c','bx_ntvdm_profile_search_snapshot_v1.c',
+    'bx_ntvdm_adapter_runtime.c','bx_ntvdm_boot_namespace_provider_v1.c',
+    'bx_ntvdm_profile_search_snapshot_v1.c',
     'bx_ntvdm_search_session.c','bx_ntvdm_search_result_v1.c',
     'bx_ntvdm_search_plan_v1.c','bx_ntvdm_search_request_v1.c',
     'bx_ntvdm_search_transaction_v1.c','bx_ntvdm_dem_path_search_service_v1.c',
     'bx_ntvdm_bop_catalog_v1.c',
     'bx_ntvdm_bop_ingress_v1.c','bx_ntvdm_bop_provider_registry_v1.c',
-    'bx_ntvdm_dem_plane_v1.c','bx_ntvdm_command_plane_v1.c',
+    'bx_ntvdm_dem_plane_v1.c','bx_ntvdm_dem_provider_v1.c','bx_ntvdm_command_plane_v1.c',
     'bx_ntvdm_legacy_plane_gate_v1.c','bx_ntvdm_bios_memory_service.c',
     'bx_ntvdm_dem_boot_drive_service.c','bx_ntvdm_dem_debug_service.c',
     'bx_ntvdm_emm_unavailable_service.c','bx_ntvdm_mouse_install1_mapping_service.c',
@@ -83,10 +86,33 @@ $manifest = [ordered]@{
     r5Root = $r5
     r5BinarySha256 = Get-Sha256 (Join-Path $r5 'ntdos64-s7-runtime-trace.exe')
     buildRoot = $build
+    deferredStartupPlan = [bool]$DeferredStartupPlan
     bochsReplacementCount = 0
+    bochsReplacements = @()
     adapterSources = @()
     cliSources = @()
     retainedEngineInputs = @()
+}
+$bochsObjects = @()
+if ($DeferredStartupPlan) {
+    $bochsSources = @(
+        @{ source = 'src\bochs\main.cc'; destination = 'main.cc'; object = 'main.o' },
+        @{ source = 'src\bochs\cpu\exception.cc'; destination = 'cpu\exception.cc'; object = 'cpu\exception.o' },
+        @{ source = 'src\bochs\cpu\bx_ntvdm_exception_intercept.h'; destination = 'cpu\bx_ntvdm_exception_intercept.h'; object = '' }
+    )
+    foreach ($entry in $bochsSources) {
+        $source = Join-Path $repository $entry.source
+        $destination = Join-Path $build $entry.destination
+        $hash = Copy-Verified $source $destination
+        $manifest.bochsReplacements += [ordered]@{ path = $entry.source; sha256 = $hash; object = $entry.object }
+        if ($entry.object -ne '') {
+            $object = Join-Path $build $entry.object
+            if (Test-Path -LiteralPath $object) { Remove-Item -LiteralPath $object -Force }
+            if (Test-Path -LiteralPath $object) { throw "Stale Bochs object remains: $($entry.object)" }
+            $bochsObjects += $entry.object
+        }
+    }
+    $manifest.bochsReplacementCount = $bochsObjects.Count
 }
 foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-ntvdm-adapter') -Filter *.h -File) {
     [void](Copy-Verified $header.FullName (Join-Path $build ('adapter\' + $header.Name)))
@@ -116,8 +142,16 @@ $make = @(
     '# Generated T98 S1 derivative: retains r5 Bochs/engine artifacts and rebuilds only the listed adapter/CLI objects.',
     '!INCLUDE Makefile','',
     ('ADAPTER_OBJS = ' + ($allObjects -join ' ')),'',
-    '# No Bochs C/C++ compilation rule is present.  Existing r5 main, exception, CPU, device and simulator inputs remain unchanged.',''
+    '# Default mode retains r5 Bochs inputs. Deferred mode rebuilds only main.o and cpu\exception.o.',''
 )
+if ($DeferredStartupPlan) {
+    $make += @(
+        'main.o: main.cc',
+        "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXECUTION_PLAN=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /Iadapter /Icli /Tpmain.cc /Fomain.o",'',
+        'cpu\exception.o: cpu\exception.cc',
+        "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1 /DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1 /DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1 /DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0 /DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /Iadapter /Icli /Tpcpu\exception.cc /Focpu\exception.o",''
+    )
+}
 foreach ($object in $allObjects) {
     $source = $object -replace '\.obj$', '.c'
     $make += "${object}: $source"
@@ -126,16 +160,27 @@ foreach ($object in $allObjects) {
 }
 $make += @(
     '# Deliberately no Bochs archive is a make prerequisite: inherited Makefile rules would recurse into devices.',
-    'ntdos64-t98-current-adapter.exe: $(ADAPTER_OBJS)',
+    ('ntdos64-t98-current-adapter.exe: ' + (($bochsObjects + @('$(ADAPTER_OBJS)')) -join ' ')),
     "`tlink /nologo /subsystem:console /incremental:no /opt:ref /map:ntdos64-t98-current-adapter.map /out:`$@ `$(BX_OBJS) `$(SIMX86_OBJS) cpu\exception.o iodev/libiodev.a iodev/hdimage/libhdimage.a iodev/usb/libusb.a iodev/network/libnetwork.a iodev/sound/libsound.a cpu/libcpu.a cpu/cpudb/libcpudb.a memory/libmemory.a gui/libgui.a `$(DISASM_LIB) `$(FPU_LIB) `$(GUI_LINK_OPTS) `$(MCH_LINK_FLAGS) `$(SIMX86_LINK_FLAGS) `$(READLINE_LIB) `$(EXTRA_LINK_OPTS) `$(LIBS) `$(ADAPTER_OBJS) kernel32.lib bcrypt.lib",''
 )
 $shim = Join-Path $build 'ntdos64-t98-current-adapter.mak'
 [IO.File]::WriteAllText($shim, ($make -join "`r`n"), [Text.UTF8Encoding]::new($false))
 
-if ((Get-Content -LiteralPath $shim -Raw) -match '(^|\r?\n)(main\.o|cpu\\exception\.o):') { throw 'Derivative shim unexpectedly rebuilds a Bochs object.' }
+if (-not $DeferredStartupPlan -and (Get-Content -LiteralPath $shim -Raw) -match '(^|\r?\n)(main\.o|cpu\\exception\.o):') { throw 'Default derivative unexpectedly rebuilds a Bochs object.' }
+if ($DeferredStartupPlan) {
+    $shimText = Get-Content -LiteralPath $shim -Raw
+    if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)(main\.o|cpu\\exception\.o):').Matches.Count -ne 2) { throw 'Deferred derivative must rebuild exactly two Bochs objects.' }
+    foreach ($term in @('BX_NTVDM_ENABLE_EXECUTION_PLAN=0', 'BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1')) {
+        if ($shimText -notmatch [regex]::Escape($term)) { throw "Deferred derivative lacks macro: $term" }
+    }
+}
 if ((Get-Content -LiteralPath $shim -Raw) -match 'host_namespace') { throw 'Derivative shim unexpectedly admits host namespace.' }
 if ((Get-Content -LiteralPath $shim -Raw) -match '^ntdos64-t98-current-adapter\.exe:.*(?:iodev|cpu\\libcpu|memory|gui)') { throw 'Derivative shim makes a retained Bochs archive a prerequisite.' }
-foreach ($path in @('main.o','cpu\exception.o','cpu\libcpu.a','iodev\libiodev.a','memory\libmemory.a','gui\libgui.a')) {
+$retainedEnginePaths = @('main.o','cpu\exception.o','cpu\libcpu.a','iodev\libiodev.a','memory\libmemory.a','gui\libgui.a')
+if ($DeferredStartupPlan) {
+    $retainedEnginePaths = @($retainedEnginePaths | Where-Object { $_ -notin @('main.o','cpu\exception.o') })
+}
+foreach ($path in $retainedEnginePaths) {
     $manifest.retainedEngineInputs += [ordered]@{ path=$path; sha256=(Get-Sha256 (Join-Path $build $path)) }
 }
 $manifest.shimSha256 = Get-Sha256 $shim
