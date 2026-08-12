@@ -58,7 +58,7 @@ static uint16_t drive_count(const bx_ntvdm_host_drive_snapshot_v1 *drives)
 void bx_ntvdm_cmd_get_next_state_v1_initialize(bx_ntvdm_cmd_get_next_state_v1 *value)
 { if (value) memset(value, 0, sizeof(*value)); }
 void bx_ntvdm_cmd_get_next_state_v1_commit(bx_ntvdm_cmd_get_next_state_v1 *state)
-{ if (state) state->delivered = 1u; }
+{ if (state && state->delivered < 2u) ++state->delivered; }
 int bx_ntvdm_cmd_return_exit_code_v1_dispatch(bx_ntvdm_cmd_get_next_state_v1 *state,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_cpu_result_v2 *result)
@@ -95,7 +95,7 @@ int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
     bx_ntvdm_multi_write_transaction_v1 *t, uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD])
 {
     byob_launch_declaration_v1 launch; bx_ntvdm_cmdinfo_v1 info; uint8_t executable[16], command[130], two[2], zero2[2] = {0,0}, zero4[4] = {0,0,0,0};
-    uint32_t executable_bytes, command_count, command_bytes, used = 0u; uint16_t extension, count; uint64_t address;
+    const char *command_name; uint32_t executable_bytes, command_count, command_bytes, used = 0u; uint16_t extension, count; uint64_t address;
     if (!ns || !plan || !drives || !reg || !state || !event || !cpu || !action || !bytes || !t || !payload ||
         state->delivered >= 2u || plan->slot_count != 2u || plan->version != 2u) return 0;
     launch = plan->first;
@@ -104,9 +104,10 @@ int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
         !bx_ntvdm_cmdinfo_v1_decode(bytes, (uint32_t)byte_count, &info) || byte_count != BX_NTVDM_CMDINFO_V1_BYTES ||
         info.command_bytes != 128u || info.executable_bytes != BX_NTVDM_CMDINFO_V1_EXECPATH_BYTES ||
         !physical(info.command_segment, info.command_offset, 130u, &address)) return 0;
-    command_count = 6u + (launch.tail_bytes ? 1u : 0u) + launch.tail_bytes + 2u;
+    command_name = state->delivered == 0u ? "TARGET" : "QUIT";
+    command_count = (uint32_t)strlen(command_name) + (launch.tail_bytes ? 1u : 0u) + launch.tail_bytes + 2u;
     if (command_count > 127u) return 0;
-    command[0] = (uint8_t)command_count; memcpy(command + 1u, "TARGET", 6u); command_bytes = 7u;
+    command[0] = (uint8_t)command_count; memcpy(command + 1u, command_name, strlen(command_name)); command_bytes = 1u + (uint32_t)strlen(command_name);
     if (launch.tail_bytes) { command[command_bytes++] = ' '; memcpy(command + command_bytes, launch.tail, launch.tail_bytes); command_bytes += launch.tail_bytes; }
     command[command_bytes++] = '\r'; command[command_bytes++] = '\n'; command[command_bytes++] = 0;
     bx_ntvdm_multi_write_transaction_v1_initialize(t, event, cpu);

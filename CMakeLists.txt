@@ -894,6 +894,7 @@ target_compile_definitions(bx-ntvdm-host-drive-policy-test PRIVATE UNICODE _UNIC
 
 add_executable(bx-ntvdm-cmd-get-next-service-test EXCLUDE_FROM_ALL
     src/cli/byob_launch_declaration_v1.c
+    src/cli/byob_launch_plan_v2.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_delta_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_result_v2.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_state_abi.c
