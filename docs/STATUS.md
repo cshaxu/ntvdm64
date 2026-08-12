@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T97 S1 — DEM namespace/file/search component and ABI audit.**
+**Active: M0 T97 S2 — Immutable CLI namespace resource and file-token design.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T97 S1, Ordinary Mode. |
-| Admission And Approval | The owner authorized dependency- and ROI-based task selection. T97 selects the former read-only namespace/file/search candidate after T96's source-proven `50:42` boundary. |
-| Objective | Produce a component-scale, source-backed contract and composition-blocker map for the original OpenNT DEM namespace/file/search family required by the declared first CLI profile. |
-| Non-goals | No runtime provider, new BOP handler, Bochs/firmware/device change, arbitrary host-path access, mutation, guest-triggered rescan, or claim of runnable DOS. |
-| Reference Baseline | history/m0-t96-closure-20260812.md; etc/research/t96-s10-real-path-checkpoint-001.md; etc/research/t96-s3-dem-component-boundaries-001.md; T96 DEM plane and legacy register. |
-| Files And ABI Surface | OpenNT source and existing adapter/CLI resource contracts are read-only evidence. S1 may add only research evidence and task planning; it introduces no new ABI or provider. |
-| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Account for the whole selected original component family and every related callable DEM service; record source definitions, dispatch slots, copied register/guest-memory layouts, return/failure behavior, CCPU/SAS/Win32 composition edges, and current profile disposition; run governance and diff checks. |
-| Expected Markers | One auditable provider-and-module map that separates independently composable original code, contained CLI-backend candidates, source-derived rehost candidates, and source-proven unavailable/deferred outcomes. |
-| Asset Needs | Existing local OpenNT source, T96 inventory, current trace, and admitted BYOB profile evidence only; no new source, firmware, guest media, or third-party asset. |
-| Reporting Requirements | Tie each conclusion to source path/dispatch identity and distinguish evidence from inference. Record the result that enables S2/S3, or a genuine composition blocker. |
-| Stop Conditions | Stop and revise admission if the audit requires a new provider, host API, Bochs change, imported input, or a service-by-service runtime patch to continue. |
-| Exit Criteria | A full component and ABI/failure map, a documented bounded S2/S3 handoff, updated T97 supporting plan, and a committed, governance-verified record. |
-| Original Owner Request | Implement BOP tables holistically; use minimal Bochs as SoftPC replacement; preserve OpenNT semantics and a narrow adapter/CLI boundary. |
-| Similar-Issue Sweep | Audit `demfile`, `demhndl`, `demdir`, `demsrch`, `demfcb`, their dispatcher entries, current frozen adapter endpoints, COMMAND configuration/current-directory callers, and the immutable drive/namespace model together. |
+| Identifier Mode | M0 T97 S2, Ordinary Mode. |
+| Admission And Approval | S1 is closed by source audit. The owner already authorized dependency- and ROI-based sequencing; this is its bounded, source-derived replacement branch. |
+| Objective | Define one immutable CLI-admitted namespace resource and token lifecycle that can replace the non-composable original `50:12/00/16/02` host-handle contract without exposing host paths or handles. |
+| Non-goals | No runtime BOP enablement, FASTREAD response, search/FCB behavior, arbitrary host-drive projection, mutation, ambient CWD, Bochs change, or new direct recognizer. |
+| Reference Baseline | etc/research/t97-s1-dem-namespace-component-abi-map-001.md; existing readonly namespace/file candidate; T96 plane and legacy register. |
+| Files And ABI Surface | Adapter-local resource/token design, evidence and focused tests only. Any bridge result remains the existing versioned copied transaction ABI. |
+| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
+| Verification | Compare source inputs/outputs and failures for the four selected DEM services against the proposed token contract; prove no host path/handle leaves the adapter and no direct recognizer is added. |
+| Expected Markers | A provider replacement-or-withdrawal decision, exact immutable resource identity/lifecycle, fixed token properties, and focused positive/negative boundary tests. |
+| Asset Needs | Existing BYOB profile/resource inputs and source evidence only; no external filesystem scan, new guest media, or Bochs asset. |
+| Reporting Requirements | State all unsupported modes and error dispositions; distinguish a design/test fixture from runtime enablement. |
+| Stop Conditions | Stop and revise if an original behavior needs a host handle/path, a new machine feature, an unbounded guest memory read, or a separate endpoint-specific hook. |
+| Exit Criteria | One verified immutable token/resource contract that either safely replaces the frozen candidate in the common plane or records why it must remain unavailable; S3 handoff is explicit. |
+| Original Owner Request | Holistic BOP implementation with an adapter boundary, minimum Bochs, original OpenNT semantics, and no accumulation of one-off patches. |
+| Similar-Issue Sweep | Reconcile DEM open/seek/read/close, COMMAND boot/current-directory consumers, BYOB profile identity, legacy register, and all existing readonly namespace tests together. |
 
 ## Current Technical Baseline
 
@@ -52,8 +52,10 @@
   selectors, service identities and BIOS forms without claiming runtime.
 - M0 T96 is closed: its real-path checkpoint exposes the original-unavailable
   DEM FASTREAD edge, without changing Bochs or fabricating a BOP outcome.
-- M0 T97 S1 is active: it audits the complete original DEM namespace/file/
-  search component family before any provider or runtime expansion.
+- M0 T97 S1 is complete: no original standalone provider exists; the frozen
+  read-only and search candidates are only implementation inventory.
+- M0 T97 S2 is active: define one immutable resource/token replacement for
+  the paired DEM open/seek/read/close contract.
 
 ## Recent Progress
 
@@ -77,5 +79,6 @@
 | M0 T96 S9 | Complete: 192 callable services traverse ingress, registry and plane classification; inventory counts are independently verified. |
 | M0 T96 S10 P1 | Complete checkpoint: r49 linked all T96 plane/gate objects and a fresh bounded NTIO/NTDOS run reached the original-unavailable `50:42` boundary; see etc/research/t96-s10-real-path-checkpoint-001.md. |
 | M0 T96 | Closed: source ownership, the holistic BOP plane, and the current real-path boundary are recorded in history/m0-t96-closure-20260812.md. |
-| M0 T97 S1 | Active: audit the original DEM namespace/file/search family as one component before a capability or provider is admitted. |
+| M0 T97 S1 | Complete: component/ABI/failure and composition map records the source-derived replacement boundary. |
+| M0 T97 S2 | Active: immutable CLI namespace resource and file-token design. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
