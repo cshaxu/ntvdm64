@@ -2,25 +2,25 @@
 
 ## Current Work
 
-**Active: M0 T98 S1 — current adapter-to-engine closure inventory.**
+**Active: M0 T99 S2 — profile-backed read-only boot namespace composition.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T98 S1, Ordinary Mode. |
-| Admission And Approval | The owner authorized dependency/ROI-driven task selection. T97 S5 proves that the retained engine rejects the current v4 adapter/profile closure before the CPU loop. T98 selects the resulting engine-composition dependency ahead of further provider expansion. |
-| Objective | Inventory the exact retained engine artifact, its adapter object/link closure, source-to-binary delta, and minimal recomposition entry point for one selected DOS-engine bundle. |
-| Non-goals | No full Bochs configure/build loop, device enablement, new BOP/provider semantics, Bochs feature expansion, guest media, firmware change, or OpenNT/host API import. |
-| Reference Baseline | history/m0-t97-closure-20260812.md; etc/research/t97-s5-profile-and-engine-checkpoint-001.md; T95 minimal-engine evidence and the Bochs intrusion register. |
-| Files And ABI Surface | Build manifests, existing r5 engine artifacts, adapter source/object lists and fixed-width bridge declarations. No ABI change is admitted by S1. |
+| Identifier Mode | M0 T99 S2, Ordinary Mode. |
+| Admission And Approval | T99 S1 selected one coherent producer/consumer family: original COMMAND config materialization with DEM normal read-only file and pathname-search consumption. Historical direct composition is source-proven blocked. |
+| Objective | Replace or withdraw that family's legacy endpoint path as one finite profile-backed, read-only boot namespace provider; preserve original paired service and bounded buffer/error contracts. |
+| Non-goals | No individual trace-hit handler, no BOP ingress rewrite, no Bochs/device/firmware change, no DOS/BIOS semantics in the adapter, no host-invasive API, host directory, host handle, FCB emulation, write/create/rename, raw IOCTL or process execution. |
+| Reference Baseline | etc/research/t99-s1-opennt-dem-command-composition-map-001.md; T97 pathname/profile contracts; T96 DEM/COMMAND maps and endpoint register. |
+| Files And ABI Surface | Existing fixed-width ingress/plane/result ABI; profile namespace, search transaction, read-only namespace and legacy gate source. Any added composition state must be copied/opaque and documented. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Hash and inspect the retained binary/input manifest, compare it to the current adapter object set, identify the exact absent/stale object boundary, and verify no full-build or feature patch was invoked. |
-| Expected Markers | Pinned artifact identity, adapter/engine source-object matrix, minimal entry/link closure candidate, and an explicit required/default/rejected classification. |
-| Asset Needs | Existing local Bochs 2.6 source, r5 build/evidence trees, current adapter sources and local toolchains only. |
+| Verification | Focused producer/consumer success and unavailable tests; scan proving no direct legacy bypass; source build/relink through the T98 composition recipe; one bounded trace only after source closure. |
+| Expected Markers | One provider owner/state boundary, paired `54:0C/0D` plus read-handle/search disposition, no-host-namespace proof, and explicit FCB/write/IOCTL refusal. |
+| Asset Needs | Existing local OpenNT source, finite BYOB profile, current adapter/CLI sources and r5-derived build island only. |
 | Reporting Requirements | Distinguish source compile/link evidence from runtime evidence; record every excluded default/device and the exact reason for any engine/adapter change. |
-| Stop Conditions | Stop and re-admit before compiling a broad engine target, adding a Bochs capability/device, changing Bochs code, or introducing a bridge ABI. |
-| Exit Criteria | A reproducible minimal composition plan with object/link and owner disposition sufficient to admit a later narrow build slice, or an evidence-backed external blocker. |
+| Stop Conditions | Stop and re-admit before any Bochs/device/firmware/guest-media change, host API capability, FCB/write/IOCTL expansion, new bridge ABI, or a second runtime retry. |
+| Exit Criteria | The coherent provider is source/test/build closed or an evidence-backed composition blocker is recorded; no continuous-DOS claim. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reconcile BYOB components/placements/boot materialization, readonly namespace, search session/result/request, DTA registration, DEM plane/gate, and runtime source lists together. |
 
@@ -95,6 +95,12 @@
 | M0 T97 S4 P3 | Complete: default runtime regression no longer asserts withdrawn file-token services; its focused v4 mode passes DTA registration, `50:09` success, and `50:0B` no-more. |
 | M0 T97 S5 | Complete: v4 acceptance/rejection fixtures pass; the retained engine rejects the v4 execution plan before CPU loop, so zero BOP/transaction is correctly classified as stale engine composition. |
 | M0 T97 | Closed: finite profile namespace and pathname provider are source/runtime closed; engine recomposition is transferred to T98. |
-| M0 T98 S1 | Active: retained engine/adapter object and link-closure inventory. |
+| M0 T98 S1 | Complete: retained engine/adapter object and link-closure inventory. |
 | M0 T98 S1 P1 | Complete: r5 manifest/makefile/map establishes the exact missing current adapter/profile object set; a narrow derivative relink is the only admitted next build candidate. |
+| M0 T98 S1 P2 | Complete: r2 generator/dry-run retains r5 Bochs inputs and exposes only 65 adapter/CLI compilations plus one final link; inherited archive recursion was rejected. |
+| M0 T98 S2 | Complete: r3 compiled 66 adapter/CLI objects (including BOP observation) and linked the current composition without a Bochs rebuild. |
+| M0 T98 S3 | Complete: bounded v4 trace passed the stale pre-CPU rejection, observed 15 BOPs and three commits, and ended at the benchmark budget. |
+| M0 T98 | Closed: current adapter-to-engine composition is source-built and bounded-runtime observed; continuous guest execution remains unproven. |
+| M0 T99 S1 | Complete: reached service families map to original components; finite read-only boot namespace is the selected whole provider slice. |
+| M0 T99 S2 | Active: contained read-only boot namespace composition, not singleton BOP handlers. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
