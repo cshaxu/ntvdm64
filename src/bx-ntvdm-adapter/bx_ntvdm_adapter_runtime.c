@@ -32,7 +32,7 @@
 #include "bx_ntvdm_machine_profile_abi.h"
 #include "bx_ntvdm_startup_snapshot_evidence.h"
 #include "byob_image.h"
-#include "byob_launch_declaration_v1.h"
+#include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
 
 #include <string.h>
@@ -40,8 +40,7 @@
 
 #define BX_NTVDM_ADAPTER_ENV_PROFILE L"NTDOS64_ADAPTER_PROFILE"
 #define BX_NTVDM_ADAPTER_ENV_ROOT L"NTDOS64_ADAPTER_ROOT"
-#define BX_NTVDM_ADAPTER_ENV_LAUNCH_KIND L"NTDOS64_ADAPTER_LAUNCH_KIND"
-#define BX_NTVDM_ADAPTER_ENV_LAUNCH_TAIL L"NTDOS64_ADAPTER_LAUNCH_TAIL"
+#define BX_NTVDM_ADAPTER_ENV_LAUNCH_PLAN L"NTDOS64_ADAPTER_LAUNCH_PLAN"
 #define BX_NTVDM_ADAPTER_MAX_OBSERVATION_BYTES 4096u
 
 typedef struct bx_ntvdm_adapter_runtime_v1 {
@@ -56,6 +55,7 @@ typedef struct bx_ntvdm_adapter_runtime_v1 {
     byob_image ntdos;
     byob_image command;
     byob_image target;
+    byob_image terminal_quit;
     wchar_t snapshot_evidence_root[MAX_PATH];
     wchar_t snapshot_evidence_file_name[64];
     byob_host_drive_inventory_descriptor host_drive_inventory;
@@ -67,6 +67,7 @@ typedef struct bx_ntvdm_adapter_runtime_v1 {
     bx_ntvdm_cmd_comspec_bootstrap_v1 cmd_comspec_bootstrap;
     bx_ntvdm_cmd_get_next_state_v1 cmd_get_next;
     byob_launch_declaration_v1 launch;
+    byob_launch_plan_v2 launch_plan;
     byob_machine_startup_handoff_descriptor deferred_startup_handoff;
     uint8_t bulk_payload[BX_NTVDM_BULK_RESULT_TRANSACTION_V1_MAX_PAYLOAD];
     uint8_t multi_write_payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
@@ -170,6 +171,7 @@ void bx_ntvdm_adapter_runtime_v1_reset(void)
     byob_image_release(&bx_ntvdm_adapter_runtime.ntdos);
     byob_image_release(&bx_ntvdm_adapter_runtime.command);
     byob_image_release(&bx_ntvdm_adapter_runtime.target);
+    byob_image_release(&bx_ntvdm_adapter_runtime.terminal_quit);
     memset(&bx_ntvdm_adapter_runtime, 0, sizeof(bx_ntvdm_adapter_runtime));
 }
 
@@ -193,9 +195,8 @@ int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
     byob_profile_selection selection;
     bx_ntvdm_session_resources_v1 resources;
     bx_ntvdm_host_service_payloads_v1 payloads;
-    wchar_t launch_kind[4];
-    wchar_t launch_tail[BYOB_LAUNCH_DECLARATION_V1_TAIL_BYTES + 1u];
-    DWORD launch_kind_size, launch_tail_size;
+    wchar_t launch_plan[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
+    DWORD launch_plan_size;
 
     if (bx_ntvdm_adapter_runtime.installed) return 0;
     if (byob_profile_validate_file_select(profile_path, byob_root, &selection) !=
@@ -209,32 +210,27 @@ int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
         return bx_ntvdm_adapter_runtime_v1_reject_install(
             BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_PROFILE_OR_IMAGE);
     }
-    if (selection.has_target_placement != 0u) {
+    if (selection.declared_target_count == 2u) {
         SetLastError(ERROR_SUCCESS);
-        launch_kind_size = GetEnvironmentVariableW(BX_NTVDM_ADAPTER_ENV_LAUNCH_KIND,
-            launch_kind, sizeof(launch_kind) / sizeof(launch_kind[0]));
-        if (launch_kind_size == 0u && GetLastError() != ERROR_SUCCESS) {
-            return bx_ntvdm_adapter_runtime_v1_reject_install(
-                BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_LAUNCH_DECLARATION);
-        }
-        SetLastError(ERROR_SUCCESS);
-        launch_tail_size = GetEnvironmentVariableW(BX_NTVDM_ADAPTER_ENV_LAUNCH_TAIL,
-            launch_tail, sizeof(launch_tail) / sizeof(launch_tail[0]));
-        if ((launch_tail_size == 0u && GetLastError() != ERROR_SUCCESS) ||
-            launch_kind_size == 0u || launch_kind_size >= sizeof(launch_kind) / sizeof(launch_kind[0]) ||
-            launch_tail_size >= sizeof(launch_tail) / sizeof(launch_tail[0]) ||
-            !byob_launch_declaration_v1_from_environment(&bx_ntvdm_adapter_runtime.launch,
-                launch_kind, launch_tail) ||
-            (bx_ntvdm_adapter_runtime.launch.target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM &&
+        launch_plan_size = GetEnvironmentVariableW(BX_NTVDM_ADAPTER_ENV_LAUNCH_PLAN,
+            launch_plan, sizeof(launch_plan) / sizeof(launch_plan[0]));
+        if ((launch_plan_size == 0u && GetLastError() != ERROR_SUCCESS) ||
+            launch_plan_size == 0u || launch_plan_size >= sizeof(launch_plan) / sizeof(launch_plan[0]) ||
+            !byob_launch_plan_v2_from_environment(&bx_ntvdm_adapter_runtime.launch_plan, launch_plan) ||
+            (bx_ntvdm_adapter_runtime.launch_plan.first.target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM &&
              wcscmp(selection.target.file_name, L"TARGET.COM") != 0) ||
-            (bx_ntvdm_adapter_runtime.launch.target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE &&
-             wcscmp(selection.target.file_name, L"TARGET.EXE") != 0)) {
+            (bx_ntvdm_adapter_runtime.launch_plan.first.target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE &&
+             wcscmp(selection.target.file_name, L"TARGET.EXE") != 0) ||
+            wcscmp(selection.terminal_quit.file_name, L"QUIT.COM") != 0) {
             return bx_ntvdm_adapter_runtime_v1_reject_install(
                 BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_LAUNCH_DECLARATION);
         }
+        bx_ntvdm_adapter_runtime.launch = bx_ntvdm_adapter_runtime.launch_plan.first;
         bx_ntvdm_adapter_runtime.has_launch = 1;
         if (byob_image_load_exact(byob_root, &selection.target,
-                &bx_ntvdm_adapter_runtime.target) != BYOB_IMAGE_OK) {
+                &bx_ntvdm_adapter_runtime.target) != BYOB_IMAGE_OK ||
+            byob_image_load_exact(byob_root, &selection.terminal_quit,
+                &bx_ntvdm_adapter_runtime.terminal_quit) != BYOB_IMAGE_OK) {
             return bx_ntvdm_adapter_runtime_v1_reject_install(
                 BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_PROFILE_OR_IMAGE);
         }
@@ -264,11 +260,12 @@ int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
         bx_ntvdm_adapter_runtime.has_host_drive_inventory = 1;
     }
     if (selection.has_command_placement != 0u &&
-        selection.has_target_placement != 0u &&
+        selection.declared_target_count == 2u &&
         selection.has_guest_search_metadata != 0u &&
         bx_ntvdm_boot_namespace_provider_v1_initialize(
             &bx_ntvdm_adapter_runtime.boot_namespace_provider,
-            &bx_ntvdm_adapter_runtime.command, &bx_ntvdm_adapter_runtime.target, NULL,
+            &bx_ntvdm_adapter_runtime.command, &bx_ntvdm_adapter_runtime.target,
+            &bx_ntvdm_adapter_runtime.terminal_quit,
             &selection)) {
         bx_ntvdm_adapter_runtime.has_boot_namespace_provider = 1;
     }

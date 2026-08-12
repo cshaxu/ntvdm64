@@ -953,6 +953,7 @@ add_executable(bx-ntvdm-adapter-runtime-test EXCLUDE_FROM_ALL
     src/cli/byob_identity.c
     src/cli/byob_image.c
     src/cli/byob_launch_declaration_v1.c
+    src/cli/byob_launch_plan_v2.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_state_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_instruction_window_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_guest_range.c
