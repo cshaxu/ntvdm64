@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 557 |
+| Documentation records | 559 |
 | --- | --- |
-| Generated UTC | 2026-08-12T04:53:46Z |
+| Generated UTC | 2026-08-12T05:14:47Z |
 
 ## Entries
 
@@ -296,6 +296,7 @@ content-divergent entries.
 | etc/research/t95-s7-target-namespace-materialization-evidence-001.md | indexed supporting material | ac111221908ec25915f220925abe17767d1435979d0e600c8ac19d2f0342ca98 |
 | etc/research/t95-s7-top-level-5a-5f-owner-audit-001.md | indexed supporting material | 0ae8ab04fdbaa99f723b9a8986fe2eb570673ea929fee72fd24307ca75f8e7cb |
 | etc/research/t96-s1-opennt-bop-provider-module-map-001.md | indexed supporting material | ab863d4a4717ce375891a4064f2131f577b59b6cdafd8d96aa771ab165d0b5af |
+| etc/research/t96-s2-bop-ingress-abi-001.md | indexed supporting material | b5fa7dee86c8f774ea951376878bed17846d2ecc58957cfc519b420bd7ff2dfa |
 | execution-workflow.md | retained pre-governance evidence | e5221d6627b9faad3bea9390561e37cd1ec045064321c9ea0b6a6bd816b6f126 |
 | FIRMWARE-PROFILE-INPUT-ADMISSION-REPORT.md | retained pre-governance evidence | c1f4a17d10761f92fa00e9c3ef8e0103dc739a89e33813e5a810d6cfac3311a4 |
 | GFI-MEDIA-HOST-BOUNDARY.md | retained pre-governance evidence | f5f6ab1ae2cb338541e3a173b6a9a22316252f5ec84a03557169ba083987cebf |
@@ -320,7 +321,8 @@ content-divergent entries.
 | HISTORICAL-TOOLCHAIN-REBASE-2026-08-07.md | retained pre-governance evidence | 909764d8e3b6870681e276a4c3e584f821570062af0803e6118a2a47dcf34bed |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-s1-p1-20260811.md | closed task history | 9b40b99939aad1233b4901b7f7f6569c64ac90b83a351e9a78268251d63c9154 |
-| history/task-index.md | closed task history | 7d858b5acdcab6bde404ed28a7c420377ec92adda000b169375722241e6495d9 |
+| history/m0-t96-s2-p1-20260811.md | closed task history | 7cea4118ee7c8c95de176bd5ee0de3f425aee60f252ac2e536444040a867c981 |
+| history/task-index.md | closed task history | 1a946069886e37e2edbc92dfcc8d7a4bbd5bfef844b759539249b47517a72ef7 |
 | HOST-APPLINIT-PREFIX-TRACE.md | retained pre-governance evidence | 1d43eca6ad570ac29479420ec0773724a160c058e9cf16bc85e3450f286efabe |
 | HOST-CONSOLE-UI-BOUNDARY.md | retained pre-governance evidence | fb9a692c698c144e8860379aff13d82499d03847a0ddfda1bbf60351ad7d2e2f |
 | HOST-EVENT-THREAD-BOUNDARY.md | retained pre-governance evidence | dc790e18fef0312debd4ff91162c44d4a137ec6ec6d00517f7c947fc70518be7 |
@@ -571,7 +573,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 2b0d87f8365271dd459fd3ed1d0b6119dc07f1926eb8259e8d1f7d1547706f32 |
+| STATUS.md | principal control document | 06a2e854c00b1eb4458feb0ab4cda48780b7ccbc8d62400a753a4e381e9b859c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
