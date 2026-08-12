@@ -8,7 +8,7 @@ Repair the v5 compatibility boundary exposed by T184.
 | --- | --- | --- |
 | S1 | Map declared v5 fields to runner/adapter consumers and identify omitted projections. | Complete: command placement and boot-file fields were omitted. |
 | S2 | Implement and test the complete declared-field projection with no schema/provider expansion. | Complete: local v5 profile and adapter-install tests pass. |
-| S3 | Recompose corrected current adapter/CLI objects into the retained engine without a Bochs rebuild. | Active in Status. |
+| S3 | Recompose corrected current adapter/CLI objects into the retained engine without a Bochs rebuild. | Complete: current 72-object derivative links against unchanged machine inputs. |
 
 ## Invariants
 

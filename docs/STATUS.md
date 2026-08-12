@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T185 S3 — complete v5 runtime selection projection.**
+**Binding active packet: none; M0 T185 is closed.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T185 S3**. M0 T184 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> No new packet is admitted below. M0 T185 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,9 +15,9 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T185 S3, Ordinary Mode. |
+| Identifier Mode | M0 T185, closed Ordinary Mode packet. |
 | Admission And Approval | T184 reaches original `54:0C` before `54:01`; source comparison identifies omitted v5 runtime selection fields. |
-| Objective | Recompose the tested v5 runtime-selection projection into the existing engine without a Bochs rebuild. |
+| Objective | Restore complete v5 selection projection and link it into the retained minimal-machine derivative. |
 | Non-goals | No guest observation/retry, Bochs change, new adapter provider, profile capability expansion, host capability, ambient namespace or `54:11` result transport. |
 | Reference Baseline | T185 S1/S2 audit/tests, T182 derivative and T184 observation. |
 | Files And ABI Surface | Current `byob_profile.c` plus the existing narrow engine derivative recipe only. |
@@ -27,7 +27,7 @@
 | Asset Needs | Current tuple plus retained NTIO/NTDOS/COMMAND/SHARE/QUIT files copied only into the fresh evidence root. |
 | Reporting Requirements | A timeout or incomplete result is final; neither `FE` nor process exit establishes normal DOS result transport. |
 | Stop Conditions | A second invocation, input replacement after manifest generation, raw Bochs invocation, Bochs/adapter change, profile capability addition or result-transport claim. |
-| Exit Criteria | Met: one retained observation loops at `54:0C` before `54:01`; the v5 selection-projection omission is transferred as an unnumbered Queue candidate. |
+| Exit Criteria | Met: complete v5 selection projection is source/test/link closed; a corrected-engine observation is an unnumbered Queue candidate. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
