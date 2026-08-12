@@ -56,7 +56,8 @@
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
   FASTREAD experiment were withdrawn; the immutable token design is retained.
-- M0 T97 S3 is active: audit pathname and FCB searches as separate contracts.
+- M0 T97 S3 is complete: pathname and FCB searches have separate source
+  contracts, and the host-directory fixture is expressly excluded.
 - M0 T97 S3 P1 is complete: pathname has a source-shaped future-provider
   boundary; FCB remains explicitly deferred pending its distinct ABI.
 - M0 T97 S3 P2 records that the existing host-directory search fixture is
@@ -89,4 +90,5 @@
 | M0 T97 S3 | Active: pathname/FCB directory-search ABI audit. |
 | M0 T97 S3 P1 | Complete: separate DTA and FCB buffer/error/continuation map recorded; no search runtime provider is enabled. |
 | M0 T97 S3 P2 | Complete limitation: host-directory fixture is excluded from T97 and its SDK-native query branch is not repaired. |
+| M0 T97 S4 P1 | Complete: v4 BYOB profiles admit an exact, immutable four-entry DOS metadata snapshot; pathname routing remains disabled pending the common-plane integration slice. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
