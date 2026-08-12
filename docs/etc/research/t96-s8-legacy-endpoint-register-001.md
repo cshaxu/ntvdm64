@@ -10,7 +10,7 @@ before S8 closes.
 
 | Source module | Identity | Original owner / target plane | Current status |
 | --- | --- | --- | --- |
-| `dem_readonly_file_service` | 50:00,02,12,16 | DEM namespace | Plane gate active at every runtime entry; source-derived candidate remains frozen. |
+| `dem_readonly_file_service` | 50:00,02,12,16 | DEM namespace | Withdrawn from runtime by T97 S2; focused source-derived candidate remains frozen pending complete namespace/provider closure. |
 | `dem_fast_read_service` | 50:42 | DEM original no-op | Rejected from runtime: original `demNotYetImplemented` slot must not become a file-read provider. |
 | `dem_boot_drive_service` | 50:0D | DEM GSET | Plane gate active; source-derived candidate remains frozen. |
 | `dem_drive_service` | 50:0F | DEM GSET | Plane gate active; source-derived candidate remains frozen. |

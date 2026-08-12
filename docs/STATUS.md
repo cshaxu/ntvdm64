@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T97 S2 — Immutable CLI namespace resource and file-token design.**
+**Active: M0 T97 S3 — Pathname/FCB directory-search ABI audit.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T97 S2, Ordinary Mode. |
-| Admission And Approval | S1 is closed by source audit. The owner already authorized dependency- and ROI-based sequencing; this is its bounded, source-derived replacement branch. |
-| Objective | Define one immutable CLI-admitted namespace resource and token lifecycle that can replace the non-composable original `50:12/00/16/02` host-handle contract without exposing host paths or handles. |
-| Non-goals | No runtime BOP enablement, FASTREAD response, search/FCB behavior, arbitrary host-drive projection, mutation, ambient CWD, Bochs change, or new direct recognizer. |
-| Reference Baseline | etc/research/t97-s1-dem-namespace-component-abi-map-001.md; existing readonly namespace/file candidate; T96 plane and legacy register. |
-| Files And ABI Surface | Adapter-local resource/token design, evidence and focused tests only. Any bridge result remains the existing versioned copied transaction ABI. |
+| Identifier Mode | M0 T97 S3, Ordinary Mode. |
+| Admission And Approval | S2 withdrew the partial file candidate rather than misrepresenting it as an OpenNT provider. The owner has authorized dependency- and ROI-based sequencing. |
+| Objective | Establish separate complete source contracts for pathname `50:09/0B` and FCB `50:0A/0C` search: copied inputs, DTA/search-buffer writes, continuation ownership, errors, and immutable-profile disposition. |
+| Non-goals | No search runtime provider, no FCB fallback to pathname behavior, no host enumeration, no guest-triggered scan, no host pointer/handle, no process/PDB emulation, no file-service re-enable, and no Bochs change. |
+| Reference Baseline | etc/research/t97-s1-dem-namespace-component-abi-map-001.md; etc/research/t97-s2-immutable-namespace-token-contract-001.md; `demsrch.c`, `dosdef.h`, existing search transaction fixtures. |
+| Files And ABI Surface | Historical source and existing search types are evidence only. S3 may add research/tests but no runtime dispatch or bridge ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare source inputs/outputs and failures for the four selected DEM services against the proposed token contract; prove no host path/handle leaves the adapter and no direct recognizer is added. |
-| Expected Markers | A provider replacement-or-withdrawal decision, exact immutable resource identity/lifecycle, fixed token properties, and focused positive/negative boundary tests. |
-| Asset Needs | Existing BYOB profile/resource inputs and source evidence only; no external filesystem scan, new guest media, or Bochs asset. |
-| Reporting Requirements | State all unsupported modes and error dispositions; distinguish a design/test fixture from runtime enablement. |
-| Stop Conditions | Stop and revise if an original behavior needs a host handle/path, a new machine feature, an unbounded guest memory read, or a separate endpoint-specific hook. |
-| Exit Criteria | One verified immutable token/resource contract that either safely replaces the frozen candidate in the common plane or records why it must remain unavailable; S3 handoff is explicit. |
-| Original Owner Request | Holistic BOP implementation with an adapter boundary, minimum Bochs, original OpenNT semantics, and no accumulation of one-off patches. |
-| Similar-Issue Sweep | Reconcile DEM open/seek/read/close, COMMAND boot/current-directory consumers, BYOB profile identity, legacy register, and all existing readonly namespace tests together. |
+| Verification | Trace both original forms from dispatcher slot through source buffer accesses and outputs; verify structure sizes/offsets and all branch-specific failure behavior against the existing transaction candidate; prove FCB unresolved outcomes remain rejected. |
+| Expected Markers | A form-separated search ABI/failure map, immutable enumeration policy, and a source-backed S4 integration-or-unavailable decision. |
+| Asset Needs | Existing local OpenNT source and existing static fixtures only; no host directory, media, or Bochs inputs. |
+| Reporting Requirements | Cite source paths/lines, label inference, and identify every unresolved byte/continuation condition rather than borrowing pathname semantics. |
+| Stop Conditions | Stop and revise if closing a required branch needs PDB/CCPU/SAS/VDD recreation, host scanning, an adapter-owned DOS algorithm, or a new direct BOP recognizer. |
+| Exit Criteria | Complete per-form contract/limitations and tested source-shaped static transactions; S4 scope is bounded to a coherent provider or recorded unavailable behavior. |
+| Original Owner Request | Holistic BOP implementation with original OpenNT semantics and a minimum, non-invasive Bochs/adapter boundary. |
+| Similar-Issue Sweep | Compare `demsrch.c`, `dosdef.h`, DTA registration `50:1B`, FCB handlers, current search sessions/results, and COMMAND/NTDOS caller context together. |
 
 ## Current Technical Baseline
 
@@ -54,8 +54,9 @@
   DEM FASTREAD edge, without changing Bochs or fabricating a BOP outcome.
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
-- M0 T97 S2 is active: define one immutable resource/token replacement for
-  the paired DEM open/seek/read/close contract.
+- M0 T97 S2 is complete: partial runtime dispatch and the contradictory
+  FASTREAD experiment were withdrawn; the immutable token design is retained.
+- M0 T97 S3 is active: audit pathname and FCB searches as separate contracts.
 
 ## Recent Progress
 
@@ -80,5 +81,6 @@
 | M0 T96 S10 P1 | Complete checkpoint: r49 linked all T96 plane/gate objects and a fresh bounded NTIO/NTDOS run reached the original-unavailable `50:42` boundary; see etc/research/t96-s10-real-path-checkpoint-001.md. |
 | M0 T96 | Closed: source ownership, the holistic BOP plane, and the current real-path boundary are recorded in history/m0-t96-closure-20260812.md. |
 | M0 T97 S1 | Complete: component/ABI/failure and composition map records the source-derived replacement boundary. |
-| M0 T97 S2 | Active: immutable CLI namespace resource and file-token design. |
+| M0 T97 S2 | Complete: provider withdrawal and immutable token/resource contract recorded; no FASTREAD helper remains. |
+| M0 T97 S3 | Active: pathname/FCB directory-search ABI audit. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |

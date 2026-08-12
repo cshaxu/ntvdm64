@@ -16,7 +16,6 @@
 #include "bx_ntvdm_spckbd_init_service.h"
 #include "bx_ntvdm_wait_if_idle_service.h"
 #include "bx_ntvdm_dem_dta_service.h"
-#include "bx_ntvdm_dem_readonly_file_service.h"
 #include "bx_ntvdm_dem_drive_service.h"
 #include "bx_ntvdm_dem_ioctl_changeable_service.h"
 #include "bx_ntvdm_dem_hard_error_service.h"
@@ -482,35 +481,9 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
         bx_ntvdm_adapter_runtime.has_dem_hard_error_registration = 1;
         return 1;
     }
-    if ((bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x00u) ||
-            bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x02u)) &&
-        (bx_ntvdm_dem_readonly_file_v1_seek(
-            &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
-            window, result) ||
-        bx_ntvdm_dem_readonly_file_v1_close(
-            &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
-            window, result))) return 1;
-    {
-        bx_ntvdm_bulk_result_transaction_v1 transaction;
-        bx_ntvdm_cpu_result_v2 direct_result;
-        if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x16u) &&
-            bx_ntvdm_dem_readonly_file_v1_read(
-                &bx_ntvdm_adapter_runtime.readonly_namespace, event, cpu_before,
-                window, bx_ntvdm_adapter_runtime.bulk_payload,
-                sizeof(bx_ntvdm_adapter_runtime.bulk_payload), &transaction,
-                &direct_result)) {
-            if (transaction.magic == BX_NTVDM_BULK_RESULT_TRANSACTION_V1_MAGIC) {
-                if (!bx_ntvdm_host_session_v1_queue_bulk_result(
-                        &bx_ntvdm_adapter_runtime.session, &transaction,
-                        bx_ntvdm_adapter_runtime.bulk_payload,
-                        transaction.payload_bytes)) return 0;
-                *result = transaction.result;
-            } else *result = direct_result;
-            return bx_ntvdm_cpu_result_v2_valid(result);
-        }
-    }
-    /* S3 records 50:42 FASTREAD as the original demNotYetImplemented slot.
-     * Do not turn the older read helper into a second file-service provider. */
+    /* T97 keeps the old 50:12/00/16/02 candidate outside runtime until the
+     * complete source-derived provider has its pathname/mode/error contract.
+     * 50:42 is original demNotYetImplemented and has no substitute. */
     if (!bx_ntvdm_adapter_runtime.has_host_drive_inventory) return 1;
     if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x21u) &&
         bx_ntvdm_dem_ioctl_changeable_service_v1_dispatch(
@@ -586,16 +559,6 @@ int bx_ntvdm_adapter_runtime_v3_dispatch(
             return 0;
         return 1;
     }
-    if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x12u) &&
-        bx_ntvdm_dem_readonly_file_v1_prepare_open(event, cpu_before, window,
-            action)) {
-        if (!bx_ntvdm_adapter_runtime.installed ||
-            !bx_ntvdm_host_session_v1_queue_guest_read(
-                &bx_ntvdm_adapter_runtime.session, event, cpu_before, action,
-                BX_NTVDM_HOST_GUEST_READ_DEM_FILE_OPEN))
-            return 0;
-        return 1;
-    }
     bx_ntvdm_guest_read_action_v1_pass_through(action);
     return 1;
 }
@@ -632,10 +595,6 @@ int bx_ntvdm_adapter_runtime_v3_complete_guest_read(
     if (consumer == BX_NTVDM_HOST_GUEST_READ_DEM_DTA)
         completed = bx_ntvdm_dem_dta_service_v1_complete(boundary, cpu_before,
             action, bytes, byte_count, &registration, result);
-    if (consumer == BX_NTVDM_HOST_GUEST_READ_DEM_FILE_OPEN)
-        completed = bx_ntvdm_dem_readonly_file_v1_complete_open(
-            &bx_ntvdm_adapter_runtime.readonly_namespace, boundary, cpu_before,
-            action, bytes, byte_count, result);
     if (!bx_ntvdm_host_session_v1_complete_guest_read(
             &bx_ntvdm_adapter_runtime.session, boundary, cpu_before, result))
         return 0;

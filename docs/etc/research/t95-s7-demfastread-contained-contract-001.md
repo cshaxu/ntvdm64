@@ -1,5 +1,10 @@
 # T95 S7 DEMFASTREAD Contained Contract 001
 
+> Superseded by `t97-s2-immutable-namespace-token-contract-001.md`. Direct
+> `DemDispatch` table evidence shows `SVC_DEMFASTREAD` is
+> `demNotYetImplemented`; this experiment's helper and test assertion were
+> withdrawn and must not be re-enabled.
+
 ## Question
 
 Can the reached `50:42` BOP be restored as a distinct, bounded adapter service
