@@ -9,8 +9,8 @@ semantics.
 
 | S | Scope | Initial disposition |
 | --- | --- | --- |
-| S1 | Inventory exact v5 profile/root, runner/shim/bundle, target identities and durable controller. | Active in Status. |
-| S2 | Define one fixed watchdog envelope and its success/unfinished classification rules. | Pending S1. |
+| S1 | Inventory exact v5 profile/root, runner/shim/bundle, target identities and durable controller. | Complete: inputs exist; the previous observer is rejected because it lacks tree cleanup. |
+| S2 | Define one fixed watchdog envelope and its success/unfinished classification rules. | Active in Status. |
 | S3 | Run exactly one watchdog-bounded observation and classify its retained evidence. | Pending S2. |
 
 ## Invariants

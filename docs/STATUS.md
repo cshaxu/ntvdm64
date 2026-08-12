@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T184 S1 — bounded v5 finite-sequence observation.**
+**Binding active packet: M0 T184 S2 — bounded v5 finite-sequence observation.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T184 S1**. M0 T183 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T184 S2**. M0 T183 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T184 S1, Ordinary Mode. |
-| Admission And Approval | Owner-authorized autonomous continuation after T183 completed the current v5 runner/shim/bundle closure. |
-| Objective | Inventory the exact v5 profile/root, two immutable target inputs, current runner/shim/bundle and durable single-run controller needed for one bounded observation. |
+| Identifier Mode | M0 T184 S2, Ordinary Mode. |
+| Admission And Approval | S1 proves all immutable inputs are available and rejects the old observer because it cannot terminate the runner/shim/Bochs process tree. |
+| Objective | Define and statically audit a one-shot controller that writes durable input/stream/outcome evidence and terminates the complete known process tree on watchdog expiry. |
 | Non-goals | No launch yet; no Bochs/adapter change, no profile semantic expansion, host capability, `GetNextVDMCommand`, ambient namespace, `54:11` result transport, retry, or guest semantic change. |
-| Reference Baseline | T181 two-slot source closure, T182 engine closure, T183 runner/shim/bundle closure, and the durable controller pattern from existing CLI observation evidence. |
-| Files And ABI Surface | Read-only input/controller audit and a proposed fresh evidence root only. |
+| Reference Baseline | T184 S1 inventory, completed T183 process boundary and existing explicit process-tree watchdog pattern. |
+| Files And ABI Surface | A new CLI observation controller and its source-level audit only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare exact input identities, v5 profile schema and controller artifact-retention behavior; documentation inventory/governance and `git diff --check` remain required. |
-| Expected Markers | One fixed v5 profile/root with `TARGET` then `QUIT.COM`, fixed bundle identity, and an observer that persists both streams and outcome even on timeout. |
-| Asset Needs | T183 runner/shim/bundle, retained NTIO/NTDOS/COMMAND/TARGET/QUIT inputs and a new empty evidence root only. |
-| Reporting Requirements | Separate source/configuration facts from observed facts; state a complete no-retry rule before launch. |
-| Stop Conditions | Any engine start, profile capability addition, raw Bochs invocation, retry budget, Bochs/adapter change or result-transport claim. |
-| Exit Criteria | An exact input manifest and controller design either support a single S2 launch or identify a concrete missing durable evidence property. |
+| Verification | Static controller audit proving pre-launch input capture, stream redirection, `taskkill /T /F` rooted at the wrapper PID, and unconditional outcome write; documentation inventory/governance and `git diff --check` remain required. |
+| Expected Markers | One wrapper-root PID, complete tree watchdog, no retry path and durable output paths for normal/timeout/launch failure outcomes. |
+| Asset Needs | Source tree only; no evidence root or engine process is created in S2. |
+| Reporting Requirements | State that static audit is not an observation; distinguish guaranteed controller mechanics from operating-system process result. |
+| Stop Conditions | Any process start, raw Bochs invocation, profile capability addition, Bochs/adapter change or result-transport claim. |
+| Exit Criteria | A source-reviewed controller establishes the complete evidence/termination contract needed to admit exactly one S3 launch. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
