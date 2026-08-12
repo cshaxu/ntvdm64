@@ -30,6 +30,23 @@ family the same invalid-service behavior: DEM writes carry, while DPMI,
 COMMAND debug builds, and Redirector follow different paths. A generic
 adapter error result would be a semantic rewrite.
 
+## Provider selection registry
+
+The companion adapter-local registry is
+src/bx-ntvdm-adapter/bx_ntvdm_bop_provider_registry_v1.{h,c}. It consumes the
+ingress record and produces a fixed-width selection record:
+
+- mapped routes select a stable DEM/WOW/XMS/DPMI/COMMAND/Debugger/Redirector
+  or top-level provider family with original-OpenNT precedence;
+- explicit top-level unavailability selects the top-level family with
+  original-failure-or-deferred precedence; and
+- unknown, malformed, sentinel, and non-BOP routes are not applicable.
+
+There is intentionally no callback, module handle, host pointer, or dynamic
+library name in this ABI. The registry therefore fixes the route-to-provider
+boundary without implying that an original dispatcher is linkable or that a
+source-derived replacement is approved.
+
 ## Source evidence
 
 - Top-level routing and selector-specific host composition:
@@ -50,7 +67,8 @@ code zero:
 The test covers every callable service index for DEM, COMMAND, XMS, DPMI,
 Redirector, and Debugger; both original LASTSVC sentinels; each remaining
 inventoried top-level selector; out-of-range services; incomplete and unknown
-BOP forms; non-BOP bytes; and non-#UD dispatch.
+BOP forms; non-BOP bytes; non-#UD dispatch; deferred original-provider
+selection; explicit-unavailable selection; and not-applicable selection.
 
 The default MinGW build probe remains unavailable in this environment because
 the MSYS2 runtime cannot create temporary files in C:\msys64\tmp; that is

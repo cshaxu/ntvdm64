@@ -8,8 +8,8 @@ in `docs/STATUS.md` or allocate later tasks.
 | S | Scope | Initial disposition |
 | --- | --- | --- |
 | S1 | Complete BOP provider, dispatcher, module, and disposition map | Complete in P1; see history/m0-t96-s1-p1-20260811.md. |
-| S2 | Shared adapter ingress, provider selection, result, and unavailable ABI | Active. |
-| S3 | DOS/DEM host-service plane migration | Pending S2. |
+| S2 | Shared adapter ingress, provider selection, result, and unavailable ABI | Complete in P1--P2; see history/m0-t96-s2-p1-20260811.md and m0-t96-s2-p2-20260811.md. |
+| S3 | DOS/DEM host-service plane migration | Active. |
 | S4 | COMMAND host-service plane migration | Pending S3. |
 | S5 | XMS/DPMI provider and profile disposition | Pending S4. |
 | S6 | Redirector, debugger, notification, VDD/mouse host-provider dispositions | Pending S5. |

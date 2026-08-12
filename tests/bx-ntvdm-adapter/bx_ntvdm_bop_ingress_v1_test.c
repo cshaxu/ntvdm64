@@ -1,4 +1,5 @@
 #include "bx_ntvdm_bop_ingress_v1.h"
+#include "bx_ntvdm_bop_provider_registry_v1.h"
 
 static int classify(uint8_t selector, uint8_t service, uint32_t bytes,
     uint32_t route, uint16_t family)
@@ -23,6 +24,7 @@ int main(void)
     };
     bx_ntvdm_cpu_state_v1 state;
     bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_bop_provider_selection_v1 selection;
     struct family_case {
         uint8_t selector, count, sentinel;
         uint16_t family;
@@ -90,9 +92,26 @@ int main(void)
         &ingress, &result) || ingress.route != BX_NTVDM_BOP_ROUTE_MAPPED_DEFERRED ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH ||
         result.resume_rip != 0u;
+    failed |= !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        selection.disposition != BX_NTVDM_BOP_PROVIDER_DEFERRED ||
+        selection.provider_family != BX_NTVDM_BOP_PROVIDER_DEM ||
+        selection.precedence != BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT;
+    {
+        uint8_t instruction[3] = { 0xc4u, 0xc4u, 0x59u };
+        bx_ntvdm_instruction_window_v1_capture(&window, instruction, 3u);
+    }
+    failed |= !bx_ntvdm_bop_ingress_v1_dispatch(&event, &state, &window,
+        &ingress, &result) || !bx_ntvdm_bop_provider_registry_v1_select(
+            &ingress, &selection) ||
+        selection.disposition != BX_NTVDM_BOP_PROVIDER_EXPLICIT_UNAVAILABLE ||
+        selection.precedence !=
+            BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_FAILURE_OR_DEFERRED;
     event.vector = 13u;
     failed |= !bx_ntvdm_bop_ingress_v1_dispatch(&event, &state, &window,
         &ingress, &result) || ingress.route != BX_NTVDM_BOP_ROUTE_NOT_BOP ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH;
+    failed |= !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        selection.disposition != BX_NTVDM_BOP_PROVIDER_NOT_APPLICABLE ||
+        selection.provider_family != BX_NTVDM_BOP_PROVIDER_NONE;
     return failed ? 1 : 0;
 }
