@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T178 S2 — normal-return trace reconciliation.**
+**Binding active packet: M0 T178 S3 — CLI-result admission decision.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T178 S2**; all pre-admission T177/T178-labelled files
+> The binding active packet below is **M0 T178 S3**; all pre-admission T177/T178-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active T177 packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T178 S2, Ordinary Mode. |
-| Admission And Approval | S1 proves that `50:36` is pre-target guest transfer and that normal `54:11` follows target termination and DOS teardown. S2 may reconcile that source chain with retained bounded observations only. |
-| Objective | Classify the most specific currently evidenced predecessor gap between target launch and normal `54:11`, without asserting a target result from a simulator exit. |
+| Identifier Mode | M0 T178 S3, Ordinary Mode. |
+| Admission And Approval | S2 proves the normal-return candidate reaches and accepts `50:3C`, then enters original DOS teardown; `54:11` remains unobserved before the existing stack/pre-fetch stop. S3 may decide whether result transport is admissible. |
+| Objective | Decide whether the evidence admits a separate fixed-width engine-to-CLI result-transport design packet, or close T178 with its exact guest-control predecessor gap. |
 | Non-goals | No result transport implementation; no process-exit reinterpretation; no Bochs/adapter/OpenNT/CLI behavior change; no new runtime observation; no BOP provider extension. |
 | Reference Baseline | T160/T161 native POST observations, T177 S4 combined observation, retained OpenNT COMMAND/DEM source, and existing BOP catalogue evidence. |
-| Files And ABI Surface | Retained trace/evidence and one research record; Status/plan only. |
+| Files And ABI Surface | Decision record only; Status/plan and Queue only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile source map against retained T176/T177 native traces and their exact final BOP markers; run governance checks and `git diff --check`. |
-| Expected Markers | A specific last-proven and first-unproven edge, confidence, and explicit exclusion of process exit as guest result. |
+| Verification | Reconcile S1/S2 confidence and existing result-transport admission conditions; run governance checks and `git diff --check`. |
+| Expected Markers | Explicit admit-or-close decision, retained exact predecessor gap, and no reinterpretation of process exit. |
 | Asset Needs | Retained source and logs only. |
 | Reporting Requirements | Separate observed facts from source inference; state whether a later implementation package is justified. |
-| Stop Conditions | A need to assert a guest return from process exit, invent a service/result ABI, change runtime behavior, or infer an exact trace transition not retained as evidence. |
-| Exit Criteria | The retained traces identify the last proven predecessor and first unproven edge without admitting transport work. |
+| Stop Conditions | A need to assert a guest return from process exit, invent a result ABI, change runtime behavior, or substitute source intent for a `54:11` observation. |
+| Exit Criteria | Result transport is either explicitly rejected pending a predecessor package or admitted with a source/trace-backed boundary. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
