@@ -991,6 +991,7 @@ add_executable(bx-ntvdm-adapter-runtime-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_bop_provider_registry_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_plane_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_provider_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_dem_session_lifecycle_provider_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_fastio_provider_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_command_plane_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_legacy_plane_gate_v1.c

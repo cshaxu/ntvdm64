@@ -30,21 +30,22 @@ static int put(bx_ntvdm_multi_write_transaction_v1 *t, uint8_t *p, uint32_t *use
 }
 static void word(uint8_t out[2], uint16_t value) { out[0] = (uint8_t)value; out[1] = (uint8_t)(value >> 8); }
 static int path(const bx_ntvdm_readonly_namespace_v1 *ns, const byob_launch_declaration_v1 *launch,
-    uint8_t out[16], uint32_t *out_bytes, uint16_t *out_extension)
+    uint32_t slot, uint8_t out[16], uint32_t *out_bytes, uint16_t *out_extension)
 {
     const wchar_t *name;
     uint32_t used = 0u;
     if (!ns || !launch || !out || !out_bytes || !out_extension || ns->drive_index >= 26u ||
-        ns->files[3].bytes == 0 || ns->files[3].byte_count == 0u) return 0;
-    name = launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L"TARGET.COM" :
-        launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE ? L"TARGET.EXE" : 0;
-    if (!name || wcscmp(ns->files[3].path, launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ?
-        L"\\TARGET.COM" : L"\\TARGET.EXE") != 0) return 0;
+        slot >= 2u || ns->file_count != 5u || ns->files[3u + slot].bytes == 0 ||
+        ns->files[3u + slot].byte_count == 0u) return 0;
+    name = slot == 0u ? (launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L"TARGET.COM" :
+        launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE ? L"TARGET.EXE" : 0) : L"QUIT.COM";
+    if (!name || wcscmp(ns->files[3u + slot].path, slot == 1u ? L"\\QUIT.COM" :
+        (launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L"\\TARGET.COM" : L"\\TARGET.EXE")) != 0) return 0;
     out[used++] = (uint8_t)('A' + ns->drive_index); out[used++] = ':'; out[used++] = '\\';
     while (*name) { if (*name > 0x7f || used >= 15u) return 0; out[used++] = (uint8_t)*name++; }
     out[used++] = 0;
     *out_bytes = used;
-    *out_extension = launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? 8u : 4u;
+    *out_extension = (slot == 1u || launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM) ? 8u : 4u;
     return 1;
 }
 static uint16_t drive_count(const bx_ntvdm_host_drive_snapshot_v1 *drives)
@@ -81,29 +82,32 @@ int bx_ntvdm_cmd_get_next_v1_prepare(const bx_ntvdm_cmd_get_next_state_v1 *state
     const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_guest_gather_read_action_v1 *action)
 {
     bx_ntvdm_guest_range range; uint64_t address;
-    if (!state || state->delivered || !action || !match(event, cpu, window) ||
+    if (!state || state->delivered >= 2u || !action || !match(event, cpu, window) ||
         !physical(cpu->ds, (uint16_t)cpu->edx, BX_NTVDM_CMDINFO_V1_BYTES, &address)) return 0;
     range.address = address; range.length = BX_NTVDM_CMDINFO_V1_BYTES;
     return bx_ntvdm_guest_gather_read_action_v1_need_read_resume(action, &range, 1u, event->fault_rip + 4u);
 }
 int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
-    const byob_launch_declaration_v1 *launch, const bx_ntvdm_host_drive_snapshot_v1 *drives,
+    const byob_launch_plan_v2 *plan, const bx_ntvdm_host_drive_snapshot_v1 *drives,
     const bx_ntvdm_cmd_set_info_registration_v1 *reg, const bx_ntvdm_cmd_get_next_state_v1 *state,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_guest_gather_read_action_v1 *action, const uint8_t *bytes, uint64_t byte_count,
     bx_ntvdm_multi_write_transaction_v1 *t, uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD])
 {
-    bx_ntvdm_cmdinfo_v1 info; uint8_t executable[16], command[130], two[2], zero2[2] = {0,0}, zero4[4] = {0,0,0,0};
+    byob_launch_declaration_v1 launch; bx_ntvdm_cmdinfo_v1 info; uint8_t executable[16], command[130], two[2], zero2[2] = {0,0}, zero4[4] = {0,0,0,0};
     uint32_t executable_bytes, command_count, command_bytes, used = 0u; uint16_t extension, count; uint64_t address;
-    if (!ns || !launch || !drives || !reg || !state || !event || !cpu || !action || !bytes || !t || !payload ||
-        state->delivered || launch->tail_bytes > 118u || !path(ns, launch, executable, &executable_bytes, &extension) ||
+    if (!ns || !plan || !drives || !reg || !state || !event || !cpu || !action || !bytes || !t || !payload ||
+        state->delivered >= 2u || plan->slot_count != 2u || plan->version != 2u) return 0;
+    launch = plan->first;
+    if (state->delivered == 1u) { memset(&launch, 0, sizeof(launch)); launch.version = 1u; launch.target_kind = BYOB_LAUNCH_TARGET_KIND_V1_COM; }
+    if (launch.tail_bytes > 118u || !path(ns, &launch, state->delivered, executable, &executable_bytes, &extension) ||
         !bx_ntvdm_cmdinfo_v1_decode(bytes, (uint32_t)byte_count, &info) || byte_count != BX_NTVDM_CMDINFO_V1_BYTES ||
         info.command_bytes != 128u || info.executable_bytes != BX_NTVDM_CMDINFO_V1_EXECPATH_BYTES ||
         !physical(info.command_segment, info.command_offset, 130u, &address)) return 0;
-    command_count = 6u + (launch->tail_bytes ? 1u : 0u) + launch->tail_bytes + 2u;
+    command_count = 6u + (launch.tail_bytes ? 1u : 0u) + launch.tail_bytes + 2u;
     if (command_count > 127u) return 0;
     command[0] = (uint8_t)command_count; memcpy(command + 1u, "TARGET", 6u); command_bytes = 7u;
-    if (launch->tail_bytes) { command[command_bytes++] = ' '; memcpy(command + command_bytes, launch->tail, launch->tail_bytes); command_bytes += launch->tail_bytes; }
+    if (launch.tail_bytes) { command[command_bytes++] = ' '; memcpy(command + command_bytes, launch.tail, launch.tail_bytes); command_bytes += launch.tail_bytes; }
     command[command_bytes++] = '\r'; command[command_bytes++] = '\n'; command[command_bytes++] = 0;
     bx_ntvdm_multi_write_transaction_v1_initialize(t, event, cpu);
     if (!put(t,payload,&used,address + 1u,command,command_bytes) ||

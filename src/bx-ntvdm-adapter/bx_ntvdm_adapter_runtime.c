@@ -872,7 +872,7 @@ int bx_ntvdm_adapter_runtime_v4_complete_guest_gather_read(
         return 1;
     }
     if (bx_ntvdm_cmd_get_next_v1_complete(&bx_ntvdm_adapter_runtime.boot_namespace_provider.readonly_namespace,
-            &bx_ntvdm_adapter_runtime.launch, &bx_ntvdm_adapter_runtime.host_drive_snapshot,
+            &bx_ntvdm_adapter_runtime.launch_plan, &bx_ntvdm_adapter_runtime.host_drive_snapshot,
             &bx_ntvdm_adapter_runtime.cmd_set_info_registration,
             &bx_ntvdm_adapter_runtime.cmd_get_next, boundary, cpu_before, action, bytes,
             byte_count, &transaction, bx_ntvdm_adapter_runtime.multi_write_payload)) {
