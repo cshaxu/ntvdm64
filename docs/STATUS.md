@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T96 S10 — Real-path trace and T96 closure checkpoint.**
+**Active: M0 T97 S1 — DEM namespace/file/search component and ABI audit.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T96 S10, Ordinary Mode. |
-| Admission And Approval | The owner approved holistic BOP recovery and requires that build/classification success never be represented as runtime success. S10 follows S1--S9 closure. |
-| Objective | Run or reproduce the current real NTIO/NTDOS path with the admitted minimal Bochs/adapter composition; correlate every reached BOP to its plane/profile disposition and state the exact T96 runtime boundary. |
-| Non-goals | No trace-driven provider patch, device enablement, BIOS/Bochs semantic change, synthetic guest success, or claim that a classifier/regression run is a CLI runtime. |
-| Reference Baseline | history/m0-t96-s9-closure-20260812.md; current native trace/build evidence; closed plane maps; Bochs intrusion register. |
-| Files And ABI Surface | Existing default-off execution/trace seams and adapter runtime only; no new public ABI, provider or Bochs API. |
-| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace records selected composition, reached BOP identities, their plane/profile disposition, accepted results, stop/fault reason and reproducible command/artifact location; governance and diff check. |
-| Expected Markers | One evidence-backed runtime outcome: controlled progress, source-proven unavailable/deferred stop, or explicit unrelated machine blocker. |
-| Asset Needs | Existing local Bochs/native build and trace artifacts plus source-built guest plan; no new third-party, firmware, guest media, or Microsoft asset. |
-| Reporting Requirements | Separate build, classifier and runtime evidence; quote no implied execution from static tests; identify the next owner/component only if trace proves it. |
-| Stop Conditions | Stop and revise admission if trace requires an unregistered Bochs change, a new provider, unproved guest asset, or semantic patch merely to pass a reached BOP. |
-| Exit Criteria | A real-path checkpoint is recorded with exact evidence and remaining limiter; T96 can close only if the architectural BOP-plane objective is proven independently of any remaining runtime blocker. |
-| Original Owner Request | Implement BOP holistically, preserve OpenNT semantics, and make adapter route to original OpenNT host code before using minimal source-derived rehosting. |
-| Similar-Issue Sweep | Review current native runtime command/trace artifacts, startup-plan handoff, generic #UD identity trace, reached services, CPU/device fault traces and all applicable plane records together. |
+| Identifier Mode | M0 T97 S1, Ordinary Mode. |
+| Admission And Approval | The owner authorized dependency- and ROI-based task selection. T97 selects the former read-only namespace/file/search candidate after T96's source-proven `50:42` boundary. |
+| Objective | Produce a component-scale, source-backed contract and composition-blocker map for the original OpenNT DEM namespace/file/search family required by the declared first CLI profile. |
+| Non-goals | No runtime provider, new BOP handler, Bochs/firmware/device change, arbitrary host-path access, mutation, guest-triggered rescan, or claim of runnable DOS. |
+| Reference Baseline | history/m0-t96-closure-20260812.md; etc/research/t96-s10-real-path-checkpoint-001.md; etc/research/t96-s3-dem-component-boundaries-001.md; T96 DEM plane and legacy register. |
+| Files And ABI Surface | OpenNT source and existing adapter/CLI resource contracts are read-only evidence. S1 may add only research evidence and task planning; it introduces no new ABI or provider. |
+| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
+| Verification | Account for the whole selected original component family and every related callable DEM service; record source definitions, dispatch slots, copied register/guest-memory layouts, return/failure behavior, CCPU/SAS/Win32 composition edges, and current profile disposition; run governance and diff checks. |
+| Expected Markers | One auditable provider-and-module map that separates independently composable original code, contained CLI-backend candidates, source-derived rehost candidates, and source-proven unavailable/deferred outcomes. |
+| Asset Needs | Existing local OpenNT source, T96 inventory, current trace, and admitted BYOB profile evidence only; no new source, firmware, guest media, or third-party asset. |
+| Reporting Requirements | Tie each conclusion to source path/dispatch identity and distinguish evidence from inference. Record the result that enables S2/S3, or a genuine composition blocker. |
+| Stop Conditions | Stop and revise admission if the audit requires a new provider, host API, Bochs change, imported input, or a service-by-service runtime patch to continue. |
+| Exit Criteria | A full component and ABI/failure map, a documented bounded S2/S3 handoff, updated T97 supporting plan, and a committed, governance-verified record. |
+| Original Owner Request | Implement BOP tables holistically; use minimal Bochs as SoftPC replacement; preserve OpenNT semantics and a narrow adapter/CLI boundary. |
+| Similar-Issue Sweep | Audit `demfile`, `demhndl`, `demdir`, `demsrch`, `demfcb`, their dispatcher entries, current frozen adapter endpoints, COMMAND configuration/current-directory callers, and the immutable drive/namespace model together. |
 
 ## Current Technical Baseline
 
@@ -50,6 +50,10 @@
   rejected, with a scan preventing unapproved direct BOP recognizers.
 - M0 T96 S9 is closed: complete inventory/profile regression covers all
   selectors, service identities and BIOS forms without claiming runtime.
+- M0 T96 is closed: its real-path checkpoint exposes the original-unavailable
+  DEM FASTREAD edge, without changing Bochs or fabricating a BOP outcome.
+- M0 T97 S1 is active: it audits the complete original DEM namespace/file/
+  search component family before any provider or runtime expansion.
 
 ## Recent Progress
 
@@ -71,5 +75,7 @@
 | M0 T96 S8 | Complete: legacy recognizers are plane-gated, frozen or rejected; no-bypass verification is active. |
 | M0 T96 S9 | Admitted in Ordinary Mode; full inventory/provider/capability regression begins. |
 | M0 T96 S9 | Complete: 192 callable services traverse ingress, registry and plane classification; inventory counts are independently verified. |
-| M0 T96 S10 P1 | Complete checkpoint: r49 linked all T96 plane/gate objects and a fresh bounded NTIO/NTDOS run reached the original-unavailable `50:42` boundary; see etc/research/t96-s10-real-path-checkpoint-001.md. T96 remains active until owner selection/admission of its successor permits formal closure. |
+| M0 T96 S10 P1 | Complete checkpoint: r49 linked all T96 plane/gate objects and a fresh bounded NTIO/NTDOS run reached the original-unavailable `50:42` boundary; see etc/research/t96-s10-real-path-checkpoint-001.md. |
+| M0 T96 | Closed: source ownership, the holistic BOP plane, and the current real-path boundary are recorded in history/m0-t96-closure-20260812.md. |
+| M0 T97 S1 | Active: audit the original DEM namespace/file/search family as one component before a capability or provider is admitted. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
