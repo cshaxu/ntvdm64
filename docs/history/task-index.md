@@ -13,6 +13,8 @@ available `T` task numbers and do not define the current task sequence.
 | --- | --- | --- |
 | `M0 T95` | Closed by owner-authorized reprioritization. It delivered the Bochs/adapter mechanics, full BOP observation, selected source-led endpoint evidence, controlled terminal stop, and CLI child-EOF evidence. Its unfinished contained file/search and full real-path closure are transferred as explicitly uncompleted work. | [m0-t95-closure-20260811.md](m0-t95-closure-20260811.md) |
 
+| M0 T96 S1 P1 | Complete static selector/service/BIOS provider and module map; no provider enabled. Local commit pending because no Git remote is configured. | [m0-t96-s1-p1-20260811.md](m0-t96-s1-p1-20260811.md) |
+
 ## Current Numbering Authority
 
 The current task sequence is governed by
