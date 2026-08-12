@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T179 S2 — vector-state provenance reconciliation.**
+**Binding active packet: M0 T179 S3 — normal-return machine-path disposition.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T179 S2**; all pre-admission T177/T178/T179-labelled files
+> The binding active packet below is **M0 T179 S3**; all pre-admission T177/T178/T179-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active T177 packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T179 S2, Ordinary Mode. |
-| Admission And Approval | S1 proves original teardown and a later vector-06 self-loop; the vector state's first writer is unproven. S2 may compare original SoftPC vector/handler installation evidence only. |
-| Objective | Classify whether retained OpenNT/SoftPC source identifies the observed vector-06 target's owner or whether a future non-mutating provenance diagnostic is required. |
+| Identifier Mode | M0 T179 S3, Ordinary Mode. |
+| Admission And Approval | S2 proves the vector-06 target is original spckbd installation and that its source-defined handler is the already-linked `illegal_op_int` machine component. S3 may decide whether one existing-binary normal-return observation is justified. |
+| Objective | Decide whether one bounded observation of the existing native-POST/machine-composition binary with the retained source-built normal-return target is admissible, or close with static closure. |
 | Non-goals | No Bochs, adapter, OpenNT or CLI behavior change; no new runtime observation; no result transport; no BOP-provider extension; no synthetic stack/vector state. |
 | Reference Baseline | T176 S19/S20 normal-return candidate evidence, T178 predecessor map, retained OpenNT DOS teardown source and existing Bochs stack mechanics audit. |
-| Files And ABI Surface | Read-only OpenNT/SoftPC source, retained traces and one research record; Status/plan only. |
+| Files And ABI Surface | Decision record only, unless it admits an existing binary/profile/configuration observation; Status/plan only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile BIOS/SoftPC vector definitions and installation/caller source with retained vector records; run governance checks and `git diff --check`. |
-| Expected Markers | Explicit vector-owner/provenance classification, or a bounded diagnostic admission decision with no semantic change. |
+| Verification | Reconcile source-defined handler reachability value, retained binary identity and one-observation constraints; run governance checks and `git diff --check`. |
+| Expected Markers | Explicit admit-or-close decision, exact input identities if admitted, and retained boundaries for adapter/device/CLI behavior. |
 | Asset Needs | Retained source and logs only. |
 | Reporting Requirements | Separate observed facts from source inference; state whether a later implementation package is justified. |
-| Stop Conditions | A need to invent a vector value, alter Bochs/adapter behavior, add a provider/device, or attribute a writer without source/trace support. |
-| Exit Criteria | The observed vector target is source-classified or the need for a separate default-off provenance diagnostic is explicitly decided. |
+| Stop Conditions | A need for source edit, a new build, device/firmware/vector change, BOP-provider extension, a second observation, or host-result interpretation. |
+| Exit Criteria | One existing-binary observation is admitted with exact source-built target inputs, or T179 closes with the static vector/handler closure. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
