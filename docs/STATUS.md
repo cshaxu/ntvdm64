@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T105 S1 — post-POST CLI continuation observation.**
+**Active: M0 T106 S1 — two-phase BOP action-bridge closure audit.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T105 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized priority/ROI-based task selection. T104 established a current, source-built native POST path and leaves CLI completion unknown after the short benchmark window. This admits one evidence-only continuation observation before any capability change. |
-| Objective | Execute exactly one longer bounded native-POST run of the T104 binary and classify the first post-`50:36` control-flow or BOP boundary relevant to CLI completion. |
-| Non-goals | No source/build/profile/ROM/device change, no Bochs intrusion, no BOP/provider implementation, no repeated tuning runs, no host namespace/drive expansion, and no claim of CLI completion absent a controlled guest exit. |
-| Reference Baseline | etc/research/t104-s1-current-adapter-deferred-post-runtime-001.md; t103-s1-native-post-deferred-composition-closure-001.md; BX-ABI-052; T104 build manifest/binary and retained r41 BOP reachability evidence. |
-| Files And ABI Surface | One new immutable evidence directory and one research/history/status record only. Existing T104 binary, profile parser, option-ROM composition input, runner and adapter ABI are consumed unchanged. |
+| Identifier Mode | M0 T106 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized priority/ROI-based task selection. T105 shows that the first stable continuation boundary is the source-owned BOP-06 illegal-instruction loop, which must not be handled as a service. This admits a holistic audit of the common adapter action bridge. |
+| Objective | Prove the end-to-end ownership and current wiring of the two-phase BOP action bridge (gather read or multi-write action → ordinary-RAM executor → checked CPU resume/refusal), and map every admitted provider that relies on it. |
+| Non-goals | No BOP/INT6/provider semantic change, no Bochs source/intrusion/device/profile/ROM/build change, no new host capability, no guest run, and no per-selector workaround. |
+| Reference Baseline | etc/research/t105-s1-post-post-cli-continuation-observation-001.md; t95-s7-command-comspec-bootstrap-closure-001.md; current ingress/registry/plane/runtime/action source and T104 build manifest. |
+| Files And ABI Surface | Existing adapter ingress, provider registry, plane gates, gather-read/multi-write action types, runtime executor and focused tests; one research/history/status record only. No new ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Run one 10-million-instruction benchmark with the unchanged T104 binary, `-DeferredStartupPlan`, 30-second watchdog and a fresh evidence root; record hashes, ordered terminal log markers and the absence/presence of a controlled guest exit; run no second guest command. |
-| Expected Markers | Native POST handoff, ordinary NTIO transaction, post-`50:36` continuation or first stable repeated/failure boundary, bounded termination classification, and unchanged binary/profile/ROM identity. |
-| Asset Needs | T104 binary/build manifest, existing BYOB inputs, runner-created option-ROM input and existing trace tool only. |
-| Reporting Requirements | Record command, binary/profile/ROM hashes, watchdog/benchmark outcome, first and terminal BOP/CPU markers, exact source-owner interpretation where available, and a source-free next-task recommendation. |
-| Stop Conditions | Stop and re-admit before any second observation, source/build/configuration change, new trace intrusion, BOP/provider behavior, host capability, or interpretation that needs unrecorded source evidence. |
-| Exit Criteria | One immutable longer observation is classified with a single next boundary/owner recommendation; no new semantic is implemented. |
+| Verification | Static call-chain inventory from generic #UD ingress through action production/execution/resume; cross-check action producers and focused tests; prove the action bridge has no selector-specific CPU/Bochs path; run no compiler or guest. |
+| Expected Markers | One provider/action matrix, explicit executor ownership, exact pending/commit/refusal transitions, COMMAND exemplar provenance, and a single source-backed disposition for the BOP-06 loop. |
+| Asset Needs | Existing adapter/OpenNT source and focused test records only. |
+| Reporting Requirements | Distinguish source-present provider code from actually connected runtime behavior; list all users of each action transport; identify missing link/object/precedence only with exact evidence; recommend one coherent successor. |
+| Stop Conditions | Stop and re-admit before source edits, tests that alter code, compile/run, a new transport/ABI, BOP/INT6 behavior, Bochs/device/profile change, or an inference beyond copied trace/source evidence. |
+| Exit Criteria | A complete bridge wiring map and a bounded implementation or rejection successor are recorded; no action is taken on the loop itself. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check transition after `50:36`, BOP identities, original OpenNT caller/dispatcher provenance, native CPU/firmware markers, benchmark versus watchdog termination, controlled-stop path, and repeats of the former aperture condition. |
+| Similar-Issue Sweep | Check every gather-read and multi-write producer, pending-action storage, CPU exception consumers, result bridge, generic BOP ingress ordering, legacy-plane gates, COMMAND COMSPEC/environment pair, bootstrap namespace users and refusal paths. |
 
 ## Current Technical Baseline
 
@@ -112,5 +112,6 @@
 | M0 T102 | Closed: retained original diagnostics already prove the zero INT10 vector/direct-entry cause; no new Bochs diagnostic is needed. |
 | M0 T103 | Closed: profile payload and handoff pairing are correct; direct/deferred consumer mutual exclusion and the two-object closure are proven. |
 | M0 T104 | Closed: current-adapter deferred derivative rebuilt exactly two Bochs objects and reached the real native POST BOP path without an aperture panic. |
-| M0 T105 S1 | Active: one longer unchanged-binary observation to identify the next real CLI continuation boundary before any BOP/provider work. |
+| M0 T105 | Closed: one longer unchanged-binary observation reached a stable source-owned INT6/BOP-06 re-entry loop; no service behavior was changed. |
+| M0 T106 S1 | Active: holistically audit the existing two-phase BOP action bridge before changing any provider. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
