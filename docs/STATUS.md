@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T111 S1 — unexpected-interrupt composition audit.**
+**Active: M0 T112 S1 — unexpected-interrupt mechanical bridge closure.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T111 S1, Ordinary Mode. |
-| Admission And Approval | T110 proves selector `02` is the SoftPC/guest unexpected-interrupt path, not an OpenNT BOP service. Its original handler reads and changes PIC state and writes the BIOS data area before guest IRET. This admits a composition audit before any behavior work. |
-| Objective | Determine the minimum correct composition of the original unexpected-interrupt semantics with Bochs-owned PIC/CPU/memory, and classify direct reuse, contained platform adaptation, source-derived rehost, or block. |
-| Non-goals | No handler implementation, no adapter emulation of PIC/BIOS semantics, no Bochs device change, no runtime build/trace, and no other BOP/provider work. |
-| Reference Baseline | etc/research/t110-s1-selector-02-owner-provenance-001.md; original `unexp_nt.c`, BIOS table and `spckbd.asm`; current Bochs PIC/memory interfaces. |
-| Files And ABI Surface | Read-only source/interface/composition evidence and research/history/status records only. |
+| Identifier Mode | M0 T112 S1, Ordinary Mode. |
+| Admission And Approval | T111 finds the original handler semantically appropriate but not directly linkable: its SoftPC `inb/outb/sas_store` platform calls have no admitted route to Bochs's internal PIC port dispatcher and RAM. This admits a closure specification, not implementation. |
+| Objective | Specify the smallest typed Bochs mechanical port/RAM bridge and the exact original-handler/shim object closure required to evaluate contained reuse of `unexpected_int`. |
+| Non-goals | No Bochs/adapter/source implementation, no exception registration yet, no handler rewrite, no PIC/BIOS semantics in adapter, no build or runtime trace. |
+| Reference Baseline | etc/research/t111-s1-unexpected-interrupt-composition-audit-001.md; original `unexp_nt.c`; Bochs `pic.cc`, `iodev.h`, `devices.cc`, `memory.h`. |
+| Files And ABI Surface | Read-only interface/link-dependency evidence and research/history/status records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Produce an owner-by-owner call/data/port contract: original `unexpected_int`, guest continuation, Bochs PIC and RAM/BIOS-data interfaces. State whether any required interface is absent from the admitted minimal machine. |
-| Expected Markers | One recommended composition route with explicit rejected routes; no adapter-owned PIC, IRQ, IRET or BIOS-data implementation. |
-| Asset Needs | Existing source trees and generated/retained interface evidence only. |
-| Reporting Requirements | Cite exact source/interface evidence and make the adapter prohibition explicit. |
-| Stop Conditions | Stop before source modification, build, runtime observation, feature enablement or a new BOP mapping. |
-| Exit Criteria | Composition recommendation and the exact next implementation-or-blocking decision are recorded. |
+| Verification | Record each original external symbol/include, the required mechanical operation, its proposed owner/ABI shape, and whether existing Bochs interfaces are accessible without new intrusion. |
+| Expected Markers | A finite link/ABI manifest plus a decision whether one narrowly registered Bochs mechanics intrusion is justified. |
+| Asset Needs | Existing source trees and existing intrusion register only. |
+| Reporting Requirements | Distinguish generic port dispatch from PIC semantic implementation; state every rejected broader interface. |
+| Stop Conditions | Stop before source modification, exception registration, build, runtime observation, feature enablement or a new BOP mapping. |
+| Exit Criteria | The exact next implementation packet or a concrete closure blocker is recorded. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check only the corresponding BOP-02 caller stubs and the existing Bochs PIC/port/RAM ownership surfaces; do not sweep unrelated BOP families. |
+| Similar-Issue Sweep | Check only `unexp_nt.c` compile/link dependencies and the existing intrusion register; do not audit other SoftPC handlers. |
 
 ## Current Technical Baseline
 
@@ -118,5 +118,6 @@
 | M0 T108 | Closed: selector 02 is runtime-reachable, but its accepted result exposed a source-identity error: `02` is XMS, not VdmRedir. |
 | M0 T109 | Closed: selector 02 is unclaimed; the focused static test proves `52h` XMS and `57h` VdmRedir identities, with no runtime claim. |
 | M0 T110 | Closed: selector 02 is SoftPC `unexpected_int` plus guest IRET, with PIC/BIOS-data side effects; it is not an adapter service. |
-| M0 T111 S1 | Active: read-only minimum-composition audit for the unexpected-interrupt boundary. |
+| M0 T111 | Closed: original semantics require Bochs-owned PIC port dispatch and RAM; direct link and adapter reimplementation are both rejected. |
+| M0 T112 S1 | Active: read-only mechanical-bridge and original-handler link-closure specification. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
