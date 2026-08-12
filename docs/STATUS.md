@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T182 S1 — finite declared-target sequence engine composition.**
+**Binding active packet: M0 T182 S2 — finite declared-target sequence engine composition.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T182 S1**; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T182 S2**; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T182 S1, Ordinary Mode. |
-| Admission And Approval | Owner approved promotion of Queue order 1 after T181 closed its complete v5 source/test closure. |
-| Objective | Inventory the exact retained native-machine derivative and every current adapter/CLI object required to compose T181's finite `TARGET` then `QUIT.COM` sequence. |
-| Non-goals | No compile, link or runtime observation; no Bochs archive rebuild, device/configuration change, `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, or guest semantic change. |
-| Reference Baseline | T181 source/test closure, T177/T179 retained native-POST/machine-composition derivative, T98 derivative generator and its byte-identical retained Bochs input evidence. |
-| Files And ABI Surface | Read-only audit of the retained derivative manifest/map/makefile, `tools/New-T98S1CurrentAdapterEngineDerivative.ps1`, and the exact T181 source objects. |
+| Identifier Mode | M0 T182 S2, Ordinary Mode. |
+| Admission And Approval | S1 establishes the exact 67-adapter plus five-CLI current closure and identifies the old generator's missing v2 plan object. |
+| Objective | Define and dry-run one fresh derivative recipe that compiles only the current 72 adapter/CLI objects and final-links them to the retained T177 machine derivative. |
+| Non-goals | No compiler/linker invocation yet and no runtime observation; no Bochs object/archive rebuild, device/configuration change, `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, or guest semantic change. |
+| Reference Baseline | T182 S1 inventory, T181 source/test closure, and the byte-identified retained T177 native-POST/machine-composition derivative. |
+| Files And ABI Surface | A new derivative-generator/build shim, its manifest and generated makefile; the listed current adapter/CLI sources only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare the retained manifest/source hashes and makefile object closure against T181; documentation inventory/governance and `git diff --check` remain required. |
-| Expected Markers | Exact retained engine identity, exact stale/current object delta, no implicit Bochs archive prerequisite, and a justified S2 disposition. |
-| Asset Needs | Retained derivative, its manifest/map/makefile, T181 sources and existing source-built `QUIT.COM` identity. |
-| Reporting Requirements | Separate retained facts from source inference; identify every replacement or missing object by owner and name. |
-| Stop Conditions | A need for a Bochs semantic change, archive rebuild, extra device, host broker, ambient state, synthetic success, or runtime observation. |
-| Exit Criteria | A reproducible inventory either defines the finite current object closure for S2 or rejects it with a concrete unresolved dependency. |
+| Verification | Generator-only execution, manifest and makefile inspection proving 72 object rules, retained machine identity checks, no Bochs build rule, and no archive prerequisite; documentation inventory/governance and `git diff --check` remain required. |
+| Expected Markers | Exact current object list, explicit v2 plan object, unchanged retained machine inputs, and one final-link rule. |
+| Asset Needs | The retained derivative, T181 source tree, and a new empty build root only. |
+| Reporting Requirements | Record generated artifact hashes and dry-run evidence separately from any later compile/link result. |
+| Stop Conditions | A need to replace `main.o`/`cpu\\exception.o`, rebuild an archive, enable a device, change Bochs macros, or perform an observation. |
+| Exit Criteria | A generator-only derivative proves the narrow 72-object closure or rejects it concretely; only then can S3 admit the one actual build/observation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 

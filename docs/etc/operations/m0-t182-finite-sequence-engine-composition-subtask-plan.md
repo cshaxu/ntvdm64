@@ -4,14 +4,14 @@
 
 Recompose the completed v5 finite-sequence CLI/adapter source into the
 retained native-machine derivative without rebuilding Bochs or changing
-machine semantics.  The packet may culminate in one bounded observation only
+machine semantics. The packet may culminate in one bounded observation only
 after the exact input/object/link closure is proven.
 
 | S | Scope | Initial disposition |
 | --- | --- | --- |
-| S1 | Inventory the existing retained engine derivative, its exact adapter/CLI object set, map and machine inputs; identify every object replaced by T181 source. | Active in Status. |
-| S2 | Define or reject one narrow derivative build recipe using the S1 closure. It may compile current adapter/CLI objects and final-link only. | Pending S1. |
-| S3 | If S2 source-builds, run exactly one bounded v5 `TARGET → QUIT` observation and classify every reached/unfinished edge. | Pending S2. |
+| S1 | Inventory the existing retained engine derivative, its exact adapter/CLI object set, map and machine inputs; identify every object replaced by T181 source. | Complete: 67 adapter plus five CLI objects; the v2 plan object is the sole new object. |
+| S2 | Define or reject one narrow derivative build recipe using the S1 closure. It may compile current adapter/CLI objects and final-link only. | Active in Status. |
+| S3 | Build the exact S2 derivative once; only on link success run exactly one bounded v5 `TARGET -> QUIT` observation and classify every reached/unfinished edge. | Pending S2. |
 
 ## Invariants
 
