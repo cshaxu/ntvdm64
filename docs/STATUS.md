@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T181 S5 — finite sequence local closure.**
+**Binding active packet: M0 T182 S1 — finite declared-target sequence engine composition.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T181 S5**; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T182 S1**; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T181 S5, Ordinary Mode (closed source/test packet). |
-| Admission And Approval | S4 completed the complete v5 source closure; S5 ran its admitted local tests and endpoint scanner. |
-| Objective | Classify the finite sequence source/test closure without making engine or guest-runtime claims. |
-| Non-goals | No engine relink or runtime observation; no `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, generic machine BOP handling, or Bochs/guest change. |
-| Reference Baseline | T181 S1/S2/S3 records, current v4 source/tests, T180 closure and source-built `QUIT.COM` evidence. |
-| Files And ABI Surface | The exact source/test closure enumerated in T181 S3; no engine or Bochs inputs. |
+| Identifier Mode | M0 T182 S1, Ordinary Mode. |
+| Admission And Approval | Owner approved promotion of Queue order 1 after T181 closed its complete v5 source/test closure. |
+| Objective | Inventory the exact retained native-machine derivative and every current adapter/CLI object required to compose T181's finite `TARGET` then `QUIT.COM` sequence. |
+| Non-goals | No compile, link or runtime observation; no Bochs archive rebuild, device/configuration change, `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, or guest semantic change. |
+| Reference Baseline | T181 source/test closure, T177/T179 retained native-POST/machine-composition derivative, T98 derivative generator and its byte-identical retained Bochs input evidence. |
+| Files And ABI Surface | Read-only audit of the retained derivative manifest/map/makefile, `tools/New-T98S1CurrentAdapterEngineDerivative.ps1`, and the exact T181 source objects. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Six MinGW local tests and the endpoint scanner pass; documentation inventory/governance and `git diff --check` remain required. |
-| Expected Markers | v5 exact acceptance/rejection, two materialized slots, one commit per `54:01`, terminal `QUIT.COM` slot and no endpoint bypass. |
-| Asset Needs | Retained sources, profiles and existing controlled-stop evidence only. |
-| Reporting Requirements | Separate observed facts from source inference; state whether a bounded implementation slice is justified. |
-| Stop Conditions | A need for a historical host broker, ambient state, synthetic success, engine/Bochs input, or runtime observation. |
-| Exit Criteria | Met: T181 closes at source/test boundary. The next engine-composition candidate is unnumbered in Queue. |
+| Verification | Compare the retained manifest/source hashes and makefile object closure against T181; documentation inventory/governance and `git diff --check` remain required. |
+| Expected Markers | Exact retained engine identity, exact stale/current object delta, no implicit Bochs archive prerequisite, and a justified S2 disposition. |
+| Asset Needs | Retained derivative, its manifest/map/makefile, T181 sources and existing source-built `QUIT.COM` identity. |
+| Reporting Requirements | Separate retained facts from source inference; identify every replacement or missing object by owner and name. |
+| Stop Conditions | A need for a Bochs semantic change, archive rebuild, extra device, host broker, ambient state, synthetic success, or runtime observation. |
+| Exit Criteria | A reproducible inventory either defines the finite current object closure for S2 or rejects it with a concrete unresolved dependency. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 

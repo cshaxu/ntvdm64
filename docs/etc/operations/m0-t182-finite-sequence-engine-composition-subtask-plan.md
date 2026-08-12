@@ -1,0 +1,25 @@
+# M0 T182 finite sequence engine composition plan
+
+## Packet purpose
+
+Recompose the completed v5 finite-sequence CLI/adapter source into the
+retained native-machine derivative without rebuilding Bochs or changing
+machine semantics.  The packet may culminate in one bounded observation only
+after the exact input/object/link closure is proven.
+
+| S | Scope | Initial disposition |
+| --- | --- | --- |
+| S1 | Inventory the existing retained engine derivative, its exact adapter/CLI object set, map and machine inputs; identify every object replaced by T181 source. | Active in Status. |
+| S2 | Define or reject one narrow derivative build recipe using the S1 closure. It may compile current adapter/CLI objects and final-link only. | Pending S1. |
+| S3 | If S2 source-builds, run exactly one bounded v5 `TARGET → QUIT` observation and classify every reached/unfinished edge. | Pending S2. |
+
+## Invariants
+
+- No Bochs archive rebuild, device enablement, configuration expansion or
+  machine semantic change.
+- No `54:11`/DOS-result claim, ambient command queue, host process or
+  filesystem capability.
+- One observation means one retained binary/profile/input manifest and one
+  watchdog-bounded process; it is not a retry budget.
+- The adapter remains the bounded copied BOP owner and Bochs remains the
+  machine/CPU/exception owner.
