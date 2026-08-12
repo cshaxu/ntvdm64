@@ -44,3 +44,9 @@ disposition, and proves service 73 cannot be classified.
 The default MinGW build probe remains unavailable because its MSYS2 runtime
 cannot create temporary files in `C:\\msys64\\tmp`; that limitation is not
 treated as a passing integration build.
+
+The one executable original-no-op slice (`dem_provider_v1`) now consumes this
+record as a required input. It rejects a valid BOP/registry pair if the plane
+does not identify the same service as the original-noop component. Thus the
+only currently admitted execution route cannot bypass the unified component
+classification.
