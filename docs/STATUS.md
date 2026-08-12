@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T120 S1 — bounded native `02h` observation.**
+**Active: M0 T121 S1 — deferred machine-composition derivative closure.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T120 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorizes project-wide priority/ROI ordering. T119 links the original `unexpected_int` invocation derivative but deliberately makes no runtime claim; its map proves the handler and three wrappers enter one image. |
-| Objective | Establish and execute one reproducible, bounded native observation of the T119 derivative, then classify only whether the reached `02h` path calls and resumes through the original handler. |
-| Non-goals | No source change, no second run profile, no response to the outcome, no other selector, BIOS table, device, host-service, adapter capability, CPU/flags delta, or continuous-execution claim. |
-| Reference Baseline | etc/research/t119-s1-original-unexpected-int-invocation-001.md; T110--T118; exception register; the existing bounded engine observation contract. |
-| Files And ABI Surface | Existing T119 derivative and its run/trace inputs; new evidence/history only unless an admission stop requires a later task. |
+| Identifier Mode | M0 T121 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorizes priority/ROI ordering. T120 proves the direct-start T119 r3 image reaches the known aperture veto before a BOP identity can be observed; existing deferred POST evidence avoids that lifecycle path. |
+| Objective | Create one source-built derivative that combines the existing deferred-POST control path, the default-off machine-composition seam, and existing read-only BOP identity observation. |
+| Non-goals | No guest run, no Bochs source change, no handler semantic change, no new log field, no device, host-service or adapter change, and no BOP provider expansion. |
+| Reference Baseline | etc/research/t120-s1-bounded-machine-bop02-observation-001.md; T104 deferred POST closure; T117--T119 seam/build evidence. |
+| Files And ABI Surface | Named derivative generator/shim and its manifest/build evidence only; existing Bochs `main.cc` and `exception.cc` compilation flags. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Record exact command, input hashes, instruction budget and resulting trace. Confirm whether `02h` is reached and whether the generic handled resume occurs; a non-reach is a valid result. |
-| Expected Markers | One bounded trace plus an explicit reached/not-reached classification; no interpretation beyond the first decisive marker. |
-| Asset Needs | T119 r3 executable/map/manifest, its compatible immutable input profile, and existing trace collector. |
-| Reporting Requirements | Separate link proof, runtime observation, inherited CRT warning, and any terminal native fault; retain full command/output paths. |
-| Stop Conditions | Stop on first `02h` disposition, terminal fault, budget exit, missing compatible run contract, or any need to modify code/configuration. |
-| Exit Criteria | One reproducible bounded observation is recorded and its outcome is classified without changing behavior. |
+| Verification | Prove the generated shim rebuilds only `main.o`, `cpu/exception.o`, machine component and current adapter/CLI objects; verify all deferred, machine and listener macros coexist in one exception compile command; link once. |
+| Expected Markers | Fresh manifest, exact object list, successful x86 link and existing boundary tests. |
+| Asset Needs | Retained r5 engine, T119 original handler object, MSVC x86 and the existing derivative generator. |
+| Reporting Requirements | Name all rebuilt/retained objects and preserve CRT warning separately; runtime remains a later packet. |
+| Stop Conditions | Stop on duplicate/ambiguous exception rule, archive rebuild, new Bochs source edit, missing handler object, link failure, or any request to run. |
+| Exit Criteria | A deferred, listener-enabled machine-composition derivative is source-built and ready for one separately admitted observation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Confirm the execution command preserves the exact T119 r3 image and excludes adapter host-service and device expansions; do not scan or implement other BOPs. |
+| Similar-Issue Sweep | Check only composition of the existing deferred and machine macros; reject any widening of Bochs feature or BOP semantics. |
 
 ## Current Technical Baseline
 
@@ -127,5 +127,6 @@
 | M0 T117 | Closed: selector-blind default-off seam source-builds in a two-object derivative with unchanged decline behavior. |
 | M0 T118 | Closed: original `02h` caller/IRET continuation and generic three-byte resume contract are source-proven. |
 | M0 T119 | Closed: original `unexpected_int` and its exact three mechanics imports link into the default-off, selector-blind derivative; no runtime result is claimed. |
-| M0 T120 S1 | Active: one bounded native observation of the frozen T119 derivative, with stop on its first decisive `02h`/terminal/budget outcome. |
+| M0 T120 | Closed: the one direct-start r3 observation ends at the known aperture veto with BOP identity observation disabled; it neither proves nor disproves `02h` reachability. |
+| M0 T121 S1 | Active: compose deferred POST, machine seam and existing BOP listener in one narrow source-built derivative; do not run it. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
