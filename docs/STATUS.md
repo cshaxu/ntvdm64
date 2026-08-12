@@ -57,6 +57,8 @@
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
   FASTREAD experiment were withdrawn; the immutable token design is retained.
 - M0 T97 S3 is active: audit pathname and FCB searches as separate contracts.
+- M0 T97 S3 P1 is complete: pathname has a source-shaped future-provider
+  boundary; FCB remains explicitly deferred pending its distinct ABI.
 
 ## Recent Progress
 
@@ -83,4 +85,5 @@
 | M0 T97 S1 | Complete: component/ABI/failure and composition map records the source-derived replacement boundary. |
 | M0 T97 S2 | Complete: provider withdrawal and immutable token/resource contract recorded; no FASTREAD helper remains. |
 | M0 T97 S3 | Active: pathname/FCB directory-search ABI audit. |
+| M0 T97 S3 P1 | Complete: separate DTA and FCB buffer/error/continuation map recorded; no search runtime provider is enabled. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
