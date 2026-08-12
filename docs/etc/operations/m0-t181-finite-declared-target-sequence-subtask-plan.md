@@ -13,8 +13,8 @@ admission/design packet, not permission to implement a command broker.
 | S1 | Define the source-derived sequence state machine: slot identity, materialized guest file, command tail, first/repeated `54:01` delivery, commit boundary, and final `QUIT.COM` stop. | Complete; the two-slot contract and owner/rejection map are recorded in `t181-s1-finite-declared-target-sequence-contract-001.md`. |
 | S2 | Audit profile, CLI launch declaration, namespace and current provider ownership; define the minimal immutable schema and rejection rules for undeclared, duplicate, out-of-order and exhausted requests. | Complete; the v5 proposal, replacement map and rejection matrix are recorded in `t181-s2-immutable-sequence-ownership-audit-001.md`. |
 | S3 | Admit or reject a contained implementation/verification slice after S1/S2 prove a stable object and ABI closure. | Complete; S4/S5 are admitted by `t181-s3-sequence-implementation-admission-001.md` with no engine/runtime permission. |
-| S4 | Implement the complete v5 two-slot profile/plan/namespace/COMMAND source closure and its focused unit tests. | Active in Status. |
-| S5 | Build and run the admitted local test set; re-run the legacy endpoint scanner and classify the resulting source closure. | Pending S4. |
+| S4 | Implement the complete v5 two-slot profile/plan/namespace/COMMAND source closure and its focused unit tests. | Complete; v5 profile/plan, five-file namespace, adapter install and two-slot COMMAND provider are source-built. |
+| S5 | Build and run the admitted local test set; re-run the legacy endpoint scanner and classify the resulting source closure. | Complete; all admitted local tests and the endpoint scanner pass. See `t181-s5-finite-sequence-local-closure-001.md`. |
 
 ## Invariants
 
