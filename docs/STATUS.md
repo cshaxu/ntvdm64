@@ -2,16 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T106 S1 — two-phase BOP action-bridge closure audit.**
+**Active: M0 T107 S1 — original VdmRedir-unavailable BOP disposition.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T106 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized priority/ROI-based task selection. T105 shows that the first stable continuation boundary is the source-owned BOP-06 illegal-instruction loop, which must not be handled as a service. This admits a holistic audit of the common adapter action bridge. |
-| Objective | Prove the end-to-end ownership and current wiring of the two-phase BOP action bridge (gather read or multi-write action → ordinary-RAM executor → checked CPU resume/refusal), and map every admitted provider that relies on it. |
-| Non-goals | No BOP/INT6/provider semantic change, no Bochs source/intrusion/device/profile/ROM/build change, no new host capability, no guest run, and no per-selector workaround. |
+| Identifier Mode | M0 T107 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized priority/ROI-based task selection. T106 proves the common action bridge is connected and source-correlates the repeated predecessor to original `MS_bop_2` unavailable-redirection behavior. |
+| Objective | Rehost the exact original `MS_bop_2` VdmRedir-unavailable result through the common adapter ingress/provider/result path. |
+| Non-goals | No VdmRedir load, redirector/host filesystem capability, Bochs source/device/profile/ROM/build change, new ABI, INT6 handler, or other selector implementation. |
 | Reference Baseline | etc/research/t105-s1-post-post-cli-continuation-observation-001.md; t95-s7-command-comspec-bootstrap-closure-001.md; current ingress/registry/plane/runtime/action source and T104 build manifest. |
 | Files And ABI Surface | Existing adapter ingress, provider registry, plane gates, gather-read/multi-write action types, runtime executor and focused tests; one research/history/status record only. No new ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
@@ -113,5 +113,6 @@
 | M0 T103 | Closed: profile payload and handoff pairing are correct; direct/deferred consumer mutual exclusion and the two-object closure are proven. |
 | M0 T104 | Closed: current-adapter deferred derivative rebuilt exactly two Bochs objects and reached the real native POST BOP path without an aperture panic. |
 | M0 T105 | Closed: one longer unchanged-binary observation reached a stable source-owned INT6/BOP-06 re-entry loop; no service behavior was changed. |
-| M0 T106 S1 | Active: holistically audit the existing two-phase BOP action bridge before changing any provider. |
+| M0 T106 | Closed: common gather/read/write/resume bridge is connected; the repeated predecessor is original `MS_bop_2` VdmRedir-unavailable behavior. |
+| M0 T107 S1 | Active: rehost only the exact original `MS_bop_2` unavailable result through the common adapter provider path. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
