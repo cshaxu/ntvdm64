@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T99 S2 — profile-backed read-only boot namespace composition.**
+**Active: M0 T101 S1 — post-BOP Bochs prefetch-map mechanics audit.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T99 S2, Ordinary Mode. |
-| Admission And Approval | T99 S1 selected one coherent producer/consumer family: original COMMAND config materialization with DEM normal read-only file and pathname-search consumption. Historical direct composition is source-proven blocked. |
-| Objective | Replace or withdraw that family's legacy endpoint path as one finite profile-backed, read-only boot namespace provider; preserve original paired service and bounded buffer/error contracts. |
-| Non-goals | No individual trace-hit handler, no BOP ingress rewrite, no Bochs/device/firmware change, no DOS/BIOS semantics in the adapter, no host-invasive API, host directory, host handle, FCB emulation, write/create/rename, raw IOCTL or process execution. |
-| Reference Baseline | etc/research/t99-s1-opennt-dem-command-composition-map-001.md; T97 pathname/profile contracts; T96 DEM/COMMAND maps and endpoint register. |
-| Files And ABI Surface | Existing fixed-width ingress/plane/result ABI; profile namespace, search transaction, read-only namespace and legacy gate source. Any added composition state must be copied/opaque and documented. |
+| Identifier Mode | M0 T101 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized priority/ROI-based task selection. T100 proves `50:42` resumes with its original no-op contract and reaches `50:02`; the remaining stop is a Bochs prefetch-map veto. This selects the next first-profile capability checkpoint as a read-only mechanics audit. |
+| Objective | Correlate the exact post-BOP trace state and physical prefetch address with Bochs memory-map/firmware/device source and reached OpenNT control flow; classify the missing owner, if any, without changing runtime behavior. |
+| Non-goals | No Bochs patch, feature/device enablement, memory mapping, firmware/ROM change, guest-media change, adapter BOP/provider change, host capability, or second guest trace. |
+| Reference Baseline | etc/research/t100-s1-original-unavailable-dem-plane-runtime-001.md; t95 PC reset-floor and memory observations; current Bochs 2.6 source and the local OpenNT sources. |
+| Files And ABI Surface | Evidence and status/history records only unless an already-present, read-only diagnostic parser is used. No source ABI or build recipe modification. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused producer/consumer success and unavailable tests; scan proving no direct legacy bypass; source build/relink through the T98 composition recipe; one bounded trace only after source closure. |
-| Expected Markers | One provider owner/state boundary, paired `54:0C/0D` plus read-handle/search disposition, no-host-namespace proof, and explicit FCB/write/IOCTL refusal. |
-| Asset Needs | Existing local OpenNT source, finite BYOB profile, current adapter/CLI sources and r5-derived build island only. |
-| Reporting Requirements | Distinguish source compile/link evidence from runtime evidence; record every excluded default/device and the exact reason for any engine/adapter change. |
-| Stop Conditions | Stop and re-admit before any Bochs/device/firmware/guest-media change, host API capability, FCB/write/IOCTL expansion, new bridge ABI, or a second runtime retry. |
-| Exit Criteria | The coherent provider is source/test/build closed or an evidence-backed composition blocker is recorded; no continuous-DOS claim. |
+| Verification | Reproducible source/trace address calculation, a source-owner map for every relevant mapping layer, and an explicit admitted/deferred/rejected disposition. No executable build or run. |
+| Expected Markers | The `0xAF6AF` physical address is classified as a required native mapping, invalid/errant guest control flow, or an unresolved evidence gap; every conclusion distinguishes inference from direct proof. |
+| Asset Needs | Existing T100 trace, local Bochs 2.6/OpenNT source and retained evidence only. |
+| Reporting Requirements | Record exact source paths/lines, trace state, calculations, confidence and next action; do not represent an audit conclusion as a repair. |
+| Stop Conditions | Stop and re-admit before source changes, a Bochs/configuration/device/firmware/guest-media change, adapter change, additional trace, or any new capability decision. |
+| Exit Criteria | One reproducible owner/disposition map and a bounded recommended next task are recorded; no repair or runtime claim. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Reconcile BYOB components/placements/boot materialization, readonly namespace, search session/result/request, DTA registration, DEM plane/gate, and runtime source lists together. |
+| Similar-Issue Sweep | Check CPU prefetch translation, memory handler/map ownership, ROM/RAM/video ranges, reset-floor device mappings, real/protected mode segmentation, and reached OpenNT continuation evidence. |
 
 ## Current Technical Baseline
 
@@ -104,5 +104,9 @@
 | M0 T99 S1 | Complete: reached service families map to original components; finite read-only boot namespace is the selected whole provider slice. |
 | M0 T99 S2 P1 | Complete: one provider-owned finite namespace state now combines paired config-path production, normal read-only lifecycle and search state; focused producer/consumer test rejects FCB routing. |
 | M0 T99 S2 P2 | Complete: v4 runtime now consumes the provider for CONFIG/AUTOEXEC and pathname-search state; narrow engine relink and one bounded `54:0C` trace pass without a Bochs rebuild. |
-| M0 T99 S2 | Active: migrate normal DEM open/seek/read/close through the same provider/session family; do not re-enable legacy endpoints separately. |
+| M0 T99 S2 P3 | Complete: normal DEM open/seek/read/close moved into the same provider/session family; focused lifecycle passes and the r2 bounded run reaches `54:0C`, `50:12`, `50:00`, then original-unavailable `50:42`. |
+| M0 T99 | Closed: finite read-only boot namespace provider is source/test/build closed; one real consumer reaches the next original-unavailable DEM boundary, with no continuous-execution claim. |
+| M0 T100 S1 | Active: compose the complete eight-slot original-unavailable DEM provider through the common plane; no individual FASTREAD substitute. |
+| M0 T100 | Closed: all eight original-unavailable DEM slots compose through common selection; trace proves `50:42` resume and later close before the separate Bochs prefetch-map stop. |
+| M0 T101 S1 | Active: read-only source/trace mechanics audit of the post-BOP `0xAF6AF` prefetch veto. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
