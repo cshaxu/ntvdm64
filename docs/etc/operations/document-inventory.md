@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 595 |
+| Documentation records | 596 |
 | --- | --- |
-| Generated UTC | 2026-08-12T06:57:18Z |
+| Generated UTC | 2026-08-12T06:59:11Z |
 
 ## Entries
 
@@ -85,7 +85,7 @@ content-divergent entries.
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | 6208c38d058faa77ab3f02772c6fd53025d6b4d0bfc383ade95def519afef0a8 |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
-| etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 9d45baf6cddff9ecf932917b8b0b79c95b2f1fd704164344001ca43deffc4929 |
+| etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 25c8d8c4b9eda9e9cc6ea41a4d84e6d3ad5f3e2e45b45238807aa37fa9b8e960 |
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
 | etc/operations/policy/source-policy.md | indexed supporting material | 96c6cc117898ffeac50af3121a6c9db5fe6aa2861150ce4e323f6c3e78fe01c3 |
 | etc/operations/task-identifier-governance.md | indexed supporting material | 172c0132f14b88cca0483046e79eb6b96082d1c496d994d183c917d8b692d9c9 |
@@ -358,6 +358,7 @@ content-divergent entries.
 | history/m0-t96-s5-closure-20260811.md | closed task history | fea9f2c66c378b0a99fdeb812de329d39c3a7a5aa1c674149cce75f7ae1da5a2 |
 | history/m0-t96-s6-closure-20260811.md | closed task history | 350e7582433483f44e2459cb2ff96decfaf4af047db1e11b0726577b9e996bd6 |
 | history/m0-t96-s7-closure-20260811.md | closed task history | b8a9fb25bf79e2f7d78b9de79d75044121a6b6d902370c39a243563065805eee |
+| history/m0-t96-s8-closure-20260811.md | closed task history | 1b8e63106ec822e2a15272df7fa04d41f399fa16cdf6838be14f2d21223bc9b1 |
 | history/task-index.md | closed task history | 650dbf90485884e24494a2c9f18eba6a2c1293eb7dc40af432aad28ebc436377 |
 | HOST-APPLINIT-PREFIX-TRACE.md | retained pre-governance evidence | 1d43eca6ad570ac29479420ec0773724a160c058e9cf16bc85e3450f286efabe |
 | HOST-CONSOLE-UI-BOUNDARY.md | retained pre-governance evidence | fb9a692c698c144e8860379aff13d82499d03847a0ddfda1bbf60351ad7d2e2f |
@@ -609,7 +610,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | efd334bc4cab779debcc16e0fe0b0c04b789d0f84e1dccb021538bfc164536bc |
+| STATUS.md | principal control document | a9e32b3c3fb86d555540ff0cf3bdd37aeb3db7c6d932164c69f5ac1ab7bf322c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T96 S8 — Existing endpoint migration and no-bypass verification.**
+**Active: M0 T96 S9 — Full inventory/provider/capability regression.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T96 S8, Ordinary Mode. |
-| Admission And Approval | The owner approved holistic BOP recovery by plane and rejected permanent trace-specific handlers. S8 follows complete source disposition planes S3--S7. |
-| Objective | Inventory every existing adapter runtime/end-point BOP recognizer and migrate it behind its matching closed plane, or freeze/reject it with source evidence; prove no new direct legacy bypass is admitted. |
-| Non-goals | No new host capability, DOS/BIOS/Bochs semantics, OpenNT direct linking, or change to a legacy service merely to make a trace advance. |
-| Reference Baseline | history/m0-t96-s7-closure-20260811.md; histories/m0-t96-s3-closure-20260811.md through m0-t96-s6-closure-20260811.md; existing adapter runtime source/tests. |
-| Files And ABI Surface | Existing adapter runtime/end-point code and plane gates only; fixed-width copied ABI; no Bochs public API expansion. |
+| Identifier Mode | M0 T96 S9, Ordinary Mode. |
+| Admission And Approval | The owner approved holistic BOP recovery by original component and rejected trace-specific handlers. S9 follows closed source planes and S8 no-bypass closure. |
+| Objective | Verify every immutable inventory identity receives the expected ingress route, provider disposition, plane classification or explicit non-provider outcome under the first CLI profile. |
+| Non-goals | No new provider, host capability, BIOS/Bochs semantic, OpenNT direct link, or trace-driven behavior change. |
+| Reference Baseline | history/m0-t96-s8-closure-20260811.md; immutable BOP inventory/map; ingress/registry and plane tests. |
+| Files And ABI Surface | Regression harnesses and read-only inventory evidence; no new public ABI or Bochs API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every legacy recognizer has a service/selector owner, original contract citation, target plane, and migration/freeze disposition; focused no-bypass test; documentation governance; git diff --check. |
-| Expected Markers | One complete legacy endpoint register and plane-gated migration changes; no raw selector/service switch survives outside ingress/closed plane modules. |
-| Asset Needs | Existing adapter source/tests, closed plane maps and pinned OpenNT source; no new third-party, firmware, guest media, or Microsoft asset. |
-| Reporting Requirements | Record file/symbol, recognized identity, original source owner, current behavior, conflict, target plane and rejection/migration evidence. |
-| Stop Conditions | Stop and revise admission if migration needs guessed source semantics, a raw guest pointer, a new Bochs feature, or a one-off handler not owned by a closed plane. |
-| Exit Criteria | Every legacy endpoint is plane-gated, explicitly frozen/rejected, or removed; no-bypass verifier covers the resulting adapter source tree; handoff to inventory regression is explicit. |
+| Verification | A complete automated matrix covers all inventory selectors/services and asserts route/selection/plane/non-provider outcomes; focused compile/tests; governance; diff check. |
+| Expected Markers | One reproducible profile-disposition report and no inventory identity that silently receives success or has no classification. |
+| Asset Needs | Immutable inventory/map, source plane code/tests and legacy register; no new third-party, firmware, guest media, or Microsoft asset. |
+| Reporting Requirements | Record total/covered identity counts, expected class, any source-table ambiguity and explicit unavailable/deferred outcomes. |
+| Stop Conditions | Stop and revise admission if regression exposes a missing identity, ambiguous source owner, unintended success, or needs new semantic code to pass. |
+| Exit Criteria | All BOP inventory families and top-level identities have a reproducible profile disposition; S10 real-path trace question is narrowed to admitted providers. |
 | Original Owner Request | Implement BOP holistically, preserve OpenNT semantics, and make adapter route to original OpenNT host code before using minimal source-derived rehosting. |
-| Similar-Issue Sweep | Review adapter runtime, all `*_service.c` BOP recognizers, BIOS selector map, host-service catalog and their tests against the four closed source planes together. |
+| Similar-Issue Sweep | Review inventory JSON, BOP catalogue, ingress, registry, all four plane classifiers, no-bypass register and existing provider tests together. |
 
 ## Current Technical Baseline
 
@@ -46,6 +46,8 @@
   explicitly outside adapter execution.
 - M0 T96 S7 is closed: the complete SoftPC BIOS inventory has native-owner,
   unavailable or collision disposition, without importing a BIOS dispatcher.
+- M0 T96 S8 is closed: legacy runtime identities are registered and gated or
+  rejected, with a scan preventing unapproved direct BOP recognizers.
 
 ## Recent Progress
 
@@ -64,4 +66,6 @@
 | M0 T96 S8 P2 | Complete: a generic DEM/COMMAND plane gate is verified; the first six runtime endpoints are gate-only migrations with no semantic expansion. |
 | M0 T96 S8 P3 | Complete: all DEM/COMMAND legacy endpoint entry stages with a proven service identity now pass the common plane gate; runtime syntax verification passed. |
 | M0 T96 S8 P4 | Complete: the conflicting legacy DEM FASTREAD path is removed from runtime, preserving its S3 original-no-op disposition. |
+| M0 T96 S8 | Complete: legacy recognizers are plane-gated, frozen or rejected; no-bypass verification is active. |
+| M0 T96 S9 | Admitted in Ordinary Mode; full inventory/provider/capability regression begins. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
