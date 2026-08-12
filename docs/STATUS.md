@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T107 S1 — original VdmRedir-unavailable BOP disposition.**
+**Active: M0 T108 S1 — original VdmRedir-unavailable runtime verification.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T107 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized priority/ROI-based task selection. T106 proves the common action bridge is connected and source-correlates the repeated predecessor to original `MS_bop_2` unavailable-redirection behavior. |
-| Objective | Rehost the exact original `MS_bop_2` VdmRedir-unavailable result through the common adapter ingress/provider/result path. |
-| Non-goals | No VdmRedir load, redirector/host filesystem capability, Bochs source/device/profile/ROM/build change, new ABI, INT6 handler, or other selector implementation. |
-| Reference Baseline | etc/research/t105-s1-post-post-cli-continuation-observation-001.md; t95-s7-command-comspec-bootstrap-closure-001.md; current ingress/registry/plane/runtime/action source and T104 build manifest. |
-| Files And ABI Surface | Existing adapter ingress, provider registry, plane gates, gather-read/multi-write action types, runtime executor and focused tests; one research/history/status record only. No new ABI. |
+| Identifier Mode | M0 T108 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized priority/ROI-based task selection. T107 source/test/build closure is complete but its only short trace did not reach selector 02. This admits one longer unchanged-binary observation. |
+| Objective | Prove or refute runtime reachability of the T107 `MS_bop_2` failure provider using one bounded deferred trace. |
+| Non-goals | No source/build/profile/ROM/device/provider change, no VdmRedir load, redirector/host filesystem capability, INT6 handler, second observation or other selector implementation. |
+| Reference Baseline | etc/research/t107-s1-redir-unavailable-provider-001.md; T105/T106 evidence; T107 binary and manifest. |
+| Files And ABI Surface | One immutable evidence directory and research/history/status records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Static call-chain inventory from generic #UD ingress through action production/execution/resume; cross-check action producers and focused tests; prove the action bridge has no selector-specific CPU/Bochs path; run no compiler or guest. |
-| Expected Markers | One provider/action matrix, explicit executor ownership, exact pending/commit/refusal transitions, COMMAND exemplar provenance, and a single source-backed disposition for the BOP-06 loop. |
-| Asset Needs | Existing adapter/OpenNT source and focused test records only. |
-| Reporting Requirements | Distinguish source-present provider code from actually connected runtime behavior; list all users of each action transport; identify missing link/object/precedence only with exact evidence; recommend one coherent successor. |
-| Stop Conditions | Stop and re-admit before source edits, tests that alter code, compile/run, a new transport/ABI, BOP/INT6 behavior, Bochs/device/profile change, or an inference beyond copied trace/source evidence. |
-| Exit Criteria | A complete bridge wiring map and a bounded implementation or rejection successor are recorded; no action is taken on the loop itself. |
+| Verification | Run exactly one 10M/30-second deferred trace with the unchanged T107 binary and compare selector 02/resume markers with T107 contract. |
+| Expected Markers | Selector 02 accepted with CF/AX result and RIP+3, or a different first stable boundary; unchanged binary/profile/ROM identities. |
+| Asset Needs | T107 binary and standard runner inputs only. |
+| Reporting Requirements | Record command, hashes, trace termination and exact selector/resume evidence; do not claim redirector support. |
+| Stop Conditions | Stop before source/build/provider/configuration change, another run, redirector backend or any other selector work. |
+| Exit Criteria | One immutable trace conclusively classifies T107 reachability. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check every gather-read and multi-write producer, pending-action storage, CPU exception consumers, result bridge, generic BOP ingress ordering, legacy-plane gates, COMMAND COMSPEC/environment pair, bootstrap namespace users and refusal paths. |
+| Similar-Issue Sweep | Check only selector 02 count, accepted result marker, BOP06 recurrence, termination class and profile/binary identity. |
 
 ## Current Technical Baseline
 
@@ -114,5 +114,6 @@
 | M0 T104 | Closed: current-adapter deferred derivative rebuilt exactly two Bochs objects and reached the real native POST BOP path without an aperture panic. |
 | M0 T105 | Closed: one longer unchanged-binary observation reached a stable source-owned INT6/BOP-06 re-entry loop; no service behavior was changed. |
 | M0 T106 | Closed: common gather/read/write/resume bridge is connected; the repeated predecessor is original `MS_bop_2` VdmRedir-unavailable behavior. |
-| M0 T107 S1 | Active: rehost only the exact original `MS_bop_2` unavailable result through the common adapter provider path. |
+| M0 T107 | Closed: exact unavailable result is source/test/build closed; short trace did not reach it. |
+| M0 T108 S1 | Active: one longer unchanged-binary trace to verify selector 02 reachability. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
