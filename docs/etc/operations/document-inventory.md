@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 584 |
+| Documentation records | 585 |
 | --- | --- |
-| Generated UTC | 2026-08-12T06:15:26Z |
+| Generated UTC | 2026-08-12T06:17:04Z |
 
 ## Entries
 
@@ -305,7 +305,8 @@ content-divergent entries.
 | etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | 57c3f24ff606a8f5c86f6e2b5408638007f73ebacbaecb0da505be5cdf326777 |
 | etc/research/t96-s4-command-boot-file-reconciliation-001.md | indexed supporting material | 30b3c9940f9984c66d6034a1008f44a570be189d78068a1d730c3caac5e5782c |
 | etc/research/t96-s4-command-plane-abi-001.md | indexed supporting material | 117cb6ac032bf519c15f1f18d92932f43e4dd8091ea35cf5319a6cc4d201422f |
-| etc/research/t96-s4-opennt-command-provider-map-001.md | indexed supporting material | 18330cfc19774e5b22d4b24e2e545a3bd6711fec57f29d20403179d62b229b0d |
+| etc/research/t96-s4-command-start-info-contract-001.md | indexed supporting material | f295788656fcb964abffe249410c14aed012617c3ea095026af0050ebfc98b44 |
+| etc/research/t96-s4-opennt-command-provider-map-001.md | indexed supporting material | 797a4e148f3c15aeea38abfccc1e03c1e6bb0db89bb2660c5a82232dafdc65eb |
 | execution-workflow.md | retained pre-governance evidence | e5221d6627b9faad3bea9390561e37cd1ec045064321c9ea0b6a6bd816b6f126 |
 | FIRMWARE-PROFILE-INPUT-ADMISSION-REPORT.md | retained pre-governance evidence | c1f4a17d10761f92fa00e9c3ef8e0103dc739a89e33813e5a810d6cfac3311a4 |
 | GFI-MEDIA-HOST-BOUNDARY.md | retained pre-governance evidence | f5f6ab1ae2cb338541e3a173b6a9a22316252f5ec84a03557169ba083987cebf |

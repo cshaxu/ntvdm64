@@ -38,7 +38,7 @@ and `cmdexit.c` `3FB4616667B2B73F00ED56D5944A786BE741F5DB511E6F0D5F6A751593A418C
 | 13 | `cmdGetAutoexecBat`, `cmdconf.c` | AUTOEXEC materialization into temp host file and guest path output. | Same paired configuration component as 12; no one-off provider. |
 | 14 | `cmdGetKbdLayout`, `cmdkeyb.c` | Keyboard-layout DLL/VDD and guest structures. | Deferred; keyboard device/VDD is outside current profile. |
 | 15 | `cmdGetInitEnvironment`, `cmdenv.c` | Initial environment transformation and guest buffer output. | Deferred pending bounded environment snapshot/write ABI. |
-| 16 | `cmdGetStartInfo`, `cmdmisc.c` | AL reflects historical `DosSessionId`. | Source-derived CLI session-policy candidate; not yet migrated. |
+| 16 | `cmdGetStartInfo`, `cmdmisc.c` | AL reflects historical `DosSessionId`. | Source-derived CLI session-policy candidate; exact bounded contract recorded, not yet migrated. |
 | 17 | `SVC_CMDLASTSVC` | Dispatcher boundary. | Not callable. |
 
 ## Interpretation
