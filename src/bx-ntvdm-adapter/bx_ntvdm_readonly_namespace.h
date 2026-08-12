@@ -6,7 +6,7 @@
 #include "byob_image.h"
 #include "byob_profile.h"
 
-#define BX_NTVDM_READONLY_NAMESPACE_MAX_FILES 4u
+#define BX_NTVDM_READONLY_NAMESPACE_MAX_FILES 5u
 #define BX_NTVDM_READONLY_NAMESPACE_MAX_READ_BYTES 65536u
 
 /* Adapter-local metadata only.  `bytes` is immutable image/profile storage;
@@ -19,6 +19,7 @@ typedef struct bx_ntvdm_readonly_namespace_file_v1 {
 
 typedef struct bx_ntvdm_readonly_namespace_v1 {
     bx_ntvdm_readonly_namespace_file_v1 files[BX_NTVDM_READONLY_NAMESPACE_MAX_FILES];
+    uint32_t file_count;
     uint32_t drive_index;
     uint32_t generation;
     uint32_t open;
@@ -31,6 +32,9 @@ int bx_ntvdm_readonly_namespace_v1_initialize(
     const byob_profile_selection *selection);
 int bx_ntvdm_readonly_namespace_v1_append_target(
     bx_ntvdm_readonly_namespace_v1 *value, const byob_image *target,
+    const byob_profile_selection *selection);
+int bx_ntvdm_readonly_namespace_v1_append_terminal_quit(
+    bx_ntvdm_readonly_namespace_v1 *value, const byob_image *terminal_quit,
     const byob_profile_selection *selection);
 int bx_ntvdm_readonly_namespace_v1_open(
     bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,

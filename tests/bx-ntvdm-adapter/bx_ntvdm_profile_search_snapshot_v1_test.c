@@ -22,6 +22,7 @@ int main(void)
     resource_set.files[2].bytes = autoexec; resource_set.files[2].byte_count = sizeof(autoexec);
     wcscpy(resource_set.files[2].path, L"\\AUTOEXEC.BAT");
     resource_set.files[3].bytes = target; resource_set.files[3].byte_count = sizeof(target);
+    resource_set.file_count = 4u;
     wcscpy(resource_set.files[3].path, L"\\TARGET.COM");
     selection.has_guest_search_metadata = 1u;
     selection.command_metadata.attributes = 0x20u;

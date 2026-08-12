@@ -23,7 +23,7 @@ static int provider_initialize(bx_ntvdm_boot_namespace_provider_v1 *provider)
     selection.command_metadata.dos_date = selection.target_metadata.dos_date =
         selection.config_metadata.dos_date = selection.autoexec_metadata.dos_date = 1u;
     return bx_ntvdm_boot_namespace_provider_v1_initialize(provider, &command_image,
-        &target_image, &selection);
+        &target_image, NULL, &selection);
 }
 
 int main(void)

@@ -13,12 +13,16 @@ int bx_ntvdm_boot_namespace_provider_v1_valid(
 
 int bx_ntvdm_boot_namespace_provider_v1_initialize(
     bx_ntvdm_boot_namespace_provider_v1 *value, const byob_image *command,
-    const byob_image *target, const byob_profile_selection *selection)
+    const byob_image *target, const byob_image *terminal_quit,
+    const byob_profile_selection *selection)
 {
     if (value == 0 || command == 0 || target == 0 || selection == 0) return 0;
     memset(value, 0, sizeof(*value));
     if (!bx_ntvdm_readonly_namespace_v1_initialize(&value->readonly_namespace, command, selection) ||
         !bx_ntvdm_readonly_namespace_v1_append_target(&value->readonly_namespace, target, selection) ||
+        (selection->declared_target_count == 2u &&
+         (terminal_quit == 0 || !bx_ntvdm_readonly_namespace_v1_append_terminal_quit(
+             &value->readonly_namespace, terminal_quit, selection))) ||
         !bx_ntvdm_profile_search_snapshot_v1_initialize(&value->search_snapshot,
             &value->readonly_namespace, selection)) return 0;
     bx_ntvdm_search_transaction_v1_initialize(&value->search_transaction);

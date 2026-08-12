@@ -42,7 +42,7 @@ int main(void)
     selection.command_metadata.dos_date = selection.target_metadata.dos_date =
         selection.config_metadata.dos_date = selection.autoexec_metadata.dos_date = 1u;
     if (!bx_ntvdm_boot_namespace_provider_v1_initialize(&provider, &command_image,
-        &target_image, &selection)) return 1;
+        &target_image, NULL, &selection)) return 1;
 
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x1000u; cpu.edx = 0x20u;

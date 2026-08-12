@@ -30,6 +30,7 @@ int bx_ntvdm_readonly_namespace_v1_initialize(
     value->files[2].byte_count = 0u;
     wcscpy(value->files[2].path, selection->autoexec_file.path);
     value->drive_index = selection->command_placement.drive_index;
+    value->file_count = 3u;
     value->generation = BX_NTVDM_READONLY_NAMESPACE_TOKEN;
     return 1;
 }
@@ -41,17 +42,39 @@ int bx_ntvdm_readonly_namespace_v1_append_target(
     const wchar_t *expected;
     if (value == 0 || target == 0 || selection == 0 || value->open ||
         target->bytes == 0 || target->byte_count == 0u ||
-        !selection->has_target_placement ||
-        selection->target_placement.drive_index != value->drive_index ||
+        (!selection->has_target_placement && selection->declared_target_count != 2u) ||
+        (selection->has_target_placement && selection->target_placement.drive_index != value->drive_index) ||
+        (selection->declared_target_count == 2u &&
+         selection->declared_targets[0].placement.drive_index != value->drive_index) ||
         (wcscmp(selection->target.file_name, L"TARGET.COM") != 0 &&
          wcscmp(selection->target.file_name, L"TARGET.EXE") != 0)) return 0;
     expected = wcscmp(selection->target.file_name, L"TARGET.COM") == 0 ?
         L"\\TARGET.COM" : L"\\TARGET.EXE";
-    if (wcscmp(selection->target_placement.path, expected) != 0 ||
+    if ((selection->has_target_placement && wcscmp(selection->target_placement.path, expected) != 0) ||
+        (selection->declared_target_count == 2u &&
+         wcscmp(selection->declared_targets[0].placement.path, expected) != 0) ||
         value->files[3].path[0] != L'\0') return 0;
     value->files[3].bytes = target->bytes;
     value->files[3].byte_count = target->byte_count;
     wcscpy(value->files[3].path, expected);
+    value->file_count = 4u;
+    return 1;
+}
+
+int bx_ntvdm_readonly_namespace_v1_append_terminal_quit(
+    bx_ntvdm_readonly_namespace_v1 *value, const byob_image *terminal_quit,
+    const byob_profile_selection *selection)
+{
+    if (!value || !terminal_quit || !selection || value->open || value->file_count != 4u ||
+        selection->declared_target_count != 2u || !selection->declared_targets[1].terminal ||
+        terminal_quit->bytes == 0 || terminal_quit->byte_count != 3u ||
+        wcscmp(selection->declared_targets[1].component.file_name, L"QUIT.COM") != 0 ||
+        wcscmp(selection->declared_targets[1].placement.path, L"\\QUIT.COM") != 0 ||
+        selection->declared_targets[1].placement.drive_index != value->drive_index) return 0;
+    value->files[4].bytes = terminal_quit->bytes;
+    value->files[4].byte_count = terminal_quit->byte_count;
+    wcscpy(value->files[4].path, L"\\QUIT.COM");
+    value->file_count = 5u;
     return 1;
 }
 
@@ -62,7 +85,7 @@ int bx_ntvdm_readonly_namespace_v1_open(
     uint32_t index;
     if (value == 0 || token == 0 || byte_count == 0 || canonical_path == 0 || value->open ||
         drive_index != value->drive_index) return 0;
-    for (index = 0u; index < BX_NTVDM_READONLY_NAMESPACE_MAX_FILES; ++index) {
+    for (index = 0u; index < value->file_count; ++index) {
         if (wcscmp(canonical_path, value->files[index].path) == 0) {
             value->open = 1u;
             value->open_file_index = index;

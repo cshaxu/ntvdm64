@@ -21,7 +21,8 @@ typedef struct bx_ntvdm_boot_namespace_provider_v1 {
 
 int bx_ntvdm_boot_namespace_provider_v1_initialize(
     bx_ntvdm_boot_namespace_provider_v1 *value, const byob_image *command,
-    const byob_image *target, const byob_profile_selection *selection);
+    const byob_image *target, const byob_image *terminal_quit,
+    const byob_profile_selection *selection);
 int bx_ntvdm_boot_namespace_provider_v1_valid(
     const bx_ntvdm_boot_namespace_provider_v1 *value);
 

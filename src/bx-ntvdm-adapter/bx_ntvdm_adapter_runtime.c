@@ -268,7 +268,7 @@ int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
         selection.has_guest_search_metadata != 0u &&
         bx_ntvdm_boot_namespace_provider_v1_initialize(
             &bx_ntvdm_adapter_runtime.boot_namespace_provider,
-            &bx_ntvdm_adapter_runtime.command, &bx_ntvdm_adapter_runtime.target,
+            &bx_ntvdm_adapter_runtime.command, &bx_ntvdm_adapter_runtime.target, NULL,
             &selection)) {
         bx_ntvdm_adapter_runtime.has_boot_namespace_provider = 1;
     }
