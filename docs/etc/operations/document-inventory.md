@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 567 |
+| Documentation records | 568 |
 | --- | --- |
-| Generated UTC | 2026-08-12T05:36:42Z |
+| Generated UTC | 2026-08-12T05:40:38Z |
 
 ## Entries
 
@@ -298,7 +298,7 @@ content-divergent entries.
 | etc/research/t96-s1-opennt-bop-provider-module-map-001.md | indexed supporting material | ab863d4a4717ce375891a4064f2131f577b59b6cdafd8d96aa771ab165d0b5af |
 | etc/research/t96-s2-bop-ingress-abi-001.md | indexed supporting material | 25ad6db0c46703b8b992823380b67aa84607cbf96fbf2375a1c2d60f24807421 |
 | etc/research/t96-s3-dem-component-boundaries-001.md | indexed supporting material | bf524117e2575fff1ea070014f8ee927f7f305687f152768b9bcb48aa739140c |
-| etc/research/t96-s3-demgset-disposition-001.md | indexed supporting material | 05b69aa9b47412b49c0c6f2bf0623b63ebfe971bd9937ab4f08ee307d86183e9 |
+| etc/research/t96-s3-demgset-disposition-001.md | indexed supporting material | 45a73927b018f106c0f0a5b3da15e4f01470a84b03b814d3696d48ee6c81304e |
 | etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | ffa26f7a5c9e29a97273f5b8e1f32b5aa590899d96ae6ddb80d89e2270adf679 |
 | execution-workflow.md | retained pre-governance evidence | e5221d6627b9faad3bea9390561e37cd1ec045064321c9ea0b6a6bd816b6f126 |
 | FIRMWARE-PROFILE-INPUT-ADMISSION-REPORT.md | retained pre-governance evidence | c1f4a17d10761f92fa00e9c3ef8e0103dc739a89e33813e5a810d6cfac3311a4 |
@@ -330,6 +330,7 @@ content-divergent entries.
 | history/m0-t96-s3-p2-20260811.md | closed task history | 02d8f05adceb07e323dc7844e183d990d32163c751e520a83956bbb395a6a365 |
 | history/m0-t96-s3-p3-20260811.md | closed task history | 4539a38f22402a0f9c530872bbbf85ece8c8945f7fa9562828132c8dd37f8ec5 |
 | history/m0-t96-s3-p5-20260811.md | closed task history | ce0e494e6d87c671d13e902f4607fa6c9647d004637b815ae31fc2b039f5164a |
+| history/m0-t96-s3-p6-20260811.md | closed task history | ba773c270d3d62443b94c28829770bd16efd67c88a8796f3f392920a718160ef |
 | history/task-index.md | closed task history | e8ded72d23a4f2913b46b95173b710a16781f44614b98ec6cbcfcaa08233d939 |
 | HOST-APPLINIT-PREFIX-TRACE.md | retained pre-governance evidence | 1d43eca6ad570ac29479420ec0773724a160c058e9cf16bc85e3450f286efabe |
 | HOST-CONSOLE-UI-BOUNDARY.md | retained pre-governance evidence | fb9a692c698c144e8860379aff13d82499d03847a0ddfda1bbf60351ad7d2e2f |
