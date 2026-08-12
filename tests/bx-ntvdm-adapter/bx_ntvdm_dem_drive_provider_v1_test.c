@@ -12,6 +12,7 @@ static int test_snapshot(uint32_t present_mask, const uint8_t types[26],
     bx_ntvdm_instruction_window_v1 window;
     bx_ntvdm_bop_ingress_v1 ingress;
     bx_ntvdm_bop_provider_selection_v1 selection;
+    bx_ntvdm_dem_plane_record_v1 plane;
     bx_ntvdm_cpu_result_v2 result;
     uint8_t bytes[4] = { 0xc4u, 0xc4u, 0x50u, 15u };
     if (!bx_ntvdm_host_drive_snapshot_v1_apply(present_mask, types, 0u, 0u,
@@ -20,7 +21,8 @@ static int test_snapshot(uint32_t present_mask, const uint8_t types[26],
     bx_ntvdm_instruction_window_v1_capture(&window, bytes, 4u);
     return bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) &&
         bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) &&
-        bx_ntvdm_dem_drive_provider_v1_dispatch(&ingress, &selection, &snapshot,
+        bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) &&
+        bx_ntvdm_dem_drive_provider_v1_dispatch(&ingress, &selection, &plane, &snapshot,
             &event, &state, &result) &&
         result.disposition == BX_NTVDM_CPU_RESULT_V2_RESUME &&
         result.resume_rip == 0x804u &&

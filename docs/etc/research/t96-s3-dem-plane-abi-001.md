@@ -45,8 +45,9 @@ The default MinGW build probe remains unavailable because its MSYS2 runtime
 cannot create temporary files in `C:\\msys64\\tmp`; that limitation is not
 treated as a passing integration build.
 
-The one executable original-no-op slice (`dem_provider_v1`) now consumes this
-record as a required input. It rejects a valid BOP/registry pair if the plane
-does not identify the same service as the original-noop component. Thus the
-only currently admitted execution route cannot bypass the unified component
-classification.
+All three currently admitted DEM slices now consume this record as a required
+input: `dem_provider_v1` accepts only the original-noop component, while the
+profile boot-drive and immutable drive-inventory slices accept only their own
+GSET component/service records. Each rejects a valid BOP/registry pair when
+the plane does not identify the same service/component. Thus no currently
+admitted DEM execution route can bypass the unified classification.
