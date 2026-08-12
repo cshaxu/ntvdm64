@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: none; M0 T182 is closed.**
+**Binding active packet: M0 T183 S2 — finite-sequence CLI shim/bundle composition.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> No new packet is admitted below. M0 T182 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T183 S2**. M0 T182 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T182, closed Ordinary Mode packet. |
-| Admission And Approval | S2 generator-only r2 proves the exact 72-object closure, zero new Bochs replacements, zero Bochs build rules and zero archive prerequisites. |
-| Objective | Complete the finite v5 engine closure while preserving the retained native machine boundary. |
-| Non-goals | No retry after build or launch, no Bochs object/archive rebuild, device/configuration change, `GetNextVDMCommand`, host queue/process, ambient namespace, `54:11` result transport, or guest semantic change. |
-| Reference Baseline | T182 S1/S2 records, T181 source/test closure, and the byte-identified retained T177 native-POST/machine-composition derivative. |
-| Files And ABI Surface | The generated r2 makefile/manifest, current source-built v5 runner, fixed profile/target/QUIT identities, and a new evidence directory only. |
+| Identifier Mode | M0 T183 S2, Ordinary Mode. |
+| Admission And Approval | S1 proves the existing shim source and CMake target, T182 engine, three fixed ROM inputs and the fixed manifest contract form a complete finite closure. |
+| Objective | Define one current MinGW runner/shim/probe build and four-member fixed-bundle assembly recipe; no native engine process may start. |
+| Non-goals | No guest launch, Bochs/adapter change, new Bochs configuration language, host capability, `GetNextVDMCommand`, ambient namespace, `54:11` result transport, or guest semantic change. |
+| Reference Baseline | T183 S1 inventory, T182 linked engine, T124 fixed shim contract and current v5 runner sources. |
+| Files And ABI Surface | A bounded CLI build root, bundle assembly script/manifest and the four fixed bundle members only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One named MSVC x86 build log; if it links, one controller record with binary/profile/input identities, timeout result and BOP markers. Documentation inventory/governance and `git diff --check` remain required. |
-| Expected Markers | 72 current object compilations, a final link against retained inputs, then at most one bounded process-tree launch. |
-| Asset Needs | T182 r2 derivative, installed MSVC x86 toolchain, existing v5 runner/profile and fixed source-built target/QUIT assets. |
-| Reporting Requirements | A failed build is final evidence; a linked binary does not imply runtime. Classify a single runtime stop without diagnosis-by-retry. |
-| Stop Conditions | Any build recipe alteration, a second compile/link attempt, a second launch, a Bochs change/archive rebuild, host capability expansion, or a result-transport claim. |
-| Exit Criteria | Met: one build linked and the observation branch was rejected by the absent current CLI shim/bundle, which is transferred as an unnumbered Queue candidate. |
+| Verification | Generator-only bundle assembly with four identity checks and one manifest; documentation inventory/governance and `git diff --check` remain required. |
+| Expected Markers | One declared MinGW target set, fixed `ntdos64-bochs.exe` bundle name, exactly three ROM copies and one fixed-order manifest. |
+| Asset Needs | Current source tree, T182 r2 linked engine, fixed BIOS/VGA/option ROM assets and a new empty build/bundle root. |
+| Reporting Requirements | Separate recipe/assembly facts from later compile/test results; record every SHA-256. |
+| Stop Conditions | Any engine launch, Bochs/adapter source alteration, bundle directive expansion, direct raw-Bochs BYOB argument, or host capability addition. |
+| Exit Criteria | A reproducible recipe and generator-only bundle assembly either pass all identity checks or reject with a concrete input error. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
