@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T104 S1 — current-adapter deferred POST derivative.**
+**Active: M0 T105 S1 — post-POST CLI continuation observation.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T104 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized priority/ROI-based task selection. T103 proves that the current derivative lost the already validated native POST lifecycle by retaining direct-entry Bochs objects. This admits one bounded build-recipe repair. |
-| Objective | Add and validate a deferred native-POST variant of the current-adapter derivative that rebuilds exactly `main.o` and `cpu\\exception.o` with the existing 0/1 deferred macro pair. |
-| Non-goals | No Bochs source edit or new intrusion, no BOP/DOS/DEM/COMMAND semantic, no IVT/BDA synthesis, no device/firmware/map/profile/adapter-ABI change, no archive repack, and no unbounded guest run. |
-| Reference Baseline | etc/research/t103-s1-native-post-deferred-composition-closure-001.md; t102-s1-aperture-entry-observation-design-audit-001.md; t95-s7-native-firmware-to-ntio-handoff-design-001.md; BX-ABI-052; r49/r41 evidence; current derivative source. |
-| Files And ABI Surface | `tools/New-T98S1CurrentAdapterEngineDerivative.ps1`, its focused lexical test, generated makefile/manifest and evidence records only. Existing `main.cc`, `exception.cc`, adapter deferred API and BYOB handoff descriptor are consumed unchanged. |
+| Identifier Mode | M0 T105 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized priority/ROI-based task selection. T104 established a current, source-built native POST path and leaves CLI completion unknown after the short benchmark window. This admits one evidence-only continuation observation before any capability change. |
+| Objective | Execute exactly one longer bounded native-POST run of the T104 binary and classify the first post-`50:36` control-flow or BOP boundary relevant to CLI completion. |
+| Non-goals | No source/build/profile/ROM/device change, no Bochs intrusion, no BOP/provider implementation, no repeated tuning runs, no host namespace/drive expansion, and no claim of CLI completion absent a controlled guest exit. |
+| Reference Baseline | etc/research/t104-s1-current-adapter-deferred-post-runtime-001.md; t103-s1-native-post-deferred-composition-closure-001.md; BX-ABI-052; T104 build manifest/binary and retained r41 BOP reachability evidence. |
+| Files And ABI Surface | One new immutable evidence directory and one research/history/status record only. Existing T104 binary, profile parser, option-ROM composition input, runner and adapter ABI are consumed unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Run the focused lexical tests; generate a fresh derivative; inspect its manifest and makefile; build its declared MSVC/x86 target once; run the standard bounded deferred POST trace once; check hashes/log markers and `git diff --check`. |
-| Expected Markers | `main.o=0/1`, `exception.o` deferred consumer, exactly two Bochs replacements, opaque one-shot handoff, no new device/archive input, and a bounded trace outcome classified without overclaim. |
-| Asset Needs | Existing admitted Bochs/OpenNT/adapter source, retained r5 engine root, existing runner-created option-ROM asset and current BYOB inputs. |
-| Reporting Requirements | Record the exact compiler/link command, source/object hashes, binary hash, profile/ROM hash, trace result, retained devices and no-new-device proof; distinguish lifecycle reachability from CLI completion. |
-| Stop Conditions | Stop and re-admit for a third Bochs object, source/intrusion/ABI/profile/device change, altered ROM bytes, archive repack, a second run required to repair the first, or any new BOP/provider semantic. |
-| Exit Criteria | One fresh current-adapter deferred derivative is reproducibly built and has one bounded trace record, or a precise closure failure is recorded with no scope expansion. |
+| Verification | Run one 10-million-instruction benchmark with the unchanged T104 binary, `-DeferredStartupPlan`, 30-second watchdog and a fresh evidence root; record hashes, ordered terminal log markers and the absence/presence of a controlled guest exit; run no second guest command. |
+| Expected Markers | Native POST handoff, ordinary NTIO transaction, post-`50:36` continuation or first stable repeated/failure boundary, bounded termination classification, and unchanged binary/profile/ROM identity. |
+| Asset Needs | T104 binary/build manifest, existing BYOB inputs, runner-created option-ROM input and existing trace tool only. |
+| Reporting Requirements | Record command, binary/profile/ROM hashes, watchdog/benchmark outcome, first and terminal BOP/CPU markers, exact source-owner interpretation where available, and a source-free next-task recommendation. |
+| Stop Conditions | Stop and re-admit before any second observation, source/build/configuration change, new trace intrusion, BOP/provider behavior, host capability, or interpretation that needs unrecorded source evidence. |
+| Exit Criteria | One immutable longer observation is classified with a single next boundary/owner recommendation; no new semantic is implemented. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Reconcile direct/deferred macro parity in both objects, link ordering versus `cpu/libcpu.a`, current adapter source completeness, old direct derivative preservation, option-ROM/profile pairing, retained device list and existing negative boundaries. |
+| Similar-Issue Sweep | Check transition after `50:36`, BOP identities, original OpenNT caller/dispatcher provenance, native CPU/firmware markers, benchmark versus watchdog termination, controlled-stop path, and repeats of the former aperture condition. |
 
 ## Current Technical Baseline
 
@@ -111,5 +111,6 @@
 | M0 T101 | Closed: `0xAF6AF` is a native VGA-aperture execution veto, not a missing mapping/device; upstream transfer remains unobserved. |
 | M0 T102 | Closed: retained original diagnostics already prove the zero INT10 vector/direct-entry cause; no new Bochs diagnostic is needed. |
 | M0 T103 | Closed: profile payload and handoff pairing are correct; direct/deferred consumer mutual exclusion and the two-object closure are proven. |
-| M0 T104 S1 | Active: implement and validate the current-adapter deferred native-POST derivative with exactly two existing Bochs object replacements. |
+| M0 T104 | Closed: current-adapter deferred derivative rebuilt exactly two Bochs objects and reached the real native POST BOP path without an aperture panic. |
+| M0 T105 S1 | Active: one longer unchanged-binary observation to identify the next real CLI continuation boundary before any BOP/provider work. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
