@@ -16,6 +16,7 @@ available `T` task numbers and do not define the current task sequence.
 | M0 T96 S1 P1 | Complete static selector/service/BIOS provider and module map; no provider enabled. Local commit pending because no Git remote is configured. | [m0-t96-s1-p1-20260811.md](m0-t96-s1-p1-20260811.md) |
 | M0 T96 S2 P1 | Shared BOP ingress classification and typed pass-through gate; provider registry and endpoint migration remain incomplete. Local commit pending because no Git remote is configured. | [m0-t96-s2-p1-20260811.md](m0-t96-s2-p1-20260811.md) |
 | M0 T96 S2 P2 | Stable provider-family selection registry; direct provider linkage and legacy endpoint migration remain deferred to service planes and S8. Local commit pending because no Git remote is configured. | [m0-t96-s2-p2-20260811.md](m0-t96-s2-p2-20260811.md) |
+| M0 T96 S3 | Closed DEM provider plane: every callable service has an original component/disposition, all admitted slices use common ingress/selection plus the unified DEM plane, and raw-media semantics remain deferred. Legacy runtime migration remains S8. | [m0-t96-s3-closure-20260811.md](m0-t96-s3-closure-20260811.md) |
 
 ## Current Numbering Authority
 
