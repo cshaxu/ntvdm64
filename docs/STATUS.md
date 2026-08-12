@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T118 S1 — unexpected-int invocation and resume contract audit.**
+**Active: M0 T120 S1 — bounded native `02h` observation.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T118 S1, Ordinary Mode. |
-| Admission And Approval | T117 proves the default-off selector-blind seam compiles in a two-object derivative. T116 proves the original object and mechanics imports; no accepted handler path exists yet. |
-| Objective | Audit the exact `unexpected_int` post-call CPU/IP contract, determine the smallest generic handled-result form, and define the pre-registration requirements for first invocation. |
-| Non-goals | No handler invocation, RIP advance, guest run, device enablement, adapter mechanics access, new selector/provider, BIOS table, or Bochs source change. |
-| Reference Baseline | etc/research/t117-s1-machine-composition-seam-build-closure-001.md; t110--t116 evidence; current architecture; exception register. |
-| Files And ABI Surface | Read-only original guest/source/control-flow evidence and design/history/status records only. |
+| Identifier Mode | M0 T120 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorizes project-wide priority/ROI ordering. T119 links the original `unexpected_int` invocation derivative but deliberately makes no runtime claim; its map proves the handler and three wrappers enter one image. |
+| Objective | Establish and execute one reproducible, bounded native observation of the T119 derivative, then classify only whether the reached `02h` path calls and resumes through the original handler. |
+| Non-goals | No source change, no second run profile, no response to the outcome, no other selector, BIOS table, device, host-service, adapter capability, CPU/flags delta, or continuous-execution claim. |
+| Reference Baseline | etc/research/t119-s1-original-unexpected-int-invocation-001.md; T110--T118; exception register; the existing bounded engine observation contract. |
+| Files And ABI Surface | Existing T119 derivative and its run/trace inputs; new evidence/history only unless an admission stop requires a later task. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace the original caller's BOP bytes, following guest IRET, and required instruction consumption; compare all candidate resume owners against existing generic exception semantics. |
-| Expected Markers | One approved-or-rejected generic result shape, exact caller/IRET evidence, and a follow-on exception-register request if implementation remains admissible. |
-| Asset Needs | T110 source provenance, T116 original object, T117 seam and existing generic #UD control-flow source. |
-| Reporting Requirements | Distinguish static source inference from any runtime proof; retain `02h` as machine composition, never adapter host service. |
-| Stop Conditions | Stop before changing source, registering an exception, invoking handler, advancing RIP, running guest, enabling devices or adding BOP providers. |
-| Exit Criteria | A bounded T119 implementation packet or an explicit architecture conflict is recorded. |
+| Verification | Record exact command, input hashes, instruction budget and resulting trace. Confirm whether `02h` is reached and whether the generic handled resume occurs; a non-reach is a valid result. |
+| Expected Markers | One bounded trace plus an explicit reached/not-reached classification; no interpretation beyond the first decisive marker. |
+| Asset Needs | T119 r3 executable/map/manifest, its compatible immutable input profile, and existing trace collector. |
+| Reporting Requirements | Separate link proof, runtime observation, inherited CRT warning, and any terminal native fault; retain full command/output paths. |
+| Stop Conditions | Stop on first `02h` disposition, terminal fault, budget exit, missing compatible run contract, or any need to modify code/configuration. |
+| Exit Criteria | One reproducible bounded observation is recorded and its outcome is classified without changing behavior. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check only the existing BIOS BOP table categories necessary to distinguish machine handlers from host-service planes; do not redesign all BOP providers. |
+| Similar-Issue Sweep | Confirm the execution command preserves the exact T119 r3 image and excludes adapter host-service and device expansions; do not scan or implement other BOPs. |
 
 ## Current Technical Baseline
 
@@ -125,5 +125,7 @@
 | M0 T115 | Closed: T115 selects a catalogue-driven machine-composition component distinct from the adapter host-service plane and records its exact future seam. |
 | M0 T116 | Closed: `02h` contract, original object and three wrappers are static/x86-link closed without handler invocation. |
 | M0 T117 | Closed: selector-blind default-off seam source-builds in a two-object derivative with unchanged decline behavior. |
-| M0 T118 S1 | Active: audit original handler invocation and resume contract before any accepted result. |
+| M0 T118 | Closed: original `02h` caller/IRET continuation and generic three-byte resume contract are source-proven. |
+| M0 T119 | Closed: original `unexpected_int` and its exact three mechanics imports link into the default-off, selector-blind derivative; no runtime result is claimed. |
+| M0 T120 S1 | Active: one bounded native observation of the frozen T119 derivative, with stop on its first decisive `02h`/terminal/budget outcome. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
