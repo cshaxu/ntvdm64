@@ -44,6 +44,7 @@ add_executable(ntdos64-run
     src/cli/byob_identity.c
     src/cli/byob_target_selection.c
     src/cli/byob_launch_declaration_v1.c
+    src/cli/byob_launch_plan_v2.c
 )
 
 # Test-only external-engine argument verifier. It is never linked to the CLI.

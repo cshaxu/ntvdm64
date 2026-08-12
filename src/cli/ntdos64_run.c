@@ -8,7 +8,7 @@
 
 #include "byob_profile.h"
 #include "byob_target_selection.h"
-#include "byob_launch_declaration_v1.h"
+#include "byob_launch_plan_v2.h"
 
 typedef enum image_kind {
     IMAGE_KIND_UNKNOWN,
@@ -175,15 +175,13 @@ static int environment_name_compare(const wchar_t *entry, const wchar_t *name)
  * environment. This does not expose guest payloads or add a Bochs option. */
 static wchar_t *build_adapter_environment(const wchar_t *profile,
     const wchar_t *root, const wchar_t *include_drives,
-    const wchar_t *exclude_drives, const wchar_t *launch_kind,
-    const wchar_t *launch_tail)
+    const wchar_t *exclude_drives, const wchar_t *launch_plan)
 {
     static const wchar_t *const names[] = {
-        L"NTDOS64_ADAPTER_PROFILE", L"NTDOS64_ADAPTER_ROOT",
-        L"NTDOS64_ADAPTER_LAUNCH_KIND", L"NTDOS64_ADAPTER_LAUNCH_TAIL",
+        L"NTDOS64_ADAPTER_PROFILE", L"NTDOS64_ADAPTER_ROOT", L"NTDOS64_ADAPTER_LAUNCH_PLAN",
         L"NTDOS64_HOST_EXCLUDE_DRIVES", L"NTDOS64_HOST_INCLUDE_DRIVES"
     };
-    const wchar_t *values[] = { profile, root, launch_kind, launch_tail, exclude_drives, include_drives };
+    const wchar_t *values[] = { profile, root, launch_plan, exclude_drives, include_drives };
     LPWCH inherited;
     const wchar_t *entry;
     size_t capacity = 1u;
@@ -192,7 +190,7 @@ static wchar_t *build_adapter_environment(const wchar_t *profile,
     wchar_t *cursor;
 
     if (profile == NULL || root == NULL || include_drives == NULL || exclude_drives == NULL ||
-        launch_kind == NULL || launch_tail == NULL ||
+        launch_plan == NULL ||
         *profile == L'\0' || *root == L'\0') return NULL;
     inherited = GetEnvironmentStringsW();
     if (inherited == NULL) return NULL;
@@ -256,8 +254,7 @@ static wchar_t *build_adapter_environment(const wchar_t *profile,
 
 static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
     const wchar_t *adapter_root, const wchar_t *include_drives,
-    const wchar_t *exclude_drives, const wchar_t *launch_kind,
-    const wchar_t *launch_tail)
+    const wchar_t *exclude_drives, const wchar_t *launch_plan)
 {
     STARTUPINFOW startup = { .cb = sizeof(startup) };
     PROCESS_INFORMATION process = {0};
@@ -272,9 +269,9 @@ static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
 
     if (line == NULL) return 1;
     if (adapter_profile != NULL || adapter_root != NULL || include_drives != NULL || exclude_drives != NULL ||
-        launch_kind != NULL || launch_tail != NULL) {
+        launch_plan != NULL) {
         environment = build_adapter_environment(adapter_profile, adapter_root,
-            include_drives, exclude_drives, launch_kind, launch_tail);
+            include_drives, exclude_drives, launch_plan);
         if (environment == NULL) {
             HeapFree(GetProcessHeap(), 0, line);
             return 1;
@@ -381,9 +378,9 @@ int wmain(void)
     int target_index = 1;
     image_kind kind;
     wchar_t full_path[MAX_PATH];
-    wchar_t launch_kind[4], launch_tail[BYOB_LAUNCH_DECLARATION_V1_TAIL_BYTES + 1u];
+    wchar_t launch_plan[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     byob_profile_selection selection;
-    byob_launch_declaration_v1 launch;
+    byob_launch_plan_v2 launch;
     DWORD path_length;
     int result;
 
@@ -445,7 +442,7 @@ int wmain(void)
             fwprintf(stderr, L"ntdos64-run: drive policy requires a BYOB DOS engine\n");
             result = 2;
         } else {
-            result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL);
+            result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL);
         }
     } else if (kind == IMAGE_KIND_DOS && engine != NULL) {
         int engine_argc = bochs == NULL ? 6 : 8;
@@ -458,11 +455,9 @@ int wmain(void)
         } else if (byob_profile_validate_file_select(byob_profile, byob_root, &selection) != BYOB_PROFILE_ACCEPTED ||
             !selection.has_target_placement ||
             !byob_target_selection_matches(byob_root, &selection, full_path) ||
-            !byob_launch_declaration_v1_from_arguments(&launch, selection.target.file_name,
+            !byob_launch_plan_v2_from_arguments(&launch, &selection,
                 argc - target_index - 1, argv + target_index + 1) ||
-            !byob_launch_declaration_v1_to_environment(&launch, launch_kind,
-                sizeof(launch_kind) / sizeof(launch_kind[0]), launch_tail,
-                sizeof(launch_tail) / sizeof(launch_tail[0]))) {
+            !byob_launch_plan_v2_to_environment(&launch, launch_plan)) {
             fwprintf(stderr, L"ntdos64-run: BYOB profile validation failed\n");
             result = 3;
         }
@@ -490,7 +485,7 @@ int wmain(void)
                 }
                 (void)index;
                 result = run_process(engine_argc, engine_argv, byob_profile, byob_root,
-                    include_drives, exclude_drives, launch_kind, launch_tail);
+                    include_drives, exclude_drives, launch_plan);
                 HeapFree(GetProcessHeap(), 0, engine_argv);
             }
         }
