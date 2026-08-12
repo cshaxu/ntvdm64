@@ -15,9 +15,9 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T177 S1, Ordinary Mode. |
-| Admission And Approval | T176 is source/test/link/one-observation closed at its earlier native stack/control-flow predecessor. The owner authorized autonomous selection of the Queue head once the medium package boundary is reached. |
-| Objective | Produce a source- and IVT-backed ownership map of the reached vector/stack predecessor, from the post-COMMAND state through the first transfer toward `0000:019d`; classify it without proposing a repair. |
+| Identifier Mode | M0 T177 S2, Ordinary Mode. |
+| Admission And Approval | S1 source/IVT attribution proves the zero captured INT10 vector in the direct pre-POST composition and excludes adapter BOP providers. S2 may cross-check that fact against the current native POST/deferred composition only. |
+| Objective | Compare the declared native POST/deferred handoff composition with the proved INT10-vector prerequisite, and classify whether the current source-built derivative satisfies it without enabling a repair. |
 | Non-goals | No Bochs, adapter, OpenNT, CLI or device change; no new runtime trace; no retry; no BOP provider extension; no terminal-result claim. |
 | Reference Baseline | T156 stack audit, T158 vector observation, T176 S24 observation, retained OpenNT source and Bochs real-mode interrupt mechanics. |
 | Files And ABI Surface | Read-only source/log analysis and one research record; Status/plan only. |
