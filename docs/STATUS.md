@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T178 S1 — normal DOS-return predecessor map.**
+**Binding active packet: M0 T178 S2 — normal-return trace reconciliation.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T178 S1**; all pre-admission T177/T178-labelled files
+> The binding active packet below is **M0 T178 S2**; all pre-admission T177/T178-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active T177 packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T178 S1, Ordinary Mode. |
-| Admission And Approval | Owner-authorized autonomous prioritization; T177 proved the native lifecycle and separates its exit from a DOS result. The Queue's first candidate is now admitted as the required predecessor to any CLI-result transport. |
-| Objective | Build a source/trace map from the observed source-owned `50:36` transfer to normal DOS return, a proven unavailable/failure path, or the first unproven edge. |
+| Identifier Mode | M0 T178 S2, Ordinary Mode. |
+| Admission And Approval | S1 proves that `50:36` is pre-target guest transfer and that normal `54:11` follows target termination and DOS teardown. S2 may reconcile that source chain with retained bounded observations only. |
+| Objective | Classify the most specific currently evidenced predecessor gap between target launch and normal `54:11`, without asserting a target result from a simulator exit. |
 | Non-goals | No result transport implementation; no process-exit reinterpretation; no Bochs/adapter/OpenNT/CLI behavior change; no new runtime observation; no BOP provider extension. |
 | Reference Baseline | T160/T161 native POST observations, T177 S4 combined observation, retained OpenNT COMMAND/DEM source, and existing BOP catalogue evidence. |
-| Files And ABI Surface | Read-only OpenNT source, retained trace/evidence and one research record; Status/plan only. |
+| Files And ABI Surface | Retained trace/evidence and one research record; Status/plan only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile exact BOP/service identities, original caller/dispatcher continuations and retained native traces; run governance checks and `git diff --check`. |
-| Expected Markers | A finite continuation table, source/trace confidence per edge, owner classification, and explicit distinction between guest result and process exit. |
+| Verification | Reconcile source map against retained T176/T177 native traces and their exact final BOP markers; run governance checks and `git diff --check`. |
+| Expected Markers | A specific last-proven and first-unproven edge, confidence, and explicit exclusion of process exit as guest result. |
 | Asset Needs | Retained source and logs only. |
 | Reporting Requirements | Separate observed facts from source inference; state whether a later implementation package is justified. |
-| Stop Conditions | A need to assert a guest return from process exit, invent a service/result ABI, change runtime behavior, or infer an exact source path without supporting source/trace evidence. |
-| Exit Criteria | The first unproven continuation edge is identified and all already-proven guest/Bochs/adapter/CLI owners are classified without admitting transport work. |
+| Stop Conditions | A need to assert a guest return from process exit, invent a service/result ABI, change runtime behavior, or infer an exact trace transition not retained as evidence. |
+| Exit Criteria | The retained traces identify the last proven predecessor and first unproven edge without admitting transport work. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
