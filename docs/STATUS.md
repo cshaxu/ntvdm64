@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S20 — CLI drive-snapshot runtime routing proof.**
+**Active: M0 T194 S21 — current drive-snapshot adapter derivative.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S20, Ordinary Mode. |
-| Admission And Approval | S19 integrates and source-builds snapshot-backed `50:0F`; policy/provider units pass, while the broad retained runtime fixture is failed and unclassified. This S admits only a narrow routing fixture. |
-| Objective | Prove one installed controlled CLI snapshot, not profile-static inventory, produces the original-shaped `50:0F` AX/CF/resume result. |
-| Non-goals | No provider/adapter behavior change, profile grammar/root change, run/retry, Bochs patch/build/config action, host enumeration during guest execution, filesystem/path/namespace/DPB access, unrelated legacy fixture repair, terminal-result transport, or host queue/process broker. |
-| Reference Baseline | S18 contract, S19 source-built route and failed broad fixture. |
-| Files And ABI Surface | One focused adapter runtime test and its CMake target only; existing snapshot/result ABI. |
+| Identifier Mode | M0 T194 S21, Ordinary Mode. |
+| Admission And Approval | S20 proves the snapshot/static precedence in an isolated v6 runtime fixture. This S admits one adapter-only relink to make that verified path available to the native engine. |
+| Objective | Produce one current adapter derivative containing S19's route while retaining the S8 r2 Bochs/mechanics inputs unchanged. |
+| Non-goals | No runtime observation/retry, Bochs source/archive/device/config change, profile/root/controller change, BOP/provider semantic expansion, host enumeration during guest execution, filesystem/path/namespace/DPB change, terminal-result transport, or host queue/process broker. |
+| Reference Baseline | S8 r2 derivative, S15 CLI pair, S19 source route and S20 focused runtime proof. |
+| Files And ABI Surface | Existing adapter derivative generator/build recipe, current adapter sources, generated build artifact/manifest and evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Deterministic runtime fixture with controlled snapshot and conflicting static profile inventory; assert BOP ingress/result state, AX/CF/resume and no host capture during dispatch; documentation governance and `git diff --check`. |
-| Expected Markers | One passing narrow runtime routing test and an explicit negative static-override assertion. |
-| Asset Needs | Existing MinGW adapter test toolchain only; no real host or guest asset. |
-| Reporting Requirements | State fixture setup, snapshot/static conflict, exact result fields and why the broad fixture remains out of scope. |
-| Stop Conditions | Any need to alter production behavior, profile parser, host capture timing, Bochs, engine execution, or unrelated test repair; pause for a fresh S admission. |
-| Exit Criteria | Committed focused runtime proof or a durable isolated test/ABI blocker. |
+| Verification | Regenerate/dry-run current derivative inputs; compile adapter/CLI objects and final link only; compare retained Bochs/mechanics hashes and link map; documentation governance and `git diff --check`. |
+| Expected Markers | A manifested derivative with S19 objects, no Bochs rebuild/replacement and explicit hash/map evidence. |
+| Asset Needs | Existing S8 r2 build inputs, documented x86 MSVC toolchain and derivative generator only. |
+| Reporting Requirements | Record source set, toolchain, output hash, unchanged Bochs input proof, any ABI/link blocker and no-runtime statement. |
+| Stop Conditions | Any archive recursion/full Bochs build, Bochs input replacement, engine run, source semantic change, device/config enablement, profile/root/controller change or retry; pause for a fresh S admission. |
+| Exit Criteria | Committed derivative/evidence closure or a durable current-link blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check snapshot/static precedence, missing snapshot decline, AX/CF/resume shape, host-capture timing, and that `50:46`/namespace/file paths remain untouched. |
+| Similar-Issue Sweep | Verify S19 provider object is included, static fallback remains unreachable for normal snapshot sessions, all Bochs inputs remain byte-identical and no accidental runtime action occurs. |
 
 ## Current Technical Baseline
 
