@@ -2,11 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S25.** Its governing brief is the active
+> **Current effective packet: M0 T198 S26.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S25 -- replace the fixture mock NTDOS with the locked
-source-built NTDOS image and observe the next real guest boundary.**
+**Active: M0 T198 S26 -- recover the original DEM error-lock registration
+through the existing source-derived provider, then observe the next real guest
+boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +24,19 @@ source-built NTDOS image and observe the next real guest boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S25, Ordinary Mode. |
-| Admission And Approval | S24 proves exact NTIO resumes original `50:3B`; its subsequent HLT is the fixture's deliberate mock NTDOS entry. The owner-approved source-closure objective admits replacement only with the locked source-built NTDOS artifact. |
-| Objective | Materialize exact source-built NTDOS bytes as the immutable S25 fixture input, preserve its verified `50:11` publication contract, and observe the next real guest BOP or bounded terminal condition. |
-| Non-goals | No new BOP provider, Bochs/mantle semantic change, guest-image patch, ambient path access, COMMAND/DOS continuity claim, or inference from the former mock terminal. |
-| Reference Baseline | S19/S20 `50:11` contract, locked NTDOS identity `957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84` / 27,858 bytes, and S24 closure. |
-| Files And ABI Surface | `bx-vdm` native fixture/input materialization and CPU5 native observation only; existing mantle terminal snapshot may be consumed but not expanded. |
+| Identifier Mode | M0 T198 S26, Ordinary Mode. |
+| Admission And Approval | S25 P3's exact source-built NTIO/NTDOS run reached original `50:32` after a completed `50:1B` DTA registration. The owner-approved continuing T198 objective authorizes source-led recovery through the existing global provider structure. |
+| Objective | Classify original `SVC_DEMSETHARDERRORINFO` (`50:32`), route it only through its existing source-derived provider and DEM error-lock ownership, preserve both checked guest locations, and observe the next real BOP or bounded terminal. |
+| Non-goals | No new host hard-error policy, retry/error-dialog capability, Bochs/mantle semantic change, guest-image patch, legacy runtime linkage, ambient path access, or COMMAND/DOS continuity claim. |
+| Reference Baseline | S25 P3 exact input/run and OpenNT `dossvc.h`, `demdisp.c`, `demerror.c`; existing `bx_ntvdm_dem_hard_error_service_v1` focused test. |
+| Files And ABI Surface | `bx-vdm` DEM error-lock composition/fixture and CPU5 native observation only; no new core, mantle, selector or host capability ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` fixture verifies exact byte count and SHA-256 before native CPU5 run; real `50:11` publication matches that input and the trace records the first subsequent BOP or typed bounded terminal. Boundary scans prove selector semantics stay in `bx-vdm`. |
-| Expected Markers | Exact NTDOS identity, checked publication, existing `50:3B` typed resume, first later real boundary or terminal snapshot, and no newly enabled selector. |
+| Verification | MSVC x64 `/MT` focused provider/composition regression and exact CPU5 native NTIO/NTDOS run; `50:32` records two validated real-mode physical locators and `RIP+4`, then trace records the first later BOP or typed terminal. Boundary scans prove selector semantics stay in `bx-vdm`. |
+| Expected Markers | OpenNT error-lock ownership, existing provider precedence, two fixed-width locations, typed resume, next boundary/terminal, and no newly enabled selector. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record NTDOS source identity/materialization, exact publication input/result, native continuation, later boundary or terminal condition, and ownership limit. |
-| Stop Conditions | Artifact identity cannot be reproduced, publication requires a new provider semantic, a guest-image patch is needed, or core/mantle behavior would need to change. Preserve evidence and re-admit. |
-| Exit Criteria | Exact original NTIO native-runs through `50:11`/`50:3B` into source-built NTDOS and records the first later real BOP or bounded terminal without claiming DOS boot. |
+| Reporting Requirements | Record original function/dispatcher/caller mapping, two-location contract, provider disposition, native continuation, later boundary or terminal, and ownership limit. |
+| Stop Conditions | The existing provider does not match the original contract, recovery requires host error handling or retry semantics, a guest-image patch is needed, or core/mantle behavior would need to change. Preserve evidence and re-admit. |
+| Exit Criteria | Exact original NTIO/NTDOS native-runs through `50:32` using the existing constrained provider and records its next real BOP or bounded terminal without claiming hard-error handling or DOS boot. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -249,6 +250,9 @@ source-built NTDOS image and observe the next real guest boundary.**
   gate: exact NTIO/NTDOS now completes `50:1B` through its checked two-byte
   guest-RAM read and typed resume, then reaches unimplemented original DEM
   `50:32`; see [S25 P3](etc/research/t198-s25-p3-dem-gset-dta-native-001.md).
+- M0 T198 S26 P1 composes original DEM error-lock registration `50:32` through
+  its existing two-locator provider and reaches the next unimplemented
+  boundary `50:45`; see [S26 P1](etc/research/t198-s26-p1-dem-error-lock-native-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
