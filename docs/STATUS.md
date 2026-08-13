@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S55.** Its governing brief is the active
+> **Current effective packet: M0 T198 S56.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S55 -- compose the existing source-derived `50:0D` C:
-fallback provider into the active finite GSET route.**
+**Active: M0 T198 S56 -- audit the reached `50:21` DEM IOCTL request and its
+existing metadata provider candidates before admitting a raw-media behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,12 +23,12 @@ fallback provider into the active finite GSET route.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S55, Ordinary Mode. |
-| Admission And Approval | S54 proves `50:0D` is GSET `demGetBootDrive`, and identifies an existing exact source-derived C: fallback provider detached only from the active finite composition. |
-| Objective | Link and dispatch that existing provider through the active finite composition, preserving its exact `50:0D` validation and typed result. |
-| Non-goals | No provider semantic rewrite, host registry import, drive scan, CLI argument, DOS image change, BIOS/device activation, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S54 audit, S53 next-boundary witness, existing boot-drive provider and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | Existing finite composition/provider manifest and evidence only; no new ABI. |
+| Identifier Mode | M0 T198 S56, Ordinary Mode. |
+| Admission And Approval | S55 source-builds the existing exact `50:0D` fallback through the finite composition and advances to `50:21` / `demIOCTL`. |
+| Objective | Capture/map the actual 50:21 request register state and source contract; determine whether an existing profile metadata responder precisely matches it. |
+| Non-goals | No raw-media/IOCTL implementation, device or host drive access, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S55 witness, OpenNT `demioctl.c`, existing IOCTL metadata provider evidence. |
+| Files And ABI Surface | Observation/audit and evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
 | Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |

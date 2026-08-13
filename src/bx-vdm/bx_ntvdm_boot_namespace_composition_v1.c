@@ -1,5 +1,6 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx_ntvdm_bios_memory_service.h"
+#include "bx_ntvdm_dem_boot_drive_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
 #include "bx_ntvdm_dem_misc_plane_v1.h"
 #include <string.h>
@@ -171,6 +172,13 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     if (bx_ntvdm_dem_gset_plane_v1_dispatch(&active->gset, &ingress,
             &selection, &boundary, &cpu, &window, &result))
         return outcome(&result, value);
+    if (bx_ntvdm_dem_boot_drive_service_v1_dispatch(&boundary, &cpu,
+            &window, &memory_result)) {
+        if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
+            !bx_ntvdm_cpu_result_v2_resume(&result, memory_result.resume_rip)) return 0;
+        result.cpu_delta = memory_result.cpu_delta;
+        return outcome(&result, value);
+    }
     if (active->gset.has_drive_snapshot) {
         bx_ntvdm_multi_write_transaction_v1 transaction;
         uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];

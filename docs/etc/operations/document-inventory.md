@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1069 |
+| Documentation records | 1070 |
 | --- | --- |
-| Generated UTC | 2026-08-13T21:20:41Z |
+| Generated UTC | 2026-08-13T21:26:24Z |
 
 ## Entries
 
@@ -446,6 +446,7 @@ content-divergent entries.
 | etc/research/t198-s52-bios15-ah88-observation-001.md | indexed supporting material | b73231989e283e05829510f39ef3c5e315a603ccde4d75148e7a0fdb4f2a640e |
 | etc/research/t198-s53-ah88-guard-repair-001.md | indexed supporting material | 20c6222cba37353b593c76528e347b0dbecf2e7dec3437906613d762648fa057 |
 | etc/research/t198-s54-boot-drive-composition-audit-001.md | indexed supporting material | 3778319881cdf9f6e280527d5a526a75c67dbb77bbead5ef34b1a6e369f3c32d |
+| etc/research/t198-s55-boot-drive-composition-witness-001.md | indexed supporting material | 246f6d46e8fc0353e64b486545adcf9a556546a611c3966ea72e23d258c57c36 |
 | etc/research/t198-s5-p1-generic-ud-bridge-record-001.md | indexed supporting material | 28b1dfb141e07bef1357cc6bee7cced17a1b9b243b83332bdfdfe2d37c3b3ce1 |
 | etc/research/t198-s5-p2-core-mantle-ud-hook-001.md | indexed supporting material | b9e735b0813e7be24beedd79915803d92a6c903041d6d7e98c62bb17e355fcf9 |
 | etc/research/t198-s5-p3-finite-ud-stop-witness-001.md | indexed supporting material | 9791321a04f96d18c79d00ceaadc0b8f40d58e41311531814a4c5c9a96f0814a |
@@ -1083,7 +1084,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 7809f83142aede8721ece361c25d2a88f02a2d3b28f890b1650bf88d567aaeda |
+| STATUS.md | principal control document | cc0c45a8818fa00e60a49dd4e7f823ad04f12f1537ef718f8fde5bbc7127f452 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
