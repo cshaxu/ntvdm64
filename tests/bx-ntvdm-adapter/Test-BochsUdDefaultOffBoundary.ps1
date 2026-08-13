@@ -22,7 +22,7 @@ if (-not $source.Contains($default)) {
 }
 
 $includeStart = $source.IndexOf('#if BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT', [System.StringComparison]::Ordinal)
-$includeEnd = $source.IndexOf('#endif', $includeStart, [System.StringComparison]::Ordinal)
+$includeEnd = $source.IndexOf('#endif' + "`n`n" + '#include "param_names.h"', $includeStart, [System.StringComparison]::Ordinal)
 if ($includeStart -lt 0 -or $includeEnd -lt $includeStart) {
     throw 'Missing BX-ABI-027 guarded adapter include block'
 }
@@ -66,13 +66,15 @@ $startupIncludeEnd = $source.IndexOf('#endif', $startupIncludeStart, [System.Str
 if ($startupIncludeStart -lt 0 -or $startupIncludeEnd -lt $startupIncludeStart) {
     throw 'Missing BX-ABI-036 guarded startup-transaction include block'
 }
-$outside = $source.Substring(0, $startupIncludeStart) +
-           $source.Substring($startupIncludeEnd + '#endif'.Length, $includeStart - ($startupIncludeEnd + '#endif'.Length)) +
-           $source.Substring($includeEnd)
-foreach ($token in @('bx_ntvdm_exception_intercept.h', 'bx_ntvdm_exception_abi.h', 'bx_ntvdm_adapter_runtime.h', 'bx_ntvdm_guest_gather_read_action_v1.h')) {
-    if ($token -in @('bx_ntvdm_exception_intercept.h', 'bx_ntvdm_exception_abi.h')) { continue }
-    if ($outside.Contains($token)) {
-        throw "Adapter include escapes default-off guard: $token"
+foreach ($token in @('bx_ntvdm_adapter_runtime.h', 'bx_ntvdm_guest_gather_read_action_v1.h')) {
+    $offset = 0
+    while (($headerIndex = $source.IndexOf('#include "' + $token + '"', $offset, [System.StringComparison]::Ordinal)) -ge 0) {
+        $guardIndex = $source.LastIndexOf('#if BX_NTVDM_ENABLE', $headerIndex, [System.StringComparison]::Ordinal)
+        $priorEndif = $source.LastIndexOf('#endif', $headerIndex, [System.StringComparison]::Ordinal)
+        if ($guardIndex -lt 0 -or $guardIndex -lt $priorEndif) {
+            throw "Adapter include escapes an explicit default-off guard: $token"
+        }
+        $offset = $headerIndex + $token.Length
     }
 }
 

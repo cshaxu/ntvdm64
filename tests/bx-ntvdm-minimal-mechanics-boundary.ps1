@@ -4,7 +4,7 @@ $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $memoryHeader = Join-Path $repositoryRoot 'src/bochs/memory/memory.h'
 $memorySource = Join-Path $repositoryRoot 'src/bochs/memory/misc_mem.cc'
 $iodevHeader = Join-Path $repositoryRoot 'src/bochs/iodev/iodev.h'
-$devicesSource = Join-Path $repositoryRoot 'src/bochs/iodev/devices.cc'
+$portSpaceSource = Join-Path $repositoryRoot 'src/bochs/iodev/minimal_port_space.cc'
 
 function Get-RegisteredBlock([string] $path, [string] $name) {
     $text = Get-Content -LiteralPath $path -Raw
@@ -43,7 +43,7 @@ foreach ($pattern in @('(?-i:\bSIM->)', '(?-i:BXPN_)', '(?-i:register_state)',
     }
 }
 
-$io = Get-RegisteredBlock $devicesSource 'BX-IO-025'
+$io = Get-RegisteredBlock $portSpaceSource 'BX-IO-025'
 foreach ($pattern in @('register_default_io_read_handler', 'register_default_io_write_handler',
         'new struct io_handler_struct \*\[PORTS\]', 'read_port_to_handler\[i\] = &io_read_handlers',
         'write_port_to_handler\[i\] = &io_write_handlers', 'cleanup_empty_port_space',

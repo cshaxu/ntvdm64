@@ -51,7 +51,7 @@ OpenNT, or host-service semantics into Bochs.
 | BX-ABI-028 | 2026-08-11: owner rule permits this necessary S6 modern-MSVC lexical compatibility repair after projected syntax observation 002 | Seven `src/bochs` source files with direct string-literal/`FMT_LL` adjacency | Add whitespace only to preserve original macro expansion at the observed C++ literal-token boundary | Registered before implementation; no format, feature, or runtime behavior change. |
 | BX-EXEC-032 | 2026-08-11: S6 intact-native detached build proves the existing registered execution-plan path is not default-off at compile/link boundary | `src/bochs/main.cc`; `src/bochs/Makefile.in` | Put the existing adapter-backed startup-plan include/call/object list behind one named compile-time opt-in, so the default native container has no adapter header/object requirement | Implemented and `/Zs`-verified; no BOP/DOS/DEM/OpenNT behavior change. |
 | BX-BUILD-033 | 2026-08-11: S6 r3 intact native build proves a prior source-object split lacks its original generated archive membership | `src/bochs/iodev/Makefile.in`; generated `src/bochs/iodev/Makefile` | Add the existing `minimal_port_space.o` to the original non-plugin I/O archive membership | Implemented and r4 native-link verified; no runtime profile, device, adapter, or OpenNT behavior change. |
-| BX-IO-029 | 2026-08-11: coordinator selects the lowest-risk S6 retained-owner candidate | `src/bochs/iodev/devices.cc`; one new Bochs-internal `src/bochs/iodev/minimal_port_space.cc` | Source-object separation of the already registered empty-port initializer and its original default port handlers | Registered before implementation; no ABI, behavior, feature, lifecycle, or runtime change. |
+| BX-IO-029 | 2026-08-11: coordinator selects the lowest-risk S6 retained-owner candidate | `src/bochs/iodev/devices.cc`; one new Bochs-internal `src/bochs/iodev/minimal_port_space.cc` | Source-object separation of the complete already registered empty-port lifecycle: initializer, default handlers, registration helpers and cleanup | Registered before implementation; no ABI, behavior, feature, lifecycle, or runtime change. |
 | BX-IO-030 | 2026-08-11: S6 single-object observation proves the isolated empty-port initializer still imports only its original default-handler registration members from the rejected full device object | `src/bochs/iodev/devices.cc`; existing Bochs-internal `src/bochs/iodev/minimal_port_space.cc` | Source-object separation of the two original default I/O-handler registration members used exclusively by the isolated empty-port initializer | Registered before implementation; no ABI, behavior, feature, lifecycle, or runtime change. |
 | BX-EXEC-034 | 2026-08-11: S6 static object inventory proves a narrow same-island startup-session has no broad runtime or Bochs edge | `src/bochs/main.cc` | In the existing default-off execution-plan block, replace the broad adapter-runtime preparation call with the adapter-owned narrow startup-session endpoint | Registered before implementation; default target remains adapter-free and no Bochs semantic branch is added. |
 | BX-TRACE-035 | 2026-08-11: owner permits registered minimum Bochs intrusions; S6 x87 correlation requires a native-state discriminator without guest mutation | `src/bochs/fpu/fpu.cc` | Default-off fixed diagnostic snapshot immediately before the existing x87 compatibility IRQ13 delivery | Removed by T196 S3 after its historical correlation use; no source, test, generator or build option remains. |
@@ -125,10 +125,13 @@ empty-port behavior into one original Bochs-internal translation unit.
 **Behavior.** Move exactly the existing definitions of
 `bx_devices_c::init_empty_port_space`,
 `bx_devices_c::default_read_handler`, and
-`bx_devices_c::default_write_handler` from `iodev/devices.cc` to
+`bx_devices_c::default_write_handler`,
+`bx_devices_c::register_default_io_read_handler`,
+`bx_devices_c::register_default_io_write_handler`, and
+`bx_devices_c::cleanup_empty_port_space` from `iodev/devices.cc` to
 `iodev/minimal_port_space.cc`. Their signatures, bodies, defaults, and class
-ownership remain unchanged. `cleanup_empty_port_space` remains in
-`devices.cc`; no declaration, caller, or lifecycle ordering changes.
+ownership remain unchanged; no declaration, caller, or lifecycle ordering
+changes.
 
 **Boundary.** This is a source-object boundary only. It adds no adapter,
 OpenNT, DOS/WOW/DEM, BOP, host, configuration, feature-flag, plugin, device,
@@ -137,14 +140,15 @@ port defaults, handler registration, cleanup semantics, or full-device
 initialization.
 
 **Negative cases and verification.** A focused static test must require each
-of the three moved definitions exactly once in the new source and absent from
+of the six moved definitions exactly once in the new source and absent from
 `devices.cc`; it must reject adapter terms in the new source. Existing FMT
 lexical and default-off/retained #UD tests must still pass. The package must
 not compile, link, run, change a build recipe, or claim object/link closure.
 
 **Review condition.** Reject this exception if the move requires any
-declaration/API/call-site/semantic change, modifies cleanup, alters a default
-handler result, reaches an adapter, or requires a second source-object split.
+declaration/API/call-site/semantic change, alters cleanup semantics or a
+ default-handler result, reaches an adapter, or requires a further
+ source-object split.
 Revisit after a separately admitted object/link observation establishes
 whether this isolated member removes the predicted rejected-owner retention.
 

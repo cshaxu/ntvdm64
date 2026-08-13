@@ -79,7 +79,7 @@ bx_bool bx_devices_c::register_default_io_read_handler(void *this_ptr, bx_read_h
 }
 
 bx_bool bx_devices_c::register_default_io_write_handler(void *this_ptr, bx_write_handler_t f,
-                                                const char *name, Bit8u mask)
+                                               const char *name, Bit8u mask)
 {
   io_write_handlers.funct = (void *)f;
   io_write_handlers.this_ptr = this_ptr;
@@ -90,6 +90,51 @@ bx_bool bx_devices_c::register_default_io_write_handler(void *this_ptr, bx_write
   strcpy(io_write_handlers.handler_name, name);
   io_write_handlers.mask = mask;
 
+  return 1;
+}
+
+bx_bool bx_devices_c::cleanup_empty_port_space(void)
+{
+  unsigned i;
+
+  if (read_port_to_handler == NULL && write_port_to_handler == NULL &&
+      io_read_handlers.next == NULL && io_read_handlers.prev == NULL &&
+      io_read_handlers.handler_name == NULL && io_write_handlers.next == NULL &&
+      io_write_handlers.prev == NULL && io_write_handlers.handler_name == NULL) {
+    return 1;
+  }
+  if (read_port_to_handler == NULL || write_port_to_handler == NULL ||
+      io_read_handlers.next != &io_read_handlers || io_read_handlers.prev != &io_read_handlers ||
+      io_write_handlers.next != &io_write_handlers || io_write_handlers.prev != &io_write_handlers) {
+    return 0;
+  }
+  for (i = 0; i < PORTS; i++) {
+    if (read_port_to_handler[i] != &io_read_handlers ||
+        write_port_to_handler[i] != &io_write_handlers) {
+      return 0;
+    }
+  }
+
+  delete [] read_port_to_handler;
+  delete [] write_port_to_handler;
+  read_port_to_handler = NULL;
+  write_port_to_handler = NULL;
+  delete [] io_read_handlers.handler_name;
+  delete [] io_write_handlers.handler_name;
+  io_read_handlers.next = NULL;
+  io_read_handlers.prev = NULL;
+  io_read_handlers.funct = NULL;
+  io_read_handlers.this_ptr = NULL;
+  io_read_handlers.handler_name = NULL;
+  io_read_handlers.usage_count = 0;
+  io_read_handlers.mask = 0;
+  io_write_handlers.next = NULL;
+  io_write_handlers.prev = NULL;
+  io_write_handlers.funct = NULL;
+  io_write_handlers.this_ptr = NULL;
+  io_write_handlers.handler_name = NULL;
+  io_write_handlers.usage_count = 0;
+  io_write_handlers.mask = 0;
   return 1;
 }
 // BX-IO-025-END

@@ -9,8 +9,7 @@ foreach ($required in @(
         'bx_ntvdm_startup_transaction_bridge_v1_dispatch',
         'bx_ntvdm_startup_transaction_bridge_v1_take_pending_write',
         'copy_to_ordinary_ram', 'resume_rip', 'guest transaction committed',
-        'request->cpu_state->cs', 'request->cpu_state->eip',
-        'bx_ntvdm_startup_transaction_bridge_v1_prepare_from_environment')) {
+        'request->cpu_state->cs', 'request->cpu_state->eip')) {
     if (-not ($exception + "`n" + $main).Contains($required)) { throw "Missing narrow startup mechanics token: $required" }
 }
 $start = $exception.IndexOf('#if BX_NTVDM_ENABLE_STARTUP_TRANSACTION', [StringComparison]::Ordinal)
@@ -19,5 +18,8 @@ if ($start -lt 0 -or $end -lt $start) { throw 'Unable to isolate narrow startup 
 $block = $exception.Substring($start, $end - $start)
 foreach ($forbidden in @('adapter_runtime', 'guest_read', 'gather', 'observation', 'multi_write', 'BOP', 'OpenNT', 'DOS', 'WOW', 'DEM', 'COMMAND', '0xC4')) {
     if ($block.IndexOf($forbidden, [StringComparison]::OrdinalIgnoreCase) -ge 0) { throw "Forbidden startup mechanics term: $forbidden" }
+}
+if ($main.Contains('bx_ntvdm_startup_transaction_bridge')) {
+    throw 'Narrow startup transaction bridge must remain in the #UD mechanics seam, not main.cc.'
 }
 Write-Output 'Bochs narrow startup-transaction boundary verification passed.'

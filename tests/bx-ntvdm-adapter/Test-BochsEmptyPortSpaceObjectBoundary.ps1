@@ -23,7 +23,8 @@ $definitions = @(
     'Bit32u\s+bx_devices_c::default_read_handler\s*\(',
     'void\s+bx_devices_c::default_write_handler\s*\(',
     'bx_bool\s+bx_devices_c::register_default_io_read_handler\s*\(',
-    'bx_bool\s+bx_devices_c::register_default_io_write_handler\s*\('
+    'bx_bool\s+bx_devices_c::register_default_io_write_handler\s*\(',
+    'bx_bool\s+bx_devices_c::cleanup_empty_port_space\s*\(\s*void\s*\)'
 )
 foreach ($definition in $definitions) {
     $isolatedCount = [regex]::Matches($isolated, $definition).Count
@@ -36,9 +37,6 @@ foreach ($definition in $definitions) {
     }
 }
 
-if ([regex]::Matches($devices, 'bx_bool\s+bx_devices_c::cleanup_empty_port_space\s*\(\s*void\s*\)').Count -ne 1) {
-    throw 'BX-IO-029 must leave cleanup_empty_port_space in devices.cc exactly once.'
-}
 if ($isolated -match '(?i)bx_ntvdm|adapter|opennt') {
     throw 'BX-IO-029 isolated source must not contain adapter or OpenNT references.'
 }
