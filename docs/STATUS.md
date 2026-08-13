@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S27 — DPB derivative bundle assembly.**
+**Active: M0 T194 S29 — reached DEM ioctl source-contract audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S27, Ordinary Mode. |
-| Admission And Approval | S26 source-builds the S25 adapter route with zero Bochs replacements. Owner authorization permits ordinary artifact assembly. |
-| Objective | Assemble one immutable fixed bundle around the S26 derivative and retained ROM inputs, then record every member hash without invoking it. |
-| Non-goals | No engine run/retry, Bochs/adapter/CLI source or build change, ROM change, profile/root change, host-capability change, or continuous-execution claim. |
-| Reference Baseline | S22 bundle method and ROM identities; S26 engine identity. |
-| Files And ABI Surface | Existing bundle tool, generated artifact evidence, S27 research record, Status, and documentation inventory only. |
+| Identifier Mode | M0 T194 S29, Ordinary Mode. |
+| Admission And Approval | S28 proves `50:46` commits/resumes and reaches `50:21`; the same one invocation exposes a controller-permission limitation, so this S is source/trace interpretation only. |
+| Objective | Establish original OpenNT `demIoctl` `50:21` selector/AL contracts, caller continuation, and current provider disposition before any capability, controller, build, or observation decision. |
+| Non-goals | No run/retry/controller change, source/provider implementation, Bochs patch/build/config/device action, filesystem/raw-media expansion, host query, or claim beyond source/trace facts. |
+| Reference Baseline | S28 retained log, T96 DEM inventory, imported OpenNT source, and existing `dem_ioctl_changeable_service` code/evidence. |
+| Files And ABI Surface | Read-only OpenNT/adapter source and evidence; one research record, Status, and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Bundle manifest/member hashes, documentation governance, and `git diff --check`. |
-| Expected Markers | S26 engine hash and unchanged three ROM hashes recorded in one immutable bundle manifest. |
-| Asset Needs | S26 engine, retained S22 ROM root, and existing bundle tool only. |
-| Reporting Requirements | Record command, root identities, every bundle hash, and explicit no-execution limitation. |
-| Stop Conditions | Missing/changed ROM, bundle collision, need to alter any input/tool, or any request to execute the engine; pause for fresh S admission. |
-| Exit Criteria | Committed immutable bundle evidence. |
+| Verification | Source definition/dispatch/caller/provider audit, documentation governance, and `git diff --check`. |
+| Expected Markers | Source path/AL/result-write/continuation map plus an admitted bounded next action or blocker. |
+| Asset Needs | Existing source/evidence only. |
+| Reporting Requirements | Separate source facts from inference; state why no provider/controller/Bochs action is admitted. |
+| Stop Conditions | Need for a run/retry, provider/controller/source change, raw-media/filesystem/device semantics, or host query; pause for fresh S admission. |
+| Exit Criteria | Committed source-backed `50:21` classification. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare all ROM hashes with S22 and engine hash with S26; ensure no runner/shim or second wrapper is invoked. |
+| Similar-Issue Sweep | Audit all `demIoctl` cases and AL forms, distinguish changeability probe from raw-media actions, and confirm static/CLI snapshot boundaries remain unmerged. |
 
 ## Current Technical Baseline
 
