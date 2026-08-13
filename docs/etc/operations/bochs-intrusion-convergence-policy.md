@@ -29,27 +29,25 @@ only opaque typed mechanical requests and returns typed mechanical results.
 
 ## Repair Package
 
-The candidate T package in `docs/QUEUE.md` is a convergence **repair**, not an
-audit-only task. Its first admitted S is read-only and classifies every
-exception-register entry as **retain**, **move to adapter**, **retain
-default-off**, or **remove**. The record identifies source presence and current
-build/link use.
+The active T196 package is a convergence **repair**, not an audit-only task.
+Its first admitted S is read-only and classifies every exception-register entry
+as **retain**, **move to adapter**, **retain default-off**, or **remove**. The
+record identifies source presence and current build/link use. That audit is a
+repair prerequisite, never T196's completion condition.
 
 Only after that S establishes the complete repair set may subsequent admitted
 S tasks make the corresponding changes. The expected sequencing is:
 
-1. record-by-record audit and target-boundary decision;
-2. move guest-service identity and routing out of Bochs and into adapter
-   composition;
-3. move historical machine-handler selection into the adapter
-   machine-composition plane and reduce the Bochs call to an opaque typed
-   mechanical request/result;
-4. remove obsolete intrusions or retain diagnostics/mechanics default-off only
-   where the audit proves their continued boundary value;
-5. rebuild the minimal closure, run focused boundary/regression checks, and
-   reconcile the exception register with source and final maps.
+1. record-by-record audit and target-boundary decision (S1/S2);
+2. remove or migrate every admitted nonconforming or retired delta (S3);
+3. repair and minimize the retained generic mechanics, minimal embedding, and
+   build-only surface, retaining only individually justified selector-blind
+   contracts (S4);
+4. reconcile the complete repaired upstream diff, exception register, and
+   generated/current build surface (S5); and
+5. rebuild the minimal closure and run focused boundary regressions (S6).
 
 No new Bochs semantic intrusion is admitted while this repair package is open.
-The following BOP runtime package may begin only after the repair package
-closes. Individual exception evidence remains in
+The following BOP runtime package may begin only after every one of these
+repair stages closes. Individual exception evidence remains in
 `docs/etc/research/adapter-external-intrusion-exceptions.md`.

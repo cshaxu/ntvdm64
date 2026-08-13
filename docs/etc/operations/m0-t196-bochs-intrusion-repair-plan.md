@@ -27,9 +27,10 @@ T196 closure gate passes.
 | S5 | Reconcile the complete post-repair upstream diff, exception register and generated/current build surfaces; resolve every residual hunk or re-admit it as a repair blocker. | S3 and S4. | No BOP runtime campaign. |
 | S6 | Rebuild the admitted minimal closure and run focused boundary regressions proving Bochs is selector-blind and the adapter owns semantic routing/selection. | S5. | No continuous-guest-execution or BOP-completeness claim. |
 
-S2 may split S3/S4 only when the S1 manifest proves an independent source or
-build dependency. It may not create a new semantic purpose. Each S requires
-its own `STATUS.md` admission; S1 is the sole active subtask now.
+Each S requires its own `STATUS.md` admission. S1 and S2 are complete; S3
+closed the admitted retired/nonconforming diagnostic surface. S4 is the sole
+active subtask. S5 and S6 are later repair/closure work, not BOP work and not
+optional follow-up after an audit.
 
 ## Completion Gate
 

@@ -5,7 +5,8 @@
 > **Current effective packet: M0 T196 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T196 S1 — establish the complete Bochs intrusive-diff baseline.**
+**Active: M0 T196 S4 — repair and minimize the retained selector-blind
+Bochs mechanics, embedding, and build-only surface.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -14,8 +15,11 @@
 ## Active Packet
 
 > **T scope:** T196 is the full Bochs/adapter boundary **repair** package.
-> S1 is only its immutable baseline/audit step; later S tasks perform the
-> repair. The next T, not T196, resumes holistic BOP runtime closure.
+> S1 is only its immutable baseline/audit step. S2 classifies the repair
+> surface; S3 removes or migrates nonconforming/retired deltas; S4 repairs the
+> retained mechanical surface; S5 reconciles the final diff and register; S6
+> rebuilds and verifies the admitted closure. Only the next T, not T196,
+> resumes holistic BOP runtime closure.
 
 | Field | Required record |
 | --- | --- |
