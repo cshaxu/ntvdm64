@@ -65,6 +65,17 @@ Bochs no longer names the observer or reads the adapter trace environment
 variable; its #UD seam supplies only copied mechanical inputs and consumes
 typed results.
 
+## Build Limitation
+
+After the observer move, a fresh isolated adapter-runtime test build was
+attempted under `artifacts/build/t196-s4-adapter-check`. The current shell has
+no `cmake`, `gcc`, or `clang` command, so configuration did not start and no
+build directory or executable was produced. The pre-existing
+`artifacts/build/adapter-tests` directory has no CMake cache and contains only
+older binaries; it was not used as evidence for the changed source. Source
+boundary checks passed, but current adapter compile/link verification remains
+required at S6 on a declared toolchain island.
+
 ## Procedure And Observations
 
 Ran all retained mechanical boundary checks, each against the repository root:

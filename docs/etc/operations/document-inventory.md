@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 953 |
 | --- | --- |
-| Generated UTC | 2026-08-13T05:53:45Z |
+| Generated UTC | 2026-08-13T05:54:50Z |
 
 ## Entries
 
@@ -371,7 +371,7 @@ content-divergent entries.
 | etc/research/t196-s1-bochs26-intrusive-diff-baseline-001.md | indexed supporting material | 64c1f17adb4bb9714ccd1db638aeb93d86cc969bfa7d62b5881599a1ca14d6f8 |
 | etc/research/t196-s2-intrusive-diff-classification-001.md | indexed supporting material | 0e5f95b7ed26a421d87821dcc317352bb593246fe160a007f276aeb11ffbd8bb |
 | etc/research/t196-s3-retired-diagnostic-removal-001.md | indexed supporting material | 60167920fda029f15398604686555e5243fa8c4e031217ea2cd9668f970b2106 |
-| etc/research/t196-s4-retained-mechanics-repair-001.md | indexed supporting material | eee461be7120bcce794e1c43bd43bfa44c7596f779893e6efea42192981e7847 |
+| etc/research/t196-s4-retained-mechanics-repair-001.md | indexed supporting material | 89a871907972f21d47eb22d507637118880fdbd68b894a41aa80c1dd438c5208 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
