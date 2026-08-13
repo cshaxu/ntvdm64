@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1058 |
+| Documentation records | 1060 |
 | --- | --- |
-| Generated UTC | 2026-08-13T19:08:47Z |
+| Generated UTC | 2026-08-13T19:22:07Z |
 
 ## Entries
 
@@ -436,6 +436,7 @@ content-divergent entries.
 | etc/research/t198-s43-devio-call-pointer-attribution-001.md | indexed supporting material | 22051afbe3b2c9b61b82c947876e8cd113d39b554f81475176d17c3fd3b100d3 |
 | etc/research/t198-s44-call-dev-ad-terminal-witness-001.md | indexed supporting material | c72afefac835ec1605ef64abb3888e792e8efe8a689d89fe4d2bd5a333ccb75c |
 | etc/research/t198-s45-realmode-ip-wrap-source-audit-001.md | indexed supporting material | 66f32b1d552be9345f7a4566d1fc4cba2a6d38e8483a771d76b98e596e411e5c |
+| etc/research/t198-s46-neutral-realmode-ip-wrap-witness-001.md | indexed supporting material | 1298dcaadebd906e61722c7664a0146051483d9e250345af980043e157f042ad |
 | etc/research/t198-s4-generic-ud-seam-map-001.md | indexed supporting material | d22f402ce51aa8c8ff079cd6e737e7103688f096c42f751571cb58ddb538746e |
 | etc/research/t198-s5-p1-generic-ud-bridge-record-001.md | indexed supporting material | 28b1dfb141e07bef1357cc6bee7cced17a1b9b243b83332bdfdfe2d37c3b3ce1 |
 | etc/research/t198-s5-p2-core-mantle-ud-hook-001.md | indexed supporting material | b9e735b0813e7be24beedd79915803d92a6c903041d6d7e98c62bb17e355fcf9 |
@@ -789,6 +790,7 @@ content-divergent entries.
 | history/m0-t198-s43-closure-20260813.md | closed task history | f0c1773c200b11810dc22a0e8e244eb6f2a25eb5ed5375168dacf8eecd357827 |
 | history/m0-t198-s44-closure-20260813.md | closed task history | 20dc0135c29e51bda9376782c9d5c9c269410030374df9935377573ab6a7ee05 |
 | history/m0-t198-s45-closure-20260813.md | closed task history | 9f2b95a235649a4258a4f6ca183284939be1f79a29d782195981464c024e58f3 |
+| history/m0-t198-s46-closure-20260813.md | closed task history | 78e5daac0f7968d6d2292fabc8c7380dd0378175737eac218f8f9eca2ef86397 |
 | history/m0-t198-s8-closure-20260813.md | closed task history | 4de76e54b2097ae2100dee4d1123253cf09964d2d1a8c8b72a8db23b216b7418 |
 | history/m0-t198-s9-closure-20260813.md | closed task history | bbf529c2d4a30cdc105a4089a27f0a4f53f048630b8273ba3f1f065448ef0f88 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
@@ -1072,7 +1074,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ee188faab8136d4894a532b46cc8fa8820e0438ac4443f7a4572d9ef362b3d6f |
+| STATUS.md | principal control document | 4b331b53ae1deb3ef3dec1f4b76b5cb225a9e34bf81ae35d31928f3aef9947a2 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

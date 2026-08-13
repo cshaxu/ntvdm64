@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S46.** Its governing brief is the active
+> **Current effective packet: M0 T198 S47.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S46 -- reproduce one neutral real-mode instruction fetch
-across the `CS:FFFF` to `CS:0000` boundary.**
+**Active: M0 T198 S47 -- repair the generic real-mode `CS:FFFF` instruction
+fetch/advance path and prove the positive neutral terminal.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ across the `CS:FFFF` to `CS:0000` boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S46, Ordinary Mode. |
-| Admission And Approval | S45 proves the precise generic code-fetch candidate: a five-byte 16-bit instruction begins at `CS:FFFF`, while upstream-retained CPU sequential execution retains `EIP=0x10000` and prefetch rejects it. |
-| Objective | Build and run a neutral CPU5 finite fixture whose only guest bytes are a valid five-byte 16-bit instruction split at one real-mode segment boundary and a controlled terminal instruction at `CS:0004`; report whether the current core reaches that terminal state. |
-| Non-goals | No change to bx-core, bx-mantle, bx-vdm, OpenNT, guest-image, provider, BOP, device, firmware, profile, CLI or production build; no NTDOS/NTIO input, selector, service, host capability or repair. |
-| Reference Baseline | S45 CPU path audit, existing finite runner/mechanical pre-entry action, neutral HLT fixture pattern, and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | New test fixture and local build recipe/evidence only; no product ABI. |
+| Identifier Mode | M0 T198 S47, Ordinary Mode. |
+| Admission And Approval | S46 neutral witness reproduces the exact `EIP [00010000] > CS.limit [0000ffff]` diagnostic from a split 16-bit instruction, independently of all guest composition. Owner authorizes strictly registered Bochs intrusions when necessary. |
+| Objective | Make the generic CPU5 real-mode instruction path wrap the 16-bit instruction pointer across `CS:FFFF` to `CS:0000`, then prove the same neutral fixture executes its `HLT` at `CS:0004`. |
+| Non-goals | No BOP, selector, service, DOS/NTIO, OpenNT, adapter, provider, host capability, device, firmware, CLI or product-startup behavior; no special guest address, opcode, or image branch. |
+| Reference Baseline | S45 source audit, S46 neutral witness, existing finite runner/mechanical action and CPU5 x64 `/MT` closure. |
+| Files And ABI Surface | One pre-registered selector-blind `bx-core` mechanics repair, neutral fixture/recipe and evidence only; no product or cross-component ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compile and link the full existing CPU5 closure under MSVC x64 `/MT`; the fixture must retain no OpenNT/BOP/provider dependency, demonstrate disabled/default helper state, and either reach the specified controlled terminal or record the exact native mechanical failure. |
-| Expected Markers | `CS:FFFF` split input, `CS:0004` expected terminal location, exact run status and source-boundary scan. |
+| Verification | Register the exact core change before patching; rebuild/link full CPU5 under MSVC x64 `/MT`; run the positive neutral fixture and retained HLT/UD2 regressions; scan for guest/product vocabulary and compare the changed path with adopted Bochs source. |
+| Expected Markers | `CS:FFFF` split input, no `EIP=00010000` prefetch diagnostic, `CS:0004` terminal HLT and controlled finite stop. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record bytes, real-mode entry state, expected/actual result, exact toolchain/closure and a repair admission decision. |
-| Stop Conditions | The fixture needs a Bochs code change, an OpenNT input, a BOP semantic, a device, or a new general memory primitive. Stop and re-admit rather than expanding scope. |
-| Exit Criteria | A repeatable neutral result that distinguishes a core fetch/width failure from the original guest composition. |
+| Reporting Requirements | Record exception registration, exact changed mechanics, source/upstream comparison, neutral/regression results and all remaining limits. |
+| Stop Conditions | The minimal repair needs guest-image recognition, OpenNT/BOP semantics, device/firmware activation, an adapter exception, a new host callback, or changes outside the generic CPU path. Stop and re-admit rather than expanding scope. |
+| Exit Criteria | The neutral split instruction reaches the specified terminal under the full closure and the repair remains selector-blind and source-bounded. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -344,6 +344,10 @@ across the `CS:FFFF` to `CS:0000` boundary.**
   unchanged upstream CPU prefetch path correlate with the `EIP=0x10000`
   diagnostic; a neutral reproduction is required before repair. See [S45
   source audit](etc/research/t198-s45-realmode-ip-wrap-source-audit-001.md).
+- M0 T198 S46 is complete: the neutral split-instruction fixture repeats the
+  exact `EIP [00010000] > CS.limit [0000ffff]` prefetch diagnostic with no
+  guest composition input. S47 is therefore a generic core repair, not an
+  adapter workaround. See [S46 neutral witness](etc/research/t198-s46-neutral-realmode-ip-wrap-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
