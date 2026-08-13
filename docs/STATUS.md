@@ -17,7 +17,7 @@
 | Objective | Add a versioned, explicit single-target launch mode that uses the existing copied CMDINFO/CPU-result ABI to deliver one target then accept only its source-shaped `54:11` no-next continuation. |
 | Non-goals | No fabricated guest input, Bochs patch, BIOS table installation, device/config action, terminal-result transport, process-exit reinterpretation, new selector handler, host command queue, host target execution broker, ambient filesystem/process exposure, or runtime observation. |
 | Reference Baseline | T190 S6 trace/bundle, T176--T179 normal-return evidence, T194 S1--S3, original `cmddisp.c`/`cmdmisc.c`/`cmdexec.c` and current COMMAND plane/provider tests. |
-| Files And ABI Surface | `src/cli/byob_launch_plan_v2.*`, `src/bx-ntvdm-adapter/bx_ntvdm_cmd_get_next_service.*`, their runtime use and focused tests only. |
+| Files And ABI Surface | Profile-declared target validation in `src/cli/byob_profile.*`, the versioned `byob_launch_plan_v2.*` encoding/runner handoff, `src/bx-ntvdm-adapter/bx_ntvdm_cmd_get_next_service.*`, their runtime use and focused CLI/adapter tests only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Trace-to-source inventory, original owner/failure map, catalogue/registry coverage scan, documentation governance and `git diff --check`. |
 | Expected Markers | Complete reached-family table with no unowned endpoint and an explicit grouped next-slice recommendation; no runtime claim. |
