@@ -504,8 +504,6 @@ add_executable(bx-ntvdm-cmd-comspec-bootstrap-service-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_multi_write_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_multi_write_transaction.c
     src/bx-ntvdm-adapter/bx_ntvdm_cmd_comspec_bootstrap_service.c
-    src/bx-ntvdm-adapter/bx_ntvdm_cmd_get_next_service.c
-    src/bx-ntvdm-adapter/bx_ntvdm_cmdinfo_v1.c
     tests/bx-ntvdm-adapter/bx_ntvdm_cmd_comspec_bootstrap_service_test.c
 )
 target_include_directories(bx-ntvdm-cmd-comspec-bootstrap-service-test PRIVATE

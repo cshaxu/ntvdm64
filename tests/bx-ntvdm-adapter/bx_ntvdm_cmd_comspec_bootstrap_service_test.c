@@ -21,17 +21,23 @@ int main(void)
     bx_ntvdm_cpu_result_v2 result;
     bx_ntvdm_multi_write_transaction_v1 tx;
     unsigned char payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
-    const unsigned char path[] = "C:\\COMMAND.COM";
+    unsigned char path[BX_NTVDM_CMD_COMSPEC_TEXT_MAX_BYTES] = "C:\\ALT.COM";
     uint32_t need;
     ns.drive_index=2u; wcscpy(ns.files[0].path,L"\\COMMAND.COM");
     event(&e,0x200u); bx_ntvdm_cpu_state_v1_initialize(&c,BX_NTVDM_CPU_EXECUTION_REAL);
     c.ds=0x100u; c.edx=0x20u; window(&w,2u);
-    if(!bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(&ns,&e,&c,&w,&action)||
-       action.range_count!=1u||action.ranges[0].address!=0x1020u||action.total_bytes!=sizeof(path))return 1;
     bx_ntvdm_cmd_comspec_bootstrap_v1_initialize(&state);
+    if(!bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(&ns,&e,&c,&w,&state,&action)||
+       action.range_count!=1u||action.ranges[0].address!=0x1020u||
+       action.total_bytes!=BX_NTVDM_CMD_COMSPEC_TEXT_MAX_BYTES)return 1;
+    memset(path,'A',sizeof(path));
+    if(bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(&ns,&e,&c,&action,path,sizeof(path),&state,&result)||
+       state.ready)return 6;
+    strcpy((char *)path,"C:\\ALT.COM");
     if(!bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(&ns,&e,&c,&action,path,sizeof(path),&state,&result)||
        result.resume_rip!=0x204u||result.cpu_delta.gpr16_values[0]!=1u||!state.ready||
-       memcmp(state.environment,"COMSPEC=C:\\COMMAND.COM",22u))return 2;
+       memcmp(state.environment,"COMSPEC=C:\\ALT.COM",19u))return 2;
+    if(bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(&ns,&e,&c,&w,&state,&action))return 5;
     event(&e,0x300u); c.es=0x200u; c.ebx=0u; window(&w,15u);
     if(!bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(&e,&c,&w,&state,&tx,payload)||
        tx.writes.write_count!=0u||tx.result.cpu_delta.gpr16_values[3]==0u)return 3;

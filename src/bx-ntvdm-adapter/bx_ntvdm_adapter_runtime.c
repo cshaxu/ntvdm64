@@ -832,7 +832,7 @@ int bx_ntvdm_adapter_runtime_v4_dispatch(
     if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x02u) &&
         bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(
             &bx_ntvdm_adapter_runtime.boot_namespace_provider.readonly_namespace, event, cpu_before,
-            window, action)) {
+            window, &bx_ntvdm_adapter_runtime.cmd_comspec_bootstrap, action)) {
         if (bx_ntvdm_host_session_v1_queue_guest_gather_read(
                 &bx_ntvdm_adapter_runtime.session, event, cpu_before, action))
             return 1;

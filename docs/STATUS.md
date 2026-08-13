@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T190 S2 — bounded COMMAND bootstrap recovery.**
+**Active: M0 T190 S3 — COMMAND bootstrap object-closure audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > and T189 are closed. Their retained S records are evidence, not concurrent
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T190 S2, Ordinary Mode. |
-| Admission And Approval | Owner authorized source-derived adapter recovery when historical CCPU/SAS/Win32 composition cannot link. T190 S1 maps `54:02` and `54:0F` as the one original COMMAND bootstrap state machine. |
-| Objective | Replace the source-derived profile-path equality restriction with the original-shaped bounded COMSPEC gather/cache contract, while retaining the paired existing `54:0F` retry/write path. |
-| Non-goals | No Bochs or guest source change, new BOP recognizer, host-environment exposure, DOS environment implementation, new COMMAND service, runtime observation, archive/device/config rebuild, or terminal-result transport. |
-| Reference Baseline | T190 S1 contract map and existing checked gather/read/resume plus multi-write ABI. |
-| Files And ABI Surface | `bx_ntvdm_cmd_comspec_bootstrap_service`, focused test, existing runtime call sites, adapter ABI/evidence/status records only. |
+| Identifier Mode | M0 T190 S3, Ordinary Mode. |
+| Admission And Approval | T190 S2 source/test closure changes only the source-derived `54:02` COMSPEC state contract and preserves `54:0F`. The owner authorized bounded derivative work only after its object closure is evidenced. |
+| Objective | Identify the exact current adapter/Bochs objects, headers, retained objects and manifest updates required for one narrow T190 derivative; reject stale-object composition before any build. |
+| Non-goals | No source change, runtime observation, retry, Bochs/guest change, host-environment exposure, archive/device/config rebuild, or terminal-result transport. |
+| Reference Baseline | T190 S1/S2 and T189 four-object stale-object closure evidence. |
+| Files And ABI Surface | Existing derivative/bundle tools, current adapter source hashes, object/link maps, evidence/status records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused positive/negative COMMAND-bootstrap tests, static BOP/trace boundaries, source diff review, documentation governance and `git diff --check`. |
-| Expected Markers | A 64-byte bounded gather for `54:02`, accepted copied COMSPEC state without a profile-path comparison, unchanged `54:0F` capacity/write behavior, and explicit pass-through for missing NUL/non-ASCII/overlong input. |
-| Asset Needs | Existing OpenNT source map and adapter test/build tools only; no new asset. |
-| Reporting Requirements | Record source deviation, retained original semantics, rejected ambient environment, test proof and the exact changed-object closure required before a later run. |
-| Stop Conditions | Need for Bochs/guest change, host environment, unbounded guest read, provider expansion, changed `54:0F` policy, or runtime observation; pause for a fresh S admission. |
-| Exit Criteria | Source/test closure of the cohesive `54:02`/`54:0F` slice or durable rejection; derivative build/run require later S admission. |
+| Verification | Source/hash/object-map review, focused dependency scan, documentation governance and `git diff --check`. |
+| Expected Markers | A declared minimum object set that includes every changed owner and excludes archives, devices, CLI rebuild and unrelated adapter objects. |
+| Asset Needs | Existing derivative/bundle inputs and source only; no new asset. |
+| Reporting Requirements | Name every retained versus recompiled object and the reason; explicitly state whether a Bochs object is needed only for relink compatibility. |
+| Stop Conditions | Any need for source change, runtime observation, retry, new Bochs patch, archive rebuild, or an object outside the proved closure; pause for a fresh S admission. |
+| Exit Criteria | Committed closure manifest/plan or durable rejection; build/run require later S admission. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
