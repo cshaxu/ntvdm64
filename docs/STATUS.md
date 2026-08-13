@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S39 — migrate paired DEM IOCTL metadata provider.**
+**Active: M0 T194 S40 — verify paired DEM IOCTL metadata provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S39, Ordinary Mode. |
-| Admission And Approval | S38 completes the source/current-composition audit and admits exactly the paired `AL=08/09` source-derived provider boundary. Owner authorization permits normal single-agent continuation under the existing T194 package. |
-| Objective | Replace the static legacy `4408` responder with one common-plane, immutable-live-snapshot `demIOCTL` metadata provider that implements original `AL=08/09` register and CF results. |
-| Non-goals | No build/engine/bundle/profile/root change, controller invocation, retry, raw-media/BDS operation (`AL=0D/11`), filesystem/path access, device action, Bochs/OpenNT intrusion, or normal-return claim. |
-| Reference Baseline | S18/S19/S20 snapshot and common-plane evidence, S29 original contract, S36 exact `4408` observation, and S38 composition audit. |
-| Files And ABI Surface | Adapter provider/header/runtime/CMake focused test and S39 record, Status, and documentation inventory. The adapter-local typed CPU-result ABI is reused; no cross-boundary ABI changes. |
+| Identifier Mode | M0 T194 S40, Ordinary Mode. |
+| Admission And Approval | S39 adds the paired source-derived provider and C11 focused target but deliberately does not build it. Owner authorization permits normal single-agent continuation under the existing T194 package. |
+| Objective | Configure an isolated MinGW C11 test build, compile and execute only the paired DEM IOCTL metadata-provider target, and retain its exact result. |
+| Non-goals | No adapter source change, runtime/engine/Bochs build or relink, bundle/profile/root change, controller invocation, guest launch, retry, raw-media/BDS operation, filesystem/device action, or normal-return claim. |
+| Reference Baseline | S38 composition audit and S39 source/test closure. |
+| Files And ABI Surface | Fresh ignored focused-test build root and evidence record, Status, and documentation inventory only. No product ABI or checked-in source changes are admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused positive/negative provider test; source review that `08/09` share one route; legacy endpoint removal scan; documentation governance; `git diff --check`. |
-| Expected Markers | A common ingress/registry/DEM-plane dispatch, live snapshot only, exact AL08/09 outcomes, and raw-media/wrong-input pass-through. |
-| Asset Needs | S38 source map, current adapter/test build graph, and no external runtime asset. |
-| Reporting Requirements | Record source-derived composition blocker, removed legacy surface, test results, and deferred raw-media disposition. |
-| Stop Conditions | Need for new guest-memory transfer, host query at BOP time, broader device/filesystem semantics, Bochs/OpenNT edit, build/run, or outcome divergence; pause for fresh S admission. |
-| Exit Criteria | Committed source/test closure with no legacy static IOCTL responder or parallel fallback. |
+| Verification | Record CMake configure command/toolchain, target build command and exact executable output/exit; inspect target inputs; documentation governance; `git diff --check`. |
+| Expected Markers | One source-only target built and exited zero with paired snapshot contract marker; no Bochs or CLI executable is built or run. |
+| Asset Needs | Existing MinGW CMake/Ninja toolchain and a new ignored build root only. |
+| Reporting Requirements | Record build-root manifest, toolchain identity, target output/hash, failure if any, and absence of runtime execution. |
+| Stop Conditions | Toolchain absence, configure requiring unrelated product targets, any source change, or need to run a runtime/guest; preserve evidence and pause for fresh S admission. |
+| Exit Criteria | Committed focused-test evidence with the exact zero/nonzero result and no expanded build scope. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Scan every legacy IOCTL source/test/CMake/runtime reference; prove `08/09` paired and `0D/11` rejected; verify no static inventory can override the live snapshot. |
+| Similar-Issue Sweep | Verify target source list is limited to provider dependencies; scan output/build log for Bochs/CLI target execution or fallback legacy endpoint. |
 
 ## Current Technical Baseline
 

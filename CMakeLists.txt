@@ -592,24 +592,28 @@ add_executable(bx-ntvdm-dem-drive-service-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_instruction_window_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_exception_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_drive_service.c
-    src/bx-ntvdm-adapter/bx_ntvdm_dem_ioctl_changeable_service.c
     tests/bx-ntvdm-adapter/bx_ntvdm_dem_drive_service_test.c
 )
 target_include_directories(bx-ntvdm-dem-drive-service-test PRIVATE
     src/bx-ntvdm-adapter)
 target_compile_features(bx-ntvdm-dem-drive-service-test PRIVATE c_std_11)
 
-add_executable(bx-ntvdm-dem-ioctl-changeable-service-test EXCLUDE_FROM_ALL
+add_executable(bx-ntvdm-dem-ioctl-metadata-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_delta_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_result_v2.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_state_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_instruction_window_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_exception_abi.c
-    src/bx-ntvdm-adapter/bx_ntvdm_dem_ioctl_changeable_service.c
-    tests/bx-ntvdm-adapter/bx_ntvdm_dem_ioctl_changeable_service_test.c
+    src/bx-ntvdm-adapter/bx_ntvdm_bop_ingress_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_dem_plane_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_host_drive_policy.c
+    src/bx-ntvdm-adapter/bx_ntvdm_dem_ioctl_metadata_provider_v1.c
+    tests/bx-ntvdm-adapter/bx_ntvdm_dem_ioctl_metadata_provider_v1_test.c
 )
-target_include_directories(bx-ntvdm-dem-ioctl-changeable-service-test PRIVATE src/bx-ntvdm-adapter)
-target_compile_features(bx-ntvdm-dem-ioctl-changeable-service-test PRIVATE c_std_11)
+target_include_directories(bx-ntvdm-dem-ioctl-metadata-provider-v1-test PRIVATE src/bx-ntvdm-adapter)
+target_compile_features(bx-ntvdm-dem-ioctl-metadata-provider-v1-test PRIVATE c_std_11)
+target_compile_definitions(bx-ntvdm-dem-ioctl-metadata-provider-v1-test PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
 
 add_executable(bx-ntvdm-dem-dta-service-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_delta_abi.c
@@ -1027,7 +1031,7 @@ add_executable(bx-ntvdm-adapter-runtime-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_spckbd_init_service.c
     src/bx-ntvdm-adapter/bx_ntvdm_wait_if_idle_service.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_drive_service.c
-    src/bx-ntvdm-adapter/bx_ntvdm_dem_ioctl_changeable_service.c
+    src/bx-ntvdm-adapter/bx_ntvdm_dem_ioctl_metadata_provider_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_dta_service.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_hard_error_service.c
     src/bx-ntvdm-adapter/bx_ntvdm_cmd_boot_file_service.c

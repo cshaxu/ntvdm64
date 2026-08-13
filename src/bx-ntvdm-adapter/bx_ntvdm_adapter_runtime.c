@@ -18,7 +18,7 @@
 #include "bx_ntvdm_dem_dta_service.h"
 #include "bx_ntvdm_dem_drive_service.h"
 #include "bx_ntvdm_dem_drive_provider_v1.h"
-#include "bx_ntvdm_dem_ioctl_changeable_service.h"
+#include "bx_ntvdm_dem_ioctl_metadata_provider_v1.h"
 #include "bx_ntvdm_dem_hard_error_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
 #include "bx_ntvdm_dem_provider_v1.h"
@@ -215,6 +215,27 @@ static int bx_ntvdm_adapter_runtime_v1_dispatch_dem_dpb_snapshot(
             transaction.writes.payload_bytes)) return 0;
     *result = transaction.result;
     return 1;
+}
+
+/* `demIOCTL` owns both metadata and raw-media AL subfunctions.  Keep the
+ * original parent plane identity, but admit only the paired 08/09 metadata
+ * contract through the immutable installation-time snapshot. */
+static int bx_ntvdm_adapter_runtime_v1_dispatch_dem_ioctl_metadata_snapshot(
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_bop_ingress_v1 ingress;
+    bx_ntvdm_bop_provider_selection_v1 selection;
+    bx_ntvdm_dem_plane_record_v1 plane;
+    return bx_ntvdm_adapter_runtime.has_host_drive_snapshot &&
+        bx_ntvdm_bop_ingress_v1_classify(window, &ingress) &&
+        bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) &&
+        bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) &&
+        bx_ntvdm_dem_ioctl_metadata_provider_v1_dispatch(&ingress, &selection,
+            &plane, &bx_ntvdm_adapter_runtime.host_drive_snapshot, event,
+            cpu_before, result);
 }
 
 static int bx_ntvdm_hex_nibble(wchar_t value, uint8_t *out)
@@ -709,11 +730,9 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
             cpu_before, window, result)) return 1;
     if (bx_ntvdm_adapter_runtime_v1_dispatch_dem_dpb_snapshot(event,
             cpu_before, window, result)) return 1;
-    if (!bx_ntvdm_adapter_runtime.has_host_drive_inventory) return 1;
-    if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x21u) &&
-        bx_ntvdm_dem_ioctl_changeable_service_v1_dispatch(
-            bx_ntvdm_adapter_runtime.host_drive_inventory.types, event,
+    if (bx_ntvdm_adapter_runtime_v1_dispatch_dem_ioctl_metadata_snapshot(event,
             cpu_before, window, result)) return 1;
+    if (!bx_ntvdm_adapter_runtime.has_host_drive_inventory) return 1;
     {
         bx_ntvdm_multi_write_transaction_v1 transaction;
         uint32_t available_mask = 0u;

@@ -7,7 +7,7 @@ $root = Join-Path $RepositoryRoot 'src\bx-ntvdm-adapter'
 $frozen = @(
     'bx_ntvdm_dem_readonly_file_service.c','bx_ntvdm_dem_boot_drive_service.c',
     'bx_ntvdm_dem_drive_service.c','bx_ntvdm_dem_debug_service.c',
-    'bx_ntvdm_dem_hard_error_service.c','bx_ntvdm_dem_ioctl_changeable_service.c',
+    'bx_ntvdm_dem_hard_error_service.c',
     'bx_ntvdm_dem_dta_service.c','bx_ntvdm_dem_dpb_service.c',
     'bx_ntvdm_dem_path_search_service_v1.c',
     'bx_ntvdm_vdd_create_user_notify_service.c','bx_ntvdm_cmd_get_next_service.c',

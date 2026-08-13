@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 922 |
+| Documentation records | 923 |
 | --- | --- |
-| Generated UTC | 2026-08-13T03:31:24Z |
+| Generated UTC | 2026-08-13T03:35:26Z |
 
 ## Entries
 
@@ -335,7 +335,8 @@ content-divergent entries.
 | etc/research/t194-s35-bop-register-bundle-001.md | indexed supporting material | 954688073af86f21e4cf5ca7ae784588ae2f20232fc369330e458852df09155b |
 | etc/research/t194-s36-bop-register-observation-001.md | indexed supporting material | 4835b4039545800140709e1e45ce27fe11ef5b79bf48fbdd7580c236ab84c804 |
 | etc/research/t194-s37-total-observation-record-001.md | indexed supporting material | 239f481af22038f6dd985ade87fc11d3908b276dd85b6f7c7f93438ccca327a9 |
-| etc/research/t194-s38-dem-ioctl-metadata-composition-audit-001.md | indexed supporting material | 44886aa002b867b9c4807910a4440c8fd3bde0fde5b7ad1c12565d659f407bf8 |
+| etc/research/t194-s38-dem-ioctl-metadata-composition-audit-001.md | indexed supporting material | 5b7ef12ae5b3a412505d4c8f4e93cee6befd1826abea3065482bb7d7368d8122 |
+| etc/research/t194-s39-paired-dem-ioctl-metadata-provider-source-001.md | indexed supporting material | 71c8df3ed92e7fcb4a4d103daf61146a8bca6e2014cad41712b397f60494b858 |
 | etc/research/t194-s3-single-target-normal-return-contract-001.md | indexed supporting material | 4ef6611830e0d0fd68d8d72b82ee2ce304ab6f3c91b5e0ad93bda83dd9eb2c8a |
 | etc/research/t194-s4-single-target-command-lifecycle-implementation-001.md | indexed supporting material | 27d374b709797403b6d02f61d899c0d8b428cfbf30c3baac34c51119e31ec182 |
 | etc/research/t194-s5-one-slot-engine-admission-audit-001.md | indexed supporting material | aca606a76c4bc9928fa138259f71125fc280c1e297dc2f397d1512c56f0efe67 |
@@ -936,7 +937,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4943e45848d333e334ecde7c523c8ac0929e046f84c3a8f88fbe8aebca16b649 |
+| STATUS.md | principal control document | 10354cac4c65c3ab0a4de1fdebcca27967c97b1d9cb9b0fec0d123e829354ba7 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

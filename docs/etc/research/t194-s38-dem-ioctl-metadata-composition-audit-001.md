@@ -47,7 +47,7 @@ The correct current seam already exists:
 
 ```text
 typed #UD event + copied window
-  -> BOP ingress (50:21) -> provider registry -> DEM plane (GSET)
+  -> BOP ingress (50:21) -> provider registry -> DEM plane (RAW_MEDIA parent)
   -> immutable host_drive_snapshot_v1
   -> paired metadata provider -> typed CPU result
 ```
@@ -57,6 +57,11 @@ installation. Its policy has no BOP call path, opens no host path, and retains
 only admitted Win32 type values. `dispatch_dem_drive_snapshot` and
 `dispatch_dem_dpb_snapshot` demonstrate the established common-plane and
 snapshot-only integration pattern, but neither implements IOCTL metadata.
+
+The current DEM plane classifies the whole decimal-33 `demIOCTL` entry as a
+`RAW_MEDIA` parent because that one original entry also owns `AL=0D/11`.
+The paired provider must retain that plane identity and use AL to admit only
+the metadata sub-group; it must not relabel or admit the raw-media sub-group.
 
 ## Implementation Boundary
 
