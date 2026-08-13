@@ -20,6 +20,8 @@ static unsigned observed_first_generic_window_bytes;
 static uint8_t observed_first_generic_window[4];
 static unsigned observed_first_generic_history_count;
 static struct bx_ntvdm_instruction_history_record_v1 observed_first_generic_history[8];
+static unsigned observed_first_generic_cs_transition_valid;
+static struct bx_ntvdm_instruction_history_transition_v1 observed_first_generic_cs_transition;
 
 int bx_ntvdm_mantle_generic_ud_bridge_v1(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
@@ -49,6 +51,9 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
                 break;
             }
         }
+        observed_first_generic_cs_transition_valid =
+            bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(
+                &observed_first_generic_cs_transition) ? 1u : 0u;
         outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
         outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
         observed_stop = 1u;
@@ -122,6 +127,8 @@ unsigned t198_s23_native_ntio_boundary_observed_first_generic_window_bytes(void)
 unsigned t198_s23_native_ntio_boundary_observed_first_generic_window(unsigned index) { return index < sizeof(observed_first_generic_window) ? observed_first_generic_window[index] : 0u; }
 unsigned t198_s23_native_ntio_boundary_observed_first_generic_history_count(void) { return observed_first_generic_history_count; }
 int t198_s23_native_ntio_boundary_copy_first_generic_history(unsigned index, struct bx_ntvdm_instruction_history_record_v1 *value) { if (!value || index >= observed_first_generic_history_count) return 0; *value = observed_first_generic_history[index]; return 1; }
+unsigned t198_s23_native_ntio_boundary_observed_first_generic_cs_transition_valid(void) { return observed_first_generic_cs_transition_valid; }
+int t198_s23_native_ntio_boundary_copy_first_generic_cs_transition(struct bx_ntvdm_instruction_history_transition_v1 *value) { if (!value || !observed_first_generic_cs_transition_valid) return 0; *value = observed_first_generic_cs_transition; return 1; }
 unsigned t198_s23_native_ntio_boundary_observed_stop(void) { return observed_stop; }
 unsigned t198_s23_native_ntio_boundary_observed_selector(void) { return observed_selector; }
 unsigned t198_s23_native_ntio_boundary_observed_service(void) { return observed_service; }

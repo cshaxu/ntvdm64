@@ -22,6 +22,11 @@ struct bx_ntvdm_instruction_history_record_v1 {
   uint16_t reserved0;
 };
 
+struct bx_ntvdm_instruction_history_transition_v1 {
+  struct bx_ntvdm_instruction_history_record_v1 previous;
+  struct bx_ntvdm_instruction_history_record_v1 current;
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -33,6 +38,8 @@ void bx_ntvdm_mantle_instruction_history_v1_record(
 uint32_t bx_ntvdm_mantle_instruction_history_v1_count(void);
 int bx_ntvdm_mantle_instruction_history_v1_get(uint32_t index,
   struct bx_ntvdm_instruction_history_record_v1 *record);
+int bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(
+  struct bx_ntvdm_instruction_history_transition_v1 *transition);
 
 #ifdef __cplusplus
 }
