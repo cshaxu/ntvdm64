@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S45 — build the narrow metadata-provider derivative.**
+**Active: M0 T194 S46 — assemble metadata-provider immutable bundle.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S45, Ordinary Mode. |
+| Identifier Mode | M0 T194 S46, Ordinary Mode. |
 | Admission And Approval | S44 generated a fresh 68+5 source closure with only the established exception-object Bochs replacement. Owner authorization permits normal single-agent continuation under T194. |
-| Objective | Build and link the S44 derivative once with the documented MSVC x86 command; record exact object and link outcome. |
-| Non-goals | No source/generator change, archive/device/Bochs expansion, bundle/profile/root change, controller invocation, guest launch, raw-media action, or normal-return claim. |
+| Objective | Assemble one immutable ROM-and-engine bundle from the S45 engine without starting it. |
+| Non-goals | No source/generator/engine change, controller invocation, guest launch, raw-media action, or normal-return claim. |
 | Reference Baseline | S32 listener derivative, S39 source migration, S42 focused test, S43 audit and S44 generated root. |
-| Files And ABI Surface | Existing S44 ignored root and build evidence only; no checked-in source or ABI changes. |
+| Files And ABI Surface | Fresh ignored bundle root and evidence record only; no checked-in source or ABI changes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One `nmake` target, map/manifest inspection, documentation governance and `git diff --check`. |
-| Expected Markers | 68 adapter + five CLI compilations, one `cpu\exception.o`, final link, no archive targets. |
-| Asset Needs | S44 root and established MSVC x86 environment only. |
-| Reporting Requirements | Record compiler/linker output, executable hash or precise failure, and retained Bochs boundary. |
-| Stop Conditions | Build failure, extra object/archive/device target, source change, or need to run output; preserve evidence and re-admit. |
-| Exit Criteria | Committed one-build evidence admitting or rejecting a later bundle/observation S. |
+| Verification | Bundle manifest/hash inspection, documentation governance and `git diff --check`. |
+| Expected Markers | Engine and three ROM hashes; no executable invocation. |
+| Asset Needs | S45 engine and retained S27 ROM root only. |
+| Reporting Requirements | Record input/output hashes and no-run disposition. |
+| Stop Conditions | Missing/mismatched input, source change, or need to run output; preserve evidence and re-admit. |
+| Exit Criteria | Committed immutable bundle evidence. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Verify source list, copied root and generated makefile contain no legacy IOCTL term and no new Bochs object rule. |
 
