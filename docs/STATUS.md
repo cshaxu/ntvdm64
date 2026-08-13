@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S38 — audit the coherent DEM IOCTL metadata provider.**
+**Active: M0 T194 S39 — migrate paired DEM IOCTL metadata provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S38, Ordinary Mode. |
-| Admission And Approval | S36 proves the reached `50:21` call is `AX=4408/BX=F002`; S29 records the original paired metadata contract. Owner authorization permits normal single-agent continuation under the existing T194 package. |
-| Objective | Produce a source-and-current-composition audit for one coherent `demIOCTL` drive-metadata provider group (`AL=08` and `AL=09`), including the exact replacement boundary from the legacy static endpoint to the immutable live CLI snapshot. |
-| Non-goals | No provider implementation, build, engine/bundle/profile/root change, controller invocation, retry, raw-media/BDS operation (`AL=0D/11`), filesystem/path access, device action, or normal-return claim. |
-| Reference Baseline | S18/S19 live snapshot and common plane, S20 focused precedence test, S29 original IOCTL contract, S36 observed `4408`, and current legacy changeable endpoint. |
-| Files And ABI Surface | Original OpenNT source paths read-only; adapter headers/source and tests read-only for audit; S38 record, Status, and documentation inventory. No ABI change is admitted. |
+| Identifier Mode | M0 T194 S39, Ordinary Mode. |
+| Admission And Approval | S38 completes the source/current-composition audit and admits exactly the paired `AL=08/09` source-derived provider boundary. Owner authorization permits normal single-agent continuation under the existing T194 package. |
+| Objective | Replace the static legacy `4408` responder with one common-plane, immutable-live-snapshot `demIOCTL` metadata provider that implements original `AL=08/09` register and CF results. |
+| Non-goals | No build/engine/bundle/profile/root change, controller invocation, retry, raw-media/BDS operation (`AL=0D/11`), filesystem/path access, device action, Bochs/OpenNT intrusion, or normal-return claim. |
+| Reference Baseline | S18/S19/S20 snapshot and common-plane evidence, S29 original contract, S36 exact `4408` observation, and S38 composition audit. |
+| Files And ABI Surface | Adapter provider/header/runtime/CMake focused test and S39 record, Status, and documentation inventory. The adapter-local typed CPU-result ABI is reused; no cross-boundary ABI changes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Cite exact original-source branches and current call sites; verify both metadata functions are covered, raw-media remains excluded, documentation governance, and `git diff --check`. |
-| Expected Markers | A source-path/line map, current object/link surface, explicit live-snapshot ingress/registry/plane seam, and a bounded future implementation/test list. |
-| Asset Needs | Checked-in OpenNT source, current adapter source/tests, S29/S36 records; no executable or generated runtime asset. |
-| Reporting Requirements | State source provenance, preserved behavior, unavailable composition edge, retained exclusions, and the precise next-S implementation boundary. |
-| Stop Conditions | Any unsupported original semantic, need to broaden into device/filesystem behavior, need for a Bochs intrusion, or need to edit/build/run; preserve findings and require fresh S admission. |
-| Exit Criteria | Committed audit that admits or rejects a narrow subsequent implementation S without one-off `50:21` routing. |
+| Verification | Focused positive/negative provider test; source review that `08/09` share one route; legacy endpoint removal scan; documentation governance; `git diff --check`. |
+| Expected Markers | A common ingress/registry/DEM-plane dispatch, live snapshot only, exact AL08/09 outcomes, and raw-media/wrong-input pass-through. |
+| Asset Needs | S38 source map, current adapter/test build graph, and no external runtime asset. |
+| Reporting Requirements | Record source-derived composition blocker, removed legacy surface, test results, and deferred raw-media disposition. |
+| Stop Conditions | Need for new guest-memory transfer, host query at BOP time, broader device/filesystem semantics, Bochs/OpenNT edit, build/run, or outcome divergence; pause for fresh S admission. |
+| Exit Criteria | Committed source/test closure with no legacy static IOCTL responder or parallel fallback. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare `AL=08` and `AL=09` together; locate all static-inventory uses and public common-plane/snapshot entry points; classify `AL=0D/11` separately. |
+| Similar-Issue Sweep | Scan every legacy IOCTL source/test/CMake/runtime reference; prove `08/09` paired and `0D/11` rejected; verify no static inventory can override the live snapshot. |
 
 ## Current Technical Baseline
 
