@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S11 — one-slot normal-return asset admission.**
+**Active: M0 T194 S12 — source-built normal-return asset recovery.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S11, Ordinary Mode. |
-| Admission And Approval | S10 produces a v6-labelled no-retry controller and r2 bundle without execution. This S admits only asset identity/provenance reconciliation before a run decision. |
-| Objective | Identify the exact source-built normal-return target and complete v6 BYOB root/profile set required for a single observation. |
-| Non-goals | No execution, source/build/controller change, Bochs patch, BIOS/device/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry. |
-| Reference Baseline | T194 S1--S10, especially the SHARE provenance and the v6 profile contract. |
-| Files And ABI Surface | Existing source-built artifacts, manifests, profile fixtures and evidence only. |
+| Identifier Mode | M0 T194 S12, Ordinary Mode. |
+| Admission And Approval | S11 proves the source-built SHARE evidence exists but its output asset is absent. Owner's source-closure objective admits recovery of that one exact historic artifact only. |
+| Objective | Reproduce or recover the exact source-built 882-byte SHARE image, verify its historical hash, and record an immutable v6 BYOB-root materialization plan. |
+| Non-goals | No execution, Bochs/adapter/CLI source change, BOP/provider change, BIOS/device/config action, new target semantics, host capability, terminal-result transport, or retry. |
+| Reference Baseline | T177 source/build manifest, T194 S11 asset blocker, source-policy requirements and v6 profile contract. |
+| Files And ABI Surface | Isolated artifact recovery stage and provenance/materialization evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Artifact hash/provenance, profile/root component identity and declared-target placement audit, documentation governance and `git diff --check`. |
-| Expected Markers | One exact v6 profile/root/target candidate or a named missing/mismatched asset; no runtime claim. |
-| Asset Needs | Existing source-built artifacts and retained inputs only; no new host capability. |
-| Reporting Requirements | Separate source-built/provenance fact from profile compatibility and normal-return source contract. |
-| Stop Conditions | Any asset build/copy, profile/controller/source change, execution, Bochs/device change, provider expansion or retry; pause for a fresh S admission. |
-| Exit Criteria | Committed candidate map or durable asset blocker. |
+| Verification | Historical tool/response/source identity, output SHA-256/size, source-policy record, and profile-root materialization plan; documentation governance and `git diff --check`. |
+| Expected Markers | Exact 882-byte hash-matched SHARE image, declared future `TARGET.EXE` mapping, and no runtime claim. |
+| Asset Needs | Existing retained historical tools and T177 source/response inputs only. |
+| Reporting Requirements | Record every source/tool/output hash, output path, mapping rationale and any reproduction failure. |
+| Stop Conditions | Any profile/adapter/Bochs/controller change, execution, different output hash, source transform, host capability, or retry policy expansion; pause for a fresh S admission. |
+| Exit Criteria | Committed exact artifact recovery or durable source/tool blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Verify controller does not carry stale v5 schema labels, old launch-kind/tail variables, an old engine hash, or a retry path. |
 

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 894 |
+| Documentation records | 895 |
 | --- | --- |
-| Generated UTC | 2026-08-13T02:21:43Z |
+| Generated UTC | 2026-08-13T02:23:08Z |
 
 ## Entries
 
@@ -306,6 +306,7 @@ content-divergent entries.
 | etc/research/t193-s2-t190-machine-island-provenance-001.md | indexed supporting material | 6c4ae40cedbcd411b51202760db44f8acecd0e7a9ce8e30f6658bd8b0f283201 |
 | etc/research/t193-s3-machine-selector-decision-register-001.md | indexed supporting material | 3673d7fe41c8bb1f48a61f1b951ac95a88b83e4f52e3b46402dae86ccdc36f12 |
 | etc/research/t194-s10-one-slot-observation-input-preparation-001.md | indexed supporting material | e2402158dd18f4240eda42dee98d15532705dd1357b1c06194ddfbf98de4a094 |
+| etc/research/t194-s11-one-slot-normal-return-asset-admission-001.md | indexed supporting material | ee8e464d2a5a7d5a20901d0ba897118e8564b7c8fa3784b60beba1ed32e8ab93 |
 | etc/research/t194-s1-normal-return-fixture-asset-reconciliation-001.md | indexed supporting material | ffe98b4bd301a29b9d6a278879061cbdb17059eca656671ec37859b0a5058d08 |
 | etc/research/t194-s2-bootstrap-normal-return-divergence-001.md | indexed supporting material | 6a3a822dd02f93aabe008de995fc9f9ab186e6b334ff8b7228c0007419a0be7c |
 | etc/research/t194-s3-single-target-normal-return-contract-001.md | indexed supporting material | 4ef6611830e0d0fd68d8d72b82ee2ce304ab6f3c91b5e0ad93bda83dd9eb2c8a |
@@ -908,7 +909,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | d8e3cc0323a3b63610adc7df6c8b270d737053288ac820ea42782eea7da97c03 |
+| STATUS.md | principal control document | 76f5b720777dc52da661a98fc43dd521a105794eca164a633ab0ff03e2ad09e6 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
