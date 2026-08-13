@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 928 |
+| Documentation records | 929 |
 | --- | --- |
-| Generated UTC | 2026-08-13T03:43:53Z |
+| Generated UTC | 2026-08-13T03:44:51Z |
 
 ## Entries
 
@@ -343,6 +343,7 @@ content-divergent entries.
 | etc/research/t194-s43-metadata-provider-engine-closure-audit-001.md | indexed supporting material | 919ffb5a57f17f895f745809d3ace40e2a3bb71935061dcc9023cb6894fcd7d0 |
 | etc/research/t194-s44-metadata-provider-derivative-generation-001.md | indexed supporting material | ce9a3da7be807ead83d242135b59522c956ce5e31ee4f4de97a397e00b61a6e1 |
 | etc/research/t194-s45-metadata-provider-derivative-build-001.md | indexed supporting material | 1a1995139e4fcb3fd03cba9a8f846548c7461db8c72def8bf919cbadfd4a3d97 |
+| etc/research/t194-s46-metadata-provider-bundle-001.md | indexed supporting material | f856f2bf94bd62b88a17564015ded46f10228a7ba7e205c9a3b4dfd39a578df3 |
 | etc/research/t194-s4-single-target-command-lifecycle-implementation-001.md | indexed supporting material | 27d374b709797403b6d02f61d899c0d8b428cfbf30c3baac34c51119e31ec182 |
 | etc/research/t194-s5-one-slot-engine-admission-audit-001.md | indexed supporting material | aca606a76c4bc9928fa138259f71125fc280c1e297dc2f397d1512c56f0efe67 |
 | etc/research/t194-s6-one-slot-adapter-composition-assembly-001.md | indexed supporting material | c5d255db3dd302de46307eff3ef07dc4762ac2e417808a715d63d4a5ebc3eafd |
