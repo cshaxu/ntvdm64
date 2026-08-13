@@ -36,8 +36,10 @@ dependency direction or attaching any provider?
 4. Built the existing whole CPU5 seed plus only the new mantle object.  The
    generated direct fixture performed a valid write at `0x800`, attempted a
    two-range write whose second range began at `0x100000`, then read `0x800`
-   back.  It exits nonzero unless the invalid operation fails and all four
-   original bytes remain unchanged.
+   back.  It then writes and reads back the full 65,535-byte maximum action
+   payload, checking its first, middle and final bytes.  It exits nonzero
+   unless the invalid operation fails and all four original bytes remain
+   unchanged.
 5. Compiled and ran the C layout witness with i686 MinGW.  It proves the C
    consumer sees a 16-byte range, `ranges` at offset 32, `payload` at offset
    1056 and a 66,592-byte v1 record.
@@ -45,15 +47,17 @@ dependency direction or attaching any provider?
 ## Observations
 
 The native run at
-`artifacts/build/t198-s8-mechanical-action-r1/` completed with link exit 0 and
+`artifacts/build/t198-s8-mechanical-action-r2/` completed with link exit 0 and
 run exit 0.  Its manifest identifies x86, CPU5/Pentium-MMX and excludes
 `main.cc`, `config.cc`, GUI, `bochs.exe`, device archives, OpenNT and CLI.
 `link.map` resolves all three new action symbols from `mechanical_action.obj`.
+The max-size write/read runs at physical `0x10000`; its checked bytes are
+`0x5a`, `0x3c` and `0xa5` at offsets 0, 32,767 and 65,534 respectively.
 
 | Artifact | SHA-256 |
 | --- | --- |
-| `mechanical_action.obj` | `01D358AD9FFD080FCDA77CAAC712429C0C0C7F2B19AAD59E6656734859AB3F42` |
-| native action fixture | `E1E1EE5C201D5ED34D5FDEF1E341905AED9C1C59B5C1127A211E836F10CDC6C5` |
+| `mechanical_action.obj` | `ED483761DF28CE7DBE3C468E00B2A94EB1667B0FBF0E105E589F95BAC2B3A1E0` |
+| native action fixture | `4368BDE5E84EF27B27F2E5E63BB2274A41DA3E570954F50E6CDCFE044AF29B2C` |
 
 The source boundary scan passed.  The i686 executable is `PE32` Intel i386 and
 exited 0.  The previous `bx_ntvdm_pending_action_v1` remains an adapter-local

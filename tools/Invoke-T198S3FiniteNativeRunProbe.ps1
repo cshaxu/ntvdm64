@@ -103,7 +103,21 @@ int main()
   if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action) ||
       action.payload[0] != 0xaa || action.payload[1] != 0xbb ||
       action.payload[2] != 0xcc || action.payload[3] != 0xdd) return 4;
-  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 5;
+  bx_ntvdm_mechanical_action_v1_clear(&action);
+  action.action_id = 4; action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+  action.range_count = 1; action.payload_bytes = 65535;
+  action.ranges[0].physical_address = 0x10000; action.ranges[0].byte_count = 65535;
+  action.payload[0] = 0x5a; action.payload[32767] = 0x3c;
+  action.payload[65534] = 0xa5;
+  if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) return 5;
+  bx_ntvdm_mechanical_action_v1_clear(&action);
+  action.action_id = 5; action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_READ;
+  action.range_count = 1; action.payload_bytes = 65535;
+  action.ranges[0].physical_address = 0x10000; action.ranges[0].byte_count = 65535;
+  if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action) ||
+      action.payload[0] != 0x5a || action.payload[32767] != 0x3c ||
+      action.payload[65534] != 0xa5) return 6;
+  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 7;
 }
 "@ | Set-Content -LiteralPath $probe -Encoding ascii
 } else {

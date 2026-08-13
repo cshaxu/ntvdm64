@@ -2,11 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S8.** Its governing brief is the active
+> **Current effective packet: M0 T198 S9.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S8 -- define the generic pending-action ABI required by the
-whole finite boot-namespace provider family, before linking that provider.**
+**Active: M0 T198 S9 -- establish the exact whole-family composition closure
+for the finite boot-namespace provider before enabling any one of its BOP
+routes.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +24,21 @@ whole finite boot-namespace provider family, before linking that provider.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S8, Ordinary Mode. |
-| Admission And Approval | S7 proves the i686/MSVC x86 bridge link. The owner-directed holistic BOP route admits an ABI-first whole-provider closure, not individual service wiring. |
-| Objective | Define and verify fixed copied pending-action records for generic checked read, multi-write and bulk-write mechanics, with no boot provider attached. |
-| Non-goals | No individual BOP execution, boot namespace/provider linkage, adapter runtime, CLI/environment/session, host filesystem, firmware/device/GUI/product build, OpenNT import or CPU semantic change. |
-| Reference Baseline | T198 S7 cross-island witness and the T198 S8 boot-namespace provider closure map. |
-| Files And ABI Surface | Fixed versioned action/result declarations, mantle generic mechanics and focused ABI tests only; no provider-specific field or selector is permitted. |
+| Identifier Mode | M0 T198 S9, Ordinary Mode. |
+| Admission And Approval | S8 has a source-built CPU5/x86 selector-blind action boundary. The owner-directed holistic BOP route requires an exact whole-provider closure before any individual service is enabled. |
+| Objective | Produce a source-backed, executable object and ABI closure map for the complete finite read-only boot-namespace provider family: COMMAND boot files, DEM normal open/seek/read/close and pathname search. |
+| Non-goals | No individual BOP execution, provider linkage, adapter runtime, CLI/environment/session, host filesystem, firmware/device/GUI/product build, OpenNT import or CPU semantic change. |
+| Reference Baseline | T198 S8 mechanical-action witness, boot-namespace provider closure map, existing global ingress and provider registry. |
+| Files And ABI Surface | Evidence and Status only. Inventory all provider entrypoints, their existing fixed transaction/result records, the required VDM-to-mantle conversion points and exact candidate object list; no new execution ABI or provider-specific route is permitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compile focused i686 and MSVC/x86 ABI fixtures, reject malformed/overflow action records, prove no selector/provider vocabulary in mantle mechanics, and run documentation checks. |
-| Expected Markers | Versioned action layouts, positive/negative action validation, selector-blind mantle source scan, and no provider link input. |
+| Verification | For every selected family entrypoint, trace source includes/calls to a global ingress/plane, transaction result and action conversion disposition. Prove candidate objects have no `adapter_runtime`, environment, host path/handle or direct recognizer dependency; run documentation checks. |
+| Expected Markers | Complete entrypoint/object/dependency matrix, explicit action disposition per entrypoint, and a rejected legacy-runtime closure. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record action ownership, widths, lifetime, transition rules, rejected legacy runtime alternatives and no-provider runtime claim. |
-| Stop Conditions | Any selector/service/provider/host semantic enters an action record; core gains memory access; action ownership or lifetime requires raw pointer/CRT memory. Preserve evidence and re-admit. |
-| Exit Criteria | Generic action ABI and selector-blind mantle mechanics source/test closure exists; no provider or legacy runtime is linked. |
+| Reporting Requirements | Record ownership, call order, layouts, failure/deferral behavior, toolchain island and candidate object/input list. |
+| Stop Conditions | A selected entrypoint requires an unbounded guest pointer, callback, ambient host state, unrecorded historical import, or a new mantle/core operation. Preserve evidence and re-admit. |
+| Exit Criteria | A complete, source-backed and selector-global provider composition candidate is identified, with every entrypoint classified and no legacy-runtime or individual-service bypass admitted. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover every existing read/write/gather/bulk transaction, overflow/partial-write behavior, result/resume transitions, bridge lifetime and core/mantle boundary vocabulary. |
+| Similar-Issue Sweep | Cover COMMAND/DEM/search entrypoints, copied read/multi/bulk transaction forms, result/resume transitions, global ingress/plane use, toolchain direction and legacy-runtime coupling. |
 
 ## Current Technical Baseline
 
@@ -109,10 +110,13 @@ whole finite boot-namespace provider family, before linking that provider.**
   witness](etc/research/t198-s7-cross-island-link-witness-001.md).
 - M0 T198 S8 P1 is complete: the first adapter-local pending descriptor was
   corrected into a mantle-owned, selector-blind copied ordinary-RAM action
-  ABI.  A native CPU5/x86 fixture proves write, rejected out-of-aperture
-  multi-range write and read-back with no partial write; an i686 C witness
-  proves the fixed layout.  No provider is attached; see [T198 S8 mechanical
-  action boundary witness](etc/research/t198-s8-mechanical-action-boundary-witness-001.md).
+  ABI.  A native CPU5/x86 fixture proves read, max-size bulk write/read and a
+  rejected out-of-aperture multi-range write with no partial write; an i686 C
+  witness proves the fixed layout.  No provider is attached; see [T198 S8
+  mechanical action boundary witness](etc/research/t198-s8-mechanical-action-boundary-witness-001.md).
+- M0 T198 S8 is complete: its generic action ABI is source-built and native
+  CPU5/x86 verified, while provider and legacy-runtime linkage remain absent;
+  see [T198 S8 closure](history/m0-t198-s8-closure-20260813.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
