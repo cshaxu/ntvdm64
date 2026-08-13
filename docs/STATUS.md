@@ -2,11 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S48.** Its governing brief is the active
+> **Current effective packet: M0 T198 S49.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S48 -- rerun the unchanged source-built NTIO plan after the
-generic real-mode repair and classify its next continuous-execution state.**
+**Active: M0 T198 S49 -- extend the source-built NTIO observation past the
+already implemented `50:0F` controlled test stop, without adding BOP, device
+or host-capability behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,12 +24,12 @@ generic real-mode repair and classify its next continuous-execution state.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S48, Ordinary Mode. |
-| Admission And Approval | S47 establishes the generic real-mode wrap repair through a full MSVC x64 `/MT` CPU5 closure and neutral HLT/UD2 regressions. The prior source-built NTIO plan is now eligible for an unchanged rerun. |
-| Objective | Rebuild and run the existing source-built NTIO finite plan without adding guest, BOP, provider or device behavior; record the first post-S47 terminal/bridge state and map it to the original OpenNT source. |
+| Identifier Mode | M0 T198 S49, Ordinary Mode. |
+| Admission And Approval | S48 proves the S47 repair reaches and resumes the existing `50:0F` drive service under a clean current-source closure; its S23 bridge then intentionally stops. |
+| Objective | Remove only that fixture-local post-`50:0F` controlled stop and record the first ensuing guest state using the same source-built CPU5, image and provider composition. |
 | Non-goals | No BOP/provider implementation, host capability, CLI argument, DOS image change, machine feature, device/firmware activation, trace broadening or corrective patch. |
-| Reference Baseline | S40--S46 NTIO evidence, S47 generic repair, locked NTDOS image map, existing source-built NTIO fixture and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | Existing finite NTIO fixture/recipe and new evidence only; no code or ABI change. |
+| Reference Baseline | S48 clean NTIO witness, S47 generic repair, locked NTDOS image map, existing source-built NTIO fixture and CPU5 x64 `/MT` closure. |
+| Files And ABI Surface | Existing finite NTIO observation fixture/bridge, its clean-rebuild recipe and new evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
 | Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |

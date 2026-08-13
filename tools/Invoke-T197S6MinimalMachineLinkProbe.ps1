@@ -5,6 +5,7 @@ param(
     [switch]$WholeCpu5Core,
     [ValidateSet('x64', 'x86')]
     [string]$HostArchitecture = 'x64',
+    [switch]$InstructionHistory,
     [switch]$RunLifecycle
 )
 
@@ -66,6 +67,10 @@ $sources = @(
     @{ Name = 'cpudb_pentium_mmx'; Path = 'src\bx-core\cpu\cpudb\pentium_mmx.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev', 'src\bx-core\cpu') },
     @{ Name = 'cpudb_amd_k6_2_chomper'; Path = 'src\bx-core\cpu\cpudb\amd_k6_2_chomper.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev', 'src\bx-core\cpu') }
 )
+
+if ($InstructionHistory) {
+    $sources += @{ Name = 'instruction_history'; Path = 'src\bx-mantle\bx_ntvdm_instruction_history.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') }
+}
 
 if ($WholeCpu5Core) {
     # Read only the original VS project source membership.  Its product
@@ -166,6 +171,7 @@ $record = [ordered]@{
     architecture = $HostArchitecture
     profile = 'CPU5/Pentium-MMX, non-x86-64'
     wholeCpu5Core = [bool]$WholeCpu5Core
+    instructionHistory = [bool]$InstructionHistory
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
     configuration = 'tools/t197-s6-cpu5-mantle-config-projection.json'
     sources = @($sources | ForEach-Object { $_.Path })
