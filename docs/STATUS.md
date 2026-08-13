@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T197 S1.** Its governing brief is the active
+> **Current effective packet: M0 T197 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T197 S1 — atomically rename the project adapter to `bx-vdm` and
-produce the Bochs core/mantle physical-placement map.**
+**Active: M0 T197 S2 — physically move the proven minimal native lifecycle
+assembly into `bx-mantle` and repair its path-only references.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -16,28 +16,28 @@ produce the Bochs core/mantle physical-placement map.**
 
 > **T scope:** T197 extracts the smallest native Bochs lifecycle into the
 > `bx-core`/`bx-mantle` boundary and physically names the VDM adapter `bx-vdm`.
-> S1 performs the atomic adapter rename and records the full ownership and
-> placement map. Later S packets move only source-proven pure core or pure
-> mantle; mixed files require a separately admitted decision. Holistic BOP
+> S1 is closed by `477283c`: it renamed the adapter and mapped the current
+> Bochs ownership surface. S2 moves only that map's pure native lifecycle files;
+> mixed files remain in place for a separately admitted decision. Holistic BOP
 > runtime closure remains the following T package.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T197 S1, Ordinary Mode. |
-| Admission And Approval | Owner approved direct `src/bx-ntvdm-adapter` to `src/bx-vdm` rename with one complete reference replacement, then ordered Bochs core/mantle mapping and `git mv` migration only for pure files. The owner expressly requires case-by-case design review for mixed files. T196 closes with its first native-lifecycle blocker transferred to this package. |
-| Objective | Rename the project adapter and its tests to `bx-vdm`, update every live source/build/test reference atomically, and record the current Bochs file/owner map that identifies pure-core, pure-mantle, and mixed product-shell surfaces. |
-| Non-goals | No Bochs source move before the map; no C/C++ behavior change; no minimal Bochs build, configure repair, device/plugin/firmware admission, BOP semantic change, OpenNT source move, or resolution of mixed files. |
-| Reference Baseline | `4f75b7b` ideal layer decision; T196 S5 crosswalk; T196 S6 effective-closure prebuild audit; pinned Bochs 2.6 import; current CMake/test topology. |
-| Files And ABI Surface | `src/bx-ntvdm-adapter/` and `tests/bx-ntvdm-adapter/` renames; live CMake/tool/test references; `docs/design/CODING.md`, coding rules, Status, Queue, T196 closure, and T197 placement evidence. No runtime ABI bytes change. |
+| Identifier Mode | M0 T197 S2, Ordinary Mode. |
+| Admission And Approval | S1 is closed by `477283c`. Its source-backed map authorizes the direct `git mv` of exactly `bx_ntvdm_minimal_machine.{cc,h}`, `bx_ntvdm_minimal_sim.{cc,h}`, `iodev/minimal_port_space.cc`, and `pc_system.{cc,h}` into `src/bx-mantle/`, with path-only build/test/reference repair. The owner directed pure files to move directly and mixed files to remain for individual design decisions. |
+| Objective | Establish the physical `src/bx-mantle/` root by moving the listed pure native lifecycle sources, retaining their native mechanics and repairing all current live references without changing their behavior. |
+| Non-goals | No CPU/memory directory move, no `main.cc`, GUI/SIM, full device, BIOS, plugin, configuration, VDM, BOP, OpenNT or DOS source move; no lifecycle semantic change, new Bochs intrusion, minimal Bochs build, or resolution of mixed edges. |
+| Reference Baseline | `477283c`; T197 S1 ownership/placement map; T196 crosswalk and effective-closure audit; pinned Bochs 2.6 import. |
+| Files And ABI Surface | Seven source/header paths, their include/build/test/source-manifest references, `src/bx-mantle/`, Status and T197 evidence. No exported ABI or data-layout change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | `git diff --summary` must show renames, tracked live references to old adapter path must be zero, CMake configure plus focused `bx-vdm` tests must pass, Bochs map must classify every top-level build-bearing directory, then documentation governance and `git diff --check`. |
-| Expected Markers | `src/bx-vdm/`, renamed test root, no live old-path reference, and a source-backed placement table with pure/mixed status and direct next action per Bochs area. |
+| Verification | `git diff --summary` shows the seven `git mv` paths; no live reference remains to their old paths; focused native-machine static tests pass; documentation governance and `git diff --check` pass. |
+| Expected Markers | A real `src/bx-mantle/` containing the native lifecycle sources, preserved source identity, and an updated placement map naming all intentionally unmoved mixed paths. |
 | Asset Needs | Existing local repository and pinned local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record renamed paths, reference sweep, test/build outcome, top-level Bochs mapping, unresolved mixed edges, and the exact S2 move set. |
-| Stop Conditions | A rename changes an include/ABI or fails a focused build/test for a non-path reason; an allegedly pure Bochs file reaches product-shell, GUI/plugin/device, VDM, BOP, OpenNT or DOS meaning; or a move needs source edits beyond path repair. Preserve evidence and re-admit. |
-| Exit Criteria | The adapter rename is mechanically closed and verified; all Bochs build-bearing areas have a placement disposition; S2's exact pure-file move set and mixed-file questions are documented. |
-| Original Owner Request | Directly rename adapter to `src/bx-vdm`; first map current Bochs logic into core and mantle, then use `git mv` for pure files and decide mixed dependencies specifically. |
-| Similar-Issue Sweep | Scan source, tests, CMake, tools, current design/rules, source-manifest checks, and the existing machine-composition directory; preserve historical evidence paths rather than rewriting history. |
+| Reporting Requirements | Record moved paths, reference repair, source-identity result, verification outcome, and each mixed edge deferred to S3. |
+| Stop Conditions | A listed file reaches excluded semantics; moving it requires behavioral code edits, changes an ABI, or causes a failure beyond a path/build-metadata reference. Preserve evidence and re-admit. |
+| Exit Criteria | All seven listed paths are under `src/bx-mantle/`, their focused checks pass, and no old live path reference remains. |
+| Original Owner Request | Find current Bochs core/mantle logic, use `git mv` to move pure core and pure mantle code directly, repair compilation, and decide only the remaining mixed links case by case. |
+| Similar-Issue Sweep | Check CMake, Makefiles, VS project metadata, tools, tests, source-manifest/intrusion checks, and all direct includes of the seven moved files. |
 
 ## Current Technical Baseline
 

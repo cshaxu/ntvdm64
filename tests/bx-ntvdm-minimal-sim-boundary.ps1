@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$headerPath = Join-Path $repositoryRoot 'src/bochs/bx_ntvdm_minimal_sim.h'
-$sourcePath = Join-Path $repositoryRoot 'src/bochs/bx_ntvdm_minimal_sim.cc'
+$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_sim.h'
+$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_sim.cc'
 
 foreach ($path in @($headerPath, $sourcePath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {

@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$machineHeader = Join-Path $repositoryRoot 'src/bochs/bx_ntvdm_minimal_machine.h'
-$machineSource = Join-Path $repositoryRoot 'src/bochs/bx_ntvdm_minimal_machine.cc'
+$machineHeader = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_machine.h'
+$machineSource = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_machine.cc'
 $memoryHeader = Join-Path $repositoryRoot 'src/bochs/memory/memory.h'
 $iodevHeader = Join-Path $repositoryRoot 'src/bochs/iodev/iodev.h'
 
