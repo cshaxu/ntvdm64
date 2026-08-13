@@ -131,6 +131,9 @@ explicit DTA prerequisite.**
 - M0 T198 S10 P2 is complete: the same plane fixture now verifies DEM seek
   and close direct-result routes after the open/read lifecycle; valid-DTA
   pathname and malformed-action cases remain P3.
+- M0 T198 S10 P3 is complete: explicit valid DTA now admits pathname first
+  `50:09` through its 134-byte read and provider-produced write; pathname
+  next and malformed-action cases remain P4.
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
