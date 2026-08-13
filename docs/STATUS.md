@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S1 — controlled-stop-to-live-guest continuation contract audit.**
+**Active: M0 T194 S2 — bootstrap-versus-normal-return composition divergence audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,12 +12,12 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized holistic, minimal Bochs/adapter/guest composition and rejects per-selector expansion. T193 proves no further machine-selector implementation is coherent; the valid T190 trace ends at engine-controlled `FE`. |
-| Objective | Establish the exact source, profile, BOP and engine-control contract of the reached `FE` stop, and decide the single admissible live-guest continuation boundary. |
-| Non-goals | No source/build/runtime change, retry, Bochs patch, adapter host-service/provider change, BIOS table installation, device/config action, terminal-result transport, process-exit reinterpretation, or new selector handler. |
-| Reference Baseline | T190 S6 trace/bundle, T193 closure, current controlled-stop provider and CLI BYOB execution-plan sources. |
-| Files And ABI Surface | Source/read-only engine/profile/controlled-stop maps and evidence/status documentation only. |
+| Identifier Mode | M0 T194 S2, Ordinary Mode. |
+| Admission And Approval | Owner authorized holistic, minimal Bochs/adapter/guest composition and rejects per-selector expansion. S1 proves the OpenNT SHARE normal-return fixture is already source-built and available; T193 rules out a new machine selector as the next action. |
+| Objective | Compare the frozen T190 bootstrap composition with the retained SHARE normal-return path to locate the first source/contract divergence that prevents original COMMAND `54:11` from being reached. |
+| Non-goals | No fabricated guest input, source/build/runtime change, retry, Bochs patch, adapter host-service/provider change, BIOS table installation, device/config action, terminal-result transport, process-exit reinterpretation, or new selector handler. |
+| Reference Baseline | T190 S6 trace/bundle, T176--T179 normal-return evidence, T194 S1 asset reconciliation, original COMMAND source and current CLI BYOB profile sources. |
+| Files And ABI Surface | Source/read-only profile/engine/map/trace inputs and evidence/status documentation only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Trace-to-source inventory, original owner/failure map, catalogue/registry coverage scan, documentation governance and `git diff --check`. |
 | Expected Markers | Complete reached-family table with no unowned endpoint and an explicit grouped next-slice recommendation; no runtime claim. |
