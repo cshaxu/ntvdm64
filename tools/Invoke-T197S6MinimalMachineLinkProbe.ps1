@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
-    [string]$BuildRoot = ''
+    [string]$BuildRoot = '',
+    [switch]$WholeCpu5Core
 )
 
 Set-StrictMode -Version Latest
@@ -62,6 +63,29 @@ $sources = @(
     @{ Name = 'cpudb_amd_k6_2_chomper'; Path = 'src\bx-core\cpu\cpudb\amd_k6_2_chomper.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev', 'src\bx-core\cpu') }
 )
 
+if ($WholeCpu5Core) {
+    # Read only the original VS project source membership.  Its product
+    # settings, target and link inputs are intentionally ignored.  The
+    # CPU5 projection decides preprocessor reachability; we do not hand-pick
+    # instruction handlers from a trace.
+    foreach ($component in @('cpu', 'fpu', 'memory', 'disasm')) {
+        $project = Join-Path $repository ('src\bochs\vs2008\' + $component + '.vcproj')
+        if (-not (Test-Path -LiteralPath $project)) { throw "Original source inventory missing: $project" }
+        $relativeSources = Select-String -LiteralPath $project -Pattern 'RelativePath=".*\.cc"' |
+            ForEach-Object {
+                if ($_.Line -match 'RelativePath="([^"]+\.cc)"') { $matches[1] }
+            }
+        foreach ($relative in $relativeSources) {
+            $path = Join-Path ('src\bx-core\' + $component) (Split-Path $relative -Leaf)
+            if ($sources.Path -contains $path) { continue }
+            $name = 'whole_' + $component + '_' + ([IO.Path]::GetFileNameWithoutExtension($path))
+            $extra = @('src\bx-core', 'src\bochs\iodev')
+            if ($component -eq 'cpu') { $extra += 'src\bx-core\cpu' }
+            $sources += @{ Name = $name; Path = $path; ExtraIncludes = $extra }
+        }
+    }
+}
+
 $includeRoots = @('src', 'src\bochs', 'src\bochs\instrument\stubs')
 function New-MsvcCompileCommand([string]$source, [string]$object, [string[]]$extraIncludes) {
     $includes = @($includeRoots + $extraIncludes | Select-Object -Unique | ForEach-Object {
@@ -114,6 +138,7 @@ $record = [ordered]@{
     schema = 'ntdos64.t197.s6.minimal-machine-link-probe.v1'
     architecture = 'x86'
     profile = 'CPU5/Pentium-MMX, non-x86-64'
+    wholeCpu5Core = [bool]$WholeCpu5Core
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
     configuration = 'tools/t197-s6-cpu5-mantle-config-projection.json'
     sources = @($sources | ForEach-Object { $_.Path })
