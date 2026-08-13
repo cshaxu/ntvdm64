@@ -12,6 +12,11 @@ static struct bx_ntvdm_generic_ud_event_v1 observed_first_generic_event;
 static unsigned observed_stop;
 static unsigned observed_selector;
 static unsigned observed_service;
+static unsigned observed_bios15;
+static uint32_t observed_bios15_eax;
+static uint16_t observed_bios15_cs;
+static uint32_t observed_bios15_eip;
+static unsigned observed_bios15_next_byte;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -101,6 +106,15 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         return 1;
     }
     if (event == 0 || outcome == 0) return 0;
+    if (!observed_bios15 && event->window_bytes >= 3u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0x15u) {
+        observed_bios15 = 1u;
+        observed_bios15_eax = event->eax;
+        observed_bios15_cs = event->cs;
+        observed_bios15_eip = event->eip;
+        observed_bios15_next_byte = event->window_bytes >= 4u ? event->window[3] : 0u;
+    }
     if (event->window_bytes >= 4u && event->window[0] == 0xc4u &&
         event->window[1] == 0xc4u) {
         observed_selector = event->window[2];
@@ -135,3 +149,8 @@ int t198_s23_native_ntio_boundary_copy_first_generic_cs_provenance(struct bx_ntv
 unsigned t198_s23_native_ntio_boundary_observed_stop(void) { return observed_stop; }
 unsigned t198_s23_native_ntio_boundary_observed_selector(void) { return observed_selector; }
 unsigned t198_s23_native_ntio_boundary_observed_service(void) { return observed_service; }
+unsigned t198_s23_native_ntio_boundary_observed_bios15(void) { return observed_bios15; }
+unsigned t198_s23_native_ntio_boundary_observed_bios15_eax(void) { return observed_bios15_eax; }
+unsigned t198_s23_native_ntio_boundary_observed_bios15_cs(void) { return observed_bios15_cs; }
+unsigned t198_s23_native_ntio_boundary_observed_bios15_eip(void) { return observed_bios15_eip; }
+unsigned t198_s23_native_ntio_boundary_observed_bios15_next_byte(void) { return observed_bios15_next_byte; }

@@ -2,12 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S52.** Its governing brief is the active
+> **Current effective packet: M0 T198 S53.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S52 -- record the actual state and three-byte form of the
-post-DPB BIOS selector `15` boundary before admitting any additional BIOS
-profile disposition.**
+**Active: M0 T198 S53 -- run the source-observed selector `15`/AH=88 existing
+profile disposition and classify its next continuous execution boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,12 +23,12 @@ profile disposition.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S52, Ordinary Mode. |
-| Admission And Approval | S51 source-builds the existing `50:46` producer through checked mantle RAM writes and advances to a selector-15 boundary. OpenNT source shows the nearby normal path issues BOP 15 after AH=88 setup, but the four-byte fixture display cannot prove the actual register state. |
-| Objective | Extend only the fixture observation record for its first unhandled selector-15 BOP to capture the copied CPU state and distinguish its three-byte selector from the following opcode. Compare the result with the existing AH=88 profile contract. |
-| Non-goals | No BIOS provider change, cassette/CMOS/device activation, BOP/provider implementation, host capability, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S51 DPB witness, OpenNT `sysinit1.asm` BOP 15 source, existing BIOS memory provider and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | Fixture observation only and evidence; no runtime ABI change. |
+| Identifier Mode | M0 T198 S53, Ordinary Mode. |
+| Admission And Approval | S52 proves the selector-15 event is exactly `C4 C4 15` in real mode with AH=88, matching the existing finite BIOS memory provider contract. |
+| Objective | Rebuild/run the current composition with the existing selector-15/AH=88 profile result and record the first following terminal or BOP boundary. |
+| Non-goals | No other BIOS provider, cassette/CMOS/device activation, BOP/provider implementation, host capability, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S52 selector-15 witness, OpenNT `sysinit1.asm`, existing BIOS memory provider and CPU5 x64 `/MT` closure. |
+| Files And ABI Surface | Existing composition/provider, fixture observation and evidence only; no ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
 | Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |
