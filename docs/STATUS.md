@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T195 S1 — audit the Bochs intrusion repair set.**
+**Active: M0 T195 S2 — define adapter-owned convergence contracts.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T195 S1, Ordinary Mode. |
-| Admission And Approval | Owner selected the first queued Bochs intrusion convergence repair package and directed that its first S be a read-only per-entry audit before repair; T194 is closed by this reprioritization. |
-| Objective | Reconcile every entry in the external intrusion register with actual source presence and the current generated build/link surfaces, assigning a repair disposition and evidence to each entry. |
-| Non-goals | No source/build/bundle/runtime change, exception implementation/removal, BOP execution, status rewrite of historical entries, or claim that a register count equals live patches. |
-| Reference Baseline | architecture/operations correction, the exception register, S54/S55 evidence, S56/S57 closure, and current imported Bochs/OpenNT source. |
-| Files And ABI Surface | Read-only source/build/map inputs; one T195 S1 evidence record, Status and regenerated document inventory only. |
+| Identifier Mode | M0 T195 S2, Ordinary Mode. |
+| Admission And Approval | S1 classifies all 58 register entries and identifies two repair groups. Owner-approved T195 plan requires a target contract before source moves. |
+| Objective | Define the fixed-width adapter-owned observer and machine-composition request/result contracts that S3/S4 will implement. |
+| Non-goals | No source/build/bundle/runtime change, selector/provider behavior change, Bochs patch, OpenNT handler move, or BOP execution claim. |
+| Reference Baseline | T195 S1 audit, architecture authority, existing adapter ABI and current S56/S57 map. |
+| Files And ABI Surface | Adapter/machine headers read-only; one S2 contract record, Status and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Parse all register entries; inspect named imported source paths and current S56/S57 makefile/map surfaces; cross-check selected representative default-off macros; run documentation governance and git diff --check. |
-| Expected Markers | One disposition per register entry: retain, move-to-adapter, retain-default-off, remove, or non-live historical record; no unsupported live-patch count. |
-| Asset Needs | Existing register, source tree, S56/S57 roots and final map only. |
-| Reporting Requirements | Record methodology, per-entry evidence/disposition, known ambiguity, candidate repair groups and forbidden scope expansion. |
-| Stop Conditions | Unresolvable source identity, conflicting source/build evidence, a needed source change, or a request to run/build; preserve facts and re-admit the next S. |
-| Exit Criteria | Committed audit supplies a finite repair plan for T195 S2 onward without modifying Bochs or adapter. |
+| Verification | Compare existing adapter exception ABI and machine seam headers; record fixed-width fields, ownership and negative cases; run documentation governance and git diff --check. |
+| Expected Markers | One opaque event observer contract and one opaque machine mechanics request/result contract, both with adapter-owned selection and no raw CPU pointer. |
+| Asset Needs | Existing adapter/machine headers and S1 audit only. |
+| Reporting Requirements | Record migration grouping, ABI ownership, compatibility limits and S3/S4 implementation prerequisites. |
+| Stop Conditions | Need for a new Bochs semantic field, incompatible existing ABI, or proposed provider/guest behavior change; pause for re-admission. |
+| Exit Criteria | Committed contract record permits S3/S4 source work without interface invention. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
