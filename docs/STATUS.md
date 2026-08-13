@@ -2,12 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S11.** Its governing brief is the active
+> **Current effective packet: M0 T198 S12.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S11 -- map and define the one synchronous generic-UD
-composition transaction between `bx-vdm` and the existing selector-blind
-mantle mechanics.**
+**Active: M0 T198 S12 -- implement the adapter-owned synchronous boot-namespace
+composition session over the existing generic-UD and mantle action ABIs.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,21 +23,21 @@ mantle mechanics.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S11, Ordinary Mode. |
-| Admission And Approval | S10 closes the entire selected boot-namespace plane under common ingress and fixed actions. The owner-directed boundary requires the next composition to keep BOP/provider meaning in `bx-vdm` and Bochs mechanics selector-blind. |
-| Objective | Produce an evidence-backed single-transaction composition contract/map from one copied generic-UD event through `bx-vdm` routing and the existing mantle mechanical action executor to a typed resume/stop outcome; determine whether the existing records close it or name one minimal, opaque ABI gap before code changes. |
-| Non-goals | No new BOP/provider, legacy adapter runtime, ambient environment/session, host filesystem, DTA registration implementation, firmware/device/GUI/product build, OpenNT import, CPU semantic change, or Bochs source patch. |
-| Reference Baseline | T198 S5 generic-UD bridge boundary, S7 cross-island link witness, S8 mechanical action closure, and S10 whole-family provider-plane closure. |
-| Files And ABI Surface | Evidence/map only unless it proves existing fixed records sufficient. Any proposed ABI is fixed-width, copied and selector-blind in mantle/core; it names no BOP/OpenNT/DOS service. |
+| Identifier Mode | M0 T198 S12, Ordinary Mode. |
+| Admission And Approval | S11 proves the current generic event/outcome and mantle action records are sufficient. The owner-approved boundary permits adapter-only composition and forbids new core/mantle semantics. |
+| Objective | Implement one explicit adapter-owned boot-namespace composition session that accepts a copied generic-UD event, applies the whole S10 plane, drives its fixed action synchronously through the existing mantle executor, and returns the corresponding typed generic outcome. |
+| Non-goals | No new BOP/provider, legacy adapter runtime, ambient host/session discovery, host filesystem, DTA BOP implementation, firmware/device/GUI/product build, OpenNT import, CPU semantic change, or core/mantle patch. |
+| Reference Baseline | T198 S7 cross-island link witness, S8 mechanical action closure, S10 provider-plane closure, and S11 synchronous composition map. |
+| Files And ABI Surface | New `bx-vdm` composition-session source/header and focused i686 test; limited S10 plane result-propagation correction. The existing mantle action function is called only with its fixed copied record. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Audit the actual core hook, generic event/outcome bridge, alternative `bx-vdm` bridge, action executor and finite-run lifecycle; map every copied record and call/link direction; scan for selector/provider vocabulary under mantle/core; run documentation checks. |
-| Expected Markers | One enumerated synchronous transaction sequence; explicit action execution/completion ownership; no retained pointer/callback/ambient state; either a sufficient existing ABI or one narrowly bounded re-admission point. |
+| Verification | i686 focused test covers direct result, write action, read→completion→write action, declined unbound session, malformed action failure and result propagation. Static scan rejects legacy runtime and Bochs service vocabulary; run documentation checks. |
+| Expected Markers | Explicit initialize/bind/clear lifecycle; one active adapter-owned session; bounded copied event/action/outcome flow; no retained pointer across mantle calls; COMMAND write action resumes rather than re-faulting. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record all event/action/outcome fields, state owner, link/toolchain direction, rejected legacy alternatives and any exact ABI insufficiency. |
-| Stop Conditions | The transaction needs an unbounded guest pointer, retained callback, ambient host state, a service-specific Bochs hook, or a new mantle/core operation. Preserve evidence and re-admit. |
-| Exit Criteria | A complete source-backed composition map distinguishes existing closure from the exact minimum missing opaque contract, without embedding BOP semantics in Bochs. |
+| Reporting Requirements | Record session lifetime, event/action/outcome transitions, mock/executor boundary, i686 object closure, rejected legacy alternatives and native-runtime limitation. |
+| Stop Conditions | The implementation needs an unbounded guest pointer, callback retained by mantle/core, ambient host state, service-specific Bochs hook, or new mantle/core operation. Preserve evidence and re-admit. |
+| Exit Criteria | A source-built adapter composition test proves the whole synchronous transaction and result propagation through fixed records; native CPU5 `UD2` integration remains separately verified or explicitly transferred. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover direct results and read/write/pending transitions; core/mantle/adapter dependency direction; x86 toolchain/object closure; default-decline behavior; and legacy-runtime or selector leakage. |
+| Similar-Issue Sweep | Cover direct/read/write/pending paths; startup lifetime and unbound decline; action preflight failure; generic outcome translation; cross-island C linkage; and legacy-runtime or Bochs-semantic leakage. |
 
 ## Current Technical Baseline
 
@@ -144,6 +143,10 @@ mantle mechanics.**
   records already close the synchronous inner transaction. The only gaps are
   adapter-owned explicit session lifetime and action-result propagation; no
   core/mantle ABI or semantic addition is indicated. See [T198 S11 P1 map](etc/research/t198-s11-p1-synchronous-composition-map-001.md).
+- M0 T198 S12 P1 is complete: an explicit adapter-owned session now executes
+  copied write/read actions synchronously and returns typed generic outcomes;
+  unbound and executor-failure paths decline. COMMAND write results now resume
+  instead of re-faulting. See [T198 S12 P1 witness](etc/research/t198-s12-p1-adapter-composition-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

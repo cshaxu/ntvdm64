@@ -65,7 +65,7 @@ int bx_ntvdm_boot_namespace_plane_v1_dispatch(bx_ntvdm_boot_namespace_plane_v1 *
  if(!valid(p)||!i||!s||!e||!c||!w||!a||!r||p->pending_kind)return 0;
  bx_ntvdm_cpu_result_v2_pass_through(r);
  bx_ntvdm_mechanical_action_v1_clear(a);
- if(i->family==BX_NTVDM_BOP_FAMILY_COMMAND && bx_ntvdm_command_plane_v1_classify(i,s,&cmd) && (i->service==12u||i->service==13u) && bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(&p->provider,e,c,w,&tx,bytes)){ if(!put_write(p,&tx,bytes,a))return 0; return 1; }
+ if(i->family==BX_NTVDM_BOP_FAMILY_COMMAND && bx_ntvdm_command_plane_v1_classify(i,s,&cmd) && (i->service==12u||i->service==13u) && bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(&p->provider,e,c,w,&tx,bytes)){ if(!put_write(p,&tx,bytes,a))return 0; *r=tx.result; return 1; }
  if(i->family!=BX_NTVDM_BOP_FAMILY_DEM||!bx_ntvdm_dem_plane_v1_classify(i,s,&dem)||dem.component!=BX_NTVDM_DEM_COMPONENT_NAMESPACE||dem.disposition!=BX_NTVDM_DEM_PLANE_DEFERRED)return 1;
  if(i->service==0u)return bx_ntvdm_boot_namespace_provider_v1_seek(&p->provider,e,c,w,r);
  if(i->service==2u)return bx_ntvdm_boot_namespace_provider_v1_close(&p->provider,e,c,w,r);
