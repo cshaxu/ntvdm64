@@ -6,6 +6,8 @@
 
 **Active: M0 T188 S10 — one frozen copied-state observation.**
 
+**Active: M0 T189 S1 — v5 runtime-predicate source map.**
+
 **Binding active packet: M0 T188 S8 — two-object derivative build.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
@@ -22,19 +24,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T188 S10, Ordinary Mode. |
-| Admission And Approval | T188 S9 closes a terminal-record-safe controller and fixed S8-engine bundle. Owner authorization permits autonomous sequencing; S10 admits exactly one observation with those frozen inputs. |
-| Objective | Make one watchdog-bounded execution that retains terminal evidence and classifies the copied lifecycle state plus the existing generic BOP pass-through/continuation markers. |
-| Non-goals | No retry, source change, engine rebuild/relink, provider/DOS/COMMAND semantic change, device/config expansion, host capability, DOS terminal result or continuous-execution claim. |
-| Reference Baseline | T188 S8 engine hash `766D3A7AAB980B05C683DD99530801F61578F9F886DD0A1122BF810D6EA8E938`; T188 S9 controller/bundle closure; BX-TRACE-060. |
-| Files And ABI Surface | S9 controller output under one fresh evidence root only. No source or ABI change. |
+| Identifier Mode | M0 T189 S1, Ordinary Mode. |
+| Admission And Approval | T188 closes its single observation with installed=1, provider=1 and pending=0 at real `54:0C`. Owner authorization permits autonomous sequencing; T189 begins with source-only predicate recovery. |
+| Objective | Map the exact v5 runtime route and every acceptance/decline predicate from generic ingress through provider/session state to the pending multi-write result; compare it with the T188/S2 fixture without changing source. |
+| Non-goals | No build, observation/retry, Bochs/adapter/CLI source change, selector recognizer, transaction forcing, provider/DOS semantic change, or host capability claim. |
+| Reference Baseline | T188 S2 controlled fixture, T188 S10 terminal observation, existing v4/v5 runtime and host-service source. |
+| Files And ABI Surface | Source-map evidence only under `docs/etc/research`; no ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Invoke the S9 controller once from a fresh root with a 30-second watchdog; inspect inputs/outcome/log hashes and lifecycle/pass-through markers; documentation inventory/governance and `git diff --check`. |
-| Expected Markers | Exactly one fresh `inputs.json`, wrapper PID, terminal `observation.json`, no retry, and either a copied lifecycle line with a continuation marker or a recorded failed/absent marker. |
-| Asset Needs | The fixed S9 bundle, retained runner/shim/profile/BYOB/target identities, and a writable fresh evidence root. |
-| Reporting Requirements | Record the actual outcome, log hashes, timeout/cleanup state and limited inference. A build or process exit is not DOS/CLI completion. |
-| Stop Conditions | A second launch, input identity mismatch, unrecorded cleanup failure, engine/source modification, or any request to add semantics; stop after the first terminal record. |
-| Exit Criteria | One terminal record with immutable inputs and a classification of lifecycle/continuation evidence, even if it is a failure; no retry. |
+| Verification | Static source map with reproducible searches; compare every branch condition to fixture and observation registers/state; documentation inventory/governance and `git diff --check`. |
+| Expected Markers | One finite predicate table identifying each condition as matched, contradicted, or unobserved; no inferred state and no implementation. |
+| Asset Needs | Existing source and T188 evidence only. |
+| Reporting Requirements | Cite source locations, observed values and the minimum next proof; distinguish source fact from inference. |
+| Stop Conditions | Missing source, a predicate depending on unobservable mutable state, ambiguity requiring a new diagnostic, or an implementation/build/runtime request; pause for re-admission. |
+| Exit Criteria | A closed source predicate map, or an evidenced bounded diagnostic requirement; no source/build/runtime action. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
