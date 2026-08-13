@@ -22,18 +22,17 @@ in a function-argument expression; P3 corrects that test defect by clearing
 the record and retrieving it before formatting.  The corrected rerun has no
 compiler warning and gives `956B:0001`.
 
-## Interpretation
+## Corrected Interpretation
 
-The halt occurs in a relocated guest code segment, not at an unmapped
-zero-segment vector.  The source has two `cli; hlt` failure sites, but the
-retained source tree has no exact NTIO link/listing map that associates the
-runtime relocated segment `956Bh`, offset `0001h`, with either source label.
-The result therefore narrows the question to original NTIO/sysinit image
-layout and relocation; it does not authorize a memory value, device,
-interrupt, or BOP change.
+The fixture's NTDOS input is deliberately `0x6cd2` bytes with first byte
+`HLT`; it is published by the source-derived `50:11` transaction.  Thus the
+terminal `956B:0001` proves that guest execution reached the fixture's
+controlled NTDOS endpoint after `50:3B`; it is not evidence for a relocated
+NTIO fatal path.  The prior static discussion of `sysinit1.asm` HLT labels is
+retained only as an unrelated source fact.
 
 ## Follow-Up
 
-S24 remains open.  Its next evidence step is a read-only original image
-layout/relocation audit for the emitted NTIO bytes and `sysinit1.asm`; no
-additional runtime diagnostic is currently admitted.
+S24 closes with an intentional mock-NDTOS terminal.  S25 must replace that
+mock with the immutable source-built NTDOS input before interpreting any
+later guest control flow or admitting another BOP service.

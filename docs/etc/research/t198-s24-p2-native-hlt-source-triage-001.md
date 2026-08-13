@@ -21,17 +21,14 @@ Bochs' retained `BX_CPU_C::HLT` log records IF but not guest CS:IP.  The
 current finite-run ABI returns only a terminal status, so the observed
 `HLT instruction with IF=0` cannot distinguish these two original paths.
 
-## Interpretation
+## Superseded Interpretation
 
-This is evidence of a guest-side deliberate fatal wait, not evidence that
-Bochs must map a new aperture, manufacture an interrupt, or that the BOP
-plane should add a service. Increasing the instruction budget would repeat a
-halted CPU and cannot identify the predecessor.
+The two source sites are valid static candidates only.  P3 established that
+the S24 fixture itself publishes a one-byte `HLT` mock NTDOS image through
+`50:11`; the observed terminal HLT therefore cannot be attributed to either
+NTIO source site.  This record must not be used to infer a missing machine,
+memory, interrupt, or driver capability.
 
-## Required Next Admission
-
-The S24 stop condition applies: a new diagnostic would alter the mantle
-fixture ABI/source.  Any successor must be separately admitted as a
-default-off, selector-blind terminal CS:IP snapshot: copied fixed-width
-result only, no guest-memory read, no CPU mutation, no device or BOP
-semantics.  Its sole purpose is to classify this already observed HLT site.
+The snapshot diagnostic was admitted only to prove that limitation.  The
+correct successor is exact source-built NTDOS composition, not a further HLT
+or firmware change.

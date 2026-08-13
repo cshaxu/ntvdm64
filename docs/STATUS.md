@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S24.** Its governing brief is the active
+> **Current effective packet: M0 T198 S25.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S24 -- recover the next original DEM `50:3B` boundary
-through the global DEM host-service plane.**
+**Active: M0 T198 S25 -- replace the fixture mock NTDOS with the locked
+source-built NTDOS image and observe the next real guest boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ through the global DEM host-service plane.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S24, Ordinary Mode. |
-| Admission And Approval | S23 proves original NTIO resumes through `50:11` and top-level `12h`, then reaches `50:3B`. The owner-approved global BOP-plane objective admits recovery only through the existing DEM plane/provider structure. |
-| Objective | Source-map and compose the original DEM `SVC_ISDEBUG` (`50:3B`) result through common ingress, registry and DEM plane; prove exact NTIO resumes it and record the next boundary. |
-| Non-goals | No per-service recognizer outside the DEM plane, Bochs/mantle selector semantics, debugger implementation, device enablement, ambient capability, or DOS-continuity claim. |
-| Reference Baseline | S23 native continuation, `dossvc.h` `SVC_ISDEBUG`, existing DEM classification/plane, and original non-debug disposition evidence. |
-| Files And ABI Surface | `bx-vdm` DEM provider/plane composition and CPU5 native fixture; P3 additionally admits a mantle-private, fixed-width terminal CS:IP observation query. No core ABI reinterpretation. |
+| Identifier Mode | M0 T198 S25, Ordinary Mode. |
+| Admission And Approval | S24 proves exact NTIO resumes original `50:3B`; its subsequent HLT is the fixture's deliberate mock NTDOS entry. The owner-approved source-closure objective admits replacement only with the locked source-built NTDOS artifact. |
+| Objective | Materialize exact source-built NTDOS bytes as the immutable S25 fixture input, preserve its verified `50:11` publication contract, and observe the next real guest BOP or bounded terminal condition. |
+| Non-goals | No new BOP provider, Bochs/mantle semantic change, guest-image patch, ambient path access, COMMAND/DOS continuity claim, or inference from the former mock terminal. |
+| Reference Baseline | S19/S20 `50:11` contract, locked NTDOS identity `957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84` / 27,858 bytes, and S24 closure. |
+| Files And ABI Surface | `bx-vdm` native fixture/input materialization and CPU5 native observation only; existing mantle terminal snapshot may be consumed but not expanded. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` focused DEM-plane test and exact-NTIO native run prove `50:3B` is selected by common ingress/registry/plane and produces the source-backed non-debug result. P3 may copy terminal CS:IP through a default-off mantle-private query solely to classify the observed HLT. Boundary scans prove selector semantics stay in `bx-vdm`. |
-| Expected Markers | Original source mapping, one existing DEM-plane route, `AL=0` non-debug result, typed resume, terminal CS:IP if HLT occurs, and no debugger/Bochs semantic addition. |
+| Verification | MSVC x64 `/MT` fixture verifies exact byte count and SHA-256 before native CPU5 run; real `50:11` publication matches that input and the trace records the first subsequent BOP or typed bounded terminal. Boundary scans prove selector semantics stay in `bx-vdm`. |
+| Expected Markers | Exact NTDOS identity, checked publication, existing `50:3B` typed resume, first later real boundary or terminal snapshot, and no newly enabled selector. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record `50:3B` source/owner/result contract, plane selection path, all build inputs, fixture result, native continuation and later-selector limit. |
-| Stop Conditions | Original source requires an unavailable debugger/host binding rather than its documented non-debug result, routing needs a bypass, or any core/Bochs state change beyond the admitted read-only terminal snapshot is required. Preserve evidence and re-admit. |
-| Exit Criteria | Exact original NTIO native-runs through DEM `50:3B` via the global DEM plane and reports the next boundary without claiming DOS boot. |
+| Reporting Requirements | Record NTDOS source identity/materialization, exact publication input/result, native continuation, later boundary or terminal condition, and ownership limit. |
+| Stop Conditions | Artifact identity cannot be reproduced, publication requires a new provider semantic, a guest-image patch is needed, or core/mantle behavior would need to change. Preserve evidence and re-admit. |
+| Exit Criteria | Exact original NTIO native-runs through `50:11`/`50:3B` into source-built NTDOS and records the first later real BOP or bounded terminal without claiming DOS boot. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -229,16 +229,15 @@ through the global DEM host-service plane.**
   closure](history/m0-t198-s23-closure-20260813.md).
 - M0 T198 S24 P1 moves original DEM `50:3B` into a dedicated DEM-MISC plane
   entry and proves its non-debug `AL=0`/`RIP+4` result through the current
-  MSVC x64 `/MT` CPU5 composition. The subsequent bounded HLT state has no
-  later BOP identity yet; see [S24 P1](etc/research/t198-s24-p1-dem-isdebug-native-resume-001.md).
-- M0 T198 S24 P2 source-triages that IF=0 HLT to two original fatal-wait
-  sites. The current finite-run ABI lacks CS:IP terminal state, so a future
-  selector-blind diagnostic requires explicit re-admission; see [S24
-  P2](etc/research/t198-s24-p2-native-hlt-source-triage-001.md).
+  MSVC x64 `/MT` CPU5 composition. Its post-resume HLT is now known to be the
+  fixture mock NTDOS endpoint, not a later guest boundary; see [S24
+  P1](etc/research/t198-s24-p1-dem-isdebug-native-resume-001.md).
+- M0 T198 S24 P2 retains the two original HLT source sites as static facts,
+  but its runtime attribution is superseded by the mock-NDTOS finding; see
+  [S24 P2](etc/research/t198-s24-p2-native-hlt-source-triage-001.md).
 - M0 T198 S24 P3 admits and verifies a default-off mantle-private terminal
-  CS:IP snapshot. The corrected native result is relocated `956B:0001`,
-  narrowing the remaining question to original NTIO/sysinit layout rather
-  than a missing Bochs/BOP capability; see [S24
+  CS:IP snapshot. The corrected `956B:0001` result is the deliberate mock
+  NTDOS endpoint, not an NTIO/sysinit failure; see [S24
   P3](etc/research/t198-s24-p3-terminal-snapshot-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
