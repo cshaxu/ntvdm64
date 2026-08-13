@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S79.** Its governing brief is the active
+> **Current effective packet: M0 T198 S80.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S79 -- determine whether the missing reached machine-image
-bytes have a reproducible, source-authorized recovery path.**
+**Active: M0 T198 S80 -- map the original display-mode composition that selects
+the reached C000 native-INT10 path.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ bytes have a reproducible, source-authorized recovery path.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S79, Ordinary Mode. |
-| Admission And Approval | S78 closes with an evidence-backed missing approved ROM payload at `C000:014A`; see `etc/research/t198-s78-minimum-rom-ivt-closure-map-001.md`. |
-| Objective | Determine whether the current approved source/checkouts contain a reproducible producer or a source-authorized, hashable input route for the missing reached ROM/initial-IVT bytes. |
-| Non-goals | No binary import, payload synthesis, BOP service/provider expansion, generic BIOS/ROM emulation, device model, guest/CLI input change, or Bochs core semantic edit. |
-| Reference Baseline | S78 closure map; source policy; OpenNT SoftPC ROM loader/resource records; current build manifests and source inventory. |
-| Files And ABI Surface | Evidence only, unless an already-approved source-built producer is proved. No runtime ABI, image descriptor, adapter route or build input is added. |
+| Identifier Mode | M0 T198 S80, Ordinary Mode. |
+| Admission And Approval | S79 proves that no current approved source-built C000 input exists; see `etc/research/t198-s79-machine-image-producer-audit-001.md`. |
+| Objective | Source-map BOP `5F` keyboard/video initialization, `use_host_int10`, saved native INT 10 vectors and their CLI-host dependencies; determine whether the C000 transfer is a missing display-mode composition or a true machine-device prerequisite. |
+| Non-goals | No BOP/provider implementation, display output, CLI mode switch, ROM import/synthesis, Bochs VGA/device admission, guest binary alteration, or core semantic edit. |
+| Reference Baseline | S74/S78 trace; S79 producer audit; OpenNT `spckbd.asm`, `keybd_io.c`, SoftPC BIOS table and historical NT host display-mode sources. |
+| Files And ABI Surface | Evidence only. No BOP ABI, machine-image descriptor, adapter route, host capability or build input is added. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Search source/build/resource manifests for producers and payload records; distinguish resource-name references from generated outputs; run documentation governance and diff checks. |
-| Expected Markers | Producer-or-absence ledger, source-policy disposition, and explicit prohibition on treating a resource name as byte provenance. |
+| Verification | Trace the historical initialization table, caller/dispatcher and writes to the resident display fields; correlate each branch with the captured registers/transfer; run documentation governance and diff checks. |
+| Expected Markers | Source-backed display-mode/vector chain, owner matrix, explicit CLI-profile dependency and a proven/unknown distinction for the exact 073B offset. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact source/build inputs searched, any producer/output evidence, source-policy compatibility, and the disposition of every candidate. |
-| Stop Conditions | A candidate requires an unapproved binary import, detached historical product build, ambiguous provenance, or any BIOS/DOS/BOP semantics in adapter/core. Stop and retain the absent-input evidence. |
-| Exit Criteria | One reproducible, source-authorized producer/input plan, or a complete evidence-backed conclusion that the current approved checkout cannot supply the required bytes. |
+| Reporting Requirements | Record source module/entry points, table layout/ownership, host dependencies, candidate CLI disposition and all unproven address mappings. |
+| Stop Conditions | The path requires an unapproved binary import, makes a BOP/provider or device admission necessary, or assigns a 073B offset without a valid listing/map. Stop and retain the map. |
+| Exit Criteria | A complete source-backed mode/vector chain and an evidence-backed next boundary; no implementation or profile selection is made. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover ROM resource names, generated/binary output references, IVT initialization sources, historical resource APIs, build manifests, overlays, and source-policy constraints. |
+| Similar-Issue Sweep | Cover fullscreen/windowed/stream states, BOP `5F`/`42`/`BE`, keyboard-vector tables, saved IVT vectors, host console calls and unavailable source maps. |
 
 ## Current Technical Baseline
 
@@ -389,6 +389,11 @@ bytes have a reproducible, source-authorized recovery path.**
   `15h`. Its ROM/IVT closure map identifies absent approved ROM payloads as
   the current machine-input gap; no BIOS/BOP route is added. See [S78 closure
   map](etc/research/t198-s78-minimum-rom-ivt-closure-map-001.md).
+- M0 T198 S79 finds no current source-authorized C000 image producer: OpenNT
+  retains names only, while Bochs VGABIOS is prebuilt and requires excluded
+  VGA lifecycle. S80 therefore audits the original display-mode selection
+  before any profile or machine decision. See [S79 producer
+  audit](etc/research/t198-s79-machine-image-producer-audit-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
