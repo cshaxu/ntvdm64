@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S40 — verify paired DEM IOCTL metadata provider.**
+**Active: M0 T194 S42 — rerun the isolated metadata-provider test.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S40, Ordinary Mode. |
-| Admission And Approval | S39 adds the paired source-derived provider and C11 focused target but deliberately does not build it. Owner authorization permits normal single-agent continuation under the existing T194 package. |
-| Objective | Configure an isolated MinGW C11 test build, compile and execute only the paired DEM IOCTL metadata-provider target, and retain its exact result. |
-| Non-goals | No adapter source change, runtime/engine/Bochs build or relink, bundle/profile/root change, controller invocation, guest launch, retry, raw-media/BDS operation, filesystem/device action, or normal-return claim. |
-| Reference Baseline | S38 composition audit and S39 source/test closure. |
-| Files And ABI Surface | Fresh ignored focused-test build root and evidence record, Status, and documentation inventory only. No product ABI or checked-in source changes are admitted. |
+| Identifier Mode | M0 T194 S42, Ordinary Mode. |
+| Admission And Approval | S41 corrects the test-only void-call sequencing after the S40 compile finding. Owner authorization permits normal single-agent continuation under the existing T194 package. |
+| Objective | Rebuild and execute only the existing isolated paired DEM IOCTL metadata-provider test target. |
+| Non-goals | No source/CMake/ABI change, runtime/engine/Bochs build or relink, bundle/profile/root change, controller invocation, guest launch, raw-media/BDS operation, filesystem/device action, or normal-return claim. |
+| Reference Baseline | S39 source closure and S40/S41 compile finding/correction. |
+| Files And ABI Surface | Existing ignored S40 build root and S42 evidence record, Status, and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Record CMake configure command/toolchain, target build command and exact executable output/exit; inspect target inputs; documentation governance; `git diff --check`. |
-| Expected Markers | One source-only target built and exited zero with paired snapshot contract marker; no Bochs or CLI executable is built or run. |
-| Asset Needs | Existing MinGW CMake/Ninja toolchain and a new ignored build root only. |
-| Reporting Requirements | Record build-root manifest, toolchain identity, target output/hash, failure if any, and absence of runtime execution. |
-| Stop Conditions | Toolchain absence, configure requiring unrelated product targets, any source change, or need to run a runtime/guest; preserve evidence and pause for fresh S admission. |
-| Exit Criteria | Committed focused-test evidence with the exact zero/nonzero result and no expanded build scope. |
+| Verification | Existing target build and one executable run with exact output/exit, then documentation governance and `git diff --check`. |
+| Expected Markers | Target links and prints its paired snapshot contract marker with exit zero; no other target is built/run. |
+| Asset Needs | Existing S40 MinGW build root/toolchain only. |
+| Reporting Requirements | Record exact build/run result, target hash and absence of runtime execution. |
+| Stop Conditions | Compile/test failure, need for source change, or any unrelated target/runtime action; preserve evidence and require fresh S admission. |
+| Exit Criteria | Committed single-target verification evidence. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify target source list is limited to provider dependencies; scan output/build log for Bochs/CLI target execution or fallback legacy endpoint. |
+| Similar-Issue Sweep | Inspect build output for only this target and scan no legacy endpoint fallback. |
 
 ## Current Technical Baseline
 

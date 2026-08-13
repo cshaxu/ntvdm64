@@ -19,9 +19,9 @@ static int dispatch(uint8_t selector, uint8_t service, uint16_t ax,
     uint8_t types[26] = {0};
 
     types[drive] = type;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
     if (!bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(1) << drive, types,
-            0u, 0u, &snapshot) || !bx_ntvdm_instruction_window_v1_capture(
-            &window, bytes, sizeof(bytes)) || !bx_ntvdm_bop_ingress_v1_classify(
+            0u, 0u, &snapshot) || !bx_ntvdm_bop_ingress_v1_classify(
             &window, &ingress) || !bx_ntvdm_bop_provider_registry_v1_select(
             &ingress, &selection) || !bx_ntvdm_dem_plane_v1_classify(
             &ingress, &selection, &plane)) return 0;
