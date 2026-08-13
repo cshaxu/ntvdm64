@@ -45,6 +45,14 @@
 #define BX_NTVDM_ENABLE_MACHINE_COMPOSITION 0
 #endif
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
+#define BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE 0
+#endif
+
+#if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
+#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#endif
+
 #if BX_NTVDM_ENABLE_MACHINE_COMPOSITION
 #include "iodev/iodev.h"
 #include "bx_ntvdm_machine_composition_v2.h"
@@ -1418,8 +1426,63 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
   bx_ntvdm_cpu_state_v1 cpu_state;
   bx_ntvdm_instruction_window_v1 instruction_window;
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
+  bx_ntvdm_generic_ud_event_v1 mantle_event;
+  bx_ntvdm_generic_ud_outcome_v1 mantle_outcome;
+#endif
 
   BX_INSTR_EXCEPTION(BX_CPU_ID, vector, error_code);
+
+#if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
+  if (vector == BX_UD_EXCEPTION) {
+    memset(&mantle_event, 0, sizeof(mantle_event));
+    mantle_event.magic = BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC;
+    mantle_event.abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+    mantle_event.struct_bytes = sizeof(mantle_event);
+    mantle_event.cpu_id = BX_CPU_ID;
+    mantle_event.vector = vector;
+    mantle_event.error_code = error_code;
+    mantle_event.execution_mode = real_mode() ? 1u : (v8086_mode() ? 3u : 2u);
+    mantle_event.fault_rip = BX_CPU_THIS_PTR prev_rip;
+    mantle_event.eax = EAX; mantle_event.ebx = EBX; mantle_event.ecx = ECX;
+    mantle_event.edx = EDX; mantle_event.esi = ESI; mantle_event.edi = EDI;
+    mantle_event.ebp = EBP; mantle_event.esp = ESP;
+    mantle_event.eip = (Bit32u) BX_CPU_THIS_PTR prev_rip;
+    mantle_event.eflags = read_eflags();
+    mantle_event.cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value;
+    mantle_event.ds = BX_CPU_THIS_PTR sregs[BX_SEG_REG_DS].selector.value;
+    mantle_event.es = BX_CPU_THIS_PTR sregs[BX_SEG_REG_ES].selector.value;
+    mantle_event.ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value;
+    mantle_event.fs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_FS].selector.value;
+    mantle_event.gs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_GS].selector.value;
+    bx_address offset = BX_CPU_THIS_PTR prev_rip + BX_CPU_THIS_PTR eipPageBias;
+    if (BX_CPU_THIS_PTR eipFetchPtr != 0 && offset < BX_CPU_THIS_PTR eipPageWindowSize) {
+      unsigned available = BX_CPU_THIS_PTR eipPageWindowSize - offset;
+      mantle_event.window_bytes = available > BX_NTVDM_GENERIC_UD_WINDOW_BYTES ?
+        BX_NTVDM_GENERIC_UD_WINDOW_BYTES : available;
+      memcpy(mantle_event.window, BX_CPU_THIS_PTR eipFetchPtr + offset,
+        mantle_event.window_bytes);
+    }
+    memset(&mantle_outcome, 0, sizeof(mantle_outcome));
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&mantle_event, &mantle_outcome) &&
+        mantle_outcome.abi_version == BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION &&
+        (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_RESUME ||
+         mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP)) {
+      if (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP) {
+        bx_pc_system.kill_bochs_request = 1;
+        longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
+      }
+      for (unsigned reg = 0; reg < BX_NTVDM_GENERIC_UD_GPR16_COUNT; ++reg) {
+        if ((mantle_outcome.gpr16_write_mask & (1u << reg)) != 0u)
+          BX_CPU_THIS_PTR set_reg16(reg, mantle_outcome.gpr16_values[reg]);
+      }
+      if ((mantle_outcome.eflags_write_mask & 1u) != 0u)
+        BX_CPU_THIS_PTR set_CF((mantle_outcome.eflags_values & 1u) != 0u);
+      RIP = mantle_outcome.resume_rip;
+      longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
+    }
+  }
+#endif
 
 #if BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT || BX_NTVDM_ENABLE_STARTUP_TRANSACTION || BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE || BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN
   if (vector == BX_UD_EXCEPTION) {
