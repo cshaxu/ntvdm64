@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T190 S3 — COMMAND bootstrap object-closure audit.**
+**Active: M0 T190 S4 — COMMAND bootstrap derivative build.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > and T189 are closed. Their retained S records are evidence, not concurrent
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T190 S3, Ordinary Mode. |
-| Admission And Approval | T190 S2 source/test closure changes only the source-derived `54:02` COMSPEC state contract and preserves `54:0F`. The owner authorized bounded derivative work only after its object closure is evidenced. |
-| Objective | Identify the exact current adapter/Bochs objects, headers, retained objects and manifest updates required for one narrow T190 derivative; reject stale-object composition before any build. |
+| Identifier Mode | M0 T190 S4, Ordinary Mode. |
+| Admission And Approval | T190 S3 proves the three-object closure on the current T189 base and identifies retained boot-file/provider objects. Owner authorization permits this one exact derivative build. |
+| Objective | Generate and build exactly the declared three-object MSVC/x86 derivative, retaining the pinned T189 composition. |
 | Non-goals | No source change, runtime observation, retry, Bochs/guest change, host-environment exposure, archive/device/config rebuild, or terminal-result transport. |
-| Reference Baseline | T190 S1/S2 and T189 four-object stale-object closure evidence. |
-| Files And ABI Surface | Existing derivative/bundle tools, current adapter source hashes, object/link maps, evidence/status records only. |
+| Reference Baseline | T190 S2 source closure and T190 S3 object-closure plan. |
+| Files And ABI Surface | T190 derivative tool/manifest, declared objects, retained base, build evidence/status records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/hash/object-map review, focused dependency scan, documentation governance and `git diff --check`. |
-| Expected Markers | A declared minimum object set that includes every changed owner and excludes archives, devices, CLI rebuild and unrelated adapter objects. |
-| Asset Needs | Existing derivative/bundle inputs and source only; no new asset. |
-| Reporting Requirements | Name every retained versus recompiled object and the reason; explicitly state whether a Bochs object is needed only for relink compatibility. |
-| Stop Conditions | Any need for source change, runtime observation, retry, new Bochs patch, archive rebuild, or an object outside the proved closure; pause for a fresh S admission. |
-| Exit Criteria | Committed closure manifest/plan or durable rejection; build/run require later S admission. |
+| Verification | Three-object manifest rule, exact MSVC/x86 command, engine/map/object hashes, documentation governance and `git diff --check`. |
+| Expected Markers | Only the declared object recipes run; current runtime/COMSPEC objects and retained T189 objects resolve into one linked engine. |
+| Asset Needs | Pinned T189 derivative and installed MSVC/x86 only; no new asset. |
+| Reporting Requirements | Record warnings unchanged, hashes and retained-object identity; state that a distinct S is required for any bundle/run. |
+| Stop Conditions | Any source change, runtime observation, retry, new Bochs patch, archive rebuild, link recipe change, or object outside the proved closure; pause for re-admission. |
+| Exit Criteria | Source-built derivative closure or durable build rejection; bundle/run require later S admission. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
