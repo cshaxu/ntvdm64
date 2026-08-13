@@ -207,6 +207,10 @@ pre-entry request and prove the first existing `50:11` boundary.**
   bytes across image publication, and then applies CS:IP.  The full CPU5
   MSVC x64 `/MT` fixture proves restoration and rejection before mutation; see
   [S22 witness](etc/research/t198-s22-mantle-preentry-witness-001.md).
+- M0 T198 S23 P1 source-builds the `bx-vdm` NTIO request builder under MSVC
+  x64 `/MT`: it copies only the exact `0x8400` image into mantle v2 and
+  source-locks `0x700`, `0x714`, `0070:0000`; execution is pending. See
+  [S23 P1 builder record](etc/research/t198-s23-p1-ntio-request-builder-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
