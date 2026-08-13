@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1001 |
+| Documentation records | 1002 |
 | --- | --- |
-| Generated UTC | 2026-08-13T14:52:02Z |
+| Generated UTC | 2026-08-13T14:52:44Z |
 
 ## Entries
 
@@ -393,6 +393,7 @@ content-divergent entries.
 | etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md | indexed supporting material | 2ff061af0c825f711fed80bccbd5cd67935349b1d1607a38dfe728104f4c801a |
 | etc/research/t198-s16-msvc-x64-boot-namespace-composition-witness-001.md | indexed supporting material | 2673f3ba959bf229f14087815350c0ea6bad2e3585090514136c46091804cfc8 |
 | etc/research/t198-s17-msvc-x64-native-bop-composition-witness-001.md | indexed supporting material | 4005d9e6f83325b0f033554ad6a8b336598090055cd33a7a0e97117da20a857b |
+| etc/research/t198-s18-boot-namespace-native-matrix-001.md | indexed supporting material | 5422b19972e8c15eace373fc8355f7c03b66dabc1870bcf0b47e01a45c46a753 |
 | etc/research/t198-s1-bop-runtime-composition-map-001.md | indexed supporting material | 6ae7b63e002e80119cde1195c5bc4df34d7af07d99fd39679cacf9e88876032c |
 | etc/research/t198-s2-native-execution-contract-map-001.md | indexed supporting material | 9948f12dc8933e287715ba748ea5ff3567f2b75aece8ac1429ad021f2e806152 |
 | etc/research/t198-s3-finite-native-run-witness-001.md | indexed supporting material | f197ff4bf1f1d6ad401b6f79b0b2ee59949ad583622468df10e2f80efc94adcc |
