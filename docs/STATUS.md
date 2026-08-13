@@ -24,7 +24,7 @@ register, and generated/current build surfaces.**
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T196 S5, Ordinary Mode. |
-| Admission And Approval | S4 is closed by `2da16f3`, `bbadb9f`, `a6736f0`, `55e1d3e`, `b70b01d`, and `2b64231`. Its closure record reports 24 paths/41 physical hunks, one adapter-owned BOP observer check, and 13 retained mechanical checks passing. S5 is admitted to reconcile each current hunk, exception-register row, source/build generator and eventual S6 verification obligation; no source mutation is presumed. |
+| Admission And Approval | S4 is closed by `2da16f3`, `bbadb9f`, `a6736f0`, `55e1d3e`, `b70b01d`, and `2b64231`. Its closure record reports 24 paths/41 physical hunks, one adapter-owned BOP observer check, and 13 retained mechanical checks passing. S5's first current crosswalk is `etc/research/t196-s5-current-diff-register-crosswalk-001.md`: every one of the 41 hunks has a register/build disposition, with MSVC compile/link evidence explicitly reserved to S6. |
 | Objective | Produce one complete, current crosswalk for every remaining Bochs diff hunk and every relevant exception-register entry, classifying it as retained mechanical necessity, generated/build counterpart, removed, or a specific S6 verification obligation. Resolve any mismatch by a bounded repair or re-admission. |
 | Non-goals | No BOP selector/service routing, OpenNT/DOS/SoftPC semantic implementation, device/firmware/plugin expansion, guest runtime campaign, full build retry, or revival of removed diagnostics/legacy seams. |
 | Reference Baseline | T196 S2 classification; T196 S3 removal evidence; T196 S4 closure record; T195 closure; pinned Bochs 2.6 tree; exception register; current build generators. |
