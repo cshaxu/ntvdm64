@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S4.** Its governing brief is the active
+> **Current effective packet: M0 T198 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S4 -- map the selector-blind generic #UD event seam needed
+**Active: M0 T198 S5 -- extract the selector-blind generic #UD bridge needed
 before the holistic BOP plane can be recomposed.**
 
 > **Governance correction:** The table below is the sole active packet. T188
@@ -23,19 +23,19 @@ before the holistic BOP plane can be recomposed.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S4, Ordinary Mode. |
-| Admission And Approval | S3 is closed by the r8 finite-native-run witness. Its mechanically verified run path makes a source/object map of the existing generic #UD seam the sole admissible next slice. |
-| Objective | Map the existing generic #UD event source, typed opaque request/result transition, object/link dependencies and required extraction boundary for composition with the finite mantle runner. |
-| Non-goals | No BOP selector/service/provider implementation; no adapter/CLI ABI change; no firmware/BIOS, device, GUI, plugin, product build, OpenNT import, general machine configuration, finite-run behavior, or CPU decode/exception semantic change. |
-| Reference Baseline | T198 S1 composition map, T198 S2 execution-contract map, T198 S3 finite-native-run witness, and current `bx-core/cpu/exception.cc` generic event code. |
-| Files And ABI Surface | T198 evidence/operation record and Status only. No source, build, cross-component ABI or BOP surface change. |
+| Identifier Mode | M0 T198 S5, Ordinary Mode. |
+| Admission And Approval | S4 is closed by the generic #UD seam map. It identifies a finite, selector-blind core/mantle bridge extraction as the only admissible next slice. |
+| Objective | Extract a fixed C ABI generic #UD event/outcome bridge: core retains copied event and typed outcome application; mantle owns bridge composition and finite controlled stop; no raw callback or adapter runtime remains in core. |
+| Non-goals | No BOP selector/service/provider behavior; no adapter/CLI ABI change; no firmware/BIOS, device, GUI, plugin, product build, OpenNT import, general machine configuration, unbounded execution, or CPU decode/exception semantic change. |
+| Reference Baseline | T198 S3 finite-run witness, T198 S4 generic #UD seam map, and current core exception/intercept source. |
+| Files And ABI Surface | Minimal `bx-core` generic seam, `bx-mantle` fixed bridge declaration/implementation, focused fixture/test/probe, T198 evidence and Status. The bridge is fixed-width copied C ABI only; no callback pointers or adapter object surface. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace all current #UD path preprocessor gates, declarations, call/return semantics and imports; compare against the finite runner and `bx-vdm` ingress without compiling or changing either; prove which dependencies are generic mechanics and which are legacy product/adapter composition; run documentation governance. |
-| Expected Markers | A selector-blind seam map, object dependency table, explicit retained/extracted/rejected classification, and one bounded next implementation brief or an exact unresolved native edge. |
+| Verification | Source-build a finite CPU5 derivative with the extracted bridge and a neutral typed #UD fixture; prove the core object has no adapter runtime include, environment selection, raw callback or BOP term; prove controlled stop returns through mantle lifecycle; run documentation governance. |
+| Expected Markers | A source-built core/mantle bridge manifest/trace, static no-composition scan, and default-off negative result when no mantle bridge is linked. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record field widths, ownership, source call sites, permitted transitions, all rejected product/adapter alternatives and runtime non-claim. |
-| Stop Conditions | Any proposed path requires BOP/service recognition in Bochs, adapter host pointers, firmware/device/GUI behavior, CPU semantic change, a product `main.cc` dependency, or runtime modification. Preserve evidence and re-admit. |
-| Exit Criteria | The current #UD seam has a source-backed owner, finite-run-compatible dependency classification and precise build placement for its next selector-blind composition slice. |
+| Stop Conditions | Any core source retains/introduces BOP/service recognition, adapter runtime include, environment selection, raw callback, firmware/device/GUI behavior, CPU semantic change, a product `main.cc` dependency, or unbounded run. Preserve evidence and re-admit. |
+| Exit Criteria | The finite CPU5 composition source-builds a neutral #UD fixture through the fixed bridge and returns via typed stop or pass-through disposition; legacy composition is demonstrably absent from core. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover CLI, bx-vdm ingress/registry/planes, native execution plan, Bochs generic seam, mantle lifecycle, retained engine build manifests, OpenNT providers and every selector-specific source location. |
 
@@ -74,6 +74,11 @@ before the holistic BOP plane can be recomposed.**
   and cleanup.  The needed A20 initialization is now a finite mantle
   lifecycle invariant; no guest/BOP runtime claim follows.  See
   [T198 S3 finite-run witness](etc/research/t198-s3-finite-native-run-witness-001.md).
+- M0 T198 S4 is complete: the current `#UD` seam map separates retained
+  copied-state/resume mechanics from legacy `bx-vdm` dispatch, raw callback,
+  environment and product-lifecycle coupling.  S5 will extract one fixed
+  core/mantle bridge before any BOP plane attachment; see
+  [T198 S4 generic #UD seam map](etc/research/t198-s4-generic-ud-seam-map-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
