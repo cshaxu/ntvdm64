@@ -876,6 +876,9 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
         (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_RESUME ||
          mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP)) {
       if (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP) {
+        /* Record only the accepted generic outcome, immediately before the
+         * existing mechanical stop transfer. */
+        bx_ntvdm_mantle_generic_ud_stop_observation_mark();
         bx_pc_system.kill_bochs_request = 1;
         longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
       }

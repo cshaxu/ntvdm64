@@ -50,6 +50,14 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *event,
   struct bx_ntvdm_generic_ud_outcome_v1 *outcome);
 
+/* Generic-machine stop observation. The CPU invokes this only after it has
+ * accepted a typed STOP outcome; no selector, provider, or guest data is
+ * carried here. Finite-run uses it solely to distinguish the stop from its
+ * watchdog timer. */
+void bx_ntvdm_mantle_generic_ud_stop_observation_reset(void);
+void bx_ntvdm_mantle_generic_ud_stop_observation_mark(void);
+int bx_ntvdm_mantle_generic_ud_stop_observed(void);
+
 /* Private finite-run fixture control.  It is not a CLI, guest, composition, or
  * service interface; production composition leaves it disabled. */
 void bx_ntvdm_mantle_generic_ud_fixture_stop(int enabled);

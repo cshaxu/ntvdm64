@@ -98,14 +98,14 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   }
 
   bx_ntvdm_mantle_generic_ud_fixture_stop(request->stop_on_ud_fixture);
+  bx_ntvdm_mantle_generic_ud_stop_observation_reset();
   bx_cpu.cpu_loop();
   bx_ntvdm_mantle_generic_ud_fixture_stop(0);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
   if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
-  if (request->stop_on_ud_fixture &&
-      bx_ntvdm_mantle_generic_ud_fixture_stop_observed()) {
+  if (bx_ntvdm_mantle_generic_ud_stop_observed()) {
     return BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP;
   }
   return stop_state.fired ? BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET :
