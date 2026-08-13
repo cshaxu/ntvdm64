@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S7.** Its governing brief is the active
+> **Current effective packet: M0 T198 S8.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S7 -- prove the i686 `bx-vdm` bridge object can enter the
-MSVC/x86 finite-machine link without activating a provider or BOP execution.**
+**Active: M0 T198 S8 -- define the generic pending-action ABI required by the
+whole finite boot-namespace provider family, before linking that provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ MSVC/x86 finite-machine link without activating a provider or BOP execution.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S7, Ordinary Mode. |
-| Admission And Approval | S6 is classification-only complete. Owner-approved installation of i686 MinGW-w64 GCC supplies the previously missing x86 producer; this S admits only an artifact/link proof. |
-| Objective | Build the fixed `bx-vdm` bridge as i686 C objects and link it as the mutually exclusive generic bridge implementation into the MSVC/x86 finite CPU5 fixture; run HLT only. |
-| Non-goals | No BOP execution, service/provider/runtime v1-v4, CLI/environment/session, guest RAM transfer, firmware/BIOS, device, GUI, product build, OpenNT import, unbounded execution or CPU semantic change. |
-| Reference Baseline | T198 S6 ingress witness and x86 toolchain audit, plus the newly installed i686 MinGW-w64 GCC 16.1.0-6. |
-| Files And ABI Surface | The fixed `bx-vdm` bridge and a reproducible cross-island link probe. Only the existing copied C ABI crosses; default mantle and `bx-vdm` bridge definitions are mutually exclusive. |
+| Identifier Mode | M0 T198 S8, Ordinary Mode. |
+| Admission And Approval | S7 proves the i686/MSVC x86 bridge link. The owner-directed holistic BOP route admits an ABI-first whole-provider closure, not individual service wiring. |
+| Objective | Define and verify fixed copied pending-action records for generic checked read, multi-write and bulk-write mechanics, with no boot provider attached. |
+| Non-goals | No individual BOP execution, boot namespace/provider linkage, adapter runtime, CLI/environment/session, host filesystem, firmware/device/GUI/product build, OpenNT import or CPU semantic change. |
+| Reference Baseline | T198 S7 cross-island witness and the T198 S8 boot-namespace provider closure map. |
+| Files And ABI Surface | Fixed versioned action/result declarations, mantle generic mechanics and focused ABI tests only; no provider-specific field or selector is permitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Verify i686 object machine type, exact source/object list, and MSVC/x86 link map; run HLT with the core bridge macro compiled but no #UD invoked; run boundary and documentation checks. |
-| Expected Markers | i386 COFF objects, one successful MSVC/x86 finite HLT link/run with the external bridge symbol resolved, no default mantle bridge object, and no BOP/provider trace. |
+| Verification | Compile focused i686 and MSVC/x86 ABI fixtures, reject malformed/overflow action records, prove no selector/provider vocabulary in mantle mechanics, and run documentation checks. |
+| Expected Markers | Versioned action layouts, positive/negative action validation, selector-blind mantle source scan, and no provider link input. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record compiler versions, architecture, CRT/link command, artifact hashes, resolved bridge symbol, alternate-object exclusion, negative runtime claim and any unresolved CRT dependency. |
-| Stop Conditions | Link requires a provider/session/CLI/product object, changes the copied ABI, has CRT-owned allocation across the boundary, or invokes BOP/provider code. Preserve evidence and re-admit. |
-| Exit Criteria | The external i686 bridge is proven link-compatible with the x86 finite fixture and HLT returns normally; no BOP is executed and no provider becomes reachable. |
+| Reporting Requirements | Record action ownership, widths, lifetime, transition rules, rejected legacy runtime alternatives and no-provider runtime claim. |
+| Stop Conditions | Any selector/service/provider/host semantic enters an action record; core gains memory access; action ownership or lifetime requires raw pointer/CRT memory. Preserve evidence and re-admit. |
+| Exit Criteria | Generic action ABI and selector-blind mantle mechanics source/test closure exists; no provider or legacy runtime is linked. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover i686 object architecture, C linkage spelling, CRT imports, bridge-symbol resolution, duplicate default-bridge exclusion, core macro isolation and no-#UD HLT run. |
+| Similar-Issue Sweep | Cover every existing read/write/gather/bulk transaction, overflow/partial-write behavior, result/resume transitions, bridge lifetime and core/mantle boundary vocabulary. |
 
 ## Current Technical Baseline
 
