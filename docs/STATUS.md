@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S13 — v6 normal-return BYOB-root materialization.**
+**Active: M0 T194 S14 — v6 runner/shim/bundle invocation audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S13, Ordinary Mode. |
-| Admission And Approval | S12 proves an exact source-built SHARE asset already exists. This S admits a single new, immutable v6 BYOB input root made only from verified existing components. |
-| Objective | Materialize and validate a v6 BYOB root that maps exact SHARE to `TARGET.EXE`, alongside verified NTIO, NTDOS and COMMAND inputs. |
+| Identifier Mode | M0 T194 S14, Ordinary Mode. |
+| Admission And Approval | S13 closes the exact v6 BYOB input root without execution. This S admits only identity/ABI audit of the existing runner, shim and r2 bundle. |
+| Objective | Identify one exact runner/shim/bundle triplet that accepts the v6 root and preserves the child environment/engine boundary. |
 | Non-goals | No execution, source/build/controller change, Bochs patch, BIOS/device/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry. |
-| Reference Baseline | T194 S4 v6 profile contract, T194 S12 exact SHARE asset, existing source-built boot components. |
-| Files And ABI Surface | A fresh artifacts input root, immutable profile manifest and focused profile validation only. |
+| Reference Baseline | T194 S8 r2 derivative, S10 controller/bundle, and S13 validated root. |
+| Files And ABI Surface | Existing runner/shim binaries, source contract and bundle manifest only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Input component hashes/sizes, v6 profile parser acceptance, target-placement identity and no extra components; documentation governance and `git diff --check`. |
-| Expected Markers | One fresh root, v6 profile valid, SHARE copied only as `TARGET.EXE`, no runtime claim. |
-| Asset Needs | Existing source-built NTIO/NTDOS/COMMAND/SHARE artifacts only. |
-| Reporting Requirements | Record source locations, output hashes, canonical mapping and rejected extra/QUIT components. |
-| Stop Conditions | Any execution, source/build/controller/Bochs change, profile grammar expansion, provider expansion, extra guest component or retry; pause for a fresh S admission. |
-| Exit Criteria | Committed validated v6 root or durable component-identity blocker. |
+| Verification | Runner/shim source ABI review, binary and bundle hashes, child-environment contract and argument shape; documentation governance and `git diff --check`. |
+| Expected Markers | One compatible triplet or exact ABI/hash blocker; no runtime claim. |
+| Asset Needs | Existing source-built runner/shim and r2 bundle only. |
+| Reporting Requirements | Separate runner CLI parsing, shim bundle verification and Bochs child invocation facts. |
+| Stop Conditions | Any execution, source/build/controller/Bochs change, profile grammar expansion, provider expansion or retry; pause for a fresh S admission. |
+| Exit Criteria | Committed compatible triplet map or durable ABI blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Verify controller does not carry stale v5 schema labels, old launch-kind/tail variables, an old engine hash, or a retry path. |
 
