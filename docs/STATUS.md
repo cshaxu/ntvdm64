@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S54 — make one deferred native-POST observation.**
+**Active: M0 T194 S55 — source-classify selector-06 re-entry and late fault.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S54, Ordinary Mode. |
-| Admission And Approval | S53 removed only the S52-confirmed old S46 process tree and verified zero residual matching processes. Owner approval permits normal single-agent continuation under T194. |
-| Objective | Run S51 through the retained controller exactly once with a 15-second watchdog, retaining its complete terminal evidence and classifying only observed facts. |
-| Non-goals | No retry, source/build/bundle/profile/root change, manual process cleanup unless the controller identifies its own wrapper PID, device/archive expansion, raw-media action, or normal-return claim without 54:11. |
-| Reference Baseline | S47 controller audit, S48 direct-pre-POST observation, S49--S51 deferred composition, S52 input audit, and S53 exact cleanup. |
-| Files And ABI Surface | Existing S51 engine, v6 runner/shim/profile/BYOB root/target, one fresh S54 evidence root, Status and documentation inventory only. |
+| Identifier Mode | M0 T194 S55, Ordinary Mode. |
+| Admission And Approval | S54 is the sole retained deferred native-POST observation: it reaches 50:21 but ends in an independently observed late selector-06/EIP/stack sequence. Owner approval permits normal single-agent continuation under T194. |
+| Objective | Classify the selector-06 re-entry and the predecessor of the late EIP/stack fault from OpenNT/SoftPC source and existing evidence, yielding an owner/disposition decision. |
+| Non-goals | No runtime retry, source/build/bundle/profile change, Bochs patch, adapter handler, device expansion, raw-media action, or normal-return claim. |
+| Reference Baseline | S54 trace, T105 selector-06 re-entry record, T134/T150 late-fault source records, and the original OpenNT/SoftPC source tree. |
+| Files And ABI Surface | Source/evidence reading plus one research record, Status and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One controller invocation with fixed S51 input hashes and a 15-second watchdog; inspect input/outcome/log records and residual processes; then run documentation governance and git diff --check. |
-| Expected Markers | Exactly one fresh evidence root, retry policy none, a terminal outcome record, observed BOP/vector facts or a precise reachability limit, and no unclassified residual process. |
-| Asset Needs | S51 bundle, existing v6 input closure, unused S54 evidence root and the S47-tested controller. |
-| Reporting Requirements | Record exact hashes, command parameters, controller outcome, watchdog/cleanup facts, observed facts, and no extrapolated semantics. |
-| Stop Conditions | Launch failure, locked/missing terminal evidence, need for retry/source change, or residual process not attributable to the controller wrapper PID; preserve evidence and pause. |
-| Exit Criteria | Committed single-run evidence classifies the deferred composition without a continuous-execution claim. |
+| Verification | Map trace sites and selector 06 through original source, compare prior retained records, inspect exact code context and run documentation governance plus git diff --check. |
+| Expected Markers | Source anchors for selector 06 and the late control path, explicit ownership, and a disposition that rejects unsupported adapter/Bochs changes. |
+| Asset Needs | Existing S54 logs and checked-in OpenNT/SoftPC source/evidence only. |
+| Reporting Requirements | Record trace-to-source mapping, what is proved/not proved, and the next bounded action or explicit block. |
+| Stop Conditions | Missing source anchor, conflicting retained evidence, need for a runtime retry, or any proposed semantic change; pause for re-admission. |
+| Exit Criteria | Committed source correlation determines whether a further investigation is warranted without changing the current composition. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Confirm the engine is S51 rather than S46, the prospective root is absent, controller inputs retain S47 hashes except the new engine, and no pre-existing matching process remains. |
+| Similar-Issue Sweep | Compare the S54 selector-06 loop and late fault with T105, T134 and T150; reject an inference from BOP observation alone to provider success or Bochs defect. |
 
 ## Current Technical Baseline
 

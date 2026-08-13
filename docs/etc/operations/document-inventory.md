@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 934 |
+| Documentation records | 935 |
 | --- | --- |
-| Generated UTC | 2026-08-13T03:57:00Z |
+| Generated UTC | 2026-08-13T03:58:57Z |
 
 ## Entries
 
@@ -350,6 +350,7 @@ content-divergent entries.
 | etc/research/t194-s4-single-target-command-lifecycle-implementation-001.md | indexed supporting material | 27d374b709797403b6d02f61d899c0d8b428cfbf30c3baac34c51119e31ec182 |
 | etc/research/t194-s52-deferred-observation-input-audit-001.md | indexed supporting material | e33749b25ae6911f70811e0e22f3f7ddd34e8008696ed46e4bc9b17c14630596 |
 | etc/research/t194-s53-obsolete-observation-tree-cleanup-001.md | indexed supporting material | c8c3a082e2f4d02c682715a4bbf8af575e450d0ad008fe45dd22bb88aeea898b |
+| etc/research/t194-s54-deferred-native-post-observation-001.md | indexed supporting material | 37ed721744f1bed6f0a3fdf0d8356bb7c3a22877b1867df3922fa30fa8c7e13d |
 | etc/research/t194-s5-one-slot-engine-admission-audit-001.md | indexed supporting material | aca606a76c4bc9928fa138259f71125fc280c1e297dc2f397d1512c56f0efe67 |
 | etc/research/t194-s6-one-slot-adapter-composition-assembly-001.md | indexed supporting material | c5d255db3dd302de46307eff3ef07dc4762ac2e417808a715d63d4a5ebc3eafd |
 | etc/research/t194-s7-one-slot-bounded-startup-admission-audit-001.md | indexed supporting material | 0f2ea6f6f3b2dcea0f84185fef8491852991d85a7445cc574efca771fa1f0fc2 |
@@ -948,7 +949,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 8d100f4820d1cf5264ebfdcf8949647dfa666f8516d7b235f7092080eb727bcc |
+| STATUS.md | principal control document | d33ff74f7bb71506b79971a9bea5feaaedfbf4e59538e18eeb0f1ad49aec650f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
