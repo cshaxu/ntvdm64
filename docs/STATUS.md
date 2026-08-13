@@ -217,6 +217,9 @@ pre-entry request and prove the first existing `50:11` boundary.**
 - M0 T198 S23 P3 restores generic accepted-STOP result observability: the
   finite CPU5 x64 UD2 regression returns typed controlled stop rather than
   conflating it with the watchdog timer.
+- M0 T198 S23 now has a strict native first-handoff result: exact NTIO reaches
+  `50:11`, then a later unimplemented boundary returns
+  `COMPLETED_UD_STOP`; no DOS-continuity claim follows.
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

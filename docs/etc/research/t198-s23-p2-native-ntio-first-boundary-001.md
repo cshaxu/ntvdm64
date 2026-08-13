@@ -20,12 +20,14 @@ STOP only at a later unhandled `#UD`.
 
 The native fixture printed:
 
-`t198-s23 status=0 observed-5011=1 observed-stop=1`
+After S23 P3 corrected the generic STOP result observation, the repeated
+native run printed:
+
+`t198-s23 status=4 observed-5011=1 observed-stop=1`
 
 Bochs also logged the later real-mode prefetch segment-limit condition.  The
-finite-run status `0` is its existing budget category; it does not encode an
-external adapter STOP, while the test bridge’s separate stop marker proves
-that STOP was requested.
+`4` is `BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP`; it proves the accepted typed
+adapter STOP rather than a watchdog expiry.
 
 ## Interpretation And Follow-Up
 
