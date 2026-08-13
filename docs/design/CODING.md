@@ -36,3 +36,9 @@ adapter. It owns command-line parsing, immutable BYOB profile admission,
 engine-child creation, cancellation, and user-facing diagnostics. It does not
 own guest payload loading, service dispatch, BOP semantics, or machine
 configuration; those concerns remain respectively in the adapter and Bochs.
+
+All current modern runtime sources below `src/cli/`, `src/bx-vdm/`,
+`src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64
+and the static `/MT` CRT. Generated build artifacts record the compiler,
+target architecture and CRT. MinGW artifacts are retained evidence only and
+cannot be linked into the x64 runtime process.

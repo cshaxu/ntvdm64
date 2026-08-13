@@ -34,3 +34,7 @@
 - Do not move Bochs CPU, exception, memory, firmware, device, configuration,
   or other machine semantics into NTVDM/OpenNT code or the adapter. The
   boundary transports typed facts; it does not duplicate either side.
+- Build the in-process M0 runtime with MSVC x64 and `/MT` only. A MinGW,
+  alternative-CRT, or differently-architected object cannot enter that link;
+  communicate only through a separately admitted fixed process ABI, never by
+  satisfying linker symbols across CRT boundaries.

@@ -2,7 +2,10 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [switch]$WholeCpu5Core
+    [switch]$WholeCpu5Core,
+    [ValidateSet('x64', 'x86')]
+    [string]$HostArchitecture = 'x64',
+    [switch]$RunLifecycle
 )
 
 Set-StrictMode -Version Latest
@@ -106,10 +109,12 @@ foreach ($entry in $sources) {
 }
 
 $compileBatch = Join-Path $build 'compile-objects.cmd'
-@('call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul') + $compileCommands |
+$compileLog = Join-Path $build 'compile.log'
+@('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul') + $compileCommands |
     Set-Content -LiteralPath $compileBatch -Encoding ascii
-& cmd.exe /d /s /c ('"' + $compileBatch + '"')
-if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for the declared minimal native object set: $LASTEXITCODE" }
+& cmd.exe /d /s /c ('"' + $compileBatch + '"') 2>&1 | Tee-Object -LiteralPath $compileLog
+$compileExit = $LASTEXITCODE
+if ($compileExit -ne 0) { throw "MSVC compilation failed for the declared minimal native object set: $compileExit" }
 
 $probe = Join-Path $build 'minimal_machine_link_probe.cc'
 @'
@@ -125,7 +130,7 @@ int main()
 }
 '@ | Set-Content -LiteralPath $probe -Encoding ascii
 $probeObject = Join-Path $build 'minimal_machine_link_probe.obj'
-$probeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' + (New-MsvcCompileCommand $probe $probeObject @())
+$probeCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' + (New-MsvcCompileCommand $probe $probeObject @())
 & cmd.exe /d /s /c $probeCompile
 if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for generated link probe: $LASTEXITCODE" }
 
@@ -141,13 +146,24 @@ $linkResponse = @(
     '/OPT:REF'
 ) + $quotedObjects
 $linkResponse | Set-Content -LiteralPath $response -Encoding ascii
-$link = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && link.exe @"' + $response + '"'
+$link = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && link.exe @"' + $response + '"'
 & cmd.exe /d /s /c $link 2>&1 | Tee-Object -LiteralPath $log
 $linkExit = $LASTEXITCODE
 
+$runExit = $null
+$headers = Join-Path $build 'headers.txt'
+if ($linkExit -eq 0) {
+    $headerCommand = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && dumpbin.exe /headers "' + $exe + '"'
+    & cmd.exe /d /s /c $headerCommand 2>&1 | Tee-Object -LiteralPath $headers
+    if ($RunLifecycle) {
+        & cmd.exe /d /s /c ('"' + $exe + '"')
+        $runExit = $LASTEXITCODE
+    }
+}
+
 $record = [ordered]@{
     schema = 'ntdos64.t197.s6.minimal-machine-link-probe.v1'
-    architecture = 'x86'
+    architecture = $HostArchitecture
     profile = 'CPU5/Pentium-MMX, non-x86-64'
     wholeCpu5Core = [bool]$WholeCpu5Core
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
@@ -156,15 +172,23 @@ $record = [ordered]@{
     generatedProbe = 'minimal_machine_link_probe.cc'
     objects = @($objects | ForEach-Object { Split-Path -Leaf $_ }) + 'minimal_machine_link_probe.obj'
     forbiddenInputs = @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe', 'device archives', 'adapter', 'OpenNT')
+    compileExitCode = $compileExit
+    compileLog = 'compile.log'
     linkExitCode = $linkExit
     linkSucceeded = ($linkExit -eq 0)
     linkLog = 'link.log'
     linkMap = 'link.map'
     linkResponse = 'link.rsp'
+    headers = if ($linkExit -eq 0) { 'headers.txt' } else { '' }
+    runLifecycle = [bool]$RunLifecycle
+    runExitCode = $runExit
 }
 $record | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 't197-s6-minimal-machine-link-probe.json') -Encoding utf8
 if ($linkExit -ne 0) {
     Write-Host "Link did not close; retained exact linker diagnostics: $log"
     exit $linkExit
+}
+if ($RunLifecycle -and $runExit -ne 0) {
+    throw "Minimal CPU5 lifecycle probe failed: $runExit"
 }
 Write-Host "Built minimal CPU5/Pentium-MMX machine link probe: $exe"

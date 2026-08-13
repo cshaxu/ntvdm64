@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S12.** Its governing brief is the active
+> **Current effective packet: M0 T198 S14.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S12 -- implement the adapter-owned synchronous boot-namespace
-composition session over the existing generic-UD and mantle action ABIs.**
+**Active: M0 T198 S14 -- prove the finite CPU5 native HLT run under the
+closed MSVC x64 modern runtime foundation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ composition session over the existing generic-UD and mantle action ABIs.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S12, Ordinary Mode. |
-| Admission And Approval | S11 proves the current generic event/outcome and mantle action records are sufficient. The owner-approved boundary permits adapter-only composition and forbids new core/mantle semantics. |
-| Objective | Implement one explicit adapter-owned boot-namespace composition session that accepts a copied generic-UD event, applies the whole S10 plane, drives its fixed action synchronously through the existing mantle executor, and returns the corresponding typed generic outcome. |
-| Non-goals | No new BOP/provider, legacy adapter runtime, ambient host/session discovery, host filesystem, DTA BOP implementation, firmware/device/GUI/product build, OpenNT import, CPU semantic change, or core/mantle patch. |
-| Reference Baseline | T198 S7 cross-island link witness, S8 mechanical action closure, S10 provider-plane closure, and S11 synchronous composition map. |
-| Files And ABI Surface | New `bx-vdm` composition-session source/header and focused i686 test; limited S10 plane result-propagation correction. The existing mantle action function is called only with its fixed copied record. |
+| Identifier Mode | M0 T198 S14, Ordinary Mode. |
+| Admission And Approval | S13 closes the source-built MSVC x64 `/MT` CPU5 lifecycle; the owner already selected MSVC x64 as the unified modern runtime toolchain. |
+| Objective | Reproduce the existing neutral guest `HLT` finite-run contract under the S13 MSVC x64 `/MT` core/mantle closure and record the exact source/object/configuration closure. |
+| Non-goals | No BOP/provider attachment, CLI engine, legacy runtime, MinGW runtime object, GUI/device/product build, OpenNT import, guest CPU semantic change, or new core/mantle patch. |
+| Reference Baseline | T198 S3 finite HLT; T198 S12 P3 CRT frontier; T198 S13 MSVC x64 lifecycle closure. |
+| Files And ABI Surface | The finite native runner and its neutral HLT fixture, compiled only with the S13 MSVC x64 core/mantle closure. Existing generic records remain unchanged; no adapter source is linked. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | i686 focused test covers direct result, write action, read→completion→write action, declined unbound session, malformed action failure and result propagation. Static scan rejects legacy runtime and Bochs service vocabulary; run documentation checks. |
-| Expected Markers | Explicit initialize/bind/clear lifecycle; one active adapter-owned session; bounded copied event/action/outcome flow; no retained pointer across mantle calls; COMMAND write action resumes rather than re-faulting. |
+| Verification | Fresh MSVC x64 compile/link/run proves checked neutral-HLT copy, real-mode entry, finite native stop and cleanup; inspect PE architecture and link map; static scan excludes MinGW, product shell, adapter and OpenNT inputs; run documentation checks. |
+| Expected Markers | PE32+ x64 executable; one MSVC `/MT` closure; neutral HLT reaches the existing controlled stop; exact source/object list; no x86 or foreign-CRT object in link response. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record session lifetime, event/action/outcome transitions, mock/executor boundary, i686 object closure, rejected legacy alternatives and native-runtime limitation. |
-| Stop Conditions | The implementation needs an unbounded guest pointer, callback retained by mantle/core, ambient host state, service-specific Bochs hook, or new mantle/core operation. Preserve evidence and re-admit. |
-| Exit Criteria | A source-built adapter composition test proves the whole synchronous transaction and result propagation through fixed records; native CPU5 `UD2` integration remains separately verified or explicitly transferred. |
+| Reporting Requirements | Record compiler/version, x64 config projection, exact sources/link response, architecture inspection, HLT stop output, excluded inputs and any source-level host-width defect. |
+| Stop Conditions | x64 requires a CPU/memory/device semantic rewrite, new BOP vocabulary in Bochs, an unregistered imported-source change, foreign CRT input, or a non-neutral guest payload. Preserve evidence and re-admit. |
+| Exit Criteria | A fresh finite neutral-HLT MSVC x64 run is reproducible and proves no product/adapter dependency; generic `#UD` and adapter composition remain separately admitted after this gate. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover direct/read/write/pending paths; startup lifetime and unbound decline; action preflight failure; generic outcome translation; cross-island C linkage; and legacy-runtime or Bochs-semantic leakage. |
+| Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
 ## Current Technical Baseline
 
@@ -155,6 +155,10 @@ composition session over the existing generic-UD and mantle action ABIs.**
   complete MinGW provider objects cannot safely link into the MSVC/x86 CPU5
   executable because they import a second CRT/helper universe. The probe did
   not run; no Bochs defect is inferred. See [T198 S12 P3 frontier](etc/research/t198-s12-p3-native-cross-island-link-frontier-001.md).
+- M0 T198 S13 is complete: the full CPU5/Pentium-MMX source membership and
+  finite mantle source-build, link and run as one MSVC x64 `/MT` PE32+ process
+  lifecycle. The x64 configuration projection corrects host pointer width
+  without changing guest CPU identity; see [T198 S13 witness](etc/research/t198-s13-msvc-x64-minimal-lifecycle-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

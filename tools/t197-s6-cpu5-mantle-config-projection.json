@@ -13,6 +13,12 @@
       "oldValue": "1",
       "newValue": "0",
       "classification": "required by the selected original Pentium-MMX profile"
+    },
+    {
+      "name": "SIZEOF_INT_P",
+      "oldValue": "4",
+      "newValue": "8",
+      "classification": "MSVC x64 host pointer width; guest CPU level remains independently CPU5"
     }
   ],
   "additions": [],

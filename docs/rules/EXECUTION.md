@@ -115,8 +115,8 @@ or CRT graph.
 
 | Island | Required toolchain | Permitted responsibility |
 | --- | --- | --- |
-| runner/, bx-ntvdm-adapter/, modern tests and tools | MinGW-w64 GCC with the owned CMake/Ninja build | Modern CLI, diagnostics, typed bridge code, and fixtures. |
-| bochs/ | MSVC with the documented Bochs 2.6 Win32 recipe | Separately built, minimal guest-machine backend only. |
+| CLI, bx-vdm, bx-mantle, bx-core and in-process modern fixtures | MSVC x64 with `/MT` | One modern runtime ABI/CRT: CLI, diagnostics, typed bridge code, provider composition and minimal guest-machine backend. |
+| PowerShell tools and retained cross-toolchain evidence | Their recorded host/toolchain | Inspection, historical evidence and non-runtime probes only; they never supply an object to the MSVC x64 process. |
 | OpenNT historical guest/service source and narrow overlays | Matching historical Microsoft toolchain or explicitly evidenced compatible island | Original guest/service ownership; never a direct dependency of the modern runner graph. |
 
 Each island produces and verifies its own artifacts. Cross-island integration

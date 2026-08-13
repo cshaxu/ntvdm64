@@ -36,6 +36,12 @@ guest-memory ranges. It does not pass C++ objects, host pointers, CRT-owned
 memory, implicit handle ownership, or cross-architecture callbacks across that
 boundary.
 
+The first runtime process is MSVC x64 throughout: CLI, VDM adapter, mantle and
+adopted Bochs core share one static CRT. The guest CPU architecture is an
+emulation property, not a host-process property; CPU5/Pentium-MMX guest code
+therefore remains valid inside the x64 process. No MinGW object or a separate
+CRT may enter this in-process composition.
+
 ## Boundary Invariants
 
 - Machine mechanics stay in the Bochs core. The VDM adapter may request bounded mechanical

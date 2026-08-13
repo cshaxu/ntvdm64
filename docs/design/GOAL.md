@@ -4,6 +4,13 @@ Deliver an independently buildable, non-invasive command-line NT 4-era DOS envir
 
 The immediate goal is not to recover the unavailable NT4 x86 V86/CCPU product composition. It is to establish a small, auditable Bochs-to-OpenNT boundary and use it to run the first contained NT4 EN-US DOS profile. No claim about WOW16, broad device compatibility, or a retail-compatible `ntvdm.exe` follows from that first slice.
 
+The modern runtime target is one MSVC x64 `/MT` host process. This constrains
+the CLI, `bx-vdm`, `bx-mantle`, and adopted Bochs core to one C/C++ ABI and
+CRT. It does not alter the emulated CPU: the first guest profile remains
+CPU5/Pentium-MMX. Historical OpenNT source remains on its evidenced historical
+toolchain path and is not made a modern runtime-link input merely to achieve
+toolchain uniformity.
+
 The runtime boundary is deliberately hard: Bochs never implements DOS, DEM,
 COMMAND, WOW, or host-service BOP semantics; OpenNT never supplies CPU
 interpretation, PC firmware, or emulated-device semantics. A separately
