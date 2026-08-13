@@ -128,6 +128,9 @@ explicit DTA prerequisite.**
   immutable namespace and pending read state through common classification;
   it covers COMMAND boot write, DEM open/read and no-DTA pathname deferral.
   See [T198 S10 P1 witness](etc/research/t198-s10-p1-provider-plane-witness-001.md).
+- M0 T198 S10 P2 is complete: the same plane fixture now verifies DEM seek
+  and close direct-result routes after the open/read lifecycle; valid-DTA
+  pathname and malformed-action cases remain P3.
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
