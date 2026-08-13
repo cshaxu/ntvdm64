@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 955 |
 | --- | --- |
-| Generated UTC | 2026-08-13T06:00:07Z |
+| Generated UTC | 2026-08-13T06:10:21Z |
 
 ## Entries
 
@@ -65,7 +65,7 @@ content-divergent entries.
 | design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | 3153c9a36e43d8efc1234879d4c8f76f83dc3a61a766ecdceaa8da6e7f410e45 |
 | design/ADAPTER-STARTUP-SNAPSHOT-EVIDENCE-EXPORT.md | retained pre-governance evidence | a14333ab6812e8d6c59f9cddb22060b41b02b113d1a4ac6a2d9b08eec3db1666 |
 | design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | d1898c127b918240c3ce7eb32ed2efc04caf11f04b5a061060d4c2a0254c1861 |
-| design/ARCHITECTURE.md | current design authority | 8415c4a0ed18e94ecca8c9af0c5556468b435df17c4b5b155f20c4c920b95abc |
+| design/ARCHITECTURE.md | current design authority | 831de4cfeac469a79189be0a477df153064b8bc3e3cfa31fc552ee6166781cd5 |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | d4cba839d15ee30600996e56cd00e34c07d59bfdcb42b91b06fccbf760c48bd5 |
 | design/CODING.md | current design authority | a28d3851d99bc7047fda3502d485e6dcf5016eb6ce543c2a46bf18dce975f972 |
 | design/GOAL.md | current design authority | 33409e2f2f4557b0d6f46fb1ab4918936a27b2605e911fddfd85a0e81d2de001 |
@@ -843,7 +843,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | 93a263d3aa4763d56f28078585a1a12f4ffff831020c2ba428dfb3b36cf16c6d |
-| QUEUE.md | principal control document | 9ecd1b185ed3a9ae856e21d81b2c0c4b1119bd55204fffeee1150c83c702b10b |
+| QUEUE.md | principal control document | d2bf160deb1be00db128d82401d96a35bb2fb7a703615c491766781ce61a9a75 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | fef23048d411b355f5c2e08b971fec6370359120e7d9c7da383cb883f1dfa2da |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | dd298ea27d815fb69cc843ecf334a2664ba740bb6ede8e0c90907d918c64086a |

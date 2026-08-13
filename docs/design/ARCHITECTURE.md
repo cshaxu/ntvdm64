@@ -12,10 +12,11 @@ another.
 | Component | Owns | Does not own |
 | --- | --- | --- |
 | CLI (`src/cli`) | Invocation contract, immutable profile admission, contained host policy, diagnostics, and engine launch | Guest execution, guest-memory access, guest-service semantics, or machine mechanics |
-| Host capability seam | Modern contained host facilities required by the composition | Guest protocol meaning, CPU/device behavior, or Bochs internals |
-| Adapter composition (`src/bx-ntvdm-adapter`) | Typed boundary contracts; guest-service routing and provider selection; compatibility adaptation; machine-composition selection | CPU execution, firmware, PIC, memory model, device model, or DOS kernel algorithms |
-| Bochs 2.6 backend (`src/bochs`) | x86 execution, memory, firmware, interrupts, PC-device mechanics, and native machine lifecycle | Guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
-| OpenNT guest layer | DOS, NTDOS, COMMAND, WOW16 payloads, and guest-visible behavior | CPU interpretation, firmware, PC devices, or modern-host composition |
+| VDM adapter (`src/bx-vdm`) | Typed Bochs/VDM contracts; BOP ingress, provider routing, compatibility adaptation, and machine-composition selection | CPU execution, firmware, PIC, memory model, device model, or DOS kernel algorithms |
+| Bochs mantle (`src/bx-mantle`) | Minimal native Bochs lifecycle composition: SIM/logging/no-device time state and assembly of admitted core mechanics | VDM, BOP, OpenNT, DOS, host policy, GUI, plugins, or unadmitted PC devices |
+| Bochs core (`src/bx-core`) | Adopted Bochs CPU/decode, memory, exceptions, and admitted no-device mechanics | VDM/guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
+| Contained host-capability seam | Modern host facilities selected by the VDM adapter | Guest protocol meaning, CPU/device behavior, or Bochs internals |
+| OpenNT source layer (`src/opennt`) | Normative historical guest payloads and host-provider source/contract evidence | CPU interpretation, firmware, PC devices, or modern-host composition |
 | Historical machine-handler islands | Individually admitted original machine-facing behavior under adapter selection | A replacement SoftPC/CCPU backend or general host-service plane |
 | Research fixtures | Reproducible evidence for a bounded question | Product behavior or implicit runtime dependencies |
 
@@ -23,13 +24,13 @@ another.
 
 ```text
 CLI and contained host policy
-  -> adapter composition
-      -> adopted Bochs machine
-          -> OpenNT guest environment
-      -> selected original or source-derived host capability
+  -> VDM adapter
+      -> Bochs mantle -> adopted Bochs core
+      -> selected OpenNT-derived provider and contained host capability
+  -> OpenNT guest environment
 ```
 
-The adapter is the composition boundary between machine events and host-side
+The VDM adapter is the composition boundary between machine events and host-side
 meaning. It receives and returns versioned, fixed-width values and checked
 guest-memory ranges. It does not pass C++ objects, host pointers, CRT-owned
 memory, implicit handle ownership, or cross-architecture callbacks across that
@@ -37,10 +38,13 @@ boundary.
 
 ## Boundary Invariants
 
-- Machine mechanics stay in Bochs. The adapter may request bounded mechanical
+- Machine mechanics stay in the Bochs core. The VDM adapter may request bounded mechanical
   operations through typed contracts but does not reproduce CPU, memory,
   firmware, interrupt, or device algorithms.
-- Guest and host-service meaning stays outside Bochs. The adapter owns the
+- The mantle is Bochs-internal assembly only. It reuses native Bochs code and
+  data structures, extracting only product-shell paths that prevent independent
+  minimal operation. It has no VDM or guest meaning.
+- Guest and host-service meaning stays outside Bochs. The VDM adapter owns the
   interpretation and routing needed to compose OpenNT-derived host behavior.
 - The guest owns DOS and WOW behavior. Neither the CLI nor the adapter becomes
   a replacement DOS kernel or filesystem implementation.
@@ -55,13 +59,13 @@ boundary.
 Dependencies point inward through declared contracts:
 
 ```text
-CLI -> adapter -> Bochs mechanics
-CLI -> adapter -> host capability seam
-adapter -> OpenNT-derived provider or historical machine-handler island
-OpenNT guest -> adapter contract -> selected provider
+CLI -> bx-vdm -> bx-mantle -> bx-core
+CLI -> bx-vdm -> contained host-capability seam
+bx-vdm -> OpenNT-derived provider or historical machine-handler island
+OpenNT guest -> bx-vdm contract -> selected provider
 ```
 
 No component may reverse these directions by importing another component's
-private execution state. In particular, Bochs remains reusable as a guest
-machine, and the adapter remains reusable as the explicit NTVDM composition
-boundary for future hosts.
+private execution state. In particular, the Bochs core and mantle remain
+reusable as a guest machine, and the VDM adapter remains reusable as the
+explicit NTVDM composition boundary for future hosts.
