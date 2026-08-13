@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T190 S5 — COMMAND bootstrap immutable bundle.**
+**Active: M0 T190 S6 — COMMAND bootstrap one-shot observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > and T189 are closed. Their retained S records are evidence, not concurrent
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T190 S5, Ordinary Mode. |
-| Admission And Approval | T190 S4 source-built the exact derivative on the valid T189 base. Owner authorization permits one immutable bundle assembly before any separately admitted observation. |
-| Objective | Assemble a new manifest-bound engine/ROM bundle from the exact T190 derivative without modifying or rebuilding any input. |
-| Non-goals | No source change, runtime observation, retry, Bochs/guest change, host-environment exposure, archive/device/config rebuild, or terminal-result transport. |
-| Reference Baseline | T190 S4 engine/map/object hashes and retained T189 ROM set. |
-| Files And ABI Surface | Existing immutable-bundle tool, T190 engine, retained ROM files and manifest/evidence/status records only. |
+| Identifier Mode | M0 T190 S6, Ordinary Mode. |
+| Admission And Approval | T190 S5 produced a complete manifest-bound bundle. Owner authorized evidence-led bounded execution with no retry and no capability expansion. |
+| Objective | Take exactly one 30-second frozen observation of the T190 bundle to determine whether the reached `54:02` now enters checked gather/complete/resume rather than the original #UD pass-through. |
+| Non-goals | No source/build change, retry, Bochs/guest change, host-environment exposure, device/config change, terminal-result transport, or claim of continuous execution. |
+| Reference Baseline | T190 S1--S5, existing one-shot controller, fixed CLI shim/profile/BYOB inputs. |
+| Files And ABI Surface | Existing runner/shim/controller, T190 immutable bundle and a new evidence root only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Bundle-manifest hash validation, input/output hash review, documentation governance and `git diff --check`. |
-| Expected Markers | Fresh bundle directory, exact engine/ROM hashes, and a complete engine-bundle manifest. |
-| Asset Needs | Existing T190 derivative and T189 ROM directory only; no new asset. |
-| Reporting Requirements | Record input/output hashes and state that no process was launched. |
-| Stop Conditions | Any source/build/runtime action, retry, Bochs patch, ROM replacement, or manifest mismatch; pause for re-admission. |
-| Exit Criteria | Immutable bundle closure or durable validation rejection; observation requires later S admission. |
+| Verification | One terminal `observation.json`, manifest/input hashes, trace inspection for `54:02`, documentation governance and `git diff --check`. |
+| Expected Markers | One gather/complete/resume transition or a bounded new failure fact; no second attempt. |
+| Asset Needs | Existing T190 bundle, runner/shim and fixed T184 BYOB inputs only. |
+| Reporting Requirements | Record exact exit/watchdog, first `54:02` neighborhood and limitations; distinguish successful entry from continuous execution. |
+| Stop Conditions | Any source/build change, retry, Bochs patch, new service/provider, device/config action, or need for detailed guest logging; pause for re-admission. |
+| Exit Criteria | One retained terminal observation with a source-backed disposition; no behavioral repair in this S. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
