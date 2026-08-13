@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S38.** Its governing brief is the active
+> **Current effective packet: M0 T198 S39.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S38 -- retain the latest selector-blind code-segment
-transition at the already admitted instruction-position boundary.**
+**Active: M0 T198 S39 -- source-led audit of the NTIO pre-entry placement and
+preserved low-memory contract.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ transition at the already admitted instruction-position boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S38, Ordinary Mode. |
-| Admission And Approval | S37 leaves the writer and first CS-to-zero control transfer unproven, and explicitly admits only selector-blind fixed-width position observation. The owner authorizes individually registered invasive bx changes under strict exception review. |
-| Objective | Extend the existing default-off mantle-owned copied position history to retain, and allow the finite fixture to snapshot at its already observed first generic `#UD`, the immediately preceding and current retained records of the most recent code-segment-selector transition. Prove or reject a direct transition into the known `0000:0A82 -> 0000:0A84` frontier. |
-| Non-goals | No bx-core change, BOP/provider/OpenNT/DOS/NTIO recognition, guest-memory or instruction-byte read, CPU state mutation, new callback, device/firmware/VGA enablement, CLI ABI, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S36 chained per-instruction copied positions, S37 source attribution, exact CPU5 x64 `/MT` finite closure and existing first-generic-stop fixture bridge. |
-| Files And ABI Surface | Registered current-path `bx-mantle` private transition snapshot/query and fixture-only copied capture; exact existing finite build/relink recipe; exception register, evidence, Status and closure. No `bx-core`, `bx-vdm` or `opennt` interface. |
+| Identifier Mode | M0 T198 S39, Ordinary Mode. |
+| Admission And Approval | S38 locates the latest retained CS transition at `9346:4D53 -> 0000:0000`, outside the NTIO aperture. The current source-defined startup request overwrites the aperture then restores four original bytes at `0x714`; this contract is now the highest-ROI provenance candidate. |
+| Objective | Read-only reconcile the OpenNT/NTIO expected entry contract with the current adapter pre-entry request and finite mantle placement/preserve order. Determine whether the observed unexpected transfer can be attributed to a missing or incorrect startup-image/memory contract, or must remain unproven. |
+| Non-goals | No runtime source change, new observation, guest-memory read/write, image patch, BOP/provider/OpenNT/DOS implementation, device/firmware/VGA enablement, CLI ABI, legacy linkage, or DOS continuity claim. |
+| Reference Baseline | S30/S31 aperture facts, S36 instruction history, S37 source map, S38 CS-transition witness, `bx_ntvdm_ntio_preentry_v1_prepare` and finite-run request mechanics. |
+| Files And ABI Surface | Evidence, Status and closure only. No code, build recipe, machine feature, exception-register or ABI change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Rebuild the changed mantle/fixture/bridge objects and relink the exact CPU5 x64 `/MT` finite closure. Test disabled, invalid and bounded-history state; verify that the bridge-time copied transition is ordered, position-only and ends at the first generic stop; scan changed source for forbidden semantic/product terms. |
-| Expected Markers | Registered exception, default-off latest transition query, copied before/after CS:RIP pair at the generic stop, typed stop, no core change and no adapter dependency. |
+| Verification | Record exact source locations for placement, preserve, reset-memory state and linked NTIO entry requirements; calculate all physical ranges; compare them against the S38 transition with explicit positive and negative ownership conclusions. Verify zero runtime-source/build/ABI diff. |
+| Expected Markers | Complete startup placement ledger, origin/disposition of the restored four bytes, source-supported attribution or bounded unproven result, no device/BOP inference, and one successor recommendation. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exception scope, copied layout/query invariants, exact build inputs/output, boundary scan, transition result, interpretation limit and successor recommendation. |
-| Stop Conditions | The mechanism needs core changes, instruction/guest inspection, CPU mutation, semantic filtering, product instrumentation, device behavior or cannot retain an ordered latest selector transition. Preserve evidence and re-admit. |
-| Exit Criteria | Under the same CPU5 x64 `/MT` finite closure, the bridge-time snapshot reports a bounded copied CS-transition pair and its retained-order relationship to the observed generic-stop frontier, or it cleanly proves that no such transition was captured, with no semantic expansion. |
+| Reporting Requirements | Record exact source locations, placement ledger, arithmetic, source/fixture differences, rejected shortcuts, interpretation limit and successor recommendation. |
+| Stop Conditions | Attribution would require runtime inspection or mutation, a guessed BIOS/device/BOP behavior, an undocumented image input, or a code change. Preserve evidence and re-admit only the necessary narrower action. |
+| Exit Criteria | A reviewable evidence record proves or rejects the current pre-entry placement/preserve contract as the owner of the unexpected transfer, without changing runtime behavior. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -311,6 +311,11 @@ transition at the already admitted instruction-position boundary.**
   later. The transfer instruction and owner remain unproven, and no machine
   capability was added. See
   [S38 witness](etc/research/t198-s38-cs-transition-witness-001.md).
+- M0 T198 S39 is complete: source/evidence audit proves the finite fixture
+  restores an undefined bare-RAM virtual-interrupt span and omits the other
+  evidenced NTIO pre-entry inputs. Its startup trace is therefore input
+  contaminated, not evidence for a missing device or BOP. See
+  [S39 attribution](etc/research/t198-s39-preentry-contract-attribution-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
