@@ -68,6 +68,14 @@ The manifest rejects `main.cc`, `config.cc`, `gui/siminterface.cc`,
   `linkSucceeded: true`; no forbidden product, adapter or OpenNT input is
   listed.  This proves a native CPU5 core/mantle **link closure**, not guest
   execution or a product runtime.
+- Fresh r12 changes the generated probe from link-only construction to the
+  finite lifecycle `initialize(1 MiB, 1 MiB) -> cleanup()`.  The executable
+  returns zero and emits the original CPU5 hardware-reset, local-APIC
+  allocation and Pentium-MMX CPUID records.  This proves finite SIM, RAM,
+  empty port-space, CPU reset and explicit cleanup coexist in one process.
+  It does **not** enter the CPU instruction loop: no BIOS/reset image,
+  instruction budget, controlled-stop contract or guest payload is admitted
+  by this probe.
 - The unresolved set is not an adapter or OpenNT edge.  It separates into:
   - native CPU5 processor dependencies: CPUID models, local APIC, TLB/flags/
     segment/reset/decode helpers and instruction-cache state;

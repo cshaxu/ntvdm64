@@ -119,7 +119,9 @@ $probe = Join-Path $build 'minimal_machine_link_probe.cc'
 int main()
 {
   bx_ntvdm_minimal_machine_c machine;
-  return (int) machine.initialize(0x100000, 0x100000);
+  int status = (int) machine.initialize(0x100000, 0x100000);
+  if (status != BX_NTVDM_MINIMAL_MACHINE_OK) return status;
+  return (int) machine.cleanup();
 }
 '@ | Set-Content -LiteralPath $probe -Encoding ascii
 $probeObject = Join-Path $build 'minimal_machine_link_probe.obj'

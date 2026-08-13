@@ -59,6 +59,10 @@ core/mantle build closure without reviving the Bochs product target.**
   the finite mantle, without a Bochs product target.  This is a native link
   closure only; machine initialization/execution still requires separate
   lifecycle verification.
+- M0 T197 S6 r12 verifies the native bare-machine lifecycle in process:
+  `initialize(1 MiB, 1 MiB) -> CPU5 reset/APIC/CPUID -> cleanup()` returns
+  zero.  No instruction-loop, BIOS/reset image, BOP or guest-running claim is
+  made by that lifecycle witness.
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
