@@ -43,27 +43,48 @@ $sources = @(
     @{ Name = 'pc_system'; Path = 'src\bx-mantle\pc_system.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
     @{ Name = 'memory'; Path = 'src\bx-core\memory\memory.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
     @{ Name = 'misc_mem'; Path = 'src\bx-core\memory\misc_mem.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
-    @{ Name = 'cpu_init'; Path = 'src\bx-core\cpu\init.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') }
+    @{ Name = 'cpu_init'; Path = 'src\bx-core\cpu\init.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_access'; Path = 'src\bx-core\cpu\access.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_apic'; Path = 'src\bx-core\cpu\apic.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_crregs'; Path = 'src\bx-core\cpu\crregs.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_debugstuff'; Path = 'src\bx-core\cpu\debugstuff.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_event'; Path = 'src\bx-core\cpu\event.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_fetchdecode'; Path = 'src\bx-core\cpu\fetchdecode.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_flag_ctrl_pro'; Path = 'src\bx-core\cpu\flag_ctrl_pro.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_generic_cpuid'; Path = 'src\bx-core\cpu\generic_cpuid.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_icache'; Path = 'src\bx-core\cpu\icache.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_msr'; Path = 'src\bx-core\cpu\msr.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_paging'; Path = 'src\bx-core\cpu\paging.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_proc_ctrl'; Path = 'src\bx-core\cpu\proc_ctrl.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_segment_ctrl_pro'; Path = 'src\bx-core\cpu\segment_ctrl_pro.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpu_smm'; Path = 'src\bx-core\cpu\smm.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
+    @{ Name = 'cpudb_pentium_mmx'; Path = 'src\bx-core\cpu\cpudb\pentium_mmx.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev', 'src\bx-core\cpu') },
+    @{ Name = 'cpudb_amd_k6_2_chomper'; Path = 'src\bx-core\cpu\cpudb\amd_k6_2_chomper.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev', 'src\bx-core\cpu') }
 )
 
 $includeRoots = @('src', 'src\bochs', 'src\bochs\instrument\stubs')
-function Invoke-MsvcCompile([string]$source, [string]$object, [string[]]$extraIncludes) {
+function New-MsvcCompileCommand([string]$source, [string]$object, [string[]]$extraIncludes) {
     $includes = @($includeRoots + $extraIncludes | Select-Object -Unique | ForEach-Object {
         '/I "' + (Join-Path $repository $_) + '"'
     }) -join ' '
-    $command = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /c /std:c++14 /EHsc /MT /Gy /DWIN32 ' + $includes + ' /FI "' + $config + '" /Fo"' + $object + '" "' + $source + '"'
-    & cmd.exe /d /s /c $command
-    if ($LASTEXITCODE -ne 0) { throw "MSVC compile failed for ${source}: $LASTEXITCODE" }
+    return 'cl.exe /nologo /c /std:c++14 /EHsc /MT /Gy /DWIN32 ' + $includes + ' /FI "' + $config + '" /Fo"' + $object + '" "' + $source + '"'
 }
 
 $objects = @()
+$compileCommands = @()
 foreach ($entry in $sources) {
     $source = Join-Path $repository $entry.Path
     if (-not (Test-Path -LiteralPath $source)) { throw "Declared source missing: $source" }
     $object = Join-Path $build ($entry.Name + '.obj')
-    Invoke-MsvcCompile $source $object $entry.ExtraIncludes
+    $compileCommands += New-MsvcCompileCommand $source $object $entry.ExtraIncludes
     $objects += $object
 }
+
+$compileBatch = Join-Path $build 'compile-objects.cmd'
+@('call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul') + $compileCommands |
+    Set-Content -LiteralPath $compileBatch -Encoding ascii
+& cmd.exe /d /s /c ('"' + $compileBatch + '"')
+if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for the declared minimal native object set: $LASTEXITCODE" }
 
 $probe = Join-Path $build 'minimal_machine_link_probe.cc'
 @'
@@ -77,7 +98,9 @@ int main()
 }
 '@ | Set-Content -LiteralPath $probe -Encoding ascii
 $probeObject = Join-Path $build 'minimal_machine_link_probe.obj'
-Invoke-MsvcCompile $probe $probeObject @()
+$probeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' + (New-MsvcCompileCommand $probe $probeObject @())
+& cmd.exe /d /s /c $probeCompile
+if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for generated link probe: $LASTEXITCODE" }
 
 $exe = Join-Path $build 't197-s6-minimal-machine-link-probe.exe'
 $map = Join-Path $build 'link.map'
