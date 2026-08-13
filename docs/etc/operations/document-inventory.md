@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 961 |
+| Documentation records | 962 |
 | --- | --- |
-| Generated UTC | 2026-08-13T06:37:06Z |
+| Generated UTC | 2026-08-13T06:58:38Z |
 
 ## Entries
 
@@ -99,7 +99,7 @@ content-divergent entries.
 | etc/operations/m0-t185-v5-runtime-selection-projection-subtask-plan.md | indexed supporting material | afad5e1141067e3e2ea25fd1ed56a79e3e9f5b2556ebcf7e3409dd67f34a64de |
 | etc/operations/m0-t195-bochs-intrusion-convergence-repair-plan.md | indexed supporting material | e58879187956eefb45cf53661e0efb8f4e0423322f6ea8621ccd7b02c7d989e7 |
 | etc/operations/m0-t196-bochs-intrusion-repair-plan.md | indexed supporting material | 7bddf4e9ff4605ef6d7a4d1262020625895f4aba8d7d6f917cdf41fd89707dcd |
-| etc/operations/m0-t197-bochs-native-lifecycle-extraction-plan.md | indexed supporting material | b2a5abbfea2067fb723f45b58e259b6751f7ecc81ed172bf5f6fd4737556a651 |
+| etc/operations/m0-t197-bochs-native-lifecycle-extraction-plan.md | indexed supporting material | 6b9fe1956e3d0aafd46a370934cfdd4615808be5166ecf299fc62049c61e0664 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -110,7 +110,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 0d83ea9be169dc8b6c8b7010eaa1cf380fb6f19155b7a50819a27b698f6dd651 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 85ce61f05457f765ae4eede51925ccea31b410e0faa8b35e9d1f4a787b7a3a33 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -379,6 +379,7 @@ content-divergent entries.
 | etc/research/t197-s2-mantle-path-migration-001.md | indexed supporting material | c36aae2ed7ece1f1543686f302c201c5b131eb34f962891f865b96620266af45 |
 | etc/research/t197-s3-core-closure-first-edge-001.md | indexed supporting material | f14f991febcfa5f8e0081dc0f8d8b1286c623528a0ea7ee0f090cb2726135513 |
 | etc/research/t197-s4-core-path-migration-001.md | indexed supporting material | b7c37c9586370f30563b25f2a001f141a7d44a903f3bec52295fb6499c3f0008 |
+| etc/research/t197-s5-sim-mantle-seam-001.md | indexed supporting material | 0fa3153b898a55a0d777bf68a223f867260bd257ed5663060f07556ad68e9a39 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -975,7 +976,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 756299aee5be25d75befab14437b4480cab70e5cf39b62d01a90b489ef732b4d |
+| STATUS.md | principal control document | dd2861b5570231fec75a8d558903ba13bbcd949d6bd2b5eb8e6183129dcf988e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

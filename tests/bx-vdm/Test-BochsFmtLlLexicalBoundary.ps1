@@ -2,8 +2,9 @@ $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $bochsRoot = Join-Path $repositoryRoot 'src\bochs'
+$mantleRoot = Join-Path $repositoryRoot 'src\bx-mantle'
 $expectedCounts = [ordered]@{
-    'gui\paramtree.cc' = 2
+    '..\bx-mantle\paramtree.cc' = 2
     'gui\siminterface.cc' = 2
     'iodev\hdimage\hdimage.cc' = 1
     'iodev\usb\scsi_device.cc' = 3
@@ -12,7 +13,7 @@ $expectedCounts = [ordered]@{
     'iodev\virt_timer.cc' = 1
 }
 $expectedForms = @(
-    [pscustomobject]@{ File = 'gui\paramtree.cc'; Text = '"0x" FMT_LL "x"'; Matches = 2; Occurrences = 1 }
+    [pscustomobject]@{ File = '..\bx-mantle\paramtree.cc'; Text = '"0x" FMT_LL "x"'; Matches = 2; Occurrences = 1 }
     [pscustomobject]@{ File = 'gui\siminterface.cc'; Text = 'FMT_LL "u\n"'; Matches = 1; Occurrences = 1 }
     [pscustomobject]@{ File = 'gui\siminterface.cc'; Text = '"0x" FMT_LL "x"'; Matches = 1; Occurrences = 1 }
     [pscustomobject]@{ File = 'iodev\hdimage\hdimage.cc'; Text = '"hd_size: " FMT_LL "u"'; Matches = 1; Occurrences = 1 }
@@ -25,7 +26,7 @@ $expectedForms = @(
 )
 
 $adjacent = @()
-Get-ChildItem -LiteralPath $bochsRoot -Recurse -File -Include *.c,*.cc,*.h | ForEach-Object {
+Get-ChildItem -LiteralPath $bochsRoot,$mantleRoot -Recurse -File -Include *.c,*.cc,*.h | ForEach-Object {
     $lineNumber = 0
     foreach ($line in Get-Content -LiteralPath $_.FullName) {
         $lineNumber++

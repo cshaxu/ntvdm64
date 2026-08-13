@@ -21,7 +21,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "cpu/cpu.h"
+#include "bx-core/cpu/cpu.h"
 #include "iodev/iodev.h"
 #include <assert.h>
 

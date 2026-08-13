@@ -2,7 +2,7 @@
 
 ## Question
 
-Which source changes outside `src/bx-ntvdm-adapter/` are authorized as
+Which source changes outside `src/bx-vdm/` are authorized as
 exceptions to the hard Bochs/OpenNT boundary, and what prevents each one from
 becoming a semantic migration?
 
@@ -31,6 +31,7 @@ Every new exception must name its current path, not the historical prefix.
 
 | ID | Owner approval | Imported code changed | Scope | Status |
 | --- | --- | --- | --- | --- |
+| BX-MANTLE-062 | 2026-08-12: owner directs `bx-core`/`bx-mantle` physical extraction, with mixed links decided individually | `src/bochs/gui/siminterface.h`; original `paramtree.*` and `logio.cc` moved to `src/bx-mantle/` | Path-only extraction of the original parameter-tree and logging implementation into the native mantle; SIM product behavior remains unselected | Implementing: no SIM replacement, configuration choice or product build claim is authorized by this entry. |
 | BX-UD-001 | 2026-08-10: permit the CPU `#UD` handling scheme as a Bochs-intrusion exception | `src/bochs/cpu/exception.cc`; `src/bochs/cpu/bx_ntvdm_exception_intercept.h` | A default-off, generic `#UD` interception and explicit resume disposition | Implemented and runtime-verified by r5 generic-#UD fixture. |
 | BX-BUILD-002 | 2026-08-10: permit necessary, registered Bochs intrusive changes while avoiding them by default | `src/bochs/config.cc` | One standards-conforming null-pointer comparison required by GCC 16 | Implemented and build/runtime-verified by r4. |
 | BX-UD-003 | 2026-08-10: same exception authority | `src/bochs/cpu/exception.cc`; reset fixture tool | Default-off test callback installation and generated generic #UD ROM | Implemented and runtime-verified by r5. |
