@@ -89,9 +89,10 @@ before the holistic BOP plane can be recomposed.**
   stop uses the finite PC stop latch.  Historical parallel gates remain for
   P3 removal and are not part of the new composition; see
   [T198 S5 P2 core hook](etc/research/t198-s5-p2-core-mantle-ud-hook-001.md).
-- M0 T198 S5 P3 is in progress: the legacy machine-composition callback and
-  its product-stop path are removed from core; remaining legacy adapter
-  transaction blocks are the next removal set.
+- M0 T198 S5 P3 is in progress: the legacy machine-composition callback,
+  product-stop path and active legacy exception call chain are removed from
+  core.  The remaining quarantined historical product body is the next
+  physical-removal set; fresh CPU5 r2 still source-builds the minimal fixture.
 - M0 T198 S5 P3 witness is complete: fresh CPU5 `UD2` traverses the new
   core/mantle fixed bridge and returns through native controlled stop with no
   product or adapter input; see
