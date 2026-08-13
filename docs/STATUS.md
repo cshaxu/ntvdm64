@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S4 — contained single-target COMMAND lifecycle implementation.**
+**Active: M0 T194 S5 — one-slot engine-admission audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S4, Ordinary Mode. |
-| Admission And Approval | Owner authorized holistic, minimal Bochs/adapter/guest composition and rejects per-selector expansion. S3 maps the original `54:01`/`54:11` no-next lifecycle and admits one coherent profile-plus-COMMAND-plane change, not a new BOP handler. |
-| Objective | Add a versioned, explicit single-target launch mode that uses the existing copied CMDINFO/CPU-result ABI to deliver one target then accept only its source-shaped `54:11` no-next continuation. |
-| Non-goals | No fabricated guest input, Bochs patch, BIOS table installation, device/config action, terminal-result transport, process-exit reinterpretation, new selector handler, host command queue, host target execution broker, ambient filesystem/process exposure, or runtime observation. |
-| Reference Baseline | T190 S6 trace/bundle, T176--T179 normal-return evidence, T194 S1--S3, original `cmddisp.c`/`cmdmisc.c`/`cmdexec.c` and current COMMAND plane/provider tests. |
-| Files And ABI Surface | Profile-declared target validation in `src/cli/byob_profile.*`, the versioned `byob_launch_plan_v2.*` encoding/runner handoff, `src/bx-ntvdm-adapter/bx_ntvdm_cmd_get_next_service.*`, their runtime use and focused CLI/adapter tests only. |
+| Identifier Mode | M0 T194 S5, Ordinary Mode. |
+| Admission And Approval | Owner authorized the holistic COMMAND-plane route. S4 is source/test closure; this S separately admits only an engine-admission audit before any new observation. |
+| Objective | Determine whether the current frozen engine/profile handoff accepts a valid one-slot v6 launch plan through its existing boundary, and record the exact acceptance or rejection owner. |
+| Non-goals | No guest execution extension, Bochs patch, BIOS/device/config action, BOP/provider change, terminal-result transport, process-exit reinterpretation, host command queue, host target execution broker, ambient filesystem/process exposure, or retry-based repair. |
+| Reference Baseline | T194 S1--S4; especially `etc/research/t194-s4-single-target-command-lifecycle-implementation-001.md`; current frozen engine handoff and original COMMAND source map. |
+| Files And ABI Surface | Read-only current engine/profile handoff code, its manifest/bundle inputs, and evidence only; no source ABI change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace-to-source inventory, original owner/failure map, catalogue/registry coverage scan, documentation governance and `git diff --check`. |
-| Expected Markers | Complete reached-family table with no unowned endpoint and an explicit grouped next-slice recommendation; no runtime claim. |
-| Asset Needs | Existing T190 trace and checked-in sources only; no new asset. |
-| Reporting Requirements | Separate original host provider, source-derived candidate, unavailable/deferred and machine-owner dispositions; reject per-service patching. |
-| Stop Conditions | Any source/build/runtime change, new Bochs patch, provider admission, device/config action or detailed guest logging; pause for a fresh S admission. |
-| Exit Criteria | Committed inventory/map or durable source evidence blocker. |
+| Verification | Inspect launch-plan parsing and frozen handoff validation; run only the focused pre-CPU/profile acceptance check if already present; documentation governance and `git diff --check`. |
+| Expected Markers | Exact one-slot acceptance or pre-CPU rejection point, named owner, and a next-slice recommendation; no `54:11` runtime claim. |
+| Asset Needs | Existing T194 fixtures and checked-in sources only; no new guest artifact or host capability. |
+| Reporting Requirements | Distinguish profile/CLI rejection, adapter boundary rejection and engine-composition rejection; preserve v5 as control. |
+| Stop Conditions | Any need for source change, fresh engine link, Bochs change, new provider, device/config action, or CPU-loop observation; pause for a fresh S admission. |
+| Exit Criteria | Committed acceptance/rejection evidence with a bounded next action or durable blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
+| Similar-Issue Sweep | Compare v5 and v6 profile parsing, environment handoff, adapter launch-plan parsing and frozen engine validation; reject fallback to a second command or implicit terminal action. |
 
 ## Current Technical Baseline
 

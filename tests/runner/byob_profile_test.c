@@ -59,7 +59,7 @@ int main(void)
 {
     wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], himem[MAX_PATH], manifest[MAX_PATH];
     wchar_t target[MAX_PATH], quit[MAX_PATH];
-    char json[4096], valid_json[4096], snapshot_json[4096], inventory_json[4096], v5_json[4096], *marker;
+    char json[4096], valid_json[4096], snapshot_json[4096], inventory_json[4096], v5_json[4096], v6_json[4096], *marker;
     byob_profile_selection selection;
     byob_image image = { NULL, 0u };
     int failed = 0;
@@ -171,6 +171,23 @@ int main(void)
     if (marker == NULL) failed = 1; else marker[0] = 'x';
     failed |= !write_text_file(manifest, v5_json) ||
         byob_profile_validate_file(manifest, root) != BYOB_PROFILE_ROLE_MISSING_OR_DUPLICATE;
+    snprintf(v6_json, sizeof(v6_json),
+        "{\"schema\":\"ntdos64-byob-profile-v6\",\"profile\":\"nt4-en-us-command-normal-return-v6\","
+        "\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"owned-test-set\","
+        "\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},"
+        "{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},"
+        "{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},"
+        "{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null}],"
+        "\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},"
+        "\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}},"
+        "\"guest_declared_targets\":[{\"role\":\"target\",\"placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2}}],"
+        "\"guest_search_metadata\":{\"command\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":33},\"target\":{\"attributes\":32,\"dos_time\":2,\"dos_date\":34},\"config\":{\"attributes\":32,\"dos_time\":3,\"dos_date\":35},\"autoexec\":{\"attributes\":32,\"dos_time\":4,\"dos_date\":36}}}",
+        sha256_abc, sha256_abc, sha256_abc, sha256_abc);
+    failed |= !write_text_file(manifest, v6_json) ||
+        byob_profile_validate_file_select(manifest, root, &selection) != BYOB_PROFILE_ACCEPTED ||
+        selection.declared_target_count != 1u || selection.declared_targets[0].terminal != 0u ||
+        wcscmp(selection.declared_targets[0].placement.path, L"\\TARGET.COM") != 0 ||
+        selection.terminal_quit.file_name[0] != L'\0';
     marker = strstr(json, "\"guest_search_metadata\"");
     if (marker == NULL) failed = 1; else marker[0] = 'x';
     failed |= !write_text_file(manifest, json) ||

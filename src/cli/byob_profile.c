@@ -661,7 +661,8 @@ static int json_declared_targets(json_cursor *cursor, byob_profile_document *doc
         first = 0;
         json_space(cursor);
     }
-    return json_take(cursor, ']') && document->declared_target_count == BYOB_PROFILE_MAX_DECLARED_TARGETS;
+    return json_take(cursor, ']') && document->declared_target_count != 0u &&
+        document->declared_target_count <= BYOB_PROFILE_MAX_DECLARED_TARGETS;
 }
 
 static int json_boot_file(json_cursor *cursor, byob_guest_artifact_placement *placement,
@@ -962,12 +963,14 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         strcmp(document->profile, "nt4-en-us-command-smoke-v4") == 0;
     int is_v5 = strcmp(document->schema, "ntdos64-byob-profile-v5") == 0 &&
         strcmp(document->profile, "nt4-en-us-command-smoke-v5") == 0;
+    int is_v6 = strcmp(document->schema, "ntdos64-byob-profile-v6") == 0 &&
+        strcmp(document->profile, "nt4-en-us-command-normal-return-v6") == 0;
     const byob_component *target_component = NULL, *terminal_quit_component = NULL;
-    if ((!is_v1 && !is_v2 && !is_v3 && !is_v4 && !is_v5) ||
+    if ((!is_v1 && !is_v2 && !is_v3 && !is_v4 && !is_v5 && !is_v6) ||
         strcmp(document->architecture, "x86") != 0 || strcmp(document->locale, "en-US") != 0) {
         return BYOB_PROFILE_TARGET_MISMATCH;
     }
-    if ((is_v2 || is_v3 || is_v4 || is_v5) && (!document->has_command_placement || !document->has_guest_boot_files ||
+    if ((is_v2 || is_v3 || is_v4 || is_v5 || is_v6) && (!document->has_command_placement || !document->has_guest_boot_files ||
         strcmp(document->command_placement.path, "\\COMMAND.COM") != 0 ||
         strcmp(document->config_file.path, "\\CONFIG.SYS") != 0 ||
         strcmp(document->autoexec_file.path, "\\AUTOEXEC.BAT") != 0))
@@ -979,7 +982,11 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         strcmp(document->declared_targets[0].role, "target") != 0 ||
         strcmp(document->declared_targets[1].role, "terminal-quit") != 0))
         return BYOB_PROFILE_FORMAT_INVALID;
-    if ((is_v4 || is_v5) && !document->has_guest_search_metadata)
+    if (is_v6 && (!document->has_declared_targets || !document->has_guest_search_metadata ||
+        document->declared_target_count != 1u ||
+        strcmp(document->declared_targets[0].role, "target") != 0))
+        return BYOB_PROFILE_FORMAT_INVALID;
+    if ((is_v4 || is_v5 || is_v6) && !document->has_guest_search_metadata)
         return BYOB_PROFILE_FORMAT_INVALID;
     if (document->compatibility_group[0] == '\0') return BYOB_PROFILE_COMPATIBILITY_GROUP_MISMATCH;
     for (index = 0u; index < document->machine_observation_count; ++index) {
@@ -1117,7 +1124,7 @@ static byob_profile_result validate_document(const byob_profile_document *docume
             document->host_drive_inventory.types,
             sizeof(selection->host_drive_inventory.types));
     }
-    if (selection != NULL && (is_v2 || is_v3 || is_v4 || is_v5)) {
+    if (selection != NULL && (is_v2 || is_v3 || is_v4 || is_v5 || is_v6)) {
         if (!ascii_to_wide(document->command_placement.path,
                 selection->command_placement.path,
                 sizeof(selection->command_placement.path) /
@@ -1141,7 +1148,7 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         wchar_t name[64], hash[65];
         size_t prior;
         unsigned int feature;
-        if (strcmp(component->role, "target") == 0 && (is_v3 || is_v4 || is_v5) &&
+        if (strcmp(component->role, "target") == 0 && (is_v3 || is_v4 || is_v5 || is_v6) &&
             (strcmp(component->file_name, "TARGET.COM") == 0 ||
              strcmp(component->file_name, "TARGET.EXE") == 0)) {
             canonical = component->file_name;
@@ -1176,7 +1183,7 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         if (strcmp(component->role, "target") == 0 && component->required) required_roles |= 8u;
         if (strcmp(component->role, "terminal-quit") == 0 && component->required) required_roles |= 16u;
     }
-    if (required_roles != (is_v5 ? 31u : ((is_v3 || is_v4) ? 15u : 7u))) return BYOB_PROFILE_ROLE_MISSING_OR_DUPLICATE;
+    if (required_roles != (is_v5 ? 31u : (is_v6 || is_v3 || is_v4 ? 15u : 7u))) return BYOB_PROFILE_ROLE_MISSING_OR_DUPLICATE;
     if ((is_v3 || is_v4) && (target_component == NULL ||
         strcmp(document->target_placement.path,
             strcmp(target_component->file_name, "TARGET.COM") == 0 ? "\\TARGET.COM" : "\\TARGET.EXE") != 0 ||
@@ -1192,6 +1199,11 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         strcmp(document->declared_targets[1].placement.path, "\\QUIT.COM") != 0 ||
         document->declared_targets[0].placement.drive_index != document->command_placement.drive_index ||
         document->declared_targets[1].placement.drive_index != document->command_placement.drive_index))
+        return BYOB_PROFILE_FORMAT_INVALID;
+    if (is_v6 && (target_component == NULL ||
+        strcmp(document->declared_targets[0].placement.path,
+            strcmp(target_component->file_name, "TARGET.COM") == 0 ? "\\TARGET.COM" : "\\TARGET.EXE") != 0 ||
+        document->declared_targets[0].placement.drive_index != document->command_placement.drive_index))
         return BYOB_PROFILE_FORMAT_INVALID;
     for (index = 0u; index < document->component_count; ++index) {
         const byob_component *component = &document->components[index];
@@ -1218,7 +1230,7 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         selection->target_placement.drive_index = document->target_placement.drive_index;
         selection->has_target_placement = 1u;
     }
-    if (selection != NULL && (is_v4 || is_v5)) {
+    if (selection != NULL && (is_v4 || is_v5 || is_v6)) {
         selection->has_guest_search_metadata = 1u;
         selection->command_metadata.attributes = document->command_metadata.attributes;
         selection->command_metadata.dos_time = document->command_metadata.dos_time;
@@ -1233,14 +1245,14 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         selection->autoexec_metadata.dos_time = document->autoexec_metadata.dos_time;
         selection->autoexec_metadata.dos_date = document->autoexec_metadata.dos_date;
     }
-    if (selection != NULL && is_v5) {
+    if (selection != NULL && (is_v5 || is_v6)) {
         uint32_t slot;
         selection->has_guest_search_metadata = 1u;
         selection->terminal_quit_metadata.attributes = document->terminal_quit_metadata.attributes;
         selection->terminal_quit_metadata.dos_time = document->terminal_quit_metadata.dos_time;
         selection->terminal_quit_metadata.dos_date = document->terminal_quit_metadata.dos_date;
-        selection->declared_target_count = 2u;
-        for (slot = 0u; slot < 2u; ++slot) {
+        selection->declared_target_count = is_v5 ? 2u : 1u;
+        for (slot = 0u; slot < selection->declared_target_count; ++slot) {
             const byob_component_descriptor *component = slot == 0u ? &selection->target : &selection->terminal_quit;
             selection->declared_targets[slot].component = *component;
             selection->declared_targets[slot].terminal = slot == 1u ? 1u : 0u;

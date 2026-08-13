@@ -823,6 +823,7 @@ int bx_ntvdm_adapter_runtime_v4_dispatch(
     }
     if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x01u) &&
         bx_ntvdm_cmd_get_next_v1_prepare(&bx_ntvdm_adapter_runtime.cmd_get_next,
+            &bx_ntvdm_adapter_runtime.launch_plan,
             event, cpu_before, window, action)) {
         if (bx_ntvdm_host_session_v1_queue_guest_gather_read(
                 &bx_ntvdm_adapter_runtime.session, event, cpu_before, action)) return 1;

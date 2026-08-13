@@ -35,7 +35,8 @@ static int path(const bx_ntvdm_readonly_namespace_v1 *ns, const byob_launch_decl
     const wchar_t *name;
     uint32_t used = 0u;
     if (!ns || !launch || !out || !out_bytes || !out_extension || ns->drive_index >= 26u ||
-        slot >= 2u || ns->file_count != 5u || ns->files[3u + slot].bytes == 0 ||
+        slot >= 2u || ns->file_count < 4u + slot || ns->file_count > 5u ||
+        ns->files[3u + slot].bytes == 0 ||
         ns->files[3u + slot].byte_count == 0u) return 0;
     name = slot == 0u ? (launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L"TARGET.COM" :
         launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE ? L"TARGET.EXE" : 0) : L"QUIT.COM";
@@ -78,11 +79,13 @@ int bx_ntvdm_cmd_return_exit_code_v1_dispatch(bx_ntvdm_cmd_get_next_state_v1 *st
     return 1;
 }
 int bx_ntvdm_cmd_get_next_v1_prepare(const bx_ntvdm_cmd_get_next_state_v1 *state,
+    const byob_launch_plan_v2 *plan,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_guest_gather_read_action_v1 *action)
 {
     bx_ntvdm_guest_range range; uint64_t address;
-    if (!state || state->delivered >= 2u || !action || !match(event, cpu, window) ||
+    if (!state || !plan || (plan->slot_count != 1u && plan->slot_count != 2u) ||
+        state->delivered >= plan->slot_count || !action || !match(event, cpu, window) ||
         !physical(cpu->ds, (uint16_t)cpu->edx, BX_NTVDM_CMDINFO_V1_BYTES, &address)) return 0;
     range.address = address; range.length = BX_NTVDM_CMDINFO_V1_BYTES;
     return bx_ntvdm_guest_gather_read_action_v1_need_read_resume(action, &range, 1u, event->fault_rip + 4u);
@@ -97,7 +100,8 @@ int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
     byob_launch_declaration_v1 launch; bx_ntvdm_cmdinfo_v1 info; uint8_t executable[16], command[130], two[2], zero2[2] = {0,0}, zero4[4] = {0,0,0,0};
     const char *command_name; uint32_t executable_bytes, command_count, command_bytes, used = 0u; uint16_t extension, count; uint64_t address;
     if (!ns || !plan || !drives || !reg || !state || !event || !cpu || !action || !bytes || !t || !payload ||
-        state->delivered >= 2u || plan->slot_count != 2u || plan->version != 2u) return 0;
+        state->delivered >= plan->slot_count ||
+        (plan->slot_count != 1u && plan->slot_count != 2u) || plan->version != 2u) return 0;
     launch = plan->first;
     if (state->delivered == 1u) { memset(&launch, 0, sizeof(launch)); launch.version = 1u; launch.target_kind = BYOB_LAUNCH_TARGET_KIND_V1_COM; }
     if (launch.tail_bytes > 118u || !path(ns, &launch, state->delivered, executable, &executable_bytes, &extension) ||

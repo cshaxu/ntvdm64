@@ -15,6 +15,7 @@ int main(void)
     bx_ntvdm_guest_gather_read_action_v1 a; bx_ntvdm_multi_write_transaction_v1 t;
     uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD], record[36] = {0}, types[26] = {0};
     const uint8_t bop[] = {0xc4,0xc4,0x54,1};
+    const uint8_t returned_bop[] = {0xc4,0xc4,0x54,0x11};
     types[2] = 3u;
     if (!bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(4),types,0,0,&drives)) return 1;
     ns.drive_index = 2u; ns.file_count = 5u;
@@ -24,15 +25,27 @@ int main(void)
     bx_ntvdm_instruction_window_v1_capture(&w,bop,sizeof(bop));
     record[8]=0x30; record[10]=0x40; record[12]=128; record[28]=0x50; record[30]=0x60; record[32]=17; record[33]=1;
     bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
-    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&e,&c,&w,&a) ||
+    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
         memcmp(payload + 1u,"TARGET /c smoke\r\n",17u) != 0) return 2;
     bx_ntvdm_cmd_get_next_state_v1_commit(&state);
-    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&e,&c,&w,&a) ||
+    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
         memcmp(payload + 1u,"QUIT\r\n",6u) != 0) return 3;
     bx_ntvdm_cmd_get_next_state_v1_commit(&state);
-    if (bx_ntvdm_cmd_get_next_v1_prepare(&state,&e,&c,&w,&a)) return 4;
-    puts("bx-ntvdm COMMAND immutable two-slot lifecycle: TARGET then QUIT verified");
+    if (bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a)) return 4;
+    plan.slot_count = 1u;
+    bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
+    ns.file_count = 4u;
+    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
+        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload)) return 5;
+    bx_ntvdm_cmd_get_next_state_v1_commit(&state);
+    if (bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
+        bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&e,&c,&w,&t.result)) return 6;
+    bx_ntvdm_instruction_window_v1_capture(&w,returned_bop,sizeof(returned_bop));
+    if (!bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&e,&c,&w,&t.result) ||
+        t.result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || state.returned != 1u ||
+        bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&e,&c,&w,&t.result)) return 7;
+    puts("bx-ntvdm COMMAND target/terminal and single-target return lifecycles verified");
     return 0;
 }
