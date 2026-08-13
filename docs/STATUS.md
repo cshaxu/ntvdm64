@@ -5,9 +5,9 @@
 > **Current effective packet: M0 T198 S26.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S26 -- recover the original DEM error-lock registration
-through the existing source-derived provider, then observe the next real guest
-boundary.**
+**Active: M0 T198 S26 -- recover the source-proven DEM initialization trio
+`50:32 -> 50:45 -> 50:0F` through its existing provider planes, then stop
+under observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -25,18 +25,18 @@ boundary.**
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T198 S26, Ordinary Mode. |
-| Admission And Approval | S25 P3's exact source-built NTIO/NTDOS run reached original `50:32` after a completed `50:1B` DTA registration. The owner-approved continuing T198 objective authorizes source-led recovery through the existing global provider structure. |
-| Objective | Classify original `SVC_DEMSETHARDERRORINFO` (`50:32`), route it only through its existing source-derived provider and DEM error-lock ownership, preserve both checked guest locations, and observe the next real BOP or bounded terminal. |
-| Non-goals | No new host hard-error policy, retry/error-dialog capability, Bochs/mantle semantic change, guest-image patch, legacy runtime linkage, ambient path access, or COMMAND/DOS continuity claim. |
-| Reference Baseline | S25 P3 exact input/run and OpenNT `dossvc.h`, `demdisp.c`, `demerror.c`; existing `bx_ntvdm_dem_hard_error_service_v1` focused test. |
-| Files And ABI Surface | `bx-vdm` DEM error-lock composition/fixture and CPU5 native observation only; no new core, mantle, selector or host capability ABI. |
+| Admission And Approval | S25 P3's exact source-built NTIO/NTDOS run reached original `50:32` after a completed `50:1B` DTA registration. Its original continuations are `50:45` and `50:0F`; the owner-approved continuing T198 objective authorizes source-led recovery through the already inventoried global provider planes. |
+| Objective | Recover original `SVC_DEMSETHARDERRORINFO` (`50:32`), non-debug `SVC_DEMSYSTEMSYMBOLOP` (`50:45`), and `SVC_DEMGETDRIVES` (`50:0F`) with their existing source-derived providers, then stop immediately after the drive result. |
+| Non-goals | No host hard-error policy, retry/error-dialog capability, symbol backend/debugger, guest-time host drive scan, new host capability ABI, Bochs/mantle semantic change, guest-image patch, legacy runtime linkage, ambient path access, or COMMAND/DOS continuity claim. |
+| Reference Baseline | S25 P3 exact input/run; OpenNT `dossvc.h`, `demdisp.c`, `demerror.c`, `demmisc.c`, `demgset.c`; existing hard-error and immutable drive-snapshot provider tests. |
+| Files And ABI Surface | `bx-vdm` DEM error-lock/MISC/GSET composition and CPU5 native observation only. GSET consumes the existing copied CLI drive-snapshot ABI; no new core, mantle, selector, or host capability ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` focused provider/composition regression and exact CPU5 native NTIO/NTDOS run; `50:32` records two validated real-mode physical locators and `RIP+4`, then trace records the first later BOP or typed terminal. Boundary scans prove selector semantics stay in `bx-vdm`. |
-| Expected Markers | OpenNT error-lock ownership, existing provider precedence, two fixed-width locations, typed resume, next boundary/terminal, and no newly enabled selector. |
+| Verification | MSVC x64 `/MT` focused provider/composition regression and exact CPU5 native NTIO/NTDOS run; `50:32` registers two locations, `50:45` takes only the non-debug no-state path, and `50:0F` consumes a prebuilt one-entry C drive snapshot, writes the original count/CF result, and enters a typed controlled stop. Boundary scans prove selector semantics stay in `bx-vdm`. |
+| Expected Markers | Error-lock ownership, non-debug symbol disposition, existing GSET provider precedence, copied snapshot, typed resumes/stop, and no newly enabled selector. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original function/dispatcher/caller mapping, two-location contract, provider disposition, native continuation, later boundary or terminal, and ownership limit. |
-| Stop Conditions | The existing provider does not match the original contract, recovery requires host error handling or retry semantics, a guest-image patch is needed, or core/mantle behavior would need to change. Preserve evidence and re-admit. |
-| Exit Criteria | Exact original NTIO/NTDOS native-runs through `50:32` using the existing constrained provider and records its next real BOP or bounded terminal without claiming hard-error handling or DOS boot. |
+| Reporting Requirements | Record original function/dispatcher/caller mapping, locations/no-op/snapshot contracts, provider dispositions, native stop, and ownership limit. |
+| Stop Conditions | A provider needs hard-error policy, symbol/debugger state, guest-time host scan, a guest-image patch, or core/mantle behavior change. Preserve evidence and re-admit. |
+| Exit Criteria | Exact original NTIO/NTDOS native-runs through `50:32`, `50:45`, and `50:0F`, then reaches the fixture's controlled stop without claiming hard-error handling, symbol debugging, host-drive discovery, or DOS boot. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -253,6 +253,10 @@ boundary.**
 - M0 T198 S26 P1 composes original DEM error-lock registration `50:32` through
   its existing two-locator provider and reaches the next unimplemented
   boundary `50:45`; see [S26 P1](etc/research/t198-s26-p1-dem-error-lock-native-001.md).
+- M0 T198 S26 P2 composes non-debug `50:45` and snapshot-backed `50:0F`, then
+  reaches the fixture's controlled stop; a separately retained extension run
+  exposes an unmapped VGA machine frontier rather than authorizing devices.
+  See [S26 P2](etc/research/t198-s26-p2-dem-init-trio-native-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

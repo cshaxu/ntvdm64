@@ -2,6 +2,7 @@
 
 #include "bx_ntvdm_dem_debug_service.h"
 #include "bx_ntvdm_dem_plane_v1.h"
+#include "bx_ntvdm_dem_system_symbol_service.h"
 
 int bx_ntvdm_dem_misc_plane_v1_dispatch(
     const bx_ntvdm_bop_ingress_v1 *ingress,
@@ -23,6 +24,8 @@ int bx_ntvdm_dem_misc_plane_v1_dispatch(
      * source contract; composition never dispatches a raw service number. */
     switch (record.service) {
     case 0x3bu: return bx_ntvdm_dem_debug_service_v1_dispatch(event,
+        cpu_before, window, result);
+    case 0x45u: return bx_ntvdm_dem_system_symbol_service_v1_dispatch(event,
         cpu_before, window, result);
     default: return 0;
     }

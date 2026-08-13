@@ -68,6 +68,7 @@ int bx_ntvdm_boot_namespace_composition_v1_initialize(
     value->abi_version = BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION;
     value->struct_bytes = sizeof(*value); value->bound = 0; bx_ntvdm_command_launch_plane_v1_clear(&value->launch);
     bx_ntvdm_dem_error_lock_plane_v1_clear(&value->error_lock);
+    bx_ntvdm_dem_gset_plane_v1_clear(&value->gset);
     return valid(value);
 }
 
@@ -83,6 +84,14 @@ void bx_ntvdm_boot_namespace_composition_v1_unbind(
 {
     if (value && active == value) active = 0;
     if (value && valid(value)) value->bound = 0;
+}
+
+int bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
+    bx_ntvdm_boot_namespace_composition_v1 *value,
+    const bx_ntvdm_host_drive_snapshot_v1 *snapshot)
+{
+    return valid(value) && !value->bound &&
+        bx_ntvdm_dem_gset_plane_v1_set_drive_snapshot(&value->gset, snapshot);
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_handle(
@@ -122,6 +131,9 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     }
     if (bx_ntvdm_dem_error_lock_plane_v1_dispatch(&active->error_lock,
             &ingress, &selection, &boundary, &cpu, &window, &result))
+        return outcome(&result, value);
+    if (bx_ntvdm_dem_gset_plane_v1_dispatch(&active->gset, &ingress,
+            &selection, &boundary, &cpu, &window, &result))
         return outcome(&result, value);
     if (bx_ntvdm_command_launch_plane_v1_dispatch(&active->launch, &ingress,
             &selection, &boundary, &cpu, &window, &result)) return outcome(&result, value);
