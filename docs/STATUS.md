@@ -211,6 +211,9 @@ pre-entry request and prove the first existing `50:11` boundary.**
   x64 `/MT`: it copies only the exact `0x8400` image into mantle v2 and
   source-locks `0x700`, `0x714`, `0070:0000`; execution is pending. See
   [S23 P1 builder record](etc/research/t198-s23-p1-ntio-request-builder-001.md).
+- M0 T198 S23 P2 native-runs the exact source-built NTIO through `0070:0000`
+  and observes real `50:11` before a later adapter STOP; see [S23 P2
+  witness](etc/research/t198-s23-p2-native-ntio-first-boundary-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

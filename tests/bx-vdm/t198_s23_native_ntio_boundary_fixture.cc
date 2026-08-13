@@ -1,0 +1,32 @@
+#include "bochs.h"
+#include "bx-mantle/bx_ntvdm_finite_run.h"
+#include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx-vdm/bx_ntvdm_ntio_preentry_v1.h"
+#include <stdio.h>
+#include <string.h>
+
+extern const Bit8u t198_s23_ntio_bytes[0x8400];
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_5011(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_stop(void);
+
+int main()
+{
+  static Bit8u ntdos_bytes[0x6cd2]; static uint8_t command[] = {0x90,0xc3};
+  static uint8_t target[] = {0xf4}; byob_image ntio={ (uint8_t*)t198_s23_ntio_bytes,0x8400};
+  byob_image ntdos={ntdos_bytes,sizeof(ntdos_bytes)}, cmd={command,sizeof(command)}, tgt={target,sizeof(target)};
+  byob_profile_selection p; bx_ntvdm_boot_namespace_composition_v1 c;
+  static bx_ntvdm_finite_run_request r; int status;
+  memset(&p,0,sizeof(p)); ntdos_bytes[0]=0xf4; p.ntio.bytes=0x8400; p.ntdos.bytes=sizeof(ntdos_bytes);
+  memcpy(p.command_placement.path,L"\\COMMAND.COM",sizeof(L"\\COMMAND.COM"));p.command_placement.drive_index=2;p.has_command_placement=1;
+  memcpy(p.target_placement.path,L"\\TARGET.COM",sizeof(L"\\TARGET.COM"));p.target_placement.drive_index=2;p.has_target_placement=1;
+  memcpy(p.target.file_name,L"TARGET.COM",sizeof(L"TARGET.COM"));p.has_guest_boot_files=p.has_guest_search_metadata=1;
+  memcpy(p.config_file.path,L"\\CONFIG.SYS",sizeof(L"\\CONFIG.SYS"));p.config_file.materialization=BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;
+  memcpy(p.autoexec_file.path,L"\\AUTOEXEC.BAT",sizeof(L"\\AUTOEXEC.BAT"));p.autoexec_file.materialization=BYOB_GUEST_BOOT_FILE_EMPTY_V1;
+  p.command_metadata.attributes=p.target_metadata.attributes=p.config_metadata.attributes=p.autoexec_metadata.attributes=0x20;
+  p.command_metadata.dos_date=p.target_metadata.dos_date=p.config_metadata.dos_date=p.autoexec_metadata.dos_date=1;
+  if(!bx_ntvdm_boot_namespace_composition_v1_initialize(&c,&ntdos,&cmd,&tgt,0,&p)||!bx_ntvdm_boot_namespace_composition_v1_bind(&c)||!bx_ntvdm_ntio_preentry_v1_prepare(&ntio,&p.ntio,&r,8192,1000000))return 1;
+  status=(int)bx_ntvdm_run_finite_bare_bytes(&r); bx_ntvdm_boot_namespace_composition_v1_unbind(&c);
+  fprintf(stderr,"t198-s23 status=%d observed-5011=%u observed-stop=%u\n",status,
+    t198_s23_native_ntio_boundary_observed_5011(),t198_s23_native_ntio_boundary_observed_stop());
+  return status==BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP && t198_s23_native_ntio_boundary_observed_5011() && t198_s23_native_ntio_boundary_observed_stop()?0:2;
+}
