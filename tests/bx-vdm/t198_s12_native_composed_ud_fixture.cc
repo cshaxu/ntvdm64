@@ -4,12 +4,16 @@
 
 #include <string.h>
 
+#ifndef BX_NTVDM_NATIVE_BOOT_SERVICE
+#define BX_NTVDM_NATIVE_BOOT_SERVICE 0x0c
+#endif
+
 int main()
 {
   /* `C4 C4` is the historical BOP #UD form.  The following HLT gives the
    * already finite native runner its existing selector-blind terminal path
    * after the adapter returns the original typed RESUME. */
-  static const Bit8u bytes[] = { 0xc4, 0xc4, 0x54, 0x0c, 0xf4 };
+  static const Bit8u bytes[] = { 0xc4, 0xc4, 0x54, BX_NTVDM_NATIVE_BOOT_SERVICE, 0xf4 };
   static uint8_t command_bytes[] = { 0x90, 0xc3 };
   static uint8_t target_bytes[] = { 0xf4 };
   byob_image command = { command_bytes, sizeof(command_bytes) };

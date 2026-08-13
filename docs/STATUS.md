@@ -182,6 +182,9 @@ already implemented boot-namespace BOP plane.**
 - M0 T198 S18 P1 is complete: the existing DEM readonly lifecycle `50:12 ->
   50:16 -> 50:00 -> 50:02` now executes as one native real-mode transaction
   under the S17 x64 closure. See [S18 DEM witness](etc/research/t198-s18-native-dem-lifecycle-witness-001.md).
+- M0 T198 S18 P2 is complete: the sibling COMMAND `54:0D` boot-file service
+  now has a separate parameterized native fixture and x64 zero-exit witness;
+  see [S18 COMMAND witness](etc/research/t198-s18-native-command-bootfile-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
