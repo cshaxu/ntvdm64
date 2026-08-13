@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S45.** Its governing brief is the active
+> **Current effective packet: M0 T198 S46.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S45 -- audit original split-at-`FFFF` strategy layout and
-retained CPU real-mode instruction-pointer behavior.**
+**Active: M0 T198 S46 -- reproduce one neutral real-mode instruction fetch
+across the `CS:FFFF` to `CS:0000` boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ retained CPU real-mode instruction-pointer behavior.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S45, Ordinary Mode. |
-| Admission And Approval | S44 observes `CALLDEVAD=BF1F:FFFF` and the same exact run reports `EIP [00010000] > CS.limit [0000ffff]`; original source identifies the first strategy instruction as a five-byte far routine. |
-| Objective | Determine, from original NTDOS/NTIO layout records and retained bx-core CPU fetch/decode/real-mode semantics, whether executing an original strategy at `CS:FFFF` requires a supported 16-bit IP wrap and whether the current prefetch diagnostic can explain the later trace. |
-| Non-goals | No Bochs, mantle, adapter, OpenNT, guest image, provider, BOP, device, firmware, CPU, memory, profile, CLI or build-recipe change; no new trace, configuration or repair. |
-| Reference Baseline | S42 provenance, S43 source map, S44 terminal witness, locked original strategy bytes, and current CPU5 source closure. |
-| Files And ABI Surface | Evidence and status/history records only. |
+| Identifier Mode | M0 T198 S46, Ordinary Mode. |
+| Admission And Approval | S45 proves the precise generic code-fetch candidate: a five-byte 16-bit instruction begins at `CS:FFFF`, while upstream-retained CPU sequential execution retains `EIP=0x10000` and prefetch rejects it. |
+| Objective | Build and run a neutral CPU5 finite fixture whose only guest bytes are a valid five-byte 16-bit instruction split at one real-mode segment boundary and a controlled terminal instruction at `CS:0004`; report whether the current core reaches that terminal state. |
+| Non-goals | No change to bx-core, bx-mantle, bx-vdm, OpenNT, guest-image, provider, BOP, device, firmware, profile, CLI or production build; no NTDOS/NTIO input, selector, service, host capability or repair. |
+| Reference Baseline | S45 CPU path audit, existing finite runner/mechanical pre-entry action, neutral HLT fixture pattern, and CPU5 x64 `/MT` closure. |
+| Files And ABI Surface | New test fixture and local build recipe/evidence only; no product ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Produce a source-to-fetch-path table with exact instructions, CS/IP width rules, and an explicit supported/unsupported/disproved classification. |
-| Expected Markers | Original strategy byte placement, IP transition calculation, retained CPU path, diagnostic correlation and a justified disposition. |
+| Verification | Compile and link the full existing CPU5 closure under MSVC x64 `/MT`; the fixture must retain no OpenNT/BOP/provider dependency, demonstrate disabled/default helper state, and either reach the specified controlled terminal or record the exact native mechanical failure. |
+| Expected Markers | `CS:FFFF` split input, `CS:0004` expected terminal location, exact run status and source-boundary scan. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Separate original guest expectation, retained core behavior and inference; name any necessary mechanical follow-up without implementing it. |
-| Stop Conditions | Source cannot prove target byte layout or retained CPU path cannot be correlated; document the gap rather than modifying a core rule. |
-| Exit Criteria | An evidence-backed decision whether a narrowly bounded core mechanics repair investigation is warranted. |
+| Reporting Requirements | Record bytes, real-mode entry state, expected/actual result, exact toolchain/closure and a repair admission decision. |
+| Stop Conditions | The fixture needs a Bochs code change, an OpenNT input, a BOP semantic, a device, or a new general memory primitive. Stop and re-admit rather than expanding scope. |
+| Exit Criteria | A repeatable neutral result that distinguishes a core fetch/width failure from the original guest composition. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -340,6 +340,10 @@ retained CPU real-mode instruction-pointer behavior.**
   `CALLDEVAD=BF1F:FFFF`, moving the remaining question to original
   end-of-segment execution continuity. See [S44 terminal
   witness](etc/research/t198-s44-call-dev-ad-terminal-witness-001.md).
+- M0 T198 S45 is complete: the original split-at-`FFFF` strategy layout and
+  unchanged upstream CPU prefetch path correlate with the `EIP=0x10000`
+  diagnostic; a neutral reproduction is required before repair. See [S45
+  source audit](etc/research/t198-s45-realmode-ip-wrap-source-audit-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
