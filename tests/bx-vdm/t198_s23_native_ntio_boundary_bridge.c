@@ -31,6 +31,10 @@ static uint16_t observed_spckbd_cs, observed_spckbd_ds, observed_spckbd_es;
 static uint32_t observed_spckbd_eip, observed_spckbd_eax, observed_spckbd_ebx,
     observed_spckbd_ecx, observed_spckbd_edx, observed_spckbd_esi,
     observed_spckbd_edi, observed_spckbd_eflags;
+static unsigned observed_emm_probe;
+static uint16_t observed_emm_probe_cs, observed_emm_probe_ds;
+static uint32_t observed_emm_probe_eip, observed_emm_probe_eax,
+    observed_emm_probe_ebx, observed_emm_probe_edx, observed_emm_probe_eflags;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -136,6 +140,14 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_spckbd_edx = event->edx; observed_spckbd_esi = event->esi;
         observed_spckbd_edi = event->edi; observed_spckbd_eflags = event->eflags;
     }
+    if (!observed_emm_probe && event->window_bytes >= 3u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0x66u) {
+        observed_emm_probe = 1u; observed_emm_probe_cs = event->cs;
+        observed_emm_probe_ds = event->ds; observed_emm_probe_eip = event->eip;
+        observed_emm_probe_eax = event->eax; observed_emm_probe_ebx = event->ebx;
+        observed_emm_probe_edx = event->edx; observed_emm_probe_eflags = event->eflags;
+    }
     if (!observed_fast_read && event->window_bytes >= 4u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
         event->window[2] == 0x50u && event->window[3] == 0x42u) {
@@ -234,3 +246,11 @@ unsigned t198_s23_native_ntio_boundary_observed_spckbd_edx(void) { return observ
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_esi(void) { return observed_spckbd_esi; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_edi(void) { return observed_spckbd_edi; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_eflags(void) { return observed_spckbd_eflags; }
+unsigned t198_s23_native_ntio_boundary_observed_emm_probe(void) { return observed_emm_probe; }
+unsigned t198_s23_native_ntio_boundary_observed_emm_probe_cs(void) { return observed_emm_probe_cs; }
+unsigned t198_s23_native_ntio_boundary_observed_emm_probe_ds(void) { return observed_emm_probe_ds; }
+unsigned t198_s23_native_ntio_boundary_observed_emm_probe_eip(void) { return observed_emm_probe_eip; }
+unsigned t198_s23_native_ntio_boundary_observed_emm_probe_eax(void) { return observed_emm_probe_eax; }
+unsigned t198_s23_native_ntio_boundary_observed_emm_probe_ebx(void) { return observed_emm_probe_ebx; }
+unsigned t198_s23_native_ntio_boundary_observed_emm_probe_edx(void) { return observed_emm_probe_edx; }
+unsigned t198_s23_native_ntio_boundary_observed_emm_probe_eflags(void) { return observed_emm_probe_eflags; }

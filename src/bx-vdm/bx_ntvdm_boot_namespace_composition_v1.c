@@ -1,4 +1,5 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx_ntvdm_emm_unavailable_service.h"
 #include "bx_ntvdm_spckbd_init_service.h"
 #include "bx_ntvdm_bios_memory_service.h"
 #include "bx_ntvdm_dem_boot_drive_service.h"
@@ -150,6 +151,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
      * This provider retains only that continuation; keyboard mechanics remain
      * outside this composition. */
     if (bx_ntvdm_spckbd_init_service_v1_dispatch(&boundary, &cpu, &window,
+            &result)) return outcome(&result, value);
+    if (bx_ntvdm_emm_unavailable_service_v1_dispatch(&boundary, &cpu, &window,
             &result)) return outcome(&result, value);
     /* This composition admits only the source-observed top-level memory
      * queries: BIOS 12h and BIOS 15h/AH=88h. */
