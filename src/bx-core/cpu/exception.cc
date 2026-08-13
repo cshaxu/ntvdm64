@@ -49,6 +49,9 @@
 #include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
 #endif
 
+// Retired product-composition evidence.  It is intentionally excluded from
+// the finite core translation unit while its provider sources are rehomed.
+#if 0
 #if BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN
 #include "bx_ntvdm_adapter_runtime.h"
 #include "bx_ntvdm_exception_intercept.h"
@@ -542,6 +545,7 @@ static bx_bool bx_ntvdm_try_intercept_ud(
   return 1;
 }
 #endif
+#endif // retired product-composition evidence
 
 #include "param_names.h"
 #include "iodev/iodev.h"
