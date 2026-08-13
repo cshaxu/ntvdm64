@@ -4,9 +4,11 @@
 
 S74/S76 instruction history records a far transfer from `073B:0939` to
 `C000:014A`; the predecessor bytes begin `EA 4A 01 00 C0`. The resulting #UD
-is real mode and its copied window begins `15 FF FF FF`. It is not a canonical
-adapter BOP window (`C4 C4 selector [service]`). The fixture correctly stops
-before composition when a copied #UD is not canonical BOP bytes.
+is real mode. Its display, `window=15:ffffffff`, means a 15-byte copied window
+whose bytes begin `FF FF FF FF`; `15` is a length, not an instruction byte.
+It is not a canonical adapter BOP window (`C4 C4 selector [service]`). The
+fixture correctly stops before composition when a copied #UD is not canonical
+BOP bytes.
 
 ## Machine lifecycle facts
 

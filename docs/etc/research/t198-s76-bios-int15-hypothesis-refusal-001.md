@@ -32,7 +32,8 @@ removed. No BOP 15 or BIOS semantic is added to `bx-vdm`, and no Bochs change
 is inferred.
 
 The next question is machine-owned: why does guest control transfer from
-`073B:0939` to `C000:014A`, and why does the native #UD capture begin at
-`15h`? It requires a source map of the C000 ROM mapping, guest IVT/control
-transfer and generic-UD instruction-window mechanics. Until that map proves a
-well-formed BOP, the existing controlled stop remains correct.
+`073B:0939` to `C000:014A`? In the display format above, the leading `15` is
+the copied-window length, not an instruction byte; the captured bytes begin
+`FF FF FF FF`. It requires a source map of the C000 ROM mapping, guest
+IVT/control transfer and generic-UD instruction-window mechanics. Until that
+map proves a well-formed BOP, the existing controlled stop remains correct.

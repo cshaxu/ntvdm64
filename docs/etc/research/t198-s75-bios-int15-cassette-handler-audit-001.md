@@ -1,5 +1,13 @@
 # M0 T198 S75: BIOS INT 15 Cassette-Handler Audit
 
+## Supersession
+
+This retained preflight is superseded as a runtime attribution by S76 and S77.
+The original `cassette_io` source map remains useful only if a future trace
+first observes a canonical `C4 C4 15` BOP. The copied event that triggered
+this audit was later correctly decoded as a 15-byte window beginning `FF FF
+FF FF`, not as `C4 C4 15`; no INT 15 BOP was observed.
+
 ## Reached call
 
 S74's copied generic event is a real-mode `C4 C4 15` BOP at `C000:014A` with

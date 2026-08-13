@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S78.** Its governing brief is the active
+> **Current effective packet: M0 T198 S79.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S78 -- map the minimum reached ROM/IVT provisioning closure
-before any further BOP service expansion.**
+**Active: M0 T198 S79 -- determine whether the missing reached machine-image
+bytes have a reproducible, source-authorized recovery path.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ before any further BOP service expansion.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S78, Ordinary Mode. |
-| Admission And Approval | S77 proves `C000:014A` is outside the current minimal-machine ROM input closure, not a canonical BOP; see `etc/research/t198-s77-c000-rom-window-provenance-audit-001.md`. |
-| Objective | Build a source-backed inventory of reached ROM/IVT vectors, byte/image availability, historical owner and initialization order; define the smallest mantle-owned machine-provisioning boundary needed to make the next reached path meaningful. |
-| Non-goals | No BOP service/provider expansion, generic BIOS/ROM emulation, device model, guest/CLI input change, detached runtime import, or Bochs core semantic edit. |
-| Reference Baseline | S77 audit; minimal-machine lifecycle; adopted core ROM mapping; OpenNT SoftPC ROM/reset and keyboard/vector sources. |
-| Files And ABI Surface | Audit/evidence and, only after closure selection, a versioned mantle-owned opaque machine-image provisioning contract; no adapter BOP semantics. |
+| Identifier Mode | M0 T198 S79, Ordinary Mode. |
+| Admission And Approval | S78 closes with an evidence-backed missing approved ROM payload at `C000:014A`; see `etc/research/t198-s78-minimum-rom-ivt-closure-map-001.md`. |
+| Objective | Determine whether the current approved source/checkouts contain a reproducible producer or a source-authorized, hashable input route for the missing reached ROM/initial-IVT bytes. |
+| Non-goals | No binary import, payload synthesis, BOP service/provider expansion, generic BIOS/ROM emulation, device model, guest/CLI input change, or Bochs core semantic edit. |
+| Reference Baseline | S78 closure map; source policy; OpenNT SoftPC ROM loader/resource records; current build manifests and source inventory. |
+| Files And ABI Surface | Evidence only, unless an already-approved source-built producer is proved. No runtime ABI, image descriptor, adapter route or build input is added. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace every reached ROM/vector transfer, compare to core mapping and historical initialization source, and record available/missing byte inputs plus a negative proof that adapter does not interpret them. |
-| Expected Markers | Owner-indexed ROM/IVT inventory, source/image availability, exact current gap, declared provisioning lifecycle and explicit excluded devices/BOP meaning. |
+| Verification | Search source/build/resource manifests for producers and payload records; distinguish resource-name references from generated outputs; run documentation governance and diff checks. |
+| Expected Markers | Producer-or-absence ledger, source-policy disposition, and explicit prohibition on treating a resource name as byte provenance. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record each image/vector source, bytes/provenance, lifecycle owner, dependency direction, candidate contract and all unavailable inputs. |
-| Stop Conditions | Required ROM bytes or initialization source are unavailable, or the proposed boundary introduces BIOS/DOS/BOP semantics into adapter/core. Stop and retain the controlled observation. |
-| Exit Criteria | A source-backed minimum machine-image closure plan or an evidence-backed unavailable-input block, with no service-plane scope expansion. |
+| Reporting Requirements | Record exact source/build inputs searched, any producer/output evidence, source-policy compatibility, and the disposition of every candidate. |
+| Stop Conditions | A candidate requires an unapproved binary import, detached historical product build, ambiguous provenance, or any BIOS/DOS/BOP semantics in adapter/core. Stop and retain the absent-input evidence. |
+| Exit Criteria | One reproducible, source-authorized producer/input plan, or a complete evidence-backed conclusion that the current approved checkout cannot supply the required bytes. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
+| Similar-Issue Sweep | Cover ROM resource names, generated/binary output references, IVT initialization sources, historical resource APIs, build manifests, overlays, and source-policy constraints. |
 
 ## Current Technical Baseline
 
@@ -384,6 +384,11 @@ before any further BOP service expansion.**
   selectors, service identities and BIOS forms without claiming runtime.
 - M0 T96 is closed: its real-path checkpoint exposes the original-unavailable
   DEM FASTREAD edge, without changing Bochs or fabricating a BOP outcome.
+- M0 T198 S78 corrects the retained #UD display interpretation:
+  `window=15:ffffffff` is a 15-byte window beginning `FF FF FF FF`, not BOP
+  `15h`. Its ROM/IVT closure map identifies absent approved ROM payloads as
+  the current machine-input gap; no BIOS/BOP route is added. See [S78 closure
+  map](etc/research/t198-s78-minimum-rom-ivt-closure-map-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
