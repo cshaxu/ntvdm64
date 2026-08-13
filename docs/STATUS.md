@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T197 S6.** Its governing brief is the active
+> **Current effective packet: M0 T198 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T197 S6 — define and execute one CPU5/Pentium-MMX minimal
-core/mantle build closure without reviving the Bochs product target.**
+**Active: M0 T198 S1 -- map the existing holistic BOP runtime composition
+onto the closed CPU5 core/mantle boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -14,36 +14,30 @@ core/mantle build closure without reviving the Bochs product target.**
 
 ## Active Packet
 
-> **T scope:** T197 extracts the smallest native Bochs lifecycle into the
-> `bx-core`/`bx-mantle` boundary and physically names the VDM adapter `bx-vdm`.
-> S1 is closed by `477283c`: it renamed the adapter and mapped the current
-> Bochs ownership surface. S2 is closed by `2fcbaac`: it created the physical
-> mantle root. S3 is closed by its first-core-closure record: it established
-> the exact pure-core trees and identified the root header/SIM product seam.
-> S4 is closed by `651c417`: it physically relocated the complete pure CPU,
-> FPU, memory and decode families. S5 is closed by the CPU5/Pentium-MMX finite
-> SIM provider: it removes the full product SIM from the minimal path and keeps
-> the original parameter/log support in the mantle. S6 creates its first real
-> object/link closure. Holistic BOP runtime closure remains the following T
-> package.
+> **T scope:** T198 is the second-stage, holistic BOP host-service and
+> machine-composition runtime package.  It composes the already inventoried
+> OpenNT selector/service/provider planes through `bx-vdm` against the closed
+> CPU5 `bx-core`/`bx-mantle` machine.  It does not create a per-service
+> interceptor program: ingress, routing, capability disposition and original
+> provider precedence remain global structures.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T197 S6, Ordinary Mode. |
-| Admission And Approval | S5 is source/static-boundary complete; `t197-s5-sim-mantle-seam-001.md` records the owner-confirmed CPU5/Pentium-MMX contract and the retained generated-config/MSVC host-shape mismatch. The owner has forbidden further full-Bochs build loops and permits only a named minimal closure. |
-| Objective | Produce a reproducible CPU5/non-x86-64 build projection and one explicit core/mantle object/link manifest, then compile the finite SIM/machine path without using `main.cc`, the product configuration parser, GUI/plugin/device archives or `bochs.exe`. |
-| Non-goals | No product configure repair, full `bochs.exe`, `main.cc`, GUI, plugin, firmware, BIOS, CMOS, device, BOP, OpenNT, DOS or host-capability behavior; no unlisted object/archive; no semantic source change solely to make a build pass. |
-| Reference Baseline | `960ca6d`; S5 evidence; the existing CPU5 generated configuration retained in `artifacts/build`; pinned Bochs 2.6 source. |
-| Files And ABI Surface | A new mantle build projection/manifest and only its listed core/mantle source inputs; Status, exception register and S6 evidence. No external machine or adapter ABI change. |
+| Identifier Mode | M0 T198 S1, Ordinary Mode. |
+| Admission And Approval | T197 is closed by `m0-t197-closure-20260813.md`. The owner-directed two-stage objective and selected queue head authorize this second-stage package; all architecture and source-policy restrictions remain binding. |
+| Objective | Produce one exact source/object/link/runtime map for the existing bounded BOP engine and identify how it can be recomposed with `bx-core`/`bx-mantle`, or the first source-backed execution-contract blocker. |
+| Non-goals | No individual BOP handler implementation, no new selector/service disposition, no BIOS/reset image, device, GUI, plugin, product build, adapter-to-Bochs semantic migration, OpenNT source import or guest-running claim. |
+| Reference Baseline | T197 closure; T96 BOP inventory/plane records; current `bx-vdm` source and existing bounded engine artifacts. |
+| Files And ABI Surface | T198 evidence/operation record, Status and read-only source/build inventories. No machine, CLI, provider or adapter ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Generated projection records every macro difference and requires CPU5/non-x86-64; manifest enumerates every compiled object and final unresolved/linked symbol; no forbidden product input is present; focused boundary tests, compilation logs, source scan, documentation governance and `git diff --check` pass. |
-| Expected Markers | A source-controlled CPU5 build projection, object/link manifest, and the first exact unresolved native lifecycle edge, if any. |
-| Asset Needs | Existing local repository and pinned local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record every projected macro, object, symbol edge, compiler invocation, retained product exclusion, source identity, test outcome and build limitation. |
-| Stop Conditions | A required source entails a product configuration/parser, GUI/plugin, firmware/device, VDM/BOP/OpenNT/DOS edge; an unlisted archive is needed; a semantic change or ABI change is proposed solely for build success; or the build input cannot stay CPU5/non-x86-64. Preserve evidence and re-admit. |
-| Exit Criteria | The stated object/link closure either builds with complete provenance or stops at one exact source-backed native edge, without broadening the candidate product surface. |
-| Original Owner Request | Find current Bochs core/mantle logic, use `git mv` to move pure core and pure mantle code directly, repair compilation, and decide only the remaining mixed links case by case. |
-| Similar-Issue Sweep | Cover CPU5 config macros, root headers, logging globals, parameter tree, PC time, port space, CPU/decode/FPU/memory objects, compiler host shape, linker symbols and retained Makefile/VS product metadata. |
+| Verification | Reconcile prior engine objects against physical T197 roots; map generic machine ingress/result contracts; scan that Bochs remains selector-blind; run focused existing BOP/boundary checks and documentation governance. |
+| Expected Markers | A source-backed current-engine composition map, explicit owner/disposition of every retained Bochs input, and one admitted next runtime closure slice or exact blocker. |
+| Asset Needs | Existing repository, local r12 evidence and retained source-built engine artifacts only; no network/import action. |
+| Reporting Requirements | Record exact toolchain/architecture/CRT, source/object/link inputs, ownership direction, old-path mismatch, trace applicability and every excluded product input. |
+| Stop Conditions | A map requires a product Bochs target, new device/firmware, selector recognition in Bochs, BOP/DOS semantics in mantle/core, direct old NT host APIs, new import, or any ABI change. Preserve evidence and re-admit. |
+| Exit Criteria | The existing BOP engine has a reproducible composition disposition against T197, with a single next closure slice that preserves global ingress/provider architecture. |
+| Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
+| Similar-Issue Sweep | Cover CLI, bx-vdm ingress/registry/planes, native execution plan, Bochs generic seam, mantle lifecycle, retained engine build manifests, OpenNT providers and every selector-specific source location. |
 
 ## Current Technical Baseline
 
