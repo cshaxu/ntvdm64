@@ -90,9 +90,6 @@ CXXFLAGS = @CXXFLAGS@ @GUI_CXXFLAGS@ $(MCH_CFLAGS) $(FLA_FLAGS) @DEFINE_PLUGIN_P
 
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-ifeq ($(OS),Windows_NT)
-LIBS += -lbcrypt
-endif
 # To compile with readline:
 #   linux needs just -lreadline
 #   solaris needs -lreadline -lcurses

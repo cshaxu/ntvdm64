@@ -43,6 +43,13 @@ lifecycle order nor default port behavior.  The `BX-IO-029` register entry and
 its source-boundary test now require all six empty-port lifecycle definitions
 to be isolated and absent from `devices.cc`.
 
+A further build-surface review found an unregistered Windows-only `bcrypt`
+addition in `src/bochs/Makefile.in`. It is not a Bochs requirement: the
+current CLI/BYOB identity and image code owns BCrypt, and admitted external
+composition link recipes name `bcrypt.lib` explicitly. S4 removed the
+unconditional Bochs template injection and added a focused build-isolation
+test that rejects a future BCrypt dependency in the Bochs template.
+
 ## Procedure And Observations
 
 Ran all retained mechanical boundary checks, each against the repository root:
@@ -58,16 +65,19 @@ Test-BochsOrdinaryRamBoundary.ps1                   passed
 Test-BochsStartupTransactionBoundary.ps1            passed
 Test-BochsUdDefaultOffBoundary.ps1                  passed
 Test-BochsUdInterceptBoundary.ps1                   passed
+Test-BochsBuildIsolationBoundary.ps1                passed
 bx-ntvdm-minimal-machine-boundary.ps1               passed
 bx-ntvdm-minimal-mechanics-boundary.ps1             passed
 bx-ntvdm-minimal-sim-boundary.ps1                   passed
 ```
 
 The retired diagnostic scan over `src/bochs`, `tests`, and `tools` for the
-eight S3 diagnostic families returned no match.  A zero-context comparison
-against the pinned upstream tree reported 25 changed paths and 42 physical
-hunks.  The S3 baseline was 43 physical hunks; this is a topology change from
-the S4 lifecycle extraction, not a row-for-hunk accounting rule.
+eight S3 diagnostic families returned no match. After the port-space repair, a
+zero-context comparison against the pinned upstream tree reported 25 changed
+paths and 42 physical hunks. After the unrelated BCrypt-link removal it
+reported 24 changed paths and 41 physical hunks. The S3 baseline was 43
+physical hunks; these are topology changes from S4 repairs, not a
+row-for-hunk accounting rule.
 
 No build, link, or guest runtime claim is made here.  Those are S6 work after
 S5 reconciles every remaining hunk and register relationship.
