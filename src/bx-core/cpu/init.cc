@@ -68,6 +68,7 @@ void BX_CPU_C::apply_real_mode_entry(Bit16u cs, Bit32u eip)
 {
   load_seg_reg(&sregs[BX_SEG_REG_CS], cs);
   RIP=eip;
+  invalidate_prefetch_q();
 }
 
 #if BX_WITH_WX

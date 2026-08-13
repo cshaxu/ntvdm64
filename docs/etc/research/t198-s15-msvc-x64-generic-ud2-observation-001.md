@@ -28,6 +28,11 @@ expected immediate STOP before the watchdog. The decode table still maps
 failure is not yet attributed to decoding, entry placement, prefetch state,
 or bridge validation.
 
+The S15 r2 retry adds the already-native `invalidate_prefetch_q()` after the
+project-owned real-mode CS:RIP entry setter. The same watchdog observation
+remains. The repair is retained because a direct control-transfer state change
+must invalidate fetch state, but it is not credited as the UD2 root cause.
+
 ## Next Diagnostic Bound
 
 The next step may add only default-off mechanical observation sufficient to
