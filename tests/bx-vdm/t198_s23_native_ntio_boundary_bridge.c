@@ -23,6 +23,9 @@ static unsigned observed_ioctl;
 static uint16_t observed_ioctl_cs;
 static uint32_t observed_ioctl_eip;
 static uint32_t observed_ioctl_eax, observed_ioctl_ebx, observed_ioctl_ecx, observed_ioctl_edx;
+static unsigned observed_fast_read;
+static uint16_t observed_fast_read_cs, observed_fast_read_ds, observed_fast_read_es;
+static uint32_t observed_fast_read_eip, observed_fast_read_eax, observed_fast_read_ebx, observed_fast_read_ecx, observed_fast_read_edx, observed_fast_read_esi, observed_fast_read_edi;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -118,6 +121,16 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         return 1;
     }
     if (event == 0 || outcome == 0) return 0;
+    if (!observed_fast_read && event->window_bytes >= 4u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0x50u && event->window[3] == 0x42u) {
+        observed_fast_read = 1u; observed_fast_read_cs = event->cs;
+        observed_fast_read_ds = event->ds; observed_fast_read_es = event->es;
+        observed_fast_read_eip = event->eip; observed_fast_read_eax = event->eax;
+        observed_fast_read_ebx = event->ebx; observed_fast_read_ecx = event->ecx;
+        observed_fast_read_edx = event->edx; observed_fast_read_esi = event->esi;
+        observed_fast_read_edi = event->edi;
+    }
     if (!observed_ioctl && event->window_bytes >= 4u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
         event->window[2] == 0x50u && event->window[3] == 0x21u) {
@@ -183,3 +196,14 @@ unsigned t198_s23_native_ntio_boundary_observed_ioctl_eax(void) { return observe
 unsigned t198_s23_native_ntio_boundary_observed_ioctl_ebx(void) { return observed_ioctl_ebx; }
 unsigned t198_s23_native_ntio_boundary_observed_ioctl_ecx(void) { return observed_ioctl_ecx; }
 unsigned t198_s23_native_ntio_boundary_observed_ioctl_edx(void) { return observed_ioctl_edx; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read(void) { return observed_fast_read; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_cs(void) { return observed_fast_read_cs; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_ds(void) { return observed_fast_read_ds; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_es(void) { return observed_fast_read_es; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_eip(void) { return observed_fast_read_eip; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_eax(void) { return observed_fast_read_eax; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_ebx(void) { return observed_fast_read_ebx; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_ecx(void) { return observed_fast_read_ecx; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_edx(void) { return observed_fast_read_edx; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_esi(void) { return observed_fast_read_esi; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_edi(void) { return observed_fast_read_edi; }

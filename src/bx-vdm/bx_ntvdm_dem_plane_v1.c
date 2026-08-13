@@ -26,7 +26,7 @@ static uint32_t bx_ntvdm_dem_plane_v1_component(uint8_t service)
     switch (service) {
     case 0u: case 1u: case 2u: case 3u: case 4u: case 5u: case 6u:
     case 8u: case 9u: case 10u: case 11u: case 12u: case 17u: case 18u: case 19u:
-    case 22u: case 23u: case 24u: case 30u: case 34u: case 39u: case 60u:
+    case 22u: case 23u: case 24u: case 30u: case 34u: case 39u: case 60u: case 66u:
     case 68u: case 71u: case 72u:
         return BX_NTVDM_DEM_COMPONENT_NAMESPACE;
     case 7u: case 32u: case 44u: case 45u: case 46u: case 47u: case 48u:
@@ -44,7 +44,7 @@ static uint32_t bx_ntvdm_dem_plane_v1_component(uint8_t service)
         return BX_NTVDM_DEM_COMPONENT_ERROR_LOCK;
     case 29u:
         return BX_NTVDM_DEM_COMPONENT_V86_BRIDGE;
-    case 31u: case 36u: case 38u: case 40u: case 43u: case 64u: case 66u:
+    case 31u: case 36u: case 38u: case 40u: case 43u: case 64u:
     case 67u:
         return BX_NTVDM_DEM_COMPONENT_ORIGINAL_NOOP;
     default:

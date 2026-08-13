@@ -2,11 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S58.** Its governing brief is the active
+> **Current effective packet: M0 T198 S60.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S58 -- audit the reached `50:42` DEM fast-read request and
-its current finite namespace/provider contract before admitting behavior.**
+**Active: M0 T198 S60 -- audit the reached top-level `5F` NTIO/SoftPC keyboard
+handoff against the existing narrow completion provider before admitting any
+behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +24,19 @@ its current finite namespace/provider contract before admitting behavior.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S58, Ordinary Mode. |
-| Admission And Approval | S57 clean source closure proves the exact snapshot-only `50:21/AX=4408` result and advances to `50:42`. |
-| Objective | Capture/map the actual 50:42 request and determine whether an existing finite namespace/provider contract precisely matches it. |
-| Non-goals | No fast-read implementation, device or host drive access, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S57 witness, OpenNT DEM source and current finite namespace provider evidence. |
+| Identifier Mode | M0 T198 S60, Ordinary Mode. |
+| Admission And Approval | S59 clean source closure composes `50:42` through the existing namespace bulk-write path and advances to selector `5F`; see `etc/research/t198-s59-fast-read-composition-witness-001.md`. |
+| Objective | Capture/map the actual three-byte `BOP 5F` input, its OpenNT NTIO/SoftPC continuation, and the existing narrow `spckbd` provider's exact eligibility. |
+| Non-goals | No keyboard/PIC/8042/IRQ behavior, device or firmware enablement, host input integration, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S59 witness, OpenNT `bop.h` and `spckbd.asm`, plus the current `bx-vdm` top-level/provider evidence. |
 | Files And ABI Surface | Observation/audit and evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
-| Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |
+| Verification | Inspect the complete current `5F` state through the existing bounded source-built recipe and map it to the OpenNT call site and existing provider contract. |
+| Expected Markers | Exact `AX`/segments/register state, source-defined branch direction, exact provider eligibility or rejection, and a narrow next admission decision. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact command, build identity, terminal output, comparison to S44/S47 and source-map result; state the narrow next admission decision. |
-| Stop Conditions | The rerun requires changing any code, image, BOP/provider disposition, device/firmware or runtime configuration. Stop and re-admit rather than expanding scope. |
-| Exit Criteria | A reproducible source-built NTIO result after S47 and a source-backed classification of its next bottleneck or progress state. |
+| Reporting Requirements | Record exact command, build identity, terminal output, OpenNT source map and whether the existing provider is eligible. |
+| Stop Conditions | The route requires keyboard, PIC, 8042, IRQ, firmware, host-input, DOS-image, or Bochs/runtime behavior. Stop and re-admit rather than expanding scope. |
+| Exit Criteria | A reproducible source-backed classification of the reached `5F` handoff and a narrow next admission decision. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
