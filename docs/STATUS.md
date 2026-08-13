@@ -132,8 +132,11 @@ explicit DTA prerequisite.**
   and close direct-result routes after the open/read lifecycle; valid-DTA
   pathname and malformed-action cases remain P3.
 - M0 T198 S10 P3 is complete: explicit valid DTA now admits pathname first
-  `50:09` through its 134-byte read and provider-produced write; pathname
-  next and malformed-action cases remain P4.
+  `50:09` through its 134-byte read and provider-produced write.
+- M0 T198 S10 P4 is complete: pathname next `50:0B` now consumes the first
+  provider write as an addressed DTA image, rejects a mismatched action ID
+  without consuming the pending read, then completes the valid fixed action.
+  See [T198 S10 P4 witness](etc/research/t198-s10-p4-path-next-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
