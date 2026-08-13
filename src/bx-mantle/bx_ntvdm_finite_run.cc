@@ -29,6 +29,7 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
 {
   bx_ntvdm_minimal_machine_c machine;
   bx_ntvdm_finite_run_stop_state stop_state;
+  Bit8u entry_probe[2];
   int stop_timer;
 
   if (request == 0 || request->entry_bytes == 0 ||
@@ -45,6 +46,13 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
       request->entry_byte_count, request->entry_bytes)) {
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
+  }
+  if (request->stop_on_ud_fixture && request->entry_byte_count >= sizeof(entry_probe) &&
+      (!bx_mem.copy_from_ordinary_ram(request->entry_physical_address,
+        sizeof(entry_probe), entry_probe) ||
+       memcmp(entry_probe, request->entry_bytes, sizeof(entry_probe)) != 0)) {
+    machine.cleanup();
+    return BX_NTVDM_FINITE_RUN_ENTRY_BYTES_MISMATCH;
   }
 
   bx_pc_system.initialize(request->ips);

@@ -46,6 +46,12 @@ any injected executable byte sequence, but r4 still exits 1 under the
 stop-observed acceptance rule. Thus neither stale prefetch state nor omitted
 page-write stamps is sufficient to explain the present UD2 non-observation.
 
+S15 r5 adds a private finite-fixture read-back of the first two entry bytes
+after the generic ordinary-RAM write. The run again exits `1`, not the distinct
+entry-byte-mismatch status, proving that `0f 0b` is present at the requested
+ordinary RAM location before CPU-loop entry. The remaining boundary is thus
+the initial native fetch/decode/exception observation chain.
+
 ## Next Diagnostic Bound
 
 The next step may add only default-off mechanical observation sufficient to
