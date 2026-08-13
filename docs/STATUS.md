@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S34 — bounded v6 observation-controller cleanup.**
+**Active: M0 T194 S36 — one register-observation v6 run.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S34, Ordinary Mode. |
-| Admission And Approval | S33 isolates an unbounded controller wait after taskkill access denial and identifies the pre-existing T188 bounded evidence pattern. Owner authorization permits the contained controller correction. |
-| Objective | Make the v6 observation controller record bounded cleanup failure and terminal evidence after one watchdog expiry, with a focused static test. |
-| Non-goals | No observation invocation/retry, runner/shim/Bochs/adapter/CLI source change, privilege elevation, job object, kill-by-name, host capability/provider change, or BOP semantic decision. |
-| Reference Baseline | S28 failed cleanup evidence; S33 audit; T188 controller and its boundary test. |
-| Files And ABI Surface | `Invoke-T194S10V6BoundedObservation.ps1`, a focused controller boundary test, S34 evidence, Status, and documentation inventory only. |
+| Identifier Mode | M0 T194 S36, Ordinary Mode. |
+| Admission And Approval | S35 freezes the S32 listener engine; S34 proves controller cleanup is bounded and terminal evidence is retained even on cleanup failure. Owner authorization permits one bounded observation. |
+| Objective | Make exactly one 15-second no-retry v6 observation with the S35 listener bundle and classify reached `50:21` from its logged AX/BX. |
+| Non-goals | No code/build/bundle/profile/root change, second invocation, provider/capability decision, raw-media/device action, or normal-return claim without `54:11`. |
+| Reference Baseline | S28 BOP sequence, S29 IOCTL family map, S32 listener build, S34 controller boundary, and S35 bundle. |
+| Files And ABI Surface | Existing controller, generated evidence root, S36 record, Status, and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused static controller test, source review for one-run/no-retry and bounded cleanup, documentation governance, and `git diff --check`. |
-| Expected Markers | Captured taskkill output/exit, bounded 5-second cleanup wait, terminal finally record, and no unbounded wait/retry loop. |
-| Asset Needs | Existing controller/test pattern only. |
-| Reporting Requirements | Record changed mechanics, static assertion outcome, and explicit no-observation limitation. |
-| Stop Conditions | Need to run/kill a process, change runtime inputs, use elevation/job objects, or alter BOP semantics; pause for fresh S admission. |
-| Exit Criteria | Committed controller/test/evidence closure. |
+| Verification | One controller outcome/input record, trace AX/BX marker for `50:21`, watchdog/cleanup fields, documentation governance, and `git diff --check`. |
+| Expected Markers | One fresh evidence root, no retry, one `50:21` register observation or precise unavailability, and a terminal outcome even when cleanup is denied. |
+| Asset Needs | S15 runner/shim, S35 bundle, fixed v6 profile/root/target, and S34 controller only. |
+| Reporting Requirements | Record all input/log hashes, watchdog/cleanup result, observed BOP/register facts, and no unobserved semantics. |
+| Stop Conditions | Input/evidence collision, launch failure, need for retry/second invocation, or source/build change; preserve evidence and pause for fresh S admission. |
+| Exit Criteria | Committed one-shot evidence with source-backed next action or blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Reject unbounded `WaitForExit()`, loops/sleeps, absent finally record, retry behavior, and broad process targeting. |
+| Similar-Issue Sweep | Verify S15 runner/shim, S35 engine, v6 one-slot inputs, one 15-second watchdog, fresh evidence root, and absence of stale v5 inputs. |
 
 ## Current Technical Baseline
 
