@@ -2,22 +2,22 @@
 
 ## Current Work
 
-**Active: M0 T192 S1 — post-bootstrap non-COMMAND BOP inventory.**
+**Active: M0 T193 S1 — reached machine-selector composition audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
-> through T191 are closed. Their retained S records are evidence, not
+> through T192 are closed. Their retained S records are evidence, not
 > concurrent active packets.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T192 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized holistic BOP recovery. T191 proves the reached COMMAND family is wholly owned and explicitly rejects another `54:xx` patch. |
-| Objective | Inventory every reached non-COMMAND BOP family after bootstrap, map each to original owner/ABI/failure behavior, and identify a single coherent next composition slice or explicit owner deferral. |
-| Non-goals | No source/build/runtime change, retry, Bochs/guest change, host capability, host-environment exposure, device/config action, terminal-result transport, or endpoint-by-endpoint implementation. |
-| Reference Baseline | T190 S6 trace, original `nt_bop.c` and family dispatchers, existing BOP catalogue/registry and T191 closure. |
-| Files And ABI Surface | Source/read-only maps, trace evidence, catalogue/registry records and status/evidence documentation only. |
+| Identifier Mode | M0 T193 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized machine-BOP composition only through separately proven original handler islands. T192 proves all reached host-service families are already classified. |
+| Objective | Audit every reached non-family selector and decide its original machine owner, handler/island availability, Bochs mechanics ABI closure and default disposition. |
+| Non-goals | No source/build/runtime change, retry, Bochs patch, adapter host-service/provider change, BIOS table installation, device/config action, or handler invocation. |
+| Reference Baseline | T190 trace, BOP catalogue, T115--T122 machine-composition evidence, original SoftPC BIOS sources and T192 closure. |
+| Files And ABI Surface | Source/read-only machine catalogue/handler maps, current machine-composition seam and evidence/status documentation only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Trace-to-source inventory, original owner/failure map, catalogue/registry coverage scan, documentation governance and `git diff --check`. |
 | Expected Markers | Complete reached-family table with no unowned endpoint and an explicit grouped next-slice recommendation; no runtime claim. |
