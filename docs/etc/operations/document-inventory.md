@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 944 |
+| Documentation records | 945 |
 | --- | --- |
-| Generated UTC | 2026-08-13T04:54:50Z |
+| Generated UTC | 2026-08-13T05:01:36Z |
 
 ## Entries
 
@@ -364,6 +364,7 @@ content-divergent entries.
 | etc/research/t195-s1-intrusion-repair-audit-001.md | indexed supporting material | 30c2d05349bce17b8a651cc9cf3d070b31d708265372140c248a66556e0a7de9 |
 | etc/research/t195-s2-adapter-convergence-contract-001.md | indexed supporting material | d453a202421ec6ca1ffcf274a28de14ba89d416bc5f49b9ecee9b355d1d36d78 |
 | etc/research/t195-s3-adapter-owned-bop-observation-001.md | indexed supporting material | 48c2156137b91f4548cb000a7b14b95d4e042ae721c9a3181888fc6139c8c493 |
+| etc/research/t195-s4-adapter-machine-composition-migration-001.md | indexed supporting material | fa9c470a55e6a4f663a11f990be864f65d990b21748249d2fc446553d75f4a3f |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |

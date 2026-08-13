@@ -135,14 +135,11 @@ foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\cli')
     [void](Copy-Verified $header.FullName (Join-Path $build ('cli\' + $header.Name)))
 }
 if ($MachineComposition) {
-    New-Item -ItemType Directory -Path (Join-Path $build 'machine') -Force | Out-Null
-    foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-ntvdm-machine-composition') -File) {
-        [void](Copy-Verified $file.FullName (Join-Path $build ('machine\' + $file.Name)))
-    }
+    [void](Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_machine_composition_v2.c') (Join-Path $build 'adapter\bx_ntvdm_machine_composition_v2.c'))
     $unexpObject = Join-Path $repository 'artifacts\build\current\t119-unexp-mt-projection-r1\CMakeFiles\ntdos64-opennt-system-provider-objects.dir\base\mvdm\softpc.new\base\system\unexp_nt.c.obj'
-    [void](Copy-Verified $unexpObject (Join-Path $build 'machine\unexp_nt.c.obj'))
+    [void](Copy-Verified $unexpObject (Join-Path $build 'adapter\unexp_nt.c.obj'))
     $illegalObject = Join-Path $repository 'artifacts\build\current\t119-unexp-mt-projection-r2\CMakeFiles\ntdos64-opennt-system-provider-objects.dir\overlay\base\mvdm\softpc.new\base\system\illegalp.c.obj'
-    [void](Copy-Verified $illegalObject (Join-Path $build 'machine\illegalp.c.obj'))
+    [void](Copy-Verified $illegalObject (Join-Path $build 'adapter\illegalp.c.obj'))
 }
 foreach ($name in $adapterSources) {
     $source = Join-Path $repository ('src\bx-ntvdm-adapter\' + $name)
@@ -191,13 +188,13 @@ if ($MachineComposition) { $exceptionDefines += '/DBX_NTVDM_ENABLE_MACHINE_COMPO
 if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic -or $BopRegisterObservation) {
     $make += @(
         'cpu\exception.o: cpu\exception.cc',
-        ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) " + ($exceptionDefines -join ' ') + ' /Iadapter /Icli ' + $(if ($MachineComposition) { '/Imachine ' }) + '/Tpcpu\exception.cc /Focpu\exception.o'),''
+        ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) " + ($exceptionDefines -join ' ') + ' /Iadapter /Icli /Tpcpu\exception.cc /Focpu\exception.o'),''
     )
 }
 if ($MachineComposition) {
     $make += @(
-        'machine\bx_ntvdm_machine_bop_v1.obj: machine\bx_ntvdm_machine_bop_v1.c',
-        "`tcl.exe /nologo /c /MT /W3 /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /Iadapter /Imachine /Fomachine\bx_ntvdm_machine_bop_v1.obj machine\bx_ntvdm_machine_bop_v1.c",''
+        'adapter\bx_ntvdm_machine_composition_v2.obj: adapter\bx_ntvdm_machine_composition_v2.c',
+        "`tcl.exe /nologo /c /MT /W3 /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1 /Iadapter /Foadapter\bx_ntvdm_machine_composition_v2.obj adapter\bx_ntvdm_machine_composition_v2.c",''
     )
 }
 foreach ($object in $allObjects) {
@@ -208,8 +205,8 @@ foreach ($object in $allObjects) {
 }
 $make += @(
     '# Deliberately no Bochs archive is a make prerequisite: inherited Makefile rules would recurse into devices.',
-    ('ntdos64-t98-current-adapter.exe: ' + (($bochsObjects + $(if ($MachineComposition) { @('machine\bx_ntvdm_machine_bop_v1.obj','machine\unexp_nt.c.obj','machine\illegalp.c.obj') } else { @() }) + @('$(ADAPTER_OBJS)')) -join ' ')),
-    "`tlink /nologo /subsystem:console /incremental:no /opt:ref /map:ntdos64-t98-current-adapter.map /out:`$@ `$(BX_OBJS) `$(SIMX86_OBJS) cpu\exception.o iodev/libiodev.a iodev/hdimage/libhdimage.a iodev/usb/libusb.a iodev/network/libnetwork.a iodev/sound/libsound.a cpu/libcpu.a cpu/cpudb/libcpudb.a memory/libmemory.a gui/libgui.a `$(DISASM_LIB) `$(FPU_LIB) `$(GUI_LINK_OPTS) `$(MCH_LINK_FLAGS) `$(SIMX86_LINK_FLAGS) `$(READLINE_LIB) `$(EXTRA_LINK_OPTS) `$(LIBS) $(if ($MachineComposition) { 'machine\bx_ntvdm_machine_bop_v1.obj machine\unexp_nt.c.obj machine\illegalp.c.obj vcruntime.lib' }) `$(ADAPTER_OBJS) kernel32.lib bcrypt.lib",''
+    ('ntdos64-t98-current-adapter.exe: ' + (($bochsObjects + $(if ($MachineComposition) { @('adapter\bx_ntvdm_machine_composition_v2.obj','adapter\unexp_nt.c.obj','adapter\illegalp.c.obj') } else { @() }) + @('$(ADAPTER_OBJS)')) -join ' ')),
+    "`tlink /nologo /subsystem:console /incremental:no /opt:ref /map:ntdos64-t98-current-adapter.map /out:`$@ `$(BX_OBJS) `$(SIMX86_OBJS) cpu\exception.o iodev/libiodev.a iodev/hdimage/libhdimage.a iodev/usb/libusb.a iodev/network/libnetwork.a iodev/sound/libsound.a cpu/libcpu.a cpu/cpudb/libcpudb.a memory/libmemory.a gui/libgui.a `$(DISASM_LIB) `$(FPU_LIB) `$(GUI_LINK_OPTS) `$(MCH_LINK_FLAGS) `$(SIMX86_LINK_FLAGS) `$(READLINE_LIB) `$(EXTRA_LINK_OPTS) `$(LIBS) $(if ($MachineComposition) { 'adapter\bx_ntvdm_machine_composition_v2.obj adapter\unexp_nt.c.obj adapter\illegalp.c.obj vcruntime.lib' }) `$(ADAPTER_OBJS) kernel32.lib bcrypt.lib",''
 )
 $shim = Join-Path $build 'ntdos64-t98-current-adapter.mak'
 [IO.File]::WriteAllText($shim, ($make -join "`r`n"), [Text.UTF8Encoding]::new($false))
@@ -226,7 +223,7 @@ if ($MachineComposition) {
     $shimText = Get-Content -LiteralPath $shim -Raw
     if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)cpu\\exception\.o:').Matches.Count -ne 1) { throw 'Machine-composition derivative must rebuild exactly one Bochs object.' }
     if ($shimText -notmatch [regex]::Escape('BX_NTVDM_ENABLE_MACHINE_COMPOSITION=1')) { throw 'Machine-composition derivative lacks opt-in macro.' }
-    if ($shimText -notmatch 'machine\\bx_ntvdm_machine_bop_v1\.obj' -or $shimText -notmatch 'machine\\unexp_nt\.c\.obj' -or $shimText -notmatch 'machine\\illegalp\.c\.obj') { throw 'Machine-composition derivative lacks its exact object triple.' }
+    if ($shimText -notmatch 'adapter\\bx_ntvdm_machine_composition_v2\.obj' -or $shimText -notmatch 'adapter\\unexp_nt\.c\.obj' -or $shimText -notmatch 'adapter\\illegalp\.c\.obj') { throw 'Machine-composition derivative lacks its exact object triple.' }
 }
 if ($RealModeVectorDiagnostic) {
     $shimText = Get-Content -LiteralPath $shim -Raw

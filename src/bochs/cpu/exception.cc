@@ -55,7 +55,7 @@
 
 #if BX_NTVDM_ENABLE_MACHINE_COMPOSITION
 #include "iodev/iodev.h"
-#include "bx_ntvdm_machine_composition_seam.h"
+#include "bx_ntvdm_machine_composition_v2.h"
 
 static int bx_ntvdm_machine_composition_read8(void *, uint16_t port,
   uint8_t *value)
@@ -97,13 +97,14 @@ static void bx_ntvdm_machine_composition_report(void *, uint32_t error_number,
     message == 0 ? "" : message));
 }
 
-static bx_ntvdm_machine_bop_v1_result bx_ntvdm_machine_composition_probe(unsigned cpu_id,
+static int bx_ntvdm_machine_composition_bridge(unsigned cpu_id,
   unsigned vector, Bit16u error_code, Bit64u fault_rip,
   const bx_ntvdm_cpu_state_v1 *cpu_state,
-  const bx_ntvdm_instruction_window_v1 *instruction_window)
+  const bx_ntvdm_instruction_window_v1 *instruction_window,
+  bx_ntvdm_cpu_result_v2 *result)
 {
   bx_ntvdm_exception_event_v1 event;
-  bx_ntvdm_machine_composition_mechanics mechanics;
+  bx_ntvdm_machine_mechanics_v1 mechanics;
   event.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
   event.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
   event.struct_bytes = sizeof(event);
@@ -113,7 +114,7 @@ static bx_ntvdm_machine_bop_v1_result bx_ntvdm_machine_composition_probe(unsigne
   event.error_code = error_code;
   event.reserved0 = 0;
   event.fault_rip = fault_rip;
-  bx_ntvdm_machine_composition_initialize_mechanics(&mechanics);
+  bx_ntvdm_machine_mechanics_v1_initialize(&mechanics);
   mechanics.read8 = bx_ntvdm_machine_composition_read8;
   mechanics.write8 = bx_ntvdm_machine_composition_write8;
   mechanics.store8 = bx_ntvdm_machine_composition_store8;
@@ -122,8 +123,8 @@ static bx_ntvdm_machine_bop_v1_result bx_ntvdm_machine_composition_probe(unsigne
   mechanics.execution_mode = cpu_state->execution_mode;
   mechanics.esp = cpu_state->esp;
   mechanics.ss = cpu_state->ss;
-  return bx_ntvdm_machine_composition_v1_probe(&event, cpu_state,
-    instruction_window, &mechanics);
+  return bx_ntvdm_machine_composition_v2_dispatch(&event, cpu_state,
+    instruction_window, &mechanics, result);
 }
 #endif
 
@@ -1590,13 +1591,21 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
 
 #if BX_NTVDM_ENABLE_MACHINE_COMPOSITION
   if (vector == BX_UD_EXCEPTION) {
-    bx_ntvdm_machine_bop_v1_result outcome = bx_ntvdm_machine_composition_probe(
+    bx_ntvdm_cpu_result_v2 result;
+    if (!bx_ntvdm_machine_composition_bridge(
       BX_CPU_ID, vector, error_code, BX_CPU_THIS_PTR prev_rip, &cpu_state,
-      &instruction_window);
-    if (outcome != BX_NTVDM_MACHINE_BOP_V1_DECLINED)
-      BX_INFO(("ntdos64 machine composition outcome=%u", (unsigned) outcome));
-    if (outcome == BX_NTVDM_MACHINE_BOP_V1_HANDLED_RESUME) {
-      RIP = BX_CPU_THIS_PTR prev_rip + 3;
+      &instruction_window, &result) || !bx_ntvdm_cpu_result_v2_valid(&result))
+      bx_ntvdm_cpu_result_v2_pass_through(&result);
+    if (result.disposition == BX_NTVDM_CPU_RESULT_V2_STOP) {
+      SIM->quit_sim(0);
+    } else if (result.disposition == BX_NTVDM_CPU_RESULT_V2_RESUME) {
+      for (unsigned reg = 0; reg < BX_NTVDM_CPU_DELTA_V1_GPR16_COUNT; ++reg) {
+        if ((result.cpu_delta.gpr16_write_mask & (1u << reg)) != 0u)
+          BX_CPU_THIS_PTR set_reg16(reg, result.cpu_delta.gpr16_values[reg]);
+      }
+      if ((result.eflags_write_mask & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u)
+        BX_CPU_THIS_PTR set_CF((result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u);
+      RIP = result.resume_rip;
       longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
     }
   }

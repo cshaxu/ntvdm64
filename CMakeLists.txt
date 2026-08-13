@@ -16,10 +16,10 @@ if(NOT CMAKE_C_COMPILER_ID STREQUAL "GNU")
         "own source roots with their selected historical compiler.")
 endif()
 
-# T116's machine-composition contract is a static, default-disabled test
-# island.  It has no Bochs, OpenNT-object, #UD, or runner link edge.
+# T195's adapter machine-composition contract is a static, default-disabled
+# test island.  It has no Bochs, OpenNT-object, #UD, or runner link edge.
 add_executable(bx-ntvdm-machine-bop-v1-test EXCLUDE_FROM_ALL
-    src/bx-ntvdm-machine-composition/bx_ntvdm_machine_bop_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_machine_composition_v2.c
     src/bx-ntvdm-adapter/bx_ntvdm_exception_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_delta_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_state_abi.c
@@ -27,8 +27,10 @@ add_executable(bx-ntvdm-machine-bop-v1-test EXCLUDE_FROM_ALL
     tests/bx-ntvdm-machine-composition/bx_ntvdm_machine_bop_v1_test.c
 )
 target_include_directories(bx-ntvdm-machine-bop-v1-test PRIVATE
-    src/bx-ntvdm-machine-composition src/bx-ntvdm-adapter)
+    src/bx-ntvdm-adapter)
 target_compile_features(bx-ntvdm-machine-bop-v1-test PRIVATE c_std_11)
+target_compile_definitions(bx-ntvdm-machine-bop-v1-test PRIVATE
+    BX_NTVDM_ENABLE_MACHINE_COMPOSITION=1)
 
 function(ntdos64_use_wide_console_entry target)
     # Modern CLI sources use wmain so paths and BYOB metadata stay UTF-16.
