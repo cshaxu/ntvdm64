@@ -23,31 +23,23 @@ than merely a matching opcode.
 
 ## Classification
 
-The null far-call target is **not** a missing Bochs CPU, port-space, BIOS,
-firmware, BOP, DEM, or CLI capability. The CPU has executed the original
-far-call mechanism faithfully enough to expose an upstream guest-state
-problem.
+The call is **not** a missing BOP, DEM, or CLI capability. S44 corrects the
+remaining attribution: its terminal raw snapshot at `00A7:037A` is
+`FF FF 1F BF`, i.e. `BF1F:FFFF`, rather than zero. The immediate source writer
+is therefore consistent with the observed `DS=BF1F` and an original device
+header strategy offset of `FFFF`.
 
-The current fixture reaches original `DEVIOCALL2`, but it has not established
-the original prepared device chain that must supply the header at `DS:SI`.
-The later generic-stop state retains `DS:SI = BF1F:1482`; the address is
-`0xC0672`. S42 proves the call consulted a null `CALLDEVAD` value, but the
-existing evidence does not directly capture whether the preceding header
-field was already zero, whether the slot write missed the expected relocated
-DOSDATA instance, or whether a subsequent guest instruction changed it.
-
-Therefore the precise current classification is **guest device-chain
-prepared-entry / DOSDATA-lifecycle gap, unclassified within that owner**.
-It is not permission to prewrite `CALLDEVAD`, install a fake device header,
-attach a host console, or skip `DEVIOCALL2`.
+The snapshot is post-stop, so it does not prove the exact call-time value.
+It does prove that S42 did not observe a null operand and removes the prior
+"missing device header" classification. The remaining owner is original
+guest execution continuity at the source-derived `BF1F:FFFF` target,
+including the retained prefetch diagnostic `EIP [00010000] > CS.limit
+[0000ffff]`. It is not permission to prewrite `CALLDEVAD`, install a fake
+device header, attach a host console, or skip `DEVIOCALL2`.
 
 ## Successor
 
-S44 may use the existing opaque terminal ordinary-RAM snapshot once to copy
-the four bytes at the source-derived final `SS:[CALLDEVAD]` location
-`0x00A7:037A` (`0x0DEA`) in the exact fixture. It must not change any Bochs,
-mantle, adapter, guest, or profile implementation, and must distinguish a
-post-stop snapshot from a direct pre-call observation. A still-zero value
-would corroborate the guest prepared-entry gap, not identify its writer;
-only then may a separately admitted observation assess the header/write
-sequence.
+S44 completed the terminal snapshot and disproved its conditional null case.
+The successor is a read-only audit of the original split-at-`FFFF` strategy
+layout and retained CPU real-mode instruction-pointer behavior before any
+core change is admitted.

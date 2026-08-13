@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S44.** Its governing brief is the active
+> **Current effective packet: M0 T198 S45.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S44 -- capture the existing terminal raw `CALLDEVAD` slot
-for the exact source-built guest fixture.**
+**Active: M0 T198 S45 -- audit original split-at-`FFFF` strategy layout and
+retained CPU real-mode instruction-pointer behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ for the exact source-built guest fixture.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S44, Ordinary Mode. |
-| Admission And Approval | S43 identifies `SS:[037A]` as NTDOS `CALLDEVAD`, populated solely by original `DEVIOCALL2` from a guest device header. The existing terminal snapshot already copies one checked ordinary-RAM range. |
-| Objective | Change only the exact fixture's existing terminal snapshot selection from the former stack range to four bytes at the source-derived `00A7:037A` (`0x0DEA`) `CALLDEVAD` slot, then run the same exact fixture. |
-| Non-goals | No Bochs, mantle, adapter, OpenNT, guest image, provider, BOP, device, firmware, CPU, memory primitive, profile, CLI or build-recipe change; no new trace mechanism, no direct pre-call claim, no write, and no repair. |
-| Reference Baseline | S42 provenance witness, S43 pointer attribution, existing terminal ordinary-RAM snapshot, and CPU5 x64 `/MT` finite closure. |
-| Files And ABI Surface | Exact fixture, evidence/status/history only; existing snapshot ABI unchanged. |
+| Identifier Mode | M0 T198 S45, Ordinary Mode. |
+| Admission And Approval | S44 observes `CALLDEVAD=BF1F:FFFF` and the same exact run reports `EIP [00010000] > CS.limit [0000ffff]`; original source identifies the first strategy instruction as a five-byte far routine. |
+| Objective | Determine, from original NTDOS/NTIO layout records and retained bx-core CPU fetch/decode/real-mode semantics, whether executing an original strategy at `CS:FFFF` requires a supported 16-bit IP wrap and whether the current prefetch diagnostic can explain the later trace. |
+| Non-goals | No Bochs, mantle, adapter, OpenNT, guest image, provider, BOP, device, firmware, CPU, memory, profile, CLI or build-recipe change; no new trace, configuration or repair. |
+| Reference Baseline | S42 provenance, S43 source map, S44 terminal witness, locked original strategy bytes, and current CPU5 source closure. |
+| Files And ABI Surface | Evidence and status/history records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Recompile/relink the exact fixture against the already rebuilt CPU5 closure; it must report a valid four-byte snapshot at `0x0DEA`, retain existing BOP/stop/CS-transition markers, and pass the snapshot invalid-range negatives. |
-| Expected Markers | Copied `CALLDEVAD` bytes, explicit post-stop timing limitation, and a classification of the next observation need. |
+| Verification | Produce a source-to-fetch-path table with exact instructions, CS/IP width rules, and an explicit supported/unsupported/disproved classification. |
+| Expected Markers | Original strategy byte placement, IP transition calculation, retained CPU path, diagnostic correlation and a justified disposition. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source-derived address math, exact run output, timing limitation, source scan and next owner boundary. |
-| Stop Conditions | The existing snapshot cannot capture the four bytes without a new primitive, a second range, or any product-semantic change. |
-| Exit Criteria | One exact run records the fixed slot's four copied bytes without changing execution semantics. |
+| Reporting Requirements | Separate original guest expectation, retained core behavior and inference; name any necessary mechanical follow-up without implementing it. |
+| Stop Conditions | Source cannot prove target byte layout or retained CPU path cannot be correlated; document the gap rather than modifying a core rule. |
+| Exit Criteria | An evidence-backed decision whether a narrowly bounded core mechanics repair investigation is warranted. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -328,13 +328,18 @@ for the exact source-built guest fixture.**
   [S41 witness](etc/research/t198-s41-stack-position-witness-001.md).
 - M0 T198 S42 is complete: the registered bounded mantle provenance record
   proves that the preceding guest instruction is `SS: CALL FAR [037A]` and
-  retains the matching `9346:4D58` far return address. It does not establish
-  a BOP, device, or adapter requirement. See [S42 control-transfer
+  retains the matching `9346:4D58` far return address; S44 corrects its
+  non-direct `0000:0000` operand inference. It does not establish a BOP,
+  device, or adapter requirement. See [S42 control-transfer
   provenance witness](etc/research/t198-s42-control-transfer-provenance-001.md).
 - M0 T198 S43 is complete: the original NTDOS `DEVIOCALL2` source and locked
   image map identify `SS:[037A]` as the DOSDATA `CALLDEVAD` scratch slot;
-  its missing prepared device-chain state is not a Bochs or BOP defect. See
+  S44 corrects the earlier unproven missing-device-chain inference. See
   [S43 pointer attribution](etc/research/t198-s43-devio-call-pointer-attribution-001.md).
+- M0 T198 S44 is complete: the existing terminal snapshot observes
+  `CALLDEVAD=BF1F:FFFF`, moving the remaining question to original
+  end-of-segment execution continuity. See [S44 terminal
+  witness](etc/research/t198-s44-call-dev-ad-terminal-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

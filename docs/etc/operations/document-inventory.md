@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1054 |
+| Documentation records | 1056 |
 | --- | --- |
-| Generated UTC | 2026-08-13T19:03:20Z |
+| Generated UTC | 2026-08-13T19:06:10Z |
 
 ## Entries
 
@@ -432,8 +432,9 @@ content-divergent entries.
 | etc/research/t198-s3-finite-native-run-witness-001.md | indexed supporting material | f197ff4bf1f1d6ad401b6f79b0b2ee59949ad583622468df10e2f80efc94adcc |
 | etc/research/t198-s40-preentry-input-closure-001.md | indexed supporting material | 8ee2640b5905e2551a9dea50003e9727c81426be11f652b561818de7b31a282b |
 | etc/research/t198-s41-stack-position-witness-001.md | indexed supporting material | 4ce7d0dae249f241e619b380b277fd78890cb7304f15d744a14ff124b2f099d3 |
-| etc/research/t198-s42-control-transfer-provenance-001.md | indexed supporting material | f2d5355cbc9efeadc9ceb3abafb88abace55902c769ad2e670977bd3c196c5e2 |
-| etc/research/t198-s43-devio-call-pointer-attribution-001.md | indexed supporting material | cacea747fd2172163e912cbc2f2900a9232123328ac390feb6cc4d454ff44532 |
+| etc/research/t198-s42-control-transfer-provenance-001.md | indexed supporting material | 0341d332df4bda709322f399bdbbfac0982a7cd9d38e6a65b4a9dd49c9efffa1 |
+| etc/research/t198-s43-devio-call-pointer-attribution-001.md | indexed supporting material | 22051afbe3b2c9b61b82c947876e8cd113d39b554f81475176d17c3fd3b100d3 |
+| etc/research/t198-s44-call-dev-ad-terminal-witness-001.md | indexed supporting material | c72afefac835ec1605ef64abb3888e792e8efe8a689d89fe4d2bd5a333ccb75c |
 | etc/research/t198-s4-generic-ud-seam-map-001.md | indexed supporting material | d22f402ce51aa8c8ff079cd6e737e7103688f096c42f751571cb58ddb538746e |
 | etc/research/t198-s5-p1-generic-ud-bridge-record-001.md | indexed supporting material | 28b1dfb141e07bef1357cc6bee7cced17a1b9b243b83332bdfdfe2d37c3b3ce1 |
 | etc/research/t198-s5-p2-core-mantle-ud-hook-001.md | indexed supporting material | b9e735b0813e7be24beedd79915803d92a6c903041d6d7e98c62bb17e355fcf9 |
@@ -783,8 +784,9 @@ content-divergent entries.
 | history/m0-t198-s39-closure-20260813.md | closed task history | 6f91fbb9d479ec5852c33aaa9e634e1d86246896f5a614d1fd391574dfdb6e17 |
 | history/m0-t198-s40-closure-20260813.md | closed task history | 23621a3119cec2ff3fb00ec7dbacdb829d6971a07b6a7d91327ba6341c7d82d4 |
 | history/m0-t198-s41-closure-20260813.md | closed task history | 46ba7bf84f4a610efb291c6b3d971fd51fc6f39bb1491b4f9bbd32c13ae8cf96 |
-| history/m0-t198-s42-closure-20260813.md | closed task history | 81f4f5a25ac95642dd748abdae67fed02fd378d6706c50e833551aea9eec188a |
+| history/m0-t198-s42-closure-20260813.md | closed task history | 6a5f1db663136fc77794aadd773f7f4f96e3f27b7cfa351ebad19276f0e20632 |
 | history/m0-t198-s43-closure-20260813.md | closed task history | f0c1773c200b11810dc22a0e8e244eb6f2a25eb5ed5375168dacf8eecd357827 |
+| history/m0-t198-s44-closure-20260813.md | closed task history | 20dc0135c29e51bda9376782c9d5c9c269410030374df9935377573ab6a7ee05 |
 | history/m0-t198-s8-closure-20260813.md | closed task history | 4de76e54b2097ae2100dee4d1123253cf09964d2d1a8c8b72a8db23b216b7418 |
 | history/m0-t198-s9-closure-20260813.md | closed task history | bbf529c2d4a30cdc105a4089a27f0a4f53f048630b8273ba3f1f065448ef0f88 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
@@ -1068,7 +1070,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 833b581bd03cf17822233676fe7a0fb902419fd526f0946305aab31dfd1aef0a |
+| STATUS.md | principal control document | 216194592d94de170f8b4ee25b5e3d480f6ac05ca04eed240430650f5f3ef078 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
