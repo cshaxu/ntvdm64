@@ -87,10 +87,7 @@ $manifest = [ordered]@{
     r4ContainerSha256 = Hash (Join-Path $r4 'ntdos64-native-container.exe')
     buildRoot = $build
     macros = @(("BX_NTVDM_ENABLE_EXECUTION_PLAN={0}" -f $executionPlanMacro),'BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1',
-        'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1','BX_NTVDM_ENABLE_STACK_TRANSFER_DIAGNOSTIC=1',
-        'BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
-        'BX_NTVDM_ENABLE_IRET_TF_DIAGNOSTIC=1',
-        'BX_NTVDM_ENABLE_REAL_MODE_FAR_JUMP_DIAGNOSTIC=1',
+        'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
         'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
         ("BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN={0}" -f $deferredPlanMacro),
         'BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')
@@ -100,10 +97,7 @@ $manifest = [ordered]@{
 }
 foreach ($entry in @(@{ source='src\bochs\main.cc'; destination='main.cc'; stale='main.o' },
         @{ source='src\bochs\cpu\exception.cc'; destination='cpu\exception.cc'; stale='cpu\exception.o' },
-        @{ source='src\bochs\cpu\bx_ntvdm_exception_intercept.h'; destination='cpu\bx_ntvdm_exception_intercept.h'; stale='' },
-        @{ source='src\bochs\cpu\data_xfer16.cc'; destination='cpu\data_xfer16.cc'; stale='cpu\data_xfer16_trace.obj' },
-        @{ source='src\bochs\cpu\ctrl_xfer16.cc'; destination='cpu\ctrl_xfer16.cc'; stale='cpu\ctrl_xfer16_trace.obj' },
-        @{ source='src\bochs\cpu\ctrl_xfer32.cc'; destination='cpu\ctrl_xfer32.cc'; stale='cpu\ctrl_xfer32_trace.obj' })) {
+        @{ source='src\bochs\cpu\bx_ntvdm_exception_intercept.h'; destination='cpu\bx_ntvdm_exception_intercept.h'; stale='' })) {
     $source = Join-Path $repository $entry.source
     $destination = Join-Path $build $entry.destination
     $hash = Copy-Verified $source $destination
@@ -139,15 +133,9 @@ $make = @(
     'main.o: main.cc',
     ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXECUTION_PLAN={0} /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN={1} /Iadapter /Icli /Tpmain.cc /Fomain.o" -f $executionPlanMacro,$deferredPlanMacro),'',
     'cpu\exception.o: cpu\exception.cc',
-    ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1 /DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1 /DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1 /DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0 /DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN={0} /Iadapter /Icli /Tpcpu\exception.cc /Focpu\exception.o" -f $deferredPlanMacro),'',
-    'cpu\data_xfer16_trace.obj: cpu\data_xfer16.cc',
-    "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_STACK_TRANSFER_DIAGNOSTIC=1 /Tpcpu\data_xfer16.cc /Focpu\data_xfer16_trace.obj",'',
-    'cpu\ctrl_xfer16_trace.obj: cpu\ctrl_xfer16.cc',
-    "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_IRET_TF_DIAGNOSTIC=1 /Tpcpu\ctrl_xfer16.cc /Focpu\ctrl_xfer16_trace.obj",'',
-    'cpu\ctrl_xfer32_trace.obj: cpu\ctrl_xfer32.cc',
-    "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_REAL_MODE_FAR_JUMP_DIAGNOSTIC=1 /Tpcpu\ctrl_xfer32.cc /Focpu\ctrl_xfer32_trace.obj",'',
+    ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1 /DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1 /DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0 /DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN={0} /Iadapter /Icli /Tpcpu\exception.cc /Focpu\exception.o" -f $deferredPlanMacro),'',
     '# The original CPU archive remains a link input; no member is extracted or repacked by this shim.',
-    '# Rebuilt exception/data-transfer/IRET/far-jump objects resolve before that archive on the final link.',
+    '# Rebuilt exception object resolves before that archive on the final link.',
     '# No original CPU object is extracted or repacked.', ''
 )
 foreach ($object in @($adapterObjects + $cliObjects)) {
