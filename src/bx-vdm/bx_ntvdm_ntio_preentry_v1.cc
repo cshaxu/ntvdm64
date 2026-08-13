@@ -10,6 +10,7 @@
 
 int bx_ntvdm_ntio_preentry_v1_prepare(const byob_image *ntio,
     const byob_component_descriptor *identity,
+    const struct bx_ntvdm_preentry_input_v1 *preentry_input,
     bx_ntvdm_finite_run_request *request, Bit64u tick_budget, Bit32u ips)
 {
   if (ntio == 0 || identity == 0 || request == 0 || ntio->bytes == 0 ||
@@ -29,5 +30,8 @@ int bx_ntvdm_ntio_preentry_v1_prepare(const byob_image *ntio,
   request->ips = ips;
   request->preserve_physical_address = BX_NTVDM_NTIO_PREENTRY_V1_PRESERVE;
   request->preserve_byte_count = BX_NTVDM_NTIO_PREENTRY_V1_PRESERVE_BYTES;
+  if (!bx_ntvdm_preentry_input_v1_make_write_action(preentry_input,
+      &request->preentry_action)) return 0;
+  request->has_preentry_action = 1;
   return 1;
 }

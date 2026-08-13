@@ -82,6 +82,8 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
       request->entry_byte_count > BX_NTVDM_FINITE_RUN_MAX_ENTRY_BYTES ||
       request->instruction_tick_budget == 0 ||
       request->ips == 0 || request->preserve_byte_count > sizeof(preserved) ||
+      (request->has_preentry_action &&
+       !bx_ntvdm_mechanical_action_v1_valid(&request->preentry_action)) ||
       (request->preserve_byte_count != 0 &&
        !bx_ntvdm_finite_run_ordinary_range_is_valid(
          request->preserve_physical_address, request->preserve_byte_count)) ||
@@ -98,6 +100,14 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
 
   if (machine.initialize(0x100000, 0x100000) != BX_NTVDM_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
+  }
+
+  if (request->has_preentry_action) {
+    struct bx_ntvdm_mechanical_action_v1 action = request->preentry_action;
+    if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) {
+      machine.cleanup();
+      return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
+    }
   }
 
   if (request->preserve_byte_count != 0 &&

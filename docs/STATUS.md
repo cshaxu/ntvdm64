@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S39.** Its governing brief is the active
+> **Current effective packet: M0 T198 S40.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S39 -- source-led audit of the NTIO pre-entry placement and
-preserved low-memory contract.**
+**Active: M0 T198 S40 -- atomically install the evidenced NTIO pre-entry
+profile snapshot before image placement and CPU entry.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ preserved low-memory contract.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S39, Ordinary Mode. |
-| Admission And Approval | S38 locates the latest retained CS transition at `9346:4D53 -> 0000:0000`, outside the NTIO aperture. The current source-defined startup request overwrites the aperture then restores four original bytes at `0x714`; this contract is now the highest-ROI provenance candidate. |
-| Objective | Read-only reconcile the OpenNT/NTIO expected entry contract with the current adapter pre-entry request and finite mantle placement/preserve order. Determine whether the observed unexpected transfer can be attributed to a missing or incorrect startup-image/memory contract, or must remain unproven. |
-| Non-goals | No runtime source change, new observation, guest-memory read/write, image patch, BOP/provider/OpenNT/DOS implementation, device/firmware/VGA enablement, CLI ABI, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S30/S31 aperture facts, S36 instruction history, S37 source map, S38 CS-transition witness, `bx_ntvdm_ntio_preentry_v1_prepare` and finite-run request mechanics. |
-| Files And ABI Surface | Evidence, Status and closure only. No code, build recipe, machine feature, exception-register or ABI change is admitted. |
+| Identifier Mode | M0 T198 S40, Ordinary Mode. |
+| Admission And Approval | S39 proves the finite fixture omits its required evidenced pre-entry profile inputs. The owner directs a minimal Bochs replacement with adapter-owned boundary and authorizes individually registered invasive bx changes under strict review. |
+| Objective | Define one fixed-width, opaque adapter pre-entry input record and convert it to the existing mantle mechanical multi-range write. Extend the private finite request so mantle validates and atomically applies that action before preserving the virtual-interrupt span, writing NTIO, restoring the span and entering the CPU. Use only the complete currently evidenced three-range stock profile snapshot. |
+| Non-goals | No bx-core change; no selector/service/BOP/OpenNT/DOS/NTIO recognition in mantle; no synthetic BIOS/device/firmware behavior; no new arbitrary memory API, raw pointer/host callback, partial writes, CLI option, broad runtime linkage, BDA-memory-`12h` input claim, or DOS continuity claim. |
+| Reference Baseline | S39 pre-entry attribution; r18 selected CPU5 snapshot evidence; existing `bx_ntvdm_mechanical_action_v1` checked all-or-nothing write; exact CPU5 x64 `/MT` finite closure. |
+| Files And ABI Surface | New `bx-vdm` pre-entry input record/builder; `bx-vdm` NTIO preparation signature; private `bx-mantle` finite-request copied action field and lifecycle call; finite fixtures/tests; registered exception, evidence and Status. The only cross-layer value is the existing fixed mechanical action record. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Record exact source locations for placement, preserve, reset-memory state and linked NTIO entry requirements; calculate all physical ranges; compare them against the S38 transition with explicit positive and negative ownership conclusions. Verify zero runtime-source/build/ABI diff. |
-| Expected Markers | Complete startup placement ledger, origin/disposition of the restored four bytes, source-supported attribution or bounded unproven result, no device/BOP inference, and one successor recommendation. |
+| Verification | Compile and run focused adapter-record validation/rejection tests and the exact CPU5 x64 `/MT` finite closure. Prove machine initialization → pre-entry whole-action preflight/write → capture preserved span → NTIO write → restore → CPU entry order; reject absent, malformed, overlapping, partial and over-aperture input; scan mantle for forbidden semantic vocabulary. |
+| Expected Markers | One opaque three-range record with r18 bytes, existing mechanical action only, atomic ordering, explicit missing-input rejection, no core change, no new device or BOP path, and a new post-seed runtime frontier. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact source locations, placement ledger, arithmetic, source/fixture differences, rejected shortcuts, interpretation limit and successor recommendation. |
-| Stop Conditions | Attribution would require runtime inspection or mutation, a guessed BIOS/device/BOP behavior, an undocumented image input, or a code change. Preserve evidence and re-admit only the necessary narrower action. |
-| Exit Criteria | A reviewable evidence record proves or rejects the current pre-entry placement/preserve contract as the owner of the unexpected transfer, without changing runtime behavior. |
+| Reporting Requirements | Record record/action layouts, r18 source identity and byte ranges, exact order, negative cases, build/run output, changed-source scan, resulting execution frontier and deferred input disposition. |
+| Stop Conditions | The action requires Bochs semantic decoding, profile/device/BOP vocabulary in mantle, a core change, host pointer/callback, uncontrolled range, partial write, undocumented bytes, or a new startup input beyond the selected r18 evidence. Preserve evidence and re-admit. |
+| Exit Criteria | The finite CPU5 x64 `/MT` execution accepts exactly the validated selected-profile pre-entry action and runs past the former undefined-input state; every invalid/absent input rejects before entry and no forbidden boundary expansion occurs. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -316,6 +316,12 @@ preserved low-memory contract.**
   evidenced NTIO pre-entry inputs. Its startup trace is therefore input
   contaminated, not evidence for a missing device or BOP. See
   [S39 attribution](etc/research/t198-s39-preentry-contract-attribution-001.md).
+- M0 T198 S40 is complete: the selected profile's complete currently
+  evidenced pre-entry snapshot is atomically installed through the existing
+  mantle mechanical action. The old all-`FF` `0A84` frontier is gone; the new
+  reproducible `0000:0047` frontier follows the still-unexplained
+  `9346:4D53 -> 0000:0000` transfer. See
+  [S40 closure](etc/research/t198-s40-preentry-input-closure-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

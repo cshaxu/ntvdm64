@@ -9,6 +9,7 @@
 #define BX_NTVDM_FINITE_RUN_H
 
 #include "bochs.h"
+#include "bx_ntvdm_mechanical_action_v1.h"
 
 enum bx_ntvdm_finite_run_status {
   BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET = 0,
@@ -42,6 +43,11 @@ struct bx_ntvdm_finite_run_request {
   Bit64u instruction_tick_budget;
   Bit32u ips;
   bx_bool stop_on_ud_fixture;
+  /* Optional fixed copied ordinary-RAM action executed before any preserved
+   * range is captured or entry bytes are placed.  Its content remains opaque
+   * to this private mantle request. */
+  bx_bool has_preentry_action;
+  struct bx_ntvdm_mechanical_action_v1 preentry_action;
   /* Optional opaque range captured before entry_bytes are published and
    * restored immediately afterwards.  This is a machine-only preservation
    * mechanic; its address and bytes have no guest-service meaning here. */
