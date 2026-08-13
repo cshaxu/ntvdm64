@@ -2,11 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S72.** Its governing brief is the active
+> **Current effective packet: M0 T198 S74.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S72 -- audit the post-`50:36` finite-execution objective,
-budget and controlled-stop contract before extending runtime observation.**
+**Active: M0 T198 S74 -- audit and, only if the existing source-derived DEM
+session-lifecycle provider closes cleanly, compose `50:3C` through the common
+provider plane.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +24,19 @@ budget and controlled-stop contract before extending runtime observation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S72, Ordinary Mode. |
-| Admission And Approval | S71 clean source closure crosses `50:36` but reaches finite-run `COMPLETED_BUDGET` at `0032:5A82`, not an unimplemented BOP; see `etc/research/t198-s71-entry-dos-app-no-vdd-witness-001.md`. |
-| Objective | Reconcile the current finite-run budget terminal with source and retained longer-run evidence, then define one minimal next execution observation/termination contract. |
-| Non-goals | No new BOP/provider, device, firmware, host launch, VDD, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S71 witness, finite-run implementation, and retained T137/T161 post-app-entry evidence. |
-| Files And ABI Surface | Audit/evidence and, only if justified, finite fixture observation controls; no BOP runtime ABI change. |
+| Identifier Mode | M0 T198 S74, Ordinary Mode. |
+| Admission And Approval | S73 reaches `50:3C` (`SVC_PDBTERMINATE`) as the first post-`50:36` uncomposed boundary and stops through the existing generic observer; see `etc/research/t198-s73-post-entry-million-tick-witness-001.md`. |
+| Objective | Audit the existing source-derived DEM session-lifecycle provider and its dependencies against the current composition, then compose it only through common ingress, registry, DEM-plane classification and the finite namespace owner if that closure remains exact. |
+| Non-goals | No raw-byte handler, new BOP contract, VDD/floppy/FDISK/device behavior, host search, guest/CLI input change, detached historical runtime import, or Bochs semantic change. |
+| Reference Baseline | S73 witness; T176 S15/S17 PDB-termination audit/implementation; current `bx_ntvdm_boot_namespace_composition_v1`; and provider manifest. |
+| Files And ABI Surface | Audit/evidence first; if admitted, existing `bx-vdm` provider source, common composition/manifest and focused tests only. No core/mantle ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Read the finite-run status/stop mechanics and compare current terminal/source path to retained longer observation; only after a stated objective is selected may a new bounded source-built run occur. |
-| Expected Markers | Explicit status meaning, exact bounded-run limitation, source-backed target/stop ownership, and one narrow next admission decision. |
+| Verification | Prove current source closure and negative ownership conditions before change; if and only if exact, build focused provider/composition tests and make one fresh unchanged-input source-built observation. |
+| Expected Markers | `50:3C` selection through ingress/registry/DEM plane, finite PSP-keyed search-session release, normal `+4` resume with no delta, and no VDD/device/host-search/Bochs member. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact source/status evidence, comparison to retained longer observation, selected execution objective, and next admission decision. |
-| Stop Conditions | The next observation requires adding BOP/provider/device/firmware/host launch/VDD behavior, or lacks an explicit termination objective. Stop and re-admit rather than expanding scope. |
-| Exit Criteria | A source-backed, finite execution objective and a justified next observation/closure task; no unclassified BOP/provider work remains admitted. |
+| Reporting Requirements | Record original owner/order, exact selected finite replacement, dependency/membership delta, positive and negative tests, and any fresh runtime boundary. |
+| Stop Conditions | The existing provider needs VDD/device/floppy/FDISK/host-search behavior, a detached historical runtime, an ABI change, or cannot be selected by the common plane. Stop and retain `50:3C` as controlled unavailable rather than widening scope. |
+| Exit Criteria | A source-backed decision to compose the pre-existing finite provider or retain it unavailable, with all non-selected original effects explicitly classified. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
