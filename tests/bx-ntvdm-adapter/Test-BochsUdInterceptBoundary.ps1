@@ -15,16 +15,7 @@ foreach ($path in @($exception, $header)) {
 }
 
 $exceptionText = Get-Content -LiteralPath $exception -Raw
-# The separately tested, default-off catalogue listener is allowed to name its
-# observation subject.  This test protects the generic transport around it,
-# not that listener's own intentionally narrow logging block.
-$listenerStart = $exceptionText.IndexOf('static void bx_ntvdm_bop_catalog_listener')
-if ($listenerStart -lt 0) { throw 'Missing separately governed BOP listener block.' }
-$listenerEnd = $exceptionText.IndexOf('#endif', $listenerStart)
-if ($listenerEnd -lt $listenerStart) { throw 'Unable to isolate BOP listener block.' }
-$genericExceptionText = $exceptionText.Remove($listenerStart,
-    ($listenerEnd + '#endif'.Length) - $listenerStart)
-$text = $genericExceptionText + "`n" + (Get-Content -LiteralPath $header -Raw)
+$text = $exceptionText + "`n" + (Get-Content -LiteralPath $header -Raw)
 foreach ($required in @(
     'BX_NTVDM_EXCEPTION_INTERCEPT_ABI_VERSION',
     'vector != BX_UD_EXCEPTION',

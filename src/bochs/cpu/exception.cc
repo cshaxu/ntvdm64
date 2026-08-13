@@ -41,10 +41,6 @@
 #define BX_NTVDM_ENABLE_UNMATCHED_UD_DIAGNOSTIC 0
 #endif
 
-#ifndef BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER
-#define BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER 0
-#endif
-
 #ifndef BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE
 #define BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE 0
 #endif
@@ -178,73 +174,6 @@ static bx_bool bx_ntvdm_deferred_startup_plan_consumer(BX_CPU_C *cpu,
   response->disposition = BX_NTVDM_EXCEPTION_RESUME;
   response->resume_rip = plan.entry_cpu.eip;
   return 1;
-}
-#endif
-
-#if BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER
-#include "bx_ntvdm_exception_abi.h"
-#include "bx_ntvdm_bop_catalog_v1.h"
-
-static void bx_ntvdm_bop_catalog_listener(unsigned cpu_id, unsigned vector,
-  Bit16u error_code, Bit64u fault_rip,
-  const bx_ntvdm_cpu_state_v1 *cpu_state,
-  const bx_ntvdm_instruction_window_v1 *instruction_window)
-{
-  bx_ntvdm_exception_event_v1 event;
-  bx_ntvdm_bop_catalog_v1_identity identity;
-  Bit8u stack_frame[4] = { 0, 0, 0, 0 };
-  Bit8u frame_code[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
-  Bit32u stack_address = 0;
-  Bit32u frame_address = 0;
-  unsigned stack_valid = 0;
-  unsigned frame_valid = 0;
-  event.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
-  event.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
-  event.struct_bytes = sizeof(event);
-  event.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;
-  event.cpu_id = cpu_id;
-  event.vector = vector;
-  event.error_code = error_code;
-  event.reserved0 = 0;
-  event.fault_rip = fault_rip;
-  if (cpu_state != 0 && instruction_window != 0 &&
-      bx_ntvdm_bop_catalog_v1_observe(&event, cpu_state,
-        instruction_window, &identity) && identity.is_bop) {
-    if (cpu_state->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
-        (cpu_state->esp & 0xffffu) <= 0xfffcu) {
-      stack_address = ((Bit32u)cpu_state->ss << 4) +
-        (Bit32u)(cpu_state->esp & 0xffffu);
-      if (stack_address <= 0xffffcu &&
-          BX_MEM(0)->ordinary_ram_readable((bx_phy_address)stack_address, 4) &&
-          BX_MEM(0)->copy_from_ordinary_ram((bx_phy_address)stack_address, 4,
-            stack_frame)) {
-        stack_valid = 1;
-        frame_address = (((Bit32u)stack_frame[2] +
-          ((Bit32u)stack_frame[3] << 8)) << 4) + (Bit32u)stack_frame[0] +
-          ((Bit32u)stack_frame[1] << 8);
-        if (frame_address <= 0xffff8u &&
-            BX_MEM(0)->ordinary_ram_readable((bx_phy_address)frame_address, 8) &&
-            BX_MEM(0)->copy_from_ordinary_ram((bx_phy_address)frame_address, 8,
-              frame_code)) frame_valid = 1;
-      }
-    }
-    BX_INFO(("ntdos64 adapter bop observed cpu=%u rip=%llx selector=%02x class=%u family=%u service-state=%u service=%02x ax=%04x bx=%04x cs=%04x ds=%04x dx=%04x si=%04x di=%04x cx=%04x flags=%08x ss=%04x sp=%04x stack-valid=%u stack=%02x%02x%02x%02x frame-valid=%u frame=%02x%02x%02x%02x%02x%02x%02x%02x",
-      cpu_id, (unsigned long long)fault_rip,
-      identity.selector, identity.source_class, identity.family,
-      identity.service_state, identity.service, (unsigned)(cpu_state->eax & 0xffffu),
-      (unsigned)(cpu_state->ebx & 0xffffu), (unsigned)cpu_state->cs,
-      (unsigned)cpu_state->ds, (unsigned)(cpu_state->edx & 0xffffu),
-      (unsigned)(cpu_state->esi & 0xffffu),
-      (unsigned)(cpu_state->edi & 0xffffu), (unsigned)(cpu_state->ecx & 0xffffu),
-      (unsigned)cpu_state->eflags, (unsigned)cpu_state->ss,
-      (unsigned)(cpu_state->esp & 0xffffu), stack_valid,
-      (unsigned)stack_frame[0], (unsigned)stack_frame[1],
-      (unsigned)stack_frame[2], (unsigned)stack_frame[3], frame_valid,
-      (unsigned)frame_code[0], (unsigned)frame_code[1],
-      (unsigned)frame_code[2], (unsigned)frame_code[3],
-      (unsigned)frame_code[4], (unsigned)frame_code[5],
-      (unsigned)frame_code[6], (unsigned)frame_code[7]));
-  }
 }
 #endif
 
@@ -418,9 +347,15 @@ static bx_bool bx_ntvdm_startup_transaction_interceptor(
 #include "bx_ntvdm_exception_intercept.h"
 #include "bx_ntvdm_exception_abi.h"
 #include "bx_ntvdm_adapter_runtime.h"
+#include "bx_ntvdm_exception_observer_v1.h"
 #include "bx_ntvdm_guest_gather_read_action_v1.h"
 
 static bx_ntvdm_exception_interceptor_t bx_ntvdm_exception_interceptor = 0;
+
+static void bx_ntvdm_adapter_diagnostic_report(void *, const char *message)
+{
+  if (message != 0) BX_INFO(("%s", message));
+}
 
 static bx_bool bx_ntvdm_ud_test_interceptor(
   const bx_ntvdm_exception_request *request,
@@ -469,6 +404,8 @@ static bx_bool bx_ntvdm_adapter_interceptor(
   event.fault_rip = request->fault_rip;
 
   if (request->cpu_state == 0 || request->instruction_window == 0 ||
+      !bx_ntvdm_exception_observer_v1_observe(&event, request->cpu_state,
+        request->instruction_window, bx_ntvdm_adapter_diagnostic_report, 0) ||
       !bx_ntvdm_adapter_runtime_v4_dispatch(&event, request->cpu_state,
         request->instruction_window, &gather_action) ||
       !bx_ntvdm_guest_gather_read_action_v1_valid(&gather_action)) return 0;
@@ -1524,7 +1461,7 @@ struct BxExceptionInfo exceptions_info[BX_CPU_HANDLED_EXCEPTIONS] = {
 // trap:       override exception class to TRAP
 void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
 {
-#if BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT || BX_NTVDM_ENABLE_STARTUP_TRANSACTION || BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER || BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE || BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN || BX_NTVDM_ENABLE_MACHINE_COMPOSITION
+#if BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT || BX_NTVDM_ENABLE_STARTUP_TRANSACTION || BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE || BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN || BX_NTVDM_ENABLE_MACHINE_COMPOSITION
   bx_ntvdm_exception_response response;
   bx_ntvdm_cpu_state_v1 cpu_state;
   bx_ntvdm_instruction_window_v1 instruction_window;
@@ -1532,7 +1469,7 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
 
   BX_INSTR_EXCEPTION(BX_CPU_ID, vector, error_code);
 
-#if BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT || BX_NTVDM_ENABLE_STARTUP_TRANSACTION || BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER || BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE || BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN
+#if BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT || BX_NTVDM_ENABLE_STARTUP_TRANSACTION || BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE || BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN
   if (vector == BX_UD_EXCEPTION) {
     bx_ntvdm_cpu_state_v1_initialize(&cpu_state,
       real_mode() ? BX_NTVDM_CPU_EXECUTION_REAL :
@@ -1565,10 +1502,6 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
       bx_ntvdm_instruction_window_v1_capture(&instruction_window,
         BX_CPU_THIS_PTR eipFetchPtr + window_offset, window_bytes);
     }
-#if BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER
-    bx_ntvdm_bop_catalog_listener(BX_CPU_ID, vector, error_code,
-      BX_CPU_THIS_PTR prev_rip, &cpu_state, &instruction_window);
-#endif
   }
 
 #if BX_NTVDM_ENABLE_STARTUP_TRANSACTION

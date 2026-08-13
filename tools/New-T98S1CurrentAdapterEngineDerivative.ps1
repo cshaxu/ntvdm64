@@ -53,7 +53,7 @@ $adapterSources = @(
     'bx_ntvdm_search_session.c','bx_ntvdm_search_result_v1.c',
     'bx_ntvdm_search_plan_v1.c','bx_ntvdm_search_request_v1.c',
     'bx_ntvdm_search_transaction_v1.c','bx_ntvdm_dem_path_search_service_v1.c',
-    'bx_ntvdm_bop_catalog_v1.c',
+    'bx_ntvdm_bop_catalog_v1.c','bx_ntvdm_exception_observer_v1.c',
     'bx_ntvdm_bop_ingress_v1.c','bx_ntvdm_bop_provider_registry_v1.c',
     'bx_ntvdm_dem_plane_v1.c','bx_ntvdm_dem_provider_v1.c',
     'bx_ntvdm_dem_session_lifecycle_provider_v1.c','bx_ntvdm_dem_fastio_provider_v1.c',
@@ -176,17 +176,15 @@ if ($DeferredStartupPlan) {
 }
 $exceptionDefines = @('/DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1')
 if ($DeferredStartupPlan) {
-    $exceptionDefines += @('/DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1', '/DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1', '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0', '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0', '/DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1')
+    $exceptionDefines += @('/DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1', '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0', '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0', '/DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1')
 }
 elseif ($RealModeVectorDiagnostic) {
-    $exceptionDefines += @('/DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
-        '/DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
+    $exceptionDefines += @('/DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
         '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
         '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')
 }
 elseif ($BopRegisterObservation) {
-    $exceptionDefines += @('/DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
-        '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
+    $exceptionDefines += @('/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
         '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')
 }
 if ($MachineComposition) { $exceptionDefines += '/DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1' }
@@ -235,7 +233,6 @@ if ($RealModeVectorDiagnostic) {
     if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)cpu\\exception\.o:').Matches.Count -ne 1 -or
         $shimText -match '(^|\r?\n)main\.o:') { throw 'Vector diagnostic must rebuild exactly cpu\\exception.o.' }
     foreach ($term in @('BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
-            'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
             'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
             'BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')) {
         if ($shimText -notmatch [regex]::Escape($term)) { throw "Vector diagnostic lacks macro: $term" }
@@ -246,7 +243,6 @@ if ($BopRegisterObservation) {
     if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)cpu\\exception\.o:').Matches.Count -ne 1 -or
         $shimText -match '(^|\r?\n)main\.o:') { throw 'BOP register observation must rebuild exactly cpu\exception.o.' }
     foreach ($term in @('BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1',
-            'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
             'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
             'BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')) {
         if ($shimText -notmatch [regex]::Escape($term)) { throw "BOP register observation lacks macro: $term" }
