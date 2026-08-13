@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T189 S6 — closure audit and next-boundary source map.**
+**Active: M0 T190 S1 — COMMAND bootstrap contract map.**
 
 > **Governance correction:** The table below is the sole active packet. T188
-> is closed. T189 S1--S5 are complete, retained evidence/implementation
-> deliveries; they are not concurrent active packets.
+> and T189 are closed. Their retained S records are evidence, not concurrent
+> active packets.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T189 S6, Ordinary Mode. |
-| Admission And Approval | Owner authorized evidence-led holistic BOP recovery. T189 S5 proves that `54:0C` succeeds when its command-service and provider objects join the four-object derivative, and that the prior decline was stale-object composition rather than a proved source/Bochs defect. |
-| Objective | Audit the completed T189 chain, map the next reached unresolved BOP boundary to its original OpenNT owner, and prepare the bounded next implementation brief. |
-| Non-goals | No source or Bochs change, provider capability, guest-memory access, trace run, retry, archive/device/config rebuild, or terminal-result transport. |
-| Reference Baseline | T189 S1--S5 evidence, notably the committed `54:0C` write in the S5 frozen observation. |
-| Files And ABI Surface | Source/read-only owner map, evidence/status/history records, and queue/TODO disposition only. |
+| Identifier Mode | M0 T190 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized evidence-led holistic BOP recovery and adapter source-derived recovery where historical host composition cannot be linked. T189 S6 identifies original COMMAND `cmdComSpec` as the first reached unresolved boundary. |
+| Objective | Produce the complete source/ABI/failure map for original `54:02` `cmdComSpec` and its paired `54:0F` environment consumer, sufficient to admit one coherent implementation slice. |
+| Non-goals | No source or Bochs change, provider capability, host-environment exposure, guest-memory access beyond read-only source analysis, trace run, retry, archive/device/config rebuild, or terminal-result transport. |
+| Reference Baseline | T189 S5 valid observation and T189 S6 command-bootstrap boundary map. |
+| Files And ABI Surface | Original COMMAND sources, existing source-derived COMSPEC seam, adapter ABI headers, and evidence/status records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Exact source-path/owner/failure map, documentation inventory/governance, `git diff --check`, and review against the T189 closure facts. |
-| Expected Markers | One source-backed next-boundary disposition with its missing composition edge or explicit unavailability; no runtime claim. |
+| Verification | Exact source-path/owner/layout/failure map, documentation inventory/governance, `git diff --check`, and review against the original-owner order. |
+| Expected Markers | One source-backed `54:02`/`54:0F` contract map that separates original behavior, current restriction, and rejected host/Bochs expansion. |
 | Asset Needs | Existing OpenNT and adapter source plus T189 retained evidence; no new asset. |
-| Reporting Requirements | State whether T189 can close, what evidence transfers, and whether the queue candidate is admissible; preserve rejected expansion paths. |
+| Reporting Requirements | State the smallest whole COMMAND slice and its test/build/observation closure requirements; preserve rejected expansion paths. |
 | Stop Conditions | Any need for source change, runtime observation, new Bochs patch, or a new provider; pause for a fresh S admission. |
-| Exit Criteria | T189 closure audit or durable evidence that an additional bounded T189 S is necessary. |
+| Exit Criteria | T190 S1 source map is committed or records a durable source/ABI blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
@@ -37,6 +37,9 @@
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
   frozen run commits the existing boot-file transaction and reaches controlled
   stop; it does not claim continuous execution.
+- M0 T189 is closed: its valid trace transfers original COMMAND `54:02`
+  `cmdComSpec` rather than a Bochs/machine issue; T190 begins with the paired
+  `54:02`/`54:0F` source contract map.
 - T96 S1 P1 is complete locally: all inventoried selector, service, and BIOS
   forms now have source routing/owner evidence without an enabled provider.
 - Bochs remains generic-machine owner. The adapter owns a bounded copied BOP
@@ -78,6 +81,7 @@
 | --- | --- |
 | M0 T95 | Closed/replanned; closure facts, transferred backlog, and limitations are in history/m0-t95-closure-20260811.md. |
 | M0 T189 S5 | Complete: four-object derivative and one manifest-bound observation commit `54:0C` and reach controlled stop; S6 is source-only audit. |
+| M0 T189 | Closed: stale object closure is proven; `54:02` COMMAND bootstrap contract transfers to T190. |
 | M0 T96 S1 P1 | Complete static BOP selector/service/BIOS provider and module map; local commit pending because no Git remote is configured. |
 | M0 T96 S2 P1--P2 | Complete shared ingress, typed pass-through gate, and provider selection registry; legacy endpoint migration remains S8. |
 | M0 T96 S3 | Complete: all 73 callable DEM services have a component/disposition, and every admitted DEM slice is plane-gated; legacy runtime migration remains S8. |
