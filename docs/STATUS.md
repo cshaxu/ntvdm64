@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S5.** Its governing brief is the active
+> **Current effective packet: M0 T198 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S5 -- extract the selector-blind generic #UD bridge needed
-before the holistic BOP plane can be recomposed.**
+**Active: M0 T198 S6 -- attach the fixed #UD record to the global `bx-vdm`
+ingress and registry without attaching a provider runtime.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ before the holistic BOP plane can be recomposed.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S5, Ordinary Mode. |
-| Admission And Approval | S4 is closed by the generic #UD seam map. It identifies a finite, selector-blind core/mantle bridge extraction as the only admissible next slice. |
-| Objective | Extract a fixed C ABI generic #UD event/outcome bridge: core retains copied event and typed outcome application; mantle owns bridge composition and finite controlled stop; no raw callback or adapter runtime remains in core. |
-| Non-goals | No BOP selector/service/provider behavior; no adapter/CLI ABI change; no firmware/BIOS, device, GUI, plugin, product build, OpenNT import, general machine configuration, unbounded execution, or CPU decode/exception semantic change. |
-| Reference Baseline | T198 S3 finite-run witness, T198 S4 generic #UD seam map, and current core exception/intercept source. |
-| Files And ABI Surface | Minimal `bx-core` generic seam, `bx-mantle` fixed bridge declaration/implementation, focused fixture/test/probe, T198 evidence and Status. The bridge is fixed-width copied C ABI only; no callback pointers or adapter object surface. |
+| Identifier Mode | M0 T198 S6, Ordinary Mode. |
+| Admission And Approval | S5 is closed by its physical core-cleanup witness. The owner-approved global BOP direction admits only an ingress/registry attachment map before any provider or transaction composition. |
+| Objective | Define and verify a fixed `bx-vdm` bridge implementation that converts the generic copied #UD record to the existing global ingress and provider-registry records, then declines every result until a separate provider slice is admitted. |
+| Non-goals | No individual BOP service/provider behavior; no adapter runtime v1/v2/v3/v4, CLI/environment/session, guest RAM transfer, firmware/BIOS, device, GUI, product build, OpenNT import, general machine configuration, unbounded execution, or CPU decode/exception semantic change. |
+| Reference Baseline | T198 S5 physical cleanup witness and the T198 S6 mantle-to-VDM ingress map. |
+| Files And ABI Surface | One `bx-vdm` fixed-bridge source/header and focused C test; the existing fixed mantle record, exception/state/window/result, ingress and registry ABI only. The bare mantle bridge remains an alternative link implementation. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-build a finite CPU5 derivative with the extracted bridge and a neutral typed #UD fixture; prove the core object has no adapter runtime include, environment selection, raw callback or BOP term; prove controlled stop returns through mantle lifecycle; run documentation governance. |
-| Expected Markers | A source-built core/mantle bridge manifest/trace, static no-composition scan, and default-off negative result when no mantle bridge is linked. |
+| Verification | Run focused x86 C conversion/ingress/registry positives and negative windows; prove the new bridge references no runtime/session/CLI/Win32/guest-memory symbol; rerun the bare CPU5 finite fixture and documentation governance. |
+| Expected Markers | Field-map evidence, a `C4 C4 50 11` global-ingress trace with a typed decline, negative non-BOP/incomplete/unknown traces, and an unchanged bare-machine source-build. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record field widths, ownership, source call sites, permitted transitions, all rejected product/adapter alternatives and runtime non-claim. |
-| Stop Conditions | Any core source retains/introduces BOP/service recognition, adapter runtime include, environment selection, raw callback, firmware/device/GUI behavior, CPU semantic change, a product `main.cc` dependency, or unbounded run. Preserve evidence and re-admit. |
-| Exit Criteria | The finite CPU5 composition source-builds a neutral #UD fixture through the fixed bridge and returns via typed stop or pass-through disposition; legacy composition is demonstrably absent from core. |
+| Reporting Requirements | Record every field/result conversion, source object and toolchain island, the mutually exclusive bridge-link rule, rejected runtime alternatives, and runtime non-claim. |
+| Stop Conditions | Any core/mantle source gains BOP/provider/runtime meaning; the bridge attaches a service/provider, environment, session, guest-memory transfer, raw pointer or product dependency; or conversion requires a new ABI field. Preserve evidence and re-admit. |
+| Exit Criteria | A `bx-vdm` bridge source/test proves common ingress and registry classification from the copied record and declines all dispositions; the bare CPU5 source-build remains clean; no individual service becomes reachable. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover CLI, bx-vdm ingress/registry/planes, native execution plan, Bochs generic seam, mantle lifecycle, retained engine build manifests, OpenNT providers and every selector-specific source location. |
+| Similar-Issue Sweep | Cover every generic-record field, ingress route, registry family, v2 outcome disposition, alternative link input, adapter runtime entrypoint, CLI/session symbol and legacy direct BOP recognizer. |
 
 ## Current Technical Baseline
 
