@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T190 S1 — COMMAND bootstrap contract map.**
+**Active: M0 T190 S2 — bounded COMMAND bootstrap recovery.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > and T189 are closed. Their retained S records are evidence, not concurrent
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T190 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized evidence-led holistic BOP recovery and adapter source-derived recovery where historical host composition cannot be linked. T189 S6 identifies original COMMAND `cmdComSpec` as the first reached unresolved boundary. |
-| Objective | Produce the complete source/ABI/failure map for original `54:02` `cmdComSpec` and its paired `54:0F` environment consumer, sufficient to admit one coherent implementation slice. |
-| Non-goals | No source or Bochs change, provider capability, host-environment exposure, guest-memory access beyond read-only source analysis, trace run, retry, archive/device/config rebuild, or terminal-result transport. |
-| Reference Baseline | T189 S5 valid observation and T189 S6 command-bootstrap boundary map. |
-| Files And ABI Surface | Original COMMAND sources, existing source-derived COMSPEC seam, adapter ABI headers, and evidence/status records only. |
+| Identifier Mode | M0 T190 S2, Ordinary Mode. |
+| Admission And Approval | Owner authorized source-derived adapter recovery when historical CCPU/SAS/Win32 composition cannot link. T190 S1 maps `54:02` and `54:0F` as the one original COMMAND bootstrap state machine. |
+| Objective | Replace the source-derived profile-path equality restriction with the original-shaped bounded COMSPEC gather/cache contract, while retaining the paired existing `54:0F` retry/write path. |
+| Non-goals | No Bochs or guest source change, new BOP recognizer, host-environment exposure, DOS environment implementation, new COMMAND service, runtime observation, archive/device/config rebuild, or terminal-result transport. |
+| Reference Baseline | T190 S1 contract map and existing checked gather/read/resume plus multi-write ABI. |
+| Files And ABI Surface | `bx_ntvdm_cmd_comspec_bootstrap_service`, focused test, existing runtime call sites, adapter ABI/evidence/status records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Exact source-path/owner/layout/failure map, documentation inventory/governance, `git diff --check`, and review against the original-owner order. |
-| Expected Markers | One source-backed `54:02`/`54:0F` contract map that separates original behavior, current restriction, and rejected host/Bochs expansion. |
-| Asset Needs | Existing OpenNT and adapter source plus T189 retained evidence; no new asset. |
-| Reporting Requirements | State the smallest whole COMMAND slice and its test/build/observation closure requirements; preserve rejected expansion paths. |
-| Stop Conditions | Any need for source change, runtime observation, new Bochs patch, or a new provider; pause for a fresh S admission. |
-| Exit Criteria | T190 S1 source map is committed or records a durable source/ABI blocker. |
+| Verification | Focused positive/negative COMMAND-bootstrap tests, static BOP/trace boundaries, source diff review, documentation governance and `git diff --check`. |
+| Expected Markers | A 64-byte bounded gather for `54:02`, accepted copied COMSPEC state without a profile-path comparison, unchanged `54:0F` capacity/write behavior, and explicit pass-through for missing NUL/non-ASCII/overlong input. |
+| Asset Needs | Existing OpenNT source map and adapter test/build tools only; no new asset. |
+| Reporting Requirements | Record source deviation, retained original semantics, rejected ambient environment, test proof and the exact changed-object closure required before a later run. |
+| Stop Conditions | Need for Bochs/guest change, host environment, unbounded guest read, provider expansion, changed `54:0F` policy, or runtime observation; pause for a fresh S admission. |
+| Exit Criteria | Source/test closure of the cohesive `54:02`/`54:0F` slice or durable rejection; derivative build/run require later S admission. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
