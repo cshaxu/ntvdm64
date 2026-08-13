@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S15 — v6 CLI runner/shim source-build closure.**
+**Active: M0 T194 S16 — one bounded v6 normal-return observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S15, Ordinary Mode. |
-| Admission And Approval | S14 establishes that every retained runner rejects the v6 profile before child creation, while the retained shim/r2 bundle remain source-compatible. This S admits one CLI-only current-source build pair. |
-| Objective | Produce and hash-record a current v6-capable runner plus the matching fixed-ABI shim, without starting an engine. |
-| Non-goals | No engine or guest execution, bundle change, Bochs patch/build/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry. |
-| Reference Baseline | T194 S8 r2 derivative, S10 controller/bundle, S13 validated root, and S14 binary-identity blocker. |
-| Files And ABI Surface | `src/cli`, CMake CLI targets, generated CLI-only artifact pair and evidence only. |
+| Identifier Mode | M0 T194 S16, Ordinary Mode. |
+| Admission And Approval | S15 source-builds and CLI-tests the exact current v6 runner/shim pair against the S13 root without a real engine. This S admits one controller invocation only. |
+| Objective | Retain one watchdog-bounded r2 engine observation of the v6 one-target launch, classifying its actual markers without claiming normal return absent `54:11`. |
+| Non-goals | No retry, source/build/controller/bundle change, Bochs patch/build/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or second observation. |
+| Reference Baseline | S8 r2 engine, S10 controller/bundle, S13 root, S14 retained-runner blocker, and S15 current CLI pair. |
+| Files And ABI Surface | Existing S10 controller, S15 runner/shim, S10 r2 bundle, S13 root, and one new immutable evidence directory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MinGW CMake build of runner/shim only; v6 parser string and CLI-focused test evidence; hashes; documentation governance and `git diff --check`. |
-| Expected Markers | One current runner/shim pair, explicit artifact hashes and a source-only acceptance record; no runtime claim. |
-| Asset Needs | Current source, existing MinGW toolchain, and no guest/Bochs asset beyond static bundle identity comparison. |
-| Reporting Requirements | Separate runner parser/environment, shim ABI/bundle verification, build-input boundary and non-execution facts. |
-| Stop Conditions | Any native engine/guest process, Bochs/adaptor build, bundle mutation, profile grammar/provider change, or retry; pause for a fresh S admission. |
-| Exit Criteria | Committed current CLI-only pair or durable toolchain/build blocker. |
+| Verification | One `Invoke-T194S10V6BoundedObservation.ps1` invocation with an empty evidence root and a 15-second watchdog; inspect immutable inputs/outcome/log hashes; documentation governance and `git diff --check`. |
+| Expected Markers | Exactly one evidence root, `retryPolicy=none`, one exit/watchdog classification and all actual BOP/stop markers preserved. |
+| Asset Needs | Existing S10 controller/r2 bundle, S13 root and S15 pair; no new source or runtime asset. |
+| Reporting Requirements | Exact hashes, watchdog and exit facts, observed marker sequence, and an explicit statement whether `54:11` was observed. |
+| Stop Conditions | Missing/mismatched input hash, controller rejection, second attempt, source/build/controller/bundle mutation, Bochs/adaptor/provider change, or any claim beyond retained markers; pause for a fresh S admission. |
+| Exit Criteria | Committed one-run evidence record and truthful normal-return classification. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify both emitted binaries carry v6 identity; reject stale v5 runner substitution, engine linkage, and accidental Bochs/adaptor targets. |
+| Similar-Issue Sweep | Verify no stale v5 runner/shim, old engine hash, old launch-kind/tail environment, retry, or unintended second wrapper enters the run. |
 
 ## Current Technical Baseline
 
