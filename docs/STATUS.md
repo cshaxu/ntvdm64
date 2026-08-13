@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T188 S5 — Bochs diagnostic necessity review.**
+**Binding active packet: M0 T188 S6 — copied-state trace implementation.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T188 S5**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T188 S6**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T188 S5, Ordinary Mode. |
-| Admission And Approval | S4 adds and proves a copied adapter-local state snapshot with no behavior change. Owner authorization permits autonomous sequencing; S5 decides whether its diagnostic value warrants a registered default-off Bochs trace consumer before any such source change. |
-| Objective | Compare the already-recorded one-shot limitation against the smallest possible Bochs trace surface and either admit a registered S6 observation plan or reject it and close T188. |
-| Non-goals | No Bochs/CLI/engine source or build change, guest observation, selector/service interpretation, state mutation, provider/DOS/COMMAND semantic change, host capability or completion claim. |
-| Reference Baseline | T188 S4 copied record can distinguish installed/provider/pending kind after dispatch; T187 S4 has no outcome controller record and cannot be repeated. |
-| Files And ABI Surface | Bochs exception register, T188 evidence/plan and Status only; no source code in this S. |
+| Identifier Mode | M0 T188 S6, Ordinary Mode. |
+| Admission And Approval | S5 registers BX-TRACE-060 and establishes that the copied lifecycle record is the only remaining high-value runtime discriminator. Owner authorization permits registered Bochs intrusions; S6 admits its default-off source/static closure only. |
+| Objective | Add the registered generic post-dispatch trace of the copied adapter lifecycle record, preserving the existing pass-through result and excluding all BOP/service semantics. |
+| Non-goals | No selector/service/window/guest-memory/payload/session-layout inspection, adapter behavior change, CLI change, engine build, guest observation, provider/DOS/COMMAND semantic change, host capability or completion claim. |
+| Reference Baseline | BX-TRACE-060; T188 S4 source/test-closed snapshot; existing generic interceptor emits the pass-through line after its unchanged v4/v3/v2 result chain. |
+| Files And ABI Surface | `src/bochs/cpu/exception.cc`, a focused Bochs static boundary test, register/evidence and Status; no other Bochs or adapter production source. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare S4 record content with current `exception.cc` generic interceptor order and the external intrusion register; run documentation inventory/governance and `git diff --check`. |
-| Expected Markers | Explicit yes/no decision, quantified one-object/source surface, exception-register disposition and a no-retry controller requirement if admitted. |
-| Asset Needs | S4 record, T187 S4 evidence, current Bochs source/register and retained build inputs; no build/runtime action. |
-| Reporting Requirements | Demonstrate that any trace reads only a copied record after dispatch and cannot alter its result; otherwise reject it. |
-| Stop Conditions | Any code/build/run, missing exception authority, inability to preserve post-dispatch order, or scope beyond copied lifecycle fields; require S6 admission only after a positive decision. |
-| Exit Criteria | Registered S6 plan or durable rejection/closure; no source or runtime action. |
+| Verification | Static test requires local default-off guard, copied-state call only in the `PASS_THROUGH` branch after valid result, and forbids selector/service/window/guest-memory/payload/result mutation terms; documentation inventory/governance and `git diff --check`. |
+| Expected Markers | BX-TRACE-060 record, one macro, one copied-state call, one append-only log, unchanged `return 0` pass-through. |
+| Asset Needs | Current exception source and S4 adapter ABI; no build/runtime input. |
+| Reporting Requirements | State exact macro default, source order, immutable result/control-flow contract and the later one-object build requirement. |
+| Stop Conditions | Any extra Bochs object/source, adapter ABI expansion, BOP/service branch, result/control-flow change, engine build or guest run; require S7 re-admission. |
+| Exit Criteria | Source/static closure of BX-TRACE-060; no engine build or guest run. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
