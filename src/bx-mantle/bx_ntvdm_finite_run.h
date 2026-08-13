@@ -21,12 +21,15 @@ enum bx_ntvdm_finite_run_status {
 
 #define BX_NTVDM_FINITE_RUN_REQUEST_VERSION 2
 #define BX_NTVDM_FINITE_RUN_MAX_ENTRY_BYTES 65536
+#define BX_NTVDM_FINITE_RUN_TERMINAL_SNAPSHOT_MAX_BYTES 64
 
 struct bx_ntvdm_finite_run_terminal_snapshot {
   Bit8u valid;
-  Bit8u reserved0;
+  Bit8u captured_byte_count;
   Bit16u cs;
   Bit32u eip;
+  bx_phy_address captured_physical_address;
+  Bit8u captured_bytes[BX_NTVDM_FINITE_RUN_TERMINAL_SNAPSHOT_MAX_BYTES];
 };
 
 struct bx_ntvdm_finite_run_request {
@@ -58,5 +61,12 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
 void bx_ntvdm_finite_run_terminal_snapshot_clear(void);
 bx_bool bx_ntvdm_finite_run_terminal_snapshot_get(
   bx_ntvdm_finite_run_terminal_snapshot *snapshot);
+
+/* One-shot, default-off fixture observation of opaque ordinary RAM after the
+ * finite loop returns. It accepts no guest pointer and carries no guest or
+ * service vocabulary. A zero length disables it; every nonzero range must
+ * fit ordinary RAM and the fixed private capture bound. */
+bx_bool bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
+  bx_phy_address physical_address, Bit8u byte_count);
 
 #endif

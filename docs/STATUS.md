@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S30.** Its governing brief is the active
+> **Current effective packet: M0 T198 S31.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S30 -- audit ownership and initialization of the low-RAM
-`0000:0A84..0AD2` frontier before admitting any repair.**
+**Active: M0 T198 S31 -- add one opaque terminal ordinary-RAM snapshot to the
+finite mantle fixture, then establish the exact `0x0A80` mutation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S30, Ordinary Mode. |
-| Admission And Approval | S29 captured the first generic fault as real-mode `0000:0A84` with an all-`FF` copied window after a `50:0F` resume. Its recorded follow-up requires owner classification of that low-RAM frontier before any BIOS, IVT, RAM, BOP, or device change. |
-| Objective | Map the exact low-RAM range's initialization and intended ownership across the source-built NTIO/NTDOS startup contract, the minimal mantle lifecycle, and original OpenNT SoftPC/BIOS evidence; produce a requirement matrix and one bounded repair or trace recommendation. |
-| Non-goals | No BOP/provider implementation, guest-image patch, RAM/IVT/BIOS write, CPU/mantle semantic change, device/plugin/firmware/VGA enablement, new ABI, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S29 copied event; exact NTIO/NTDOS fixture; `bx_ntvdm_ntio_preentry_v1`, finite-run/minimal-machine sources; OpenNT SoftPC/NTIO startup source and retained startup evidence. |
-| Files And ABI Surface | Evidence and Status only. No runtime ABI, Bochs, mantle, adapter, CLI, guest, or historical OpenNT source changes are admitted. |
+| Identifier Mode | M0 T198 S31, Ordinary Mode. |
+| Admission And Approval | S30 proves the source NTIO image owns physical `0x0A84` at publication, but S29 observes all-`FF` bytes there later. S30's recorded successor authorizes a bounded opaque mantle-owned ordinary-RAM terminal snapshot before any repair. |
+| Objective | Add a default-off private finite-run terminal snapshot of one prevalidated ordinary-RAM range, request `0x0A80` through the exact fixture, and prove whether/which bytes differ from the published NTIO source image at the accepted generic-stop boundary. |
+| Non-goals | No BOP/provider implementation or interpretation, guest-image patch, RAM/IVT/BIOS write, CPU/core semantic change, device/plugin/firmware/VGA enablement, production CLI ABI, legacy linkage, or DOS continuity claim. |
+| Reference Baseline | S29 copied event; S30 aperture audit; existing mantle finite-run copied RAM primitives and private terminal snapshot; exact source-built NTIO/NTDOS fixture. |
+| Files And ABI Surface | `bx-mantle` private finite-run header/source and the exact test fixture, plus evidence and Status. The capture accepts only address/length and returns copied bytes; no BOP, guest, OpenNT, or provider vocabulary is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect the admitted sources and existing exact fixture layout; map physical ranges and state writers; cross-check the copied event; record evidence/limitations and a negative proof of zero runtime-source diff. |
-| Expected Markers | `0xA84..0xAD2` owner matrix, initialization/source mapping, required/missing-state classification, one bounded successor, and zero runtime-source change. |
+| Verification | MSVC x64 `/MT` compile/link of the mantle fixture and exact CPU5 run. Prove disabled/default and invalid-range rejection, then the fixture's bounded capture at generic stop; compare the copied output against the exact published NTIO bytes. Boundary scans prove no core, BOP, provider, device, or CLI term enters the new mantle mechanic. |
+| Expected Markers | Bounded opaque address/length, final copied bytes, source-versus-terminal difference, first generic-stop evidence, and no enabled device. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact sources/ranges, owner matrix, confirmed facts versus hypotheses, and a bounded successor recommendation. |
-| Stop Conditions | The low-RAM writer cannot be established from available source/evidence, repair would need changed code, a device/firmware route appears necessary, or host-service semantics are implicated. Preserve evidence and re-admit. |
-| Exit Criteria | A reviewable evidence record classifies the frontier and names the smallest owner-correct next S without runtime code change. |
+| Reporting Requirements | Record API/default/rejection contract, exact commands and snapshot bytes, source comparison, ownership boundary, limitations, and successor recommendation. |
+| Stop Conditions | Capture needs guest interpretation, a mutable action, core/device/firmware change, unbounded guest memory, a host pointer, or a production CLI contract. Preserve evidence and re-admit. |
+| Exit Criteria | The exact run records the bounded terminal range and source difference at typed stop, while focused mechanics tests prove default/rejection behavior and all production boundaries remain clean. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -273,6 +273,11 @@
   differs from the entry CS. The frontier is a guest mutation/transfer target,
   not an IVT, firmware, VGA, or device-admission request. See
   [S30 audit](etc/research/t198-s30-low-ram-frontier-ownership-audit-001.md).
+- M0 T198 S31 adds a one-shot, opaque, checked mantle terminal-RAM snapshot.
+  The exact CPU5 run records `0x0A80..0x0A8F` as differing from its published
+  NTIO bytes and confirms `0x0A84..0x0A87 = FF FF FF FF` at generic stop; no
+  core, BOP, device, or CLI behavior changed. See
+  [S31 snapshot](etc/research/t198-s31-terminal-ram-snapshot-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

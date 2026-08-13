@@ -17,6 +17,8 @@ struct bx_ntvdm_finite_run_stop_state {
 };
 
 static bx_ntvdm_finite_run_terminal_snapshot terminal_snapshot;
+static bx_phy_address terminal_capture_physical_address;
+static Bit8u terminal_capture_byte_count;
 
 void bx_ntvdm_finite_run_terminal_snapshot_clear(void)
 {
@@ -49,6 +51,20 @@ static bx_bool bx_ntvdm_finite_run_ordinary_range_is_valid(
     physical_address <= (bx_phy_address) (0x100000 - byte_count);
 }
 
+bx_bool bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
+  bx_phy_address physical_address, Bit8u byte_count)
+{
+  terminal_capture_physical_address = 0;
+  terminal_capture_byte_count = 0;
+  if (byte_count == 0) return physical_address == 0;
+  if (byte_count > BX_NTVDM_FINITE_RUN_TERMINAL_SNAPSHOT_MAX_BYTES ||
+      !bx_ntvdm_finite_run_ordinary_range_is_valid(physical_address,
+        byte_count)) return 0;
+  terminal_capture_physical_address = physical_address;
+  terminal_capture_byte_count = byte_count;
+  return 1;
+}
+
 bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   const bx_ntvdm_finite_run_request *request)
 {
@@ -56,6 +72,8 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   bx_ntvdm_finite_run_stop_state stop_state;
   Bit8u entry_probe[2];
   Bit8u preserved[64];
+  bx_phy_address terminal_capture_address;
+  Bit8u terminal_capture_count;
   int stop_timer;
 
   if (request == 0 || request->request_version != BX_NTVDM_FINITE_RUN_REQUEST_VERSION ||
@@ -73,6 +91,10 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   }
 
   bx_ntvdm_finite_run_terminal_snapshot_clear();
+  terminal_capture_address = terminal_capture_physical_address;
+  terminal_capture_count = terminal_capture_byte_count;
+  terminal_capture_physical_address = 0;
+  terminal_capture_byte_count = 0;
 
   if (machine.initialize(0x100000, 0x100000) != BX_NTVDM_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
@@ -120,6 +142,15 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   if (request->capture_terminal_snapshot) {
     terminal_snapshot.cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
     terminal_snapshot.eip = bx_cpu.get_eip();
+    if (terminal_capture_count != 0) {
+      if (!bx_mem.copy_from_ordinary_ram(terminal_capture_address,
+          terminal_capture_count, terminal_snapshot.captured_bytes)) {
+        machine.cleanup();
+        return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
+      }
+      terminal_snapshot.captured_physical_address = terminal_capture_address;
+      terminal_snapshot.captured_byte_count = terminal_capture_count;
+    }
     terminal_snapshot.valid = 1;
   }
   bx_ntvdm_mantle_generic_ud_fixture_stop(0);
