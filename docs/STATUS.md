@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S57 — build deferred native-POST machine-composition closure.**
+**Active: M0 T194 S58 — apply Bochs-intrusion convergence architecture correction.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S57, Ordinary Mode. |
-| Admission And Approval | S56 generated the exact deferred native-POST machine-composition closure. Owner approval permits normal single-agent continuation under T194. |
-| Objective | Build and link the frozen S56 closure once with MSVC x86. |
-| Non-goals | No engine execution, source/generator change, device/archive expansion, new machine/provider semantic change, raw-media action, or normal-return claim. |
-| Reference Baseline | S50 deferred closure, S54 observation, S55 source correlation and S56 generated makefile/manifest. |
-| Files And ABI Surface | Existing S56 ignored root and build evidence only. |
+| Identifier Mode | M0 T194 S58, Ordinary Mode. |
+| Admission And Approval | Owner directs the architecture correction: Bochs intrusion does not mean BOP implementation in Bochs; selector/service semantics belong to the adapter, and future Bochs semantic intrusion is frozen pending an audit. |
+| Objective | Update the current architecture authority and unnumbered candidate-T order to make the selector-blind Bochs boundary and intrusion-convergence audit binding. |
+| Non-goals | No source/build/bundle/runtime change, no exception-register status rewrite, no numeric T allocation, no Bochs/adapter migration, and no BOP execution claim. |
+| Reference Baseline | Owner correction, current exception register, S54/S55 evidence, and S56/S57 closure. |
+| Files And ABI Surface | docs/design/ARCHITECTURE.md, docs/QUEUE.md, Status and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One MSVC x86 nmake target; inspect compile/link surface, map and hashes; then run documentation governance and git diff --check. |
-| Expected Markers | 68+5 adapter/CLI compilations, main.o, cpu/exception.o, existing machine triple and final link; no archive/device target. |
-| Asset Needs | Existing S56 root, its retained machine objects and MSVC x86 environment only. |
-| Reporting Requirements | Record command, result/hash, exact object boundary, warnings and no-run result. |
-| Stop Conditions | Build failure, missing machine object, extra archive/device target, source mutation, or need to run output. |
-| Exit Criteria | Committed build evidence admits a separate bundle/one-shot observation decision. |
+| Verification | Review authority/queue wording against the owner correction; run documentation governance and git diff --check. |
+| Expected Markers | Four allowed Bochs mechanical classes, adapter-owned BOP and machine-composition selection, audit-first queue order, and no numeric T reservation. |
+| Asset Needs | Existing documents and no build/runtime asset. |
+| Reporting Requirements | Record the governance correction and identify the candidate audit's required evidence. |
+| Stop Conditions | A proposed source migration, a numeric T reservation in Queue, conflicting authority, or a request to begin the audit without Status admission. |
+| Exit Criteria | Committed current authority and queue make the audit the first candidate before any resumed holistic BOP runtime work. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare the final map and makefile with S50/S56; verify machine composition is the only additional link surface and no handler is added to adapter. |
+| Similar-Issue Sweep | Check that the architecture does not merely prohibit Bochs BOP semantics, but also assigns 02h/06h selection to the adapter machine-composition plane. |
 
 ## Current Technical Baseline
 
