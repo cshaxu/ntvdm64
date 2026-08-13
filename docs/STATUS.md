@@ -140,6 +140,10 @@ mantle mechanics.**
 - M0 T198 S10 is complete: its selected whole-family plane is source-built
   and tested without legacy runtime linkage; its closure transfers only the
   generic-UD composition question to S11. See [T198 S10 closure](history/m0-t198-s10-closure-20260813.md).
+- M0 T198 S11 P1 is complete: the generic event/outcome and mechanical action
+  records already close the synchronous inner transaction. The only gaps are
+  adapter-owned explicit session lifetime and action-result propagation; no
+  core/mantle ABI or semantic addition is indicated. See [T198 S11 P1 map](etc/research/t198-s11-p1-synchronous-composition-map-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
