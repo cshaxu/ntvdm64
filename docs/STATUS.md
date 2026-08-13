@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T195 S3 — move BOP observation out of Bochs.**
+**Active: M0 T195 S4 — move historical machine-handler selection into adapter.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T195 S3, Ordinary Mode. |
-| Admission And Approval | S2 freezes the adapter-owned copied-event observer contract. S3 is the first source repair: migrate the current BOP catalogue/listener family with no provider change. |
-| Objective | Remove BOP byte recognition, selector/service formatting, and catalogue observation from `src/bochs`; implement the equivalent observation at adapter ingress. |
-| Non-goals | No BOP provider/guest behavior change, machine-handler migration, device expansion, runtime claim, or new guest-memory observation contract. |
-| Reference Baseline | T195 S1 audit; T195 S2 contract; current `exception.cc` listener and adapter catalogue/runtime sources. |
-| Files And ABI Surface | `src/bochs/cpu/exception.cc`, adapter observer source/header, affected focused tests and build-closure generator only; no public CPU/guest ABI change. |
+| Identifier Mode | M0 T195 S4, Ordinary Mode. |
+| Admission And Approval | S3 closes catalogue observation migration. S2 reserves the second repair group: move historical machine-handler selection into adapter while retaining Bochs-owned checked mechanics. |
+| Objective | Relocate `02h`/`06h` instruction recognition, original-handler selection, outcome interpretation and resume-address decision from Bochs to the adapter machine-composition plane. |
+| Non-goals | No reimplementation of original handlers, device/PIC/RAM ownership transfer, BOP provider expansion, broad build, or runtime-success claim. |
+| Reference Baseline | T195 S1/S2/S3; current machine-composition seam and T119 original-handler object island. |
+| Files And ABI Surface | `src/bochs/cpu/exception.cc`, machine-composition headers/source and adapter plane/build/test records; adapter gets selection, Bochs only opaque typed mechanics/result. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused boundary tests prove no BOP catalogue/listener/selector formatting remains in Bochs and adapter receives the copied facts; rebuild only the affected closure when its object list is explicit; run documentation governance and `git diff --check`. |
-| Expected Markers | Adapter-owned observer emits the established BOP identity trace from copied facts; Bochs provides only generic copied exception delivery. |
-| Asset Needs | Existing adapter catalogue, copied exception ABI and current derivative generator. |
-| Reporting Requirements | Record deleted Bochs semantic surface, adapter replacement, build-object change and exact regressions. |
-| Stop Conditions | Need for Bochs to decode BOP again, a provider outcome change, an unbounded/raw-memory observation, or an unresolved link closure; pause for a new S. |
-| Exit Criteria | Committed source/test/build evidence moves BX-ABI-040 and the BOP catalogue/listener trace family into adapter, with no catalogue recognition or selector/service formatting remaining in Bochs. S4 separately removes the historical machine-handler selection. |
+| Verification | Focused boundary tests prove no `02h`/`06h`, handler symbol or fixed BOP-length resume remains in Bochs; adapter selection is source-built with existing original objects; rebuild only its explicit closure and run documentation governance/diff checks. |
+| Expected Markers | Adapter-owned selection returns generic pass-through/resume/stop; Bochs supplies only synchronous typed port/RAM/stack/report mechanics and applies that result. |
+| Asset Needs | Existing original handler island, checked mechanics callbacks, adapter copied-event ABI and current derivative generator. |
+| Reporting Requirements | Record selection migration, operation/result contract, retained native mechanics, original-object linkage and rejected scope. |
+| Stop Conditions | New guest-visible behavior, direct handler rewrite, new device dependency, raw CPU/Bochs pointer across ABI, or unresolved minimum closure; pause for a new S. |
+| Exit Criteria | Committed source/test/build evidence removes historical handler identity/selection from Bochs and leaves a selector-blind typed mechanics boundary. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
