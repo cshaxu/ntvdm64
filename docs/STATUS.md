@@ -2,12 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S77.** Its governing brief is the active
+> **Current effective packet: M0 T198 S78.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S77 -- audit the `C000:014A` non-BOP #UD, ROM/machine
-mapping and copied instruction-window provenance before assigning any BOP or
-machine-handler meaning.**
+**Active: M0 T198 S78 -- map the minimum reached ROM/IVT provisioning closure
+before any further BOP service expansion.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,19 +23,19 @@ machine-handler meaning.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S77, Ordinary Mode. |
-| Admission And Approval | S76 proves the actual copied window at `C000:014A` begins `15 FF FF...`, not `C4 C4 15`; the proposed BOP 15 provider was therefore refused and removed; see `etc/research/t198-s76-bios-int15-hypothesis-refusal-001.md`. |
-| Objective | Establish the source and ownership of the C000 mapping/control transfer and the precise generic-UD capture address/window semantics, then classify it as a machine defect, a valid BOP or an explicit unsupported ROM path. |
-| Non-goals | No BOP 15/INT15 provider, generic BIOS/ROM emulation, device support, guest/CLI input change, detached runtime import, or Bochs semantic edit before the mapping and capture facts are proven. |
-| Reference Baseline | S74 runtime witness, S76 refusal, current core exception capture, mantle lifecycle/memory mapping and OpenNT ROM/keyboard source. |
-| Files And ABI Surface | Audit/evidence only unless a defect in the fixed copied-window mechanics is proven; no provider or runtime composition change is admitted. |
+| Identifier Mode | M0 T198 S78, Ordinary Mode. |
+| Admission And Approval | S77 proves `C000:014A` is outside the current minimal-machine ROM input closure, not a canonical BOP; see `etc/research/t198-s77-c000-rom-window-provenance-audit-001.md`. |
+| Objective | Build a source-backed inventory of reached ROM/IVT vectors, byte/image availability, historical owner and initialization order; define the smallest mantle-owned machine-provisioning boundary needed to make the next reached path meaningful. |
+| Non-goals | No BOP service/provider expansion, generic BIOS/ROM emulation, device model, guest/CLI input change, detached runtime import, or Bochs core semantic edit. |
+| Reference Baseline | S77 audit; minimal-machine lifecycle; adopted core ROM mapping; OpenNT SoftPC ROM/reset and keyboard/vector sources. |
+| Files And ABI Surface | Audit/evidence and, only after closure selection, a versioned mantle-owned opaque machine-image provisioning contract; no adapter BOP semantics. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Correlate traced CS/IP and predecessor bytes with ROM mapping/source ownership; derive exact capture address and byte window from core code; compare to an independently valid BOP observation. |
-| Expected Markers | Proven C000 owner/mapping, exact control-transfer cause, valid/invalid BOP classification, and a narrow repair/defer decision. |
+| Verification | Trace every reached ROM/vector transfer, compare to core mapping and historical initialization source, and record available/missing byte inputs plus a negative proof that adapter does not interpret them. |
+| Expected Markers | Owner-indexed ROM/IVT inventory, source/image availability, exact current gap, declared provisioning lifecycle and explicit excluded devices/BOP meaning. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record all mapping/capture source evidence, the hypothesis rejection, ownership classification, and any separately admitted follow-up. |
-| Stop Conditions | The mapping cannot be proven from current sources/trace, or repair requires new ROM/device semantics rather than correcting a proven generic mechanical capture defect. Stop with controlled observation intact. |
-| Exit Criteria | A source-backed classification of the non-BOP event with no invented host-service meaning. |
+| Reporting Requirements | Record each image/vector source, bytes/provenance, lifecycle owner, dependency direction, candidate contract and all unavailable inputs. |
+| Stop Conditions | Required ROM bytes or initialization source are unavailable, or the proposed boundary introduces BIOS/DOS/BOP semantics into adapter/core. Stop and retain the controlled observation. |
+| Exit Criteria | A source-backed minimum machine-image closure plan or an evidence-backed unavailable-input block, with no service-plane scope expansion. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
