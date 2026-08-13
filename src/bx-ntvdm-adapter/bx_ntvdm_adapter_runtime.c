@@ -31,18 +31,27 @@
 #include "bx_ntvdm_dem_path_search_service_v1.h"
 #include "bx_ntvdm_legacy_plane_gate_v1.h"
 #include "bx_ntvdm_machine_profile_abi.h"
+#include "bx_ntvdm_exception_observer_v1.h"
 #include "bx_ntvdm_startup_snapshot_evidence.h"
 #include "byob_image.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
 
 #include <string.h>
+#include <stdio.h>
 #include <windows.h>
 
 #define BX_NTVDM_ADAPTER_ENV_PROFILE L"NTDOS64_ADAPTER_PROFILE"
 #define BX_NTVDM_ADAPTER_ENV_ROOT L"NTDOS64_ADAPTER_ROOT"
 #define BX_NTVDM_ADAPTER_ENV_LAUNCH_PLAN L"NTDOS64_ADAPTER_LAUNCH_PLAN"
 #define BX_NTVDM_ADAPTER_MAX_OBSERVATION_BYTES 4096u
+
+static void bx_ntvdm_adapter_runtime_observer_report(void *opaque,
+    const char *message)
+{
+    (void)opaque;
+    if (message != 0) (void)fprintf(stderr, "%s\n", message);
+}
 
 typedef struct bx_ntvdm_adapter_runtime_v1 {
     bx_ntvdm_host_session_v1 session;
@@ -877,6 +886,8 @@ int bx_ntvdm_adapter_runtime_v4_dispatch(
     if (action == 0 || !bx_ntvdm_exception_event_v1_valid(event) ||
         !bx_ntvdm_cpu_state_v1_valid(cpu_before) ||
         !bx_ntvdm_instruction_window_v1_valid(window)) return 0;
+    if (!bx_ntvdm_exception_observer_v1_observe(event, cpu_before, window,
+            bx_ntvdm_adapter_runtime_observer_report, 0)) return 0;
     bx_ntvdm_guest_gather_read_action_v1_pass_through(action);
     (void)bx_ntvdm_adapter_runtime_v1_install_from_environment();
     if (!bx_ntvdm_adapter_runtime.installed)

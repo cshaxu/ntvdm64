@@ -57,6 +57,14 @@ combined opt-in guard, and that the post-hardware/pre-loop call remains inside
 the execution-plan guard. This adds no Bochs behavior; it prevents a future
 default dependency from being mistaken for the established single consumer.
 
+The same review removed two residual Bochs-side diagnostics (BX-TRACE-060 and
+BX-TRACE-061): the `NTDOS64_ADAPTER_TRACE` environment branch and the copied
+adapter lifecycle snapshot. The generic BOP observer now runs at the start of
+adapter runtime v4 dispatch and writes through an adapter-owned reporter.
+Bochs no longer names the observer or reads the adapter trace environment
+variable; its #UD seam supplies only copied mechanical inputs and consumes
+typed results.
+
 ## Procedure And Observations
 
 Ran all retained mechanical boundary checks, each against the repository root:

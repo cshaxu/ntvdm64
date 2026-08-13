@@ -31,7 +31,8 @@ foreach ($required in @(
     if (-not $text.Contains($required)) { throw "Missing required neutral exception-seam token: $required" }
 }
 
-foreach ($forbidden in @('BOP', 'OpenNT', 'DOS', 'WOW', 'DEM', 'COMMAND')) {
+foreach ($forbidden in @('BOP', 'OpenNT', 'DOS', 'WOW', 'DEM', 'COMMAND',
+        'NTDOS64_ADAPTER_TRACE', 'bx_ntvdm_exception_observer_v1')) {
     if ($text -match ("(?i)(?<![A-Za-z0-9_])" + [regex]::Escape($forbidden) + "(?![A-Za-z0-9_])")) {
         throw "Forbidden semantic token found in Bochs #UD seam: $forbidden"
     }

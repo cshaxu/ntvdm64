@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 953 |
 | --- | --- |
-| Generated UTC | 2026-08-13T05:50:43Z |
+| Generated UTC | 2026-08-13T05:53:45Z |
 
 ## Entries
 
@@ -109,7 +109,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 37d5b71c1aeaaef30f34d2c4fc73bae062f780ce5a3ddd37dcc93132766b1bcd |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | c253026a9e523c90d68a6b36558450f5b263cc244a6d24e5732819b8ddf0b337 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -371,7 +371,7 @@ content-divergent entries.
 | etc/research/t196-s1-bochs26-intrusive-diff-baseline-001.md | indexed supporting material | 64c1f17adb4bb9714ccd1db638aeb93d86cc969bfa7d62b5881599a1ca14d6f8 |
 | etc/research/t196-s2-intrusive-diff-classification-001.md | indexed supporting material | 0e5f95b7ed26a421d87821dcc317352bb593246fe160a007f276aeb11ffbd8bb |
 | etc/research/t196-s3-retired-diagnostic-removal-001.md | indexed supporting material | 60167920fda029f15398604686555e5243fa8c4e031217ea2cd9668f970b2106 |
-| etc/research/t196-s4-retained-mechanics-repair-001.md | indexed supporting material | e1e3b6df2e438cd18b289fb57208bda1302cfe4c9c2c1fffa218b17e0ca84f00 |
+| etc/research/t196-s4-retained-mechanics-repair-001.md | indexed supporting material | eee461be7120bcce794e1c43bd43bfa44c7596f779893e6efea42192981e7847 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |

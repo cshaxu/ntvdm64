@@ -51,7 +51,6 @@ $environmentValues = [ordered]@{
     NTDOS64_ADAPTER_LAUNCH_KIND = $LaunchKind
     NTDOS64_ADAPTER_LAUNCH_TAIL = $LaunchTail
     NTDOS64_ADAPTER_BRIDGE = '1'
-    NTDOS64_ADAPTER_TRACE = '1'
 }
 
 $process = $null

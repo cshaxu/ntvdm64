@@ -29,10 +29,6 @@
 #define BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT 0
 #endif
 
-#ifndef BX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC
-#define BX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC 0
-#endif
-
 #ifndef BX_NTVDM_ENABLE_STARTUP_TRANSACTION
 #define BX_NTVDM_ENABLE_STARTUP_TRANSACTION 0
 #endif
@@ -344,15 +340,9 @@ static bx_bool bx_ntvdm_startup_transaction_interceptor(
 #include "bx_ntvdm_exception_intercept.h"
 #include "bx_ntvdm_exception_abi.h"
 #include "bx_ntvdm_adapter_runtime.h"
-#include "bx_ntvdm_exception_observer_v1.h"
 #include "bx_ntvdm_guest_gather_read_action_v1.h"
 
 static bx_ntvdm_exception_interceptor_t bx_ntvdm_exception_interceptor = 0;
-
-static void bx_ntvdm_adapter_diagnostic_report(void *, const char *message)
-{
-  if (message != 0) BX_INFO(("%s", message));
-}
 
 static bx_bool bx_ntvdm_ud_test_interceptor(
   const bx_ntvdm_exception_request *request,
@@ -388,8 +378,6 @@ static bx_bool bx_ntvdm_adapter_interceptor(
   uint64_t resume_rip;
   uint32_t write_index;
   uint32_t range_index;
-  const char *trace_mode = getenv("NTDOS64_ADAPTER_TRACE");
-
   event.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
   event.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
   event.struct_bytes = sizeof(event);
@@ -401,8 +389,6 @@ static bx_bool bx_ntvdm_adapter_interceptor(
   event.fault_rip = request->fault_rip;
 
   if (request->cpu_state == 0 || request->instruction_window == 0 ||
-      !bx_ntvdm_exception_observer_v1_observe(&event, request->cpu_state,
-        request->instruction_window, bx_ntvdm_adapter_diagnostic_report, 0) ||
       !bx_ntvdm_adapter_runtime_v4_dispatch(&event, request->cpu_state,
         request->instruction_window, &gather_action) ||
       !bx_ntvdm_guest_gather_read_action_v1_valid(&gather_action)) return 0;
@@ -449,15 +435,6 @@ static bx_bool bx_ntvdm_adapter_interceptor(
   if (!bx_ntvdm_cpu_result_v2_valid(&result))
     return 0;
   if (result.disposition == BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH) {
-#if BX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC
-      bx_ntvdm_adapter_runtime_diagnostic_state_v1 diagnostic_state;
-      if (bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(&diagnostic_state))
-        BX_INFO(("ntdos64 adapter lifecycle installed=%u provider=%u pending=%u boot-file-stage=%u",
-          (unsigned)diagnostic_state.installed,
-          (unsigned)diagnostic_state.has_boot_namespace_provider,
-          (unsigned)diagnostic_state.pending_kind,
-          (unsigned)diagnostic_state.boot_file_diagnostic));
-#endif
       BX_INFO(("ntdos64 adapter boundary passed through cs=%04x eip=%08x rip=%llx bytes=%02x%02x%02x%02x",
         request->cpu_state->cs, request->cpu_state->eip,
         (unsigned long long)request->fault_rip,
@@ -575,17 +552,6 @@ static bx_bool bx_ntvdm_adapter_interceptor(
   response->disposition = BX_NTVDM_EXCEPTION_RESUME;
   response->resume_rip = result.resume_rip;
   response->cpu_result = result;
-  if (trace_mode != 0 && !strcmp(trace_mode, "1")) {
-    BX_INFO(("ntdos64 adapter accepted resume cs=%04x eip=%08x ss=%04x esp=%08x ds=%04x es=%04x fs=%04x gs=%04x eax=%08x ebx=%08x ecx=%08x edx=%08x esi=%08x edi=%08x ebp=%08x flags=%08x rip=%llx next=%llx delta=%02x",
-      request->cpu_state->cs, request->cpu_state->eip, request->cpu_state->ss,
-      request->cpu_state->esp, request->cpu_state->ds, request->cpu_state->es,
-      request->cpu_state->fs, request->cpu_state->gs, request->cpu_state->eax,
-      request->cpu_state->ebx, request->cpu_state->ecx, request->cpu_state->edx,
-      request->cpu_state->esi, request->cpu_state->edi, request->cpu_state->ebp,
-      request->cpu_state->eflags, (unsigned long long)request->fault_rip,
-      (unsigned long long)result.resume_rip,
-      (unsigned int)result.cpu_delta.gpr16_write_mask));
-  }
   return 1;
 }
 

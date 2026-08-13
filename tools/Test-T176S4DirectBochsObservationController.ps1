@@ -30,7 +30,6 @@ foreach ($required in @(
     'NTDOS64_ADAPTER_LAUNCH_KIND',
     'NTDOS64_ADAPTER_LAUNCH_TAIL',
     'NTDOS64_ADAPTER_BRIDGE',
-    'NTDOS64_ADAPTER_TRACE',
     '$null = $startInfo.EnvironmentVariables',
     '$startInfo.EnvironmentVariables[$name] = [string]$environmentValues[$name]',
     'Outer timeout must include watchdog plus 15-second evidence-collection grace.'
