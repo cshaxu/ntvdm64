@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S31 — exact BOP-register derivative generator.**
+**Active: M0 T194 S32 — BOP-register derivative build.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S31, Ordinary Mode. |
-| Admission And Approval | S30 proves the registered source diagnostic needs a one-object derivative but the generator lacks an exact-only mode. Owner-authorized registered intrusions permit a narrow build-shim update. |
-| Objective | Add and verify one named generator mode that replaces only `cpu/exception.o` with the registered generic BOP listener enabled, while preserving current runtime bridge macros and rejecting unrelated diagnostics. |
-| Non-goals | No Bochs source change, actual derivative build/run/retry, provider/capability decision, selector-specific branch, guest-memory read, device/configuration/archive change, or controller change. |
-| Reference Baseline | S30 audit, BX-TRACE-043, current derivative generator and S26 closure. |
-| Files And ABI Surface | `New-T98S1CurrentAdapterEngineDerivative.ps1`, focused generator dry-run artifact/evidence, Status, and documentation inventory only. |
+| Identifier Mode | M0 T194 S32, Ordinary Mode. |
+| Admission And Approval | S31 generator dry-run proves one exact registered diagnostic object closure. Owner authorization permits the source-build step. |
+| Objective | Build one S31 derivative and verify its manifest/map/hash while retaining all Bochs inputs except the declared `cpu/exception.o`. |
+| Non-goals | No engine run/retry/controller change, Bochs source/config/device/archive change, provider/capability decision, guest-memory operation, or normal-return claim. |
+| Reference Baseline | S26 retained input closure; S31 generator and dry-run manifest. |
+| Files And ABI Surface | S31 generated build root/artifact evidence, S32 research record, Status, and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Generator dry-run manifest/shim, source-replacement count, macro scan, negative `main.o`/archive/vector checks, documentation governance, and `git diff --check`. |
-| Expected Markers | Exactly one Bochs replacement (`cpu/exception.o`) and exact four macro definitions; no build/run. |
-| Asset Needs | Existing r5 retained build root and source tree only. |
-| Reporting Requirements | Record generated closure and why it remains generic/diagnostic-only. |
-| Stop Conditions | Any additional Bochs object/archive/configuration, source edit, build/run, or semantic/provider action; pause for fresh S admission. |
-| Exit Criteria | Committed generator-only closure. |
+| Verification | MSVC x86 build output, one-object manifest/map review, engine hash, retained-input hashes, documentation governance, and `git diff --check`. |
+| Expected Markers | Source-built `cpu/exception.o`, one new engine hash, zero archive/device rebuild, and preserved runtime bridge macros. |
+| Asset Needs | S31 fresh build root and documented MSVC x86 toolchain only. |
+| Reporting Requirements | Record exact command, object closure, hashes, and no-execution limitation. |
+| Stop Conditions | Extra Bochs object/archive/config/device, source change, link closure expansion, or any engine execution; pause for fresh S admission. |
+| Exit Criteria | Committed source-built one-object derivative evidence. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare all existing generator switches; reject real-mode vector, machine-composition, deferred-plan, main-object, and archive recursion leakage. |
+| Similar-Issue Sweep | Compare current retained hashes with S26 and re-scan generated shim for all four intended plus all forbidden macros. |
 
 ## Current Technical Baseline
 

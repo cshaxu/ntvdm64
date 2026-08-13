@@ -5,7 +5,8 @@ param(
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [switch]$DeferredStartupPlan,
     [switch]$MachineComposition,
-    [switch]$RealModeVectorDiagnostic
+    [switch]$RealModeVectorDiagnostic,
+    [switch]$BopRegisterObservation
 )
 
 $ErrorActionPreference = 'Stop'
@@ -96,6 +97,7 @@ $manifest = [ordered]@{
     deferredStartupPlan = [bool]$DeferredStartupPlan
     machineComposition = [bool]$MachineComposition
     realModeVectorDiagnostic = [bool]$RealModeVectorDiagnostic
+    bopRegisterObservation = [bool]$BopRegisterObservation
     bochsReplacementCount = 0
     bochsReplacements = @()
     adapterSources = @()
@@ -103,7 +105,7 @@ $manifest = [ordered]@{
     retainedEngineInputs = @()
 }
 $bochsObjects = @()
-if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic) {
+if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic -or $BopRegisterObservation) {
     $bochsSources = @()
     if ($DeferredStartupPlan) {
         $bochsSources += @{ source = 'src\bochs\main.cc'; destination = 'main.cc'; object = 'main.o' }
@@ -182,8 +184,13 @@ elseif ($RealModeVectorDiagnostic) {
         '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
         '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')
 }
+elseif ($BopRegisterObservation) {
+    $exceptionDefines += @('/DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
+        '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
+        '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')
+}
 if ($MachineComposition) { $exceptionDefines += '/DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1' }
-if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic) {
+if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic -or $BopRegisterObservation) {
     $make += @(
         'cpu\exception.o: cpu\exception.cc',
         ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) " + ($exceptionDefines -join ' ') + ' /Iadapter /Icli ' + $(if ($MachineComposition) { '/Imachine ' }) + '/Tpcpu\exception.cc /Focpu\exception.o'),''
@@ -209,7 +216,7 @@ $make += @(
 $shim = Join-Path $build 'ntdos64-t98-current-adapter.mak'
 [IO.File]::WriteAllText($shim, ($make -join "`r`n"), [Text.UTF8Encoding]::new($false))
 
-if (-not $DeferredStartupPlan -and -not $MachineComposition -and -not $RealModeVectorDiagnostic -and (Get-Content -LiteralPath $shim -Raw) -match '(^|\r?\n)(main\.o|cpu\\exception\.o):') { throw 'Default derivative unexpectedly rebuilds a Bochs object.' }
+if (-not $DeferredStartupPlan -and -not $MachineComposition -and -not $RealModeVectorDiagnostic -and -not $BopRegisterObservation -and (Get-Content -LiteralPath $shim -Raw) -match '(^|\r?\n)(main\.o|cpu\\exception\.o):') { throw 'Default derivative unexpectedly rebuilds a Bochs object.' }
 if ($DeferredStartupPlan) {
     $shimText = Get-Content -LiteralPath $shim -Raw
     if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)(main\.o|cpu\\exception\.o):').Matches.Count -ne 2) { throw 'Deferred derivative must rebuild exactly two Bochs objects.' }
@@ -234,13 +241,29 @@ if ($RealModeVectorDiagnostic) {
         if ($shimText -notmatch [regex]::Escape($term)) { throw "Vector diagnostic lacks macro: $term" }
     }
 }
+if ($BopRegisterObservation) {
+    $shimText = Get-Content -LiteralPath $shim -Raw
+    if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)cpu\\exception\.o:').Matches.Count -ne 1 -or
+        $shimText -match '(^|\r?\n)main\.o:') { throw 'BOP register observation must rebuild exactly cpu\exception.o.' }
+    foreach ($term in @('BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1',
+            'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
+            'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
+            'BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')) {
+        if ($shimText -notmatch [regex]::Escape($term)) { throw "BOP register observation lacks macro: $term" }
+    }
+    foreach ($term in @('BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
+            'BX_NTVDM_ENABLE_MACHINE_COMPOSITION=1',
+            'BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1')) {
+        if ($shimText -match [regex]::Escape($term)) { throw "BOP register observation admits unrelated macro: $term" }
+    }
+}
 if ((Get-Content -LiteralPath $shim -Raw) -match 'host_namespace') { throw 'Derivative shim unexpectedly admits host namespace.' }
 if ((Get-Content -LiteralPath $shim -Raw) -match '^ntdos64-t98-current-adapter\.exe:.*(?:iodev|cpu\\libcpu|memory|gui)') { throw 'Derivative shim makes a retained Bochs archive a prerequisite.' }
 $retainedEnginePaths = @('main.o','cpu\exception.o','cpu\libcpu.a','iodev\libiodev.a','memory\libmemory.a','gui\libgui.a')
 if ($DeferredStartupPlan) {
     $retainedEnginePaths = @($retainedEnginePaths | Where-Object { $_ -notin @('main.o','cpu\exception.o') })
 }
-elseif ($MachineComposition -or $RealModeVectorDiagnostic) {
+elseif ($MachineComposition -or $RealModeVectorDiagnostic -or $BopRegisterObservation) {
     $retainedEnginePaths = @($retainedEnginePaths | Where-Object { $_ -ne 'cpu\exception.o' })
 }
 foreach ($path in $retainedEnginePaths) {
