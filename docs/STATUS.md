@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S18 — v6 drive-policy capability contract audit.**
+**Active: M0 T194 S19 — CLI drive-snapshot provider integration.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S18, Ordinary Mode. |
-| Admission And Approval | S17 proves that S13 omitted the finite inventory required by already-admitted `50:0F`, and that this omission precedes the repeated pass-through state. This S admits contract/design audit only. |
-| Objective | Define the source-backed immutable drive-inventory input and exact CLI include/exclude/default policy needed to form a successor v6 profile without granting filesystem access. |
-| Non-goals | No profile/root creation, run/retry, source/build/controller/bundle change, Bochs patch/config action, new provider, host-drive scanning, host filesystem projection, terminal-result transport, or queue/process broker. |
-| Reference Baseline | S17 source map; owner drive-policy request; current profile parser/session and source-derived `demGetDrives` provider boundaries. |
-| Files And ABI Surface | Read-only CLI/profile/session/provider source, existing policy evidence, one research record and Status only. |
+| Identifier Mode | M0 T194 S19, Ordinary Mode. |
+| Admission And Approval | S18 resolves the owner policy: the existing immutable CLI snapshot, not optional static profile inventory, is the sole normal-launch input for `50:0F`. This S admits that contained provider selection integration. |
+| Objective | Make the existing source-derived `demGetDrives` provider consume the already installed CLI snapshot, preserving original count/AX/CF/resume behavior. |
+| Non-goals | No new BOP/provider algorithm, profile grammar/root change, run/retry, Bochs patch/build/config action, host enumeration during guest execution, filesystem/path/namespace access, `50:46` expansion, terminal-result transport, or host queue/process broker. |
+| Reference Baseline | S16 trace, S17 original contract, S18 policy contract, existing drive snapshot and provider implementations. |
+| Files And ABI Surface | `src/bx-ntvdm-adapter` runtime dispatch and focused tests only; existing fixed-width snapshot/result ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Read the owner policy, profile parser, runner child-environment contract, session installation and existing drive-provider/source records; write an explicit 26-slot data model, precedence/default rule and negative boundary; documentation governance and `git diff --check`. |
-| Expected Markers | One exact capability contract and a successor-profile admission plan, or a bounded contradiction requiring owner direction. |
-| Asset Needs | Existing source/evidence only; no new host query, profile or artifact. |
-| Reporting Requirements | State the input owner, snapshot timing, `exclude` precedence, no-option default, profile/CLI transport, original `demGetDrives` mapping and what remains unavailable. |
-| Stop Conditions | Any proposal to probe/mount host paths during guest execution, embed DOS semantics in Bochs, change profile grammar/source, or create/run a root; pause for a fresh S admission. |
-| Exit Criteria | Committed policy/ABI conclusion adequate to admit or reject one successor-input materialization S. |
+| Verification | Focused adapter tests prove default/include/exclude/conflict snapshots, 50:0F result/CF/resume, missing snapshot decline and no profile-static override; source review, documentation governance and `git diff --check`. |
+| Expected Markers | A source-built focused provider path that consumes the existing snapshot exactly once, plus explicit negative boundaries. |
+| Asset Needs | Existing MinGW adapter test toolchain and no new host or guest asset. |
+| Reporting Requirements | Record exact changed selection path, source-derived OpenNT count correspondence, test outcomes, no-live-query proof and deferred services. |
+| Stop Conditions | Need for a new snapshot format, any guest-time host query, any Bochs/profile/filesystem/DPB change, source-derived behavior beyond `demGetDrives`, or runtime observation; pause for a fresh S admission. |
+| Exit Criteria | Committed adapter/test evidence or a durable build/ABI blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check include/exclude/default behavior, immutable-vs-live source, profile/session/runner propagation, `50:0F` and related `50:46` ownership, and accidental filesystem capability expansion. |
+| Similar-Issue Sweep | Check static-inventory precedence, all policy modes, absent snapshot behavior, 50:0F result shape, and that `50:46`/namespace/file paths remain untouched. |
 
 ## Current Technical Baseline
 
