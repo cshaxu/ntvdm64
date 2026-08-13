@@ -98,10 +98,6 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
             outcome->disposition == BX_NTVDM_GENERIC_UD_RESUME &&
             outcome->resume_rip == event->fault_rip + 4u)
             observed_drive_resume = 1u;
-        if (observed_drive_resume) {
-            outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
-            observed_stop = 1u;
-        }
         return 1;
     }
     if (event == 0 || outcome == 0) return 0;

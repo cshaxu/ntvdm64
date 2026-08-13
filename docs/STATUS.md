@@ -2,12 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S49.** Its governing brief is the active
+> **Current effective packet: M0 T198 S50.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S49 -- extend the source-built NTIO observation past the
-already implemented `50:0F` controlled test stop, without adding BOP, device
-or host-capability behavior.**
+**Active: M0 T198 S50 -- replace the historical `bx-vdm` source-membership
+manifest in the clean NTIO recipe with an explicit current composition
+manifest, before changing any BOP behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,12 +24,12 @@ or host-capability behavior.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S49, Ordinary Mode. |
-| Admission And Approval | S48 proves the S47 repair reaches and resumes the existing `50:0F` drive service under a clean current-source closure; its S23 bridge then intentionally stops. |
-| Objective | Remove only that fixture-local post-`50:0F` controlled stop and record the first ensuing guest state using the same source-built CPU5, image and provider composition. |
+| Identifier Mode | M0 T198 S50, Ordinary Mode. |
+| Admission And Approval | S49 reaches `50:46` after the already accepted DEM initialization services, and source audit proves an existing DPB provider omitted only by the old recipe membership manifest. |
+| Objective | Derive and use a tracked current `bx-vdm` composition membership manifest in the clean NTIO recipe; prove whether the existing `50:46` provider can enter the unchanged composition. |
 | Non-goals | No BOP/provider implementation, host capability, CLI argument, DOS image change, machine feature, device/firmware activation, trace broadening or corrective patch. |
-| Reference Baseline | S48 clean NTIO witness, S47 generic repair, locked NTDOS image map, existing source-built NTIO fixture and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | Existing finite NTIO observation fixture/bridge, its clean-rebuild recipe and new evidence only; no runtime ABI change. |
+| Reference Baseline | S49 post-drive witness, existing DPB service/runtime source, S48 clean recipe and CPU5 x64 `/MT` closure. |
+| Files And ABI Surface | Clean-rebuild recipe and a tracked source-membership manifest, plus evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
 | Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |
