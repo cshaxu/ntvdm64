@@ -55,10 +55,3 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
 {
     return bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome);
 }
-
-/* The finite runner references this fixture control unconditionally.  In the
- * composed target it remains inert: S7 executes HLT and never enters #UD. */
-void bx_ntvdm_mantle_generic_ud_fixture_stop(int enabled)
-{
-    (void)enabled;
-}

@@ -5,6 +5,7 @@ param(
     [switch]$UdStopFixture,
     [switch]$MechanicalActionProbe,
     [string[]]$ExternalBridgeObjects = @(),
+    [string[]]$ExternalLibraries = @(),
     [string]$ExternalFixtureSource = '',
     [ValidateSet('x64', 'x86')]
     [string]$HostArchitecture = 'x64'
@@ -178,9 +179,16 @@ if ($MechanicalActionProbe) {
     & cmd.exe /d /s /c $finiteCompile
     if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run helper: $LASTEXITCODE" }
 }
-if (!$MechanicalActionProbe -and !$externalBridge) {
+if ($externalBridge) {
+    $actionCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
+        (New-MsvcCompileCommand $mechanicalActionSource $mechanicalActionObject)
+    & cmd.exe /d /s /c $actionCompile
+    if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for external mechanical action: $LASTEXITCODE" }
+}
+if (!$MechanicalActionProbe) {
     $bridgeCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
-        (New-MsvcCompileCommand $bridgeSource $bridgeObject)
+        (New-MsvcCompileCommand $bridgeSource $bridgeObject) +
+        $(if ($externalBridge) { ' /DBX_NTVDM_EXTERNAL_GENERIC_UD_BRIDGE=1' } else { '' })
     & cmd.exe /d /s /c $bridgeCompile
     if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for generic #UD bridge: $LASTEXITCODE" }
 }
@@ -203,12 +211,14 @@ if ($MechanicalActionProbe) {
     $localObjects += $mechanicalActionObject
 } else {
     $localObjects += $finiteRunObject
-    if ($externalBridge) { $localObjects += $ExternalBridgeObjects } else { $localObjects += $bridgeObject }
+    $localObjects += $bridgeObject
+    if ($externalBridge) { $localObjects += $mechanicalActionObject }
+    if ($externalBridge) { $localObjects += $ExternalBridgeObjects }
     if ($UdStopFixture -or $externalBridge) { $localObjects += $replacementExceptionObject }
 }
 $quotedObjects = $localObjects + $seedObjects |
     ForEach-Object { '"' + $_ + '"' }
-@('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') + $quotedObjects |
+@('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') + $quotedObjects + $ExternalLibraries |
     Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 |
     Tee-Object -LiteralPath $log
@@ -229,7 +239,9 @@ $record = [ordered]@{
     profile = 'CPU5/Pentium-MMX, non-x86-64'
     seedBuild = 'tools/Invoke-T197S6MinimalMachineLinkProbe.ps1 -WholeCpu5Core -HostArchitecture ' + $HostArchitecture
     fixture = [ordered]@{
-        entryBytes = if ($UdStopFixture) { '0f 0b (UD2)' } else { 'f4 (HLT)' }
+        entryBytes = if (![string]::IsNullOrWhiteSpace($ExternalFixtureSource)) {
+            'external fixture; inspect externalFixtureSource'
+        } elseif ($UdStopFixture) { '0f 0b (UD2)' } else { 'f4 (HLT)' }
         physicalAddress = '0x1000'
         cs = '0x0100'
         eip = '0x00000000'
@@ -237,10 +249,18 @@ $record = [ordered]@{
         udStopFixture = [bool]$UdStopFixture
         mechanicalActionProbe = [bool]$MechanicalActionProbe
         externalBridgeObjects = @($ExternalBridgeObjects | ForEach-Object { [IO.Path]::GetFileName($_) })
+        externalLibraries = @($ExternalLibraries)
         externalFixtureSource = if ([string]::IsNullOrWhiteSpace($ExternalFixtureSource)) { '' } else { [IO.Path]::GetFileName($probe) }
         ips = 1000000
     }
-    forbiddenInputs = @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe', 'device archives', 'adapter', 'BOP', 'OpenNT', 'CLI')
+    forbiddenInputs = if ($externalBridge) {
+        @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe',
+          'device archives', 'MinGW object', 'historical OpenNT runtime',
+          'CLI engine')
+    } else {
+        @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe',
+          'device archives', 'adapter', 'BOP', 'OpenNT', 'CLI')
+    }
     linkExitCode = $linkExit
     runExitCode = $runExit
     expectedRunExitCode = 0

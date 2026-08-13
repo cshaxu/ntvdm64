@@ -173,6 +173,12 @@ composition to the existing selector-blind native generic-`#UD` mechanics.**
   CLI BYOB startup-contract model; no native-machine or historical runtime
   object entered. See [T198 S16 witness](etc/research/t198-s16-msvc-x64-boot-namespace-composition-witness-001.md)
   and [closure](history/m0-t198-s16-closure-20260813.md).
+- M0 T198 S17 is complete: the existing adapter session is now attached to
+  the CPU5 native generic-`#UD` mechanics under one MSVC x64 `/MT` process.
+  A real `C4 C4 54:0C` BOP form completes its existing checked ordinary-RAM
+  transaction and resumes to the bounded terminal fixture. This is not a DOS
+  continuity claim; see [T198 S17 witness](etc/research/t198-s17-msvc-x64-native-bop-composition-witness-001.md)
+  and [closure](history/m0-t198-s17-closure-20260813.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

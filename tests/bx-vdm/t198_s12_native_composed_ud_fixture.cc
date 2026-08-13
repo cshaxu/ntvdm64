@@ -6,7 +6,10 @@
 
 int main()
 {
-  static const Bit8u bytes[] = { 0x0f, 0x0b };
+  /* `C4 C4` is the historical BOP #UD form.  The following HLT gives the
+   * already finite native runner its existing selector-blind terminal path
+   * after the adapter returns the original typed RESUME. */
+  static const Bit8u bytes[] = { 0xc4, 0xc4, 0x54, 0x0c, 0xf4 };
   static uint8_t command_bytes[] = { 0x90, 0xc3 };
   static uint8_t target_bytes[] = { 0xf4 };
   byob_image command = { command_bytes, sizeof(command_bytes) };
@@ -17,16 +20,16 @@ int main()
   int status;
 
   memset(&profile, 0, sizeof(profile));
-  wcscpy(profile.command_placement.path, L"\\COMMAND.COM");
+  memcpy(profile.command_placement.path, L"\\COMMAND.COM", sizeof(L"\\COMMAND.COM"));
   profile.command_placement.drive_index = 2;
   profile.has_command_placement = 1;
-  wcscpy(profile.target_placement.path, L"\\TARGET.COM");
+  memcpy(profile.target_placement.path, L"\\TARGET.COM", sizeof(L"\\TARGET.COM"));
   profile.target_placement.drive_index = 2;
   profile.has_target_placement = 1;
-  wcscpy(profile.target.file_name, L"TARGET.COM");
-  wcscpy(profile.config_file.path, L"\\CONFIG.SYS");
+  memcpy(profile.target.file_name, L"TARGET.COM", sizeof(L"TARGET.COM"));
+  memcpy(profile.config_file.path, L"\\CONFIG.SYS", sizeof(L"\\CONFIG.SYS"));
   profile.config_file.materialization = BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;
-  wcscpy(profile.autoexec_file.path, L"\\AUTOEXEC.BAT");
+  memcpy(profile.autoexec_file.path, L"\\AUTOEXEC.BAT", sizeof(L"\\AUTOEXEC.BAT"));
   profile.autoexec_file.materialization = BYOB_GUEST_BOOT_FILE_EMPTY_V1;
   profile.has_guest_boot_files = profile.has_guest_search_metadata = 1;
   profile.command_metadata.attributes = profile.target_metadata.attributes =

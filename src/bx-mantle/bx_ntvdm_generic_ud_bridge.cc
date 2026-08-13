@@ -21,6 +21,7 @@ extern "C" int bx_ntvdm_mantle_generic_ud_fixture_stop_observed(void)
   return bx_ntvdm_generic_ud_fixture_stop_was_observed;
 }
 
+#ifndef BX_NTVDM_EXTERNAL_GENERIC_UD_BRIDGE
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *event,
   struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
@@ -35,3 +36,4 @@ extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   bx_ntvdm_generic_ud_fixture_stop_was_observed = 1;
   return 1;
 }
+#endif
