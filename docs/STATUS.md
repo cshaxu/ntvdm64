@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S26 — current-adapter DPB derivative build.**
+**Active: M0 T194 S27 — DPB derivative bundle assembly.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S26, Ordinary Mode. |
-| Admission And Approval | S25 source/test closure selects the existing checked multi-write seam for non-empty snapshot DPB results. Owner authorization permits the normal narrow derivative step. |
-| Objective | Generate and source-build one current adapter derivative containing S25, while retaining the exact existing Bochs object closure and recording its identity. |
-| Non-goals | No engine run/retry, Bochs source/object/archive/config/device change, host capability expansion, source/provider semantic change, bundle assembly, profile/root change, or continuous-execution claim. |
-| Reference Baseline | S21 derivative method; S25 adapter/test closure; current S21 engine/bundle identities. |
-| Files And ABI Surface | Existing derivative generator, generated artifact evidence, S26 research record, Status, and documentation inventory only; no product-source change. |
+| Identifier Mode | M0 T194 S27, Ordinary Mode. |
+| Admission And Approval | S26 source-builds the S25 adapter route with zero Bochs replacements. Owner authorization permits ordinary artifact assembly. |
+| Objective | Assemble one immutable fixed bundle around the S26 derivative and retained ROM inputs, then record every member hash without invoking it. |
+| Non-goals | No engine run/retry, Bochs/adapter/CLI source or build change, ROM change, profile/root change, host-capability change, or continuous-execution claim. |
+| Reference Baseline | S22 bundle method and ROM identities; S26 engine identity. |
+| Files And ABI Surface | Existing bundle tool, generated artifact evidence, S27 research record, Status, and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Generator manifest/object diff, MSVC x86 build output, engine hash, documentation governance, and `git diff --check`. |
-| Expected Markers | Source-built adapter/runtime object, zero Bochs replacement count, unchanged retained Bochs-input hashes, and one new engine hash. |
-| Asset Needs | Existing S21 generator, retained S21 Bochs objects, MSVC x86 toolchain, and generated-artifact path only. |
-| Reporting Requirements | Record generator input, command, object/replacement counts, retained Bochs identities, output hash, and build limitation. |
-| Stop Conditions | Any Bochs recompilation, new device/configuration, generator source edit, object-closure mismatch, link dependency expansion, or need to run the engine; pause for fresh S admission. |
-| Exit Criteria | Committed manifest-bound source-built derivative evidence. |
+| Verification | Bundle manifest/member hashes, documentation governance, and `git diff --check`. |
+| Expected Markers | S26 engine hash and unchanged three ROM hashes recorded in one immutable bundle manifest. |
+| Asset Needs | S26 engine, retained S22 ROM root, and existing bundle tool only. |
+| Reporting Requirements | Record command, root identities, every bundle hash, and explicit no-execution limitation. |
+| Stop Conditions | Missing/changed ROM, bundle collision, need to alter any input/tool, or any request to execute the engine; pause for fresh S admission. |
+| Exit Criteria | Committed immutable bundle evidence. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare every retained Bochs object hash with S21; ensure the generator compiles adapter/CLI objects only and no archive target can recurse into Bochs. |
+| Similar-Issue Sweep | Compare all ROM hashes with S22 and engine hash with S26; ensure no runner/shim or second wrapper is invoked. |
 
 ## Current Technical Baseline
 
