@@ -44,6 +44,11 @@ static unsigned observed_printer;
 static uint16_t observed_printer_cs, observed_printer_ds;
 static uint32_t observed_printer_eip, observed_printer_eax, observed_printer_ebx,
     observed_printer_ecx, observed_printer_edx, observed_printer_eflags;
+static unsigned observed_config_done;
+static uint16_t observed_config_done_cs, observed_config_done_ds;
+static uint32_t observed_config_done_eip, observed_config_done_eax,
+    observed_config_done_ebx, observed_config_done_ecx, observed_config_done_edx,
+    observed_config_done_eflags;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -175,6 +180,15 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_printer_ecx = event->ecx; observed_printer_edx = event->edx;
         observed_printer_eflags = event->eflags;
     }
+    if (!observed_config_done && event->window_bytes >= 3u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0x5eu) {
+        observed_config_done = 1u; observed_config_done_cs = event->cs;
+        observed_config_done_ds = event->ds; observed_config_done_eip = event->eip;
+        observed_config_done_eax = event->eax; observed_config_done_ebx = event->ebx;
+        observed_config_done_ecx = event->ecx; observed_config_done_edx = event->edx;
+        observed_config_done_eflags = event->eflags;
+    }
     if (!observed_fast_read && event->window_bytes >= 4u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
         event->window[2] == 0x50u && event->window[3] == 0x42u) {
@@ -299,3 +313,12 @@ unsigned t198_s23_native_ntio_boundary_observed_printer_ebx(void) { return obser
 unsigned t198_s23_native_ntio_boundary_observed_printer_ecx(void) { return observed_printer_ecx; }
 unsigned t198_s23_native_ntio_boundary_observed_printer_edx(void) { return observed_printer_edx; }
 unsigned t198_s23_native_ntio_boundary_observed_printer_eflags(void) { return observed_printer_eflags; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done(void) { return observed_config_done; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done_cs(void) { return observed_config_done_cs; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done_ds(void) { return observed_config_done_ds; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done_eip(void) { return observed_config_done_eip; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done_eax(void) { return observed_config_done_eax; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done_ebx(void) { return observed_config_done_ebx; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done_ecx(void) { return observed_config_done_ecx; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done_edx(void) { return observed_config_done_edx; }
+unsigned t198_s23_native_ntio_boundary_observed_config_done_eflags(void) { return observed_config_done_eflags; }
