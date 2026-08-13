@@ -2,11 +2,13 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S34.** Its governing brief is the active
-> packet table below.
+> **Current effective packet: M0 T198 S35.** It is paused at its stop
+> condition; its governing brief and rejection evidence are recorded below, and
+> a successor needs re-admission before implementation resumes.
 
-**Active: M0 T198 S34 -- audit adopted Bochs instruction instrumentation for
-an existing selector-blind history seam before admitting any trace code.**
+**Active: M0 T198 S35 -- paused after the default-off fixed-width
+core-to-mantle instruction-history mechanic was rejected at the retained
+chained CPU boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +25,19 @@ an existing selector-blind history seam before admitting any trace code.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S34, Ordinary Mode. |
-| Admission And Approval | S33 confirms raw stack bytes cannot establish the predecessor because the copied generic event reports only `prev_rip`. Its recorded follow-up requires a read-only audit for an existing selector-blind Bochs instruction-history seam before any trace implementation. |
-| Objective | Map the adopted CPU execution/instrumentation callbacks, their enabled closure and ownership, and determine whether a bounded default-off mantle-owned instruction history can reuse an existing seam without OpenNT/BOP/device knowledge or product-shell activation. |
-| Non-goals | No trace implementation, BOP/provider work, guest-memory access, guest-image patch, CPU/core/mantle code change, device/plugin/firmware/VGA enablement, product debugger/GUI activation, new ABI, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S29--S33 evidence; adopted `bx-core` CPU loop and `src/bochs/instrument` sources; current CPU5 x64 `/MT` configuration and finite mantle closure. |
-| Files And ABI Surface | Evidence and Status only. No runtime source, build manifest, feature selection, or ABI changes are admitted. |
+| Identifier Mode | M0 T198 S35, Ordinary Mode. |
+| Admission And Approval | S34 proved no existing instrumentation facility met the minimal closure. The owner authorized individually registered Bochs intrusions. S35 was admitted as a fixed-width mechanical experiment; its stop condition has now fired and no successor is admitted. |
+| Objective | The attempted bounded, default-off, selector-blind before-execution history ring had to prove an exact predecessor before S29's generic stop. It instead proved that the retained hook is trace-granular under handler chaining, so the candidate was removed. |
+| Non-goals | No BOP/service/OpenNT/DOS/NTIO recognition, guest-memory read/write, raw `bxInstruction_c*` or host pointer transfer, CPU state mutation, debugger/instrumentation/product feature activation, device/firmware/VGA enablement, CLI ABI, legacy linkage, or DOS continuity claim. |
+| Reference Baseline | S29--S34 evidence; selected CPU-loop before-execution timing; existing generic copied-event and terminal-snapshot patterns; current CPU5 x64 `/MT` finite closure. |
+| Files And ABI Surface | New current-path `bx-mantle` private history record/ring; one compile-time-default-off inclusion in `bx-core/cpu/cpu.cc`; exact finite fixture/build recipe; exception register/evidence/Status. No adapter or OpenNT interface. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect source/active build closure and retained instrumentation stubs; record callback timing, fixed-width availability, required objects/features, core/mantle owner, and rejection reasons. Verify zero runtime-source diff. |
-| Expected Markers | Existing seam map, viable/rejected disposition, no product dependency, no selector knowledge, and one bounded successor recommendation. |
+| Verification | The affected CPU5 x64 `/MT` core object, temporary mantle ring and exact fixture compiled and linked. Disabled behavior, invalid capacity and four-entry wrap were checked; the resulting final trace entry `0000:0AC1` differed from the generic fault `0000:0A84`. See `etc/research/t198-s35-chained-history-rejection-001.md`. |
+| Expected Markers | Rejection evidence, removed temporary core/mantle mechanism, preserved selector-blind boundary, typed stop, no product instrumentation, and no adapter dependency. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact sources/configuration, callback chronology, necessary closure, positive/negative candidate analysis, limitations, and successor recommendation. |
-| Stop Conditions | A candidate requires a product GUI/debugger/plugin, BOP/OpenNT knowledge in core, host pointer/callback leakage, a broad feature enablement, or changed code. Preserve evidence and re-admit. |
-| Exit Criteria | A reviewable evidence record names an existing reusable seam or rejects all candidates with reasons, and identifies the smallest owner-correct next S without source change. |
+| Reporting Requirements | The exception scope, exact object/build inputs, trace output, limitation and successor constraint are recorded in `etc/research/t198-s35-chained-history-rejection-001.md`. |
+| Stop Conditions | Fired: retained handler chaining makes the selected hook trace-granular. The candidate is removed; preserve evidence and re-admit before any different core seam or tracing strategy. |
+| Exit Criteria | Not met. No direct predecessor is established; this packet remains paused pending owner-approved re-admission. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
