@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S16 — one bounded v6 normal-return observation.**
+**Active: M0 T194 S17 — reached DEM continuation source audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S16, Ordinary Mode. |
-| Admission And Approval | S15 source-builds and CLI-tests the exact current v6 runner/shim pair against the S13 root without a real engine. This S admits one controller invocation only. |
-| Objective | Retain one watchdog-bounded r2 engine observation of the v6 one-target launch, classifying its actual markers without claiming normal return absent `54:11`. |
-| Non-goals | No retry, source/build/controller/bundle change, Bochs patch/build/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or second observation. |
-| Reference Baseline | S8 r2 engine, S10 controller/bundle, S13 root, S14 retained-runner blocker, and S15 current CLI pair. |
-| Files And ABI Surface | Existing S10 controller, S15 runner/shim, S10 r2 bundle, S13 root, and one new immutable evidence directory only. |
+| Identifier Mode | M0 T194 S17, Ordinary Mode. |
+| Admission And Approval | S16's sole observation reaches `50:3B` then `50:0F`, never `54:11`, and enters a repeated pass-through state. This S admits source/trace interpretation only. |
+| Objective | Establish the original OpenNT owner, contract, failure/continuation semantics, and caller context for reached `50:3B` and `50:0F`; distinguish an absent provider from a guest/control-state error. |
+| Non-goals | No second run or retry, source/build/controller/bundle/profile change, Bochs patch/config action, BOP/provider implementation, terminal-result transport, host queue/process broker, or claim about the `0000:0A84` cause without evidence. |
+| Reference Baseline | S16 immutable trace, T96 full BOP inventory and existing OpenNT selector/service mapping evidence. |
+| Files And ABI Surface | `src/opennt` and retained source/trace evidence read-only; one research record and Status only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One `Invoke-T194S10V6BoundedObservation.ps1` invocation with an empty evidence root and a 15-second watchdog; inspect immutable inputs/outcome/log hashes; documentation governance and `git diff --check`. |
-| Expected Markers | Exactly one evidence root, `retryPolicy=none`, one exit/watchdog classification and all actual BOP/stop markers preserved. |
-| Asset Needs | Existing S10 controller/r2 bundle, S13 root and S15 pair; no new source or runtime asset. |
-| Reporting Requirements | Exact hashes, watchdog and exit facts, observed marker sequence, and an explicit statement whether `54:11` was observed. |
-| Stop Conditions | Missing/mismatched input hash, controller rejection, second attempt, source/build/controller/bundle mutation, Bochs/adaptor/provider change, or any claim beyond retained markers; pause for a fresh S admission. |
-| Exit Criteria | Committed one-run evidence record and truthful normal-return classification. |
+| Verification | Source-definition and dispatch/caller trace audit against exact BOP/service evidence; compare applicable existing unavailable/provider dispositions; documentation governance and `git diff --check`. |
+| Expected Markers | A source-path/line/owner map for both services, a precise disposition, and a bounded next action or blocker. |
+| Asset Needs | Existing imported OpenNT source and retained evidence only; no new artifact or runtime input. |
+| Reporting Requirements | Separate facts from inference; record relevant source revision/path, dispatch path, expected result/continuation, and why adapter or Bochs changes are or are not admitted. |
+| Stop Conditions | Unavailable source identity, a need to run/build/change code, ambiguity requiring guest-memory reconstruction, or any pressure to invent a provider; pause for a fresh S admission. |
+| Exit Criteria | Committed source-backed classification of both reached services and a truthful next-step boundary. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify no stale v5 runner/shim, old engine hash, old launch-kind/tail environment, retry, or unintended second wrapper enters the run. |
+| Similar-Issue Sweep | Audit both service definitions, selector-50 dispatch paths, all reached caller forms and existing provider dispositions; do not infer a handler from service number alone. |
 
 ## Current Technical Baseline
 
