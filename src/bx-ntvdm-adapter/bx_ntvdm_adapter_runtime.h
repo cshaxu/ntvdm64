@@ -36,6 +36,18 @@ typedef enum bx_ntvdm_adapter_install_diagnostic_v1 {
     BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_MACHINE_SNAPSHOT_TRIGGER
 } bx_ntvdm_adapter_install_diagnostic_v1;
 
+/* Same-island diagnostic snapshot. It contains lifecycle state only: no
+ * selector, service, guest address, payload, pointer, or mutable session
+ * object crosses this copy boundary. */
+typedef struct bx_ntvdm_adapter_runtime_diagnostic_state_v1 {
+    uint32_t version;
+    uint32_t installed;
+    uint32_t has_boot_namespace_provider;
+    uint32_t pending_kind;
+} bx_ntvdm_adapter_runtime_diagnostic_state_v1;
+
+#define BX_NTVDM_ADAPTER_RUNTIME_DIAGNOSTIC_STATE_V1_VERSION 1u
+
 /* Installs exactly one process-local session from independently verified CLI
  * identities. This is adapter lifecycle code, not a Bochs or guest ABI. */
 int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
@@ -55,6 +67,11 @@ bx_ntvdm_adapter_runtime_v1_install_diagnostic(void);
  * after installation and is not a guest-visible drive service. */
 int bx_ntvdm_adapter_runtime_v1_copy_host_drive_snapshot(
     bx_ntvdm_host_drive_snapshot_v1 *out);
+
+/* Copies lifecycle state without dispatching, taking, clearing, queuing or
+ * resetting the process-local session. This is never a guest or Bochs ABI. */
+int bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(
+    bx_ntvdm_adapter_runtime_diagnostic_state_v1 *out);
 
 int bx_ntvdm_adapter_runtime_v1_dispatch(
     const bx_ntvdm_exception_event_v1 *event,

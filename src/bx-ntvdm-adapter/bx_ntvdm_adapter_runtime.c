@@ -387,6 +387,19 @@ int bx_ntvdm_adapter_runtime_v1_copy_host_drive_snapshot(
     return 1;
 }
 
+int bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(
+    bx_ntvdm_adapter_runtime_diagnostic_state_v1 *out)
+{
+    if (out == 0) return 0;
+    out->version = BX_NTVDM_ADAPTER_RUNTIME_DIAGNOSTIC_STATE_V1_VERSION;
+    out->installed = bx_ntvdm_adapter_runtime.installed ? 1u : 0u;
+    out->has_boot_namespace_provider =
+        bx_ntvdm_adapter_runtime.has_boot_namespace_provider ? 1u : 0u;
+    out->pending_kind = bx_ntvdm_adapter_runtime.installed ?
+        bx_ntvdm_adapter_runtime.session.pending_kind : BX_NTVDM_HOST_PENDING_NONE;
+    return 1;
+}
+
 int bx_ntvdm_adapter_runtime_v1_install_from_environment(void)
 {
     wchar_t profile[MAX_PATH], root[MAX_PATH];

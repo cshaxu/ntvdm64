@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "bx_ntvdm_adapter_runtime.h"
+#include "bx_ntvdm_host_session.h"
 #include "byob_profile.h"
 #include "byob_identity.h"
 
@@ -128,6 +129,7 @@ static int run_t181_v5_install(void)
     bx_ntvdm_instruction_window_v1 window;
     bx_ntvdm_cpu_result_v2 result;
     bx_ntvdm_multi_write_transaction_v1 multi_write;
+    bx_ntvdm_adapter_runtime_diagnostic_state_v1 diagnostic;
     const uint8_t *payload = 0;
     uint64_t payload_bytes = 0u;
     int failed = 0;
@@ -144,6 +146,10 @@ static int run_t181_v5_install(void)
     bx_ntvdm_adapter_runtime_v1_reset();
     failed |= !bx_ntvdm_adapter_runtime_v1_install(profile,root) ||
         bx_ntvdm_adapter_runtime_v1_install_diagnostic()!=BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_NONE;
+    failed |= !bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(&diagnostic) ||
+        diagnostic.version != BX_NTVDM_ADAPTER_RUNTIME_DIAGNOSTIC_STATE_V1_VERSION ||
+        diagnostic.installed != 1u || diagnostic.has_boot_namespace_provider != 1u ||
+        diagnostic.pending_kind != BX_NTVDM_HOST_PENDING_NONE;
     bx_ntvdm_cpu_state_v1_initialize(&state, BX_NTVDM_CPU_EXECUTION_REAL);
     state.ds = 0x8dc8u;
     state.edx = 0x33d9u;
@@ -152,6 +158,9 @@ static int run_t181_v5_install(void)
     failed |= !bx_ntvdm_adapter_runtime_v2_dispatch(&event, &state, &window, &result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         result.resume_rip != 0x736u ||
+        !bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(&diagnostic) ||
+        diagnostic.installed != 1u || diagnostic.has_boot_namespace_provider != 1u ||
+        diagnostic.pending_kind != BX_NTVDM_HOST_PENDING_MULTI_WRITE ||
         !bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
             &multi_write, &payload, &payload_bytes) ||
         multi_write.writes.write_count != 1u ||
