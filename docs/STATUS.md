@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S17.** Its governing brief is the active
+> **Current effective packet: M0 T198 S18.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S17 -- attach the source-built `bx-vdm` boot-namespace
-composition to the existing selector-blind native generic-`#UD` mechanics.**
+**Active: M0 T198 S18 -- establish a native transaction matrix for the
+already implemented boot-namespace BOP plane.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ composition to the existing selector-blind native generic-`#UD` mechanics.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S17, Ordinary Mode. |
-| Admission And Approval | S15 r6 closes the native x64 selector-blind generic-`#UD` mechanical bridge; S16 closes the same-runtime `bx-vdm` boot-namespace session. The owner objective authorizes their bounded integration through the existing typed ABI. |
-| Objective | Link the existing source-built S16 adapter session into the finite CPU5 native runner and prove one real `UD2` BOP-form event follows `Bochs #UD -> copied state -> bx-vdm ingress/plane -> checked ordinary-RAM action -> typed resume/stop` without new semantics. |
-| Non-goals | No BOP table expansion, provider rewrite, CLI engine, host-drive/filesystem feature, original OpenNT provider import, MinGW input, GUI/device/product build, Bochs selector recognition, or core/mantle semantic patch. |
-| Reference Baseline | T198 S10 whole-family plane; T198 S12 session/composed-bridge records and CRT frontier; T198 S13 x64 lifecycle; T198 S15 x64 generic-UD mechanics; T198 S16 x64 adapter session closure. |
-| Files And ABI Surface | Existing finite runner/replacement exception, existing `bx-vdm` composition session and a source-built x64 external-object closure; the established generic-event, typed-outcome and mechanical-action ABIs. No new ABI version or selector vocabulary in `bx-core`/`bx-mantle`. |
+| Identifier Mode | M0 T198 S18, Ordinary Mode. |
+| Admission And Approval | S17 closes the first real `54:0C` native transaction. The owner objective requires global BOP-plane progress rather than per-service ad hoc growth; this S exercises the already admitted boot-namespace plane as one family. |
+| Objective | Map and execute the existing COMMAND boot-file and DEM readonly/search transaction paths through the native bridge where their current copied-CPU/guest-memory preconditions can be constructed; classify any remaining precondition as an explicit plane gap rather than adding a service hack. |
+| Non-goals | No new selector, provider, host filesystem, CLI engine, OpenNT import, Bochs semantic change, device enablement or per-service bypass. |
+| Reference Baseline | T198 S10 plane coverage, S16 x64 composition, and S17 native `54:0C` transaction. |
+| Files And ABI Surface | Existing `bx-vdm` boot-namespace composition/plane/provider and tests; existing finite runner, generic copied bridge and mechanical action only. No ABI revision. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MSVC x64 compile/link/run composes the S16 object closure with the finite native CPU5 runner and the existing composed-UD fixture; inspect PE architecture, link response and exact objects; prove the expected generic event, checked RAM result, typed resume/controlled stop and explicit unbind; static boundary scan and documentation checks. |
-| Expected Markers | One PE32+ MSVC `/MT` process; no foreign CRT; core/mantle remain selector-blind; a BOP-form UD2 reaches the existing adapter session and its ordinary-RAM operation before a checked terminal result. |
+| Verification | Source map plus MSVC x64 native fixtures and existing C plane tests; record exact selector/service, required copied reads/writes, direct result and native disposition for each selected endpoint. |
+| Expected Markers | A compact service matrix distinguishing native-proven endpoints, source-tested-only endpoints and explicit missing guest preconditions; no unknown behavior is reported as success. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record compiler/version, source/object responses, x64 architecture, actual event/outcome/action observations, exact fixture bytes, exclusions and any machine/adapter boundary defect. |
-| Stop Conditions | Attachment needs new Bochs semantic code, selector recognition outside `bx-vdm`, a new BOP/provider behavior, foreign CRT input, historical product linkage, or an unregistered imported-source change. Preserve evidence and re-admit. |
-| Exit Criteria | A fresh bounded native BOP-form UD2 run proves the existing adapter composition transacts through the generic typed mechanics under MSVC x64 `/MT`; no continuous guest execution claim follows. |
+| Reporting Requirements | Record endpoint matrix, exact fixtures and preconditions, x64 source/object closure, action/result evidence and exclusions. |
+| Stop Conditions | A candidate requires new provider semantics, a Bochs/core change, host capability, foreign CRT or unrecorded guest ABI. Preserve evidence and re-admit. |
+| Exit Criteria | The full already implemented boot-namespace plane has a native/source-test/deferred classification with reproducible evidence and no semantic migration. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
