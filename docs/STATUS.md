@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S66.** Its governing brief is the active
+> **Current effective packet: M0 T198 S68.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S66 -- audit the reached top-level `BOP 17` printer I/O
-request and its existing unavailable-provider contract before admitting behavior.**
+**Active: M0 T198 S68 -- audit the reached top-level `BOP 5E` notification ABI
+and its exact profile/provider disposition before admitting behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ request and its existing unavailable-provider contract before admitting behavior
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S66, Ordinary Mode. |
-| Admission And Approval | S65 clean source closure maps the exact C8 guest vector through checked RAM mechanics and advances to selector `17`; see `etc/research/t198-s65-mouse-vector-mapping-witness-001.md`. |
-| Objective | Capture/map the actual three-byte `BOP 17` request, the SoftPC printer I/O source path, and the existing unavailable-provider eligibility. |
-| Non-goals | No printer device, LPT I/O, host spooler, host integration, firmware enablement, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S65 witness, OpenNT SoftPC printer source and current bx-vdm unavailable-provider evidence. |
+| Identifier Mode | M0 T198 S68, Ordinary Mode. |
+| Admission And Approval | S67 clean source closure preserves the non-PRINTER no-I/O return and advances to selector `5E`; see `etc/research/t198-s67-printer-disabled-witness-001.md`. |
+| Objective | Capture/map the actual three-byte `BOP 5E` notification input, original dispatch/continuation, and existing candidate-provider eligibility. |
+| Non-goals | No host notification, GUI/console transition, VDD interaction, mouse/input effect, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S67 witness, OpenNT `nt_bop.c`/notification call sites, and current bx-vdm candidate evidence. |
 | Files And ABI Surface | Observation/audit and evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect the complete current `17` state through the bounded source-built recipe and map it to the original printer owner and current provider contract. |
-| Expected Markers | Exact copied input, source-defined unavailable branch direction, provider eligibility or rejection, and a narrow next admission decision. |
+| Verification | Inspect the complete current `5E` state through the bounded source-built recipe and map it to the original notification source and candidate contract. |
+| Expected Markers | Exact copied input, source-defined continuation/disposition, candidate eligibility or rejection, and a narrow next admission decision. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact command, build identity, terminal output, OpenNT source map and exact provider eligibility. |
-| Stop Conditions | The route requires printer/LPT/spooler/host integration, firmware, DOS image, or Bochs/runtime behavior. Stop and re-admit rather than expanding scope. |
-| Exit Criteria | A reproducible source-backed classification of the reached `BOP 17` printer boundary and a narrow next admission decision. |
+| Reporting Requirements | Record exact command, build identity, terminal output, original source map and exact candidate eligibility. |
+| Stop Conditions | The route requires host notification, GUI/console, VDD, input, DOS image, or Bochs/runtime behavior. Stop and re-admit rather than expanding scope. |
+| Exit Criteria | A reproducible source-backed classification of the reached `BOP 5E` notification boundary and a narrow next admission decision. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 

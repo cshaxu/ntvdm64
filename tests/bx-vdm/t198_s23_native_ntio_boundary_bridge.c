@@ -40,6 +40,10 @@ static uint16_t observed_mouse_install1_cs, observed_mouse_install1_ds;
 static uint32_t observed_mouse_install1_eip, observed_mouse_install1_eax,
     observed_mouse_install1_ebx, observed_mouse_install1_ecx,
     observed_mouse_install1_edx, observed_mouse_install1_eflags;
+static unsigned observed_printer;
+static uint16_t observed_printer_cs, observed_printer_ds;
+static uint32_t observed_printer_eip, observed_printer_eax, observed_printer_ebx,
+    observed_printer_ecx, observed_printer_edx, observed_printer_eflags;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -162,6 +166,15 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_mouse_install1_ecx = event->ecx; observed_mouse_install1_edx = event->edx;
         observed_mouse_install1_eflags = event->eflags;
     }
+    if (!observed_printer && event->window_bytes >= 3u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0x17u) {
+        observed_printer = 1u; observed_printer_cs = event->cs;
+        observed_printer_ds = event->ds; observed_printer_eip = event->eip;
+        observed_printer_eax = event->eax; observed_printer_ebx = event->ebx;
+        observed_printer_ecx = event->ecx; observed_printer_edx = event->edx;
+        observed_printer_eflags = event->eflags;
+    }
     if (!observed_fast_read && event->window_bytes >= 4u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
         event->window[2] == 0x50u && event->window[3] == 0x42u) {
@@ -277,3 +290,12 @@ unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_ebx(void) { retur
 unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_ecx(void) { return observed_mouse_install1_ecx; }
 unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_edx(void) { return observed_mouse_install1_edx; }
 unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_eflags(void) { return observed_mouse_install1_eflags; }
+unsigned t198_s23_native_ntio_boundary_observed_printer(void) { return observed_printer; }
+unsigned t198_s23_native_ntio_boundary_observed_printer_cs(void) { return observed_printer_cs; }
+unsigned t198_s23_native_ntio_boundary_observed_printer_ds(void) { return observed_printer_ds; }
+unsigned t198_s23_native_ntio_boundary_observed_printer_eip(void) { return observed_printer_eip; }
+unsigned t198_s23_native_ntio_boundary_observed_printer_eax(void) { return observed_printer_eax; }
+unsigned t198_s23_native_ntio_boundary_observed_printer_ebx(void) { return observed_printer_ebx; }
+unsigned t198_s23_native_ntio_boundary_observed_printer_ecx(void) { return observed_printer_ecx; }
+unsigned t198_s23_native_ntio_boundary_observed_printer_edx(void) { return observed_printer_edx; }
+unsigned t198_s23_native_ntio_boundary_observed_printer_eflags(void) { return observed_printer_eflags; }

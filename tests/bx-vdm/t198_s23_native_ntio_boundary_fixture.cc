@@ -84,6 +84,15 @@ extern "C" unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_ebx(vo
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_ecx(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_edx(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_eflags(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer_cs(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer_ds(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer_eip(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer_eax(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer_ebx(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer_ecx(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer_edx(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_printer_eflags(void);
 
 static int prepare_preentry_input(bx_ntvdm_preentry_input_v1 *input)
 {
@@ -135,6 +144,7 @@ int main()
   fprintf(stderr,"t198-s23 spckbd observed=%u state=%04x:%04x eax=%08x ebx=%08x ecx=%08x edx=%08x ds-si=%04x:%04x es-di=%04x:%04x flags=%08x\n",t198_s23_native_ntio_boundary_observed_spckbd(),t198_s23_native_ntio_boundary_observed_spckbd_cs(),t198_s23_native_ntio_boundary_observed_spckbd_eip(),t198_s23_native_ntio_boundary_observed_spckbd_eax(),t198_s23_native_ntio_boundary_observed_spckbd_ebx(),t198_s23_native_ntio_boundary_observed_spckbd_ecx(),t198_s23_native_ntio_boundary_observed_spckbd_edx(),t198_s23_native_ntio_boundary_observed_spckbd_ds(),t198_s23_native_ntio_boundary_observed_spckbd_esi(),t198_s23_native_ntio_boundary_observed_spckbd_es(),t198_s23_native_ntio_boundary_observed_spckbd_edi(),t198_s23_native_ntio_boundary_observed_spckbd_eflags());
   fprintf(stderr,"t198-s23 emm-probe observed=%u state=%04x:%04x eax=%08x ebx=%08x edx=%08x ds=%04x flags=%08x\n",t198_s23_native_ntio_boundary_observed_emm_probe(),t198_s23_native_ntio_boundary_observed_emm_probe_cs(),t198_s23_native_ntio_boundary_observed_emm_probe_eip(),t198_s23_native_ntio_boundary_observed_emm_probe_eax(),t198_s23_native_ntio_boundary_observed_emm_probe_ebx(),t198_s23_native_ntio_boundary_observed_emm_probe_edx(),t198_s23_native_ntio_boundary_observed_emm_probe_ds(),t198_s23_native_ntio_boundary_observed_emm_probe_eflags());
   fprintf(stderr,"t198-s23 mouse-install1 observed=%u state=%04x:%04x eax=%08x ebx=%08x ecx=%08x edx=%08x ds=%04x flags=%08x\n",t198_s23_native_ntio_boundary_observed_mouse_install1(),t198_s23_native_ntio_boundary_observed_mouse_install1_cs(),t198_s23_native_ntio_boundary_observed_mouse_install1_eip(),t198_s23_native_ntio_boundary_observed_mouse_install1_eax(),t198_s23_native_ntio_boundary_observed_mouse_install1_ebx(),t198_s23_native_ntio_boundary_observed_mouse_install1_ecx(),t198_s23_native_ntio_boundary_observed_mouse_install1_edx(),t198_s23_native_ntio_boundary_observed_mouse_install1_ds(),t198_s23_native_ntio_boundary_observed_mouse_install1_eflags());
+  fprintf(stderr,"t198-s23 printer observed=%u state=%04x:%04x eax=%08x ebx=%08x ecx=%08x edx=%08x ds=%04x flags=%08x\n",t198_s23_native_ntio_boundary_observed_printer(),t198_s23_native_ntio_boundary_observed_printer_cs(),t198_s23_native_ntio_boundary_observed_printer_eip(),t198_s23_native_ntio_boundary_observed_printer_eax(),t198_s23_native_ntio_boundary_observed_printer_ebx(),t198_s23_native_ntio_boundary_observed_printer_ecx(),t198_s23_native_ntio_boundary_observed_printer_edx(),t198_s23_native_ntio_boundary_observed_printer_ds(),t198_s23_native_ntio_boundary_observed_printer_eflags());
   return t198_s23_native_ntio_boundary_observed_first_generic_ud() && generic_valid &&
     generic.magic==BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC && generic.abi_version==BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION && generic.struct_bytes==sizeof(generic) && generic.cs==0u && generic.eip==0x0047u && generic.execution_mode==1u && generic.vector==6u && generic.window_bytes>=4u && generic.window[0]==0xf0u && generic.window[1]==0x41u && generic.window[2]==0xf8u && generic.window[3]==0x00u &&
     t198_s23_native_ntio_boundary_observed_stop() && terminal_valid &&

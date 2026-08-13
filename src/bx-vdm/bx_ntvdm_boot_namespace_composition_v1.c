@@ -1,6 +1,7 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx_ntvdm_emm_unavailable_service.h"
 #include "bx_ntvdm_mouse_install1_mapping_service.h"
+#include "bx_ntvdm_printer_unavailable_service.h"
 #include "bx_ntvdm_spckbd_init_service.h"
 #include "bx_ntvdm_bios_memory_service.h"
 #include "bx_ntvdm_dem_boot_drive_service.h"
@@ -208,6 +209,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             &result)) return outcome(&result, value);
     if (execute_mouse_install1_mapping(active, &boundary, &cpu, &window,
             &result)) return outcome(&result, value);
+    if (bx_ntvdm_printer_unavailable_service_v1_dispatch(&boundary, &cpu,
+            &window, &result)) return outcome(&result, value);
     /* This composition admits only the source-observed top-level memory
      * queries: BIOS 12h and BIOS 15h/AH=88h. */
     if (window.valid_bytes >= 3u && window.bytes[0] == 0xc4u &&
