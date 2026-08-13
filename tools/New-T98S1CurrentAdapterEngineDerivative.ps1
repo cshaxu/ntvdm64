@@ -5,7 +5,6 @@ param(
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [switch]$DeferredStartupPlan,
     [switch]$MachineComposition,
-    [switch]$RealModeVectorDiagnostic,
     [switch]$BopRegisterObservation
 )
 
@@ -173,19 +172,14 @@ if ($DeferredStartupPlan) {
 }
 $exceptionDefines = @('/DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1')
 if ($DeferredStartupPlan) {
-    $exceptionDefines += @('/DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1', '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0', '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0', '/DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1')
-}
-elseif ($RealModeVectorDiagnostic) {
-    $exceptionDefines += @('/DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
-        '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
-        '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')
+    $exceptionDefines += @('/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0', '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0', '/DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1')
 }
 elseif ($BopRegisterObservation) {
     $exceptionDefines += @('/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
         '/DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')
 }
 if ($MachineComposition) { $exceptionDefines += '/DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1' }
-if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic -or $BopRegisterObservation) {
+if ($DeferredStartupPlan -or $MachineComposition -or $BopRegisterObservation) {
     $make += @(
         'cpu\exception.o: cpu\exception.cc',
         ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) " + ($exceptionDefines -join ' ') + ' /Iadapter /Icli /Tpcpu\exception.cc /Focpu\exception.o'),''
@@ -225,16 +219,6 @@ if ($MachineComposition) {
     if ($shimText -notmatch [regex]::Escape('BX_NTVDM_ENABLE_MACHINE_COMPOSITION=1')) { throw 'Machine-composition derivative lacks opt-in macro.' }
     if ($shimText -notmatch 'adapter\\bx_ntvdm_machine_composition_v2\.obj' -or $shimText -notmatch 'adapter\\unexp_nt\.c\.obj' -or $shimText -notmatch 'adapter\\illegalp\.c\.obj') { throw 'Machine-composition derivative lacks its exact object triple.' }
 }
-if ($RealModeVectorDiagnostic) {
-    $shimText = Get-Content -LiteralPath $shim -Raw
-    if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)cpu\\exception\.o:').Matches.Count -ne 1 -or
-        $shimText -match '(^|\r?\n)main\.o:') { throw 'Vector diagnostic must rebuild exactly cpu\\exception.o.' }
-    foreach ($term in @('BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
-            'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
-            'BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')) {
-        if ($shimText -notmatch [regex]::Escape($term)) { throw "Vector diagnostic lacks macro: $term" }
-    }
-}
 if ($BopRegisterObservation) {
     $shimText = Get-Content -LiteralPath $shim -Raw
     if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)cpu\\exception\.o:').Matches.Count -ne 1 -or
@@ -244,8 +228,7 @@ if ($BopRegisterObservation) {
             'BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0')) {
         if ($shimText -notmatch [regex]::Escape($term)) { throw "BOP register observation lacks macro: $term" }
     }
-    foreach ($term in @('BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
-            'BX_NTVDM_ENABLE_MACHINE_COMPOSITION=1',
+    foreach ($term in @('BX_NTVDM_ENABLE_MACHINE_COMPOSITION=1',
             'BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1')) {
         if ($shimText -match [regex]::Escape($term)) { throw "BOP register observation admits unrelated macro: $term" }
     }
@@ -256,7 +239,7 @@ $retainedEnginePaths = @('main.o','cpu\exception.o','cpu\libcpu.a','iodev\libiod
 if ($DeferredStartupPlan) {
     $retainedEnginePaths = @($retainedEnginePaths | Where-Object { $_ -notin @('main.o','cpu\exception.o') })
 }
-elseif ($MachineComposition -or $RealModeVectorDiagnostic -or $BopRegisterObservation) {
+elseif ($MachineComposition -or $BopRegisterObservation) {
     $retainedEnginePaths = @($retainedEnginePaths | Where-Object { $_ -ne 'cpu\exception.o' })
 }
 foreach ($path in $retainedEnginePaths) {
