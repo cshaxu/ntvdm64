@@ -31,6 +31,7 @@
     "src/bx-vdm/bx_ntvdm_dem_path_search_service_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_plane_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_readonly_file_service.c",
+    "src/bx-vdm/bx_ntvdm_dem_session_lifecycle_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_system_symbol_service.c",
     "src/bx-vdm/bx_ntvdm_emm_unavailable_service.c",
     "src/bx-vdm/bx_ntvdm_exception_abi.c",

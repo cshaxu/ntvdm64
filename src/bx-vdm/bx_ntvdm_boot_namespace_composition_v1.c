@@ -10,6 +10,7 @@
 #include "bx_ntvdm_dem_dpb_service.h"
 #include "bx_ntvdm_dem_ioctl_metadata_provider_v1.h"
 #include "bx_ntvdm_dem_misc_plane_v1.h"
+#include "bx_ntvdm_dem_session_lifecycle_provider_v1.h"
 #include <string.h>
 
 static bx_ntvdm_boot_namespace_composition_v1 *active;
@@ -240,6 +241,10 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
         result.cpu_delta = memory_result.cpu_delta;
         return outcome(&result, value);
     }
+    if (bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &dem_plane) &&
+        bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
+            &active->plane.provider, &ingress, &selection, &dem_plane,
+            &boundary, &cpu, &result)) return outcome(&result, value);
     if (bx_ntvdm_dem_error_lock_plane_v1_dispatch(&active->error_lock,
             &ingress, &selection, &boundary, &cpu, &window, &result))
         return outcome(&result, value);

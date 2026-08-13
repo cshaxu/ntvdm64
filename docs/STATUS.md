@@ -2,12 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S74.** Its governing brief is the active
+> **Current effective packet: M0 T198 S75.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S74 -- audit and, only if the existing source-derived DEM
-session-lifecycle provider closes cleanly, compose `50:3C` through the common
-provider plane.**
+**Active: M0 T198 S75 -- audit the post-`50:3C` top-level `BOP 15h` machine
+handler and its source-defined unavailable/result contract before composing
+any disposition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,19 +24,19 @@ provider plane.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S74, Ordinary Mode. |
-| Admission And Approval | S73 reaches `50:3C` (`SVC_PDBTERMINATE`) as the first post-`50:36` uncomposed boundary and stops through the existing generic observer; see `etc/research/t198-s73-post-entry-million-tick-witness-001.md`. |
-| Objective | Audit the existing source-derived DEM session-lifecycle provider and its dependencies against the current composition, then compose it only through common ingress, registry, DEM-plane classification and the finite namespace owner if that closure remains exact. |
-| Non-goals | No raw-byte handler, new BOP contract, VDD/floppy/FDISK/device behavior, host search, guest/CLI input change, detached historical runtime import, or Bochs semantic change. |
-| Reference Baseline | S73 witness; T176 S15/S17 PDB-termination audit/implementation; current `bx_ntvdm_boot_namespace_composition_v1`; and provider manifest. |
-| Files And ABI Surface | Audit/evidence first; if admitted, existing `bx-vdm` provider source, common composition/manifest and focused tests only. No core/mantle ABI change. |
+| Identifier Mode | M0 T198 S75, Ordinary Mode. |
+| Admission And Approval | S74 composes the pre-existing finite `50:3C` provider and reaches top-level `BOP 15h` at `C000:014A`, AH=`0Eh`; see `etc/research/t198-s74-dem-pdb-termination-witness-001.md`. |
+| Objective | Map the reached BOP `15h` caller and original `cassette_io` result contract, then decide whether the first profile can use a source-derived explicit unavailable result through the machine-composition plane. |
+| Non-goals | No generic BIOS emulation, cassette/device support, VDD, DEM/DOS/COMMAND changes, guest/CLI input change, detached runtime import, or Bochs CPU/memory/device semantic change. |
+| Reference Baseline | S74 witness; OpenNT `softpc.new/base/bios/bios.c` BOP table and `tape_io.c`; current top-level memory-provider boundary. |
+| Files And ABI Surface | Audit/evidence only unless the exact original error result and a bounded machine-plane route are proven. No existing core/mantle ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Prove current source closure and negative ownership conditions before change; if and only if exact, build focused provider/composition tests and make one fresh unchanged-input source-built observation. |
-| Expected Markers | `50:3C` selection through ingress/registry/DEM plane, finite PSP-keyed search-session release, normal `+4` resume with no delta, and no VDD/device/host-search/Bochs member. |
+| Verification | Locate the original selector table, reached caller and AH=`0Eh` branch; prove register/flags/resume behavior and classify the owner before any source edit. |
+| Expected Markers | Exact `15h` BOP length, AH=`0Eh` source branch, result registers/flags, caller purpose, and an explicit retain/defer/compose decision. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original owner/order, exact selected finite replacement, dependency/membership delta, positive and negative tests, and any fresh runtime boundary. |
-| Stop Conditions | The existing provider needs VDD/device/floppy/FDISK/host-search behavior, a detached historical runtime, an ABI change, or cannot be selected by the common plane. Stop and retain `50:3C` as controlled unavailable rather than widening scope. |
-| Exit Criteria | A source-backed decision to compose the pre-existing finite provider or retain it unavailable, with all non-selected original effects explicitly classified. |
+| Reporting Requirements | Record original source/caller, all excluded device behavior, exact return contract, ownership classification, and a narrow next admission decision. |
+| Stop Conditions | The source requires a device framework, ROM/firmware replacement, generic BIOS implementation, guest input change, or a Bochs semantic edit. Stop and retain the controlled observer rather than widening scope. |
+| Exit Criteria | A source-backed handler classification and a bounded decision to compose an explicit unavailable result or defer the machine feature. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
