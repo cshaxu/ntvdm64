@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S1.** Its governing brief is the active
+> **Current effective packet: M0 T198 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S1 -- map the existing holistic BOP runtime composition
-onto the closed CPU5 core/mantle boundary.**
+**Active: M0 T198 S2 -- define the selector-blind native execution contract
+needed before the holistic BOP plane can be recomposed.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ onto the closed CPU5 core/mantle boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S1, Ordinary Mode. |
-| Admission And Approval | T197 is closed by `m0-t197-closure-20260813.md`. The owner-directed two-stage objective and selected queue head authorize this second-stage package; all architecture and source-policy restrictions remain binding. |
-| Objective | Produce one exact source/object/link/runtime map for the existing bounded BOP engine and identify how it can be recomposed with `bx-core`/`bx-mantle`, or the first source-backed execution-contract blocker. |
-| Non-goals | No individual BOP handler implementation, no new selector/service disposition, no BIOS/reset image, device, GUI, plugin, product build, adapter-to-Bochs semantic migration, OpenNT source import or guest-running claim. |
-| Reference Baseline | T197 closure; T96 BOP inventory/plane records; current `bx-vdm` source and existing bounded engine artifacts. |
-| Files And ABI Surface | T198 evidence/operation record, Status and read-only source/build inventories. No machine, CLI, provider or adapter ABI change. |
+| Identifier Mode | M0 T198 S2, Ordinary Mode. |
+| Admission And Approval | S1 is closed by `a917569` and its composition map. The map proves a native execution contract is the sole admissible next slice, under the owner-approved second-stage package. |
+| Objective | Define the exact typed, selector-blind mantle-owned execution request/result contract and source/object closure needed for fixed entry bytes, finite instruction budget and controlled stop. |
+| Non-goals | No BOP selector/service/provider behavior; no adapter/CLI ABI change; no firmware/BIOS, device, GUI, plugin, product build, OpenNT import or general machine configuration. |
+| Reference Baseline | T197 r12 lifecycle witness; T198 S1 composition map; original `BX_CPU_C::cpu_loop`/event flow and existing generic #UD contract as source evidence. |
+| Files And ABI Surface | T198 evidence/operation record, Status, and proposed mantle-private C++ contract only. No cross-component ABI or BOP surface change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile prior engine objects against physical T197 roots; map generic machine ingress/result contracts; scan that Bochs remains selector-blind; run focused existing BOP/boundary checks and documentation governance. |
-| Expected Markers | A source-backed current-engine composition map, explicit owner/disposition of every retained Bochs input, and one admitted next runtime closure slice or exact blocker. |
-| Asset Needs | Existing repository, local r12 evidence and retained source-built engine artifacts only; no network/import action. |
-| Reporting Requirements | Record exact toolchain/architecture/CRT, source/object/link inputs, ownership direction, old-path mismatch, trace applicability and every excluded product input. |
-| Stop Conditions | A map requires a product Bochs target, new device/firmware, selector recognition in Bochs, BOP/DOS semantics in mantle/core, direct old NT host APIs, new import, or any ABI change. Preserve evidence and re-admit. |
-| Exit Criteria | The existing BOP engine has a reproducible composition disposition against T197, with a single next closure slice that preserves global ingress/provider architecture. |
+| Verification | Source-map `cpu_loop` exits, existing reset/init order and generic exception stop; prove no contract field can encode BOP/provider identity; compile/static-test the contract only if no new object/link edge is required; run documentation governance. |
+| Expected Markers | An execution-contract evidence record, field/owner table, finite-state transition map and either a compact mantle implementation brief or one precise core/mantle edge. |
+| Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
+| Reporting Requirements | Record field widths, ownership, source call sites, permitted transitions, all rejected product/adapter alternatives and runtime non-claim. |
+| Stop Conditions | Any field requires BOP/service meaning, adapter pointer/object, host handle, firmware/device/GUI behavior, new CPU semantic, unbounded execution, or product `main.cc`. Preserve evidence and re-admit. |
+| Exit Criteria | The contract has a source-backed owner, finite state model and exact build placement; it either becomes the next small mantle implementation or stops at one documented native edge. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover CLI, bx-vdm ingress/registry/planes, native execution plan, Bochs generic seam, mantle lifecycle, retained engine build manifests, OpenNT providers and every selector-specific source location. |
 
