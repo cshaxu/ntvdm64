@@ -13,18 +13,18 @@
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T194 S58, Ordinary Mode. |
-| Admission And Approval | Owner directs the architecture correction: Bochs intrusion does not mean BOP implementation in Bochs; selector/service semantics belong to the adapter, and future Bochs semantic intrusion is frozen pending an audit. |
-| Objective | Update the current architecture authority and unnumbered candidate-T order to make the selector-blind Bochs boundary and intrusion-convergence audit binding. |
+| Admission And Approval | Owner directs the architecture correction: Bochs intrusion does not mean BOP implementation in Bochs; selector/service semantics belong to the adapter, and future Bochs semantic intrusion is frozen pending a multi-S convergence repair. |
+| Objective | Update the current architecture authority and unnumbered candidate-T order to make the selector-blind Bochs boundary and a repair-first package binding. |
 | Non-goals | No source/build/bundle/runtime change, no exception-register status rewrite, no numeric T allocation, no Bochs/adapter migration, and no BOP execution claim. |
 | Reference Baseline | Owner correction, current exception register, S54/S55 evidence, and S56/S57 closure. |
 | Files And ABI Surface | docs/design/ARCHITECTURE.md, docs/etc/operations/bochs-intrusion-convergence-policy.md, docs/QUEUE.md, Status and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Review authority/queue wording against the owner correction; run documentation governance and git diff --check. |
-| Expected Markers | Four allowed Bochs mechanical classes, adapter-owned BOP and machine-composition selection, audit-first queue order, and no numeric T reservation. |
+| Expected Markers | Four allowed Bochs mechanical classes, adapter-owned BOP and machine-composition selection, repair-first queue order with audit as its first S, and no numeric T reservation. |
 | Asset Needs | Existing documents and no build/runtime asset. |
-| Reporting Requirements | Record the governance correction and identify the candidate audit's required evidence. |
+| Reporting Requirements | Record the governance correction and identify the candidate repair's staged evidence. |
 | Stop Conditions | A proposed source migration, a numeric T reservation in Queue, conflicting authority, or a request to begin the audit without Status admission. |
-| Exit Criteria | Committed current authority and queue make the audit the first candidate before any resumed holistic BOP runtime work. |
+| Exit Criteria | Committed current authority and queue make the repair the first candidate before any resumed holistic BOP runtime work. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Check that the architecture does not merely prohibit Bochs BOP semantics, but also assigns 02h/06h selection to the adapter machine-composition plane. |
 
