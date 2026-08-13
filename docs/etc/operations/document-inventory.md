@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 897 |
+| Documentation records | 898 |
 | --- | --- |
-| Generated UTC | 2026-08-13T02:27:38Z |
+| Generated UTC | 2026-08-13T02:34:19Z |
 
 ## Entries
 
@@ -309,6 +309,7 @@ content-divergent entries.
 | etc/research/t194-s11-one-slot-normal-return-asset-admission-001.md | indexed supporting material | ee8e464d2a5a7d5a20901d0ba897118e8564b7c8fa3784b60beba1ed32e8ab93 |
 | etc/research/t194-s12-source-built-normal-return-asset-recovery-001.md | indexed supporting material | 66ccaf6959887aaeceb8a68722a2c7efb8fab6bdb7b4aa23d1966f3de8722002 |
 | etc/research/t194-s13-v6-normal-return-byob-root-materialization-001.md | indexed supporting material | 64a51689cec4a21c6fd894614eeb23f77520cc657d1919f30834262d67150030 |
+| etc/research/t194-s14-v6-runner-shim-bundle-invocation-audit-001.md | indexed supporting material | 2417decf2202f148a417d3e7488b0a24cb06f5d9587da7d8f01a9c1a00bee8f7 |
 | etc/research/t194-s1-normal-return-fixture-asset-reconciliation-001.md | indexed supporting material | ffe98b4bd301a29b9d6a278879061cbdb17059eca656671ec37859b0a5058d08 |
 | etc/research/t194-s2-bootstrap-normal-return-divergence-001.md | indexed supporting material | 6a3a822dd02f93aabe008de995fc9f9ab186e6b334ff8b7228c0007419a0be7c |
 | etc/research/t194-s3-single-target-normal-return-contract-001.md | indexed supporting material | 4ef6611830e0d0fd68d8d72b82ee2ce304ab6f3c91b5e0ad93bda83dd9eb2c8a |
@@ -911,7 +912,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | fddea5d612b5884fc85428207aa2b71b070737b3529b6450c1de9715cafb7ca7 |
+| STATUS.md | principal control document | 7f9b9f1ad0830bca296794430b8075c6f91ebcccaab6f2c82a3e4654368c8d78 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

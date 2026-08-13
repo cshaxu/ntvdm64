@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S14 — v6 runner/shim/bundle invocation audit.**
+**Active: M0 T194 S15 — v6 CLI runner/shim source-build closure.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S14, Ordinary Mode. |
-| Admission And Approval | S13 closes the exact v6 BYOB input root without execution. This S admits only identity/ABI audit of the existing runner, shim and r2 bundle. |
-| Objective | Identify one exact runner/shim/bundle triplet that accepts the v6 root and preserves the child environment/engine boundary. |
-| Non-goals | No execution, source/build/controller change, Bochs patch, BIOS/device/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry. |
-| Reference Baseline | T194 S8 r2 derivative, S10 controller/bundle, and S13 validated root. |
-| Files And ABI Surface | Existing runner/shim binaries, source contract and bundle manifest only. |
+| Identifier Mode | M0 T194 S15, Ordinary Mode. |
+| Admission And Approval | S14 establishes that every retained runner rejects the v6 profile before child creation, while the retained shim/r2 bundle remain source-compatible. This S admits one CLI-only current-source build pair. |
+| Objective | Produce and hash-record a current v6-capable runner plus the matching fixed-ABI shim, without starting an engine. |
+| Non-goals | No engine or guest execution, bundle change, Bochs patch/build/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry. |
+| Reference Baseline | T194 S8 r2 derivative, S10 controller/bundle, S13 validated root, and S14 binary-identity blocker. |
+| Files And ABI Surface | `src/cli`, CMake CLI targets, generated CLI-only artifact pair and evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Runner/shim source ABI review, binary and bundle hashes, child-environment contract and argument shape; documentation governance and `git diff --check`. |
-| Expected Markers | One compatible triplet or exact ABI/hash blocker; no runtime claim. |
-| Asset Needs | Existing source-built runner/shim and r2 bundle only. |
-| Reporting Requirements | Separate runner CLI parsing, shim bundle verification and Bochs child invocation facts. |
-| Stop Conditions | Any execution, source/build/controller/Bochs change, profile grammar expansion, provider expansion or retry; pause for a fresh S admission. |
-| Exit Criteria | Committed compatible triplet map or durable ABI blocker. |
+| Verification | Fresh MinGW CMake build of runner/shim only; v6 parser string and CLI-focused test evidence; hashes; documentation governance and `git diff --check`. |
+| Expected Markers | One current runner/shim pair, explicit artifact hashes and a source-only acceptance record; no runtime claim. |
+| Asset Needs | Current source, existing MinGW toolchain, and no guest/Bochs asset beyond static bundle identity comparison. |
+| Reporting Requirements | Separate runner parser/environment, shim ABI/bundle verification, build-input boundary and non-execution facts. |
+| Stop Conditions | Any native engine/guest process, Bochs/adaptor build, bundle mutation, profile grammar/provider change, or retry; pause for a fresh S admission. |
+| Exit Criteria | Committed current CLI-only pair or durable toolchain/build blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify controller does not carry stale v5 schema labels, old launch-kind/tail variables, an old engine hash, or a retry path. |
+| Similar-Issue Sweep | Verify both emitted binaries carry v6 identity; reject stale v5 runner substitution, engine linkage, and accidental Bochs/adaptor targets. |
 
 ## Current Technical Baseline
 
