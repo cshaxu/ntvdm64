@@ -56,6 +56,7 @@ $adapterSources = @(
     'bx_ntvdm_bop_ingress_v1.c','bx_ntvdm_bop_provider_registry_v1.c',
     'bx_ntvdm_dem_plane_v1.c','bx_ntvdm_dem_provider_v1.c',
     'bx_ntvdm_dem_session_lifecycle_provider_v1.c','bx_ntvdm_dem_fastio_provider_v1.c',
+    'bx_ntvdm_dem_drive_provider_v1.c',
     'bx_ntvdm_command_plane_v1.c',
     'bx_ntvdm_redir_unavailable_provider_v1.c',
     'bx_ntvdm_legacy_plane_gate_v1.c','bx_ntvdm_bios_memory_service.c',

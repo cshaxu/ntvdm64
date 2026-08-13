@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S21 — current drive-snapshot adapter derivative.**
+**Active: M0 T194 S22 — current drive-snapshot engine bundle assembly.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S21, Ordinary Mode. |
-| Admission And Approval | S20 proves the snapshot/static precedence in an isolated v6 runtime fixture. This S admits one adapter-only relink to make that verified path available to the native engine. |
-| Objective | Produce one current adapter derivative containing S19's route while retaining the S8 r2 Bochs/mechanics inputs unchanged. |
-| Non-goals | No runtime observation/retry, Bochs source/archive/device/config change, profile/root/controller change, BOP/provider semantic expansion, host enumeration during guest execution, filesystem/path/namespace/DPB change, terminal-result transport, or host queue/process broker. |
-| Reference Baseline | S8 r2 derivative, S15 CLI pair, S19 source route and S20 focused runtime proof. |
-| Files And ABI Surface | Existing adapter derivative generator/build recipe, current adapter sources, generated build artifact/manifest and evidence only. |
+| Identifier Mode | M0 T194 S22, Ordinary Mode. |
+| Admission And Approval | S21 source-builds the current drive-snapshot derivative with zero Bochs replacements. This S admits only content-addressed fixed-bundle assembly. |
+| Objective | Assemble and verify one immutable bundle for the S21 engine using the retained three ROM inputs. |
+| Non-goals | No engine/guest execution or retry, source/build/controller/profile/root change, Bochs patch/config/device action, BOP/provider semantic expansion, terminal-result transport, or host queue/process broker. |
+| Reference Baseline | S10 fixed-bundle format, S21 engine and retained ROM identities. |
+| Files And ABI Surface | Existing bundle assembly tool, generated bundle/manifest and evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Regenerate/dry-run current derivative inputs; compile adapter/CLI objects and final link only; compare retained Bochs/mechanics hashes and link map; documentation governance and `git diff --check`. |
-| Expected Markers | A manifested derivative with S19 objects, no Bochs rebuild/replacement and explicit hash/map evidence. |
-| Asset Needs | Existing S8 r2 build inputs, documented x86 MSVC toolchain and derivative generator only. |
-| Reporting Requirements | Record source set, toolchain, output hash, unchanged Bochs input proof, any ABI/link blocker and no-runtime statement. |
-| Stop Conditions | Any archive recursion/full Bochs build, Bochs input replacement, engine run, source semantic change, device/config enablement, profile/root/controller change or retry; pause for a fresh S admission. |
-| Exit Criteria | Committed derivative/evidence closure or a durable current-link blocker. |
+| Verification | Fixed bundle tool validation, manifest/member hashes, exact engine/ROM identity and no-process evidence; documentation governance and `git diff --check`. |
+| Expected Markers | One new immutable bundle whose engine is S21 and whose ROM hashes equal the retained fixed inputs. |
+| Asset Needs | S21 engine and S10 retained ROM files only. |
+| Reporting Requirements | Record all four member hashes, source paths, manifest schema and no-runtime statement. |
+| Stop Conditions | Any process launch, source/build change, ROM replacement, option mechanism, Bochs configuration change or retry; pause for a fresh S admission. |
+| Exit Criteria | Committed bundle/evidence closure or a durable source/hash blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify S19 provider object is included, static fallback remains unreachable for normal snapshot sessions, all Bochs inputs remain byte-identical and no accidental runtime action occurs. |
+| Similar-Issue Sweep | Verify engine identity is S21 rather than S8, all three ROM identities remain fixed, manifest has no extra options, and no process is launched. |
 
 ## Current Technical Baseline
 
