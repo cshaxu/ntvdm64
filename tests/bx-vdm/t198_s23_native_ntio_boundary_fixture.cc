@@ -8,6 +8,8 @@
 extern const Bit8u t198_s23_ntio_bytes[0x8400];
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_5011(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_stop(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_selector(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_service(void);
 
 int main()
 {
@@ -26,7 +28,8 @@ int main()
   p.command_metadata.dos_date=p.target_metadata.dos_date=p.config_metadata.dos_date=p.autoexec_metadata.dos_date=1;
   if(!bx_ntvdm_boot_namespace_composition_v1_initialize(&c,&ntdos,&cmd,&tgt,0,&p)||!bx_ntvdm_boot_namespace_composition_v1_bind(&c)||!bx_ntvdm_ntio_preentry_v1_prepare(&ntio,&p.ntio,&r,8192,1000000))return 1;
   status=(int)bx_ntvdm_run_finite_bare_bytes(&r); bx_ntvdm_boot_namespace_composition_v1_unbind(&c);
-  fprintf(stderr,"t198-s23 status=%d observed-5011=%u observed-stop=%u\n",status,
-    t198_s23_native_ntio_boundary_observed_5011(),t198_s23_native_ntio_boundary_observed_stop());
+  fprintf(stderr,"t198-s23 status=%d observed-5011=%u observed-stop=%u next=%02x:%02x\n",status,
+    t198_s23_native_ntio_boundary_observed_5011(),t198_s23_native_ntio_boundary_observed_stop(),
+    t198_s23_native_ntio_boundary_observed_selector(),t198_s23_native_ntio_boundary_observed_service());
   return status==BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP && t198_s23_native_ntio_boundary_observed_5011() && t198_s23_native_ntio_boundary_observed_stop()?0:2;
 }
