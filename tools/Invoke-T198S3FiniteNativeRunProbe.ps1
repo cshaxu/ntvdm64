@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
-    [string]$BuildRoot = ''
+    [string]$BuildRoot = '',
+    [switch]$UdStopFixture
 )
 
 Set-StrictMode -Version Latest
@@ -43,14 +44,25 @@ $finiteRunSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_finite_run.cc'
 $finiteRunObject = Join-Path $build 'finite_run.obj'
 $bridgeSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_generic_ud_bridge.cc'
 $bridgeObject = Join-Path $build 'generic_ud_bridge.obj'
+$fixtureBytes = if ($UdStopFixture) { '0x0f, 0x0b' } else { '0xf4' }
+$fixtureStopOnUd = if ($UdStopFixture) { '1' } else { '0' }
+$replacementExceptionObject = $null
+if ($UdStopFixture) {
+    $replacementExceptionObject = Join-Path $build 'exception_mantle_ud.obj'
+    $exceptionCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+        (New-MsvcCompileCommand (Join-Path $repository 'src\bx-core\cpu\exception.cc') $replacementExceptionObject) +
+        ' /DBX_NTVDM_ENABLE_MANTLE_UD_BRIDGE=1'
+    & cmd.exe /d /s /c $exceptionCompile
+    if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for mantle #UD exception replacement: $LASTEXITCODE" }
+}
 $probe = Join-Path $build 'finite_native_run_probe.cc'
-@'
+@"
 #include "bochs.h"
 #include "bx-mantle/bx_ntvdm_finite_run.h"
 
 int main()
 {
-  static const Bit8u bytes[] = { 0xf4 };
+  static const Bit8u bytes[] = { $fixtureBytes };
   bx_ntvdm_finite_run_request request;
   request.entry_bytes = bytes;
   request.entry_byte_count = sizeof(bytes);
@@ -59,10 +71,10 @@ int main()
   request.entry_eip = 0;
   request.instruction_tick_budget = 64;
   request.ips = 1000000;
-  request.stop_on_ud_fixture = 0;
+  request.stop_on_ud_fixture = $fixtureStopOnUd;
   return (int) bx_ntvdm_run_finite_bare_bytes(&request);
 }
-'@ | Set-Content -LiteralPath $probe -Encoding ascii
+"@ | Set-Content -LiteralPath $probe -Encoding ascii
 $probeObject = Join-Path $build 'finite_native_run_probe.obj'
 $finiteCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
     (New-MsvcCompileCommand $finiteRunSource $finiteRunObject)
@@ -78,14 +90,17 @@ $probeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
 if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run fixture: $LASTEXITCODE" }
 
 $seedObjects = Get-ChildItem -LiteralPath $nativeCore -Filter '*.obj' -File |
-    Where-Object { $_.Name -ne 'minimal_machine_link_probe.obj' } |
+    Where-Object { $_.Name -ne 'minimal_machine_link_probe.obj' -and
+        (!$UdStopFixture -or $_.Name -ne 'whole_cpu_exception.obj') } |
     ForEach-Object { $_.FullName }
 if ($seedObjects.Count -eq 0) { throw 'The seed build produced no reusable CPU5 objects' }
 $exe = Join-Path $build 't198-s3-finite-native-run-probe.exe'
 $map = Join-Path $build 'link.map'
 $log = Join-Path $build 'link.log'
 $response = Join-Path $build 'link.rsp'
-$quotedObjects = @($probeObject, $finiteRunObject, $bridgeObject) + $seedObjects |
+$localObjects = @($probeObject, $finiteRunObject, $bridgeObject)
+if ($UdStopFixture) { $localObjects += $replacementExceptionObject }
+$quotedObjects = $localObjects + $seedObjects |
     ForEach-Object { '"' + $_ + '"' }
 @('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') + $quotedObjects |
     Set-Content -LiteralPath $response -Encoding ascii
@@ -104,11 +119,12 @@ $record = [ordered]@{
     profile = 'CPU5/Pentium-MMX, non-x86-64'
     seedBuild = 'tools/Invoke-T197S6MinimalMachineLinkProbe.ps1 -WholeCpu5Core'
     fixture = [ordered]@{
-        entryBytes = 'f4 (HLT)'
+        entryBytes = if ($UdStopFixture) { '0f 0b (UD2)' } else { 'f4 (HLT)' }
         physicalAddress = '0x1000'
         cs = '0x0100'
         eip = '0x00000000'
         instructionTickBudget = 64
+        udStopFixture = [bool]$UdStopFixture
         ips = 1000000
     }
     forbiddenInputs = @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe', 'device archives', 'adapter', 'OpenNT', 'BOP', 'CLI')
