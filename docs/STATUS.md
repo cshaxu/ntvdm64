@@ -223,6 +223,10 @@ pre-entry request and prove the first existing `50:11` boundary.**
 - M0 T198 S23 P4 maps that later boundary as top-level BIOS `BOP 12h`
   `memory_size`; the logged trailing `B1` is the next guest instruction, not
   a service ID. See [S23 P4 map](etc/research/t198-s23-p4-post-dem-bop12-map-001.md).
+- M0 T198 S23 P5 routes the existing exact BIOS memory service through the
+  unified composition: `12h` resumes at `RIP+3` with AX `027Fh`; its MSVC x64
+  composition closure passes. Native NTIO continuation is the remaining
+  verification.
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

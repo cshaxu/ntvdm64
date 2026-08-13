@@ -30,6 +30,7 @@ if (-not (Test-Path -LiteralPath $vsDevCmd -PathType Leaf)) {
 # its generic ingress/session bridge, and direct adapter dependencies.
 $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_boot_namespace_composition_v1.c',
+    'src\bx-vdm\bx_ntvdm_bios_memory_service.c',
     'src\bx-vdm\bx_ntvdm_boot_namespace_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_boot_namespace_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_bop_ingress_v1.c',

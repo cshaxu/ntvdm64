@@ -91,8 +91,14 @@ int main(void)
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 12;
     if (outcome.resume_rip != 0x104) return 13;
     if (memcmp(ram + 0x8000, ntdos_bytes, sizeof(ntdos_bytes)) != 0) return 14;
-    composition.plane.ntdos.byte_count--;
+    event_initialize(&event, 0x12, 0);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x103 || outcome.gpr16_write_mask != 1u ||
+        outcome.gpr16_values[0] != 0x027fu) return 16;
+    event_initialize(&event, 0x50, 0x11);
     event.edi = 0x0900;
+    composition.plane.ntdos.byte_count--;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
         ram[0x9000] != 0 || ram[0x9001] != 0 || ram[0x9002] != 0) return 15;

@@ -1,4 +1,5 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx_ntvdm_bios_memory_service.h"
 #include <string.h>
 
 static bx_ntvdm_boot_namespace_composition_v1 *active;
@@ -89,9 +90,18 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     bx_ntvdm_exception_event_v1 boundary; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_instruction_window_v1 window; bx_ntvdm_bop_ingress_v1 ingress;
     bx_ntvdm_bop_provider_selection_v1 selection; bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_exception_result_v1 memory_result;
     struct bx_ntvdm_mechanical_action_v1 action, next;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
-            &cpu, &window) || !bx_ntvdm_bop_ingress_v1_dispatch(&boundary, &cpu,
+            &cpu, &window)) return 0;
+    if (bx_ntvdm_bios_memory_service_v1_dispatch(&boundary, &cpu, &window,
+            &memory_result)) {
+        if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
+            !bx_ntvdm_cpu_result_v2_resume(&result, memory_result.resume_rip)) return 0;
+        result.cpu_delta = memory_result.cpu_delta;
+        return outcome(&result, value);
+    }
+    if (!bx_ntvdm_bop_ingress_v1_dispatch(&boundary, &cpu,
             &window, &ingress, &result) || !bx_ntvdm_cpu_result_v2_valid(&result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH ||
         !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
