@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S23.** Its governing brief is the active
+> **Current effective packet: M0 T198 S24.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S23 -- compose the locked NTIO input through the generic
-pre-entry request and prove the first existing `50:11` boundary.**
+**Active: M0 T198 S24 -- recover the next original DEM `50:3B` boundary
+through the global DEM host-service plane.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ pre-entry request and prove the first existing `50:11` boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S23, Ordinary Mode. |
-| Admission And Approval | S22 closes the generic machine primitive. The owner-approved M0 objective and S21 source contract now admit one `bx-vdm` composition of the locked NTIO image and existing `50:11` provider. |
-| Objective | Prepare the generic v2 pre-entry request in `bx-vdm` from exact selected NTIO bytes and source-locked physical/entry fields; prove original NTIO reaches its existing DEM `50:11` transaction and a bounded stop. |
-| Non-goals | No BOP selector handling in Bochs, mantle host/guest semantics, guessed firmware/IVT/BDA input, selector `12` result, device enablement, ambient path access, or COMMAND/DOS continuity claim. |
-| Reference Baseline | S20 `50:11` source-derived provider, S21 NTIO pre-entry map, S22 generic native pre-entry witness, and BYOB exact-image contract. |
-| Files And ABI Surface | `bx-vdm` NTIO composition/request builder and CPU5 native fixture; the closed mantle v2 request may be consumed but not reinterpreted. |
+| Identifier Mode | M0 T198 S24, Ordinary Mode. |
+| Admission And Approval | S23 proves original NTIO resumes through `50:11` and top-level `12h`, then reaches `50:3B`. The owner-approved global BOP-plane objective admits recovery only through the existing DEM plane/provider structure. |
+| Objective | Source-map and compose the original DEM `SVC_ISDEBUG` (`50:3B`) result through common ingress, registry and DEM plane; prove exact NTIO resumes it and record the next boundary. |
+| Non-goals | No per-service recognizer outside the DEM plane, Bochs/mantle selector semantics, debugger implementation, device enablement, ambient capability, or DOS-continuity claim. |
+| Reference Baseline | S23 native continuation, `dossvc.h` `SVC_ISDEBUG`, existing DEM classification/plane, and original non-debug disposition evidence. |
+| Files And ABI Surface | `bx-vdm` DEM provider/plane composition and CPU5 native fixture only; no core/mantle ABI reinterpretation. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` native fixture enters original exact NTIO at `0070:0000`, reaches its real `50:11`, performs the existing NTDOS publication and stops under a bounded terminal condition. Boundary scans prove selector semantics stay in `bx-vdm`. |
-| Expected Markers | Exact NTIO identity, one copied v2 request, observed first `50:11`, checked NTDOS publication, typed resume, and no newly enabled selector. |
+| Verification | MSVC x64 `/MT` focused DEM-plane test and exact-NTIO native run prove `50:3B` is selected by common ingress/registry/plane, produces source-backed non-debug result, resumes, and reports the later boundary. Boundary scans prove selector semantics stay in `bx-vdm`. |
+| Expected Markers | Original source mapping, one existing DEM-plane route, `AL=0` non-debug result, typed resume, next copied boundary, and no debugger/Bochs semantic addition. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact NTIO identity, request construction, first-prefix control-flow evidence, machine/provider ownership, all build inputs, fixture result and later-selector limit. |
-| Stop Conditions | NTIO requires a guessed firmware/device value before `50:11`, a core/mantle semantic change, pre-entry state is not preserved, or first BOP is not the admitted transaction. Preserve evidence and re-admit. |
-| Exit Criteria | Exact original NTIO is native-run through `50:11` into the existing provider, and the fixture bounds the next unimplemented boundary without claiming DOS boot. |
+| Reporting Requirements | Record `50:3B` source/owner/result contract, plane selection path, all build inputs, fixture result, native continuation and later-selector limit. |
+| Stop Conditions | Original source requires an unavailable debugger/host binding rather than its documented non-debug result, routing needs a bypass, or a core/mantle semantic change is required. Preserve evidence and re-admit. |
+| Exit Criteria | Exact original NTIO native-runs through DEM `50:3B` via the global DEM plane and reports the next boundary without claiming DOS boot. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -223,10 +223,10 @@ pre-entry request and prove the first existing `50:11` boundary.**
 - M0 T198 S23 P4 maps that later boundary as top-level BIOS `BOP 12h`
   `memory_size`; the logged trailing `B1` is the next guest instruction, not
   a service ID. See [S23 P4 map](etc/research/t198-s23-p4-post-dem-bop12-map-001.md).
-- M0 T198 S23 P5 routes the existing exact BIOS memory service through the
-  unified composition: `12h` resumes at `RIP+3` with AX `027Fh`; its MSVC x64
-  composition closure passes. Native NTIO continuation is the remaining
-  verification.
+- M0 T198 S23 closes the exact NTIO first-handoff slice: its admitted `12h`
+  result is native-resumed under MSVC x64 `/MT`, while `15h/AH=88h` remains
+  explicitly declined; the next real boundary is DEM `50:3B`. See [S23
+  closure](history/m0-t198-s23-closure-20260813.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

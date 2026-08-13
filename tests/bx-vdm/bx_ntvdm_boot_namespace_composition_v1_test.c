@@ -96,6 +96,11 @@ int main(void)
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x103 || outcome.gpr16_write_mask != 1u ||
         outcome.gpr16_values[0] != 0x027fu) return 16;
+    /* AH=88h belongs to the reusable BIOS-memory provider but is not an
+     * admitted selector in this composition slice. */
+    event_initialize(&event, 0x15, 0);
+    event.eax = 0x8800;
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 17;
     event_initialize(&event, 0x50, 0x11);
     event.edi = 0x0900;
     composition.plane.ntdos.byte_count--;

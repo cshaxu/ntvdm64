@@ -94,7 +94,13 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     struct bx_ntvdm_mechanical_action_v1 action, next;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
             &cpu, &window)) return 0;
-    if (bx_ntvdm_bios_memory_service_v1_dispatch(&boundary, &cpu, &window,
+    /* This composition has admitted only the source-observed top-level
+     * BIOS_MEMORY_SIZE (12h) boundary.  The reusable provider also retains
+     * the separately mapped AH=88h contract, but that must not become live
+     * merely by linking it here. */
+    if (window.valid_bytes >= 3u && window.bytes[0] == 0xc4u &&
+        window.bytes[1] == 0xc4u && window.bytes[2] == 0x12u &&
+        bx_ntvdm_bios_memory_service_v1_dispatch(&boundary, &cpu, &window,
             &memory_result)) {
         if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
             !bx_ntvdm_cpu_result_v2_resume(&result, memory_result.resume_rip)) return 0;
