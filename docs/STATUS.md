@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T186 S1 — corrected-engine v5 observation composition.**
+**Binding active packet: M0 T187 S1 — boot-file BOP runtime predicate classification.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T186 S1**. M0 T185 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T187 S1**. M0 T186 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,21 +15,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T186 S1, Ordinary Mode; closed after one observation. |
-| Admission And Approval | Owner-approved continuation after T185's corrected v5 projection; the Queue candidate was admitted solely to compose and observe that fixed tuple once. |
-| Objective | Compose the corrected engine with a current runner, existing shim and fixed ROM bundle, then classify one watchdog-bounded v5 observation. |
-| Non-goals | No retry, Bochs change, new adapter provider, profile capability expansion, host capability, ambient namespace or `54:11` result transport. |
-| Reference Baseline | T185 S1/S2 audit/tests, T182 derivative, T184 observation and the fixed v5 BYOB root. |
-| Files And ABI Surface | Current `byob_profile.c`, existing narrow engine derivative recipe, fixed bundle manifest and durable observation evidence only. |
+| Identifier Mode | M0 T187 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized autonomous, holistic routing and task selection; the first Queue candidate is admitted after T186's corrected observation proves that the remaining `54:0C` decline is not a v5-selection projection omission. |
+| Objective | Audit whether a default-off fixed-width diagnostic can classify the existing boot-file dispatch predicates without changing their observable result or transaction behavior. |
+| Non-goals | No source change, guest run/retry, Bochs or OpenNT change, BOP/service/provider addition, profile expansion, host capability, guest-memory read, new result transport, selector/service branch, or runtime logging. |
+| Reference Baseline | T186 durable observation/classification, existing finite boot namespace provider, adapter runtime test, BOP identity listener and common COMMAND plane gate. |
+| Files And ABI Surface | Existing adapter runtime/provider/host-session source and tests, the BOP listener and T187 evidence only; no ABI or source surface is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One controller result with prelaunch input hashes, both streams, terminal outcome JSON and marker classification; documentation inventory/governance and `git diff --check`. |
-| Expected Markers | Exactly one wrapper PID, no retry, and recorded status of `54:01`, commit, `FE` controlled stop and timeout/exit. |
-| Asset Needs | Fixed current tuple plus retained NTIO/NTDOS/COMMAND/SHARE/QUIT files from the T184 evidence root. |
-| Reporting Requirements | A timeout or incomplete result is final; neither `FE` nor process exit establishes normal DOS result transport. Record whether the T185 correction changes `54:0C`. |
-| Stop Conditions | A second invocation, input replacement after manifest generation, raw Bochs invocation, Bochs/adapter change, profile capability addition or result-transport claim. |
-| Exit Criteria | Met: one complete corrected-engine observation is retained and source-classified without retry. |
+| Verification | Compare the attempted predicate decomposition against the retained original short-circuit route; a focused adapter fixture must show whether enabling it preserves repeat preparation; documentation inventory/governance and `git diff --check`. |
+| Expected Markers | Either a source-equivalent, non-perturbing diagnostic design or a recorded rejection proving why the attempted decomposition cannot be admitted. |
+| Asset Needs | Existing source and unit-test fixture only; T186 evidence is read-only baseline. |
+| Reporting Requirements | Record exact diagnostic ABI, default-off activation, every classified decline and the fact that no historical guest run is performed. No result may be inferred from the old trace beyond its recorded limitations. |
+| Stop Conditions | Any attempted observer changes repeat preparation, needs a Bochs/OpenNT change, selector-specific CPU branch, guest-memory access, new BOP behavior, broader tracing, or a guest rerun. |
+| Exit Criteria | Met only if a non-perturbing design is source/test proven; otherwise close with the failed design removed and transfer an evidence-backed alternative. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Rejected global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
+| Similar-Issue Sweep | Audit both `54:0C` and `54:0D`; reject global BOP tracing, DEM/FCB reuse, ambient host state, selector recognizer bypass, direct Bochs/DOS integration and all retries. |
 
 ## Current Technical Baseline
 
