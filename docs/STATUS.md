@@ -2,13 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S35.** It is paused at its stop
-> condition; its governing brief and rejection evidence are recorded below, and
-> a successor needs re-admission before implementation resumes.
+> **Current effective packet: M0 T198 S36.** Its governing brief is the active
+> packet table below.
 
-**Active: M0 T198 S35 -- paused after the default-off fixed-width
-core-to-mantle instruction-history mechanic was rejected at the retained
-chained CPU boundary.**
+**Active: M0 T198 S36 -- use the retained chained handler's native per-step
+macro for a default-off fixed-width predecessor history.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -25,19 +23,19 @@ chained CPU boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S35, Ordinary Mode. |
-| Admission And Approval | S34 proved no existing instrumentation facility met the minimal closure. The owner authorized individually registered Bochs intrusions. S35 was admitted as a fixed-width mechanical experiment; its stop condition has now fired and no successor is admitted. |
-| Objective | The attempted bounded, default-off, selector-blind before-execution history ring had to prove an exact predecessor before S29's generic stop. It instead proved that the retained hook is trace-granular under handler chaining, so the candidate was removed. |
+| Identifier Mode | M0 T198 S36, Ordinary Mode. |
+| Admission And Approval | S35 rejected the CPU-loop hook because handler chaining makes it trace-granular. The owner approved 2026-08-13 a registered intrusive Bochs correction: use the original chained `BX_EXECUTE_INSTRUCTION` macro, with the first trace instruction recorded by the CPU loop. |
+| Objective | Register then implement a bounded, default-off, selector-blind fixed history record at every retained chained instruction transition. Core copies only CPU id, CS, RIP and instruction count; mantle owns storage/configuration/query. Under the exact CPU5 x64 `/MT` run, prove the record immediately preceding S29's generic stop. |
 | Non-goals | No BOP/service/OpenNT/DOS/NTIO recognition, guest-memory read/write, raw `bxInstruction_c*` or host pointer transfer, CPU state mutation, debugger/instrumentation/product feature activation, device/firmware/VGA enablement, CLI ABI, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S29--S34 evidence; selected CPU-loop before-execution timing; existing generic copied-event and terminal-snapshot patterns; current CPU5 x64 `/MT` finite closure. |
-| Files And ABI Surface | New current-path `bx-mantle` private history record/ring; one compile-time-default-off inclusion in `bx-core/cpu/cpu.cc`; exact finite fixture/build recipe; exception register/evidence/Status. No adapter or OpenNT interface. |
+| Reference Baseline | S29--S35 evidence; original `instr.h` chained execution macros, `linkTrace`, and current CPU5 x64 `/MT` finite closure. |
+| Files And ABI Surface | New current-path `bx-mantle` private history record/ring; default-off inclusion in `bx-core/cpu/instr.h` plus first-trace call in `bx-core/cpu/cpu.cc`; exact finite fixture/build recipe; exception register/evidence/Status. No adapter or OpenNT interface. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | The affected CPU5 x64 `/MT` core object, temporary mantle ring and exact fixture compiled and linked. Disabled behavior, invalid capacity and four-entry wrap were checked; the resulting final trace entry `0000:0AC1` differed from the generic fault `0000:0A84`. See `etc/research/t198-s35-chained-history-rejection-001.md`. |
-| Expected Markers | Rejection evidence, removed temporary core/mantle mechanism, preserved selector-blind boundary, typed stop, no product instrumentation, and no adapter dependency. |
+| Verification | Rebuild every CPU5 source object affected by `instr.h` plus the finite fixture under MSVC x64 `/MT`; test disabled state, invalid capacity, bounded wrap/order, and that final history contains generic fault `0000:0A84` with an immediately preceding record. Scan for forbidden vocabulary/pointer/device/product dependency. |
+| Expected Markers | Registered exception, fixed record/ring, first-trace and chained-step coverage, copied predecessor CS:RIP sequence, typed stop, no product instrumentation, and no adapter dependency. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | The exception scope, exact object/build inputs, trace output, limitation and successor constraint are recorded in `etc/research/t198-s35-chained-history-rejection-001.md`. |
-| Stop Conditions | Fired: retained handler chaining makes the selected hook trace-granular. The candidate is removed; preserve evidence and re-admit before any different core seam or tracing strategy. |
-| Exit Criteria | Not met. No direct predecessor is established; this packet remains paused pending owner-approved re-admission. |
+| Reporting Requirements | Record exception scope, exact rebuilt objects/build inputs, fixed layout, default/rejection tests, exact trace output, boundary scan, OpenNT source interpretation, limitation and successor recommendation. |
+| Stop Conditions | The full CPU5 closure cannot rebuild/link; the macro requires instruction-object/guest-byte/BOP/service knowledge, CPU mutation, product instrumentation, host pointer, or device behavior; or it still cannot establish the immediate predecessor. Preserve evidence and re-admit. |
+| Exit Criteria | The exact run exposes a bounded history whose final record is the known generic fault and whose previous record is its direct predecessor, under the same CPU5 x64 `/MT` closure with no semantic or product-surface expansion. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -295,6 +293,12 @@ chained CPU boundary.**
   a broader feature closure and raw CPU/logging coupling. A future trace must
   be a separately admitted fixed-width core-to-mantle mechanic, never a BOP or
   debugger path. See [S34 audit](etc/research/t198-s34-instruction-history-seam-audit-001.md).
+- M0 T198 S36 is complete: the default-off registered chained-step history
+  rebuilt the full CPU5 source closure under MSVC x64 `/MT` and captured the
+  first non-BOP generic fault `0000:0A84` with immediate predecessor
+  `0000:0A82` on consecutive counts. This confirms a low-RAM
+  mutation/control-transfer frontier, not a missing BOP handler. See
+  [S36 witness](etc/research/t198-s36-chained-step-history-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

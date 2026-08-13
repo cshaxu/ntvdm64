@@ -100,6 +100,7 @@ void BX_CPU_C::cpu_loop(void)
     for(;;) {
 
       // want to allow changing of the instruction inside instrumentation callback
+      BX_NTVDM_RECORD_INSTRUCTION_HISTORY();
       BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, i);
       RIP += i->ilen();
       // when handlers chaining is enabled this single call will execute entire trace
@@ -177,6 +178,7 @@ void BX_CPU_C::cpu_run_trace(void)
 
 #if BX_SUPPORT_HANDLERS_CHAINING_SPEEDUPS
   // want to allow changing of the instruction inside instrumentation callback
+  BX_NTVDM_RECORD_INSTRUCTION_HISTORY();
   BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, i);
   RIP += i->ilen();
   // when handlers chaining is enabled this single call will execute entire trace

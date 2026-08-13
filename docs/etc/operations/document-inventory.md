@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1038 |
+| Documentation records | 1040 |
 | --- | --- |
-| Generated UTC | 2026-08-13T17:12:47Z |
+| Generated UTC | 2026-08-13T18:26:36Z |
 
 ## Entries
 
@@ -110,7 +110,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 49625e0cc4e230deb258353e667d79a04e2293a03f6154fd4309e1e4bd4f9652 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 5a164b2415a82346809e2b76c90e85d27cba225504d782f1a1980f8da717ae1e |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -425,6 +425,7 @@ content-divergent entries.
 | etc/research/t198-s33-first-generic-stack-snapshot-001.md | indexed supporting material | 532852abc7c311fd2bb44bb452034d5b0872e1996a4db8cb369254e00e8495f2 |
 | etc/research/t198-s34-instruction-history-seam-audit-001.md | indexed supporting material | c92a97e856788e27e55a6d5bc45d7799b6d83776a8246743d32d1bf7f8f0f91a |
 | etc/research/t198-s35-chained-history-rejection-001.md | indexed supporting material | cc280497eaea0e5ef8205089e6eae8f080dcfd18710f1406e798eec21fdf079a |
+| etc/research/t198-s36-chained-step-history-witness-001.md | indexed supporting material | 74ff37a3587656166f0010b913d0105b84459f9f836f9184f9525568ee011e45 |
 | etc/research/t198-s3-finite-native-run-witness-001.md | indexed supporting material | f197ff4bf1f1d6ad401b6f79b0b2ee59949ad583622468df10e2f80efc94adcc |
 | etc/research/t198-s4-generic-ud-seam-map-001.md | indexed supporting material | d22f402ce51aa8c8ff079cd6e737e7103688f096c42f751571cb58ddb538746e |
 | etc/research/t198-s5-p1-generic-ud-bridge-record-001.md | indexed supporting material | 28b1dfb141e07bef1357cc6bee7cced17a1b9b243b83332bdfdfe2d37c3b3ce1 |
@@ -769,6 +770,7 @@ content-divergent entries.
 | history/m0-t198-s22-closure-20260813.md | closed task history | 1b5842876c31c3001c142326f04ffb75e39ce5c5056f135ee7ae9f498756fec9 |
 | history/m0-t198-s23-closure-20260813.md | closed task history | a59f8e015f6e74e46c6681c714bfcc011304f88130769d98fe5ebfcb2c3a1e6d |
 | history/m0-t198-s24-closure-20260813.md | closed task history | af69513b76d861e6cbf9f768a824b06e7cc84dbaca268691ae41625bab5feab3 |
+| history/m0-t198-s36-closure-20260813.md | closed task history | 36937e18eeb92a7ddb67fee7a587b6a74c05035eee12ec2b0246e57816cca392 |
 | history/m0-t198-s8-closure-20260813.md | closed task history | 4de76e54b2097ae2100dee4d1123253cf09964d2d1a8c8b72a8db23b216b7418 |
 | history/m0-t198-s9-closure-20260813.md | closed task history | bbf529c2d4a30cdc105a4089a27f0a4f53f048630b8273ba3f1f065448ef0f88 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
@@ -1052,7 +1054,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 322870fbfbc32d42d05e687e52e3f44744eb3653734a556be557a12506374cba |
+| STATUS.md | principal control document | efd5484a5f53089894e2858c972a0ebcd259345d50c82cbf1934d1931de8955f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

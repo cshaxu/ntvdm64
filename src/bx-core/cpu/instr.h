@@ -30,6 +30,26 @@ typedef void BX_INSF_TYPE;
 
 #if BX_SUPPORT_HANDLERS_CHAINING_SPEEDUPS
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+#define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY 0
+#endif
+
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+#include "bx-mantle/bx_ntvdm_instruction_history.h"
+#define BX_NTVDM_RECORD_INSTRUCTION_HISTORY() do { \
+  bx_ntvdm_instruction_history_record_v1 bx_ntvdm_history_record; \
+  bx_ntvdm_history_record.version = BX_NTVDM_INSTRUCTION_HISTORY_V1_VERSION; \
+  bx_ntvdm_history_record.cpu_id = BX_CPU_ID; \
+  bx_ntvdm_history_record.sequence = BX_CPU_THIS_PTR icount; \
+  bx_ntvdm_history_record.rip = BX_CPU_THIS_PTR prev_rip; \
+  bx_ntvdm_history_record.cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value; \
+  bx_ntvdm_history_record.reserved0 = 0; \
+  bx_ntvdm_mantle_instruction_history_v1_record(&bx_ntvdm_history_record); \
+} while (0)
+#else
+#define BX_NTVDM_RECORD_INSTRUCTION_HISTORY() do { } while (0)
+#endif
+
 #define BX_SYNC_TIME_IF_SINGLE_PROCESSOR(allowed_delta) {                     \
   if (BX_SMP_PROCESSORS == 1) {                                               \
     Bit32u delta = BX_CPU_THIS_PTR icount - BX_CPU_THIS_PTR icount_last_sync; \
@@ -47,6 +67,7 @@ typedef void BX_INSF_TYPE;
 }
 
 #define BX_EXECUTE_INSTRUCTION(i) {                    \
+  BX_NTVDM_RECORD_INSTRUCTION_HISTORY();                \
   BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, (i));           \
   RIP += (i)->ilen();                                  \
   return BX_CPU_CALL_METHOD(i->execute, (i));          \
