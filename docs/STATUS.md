@@ -49,6 +49,12 @@ core/mantle build closure without reviving the Bochs product target.**
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
   capability and full real-path closure remain uncompleted.
+- M0 T197 S6 has a reproducible CPU5/non-x86-64 native link frontier: r4
+  compiles the explicit SIM/mantle/memory and source-proven reset/decode CPU
+  candidates, then stops at the original complete instruction-handler table
+  and retained product-shell methods.  No GUI, plugin/device archive, adapter
+  or OpenNT input entered the probe; see
+  [T197 S6 link probe 001](etc/research/t197-s6-cpu5-minimal-link-probe-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
