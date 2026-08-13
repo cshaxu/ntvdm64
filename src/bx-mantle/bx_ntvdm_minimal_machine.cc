@@ -6,10 +6,10 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "cpu/cpu.h"
-#include "memory/memory.h"
+#include "bx-core/cpu/cpu.h"
+#include "bx-core/memory/memory.h"
 #include "iodev/iodev.h"
-#include "pc_system.h"
+#include "bx-mantle/pc_system.h"
 #include "bx_ntvdm_minimal_sim.h"
 #include "bx_ntvdm_minimal_machine.h"
 
