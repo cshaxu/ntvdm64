@@ -230,10 +230,7 @@ $mak = @(
     'cpu\\exception.o: cpu\\exception.cc',
     ("`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) " + ($exceptionOptInFlags -join ' ') + ' /Iadapter /Icli /Tpcpu\\exception.cc /Focpu\\exception.o'),
     '',
-    'cpu\\event.o: cpu\\event.cc',
-    "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_IRQ13_TRANSFER_DIAGNOSTIC=1 /Tpcpu\\event.cc /Focpu\\event.o",
-    '',
-    'cpu\\libcpu.a: cpu\\exception.o cpu\\event.o',
+    'cpu\\libcpu.a: cpu\\exception.o',
     "`tcd cpu && lib /nologo /subsystem:console /verbose /out:libcpu.a $($cpuArchiveObjects -join ' ')",
     ''
 )
