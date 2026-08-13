@@ -26,7 +26,8 @@ $runtimeHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\
 $comspecHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_cmd_comspec_bootstrap_service.c') (Join-Path $build 'adapter\bx_ntvdm_cmd_comspec_bootstrap_service.c')
 $comspecHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_cmd_comspec_bootstrap_service.h') (Join-Path $build 'adapter\bx_ntvdm_cmd_comspec_bootstrap_service.h')
 $baseMake = Join-Path $base 'ntdos64-t188-copied-state.mak'
-$linkLine = Get-Content -LiteralPath $baseMake | Where-Object { $_ -like 'link /nologo *' }
+$linkLine = Get-Content -LiteralPath $baseMake | Where-Object { $_.TrimStart() -like 'link /nologo *' } |
+    ForEach-Object { $_.TrimStart() }
 if (@($linkLine).Count -ne 1) { throw 'Base derivative does not contain one link line.' }
 $make = @(
     '# Generated T190 S3 derivative: exactly three object targets and final link.', '!INCLUDE Makefile', '',
