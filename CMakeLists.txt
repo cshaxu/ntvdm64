@@ -241,6 +241,13 @@ target_include_directories(bx-ntvdm-vdm-generic-ud-bridge-v1-test PRIVATE
     src/bx-vdm src/bx-mantle)
 target_compile_features(bx-ntvdm-vdm-generic-ud-bridge-v1-test PRIVATE c_std_11)
 
+add_executable(bx-ntvdm-mechanical-action-v1-abi-test EXCLUDE_FROM_ALL
+    tests/bx-vdm/bx_ntvdm_mechanical_action_v1_abi_test.c
+)
+target_include_directories(bx-ntvdm-mechanical-action-v1-abi-test PRIVATE
+    src src/bx-mantle)
+target_compile_features(bx-ntvdm-mechanical-action-v1-abi-test PRIVATE c_std_11)
+
 add_executable(bx-ntvdm-dem-drive-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_cpu_state_abi.c
     src/bx-vdm/bx_ntvdm_instruction_window_abi.c

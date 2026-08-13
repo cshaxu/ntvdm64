@@ -3,6 +3,7 @@ param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
     [switch]$UdStopFixture,
+    [switch]$MechanicalActionProbe,
     [string[]]$ExternalBridgeObjects = @()
 )
 
@@ -19,6 +20,9 @@ if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
 $build = [IO.Path]::GetFullPath($BuildRoot)
 if (Test-Path -LiteralPath $build) {
     throw "Refusing to overwrite existing build root: $build"
+}
+if ($MechanicalActionProbe -and ($UdStopFixture -or $ExternalBridgeObjects.Count -ne 0)) {
+    throw 'Mechanical-action probe cannot be combined with a #UD fixture or external bridge.'
 }
 
 $seed = Join-Path $repository 'tools\Invoke-T197S6MinimalMachineLinkProbe.ps1'
@@ -45,6 +49,8 @@ $finiteRunSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_finite_run.cc'
 $finiteRunObject = Join-Path $build 'finite_run.obj'
 $bridgeSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_generic_ud_bridge.cc'
 $bridgeObject = Join-Path $build 'generic_ud_bridge.obj'
+$mechanicalActionSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_mechanical_action_v1.cc'
+$mechanicalActionObject = Join-Path $build 'mechanical_action.obj'
 $externalBridge = $ExternalBridgeObjects.Count -ne 0
 foreach ($object in $ExternalBridgeObjects) {
     if (-not (Test-Path -LiteralPath $object -PathType Leaf)) {
@@ -63,6 +69,44 @@ if ($UdStopFixture -or $externalBridge) {
     if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for mantle #UD exception replacement: $LASTEXITCODE" }
 }
 $probe = Join-Path $build 'finite_native_run_probe.cc'
+if ($MechanicalActionProbe) {
+@"
+#include "bochs.h"
+#include "bx-mantle/bx_ntvdm_minimal_machine.h"
+#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
+
+int main()
+{
+  bx_ntvdm_minimal_machine_c machine;
+  struct bx_ntvdm_mechanical_action_v1 action;
+  if (machine.initialize(0x100000, 0x100000) != BX_NTVDM_MINIMAL_MACHINE_OK) return 1;
+  bx_ntvdm_mechanical_action_v1_clear(&action);
+  action.action_id = 1; action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+  action.range_count = 1; action.payload_bytes = 4;
+  action.ranges[0].physical_address = 0x800; action.ranges[0].byte_count = 4;
+  action.payload[0] = 0xaa; action.payload[1] = 0xbb;
+  action.payload[2] = 0xcc; action.payload[3] = 0xdd;
+  if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) return 2;
+  bx_ntvdm_mechanical_action_v1_clear(&action);
+  action.action_id = 2; action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+  action.range_count = 2; action.payload_bytes = 4;
+  action.ranges[0].physical_address = 0x800; action.ranges[0].byte_count = 2;
+  action.ranges[1].physical_address = 0x100000; action.ranges[1].byte_count = 2;
+  action.ranges[1].payload_offset = 2;
+  action.payload[0] = 0x11; action.payload[1] = 0x22;
+  action.payload[2] = 0x33; action.payload[3] = 0x44;
+  if (bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) return 3;
+  bx_ntvdm_mechanical_action_v1_clear(&action);
+  action.action_id = 3; action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_READ;
+  action.range_count = 1; action.payload_bytes = 4;
+  action.ranges[0].physical_address = 0x800; action.ranges[0].byte_count = 4;
+  if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action) ||
+      action.payload[0] != 0xaa || action.payload[1] != 0xbb ||
+      action.payload[2] != 0xcc || action.payload[3] != 0xdd) return 4;
+  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 5;
+}
+"@ | Set-Content -LiteralPath $probe -Encoding ascii
+} else {
 @"
 #include "bochs.h"
 #include "bx-mantle/bx_ntvdm_finite_run.h"
@@ -82,12 +126,20 @@ int main()
   return (int) bx_ntvdm_run_finite_bare_bytes(&request);
 }
 "@ | Set-Content -LiteralPath $probe -Encoding ascii
+}
 $probeObject = Join-Path $build 'finite_native_run_probe.obj'
-$finiteCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
-    (New-MsvcCompileCommand $finiteRunSource $finiteRunObject)
-& cmd.exe /d /s /c $finiteCompile
-if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run helper: $LASTEXITCODE" }
-if (!$externalBridge) {
+if ($MechanicalActionProbe) {
+    $actionCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+        (New-MsvcCompileCommand $mechanicalActionSource $mechanicalActionObject)
+    & cmd.exe /d /s /c $actionCompile
+    if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for mechanical action: $LASTEXITCODE" }
+} else {
+    $finiteCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+        (New-MsvcCompileCommand $finiteRunSource $finiteRunObject)
+    & cmd.exe /d /s /c $finiteCompile
+    if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run helper: $LASTEXITCODE" }
+}
+if (!$MechanicalActionProbe -and !$externalBridge) {
     $bridgeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
         (New-MsvcCompileCommand $bridgeSource $bridgeObject)
     & cmd.exe /d /s /c $bridgeCompile
@@ -107,9 +159,14 @@ $exe = Join-Path $build 't198-s3-finite-native-run-probe.exe'
 $map = Join-Path $build 'link.map'
 $log = Join-Path $build 'link.log'
 $response = Join-Path $build 'link.rsp'
-$localObjects = @($probeObject, $finiteRunObject)
-if ($externalBridge) { $localObjects += $ExternalBridgeObjects } else { $localObjects += $bridgeObject }
-if ($UdStopFixture -or $externalBridge) { $localObjects += $replacementExceptionObject }
+$localObjects = @($probeObject)
+if ($MechanicalActionProbe) {
+    $localObjects += $mechanicalActionObject
+} else {
+    $localObjects += $finiteRunObject
+    if ($externalBridge) { $localObjects += $ExternalBridgeObjects } else { $localObjects += $bridgeObject }
+    if ($UdStopFixture -or $externalBridge) { $localObjects += $replacementExceptionObject }
+}
 $quotedObjects = $localObjects + $seedObjects |
     ForEach-Object { '"' + $_ + '"' }
 @('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') + $quotedObjects |
@@ -124,7 +181,7 @@ $runCommand = '"' + $exe + '" > "' + $runLog + '" 2>&1'
 & cmd.exe /d /s /c $runCommand
 $runExit = $LASTEXITCODE
 $record = [ordered]@{
-    schema = 'ntdos64.t198.s3.finite-native-run-probe.v1'
+    schema = 'ntdos64.t198.s3.finite-native-run-probe.v2'
     architecture = 'x86'
     profile = 'CPU5/Pentium-MMX, non-x86-64'
     seedBuild = 'tools/Invoke-T197S6MinimalMachineLinkProbe.ps1 -WholeCpu5Core'
@@ -135,6 +192,7 @@ $record = [ordered]@{
         eip = '0x00000000'
         instructionTickBudget = 64
         udStopFixture = [bool]$UdStopFixture
+        mechanicalActionProbe = [bool]$MechanicalActionProbe
         externalBridgeObjects = @($ExternalBridgeObjects | ForEach-Object { [IO.Path]::GetFileName($_) })
         ips = 1000000
     }

@@ -107,6 +107,12 @@ whole finite boot-namespace provider family, before linking that provider.**
   bridge in the MSVC/x86 CPU5 finite link; the macro-enabled HLT fixture
   links and returns zero without entering #UD.  See [T198 S7 cross-island
   witness](etc/research/t198-s7-cross-island-link-witness-001.md).
+- M0 T198 S8 P1 is complete: the first adapter-local pending descriptor was
+  corrected into a mantle-owned, selector-blind copied ordinary-RAM action
+  ABI.  A native CPU5/x86 fixture proves write, rejected out-of-aperture
+  multi-range write and read-back with no partial write; an i686 C witness
+  proves the fixed layout.  No provider is attached; see [T198 S8 mechanical
+  action boundary witness](etc/research/t198-s8-mechanical-action-boundary-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
