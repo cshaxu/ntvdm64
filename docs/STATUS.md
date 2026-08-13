@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S7 — one-slot bounded-startup admission audit.**
+**Active: M0 T194 S8 — one-slot current-adapter derivative closure.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S7, Ordinary Mode. |
-| Admission And Approval | S6 closes v5/v6 adapter assembly. This S admits only a read-only audit of the existing bounded startup boundary before any engine link or guest execution. |
-| Objective | Identify the exact unchanged engine entry, profile inputs and existing evidence needed to observe a v6 one-slot startup handoff, or record the pre-CPU blocker. |
-| Non-goals | No source change, engine link, guest execution, Bochs patch, BIOS/device/config action, BOP/provider change, terminal-result transport, process-exit reinterpretation, host command queue, host target execution broker, or retry-based repair. |
-| Reference Baseline | T194 S1--S6, including `etc/research/t194-s6-one-slot-adapter-composition-assembly-001.md`; frozen engine/build manifests and T190/T181 evidence. |
-| Files And ABI Surface | Read-only build manifests, engine entry scripts, profile/bundle inputs and evidence only. |
+| Identifier Mode | M0 T194 S8, Ordinary Mode. |
+| Admission And Approval | S7 proves no unchanged v6 engine candidate exists. Owner's minimal-boundary policy admits one narrow derivative closure that retains Bochs and machine inputs unchanged. |
+| Objective | Produce a reproducible engine derivative containing the current adapter/CLI composition required for one-slot profile installation, with no Bochs rebuild. |
+| Non-goals | No guest observation, Bochs source/object/archive rebuild, BIOS/device/config change, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry repair. |
+| Reference Baseline | T194 S4--S7; `etc/research/t194-s7-one-slot-bounded-startup-admission-audit-001.md`; T98 current-adapter derivative method. |
+| Files And ABI Surface | A new generated build root/manifest and existing current adapter/CLI sources only; retained Bochs inputs are hash-verified. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Manifest/entrypoint source audit, retained evidence comparison, documentation governance and `git diff --check`. |
-| Expected Markers | One named unchanged execution candidate or one exact pre-CPU blocker; no runtime claim. |
-| Asset Needs | Existing committed fixtures and artifacts only; no new guest artifact or host capability. |
-| Reporting Requirements | Name the engine owner, build identity, profile/plan transport, and required fresh admission boundary. |
-| Stop Conditions | Any source change, engine link, guest execution, Bochs change, new provider semantics, device/config action, or retry; pause for a fresh S admission. |
-| Exit Criteria | Committed execution-candidate map or durable blocker. |
+| Verification | Derivative input/object manifest, object count and retained-Bochs hash checks, focused build/link result, documentation governance and `git diff --check`. |
+| Expected Markers | Current adapter/CLI objects only; zero Bochs recompilations; one linked engine and reproducible manifest; no runtime claim. |
+| Asset Needs | Existing accepted derivative base and committed sources only; no new guest artifact or host capability. |
+| Reporting Requirements | Record exact base identity, rebuilt object list, retained Bochs identities and any link blocker. |
+| Stop Conditions | Any Bochs object rebuild, source intrusion, machine config/device change, guest execution or provider expansion; pause for a fresh S admission. |
+| Exit Criteria | Committed derivative closure or durable build blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare v5/v6 profile inputs against every existing engine startup entry and reject stale launch-kind/tail or two-slot-only fixtures. |
+| Similar-Issue Sweep | Scan generated makefiles/manifests for stale copied runtime/profile/plan objects and accidental Bochs rebuild prerequisites. |
 
 ## Current Technical Baseline
 
