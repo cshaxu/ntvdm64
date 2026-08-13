@@ -92,6 +92,10 @@ before the holistic BOP plane can be recomposed.**
 - M0 T198 S5 P3 is in progress: the legacy machine-composition callback and
   its product-stop path are removed from core; remaining legacy adapter
   transaction blocks are the next removal set.
+- M0 T198 S5 P3 witness is complete: fresh CPU5 `UD2` traverses the new
+  core/mantle fixed bridge and returns through native controlled stop with no
+  product or adapter input; see
+  [T198 S5 P3 UD-stop witness](etc/research/t198-s5-p3-finite-ud-stop-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
