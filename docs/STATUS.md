@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S19 — CLI drive-snapshot provider integration.**
+**Active: M0 T194 S20 — CLI drive-snapshot runtime routing proof.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S19, Ordinary Mode. |
-| Admission And Approval | S18 resolves the owner policy: the existing immutable CLI snapshot, not optional static profile inventory, is the sole normal-launch input for `50:0F`. This S admits that contained provider selection integration. |
-| Objective | Make the existing source-derived `demGetDrives` provider consume the already installed CLI snapshot, preserving original count/AX/CF/resume behavior. |
-| Non-goals | No new BOP/provider algorithm, profile grammar/root change, run/retry, Bochs patch/build/config action, host enumeration during guest execution, filesystem/path/namespace access, `50:46` expansion, terminal-result transport, or host queue/process broker. |
-| Reference Baseline | S16 trace, S17 original contract, S18 policy contract, existing drive snapshot and provider implementations. |
-| Files And ABI Surface | `src/bx-ntvdm-adapter` runtime dispatch and focused tests only; existing fixed-width snapshot/result ABI. |
+| Identifier Mode | M0 T194 S20, Ordinary Mode. |
+| Admission And Approval | S19 integrates and source-builds snapshot-backed `50:0F`; policy/provider units pass, while the broad retained runtime fixture is failed and unclassified. This S admits only a narrow routing fixture. |
+| Objective | Prove one installed controlled CLI snapshot, not profile-static inventory, produces the original-shaped `50:0F` AX/CF/resume result. |
+| Non-goals | No provider/adapter behavior change, profile grammar/root change, run/retry, Bochs patch/build/config action, host enumeration during guest execution, filesystem/path/namespace/DPB access, unrelated legacy fixture repair, terminal-result transport, or host queue/process broker. |
+| Reference Baseline | S18 contract, S19 source-built route and failed broad fixture. |
+| Files And ABI Surface | One focused adapter runtime test and its CMake target only; existing snapshot/result ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused adapter tests prove default/include/exclude/conflict snapshots, 50:0F result/CF/resume, missing snapshot decline and no profile-static override; source review, documentation governance and `git diff --check`. |
-| Expected Markers | A source-built focused provider path that consumes the existing snapshot exactly once, plus explicit negative boundaries. |
-| Asset Needs | Existing MinGW adapter test toolchain and no new host or guest asset. |
-| Reporting Requirements | Record exact changed selection path, source-derived OpenNT count correspondence, test outcomes, no-live-query proof and deferred services. |
-| Stop Conditions | Need for a new snapshot format, any guest-time host query, any Bochs/profile/filesystem/DPB change, source-derived behavior beyond `demGetDrives`, or runtime observation; pause for a fresh S admission. |
-| Exit Criteria | Committed adapter/test evidence or a durable build/ABI blocker. |
+| Verification | Deterministic runtime fixture with controlled snapshot and conflicting static profile inventory; assert BOP ingress/result state, AX/CF/resume and no host capture during dispatch; documentation governance and `git diff --check`. |
+| Expected Markers | One passing narrow runtime routing test and an explicit negative static-override assertion. |
+| Asset Needs | Existing MinGW adapter test toolchain only; no real host or guest asset. |
+| Reporting Requirements | State fixture setup, snapshot/static conflict, exact result fields and why the broad fixture remains out of scope. |
+| Stop Conditions | Any need to alter production behavior, profile parser, host capture timing, Bochs, engine execution, or unrelated test repair; pause for a fresh S admission. |
+| Exit Criteria | Committed focused runtime proof or a durable isolated test/ABI blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check static-inventory precedence, all policy modes, absent snapshot behavior, 50:0F result shape, and that `50:46`/namespace/file paths remain untouched. |
+| Similar-Issue Sweep | Check snapshot/static precedence, missing snapshot decline, AX/CF/resume shape, host-capture timing, and that `50:46`/namespace/file paths remain untouched. |
 
 ## Current Technical Baseline
 

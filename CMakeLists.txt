@@ -220,6 +220,22 @@ add_executable(bx-ntvdm-dem-provider-v1-test EXCLUDE_FROM_ALL
 target_include_directories(bx-ntvdm-dem-provider-v1-test PRIVATE src/bx-ntvdm-adapter)
 target_compile_features(bx-ntvdm-dem-provider-v1-test PRIVATE c_std_11)
 
+add_executable(bx-ntvdm-dem-drive-provider-v1-test EXCLUDE_FROM_ALL
+    src/bx-ntvdm-adapter/bx_ntvdm_cpu_state_abi.c
+    src/bx-ntvdm-adapter/bx_ntvdm_instruction_window_abi.c
+    src/bx-ntvdm-adapter/bx_ntvdm_exception_abi.c
+    src/bx-ntvdm-adapter/bx_ntvdm_cpu_delta_abi.c
+    src/bx-ntvdm-adapter/bx_ntvdm_cpu_result_v2.c
+    src/bx-ntvdm-adapter/bx_ntvdm_bop_ingress_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_dem_plane_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_host_drive_policy.c
+    src/bx-ntvdm-adapter/bx_ntvdm_dem_drive_provider_v1.c
+    tests/bx-ntvdm-adapter/bx_ntvdm_dem_drive_provider_v1_test.c
+)
+target_include_directories(bx-ntvdm-dem-drive-provider-v1-test PRIVATE src/bx-ntvdm-adapter)
+target_compile_features(bx-ntvdm-dem-drive-provider-v1-test PRIVATE c_std_11)
+
 add_executable(bx-ntvdm-redir-unavailable-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_state_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_instruction_window_abi.c
@@ -991,6 +1007,7 @@ add_executable(bx-ntvdm-adapter-runtime-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_dem_plane_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_provider_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_session_lifecycle_provider_v1.c
+    src/bx-ntvdm-adapter/bx_ntvdm_dem_drive_provider_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_dem_fastio_provider_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_command_plane_v1.c
     src/bx-ntvdm-adapter/bx_ntvdm_legacy_plane_gate_v1.c

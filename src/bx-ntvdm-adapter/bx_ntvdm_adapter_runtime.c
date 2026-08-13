@@ -17,6 +17,7 @@
 #include "bx_ntvdm_wait_if_idle_service.h"
 #include "bx_ntvdm_dem_dta_service.h"
 #include "bx_ntvdm_dem_drive_service.h"
+#include "bx_ntvdm_dem_drive_provider_v1.h"
 #include "bx_ntvdm_dem_ioctl_changeable_service.h"
 #include "bx_ntvdm_dem_hard_error_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
@@ -158,6 +159,27 @@ static int bx_ntvdm_adapter_runtime_v1_dispatch_dem_session_lifecycle(
         bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
             &bx_ntvdm_adapter_runtime.boot_namespace_provider, &ingress,
             &selection, &plane, event, cpu_before, result);
+}
+
+/* The CLI captures the only normal-launch drive inventory before guest
+ * execution.  Route the OpenNT-shaped DEM count through the common BOP
+ * ingress/registry/plane records; a guest BOP never triggers a host query. */
+static int bx_ntvdm_adapter_runtime_v1_dispatch_dem_drive_snapshot(
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_bop_ingress_v1 ingress;
+    bx_ntvdm_bop_provider_selection_v1 selection;
+    bx_ntvdm_dem_plane_record_v1 plane;
+    return bx_ntvdm_adapter_runtime.has_host_drive_snapshot &&
+        bx_ntvdm_bop_ingress_v1_classify(window, &ingress) &&
+        bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) &&
+        bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) &&
+        bx_ntvdm_dem_drive_provider_v1_dispatch(&ingress, &selection, &plane,
+            &bx_ntvdm_adapter_runtime.host_drive_snapshot, event, cpu_before,
+            result);
 }
 
 static int bx_ntvdm_hex_nibble(wchar_t value, uint8_t *out)
@@ -648,6 +670,8 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
      * The original-unavailable DEM provider above owns every remaining
      * demNotYetImplemented slot.  The selected finite profile overrides only
      * 50:42 through the source-derived fast-read provider above. */
+    if (bx_ntvdm_adapter_runtime_v1_dispatch_dem_drive_snapshot(event,
+            cpu_before, window, result)) return 1;
     if (!bx_ntvdm_adapter_runtime.has_host_drive_inventory) return 1;
     if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x21u) &&
         bx_ntvdm_dem_ioctl_changeable_service_v1_dispatch(
