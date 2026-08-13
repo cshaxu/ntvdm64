@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T188 S3 — adapter session-observation audit.**
+**Binding active packet: M0 T188 S4 — copied session-state diagnostic design.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T188 S3**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T188 S4**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T188 S3, Ordinary Mode. |
-| Admission And Approval | S2 proves the original v2 composite succeeds with the exact v5 BOP/register shape, so a live difference must be accumulated adapter state. Owner authorization permits autonomous sequencing; S3 admits only a read-only audit of existing state-observation contracts. |
-| Objective | Determine whether the host session/runtime exposes a side-effect-free, copied state observation capable of explaining a live `54:0C` pass-through without reinvoking or reordering its condition. |
-| Non-goals | No production source change, Bochs/CLI/engine change, build, guest observation, state reset, condition instrumentation, selector-specific ingress, provider/DOS/COMMAND semantic change, host capability or completion claim. |
-| Reference Baseline | T187 S1 rejects stateful predicate decomposition; T188 S2 proves provider/gate/prepare/queue success for the exact static v5 shape. |
-| Files And ABI Surface | `docs/etc/research/t188-s3-*` only; read-only audit of runtime/session headers, public APIs and existing test seams. |
+| Identifier Mode | M0 T188 S4, Ordinary Mode. |
+| Admission And Approval | S3 proves no existing general state observer and rejects all transfer/reset accessors. Owner authorization permits autonomous sequencing; S4 admits design and static validation of one adapter-owned copied diagnostic ABI before any Bochs source/build or runtime action. |
+| Objective | Specify the smallest layout-neutral adapter state snapshot that can distinguish installed/provider/pending lifecycle state after generic dispatch, without exposing pointers, BOP/service identity or mutable session contents. |
+| Non-goals | No Bochs/CLI/engine change, build, guest observation, direct session-layout export, selector/service field, state mutation, condition reordering, provider/DOS/COMMAND semantic change, host capability or completion claim. |
+| Reference Baseline | T188 S3 finds the runtime session private and all generic pending transfers consuming; T188 S2 proves the static route succeeds. |
+| Files And ABI Surface | Adapter diagnostic header/source and focused static test/evidence only; no Bochs source in this S. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Cite all public observation/read APIs and state fields involved in queue/lifecycle; run documentation inventory/governance and `git diff --check`. |
-| Expected Markers | An existing side-effect-free observer with its copied ABI, or evidence that no such observer exists and that adding one would be a controlled future change. |
-| Asset Needs | Current adapter runtime/session source, headers and existing tests; no new source, build or runtime input. |
-| Reporting Requirements | Separate state ownership from BOP/service semantics. Reject any observer that resets, takes, clears, queues or repeats a transaction. |
-| Stop Conditions | Any source/test/build/run change, inferred live state, side-effecting accessor, Bochs/CLI change or provider semantic change; these require S4 admission. |
-| Exit Criteria | A durable observer disposition and a bounded next step; no runtime invocation. |
+| Verification | Define fixed-width validity rules and static tests that reject pointers, service/selector fields, state-changing calls and direct `host_session` layout use; run documentation inventory/governance and `git diff --check`. |
+| Expected Markers | One copied record with versioned fields sufficient only for lifecycle classification, plus explicit non-mutation proof. |
+| Asset Needs | Current adapter runtime/session source and static adapter test island; no Bochs build or runtime input. |
+| Reporting Requirements | Separate adapter-state ownership from BOP/service semantics. Record the future Bochs trace as a registered, default-off consumer of the copied record only. |
+| Stop Conditions | Any Bochs/CLI change, build or guest run; any pointer/selector/service/memory content in the record; any state mutation or production behavior change; these require re-admission. |
+| Exit Criteria | Source/test closed copied-state ABI or a design rejection; no Bochs or guest action. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 

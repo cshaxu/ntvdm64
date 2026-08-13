@@ -11,7 +11,7 @@ T188 recovers one coherent, generic BOP ingress path from Bochs #UD through the 
 | S1 | Source/build closure map for #UD consumers, macros, objects, transactions and negative paths. | One generic consumer selected; no source change. |
 | S2 | No-runtime adapter-plane predicate audit for the selected ingress. | One source-preserving fixture identifies or proves inability to identify the declining predicate. |
 | S3 | Audit whether the accumulated adapter session state has an existing side-effect-free observation contract. | Either select a state observation seam or reject intrusive condition instrumentation. |
-| S4 | Only if S3 finds a non-invasive state contract, build its narrowest derivative and make one watchdog-bounded observation. | No retry; classify state/result/continuation separately. |
+| S4 | Define and verify an adapter-owned copied state snapshot only because S3 proves no existing observer; then build its narrowest derivative and make one watchdog-bounded observation. | No retry; classify state/result/continuation separately. |
 | S5 | Closure audit and next-boundary disposition. | No completion, host-drive, device or terminal-result claim. |
 
 ## Invariants
