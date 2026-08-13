@@ -227,6 +227,10 @@ through the global DEM host-service plane.**
   result is native-resumed under MSVC x64 `/MT`, while `15h/AH=88h` remains
   explicitly declined; the next real boundary is DEM `50:3B`. See [S23
   closure](history/m0-t198-s23-closure-20260813.md).
+- M0 T198 S24 P1 moves original DEM `50:3B` into a dedicated DEM-MISC plane
+  entry and proves its non-debug `AL=0`/`RIP+4` result through the current
+  MSVC x64 `/MT` CPU5 composition. The subsequent bounded HLT state has no
+  later BOP identity yet; see [S24 P1](etc/research/t198-s24-p1-dem-isdebug-native-resume-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

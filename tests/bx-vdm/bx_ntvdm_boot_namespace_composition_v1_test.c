@@ -101,6 +101,12 @@ int main(void)
     event_initialize(&event, 0x15, 0);
     event.eax = 0x8800;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 17;
+    event_initialize(&event, 0x50, 0x3b);
+    event.eax = 0xabcd;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104 || outcome.gpr16_write_mask != 1u ||
+        outcome.gpr16_values[0] != 0xab00u) return 18;
     event_initialize(&event, 0x50, 0x11);
     event.edi = 0x0900;
     composition.plane.ntdos.byte_count--;
