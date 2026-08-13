@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S10 — one-slot observation input preparation.**
+**Active: M0 T194 S11 — one-slot normal-return asset admission.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S10, Ordinary Mode. |
-| Admission And Approval | S9 rejects the stale v5 controller and absent r2 bundle as observation inputs. This S admits only input/controller preparation, not execution. |
-| Objective | Create an immutable r2 engine bundle and a v6-labelled, no-retry bounded-observation controller with equivalent process-tree safety. |
-| Non-goals | No guest execution, source/build change outside the controller, Bochs patch, BIOS/device/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry. |
-| Reference Baseline | T194 S8--S9 and the retained T184 controller/bundle pattern. |
-| Files And ABI Surface | A new tool controller and a generated r2 bundle only. |
+| Identifier Mode | M0 T194 S11, Ordinary Mode. |
+| Admission And Approval | S10 produces a v6-labelled no-retry controller and r2 bundle without execution. This S admits only asset identity/provenance reconciliation before a run decision. |
+| Objective | Identify the exact source-built normal-return target and complete v6 BYOB root/profile set required for a single observation. |
+| Non-goals | No execution, source/build/controller change, Bochs patch, BIOS/device/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry. |
+| Reference Baseline | T194 S1--S10, especially the SHARE provenance and the v6 profile contract. |
+| Files And ABI Surface | Existing source-built artifacts, manifests, profile fixtures and evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Controller static contract scan, r2 bundle hash manifest, documentation governance and `git diff --check`. |
-| Expected Markers | v6 schema labels, no retry, explicit watchdog tree kill and one immutable bundle. |
-| Asset Needs | Existing r2 derivative and ROM root only; no new guest artifact or host capability. |
-| Reporting Requirements | Record source controller provenance, bundle hashes and the separate execution admission required. |
-| Stop Conditions | Any execution, engine rebuild, Bochs/device change, provider expansion or controller semantics beyond labelling/inputs; pause for a fresh S admission. |
-| Exit Criteria | Committed controller/bundle preparation or durable blocker. |
+| Verification | Artifact hash/provenance, profile/root component identity and declared-target placement audit, documentation governance and `git diff --check`. |
+| Expected Markers | One exact v6 profile/root/target candidate or a named missing/mismatched asset; no runtime claim. |
+| Asset Needs | Existing source-built artifacts and retained inputs only; no new host capability. |
+| Reporting Requirements | Separate source-built/provenance fact from profile compatibility and normal-return source contract. |
+| Stop Conditions | Any asset build/copy, profile/controller/source change, execution, Bochs/device change, provider expansion or retry; pause for a fresh S admission. |
+| Exit Criteria | Committed candidate map or durable asset blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Verify controller does not carry stale v5 schema labels, old launch-kind/tail variables, an old engine hash, or a retry path. |
 
