@@ -2,7 +2,7 @@
 
 `src/cli` is the user-facing, non-invasive `ntdos64-run` component.  It is a
 separate fifth component beside the OpenNT guest payload, host capabilities,
-minimal Bochs machine, and `bx-ntvdm-adapter` composition boundary.
+minimal Bochs machine, and `bx-vdm` composition boundary.
 
 It owns only:
 

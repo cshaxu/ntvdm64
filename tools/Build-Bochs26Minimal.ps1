@@ -12,7 +12,7 @@ if (-not $ReenableFullBuild) {
 }
 $repository = [IO.Path]::GetFullPath($RepositoryRoot)
 $source = Join-Path $repository 'src\bochs'
-$compatibilityPatch = Join-Path $repository 'src\bx-ntvdm-adapter\patches\bochs-2.6-msvc-fmt-ll.patch'
+$compatibilityPatch = Join-Path $repository 'src\bx-vdm\patches\bochs-2.6-msvc-fmt-ll.patch'
 if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
     $BuildRoot = Join-Path $repository 'artifacts\build\bochs-2.6-minimal'
 }
@@ -69,7 +69,7 @@ $metadata = [ordered]@{
     source = $source
     buildRoot = $build
     compilerPath = 'C:\\msys64\\ucrt64\\bin'
-    buildPatch = 'src/bx-ntvdm-adapter/patches/bochs-2.6-msvc-fmt-ll.patch'
+    buildPatch = 'src/bx-vdm/patches/bochs-2.6-msvc-fmt-ll.patch'
     configureOptions = $options
     optionalFeatures = 'deny-by-default; only CPU level 3, FPU default, and nogui baseline admitted'
     executable = (Get-ChildItem -LiteralPath $build -Filter 'bochs.exe' -File -Recurse | Select-Object -First 1 -ExpandProperty FullName)

@@ -382,7 +382,7 @@ int main(int argc, char **argv)
                 L"908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43" };
             uint64_t sizes[] = { 33792u, 858u, 384u };
             unsigned index;
-            printf("bx-ntvdm-adapter-runtime-test: supplied profile rejected=%s\n",
+            printf("bx-vdm-runtime-test: supplied profile rejected=%s\n",
                 byob_profile_result_name(validation));
             printf("install-diagnostic=%d\n", (int)
                 bx_ntvdm_adapter_runtime_v1_install_diagnostic());
@@ -393,7 +393,7 @@ int main(int argc, char **argv)
         }
         if (!bx_ntvdm_adapter_runtime_v1_prepare_profile_startup_plan(
                 &startup_plan, &payload, &payload_bytes)) return 4;
-        printf("bx-ntvdm-adapter-runtime-test: supplied profile plan bytes=%llu\n",
+        printf("bx-vdm-runtime-test: supplied profile plan bytes=%llu\n",
             (unsigned long long)payload_bytes);
         return 0;
     }
@@ -598,6 +598,6 @@ int main(int argc, char **argv)
     bx_ntvdm_adapter_runtime_v1_reset();
     DeleteFileW(evidence); DeleteFileW(profile); DeleteFileW(target); DeleteFileW(command); DeleteFileW(ntdos); DeleteFileW(ntio); RemoveDirectoryW(root);
     if (failed) return 1;
-    puts("bx-ntvdm-adapter-runtime-test: identity-to-pending-transaction path verified");
+    puts("bx-vdm-runtime-test: identity-to-pending-transaction path verified");
     return 0;
 }

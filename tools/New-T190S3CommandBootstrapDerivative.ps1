@@ -21,10 +21,10 @@ if ((Hash $baseEngine) -ne 'A008832FBE0E6094A1F91D196E14ED9527BDAAE99FDE1042EC50
 if ($LASTEXITCODE -gt 7) { throw "Base copy failed: $LASTEXITCODE" }
 
 $exceptionHash = Copy-Verified (Join-Path $repository 'src\bochs\cpu\exception.cc') (Join-Path $build 'cpu\exception.cc')
-$runtimeHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_adapter_runtime.c') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.c')
-$runtimeHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_adapter_runtime.h') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.h')
-$comspecHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_cmd_comspec_bootstrap_service.c') (Join-Path $build 'adapter\bx_ntvdm_cmd_comspec_bootstrap_service.c')
-$comspecHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_cmd_comspec_bootstrap_service.h') (Join-Path $build 'adapter\bx_ntvdm_cmd_comspec_bootstrap_service.h')
+$runtimeHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_adapter_runtime.c') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.c')
+$runtimeHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_adapter_runtime.h') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.h')
+$comspecHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_cmd_comspec_bootstrap_service.c') (Join-Path $build 'adapter\bx_ntvdm_cmd_comspec_bootstrap_service.c')
+$comspecHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_cmd_comspec_bootstrap_service.h') (Join-Path $build 'adapter\bx_ntvdm_cmd_comspec_bootstrap_service.h')
 $baseMake = Join-Path $base 'ntdos64-t188-copied-state.mak'
 $linkLine = Get-Content -LiteralPath $baseMake | Where-Object { $_.TrimStart() -like 'link /nologo *' } |
     ForEach-Object { $_.TrimStart() }

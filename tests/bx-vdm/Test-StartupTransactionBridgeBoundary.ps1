@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
-$header = Get-Content (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_startup_transaction_bridge.h') -Raw
-$source = Get-Content (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_startup_transaction_bridge.c') -Raw
+$header = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_transaction_bridge.h') -Raw
+$source = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_transaction_bridge.c') -Raw
 $combined = $header + "`n" + $source
 foreach ($required in @(
         'prepare_from_environment',

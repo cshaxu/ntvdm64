@@ -109,14 +109,14 @@ foreach ($entry in @(@{ source='src\bochs\main.cc'; destination='main.cc'; stale
 }
 
 New-Item -ItemType Directory -Path (Join-Path $build 'adapter'), (Join-Path $build 'cli') -Force | Out-Null
-foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-ntvdm-adapter') -Filter *.h -File) {
+foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-vdm') -Filter *.h -File) {
     [void](Copy-Verified $header.FullName (Join-Path $build ('adapter\' + $header.Name)))
 }
 foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\cli') -Filter *.h -File) {
     [void](Copy-Verified $header.FullName (Join-Path $build ('cli\' + $header.Name)))
 }
 foreach ($name in $adapterSources) {
-    $hash = Copy-Verified (Join-Path $repository ('src\bx-ntvdm-adapter\' + $name)) (Join-Path $build ('adapter\' + $name))
+    $hash = Copy-Verified (Join-Path $repository ('src\bx-vdm\' + $name)) (Join-Path $build ('adapter\' + $name))
     $manifest.adapterSources += [ordered]@{ name=$name; sha256=$hash }
 }
 foreach ($name in $cliSources) {

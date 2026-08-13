@@ -5,8 +5,8 @@ $ErrorActionPreference = 'Stop'
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path $MyInvocation.MyCommand.Path))
 }
-$header = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src\bx-ntvdm-adapter\bx_ntvdm_adapter_runtime.h') -Raw
-$source = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src\bx-ntvdm-adapter\bx_ntvdm_adapter_runtime.c') -Raw
+$header = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src\bx-vdm\bx_ntvdm_adapter_runtime.h') -Raw
+$source = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src\bx-vdm\bx_ntvdm_adapter_runtime.c') -Raw
 $start = $header.IndexOf('typedef struct bx_ntvdm_adapter_runtime_diagnostic_state_v1')
 $end = $header.IndexOf('} bx_ntvdm_adapter_runtime_diagnostic_state_v1;', $start)
 if ($start -lt 0 -or $end -lt $start) { throw 'Missing copied diagnostic-state ABI.' }

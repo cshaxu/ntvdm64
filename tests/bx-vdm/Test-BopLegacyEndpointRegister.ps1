@@ -3,7 +3,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$root = Join-Path $RepositoryRoot 'src\bx-ntvdm-adapter'
+$root = Join-Path $RepositoryRoot 'src\bx-vdm'
 $frozen = @(
     'bx_ntvdm_dem_readonly_file_service.c','bx_ntvdm_dem_boot_drive_service.c',
     'bx_ntvdm_dem_drive_service.c','bx_ntvdm_dem_debug_service.c',

@@ -1,9 +1,9 @@
 $ErrorActionPreference = 'Stop'
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
-$header = Get-Content (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_startup_session.h') -Raw
-$source = Get-Content (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_startup_session.c') -Raw
-$environmentHeader = Get-Content (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_startup_session_environment.h') -Raw
-$environmentSource = Get-Content (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_startup_session_environment.c') -Raw
+$header = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_session.h') -Raw
+$source = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_session.c') -Raw
+$environmentHeader = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_session_environment.h') -Raw
+$environmentSource = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_session_environment.c') -Raw
 foreach ($term in @('byob_image.h', 'bx_ntvdm_startup_plan_abi.h')) {
     if (-not $header.Contains($term)) { throw "Missing required startup-session include: $term" }
 }

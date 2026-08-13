@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $inventoryPath = Join-Path $repositoryRoot 'artifacts\analysis\opennt-bop-inventory-005-20260811-001\opennt-bop-inventory.json'
-$catalogPath = Join-Path $repositoryRoot 'src\bx-ntvdm-adapter\bx_ntvdm_bop_catalog_v1.c'
+$catalogPath = Join-Path $repositoryRoot 'src\bx-vdm\bx_ntvdm_bop_catalog_v1.c'
 if (-not (Test-Path -LiteralPath $inventoryPath)) { throw "Missing pinned BOP inventory: $inventoryPath" }
 
 $inventory = Get-Content -LiteralPath $inventoryPath -Raw | ConvertFrom-Json

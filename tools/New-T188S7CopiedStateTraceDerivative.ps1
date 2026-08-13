@@ -21,8 +21,8 @@ if ((Hash $baseEngine) -ne 'EB55EFA8CBBB4E9B640D3AC2BFAF054AE551EB0EB793A597733E
 if ($LASTEXITCODE -gt 7) { throw "Base copy failed: $LASTEXITCODE" }
 
 $exceptionHash = Copy-Verified (Join-Path $repository 'src\bochs\cpu\exception.cc') (Join-Path $build 'cpu\exception.cc')
-$runtimeSourceHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_adapter_runtime.c') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.c')
-$runtimeHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_adapter_runtime.h') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.h')
+$runtimeSourceHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_adapter_runtime.c') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.c')
+$runtimeHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_adapter_runtime.h') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.h')
 $make = @(
     '# Generated T188 S7 derivative: two object targets and final link.', '!INCLUDE Makefile', '',
     'cpu\exception.o: cpu\exception.cc',

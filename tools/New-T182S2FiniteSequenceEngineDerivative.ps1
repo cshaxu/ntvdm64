@@ -64,14 +64,14 @@ foreach ($path in @('main.o','cpu\exception.o','cpu\libcpu.a','iodev\libiodev.a'
         'machine\unexp_nt.c.obj','machine\illegalp.c.obj')) {
     $manifest.retainedMachineInputs += [ordered]@{ path = $path; sha256 = Get-Sha256 (Join-Path $build $path) }
 }
-foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-ntvdm-adapter') -Filter *.h -File) {
+foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-vdm') -Filter *.h -File) {
     [void](Copy-Verified $header.FullName (Join-Path $build ('adapter\' + $header.Name)))
 }
 foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\cli') -Filter *.h -File) {
     [void](Copy-Verified $header.FullName (Join-Path $build ('cli\' + $header.Name)))
 }
 foreach ($name in $adapterSources) {
-    $source = Join-Path $repository ('src\bx-ntvdm-adapter\' + $name)
+    $source = Join-Path $repository ('src\bx-vdm\' + $name)
     $manifest.adapterSources += [ordered]@{ name = $name; sha256 = Copy-Verified $source (Join-Path $build ('adapter\' + $name)) }
 }
 foreach ($name in $cliSources) {

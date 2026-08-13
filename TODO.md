@@ -9,7 +9,7 @@ emulation exists:
 1. **Minimum Bochs:** retain only the generic CPU, RAM/ROM, exception and
    evidence-proven native PC mechanics required by the selected guest path.
    Bochs must not own OpenNT BOP, DOS, DEM, CLI, or host-capability semantics.
-2. **Minimum bx-ntvdm-adapter:** retain only fixed-width bridge records,
+2. **Minimum bx-vdm:** retain only fixed-width bridge records,
    generic `#UD`/BOP ingress, provider routing, and checked guest-copy/result
    transport. It must not become a DOS kernel/filesystem, BIOS, SoftPC, or
    replacement virtual machine.

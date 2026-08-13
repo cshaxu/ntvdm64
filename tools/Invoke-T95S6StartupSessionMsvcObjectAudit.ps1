@@ -15,7 +15,7 @@ if ([string]::IsNullOrWhiteSpace($AnalysisRoot)) {
 $analysis = [IO.Path]::GetFullPath($AnalysisRoot)
 if (Test-Path -LiteralPath $analysis) { throw "Refusing to overwrite existing analysis directory: $analysis" }
 
-$adapter = Join-Path $repository 'src\bx-ntvdm-adapter'
+$adapter = Join-Path $repository 'src\bx-vdm'
 $cli = Join-Path $repository 'src\cli'
 $sources = @(
     @{ Folder = 'adapter'; Name = 'bx_ntvdm_startup_session.c' },

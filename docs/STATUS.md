@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T196 S6.** Its governing brief is the active
+> **Current effective packet: M0 T197 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T196 S6 — establish the effective minimal MSVC closure before
-any build, then verify the selector-blind Bochs/adapter boundary.**
+**Active: M0 T197 S1 — atomically rename the project adapter to `bx-vdm` and
+produce the Bochs core/mantle physical-placement map.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -14,30 +14,30 @@ any build, then verify the selector-blind Bochs/adapter boundary.**
 
 ## Active Packet
 
-> **T scope:** T196 is the full Bochs/adapter boundary **repair** package.
-> S1 is only its immutable baseline/audit step. S2 classifies the repair
-> surface; S3 removes or migrates nonconforming/retired deltas; S4 repairs the
-> retained mechanical surface; S5 reconciles the final diff and register; S6
-> rebuilds and verifies the admitted closure. Only the next T, not T196,
-> resumes holistic BOP runtime closure.
+> **T scope:** T197 extracts the smallest native Bochs lifecycle into the
+> `bx-core`/`bx-mantle` boundary and physically names the VDM adapter `bx-vdm`.
+> S1 performs the atomic adapter rename and records the full ownership and
+> placement map. Later S packets move only source-proven pure core or pure
+> mantle; mixed files require a separately admitted decision. Holistic BOP
+> runtime closure remains the following T package.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T196 S6, Ordinary Mode. |
-| Admission And Approval | S5 is closed by `e2748ba`: its current 24-path/41-hunk crosswalk has no orphan source hunk or exception-register entry and assigns every remaining compiler/archive/link claim to this S6. T95's minimal-x86 closure contract and object-link audit prove that no safe recipe exists yet. S6 is therefore admitted first for the controlled effective-configuration and retained-symbol closure investigation; a build requires a subsequent explicit S6 admission. |
-| Objective | Derive and prove the effective minimal MSVC x86 configuration, fixture-root contract and retained object/symbol closure needed before any minimal build can be generated. |
-| Non-goals | No compiler/linker invocation, build root, recipe, response file, full Bochs/bochs.exe build, configure-loop repair, BOP runtime campaign, guest execution claim, device/firmware/plugin expansion, or new Bochs intrusion. |
-| Reference Baseline | T196 S5 current crosswalk; T196 S4 closure; T95 minimal-x86 configuration/link-closure contract; T95 MSVC object-link audit; pinned Bochs 2.6 tree; exception register. |
-| Files And ABI Surface | Configuration/closure investigation evidence, source/object ownership ledgers, focused static tests, Status and documentation inventory. |
-| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Record exact effective configuration candidates and their source edges; establish a fixture-root contract; reconcile every candidate object's retained/rejected members; rerun focused static checks; run documentation governance and `git diff --check`. |
-| Expected Markers | A build admission record naming exact config bytes/hash, fixture root, source/object vector, CRT/import model and negative retention proof—or a precisely attributed unresolved edge. |
-| Asset Needs | Local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record configuration bytes/hash candidate, fixture-root scope, object/symbol ownership result, unresolved edge, and exact conditions for any later build admission. |
-| Stop Conditions | The investigation requires a guessed macro, product-shell object, full target rebuild, device/plugin/configuration expansion, guest semantic branch, object/pointer ABI, or new intrusion. Preserve facts and re-admit. |
-| Exit Criteria | The effective configuration and retained-symbol closure either satisfy the documented build-admission criteria or identify the first unresolvable owner edge without a build. This closes only the investigative S6 stage. |
-| Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
-| Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
+| Identifier Mode | M0 T197 S1, Ordinary Mode. |
+| Admission And Approval | Owner approved direct `src/bx-ntvdm-adapter` to `src/bx-vdm` rename with one complete reference replacement, then ordered Bochs core/mantle mapping and `git mv` migration only for pure files. The owner expressly requires case-by-case design review for mixed files. T196 closes with its first native-lifecycle blocker transferred to this package. |
+| Objective | Rename the project adapter and its tests to `bx-vdm`, update every live source/build/test reference atomically, and record the current Bochs file/owner map that identifies pure-core, pure-mantle, and mixed product-shell surfaces. |
+| Non-goals | No Bochs source move before the map; no C/C++ behavior change; no minimal Bochs build, configure repair, device/plugin/firmware admission, BOP semantic change, OpenNT source move, or resolution of mixed files. |
+| Reference Baseline | `4f75b7b` ideal layer decision; T196 S5 crosswalk; T196 S6 effective-closure prebuild audit; pinned Bochs 2.6 import; current CMake/test topology. |
+| Files And ABI Surface | `src/bx-ntvdm-adapter/` and `tests/bx-ntvdm-adapter/` renames; live CMake/tool/test references; `docs/design/CODING.md`, coding rules, Status, Queue, T196 closure, and T197 placement evidence. No runtime ABI bytes change. |
+| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
+| Verification | `git diff --summary` must show renames, tracked live references to old adapter path must be zero, CMake configure plus focused `bx-vdm` tests must pass, Bochs map must classify every top-level build-bearing directory, then documentation governance and `git diff --check`. |
+| Expected Markers | `src/bx-vdm/`, renamed test root, no live old-path reference, and a source-backed placement table with pure/mixed status and direct next action per Bochs area. |
+| Asset Needs | Existing local repository and pinned local Bochs 2.6 source only; no network/import action. |
+| Reporting Requirements | Record renamed paths, reference sweep, test/build outcome, top-level Bochs mapping, unresolved mixed edges, and the exact S2 move set. |
+| Stop Conditions | A rename changes an include/ABI or fails a focused build/test for a non-path reason; an allegedly pure Bochs file reaches product-shell, GUI/plugin/device, VDM, BOP, OpenNT or DOS meaning; or a move needs source edits beyond path repair. Preserve evidence and re-admit. |
+| Exit Criteria | The adapter rename is mechanically closed and verified; all Bochs build-bearing areas have a placement disposition; S2's exact pure-file move set and mixed-file questions are documented. |
+| Original Owner Request | Directly rename adapter to `src/bx-vdm`; first map current Bochs logic into core and mantle, then use `git mv` for pure files and decide mixed dependencies specifically. |
+| Similar-Issue Sweep | Scan source, tests, CMake, tools, current design/rules, source-manifest checks, and the existing machine-composition directory; preserve historical evidence paths rather than rewriting history. |
 
 ## Current Technical Baseline
 

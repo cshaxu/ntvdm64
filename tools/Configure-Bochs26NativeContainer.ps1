@@ -33,7 +33,7 @@ if (-not $existingBuild) {
     New-Item -ItemType Directory -Path $build -Force | Out-Null
     & robocopy $source $build /E /COPY:DAT /DCOPY:DAT /R:1 /W:1 /XJ /NFL /NDL /NJH /NJS | Out-Null
     if ($LASTEXITCODE -gt 7) { throw "robocopy failed with exit code $LASTEXITCODE" }
-    $adapterSource = Join-Path $repository 'src\bx-ntvdm-adapter'
+    $adapterSource = Join-Path $repository 'src\bx-vdm'
     $adapterBuild = Join-Path $build 'ntdos64_adapter'
     New-Item -ItemType Directory -Path $adapterBuild -Force | Out-Null
     Copy-Item -LiteralPath (Join-Path $adapterSource 'bx_ntvdm_exception_abi.h') -Destination $adapterBuild

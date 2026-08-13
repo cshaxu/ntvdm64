@@ -11,8 +11,8 @@
   focused verification. Unsupported cases fail explicitly.
 - Generated binaries, logs, object files, and build trees belong below
   `artifacts/` when retained, never as source or default runtime inputs.
-- Keep Bochs upstream files and license notices intact under `src/bochs/`.
-  Put project code in `src/bx-ntvdm-adapter/`; any exception is an explicit patch
+- Keep adopted Bochs upstream files and license notices intact under `src/bx-core/`.
+  Put project code in `src/bx-mantle/` or `src/bx-vdm/` by ownership; any exception is an explicit patch
   with upstream path/revision, rationale and focused test, registered in
   `docs/etc/research/adapter-external-intrusion-exceptions.md` before it is
   applied. Avoid such exceptions; admit one only when an adapter/build wrapper

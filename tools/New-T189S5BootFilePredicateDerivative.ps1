@@ -17,10 +17,10 @@ $prepare = @{ RepositoryRoot = $repository; BuildRoot = $build }
 if (-not [string]::IsNullOrWhiteSpace($BaseRoot)) { $prepare.BaseRoot = $BaseRoot }
 & (Join-Path $PSScriptRoot 'New-T188S7CopiedStateTraceDerivative.ps1') @prepare
 
-$cmdSourceHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_cmd_boot_file_service.c') (Join-Path $build 'adapter\bx_ntvdm_cmd_boot_file_service.c')
-$cmdHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_cmd_boot_file_service.h') (Join-Path $build 'adapter\bx_ntvdm_cmd_boot_file_service.h')
-$providerSourceHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_boot_namespace_provider_v1.c') (Join-Path $build 'adapter\bx_ntvdm_boot_namespace_provider_v1.c')
-$providerHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_boot_namespace_provider_v1.h') (Join-Path $build 'adapter\bx_ntvdm_boot_namespace_provider_v1.h')
+$cmdSourceHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_cmd_boot_file_service.c') (Join-Path $build 'adapter\bx_ntvdm_cmd_boot_file_service.c')
+$cmdHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_cmd_boot_file_service.h') (Join-Path $build 'adapter\bx_ntvdm_cmd_boot_file_service.h')
+$providerSourceHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_boot_namespace_provider_v1.c') (Join-Path $build 'adapter\bx_ntvdm_boot_namespace_provider_v1.c')
+$providerHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_boot_namespace_provider_v1.h') (Join-Path $build 'adapter\bx_ntvdm_boot_namespace_provider_v1.h')
 $makePath = Join-Path $build 'ntdos64-t188-copied-state.mak'
 $extension = @(
     '',

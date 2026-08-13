@@ -127,21 +127,21 @@ if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic -
     }
     $manifest.bochsReplacementCount = $bochsObjects.Count
 }
-foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-ntvdm-adapter') -Filter *.h -File) {
+foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\bx-vdm') -Filter *.h -File) {
     [void](Copy-Verified $header.FullName (Join-Path $build ('adapter\' + $header.Name)))
 }
 foreach ($header in Get-ChildItem -LiteralPath (Join-Path $repository 'src\cli') -Filter *.h -File) {
     [void](Copy-Verified $header.FullName (Join-Path $build ('cli\' + $header.Name)))
 }
 if ($MachineComposition) {
-    [void](Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\bx_ntvdm_machine_composition_v2.c') (Join-Path $build 'adapter\bx_ntvdm_machine_composition_v2.c'))
+    [void](Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_machine_composition_v2.c') (Join-Path $build 'adapter\bx_ntvdm_machine_composition_v2.c'))
     $unexpObject = Join-Path $repository 'artifacts\build\current\t119-unexp-mt-projection-r1\CMakeFiles\ntdos64-opennt-system-provider-objects.dir\base\mvdm\softpc.new\base\system\unexp_nt.c.obj'
     [void](Copy-Verified $unexpObject (Join-Path $build 'adapter\unexp_nt.c.obj'))
     $illegalObject = Join-Path $repository 'artifacts\build\current\t119-unexp-mt-projection-r2\CMakeFiles\ntdos64-opennt-system-provider-objects.dir\overlay\base\mvdm\softpc.new\base\system\illegalp.c.obj'
     [void](Copy-Verified $illegalObject (Join-Path $build 'adapter\illegalp.c.obj'))
 }
 foreach ($name in $adapterSources) {
-    $source = Join-Path $repository ('src\bx-ntvdm-adapter\' + $name)
+    $source = Join-Path $repository ('src\bx-vdm\' + $name)
     $hash = Copy-Verified $source (Join-Path $build ('adapter\' + $name))
     $object = Join-Path $build ('adapter\' + ($name -replace '\.c$', '.obj'))
     if (Test-Path -LiteralPath $object) { Remove-Item -LiteralPath $object -Force }

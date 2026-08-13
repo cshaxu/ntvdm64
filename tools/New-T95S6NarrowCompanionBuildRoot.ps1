@@ -65,7 +65,7 @@ $adapterSources = @(
     'bx_ntvdm_startup_plan_abi.c'
 )
 $cliSources = @('byob_profile.c', 'byob_identity.c', 'byob_image.c')
-$adapterManifest = Copy-DeclaredSources (Join-Path $repository 'src\bx-ntvdm-adapter') (Join-Path $build 'adapter') $adapterSources
+$adapterManifest = Copy-DeclaredSources (Join-Path $repository 'src\bx-vdm') (Join-Path $build 'adapter') $adapterSources
 $cliManifest = Copy-DeclaredSources (Join-Path $repository 'src\cli') (Join-Path $build 'cli') $cliSources
 
 $adapterObjects = @($adapterSources | ForEach-Object { 'adapter\' + ($_ -replace '\.c$', '.obj') })
