@@ -4,6 +4,8 @@
 
 **Active: M0 T188 S9 — one-shot observation-controller closure.**
 
+**Active: M0 T188 S10 — one frozen copied-state observation.**
+
 **Binding active packet: M0 T188 S8 — two-object derivative build.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
@@ -14,24 +16,25 @@
 > the active packet is defined only by the table below.
 > S8 is closed; the binding packet is now M0 T188 S9. The retained S8 banner
 > above is not an active-packet allocation.
+> S9 is closed; M0 T188 S10 below is the sole active implementation brief.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T188 S9, Ordinary Mode. |
-| Admission And Approval | T188 S8 closed the exact two-object MSVC `/MT` derivative build. Owner authorization permits autonomous sequencing; S9 is admitted solely to replace the T187 controller failure with a terminal-record-safe one-shot controller and fixed bundle composition. |
-| Objective | Produce and statically verify one controller that records inputs, watchdog result, child result and cleanup failure independently; compose the frozen S8 engine into a manifest-identified observation bundle. |
-| Non-goals | No Bochs/adapter/CLI source or build change, guest observation, retry, engine relink, provider/DOS/COMMAND semantic change, host capability or completion claim. |
-| Reference Baseline | T187 controller failure record; T188 S8 engine/map hashes; T184 v5 immutable profile inputs; BX-TRACE-060 source/static closure. |
-| Files And ABI Surface | New controller and focused static boundary test under `tools/` and `tests/`; a new immutable bundle manifest and T188 S9 evidence. No C/C++ ABI surface changes. |
+| Identifier Mode | M0 T188 S10, Ordinary Mode. |
+| Admission And Approval | T188 S9 closes a terminal-record-safe controller and fixed S8-engine bundle. Owner authorization permits autonomous sequencing; S10 admits exactly one observation with those frozen inputs. |
+| Objective | Make one watchdog-bounded execution that retains terminal evidence and classifies the copied lifecycle state plus the existing generic BOP pass-through/continuation markers. |
+| Non-goals | No retry, source change, engine rebuild/relink, provider/DOS/COMMAND semantic change, device/config expansion, host capability, DOS terminal result or continuous-execution claim. |
+| Reference Baseline | T188 S8 engine hash `766D3A7AAB980B05C683DD99530801F61578F9F886DD0A1122BF810D6EA8E938`; T188 S9 controller/bundle closure; BX-TRACE-060. |
+| Files And ABI Surface | S9 controller output under one fresh evidence root only. No source or ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused static controller/bundle test; inspect all script diffs; document inventory/governance and `git diff --check`. |
-| Expected Markers | A fresh output root, immutable input/bundle manifests, one child launch only, bounded watchdog, and an `observation.json` written even when cleanup raises an error. |
-| Asset Needs | S8 derivative engine, retained fixed runner/shim/firmware assets and T184 v5 profile inputs; no guest run. |
-| Reporting Requirements | Record controller's no-retry and terminal-record behavior, bundle hashes and all inherited limitations. S9 cannot claim runtime behavior. |
-| Stop Conditions | Any request to retry, terminate unrelated processes, alter the engine, mask cleanup failure, or infer runtime state without an observation; pause for re-admission. |
-| Exit Criteria | Static proof of terminal-record-safe controller and fixed bundle, or durable evidence that the retained assets cannot be composed; no runtime invocation. |
+| Verification | Invoke the S9 controller once from a fresh root with a 30-second watchdog; inspect inputs/outcome/log hashes and lifecycle/pass-through markers; documentation inventory/governance and `git diff --check`. |
+| Expected Markers | Exactly one fresh `inputs.json`, wrapper PID, terminal `observation.json`, no retry, and either a copied lifecycle line with a continuation marker or a recorded failed/absent marker. |
+| Asset Needs | The fixed S9 bundle, retained runner/shim/profile/BYOB/target identities, and a writable fresh evidence root. |
+| Reporting Requirements | Record the actual outcome, log hashes, timeout/cleanup state and limited inference. A build or process exit is not DOS/CLI completion. |
+| Stop Conditions | A second launch, input identity mismatch, unrecorded cleanup failure, engine/source modification, or any request to add semantics; stop after the first terminal record. |
+| Exit Criteria | One terminal record with immutable inputs and a classification of lifecycle/continuation evidence, even if it is a failure; no retry. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
