@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S41.** Its governing brief is the active
+> **Current effective packet: M0 T198 S43.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S41 -- capture fixed stack position at the existing
-selector-blind code-segment transition boundary.**
+**Active: M0 T198 S43 -- attribute the observed guest far-call pointer through
+retained source, image, and loader evidence.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ selector-blind code-segment transition boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S41, Ordinary Mode. |
-| Admission And Approval | S40 removes the undefined pre-entry input frontier but retains `9346:4D53 -> 0000:0000`; owner permits strict registered Bochs intrusions. |
-| Objective | Extend the existing default-off copied instruction-position record with real-mode `SS:SP`, then report the ordered stack positions on the already captured latest CS transition. |
-| Non-goals | No instruction/stack-memory read, BOP/OpenNT/DOS/NTIO recognition, CPU mutation, decoder/exception change, device/firmware behavior, callback, CLI ABI, or new adapter interface. |
-| Reference Baseline | S36 per-step history, S38 transition witness and S40 selected-profile native run. |
-| Files And ABI Surface | Existing history record/macro, mantle transition query and finite fixture only; exception register/evidence/Status. |
+| Identifier Mode | M0 T198 S43, Ordinary Mode. |
+| Admission And Approval | S42 proves the preceding instruction is `SS: CALL FAR [037A]` and the saved return is `9346:4D58`; the called pointer resolves to `0000:0000`. No missing machine capability is yet proven. |
+| Objective | Establish, from retained source, locked image/layout evidence and loader contracts, who owns `SS:[037A]` at the observed call and whether its null value is an omitted input, an incorrect layout, or an expected unavailable path. |
+| Non-goals | No Bochs, mantle, adapter, OpenNT, guest-image, provider, BOP, device, firmware, CPU, memory, or CLI code change; no new trace, memory capture, configuration, or inferred repair. |
+| Reference Baseline | S42 provenance witness, S39 pre-entry contract attribution, locked source-built NTIO/NTDOS inputs, and CPU5 x64 `/MT` finite closure. |
+| Files And ABI Surface | Evidence and status/history records only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Rebuild affected CPU5 objects and fixture under x64 `/MT`; prove disabled/default, copied transition order and exact SS:SP result; scan changed sources for semantic or memory-access expansion. |
-| Expected Markers | Registered fixed-width scalar capture, no guest-memory read, CS transition plus SS:SP, typed stop and no product/device path. |
+| Verification | Produce a reproducible source/image/loader attribution table with explicit unknowns and an owner classification; no runtime claim beyond S42. |
+| Expected Markers | `SS:[037A]` candidate table, writer/initializer candidates, loader/image placement relationship, and a justified successor disposition. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record layout, exact run result, source scan, interpretation limit and successor. |
-| Stop Conditions | Any guest-memory/stack-content access, semantic filtering, CPU mutation, pointer/object transfer or product feature is needed. |
-| Exit Criteria | One exact CPU5 run reports the copied SS:SP pair for the retained CS transition, without boundary expansion. |
+| Reporting Requirements | Record every claim with source/image evidence, distinguish static proof from inference, and name the next smallest admitted task. |
+| Stop Conditions | The table value or its writer cannot be attributed without new runtime data; stop with that precise evidence gap rather than patching a presumed facility. |
+| Exit Criteria | A source-derived owner/disposition for the pointer, or a documented proof that a narrowly-scoped follow-up observation is required. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -326,6 +326,11 @@ selector-blind code-segment transition boundary.**
   the unexpected CS transition changes SS:SP from `00A7:0918` to
   `00A7:090E`. The frame owner remains unproven. See
   [S41 witness](etc/research/t198-s41-stack-position-witness-001.md).
+- M0 T198 S42 is complete: the registered bounded mantle provenance record
+  proves that the preceding guest instruction is `SS: CALL FAR [037A]` and
+  retains the matching `9346:4D58` far return address. It does not establish
+  a BOP, device, or adapter requirement. See [S42 control-transfer
+  provenance witness](etc/research/t198-s42-control-transfer-provenance-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
