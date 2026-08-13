@@ -446,8 +446,8 @@ BOCHSAPI extern Bit32u apic_id_mask;
 #define BX_RESET_SOFTWARE 10
 #define BX_RESET_HARDWARE 11
 
-#include "memory/memory.h"
-#include "pc_system.h"
+#include "bx-core/memory/memory.h"
+#include "bx-mantle/pc_system.h"
 #include "gui/gui.h"
 
 /* --- EXTERNS --- */

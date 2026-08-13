@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "sourceConfigSha256": "A1FADC25502FB0A4644917B6F3A62987C125CC7335457F9C59E7CE7E62A45AC8",
+  "replacements": [
+    {
+      "name": "BX_CPU_LEVEL",
+      "oldValue": "6",
+      "newValue": "5",
+      "classification": "owner-confirmed CPU5/Pentium-MMX bare-machine contract"
+    },
+    {
+      "name": "BX_SUPPORT_X86_64",
+      "oldValue": "1",
+      "newValue": "0",
+      "classification": "required by the selected original Pentium-MMX profile"
+    }
+  ],
+  "additions": [],
+  "derivedAssertions": [
+    {
+      "name": "BX_SUPPORT_APIC",
+      "sourceCondition": "#if BX_SUPPORT_SMP || BX_CPU_LEVEL >= 5",
+      "targetValue": "1",
+      "classification": "original configuration consequence retained for later object-closure classification"
+    }
+  ]
+}
