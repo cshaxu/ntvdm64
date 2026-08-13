@@ -24,10 +24,6 @@
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
 
-#ifndef BX_NTVDM_ENABLE_PREFETCH_PREDECESSOR_DIAGNOSTIC
-#define BX_NTVDM_ENABLE_PREFETCH_PREDECESSOR_DIAGNOSTIC 0
-#endif
-
 #define InstrumentICACHE 0
 
 #if InstrumentICACHE
@@ -581,12 +577,6 @@ void BX_CPU_C::prefetch(void)
 
     Bit32u limit = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].cache.u.segment.limit_scaled;
     if (EIP > limit) {
-#if BX_NTVDM_ENABLE_PREFETCH_PREDECESSOR_DIAGNOSTIC
-      if (real_mode()) {
-        BX_INFO(("ntdos64 real-mode prefetch-limit cs=%04x prev-rip=%04x eip=%08x limit=%08x",
-            BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value, PREV_RIP, EIP, limit));
-      }
-#endif
       BX_ERROR(("prefetch: EIP [%08x] > CS.limit [%08x]", EIP, limit));
       exception(BX_GP_EXCEPTION, 0);
     }

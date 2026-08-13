@@ -60,19 +60,7 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::MOV_GwEwM(bxInstruction_c *i)
 {
   bx_address eaddr = BX_CPU_CALL_METHODR(i->ResolveModrm, (i));
   Bit16u val16 = read_virtual_word(i->seg(), eaddr);
-#if BX_NTVDM_ENABLE_STACK_TRANSFER_DIAGNOSTIC
-  Bit16u old_sp = BX_READ_16BIT_REG(BX_16BIT_REG_SP);
-#endif
   BX_WRITE_16BIT_REG(i->dst(), val16);
-
-#if BX_NTVDM_ENABLE_STACK_TRANSFER_DIAGNOSTIC
-  if (real_mode() && i->dst() == BX_16BIT_REG_SP) {
-    BX_INFO(("ntdos64 stack transfer mov-sp cs=%04x rip=%llx old=%04x new=%04x",
-      BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value,
-      (unsigned long long) PREV_RIP, old_sp,
-      BX_READ_16BIT_REG(BX_16BIT_REG_SP)));
-  }
-#endif
 
   BX_NEXT_INSTR(i);
 }
@@ -132,20 +120,9 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::MOV_SwEw(bxInstruction_c *i)
     op2_16 = read_virtual_word(i->seg(), eaddr);
   }
 
-#if BX_NTVDM_ENABLE_STACK_TRANSFER_DIAGNOSTIC
-  Bit16u old_ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value;
-#endif
   load_seg_reg(&BX_CPU_THIS_PTR sregs[i->dst()], op2_16);
 
   if (i->dst() == BX_SEG_REG_SS) {
-#if BX_NTVDM_ENABLE_STACK_TRANSFER_DIAGNOSTIC
-    if (real_mode()) {
-      BX_INFO(("ntdos64 stack transfer mov-ss cs=%04x rip=%llx old=%04x new=%04x",
-        BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value,
-        (unsigned long long) PREV_RIP, old_ss,
-        BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value));
-    }
-#endif
     // MOV SS inhibits interrupts, debug exceptions and single-step
     // trap exceptions until the execution boundary following the
     // next instruction is reached.

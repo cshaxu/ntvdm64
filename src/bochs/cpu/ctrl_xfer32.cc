@@ -526,13 +526,6 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::JMP_Ap(bxInstruction_c *i)
     exception(BX_GP_EXCEPTION, 0);
   }
 
-#if BX_NTVDM_ENABLE_REAL_MODE_FAR_JUMP_DIAGNOSTIC
-  if (real_mode()) {
-    BX_INFO(("ntdos64 real-mode far-jump old-cs=%04x old-ip=%04x target-cs=%04x target-ip=%04x",
-        BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value, PREV_RIP,
-        cs_raw, disp32));
-  }
-#endif
   load_seg_reg(&BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS], cs_raw);
   EIP = disp32;
 

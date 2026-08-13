@@ -25,10 +25,6 @@
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
 
-#ifndef BX_NTVDM_ENABLE_IRQ13_TRANSFER_DIAGNOSTIC
-#define BX_NTVDM_ENABLE_IRQ13_TRANSFER_DIAGNOSTIC 0
-#endif
-
 #include "iodev/iodev.h"
 
 bx_bool BX_CPU_C::handleWaitForEvent(void)
@@ -132,19 +128,7 @@ void BX_CPU_C::InterruptAcknowledge(void)
 
   BX_INSTR_HWINTERRUPT(BX_CPU_ID, vector,
       BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value, RIP);
-#if BX_NTVDM_ENABLE_IRQ13_TRANSFER_DIAGNOSTIC
-  if (vector == 13) {
-    BX_INFO(("irq13 transfer before cs=%04x rip=" FMT_ADDRX,
-      BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value, RIP));
-  }
-#endif
   interrupt(vector, BX_EXTERNAL_INTERRUPT, 0, 0);
-#if BX_NTVDM_ENABLE_IRQ13_TRANSFER_DIAGNOSTIC
-  if (vector == 13) {
-    BX_INFO(("irq13 transfer after cs=%04x rip=" FMT_ADDRX,
-      BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value, RIP));
-  }
-#endif
 
   BX_CPU_THIS_PTR prev_rip = RIP; // commit new RIP
   BX_CPU_THIS_PTR EXT = 0;

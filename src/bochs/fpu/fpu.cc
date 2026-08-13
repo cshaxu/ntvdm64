@@ -27,10 +27,6 @@
 #include "cpu/cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
 
-#ifndef BX_NTVDM_ENABLE_X87_COMPAT_DIAGNOSTIC
-#define BX_NTVDM_ENABLE_X87_COMPAT_DIAGNOSTIC 0
-#endif
-
 #include "iodev/iodev.h"
 
 #define CHECK_PENDING_EXCEPTIONS 1
@@ -72,26 +68,6 @@ void BX_CPU_C::FPU_check_pending_exceptions(void)
      else
 #endif
      {
-#if BX_NTVDM_ENABLE_X87_COMPAT_DIAGNOSTIC
-        BX_INFO(("ntdos64 x87-compat-diagnostic cpu=%u cs=%04x rip=" FMT_ADDRX
-                 " cr0=%08x eflags=%08x if=%u cwd=%04x swd=%04x twd=%04x tos=%u foo=%04x"
-                 " fcs=%04x fip=" FMT_ADDRX " fds=%04x fdp=" FMT_ADDRX,
-                 BX_CPU_ID,
-                 BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value,
-                 RIP,
-                 BX_CPU_THIS_PTR cr0.get32(),
-                 read_eflags(),
-                 (unsigned) BX_CPU_THIS_PTR get_IF(),
-                 BX_CPU_THIS_PTR the_i387.get_control_word(),
-                 BX_CPU_THIS_PTR the_i387.get_partial_status(),
-                 BX_CPU_THIS_PTR the_i387.get_tag_word(),
-                 BX_CPU_THIS_PTR the_i387.tos,
-                 BX_CPU_THIS_PTR the_i387.foo,
-                 BX_CPU_THIS_PTR the_i387.fcs,
-                 BX_CPU_THIS_PTR the_i387.fip,
-                 BX_CPU_THIS_PTR the_i387.fds,
-                 BX_CPU_THIS_PTR the_i387.fdp));
-#endif
         // MSDOS compatibility external interrupt (IRQ13)
         BX_INFO(("math_abort: MSDOS compatibility FPU exception"));
         DEV_pic_raise_irq(13);

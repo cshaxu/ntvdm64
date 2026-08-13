@@ -37,10 +37,6 @@
 #define BX_NTVDM_ENABLE_STARTUP_TRANSACTION 0
 #endif
 
-#ifndef BX_NTVDM_ENABLE_UNMATCHED_UD_DIAGNOSTIC
-#define BX_NTVDM_ENABLE_UNMATCHED_UD_DIAGNOSTIC 0
-#endif
-
 #ifndef BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE
 #define BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE 0
 #endif
@@ -1286,12 +1282,6 @@ void BX_CPU_C::protected_mode_int(Bit8u vector, unsigned soft_int, bx_bool push_
 
 void BX_CPU_C::real_mode_int(Bit8u vector, bx_bool push_error, Bit16u error_code)
 {
-#if BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC
-  Bit16u ntdos64_old_cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value;
-  Bit16u ntdos64_old_ip = IP;
-  Bit16u ntdos64_old_ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value;
-  Bit16u ntdos64_old_sp = SP;
-#endif
   if ((vector*4+3) > BX_CPU_THIS_PTR idtr.limit) {
     BX_ERROR(("interrupt(real mode) vector > idtr.limit"));
     exception(BX_GP_EXCEPTION, 0);
@@ -1309,11 +1299,6 @@ void BX_CPU_C::real_mode_int(Bit8u vector, bx_bool push_error, Bit16u error_code
   }
 
   Bit16u cs_selector = system_read_word(BX_CPU_THIS_PTR idtr.base + 4 * vector + 2);
-#if BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC
-  BX_INFO(("ntdos64 real-mode vector vector=%02x old-cs=%04x old-ip=%04x old-ss=%04x old-sp=%04x target-cs=%04x target-ip=%04x",
-      vector, ntdos64_old_cs, ntdos64_old_ip, ntdos64_old_ss, ntdos64_old_sp,
-      cs_selector, new_ip));
-#endif
   load_seg_reg(&BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS], cs_selector);
   EIP = new_ip;
 
@@ -1552,11 +1537,6 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
     }
 #endif
 
-#if BX_NTVDM_ENABLE_UNMATCHED_UD_DIAGNOSTIC
-    BX_INFO(("ntdos64 unmatched-ud cpu=%u cs=%04x rip=%08x",
-      BX_CPU_ID, BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value,
-      (Bit32u) BX_CPU_THIS_PTR prev_rip));
-#endif
   }
 #endif
 

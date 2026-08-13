@@ -565,22 +565,9 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::IRET16(bxInstruction_c *i)
     iret16_stack_return_from_v86(i);
   }
   else {
-#if BX_NTVDM_ENABLE_IRET_TF_DIAGNOSTIC
-    Bit16u ntdos64_old_cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value;
-    Bit16u ntdos64_old_ip = IP;
-    Bit16u ntdos64_old_ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value;
-    Bit16u ntdos64_old_sp = SP;
-#endif
     Bit16u ip     = pop_16();
     Bit16u cs_raw = pop_16(); // #SS has higher priority
     Bit16u flags  = pop_16();
-#if BX_NTVDM_ENABLE_IRET_TF_DIAGNOSTIC
-    if (flags & 0x0100) {
-      BX_INFO(("ntdos64 iret tf old-cs=%04x old-ip=%04x old-ss=%04x old-sp=%04x target-cs=%04x target-ip=%04x flags=%04x",
-          ntdos64_old_cs, ntdos64_old_ip, ntdos64_old_ss, ntdos64_old_sp,
-          cs_raw, ip, flags));
-    }
-#endif
 
     // CS.LIMIT can't change when in real/v8086 mode
     if(ip > BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].cache.u.segment.limit_scaled) {
