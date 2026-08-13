@@ -121,6 +121,15 @@ static int run_t181_v5_install(void)
 {
     wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], target[MAX_PATH], quit[MAX_PATH], profile[MAX_PATH];
     char json[4096];
+    bx_ntvdm_exception_event_v1 event = { BX_NTVDM_EXCEPTION_ABI_MAGIC,
+        BX_NTVDM_EXCEPTION_ABI_VERSION, sizeof(event), BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION,
+        0u, 6u, 0u, 0u, 0x732u };
+    bx_ntvdm_cpu_state_v1 state;
+    bx_ntvdm_instruction_window_v1 window;
+    bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_multi_write_transaction_v1 multi_write;
+    const uint8_t *payload = 0;
+    uint64_t payload_bytes = 0u;
     int failed = 0;
     if (GetTempPathW(MAX_PATH, root) == 0 || GetTempFileNameW(root, L"n64", 0u, root) == 0 ||
         !DeleteFileW(root) || !CreateDirectoryW(root, 0)) return 1;
@@ -135,6 +144,19 @@ static int run_t181_v5_install(void)
     bx_ntvdm_adapter_runtime_v1_reset();
     failed |= !bx_ntvdm_adapter_runtime_v1_install(profile,root) ||
         bx_ntvdm_adapter_runtime_v1_install_diagnostic()!=BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_NONE;
+    bx_ntvdm_cpu_state_v1_initialize(&state, BX_NTVDM_CPU_EXECUTION_REAL);
+    state.ds = 0x8dc8u;
+    state.edx = 0x33d9u;
+    bx_ntvdm_instruction_window_v1_capture(&window,
+        (const uint8_t[]){ 0xc4u, 0xc4u, 0x54u, 0x0cu }, 4u);
+    failed |= !bx_ntvdm_adapter_runtime_v2_dispatch(&event, &state, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x736u ||
+        !bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
+            &multi_write, &payload, &payload_bytes) ||
+        multi_write.writes.write_count != 1u ||
+        multi_write.writes.writes[0].guest_physical_address != 0x91059u ||
+        payload_bytes != 14u || memcmp(payload, "C:\\CONFIG.SYS", 14u) != 0;
     bx_ntvdm_adapter_runtime_v1_reset();
     failed |= !write_file(quit,"bad") || bx_ntvdm_adapter_runtime_v1_install(profile,root) != 0 ||
         bx_ntvdm_adapter_runtime_v1_install_diagnostic()!=BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_PROFILE_OR_IMAGE;

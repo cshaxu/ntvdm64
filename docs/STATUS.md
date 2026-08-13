@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T188 S2 — adapter-plane predicate audit.**
+**Binding active packet: M0 T188 S3 — adapter session-observation audit.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T188 S2**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T188 S3**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T188 S2, Ordinary Mode. |
-| Admission And Approval | S1 source closure corrects the T187 narrow inference: the enabled generic interceptor already routes `54:0C` into adapter runtime and returns pass-through. Owner authorization permits autonomous sequencing; S2 audits that existing adapter-plane decline without a guest run. |
-| Objective | Determine whether an unchanged, focused fixture can distinguish provider availability, COMMAND plane gate, boot-file preparation and multi-write queue failure for the current `54:0C/0D` route. |
-| Non-goals | No Bochs change, macro/build change, guest observation, condition reordering, selector-specific ingress, provider/DOS/COMMAND semantic change, host capability or normal DOS completion claim. |
-| Reference Baseline | T187 S1 rejected an in-route predicate split as behavior-changing; T188 S1 selects the currently enabled generic interceptor and identifies the v2 chain as the actual pass-through owner. |
-| Files And ABI Surface | Focused adapter test/evidence only, if an existing public function surface permits it; no Bochs, CLI or production adapter source. |
+| Identifier Mode | M0 T188 S3, Ordinary Mode. |
+| Admission And Approval | S2 proves the original v2 composite succeeds with the exact v5 BOP/register shape, so a live difference must be accumulated adapter state. Owner authorization permits autonomous sequencing; S3 admits only a read-only audit of existing state-observation contracts. |
+| Objective | Determine whether the host session/runtime exposes a side-effect-free, copied state observation capable of explaining a live `54:0C` pass-through without reinvoking or reordering its condition. |
+| Non-goals | No production source change, Bochs/CLI/engine change, build, guest observation, state reset, condition instrumentation, selector-specific ingress, provider/DOS/COMMAND semantic change, host capability or completion claim. |
+| Reference Baseline | T187 S1 rejects stateful predicate decomposition; T188 S2 proves provider/gate/prepare/queue success for the exact static v5 shape. |
+| Files And ABI Surface | `docs/etc/research/t188-s3-*` only; read-only audit of runtime/session headers, public APIs and existing test seams. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Exercise only existing public provider/session functions against fixed copied inputs, or record why their state cannot be observed without changing behavior; run focused test(s), documentation inventory/governance and `git diff --check`. |
-| Expected Markers | One disposition per predicate; explicit proof that fixture sequencing neither reorders nor duplicates the runtime compound expression. |
-| Asset Needs | Existing adapter test harness and T184 v5 fixed input facts; no new runtime, profile, source or Bochs build input. |
-| Reporting Requirements | State whether a source-preserving test can identify the decline. If not, reject instrumentation and transfer only a justified default-off diagnostic candidate. |
-| Stop Conditions | Any production source edit, test that reinvokes/reorders a stateful predicate, Bochs/CLI change, build/guest run or provider semantic change; pause for S3 admission. |
-| Exit Criteria | A source-preserving predicate result or a durable infeasibility proof with one precise successor seam; no runtime invocation. |
+| Verification | Cite all public observation/read APIs and state fields involved in queue/lifecycle; run documentation inventory/governance and `git diff --check`. |
+| Expected Markers | An existing side-effect-free observer with its copied ABI, or evidence that no such observer exists and that adding one would be a controlled future change. |
+| Asset Needs | Current adapter runtime/session source, headers and existing tests; no new source, build or runtime input. |
+| Reporting Requirements | Separate state ownership from BOP/service semantics. Reject any observer that resets, takes, clears, queues or repeats a transaction. |
+| Stop Conditions | Any source/test/build/run change, inferred live state, side-effecting accessor, Bochs/CLI change or provider semantic change; these require S4 admission. |
+| Exit Criteria | A durable observer disposition and a bounded next step; no runtime invocation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
