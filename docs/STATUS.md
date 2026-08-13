@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S12 — source-built normal-return asset recovery.**
+**Active: M0 T194 S13 — v6 normal-return BYOB-root materialization.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S12, Ordinary Mode. |
-| Admission And Approval | S11 proves the source-built SHARE evidence exists but its output asset is absent. Owner's source-closure objective admits recovery of that one exact historic artifact only. |
-| Objective | Reproduce or recover the exact source-built 882-byte SHARE image, verify its historical hash, and record an immutable v6 BYOB-root materialization plan. |
-| Non-goals | No execution, Bochs/adapter/CLI source change, BOP/provider change, BIOS/device/config action, new target semantics, host capability, terminal-result transport, or retry. |
-| Reference Baseline | T177 source/build manifest, T194 S11 asset blocker, source-policy requirements and v6 profile contract. |
-| Files And ABI Surface | Isolated artifact recovery stage and provenance/materialization evidence only. |
+| Identifier Mode | M0 T194 S13, Ordinary Mode. |
+| Admission And Approval | S12 proves an exact source-built SHARE asset already exists. This S admits a single new, immutable v6 BYOB input root made only from verified existing components. |
+| Objective | Materialize and validate a v6 BYOB root that maps exact SHARE to `TARGET.EXE`, alongside verified NTIO, NTDOS and COMMAND inputs. |
+| Non-goals | No execution, source/build/controller change, Bochs patch, BIOS/device/config action, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry. |
+| Reference Baseline | T194 S4 v6 profile contract, T194 S12 exact SHARE asset, existing source-built boot components. |
+| Files And ABI Surface | A fresh artifacts input root, immutable profile manifest and focused profile validation only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Historical tool/response/source identity, output SHA-256/size, source-policy record, and profile-root materialization plan; documentation governance and `git diff --check`. |
-| Expected Markers | Exact 882-byte hash-matched SHARE image, declared future `TARGET.EXE` mapping, and no runtime claim. |
-| Asset Needs | Existing retained historical tools and T177 source/response inputs only. |
-| Reporting Requirements | Record every source/tool/output hash, output path, mapping rationale and any reproduction failure. |
-| Stop Conditions | Any profile/adapter/Bochs/controller change, execution, different output hash, source transform, host capability, or retry policy expansion; pause for a fresh S admission. |
-| Exit Criteria | Committed exact artifact recovery or durable source/tool blocker. |
+| Verification | Input component hashes/sizes, v6 profile parser acceptance, target-placement identity and no extra components; documentation governance and `git diff --check`. |
+| Expected Markers | One fresh root, v6 profile valid, SHARE copied only as `TARGET.EXE`, no runtime claim. |
+| Asset Needs | Existing source-built NTIO/NTDOS/COMMAND/SHARE artifacts only. |
+| Reporting Requirements | Record source locations, output hashes, canonical mapping and rejected extra/QUIT components. |
+| Stop Conditions | Any execution, source/build/controller/Bochs change, profile grammar expansion, provider expansion, extra guest component or retry; pause for a fresh S admission. |
+| Exit Criteria | Committed validated v6 root or durable component-identity blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Verify controller does not carry stale v5 schema labels, old launch-kind/tail variables, an old engine hash, or a retry path. |
 
