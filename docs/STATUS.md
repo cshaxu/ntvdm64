@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: none; M0 T185 is closed.**
+**Binding active packet: M0 T186 S1 — corrected-engine v5 observation composition.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> No new packet is admitted below. M0 T185 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T186 S1**. M0 T185 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,21 +15,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T185, closed Ordinary Mode packet. |
-| Admission And Approval | T184 reaches original `54:0C` before `54:01`; source comparison identifies omitted v5 runtime selection fields. |
-| Objective | Restore complete v5 selection projection and link it into the retained minimal-machine derivative. |
-| Non-goals | No guest observation/retry, Bochs change, new adapter provider, profile capability expansion, host capability, ambient namespace or `54:11` result transport. |
-| Reference Baseline | T185 S1/S2 audit/tests, T182 derivative and T184 observation. |
-| Files And ABI Surface | Current `byob_profile.c` plus the existing narrow engine derivative recipe only. |
+| Identifier Mode | M0 T186 S1, Ordinary Mode; closed after one observation. |
+| Admission And Approval | Owner-approved continuation after T185's corrected v5 projection; the Queue candidate was admitted solely to compose and observe that fixed tuple once. |
+| Objective | Compose the corrected engine with a current runner, existing shim and fixed ROM bundle, then classify one watchdog-bounded v5 observation. |
+| Non-goals | No retry, Bochs change, new adapter provider, profile capability expansion, host capability, ambient namespace or `54:11` result transport. |
+| Reference Baseline | T185 S1/S2 audit/tests, T182 derivative, T184 observation and the fixed v5 BYOB root. |
+| Files And ABI Surface | Current `byob_profile.c`, existing narrow engine derivative recipe, fixed bundle manifest and durable observation evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One controller result with prelaunch input hashes, both streams, terminal outcome JSON and marker classification; documentation inventory/governance and `git diff --check` remain required. |
+| Verification | One controller result with prelaunch input hashes, both streams, terminal outcome JSON and marker classification; documentation inventory/governance and `git diff --check`. |
 | Expected Markers | Exactly one wrapper PID, no retry, and recorded status of `54:01`, commit, `FE` controlled stop and timeout/exit. |
-| Asset Needs | Current tuple plus retained NTIO/NTDOS/COMMAND/SHARE/QUIT files copied only into the fresh evidence root. |
-| Reporting Requirements | A timeout or incomplete result is final; neither `FE` nor process exit establishes normal DOS result transport. |
+| Asset Needs | Fixed current tuple plus retained NTIO/NTDOS/COMMAND/SHARE/QUIT files from the T184 evidence root. |
+| Reporting Requirements | A timeout or incomplete result is final; neither `FE` nor process exit establishes normal DOS result transport. Record whether the T185 correction changes `54:0C`. |
 | Stop Conditions | A second invocation, input replacement after manifest generation, raw Bochs invocation, Bochs/adapter change, profile capability addition or result-transport claim. |
-| Exit Criteria | Met: complete v5 selection projection is source/test/link closed; a corrected-engine observation is an unnumbered Queue candidate. |
+| Exit Criteria | Met: one complete corrected-engine observation is retained and source-classified without retry. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Reject global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
+| Similar-Issue Sweep | Rejected global cleanup, ambient host/VDD/device state, a selector recognizer bypass, direct Bochs/DOS integration, FCB expansion, and any retry. |
 
 ## Current Technical Baseline
 

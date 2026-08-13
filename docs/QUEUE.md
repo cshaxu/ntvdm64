@@ -8,7 +8,7 @@ not belong here.
 
 | Order | Candidate T package | Boundary | Admission evidence |
 | --- | --- | --- | --- |
-| 1 | Corrected-engine bounded v5 finite-sequence observation | Launch exactly one watchdog-bounded current runner/shim/fixed-bundle tuple with the corrected linked engine and fixed two-slot profile; classify durable `54:0C`, `54:01`, commit and stop markers only. | The completed projection packet links the sole corrected profile object into a fresh frozen-machine derivative; the earlier observation is final and does not cover it. |
+| 1 | Boot-file BOP runtime predicate classification | Establish a default-off, copied-value diagnostic for the existing `54:0C/0D` dispatch predicates, then classify the single currently unidentifiable decline without another guest observation unless separately admitted. | The completed corrected observation proves that v5 projection and finite-provider construction are insufficient, while its durable listener omits DX and individual decline reasons. |
 | 2 | Engine-owned declared DOS terminal-result transport | Expose a captured, fixed-width DOS status to the CLI only after normal `54:11` return is runtime-proven and a distinct engine/Bochs transport ABI is designed. | A real normal-return trace, source/test proof of its continuation, and a fixed-width transport that does not overload process exit codes or introduce host broker semantics. |
 
 Queue order expresses priority only. It is neither approval nor a numeric T
