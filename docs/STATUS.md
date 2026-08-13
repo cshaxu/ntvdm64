@@ -2,22 +2,22 @@
 
 ## Current Work
 
-**Active: M0 T193 S3 — machine-selector closure decision register.**
+**Active: M0 T194 S1 — controlled-stop-to-live-guest continuation contract audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
-> through T192 are closed. Their retained S records are evidence, not
+> through T193 are closed. Their retained S records are evidence, not
 > concurrent active packets.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T193 S3, Ordinary Mode. |
-| Admission And Approval | Owner authorized machine-BOP composition only through separately proven original handler islands. S1/S2 establish the complete reached selector map and that the frozen T190 engine already contains only the admitted `02`/`06` islands. |
-| Objective | Produce the T193 decision register and handoff: identify whether any coherent new machine implementation is admitted, while preserving default decline for every other reached selector. |
-| Non-goals | No source/build/runtime change, retry, Bochs patch, adapter host-service/provider change, BIOS table installation, device/config action, handler activation, binary relink, or new task-number allocation. |
-| Reference Baseline | T190 S4/S5 manifests, T193 S1/S2 evidence, T115--T122/T176--T179 machine-composition evidence and current exception seam. |
-| Files And ABI Surface | T193 evidence/history/Status and Queue handoff records only; no code or ABI change. |
+| Identifier Mode | M0 T194 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized holistic, minimal Bochs/adapter/guest composition and rejects per-selector expansion. T193 proves no further machine-selector implementation is coherent; the valid T190 trace ends at engine-controlled `FE`. |
+| Objective | Establish the exact source, profile, BOP and engine-control contract of the reached `FE` stop, and decide the single admissible live-guest continuation boundary. |
+| Non-goals | No source/build/runtime change, retry, Bochs patch, adapter host-service/provider change, BIOS table installation, device/config action, terminal-result transport, process-exit reinterpretation, or new selector handler. |
+| Reference Baseline | T190 S6 trace/bundle, T193 closure, current controlled-stop provider and CLI BYOB execution-plan sources. |
+| Files And ABI Surface | Source/read-only engine/profile/controlled-stop maps and evidence/status documentation only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Trace-to-source inventory, original owner/failure map, catalogue/registry coverage scan, documentation governance and `git diff --check`. |
 | Expected Markers | Complete reached-family table with no unowned endpoint and an explicit grouped next-slice recommendation; no runtime claim. |
