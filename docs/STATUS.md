@@ -2,12 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S75.** Its governing brief is the active
+> **Current effective packet: M0 T198 S76.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S75 -- audit the post-`50:3C` top-level `BOP 15h` machine
-handler and its source-defined unavailable/result contract before composing
-any disposition.**
+**Active: M0 T198 S76 -- compose the exact source-derived `BOP 15h`/AH=`0Eh`
+invalid-INT15 result through the bounded machine-handler plane.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,19 +23,19 @@ any disposition.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S75, Ordinary Mode. |
-| Admission And Approval | S74 composes the pre-existing finite `50:3C` provider and reaches top-level `BOP 15h` at `C000:014A`, AH=`0Eh`; see `etc/research/t198-s74-dem-pdb-termination-witness-001.md`. |
-| Objective | Map the reached BOP `15h` caller and original `cassette_io` result contract, then decide whether the first profile can use a source-derived explicit unavailable result through the machine-composition plane. |
-| Non-goals | No generic BIOS emulation, cassette/device support, VDD, DEM/DOS/COMMAND changes, guest/CLI input change, detached runtime import, or Bochs CPU/memory/device semantic change. |
-| Reference Baseline | S74 witness; OpenNT `softpc.new/base/bios/bios.c` BOP table and `tape_io.c`; current top-level memory-provider boundary. |
-| Files And ABI Surface | Audit/evidence only unless the exact original error result and a bounded machine-plane route are proven. No existing core/mantle ABI change. |
+| Identifier Mode | M0 T198 S76, Ordinary Mode. |
+| Admission And Approval | S75 proves exact BOP `15h`/AH=`0Eh` reaches `cassette_io`'s original invalid-function branch: preserve AL, set AH=`86h` and CF, resume `+3`; see `etc/research/t198-s75-bios-int15-cassette-handler-audit-001.md`. |
+| Objective | Implement and compose only that exact source-derived invalid-INT15 result through `bx-vdm`, then verify its positive and rejection behavior before one unchanged-input source-built observation. |
+| Non-goals | No generic BIOS emulation, other BOP 15 AH functions, cassette/device/timer/ROM support, VDD, DEM/DOS/COMMAND changes, guest/CLI input change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S75 audit, current top-level memory provider, CPU-result-v2 CF-only ABI, and S74 runtime witness. |
+| Files And ABI Surface | New bounded `bx-vdm` machine-handler provider, composition/manifest and focused tests only; no core/mantle ABI revision. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Locate the original selector table, reached caller and AH=`0Eh` branch; prove register/flags/resume behavior and classify the owner before any source edit. |
-| Expected Markers | Exact `15h` BOP length, AH=`0Eh` source branch, result registers/flags, caller purpose, and an explicit retain/defer/compose decision. |
+| Verification | Focused exact-input and negative provider/composition tests, then a fresh source-built unchanged-input run from a new build root. |
+| Expected Markers | `AX=8643h`, CF-only set, `fault_rip + 3`, and decline for wrong selector/AH/mode/vector without a new Bochs or device member. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original source/caller, all excluded device behavior, exact return contract, ownership classification, and a narrow next admission decision. |
-| Stop Conditions | The source requires a device framework, ROM/firmware replacement, generic BIOS implementation, guest input change, or a Bochs semantic edit. Stop and retain the controlled observer rather than widening scope. |
-| Exit Criteria | A source-backed handler classification and a bounded decision to compose an explicit unavailable result or defer the machine feature. |
+| Reporting Requirements | Record source-derived contract, source/member delta, positive/negative results, fresh runtime boundary and next classification decision. |
+| Stop Conditions | The result requires any other AH case, ROM or device framework, a new generic ABI, guest input change, or a Bochs semantic edit. Stop and retain the controlled observer rather than widening scope. |
+| Exit Criteria | A source-built exact failure disposition or an explicit evidence-backed refusal if the bounded route cannot close. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
