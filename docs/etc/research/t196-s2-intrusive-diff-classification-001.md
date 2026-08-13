@@ -86,7 +86,11 @@ Their source
 questions are closed historical evidence; future diagnostics require a new
 exception and admission.
 
-S4 then handles the remaining 42 hunks as four coupled mechanical groups:
+S4 then handles the remaining classified mechanical groups as four coupled
+areas. The S3 removal later proves that classification rows and Git `@@`
+hunks are not always one-to-one: an removed declaration can share a hunk with
+retained generic mechanics. Post-repair comparison counts, rather than this
+arithmetic, are authoritative.
 
 1. `H03--H06`, `H34--H38`, `H41--H43`, and `H55--H60`: minimal reset/RAM/
    default-port machine embedding.

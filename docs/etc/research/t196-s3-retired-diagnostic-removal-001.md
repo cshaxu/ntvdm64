@@ -2,10 +2,10 @@
 
 ## Objective
 
-S2 classified 17 Bochs hunks as completed historical provenance diagnostics
-or an obsolete duplicate observation-fixture target. They did not implement
-machine mechanics, the adapter ABI, BOP routing or a host capability. This
-record proves their removal and the associated current tool/test cleanup.
+S2 classified the diagnostic/fixture removal surface as completed historical
+provenance work. It did not implement machine mechanics, the adapter ABI, BOP
+routing or a host capability. This record proves its removal and the
+associated current tool/test cleanup.
 
 ## Removed Surface
 
@@ -51,8 +51,11 @@ git -c core.safecrlf=false diff --no-index --unified=0 -- src/bochs O:\repos.ext
 ```
 
 After the removal it contains 43 `@@` hunks, down from S1's corrected 60.
-The remaining 43 hunks are not approved merely by this reduction: S4 must
-minimize and verify their mechanical, embedding and build-only groups.
+The change count is 17 rather than a row-for-row subtraction because the
+removed unmatched-UD declaration shared `exception.cc`'s large generic
+mechanics hunk with retained code. The remaining 43 hunks are not approved
+merely by this reduction: S4 must minimize and verify their mechanical,
+embedding and build-only groups.
 
 The following current boundary checks passed without rebuilding or running a
 guest: adapter-state trace, deferred startup plan, empty-port source-object,

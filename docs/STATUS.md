@@ -2,7 +2,7 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T196 S3.** Its governing brief is the active
+> **Current effective packet: M0 T196 S4.** Its governing brief is the active
 > packet table below.
 
 **Active: M0 T196 S1 — establish the complete Bochs intrusive-diff baseline.**
@@ -19,19 +19,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T196 S3, Ordinary Mode. |
-| Admission And Approval | T196 S2 is committed in dea352a: all 60 hunks are classified. S3 is admitted to remove its 17 stale Bochs diagnostics and old observation fixture, including direct diagnostic-only current tools/tests that would otherwise retain dead references. |
-| Objective | Delete the S2 removal group without changing Bochs execution semantics: H02, H09--H10, H12--H21, H23--H25 and H28--H29; retire/update only their diagnostic-exclusive scripts and tests; reconcile their register entries. |
-| Non-goals | No change to generic #UD/RAM/result/startup mechanics, no BOP/provider behavior, no device/firmware feature, no runtime campaign, and no retention of a deleted diagnostic through an obsolete generator switch. |
-| Reference Baseline | T196 S2 classification, T195 closure, pinned Bochs 2.6 tree, and external-intrusion exception register. |
-| Files And ABI Surface | Named Bochs diagnostic files, their direct diagnostic-only tests/generators, exception register, S3 evidence, Status and documentation inventory. |
+| Identifier Mode | M0 T196 S4, Ordinary Mode. |
+| Admission And Approval | T196 S3 is closed by `dacbe6a`: diagnostic source/tool/test surface is absent, register rows are removed, and the Bochs comparison is 43 hunks. Its retained-test audit exposed three pre-existing test contracts that still name pre-T195 source locations/seams. S4 is admitted to repair/minimize retained Bochs-local mechanics, embedding and build-only surfaces, beginning by making their boundary tests describe the current selector-blind source topology. |
+| Objective | Preserve only the justified generic #UD/result/RAM/startup mechanics, minimal machine embedding, isolated port-space and compiler compatibility deltas; repair their boundary tests and build descriptions to the current adapter-owned topology; identify and remove/minimize any retained surface not required by that contract. |
+| Non-goals | No BOP selector/service routing, OpenNT/DOS/SoftPC semantic implementation, device/firmware/plugin expansion, guest runtime campaign, or revival of removed diagnostics/legacy seams. |
+| Reference Baseline | T196 S2 classification, T196 S3 removal evidence, T195 closure, pinned Bochs 2.6 tree, exception register and current current-adapter build generators. |
+| Files And ABI Surface | Retained `src/bochs` mechanics/embedding/build files, their current boundary tests and generators, external-intrusion register, S4 evidence, Status and documentation inventory. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Prove each named source hunk and its direct diagnostic-only references are absent; run retained boundary checks, documentation governance and `git diff --check`; recount the upstream diff and record the expected reduction. |
-| Expected Markers | No deleted diagnostic macro/log/fixture target remains live; retained mechanics source is unchanged except necessary dead-reference cleanup; register rows state removal. |
+| Verification | Update stale test contracts only to current source/ABI facts, run all retained mechanical boundary tests, reproduce the 43-hunk comparison and register crosswalk, and run documentation governance plus `git diff --check`. |
+| Expected Markers | Tests name current adapter-owned and selector-blind mechanics only; retained source/build deltas have an exact exception/necessity relation; no stale diagnostic or pre-T195 seam name remains. |
 | Asset Needs | Local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record every removed source/tool/test reference, retained-tool rationale and post-removal diff count. |
-| Stop Conditions | A reference also supplies a retained mechanical closure, deletion changes generic execution semantics, or removal requires replacement behavior. Preserve facts and re-admit. |
-| Exit Criteria | Committed removal and direct-reference cleanup prove the 17-hunk group is gone without a replacement semantic path. This closes S3 only, not T196. |
+| Reporting Requirements | Record each retained hunk group's contract, test repair, build relationship, residual ambiguity and any removal/minimization decision. |
+| Stop Conditions | A retained surface needs a guest semantic branch, device/firmware expansion, object/pointer ABI, or a new unregistered Bochs intrusion. Preserve facts and re-admit. |
+| Exit Criteria | Current boundary tests and retained-source/build crosswalk prove the narrowed mechanical surface; any non-minimal residual is removed or transferred as a specific later S item. This closes S4 only, not T196. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
