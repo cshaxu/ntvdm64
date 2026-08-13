@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 941 |
+| Documentation records | 942 |
 | --- | --- |
-| Generated UTC | 2026-08-13T04:42:48Z |
+| Generated UTC | 2026-08-13T04:44:23Z |
 
 ## Entries
 
@@ -361,6 +361,7 @@ content-divergent entries.
 | etc/research/t194-s7-one-slot-bounded-startup-admission-audit-001.md | indexed supporting material | 0f2ea6f6f3b2dcea0f84185fef8491852991d85a7445cc574efca771fa1f0fc2 |
 | etc/research/t194-s8-one-slot-current-adapter-derivative-closure-001.md | indexed supporting material | b51c997cd203d90b0dd57d8dce6d1bc85e31015574454e9fc5e7bfc65e1a6b17 |
 | etc/research/t194-s9-one-slot-observation-input-audit-001.md | indexed supporting material | 442dfb9c96fb4c46044b5fad1fe7fc8d0a97a7bf16164d93ecc5207131bbe60f |
+| etc/research/t195-s1-intrusion-repair-audit-001.md | indexed supporting material | 30c2d05349bce17b8a651cc9cf3d070b31d708265372140c248a66556e0a7de9 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
