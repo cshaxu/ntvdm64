@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T196 S4.** Its governing brief is the active
+> **Current effective packet: M0 T196 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T196 S4 — repair and minimize the retained selector-blind
-Bochs mechanics, embedding, and build-only surface.**
+**Active: M0 T196 S5 — reconcile the complete repaired Bochs diff, exception
+register, and generated/current build surfaces.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ Bochs mechanics, embedding, and build-only surface.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T196 S4, Ordinary Mode. |
-| Admission And Approval | T196 S3 is closed by `dacbe6a`: diagnostic source/tool/test surface is absent, register rows are removed, and the Bochs comparison is 43 hunks. S4 repaired three stale retained-test contracts, completed the empty-port lifecycle extraction, and removed the unowned Bochs `bcrypt` link injection; `etc/research/t196-s4-retained-mechanics-repair-001.md` records the work. The current comparison is 41 hunks. S4 remains admitted to review/minimize all remaining retained Bochs-local mechanics, embedding and build-only surfaces. |
-| Objective | Preserve only the justified generic #UD/result/RAM/startup mechanics, minimal machine embedding, isolated port-space and compiler compatibility deltas; repair their boundary tests and build descriptions to the current adapter-owned topology; identify and remove/minimize any retained surface not required by that contract. |
-| Non-goals | No BOP selector/service routing, OpenNT/DOS/SoftPC semantic implementation, device/firmware/plugin expansion, guest runtime campaign, or revival of removed diagnostics/legacy seams. |
-| Reference Baseline | T196 S2 classification, T196 S3 removal evidence, T195 closure, pinned Bochs 2.6 tree, exception register and current current-adapter build generators. |
-| Files And ABI Surface | Retained `src/bochs` mechanics/embedding/build files, their current boundary tests and generators, external-intrusion register, S4 evidence, Status and documentation inventory. |
+| Identifier Mode | M0 T196 S5, Ordinary Mode. |
+| Admission And Approval | S4 is closed by `2da16f3`, `bbadb9f`, `a6736f0`, `55e1d3e`, `b70b01d`, and `2b64231`. Its closure record reports 24 paths/41 physical hunks, one adapter-owned BOP observer check, and 13 retained mechanical checks passing. S5 is admitted to reconcile each current hunk, exception-register row, source/build generator and eventual S6 verification obligation; no source mutation is presumed. |
+| Objective | Produce one complete, current crosswalk for every remaining Bochs diff hunk and every relevant exception-register entry, classifying it as retained mechanical necessity, generated/build counterpart, removed, or a specific S6 verification obligation. Resolve any mismatch by a bounded repair or re-admission. |
+| Non-goals | No BOP selector/service routing, OpenNT/DOS/SoftPC semantic implementation, device/firmware/plugin expansion, guest runtime campaign, full build retry, or revival of removed diagnostics/legacy seams. |
+| Reference Baseline | T196 S2 classification; T196 S3 removal evidence; T196 S4 closure record; T195 closure; pinned Bochs 2.6 tree; exception register; current build generators. |
+| Files And ABI Surface | Current `src/bochs` diff and generated build inputs; external-intrusion register; S5 reconciliation evidence; Status and documentation inventory. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Update stale test contracts only to current source/ABI facts, run all retained mechanical boundary tests, reproduce the post-S3 43-hunk and current post-S4 comparison/register crosswalk, and run documentation governance plus `git diff --check`. |
-| Expected Markers | Tests name current adapter-owned and selector-blind mechanics only; retained source/build deltas have an exact exception/necessity relation; no stale diagnostic or pre-T195 seam name remains. |
+| Verification | Reproduce the pinned zero-context diff; enumerate all paths/hunks; reconcile each with a register row or explicit build-only justification; rerun the S4 static suite as needed; run documentation governance and `git diff --check`. |
+| Expected Markers | Every current hunk has one disposition and evidence location; each retained exception has a live source/build relation; removed entries have no residual source/test/generator use; S6 obligations are explicit rather than assumed. |
 | Asset Needs | Local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record each retained hunk group's contract, test repair, build relationship, residual ambiguity and any removal/minimization decision. |
-| Stop Conditions | A retained surface needs a guest semantic branch, device/firmware expansion, object/pointer ABI, or a new unregistered Bochs intrusion. Preserve facts and re-admit. |
-| Exit Criteria | Current boundary tests and retained-source/build crosswalk prove the narrowed mechanical surface; any non-minimal residual is removed or transferred as a specific later S item. This closes S4 only, not T196. |
+| Reporting Requirements | Record the complete hunk/register/build crosswalk, exact source/build evidence, residual ambiguity, and an explicit S6 obligation for each unbuilt retained group. |
+| Stop Conditions | A reconciliation mismatch requires a guest semantic branch, device/firmware expansion, object/pointer ABI, a fresh unregistered Bochs intrusion, or an unbounded build retry. Preserve facts and re-admit. |
+| Exit Criteria | A complete current crosswalk has no orphan hunk or register entry; all residual build proof is narrowly assigned to S6; any required repair has either landed or been separately admitted. This closes S5 only, not T196. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 

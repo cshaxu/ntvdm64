@@ -118,3 +118,23 @@ reduces a concrete unwanted dependency on the full device aggregation object.
 S4 remains active.  Its next review must examine the remaining retained hunk
 groups for equivalent incomplete extraction or non-minimal build/mechanics
 surface before S5 can perform final reconciliation.
+
+## S4 Closure And Handover
+
+S4 is closed on source/static evidence. The final focused run passed the
+adapter-owned BOP observer boundary plus 13 retained Bochs mechanical boundary
+checks. The pinned upstream comparison is 24 paths and 41 physical hunks.
+
+The hunk groups have the following S4 disposition:
+
+| Group | S4 disposition | S5/S6 follow-up |
+| --- | --- | --- |
+| Minimal SIM/machine, no-SIM RAM and empty port space | Retained as tested selector-blind Bochs-local mechanics; port lifecycle extraction completed. | S5 reconciles all affected register rows; S6 builds the admitted closure. |
+| Generic #UD, copied CPU/window, RAM result and controlled stop | Retained only as typed mechanics. BOP observer and adapter diagnostics were removed from Bochs. | S5 proves every remaining exception hunk maps to a live mechanical row; S6 compiles it. |
+| Execution/deferred startup plan | Retained as a single default-off post-hardware/pre-loop consumer. | S5 verifies generated build isolation; S6 performs the fresh declared build. |
+| `FMT_LL` lexical edits | Retained as fourteen source-exact compatibility edits; the lexical test passes. | S6 must supply the current declared MSVC proof. |
+| Build deltas | Unowned Bochs BCrypt injection removed. | S5 reconciles templates/generated files; S6 proves actual link inputs. |
+
+No S4 result proves a build, link, continuous guest execution, or BOP runtime
+closure. Those claims remain prohibited until the applicable later S evidence
+exists.
