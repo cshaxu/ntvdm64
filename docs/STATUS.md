@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T187 S3 — passive-listener engine composition.**
+**Binding active packet: M0 T188 S1 — BOP ingress consumer closure map.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T187 S3**. M0 T186 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T188 S1**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,21 +15,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T187 S3, Ordinary Mode. |
-| Admission And Approval | S2 closes the passive source snapshot. The owner-authorized build island rule permits a one-object Bochs derivative only after exact input and macro closure is recorded. |
-| Objective | Recompose one current v5 engine by rebuilding only listener-enabled `cpu/exception.o` from S2 source and relinking against the retained T185 current adapter/CLI closure. |
-| Non-goals | No guest run/retry, adapter/OpenNT change, BOP/service/provider addition, profile expansion, host capability, archive/device/configuration rebuild, additional Bochs object, or runtime-result claim. |
-| Reference Baseline | T185 current engine composition, T186 corrected bundle, T187 S2 default-off listener source and existing T98 exception compilation flags. |
-| Files And ABI Surface | One generator under `tools/`, a new `artifacts/build/` derivative, `cpu/exception.o` and final engine only; all adapter/CLI objects and Bochs archives are retained inputs. |
+| Identifier Mode | M0 T188 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorization permits autonomous task sequencing. T187 S4 proves the passive listener passes `54:0C` to native #UD because the current generic consumer is disabled; T188 is admitted as the medium-sized common-ingress recovery package. |
+| Objective | Produce a source-and-build closure map that selects exactly one generic, selector-blind BOP consumer path from #UD request through existing adapter transaction/result handling to checked CPU resume. |
+| Non-goals | No source/build change, guest observation, selector-specific interceptor, provider/DOS/COMMAND semantic change, host capability, device enablement, or normal DOS completion claim. |
+| Reference Baseline | T187 S4 immutable listener trace and T188 operation plan; current `exception.cc` nests both startup dispatch and CPU-result bridge beneath `BX_NTVDM_ENABLE_STARTUP_TRANSACTION`. |
+| Files And ABI Surface | `docs/etc/research/t188-s1-*` and the T188 operation plan only; read-only review of `exception.cc`, adapter bridge headers/source and retained engine manifest. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Generator manifest proves exactly one Bochs object target, retained object/archive hashes and fixed listener macros; MSVC x86 build/link succeeds; static listener test, documentation inventory/governance and `git diff --check`. |
-| Expected Markers | One new `cpu/exception.o`, one final engine/map, zero archive/device/main/adapter/CLI object targets, and a manifest recording every input hash. |
-| Asset Needs | Retained T185 engine root and matching MSVC x86 toolchain; no guest artifacts beyond read-only provenance. |
-| Reporting Requirements | Record toolchain command, exact macro set, hash delta and that link success neither observes nor classifies `54:0C`. |
-| Stop Conditions | Any extra Bochs object/archive/device/configuration target, adapter/CLI recompilation, link-model change, build failure requiring semantic repair, or guest run pauses the packet. |
-| Exit Criteria | Source/build closure proves only `cpu/exception.o` and final executable/map are newly built from the frozen current-engine closure. |
+| Verification | Cite exact preprocessor nesting, function/object dependencies, request/result ABI records and retained engine makefile; run documentation inventory/governance and `git diff --check`. |
+| Expected Markers | A selected common consumer, rejected alternatives, required macro/object closure and explicit negative selector/provider ownership statement. |
+| Asset Needs | Current source tree and the T187/T186 retained evidence; no new source, fixture, toolchain or runtime input. |
+| Reporting Requirements | Record why listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition are or are not candidates. State whether a source-shaped seam is necessary before any build. |
+| Stop Conditions | Any decision to enable a macro, change Bochs/adapter source, build, observe, alter a provider or select a selector-specific path; these require S2 admission. |
+| Exit Criteria | A durable closure map selects one generic ingress candidate and its minimal proposed build surface, or evidence proves no candidate exists; no source/build/runtime action. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Audit both `54:0C` and `54:0D`; reject global BOP tracing, DEM/FCB reuse, ambient host state, selector recognizer bypass, direct Bochs/DOS integration and all retries. |
+| Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
 ## Current Technical Baseline
 
