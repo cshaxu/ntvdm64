@@ -79,6 +79,11 @@ before the holistic BOP plane can be recomposed.**
   environment and product-lifecycle coupling.  S5 will extract one fixed
   core/mantle bridge before any BOP plane attachment; see
   [T198 S4 generic #UD seam map](etc/research/t198-s4-generic-ud-seam-map-001.md).
+- M0 T198 S5 P1 is complete: mantle now owns a standalone fixed generic-UD
+  copied record and default-decline bridge, independently MSVC/x86 compiled
+  with no adapter/product vocabulary or dependency.  Core has not yet been
+  switched; see
+  [T198 S5 P1 bridge record](etc/research/t198-s5-p1-generic-ud-bridge-record-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
