@@ -3,7 +3,6 @@ param(
     [string]$RepositoryRoot = '',
     [string]$R6Root = '',
     [string]$BuildRoot = '',
-    [switch]$EnableUnmatchedUdDiagnostic,
     [switch]$EnableBopCatalogListener,
     [switch]$EnableCpuResultBridge
 )
@@ -204,10 +203,6 @@ $exceptionOptInFlags = @(
     '/DBX_NTVDM_ENABLE_EXECUTION_PLAN=1',
     '/DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=1'
 )
-if ($EnableUnmatchedUdDiagnostic) {
-    $rootLocalOptInMacros += 'BX_NTVDM_ENABLE_UNMATCHED_UD_DIAGNOSTIC=1'
-    $exceptionOptInFlags += '/DBX_NTVDM_ENABLE_UNMATCHED_UD_DIAGNOSTIC=1'
-}
 if ($EnableBopCatalogListener) {
     $rootLocalOptInMacros += 'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1'
     $exceptionOptInFlags += '/DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1'
@@ -256,9 +251,6 @@ if (($shimText | Select-String -AllMatches -Pattern 'BX_NTVDM_ENABLE_EXECUTION_P
     ($shimText | Select-String -AllMatches -Pattern 'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=1').Matches.Count -ne 2) {
     throw 'Generated shim does not contain exactly two opt-in macro occurrences.'
 }
-if (($shimText | Select-String -AllMatches -Pattern 'BX_NTVDM_ENABLE_UNMATCHED_UD_DIAGNOSTIC=1').Matches.Count -ne $(if ($EnableUnmatchedUdDiagnostic) { 1 } else { 0 })) {
-    throw 'Generated shim does not contain the expected unmatched-#UD diagnostic macro occurrences.'
-}
 if (($shimText | Select-String -AllMatches -Pattern 'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1').Matches.Count -ne $(if ($EnableBopCatalogListener) { 1 } else { 0 })) {
     throw 'Generated shim does not contain the expected BOP catalogue listener macro occurrences.'
 }
@@ -289,7 +281,6 @@ $record = [ordered]@{
     cli = $cliManifest
     closureObjects = $closureObjects
     rootLocalOptInMacros = $rootLocalOptInMacros
-    unmatchedUdDiagnosticEnabled = [bool]$EnableUnmatchedUdDiagnostic
     bopCatalogListenerEnabled = [bool]$EnableBopCatalogListener
     cpuResultBridgeEnabled = [bool]$EnableCpuResultBridge
     absentMacro = 'BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT'

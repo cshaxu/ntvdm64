@@ -2,7 +2,6 @@
 param(
     [Parameter(Mandatory = $true)]
     [string]$BuildRoot,
-    [switch]$EnableUnmatchedUdDiagnostic,
     [switch]$EnableBopCatalogListener,
     [switch]$EnableCpuResultBridge,
     [int]$TimeoutSeconds = 180
@@ -44,9 +43,6 @@ $expectedMacros = @(
     'BX_NTVDM_ENABLE_EXECUTION_PLAN=1',
     'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=1'
 )
-if ($EnableUnmatchedUdDiagnostic) {
-    $expectedMacros += 'BX_NTVDM_ENABLE_UNMATCHED_UD_DIAGNOSTIC=1'
-}
 if ($EnableBopCatalogListener) {
     $expectedMacros += 'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1'
 }
@@ -55,9 +51,6 @@ if ($EnableCpuResultBridge) {
 }
 if (($record.rootLocalOptInMacros -join ',') -ne ($expectedMacros -join ',')) {
     throw 'Unexpected narrow startup macro set.'
-}
-if ([bool]$record.unmatchedUdDiagnosticEnabled -ne [bool]$EnableUnmatchedUdDiagnostic) {
-    throw 'Narrow startup diagnostic opt-in does not match its build-root record.'
 }
 if ([bool]$record.bopCatalogListenerEnabled -ne [bool]$EnableBopCatalogListener) {
     throw 'Narrow startup BOP listener opt-in does not match its build-root record.'
