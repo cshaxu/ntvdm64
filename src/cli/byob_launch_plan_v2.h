@@ -9,8 +9,9 @@
 
 #define BYOB_LAUNCH_PLAN_V2_ENV_CHARS 256u
 
-/* Fixed composition input for the two declared profile slots.  It carries no
- * host pathname or queue operation: slot 1 is always the profile's QUIT.COM. */
+/* Fixed composition input for one declared target, optionally followed by a
+ * profile-declared QUIT.COM terminal slot. It carries no host pathname or
+ * queue operation. */
 typedef struct byob_launch_plan_v2 {
     uint32_t version;
     uint32_t slot_count;

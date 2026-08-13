@@ -176,6 +176,36 @@ static int run_t181_v5_install(void)
     return failed;
 }
 
+static int run_t194_v6_install(void)
+{
+    wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], target[MAX_PATH], profile[MAX_PATH];
+    char json[4096];
+    bx_ntvdm_adapter_runtime_diagnostic_state_v1 diagnostic;
+    int failed = 0;
+    if (GetTempPathW(MAX_PATH, root) == 0 || GetTempFileNameW(root, L"n64", 0u, root) == 0 ||
+        !DeleteFileW(root) || !CreateDirectoryW(root, 0)) return 1;
+    swprintf(ntio,MAX_PATH,L"%ls\\NTIO.SYS",root); swprintf(ntdos,MAX_PATH,L"%ls\\NTDOS.SYS",root);
+    swprintf(command,MAX_PATH,L"%ls\\COMMAND.COM",root); swprintf(target,MAX_PATH,L"%ls\\TARGET.COM",root);
+    swprintf(profile,MAX_PATH,L"%ls\\profile.json",root);
+    snprintf(json,sizeof(json),
+        "{\"schema\":\"ntdos64-byob-profile-v6\",\"profile\":\"nt4-en-us-command-normal-return-v6\",\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"t194-install\",\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null}],\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}},\"guest_declared_targets\":[{\"role\":\"target\",\"placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2}}],\"guest_search_metadata\":{\"command\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"target\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"config\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"autoexec\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1}}}",sha256_abc,sha256_abc,sha256_abc,sha256_abc);
+    failed |= !write_file(ntio,"abc") || !write_file(ntdos,"abc") || !write_file(command,"abc") ||
+        !write_file(target,"abc") || !write_file(profile,json) ||
+        !SetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_PLAN",L"2,1,c,00");
+    bx_ntvdm_adapter_runtime_v1_reset();
+    failed |= !bx_ntvdm_adapter_runtime_v1_install(profile,root) ||
+        bx_ntvdm_adapter_runtime_v1_install_diagnostic()!=BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_NONE ||
+        !bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(&diagnostic) ||
+        diagnostic.installed != 1u || diagnostic.has_boot_namespace_provider != 1u;
+    bx_ntvdm_adapter_runtime_v1_reset();
+    failed |= !SetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_PLAN",L"2,2,c,00") ||
+        bx_ntvdm_adapter_runtime_v1_install(profile,root) != 0 ||
+        bx_ntvdm_adapter_runtime_v1_install_diagnostic()!=BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_LAUNCH_DECLARATION;
+    SetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_PLAN",0); bx_ntvdm_adapter_runtime_v1_reset();
+    DeleteFileW(profile); DeleteFileW(target); DeleteFileW(command); DeleteFileW(ntdos); DeleteFileW(ntio); RemoveDirectoryW(root);
+    return failed;
+}
+
 int main(int argc, char **argv)
 {
     wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], target[MAX_PATH], profile[MAX_PATH], evidence[MAX_PATH];
@@ -211,6 +241,8 @@ int main(int argc, char **argv)
         return run_t97_path_search();
     if (argc == 2 && strcmp(argv[1], "--t181-v5-install") == 0)
         return run_t181_v5_install();
+    if (argc == 2 && strcmp(argv[1], "--t194-v6-install") == 0)
+        return run_t194_v6_install();
 
     if (argc == 3) {
         wchar_t supplied_profile[MAX_PATH], supplied_root[MAX_PATH];
