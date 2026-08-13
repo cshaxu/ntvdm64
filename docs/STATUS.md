@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T193 S1 — reached machine-selector composition audit.**
+**Active: M0 T193 S3 — machine-selector closure decision register.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T192 are closed. Their retained S records are evidence, not
@@ -12,12 +12,12 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T193 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized machine-BOP composition only through separately proven original handler islands. T192 proves all reached host-service families are already classified. |
-| Objective | Audit every reached non-family selector and decide its original machine owner, handler/island availability, Bochs mechanics ABI closure and default disposition. |
-| Non-goals | No source/build/runtime change, retry, Bochs patch, adapter host-service/provider change, BIOS table installation, device/config action, or handler invocation. |
-| Reference Baseline | T190 trace, BOP catalogue, T115--T122 machine-composition evidence, original SoftPC BIOS sources and T192 closure. |
-| Files And ABI Surface | Source/read-only machine catalogue/handler maps, current machine-composition seam and evidence/status documentation only. |
+| Identifier Mode | M0 T193 S3, Ordinary Mode. |
+| Admission And Approval | Owner authorized machine-BOP composition only through separately proven original handler islands. S1/S2 establish the complete reached selector map and that the frozen T190 engine already contains only the admitted `02`/`06` islands. |
+| Objective | Produce the T193 decision register and handoff: identify whether any coherent new machine implementation is admitted, while preserving default decline for every other reached selector. |
+| Non-goals | No source/build/runtime change, retry, Bochs patch, adapter host-service/provider change, BIOS table installation, device/config action, handler activation, binary relink, or new task-number allocation. |
+| Reference Baseline | T190 S4/S5 manifests, T193 S1/S2 evidence, T115--T122/T176--T179 machine-composition evidence and current exception seam. |
+| Files And ABI Surface | T193 evidence/history/Status and Queue handoff records only; no code or ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Trace-to-source inventory, original owner/failure map, catalogue/registry coverage scan, documentation governance and `git diff --check`. |
 | Expected Markers | Complete reached-family table with no unowned endpoint and an explicit grouped next-slice recommendation; no runtime claim. |
