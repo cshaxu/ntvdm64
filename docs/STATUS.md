@@ -98,6 +98,11 @@ ingress and registry without attaching a provider runtime.**
   copied generic record through common ingress and provider registry while
   declining every outcome.  Its UCRT64 C-island test covers one mapped entry
   and three negative routes; see [T198 S6 ingress bridge witness](etc/research/t198-s6-global-ingress-bridge-witness-001.md).
+- M0 T198 S6 P2 is complete: the toolchain audit proves the available MinGW
+  producer is x64-only, so the classification bridge is not an in-process
+  MSVC/x86 artifact.  A next composed bridge requires an owner-selected x86
+  producer or a separately designed process ABI; see [T198 S6 x86 toolchain
+  audit](etc/research/t198-s6-x86-vdm-toolchain-audit-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
