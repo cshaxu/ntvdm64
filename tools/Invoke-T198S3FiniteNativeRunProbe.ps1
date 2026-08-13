@@ -160,7 +160,9 @@ int main()
   request.instruction_tick_budget = 64;
   request.ips = 1000000;
   request.stop_on_ud_fixture = $fixtureStopOnUd;
-  return (int) bx_ntvdm_run_finite_bare_bytes(&request);
+  int status = (int) bx_ntvdm_run_finite_bare_bytes(&request);
+  return $fixtureStopOnUd ?
+    (status == BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ? 0 : status + 1) : status;
 }
 "@ | Set-Content -LiteralPath $probe -Encoding ascii
 }

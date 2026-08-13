@@ -33,6 +33,13 @@ project-owned real-mode CS:RIP entry setter. The same watchdog observation
 remains. The repair is retained because a direct control-transfer state change
 must invalidate fetch state, but it is not credited as the UD2 root cause.
 
+S15 r3 corrects the finite fixture's former false-positive condition. Its
+private mantle test control now records an accepted generic STOP, and the
+generated UD2 program accepts only `COMPLETED_UD_STOP`; watchdog completion is
+an explicit failure. The fresh MSVC x64 run exits `1`, while retaining the
+same prefetch-limit log. This conclusively rejects the former zero result as
+proof of bridge traversal.
+
 ## Next Diagnostic Bound
 
 The next step may add only default-off mechanical observation sufficient to

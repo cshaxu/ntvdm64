@@ -65,6 +65,10 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
+  if (request->stop_on_ud_fixture &&
+      bx_ntvdm_mantle_generic_ud_fixture_stop_observed()) {
+    return BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP;
+  }
   return stop_state.fired ? BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET :
     BX_NTVDM_FINITE_RUN_UNEXPECTED_LOOP_RETURN;
 }

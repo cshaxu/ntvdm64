@@ -54,6 +54,10 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
  * service interface; production composition leaves it disabled. */
 void bx_ntvdm_mantle_generic_ud_fixture_stop(int enabled);
 
+/* Private test observation: returns nonzero only after this fixture's own
+ * generic STOP was accepted. It is not a composition or guest interface. */
+int bx_ntvdm_mantle_generic_ud_fixture_stop_observed(void);
+
 #ifdef __cplusplus
 }
 #endif
