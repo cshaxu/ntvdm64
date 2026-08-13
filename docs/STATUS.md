@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T195 S4 — move historical machine-handler selection into adapter.**
+**Active: M0 T195 S5 — reconcile superseded Bochs intrusions and build surface.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T195 S4, Ordinary Mode. |
-| Admission And Approval | S3 closes catalogue observation migration. S2 reserves the second repair group: move historical machine-handler selection into adapter while retaining Bochs-owned checked mechanics. |
-| Objective | Relocate `02h`/`06h` instruction recognition, original-handler selection, outcome interpretation and resume-address decision from Bochs to the adapter machine-composition plane. |
-| Non-goals | No reimplementation of original handlers, device/PIC/RAM ownership transfer, BOP provider expansion, broad build, or runtime-success claim. |
-| Reference Baseline | T195 S1/S2/S3; current machine-composition seam and T119 original-handler object island. |
-| Files And ABI Surface | `src/bochs/cpu/exception.cc`, machine-composition headers/source and adapter plane/build/test records; adapter gets selection, Bochs only opaque typed mechanics/result. |
+| Identifier Mode | M0 T195 S5, Ordinary Mode. |
+| Admission And Approval | S3/S4 move both identified semantic repair groups out of Bochs. S5 reconciles the register and active build rules before final closure verification. |
+| Objective | Mark superseded BOP/machine-selection intrusions as migrated, retain only justified selector-blind mechanics/default-off diagnostics, and remove live build references to removed source domains. |
+| Non-goals | No new mechanics/provider/runtime behavior, no device expansion, no reactivation of historical scripts as current recipes, and no broad rebuild. |
+| Reference Baseline | T195 S1 audit; S3/S4 source/build evidence; intrusion register and current generator/test surfaces. |
+| Files And ABI Surface | Intrusion register, current generator/tests, Status and one S5 evidence record; no guest or engine ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused boundary tests prove no `02h`/`06h`, handler symbol or fixed BOP-length resume remains in Bochs; adapter selection is source-built with existing original objects; rebuild only its explicit closure and run documentation governance/diff checks. |
-| Expected Markers | Adapter-owned selection returns generic pass-through/resume/stop; Bochs supplies only synchronous typed port/RAM/stack/report mechanics and applies that result. |
-| Asset Needs | Existing original handler island, checked mechanics callbacks, adapter copied-event ABI and current derivative generator. |
-| Reporting Requirements | Record selection migration, operation/result contract, retained native mechanics, original-object linkage and rejected scope. |
-| Stop Conditions | New guest-visible behavior, direct handler rewrite, new device dependency, raw CPU/Bochs pointer across ABI, or unresolved minimum closure; pause for a new S. |
-| Exit Criteria | Committed source/test/build evidence removes historical handler identity/selection from Bochs and leaves a selector-blind typed mechanics boundary. |
+| Verification | Search current source/generator surfaces for removed listener/machine-domain terms; compare every moved register row with S3/S4 evidence; run focused boundary checks, doc governance and `git diff --check`. |
+| Expected Markers | Register distinguishes migrated adapter ownership from retained generic mechanics; active derivative uses adapter-only machine objects and no obsolete listener macro. |
+| Asset Needs | Existing register, current source/build generator and S1/S3/S4 records. |
+| Reporting Requirements | Record every changed register disposition, exact remaining default-off features and rejected historical references. |
+| Stop Conditions | Any row implies unproven source semantics, a live reference cannot be classified, or cleanup requires new engine behavior; pause for a new S. |
+| Exit Criteria | Committed reconciliation leaves S6 a finite source/map regression with no unresolved semantic intrusion group. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 

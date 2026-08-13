@@ -24,7 +24,7 @@ add_executable(bx-ntvdm-machine-bop-v1-test EXCLUDE_FROM_ALL
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_delta_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_cpu_state_abi.c
     src/bx-ntvdm-adapter/bx_ntvdm_instruction_window_abi.c
-    tests/bx-ntvdm-machine-composition/bx_ntvdm_machine_bop_v1_test.c
+    tests/bx-ntvdm-adapter/bx_ntvdm_machine_composition_v2_test.c
 )
 target_include_directories(bx-ntvdm-machine-bop-v1-test PRIVATE
     src/bx-ntvdm-adapter)
