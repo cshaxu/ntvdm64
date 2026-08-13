@@ -37,6 +37,13 @@ extern "C" unsigned t198_s23_native_ntio_boundary_observed_bios15_eip(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_bios15_next_byte(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_bios15_composition_handled(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_bios15_outcome(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_ioctl(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_ioctl_cs(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_ioctl_eip(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_ioctl_eax(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_ioctl_ebx(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_ioctl_ecx(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_ioctl_edx(void);
 
 static int prepare_preentry_input(bx_ntvdm_preentry_input_v1 *input)
 {
@@ -83,6 +90,7 @@ int main()
   fprintf(stderr,"t198-s23 cs-transition valid=%u previous=%04x:%04x ss-sp=%04x:%04x seq=%llx current=%04x:%04x ss-sp=%04x:%04x seq=%llx\n",transition_valid,transition.previous.cs,(unsigned)transition.previous.rip,transition.previous.ss,transition.previous.sp,(unsigned long long)transition.previous.sequence,transition.current.cs,(unsigned)transition.current.rip,transition.current.ss,transition.current.sp,(unsigned long long)transition.current.sequence);
   fprintf(stderr,"t198-s23 cs-provenance valid=%u predecessor-valid=%u stack-valid=%u code=%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x stack=%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x\n",provenance_valid,provenance.predecessor_valid,provenance.stack_valid,provenance.predecessor_bytes[0],provenance.predecessor_bytes[1],provenance.predecessor_bytes[2],provenance.predecessor_bytes[3],provenance.predecessor_bytes[4],provenance.predecessor_bytes[5],provenance.predecessor_bytes[6],provenance.predecessor_bytes[7],provenance.predecessor_bytes[8],provenance.predecessor_bytes[9],provenance.predecessor_bytes[10],provenance.predecessor_bytes[11],provenance.predecessor_bytes[12],provenance.predecessor_bytes[13],provenance.predecessor_bytes[14],provenance.stack_bytes[0],provenance.stack_bytes[1],provenance.stack_bytes[2],provenance.stack_bytes[3],provenance.stack_bytes[4],provenance.stack_bytes[5],provenance.stack_bytes[6],provenance.stack_bytes[7],provenance.stack_bytes[8],provenance.stack_bytes[9]);
   fprintf(stderr,"t198-s23 bios15 observed=%u state=%04x:%04x eax=%08x next=%02x composition=%u outcome=%u\n",t198_s23_native_ntio_boundary_observed_bios15(),t198_s23_native_ntio_boundary_observed_bios15_cs(),t198_s23_native_ntio_boundary_observed_bios15_eip(),t198_s23_native_ntio_boundary_observed_bios15_eax(),t198_s23_native_ntio_boundary_observed_bios15_next_byte(),t198_s23_native_ntio_boundary_observed_bios15_composition_handled(),t198_s23_native_ntio_boundary_observed_bios15_outcome());
+  fprintf(stderr,"t198-s23 ioctl observed=%u state=%04x:%04x eax=%08x ebx=%08x ecx=%08x edx=%08x\n",t198_s23_native_ntio_boundary_observed_ioctl(),t198_s23_native_ntio_boundary_observed_ioctl_cs(),t198_s23_native_ntio_boundary_observed_ioctl_eip(),t198_s23_native_ntio_boundary_observed_ioctl_eax(),t198_s23_native_ntio_boundary_observed_ioctl_ebx(),t198_s23_native_ntio_boundary_observed_ioctl_ecx(),t198_s23_native_ntio_boundary_observed_ioctl_edx());
   return t198_s23_native_ntio_boundary_observed_first_generic_ud() && generic_valid &&
     generic.magic==BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC && generic.abi_version==BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION && generic.struct_bytes==sizeof(generic) && generic.cs==0u && generic.eip==0x0047u && generic.execution_mode==1u && generic.vector==6u && generic.window_bytes>=4u && generic.window[0]==0xf0u && generic.window[1]==0x41u && generic.window[2]==0xf8u && generic.window[3]==0x00u &&
     t198_s23_native_ntio_boundary_observed_stop() && terminal_valid &&

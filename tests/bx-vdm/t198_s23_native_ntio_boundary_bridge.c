@@ -19,6 +19,10 @@ static uint32_t observed_bios15_eip;
 static unsigned observed_bios15_next_byte;
 static unsigned observed_bios15_composition_handled;
 static unsigned observed_bios15_outcome;
+static unsigned observed_ioctl;
+static uint16_t observed_ioctl_cs;
+static uint32_t observed_ioctl_eip;
+static uint32_t observed_ioctl_eax, observed_ioctl_ebx, observed_ioctl_ecx, observed_ioctl_edx;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -114,6 +118,14 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         return 1;
     }
     if (event == 0 || outcome == 0) return 0;
+    if (!observed_ioctl && event->window_bytes >= 4u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0x50u && event->window[3] == 0x21u) {
+        observed_ioctl = 1u;
+        observed_ioctl_cs = event->cs; observed_ioctl_eip = event->eip;
+        observed_ioctl_eax = event->eax; observed_ioctl_ebx = event->ebx;
+        observed_ioctl_ecx = event->ecx; observed_ioctl_edx = event->edx;
+    }
     if (!observed_bios15 && event->window_bytes >= 3u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
         event->window[2] == 0x15u) {
@@ -164,3 +176,10 @@ unsigned t198_s23_native_ntio_boundary_observed_bios15_eip(void) { return observ
 unsigned t198_s23_native_ntio_boundary_observed_bios15_next_byte(void) { return observed_bios15_next_byte; }
 unsigned t198_s23_native_ntio_boundary_observed_bios15_composition_handled(void) { return observed_bios15_composition_handled; }
 unsigned t198_s23_native_ntio_boundary_observed_bios15_outcome(void) { return observed_bios15_outcome; }
+unsigned t198_s23_native_ntio_boundary_observed_ioctl(void) { return observed_ioctl; }
+unsigned t198_s23_native_ntio_boundary_observed_ioctl_cs(void) { return observed_ioctl_cs; }
+unsigned t198_s23_native_ntio_boundary_observed_ioctl_eip(void) { return observed_ioctl_eip; }
+unsigned t198_s23_native_ntio_boundary_observed_ioctl_eax(void) { return observed_ioctl_eax; }
+unsigned t198_s23_native_ntio_boundary_observed_ioctl_ebx(void) { return observed_ioctl_ebx; }
+unsigned t198_s23_native_ntio_boundary_observed_ioctl_ecx(void) { return observed_ioctl_ecx; }
+unsigned t198_s23_native_ntio_boundary_observed_ioctl_edx(void) { return observed_ioctl_edx; }
