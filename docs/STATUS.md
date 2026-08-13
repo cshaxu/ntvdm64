@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S3 — original single-target normal-return lifecycle contract map.**
+**Active: M0 T194 S4 — contained single-target COMMAND lifecycle implementation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,12 +12,12 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S3, Ordinary Mode. |
-| Admission And Approval | Owner authorized holistic, minimal Bochs/adapter/guest composition and rejects per-selector expansion. S2 proves the current two-slot TARGET/QUIT finite plan is the first divergence from the source normal-return lifecycle; no machine or individual BOP repair is indicated. |
-| Objective | Map the original `cmdGetNextCmd`/`cmdReturnExitCode` lifecycle, copied ABI and unavailable/no-next behavior needed for one declared target to reach `54:11`, so a later implementation can be admitted as one plane-level change. |
-| Non-goals | No fabricated guest input, source/build/runtime change, retry, Bochs patch, adapter host-service/provider change, BIOS table installation, device/config action, terminal-result transport, process-exit reinterpretation, new selector handler, host command queue, or target execution broker. |
-| Reference Baseline | T190 S6 trace/bundle, T176--T179 normal-return evidence, T194 S1/S2, original `cmddisp.c`/`cmdmisc.c` and current COMMAND plane/provider sources. |
-| Files And ABI Surface | Source/read-only COMMAND dispatcher and copied CMDINFO/result ABI maps; evidence/status documentation only. |
+| Identifier Mode | M0 T194 S4, Ordinary Mode. |
+| Admission And Approval | Owner authorized holistic, minimal Bochs/adapter/guest composition and rejects per-selector expansion. S3 maps the original `54:01`/`54:11` no-next lifecycle and admits one coherent profile-plus-COMMAND-plane change, not a new BOP handler. |
+| Objective | Add a versioned, explicit single-target launch mode that uses the existing copied CMDINFO/CPU-result ABI to deliver one target then accept only its source-shaped `54:11` no-next continuation. |
+| Non-goals | No fabricated guest input, Bochs patch, BIOS table installation, device/config action, terminal-result transport, process-exit reinterpretation, new selector handler, host command queue, host target execution broker, ambient filesystem/process exposure, or runtime observation. |
+| Reference Baseline | T190 S6 trace/bundle, T176--T179 normal-return evidence, T194 S1--S3, original `cmddisp.c`/`cmdmisc.c`/`cmdexec.c` and current COMMAND plane/provider tests. |
+| Files And ABI Surface | `src/cli/byob_launch_plan_v2.*`, `src/bx-ntvdm-adapter/bx_ntvdm_cmd_get_next_service.*`, their runtime use and focused tests only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Trace-to-source inventory, original owner/failure map, catalogue/registry coverage scan, documentation governance and `git diff --check`. |
 | Expected Markers | Complete reached-family table with no unowned endpoint and an explicit grouped next-slice recommendation; no runtime claim. |
