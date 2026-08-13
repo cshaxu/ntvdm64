@@ -242,6 +242,9 @@ source-built NTDOS image and observe the next real guest boundary.**
 - M0 T198 S25 P1 embeds the exact locked source-built NTDOS input and reaches
   the first post-NDTOS real boundary, `54:05`, under MSVC x64 `/MT` CPU5;
   see [S25 P1](etc/research/t198-s25-p1-source-built-ntdos-next-boundary-001.md).
+- M0 T198 S25 P2 composes original COMMAND `54:05` through a bounded launch
+  state plane and reaches the next original boundary `50:1B`; see [S25
+  P2](etc/research/t198-s25-p2-command-setinfo-native-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

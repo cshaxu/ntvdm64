@@ -1,0 +1,4 @@
+#include "bx_ntvdm_command_launch_plane_v1.h"
+#include <string.h>
+void bx_ntvdm_command_launch_plane_v1_clear(bx_ntvdm_command_launch_plane_v1 *s){if(s)memset(s,0,sizeof(*s));}
+int bx_ntvdm_command_launch_plane_v1_dispatch(bx_ntvdm_command_launch_plane_v1 *s,const bx_ntvdm_bop_ingress_v1 *i,const bx_ntvdm_bop_provider_selection_v1 *p,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r){bx_ntvdm_command_plane_record_v1 q;bx_ntvdm_cmd_set_info_registration_v1 x;if(!s||!i||!p||!e||!c||!w||!r||!bx_ntvdm_command_plane_v1_classify(i,p,&q)||q.component!=BX_NTVDM_COMMAND_COMPONENT_LAUNCH||q.disposition!=BX_NTVDM_COMMAND_PLANE_DEFERRED||q.service!=5u||!bx_ntvdm_cmd_set_info_service_v1_dispatch(e,c,w,&x,r))return 0;s->registration=x;s->valid=1u;return 1;}

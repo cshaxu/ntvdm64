@@ -35,5 +35,6 @@ int main()
     t198_s23_native_ntio_boundary_observed_selector(),t198_s23_native_ntio_boundary_observed_service(),
     terminal_valid,terminal.cs,terminal.eip);
   return t198_s23_native_ntio_boundary_observed_5011() &&
-    t198_s23_native_ntio_boundary_observed_503b_resume()?0:2;
+    t198_s23_native_ntio_boundary_observed_503b_resume() &&
+    t198_s23_native_ntio_boundary_observed_stop()?0:2;
 }

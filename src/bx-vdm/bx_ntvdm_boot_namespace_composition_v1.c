@@ -66,7 +66,7 @@ int bx_ntvdm_boot_namespace_composition_v1_initialize(
             ntdos, command, target, quit, selection)) return 0;
     value->magic = BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_MAGIC;
     value->abi_version = BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION;
-    value->struct_bytes = sizeof(*value); value->bound = 0;
+    value->struct_bytes = sizeof(*value); value->bound = 0; bx_ntvdm_command_launch_plane_v1_clear(&value->launch);
     return valid(value);
 }
 
@@ -119,6 +119,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
         result.cpu_delta = memory_result.cpu_delta;
         return outcome(&result, value);
     }
+    if (bx_ntvdm_command_launch_plane_v1_dispatch(&active->launch, &ingress,
+            &selection, &boundary, &cpu, &window, &result)) return outcome(&result, value);
     if (
         !bx_ntvdm_boot_namespace_plane_v1_dispatch(&active->plane, &ingress,
             &selection, &boundary, &cpu, &window, &action, &result)) return 0;

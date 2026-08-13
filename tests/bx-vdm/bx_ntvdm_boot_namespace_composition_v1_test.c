@@ -101,12 +101,20 @@ int main(void)
     event_initialize(&event, 0x15, 0);
     event.eax = 0x8800;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 17;
+    event_initialize(&event, 0x54, 0x05);
+    event.ds = 0x1000; event.edx = 0x20; event.ebx = 0x40; event.ecx = 0x60;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x104 ||
+        !composition.launch.valid || composition.launch.registration.scs_info != 0x10020u ||
+        composition.launch.registration.scs_to_sync != 0x100eeu ||
+        composition.launch.registration.is_dos_binary != 0x10040u ||
+        composition.launch.registration.fd_access != 0x10060u) return 18;
     event_initialize(&event, 0x50, 0x3b);
     event.eax = 0xabcd;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x104 || outcome.gpr16_write_mask != 1u ||
-        outcome.gpr16_values[0] != 0xab00u) return 18;
+        outcome.gpr16_values[0] != 0xab00u) return 19;
     event_initialize(&event, 0x50, 0x11);
     event.edi = 0x0900;
     composition.plane.ntdos.byte_count--;
