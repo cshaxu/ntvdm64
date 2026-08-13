@@ -5,7 +5,9 @@ param(
     [switch]$UdStopFixture,
     [switch]$MechanicalActionProbe,
     [string[]]$ExternalBridgeObjects = @(),
-    [string]$ExternalFixtureSource = ''
+    [string]$ExternalFixtureSource = '',
+    [ValidateSet('x64', 'x86')]
+    [string]$HostArchitecture = 'x64'
 )
 
 Set-StrictMode -Version Latest
@@ -36,7 +38,7 @@ foreach ($input in @($seed, $vsDevCmd)) {
 }
 
 $nativeCore = Join-Path $build 'native-core'
-& powershell -ExecutionPolicy Bypass -File $seed -RepositoryRoot $repository -BuildRoot $nativeCore -WholeCpu5Core
+& powershell -ExecutionPolicy Bypass -File $seed -RepositoryRoot $repository -BuildRoot $nativeCore -WholeCpu5Core -HostArchitecture $HostArchitecture
 if ($LASTEXITCODE -ne 0) { throw "CPU5 native-core seed build failed: $LASTEXITCODE" }
 
 $config = Join-Path $nativeCore 'config.h'
@@ -74,7 +76,7 @@ $fixtureStopOnUd = if ($UdStopFixture) { '1' } else { '0' }
 $replacementExceptionObject = $null
 if ($UdStopFixture -or $externalBridge) {
     $replacementExceptionObject = Join-Path $build 'exception_mantle_ud.obj'
-    $exceptionCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+    $exceptionCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
         (New-MsvcCompileCommand (Join-Path $repository 'src\bx-core\cpu\exception.cc') $replacementExceptionObject) +
         ' /DBX_NTVDM_ENABLE_MANTLE_UD_BRIDGE=1'
     & cmd.exe /d /s /c $exceptionCompile
@@ -164,23 +166,23 @@ int main()
 }
 $probeObject = Join-Path $build 'finite_native_run_probe.obj'
 if ($MechanicalActionProbe) {
-    $actionCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+    $actionCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
         (New-MsvcCompileCommand $mechanicalActionSource $mechanicalActionObject)
     & cmd.exe /d /s /c $actionCompile
     if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for mechanical action: $LASTEXITCODE" }
 } else {
-    $finiteCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+    $finiteCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
         (New-MsvcCompileCommand $finiteRunSource $finiteRunObject)
     & cmd.exe /d /s /c $finiteCompile
     if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run helper: $LASTEXITCODE" }
 }
 if (!$MechanicalActionProbe -and !$externalBridge) {
-    $bridgeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+    $bridgeCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
         (New-MsvcCompileCommand $bridgeSource $bridgeObject)
     & cmd.exe /d /s /c $bridgeCompile
     if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for generic #UD bridge: $LASTEXITCODE" }
 }
-$probeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+$probeCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
     (New-MsvcCompileCommand $probe $probeObject)
 & cmd.exe /d /s /c $probeCompile
 if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run fixture: $LASTEXITCODE" }
@@ -206,10 +208,14 @@ $quotedObjects = $localObjects + $seedObjects |
     ForEach-Object { '"' + $_ + '"' }
 @('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') + $quotedObjects |
     Set-Content -LiteralPath $response -Encoding ascii
-& cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 |
+& cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 |
     Tee-Object -LiteralPath $log
 $linkExit = $LASTEXITCODE
 if ($linkExit -ne 0) { throw "Finite native-run link failed: $linkExit" }
+
+$headers = Join-Path $build 'headers.txt'
+& cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && dumpbin.exe /headers "' + $exe + '"') 2>&1 |
+    Tee-Object -LiteralPath $headers
 
 $runLog = Join-Path $build 'run.log'
 $runCommand = '"' + $exe + '" > "' + $runLog + '" 2>&1'
@@ -217,9 +223,9 @@ $runCommand = '"' + $exe + '" > "' + $runLog + '" 2>&1'
 $runExit = $LASTEXITCODE
 $record = [ordered]@{
     schema = 'ntdos64.t198.s3.finite-native-run-probe.v2'
-    architecture = 'x86'
+    architecture = $HostArchitecture
     profile = 'CPU5/Pentium-MMX, non-x86-64'
-    seedBuild = 'tools/Invoke-T197S6MinimalMachineLinkProbe.ps1 -WholeCpu5Core'
+    seedBuild = 'tools/Invoke-T197S6MinimalMachineLinkProbe.ps1 -WholeCpu5Core -HostArchitecture ' + $HostArchitecture
     fixture = [ordered]@{
         entryBytes = if ($UdStopFixture) { '0f 0b (UD2)' } else { 'f4 (HLT)' }
         physicalAddress = '0x1000'
@@ -232,7 +238,7 @@ $record = [ordered]@{
         externalFixtureSource = if ([string]::IsNullOrWhiteSpace($ExternalFixtureSource)) { '' } else { [IO.Path]::GetFileName($probe) }
         ips = 1000000
     }
-    forbiddenInputs = @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe', 'device archives', 'OpenNT', 'CLI')
+    forbiddenInputs = @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe', 'device archives', 'adapter', 'BOP', 'OpenNT', 'CLI')
     linkExitCode = $linkExit
     runExitCode = $runExit
     expectedRunExitCode = 0
@@ -240,6 +246,7 @@ $record = [ordered]@{
     linkLog = 'link.log'
     runLog = 'run.log'
     linkMap = 'link.map'
+    headers = 'headers.txt'
 }
 $record | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 't198-s3-finite-native-run-probe.json') -Encoding utf8
 if ($runExit -ne 0) { throw "Finite native-run fixture failed: $runExit" }

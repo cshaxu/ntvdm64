@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S14.** Its governing brief is the active
+> **Current effective packet: M0 T198 S15.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S14 -- prove the finite CPU5 native HLT run under the
-closed MSVC x64 modern runtime foundation.**
+**Active: M0 T198 S15 -- prove the existing selector-blind generic `#UD`
+mechanical bridge under the closed MSVC x64 modern runtime foundation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ closed MSVC x64 modern runtime foundation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S14, Ordinary Mode. |
-| Admission And Approval | S13 closes the source-built MSVC x64 `/MT` CPU5 lifecycle; the owner already selected MSVC x64 as the unified modern runtime toolchain. |
-| Objective | Reproduce the existing neutral guest `HLT` finite-run contract under the S13 MSVC x64 `/MT` core/mantle closure and record the exact source/object/configuration closure. |
-| Non-goals | No BOP/provider attachment, CLI engine, legacy runtime, MinGW runtime object, GUI/device/product build, OpenNT import, guest CPU semantic change, or new core/mantle patch. |
-| Reference Baseline | T198 S3 finite HLT; T198 S12 P3 CRT frontier; T198 S13 MSVC x64 lifecycle closure. |
-| Files And ABI Surface | The finite native runner and its neutral HLT fixture, compiled only with the S13 MSVC x64 core/mantle closure. Existing generic records remain unchanged; no adapter source is linked. |
+| Identifier Mode | M0 T198 S15, Ordinary Mode. |
+| Admission And Approval | S14 closes the source-built MSVC x64 neutral HLT run; generic `#UD` mechanics already have source and x86 evidence but require x64 reproduction before adapter attachment. |
+| Objective | Source-build and run the existing generic copied-state `#UD` bridge under MSVC x64 `/MT`, using only the neutral `UD2` controlled-stop fixture. |
+| Non-goals | No BOP selector/service recognition, provider attachment, CLI engine, legacy runtime, MinGW runtime object, GUI/device/product build, OpenNT import, guest CPU semantic change, or new core/mantle patch. |
+| Reference Baseline | T198 S5 generic-UD bridge records; T198 S14 finite HLT; T198 S12 P3 CRT frontier; T198 S13 MSVC x64 lifecycle closure. |
+| Files And ABI Surface | The existing core generic-UD gate, mantle copied record/default bridge and finite runner, compiled only with the MSVC x64 core/mantle closure. No adapter source is linked. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MSVC x64 compile/link/run proves checked neutral-HLT copy, real-mode entry, finite native stop and cleanup; inspect PE architecture and link map; static scan excludes MinGW, product shell, adapter and OpenNT inputs; run documentation checks. |
-| Expected Markers | PE32+ x64 executable; one MSVC `/MT` closure; neutral HLT reaches the existing controlled stop; exact source/object list; no x86 or foreign-CRT object in link response. |
+| Verification | Fresh MSVC x64 compile/link/run proves neutral `UD2` reaches the core generic gate, fixed copied state, mantle default controlled-stop outcome and cleanup; inspect PE architecture and link map; static scan excludes BOP vocabulary, MinGW, product shell, adapter and OpenNT inputs; run documentation checks. |
+| Expected Markers | PE32+ x64 executable; one MSVC `/MT` closure; neutral `UD2` reaches existing controlled stop; exact source/object list; no BOP or foreign-CRT object in link response. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record compiler/version, x64 config projection, exact sources/link response, architecture inspection, HLT stop output, excluded inputs and any source-level host-width defect. |
-| Stop Conditions | x64 requires a CPU/memory/device semantic rewrite, new BOP vocabulary in Bochs, an unregistered imported-source change, foreign CRT input, or a non-neutral guest payload. Preserve evidence and re-admit. |
-| Exit Criteria | A fresh finite neutral-HLT MSVC x64 run is reproducible and proves no product/adapter dependency; generic `#UD` and adapter composition remain separately admitted after this gate. |
+| Reporting Requirements | Record compiler/version, x64 config projection, exact sources/link response, architecture inspection, copied-event/outcome stop output, excluded inputs and any source-level host-width defect. |
+| Stop Conditions | x64 requires a CPU/memory/device semantic rewrite, BOP vocabulary in Bochs, an unregistered imported-source change, foreign CRT input, or a non-neutral guest payload. Preserve evidence and re-admit. |
+| Exit Criteria | A fresh neutral-UD2 MSVC x64 run is reproducible and proves no product/adapter dependency; adapter composition remains separately admitted after this gate. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -159,6 +159,10 @@ closed MSVC x64 modern runtime foundation.**
   finite mantle source-build, link and run as one MSVC x64 `/MT` PE32+ process
   lifecycle. The x64 configuration projection corrects host pointer width
   without changing guest CPU identity; see [T198 S13 witness](etc/research/t198-s13-msvc-x64-minimal-lifecycle-witness-001.md).
+- M0 T198 S14 is complete: a neutral one-byte HLT fixture enters the CPU5
+  instruction loop and reaches finite controlled stop under the same MSVC x64
+  `/MT` closure, with no adapter/provider or product input; see [T198 S14
+  witness](etc/research/t198-s14-msvc-x64-finite-hlt-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
