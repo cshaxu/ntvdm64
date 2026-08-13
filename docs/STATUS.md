@@ -190,6 +190,10 @@ admitting its provider.**
   their checked guest-RAM reads/writes and typed resumes.  See [S18 DTA/search
   witness](etc/research/t198-s18-native-dta-search-witness-001.md) and the
   updated [S18 matrix](etc/research/t198-s18-boot-namespace-native-matrix-001.md).
+- M0 T198 S19 P1 establishes the first original NTDOS guest-entry map:
+  `50:11` is a live `DI:0000` request after NTIO entry, not an initial preload;
+  its unavailable historical composition has one bounded source-derived
+  provider boundary.  See [S19 guest-entry map](etc/research/t198-s19-first-ntdos-guest-entry-map-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
