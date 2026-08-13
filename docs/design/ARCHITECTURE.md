@@ -16,14 +16,14 @@ another.
 | Bochs mantle (`src/bx-mantle`) | Minimal native Bochs lifecycle composition: SIM/logging/no-device time state and assembly of admitted core mechanics | VDM, BOP, OpenNT, DOS, host policy, GUI, plugins, or unadmitted PC devices |
 | Bochs core (`src/bx-core`) | Adopted Bochs CPU/decode, memory, exceptions, and admitted no-device mechanics | VDM/guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
 | Contained host-capability seam | Modern host facilities selected by the VDM adapter | Guest protocol meaning, CPU/device behavior, or Bochs internals |
-| OpenNT source layer (`src/opennt`) | Normative historical guest payloads and host-provider source/contract evidence | CPU interpretation, firmware, PC devices, or modern-host composition |
 | Historical machine-handler islands | Individually admitted original machine-facing behavior under adapter selection | A replacement SoftPC/CCPU backend or general host-service plane |
 | Research fixtures | Reproducible evidence for a bounded question | Product behavior or implicit runtime dependencies |
 
 ## Composition
 
 ```text
-OpenNT host and guest layer
+command-line invocation shell
+  -> OpenNT host and guest layer
   -> bx-vdm adapter
       -> bx-mantle -> bx-core
       -> selected contained host capability
@@ -35,8 +35,10 @@ guest-memory ranges. It does not pass C++ objects, host pointers, CRT-owned
 memory, implicit handle ownership, or cross-architecture callbacks across that
 boundary.
 
-The first runtime process is MSVC x64 throughout: CLI, VDM adapter, mantle and
-adopted Bochs core share one static CRT. The guest CPU architecture is an
+The first runtime process is MSVC x64 throughout: its command-line invocation
+shell, VDM adapter, mantle and adopted Bochs core share one static CRT. The
+invocation shell is an outer product boundary, not a semantic architecture
+layer. The guest CPU architecture is an
 emulation property, not a host-process property; CPU5/Pentium-MMX guest code
 therefore remains valid inside the x64 process. No MinGW object or a separate
 CRT may enter this in-process composition.
@@ -51,8 +53,8 @@ CRT may enter this in-process composition.
   minimal operation. It has no VDM or guest meaning.
 - Guest and host-service meaning stays outside Bochs. The VDM adapter owns the
   interpretation and routing needed to compose OpenNT-derived host behavior.
-- The guest owns DOS and WOW behavior. Neither the CLI nor the adapter becomes
-  a replacement DOS kernel or filesystem implementation.
+- The guest owns DOS and WOW behavior. Neither the invocation shell nor the
+  adapter becomes a replacement DOS kernel or filesystem implementation.
 - Modern host capability is explicit and contained. It is introduced through
   the host capability seam, never by exposing ambient host state to the guest.
 - Historical code is normative source and ownership evidence. It is reused

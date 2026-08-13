@@ -185,6 +185,11 @@ already implemented boot-namespace BOP plane.**
 - M0 T198 S18 P2 is complete: the sibling COMMAND `54:0D` boot-file service
   now has a separate parameterized native fixture and x64 zero-exit witness;
   see [S18 COMMAND witness](etc/research/t198-s18-native-command-bootfile-witness-001.md).
+- M0 T198 S18 P3 is complete: the existing DTA registration and pathname
+  search branches run natively as `50:1B -> 50:09 -> 50:0B -> HLT`, including
+  their checked guest-RAM reads/writes and typed resumes.  See [S18 DTA/search
+  witness](etc/research/t198-s18-native-dta-search-witness-001.md) and the
+  updated [S18 matrix](etc/research/t198-s18-boot-namespace-native-matrix-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

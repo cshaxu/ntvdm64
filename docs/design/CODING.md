@@ -31,11 +31,12 @@ is retained only under `src/archived/` and is not a runtime input. Any source
 exception below the imported tree is registered in
 `docs/etc/research/adapter-external-intrusion-exceptions.md`.
 
-`src/cli` is a separate component, not a convenience wrapper inside the
-adapter. It owns command-line parsing, immutable BYOB profile admission,
-engine-child creation, cancellation, and user-facing diagnostics. It does not
-own guest payload loading, service dispatch, BOP semantics, or machine
-configuration; those concerns remain respectively in the adapter and Bochs.
+`src/cli` is the outer command-line invocation shell, not an architecture
+component or a convenience wrapper inside the adapter.  Its retained sources
+are transitional input-model evidence until their ownership moves under the
+four-layer architecture.  It does not own guest payload loading, service
+dispatch, BOP semantics, or machine configuration; those concerns remain
+respectively in the OpenNT layer, adapter, and Bochs layers.
 
 All current modern runtime sources below `src/cli/`, `src/bx-vdm/`,
 `src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64
