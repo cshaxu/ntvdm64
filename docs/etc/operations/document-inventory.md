@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1002 |
+| Documentation records | 1003 |
 | --- | --- |
-| Generated UTC | 2026-08-13T14:52:44Z |
+| Generated UTC | 2026-08-13T14:55:51Z |
 
 ## Entries
 
@@ -65,7 +65,7 @@ content-divergent entries.
 | design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | 3153c9a36e43d8efc1234879d4c8f76f83dc3a61a766ecdceaa8da6e7f410e45 |
 | design/ADAPTER-STARTUP-SNAPSHOT-EVIDENCE-EXPORT.md | retained pre-governance evidence | a14333ab6812e8d6c59f9cddb22060b41b02b113d1a4ac6a2d9b08eec3db1666 |
 | design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | d1898c127b918240c3ce7eb32ed2efc04caf11f04b5a061060d4c2a0254c1861 |
-| design/ARCHITECTURE.md | current design authority | 6bc1f2ccfb3bd4c6a93c124702b36dbd150d7d704088e1499dfc145eb8b6c3bb |
+| design/ARCHITECTURE.md | current design authority | 0cca68ad2dd1c2e4bb551859662cc0f616e1c8cf3904961eedc6dc12f9505a7c |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | d4cba839d15ee30600996e56cd00e34c07d59bfdcb42b91b06fccbf760c48bd5 |
 | design/CODING.md | current design authority | 5c7d467c8e7623cddf0bb70f094b867e33732be922467c1b05e0084a1bc1031b |
 | design/GOAL.md | current design authority | de230f5125ae9170daeeb2412f93e765f723585ea84e1955afa7f8c60a4a0995 |
@@ -394,6 +394,7 @@ content-divergent entries.
 | etc/research/t198-s16-msvc-x64-boot-namespace-composition-witness-001.md | indexed supporting material | 2673f3ba959bf229f14087815350c0ea6bad2e3585090514136c46091804cfc8 |
 | etc/research/t198-s17-msvc-x64-native-bop-composition-witness-001.md | indexed supporting material | 4005d9e6f83325b0f033554ad6a8b336598090055cd33a7a0e97117da20a857b |
 | etc/research/t198-s18-boot-namespace-native-matrix-001.md | indexed supporting material | 5422b19972e8c15eace373fc8355f7c03b66dabc1870bcf0b47e01a45c46a753 |
+| etc/research/t198-s18-native-dem-lifecycle-witness-001.md | indexed supporting material | f9f15361c000317cee633145404ed8179fef41ec441696e4e9b4d5fa6cdcf5fc |
 | etc/research/t198-s1-bop-runtime-composition-map-001.md | indexed supporting material | 6ae7b63e002e80119cde1195c5bc4df34d7af07d99fd39679cacf9e88876032c |
 | etc/research/t198-s2-native-execution-contract-map-001.md | indexed supporting material | 9948f12dc8933e287715ba748ea5ff3567f2b75aece8ac1429ad021f2e806152 |
 | etc/research/t198-s3-finite-native-run-witness-001.md | indexed supporting material | f197ff4bf1f1d6ad401b6f79b0b2ee59949ad583622468df10e2f80efc94adcc |
@@ -1016,7 +1017,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 2bc50223935f93edb784e10353037752ae7cf5673df0f1c3311343752a57bd3a |
+| STATUS.md | principal control document | 495dd69b06d35483974170a31db7ee24a9f0dd66c1537a726c343aff54bf53ec |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

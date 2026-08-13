@@ -11,8 +11,8 @@ another.
 
 | Component | Owns | Does not own |
 | --- | --- | --- |
-| CLI (`src/cli`) | Invocation contract, immutable profile admission, contained host policy, diagnostics, and engine launch | Guest execution, guest-memory access, guest-service semantics, or machine mechanics |
-| VDM adapter (`src/bx-vdm`) | Typed Bochs/VDM contracts; BOP ingress, provider routing, compatibility adaptation, and machine-composition selection | CPU execution, firmware, PIC, memory model, device model, or DOS kernel algorithms |
+| OpenNT layer (`src/opennt`) | Original NTVDM host-service source, DOS/WOW guest source, and their source-derived contracts | CPU execution, firmware, PC-device emulation, or Bochs lifecycle |
+| VDM adapter (`src/bx-vdm`) | Typed bx↔VDM contracts, BOP ingress/egress, compatibility adaptation, and explicit composition of OpenNT host/guest contracts | CPU execution, firmware, PIC, memory model, device model, DOS/WOW kernel algorithms, or ambient-host policy |
 | Bochs mantle (`src/bx-mantle`) | Minimal native Bochs lifecycle composition: SIM/logging/no-device time state and assembly of admitted core mechanics | VDM, BOP, OpenNT, DOS, host policy, GUI, plugins, or unadmitted PC devices |
 | Bochs core (`src/bx-core`) | Adopted Bochs CPU/decode, memory, exceptions, and admitted no-device mechanics | VDM/guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
 | Contained host-capability seam | Modern host facilities selected by the VDM adapter | Guest protocol meaning, CPU/device behavior, or Bochs internals |
@@ -23,11 +23,10 @@ another.
 ## Composition
 
 ```text
-CLI and contained host policy
-  -> VDM adapter
-      -> Bochs mantle -> adopted Bochs core
-      -> selected OpenNT-derived provider and contained host capability
-  -> OpenNT guest environment
+OpenNT host and guest layer
+  -> bx-vdm adapter
+      -> bx-mantle -> bx-core
+      -> selected contained host capability
 ```
 
 The VDM adapter is the composition boundary between machine events and host-side
@@ -65,10 +64,9 @@ CRT may enter this in-process composition.
 Dependencies point inward through declared contracts:
 
 ```text
-CLI -> bx-vdm -> bx-mantle -> bx-core
-CLI -> bx-vdm -> contained host-capability seam
-bx-vdm -> OpenNT-derived provider or historical machine-handler island
-OpenNT guest -> bx-vdm contract -> selected provider
+src/opennt -> bx-vdm -> bx-mantle -> bx-core
+bx-vdm -> contained host-capability seam
+bx-vdm -> src/opennt host/guest contract or historical machine-handler island
 ```
 
 No component may reverse these directions by importing another component's

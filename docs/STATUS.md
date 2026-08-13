@@ -179,6 +179,9 @@ already implemented boot-namespace BOP plane.**
   transaction and resumes to the bounded terminal fixture. This is not a DOS
   continuity claim; see [T198 S17 witness](etc/research/t198-s17-msvc-x64-native-bop-composition-witness-001.md)
   and [closure](history/m0-t198-s17-closure-20260813.md).
+- M0 T198 S18 P1 is complete: the existing DEM readonly lifecycle `50:12 ->
+  50:16 -> 50:00 -> 50:02` now executes as one native real-mode transaction
+  under the S17 x64 closure. See [S18 DEM witness](etc/research/t198-s18-native-dem-lifecycle-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
