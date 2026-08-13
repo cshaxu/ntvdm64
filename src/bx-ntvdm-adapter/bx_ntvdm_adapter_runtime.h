@@ -36,6 +36,14 @@ typedef enum bx_ntvdm_adapter_install_diagnostic_v1 {
     BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_MACHINE_SNAPSHOT_TRIGGER
 } bx_ntvdm_adapter_install_diagnostic_v1;
 
+typedef enum bx_ntvdm_adapter_boot_file_diagnostic_v1 {
+    BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_NONE = 0,
+    BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_PROVIDER,
+    BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_PREPARE,
+    BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_QUEUE,
+    BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_ACCEPTED
+} bx_ntvdm_adapter_boot_file_diagnostic_v1;
+
 /* Same-island diagnostic snapshot. It contains lifecycle state only: no
  * selector, service, guest address, payload, pointer, or mutable session
  * object crosses this copy boundary. */
@@ -44,6 +52,7 @@ typedef struct bx_ntvdm_adapter_runtime_diagnostic_state_v1 {
     uint32_t installed;
     uint32_t has_boot_namespace_provider;
     uint32_t pending_kind;
+    uint32_t boot_file_diagnostic;
 } bx_ntvdm_adapter_runtime_diagnostic_state_v1;
 
 #define BX_NTVDM_ADAPTER_RUNTIME_DIAGNOSTIC_STATE_V1_VERSION 1u

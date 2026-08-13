@@ -518,10 +518,11 @@ static bx_bool bx_ntvdm_adapter_interceptor(
 #if BX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC
       bx_ntvdm_adapter_runtime_diagnostic_state_v1 diagnostic_state;
       if (bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(&diagnostic_state))
-        BX_INFO(("ntdos64 adapter lifecycle installed=%u provider=%u pending=%u",
+        BX_INFO(("ntdos64 adapter lifecycle installed=%u provider=%u pending=%u boot-file-stage=%u",
           (unsigned)diagnostic_state.installed,
           (unsigned)diagnostic_state.has_boot_namespace_provider,
-          (unsigned)diagnostic_state.pending_kind));
+          (unsigned)diagnostic_state.pending_kind,
+          (unsigned)diagnostic_state.boot_file_diagnostic));
 #endif
       BX_INFO(("ntdos64 adapter boundary passed through cs=%04x eip=%08x rip=%llx bytes=%02x%02x%02x%02x",
         request->cpu_state->cs, request->cpu_state->eip,

@@ -2,6 +2,8 @@
 
 ## Current Work
 
+**Active: M0 T189 S2 — adapter first-failure diagnostic closure.**
+
 **Active: M0 T188 S9 — one-shot observation-controller closure.**
 
 **Active: M0 T188 S10 — one frozen copied-state observation.**
@@ -24,19 +26,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T189 S1, Ordinary Mode. |
-| Admission And Approval | T188 closes its single observation with installed=1, provider=1 and pending=0 at real `54:0C`. Owner authorization permits autonomous sequencing; T189 begins with source-only predicate recovery. |
-| Objective | Map the exact v5 runtime route and every acceptance/decline predicate from generic ingress through provider/session state to the pending multi-write result; compare it with the T188/S2 fixture without changing source. |
-| Non-goals | No build, observation/retry, Bochs/adapter/CLI source change, selector recognizer, transaction forcing, provider/DOS semantic change, or host capability claim. |
-| Reference Baseline | T188 S2 controlled fixture, T188 S10 terminal observation, existing v4/v5 runtime and host-service source. |
-| Files And ABI Surface | Source-map evidence only under `docs/etc/research`; no ABI change. |
+| Identifier Mode | M0 T189 S2, Ordinary Mode. |
+| Admission And Approval | T189 S1 proves an unobservable compound-chain decline. Owner authorization for registered Bochs intrusions and adapter work permits one fixed-width first-failure diagnostic. |
+| Objective | Add and statically prove a default-off copied first-failure category for the existing boot-file compound chain. |
+| Non-goals | No selector/service/address/payload export, guest memory read, result/session mutation, runtime observation, build, retry, provider semantic change or Bochs branch. |
+| Reference Baseline | T189 S1 map and BX-TRACE-060. |
+| Files And ABI Surface | Adapter diagnostic state, existing generic Bochs trace, exception register and focused tests only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Static source map with reproducible searches; compare every branch condition to fixture and observation registers/state; documentation inventory/governance and `git diff --check`. |
-| Expected Markers | One finite predicate table identifying each condition as matched, contradicted, or unobserved; no inferred state and no implementation. |
-| Asset Needs | Existing source and T188 evidence only. |
-| Reporting Requirements | Cite source locations, observed values and the minimum next proof; distinguish source fact from inference. |
-| Stop Conditions | Missing source, a predicate depending on unobservable mutable state, ambiguity requiring a new diagnostic, or an implementation/build/runtime request; pause for re-admission. |
-| Exit Criteria | A closed source predicate map, or an evidenced bounded diagnostic requirement; no source/build/runtime action. |
+| Verification | Focused adapter and static Bochs-boundary tests, diff review, documentation inventory/governance and `git diff --check`. |
+| Expected Markers | A fixed category value copied after pass-through, unchanged lifecycle/result/queue state, and no forbidden data terms in the trace. |
+| Asset Needs | Existing adapter/Bochs sources and BX-TRACE-060 only; no guest asset. |
+| Reporting Requirements | Record every category and the omitted data, then state that a separate build/run admission is required. |
+| Stop Conditions | Any semantic dispatch change, new BOP recognizer, guest-memory access, category needing detailed data, or runtime action; pause for re-admission. |
+| Exit Criteria | Source/static closure of the fixed diagnostic or durable rejection; no build/runtime action. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 

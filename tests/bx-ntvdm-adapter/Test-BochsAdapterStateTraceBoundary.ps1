@@ -17,7 +17,7 @@ $traceStart = $branch.IndexOf('#if BX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC')
 $traceEnd = $branch.IndexOf('#endif', $traceStart)
 if ($traceStart -lt 0 -or $traceEnd -lt $traceStart) { throw 'Missing state-trace guard.' }
 $trace = $branch.Substring($traceStart, $traceEnd - $traceStart)
-foreach ($required in @('bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state', 'diagnostic_state.installed', 'diagnostic_state.has_boot_namespace_provider', 'diagnostic_state.pending_kind', 'ntdos64 adapter lifecycle')) {
+foreach ($required in @('bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state', 'diagnostic_state.installed', 'diagnostic_state.has_boot_namespace_provider', 'diagnostic_state.pending_kind', 'diagnostic_state.boot_file_diagnostic', 'ntdos64 adapter lifecycle')) {
     if (-not $trace.Contains($required)) { throw "Missing state-trace term: $required" }
 }
 foreach ($forbidden in @('instruction_window', 'bytes[', 'selector', 'service', 'guest_', 'payload', 'take_pending', 'queue_', 'set_reg', 'set_CF', 'response->', 'RIP =', 'return 1')) {

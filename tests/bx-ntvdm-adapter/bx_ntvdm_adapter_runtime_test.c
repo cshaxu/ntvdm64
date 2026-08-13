@@ -149,7 +149,8 @@ static int run_t181_v5_install(void)
     failed |= !bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(&diagnostic) ||
         diagnostic.version != BX_NTVDM_ADAPTER_RUNTIME_DIAGNOSTIC_STATE_V1_VERSION ||
         diagnostic.installed != 1u || diagnostic.has_boot_namespace_provider != 1u ||
-        diagnostic.pending_kind != BX_NTVDM_HOST_PENDING_NONE;
+        diagnostic.pending_kind != BX_NTVDM_HOST_PENDING_NONE ||
+        diagnostic.boot_file_diagnostic != BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_NONE;
     bx_ntvdm_cpu_state_v1_initialize(&state, BX_NTVDM_CPU_EXECUTION_REAL);
     state.ds = 0x8dc8u;
     state.edx = 0x33d9u;
@@ -161,6 +162,7 @@ static int run_t181_v5_install(void)
         !bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(&diagnostic) ||
         diagnostic.installed != 1u || diagnostic.has_boot_namespace_provider != 1u ||
         diagnostic.pending_kind != BX_NTVDM_HOST_PENDING_MULTI_WRITE ||
+        diagnostic.boot_file_diagnostic != BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_ACCEPTED ||
         !bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
             &multi_write, &payload, &payload_bytes) ||
         multi_write.writes.write_count != 1u ||

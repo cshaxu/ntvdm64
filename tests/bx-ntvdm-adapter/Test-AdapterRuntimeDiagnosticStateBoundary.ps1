@@ -11,7 +11,7 @@ $start = $header.IndexOf('typedef struct bx_ntvdm_adapter_runtime_diagnostic_sta
 $end = $header.IndexOf('} bx_ntvdm_adapter_runtime_diagnostic_state_v1;', $start)
 if ($start -lt 0 -or $end -lt $start) { throw 'Missing copied diagnostic-state ABI.' }
 $record = $header.Substring($start, $end - $start)
-foreach ($field in @('uint32_t version;', 'uint32_t installed;', 'uint32_t has_boot_namespace_provider;', 'uint32_t pending_kind;')) {
+foreach ($field in @('uint32_t version;', 'uint32_t installed;', 'uint32_t has_boot_namespace_provider;', 'uint32_t pending_kind;', 'uint32_t boot_file_diagnostic;')) {
     if (-not $record.Contains($field)) { throw "Missing fixed-width lifecycle field: $field" }
 }
 foreach ($forbidden in @('selector', 'service', 'address', 'payload', '*', 'pointer', 'transaction')) {
@@ -21,7 +21,7 @@ $functionStart = $source.IndexOf('int bx_ntvdm_adapter_runtime_v1_copy_diagnosti
 $functionEnd = $source.IndexOf("`n}", $functionStart)
 if ($functionStart -lt 0 -or $functionEnd -lt $functionStart) { throw 'Missing diagnostic copy implementation.' }
 $function = $source.Substring($functionStart, $functionEnd - $functionStart)
-foreach ($required in @('out->version', 'out->installed', 'out->has_boot_namespace_provider', 'out->pending_kind', 'return 1;')) {
+foreach ($required in @('out->version', 'out->installed', 'out->has_boot_namespace_provider', 'out->pending_kind', 'out->boot_file_diagnostic', 'return 1;')) {
     if (-not $function.Contains($required)) { throw "Missing copy implementation term: $required" }
 }
 foreach ($forbidden in @('dispatch(', 'take_pending', 'queue_', 'clear_pending', '_reset(', 'memcpy', 'selector', 'service')) {
