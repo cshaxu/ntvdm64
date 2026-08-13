@@ -70,8 +70,12 @@ static int bx_ntvdm_search_request_decode(const uint8_t path[128],
             if (directory_length != 0u) query->relative_directory[directory_length++] = L'\\';
             if (directory_length + wcslen(component) > BX_NTVDM_SEARCH_PLAN_V1_MAX_RELATIVE_DIRECTORY)
                 return 0;
-            wcscpy(query->relative_directory + directory_length, component);
-            directory_length += wcslen(component);
+            {
+                size_t component_length = wcslen(component);
+                memcpy(query->relative_directory + directory_length, component,
+                    (component_length + 1u) * sizeof(component[0]));
+                directory_length += component_length;
+            }
         }
         offset = end + 1u;
     }

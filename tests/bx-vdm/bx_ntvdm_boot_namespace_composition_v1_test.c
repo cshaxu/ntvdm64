@@ -39,14 +39,16 @@ static void event_initialize(struct bx_ntvdm_generic_ud_event_v1 *event,
 static void profile_initialize(byob_profile_selection *profile)
 {
     memset(profile, 0, sizeof(*profile));
-    wcscpy(profile->command_placement.path, L"\\COMMAND.COM");
+    memcpy(profile->command_placement.path, L"\\COMMAND.COM",
+        sizeof(L"\\COMMAND.COM"));
     profile->command_placement.drive_index = 2; profile->has_command_placement = 1;
-    wcscpy(profile->target_placement.path, L"\\TARGET.COM");
+    memcpy(profile->target_placement.path, L"\\TARGET.COM",
+        sizeof(L"\\TARGET.COM"));
     profile->target_placement.drive_index = 2; profile->has_target_placement = 1;
-    wcscpy(profile->target.file_name, L"TARGET.COM");
-    wcscpy(profile->config_file.path, L"\\CONFIG.SYS");
+    memcpy(profile->target.file_name, L"TARGET.COM", sizeof(L"TARGET.COM"));
+    memcpy(profile->config_file.path, L"\\CONFIG.SYS", sizeof(L"\\CONFIG.SYS"));
     profile->config_file.materialization = BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;
-    wcscpy(profile->autoexec_file.path, L"\\AUTOEXEC.BAT");
+    memcpy(profile->autoexec_file.path, L"\\AUTOEXEC.BAT", sizeof(L"\\AUTOEXEC.BAT"));
     profile->autoexec_file.materialization = BYOB_GUEST_BOOT_FILE_EMPTY_V1;
     profile->has_guest_boot_files = profile->has_guest_search_metadata = 1;
     profile->command_metadata.attributes = profile->target_metadata.attributes =

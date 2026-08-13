@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S15.** Its governing brief is the active
+> **Current effective packet: M0 T198 S17.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S15 -- prove the existing selector-blind generic `#UD`
-mechanical bridge under the closed MSVC x64 modern runtime foundation.**
+**Active: M0 T198 S17 -- attach the source-built `bx-vdm` boot-namespace
+composition to the existing selector-blind native generic-`#UD` mechanics.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ mechanical bridge under the closed MSVC x64 modern runtime foundation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S15, Ordinary Mode. |
-| Admission And Approval | S14 closes the source-built MSVC x64 neutral HLT run; generic `#UD` mechanics already have source and x86 evidence but require x64 reproduction before adapter attachment. |
-| Objective | Source-build and run the existing generic copied-state `#UD` bridge under MSVC x64 `/MT`, using only the neutral `UD2` controlled-stop fixture. |
-| Non-goals | No BOP selector/service recognition, provider attachment, CLI engine, legacy runtime, MinGW runtime object, GUI/device/product build, OpenNT import, guest CPU semantic change, or new core/mantle patch. |
-| Reference Baseline | T198 S5 generic-UD bridge records; T198 S14 finite HLT; T198 S12 P3 CRT frontier; T198 S13 MSVC x64 lifecycle closure. |
-| Files And ABI Surface | The existing core generic-UD gate, mantle copied record/default bridge and finite runner, compiled only with the MSVC x64 core/mantle closure. No adapter source is linked. |
+| Identifier Mode | M0 T198 S17, Ordinary Mode. |
+| Admission And Approval | S15 r6 closes the native x64 selector-blind generic-`#UD` mechanical bridge; S16 closes the same-runtime `bx-vdm` boot-namespace session. The owner objective authorizes their bounded integration through the existing typed ABI. |
+| Objective | Link the existing source-built S16 adapter session into the finite CPU5 native runner and prove one real `UD2` BOP-form event follows `Bochs #UD -> copied state -> bx-vdm ingress/plane -> checked ordinary-RAM action -> typed resume/stop` without new semantics. |
+| Non-goals | No BOP table expansion, provider rewrite, CLI engine, host-drive/filesystem feature, original OpenNT provider import, MinGW input, GUI/device/product build, Bochs selector recognition, or core/mantle semantic patch. |
+| Reference Baseline | T198 S10 whole-family plane; T198 S12 session/composed-bridge records and CRT frontier; T198 S13 x64 lifecycle; T198 S15 x64 generic-UD mechanics; T198 S16 x64 adapter session closure. |
+| Files And ABI Surface | Existing finite runner/replacement exception, existing `bx-vdm` composition session and a source-built x64 external-object closure; the established generic-event, typed-outcome and mechanical-action ABIs. No new ABI version or selector vocabulary in `bx-core`/`bx-mantle`. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MSVC x64 compile/link/run proves neutral `UD2` reaches the core generic gate, fixed copied state, mantle default controlled-stop outcome and cleanup; inspect PE architecture and link map; static scan excludes BOP vocabulary, MinGW, product shell, adapter and OpenNT inputs; run documentation checks. |
-| Expected Markers | PE32+ x64 executable; one MSVC `/MT` closure; neutral `UD2` reaches existing controlled stop; exact source/object list; no BOP or foreign-CRT object in link response. |
+| Verification | Fresh MSVC x64 compile/link/run composes the S16 object closure with the finite native CPU5 runner and the existing composed-UD fixture; inspect PE architecture, link response and exact objects; prove the expected generic event, checked RAM result, typed resume/controlled stop and explicit unbind; static boundary scan and documentation checks. |
+| Expected Markers | One PE32+ MSVC `/MT` process; no foreign CRT; core/mantle remain selector-blind; a BOP-form UD2 reaches the existing adapter session and its ordinary-RAM operation before a checked terminal result. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record compiler/version, x64 config projection, exact sources/link response, architecture inspection, copied-event/outcome stop output, excluded inputs and any source-level host-width defect. |
-| Stop Conditions | x64 requires a CPU/memory/device semantic rewrite, BOP vocabulary in Bochs, an unregistered imported-source change, foreign CRT input, or a non-neutral guest payload. Preserve evidence and re-admit. |
-| Exit Criteria | A fresh neutral-UD2 MSVC x64 run is reproducible and proves no product/adapter dependency; adapter composition remains separately admitted after this gate. |
+| Reporting Requirements | Record compiler/version, source/object responses, x64 architecture, actual event/outcome/action observations, exact fixture bytes, exclusions and any machine/adapter boundary defect. |
+| Stop Conditions | Attachment needs new Bochs semantic code, selector recognition outside `bx-vdm`, a new BOP/provider behavior, foreign CRT input, historical product linkage, or an unregistered imported-source change. Preserve evidence and re-admit. |
+| Exit Criteria | A fresh bounded native BOP-form UD2 run proves the existing adapter composition transacts through the generic typed mechanics under MSVC x64 `/MT`; no continuous guest execution claim follows. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -163,10 +163,16 @@ mechanical bridge under the closed MSVC x64 modern runtime foundation.**
   instruction loop and reaches finite controlled stop under the same MSVC x64
   `/MT` closure, with no adapter/provider or product input; see [T198 S14
   witness](etc/research/t198-s14-msvc-x64-finite-hlt-witness-001.md).
-- M0 T198 S15 P1 is an unresolved mechanical observation: the x64 UD2 fixture
-  links the replacement exception and generic bridge but reaches the finite
-  watchdog rather than observing bridge STOP. It is not accepted as a BOP or
-  generic-UD success; see [T198 S15 observation](etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md).
+- M0 T198 S15 is complete: r6 repeats the neutral UD2 fixture under MSVC x64
+  `/MT` and observes the selector-blind copied-event bridge's typed controlled+  stop. Earlier r1--r5 observations are retained as rejected diagnostics;
+  no BOP/provider/OpenNT claim follows. See [T198 S15 observation](etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md)
+  and [closure](history/m0-t198-s15-closure-20260813.md).
+- M0 T198 S16 is complete: the retained boot-namespace composition and its
+  full session fixture now source-build, link and run as one MSVC x64 `/MT` C
+  closure. The only platform library is `bcrypt.lib`, required by the existing
+  CLI BYOB startup-contract model; no native-machine or historical runtime
+  object entered. See [T198 S16 witness](etc/research/t198-s16-msvc-x64-boot-namespace-composition-witness-001.md)
+  and [closure](history/m0-t198-s16-closure-20260813.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

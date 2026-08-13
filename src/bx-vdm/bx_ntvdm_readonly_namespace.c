@@ -7,6 +7,17 @@
 static const uint8_t bx_ntvdm_minimal_config_v1[] = "REM NTVDM64\r\n";
 static const uint8_t bx_ntvdm_empty_autoexec_v1[] = "";
 
+static int bx_ntvdm_readonly_namespace_v1_copy_path(wchar_t *destination,
+    size_t destination_count, const wchar_t *source)
+{
+    size_t length;
+    if (destination == 0 || source == 0 || destination_count == 0u) return 0;
+    length = wcslen(source);
+    if (length >= destination_count) return 0;
+    memcpy(destination, source, (length + 1u) * sizeof(*destination));
+    return 1;
+}
+
 int bx_ntvdm_readonly_namespace_v1_initialize(
     bx_ntvdm_readonly_namespace_v1 *value, const byob_image *command,
     const byob_profile_selection *selection)
@@ -22,13 +33,19 @@ int bx_ntvdm_readonly_namespace_v1_initialize(
     memset(value, 0, sizeof(*value));
     value->files[0].bytes = command->bytes;
     value->files[0].byte_count = command->byte_count;
-    wcscpy(value->files[0].path, selection->command_placement.path);
+    if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[0].path,
+            sizeof(value->files[0].path) / sizeof(value->files[0].path[0]),
+            selection->command_placement.path)) return 0;
     value->files[1].bytes = bx_ntvdm_minimal_config_v1;
     value->files[1].byte_count = sizeof(bx_ntvdm_minimal_config_v1) - 1u;
-    wcscpy(value->files[1].path, selection->config_file.path);
+    if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[1].path,
+            sizeof(value->files[1].path) / sizeof(value->files[1].path[0]),
+            selection->config_file.path)) return 0;
     value->files[2].bytes = bx_ntvdm_empty_autoexec_v1;
     value->files[2].byte_count = 0u;
-    wcscpy(value->files[2].path, selection->autoexec_file.path);
+    if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[2].path,
+            sizeof(value->files[2].path) / sizeof(value->files[2].path[0]),
+            selection->autoexec_file.path)) return 0;
     value->drive_index = selection->command_placement.drive_index;
     value->file_count = 3u;
     value->generation = BX_NTVDM_READONLY_NAMESPACE_TOKEN;
@@ -56,7 +73,8 @@ int bx_ntvdm_readonly_namespace_v1_append_target(
         value->files[3].path[0] != L'\0') return 0;
     value->files[3].bytes = target->bytes;
     value->files[3].byte_count = target->byte_count;
-    wcscpy(value->files[3].path, expected);
+    if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[3].path,
+            sizeof(value->files[3].path) / sizeof(value->files[3].path[0]), expected)) return 0;
     value->file_count = 4u;
     return 1;
 }
@@ -73,7 +91,8 @@ int bx_ntvdm_readonly_namespace_v1_append_terminal_quit(
         selection->declared_targets[1].placement.drive_index != value->drive_index) return 0;
     value->files[4].bytes = terminal_quit->bytes;
     value->files[4].byte_count = terminal_quit->byte_count;
-    wcscpy(value->files[4].path, L"\\QUIT.COM");
+    if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[4].path,
+            sizeof(value->files[4].path) / sizeof(value->files[4].path[0]), L"\\QUIT.COM")) return 0;
     value->file_count = 5u;
     return 1;
 }
