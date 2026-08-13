@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T190 S6 — COMMAND bootstrap one-shot observation.**
+**Active: M0 T191 S1 — post-bootstrap COMMAND-family inventory.**
 
-> **Governance correction:** The table below is the sole active packet. T188
-> and T189 are closed. Their retained S records are evidence, not concurrent
-> active packets.
+> **Governance correction:** The table below is the sole active packet. T188,
+> T189 and T190 are closed. Their retained S records are evidence, not
+> concurrent active packets.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T190 S6, Ordinary Mode. |
-| Admission And Approval | T190 S5 produced a complete manifest-bound bundle. Owner authorized evidence-led bounded execution with no retry and no capability expansion. |
-| Objective | Take exactly one 30-second frozen observation of the T190 bundle to determine whether the reached `54:02` now enters checked gather/complete/resume rather than the original #UD pass-through. |
-| Non-goals | No source/build change, retry, Bochs/guest change, host-environment exposure, device/config change, terminal-result transport, or claim of continuous execution. |
-| Reference Baseline | T190 S1--S5, existing one-shot controller, fixed CLI shim/profile/BYOB inputs. |
-| Files And ABI Surface | Existing runner/shim/controller, T190 immutable bundle and a new evidence root only. |
+| Identifier Mode | M0 T191 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized holistic BOP recovery. T190 closes the COMMAND bootstrap pair and its valid trace now supplies the post-bootstrap reached-service evidence. |
+| Objective | Inventory every reached COMMAND-family BOP after bootstrap, map each to the original dispatcher/owner/ABI/failure behavior, and group them into coherent provider slices. |
+| Non-goals | No source/build/runtime change, retry, Bochs/guest change, host capability, host-environment exposure, device/config action, terminal-result transport, or one-service implementation. |
+| Reference Baseline | T190 S6 trace, original `nt_bop.c`/`cmddisp.c`/COMMAND source, existing BOP catalogue and provider registry. |
+| Files And ABI Surface | Source/read-only maps, trace evidence, catalogue/registry records and status/evidence documentation only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One terminal `observation.json`, manifest/input hashes, trace inspection for `54:02`, documentation governance and `git diff --check`. |
-| Expected Markers | One gather/complete/resume transition or a bounded new failure fact; no second attempt. |
-| Asset Needs | Existing T190 bundle, runner/shim and fixed T184 BYOB inputs only. |
-| Reporting Requirements | Record exact exit/watchdog, first `54:02` neighborhood and limitations; distinguish successful entry from continuous execution. |
-| Stop Conditions | Any source/build change, retry, Bochs patch, new service/provider, device/config action, or need for detailed guest logging; pause for re-admission. |
-| Exit Criteria | One retained terminal observation with a source-backed disposition; no behavioral repair in this S. |
+| Verification | Trace-to-source inventory, original owner/failure map, catalogue/registry coverage scan, documentation governance and `git diff --check`. |
+| Expected Markers | Complete reached-family table with no unowned endpoint and an explicit grouped next-slice recommendation; no runtime claim. |
+| Asset Needs | Existing T190 trace and checked-in sources only; no new asset. |
+| Reporting Requirements | Separate original host provider, source-derived candidate, unavailable/deferred and machine-owner dispositions; reject per-service patching. |
+| Stop Conditions | Any source/build/runtime change, new Bochs patch, provider admission, device/config action or detailed guest logging; pause for a fresh S admission. |
+| Exit Criteria | Committed inventory/map or durable source evidence blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
