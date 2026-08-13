@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S32.** Its governing brief is the active
+> **Current effective packet: M0 T198 S33.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S32 -- retain the complete already-copied first generic
-`#UD` register/segment record, then classify its predecessor state.**
+**Active: M0 T198 S33 -- capture the bounded raw stack range for the first
+generic fault, then map only its candidate predecessor data.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S32, Ordinary Mode. |
-| Admission And Approval | S31 independently confirms the low-RAM mutation but cannot identify its predecessor. Its recorded follow-up authorizes test-local retention of the full preexisting copied generic event, which already contains all GPRs and segment values. |
-| Objective | At the first non-BOP generic `#UD`, copy the complete fixed-width event into test-local storage, report registers and segments with the terminal RAM snapshot, and classify the likely predecessor-state evidence without guest-memory access. |
-| Non-goals | No BOP/provider implementation or interpretation, guest-memory read/write, guest-image patch, CPU/core/mantle semantic change, new runtime ABI, device/plugin/firmware/VGA enablement, production CLI surface, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S29 generic event, S30 aperture audit, S31 terminal snapshot, and the existing `bx_ntvdm_generic_ud_event_v1` fixed-width copied ABI. |
-| Files And ABI Surface | Existing exact test bridge/fixture plus evidence and Status only. The test makes a value copy of the already-copied event; production source and ABI are unchanged. |
+| Identifier Mode | M0 T198 S33, Ordinary Mode. |
+| Admission And Approval | S32 captures a deterministic first-fault stack pointer `00A7:090A`, physical `0x137A`, and recommends a small raw stack snapshot before any source repair or guest interpretation. The owner-approved continuing T198 objective admits that direct trace step. |
+| Objective | Configure the existing default-off opaque mantle snapshot for a 32-byte ordinary-RAM range surrounding physical `0x137A`, record the bytes at typed generic stop, and map only candidate return/frame values against the original source layout. |
+| Non-goals | No BOP/provider implementation or interpretation, guest-memory write, guest-image patch, CPU/core/mantle production semantic change, new ABI, device/plugin/firmware/VGA enablement, production CLI surface, legacy linkage, or DOS continuity claim. |
+| Reference Baseline | S29 generic event, S31 snapshot mechanic, S32 full copied state, exact source-built NTIO/NTDOS fixture. |
+| Files And ABI Surface | Existing exact test fixture and evidence/Status only. It reuses the S31 mantle capture API with opaque address/length; no production source changes are admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` rebuild/link and exact CPU5 run; prove the bridge event value copy is valid, reports the identical `0000:0A84` event and is not retained by pointer. Review test-only diff and production-boundary scan. |
-| Expected Markers | Complete GPR/segment record, unchanged copied window/vector, prior-drive bit, typed stop, source/terminal snapshot correlation, and zero production-source change. |
+| Verification | MSVC x64 `/MT` rebuild/link and exact CPU5 run; verify the captured terminal range encloses the raw physical stack pointer and record its bytes. Map values only after an explicit source/layout comparison. Review test-only diff and production-boundary scan. |
+| Expected Markers | `0x137A`-enclosing opaque snapshot, unchanged copied event and typed stop, candidate raw stack words, source mapping or explicit inconclusiveness, and zero production-source change. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record complete copied values, exact commands, what they prove or do not prove about predecessor state, and an owner-correct successor recommendation. |
-| Stop Conditions | Capture needs guest-memory access, a CPU/device change, an ABI change, or BOP/service interpretation. Preserve evidence and re-admit. |
-| Exit Criteria | One exact run captures a valid full copied event alongside the S31 terminal snapshot and produces a source-backed next trace/audit direction with no production change. |
+| Reporting Requirements | Record requested range, exact bytes, arithmetic from copied SS:SP, source mapping confidence, limitations, and successor recommendation. |
+| Stop Conditions | The stack range changes nondeterministically, capture needs guest-memory access beyond the existing mantle mechanic, a CPU/device change, ABI change, or BOP/service interpretation. Preserve evidence and re-admit. |
+| Exit Criteria | One exact run captures the raw range around the copied fault stack and produces either a source-backed predecessor candidate or an explicit need for a different owner-correct trace, with no production change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -283,6 +283,11 @@
   `0x137A`), separate DS/ES state, and the same all-FF window/snapshot. The
   next evidence target is the raw stack range, not a device or service. See
   [S32 state](etc/research/t198-s32-first-generic-event-state-001.md).
+- M0 T198 S33 captures the raw stack range around that pointer:
+  `00A7 090E FFFF BF1F 0046 4D58 9346 76F6`. It proves a nonempty stack but
+  cannot safely label a return pair; next is a read-only audit for existing
+  selector-blind native instruction-history facilities. See
+  [S33 stack](etc/research/t198-s33-first-generic-stack-snapshot-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
