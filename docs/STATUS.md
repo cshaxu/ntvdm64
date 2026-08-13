@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T188 S1 — BOP ingress consumer closure map.**
+**Binding active packet: M0 T188 S2 — adapter-plane predicate audit.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T188 S1**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T188 S2**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T188 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorization permits autonomous task sequencing. T187 S4 proves the passive listener passes `54:0C` to native #UD because the current generic consumer is disabled; T188 is admitted as the medium-sized common-ingress recovery package. |
-| Objective | Produce a source-and-build closure map that selects exactly one generic, selector-blind BOP consumer path from #UD request through existing adapter transaction/result handling to checked CPU resume. |
-| Non-goals | No source/build change, guest observation, selector-specific interceptor, provider/DOS/COMMAND semantic change, host capability, device enablement, or normal DOS completion claim. |
-| Reference Baseline | T187 S4 immutable listener trace and T188 operation plan; current `exception.cc` nests both startup dispatch and CPU-result bridge beneath `BX_NTVDM_ENABLE_STARTUP_TRANSACTION`. |
-| Files And ABI Surface | `docs/etc/research/t188-s1-*` and the T188 operation plan only; read-only review of `exception.cc`, adapter bridge headers/source and retained engine manifest. |
+| Identifier Mode | M0 T188 S2, Ordinary Mode. |
+| Admission And Approval | S1 source closure corrects the T187 narrow inference: the enabled generic interceptor already routes `54:0C` into adapter runtime and returns pass-through. Owner authorization permits autonomous sequencing; S2 audits that existing adapter-plane decline without a guest run. |
+| Objective | Determine whether an unchanged, focused fixture can distinguish provider availability, COMMAND plane gate, boot-file preparation and multi-write queue failure for the current `54:0C/0D` route. |
+| Non-goals | No Bochs change, macro/build change, guest observation, condition reordering, selector-specific ingress, provider/DOS/COMMAND semantic change, host capability or normal DOS completion claim. |
+| Reference Baseline | T187 S1 rejected an in-route predicate split as behavior-changing; T188 S1 selects the currently enabled generic interceptor and identifies the v2 chain as the actual pass-through owner. |
+| Files And ABI Surface | Focused adapter test/evidence only, if an existing public function surface permits it; no Bochs, CLI or production adapter source. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Cite exact preprocessor nesting, function/object dependencies, request/result ABI records and retained engine makefile; run documentation inventory/governance and `git diff --check`. |
-| Expected Markers | A selected common consumer, rejected alternatives, required macro/object closure and explicit negative selector/provider ownership statement. |
-| Asset Needs | Current source tree and the T187/T186 retained evidence; no new source, fixture, toolchain or runtime input. |
-| Reporting Requirements | Record why listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition are or are not candidates. State whether a source-shaped seam is necessary before any build. |
-| Stop Conditions | Any decision to enable a macro, change Bochs/adapter source, build, observe, alter a provider or select a selector-specific path; these require S2 admission. |
-| Exit Criteria | A durable closure map selects one generic ingress candidate and its minimal proposed build surface, or evidence proves no candidate exists; no source/build/runtime action. |
+| Verification | Exercise only existing public provider/session functions against fixed copied inputs, or record why their state cannot be observed without changing behavior; run focused test(s), documentation inventory/governance and `git diff --check`. |
+| Expected Markers | One disposition per predicate; explicit proof that fixture sequencing neither reorders nor duplicates the runtime compound expression. |
+| Asset Needs | Existing adapter test harness and T184 v5 fixed input facts; no new runtime, profile, source or Bochs build input. |
+| Reporting Requirements | State whether a source-preserving test can identify the decline. If not, reject instrumentation and transfer only a justified default-off diagnostic candidate. |
+| Stop Conditions | Any production source edit, test that reinvokes/reorders a stateful predicate, Bochs/CLI change, build/guest run or provider semantic change; pause for S3 admission. |
+| Exit Criteria | A source-preserving predicate result or a durable infeasibility proof with one precise successor seam; no runtime invocation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 

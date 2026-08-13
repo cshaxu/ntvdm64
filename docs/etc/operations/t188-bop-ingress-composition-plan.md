@@ -9,9 +9,9 @@ T188 recovers one coherent, generic BOP ingress path from Bochs #UD through the 
 | S | Result | Gate before next S |
 | --- | --- | --- |
 | S1 | Source/build closure map for #UD consumers, macros, objects, transactions and negative paths. | One generic consumer selected; no source change. |
-| S2 | Default-off source-shaped seam for only that common consumer. | Static proof that Bochs has no selector/service knowledge. |
-| S3 | Narrow MSVC derivative with only required objects. | Reproducible manifest, hashes and negative checks. |
-| S4 | One watchdog-bounded proof of consumption or durable pre-execution failure. | No retry; classify transaction/result/continuation separately. |
+| S2 | No-runtime adapter-plane predicate audit for the selected ingress. | One source-preserving fixture identifies or proves inability to identify the declining predicate. |
+| S3 | If and only if S2 produces a source-preserving contract, admit the smallest necessary adapter-side test or default-off diagnostic seam. | Static boundary proof; no selector knowledge in Bochs. |
+| S4 | If a changed engine is still necessary, build the narrowest derivative and make one watchdog-bounded observation. | No retry; classify transaction/result/continuation separately. |
 | S5 | Closure audit and next-boundary disposition. | No completion, host-drive, device or terminal-result claim. |
 
 ## Invariants
