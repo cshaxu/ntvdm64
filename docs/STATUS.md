@@ -94,6 +94,10 @@ ingress and registry without attaching a provider runtime.**
   physically removed from core.  Fresh CPU5 r3 source-builds the minimal
   fixture and traverses `UD2` through the fixed bridge to native controlled
   stop; see [T198 S5 P3 physical cleanup witness](etc/research/t198-s5-p3-physical-core-cleanup-witness-001.md).
+- M0 T198 S6 P1 is complete: the alternative `bx-vdm` bridge converts the
+  copied generic record through common ingress and provider registry while
+  declining every outcome.  Its UCRT64 C-island test covers one mapped entry
+  and three negative routes; see [T198 S6 ingress bridge witness](etc/research/t198-s6-global-ingress-bridge-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

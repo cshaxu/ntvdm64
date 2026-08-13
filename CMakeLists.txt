@@ -223,6 +223,24 @@ add_executable(bx-ntvdm-dem-provider-v1-test EXCLUDE_FROM_ALL
 target_include_directories(bx-ntvdm-dem-provider-v1-test PRIVATE src/bx-vdm)
 target_compile_features(bx-ntvdm-dem-provider-v1-test PRIVATE c_std_11)
 
+# T198 S6: this alternative bridge implementation classifies a copied machine
+# event through the common ingress/registry only. It has no provider/session
+# object and is never linked with the default finite-mantle bridge.
+add_executable(bx-ntvdm-vdm-generic-ud-bridge-v1-test EXCLUDE_FROM_ALL
+    src/bx-vdm/bx_ntvdm_cpu_state_abi.c
+    src/bx-vdm/bx_ntvdm_instruction_window_abi.c
+    src/bx-vdm/bx_ntvdm_exception_abi.c
+    src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
+    src/bx-vdm/bx_ntvdm_cpu_result_v2.c
+    src/bx-vdm/bx_ntvdm_bop_ingress_v1.c
+    src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c
+    tests/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1_test.c
+)
+target_include_directories(bx-ntvdm-vdm-generic-ud-bridge-v1-test PRIVATE
+    src/bx-vdm src/bx-mantle)
+target_compile_features(bx-ntvdm-vdm-generic-ud-bridge-v1-test PRIVATE c_std_11)
+
 add_executable(bx-ntvdm-dem-drive-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_cpu_state_abi.c
     src/bx-vdm/bx_ntvdm_instruction_window_abi.c
