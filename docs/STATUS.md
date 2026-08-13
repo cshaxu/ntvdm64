@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S18.** Its governing brief is the active
+> **Current effective packet: M0 T198 S19.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S18 -- establish a native transaction matrix for the
-already implemented boot-namespace BOP plane.**
+**Active: M0 T198 S19 -- map the first original guest-entry transaction before
+admitting its provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ already implemented boot-namespace BOP plane.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S18, Ordinary Mode. |
-| Admission And Approval | S17 closes the first real `54:0C` native transaction. The owner objective requires global BOP-plane progress rather than per-service ad hoc growth; this S exercises the already admitted boot-namespace plane as one family. |
-| Objective | Map and execute the existing COMMAND boot-file and DEM readonly/search transaction paths through the native bridge where their current copied-CPU/guest-memory preconditions can be constructed; classify any remaining precondition as an explicit plane gap rather than adding a service hack. |
-| Non-goals | No new selector, provider, host filesystem, CLI engine, OpenNT import, Bochs semantic change, device enablement or per-service bypass. |
-| Reference Baseline | T198 S10 plane coverage, S16 x64 composition, and S17 native `54:0C` transaction. |
-| Files And ABI Surface | Existing `bx-vdm` boot-namespace composition/plane/provider and tests; existing finite runner, generic copied bridge and mechanical action only. No ABI revision. |
+| Identifier Mode | M0 T198 S19, Ordinary Mode. |
+| Admission And Approval | S18 closes native coverage of the entire already implemented boot-namespace plane. The owner objective requires a CLI-based, non-invasive NTVDM with global BOP structure; the next required first-profile boundary is original DEM `50:11` (`demLoadDos`), whose original composition is known unavailable. |
+| Objective | Establish an evidence-complete source/object/guest-image map for the first original NTDOS guest-entry transaction: its exact BOP ABI, destination and publication semantics, NTDOS artifact identity, original-provider dependencies, and admissible source-derived provider boundary. Classify every dependency as reusable original input, contained replacement, or unavailable; do not implement until that map is closed. |
+| Non-goals | No new selector/service handler, host filesystem, CLI engine, OpenNT runtime import, Bochs semantic change, device enablement, image publication, or synthetic DOS startup. |
+| Reference Baseline | T198 S18 native matrix; `first-owner-transaction-closure-audit.md`; original `demLoadDos` source and the current source-built artifact inventory. |
+| Files And ABI Surface | `src/opennt` source/artifact records, `bx-vdm` BOP catalogue/contracts, and new evidence only. No runtime ABI revision or source implementation. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source map plus MSVC x64 native fixtures and existing C plane tests; record exact selector/service, required copied reads/writes, direct result and native disposition for each selected endpoint. |
-| Expected Markers | A compact service matrix distinguishing native-proven endpoints, source-tested-only endpoints and explicit missing guest preconditions; no unknown behavior is reported as success. |
+| Verification | Reconcile `nt_bop.c`, `demdisp.c`, `demmisc.c`, BOP/DOS service headers, guest artifact inventory and prior closure records; independently enumerate original link/lifecycle inputs and compare them against the four-layer architecture. |
+| Expected Markers | One source-cited transaction map that distinguishes original guest payload, original host composition, contained input capability, adapter mechanical contract, and explicit unavailable dependencies; no direct `demLoadDos` call is represented as an admissible runtime path. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record endpoint matrix, exact fixtures and preconditions, x64 source/object closure, action/result evidence and exclusions. |
-| Stop Conditions | A candidate requires new provider semantics, a Bochs/core change, host capability, foreign CRT or unrecorded guest ABI. Preserve evidence and re-admit. |
-| Exit Criteria | The full already implemented boot-namespace plane has a native/source-test/deferred classification with reproducible evidence and no semantic migration. |
+| Reporting Requirements | Record source paths, artifact provenance/classification, guest destination/size semantics, link/lifecycle dependencies, rejection rationale, and the smallest next-provider admission boundary. |
+| Stop Conditions | The map relies on an unrecorded binary, proposes direct legacy runtime linkage, requires a Bochs/core change, exposes host paths, or cannot distinguish historical behavior from a proposed contained replacement. Preserve evidence and re-admit. |
+| Exit Criteria | A reviewable first-guest-entry map names the next provider's immutable input, checked guest-RAM action/result shape, failure disposition, original-source fidelity limits, and all rejected composition dependencies. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
