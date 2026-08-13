@@ -2,47 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T189 S4 — two-object diagnostic derivative build.**
+**Active: M0 T189 S6 — closure audit and next-boundary source map.**
 
-**Active: M0 T189 S3 — two-object diagnostic derivative closure.**
-
-**Active: M0 T189 S2 — adapter first-failure diagnostic closure.**
-
-**Active: M0 T188 S9 — one-shot observation-controller closure.**
-
-**Active: M0 T188 S10 — one frozen copied-state observation.**
-
-**Active: M0 T189 S1 — v5 runtime-predicate source map.**
-
-**Binding active packet: M0 T188 S8 — two-object derivative build.**
-
-**Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
-
-> **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T188 S8**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
-> files are historical evidence locators and do not allocate a current task;
-> the active packet is defined only by the table below.
-> S8 is closed; the binding packet is now M0 T188 S9. The retained S8 banner
-> above is not an active-packet allocation.
-> S9 is closed; M0 T188 S10 below is the sole active implementation brief.
+> **Governance correction:** The table below is the sole active packet. T188
+> is closed. T189 S1--S5 are complete, retained evidence/implementation
+> deliveries; they are not concurrent active packets.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T189 S4, Ordinary Mode. |
-| Admission And Approval | T189 S1 proves an unobservable compound-chain decline. Owner authorization for registered Bochs intrusions and adapter work permits one fixed-width first-failure diagnostic. |
-| Objective | Compile only the two declared objects and link the frozen diagnostic derivative. |
-| Non-goals | No guest runtime, retry, archive/device/config rebuild, source change or semantic expansion. |
-| Reference Baseline | T189 S1 map and BX-TRACE-060. |
-| Files And ABI Surface | Adapter diagnostic state, existing generic Bochs trace, exception register and focused tests only. |
+| Identifier Mode | M0 T189 S6, Ordinary Mode. |
+| Admission And Approval | Owner authorized evidence-led holistic BOP recovery. T189 S5 proves that `54:0C` succeeds when its command-service and provider objects join the four-object derivative, and that the prior decline was stale-object composition rather than a proved source/Bochs defect. |
+| Objective | Audit the completed T189 chain, map the next reached unresolved BOP boundary to its original OpenNT owner, and prepare the bounded next implementation brief. |
+| Non-goals | No source or Bochs change, provider capability, guest-memory access, trace run, retry, archive/device/config rebuild, or terminal-result transport. |
+| Reference Baseline | T189 S1--S5 evidence, notably the committed `54:0C` write in the S5 frozen observation. |
+| Files And ABI Surface | Source/read-only owner map, evidence/status/history records, and queue/TODO disposition only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused adapter and static Bochs-boundary tests, diff review, documentation inventory/governance and `git diff --check`. |
-| Expected Markers | A fixed category value copied after pass-through, unchanged lifecycle/result/queue state, and no forbidden data terms in the trace. |
-| Asset Needs | Existing adapter/Bochs sources and BX-TRACE-060 only; no guest asset. |
-| Reporting Requirements | Record every category and the omitted data, then state that a separate build/run admission is required. |
-| Stop Conditions | Any semantic dispatch change, new BOP recognizer, guest-memory access, category needing detailed data, or runtime action; pause for re-admission. |
-| Exit Criteria | Source/static closure of the fixed diagnostic or durable rejection; no build/runtime action. |
+| Verification | Exact source-path/owner/failure map, documentation inventory/governance, `git diff --check`, and review against the T189 closure facts. |
+| Expected Markers | One source-backed next-boundary disposition with its missing composition edge or explicit unavailability; no runtime claim. |
+| Asset Needs | Existing OpenNT and adapter source plus T189 retained evidence; no new asset. |
+| Reporting Requirements | State whether T189 can close, what evidence transfers, and whether the queue candidate is admissible; preserve rejected expansion paths. |
+| Stop Conditions | Any need for source change, runtime observation, new Bochs patch, or a new provider; pause for a fresh S admission. |
+| Exit Criteria | T189 closure audit or durable evidence that an additional bounded T189 S is necessary. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
@@ -50,6 +32,11 @@
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
   capability and full real-path closure remain uncompleted.
+- M0 T189 S5 is complete: the four-object source closure proves that the
+  previous `54:0C` preparation decline came from stale retained provider and
+  command-service objects, not a proven OpenNT or Bochs defect.  The valid
+  frozen run commits the existing boot-file transaction and reaches controlled
+  stop; it does not claim continuous execution.
 - T96 S1 P1 is complete locally: all inventoried selector, service, and BIOS
   forms now have source routing/owner evidence without an enabled provider.
 - Bochs remains generic-machine owner. The adapter owns a bounded copied BOP
@@ -90,6 +77,7 @@
 | Scope | Compact result |
 | --- | --- |
 | M0 T95 | Closed/replanned; closure facts, transferred backlog, and limitations are in history/m0-t95-closure-20260811.md. |
+| M0 T189 S5 | Complete: four-object derivative and one manifest-bound observation commit `54:0C` and reach controlled stop; S6 is source-only audit. |
 | M0 T96 S1 P1 | Complete static BOP selector/service/BIOS provider and module map; local commit pending because no Git remote is configured. |
 | M0 T96 S2 P1--P2 | Complete shared ingress, typed pass-through gate, and provider selection registry; legacy endpoint migration remains S8. |
 | M0 T96 S3 | Complete: all 73 callable DEM services have a component/disposition, and every admitted DEM slice is plane-gated; legacy runtime migration remains S8. |

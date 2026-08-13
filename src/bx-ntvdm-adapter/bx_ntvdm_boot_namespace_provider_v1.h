@@ -26,6 +26,17 @@ int bx_ntvdm_boot_namespace_provider_v1_initialize(
 int bx_ntvdm_boot_namespace_provider_v1_valid(
     const bx_ntvdm_boot_namespace_provider_v1 *value);
 
+/* Preserves the provider boundary while exposing the subordinate source
+ * condition group to same-island diagnostics. */
+int bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(
+    const bx_ntvdm_boot_namespace_provider_v1 *value,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_multi_write_transaction_v1 *transaction,
+    uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD],
+    bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 *diagnostic);
+
 int bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(
     const bx_ntvdm_boot_namespace_provider_v1 *value,
     const bx_ntvdm_exception_event_v1 *event,

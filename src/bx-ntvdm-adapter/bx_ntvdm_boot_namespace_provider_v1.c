@@ -31,15 +31,27 @@ int bx_ntvdm_boot_namespace_provider_v1_initialize(
     return bx_ntvdm_boot_namespace_provider_v1_valid(value);
 }
 
+int bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(
+    const bx_ntvdm_boot_namespace_provider_v1 *value,
+    const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_multi_write_transaction_v1 *transaction,
+    uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD],
+    bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 *diagnostic)
+{
+    if (diagnostic == 0 || !bx_ntvdm_boot_namespace_provider_v1_valid(value)) return 0;
+    return bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(&value->readonly_namespace,
+        event, cpu_before, window, transaction, payload, diagnostic);
+}
+
 int bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(
     const bx_ntvdm_boot_namespace_provider_v1 *value,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu_before,
     const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_multi_write_transaction_v1 *transaction,
     uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD])
 {
-    return bx_ntvdm_boot_namespace_provider_v1_valid(value) &&
-        bx_ntvdm_cmd_boot_file_service_v1_prepare(&value->readonly_namespace, event, cpu_before,
-            window, transaction, payload);
+    bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 diagnostic;
+    return bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(value, event,
+        cpu_before, window, transaction, payload, &diagnostic);
 }
 
 int bx_ntvdm_boot_namespace_provider_v1_prepare_open(

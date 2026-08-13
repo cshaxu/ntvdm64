@@ -25,6 +25,7 @@ int main(void)
     bx_ntvdm_guest_read_action_v1 action;
     bx_ntvdm_bulk_result_transaction_v1 bulk;
     bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 boot_file_diagnostic;
     uint32_t token;
 
     wcscpy(selection.command_placement.path, L"\\COMMAND.COM");
@@ -47,9 +48,18 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x1000u; cpu.edx = 0x20u;
     window_for(&window, 0x54u, 0x0cu);
-    if (!bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(&provider, &event, &cpu,
-        &window, &writes, payload) || writes.writes.write_count != 1u ||
+    if (!bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(&provider, &event,
+        &cpu, &window, &writes, payload, &boot_file_diagnostic) ||
+        boot_file_diagnostic != BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_ACCEPTED ||
+        writes.writes.write_count != 1u ||
         writes.writes.writes[0].byte_count != sizeof("C:\\CONFIG.SYS")) return 2;
+
+    event.vector = 5u;
+    if (bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(&provider, &event,
+        &cpu, &window, &writes, payload, &boot_file_diagnostic) ||
+        boot_file_diagnostic != BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_CONTRACT)
+        return 7;
+    event.vector = 6u;
 
     cpu.esi = 0x40u; window_for(&window, 0x50u, 0x12u);
     if (!bx_ntvdm_boot_namespace_provider_v1_prepare_open(&provider, &event, &cpu,

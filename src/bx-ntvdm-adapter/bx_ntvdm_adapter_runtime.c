@@ -92,6 +92,33 @@ typedef struct bx_ntvdm_adapter_runtime_v1 {
 
 static bx_ntvdm_adapter_runtime_v1 bx_ntvdm_adapter_runtime;
 
+static uint32_t bx_ntvdm_adapter_runtime_v1_boot_file_diagnostic(
+    bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 value)
+{
+    switch (value) {
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_ARGUMENT:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_ARGUMENT;
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_EVENT:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_EVENT;
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_CPU:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_CPU;
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_WINDOW:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_WINDOW;
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_CONTRACT:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_CONTRACT;
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_NAMESPACE:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_NAMESPACE;
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_PATH:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_PATH;
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_TRANSACTION:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_TRANSACTION;
+    case BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_ACCEPTED:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_ACCEPTED;
+    default:
+        return BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_ARGUMENT;
+    }
+}
+
 /* The original DEM dispatcher reserves eight table slots for the one shared
  * demNotYetImplemented outcome.  This helper deliberately derives the owner
  * through the common ingress/registry/plane path before offering that whole
@@ -544,15 +571,20 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
     }
     {
         bx_ntvdm_multi_write_transaction_v1 transaction;
+        bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 diagnostic;
         int boot_file = bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0cu) ||
             bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0du);
         if (boot_file) {
             if (!bx_ntvdm_adapter_runtime.has_boot_namespace_provider) {
                 bx_ntvdm_adapter_runtime.boot_file_diagnostic = BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_PROVIDER;
-            } else if (!bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(
-                    &bx_ntvdm_adapter_runtime.boot_namespace_provider, event, cpu_before,
-                    window, &transaction, bx_ntvdm_adapter_runtime.multi_write_payload)) {
-                bx_ntvdm_adapter_runtime.boot_file_diagnostic = BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_PREPARE;
+            } else if (!bx_ntvdm_boot_namespace_provider_v1_valid(
+                    &bx_ntvdm_adapter_runtime.boot_namespace_provider)) {
+                bx_ntvdm_adapter_runtime.boot_file_diagnostic = BX_NTVDM_ADAPTER_BOOT_FILE_DIAGNOSTIC_V1_PROVIDER_INVALID;
+            } else if (!bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(
+                    &bx_ntvdm_adapter_runtime.boot_namespace_provider, event, cpu_before, window,
+                    &transaction, bx_ntvdm_adapter_runtime.multi_write_payload, &diagnostic)) {
+                bx_ntvdm_adapter_runtime.boot_file_diagnostic =
+                    bx_ntvdm_adapter_runtime_v1_boot_file_diagnostic(diagnostic);
             } else if (!bx_ntvdm_host_session_v1_queue_multi_write(
                     &bx_ntvdm_adapter_runtime.session, &transaction,
                     bx_ntvdm_adapter_runtime.multi_write_payload, transaction.writes.payload_bytes)) {
