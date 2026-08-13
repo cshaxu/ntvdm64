@@ -13,11 +13,11 @@ $build = [IO.Path]::GetFullPath($BuildRoot)
 if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build root: $build" }
 $vsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $coreProbe = Join-Path $repository 'tools\Invoke-T197S6MinimalMachineLinkProbe.ps1'
-$legacyCompile = Join-Path $repository 'artifacts\build\t198-s25-command-launch-r2\compile.cmd'
 $legacyResponse = Join-Path $repository 'artifacts\build\t198-s25-native-command-r1\link.rsp'
+$compositionManifest = Join-Path $repository 'tools\t198-s50-bx-vdm-composition-manifest.json'
 $ntioBytes = Join-Path $repository 'artifacts\build\t198-s23-native-ntio-r1\ntio_bytes.cc'
 $ntdosBytes = Join-Path $repository 'artifacts\build\t198-s25-native-ntdos-r1\ntdos_bytes.cc'
-foreach ($input in @($vsDevCmd, $coreProbe, $legacyCompile, $legacyResponse, $ntioBytes, $ntdosBytes)) {
+foreach ($input in @($vsDevCmd, $coreProbe, $legacyResponse, $compositionManifest, $ntioBytes, $ntdosBytes)) {
     if (-not (Test-Path -LiteralPath $input)) { throw "Required S48 input missing: $input" }
 }
 
@@ -35,12 +35,20 @@ try {
 } finally { $env:CL = $savedCl }
 
 $compileLog = Join-Path $build 'compile.log'
-$providerBatch = Join-Path $build 'compile-providers.cmd'
 $oldProviderRoot = Join-Path $repository 'artifacts\build\t198-s25-command-launch-r2\obj'
-$providerLines = Get-Content -LiteralPath $legacyCompile | ForEach-Object { $_.Replace($oldProviderRoot, (Join-Path $build 'obj')) }
-$providerLines | Set-Content -LiteralPath $providerBatch -Encoding ascii
-& cmd.exe /d /s /c ('"' + $providerBatch + '"') 2>&1 | Tee-Object -LiteralPath $compileLog
-if ($LASTEXITCODE -ne 0) { throw "S48 provider recompilation failed: $LASTEXITCODE" }
+$composition = Get-Content -LiteralPath $compositionManifest -Raw | ConvertFrom-Json
+if ($composition.schema -ne 'ntdos64.t198.s50.bx-vdm-composition.v1') { throw 'Unexpected S50 composition manifest schema' }
+$providerSources = @($composition.compileSources | ForEach-Object {
+    Join-Path $repository $_.Replace('/', '\\')
+})
+foreach ($sourcePath in $providerSources) {
+    if (-not (Test-Path -LiteralPath $sourcePath)) { throw "S50 composition source missing: $sourcePath" }
+    $source = Get-Item -LiteralPath $sourcePath
+    $object = Join-Path $build ('obj\' + [IO.Path]::GetFileNameWithoutExtension($source.Name) + '.obj')
+    $providerCommand = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 /I "' + (Join-Path $repository 'src') + '" /I "' + (Join-Path $repository 'src\cli') + '" /I "' + (Join-Path $repository 'src\bx-vdm') + '" /I "' + (Join-Path $repository 'src\bx-mantle') + '" /Fo"' + $object + '" "' + $source.FullName + '"'
+    & cmd.exe /d /s /c $providerCommand 2>&1 | Tee-Object -FilePath $compileLog -Append
+    if ($LASTEXITCODE -ne 0) { throw "S50 provider source compile failed: $($source.Name)" }
+}
 
 $config = Join-Path $build 'native-core\config.h'
 $includes = @('src', 'src\bochs', 'src\bochs\instrument\stubs', 'src\bx-core', 'src\bx-core\cpu', 'src\bx-mantle', 'src\bx-vdm', 'src\cli') | ForEach-Object { '/I "' + (Join-Path $repository $_) + '"' }
