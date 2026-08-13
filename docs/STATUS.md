@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T188 S7 — derivative closure audit.**
+**Binding active packet: M0 T188 S8 — two-object derivative build.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T188 S7**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T188 S8**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T188 S7, Ordinary Mode. |
-| Admission And Approval | S6 source/static closure implements BX-TRACE-060 without behavior change. Owner authorization permits autonomous sequencing; S7 audits only the exact object/CRT closure required to incorporate its existing adapter diagnostic API into a derivative. |
-| Objective | Establish whether the current frozen engine can replace only `cpu/exception.o` and the one adapter runtime object needed by the new API, without archive or full product rebuild. |
-| Non-goals | No source change, archive/device/config/full build, guest observation, CLI change, provider/DOS/COMMAND semantic change, host capability or completion claim. |
-| Reference Baseline | T187 S3 r5 engine rebuilt only `exception.o`; T188 S4 adds the API symbol to adapter runtime; all other T187 closure inputs remain retained candidates. |
-| Files And ABI Surface | Build-manifest/audit evidence and, only if already supported by a generator dry-run, a proposed derivative makefile; no compilation or runtime action. |
+| Identifier Mode | M0 T188 S8, Ordinary Mode. |
+| Admission And Approval | S7 r3 proves an exact two-object MSVC `/MT` derivative closure. Owner authorization permits autonomous sequencing; S8 admits only that fixed compilation/link command. |
+| Objective | Build the r3 derivative by compiling only `cpu/exception.o` and `adapter/bx_ntvdm_adapter_runtime.obj`, then link the declared final engine. |
+| Non-goals | No source change, additional object/archive/device/config/full build, guest observation, CLI change, provider/DOS/COMMAND semantic change, host capability or completion claim. |
+| Reference Baseline | T188 S7 r3 manifest and makefile; BX-TRACE-060 source/static closure. |
+| Files And ABI Surface | `artifacts/build/current/t188-copied-state-derivative-r3` outputs and build evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare source symbol references against r5 retained object map/makefile and toolchain/CRT records; documentation inventory/governance and `git diff --check`. |
-| Expected Markers | Exact required object list, retained-input hashes, compatibility finding and explicit rejection of archive/full build alternatives. |
-| Asset Needs | T187 r5 manifest/map/makefile and current adapter object/source records; no compiler/runtime input. |
-| Reporting Requirements | State whether replacement needs a compatible adapter object and whether the existing makefile can compile it without changing the build island. |
-| Stop Conditions | Any compilation, extra object/archive, toolchain/CRT uncertainty that cannot be evidenced, or guest action; require S8 admission after a positive closure. |
-| Exit Criteria | A reproducible narrow build plan or durable build infeasibility proof; no compilation or runtime action. |
+| Verification | One MSVC x86 command; verify output/map hashes, object targets and build log; documentation inventory/governance and `git diff --check`. |
+| Expected Markers | Exactly two object compilations, final engine/map, retained warnings only if present and no archive/device/config target. |
+| Asset Needs | r3 root and installed MSVC x86 environment; no guest artifact. |
+| Reporting Requirements | Record command, toolchain result, hashes and any warning; link success does not claim runtime behavior. |
+| Stop Conditions | Any extra build target, source repair, link-model change, unresolved ABI/toolchain mismatch or guest action; S9 only after a closed build. |
+| Exit Criteria | Exact two-object derivative build or durable build failure; no runtime invocation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 
