@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S23 — one drive-snapshot v6 observation.**
+**Active: M0 T194 S24 — reached DPB source-contract audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S23, Ordinary Mode. |
-| Admission And Approval | S22 assembles the S21 engine and retained ROMs as one hash-verified fixed bundle. This S admits one controller invocation only. |
-| Objective | Retain one watchdog-bounded observation that verifies whether snapshot-backed `50:0F` resumes and whether execution reaches `54:11`. |
-| Non-goals | No retry, source/build/controller/bundle/profile/root change, Bochs patch/build/config/device action, BOP/provider semantic expansion, terminal-result transport, host queue/process broker, or claim beyond actual markers. |
-| Reference Baseline | S13 root, S15 CLI pair, S20 runtime proof and S22 immutable bundle. |
-| Files And ABI Surface | Existing controller, S15 runner/shim, S22 bundle, S13 root and one new immutable evidence directory only. |
+| Identifier Mode | M0 T194 S24, Ordinary Mode. |
+| Admission And Approval | S23 proves `50:0F` resumes and reaches `50:46`, but never `54:11`. This S admits source/trace interpretation only. |
+| Objective | Establish the original OpenNT `DemGetDPBList` contract, caller continuation and existing multi-write provider disposition before considering any change or observation. |
+| Non-goals | No run/retry, source/build/controller/bundle/profile/root change, Bochs patch/build/config/device action, BOP/provider implementation, filesystem/DPB device expansion, terminal-result transport, or claim beyond source/trace facts. |
+| Reference Baseline | S23 trace, T96 inventory, existing `50:46` source-derived multi-write records and imported OpenNT source. |
+| Files And ABI Surface | Read-only OpenNT/adapter source and evidence; one research record and Status only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One existing controller invocation with empty evidence root and 15-second watchdog; inspect immutable inputs/outcome/log hashes and exact marker sequence; documentation governance and `git diff --check`. |
-| Expected Markers | Exactly one evidence root, `retryPolicy=none`, watchdog classification, and observed BOP/commit/pass-through markers. |
-| Asset Needs | Existing controller, S15 pair, S22 bundle and S13 root only. |
-| Reporting Requirements | Exact hashes, exit/watchdog facts, `50:0F` disposition, `54:11` presence/absence, and no completion claim absent evidence. |
-| Stop Conditions | Missing/mismatched hash, controller rejection, second attempt, source/build/controller/bundle/profile mutation, Bochs/adapter/provider change or retry; pause for a fresh S admission. |
-| Exit Criteria | Committed one-run evidence and truthful classification. |
+| Verification | Source definition/dispatch/caller and existing provider/multi-write seam audit; documentation governance and `git diff --check`. |
+| Expected Markers | Source path/owner/result-write/continuation map and an admitted next action or blocker. |
+| Asset Needs | Existing imported source and evidence only. |
+| Reporting Requirements | Separate source facts from inference; explain why adapter/Bochs changes are or are not admitted. |
+| Stop Conditions | Any need to run/build/change code, guest-memory reconstruction beyond the existing seam, or DPB/device expansion; pause for fresh S admission. |
+| Exit Criteria | Committed source-backed `50:46` classification. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Verify S21 engine rather than S8, S15 runner/shim identities, v6 one-slot profile, no stale v5 launch variables, one watchdog and no second wrapper. |
 
