@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S24 — reached DPB source-contract audit.**
+**Active: M0 T194 S25 — immutable drive-snapshot DPB route.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S24, Ordinary Mode. |
-| Admission And Approval | S23 proves `50:0F` resumes and reaches `50:46`, but never `54:11`. This S admits source/trace interpretation only. |
-| Objective | Establish the original OpenNT `DemGetDPBList` contract, caller continuation and existing multi-write provider disposition before considering any change or observation. |
-| Non-goals | No run/retry, source/build/controller/bundle/profile/root change, Bochs patch/build/config/device action, BOP/provider implementation, filesystem/DPB device expansion, terminal-result transport, or claim beyond source/trace facts. |
-| Reference Baseline | S23 trace, T96 inventory, existing `50:46` source-derived multi-write records and imported OpenNT source. |
-| Files And ABI Surface | Read-only OpenNT/adapter source and evidence; one research record and Status only. |
+| Identifier Mode | M0 T194 S25, Ordinary Mode. |
+| Admission And Approval | S24 proves the reached `50:46` contract consumes only the same immutable 26-slot type snapshot as `50:0F`; owner approval authorizes normal, evidence-backed continuation. |
+| Objective | Route the existing source-derived `DemGetDPBList` multi-write producer through common ingress/registry/DEM-plane selection using the normal CLI snapshot, and prove snapshot precedence plus an empty-snapshot decline. |
+| Non-goals | No real engine run/retry, Bochs patch/build/config/device action, guest-profile/root change, filesystem/DPB device expansion, host path access, static-inventory merge, empty-list success fabrication, terminal-result transport, or claim of continuous execution. |
+| Reference Baseline | S23 trace; S24 source audit; S19/S20 snapshot route and precedence proof; existing `50:46` provider/multi-write seam. |
+| Files And ABI Surface | Adapter runtime selection code, focused adapter runtime test, S25 evidence, Status, and generated documentation inventory only; no ABI shape change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source definition/dispatch/caller and existing provider/multi-write seam audit; documentation governance and `git diff --check`. |
-| Expected Markers | Source path/owner/result-write/continuation map and an admitted next action or blocker. |
-| Asset Needs | Existing imported source and evidence only. |
-| Reporting Requirements | Separate source facts from inference; explain why adapter/Bochs changes are or are not admitted. |
-| Stop Conditions | Any need to run/build/change code, guest-memory reconstruction beyond the existing seam, or DPB/device expansion; pause for fresh S admission. |
-| Exit Criteria | Committed source-backed `50:46` classification. |
+| Verification | Focused positive/negative runtime routing test, source review, documentation governance, and `git diff --check`; no real guest process. |
+| Expected Markers | `50:46` queues the existing checked multi-write only from the live snapshot; static profile value cannot override it; empty snapshot remains declined. |
+| Asset Needs | Existing imported source, adapter/test closure, and documentation tools only. |
+| Reporting Requirements | Record exact source contract, changed selection order, positive/negative assertions, and all unclaimed runtime behavior. |
+| Stop Conditions | Need for an empty-list ABI change, new guest-memory mechanism, static inventory merge, host namespace/filesystem, or any Bochs change/build; pause for fresh S admission. |
+| Exit Criteria | Committed adapter-only source/test/evidence closure of the snapshot-to-DPB route. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify S21 engine rather than S8, S15 runner/shim identities, v6 one-slot profile, no stale v5 launch variables, one watchdog and no second wrapper. |
+| Similar-Issue Sweep | Verify `50:0F` snapshot precedence remains intact; inspect `54:04` and static fixture routes for accidental inventory merging; verify no BOP recognizer bypasses common DEM classification. |
 
 ## Current Technical Baseline
 
