@@ -87,6 +87,18 @@ $response = Join-Path $build 'link.rsp'
 $rewritten = Get-Content -LiteralPath $legacyResponse | ForEach-Object {
     $_.Replace($oldCore, (Join-Path $build 'native-core')).Replace($oldProviderRoot, (Join-Path $build 'obj')).Replace($oldRun, $build).Replace($oldSnapshot, $build).Replace($oldNtio, $build).Replace($oldNtdos, $build)
 } | Where-Object { $_ -notmatch 'native-core\\whole_cpu_exception\.obj' }
+$linkedProviderLeaves = @($rewritten | Where-Object { $_ -match '\\obj\\[^\\"]+\.obj"$' } | ForEach-Object {
+    [IO.Path]::GetFileName($_.Trim('"'))
+})
+$compileOnlyLeaves = @($composition.compileOnlySources | ForEach-Object {
+    [IO.Path]::GetFileNameWithoutExtension($_) + '.obj'
+})
+foreach ($sourcePath in $providerSources) {
+    $leaf = [IO.Path]::GetFileNameWithoutExtension($sourcePath) + '.obj'
+    if ($leaf -notin $linkedProviderLeaves -and $leaf -notin $compileOnlyLeaves) {
+        $rewritten += '"' + (Join-Path $build ('obj\' + $leaf)) + '"'
+    }
+}
 $rewritten += '"' + (Join-Path $build 'native-core\instruction_history.obj') + '"'
 $rewritten += '"' + (Join-Path $build 'preentry_input.obj') + '"'
 $rewritten | Set-Content -LiteralPath $response -Encoding ascii

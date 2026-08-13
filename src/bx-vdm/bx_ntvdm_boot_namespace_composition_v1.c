@@ -1,5 +1,6 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx_ntvdm_bios_memory_service.h"
+#include "bx_ntvdm_dem_dpb_service.h"
 #include "bx_ntvdm_dem_misc_plane_v1.h"
 #include <string.h>
 
@@ -54,6 +55,42 @@ static int outcome(const bx_ntvdm_cpu_result_v2 *result,
     value->eflags_write_mask = result->eflags_write_mask;
     value->eflags_values = result->eflags_values;
     return 1;
+}
+
+static int execute_dpb_multi_write(
+    bx_ntvdm_boot_namespace_composition_v1 *composition,
+    const bx_ntvdm_multi_write_transaction_v1 *transaction,
+    const uint8_t *payload)
+{
+    struct bx_ntvdm_mechanical_action_v1 action;
+    uint32_t index;
+    uint32_t action_id;
+
+    if (composition == 0 || transaction == 0 || payload == 0 ||
+        !bx_ntvdm_multi_write_transaction_v1_preflight(transaction,
+            UINT64_C(0x100000), transaction->writes.payload_bytes)) return 0;
+    if (transaction->writes.write_count == 0u) return 1;
+    if (transaction->writes.write_count > BX_NTVDM_MECHANICAL_ACTION_V1_MAX_RANGES ||
+        transaction->writes.payload_bytes > BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES ||
+        composition->plane.next_action_id == 0u) return 0;
+    action_id = composition->plane.next_action_id++;
+    if (composition->plane.next_action_id == 0u) composition->plane.next_action_id = 1u;
+    bx_ntvdm_mechanical_action_v1_clear(&action);
+    action.action_id = action_id;
+    action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+    action.range_count = transaction->writes.write_count;
+    action.payload_bytes = (uint32_t)transaction->writes.payload_bytes;
+    for (index = 0; index < action.range_count; ++index) {
+        action.ranges[index].physical_address =
+            transaction->writes.writes[index].guest_physical_address;
+        action.ranges[index].byte_count =
+            (uint32_t)transaction->writes.writes[index].byte_count;
+        action.ranges[index].payload_offset =
+            (uint32_t)transaction->writes.writes[index].payload_offset;
+    }
+    memcpy(action.payload, payload, action.payload_bytes);
+    return bx_ntvdm_mechanical_action_v1_valid(&action) &&
+        bx_ntvdm_mantle_execute_mechanical_action_v1(&action);
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_initialize(
@@ -135,6 +172,16 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     if (bx_ntvdm_dem_gset_plane_v1_dispatch(&active->gset, &ingress,
             &selection, &boundary, &cpu, &window, &result))
         return outcome(&result, value);
+    if (active->gset.has_drive_snapshot) {
+        bx_ntvdm_multi_write_transaction_v1 transaction;
+        uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
+        if (bx_ntvdm_dem_dpb_service_v1_prepare(
+                active->gset.drive_snapshot.types, &boundary, &cpu, &window,
+                &transaction, payload)) {
+            if (!execute_dpb_multi_write(active, &transaction, payload)) return 0;
+            return outcome(&transaction.result, value);
+        }
+    }
     if (bx_ntvdm_command_launch_plane_v1_dispatch(&active->launch, &ingress,
             &selection, &boundary, &cpu, &window, &result)) return outcome(&result, value);
     if (

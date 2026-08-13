@@ -2,12 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S51.** Its governing brief is the active
+> **Current effective packet: M0 T198 S52.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S51 -- connect the existing `50:46` DPB producer through a
-finite composition multi-write seam, without importing the detached runtime
-or adding host/device behavior.**
+**Active: M0 T198 S52 -- record the actual state and three-byte form of the
+post-DPB BIOS selector `15` boundary before admitting any additional BIOS
+profile disposition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,12 +24,12 @@ or adding host/device behavior.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S51, Ordinary Mode. |
-| Admission And Approval | S50 gives a current clean composition manifest and proves the existing finite root reproduces the `50:46` frontier without detached runtime inputs. Existing DPB service code and an immutable gset drive snapshot provide a source-backed producer/input pair. |
-| Objective | Add the minimum composition-level multi-write adaptation that invokes the existing `50:46` DPB producer with the gset snapshot, executes checked ordinary-RAM writes through mantle mechanics, and applies its existing typed result. |
-| Non-goals | No new BOP contract, host capability, CLI argument, DOS image change, machine feature, device/firmware activation, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S50 current manifest witness, S49 post-drive witness, existing DPB service/runtime source, S48 clean recipe and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | `bx-vdm` finite composition and existing multi-write/mechanical-action interfaces, fixture/recipe and evidence; no new cross-layer ABI. |
+| Identifier Mode | M0 T198 S52, Ordinary Mode. |
+| Admission And Approval | S51 source-builds the existing `50:46` producer through checked mantle RAM writes and advances to a selector-15 boundary. OpenNT source shows the nearby normal path issues BOP 15 after AH=88 setup, but the four-byte fixture display cannot prove the actual register state. |
+| Objective | Extend only the fixture observation record for its first unhandled selector-15 BOP to capture the copied CPU state and distinguish its three-byte selector from the following opcode. Compare the result with the existing AH=88 profile contract. |
+| Non-goals | No BIOS provider change, cassette/CMOS/device activation, BOP/provider implementation, host capability, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S51 DPB witness, OpenNT `sysinit1.asm` BOP 15 source, existing BIOS memory provider and CPU5 x64 `/MT` closure. |
+| Files And ABI Surface | Fixture observation only and evidence; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
 | Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |

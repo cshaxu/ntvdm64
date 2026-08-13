@@ -17,6 +17,7 @@
     "src/bx-vdm/bx_ntvdm_cpu_state_abi.c",
     "src/bx-vdm/bx_ntvdm_dem_debug_service.c",
     "src/bx-vdm/bx_ntvdm_dem_drive_provider_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_dpb_service.c",
     "src/bx-vdm/bx_ntvdm_dem_dta_service.c",
     "src/bx-vdm/bx_ntvdm_dem_error_lock_plane_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_gset_plane_v1.c",
@@ -49,8 +50,10 @@
     "src/cli/byob_profile.c"
   ],
   "linkedCompositionRoot": "bx_ntvdm_boot_namespace_composition_v1",
+  "compileOnlySources": [
+    "src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c"
+  ],
   "availableButDetached": [
-    "bx_ntvdm_dem_dpb_service.c",
     "bx_ntvdm_adapter_runtime.c",
     "bx_ntvdm_startup_transaction_bridge.c",
     "bx_ntvdm_host_namespace.c"
