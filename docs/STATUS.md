@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S27.** Its governing brief is the active
+> **Current effective packet: M0 T198 S28.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S27 -- audit the exact source-built post-`50:0F` guest path
-and minimal-machine conditions before admitting any continuation work.**
+**Active: M0 T198 S28 -- capture the first post-drive selector-blind generic
+`#UD` record under the exact CPU5 fixture, then stop.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ and minimal-machine conditions before admitting any continuation work.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S27, Ordinary Mode. |
-| Admission And Approval | S26 P2 completed the bounded source-built NTIO/NTDOS path through `50:0F`. Its separately retained extension trace then reported real-mode `LSL` faults and `prefetch` at physical `0xA2E63`, followed by the minimal VGA timer stub. The owner-approved continuing T198 objective authorizes a source/trace classification before any machine or BOP extension. |
-| Objective | Establish the exact post-drive guest control-flow and memory/CPU/mantle preconditions, classify each reached requirement by owner, and identify one evidence-backed next bounded task without enabling an unproven device or service. |
-| Non-goals | No BOP/provider implementation, hard-error/debugger/drive policy expansion, guest-image patch, device/plugin/firmware enablement, VGA emulation, core/mantle behavior change, legacy runtime linkage, ambient path access, or COMMAND/DOS continuity claim. |
-| Reference Baseline | S26 P2 exact source-built input/controlled stop and retained extension observation; OpenNT NTIO/NTDOS source and adopted CPU5 `bx-core`/`bx-mantle` sources; existing finite-machine and BOP records. |
-| Files And ABI Surface | Evidence and Status only. No runtime ABI, Bochs, mantle, adapter, CLI, guest, or historical OpenNT source changes are admitted. |
+| Identifier Mode | M0 T198 S28, Ordinary Mode. |
+| Admission And Approval | S27 proves that the retained `LSL`/VGA diagnostic lacks the copied fault state needed to classify it. The owner-approved continuing T198 objective and S27's explicitly named successor authorize one test-only observation using the existing generic copied-event ABI. |
+| Objective | After the existing exact `50:0F` resume, capture the first later generic `#UD` record's fixed-width CS:EIP, execution mode, vector, and instruction window, then issue the existing typed controlled stop. |
+| Non-goals | No BOP selector/service routing or new provider, no guest-memory read, no guest-image patch, no CPU/mantle production semantic change, no new ABI, no device/plugin/firmware/VGA enablement, no legacy linkage, and no command/DOS continuity claim. |
+| Reference Baseline | S26 P2 controlled CPU5 fixture; S27 audit; existing selector-blind core-to-mantle generic `#UD` event ABI and test-only external bridge. |
+| Files And ABI Surface | Only the existing exact fixture/bridge plus evidence and Status. The existing fixed-width `bx_ntvdm_generic_ud_event_v1` is consumed read-only; no production ABI changes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproduce or inspect the retained bounded extension trace; map its last confirmed guest CS:IP/physical access to source and instruction evidence; inspect corresponding CPU and mantle code; record a requirement matrix, owner classification, and negative proof that no device or BOP handler was added. |
-| Expected Markers | Post-`50:0F` continuation map, `LSL` classification, `0xA2E63` access classification, VGA-stub causality, one owner-correct follow-up, and zero runtime-source diff. |
+| Verification | MSVC x64 `/MT` rebuild of the existing fixture and exact CPU5 run. Prove the original BOP path reaches a valid `50:0F` typed resume, then record and stop on the first later non-`C4 C4` generic `#UD`; inspect the diff and boundary scans for zero selector/provider/device vocabulary in production Bochs code. |
+| Expected Markers | `50:0F` resume, copied fault CS:EIP/window, controlled stop, run exit zero, and no production-source change. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact inputs/commands, last reliable instruction/address evidence, source mappings, owner matrix, confidence/limitations, and a bounded successor recommendation. |
-| Stop Conditions | The evidence is insufficient to distinguish guest-state error from native-machine prerequisite, source interpretation requires changed code, a device/plugin/firmware path appears necessary, or a host-service semantic change is implicated. Preserve evidence and re-admit a new implementation S. |
-| Exit Criteria | A reviewable evidence record distinguishes confirmed facts from hypotheses, names the smallest owner-correct next S, and makes no runtime code change. |
+| Reporting Requirements | Record exact inputs/commands, captured copied event, relationship to S27's diagnostic, source ownership, and follow-up classification. |
+| Stop Conditions | No later generic `#UD` occurs before timer expiry, capture would need guest-memory or CPU/device changes, the event is not fixed-width/valid, or a BOP/provider/device semantic change would be needed. Preserve evidence and re-admit. |
+| Exit Criteria | One exact run proves a valid post-drive generic-event capture and typed stop, or records the bounded alternative without any added production behavior. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -260,6 +260,10 @@ and minimal-machine conditions before admitting any continuation work.**
   extension reaches real-mode `LSL` before its `0xA2E63` VGA-aperture prefetch
   veto, while the original DOS init order is not yet proven continuous. See
   [S27 audit](etc/research/t198-s27-post-drive-machine-audit-001.md).
+- M0 T198 S28 proves the retained unrestricted run does not first reach the
+  proposed post-drive capture point: it hits six real-mode `LSL` reports and
+  the same VGA-aperture panic before any observed drive resume. The temporary
+  nonpassing probe was removed. See [S28 probe](etc/research/t198-s28-post-drive-generic-ud-probe-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
