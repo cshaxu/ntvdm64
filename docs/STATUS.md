@@ -10,21 +10,25 @@
 
 ## Active Packet
 
+> **T scope:** T196 is the full Bochs/adapter boundary **repair** package.
+> S1 is only its immutable baseline/audit step; later S tasks perform the
+> repair. The next T, not T196, resumes holistic BOP runtime closure.
+
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T196 S1, Ordinary Mode. |
-| Admission And Approval | T195 is closed by S6 source/map/ledger evidence. Queue priority requires a complete Bochs 2.6 intrusive-change reconciliation before holistic BOP runtime closure. |
-| Objective | Establish a reproducible full-tree diff baseline between `src/bochs` and the pinned local Bochs 2.6 source, then enumerate every project hunk for later disposition. |
-| Non-goals | No Bochs/adapter behavior change, patch normalization, source import, build/runtime campaign, or treating an unreviewed diff as approved. |
+| Admission And Approval | Owner directs **T196 as a multi-S Bochs/adapter boundary repair package**, not as a stand-alone audit. T195 is closed by S6 source/map/ledger evidence. S1 is the mandatory first repair subtask: establish the complete Bochs 2.6 intrusive-diff baseline. Later admitted S tasks classify and repair the discovered surface. Only after T196 closes may the next unnumbered candidate T resume holistic BOP runtime closure. |
+| Objective | For S1 only, establish a reproducible full-tree diff baseline between `src/bochs` and the pinned local Bochs 2.6 source, then enumerate every project hunk so later T196 repair subtasks can make a complete disposition. T196 as a whole must repair the boundary: remove or migrate nonconforming semantics, retain only justified selector-blind mechanics/minimal embedding/default-off diagnostics, and reconcile the register, sources and build surfaces. |
+| Non-goals | S1 makes no Bochs/adapter behavior change, patch normalization, source import, build/runtime campaign, or approval decision. Those are not cancelled; they belong only to later, separately admitted T196 repair S tasks. S1 must not treat an unreviewed diff as approved. |
 | Reference Baseline | T195 closure, source-policy authority, pinned local Bochs 2.6 input and external-intrusion register. |
 | Files And ABI Surface | Read-only source/input inspection plus one T196 S1 evidence manifest, Status and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Identify pinned source provenance, generate a reproducible path/hunk manifest, distinguish import drift from project edits, and prove every changed path has an initial classification record; run documentation governance and `git diff --check`. |
-| Expected Markers | Exact upstream identity/input path, full changed-path list, hunk count/hash manifest and no implicit approval of an unclassified change. |
+| Verification | Identify pinned source provenance, generate a reproducible path/hunk manifest, distinguish import drift from project edits, and preserve every changed path/hunk for the next S classification; run documentation governance and `git diff --check`. |
+| Expected Markers | Exact upstream identity/input path, full changed-path list, hunk count/hash manifest, an explicit repair-sequence handoff, and no implicit approval of an unclassified change. |
 | Asset Needs | Local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record comparison command, baseline identity, limitations, changed-path/hunk totals and S2 classification handoff. |
+| Reporting Requirements | Record comparison command, baseline identity, limitations, changed-path/hunk totals, and the T196 repair-sequence handoff. |
 | Stop Conditions | Pinned source identity is absent/ambiguous, comparison has unresolvable transformation noise, or a source import would be required; preserve facts and re-admit. |
-| Exit Criteria | Committed immutable comparison manifest supports per-hunk classification without repeating discovery. |
+| Exit Criteria | Committed immutable comparison manifest supports per-hunk classification and subsequent repair without repeating discovery. This closes S1 only, not T196. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
