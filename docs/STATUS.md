@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T196 S5.** Its governing brief is the active
+> **Current effective packet: M0 T196 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T196 S5 — reconcile the complete repaired Bochs diff, exception
-register, and generated/current build surfaces.**
+**Active: M0 T196 S6 — rebuild only the admitted minimal closure and verify
+the selector-blind Bochs/adapter boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ register, and generated/current build surfaces.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T196 S5, Ordinary Mode. |
-| Admission And Approval | S4 is closed by `2da16f3`, `bbadb9f`, `a6736f0`, `55e1d3e`, `b70b01d`, and `2b64231`. Its closure record reports 24 paths/41 physical hunks, one adapter-owned BOP observer check, and 13 retained mechanical checks passing. S5's first current crosswalk is `etc/research/t196-s5-current-diff-register-crosswalk-001.md`: every one of the 41 hunks has a register/build disposition, with MSVC compile/link evidence explicitly reserved to S6. |
-| Objective | Produce one complete, current crosswalk for every remaining Bochs diff hunk and every relevant exception-register entry, classifying it as retained mechanical necessity, generated/build counterpart, removed, or a specific S6 verification obligation. Resolve any mismatch by a bounded repair or re-admission. |
-| Non-goals | No BOP selector/service routing, OpenNT/DOS/SoftPC semantic implementation, device/firmware/plugin expansion, guest runtime campaign, full build retry, or revival of removed diagnostics/legacy seams. |
-| Reference Baseline | T196 S2 classification; T196 S3 removal evidence; T196 S4 closure record; T195 closure; pinned Bochs 2.6 tree; exception register; current build generators. |
-| Files And ABI Surface | Current `src/bochs` diff and generated build inputs; external-intrusion register; S5 reconciliation evidence; Status and documentation inventory. |
+| Identifier Mode | M0 T196 S6, Ordinary Mode. |
+| Admission And Approval | S5 is closed by `e2748ba`: its current 24-path/41-hunk crosswalk has no orphan source hunk or exception-register entry and assigns every remaining compiler/archive/link claim to this S6. S6 is admitted for one declared minimal MSVC x86 closure only, plus the focused static boundary suite. |
+| Objective | Rebuild and link only the admitted minimal Bochs/adapter closure from a fresh isolated root, record exact compiler/link inputs and artifact hashes, and verify that the resulting closure contains no selector/service semantics in Bochs. |
+| Non-goals | No full Bochs/bochs.exe build, configure-loop repair, BOP runtime campaign, guest execution claim, device/firmware/plugin expansion, new Bochs intrusion, or source change unless an explicitly recorded minimal-closure mismatch requires re-admission. |
+| Reference Baseline | T196 S5 current crosswalk; T196 S4 closure; pinned Bochs 2.6 tree; exception register; existing minimal MSVC closure recipes as evidence only. |
+| Files And ABI Surface | A new isolated build root under `artifacts/build/`; admitted build shim/manifest if required; exact object/link map/log/hash evidence; focused tests; Status and documentation inventory. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproduce the pinned zero-context diff; enumerate all paths/hunks; reconcile each with a register row or explicit build-only justification; rerun the S4 static suite as needed; run documentation governance and `git diff --check`. |
-| Expected Markers | Every current hunk has one disposition and evidence location; each retained exception has a live source/build relation; removed entries have no residual source/test/generator use; S6 obligations are explicit rather than assumed. |
+| Verification | Establish the declared MSVC x86 environment; generate one new minimal build root without recursive default targets; compile/link only its manifest; inspect the resulting map/object vector; run the complete retained static suite; run documentation governance and `git diff --check`. |
+| Expected Markers | One fresh manifest-bound minimal artifact or a precise first closure failure; compiler/link commands, inputs, output hashes and map evidence; no broad rebuild and no Bochs selector/service term. |
 | Asset Needs | Local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record the complete hunk/register/build crosswalk, exact source/build evidence, residual ambiguity, and an explicit S6 obligation for each unbuilt retained group. |
-| Stop Conditions | A reconciliation mismatch requires a guest semantic branch, device/firmware expansion, object/pointer ABI, a fresh unregistered Bochs intrusion, or an unbounded build retry. Preserve facts and re-admit. |
-| Exit Criteria | A complete current crosswalk has no orphan hunk or register entry; all residual build proof is narrowly assigned to S6; any required repair has either landed or been separately admitted. This closes S5 only, not T196. |
+| Reporting Requirements | Record the complete declared build vector, environment, hashes, map/object result, static suite result, first failure if any, and whether T196 closes or needs a bounded repair re-admission. |
+| Stop Conditions | The first closure attempt requires a full target rebuild, extra device/plugin/configuration, guest semantic branch, object/pointer ABI, new intrusion, or a second speculative recipe. Preserve facts; do not retry or repair without re-admission. |
+| Exit Criteria | The admitted minimal closure builds/links and static regressions pass, or its first reproducible failure is fully attributed without a retry. T196 may close only if no remaining repair work exists. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
