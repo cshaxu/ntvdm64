@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S36 — one register-observation v6 run.**
+**Active: M0 T194 S38 — audit the coherent DEM IOCTL metadata provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S36, Ordinary Mode. |
-| Admission And Approval | S35 freezes the S32 listener engine; S34 proves controller cleanup is bounded and terminal evidence is retained even on cleanup failure. Owner authorization permits one bounded observation. |
-| Objective | Make exactly one 15-second no-retry v6 observation with the S35 listener bundle and classify reached `50:21` from its logged AX/BX. |
-| Non-goals | No code/build/bundle/profile/root change, second invocation, provider/capability decision, raw-media/device action, or normal-return claim without `54:11`. |
-| Reference Baseline | S28 BOP sequence, S29 IOCTL family map, S32 listener build, S34 controller boundary, and S35 bundle. |
-| Files And ABI Surface | Existing controller, generated evidence root, S36 record, Status, and documentation inventory only. |
+| Identifier Mode | M0 T194 S38, Ordinary Mode. |
+| Admission And Approval | S36 proves the reached `50:21` call is `AX=4408/BX=F002`; S29 records the original paired metadata contract. Owner authorization permits normal single-agent continuation under the existing T194 package. |
+| Objective | Produce a source-and-current-composition audit for one coherent `demIOCTL` drive-metadata provider group (`AL=08` and `AL=09`), including the exact replacement boundary from the legacy static endpoint to the immutable live CLI snapshot. |
+| Non-goals | No provider implementation, build, engine/bundle/profile/root change, controller invocation, retry, raw-media/BDS operation (`AL=0D/11`), filesystem/path access, device action, or normal-return claim. |
+| Reference Baseline | S18/S19 live snapshot and common plane, S20 focused precedence test, S29 original IOCTL contract, S36 observed `4408`, and current legacy changeable endpoint. |
+| Files And ABI Surface | Original OpenNT source paths read-only; adapter headers/source and tests read-only for audit; S38 record, Status, and documentation inventory. No ABI change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One controller outcome/input record, trace AX/BX marker for `50:21`, watchdog/cleanup fields, documentation governance, and `git diff --check`. |
-| Expected Markers | One fresh evidence root, no retry, one `50:21` register observation or precise unavailability, and a terminal outcome even when cleanup is denied. |
-| Asset Needs | S15 runner/shim, S35 bundle, fixed v6 profile/root/target, and S34 controller only. |
-| Reporting Requirements | Record all input/log hashes, watchdog/cleanup result, observed BOP/register facts, and no unobserved semantics. |
-| Stop Conditions | Input/evidence collision, launch failure, need for retry/second invocation, or source/build change; preserve evidence and pause for fresh S admission. |
-| Exit Criteria | Committed one-shot evidence with source-backed next action or blocker. |
+| Verification | Cite exact original-source branches and current call sites; verify both metadata functions are covered, raw-media remains excluded, documentation governance, and `git diff --check`. |
+| Expected Markers | A source-path/line map, current object/link surface, explicit live-snapshot ingress/registry/plane seam, and a bounded future implementation/test list. |
+| Asset Needs | Checked-in OpenNT source, current adapter source/tests, S29/S36 records; no executable or generated runtime asset. |
+| Reporting Requirements | State source provenance, preserved behavior, unavailable composition edge, retained exclusions, and the precise next-S implementation boundary. |
+| Stop Conditions | Any unsupported original semantic, need to broaden into device/filesystem behavior, need for a Bochs intrusion, or need to edit/build/run; preserve findings and require fresh S admission. |
+| Exit Criteria | Committed audit that admits or rejects a narrow subsequent implementation S without one-off `50:21` routing. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify S15 runner/shim, S35 engine, v6 one-slot inputs, one 15-second watchdog, fresh evidence root, and absence of stale v5 inputs. |
+| Similar-Issue Sweep | Compare `AL=08` and `AL=09` together; locate all static-inventory uses and public common-plane/snapshot entry points; classify `AL=0D/11` separately. |
 
 ## Current Technical Baseline
 

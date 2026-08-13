@@ -12,6 +12,10 @@ foreach ($required in @(
     'if (-not $process.WaitForExit(5000)) { $cleanupWaitTimedOut = $true }',
     'treeKillOutput = $treeKillOutput',
     'cleanupWaitTimedOut = $cleanupWaitTimedOut',
+    'function Try-Hash([string]$Path)',
+    'catch { return $null }',
+    'stdoutSha256 = Try-Hash $stdoutPath',
+    'stderrSha256 = Try-Hash $stderrPath',
     '[IO.File]::WriteAllText($outcomePath, ($record | ConvertTo-Json -Depth 5)'
 )) {
     if (-not $source.Contains($required)) { throw "Missing T194 controller boundary term: $required" }

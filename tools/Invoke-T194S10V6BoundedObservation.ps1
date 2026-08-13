@@ -18,6 +18,11 @@ function Resolve-Leaf([string]$Path, [string]$Name) {
     return $resolved
 }
 function Quote-CmdArgument([string]$Value) { return '"' + ($Value -replace '"', '""') + '"' }
+function Try-Hash([string]$Path) {
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { return $null }
+    try { return (Get-FileHash -LiteralPath $Path -Algorithm SHA256 -ErrorAction Stop).Hash }
+    catch { return $null }
+}
 
 $runnerPath = Resolve-Leaf $Runner 'Runner'
 $shimPath = Resolve-Leaf $Shim 'Shim'
@@ -93,8 +98,8 @@ finally {
         watchdogSeconds = $WatchdogSeconds; watchdogTerminated = $watchdogTerminated
         treeKillExit = $treeKillExit; treeKillOutput = $treeKillOutput
         cleanupWaitTimedOut = $cleanupWaitTimedOut; exitCode = $exitCode; launchError = $launchError
-        stdoutSha256 = if (Test-Path -LiteralPath $stdoutPath) { (Get-FileHash -LiteralPath $stdoutPath -Algorithm SHA256).Hash } else { $null }
-        stderrSha256 = if (Test-Path -LiteralPath $stderrPath) { (Get-FileHash -LiteralPath $stderrPath -Algorithm SHA256).Hash } else { $null }
+        stdoutSha256 = Try-Hash $stdoutPath
+        stderrSha256 = Try-Hash $stderrPath
         interpretation = 'one mechanical process-tree observation; normal COMMAND return requires an observed 54:11 marker'
     }
     [IO.File]::WriteAllText($outcomePath, ($record | ConvertTo-Json -Depth 5), [Text.UTF8Encoding]::new($false))
