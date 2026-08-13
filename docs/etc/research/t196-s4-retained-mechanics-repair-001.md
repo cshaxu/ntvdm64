@@ -50,6 +50,13 @@ composition link recipes name `bcrypt.lib` explicitly. S4 removed the
 unconditional Bochs template injection and added a focused build-isolation
 test that rejects a future BCrypt dependency in the Bochs template.
 
+The execution-plan boundary test was also strengthened during the retained
+mechanics review. It now proves that both execution-plan and deferred-startup
+forms are explicit opt-ins, that the adapter-runtime include is nested in the
+combined opt-in guard, and that the post-hardware/pre-loop call remains inside
+the execution-plan guard. This adds no Bochs behavior; it prevents a future
+default dependency from being mistaken for the established single consumer.
+
 ## Procedure And Observations
 
 Ran all retained mechanical boundary checks, each against the repository root:
