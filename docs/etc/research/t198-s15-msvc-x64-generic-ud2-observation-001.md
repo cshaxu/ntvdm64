@@ -58,3 +58,11 @@ The next step may add only default-off mechanical observation sufficient to
 distinguish copied entry bytes, fault vector and bridge disposition. It may
 not add BOP recognition, adapter/provider linkage, DOS/OpenNT behavior, or
 new machine/device semantics.
+
+## Closure
+
+S15 r6 corrects the fixture lifecycle: disabling fixture mode no longer clears
+the already-observed STOP. The fresh MSVC x64 run exits zero under the strict
+stop-observed criterion, proving neutral `UD2` reaches the generic copied
+`#UD` bridge and its typed STOP outcome without adapter, BOP, provider,
+OpenNT, MinGW or product input.
