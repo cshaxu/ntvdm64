@@ -55,6 +55,10 @@ core/mantle build closure without reviving the Bochs product target.**
   and retained product-shell methods.  No GUI, plugin/device archive, adapter
   or OpenNT input entered the probe; see
   [T197 S6 link probe 001](etc/research/t197-s6-cpu5-minimal-link-probe-001.md).
+- M0 T197 S6 r11 now source-builds and links the whole CPU5 adopted core with
+  the finite mantle, without a Bochs product target.  This is a native link
+  closure only; machine initialization/execution still requires separate
+  lifecycle verification.
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

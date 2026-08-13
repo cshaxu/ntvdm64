@@ -62,6 +62,12 @@ The manifest rejects `main.cc`, `config.cc`, `gui/siminterface.cc`,
   added.  The remaining frontier is product UI/teardown (`bx_gui`, text
   parameter methods, `bx_atexit`) and the explicitly rejected full-device
   reset/exit methods referenced by `pc_system.cc`.
+- Fresh r11 compiles the entire 120-source adopted core plus the named mantle
+  objects and links `t197-s6-minimal-machine-link-probe.exe` successfully with
+  MSVC/x86.  Its JSON manifest records `wholeCpu5Core: true` and
+  `linkSucceeded: true`; no forbidden product, adapter or OpenNT input is
+  listed.  This proves a native CPU5 core/mantle **link closure**, not guest
+  execution or a product runtime.
 - The unresolved set is not an adapter or OpenNT edge.  It separates into:
   - native CPU5 processor dependencies: CPUID models, local APIC, TLB/flags/
     segment/reset/decode helpers and instruction-cache state;

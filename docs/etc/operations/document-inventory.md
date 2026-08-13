@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 963 |
 | --- | --- |
-| Generated UTC | 2026-08-13T07:42:16Z |
+| Generated UTC | 2026-08-13T07:49:32Z |
 
 ## Entries
 
@@ -110,7 +110,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 4a1e23d0bf6dba72cce2eeb00b9ce7ecb0ce86707f003adb104bf6acf0617562 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 3a0c80f51d76ac5010302c9bffd595164d00070ae870125a0ccca03bfc5e4487 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -380,7 +380,7 @@ content-divergent entries.
 | etc/research/t197-s3-core-closure-first-edge-001.md | indexed supporting material | f14f991febcfa5f8e0081dc0f8d8b1286c623528a0ea7ee0f090cb2726135513 |
 | etc/research/t197-s4-core-path-migration-001.md | indexed supporting material | b7c37c9586370f30563b25f2a001f141a7d44a903f3bec52295fb6499c3f0008 |
 | etc/research/t197-s5-sim-mantle-seam-001.md | indexed supporting material | 4df913f15da95718bab837b847681dc50d8b9386bd634c322ceddd0df559a9c2 |
-| etc/research/t197-s6-cpu5-minimal-link-probe-001.md | indexed supporting material | e7bd21b1237480a257b3820c877dbbf2103352378015a3c56fa5a098b5ffd5ab |
+| etc/research/t197-s6-cpu5-minimal-link-probe-001.md | indexed supporting material | 21db30cb859a850df2b9595b695f8d89e849b20b369d3bc5eefeea26d59991e2 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -977,7 +977,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | e563fbf8c4b899c96239d8660c854aeca1872c3751d234c06fb2f06297947d0c |
+| STATUS.md | principal control document | 74e44b5d06dcdd565341f08ab200d3ae39d324dfc1d41da66f1a3f0208a41ce1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

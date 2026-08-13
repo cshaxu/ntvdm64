@@ -39,6 +39,7 @@ $sources = @(
     @{ Name = 'minimal_sim'; Path = 'src\bx-mantle\bx_ntvdm_minimal_sim.cc'; ExtraIncludes = @() },
     @{ Name = 'minimal_machine'; Path = 'src\bx-mantle\bx_ntvdm_minimal_machine.cc'; ExtraIncludes = @('src\bochs\iodev') },
     @{ Name = 'minimal_port_space'; Path = 'src\bx-mantle\minimal_port_space.cc'; ExtraIncludes = @('src\bochs\iodev') },
+    @{ Name = 'minimal_product_shell'; Path = 'src\bx-mantle\minimal_product_shell.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
     @{ Name = 'paramtree'; Path = 'src\bx-mantle\paramtree.cc'; ExtraIncludes = @() },
     @{ Name = 'logio'; Path = 'src\bx-mantle\logio.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
     @{ Name = 'pc_system'; Path = 'src\bx-mantle\pc_system.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },

@@ -181,40 +181,9 @@ void bx_pc_system_c::invlpg(bx_address addr)
     BX_CPU(i)->TLB_invlpg(addr);
 }
 
-int bx_pc_system_c::Reset(unsigned type)
-{
-  // type is BX_RESET_HARDWARE or BX_RESET_SOFTWARE
-  BX_INFO(("bx_pc_system_c::Reset(%s) called",type==BX_RESET_HARDWARE?"HARDWARE":"SOFTWARE"));
-
-  set_enable_a20(1);
-
-  // Always reset cpu
-  for (int i=0; i<BX_SMP_PROCESSORS; i++) {
-    BX_CPU(i)->reset(type);
-  }
-
-  // Reset devices only on Hardware resets
-  if (type==BX_RESET_HARDWARE) {
-    DEV_reset_devices(type);
-  }
-
-  return(0);
-}
-
 Bit8u bx_pc_system_c::IAC(void)
 {
   return DEV_pic_iac();
-}
-
-void bx_pc_system_c::exit(void)
-{
-  // delete all registered timers (exception: null timer and APIC timer)
-  numTimers = 1 + BX_SUPPORT_APIC;
-  bx_devices.exit();
-  if (bx_gui) {
-    bx_gui->cleanup();
-    bx_gui->exit();
-  }
 }
 
 void bx_pc_system_c::register_state(void)
