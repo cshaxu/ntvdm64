@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S51 — preserve deferred native-POST metadata bundle evidence.**
+**Active: M0 T194 S53 — remove the confirmed obsolete observation tree.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S51, Ordinary Mode. |
-| Admission And Approval | S49 generated and S50 built the deferred native-POST 68+5 closure. Owner approval permits normal single-agent continuation under T194. The immutable bundle was assembled from those frozen inputs before this S51 record was formalized; this packet records and verifies that fact rather than treating it as a new execution. |
-| Objective | Preserve the exact S50 engine and S27 ROM hashes as one immutable deferred native-POST bundle. |
-| Non-goals | No source/generator change, engine run, device/archive expansion, raw-media action, normal-return claim, or post-bundle modification. |
-| Reference Baseline | S39 source migration, S42 focused test, S44 generation, S45 direct build, S48 direct-pre-POST observation, and S49/S50 deferred closure. |
-| Files And ABI Surface | Existing ignored S49 closure and S51 bundle roots; evidence record, Status, and regenerated document inventory only. |
+| Identifier Mode | M0 T194 S53, Ordinary Mode. |
+| Admission And Approval | S52 read-only audit proves the exact old wrapper PID 11396 and its descendant tree. Owner approval permits normal single-agent continuation under T194. |
+| Objective | Terminate only confirmed wrapper PID 11396 and its descendants, then record a no-residual process check. |
+| Non-goals | No S51 engine execution, new evidence root, retry, source/build/bundle/profile change, name-based cleanup, device/archive expansion, raw-media action, or normal-return claim. |
+| Reference Baseline | S47 controller cleanup limitation and S52 exact process-tree evidence. |
+| Files And ABI Surface | The already-running old PID 11396 process tree; one cleanup record, Status and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare S50 engine and S27 ROM hashes with the S51 manifest; then run documentation governance and `git diff --check`. |
-| Expected Markers | S50 engine `79D404A9451F218009408D75AF2F2A36CFB8F984FFF64C0328DC34A8EBB0857E`; unchanged three ROM hashes; no process launch. |
-| Asset Needs | Existing S49 closure, existing S27 ROM root, and the S51 manifest only. |
-| Reporting Requirements | Record generation/build/bundle chronology, commands, exact hashes, retained two-object boundary, and the absence of an execution claim. |
-| Stop Conditions | Hash mismatch, unexpected bundle member, source change, or any need to execute the engine. |
-| Exit Criteria | Committed evidence admits a separately reviewed single deferred observation. |
+| Verification | Use elevated taskkill /T /F /PID 11396 once, then read the process table and confirm no matching process remains; run documentation governance and git diff --check. |
+| Expected Markers | Exact PID tree termination and zero matching ntdos64/bochs residual processes. |
+| Asset Needs | S52 process-tree evidence and administrator authorization for the exact PID command. |
+| Reporting Requirements | Record command, command result, post-check and the restriction that S51 was not run. |
+| Stop Conditions | PID identity changes, termination failure, residual process, or any need to use a name-based/broader kill. |
+| Exit Criteria | Committed cleanup evidence admits a separate re-audit of the S51 one-shot observation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify the bundle contains only the engine plus ROM tree, retains no legacy IOCTL source in its S49 manifest/makefile, and does not introduce an archive/device target. |
+| Similar-Issue Sweep | Verify all matching process names are descendants of the exact admitted wrapper before termination and that none selects the S51 bundle. |
 
 ## Current Technical Baseline
 
