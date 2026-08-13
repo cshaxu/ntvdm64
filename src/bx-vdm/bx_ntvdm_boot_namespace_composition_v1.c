@@ -145,7 +145,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     /* This composition admits only the source-observed top-level memory
      * queries: BIOS 12h and BIOS 15h/AH=88h. */
     if (window.valid_bytes >= 3u && window.bytes[0] == 0xc4u &&
-        window.bytes[1] == 0xc4u && window.bytes[2] == 0x12u &&
+        window.bytes[1] == 0xc4u &&
+        (window.bytes[2] == 0x12u || window.bytes[2] == 0x15u) &&
         bx_ntvdm_bios_memory_service_v1_dispatch(&boundary, &cpu, &window,
             &memory_result)) {
         if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||

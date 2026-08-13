@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S53.** Its governing brief is the active
+> **Current effective packet: M0 T198 S54.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S53 -- run the source-observed selector `15`/AH=88 existing
-profile disposition and classify its next continuous execution boundary.**
+**Active: M0 T198 S54 -- audit the existing `50:0D` boot-drive provider and
+finite composition route before admitting any new behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,12 +23,12 @@ profile disposition and classify its next continuous execution boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S53, Ordinary Mode. |
-| Admission And Approval | S52 proves the selector-15 event is exactly `C4 C4 15` in real mode with AH=88, matching the existing finite BIOS memory provider contract. |
-| Objective | Rebuild/run the current composition with the existing selector-15/AH=88 profile result and record the first following terminal or BOP boundary. |
-| Non-goals | No other BIOS provider, cassette/CMOS/device activation, BOP/provider implementation, host capability, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S52 selector-15 witness, OpenNT `sysinit1.asm`, existing BIOS memory provider and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | Existing composition/provider, fixture observation and evidence only; no ABI change. |
+| Identifier Mode | M0 T198 S54, Ordinary Mode. |
+| Admission And Approval | S53 clean source closure proves `15/AH=88` is handled by the existing profile provider and advances to `50:0D`. Existing records identify the original service and contained profile fallback. |
+| Objective | Map `50:0D` from OpenNT dispatcher through the current `bx-vdm` provider/plane/composition path; classify it as already composable, detached, or absent before a behavior change. |
+| Non-goals | No provider implementation, host registry import, CLI argument, DOS image change, BIOS/device activation, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S53 AH=88 witness, OpenNT DEM source and existing boot-drive service records. |
+| Files And ABI Surface | Read-only audit and evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
 | Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |

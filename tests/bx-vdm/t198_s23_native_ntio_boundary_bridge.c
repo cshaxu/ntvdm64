@@ -17,6 +17,8 @@ static uint32_t observed_bios15_eax;
 static uint16_t observed_bios15_cs;
 static uint32_t observed_bios15_eip;
 static unsigned observed_bios15_next_byte;
+static unsigned observed_bios15_composition_handled;
+static unsigned observed_bios15_outcome;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -73,6 +75,12 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         event->window[1] == 0xc4u && event->window[2] == 0x50u &&
         event->window[3] == 0x11u) observed_5011 = 1u;
     if (bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome)) {
+        if (event != 0 && event->window_bytes >= 3u &&
+            event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+            event->window[2] == 0x15u) {
+            observed_bios15_composition_handled = 1u;
+            observed_bios15_outcome = outcome != 0 ? outcome->disposition : 0u;
+        }
         if (event != 0 && outcome != 0 && event->window_bytes >= 4u &&
             event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
             event->window[2] == 0x50u && event->window[3] == 0x3bu &&
@@ -154,3 +162,5 @@ unsigned t198_s23_native_ntio_boundary_observed_bios15_eax(void) { return observ
 unsigned t198_s23_native_ntio_boundary_observed_bios15_cs(void) { return observed_bios15_cs; }
 unsigned t198_s23_native_ntio_boundary_observed_bios15_eip(void) { return observed_bios15_eip; }
 unsigned t198_s23_native_ntio_boundary_observed_bios15_next_byte(void) { return observed_bios15_next_byte; }
+unsigned t198_s23_native_ntio_boundary_observed_bios15_composition_handled(void) { return observed_bios15_composition_handled; }
+unsigned t198_s23_native_ntio_boundary_observed_bios15_outcome(void) { return observed_bios15_outcome; }
