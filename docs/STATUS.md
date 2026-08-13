@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S56 — generate deferred native-POST machine-composition closure.**
+**Active: M0 T194 S57 — build deferred native-POST machine-composition closure.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S56, Ordinary Mode. |
-| Admission And Approval | S55 proves S51 omitted the existing original SoftPC illegal-op machine island, causing selector-06 re-entry. Owner approval permits normal single-agent continuation under T194. |
-| Objective | Generate one fresh, uncompiled derivative that combines deferred native POST with the existing selector-blind machine-composition object triple. |
-| Non-goals | No compilation, engine execution, source/Bochs patch, adapter handler, device/archive expansion, raw-media action, or normal-return claim. |
-| Reference Baseline | S49/S50 deferred closure, S54 single trace, S55 source correlation, and T121/T130 machine-composition closure. |
-| Files And ABI Surface | Existing derivative generator and one fresh ignored build root; one evidence record, Status and regenerated document inventory only. |
+| Identifier Mode | M0 T194 S57, Ordinary Mode. |
+| Admission And Approval | S56 generated the exact deferred native-POST machine-composition closure. Owner approval permits normal single-agent continuation under T194. |
+| Objective | Build and link the frozen S56 closure once with MSVC x86. |
+| Non-goals | No engine execution, source/generator change, device/archive expansion, new machine/provider semantic change, raw-media action, or normal-return claim. |
+| Reference Baseline | S50 deferred closure, S54 observation, S55 source correlation and S56 generated makefile/manifest. |
+| Files And ABI Surface | Existing S56 ignored root and build evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Invoke the generator once with DeferredStartupPlan and MachineComposition; inspect manifest/makefile for 68+5 closure, exactly two Bochs objects, original machine triple and no archive/device target; run documentation governance and git diff --check. |
-| Expected Markers | Deferred macros, machine-composition macro, main.o plus cpu\\exception.o, and bx_ntvdm_machine_bop_v1.obj, unexp_nt.c.obj, illegalp.c.obj. |
-| Asset Needs | Existing generator, retained source/object islands and a new nonexisting build root only. |
-| Reporting Requirements | Record command, root/manifest/makefile hashes, exact object surface and no-run result. |
-| Stop Conditions | Generator rejects option combination, missing/extra machine object, archive/device prerequisite, source mutation, or need to compile/run. |
-| Exit Criteria | Committed generated closure admits a separately reviewed build decision. |
+| Verification | One MSVC x86 nmake target; inspect compile/link surface, map and hashes; then run documentation governance and git diff --check. |
+| Expected Markers | 68+5 adapter/CLI compilations, main.o, cpu/exception.o, existing machine triple and final link; no archive/device target. |
+| Asset Needs | Existing S56 root, its retained machine objects and MSVC x86 environment only. |
+| Reporting Requirements | Record command, result/hash, exact object boundary, warnings and no-run result. |
+| Stop Conditions | Build failure, missing machine object, extra archive/device target, source mutation, or need to run output. |
+| Exit Criteria | Committed build evidence admits a separate bundle/one-shot observation decision. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare the generated object/rule set to S49 and T121/T130, ensuring the only composition change is the existing original machine island. |
+| Similar-Issue Sweep | Compare the final map and makefile with S50/S56; verify machine composition is the only additional link surface and no handler is added to adapter. |
 
 ## Current Technical Baseline
 
