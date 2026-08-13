@@ -70,11 +70,11 @@ int main(void)
     profile_initialize(&profile);
     event_initialize(&event, 0x54, 0x0c);
     event.ds = 0x1000; event.edx = 0x20;
-    if (bx_ntvdm_boot_namespace_composition_v1_handle(&event, &outcome)) return 1;
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 1;
     if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
             &command, &target, 0, &profile) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 2;
-    if (!bx_ntvdm_boot_namespace_composition_v1_handle(&event, &outcome)) return 3;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 3;
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 4;
     if (outcome.resume_rip != 0x104) return 5;
     if (ram[0x10020] == 0) return 6;
@@ -82,20 +82,20 @@ int main(void)
     event_initialize(&event, 0x50, 0x12);
     event.ds = 0x1000; event.esi = 0x40;
     memcpy(ram + 0x10040, "C:\\CONFIG.SYS", 14);
-    if (!bx_ntvdm_boot_namespace_composition_v1_handle(&event, &outcome) ||
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 7;
     token = ((uint32_t)outcome.gpr16_values[5] << 16) | outcome.gpr16_values[0];
 
     event_initialize(&event, 0x50, 0x00);
     event.eax = token & 0xffffu; event.ebp = token >> 16;
-    if (!bx_ntvdm_boot_namespace_composition_v1_handle(&event, &outcome) ||
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 8;
 
     allow_action = 0;
     event_initialize(&event, 0x54, 0x0d);
     event.ds = 0x1000; event.edx = 0x20;
-    if (bx_ntvdm_boot_namespace_composition_v1_handle(&event, &outcome)) return 9;
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 9;
     bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
-    if (bx_ntvdm_boot_namespace_composition_v1_handle(&event, &outcome)) return 10;
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 10;
     return 0;
 }

@@ -18,7 +18,7 @@ foreach ($pattern in @('adapter_runtime', 'host_session', 'GetEnvironment',
         throw "Forbidden generic ingress bridge dependency: $pattern"
     }
 }
-if ($source -notmatch 'return bx_ntvdm_vdm_generic_ud_classify_v1\(event, &ingress, &selection\) \?\s*0 : 0;') {
-    throw 'The S6 bridge must classify and decline until a provider slice is admitted.'
+if ($source -notmatch 'return bx_ntvdm_boot_namespace_composition_v1_handle\(event, outcome\);') {
+    throw 'The composed bridge must delegate only to the adapter-owned session.'
 }
-Write-Output 'bx-vdm-generic-ud-bridge-boundary: global classification-only bridge verified'
+Write-Output 'bx-vdm-generic-ud-bridge-boundary: adapter-owned composed bridge verified'

@@ -147,6 +147,10 @@ composition session over the existing generic-UD and mantle action ABIs.**
   copied write/read actions synchronously and returns typed generic outcomes;
   unbound and executor-failure paths decline. COMMAND write results now resume
   instead of re-faulting. See [T198 S12 P1 witness](etc/research/t198-s12-p1-adapter-composition-witness-001.md).
+- M0 T198 S12 P2 is complete: the core-facing alternative bridge is now a
+  single adapter-session delegate, retaining default decline until bind. Its
+  i686 transaction fixture and updated boundary scan pass. See [T198 S12 P2
+  witness](etc/research/t198-s12-p2-composed-bridge-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

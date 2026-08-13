@@ -1,4 +1,5 @@
 #include "bx_ntvdm_vdm_generic_ud_bridge_v1.h"
+#include "bx_ntvdm_boot_namespace_composition_v1.h"
 
 static int bx_ntvdm_vdm_generic_ud_event_valid(
     const struct bx_ntvdm_generic_ud_event_v1 *event)
@@ -46,17 +47,13 @@ int bx_ntvdm_vdm_generic_ud_classify_v1(
     return bx_ntvdm_bop_provider_registry_v1_select(ingress, selection);
 }
 
-/* This alternative link implementation is used only by a future composed
- * target.  S6 has no provider and must preserve the native exception path. */
+/* This alternative link implementation remains a decline until the adapter
+ * explicitly binds its one composition session. */
 int bx_ntvdm_mantle_generic_ud_bridge_v1(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    bx_ntvdm_bop_ingress_v1 ingress;
-    bx_ntvdm_bop_provider_selection_v1 selection;
-    (void)outcome;
-    return bx_ntvdm_vdm_generic_ud_classify_v1(event, &ingress, &selection) ?
-        0 : 0;
+    return bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome);
 }
 
 /* The finite runner references this fixture control unconditionally.  In the
