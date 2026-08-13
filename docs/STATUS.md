@@ -163,6 +163,10 @@ mechanical bridge under the closed MSVC x64 modern runtime foundation.**
   instruction loop and reaches finite controlled stop under the same MSVC x64
   `/MT` closure, with no adapter/provider or product input; see [T198 S14
   witness](etc/research/t198-s14-msvc-x64-finite-hlt-witness-001.md).
+- M0 T198 S15 P1 is an unresolved mechanical observation: the x64 UD2 fixture
+  links the replacement exception and generic bridge but reaches the finite
+  watchdog rather than observing bridge STOP. It is not accepted as a BOP or
+  generic-UD success; see [T198 S15 observation](etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
