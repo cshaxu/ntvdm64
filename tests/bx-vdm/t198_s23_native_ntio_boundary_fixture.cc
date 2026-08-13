@@ -13,6 +13,13 @@ extern "C" unsigned t198_s23_native_ntio_boundary_observed_dta_resume(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_hard_error_resume(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_system_symbol_resume(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_drive_resume(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_first_generic_ud(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_first_generic_cs(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_first_generic_eip(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_first_generic_mode(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_first_generic_vector(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_first_generic_window_bytes(void);
+extern "C" unsigned t198_s23_native_ntio_boundary_observed_first_generic_window(unsigned index);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_stop(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_selector(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_service(void);
@@ -35,14 +42,10 @@ int main()
   drive_types[2]=3u;
   if(!bx_ntvdm_host_drive_snapshot_v1_apply(1u<<2,drive_types,0u,0u,&drives)||!bx_ntvdm_boot_namespace_composition_v1_initialize(&c,&ntdos,&cmd,&tgt,0,&p)||!bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(&c,&drives)||!bx_ntvdm_boot_namespace_composition_v1_bind(&c)||!bx_ntvdm_ntio_preentry_v1_prepare(&ntio,&p.ntio,&r,8192,1000000))return 1;
   memset(&terminal,0,sizeof(terminal)); r.capture_terminal_snapshot=1; status=(int)bx_ntvdm_run_finite_bare_bytes(&r); terminal_valid=bx_ntvdm_finite_run_terminal_snapshot_get(&terminal); bx_ntvdm_boot_namespace_composition_v1_unbind(&c);
-  fprintf(stderr,"t198-s23 status=%d observed-5011=%u observed-503b-resume=%u observed-dta-resume=%u observed-hard-error-resume=%u observed-system-symbol-resume=%u observed-drive-resume=%u observed-stop=%u next=%02x:%02x plane=%u/%u/%u error-lock=%u gset=%u terminal=%u:%04x:%04x\n",status,
-    t198_s23_native_ntio_boundary_observed_5011(),t198_s23_native_ntio_boundary_observed_503b_resume(),t198_s23_native_ntio_boundary_observed_dta_resume(),t198_s23_native_ntio_boundary_observed_hard_error_resume(),t198_s23_native_ntio_boundary_observed_system_symbol_resume(),t198_s23_native_ntio_boundary_observed_drive_resume(),t198_s23_native_ntio_boundary_observed_stop(),
+  fprintf(stderr,"t198-s23 status=%d observed-5011=%u observed-503b-resume=%u observed-dta-resume=%u observed-hard-error-resume=%u observed-system-symbol-resume=%u observed-drive-resume=%u observed-first-generic-ud=%u fault=%04x:%04x mode=%u vector=%u window=%u:%02x%02x%02x%02x observed-stop=%u next=%02x:%02x plane=%u/%u/%u error-lock=%u gset=%u terminal=%u:%04x:%04x\n",status,
+    t198_s23_native_ntio_boundary_observed_5011(),t198_s23_native_ntio_boundary_observed_503b_resume(),t198_s23_native_ntio_boundary_observed_dta_resume(),t198_s23_native_ntio_boundary_observed_hard_error_resume(),t198_s23_native_ntio_boundary_observed_system_symbol_resume(),t198_s23_native_ntio_boundary_observed_drive_resume(),t198_s23_native_ntio_boundary_observed_first_generic_ud(),t198_s23_native_ntio_boundary_observed_first_generic_cs(),t198_s23_native_ntio_boundary_observed_first_generic_eip(),t198_s23_native_ntio_boundary_observed_first_generic_mode(),t198_s23_native_ntio_boundary_observed_first_generic_vector(),t198_s23_native_ntio_boundary_observed_first_generic_window_bytes(),t198_s23_native_ntio_boundary_observed_first_generic_window(0),t198_s23_native_ntio_boundary_observed_first_generic_window(1),t198_s23_native_ntio_boundary_observed_first_generic_window(2),t198_s23_native_ntio_boundary_observed_first_generic_window(3),t198_s23_native_ntio_boundary_observed_stop(),
     t198_s23_native_ntio_boundary_observed_selector(),t198_s23_native_ntio_boundary_observed_service(),c.plane.pending_kind,c.plane.pending_action_id,c.plane.has_dta,c.error_lock.has_registration,c.gset.has_drive_snapshot,
     terminal_valid,terminal.cs,terminal.eip);
-  return t198_s23_native_ntio_boundary_observed_5011() &&
-    t198_s23_native_ntio_boundary_observed_503b_resume() &&
-    t198_s23_native_ntio_boundary_observed_dta_resume() &&
-    t198_s23_native_ntio_boundary_observed_system_symbol_resume() &&
-    t198_s23_native_ntio_boundary_observed_drive_resume() &&
+  return t198_s23_native_ntio_boundary_observed_first_generic_ud() &&
     t198_s23_native_ntio_boundary_observed_stop()?0:2;
 }

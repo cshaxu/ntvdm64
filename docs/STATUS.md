@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S28.** Its governing brief is the active
+> **Current effective packet: M0 T198 S29.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S28 -- capture the first post-drive selector-blind generic
+**Active: M0 T198 S29 -- capture the first selector-blind non-BOP generic
 `#UD` record under the exact CPU5 fixture, then stop.**
 
 > **Governance correction:** The table below is the sole active packet. T188
@@ -23,19 +23,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S28, Ordinary Mode. |
-| Admission And Approval | S27 proves that the retained `LSL`/VGA diagnostic lacks the copied fault state needed to classify it. The owner-approved continuing T198 objective and S27's explicitly named successor authorize one test-only observation using the existing generic copied-event ABI. |
-| Objective | After the existing exact `50:0F` resume, capture the first later generic `#UD` record's fixed-width CS:EIP, execution mode, vector, and instruction window, then issue the existing typed controlled stop. |
-| Non-goals | No BOP selector/service routing or new provider, no guest-memory read, no guest-image patch, no CPU/mantle production semantic change, no new ABI, no device/plugin/firmware/VGA enablement, no legacy linkage, and no command/DOS continuity claim. |
-| Reference Baseline | S26 P2 controlled CPU5 fixture; S27 audit; existing selector-blind core-to-mantle generic `#UD` event ABI and test-only external bridge. |
+| Identifier Mode | M0 T198 S29, Ordinary Mode. |
+| Admission And Approval | S28 disproved its post-drive premise: the unrestricted trace reaches real-mode `LSL` and the VGA-aperture panic without an observed `50:0F` resume. Its recorded follow-up explicitly authorizes first-generic-`#UD` capture using the existing copied-event ABI. |
+| Objective | Capture the first non-`C4 C4` generic `#UD` record's fixed-width CS:EIP, execution mode, vector, instruction window, and local prior-drive marker, then issue the existing typed controlled stop. |
+| Non-goals | No BOP selector/service routing or provider, no guest-memory read, guest-image patch, CPU/mantle production semantic change, new ABI, device/plugin/firmware/VGA enablement, legacy linkage, or command/DOS continuity claim. |
+| Reference Baseline | S26 P2 controlled CPU5 fixture; S27 audit; S28 failure evidence; existing selector-blind core-to-mantle generic `#UD` event ABI and test-only external bridge. |
 | Files And ABI Surface | Only the existing exact fixture/bridge plus evidence and Status. The existing fixed-width `bx_ntvdm_generic_ud_event_v1` is consumed read-only; no production ABI changes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` rebuild of the existing fixture and exact CPU5 run. Prove the original BOP path reaches a valid `50:0F` typed resume, then record and stop on the first later non-`C4 C4` generic `#UD`; inspect the diff and boundary scans for zero selector/provider/device vocabulary in production Bochs code. |
-| Expected Markers | `50:0F` resume, copied fault CS:EIP/window, controlled stop, run exit zero, and no production-source change. |
+| Verification | MSVC x64 `/MT` rebuild of the existing fixture and exact CPU5 run. Record and stop on the first non-`C4 C4` generic `#UD`; inspect the diff and boundary scans for zero selector/provider/device vocabulary in production Bochs code. |
+| Expected Markers | Copied fault CS:EIP/window, local prior-drive bit, typed controlled stop, run exit zero, and no production-source change. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact inputs/commands, captured copied event, relationship to S27's diagnostic, source ownership, and follow-up classification. |
-| Stop Conditions | No later generic `#UD` occurs before timer expiry, capture would need guest-memory or CPU/device changes, the event is not fixed-width/valid, or a BOP/provider/device semantic change would be needed. Preserve evidence and re-admit. |
-| Exit Criteria | One exact run proves a valid post-drive generic-event capture and typed stop, or records the bounded alternative without any added production behavior. |
+| Reporting Requirements | Record exact inputs/commands, captured copied event, local drive marker, relationship to S27/S28, source ownership, and follow-up classification. |
+| Stop Conditions | No generic `#UD` occurs before timer expiry, capture would need guest-memory or CPU/device changes, the event is not fixed-width/valid, or a BOP/provider/device semantic change would be needed. Preserve evidence and re-admit. |
+| Exit Criteria | One exact run proves a valid first generic-event capture and typed stop, or records the bounded alternative without any added production behavior. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -264,6 +264,10 @@
   proposed post-drive capture point: it hits six real-mode `LSL` reports and
   the same VGA-aperture panic before any observed drive resume. The temporary
   nonpassing probe was removed. See [S28 probe](etc/research/t198-s28-post-drive-generic-ud-probe-001.md).
+- M0 T198 S29 captures the actual first non-BOP fault after a `50:0F` resume:
+  real-mode `0000:0A84`, vector 6, with a copied all-`FF` window. It stops
+  before the former VGA panic and moves the frontier to low-RAM control flow.
+  See [S29 capture](etc/research/t198-s29-first-generic-ud-capture-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
