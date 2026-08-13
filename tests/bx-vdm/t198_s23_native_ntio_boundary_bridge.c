@@ -7,6 +7,7 @@ static unsigned observed_hard_error_resume;
 static unsigned observed_system_symbol_resume;
 static unsigned observed_drive_resume;
 static unsigned observed_first_generic_ud;
+static struct bx_ntvdm_generic_ud_event_v1 observed_first_generic_event;
 static unsigned observed_stop;
 static unsigned observed_selector;
 static unsigned observed_service;
@@ -28,6 +29,7 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
             event->window_bytes : sizeof(observed_first_generic_window);
         unsigned i;
         observed_first_generic_ud = 1u;
+        observed_first_generic_event = *event;
         observed_first_generic_cs = event->cs;
         observed_first_generic_eip = event->eip;
         observed_first_generic_mode = event->execution_mode;
@@ -98,6 +100,7 @@ unsigned t198_s23_native_ntio_boundary_observed_hard_error_resume(void) { return
 unsigned t198_s23_native_ntio_boundary_observed_system_symbol_resume(void) { return observed_system_symbol_resume; }
 unsigned t198_s23_native_ntio_boundary_observed_drive_resume(void) { return observed_drive_resume; }
 unsigned t198_s23_native_ntio_boundary_observed_first_generic_ud(void) { return observed_first_generic_ud; }
+int t198_s23_native_ntio_boundary_copy_first_generic_event(struct bx_ntvdm_generic_ud_event_v1 *value) { if (!value || !observed_first_generic_ud) return 0; *value = observed_first_generic_event; return 1; }
 unsigned t198_s23_native_ntio_boundary_observed_first_generic_cs(void) { return observed_first_generic_cs; }
 unsigned t198_s23_native_ntio_boundary_observed_first_generic_eip(void) { return observed_first_generic_eip; }
 unsigned t198_s23_native_ntio_boundary_observed_first_generic_mode(void) { return observed_first_generic_mode; }

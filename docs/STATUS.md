@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S31.** Its governing brief is the active
+> **Current effective packet: M0 T198 S32.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S31 -- add one opaque terminal ordinary-RAM snapshot to the
-finite mantle fixture, then establish the exact `0x0A80` mutation.**
+**Active: M0 T198 S32 -- retain the complete already-copied first generic
+`#UD` register/segment record, then classify its predecessor state.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ finite mantle fixture, then establish the exact `0x0A80` mutation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S31, Ordinary Mode. |
-| Admission And Approval | S30 proves the source NTIO image owns physical `0x0A84` at publication, but S29 observes all-`FF` bytes there later. S30's recorded successor authorizes a bounded opaque mantle-owned ordinary-RAM terminal snapshot before any repair. |
-| Objective | Add a default-off private finite-run terminal snapshot of one prevalidated ordinary-RAM range, request `0x0A80` through the exact fixture, and prove whether/which bytes differ from the published NTIO source image at the accepted generic-stop boundary. |
-| Non-goals | No BOP/provider implementation or interpretation, guest-image patch, RAM/IVT/BIOS write, CPU/core semantic change, device/plugin/firmware/VGA enablement, production CLI ABI, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S29 copied event; S30 aperture audit; existing mantle finite-run copied RAM primitives and private terminal snapshot; exact source-built NTIO/NTDOS fixture. |
-| Files And ABI Surface | `bx-mantle` private finite-run header/source and the exact test fixture, plus evidence and Status. The capture accepts only address/length and returns copied bytes; no BOP, guest, OpenNT, or provider vocabulary is admitted. |
+| Identifier Mode | M0 T198 S32, Ordinary Mode. |
+| Admission And Approval | S31 independently confirms the low-RAM mutation but cannot identify its predecessor. Its recorded follow-up authorizes test-local retention of the full preexisting copied generic event, which already contains all GPRs and segment values. |
+| Objective | At the first non-BOP generic `#UD`, copy the complete fixed-width event into test-local storage, report registers and segments with the terminal RAM snapshot, and classify the likely predecessor-state evidence without guest-memory access. |
+| Non-goals | No BOP/provider implementation or interpretation, guest-memory read/write, guest-image patch, CPU/core/mantle semantic change, new runtime ABI, device/plugin/firmware/VGA enablement, production CLI surface, legacy linkage, or DOS continuity claim. |
+| Reference Baseline | S29 generic event, S30 aperture audit, S31 terminal snapshot, and the existing `bx_ntvdm_generic_ud_event_v1` fixed-width copied ABI. |
+| Files And ABI Surface | Existing exact test bridge/fixture plus evidence and Status only. The test makes a value copy of the already-copied event; production source and ABI are unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` compile/link of the mantle fixture and exact CPU5 run. Prove disabled/default and invalid-range rejection, then the fixture's bounded capture at generic stop; compare the copied output against the exact published NTIO bytes. Boundary scans prove no core, BOP, provider, device, or CLI term enters the new mantle mechanic. |
-| Expected Markers | Bounded opaque address/length, final copied bytes, source-versus-terminal difference, first generic-stop evidence, and no enabled device. |
+| Verification | MSVC x64 `/MT` rebuild/link and exact CPU5 run; prove the bridge event value copy is valid, reports the identical `0000:0A84` event and is not retained by pointer. Review test-only diff and production-boundary scan. |
+| Expected Markers | Complete GPR/segment record, unchanged copied window/vector, prior-drive bit, typed stop, source/terminal snapshot correlation, and zero production-source change. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record API/default/rejection contract, exact commands and snapshot bytes, source comparison, ownership boundary, limitations, and successor recommendation. |
-| Stop Conditions | Capture needs guest interpretation, a mutable action, core/device/firmware change, unbounded guest memory, a host pointer, or a production CLI contract. Preserve evidence and re-admit. |
-| Exit Criteria | The exact run records the bounded terminal range and source difference at typed stop, while focused mechanics tests prove default/rejection behavior and all production boundaries remain clean. |
+| Reporting Requirements | Record complete copied values, exact commands, what they prove or do not prove about predecessor state, and an owner-correct successor recommendation. |
+| Stop Conditions | Capture needs guest-memory access, a CPU/device change, an ABI change, or BOP/service interpretation. Preserve evidence and re-admit. |
+| Exit Criteria | One exact run captures a valid full copied event alongside the S31 terminal snapshot and produces a source-backed next trace/audit direction with no production change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -278,6 +278,11 @@ finite mantle fixture, then establish the exact `0x0A80` mutation.**
   NTIO bytes and confirms `0x0A84..0x0A87 = FF FF FF FF` at generic stop; no
   core, BOP, device, or CLI behavior changed. See
   [S31 snapshot](etc/research/t198-s31-terminal-ram-snapshot-001.md).
+- M0 T198 S32 captures the complete existing copied event without pointer
+  retention: its first generic fault has `SS:SP=00A7:090A` (physical
+  `0x137A`), separate DS/ES state, and the same all-FF window/snapshot. The
+  next evidence target is the raw stack range, not a device or service. See
+  [S32 state](etc/research/t198-s32-first-generic-event-state-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
