@@ -2,6 +2,10 @@
 
 ## Current Work
 
+**Active: M0 T189 S4 — two-object diagnostic derivative build.**
+
+**Active: M0 T189 S3 — two-object diagnostic derivative closure.**
+
 **Active: M0 T189 S2 — adapter first-failure diagnostic closure.**
 
 **Active: M0 T188 S9 — one-shot observation-controller closure.**
@@ -26,10 +30,10 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T189 S2, Ordinary Mode. |
+| Identifier Mode | M0 T189 S4, Ordinary Mode. |
 | Admission And Approval | T189 S1 proves an unobservable compound-chain decline. Owner authorization for registered Bochs intrusions and adapter work permits one fixed-width first-failure diagnostic. |
-| Objective | Add and statically prove a default-off copied first-failure category for the existing boot-file compound chain. |
-| Non-goals | No selector/service/address/payload export, guest memory read, result/session mutation, runtime observation, build, retry, provider semantic change or Bochs branch. |
+| Objective | Compile only the two declared objects and link the frozen diagnostic derivative. |
+| Non-goals | No guest runtime, retry, archive/device/config rebuild, source change or semantic expansion. |
 | Reference Baseline | T189 S1 map and BX-TRACE-060. |
 | Files And ABI Surface | Adapter diagnostic state, existing generic Bochs trace, exception register and focused tests only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
