@@ -89,6 +89,9 @@ before the holistic BOP plane can be recomposed.**
   stop uses the finite PC stop latch.  Historical parallel gates remain for
   P3 removal and are not part of the new composition; see
   [T198 S5 P2 core hook](etc/research/t198-s5-p2-core-mantle-ud-hook-001.md).
+- M0 T198 S5 P3 is in progress: the legacy machine-composition callback and
+  its product-stop path are removed from core; remaining legacy adapter
+  transaction blocks are the next removal set.
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
