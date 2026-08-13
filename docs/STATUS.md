@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S57.** Its governing brief is the active
+> **Current effective packet: M0 T198 S58.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S57 -- compose the existing snapshot-only `50:21/AX=4408`
-metadata provider through the active validated RAW_MEDIA route.**
+**Active: M0 T198 S58 -- audit the reached `50:42` DEM fast-read request and
+its current finite namespace/provider contract before admitting behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,12 +23,12 @@ metadata provider through the active validated RAW_MEDIA route.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S57, Ordinary Mode. |
-| Admission And Approval | S56 proves the reached request is 50:21 AX=4408, BL=02, and that the existing immutable-snapshot metadata provider exactly accepts the selected C: type. |
-| Objective | Add the existing provider to the active finite composition after validated ingress/selection/RAW_MEDIA classification, then observe the next boundary. |
-| Non-goals | No raw-media/IOCTL implementation beyond the exact provider contract, device or host drive access, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S56 audit, existing metadata provider, gset snapshot and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | Existing finite composition/provider manifest and evidence only; no new ABI. |
+| Identifier Mode | M0 T198 S58, Ordinary Mode. |
+| Admission And Approval | S57 clean source closure proves the exact snapshot-only `50:21/AX=4408` result and advances to `50:42`. |
+| Objective | Capture/map the actual 50:42 request and determine whether an existing finite namespace/provider contract precisely matches it. |
+| Non-goals | No fast-read implementation, device or host drive access, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S57 witness, OpenNT DEM source and current finite namespace provider evidence. |
+| Files And ABI Surface | Observation/audit and evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
 | Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |

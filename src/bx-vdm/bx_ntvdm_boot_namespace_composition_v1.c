@@ -2,6 +2,7 @@
 #include "bx_ntvdm_bios_memory_service.h"
 #include "bx_ntvdm_dem_boot_drive_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
+#include "bx_ntvdm_dem_ioctl_metadata_provider_v1.h"
 #include "bx_ntvdm_dem_misc_plane_v1.h"
 #include <string.h>
 
@@ -139,6 +140,7 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     bx_ntvdm_exception_event_v1 boundary; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_instruction_window_v1 window; bx_ntvdm_bop_ingress_v1 ingress;
     bx_ntvdm_bop_provider_selection_v1 selection; bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_dem_plane_record_v1 dem_plane;
     bx_ntvdm_exception_result_v1 memory_result;
     struct bx_ntvdm_mechanical_action_v1 action, next;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
@@ -172,6 +174,11 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     if (bx_ntvdm_dem_gset_plane_v1_dispatch(&active->gset, &ingress,
             &selection, &boundary, &cpu, &window, &result))
         return outcome(&result, value);
+    if (active->gset.has_drive_snapshot &&
+        bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &dem_plane) &&
+        bx_ntvdm_dem_ioctl_metadata_provider_v1_dispatch(&ingress, &selection,
+            &dem_plane, &active->gset.drive_snapshot, &boundary, &cpu,
+            &result)) return outcome(&result, value);
     if (bx_ntvdm_dem_boot_drive_service_v1_dispatch(&boundary, &cpu,
             &window, &memory_result)) {
         if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
