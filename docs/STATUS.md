@@ -198,6 +198,10 @@ contract before implementation.**
   `bx-vdm` session. Its x64 C closure and CPU5 native fixture prove one checked
   NTDOS publication, typed resume and negative controlled stop; see [S20
   witness](etc/research/t198-s20-native-dem-load-dos-witness-001.md).
+- M0 T198 S21 P1 closes the NTIO pre-entry contract: pre-entry publication is
+  a new selector-blind mantle request, not a startup BOP or Bochs semantic;
+  entry changes only CS:IP and stops at the already-admitted `50:11` boundary.
+  See [S21 pre-entry map](etc/research/t198-s21-ntio-preentry-contract-map-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
