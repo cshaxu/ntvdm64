@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 969 |
 | --- | --- |
-| Generated UTC | 2026-08-13T08:24:50Z |
+| Generated UTC | 2026-08-13T08:26:06Z |
 
 ## Entries
 
@@ -110,7 +110,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 534a52b28db596ecc2f2d9c37df4bafc4c892bb198474528611a0b05663ef775 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 27d3dd944e5f9a10671ee317ded5841324825c7ea77045dc637e3bcdb893d024 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
