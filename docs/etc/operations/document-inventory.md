@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 937 |
+| Documentation records | 938 |
 | --- | --- |
-| Generated UTC | 2026-08-13T04:02:32Z |
+| Generated UTC | 2026-08-13T04:03:55Z |
 
 ## Entries
 
@@ -353,6 +353,7 @@ content-divergent entries.
 | etc/research/t194-s54-deferred-native-post-observation-001.md | indexed supporting material | 37ed721744f1bed6f0a3fdf0d8356bb7c3a22877b1867df3922fa30fa8c7e13d |
 | etc/research/t194-s55-selector-06-source-correlation-001.md | indexed supporting material | 8021a442f3b9de7e13fbd246865e28da5db8a7f345718cdb3876fa5333b1827e |
 | etc/research/t194-s56-deferred-machine-closure-generation-001.md | indexed supporting material | e6c5c8e21ef39d9ec4e562bc703f3eceabe999fbb3aba1db9c133ec51b6aecd1 |
+| etc/research/t194-s57-deferred-machine-closure-build-001.md | indexed supporting material | 6dcdd2698c93457afa5bf5285a5d7d8e0b348d17c8d6581c7b31ae35582eab4e |
 | etc/research/t194-s5-one-slot-engine-admission-audit-001.md | indexed supporting material | aca606a76c4bc9928fa138259f71125fc280c1e297dc2f397d1512c56f0efe67 |
 | etc/research/t194-s6-one-slot-adapter-composition-assembly-001.md | indexed supporting material | c5d255db3dd302de46307eff3ef07dc4762ac2e417808a715d63d4a5ebc3eafd |
 | etc/research/t194-s7-one-slot-bounded-startup-admission-audit-001.md | indexed supporting material | 0f2ea6f6f3b2dcea0f84185fef8491852991d85a7445cc574efca771fa1f0fc2 |
