@@ -5,8 +5,8 @@
 > **Current effective packet: M0 T196 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T196 S6 — rebuild only the admitted minimal closure and verify
-the selector-blind Bochs/adapter boundary.**
+**Active: M0 T196 S6 — establish the effective minimal MSVC closure before
+any build, then verify the selector-blind Bochs/adapter boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,18 +24,18 @@ the selector-blind Bochs/adapter boundary.**
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T196 S6, Ordinary Mode. |
-| Admission And Approval | S5 is closed by `e2748ba`: its current 24-path/41-hunk crosswalk has no orphan source hunk or exception-register entry and assigns every remaining compiler/archive/link claim to this S6. S6 is admitted for one declared minimal MSVC x86 closure only, plus the focused static boundary suite. |
-| Objective | Rebuild and link only the admitted minimal Bochs/adapter closure from a fresh isolated root, record exact compiler/link inputs and artifact hashes, and verify that the resulting closure contains no selector/service semantics in Bochs. |
-| Non-goals | No full Bochs/bochs.exe build, configure-loop repair, BOP runtime campaign, guest execution claim, device/firmware/plugin expansion, new Bochs intrusion, or source change unless an explicitly recorded minimal-closure mismatch requires re-admission. |
-| Reference Baseline | T196 S5 current crosswalk; T196 S4 closure; pinned Bochs 2.6 tree; exception register; existing minimal MSVC closure recipes as evidence only. |
-| Files And ABI Surface | A new isolated build root under `artifacts/build/`; admitted build shim/manifest if required; exact object/link map/log/hash evidence; focused tests; Status and documentation inventory. |
+| Admission And Approval | S5 is closed by `e2748ba`: its current 24-path/41-hunk crosswalk has no orphan source hunk or exception-register entry and assigns every remaining compiler/archive/link claim to this S6. T95's minimal-x86 closure contract and object-link audit prove that no safe recipe exists yet. S6 is therefore admitted first for the controlled effective-configuration and retained-symbol closure investigation; a build requires a subsequent explicit S6 admission. |
+| Objective | Derive and prove the effective minimal MSVC x86 configuration, fixture-root contract and retained object/symbol closure needed before any minimal build can be generated. |
+| Non-goals | No compiler/linker invocation, build root, recipe, response file, full Bochs/bochs.exe build, configure-loop repair, BOP runtime campaign, guest execution claim, device/firmware/plugin expansion, or new Bochs intrusion. |
+| Reference Baseline | T196 S5 current crosswalk; T196 S4 closure; T95 minimal-x86 configuration/link-closure contract; T95 MSVC object-link audit; pinned Bochs 2.6 tree; exception register. |
+| Files And ABI Surface | Configuration/closure investigation evidence, source/object ownership ledgers, focused static tests, Status and documentation inventory. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Establish the declared MSVC x86 environment; generate one new minimal build root without recursive default targets; compile/link only its manifest; inspect the resulting map/object vector; run the complete retained static suite; run documentation governance and `git diff --check`. |
-| Expected Markers | One fresh manifest-bound minimal artifact or a precise first closure failure; compiler/link commands, inputs, output hashes and map evidence; no broad rebuild and no Bochs selector/service term. |
+| Verification | Record exact effective configuration candidates and their source edges; establish a fixture-root contract; reconcile every candidate object's retained/rejected members; rerun focused static checks; run documentation governance and `git diff --check`. |
+| Expected Markers | A build admission record naming exact config bytes/hash, fixture root, source/object vector, CRT/import model and negative retention proof—or a precisely attributed unresolved edge. |
 | Asset Needs | Local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record the complete declared build vector, environment, hashes, map/object result, static suite result, first failure if any, and whether T196 closes or needs a bounded repair re-admission. |
-| Stop Conditions | The first closure attempt requires a full target rebuild, extra device/plugin/configuration, guest semantic branch, object/pointer ABI, new intrusion, or a second speculative recipe. Preserve facts; do not retry or repair without re-admission. |
-| Exit Criteria | The admitted minimal closure builds/links and static regressions pass, or its first reproducible failure is fully attributed without a retry. T196 may close only if no remaining repair work exists. |
+| Reporting Requirements | Record configuration bytes/hash candidate, fixture-root scope, object/symbol ownership result, unresolved edge, and exact conditions for any later build admission. |
+| Stop Conditions | The investigation requires a guessed macro, product-shell object, full target rebuild, device/plugin/configuration expansion, guest semantic branch, object/pointer ABI, or new intrusion. Preserve facts and re-admit. |
+| Exit Criteria | The effective configuration and retained-symbol closure either satisfy the documented build-admission criteria or identify the first unresolvable owner edge without a build. This closes only the investigative S6 stage. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
