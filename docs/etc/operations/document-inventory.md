@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1004 |
+| Documentation records | 1005 |
 | --- | --- |
-| Generated UTC | 2026-08-13T14:57:11Z |
+| Generated UTC | 2026-08-13T14:59:11Z |
 
 ## Entries
 
@@ -394,6 +394,7 @@ content-divergent entries.
 | etc/research/t198-s16-msvc-x64-boot-namespace-composition-witness-001.md | indexed supporting material | 2673f3ba959bf229f14087815350c0ea6bad2e3585090514136c46091804cfc8 |
 | etc/research/t198-s17-msvc-x64-native-bop-composition-witness-001.md | indexed supporting material | 4005d9e6f83325b0f033554ad6a8b336598090055cd33a7a0e97117da20a857b |
 | etc/research/t198-s18-boot-namespace-native-matrix-001.md | indexed supporting material | 5422b19972e8c15eace373fc8355f7c03b66dabc1870bcf0b47e01a45c46a753 |
+| etc/research/t198-s18-dta-composition-closure-001.md | indexed supporting material | 55320ef7855a8c1cf813c91ba77bec6c0ce32eff3755c588ce1394e5ab83376b |
 | etc/research/t198-s18-native-command-bootfile-witness-001.md | indexed supporting material | 94c61dd99dbdc9721539e2ea18a8003f20d1bfdd97e34edd4898b2d1f235536e |
 | etc/research/t198-s18-native-dem-lifecycle-witness-001.md | indexed supporting material | f9f15361c000317cee633145404ed8179fef41ec441696e4e9b4d5fa6cdcf5fc |
 | etc/research/t198-s1-bop-runtime-composition-map-001.md | indexed supporting material | 6ae7b63e002e80119cde1195c5bc4df34d7af07d99fd39679cacf9e88876032c |
