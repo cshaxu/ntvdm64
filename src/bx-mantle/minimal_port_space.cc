@@ -15,6 +15,8 @@
 
 #include "iodev.h"
 
+bx_devices_c bx_devices;
+
 // BX-IO-025-BEGIN
 bx_bool bx_devices_c::init_empty_port_space(void)
 {

@@ -37,7 +37,6 @@
 #define BASE_MEMORY_IN_K  640
 
 
-bx_devices_c bx_devices;
 
 
 // constructor for bx_devices_c
