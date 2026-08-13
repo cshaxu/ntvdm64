@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S55 — source-classify selector-06 re-entry and late fault.**
+**Active: M0 T194 S56 — generate deferred native-POST machine-composition closure.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S55, Ordinary Mode. |
-| Admission And Approval | S54 is the sole retained deferred native-POST observation: it reaches 50:21 but ends in an independently observed late selector-06/EIP/stack sequence. Owner approval permits normal single-agent continuation under T194. |
-| Objective | Classify the selector-06 re-entry and the predecessor of the late EIP/stack fault from OpenNT/SoftPC source and existing evidence, yielding an owner/disposition decision. |
-| Non-goals | No runtime retry, source/build/bundle/profile change, Bochs patch, adapter handler, device expansion, raw-media action, or normal-return claim. |
-| Reference Baseline | S54 trace, T105 selector-06 re-entry record, T134/T150 late-fault source records, and the original OpenNT/SoftPC source tree. |
-| Files And ABI Surface | Source/evidence reading plus one research record, Status and regenerated document inventory only. |
+| Identifier Mode | M0 T194 S56, Ordinary Mode. |
+| Admission And Approval | S55 proves S51 omitted the existing original SoftPC illegal-op machine island, causing selector-06 re-entry. Owner approval permits normal single-agent continuation under T194. |
+| Objective | Generate one fresh, uncompiled derivative that combines deferred native POST with the existing selector-blind machine-composition object triple. |
+| Non-goals | No compilation, engine execution, source/Bochs patch, adapter handler, device/archive expansion, raw-media action, or normal-return claim. |
+| Reference Baseline | S49/S50 deferred closure, S54 single trace, S55 source correlation, and T121/T130 machine-composition closure. |
+| Files And ABI Surface | Existing derivative generator and one fresh ignored build root; one evidence record, Status and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Map trace sites and selector 06 through original source, compare prior retained records, inspect exact code context and run documentation governance plus git diff --check. |
-| Expected Markers | Source anchors for selector 06 and the late control path, explicit ownership, and a disposition that rejects unsupported adapter/Bochs changes. |
-| Asset Needs | Existing S54 logs and checked-in OpenNT/SoftPC source/evidence only. |
-| Reporting Requirements | Record trace-to-source mapping, what is proved/not proved, and the next bounded action or explicit block. |
-| Stop Conditions | Missing source anchor, conflicting retained evidence, need for a runtime retry, or any proposed semantic change; pause for re-admission. |
-| Exit Criteria | Committed source correlation determines whether a further investigation is warranted without changing the current composition. |
+| Verification | Invoke the generator once with DeferredStartupPlan and MachineComposition; inspect manifest/makefile for 68+5 closure, exactly two Bochs objects, original machine triple and no archive/device target; run documentation governance and git diff --check. |
+| Expected Markers | Deferred macros, machine-composition macro, main.o plus cpu\\exception.o, and bx_ntvdm_machine_bop_v1.obj, unexp_nt.c.obj, illegalp.c.obj. |
+| Asset Needs | Existing generator, retained source/object islands and a new nonexisting build root only. |
+| Reporting Requirements | Record command, root/manifest/makefile hashes, exact object surface and no-run result. |
+| Stop Conditions | Generator rejects option combination, missing/extra machine object, archive/device prerequisite, source mutation, or need to compile/run. |
+| Exit Criteria | Committed generated closure admits a separately reviewed build decision. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare the S54 selector-06 loop and late fault with T105, T134 and T150; reject an inference from BOP observation alone to provider success or Bochs defect. |
+| Similar-Issue Sweep | Compare the generated object/rule set to S49 and T121/T130, ensuring the only composition change is the existing original machine island. |
 
 ## Current Technical Baseline
 
