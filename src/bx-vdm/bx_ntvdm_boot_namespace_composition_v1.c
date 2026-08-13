@@ -1,5 +1,6 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx_ntvdm_emm_unavailable_service.h"
+#include "bx_ntvdm_mouse_install1_mapping_service.h"
 #include "bx_ntvdm_spckbd_init_service.h"
 #include "bx_ntvdm_bios_memory_service.h"
 #include "bx_ntvdm_dem_boot_drive_service.h"
@@ -61,7 +62,7 @@ static int outcome(const bx_ntvdm_cpu_result_v2 *result,
     return 1;
 }
 
-static int execute_dpb_multi_write(
+static int execute_multi_write(
     bx_ntvdm_boot_namespace_composition_v1 *composition,
     const bx_ntvdm_multi_write_transaction_v1 *transaction,
     const uint8_t *payload)
@@ -95,6 +96,57 @@ static int execute_dpb_multi_write(
     memcpy(action.payload, payload, action.payload_bytes);
     return bx_ntvdm_mechanical_action_v1_valid(&action) &&
         bx_ntvdm_mantle_execute_mechanical_action_v1(&action);
+}
+
+static int execute_mouse_install1_mapping(
+    bx_ntvdm_boot_namespace_composition_v1 *composition,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_guest_gather_read_action_v1 read;
+    bx_ntvdm_multi_write_transaction_v1 write;
+    struct bx_ntvdm_mechanical_action_v1 action;
+    uint8_t payload[4];
+    uint32_t index, action_id, offset = 0u;
+
+    if (composition == 0 || event == 0 || cpu == 0 || window == 0 ||
+        result == 0 || !bx_ntvdm_mouse_install1_mapping_service_v1_prepare(
+            event, cpu, window, &read)) return 0;
+    if (read.disposition != BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_NEED_READ ||
+        read.range_count == 0u ||
+        read.range_count > BX_NTVDM_MECHANICAL_ACTION_V1_MAX_RANGES ||
+        read.total_bytes == 0u ||
+        read.total_bytes > BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES ||
+        composition->plane.next_action_id == 0u) return 0;
+    action_id = composition->plane.next_action_id++;
+    if (composition->plane.next_action_id == 0u) composition->plane.next_action_id = 1u;
+    bx_ntvdm_mechanical_action_v1_clear(&action);
+    action.action_id = action_id;
+    action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_READ;
+    action.range_count = read.range_count;
+    action.payload_bytes = read.total_bytes;
+    for (index = 0u; index < read.range_count; ++index) {
+        if (read.ranges[index].address >= UINT64_C(0x100000) ||
+            read.ranges[index].length == 0u ||
+            read.ranges[index].length > UINT32_MAX ||
+            read.ranges[index].length > UINT64_C(0x100000) -
+                read.ranges[index].address ||
+            offset > action.payload_bytes - (uint32_t)read.ranges[index].length)
+            return 0;
+        action.ranges[index].physical_address = read.ranges[index].address;
+        action.ranges[index].byte_count = (uint32_t)read.ranges[index].length;
+        action.ranges[index].payload_offset = offset;
+        offset += action.ranges[index].byte_count;
+    }
+    if (offset != action.payload_bytes || !bx_ntvdm_mechanical_action_v1_valid(&action) ||
+        !bx_ntvdm_mantle_execute_mechanical_action_v1(&action) ||
+        !bx_ntvdm_mouse_install1_mapping_service_v1_complete(event, cpu, &read,
+            action.payload, action.payload_bytes, &write, payload) ||
+        !execute_multi_write(composition, &write, payload)) return 0;
+    *result = write.result;
+    return bx_ntvdm_cpu_result_v2_valid(result);
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_initialize(
@@ -154,6 +206,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             &result)) return outcome(&result, value);
     if (bx_ntvdm_emm_unavailable_service_v1_dispatch(&boundary, &cpu, &window,
             &result)) return outcome(&result, value);
+    if (execute_mouse_install1_mapping(active, &boundary, &cpu, &window,
+            &result)) return outcome(&result, value);
     /* This composition admits only the source-observed top-level memory
      * queries: BIOS 12h and BIOS 15h/AH=88h. */
     if (window.valid_bytes >= 3u && window.bytes[0] == 0xc4u &&
@@ -201,7 +255,7 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
         if (bx_ntvdm_dem_dpb_service_v1_prepare(
                 active->gset.drive_snapshot.types, &boundary, &cpu, &window,
                 &transaction, payload)) {
-            if (!execute_dpb_multi_write(active, &transaction, payload)) return 0;
+            if (!execute_multi_write(active, &transaction, payload)) return 0;
             return outcome(&transaction.result, value);
         }
     }

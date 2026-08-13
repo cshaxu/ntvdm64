@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S64.** Its governing brief is the active
+> **Current effective packet: M0 T198 S66.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S64 -- audit the reached top-level `BOP C8` first-phase mouse
-installation and its existing headless mapping provider before admitting behavior.**
+**Active: M0 T198 S66 -- audit the reached top-level `BOP 17` printer I/O
+request and its existing unavailable-provider contract before admitting behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ installation and its existing headless mapping provider before admitting behavio
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S64, Ordinary Mode. |
-| Admission And Approval | S63 clean source closure takes the original no-EMS `BX=0` failure path and advances to selector `C8`; see `etc/research/t198-s63-emm-unavailable-witness-001.md`. |
-| Objective | Capture/map the actual three-byte `BOP C8` input, the OpenNT mouse-install source path, and the existing headless mapping provider's exact eligibility. |
-| Non-goals | No mouse device, input queue, pointer integration, PIC/IRQ, firmware enablement, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S63 witness, OpenNT SoftPC BIOS/mouse source and current bx-vdm mapping-provider evidence. |
+| Identifier Mode | M0 T198 S66, Ordinary Mode. |
+| Admission And Approval | S65 clean source closure maps the exact C8 guest vector through checked RAM mechanics and advances to selector `17`; see `etc/research/t198-s65-mouse-vector-mapping-witness-001.md`. |
+| Objective | Capture/map the actual three-byte `BOP 17` request, the SoftPC printer I/O source path, and the existing unavailable-provider eligibility. |
+| Non-goals | No printer device, LPT I/O, host spooler, host integration, firmware enablement, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S65 witness, OpenNT SoftPC printer source and current bx-vdm unavailable-provider evidence. |
 | Files And ABI Surface | Observation/audit and evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect the complete current `C8` state through the bounded source-built recipe and map it to the OpenNT call site and existing provider contract. |
-| Expected Markers | Exact copied input, source-defined completion/failure branch direction, provider eligibility or rejection, and a narrow next admission decision. |
+| Verification | Inspect the complete current `17` state through the bounded source-built recipe and map it to the original printer owner and current provider contract. |
+| Expected Markers | Exact copied input, source-defined unavailable branch direction, provider eligibility or rejection, and a narrow next admission decision. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record exact command, build identity, terminal output, OpenNT source map and exact provider eligibility. |
-| Stop Conditions | The route requires mouse device/input/PIC/IRQ/firmware, host integration, DOS image, or Bochs/runtime behavior. Stop and re-admit rather than expanding scope. |
-| Exit Criteria | A reproducible source-backed classification of the reached `BOP C8` mouse-install boundary and a narrow next admission decision. |
+| Stop Conditions | The route requires printer/LPT/spooler/host integration, firmware, DOS image, or Bochs/runtime behavior. Stop and re-admit rather than expanding scope. |
+| Exit Criteria | A reproducible source-backed classification of the reached `BOP 17` printer boundary and a narrow next admission decision. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 

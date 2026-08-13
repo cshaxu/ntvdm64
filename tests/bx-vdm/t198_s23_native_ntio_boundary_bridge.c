@@ -35,6 +35,11 @@ static unsigned observed_emm_probe;
 static uint16_t observed_emm_probe_cs, observed_emm_probe_ds;
 static uint32_t observed_emm_probe_eip, observed_emm_probe_eax,
     observed_emm_probe_ebx, observed_emm_probe_edx, observed_emm_probe_eflags;
+static unsigned observed_mouse_install1;
+static uint16_t observed_mouse_install1_cs, observed_mouse_install1_ds;
+static uint32_t observed_mouse_install1_eip, observed_mouse_install1_eax,
+    observed_mouse_install1_ebx, observed_mouse_install1_ecx,
+    observed_mouse_install1_edx, observed_mouse_install1_eflags;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -148,6 +153,15 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_emm_probe_eax = event->eax; observed_emm_probe_ebx = event->ebx;
         observed_emm_probe_edx = event->edx; observed_emm_probe_eflags = event->eflags;
     }
+    if (!observed_mouse_install1 && event->window_bytes >= 3u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0xc8u) {
+        observed_mouse_install1 = 1u; observed_mouse_install1_cs = event->cs;
+        observed_mouse_install1_ds = event->ds; observed_mouse_install1_eip = event->eip;
+        observed_mouse_install1_eax = event->eax; observed_mouse_install1_ebx = event->ebx;
+        observed_mouse_install1_ecx = event->ecx; observed_mouse_install1_edx = event->edx;
+        observed_mouse_install1_eflags = event->eflags;
+    }
     if (!observed_fast_read && event->window_bytes >= 4u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
         event->window[2] == 0x50u && event->window[3] == 0x42u) {
@@ -254,3 +268,12 @@ unsigned t198_s23_native_ntio_boundary_observed_emm_probe_eax(void) { return obs
 unsigned t198_s23_native_ntio_boundary_observed_emm_probe_ebx(void) { return observed_emm_probe_ebx; }
 unsigned t198_s23_native_ntio_boundary_observed_emm_probe_edx(void) { return observed_emm_probe_edx; }
 unsigned t198_s23_native_ntio_boundary_observed_emm_probe_eflags(void) { return observed_emm_probe_eflags; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1(void) { return observed_mouse_install1; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_cs(void) { return observed_mouse_install1_cs; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_ds(void) { return observed_mouse_install1_ds; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_eip(void) { return observed_mouse_install1_eip; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_eax(void) { return observed_mouse_install1_eax; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_ebx(void) { return observed_mouse_install1_ebx; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_ecx(void) { return observed_mouse_install1_ecx; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_edx(void) { return observed_mouse_install1_edx; }
+unsigned t198_s23_native_ntio_boundary_observed_mouse_install1_eflags(void) { return observed_mouse_install1_eflags; }
