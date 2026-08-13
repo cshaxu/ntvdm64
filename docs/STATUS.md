@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S6.** Its governing brief is the active
+> **Current effective packet: M0 T198 S7.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S6 -- attach the fixed #UD record to the global `bx-vdm`
-ingress and registry without attaching a provider runtime.**
+**Active: M0 T198 S7 -- prove the i686 `bx-vdm` bridge object can enter the
+MSVC/x86 finite-machine link without activating a provider or BOP execution.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ ingress and registry without attaching a provider runtime.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S6, Ordinary Mode. |
-| Admission And Approval | S5 is closed by its physical core-cleanup witness. The owner-approved global BOP direction admits only an ingress/registry attachment map before any provider or transaction composition. |
-| Objective | Define and verify a fixed `bx-vdm` bridge implementation that converts the generic copied #UD record to the existing global ingress and provider-registry records, then declines every result until a separate provider slice is admitted. |
-| Non-goals | No individual BOP service/provider behavior; no adapter runtime v1/v2/v3/v4, CLI/environment/session, guest RAM transfer, firmware/BIOS, device, GUI, product build, OpenNT import, general machine configuration, unbounded execution, or CPU decode/exception semantic change. |
-| Reference Baseline | T198 S5 physical cleanup witness and the T198 S6 mantle-to-VDM ingress map. |
-| Files And ABI Surface | One `bx-vdm` fixed-bridge source/header and focused C test; the existing fixed mantle record, exception/state/window/result, ingress and registry ABI only. The bare mantle bridge remains an alternative link implementation. |
+| Identifier Mode | M0 T198 S7, Ordinary Mode. |
+| Admission And Approval | S6 is classification-only complete. Owner-approved installation of i686 MinGW-w64 GCC supplies the previously missing x86 producer; this S admits only an artifact/link proof. |
+| Objective | Build the fixed `bx-vdm` bridge as i686 C objects and link it as the mutually exclusive generic bridge implementation into the MSVC/x86 finite CPU5 fixture; run HLT only. |
+| Non-goals | No BOP execution, service/provider/runtime v1-v4, CLI/environment/session, guest RAM transfer, firmware/BIOS, device, GUI, product build, OpenNT import, unbounded execution or CPU semantic change. |
+| Reference Baseline | T198 S6 ingress witness and x86 toolchain audit, plus the newly installed i686 MinGW-w64 GCC 16.1.0-6. |
+| Files And ABI Surface | The fixed `bx-vdm` bridge and a reproducible cross-island link probe. Only the existing copied C ABI crosses; default mantle and `bx-vdm` bridge definitions are mutually exclusive. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Run focused x86 C conversion/ingress/registry positives and negative windows; prove the new bridge references no runtime/session/CLI/Win32/guest-memory symbol; rerun the bare CPU5 finite fixture and documentation governance. |
-| Expected Markers | Field-map evidence, a `C4 C4 50 11` global-ingress trace with a typed decline, negative non-BOP/incomplete/unknown traces, and an unchanged bare-machine source-build. |
+| Verification | Verify i686 object machine type, exact source/object list, and MSVC/x86 link map; run HLT with the core bridge macro compiled but no #UD invoked; run boundary and documentation checks. |
+| Expected Markers | i386 COFF objects, one successful MSVC/x86 finite HLT link/run with the external bridge symbol resolved, no default mantle bridge object, and no BOP/provider trace. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record every field/result conversion, source object and toolchain island, the mutually exclusive bridge-link rule, rejected runtime alternatives, and runtime non-claim. |
-| Stop Conditions | Any core/mantle source gains BOP/provider/runtime meaning; the bridge attaches a service/provider, environment, session, guest-memory transfer, raw pointer or product dependency; or conversion requires a new ABI field. Preserve evidence and re-admit. |
-| Exit Criteria | A `bx-vdm` bridge source/test proves common ingress and registry classification from the copied record and declines all dispositions; the bare CPU5 source-build remains clean; no individual service becomes reachable. |
+| Reporting Requirements | Record compiler versions, architecture, CRT/link command, artifact hashes, resolved bridge symbol, alternate-object exclusion, negative runtime claim and any unresolved CRT dependency. |
+| Stop Conditions | Link requires a provider/session/CLI/product object, changes the copied ABI, has CRT-owned allocation across the boundary, or invokes BOP/provider code. Preserve evidence and re-admit. |
+| Exit Criteria | The external i686 bridge is proven link-compatible with the x86 finite fixture and HLT returns normally; no BOP is executed and no provider becomes reachable. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover every generic-record field, ingress route, registry family, v2 outcome disposition, alternative link input, adapter runtime entrypoint, CLI/session symbol and legacy direct BOP recognizer. |
+| Similar-Issue Sweep | Cover i686 object architecture, C linkage spelling, CRT imports, bridge-symbol resolution, duplicate default-bridge exclusion, core macro isolation and no-#UD HLT run. |
 
 ## Current Technical Baseline
 
@@ -103,6 +103,10 @@ ingress and registry without attaching a provider runtime.**
   MSVC/x86 artifact.  A next composed bridge requires an owner-selected x86
   producer or a separately designed process ABI; see [T198 S6 x86 toolchain
   audit](etc/research/t198-s6-x86-vdm-toolchain-audit-001.md).
+- M0 T198 S7 P1 is complete: eight i686 MinGW C objects replace the default
+  bridge in the MSVC/x86 CPU5 finite link; the macro-enabled HLT fixture
+  links and returns zero without entering #UD.  See [T198 S7 cross-island
+  witness](etc/research/t198-s7-cross-island-link-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

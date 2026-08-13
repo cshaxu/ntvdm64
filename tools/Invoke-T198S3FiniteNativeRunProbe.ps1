@@ -2,7 +2,8 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [switch]$UdStopFixture
+    [switch]$UdStopFixture,
+    [string[]]$ExternalBridgeObjects = @()
 )
 
 Set-StrictMode -Version Latest
@@ -44,10 +45,16 @@ $finiteRunSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_finite_run.cc'
 $finiteRunObject = Join-Path $build 'finite_run.obj'
 $bridgeSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_generic_ud_bridge.cc'
 $bridgeObject = Join-Path $build 'generic_ud_bridge.obj'
+$externalBridge = $ExternalBridgeObjects.Count -ne 0
+foreach ($object in $ExternalBridgeObjects) {
+    if (-not (Test-Path -LiteralPath $object -PathType Leaf)) {
+        throw "External bridge object missing: $object"
+    }
+}
 $fixtureBytes = if ($UdStopFixture) { '0x0f, 0x0b' } else { '0xf4' }
 $fixtureStopOnUd = if ($UdStopFixture) { '1' } else { '0' }
 $replacementExceptionObject = $null
-if ($UdStopFixture) {
+if ($UdStopFixture -or $externalBridge) {
     $replacementExceptionObject = Join-Path $build 'exception_mantle_ud.obj'
     $exceptionCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
         (New-MsvcCompileCommand (Join-Path $repository 'src\bx-core\cpu\exception.cc') $replacementExceptionObject) +
@@ -80,10 +87,12 @@ $finiteCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
     (New-MsvcCompileCommand $finiteRunSource $finiteRunObject)
 & cmd.exe /d /s /c $finiteCompile
 if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run helper: $LASTEXITCODE" }
-$bridgeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
-    (New-MsvcCompileCommand $bridgeSource $bridgeObject)
-& cmd.exe /d /s /c $bridgeCompile
-if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for generic #UD bridge: $LASTEXITCODE" }
+if (!$externalBridge) {
+    $bridgeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+        (New-MsvcCompileCommand $bridgeSource $bridgeObject)
+    & cmd.exe /d /s /c $bridgeCompile
+    if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for generic #UD bridge: $LASTEXITCODE" }
+}
 $probeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
     (New-MsvcCompileCommand $probe $probeObject)
 & cmd.exe /d /s /c $probeCompile
@@ -91,15 +100,16 @@ if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run fixture
 
 $seedObjects = Get-ChildItem -LiteralPath $nativeCore -Filter '*.obj' -File |
     Where-Object { $_.Name -ne 'minimal_machine_link_probe.obj' -and
-        (!$UdStopFixture -or $_.Name -ne 'whole_cpu_exception.obj') } |
+        (!(($UdStopFixture -or $externalBridge)) -or $_.Name -ne 'whole_cpu_exception.obj') } |
     ForEach-Object { $_.FullName }
 if ($seedObjects.Count -eq 0) { throw 'The seed build produced no reusable CPU5 objects' }
 $exe = Join-Path $build 't198-s3-finite-native-run-probe.exe'
 $map = Join-Path $build 'link.map'
 $log = Join-Path $build 'link.log'
 $response = Join-Path $build 'link.rsp'
-$localObjects = @($probeObject, $finiteRunObject, $bridgeObject)
-if ($UdStopFixture) { $localObjects += $replacementExceptionObject }
+$localObjects = @($probeObject, $finiteRunObject)
+if ($externalBridge) { $localObjects += $ExternalBridgeObjects } else { $localObjects += $bridgeObject }
+if ($UdStopFixture -or $externalBridge) { $localObjects += $replacementExceptionObject }
 $quotedObjects = $localObjects + $seedObjects |
     ForEach-Object { '"' + $_ + '"' }
 @('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') + $quotedObjects |
@@ -125,9 +135,10 @@ $record = [ordered]@{
         eip = '0x00000000'
         instructionTickBudget = 64
         udStopFixture = [bool]$UdStopFixture
+        externalBridgeObjects = @($ExternalBridgeObjects | ForEach-Object { [IO.Path]::GetFileName($_) })
         ips = 1000000
     }
-    forbiddenInputs = @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe', 'device archives', 'adapter', 'OpenNT', 'BOP', 'CLI')
+    forbiddenInputs = @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe', 'device archives', 'OpenNT', 'CLI')
     linkExitCode = $linkExit
     runExitCode = $runExit
     expectedRunExitCode = 0
