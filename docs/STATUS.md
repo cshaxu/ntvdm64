@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T197 S3.** Its governing brief is the active
+> **Current effective packet: M0 T197 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T197 S3 — derive the first independently buildable `bx-core`
-source vector and its exact mantle dependencies.**
+**Active: M0 T197 S4 — physically move the complete adopted CPU, FPU, memory
+and decode families into `bx-core` without altering their semantics.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -18,25 +18,27 @@ source vector and its exact mantle dependencies.**
 > `bx-core`/`bx-mantle` boundary and physically names the VDM adapter `bx-vdm`.
 > S1 is closed by `477283c`: it renamed the adapter and mapped the current
 > Bochs ownership surface. S2 is closed by `2fcbaac`: it created the physical
-> mantle root. S3 derives the independently buildable core source vector and
-> its exact mantle dependencies; mixed files remain for individually admitted
-> decisions. Holistic BOP runtime closure remains the following T package.
+> mantle root. S3 is closed by its first-core-closure record: it established
+> the exact pure-core trees and identified the root header/SIM product seam.
+> S4 physically relocates only those pure trees; mixed files remain for later
+> individually admitted decisions. Holistic BOP runtime closure remains the
+> following T package.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T197 S3, Ordinary Mode. |
-| Admission And Approval | S2 is closed by `2fcbaac`. The owner requires `src/bx-core` as the adopted Bochs core, but the S1/S2 evidence shows that CPU, memory, FPU, decode and their root headers currently reach product-shell SIM/config/device definitions. S3 is admitted to derive an exact first source/object/header vector and classify every direct edge before any core `git mv`. |
-| Objective | Produce a reproducible first `bx-core` physical-move and compile-closure contract for CPU/decode, RAM and admitted no-device mechanics, including each required root header/source and its direction to `bx-mantle`. |
-| Non-goals | No core source move yet; no source behavior change; no `main.cc`, GUI/SIM, full device, BIOS, plugin, configuration, VDM, BOP, OpenNT or DOS implementation; no full product build and no guessed configuration macro. |
-| Reference Baseline | `2fcbaac`; T197 S1 ownership map; T197 S2 migration record; T196 prebuild audit; pinned Bochs 2.6 source and its existing MSVC project/Makefiles. |
-| Files And ABI Surface | Read-only source/object/header ledgers, current build metadata, Status and T197 evidence. No runtime ABI or compiled source change. |
+| Identifier Mode | M0 T197 S4, Ordinary Mode. |
+| Admission And Approval | S3 is closed by `8761ad2` and `t197-s3-core-closure-first-edge-001.md`. The owner directed direct `git mv` for source-proven pure core and mantle code. The established pure-core move set is the complete `cpu/` (including `cpudb/`), `fpu/`, `memory/`, `disasm/` trees and `cpudb.h`; root `bochs.h`, SIM, full I/O devices and product build shell are explicitly mixed and excluded. |
+| Objective | Create the physical `src/bx-core/` root by moving the complete adopted CPU/decode/FPU/memory source families and their pure root CPUID declaration, then repair path-only live references. |
+| Non-goals | No instruction, CPU, FPU, memory, decode or exception behavior change; no new Bochs intrusion; no `main.cc`, root `bochs.h`, GUI/SIM, full device, BIOS, plugin/configuration, VDM/BOP/OpenNT/DOS source move; no full-product build or configuration choice. |
+| Reference Baseline | `8761ad2`; T197 S1/S2 records; T196 crosswalk; pinned Bochs 2.6 source. |
+| Files And ABI Surface | `src/bochs/{cpu,fpu,memory,disasm}/`, `src/bx-core/cpudb.h`, their live test/tool/build-reference paths, the exception register, Status and S4 evidence. The mixed root header is a retained compatibility include; no runtime ABI bytes change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace every selected initial core translation unit to direct includes and externally defined globals; reconcile against the minimal mantle entry; prove positive core ownership and negative product-shell/VDM retention; run focused static checks, documentation governance and `git diff --check`. |
-| Expected Markers | Exact core candidate file vector, required root/header vector, mantle import list, rejected/mixed list, and a path-only S4 `git mv` recipe with no inferred source semantics. |
-| Asset Needs | Existing local and pinned external Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record every selected/rejected file, direct owner edge, source/build metadata implication, unresolved edge, and conditions for S4 move admission. |
-| Stop Conditions | The first closure requires a guessed product config, GUI/SIM parser, plugin/device/firmware component, VDM/BOP semantic, or a source behavior change. Preserve evidence and re-admit. |
-| Exit Criteria | The first core vector is exhaustive for its declared minimal mechanics and all direct dependencies have core/mantle/mixed disposition, or the first unresolvable native owner edge is source-proven. |
+| Verification | `git diff --summary` proves the complete tree moves; tracked live references to old core paths are zero except declared retained product-shell evidence; static core/mantle boundary tests pass; source identity/provenance and exception register paths agree; documentation governance and `git diff --check` pass. |
+| Expected Markers | A real `src/bx-core/{cpu,fpu,memory,disasm}` and `src/bx-core/cpudb.h`, with root `bochs.h` explicitly retained/mixed and an exact next compile-header seam list. |
+| Asset Needs | Existing local repository and pinned local Bochs 2.6 source only; no network/import action. |
+| Reporting Requirements | Record every moved tree, retained mixed root path, reference repair, source identity, test outcome, and any build-metadata limitation. |
+| Stop Conditions | A move requires behavioral source edits, changes an ABI, needs GUI/SIM/product configuration, pulls a device/firmware/plugin path, or reveals VDM/BOP/OpenNT/DOS logic inside a claimed core tree. Preserve evidence and re-admit. |
+| Exit Criteria | The selected core source families are physically under `bx-core`, live non-product references are repaired, and all retained mixed paths have explicit disposition. |
 | Original Owner Request | Find current Bochs core/mantle logic, use `git mv` to move pure core and pure mantle code directly, repair compilation, and decide only the remaining mixed links case by case. |
 | Similar-Issue Sweep | Cover CPU, decode tables, memory, FPU, disassembly, root headers, log/SIM, PC time, port space, Makefile and VS metadata; distinguish selected minimal build paths from retained historical product metadata. |
 

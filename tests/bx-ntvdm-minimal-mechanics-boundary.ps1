@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$memoryHeader = Join-Path $repositoryRoot 'src/bochs/memory/memory.h'
-$memorySource = Join-Path $repositoryRoot 'src/bochs/memory/misc_mem.cc'
+$memoryHeader = Join-Path $repositoryRoot 'src/bx-core/memory/memory.h'
+$memorySource = Join-Path $repositoryRoot 'src/bx-core/memory/misc_mem.cc'
 $iodevHeader = Join-Path $repositoryRoot 'src/bochs/iodev/iodev.h'
 $portSpaceSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_port_space.cc'
 

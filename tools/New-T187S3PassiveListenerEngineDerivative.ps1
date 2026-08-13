@@ -38,7 +38,7 @@ if ($baseManifest.adapterSources.Count -ne 67 -or $baseManifest.cliSources.Count
 
 & robocopy $base $build /E /COPY:DAT /DCOPY:DAT /R:1 /W:1 /XJ /NFL /NDL /NJH /NJS | Out-Null
 if ($LASTEXITCODE -gt 7) { throw "Base copy failed: $LASTEXITCODE" }
-$sourceHash = Copy-Verified -Source (Join-Path $repository 'src\bochs\cpu\exception.cc') `
+$sourceHash = Copy-Verified -Source (Join-Path $repository 'src\bx-core\cpu\exception.cc') `
     -Destination (Join-Path $build 'cpu\exception.cc')
 
 $objects = @($baseManifest.adapterSources | ForEach-Object { 'adapter\' + ($_.name -replace '\.c$', '.obj') }) +

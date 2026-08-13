@@ -96,8 +96,8 @@ $manifest = [ordered]@{
     cliSources = @()
 }
 foreach ($entry in @(@{ source='src\bochs\main.cc'; destination='main.cc'; stale='main.o' },
-        @{ source='src\bochs\cpu\exception.cc'; destination='cpu\exception.cc'; stale='cpu\exception.o' },
-        @{ source='src\bochs\cpu\bx_ntvdm_exception_intercept.h'; destination='cpu\bx_ntvdm_exception_intercept.h'; stale='' })) {
+        @{ source='src\bx-core\cpu\exception.cc'; destination='cpu\exception.cc'; stale='cpu\exception.o' },
+        @{ source='src\bx-core\cpu\bx_ntvdm_exception_intercept.h'; destination='cpu\bx_ntvdm_exception_intercept.h'; stale='' })) {
     $source = Join-Path $repository $entry.source
     $destination = Join-Path $build $entry.destination
     $hash = Copy-Verified $source $destination

@@ -8,7 +8,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
 }
 
-$exceptionPath = Join-Path $RepositoryRoot 'src\bochs\cpu\exception.cc'
+$exceptionPath = Join-Path $RepositoryRoot 'src\bx-core\cpu\exception.cc'
 if (-not (Test-Path -LiteralPath $exceptionPath -PathType Leaf)) {
     throw "Missing exception source: $exceptionPath"
 }

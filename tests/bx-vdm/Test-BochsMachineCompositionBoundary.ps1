@@ -8,7 +8,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
 }
 
-$exception = Join-Path $RepositoryRoot 'src\bochs\cpu\exception.cc'
+$exception = Join-Path $RepositoryRoot 'src\bx-core\cpu\exception.cc'
 if (-not (Test-Path -LiteralPath $exception -PathType Leaf)) {
     throw "Missing seam file: $exception"
 }

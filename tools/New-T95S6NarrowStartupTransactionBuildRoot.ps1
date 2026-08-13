@@ -91,9 +91,9 @@ if ($LASTEXITCODE -gt 7) {
 
 $bochsReplacements = @(
     [ordered]@{ source = (Join-Path $repository 'src\bochs\main.cc'); destination = (Join-Path $build 'main.cc'); staleObject = (Join-Path $build 'main.o') },
-    [ordered]@{ source = (Join-Path $repository 'src\bochs\cpu\exception.cc'); destination = (Join-Path $build 'cpu\exception.cc'); staleObject = (Join-Path $build 'cpu\exception.o') },
-    [ordered]@{ source = (Join-Path $repository 'src\bochs\cpu\event.cc'); destination = (Join-Path $build 'cpu\event.cc'); staleObject = (Join-Path $build 'cpu\event.o') },
-    [ordered]@{ source = (Join-Path $repository 'src\bochs\fpu\fpu.cc'); destination = (Join-Path $build 'fpu\fpu.cc'); staleObject = (Join-Path $build 'fpu\fpu.o') }
+    [ordered]@{ source = (Join-Path $repository 'src\bx-core\cpu\exception.cc'); destination = (Join-Path $build 'cpu\exception.cc'); staleObject = (Join-Path $build 'cpu\exception.o') },
+    [ordered]@{ source = (Join-Path $repository 'src\bx-core\cpu\event.cc'); destination = (Join-Path $build 'cpu\event.cc'); staleObject = (Join-Path $build 'cpu\event.o') },
+    [ordered]@{ source = (Join-Path $repository 'src\bx-core\fpu\fpu.cc'); destination = (Join-Path $build 'fpu\fpu.cc'); staleObject = (Join-Path $build 'fpu\fpu.o') }
 )
 $bochsManifest = @()
 foreach ($replacement in $bochsReplacements) {

@@ -63,6 +63,16 @@ configuration/header seam and proves that it replaces the mixed root header
 only for the selected core vector. `main.cc`, GUI/SIM, full I/O devices,
 plugins, BIOS and product build metadata remain rejected from that vector.
 
+The physical S4 move set is now complete and mechanical: the full
+`cpu/` tree (including its `cpudb/` subdirectory), `fpu/`, `memory/`,
+`disasm/`, and the root `cpudb.h`. Complete trees move together so Bochs
+instruction semantics are neither selected nor reconstructed one file at a
+time. The retained root `bochs.h` is a **mixed compatibility header** for the
+first transition: it continues to expose native declarations from the core,
+mantle and temporarily retained product tree through named include roots. It
+will be replaced only after S4's source/object compile map proves a smaller
+header contract. This is not a claim that `bochs.h` itself is core-owned.
+
 ## Confidence and Follow-up
 
 High confidence in the direct source calls and current macro values. Medium

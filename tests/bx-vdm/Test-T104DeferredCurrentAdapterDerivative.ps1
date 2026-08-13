@@ -5,7 +5,7 @@ $generator = Get-Content (Join-Path $repository 'tools\New-T98S1CurrentAdapterEn
 foreach ($required in @(
         '[switch]$DeferredStartupPlan',
         "@{ source = 'src\bochs\main.cc'; destination = 'main.cc'; object = 'main.o' }",
-        "@{ source = 'src\bochs\cpu\exception.cc'; destination = 'cpu\exception.cc'; object = 'cpu\exception.o' }",
+        "@{ source = 'src\bx-core\cpu\exception.cc'; destination = 'cpu\exception.cc'; object = 'cpu\exception.o' }",
         'BX_NTVDM_ENABLE_EXECUTION_PLAN=0',
         'BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1',
         'Deferred derivative must rebuild exactly two Bochs objects.',

@@ -17,8 +17,15 @@ case, and removal/review condition.
 The owner confirmed on 2026-08-10 that a direct Bochs change is permitted when
 necessary, provided it is entered here before the patch. This is exception
 authority, not a general permission: the preferred implementation location
-remains `src/bx-ntvdm-adapter/`, and no entry may introduce BOP, DOS/WOW/DEM,
+remains `src/bx-vdm/`, and no entry may introduce BOP, DOS/WOW/DEM,
 OpenNT, or host-service semantics into Bochs.
+
+**T197 location migration.** Historical entries retain the source paths that
+were true when they were registered. The adopted native paths are now
+`src/bx-core/cpu/`, `src/bx-core/fpu/` and `src/bx-core/memory/`; the complete
+crosswalk and negative scope are recorded in
+[`t197-s4-core-path-migration-001.md`](t197-s4-core-path-migration-001.md).
+Every new exception must name its current path, not the historical prefix.
 
 ## Active Exceptions
 

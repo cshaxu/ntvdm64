@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 960 |
+| Documentation records | 961 |
 | --- | --- |
-| Generated UTC | 2026-08-13T06:30:47Z |
+| Generated UTC | 2026-08-13T06:37:06Z |
 
 ## Entries
 
@@ -110,7 +110,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | c253026a9e523c90d68a6b36558450f5b263cc244a6d24e5732819b8ddf0b337 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 0d83ea9be169dc8b6c8b7010eaa1cf380fb6f19155b7a50819a27b698f6dd651 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -377,7 +377,8 @@ content-divergent entries.
 | etc/research/t196-s6-effective-closure-prebuild-audit-001.md | indexed supporting material | 7b72493f07fd982a85874c5c06077692fbe4eb46440007a5a89f482b4cf69f54 |
 | etc/research/t197-s1-bochs-ownership-placement-map-001.md | indexed supporting material | 90c72f178e7127bfdda2859a61dcfdbc996cd8449342298e1ff53811d95c5cfe |
 | etc/research/t197-s2-mantle-path-migration-001.md | indexed supporting material | c36aae2ed7ece1f1543686f302c201c5b131eb34f962891f865b96620266af45 |
-| etc/research/t197-s3-core-closure-first-edge-001.md | indexed supporting material | a19ea7b0457d2b8a35477750b9865edb5145a36270e3cf8f0d714fda41328680 |
+| etc/research/t197-s3-core-closure-first-edge-001.md | indexed supporting material | f14f991febcfa5f8e0081dc0f8d8b1286c623528a0ea7ee0f090cb2726135513 |
+| etc/research/t197-s4-core-path-migration-001.md | indexed supporting material | b7c37c9586370f30563b25f2a001f141a7d44a903f3bec52295fb6499c3f0008 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -974,7 +975,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 671d4d0e963b8202210bab8c58318f5a4226565440e33c657e0e248117ad353d |
+| STATUS.md | principal control document | 756299aee5be25d75befab14437b4480cab70e5cf39b62d01a90b489ef732b4d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

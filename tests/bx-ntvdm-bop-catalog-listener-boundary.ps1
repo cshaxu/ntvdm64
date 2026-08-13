@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $repository = Split-Path -Parent $PSScriptRoot
-$bochs = Get-Content (Join-Path $repository 'src\bochs\cpu\exception.cc') -Raw
+$bochs = Get-Content (Join-Path $repository 'src\bx-core\cpu\exception.cc') -Raw
 $adapter = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_exception_observer_v1.c') -Raw
 foreach ($forbidden in @('BOP_CATALOG_LISTENER', 'bx_ntvdm_bop_catalog',
         'bop observed', 'selector=', 'stack-valid=', 'frame-valid=')) {

@@ -110,8 +110,8 @@ if ($DeferredStartupPlan -or $MachineComposition -or $RealModeVectorDiagnostic -
         $bochsSources += @{ source = 'src\bochs\main.cc'; destination = 'main.cc'; object = 'main.o' }
     }
     $bochsSources += @(
-        @{ source = 'src\bochs\cpu\exception.cc'; destination = 'cpu\exception.cc'; object = 'cpu\exception.o' },
-        @{ source = 'src\bochs\cpu\bx_ntvdm_exception_intercept.h'; destination = 'cpu\bx_ntvdm_exception_intercept.h'; object = '' }
+        @{ source = 'src\bx-core\cpu\exception.cc'; destination = 'cpu\exception.cc'; object = 'cpu\exception.o' },
+        @{ source = 'src\bx-core\cpu\bx_ntvdm_exception_intercept.h'; destination = 'cpu\bx_ntvdm_exception_intercept.h'; object = '' }
     )
     foreach ($entry in $bochsSources) {
         $source = Join-Path $repository $entry.source
