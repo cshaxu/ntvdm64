@@ -182,6 +182,41 @@ static int bx_ntvdm_adapter_runtime_v1_dispatch_dem_drive_snapshot(
             result);
 }
 
+/* The same immutable CLI snapshot is the complete input to the narrow
+ * demGetDPBList contract.  This is deliberately a selection gate as well as
+ * a producer: an empty admitted snapshot must not fall through to a retained
+ * profile-static inventory.  It leaves the original empty-list continuation
+ * as pass-through because the generic multi-write ABI has no empty-result
+ * transport. */
+static int bx_ntvdm_adapter_runtime_v1_dispatch_dem_dpb_snapshot(
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_bop_ingress_v1 ingress;
+    bx_ntvdm_bop_provider_selection_v1 selection;
+    bx_ntvdm_dem_plane_record_v1 plane;
+    bx_ntvdm_multi_write_transaction_v1 transaction;
+
+    if (!bx_ntvdm_adapter_runtime.has_host_drive_snapshot || result == 0 ||
+        !bx_ntvdm_bop_ingress_v1_classify(window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) ||
+        ingress.service != 0x46u ||
+        !bx_ntvdm_dem_dpb_service_v1_prepare(
+            bx_ntvdm_adapter_runtime.host_drive_snapshot.types, event,
+            cpu_before, window, &transaction,
+            bx_ntvdm_adapter_runtime.multi_write_payload)) return 0;
+    if (transaction.writes.write_count == 0u) return 1;
+    if (!bx_ntvdm_host_session_v1_queue_multi_write(
+            &bx_ntvdm_adapter_runtime.session, &transaction,
+            bx_ntvdm_adapter_runtime.multi_write_payload,
+            transaction.writes.payload_bytes)) return 0;
+    *result = transaction.result;
+    return 1;
+}
+
 static int bx_ntvdm_hex_nibble(wchar_t value, uint8_t *out)
 {
     if (value >= L'0' && value <= L'9') { *out = (uint8_t)(value - L'0'); return 1; }
@@ -671,6 +706,8 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
      * demNotYetImplemented slot.  The selected finite profile overrides only
      * 50:42 through the source-derived fast-read provider above. */
     if (bx_ntvdm_adapter_runtime_v1_dispatch_dem_drive_snapshot(event,
+            cpu_before, window, result)) return 1;
+    if (bx_ntvdm_adapter_runtime_v1_dispatch_dem_dpb_snapshot(event,
             cpu_before, window, result)) return 1;
     if (!bx_ntvdm_adapter_runtime.has_host_drive_inventory) return 1;
     if (bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x21u) &&

@@ -256,6 +256,72 @@ static int run_t194_drive_snapshot_routing(void)
     return failed;
 }
 
+static int run_t194_drive_snapshot_dpb_routing(void)
+{
+    wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], target[MAX_PATH], profile[MAX_PATH];
+    char json[4096];
+    bx_ntvdm_exception_event_v1 event = { BX_NTVDM_EXCEPTION_ABI_MAGIC,
+        BX_NTVDM_EXCEPTION_ABI_VERSION, sizeof(event), BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION,
+        0u, 6u, 0u, 0u, 0x7c00u };
+    bx_ntvdm_cpu_state_v1 state;
+    bx_ntvdm_instruction_window_v1 window;
+    bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_multi_write_transaction_v1 transaction;
+    bx_ntvdm_host_drive_snapshot_v1 snapshot;
+    const uint8_t *payload = 0;
+    uint64_t payload_bytes = 0u;
+    int failed = 0;
+    if (GetTempPathW(MAX_PATH, root) == 0 || GetTempFileNameW(root, L"n64", 0u, root) == 0 ||
+        !DeleteFileW(root) || !CreateDirectoryW(root, 0)) return 1;
+    swprintf(ntio, MAX_PATH, L"%ls\\NTIO.SYS", root);
+    swprintf(ntdos, MAX_PATH, L"%ls\\NTDOS.SYS", root);
+    swprintf(command, MAX_PATH, L"%ls\\COMMAND.COM", root);
+    swprintf(target, MAX_PATH, L"%ls\\TARGET.COM", root);
+    swprintf(profile, MAX_PATH, L"%ls\\profile.json", root);
+    snprintf(json, sizeof(json),
+        "{\"schema\":\"ntdos64-byob-profile-v6\",\"profile\":\"nt4-en-us-command-normal-return-v6\",\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"t194-drive-snapshot-dpb\",\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null},{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"%s\",\"version\":null}],\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}},\"guest_declared_targets\":[{\"role\":\"target\",\"placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2}}],\"guest_search_metadata\":{\"command\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"target\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"config\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1},\"autoexec\":{\"attributes\":32,\"dos_time\":1,\"dos_date\":1}},\"host_drive_inventory\":{\"types\":[0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}",
+        sha256_abc, sha256_abc, sha256_abc, sha256_abc);
+    failed |= !write_file(ntio, "abc") || !write_file(ntdos, "abc") ||
+        !write_file(command, "abc") || !write_file(target, "abc") || !write_file(profile, json) ||
+        !SetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_PLAN", L"2,1,c,00") ||
+        !SetEnvironmentVariableW(L"NTDOS64_HOST_INCLUDE_DRIVES", L"C");
+    bx_ntvdm_adapter_runtime_v1_reset();
+    failed |= !bx_ntvdm_adapter_runtime_v1_install(profile, root) ||
+        !bx_ntvdm_adapter_runtime_v1_copy_host_drive_snapshot(&snapshot) ||
+        (snapshot.types[2] != 2u && snapshot.types[2] != 3u);
+    bx_ntvdm_cpu_state_v1_initialize(&state, BX_NTVDM_CPU_EXECUTION_REAL);
+    state.es = 0x100u; state.ebp = 0x200u;
+    bx_ntvdm_instruction_window_v1_capture(&window,
+        (const uint8_t[]){ 0xc4u, 0xc4u, 0x50u, 0x46u }, 4u);
+    failed |= !bx_ntvdm_adapter_runtime_v2_dispatch(&event, &state, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x7c04u ||
+        result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 6) ||
+        result.cpu_delta.gpr16_values[6] != 0x221u ||
+        !bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
+            &transaction, &payload, &payload_bytes) || transaction.writes.write_count != 2u ||
+        transaction.writes.writes[0].guest_physical_address != 0x1200u ||
+        transaction.writes.writes[1].guest_physical_address != 0x1219u ||
+        payload_bytes != 6u || payload == 0 || payload[0] != 2u || payload[1] != 2u ||
+        payload[2] != 0xffu || payload[3] != 0xffu || payload[4] != 0xffu || payload[5] != 0xffu;
+    bx_ntvdm_adapter_runtime_v1_reset();
+    SetEnvironmentVariableW(L"NTDOS64_HOST_INCLUDE_DRIVES", 0);
+    failed |= !SetEnvironmentVariableW(L"NTDOS64_HOST_EXCLUDE_DRIVES", L"A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z") ||
+        !bx_ntvdm_adapter_runtime_v1_install(profile, root) ||
+        !bx_ntvdm_adapter_runtime_v2_dispatch(&event, &state, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH ||
+        bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
+            &transaction, &payload, &payload_bytes);
+    if (failed) fprintf(stderr, "t194-drive-snapshot-dpb-routing: result=%u rip=%llx bp=%x writes=%u bytes=%llu C-type=%u\n",
+        result.disposition, (unsigned long long)result.resume_rip,
+        result.cpu_delta.gpr16_values[6], transaction.writes.write_count,
+        (unsigned long long)payload_bytes, snapshot.types[2]);
+    bx_ntvdm_adapter_runtime_v1_reset();
+    SetEnvironmentVariableW(L"NTDOS64_HOST_EXCLUDE_DRIVES", 0);
+    SetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_PLAN", 0);
+    DeleteFileW(profile); DeleteFileW(target); DeleteFileW(command); DeleteFileW(ntdos); DeleteFileW(ntio); RemoveDirectoryW(root);
+    return failed;
+}
+
 int main(int argc, char **argv)
 {
     wchar_t root[MAX_PATH], ntio[MAX_PATH], ntdos[MAX_PATH], command[MAX_PATH], target[MAX_PATH], profile[MAX_PATH], evidence[MAX_PATH];
@@ -295,6 +361,8 @@ int main(int argc, char **argv)
         return run_t194_v6_install();
     if (argc == 2 && strcmp(argv[1], "--t194-drive-snapshot-routing") == 0)
         return run_t194_drive_snapshot_routing();
+    if (argc == 2 && strcmp(argv[1], "--t194-drive-snapshot-dpb-routing") == 0)
+        return run_t194_drive_snapshot_dpb_routing();
 
     if (argc == 3) {
         wchar_t supplied_profile[MAX_PATH], supplied_root[MAX_PATH];

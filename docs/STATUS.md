@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S25 — immutable drive-snapshot DPB route.**
+**Active: M0 T194 S26 — current-adapter DPB derivative build.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S25, Ordinary Mode. |
-| Admission And Approval | S24 proves the reached `50:46` contract consumes only the same immutable 26-slot type snapshot as `50:0F`; owner approval authorizes normal, evidence-backed continuation. |
-| Objective | Route the existing source-derived `DemGetDPBList` multi-write producer through common ingress/registry/DEM-plane selection using the normal CLI snapshot, and prove snapshot precedence plus an empty-snapshot decline. |
-| Non-goals | No real engine run/retry, Bochs patch/build/config/device action, guest-profile/root change, filesystem/DPB device expansion, host path access, static-inventory merge, empty-list success fabrication, terminal-result transport, or claim of continuous execution. |
-| Reference Baseline | S23 trace; S24 source audit; S19/S20 snapshot route and precedence proof; existing `50:46` provider/multi-write seam. |
-| Files And ABI Surface | Adapter runtime selection code, focused adapter runtime test, S25 evidence, Status, and generated documentation inventory only; no ABI shape change. |
+| Identifier Mode | M0 T194 S26, Ordinary Mode. |
+| Admission And Approval | S25 source/test closure selects the existing checked multi-write seam for non-empty snapshot DPB results. Owner authorization permits the normal narrow derivative step. |
+| Objective | Generate and source-build one current adapter derivative containing S25, while retaining the exact existing Bochs object closure and recording its identity. |
+| Non-goals | No engine run/retry, Bochs source/object/archive/config/device change, host capability expansion, source/provider semantic change, bundle assembly, profile/root change, or continuous-execution claim. |
+| Reference Baseline | S21 derivative method; S25 adapter/test closure; current S21 engine/bundle identities. |
+| Files And ABI Surface | Existing derivative generator, generated artifact evidence, S26 research record, Status, and documentation inventory only; no product-source change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused positive/negative runtime routing test, source review, documentation governance, and `git diff --check`; no real guest process. |
-| Expected Markers | `50:46` queues the existing checked multi-write only from the live snapshot; static profile value cannot override it; empty snapshot remains declined. |
-| Asset Needs | Existing imported source, adapter/test closure, and documentation tools only. |
-| Reporting Requirements | Record exact source contract, changed selection order, positive/negative assertions, and all unclaimed runtime behavior. |
-| Stop Conditions | Need for an empty-list ABI change, new guest-memory mechanism, static inventory merge, host namespace/filesystem, or any Bochs change/build; pause for fresh S admission. |
-| Exit Criteria | Committed adapter-only source/test/evidence closure of the snapshot-to-DPB route. |
+| Verification | Generator manifest/object diff, MSVC x86 build output, engine hash, documentation governance, and `git diff --check`. |
+| Expected Markers | Source-built adapter/runtime object, zero Bochs replacement count, unchanged retained Bochs-input hashes, and one new engine hash. |
+| Asset Needs | Existing S21 generator, retained S21 Bochs objects, MSVC x86 toolchain, and generated-artifact path only. |
+| Reporting Requirements | Record generator input, command, object/replacement counts, retained Bochs identities, output hash, and build limitation. |
+| Stop Conditions | Any Bochs recompilation, new device/configuration, generator source edit, object-closure mismatch, link dependency expansion, or need to run the engine; pause for fresh S admission. |
+| Exit Criteria | Committed manifest-bound source-built derivative evidence. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify `50:0F` snapshot precedence remains intact; inspect `54:04` and static fixture routes for accidental inventory merging; verify no BOP recognizer bypasses common DEM classification. |
+| Similar-Issue Sweep | Compare every retained Bochs object hash with S21; ensure the generator compiles adapter/CLI objects only and no archive target can recurse into Bochs. |
 
 ## Current Technical Baseline
 
