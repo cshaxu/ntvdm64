@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S40.** Its governing brief is the active
+> **Current effective packet: M0 T198 S41.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S40 -- atomically install the evidenced NTIO pre-entry
-profile snapshot before image placement and CPU entry.**
+**Active: M0 T198 S41 -- capture fixed stack position at the existing
+selector-blind code-segment transition boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ profile snapshot before image placement and CPU entry.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S40, Ordinary Mode. |
-| Admission And Approval | S39 proves the finite fixture omits its required evidenced pre-entry profile inputs. The owner directs a minimal Bochs replacement with adapter-owned boundary and authorizes individually registered invasive bx changes under strict review. |
-| Objective | Define one fixed-width, opaque adapter pre-entry input record and convert it to the existing mantle mechanical multi-range write. Extend the private finite request so mantle validates and atomically applies that action before preserving the virtual-interrupt span, writing NTIO, restoring the span and entering the CPU. Use only the complete currently evidenced three-range stock profile snapshot. |
-| Non-goals | No bx-core change; no selector/service/BOP/OpenNT/DOS/NTIO recognition in mantle; no synthetic BIOS/device/firmware behavior; no new arbitrary memory API, raw pointer/host callback, partial writes, CLI option, broad runtime linkage, BDA-memory-`12h` input claim, or DOS continuity claim. |
-| Reference Baseline | S39 pre-entry attribution; r18 selected CPU5 snapshot evidence; existing `bx_ntvdm_mechanical_action_v1` checked all-or-nothing write; exact CPU5 x64 `/MT` finite closure. |
-| Files And ABI Surface | New `bx-vdm` pre-entry input record/builder; `bx-vdm` NTIO preparation signature; private `bx-mantle` finite-request copied action field and lifecycle call; finite fixtures/tests; registered exception, evidence and Status. The only cross-layer value is the existing fixed mechanical action record. |
+| Identifier Mode | M0 T198 S41, Ordinary Mode. |
+| Admission And Approval | S40 removes the undefined pre-entry input frontier but retains `9346:4D53 -> 0000:0000`; owner permits strict registered Bochs intrusions. |
+| Objective | Extend the existing default-off copied instruction-position record with real-mode `SS:SP`, then report the ordered stack positions on the already captured latest CS transition. |
+| Non-goals | No instruction/stack-memory read, BOP/OpenNT/DOS/NTIO recognition, CPU mutation, decoder/exception change, device/firmware behavior, callback, CLI ABI, or new adapter interface. |
+| Reference Baseline | S36 per-step history, S38 transition witness and S40 selected-profile native run. |
+| Files And ABI Surface | Existing history record/macro, mantle transition query and finite fixture only; exception register/evidence/Status. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compile and run focused adapter-record validation/rejection tests and the exact CPU5 x64 `/MT` finite closure. Prove machine initialization → pre-entry whole-action preflight/write → capture preserved span → NTIO write → restore → CPU entry order; reject absent, malformed, overlapping, partial and over-aperture input; scan mantle for forbidden semantic vocabulary. |
-| Expected Markers | One opaque three-range record with r18 bytes, existing mechanical action only, atomic ordering, explicit missing-input rejection, no core change, no new device or BOP path, and a new post-seed runtime frontier. |
+| Verification | Rebuild affected CPU5 objects and fixture under x64 `/MT`; prove disabled/default, copied transition order and exact SS:SP result; scan changed sources for semantic or memory-access expansion. |
+| Expected Markers | Registered fixed-width scalar capture, no guest-memory read, CS transition plus SS:SP, typed stop and no product/device path. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record record/action layouts, r18 source identity and byte ranges, exact order, negative cases, build/run output, changed-source scan, resulting execution frontier and deferred input disposition. |
-| Stop Conditions | The action requires Bochs semantic decoding, profile/device/BOP vocabulary in mantle, a core change, host pointer/callback, uncontrolled range, partial write, undocumented bytes, or a new startup input beyond the selected r18 evidence. Preserve evidence and re-admit. |
-| Exit Criteria | The finite CPU5 x64 `/MT` execution accepts exactly the validated selected-profile pre-entry action and runs past the former undefined-input state; every invalid/absent input rejects before entry and no forbidden boundary expansion occurs. |
+| Reporting Requirements | Record layout, exact run result, source scan, interpretation limit and successor. |
+| Stop Conditions | Any guest-memory/stack-content access, semantic filtering, CPU mutation, pointer/object transfer or product feature is needed. |
+| Exit Criteria | One exact CPU5 run reports the copied SS:SP pair for the retained CS transition, without boundary expansion. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -322,6 +322,10 @@ profile snapshot before image placement and CPU entry.**
   reproducible `0000:0047` frontier follows the still-unexplained
   `9346:4D53 -> 0000:0000` transfer. See
   [S40 closure](etc/research/t198-s40-preentry-input-closure-001.md).
+- M0 T198 S41 is complete: the registered copied position record proves that
+  the unexpected CS transition changes SS:SP from `00A7:0918` to
+  `00A7:090E`. The frame owner remains unproven. See
+  [S41 witness](etc/research/t198-s41-stack-position-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

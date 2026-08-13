@@ -19,6 +19,8 @@ struct bx_ntvdm_instruction_history_record_v1 {
   uint64_t sequence;
   uint64_t rip;
   uint16_t cs;
+  uint16_t ss;
+  uint16_t sp;
   uint16_t reserved0;
 };
 

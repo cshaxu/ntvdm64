@@ -43,6 +43,8 @@ typedef void BX_INSF_TYPE;
   bx_ntvdm_history_record.sequence = BX_CPU_THIS_PTR icount; \
   bx_ntvdm_history_record.rip = BX_CPU_THIS_PTR prev_rip; \
   bx_ntvdm_history_record.cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value; \
+  bx_ntvdm_history_record.ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value; \
+  bx_ntvdm_history_record.sp = SP; \
   bx_ntvdm_history_record.reserved0 = 0; \
   bx_ntvdm_mantle_instruction_history_v1_record(&bx_ntvdm_history_record); \
 } while (0)
