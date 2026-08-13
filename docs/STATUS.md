@@ -17,7 +17,7 @@
 | Objective | Update the current architecture authority and unnumbered candidate-T order to make the selector-blind Bochs boundary and intrusion-convergence audit binding. |
 | Non-goals | No source/build/bundle/runtime change, no exception-register status rewrite, no numeric T allocation, no Bochs/adapter migration, and no BOP execution claim. |
 | Reference Baseline | Owner correction, current exception register, S54/S55 evidence, and S56/S57 closure. |
-| Files And ABI Surface | docs/design/ARCHITECTURE.md, docs/QUEUE.md, Status and regenerated document inventory only. |
+| Files And ABI Surface | docs/design/ARCHITECTURE.md, docs/etc/operations/bochs-intrusion-convergence-policy.md, docs/QUEUE.md, Status and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Review authority/queue wording against the owner correction; run documentation governance and git diff --check. |
 | Expected Markers | Four allowed Bochs mechanical classes, adapter-owned BOP and machine-composition selection, audit-first queue order, and no numeric T reservation. |
