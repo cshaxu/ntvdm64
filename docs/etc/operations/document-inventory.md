@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 954 |
+| Documentation records | 955 |
 | --- | --- |
-| Generated UTC | 2026-08-13T05:59:22Z |
+| Generated UTC | 2026-08-13T06:00:07Z |
 
 ## Entries
 
@@ -373,6 +373,7 @@ content-divergent entries.
 | etc/research/t196-s3-retired-diagnostic-removal-001.md | indexed supporting material | 60167920fda029f15398604686555e5243fa8c4e031217ea2cd9668f970b2106 |
 | etc/research/t196-s4-retained-mechanics-repair-001.md | indexed supporting material | 52cb3bdb8e01702cffe9fc4ee7c31e6732d93a9e901d1e08d321f6457e4cf1aa |
 | etc/research/t196-s5-current-diff-register-crosswalk-001.md | indexed supporting material | 46ecd7c93999404e5f73c52e0b599b86e624ca412417b0afd011bcee2a704637 |
+| etc/research/t196-s6-effective-closure-prebuild-audit-001.md | indexed supporting material | 7b72493f07fd982a85874c5c06077692fbe4eb46440007a5a89f482b4cf69f54 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
