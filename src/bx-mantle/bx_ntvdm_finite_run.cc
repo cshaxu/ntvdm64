@@ -16,6 +16,21 @@ struct bx_ntvdm_finite_run_stop_state {
   bx_bool fired;
 };
 
+static bx_ntvdm_finite_run_terminal_snapshot terminal_snapshot;
+
+void bx_ntvdm_finite_run_terminal_snapshot_clear(void)
+{
+  memset(&terminal_snapshot, 0, sizeof(terminal_snapshot));
+}
+
+bx_bool bx_ntvdm_finite_run_terminal_snapshot_get(
+  bx_ntvdm_finite_run_terminal_snapshot *snapshot)
+{
+  if (!snapshot || !terminal_snapshot.valid) return 0;
+  *snapshot = terminal_snapshot;
+  return 1;
+}
+
 static void bx_ntvdm_finite_run_stop(void *opaque)
 {
   bx_ntvdm_finite_run_stop_state *state =
@@ -56,6 +71,8 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
         request->entry_physical_address, request->entry_byte_count)) {
     return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
   }
+
+  bx_ntvdm_finite_run_terminal_snapshot_clear();
 
   if (machine.initialize(0x100000, 0x100000) != BX_NTVDM_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
@@ -100,6 +117,11 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   bx_ntvdm_mantle_generic_ud_fixture_stop(request->stop_on_ud_fixture);
   bx_ntvdm_mantle_generic_ud_stop_observation_reset();
   bx_cpu.cpu_loop();
+  if (request->capture_terminal_snapshot) {
+    terminal_snapshot.cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
+    terminal_snapshot.eip = bx_cpu.get_eip();
+    terminal_snapshot.valid = 1;
+  }
   bx_ntvdm_mantle_generic_ud_fixture_stop(0);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
   if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {

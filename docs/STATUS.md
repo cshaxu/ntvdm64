@@ -28,13 +28,13 @@ through the global DEM host-service plane.**
 | Objective | Source-map and compose the original DEM `SVC_ISDEBUG` (`50:3B`) result through common ingress, registry and DEM plane; prove exact NTIO resumes it and record the next boundary. |
 | Non-goals | No per-service recognizer outside the DEM plane, Bochs/mantle selector semantics, debugger implementation, device enablement, ambient capability, or DOS-continuity claim. |
 | Reference Baseline | S23 native continuation, `dossvc.h` `SVC_ISDEBUG`, existing DEM classification/plane, and original non-debug disposition evidence. |
-| Files And ABI Surface | `bx-vdm` DEM provider/plane composition and CPU5 native fixture only; no core/mantle ABI reinterpretation. |
+| Files And ABI Surface | `bx-vdm` DEM provider/plane composition and CPU5 native fixture; P3 additionally admits a mantle-private, fixed-width terminal CS:IP observation query. No core ABI reinterpretation. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` focused DEM-plane test and exact-NTIO native run prove `50:3B` is selected by common ingress/registry/plane, produces source-backed non-debug result, resumes, and reports the later boundary. Boundary scans prove selector semantics stay in `bx-vdm`. |
-| Expected Markers | Original source mapping, one existing DEM-plane route, `AL=0` non-debug result, typed resume, next copied boundary, and no debugger/Bochs semantic addition. |
+| Verification | MSVC x64 `/MT` focused DEM-plane test and exact-NTIO native run prove `50:3B` is selected by common ingress/registry/plane and produces the source-backed non-debug result. P3 may copy terminal CS:IP through a default-off mantle-private query solely to classify the observed HLT. Boundary scans prove selector semantics stay in `bx-vdm`. |
+| Expected Markers | Original source mapping, one existing DEM-plane route, `AL=0` non-debug result, typed resume, terminal CS:IP if HLT occurs, and no debugger/Bochs semantic addition. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record `50:3B` source/owner/result contract, plane selection path, all build inputs, fixture result, native continuation and later-selector limit. |
-| Stop Conditions | Original source requires an unavailable debugger/host binding rather than its documented non-debug result, routing needs a bypass, or a core/mantle semantic change is required. Preserve evidence and re-admit. |
+| Stop Conditions | Original source requires an unavailable debugger/host binding rather than its documented non-debug result, routing needs a bypass, or any core/Bochs state change beyond the admitted read-only terminal snapshot is required. Preserve evidence and re-admit. |
 | Exit Criteria | Exact original NTIO native-runs through DEM `50:3B` via the global DEM plane and reports the next boundary without claiming DOS boot. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
@@ -235,6 +235,11 @@ through the global DEM host-service plane.**
   sites. The current finite-run ABI lacks CS:IP terminal state, so a future
   selector-blind diagnostic requires explicit re-admission; see [S24
   P2](etc/research/t198-s24-p2-native-hlt-source-triage-001.md).
+- M0 T198 S24 P3 admits and verifies a default-off mantle-private terminal
+  CS:IP snapshot. The corrected native result is relocated `956B:0001`,
+  narrowing the remaining question to original NTIO/sysinit layout rather
+  than a missing Bochs/BOP capability; see [S24
+  P3](etc/research/t198-s24-p3-terminal-snapshot-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
