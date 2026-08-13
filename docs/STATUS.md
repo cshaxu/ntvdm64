@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S29.** Its governing brief is the active
+> **Current effective packet: M0 T198 S30.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S29 -- capture the first selector-blind non-BOP generic
-`#UD` record under the exact CPU5 fixture, then stop.**
+**Active: M0 T198 S30 -- audit ownership and initialization of the low-RAM
+`0000:0A84..0AD2` frontier before admitting any repair.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S29, Ordinary Mode. |
-| Admission And Approval | S28 disproved its post-drive premise: the unrestricted trace reaches real-mode `LSL` and the VGA-aperture panic without an observed `50:0F` resume. Its recorded follow-up explicitly authorizes first-generic-`#UD` capture using the existing copied-event ABI. |
-| Objective | Capture the first non-`C4 C4` generic `#UD` record's fixed-width CS:EIP, execution mode, vector, instruction window, and local prior-drive marker, then issue the existing typed controlled stop. |
-| Non-goals | No BOP selector/service routing or provider, no guest-memory read, guest-image patch, CPU/mantle production semantic change, new ABI, device/plugin/firmware/VGA enablement, legacy linkage, or command/DOS continuity claim. |
-| Reference Baseline | S26 P2 controlled CPU5 fixture; S27 audit; S28 failure evidence; existing selector-blind core-to-mantle generic `#UD` event ABI and test-only external bridge. |
-| Files And ABI Surface | Only the existing exact fixture/bridge plus evidence and Status. The existing fixed-width `bx_ntvdm_generic_ud_event_v1` is consumed read-only; no production ABI changes. |
+| Identifier Mode | M0 T198 S30, Ordinary Mode. |
+| Admission And Approval | S29 captured the first generic fault as real-mode `0000:0A84` with an all-`FF` copied window after a `50:0F` resume. Its recorded follow-up requires owner classification of that low-RAM frontier before any BIOS, IVT, RAM, BOP, or device change. |
+| Objective | Map the exact low-RAM range's initialization and intended ownership across the source-built NTIO/NTDOS startup contract, the minimal mantle lifecycle, and original OpenNT SoftPC/BIOS evidence; produce a requirement matrix and one bounded repair or trace recommendation. |
+| Non-goals | No BOP/provider implementation, guest-image patch, RAM/IVT/BIOS write, CPU/mantle semantic change, device/plugin/firmware/VGA enablement, new ABI, legacy linkage, or DOS continuity claim. |
+| Reference Baseline | S29 copied event; exact NTIO/NTDOS fixture; `bx_ntvdm_ntio_preentry_v1`, finite-run/minimal-machine sources; OpenNT SoftPC/NTIO startup source and retained startup evidence. |
+| Files And ABI Surface | Evidence and Status only. No runtime ABI, Bochs, mantle, adapter, CLI, guest, or historical OpenNT source changes are admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` rebuild of the existing fixture and exact CPU5 run. Record and stop on the first non-`C4 C4` generic `#UD`; inspect the diff and boundary scans for zero selector/provider/device vocabulary in production Bochs code. |
-| Expected Markers | Copied fault CS:EIP/window, local prior-drive bit, typed controlled stop, run exit zero, and no production-source change. |
+| Verification | Inspect the admitted sources and existing exact fixture layout; map physical ranges and state writers; cross-check the copied event; record evidence/limitations and a negative proof of zero runtime-source diff. |
+| Expected Markers | `0xA84..0xAD2` owner matrix, initialization/source mapping, required/missing-state classification, one bounded successor, and zero runtime-source change. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact inputs/commands, captured copied event, local drive marker, relationship to S27/S28, source ownership, and follow-up classification. |
-| Stop Conditions | No generic `#UD` occurs before timer expiry, capture would need guest-memory or CPU/device changes, the event is not fixed-width/valid, or a BOP/provider/device semantic change would be needed. Preserve evidence and re-admit. |
-| Exit Criteria | One exact run proves a valid first generic-event capture and typed stop, or records the bounded alternative without any added production behavior. |
+| Reporting Requirements | Record exact sources/ranges, owner matrix, confirmed facts versus hypotheses, and a bounded successor recommendation. |
+| Stop Conditions | The low-RAM writer cannot be established from available source/evidence, repair would need changed code, a device/firmware route appears necessary, or host-service semantics are implicated. Preserve evidence and re-admit. |
+| Exit Criteria | A reviewable evidence record classifies the frontier and names the smallest owner-correct next S without runtime code change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -268,6 +268,11 @@
   real-mode `0000:0A84`, vector 6, with a copied all-`FF` window. It stops
   before the former VGA panic and moves the frontier to low-RAM control flow.
   See [S29 capture](etc/research/t198-s29-first-generic-ud-capture-001.md).
+- M0 T198 S30 proves `0x0A84` lies inside the loaded `0x0700..0x8AFF` NTIO
+  aperture, whose source bytes there are not all `FF`; the current CS also
+  differs from the entry CS. The frontier is a guest mutation/transfer target,
+  not an IVT, firmware, VGA, or device-admission request. See
+  [S30 audit](etc/research/t198-s30-low-ram-frontier-ownership-audit-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
