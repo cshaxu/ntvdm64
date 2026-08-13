@@ -151,6 +151,10 @@ composition session over the existing generic-UD and mantle action ABIs.**
   single adapter-session delegate, retaining default decline until bind. Its
   i686 transaction fixture and updated boundary scan pass. See [T198 S12 P2
   witness](etc/research/t198-s12-p2-composed-bridge-witness-001.md).
+- M0 T198 S12 P3 reached and records the true native cross-island frontier:
+  complete MinGW provider objects cannot safely link into the MSVC/x86 CPU5
+  executable because they import a second CRT/helper universe. The probe did
+  not run; no Bochs defect is inferred. See [T198 S12 P3 frontier](etc/research/t198-s12-p3-native-cross-island-link-frontier-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

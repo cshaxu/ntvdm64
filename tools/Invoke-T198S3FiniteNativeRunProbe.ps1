@@ -4,7 +4,8 @@ param(
     [string]$BuildRoot = '',
     [switch]$UdStopFixture,
     [switch]$MechanicalActionProbe,
-    [string[]]$ExternalBridgeObjects = @()
+    [string[]]$ExternalBridgeObjects = @(),
+    [string]$ExternalFixtureSource = ''
 )
 
 Set-StrictMode -Version Latest
@@ -24,6 +25,9 @@ if (Test-Path -LiteralPath $build) {
 if ($MechanicalActionProbe -and ($UdStopFixture -or $ExternalBridgeObjects.Count -ne 0)) {
     throw 'Mechanical-action probe cannot be combined with a #UD fixture or external bridge.'
 }
+if ($MechanicalActionProbe -and ![string]::IsNullOrWhiteSpace($ExternalFixtureSource)) {
+    throw 'Mechanical-action probe cannot be combined with an external fixture source.'
+}
 
 $seed = Join-Path $repository 'tools\Invoke-T197S6MinimalMachineLinkProbe.ps1'
 $vsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
@@ -36,7 +40,7 @@ $nativeCore = Join-Path $build 'native-core'
 if ($LASTEXITCODE -ne 0) { throw "CPU5 native-core seed build failed: $LASTEXITCODE" }
 
 $config = Join-Path $nativeCore 'config.h'
-$includeRoots = @('src', 'src\bochs', 'src\bochs\instrument\stubs', 'src\bx-core', 'src\bochs\iodev')
+$includeRoots = @('src', 'src\cli', 'src\bx-vdm', 'src\bx-mantle', 'src\bochs', 'src\bochs\instrument\stubs', 'src\bx-core', 'src\bochs\iodev')
 function New-MsvcCompileCommand([string]$source, [string]$object) {
     $includes = @($includeRoots | Select-Object -Unique | ForEach-Object {
         '/I "' + (Join-Path $repository $_) + '"'
@@ -52,11 +56,19 @@ $bridgeObject = Join-Path $build 'generic_ud_bridge.obj'
 $mechanicalActionSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_mechanical_action_v1.cc'
 $mechanicalActionObject = Join-Path $build 'mechanical_action.obj'
 $externalBridge = $ExternalBridgeObjects.Count -ne 0
+$expandedExternalBridgeObjects = @()
 foreach ($object in $ExternalBridgeObjects) {
+    $matches = @(Get-ChildItem -Path $object -File -ErrorAction SilentlyContinue)
+    if ($matches.Count -ne 0) {
+        $expandedExternalBridgeObjects += $matches.FullName
+        continue
+    }
     if (-not (Test-Path -LiteralPath $object -PathType Leaf)) {
         throw "External bridge object missing: $object"
     }
+    $expandedExternalBridgeObjects += [IO.Path]::GetFullPath($object)
 }
+$ExternalBridgeObjects = $expandedExternalBridgeObjects
 $fixtureBytes = if ($UdStopFixture) { '0x0f, 0x0b' } else { '0xf4' }
 $fixtureStopOnUd = if ($UdStopFixture) { '1' } else { '0' }
 $replacementExceptionObject = $null
@@ -69,7 +81,16 @@ if ($UdStopFixture -or $externalBridge) {
     if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for mantle #UD exception replacement: $LASTEXITCODE" }
 }
 $probe = Join-Path $build 'finite_native_run_probe.cc'
-if ($MechanicalActionProbe) {
+if (![string]::IsNullOrWhiteSpace($ExternalFixtureSource)) {
+    $probe = [IO.Path]::GetFullPath($ExternalFixtureSource)
+    if (-not (Test-Path -LiteralPath $probe -PathType Leaf)) {
+        throw "External fixture source missing: $probe"
+    }
+}
+if (![string]::IsNullOrWhiteSpace($ExternalFixtureSource)) {
+    # The supplied fixture owns only its adapter session lifetime. It still
+    # invokes the existing finite mantle runner and is compiled below.
+} elseif ($MechanicalActionProbe) {
 @"
 #include "bochs.h"
 #include "bx-mantle/bx_ntvdm_minimal_machine.h"
@@ -208,6 +229,7 @@ $record = [ordered]@{
         udStopFixture = [bool]$UdStopFixture
         mechanicalActionProbe = [bool]$MechanicalActionProbe
         externalBridgeObjects = @($ExternalBridgeObjects | ForEach-Object { [IO.Path]::GetFileName($_) })
+        externalFixtureSource = if ([string]::IsNullOrWhiteSpace($ExternalFixtureSource)) { '' } else { [IO.Path]::GetFileName($probe) }
         ips = 1000000
     }
     forbiddenInputs = @('main.cc', 'config.cc', 'gui/siminterface.cc', 'bochs.exe', 'device archives', 'OpenNT', 'CLI')

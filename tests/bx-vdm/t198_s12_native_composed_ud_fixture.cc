@@ -1,0 +1,50 @@
+#include "bochs.h"
+#include "bx-mantle/bx_ntvdm_finite_run.h"
+#include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
+
+#include <string.h>
+
+int main()
+{
+  static const Bit8u bytes[] = { 0x0f, 0x0b };
+  static uint8_t command_bytes[] = { 0x90, 0xc3 };
+  static uint8_t target_bytes[] = { 0xf4 };
+  byob_image command = { command_bytes, sizeof(command_bytes) };
+  byob_image target = { target_bytes, sizeof(target_bytes) };
+  byob_profile_selection profile;
+  bx_ntvdm_boot_namespace_composition_v1 composition;
+  bx_ntvdm_finite_run_request request;
+  int status;
+
+  memset(&profile, 0, sizeof(profile));
+  wcscpy(profile.command_placement.path, L"\\COMMAND.COM");
+  profile.command_placement.drive_index = 2;
+  profile.has_command_placement = 1;
+  wcscpy(profile.target_placement.path, L"\\TARGET.COM");
+  profile.target_placement.drive_index = 2;
+  profile.has_target_placement = 1;
+  wcscpy(profile.target.file_name, L"TARGET.COM");
+  wcscpy(profile.config_file.path, L"\\CONFIG.SYS");
+  profile.config_file.materialization = BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;
+  wcscpy(profile.autoexec_file.path, L"\\AUTOEXEC.BAT");
+  profile.autoexec_file.materialization = BYOB_GUEST_BOOT_FILE_EMPTY_V1;
+  profile.has_guest_boot_files = profile.has_guest_search_metadata = 1;
+  profile.command_metadata.attributes = profile.target_metadata.attributes =
+    profile.config_metadata.attributes = profile.autoexec_metadata.attributes = 0x20;
+  profile.command_metadata.dos_date = profile.target_metadata.dos_date =
+    profile.config_metadata.dos_date = profile.autoexec_metadata.dos_date = 1;
+  if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
+      &command, &target, 0, &profile) ||
+      !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 1;
+  request.entry_bytes = bytes;
+  request.entry_byte_count = sizeof(bytes);
+  request.entry_physical_address = 0x1000;
+  request.entry_cs = 0x0100;
+  request.entry_eip = 0;
+  request.instruction_tick_budget = 64;
+  request.ips = 1000000;
+  request.stop_on_ud_fixture = 0;
+  status = (int) bx_ntvdm_run_finite_bare_bytes(&request);
+  bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
+  return status;
+}
