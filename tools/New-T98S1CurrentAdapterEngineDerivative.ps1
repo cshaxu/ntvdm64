@@ -68,7 +68,7 @@ $adapterSources = @(
     'bx_ntvdm_cmdinfo_v1.c','bx_ntvdm_cmd_keyboard_layout_service.c',
     'bx_ntvdm_controlled_stop_service.c','bx_ntvdm_vdd_create_user_notify_service.c',
     'bx_ntvdm_spckbd_init_service.c','bx_ntvdm_wait_if_idle_service.c',
-    'bx_ntvdm_dem_drive_service.c','bx_ntvdm_dem_ioctl_changeable_service.c',
+    'bx_ntvdm_dem_drive_service.c','bx_ntvdm_dem_ioctl_metadata_provider_v1.c',
     'bx_ntvdm_dem_dta_service.c','bx_ntvdm_dem_hard_error_service.c',
     'bx_ntvdm_cmd_boot_file_service.c','bx_ntvdm_cmd_current_dir_service.c',
     'bx_ntvdm_cmd_set_info_service.c','bx_ntvdm_dem_dpb_service.c',

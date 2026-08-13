@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S44 — update metadata-provider derivative generator.**
+**Active: M0 T194 S45 — build the narrow metadata-provider derivative.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S44, Ordinary Mode. |
-| Admission And Approval | S43 proves the exact 1:1 adapter-object replacement and no new Bochs closure. Owner authorization permits normal single-agent continuation under the existing T194 package. |
-| Objective | Update the current derivative generator to replace the removed legacy IOCTL source with the paired metadata provider while preserving the 68+5 object count and default-off Bochs boundary. |
-| Non-goals | No derivative build/link, bundle/profile/root change, controller invocation, guest launch, provider semantic change, raw-media/device action, Bochs/OpenNT change, or normal-return claim. |
-| Reference Baseline | S32 listener derivative, S39 source migration, S42 focused test, and S43 closure audit. |
-| Files And ABI Surface | One generator, its focused static test if present, S43/S44 records, Status, and documentation inventory. No runtime ABI change. |
+| Identifier Mode | M0 T194 S45, Ordinary Mode. |
+| Admission And Approval | S44 generated a fresh 68+5 source closure with only the established exception-object Bochs replacement. Owner authorization permits normal single-agent continuation under T194. |
+| Objective | Build and link the S44 derivative once with the documented MSVC x86 command; record exact object and link outcome. |
+| Non-goals | No source/generator change, archive/device/Bochs expansion, bundle/profile/root change, controller invocation, guest launch, raw-media action, or normal-return claim. |
+| Reference Baseline | S32 listener derivative, S39 source migration, S42 focused test, S43 audit and S44 generated root. |
+| Files And ABI Surface | Existing S44 ignored root and build evidence only; no checked-in source or ABI changes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Static generator source/count/no-legacy checks, fresh generation only, documentation governance and `git diff --check`. |
-| Expected Markers | 68 adapter/5 CLI source manifest, new provider source, no legacy source, and only `cpu\exception.o` in BOP-register Bochs replacements. |
-| Asset Needs | Existing r5 root and an absent ignored generation root only. |
-| Reporting Requirements | Record generated manifest/object counts/hashes and confirm no compiler/linker/executable invocation. |
-| Stop Conditions | Need to build/link/run, source-list count expansion, Bochs replacement beyond existing exception object, or archive/device change; preserve findings and require fresh S admission. |
-| Exit Criteria | Committed generator/generation evidence admitting one narrow derivative build S. |
+| Verification | One `nmake` target, map/manifest inspection, documentation governance and `git diff --check`. |
+| Expected Markers | 68 adapter + five CLI compilations, one `cpu\exception.o`, final link, no archive targets. |
+| Asset Needs | S44 root and established MSVC x86 environment only. |
+| Reporting Requirements | Record compiler/linker output, executable hash or precise failure, and retained Bochs boundary. |
+| Stop Conditions | Build failure, extra object/archive/device target, source change, or need to run output; preserve evidence and re-admit. |
+| Exit Criteria | Committed one-build evidence admitting or rejecting a later bundle/observation S. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Verify source list, copied root and generated makefile contain no legacy IOCTL term and no new Bochs object rule. |
 
