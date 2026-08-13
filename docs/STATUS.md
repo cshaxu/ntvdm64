@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S22 — current drive-snapshot engine bundle assembly.**
+**Active: M0 T194 S23 — one drive-snapshot v6 observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S22, Ordinary Mode. |
-| Admission And Approval | S21 source-builds the current drive-snapshot derivative with zero Bochs replacements. This S admits only content-addressed fixed-bundle assembly. |
-| Objective | Assemble and verify one immutable bundle for the S21 engine using the retained three ROM inputs. |
-| Non-goals | No engine/guest execution or retry, source/build/controller/profile/root change, Bochs patch/config/device action, BOP/provider semantic expansion, terminal-result transport, or host queue/process broker. |
-| Reference Baseline | S10 fixed-bundle format, S21 engine and retained ROM identities. |
-| Files And ABI Surface | Existing bundle assembly tool, generated bundle/manifest and evidence only. |
+| Identifier Mode | M0 T194 S23, Ordinary Mode. |
+| Admission And Approval | S22 assembles the S21 engine and retained ROMs as one hash-verified fixed bundle. This S admits one controller invocation only. |
+| Objective | Retain one watchdog-bounded observation that verifies whether snapshot-backed `50:0F` resumes and whether execution reaches `54:11`. |
+| Non-goals | No retry, source/build/controller/bundle/profile/root change, Bochs patch/build/config/device action, BOP/provider semantic expansion, terminal-result transport, host queue/process broker, or claim beyond actual markers. |
+| Reference Baseline | S13 root, S15 CLI pair, S20 runtime proof and S22 immutable bundle. |
+| Files And ABI Surface | Existing controller, S15 runner/shim, S22 bundle, S13 root and one new immutable evidence directory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fixed bundle tool validation, manifest/member hashes, exact engine/ROM identity and no-process evidence; documentation governance and `git diff --check`. |
-| Expected Markers | One new immutable bundle whose engine is S21 and whose ROM hashes equal the retained fixed inputs. |
-| Asset Needs | S21 engine and S10 retained ROM files only. |
-| Reporting Requirements | Record all four member hashes, source paths, manifest schema and no-runtime statement. |
-| Stop Conditions | Any process launch, source/build change, ROM replacement, option mechanism, Bochs configuration change or retry; pause for a fresh S admission. |
-| Exit Criteria | Committed bundle/evidence closure or a durable source/hash blocker. |
+| Verification | One existing controller invocation with empty evidence root and 15-second watchdog; inspect immutable inputs/outcome/log hashes and exact marker sequence; documentation governance and `git diff --check`. |
+| Expected Markers | Exactly one evidence root, `retryPolicy=none`, watchdog classification, and observed BOP/commit/pass-through markers. |
+| Asset Needs | Existing controller, S15 pair, S22 bundle and S13 root only. |
+| Reporting Requirements | Exact hashes, exit/watchdog facts, `50:0F` disposition, `54:11` presence/absence, and no completion claim absent evidence. |
+| Stop Conditions | Missing/mismatched hash, controller rejection, second attempt, source/build/controller/bundle/profile mutation, Bochs/adapter/provider change or retry; pause for a fresh S admission. |
+| Exit Criteria | Committed one-run evidence and truthful classification. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify engine identity is S21 rather than S8, all three ROM identities remain fixed, manifest has no extra options, and no process is launched. |
+| Similar-Issue Sweep | Verify S21 engine rather than S8, S15 runner/shim identities, v6 one-slot profile, no stale v5 launch variables, one watchdog and no second wrapper. |
 
 ## Current Technical Baseline
 
