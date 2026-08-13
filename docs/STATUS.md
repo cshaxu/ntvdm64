@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S48 — one metadata-provider v6 observation.**
+**Active: M0 T194 S51 — preserve deferred native-POST metadata bundle evidence.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S48, Ordinary Mode. |
-| Admission And Approval | S44 generated a fresh 68+5 source closure with only the established exception-object Bochs replacement. Owner authorization permits normal single-agent continuation under T194. |
-| Objective | Make exactly one 15-second no-retry v6 observation using S46 and classify the reached `50:21` outcome. |
-| Non-goals | No source/build/bundle/profile/root change, second invocation, raw-media/device action, or normal-return claim without `54:11`. |
-| Reference Baseline | S32 listener derivative, S39 source migration, S42 focused test, S43 audit and S44 generated root. |
-| Files And ABI Surface | Existing controller, one fresh evidence root, S48 record, Status and documentation inventory only. |
+| Identifier Mode | M0 T194 S51, Ordinary Mode. |
+| Admission And Approval | S49 generated and S50 built the deferred native-POST 68+5 closure. Owner approval permits normal single-agent continuation under T194. The immutable bundle was assembled from those frozen inputs before this S51 record was formalized; this packet records and verifies that fact rather than treating it as a new execution. |
+| Objective | Preserve the exact S50 engine and S27 ROM hashes as one immutable deferred native-POST bundle. |
+| Non-goals | No source/generator change, engine run, device/archive expansion, raw-media action, normal-return claim, or post-bundle modification. |
+| Reference Baseline | S39 source migration, S42 focused test, S44 generation, S45 direct build, S48 direct-pre-POST observation, and S49/S50 deferred closure. |
+| Files And ABI Surface | Existing ignored S49 closure and S51 bundle roots; evidence record, Status, and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One controller outcome/input record, BOP/register trace, watchdog/cleanup fields, documentation governance and `git diff --check`. |
-| Expected Markers | One fresh root, no retry, current metadata provider evidence or precise non-reachability. |
-| Asset Needs | S46 bundle, v6 runner/shim/root and S47 controller audit. |
-| Reporting Requirements | Record hashes, observed BOP/register facts, watchdog/cleanup and any exact manual cleanup. |
-| Stop Conditions | Launch failure, need for retry/source change, or unmatched residual process; preserve evidence and pause. |
-| Exit Criteria | Committed one-shot evidence with no unobserved semantics. |
+| Verification | Compare S50 engine and S27 ROM hashes with the S51 manifest; then run documentation governance and `git diff --check`. |
+| Expected Markers | S50 engine `79D404A9451F218009408D75AF2F2A36CFB8F984FFF64C0328DC34A8EBB0857E`; unchanged three ROM hashes; no process launch. |
+| Asset Needs | Existing S49 closure, existing S27 ROM root, and the S51 manifest only. |
+| Reporting Requirements | Record generation/build/bundle chronology, commands, exact hashes, retained two-object boundary, and the absence of an execution claim. |
+| Stop Conditions | Hash mismatch, unexpected bundle member, source change, or any need to execute the engine. |
+| Exit Criteria | Committed evidence admits a separately reviewed single deferred observation. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify source list, copied root and generated makefile contain no legacy IOCTL term and no new Bochs object rule. |
+| Similar-Issue Sweep | Verify the bundle contains only the engine plus ROM tree, retains no legacy IOCTL source in its S49 manifest/makefile, and does not introduce an archive/device target. |
 
 ## Current Technical Baseline
 

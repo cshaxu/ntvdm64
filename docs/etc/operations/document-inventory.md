@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 931 |
+| Documentation records | 932 |
 | --- | --- |
-| Generated UTC | 2026-08-13T03:47:33Z |
+| Generated UTC | 2026-08-13T03:53:52Z |
 
 ## Entries
 
@@ -346,6 +346,7 @@ content-divergent entries.
 | etc/research/t194-s46-metadata-provider-bundle-001.md | indexed supporting material | f856f2bf94bd62b88a17564015ded46f10228a7ba7e205c9a3b4dfd39a578df3 |
 | etc/research/t194-s47-metadata-provider-observation-admission-001.md | indexed supporting material | 62d66caeb98d49704beb6e133513742bc82a28bdde01ec6ef16eb1408d0c02c0 |
 | etc/research/t194-s48-metadata-provider-observation-001.md | indexed supporting material | b70236c1a004b915ef34e3e41b93425bca89b1d6923657caf652982be3752b13 |
+| etc/research/t194-s49-s51-deferred-native-post-composition-001.md | indexed supporting material | 5ebed03383788e89f16bbf46e7d7c73b1b5b0c9e0657c018df74389dd8eb2364 |
 | etc/research/t194-s4-single-target-command-lifecycle-implementation-001.md | indexed supporting material | 27d374b709797403b6d02f61d899c0d8b428cfbf30c3baac34c51119e31ec182 |
 | etc/research/t194-s5-one-slot-engine-admission-audit-001.md | indexed supporting material | aca606a76c4bc9928fa138259f71125fc280c1e297dc2f397d1512c56f0efe67 |
 | etc/research/t194-s6-one-slot-adapter-composition-assembly-001.md | indexed supporting material | c5d255db3dd302de46307eff3ef07dc4762ac2e417808a715d63d4a5ebc3eafd |
@@ -945,7 +946,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | aa0ede54086312b88164eb8746b8f76773972d77d24737710f9b321ce15273b8 |
+| STATUS.md | principal control document | 1b1c2932831f34282b8cec9ac307244999003bd45db8fd74a0bd0e274ea640e1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
