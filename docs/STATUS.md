@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S43 — audit current engine closure for metadata provider.**
+**Active: M0 T194 S44 — update metadata-provider derivative generator.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S43, Ordinary Mode. |
-| Admission And Approval | S42 proves the isolated paired provider target. Owner authorization permits normal single-agent continuation under the existing T194 package. |
-| Objective | Audit the exact current adapter/CLI object and link closure needed to incorporate S39 into an engine derivative without rebuilding or expanding Bochs. |
+| Identifier Mode | M0 T194 S44, Ordinary Mode. |
+| Admission And Approval | S43 proves the exact 1:1 adapter-object replacement and no new Bochs closure. Owner authorization permits normal single-agent continuation under the existing T194 package. |
+| Objective | Update the current derivative generator to replace the removed legacy IOCTL source with the paired metadata provider while preserving the 68+5 object count and default-off Bochs boundary. |
 | Non-goals | No derivative build/link, bundle/profile/root change, controller invocation, guest launch, provider semantic change, raw-media/device action, Bochs/OpenNT change, or normal-return claim. |
-| Reference Baseline | S21/S26 current-engine closure, S32 listener derivative, S35 bundle, S39 source migration, and S42 focused test. |
-| Files And ABI Surface | Existing manifests/generators/maps and adapter source read-only; S43 record, Status, and documentation inventory. No ABI change. |
+| Reference Baseline | S32 listener derivative, S39 source migration, S42 focused test, and S43 closure audit. |
+| Files And ABI Surface | One generator, its focused static test if present, S43/S44 records, Status, and documentation inventory. No runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare current engine manifest/object list with S39 sources and CMake closure; identify exact adapter objects and final-link inputs; documentation governance and `git diff --check`. |
-| Expected Markers | One reproducible no-Bochs-rebuild candidate or a precise closure blocker. |
-| Asset Needs | Retained T194 build/manifests and checked-in sources only. |
-| Reporting Requirements | Record hashes/paths, object additions/removals, dependency direction, and exclusions. |
-| Stop Conditions | Need to build/link/run, change source, add a Bochs object, archive rebuild, or broaden device capability; preserve findings and require fresh S admission. |
-| Exit Criteria | Committed closure audit admitting or rejecting one narrow derivative build S. |
+| Verification | Static generator source/count/no-legacy checks, fresh generation only, documentation governance and `git diff --check`. |
+| Expected Markers | 68 adapter/5 CLI source manifest, new provider source, no legacy source, and only `cpu\exception.o` in BOP-register Bochs replacements. |
+| Asset Needs | Existing r5 root and an absent ignored generation root only. |
+| Reporting Requirements | Record generated manifest/object counts/hashes and confirm no compiler/linker/executable invocation. |
+| Stop Conditions | Need to build/link/run, source-list count expansion, Bochs replacement beyond existing exception object, or archive/device change; preserve findings and require fresh S admission. |
+| Exit Criteria | Committed generator/generation evidence admitting one narrow derivative build S. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify no legacy IOCTL object remains and no Bochs source/object changes are implied. |
+| Similar-Issue Sweep | Verify source list, copied root and generated makefile contain no legacy IOCTL term and no new Bochs object rule. |
 
 ## Current Technical Baseline
 
