@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S70.** Its governing brief is the active
+> **Current effective packet: M0 T198 S72.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S70 -- audit the reached `50:36` DEM DOS-app entry against
-the global DEM plane and its current composition/session state.**
+**Active: M0 T198 S72 -- audit the post-`50:36` finite-execution objective,
+budget and controlled-stop contract before extending runtime observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ the global DEM plane and its current composition/session state.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S70, Ordinary Mode. |
-| Admission And Approval | S69 clean source closure preserves the explicit no-host-UMB/no-DASD ConfigDone disposition and reaches DEM `50:36`; see `etc/research/t198-s69-config-done-nohost-witness-001.md`. |
-| Objective | Capture/map the actual `50:36` state and compare it with its original DEM owner, global plane classification, and active composition/session lifetime. |
-| Non-goals | No new per-service handler, DOS-app host execution, V86 bridge, host process launch, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S69 witness, OpenNT `dossvc.h`/DEM source, and existing bx-vdm global DEM-plane/composition evidence. |
-| Files And ABI Surface | Observation/audit and evidence only; no runtime ABI change. |
+| Identifier Mode | M0 T198 S72, Ordinary Mode. |
+| Admission And Approval | S71 clean source closure crosses `50:36` but reaches finite-run `COMPLETED_BUDGET` at `0032:5A82`, not an unimplemented BOP; see `etc/research/t198-s71-entry-dos-app-no-vdd-witness-001.md`. |
+| Objective | Reconcile the current finite-run budget terminal with source and retained longer-run evidence, then define one minimal next execution observation/termination contract. |
+| Non-goals | No new BOP/provider, device, firmware, host launch, VDD, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S71 witness, finite-run implementation, and retained T137/T161 post-app-entry evidence. |
+| Files And ABI Surface | Audit/evidence and, only if justified, finite fixture observation controls; no BOP runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect the complete current `50:36` state through the bounded source-built recipe and map it to the original DEM service and active global-plane disposition. |
-| Expected Markers | Exact copied input, source-defined owner/continuation, existing-plane eligibility or a concrete state-lifetime gap, and a narrow next admission decision. |
+| Verification | Read the finite-run status/stop mechanics and compare current terminal/source path to retained longer observation; only after a stated objective is selected may a new bounded source-built run occur. |
+| Expected Markers | Explicit status meaning, exact bounded-run limitation, source-backed target/stop ownership, and one narrow next admission decision. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact command, build identity, terminal output, source/plane map and the narrow next admission decision. |
-| Stop Conditions | The route requires DOS-app host execution, V86 bridge, host process launch, DOS image, or Bochs/runtime behavior. Stop and re-admit rather than expanding scope. |
-| Exit Criteria | A reproducible source-backed classification of the reached `50:36` re-entry and a narrow next admission decision. |
+| Reporting Requirements | Record exact source/status evidence, comparison to retained longer observation, selected execution objective, and next admission decision. |
+| Stop Conditions | The next observation requires adding BOP/provider/device/firmware/host launch/VDD behavior, or lacks an explicit termination objective. Stop and re-admit rather than expanding scope. |
+| Exit Criteria | A source-backed, finite execution objective and a justified next observation/closure task; no unclassified BOP/provider work remains admitted. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 

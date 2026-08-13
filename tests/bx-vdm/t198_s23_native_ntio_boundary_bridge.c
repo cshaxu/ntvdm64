@@ -49,6 +49,12 @@ static uint16_t observed_config_done_cs, observed_config_done_ds;
 static uint32_t observed_config_done_eip, observed_config_done_eax,
     observed_config_done_ebx, observed_config_done_ecx, observed_config_done_edx,
     observed_config_done_eflags;
+static unsigned observed_entry_dos_app;
+static uint16_t observed_entry_dos_app_cs, observed_entry_dos_app_ds;
+static uint32_t observed_entry_dos_app_eip, observed_entry_dos_app_eax,
+    observed_entry_dos_app_ebx, observed_entry_dos_app_ecx,
+    observed_entry_dos_app_edx, observed_entry_dos_app_esi,
+    observed_entry_dos_app_edi, observed_entry_dos_app_eflags;
 static uint16_t observed_first_generic_cs;
 static uint32_t observed_first_generic_eip;
 static uint32_t observed_first_generic_mode;
@@ -189,6 +195,16 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_config_done_ecx = event->ecx; observed_config_done_edx = event->edx;
         observed_config_done_eflags = event->eflags;
     }
+    if (!observed_entry_dos_app && event->window_bytes >= 4u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0x50u && event->window[3] == 0x36u) {
+        observed_entry_dos_app = 1u; observed_entry_dos_app_cs = event->cs;
+        observed_entry_dos_app_ds = event->ds; observed_entry_dos_app_eip = event->eip;
+        observed_entry_dos_app_eax = event->eax; observed_entry_dos_app_ebx = event->ebx;
+        observed_entry_dos_app_ecx = event->ecx; observed_entry_dos_app_edx = event->edx;
+        observed_entry_dos_app_esi = event->esi; observed_entry_dos_app_edi = event->edi;
+        observed_entry_dos_app_eflags = event->eflags;
+    }
     if (!observed_fast_read && event->window_bytes >= 4u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
         event->window[2] == 0x50u && event->window[3] == 0x42u) {
@@ -322,3 +338,14 @@ unsigned t198_s23_native_ntio_boundary_observed_config_done_ebx(void) { return o
 unsigned t198_s23_native_ntio_boundary_observed_config_done_ecx(void) { return observed_config_done_ecx; }
 unsigned t198_s23_native_ntio_boundary_observed_config_done_edx(void) { return observed_config_done_edx; }
 unsigned t198_s23_native_ntio_boundary_observed_config_done_eflags(void) { return observed_config_done_eflags; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app(void) { return observed_entry_dos_app; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_cs(void) { return observed_entry_dos_app_cs; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_ds(void) { return observed_entry_dos_app_ds; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_eip(void) { return observed_entry_dos_app_eip; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_eax(void) { return observed_entry_dos_app_eax; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_ebx(void) { return observed_entry_dos_app_ebx; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_ecx(void) { return observed_entry_dos_app_ecx; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_edx(void) { return observed_entry_dos_app_edx; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_esi(void) { return observed_entry_dos_app_esi; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_edi(void) { return observed_entry_dos_app_edi; }
+unsigned t198_s23_native_ntio_boundary_observed_entry_dos_app_eflags(void) { return observed_entry_dos_app_eflags; }
