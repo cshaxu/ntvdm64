@@ -57,6 +57,12 @@ onto the closed CPU5 core/mantle boundary.**
   `initialize(1 MiB, 1 MiB) -> CPU5 reset/APIC/CPUID -> cleanup()` returns
   zero.  No instruction-loop, BIOS/reset image, BOP or guest-running claim is
   made by that lifecycle witness.
+- M0 T198 S1 finds the retained BOP runtime is a historical product derivative:
+  it retains `main.cc`, GUI/device archives and product configuration.  It is
+  not link-compatible with the finite mantle.  The first second-stage closure
+  is therefore a selector-blind native execution contract, not a per-BOP
+  implementation; see
+  [T198 S1 composition map](etc/research/t198-s1-bop-runtime-composition-map-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
