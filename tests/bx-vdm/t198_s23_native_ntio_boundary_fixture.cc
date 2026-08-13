@@ -6,6 +6,7 @@
 #include <string.h>
 
 extern const Bit8u t198_s23_ntio_bytes[0x8400];
+extern const Bit8u t198_s25_ntdos_bytes[0x6cd2];
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_5011(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_503b_resume(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_stop(void);
@@ -14,12 +15,12 @@ extern "C" unsigned t198_s23_native_ntio_boundary_observed_service(void);
 
 int main()
 {
-  static Bit8u ntdos_bytes[0x6cd2]; static uint8_t command[] = {0x90,0xc3};
+  static uint8_t command[] = {0x90,0xc3};
   static uint8_t target[] = {0xf4}; byob_image ntio={ (uint8_t*)t198_s23_ntio_bytes,0x8400};
-  byob_image ntdos={ntdos_bytes,sizeof(ntdos_bytes)}, cmd={command,sizeof(command)}, tgt={target,sizeof(target)};
+  byob_image ntdos={(uint8_t*)t198_s25_ntdos_bytes,0x6cd2}, cmd={command,sizeof(command)}, tgt={target,sizeof(target)};
   byob_profile_selection p; bx_ntvdm_boot_namespace_composition_v1 c;
   static bx_ntvdm_finite_run_request r; bx_ntvdm_finite_run_terminal_snapshot terminal; unsigned terminal_valid; int status;
-  memset(&p,0,sizeof(p)); ntdos_bytes[0]=0xf4; p.ntio.bytes=0x8400; p.ntdos.bytes=sizeof(ntdos_bytes);
+  memset(&p,0,sizeof(p)); p.ntio.bytes=0x8400; p.ntdos.bytes=0x6cd2;
   memcpy(p.command_placement.path,L"\\COMMAND.COM",sizeof(L"\\COMMAND.COM"));p.command_placement.drive_index=2;p.has_command_placement=1;
   memcpy(p.target_placement.path,L"\\TARGET.COM",sizeof(L"\\TARGET.COM"));p.target_placement.drive_index=2;p.has_target_placement=1;
   memcpy(p.target.file_name,L"TARGET.COM",sizeof(L"TARGET.COM"));p.has_guest_boot_files=p.has_guest_search_metadata=1;
