@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S33.** Its governing brief is the active
+> **Current effective packet: M0 T198 S34.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S33 -- capture the bounded raw stack range for the first
-generic fault, then map only its candidate predecessor data.**
+**Active: M0 T198 S34 -- audit adopted Bochs instruction instrumentation for
+an existing selector-blind history seam before admitting any trace code.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ generic fault, then map only its candidate predecessor data.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S33, Ordinary Mode. |
-| Admission And Approval | S32 captures a deterministic first-fault stack pointer `00A7:090A`, physical `0x137A`, and recommends a small raw stack snapshot before any source repair or guest interpretation. The owner-approved continuing T198 objective admits that direct trace step. |
-| Objective | Configure the existing default-off opaque mantle snapshot for a 32-byte ordinary-RAM range surrounding physical `0x137A`, record the bytes at typed generic stop, and map only candidate return/frame values against the original source layout. |
-| Non-goals | No BOP/provider implementation or interpretation, guest-memory write, guest-image patch, CPU/core/mantle production semantic change, new ABI, device/plugin/firmware/VGA enablement, production CLI surface, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S29 generic event, S31 snapshot mechanic, S32 full copied state, exact source-built NTIO/NTDOS fixture. |
-| Files And ABI Surface | Existing exact test fixture and evidence/Status only. It reuses the S31 mantle capture API with opaque address/length; no production source changes are admitted. |
+| Identifier Mode | M0 T198 S34, Ordinary Mode. |
+| Admission And Approval | S33 confirms raw stack bytes cannot establish the predecessor because the copied generic event reports only `prev_rip`. Its recorded follow-up requires a read-only audit for an existing selector-blind Bochs instruction-history seam before any trace implementation. |
+| Objective | Map the adopted CPU execution/instrumentation callbacks, their enabled closure and ownership, and determine whether a bounded default-off mantle-owned instruction history can reuse an existing seam without OpenNT/BOP/device knowledge or product-shell activation. |
+| Non-goals | No trace implementation, BOP/provider work, guest-memory access, guest-image patch, CPU/core/mantle code change, device/plugin/firmware/VGA enablement, product debugger/GUI activation, new ABI, legacy linkage, or DOS continuity claim. |
+| Reference Baseline | S29--S33 evidence; adopted `bx-core` CPU loop and `src/bochs/instrument` sources; current CPU5 x64 `/MT` configuration and finite mantle closure. |
+| Files And ABI Surface | Evidence and Status only. No runtime source, build manifest, feature selection, or ABI changes are admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` rebuild/link and exact CPU5 run; verify the captured terminal range encloses the raw physical stack pointer and record its bytes. Map values only after an explicit source/layout comparison. Review test-only diff and production-boundary scan. |
-| Expected Markers | `0x137A`-enclosing opaque snapshot, unchanged copied event and typed stop, candidate raw stack words, source mapping or explicit inconclusiveness, and zero production-source change. |
+| Verification | Inspect source/active build closure and retained instrumentation stubs; record callback timing, fixed-width availability, required objects/features, core/mantle owner, and rejection reasons. Verify zero runtime-source diff. |
+| Expected Markers | Existing seam map, viable/rejected disposition, no product dependency, no selector knowledge, and one bounded successor recommendation. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record requested range, exact bytes, arithmetic from copied SS:SP, source mapping confidence, limitations, and successor recommendation. |
-| Stop Conditions | The stack range changes nondeterministically, capture needs guest-memory access beyond the existing mantle mechanic, a CPU/device change, ABI change, or BOP/service interpretation. Preserve evidence and re-admit. |
-| Exit Criteria | One exact run captures the raw range around the copied fault stack and produces either a source-backed predecessor candidate or an explicit need for a different owner-correct trace, with no production change. |
+| Reporting Requirements | Record exact sources/configuration, callback chronology, necessary closure, positive/negative candidate analysis, limitations, and successor recommendation. |
+| Stop Conditions | A candidate requires a product GUI/debugger/plugin, BOP/OpenNT knowledge in core, host pointer/callback leakage, a broad feature enablement, or changed code. Preserve evidence and re-admit. |
+| Exit Criteria | A reviewable evidence record names an existing reusable seam or rejects all candidates with reasons, and identifies the smallest owner-correct next S without source change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -288,6 +288,11 @@ generic fault, then map only its candidate predecessor data.**
   cannot safely label a return pair; next is a read-only audit for existing
   selector-blind native instruction-history facilities. See
   [S33 stack](etc/research/t198-s33-first-generic-stack-snapshot-001.md).
+- M0 T198 S34 rejects all existing instrumentation candidates: the CPU5 build
+  compiles `BX_INSTRUMENTATION=0`, while the available active modules require
+  a broader feature closure and raw CPU/logging coupling. A future trace must
+  be a separately admitted fixed-width core-to-mantle mechanic, never a BOP or
+  debugger path. See [S34 audit](etc/research/t198-s34-instruction-history-seam-audit-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
