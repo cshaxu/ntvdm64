@@ -12,11 +12,16 @@ foreach ($path in @($headerPath, $sourcePath)) {
 
 $source = Get-Content -LiteralPath $sourcePath -Raw
 $required = @(
-    'bx_init_siminterface\(\);',
-    'SIM->get_param\("\."\)',
-    'new bx_list_c\(root, "cpu", "CPU Options"\)',
+    'class bx_ntvdm_minimal_sim_c : public bx_simulator_interface_c',
+    'bx_cpudb_pentium_mmx',
+    'BX_CPU_LEVEL != 5',
+    'BX_SUPPORT_X86_64',
+    'new bx_list_c\(root_param, "cpu", "CPU Options"\)',
+    '"model"',
     'new bx_param_bool_c\(cpu,',
     '"reset_on_triple_fault"',
+    '"ignore_bad_msrs"',
+    '"msrs"',
     'BX_NTVDM_MINIMAL_SIM_RESET_PARAM_NOT_FALSE'
 )
 foreach ($pattern in $required) {
@@ -26,7 +31,7 @@ foreach ($pattern in $required) {
 }
 
 $forbidden = @(
-    'config\.cc', 'bx_gui', 'text_', 'PLUG_', 'bx_load_',
+    'bx_init_siminterface', 'config\.cc', 'bx_gui', 'text_', 'PLUG_', 'bx_load_',
     'DEV_', 'bx_devices', 'cmos', 'timer', 'adapter', 'OpenNT',
     'DOS', 'WOW', 'BOP'
 )

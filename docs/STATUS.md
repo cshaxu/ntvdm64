@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T197 S5.** Its governing brief is the active
+> **Current effective packet: M0 T197 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T197 S5 — close the minimal native SIM, parameter-tree and
-logging seam under `bx-mantle` without selecting product behavior.**
+**Active: M0 T197 S6 — define and execute one CPU5/Pentium-MMX minimal
+core/mantle build closure without reviving the Bochs product target.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -21,28 +21,29 @@ logging seam under `bx-mantle` without selecting product behavior.**
 > mantle root. S3 is closed by its first-core-closure record: it established
 > the exact pure-core trees and identified the root header/SIM product seam.
 > S4 is closed by `651c417`: it physically relocated the complete pure CPU,
-> FPU, memory and decode families. S5 closes only the next source-proven mixed
-> seam: the minimal SIM parameter model and its original parameter/log support.
-> It does not select an emulated product, device set, BIOS or BOP policy.
-> Holistic BOP runtime closure remains the following T package.
+> FPU, memory and decode families. S5 is closed by the CPU5/Pentium-MMX finite
+> SIM provider: it removes the full product SIM from the minimal path and keeps
+> the original parameter/log support in the mantle. S6 creates its first real
+> object/link closure. Holistic BOP runtime closure remains the following T
+> package.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T197 S5, Ordinary Mode. |
-| Admission And Approval | S4 is closed by `651c417` and `t197-s4-core-path-migration-001.md`. The owner directed direct `git mv` for source-proven pure core and mantle code, with mixed paths to be decided individually. `t197-s3-core-closure-first-edge-001.md` proves that CPU initialization reads only the CPU model, configurable-MSR path, bad-MSR policy and triple-fault reset policy from SIM on the selected edge. |
-| Objective | Extract the original Bochs parameter-tree and log support into `bx-mantle`, and replace the full product SIM initializer in the minimal-machine path with an exact, finite mantle-owned parameter provider for only the proven CPU initialization contract. |
-| Non-goals | No instruction, CPU, FPU, memory, decode or exception behavior change; no product configuration parser, GUI, plugin, BIOS, CMOS, device, timer, BOP, OpenNT, DOS or host-capability behavior; no full-product build; no unproven CPU-model or feature choice. |
-| Reference Baseline | `651c417`; T197 S1--S4 records; `t197-s3-core-closure-first-edge-001.md`; pinned Bochs 2.6 source. |
-| Files And ABI Surface | `src/bx-mantle/` SIM/lifecycle sources and moved original parameter/log sources; minimal path-only include repairs; exception register, Status and S5 evidence. The external machine and adapter ABI does not change. |
+| Identifier Mode | M0 T197 S6, Ordinary Mode. |
+| Admission And Approval | S5 is source/static-boundary complete; `t197-s5-sim-mantle-seam-001.md` records the owner-confirmed CPU5/Pentium-MMX contract and the retained generated-config/MSVC host-shape mismatch. The owner has forbidden further full-Bochs build loops and permits only a named minimal closure. |
+| Objective | Produce a reproducible CPU5/non-x86-64 build projection and one explicit core/mantle object/link manifest, then compile the finite SIM/machine path without using `main.cc`, the product configuration parser, GUI/plugin/device archives or `bochs.exe`. |
+| Non-goals | No product configure repair, full `bochs.exe`, `main.cc`, GUI, plugin, firmware, BIOS, CMOS, device, BOP, OpenNT, DOS or host-capability behavior; no unlisted object/archive; no semantic source change solely to make a build pass. |
+| Reference Baseline | `960ca6d`; S5 evidence; the existing CPU5 generated configuration retained in `artifacts/build`; pinned Bochs 2.6 source. |
+| Files And ABI Surface | A new mantle build projection/manifest and only its listed core/mantle source inputs; Status, exception register and S6 evidence. No external machine or adapter ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | The minimal SIM path does not call `bx_init_siminterface`; its provider exposes only the source-proven parameters with correct types and default values; original parameter/log sources retain identity after moves; focused static boundary tests, source scan, documentation governance and `git diff --check` pass. A compile observation may identify the next unresolved non-product symbol but must not broaden the product surface. |
-| Expected Markers | A mantle-owned finite SIM lifecycle, original parameter/log support physically below `bx-mantle`, and an exact next compile-header seam list. |
+| Verification | Generated projection records every macro difference and requires CPU5/non-x86-64; manifest enumerates every compiled object and final unresolved/linked symbol; no forbidden product input is present; focused boundary tests, compilation logs, source scan, documentation governance and `git diff --check` pass. |
+| Expected Markers | A source-controlled CPU5 build projection, object/link manifest, and the first exact unresolved native lifecycle edge, if any. |
 | Asset Needs | Existing local repository and pinned local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record every parameter, default, original-source move, retained root-header edge, reference repair, source identity, test outcome, and build-metadata limitation. |
-| Stop Conditions | A needed parameter cannot be proved from the selected lifecycle; a source move requires behavior changes beyond path repair; any GUI/plugin/config-parser, firmware/device, VDM/BOP/OpenNT/DOS edge appears; or an ABI changes. Preserve evidence and re-admit. |
-| Exit Criteria | The minimal lifecycle no longer starts the full product SIM, all finite parameter dependencies have a mantle owner, and remaining root-header/product edges have explicit disposition. |
+| Reporting Requirements | Record every projected macro, object, symbol edge, compiler invocation, retained product exclusion, source identity, test outcome and build limitation. |
+| Stop Conditions | A required source entails a product configuration/parser, GUI/plugin, firmware/device, VDM/BOP/OpenNT/DOS edge; an unlisted archive is needed; a semantic change or ABI change is proposed solely for build success; or the build input cannot stay CPU5/non-x86-64. Preserve evidence and re-admit. |
+| Exit Criteria | The stated object/link closure either builds with complete provenance or stops at one exact source-backed native edge, without broadening the candidate product surface. |
 | Original Owner Request | Find current Bochs core/mantle logic, use `git mv` to move pure core and pure mantle code directly, repair compilation, and decide only the remaining mixed links case by case. |
-| Similar-Issue Sweep | Cover SIM, parameter tree, logging globals, root headers, PC time, port space, CPU configuration and retained Makefile/VS product metadata; distinguish selected minimal build paths from retained historical product metadata. |
+| Similar-Issue Sweep | Cover CPU5 config macros, root headers, logging globals, parameter tree, PC time, port space, CPU/decode/FPU/memory objects, compiler host shape, linker symbols and retained Makefile/VS product metadata. |
 
 ## Current Technical Baseline
 

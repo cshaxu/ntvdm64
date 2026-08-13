@@ -15,12 +15,14 @@ enum bx_ntvdm_minimal_sim_status {
   BX_NTVDM_MINIMAL_SIM_CPU_NOT_LIST,
   BX_NTVDM_MINIMAL_SIM_CPU_LAYOUT_INVALID,
   BX_NTVDM_MINIMAL_SIM_RESET_PARAM_NOT_BOOL,
-  BX_NTVDM_MINIMAL_SIM_RESET_PARAM_NOT_FALSE
+  BX_NTVDM_MINIMAL_SIM_RESET_PARAM_NOT_FALSE,
+  BX_NTVDM_MINIMAL_SIM_PROFILE_CONFIGURATION_UNSUPPORTED,
+  BX_NTVDM_MINIMAL_SIM_ALREADY_BOUND
 };
 
-// Creates only cpu.reset_on_triple_fault=false on an otherwise empty
-// original SIM tree.  Existing state is accepted only when it exactly matches
-// that invariant; no existing parameter is changed.
+// Creates the finite CPU5/Pentium MMX bare-machine parameter tree using
+// original Bochs parameter types. The caller must compile with CPU level 5
+// and x86-64 support disabled; this function never starts product SIM setup.
 bx_ntvdm_minimal_sim_status bx_ntvdm_minimal_sim_initialize(void);
 
 #endif
