@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S36.** Its governing brief is the active
+> **Current effective packet: M0 T198 S37.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S36 -- use the retained chained handler's native per-step
-macro for a default-off fixed-width predecessor history.**
+**Active: M0 T198 S37 -- source-led attribution of the low-RAM transfer reached
+after the source-built `50:0F` return.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ macro for a default-off fixed-width predecessor history.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S36, Ordinary Mode. |
-| Admission And Approval | S35 rejected the CPU-loop hook because handler chaining makes it trace-granular. The owner approved 2026-08-13 a registered intrusive Bochs correction: use the original chained `BX_EXECUTE_INSTRUCTION` macro, with the first trace instruction recorded by the CPU loop. |
-| Objective | Register then implement a bounded, default-off, selector-blind fixed history record at every retained chained instruction transition. Core copies only CPU id, CS, RIP and instruction count; mantle owns storage/configuration/query. Under the exact CPU5 x64 `/MT` run, prove the record immediately preceding S29's generic stop. |
-| Non-goals | No BOP/service/OpenNT/DOS/NTIO recognition, guest-memory read/write, raw `bxInstruction_c*` or host pointer transfer, CPU state mutation, debugger/instrumentation/product feature activation, device/firmware/VGA enablement, CLI ABI, legacy linkage, or DOS continuity claim. |
-| Reference Baseline | S29--S35 evidence; original `instr.h` chained execution macros, `linkTrace`, and current CPU5 x64 `/MT` finite closure. |
-| Files And ABI Surface | New current-path `bx-mantle` private history record/ring; default-off inclusion in `bx-core/cpu/instr.h` plus first-trace call in `bx-core/cpu/cpu.cc`; exact finite fixture/build recipe; exception register/evidence/Status. No adapter or OpenNT interface. |
+| Identifier Mode | M0 T198 S37, Ordinary Mode. |
+| Admission And Approval | S36 proves the direct sequence `0000:0A82 -> 0000:0A84` after source-built `50:0F`, while S30/S31 prove the low-RAM bytes differ from the source-loaded NTIO image. The owner requires OpenNT source to guide diagnosis rather than incremental device or BOP additions. |
+| Objective | Read-only map the reached `50:0F` continuation, its expected OpenNT/NTIO control transfers and low-RAM writes, then classify the `0000:0A82 -> 0A84` sequence as a missing Bochs-native prerequisite, an incorrect machine/adapter action, or still unproven. |
+| Non-goals | No BOP/provider implementation, new core/mantle/adapter intrusion, guest-memory observation, guest-image patch, device/firmware/VGA enablement, CLI ABI, legacy linkage, or DOS continuity claim. |
+| Reference Baseline | S26 P2 native `50:32 -> 50:45 -> 50:0F`, S29--S31 low-RAM frontier, S33 stack snapshot, S36 chained-step witness, and original OpenNT/NTIO source. |
+| Files And ABI Surface | Evidence, Status and closure only. No runtime source, build recipe, feature selection or ABI change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Rebuild every CPU5 source object affected by `instr.h` plus the finite fixture under MSVC x64 `/MT`; test disabled state, invalid capacity, bounded wrap/order, and that final history contains generic fault `0000:0A84` with an immediately preceding record. Scan for forbidden vocabulary/pointer/device/product dependency. |
-| Expected Markers | Registered exception, fixed record/ring, first-trace and chained-step coverage, copied predecessor CS:RIP sequence, typed stop, no product instrumentation, and no adapter dependency. |
+| Verification | Record exact source locations, control-flow/low-RAM ownership mapping, source-versus-run comparison, and a strict owner classification with negative alternatives. Verify zero runtime-source/build/ABI diff. |
+| Expected Markers | Reached continuation map, candidate write/transfer ledger, source-proven or explicitly unproven disposition, no device/BOP inference, and one bounded successor recommendation. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exception scope, exact rebuilt objects/build inputs, fixed layout, default/rejection tests, exact trace output, boundary scan, OpenNT source interpretation, limitation and successor recommendation. |
-| Stop Conditions | The full CPU5 closure cannot rebuild/link; the macro requires instruction-object/guest-byte/BOP/service knowledge, CPU mutation, product instrumentation, host pointer, or device behavior; or it still cannot establish the immediate predecessor. Preserve evidence and re-admit. |
-| Exit Criteria | The exact run exposes a bounded history whose final record is the known generic fault and whose previous record is its direct predecessor, under the same CPU5 x64 `/MT` closure with no semantic or product-surface expansion. |
+| Reporting Requirements | Record exact source locations, reached facts, inference limits, rejected ownership shortcuts and successor recommendation. |
+| Stop Conditions | The evidence requires new runtime observation, source is absent/unmappable, or classification would require guessing a device/BOP/adapter implementation. Preserve the audit and re-admit a narrower observation only if needed. |
+| Exit Criteria | A reviewable evidence record classifies the frontier or records the exact remaining uncertainty, without changing runtime behavior. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -299,6 +299,12 @@ macro for a default-off fixed-width predecessor history.**
   `0000:0A82` on consecutive counts. This confirms a low-RAM
   mutation/control-transfer frontier, not a missing BOP handler. See
   [S36 witness](etc/research/t198-s36-chained-step-history-witness-001.md).
+- M0 T198 S37 is complete: OpenNT `msinit` and DEM source prove current
+  `50:0F` returns into legitimate guest low-memory/stack/IVT initialization,
+  while current T198 evidence proves the old unhandled-`50:0F` explanation is
+  stale. The exact CS-to-zero transfer and low-RAM writer remain unproven; no
+  device, firmware or BOP change is admitted. See
+  [S37 attribution](etc/research/t198-s37-low-ram-transfer-attribution-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
