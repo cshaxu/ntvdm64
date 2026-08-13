@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T188 S6 — copied-state trace implementation.**
+**Binding active packet: M0 T188 S7 — derivative closure audit.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T188 S6**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T188 S7**. M0 T186 and T187 are closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T188 S6, Ordinary Mode. |
-| Admission And Approval | S5 registers BX-TRACE-060 and establishes that the copied lifecycle record is the only remaining high-value runtime discriminator. Owner authorization permits registered Bochs intrusions; S6 admits its default-off source/static closure only. |
-| Objective | Add the registered generic post-dispatch trace of the copied adapter lifecycle record, preserving the existing pass-through result and excluding all BOP/service semantics. |
-| Non-goals | No selector/service/window/guest-memory/payload/session-layout inspection, adapter behavior change, CLI change, engine build, guest observation, provider/DOS/COMMAND semantic change, host capability or completion claim. |
-| Reference Baseline | BX-TRACE-060; T188 S4 source/test-closed snapshot; existing generic interceptor emits the pass-through line after its unchanged v4/v3/v2 result chain. |
-| Files And ABI Surface | `src/bochs/cpu/exception.cc`, a focused Bochs static boundary test, register/evidence and Status; no other Bochs or adapter production source. |
+| Identifier Mode | M0 T188 S7, Ordinary Mode. |
+| Admission And Approval | S6 source/static closure implements BX-TRACE-060 without behavior change. Owner authorization permits autonomous sequencing; S7 audits only the exact object/CRT closure required to incorporate its existing adapter diagnostic API into a derivative. |
+| Objective | Establish whether the current frozen engine can replace only `cpu/exception.o` and the one adapter runtime object needed by the new API, without archive or full product rebuild. |
+| Non-goals | No source change, archive/device/config/full build, guest observation, CLI change, provider/DOS/COMMAND semantic change, host capability or completion claim. |
+| Reference Baseline | T187 S3 r5 engine rebuilt only `exception.o`; T188 S4 adds the API symbol to adapter runtime; all other T187 closure inputs remain retained candidates. |
+| Files And ABI Surface | Build-manifest/audit evidence and, only if already supported by a generator dry-run, a proposed derivative makefile; no compilation or runtime action. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Static test requires local default-off guard, copied-state call only in the `PASS_THROUGH` branch after valid result, and forbids selector/service/window/guest-memory/payload/result mutation terms; documentation inventory/governance and `git diff --check`. |
-| Expected Markers | BX-TRACE-060 record, one macro, one copied-state call, one append-only log, unchanged `return 0` pass-through. |
-| Asset Needs | Current exception source and S4 adapter ABI; no build/runtime input. |
-| Reporting Requirements | State exact macro default, source order, immutable result/control-flow contract and the later one-object build requirement. |
-| Stop Conditions | Any extra Bochs object/source, adapter ABI expansion, BOP/service branch, result/control-flow change, engine build or guest run; require S7 re-admission. |
-| Exit Criteria | Source/static closure of BX-TRACE-060; no engine build or guest run. |
+| Verification | Compare source symbol references against r5 retained object map/makefile and toolchain/CRT records; documentation inventory/governance and `git diff --check`. |
+| Expected Markers | Exact required object list, retained-input hashes, compatibility finding and explicit rejection of archive/full build alternatives. |
+| Asset Needs | T187 r5 manifest/map/makefile and current adapter object/source records; no compiler/runtime input. |
+| Reporting Requirements | State whether replacement needs a compatible adapter object and whether the existing makefile can compile it without changing the build island. |
+| Stop Conditions | Any compilation, extra object/archive, toolchain/CRT uncertainty that cannot be evidenced, or guest action; require S8 admission after a positive closure. |
+| Exit Criteria | A reproducible narrow build plan or durable build infeasibility proof; no compilation or runtime action. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit all #UD consumers in `exception.cc`, including listener, startup transaction, CPU-result bridge, deferred plan, generic interceptor and machine composition; reject selector recognizers, parallel startup paths, direct Bochs/DOS integration and any runtime retry. |
 

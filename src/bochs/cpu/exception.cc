@@ -29,6 +29,10 @@
 #define BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT 0
 #endif
 
+#ifndef BX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC
+#define BX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC 0
+#endif
+
 #ifndef BX_NTVDM_ENABLE_STARTUP_TRANSACTION
 #define BX_NTVDM_ENABLE_STARTUP_TRANSACTION 0
 #endif
@@ -511,6 +515,14 @@ static bx_bool bx_ntvdm_adapter_interceptor(
   if (!bx_ntvdm_cpu_result_v2_valid(&result))
     return 0;
   if (result.disposition == BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH) {
+#if BX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC
+      bx_ntvdm_adapter_runtime_diagnostic_state_v1 diagnostic_state;
+      if (bx_ntvdm_adapter_runtime_v1_copy_diagnostic_state(&diagnostic_state))
+        BX_INFO(("ntdos64 adapter lifecycle installed=%u provider=%u pending=%u",
+          (unsigned)diagnostic_state.installed,
+          (unsigned)diagnostic_state.has_boot_namespace_provider,
+          (unsigned)diagnostic_state.pending_kind));
+#endif
       BX_INFO(("ntdos64 adapter boundary passed through cs=%04x eip=%08x rip=%llx bytes=%02x%02x%02x%02x",
         request->cpu_state->cs, request->cpu_state->eip,
         (unsigned long long)request->fault_rip,
