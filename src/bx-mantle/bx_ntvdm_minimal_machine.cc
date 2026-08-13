@@ -57,6 +57,7 @@ bx_ntvdm_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
   port_space_owned = 1;
 
   bx_cpu.initialize();
+  bx_pc_system.set_enable_a20(1);
   bx_cpu.reset(BX_RESET_HARDWARE);
 
   return BX_NTVDM_MINIMAL_MACHINE_OK;

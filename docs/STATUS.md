@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S3.** Its governing brief is the active
+> **Current effective packet: M0 T198 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S3 -- implement and verify the selector-blind native
-execution mechanic needed before the holistic BOP plane can be recomposed.**
+**Active: M0 T198 S4 -- map the selector-blind generic #UD event seam needed
+before the holistic BOP plane can be recomposed.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ execution mechanic needed before the holistic BOP plane can be recomposed.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S3, Ordinary Mode. |
-| Admission And Approval | S2 is closed by the native execution-contract source map. It proves that a mantle-owned, PC-time tick-bounded mechanic is the sole admissible next slice, under the owner-approved second-stage package. |
-| Objective | Implement and verify the typed, selector-blind mantle-private run mechanic for fixed entry bytes, a finite native instruction-tick budget, and controlled stop. |
-| Non-goals | No BOP selector/service/provider behavior; no adapter/CLI ABI change; no firmware/BIOS, device, GUI, plugin, product build, OpenNT import, general machine configuration, or CPU decode/exception semantic change. |
-| Reference Baseline | T197 r12 lifecycle witness; T198 S1 composition map; T198 S2 native execution-contract map; original `BX_CPU_C::cpu_loop`/event and PC-time timer flow. |
-| Files And ABI Surface | `src/bx-mantle` C++-private request/result and run helper, focused mantle test/probe, T198 evidence/operation record and Status. No cross-component ABI or BOP surface change. |
+| Identifier Mode | M0 T198 S4, Ordinary Mode. |
+| Admission And Approval | S3 is closed by the r8 finite-native-run witness. Its mechanically verified run path makes a source/object map of the existing generic #UD seam the sole admissible next slice. |
+| Objective | Map the existing generic #UD event source, typed opaque request/result transition, object/link dependencies and required extraction boundary for composition with the finite mantle runner. |
+| Non-goals | No BOP selector/service/provider implementation; no adapter/CLI ABI change; no firmware/BIOS, device, GUI, plugin, product build, OpenNT import, general machine configuration, finite-run behavior, or CPU decode/exception semantic change. |
+| Reference Baseline | T198 S1 composition map, T198 S2 execution-contract map, T198 S3 finite-native-run witness, and current `bx-core/cpu/exception.cc` generic event code. |
+| Files And ABI Surface | T198 evidence/operation record and Status only. No source, build, cross-component ABI or BOP surface change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-build the finite CPU5 core/mantle with the helper; run a fixed neutral bare-byte fixture through reset, checked ordinary-RAM copy, entry, finite PC-time tick stop and cleanup; prove no product/adapter/BOP input enters the link or trace; run documentation governance. |
-| Expected Markers | A source-built finite-run manifest/trace, typed field and state assertions, and a documented distinction between PC-time ticks and exact instruction retirement. |
+| Verification | Trace all current #UD path preprocessor gates, declarations, call/return semantics and imports; compare against the finite runner and `bx-vdm` ingress without compiling or changing either; prove which dependencies are generic mechanics and which are legacy product/adapter composition; run documentation governance. |
+| Expected Markers | A selector-blind seam map, object dependency table, explicit retained/extracted/rejected classification, and one bounded next implementation brief or an exact unresolved native edge. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record field widths, ownership, source call sites, permitted transitions, all rejected product/adapter alternatives and runtime non-claim. |
-| Stop Conditions | Any field requires BOP/service meaning, adapter pointer/object, host handle, firmware/device/GUI behavior, new CPU semantic, unbounded execution, product `main.cc`, or represents a tick budget as exact instruction retirement. Preserve evidence and re-admit. |
-| Exit Criteria | A fresh finite CPU5 build executes the neutral fixture and returns via the mantle-owned stop latch with cleanup; all outcomes and non-runtime claims are evidenced. |
+| Stop Conditions | Any proposed path requires BOP/service recognition in Bochs, adapter host pointers, firmware/device/GUI behavior, CPU semantic change, a product `main.cc` dependency, or runtime modification. Preserve evidence and re-admit. |
+| Exit Criteria | The current #UD seam has a source-backed owner, finite-run-compatible dependency classification and precise build placement for its next selector-blind composition slice. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover CLI, bx-vdm ingress/registry/planes, native execution plan, Bochs generic seam, mantle lifecycle, retained engine build manifests, OpenNT providers and every selector-specific source location. |
 
@@ -69,6 +69,11 @@ execution mechanic needed before the holistic BOP plane can be recomposed.**
   the existing product `benchmarkTimer` is rejected because it also mutates
   GUI exit state.  See
   [T198 S2 execution-contract map](etc/research/t198-s2-native-execution-contract-map-001.md).
+- M0 T198 S3 is complete: r8 source-builds and runs neutral `HLT` bytes
+  through CPU5 reset, checked RAM copy, real-mode entry, 64-tick native stop
+  and cleanup.  The needed A20 initialization is now a finite mantle
+  lifecycle invariant; no guest/BOP runtime claim follows.  See
+  [T198 S3 finite-run witness](etc/research/t198-s3-finite-native-run-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

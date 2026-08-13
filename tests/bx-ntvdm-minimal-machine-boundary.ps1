@@ -47,7 +47,8 @@ foreach ($pattern in @(
         'bx_ntvdm_minimal_sim_initialize\(\)',
         'bx_mem\.init_memory_without_sim\(guest, host\)',
         'bx_devices\.init_empty_port_space\(\)',
-        'bx_cpu\.initialize\(\);', 'bx_cpu\.reset\(BX_RESET_HARDWARE\);',
+        'bx_cpu\.initialize\(\);', 'bx_pc_system\.set_enable_a20\(1\);',
+        'bx_cpu\.reset\(BX_RESET_HARDWARE\);',
         'bx_devices\.cleanup_empty_port_space\(\)', 'bx_mem\.cleanup_memory\(\)')) {
     if ($source -notmatch $pattern) {
         throw "Missing BX-MACH-026 source invariant: $pattern"
@@ -67,7 +68,8 @@ Assert-Ordered 'SAFE_GET_GENLOG();' 'bx_ntvdm_minimal_sim_initialize()'
 Assert-Ordered 'bx_ntvdm_minimal_sim_initialize()' 'bx_mem.init_memory_without_sim(guest, host)'
 Assert-Ordered 'bx_mem.init_memory_without_sim(guest, host)' 'bx_devices.init_empty_port_space()'
 Assert-Ordered 'bx_devices.init_empty_port_space()' 'bx_cpu.initialize();'
-Assert-Ordered 'bx_cpu.initialize();' 'bx_cpu.reset(BX_RESET_HARDWARE);'
+Assert-Ordered 'bx_cpu.initialize();' 'bx_pc_system.set_enable_a20(1);'
+Assert-Ordered 'bx_pc_system.set_enable_a20(1);' 'bx_cpu.reset(BX_RESET_HARDWARE);'
 if ($cleanupSource.IndexOf('bx_devices.cleanup_empty_port_space()', [System.StringComparison]::Ordinal) -ge
         $cleanupSource.IndexOf('bx_mem.cleanup_memory()', [System.StringComparison]::Ordinal)) {
     throw 'BX-MACH-026 cleanup does not release port space before memory'
