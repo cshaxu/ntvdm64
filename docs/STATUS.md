@@ -117,6 +117,10 @@ routes.**
 - M0 T198 S8 is complete: its generic action ABI is source-built and native
   CPU5/x86 verified, while provider and legacy-runtime linkage remain absent;
   see [T198 S8 closure](history/m0-t198-s8-closure-20260813.md).
+- M0 T198 S9 P1 is complete: the whole boot-namespace facade, its exact
+  read/write action dispositions and its sole pathname prerequisite are
+  source-mapped; the leaf closure is i686 source-built without the retained
+  runtime.  See [T198 S9 composition closure map](etc/research/t198-s9-boot-namespace-composition-closure-map-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
