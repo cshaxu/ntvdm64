@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S8 — one-slot current-adapter derivative closure.**
+**Active: M0 T194 S9 — one-slot bounded engine observation admission.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S8, Ordinary Mode. |
-| Admission And Approval | S7 proves no unchanged v6 engine candidate exists. Owner's minimal-boundary policy admits one narrow derivative closure that retains Bochs and machine inputs unchanged. |
-| Objective | Produce a reproducible engine derivative containing the current adapter/CLI composition required for one-slot profile installation, with no Bochs rebuild. |
-| Non-goals | No guest observation, Bochs source/object/archive rebuild, BIOS/device/config change, BOP/provider semantic change, terminal-result transport, host queue/process broker, or retry repair. |
-| Reference Baseline | T194 S4--S7; `etc/research/t194-s7-one-slot-bounded-startup-admission-audit-001.md`; T98 current-adapter derivative method. |
-| Files And ABI Surface | A new generated build root/manifest and existing current adapter/CLI sources only; retained Bochs inputs are hash-verified. |
+| Identifier Mode | M0 T194 S9, Ordinary Mode. |
+| Admission And Approval | S8 supplies the only current v6 derivative with zero Bochs recompilations. This S admits one bounded, no-retry process-tree observation after exact bundle/profile input audit. |
+| Objective | Observe the current one-slot adapter composition through the existing engine boundary and classify the first terminal/budget result without changing behavior. |
+| Non-goals | No source/build change, Bochs patch, BIOS/device/config action, BOP/provider semantic change, terminal-result transport, process-exit reinterpretation, host queue/process broker, or retry. |
+| Reference Baseline | T194 S4--S8; `etc/research/t194-s8-one-slot-current-adapter-derivative-closure-001.md`; retained bounded-observation controller pattern. |
+| Files And ABI Surface | Existing r2 derivative, an exact v6 profile/root/target input bundle, one fresh evidence directory and controller output only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Derivative input/object manifest, object count and retained-Bochs hash checks, focused build/link result, documentation governance and `git diff --check`. |
-| Expected Markers | Current adapter/CLI objects only; zero Bochs recompilations; one linked engine and reproducible manifest; no runtime claim. |
-| Asset Needs | Existing accepted derivative base and committed sources only; no new guest artifact or host capability. |
-| Reporting Requirements | Record exact base identity, rebuilt object list, retained Bochs identities and any link blocker. |
-| Stop Conditions | Any Bochs object rebuild, source intrusion, machine config/device change, guest execution or provider expansion; pause for a fresh S admission. |
-| Exit Criteria | Committed derivative closure or durable build blocker. |
+| Verification | Hash-bound inputs, one watchdog-controlled invocation, stderr/stdout/exit evidence, BOP/transaction marker classification, documentation governance and `git diff --check`. |
+| Expected Markers | One immutable input record and one result; no retry; explicit `54:11` absence or presence classification. |
+| Asset Needs | Existing r2 derivative and checked-in/reproducible v6 input assets only; no new host capability. |
+| Reporting Requirements | Record all binary/profile/root/target hashes, watchdog status, first markers, stop classification and limitations. |
+| Stop Conditions | Missing exact v6 input identity, controller change, source/build change, Bochs/device change, provider expansion or a second run; pause for a fresh S admission. |
+| Exit Criteria | Committed single-observation evidence or durable input blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Scan generated makefiles/manifests for stale copied runtime/profile/plan objects and accidental Bochs rebuild prerequisites. |
+| Similar-Issue Sweep | Verify controller does not carry stale v5 schema labels, old launch-kind/tail variables, an old engine hash, or a retry path. |
 
 ## Current Technical Baseline
 

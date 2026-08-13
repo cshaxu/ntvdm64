@@ -72,7 +72,8 @@ $adapterSources = @(
     'bx_ntvdm_cmd_set_info_service.c','bx_ntvdm_dem_dpb_service.c',
     'bx_ntvdm_host_drive_policy.c'
 )
-$cliSources = @('byob_profile.c','byob_identity.c','byob_image.c','byob_launch_declaration_v1.c')
+$cliSources = @('byob_profile.c','byob_identity.c','byob_image.c',
+    'byob_launch_declaration_v1.c','byob_launch_plan_v2.c')
 if (($adapterSources | Sort-Object -Unique).Count -ne $adapterSources.Count) { throw 'Duplicate adapter source.' }
 
 foreach ($path in @('ntdos64-s7-runtime-trace.exe','Makefile','config.h','main.o',
