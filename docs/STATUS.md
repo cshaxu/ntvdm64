@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S30 — BOP register-observation derivative audit.**
+**Active: M0 T194 S31 — exact BOP-register derivative generator.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S30, Ordinary Mode. |
-| Admission And Approval | S29 proves AL is required to classify reached `50:21`, while S28 lacks copied register fields. Owner-authorized registered Bochs diagnostics may be assessed before any provider decision. |
-| Objective | Audit the existing registered default-off generic BOP register-observation intrusion and exact derivative closure needed to reveal copied AX/BX, without enabling/building/changing it. |
-| Non-goals | No source edit/build/run/retry/controller change, provider/capability decision, selector-specific Bochs branch, guest-memory read, raw-media/device action, or claim beyond source/build facts. |
-| Reference Baseline | S28/S29, registered BX-TRACE-043, current S26/S27 closure, and Bochs exception source/build generator. |
-| Files And ABI Surface | Read-only Bochs/adapter/build/evidence sources, one research record, Status, and documentation inventory only. |
+| Identifier Mode | M0 T194 S31, Ordinary Mode. |
+| Admission And Approval | S30 proves the registered source diagnostic needs a one-object derivative but the generator lacks an exact-only mode. Owner-authorized registered intrusions permit a narrow build-shim update. |
+| Objective | Add and verify one named generator mode that replaces only `cpu/exception.o` with the registered generic BOP listener enabled, while preserving current runtime bridge macros and rejecting unrelated diagnostics. |
+| Non-goals | No Bochs source change, actual derivative build/run/retry, provider/capability decision, selector-specific branch, guest-memory read, device/configuration/archive change, or controller change. |
+| Reference Baseline | S30 audit, BX-TRACE-043, current derivative generator and S26 closure. |
+| Files And ABI Surface | `New-T98S1CurrentAdapterEngineDerivative.ps1`, focused generator dry-run artifact/evidence, Status, and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Diagnostic source/build-flag/object-closure audit, documentation governance, and `git diff --check`. |
-| Expected Markers | Exact macro/source/log fields and whether a current derivative requires a Bochs object replacement; no implied admission. |
-| Asset Needs | Existing source/evidence/build inputs only. |
-| Reporting Requirements | Record semantic-negative proof, required build scope, and whether controller permission must be resolved first. |
-| Stop Conditions | Need to enable/build/run/change source or registry, or any provider/device decision; pause for fresh S admission. |
-| Exit Criteria | Committed audit with one bounded next action or blocker. |
+| Verification | Generator dry-run manifest/shim, source-replacement count, macro scan, negative `main.o`/archive/vector checks, documentation governance, and `git diff --check`. |
+| Expected Markers | Exactly one Bochs replacement (`cpu/exception.o`) and exact four macro definitions; no build/run. |
+| Asset Needs | Existing r5 retained build root and source tree only. |
+| Reporting Requirements | Record generated closure and why it remains generic/diagnostic-only. |
+| Stop Conditions | Any additional Bochs object/archive/configuration, source edit, build/run, or semantic/provider action; pause for fresh S admission. |
+| Exit Criteria | Committed generator-only closure. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Verify diagnostic is generic, default-off and already registered; compare S26 current object closure and reject any archive/device rebuild. |
+| Similar-Issue Sweep | Compare all existing generator switches; reject real-mode vector, machine-composition, deferred-plan, main-object, and archive recursion leakage. |
 
 ## Current Technical Baseline
 
