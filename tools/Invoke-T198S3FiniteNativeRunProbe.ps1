@@ -41,6 +41,8 @@ function New-MsvcCompileCommand([string]$source, [string]$object) {
 
 $finiteRunSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_finite_run.cc'
 $finiteRunObject = Join-Path $build 'finite_run.obj'
+$bridgeSource = Join-Path $repository 'src\bx-mantle\bx_ntvdm_generic_ud_bridge.cc'
+$bridgeObject = Join-Path $build 'generic_ud_bridge.obj'
 $probe = Join-Path $build 'finite_native_run_probe.cc'
 @'
 #include "bochs.h"
@@ -57,6 +59,7 @@ int main()
   request.entry_eip = 0;
   request.instruction_tick_budget = 64;
   request.ips = 1000000;
+  request.stop_on_ud_fixture = 0;
   return (int) bx_ntvdm_run_finite_bare_bytes(&request);
 }
 '@ | Set-Content -LiteralPath $probe -Encoding ascii
@@ -65,6 +68,10 @@ $finiteCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
     (New-MsvcCompileCommand $finiteRunSource $finiteRunObject)
 & cmd.exe /d /s /c $finiteCompile
 if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run helper: $LASTEXITCODE" }
+$bridgeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
+    (New-MsvcCompileCommand $bridgeSource $bridgeObject)
+& cmd.exe /d /s /c $bridgeCompile
+if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for generic #UD bridge: $LASTEXITCODE" }
 $probeCompile = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && ' +
     (New-MsvcCompileCommand $probe $probeObject)
 & cmd.exe /d /s /c $probeCompile
@@ -78,7 +85,7 @@ $exe = Join-Path $build 't198-s3-finite-native-run-probe.exe'
 $map = Join-Path $build 'link.map'
 $log = Join-Path $build 'link.log'
 $response = Join-Path $build 'link.rsp'
-$quotedObjects = @($probeObject, $finiteRunObject) + $seedObjects |
+$quotedObjects = @($probeObject, $finiteRunObject, $bridgeObject) + $seedObjects |
     ForEach-Object { '"' + $_ + '"' }
 @('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') + $quotedObjects |
     Set-Content -LiteralPath $response -Encoding ascii

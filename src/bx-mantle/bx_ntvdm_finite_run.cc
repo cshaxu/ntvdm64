@@ -9,6 +9,7 @@
 #include "bx-core/memory/memory.h"
 #include "bx-mantle/pc_system.h"
 #include "bx_ntvdm_finite_run.h"
+#include "bx_ntvdm_generic_ud_bridge.h"
 #include "bx_ntvdm_minimal_machine.h"
 
 struct bx_ntvdm_finite_run_stop_state {
@@ -57,7 +58,9 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
 
+  bx_ntvdm_mantle_generic_ud_fixture_stop(request->stop_on_ud_fixture);
   bx_cpu.cpu_loop();
+  bx_ntvdm_mantle_generic_ud_fixture_stop(0);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
   if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;

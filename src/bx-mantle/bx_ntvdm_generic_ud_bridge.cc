@@ -7,11 +7,23 @@
 
 #include "bx_ntvdm_generic_ud_bridge.h"
 
+static int bx_ntvdm_generic_ud_fixture_stop_enabled = 0;
+
+extern "C" void bx_ntvdm_mantle_generic_ud_fixture_stop(int enabled)
+{
+  bx_ntvdm_generic_ud_fixture_stop_enabled = enabled != 0;
+}
+
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *event,
   struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-  (void) event;
-  (void) outcome;
-  return 0;
+  if (event == 0 || outcome == 0 ||
+      event->magic != BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC ||
+      event->abi_version != BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION ||
+      event->struct_bytes != sizeof(*event) || event->vector != 6u ||
+      !bx_ntvdm_generic_ud_fixture_stop_enabled) return 0;
+  outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+  outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
+  return 1;
 }

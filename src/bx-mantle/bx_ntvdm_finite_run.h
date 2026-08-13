@@ -25,6 +25,7 @@ struct bx_ntvdm_finite_run_request {
   Bit32u entry_eip;
   Bit64u instruction_tick_budget;
   Bit32u ips;
+  bx_bool stop_on_ud_fixture;
 };
 
 // The request is copied/consumed synchronously.  No pointer or guest state
