@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S29 — reached DEM ioctl source-contract audit.**
+**Active: M0 T194 S30 — BOP register-observation derivative audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S29, Ordinary Mode. |
-| Admission And Approval | S28 proves `50:46` commits/resumes and reaches `50:21`; the same one invocation exposes a controller-permission limitation, so this S is source/trace interpretation only. |
-| Objective | Establish original OpenNT `demIoctl` `50:21` selector/AL contracts, caller continuation, and current provider disposition before any capability, controller, build, or observation decision. |
-| Non-goals | No run/retry/controller change, source/provider implementation, Bochs patch/build/config/device action, filesystem/raw-media expansion, host query, or claim beyond source/trace facts. |
-| Reference Baseline | S28 retained log, T96 DEM inventory, imported OpenNT source, and existing `dem_ioctl_changeable_service` code/evidence. |
-| Files And ABI Surface | Read-only OpenNT/adapter source and evidence; one research record, Status, and documentation inventory only. |
+| Identifier Mode | M0 T194 S30, Ordinary Mode. |
+| Admission And Approval | S29 proves AL is required to classify reached `50:21`, while S28 lacks copied register fields. Owner-authorized registered Bochs diagnostics may be assessed before any provider decision. |
+| Objective | Audit the existing registered default-off generic BOP register-observation intrusion and exact derivative closure needed to reveal copied AX/BX, without enabling/building/changing it. |
+| Non-goals | No source edit/build/run/retry/controller change, provider/capability decision, selector-specific Bochs branch, guest-memory read, raw-media/device action, or claim beyond source/build facts. |
+| Reference Baseline | S28/S29, registered BX-TRACE-043, current S26/S27 closure, and Bochs exception source/build generator. |
+| Files And ABI Surface | Read-only Bochs/adapter/build/evidence sources, one research record, Status, and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source definition/dispatch/caller/provider audit, documentation governance, and `git diff --check`. |
-| Expected Markers | Source path/AL/result-write/continuation map plus an admitted bounded next action or blocker. |
-| Asset Needs | Existing source/evidence only. |
-| Reporting Requirements | Separate source facts from inference; state why no provider/controller/Bochs action is admitted. |
-| Stop Conditions | Need for a run/retry, provider/controller/source change, raw-media/filesystem/device semantics, or host query; pause for fresh S admission. |
-| Exit Criteria | Committed source-backed `50:21` classification. |
+| Verification | Diagnostic source/build-flag/object-closure audit, documentation governance, and `git diff --check`. |
+| Expected Markers | Exact macro/source/log fields and whether a current derivative requires a Bochs object replacement; no implied admission. |
+| Asset Needs | Existing source/evidence/build inputs only. |
+| Reporting Requirements | Record semantic-negative proof, required build scope, and whether controller permission must be resolved first. |
+| Stop Conditions | Need to enable/build/run/change source or registry, or any provider/device decision; pause for fresh S admission. |
+| Exit Criteria | Committed audit with one bounded next action or blocker. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Audit all `demIoctl` cases and AL forms, distinguish changeability probe from raw-media actions, and confirm static/CLI snapshot boundaries remain unmerged. |
+| Similar-Issue Sweep | Verify diagnostic is generic, default-off and already registered; compare S26 current object closure and reject any archive/device rebuild. |
 
 ## Current Technical Baseline
 
