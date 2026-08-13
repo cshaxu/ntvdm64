@@ -67,9 +67,13 @@ int bx_ntvdm_boot_namespace_plane_v1_dispatch(bx_ntvdm_boot_namespace_plane_v1 *
  bx_ntvdm_cpu_result_v2_pass_through(r);
  bx_ntvdm_mechanical_action_v1_clear(a);
  if(i->family==BX_NTVDM_BOP_FAMILY_COMMAND && bx_ntvdm_command_plane_v1_classify(i,s,&cmd) && (i->service==12u||i->service==13u) && bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(&p->provider,e,c,w,&tx,bytes)){ if(!put_write(p,&tx,bytes,a))return 0; *r=tx.result; return 1; }
- if(i->family!=BX_NTVDM_BOP_FAMILY_DEM||!bx_ntvdm_dem_plane_v1_classify(i,s,&dem)||dem.component!=BX_NTVDM_DEM_COMPONENT_NAMESPACE||dem.disposition!=BX_NTVDM_DEM_PLANE_DEFERRED)return 1;
+ if(i->family!=BX_NTVDM_BOP_FAMILY_DEM||!bx_ntvdm_dem_plane_v1_classify(i,s,&dem)||dem.disposition!=BX_NTVDM_DEM_PLANE_DEFERRED)return 1;
+ /* The original DEM dispatcher assigns SVC_DEMSETDTALOCATION (1Bh) to
+  * demgset.c, not to the file namespace.  Its registration is retained here
+  * only as the prerequisite consumed by the selected namespace provider. */
+ if(i->service==0x1bu&&dem.component==BX_NTVDM_DEM_COMPONENT_GSET&&bx_ntvdm_dem_dta_service_v1_dispatch(e,c,w,&read)){if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION,e,c,&read.guest_read,1u,a))return 0;p->pending_read=read;return 1;}
+ if(dem.component!=BX_NTVDM_DEM_COMPONENT_NAMESPACE)return 1;
  if(i->service==0x11u){uint32_t id=0;if(!take_id(p,&id)||!bx_ntvdm_dem_load_dos_service_v1_prepare(&p->ntdos,&p->ntdos_identity,e,c,w,id,a,r)){bx_ntvdm_mechanical_action_v1_clear(a);return bx_ntvdm_cpu_result_v2_stop(r);}return 1;}
- if(i->service==0x1bu&&bx_ntvdm_dem_dta_service_v1_dispatch(e,c,w,&read)){if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION,e,c,&read.guest_read,1u,a))return 0;p->pending_read=read;return 1;}
  if(i->service==0u)return bx_ntvdm_boot_namespace_provider_v1_seek(&p->provider,e,c,w,r);
  if(i->service==2u)return bx_ntvdm_boot_namespace_provider_v1_close(&p->provider,e,c,w,r);
  if(i->service==0x16u&&bx_ntvdm_boot_namespace_provider_v1_read(&p->provider,e,c,w,bytes,sizeof(bytes),&bulk,r)){if(!bulk.magic)return 1;return put_bulk(p,&bulk,bytes,a);}
