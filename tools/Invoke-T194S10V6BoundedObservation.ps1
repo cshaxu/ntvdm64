@@ -70,18 +70,19 @@ exit /b %NTDOS64_EXITCODE%
 
 $started = [DateTime]::UtcNow
 $process = $null; $launchError = $null; $watchdogTerminated = $false
-$treeKillExit = $null; $exitCode = $null
+$treeKillExit = $null; $treeKillOutput = $null; $cleanupWaitTimedOut = $false
+$exitCode = $null
 try {
     $process = Start-Process -FilePath $env:ComSpec -ArgumentList @('/d', '/c', $wrapperPath) -WindowStyle Hidden -PassThru
     if (-not $process.WaitForExit($WatchdogSeconds * 1000)) {
         $watchdogTerminated = $true
-        & taskkill.exe /T /F /PID $process.Id | Out-Null
+        $treeKillOutput = (& taskkill.exe /T /F /PID $process.Id 2>&1 | Out-String).Trim()
         $treeKillExit = $LASTEXITCODE
-        $process.WaitForExit()
+        if (-not $process.WaitForExit(5000)) { $cleanupWaitTimedOut = $true }
     }
     $exitCode = if (Test-Path -LiteralPath $exitPath -PathType Leaf) {
         [int](Get-Content -LiteralPath $exitPath -Raw).Trim()
-    } else { $process.ExitCode }
+    } elseif ($process.HasExited) { $process.ExitCode } else { $null }
 } catch { $launchError = $_.Exception.Message }
 finally {
     $record = [ordered]@{
@@ -90,7 +91,8 @@ finally {
         elapsedMilliseconds = [int](([DateTime]::UtcNow - $started).TotalMilliseconds)
         wrapperPid = if ($null -ne $process) { $process.Id } else { $null }
         watchdogSeconds = $WatchdogSeconds; watchdogTerminated = $watchdogTerminated
-        treeKillExit = $treeKillExit; exitCode = $exitCode; launchError = $launchError
+        treeKillExit = $treeKillExit; treeKillOutput = $treeKillOutput
+        cleanupWaitTimedOut = $cleanupWaitTimedOut; exitCode = $exitCode; launchError = $launchError
         stdoutSha256 = if (Test-Path -LiteralPath $stdoutPath) { (Get-FileHash -LiteralPath $stdoutPath -Algorithm SHA256).Hash } else { $null }
         stderrSha256 = if (Test-Path -LiteralPath $stderrPath) { (Get-FileHash -LiteralPath $stderrPath -Algorithm SHA256).Hash } else { $null }
         interpretation = 'one mechanical process-tree observation; normal COMMAND return requires an observed 54:11 marker'

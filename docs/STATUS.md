@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T194 S32 — BOP-register derivative build.**
+**Active: M0 T194 S34 — bounded v6 observation-controller cleanup.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T193 are closed. Their retained S records are evidence, not
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S32, Ordinary Mode. |
-| Admission And Approval | S31 generator dry-run proves one exact registered diagnostic object closure. Owner authorization permits the source-build step. |
-| Objective | Build one S31 derivative and verify its manifest/map/hash while retaining all Bochs inputs except the declared `cpu/exception.o`. |
-| Non-goals | No engine run/retry/controller change, Bochs source/config/device/archive change, provider/capability decision, guest-memory operation, or normal-return claim. |
-| Reference Baseline | S26 retained input closure; S31 generator and dry-run manifest. |
-| Files And ABI Surface | S31 generated build root/artifact evidence, S32 research record, Status, and documentation inventory only. |
+| Identifier Mode | M0 T194 S34, Ordinary Mode. |
+| Admission And Approval | S33 isolates an unbounded controller wait after taskkill access denial and identifies the pre-existing T188 bounded evidence pattern. Owner authorization permits the contained controller correction. |
+| Objective | Make the v6 observation controller record bounded cleanup failure and terminal evidence after one watchdog expiry, with a focused static test. |
+| Non-goals | No observation invocation/retry, runner/shim/Bochs/adapter/CLI source change, privilege elevation, job object, kill-by-name, host capability/provider change, or BOP semantic decision. |
+| Reference Baseline | S28 failed cleanup evidence; S33 audit; T188 controller and its boundary test. |
+| Files And ABI Surface | `Invoke-T194S10V6BoundedObservation.ps1`, a focused controller boundary test, S34 evidence, Status, and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x86 build output, one-object manifest/map review, engine hash, retained-input hashes, documentation governance, and `git diff --check`. |
-| Expected Markers | Source-built `cpu/exception.o`, one new engine hash, zero archive/device rebuild, and preserved runtime bridge macros. |
-| Asset Needs | S31 fresh build root and documented MSVC x86 toolchain only. |
-| Reporting Requirements | Record exact command, object closure, hashes, and no-execution limitation. |
-| Stop Conditions | Extra Bochs object/archive/config/device, source change, link closure expansion, or any engine execution; pause for fresh S admission. |
-| Exit Criteria | Committed source-built one-object derivative evidence. |
+| Verification | Focused static controller test, source review for one-run/no-retry and bounded cleanup, documentation governance, and `git diff --check`. |
+| Expected Markers | Captured taskkill output/exit, bounded 5-second cleanup wait, terminal finally record, and no unbounded wait/retry loop. |
+| Asset Needs | Existing controller/test pattern only. |
+| Reporting Requirements | Record changed mechanics, static assertion outcome, and explicit no-observation limitation. |
+| Stop Conditions | Need to run/kill a process, change runtime inputs, use elevation/job objects, or alter BOP semantics; pause for fresh S admission. |
+| Exit Criteria | Committed controller/test/evidence closure. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Compare current retained hashes with S26 and re-scan generated shim for all four intended plus all forbidden macros. |
+| Similar-Issue Sweep | Reject unbounded `WaitForExit()`, loops/sleeps, absent finally record, retry behavior, and broad process targeting. |
 
 ## Current Technical Baseline
 
