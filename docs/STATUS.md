@@ -2,12 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S60.** Its governing brief is the active
+> **Current effective packet: M0 T198 S62.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S60 -- audit the reached top-level `5F` NTIO/SoftPC keyboard
-handoff against the existing narrow completion provider before admitting any
-behavior.**
+**Active: M0 T198 S62 -- audit the reached top-level `BOP 66` LIM/EMS probe
+and its existing unavailable-provider contract before admitting behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,19 +23,19 @@ behavior.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S60, Ordinary Mode. |
-| Admission And Approval | S59 clean source closure composes `50:42` through the existing namespace bulk-write path and advances to selector `5F`; see `etc/research/t198-s59-fast-read-composition-witness-001.md`. |
-| Objective | Capture/map the actual three-byte `BOP 5F` input, its OpenNT NTIO/SoftPC continuation, and the existing narrow `spckbd` provider's exact eligibility. |
-| Non-goals | No keyboard/PIC/8042/IRQ behavior, device or firmware enablement, host input integration, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S59 witness, OpenNT `bop.h` and `spckbd.asm`, plus the current `bx-vdm` top-level/provider evidence. |
+| Identifier Mode | M0 T198 S62, Ordinary Mode. |
+| Admission And Approval | S61 clean source closure preserves the exact `BOP 5F` CF=1 fallback and advances to selector `66`; see `etc/research/t198-s61-spckbd-cf-fallback-witness-001.md`. |
+| Objective | Capture/map the actual three-byte `BOP 66` input, its OpenNT `InitSpcEmm` continuation, and the existing unavailable-provider eligibility. |
+| Non-goals | No EMS/LIM emulation, memory mapping, device or firmware enablement, host integration, CLI argument, DOS image change, detached runtime import, or Bochs semantic change. |
+| Reference Baseline | S61 witness, OpenNT `spcemm.asm`, and current bx-vdm unavailable-provider evidence. |
 | Files And ABI Surface | Observation/audit and evidence only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect the complete current `5F` state through the existing bounded source-built recipe and map it to the OpenNT call site and existing provider contract. |
-| Expected Markers | Exact `AX`/segments/register state, source-defined branch direction, exact provider eligibility or rejection, and a narrow next admission decision. |
+| Verification | Inspect the complete current `66` state through the bounded source-built recipe and map it to OpenNT's source call site and existing provider contract. |
+| Expected Markers | Exact copied input, source-defined failure/success branch direction, provider eligibility or rejection, and a narrow next admission decision. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact command, build identity, terminal output, OpenNT source map and whether the existing provider is eligible. |
-| Stop Conditions | The route requires keyboard, PIC, 8042, IRQ, firmware, host-input, DOS-image, or Bochs/runtime behavior. Stop and re-admit rather than expanding scope. |
-| Exit Criteria | A reproducible source-backed classification of the reached `5F` handoff and a narrow next admission decision. |
+| Reporting Requirements | Record exact command, build identity, terminal output, OpenNT source map and exact provider eligibility. |
+| Stop Conditions | The route requires EMS/LIM emulation, memory mapping, device/firmware, host integration, DOS image, or Bochs/runtime behavior. Stop and re-admit rather than expanding scope. |
+| Exit Criteria | A reproducible source-backed classification of the reached `BOP 66` probe and a narrow next admission decision. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 

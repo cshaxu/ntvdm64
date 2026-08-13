@@ -1,4 +1,5 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx_ntvdm_spckbd_init_service.h"
 #include "bx_ntvdm_bios_memory_service.h"
 #include "bx_ntvdm_dem_boot_drive_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
@@ -145,6 +146,11 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     struct bx_ntvdm_mechanical_action_v1 action, next;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
             &cpu, &window)) return 0;
+    /* The NTIO x86 branch explicitly requests CF after its BEEF 5F handoff.
+     * This provider retains only that continuation; keyboard mechanics remain
+     * outside this composition. */
+    if (bx_ntvdm_spckbd_init_service_v1_dispatch(&boundary, &cpu, &window,
+            &result)) return outcome(&result, value);
     /* This composition admits only the source-observed top-level memory
      * queries: BIOS 12h and BIOS 15h/AH=88h. */
     if (window.valid_bytes >= 3u && window.bytes[0] == 0xc4u &&
