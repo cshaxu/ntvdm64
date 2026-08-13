@@ -2,12 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S26.** Its governing brief is the active
+> **Current effective packet: M0 T198 S27.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S26 -- recover the source-proven DEM initialization trio
-`50:32 -> 50:45 -> 50:0F` through its existing provider planes, then stop
-under observation.**
+**Active: M0 T198 S27 -- audit the exact source-built post-`50:0F` guest path
+and minimal-machine conditions before admitting any continuation work.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,19 +23,19 @@ under observation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S26, Ordinary Mode. |
-| Admission And Approval | S25 P3's exact source-built NTIO/NTDOS run reached original `50:32` after a completed `50:1B` DTA registration. Its original continuations are `50:45` and `50:0F`; the owner-approved continuing T198 objective authorizes source-led recovery through the already inventoried global provider planes. |
-| Objective | Recover original `SVC_DEMSETHARDERRORINFO` (`50:32`), non-debug `SVC_DEMSYSTEMSYMBOLOP` (`50:45`), and `SVC_DEMGETDRIVES` (`50:0F`) with their existing source-derived providers, then stop immediately after the drive result. |
-| Non-goals | No host hard-error policy, retry/error-dialog capability, symbol backend/debugger, guest-time host drive scan, new host capability ABI, Bochs/mantle semantic change, guest-image patch, legacy runtime linkage, ambient path access, or COMMAND/DOS continuity claim. |
-| Reference Baseline | S25 P3 exact input/run; OpenNT `dossvc.h`, `demdisp.c`, `demerror.c`, `demmisc.c`, `demgset.c`; existing hard-error and immutable drive-snapshot provider tests. |
-| Files And ABI Surface | `bx-vdm` DEM error-lock/MISC/GSET composition and CPU5 native observation only. GSET consumes the existing copied CLI drive-snapshot ABI; no new core, mantle, selector, or host capability ABI. |
+| Identifier Mode | M0 T198 S27, Ordinary Mode. |
+| Admission And Approval | S26 P2 completed the bounded source-built NTIO/NTDOS path through `50:0F`. Its separately retained extension trace then reported real-mode `LSL` faults and `prefetch` at physical `0xA2E63`, followed by the minimal VGA timer stub. The owner-approved continuing T198 objective authorizes a source/trace classification before any machine or BOP extension. |
+| Objective | Establish the exact post-drive guest control-flow and memory/CPU/mantle preconditions, classify each reached requirement by owner, and identify one evidence-backed next bounded task without enabling an unproven device or service. |
+| Non-goals | No BOP/provider implementation, hard-error/debugger/drive policy expansion, guest-image patch, device/plugin/firmware enablement, VGA emulation, core/mantle behavior change, legacy runtime linkage, ambient path access, or COMMAND/DOS continuity claim. |
+| Reference Baseline | S26 P2 exact source-built input/controlled stop and retained extension observation; OpenNT NTIO/NTDOS source and adopted CPU5 `bx-core`/`bx-mantle` sources; existing finite-machine and BOP records. |
+| Files And ABI Surface | Evidence and Status only. No runtime ABI, Bochs, mantle, adapter, CLI, guest, or historical OpenNT source changes are admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` focused provider/composition regression and exact CPU5 native NTIO/NTDOS run; `50:32` registers two locations, `50:45` takes only the non-debug no-state path, and `50:0F` consumes a prebuilt one-entry C drive snapshot, writes the original count/CF result, and enters a typed controlled stop. Boundary scans prove selector semantics stay in `bx-vdm`. |
-| Expected Markers | Error-lock ownership, non-debug symbol disposition, existing GSET provider precedence, copied snapshot, typed resumes/stop, and no newly enabled selector. |
+| Verification | Reproduce or inspect the retained bounded extension trace; map its last confirmed guest CS:IP/physical access to source and instruction evidence; inspect corresponding CPU and mantle code; record a requirement matrix, owner classification, and negative proof that no device or BOP handler was added. |
+| Expected Markers | Post-`50:0F` continuation map, `LSL` classification, `0xA2E63` access classification, VGA-stub causality, one owner-correct follow-up, and zero runtime-source diff. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original function/dispatcher/caller mapping, locations/no-op/snapshot contracts, provider dispositions, native stop, and ownership limit. |
-| Stop Conditions | A provider needs hard-error policy, symbol/debugger state, guest-time host scan, a guest-image patch, or core/mantle behavior change. Preserve evidence and re-admit. |
-| Exit Criteria | Exact original NTIO/NTDOS native-runs through `50:32`, `50:45`, and `50:0F`, then reaches the fixture's controlled stop without claiming hard-error handling, symbol debugging, host-drive discovery, or DOS boot. |
+| Reporting Requirements | Record exact inputs/commands, last reliable instruction/address evidence, source mappings, owner matrix, confidence/limitations, and a bounded successor recommendation. |
+| Stop Conditions | The evidence is insufficient to distinguish guest-state error from native-machine prerequisite, source interpretation requires changed code, a device/plugin/firmware path appears necessary, or a host-service semantic change is implicated. Preserve evidence and re-admit a new implementation S. |
+| Exit Criteria | A reviewable evidence record distinguishes confirmed facts from hypotheses, names the smallest owner-correct next S, and makes no runtime code change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -257,6 +256,10 @@ under observation.**
   reaches the fixture's controlled stop; a separately retained extension run
   exposes an unmapped VGA machine frontier rather than authorizing devices.
   See [S26 P2](etc/research/t198-s26-p2-dem-init-trio-native-001.md).
+- M0 T198 S27 establishes that `50:0F` itself cannot justify VGA: the retained
+  extension reaches real-mode `LSL` before its `0xA2E63` VGA-aperture prefetch
+  veto, while the original DOS init order is not yet proven continuous. See
+  [S27 audit](etc/research/t198-s27-post-drive-machine-audit-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
