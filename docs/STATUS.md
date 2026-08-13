@@ -2,31 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T194 S58 — apply Bochs-intrusion convergence architecture correction.**
+**Active: M0 T195 S1 — audit the Bochs intrusion repair set.**
 
 > **Governance correction:** The table below is the sole active packet. T188
-> through T193 are closed. Their retained S records are evidence, not
+> through T194 are closed. Their retained S records are evidence, not
 > concurrent active packets.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T194 S58, Ordinary Mode. |
-| Admission And Approval | Owner directs the architecture correction: Bochs intrusion does not mean BOP implementation in Bochs; selector/service semantics belong to the adapter, and future Bochs semantic intrusion is frozen pending a multi-S convergence repair. |
-| Objective | Update the current architecture authority and unnumbered candidate-T order to make the selector-blind Bochs boundary and a repair-first package binding. |
-| Non-goals | No source/build/bundle/runtime change, no exception-register status rewrite, no numeric T allocation, no Bochs/adapter migration, and no BOP execution claim. |
-| Reference Baseline | Owner correction, current exception register, S54/S55 evidence, and S56/S57 closure. |
-| Files And ABI Surface | docs/design/ARCHITECTURE.md, docs/etc/operations/bochs-intrusion-convergence-policy.md, docs/QUEUE.md, Status and regenerated document inventory only. |
+| Identifier Mode | M0 T195 S1, Ordinary Mode. |
+| Admission And Approval | Owner selected the first queued Bochs intrusion convergence repair package and directed that its first S be a read-only per-entry audit before repair; T194 is closed by this reprioritization. |
+| Objective | Reconcile every entry in the external intrusion register with actual source presence and the current generated build/link surfaces, assigning a repair disposition and evidence to each entry. |
+| Non-goals | No source/build/bundle/runtime change, exception implementation/removal, BOP execution, status rewrite of historical entries, or claim that a register count equals live patches. |
+| Reference Baseline | architecture/operations correction, the exception register, S54/S55 evidence, S56/S57 closure, and current imported Bochs/OpenNT source. |
+| Files And ABI Surface | Read-only source/build/map inputs; one T195 S1 evidence record, Status and regenerated document inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Review authority/queue wording against the owner correction; run documentation governance and git diff --check. |
-| Expected Markers | Four allowed Bochs mechanical classes, adapter-owned BOP and machine-composition selection, repair-first queue order with audit as its first S, and no numeric T reservation. |
-| Asset Needs | Existing documents and no build/runtime asset. |
-| Reporting Requirements | Record the governance correction and identify the candidate repair's staged evidence. |
-| Stop Conditions | A proposed source migration, a numeric T reservation in Queue, conflicting authority, or a request to begin the audit without Status admission. |
-| Exit Criteria | Committed current authority and queue make the repair the first candidate before any resumed holistic BOP runtime work. |
-| Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
-| Similar-Issue Sweep | Check that the architecture does not merely prohibit Bochs BOP semantics, but also assigns 02h/06h selection to the adapter machine-composition plane. |
+| Verification | Parse all register entries; inspect named imported source paths and current S56/S57 makefile/map surfaces; cross-check selected representative default-off macros; run documentation governance and git diff --check. |
+| Expected Markers | One disposition per register entry: retain, move-to-adapter, retain-default-off, remove, or non-live historical record; no unsupported live-patch count. |
+| Asset Needs | Existing register, source tree, S56/S57 roots and final map only. |
+| Reporting Requirements | Record methodology, per-entry evidence/disposition, known ambiguity, candidate repair groups and forbidden scope expansion. |
+| Stop Conditions | Unresolvable source identity, conflicting source/build evidence, a needed source change, or a request to run/build; preserve facts and re-admit the next S. |
+| Exit Criteria | Committed audit supplies a finite repair plan for T195 S2 onward without modifying Bochs or adapter. |
+| Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
+| Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
 ## Current Technical Baseline
 
