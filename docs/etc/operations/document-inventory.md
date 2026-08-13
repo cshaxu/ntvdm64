@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 951 |
+| Documentation records | 952 |
 | --- | --- |
-| Generated UTC | 2026-08-13T05:23:00Z |
+| Generated UTC | 2026-08-13T05:35:45Z |
 
 ## Entries
 
@@ -109,7 +109,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | a915dc0b11a0333066fd353a66cc9c939ef6817b94459b419affe106fb3a5749 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 85635de44f337166368ffe5c9d4539fe69254f54909884c5609cc4e2adaeb35d |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -370,6 +370,7 @@ content-divergent entries.
 | etc/research/t195-s6-repaired-boundary-closure-001.md | indexed supporting material | aa19432ee5645d2e8faa287e49974ede11d745232b6716c4473ac083671b376b |
 | etc/research/t196-s1-bochs26-intrusive-diff-baseline-001.md | indexed supporting material | 64c1f17adb4bb9714ccd1db638aeb93d86cc969bfa7d62b5881599a1ca14d6f8 |
 | etc/research/t196-s2-intrusive-diff-classification-001.md | indexed supporting material | 4717a02093f0933b7e18b05bf8ba1b1ca32057606c602a9b77d9b9959629b807 |
+| etc/research/t196-s3-retired-diagnostic-removal-001.md | indexed supporting material | 92dd7ef8cf7d6bdad029ab7e73ce8b9ddec4e250c9430073ca368bcd051fe7f3 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
