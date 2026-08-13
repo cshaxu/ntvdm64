@@ -2,11 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S76.** Its governing brief is the active
+> **Current effective packet: M0 T198 S77.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S76 -- compose the exact source-derived `BOP 15h`/AH=`0Eh`
-invalid-INT15 result through the bounded machine-handler plane.**
+**Active: M0 T198 S77 -- audit the `C000:014A` non-BOP #UD, ROM/machine
+mapping and copied instruction-window provenance before assigning any BOP or
+machine-handler meaning.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +24,19 @@ invalid-INT15 result through the bounded machine-handler plane.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S76, Ordinary Mode. |
-| Admission And Approval | S75 proves exact BOP `15h`/AH=`0Eh` reaches `cassette_io`'s original invalid-function branch: preserve AL, set AH=`86h` and CF, resume `+3`; see `etc/research/t198-s75-bios-int15-cassette-handler-audit-001.md`. |
-| Objective | Implement and compose only that exact source-derived invalid-INT15 result through `bx-vdm`, then verify its positive and rejection behavior before one unchanged-input source-built observation. |
-| Non-goals | No generic BIOS emulation, other BOP 15 AH functions, cassette/device/timer/ROM support, VDD, DEM/DOS/COMMAND changes, guest/CLI input change, detached runtime import, or Bochs semantic change. |
-| Reference Baseline | S75 audit, current top-level memory provider, CPU-result-v2 CF-only ABI, and S74 runtime witness. |
-| Files And ABI Surface | New bounded `bx-vdm` machine-handler provider, composition/manifest and focused tests only; no core/mantle ABI revision. |
+| Identifier Mode | M0 T198 S77, Ordinary Mode. |
+| Admission And Approval | S76 proves the actual copied window at `C000:014A` begins `15 FF FF...`, not `C4 C4 15`; the proposed BOP 15 provider was therefore refused and removed; see `etc/research/t198-s76-bios-int15-hypothesis-refusal-001.md`. |
+| Objective | Establish the source and ownership of the C000 mapping/control transfer and the precise generic-UD capture address/window semantics, then classify it as a machine defect, a valid BOP or an explicit unsupported ROM path. |
+| Non-goals | No BOP 15/INT15 provider, generic BIOS/ROM emulation, device support, guest/CLI input change, detached runtime import, or Bochs semantic edit before the mapping and capture facts are proven. |
+| Reference Baseline | S74 runtime witness, S76 refusal, current core exception capture, mantle lifecycle/memory mapping and OpenNT ROM/keyboard source. |
+| Files And ABI Surface | Audit/evidence only unless a defect in the fixed copied-window mechanics is proven; no provider or runtime composition change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused exact-input and negative provider/composition tests, then a fresh source-built unchanged-input run from a new build root. |
-| Expected Markers | `AX=8643h`, CF-only set, `fault_rip + 3`, and decline for wrong selector/AH/mode/vector without a new Bochs or device member. |
+| Verification | Correlate traced CS/IP and predecessor bytes with ROM mapping/source ownership; derive exact capture address and byte window from core code; compare to an independently valid BOP observation. |
+| Expected Markers | Proven C000 owner/mapping, exact control-transfer cause, valid/invalid BOP classification, and a narrow repair/defer decision. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source-derived contract, source/member delta, positive/negative results, fresh runtime boundary and next classification decision. |
-| Stop Conditions | The result requires any other AH case, ROM or device framework, a new generic ABI, guest input change, or a Bochs semantic edit. Stop and retain the controlled observer rather than widening scope. |
-| Exit Criteria | A source-built exact failure disposition or an explicit evidence-backed refusal if the bounded route cannot close. |
+| Reporting Requirements | Record all mapping/capture source evidence, the hypothesis rejection, ownership classification, and any separately admitted follow-up. |
+| Stop Conditions | The mapping cannot be proven from current sources/trace, or repair requires new ROM/device semantics rather than correcting a proven generic mechanical capture defect. Stop with controlled observation intact. |
+| Exit Criteria | A source-backed classification of the non-BOP event with no invented host-service meaning. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
