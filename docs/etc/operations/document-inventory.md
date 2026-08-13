@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 863 |
+| Documentation records | 864 |
 | --- | --- |
-| Generated UTC | 2026-08-13T01:02:30Z |
+| Generated UTC | 2026-08-13T01:04:31Z |
 
 ## Entries
 
@@ -289,6 +289,7 @@ content-divergent entries.
 | etc/research/t188-s7-copied-state-derivative-closure-001.md | indexed supporting material | 578a5142f29520b5b222e9c0adf06b8e62b339cf546c0788f51162de49295cb6 |
 | etc/research/t188-s8-two-object-build-001.md | indexed supporting material | d101b92b317fd84dd7768bc664a6aa4855e9d3c8563fa7a632f4ea34405d6b30 |
 | etc/research/t188-s9-one-shot-controller-closure-001.md | indexed supporting material | 846363afd4fb093670ab3539b6f806f892abe91627932299c719a6f9b0c3b10f |
+| etc/research/t189-s1-v5-runtime-predicate-map-001.md | indexed supporting material | 3c0b66838b579d3f72f178e8c20e9ba3920eea2609a2d85fad98be8f8d2b2bfc |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
