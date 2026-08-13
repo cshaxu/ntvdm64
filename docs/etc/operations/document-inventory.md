@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 996 |
 | --- | --- |
-| Generated UTC | 2026-08-13T14:12:28Z |
+| Generated UTC | 2026-08-13T14:15:28Z |
 
 ## Entries
 
@@ -110,7 +110,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 5025be613c26c969ba87b7d6b50d355c81e76a4767f7ad7b2fa570e344f3f097 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | b90fb7a1c0a9b5c802228932e136cfc2dcf1e607f084a0d35af391e670df90b1 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -390,7 +390,7 @@ content-divergent entries.
 | etc/research/t198-s12-p3-native-cross-island-link-frontier-001.md | indexed supporting material | e3d753b80269715c54dfc24cfb7eaa35b9e0148e688adfccfde60276b7e6caa5 |
 | etc/research/t198-s13-msvc-x64-minimal-lifecycle-witness-001.md | indexed supporting material | 3e73562fd78f45ebe1141148edca78c99a6e35e31f023ef6549304a76796aeae |
 | etc/research/t198-s14-msvc-x64-finite-hlt-witness-001.md | indexed supporting material | 5216921101718f1fcf2b0fe514a1105c7cd5a218e77e756c3efeb60bb1b2c0ff |
-| etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md | indexed supporting material | 0e44131dcaa732d41dbfb7ea42addfd006b355354fb0a88f67605b761c32d98b |
+| etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md | indexed supporting material | 23d23c5c350207e7753b6b85c702caf8ccd583eb4fd1d57668b92b787780f3ed |
 | etc/research/t198-s1-bop-runtime-composition-map-001.md | indexed supporting material | 6ae7b63e002e80119cde1195c5bc4df34d7af07d99fd39679cacf9e88876032c |
 | etc/research/t198-s2-native-execution-contract-map-001.md | indexed supporting material | 9948f12dc8933e287715ba748ea5ff3567f2b75aece8ac1429ad021f2e806152 |
 | etc/research/t198-s3-finite-native-run-witness-001.md | indexed supporting material | f197ff4bf1f1d6ad401b6f79b0b2ee59949ad583622468df10e2f80efc94adcc |

@@ -40,6 +40,12 @@ an explicit failure. The fresh MSVC x64 run exits `1`, while retaining the
 same prefetch-limit log. This conclusively rejects the former zero result as
 proof of bridge traversal.
 
+S15 r4 restores the native page-write-stamp decrement for every successful
+chunk in the generic ordinary-RAM copier. That is required cache coherency for
+any injected executable byte sequence, but r4 still exits 1 under the
+stop-observed acceptance rule. Thus neither stale prefetch state nor omitted
+page-write stamps is sufficient to explain the present UD2 non-observation.
+
 ## Next Diagnostic Bound
 
 The next step may add only default-off mechanical observation sufficient to

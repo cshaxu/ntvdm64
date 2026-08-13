@@ -913,6 +913,7 @@ bx_bool BX_MEM_C::copy_to_ordinary_ram(bx_phy_address addr, Bit64u len,
     if ((Bit64u)chunk > remaining) chunk = (unsigned)remaining;
     memptr = BX_MEM_THIS getHostMemAddr(NULL, current, BX_WRITE);
     if (memptr == NULL) return 0;
+    pageWriteStampTable.decWriteStamp(current, chunk);
     memcpy(memptr, data, chunk);
     current += chunk;
     data += chunk;
