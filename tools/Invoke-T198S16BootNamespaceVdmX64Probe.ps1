@@ -42,6 +42,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_cpu_state_abi.c',
     'src\bx-vdm\bx_ntvdm_dem_path_search_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_dta_service.c',
+    'src\bx-vdm\bx_ntvdm_dem_load_dos_service.c',
     'src\bx-vdm\bx_ntvdm_dem_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_readonly_file_service.c',
     'src\bx-vdm\bx_ntvdm_exception_abi.c',

@@ -50,9 +50,10 @@ static int put_bulk(bx_ntvdm_boot_namespace_plane_v1 *p,
   if(t->payload_bytes){a->ranges[0].physical_address=t->guest_physical_address;a->ranges[0].byte_count=t->payload_bytes;memcpy(a->payload,bytes,t->payload_bytes);}return t->payload_bytes?bx_ntvdm_mechanical_action_v1_valid(a):1; }
 
 int bx_ntvdm_boot_namespace_plane_v1_initialize(bx_ntvdm_boot_namespace_plane_v1 *p,
-    const byob_image *command,const byob_image *target,const byob_image *quit,
+    const byob_image *ntdos,const byob_image *command,const byob_image *target,const byob_image *quit,
     const byob_profile_selection *selection)
-{ if(!p||!bx_ntvdm_boot_namespace_provider_v1_initialize(&p->provider,command,target,quit,selection))return 0;
+{ if(!p||!selection||!bx_ntvdm_boot_namespace_provider_v1_initialize(&p->provider,command,target,quit,selection))return 0;
+  if(ntdos)p->ntdos=*ntdos;else memset(&p->ntdos,0,sizeof(p->ntdos));p->ntdos_identity=selection->ntdos;
   p->magic=BX_NTVDM_BOOT_NAMESPACE_PLANE_V1_MAGIC;p->abi_version=1u;p->struct_bytes=sizeof(*p);p->next_action_id=1u;p->has_dta=0;p->pending_kind=0;p->pending_action_id=0;return valid(p); }
 int bx_ntvdm_boot_namespace_plane_v1_set_dta(bx_ntvdm_boot_namespace_plane_v1 *p,const bx_ntvdm_dem_dta_registration_v1 *d)
 {if(!valid(p)||!d||!d->dta_location||!d->current_pdb)return 0;p->dta=*d;p->has_dta=1;return 1;}
@@ -67,6 +68,7 @@ int bx_ntvdm_boot_namespace_plane_v1_dispatch(bx_ntvdm_boot_namespace_plane_v1 *
  bx_ntvdm_mechanical_action_v1_clear(a);
  if(i->family==BX_NTVDM_BOP_FAMILY_COMMAND && bx_ntvdm_command_plane_v1_classify(i,s,&cmd) && (i->service==12u||i->service==13u) && bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(&p->provider,e,c,w,&tx,bytes)){ if(!put_write(p,&tx,bytes,a))return 0; *r=tx.result; return 1; }
  if(i->family!=BX_NTVDM_BOP_FAMILY_DEM||!bx_ntvdm_dem_plane_v1_classify(i,s,&dem)||dem.component!=BX_NTVDM_DEM_COMPONENT_NAMESPACE||dem.disposition!=BX_NTVDM_DEM_PLANE_DEFERRED)return 1;
+ if(i->service==0x11u){uint32_t id=0;if(!take_id(p,&id)||!bx_ntvdm_dem_load_dos_service_v1_prepare(&p->ntdos,&p->ntdos_identity,e,c,w,id,a,r)){bx_ntvdm_mechanical_action_v1_clear(a);return bx_ntvdm_cpu_result_v2_stop(r);}return 1;}
  if(i->service==0x1bu&&bx_ntvdm_dem_dta_service_v1_dispatch(e,c,w,&read)){if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION,e,c,&read.guest_read,1u,a))return 0;p->pending_read=read;return 1;}
  if(i->service==0u)return bx_ntvdm_boot_namespace_provider_v1_seek(&p->provider,e,c,w,r);
  if(i->service==2u)return bx_ntvdm_boot_namespace_provider_v1_close(&p->provider,e,c,w,r);

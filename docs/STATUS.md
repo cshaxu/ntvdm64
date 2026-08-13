@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S19.** Its governing brief is the active
+> **Current effective packet: M0 T198 S20.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S19 -- map the first original guest-entry transaction before
-admitting its provider.**
+**Active: M0 T198 S20 -- compose the first NTDOS guest-entry provider into the
+single `bx-vdm` session.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ admitting its provider.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S19, Ordinary Mode. |
-| Admission And Approval | S18 closes native coverage of the entire already implemented boot-namespace plane. The owner objective requires a CLI-based, non-invasive NTVDM with global BOP structure; the next required first-profile boundary is original DEM `50:11` (`demLoadDos`), whose original composition is known unavailable. |
-| Objective | Establish an evidence-complete source/object/guest-image map for the first original NTDOS guest-entry transaction: its exact BOP ABI, destination and publication semantics, NTDOS artifact identity, original-provider dependencies, and admissible source-derived provider boundary. Classify every dependency as reusable original input, contained replacement, or unavailable; do not implement until that map is closed. |
-| Non-goals | No new selector/service handler, host filesystem, CLI engine, OpenNT runtime import, Bochs semantic change, device enablement, image publication, or synthetic DOS startup. |
-| Reference Baseline | T198 S18 native matrix; `first-owner-transaction-closure-audit.md`; original `demLoadDos` source and the current source-built artifact inventory. |
-| Files And ABI Surface | `src/opennt` source/artifact records, `bx-vdm` BOP catalogue/contracts, and new evidence only. No runtime ABI revision or source implementation. |
+| Identifier Mode | M0 T198 S20, Ordinary Mode. |
+| Admission And Approval | S19 closes the source/object/guest-image map. The owner has authorized source-derived recovery when the historical host composition is unavailable; `demLoadDos` is the first such bounded provider. |
+| Objective | Add the source-derived DEM `50:11` NTDOS-publication provider to the existing one `bx-vdm` boot/guest-entry composition session. It must accept only an identity-checked same-island NTDOS image, derive destination from real-mode `DI:0000`, commit one preflighted ordinary-RAM write, resume at `fault+4`, and controlled-stop on an exact-request failure. |
+| Non-goals | No original DEM/CCPU/Win32 linkage, `adapter_runtime`/legacy host-session revival, host path/HANDLE, initial preload, BIOS `12h` response, DOS startup emulation, CLI engine, Bochs semantic change, device enablement, or additional BOP provider. |
+| Reference Baseline | S19 guest-entry map, S18 native composition matrix, existing mechanical-action ABI and immutable BYOB image structure. |
+| Files And ABI Surface | New `bx-vdm` source-derived load-DOS service; current boot-namespace plane/composition initializer and focused tests/fixture; its initializer gains the immutable NTDOS image input. Bochs/mantle ABI remains unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile `nt_bop.c`, `demdisp.c`, `demmisc.c`, BOP/DOS service headers, guest artifact inventory and prior closure records; independently enumerate original link/lifecycle inputs and compare them against the four-layer architecture. |
-| Expected Markers | One source-cited transaction map that distinguishes original guest payload, original host composition, contained input capability, adapter mechanical contract, and explicit unavailable dependencies; no direct `demLoadDos` call is represented as an admissible runtime path. |
+| Verification | Focused C source/negative tests; fresh MSVC x64 `/MT` adapter closure; native CPU5 fixture using real `C4 C4 50 11; HLT`, success publication/resume, and invalid-input controlled-stop. Run generic bridge/mechanical-action boundaries and governance checks. |
+| Expected Markers | One global session owns both existing namespace and NTDOS-load routes; no selector recognition outside `bx-vdm`; no second session/link graph; destination, payload length, action result and stop/resume disposition are directly asserted. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source paths, artifact provenance/classification, guest destination/size semantics, link/lifecycle dependencies, rejection rationale, and the smallest next-provider admission boundary. |
-| Stop Conditions | The map relies on an unrecorded binary, proposes direct legacy runtime linkage, requires a Bochs/core change, exposes host paths, or cannot distinguish historical behavior from a proposed contained replacement. Preserve evidence and re-admit. |
-| Exit Criteria | A reviewable first-guest-entry map names the next provider's immutable input, checked guest-RAM action/result shape, failure disposition, original-source fidelity limits, and all rejected composition dependencies. |
+| Reporting Requirements | Record exact original source basis, new adapter contract, input identity rule, destination calculation, all-or-nothing write evidence, typed outcome, x64 source/object closure, native fixture and exclusions. |
+| Stop Conditions | A needed capability cannot fit the existing session/action ABI, requires a Bochs/core change, host access, another selector/provider, foreign CRT, unrecorded guest ABI, or an incomplete-write failure path. Preserve evidence and re-admit. |
+| Exit Criteria | The `50:11` provider is source-tested, MSVC x64 `/MT` source-built and native-proven under CPU5 through one real BOP form; invalid input/out-of-aperture behavior stops without guest mutation and no banned dependency appears. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -194,6 +194,10 @@ admitting its provider.**
   `50:11` is a live `DI:0000` request after NTIO entry, not an initial preload;
   its unavailable historical composition has one bounded source-derived
   provider boundary.  See [S19 guest-entry map](etc/research/t198-s19-first-ntdos-guest-entry-map-001.md).
+- M0 T198 S20 P1 composes source-derived DEM `50:11` into the one active
+  `bx-vdm` session. Its x64 C closure and CPU5 native fixture prove one checked
+  NTDOS publication, typed resume and negative controlled stop; see [S20
+  witness](etc/research/t198-s20-native-dem-load-dos-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

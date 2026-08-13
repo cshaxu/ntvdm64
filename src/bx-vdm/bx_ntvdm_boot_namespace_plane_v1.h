@@ -5,6 +5,7 @@
 #include "bx_ntvdm_command_plane_v1.h"
 #include "bx_ntvdm_dem_plane_v1.h"
 #include "bx_ntvdm_dem_dta_service.h"
+#include "bx_ntvdm_dem_load_dos_service.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 
 #define BX_NTVDM_BOOT_NAMESPACE_PLANE_V1_MAGIC 0x42584e51u
@@ -21,6 +22,8 @@ enum bx_ntvdm_boot_namespace_pending_v1_kind {
 typedef struct bx_ntvdm_boot_namespace_plane_v1 {
     uint32_t magic, abi_version, struct_bytes, next_action_id;
     bx_ntvdm_boot_namespace_provider_v1 provider;
+    byob_image ntdos;
+    byob_component_descriptor ntdos_identity;
     bx_ntvdm_dem_dta_registration_v1 dta;
     uint32_t has_dta, pending_kind, pending_action_id;
     bx_ntvdm_exception_event_v1 pending_event;
@@ -30,7 +33,8 @@ typedef struct bx_ntvdm_boot_namespace_plane_v1 {
 } bx_ntvdm_boot_namespace_plane_v1;
 
 int bx_ntvdm_boot_namespace_plane_v1_initialize(
-    bx_ntvdm_boot_namespace_plane_v1 *plane, const byob_image *command,
+    bx_ntvdm_boot_namespace_plane_v1 *plane, const byob_image *ntdos,
+    const byob_image *command,
     const byob_image *target, const byob_image *terminal_quit,
     const byob_profile_selection *selection);
 int bx_ntvdm_boot_namespace_plane_v1_set_dta(

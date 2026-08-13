@@ -57,7 +57,7 @@ int main()
   profile.command_metadata.dos_date = profile.target_metadata.dos_date =
     profile.config_metadata.dos_date = profile.autoexec_metadata.dos_date = 1;
   if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
-      &command, &target, 0, &profile) ||
+      0, &command, &target, 0, &profile) ||
       !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 1;
   request.entry_bytes = bytes; request.entry_byte_count = sizeof(bytes);
   request.entry_physical_address = 0x1000; request.entry_cs = 0x0100;

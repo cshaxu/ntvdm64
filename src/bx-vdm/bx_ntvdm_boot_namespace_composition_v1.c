@@ -55,12 +55,13 @@ static int outcome(const bx_ntvdm_cpu_result_v2 *result,
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_initialize(
-    bx_ntvdm_boot_namespace_composition_v1 *value, const byob_image *command,
+    bx_ntvdm_boot_namespace_composition_v1 *value, const byob_image *ntdos,
+    const byob_image *command,
     const byob_image *target, const byob_image *quit,
     const byob_profile_selection *selection)
 {
     if (!value || !bx_ntvdm_boot_namespace_plane_v1_initialize(&value->plane,
-            command, target, quit, selection)) return 0;
+            ntdos, command, target, quit, selection)) return 0;
     value->magic = BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_MAGIC;
     value->abi_version = BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION;
     value->struct_bytes = sizeof(*value); value->bound = 0;

@@ -16,7 +16,8 @@ typedef struct bx_ntvdm_boot_namespace_composition_v1 {
 extern "C" {
 #endif
 int bx_ntvdm_boot_namespace_composition_v1_initialize(
-    bx_ntvdm_boot_namespace_composition_v1 *value, const byob_image *command,
+    bx_ntvdm_boot_namespace_composition_v1 *value, const byob_image *ntdos,
+    const byob_image *command,
     const byob_image *target, const byob_image *quit,
     const byob_profile_selection *selection);
 int bx_ntvdm_boot_namespace_composition_v1_bind(

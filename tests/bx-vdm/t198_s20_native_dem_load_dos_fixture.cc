@@ -6,35 +6,29 @@
 
 int main()
 {
-  /* The opaque payload is real-mode code at 1000:0000 plus pathname bytes at
-   * 0100:0100.  The guest, not the fixture, carries AX:BP token state between
-   * the existing 50:12, 50:16, 50:00 and 50:02 services. */
-  static Bit8u bytes[0x110];
+  /* The copied NTDOS test image starts with HLT.  After the real 50:11 BOP
+   * resumes, the guest far-jumps to DI:0000.  Reaching that HLT proves the
+   * complete checked RAM publication, rather than only adapter acceptance. */
+  static Bit8u ntdos_bytes[0x6cd2];
+  static Bit8u bytes[] = {
+    0xbf,0xb0,0x08,             /* mov di,08b0 */
+    0xc4,0xc4,0x50,0x11,        /* DEM load-DOS */
+    0xea,0x00,0x00,0xb0,0x08    /* jmp 08b0:0000 */
+  };
   static uint8_t command_bytes[] = { 0x90, 0xc3 };
   static uint8_t target_bytes[] = { 0xf4 };
+  byob_image ntdos = { ntdos_bytes, sizeof(ntdos_bytes) };
   byob_image command = { command_bytes, sizeof(command_bytes) };
   byob_image target = { target_bytes, sizeof(target_bytes) };
   byob_profile_selection profile;
   bx_ntvdm_boot_namespace_composition_v1 composition;
   bx_ntvdm_finite_run_request request;
-  unsigned i = 0;
-
-  memset(bytes, 0, sizeof(bytes));
-  /* mov ax,0100; mov ds,ax; xor ax,ax; mov si,0100; BOP 50:12 */
-  static const Bit8u code[] = {
-    0xb8,0x00,0x01, 0x8e,0xd8, 0x31,0xc0, 0xbe,0x00,0x01,
-    0xc4,0xc4,0x50,0x12,
-    /* save token AX in DI; ZF=1, count=2, destination=0100:0200 */
-    0x89,0xc7, 0x31,0xdb, 0xb9,0x02,0x00, 0xba,0x00,0x02,
-    0xbe,0x00,0x00, 0xc4,0xc4,0x50,0x16,
-    /* restore token; seek absolute zero; restore token; close; HLT */
-    0x89,0xf8, 0x31,0xdb, 0x31,0xc9, 0x31,0xd2,
-    0xc4,0xc4,0x50,0x00, 0x89,0xf8, 0xc4,0xc4,0x50,0x02, 0xf4
-  };
-  memcpy(bytes, code, sizeof(code));
-  memcpy(bytes + 0x100, "C:\\CONFIG.SYS", sizeof("C:\\CONFIG.SYS"));
+  unsigned status;
 
   memset(&profile, 0, sizeof(profile));
+  ntdos_bytes[0] = 0xf4;
+  profile.ntdos.bytes = sizeof(ntdos_bytes);
+  memcpy(profile.ntdos.file_name, L"NTDOS.SYS", sizeof(L"NTDOS.SYS"));
   memcpy(profile.command_placement.path, L"\\COMMAND.COM", sizeof(L"\\COMMAND.COM"));
   profile.command_placement.drive_index = 2; profile.has_command_placement = 1;
   memcpy(profile.target_placement.path, L"\\TARGET.COM", sizeof(L"\\TARGET.COM"));
@@ -50,13 +44,13 @@ int main()
   profile.command_metadata.dos_date = profile.target_metadata.dos_date =
     profile.config_metadata.dos_date = profile.autoexec_metadata.dos_date = 1;
   if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
-      0, &command, &target, 0, &profile) ||
+      &ntdos, &command, &target, 0, &profile) ||
       !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 1;
   request.entry_bytes = bytes; request.entry_byte_count = sizeof(bytes);
   request.entry_physical_address = 0x1000; request.entry_cs = 0x0100;
-  request.entry_eip = 0; request.instruction_tick_budget = 128;
+  request.entry_eip = 0; request.instruction_tick_budget = 64;
   request.ips = 1000000; request.stop_on_ud_fixture = 0;
-  i = (unsigned)bx_ntvdm_run_finite_bare_bytes(&request);
+  status = (unsigned)bx_ntvdm_run_finite_bare_bytes(&request);
   bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
-  return (int)i;
+  return (int)status;
 }

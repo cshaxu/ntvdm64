@@ -61,6 +61,8 @@ int main(void)
 {
     uint8_t command_bytes[] = { 0x90, 0xc3 };
     uint8_t target_bytes[] = { 0xf4 };
+    uint8_t ntdos_bytes[] = { 0xfa, 0xfc, 0xf4 };
+    byob_image ntdos = { ntdos_bytes, sizeof(ntdos_bytes) };
     byob_image command = { command_bytes, sizeof(command_bytes) };
     byob_image target = { target_bytes, sizeof(target_bytes) };
     byob_profile_selection profile;
@@ -70,16 +72,31 @@ int main(void)
     uint32_t token;
 
     profile_initialize(&profile);
+    profile.ntdos.bytes = sizeof(ntdos_bytes);
+    memcpy(profile.ntdos.file_name, L"NTDOS.SYS", sizeof(L"NTDOS.SYS"));
     event_initialize(&event, 0x54, 0x0c);
     event.ds = 0x1000; event.edx = 0x20;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 1;
     if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
-            &command, &target, 0, &profile) ||
+            &ntdos, &command, &target, 0, &profile) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 2;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 3;
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 4;
     if (outcome.resume_rip != 0x104) return 5;
     if (ram[0x10020] == 0) return 6;
+
+    event_initialize(&event, 0x50, 0x11);
+    event.edi = 0x0800;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 11;
+    if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 12;
+    if (outcome.resume_rip != 0x104) return 13;
+    if (memcmp(ram + 0x8000, ntdos_bytes, sizeof(ntdos_bytes)) != 0) return 14;
+    composition.plane.ntdos.byte_count--;
+    event.edi = 0x0900;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
+        ram[0x9000] != 0 || ram[0x9001] != 0 || ram[0x9002] != 0) return 15;
+    composition.plane.ntdos.byte_count++;
 
     event_initialize(&event, 0x50, 0x12);
     event.ds = 0x1000; event.esi = 0x40;

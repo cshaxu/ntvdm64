@@ -80,7 +80,7 @@ int main(void)
         profile.config_metadata.dos_date = profile.autoexec_metadata.dos_date = 1u;
 
     if (!bx_ntvdm_boot_namespace_plane_v1_initialize(
-            &plane, &command, &target, 0, &profile)) return 1;
+            &plane, 0, &command, &target, 0, &profile)) return 1;
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x1000;
     cpu.edx = 0x20;
