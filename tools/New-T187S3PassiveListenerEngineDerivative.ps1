@@ -59,7 +59,6 @@ $record = [ordered]@{
     exceptionSourceSha256 = $sourceHash
     exceptionMacroSet = @('BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1',
         'BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1',
-        'BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1',
         'BX_NTVDM_ENABLE_STARTUP_TRANSACTION=0',
         'BX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0',
         'BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1',
@@ -73,7 +72,7 @@ $make = @(
     '!INCLUDE Makefile','',
     ('ADAPTER_OBJS = ' + ($objects -join ' ')),'',
     'cpu\exception.o: cpu\exception.cc',
-    "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1 /DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1 /DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1 /DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0 /DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1 /Iadapter /Icli /Imachine /Tpcpu\exception.cc /Focpu\exception.o",'',
+    "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1 /DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1 /DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0 /DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1 /Iadapter /Icli /Imachine /Tpcpu\exception.cc /Focpu\exception.o",'',
     'ntdos64-t187-passive-listener.exe: cpu\exception.o',
     "`tlink /nologo /subsystem:console /incremental:no /opt:ref /map:ntdos64-t187-passive-listener.map /out:`$@ `$(BX_OBJS) `$(SIMX86_OBJS) main.o cpu\exception.o iodev/libiodev.a iodev/hdimage/libhdimage.a iodev/usb/libusb.a iodev/network/libnetwork.a iodev/sound/libsound.a cpu/libcpu.a cpu/cpudb/libcpudb.a memory/libmemory.a gui/libgui.a `$(DISASM_LIB) `$(FPU_LIB) `$(GUI_LINK_OPTS) `$(MCH_LINK_FLAGS) `$(SIMX86_LINK_FLAGS) `$(READLINE_LIB) `$(EXTRA_LINK_OPTS) `$(LIBS) machine\bx_ntvdm_machine_bop_v1.obj machine\unexp_nt.c.obj machine\illegalp.c.obj vcruntime.lib `$(ADAPTER_OBJS) kernel32.lib bcrypt.lib",''
 )

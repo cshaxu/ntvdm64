@@ -26,7 +26,7 @@ $runtimeHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-ntvdm-adapter\
 $make = @(
     '# Generated T188 S7 derivative: two object targets and final link.', '!INCLUDE Makefile', '',
     'cpu\exception.o: cpu\exception.cc',
-    "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1 /DBX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC=1 /DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1 /DBX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC=1 /DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0 /DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1 /Iadapter /Icli /Imachine /Tpcpu\exception.cc /Focpu\exception.o", '',
+    "`t`$(CXX) /c `$(BX_INCDIRS) `$(CXXFLAGS) /DBX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=1 /DBX_NTVDM_ENABLE_ADAPTER_STATE_DIAGNOSTIC=1 /DBX_NTVDM_ENABLE_BOP_CATALOG_LISTENER=1 /DBX_NTVDM_ENABLE_STARTUP_TRANSACTION=0 /DBX_NTVDM_ENABLE_CPU_RESULT_BRIDGE=0 /DBX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1 /DBX_NTVDM_ENABLE_MACHINE_COMPOSITION=1 /Iadapter /Icli /Imachine /Tpcpu\exception.cc /Focpu\exception.o", '',
     'adapter\bx_ntvdm_adapter_runtime.obj: adapter\bx_ntvdm_adapter_runtime.c adapter\bx_ntvdm_adapter_runtime.h',
     "`tcl.exe /nologo /c /MT /W3 /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /Iadapter /Icli /Foadapter\bx_ntvdm_adapter_runtime.obj adapter\bx_ntvdm_adapter_runtime.c", '',
     'ntdos64-t188-copied-state.exe: cpu\exception.o adapter\bx_ntvdm_adapter_runtime.obj',
