@@ -2,7 +2,7 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T196 S2.** Its governing brief is the active
+> **Current effective packet: M0 T196 S3.** Its governing brief is the active
 > packet table below.
 
 **Active: M0 T196 S1 — establish the complete Bochs intrusive-diff baseline.**
@@ -19,19 +19,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T196 S2, Ordinary Mode. |
-| Admission And Approval | T196 S1 is committed in 10302ef. S2's direct Git `@@` recount corrected the baseline: the 31-path manifest contains 60 hunks, including six project-added-file hunks that S1's first counter reported as zero. Owner-approved T196 remains a multi-S boundary **repair** package. S2 is admitted to classify that complete surface and design the dependency-ordered repair; later S tasks perform the actual removal, migration and minimization. |
-| Objective | Produce one complete hunk-to-register/source/build crosswalk and repair disposition for all S1 differences: retain only justified selector-blind mechanics/minimal embedding/default-off diagnostics, remove, migrate to adapter, or flag an explicit repair blocker. Define bounded S3/S4 repair groups from actual shared dependencies. |
-| Non-goals | No Bochs/adapter behavior change, source import, build/runtime campaign, device/provider/BOP expansion, or implicit approval. S2 records proposed disposition; it does not claim that a proposed removal/migration is already repaired. |
-| Reference Baseline | T196 S1 immutable manifest `etc/research/t196-s1-bochs26-intrusive-diff-baseline-001.md`, T195 closure, source-policy authority, and the external-intrusion exception register. |
-| Files And ABI Surface | Read-only `src/bochs`, pinned external Bochs 2.6 input, external-intrusion register and relevant current build generators; one T196 S2 classification/repair-design record, Status and documentation inventory only. |
+| Identifier Mode | M0 T196 S3, Ordinary Mode. |
+| Admission And Approval | T196 S2 is committed in dea352a: all 60 hunks are classified. S3 is admitted to remove its 17 stale Bochs diagnostics and old observation fixture, including direct diagnostic-only current tools/tests that would otherwise retain dead references. |
+| Objective | Delete the S2 removal group without changing Bochs execution semantics: H02, H09--H10, H12--H21, H23--H25 and H28--H29; retire/update only their diagnostic-exclusive scripts and tests; reconcile their register entries. |
+| Non-goals | No change to generic #UD/RAM/result/startup mechanics, no BOP/provider behavior, no device/firmware feature, no runtime campaign, and no retention of a deleted diagnostic through an obsolete generator switch. |
+| Reference Baseline | T196 S2 classification, T195 closure, pinned Bochs 2.6 tree, and external-intrusion exception register. |
+| Files And ABI Surface | Named Bochs diagnostic files, their direct diagnostic-only tests/generators, exception register, S3 evidence, Status and documentation inventory. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproduce the S1 identity/manifest with a direct Git `@@` recount; inspect every hunk and relevant exception/register/build relation; prove the crosswalk covers all 60 hunks and every applicable register row; review the proposed repair group boundary; run documentation governance and `git diff --check`. |
-| Expected Markers | Complete 60-hunk disposition table, explicit register relationship or absence for each hunk, bounded S3/S4 repair groups, and no selector/service/OpenNT/DOS/SoftPC semantic exception silently retained in Bochs. |
+| Verification | Prove each named source hunk and its direct diagnostic-only references are absent; run retained boundary checks, documentation governance and `git diff --check`; recount the upstream diff and record the expected reduction. |
+| Expected Markers | No deleted diagnostic macro/log/fixture target remains live; retained mechanics source is unchanged except necessary dead-reference cleanup; register rows state removal. |
 | Asset Needs | Local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record exact evidence per disposition, unresolved ambiguity/blocker, proposed repair ownership and dependency ordering; distinguish a proposed repair from an implemented one. |
-| Stop Conditions | Pinned source identity or a hunk's provenance cannot be established; a disposition needs a new semantic purpose; or the repair would require a device/firmware/provider expansion. Preserve facts and re-admit rather than guessing. |
-| Exit Criteria | Committed complete classification and dependency-ordered repair design support separately admitted implementation S tasks without rediscovery. This closes S2 only, not T196. |
+| Reporting Requirements | Record every removed source/tool/test reference, retained-tool rationale and post-removal diff count. |
+| Stop Conditions | A reference also supplies a retained mechanical closure, deletion changes generic execution semantics, or removal requires replacement behavior. Preserve facts and re-admit. |
+| Exit Criteria | Committed removal and direct-reference cleanup prove the 17-hunk group is gone without a replacement semantic path. This closes S3 only, not T196. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
