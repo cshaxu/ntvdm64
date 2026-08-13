@@ -2,12 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S10.** Its governing brief is the active
+> **Current effective packet: M0 T198 S11.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S10 -- implement one whole-family boot-namespace provider
-plane behind common ingress, with a fixed pending-action lifecycle and an
-explicit DTA prerequisite.**
+**Active: M0 T198 S11 -- map and define the one synchronous generic-UD
+composition transaction between `bx-vdm` and the existing selector-blind
+mantle mechanics.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,21 +24,21 @@ explicit DTA prerequisite.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S10, Ordinary Mode. |
-| Admission And Approval | S9 proves the complete family/object/action closure and rejects the legacy runtime. The owner-directed holistic BOP route authorizes one provider plane, not per-service bridge hacks. |
-| Objective | Implement and test one `bx-vdm` boot-namespace provider plane that accepts only common ingress/selection/plane records, owns the complete selected immutable namespace and one fixed pending action, and routes all selected COMMAND/DEM namespace operations through it. |
-| Non-goals | No legacy adapter runtime, ambient environment/session, host filesystem, FCB/fast-I/O, DTA BOP implementation, firmware/device/GUI/product build, OpenNT import or CPU semantic change. |
-| Reference Baseline | T198 S8 mechanical action closure and T198 S9 whole-family composition map. |
-| Files And ABI Surface | New adapter-only provider-plane state, fixed pending/completion records and focused test; it may include the mantle mechanical-action header but must not add a mantle/core patch. DTA registration is a fixed explicit input; pathname dispatch defers unless it is valid. |
+| Identifier Mode | M0 T198 S11, Ordinary Mode. |
+| Admission And Approval | S10 closes the entire selected boot-namespace plane under common ingress and fixed actions. The owner-directed boundary requires the next composition to keep BOP/provider meaning in `bx-vdm` and Bochs mechanics selector-blind. |
+| Objective | Produce an evidence-backed single-transaction composition contract/map from one copied generic-UD event through `bx-vdm` routing and the existing mantle mechanical action executor to a typed resume/stop outcome; determine whether the existing records close it or name one minimal, opaque ABI gap before code changes. |
+| Non-goals | No new BOP/provider, legacy adapter runtime, ambient environment/session, host filesystem, DTA registration implementation, firmware/device/GUI/product build, OpenNT import, CPU semantic change, or Bochs source patch. |
+| Reference Baseline | T198 S5 generic-UD bridge boundary, S7 cross-island link witness, S8 mechanical action closure, and S10 whole-family provider-plane closure. |
+| Files And ABI Surface | Evidence/map only unless it proves existing fixed records sufficient. Any proposed ABI is fixed-width, copied and selector-blind in mantle/core; it names no BOP/OpenNT/DOS service. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused i686 plane test must cover every selected route, direct-result cases, pending read/multi/bulk conversion and completion, invalid/missing DTA deferral, malformed action rejection, and no legacy-runtime source dependency. Run documentation checks. |
-| Expected Markers | One plane entrypoint and state owner; all selected facade calls occur only after global ingress/plane classification; fixed copied action/completion records; no direct recognizer or runtime link input. |
+| Verification | Audit the actual core hook, generic event/outcome bridge, alternative `bx-vdm` bridge, action executor and finite-run lifecycle; map every copied record and call/link direction; scan for selector/provider vocabulary under mantle/core; run documentation checks. |
+| Expected Markers | One enumerated synchronous transaction sequence; explicit action execution/completion ownership; no retained pointer/callback/ambient state; either a sufficient existing ABI or one narrowly bounded re-admission point. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record entrypoint coverage, action/result transitions, DTA disposition, toolchain island, object closure and rejected legacy alternatives. |
-| Stop Conditions | A route needs an unbounded guest pointer, callback, ambient host state, unrecorded historical import, a new mantle/core operation, or a service-specific Bochs hook. Preserve evidence and re-admit. |
-| Exit Criteria | One focused provider-plane source/test closure covers the selected family through global classification and fixed action records, with pathname behavior explicitly gated by the supplied DTA input and no runtime link. |
+| Reporting Requirements | Record all event/action/outcome fields, state owner, link/toolchain direction, rejected legacy alternatives and any exact ABI insufficiency. |
+| Stop Conditions | The transaction needs an unbounded guest pointer, retained callback, ambient host state, a service-specific Bochs hook, or a new mantle/core operation. Preserve evidence and re-admit. |
+| Exit Criteria | A complete source-backed composition map distinguishes existing closure from the exact minimum missing opaque contract, without embedding BOP semantics in Bochs. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover COMMAND/DEM/search entrypoints, copied read/multi/bulk action conversion and completion, direct results, DTA absence, global plane use, toolchain direction and legacy-runtime coupling. |
+| Similar-Issue Sweep | Cover direct results and read/write/pending transitions; core/mantle/adapter dependency direction; x86 toolchain/object closure; default-decline behavior; and legacy-runtime or selector leakage. |
 
 ## Current Technical Baseline
 
@@ -137,6 +137,9 @@ explicit DTA prerequisite.**
   provider write as an addressed DTA image, rejects a mismatched action ID
   without consuming the pending read, then completes the valid fixed action.
   See [T198 S10 P4 witness](etc/research/t198-s10-p4-path-next-witness-001.md).
+- M0 T198 S10 is complete: its selected whole-family plane is source-built
+  and tested without legacy runtime linkage; its closure transfers only the
+  generic-UD composition question to S11. See [T198 S10 closure](history/m0-t198-s10-closure-20260813.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
