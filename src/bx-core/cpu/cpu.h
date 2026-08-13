@@ -3582,6 +3582,10 @@ public: // for now...
   BX_SMF BX_INSF_TYPE linkTrace(bxInstruction_c *i) BX_CPP_AttrRegparmN(1);
 #endif
   BX_SMF void prefetch(void);
+  /* Sequential instruction decode/execution and a split fetch both advance
+   * the architectural code offset. A 16-bit code segment wraps that offset;
+   * 32-bit and long-64 paths retain their existing widths. */
+  BX_SMF BX_CPP_INLINE void advance_ip(unsigned amount);
   BX_SMF void updateFetchModeMask(void);
   BX_SMF BX_CPP_INLINE void invalidate_prefetch_q(void)
   {
@@ -4418,6 +4422,21 @@ BX_CPP_INLINE void BX_CPU_C::updateFetchModeMask(void)
 
   BX_CPU_THIS_PTR user_pl = // CPL == 3
      (BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.rpl == 3);
+}
+
+BX_CPP_INLINE void BX_CPU_C::advance_ip(unsigned amount)
+{
+#if BX_SUPPORT_X86_64
+  if (long64_mode()) {
+    BX_CPU_THIS_PTR gen_reg[BX_64BIT_REG_RIP].rrx += amount;
+    return;
+  }
+#endif
+  if (BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].cache.u.segment.d_b) {
+    BX_CPU_THIS_PTR gen_reg[BX_32BIT_REG_EIP].dword.erx += amount;
+  } else {
+    BX_CPU_THIS_PTR gen_reg[BX_16BIT_REG_IP].word.rx += (Bit16u) amount;
+  }
 }
 
 #if BX_X86_DEBUGGER

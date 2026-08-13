@@ -42,15 +42,12 @@ int main()
   request.capture_terminal_snapshot = 1;
 
   status = bx_ntvdm_run_finite_bare_bytes(&request);
-  /* Current core emits its prefetch diagnostic then runs to the fixture's
-   * controlled budget.  Preserve both facets as the exact pre-repair witness;
-   * a generic core repair must be admitted separately. */
+  /* The repaired generic path must decode across the 16-bit offset wrap,
+   * advance the split instruction to offset 0004, then execute HLT. The
+   * normal pre-execution advance makes the retained post-HLT IP 0005. */
   if (status != BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET ||
       !bx_ntvdm_finite_run_terminal_snapshot_get(&terminal)) return 1;
   fprintf(stdout, "t198-s46 terminal=%04x:%08x\n", terminal.cs,
     (unsigned) terminal.eip);
-  /* The current fatal prefetch path resets the retained CPU state before the
-   * finite runner observes it, so the terminal snapshot is intentionally
-   * recorded but not used as a substitute for the core's exact diagnostic. */
-  return 0;
+  return terminal.cs == 0x1000 && terminal.eip == 0x0005 ? 0 : 2;
 }

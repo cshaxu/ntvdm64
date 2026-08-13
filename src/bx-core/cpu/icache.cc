@@ -233,7 +233,7 @@ void BX_CPU_C::boundaryFetch(const Bit8u *fetchPtr, unsigned remainingInPage, bx
   // Set RIP to the 0th byte of the 2nd page, and force a
   // prefetch so direct access of that physical page is possible, and
   // all the associated info is updated.
-  RIP += remainingInPage;
+  advance_ip(remainingInPage);
   prefetch();
 
   unsigned fetchBufferLimit = 15;

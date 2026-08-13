@@ -102,7 +102,7 @@ void BX_CPU_C::cpu_loop(void)
       // want to allow changing of the instruction inside instrumentation callback
       BX_NTVDM_RECORD_INSTRUCTION_HISTORY();
       BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, i);
-      RIP += i->ilen();
+      advance_ip(i->ilen());
       // when handlers chaining is enabled this single call will execute entire trace
       BX_CPU_CALL_METHOD(i->execute, (i)); // might iterate repeat instruction
 
@@ -125,7 +125,7 @@ void BX_CPU_C::cpu_loop(void)
 
       // want to allow changing of the instruction inside instrumentation callback
       BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, i);
-      RIP += i->ilen();
+      advance_ip(i->ilen());
       BX_CPU_CALL_METHOD(i->execute, (i)); // might iterate repeat instruction
       BX_CPU_THIS_PTR prev_rip = RIP; // commit new RIP
       BX_INSTR_AFTER_EXECUTION(BX_CPU_ID, i);
@@ -180,7 +180,7 @@ void BX_CPU_C::cpu_run_trace(void)
   // want to allow changing of the instruction inside instrumentation callback
   BX_NTVDM_RECORD_INSTRUCTION_HISTORY();
   BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, i);
-  RIP += i->ilen();
+  advance_ip(i->ilen());
   // when handlers chaining is enabled this single call will execute entire trace
   BX_CPU_CALL_METHOD(i->execute, (i)); // might iterate repeat instruction
 
@@ -194,7 +194,7 @@ void BX_CPU_C::cpu_run_trace(void)
   for(;;) {
     // want to allow changing of the instruction inside instrumentation callback
     BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, i);
-    RIP += i->ilen();
+    advance_ip(i->ilen());
     BX_CPU_CALL_METHOD(i->execute, (i)); // might iterate repeat instruction
     BX_CPU_THIS_PTR prev_rip = RIP; // commit new RIP
     BX_INSTR_AFTER_EXECUTION(BX_CPU_ID, i);

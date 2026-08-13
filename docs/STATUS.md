@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S47.** Its governing brief is the active
+> **Current effective packet: M0 T198 S48.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S47 -- repair the generic real-mode `CS:FFFF` instruction
-fetch/advance path and prove the positive neutral terminal.**
+**Active: M0 T198 S48 -- rerun the unchanged source-built NTIO plan after the
+generic real-mode repair and classify its next continuous-execution state.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ fetch/advance path and prove the positive neutral terminal.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S47, Ordinary Mode. |
-| Admission And Approval | S46 neutral witness reproduces the exact `EIP [00010000] > CS.limit [0000ffff]` diagnostic from a split 16-bit instruction, independently of all guest composition. Owner authorizes strictly registered Bochs intrusions when necessary. |
-| Objective | Make the generic CPU5 real-mode instruction path wrap the 16-bit instruction pointer across `CS:FFFF` to `CS:0000`, then prove the same neutral fixture executes its `HLT` at `CS:0004`. |
-| Non-goals | No BOP, selector, service, DOS/NTIO, OpenNT, adapter, provider, host capability, device, firmware, CLI or product-startup behavior; no special guest address, opcode, or image branch. |
-| Reference Baseline | S45 source audit, S46 neutral witness, existing finite runner/mechanical action and CPU5 x64 `/MT` closure. |
-| Files And ABI Surface | One pre-registered selector-blind `bx-core` mechanics repair, neutral fixture/recipe and evidence only; no product or cross-component ABI. |
+| Identifier Mode | M0 T198 S48, Ordinary Mode. |
+| Admission And Approval | S47 establishes the generic real-mode wrap repair through a full MSVC x64 `/MT` CPU5 closure and neutral HLT/UD2 regressions. The prior source-built NTIO plan is now eligible for an unchanged rerun. |
+| Objective | Rebuild and run the existing source-built NTIO finite plan without adding guest, BOP, provider or device behavior; record the first post-S47 terminal/bridge state and map it to the original OpenNT source. |
+| Non-goals | No BOP/provider implementation, host capability, CLI argument, DOS image change, machine feature, device/firmware activation, trace broadening or corrective patch. |
+| Reference Baseline | S40--S46 NTIO evidence, S47 generic repair, locked NTDOS image map, existing source-built NTIO fixture and CPU5 x64 `/MT` closure. |
+| Files And ABI Surface | Existing finite NTIO fixture/recipe and new evidence only; no code or ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Register the exact core change before patching; rebuild/link full CPU5 under MSVC x64 `/MT`; run the positive neutral fixture and retained HLT/UD2 regressions; scan for guest/product vocabulary and compare the changed path with adopted Bochs source. |
-| Expected Markers | `CS:FFFF` split input, no `EIP=00010000` prefetch diagnostic, `CS:0004` terminal HLT and controlled finite stop. |
+| Verification | Run the existing complete source-built NTIO recipe from a new build root under MSVC x64 `/MT`; retain exact output, verify the input/bridge links remain unchanged, compare it with S44's former terminal and map any new first state to OpenNT source. |
+| Expected Markers | Existing source-built plan identity, bounded terminal/bridge result, absence or presence of the former prefetch diagnostic, and source-attributed next frontier. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exception registration, exact changed mechanics, source/upstream comparison, neutral/regression results and all remaining limits. |
-| Stop Conditions | The minimal repair needs guest-image recognition, OpenNT/BOP semantics, device/firmware activation, an adapter exception, a new host callback, or changes outside the generic CPU path. Stop and re-admit rather than expanding scope. |
-| Exit Criteria | The neutral split instruction reaches the specified terminal under the full closure and the repair remains selector-blind and source-bounded. |
+| Reporting Requirements | Record exact command, build identity, terminal output, comparison to S44/S47 and source-map result; state the narrow next admission decision. |
+| Stop Conditions | The rerun requires changing any code, image, BOP/provider disposition, device/firmware or runtime configuration. Stop and re-admit rather than expanding scope. |
+| Exit Criteria | A reproducible source-built NTIO result after S47 and a source-backed classification of its next bottleneck or progress state. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -348,6 +348,10 @@ fetch/advance path and prove the positive neutral terminal.**
   exact `EIP [00010000] > CS.limit [0000ffff]` prefetch diagnostic with no
   guest composition input. S47 is therefore a generic core repair, not an
   adapter workaround. See [S46 neutral witness](etc/research/t198-s46-neutral-realmode-ip-wrap-witness-001.md).
+- M0 T198 S47 is complete: one selector-blind code-offset-width helper repairs
+  the neutral `CS:FFFF` instruction path; its HLT and generic UD2 STOP
+  regressions pass after finite early-stop cleanup. See [S47 repair
+  witness](etc/research/t198-s47-realmode-ip-width-repair-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

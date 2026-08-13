@@ -71,7 +71,7 @@ typedef void BX_INSF_TYPE;
 #define BX_EXECUTE_INSTRUCTION(i) {                    \
   BX_NTVDM_RECORD_INSTRUCTION_HISTORY();                \
   BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, (i));           \
-  RIP += (i)->ilen();                                  \
+  BX_CPU_THIS_PTR advance_ip((i)->ilen());              \
   return BX_CPU_CALL_METHOD(i->execute, (i));          \
 }
 

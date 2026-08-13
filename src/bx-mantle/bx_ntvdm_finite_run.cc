@@ -164,6 +164,9 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     terminal_snapshot.valid = 1;
   }
   bx_ntvdm_mantle_generic_ud_fixture_stop(0);
+  /* A bridge STOP may return before the finite watchdog fires.  The native
+   * timer contract requires explicit deactivation before unregistration. */
+  bx_pc_system.deactivate_timer((unsigned) stop_timer);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
   if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;

@@ -880,6 +880,10 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
          * existing mechanical stop transfer. */
         bx_ntvdm_mantle_generic_ud_stop_observation_mark();
         bx_pc_system.kill_bochs_request = 1;
+        /* cpu_loop tests the finite stop latch only while servicing an
+         * asynchronous event after this longjmp.  Request that native check
+         * without adding any selector or guest semantic. */
+        BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
         longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
       }
       for (unsigned reg = 0; reg < BX_NTVDM_GENERIC_UD_GPR16_COUNT; ++reg) {

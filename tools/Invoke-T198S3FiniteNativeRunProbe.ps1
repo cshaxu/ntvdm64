@@ -179,13 +179,10 @@ if (!$MechanicalActionProbe) {
     & cmd.exe /d /s /c $finiteCompile
     if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for finite-run helper: $LASTEXITCODE" }
 }
-if ($MechanicalActionProbe -or $externalBridge -or
-    ![string]::IsNullOrWhiteSpace($ExternalFixtureSource)) {
-    $actionCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
-        (New-MsvcCompileCommand $mechanicalActionSource $mechanicalActionObject)
-    & cmd.exe /d /s /c $actionCompile
-    if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for mechanical action: $LASTEXITCODE" }
-}
+$actionCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
+    (New-MsvcCompileCommand $mechanicalActionSource $mechanicalActionObject)
+& cmd.exe /d /s /c $actionCompile
+if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for mechanical action: $LASTEXITCODE" }
 if (!$MechanicalActionProbe) {
     $bridgeCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' +
         (New-MsvcCompileCommand $bridgeSource $bridgeObject) +
@@ -213,10 +210,7 @@ if ($MechanicalActionProbe) {
 } else {
     $localObjects += $finiteRunObject
     $localObjects += $bridgeObject
-    if (! [string]::IsNullOrWhiteSpace($ExternalFixtureSource)) {
-        $localObjects += $mechanicalActionObject
-    }
-    if ($externalBridge) { $localObjects += $mechanicalActionObject }
+    $localObjects += $mechanicalActionObject
     if ($externalBridge) { $localObjects += $ExternalBridgeObjects }
     if ($UdStopFixture -or $externalBridge) { $localObjects += $replacementExceptionObject }
 }
