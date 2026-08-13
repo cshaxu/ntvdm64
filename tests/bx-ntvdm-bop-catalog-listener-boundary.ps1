@@ -6,7 +6,7 @@ foreach ($required in @(
         '#include "bx_ntvdm_bop_catalog_v1.h"',
         'static void bx_ntvdm_bop_catalog_listener',
         'bx_ntvdm_bop_catalog_v1_observe',
-        'ntdos64 adapter bop observed', 'rip=%llx',
+        'ntdos64 adapter bop observed', 'rip=%llx', 'dx=%04x',
         'stack-valid=%u', 'frame-valid=%u')) {
     if (-not $source.Contains($required)) { throw "Missing BOP listener boundary element: $required" }
 }

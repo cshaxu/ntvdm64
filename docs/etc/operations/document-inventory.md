@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 847 |
+| Documentation records | 848 |
 | --- | --- |
-| Generated UTC | 2026-08-13T00:15:08Z |
+| Generated UTC | 2026-08-13T00:17:10Z |
 
 ## Entries
 
@@ -105,7 +105,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | fe390ac7dee155b1035451e9696be9c59853528a90e906ff8a8dea30cb0ea59e |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 84f45bf19c4af83dc0b5cee2f7356528ce0650c0150d72bbf915e4bd87450a11 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -275,6 +275,7 @@ content-divergent entries.
 | etc/research/t185-s3-v5-selection-engine-relink-001.md | indexed supporting material | 1fd938998ef863cb1331eabc2e1f513c1c3e00209b1780a5e26f3b9b299aa240 |
 | etc/research/t186-s1-corrected-v5-observation-classification-001.md | indexed supporting material | 14131c68d9fc890555dd87362e364af7690b3355862fa688241db40b837d3e52 |
 | etc/research/t187-s1-boot-file-diagnostic-feasibility-001.md | indexed supporting material | 9c0539e2a1df7277295d71dd4e82e63811310860f0debec01c96c0f3c93d8832 |
+| etc/research/t187-s2-passive-bop-dx-snapshot-001.md | indexed supporting material | 27dfa9e144e724842f572833d3af3b9a2bb0110c48b7a7c5ac138008b82e1cbb |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -861,7 +862,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | fe53624b19e8e6939808a3883f2939474c8af663cbb64dcb5f88b1095c63ece4 |
+| STATUS.md | principal control document | 07ea80378a5a9f045d21dff1b8da8f9ead415f9163daae303acc3e3dbef9d2e8 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Binding active packet: M0 T187 S1 — boot-file BOP runtime predicate classification.**
+**Binding active packet: M0 T187 S2 — passive BOP snapshot completion.**
 
 **Active: M0 T176 S22 — normal-return and post-termination machine-BOP recovery.**
 
 > **Governance correction:** The title is a retained encoding-damaged locator.
-> The binding active packet below is **M0 T187 S1**. M0 T186 is closed; all pre-admission T177/T178/T179/T180-labelled files
+> The binding active packet below is **M0 T187 S2**. M0 T186 is closed; all pre-admission T177/T178/T179/T180-labelled files
 > files are historical evidence locators and do not allocate a current task;
 > the active packet is defined only by the table below.
 
@@ -15,19 +15,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T187 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized autonomous, holistic routing and task selection; the first Queue candidate is admitted after T186's corrected observation proves that the remaining `54:0C` decline is not a v5-selection projection omission. |
-| Objective | Audit whether a default-off fixed-width diagnostic can classify the existing boot-file dispatch predicates without changing their observable result or transaction behavior. |
-| Non-goals | No source change, guest run/retry, Bochs or OpenNT change, BOP/service/provider addition, profile expansion, host capability, guest-memory read, new result transport, selector/service branch, or runtime logging. |
-| Reference Baseline | T186 durable observation/classification, existing finite boot namespace provider, adapter runtime test, BOP identity listener and common COMMAND plane gate. |
-| Files And ABI Surface | Existing adapter runtime/provider/host-session source and tests, the BOP listener and T187 evidence only; no ABI or source surface is admitted. |
+| Identifier Mode | M0 T187 S2, Ordinary Mode. |
+| Admission And Approval | S1 rejected an invasive adapter predicate decomposition without retaining source. Owner authorization permits individually registered Bochs diagnostic intrusions; this S uses only the existing BOP listener. |
+| Objective | Add the already-copied low 16-bit DX register to the default-off BOP catalog listener record, without changing its classification, memory reads, dispatch, result or exception flow. |
+| Non-goals | No guest run/retry, adapter/OpenNT change, BOP/service/provider addition, profile expansion, host capability, guest-memory read, result transport, selector/service branch, or new observer. |
+| Reference Baseline | T186 durable observation/classification, S1 rejection, existing BOP catalog listener, and its copied CPU-state ABI. |
+| Files And ABI Surface | `src/bochs/cpu/exception.cc`, its static boundary test, the Bochs exception register and T187 evidence only; no adapter ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare the attempted predicate decomposition against the retained original short-circuit route; a focused adapter fixture must show whether enabling it preserves repeat preparation; documentation inventory/governance and `git diff --check`. |
-| Expected Markers | Either a source-equivalent, non-perturbing diagnostic design or a recorded rejection proving why the attempted decomposition cannot be admitted. |
-| Asset Needs | Existing source and unit-test fixture only; T186 evidence is read-only baseline. |
-| Reporting Requirements | Record exact diagnostic ABI, default-off activation, every classified decline and the fact that no historical guest run is performed. No result may be inferred from the old trace beyond its recorded limitations. |
-| Stop Conditions | Any attempted observer changes repeat preparation, needs a Bochs/OpenNT change, selector-specific CPU branch, guest-memory access, new BOP behavior, broader tracing, or a guest rerun. |
-| Exit Criteria | Met only if a non-perturbing design is source/test proven; otherwise close with the failed design removed and transfer an evidence-backed alternative. |
+| Verification | Static boundary test proves listener remains default-off and its sole new output is copied `dx`; documentation inventory/governance and `git diff --check`. |
+| Expected Markers | When an existing listener-enabled derivative is separately built, its unchanged BOP line contains `dx=%04x`; default build has no listener branch. |
+| Asset Needs | Existing source and static listener boundary fixture only; T186 evidence is read-only baseline. |
+| Reporting Requirements | Record exact source line and the fact that this does not classify a runtime decline or authorize a guest observation. |
+| Stop Conditions | Any need for adapter/OpenNT change, additional CPU snapshot, guest-memory read, selector/service branch, a new observer, build recipe, or guest rerun pauses the packet. |
+| Exit Criteria | Source/static-test closure proves a one-field passive listener extension, with no behavior change claim beyond output completeness. |
 | Original Owner Request | Holistic BOP recovery with original OpenNT semantics, a minimum Bochs boundary, non-invasive CLI capabilities, and no one-off patches. |
 | Similar-Issue Sweep | Audit both `54:0C` and `54:0D`; reject global BOP tracing, DEM/FCB reuse, ambient host state, selector recognizer bypass, direct Bochs/DOS integration and all retries. |
 

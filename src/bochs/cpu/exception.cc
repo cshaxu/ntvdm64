@@ -224,12 +224,13 @@ static void bx_ntvdm_bop_catalog_listener(unsigned cpu_id, unsigned vector,
               frame_code)) frame_valid = 1;
       }
     }
-    BX_INFO(("ntdos64 adapter bop observed cpu=%u rip=%llx selector=%02x class=%u family=%u service-state=%u service=%02x ax=%04x bx=%04x cs=%04x ds=%04x si=%04x di=%04x cx=%04x flags=%08x ss=%04x sp=%04x stack-valid=%u stack=%02x%02x%02x%02x frame-valid=%u frame=%02x%02x%02x%02x%02x%02x%02x%02x",
+    BX_INFO(("ntdos64 adapter bop observed cpu=%u rip=%llx selector=%02x class=%u family=%u service-state=%u service=%02x ax=%04x bx=%04x cs=%04x ds=%04x dx=%04x si=%04x di=%04x cx=%04x flags=%08x ss=%04x sp=%04x stack-valid=%u stack=%02x%02x%02x%02x frame-valid=%u frame=%02x%02x%02x%02x%02x%02x%02x%02x",
       cpu_id, (unsigned long long)fault_rip,
       identity.selector, identity.source_class, identity.family,
       identity.service_state, identity.service, (unsigned)(cpu_state->eax & 0xffffu),
       (unsigned)(cpu_state->ebx & 0xffffu), (unsigned)cpu_state->cs,
-      (unsigned)cpu_state->ds, (unsigned)(cpu_state->esi & 0xffffu),
+      (unsigned)cpu_state->ds, (unsigned)(cpu_state->edx & 0xffffu),
+      (unsigned)(cpu_state->esi & 0xffffu),
       (unsigned)(cpu_state->edi & 0xffffu), (unsigned)(cpu_state->ecx & 0xffffu),
       (unsigned)cpu_state->eflags, (unsigned)cpu_state->ss,
       (unsigned)(cpu_state->esp & 0xffffu), stack_valid,
