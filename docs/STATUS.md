@@ -2,6 +2,9 @@
 
 ## Current Work
 
+> **Current effective packet: M0 T196 S2.** Its governing brief is the active
+> packet table below.
+
 **Active: M0 T196 S1 — establish the complete Bochs intrusive-diff baseline.**
 
 > **Governance correction:** The table below is the sole active packet. T188
@@ -16,19 +19,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T196 S1, Ordinary Mode. |
-| Admission And Approval | Owner directs **T196 as a multi-S Bochs/adapter boundary repair package**, not as a stand-alone audit. T195 is closed by S6 source/map/ledger evidence. S1 is the mandatory first repair subtask: establish the complete Bochs 2.6 intrusive-diff baseline. Later admitted S tasks classify and repair the discovered surface. Only after T196 closes may the next unnumbered candidate T resume holistic BOP runtime closure. |
-| Objective | For S1 only, establish a reproducible full-tree diff baseline between `src/bochs` and the pinned local Bochs 2.6 source, then enumerate every project hunk so later T196 repair subtasks can make a complete disposition. T196 as a whole must repair the boundary: remove or migrate nonconforming semantics, retain only justified selector-blind mechanics/minimal embedding/default-off diagnostics, and reconcile the register, sources and build surfaces. |
-| Non-goals | S1 makes no Bochs/adapter behavior change, patch normalization, source import, build/runtime campaign, or approval decision. Those are not cancelled; they belong only to later, separately admitted T196 repair S tasks. S1 must not treat an unreviewed diff as approved. |
-| Reference Baseline | T195 closure, source-policy authority, pinned local Bochs 2.6 input and external-intrusion register. |
-| Files And ABI Surface | Read-only source/input inspection plus one T196 S1 evidence manifest, Status and documentation inventory only. |
+| Identifier Mode | M0 T196 S2, Ordinary Mode. |
+| Admission And Approval | T196 S1 is committed in 10302ef: the authoritative Bochs 2.6 identity and 31-path/54-hunk manifest are frozen. Owner-approved T196 remains a multi-S boundary **repair** package. S2 is admitted to classify that complete surface and design the dependency-ordered repair; later S tasks perform the actual removal, migration and minimization. |
+| Objective | Produce one complete hunk-to-register/source/build crosswalk and repair disposition for all S1 differences: retain only justified selector-blind mechanics/minimal embedding/default-off diagnostics, remove, migrate to adapter, or flag an explicit repair blocker. Define bounded S3/S4 repair groups from actual shared dependencies. |
+| Non-goals | No Bochs/adapter behavior change, source import, build/runtime campaign, device/provider/BOP expansion, or implicit approval. S2 records proposed disposition; it does not claim that a proposed removal/migration is already repaired. |
+| Reference Baseline | T196 S1 immutable manifest `etc/research/t196-s1-bochs26-intrusive-diff-baseline-001.md`, T195 closure, source-policy authority, and the external-intrusion exception register. |
+| Files And ABI Surface | Read-only `src/bochs`, pinned external Bochs 2.6 input, external-intrusion register and relevant current build generators; one T196 S2 classification/repair-design record, Status and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Identify pinned source provenance, generate a reproducible path/hunk manifest, distinguish import drift from project edits, and preserve every changed path/hunk for the next S classification; run documentation governance and `git diff --check`. |
-| Expected Markers | Exact upstream identity/input path, full changed-path list, hunk count/hash manifest, an explicit repair-sequence handoff, and no implicit approval of an unclassified change. |
+| Verification | Reproduce the S1 identity/manifest; inspect every hunk and relevant exception/register/build relation; prove the crosswalk covers all 54 hunks and every applicable register row; review the proposed repair group boundary; run documentation governance and `git diff --check`. |
+| Expected Markers | Complete 54-hunk disposition table, explicit register relationship or absence for each hunk, bounded S3/S4 repair groups, and no selector/service/OpenNT/DOS/SoftPC semantic exception silently retained in Bochs. |
 | Asset Needs | Local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record comparison command, baseline identity, limitations, changed-path/hunk totals, and the T196 repair-sequence handoff. |
-| Stop Conditions | Pinned source identity is absent/ambiguous, comparison has unresolvable transformation noise, or a source import would be required; preserve facts and re-admit. |
-| Exit Criteria | Committed immutable comparison manifest supports per-hunk classification and subsequent repair without repeating discovery. This closes S1 only, not T196. |
+| Reporting Requirements | Record exact evidence per disposition, unresolved ambiguity/blocker, proposed repair ownership and dependency ordering; distinguish a proposed repair from an implemented one. |
+| Stop Conditions | Pinned source identity or a hunk's provenance cannot be established; a disposition needs a new semantic purpose; or the repair would require a device/firmware/provider expansion. Preserve facts and re-admit rather than guessing. |
+| Exit Criteria | Committed complete classification and dependency-ordered repair design support separately admitted implementation S tasks without rediscovery. This closes S2 only, not T196. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
