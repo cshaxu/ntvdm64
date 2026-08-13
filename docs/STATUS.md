@@ -124,6 +124,10 @@ explicit DTA prerequisite.**
 - M0 T198 S9 is complete: the complete family closure and DTA prerequisite
   are recorded without linking the historical runtime; see [T198 S9
   closure](history/m0-t198-s9-closure-20260813.md).
+- M0 T198 S10 P1 is complete: a source-built i686 whole-family plane owns the
+  immutable namespace and pending read state through common classification;
+  it covers COMMAND boot write, DEM open/read and no-DTA pathname deferral.
+  See [T198 S10 P1 witness](etc/research/t198-s10-p1-provider-plane-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid
