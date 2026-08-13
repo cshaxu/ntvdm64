@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T195 S5 — reconcile superseded Bochs intrusions and build surface.**
+**Active: M0 T196 S1 — establish the complete Bochs intrusive-diff baseline.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T195 S5, Ordinary Mode. |
-| Admission And Approval | S3/S4 move both identified semantic repair groups out of Bochs. S5 reconciles the register and active build rules before final closure verification. |
-| Objective | Mark superseded BOP/machine-selection intrusions as migrated, retain only justified selector-blind mechanics/default-off diagnostics, and remove live build references to removed source domains. |
-| Non-goals | No new mechanics/provider/runtime behavior, no device expansion, no reactivation of historical scripts as current recipes, and no broad rebuild. |
-| Reference Baseline | T195 S1 audit; S3/S4 source/build evidence; intrusion register and current generator/test surfaces. |
-| Files And ABI Surface | Intrusion register, current generator/tests, Status and one S5 evidence record; no guest or engine ABI change. |
+| Identifier Mode | M0 T196 S1, Ordinary Mode. |
+| Admission And Approval | T195 is closed by S6 source/map/ledger evidence. Queue priority requires a complete Bochs 2.6 intrusive-change reconciliation before holistic BOP runtime closure. |
+| Objective | Establish a reproducible full-tree diff baseline between `src/bochs` and the pinned local Bochs 2.6 source, then enumerate every project hunk for later disposition. |
+| Non-goals | No Bochs/adapter behavior change, patch normalization, source import, build/runtime campaign, or treating an unreviewed diff as approved. |
+| Reference Baseline | T195 closure, source-policy authority, pinned local Bochs 2.6 input and external-intrusion register. |
+| Files And ABI Surface | Read-only source/input inspection plus one T196 S1 evidence manifest, Status and documentation inventory only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Search current source/generator surfaces for removed listener/machine-domain terms; compare every moved register row with S3/S4 evidence; run focused boundary checks, doc governance and `git diff --check`. |
-| Expected Markers | Register distinguishes migrated adapter ownership from retained generic mechanics; active derivative uses adapter-only machine objects and no obsolete listener macro. |
-| Asset Needs | Existing register, current source/build generator and S1/S3/S4 records. |
-| Reporting Requirements | Record every changed register disposition, exact remaining default-off features and rejected historical references. |
-| Stop Conditions | Any row implies unproven source semantics, a live reference cannot be classified, or cleanup requires new engine behavior; pause for a new S. |
-| Exit Criteria | Committed reconciliation leaves S6 a finite source/map regression with no unresolved semantic intrusion group. |
+| Verification | Identify pinned source provenance, generate a reproducible path/hunk manifest, distinguish import drift from project edits, and prove every changed path has an initial classification record; run documentation governance and `git diff --check`. |
+| Expected Markers | Exact upstream identity/input path, full changed-path list, hunk count/hash manifest and no implicit approval of an unclassified change. |
+| Asset Needs | Local Bochs 2.6 source only; no network/import action. |
+| Reporting Requirements | Record comparison command, baseline identity, limitations, changed-path/hunk totals and S2 classification handoff. |
+| Stop Conditions | Pinned source identity is absent/ambiguous, comparison has unresolvable transformation noise, or a source import would be required; preserve facts and re-admit. |
+| Exit Criteria | Committed immutable comparison manifest supports per-hunk classification without repeating discovery. |
 | Original Owner Request | Repair the Bochs/adapter boundary before resuming complete BOP execution, keeping Bochs minimal and selector-blind while adapter owns service and machine-composition meaning. |
 | Similar-Issue Sweep | Include implemented, pending, rejected, removed and diagnostic entries; distinguish source existence, default-off compilation and final-map linkage. |
 
