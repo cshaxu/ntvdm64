@@ -12,8 +12,8 @@ static int bx_ntvdm_generic_ud_fixture_stop_was_observed = 0;
 
 extern "C" void bx_ntvdm_mantle_generic_ud_fixture_stop(int enabled)
 {
+  if (enabled) bx_ntvdm_generic_ud_fixture_stop_was_observed = 0;
   bx_ntvdm_generic_ud_fixture_stop_enabled = enabled != 0;
-  bx_ntvdm_generic_ud_fixture_stop_was_observed = 0;
 }
 
 extern "C" int bx_ntvdm_mantle_generic_ud_fixture_stop_observed(void)
