@@ -5,6 +5,7 @@ $memoryHeader = Join-Path $repositoryRoot 'src/bx-core/memory/memory.h'
 $memorySource = Join-Path $repositoryRoot 'src/bx-core/memory/misc_mem.cc'
 $iodevHeader = Join-Path $repositoryRoot 'src/bochs/iodev/iodev.h'
 $portSpaceSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_port_space.cc'
+$devicesSource = Join-Path $repositoryRoot 'src/bochs/iodev/devices.cc'
 
 function Get-RegisteredBlock([string] $path, [string] $name) {
     $text = Get-Content -LiteralPath $path -Raw
@@ -60,6 +61,25 @@ foreach ($pattern in @('(?-i:\bSIM->)', '(?-i:bx_virt_timer)', '(?-i:bx_slowdown
         '(?-i:adapter)', '(?-i:OpenNT)', '(?-i:DOS)', '(?-i:WOW)', '(?-i:BOP)')) {
     if ($io -match $pattern) {
         throw "Forbidden BX-IO-025 dependency: $pattern"
+    }
+}
+
+$mantle = Get-Content -LiteralPath $portSpaceSource -Raw
+$devices = Get-Content -LiteralPath $devicesSource -Raw
+foreach ($pattern in @('bx_devices_c::bx_devices_c\(\)', 'bx_devices_c::~bx_devices_c\(\)',
+        'void bx_devices_c::init_stubs\(\)', 'bx_devices_c::inp\(Bit16u addr, unsigned io_len\)',
+        'bx_devices_c::outp\(Bit16u addr, Bit32u value, unsigned io_len\)')) {
+    if ($mantle -notmatch $pattern) {
+        throw "Missing BX-MANTLE-065 original member in mantle: $pattern"
+    }
+    if ($devices -match $pattern) {
+        throw "BX-MANTLE-065 member remains in full device source: $pattern"
+    }
+}
+foreach ($pattern in @('bx_devices_c::init\(BX_MEM_C \*newmem\)',
+        'void bx_devices_c::reset\(unsigned type\)', 'void bx_devices_c::exit\(\)')) {
+    if ($devices -notmatch $pattern) {
+        throw "Full-device-only member unexpectedly missing: $pattern"
     }
 }
 

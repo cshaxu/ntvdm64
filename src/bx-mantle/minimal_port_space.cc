@@ -15,7 +15,72 @@
 
 #include "iodev.h"
 
+#define LOG_THIS bx_devices.
+
 bx_devices_c bx_devices;
+
+// BX-MANTLE-065-BEGIN
+// Original no-device object lifetime and port dispatch, separated from the
+// full product/device lifecycle in iodev/devices.cc.
+bx_devices_c::bx_devices_c()
+{
+  put("devices", "DEV");
+
+  read_port_to_handler = NULL;
+  write_port_to_handler = NULL;
+  io_read_handlers.next = NULL;
+  io_read_handlers.handler_name = NULL;
+  io_write_handlers.next = NULL;
+  io_write_handlers.handler_name = NULL;
+  init_stubs();
+
+  for (unsigned i=0; i < BX_MAX_IRQS; i++) {
+    irq_handler_name[i] = NULL;
+  }
+}
+
+bx_devices_c::~bx_devices_c()
+{
+  // nothing needed for now
+  timer_handle = BX_NULL_TIMER_HANDLE;
+}
+
+void bx_devices_c::init_stubs()
+{
+  pluginPciBridge = &stubPci;
+  pluginPci2IsaBridge = &stubPci2Isa;
+  pluginPciIdeController = &stubPciIde;
+#if BX_SUPPORT_PCI
+  pluginACPIController = &stubACPIController;
+#endif
+  pluginKeyboard = &stubKeyboard;
+  pluginDmaDevice = &stubDma;
+  pluginFloppyDevice = &stubFloppy;
+  pluginCmosDevice = &stubCmos;
+  pluginVgaDevice = &stubVga;
+  pluginPicDevice = &stubPic;
+  pluginHardDrive = &stubHardDrive;
+  pluginSpeaker = &stubSpeaker;
+#if BX_SUPPORT_IODEBUG
+  pluginIODebug = &stubIODebug;
+#endif
+#if BX_SUPPORT_APIC
+  pluginIOAPIC = &stubIOAPIC;
+#endif
+#if BX_SUPPORT_GAMEPORT
+  pluginGameport = &stubGameport;
+#endif
+#if BX_SUPPORT_PCIUSB
+  pluginUsbDevCtl = &stubUsbDevCtl;
+#endif
+#if BX_SUPPORT_SOUNDLOW
+  pluginSoundModCtl = &stubSoundModCtl;
+#endif
+#if BX_NETWORKING
+  pluginNetModCtl = &stubNetModCtl;
+#endif
+}
+// BX-MANTLE-065-END
 
 // BX-IO-025-BEGIN
 bx_bool bx_devices_c::init_empty_port_space(void)
@@ -139,4 +204,50 @@ bx_bool bx_devices_c::cleanup_empty_port_space(void)
   io_write_handlers.mask = 0;
   return 1;
 }
+
+// BX-MANTLE-065-DISPATCH-BEGIN
+Bit32u BX_CPP_AttrRegparmN(2)
+bx_devices_c::inp(Bit16u addr, unsigned io_len)
+{
+  struct io_handler_struct *io_read_handler;
+  Bit32u ret;
+
+  BX_INSTR_INP(addr, io_len);
+
+  io_read_handler = read_port_to_handler[addr];
+  if (io_read_handler->mask & io_len) {
+    ret = ((bx_read_handler_t)io_read_handler->funct)(io_read_handler->this_ptr, (Bit32u)addr, io_len);
+  } else {
+    switch (io_len) {
+      case 1: ret = 0xff; break;
+      case 2: ret = 0xffff; break;
+      default: ret = 0xffffffff; break;
+    }
+    if (addr != 0x0cf8) {
+      BX_ERROR(("read from port 0x%04x with len %d returns 0x%x", addr, io_len, ret));
+    }
+  }
+
+  BX_INSTR_INP2(addr, io_len, ret);
+  BX_DBG_IO_REPORT(addr, io_len, BX_READ, ret);
+
+  return(ret);
+}
+
+void BX_CPP_AttrRegparmN(3)
+bx_devices_c::outp(Bit16u addr, Bit32u value, unsigned io_len)
+{
+  struct io_handler_struct *io_write_handler;
+
+  BX_INSTR_OUTP(addr, io_len, value);
+  BX_DBG_IO_REPORT(addr, io_len, BX_WRITE, value);
+
+  io_write_handler = write_port_to_handler[addr];
+  if (io_write_handler->mask & io_len) {
+    ((bx_write_handler_t)io_write_handler->funct)(io_write_handler->this_ptr, (Bit32u)addr, value, io_len);
+  } else if (addr != 0x0cf8) {
+    BX_ERROR(("write to port 0x%04x with len %d ignored", addr, io_len));
+  }
+}
+// BX-MANTLE-065-DISPATCH-END
 // BX-IO-025-END

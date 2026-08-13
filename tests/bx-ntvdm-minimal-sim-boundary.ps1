@@ -14,6 +14,8 @@ $source = Get-Content -LiteralPath $sourcePath -Raw
 $required = @(
     'class bx_ntvdm_minimal_sim_c : public bx_simulator_interface_c',
     'bx_cpudb_pentium_mmx',
+    'Bit32u apic_id_mask = 0x0f',
+    'bx_bool simulate_xapic = 0',
     'BX_CPU_LEVEL != 5',
     'BX_SUPPORT_X86_64',
     'new bx_list_c\(root_param, "cpu", "CPU Options"\)',

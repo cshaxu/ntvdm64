@@ -17,6 +17,12 @@ bx_simulator_interface_c *SIM = NULL;
 logfunctions *siminterface_log = NULL;
 bx_list_c *root_param = NULL;
 
+// CPU5/Pentium-MMX has the original legacy local-APIC identity shape.  The
+// historical product derives these globals from its broader CPUID parameter
+// tree; the finite mantle has no xAPIC-capable model to select.
+Bit32u apic_id_mask = 0x0f;
+bx_bool simulate_xapic = 0;
+
 static bx_param_c *bx_ntvdm_find_param(const char *from, bx_param_c *base)
 {
   const char *separator = strchr(from, '.');

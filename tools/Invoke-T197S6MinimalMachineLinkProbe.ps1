@@ -129,8 +129,16 @@ if ($LASTEXITCODE -ne 0) { throw "MSVC compilation failed for generated link pro
 $exe = Join-Path $build 't197-s6-minimal-machine-link-probe.exe'
 $map = Join-Path $build 'link.map'
 $log = Join-Path $build 'link.log'
+$response = Join-Path $build 'link.rsp'
 $quotedObjects = @($probeObject) + $objects | ForEach-Object { '"' + $_ + '"' }
-$link = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /OUT:"' + $exe + '" /MAP:"' + $map + '" /OPT:REF ' + ($quotedObjects -join ' ')
+$linkResponse = @(
+    '/nologo',
+    ('/OUT:"' + $exe + '"'),
+    ('/MAP:"' + $map + '"'),
+    '/OPT:REF'
+) + $quotedObjects
+$linkResponse | Set-Content -LiteralPath $response -Encoding ascii
+$link = 'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x64 >nul && link.exe @"' + $response + '"'
 & cmd.exe /d /s /c $link 2>&1 | Tee-Object -LiteralPath $log
 $linkExit = $LASTEXITCODE
 
@@ -149,6 +157,7 @@ $record = [ordered]@{
     linkSucceeded = ($linkExit -eq 0)
     linkLog = 'link.log'
     linkMap = 'link.map'
+    linkResponse = 'link.rsp'
 }
 $record | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 't197-s6-minimal-machine-link-probe.json') -Encoding utf8
 if ($linkExit -ne 0) {

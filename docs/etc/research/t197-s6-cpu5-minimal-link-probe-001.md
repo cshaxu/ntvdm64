@@ -50,6 +50,18 @@ The manifest rejects `main.cc`, `config.cc`, `gui/siminterface.cc`,
   instruction family rather than a hand-picked handler subset.  The r4 link
   stops at 998 unresolved CPU instruction-handler/core symbols plus the same
   product-shell edges; its retained `link.log` is the reproducible proof.
+- r8 uses the original VS2008 project files only as source-membership
+  inventories for CPU, FPU, memory and disassembly.  It compiles all 120
+  corresponding adopted-core candidates in the CPU5 projection and reduces
+  the linker frontier to 21 symbols.  The CPU instruction table is therefore
+  closed by adopted Bochs code, not a reconstructed subset.
+- After the registered r9 port-space source-object separation, an exact
+  relink of the same r9 objects leaves 15 symbols.  The removed symbols are
+  the original `bx_devices_c` constructor/destructor and the default port
+  `inp`/`outp` dispatch methods; no device initializer or adapter code was
+  added.  The remaining frontier is product UI/teardown (`bx_gui`, text
+  parameter methods, `bx_atexit`) and the explicitly rejected full-device
+  reset/exit methods referenced by `pc_system.cc`.
 - The unresolved set is not an adapter or OpenNT edge.  It separates into:
   - native CPU5 processor dependencies: CPUID models, local APIC, TLB/flags/
     segment/reset/decode helpers and instruction-cache state;
