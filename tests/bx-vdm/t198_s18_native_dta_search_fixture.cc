@@ -27,7 +27,7 @@ int main()
   byob_image target = { target_bytes, sizeof(target_bytes) };
   byob_profile_selection profile;
   bx_ntvdm_boot_namespace_composition_v1 composition;
-  bx_ntvdm_finite_run_request request;
+  static bx_ntvdm_finite_run_request request;
   unsigned status;
 
   memset(bytes, 0, sizeof(bytes));
@@ -59,10 +59,12 @@ int main()
   if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
       0, &command, &target, 0, &profile) ||
       !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 1;
-  request.entry_bytes = bytes; request.entry_byte_count = sizeof(bytes);
+  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  memcpy(request.entry_bytes, bytes, sizeof(bytes)); request.entry_byte_count = sizeof(bytes);
   request.entry_physical_address = 0x1000; request.entry_cs = 0x0100;
   request.entry_eip = 0; request.instruction_tick_budget = 128;
   request.ips = 1000000; request.stop_on_ud_fixture = 0;
+  request.preserve_physical_address = 0; request.preserve_byte_count = 0;
   status = (unsigned)bx_ntvdm_run_finite_bare_bytes(&request);
   bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
   return (int)status;

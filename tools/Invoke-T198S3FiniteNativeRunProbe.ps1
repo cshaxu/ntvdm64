@@ -149,11 +149,14 @@ int main()
 #include "bochs.h"
 #include "bx-mantle/bx_ntvdm_finite_run.h"
 
+#include <string.h>
+
 int main()
 {
   static const Bit8u bytes[] = { $fixtureBytes };
-  bx_ntvdm_finite_run_request request;
-  request.entry_bytes = bytes;
+  static bx_ntvdm_finite_run_request request;
+  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  memcpy(request.entry_bytes, bytes, sizeof(bytes));
   request.entry_byte_count = sizeof(bytes);
   request.entry_physical_address = 0x1000;
   request.entry_cs = 0x0100;
@@ -161,6 +164,8 @@ int main()
   request.instruction_tick_budget = 64;
   request.ips = 1000000;
   request.stop_on_ud_fixture = $fixtureStopOnUd;
+  request.preserve_physical_address = 0;
+  request.preserve_byte_count = 0;
   int status = (int) bx_ntvdm_run_finite_bare_bytes(&request);
   return $fixtureStopOnUd ?
     (status == BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ? 0 : status + 1) : status;

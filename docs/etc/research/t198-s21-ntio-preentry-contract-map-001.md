@@ -58,8 +58,9 @@ S22 may replace the fixture-private single-entry copy with a versioned
 | CPU entry delta | mantle | Exactly real-mode `CS=0070`, `IP=0000`; all other post-reset visible state remains untouched |
 | Stop boundary | adapter test fixture | Bound execution at copied `50:11`, or controlled stop before a BOP if a precondition fails |
 
-The read and both writes must be preflighted before the first write.  A failed
-read, invalid identity, oversize image or overlapping/out-of-aperture range
+The read and both writes must be preflighted before the first write.  The
+intentional containment of the restored bytes inside the published image is
+valid; a failed read, invalid identity, oversize image or out-of-aperture range
 must abort without publishing NTIO or changing the entry state.
 
 ## Exclusions And First Stop

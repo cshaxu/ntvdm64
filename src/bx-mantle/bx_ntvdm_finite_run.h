@@ -19,19 +19,28 @@ enum bx_ntvdm_finite_run_status {
   BX_NTVDM_FINITE_RUN_ENTRY_BYTES_MISMATCH
 };
 
+#define BX_NTVDM_FINITE_RUN_REQUEST_VERSION 2
+#define BX_NTVDM_FINITE_RUN_MAX_ENTRY_BYTES 65536
+
 struct bx_ntvdm_finite_run_request {
-  const Bit8u *entry_bytes;
-  Bit64u entry_byte_count;
+  Bit32u request_version;
+  Bit8u entry_bytes[BX_NTVDM_FINITE_RUN_MAX_ENTRY_BYTES];
+  Bit32u entry_byte_count;
   bx_phy_address entry_physical_address;
   Bit16u entry_cs;
   Bit32u entry_eip;
   Bit64u instruction_tick_budget;
   Bit32u ips;
   bx_bool stop_on_ud_fixture;
+  /* Optional opaque range captured before entry_bytes are published and
+   * restored immediately afterwards.  This is a machine-only preservation
+   * mechanic; its address and bytes have no guest-service meaning here. */
+  bx_phy_address preserve_physical_address;
+  Bit32u preserve_byte_count;
 };
 
-// The request is copied/consumed synchronously.  No pointer or guest state
-// crosses a component boundary, and the byte sequence is opaque to mantle.
+// The request carries copied fixed-width data only; the byte sequence is
+// opaque to mantle.
 bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   const bx_ntvdm_finite_run_request *request);
 

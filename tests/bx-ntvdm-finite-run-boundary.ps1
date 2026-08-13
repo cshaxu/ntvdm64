@@ -13,13 +13,17 @@ $source = Get-Content -LiteralPath $sourcePath -Raw
 $tool = Get-Content -LiteralPath $toolPath -Raw
 foreach ($pattern in @(
         'enum bx_ntvdm_finite_run_status', 'BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET',
-        'struct bx_ntvdm_finite_run_request', 'const Bit8u \*entry_bytes;',
+        'BX_NTVDM_FINITE_RUN_REQUEST_VERSION', 'BX_NTVDM_FINITE_RUN_MAX_ENTRY_BYTES',
+        'struct bx_ntvdm_finite_run_request', 'Bit32u request_version;',
+        'Bit8u entry_bytes\[BX_NTVDM_FINITE_RUN_MAX_ENTRY_BYTES\];',
         'Bit64u instruction_tick_budget;', 'Bit32u ips;',
+        'bx_phy_address preserve_physical_address;', 'Bit32u preserve_byte_count;',
         'bx_ntvdm_run_finite_bare_bytes')) {
     if ($header -notmatch $pattern) { throw "Missing finite-run contract invariant: $pattern" }
 }
 foreach ($pattern in @(
         'bx_ntvdm_minimal_machine_c machine;', 'machine\.initialize\(0x100000, 0x100000\)',
+        'BX_NTVDM_FINITE_RUN_REQUEST_VERSION', 'bx_ntvdm_finite_run_ordinary_range_is_valid', 'bx_mem\.copy_from_ordinary_ram',
         'bx_mem\.copy_to_ordinary_ram', 'bx_pc_system\.initialize\(request->ips\)',
         'bx_cpu\.apply_real_mode_entry', 'bx_pc_system\.register_timer_ticks',
         'bx_ntvdm_finite_run_stop', 'bx_pc_system\.kill_bochs_request = 1;',

@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S21.** Its governing brief is the active
+> **Current effective packet: M0 T198 S23.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S21 -- close the NTIO pre-entry publication and entry-state
-contract before implementation.**
+**Active: M0 T198 S23 -- compose the locked NTIO input through the generic
+pre-entry request and prove the first existing `50:11` boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ contract before implementation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S21, Ordinary Mode. |
-| Admission And Approval | S20 closes the first post-entry `50:11` transaction. The next first-profile prerequisite is the original NTIO pre-entry handoff; existing startup-descriptor evidence is source-locked but not yet a current composition ABI. |
-| Objective | Reconcile original NTIO handoff, image/layout evidence, the finite mantle lifecycle, and the one-session `bx-vdm` composition into an implementation-ready pre-entry publication/entry-state contract. Establish ownership of NTIO bytes, `0x700` publication, `0x714` preservation, `0070:0000` entry delta, reset-state preservation and first stop boundary. |
-| Non-goals | No preload implementation, BIOS/IVT/BDA mutation, selector `12` provider, DOS/NTDOS execution claim, device enablement, host path, old adapter startup bridge, CCPU/Win32 linkage or Bochs CPU/device change. |
-| Reference Baseline | First guest-startup descriptor v0, S20 native `50:11` provider, finite mantle run ABI and recorded stock-machine observations. |
-| Files And ABI Surface | Existing source/evidence plus a new contract map only. No runtime ABI/source change. |
+| Identifier Mode | M0 T198 S23, Ordinary Mode. |
+| Admission And Approval | S22 closes the generic machine primitive. The owner-approved M0 objective and S21 source contract now admit one `bx-vdm` composition of the locked NTIO image and existing `50:11` provider. |
+| Objective | Prepare the generic v2 pre-entry request in `bx-vdm` from exact selected NTIO bytes and source-locked physical/entry fields; prove original NTIO reaches its existing DEM `50:11` transaction and a bounded stop. |
+| Non-goals | No BOP selector handling in Bochs, mantle host/guest semantics, guessed firmware/IVT/BDA input, selector `12` result, device enablement, ambient path access, or COMMAND/DOS continuity claim. |
+| Reference Baseline | S20 `50:11` source-derived provider, S21 NTIO pre-entry map, S22 generic native pre-entry witness, and BYOB exact-image contract. |
+| Files And ABI Surface | `bx-vdm` NTIO composition/request builder and CPU5 native fixture; the closed mantle v2 request may be consumed but not reinterpreted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/artifact-layout reconciliation; inspect finite-run ordering and ordinary-RAM action ownership; compare retained first-prefix observations without treating them as runtime input. |
-| Expected Markers | One pre-entry contract names byte ranges/owners, preflight/commit order, allowed entry register delta, stop boundary, negative cases and smallest next ABI change. |
+| Verification | MSVC x64 `/MT` native fixture enters original exact NTIO at `0070:0000`, reaches its real `50:11`, performs the existing NTDOS publication and stops under a bounded terminal condition. Boundary scans prove selector semantics stay in `bx-vdm`. |
+| Expected Markers | Exact NTIO identity, one copied v2 request, observed first `50:11`, checked NTDOS publication, typed resume, and no newly enabled selector. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source basis, immutable input rule, byte ranges, ordering, reset-state rule, entry request, rejected legacy dependencies and future test boundary. |
-| Stop Conditions | A required input lacks provenance, requests guessed firmware/device behavior, needs unrecorded Bochs intrusion, bypasses mantle action, or cannot preserve reset state. Preserve evidence and re-admit. |
-| Exit Criteria | A reviewable contract proves the future pre-entry change can remain selector-blind, adapter-owned for input selection, mantle-owned for RAM mechanics, and bounded before first `50:11` or explicit stop. |
+| Reporting Requirements | Record exact NTIO identity, request construction, first-prefix control-flow evidence, machine/provider ownership, all build inputs, fixture result and later-selector limit. |
+| Stop Conditions | NTIO requires a guessed firmware/device value before `50:11`, a core/mantle semantic change, pre-entry state is not preserved, or first BOP is not the admitted transaction. Preserve evidence and re-admit. |
+| Exit Criteria | Exact original NTIO is native-run through `50:11` into the existing provider, and the fixture bounds the next unimplemented boundary without claiming DOS boot. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover source-width assumptions, generated config architecture bits, compiler/linker architecture, `/MT` selection, CPU5 guest identity, lifecycle behavior and forbidden link inputs. |
 
@@ -202,6 +202,11 @@ contract before implementation.**
   a new selector-blind mantle request, not a startup BOP or Bochs semantic;
   entry changes only CS:IP and stops at the already-admitted `50:11` boundary.
   See [S21 pre-entry map](etc/research/t198-s21-ntio-preentry-contract-map-001.md).
+- M0 T198 S22 closes the selector-blind pre-entry primitive: a versioned,
+  copied v2 request preflights a one-MiB aperture, captures/restores opaque
+  bytes across image publication, and then applies CS:IP.  The full CPU5
+  MSVC x64 `/MT` fixture proves restoration and rejection before mutation; see
+  [S22 witness](etc/research/t198-s22-mantle-preentry-witness-001.md).
 - M0 T189 S5 is complete: the four-object source closure proves that the
   previous `54:0C` preparation decline came from stale retained provider and
   command-service objects, not a proven OpenNT or Bochs defect.  The valid

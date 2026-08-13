@@ -24,17 +24,36 @@ static void bx_ntvdm_finite_run_stop(void *opaque)
   bx_pc_system.kill_bochs_request = 1;
 }
 
+/* The finite machine exposes exactly one MiB of ordinary RAM.  Keep this
+ * validation beside the native copy calls so every request range is known
+ * valid before the first mutable operation. */
+static bx_bool bx_ntvdm_finite_run_ordinary_range_is_valid(
+  bx_phy_address physical_address, Bit64u byte_count)
+{
+  return byte_count <= 0x100000 &&
+    physical_address <= (bx_phy_address) (0x100000 - byte_count);
+}
+
 bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   const bx_ntvdm_finite_run_request *request)
 {
   bx_ntvdm_minimal_machine_c machine;
   bx_ntvdm_finite_run_stop_state stop_state;
   Bit8u entry_probe[2];
+  Bit8u preserved[64];
   int stop_timer;
 
-  if (request == 0 || request->entry_bytes == 0 ||
-      request->entry_byte_count == 0 || request->instruction_tick_budget == 0 ||
-      request->ips == 0) {
+  if (request == 0 || request->request_version != BX_NTVDM_FINITE_RUN_REQUEST_VERSION ||
+      request->entry_bytes == 0 ||
+      request->entry_byte_count == 0 ||
+      request->entry_byte_count > BX_NTVDM_FINITE_RUN_MAX_ENTRY_BYTES ||
+      request->instruction_tick_budget == 0 ||
+      request->ips == 0 || request->preserve_byte_count > sizeof(preserved) ||
+      (request->preserve_byte_count != 0 &&
+       !bx_ntvdm_finite_run_ordinary_range_is_valid(
+         request->preserve_physical_address, request->preserve_byte_count)) ||
+      !bx_ntvdm_finite_run_ordinary_range_is_valid(
+        request->entry_physical_address, request->entry_byte_count)) {
     return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
   }
 
@@ -42,10 +61,22 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
 
+  if (request->preserve_byte_count != 0 &&
+      !bx_mem.copy_from_ordinary_ram(request->preserve_physical_address,
+        request->preserve_byte_count, preserved)) {
+    machine.cleanup();
+    return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
+  }
   if (!bx_mem.copy_to_ordinary_ram(request->entry_physical_address,
       request->entry_byte_count, request->entry_bytes)) {
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
+  }
+  if (request->preserve_byte_count != 0 &&
+      !bx_mem.copy_to_ordinary_ram(request->preserve_physical_address,
+        request->preserve_byte_count, preserved)) {
+    machine.cleanup();
+    return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
   if (request->stop_on_ud_fixture && request->entry_byte_count >= sizeof(entry_probe) &&
       (!bx_mem.copy_from_ordinary_ram(request->entry_physical_address,
