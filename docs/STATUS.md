@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T197 S2.** Its governing brief is the active
+> **Current effective packet: M0 T197 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T197 S2 — physically move the proven minimal native lifecycle
-assembly into `bx-mantle` and repair its path-only references.**
+**Active: M0 T197 S3 — derive the first independently buildable `bx-core`
+source vector and its exact mantle dependencies.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -17,27 +17,28 @@ assembly into `bx-mantle` and repair its path-only references.**
 > **T scope:** T197 extracts the smallest native Bochs lifecycle into the
 > `bx-core`/`bx-mantle` boundary and physically names the VDM adapter `bx-vdm`.
 > S1 is closed by `477283c`: it renamed the adapter and mapped the current
-> Bochs ownership surface. S2 moves only that map's pure native lifecycle files;
-> mixed files remain in place for a separately admitted decision. Holistic BOP
-> runtime closure remains the following T package.
+> Bochs ownership surface. S2 is closed by `2fcbaac`: it created the physical
+> mantle root. S3 derives the independently buildable core source vector and
+> its exact mantle dependencies; mixed files remain for individually admitted
+> decisions. Holistic BOP runtime closure remains the following T package.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T197 S2, Ordinary Mode. |
-| Admission And Approval | S1 is closed by `477283c`. Its source-backed map authorizes the direct `git mv` of exactly `bx_ntvdm_minimal_machine.{cc,h}`, `bx_ntvdm_minimal_sim.{cc,h}`, `iodev/minimal_port_space.cc`, and `pc_system.{cc,h}` into `src/bx-mantle/`, with path-only build/test/reference repair. The owner directed pure files to move directly and mixed files to remain for individual design decisions. |
-| Objective | Establish the physical `src/bx-mantle/` root by moving the listed pure native lifecycle sources, retaining their native mechanics and repairing all current live references without changing their behavior. |
-| Non-goals | No CPU/memory directory move, no `main.cc`, GUI/SIM, full device, BIOS, plugin, configuration, VDM, BOP, OpenNT or DOS source move; no lifecycle semantic change, new Bochs intrusion, minimal Bochs build, or resolution of mixed edges. |
-| Reference Baseline | `477283c`; T197 S1 ownership/placement map; T196 crosswalk and effective-closure audit; pinned Bochs 2.6 import. |
-| Files And ABI Surface | Seven source/header paths, their include/build/test/source-manifest references, `src/bx-mantle/`, Status and T197 evidence. No exported ABI or data-layout change. |
+| Identifier Mode | M0 T197 S3, Ordinary Mode. |
+| Admission And Approval | S2 is closed by `2fcbaac`. The owner requires `src/bx-core` as the adopted Bochs core, but the S1/S2 evidence shows that CPU, memory, FPU, decode and their root headers currently reach product-shell SIM/config/device definitions. S3 is admitted to derive an exact first source/object/header vector and classify every direct edge before any core `git mv`. |
+| Objective | Produce a reproducible first `bx-core` physical-move and compile-closure contract for CPU/decode, RAM and admitted no-device mechanics, including each required root header/source and its direction to `bx-mantle`. |
+| Non-goals | No core source move yet; no source behavior change; no `main.cc`, GUI/SIM, full device, BIOS, plugin, configuration, VDM, BOP, OpenNT or DOS implementation; no full product build and no guessed configuration macro. |
+| Reference Baseline | `2fcbaac`; T197 S1 ownership map; T197 S2 migration record; T196 prebuild audit; pinned Bochs 2.6 source and its existing MSVC project/Makefiles. |
+| Files And ABI Surface | Read-only source/object/header ledgers, current build metadata, Status and T197 evidence. No runtime ABI or compiled source change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | `git diff --summary` shows the seven `git mv` paths; no live reference remains to their old paths; focused native-machine static tests pass; documentation governance and `git diff --check` pass. |
-| Expected Markers | A real `src/bx-mantle/` containing the native lifecycle sources, preserved source identity, and an updated placement map naming all intentionally unmoved mixed paths. |
-| Asset Needs | Existing local repository and pinned local Bochs 2.6 source only; no network/import action. |
-| Reporting Requirements | Record moved paths, reference repair, source-identity result, verification outcome, and each mixed edge deferred to S3. |
-| Stop Conditions | A listed file reaches excluded semantics; moving it requires behavioral code edits, changes an ABI, or causes a failure beyond a path/build-metadata reference. Preserve evidence and re-admit. |
-| Exit Criteria | All seven listed paths are under `src/bx-mantle/`, their focused checks pass, and no old live path reference remains. |
+| Verification | Trace every selected initial core translation unit to direct includes and externally defined globals; reconcile against the minimal mantle entry; prove positive core ownership and negative product-shell/VDM retention; run focused static checks, documentation governance and `git diff --check`. |
+| Expected Markers | Exact core candidate file vector, required root/header vector, mantle import list, rejected/mixed list, and a path-only S4 `git mv` recipe with no inferred source semantics. |
+| Asset Needs | Existing local and pinned external Bochs 2.6 source only; no network/import action. |
+| Reporting Requirements | Record every selected/rejected file, direct owner edge, source/build metadata implication, unresolved edge, and conditions for S4 move admission. |
+| Stop Conditions | The first closure requires a guessed product config, GUI/SIM parser, plugin/device/firmware component, VDM/BOP semantic, or a source behavior change. Preserve evidence and re-admit. |
+| Exit Criteria | The first core vector is exhaustive for its declared minimal mechanics and all direct dependencies have core/mantle/mixed disposition, or the first unresolvable native owner edge is source-proven. |
 | Original Owner Request | Find current Bochs core/mantle logic, use `git mv` to move pure core and pure mantle code directly, repair compilation, and decide only the remaining mixed links case by case. |
-| Similar-Issue Sweep | Check CMake, Makefiles, VS project metadata, tools, tests, source-manifest/intrusion checks, and all direct includes of the seven moved files. |
+| Similar-Issue Sweep | Cover CPU, decode tables, memory, FPU, disassembly, root headers, log/SIM, PC time, port space, Makefile and VS metadata; distinguish selected minimal build paths from retained historical product metadata. |
 
 ## Current Technical Baseline
 
