@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S47.** Its governing brief is the active
+> **Current effective packet: M0 T199 S48.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S47 -- Debugger package owner and disposition verification.**
+**Active: M0 T199 S48 -- top-level host-service package disposition verification.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S47, Ordinary Mode. |
-| Admission And Approval | S46 revalidated the complete Redirector family as source-derived explicit unavailability. T199 advances to the original Debugger package. |
-| Objective | Revalidate the OpenNT Debugger BOP identity, its stack/ABI boundary, owner, and contained CLI disposition as one provider package. |
-| Non-goals | No native trace, no debugger implementation, no service-only patch, no Bochs selector knowledge, and no ambient NT host dependency. |
-| Reference Baseline | S46 Redirector revalidation; OpenNT `nt_bop.c` debugger dispatch context; current Debugger package facade and generic ingress rules. |
-| Files And ABI Surface | Debugger source/ABI/failure ledger, package facade and bound fixture; typed contracts only. |
+| Identifier Mode | M0 T199 S48, Ordinary Mode. |
+| Admission And Approval | S47 revalidated the complete Debugger package as stack-ABI deferred stop. T199 advances to the remaining top-level host-service selectors as one package. |
+| Objective | Revalidate the original top-level BOP owner map and contained CLI dispositions for WOW, unsupported/idle/notification, keyboard/video, and mode-transition selectors. |
+| Non-goals | No native trace, no service-only patch, no WOW/GUI/VDD/console reimplementation, no Bochs selector knowledge, and no ambient NT host dependency. |
+| Reference Baseline | S47 Debugger boundary; OpenNT `bop.h`, `nt_bop.c`, and current top-level/machine facades. |
+| Files And ABI Surface | Top-level source/owner/disposition ledger and bound all-selector fixture; typed contracts only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-map the Debugger identity and stack/continuation contract, then run a fresh MSVC x64 `/MT` bound package regression. |
-| Expected Markers | Complete Debugger ledger, explicit deferred stop, no selector leakage and reproducible package evidence. |
+| Verification | Source-map all remaining top-level identities, then run a fresh MSVC x64 `/MT` bound all-selector package regression. |
+| Expected Markers | Complete top-level ledger, explicit owner dispositions, no selector leakage and reproducible package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
-| Stop Conditions | Need for trace patch, Bochs semantic migration, debugger/VDD/GUI host link, ambient host dependency, selector leakage or native trace. |
-| Exit Criteria | The Debugger identity has an owner/disposition and its package regression passes. |
-| Original Owner Request | "按完整原始 component package 推进（Debugger 整族 deferred）……不按 trace 添油。" |
-| Similar-Issue Sweep | Separate original debugger stack ABI from fixed-width generic BOP ingress and CPU exception ownership. |
+| Stop Conditions | Need for trace patch, Bochs semantic migration, WOW/GUI/VDD host link, ambient host dependency, selector leakage or native trace. |
+| Exit Criteria | Every remaining top-level host-service selector has an owner/disposition and its bound package regression passes. |
+| Original Owner Request | "按完整原始 component package 推进（Debugger 整族 deferred；machine/BIOS 归 bx-core/bx-mantle）……不按 trace 添油。" |
+| Similar-Issue Sweep | Separate host-service selectors from machine/BIOS selectors and keep all selector recognition in bx-vdm. |
+
+> **T199 S47 closure:** `56h` is source-proven three-byte debugger ingress
+> with stack-resident mode/arguments, and is a deferred typed stop for the CLI
+> profile. Fresh x64 `/MT` composition evidence preserves a following guest
+> byte; see the [Debugger revalidation](etc/research/t199-s47-debugger-package-revalidation-001.md).
 
 > **T199 S46 closure:** all fifty Redirector slots retain their source-derived,
 > bound-composition unavailable result (`RIP+4`, `CF=1`, `AX=1`); `57:32`
