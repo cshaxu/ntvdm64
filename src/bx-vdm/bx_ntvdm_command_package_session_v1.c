@@ -43,7 +43,7 @@ int bx_ntvdm_command_package_session_v1_dispatch(bx_ntvdm_command_package_sessio
   if(route.disposition!=BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER)return 0;
   if(bx_ntvdm_cmd_cli_profile_v1_dispatch(e,c,w,r))return 1;
   switch(route.plane.service){
-  case 1u:return get_next(s,e,c,w,r);case 2u:case 15u:return bootstrap(s,e,c,w,r);
+  case 1u:return get_next(s,e,c,w,r);case 2u:case 15u:return bootstrap(s,e,c,w,r);case 11u:return bx_ntvdm_cmd_return_exit_code_v1_dispatch(&s->get_next,&s->launch_plan,e,c,w,r);
   case 4u:if(!s->gset->has_drive_snapshot||!bx_ntvdm_cmd_current_dir_service_v1_prepare(s->gset->drive_snapshot.admitted_mask,e,c,w,&tx,payload)||(tx.writes.write_count&&!write_tx(s,&tx,payload)))return 0;*r=tx.result;return bx_ntvdm_cpu_result_v2_valid(r);
   case 5u:return bx_ntvdm_command_launch_plane_v1_dispatch(&s->launch,i,p,e,c,w,r);
   case 12u:case 13u:if(!bx_ntvdm_cmd_boot_file_service_v1_prepare(&s->namespace_plane->provider.readonly_namespace,e,c,w,&tx,payload)||(tx.writes.write_count&&!write_tx(s,&tx,payload)))return 0;*r=tx.result;return bx_ntvdm_cpu_result_v2_valid(r);

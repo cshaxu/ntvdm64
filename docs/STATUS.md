@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S5.** Its governing brief is the active
+> **Current effective packet: M0 T200 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S5 -- COMMAND return and next-command lifecycle recovery.**
+**Active: M0 T200 S6 -- COMMAND lifecycle native observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,24 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S5, Ordinary Mode. |
-| Admission And Approval | S4 proved an exhausted one-slot plan and a `54:0B`/`54:11` mismatch. The complete COMMAND return/next-command package is admitted. |
-| Objective | Recover the original `54:0B` return contract and contained CLI next-command-or-terminal policy, then implement and regress the package as one lifecycle. |
-| Non-goals | No arbitrary second launch slot, no new guest run before package regression, no Bochs change, no ambient host process/console policy, and no isolated byte-only patch. |
-| Reference Baseline | T200 S2 source map, S4 observation, `cmdexec.c`, `tcode.asm`, COMMAND session and launch-plan sources. |
-| Files And ABI Surface | COMMAND get-next/return lifecycle, launch-plan representation, session state, source-built package regression. |
+| Identifier Mode | M0 T200 S6, Ordinary Mode. |
+| Admission And Approval | S5 passed package regression. One native integration observation is admitted. |
+| Objective | Run once to observe the repaired COMMAND lifecycle and select the next owner package, if any. |
+| Non-goals | No repair, repeated run, Bochs change, ambient host policy, or trace-derived single-service task. |
+| Reference Baseline | T200 S4 observation and S5 regression. |
+| Files And ABI Surface | Existing source-built native probe and COMMAND lifecycle state. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI/failure map plus fresh x64 `/MT` lifecycle regression for return-with-next, exhausted-plan terminal, invalid order, and exact `54:0B` encoding. |
-| Expected Markers | Correct carry/result contract, no raw decline at exhausted plan, no ambient host action, and preserved CMDINFO/return ordering. |
+| Verification | One source-built x64 `/MT` run with retained lifecycle frontier. |
+| Expected Markers | No raw decline from repaired `54:0B`; next owner package only. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original host behavior, contained CLI substitution, and all unavailable host features; do not call COMMAND component closed. |
-| Stop Conditions | A per-service patch, a synthetic interactive shell, host console/process dependence, Bochs semantic change, or native trace before regression. |
-| Exit Criteria | One complete lifecycle package implementation and regression, or source evidence of an unavoidable additional owner dependency. |
+| Stop Conditions | A second run, repair in this packet, or per-service trace patch. |
+| Exit Criteria | One retained run with next owner-package decision. |
 | Original Owner Request | "trace 只是辅助手段，用于观察每次完成一组新 BOP 后的行为变化；避免通过 trace 实施添油战术。" |
-| Similar-Issue Sweep | Audit bootstrap, CMDINFO, launch plan, return code, re-entry, queue exhaustion, terminal stop, and registration together. |
+| Similar-Issue Sweep | Interpret the entire COMMAND lifecycle, not one service hit. |
+
+> **T200 S5 closure:** `54:0B`, session dispatch and declared-plan lifecycle
+> now pass x64 regression; see the [lifecycle evidence](etc/research/t200-s5-command-return-next-lifecycle-001.md).
 
 > **T200 S4 closure:** its one allowed run proves the CMDINFO contract and
 > assigns the decline to COMMAND return/next-command lifecycle; see the

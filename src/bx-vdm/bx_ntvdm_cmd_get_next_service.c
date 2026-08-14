@@ -61,19 +61,25 @@ void bx_ntvdm_cmd_get_next_state_v1_initialize(bx_ntvdm_cmd_get_next_state_v1 *v
 void bx_ntvdm_cmd_get_next_state_v1_commit(bx_ntvdm_cmd_get_next_state_v1 *state)
 { if (state && state->delivered < 2u) ++state->delivered; }
 int bx_ntvdm_cmd_return_exit_code_v1_dispatch(bx_ntvdm_cmd_get_next_state_v1 *state,
+    const byob_launch_plan_v2 *plan,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_cpu_result_v2 *result)
 {
-    if (!state || !event || !cpu || !window || !result || state->delivered != 1u ||
+    int reenter;
+    if (!state || !plan || !event || !cpu || !window || !result || state->delivered == 0u ||
+        state->delivered > plan->slot_count || (plan->slot_count != 1u && plan->slot_count != 2u) ||
         state->returned != 0u || state->reserved0 != 0u ||
         !bx_ntvdm_exception_event_v1_valid(event) || !bx_ntvdm_cpu_state_v1_valid(cpu) ||
         !bx_ntvdm_instruction_window_v1_valid(window) ||
         event->kind != BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION || event->vector != 6u ||
         cpu->execution_mode != BX_NTVDM_CPU_EXECUTION_REAL || event->fault_rip > UINT64_MAX - 4u ||
         window->valid_bytes < 4u || window->bytes[0] != 0xc4u || window->bytes[1] != 0xc4u ||
-        window->bytes[2] != 0x54u || window->bytes[3] != 0x11u ||
-        !bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) ||
-        !bx_ntvdm_cpu_result_v2_set_cf(result, 0)) return 0;
+        window->bytes[2] != 0x54u || window->bytes[3] != 0x0bu ||
+        !bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u)) return 0;
+    reenter = state->delivered < plan->slot_count;
+    if (!bx_ntvdm_cpu_result_v2_set_cf(result, reenter)) return 0;
+    if (!reenter && !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
+        (uint16_t)(cpu->edx & 0xffu))) return 0;
     state->terminal_dos_exit_code = (uint16_t)cpu->edx;
     state->returned = 1u;
     return 1;

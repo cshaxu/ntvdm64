@@ -34,6 +34,7 @@ int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
 void bx_ntvdm_cmd_get_next_state_v1_commit(bx_ntvdm_cmd_get_next_state_v1 *state);
 int bx_ntvdm_cmd_return_exit_code_v1_dispatch(
     bx_ntvdm_cmd_get_next_state_v1 *state,
+    const byob_launch_plan_v2 *plan,
     const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_instruction_window_v1 *window,
