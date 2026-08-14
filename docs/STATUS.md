@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S4.** Its governing brief is the active
+> **Current effective packet: M0 T200 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S4 -- COMMAND CMDINFO native observation.**
+**Active: M0 T200 S5 -- COMMAND return and next-command lifecycle recovery.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,25 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S4, Ordinary Mode. |
-| Admission And Approval | S3 compiled the fixture-only complete CMDINFO observation with `runs: 0`; one native integration observation is now admitted. |
-| Objective | Run exactly once and record the complete `54:01` CMDINFO/lifecycle state for a subsequent COMMAND package repair decision. |
-| Non-goals | No repair in this packet, no repeated run, no Bochs change, no ambient host dependency, and no per-service patch. |
-| Reference Baseline | T200 S1/S2/S3 records and current source-built fixture. |
-| Files And ABI Surface | Existing source-built native probe and fixture-only CMDINFO observation line. |
+| Identifier Mode | M0 T200 S5, Ordinary Mode. |
+| Admission And Approval | S4 proved an exhausted one-slot plan and a `54:0B`/`54:11` mismatch. The complete COMMAND return/next-command package is admitted. |
+| Objective | Recover the original `54:0B` return contract and contained CLI next-command-or-terminal policy, then implement and regress the package as one lifecycle. |
+| Non-goals | No arbitrary second launch slot, no new guest run before package regression, no Bochs change, no ambient host process/console policy, and no isolated byte-only patch. |
+| Reference Baseline | T200 S2 source map, S4 observation, `cmdexec.c`, `tcode.asm`, COMMAND session and launch-plan sources. |
+| Files And ABI Surface | COMMAND get-next/return lifecycle, launch-plan representation, session state, source-built package regression. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One source-built x64 `/MT` guest run; retained run record must report `runs: 1` and the CMDINFO diagnostic line. |
-| Expected Markers | Geometry/read/decode status, fixed-width CMDINFO fields, acceptance/outcome, and lifecycle prerequisites. |
+| Verification | Source/ABI/failure map plus fresh x64 `/MT` lifecycle regression for return-with-next, exhausted-plan terminal, invalid order, and exact `54:0B` encoding. |
+| Expected Markers | Correct carry/result contract, no raw decline at exhausted plan, no ambient host action, and preserved CMDINFO/return ordering. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record only observed facts and resulting owner-package decision; do not claim repair or component closure. |
-| Stop Conditions | A second run, any repair, or an inference beyond the captured record. |
-| Exit Criteria | One retained CMDINFO observation with an explicit next package decision. |
+| Reporting Requirements | Record original host behavior, contained CLI substitution, and all unavailable host features; do not call COMMAND component closed. |
+| Stop Conditions | A per-service patch, a synthetic interactive shell, host console/process dependence, Bochs semantic change, or native trace before regression. |
+| Exit Criteria | One complete lifecycle package implementation and regression, or source evidence of an unavoidable additional owner dependency. |
 | Original Owner Request | "trace 只是辅助手段，用于观察每次完成一组新 BOP 后的行为变化；避免通过 trace 实施添油战术。" |
-| Similar-Issue Sweep | Interpret all CMDINFO, bootstrap, registration, launch and return facts as one COMMAND package. |
+| Similar-Issue Sweep | Audit bootstrap, CMDINFO, launch plan, return code, re-entry, queue exhaustion, terminal stop, and registration together. |
+
+> **T200 S4 closure:** its one allowed run proves the CMDINFO contract and
+> assigns the decline to COMMAND return/next-command lifecycle; see the
+> [native observation](etc/research/t200-s4-command-cmdinfo-native-observation-001.md).
 
 > **T200 S3 closure:** the fixture-only CMDINFO surface compiled in the full
 > x64 closure with `runs: 0`; see the [fixture record](etc/research/t200-s3-command-cmdinfo-observation-fixture-001.md).
