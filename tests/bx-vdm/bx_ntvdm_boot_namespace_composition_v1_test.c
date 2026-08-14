@@ -486,7 +486,9 @@ int main(void)
     if (ram[0x340u + 1u] != 8u ||
         memcmp(ram + 0x340u + 2u, "TARGET\r\n", 8u) != 0) return 35;
     if (memcmp(ram + 0x560u, "C:\\TARGET.COM", 14u) != 0) return 36;
-    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_STOP || outcome.resume_rip != 0u ||
+        outcome.gpr16_write_mask != 0u || outcome.eflags_write_mask != 0u ||
         composition.command.get_next.delivered != 1u) return 32;
     /* The selected COMMAND console capability is a fixed CLI no-install
        response.  Its identity was established by ingress and COMMAND-plane

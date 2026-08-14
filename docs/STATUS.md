@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S6.** Its governing brief is the active
+> **Current effective packet: M0 T200 S9.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S6 -- COMMAND lifecycle native observation.**
+**Active: M0 T200 S9 -- COMMAND exhausted-plan native observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,27 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S6, Ordinary Mode. |
-| Admission And Approval | S5 passed package regression. One native integration observation is admitted. |
-| Objective | Run once to observe the repaired COMMAND lifecycle and select the next owner package, if any. |
-| Non-goals | No repair, repeated run, Bochs change, ambient host policy, or trace-derived single-service task. |
-| Reference Baseline | T200 S4 observation and S5 regression. |
-| Files And ABI Surface | Existing source-built native probe and COMMAND lifecycle state. |
+| Identifier Mode | M0 T200 S9, Ordinary Mode. |
+| Admission And Approval | S7 source diagnosis and S8 x64 regression prove the typed terminal disposition. |
+| Objective | Execute one native observation of the repaired exhausted-plan terminal and identify the next owner package. |
+| Non-goals | No repair, repeat run, Bochs change, host policy, or trace-derived service patch. |
+| Reference Baseline | T200 S6 native observation and S8 regression. |
+| Files And ABI Surface | Existing native probe and typed COMMAND terminal result. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One source-built x64 `/MT` run with retained lifecycle frontier. |
-| Expected Markers | No raw decline from repaired `54:0B`; next owner package only. |
+| Verification | One source-built x64 `/MT` run with controlled terminal outcome. |
+| Expected Markers | Accepted stop at exhausted `54:01` and no raw #UD. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original host behavior, contained CLI substitution, and all unavailable host features; do not call COMMAND component closed. |
-| Stop Conditions | A second run, repair in this packet, or per-service trace patch. |
-| Exit Criteria | One retained run with next owner-package decision. |
+| Stop Conditions | A second run, repair, or extra capability. |
+| Exit Criteria | One retained observation and next owner-package decision. |
 | Original Owner Request | "trace 只是辅助手段，用于观察每次完成一组新 BOP 后的行为变化；避免通过 trace 实施添油战术。" |
-| Similar-Issue Sweep | Interpret the entire COMMAND lifecycle, not one service hit. |
+| Similar-Issue Sweep | Inspect terminal snapshot, generic #UD status and all COMMAND session state. |
+
+> **T200 S7/S8 closure:** original no-next-command behavior is a contained
+> typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
+
+> **T200 S6 closure:** the native guest follows ordinary `54:01` re-entry,
+> not the repaired shell-out `54:0B` path; see the [observation](etc/research/t200-s6-command-lifecycle-native-observation-001.md).
 
 > **T200 S5 closure:** `54:0B`, session dispatch and declared-plan lifecycle
 > now pass x64 regression; see the [lifecycle evidence](etc/research/t200-s5-command-return-next-lifecycle-001.md).

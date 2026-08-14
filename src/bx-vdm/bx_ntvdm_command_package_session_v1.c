@@ -35,6 +35,12 @@ static int bootstrap(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_excep
 static int get_next(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
 { bx_ntvdm_guest_gather_read_action_v1 read;bx_ntvdm_multi_write_transaction_v1 write;uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];uint32_t env=0u;
   if(s&&s->bootstrap.stage==BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED)env=s->bootstrap.environment_bytes;
+  /* OpenNT cmdGetNextCmd terminates the VDM when GetNextVDMCommand has no
+     command.  A declared CLI plan has no ambient queue, so its exhausted
+     state is the contained equivalent: typed stop, not raw #UD or a fake
+     command.  This branch is reached only after COMMAND package routing. */
+  if(s&&s->has_launch_plan&&s->get_next.delivered>=s->launch_plan.slot_count)
+    return bx_ntvdm_cpu_result_v2_stop(r);
   if(!s->has_launch_plan||!s->gset->has_drive_snapshot||!bx_ntvdm_cmd_get_next_v1_prepare(&s->get_next,&s->launch_plan,e,c,w,&read)||read.range_count!=1u||read.total_bytes!=BX_NTVDM_CMDINFO_V1_BYTES||!read_one(s,read.ranges[0].address,(uint32_t)read.ranges[0].length,payload)||!bx_ntvdm_cmd_get_next_v1_complete(&s->namespace_plane->provider.readonly_namespace,&s->launch_plan,&s->gset->drive_snapshot,env,s->launch.valid?&s->launch.registration:0,&s->get_next,e,c,&read,payload,read.total_bytes,&write,payload)||!write_tx(s,&write,payload))return 0;bx_ntvdm_cmd_get_next_state_v1_commit(&s->get_next);*r=write.result;return bx_ntvdm_cpu_result_v2_valid(r); }
 int bx_ntvdm_command_package_session_v1_dispatch(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_bop_ingress_v1 *i,const bx_ntvdm_bop_provider_selection_v1 *p,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
 { bx_ntvdm_command_package_route_v1 route;bx_ntvdm_multi_write_transaction_v1 tx;uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
