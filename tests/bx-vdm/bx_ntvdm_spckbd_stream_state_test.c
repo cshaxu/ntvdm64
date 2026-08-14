@@ -16,14 +16,14 @@ int main(void)
     const uint8_t offset[2] = { 0x56u, 0x34u };
 
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-    cpu.eax = 0xbeefu; cpu.ds = 0x1000u; cpu.esi = 0x0020u;
+    cpu.eax = 0xbeefu; cpu.cs = 0x2000u; cpu.ds = 0x1000u; cpu.esi = 0x0020u;
     bx_ntvdm_instruction_window_v1_capture(&window,
         (const uint8_t[]){ 0xc4u, 0xc4u, 0x5fu }, 3u);
     if (!bx_ntvdm_spckbd_stream_state_v1_prepare(
             BX_NTVDM_SPCKBD_DISPLAY_STREAM_IO, &event, &cpu, &window, &action) ||
         action.disposition != BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_NEED_READ ||
         action.range_count != 1u || action.total_bytes != 2u ||
-        action.ranges[0].address != 0x10042u || action.ranges[0].length != 2u ||
+        action.ranges[0].address != 0x20042u || action.ranges[0].length != 2u ||
         action.cpu_result.resume_rip != 0x456au) return 1;
     if (!bx_ntvdm_spckbd_stream_state_v1_complete(
             BX_NTVDM_SPCKBD_DISPLAY_STREAM_IO, &event, &cpu, &action, offset,
@@ -39,11 +39,11 @@ int main(void)
     if (bx_ntvdm_spckbd_stream_state_v1_complete(
             0u, &event, &cpu, &action, offset,
             sizeof(offset), &transaction, payload)) return 4;
-    cpu.ds = 0xffffu; cpu.esi = 0xffefu;
+    cpu.cs = 0xffffu; cpu.esi = 0xffefu;
     if (bx_ntvdm_spckbd_stream_state_v1_prepare(
             BX_NTVDM_SPCKBD_DISPLAY_STREAM_IO, &event, &cpu, &window, &action))
         return 5;
-    cpu.ds = 0xfffcu; cpu.esi = 0u;
+    cpu.cs = 0xfffcu; cpu.ds = 0xfffcu; cpu.esi = 0u;
     if (!bx_ntvdm_spckbd_stream_state_v1_prepare(
             BX_NTVDM_SPCKBD_DISPLAY_STREAM_IO, &event, &cpu, &window, &action))
         return 6;

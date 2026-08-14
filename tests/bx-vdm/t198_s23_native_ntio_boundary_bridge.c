@@ -148,6 +148,20 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
     if (event != 0 && event->window_bytes >= 4u && event->window[0] == 0xc4u &&
         event->window[1] == 0xc4u && event->window[2] == 0x50u &&
         event->window[3] == 0x11u) observed_5011 = 1u;
+    /* The composition consumes a selected BOP 5F before any later passive
+     * recorder can observe it.  This observer captures only copied event
+     * fields before delegation; it reads no guest memory and changes no CPU
+     * state or provider result. */
+    if (!observed_spckbd && event != 0 && event->window_bytes >= 3u &&
+        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+        event->window[2] == 0x5fu) {
+        observed_spckbd = 1u; observed_spckbd_cs = event->cs;
+        observed_spckbd_ds = event->ds; observed_spckbd_es = event->es;
+        observed_spckbd_eip = event->eip; observed_spckbd_eax = event->eax;
+        observed_spckbd_ebx = event->ebx; observed_spckbd_ecx = event->ecx;
+        observed_spckbd_edx = event->edx; observed_spckbd_esi = event->esi;
+        observed_spckbd_edi = event->edi; observed_spckbd_eflags = event->eflags;
+    }
     if (bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome)) {
         if (event != 0 && event->window_bytes >= 3u &&
             event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
@@ -188,16 +202,6 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         return 1;
     }
     if (event == 0 || outcome == 0) return 0;
-    if (!observed_spckbd && event->window_bytes >= 3u &&
-        event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
-        event->window[2] == 0x5fu) {
-        observed_spckbd = 1u; observed_spckbd_cs = event->cs;
-        observed_spckbd_ds = event->ds; observed_spckbd_es = event->es;
-        observed_spckbd_eip = event->eip; observed_spckbd_eax = event->eax;
-        observed_spckbd_ebx = event->ebx; observed_spckbd_ecx = event->ecx;
-        observed_spckbd_edx = event->edx; observed_spckbd_esi = event->esi;
-        observed_spckbd_edi = event->edi; observed_spckbd_eflags = event->eflags;
-    }
     if (!observed_emm_probe && event->window_bytes >= 3u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
         event->window[2] == 0x66u) {

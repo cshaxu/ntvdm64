@@ -144,6 +144,9 @@ int main()
   byob_profile_selection p; bx_ntvdm_boot_namespace_composition_v1 c; bx_ntvdm_host_drive_snapshot_v1 drives; bx_ntvdm_preentry_input_v1 preentry; uint8_t drive_types[26]={0};
   static bx_ntvdm_finite_run_request r; bx_ntvdm_finite_run_terminal_snapshot terminal; bx_ntvdm_generic_ud_event_v1 generic; bx_ntvdm_instruction_history_record_v1 history[8]; bx_ntvdm_instruction_history_transition_v1 transition; bx_ntvdm_instruction_history_provenance_v1 provenance; unsigned terminal_valid, generic_valid, history_count, transition_valid, provenance_valid; int status;
   memset(&p,0,sizeof(p)); p.ntio.bytes=0x8400; p.ntdos.bytes=0x6cd2;
+  /* This fixture supplies the already parser-validated v7 projection.  It
+   * does not parse or invent a display option inside the native machine. */
+  p.guest_display_state=BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1;
   memcpy(p.command_placement.path,L"\\COMMAND.COM",sizeof(L"\\COMMAND.COM"));p.command_placement.drive_index=2;p.has_command_placement=1;
   memcpy(p.target_placement.path,L"\\TARGET.COM",sizeof(L"\\TARGET.COM"));p.target_placement.drive_index=2;p.has_target_placement=1;
   memcpy(p.target.file_name,L"TARGET.COM",sizeof(L"TARGET.COM"));p.has_guest_boot_files=p.has_guest_search_metadata=1;

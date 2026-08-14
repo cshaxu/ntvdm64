@@ -25,7 +25,9 @@ static int bx_ntvdm_spckbd_stream_state_matches(
         window->valid_bytes < 3u || window->bytes[0] != 0xc4u ||
         window->bytes[1] != 0xc4u || window->bytes[2] != BX_NTVDM_SPCKBD_INIT_BOP ||
         event->fault_rip > UINT64_MAX - 3u) return 0;
-    base = (uint64_t)cpu_before->ds << 4;
+    /* OpenNT kb_setup_vectors reads the kio table from CS:SI, while the
+     * returned useHostInt10 offset remains relative to KbdSeg/DS. */
+    base = (uint64_t)cpu_before->cs << 4;
     address = base + (uint64_t)(cpu_before->esi & 0xffffu) +
         BX_NTVDM_SPCKBD_KIO_USE_HOST_INT10_INDEX * 2u;
     if (base >= BX_NTVDM_SPCKBD_APERTURE_BYTES ||

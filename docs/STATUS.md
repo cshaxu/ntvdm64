@@ -2,12 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S89.** Its governing brief is the active
+> **Current effective packet: M0 T198 S91.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S89 -- rebuild the CPU5 native NTIO fixture with the selected
-stream profile and current composition, then observe the original guest
-BOP-`5F` transaction.**
+**Active: M0 T198 S91 -- source-classify the newly reached DEM `BOP 50:3D`
+before admitting any provider or runtime behavior.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,21 +23,21 @@ BOP-`5F` transaction.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S89, Ordinary Mode. |
-| Admission And Approval | S88 closes parser and adapter-composition proof but establishes that the retained CPU5 NTIO fixture links older adapter objects. This S admits only a current-object native relink and observation; see `etc/research/t198-s88-profile-stream-composition-001.md`. |
-| Objective | Source-build and link the selected v7 profile plus current `bx-vdm` composition into the existing CPU5/mantle NTIO fixture, then observe whether the original guest reaches BOP-`5F` and performs the checked stream-state publication. |
+| Identifier Mode | M0 T198 S91, Ordinary Mode. |
+| Admission And Approval | S89/S90 current-object native observation reaches a new real guest boundary `50:3D`; see `etc/research/t198-s89-s90-native-spckbd-cs-si-closure-001.md`. |
+| Objective | Map original OpenNT owner, dispatcher, parameter contract, continuation and profile disposition for DEM `50:3D`; admit no implementation until that map is evidence-complete. |
 | Non-goals | No CLI `--display` option, stdout sink, BOP `42`, guest video implementation, ROM/device import, memory mapping change, Bochs core/mantle edit, PIC/keyboard/timer behavior, alternate display mode, or new BOP provider. |
-| Reference Baseline | S83--S85 BOP-`5F` reachability evidence; S87 transaction closure; S88 v7 composition closure; existing CPU5 native NTIO fixture and its bounded stop contract. |
+| Reference Baseline | S89/S90 native handoff closure; current BOP catalog/DEM plane and original OpenNT dispatcher sources. |
 | Files And ABI Surface | Native fixture/relink recipe and focused observations only, plus necessary current-object manifest correction. Reuse S88 types and the existing selector-blind core/mantle ABI; no new seam or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Current-object source-build/link manifest; bounded CPU5 native fixture; BOP-`5F` transaction observation including read/write/result; retained S87/S88 focused tests; documentation governance and diff checks. |
-| Expected Markers | A v7-selected profile reaches the fixture, real guest BOP-`5F` is observed, exact `DS:SI + 34` read and target write of `2` occur, CF/RIP result is returned, or an evidence-backed earlier/later boundary prevents that claim. |
+| Verification | Static source map, catalog/plane cross-check and focused classification test if an existing route is affected; documentation governance and diff checks. |
+| Expected Markers | Original owner and service identity, input/output/continuation, explicit available/unavailable/deferred disposition, and no speculative provider. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record all rebuilt versus inherited objects, profile-to-composition data direction, actual BOP observation ordering, action ordering/result, bounded-stop meaning and every excluded display behavior. |
 | Stop Conditions | Any need for a user-selectable display setting, text sink, BOP `42`, arbitrary guest address, ROM/VGA/PIC/device admission, core/mantle seam, or broad Bochs rebuild. Stop and retain the partial capability. |
-| Exit Criteria | Reproducible current-object native observation with an exact runtime disposition, plus no output/device/ROM semantics. |
+| Exit Criteria | Reproducible source-owned classification ready for a separately admitted implementation or explicit deferral. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover object provenance, old composition object exclusion, v7 projection, BOP-`5F` observer order, invalid target decline, selected write/result, later stream branch and bounded fixture termination. |
+| Similar-Issue Sweep | Cover adjacent DEM 50-family ownership, selector/service decoding, legacy plane gates and existing unavailable dispositions. |
 
 ## Current Technical Baseline
 
