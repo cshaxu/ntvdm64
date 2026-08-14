@@ -1,6 +1,7 @@
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx-mantle/bx_ntvdm_instruction_history.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
+#include "t198_s23_fastread_attempt_ledger.h"
 
 static unsigned observed_5011;
 static unsigned observed_503b_resume;
@@ -35,6 +36,7 @@ static uint64_t observed_fast_read_resume_rip;
 static uint32_t observed_fast_read_gpr16_write_mask;
 static uint16_t observed_fast_read_ax;
 static uint32_t observed_fast_read_eflags_write_mask, observed_fast_read_eflags_values;
+static struct t198_s23_fastread_attempt_ledger_v1 observed_fast_read_attempts;
 static unsigned observed_spckbd;
 static uint16_t observed_spckbd_cs, observed_spckbd_ds, observed_spckbd_es;
 static uint32_t observed_spckbd_eip, observed_spckbd_eax, observed_spckbd_ebx,
@@ -170,7 +172,11 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_spckbd_edx = event->edx; observed_spckbd_esi = event->esi;
         observed_spckbd_edi = event->edi; observed_spckbd_eflags = event->eflags;
     }
-    if (bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome)) {
+    {
+        int composition_accepted = bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome);
+        t198_s23_fastread_attempt_ledger_v1_record(&observed_fast_read_attempts,
+            event, outcome, composition_accepted);
+        if (composition_accepted) {
         if (!observed_fast_read_commit && event != 0 && outcome != 0 &&
             event->window_bytes >= 4u && event->window[0] == 0xc4u &&
             event->window[1] == 0xc4u && event->window[2] == 0x50u &&
@@ -220,7 +226,8 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
             outcome->disposition == BX_NTVDM_GENERIC_UD_RESUME &&
             outcome->resume_rip == event->fault_rip + 4u)
             observed_drive_resume = 1u;
-        return 1;
+            return 1;
+        }
     }
     if (event == 0 || outcome == 0) return 0;
     if (!observed_emm_probe && event->window_bytes >= 3u &&
@@ -368,6 +375,8 @@ unsigned t198_s23_native_ntio_boundary_observed_fast_read_gpr16_write_mask(void)
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_ax(void) { return observed_fast_read_ax; }
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_eflags_write_mask(void) { return observed_fast_read_eflags_write_mask; }
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_eflags_values(void) { return observed_fast_read_eflags_values; }
+unsigned t198_s23_native_ntio_boundary_fast_read_attempt_count(void) { return observed_fast_read_attempts.count; }
+int t198_s23_native_ntio_boundary_copy_fast_read_attempt(unsigned index, struct t198_s23_fastread_attempt_v1 *entry) { return t198_s23_fastread_attempt_ledger_v1_get(&observed_fast_read_attempts,index,entry); }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd(void) { return observed_spckbd; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_cs(void) { return observed_spckbd_cs; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_ds(void) { return observed_spckbd_ds; }

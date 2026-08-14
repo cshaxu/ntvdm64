@@ -14,7 +14,8 @@ $vsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Comm
 if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build root: $build" }
 foreach ($path in @($vsDevCmd, $manifestPath, (Join-Path $baseline 'link.rsp'),
     (Join-Path $baseline 'native-core\config.h'),
-    (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_bridge.c'))) {
+    (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_bridge.c'),
+    (Join-Path $repository 'tests\bx-vdm\t198_s23_fastread_attempt_ledger.c'))) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Required S94 input missing: $path" }
 }
 
@@ -29,7 +30,7 @@ $sources = @($manifest.compileSources | Where-Object { $_ -notin $compileOnly })
 $objects = Join-Path $build 'current-objects'
 New-Item -ItemType Directory -Path $objects | Out-Null
 $config = Join-Path $baseline 'native-core\config.h'
-$includes = @('src', 'src\bochs', 'src\bochs\instrument\stubs', 'src\bx-core', 'src\bx-core\cpu', 'src\bx-mantle', 'src\bx-vdm', 'src\cli') | ForEach-Object { '/I "' + (Join-Path $repository $_) + '"' }
+$includes = @('src', 'src\bochs', 'src\bochs\instrument\stubs', 'src\bx-core', 'src\bx-core\cpu', 'src\bx-mantle', 'src\bx-vdm', 'src\cli', 'tests\bx-vdm') | ForEach-Object { '/I "' + (Join-Path $repository $_) + '"' }
 function Invoke-Compile([string]$Language, [string]$Source, [string]$Object, [string]$Defines) {
     $common = 'call "' + $vsDevCmd + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /c /MT /DWIN32 ' +
         ($includes -join ' ') + ' /FI "' + $config + '" ' + $Defines + ' /Fo"' + $Object + '" "' + $Source + '"'
@@ -47,6 +48,8 @@ foreach ($relative in $sources) {
     $current[$base] = $object
 }
 $bridge = Join-Path $build 'bridge.obj'
+$ledger = Join-Path $build 'fastread-attempt-ledger.obj'
+Invoke-Compile 'C' (Join-Path $repository 'tests\bx-vdm\t198_s23_fastread_attempt_ledger.c') $ledger ''
 Invoke-Compile 'C' (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_bridge.c') $bridge ''
 $fixture = Join-Path $prepared 'source-built-normal-return-fixture.obj'
 $commandBytes = Join-Path $prepared 'command_bytes.obj'
@@ -69,6 +72,7 @@ $responseLines = foreach ($line in Get-Content -LiteralPath (Join-Path $baseline
 foreach ($base in ($current.Keys | Sort-Object)) { if (-not $emitted.ContainsKey($base)) { $responseLines += '"' + $current[$base] + '"' } }
 $responseLines += '"' + $commandBytes + '"'
 $responseLines += '"' + $shareBytes + '"'
+$responseLines += '"' + $ledger + '"'
 $responseLines | Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=x64 -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 | Tee-Object -FilePath (Join-Path $build 'link.log')
 if ($LASTEXITCODE -ne 0) { throw "S94 link failed: $LASTEXITCODE" }
@@ -83,7 +87,7 @@ Get-Content -LiteralPath $stdout, $stderr | Tee-Object -FilePath (Join-Path $bui
     preparedInputs = 'S93 exact source-built COMMAND.COM/SHARE.EXE and v7 profile-selection witness'
     inheritedInputs = 'T198 S74 CPU5/mantle/NTIO/NTDOS link response only'
     currentSourceManifest = 'tools/t198-s50-bx-vdm-composition-manifest.json'
-    rebuiltObjects = @('S93 prepared fixture/input objects', 'current adapter/CLI objects', 'bridge.obj')
+    rebuiltObjects = @('S93 prepared fixture/input objects', 'current adapter/CLI objects', 'fastread-attempt-ledger.obj', 'bridge.obj')
     runExitCode = $runExit; runs = 1
     logs = @{ preparation = 'prepared'; compile = 'compile.log'; link = 'link.log'; run = 'run.log' }
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 't198-s94-source-built-normal-return-native-probe.json') -Encoding utf8
