@@ -40,6 +40,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_cmd_boot_file_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_comspec_bootstrap_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_get_next_service.c',
+    'src\bx-vdm\bx_ntvdm_cmd_keyboard_layout_service.c',
     'src\bx-vdm\bx_ntvdm_cmdinfo_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_set_info_service.c',
     'src\bx-vdm\bx_ntvdm_command_launch_plane_v1.c',

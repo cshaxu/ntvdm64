@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S128.** Its governing brief is the active
+> **Current effective packet: M0 T198 S130.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S128 -- composed COMMAND `54:0E` reuse/admission map.**
+**Active: M0 T198 S130 -- one native observation after composed `54:0E`.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S128, Ordinary Mode. |
-| Admission And Approval | S127's sole native observation proves the composed `54:01` delivery resumes and stops next at `54:0E`.  The next action is a source/reuse decision before any code or repeat trace. |
-| Objective | Map the exact original `SVC_GETKBDLAYOUT` contract, its existing source-derived candidate and composed-plane dependencies; classify reuse, required adaptation, or explicit deferment. |
-| Non-goals | No native retry, host queue/Win32/VDD dependency, new BOP semantics, target completion claim, Bochs/core/mantle/device change, code modification or broad rebuild. |
-| Reference Baseline | S127 native observation and the retained `54:0E` source audits. |
-| Files And ABI Surface | Read-only source/evidence map only. |
+| Identifier Mode | M0 T198 S130, Ordinary Mode. |
+| Admission And Approval | S129 source/test closure admits the bounded `54:0E` provider.  One new exact-input native run may now observe its real guest continuation. |
+| Objective | Rebuild and execute exactly one registered native fixture; record whether `54:0E` is accepted and identify the next terminal/BOP boundary. |
+| Non-goals | No retry, keyboard device, guest-buffer write, host queue, Win32/VDD/registry dependency, new BOP semantics, target completion claim, Bochs/core/mantle change or broad rebuild. |
+| Reference Baseline | S127 native observation and S129 adapter-only closure. |
+| Files And ABI Surface | Registered native derivative/evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | A compact source map identifies caller, original handler, exact ABI/result terms, existing candidate and forbidden historical dependencies. |
-| Expected Markers | `SVC_GETKBDLAYOUT`, `cmdGetKbdLayout`, bounded `DX=0` candidate, and no direct OpenNT dispatcher link. |
+| Verification | One provenance-locked `runs=1` record shows `54:0E` accepted or declined and identifies the subsequent terminal/BOP boundary. |
+| Expected Markers | Fixed `DX=0`, four-byte resume, no host queue and no second run. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Separate historical-source fact from existing candidate fact; record any ABI mismatch or composition prerequisite without proposing a local BOP hack. |
-| Stop Conditions | Code modification, native run, host/Bochs change, host queue or direct OpenNT dispatcher link. |
-| Exit Criteria | One evidence-backed reuse/adaptation/deferment classification gives the next implementation packet a bounded, global-plane input. |
+| Reporting Requirements | Record provenance, `54:0E` result/continuation and the next boundary without claiming target completion. |
+| Stop Conditions | A second run, host/Bochs change, host queue, keyboard-device/guest-buffer expansion, Win32/VDD dependency or direct OpenNT dispatcher link. |
+| Exit Criteria | The native result validates/refutes the bounded `54:0E` lifecycle and gives one exact next action. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
@@ -544,4 +544,6 @@
 | M0 T161 | Closed: unchanged composition reaches accepted `FE` controlled stop after `50:36`; T162 must source-classify its CLI completion meaning. |
 | M0 T198 S126 | Complete: the explicit CLI launch plan, `54:05` registration, CMDINFO gather, checked response writes and one-slot `54:01` commit are source/test/build closed in the adapter-only composition. |
 | M0 T198 S127 | Complete: the sole locked native observation resumes past assembled `54:01` and reaches `54:0E`; it does not claim target completion. |
+| M0 T198 S128 | Complete: `54:0E` is mapped to original `cmdGetKbdLayout`; the existing finite `DX=0` helper is admissible only as a globally classified CLI rehost. |
+| M0 T198 S129 | Complete: the finite `54:0E` provider is composed after global classification; the focused adapter-only closure verifies `DX=0`, `+4` resume and protected-mode decline. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |

@@ -190,6 +190,18 @@ int main(void)
     if (memcmp(ram + 0x560u, "C:\\TARGET.COM", 14u) != 0) return 36;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         composition.cmd_get_next.delivered != 1u) return 32;
+    /* The selected COMMAND console capability is a fixed CLI no-install
+       response.  Its identity was established by ingress and COMMAND-plane
+       classification, rather than by the detached legacy runtime gate. */
+    event_initialize(&event, 0x54, 0x0e);
+    event.edx = 1u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != (1u << 2) ||
+        outcome.gpr16_values[2] != 0u) return 37;
+    event_initialize(&event, 0x54, 0x0e);
+    event.execution_mode = BX_NTVDM_CPU_EXECUTION_PROTECTED;
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 38;
     event_initialize(&event, 0x50, 0x3b);
     event.eax = 0xabcd;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||

@@ -6,6 +6,7 @@
 #include "bx_ntvdm_spckbd_init_service.h"
 #include "bx_ntvdm_bios_memory_service.h"
 #include "bx_ntvdm_command_plane_v1.h"
+#include "bx_ntvdm_cmd_keyboard_layout_service.h"
 #include "bx_ntvdm_config_done_service.h"
 #include "bx_ntvdm_dem_boot_drive_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
@@ -347,6 +348,28 @@ static int execute_command_get_next(bx_ntvdm_boot_namespace_composition_v1 *x,
     bx_ntvdm_cmd_get_next_state_v1_commit(&x->cmd_get_next); *r=write.result; return bx_ntvdm_cpu_result_v2_valid(r);
 }
 
+/* The finite no-install response is a COMMAND console-plane capability
+ * substitution.  Identity first comes from common ingress/provider selection;
+ * this helper does not independently select a BOP or borrow the legacy runtime
+ * gate. */
+static int execute_command_keyboard_layout(
+    const bx_ntvdm_bop_ingress_v1 *ingress,
+    const bx_ntvdm_bop_provider_selection_v1 *selection,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_command_plane_record_v1 command;
+    return ingress != 0 && selection != 0 && event != 0 && cpu != 0 &&
+        window != 0 && result != 0 &&
+        bx_ntvdm_command_plane_v1_classify(ingress, selection, &command) &&
+        command.component == BX_NTVDM_COMMAND_COMPONENT_CONSOLE &&
+        command.disposition == BX_NTVDM_COMMAND_PLANE_DEFERRED &&
+        command.service == 14u && bx_ntvdm_cmd_keyboard_layout_v1_dispatch(
+            event, cpu, window, result);
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
     const bx_ntvdm_boot_namespace_composition_v1 *value,
     bx_ntvdm_boot_namespace_diagnostic_v1 *out)
@@ -450,6 +473,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             return outcome(&transaction.result, value);
         }
     }
+    if (execute_command_keyboard_layout(&ingress, &selection, &boundary, &cpu,
+            &window, &result)) return outcome(&result, value);
     if (execute_command_bootstrap(active, &ingress, &selection, &boundary, &cpu,
             &window, &result)) return outcome(&result, value);
     if (bx_ntvdm_command_launch_plane_v1_dispatch(&active->launch, &ingress,
