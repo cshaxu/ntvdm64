@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1313 |
+| Documentation records | 1315 |
 | --- | --- |
-| Generated UTC | 2026-08-14T20:53:13Z |
+| Generated UTC | 2026-08-14T20:55:46Z |
 
 ## Entries
 
@@ -603,6 +603,7 @@ content-divergent entries.
 | etc/research/t199-s46-redirector-package-revalidation-001.md | indexed supporting material | 05b7a92347324e4d89207220dbf2e9c8306a7aec732aa8732581990d48d3e633 |
 | etc/research/t199-s47-debugger-package-revalidation-001.md | indexed supporting material | f6b32255c4911a1b515d98b561c89df798d5f09183ba3eea7b90372f349c6c0f |
 | etc/research/t199-s48-top-level-host-service-package-revalidation-001.md | indexed supporting material | 76989f16fba21654f00a47eecee0b14528f4b09cae057c05f0614c4d0aacc41b |
+| etc/research/t199-s49-machine-bios-package-revalidation-001.md | indexed supporting material | 7791e2cdec835d48e9b059dbb00f653b141ed1bd90fabe809f5973fb953da02b |
 | etc/research/t199-s4-dem-package-facade-regression-001.md | indexed supporting material | 8b4ae0b7e684e38c45ceb39cf6bc93e4c42bc2a45c1888c786c365689854ebd6 |
 | etc/research/t199-s5-command-source-abi-failure-matrix-001.md | indexed supporting material | 0058ec8ba5ea2c9f3236842ce38e532526033392b3605f2082a0fcc6f32df9d0 |
 | etc/research/t199-s6-command-whole-package-disposition-001.md | indexed supporting material | f6fd15f9c7bc30fcfce815acd0778f2b48cfac9a6ccd68e1a8a8143ec6a89441 |
@@ -1046,6 +1047,7 @@ content-divergent entries.
 | history/m0-t199-s46-closure-20260814.md | closed task history | c82dea053b3a30f5ca06d691c2374e7d00bb835b606c38ab0e5a9d7e97685960 |
 | history/m0-t199-s47-closure-20260814.md | closed task history | 77081c304af18cf56ec8994e94b783a6c3ded3e8ec8bad33a88d8f313584eb48 |
 | history/m0-t199-s48-closure-20260814.md | closed task history | 8c2ced18c8cc7cc67f91ee0e260641fb3c30eaa174ae20d3d38928641b4d2f20 |
+| history/m0-t199-s49-closure-20260814.md | closed task history | d0ae28de296807804b0ce6616e82f0cae1d6a048c885c6211b208f29c70e3903 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | 9b40b99939aad1233b4901b7f7f6569c64ac90b83a351e9a78268251d63c9154 |
@@ -1327,7 +1329,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 50c3fbd49a56443939245f75f68671f309d8d33616b79b7e78c2ef4dca72b9b6 |
+| STATUS.md | principal control document | 09656efe5af1c743bbeafb6c1d4174cabb429253a9d2d566d3b979d0627257f2 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S49.** Its governing brief is the active
+> **Current effective packet: M0 T199 S50.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S49 -- machine and BIOS BOP owner/disposition verification.**
+**Active: M0 T199 S50 -- global BOP package closure audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S49, Ordinary Mode. |
-| Admission And Approval | S48 revalidated the top-level host-service package and repaired the `5E` no-op continuation. T199 advances to the separately owned machine/BIOS and monitor BOP package. |
-| Objective | Revalidate machine/BIOS BOP identity, owner boundaries, admitted memory/handoff behavior, and deferred monitor/mode-transition disposition. |
-| Non-goals | No native trace, no service-only patch, no adapter-owned CPU/BIOS/PIC/device semantic, no Bochs selector knowledge, and no ambient NT host dependency. |
-| Reference Baseline | S48 top-level owner split; bx-core/bx-mantle architecture; current machine facade, BIOS memory service and machine handoff evidence. |
-| Files And ABI Surface | Machine/BIOS source/owner/disposition ledger and bound fixture; typed contracts only. |
+| Identifier Mode | M0 T199 S50, Ordinary Mode. |
+| Admission And Approval | S49 revalidated the machine/BIOS package. All planned owner packages now have individual current evidence; T199 advances to its one global closure audit. |
+| Objective | Verify every admitted OpenNT BOP identity has exactly one current owner/disposition, current source-built regression coverage, and no selected raw-`#UD` fallthrough. |
+| Non-goals | No native trace, no per-service implementation, no newly admitted capability, no Bochs selector knowledge, and no ambient NT host dependency. |
+| Reference Baseline | T199 S37/43/44/45/46/47/48/49 package evidence and the global ingress/provider/composition closure. |
+| Files And ABI Surface | Global BOP closure ledger, all-family regression fixture and closure history; typed contracts only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-map all admitted machine/BIOS identities, then run a fresh MSVC x64 `/MT` bound machine package regression. |
-| Expected Markers | Complete machine ledger, typed memory/handoff or deferred results, no selector leakage and reproducible package evidence. |
+| Verification | Reconcile every package ledger to ingress/provider bounds, then run fresh MSVC x64 `/MT` all-family regression through current bound composition. |
+| Expected Markers | One-owner/one-disposition ledger, no selected raw-`#UD` leak, and reproducible full-package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
 | Stop Conditions | Need for trace patch, Bochs semantic migration into bx-vdm, direct host hardware link, ambient host dependency, selector leakage or native trace. |
-| Exit Criteria | Every admitted machine/BIOS identity has an owner/disposition and its bound package regression passes. |
-| Original Owner Request | "machine/BIOS 归 bx-core/bx-mantle；adapter 负责边界定义，不承载 BIOS/PIC/设备语义。" |
-| Similar-Issue Sweep | Separate selector routing from selector-blind machine actions and audit all top-level machine forms together. |
+| Exit Criteria | Global owner/disposition audit and full-family regression pass, or each uncovered identity is explicitly recorded as a remaining T199 failure. |
+| Original Owner Request | "全面实现跑通 BOP 表格的指令；要有全局观，避免添油战术。" |
+| Similar-Issue Sweep | Check selector count, sentinel/unknown behavior, direct composition paths, typed results and package evidence together. |
+
+> **T199 S49 closure:** machine/BIOS BOP ownership is current: profile memory
+> values and checked handoff remain bounded, while monitor and transition forms
+> are typed stops. Fresh focused and bound x64 `/MT` runs pass; see the
+> [machine revalidation](etc/research/t199-s49-machine-bios-package-revalidation-001.md).
 
 > **T199 S48 closure:** the top-level host-service package has explicit CLI
 > dispositions, including the corrected source-derived `5E` nonzero no-op
