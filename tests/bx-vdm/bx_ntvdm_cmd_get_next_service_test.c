@@ -86,6 +86,26 @@ int main(void)
     if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,32u,0,&state,&e,&c,
             &a,record,sizeof(record),&t,payload)) return 10;
+    /* The profile-owned boot namespace remains C: even when CLI policy
+       projects no host drives.  This diagnostic fixes the current ABI fact:
+       cmdGetNextCmd publishes the namespace drive index (C, zero-based 2)
+       separately from the filtered host-drive count (zero).  It deliberately
+       does not assert that this is yet a complete guest execution profile. */
+    types[2] = 0u;
+    if (!bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(4),types,
+            UINT32_C(4),UINT32_C(4),&drives)) return 11;
+    memset(record,0,sizeof(record));
+    record[8]=0x30; record[10]=0x40; record[12]=128;
+    record[28]=0x50; record[30]=0x60; record[32]=17; record[33]=1;
+    bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
+    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
+        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0u,0,&state,&e,&c,
+            &a,record,sizeof(record),&t,payload) ||
+        t.writes.write_count < 4u ||
+        payload[t.writes.writes[2].payload_offset] != 2u ||
+        payload[t.writes.writes[2].payload_offset + 1u] != 0u ||
+        payload[t.writes.writes[3].payload_offset] != 0u ||
+        payload[t.writes.writes[3].payload_offset + 1u] != 0u) return 12;
     puts("bx-ntvdm COMMAND CMDINFO delivery, environment retry and terminal lifecycles verified");
     return 0;
 }

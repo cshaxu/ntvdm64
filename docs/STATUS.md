@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S28.** Its governing brief is the active
+> **Current effective packet: M0 T200 S30.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S28 -- native CLI admission and terminal regression.**
+**Active: M0 T200 S30 -- guest boot-volume / host-drive projection separation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,19 +20,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S28, Ordinary Mode. |
-| Admission And Approval | S27 establishes the first direct source-built native CLI-to-engine run. The direct path now needs its complete CLI admission and typed-terminal negative regression before it can displace retained runner evidence. |
-| Objective | Add and run a bounded native-CLI regression that proves accepted invocation, malformed/foreign target rejection, drive-policy precedence, and typed terminal mapping without a child engine or environment transport. |
-| Non-goals | No BOP/provider change, interactive shell, host process, VDD/GUI/KEYB recovery, legacy runner rewrite, arbitrary Bochs configuration, external `bochs.exe`, unbounded run, device/BIOS change, or OpenNT semantic move. |
-| Reference Baseline | S27 direct CLI source and probe, engine contract v1, existing BYOB admission tests, and S26 controlled terminal. |
-| Files And ABI Surface | Native CLI test/fixture and explicit MSVC x64 `/MT` probe updates only; no new cross-layer ABI. |
+| Identifier Mode | M0 T200 S30, Ordinary Mode. |
+| Admission And Approval | S29 proves that profile-owned guest C: and the filtered host-drive snapshot have distinct owners but are presently coupled in COMMAND/DEM composition. |
+| Objective | Repair the adapter composition so a fixed-width profile-owned guest boot-volume/session record is distinct from the optional host-drive projection; update COMMAND and DEM consumers according to source/ABI evidence and prove the separated cases by package fixtures. |
+| Non-goals | No BOP endpoint patch, CLI exclusion workaround, device enablement, Bochs semantic change, unbounded guest rerun, or host-drive exposure. |
+| Reference Baseline | S29 owner map, T199 S37 GSET evidence, HOST-NAMESPACE-CAPABILITY design, current boot namespace composition, and S26/S27 direct engine path. |
+| Files And ABI Surface | bx-vdm composition/COMMAND/DEM fixed-width records and bounded package fixtures; no raw Bochs type or host handle crosses the boundary. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Build the native CLI closure and execute its accepted and rejection cases. Inspect process/environment boundary, run documentation governance and diff checks, then commit and push. |
-| Expected Markers | Accepted case remains direct; rejected cases do not enter engine execution; include/exclude conflict preserves exclusion precedence. |
+| Verification | Build affected MSVC x64 `/MT` adapter fixtures for independent guest-volume and host-projection cases; preserve CLI include/exclude precedence; run governance and diff checks, then commit and push. |
+| Expected Markers | Guest boot C: stays profile-owned; empty host projection remains representable; host-only providers do not gain a synthetic admitted host C:. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record each admission case and typed outcome; do not claim general CLI/DOS compatibility. |
-| Stop Conditions | Any child product shell, environment-variable handoff, new Bochs semantic intrusion, raw Bochs type crossing a C boundary, or unbounded run pauses this S for re-admission. |
-| Exit Criteria | Accepted and declared negative CLI paths are source-built and evidenced under the direct ABI. |
+| Reporting Requirements | Record the source/ABI ownership map and all separated fixture outcomes; do not claim general CLI/DOS compatibility or timeout causality. |
+| Stop Conditions | Any synthetic host-drive re-admission, child product shell, environment-variable handoff, new Bochs semantic intrusion, raw Bochs type crossing a C boundary, or unbounded run pauses this S for re-admission. |
+| Exit Criteria | The profile boot-volume and host projection have separate documented adapter records and source-built package evidence; consumers no longer conflate their ownership. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Inspect native CLI option parser, profile/target admission, launch-plan encoding, drive parser, engine request validation, terminal mapping, and retained runner policy tests. |
 
@@ -116,6 +116,11 @@
 > foreign targets before engine entry; a validation-only route proves that
 > conflicting include/exclude masks remain explicit for the snapshot layer's
 > exclusion precedence. See the [regression evidence](etc/research/t200-s28-native-cli-admission-regression-001.md).
+
+> **T200 S29 closure:** profile-owned guest C: and filtered host-drive
+> projection are distinct ownership domains; current COMMAND output exposes
+> their coupling without assigning the prior timeout's cause. See the
+> [owner map](etc/research/t200-s29-excluded-drive-owner-map-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
