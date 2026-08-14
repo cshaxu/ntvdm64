@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S1.** Its governing brief is the active
+> **Current effective packet: M0 T199 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S1 -- global BOP state, ownership and component-package audit.**
+**Active: M0 T199 S2 -- complete DEM source/ABI/failure matrix.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -21,19 +21,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S1, Ordinary Mode. |
-| Admission And Approval | Owner closes T198 and authorizes a full current BOP state/implementation-plan audit before further BOP implementation. |
-| Objective | Reconcile the complete OpenNT BOP inventory with actual bx-vdm/bx-core/bx-mantle code and evidence; publish a global status matrix and ordered component-package plan. |
-| Non-goals | No BOP implementation, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no host capability expansion, and no endpoint-by-endpoint task creation. |
-| Reference Baseline | OpenNT BOP inventory 005, T198 closure, current composition manifest and all retained T198 evidence. |
-| Files And ABI Surface | Read-only source/evidence audit and T199 planning documents only. |
+| Identifier Mode | M0 T199 S2, Ordinary Mode. |
+| Admission And Approval | T199 S1 selects DEM as the first complete owner package after full-inventory reconciliation. |
+| Objective | Produce one complete source/ABI/failure matrix for all 73 callable DEM services and its namespace/search/session/device/state groups. |
+| Non-goals | No DEM implementation, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no host capability expansion, and no single-service task admission. |
+| Reference Baseline | T199 global audit, T96 S3 provider map, current composition manifest and retained DEM evidence. |
+| Files And ABI Surface | Read-only OpenNT/`bx-vdm` source map and evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every inventory group is reconciled to one current status and package owner; counts, aliases and non-callable BIOS rows are explicitly accounted for. |
-| Expected Markers | One global matrix, component package order, prerequisites, failure dispositions, regression gates and trace-after-package rule. |
+| Verification | Every callable DEM service has source handler, ABI direction, failure contract, current evidence level and one component subgroup; sentinel is separately recorded. |
+| Expected Markers | 73 callable services reconciled, namespace/search/session/device/state grouping, and no unclassified implementation candidate. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Preserve partial endpoint evidence as partial; distinguish source existence, composition linkage, unit regression and native integration evidence. |
-| Stop Conditions | Any implementation, trace, package selection based only on trace, Bochs/mantle change, direct dispatcher link or host capability expansion. |
-| Exit Criteria | An evidence-backed global matrix and package plan are sufficient to admit T199 S2 for one complete component's disposition design. |
+| Reporting Requirements | Distinguish original source contract, existing rehost candidate, current composition route, negative/failure semantics and machine dependency. |
+| Stop Conditions | Any implementation, trace, Bochs/mantle change, direct dispatcher link or host capability expansion. |
+| Exit Criteria | The complete matrix is sufficient to admit one all-service DEM disposition design rather than a service-by-service implementation. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
