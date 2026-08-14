@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S26.** Its governing brief is the active
+> **Current effective packet: M0 T199 S27.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S26 -- C5 INT15 and fault-delivery owner/ABI admission.**
+**Active: M0 T199 S27 -- C4 protected-mode state owner/ABI admission.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S26, Ordinary Mode. |
-| Admission And Approval | T199 S11 orders C5 before any XMS/DPMI provider. The owner-authorized T199 whole-package plan requires source/ABI/failure mapping before an interrupt or firmware implementation decision. |
-| Objective | Establish whether a native, bounded INT15/fault-delivery lifecycle can be admitted without reintroducing SoftPC keyboard, PIC, firmware or historical host composition. |
-| Non-goals | No interrupt implementation, XMS BOP result, adapter state, BIOS/PIC/keyboard/device enablement, synthetic IVT, trace, or bx-core modification. |
-| Reference Baseline | T199 S8 XMS matrix, T199 S9 package disposition, T199 S11 shared capability plan, T199 S25 C3 closure, `xmsmisc.c`, and reached SoftPC INT15 sources. |
-| Files And ABI Surface | Source/owner/failure map under `docs/etc/research`; no runtime ABI or source implementation is admitted until a native lifecycle and reset owner are proven. |
+| Identifier Mode | M0 T199 S27, Ordinary Mode. |
+| Admission And Approval | T199 S11 orders C4 after C1/C2 and alongside the C3/C5 decisions. The owner-authorized T199 whole-package plan requires source/ABI/failure mapping before any DPMI protected-mode implementation decision. |
+| Objective | Establish whether a bounded native CPU mode/descriptor request can be admitted without moving DPMI policy, LDT lifetime, exception semantics, or host memory ownership into mantle or adapter. |
+| Non-goals | No DPMI BOP result, protected-mode implementation, selector/LDT mutation, adapter state, DOS transition, trace, or bx-core modification. |
+| Reference Baseline | T199 S10 DPMI matrix, T199 S11 shared capability plan, T199 S24 C2 closure, `dpmi32` source, and native CPU mode/descriptor owners. |
+| Files And ABI Surface | Source/owner/failure map under `docs/etc/research`; no runtime ABI or source implementation is admitted until native state and reset/lifetime ownership are proven. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace every reached historical INT15 dependency to its owner; compare it with the current no-device machine lifecycle and record an explicit implement/defer decision with no unsupported inference. |
-| Expected Markers | A complete C5 dependency and failure map identifies native prerequisites, historical host-only dependencies, and whether a bounded mantle capability is admissible. |
+| Verification | Trace every reached historical DPMI mode/descriptor dependency to its owner; compare it with native CPU state and current machine lifecycle, then record an explicit implement/defer decision with no unsupported inference. |
+| Expected Markers | A complete C4 dependency and failure map identifies native prerequisites, historical host-only dependencies, and whether a bounded mantle capability is admissible. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record source paths/hashes, actual dependency direction, disposition, and preserved exclusions. |
-| Stop Conditions | Any conclusion that C5 can be provided without a source-proven native vector, delivery, reset and device lifecycle; or any need for a product shell, callback/pointer, selector knowledge, adapter dependency, or new machine-device feature. |
-| Exit Criteria | C5 has a complete evidence-backed admit/defer decision; if deferred, no implementation is started. |
+| Stop Conditions | Any conclusion that C4 can be provided without source-proven native descriptor/mode/reset ownership; or any need for DPMI policy, a product shell, callback/pointer, selector knowledge, adapter dependency, host virtual-memory allocation, or a new machine-device feature. |
+| Exit Criteria | C4 has a complete evidence-backed admit/defer decision; if deferred, no implementation is started. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
-| Similar-Issue Sweep | Audit native exception delivery, PIC/keyboard/firmware startup and reset, IVT ownership, host callbacks, x87 IRQ13 evidence, and existing no-device exclusions together. |
+| Similar-Issue Sweep | Audit DPMI mode switches, LDT/descriptor lifetime, fault and exception paths, native CPU reset, memory ownership, source-derived failure behavior, and existing no-device exclusions together. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 
