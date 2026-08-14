@@ -41,6 +41,7 @@ int wmain(int argc, wchar_t **argv)
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     uint32_t include_mask = 0u, exclude_mask = 0u;
     int has_include = 0, has_exclude = 0;
+    int validate_only = 0;
     int index = 1;
     byob_profile_selection selection;
     byob_launch_plan_v2 launch;
@@ -54,11 +55,15 @@ int wmain(int argc, wchar_t **argv)
         else if (wcscmp(argv[index], L"--byob-root") == 0 && index + 1 < argc && !root)
             root = argv[index + 1], index += 2;
         else if (wcscmp(argv[index], L"--include-drives") == 0 && index + 1 < argc &&
-            !has_include && bx_ntvdm_host_drive_policy_v1_parse(argv[index + 1], &include_mask))
+            !has_include && argv[index + 1][0] != L'\0' &&
+            bx_ntvdm_host_drive_policy_v1_parse(argv[index + 1], &include_mask))
             has_include = 1, index += 2;
         else if (wcscmp(argv[index], L"--exclude-drives") == 0 && index + 1 < argc &&
-            !has_exclude && bx_ntvdm_host_drive_policy_v1_parse(argv[index + 1], &exclude_mask))
+            !has_exclude && argv[index + 1][0] != L'\0' &&
+            bx_ntvdm_host_drive_policy_v1_parse(argv[index + 1], &exclude_mask))
             has_exclude = 1, index += 2;
+        else if (wcscmp(argv[index], L"--validate-only") == 0 && !validate_only)
+            validate_only = 1, ++index;
         else goto usage;
     }
     if (!profile || !root || index >= argc) goto usage;
@@ -80,11 +85,17 @@ int wmain(int argc, wchar_t **argv)
     request.admitted_drive_mask = include_mask;
     request.excluded_drive_mask = exclude_mask;
     request.instruction_tick_budget = UINT64_C(1000000);
-    if (!bx_ntvdm_engine_request_v1_valid(&request) || !bx_ntvdm_engine_run_v1(&request, &result) ||
+    if (!bx_ntvdm_engine_request_v1_valid(&request)) return 3;
+    if (validate_only) {
+        wprintf(L"ntdos64-native: request include=%08x exclude=%08x\n",
+            request.admitted_drive_mask, request.excluded_drive_mask);
+        return 0;
+    }
+    if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         !bx_ntvdm_engine_result_v1_valid(&result)) return 1;
     wprintf(L"ntdos64-native: terminal=%u detail=%u\n", result.terminal_kind, result.detail_code);
     return result_exit(&result);
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--include-drives c,d] [--exclude-drives e] target [args...]\n");
+    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
     return 2;
 }

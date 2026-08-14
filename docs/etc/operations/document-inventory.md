@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1370 |
+| Documentation records | 1372 |
 | --- | --- |
-| Generated UTC | 2026-08-14T23:31:00Z |
+| Generated UTC | 2026-08-14T23:36:05Z |
 
 ## Entries
 
@@ -630,6 +630,7 @@ content-divergent entries.
 | etc/research/t200-s25-first-controlled-terminal-observation-001.md | indexed supporting material | 5c52ac91acf91d8aefe7d49efbb1bd74a4ee86904c7c14ced352b005cf05663e |
 | etc/research/t200-s26-command-initial-lifecycle-reconciliation-001.md | indexed supporting material | 7a587d1b057e3ba2f61d05155da64b4ba446c335a1e572af4473c21360b62d1a |
 | etc/research/t200-s27-native-cli-engine-handoff-001.md | indexed supporting material | 174c572be411bcf197cd5a4557d4f25286eb8950a563a9f1066d00bb254f178e |
+| etc/research/t200-s28-native-cli-admission-regression-001.md | indexed supporting material | f0188ef9bd14a1a66a18e33aebe053a2d6d82ba7df55ba6a9d804f04c328a926 |
 | etc/research/t200-s2-command-cmdinfo-native-frontier-diagnosis-001.md | indexed supporting material | c95451303bb329dafb9751ac2946e6a2ef4df551f26f71e4b78937b515bde848 |
 | etc/research/t200-s3-command-cmdinfo-observation-fixture-001.md | indexed supporting material | 03f56909a31a2e66f0cc70d5fc3c45710b4b31f6cb40d6cd4759fd5fbcf01f5d |
 | etc/research/t200-s4-command-cmdinfo-native-observation-001.md | indexed supporting material | 9a8a014afde187eb5060d38ec06a008daa0165bf6c00482b3f930f52cd59c028 |
@@ -1095,6 +1096,7 @@ content-divergent entries.
 | history/m0-t200-s25-closure-20260814.md | closed task history | c22a28d9a2ef26c05c71dd425788d6075aece7a746cf759e9ad7e77b398f3864 |
 | history/m0-t200-s26-closure-20260814.md | closed task history | 0a34e90cbe787b6ed9f7b9b7ead5d8e7c5bab7fe5c1b7accfb4b7a639443d1ee |
 | history/m0-t200-s27-closure-20260814.md | closed task history | 4a59a2c4508b70d8da23736e05d78e7b5500a880396120a157bf86088fdae877 |
+| history/m0-t200-s28-closure-20260814.md | closed task history | 7163c3ce6fb529ec2943dead3040e31cd3d73b3d1bbdab34ec7f05778be63c53 |
 | history/m0-t200-s2-closure-20260814.md | closed task history | baf6d29cb25f573dd111254dc6cb4688962f15f83154d4060338478486c14e45 |
 | history/m0-t200-s3-closure-20260814.md | closed task history | f8c9bc32ccda1118ca370e8e6bfd12f68f8f6b2f59334972fc7d50c80a609245 |
 | history/m0-t200-s4-closure-20260814.md | closed task history | 250aab6943b81332130973194efaf79ff110a34aaf58b758e90473e4f31c41d6 |
@@ -1384,7 +1386,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | cbf31247e9206cee83283dfc02f3b67f2f7e4c743aa3755ede22a3f6458507bd |
+| STATUS.md | principal control document | 03da890776df0c90c95bacd71cf4ed85c608ba39677adbe983d12f4b68bdb27f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

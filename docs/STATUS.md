@@ -112,6 +112,11 @@
 > engine, `bochs.exe`, or `NTDOS64_ADAPTER_*` environment transport is used.
 > See the [handoff evidence](etc/research/t200-s27-native-cli-engine-handoff-001.md).
 
+> **T200 S28 closure:** native CLI admission now rejects empty drive lists and
+> foreign targets before engine entry; a validation-only route proves that
+> conflicting include/exclude masks remain explicit for the snapshot layer's
+> exclusion precedence. See the [regression evidence](etc/research/t200-s28-native-cli-admission-regression-001.md).
+
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
 
