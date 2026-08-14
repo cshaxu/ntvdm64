@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S50.** Its governing brief is the active
+> **Current effective packet: M0 T200 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S50 -- global BOP package closure audit.**
+**Active: M0 T200 S1 -- native CLI integrated-execution baseline.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -13,30 +13,30 @@
 
 ## Active Packet
 
-> **T scope:** T199 globally audits every OpenNT BOP identity and maps current
-> implementation/evidence to complete owner packages: DEM; COMMAND; XMS; DPMI;
-> Redirector; Debugger; and bx-core/bx-mantle machine/BIOS. For each package,
-> mapping and disposition are admission work immediately followed by one
-> whole-package implementation and family regression. Trace then verifies the
-> completed package's native integration; it never creates one-service tasks.
+> **T scope:** T200 resumes native source-built CLI execution now that T199 has
+> closed the full BOP routing/disposition table. Trace is an integration
+> observation and repair-order input. A repair still belongs to its owning
+> component package; no trace hit by itself authorizes a one-service BOP patch.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S50, Ordinary Mode. |
-| Admission And Approval | S49 revalidated the machine/BIOS package. All planned owner packages now have individual current evidence; T199 advances to its one global closure audit. |
-| Objective | Verify every admitted OpenNT BOP identity has exactly one current owner/disposition, current source-built regression coverage, and no selected raw-`#UD` fallthrough. |
-| Non-goals | No native trace, no per-service implementation, no newly admitted capability, no Bochs selector knowledge, and no ambient NT host dependency. |
-| Reference Baseline | T199 S37/43/44/45/46/47/48/49 package evidence and the global ingress/provider/composition closure. |
-| Files And ABI Surface | Global BOP closure ledger, all-family regression fixture and closure history; typed contracts only. |
+| Identifier Mode | M0 T200 S1, Ordinary Mode. |
+| Admission And Approval | T199 is closed by its global BOP package audit. The owner instruction permits trace-led integrated repair only after that closure. |
+| Objective | Produce one fresh source-built CPU5 native CLI execution baseline with the completed BOP composition, classify its first controlled frontier by owner component, and record no implementation conclusion beyond the evidence. |
+| Non-goals | No automatic BOP implementation from a trace hit, no repeated build loop, no Bochs feature expansion, no ambient NT host dependency, and no claim of runnable CLI completion. |
+| Reference Baseline | T199 global BOP closure audit; current minimal bx-core/bx-mantle/bx-vdm composition; prior native observations retained as historical comparison only. |
+| Files And ABI Surface | Native run recipe, trace/evidence record and component-owner diagnosis only; no ABI change unless separately admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile every package ledger to ingress/provider bounds, then run fresh MSVC x64 `/MT` all-family regression through current bound composition. |
-| Expected Markers | One-owner/one-disposition ledger, no selected raw-`#UD` leak, and reproducible full-package evidence. |
+| Verification | One fresh source-built CPU5 native run with bounded instruction/watchdog policy; capture frontier and compare it with source/owner package mapping. |
+| Expected Markers | Reproducible run root, exact observed frontier, and an owner-package diagnosis or a documented evidence limit. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
-| Stop Conditions | Need for trace patch, Bochs semantic migration into bx-vdm, direct host hardware link, ambient host dependency, selector leakage or native trace. |
-| Exit Criteria | Global owner/disposition audit and full-family regression pass, or each uncovered identity is explicitly recorded as a remaining T199 failure. |
-| Original Owner Request | "全面实现跑通 BOP 表格的指令；要有全局观，避免添油战术。" |
-| Similar-Issue Sweep | Check selector count, sentinel/unknown behavior, direct composition paths, typed results and package evidence together. |
+| Stop Conditions | Need to add a BOP-specific patch without component admission, repeated non-informative trace runs, Bochs semantic migration into bx-vdm, ambient host dependency, or selector leakage. |
+| Exit Criteria | One native observation is source-built, reproducible and owner-classified; any repair is explicitly staged as the next component package. |
+| Original Owner Request | "只有所有 BOP 都闭合了，才真的开始用 trace 实跑的方法添油式修复。" |
+| Similar-Issue Sweep | Compare the first frontier with BOP ingress, CPU/exception, x87/IRQ, mapping and startup-plan owners before selecting repair work. |
+
+> **T199 closed:** the [global BOP audit](etc/research/t199-s50-global-bop-package-closure-audit-001.md) confirms every admitted family has one package owner/disposition and current source-built coverage. This does not claim unavailable/deferred host features are implemented; it authorizes T200's controlled native integration observation.
 
 > **T199 S49 closure:** machine/BIOS BOP ownership is current: profile memory
 > values and checked handoff remain bounded, while monitor and transition forms
