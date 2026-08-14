@@ -7,6 +7,8 @@
 #include "byob_image.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
+#include "bx_ntvdm_cpu_state_abi.h"
+#include "bx_ntvdm_guest_write_abi.h"
 
 #include <string.h>
 #include <windows.h>
@@ -16,7 +18,7 @@
 #define BX_NTVDM_COMPOSITION_ENV_LAUNCH_PLAN L"NTDOS64_ADAPTER_LAUNCH_PLAN"
 
 typedef struct bx_ntvdm_composition_runtime_v1 {
-    byob_image ntdos, command, target, terminal_quit;
+    byob_image ntio, ntdos, command, target, terminal_quit;
     bx_ntvdm_host_drive_snapshot_v1 drives;
     bx_ntvdm_host_volume_snapshot_v1 volumes;
     bx_ntvdm_boot_namespace_composition_v1 composition;
@@ -37,6 +39,7 @@ void bx_ntvdm_composition_runtime_v1_reset(void)
         bx_ntvdm_search_transaction_v1_release(
             &runtime.composition.plane.provider.search_transaction);
     }
+    byob_image_release(&runtime.ntio);
     byob_image_release(&runtime.ntdos);
     byob_image_release(&runtime.command);
     byob_image_release(&runtime.target);
@@ -63,6 +66,8 @@ static int install(const wchar_t *profile, const wchar_t *root,
         goto reject;
     if (!byob_launch_plan_v2_from_environment(&launch, launch_text) ||
         launch.slot_count != selection.declared_target_count ||
+        byob_image_load_exact(root, &selection.ntio, &runtime.ntio) !=
+            BYOB_IMAGE_OK ||
         byob_image_load_exact(root, &selection.ntdos, &runtime.ntdos) !=
             BYOB_IMAGE_OK ||
         byob_image_load_exact(root, &selection.command, &runtime.command) !=
@@ -151,4 +156,26 @@ int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
         !descriptor_to_wide(root_input, root_chars, root, 261u) ||
         !descriptor_to_wide(launch_input, launch_chars, launch, 257u)) return -1;
     return install(profile, root, launch, include_mask, exclude_mask);
+}
+
+int bx_ntvdm_composition_runtime_v1_prepare_startup_plan(
+    bx_ntvdm_startup_plan_v1 *plan, const uint8_t **payload,
+    uint64_t *payload_bytes)
+{
+    bx_ntvdm_cpu_state_v1 entry;
+    bx_ntvdm_guest_write_v1 write;
+    if (!runtime.installed || plan == 0 || payload == 0 || payload_bytes == 0 ||
+        runtime.ntio.bytes == 0 || runtime.ntio.byte_count == 0u) return 0;
+    /* NTIO v0's entry geometry is retained from the original startup-session
+     * contract. The direct composition owns the profile-selected image. */
+    bx_ntvdm_cpu_state_v1_initialize(&entry, BX_NTVDM_CPU_EXECUTION_REAL);
+    entry.cs = 0x70u;
+    bx_ntvdm_guest_write_v1_initialize(&write, 0x700u,
+        (uint64_t)runtime.ntio.byte_count, 0u);
+    bx_ntvdm_startup_plan_v1_initialize(plan, &write, &entry, 0x714u, 4u);
+    if (!bx_ntvdm_startup_plan_v1_preflight(plan, 0x100000u,
+        (uint64_t)runtime.ntio.byte_count)) return 0;
+    *payload = runtime.ntio.bytes;
+    *payload_bytes = (uint64_t)runtime.ntio.byte_count;
+    return 1;
 }

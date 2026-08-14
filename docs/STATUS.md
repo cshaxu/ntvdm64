@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S16.** Its governing brief is the active
+> **Current effective packet: M0 T200 S17.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S16 -- direct composition startup-plan provider.**
+**Active: M0 T200 S17 -- product preentry source/ABI map.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S16, Ordinary Mode. |
-| Admission And Approval | S15 source-mapped product lifecycle and identified the direct composition startup-plan provider as its first missing boundary. |
-| Objective | Define and test a direct-composition startup-plan/payload provider with explicit ownership and release-safe lifecycle contract. |
-| Non-goals | No machine initialization, CPU loop, guest run, CLI process-status mapping, old-shell removal, BOP patch, or Bochs change. |
-| Reference Baseline | T200 S15 lifecycle map, S14 direct composition closure, existing pointer-free startup-plan ABI. |
-| Files And ABI Surface | bx-vdm direct composition startup provider; copied startup-plan/payload view; session cleanup contract; focused x64 `/MT` fixture. |
+| Identifier Mode | M0 T200 S17, Ordinary Mode. |
+| Admission And Approval | S16 closed the direct composition plan/payload boundary while retaining the product-preentry gap. |
+| Objective | Source-map the product NTIO preentry recipe and define the future bx-mantle mechanical publication ABI. |
+| Non-goals | No machine initialization, RAM publication, CPU loop, guest run, CLI process-status mapping, BOP patch, or Bochs change. |
+| Reference Baseline | T200 S15 lifecycle map and S16 direct startup-plan closure. |
+| Files And ABI Surface | Source/evidence map and a proposed typed mechanical publication contract only; no implementation is admitted unless the map closes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused x64 `/MT` fixture proves valid source-built direct composition produces a plan/payload, invalid use is rejected, and cleanup prevents stale reuse. |
-| Expected Markers | Provider never calls environment startup paths or finite-run APIs; plan remains pointer-free and payload lifetime is explicit; no runtime-success claim. |
+| Verification | Source/ABI map distinguishes product evidence from fixture-only IVT/BDA setup and names exact future mechanical inputs/results. |
+| Expected Markers | No environment startup or finite-run API becomes product behavior; no fixture byte is silently promoted to a product default. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source-derived plan geometry, payload ownership, rejected routes, and release order; do not call guest startup/COMMAND closed. |
-| Stop Conditions | Any machine initialization, CPU loop, guest execution, environment startup call, finite-run use, or raw object/Bochs type crossing a C boundary. |
-| Exit Criteria | Source-built direct provider/test closure documents plan and payload lifetime plus cleanup behavior. |
+| Reporting Requirements | Record source provenance, accepted/rejected recipe elements, ABI ownership, and unresolved evidence; do not call guest startup/COMMAND closed. |
+| Stop Conditions | Any implementation that publishes RAM, initializes a machine, executes guest code, uses environment startup/finite-run, or crosses raw Bochs types. |
+| Exit Criteria | The next mechanical implementation is precisely admitted with typed inputs or explicitly blocked by missing source evidence. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect old startup sessions, direct composition images, preentry provenance, startup-plan validation, and native XMS resource release. |
+| Similar-Issue Sweep | Inspect OpenNT startup paths, NTIO entry provenance, fixture preentry bytes, startup-plan ABI, and minimal-machine reset assumptions. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -62,6 +62,10 @@
 > **T200 S15 closure:** the native engine lifecycle map rejects the old
 > product startup hook and fixture runner, and admits a direct-composition
 > startup-plan provider.  See the [lifecycle map](etc/research/t200-s15-native-engine-machine-lifecycle-map-001.md).
+
+> **T200 S16 closure:** direct composition owns its profile-selected NTIO image
+> and exposes a pointer-free startup plan whose payload is invalidated by
+> reset; see the [startup-plan closure](etc/research/t200-s16-direct-composition-startup-plan-closure-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
