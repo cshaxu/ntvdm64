@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S27.** Its governing brief is the active
+> **Current effective packet: M0 T199 S28.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S27 -- C4 protected-mode state owner/ABI admission.**
+**Active: M0 T199 S28 -- XMS/DPMI whole-package disposition reconciliation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S27, Ordinary Mode. |
-| Admission And Approval | T199 S11 orders C4 after C1/C2 and alongside the C3/C5 decisions. The owner-authorized T199 whole-package plan requires source/ABI/failure mapping before any DPMI protected-mode implementation decision. |
-| Objective | Establish whether a bounded native CPU mode/descriptor request can be admitted without moving DPMI policy, LDT lifetime, exception semantics, or host memory ownership into mantle or adapter. |
-| Non-goals | No DPMI BOP result, protected-mode implementation, selector/LDT mutation, adapter state, DOS transition, trace, or bx-core modification. |
-| Reference Baseline | T199 S10 DPMI matrix, T199 S11 shared capability plan, T199 S24 C2 closure, `dpmi32` source, and native CPU mode/descriptor owners. |
-| Files And ABI Surface | Source/owner/failure map under `docs/etc/research`; no runtime ABI or source implementation is admitted until native state and reset/lifetime ownership are proven. |
+| Identifier Mode | M0 T199 S28, Ordinary Mode. |
+| Admission And Approval | T199 S8--S11 and S21--S27 now provide the complete XMS/DPMI source and machine-capability record. The owner-authorized whole-package strategy requires one reconciled provider disposition before any family regression or trace. |
+| Objective | Reconcile every XMS/DPMI identity, current facade behavior and native capability dependency into one whole-package disposition and regression plan. |
+| Non-goals | No new BOP implementation, per-service trace patch, fabricated failure result, capability implementation, adapter policy, or bx-core modification. |
+| Reference Baseline | T199 S8--S11, S21--S27, current `bx_ntvdm_xms_dpmi_plane_v1` source/tests, and all XMS/DPMI original matrices. |
+| Files And ABI Surface | Package disposition/reconciliation record and focused existing-facade regression only; no new runtime ABI is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace every reached historical DPMI mode/descriptor dependency to its owner; compare it with native CPU state and current machine lifecycle, then record an explicit implement/defer decision with no unsupported inference. |
-| Expected Markers | A complete C4 dependency and failure map identifies native prerequisites, historical host-only dependencies, and whether a bounded mantle capability is admissible. |
+| Verification | Enumerate every `52:00..0B` and `53:00..18` identity against actual facade classification and original failure behavior; prove no member bypasses the package disposition. |
+| Expected Markers | One complete package table distinguishes C1/C2-ready translation prerequisites from C3/C4/C5/C6 blocked services and preserves `53:12` unavailable. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source paths/hashes, actual dependency direction, disposition, and preserved exclusions. |
-| Stop Conditions | Any conclusion that C4 can be provided without source-proven native descriptor/mode/reset ownership; or any need for DPMI policy, a product shell, callback/pointer, selector knowledge, adapter dependency, host virtual-memory allocation, or a new machine-device feature. |
-| Exit Criteria | C4 has a complete evidence-backed admit/defer decision; if deferred, no implementation is started. |
+| Reporting Requirements | Record every identity's exact disposition, regression output, original failure constraints, and preserved exclusions. |
+| Stop Conditions | Any member requiring a new unadmitted machine capability, a source-derived per-service success result, selector/service logic outside bx-vdm, or trace-led scope change. |
+| Exit Criteria | All 37 package identities have one reconciled disposition and focused regression; no false claim that C1/C2 alone closes either provider. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
-| Similar-Issue Sweep | Audit DPMI mode switches, LDT/descriptor lifetime, fault and exception paths, native CPU reset, memory ownership, source-derived failure behavior, and existing no-device exclusions together. |
+| Similar-Issue Sweep | Audit ingress routing, original bounds/failure behavior, facade default results, all C1--C6 dependencies, and DPMI VCD special unavailability together. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 
@@ -122,6 +122,11 @@
 > and protected-mode operations are a coupled LDT/session component, not a
 > safely exportable Bochs CPU API; see [S27
 > map](etc/research/t199-s27-c4-protected-mode-owner-abi-failure-map-001.md).
+
+> **T199 S28 completion:** all 37 XMS/DPMI callable identities now have one
+> reconciled whole-package disposition (36 deferred and `53:12` unavailable),
+> verified by a source-built x64 facade regression; see [S28
+> reconciliation](etc/research/t199-s28-xms-dpmi-whole-package-reconciliation-001.md).
 
 ## Current Technical Baseline
 
