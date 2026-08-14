@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S83.** Its governing brief is the active
+> **Current effective packet: M0 T198 S84.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S83 -- establish the lifecycle ordering of SpcKbd's patched
-native-INT10 pointer and BOP ingress.**
+**Active: M0 T198 S84 -- audit why the current passive observer does not see
+SpcKbd's BOP-`5F` before the source-owned IVT write.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ native-INT10 pointer and BOP ingress.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S83, Ordinary Mode. |
-| Admission And Approval | S82 proves the C000 transfer is a dynamically patched SpcKbd `host_int10` far pointer; see `etc/research/t198-s82-spckbd-native-int10-provenance-001.md`. |
-| Objective | Establish whether the `host_int10` operand is patched before/after generic bridge binding and canonical BOP ingress, using only checked read-only observation and source-owned lifecycle evidence. |
+| Identifier Mode | M0 T198 S84, Ordinary Mode. |
+| Admission And Approval | S83 proves that the `host_int10` operand changes only after the first bound canonical `50:11` ingress; see `etc/research/t198-s83-spckbd-patch-lifecycle-001.md`. |
+| Objective | Determine whether BOP `5F` is consumed by existing common routing before the passive observer, or whether the observed SpcKbd IVT write has another source-owned continuation. |
 | Non-goals | No guest-memory write, BOP/provider implementation, `use_host_int10` write, CLI profile selection, ROM/device import, memory mapping change, Bochs core/mantle edit, or forced control-flow change. |
-| Reference Baseline | S81 passive observation; S82 image/map proof; current generic-UD bridge bind lifecycle; mantle checked ordinary-RAM read mechanics; OpenNT `spckbd.asm`. |
-| Files And ABI Surface | A default-off adapter observation record may use existing fixed-width checked read actions. No production BOP/mantle/core ABI change. |
+| Reference Baseline | S80 display chain; S81 passive observation; S82/S83 pointer provenance and bracket; current test-bridge/composition routing; OpenNT `spckbd.asm` and `nt_bop.c`. |
+| Files And ABI Surface | Initially read-only source and ordering audit only. Any new observer must be default-off, use existing copied event/checked-read mechanics, and requires Status re-admission if it adds a new range or changes routing. No production BOP/mantle/core ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Review binding order and source build membership; if safely admitted, source-build a bounded observer that reads only the declared four-byte range before/at first relevant event; run documentation governance and diff checks. |
-| Expected Markers | A precise lifecycle ordering record, state delta/no-delta result, and explicit not-observable outcome if the needed pre-bind instant cannot be captured without a new mechanical seam. |
+| Verification | Review `bx_ntvdm_boot_namespace_composition_v1_handle`, registry/plane disposition for `5F`, and the test-bridge ordering; run focused static boundary checks plus documentation governance and diff checks. |
+| Expected Markers | A source-backed disposition of the observer gap: pre-consumed, unreachable, alternate continuation, or explicitly unproven. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record all read addresses/range validation, bind/event ordering, before/after values, source references and any unobservable period. |
-| Stop Conditions | Observation requires guest writes, a new mechanical core/mantle seam, guessed range, new ROM input, BOP/provider behavior, device admission or CLI-profile selection. Stop and retain the lifecycle gap. |
-| Exit Criteria | Source-backed patch-lifecycle disposition or evidence-backed inability to observe it under the existing contract, with no runtime semantic change. |
+| Reporting Requirements | Record selector ownership, handler/observer ordering, evidence for every excluded route, and any unobservable period. |
+| Stop Conditions | The audit requires guest writes, a new mechanical core/mantle seam, guessed range, new ROM input, BOP/provider behavior, device admission or CLI-profile selection. Stop and retain the lifecycle gap. |
+| Exit Criteria | Source-backed BOP-`5F` observer-gap disposition or evidence-backed inability under the existing contract, with no runtime semantic change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover bridge bind/unbind ordering, before-first-event state, malformed copied events, checked read range failures, non-BOP #UD and BOP `5F`/`42` ordering. |
+| Similar-Issue Sweep | Cover bridge pre/post-delegate ordering, registry and plane decline paths, malformed copied events, BOP `5F` versus nearby `5E`/`42`, and historical x86/RISC split. |
 
 ## Current Technical Baseline
 
@@ -403,9 +403,10 @@ native-INT10 pointer and BOP ingress.**
   initialization path, without forcing a mode byte or adding a provider. See
   [S81 passive observation](etc/research/t198-s81-bop5f-passive-observation-001.md).
 - M0 T198 S82 proves that `073B:0939` is a dynamically patched SpcKbd native
-  INT10 far jump, not random Bochs control flow. S83 now constrains the next
-  step to passive patch-lifecycle observation. See [S82 provenance
-  audit](etc/research/t198-s82-spckbd-native-int10-provenance-001.md).
+  INT10 far jump, not random Bochs control flow. M0 T198 S83 then proves the
+  pointer is still zero at first bound `50:11` and changes only later. S84 now
+  audits the remaining absent-BOP-`5F` observer gap. See [S83 lifecycle
+  record](etc/research/t198-s83-spckbd-patch-lifecycle-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory

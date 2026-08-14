@@ -1,5 +1,6 @@
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx-mantle/bx_ntvdm_instruction_history.h"
+#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 
 static unsigned observed_5011;
 static unsigned observed_503b_resume;
@@ -67,11 +68,48 @@ static unsigned observed_first_generic_cs_transition_valid;
 static struct bx_ntvdm_instruction_history_transition_v1 observed_first_generic_cs_transition;
 static unsigned observed_first_generic_cs_provenance_valid;
 static struct bx_ntvdm_instruction_history_provenance_v1 observed_first_generic_cs_provenance;
+static unsigned observed_first_canonical_bop;
+static unsigned observed_first_canonical_selector;
+static unsigned observed_first_canonical_service;
+static unsigned observed_first_canonical_host_int10_read;
+static unsigned char observed_first_canonical_host_int10[4];
+
+/* Test-only T198 S83 observation.  Physical 0x7ce9 is the source-mapped
+ * resident SpcKbd POPF/FAR-JMP instruction start; the four-byte host_int10
+ * far-pointer operand follows its EA opcode at 0x7ceb.  This existing mantle
+ * READ action runs before composition consumes a canonical BOP and changes no
+ * guest state, event, or outcome. */
+static void observe_first_canonical_bop_host_int10(
+    const struct bx_ntvdm_generic_ud_event_v1 *event)
+{
+    struct bx_ntvdm_mechanical_action_v1 action;
+
+    if (event == 0 || observed_first_canonical_bop || event->window_bytes < 4u ||
+        event->window[0] != 0xc4u || event->window[1] != 0xc4u) return;
+    observed_first_canonical_bop = 1u;
+    observed_first_canonical_selector = event->window[2];
+    observed_first_canonical_service = event->window[3];
+    bx_ntvdm_mechanical_action_v1_clear(&action);
+    action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_READ;
+    action.action_id = 0x53383301u;
+    action.range_count = 1u;
+    action.payload_bytes = sizeof(observed_first_canonical_host_int10);
+    action.ranges[0].physical_address = 0x7cebu;
+    action.ranges[0].byte_count = sizeof(observed_first_canonical_host_int10);
+    action.ranges[0].payload_offset = 0u;
+    if (bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) {
+        unsigned index;
+        observed_first_canonical_host_int10_read = 1u;
+        for (index = 0; index < sizeof(observed_first_canonical_host_int10); ++index)
+            observed_first_canonical_host_int10[index] = action.payload[index];
+    }
+}
 
 int bx_ntvdm_mantle_generic_ud_bridge_v1(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
+    observe_first_canonical_bop_host_int10(event);
     if (event != 0 && outcome != 0 && !observed_first_generic_ud &&
         !(event->window_bytes >= 2u && event->window[0] == 0xc4u &&
           event->window[1] == 0xc4u)) {
@@ -263,6 +301,11 @@ unsigned t198_s23_native_ntio_boundary_observed_first_generic_cs_transition_vali
 int t198_s23_native_ntio_boundary_copy_first_generic_cs_transition(struct bx_ntvdm_instruction_history_transition_v1 *value) { if (!value || !observed_first_generic_cs_transition_valid) return 0; *value = observed_first_generic_cs_transition; return 1; }
 unsigned t198_s23_native_ntio_boundary_observed_first_generic_cs_provenance_valid(void) { return observed_first_generic_cs_provenance_valid; }
 int t198_s23_native_ntio_boundary_copy_first_generic_cs_provenance(struct bx_ntvdm_instruction_history_provenance_v1 *value) { if (!value || !observed_first_generic_cs_provenance_valid) return 0; *value = observed_first_generic_cs_provenance; return 1; }
+unsigned t198_s23_native_ntio_boundary_observed_first_canonical_bop(void) { return observed_first_canonical_bop; }
+unsigned t198_s23_native_ntio_boundary_observed_first_canonical_selector(void) { return observed_first_canonical_selector; }
+unsigned t198_s23_native_ntio_boundary_observed_first_canonical_service(void) { return observed_first_canonical_service; }
+unsigned t198_s23_native_ntio_boundary_observed_first_canonical_host_int10_read(void) { return observed_first_canonical_host_int10_read; }
+unsigned t198_s23_native_ntio_boundary_observed_first_canonical_host_int10(unsigned index) { return index < sizeof(observed_first_canonical_host_int10) ? observed_first_canonical_host_int10[index] : 0u; }
 unsigned t198_s23_native_ntio_boundary_observed_stop(void) { return observed_stop; }
 unsigned t198_s23_native_ntio_boundary_observed_selector(void) { return observed_selector; }
 unsigned t198_s23_native_ntio_boundary_observed_service(void) { return observed_service; }

@@ -50,9 +50,10 @@ historical guest-vector handoff, not an unexplained CPU transfer.
 ## Limit
 
 S81 proves that the current observable bridge did not record canonical BOP
-`5F`; S82 does not prove whether that BOP executed before the bridge was bound,
-was bypassed by an unobserved alternate continuation, or whether another
-writer supplied the same `host_int10` value. No retained symbol listing names
+`5F`. S83 supersedes the pre-bind uncertainty: the pointer is still zero at
+the first bound canonical ingress. The remaining question is whether `5F` was
+consumed before the passive post-composition observer or an alternate source
+continuation performed the same IVT write. No retained symbol listing names
 the local `host_int10` offset, so the correlation is source/range/byte based,
 not a fabricated symbol address.
 
