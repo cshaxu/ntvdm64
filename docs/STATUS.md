@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S115.** Its governing brief is the active
+> **Current effective packet: M0 T198 S116.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S115 -- source-map the remaining declined `50:42` call after
-the accepted fast-read result.**
+**Active: M0 T198 S116 -- add a bounded test-only `50:42` attempt ledger before
+admitting another observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ the accepted fast-read result.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S115, Ordinary Mode. |
-| Admission And Approval | S114's sole native run proves an accepted `50:42` resume at `0032:6355` with AX=`000Dh` and CF clear, then reaches BOP `5F`; its retained fallback marker proves a separate `50:42` is declined. This separates provider success from the remaining unowned call. |
-| Objective | Source-map the second/fallback fast-read call using original NTDOS caller context, profile namespace lifecycle and current composition eligibility. Decide whether it is a distinct resource, an intentionally unavailable call or a provider-state defect. |
-| Non-goals | No guest run, retry, provider/ABI change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S114 post-commit/fallback split, S109 contract, original `handle.asm`, profile namespace/provider source and existing exact guest input evidence. |
-| Files And ABI Surface | Evidence and task records only; no runtime source change. |
+| Identifier Mode | M0 T198 S116, Ordinary Mode. |
+| Admission And Approval | S115 identifies the accepted AX=`000Dh` read as finite CONFIG.SYS, but the existing fallback observer retains only first declined fields and no ordinal/reason. Current source cannot distinguish an unopened/closed namespace state from a distinct file call. One bounded test-only ledger is the minimum evidence seam before another run. |
+| Objective | Add a fixed-capacity, default-off fixture ledger for canonical `50:42` attempts. Each entry records only copied event fields, composition accepted/declined state and typed result metadata; it must preserve ordering, not read guest bytes/state, retain pointers or affect execution. Add focused capacity/order tests and compile without guest run. |
+| Non-goals | No guest run/retry, provider/ABI behavior change, unbounded logging, guest memory reads, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
+| Reference Baseline | S115 source map, S113 post-commit marker, existing fixed instruction-history/fixture observation patterns. |
+| Files And ABI Surface | Test fixture bridge/fixture observation only; no production adapter or Bochs ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/identity table distinguishes the accepted 13-byte call from the fallback call, with an owner/disposition and no inferred file access; documentation governance and diff checks. |
-| Expected Markers | One bounded next task is selected only if a missing capability or source-derived contract is proven. |
+| Verification | Focused ledger test verifies capacity clamp, chronological accepted/declined records, malformed/non-`50:42` exclusion and no mutation; fixture source compiles under locked CPU5/x64 configuration; no guest run. |
+| Expected Markers | A fixed maximum attempt count and opaque copied fields make the next one-run source attribution possible without semantic instrumentation. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record call identity evidence, file/namespace ownership, rejected interpretations and confidence. |
-| Stop Conditions | Any guest execution, provider/ABI change, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. Stop and retain the map. |
-| Exit Criteria | The fallback call has one source-grounded disposition, or a minimal non-semantic observation requirement is recorded for a later task. |
+| Reporting Requirements | Record capacity, entry fields, ordering point, disabled behavior, negative cases, source-build evidence and limits. |
+| Stop Conditions | Any guest execution, provider/ABI or semantic change, guest-memory read, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. Stop and retain the ledger. |
+| Exit Criteria | A source-built bounded attempt ledger is closed by focused and compile evidence, leaving one later run only if user-visible source attribution remains needed. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
