@@ -422,7 +422,12 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     if (
         !bx_ntvdm_boot_namespace_plane_v1_dispatch(&active->plane, &ingress,
             &selection, &boundary, &cpu, &window, &action, &result)) return 0;
+    /* A zero-byte read is a normal typed CPU result: it has no guest RAM
+     * transfer.  Do not manufacture an empty mantle WRITE, whose mechanical
+     * action contract intentionally requires a real range. */
     if (action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_NONE &&
+        !(action.kind == BX_NTVDM_MECHANICAL_ACTION_V1_WRITE &&
+          action.range_count == 0u && action.payload_bytes == 0u) &&
         !bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) return 0;
     if (action.kind == BX_NTVDM_MECHANICAL_ACTION_V1_READ) {
         if (!bx_ntvdm_boot_namespace_plane_v1_complete_read(&active->plane,

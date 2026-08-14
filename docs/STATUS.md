@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S122.** Its governing brief is the active
+> **Current effective packet: M0 T198 S123.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S122 -- make one replacement native lifecycle observation.**
+**Active: M0 T198 S123 -- repair and verify the common zero-byte result-only transaction seam.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S122, Ordinary Mode. |
-| Admission And Approval | S121's fixture-only lifecycle ledger source/tests compile without a guest run. One exact-input replacement observation is now needed to resolve the sole remaining `4E534005` lifecycle ambiguity. |
-| Objective | Rebuild and execute exactly one registered native fixture. Export every DEM lifecycle ledger entry and classify the declined fast-read against the copied namespace state. |
-| Non-goals | No retry, provider/ABI/result-routing change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S119 ledger, S120 source map and S121 fixture-only lifecycle ledger. |
-| Files And ABI Surface | Registered native derivative and evidence only. |
+| Identifier Mode | M0 T198 S123, Ordinary Mode. |
+| Admission And Approval | S122 source-proves a single common transaction-mechanics failure: an empty result-only bulk transaction is sent as a mantle WRITE. |
+| Objective | Preserve the typed resume result while skipping only range-less zero-byte mechanical writes; focused-test/compile the composition, then admit one regression only if needed. |
+| Non-goals | No BOP selector/provider change, guest-byte copy, host capability, Bochs core/mantle edit, ROM/VGA/device import or broad rebuild. |
+| Reference Baseline | S122 lifecycle observation and `t198-s123-zero-byte-result-transaction-fix-001.md`. |
+| Files And ABI Surface | `src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c`, its focused tests and registered native derivative only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One provenance-locked `runs=1` record exports ordered `50:12/02/42` entries and state of the declined `4E534005` attempt. |
-| Expected Markers | No entry outside the three DEM services, and no changed provider result. |
+| Verification | Focused contract test proves zero-byte result resumes without a mantle write; CPU5/x64 compile passes. |
+| Expected Markers | `AX=0`, CF clear, normal BOP resume; no guest RAM range or payload. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record provenance, run count, ordered entries and source-grounded disposition. |
-| Stop Conditions | A second run, provider/ABI/result-routing change, guest path/payload capture, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. |
-| Exit Criteria | The declined token is classified from ordered lifecycle state or reduced to one exact implementation question. |
+| Reporting Requirements | Record seam cause, exact no-write rule and focused verification. |
+| Stop Conditions | Selector/provider/ABI expansion, any host or Bochs change, or an unadmitted guest run. |
+| Exit Criteria | The empty AUTOEXEC fast-read resumes through the shared transaction contract, or a single exact remaining defect is evidenced. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
