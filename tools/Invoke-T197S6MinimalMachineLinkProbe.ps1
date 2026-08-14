@@ -6,7 +6,8 @@ param(
     [ValidateSet('x64', 'x86')]
     [string]$HostArchitecture = 'x64',
     [switch]$InstructionHistory,
-    [switch]$RunLifecycle
+    [switch]$RunLifecycle,
+    [switch]$A20CapabilityFixture
 )
 
 Set-StrictMode -Version Latest
@@ -42,6 +43,7 @@ $config = Join-Path $build 'config.h'
 $sources = @(
     @{ Name = 'minimal_sim'; Path = 'src\bx-mantle\bx_ntvdm_minimal_sim.cc'; ExtraIncludes = @() },
     @{ Name = 'minimal_machine'; Path = 'src\bx-mantle\bx_ntvdm_minimal_machine.cc'; ExtraIncludes = @('src\bochs\iodev') },
+    @{ Name = 'a20_capability'; Path = 'src\bx-mantle\bx_ntvdm_a20_capability_v1.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
     @{ Name = 'minimal_port_space'; Path = 'src\bx-mantle\minimal_port_space.cc'; ExtraIncludes = @('src\bochs\iodev') },
     @{ Name = 'minimal_product_shell'; Path = 'src\bx-mantle\minimal_product_shell.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') },
     @{ Name = 'paramtree'; Path = 'src\bx-mantle\paramtree.cc'; ExtraIncludes = @() },
@@ -122,6 +124,38 @@ $compileExit = $LASTEXITCODE
 if ($compileExit -ne 0) { throw "MSVC compilation failed for the declared minimal native object set: $compileExit" }
 
 $probe = Join-Path $build 'minimal_machine_link_probe.cc'
+if ($A20CapabilityFixture) {
+@'
+#include "bochs.h"
+#include "bx-mantle/bx_ntvdm_minimal_machine.h"
+#include "bx-mantle/bx_ntvdm_a20_capability_v1.h"
+
+static int call(unsigned op, unsigned value, unsigned expected_status, unsigned expected_enabled)
+{
+  bx_ntvdm_a20_capability_request_v1 request = { BX_NTVDM_A20_CAPABILITY_V1_VERSION, op, value };
+  bx_ntvdm_a20_capability_result_v1 result;
+  bx_ntvdm_a20_capability_v1_dispatch(&request, &result);
+  return result.status == expected_status && result.enabled == expected_enabled;
+}
+
+int main()
+{
+  bx_ntvdm_a20_capability_request_v1 request = { BX_NTVDM_A20_CAPABILITY_V1_VERSION, BX_NTVDM_A20_CAPABILITY_QUERY, 0 };
+  bx_ntvdm_a20_capability_result_v1 result;
+  bx_ntvdm_a20_capability_v1_dispatch(&request, &result);
+  if (result.status != BX_NTVDM_A20_CAPABILITY_REJECTED_LIFECYCLE) return 1;
+  bx_ntvdm_minimal_machine_c machine;
+  if (machine.initialize(0x100000, 0x100000) != BX_NTVDM_MINIMAL_MACHINE_OK) return 2;
+  if (!call(BX_NTVDM_A20_CAPABILITY_QUERY, 0, BX_NTVDM_A20_CAPABILITY_OK, 1)) return 3;
+  if (!call(BX_NTVDM_A20_CAPABILITY_SET, 0, BX_NTVDM_A20_CAPABILITY_OK, 0)) return 4;
+  if (!call(BX_NTVDM_A20_CAPABILITY_SET, 2, BX_NTVDM_A20_CAPABILITY_REJECTED_VALUE, 0)) return 5;
+  if (!call(BX_NTVDM_A20_CAPABILITY_SET, 1, BX_NTVDM_A20_CAPABILITY_OK, 1)) return 6;
+  if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) return 7;
+  bx_ntvdm_a20_capability_v1_dispatch(&request, &result);
+  return result.status == BX_NTVDM_A20_CAPABILITY_REJECTED_LIFECYCLE ? 0 : 8;
+}
+'@ | Set-Content -LiteralPath $probe -Encoding ascii
+} else {
 @'
 #include "bochs.h"
 #include "bx-mantle/bx_ntvdm_minimal_machine.h"
@@ -134,6 +168,7 @@ int main()
   return (int) machine.cleanup();
 }
 '@ | Set-Content -LiteralPath $probe -Encoding ascii
+}
 $probeObject = Join-Path $build 'minimal_machine_link_probe.obj'
 $probeCompile = 'call "' + $vsDevCmd + '" -arch=' + $HostArchitecture + ' -host_arch=x64 >nul && ' + (New-MsvcCompileCommand $probe $probeObject @())
 & cmd.exe /d /s /c $probeCompile
@@ -172,6 +207,7 @@ $record = [ordered]@{
     profile = 'CPU5/Pentium-MMX, non-x86-64'
     wholeCpu5Core = [bool]$WholeCpu5Core
     instructionHistory = [bool]$InstructionHistory
+    a20CapabilityFixture = [bool]$A20CapabilityFixture
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
     configuration = 'tools/t197-s6-cpu5-mantle-config-projection.json'
     sources = @($sources | ForEach-Object { $_.Path })
