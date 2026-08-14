@@ -9,8 +9,9 @@ finite-composition source set explicitly.
 
 The manifest distinguishes three facts that must not be conflated:
 
-1. the source-built fixture's actual root is
-   `bx_ntvdm_boot_namespace_composition_v1`;
+1. the installed CLI composition root is
+   `bx_ntvdm_composition_runtime_v1`, which binds both the boot-namespace
+   session and the native XMS/DPMI session;
 2. compilation membership does not activate a BOP route; and
 3. the DPB provider, `adapter_runtime`, startup transaction bridge and host
    namespace are detached from that finite root.
@@ -27,7 +28,7 @@ observed-hard-error-resume=1 observed-first-generic-ud=0
 observed-stop=1 next=50:46 terminal=1:9346:758a
 ```
 
-No object from `bx_ntvdm_adapter_runtime.c`,
+At the time of this older finite witness, no object from `bx_ntvdm_adapter_runtime.c`,
 `bx_ntvdm_startup_transaction_bridge.c`,
 `bx_ntvdm_host_namespace.c`, or the detached DPB provider is linked.
 

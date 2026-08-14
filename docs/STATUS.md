@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S37.** Its governing brief is the active
+> **Current effective packet: M0 T199 S38.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S37 -- DEM whole-package provider implementation.**
+**Active: M0 T199 S38 -- global BOP package coverage audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,31 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S37, Ordinary Mode. |
-| Admission And Approval | The owner directs that T199 implement all BOP identities by complete OpenNT component packages.  DEM already has its source/ABI/failure map (S2/S3), facade (S4) and one session route (S30); this S replaces remaining placeholder dispositions with a source-governed DEM provider package. |
-| Objective | Implement the complete DEM `50:xx` package as one provider family: namespace/search, session lifecycle, device/drive state, DOS load/state, error/lock, VDD/notification and original no-op paths.  Every callable identity must reach an original OpenNT provider, a contained-capability adaptation of one, a source-derived rehost, or that identity's source-proven terminal failure; no callable identity may retain a generic `package-deferred` placeholder. |
-| Non-goals | No trace-led service selection, no individual-service patch packet, no direct execution of historical `nt_bop.c`, no change to Bochs BOP recognition, no DOS/BIOS semantics in bx-vdm, and no ambient NT-host dependency.  A native trace is not an implementation technique; it is run once only after the complete package and its family regression are ready. |
-| Reference Baseline | S2/S3/S4/S30 DEM records; OpenNT DEM/NTVDM source; common ingress and provider registry; S36's native #UD integration evidence; mantle C1/C2 boundaries. |
-| Files And ABI Surface | DEM package session/provider translations, contained CLI capability interfaces where source requires them, common ingress registration, all-family source-built regression, and a source/failure record.  All Bochs/mantle calls remain behind registered typed ABI. |
+| Identifier Mode | M0 T199 S38, Ordinary Mode. |
+| Admission And Approval | The owner directs T199 to implement and assess all BOP identities by complete OpenNT component packages, not trace-selected endpoints.  S37 is closed; this S is the final global owner/selector/package coverage audit within the already admitted T199 scope. |
+| Objective | Establish one auditable global map from each admitted BOP selector/service form to its original OpenNT owner, bx-vdm package provider disposition, source-built regression and native-composition membership.  Correct any package-level owner/manifest omission discovered by that map; do not create per-endpoint work. |
+| Non-goals | No trace-led service selection, no individual-service patch packet, no direct execution of historical `nt_bop.c`, no change to Bochs BOP recognition, no DOS/BIOS semantics in bx-vdm, and no ambient NT-host dependency.  A trace stop is evidence only and cannot expand this S. |
+| Reference Baseline | Completed T199 package records S5-S37; common ingress and provider registry; S37 pre-trace ledger/r94 observation; mantle C1/C2 boundaries. |
+| Files And ABI Surface | Global source/owner/disposition ledger, ingress and package-facade audit, current composition manifest and its source-built closure.  All Bochs/mantle calls remain behind registered typed ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | First prove every `50:xx` callable identity through source-built family regression, including lifecycle, success, source-proven failure and negative boundary cases.  Then run one bounded native trace only as package integration verification; it may report a machine/guest frontier but cannot admit a new one-service task. |
-| Expected Markers | A reproducible DEM package build and family regression with no generic deferred route, followed by one explicitly bounded integration trace and a disposition report for any reached external prerequisite. |
+| Verification | Mechanically expand each selector/service inventory from its original source and compare it with ingress/facade/provider ownership; verify no duplicate/missing global identity, no selector knowledge in Bochs, and a source-built current composition closure. |
+| Expected Markers | A global exact-coverage ledger, explicit package-level unavailable/deferred dispositions where source and profile require them, and a reproducible MSVC x64 `/MT` composition link/run record. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source paths/hashes, provider precedence decision and blocker where a source-derived rehost is necessary, ABI/layout/return contracts, every identity's final disposition, source-proven failure constraints, contained host-capability scope, and the bounded trace result. |
+| Reporting Requirements | Record each selector family's source authority, exact callable universe, package owner, provider disposition, ABI boundary, fixture evidence, composition membership, and any profile exclusion. |
 | Stop Conditions | Need for a one-service patch, a DOS/Bochs semantic migration, a direct `nt_bop.c`/historical product-shell link, an ambient host dependency, selector knowledge outside bx-vdm, or a trace-led scope change. |
-| Exit Criteria | All callable DEM identities have a non-placeholder provider or source-proven terminal failure, the complete family regression passes, and one bounded trace has been recorded strictly as integration evidence. |
-| Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only, not a reason to postpone implementation. |
-| Similar-Issue Sweep | Audit all `50:xx` identities together: namespace/search, DOS load and state, drive/device and session state, error/lock, VDD/notifications, original no-ops, provider precedence, no-bypass routing, common ingress, and composition non-regression. |
+| Exit Criteria | Every admitted selector/service inventory is covered exactly once by an owner package and disposition; all package composition sources participate in a reproducible closure; any remaining capability gap is recorded at whole-package granularity. |
+| Original Owner Request | "全面实现跑通BOP表格的指令。要有全局观，避免添油战术。" |
+| Similar-Issue Sweep | Audit DEM, COMMAND, XMS, DPMI, Redirector, Debugger, top-level and machine/BIOS selector forms together: source inventory, ingress reachability, facade/package ownership, capability disposition, native manifest membership, and selector-blind Bochs boundary. |
+
+> **T199 S38 completion:** the global selector ledger now covers each
+> admitted BOP identity by its original owner, bx-vdm package, disposition,
+> regression and runtime-composition member.  It found and repaired one
+> composition omission: the normal CLI runtime had compiled but not bound the
+> native XMS/DPMI session.  A fresh x64 `/MT` source-built composition fixture
+> binds both sessions and proves `52:00` falls through the boot namespace to
+> its native XMS owner.  This is package-routing evidence, not a guest trace
+> or a claim that deferred capabilities are implemented; see the [global
+> ledger](etc/research/t199-s38-global-bop-owner-composition-ledger-001.md).
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 

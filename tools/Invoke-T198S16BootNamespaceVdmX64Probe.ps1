@@ -1,7 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [ValidateSet('boot-namespace', 'dem-package', 'readonly-file')]
+    [ValidateSet('boot-namespace', 'dem-package', 'readonly-file', 'global-bop')]
     [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
@@ -120,16 +120,27 @@ $sourceRelatives = @(
     'src\cli\byob_image.c',
     'src\cli\byob_launch_plan_v2.c',
     'src\cli\byob_launch_declaration_v1.c',
-    'src\cli\byob_profile.c',
-    'tests\bx-vdm\bx_ntvdm_native_bop_composition_decline_stub.c'
+    'src\cli\byob_profile.c'
 )
 if ($Fixture -eq 'dem-package') {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_package_family_v1_test.c'
 } elseif ($Fixture -eq 'readonly-file') {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_readonly_file_service_test.c'
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c'
+} elseif ($Fixture -eq 'global-bop') {
+    $sourceRelatives += @(
+        'src\bx-vdm\bx_ntvdm_native_bop_composition_v1.c',
+        'src\bx-vdm\bx_ntvdm_xms_package_session_v1.c',
+        'src\bx-vdm\bx_ntvdm_dpmi_package_session_v1.c',
+        'src\bx-vdm\bx_ntvdm_xms_dpmi_plane_v1.c',
+        'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
+        'tests\bx-vdm\bx_ntvdm_global_bop_composition_v1_test.c'
+    )
 } else {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_boot_namespace_composition_v1_test.c'
+}
+if ($Fixture -ne 'global-bop') {
+    $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_native_bop_composition_decline_stub.c'
 }
 $sources = @($sourceRelatives | ForEach-Object { Join-Path $repository $_ })
 foreach ($source in $sources) {
@@ -197,6 +208,8 @@ $record = [ordered]@{
         'tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c'
     } elseif ($Fixture -eq 'readonly-file') {
         'tests/bx-vdm/bx_ntvdm_dem_readonly_file_service_test.c'
+    } elseif ($Fixture -eq 'global-bop') {
+        'tests/bx-vdm/bx_ntvdm_global_bop_composition_v1_test.c'
     } else {
         'tests/bx-vdm/bx_ntvdm_boot_namespace_composition_v1_test.c'
     }

@@ -100,7 +100,7 @@
     ,"src/bx-mantle/bx_ntvdm_extended_memory_v1.cc"
     ,"src/bx-core/memory/misc_mem.cc"
   ],
-  "linkedCompositionRoot": "bx_ntvdm_boot_namespace_composition_v1",
+  "linkedCompositionRoot": "bx_ntvdm_composition_runtime_v1 (boot namespace + native XMS/DPMI sessions)",
   "compileOnlySources": [
     "src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c"
   ],

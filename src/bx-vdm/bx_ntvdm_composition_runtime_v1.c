@@ -1,6 +1,7 @@
 #include "bx_ntvdm_composition_runtime_v1.h"
 
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx_ntvdm_native_bop_composition_v1.h"
 #include "bx_ntvdm_host_drive_policy.h"
 #include "bx_ntvdm_host_volume_snapshot_v1.h"
 #include "byob_image.h"
@@ -19,6 +20,7 @@ typedef struct bx_ntvdm_composition_runtime_v1 {
     bx_ntvdm_host_drive_snapshot_v1 drives;
     bx_ntvdm_host_volume_snapshot_v1 volumes;
     bx_ntvdm_boot_namespace_composition_v1 composition;
+    bx_ntvdm_native_bop_composition_v1 native_bop;
     int attempted, installed;
 } bx_ntvdm_composition_runtime_v1;
 
@@ -26,7 +28,11 @@ static bx_ntvdm_composition_runtime_v1 runtime;
 
 void bx_ntvdm_composition_runtime_v1_reset(void)
 {
-    if (runtime.installed) {
+    /* Binding either half succeeds independently.  Rejection after the first
+     * bind must therefore undo both halves, rather than leaving an active
+     * provider behind for a later CLI invocation. */
+    bx_ntvdm_native_bop_composition_v1_unbind(&runtime.native_bop);
+    if (runtime.installed || runtime.composition.bound) {
         bx_ntvdm_boot_namespace_composition_v1_unbind(&runtime.composition);
         bx_ntvdm_search_transaction_v1_release(
             &runtime.composition.plane.provider.search_transaction);
@@ -98,7 +104,9 @@ int bx_ntvdm_composition_runtime_v1_install_from_environment(void)
             &runtime.composition, &runtime.volumes) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
             &runtime.composition, &launch) ||
-        !bx_ntvdm_boot_namespace_composition_v1_bind(&runtime.composition))
+        !bx_ntvdm_boot_namespace_composition_v1_bind(&runtime.composition) ||
+        !bx_ntvdm_native_bop_composition_v1_initialize(&runtime.native_bop) ||
+        !bx_ntvdm_native_bop_composition_v1_bind(&runtime.native_bop))
         goto reject;
     runtime.installed = 1;
     return 1;
