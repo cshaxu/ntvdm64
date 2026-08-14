@@ -57,6 +57,7 @@
     "src/bx-vdm/bx_ntvdm_host_drive_policy.c",
     "src/bx-vdm/bx_ntvdm_instruction_window_abi.c",
     "src/bx-vdm/bx_ntvdm_initial_state_abi.c",
+    "src/bx-vdm/bx_ntvdm_initial_state_action_v1.c",
     "src/bx-vdm/bx_ntvdm_initial_state_catalog_v1.c",
     "src/bx-vdm/bx_ntvdm_startup_plan_abi.c",
     "src/bx-vdm/bx_ntvdm_multi_write_abi.c",

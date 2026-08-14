@@ -196,3 +196,11 @@ int bx_ntvdm_composition_runtime_v1_copy_initial_state(
     *out = runtime.initial_state;
     return 1;
 }
+
+int bx_ntvdm_composition_runtime_v1_prepare_initial_state_action(
+    struct bx_ntvdm_mechanical_action_v1 *action)
+{
+    if (!runtime.installed) return 0;
+    return bx_ntvdm_initial_state_action_v1_prepare(&runtime.initial_state,
+        action);
+}

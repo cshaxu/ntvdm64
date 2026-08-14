@@ -5,6 +5,7 @@
 
 #include "bx_ntvdm_startup_plan_abi.h"
 #include "bx_ntvdm_initial_state_abi.h"
+#include "bx_ntvdm_initial_state_action_v1.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,6 +31,10 @@ int bx_ntvdm_composition_runtime_v1_prepare_startup_plan(
     uint64_t *payload_bytes);
 int bx_ntvdm_composition_runtime_v1_copy_initial_state(
     bx_ntvdm_initial_state_v1 *out);
+/* Publishes the installed evidence-selected state only as a generic copied
+ * mantle action.  It exposes no raw machine object or guest service meaning. */
+int bx_ntvdm_composition_runtime_v1_prepare_initial_state_action(
+    struct bx_ntvdm_mechanical_action_v1 *action);
 void bx_ntvdm_composition_runtime_v1_reset(void);
 
 #ifdef __cplusplus

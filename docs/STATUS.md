@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S21.** Its governing brief is the active
+> **Current effective packet: M0 T200 S22.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S21 -- generic mantle initial-state publication design.**
+**Active: M0 T200 S22 -- native engine machine-stage composition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S20, Ordinary Mode. |
-| Admission And Approval | S19 rejects equivalence between r18 stock-ROM/POST evidence and minimal-mantle reset output, while admitting an explicit external profile record. |
-| Objective | Add a profile-selected, evidence-identified external initial-state record and bind it into direct composition without RAM publication. |
-| Non-goals | No RAM publication, CPU loop, guest run, device/firmware behavior, fixture preentry reuse, BOP patch, or Bochs change. |
-| Reference Baseline | T200 S18 declaration ABI, S19 binding decision, and r18 first-prefix evidence. |
-| Files And ABI Surface | BYOB profile revision/parser, bx-vdm evidence catalog/composition binding, focused x64 `/MT` test. |
+| Identifier Mode | M0 T200 S22, Ordinary Mode. |
+| Admission And Approval | S21 admits only a typed, selector-blind action publication to the mantle; its initialized-machine fixture proves the mechanical boundary, not engine lifecycle or guest execution. |
+| Objective | Define and implement the smallest native-engine machine stage that initializes the admitted minimal machine and applies the already prepared external initial-state action before any later startup action. |
+| Non-goals | No CPU loop, guest run, BOP/provider change, BIOS/POST emulation, new device, fixture-state reuse, OpenNT semantic move, or Bochs core patch. |
+| Reference Baseline | T200 S16 direct startup-plan ownership, S18-S21 initial-state record/catalog/publication, and the minimal-machine lifecycle contract. |
+| Files And ABI Surface | A mantle-owned C-callable machine-stage contract, typed copied actions only, native-engine lifecycle binding, and focused x64 `/MT` evidence. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused profile/composition tests prove exact external evidence identity creates an admitted copied record, while v7 absence and any mismatch are rejected. |
-| Expected Markers | No historical byte becomes a global default; mantle remains selector/firmware blind; no environment or finite-run route is imported. |
+| Verification | Source-built x64 `/MT` test proves initial state is applied after machine initialization, before any later startup action, and a declined stage leaves no CPU loop or guest execution. |
+| Expected Markers | Engine receives no raw Bochs object; bx-vdm prepares typed actions; mantle alone owns minimal-machine lifetime and generic action execution. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record record schema, evidence identity, range provenance, absent/mismatch behavior, and rejected routes; do not call guest startup/COMMAND closed. |
-| Stop Conditions | Any RAM application, machine initialization, guest execution, environment/finite-run use, device behavior, or raw Bochs type crossing a C boundary. |
-| Exit Criteria | A new profile record is source/evidence-bound in direct composition and a later generic publisher is precisely admitted. |
+| Reporting Requirements | Record lifecycle order, action ownership/lifetime, failure/reset behavior, and exact non-goals; do not call guest startup/COMMAND closed. |
+| Stop Conditions | Any guest instruction, BOP trace, firmware/device behavior, raw Bochs type crossing a C boundary, or use of a historical snapshot as a default machine state. |
+| Exit Criteria | A source-built native-engine stage has bounded mechanical preentry evidence and resets every retained composition/machine resource. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect profile parser/version handling, r18 raw snapshot ranges/digest, composition reset lifetime, and ABI catalog membership. |
+| Similar-Issue Sweep | Inspect engine direct-composition reset order, finite-run preentry action contract, minimal-machine cleanup behavior, and source-manifest membership. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -76,6 +76,11 @@
 
 > **T200 S19 closure:** r18 stock-ROM/POST evidence is explicitly not the
 > minimal-mantle reset state; see the [binding decision](etc/research/t200-s19-initial-state-evidence-binding-decision-001.md).
+
+> **T200 S21 closure:** bx-vdm publishes the admitted external record only as
+> a selector-blind mantle action. Its initialized-machine fixture proves both
+> copied range application and all-range preflight; see the [publication
+> closure](etc/research/t200-s21-initial-state-publication-closure-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
