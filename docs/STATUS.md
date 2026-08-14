@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S11.** Its governing brief is the active
+> **Current effective packet: M0 T200 S12.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S11 -- native CLI/engine composition ABI map.**
+**Active: M0 T200 S12 -- native engine contract foundation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S11, Ordinary Mode. |
-| Admission And Approval | S10 established that the bounded fixture exit is not a product CLI result and assigned the next work to CLI/engine composition. |
-| Objective | Map a versioned fixed-width native-engine entry/result ABI, profile/launch handoff, lifecycle owner, and product failure/status taxonomy. |
-| Non-goals | No entrypoint implementation, no guest run, no BOP patch, no Bochs change, and no CLI inclusion of Bochs headers. |
-| Reference Baseline | T200 S10 CLI terminal-owner boundary and the existing `ntdos64-run`/`ntdos64-bochs-engine` sources. |
-| Files And ABI Surface | CLI child process contract; opaque native-engine request/result ABI; bx-mantle lifecycle and bx-vdm composition handoff. |
+| Identifier Mode | M0 T200 S12, Ordinary Mode. |
+| Admission And Approval | S11 mapped the current product-shell intrusion and admitted a narrow C-only native-engine contract as the next foundation. |
+| Objective | Define and test a versioned copied native-engine request/result C ABI, including validation and terminal-category invariants. |
+| Non-goals | No engine entrypoint body, no guest run, no old-shell removal, no BOP patch, no Bochs change, and no CLI inclusion of Bochs headers. |
+| Reference Baseline | T200 S11 native-engine entry ABI map and the existing composition/mantle interfaces. |
+| Files And ABI Surface | New `bx-mantle` public C contract header/source and focused negative ABI fixture only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI map names every owner and forbidden dependency; it distinguishes engine terminal kinds from CLI process statuses. |
-| Expected Markers | No product path remains dependent on `bochs.exe`; no unsupported runtime-success claim. |
+| Verification | x64 `/MT` focused ABI fixture proves validation, copied-field bounds, and every declared terminal category without initializing a machine. |
+| Expected Markers | No Bochs headers or BOP vocabulary cross the public contract; no runtime-success claim. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record retained `bochs.exe` shell dependencies, proposed replacement boundary, and every unavailable product behavior; do not call COMMAND component closed. |
-| Stop Conditions | Any implementation, guest run, direct exit-code patch, or adapter/Bochs ownership inversion. |
-| Exit Criteria | A complete ABI/owner/failure map that can admit one later engine-composition implementation S. |
-| Original Owner Request | "目标仍是持续推进 ntvdm 的 cli；…cli 部分应该还有一个组件。" |
-| Similar-Issue Sweep | Inspect CLI launcher, legacy engine shell, mantle private runner, adapter runtime, and product build/entry artifacts together. |
+| Reporting Requirements | Record every field's owner and rejected form; do not call COMMAND component closed or convert typed stops to CLI success. |
+| Stop Conditions | Any machine initialization, guest execution, engine replacement, old-shell removal, or boundary field requiring raw pointer/Bochs type. |
+| Exit Criteria | Header/source/test compile in a focused x64 `/MT` closure and evidence states the later implementation boundary. |
+| Original Owner Request | "cli 部分应该还有一个组件 对吧？可以放入 src/cli" and the fixed core/mantle/vdm/CLI boundary decisions. |
+| Similar-Issue Sweep | Inspect existing copied ABIs, launch-plan encoding, composition reset, and all test-only finite-run types for forbidden leakage. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -42,6 +42,10 @@
 > **T200 S10 closure:** the S9 process exit is a fixture assertion, not a
 > product CLI or guest result.  Native CLI/engine composition is the next
 > owner package; see the [terminal-owner boundary](etc/research/t200-s10-cli-terminal-owner-boundary-001.md).
+
+> **T200 S11 closure:** the retained `bochs.exe` shell and product `main.cc`
+> hook have a source-mapped replacement boundary: a C-only native engine
+> contract in `bx-mantle`.  See the [ABI map](etc/research/t200-s11-native-engine-entry-abi-map-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
