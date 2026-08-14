@@ -67,11 +67,16 @@ int main(void)
     byob_image target = { target_bytes, sizeof(target_bytes) };
     byob_profile_selection profile;
     bx_ntvdm_boot_namespace_composition_v1 composition;
+    bx_ntvdm_host_drive_snapshot_v1 drives;
+    uint8_t drive_types[26] = { 0 };
+    byob_launch_plan_v2 launch_plan = { 2u, 1u,
+        { 1u, BYOB_LAUNCH_TARGET_KIND_V1_COM, 0u, { 0 } } };
     struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t token;
 
     profile_initialize(&profile);
+    drive_types[2] = 3u;
     profile.guest_display_state = BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1;
     profile.ntdos.bytes = sizeof(ntdos_bytes);
     memcpy(profile.ntdos.file_name, L"NTDOS.SYS", sizeof(L"NTDOS.SYS"));
@@ -80,6 +85,11 @@ int main(void)
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 1;
     if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
             &ntdos, &command, &target, 0, &profile) ||
+        !bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(4), drive_types, 0u, 0u,
+            &drives) || !bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
+            &composition, &drives) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,
+            &launch_plan) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 2;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 3;
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 4;
@@ -162,6 +172,24 @@ int main(void)
         composition.launch.registration.scs_to_sync != 0x100eeu ||
         composition.launch.registration.is_dos_binary != 0x10040u ||
         composition.launch.registration.fd_access != 0x10060u) return 18;
+    /* The complete source-derived CMDGETNEXT lifecycle consumes the fixed
+       CMDINFO gather, writes the declared target response and commits exactly
+       one immutable launch slot. */
+    event_initialize(&event, 0x54, 0x01);
+    event.ds = 0x100u; event.edx = 0x80u;
+    ram[0x1088] = 0x30u; ram[0x108a] = 0x40u; ram[0x108c] = 128u;
+    ram[0x109c] = 0x50u; ram[0x109e] = 0x60u; ram[0x10a0] = 17u;
+    ram[0x10a1] = 1u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 31;
+    if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x104u) return 32;
+    if (outcome.gpr16_write_mask != 0u || outcome.eflags_write_mask !=
+        BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF || outcome.eflags_values != 0u) return 33;
+    if (composition.cmd_get_next.delivered != 1u) return 34;
+    if (ram[0x340u + 1u] != 8u ||
+        memcmp(ram + 0x340u + 2u, "TARGET\r\n", 8u) != 0) return 35;
+    if (memcmp(ram + 0x560u, "C:\\TARGET.COM", 14u) != 0) return 36;
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        composition.cmd_get_next.delivered != 1u) return 32;
     event_initialize(&event, 0x50, 0x3b);
     event.eax = 0xabcd;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||

@@ -39,6 +39,8 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_bulk_result_transaction.c',
     'src\bx-vdm\bx_ntvdm_cmd_boot_file_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_comspec_bootstrap_service.c',
+    'src\bx-vdm\bx_ntvdm_cmd_get_next_service.c',
+    'src\bx-vdm\bx_ntvdm_cmdinfo_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_set_info_service.c',
     'src\bx-vdm\bx_ntvdm_command_launch_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_command_plane_v1.c',
@@ -86,6 +88,8 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_vdd_create_user_notify_service.c',
     'src\cli\byob_identity.c',
     'src\cli\byob_image.c',
+    'src\cli\byob_launch_plan_v2.c',
+    'src\cli\byob_launch_declaration_v1.c',
     'src\cli\byob_profile.c',
     'tests\bx-vdm\bx_ntvdm_boot_namespace_composition_v1_test.c'
 )
@@ -111,7 +115,7 @@ $compileCommands = @('@echo off', ('call "' + $vsDevCmd + '" -arch=' +
 
 foreach ($source in $sources) {
     $object = Join-Path $objectsDirectory (([IO.Path]::GetFileNameWithoutExtension($source)) + '.obj')
-    $command = 'cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 ' +
+    $command = 'cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 /D_CRT_SECURE_NO_WARNINGS ' +
         $includeArguments + ' /Fo"' + $object + '" "' + $source + '"'
     $compileCommands += $command
     $compileCommands += 'if errorlevel 1 exit /b %errorlevel%'

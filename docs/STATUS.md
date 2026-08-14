@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S126.** Its governing brief is the active
+> **Current effective packet: M0 T198 S127.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S126 -- integrate the existing finite COMMAND launch component.**
+**Active: M0 T198 S127 -- one native observation of assembled COMMAND `54:01`.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S126, Ordinary Mode. |
-| Admission And Approval | S125 proves the finite source-derived component already exists and is detached. Integrating its complete lifecycle is the smallest owner-correct response. |
-| Objective | Assemble existing CMDGETNEXT provider state, launch plan, gather/complete/write/commit lifecycle and manifest membership into the native composition. |
-| Non-goals | No direct OpenNT `cmdGetNextCmd` link, host queue/Win32 dependency, new BOP semantics, target execution claim, Bochs/core/mantle/device change or guest run. |
-| Reference Baseline | S125 map, T181/T194 finite launch contracts and current composition. |
-| Files And ABI Surface | `src/bx-vdm` composition/command component and declared native manifest/tests. |
+| Identifier Mode | M0 T198 S127, Ordinary Mode. |
+| Admission And Approval | S126 source/test/build closes complete finite command composition. One exact-input native run is needed to verify the reached real guest `54:01` transaction. |
+| Objective | Rebuild and execute exactly one registered native fixture; export `54:01` result/lifecycle and classify its subsequent source-owned boundary. |
+| Non-goals | No retry, host queue/Win32 dependency, new BOP semantics, target completion claim, Bochs/core/mantle/device change or broad rebuild. |
+| Reference Baseline | S124 native path and S126 composition closure. |
+| Files And ABI Surface | Registered native derivative/evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused tests cover absent registration, one/two slots, gather/write/commit and exhausted decline; declared native sources source-compile. |
-| Expected Markers | Only existing checked gather/multi-write/mechanical actions and typed results; no host queue. |
+| Verification | One provenance-locked `runs=1` record shows `54:01` accepted, its typed result and the next terminal/BOP boundary. |
+| Expected Markers | Explicit one-slot delivery, no host queue and no second run. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record component ownership, lifecycle state and manifest closure. |
-| Stop Conditions | Any guest run, new host composition, OpenNT host link, Bochs/device change or per-service shortcut. |
-| Exit Criteria | The complete finite COMMAND lifecycle is composition/test/compile closed; a later native observation is precisely admitted or rejected. |
+| Reporting Requirements | Record run provenance, CMDGETNEXT delivery facts and next boundary without claiming target completion. |
+| Stop Conditions | A second run, host/Bochs change, host queue or direct OpenNT dispatcher link. |
+| Exit Criteria | Native result validates/refutes the composed `54:01` lifecycle and gives one exact next action. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
