@@ -437,6 +437,23 @@ int main(void)
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x103 || outcome.gpr16_write_mask != 1u ||
         outcome.gpr16_values[0] != 0x0c00u) return 17;
+    /* Original cmdGetNextCmd gathers CMDINFO itself; cmdSetInfo's SCS/DOSDATA
+       registration is not a reason to leak a pre-registration call back to
+       the CPU as an unhandled #UD.  Keep this probe transaction-local so the
+       registered lifecycle below still proves its normal first slot. */
+    event_initialize(&event, 0x54, 0x01);
+    event.ds = 0x100u; event.edx = 0x80u;
+    ram[0x1088] = 0x30u; ram[0x108a] = 0x40u; ram[0x108c] = 128u;
+    ram[0x109c] = 0x50u; ram[0x109e] = 0x60u; ram[0x10a0] = 17u;
+    ram[0x10a1] = 1u;
+    if (composition.command.launch.valid ||
+        !bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u ||
+        outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        outcome.eflags_values != 0u ||
+        composition.command.get_next.delivered != 1u) return 70;
+    bx_ntvdm_cmd_get_next_state_v1_initialize(&composition.command.get_next);
     event_initialize(&event, 0x54, 0x05);
     event.ds = 0x1000; event.edx = 0x20; event.ebx = 0x40; event.ecx = 0x60;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||

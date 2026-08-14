@@ -99,7 +99,7 @@ int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
 {
     byob_launch_declaration_v1 launch; bx_ntvdm_cmdinfo_v1 info; uint8_t executable[16], command[130], two[2], zero2[2] = {0,0}, zero4[4] = {0,0,0,0};
     const char *command_name; uint32_t executable_bytes, command_count, command_bytes, used = 0u; uint16_t extension, count; uint64_t address;
-    if (!ns || !plan || !drives || !reg || !state || !event || !cpu || !action || !bytes || !t || !payload ||
+    if (!ns || !plan || !drives || !state || !event || !cpu || !action || !bytes || !t || !payload ||
         state->delivered >= plan->slot_count ||
         (plan->slot_count != 1u && plan->slot_count != 2u) || plan->version != 2u) return 0;
     launch = plan->first;
@@ -121,6 +121,6 @@ int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
     word(two,(uint16_t)ns->drive_index); if (!put(t,payload,&used,address,two,2u) || !physical(cpu->ds,(uint16_t)cpu->edx + 6u,2u,&address)) return 0;
     count = drive_count(drives); word(two,count); if (!put(t,payload,&used,address,two,2u) || !physical(cpu->ds,(uint16_t)cpu->edx + 16u,2u,&address) || !put(t,payload,&used,address,zero2,2u) || !physical(cpu->ds,(uint16_t)cpu->edx + 18u,4u,&address) || !put(t,payload,&used,address,zero4,4u) || !physical(cpu->ds,(uint16_t)cpu->edx + 22u,2u,&address) || !put(t,payload,&used,address,zero2,2u) || !physical(cpu->ds,(uint16_t)cpu->edx + 26u,2u,&address) || !put(t,payload,&used,address,zero2,2u)) return 0;
     word(two,(uint16_t)(executable_bytes - 1u)); if (!physical(cpu->ds,(uint16_t)cpu->edx + 32u,2u,&address) || !put(t,payload,&used,address,two,2u)) return 0;
-    word(two,extension); if (!physical(cpu->ds,(uint16_t)cpu->edx + 34u,2u,&address) || !put(t,payload,&used,address,two,2u) || !put(t,payload,&used,reg->scs_to_sync,(const uint8_t[]){0xffu},1u) || !put(t,payload,&used,reg->is_dos_binary,(const uint8_t[]){1u},1u) || !bx_ntvdm_cpu_result_v2_resume(&t->result,event->fault_rip+4u) || !bx_ntvdm_cpu_result_v2_set_cf(&t->result,0)) return 0;
+    word(two,extension); if (!physical(cpu->ds,(uint16_t)cpu->edx + 34u,2u,&address) || !put(t,payload,&used,address,two,2u) || (reg && (!put(t,payload,&used,reg->scs_to_sync,(const uint8_t[]){0xffu},1u) || !put(t,payload,&used,reg->is_dos_binary,(const uint8_t[]){1u},1u))) || !bx_ntvdm_cpu_result_v2_resume(&t->result,event->fault_rip+4u) || !bx_ntvdm_cpu_result_v2_set_cf(&t->result,0)) return 0;
     return bx_ntvdm_multi_write_transaction_v1_preflight(t,BX_NTVDM_CMD_APERTURE,used);
 }

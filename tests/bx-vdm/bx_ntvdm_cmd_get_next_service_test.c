@@ -46,6 +46,17 @@ int main(void)
     if (!bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&e,&c,&w,&t.result) ||
         t.result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || state.returned != 1u ||
         bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&e,&c,&w,&t.result)) return 7;
+    /* cmdGetNextCmd does not consume cmdSetInfo's SCS/DOSDATA locators.
+       A pre-registration entry may still build the copied CMDINFO response;
+       it must not manufacture zero-address registration writes. */
+    bx_ntvdm_instruction_window_v1_capture(&w,bop,sizeof(bop));
+    bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
+    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
+        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0,&state,&e,&c,
+            &a,record,sizeof(record),&t,payload) ||
+        t.writes.write_count < 7u ||
+        !bx_ntvdm_multi_write_transaction_v1_preflight(&t,UINT64_C(0x100000),
+            t.writes.payload_bytes)) return 8;
     puts("bx-ntvdm COMMAND target/terminal and single-target return lifecycles verified");
     return 0;
 }

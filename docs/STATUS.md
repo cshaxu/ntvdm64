@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S39.** Its governing brief is the active
+> **Current effective packet: M0 T199 S40.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S39 -- package-complete native integration baseline.**
+**Active: M0 T199 S40 -- COMMAND entry-lifecycle package recovery.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,27 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S39, Ordinary Mode. |
-| Admission And Approval | The owner directs that trace follows complete BOP-package implementation as integration evidence, never as a source of one-service patches. S38 established the global owner/disposition and composition-membership baseline; this S is the one bounded whole-composition observation now admitted within T199. |
-| Objective | Rebuild and run the current source-built CPU5 native composition once with every currently admitted package session bound; record the first observed frontier and classify it by existing component owner. |
-| Non-goals | No trace-led service implementation, no endpoint-only S task, no change to Bochs BOP recognition, no direct execution of historical `nt_bop.c`, no DOS/BIOS semantics in bx-vdm, and no ambient NT-host dependency. A frontier is evidence only. |
-| Reference Baseline | T199 S37 DEM native r94, S31-S36 package records, S38 global BOP owner/composition ledger, current composition manifest and mantle C1/C2 boundaries. |
-| Files And ABI Surface | Existing source-built composition recipe, generic bridge observations, package composition sessions and evidence record. No new provider ABI unless a later package S is separately admitted. |
+| Identifier Mode | M0 T199 S40, Ordinary Mode. |
+| Admission And Approval | S39's one native observation assigned its `54:01` frontier to the existing COMMAND bootstrap/launch/lifecycle package. The owner requires component-package implementation rather than trace-selected endpoint patches; this S therefore reopens the complete COMMAND entry lifecycle as one bounded package recovery. |
+| Objective | Recover the source-governed COMMAND entry lifecycle as a coherent package: bootstrap and `54:05` copied registration; `54:01` CMDINFO/get-next and return lifecycle; launch/environment prerequisites; and source-proven absent-registration failure. |
+| Non-goals | No `54:01`-only patch, no new trace until the entire package regression is ready, no direct `nt_bop.c` linking, no Bochs BOP knowledge, no DOS/BIOS semantic migration into bx-vdm, and no ambient NT-host dependency. |
+| Reference Baseline | T199 S5-S7/S29/S36 COMMAND records; S38 global ledger; S39 native baseline; OpenNT `dos/v86/cmd/cmdmisc.c`, `cmdconf.c`, `cmdenv.c`; current command package session and typed mantle action ABI. |
+| Files And ABI Surface | COMMAND source/ABI/failure map, command package session/provider/launch-plane code, copied CMDINFO/SCSINFO records, source-built whole-package regression and evidence. All guest reads/writes remain checked copied mechanical actions. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One fresh source-built MSVC x64 `/MT` build/link/run using the current manifest and one bounded guest execution; inspect its generic #UD history and terminal result; compare the observed selector, if any, against the S38 owner ledger. |
-| Expected Markers | A reproducible run record with `runs=1`, package-session binding evidence, an observed frontier or normal controlled terminal, and a component-level—not endpoint-level—next disposition. |
+| Verification | First enumerate the original entry lifecycle and all participating 54-family services; then run source-built whole-COMMAND regression covering registered and absent-registration paths, bootstrap/return ordering, copied-layout boundaries and no-bypass routing. A native trace is not part of this S. |
+| Expected Markers | One source/ABI/failure map, one package-level disposition, no generic decline from callable `54:01` under an absent registration, and reproducible MSVC x64 `/MT` whole-package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Preserve exact build inputs/logs, run count, observed generic #UD history, terminal condition, S38 owner lookup and any machine/guest prerequisite. Do not describe a reached selector as a closed component. |
-| Stop Conditions | Need for a one-service patch, a DOS/Bochs semantic migration, a direct `nt_bop.c`/historical product-shell link, an ambient host dependency, selector knowledge outside bx-vdm, a second trace run, or a trace-led scope change. |
-| Exit Criteria | The one allowed run is reproducibly recorded, its frontier is assigned to an existing package or machine owner, and any follow-on is stated at whole-package scope. |
-| Original Owner Request | "只有所有BOP都闭合了，才真的开始用trace实跑的方法添油式修复。" |
-| Similar-Issue Sweep | Verify the installed composition binds boot namespace plus native XMS/DPMI; audit generic bridge ordering, manifest membership, run-count evidence, selector ownership and the selector-blind Bochs boundary. |
+| Reporting Requirements | Record original source paths/functions, copied field/layout requirements, registration and return state, each participating service's final disposition, test scope and any contained CLI capability. Explicitly distinguish package closure from a later native integration trace. |
+| Stop Conditions | Need for a service-only patch, a DOS/Bochs semantic migration, direct historical host-shell link, ambient host dependency, selector knowledge outside bx-vdm, or a trace-led scope change. |
+| Exit Criteria | The complete COMMAND entry package has a source/ABI/failure map, callable-path handling or source-proven terminal result, passing whole-package regression and no generic decline at the absent-registration `54:01` boundary. |
+| Original Owner Request | "按完整原始 component package 推进（COMMAND: bootstrap/launch/console/execution/environment/lifecycle）……不按 trace 添油。" |
+| Similar-Issue Sweep | Review `54:00..10` together, especially `01`, `02`, `04`, `05`, `0C..0F`; compare original CMD lifecycle ordering, current facade/session routing, copied guest ABI, registration state, failure path and composition action ordering. |
+
+> **T199 S40 completion:** COMMAND entry lifecycle no longer treats absent
+> `54:05` registration as a generic `54:01` decline. It completes the copied
+> CMDINFO transaction without registration-only writes, while the registered
+> `54:05 → 54:01` lifecycle remains covered by source-built session regression.
+> See the [S40 source/ABI map](etc/research/t199-s40-command-entry-lifecycle-source-abi-map-001.md).
 
 > **T199 S39 completion:** one source-built native guest execution reached
 > the existing controlled `54:01` frontier after DEM package traffic.  The
