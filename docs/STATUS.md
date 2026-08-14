@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S133.** Its governing brief is the active
+> **Current effective packet: M0 T198 S134.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S133 -- one native observation after composed `54:04`.**
+**Active: M0 T198 S134 -- paired COMMAND `54:0E`/`54:04` endpoint integration closure.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -13,28 +13,32 @@
 
 ## Active Packet
 
-> **T scope:** T198 is the second-stage, holistic BOP host-service and
-> machine-composition runtime package.  It composes the already inventoried
-> OpenNT selector/service/provider planes through `bx-vdm` against the closed
-> CPU5 `bx-core`/`bx-mantle` machine.  It does not create a per-service
-> interceptor program: ingress, routing, capability disposition and original
-> provider precedence remain global structures.
+> **T scope:** T198 composes OpenNT service planes through `bx-vdm` against the
+> CPU5 `bx-core`/`bx-mantle` machine by complete component packages: DEM;
+> COMMAND; XMS; DPMI; Redirector; Debugger; and machine/BIOS. A trace validates
+> an assembled package and orders packages; it never creates a singleton BOP
+> implementation task.
+>
+> `54:0E` and `54:04` are partial COMMAND console/launch endpoint evidence,
+> not component closure. `54:0E` proves only fixed DX=0/four-byte resume and
+> one continuation; `54:04` has only adapter-only restricted-root/failure
+> proof because S133 was terminated before a native result.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S133, Ordinary Mode. |
-| Admission And Approval | S132 source/test closure admits the bounded `54:04` provider. One new exact-input native run may now observe its real guest continuation. |
-| Objective | Rebuild and execute exactly one registered native fixture; record whether `54:04` is accepted and identify the next terminal/BOP boundary. |
-| Non-goals | No retry, host-drive scan, environment persistence, filesystem/path-search expansion, host queue/Win32 dependency, new BOP semantics, target completion claim, Bochs/core/mantle/device change or broad rebuild. |
-| Reference Baseline | S130 native observation and S132 adapter-only closure. |
-| Files And ABI Surface | Registered native derivative/evidence only. |
+| Identifier Mode | M0 T198 S134, Ordinary Mode. |
+| Admission And Approval | After the component-package correction, the owner explicitly authorizes closing the two already-admitted COMMAND console/launch endpoints first. |
+| Objective | Retain the existing `54:0E` native continuation evidence and run exactly one native integration observation for composed `54:04`; record the pair's bounded endpoint result. |
+| Non-goals | No claim of complete COMMAND console/launch closure, no next-BOP task, no retry, new endpoint/provider, host-drive scan, environment/filesystem expansion, Bochs/core/mantle change, or direct OpenNT dispatcher link. |
+| Reference Baseline | S129 `54:0E` composition/native continuation; S132 `54:04` adapter-only composition; S133 withdrawal; component-package replan. |
+| Files And ABI Surface | Registered native derivative and closure evidence only; no source change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One provenance-locked `runs=1` record shows `54:04` accepted or declined and identifies the subsequent terminal/BOP boundary. |
-| Expected Markers | Immutable root response, four-byte resume, no host queue and no second run. |
+| Verification | One provenance-locked `runs=1` native record proves or refutes `54:04` acceptance after the existing `54:0E` evidence. |
+| Expected Markers | `54:0E` fixed DX=0/four-byte resume, `54:04` restricted root/failure integration result, and no follow-on implementation admission. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record provenance, `54:04` result/continuation and the next boundary without claiming target completion. |
-| Stop Conditions | A second run, host/Bochs change, host-drive/environment/filesystem expansion, host queue or direct OpenNT dispatcher link. |
-| Exit Criteria | The native result validates/refutes the bounded `54:04` lifecycle and gives one exact next action. |
+| Reporting Requirements | State explicitly that the pair is partial endpoint evidence and that COMMAND console/launch remains incomplete; classify the next trace endpoint as ordering information only. |
+| Stop Conditions | A second run, new endpoint/provider, trace-derived singleton scope, Bochs/mantle change, direct dispatcher link or host capability expansion. |
+| Exit Criteria | One native result is recorded for `54:04`, paired with retained `54:0E` evidence, without changing the component-package roadmap. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
