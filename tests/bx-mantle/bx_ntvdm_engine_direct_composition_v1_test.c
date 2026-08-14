@@ -1,5 +1,7 @@
 #include "bx_ntvdm_engine_contract_v1.h"
+#include "bx_ntvdm_machine_stage_v1.h"
 
+#include <stdio.h>
 #include <windows.h>
 
 static int descriptor_set(uint16_t *out_value, uint32_t maximum,
@@ -34,6 +36,16 @@ static int request_set(struct bx_ntvdm_engine_request_v1 *request,
     return bx_ntvdm_engine_request_v1_valid(request);
 }
 
+static int terminal_valid(const struct bx_ntvdm_engine_result_v1 *result)
+{
+    if (result->terminal_kind == BX_NTVDM_ENGINE_TERMINAL_V1_EXECUTION_BUDGET)
+        return result->detail_code == BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET;
+    if (result->terminal_kind == BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL)
+        return result->detail_code ==
+            BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP;
+    return 0;
+}
+
 int wmain(int argc, wchar_t **argv)
 {
     struct bx_ntvdm_engine_request_v1 request;
@@ -41,13 +53,17 @@ int wmain(int argc, wchar_t **argv)
     if (argc != 3 || !request_set(&request, argv[1], argv[2])) return 1;
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         !bx_ntvdm_engine_result_v1_valid(&result) ||
-        result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_NONE ||
-        result.detail_code != 0u) return 2;
+        !terminal_valid(&result))
+        return 2;
+    printf("t200-s24 first terminal=%u detail=%u\n", result.terminal_kind,
+        result.detail_code);
     /* A second direct installation is the release witness: the first call's
      * unconditional reset must leave no active process-local composition. */
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         !bx_ntvdm_engine_result_v1_valid(&result) ||
-        result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_NONE ||
-        result.detail_code != 0u) return 3;
+        !terminal_valid(&result))
+        return 3;
+    printf("t200-s24 second terminal=%u detail=%u\n", result.terminal_kind,
+        result.detail_code);
     return 0;
 }

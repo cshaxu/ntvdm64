@@ -9,10 +9,12 @@ int main()
   struct bx_ntvdm_machine_stage_v1_request request;
   struct bx_ntvdm_machine_stage_v1_entry entry;
   struct bx_ntvdm_machine_stage_v1_entry observed;
+  struct bx_ntvdm_machine_stage_v1_execution_request execution;
   Bit8u preserved[4] = { 0, 0, 0, 0 };
   Bit8u startup[32];
 
   memset(startup, 0xaa, sizeof(startup));
+  startup[0] = 0xf4u;
   bx_ntvdm_machine_stage_v1_request_clear(&request);
   if (bx_ntvdm_machine_stage_v1_begin(&request) !=
       BX_NTVDM_MACHINE_STAGE_V1_REJECTED_INPUT ||
@@ -60,7 +62,12 @@ int main()
       memcmp(preserved, "\x10\x20\x30\x40", sizeof(preserved)) != 0 ||
       !bx_mem.copy_from_ordinary_ram(0x700u, sizeof(preserved), preserved) ||
       memcmp(preserved, startup, sizeof(preserved)) != 0) return 6;
+  bx_ntvdm_machine_stage_v1_execution_request_clear(&execution);
+  execution.ips = 1000000u;
+  execution.instruction_tick_budget = 1000000u;
+  if (bx_ntvdm_machine_stage_v1_execute(&execution) !=
+      BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET) return 7;
   if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK ||
-      bx_ntvdm_machine_stage_v1_active()) return 7;
+      bx_ntvdm_machine_stage_v1_active()) return 8;
   return 0;
 }

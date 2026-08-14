@@ -1,12 +1,26 @@
 #include "bochs.h"
 #include "bx-core/cpu/cpu.h"
 #include "bx-core/memory/memory.h"
+#include "bx-mantle/pc_system.h"
+#include "bx_ntvdm_generic_ud_bridge.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
 
 #include <string.h>
 
 static bx_ntvdm_minimal_machine_c *bx_ntvdm_machine_stage_machine;
+
+struct bx_ntvdm_machine_stage_v1_stop_state {
+  bx_bool fired;
+};
+
+static void bx_ntvdm_machine_stage_v1_stop(void *opaque)
+{
+  bx_ntvdm_machine_stage_v1_stop_state *state =
+    (bx_ntvdm_machine_stage_v1_stop_state *) opaque;
+  state->fired = 1;
+  bx_pc_system.kill_bochs_request = 1;
+}
 
 static bx_bool bx_ntvdm_machine_stage_preserved_range_valid(
   Bit64u address, Bit64u bytes)
@@ -136,4 +150,51 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_copy_real_mode_entry(
   entry->cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
   entry->eip = bx_cpu.get_eip();
   return BX_NTVDM_MACHINE_STAGE_V1_OK;
+}
+
+extern "C" void bx_ntvdm_machine_stage_v1_execution_request_clear(
+  struct bx_ntvdm_machine_stage_v1_execution_request *request)
+{
+  if (request == 0) return;
+  memset(request, 0, sizeof(*request));
+  request->magic = BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_MAGIC;
+  request->abi_version = BX_NTVDM_MACHINE_STAGE_V1_VERSION;
+  request->struct_bytes = sizeof(*request);
+}
+
+extern "C" int bx_ntvdm_machine_stage_v1_execution_request_valid(
+  const struct bx_ntvdm_machine_stage_v1_execution_request *request)
+{
+  return request != 0 &&
+    request->magic == BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_MAGIC &&
+    request->abi_version == BX_NTVDM_MACHINE_STAGE_V1_VERSION &&
+    request->struct_bytes == sizeof(*request) && request->ips != 0u &&
+    request->instruction_tick_budget != 0u;
+}
+
+extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
+  const struct bx_ntvdm_machine_stage_v1_execution_request *request)
+{
+  bx_ntvdm_machine_stage_v1_stop_state stop_state;
+  int stop_timer;
+
+  if (bx_ntvdm_machine_stage_machine == 0)
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_REJECTED_INACTIVE;
+  if (!bx_ntvdm_machine_stage_v1_execution_request_valid(request))
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_REJECTED_INPUT;
+  bx_pc_system.initialize(request->ips);
+  stop_state.fired = 0;
+  stop_timer = bx_pc_system.register_timer_ticks(&stop_state,
+    bx_ntvdm_machine_stage_v1_stop, request->instruction_tick_budget, 0, 1,
+    "machine-stage-stop");
+  if (stop_timer <= 0)
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
+  bx_ntvdm_mantle_generic_ud_stop_observation_reset();
+  bx_cpu.cpu_loop();
+  bx_pc_system.deactivate_timer((unsigned) stop_timer);
+  bx_pc_system.unregisterTimer((unsigned) stop_timer);
+  if (bx_ntvdm_mantle_generic_ud_stop_observed())
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP;
+  return stop_state.fired ? BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET :
+    BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_UNEXPECTED_LOOP_RETURN;
 }

@@ -28,6 +28,7 @@ enum bx_ntvdm_machine_stage_v1_status {
 };
 
 #define BX_NTVDM_MACHINE_STAGE_V1_ENTRY_MAGIC UINT32_C(0x42584d45)
+#define BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_MAGIC UINT32_C(0x42584d58)
 
 /* A real-mode control-transfer delta.  It deliberately excludes general
  * registers, flags, descriptor caches, and any machine object. */
@@ -39,6 +40,23 @@ struct bx_ntvdm_machine_stage_v1_entry {
   uint16_t cs;
   uint16_t reserved1;
   uint32_t eip;
+};
+
+enum bx_ntvdm_machine_stage_v1_execution_status {
+  BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET = 0u,
+  BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP,
+  BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_REJECTED_INACTIVE,
+  BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_REJECTED_INPUT,
+  BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE,
+  BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_UNEXPECTED_LOOP_RETURN
+};
+
+struct bx_ntvdm_machine_stage_v1_execution_request {
+  uint32_t magic;
+  uint32_t abi_version;
+  uint32_t struct_bytes;
+  uint32_t ips;
+  uint64_t instruction_tick_budget;
 };
 
 struct bx_ntvdm_machine_stage_v1_request {
@@ -77,6 +95,14 @@ uint32_t bx_ntvdm_machine_stage_v1_arm_real_mode_entry(
 /* Copies the currently armed CS:IP without exposing the native CPU object. */
 uint32_t bx_ntvdm_machine_stage_v1_copy_real_mode_entry(
   struct bx_ntvdm_machine_stage_v1_entry *entry);
+void bx_ntvdm_machine_stage_v1_execution_request_clear(
+  struct bx_ntvdm_machine_stage_v1_execution_request *request);
+int bx_ntvdm_machine_stage_v1_execution_request_valid(
+  const struct bx_ntvdm_machine_stage_v1_execution_request *request);
+/* Executes an already armed active stage until a finite watchdog or accepted
+ * generic STOP outcome returns control. It never owns a BOP/provider policy. */
+uint32_t bx_ntvdm_machine_stage_v1_execute(
+  const struct bx_ntvdm_machine_stage_v1_execution_request *request);
 
 #ifdef __cplusplus
 }
