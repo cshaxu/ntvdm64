@@ -120,6 +120,28 @@ int main(void)
             &event, &cpu, &window, &action, &result) ||
         action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE || !action.payload_bytes) return 5;
 
+    /* 50:42 is the separately admitted fast-read contract.  ZF clear uses
+     * the copied BX:SI position and must produce the existing namespace bulk
+     * write, rather than falling through as raw media or opening FASTWRITE. */
+    cpu.ebx = 0u;
+    cpu.esi = 0u;
+    cpu.ecx = 3u;
+    cpu.edx = 0x90u;
+    cpu.eflags = 0u;
+    window_capture(&window, 0x50, 0x42);
+    if (!classify_and_select(&window, &ingress, &selection) ||
+        !bx_ntvdm_boot_namespace_plane_v1_dispatch(&plane, &ingress, &selection,
+            &event, &cpu, &window, &action, &result) ||
+        action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE || action.payload_bytes != 3u ||
+        memcmp(action.payload, "REM", 3u) != 0 ||
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 3u) return 16;
+    window_capture(&window, 0x50, 0x43);
+    if (!classify_and_select(&window, &ingress, &selection) ||
+        !bx_ntvdm_boot_namespace_plane_v1_dispatch(&plane, &ingress, &selection,
+            &event, &cpu, &window, &action, &result) ||
+        action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_NONE ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH) return 17;
+
     cpu.ebx = 0;
     cpu.ecx = 0;
     cpu.edx = 0;

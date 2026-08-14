@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S99.** Its governing brief is the active
+> **Current effective packet: M0 T198 S100.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S99 -- repair the DEMFASTREAD component classification and
-prove the existing provider is reachable without admitting a guest run.**
+**Active: M0 T198 S100 -- map the actual S97 DEMFASTREAD handle/token lifecycle
+before admitting a provider change or another guest run.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ prove the existing provider is reachable without admitting a guest run.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S99, Ordinary Mode. |
-| Admission And Approval | S98 proves a source contradiction: `50:42` is compiled but unreachable because current DEM classification says RAW_MEDIA while its existing route requires NAMESPACE. |
-| Objective | Restore only `SVC_DEMFASTREAD` (`50:42`) to the existing namespace component, retain `50:43` unavailable, and source-build/test classification and composition reachability without a guest run. |
-| Non-goals | No guest run, new fast-I/O ABI/provider, FASTWRITE admission, host filesystem/environment expansion, terminal transport, CLI exit-code mapping, guest artifact creation, device/ROM import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim. |
-| Reference Baseline | S98 DEMFASTREAD map; S59 retained composition witness; current DEM plane, boot-namespace plane/provider and focused tests. |
-| Files And ABI Surface | DEM-plane classification and focused `bx-vdm` tests only. Reuse existing provider, namespace state and checked bulk mechanical action; no new seam or guest-address API. |
+| Identifier Mode | M0 T198 S100, Ordinary Mode. |
+| Admission And Approval | S99 proves the current `66u` classification is already `0x42`/NAMESPACE and the existing fast-read provider is reachable with a valid namespace handle; S98's contrary conclusion is superseded. |
+| Objective | Map the original NTDOS FASTREAD caller's handle/token lifecycle and compare it with the actual S97 copied state and current immutable-namespace token contract; admit no change or guest run until the discrepancy is evidence-complete. |
+| Non-goals | No guest run, provider/ABI/routing change, FASTWRITE admission, host filesystem/environment expansion, terminal transport, CLI exit-code mapping, guest artifact creation, device/ROM import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim. |
+| Reference Baseline | S97 one-run observation; S99 correction witness; original NTDOS `handle.asm`; current readonly namespace and fast-read provider sources. |
+| Files And ABI Surface | Source/evidence records and copied-state trace audit only. Reuse the current fixed event record and token ABI as audit subjects; add no new runtime seam, arbitrary guest read or provider membership. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused plane classification and current-composition source-built tests prove `42h` reaches existing fast-read handling when namespace state is valid, while `43h` and raw-media siblings remain unaccepted; documentation governance and diff checks pass. |
-| Expected Markers | `42h` classifies NAMESPACE/DEFERRED and performs only its existing checked bulk result; `43h` does not become a namespace request; invalid namespace state continues to fail explicitly. |
+| Verification | Static original-caller and current-token cross-map, S97 copied-state/log audit, existing namespace open/seek/fast-read tests, documentation governance and diff checks. |
+| Expected Markers | One exact map states where `AX:BP`, ZF and `BX:SI` arise, whether S97's call can name the immutable namespace handle, and the source-proven disposition of mismatch. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record classification before/after, original caller/provider rationale, source membership, focused test commands/results, rejected `43h`/raw-media cases, and every excluded capability. |
-| Stop Conditions | Any need for a new provider or fast-I/O ABI, guest run, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a continuity claim. Stop and admit a distinct S item. |
-| Exit Criteria | Current composition source-builds/tests the repaired `42h` classification and negative siblings with retained evidence, making no guest-run claim. |
+| Reporting Requirements | Record S98 correction, original caller/register paths, current token/open/seek state contract, exact S97 evidence strengths/limits, every excluded capability and one bounded next seam if justified. |
+| Stop Conditions | Any need for a provider/ABI/routing change, guest run, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a continuity claim. Stop and admit a distinct S item. |
+| Exit Criteria | An evidence-complete source map explains whether the S97 call can satisfy the existing token state, naming a bounded next repair or source-proven unavailable/deferred result without runtime claim. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
