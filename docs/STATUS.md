@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S38.** Its governing brief is the active
+> **Current effective packet: M0 T199 S39.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S38 -- global BOP package coverage audit.**
+**Active: M0 T199 S39 -- package-complete native integration baseline.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,28 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S38, Ordinary Mode. |
-| Admission And Approval | The owner directs T199 to implement and assess all BOP identities by complete OpenNT component packages, not trace-selected endpoints.  S37 is closed; this S is the final global owner/selector/package coverage audit within the already admitted T199 scope. |
-| Objective | Establish one auditable global map from each admitted BOP selector/service form to its original OpenNT owner, bx-vdm package provider disposition, source-built regression and native-composition membership.  Correct any package-level owner/manifest omission discovered by that map; do not create per-endpoint work. |
-| Non-goals | No trace-led service selection, no individual-service patch packet, no direct execution of historical `nt_bop.c`, no change to Bochs BOP recognition, no DOS/BIOS semantics in bx-vdm, and no ambient NT-host dependency.  A trace stop is evidence only and cannot expand this S. |
-| Reference Baseline | Completed T199 package records S5-S37; common ingress and provider registry; S37 pre-trace ledger/r94 observation; mantle C1/C2 boundaries. |
-| Files And ABI Surface | Global source/owner/disposition ledger, ingress and package-facade audit, current composition manifest and its source-built closure.  All Bochs/mantle calls remain behind registered typed ABI. |
+| Identifier Mode | M0 T199 S39, Ordinary Mode. |
+| Admission And Approval | The owner directs that trace follows complete BOP-package implementation as integration evidence, never as a source of one-service patches. S38 established the global owner/disposition and composition-membership baseline; this S is the one bounded whole-composition observation now admitted within T199. |
+| Objective | Rebuild and run the current source-built CPU5 native composition once with every currently admitted package session bound; record the first observed frontier and classify it by existing component owner. |
+| Non-goals | No trace-led service implementation, no endpoint-only S task, no change to Bochs BOP recognition, no direct execution of historical `nt_bop.c`, no DOS/BIOS semantics in bx-vdm, and no ambient NT-host dependency. A frontier is evidence only. |
+| Reference Baseline | T199 S37 DEM native r94, S31-S36 package records, S38 global BOP owner/composition ledger, current composition manifest and mantle C1/C2 boundaries. |
+| Files And ABI Surface | Existing source-built composition recipe, generic bridge observations, package composition sessions and evidence record. No new provider ABI unless a later package S is separately admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Mechanically expand each selector/service inventory from its original source and compare it with ingress/facade/provider ownership; verify no duplicate/missing global identity, no selector knowledge in Bochs, and a source-built current composition closure. |
-| Expected Markers | A global exact-coverage ledger, explicit package-level unavailable/deferred dispositions where source and profile require them, and a reproducible MSVC x64 `/MT` composition link/run record. |
+| Verification | One fresh source-built MSVC x64 `/MT` build/link/run using the current manifest and one bounded guest execution; inspect its generic #UD history and terminal result; compare the observed selector, if any, against the S38 owner ledger. |
+| Expected Markers | A reproducible run record with `runs=1`, package-session binding evidence, an observed frontier or normal controlled terminal, and a component-level—not endpoint-level—next disposition. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record each selector family's source authority, exact callable universe, package owner, provider disposition, ABI boundary, fixture evidence, composition membership, and any profile exclusion. |
-| Stop Conditions | Need for a one-service patch, a DOS/Bochs semantic migration, a direct `nt_bop.c`/historical product-shell link, an ambient host dependency, selector knowledge outside bx-vdm, or a trace-led scope change. |
-| Exit Criteria | Every admitted selector/service inventory is covered exactly once by an owner package and disposition; all package composition sources participate in a reproducible closure; any remaining capability gap is recorded at whole-package granularity. |
-| Original Owner Request | "全面实现跑通BOP表格的指令。要有全局观，避免添油战术。" |
-| Similar-Issue Sweep | Audit DEM, COMMAND, XMS, DPMI, Redirector, Debugger, top-level and machine/BIOS selector forms together: source inventory, ingress reachability, facade/package ownership, capability disposition, native manifest membership, and selector-blind Bochs boundary. |
+| Reporting Requirements | Preserve exact build inputs/logs, run count, observed generic #UD history, terminal condition, S38 owner lookup and any machine/guest prerequisite. Do not describe a reached selector as a closed component. |
+| Stop Conditions | Need for a one-service patch, a DOS/Bochs semantic migration, a direct `nt_bop.c`/historical product-shell link, an ambient host dependency, selector knowledge outside bx-vdm, a second trace run, or a trace-led scope change. |
+| Exit Criteria | The one allowed run is reproducibly recorded, its frontier is assigned to an existing package or machine owner, and any follow-on is stated at whole-package scope. |
+| Original Owner Request | "只有所有BOP都闭合了，才真的开始用trace实跑的方法添油式修复。" |
+| Similar-Issue Sweep | Verify the installed composition binds boot namespace plus native XMS/DPMI; audit generic bridge ordering, manifest membership, run-count evidence, selector ownership and the selector-blind Bochs boundary. |
+
+> **T199 S39 completion:** one source-built native guest execution reached
+> the existing controlled `54:01` frontier after DEM package traffic.  The
+> evidence assigns it to COMMAND bootstrap/launch/lifecycle as a complete
+> component problem—specifically its prerequisite `54:05` registration and
+> `54:01` CMDINFO lifecycle—not a follow-on endpoint patch.  See [S39 native
+> baseline](etc/research/t199-s39-package-complete-native-integration-baseline-001.md).
 
 > **T199 S38 completion:** the global selector ledger now covers each
 > admitted BOP identity by its original owner, bx-vdm package, disposition,

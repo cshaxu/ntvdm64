@@ -1,4 +1,5 @@
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx-vdm/bx_ntvdm_native_bop_composition_v1.h"
 #include "bx-mantle/bx_ntvdm_instruction_history.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 #include "t198_s23_fastread_attempt_ledger.h"
@@ -182,7 +183,14 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_spckbd_edi = event->edi; observed_spckbd_eflags = event->eflags;
     }
     {
+        /* Mirror the production adapter's one generic route: boot/namespace
+         * owns its packages first, then the separately bound XMS/DPMI
+         * session may answer a decline.  This fixture contains no selector
+         * knowledge and cannot change either provider's result. */
         int composition_accepted = bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome);
+        if (!composition_accepted)
+            composition_accepted = bx_ntvdm_native_bop_composition_v1_handle(
+                event, outcome);
         bx_ntvdm_boot_namespace_diagnostic_v1 namespace_diagnostic;
         if (observed_composition != 0 &&
             bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
