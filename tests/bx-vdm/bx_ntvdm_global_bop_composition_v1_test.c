@@ -108,6 +108,17 @@ int main(void)
                 return (int)(10u + service);
         }
     }
+    /* DPMI is selected by the same generic ingress but is not installed in
+     * this CLI profile.  Every original identity must stop in the typed
+     * boundary, never escape as an unhandled #UD. */
+    {
+        uint32_t service;
+        for (service = 0u; service < 25u; ++service) {
+            if (!call(0x53u, (uint8_t)service, &outcome) ||
+                outcome.disposition != BX_NTVDM_GENERIC_UD_STOP)
+                return (int)(30u + service);
+        }
+    }
     bx_ntvdm_native_bop_composition_v1_unbind(&native_bop);
     bx_ntvdm_boot_namespace_composition_v1_unbind(&boot);
     return 0;

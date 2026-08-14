@@ -12,7 +12,7 @@ int main(void) {
         bx_ntvdm_instruction_window_v1_capture(&w,b,4); bad|=!bx_ntvdm_bop_ingress_v1_classify(&w,&i);
         bad|=!bx_ntvdm_bop_provider_registry_v1_select(&i,&s); bad|=!bx_ntvdm_xms_dpmi_plane_v1_classify(&i,&s,&r);
         bad|=r.service!=n || r.provider_family!=BX_NTVDM_BOP_PROVIDER_DPMI ||
-            r.disposition!=((n==18)?BX_NTVDM_XMS_DPMI_EXPLICIT_UNAVAILABLE:BX_NTVDM_XMS_DPMI_DEFERRED); }
+            r.disposition!=BX_NTVDM_XMS_DPMI_EXPLICIT_UNAVAILABLE; }
     { uint8_t b[4]={0xc4,0xc4,0x53,25}; bx_ntvdm_instruction_window_v1_capture(&w,b,4);
       bad|=!bx_ntvdm_bop_ingress_v1_classify(&w,&i); bad|=!bx_ntvdm_bop_provider_registry_v1_select(&i,&s);
       bad|=bx_ntvdm_xms_dpmi_plane_v1_classify(&i,&s,&r); }

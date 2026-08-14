@@ -18,7 +18,6 @@ int main(void)
   if(!bx_ntvdm_dpmi_package_session_v1_initialize(&s))return 1;
   for(n=0;n<25u;n++){
     if(!dispatch(&s,n,&r))return 2;
-    if(n==18u){if(r.disposition!=BX_NTVDM_CPU_RESULT_V2_STOP)return 3;}
-    else if(r.disposition!=BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH)return 4;
+    if(r.disposition!=BX_NTVDM_CPU_RESULT_V2_STOP)return 3;
   }
   return 0; }

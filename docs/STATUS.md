@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S45.** Its governing brief is the active
+> **Current effective packet: M0 T199 S46.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S45 -- DPMI package owner and disposition recovery.**
+**Active: M0 T199 S46 -- Redirector package owner and disposition verification.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S45, Ordinary Mode. |
-| Admission And Approval | S44 closed the complete XMS selector family with source inventory, explicit unavailable outcomes and a source-built regression. T199 advances to DPMI as the next original owner package. |
-| Objective | Establish the complete OpenNT DPMI BOP identity/owner/failure map and one contained profile disposition for protected-mode, LDT, exception, memory and session families. |
-| Non-goals | No native trace, no service-only patch, no DPMI implementation inside bx-vdm, no Bochs selector knowledge, and no ambient NT host dependency. |
-| Reference Baseline | S44 XMS boundary map; OpenNT `base/mvdm/dpmi`; current DPMI session/plane and bx-core CPU/interrupt ownership rules. |
-| Files And ABI Surface | DPMI source/ABI/failure ledger, DPMI session/plane and whole-family fixture; typed contracts only. |
+| Identifier Mode | M0 T199 S46, Ordinary Mode. |
+| Admission And Approval | S45 closed the complete DPMI selector family with source inventory, typed unavailable outcomes and a source-built regression. T199 advances to the original Redirector package. |
+| Objective | Revalidate the complete OpenNT Redirector BOP identity/owner/failure map and its contained CLI disposition as one provider package. |
+| Non-goals | No native trace, no service-only patch, no host filesystem/network redirector, no Bochs selector knowledge, and no ambient NT host dependency. |
+| Reference Baseline | S45 DPMI boundary map; OpenNT Redirector dispatcher/provider sources; current Redirector package facade and generic ingress rules. |
+| Files And ABI Surface | Redirector source/ABI/failure ledger, package facade and whole-family fixture; typed contracts only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-map all DPMI identities, then run fresh MSVC x64 `/MT` package regression through ingress and the bound DPMI session. |
-| Expected Markers | Complete DPMI ledger, explicit capability failures, no selector leakage and reproducible package evidence. |
+| Verification | Source-map all Redirector identities, then run fresh MSVC x64 `/MT` package regression through ingress and its bound package facade. |
+| Expected Markers | Complete Redirector ledger, explicit capability failures, no selector leakage and reproducible package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
-| Stop Conditions | Need for trace patch, Bochs semantic migration, direct host shell link, ambient host dependency, selector leakage or native trace. |
-| Exit Criteria | Every DPMI identity has an owner/disposition and a whole-package regression passes. |
-| Original Owner Request | "按完整原始 component package 推进（DPMI: PM/LDT/exception/memory）……不按 trace 添油。" |
-| Similar-Issue Sweep | Separate CPU/interrupt/memory mechanics from adapter routing and XMS coupling. |
+| Stop Conditions | Need for trace patch, Bochs semantic migration, direct host filesystem/network link, ambient host dependency, selector leakage or native trace. |
+| Exit Criteria | Every Redirector identity has an owner/disposition and a whole-package regression passes. |
+| Original Owner Request | "按完整原始 component package 推进（Redirector 整族 unavailable）……不按 trace 添油。" |
+| Similar-Issue Sweep | Separate original Redirector semantics from CLI profile capability and from DOS filesystem ownership. |
+
+> **T199 S45 closure:** all twenty-five DPMI slots have a source-mapped owner
+> and typed explicit-unavailable disposition. A fresh x64 `/MT` global
+> composition run proves each reaches controlled stop instead of raw `#UD`;
+> no native trace ran. See the [DPMI map](etc/research/t199-s45-dpmi-owner-abi-failure-map-001.md).
 
 > **T199 S44 closure:** all twelve XMS slots have explicit owner/disposition;
 > a fresh x64 `/MT` family run proves admitted paths resume and all remaining

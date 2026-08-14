@@ -36,6 +36,11 @@ int bx_ntvdm_xms_dpmi_plane_v1_classify(const bx_ntvdm_bop_ingress_v1 *i,
          (i->family==BX_NTVDM_BOP_FAMILY_DPMI && s->provider_family==BX_NTVDM_BOP_PROVIDER_DPMI && i->service<25u))) return 0;
     c=i->family==BX_NTVDM_BOP_FAMILY_XMS?xms_component(i->service):dpmi_component(i->service); if(!c) return 0;
     r->service=i->service; r->provider_family=s->provider_family; r->component=c; r->machine_owner=owner(c);
-    r->disposition=(c==BX_NTVDM_XMS_DPMI_COMPONENT_VDD)?BX_NTVDM_XMS_DPMI_EXPLICIT_UNAVAILABLE:BX_NTVDM_XMS_DPMI_DEFERRED;
+    /* No DPMI component is admitted in the current CLI profile.  Preserve the
+     * original service identity and mechanical owner, but make every selected
+     * DPMI request terminal at the typed boundary rather than returning it to
+     * the CPU as an unhandled #UD. */
+    r->disposition=i->family==BX_NTVDM_BOP_FAMILY_DPMI ?
+        BX_NTVDM_XMS_DPMI_EXPLICIT_UNAVAILABLE : BX_NTVDM_XMS_DPMI_DEFERRED;
     return bx_ntvdm_xms_dpmi_plane_v1_valid(r);
 }
