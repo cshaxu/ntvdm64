@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S120.** Its governing brief is the active
+> **Current effective packet: M0 T198 S121.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S120 -- source-map the exact `4E534005` declined fast-read
-lifecycle before any provider or machine change.**
+**Active: M0 T198 S121 -- add a fixture-only bounded DEM lifecycle
+correlation record, with no guest run or provider semantic change.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ lifecycle before any provider or machine change.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S120, Ordinary Mode. |
-| Admission And Approval | S119's single provenance-locked run exported all four fixed-width attempts. `4E534005` is a genuine declined post-close generation, but not yet a file identity. The next safe action is source-only lifecycle reconstruction. |
-| Objective | Trace the relevant OpenNT NTDOS open/read/close control flow and the `bx-vdm` immutable namespace contract to identify what `4E534005` proves, what it cannot prove, and whether a minimum correction is admissible. |
-| Non-goals | No guest run/retry, provider/ABI change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S115 source map and S119 exported native ledger. |
-| Files And ABI Surface | Read-only source and evidence analysis only. |
+| Identifier Mode | M0 T198 S121, Ordinary Mode. |
+| Admission And Approval | S120 proves `4E534005` counts successful closes rather than files. Its single remaining ambiguity needs lifecycle metadata absent from the S119 ledger; a default-off fixture-only record is the narrowest global observation surface. |
+| Objective | Add and test a fixed-capacity test-only DEM lifecycle correlation record for `50:12`, `50:02` and `50:42`, plus a copied namespace diagnostic containing only open flag, file index, generation and offset. |
+| Non-goals | No guest run/retry, provider/ABI/result-routing change, copied path/guest bytes, host pointer/export, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit or broad rebuild. |
+| Reference Baseline | S119 exported ledger and S120 lifecycle map. |
+| Files And ABI Surface | `tests/bx-vdm/` fixture ledger/bridge plus the smallest default-off copied `bx-vdm` namespace diagnostic needed for it. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | A source-line-keyed lifecycle map reconciles each generation transition with the OpenNT `50:12/00/42/02` ABI and states any remaining ambiguity explicitly. |
-| Expected Markers | No changed runtime source, no new build root and no guest run; the map distinguishes source proof from inference. |
+| Verification | Focused C test proves selector exclusion, record order/capacity and that the diagnostic contains no pathname, pointer or guest-memory field; registered native sources compile with the new fixture code. |
+| Expected Markers | No native run, no changed provider result, and no record outside the three DEM service identities. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source owner, generation rule, exact conclusion and remaining unknowns for the declined token. |
-| Stop Conditions | Any run/retry, provider/ABI/semantic change, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. |
-| Exit Criteria | The `4E534005` question is either source-classified or reduced to one exact next observation/implementation question. |
+| Reporting Requirements | Record every field, source owner, fixture-only boundary and proof that no runtime routing changes. |
+| Stop Conditions | Any run/retry, provider/ABI/result-routing change, guest path/payload capture, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. |
+| Exit Criteria | The lifecycle recorder and diagnostic are source/test/compile closed and a later native observation is either precisely admitted or rejected. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
