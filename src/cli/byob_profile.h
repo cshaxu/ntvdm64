@@ -97,6 +97,13 @@ typedef struct byob_guest_dos_metadata_descriptor {
     uint16_t dos_date;
 } byob_guest_dos_metadata_descriptor;
 
+/* The first non-invasive CLI profile has one display disposition.  This is a
+ * closed guest-composition value, not a user-facing host console setting. */
+typedef enum byob_guest_display_state {
+    BYOB_GUEST_DISPLAY_STATE_NONE = 0,
+    BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1 = 2
+} byob_guest_display_state;
+
 /* A fixed guest command sequence is profile data, not a host queue.  The
  * first v5 profile has exactly two entries: the selected target then QUIT. */
 typedef struct byob_declared_target_descriptor {
@@ -140,6 +147,7 @@ typedef struct byob_profile_selection {
     byob_guest_dos_metadata_descriptor terminal_quit_metadata;
     byob_guest_dos_metadata_descriptor config_metadata;
     byob_guest_dos_metadata_descriptor autoexec_metadata;
+    uint32_t guest_display_state;
     uint32_t declared_target_count;
     byob_declared_target_descriptor
         declared_targets[BYOB_PROFILE_MAX_DECLARED_TARGETS];

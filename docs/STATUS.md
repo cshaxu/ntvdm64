@@ -2,12 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S88.** Its governing brief is the active
+> **Current effective packet: M0 T198 S89.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S88 -- declare the fixed stream state in the first CLI
-profile and bind the already-tested BOP-`5F` transaction without enabling
-output or hardware composition.**
+**Active: M0 T198 S89 -- rebuild the CPU5 native NTIO fixture with the selected
+stream profile and current composition, then observe the original guest
+BOP-`5F` transaction.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,21 +24,21 @@ output or hardware composition.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S88, Ordinary Mode. |
-| Admission And Approval | S87 closed the exact adapter transaction but found the current profile selection has no display-state member. This is the required re-admission of S86's explicit-profile decision; see `etc/research/t198-s86-cli-stream-profile-design-001.md` and `etc/research/t198-s87-spckbd-stream-state-transaction-001.md`. |
-| Objective | Define a closed, immutable first-profile stream-state declaration and thread only that typed value to the existing `bx-vdm` BOP-`5F` transaction, proving a selected profile can publish `2` through the existing mechanical action boundary. |
-| Non-goals | No CLI `--display` option, stdout sink, BOP `42`, guest video implementation, ROM/device import, memory mapping change, Bochs core/mantle edit, PIC/keyboard/timer behavior, or alternate display mode. |
-| Reference Baseline | S85 contract map; S86 profile design; S87 transaction closure; existing BYOB schema/parser tests and native composition fixture. |
-| Files And ABI Surface | `src/cli` profile schema/selection and `bx-vdm` composition binding only. Reuse S87 typed actions; no core/mantle ABI change, raw guest address, or host display API. |
+| Identifier Mode | M0 T198 S89, Ordinary Mode. |
+| Admission And Approval | S88 closes parser and adapter-composition proof but establishes that the retained CPU5 NTIO fixture links older adapter objects. This S admits only a current-object native relink and observation; see `etc/research/t198-s88-profile-stream-composition-001.md`. |
+| Objective | Source-build and link the selected v7 profile plus current `bx-vdm` composition into the existing CPU5/mantle NTIO fixture, then observe whether the original guest reaches BOP-`5F` and performs the checked stream-state publication. |
+| Non-goals | No CLI `--display` option, stdout sink, BOP `42`, guest video implementation, ROM/device import, memory mapping change, Bochs core/mantle edit, PIC/keyboard/timer behavior, alternate display mode, or new BOP provider. |
+| Reference Baseline | S83--S85 BOP-`5F` reachability evidence; S87 transaction closure; S88 v7 composition closure; existing CPU5 native NTIO fixture and its bounded stop contract. |
+| Files And ABI Surface | Native fixture/relink recipe and focused observations only, plus necessary current-object manifest correction. Reuse S88 types and the existing selector-blind core/mantle ABI; no new seam or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Parser acceptance/rejection tests; focused positive/negative transaction tests; source-built x64 composition closure and bounded fixture when the selected profile reaches `5F`; documentation governance and diff checks. |
-| Expected Markers | An explicit accepted stream declaration, rejection of absence/unknown values, exact `DS:SI + 34` read, validated target write of `2`, CF/RIP result, and no write on every invalid/precondition-negative path. |
+| Verification | Current-object source-build/link manifest; bounded CPU5 native fixture; BOP-`5F` transaction observation including read/write/result; retained S87/S88 focused tests; documentation governance and diff checks. |
+| Expected Markers | A v7-selected profile reaches the fixture, real guest BOP-`5F` is observed, exact `DS:SI + 34` read and target write of `2` occur, CF/RIP result is returned, or an evidence-backed earlier/later boundary prevents that claim. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record schema/version choice, profile-to-composition data direction, action ordering/atomicity, runtime reachability and every excluded display behavior. |
-| Stop Conditions | Any need for a user-selectable display setting, text sink, BOP `42`, arbitrary guest address, ROM/VGA/PIC/device admission, or core/mantle seam. Stop and retain the partial capability. |
-| Exit Criteria | Source/test-built profile declaration and selected transaction binding with negative coverage and no output/device/ROM semantics. |
+| Reporting Requirements | Record all rebuilt versus inherited objects, profile-to-composition data direction, actual BOP observation ordering, action ordering/result, bounded-stop meaning and every excluded display behavior. |
+| Stop Conditions | Any need for a user-selectable display setting, text sink, BOP `42`, arbitrary guest address, ROM/VGA/PIC/device admission, core/mantle seam, or broad Bochs rebuild. Stop and retain the partial capability. |
+| Exit Criteria | Reproducible current-object native observation with an exact runtime disposition, plus no output/device/ROM semantics. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover profile absence/unknown value, legacy-profile compatibility, malformed `DS:SI`, 20-bit range overflow, failed second action, no partial write, existing BOP-`5F` CF continuation, and native fixture reachability. |
+| Similar-Issue Sweep | Cover object provenance, old composition object exclusion, v7 projection, BOP-`5F` observer order, invalid target decline, selected write/result, later stream branch and bounded fixture termination. |
 
 ## Current Technical Baseline
 
@@ -407,13 +407,17 @@ output or hardware composition.**
   INT10 far jump, not random Bochs control flow. M0 T198 S83 brackets the
   pointer write after first `50:11`; M0 T198 S84 proves BOP-`5F` was consumed
   before the passive recorder; M0 T198 S85 classifies its host-contract delta;
-  M0 T198 S86 selects the explicit stream profile. S87 now implements only
+  M0 T198 S86 selects the explicit stream profile. S87 implements only
   its source-derived K.SYS state publication. See [S86 profile design](etc/research/t198-s86-cli-stream-profile-design-001.md).
 - M0 T198 S87 is complete: an explicit `STREAM_IO=2` input permits only the
   exact BOP-`5F` two-byte K.SYS offset read followed by one typed ordinary-RAM
   byte write and the retained CF/RIP continuation. The new API is intentionally
   unbound because no BYOB profile field exists yet; see [S87 transaction
   record](etc/research/t198-s87-spckbd-stream-state-transaction-001.md).
+- M0 T198 S88 is complete: profile v7 now selects only `stream-io-v1`, which
+  becomes the immutable value `2` in composition v2; that composition performs
+  S87's exact BOP-`5F` transaction or declines it rather than falsely resuming.
+  See [S88 profile/composition record](etc/research/t198-s88-profile-stream-composition-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory

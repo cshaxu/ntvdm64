@@ -19,7 +19,9 @@ static int valid(const bx_ntvdm_boot_namespace_composition_v1 *value)
 {
     return value && value->magic == BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_MAGIC &&
         value->abi_version == BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION &&
-        value->struct_bytes == sizeof(*value) && value->bound <= 1u;
+        value->struct_bytes == sizeof(*value) && value->bound <= 1u &&
+        (value->guest_display_state == BYOB_GUEST_DISPLAY_STATE_NONE ||
+         value->guest_display_state == BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1);
 }
 
 static int unpack(const struct bx_ntvdm_generic_ud_event_v1 *event,
@@ -153,6 +155,54 @@ static int execute_mouse_install1_mapping(
     return bx_ntvdm_cpu_result_v2_valid(result);
 }
 
+/* Returns 1 for a completed selected stream transaction, 0 when this is not
+ * a selected BOP 5F request, and -1 when a selected request cannot complete.
+ * The latter deliberately declines rather than falsely taking the old
+ * continuation without publishing the profile-selected state. */
+static int execute_spckbd_stream_state(
+    bx_ntvdm_boot_namespace_composition_v1 *composition,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_guest_gather_read_action_v1 read;
+    bx_ntvdm_multi_write_transaction_v1 write;
+    struct bx_ntvdm_mechanical_action_v1 action;
+    uint8_t payload[1];
+    uint32_t action_id;
+    int selected_bop;
+
+    if (composition == 0 || event == 0 || cpu == 0 || window == 0 ||
+        result == 0 || composition->guest_display_state !=
+            BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1) return 0;
+    selected_bop = event->vector == 6u && window->valid_bytes >= 3u &&
+        window->bytes[0] == 0xc4u && window->bytes[1] == 0xc4u &&
+        window->bytes[2] == 0x5fu;
+    if (!selected_bop) return 0;
+    if (!bx_ntvdm_spckbd_stream_state_v1_prepare(
+            composition->guest_display_state, event, cpu, window, &read) ||
+        read.disposition != BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_NEED_READ ||
+        read.range_count != 1u || read.total_bytes != 2u ||
+        composition->plane.next_action_id == 0u) return -1;
+    action_id = composition->plane.next_action_id++;
+    if (composition->plane.next_action_id == 0u) composition->plane.next_action_id = 1u;
+    bx_ntvdm_mechanical_action_v1_clear(&action);
+    action.action_id = action_id;
+    action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_READ;
+    action.range_count = 1u; action.payload_bytes = 2u;
+    action.ranges[0].physical_address = read.ranges[0].address;
+    action.ranges[0].byte_count = (uint32_t)read.ranges[0].length;
+    if (!bx_ntvdm_mechanical_action_v1_valid(&action) ||
+        !bx_ntvdm_mantle_execute_mechanical_action_v1(&action) ||
+        !bx_ntvdm_spckbd_stream_state_v1_complete(
+            composition->guest_display_state, event, cpu, &read,
+            action.payload, action.payload_bytes, &write, payload) ||
+        !execute_multi_write(composition, &write, payload)) return -1;
+    *result = write.result;
+    return bx_ntvdm_cpu_result_v2_valid(result) ? 1 : -1;
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_initialize(
     bx_ntvdm_boot_namespace_composition_v1 *value, const byob_image *ntdos,
     const byob_image *command,
@@ -163,7 +213,9 @@ int bx_ntvdm_boot_namespace_composition_v1_initialize(
             ntdos, command, target, quit, selection)) return 0;
     value->magic = BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_MAGIC;
     value->abi_version = BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION;
-    value->struct_bytes = sizeof(*value); value->bound = 0; bx_ntvdm_command_launch_plane_v1_clear(&value->launch);
+    value->struct_bytes = sizeof(*value); value->bound = 0;
+    value->guest_display_state = selection->guest_display_state;
+    bx_ntvdm_command_launch_plane_v1_clear(&value->launch);
     bx_ntvdm_dem_error_lock_plane_v1_clear(&value->error_lock);
     bx_ntvdm_dem_gset_plane_v1_clear(&value->gset);
     return valid(value);
@@ -206,6 +258,12 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     /* The NTIO x86 branch explicitly requests CF after its BEEF 5F handoff.
      * This provider retains only that continuation; keyboard mechanics remain
      * outside this composition. */
+    {
+        int stream_state = execute_spckbd_stream_state(active, &boundary, &cpu,
+            &window, &result);
+        if (stream_state > 0) return outcome(&result, value);
+        if (stream_state < 0) return 0;
+    }
     if (bx_ntvdm_spckbd_init_service_v1_dispatch(&boundary, &cpu, &window,
             &result)) return outcome(&result, value);
     if (bx_ntvdm_emm_unavailable_service_v1_dispatch(&boundary, &cpu, &window,

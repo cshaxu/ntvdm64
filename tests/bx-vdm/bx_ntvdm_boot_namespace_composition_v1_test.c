@@ -72,6 +72,7 @@ int main(void)
     uint32_t token;
 
     profile_initialize(&profile);
+    profile.guest_display_state = BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1;
     profile.ntdos.bytes = sizeof(ntdos_bytes);
     memcpy(profile.ntdos.file_name, L"NTDOS.SYS", sizeof(L"NTDOS.SYS"));
     event_initialize(&event, 0x54, 0x0c);
@@ -85,6 +86,20 @@ int main(void)
     if (outcome.resume_rip != 0x104) return 5;
     if (ram[0x10020] == 0) return 6;
 
+    event_initialize(&event, 0x5f, 0);
+    event.eax = 0xbeefu; event.ds = 0x1000u; event.esi = 0x40u;
+    ram[0x10062] = 0x70u; ram[0x10063] = 0u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x103u ||
+        outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        outcome.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        ram[0x10070] != BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1) return 21;
+    event_initialize(&event, 0x5f, 0);
+    event.eax = 0xbeefu; event.ds = 0xfffcu; event.esi = 0u;
+    ram[0xfffe2] = 0xffu; ram[0xfffe3] = 0xffu;
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 22;
+
     event_initialize(&event, 0x50, 0x11);
     event.edi = 0x0800;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 11;
@@ -96,11 +111,14 @@ int main(void)
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x103 || outcome.gpr16_write_mask != 1u ||
         outcome.gpr16_values[0] != 0x027fu) return 16;
-    /* AH=88h belongs to the reusable BIOS-memory provider but is not an
-     * admitted selector in this composition slice. */
+    /* The admitted bare-machine profile reports its fixed extended-memory
+     * value through the existing BIOS-memory provider. */
     event_initialize(&event, 0x15, 0);
     event.eax = 0x8800;
-    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 17;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x103 || outcome.gpr16_write_mask != 1u ||
+        outcome.gpr16_values[0] != 0x0c00u) return 17;
     event_initialize(&event, 0x54, 0x05);
     event.ds = 0x1000; event.edx = 0x20; event.ebx = 0x40; event.ecx = 0x60;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||

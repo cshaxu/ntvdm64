@@ -8,10 +8,11 @@
 #include "bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_MAGIC 0x42584e43u
-#define BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION 1u
+#define BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION 2u
 
 typedef struct bx_ntvdm_boot_namespace_composition_v1 {
     uint32_t magic, abi_version, struct_bytes, bound;
+    uint32_t guest_display_state;
     bx_ntvdm_boot_namespace_plane_v1 plane;
     bx_ntvdm_command_launch_plane_v1 launch;
     bx_ntvdm_dem_error_lock_plane_v1 error_lock;
