@@ -23,20 +23,20 @@
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T199 S24, Ordinary Mode. |
-| Admission And Approval | T199 S21 records BX-MANTLE-078 and admits the fixed selector-blind C1 implementation. |
+| Admission And Approval | T199 S23 establishes C2 as the second shared XMS/DPMI prerequisite. S24 remedies the uncommitted prototype by registering BX-MANTLE-079 before accepting its mantle-private implementation. |
 | Objective | Implement the mantle-private C2 fixed-width aperture allocator and focused lifecycle/bounds regression. |
 | Non-goals | No XMS/DPMI BOP result, adapter state, allocator/UMB/INT15 work, selector recognition below bx-vdm, trace, or bx-core modification. |
-| Reference Baseline | T199 S21 admission and BX-MANTLE-078. |
-| Files And ABI Surface | New mantle request/result wrapper, minimal-machine lifecycle gate, focused MSVC x64 `/MT` fixture and source-boundary check. |
+| Reference Baseline | T199 S23 C2 admission and BX-MANTLE-079. |
+| Files And ABI Surface | New mantle request/result wrapper, minimal-machine lifecycle gate, focused MSVC x64 `/MT` fixture, source-boundary check, and declared whole-core link recipe membership. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fixture proves native enabled/disabled/enabled/query and every specified rejection leaves state unchanged; source scan proves no adapter/BOP/OpenNT term. |
-| Expected Markers | One C1 wrapper, native TLB-flushing setter is the sole mutation owner, and no new bx-core file or provider facade. |
+| Verification | Fixture proves lifecycle gating, aperture bounds, non-overlap, handle invalidation, atomic resize, overlap-safe move, and rejected requests leave allocator state unchanged; source scan proves no adapter/BOP/OpenNT term. |
+| Expected Markers | One C2 wrapper owns the fixed allocation table and checked-copy use; no new bx-core file, provider facade, selector knowledge, or host pointer crosses the surface. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record exact artifact, compiler/CRT, transition results, rejected results, and preserved exclusions. |
-| Stop Conditions | Need for a bx-core patch, product shell, callback/pointer, selector knowledge, or adapter dependency. |
+| Stop Conditions | Need for a bx-core patch, product shell, callback/pointer, selector knowledge, adapter dependency, unbounded host allocation, or a new machine-device feature. |
 | Exit Criteria | C2 allocation/free/reallocation/query/move are source-built and regression-closed without a BOP result. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
-| Similar-Issue Sweep | Audit A20 initialization, wrap semantics, reset/cleanup, x86 CPU mode callers, and all existing A20 configuration paths together. |
+| Similar-Issue Sweep | Audit aperture bounds, reset/cleanup ownership, native checked-memory primitives, handle lifetime, overlap semantics, and all current full-core recipe inputs together. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 
@@ -102,6 +102,11 @@
 > **T199 S21 completion:** C1 A20 now has a source-backed native owner,
 > selector-blind ABI design, and registered mantle exception; see [S21
 > admission](etc/research/t199-s21-c1-a20-capability-admission-001.md).
+
+> **T199 S24 completion:** C2 now provides a selector-blind bounded native
+> aperture allocator with query/allocate/free/resize/move regression and a
+> registered mantle exception; see [S24
+> regression](etc/research/t199-s24-c2-extended-memory-regression-001.md).
 
 ## Current Technical Baseline
 

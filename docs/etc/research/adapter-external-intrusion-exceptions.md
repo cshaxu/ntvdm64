@@ -32,6 +32,7 @@ Every new exception must name its current path, not the historical prefix.
 
 | ID | Owner approval | Imported code changed | Scope | Status |
 | --- | --- | --- | --- | --- |
+| BX-MANTLE-079 | 2026-08-13: T199 S23 admits C2 as the second shared XMS/DPMI prerequisite; owner permits individually registered minimal Bochs intrusions | New project-authored `src/bx-mantle/bx_ntvdm_extended_memory_v1.*`; minimal lifecycle gate in `bx_ntvdm_minimal_machine.*`; declared source membership in the finite-machine link recipe | Expose a fixed-size, mantle-private allocation table over the already initialized native RAM aperture from 1 MiB through `get_memory_len`, with fixed-width query/allocate/free/resize/move records and existing checked ordinary-RAM copies. | S24 governance remediation: the uncommitted prototype existed before this row; this row was entered before final implementation acceptance and commit. No selector/BOP/XMS/DPMI/OpenNT/DOS term, adapter state, host pointer, host allocator, device, firmware, interrupt, CPU decoding, or bx-core change is permitted. |
 | BX-MANTLE-078 | 2026-08-13: T199 S21 establishes C1 as the first shared XMS/DPMI prerequisite; owner permits individually registered minimal Bochs intrusions | New project-authored `src/bx-mantle/bx_ntvdm_a20_capability_v1.*`; minimal lifecycle gate in `bx_ntvdm_minimal_machine.*` | Expose the existing native `bx_pc_system` A20 set/query primitives through one mantle-private fixed-width request/result wrapper after minimal-machine initialization. | Registered before implementation. No selector/BOP/XMS/DPMI/OpenNT term, adapter state, allocator, device, firmware, interrupt, CPU decoding, or core source change is permitted. |
 | BX-MANTLE-077 | 2026-08-13: S47's now-observed generic `#UD STOP` returns before the finite watchdog fires, exposing that the original timer API rejects direct unregistration of an active timer | `src/bx-mantle/bx_ntvdm_finite_run.cc` | Before unregistering the finite private stop timer after `cpu_loop` returns, deactivate it through the existing native PC-time API. | Registered before implementation. No CPU, BOP, OpenNT, adapter, guest-memory, device, firmware, product or ABI behavior is changed. Require early generic-STOP cleanup without a timer panic and retained watchdog HLT cleanup. Reject if cleanup needs a new timer primitive or changes production timer policy. |
 | BX-CORE-076 | 2026-08-13: S46 neutral fixture independently reproduces a five-byte 16-bit code fetch at `CS:FFFF` advancing to `EIP=00010000`; owner permits necessary individually registered Bochs intrusions | `src/bx-core/cpu/cpu.h`, `cpu.cc`, `instr.h`, and `icache.cc` | Introduce one selector-blind instruction-pointer advance helper: long-64 code retains full RIP, 32-bit code retains existing EIP behavior, and 16-bit code truncates the incremented offset to 16 bits. Replace only existing sequential execution and boundary-fetch increments with that helper. | Registered before implementation. No instruction/opcode/address recognition, BOP/DOS/OpenNT/adapter term, guest-memory access, callback, device/firmware/product behavior, ABI or guest-state change beyond the native code-address-width rule. Full CPU5 x64 `/MT` closure, the positive neutral split fixture, HLT/UD2 regressions, and a changed-path source scan are required. Reject/remove if it needs a special-case input or changes control-transfer semantics. |
@@ -1181,6 +1182,42 @@ device enablement is admitted.
 patch, product-shell API, callback, pointer/handle, selector-specific branch,
 second state copy, allocator, interrupt/firmware action, or direct adapter
 dependency.
+
+### BX-MANTLE-079: Mantle-Private Native Extended-Aperture Capability
+
+**Need.** The shared XMS/DPMI plan identifies a bounded extended-RAM allocator
+as C2.  The native memory owner already exposes RAM length and checked copied
+ordinary-RAM operations, but those methods do not provide a bounded allocation
+lifetime and cannot expose host mappings across a component boundary.
+
+**Registration correction.** An uncommitted C2 prototype preceded the entry,
+contrary to the register's prospective rule.  S24 does not treat that fact as
+authorization: it records the deviation, reviews the final surface against
+this row, and admits only the verified implementation in the resulting commit.
+
+**Procedure.** Add only project-authored mantle files
+`bx_ntvdm_extended_memory_v1.h/.cc`.  A fixed-size internal table is active
+only while the existing minimal machine owns initialized memory.  Its
+fixed-width requests support capacity query, allocation, release, resize and
+checked copy between allocated ranges.  Successful results return opaque
+numeric handles and physical offsets only.  The aperture begins at 1 MiB and
+ends at the native memory length; all copying uses the existing checked
+ordinary-RAM primitives.  The wrapper contains no historical service selector
+or guest-service provider behavior.
+
+**Negative cases and verification.** A focused MSVC x64 `/MT` fixture must
+prove inactive rejection, no allocation below 1 MiB, non-overlap, invalidated
+handles, resize atomicity, bounds rejection, overlap-safe copied moves and
+post-cleanup rejection.  Rejected operations leave allocation state unchanged.
+The whole-core finite-machine recipe must explicitly name the new translation
+unit.  Source scans must reject adapter/BOP/OpenNT and host-pointer vocabulary
+from the wrapper.  No BOP result, guest run, device enablement, or XMS/DPMI
+provider is admitted.
+
+**Review condition.** Reject/remove this exception if it requires a bx-core
+patch, product-shell API, callback, raw host pointer, host allocator,
+selector-specific branch, device/firmware/interrupt behavior, or direct
+adapter dependency.
 
 ## OpenNT Intrusions
 
