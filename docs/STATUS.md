@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S16.** Its governing brief is the active
+> **Current effective packet: M0 T199 S17.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S16 -- top-level non-family BOP source/owner map.**
+**Active: M0 T199 S17 -- top-level non-family grouped disposition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S16, Ordinary Mode. |
-| Admission And Approval | T199 S15 closes the entire Debugger package at deferred controlled stop. The owner directed complete BOP coverage by original owner package. |
-| Objective | Map every remaining top-level, non-family OpenNT BOP selector to its original owner, ABI form, failure path, and CLI disposition basis. |
-| Non-goals | No selector implementation, trace-driven endpoint work, Bochs/core/mantle modification, direct old dispatcher link, host-capability expansion, or selector-specific machine semantic. |
-| Reference Baseline | OpenNT `bop.h`, `BOP.INC`, `nt_bop.c`, current ingress and catalog, and retained top-level service sources. |
-| Files And ABI Surface | Original top-level BOP sources and current `bx-vdm` top-level classification only; evidence document. |
+| Identifier Mode | M0 T199 S17, Ordinary Mode. |
+| Admission And Approval | T199 S16 establishes all top-level non-family source owners and admits one grouped disposition plan. |
+| Objective | Select package dispositions and explicit boundaries for every remaining top-level selector before any grouped facade implementation. |
+| Non-goals | No selector implementation, trace, Bochs/core/mantle change, direct dispatcher link, host-capability expansion, or free-form source-derived behavior. |
+| Reference Baseline | T199 S16 owner matrix, current composition helpers and shared XMS/DPMI machine-capability plan. |
+| Files And ABI Surface | `bx-vdm` top-level classification/composition and `bx-mantle` lifecycle boundaries; evidence/disposition only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproducible selector-to-owner/ABI/failure ledger for WOW, unavailable, idle, debug-break, keyboard, video, notification, unimplemented interrupt, switch-to-real-mode and unsimulate selectors. |
-| Expected Markers | One complete top-level map and a grouped implementation/disposition order. |
+| Verification | Every selector has one provider owner and disposition: CLI facade, existing adapter composition, bx-mantle machine lifecycle, DPMI capability plan, or explicit controlled stop. |
+| Expected Markers | One grouped plan that forbids selector semantics in bx-core/bx-mantle and avoids singleton implementation tasks. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Distinguish BOP host-service selectors from SoftPC machine-owned selectors and record all source-closure limitations. |
-| Stop Conditions | Selector implementation, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or unresolved source ambiguity. |
-| Exit Criteria | Complete top-level source map admits grouped unavailable/deferred/machine-owner implementation packets. |
+| Reporting Requirements | Record migration/reuse decisions for existing direct composition helpers and `5C/5D` variant ambiguity. |
+| Stop Conditions | Selector implementation, trace, Bochs/mantle modification, host-capability expansion, or need to resolve historical variant ambiguity by speculation. |
+| Exit Criteria | Grouped disposition plan admits only safe whole-group facade/machine capability tasks. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -77,6 +77,10 @@
 > **T199 S15 completion:** Debugger now has one selector-only deferred-stop
 > facade, preserving byte four as guest code; see [S15
 > regression](etc/research/t199-s15-debugger-deferred-package-regression-001.md).
+
+> **T199 S16 completion:** the remaining top-level selectors have explicit
+> original owners and boundary constraints; see [S16
+> matrix](etc/research/t199-s16-top-level-bop-source-owner-matrix-001.md).
 
 ## Current Technical Baseline
 
