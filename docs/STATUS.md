@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S125.** Its governing brief is the active
+> **Current effective packet: M0 T198 S126.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S125 -- audit whole COMMAND `54:01` launch-plane composition.**
+**Active: M0 T198 S126 -- integrate the existing finite COMMAND launch component.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S125, Ordinary Mode. |
-| Admission And Approval | S124 closes the finite DEM boot sequence and reaches `54:01`. The architecture already has a COMMAND launch plane; source-level ownership/contract must be audited before any changed response. |
-| Objective | Reconcile OpenNT `cmdGetNextCmd`/COMMAND caller ABI, existing launch-plane provider, controlled-stop observer and declared target namespace as one command-launch composition. |
-| Non-goals | No guest run, `54:01` handler rewrite, host broker/Win32 import, target execution claim, Bochs/core/mantle/device change or per-service patch. |
-| Reference Baseline | S124 native observation, T96 COMMAND map and current `bx_ntvdm_command_launch_plane_v1` source. |
-| Files And ABI Surface | Read-only OpenNT and `bx-vdm` source/evidence analysis only. |
+| Identifier Mode | M0 T198 S126, Ordinary Mode. |
+| Admission And Approval | S125 proves the finite source-derived component already exists and is detached. Integrating its complete lifecycle is the smallest owner-correct response. |
+| Objective | Assemble existing CMDGETNEXT provider state, launch plan, gather/complete/write/commit lifecycle and manifest membership into the native composition. |
+| Non-goals | No direct OpenNT `cmdGetNextCmd` link, host queue/Win32 dependency, new BOP semantics, target execution claim, Bochs/core/mantle/device change or guest run. |
+| Reference Baseline | S125 map, T181/T194 finite launch contracts and current composition. |
+| Files And ABI Surface | `src/bx-vdm` composition/command component and declared native manifest/tests. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-line keyed map identifies caller, original dispatcher, current composition disposition and the exact reason the `54:01` boundary is controlled-stopped. |
-| Expected Markers | One command-plane ownership result; no changed runtime source or guest run. |
+| Verification | Focused tests cover absent registration, one/two slots, gather/write/commit and exhausted decline; declared native sources source-compile. |
+| Expected Markers | Only existing checked gather/multi-write/mechanical actions and typed results; no host queue. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record every provider boundary and source-derived unavailable/deferred distinction. |
-| Stop Conditions | Any guest run or semantic source change, host/Bochs/device import, or per-service handler addition. |
-| Exit Criteria | `54:01` is classified as existing-provider, missing composition step, or original unavailable dependency, with one exact next action. |
+| Reporting Requirements | Record component ownership, lifecycle state and manifest closure. |
+| Stop Conditions | Any guest run, new host composition, OpenNT host link, Bochs/device change or per-service shortcut. |
+| Exit Criteria | The complete finite COMMAND lifecycle is composition/test/compile closed; a later native observation is precisely admitted or rejected. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
