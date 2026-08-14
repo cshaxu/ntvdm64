@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S44.** Its governing brief is the active
+> **Current effective packet: M0 T199 S45.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S44 -- XMS package owner and capability recovery.**
+**Active: M0 T199 S45 -- DPMI package owner and disposition recovery.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,25 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S44, Ordinary Mode. |
-| Admission And Approval | S43 closed COMMAND's full source/family disposition without a native trace. T199 now advances to the next original owner package, XMS, rather than following the prior native frontier. |
-| Objective | Recover the complete OpenNT XMS BOP owner package as one unit: original selector/service inventory, A20 and extended-memory ownership, allocator/UMB and INT15 interactions, CLI profile capability disposition, and one whole-family source-built regression. |
-| Non-goals | No service-by-service trace patch, no native guest run, no direct historical host-shell linking, no Bochs BOP knowledge, no DPMI implementation, no DOS/BIOS semantic migration into bx-vdm, and no ambient host memory/device dependency. |
-| Reference Baseline | S38 global ledger and bound native XMS/DPMI session evidence; OpenNT XMS sources and BOP definitions; current `bx_ntvdm_xms_package_session_v1`, `bx_ntvdm_xms_dpmi_plane_v1`, A20 and extended-memory contracts. |
-| Files And ABI Surface | XMS source/ABI/failure map; XMS session/plane/capability code and whole-family fixture. CPU/memory/A20 mechanics remain bx-core/bx-mantle-owned through fixed typed actions only. |
+| Identifier Mode | M0 T199 S45, Ordinary Mode. |
+| Admission And Approval | S44 closed the complete XMS selector family with source inventory, explicit unavailable outcomes and a source-built regression. T199 advances to DPMI as the next original owner package. |
+| Objective | Establish the complete OpenNT DPMI BOP identity/owner/failure map and one contained profile disposition for protected-mode, LDT, exception, memory and session families. |
+| Non-goals | No native trace, no service-only patch, no DPMI implementation inside bx-vdm, no Bochs selector knowledge, and no ambient NT host dependency. |
+| Reference Baseline | S44 XMS boundary map; OpenNT `base/mvdm/dpmi`; current DPMI session/plane and bx-core CPU/interrupt ownership rules. |
+| Files And ABI Surface | DPMI source/ABI/failure ledger, DPMI session/plane and whole-family fixture; typed contracts only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Establish source inventory before code; classify every XMS identity by original owner and profile disposition; then run a fresh MSVC x64 `/MT` package regression through ingress, bound XMS session and typed A20/memory seams. No native trace. |
-| Expected Markers | One XMS owner/ABI/failure ledger; no selector leakage into Bochs; explicit allocator/UMB/INT15 dispositions; and reproducible package evidence. |
+| Verification | Source-map all DPMI identities, then run fresh MSVC x64 `/MT` package regression through ingress and the bound DPMI session. |
+| Expected Markers | Complete DPMI ledger, explicit capability failures, no selector leakage and reproducible package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original XMS source paths/functions, selectors/services, copied register/memory ABI, Bochs/mantle owner boundaries, profile disposition, regressions and limits. Do not label an unavailable capability implemented. |
-| Stop Conditions | Need for a single-service trace patch, changed Bochs CPU/memory/A20 semantics, direct historical host-shell link, ambient host dependency, selector knowledge outside bx-vdm, a native trace, or trace-led scope change. |
-| Exit Criteria | Every original XMS identity has an owner/disposition; whole-package source-built regression passes; unavailable/deferred branches cannot silently succeed; and ownership boundary is recorded. |
-| Original Owner Request | "按完整原始 component package 推进（XMS: A20+allocator+UMB+INT15）……不按 trace 添油。" |
-| Similar-Issue Sweep | Compare all XMS caller families against native session and A20/extended-memory helpers; distinguish XMS host-service semantics from Bochs-owned mechanics and DPMI ownership. |
+| Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
+| Stop Conditions | Need for trace patch, Bochs semantic migration, direct host shell link, ambient host dependency, selector leakage or native trace. |
+| Exit Criteria | Every DPMI identity has an owner/disposition and a whole-package regression passes. |
+| Original Owner Request | "按完整原始 component package 推进（DPMI: PM/LDT/exception/memory）……不按 trace 添油。" |
+| Similar-Issue Sweep | Separate CPU/interrupt/memory mechanics from adapter routing and XMS coupling. |
+
+> **T199 S44 closure:** all twelve XMS slots have explicit owner/disposition;
+> a fresh x64 `/MT` family run proves admitted paths resume and all remaining
+> paths stop rather than leak a raw #UD. See the [XMS map](etc/research/t199-s44-xms-owner-abi-failure-map-001.md).
 
 > **T199 S43 closure:** all seventeen callable COMMAND slots now have one
 > original-owner disposition and fresh x64 `/MT` bound-composition family

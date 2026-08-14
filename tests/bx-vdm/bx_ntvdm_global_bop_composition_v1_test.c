@@ -97,6 +97,17 @@ int main(void)
     if (!call(0x52u, 0u, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_values[0] != 1u) return 2;
+    {
+        uint32_t service;
+        for (service = 0u; service < 12u; ++service) {
+            int implemented = service == 0u || service == 2u || service == 3u ||
+                service == 5u || service == 11u;
+            if (!call(0x52u, (uint8_t)service, &outcome) ||
+                outcome.disposition != (uint32_t)(implemented ?
+                    BX_NTVDM_GENERIC_UD_RESUME : BX_NTVDM_GENERIC_UD_STOP))
+                return (int)(10u + service);
+        }
+    }
     bx_ntvdm_native_bop_composition_v1_unbind(&native_bop);
     bx_ntvdm_boot_namespace_composition_v1_unbind(&boot);
     return 0;
