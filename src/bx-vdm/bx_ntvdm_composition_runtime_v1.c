@@ -9,6 +9,7 @@
 #include "byob_profile.h"
 #include "bx_ntvdm_cpu_state_abi.h"
 #include "bx_ntvdm_guest_write_abi.h"
+#include "bx_ntvdm_initial_state_catalog_v1.h"
 
 #include <string.h>
 #include <windows.h>
@@ -23,6 +24,7 @@ typedef struct bx_ntvdm_composition_runtime_v1 {
     bx_ntvdm_host_volume_snapshot_v1 volumes;
     bx_ntvdm_boot_namespace_composition_v1 composition;
     bx_ntvdm_native_bop_composition_v1 native_bop;
+    bx_ntvdm_initial_state_v1 initial_state;
     int attempted, installed;
 } bx_ntvdm_composition_runtime_v1;
 
@@ -95,6 +97,11 @@ static int install(const wchar_t *profile, const wchar_t *root,
         !bx_ntvdm_native_bop_composition_v1_initialize(&runtime.native_bop) ||
         !bx_ntvdm_native_bop_composition_v1_bind(&runtime.native_bop))
         goto reject;
+    bx_ntvdm_initial_state_v1_clear(&runtime.initial_state);
+    if (selection.has_machine_external_initial_state != 0u &&
+        !bx_ntvdm_initial_state_catalog_v1_select(
+            (const uint16_t *)selection.machine_external_initial_state_evidence_sha256,
+            64u, &runtime.initial_state)) goto reject;
     runtime.installed = 1;
     return 1;
 
@@ -177,5 +184,15 @@ int bx_ntvdm_composition_runtime_v1_prepare_startup_plan(
         (uint64_t)runtime.ntio.byte_count)) return 0;
     *payload = runtime.ntio.bytes;
     *payload_bytes = (uint64_t)runtime.ntio.byte_count;
+    return 1;
+}
+
+int bx_ntvdm_composition_runtime_v1_copy_initial_state(
+    bx_ntvdm_initial_state_v1 *out)
+{
+    if (out == 0 || !runtime.installed ||
+        !bx_ntvdm_initial_state_v1_admitted(&runtime.initial_state, 0x100000u))
+        return 0;
+    *out = runtime.initial_state;
     return 1;
 }

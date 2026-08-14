@@ -37,6 +37,7 @@ int wmain(int argc, wchar_t **argv)
 {
     struct bx_ntvdm_engine_request_v1 request;
     bx_ntvdm_startup_plan_v1 plan;
+    bx_ntvdm_initial_state_v1 initial_state;
     const uint8_t *payload = 0;
     uint64_t payload_bytes = 0u;
     if (argc != 3 || !request_set(&request, argv[1], argv[2])) return 1;
@@ -45,6 +46,8 @@ int wmain(int argc, wchar_t **argv)
             request.root_descriptor, request.root_descriptor_chars,
             request.launch_descriptor, request.launch_descriptor_chars,
             request.admitted_drive_mask, request.excluded_drive_mask) != 1 ||
+        !bx_ntvdm_composition_runtime_v1_copy_initial_state(&initial_state) ||
+        initial_state.range_count != 3u || initial_state.payload_bytes != 53u ||
         !bx_ntvdm_composition_runtime_v1_prepare_startup_plan(&plan, &payload,
             &payload_bytes) || payload == 0 || payload_bytes != 0x8400u ||
         !bx_ntvdm_startup_plan_v1_preflight(&plan, 0x100000u, payload_bytes) ||
@@ -52,6 +55,7 @@ int wmain(int argc, wchar_t **argv)
         plan.entry_cpu.eip != 0u || plan.preserved_state_address != 0x714u ||
         plan.preserved_state_bytes != 4u) return 2;
     bx_ntvdm_composition_runtime_v1_reset();
+    if (bx_ntvdm_composition_runtime_v1_copy_initial_state(&initial_state)) return 3;
     if (bx_ntvdm_composition_runtime_v1_prepare_startup_plan(&plan, &payload,
             &payload_bytes)) return 3;
     return 0;

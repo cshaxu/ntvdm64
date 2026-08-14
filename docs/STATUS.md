@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S20.** Its governing brief is the active
+> **Current effective packet: M0 T200 S21.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S20 -- explicit external initial-state profile record.**
+**Active: M0 T200 S21 -- generic mantle initial-state publication design.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not

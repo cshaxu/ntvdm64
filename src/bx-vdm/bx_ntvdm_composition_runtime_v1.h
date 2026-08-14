@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "bx_ntvdm_startup_plan_abi.h"
+#include "bx_ntvdm_initial_state_abi.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,6 +28,8 @@ int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
 int bx_ntvdm_composition_runtime_v1_prepare_startup_plan(
     bx_ntvdm_startup_plan_v1 *plan, const uint8_t **payload,
     uint64_t *payload_bytes);
+int bx_ntvdm_composition_runtime_v1_copy_initial_state(
+    bx_ntvdm_initial_state_v1 *out);
 void bx_ntvdm_composition_runtime_v1_reset(void);
 
 #ifdef __cplusplus

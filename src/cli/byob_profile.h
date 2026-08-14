@@ -130,6 +130,8 @@ typedef struct byob_profile_selection {
     wchar_t machine_startup_snapshot_evidence_file_name[64];
     uint32_t machine_startup_plan_enabled;
     uint32_t machine_startup_entry_ntio_v0;
+    uint32_t has_machine_external_initial_state;
+    wchar_t machine_external_initial_state_evidence_sha256[65];
     uint32_t has_machine_startup_handoff;
     byob_machine_startup_handoff_descriptor machine_startup_handoff;
     uint32_t has_host_drive_inventory;

@@ -23,8 +23,8 @@ New-Item -ItemType Directory -Path $build | Out-Null
 
 $profile = @'
 {
-  "schema":"ntdos64-byob-profile-v7",
-  "profile":"nt4-en-us-cli-stream-v7",
+  "schema":"ntdos64-byob-profile-v8",
+  "profile":"nt4-en-us-cli-stream-v8",
   "architecture":"x86","locale":"en-US","compatibility_group":"t198-s93-source-built-normal-return",
   "components":[
     {"role":"ntio","file_name":"NTIO.SYS","required":true,"bytes":33792,"sha256":"cfc8be16576bb6acd16bb8fc9b2d9a080f544bbfdd2d2d2df07ed908b3ab4937","version":null},
@@ -36,7 +36,8 @@ $profile = @'
   "guest_boot_files":{"config":{"path":"\\CONFIG.SYS","materialization":"minimal-comment-v1"},"autoexec":{"path":"\\AUTOEXEC.BAT","materialization":"empty-v1"}},
   "guest_declared_targets":[{"role":"target","placement":{"path":"\\TARGET.EXE","drive_index":2}}],
   "guest_search_metadata":{"command":{"attributes":32,"dos_time":1,"dos_date":33},"target":{"attributes":32,"dos_time":2,"dos_date":34},"config":{"attributes":32,"dos_time":3,"dos_date":35},"autoexec":{"attributes":32,"dos_time":4,"dos_date":36}},
-  "guest_display_state":"stream-io-v1"
+  "guest_display_state":"stream-io-v1",
+  "machine_external_initial_state_evidence_sha256":"168219f4c7d73abee06b62b1423298a2f111685e1bf36da23b2c16a642310195"
 }
 '@
 $profilePath = Join-Path $build 'profile-v7.json'
@@ -54,7 +55,7 @@ $profileArgs = '/TC /std:c11 /W4 /WX /D_CRT_SECURE_NO_WARNINGS /MT ' + ($include
     (Join-Path $repository 'tests\runner\t198_s93_profile_select_test.c') + '" /link bcrypt.lib'
 Invoke-Cl $profileArgs (Join-Path $build 'profile-compile.log')
 & $profileExe $profilePath $profileRoot
-if ($LASTEXITCODE -ne 0) { throw 'S93 exact v7 profile selection failed.' }
+if ($LASTEXITCODE -ne 0) { throw 'S93 exact v8 profile selection failed.' }
 
 $fixtureObject = Join-Path $build 'source-built-normal-return-fixture.obj'
 $fixtureArgs = '/c /std:c++14 /EHsc /MT /Gy /DWIN32 /DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1 /DT198_S93_SOURCE_BUILT_NORMAL_RETURN ' + ($includes -join ' ') +
