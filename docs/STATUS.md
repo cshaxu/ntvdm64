@@ -2,12 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S92.** Its governing brief is the active
+> **Current effective packet: M0 T198 S93.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S92 -- map the available source-built SHARE normal-return
-candidate and its startup prerequisites before admitting another native run or
-terminal-result transport.**
+**Active: M0 T198 S93 -- replace synthetic COMMAND/target bytes in the native
+fixture with identity-locked source-built COMMAND.COM/SHARE.EXE inputs and
+define its bounded observation markers.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,21 +24,21 @@ terminal-result transport.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S92, Ordinary Mode. |
-| Admission And Approval | S91 proves the reached `50:3D` is fatal `demExitVDM`, while current artifacts retain a hash-verified source-built SHARE.EXE normal-return candidate. |
-| Objective | Verify the candidate’s present source-build/provenance and map its actual first-profile loading, startup BOP prerequisites, expected normal-return sequence and continuations. Admit no native run until that map distinguishes all reached prerequisites from `54:11`. |
-| Non-goals | No terminal-result transport, CLI exit-code mapping, provider change, fabricated guest, CLI `--display` option, stdout sink, guest video, ROM/device import, memory mapping change, Bochs core/mantle edit, PIC/keyboard/timer behavior, or broad rebuild. |
-| Reference Baseline | S91 fatal-edge closure; S90 stream-handoff witness; T176/T180 normal-return source evidence; retained SHARE provenance and T194 v6 observation. |
-| Files And ABI Surface | Existing source/build manifests, BYOB root/profile, original DOS/COMMAND sources and observation records only. Reuse the selector-blind core/mantle ABI; no new seam, guest-address API, or target binary. |
+| Identifier Mode | M0 T198 S93, Ordinary Mode. |
+| Admission And Approval | S92 proves the source-built SHARE candidate is present but current native observation substitutes synthetic COMMAND/target inputs. |
+| Objective | Create reproducible, compile-only fixture inputs from the existing locked source-built COMMAND.COM and SHARE.EXE artifacts; bind them through the existing composition and define exact bounded observation markers before execution. |
+| Non-goals | No guest execution, terminal-result transport, CLI exit-code mapping, provider change, guest artifact creation, host filesystem exposure, CLI `--display` option, guest video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, or broad rebuild. |
+| Reference Baseline | S92 candidate/prerequisite map; S89/S90 current composition fixture; existing NTIO/NTDOS generated-input recipe. |
+| Files And ABI Surface | New generated evidence inputs and narrow native-fixture/tool references only. Reuse existing immutable namespace, drive snapshot, composition and selector-blind core/mantle ABI; no new seam or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Re-hash existing candidate/provenance inputs; static original-source and existing-trace map; catalog/plane cross-check; documentation governance and diff checks. |
-| Expected Markers | Candidate identity and policy eligibility; ordered startup prerequisite BOPs with original owners/dispositions; expected normal `INT 21h/AH=4Ch -> 50:3C -> COMMAND` sequence; explicit proof that `54:11` is not yet observed. |
+| Verification | Generated-input byte/hash checks, focused fixture source scan for absence of synthetic COMMAND/target payloads, static source-membership/relink recipe review, documentation governance and diff checks. |
+| Expected Markers | Exact two artifact identities, generated-array symbols and lengths, fixture bindings, C-drive snapshot, bounded marker list (`50:3B`, `50:0F`, `54:0C`, `54:01`, `50:3C`, `54:11`) and explicit no-execution result. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record candidate hashes and provenance, profile-to-composition data direction, observed BOP ordering, every prerequisite owner/disposition, normal-return expectation, and every excluded runtime feature. |
-| Stop Conditions | Any need to recreate a target, add a BOP provider, read arbitrary guest addresses, admit ROM/VGA/PIC/device behavior, alter the core/mantle seam, or run before the static map closes. Stop and retain the partial capability. |
-| Exit Criteria | Reproducible source-owned prerequisite/continuation map that either admits one bounded observation or records a concrete pre-observation blocker. |
+| Reporting Requirements | Record source artifact paths, hashes, generator output, compiled-input ownership, profile-to-composition direction, marker meanings, and every excluded runtime feature. |
+| Stop Conditions | Any identity mismatch, need to modify/import a guest artifact, add a BOP provider, read arbitrary guest addresses, admit ROM/VGA/PIC/device behavior, alter the core/mantle seam, or execute before the static fixture closes. Stop and retain the partial capability. |
+| Exit Criteria | Reproducible source-owned actual-image fixture preparation with a separately admissible one-run observation contract, or a concrete build/input blocker. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover `50:3B`, `50:0F`, `50:3C`, `54:01`, and `54:11` evidence so a prior trace’s fatal or pass-through edge cannot be relabeled as normal return. |
+| Similar-Issue Sweep | Cover all generated native guest arrays, manifest/compiler membership, profile selection versus manual fixture fields, and marker collection so no synthetic byte array or unrelated BOP observer masquerades as a normal-return run. |
 
 ## Current Technical Baseline
 
@@ -425,6 +425,11 @@ terminal-result transport.**
   normal return; no provider or runtime behavior was added.  See [S89/S90
   closure](etc/research/t198-s89-s90-native-spckbd-cs-si-closure-001.md) and
   [S91 classification](etc/research/t198-s91-dem-exit-vdm-classification-001.md).
+- M0 T198 S92 is complete: the profile-declared SHARE normal-return candidate
+  is present and hash-verified, but the current native fixture contains only
+  synthetic COMMAND/target bytes.  Repeating it cannot test `50:3C` or
+  `54:11`; S93 owns identity-locked fixture inputs before any next run. See
+  [S92 prerequisite map](etc/research/t198-s92-normal-return-candidate-prerequisite-map-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
