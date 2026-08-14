@@ -9,6 +9,7 @@
 #include "bx_ntvdm_config_done_service.h"
 #include "bx_ntvdm_dem_boot_drive_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
+#include "bx_ntvdm_dem_fastio_noop_service.h"
 #include "bx_ntvdm_dem_ioctl_metadata_provider_v1.h"
 #include "bx_ntvdm_dem_misc_plane_v1.h"
 #include "bx_ntvdm_dem_session_lifecycle_provider_v1.h"
@@ -404,6 +405,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             &window, &result)) return outcome(&result, value);
     if (bx_ntvdm_command_launch_plane_v1_dispatch(&active->launch, &ingress,
             &selection, &boundary, &cpu, &window, &result)) return outcome(&result, value);
+    if (bx_ntvdm_dem_fastio_noop_service_v1_dispatch(&boundary, &cpu, &window,
+            &result)) return outcome(&result, value);
     if (
         !bx_ntvdm_boot_namespace_plane_v1_dispatch(&active->plane, &ingress,
             &selection, &boundary, &cpu, &window, &action, &result)) return 0;

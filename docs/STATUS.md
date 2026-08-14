@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S106.** Its governing brief is the active
+> **Current effective packet: M0 T198 S107.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S106 -- recover the historical DEM fast-I/O no-op family
-as one bounded adapter plane.**
+**Active: M0 T198 S107 -- make one exact-input observation after the recovered
+DEM fast-I/O no-op family.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ as one bounded adapter plane.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S106, Ordinary Mode. |
-| Admission And Approval | S105 proves that both `SVC_DEMFASTREAD`/`SVC_DEMFASTWRITE` dispatch to historical `demNotYetImplemented`, which preserves registers and clears CF after normal BOP service-byte advance. The current `50:42` source-derived byte-copy route is contrary to that recorded disposition and still declines at runtime. |
-| Objective | Add one source-derived `bx-vdm` DEM fast-I/O no-op plane for the exact `50:42`/`50:43` family: validate the bounded event, resume after four BOP bytes, preserve GPRs and clear CF; remove the conflicting fast-read provider route from the active composition. |
-| Non-goals | No guest run, host file read/write, token/position interpretation, guest-memory action, host capability expansion, guest artifact, device/ROM import, Bochs core/mantle edit, broad rebuild or DOS-continuity claim. |
-| Reference Baseline | S105 fast-I/O disposition map; OpenNT `handle.asm`, `demdisp.c` and `nt_bop.c`. |
-| Files And ABI Surface | New adapter-local source-derived provider plus existing typed CPU outcome only; no cross-boundary ABI change. |
+| Identifier Mode | M0 T198 S107, Ordinary Mode. |
+| Admission And Approval | S106 source-builds the two-selector historical no-op family and removes its byte-copy route from the active composition. One exact run is now required to observe the original caller continuation and next unresolved BOP. |
+| Objective | Run exactly once against the retained exact native input and record `50:42` acceptance, its bounded resume, and the first subsequent boundary. |
+| Non-goals | No provider/routing/ABI change, host capability expansion, guest artifact, device/ROM import, Bochs core/mantle edit, broad rebuild or DOS-continuity claim. |
+| Reference Baseline | S106 no-op family witness and S104 exact observation. |
+| Files And ABI Surface | Existing fixture observation only; no new runtime seam or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` C-island positive tests for both selectors and negative wrong-selector/malformed-event tests; current composition source-build without guest run; documentation governance and diff checks. |
-| Expected Markers | Both selectors return typed resume at `fault_rip+4`, write only CF-clear, and do not prepare a mechanical action or consume namespace/provider state. |
+| Verification | One current-object compile/link and exactly one finite native run; retain exact profile/input hashes, logs, acceptance marker and first subsequent boundary; documentation governance and diff checks. |
+| Expected Markers | `50:42` has typed resume with CF clear and no byte-copy action; the run reports the exact next BOP or a bounded-stop classification. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source paths/lines, the explicit historical no-op contract, removed route, positive/negative test coverage and no-run exclusion. |
-| Stop Conditions | Any need for guest execution, host file read/write, token/position interpretation, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change or broad rebuild. Stop and retain the bounded source result. |
-| Exit Criteria | The whole two-selector fast-I/O family source-builds and tests as historical no-op resume semantics, with no remaining active byte-copy fast-read route. |
+| Reporting Requirements | Record rebuilt/inherited objects, exact profile/input hashes, current composition membership, marker ordering, first unresolved boundary and bounded-stop exclusions. |
+| Stop Conditions | Any need for a second run, provider addition, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a claim that watchdog/process exit is a guest result. Stop and retain the observation. |
+| Exit Criteria | One reproducible exact-input observation confirms the recovered family reached its caller continuation or records an exact build/link blocker. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
