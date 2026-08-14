@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S8.** Its governing brief is the active
+> **Current effective packet: M0 T199 S9.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S8 -- whole XMS source/ABI/failure package map.**
+**Active: M0 T199 S9 -- whole XMS provider disposition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -21,19 +21,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S8, Ordinary Mode. |
+| Identifier Mode | M0 T199 S9, Ordinary Mode. |
 | Admission And Approval | T199 S7 closes COMMAND package implementation boundary. T199 S1 orders XMS next; owner policy requires full source package map before provider work. |
-| Objective | Produce a complete original OpenNT XMS source/ABI/failure map for all 12 callable services. |
+| Objective | Select one complete XMS package disposition and record the required bx-core/bx-mantle capability boundary for all 12 services. |
 | Non-goals | No XMS implementation, trace, Bochs/core/mantle modification, direct dispatcher link, host-capability expansion, or singleton recognizer. |
-| Reference Baseline | T199 global audit, existing XMS plane, and DEM/COMMAND package records. |
-| Files And ABI Surface | Research/evidence only: original XMS dispatcher/services and existing `bx-vdm` XMS classification. |
+| Reference Baseline | T199 S8 XMS matrix and existing combined XMS/DPMI plane. |
+| Files And ABI Surface | Research/evidence only: XMS machine-owner map and minimal mantle capability evidence. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproducible source-to-ABI/failure ledger for all XMS callable identities; cross-check current classification. |
-| Expected Markers | One complete XMS matrix and disposition-ready component map. |
+| Verification | Every XMS member has one package disposition, an explicit missing/native prerequisite, and non-fabricated failure behavior. |
+| Expected Markers | One whole-package disposition and a bounded follow-up plan. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record all original host/machine dependencies and prove all 12 identities have one source owner. |
-| Stop Conditions | Implementation, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or source ambiguity. |
-| Exit Criteria | Complete XMS source/ABI/failure matrix admits a whole-package disposition S. |
+| Reporting Requirements | Distinguish current classification from actual native capability; record why no adapter implementation is admitted. |
+| Stop Conditions | Implementation, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or an uncovered member. |
+| Exit Criteria | Complete disposition can move the XMS implementation package behind the required machine capability work. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -52,6 +52,8 @@
 > failure disposition; see [S6 disposition](etc/research/t199-s6-command-whole-package-disposition-001.md).
 
 > **T199 S7 completion:** COMMAND has a compiled package facade and all-service regression without a trace; see [S7 regression](etc/research/t199-s7-command-package-facade-regression-001.md).
+
+> **T199 S8 completion:** all XMS identities, original ABI and failure boundary are recorded in [S8 matrix](etc/research/t199-s8-xms-source-abi-failure-matrix-001.md).
 
 ## Current Technical Baseline
 
