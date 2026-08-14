@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S48.** Its governing brief is the active
+> **Current effective packet: M0 T199 S49.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S48 -- top-level host-service package disposition verification.**
+**Active: M0 T199 S49 -- machine and BIOS BOP owner/disposition verification.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S48, Ordinary Mode. |
-| Admission And Approval | S47 revalidated the complete Debugger package as stack-ABI deferred stop. T199 advances to the remaining top-level host-service selectors as one package. |
-| Objective | Revalidate the original top-level BOP owner map and contained CLI dispositions for WOW, unsupported/idle/notification, keyboard/video, and mode-transition selectors. |
-| Non-goals | No native trace, no service-only patch, no WOW/GUI/VDD/console reimplementation, no Bochs selector knowledge, and no ambient NT host dependency. |
-| Reference Baseline | S47 Debugger boundary; OpenNT `bop.h`, `nt_bop.c`, and current top-level/machine facades. |
-| Files And ABI Surface | Top-level source/owner/disposition ledger and bound all-selector fixture; typed contracts only. |
+| Identifier Mode | M0 T199 S49, Ordinary Mode. |
+| Admission And Approval | S48 revalidated the top-level host-service package and repaired the `5E` no-op continuation. T199 advances to the separately owned machine/BIOS and monitor BOP package. |
+| Objective | Revalidate machine/BIOS BOP identity, owner boundaries, admitted memory/handoff behavior, and deferred monitor/mode-transition disposition. |
+| Non-goals | No native trace, no service-only patch, no adapter-owned CPU/BIOS/PIC/device semantic, no Bochs selector knowledge, and no ambient NT host dependency. |
+| Reference Baseline | S48 top-level owner split; bx-core/bx-mantle architecture; current machine facade, BIOS memory service and machine handoff evidence. |
+| Files And ABI Surface | Machine/BIOS source/owner/disposition ledger and bound fixture; typed contracts only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-map all remaining top-level identities, then run a fresh MSVC x64 `/MT` bound all-selector package regression. |
-| Expected Markers | Complete top-level ledger, explicit owner dispositions, no selector leakage and reproducible package evidence. |
+| Verification | Source-map all admitted machine/BIOS identities, then run a fresh MSVC x64 `/MT` bound machine package regression. |
+| Expected Markers | Complete machine ledger, typed memory/handoff or deferred results, no selector leakage and reproducible package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
-| Stop Conditions | Need for trace patch, Bochs semantic migration, WOW/GUI/VDD host link, ambient host dependency, selector leakage or native trace. |
-| Exit Criteria | Every remaining top-level host-service selector has an owner/disposition and its bound package regression passes. |
-| Original Owner Request | "按完整原始 component package 推进（Debugger 整族 deferred；machine/BIOS 归 bx-core/bx-mantle）……不按 trace 添油。" |
-| Similar-Issue Sweep | Separate host-service selectors from machine/BIOS selectors and keep all selector recognition in bx-vdm. |
+| Stop Conditions | Need for trace patch, Bochs semantic migration into bx-vdm, direct host hardware link, ambient host dependency, selector leakage or native trace. |
+| Exit Criteria | Every admitted machine/BIOS identity has an owner/disposition and its bound package regression passes. |
+| Original Owner Request | "machine/BIOS 归 bx-core/bx-mantle；adapter 负责边界定义，不承载 BIOS/PIC/设备语义。" |
+| Similar-Issue Sweep | Separate selector routing from selector-blind machine actions and audit all top-level machine forms together. |
+
+> **T199 S48 closure:** the top-level host-service package has explicit CLI
+> dispositions, including the corrected source-derived `5E` nonzero no-op
+> continuation. Focused and bound x64 `/MT` fixtures pass; machine selectors
+> remain with their owner package. See the [top-level revalidation](etc/research/t199-s48-top-level-host-service-package-revalidation-001.md).
 
 > **T199 S47 closure:** `56h` is source-proven three-byte debugger ingress
 > with stack-resident mode/arguments, and is a deferred typed stop for the CLI

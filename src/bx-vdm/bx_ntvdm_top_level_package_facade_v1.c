@@ -60,6 +60,15 @@ int bx_ntvdm_top_level_package_facade_v1_dispatch(uint32_t route,
         event->vector != 6u) return 0;
     if (route == BX_NTVDM_TOP_LEVEL_PACKAGE_TERMINAL)
         return bx_ntvdm_cpu_result_v2_stop(result);
+    /* MS_bop_E handles notification code zero through the retained
+     * config-complete provider.  Its only other original branch ignores an
+     * unknown code, so preserve that no-op continuation instead of leaking a
+     * selected BOP back as #UD. */
+    if (route == BX_NTVDM_TOP_LEVEL_PACKAGE_CONFIG) {
+        if ((cpu_before->eax & 0xffu) == 0u || event->fault_rip > UINT64_MAX - 3u)
+            return 0;
+        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 3u);
+    }
     if (route != BX_NTVDM_TOP_LEVEL_PACKAGE_IDLE ||
         event->fault_rip > UINT64_MAX - 3u) return 0;
     return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 3u);
