@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S13.** Its governing brief is the active
+> **Current effective packet: M0 T199 S14.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S13 -- whole Redirector unavailable package provider.**
+**Active: M0 T199 S14 -- whole Debugger source/ABI/failure package map.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S13, Ordinary Mode. |
-| Admission And Approval | T199 S12 closes the complete 50-member Redirector source/ABI/failure map and admits this one package implementation. The owner directed complete ordered BOP packages, not trace-led singleton work. |
-| Objective | Attach one `bx-vdm` source-derived Redirector unavailable provider to all 50 `57:00-31` members, with the original unavailable result and one full-family regression. |
-| Non-goals | No Redirector capability, per-service shim, trace, Bochs/core/mantle modification, direct historical dispatcher link, host-capability expansion, or reuse of the disconnected three-byte legacy provider. |
-| Reference Baseline | T199 S12 Redirector matrix, source `MS_bop_7` unavailable branch, and corrected inventory/catalog/ingress/system-plane identity coverage. |
-| Files And ABI Surface | `bx-vdm` Redirector package facade/provider, composition ingress attachment, typed CPU-result ABI, and a 50-member plus out-of-range regression. |
+| Identifier Mode | M0 T199 S14, Ordinary Mode. |
+| Admission And Approval | T199 S13 closes the entire Redirector package at its selected unavailable disposition. The owner directed implementation by complete original component packages. |
+| Objective | Produce a complete original OpenNT Debugger source/ABI/failure map for all 16 `56:00-0F` members and select one whole-package CLI disposition. |
+| Non-goals | No Debugger implementation, trace-driven endpoint work, Bochs/core/mantle modification, direct old dispatcher link, host-capability expansion, or singleton recognizer. |
+| Reference Baseline | T199 global audit, current system-plane debugger classification, and retained OpenNT debugger dispatcher/service sources. |
+| Files And ABI Surface | Original Debugger service definitions/dispatcher/module surfaces, `bx-vdm` system-plane classification, and evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` source build and run of all-family provider regression: each member returns the source-derived unavailable result through the common four-byte ingress; `57:32` is not accepted. Run source inventory and documentation governance checks. |
-| Expected Markers | One provider/facade, 50 positive members, one out-of-range negative, and no per-service implementation source. |
+| Verification | Reproducible source-to-ABI/failure ledger for all 16 Debugger identities, including source availability and host-bound dependencies. |
+| Expected Markers | One complete Debugger matrix and a package disposition basis. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record the exact CF/AX/resume interpretation, any difference from the disconnected legacy provider, and no capability claim. |
-| Stop Conditions | Any need for a per-service behavior, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or unresolved four-byte result ABI. |
-| Exit Criteria | A single source-derived provider covers every defined Redirector member with complete regression and admits the package's later one native trace. |
+| Reporting Requirements | Identify old debugger/Win32/VDD dependencies, all original failure paths, and source-closure limitations. |
+| Stop Conditions | Debugger implementation, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or unresolved source ambiguity. |
+| Exit Criteria | Complete Debugger map admits one whole-package deferred/unavailable implementation and regression. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -65,6 +65,10 @@
 > **T199 S12 completion:** the Redirector map corrects the `57:31` omission,
 > confirms 50 callable members and records the single unavailable-package
 > disposition; see [S12 matrix](etc/research/t199-s12-redirector-source-abi-failure-matrix-001.md).
+
+> **T199 S13 completion:** one common source-derived facade now returns the
+> original unavailable Redirector result for all 50 members; see [S13
+> regression](etc/research/t199-s13-redirector-unavailable-package-regression-001.md).
 
 ## Current Technical Baseline
 

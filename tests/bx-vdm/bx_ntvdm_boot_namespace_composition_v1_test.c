@@ -168,6 +168,7 @@ int main(void)
     struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t token;
+    uint32_t service;
 
     profile_initialize(&profile);
     if (!facade_regression()) return 45;
@@ -187,6 +188,22 @@ int main(void)
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,
             &launch_plan) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 2;
+    /* The Redirector plane is one whole-package source-derived failure.  The
+       composition must route every defined service through it, without any
+       service-specific host capability. */
+    for (service = 0u; service < 50u; ++service) {
+        event_initialize(&event, 0x57u, (uint8_t)service);
+        if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+            outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+            outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != 1u ||
+            outcome.gpr16_values[0] != 1u || outcome.eflags_write_mask !=
+            BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF || outcome.eflags_values !=
+            BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) return 47;
+    }
+    event_initialize(&event, 0x57u, 0x32u);
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 48;
+    event_initialize(&event, 0x54u, 0x0cu);
+    event.ds = 0x1000; event.edx = 0x20;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 3;
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 4;
     if (outcome.resume_rip != 0x104) return 5;
