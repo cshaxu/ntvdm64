@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S25.** Its governing brief is the active
+> **Current effective packet: M0 T199 S26.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S25 -- C3 UMB owner and ABI admission.**
+**Active: M0 T199 S26 -- C5 INT15 and fault-delivery owner/ABI admission.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S25, Ordinary Mode. |
-| Admission And Approval | T199 S11 orders C3 after C1/C2; the owner-authorized T199 whole-package plan requires source/ABI/failure mapping before a C3 implementation decision. |
-| Objective | Establish whether a native, bounded UMB map/reserve/release capability can exist without inventing a firmware/device map or reproducing the historical NT host allocator. |
-| Non-goals | No UMB implementation, XMS BOP result, adapter state, synthetic memory holes, BIOS/ROM/device enablement, trace, or bx-core modification. |
-| Reference Baseline | T199 S8 XMS matrix, T199 S9 package disposition, T199 S11 shared capability plan, T199 S24 C2 closure, `xmsumb.c`, and historical `nt_umb.c`. |
-| Files And ABI Surface | Source/owner/failure map under `docs/etc/research`; no runtime ABI or source implementation is admitted until the map supplies a real native layout. |
+| Identifier Mode | M0 T199 S26, Ordinary Mode. |
+| Admission And Approval | T199 S11 orders C5 before any XMS/DPMI provider. The owner-authorized T199 whole-package plan requires source/ABI/failure mapping before an interrupt or firmware implementation decision. |
+| Objective | Establish whether a native, bounded INT15/fault-delivery lifecycle can be admitted without reintroducing SoftPC keyboard, PIC, firmware or historical host composition. |
+| Non-goals | No interrupt implementation, XMS BOP result, adapter state, BIOS/PIC/keyboard/device enablement, synthetic IVT, trace, or bx-core modification. |
+| Reference Baseline | T199 S8 XMS matrix, T199 S9 package disposition, T199 S11 shared capability plan, T199 S25 C3 closure, `xmsmisc.c`, and reached SoftPC INT15 sources. |
+| Files And ABI Surface | Source/owner/failure map under `docs/etc/research`; no runtime ABI or source implementation is admitted until a native lifecycle and reset owner are proven. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace every historical UMB allocator dependency to its owner; compare it with the current no-device machine memory map and record an explicit implement/defer decision with no unsupported inference. |
-| Expected Markers | A complete C3 dependency and failure map identifies native prerequisites, historical host-only dependencies, and whether a bounded mantle capability is admissible. |
+| Verification | Trace every reached historical INT15 dependency to its owner; compare it with the current no-device machine lifecycle and record an explicit implement/defer decision with no unsupported inference. |
+| Expected Markers | A complete C5 dependency and failure map identifies native prerequisites, historical host-only dependencies, and whether a bounded mantle capability is admissible. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record source paths/hashes, actual dependency direction, disposition, and preserved exclusions. |
-| Stop Conditions | Any conclusion that C3 can be provided without a source-proven native UMB layout, or any need for a synthetic hole, product shell, callback/pointer, selector knowledge, adapter dependency, or new machine-device feature. |
-| Exit Criteria | C3 has a complete evidence-backed admit/defer decision; if deferred, no implementation is started. |
+| Stop Conditions | Any conclusion that C5 can be provided without a source-proven native vector, delivery, reset and device lifecycle; or any need for a product shell, callback/pointer, selector knowledge, adapter dependency, or new machine-device feature. |
+| Exit Criteria | C5 has a complete evidence-backed admit/defer decision; if deferred, no implementation is started. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
-| Similar-Issue Sweep | Audit ROM/option-ROM/VGA holes, current memory handlers, historical UMB ownership transitions, EMM/VDD consumers, reset/cleanup, and existing no-device exclusions together. |
+| Similar-Issue Sweep | Audit native exception delivery, PIC/keyboard/firmware startup and reset, IVT ownership, host callbacks, x87 IRQ13 evidence, and existing no-device exclusions together. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 
@@ -112,6 +112,11 @@
 > UMB map depends on NT/SoftPC product composition, while the no-device native
 > machine has no source-proven allocatable UMB layout; see [S25
 > map](etc/research/t199-s25-c3-umb-owner-abi-failure-map-001.md).
+
+> **T199 S26 completion:** C5 is explicitly deferred: the reached XMS INT15
+> path is a SoftPC keyboard/firmware callout contract, not a generic native
+> interrupt facility; see [S26
+> map](etc/research/t199-s26-c5-int15-owner-abi-failure-map-001.md).
 
 ## Current Technical Baseline
 
