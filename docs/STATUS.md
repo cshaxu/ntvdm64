@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S27.** Its governing brief is the active
+> **Current effective packet: M0 T200 S28.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S27 -- native CLI engine handoff.**
+**Active: M0 T200 S28 -- native CLI admission and terminal regression.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S27, Ordinary Mode. |
-| Admission And Approval | S26 proves the native engine reaches the expected contained one-slot COMMAND terminal without a package-level BOP omission. The declared product architecture assigns invocation parsing to `src/cli` and execution to the typed native engine; the retained external Bochs runner is not that final composition. |
-| Objective | Make one source-built CLI invocation build a checked fixed-width native-engine request from its admitted BYOB profile, root, declared target, arguments, and drive policy, then report the engine's typed terminal without environment-variable or legacy-product-shell composition. |
-| Non-goals | No BOP/provider change, interactive shell, host process, VDD/GUI/KEYB recovery, ambient command queue, arbitrary Bochs configuration, external `bochs.exe` dependency, unbounded run, device/BIOS change, or OpenNT semantic move. |
-| Reference Baseline | Design architecture's CLI ownership, existing `ntdos64_run.c` argument/profile admission, engine contract v1, S24 bounded native engine, and S26 COMMAND lifecycle determination. |
-| Files And ABI Surface | `src/cli` native invocation entry and fixed-width engine request/result mapping; an explicit MSVC x64 `/MT` build recipe and end-to-end CLI fixture. No environment variable crosses from CLI to engine. |
+| Identifier Mode | M0 T200 S28, Ordinary Mode. |
+| Admission And Approval | S27 establishes the first direct source-built native CLI-to-engine run. The direct path now needs its complete CLI admission and typed-terminal negative regression before it can displace retained runner evidence. |
+| Objective | Add and run a bounded native-CLI regression that proves accepted invocation, malformed/foreign target rejection, drive-policy precedence, and typed terminal mapping without a child engine or environment transport. |
+| Non-goals | No BOP/provider change, interactive shell, host process, VDD/GUI/KEYB recovery, legacy runner rewrite, arbitrary Bochs configuration, external `bochs.exe`, unbounded run, device/BIOS change, or OpenNT semantic move. |
+| Reference Baseline | S27 direct CLI source and probe, engine contract v1, existing BYOB admission tests, and S26 controlled terminal. |
+| Files And ABI Surface | Native CLI test/fixture and explicit MSVC x64 `/MT` probe updates only; no new cross-layer ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-map the retained runner and native-engine ABI before editing. Build one MSVC x64 `/MT` CLI-to-engine closure, run one admitted BYOB target through it, and prove profile/root/launch/drive values are copied rather than passed by environment. Documentation inventory, governance check, diff check, review, commit, and push are required. |
-| Expected Markers | CLI parsing stays in `src/cli`; the engine receives only validated fixed-width copied values and returns a typed terminal. No child product shell, `bochs.exe`, or `NTDOS64_ADAPTER_*` environment transport participates. |
+| Verification | Build the native CLI closure and execute its accepted and rejection cases. Inspect process/environment boundary, run documentation governance and diff checks, then commit and push. |
+| Expected Markers | Accepted case remains direct; rejected cases do not enter engine execution; include/exclude conflict preserves exclusion precedence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record old/new composition boundary, CLI argument/result mapping, source-built build graph, end-to-end result, and limitations. Do not claim general CLI/DOS compatibility. |
-| Stop Conditions | A requirement for an ambient host broker, a legacy product-shell or `bochs.exe` launch, an environment-variable handoff, a new Bochs semantic intrusion, raw Bochs type crossing a C boundary, or an unbounded run pauses this S for re-admission. |
-| Exit Criteria | One independently buildable CLI executable invokes the native engine via the declared copied ABI and produces a bounded typed result for an admitted profile; the old external engine route is not used by that fixture. |
+| Reporting Requirements | Record each admission case and typed outcome; do not claim general CLI/DOS compatibility. |
+| Stop Conditions | Any child product shell, environment-variable handoff, new Bochs semantic intrusion, raw Bochs type crossing a C boundary, or unbounded run pauses this S for re-admission. |
+| Exit Criteria | Accepted and declared negative CLI paths are source-built and evidenced under the direct ABI. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect `ntdos64_run.c`, `ntdos64_bochs_engine.c`, CLI profile/target/launch/drive parsing, engine contract/request validation, direct composition installation, existing runner CMake policy, and native engine probe. |
+| Similar-Issue Sweep | Inspect native CLI option parser, profile/target admission, launch-plan encoding, drive parser, engine request validation, terminal mapping, and retained runner policy tests. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -106,6 +106,11 @@
 > Current source-built package regressions and one bounded native engine run
 > confirm that the observed `54:01` is the declared one-slot terminal, not a
 > missing BOP. See the [lifecycle reconciliation](etc/research/t200-s26-command-initial-lifecycle-reconciliation-001.md).
+
+> **T200 S27 closure:** the new MSVC x64 `/MT` native CLI constructs and calls
+> the copied engine ABI directly for an admitted BYOB target; no legacy child
+> engine, `bochs.exe`, or `NTDOS64_ADAPTER_*` environment transport is used.
+> See the [handoff evidence](etc/research/t200-s27-native-cli-engine-handoff-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
