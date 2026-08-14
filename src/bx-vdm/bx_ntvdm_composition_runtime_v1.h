@@ -6,6 +6,7 @@
 #include "bx_ntvdm_startup_plan_abi.h"
 #include "bx_ntvdm_initial_state_abi.h"
 #include "bx_ntvdm_initial_state_action_v1.h"
+#include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,6 +36,11 @@ int bx_ntvdm_composition_runtime_v1_copy_initial_state(
  * mantle action.  It exposes no raw machine object or guest service meaning. */
 int bx_ntvdm_composition_runtime_v1_prepare_initial_state_action(
     struct bx_ntvdm_mechanical_action_v1 *action);
+/* Produces the full mechanical preentry request from the installed direct
+ * composition.  The record contains no Bochs object, host pointer, or BOP
+ * identity; it is consumed synchronously by the mantle machine stage. */
+int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_request(
+    struct bx_ntvdm_machine_stage_v1_request *request);
 void bx_ntvdm_composition_runtime_v1_reset(void);
 
 #ifdef __cplusplus

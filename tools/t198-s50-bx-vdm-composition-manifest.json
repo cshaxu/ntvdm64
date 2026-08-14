@@ -102,6 +102,7 @@
     ,"src/bx-vdm/bx_ntvdm_xms_dpmi_plane_v1.c"
     ,"src/bx-mantle/bx_ntvdm_a20_capability_v1.cc"
     ,"src/bx-mantle/bx_ntvdm_extended_memory_v1.cc"
+    ,"src/bx-mantle/bx_ntvdm_machine_stage_v1.cc"
     ,"src/bx-core/memory/misc_mem.cc"
   ],
   "linkedCompositionRoot": "bx_ntvdm_composition_runtime_v1 (boot namespace + native XMS/DPMI sessions)",

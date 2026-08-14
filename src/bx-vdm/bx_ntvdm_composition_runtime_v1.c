@@ -204,3 +204,35 @@ int bx_ntvdm_composition_runtime_v1_prepare_initial_state_action(
     return bx_ntvdm_initial_state_action_v1_prepare(&runtime.initial_state,
         action);
 }
+
+int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_request(
+    struct bx_ntvdm_machine_stage_v1_request *request)
+{
+    bx_ntvdm_startup_plan_v1 plan;
+    const uint8_t *payload;
+    uint64_t payload_bytes;
+
+    if (request == 0 || !runtime.installed ||
+        !bx_ntvdm_composition_runtime_v1_prepare_startup_plan(&plan, &payload,
+            &payload_bytes) || payload == 0 ||
+        payload_bytes > BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES ||
+        !bx_ntvdm_startup_plan_v1_preflight(&plan, UINT64_C(0x100000),
+            payload_bytes)) return 0;
+    bx_ntvdm_machine_stage_v1_request_clear(request);
+    if (!bx_ntvdm_initial_state_action_v1_prepare(&runtime.initial_state,
+            &request->initial_state_action)) return 0;
+    bx_ntvdm_mechanical_action_v1_clear(&request->startup_action);
+    request->startup_action.action_id = 2u;
+    request->startup_action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+    request->startup_action.range_count = 1u;
+    request->startup_action.payload_bytes = (uint32_t) payload_bytes;
+    request->startup_action.ranges[0].physical_address =
+        plan.payload_write.guest_physical_address;
+    request->startup_action.ranges[0].byte_count =
+        (uint32_t) plan.payload_write.byte_count;
+    request->startup_action.ranges[0].payload_offset = 0u;
+    memcpy(request->startup_action.payload, payload, (size_t) payload_bytes);
+    request->preserved_state_address = plan.preserved_state_address;
+    request->preserved_state_bytes = plan.preserved_state_bytes;
+    return bx_ntvdm_machine_stage_v1_request_valid(request);
+}
