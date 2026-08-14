@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S15.** Its governing brief is the active
+> **Current effective packet: M0 T200 S16.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S15 -- native engine machine-lifecycle map.**
+**Active: M0 T200 S16 -- direct composition startup-plan provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S15, Ordinary Mode. |
-| Admission And Approval | S14 closed real source-built direct composition install/reset without an environment handoff. |
-| Objective | Map the product-owned native engine machine lifecycle: startup input ownership, mantle initialize/reset, composition bind order, and terminal result propagation. |
-| Non-goals | No lifecycle implementation, guest run, CLI process-status mapping, old-shell removal, BOP patch, or Bochs change. |
-| Reference Baseline | T200 S14 direct composition closure; minimal-machine and finite-run source; retained full-product startup hook. |
-| Files And ABI Surface | Native engine request/result extension candidates; mantle lifecycle entry; bx-vdm startup composition and terminal handoff. |
+| Identifier Mode | M0 T200 S16, Ordinary Mode. |
+| Admission And Approval | S15 source-mapped product lifecycle and identified the direct composition startup-plan provider as its first missing boundary. |
+| Objective | Define and test a direct-composition startup-plan/payload provider with explicit ownership and release-safe lifecycle contract. |
+| Non-goals | No machine initialization, CPU loop, guest run, CLI process-status mapping, old-shell removal, BOP patch, or Bochs change. |
+| Reference Baseline | T200 S15 lifecycle map, S14 direct composition closure, existing pointer-free startup-plan ABI. |
+| Files And ABI Surface | bx-vdm direct composition startup provider; copied startup-plan/payload view; session cleanup contract; focused x64 `/MT` fixture. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI map names the exact product-owned replacement for each retained `main.cc` startup step, including rejection/cleanup order. |
-| Expected Markers | No planned path uses the old product `main.cc` hook or passes a C++ machine object across an ABI; no runtime-success claim. |
+| Verification | Focused x64 `/MT` fixture proves valid source-built direct composition produces a plan/payload, invalid use is rejected, and cleanup prevents stale reuse. |
+| Expected Markers | Provider never calls environment startup paths or finite-run APIs; plan remains pointer-free and payload lifetime is explicit; no runtime-success claim. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record old-hook replacement/rejection decisions, lifecycle owner, input/result lifetime, and every unproven terminal semantic. |
-| Stop Conditions | Any lifecycle implementation, guest run, old-hook change, or raw object/Bochs type crossing the public engine contract. |
-| Exit Criteria | A source-backed lifecycle/ABI map that can admit one later bounded implementation S. |
+| Reporting Requirements | Record source-derived plan geometry, payload ownership, rejected routes, and release order; do not call guest startup/COMMAND closed. |
+| Stop Conditions | Any machine initialization, CPU loop, guest execution, environment startup call, finite-run use, or raw object/Bochs type crossing a C boundary. |
+| Exit Criteria | Source-built direct provider/test closure documents plan and payload lifetime plus cleanup behavior. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect finite-run, minimal-machine lifecycle, preentry/startup-plan paths, generic stop handling, composition reset, and CLI child ownership. |
+| Similar-Issue Sweep | Inspect old startup sessions, direct composition images, preentry provenance, startup-plan validation, and native XMS resource release. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -58,6 +58,10 @@
 > **T200 S14 closure:** the direct path binds and releases the real,
 > source-built whole composition twice without environment mutation or machine
 > execution.  See the [direct closure](etc/research/t200-s14-direct-composition-closure-001.md).
+
+> **T200 S15 closure:** the native engine lifecycle map rejects the old
+> product startup hook and fixture runner, and admits a direct-composition
+> startup-plan provider.  See the [lifecycle map](etc/research/t200-s15-native-engine-machine-lifecycle-map-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
