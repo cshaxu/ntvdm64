@@ -2,12 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S94.** Its governing brief is the active
+> **Current effective packet: M0 T198 S95.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S94 -- relink and make one bounded observation of the exact
-source-built COMMAND.COM/SHARE.EXE native fixture; classify the first unresolved
-boundary without adding a provider.**
+**Active: M0 T198 S95 -- map the whole existing COMMAND bootstrap component
+(`54:02` and `54:0F`) before admitting any composition routing change.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,9 +23,9 @@ boundary without adding a provider.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S94, Ordinary Mode. |
-| Admission And Approval | S93 source-builds and compile-validates exact COMMAND/SHARE fixture inputs, a v7 stream profile declaration and the full fixture branch without execution. |
-| Objective | Perform one full current-object MSVC x64 `/MT` relink and finite native observation using the S93 source-built inputs; record the first unresolved boundary and its original owner/disposition. |
+| Identifier Mode | M0 T198 S95, Ordinary Mode. |
+| Admission And Approval | S94's only exact-input run reaches original COMMAND `54:02`; the paired bootstrap implementation exists but is detached from composition. |
+| Objective | Map original owner, ABI, paired state transition, current component dependencies and failure behavior for `54:02`/`54:0F`; admit no routing until this component is evidence-complete. |
 | Non-goals | No second run, terminal-result transport, CLI exit-code mapping, provider change, guest artifact creation, host filesystem exposure, CLI `--display` option, guest video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim without `54:11`. |
 | Reference Baseline | S93 input preparation; S92 prerequisite map; S89/S90 current-object relink recipe. |
 | Files And ABI Surface | One new bounded build/run root and narrow native probe/fixture references only. Reuse existing immutable namespace, drive snapshot, composition and selector-blind core/mantle ABI; no new seam or guest-address API. |
