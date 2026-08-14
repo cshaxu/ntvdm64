@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S43.** Its governing brief is the active
+> **Current effective packet: M0 T199 S44.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S43 -- COMMAND full service-family composition.**
+**Active: M0 T199 S44 -- XMS package owner and capability recovery.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S43, Ordinary Mode. |
-| Admission And Approval | S42 closed the original CMDINFO subpackage map and its source-built `54:0F → 54:01` regression. The owner requires the complete original component package, not a succession of trace-selected BOP patches. |
-| Objective | Recover and verify one coherent contained disposition for every original COMMAND `54:00..10` service: bootstrap, launch, console, execution, environment and lifecycle, with original-source ordering and explicit unavailable/deferred outcomes where CLI capability is absent. |
-| Non-goals | No individual trace-frontier patch, no native guest run, no direct `nt_bop.c` linking, no Bochs BOP knowledge, no DOS/BIOS semantic migration into bx-vdm, and no ambient NT-host dependency. |
-| Reference Baseline | S5/S6 COMMAND matrices, S40 entry-lifecycle map, S42 CMDINFO source/ABI map and regressions, S38 global ledger, `cmdsvc.h`, `cmddisp.c`, `cmdmisc.c`, `cmdenv.c`, `cmdexec.c` and current command package facade/session. |
-| Files And ABI Surface | COMMAND facade/plane/session and service providers; one full-family source-built regression and owner/disposition ledger. All memory remains fixed-width checked copied adapter action. |
+| Identifier Mode | M0 T199 S44, Ordinary Mode. |
+| Admission And Approval | S43 closed COMMAND's full source/family disposition without a native trace. T199 now advances to the next original owner package, XMS, rather than following the prior native frontier. |
+| Objective | Recover the complete OpenNT XMS BOP owner package as one unit: original selector/service inventory, A20 and extended-memory ownership, allocator/UMB and INT15 interactions, CLI profile capability disposition, and one whole-family source-built regression. |
+| Non-goals | No service-by-service trace patch, no native guest run, no direct historical host-shell linking, no Bochs BOP knowledge, no DPMI implementation, no DOS/BIOS semantic migration into bx-vdm, and no ambient host memory/device dependency. |
+| Reference Baseline | S38 global ledger and bound native XMS/DPMI session evidence; OpenNT XMS sources and BOP definitions; current `bx_ntvdm_xms_package_session_v1`, `bx_ntvdm_xms_dpmi_plane_v1`, A20 and extended-memory contracts. |
+| Files And ABI Surface | XMS source/ABI/failure map; XMS session/plane/capability code and whole-family fixture. CPU/memory/A20 mechanics remain bx-core/bx-mantle-owned through fixed typed actions only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Audit all seventeen original dispatch slots against `cmddisp.c`; run fresh MSVC x64 `/MT` whole-family regression through ingress, composition and checked mechanical seams for every callable disposition, including no-op, unavailable and deferred paths. No native trace. |
-| Expected Markers | One `54:00..10` owner/disposition ledger; no accidental raw pass-through for an admitted service; positive/negative source-built evidence for each provider class; and preserved composition ordering. |
+| Verification | Establish source inventory before code; classify every XMS identity by original owner and profile disposition; then run a fresh MSVC x64 `/MT` package regression through ingress, bound XMS session and typed A20/memory seams. No native trace. |
+| Expected Markers | One XMS owner/ABI/failure ledger; no selector leakage into Bochs; explicit allocator/UMB/INT15 dispositions; and reproducible package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record every original slot, owner function, adapter/provider disposition, fixed ABI effects, regression evidence and limits. Do not call a provider-class terminal result a historical capability implementation. |
-| Stop Conditions | Need for a service-only patch, a DOS/Bochs semantic migration, direct historical host-shell link, ambient host dependency, selector knowledge outside bx-vdm, a native trace, or trace-led scope change. |
-| Exit Criteria | All 17 original COMMAND slots have verified package dispositions; one whole-family regression passes; unavailable/deferred slots cannot silently succeed; and component limitations are recorded. |
-| Original Owner Request | "按完整原始 component package 推进（COMMAND: bootstrap/launch/console/execution/environment/lifecycle）……不按 trace 添油。" |
-| Similar-Issue Sweep | Compare `cmddisp.c`'s seventeen-slot order against ingress, plane, facade and session dispatch; test launch state, initial environment, CMDINFO retry, console, boot-file, current-directory, execution refusal, return/exit and malformed-range containment. |
+| Reporting Requirements | Record original XMS source paths/functions, selectors/services, copied register/memory ABI, Bochs/mantle owner boundaries, profile disposition, regressions and limits. Do not label an unavailable capability implemented. |
+| Stop Conditions | Need for a single-service trace patch, changed Bochs CPU/memory/A20 semantics, direct historical host-shell link, ambient host dependency, selector knowledge outside bx-vdm, a native trace, or trace-led scope change. |
+| Exit Criteria | Every original XMS identity has an owner/disposition; whole-package source-built regression passes; unavailable/deferred branches cannot silently succeed; and ownership boundary is recorded. |
+| Original Owner Request | "按完整原始 component package 推进（XMS: A20+allocator+UMB+INT15）……不按 trace 添油。" |
+| Similar-Issue Sweep | Compare all XMS caller families against native session and A20/extended-memory helpers; distinguish XMS host-service semantics from Bochs-owned mechanics and DPMI ownership. |
+
+> **T199 S43 closure:** all seventeen callable COMMAND slots now have one
+> original-owner disposition and fresh x64 `/MT` bound-composition family
+> evidence. It does not claim historical console/process/redirection recovery
+> or native-run closure; see the [COMMAND ledger](etc/research/t199-s43-command-family-owner-disposition-ledger-001.md).
 
 > **T199 S42 closure:** CMDINFO is now a source-mapped contained subpackage:
 > `54:0F` environment capacity crosses to `54:01` as the original CF/AX retry
