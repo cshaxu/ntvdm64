@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S118.** Its governing brief is the active
+> **Current effective packet: M0 T198 S119.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S118 -- verify ledger export without guest execution before
-admitting a replacement observation.**
+**Active: M0 T198 S119 -- make one replacement native observation with the
+exported bounded fast-read ledger.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ admitting a replacement observation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S118, Ordinary Mode. |
-| Admission And Approval | S117 executed exactly one run and linked the ledger, but the fixture did not export ledger entries, so that run is invalid for per-attempt attribution. The missing export is now fixed in the test-only fixture and compiles under CPU5/x64. S118 verifies the export closure without guest execution. |
-| Objective | Close the fixed ledger export through source/build evidence and record S117's evidence limitation. Prepare one later, separately admitted replacement observation. |
-| Non-goals | No guest run, retry, provider/ABI change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S116 ledger, S117 run/provenance, commit `da62305` export fix and current S94/S97 harness. |
-| Files And ABI Surface | Test fixture export and evidence records only; no production adapter or Bochs ABI. |
+| Identifier Mode | M0 T198 S119, Ordinary Mode. |
+| Admission And Approval | S118 records S117 as attribution-insufficient, fixes the fixture export and source-compiles it. The registered harness now links the fixed ledger and its output site. One replacement run is required to answer the already bounded attribution question. |
+| Objective | Rebuild and execute exactly one bounded native run. Export every ledger entry, BOP `5F` and bounded terminal state; classify all observed `50:42` attempts from the copied facts without implementation change. |
+| Non-goals | No retry, provider/ABI change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
+| Reference Baseline | S114 post-commit evidence, S115 source map, S116 ledger, S117 invalid record, S118 export closure. |
+| Files And ABI Surface | Registered native derivative and evidence only; no source change unless a pre-run build membership defect blocks the admitted build. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fixture export source compiles with ledger declaration; no run provenance is created; documentation governance and diff checks pass. |
-| Expected Markers | S117 is explicitly limited, and a later run can emit all ledger entries. |
+| Verification | One provenance-locked `runs=1` record plus `run.log` contains ordered ledger entries and terminal markers. |
+| Expected Markers | Each recorded attempt has only fixed-width copied input/result fields and an accepted/declined disposition. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record the S117 omission, fixed output site, non-guest compilation and limits. |
-| Stop Conditions | Any guest execution, provider/ABI/semantic change, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. |
-| Exit Criteria | Export closure is recorded and a replacement observation is bounded by a new active task. |
+| Reporting Requirements | Record build provenance, run count, every entry, source disposition and confidence. |
+| Stop Conditions | Any second run, provider/ABI/semantic change, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. |
+| Exit Criteria | Ledger evidence assigns source-grounded status to every retained fast-read call or establishes one exact source-only follow-up. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
