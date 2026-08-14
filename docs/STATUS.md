@@ -2,11 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S91.** Its governing brief is the active
+> **Current effective packet: M0 T198 S92.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S91 -- source-classify the newly reached DEM `BOP 50:3D`
-before admitting any provider or runtime behavior.**
+**Active: M0 T198 S92 -- map the available source-built SHARE normal-return
+candidate and its startup prerequisites before admitting another native run or
+terminal-result transport.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +24,21 @@ before admitting any provider or runtime behavior.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S91, Ordinary Mode. |
-| Admission And Approval | S89/S90 current-object native observation reaches a new real guest boundary `50:3D`; see `etc/research/t198-s89-s90-native-spckbd-cs-si-closure-001.md`. |
-| Objective | Map original OpenNT owner, dispatcher, parameter contract, continuation and profile disposition for DEM `50:3D`; admit no implementation until that map is evidence-complete. |
-| Non-goals | No CLI `--display` option, stdout sink, BOP `42`, guest video implementation, ROM/device import, memory mapping change, Bochs core/mantle edit, PIC/keyboard/timer behavior, alternate display mode, or new BOP provider. |
-| Reference Baseline | S89/S90 native handoff closure; current BOP catalog/DEM plane and original OpenNT dispatcher sources. |
-| Files And ABI Surface | Native fixture/relink recipe and focused observations only, plus necessary current-object manifest correction. Reuse S88 types and the existing selector-blind core/mantle ABI; no new seam or guest-address API. |
+| Identifier Mode | M0 T198 S92, Ordinary Mode. |
+| Admission And Approval | S91 proves the reached `50:3D` is fatal `demExitVDM`, while current artifacts retain a hash-verified source-built SHARE.EXE normal-return candidate. |
+| Objective | Verify the candidate’s present source-build/provenance and map its actual first-profile loading, startup BOP prerequisites, expected normal-return sequence and continuations. Admit no native run until that map distinguishes all reached prerequisites from `54:11`. |
+| Non-goals | No terminal-result transport, CLI exit-code mapping, provider change, fabricated guest, CLI `--display` option, stdout sink, guest video, ROM/device import, memory mapping change, Bochs core/mantle edit, PIC/keyboard/timer behavior, or broad rebuild. |
+| Reference Baseline | S91 fatal-edge closure; S90 stream-handoff witness; T176/T180 normal-return source evidence; retained SHARE provenance and T194 v6 observation. |
+| Files And ABI Surface | Existing source/build manifests, BYOB root/profile, original DOS/COMMAND sources and observation records only. Reuse the selector-blind core/mantle ABI; no new seam, guest-address API, or target binary. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Static source map, catalog/plane cross-check and focused classification test if an existing route is affected; documentation governance and diff checks. |
-| Expected Markers | Original owner and service identity, input/output/continuation, explicit available/unavailable/deferred disposition, and no speculative provider. |
+| Verification | Re-hash existing candidate/provenance inputs; static original-source and existing-trace map; catalog/plane cross-check; documentation governance and diff checks. |
+| Expected Markers | Candidate identity and policy eligibility; ordered startup prerequisite BOPs with original owners/dispositions; expected normal `INT 21h/AH=4Ch -> 50:3C -> COMMAND` sequence; explicit proof that `54:11` is not yet observed. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record all rebuilt versus inherited objects, profile-to-composition data direction, actual BOP observation ordering, action ordering/result, bounded-stop meaning and every excluded display behavior. |
-| Stop Conditions | Any need for a user-selectable display setting, text sink, BOP `42`, arbitrary guest address, ROM/VGA/PIC/device admission, core/mantle seam, or broad Bochs rebuild. Stop and retain the partial capability. |
-| Exit Criteria | Reproducible source-owned classification ready for a separately admitted implementation or explicit deferral. |
+| Reporting Requirements | Record candidate hashes and provenance, profile-to-composition data direction, observed BOP ordering, every prerequisite owner/disposition, normal-return expectation, and every excluded runtime feature. |
+| Stop Conditions | Any need to recreate a target, add a BOP provider, read arbitrary guest addresses, admit ROM/VGA/PIC/device behavior, alter the core/mantle seam, or run before the static map closes. Stop and retain the partial capability. |
+| Exit Criteria | Reproducible source-owned prerequisite/continuation map that either admits one bounded observation or records a concrete pre-observation blocker. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover adjacent DEM 50-family ownership, selector/service decoding, legacy plane gates and existing unavailable dispositions. |
+| Similar-Issue Sweep | Cover `50:3B`, `50:0F`, `50:3C`, `54:01`, and `54:11` evidence so a prior trace’s fatal or pass-through edge cannot be relabeled as normal return. |
 
 ## Current Technical Baseline
 
@@ -417,6 +418,13 @@ before admitting any provider or runtime behavior.**
   becomes the immutable value `2` in composition v2; that composition performs
   S87's exact BOP-`5F` transaction or declines it rather than falsely resuming.
   See [S88 profile/composition record](etc/research/t198-s88-profile-stream-composition-001.md).
+- M0 T198 S89/S90 are complete: a current-object MSVC x64 native run proves
+  that the exact BOP-`5F` CS:SI table / DS-relative state transaction selects
+  the guest stream branch and avoids the former C000 transfer.  Its next
+  boundary is `50:3D`, which S91 source-classifies as fatal `demExitVDM`, not a
+  normal return; no provider or runtime behavior was added.  See [S89/S90
+  closure](etc/research/t198-s89-s90-native-spckbd-cs-si-closure-001.md) and
+  [S91 classification](etc/research/t198-s91-dem-exit-vdm-classification-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
