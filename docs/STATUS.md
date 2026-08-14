@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S14.** Its governing brief is the active
+> **Current effective packet: M0 T199 S15.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S14 -- whole Debugger source/ABI/failure package map.**
+**Active: M0 T199 S15 -- whole Debugger deferred package facade.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S14, Ordinary Mode. |
-| Admission And Approval | T199 S13 closes the entire Redirector package at its selected unavailable disposition. The owner directed implementation by complete original component packages. |
-| Objective | Produce a complete original OpenNT Debugger source/ABI/failure map for all 16 `56:00-0F` members and select one whole-package CLI disposition. |
-| Non-goals | No Debugger implementation, trace-driven endpoint work, Bochs/core/mantle modification, direct old dispatcher link, host-capability expansion, or singleton recognizer. |
-| Reference Baseline | T199 global audit, current system-plane debugger classification, and retained OpenNT debugger dispatcher/service sources. |
-| Files And ABI Surface | Original Debugger service definitions/dispatcher/module surfaces, `bx-vdm` system-plane classification, and evidence only. |
+| Identifier Mode | M0 T199 S15, Ordinary Mode. |
+| Admission And Approval | T199 S14 establishes the actual three-byte Debugger selector ABI and admits this complete package disposition. The owner directed component-wide BOP implementation. |
+| Objective | Replace the erroneous inline-service Debugger ingress with selector-only `56h` routing and attach one whole-package deferred controlled-stop facade. |
+| Non-goals | No Debugger host capability, stack-mode parser, guest-stack read, register emulation, trace, Bochs/core/mantle modification, old dispatcher link, or singleton recognizer. |
+| Reference Baseline | T199 S14 source/ABI matrix and current ingress/system-plane implementation. |
+| Files And ABI Surface | `bx-vdm` ingress, system-plane Debugger classification, one package facade, composition attachment, and focused plus composition regressions. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproducible source-to-ABI/failure ledger for all 16 Debugger identities, including source availability and host-bound dependencies. |
-| Expected Markers | One complete Debugger matrix and a package disposition basis. |
+| Verification | MSVC x64 `/MT` source build and run: three-byte `56h` and a four-byte window resume neither as a service nor a false success; both reach the package controlled-stop path. Run documentation governance checks. |
+| Expected Markers | One selector-only package facade, no stack/guest-memory access, deterministic controlled stop, and no consumed fourth byte. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Identify old debugger/Win32/VDD dependencies, all original failure paths, and source-closure limitations. |
-| Stop Conditions | Debugger implementation, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or unresolved source ambiguity. |
-| Exit Criteria | Complete Debugger map admits one whole-package deferred/unavailable implementation and regression. |
+| Reporting Requirements | Record the three-byte continuation rationale and explicitly distinguish deferred stop from original no-debug execution. |
+| Stop Conditions | Need for a stack parser, guest-memory access, Debugger feature, trace, direct dispatcher link, Bochs/mantle modification, or host-capability expansion. |
+| Exit Criteria | One facade covers the Debugger selector through the common ingress with positive/negative regression and composition closure. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -69,6 +69,10 @@
 > **T199 S13 completion:** one common source-derived facade now returns the
 > original unavailable Redirector result for all 50 members; see [S13
 > regression](etc/research/t199-s13-redirector-unavailable-package-regression-001.md).
+
+> **T199 S14 completion:** Debugger is mapped as a three-byte BOP plus a
+> stack-mode protocol, not a fourth-byte service family; see [S14
+> matrix](etc/research/t199-s14-debugger-source-abi-failure-matrix-001.md).
 
 ## Current Technical Baseline
 
