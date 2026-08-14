@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S6.** Its governing brief is the active
+> **Current effective packet: M0 T199 S7.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S6 -- whole COMMAND provider disposition.**
+**Active: M0 T199 S7 -- COMMAND facade and all-service regression implementation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -21,19 +21,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S6, Ordinary Mode. |
-| Admission And Approval | T199 S5 maps all seventeen COMMAND services and its sentinel. Owner policy requires whole-package capability planning before any implementation. |
-| Objective | Select one complete disposition for every COMMAND service: original no-op, explicitly unavailable, deferred, or bounded CLI source-derived candidate. |
-| Non-goals | No COMMAND implementation, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no new host capability, and no singleton recognizer. |
-| Reference Baseline | T199 S5 COMMAND matrix, current command plane, and partial endpoint evidence. |
-| Files And ABI Surface | Research/evidence only: COMMAND plane, existing providers/tests, profile and CLI capability contracts. |
+| Identifier Mode | M0 T199 S7, Ordinary Mode. |
+| Admission And Approval | T199 S6 selects a complete COMMAND package disposition. Owner requires all BOP work to advance by complete packages, never by trace hit. |
+| Objective | Implement one classified COMMAND package facade, migrate admitted existing candidate/no-op routes behind it, and add an all-17-service plus sentinel regression. |
+| Non-goals | No trace; no new lifecycle, environment, process, handle, VDD, GUI or keyboard capability; no Bochs/core/mantle change; no direct OpenNT dispatcher link; no singleton recognizer. |
+| Reference Baseline | T199 S5 matrix and T199 S6 whole-package disposition. |
+| Files And ABI Surface | `bx-vdm` COMMAND facade/composition integration, manifest and source-built all-service regression fixture. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every `54:00..10` member and `54:11` sentinel has one disposition, prerequisite, and compatible failure behavior; partial evidence is not promoted to closure. |
-| Expected Markers | One package disposition table and a bounded S7 facade/full-family implementation plan. |
+| Verification | Source-built all-service regression enumerates 17 callable values and sentinel; verifies ownership, no-op, unavailable, deferred no-result, and migrated candidates. |
+| Expected Markers | One facade entry, no raw service recognizer, no bypass, and a complete regression ledger. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Preserve `54:04` and `54:0E` as partial evidence; identify every provider that must migrate behind a COMMAND facade. |
-| Stop Conditions | Any implementation, trace, host-capability expansion, direct historical dispatcher link, Bochs/mantle modification, or an uncovered service. |
-| Exit Criteria | A complete disposition admits one COMMAND facade/full-family implementation S without trace-led service scheduling. |
+| Reporting Requirements | Preserve `54:04` and `54:0E` as partial evidence; record each migrated provider and deferred/unavailable group. |
+| Stop Conditions | Trace, host-capability expansion, direct historical dispatcher link, Bochs/mantle modification, new singleton recognizer, or a result for a deferred service. |
+| Exit Criteria | COMMAND facade/full-family regression closes its implementation boundary; a later integration S may schedule one trace only after global ordering permits it. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -47,6 +47,9 @@
 > **T199 S5 completion:** the complete COMMAND table, ABI dependencies,
 > sentinel safety rule, and partial endpoint evidence are in
 > [S5 matrix](etc/research/t199-s5-command-source-abi-failure-matrix-001.md).
+
+> **T199 S6 completion:** every COMMAND member has one package capability and
+> failure disposition; see [S6 disposition](etc/research/t199-s6-command-whole-package-disposition-001.md).
 
 ## Current Technical Baseline
 
