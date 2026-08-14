@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S12.** Its governing brief is the active
+> **Current effective packet: M0 T199 S13.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S12 -- whole Redirector source/ABI/failure package map.**
+**Active: M0 T199 S13 -- whole Redirector unavailable package provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -15,25 +15,26 @@
 
 > **T scope:** T199 globally audits every OpenNT BOP identity and maps current
 > implementation/evidence to complete owner packages: DEM; COMMAND; XMS; DPMI;
-> Redirector; Debugger; and bx-core/bx-mantle machine/BIOS. It then defines the
-> package order and acceptance contracts. Trace is a post-package integration
-> tool, not a source of per-BOP implementation tasks.
+> Redirector; Debugger; and bx-core/bx-mantle machine/BIOS. For each package,
+> mapping and disposition are admission work immediately followed by one
+> whole-package implementation and family regression. Trace then verifies the
+> completed package's native integration; it never creates one-service tasks.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S12, Ordinary Mode. |
-| Admission And Approval | T199 S11 merges XMS/DPMI machine requirements under one ownership plan. T199 S1 orders Redirector next. |
-| Objective | Produce a complete original OpenNT Redirector source/ABI/failure map for all 49 callable services. |
-| Non-goals | No Redirector implementation, trace, Bochs/core/mantle modification, direct dispatcher link, host-capability expansion, or singleton recognizer. |
-| Reference Baseline | T199 global audit and existing Redirector classification/unavailable evidence. |
-| Files And ABI Surface | Research/evidence only: original Redirector dispatcher/module surface and current classification. |
+| Identifier Mode | M0 T199 S13, Ordinary Mode. |
+| Admission And Approval | T199 S12 closes the complete 50-member Redirector source/ABI/failure map and admits this one package implementation. The owner directed complete ordered BOP packages, not trace-led singleton work. |
+| Objective | Attach one `bx-vdm` source-derived Redirector unavailable provider to all 50 `57:00-31` members, with the original unavailable result and one full-family regression. |
+| Non-goals | No Redirector capability, per-service shim, trace, Bochs/core/mantle modification, direct historical dispatcher link, host-capability expansion, or reuse of the disconnected three-byte legacy provider. |
+| Reference Baseline | T199 S12 Redirector matrix, source `MS_bop_7` unavailable branch, and corrected inventory/catalog/ingress/system-plane identity coverage. |
+| Files And ABI Surface | `bx-vdm` Redirector package facade/provider, composition ingress attachment, typed CPU-result ABI, and a 50-member plus out-of-range regression. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproducible source-to-ABI/failure ledger for all 49 callable Redirector identities. |
-| Expected Markers | One complete Redirector matrix and package disposition basis. |
+| Verification | MSVC x64 `/MT` source build and run of all-family provider regression: each member returns the source-derived unavailable result through the common four-byte ingress; `57:32` is not accepted. Run source inventory and documentation governance checks. |
+| Expected Markers | One provider/facade, 50 positive members, one out-of-range negative, and no per-service implementation source. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Identify host DLL/VDD/redirector dependencies and complete unavailable semantics. |
-| Stop Conditions | Implementation, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or source ambiguity. |
-| Exit Criteria | Complete Redirector map admits an all-family unavailable/deferred disposition. |
+| Reporting Requirements | Record the exact CF/AX/resume interpretation, any difference from the disconnected legacy provider, and no capability claim. |
+| Stop Conditions | Any need for a per-service behavior, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or unresolved four-byte result ABI. |
+| Exit Criteria | A single source-derived provider covers every defined Redirector member with complete regression and admits the package's later one native trace. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -60,6 +61,10 @@
 > **T199 S10 completion:** all DPMI identities, original ABI and machine dependencies are recorded in [S10 matrix](etc/research/t199-s10-dpmi-source-abi-failure-matrix-001.md).
 
 > **T199 S11 completion:** XMS and DPMI now share one selector-blind machine-capability roadmap; see [S11 plan](etc/research/t199-s11-shared-xms-dpmi-machine-capability-plan-001.md).
+
+> **T199 S12 completion:** the Redirector map corrects the `57:31` omission,
+> confirms 50 callable members and records the single unavailable-package
+> disposition; see [S12 matrix](etc/research/t199-s12-redirector-source-abi-failure-matrix-001.md).
 
 ## Current Technical Baseline
 

@@ -34,7 +34,7 @@ int main(void)
         { 0x53u, 25u, 0xffu, BX_NTVDM_BOP_FAMILY_DPMI },
         { 0x54u, 17u, 17u, BX_NTVDM_BOP_FAMILY_COMMAND },
         { 0x56u, 16u, 0xffu, BX_NTVDM_BOP_FAMILY_DEBUGGER },
-        { 0x57u, 49u, 0xffu, BX_NTVDM_BOP_FAMILY_REDIR }
+        { 0x57u, 50u, 0xffu, BX_NTVDM_BOP_FAMILY_REDIR }
     };
     uint32_t index, service;
     int failed = 0;

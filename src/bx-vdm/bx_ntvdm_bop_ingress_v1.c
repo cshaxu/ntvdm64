@@ -81,7 +81,7 @@ int bx_ntvdm_bop_ingress_v1_classify(
         case 0x53u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_DPMI, 25u, 0xffu); break;
         case 0x54u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_COMMAND, 17u, 17u); break;
         case 0x56u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_DEBUGGER, 16u, 0xffu); break;
-        default: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_REDIR, 49u, 0xffu); break;
+        default: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_REDIR, 50u, 0xffu); break;
         }
         return 1;
     }

@@ -62,6 +62,16 @@ int main(void)
             identity.service_state != BX_NTVDM_BOP_CATALOG_V1_SERVICE_PRESENT)
             return 9;
     }
+    {
+        const uint8_t last_redir[] = { 0xc4u, 0xc4u, 0x57u, 0x31u };
+        const uint8_t undefined_redir[] = { 0xc4u, 0xc4u, 0x57u, 0x32u };
+        if (!observe(last_redir, sizeof(last_redir), &identity) ||
+            identity.service_state != BX_NTVDM_BOP_CATALOG_V1_SERVICE_PRESENT)
+            return 10;
+        if (!observe(undefined_redir, sizeof(undefined_redir), &identity) ||
+            identity.service_state != BX_NTVDM_BOP_CATALOG_V1_SERVICE_UNDEFINED)
+            return 11;
+    }
     if (!observe(table_only, sizeof(table_only), &identity) || !identity.is_bop ||
         identity.source_class != BX_NTVDM_BOP_CATALOG_V1_SOURCE_SOFTPC_BIOS ||
         identity.family != BX_NTVDM_BOP_CATALOG_V1_FAMILY_NONE)

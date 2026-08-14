@@ -18,7 +18,7 @@ static int classify(uint8_t selector, uint32_t count) {
     } return bad;
 }
 int main(void) { bx_ntvdm_instruction_window_v1 w; bx_ntvdm_bop_ingress_v1 i; int bad=0; uint32_t n;
-    bad|=classify(0x50u,73); bad|=classify(0x54u,17); bad|=classify(0x52u,12); bad|=classify(0x53u,25);bad|=classify(0x56u,16);bad|=classify(0x57u,49);
+    bad|=classify(0x50u,73); bad|=classify(0x54u,17); bad|=classify(0x52u,12); bad|=classify(0x53u,25);bad|=classify(0x56u,16);bad|=classify(0x57u,50);
     for(n=0;n<16;n++){uint8_t selector[]={0x50,0x51,0x52,0x53,0x54,0x56,0x57,0x59,0x5a,0x5b,0x5c,0x5d,0x5e,0x5f,0xfd,0xfe};uint8_t b[4]={0xc4,0xc4,selector[n],0};bx_ntvdm_instruction_window_v1_capture(&w,b,4);bad|=!bx_ntvdm_bop_ingress_v1_classify(&w,&i);}
     return bad?1:0;
 }

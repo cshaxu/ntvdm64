@@ -40,7 +40,7 @@ static int bx_ntvdm_bop_catalog_v1_service_defined(uint32_t family,
     case BX_NTVDM_BOP_CATALOG_V1_FAMILY_DPMI: return service <= 0x18u;
     case BX_NTVDM_BOP_CATALOG_V1_FAMILY_COMMAND: return service <= 0x11u;
     case BX_NTVDM_BOP_CATALOG_V1_FAMILY_DEBUGGER: return service <= 0x0fu;
-    case BX_NTVDM_BOP_CATALOG_V1_FAMILY_REDIR: return service <= 0x30u;
+    case BX_NTVDM_BOP_CATALOG_V1_FAMILY_REDIR: return service <= 0x31u;
     default: return 0;
     }
 }

@@ -139,7 +139,7 @@ $families = @(
     [ordered]@{ selector_name = 'BOP_CMD'; selector_value = 0x54; source_kind = 'service'; entries = (Parse-CDefines $sourcePaths.command { param($name) $name -match '^SVC_CMD|^SVC_GETSTDHANDLE$|^SVC_EXECCOMSPEC32$|^SVC_RETURNEXITCODE$|^SVC_GETCONFIGSYS$|^SVC_GETAUTOEXECBAT$|^SVC_GETKBDLAYOUT$|^SVC_GETINITENVIRONMENT$|^SVC_GETSTARTINFO$' }) },
     [ordered]@{ selector_name = 'BOP_XMS'; selector_value = 0x52; source_kind = 'service'; entries = (Parse-CDefines $sourcePaths.xms { param($name) $name -match '^XMS_' -and $name -ne 'XMS_LASTSVC' }) },
     [ordered]@{ selector_name = 'BOP_DPMI'; selector_value = 0x53; source_kind = 'service'; entries = (Parse-DpmiSubfunctions $sourcePaths.dpmi) },
-    [ordered]@{ selector_name = 'BOP_REDIR'; selector_value = 0x57; source_kind = 'service'; entries = (Parse-CDefines $sourcePaths.redir { param($name) $name -match '^SVC_RDR|^SVC_NETBIOS5C$|^SVC_NETBIOS5CINTERRUPT$|^SVC_DLC_5C$|^SVC_VDM_WINDOW_INIT$' }) },
+    [ordered]@{ selector_name = 'BOP_REDIR'; selector_value = 0x57; source_kind = 'service'; entries = (Parse-CDefines $sourcePaths.redir { param($name) $name -match '^SVC_RDR|^SVC_NETBIOS5C$|^SVC_NETBIOS5CINTERRUPT$|^SVC_NETBIOSCHECK$|^SVC_DLC_5C$|^SVC_VDM_WINDOW_INIT$' }) },
     [ordered]@{ selector_name = 'BOP_DEBUGGER'; selector_value = 0x56; source_kind = 'service'; entries = (Parse-CDefines $sourcePaths.debugger { param($name) $name -match '^DBG_' }) }
 )
 foreach ($family in $families) {
