@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S113.** Its governing brief is the active
+> **Current effective packet: M0 T198 S114.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S113 -- add a default-off post-commit `50:42` observation
-marker to distinguish accepted provider results from fallback telemetry.**
+**Active: M0 T198 S114 -- make one bounded post-commit-observer native run and
+classify the accepted/declined fast-read split.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ marker to distinguish accepted provider results from fallback telemetry.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S113, Ordinary Mode. |
-| Admission And Approval | S112 proves S111's `next=50:42` is written only after `bx_ntvdm_boot_namespace_composition_v1_handle` returns false; it is a declined fallback event, not accepted-provider proof. S111 also reaches BOP `5F`, so the no-op regression is removed. The remaining uncertainty is one accepted result marker, not a machine capability. |
-| Objective | Add one adapter-local, default-off test observation that records a `50:42` only after common ingress, namespace provider dispatch, checked mechanical action and typed resume outcome are accepted. It must copy only event/result metadata and not affect routing or CPU state. Add focused tests; no guest run. |
-| Non-goals | No guest run/retry, provider behavior or ABI change, data capture beyond copied metadata, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S112 telemetry map, S109 source contract, S110 restoration and existing test-only observer pattern. |
-| Files And ABI Surface | `bx-vdm` composition and native fixture bridge/test observation only; no exported production ABI. |
+| Identifier Mode | M0 T198 S114, Ordinary Mode. |
+| Admission And Approval | S113 adds a test-only, post-composition `50:42` marker that requires typed resume at `fault_rip+4` and copies only result metadata. Its fixture sources compile under the locked CPU5/x64 configuration; current composition tests pass. One run is now the only way to determine whether the real path contains an accepted provider call in addition to the known declined fallback call. |
+| Objective | Rebuild the registered current native derivative and execute exactly one bounded run. Record the post-commit marker, fallback marker and BOP `5F` in order; classify all observed fast-read calls without code change. |
+| Non-goals | No retry, provider/ABI change, ROM/VGA/device import, host capability expansion, Bochs core/mantle edit, broad rebuild or continuity claim. |
+| Reference Baseline | S111 one-run evidence, S112 ordering map, S113 post-commit observer, current native derivative recipe. |
+| Files And ABI Surface | Registered native derivative and evidence only; no source change unless a pre-run membership error prevents the admitted build. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused test proves marker is absent on declined/malformed/`50:43` routes and present only for valid `50:42` typed resume after committed action; current x64 composition closure passes without guest entry. |
-| Expected Markers | Fixed-width copied selector/service/result fields distinguish post-commit success from the retained fallback observer. |
+| Verification | One provenance-locked run has `runs=1`; run log reports post-commit `50:42`, fallback `50:42`, BOP `5F`, and controlled terminal state. |
+| Expected Markers | The post-commit marker yields only copied RIP/masks/AX/flags; no guest data or new capability appears. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact marker ordering, copied field bounds, disabled behavior, negative cases, build membership and limits. |
-| Stop Conditions | Any guest execution, provider/ABI/semantic change, unbounded guest-memory read, ROM/VGA/device admission, host environment injection, core/mantle change or broad rebuild. Stop and retain the marker. |
-| Exit Criteria | A source-built, default-off accepted-result marker is closed by focused and current-composition non-guest evidence, leaving exactly one later observation task if still needed. |
+| Reporting Requirements | Record exact build inputs, run count, post-commit/fallback field values, BOP `5F`, terminal classification and confidence. |
+| Stop Conditions | Any second run, need for semantic/provider change, ROM/VGA/device admission, host environment injection, core/mantle change or broad rebuild. Stop after the one run. |
+| Exit Criteria | The one-run record distinguishes accepted source-derived fast read from later unavailable/declined fast read and bounds the next source-only task. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 

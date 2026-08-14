@@ -27,6 +27,14 @@ static uint32_t observed_ioctl_eax, observed_ioctl_ebx, observed_ioctl_ecx, obse
 static unsigned observed_fast_read;
 static uint16_t observed_fast_read_cs, observed_fast_read_ds, observed_fast_read_es;
 static uint32_t observed_fast_read_eip, observed_fast_read_eax, observed_fast_read_ebx, observed_fast_read_ecx, observed_fast_read_edx, observed_fast_read_esi, observed_fast_read_edi, observed_fast_read_ebp, observed_fast_read_eflags;
+/* Test-only post-commit observation.  Unlike observed_fast_read below, this
+ * is reached only after the adapter composition returned an accepted typed
+ * result; it carries no guest bytes or provider state. */
+static unsigned observed_fast_read_commit;
+static uint64_t observed_fast_read_resume_rip;
+static uint32_t observed_fast_read_gpr16_write_mask;
+static uint16_t observed_fast_read_ax;
+static uint32_t observed_fast_read_eflags_write_mask, observed_fast_read_eflags_values;
 static unsigned observed_spckbd;
 static uint16_t observed_spckbd_cs, observed_spckbd_ds, observed_spckbd_es;
 static uint32_t observed_spckbd_eip, observed_spckbd_eax, observed_spckbd_ebx,
@@ -163,6 +171,19 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_spckbd_edi = event->edi; observed_spckbd_eflags = event->eflags;
     }
     if (bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome)) {
+        if (!observed_fast_read_commit && event != 0 && outcome != 0 &&
+            event->window_bytes >= 4u && event->window[0] == 0xc4u &&
+            event->window[1] == 0xc4u && event->window[2] == 0x50u &&
+            event->window[3] == 0x42u &&
+            outcome->disposition == BX_NTVDM_GENERIC_UD_RESUME &&
+            outcome->resume_rip == event->fault_rip + 4u) {
+            observed_fast_read_commit = 1u;
+            observed_fast_read_resume_rip = outcome->resume_rip;
+            observed_fast_read_gpr16_write_mask = outcome->gpr16_write_mask;
+            observed_fast_read_ax = outcome->gpr16_values[0];
+            observed_fast_read_eflags_write_mask = outcome->eflags_write_mask;
+            observed_fast_read_eflags_values = outcome->eflags_values;
+        }
         if (event != 0 && event->window_bytes >= 3u &&
             event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
             event->window[2] == 0x15u) {
@@ -341,6 +362,12 @@ unsigned t198_s23_native_ntio_boundary_observed_fast_read_esi(void) { return obs
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_edi(void) { return observed_fast_read_edi; }
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_ebp(void) { return observed_fast_read_ebp; }
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_eflags(void) { return observed_fast_read_eflags; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_commit(void) { return observed_fast_read_commit; }
+unsigned long long t198_s23_native_ntio_boundary_observed_fast_read_resume_rip(void) { return (unsigned long long)observed_fast_read_resume_rip; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_gpr16_write_mask(void) { return observed_fast_read_gpr16_write_mask; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_ax(void) { return observed_fast_read_ax; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_eflags_write_mask(void) { return observed_fast_read_eflags_write_mask; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_eflags_values(void) { return observed_fast_read_eflags_values; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd(void) { return observed_spckbd; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_cs(void) { return observed_spckbd_cs; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_ds(void) { return observed_spckbd_ds; }
