@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S109.** Its governing brief is the active
+> **Current effective packet: M0 T198 S111.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S109 -- reconstruct the original DEM `50:42` fast-path
-contract before changing its runtime disposition.**
+**Active: M0 T198 S111 -- make one bounded native observation after restoring
+the profile-gated `50:42` fast-read provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ contract before changing its runtime disposition.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S109, Ordinary Mode. |
-| Admission And Approval | S108 proves that `C000:014A` is an unprovisioned ROM-vector target but S89/S90 prove the same stream profile reaches and commits BOP `5F`, avoids that target, and continues to `50:3D`. S107 instead accepts the S106 `50:42` no-op and never reaches `5F`. This regression invalidates S106's no-op interpretation as sufficient runtime evidence. |
-| Objective | Reconstruct `handle.asm` `FastOrSlow` and the complete `50:42` caller/return contract, including MIPS-state predicate, SVC encoding, register/flag/position effects, source-derived fast-read provider precedence, and the precise divergence between S90 and S107. Classify the corrective runtime disposition without changing code. |
-| Non-goals | No guest run, no ROM/VGA/device import, no provider/routing/ABI change, host capability expansion, Bochs core/mantle edit, broad rebuild, rollback, or continuity claim. |
-| Reference Baseline | S89/S90 stream handoff, S106 no-op family, S107 observation, OpenNT `handle.asm`, `dossvc.h`, `demdisp.c`, `vint.h`, and the retained source-derived fast-read records. |
-| Files And ABI Surface | Evidence and task records only; no new runtime seam, guest-address API, or source mutation. |
+| Identifier Mode | M0 T198 S111, Ordinary Mode. |
+| Admission And Approval | S110 restores the existing profile-gated `50:42` provider, removes the no-op intercept and passes focused/current-composition x64 closure. S89/S90 establishes BOP `5F` as the original stream handoff downstream of a correct path; S107 establishes the no-op regression misses it. One exact native observation is now warranted. |
+| Objective | Build the declared current native composition using the registered minimal derivative, execute exactly one bounded source-built run, and record the ordered `50:42` result, BOP `5F` reach/transaction and terminal/next boundary. Compare only with S89/S90 and S107; classify the result without further semantic change. |
+| Non-goals | No retry, budget extension, provider/ABI change, ROM/VGA/device import, host capability expansion, Bochs core/mantle edit, broad rebuild, or continuity claim. |
+| Reference Baseline | S89/S90 stream handoff; S107 no-op observation; S110 provider-restoration closure; current T198 native derivative recipe. |
+| Files And ABI Surface | Registered current native derivative recipe and run evidence only; no source change unless a pre-run recipe membership defect blocks the admitted build. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Line-addressed source and current-composition map proves the fast/slow predicate, success/error result contract and S90/S107 divergence; documentation governance and diff checks. |
-| Expected Markers | One owner/disposition table distinguishes historical dispatcher placeholder behavior from the exact guest fast-path contract and bounds a corrective implementation task. |
+| Verification | One provenance-locked run has `runs=1`; log/order records `50:42` provider acceptance and whether BOP `5F` reaches the existing stream transaction. Hashes, build manifest and exact terminal classification are retained. |
+| Expected Markers | No no-op acceptance marker; source-derived read result contains actual count/payload commitment; BOP `5F` is either observed and its original stream path classified, or a distinct earlier source-backed boundary is recorded. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact source paths, state-bit predicate, BOP encoding, caller effects, current provider ordering, rejected no-op inference and confidence. |
-| Stop Conditions | Any need for guest execution, ROM/VGA/device admission, arbitrary guest read, host environment injection, core/mantle seam change, broad rebuild or a semantic change. Stop and retain the map. |
-| Exit Criteria | A source-grounded corrective disposition bounds one next provider/composition task or records an exact evidence blocker. |
+| Reporting Requirements | Record exact build inputs, run count, ordered selectors, state/transaction markers, terminal source classification, rejected interpretations and confidence. |
+| Stop Conditions | Any second run, need for provider/ABI change, ROM/VGA/device admission, host environment injection, core/mantle change, broad rebuild or new semantic change. Stop after the one run. |
+| Exit Criteria | A reproducible one-run observation determines whether the restored source-derived result re-enters the proven stream-initialization path, or bounds the next source-only diagnostic task. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 

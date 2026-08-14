@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1153 |
+| Documentation records | 1157 |
 | --- | --- |
-| Generated UTC | 2026-08-14T02:17:30Z |
+| Generated UTC | 2026-08-14T02:22:02Z |
 
 ## Entries
 
@@ -391,8 +391,10 @@ content-divergent entries.
 | etc/research/t198-s106-dem-fast-io-noop-family-001.md | indexed supporting material | 06f4027dbe967b3968aac3a0023f894baa33e93082e224a7b5a314cdc823645c |
 | etc/research/t198-s107-fastio-noop-native-observation-001.md | indexed supporting material | 2e534488c4c5ff677a2acfa05715b91a66487f2a70097b99c3924cb5bf1a1b81 |
 | etc/research/t198-s108-c000-int10-machine-owner-map-001.md | indexed supporting material | 2c3facc5a6331745889e360faf41fe1999947a0495847b16e14fcc4286ff5a2e |
+| etc/research/t198-s109-dem-fastread-contract-reconciliation-001.md | indexed supporting material | 5916dea29322cc11baeb795681d7512d7178f2646bb3278192f4ecffe5b59884 |
 | etc/research/t198-s10-p1-provider-plane-witness-001.md | indexed supporting material | a7dcd3b349ec9014e4e82e8a2e90761c5cee14e97dc6bc5693c06bbca10744e8 |
 | etc/research/t198-s10-p4-path-next-witness-001.md | indexed supporting material | 7afe1f1b013279372fd84025d3b15f78af0a8b754bc994570a690b21b05430ec |
+| etc/research/t198-s110-fastread-provider-restoration-001.md | indexed supporting material | 22e612c5d0e2757c10d4829df0f10f624c148fd910103d39edcf22f27709a543 |
 | etc/research/t198-s11-p1-synchronous-composition-map-001.md | indexed supporting material | c3bb3b0c23aeff5d092f89b419bf75ba1040048fdf938218b190a4607575e616 |
 | etc/research/t198-s12-p1-adapter-composition-witness-001.md | indexed supporting material | 00e53652ea1588d60d0da6dcd0d8f83217d4526e08c864ecb6e53fbdd32eb5c1 |
 | etc/research/t198-s12-p2-composed-bridge-witness-001.md | indexed supporting material | a87666de0fb44d37856140eaf0e6a2ac56bd8ecf4818959794290a52bd2ef96b |
@@ -836,7 +838,9 @@ content-divergent entries.
 | history/m0-t198-s106-closure-20260813.md | closed task history | aa3d43b258d71285c30b4a09774c02f58c1431013a8dcd088c38287eb07cc0d7 |
 | history/m0-t198-s107-closure-20260813.md | closed task history | e257e4c224dd5a6f04952d5c46276925dd9466dfe6fd78ca6d638cc59731dc11 |
 | history/m0-t198-s108-closure-20260813.md | closed task history | 720992bca7a8c5f67e84c468fabd72908f3123373f82952fe71aa99a077d8dd3 |
+| history/m0-t198-s109-closure-20260813.md | closed task history | a5d865e0739c6c460b50677f9ad315ae975ddf1d58d607cd812378259521ab04 |
 | history/m0-t198-s10-closure-20260813.md | closed task history | 6442d613cf5556b1e5b9c2290d6116e67e358881e59dcd428e1f1492281e0ea3 |
+| history/m0-t198-s110-closure-20260813.md | closed task history | 998a54e6589f86afa1f1f4aac6c454929a9e5b176b9aae3759ba9cf8b2e200a4 |
 | history/m0-t198-s11-closure-20260813.md | closed task history | 0fc96543cf213f000d5cc88750f0b2087a9b97b80ad4769ce54b2f7e6081aaf6 |
 | history/m0-t198-s12-closure-20260813.md | closed task history | fad9c0f4d0bf6e588509ace12a18d96c0b5c8762c0d8e9b9d1c40f6547f4a420 |
 | history/m0-t198-s13-closure-20260813.md | closed task history | 0420f1f1b7c777477ed3fb3458e311ee6324e5b2f7542ef54f7e803d478efeb8 |
@@ -1167,7 +1171,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 2d47369ab3f8ceef9847e7fafee47143ecd5c51749dbd0c566d260474cfc8d7b |
+| STATUS.md | principal control document | 821c7a30496459a183442b8134c2ba70efcad67fe94e0f9b75ff3cb217b1fde0 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

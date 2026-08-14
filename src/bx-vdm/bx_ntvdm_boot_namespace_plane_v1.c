@@ -1,4 +1,5 @@
 #include "bx_ntvdm_boot_namespace_plane_v1.h"
+#include "bx_ntvdm_dem_fastio_provider_v1.h"
 #include <string.h>
 
 #define BX_NTVDM_BOOT_NAMESPACE_APERTURE UINT64_C(0x100000)
@@ -75,9 +76,10 @@ int bx_ntvdm_boot_namespace_plane_v1_dispatch(bx_ntvdm_boot_namespace_plane_v1 *
  if(dem.component!=BX_NTVDM_DEM_COMPONENT_NAMESPACE)return 1;
  if(i->service==0x11u){uint32_t id=0;if(!take_id(p,&id)||!bx_ntvdm_dem_load_dos_service_v1_prepare(&p->ntdos,&p->ntdos_identity,e,c,w,id,a,r)){bx_ntvdm_mechanical_action_v1_clear(a);return bx_ntvdm_cpu_result_v2_stop(r);}return 1;}
  if(i->service==0u)return bx_ntvdm_boot_namespace_provider_v1_seek(&p->provider,e,c,w,r);
- if(i->service==2u)return bx_ntvdm_boot_namespace_provider_v1_close(&p->provider,e,c,w,r);
- if(i->service==0x16u&&bx_ntvdm_boot_namespace_provider_v1_read(&p->provider,e,c,w,bytes,sizeof(bytes),&bulk,r)){if(!bulk.magic)return 1;return put_bulk(p,&bulk,bytes,a);}
- if(i->service==18u&&bx_ntvdm_boot_namespace_provider_v1_prepare_open(&p->provider,e,c,w,&read)){ if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_OPEN,e,c,&read.guest_read,1u,a))return 0;p->pending_read=read;return 1; }
+  if(i->service==2u)return bx_ntvdm_boot_namespace_provider_v1_close(&p->provider,e,c,w,r);
+  if(i->service==0x16u&&bx_ntvdm_boot_namespace_provider_v1_read(&p->provider,e,c,w,bytes,sizeof(bytes),&bulk,r)){if(!bulk.magic)return 1;return put_bulk(p,&bulk,bytes,a);}
+  if(i->service==0x42u&&bx_ntvdm_dem_fastio_provider_v1_dispatch(&p->provider,e,c,w,bytes,sizeof(bytes),&bulk,r)){if(!bulk.magic)return 1;return put_bulk(p,&bulk,bytes,a);}
+  if(i->service==18u&&bx_ntvdm_boot_namespace_provider_v1_prepare_open(&p->provider,e,c,w,&read)){ if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_OPEN,e,c,&read.guest_read,1u,a))return 0;p->pending_read=read;return 1; }
  if((i->service==9u||i->service==11u)&&p->has_dta){int ok=i->service==9u?bx_ntvdm_dem_path_search_v1_prepare_first(&p->dta,e,c,w,&gather):bx_ntvdm_dem_path_search_v1_prepare_next(&p->dta,e,c,w,&gather);if(ok){if(!put_read(p,i->service==9u?BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_FIRST:BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_NEXT,e,c,gather.ranges,gather.range_count,a))return 0;p->pending_gather=gather;return 1;}}
  return 1; }
 

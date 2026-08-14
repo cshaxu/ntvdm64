@@ -53,7 +53,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_dpb_service.c',
     'src\bx-vdm\bx_ntvdm_dem_drive_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_error_lock_plane_v1.c',
-    'src\bx-vdm\bx_ntvdm_dem_fastio_noop_service.c',
+    'src\bx-vdm\bx_ntvdm_dem_fastio_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_gset_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_hard_error_service.c',
     'src\bx-vdm\bx_ntvdm_dem_ioctl_metadata_provider_v1.c',
