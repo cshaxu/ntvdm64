@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S1.** Its governing brief is the active
+> **Current effective packet: M0 T200 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S1 -- native CLI integrated-execution baseline.**
+**Active: M0 T200 S2 -- COMMAND native-frontier package diagnosis.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,25 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S1, Ordinary Mode. |
-| Admission And Approval | T199 is closed by its global BOP package audit. The owner instruction permits trace-led integrated repair only after that closure. |
-| Objective | Produce one fresh source-built CPU5 native CLI execution baseline with the completed BOP composition, classify its first controlled frontier by owner component, and record no implementation conclusion beyond the evidence. |
-| Non-goals | No automatic BOP implementation from a trace hit, no repeated build loop, no Bochs feature expansion, no ambient NT host dependency, and no claim of runnable CLI completion. |
-| Reference Baseline | T199 global BOP closure audit; current minimal bx-core/bx-mantle/bx-vdm composition; prior native observations retained as historical comparison only. |
-| Files And ABI Surface | Native run recipe, trace/evidence record and component-owner diagnosis only; no ABI change unless separately admitted. |
+| Identifier Mode | M0 T200 S2, Ordinary Mode. |
+| Admission And Approval | S1's one authorized run reached the controlled `54:01` frontier. The owner-package rule requires complete COMMAND diagnosis before any repair. |
+| Objective | Recover the original COMMAND `54:01` caller/input/result contract and compare it with the current package session, identifying the smallest complete COMMAND subpackage that explains any mismatch. |
+| Non-goals | No service-only patch, no new native run until the observation surface is admitted, no Bochs feature expansion, no ambient NT host dependency, and no unsupported CMDINFO inference. |
+| Reference Baseline | T200 S1 run record; T199 S40-S43 COMMAND source/ABI evidence; current COMMAND session and source-built fixture bridge. |
+| Files And ABI Surface | COMMAND source/ABI comparison record, session/fixture review, and an observation-extension proposal only if source diagnosis cannot decide. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One fresh source-built CPU5 native run with bounded instruction/watchdog policy; capture frontier and compare it with source/owner package mapping. |
-| Expected Markers | Reproducible run root, exact observed frontier, and an owner-package diagnosis or a documented evidence limit. |
+| Verification | Source-map all 54:01 caller inputs/results and compare to current session guards; compile/review any diagnostic-only fixture change before a new guest run is admitted. |
+| Expected Markers | Original contract matrix, exact current mismatch or explicit evidence gap, and a next full-package repair/observation decision. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
-| Stop Conditions | Need to add a BOP-specific patch without component admission, repeated non-informative trace runs, Bochs semantic migration into bx-vdm, ambient host dependency, or selector leakage. |
-| Exit Criteria | One native observation is source-built, reproducible and owner-classified; any repair is explicitly staged as the next component package. |
-| Original Owner Request | "只有所有 BOP 都闭合了，才真的开始用 trace 实跑的方法添油式修复。" |
-| Similar-Issue Sweep | Compare the first frontier with BOP ingress, CPU/exception, x87/IRQ, mapping and startup-plan owners before selecting repair work. |
+| Stop Conditions | Need to patch only 54:01 without its COMMAND lifecycle contract, repeated trace without a new diagnostic surface, Bochs semantic migration into bx-vdm, ambient host dependency, or selector leakage. |
+| Exit Criteria | Source/ABI diagnosis identifies a full COMMAND subpackage repair, or records why one bounded next observation is necessary. |
+| Original Owner Request | "trace 只是辅助手段，用于观察每次完成一组新 BOP 后的行为变化；避免通过 trace 实施添油战术。" |
+| Similar-Issue Sweep | Audit registration, CMDINFO, environment, launch, execution and return lifecycle together. |
+
+> **T200 S1 closure:** one source-built CPU5 native run reached controlled
+> `54:01` after established DEM and machine-handoff traffic. It is a COMMAND
+> package frontier, not a patch admission; see the [native baseline](etc/research/t200-s1-native-cli-integrated-baseline-001.md).
 
 > **T199 closed:** the [global BOP audit](etc/research/t199-s50-global-bop-package-closure-audit-001.md) confirms every admitted family has one package owner/disposition and current source-built coverage. This does not claim unavailable/deferred host features are implemented; it authorizes T200's controlled native integration observation.
 

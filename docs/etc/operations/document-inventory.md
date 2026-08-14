@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1317 |
+| Documentation records | 1319 |
 | --- | --- |
-| Generated UTC | 2026-08-14T20:59:10Z |
+| Generated UTC | 2026-08-14T21:01:48Z |
 
 ## Entries
 
@@ -611,6 +611,7 @@ content-divergent entries.
 | etc/research/t199-s7-command-package-facade-regression-001.md | indexed supporting material | 252206ad9bf56d6f58284e69e39bbf1e0e475b50a8006bf49836c0a7a353bff9 |
 | etc/research/t199-s8-xms-source-abi-failure-matrix-001.md | indexed supporting material | cdcb461bfca3caffe8ea8c03d55b6b4ab93d5513ac708c783a5409356dbde898 |
 | etc/research/t199-s9-xms-whole-package-disposition-001.md | indexed supporting material | 2de489bc1b13f47c634a38beea439180e36378374f61030ba9bd1885280f9395 |
+| etc/research/t200-s1-native-cli-integrated-baseline-001.md | indexed supporting material | 81d17dff62de39f09057353dfad43c2417ff1a9feac2a220d1af15c5bac617cc |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -1050,6 +1051,7 @@ content-divergent entries.
 | history/m0-t199-s47-closure-20260814.md | closed task history | 77081c304af18cf56ec8994e94b783a6c3ded3e8ec8bad33a88d8f313584eb48 |
 | history/m0-t199-s48-closure-20260814.md | closed task history | 8c2ced18c8cc7cc67f91ee0e260641fb3c30eaa174ae20d3d38928641b4d2f20 |
 | history/m0-t199-s49-closure-20260814.md | closed task history | d0ae28de296807804b0ce6616e82f0cae1d6a048c885c6211b208f29c70e3903 |
+| history/m0-t200-s1-closure-20260814.md | closed task history | 6160af1026b632479d5668ea3cd3bf2a73f76f1cdda5aba52facd03c128b41cf |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | 9b40b99939aad1233b4901b7f7f6569c64ac90b83a351e9a78268251d63c9154 |
@@ -1331,7 +1333,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 5947083001daa98ccf097b7b140bcc96c07739f9a1b0f83f0cc35879d5c44d16 |
+| STATUS.md | principal control document | 08197505813078bc5e6e3f7b557fa3511fe2e918c9b7e13a859ef05d31829bbf |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
