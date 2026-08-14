@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S17.** Its governing brief is the active
+> **Current effective packet: M0 T199 S18.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S17 -- top-level non-family grouped disposition.**
+**Active: M0 T199 S18 -- top-level CLI package facade and regression.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S17, Ordinary Mode. |
-| Admission And Approval | T199 S16 establishes all top-level non-family source owners and admits one grouped disposition plan. |
-| Objective | Select package dispositions and explicit boundaries for every remaining top-level selector before any grouped facade implementation. |
-| Non-goals | No selector implementation, trace, Bochs/core/mantle change, direct dispatcher link, host-capability expansion, or free-form source-derived behavior. |
-| Reference Baseline | T199 S16 owner matrix, current composition helpers and shared XMS/DPMI machine-capability plan. |
-| Files And ABI Surface | `bx-vdm` top-level classification/composition and `bx-mantle` lifecycle boundaries; evidence/disposition only. |
+| Identifier Mode | M0 T199 S18, Ordinary Mode. |
+| Admission And Approval | T199 S17 assigns every remaining top-level selector to a grouped owner and admits the bx-vdm facade group. |
+| Objective | Create one top-level bx-vdm package facade for `51,59,5A,5B,5E,5F,FE`, migrate existing direct helpers behind it, and regress each selected disposition. |
+| Non-goals | No WOW/UI/debugger/idle host feature, no UMB/DASD claim, no keyboard/PIC/BIOS emulation in bx-vdm, no `5C/5D/FD` behavior, trace, Bochs/core/mantle modification, or direct old dispatcher link. |
+| Reference Baseline | T199 S17 grouped disposition and current direct helper implementations. |
+| Files And ABI Surface | One `bx-vdm` top-level facade, common ingress/composition attachment, retained helpers, and focused plus composition regressions. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every selector has one provider owner and disposition: CLI facade, existing adapter composition, bx-mantle machine lifecycle, DPMI capability plan, or explicit controlled stop. |
-| Expected Markers | One grouped plan that forbids selector semantics in bx-core/bx-mantle and avoids singleton implementation tasks. |
+| Verification | MSVC x64 `/MT` tests cover all seven admitted selectors through common ingress: terminal stops; `5A` and `5E` resume exactly three bytes; `5F` retains its existing checked-action/continuation path. A bound composition regression proves no direct bypass remains. |
+| Expected Markers | One facade, no new host capability, no direct top-level helper dispatch before common ingress, and no routing for `5C/5D/FD`. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record migration/reuse decisions for existing direct composition helpers and `5C/5D` variant ambiguity. |
-| Stop Conditions | Selector implementation, trace, Bochs/mantle modification, host-capability expansion, or need to resolve historical variant ambiguity by speculation. |
-| Exit Criteria | Grouped disposition plan admits only safe whole-group facade/machine capability tasks. |
+| Reporting Requirements | Record each selector's terminal/resume/action outcome and the preserved limitations. |
+| Stop Conditions | Need for WOW/UI/debugger/idle capability, UMB/DASD behavior, keyboard/PIC/BIOS semantic addition, `5C/5D/FD` behavior, trace, or Bochs/mantle modification. |
+| Exit Criteria | One package facade owns all admitted top-level routes with focused and composition regression. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -81,6 +81,10 @@
 > **T199 S16 completion:** the remaining top-level selectors have explicit
 > original owners and boundary constraints; see [S16
 > matrix](etc/research/t199-s16-top-level-bop-source-owner-matrix-001.md).
+
+> **T199 S17 completion:** top-level selectors now have grouped provider
+> dispositions and a no-bypass migration rule; see [S17
+> disposition](etc/research/t199-s17-top-level-grouped-disposition-001.md).
 
 ## Current Technical Baseline
 
