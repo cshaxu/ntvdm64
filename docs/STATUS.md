@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S85.** Its governing brief is the active
+> **Current effective packet: M0 T198 S86.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S85 -- map the original BOP-`5F` host display/vector contract
-against the current narrow source-derived guest continuation.**
+**Active: M0 T198 S86 -- design the explicit non-invasive CLI display profile
+and its checked K.SYS publication boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ against the current narrow source-derived guest continuation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S85, Ordinary Mode. |
-| Admission And Approval | S84 proves the BOP-`5F` special continuation is consumed before passive observation and reaches original `isk_int9`; see `etc/research/t198-s84-bop5f-observer-order-001.md`. |
-| Objective | Identify the observable original `MS_bop_F`/`kb_setup_vectors` contract omitted by the narrow continuation, and classify the minimum correct owner/profile disposition. |
+| Identifier Mode | M0 T198 S86, Ordinary Mode. |
+| Admission And Approval | S85 classifies display selection as a CLI profile contract and rejects implicit native/windowed semantics; see `etc/research/t198-s85-spckbd-host-contract-delta-001.md`. |
+| Objective | Define the sole default non-invasive CLI text-output/display state, its capability boundary, its exact guest publication prerequisite, and negative behavior for unselected profiles. |
 | Non-goals | No guest-memory write, BOP/provider implementation, `use_host_int10` write, CLI profile selection, ROM/device import, memory mapping change, Bochs core/mantle edit, or forced control-flow change. |
-| Reference Baseline | S80 display chain; S82/S83 pointer provenance/lifecycle; S84 routing order; original `nt_bop.c`, `keybd_io.c`, and `spckbd.asm`; current source-derived service. |
-| Files And ABI Surface | Read-only OpenNT-to-current contract map. No provider, display mode, machine image, ROM mapping, guest write, or core/mantle ABI change. |
+| Reference Baseline | S80 display chain; S85 owner matrix; existing CLI BYOB/profile selection, generic action ABI, `spckbd.asm` stream branch, and host stream-I/O source evidence. |
+| Files And ABI Surface | Design and source map only. It may define a future fixed-width capability/request record, but must not write guest memory, route text, select an actual profile, add a provider, map ROM, or change core/mantle. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace original host calls and state writes, compare each with current service behavior, classify owner/profile implications, and run documentation governance and diff checks. |
-| Expected Markers | A compact contract delta table with exact source evidence and a source-backed disposition for each missing host-side effect. |
+| Verification | Compare all three historical state values with the CLI objective; identify byte address source, output/sink ownership, applicability gates, rejected choices and ABI requirements; run documentation governance and diff checks. |
+| Expected Markers | One profile decision record that distinguishes stream, windowed and native/fullscreen behavior without silently enabling any implementation. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original source calls, current continuation behavior, affected guest state and concrete non-admission rationale. |
-| Stop Conditions | The audit requires a host-state write, a new BOP/provider, a guessed display policy, ROM input, machine/device admission, CLI-profile selection or a Bochs core/mantle seam. Stop and retain the contract delta. |
-| Exit Criteria | Source-backed host-contract delta and owner/profile disposition, with no runtime semantic change. |
+| Reporting Requirements | Record explicit profile semantics, owner/ABI direction, prerequisites and all denied options. |
+| Stop Conditions | The work requires a host-state/guest-memory write, text output behavior, a new BOP/provider, ROM input, device admission or a Bochs core/mantle seam. Stop after recording the design boundary. |
+| Exit Criteria | A source-backed non-invasive CLI profile design and implementation-admission boundary, with no runtime semantic change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover `useHostInt10`, saved INT10/42 vectors, keyboard-vector setup, fullscreen/windowed/stream modes, and x86/RISC continuations. |
+| Similar-Issue Sweep | Cover stream text forms, mode changes, cursor/string fallbacks, no-console/error behavior, CLI flags, and native/windowed exclusion. |
 
 ## Current Technical Baseline
 
@@ -405,8 +405,8 @@ against the current narrow source-derived guest continuation.**
 - M0 T198 S82 proves that `073B:0939` is a dynamically patched SpcKbd native
   INT10 far jump, not random Bochs control flow. M0 T198 S83 brackets the
   pointer write after first `50:11`; M0 T198 S84 proves BOP-`5F` was consumed
-  before the passive recorder. S85 now maps the original host-contract delta.
-  See [S84 observer-order audit](etc/research/t198-s84-bop5f-observer-order-001.md).
+  before the passive recorder; M0 T198 S85 classifies its host-contract delta.
+  S86 now designs the explicit CLI profile boundary. See [S85 contract map](etc/research/t198-s85-spckbd-host-contract-delta-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
