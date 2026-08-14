@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S132.** Its governing brief is the active
+> **Current effective packet: M0 T198 S133.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S132 -- composed COMMAND `54:04` bounded provider admission.**
+**Active: M0 T198 S133 -- one native observation after composed `54:04`.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S132, Ordinary Mode. |
-| Admission And Approval | S131 admits the existing bounded root provider for global-classified composition reuse. |
-| Objective | Attach the existing `54:04` root provider to the T198 composition through common ingress/provider/COMMAND-plane classification and immutable drive snapshot, with focused adapter-only proof. |
-| Non-goals | No native retry, host-drive scan, environment persistence, filesystem/path-search expansion, host queue/Win32 dependency, new BOP semantics, target completion claim, Bochs/core/mantle/device change or broad rebuild. |
-| Reference Baseline | S130 native boundary and S131 reuse map. |
-| Files And ABI Surface | `bx-vdm` composition routing, existing current-directory provider, manifest and focused adapter-only test. |
+| Identifier Mode | M0 T198 S133, Ordinary Mode. |
+| Admission And Approval | S132 source/test closure admits the bounded `54:04` provider. One new exact-input native run may now observe its real guest continuation. |
+| Objective | Rebuild and execute exactly one registered native fixture; record whether `54:04` is accepted and identify the next terminal/BOP boundary. |
+| Non-goals | No retry, host-drive scan, environment persistence, filesystem/path-search expansion, host queue/Win32 dependency, new BOP semantics, target completion claim, Bochs/core/mantle/device change or broad rebuild. |
+| Reference Baseline | S130 native observation and S132 adapter-only closure. |
+| Files And ABI Surface | Registered native derivative/evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | A focused source-built composition test proves admitted root write/CF-clear, unadmitted direct CF/AX-zero, and malformed or non-real-mode decline. |
-| Expected Markers | Common ingress, provider selection, COMMAND `LAUNCH` classification, immutable drive snapshot and no direct OpenNT dispatcher link. |
+| Verification | One provenance-locked `runs=1` record shows `54:04` accepted or declined and identifies the subsequent terminal/BOP boundary. |
+| Expected Markers | Immutable root response, four-byte resume, no host queue and no second run. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record excluded environment persistence/host probing and verify no legacy runtime gate entered the closure. |
-| Stop Conditions | Native run, host/Bochs change, host drive scan, environment/filesystem expansion, host queue or direct OpenNT dispatcher link. |
-| Exit Criteria | The provider is composition-routed with exact selection discipline and focused source/test evidence. |
+| Reporting Requirements | Record provenance, `54:04` result/continuation and the next boundary without claiming target completion. |
+| Stop Conditions | A second run, host/Bochs change, host-drive/environment/filesystem expansion, host queue or direct OpenNT dispatcher link. |
+| Exit Criteria | The native result validates/refutes the bounded `54:04` lifecycle and gives one exact next action. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
@@ -548,4 +548,5 @@
 | M0 T198 S129 | Complete: the finite `54:0E` provider is composed after global classification; the focused adapter-only closure verifies `DX=0`, `+4` resume and protected-mode decline. |
 | M0 T198 S130 | Complete: the sole locked native observation resumes past composed `54:0E` and reaches `54:04`; it does not claim target or console completion. |
 | M0 T198 S131 | Complete: `54:04` is mapped to original `cmdGetCurrentDir`; its immutable-root candidate is admissible only as a globally classified CLI rehost. |
+| M0 T198 S132 | Complete: the finite `54:04` provider is composed after global classification; its focused closure verifies root write, typed no-write failure and protected-mode decline. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |

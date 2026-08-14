@@ -202,6 +202,22 @@ int main(void)
     event_initialize(&event, 0x54, 0x0e);
     event.execution_mode = BX_NTVDM_CPU_EXECUTION_PROTECTED;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 38;
+    event_initialize(&event, 0x54, 0x04);
+    event.eax = 2u; event.ds = 0x100u; event.esi = 0x70u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u || outcome.eflags_write_mask !=
+            BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF || outcome.eflags_values != 0u ||
+        memcmp(ram + 0x1070u, "C:\\", 4u) != 0) return 39;
+    event.eax = 3u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 40;
+    if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u) return 42;
+    if (outcome.gpr16_write_mask != 1u || outcome.gpr16_values[0] != 0u) return 43;
+    if (outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        outcome.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) return 44;
+    event.execution_mode = BX_NTVDM_CPU_EXECUTION_PROTECTED;
+    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 41;
     event_initialize(&event, 0x50, 0x3b);
     event.eax = 0xabcd;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||

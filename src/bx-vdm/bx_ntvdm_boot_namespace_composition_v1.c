@@ -7,6 +7,7 @@
 #include "bx_ntvdm_bios_memory_service.h"
 #include "bx_ntvdm_command_plane_v1.h"
 #include "bx_ntvdm_cmd_keyboard_layout_service.h"
+#include "bx_ntvdm_cmd_current_dir_service.h"
 #include "bx_ntvdm_config_done_service.h"
 #include "bx_ntvdm_dem_boot_drive_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
@@ -370,6 +371,37 @@ static int execute_command_keyboard_layout(
             event, cpu, window, result);
 }
 
+/* As with the keyboard-layout capability, the original selector identity must
+ * first cross the common planes.  The finite current-directory provider uses
+ * only the immutable admission mask and generic RAM-write mechanics. */
+static int execute_command_current_directory(
+    bx_ntvdm_boot_namespace_composition_v1 *composition,
+    const bx_ntvdm_bop_ingress_v1 *ingress,
+    const bx_ntvdm_bop_provider_selection_v1 *selection,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_command_plane_record_v1 command;
+    bx_ntvdm_multi_write_transaction_v1 transaction;
+    uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
+    if (composition == 0 || ingress == 0 || selection == 0 || event == 0 ||
+        cpu == 0 || window == 0 || result == 0 ||
+        !composition->gset.has_drive_snapshot ||
+        !bx_ntvdm_command_plane_v1_classify(ingress, selection, &command) ||
+        command.component != BX_NTVDM_COMMAND_COMPONENT_LAUNCH ||
+        command.disposition != BX_NTVDM_COMMAND_PLANE_DEFERRED ||
+        command.service != 4u || !bx_ntvdm_cmd_current_dir_service_v1_prepare(
+            composition->gset.drive_snapshot.admitted_mask, event, cpu, window,
+            &transaction, payload) ||
+        !bx_ntvdm_cpu_result_v2_valid(&transaction.result) ||
+        (transaction.writes.write_count != 0u &&
+         !execute_multi_write(composition, &transaction, payload))) return 0;
+    *result = transaction.result;
+    return bx_ntvdm_cpu_result_v2_valid(result);
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
     const bx_ntvdm_boot_namespace_composition_v1 *value,
     bx_ntvdm_boot_namespace_diagnostic_v1 *out)
@@ -475,6 +507,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     }
     if (execute_command_keyboard_layout(&ingress, &selection, &boundary, &cpu,
             &window, &result)) return outcome(&result, value);
+    if (execute_command_current_directory(active, &ingress, &selection,
+            &boundary, &cpu, &window, &result)) return outcome(&result, value);
     if (execute_command_bootstrap(active, &ingress, &selection, &boundary, &cpu,
             &window, &result)) return outcome(&result, value);
     if (bx_ntvdm_command_launch_plane_v1_dispatch(&active->launch, &ingress,
