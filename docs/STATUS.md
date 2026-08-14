@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S100.** Its governing brief is the active
+> **Current effective packet: M0 T198 S101.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S100 -- map the actual S97 DEMFASTREAD handle/token lifecycle
-before admitting a provider change or another guest run.**
+**Active: M0 T198 S101 -- correct the source-derived DEM handle codec as
+OpenNT `AX:BP`, then source-build the current composition without a guest run.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ before admitting a provider change or another guest run.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S100, Ordinary Mode. |
-| Admission And Approval | S99 proves the current `66u` classification is already `0x42`/NAMESPACE and the existing fast-read provider is reachable with a valid namespace handle; S98's contrary conclusion is superseded. |
-| Objective | Map the original NTDOS FASTREAD caller's handle/token lifecycle and compare it with the actual S97 copied state and current immutable-namespace token contract; admit no change or guest run until the discrepancy is evidence-complete. |
-| Non-goals | No guest run, provider/ABI/routing change, FASTWRITE admission, host filesystem/environment expansion, terminal transport, CLI exit-code mapping, guest artifact creation, device/ROM import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim. |
-| Reference Baseline | S97 one-run observation; S99 correction witness; original NTDOS `handle.asm`; current readonly namespace and fast-read provider sources. |
-| Files And ABI Surface | Source/evidence records and copied-state trace audit only. Reuse the current fixed event record and token ABI as audit subjects; add no new runtime seam, arbitrary guest read or provider membership. |
+| Identifier Mode | M0 T198 S101, Ordinary Mode. |
+| Admission And Approval | S100 proves original OpenNT uses handle `AX=high`, `BP=low`, while current contained `50:12` and token decode use the inverse layout. |
+| Objective | Correct the one shared source-derived DEM handle codec to original AX:BP order and update the complete open/seek/read/fast-read/close composition tests; source-build without a guest run. |
+| Non-goals | No guest run, new provider/fast-I/O ABI, FASTWRITE admission, host filesystem/environment expansion, terminal transport, CLI exit-code mapping, guest artifact creation, device/ROM import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim. |
+| Reference Baseline | S100 original ABI map; current readonly namespace service/provider/composition tests; S97 copied fast-read observation. |
+| Files And ABI Surface | Shared contained DEM handle encoding/decoding and focused tests only. Reuse current namespace, checked bulk write and fixed event ABI; no new seam or arbitrary guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Static original-caller and current-token cross-map, S97 copied-state/log audit, existing namespace open/seek/fast-read tests, documentation governance and diff checks. |
-| Expected Markers | One exact map states where `AX:BP`, ZF and `BX:SI` arise, whether S97's call can name the immutable namespace handle, and the source-proven disposition of mismatch. |
+| Verification | Focused source-built tests prove open returns `AX=high/BP=low`, every consumer reconstructs the same namespace token, fast-read obeys ZF/BX:SI, and invalid tokens fail explicitly; current composition closure, documentation governance and diff checks pass. |
+| Expected Markers | One generated token round-trips through `50:12`, `50:00`, `50:16`, `50:42` and `50:02` in historical AX:BP order; no other DEM service changes classification or ownership. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record S98 correction, original caller/register paths, current token/open/seek state contract, exact S97 evidence strengths/limits, every excluded capability and one bounded next seam if justified. |
-| Stop Conditions | Any need for a provider/ABI/routing change, guest run, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a continuity claim. Stop and admit a distinct S item. |
-| Exit Criteria | An evidence-complete source map explains whether the S97 call can satisfy the existing token state, naming a bounded next repair or source-proven unavailable/deferred result without runtime claim. |
+| Reporting Requirements | Record original/corrected codec order, every affected provider/consumer/test, source-build commands/results, negative invalid-token behavior and all exclusions. |
+| Stop Conditions | Any need for new provider/ABI scope, guest run, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a continuity claim. Stop and admit a distinct S item. |
+| Exit Criteria | Current composition source-builds/tests the original AX:BP codec across the admitted lifecycle with retained evidence and no guest-run claim. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
