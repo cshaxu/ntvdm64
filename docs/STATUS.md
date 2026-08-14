@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S116.** Its governing brief is the active
+> **Current effective packet: M0 T198 S117.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S116 -- add a bounded test-only `50:42` attempt ledger before
-admitting another observation.**
+**Active: M0 T198 S117 -- make one bounded ledger-equipped native observation
+to attribute `50:42` accepted and declined attempts.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ admitting another observation.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S116, Ordinary Mode. |
-| Admission And Approval | S115 identifies the accepted AX=`000Dh` read as finite CONFIG.SYS, but the existing fallback observer retains only first declined fields and no ordinal/reason. Current source cannot distinguish an unopened/closed namespace state from a distinct file call. One bounded test-only ledger is the minimum evidence seam before another run. |
-| Objective | Add a fixed-capacity, default-off fixture ledger for canonical `50:42` attempts. Each entry records only copied event fields, composition accepted/declined state and typed result metadata; it must preserve ordering, not read guest bytes/state, retain pointers or affect execution. Add focused capacity/order tests and compile without guest run. |
-| Non-goals | No guest run/retry, provider/ABI behavior change, unbounded logging, guest memory reads, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S115 source map, S113 post-commit marker, existing fixed instruction-history/fixture observation patterns. |
-| Files And ABI Surface | Test fixture bridge/fixture observation only; no production adapter or Bochs ABI. |
+| Identifier Mode | M0 T198 S117, Ordinary Mode. |
+| Admission And Approval | S116 closes a fixed eight-entry test-only ledger, its standalone C11 behavior test and CPU5/x64 bridge compile closure. The native harness explicitly links the ledger. One run is now needed to attribute the remaining fallback without guesswork. |
+| Objective | Rebuild the registered native derivative and execute exactly one bounded run. Record the ordered `50:42` ledger, BOP `5F` and terminal state; source-classify accepted and declined calls without changing code. |
+| Non-goals | No retry, provider/ABI change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
+| Reference Baseline | S114 result split, S115 source map, S116 ledger closure and registered S94/S97 harness. |
+| Files And ABI Surface | Registered native derivative and evidence only; no source change unless a pre-run membership error blocks the admitted build. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused ledger test verifies capacity clamp, chronological accepted/declined records, malformed/non-`50:42` exclusion and no mutation; fixture source compiles under locked CPU5/x64 configuration; no guest run. |
-| Expected Markers | A fixed maximum attempt count and opaque copied fields make the next one-run source attribution possible without semantic instrumentation. |
+| Verification | One provenance-locked run declares `runs=1` and logs up to eight ordered copied attempts, with accepted/declined state, BOP `5F` and bounded terminal. |
+| Expected Markers | No guest bytes, host pointers or new capability; one source-grounded disposition for each observed fast-read attempt. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record capacity, entry fields, ordering point, disabled behavior, negative cases, source-build evidence and limits. |
-| Stop Conditions | Any guest execution, provider/ABI or semantic change, guest-memory read, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. Stop and retain the ledger. |
-| Exit Criteria | A source-built bounded attempt ledger is closed by focused and compile evidence, leaving one later run only if user-visible source attribution remains needed. |
+| Reporting Requirements | Record build provenance, run count, ordered entries, source disposition, terminal classification and confidence. |
+| Stop Conditions | Any second run, provider/ABI or semantic change, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. Stop after the one run. |
+| Exit Criteria | The ledger identifies every retained attempt's accepted/declined disposition or bounds one exact source-only follow-up. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
