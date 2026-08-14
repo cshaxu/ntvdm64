@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S46.** Its governing brief is the active
+> **Current effective packet: M0 T199 S47.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S46 -- Redirector package owner and disposition verification.**
+**Active: M0 T199 S47 -- Debugger package owner and disposition verification.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S46, Ordinary Mode. |
-| Admission And Approval | S45 closed the complete DPMI selector family with source inventory, typed unavailable outcomes and a source-built regression. T199 advances to the original Redirector package. |
-| Objective | Revalidate the complete OpenNT Redirector BOP identity/owner/failure map and its contained CLI disposition as one provider package. |
-| Non-goals | No native trace, no service-only patch, no host filesystem/network redirector, no Bochs selector knowledge, and no ambient NT host dependency. |
-| Reference Baseline | S45 DPMI boundary map; OpenNT Redirector dispatcher/provider sources; current Redirector package facade and generic ingress rules. |
-| Files And ABI Surface | Redirector source/ABI/failure ledger, package facade and whole-family fixture; typed contracts only. |
+| Identifier Mode | M0 T199 S47, Ordinary Mode. |
+| Admission And Approval | S46 revalidated the complete Redirector family as source-derived explicit unavailability. T199 advances to the original Debugger package. |
+| Objective | Revalidate the OpenNT Debugger BOP identity, its stack/ABI boundary, owner, and contained CLI disposition as one provider package. |
+| Non-goals | No native trace, no debugger implementation, no service-only patch, no Bochs selector knowledge, and no ambient NT host dependency. |
+| Reference Baseline | S46 Redirector revalidation; OpenNT `nt_bop.c` debugger dispatch context; current Debugger package facade and generic ingress rules. |
+| Files And ABI Surface | Debugger source/ABI/failure ledger, package facade and bound fixture; typed contracts only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-map all Redirector identities, then run fresh MSVC x64 `/MT` package regression through ingress and its bound package facade. |
-| Expected Markers | Complete Redirector ledger, explicit capability failures, no selector leakage and reproducible package evidence. |
+| Verification | Source-map the Debugger identity and stack/continuation contract, then run a fresh MSVC x64 `/MT` bound package regression. |
+| Expected Markers | Complete Debugger ledger, explicit deferred stop, no selector leakage and reproducible package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
-| Stop Conditions | Need for trace patch, Bochs semantic migration, direct host filesystem/network link, ambient host dependency, selector leakage or native trace. |
-| Exit Criteria | Every Redirector identity has an owner/disposition and a whole-package regression passes. |
-| Original Owner Request | "按完整原始 component package 推进（Redirector 整族 unavailable）……不按 trace 添油。" |
-| Similar-Issue Sweep | Separate original Redirector semantics from CLI profile capability and from DOS filesystem ownership. |
+| Stop Conditions | Need for trace patch, Bochs semantic migration, debugger/VDD/GUI host link, ambient host dependency, selector leakage or native trace. |
+| Exit Criteria | The Debugger identity has an owner/disposition and its package regression passes. |
+| Original Owner Request | "按完整原始 component package 推进（Debugger 整族 deferred）……不按 trace 添油。" |
+| Similar-Issue Sweep | Separate original debugger stack ABI from fixed-width generic BOP ingress and CPU exception ownership. |
+
+> **T199 S46 closure:** all fifty Redirector slots retain their source-derived,
+> bound-composition unavailable result (`RIP+4`, `CF=1`, `AX=1`); `57:32`
+> remains rejected. A fresh x64 `/MT` fixture passes without a host network or
+> filesystem capability; see the [revalidation](etc/research/t199-s46-redirector-package-revalidation-001.md).
 
 > **T199 S45 closure:** all twenty-five DPMI slots have a source-mapped owner
 > and typed explicit-unavailable disposition. A fresh x64 `/MT` global
