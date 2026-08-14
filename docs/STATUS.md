@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S40.** Its governing brief is the active
+> **Current effective packet: M0 T199 S42.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S40 -- COMMAND entry-lifecycle package recovery.**
+**Active: M0 T199 S42 -- COMMAND CMDINFO ABI package recovery.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,27 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S40, Ordinary Mode. |
-| Admission And Approval | S39's one native observation assigned its `54:01` frontier to the existing COMMAND bootstrap/launch/lifecycle package. The owner requires component-package implementation rather than trace-selected endpoint patches; this S therefore reopens the complete COMMAND entry lifecycle as one bounded package recovery. |
-| Objective | Recover the source-governed COMMAND entry lifecycle as a coherent package: bootstrap and `54:05` copied registration; `54:01` CMDINFO/get-next and return lifecycle; launch/environment prerequisites; and source-proven absent-registration failure. |
-| Non-goals | No `54:01`-only patch, no new trace until the entire package regression is ready, no direct `nt_bop.c` linking, no Bochs BOP knowledge, no DOS/BIOS semantic migration into bx-vdm, and no ambient NT-host dependency. |
-| Reference Baseline | T199 S5-S7/S29/S36 COMMAND records; S38 global ledger; S39 native baseline; OpenNT `dos/v86/cmd/cmdmisc.c`, `cmdconf.c`, `cmdenv.c`; current command package session and typed mantle action ABI. |
-| Files And ABI Surface | COMMAND source/ABI/failure map, command package session/provider/launch-plane code, copied CMDINFO/SCSINFO records, source-built whole-package regression and evidence. All guest reads/writes remain checked copied mechanical actions. |
+| Identifier Mode | M0 T199 S42, Ordinary Mode. |
+| Admission And Approval | S41's one authorized native observation retained `54:01` as an unhandled COMMAND-package frontier after S40 removed only the false registration prerequisite. The owner requires package-first recovery, not trace-led service patches. |
+| Objective | Recover the original COMMAND CMDINFO transaction as one package: caller construction; packed DS:DX input; bootstrap and initial-environment fields; get-next result fields; `54:05` locator interaction; return/exit lifecycle; and original-source-supported failure dispositions. |
+| Non-goals | No `54:01`-only patch, no native guest run, no direct `nt_bop.c` linking, no Bochs BOP knowledge, no DOS/BIOS semantic migration into bx-vdm, and no ambient NT-host dependency. |
+| Reference Baseline | S41 observation; S40 source/ABI map and source-built command-entry/session regressions; S38 global ledger; OpenNT `base/mvdm/inc/cmdsvc.h`, `base/mvdm/dos/v86/cmd/cmdmisc.c`, and 16-bit COMMAND caller sources. |
+| Files And ABI Surface | COMMAND source/ABI/failure map; existing CMDINFO, command-session, launch-plane and checked guest-memory records; source-built whole-package regression. Any expansion remains a fixed-width copied adapter ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | First enumerate the original entry lifecycle and all participating 54-family services; then run source-built whole-COMMAND regression covering registered and absent-registration paths, bootstrap/return ordering, copied-layout boundaries and no-bypass routing. A native trace is not part of this S. |
-| Expected Markers | One source/ABI/failure map, one package-level disposition, no generic decline from callable `54:01` under an absent registration, and reproducible MSVC x64 `/MT` whole-package evidence. |
+| Verification | Audit original caller and callee layout/order first; then run fresh MSVC x64 `/MT` source-built package regression covering actual caller-shaped CMDINFO, malformed/aperture failure, bootstrap/environment ordering, registration-present/absent interaction and return lifecycle. No native trace. |
+| Expected Markers | One source/ABI/failure map, all CMDINFO fields assigned an original/provider disposition, no raw generic decline for valid caller-shaped `54:01`, and reproducible whole-package evidence. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original source paths/functions, copied field/layout requirements, registration and return state, each participating service's final disposition, test scope and any contained CLI capability. Explicitly distinguish package closure from a later native integration trace. |
-| Stop Conditions | Need for a service-only patch, a DOS/Bochs semantic migration, direct historical host-shell link, ambient host dependency, selector knowledge outside bx-vdm, or a trace-led scope change. |
-| Exit Criteria | The complete COMMAND entry package has a source/ABI/failure map, callable-path handling or source-proven terminal result, passing whole-package regression and no generic decline at the absent-registration `54:01` boundary. |
+| Reporting Requirements | Record original source paths/functions, exact packed layout and offsets, caller/callee field ownership, copied input/output ranges, provider disposition, test scope and limitations. Explicitly distinguish source-built package closure from a later native integration trace. |
+| Stop Conditions | Need for a service-only patch, a DOS/Bochs semantic migration, direct historical host-shell link, ambient host dependency, selector knowledge outside bx-vdm, a second S41 run, or a trace-led scope change. |
+| Exit Criteria | Complete source/ABI/failure map; valid caller-shaped handling or source-proven terminal result for every CMDINFO field; passing whole-package regression; and no generic decline at that tested boundary. |
 | Original Owner Request | "按完整原始 component package 推进（COMMAND: bootstrap/launch/console/execution/environment/lifecycle）……不按 trace 添油。" |
-| Similar-Issue Sweep | Review `54:00..10` together, especially `01`, `02`, `04`, `05`, `0C..0F`; compare original CMD lifecycle ordering, current facade/session routing, copied guest ABI, registration state, failure path and composition action ordering. |
+| Similar-Issue Sweep | Review `54:00..10` as a family; compare all CMDINFO readers/writers, `cmdSetInfo` locators, COMSPEC/bootstrap, initial environment, return exit code, field packing, guest aperture failures and bound composition ordering. |
+
+> **T199 S41 closure:** its one admitted source-built CPU5 guest run compiled and
+> linked the full current composition, completed established DEM traffic, and
+> stopped at unhandled `54:01`. This is a precise COMMAND CMDINFO package
+> frontier—not #UD failure or component closure—and creates no endpoint patch.
+> See the [S41 observation](etc/research/t199-s41-command-native-integration-observation-001.md).
 
 > **T199 S40 completion:** COMMAND entry lifecycle no longer treats absent
 > `54:05` registration as a generic `54:01` decline. It completes the copied
