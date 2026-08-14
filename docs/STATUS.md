@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S114.** Its governing brief is the active
+> **Current effective packet: M0 T198 S115.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S114 -- make one bounded post-commit-observer native run and
-classify the accepted/declined fast-read split.**
+**Active: M0 T198 S115 -- source-map the remaining declined `50:42` call after
+the accepted fast-read result.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ classify the accepted/declined fast-read split.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S114, Ordinary Mode. |
-| Admission And Approval | S113 adds a test-only, post-composition `50:42` marker that requires typed resume at `fault_rip+4` and copies only result metadata. Its fixture sources compile under the locked CPU5/x64 configuration; current composition tests pass. One run is now the only way to determine whether the real path contains an accepted provider call in addition to the known declined fallback call. |
-| Objective | Rebuild the registered current native derivative and execute exactly one bounded run. Record the post-commit marker, fallback marker and BOP `5F` in order; classify all observed fast-read calls without code change. |
-| Non-goals | No retry, provider/ABI change, ROM/VGA/device import, host capability expansion, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S111 one-run evidence, S112 ordering map, S113 post-commit observer, current native derivative recipe. |
-| Files And ABI Surface | Registered native derivative and evidence only; no source change unless a pre-run membership error prevents the admitted build. |
+| Identifier Mode | M0 T198 S115, Ordinary Mode. |
+| Admission And Approval | S114's sole native run proves an accepted `50:42` resume at `0032:6355` with AX=`000Dh` and CF clear, then reaches BOP `5F`; its retained fallback marker proves a separate `50:42` is declined. This separates provider success from the remaining unowned call. |
+| Objective | Source-map the second/fallback fast-read call using original NTDOS caller context, profile namespace lifecycle and current composition eligibility. Decide whether it is a distinct resource, an intentionally unavailable call or a provider-state defect. |
+| Non-goals | No guest run, retry, provider/ABI change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
+| Reference Baseline | S114 post-commit/fallback split, S109 contract, original `handle.asm`, profile namespace/provider source and existing exact guest input evidence. |
+| Files And ABI Surface | Evidence and task records only; no runtime source change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One provenance-locked run has `runs=1`; run log reports post-commit `50:42`, fallback `50:42`, BOP `5F`, and controlled terminal state. |
-| Expected Markers | The post-commit marker yields only copied RIP/masks/AX/flags; no guest data or new capability appears. |
+| Verification | Source/identity table distinguishes the accepted 13-byte call from the fallback call, with an owner/disposition and no inferred file access; documentation governance and diff checks. |
+| Expected Markers | One bounded next task is selected only if a missing capability or source-derived contract is proven. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact build inputs, run count, post-commit/fallback field values, BOP `5F`, terminal classification and confidence. |
-| Stop Conditions | Any second run, need for semantic/provider change, ROM/VGA/device admission, host environment injection, core/mantle change or broad rebuild. Stop after the one run. |
-| Exit Criteria | The one-run record distinguishes accepted source-derived fast read from later unavailable/declined fast read and bounds the next source-only task. |
+| Reporting Requirements | Record call identity evidence, file/namespace ownership, rejected interpretations and confidence. |
+| Stop Conditions | Any guest execution, provider/ABI change, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. Stop and retain the map. |
+| Exit Criteria | The fallback call has one source-grounded disposition, or a minimal non-semantic observation requirement is recorded for a later task. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
