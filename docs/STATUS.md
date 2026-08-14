@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S3.** Its governing brief is the active
+> **Current effective packet: M0 T200 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S3 -- COMMAND CMDINFO bounded-observation fixture.**
+**Active: M0 T200 S4 -- COMMAND CMDINFO native observation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,24 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S3, Ordinary Mode. |
-| Admission And Approval | S2 established that source cannot identify the S1 `54:01` decline. One test-only observation surface is admitted before any further native run. |
-| Objective | Build and compile a selector-contained, fixed-36-byte CMDINFO diagnostic surface that records the complete `54:01` contract without changing product behaviour. |
-| Non-goals | No guest run, no provider repair, no service-only implementation, no Bochs feature expansion, no ambient NT host dependency, and no unrelated guest-memory inspection. |
-| Reference Baseline | T200 S1 run record; T200 S2 source/ABI diagnosis; current COMMAND session and source-built fixture bridge. |
-| Files And ABI Surface | Research fixture bridge and fixture output only; copied event registers, one checked `DS:DX` CMDINFO read, decoded 36-byte fields, and post-delegation session/outcome facts. |
+| Identifier Mode | M0 T200 S4, Ordinary Mode. |
+| Admission And Approval | S3 compiled the fixture-only complete CMDINFO observation with `runs: 0`; one native integration observation is now admitted. |
+| Objective | Run exactly once and record the complete `54:01` CMDINFO/lifecycle state for a subsequent COMMAND package repair decision. |
+| Non-goals | No repair in this packet, no repeated run, no Bochs change, no ambient host dependency, and no per-service patch. |
+| Reference Baseline | T200 S1/S2/S3 records and current source-built fixture. |
+| Files And ABI Surface | Existing source-built native probe and fixture-only CMDINFO observation line. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MSVC x64 `/MT` compile and focused fixture regression prove exact read bounds, no CPU/guest-memory mutation, default-off product scope, and stable diagnostic output for caller-shaped and invalid geometries. |
-| Expected Markers | Explicit geometry/read status, decoded fixed-width CMDINFO values when readable, post-delegation acceptance/outcome, and command-session prerequisite facts. |
+| Verification | One source-built x64 `/MT` guest run; retained run record must report `runs: 1` and the CMDINFO diagnostic line. |
+| Expected Markers | Geometry/read/decode status, fixed-width CMDINFO fields, acceptance/outcome, and lifecycle prerequisites. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record the test-only boundary, original source layout, and exact non-mutation proof; do not call a diagnostic or unavailable capability implemented. |
-| Stop Conditions | Any product-runtime dependency, mutation of event/CPU/guest memory/result, wider-than-CMDINFO guest read, Bochs selector awareness, ambient host dependency, or a guest run. |
-| Exit Criteria | Source-built fixture surface and focused tests prove the bounded observation contract, after which a separate packet may admit one native run. |
+| Reporting Requirements | Record only observed facts and resulting owner-package decision; do not claim repair or component closure. |
+| Stop Conditions | A second run, any repair, or an inference beyond the captured record. |
+| Exit Criteria | One retained CMDINFO observation with an explicit next package decision. |
 | Original Owner Request | "trace 只是辅助手段，用于观察每次完成一组新 BOP 后的行为变化；避免通过 trace 实施添油战术。" |
-| Similar-Issue Sweep | Audit command bootstrap, environment, registration, launch, execution and return lifecycle together; do not add a per-service patch. |
+| Similar-Issue Sweep | Interpret all CMDINFO, bootstrap, registration, launch and return facts as one COMMAND package. |
+
+> **T200 S3 closure:** the fixture-only CMDINFO surface compiled in the full
+> x64 closure with `runs: 0`; see the [fixture record](etc/research/t200-s3-command-cmdinfo-observation-fixture-001.md).
 
 > **T200 S2 closure:** source comparison proves `54:01` is a full CMDINFO
 > lifecycle contract but S1 lacks the live inputs needed to identify its

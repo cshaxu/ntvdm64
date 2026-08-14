@@ -1,9 +1,11 @@
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx-vdm/bx_ntvdm_cmdinfo_v1.h"
 #include "bx-vdm/bx_ntvdm_native_bop_composition_v1.h"
 #include "bx-mantle/bx_ntvdm_instruction_history.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 #include "t198_s23_fastread_attempt_ledger.h"
 #include "t198_s121_dem_lifecycle_ledger.h"
+#include "t200_s3_cmdinfo_observation.h"
 
 static unsigned observed_5011;
 static unsigned observed_503b_resume;
@@ -41,6 +43,43 @@ static uint32_t observed_fast_read_eflags_write_mask, observed_fast_read_eflags_
 static struct t198_s23_fastread_attempt_ledger_v1 observed_fast_read_attempts;
 static struct t198_s121_dem_lifecycle_ledger_v1 observed_dem_lifecycle;
 static const bx_ntvdm_boot_namespace_composition_v1 *observed_composition;
+static t200_s3_cmdinfo_observation_v1 observed_cmdinfo;
+
+/* The only S3 read is the historical 36-byte wire record.  It passes through
+ * the selector-blind mantle action seam and has no result/CPU mutation path. */
+static void observe_cmdinfo(const struct bx_ntvdm_generic_ud_event_v1 *event)
+{
+    struct bx_ntvdm_mechanical_action_v1 action; bx_ntvdm_cmdinfo_v1 value;
+    uint64_t address;
+    if (!event || observed_cmdinfo.observed || event->window_bytes < 4u ||
+        event->window[0] != 0xc4u || event->window[1] != 0xc4u ||
+        event->window[2] != 0x54u || event->window[3] != 0x01u) return;
+    observed_cmdinfo.observed=1u; observed_cmdinfo.cs=event->cs;
+    observed_cmdinfo.ds=event->ds; observed_cmdinfo.es=event->es;
+    observed_cmdinfo.ss=event->ss; observed_cmdinfo.eip=event->eip;
+    observed_cmdinfo.edx=event->edx;
+    address=(uint64_t)event->ds*16u+(uint16_t)event->edx;
+    if (address > UINT64_C(0x100000)-BX_NTVDM_CMDINFO_V1_BYTES) return;
+    observed_cmdinfo.geometry_valid=1u;
+    bx_ntvdm_mechanical_action_v1_clear(&action);
+    action.kind=BX_NTVDM_MECHANICAL_ACTION_V1_READ; action.action_id=0x54303101u;
+    action.range_count=1u; action.payload_bytes=BX_NTVDM_CMDINFO_V1_BYTES;
+    action.ranges[0].physical_address=address;
+    action.ranges[0].byte_count=BX_NTVDM_CMDINFO_V1_BYTES;
+    if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) return;
+    observed_cmdinfo.read_ok=1u;
+    if (!bx_ntvdm_cmdinfo_v1_decode(action.payload,action.payload_bytes,&value)) return;
+    observed_cmdinfo.decoded=1u;
+    observed_cmdinfo.environment_segment=value.environment_segment;
+    observed_cmdinfo.environment_bytes=value.environment_bytes;
+    observed_cmdinfo.command_segment=value.command_segment;
+    observed_cmdinfo.command_offset=value.command_offset;
+    observed_cmdinfo.command_bytes=value.command_bytes;
+    observed_cmdinfo.return_code=value.return_code;
+    observed_cmdinfo.executable_segment=value.executable_segment;
+    observed_cmdinfo.executable_offset=value.executable_offset;
+    observed_cmdinfo.executable_bytes=value.executable_bytes;
+}
 
 void t198_s23_native_ntio_boundary_bind_observation_composition(
     const bx_ntvdm_boot_namespace_composition_v1 *value)
@@ -182,6 +221,7 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_spckbd_edx = event->edx; observed_spckbd_esi = event->esi;
         observed_spckbd_edi = event->edi; observed_spckbd_eflags = event->eflags;
     }
+    observe_cmdinfo(event);
     {
         /* Mirror the production adapter's one generic route: boot/namespace
          * owns its packages first, then the separately bound XMS/DPMI
@@ -191,6 +231,18 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         if (!composition_accepted)
             composition_accepted = bx_ntvdm_native_bop_composition_v1_handle(
                 event, outcome);
+        if (observed_cmdinfo.observed && event != 0 && event->window_bytes >= 4u &&
+            event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
+            event->window[2] == 0x54u && event->window[3] == 0x01u &&
+            observed_composition != 0) {
+            observed_cmdinfo.accepted=composition_accepted?1u:0u;
+            observed_cmdinfo.disposition=outcome?outcome->disposition:0u;
+            observed_cmdinfo.bootstrap_stage=observed_composition->command.bootstrap.stage;
+            observed_cmdinfo.has_launch_plan=observed_composition->command.has_launch_plan;
+            observed_cmdinfo.has_drive_snapshot=observed_composition->command.gset->has_drive_snapshot;
+            observed_cmdinfo.delivered=observed_composition->command.get_next.delivered;
+            observed_cmdinfo.launch_registration_valid=observed_composition->command.launch.valid;
+        }
         bx_ntvdm_boot_namespace_diagnostic_v1 namespace_diagnostic;
         if (observed_composition != 0 &&
             bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
@@ -363,6 +415,8 @@ unsigned t198_s23_native_ntio_boundary_observed_first_canonical_service(void) { 
 unsigned t198_s23_native_ntio_boundary_observed_first_canonical_host_int10_read(void) { return observed_first_canonical_host_int10_read; }
 unsigned t198_s23_native_ntio_boundary_observed_first_canonical_host_int10(unsigned index) { return index < sizeof(observed_first_canonical_host_int10) ? observed_first_canonical_host_int10[index] : 0u; }
 unsigned t198_s23_native_ntio_boundary_observed_stop(void) { return observed_stop; }
+int t200_s3_native_ntio_boundary_copy_cmdinfo_observation(t200_s3_cmdinfo_observation_v1 *out_value)
+{ if (!out_value || !observed_cmdinfo.observed) return 0; *out_value=observed_cmdinfo; return 1; }
 unsigned t198_s23_native_ntio_boundary_observed_selector(void) { return observed_selector; }
 unsigned t198_s23_native_ntio_boundary_observed_service(void) { return observed_service; }
 unsigned t198_s23_native_ntio_boundary_observed_bios15(void) { return observed_bios15; }

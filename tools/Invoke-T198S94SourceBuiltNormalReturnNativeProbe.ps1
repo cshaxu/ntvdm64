@@ -1,6 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
-    [Parameter(Mandatory = $true)][string]$BuildRoot
+    [Parameter(Mandatory = $true)][string]$BuildRoot,
+    [switch]$CompileOnly
 )
 
 Set-StrictMode -Version Latest
@@ -26,8 +27,8 @@ $prepared = Join-Path $build 'prepared'
 if ($LASTEXITCODE -ne 0) { throw 'S94 input preparation failed.' }
 
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-$compileOnly = @($manifest.compileOnlySources)
-$sources = @($manifest.compileSources | Where-Object { $_ -notin $compileOnly })
+$manifestCompileOnly = @($manifest.compileOnlySources)
+$sources = @($manifest.compileSources | Where-Object { $_ -notin $manifestCompileOnly })
 $objects = Join-Path $build 'current-objects'
 New-Item -ItemType Directory -Path $objects | Out-Null
 $config = Join-Path $baseline 'native-core\config.h'
@@ -67,6 +68,12 @@ $compileBatch = Join-Path $build 'compile-current.cmd'
 & cmd.exe /d /s /c ('call "' + $compileBatch + '"') 2>&1 |
     Tee-Object -FilePath (Join-Path $build 'compile.log')
 if ($LASTEXITCODE -ne 0) { throw "S94 current-manifest compile failed: $LASTEXITCODE" }
+if ($CompileOnly) {
+    @{ schema = 'ntdos64.t200.s3.compile-only.v1'; architecture = 'x64'; runtimeLibrary = '/MT'; runs = 0; logs = @{ preparation = 'prepared'; compile = 'compile.log' } } |
+        ConvertTo-Json -Depth 3 | Set-Content -LiteralPath (Join-Path $build 't200-s3-compile-only.json') -Encoding utf8
+    Write-Host "S3 compile-only fixture completed: $build"
+    exit 0
+}
 $fixture = Join-Path $prepared 'source-built-normal-return-fixture.obj'
 $commandBytes = Join-Path $prepared 'command_bytes.obj'
 $shareBytes = Join-Path $prepared 'share_bytes.obj'
