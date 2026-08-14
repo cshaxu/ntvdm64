@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S17.** Its governing brief is the active
+> **Current effective packet: M0 T200 S18.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S17 -- product preentry source/ABI map.**
+**Active: M0 T200 S18 -- initial-state profile declaration design.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S17, Ordinary Mode. |
-| Admission And Approval | S16 closed the direct composition plan/payload boundary while retaining the product-preentry gap. |
-| Objective | Source-map the product NTIO preentry recipe and define the future bx-mantle mechanical publication ABI. |
-| Non-goals | No machine initialization, RAM publication, CPU loop, guest run, CLI process-status mapping, BOP patch, or Bochs change. |
-| Reference Baseline | T200 S15 lifecycle map and S16 direct startup-plan closure. |
-| Files And ABI Surface | Source/evidence map and a proposed typed mechanical publication contract only; no implementation is admitted unless the map closes. |
+| Identifier Mode | M0 T200 S18, Ordinary Mode. |
+| Admission And Approval | S17 source-mapped NTIO publication and established that minimal mantle has no bound firmware/initial-state provider. |
+| Objective | Design the copied, versioned profile initial-state declaration and its evidence admission/rejection contract. |
+| Non-goals | No machine initialization, RAM publication, CPU loop, guest run, fixture preentry reuse, BOP patch, or Bochs change. |
+| Reference Baseline | T200 S16 direct startup-plan closure, S17 preentry map, and r18 first-prefix input evidence. |
+| Files And ABI Surface | bx-vdm/profile declaration and opaque typed mantle-consumer proposal only; values, RAM application, and execution are not admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI map distinguishes product evidence from fixture-only IVT/BDA setup and names exact future mechanical inputs/results. |
-| Expected Markers | No environment startup or finite-run API becomes product behavior; no fixture byte is silently promoted to a product default. |
+| Verification | Focused ABI validation proves absent/unproven state is represented and rejected, while evidence identity remains copied and pointer-free. |
+| Expected Markers | No historical snapshot byte becomes a default; mantle remains selector/firmware blind; no environment or finite-run route is imported. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source provenance, accepted/rejected recipe elements, ABI ownership, and unresolved evidence; do not call guest startup/COMMAND closed. |
-| Stop Conditions | Any implementation that publishes RAM, initializes a machine, executes guest code, uses environment startup/finite-run, or crosses raw Bochs types. |
-| Exit Criteria | The next mechanical implementation is precisely admitted with typed inputs or explicitly blocked by missing source evidence. |
+| Reporting Requirements | Record declaration fields, provenance binding, absent-state behavior, and rejected routes; do not call guest startup/COMMAND closed. |
+| Stop Conditions | Any default byte, RAM application, machine initialization, guest execution, environment/finite-run use, or raw Bochs type crossing a C boundary. |
+| Exit Criteria | A typed declaration design and focused validation either admit a later generic publisher or clearly retain an evidence blocker. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect OpenNT startup paths, NTIO entry provenance, fixture preentry bytes, startup-plan ABI, and minimal-machine reset assumptions. |
+| Similar-Issue Sweep | Inspect profile schema/parser, r18 snapshot evidence, machine profile ABI, startup-plan ABI, and mantle generic action interfaces. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -66,6 +66,10 @@
 > **T200 S16 closure:** direct composition owns its profile-selected NTIO image
 > and exposes a pointer-free startup plan whose payload is invalidated by
 > reset; see the [startup-plan closure](etc/research/t200-s16-direct-composition-startup-plan-closure-001.md).
+
+> **T200 S17 closure:** OpenNT source locks the narrow NTIO handoff, but the
+> minimal mantle has no bound IVT/BDA/virtual-interrupt input provider; see the
+> [preentry map](etc/research/t200-s17-product-preentry-source-abi-map-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
