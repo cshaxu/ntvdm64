@@ -2,12 +2,12 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S93.** Its governing brief is the active
+> **Current effective packet: M0 T198 S94.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S93 -- replace synthetic COMMAND/target bytes in the native
-fixture with identity-locked source-built COMMAND.COM/SHARE.EXE inputs and
-define its bounded observation markers.**
+**Active: M0 T198 S94 -- relink and make one bounded observation of the exact
+source-built COMMAND.COM/SHARE.EXE native fixture; classify the first unresolved
+boundary without adding a provider.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -24,21 +24,21 @@ define its bounded observation markers.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S93, Ordinary Mode. |
-| Admission And Approval | S92 proves the source-built SHARE candidate is present but current native observation substitutes synthetic COMMAND/target inputs. |
-| Objective | Create reproducible, compile-only fixture inputs from the existing locked source-built COMMAND.COM and SHARE.EXE artifacts; bind them through the existing composition and define exact bounded observation markers before execution. |
-| Non-goals | No guest execution, terminal-result transport, CLI exit-code mapping, provider change, guest artifact creation, host filesystem exposure, CLI `--display` option, guest video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, or broad rebuild. |
-| Reference Baseline | S92 candidate/prerequisite map; S89/S90 current composition fixture; existing NTIO/NTDOS generated-input recipe. |
-| Files And ABI Surface | New generated evidence inputs and narrow native-fixture/tool references only. Reuse existing immutable namespace, drive snapshot, composition and selector-blind core/mantle ABI; no new seam or guest-address API. |
+| Identifier Mode | M0 T198 S94, Ordinary Mode. |
+| Admission And Approval | S93 source-builds and compile-validates exact COMMAND/SHARE fixture inputs, a v7 stream profile declaration and the full fixture branch without execution. |
+| Objective | Perform one full current-object MSVC x64 `/MT` relink and finite native observation using the S93 source-built inputs; record the first unresolved boundary and its original owner/disposition. |
+| Non-goals | No second run, terminal-result transport, CLI exit-code mapping, provider change, guest artifact creation, host filesystem exposure, CLI `--display` option, guest video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim without `54:11`. |
+| Reference Baseline | S93 input preparation; S92 prerequisite map; S89/S90 current-object relink recipe. |
+| Files And ABI Surface | One new bounded build/run root and narrow native probe/fixture references only. Reuse existing immutable namespace, drive snapshot, composition and selector-blind core/mantle ABI; no new seam or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Generated-input byte/hash checks, focused fixture source scan for absence of synthetic COMMAND/target payloads, static source-membership/relink recipe review, documentation governance and diff checks. |
-| Expected Markers | Exact two artifact identities, generated-array symbols and lengths, fixture bindings, C-drive snapshot, bounded marker list (`50:3B`, `50:0F`, `54:0C`, `54:01`, `50:3C`, `54:11`) and explicit no-execution result. |
+| Verification | One successful current-object compile/link, one finite run, retained exact inputs/profile/command line/logs, marker ordering, bounded-stop classification, documentation governance and diff checks. |
+| Expected Markers | Existing startup/stream markers plus ordered observation of `50:3B`, `50:0F`, `54:0C`, `54:01`, `50:3C`, `54:11` if reached; otherwise exact first unresolved BOP/window/state and original owner. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source artifact paths, hashes, generator output, compiled-input ownership, profile-to-composition direction, marker meanings, and every excluded runtime feature. |
-| Stop Conditions | Any identity mismatch, need to modify/import a guest artifact, add a BOP provider, read arbitrary guest addresses, admit ROM/VGA/PIC/device behavior, alter the core/mantle seam, or execute before the static fixture closes. Stop and retain the partial capability. |
-| Exit Criteria | Reproducible source-owned actual-image fixture preparation with a separately admissible one-run observation contract, or a concrete build/input blocker. |
+| Reporting Requirements | Record rebuilt/inherited objects, input/profile hashes, profile-to-composition data direction, exact marker order, first unresolved boundary, action/result ordering, bounded-stop meaning and every excluded feature. |
+| Stop Conditions | Any need for a second run, provider addition, arbitrary guest address read, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a claim that a watchdog/process exit is a guest result. Stop and retain the partial capability. |
+| Exit Criteria | One reproducible exact-input observation whose first unresolved boundary is source-classified, or an exact build/link blocker. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover all generated native guest arrays, manifest/compiler membership, profile selection versus manual fixture fields, and marker collection so no synthetic byte array or unrelated BOP observer masquerades as a normal-return run. |
+| Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
 ## Current Technical Baseline
 
@@ -430,6 +430,10 @@ define its bounded observation markers.**
   synthetic COMMAND/target bytes.  Repeating it cannot test `50:3C` or
   `54:11`; S93 owns identity-locked fixture inputs before any next run. See
   [S92 prerequisite map](etc/research/t198-s92-normal-return-candidate-prerequisite-map-001.md).
+- M0 T198 S93 is complete: the exact source-built COMMAND.COM and SHARE.EXE
+  inputs, plus an explicit v7 stream/TARGET.EXE profile, source-build into the
+  native fixture branch without link or guest execution.  S94 may make one
+  bounded exact-input observation; see [S93 preparation](etc/research/t198-s93-source-built-normal-return-fixture-preparation-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory

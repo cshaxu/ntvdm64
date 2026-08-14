@@ -8,6 +8,12 @@
 
 extern const Bit8u t198_s23_ntio_bytes[0x8400];
 extern const Bit8u t198_s25_ntdos_bytes[0x6cd2];
+#ifdef T198_S93_SOURCE_BUILT_NORMAL_RETURN
+/* Compile-only S93 input seam: these arrays are generated from the locked
+ * source-built artifacts.  This fixture still does not execute under S93. */
+extern const Bit8u t198_s93_command_bytes[0xc4d0];
+extern const Bit8u t198_s93_share_bytes[0x372];
+#endif
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_5011(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_503b_resume(void);
 extern "C" unsigned t198_s23_native_ntio_boundary_observed_dta_resume(void);
@@ -138,9 +144,14 @@ static int prepare_preentry_input(bx_ntvdm_preentry_input_v1 *input)
 
 int main()
 {
+#ifdef T198_S93_SOURCE_BUILT_NORMAL_RETURN
+  byob_image ntio={ (uint8_t*)t198_s23_ntio_bytes,0x8400};
+  byob_image ntdos={(uint8_t*)t198_s25_ntdos_bytes,0x6cd2}, cmd={(uint8_t*)t198_s93_command_bytes,0xc4d0}, tgt={(uint8_t*)t198_s93_share_bytes,0x372};
+#else
   static uint8_t command[] = {0x90,0xc3};
   static uint8_t target[] = {0xf4}; byob_image ntio={ (uint8_t*)t198_s23_ntio_bytes,0x8400};
   byob_image ntdos={(uint8_t*)t198_s25_ntdos_bytes,0x6cd2}, cmd={command,sizeof(command)}, tgt={target,sizeof(target)};
+#endif
   byob_profile_selection p; bx_ntvdm_boot_namespace_composition_v1 c; bx_ntvdm_host_drive_snapshot_v1 drives; bx_ntvdm_preentry_input_v1 preentry; uint8_t drive_types[26]={0};
   static bx_ntvdm_finite_run_request r; bx_ntvdm_finite_run_terminal_snapshot terminal; bx_ntvdm_generic_ud_event_v1 generic; bx_ntvdm_instruction_history_record_v1 history[8]; bx_ntvdm_instruction_history_transition_v1 transition; bx_ntvdm_instruction_history_provenance_v1 provenance; unsigned terminal_valid, generic_valid, history_count, transition_valid, provenance_valid; int status;
   memset(&p,0,sizeof(p)); p.ntio.bytes=0x8400; p.ntdos.bytes=0x6cd2;
@@ -148,8 +159,14 @@ int main()
    * does not parse or invent a display option inside the native machine. */
   p.guest_display_state=BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1;
   memcpy(p.command_placement.path,L"\\COMMAND.COM",sizeof(L"\\COMMAND.COM"));p.command_placement.drive_index=2;p.has_command_placement=1;
+#ifdef T198_S93_SOURCE_BUILT_NORMAL_RETURN
+  memcpy(p.target_placement.path,L"\\TARGET.EXE",sizeof(L"\\TARGET.EXE"));p.target_placement.drive_index=2;p.has_target_placement=1;
+  memcpy(p.target.file_name,L"TARGET.EXE",sizeof(L"TARGET.EXE"));
+#else
   memcpy(p.target_placement.path,L"\\TARGET.COM",sizeof(L"\\TARGET.COM"));p.target_placement.drive_index=2;p.has_target_placement=1;
-  memcpy(p.target.file_name,L"TARGET.COM",sizeof(L"TARGET.COM"));p.has_guest_boot_files=p.has_guest_search_metadata=1;
+  memcpy(p.target.file_name,L"TARGET.COM",sizeof(L"TARGET.COM"));
+#endif
+  p.has_guest_boot_files=p.has_guest_search_metadata=1;
   memcpy(p.config_file.path,L"\\CONFIG.SYS",sizeof(L"\\CONFIG.SYS"));p.config_file.materialization=BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;
   memcpy(p.autoexec_file.path,L"\\AUTOEXEC.BAT",sizeof(L"\\AUTOEXEC.BAT"));p.autoexec_file.materialization=BYOB_GUEST_BOOT_FILE_EMPTY_V1;
   p.command_metadata.attributes=p.target_metadata.attributes=p.config_metadata.attributes=p.autoexec_metadata.attributes=0x20;
