@@ -19,6 +19,8 @@
     "src/bx-vdm/bx_ntvdm_cmd_set_info_service.c",
     "src/bx-vdm/bx_ntvdm_command_launch_plane_v1.c",
     "src/bx-vdm/bx_ntvdm_command_plane_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_package_facade_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_cpu_delta_abi.c",
     "src/bx-vdm/bx_ntvdm_cpu_result_v2.c",
     "src/bx-vdm/bx_ntvdm_cpu_state_abi.c",

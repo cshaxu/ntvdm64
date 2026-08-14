@@ -1,5 +1,6 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx_ntvdm_dem_package_facade_v1.h"
+#include "bx_ntvdm_command_package_facade_v1.h"
 #include <string.h>
 
 static uint8_t ram[0x100000];
@@ -133,6 +134,23 @@ static int facade_regression(void)
     return 1;
 }
 
+static int command_facade_regression(void)
+{
+    uint32_t service;
+    for (service=0u; service<17u; ++service) {
+        uint8_t bytes[4]={0xc4u,0xc4u,0x54u,(uint8_t)service};
+        bx_ntvdm_instruction_window_v1 window; bx_ntvdm_bop_ingress_v1 ingress;
+        bx_ntvdm_bop_provider_selection_v1 selection; bx_ntvdm_command_package_route_v1 route;
+        uint32_t expected=(service==3u)?BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP:
+            ((service==8u||service==10u)?BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE:
+            ((service==1u||service==2u||service==4u||service==5u||service==12u||service==13u||service==14u)?BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER:BX_NTVDM_COMMAND_PACKAGE_DEFERRED));
+        bx_ntvdm_instruction_window_v1_capture(&window,bytes,4u);
+        if(!bx_ntvdm_bop_ingress_v1_classify(&window,&ingress)||!bx_ntvdm_bop_provider_registry_v1_select(&ingress,&selection)||!bx_ntvdm_command_package_facade_v1_classify(&ingress,&selection,&route)||route.disposition!=expected) return 0;
+        if(expected==BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP||expected==BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE){bx_ntvdm_exception_event_v1 event;bx_ntvdm_cpu_state_v1 cpu;bx_ntvdm_cpu_result_v2 result;memset(&event,0,sizeof(event));event.magic=BX_NTVDM_EXCEPTION_ABI_MAGIC;event.abi_version=BX_NTVDM_EXCEPTION_ABI_VERSION;event.struct_bytes=sizeof(event);event.kind=BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;event.vector=6u;event.fault_rip=0x100u;bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);if(!bx_ntvdm_command_package_facade_v1_dispatch(&ingress,&selection,&route,&event,&cpu,&result)||result.disposition!=(expected==BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP?(uint32_t)BX_NTVDM_CPU_RESULT_V2_RESUME:(uint32_t)BX_NTVDM_CPU_RESULT_V2_STOP))return 0;}
+    }
+    return 1;
+}
+
 int main(void)
 {
     uint8_t command_bytes[] = { 0x90, 0xc3 };
@@ -153,6 +171,7 @@ int main(void)
 
     profile_initialize(&profile);
     if (!facade_regression()) return 45;
+    if (!command_facade_regression()) return 46;
     drive_types[2] = 3u;
     profile.guest_display_state = BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1;
     profile.ntdos.bytes = sizeof(ntdos_bytes);
