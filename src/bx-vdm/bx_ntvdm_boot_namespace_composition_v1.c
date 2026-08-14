@@ -19,6 +19,7 @@
 #include "bx_ntvdm_redir_package_facade_v1.h"
 #include "bx_ntvdm_debugger_package_facade_v1.h"
 #include "bx_ntvdm_top_level_package_facade_v1.h"
+#include "bx_ntvdm_machine_bop_facade_v1.h"
 #include <string.h>
 
 static bx_ntvdm_boot_namespace_composition_v1 *active;
@@ -433,6 +434,7 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     bx_ntvdm_dem_package_route_v1 dem_route;
     bx_ntvdm_command_package_route_v1 command_route;
     uint32_t top_level_route;
+    uint32_t machine_route;
     bx_ntvdm_exception_result_v1 memory_result;
     struct bx_ntvdm_mechanical_action_v1 action, next;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
@@ -445,18 +447,6 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             &window, &result)) return outcome(&result, value);
     if (bx_ntvdm_vdd_create_user_notify_service_v1_dispatch(&boundary, &cpu,
             &window, &result)) return outcome(&result, value);
-    /* This composition admits only the source-observed top-level memory
-     * queries: BIOS 12h and BIOS 15h/AH=88h. */
-    if (window.valid_bytes >= 3u && window.bytes[0] == 0xc4u &&
-        window.bytes[1] == 0xc4u &&
-        (window.bytes[2] == 0x12u || window.bytes[2] == 0x15u) &&
-        bx_ntvdm_bios_memory_service_v1_dispatch(&boundary, &cpu, &window,
-            &memory_result)) {
-        if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
-            !bx_ntvdm_cpu_result_v2_resume(&result, memory_result.resume_rip)) return 0;
-        result.cpu_delta = memory_result.cpu_delta;
-        return outcome(&result, value);
-    }
     if (!bx_ntvdm_bop_ingress_v1_dispatch(&boundary, &cpu,
             &window, &ingress, &result) || !bx_ntvdm_cpu_result_v2_valid(&result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH ||
@@ -468,7 +458,20 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
         if (top_level_route == BX_NTVDM_TOP_LEVEL_PACKAGE_CONFIG &&
             bx_ntvdm_config_done_service_v1_dispatch(&boundary, &cpu, &window,
                 &result)) return outcome(&result, value);
-        if (top_level_route == BX_NTVDM_TOP_LEVEL_PACKAGE_KEYBOARD) {
+    }
+    if (bx_ntvdm_machine_bop_facade_v1_classify(&ingress, &selection,
+            &machine_route)) {
+        if (bx_ntvdm_machine_bop_facade_v1_dispatch(machine_route, &boundary,
+                &cpu, &result)) return outcome(&result, value);
+        if (machine_route == BX_NTVDM_MACHINE_BOP_MEMORY &&
+            bx_ntvdm_bios_memory_service_v1_dispatch(&boundary, &cpu, &window,
+                &memory_result)) {
+            if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
+                !bx_ntvdm_cpu_result_v2_resume(&result, memory_result.resume_rip)) return 0;
+            result.cpu_delta = memory_result.cpu_delta;
+            return outcome(&result, value);
+        }
+        if (machine_route == BX_NTVDM_MACHINE_BOP_HANDOFF) {
             int stream_state = execute_spckbd_stream_state(active, &boundary,
                 &cpu, &window, &result);
             if (stream_state > 0) return outcome(&result, value);

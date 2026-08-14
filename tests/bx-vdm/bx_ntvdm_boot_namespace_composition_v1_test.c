@@ -209,6 +209,14 @@ int main(void)
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x103u || outcome.gpr16_write_mask != 0u ||
         outcome.eflags_write_mask != 0u) return 53;
+    for (service = 0u; service < 3u; ++service) {
+        static const uint8_t deferred_machine_selectors[3] = { 0x5cu, 0x5du, 0xfdu };
+        event_initialize(&event, deferred_machine_selectors[service], 0x90u);
+        if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+            outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
+            outcome.resume_rip != 0u || outcome.gpr16_write_mask != 0u ||
+            outcome.eflags_write_mask != 0u) return 54;
+    }
     /* The Redirector plane is one whole-package source-derived failure.  The
        composition must route every defined service through it, without any
        service-specific host capability. */

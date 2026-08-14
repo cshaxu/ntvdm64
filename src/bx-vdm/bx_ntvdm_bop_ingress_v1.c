@@ -96,7 +96,8 @@ int bx_ntvdm_bop_ingress_v1_classify(
     case 0x51u: bx_ntvdm_bop_ingress_v1_set(ingress, BX_NTVDM_BOP_ROUTE_MAPPED_DEFERRED, BX_NTVDM_BOP_FAMILY_WOW, selector, 0u, 0u); break;
     case 0x59u: case 0x5bu: case 0x5fu:
         bx_ntvdm_bop_ingress_v1_set(ingress, BX_NTVDM_BOP_ROUTE_EXPLICIT_UNAVAILABLE, BX_NTVDM_BOP_FAMILY_TOP_LEVEL, selector, 0u, 0u); break;
-    case 0x5au: case 0x5cu: case 0x5du: case 0x5eu: case 0xfdu: case 0xfeu:
+    case 0x12u: case 0x15u: case 0x5au: case 0x5cu: case 0x5du: case 0x5eu:
+    case 0xfdu: case 0xfeu:
         bx_ntvdm_bop_ingress_v1_set(ingress, BX_NTVDM_BOP_ROUTE_MAPPED_DEFERRED, BX_NTVDM_BOP_FAMILY_TOP_LEVEL, selector, 0u, 0u); break;
     default:
         bx_ntvdm_bop_ingress_v1_set(ingress, BX_NTVDM_BOP_ROUTE_UNKNOWN_SELECTOR, BX_NTVDM_BOP_FAMILY_NONE, selector, 0u, 0u); break;

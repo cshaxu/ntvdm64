@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S20.** Its governing brief is the active
+> **Current effective packet: M0 T199 S21.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S20 -- machine-BOP facade and package regression.**
+**Active: M0 T199 S21 -- C1 A20 selector-blind capability admission.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S20, Ordinary Mode. |
-| Admission And Approval | T199 S19 closes the machine/BIOS source and ownership map and admits its bounded bx-vdm routing facade. |
-| Objective | Implement one bx-vdm machine-BOP facade for existing `12`, `15:88`, and `5F` composition paths plus selected deferred/controlled-stop `5C`, `5D`, and `FD` outcomes; route each only after common ingress. |
-| Non-goals | No Bochs feature addition, no C1--C6 machine capability, no selected SoftPC BIOS branch, no keyboard/PIC/firmware emulation in bx-vdm, no `FD` transition, no trace, and no direct historical dispatcher link. |
-| Reference Baseline | T199 S19 machine/BIOS map and current bounded BIOS-memory and SPCKBD helpers. |
-| Files And ABI Surface | One bx-vdm facade, composition attachment, existing helper calls, all-member focused regression, and bound-composition regression. |
+| Identifier Mode | M0 T199 S21, Ordinary Mode. |
+| Admission And Approval | T199 S11 selects C1 A20 as the first shared XMS/DPMI machine capability; S20 finishes all currently admitted machine-BOP routing. |
+| Objective | Establish the source/ABI/exception admission for one selector-blind bx-core/bx-mantle A20 set/query capability, including the exact intrusion decision and positive/negative boundary tests required before implementation. |
+| Non-goals | No XMS or DPMI BOP result, no adapter-owned A20 state, no allocator/UMB/INT15 work, no direct Bochs selector recognition, no trace, and no unregistered Bochs modification. |
+| Reference Baseline | T199 S9 XMS disposition, T199 S11 C1--C6 plan, CPU5 minimal-machine lifecycle, and the Bochs intrusion register. |
+| Files And ABI Surface | Supporting source/ABI map, exception-register decision, and selector-blind fixture plan only; no provider-facing BOP facade in this S. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` focused and bound-composition tests cover each admitted selector, exact three-byte continuation, explicit stop behavior, and no direct helper bypass. |
-| Expected Markers | `12` and `15:88` retain their existing limited profile results; `5F` retains checked action; `5C/5D/FD` never synthesize a machine operation. |
+| Verification | Review the adopted Bochs A20 owner path and current mantle lifecycle; record source locations, exact ABI record proposal, exception requirement, and a fixture that can prove mutation/query plus default-off rejection. |
+| Expected Markers | One selected core owner, no duplicate adapter state, no BOP vocabulary below bx-vdm, and no unrecorded Bochs intrusion. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record each selector's route, result, preserved limitation, and unchanged machine owner. |
-| Stop Conditions | Need to choose a historical product variant, add C1--C6 capability, change Bochs, or introduce selector knowledge into bx-core/bx-mantle. |
-| Exit Criteria | One facade owns all six admitted machine-BOP routes with focused and composition regressions. |
+| Reporting Requirements | Record exact source owner, state/lifecycle path, requested ABI, rejection behavior, and whether an intrusion exception is necessary. |
+| Stop Conditions | The only viable design requires adapter state, a CPU rewrite, unbounded Bochs product-shell import, or an unregistered core change. |
+| Exit Criteria | One evidence-backed C1 design is ready for a bounded selector-blind implementation S. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
-| Similar-Issue Sweep | Audit `12`, `15:88`, `5F`, `5C`, `5D`, `FD`, their fourth-byte handling, and every current direct machine helper together. |
+| Similar-Issue Sweep | Audit A20 initialization, wrap semantics, reset/cleanup, x86 CPU mode callers, and all existing A20 configuration paths together. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 
@@ -94,6 +94,10 @@
 > **T199 S19 completion:** all machine/BIOS identities now have an owner and
 > disposition without selecting a historical `BIOS[]` branch; see [S19
 > map](etc/research/t199-s19-machine-bios-source-abi-owner-map-001.md).
+
+> **T199 S20 completion:** one machine facade now routes the bounded BIOS and
+> machine handoff group after common ingress; see [S20
+> regression](etc/research/t199-s20-machine-bop-facade-regression-001.md).
 
 ## Current Technical Baseline
 

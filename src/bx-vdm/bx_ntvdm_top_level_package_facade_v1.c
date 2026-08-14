@@ -44,12 +44,6 @@ int bx_ntvdm_top_level_package_facade_v1_classify(
             ingress->route != BX_NTVDM_BOP_ROUTE_MAPPED_DEFERRED ||
             selection->disposition != BX_NTVDM_BOP_PROVIDER_DEFERRED) return 0;
         *route = BX_NTVDM_TOP_LEVEL_PACKAGE_CONFIG; break;
-    case 0x5fu:
-        if (ingress->family != BX_NTVDM_BOP_FAMILY_TOP_LEVEL ||
-            selection->provider_family != BX_NTVDM_BOP_PROVIDER_TOP_LEVEL ||
-            ingress->route != BX_NTVDM_BOP_ROUTE_EXPLICIT_UNAVAILABLE ||
-            selection->disposition != BX_NTVDM_BOP_PROVIDER_EXPLICIT_UNAVAILABLE) return 0;
-        *route = BX_NTVDM_TOP_LEVEL_PACKAGE_KEYBOARD; break;
     default: return 0;
     }
     return 1;

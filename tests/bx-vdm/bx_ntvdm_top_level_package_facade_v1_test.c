@@ -47,9 +47,7 @@ int main(void)
             BX_NTVDM_CPU_RESULT_V2_STOP, 1)) return 4;
     if (!check(0x5eu, BX_NTVDM_TOP_LEVEL_PACKAGE_CONFIG,
             BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH, 0)) return 5;
-    if (!check(0x5fu, BX_NTVDM_TOP_LEVEL_PACKAGE_KEYBOARD,
-            BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH, 0)) return 6;
     if (!check(0xfeu, BX_NTVDM_TOP_LEVEL_PACKAGE_TERMINAL,
-            BX_NTVDM_CPU_RESULT_V2_STOP, 1)) return 7;
+            BX_NTVDM_CPU_RESULT_V2_STOP, 1)) return 6;
     return 0;
 }
