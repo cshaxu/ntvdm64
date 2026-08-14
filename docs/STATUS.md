@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S9.** Its governing brief is the active
+> **Current effective packet: M0 T200 S10.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S9 -- COMMAND exhausted-plan native observation.**
+**Active: M0 T200 S10 -- post-COMMAND terminal integration diagnosis.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,24 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S9, Ordinary Mode. |
-| Admission And Approval | S7 source diagnosis and S8 x64 regression prove the typed terminal disposition. |
-| Objective | Execute one native observation of the repaired exhausted-plan terminal and identify the next owner package. |
-| Non-goals | No repair, repeat run, Bochs change, host policy, or trace-derived service patch. |
-| Reference Baseline | T200 S6 native observation and S8 regression. |
-| Files And ABI Surface | Existing native probe and typed COMMAND terminal result. |
+| Identifier Mode | M0 T200 S10, Ordinary Mode. |
+| Admission And Approval | S9 closed the declared one-slot COMMAND terminal without raw #UD. |
+| Objective | Diagnose the remaining finite-run terminal/result boundary and select the next whole owner package. |
+| Non-goals | No new BOP patch, no guest run, no Bochs change, and no claim that fixture exit equals CLI exit. |
+| Reference Baseline | T200 S9 native terminal evidence and finite-run/CLI boundary sources. |
+| Files And ABI Surface | Typed stop propagation, finite-run terminal snapshot, CLI exit ownership. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One source-built x64 `/MT` run with controlled terminal outcome. |
-| Expected Markers | Accepted stop at exhausted `54:01` and no raw #UD. |
+| Verification | Source/ABI map distinguishes fixture controlled exit from product CLI exit and names the next owner package. |
+| Expected Markers | Explicit terminal ownership and no unsupported runtime-success claim. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record original host behavior, contained CLI substitution, and all unavailable host features; do not call COMMAND component closed. |
-| Stop Conditions | A second run, repair, or extra capability. |
-| Exit Criteria | One retained observation and next owner-package decision. |
+| Stop Conditions | New guest run, direct exit-code patch, or adapter/Bochs ownership inversion. |
+| Exit Criteria | Owner-package admission or documented terminal boundary. |
 | Original Owner Request | "trace 只是辅助手段，用于观察每次完成一组新 BOP 后的行为变化；避免通过 trace 实施添油战术。" |
-| Similar-Issue Sweep | Inspect terminal snapshot, generic #UD status and all COMMAND session state. |
+| Similar-Issue Sweep | Inspect CPU stop, finite runner, CLI shell and retained fixture exit semantics together. |
+
+> **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
+> run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
