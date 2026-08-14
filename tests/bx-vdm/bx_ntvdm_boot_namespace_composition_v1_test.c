@@ -202,6 +202,15 @@ int main(void)
     }
     event_initialize(&event, 0x57u, 0x32u);
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 48;
+    event_initialize(&event, 0x56u, 0x90u);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
+        outcome.resume_rip != 0u || outcome.gpr16_write_mask != 0u ||
+        outcome.eflags_write_mask != 0u) return 49;
+    event.window_bytes = 3u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
+        outcome.resume_rip != 0u) return 50;
     event_initialize(&event, 0x54u, 0x0cu);
     event.ds = 0x1000; event.edx = 0x20;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 3;

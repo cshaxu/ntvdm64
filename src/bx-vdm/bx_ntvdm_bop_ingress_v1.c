@@ -67,8 +67,16 @@ int bx_ntvdm_bop_ingress_v1_classify(
         return 1;
     }
     selector = window->bytes[2];
+    if (selector == 0x56u) {
+        /* Debugger modes are on the guest stack.  The BOP itself is only
+         * C4 C4 56, so byte four belongs to the following guest instruction. */
+        bx_ntvdm_bop_ingress_v1_set(ingress,
+            BX_NTVDM_BOP_ROUTE_MAPPED_DEFERRED,
+            BX_NTVDM_BOP_FAMILY_DEBUGGER, selector, 0u, 0u);
+        return 1;
+    }
     if (selector == 0x50u || selector == 0x52u || selector == 0x53u ||
-        selector == 0x54u || selector == 0x56u || selector == 0x57u) {
+        selector == 0x54u || selector == 0x57u) {
         if (window->valid_bytes < 4u) {
             bx_ntvdm_bop_ingress_v1_set(ingress, BX_NTVDM_BOP_ROUTE_INCOMPLETE,
                 BX_NTVDM_BOP_FAMILY_NONE, selector, 0u, 0u);
@@ -80,7 +88,6 @@ int bx_ntvdm_bop_ingress_v1_classify(
         case 0x52u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_XMS, 12u, 0xffu); break;
         case 0x53u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_DPMI, 25u, 0xffu); break;
         case 0x54u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_COMMAND, 17u, 17u); break;
-        case 0x56u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_DEBUGGER, 16u, 0xffu); break;
         default: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_REDIR, 50u, 0xffu); break;
         }
         return 1;

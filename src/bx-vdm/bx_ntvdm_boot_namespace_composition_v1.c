@@ -17,6 +17,7 @@
 #include "bx_ntvdm_dem_package_facade_v1.h"
 #include "bx_ntvdm_command_package_facade_v1.h"
 #include "bx_ntvdm_redir_package_facade_v1.h"
+#include "bx_ntvdm_debugger_package_facade_v1.h"
 #include <string.h>
 
 static bx_ntvdm_boot_namespace_composition_v1 *active;
@@ -485,6 +486,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             &ingress, &selection, &command_route, &boundary, &cpu, &result))
         return outcome(&result, value);
     if (bx_ntvdm_redir_package_facade_v1_dispatch(&ingress, &selection,
+            &boundary, &cpu, &result)) return outcome(&result, value);
+    if (bx_ntvdm_debugger_package_facade_v1_dispatch(&ingress, &selection,
             &boundary, &cpu, &result)) return outcome(&result, value);
     if (bx_ntvdm_dem_misc_plane_v1_dispatch(&ingress, &selection, &boundary,
             &cpu, &window, &memory_result)) {

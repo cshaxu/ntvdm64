@@ -33,7 +33,6 @@ int main(void)
         { 0x52u, 12u, 0xffu, BX_NTVDM_BOP_FAMILY_XMS },
         { 0x53u, 25u, 0xffu, BX_NTVDM_BOP_FAMILY_DPMI },
         { 0x54u, 17u, 17u, BX_NTVDM_BOP_FAMILY_COMMAND },
-        { 0x56u, 16u, 0xffu, BX_NTVDM_BOP_FAMILY_DEBUGGER },
         { 0x57u, 50u, 0xffu, BX_NTVDM_BOP_FAMILY_REDIR }
     };
     uint32_t index, service;
@@ -44,7 +43,9 @@ int main(void)
         BX_NTVDM_BOP_ROUTE_NOT_CALLABLE_SENTINEL, BX_NTVDM_BOP_FAMILY_COMMAND);
     failed |= !classify(0x52u, 12u, 4u,
         BX_NTVDM_BOP_ROUTE_UNKNOWN_SERVICE, BX_NTVDM_BOP_FAMILY_XMS);
-    failed |= !classify(0x56u, 15u, 4u,
+    failed |= !classify(0x56u, 0x90u, 3u,
+        BX_NTVDM_BOP_ROUTE_MAPPED_DEFERRED, BX_NTVDM_BOP_FAMILY_DEBUGGER);
+    failed |= !classify(0x56u, 0x90u, 4u,
         BX_NTVDM_BOP_ROUTE_MAPPED_DEFERRED, BX_NTVDM_BOP_FAMILY_DEBUGGER);
     failed |= !classify(0x59u, 0u, 3u,
         BX_NTVDM_BOP_ROUTE_EXPLICIT_UNAVAILABLE, BX_NTVDM_BOP_FAMILY_TOP_LEVEL);

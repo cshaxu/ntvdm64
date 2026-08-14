@@ -19,7 +19,8 @@ typedef enum bx_ntvdm_system_component_v1 {
     BX_NTVDM_SYSTEM_COMPONENT_DEBUG_METADATA = 8u,
     BX_NTVDM_SYSTEM_COMPONENT_DEBUG_EXCEPTION = 9u,
     BX_NTVDM_SYSTEM_COMPONENT_DEBUG_TASK = 10u,
-    BX_NTVDM_SYSTEM_COMPONENT_DEBUG_ATTACH = 11u
+    BX_NTVDM_SYSTEM_COMPONENT_DEBUG_ATTACH = 11u,
+    BX_NTVDM_SYSTEM_COMPONENT_DEBUG_DISPATCH = 12u
 } bx_ntvdm_system_component_v1;
 
 typedef enum bx_ntvdm_system_disposition_v1 {

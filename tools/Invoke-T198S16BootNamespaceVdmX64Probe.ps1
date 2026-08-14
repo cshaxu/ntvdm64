@@ -49,6 +49,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_command_package_facade_v1.c',
     'src\bx-vdm\bx_ntvdm_command_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_redir_package_facade_v1.c',
+    'src\bx-vdm\bx_ntvdm_debugger_package_facade_v1.c',
     'src\bx-vdm\bx_ntvdm_system_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_cpu_delta_abi.c',
     'src\bx-vdm\bx_ntvdm_cpu_result_v2.c',
