@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1199 |
+| Documentation records | 1200 |
 | --- | --- |
-| Generated UTC | 2026-08-14T04:24:53Z |
+| Generated UTC | 2026-08-14T04:30:50Z |
 
 ## Entries
 
@@ -420,6 +420,7 @@ content-divergent entries.
 | etc/research/t198-s130-post-keyboard-native-observation-001.md | indexed supporting material | 51ff5463ac76afb5ab9546dce668a011d860f4784f5531cb77953e7458482fca |
 | etc/research/t198-s131-command-current-directory-reuse-map-001.md | indexed supporting material | 011e2fb3b685a9a2366382040be7fd1f3bb7f0d6f8005835872b81cd571e5a7f |
 | etc/research/t198-s132-command-current-directory-composition-closure-001.md | indexed supporting material | d12510316c7369ad411590ce1946e81f09b20bc6164e7b7fb0595c1b95bbad1a |
+| etc/research/t198-s134-paired-command-endpoints-native-result-001.md | indexed supporting material | 46d0592a51d53a306dc3bc2063a342d0f554964e9d0b1a674753c4918f4105bd |
 | etc/research/t198-s13-msvc-x64-minimal-lifecycle-witness-001.md | indexed supporting material | 3e73562fd78f45ebe1141148edca78c99a6e35e31f023ef6549304a76796aeae |
 | etc/research/t198-s14-msvc-x64-finite-hlt-witness-001.md | indexed supporting material | 5216921101718f1fcf2b0fe514a1105c7cd5a218e77e756c3efeb60bb1b2c0ff |
 | etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md | indexed supporting material | 2ff061af0c825f711fed80bccbd5cd67935349b1d1607a38dfe728104f4c801a |
@@ -1213,7 +1214,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 473f4d78e957fd78fb99d80d6bcea43efbb2ac3b3f5db72942f2397725ca37fc |
+| STATUS.md | principal control document | a559f34ed92e239a512515d712b56859631e13c6e3c140e4e1dd6b4bf943feec |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

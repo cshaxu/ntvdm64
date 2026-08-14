@@ -42,6 +42,8 @@
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
+> **S134 result and hold:** its single authorized run stopped at `54:01`, not `54:04`. The result is retained as a non-closure observation. No retry or trace-derived endpoint task is admitted; await owner direction before a new S is admitted.
+
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
