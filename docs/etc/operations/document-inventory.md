@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1179 |
+| Documentation records | 1181 |
 | --- | --- |
-| Generated UTC | 2026-08-14T03:13:58Z |
+| Generated UTC | 2026-08-14T03:19:13Z |
 
 ## Entries
 
@@ -407,6 +407,7 @@ content-divergent entries.
 | etc/research/t198-s120-fastread-declined-token-lifecycle-map-001.md | indexed supporting material | 19c5bbc4156312483074ddbacebc9f60d3020cc99de9f5b1b9220c68178278c0 |
 | etc/research/t198-s121-dem-lifecycle-ledger-001.md | indexed supporting material | 2e89ed69ec50ced42dcab3a4dafacdb6552f0b8d8eda793cc87ed205b81a0efd |
 | etc/research/t198-s123-zero-byte-result-transaction-fix-001.md | indexed supporting material | c24c57059b7b922aa0e161d4abab581b02ad6903ac267650819f9fb4fa681baf |
+| etc/research/t198-s124-zero-byte-eof-native-observation-001.md | indexed supporting material | 475abdea62531d06152b4789fa77805fabe759eca9796c6b2ab9428bf662655b |
 | etc/research/t198-s12-p1-adapter-composition-witness-001.md | indexed supporting material | 00e53652ea1588d60d0da6dcd0d8f83217d4526e08c864ecb6e53fbdd32eb5c1 |
 | etc/research/t198-s12-p2-composed-bridge-witness-001.md | indexed supporting material | a87666de0fb44d37856140eaf0e6a2ac56bd8ecf4818959794290a52bd2ef96b |
 | etc/research/t198-s12-p3-native-cross-island-link-frontier-001.md | indexed supporting material | e3d753b80269715c54dfc24cfb7eaa35b9e0148e688adfccfde60276b7e6caa5 |
@@ -864,6 +865,7 @@ content-divergent entries.
 | history/m0-t198-s120-closure-20260813.md | closed task history | b75add48a3c506a2ff7896846f430007dd0f2898354287631c53b6cea4b1ddf7 |
 | history/m0-t198-s121-closure-20260813.md | closed task history | a5abd78b98aeb142c6767d7770dcde6daf9b3c92fc1600680cd5ae7ad6910f13 |
 | history/m0-t198-s123-closure-20260813.md | closed task history | e3dd422e705bbbddd26bc4f14bfcc5c9fd6acd752d91e5274dae5b2d0f0c502c |
+| history/m0-t198-s124-closure-20260813.md | closed task history | 2d75e1aa61a45e2e3a3612b4141066492bbd889593daba0a1b178a23cc877296 |
 | history/m0-t198-s12-closure-20260813.md | closed task history | fad9c0f4d0bf6e588509ace12a18d96c0b5c8762c0d8e9b9d1c40f6547f4a420 |
 | history/m0-t198-s13-closure-20260813.md | closed task history | 0420f1f1b7c777477ed3fb3458e311ee6324e5b2f7542ef54f7e803d478efeb8 |
 | history/m0-t198-s14-closure-20260813.md | closed task history | caa9c4d2573da0221c10c4c7cfb02ee7b592b69c118577f100f22dac92903fc9 |
@@ -1193,7 +1195,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | e2d7e4b4ad4b7db060e2f83691a9cb7b3b5db15d7e4616e66c360fb52a867d19 |
+| STATUS.md | principal control document | 29701d8f979fd626c0fbbf5729d15b85704cb9826c0b374aaece208395fb437c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |

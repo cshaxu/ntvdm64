@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S124.** Its governing brief is the active
+> **Current effective packet: M0 T198 S125.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S124 -- one exact-input native lifecycle regression after S123.**
+**Active: M0 T198 S125 -- audit whole COMMAND `54:01` launch-plane composition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S124, Ordinary Mode. |
-| Admission And Approval | S123's shared zero-byte result-only seam has focused source/test/compile closure. One native exact-input run is needed to verify the real AUTOEXEC EOF resumes. |
-| Objective | Rebuild and execute exactly one registered native fixture, export the lifecycle ledger, and classify the next reached BOP boundary. |
-| Non-goals | No retry, BOP/provider/ABI expansion, host capability, Bochs core/mantle edit, ROM/VGA/device import, broad rebuild or continuity claim. |
-| Reference Baseline | S122 lifecycle observation and S123 focused composition test. |
-| Files And ABI Surface | Registered native derivative/evidence only. |
+| Identifier Mode | M0 T198 S125, Ordinary Mode. |
+| Admission And Approval | S124 closes the finite DEM boot sequence and reaches `54:01`. The architecture already has a COMMAND launch plane; source-level ownership/contract must be audited before any changed response. |
+| Objective | Reconcile OpenNT `cmdGetNextCmd`/COMMAND caller ABI, existing launch-plane provider, controlled-stop observer and declared target namespace as one command-launch composition. |
+| Non-goals | No guest run, `54:01` handler rewrite, host broker/Win32 import, target execution claim, Bochs/core/mantle/device change or per-service patch. |
+| Reference Baseline | S124 native observation, T96 COMMAND map and current `bx_ntvdm_command_launch_plane_v1` source. |
+| Files And ABI Surface | Read-only OpenNT and `bx-vdm` source/evidence analysis only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | A sole `runs=1` record shows `4E534005` accepted with `AX=0`, then records the next bounded BOP/terminal state. |
-| Expected Markers | No empty mechanical WRITE, no provider expansion, and one ordered lifecycle ledger. |
+| Verification | Source-line keyed map identifies caller, original dispatcher, current composition disposition and the exact reason the `54:01` boundary is controlled-stopped. |
+| Expected Markers | One command-plane ownership result; no changed runtime source or guest run. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record provenance, run count, EOF result and next source-owned boundary. |
-| Stop Conditions | A second run, any semantic expansion, host/Bochs change or broad rebuild. |
-| Exit Criteria | Native evidence confirms/refutes the source/test result and leaves one exact next task. |
+| Reporting Requirements | Record every provider boundary and source-derived unavailable/deferred distinction. |
+| Stop Conditions | Any guest run or semantic source change, host/Bochs/device import, or per-service handler addition. |
+| Exit Criteria | `54:01` is classified as existing-provider, missing composition step, or original unavailable dependency, with one exact next action. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
