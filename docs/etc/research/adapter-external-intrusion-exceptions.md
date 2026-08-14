@@ -32,6 +32,7 @@ Every new exception must name its current path, not the historical prefix.
 
 | ID | Owner approval | Imported code changed | Scope | Status |
 | --- | --- | --- | --- | --- |
+| BX-MANTLE-078 | 2026-08-13: T199 S21 establishes C1 as the first shared XMS/DPMI prerequisite; owner permits individually registered minimal Bochs intrusions | New project-authored `src/bx-mantle/bx_ntvdm_a20_capability_v1.*` | Expose the existing native `bx_pc_system` A20 set/query primitives through one mantle-private fixed-width request/result wrapper after minimal-machine initialization. | Registered before implementation. No selector/BOP/XMS/DPMI/OpenNT term, adapter state, allocator, device, firmware, interrupt, CPU decoding, or core source change is permitted. |
 | BX-MANTLE-077 | 2026-08-13: S47's now-observed generic `#UD STOP` returns before the finite watchdog fires, exposing that the original timer API rejects direct unregistration of an active timer | `src/bx-mantle/bx_ntvdm_finite_run.cc` | Before unregistering the finite private stop timer after `cpu_loop` returns, deactivate it through the existing native PC-time API. | Registered before implementation. No CPU, BOP, OpenNT, adapter, guest-memory, device, firmware, product or ABI behavior is changed. Require early generic-STOP cleanup without a timer panic and retained watchdog HLT cleanup. Reject if cleanup needs a new timer primitive or changes production timer policy. |
 | BX-CORE-076 | 2026-08-13: S46 neutral fixture independently reproduces a five-byte 16-bit code fetch at `CS:FFFF` advancing to `EIP=00010000`; owner permits necessary individually registered Bochs intrusions | `src/bx-core/cpu/cpu.h`, `cpu.cc`, `instr.h`, and `icache.cc` | Introduce one selector-blind instruction-pointer advance helper: long-64 code retains full RIP, 32-bit code retains existing EIP behavior, and 16-bit code truncates the incremented offset to 16 bits. Replace only existing sequential execution and boundary-fetch increments with that helper. | Registered before implementation. No instruction/opcode/address recognition, BOP/DOS/OpenNT/adapter term, guest-memory access, callback, device/firmware/product behavior, ABI or guest-state change beyond the native code-address-width rule. Full CPU5 x64 `/MT` closure, the positive neutral split fixture, HLT/UD2 regressions, and a changed-path source scan are required. Reject/remove if it needs a special-case input or changes control-transfer semantics. |
 | BX-MANTLE-068 | 2026-08-13: T198 S8 requires the whole finite boot-namespace family to use one selector-blind mechanical action boundary; owner architecture requires `bx-vdm -> bx-mantle`, never the reverse | New project-owned `src/bx-mantle/bx_ntvdm_mechanical_action_v1.h` and `.cc` | Define and execute one synchronous, fixed-width copied ordinary-RAM action record: preflight every range, then perform either a bounded copied read or an all-or-nothing copied write. It has no selector, provider, guest-image, host-capability, OpenNT or DOS field and no retained pointer/lifetime. | Registered before implementation. It may use only the existing Bochs ordinary-RAM primitives. A focused MSVC/x86 bare-machine fixture and source scan must prove valid read/write, malformed/out-of-aperture rejection, no partial write, no adapter dependency, and no product/device input. Review/remove if an action needs a callback, host pointer, CPU state mutation, device/firmware behavior, or VDM vocabulary. |
@@ -1151,6 +1152,33 @@ hook, a generic port/device API, a selector/service branch in Bochs, adapter
 mechanics access, any device enablement, a guest-memory policy, or runtime
 handler invocation. Review before T118; remove if the machine-composition
 boundary cannot remain selector-blind and default-off.
+
+### BX-MANTLE-078: Selector-Blind Native A20 Capability
+
+**Need.** The full XMS/DPMI package plan identifies A20 state as capability
+C1. The minimum machine already uses Bochs' native A20 setter during reset,
+but adapter code must not own a shadow state or call native internals directly.
+
+**Procedure.** Add only project-authored mantle files
+`bx_ntvdm_a20_capability_v1.h/.cc`. They expose fixed-width `set` and `query`
+operations, call existing `bx_pc_system.set_enable_a20`/`get_enable_a20`, and
+allow access only while a successfully initialized minimal machine owns the
+native state. The wrapper neither imports nor names a BOP, XMS/DPMI, OpenNT,
+DOS, guest address, host feature, device, interrupt, firmware, allocator, or
+CPU decoder.
+
+**Negative cases and verification.** A focused MSVC x64 `/MT` fixture must
+prove native enabled-to-disabled-to-enabled transition and query, reject
+unknown/version-invalid/pre-initialize/post-cleanup input, and prove each
+rejection leaves native state unchanged. The existing minimal-machine boundary
+test must still prove the initial A20-before-reset ordering. Source scans must
+reject adapter/BOP/OpenNT terms from the wrapper. No BOP result, guest run, or
+device enablement is admitted.
+
+**Review condition.** Reject/remove this exception if it requires a bx-core
+patch, product-shell API, callback, pointer/handle, selector-specific branch,
+second state copy, allocator, interrupt/firmware action, or direct adapter
+dependency.
 
 ## OpenNT Intrusions
 

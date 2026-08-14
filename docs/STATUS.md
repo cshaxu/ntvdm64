@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S21.** Its governing brief is the active
+> **Current effective packet: M0 T199 S22.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S21 -- C1 A20 selector-blind capability admission.**
+**Active: M0 T199 S22 -- C1 A20 selector-blind capability implementation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S21, Ordinary Mode. |
-| Admission And Approval | T199 S11 selects C1 A20 as the first shared XMS/DPMI machine capability; S20 finishes all currently admitted machine-BOP routing. |
-| Objective | Establish the source/ABI/exception admission for one selector-blind bx-core/bx-mantle A20 set/query capability, including the exact intrusion decision and positive/negative boundary tests required before implementation. |
-| Non-goals | No XMS or DPMI BOP result, no adapter-owned A20 state, no allocator/UMB/INT15 work, no direct Bochs selector recognition, no trace, and no unregistered Bochs modification. |
-| Reference Baseline | T199 S9 XMS disposition, T199 S11 C1--C6 plan, CPU5 minimal-machine lifecycle, and the Bochs intrusion register. |
-| Files And ABI Surface | Supporting source/ABI map, exception-register decision, and selector-blind fixture plan only; no provider-facing BOP facade in this S. |
+| Identifier Mode | M0 T199 S22, Ordinary Mode. |
+| Admission And Approval | T199 S21 records BX-MANTLE-078 and admits the fixed selector-blind C1 implementation. |
+| Objective | Implement and source-build the mantle-private A20 set/query wrapper and its positive/negative fixture against the initialized minimal machine. |
+| Non-goals | No XMS/DPMI BOP result, adapter state, allocator/UMB/INT15 work, selector recognition below bx-vdm, trace, or bx-core modification. |
+| Reference Baseline | T199 S21 admission and BX-MANTLE-078. |
+| Files And ABI Surface | New mantle request/result wrapper, minimal-machine lifecycle gate, focused MSVC x64 `/MT` fixture and source-boundary check. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Review the adopted Bochs A20 owner path and current mantle lifecycle; record source locations, exact ABI record proposal, exception requirement, and a fixture that can prove mutation/query plus default-off rejection. |
-| Expected Markers | One selected core owner, no duplicate adapter state, no BOP vocabulary below bx-vdm, and no unrecorded Bochs intrusion. |
+| Verification | Fixture proves native enabled/disabled/enabled/query and every specified rejection leaves state unchanged; source scan proves no adapter/BOP/OpenNT term. |
+| Expected Markers | One C1 wrapper, native TLB-flushing setter is the sole mutation owner, and no new bx-core file or provider facade. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact source owner, state/lifecycle path, requested ABI, rejection behavior, and whether an intrusion exception is necessary. |
-| Stop Conditions | The only viable design requires adapter state, a CPU rewrite, unbounded Bochs product-shell import, or an unregistered core change. |
-| Exit Criteria | One evidence-backed C1 design is ready for a bounded selector-blind implementation S. |
+| Reporting Requirements | Record exact artifact, compiler/CRT, transition results, rejected results, and preserved exclusions. |
+| Stop Conditions | Need for a bx-core patch, product shell, callback/pointer, selector knowledge, or adapter dependency. |
+| Exit Criteria | C1 has a bounded native implementation and regression; it is ready for later XMS translation but remains unconnected to BOP. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit A20 initialization, wrap semantics, reset/cleanup, x86 CPU mode callers, and all existing A20 configuration paths together. |
 
@@ -98,6 +98,10 @@
 > **T199 S20 completion:** one machine facade now routes the bounded BIOS and
 > machine handoff group after common ingress; see [S20
 > regression](etc/research/t199-s20-machine-bop-facade-regression-001.md).
+
+> **T199 S21 completion:** C1 A20 now has a source-backed native owner,
+> selector-blind ABI design, and registered mantle exception; see [S21
+> admission](etc/research/t199-s21-c1-a20-capability-admission-001.md).
 
 ## Current Technical Baseline
 
