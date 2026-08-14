@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S97.** Its governing brief is the active
+> **Current effective packet: M0 T198 S98.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S97 -- make one rebuilt exact-input source-built guest
-observation after the composed COMMAND bootstrap pair.**
+**Active: M0 T198 S98 -- map the whole original/current DEM `50:42` component
+before admitting any route repair or another guest run.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ observation after the composed COMMAND bootstrap pair.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S97, Ordinary Mode. |
-| Admission And Approval | S96 source-builds/tests the classified `54:02`/`54:0F` component in the current x64 composition, with no Bochs/mantle change. |
-| Objective | Rebuild the existing exact source-built NTIO/NTDOS/COMMAND/SHARE native fixture against the S96 composition and make exactly one finite observation; classify the first unresolved post-bootstrap boundary. |
-| Non-goals | No provider addition, terminal-result transport, CLI exit-code mapping, host environment/filesystem exposure, guest artifact creation, CLI `--display` option, guest video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, second run, or normal completion claim without `54:11`. |
-| Reference Baseline | S94 exact-input source-built normal-return probe; S96 composed COMMAND-bootstrap closure; retained T198 S74 CPU5/mantle/NTIO/NTDOS link response. |
-| Files And ABI Surface | One fresh artifact build root and a narrow S97 probe wrapper only. Reuse exact S93 inputs, current manifest composition, selector-blind core/mantle ABI and existing fixture; no new runtime seam or guest-address API. |
+| Identifier Mode | M0 T198 S98, Ordinary Mode. |
+| Admission And Approval | S97's only rebuilt exact-input run reaches DEM `50:42` after an earlier fast-read transaction and before any COMMAND bootstrap service. |
+| Objective | Map original OpenNT DEM `50:42` callers/operations/lifecycle and the current provider's complete accepted domain, failure behavior and composition membership; admit no route repair until evidence is complete. |
+| Non-goals | No guest run, provider/routing change, terminal-result transport, CLI exit-code mapping, host filesystem/environment expansion, guest artifact creation, CLI display/video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim. |
+| Reference Baseline | S97 exact-input observation; original OpenNT DEM dispatcher/callers; current DEM fast-I/O provider, plane and composition sources. |
+| Files And ABI Surface | Source/evidence records only. Audit existing ingress, DEM classification, provider and checked mechanical ABI without adding a seam, an arbitrary guest-address read, or runtime membership. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One current-object compile/link, exactly one finite run, retained exact profile/input hashes and logs, marker order, bounded-stop classification, documentation governance and diff checks. |
-| Expected Markers | Existing startup/stream markers followed by accepted `54:02` and, if reached, `54:0F`; otherwise exact first unresolved BOP/window/state and its original owner. |
+| Verification | Static cross-map of original source, current DEM plane/provider/composition, S97 copied register/window evidence, accepted and rejected state/operation domains, then documentation governance and diff checks. |
+| Expected Markers | One original-owner map identifies the service's operation selector, required state and return contract; one current-domain map explains whether S97 is outside an admitted state/operation or exposes a semantic mismatch. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record rebuilt/inherited objects, exact profile/input hashes, composition source membership, marker order, action/result ordering, first unresolved boundary, bounded-stop meaning and every excluded capability. |
-| Stop Conditions | Any need for a second run, provider addition, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a claim that watchdog/process exit is a guest result. Stop and retain the observation. |
-| Exit Criteria | One reproducible exact-input observation source-classifies the first post-bootstrap boundary, or records an exact build/link blocker. |
+| Reporting Requirements | Record original source/caller paths, selector/register/operation and lifecycle contracts, current source membership and disposition, exact S97 state evidence, all exclusions and one bounded next seam if justified. |
+| Stop Conditions | Any need for a route/provider change, guest run, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a continuity claim. Stop and admit a distinct S item. |
+| Exit Criteria | An evidence-complete source map classifies the S97 `50:42` boundary and names either a bounded next repair or a source-proven unavailable/deferred result, with no runtime claim. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
