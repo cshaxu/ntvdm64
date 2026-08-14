@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S2.** Its governing brief is the active
+> **Current effective packet: M0 T200 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S2 -- COMMAND native-frontier package diagnosis.**
+**Active: M0 T200 S3 -- COMMAND CMDINFO bounded-observation fixture.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S2, Ordinary Mode. |
-| Admission And Approval | S1's one authorized run reached the controlled `54:01` frontier. The owner-package rule requires complete COMMAND diagnosis before any repair. |
-| Objective | Recover the original COMMAND `54:01` caller/input/result contract and compare it with the current package session, identifying the smallest complete COMMAND subpackage that explains any mismatch. |
-| Non-goals | No service-only patch, no new native run until the observation surface is admitted, no Bochs feature expansion, no ambient NT host dependency, and no unsupported CMDINFO inference. |
-| Reference Baseline | T200 S1 run record; T199 S40-S43 COMMAND source/ABI evidence; current COMMAND session and source-built fixture bridge. |
-| Files And ABI Surface | COMMAND source/ABI comparison record, session/fixture review, and an observation-extension proposal only if source diagnosis cannot decide. |
+| Identifier Mode | M0 T200 S3, Ordinary Mode. |
+| Admission And Approval | S2 established that source cannot identify the S1 `54:01` decline. One test-only observation surface is admitted before any further native run. |
+| Objective | Build and compile a selector-contained, fixed-36-byte CMDINFO diagnostic surface that records the complete `54:01` contract without changing product behaviour. |
+| Non-goals | No guest run, no provider repair, no service-only implementation, no Bochs feature expansion, no ambient NT host dependency, and no unrelated guest-memory inspection. |
+| Reference Baseline | T200 S1 run record; T200 S2 source/ABI diagnosis; current COMMAND session and source-built fixture bridge. |
+| Files And ABI Surface | Research fixture bridge and fixture output only; copied event registers, one checked `DS:DX` CMDINFO read, decoded 36-byte fields, and post-delegation session/outcome facts. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-map all 54:01 caller inputs/results and compare to current session guards; compile/review any diagnostic-only fixture change before a new guest run is admitted. |
-| Expected Markers | Original contract matrix, exact current mismatch or explicit evidence gap, and a next full-package repair/observation decision. |
+| Verification | Fresh MSVC x64 `/MT` compile and focused fixture regression prove exact read bounds, no CPU/guest-memory mutation, default-off product scope, and stable diagnostic output for caller-shaped and invalid geometries. |
+| Expected Markers | Explicit geometry/read status, decoded fixed-width CMDINFO values when readable, post-delegation acceptance/outcome, and command-session prerequisite facts. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original sources, owner boundaries, ABI and failure dispositions; do not call unavailable capability implemented. |
-| Stop Conditions | Need to patch only 54:01 without its COMMAND lifecycle contract, repeated trace without a new diagnostic surface, Bochs semantic migration into bx-vdm, ambient host dependency, or selector leakage. |
-| Exit Criteria | Source/ABI diagnosis identifies a full COMMAND subpackage repair, or records why one bounded next observation is necessary. |
+| Reporting Requirements | Record the test-only boundary, original source layout, and exact non-mutation proof; do not call a diagnostic or unavailable capability implemented. |
+| Stop Conditions | Any product-runtime dependency, mutation of event/CPU/guest memory/result, wider-than-CMDINFO guest read, Bochs selector awareness, ambient host dependency, or a guest run. |
+| Exit Criteria | Source-built fixture surface and focused tests prove the bounded observation contract, after which a separate packet may admit one native run. |
 | Original Owner Request | "trace 只是辅助手段，用于观察每次完成一组新 BOP 后的行为变化；避免通过 trace 实施添油战术。" |
-| Similar-Issue Sweep | Audit registration, CMDINFO, environment, launch, execution and return lifecycle together. |
+| Similar-Issue Sweep | Audit command bootstrap, environment, registration, launch, execution and return lifecycle together; do not add a per-service patch. |
+
+> **T200 S2 closure:** source comparison proves `54:01` is a full CMDINFO
+> lifecycle contract but S1 lacks the live inputs needed to identify its
+> declined guard.  S3 is the bounded fixture-only observation surface; see the
+> [diagnosis](etc/research/t200-s2-command-cmdinfo-native-frontier-diagnosis-001.md).
 
 > **T200 S1 closure:** one source-built CPU5 native run reached controlled
 > `54:01` after established DEM and machine-handoff traffic. It is a COMMAND
