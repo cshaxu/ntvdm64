@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S2.** Its governing brief is the active
+> **Current effective packet: M0 T199 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S2 -- complete DEM source/ABI/failure matrix.**
+**Active: M0 T199 S3 -- whole DEM provider-disposition design.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -21,19 +21,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S2, Ordinary Mode. |
-| Admission And Approval | T199 S1 selects DEM as the first complete owner package after full-inventory reconciliation. |
-| Objective | Produce one complete source/ABI/failure matrix for all 73 callable DEM services and its namespace/search/session/device/state groups. |
+| Identifier Mode | M0 T199 S3, Ordinary Mode. |
+| Admission And Approval | T199 S2 reconciles the complete DEM source/ABI/failure matrix. |
+| Objective | Select one explicit disposition and provider boundary for every DEM group and all 73 callable services, with complete-package regression criteria. |
 | Non-goals | No DEM implementation, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no host capability expansion, and no single-service task admission. |
-| Reference Baseline | T199 global audit, T96 S3 provider map, current composition manifest and retained DEM evidence. |
-| Files And ABI Surface | Read-only OpenNT/`bx-vdm` source map and evidence only. |
+| Reference Baseline | T199 global audit and complete DEM matrix. |
+| Files And ABI Surface | Read-only design/evidence documents only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every callable DEM service has source handler, ABI direction, failure contract, current evidence level and one component subgroup; sentinel is separately recorded. |
-| Expected Markers | 73 callable services reconciled, namespace/search/session/device/state grouping, and no unclassified implementation candidate. |
+| Verification | Every DEM group and special service set has a selected disposition, owner boundary, prerequisite and regression/trace gate; no callable value is left implicit. |
+| Expected Markers | One all-service disposition table, preserved no-op/sentinel semantics, and one package-level implementation scope. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Distinguish original source contract, existing rehost candidate, current composition route, negative/failure semantics and machine dependency. |
+| Reporting Requirements | Explain source-derived rehost versus unavailable/deferred choices and list the exact transition prerequisites. |
 | Stop Conditions | Any implementation, trace, Bochs/mantle change, direct dispatcher link or host capability expansion. |
-| Exit Criteria | The complete matrix is sufficient to admit one all-service DEM disposition design rather than a service-by-service implementation. |
+| Exit Criteria | The whole DEM package has a single coherent disposition design ready for an implementation S. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
