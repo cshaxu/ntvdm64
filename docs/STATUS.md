@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S98.** Its governing brief is the active
+> **Current effective packet: M0 T198 S99.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S98 -- map the whole original/current DEM `50:42` component
-before admitting any route repair or another guest run.**
+**Active: M0 T198 S99 -- repair the DEMFASTREAD component classification and
+prove the existing provider is reachable without admitting a guest run.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ before admitting any route repair or another guest run.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S98, Ordinary Mode. |
-| Admission And Approval | S97's only rebuilt exact-input run reaches DEM `50:42` after an earlier fast-read transaction and before any COMMAND bootstrap service. |
-| Objective | Map original OpenNT DEM `50:42` callers/operations/lifecycle and the current provider's complete accepted domain, failure behavior and composition membership; admit no route repair until evidence is complete. |
-| Non-goals | No guest run, provider/routing change, terminal-result transport, CLI exit-code mapping, host filesystem/environment expansion, guest artifact creation, CLI display/video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim. |
-| Reference Baseline | S97 exact-input observation; original OpenNT DEM dispatcher/callers; current DEM fast-I/O provider, plane and composition sources. |
-| Files And ABI Surface | Source/evidence records only. Audit existing ingress, DEM classification, provider and checked mechanical ABI without adding a seam, an arbitrary guest-address read, or runtime membership. |
+| Identifier Mode | M0 T198 S99, Ordinary Mode. |
+| Admission And Approval | S98 proves a source contradiction: `50:42` is compiled but unreachable because current DEM classification says RAW_MEDIA while its existing route requires NAMESPACE. |
+| Objective | Restore only `SVC_DEMFASTREAD` (`50:42`) to the existing namespace component, retain `50:43` unavailable, and source-build/test classification and composition reachability without a guest run. |
+| Non-goals | No guest run, new fast-I/O ABI/provider, FASTWRITE admission, host filesystem/environment expansion, terminal transport, CLI exit-code mapping, guest artifact creation, device/ROM import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim. |
+| Reference Baseline | S98 DEMFASTREAD map; S59 retained composition witness; current DEM plane, boot-namespace plane/provider and focused tests. |
+| Files And ABI Surface | DEM-plane classification and focused `bx-vdm` tests only. Reuse existing provider, namespace state and checked bulk mechanical action; no new seam or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Static cross-map of original source, current DEM plane/provider/composition, S97 copied register/window evidence, accepted and rejected state/operation domains, then documentation governance and diff checks. |
-| Expected Markers | One original-owner map identifies the service's operation selector, required state and return contract; one current-domain map explains whether S97 is outside an admitted state/operation or exposes a semantic mismatch. |
+| Verification | Focused plane classification and current-composition source-built tests prove `42h` reaches existing fast-read handling when namespace state is valid, while `43h` and raw-media siblings remain unaccepted; documentation governance and diff checks pass. |
+| Expected Markers | `42h` classifies NAMESPACE/DEFERRED and performs only its existing checked bulk result; `43h` does not become a namespace request; invalid namespace state continues to fail explicitly. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original source/caller paths, selector/register/operation and lifecycle contracts, current source membership and disposition, exact S97 state evidence, all exclusions and one bounded next seam if justified. |
-| Stop Conditions | Any need for a route/provider change, guest run, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a continuity claim. Stop and admit a distinct S item. |
-| Exit Criteria | An evidence-complete source map classifies the S97 `50:42` boundary and names either a bounded next repair or a source-proven unavailable/deferred result, with no runtime claim. |
+| Reporting Requirements | Record classification before/after, original caller/provider rationale, source membership, focused test commands/results, rejected `43h`/raw-media cases, and every excluded capability. |
+| Stop Conditions | Any need for a new provider or fast-I/O ABI, guest run, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a continuity claim. Stop and admit a distinct S item. |
+| Exit Criteria | Current composition source-builds/tests the repaired `42h` classification and negative siblings with retained evidence, making no guest-run claim. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
