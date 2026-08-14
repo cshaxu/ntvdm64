@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S95.** Its governing brief is the active
+> **Current effective packet: M0 T198 S96.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S95 -- map the whole existing COMMAND bootstrap component
-(`54:02` and `54:0F`) before admitting any composition routing change.**
+**Active: M0 T198 S96 -- repair and compose the whole contained COMMAND
+bootstrap component (`54:02` and `54:0F`) before admitting another guest run.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S95, Ordinary Mode. |
-| Admission And Approval | S94's only exact-input run reaches original COMMAND `54:02`; the paired bootstrap implementation exists but is detached from composition. |
-| Objective | Map original owner, ABI, paired state transition, current component dependencies and failure behavior for `54:02`/`54:0F`; admit no routing until this component is evidence-complete. |
-| Non-goals | No second run, terminal-result transport, CLI exit-code mapping, provider change, guest artifact creation, host filesystem exposure, CLI `--display` option, guest video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim without `54:11`. |
-| Reference Baseline | S93 input preparation; S92 prerequisite map; S89/S90 current-object relink recipe. |
-| Files And ABI Surface | One new bounded build/run root and narrow native probe/fixture references only. Reuse existing immutable namespace, drive snapshot, composition and selector-blind core/mantle ABI; no new seam or guest-address API. |
+| Identifier Mode | M0 T198 S96, Ordinary Mode. |
+| Admission And Approval | S95 proves `54:02` and `54:0F` are one original COMMAND first-profile component, identifies the current detached bounded subset, and records its required repeat-state repairs. |
+| Objective | Repair the contained source-derived COMMAND bootstrap state machine and compose it through existing global COMMAND classification and checked selector-blind mechanical actions; source-build/test the current composition without running a guest. |
+| Non-goals | No guest run, terminal-result transport, CLI exit-code mapping, ambient-host environment or filesystem exposure, any COMMAND endpoint other than `54:02`/`54:0F`, guest artifact creation, CLI `--display` option, guest video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim without `54:11`. |
+| Reference Baseline | S95 component map; current COMMAND-plane classifier and boot-namespace composition; existing bounded bootstrap-service unit test and current x64 composition build recipe. |
+| Files And ABI Surface | `src/bx-vdm` bootstrap service, command-plane-aware composition state/dispatch, focused tests and build membership only. Reuse the existing fixed 64-byte gather-read, checked multi-write, copied result and mantle mechanical-action ABI; no new core/mantle or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One successful current-object compile/link, one finite run, retained exact inputs/profile/command line/logs, marker ordering, bounded-stop classification, documentation governance and diff checks. |
-| Expected Markers | Existing startup/stream markers plus ordered observation of `50:3B`, `50:0F`, `54:0C`, `54:01`, `50:3C`, `54:11` if reached; otherwise exact first unresolved BOP/window/state and original owner. |
+| Verification | Focused service and current-composition source-built tests cover first `54:02`, environment size retry and copy, later `54:02` no-op resume, later `54:0F` `BX=0`, selector/classification negatives, and no partial checked action; composition manifest membership, documentation governance and diff checks pass. |
+| Expected Markers | One classified component accepts only the paired services; COMSPEC read completes before environment publication; retry returns a nonzero paragraph count; successful copy returns `BX=0`; later calls return the original-compatible no-op/`BX=0` forms. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record rebuilt/inherited objects, input/profile hashes, profile-to-composition data direction, exact marker order, first unresolved boundary, action/result ordering, bounded-stop meaning and every excluded feature. |
-| Stop Conditions | Any need for a second run, provider addition, arbitrary guest address read, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a claim that a watchdog/process exit is a guest result. Stop and retain the partial capability. |
-| Exit Criteria | One reproducible exact-input observation whose first unresolved boundary is source-classified, or an exact build/link blocker. |
+| Reporting Requirements | Record every changed state transition and source-derived divergence, original caller/owner paths, compilation membership, focused test commands/results, rejected selector/order/repeat cases, and every excluded capability. |
+| Stop Conditions | Any need for arbitrary guest reads, host environment/filesystem injection, an additional COMMAND endpoint, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, native guest run, or a claim of guest continuity. Stop and admit a distinct S item. |
+| Exit Criteria | One source-built current-composition closure proves the classified paired state machine and its negative/repeat contracts, with a retained evidence record and no guest-run claim. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
