@@ -114,6 +114,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_search_session.c',
     'src\bx-vdm\bx_ntvdm_search_transaction_v1.c',
     'src\bx-vdm\bx_ntvdm_spckbd_init_service.c',
+    'src\bx-vdm\bx_ntvdm_terminal_observation_v1.c',
     'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c',
     'src\bx-vdm\bx_ntvdm_vdd_create_user_notify_service.c',
     'src\cli\byob_identity.c',

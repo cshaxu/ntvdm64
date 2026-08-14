@@ -49,6 +49,10 @@ int main(void)
     if (bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result)) return 6;
     bx_ntvdm_instruction_window_v1_capture(&w,returned_bop,sizeof(returned_bop));
+    /* `cmdReturnExitCode` returns the low byte of the DOS return code in
+       DX.  The preceding CMDINFO setup used DX as its DS:DX locator, so make
+       the terminal-case input explicit before asserting the zero result. */
+    c.edx=0u;
     if (!bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result) ||
         t.result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         (t.result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
