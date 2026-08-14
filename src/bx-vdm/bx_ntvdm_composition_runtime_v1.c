@@ -44,31 +44,16 @@ void bx_ntvdm_composition_runtime_v1_reset(void)
     memset(&runtime, 0, sizeof(runtime));
 }
 
-int bx_ntvdm_composition_runtime_v1_install_from_environment(void)
+static int install(const wchar_t *profile, const wchar_t *root,
+    const wchar_t *launch_text, uint32_t include_mask, uint32_t exclude_mask)
 {
     byob_profile_selection selection;
     byob_launch_plan_v2 launch;
-    wchar_t profile[MAX_PATH], root[MAX_PATH];
-    wchar_t launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
-    DWORD profile_size, root_size, launch_size, profile_error, root_error;
 
     if (runtime.installed) return 1;
     if (runtime.attempted) return -1;
     runtime.attempted = 1;
-    SetLastError(ERROR_SUCCESS);
-    profile_size = GetEnvironmentVariableW(BX_NTVDM_COMPOSITION_ENV_PROFILE,
-        profile, MAX_PATH);
-    profile_error = GetLastError();
-    SetLastError(ERROR_SUCCESS);
-    root_size = GetEnvironmentVariableW(BX_NTVDM_COMPOSITION_ENV_ROOT,
-        root, MAX_PATH);
-    root_error = GetLastError();
-    if (profile_size == 0u && root_size == 0u &&
-        profile_error == ERROR_ENVVAR_NOT_FOUND &&
-        root_error == ERROR_ENVVAR_NOT_FOUND)
-        return 0;
-    if (profile_size == 0u || root_size == 0u || profile_size >= MAX_PATH ||
-        root_size >= MAX_PATH ||
+    if (profile == 0 || root == 0 || launch_text == 0 ||
         byob_profile_validate_file_select(profile, root, &selection) !=
             BYOB_PROFILE_ACCEPTED ||
         selection.has_command_placement == 0u ||
@@ -76,10 +61,7 @@ int bx_ntvdm_composition_runtime_v1_install_from_environment(void)
         (selection.declared_target_count != 1u &&
          selection.declared_target_count != 2u))
         goto reject;
-    launch_size = GetEnvironmentVariableW(BX_NTVDM_COMPOSITION_ENV_LAUNCH_PLAN,
-        launch_text, BYOB_LAUNCH_PLAN_V2_ENV_CHARS);
-    if (launch_size == 0u || launch_size >= BYOB_LAUNCH_PLAN_V2_ENV_CHARS ||
-        !byob_launch_plan_v2_from_environment(&launch, launch_text) ||
+    if (!byob_launch_plan_v2_from_environment(&launch, launch_text) ||
         launch.slot_count != selection.declared_target_count ||
         byob_image_load_exact(root, &selection.ntdos, &runtime.ntdos) !=
             BYOB_IMAGE_OK ||
@@ -90,7 +72,7 @@ int bx_ntvdm_composition_runtime_v1_install_from_environment(void)
         (selection.declared_target_count == 2u &&
          byob_image_load_exact(root, &selection.terminal_quit,
              &runtime.terminal_quit) != BYOB_IMAGE_OK) ||
-        !bx_ntvdm_host_drive_snapshot_v1_capture_from_environment(
+        !bx_ntvdm_host_drive_snapshot_v1_capture(include_mask, exclude_mask,
             &runtime.drives) ||
         !bx_ntvdm_host_volume_snapshot_v1_capture(&runtime.drives,
             &runtime.volumes) ||
@@ -115,4 +97,58 @@ reject:
     bx_ntvdm_composition_runtime_v1_reset();
     runtime.attempted = 1;
     return -1;
+}
+
+int bx_ntvdm_composition_runtime_v1_install_from_environment(void)
+{
+    wchar_t profile[MAX_PATH], root[MAX_PATH];
+    wchar_t launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
+    DWORD profile_size, root_size, launch_size, profile_error, root_error;
+    uint32_t include_mask, exclude_mask;
+    wchar_t include_text[52] = {0}, exclude_text[52] = {0};
+    DWORD include_size, exclude_size;
+
+    if (runtime.installed) return 1;
+    if (runtime.attempted) return -1;
+    SetLastError(ERROR_SUCCESS);
+    profile_size = GetEnvironmentVariableW(BX_NTVDM_COMPOSITION_ENV_PROFILE, profile, MAX_PATH);
+    profile_error = GetLastError();
+    SetLastError(ERROR_SUCCESS);
+    root_size = GetEnvironmentVariableW(BX_NTVDM_COMPOSITION_ENV_ROOT, root, MAX_PATH);
+    root_error = GetLastError();
+    if (profile_size == 0u && root_size == 0u && profile_error == ERROR_ENVVAR_NOT_FOUND && root_error == ERROR_ENVVAR_NOT_FOUND) return 0;
+    launch_size = GetEnvironmentVariableW(BX_NTVDM_COMPOSITION_ENV_LAUNCH_PLAN, launch_text, BYOB_LAUNCH_PLAN_V2_ENV_CHARS);
+    include_size = GetEnvironmentVariableW(L"NTDOS64_HOST_INCLUDE_DRIVES", include_text, 52u);
+    exclude_size = GetEnvironmentVariableW(L"NTDOS64_HOST_EXCLUDE_DRIVES", exclude_text, 52u);
+    if (profile_size == 0u || root_size == 0u || profile_size >= MAX_PATH || root_size >= MAX_PATH ||
+        launch_size == 0u || launch_size >= BYOB_LAUNCH_PLAN_V2_ENV_CHARS || include_size >= 52u || exclude_size >= 52u ||
+        !bx_ntvdm_host_drive_policy_v1_parse(include_text, &include_mask) ||
+        !bx_ntvdm_host_drive_policy_v1_parse(exclude_text, &exclude_mask)) {
+        runtime.attempted = 1;
+        return -1;
+    }
+    return install(profile, root, launch_text, include_mask, exclude_mask);
+}
+
+static int descriptor_to_wide(const uint16_t *source, uint32_t chars,
+    wchar_t *destination, uint32_t capacity)
+{
+    uint32_t index;
+    if (source == 0 || destination == 0 || chars >= capacity) return 0;
+    for (index = 0u; index < chars; ++index) destination[index] = (wchar_t) source[index];
+    destination[chars] = L'\0';
+    return 1;
+}
+
+int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
+    const uint16_t *profile_input, uint32_t profile_chars,
+    const uint16_t *root_input, uint32_t root_chars,
+    const uint16_t *launch_input, uint32_t launch_chars,
+    uint32_t include_mask, uint32_t exclude_mask)
+{
+    wchar_t profile[261], root[261], launch[257];
+    if (!descriptor_to_wide(profile_input, profile_chars, profile, 261u) ||
+        !descriptor_to_wide(root_input, root_chars, root, 261u) ||
+        !descriptor_to_wide(launch_input, launch_chars, launch, 257u)) return -1;
+    return install(profile, root, launch, include_mask, exclude_mask);
 }

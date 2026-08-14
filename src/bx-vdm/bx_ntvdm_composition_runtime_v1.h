@@ -1,6 +1,8 @@
 #ifndef BX_NTVDM_COMPOSITION_RUNTIME_V1_H
 #define BX_NTVDM_COMPOSITION_RUNTIME_V1_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -9,6 +11,13 @@ extern "C" {
  * CLI launch environment.  Returns 1 when bound, 0 when no CLI environment
  * is present, and -1 for a declared-but-invalid composition. */
 int bx_ntvdm_composition_runtime_v1_install_from_environment(void);
+/* Copied strings are borrowed only for this call; the installed composition
+ * retains only its own validated/resource-owned state. */
+int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
+    const uint16_t *profile, uint32_t profile_chars,
+    const uint16_t *root, uint32_t root_chars,
+    const uint16_t *launch, uint32_t launch_chars,
+    uint32_t include_mask, uint32_t exclude_mask);
 void bx_ntvdm_composition_runtime_v1_reset(void);
 
 #ifdef __cplusplus

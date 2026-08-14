@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S13.** Its governing brief is the active
+> **Current effective packet: M0 T200 S14.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S13 -- native engine setup/teardown skeleton.**
+**Active: M0 T200 S14 -- direct composition installation closure.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S13, Ordinary Mode. |
-| Admission And Approval | S12 established and tested the copied C-only native-engine contract. |
-| Objective | Implement and test a non-executing native-engine lifecycle skeleton with request validation, composition installation/reset, and categorized setup results. |
+| Identifier Mode | M0 T200 S14, Ordinary Mode. |
+| Admission And Approval | S13 established the direct copied-input installation seam and setup/reset skeleton. |
+| Objective | Build one valid source-built profile/resource set and prove direct bx-vdm composition install/reset through the real owner without a machine. |
 | Non-goals | No machine initialization, guest run, CLI process-status mapping, old-shell removal, BOP patch, or Bochs change. |
-| Reference Baseline | T200 S12 contract closure and `bx_ntvdm_composition_runtime_v1` install/reset behavior. |
-| Files And ABI Surface | `bx_ntvdm_engine_run_v1` C entry, contract result categories, composition installation/reset seam, focused negative fixture. |
+| Reference Baseline | T200 S13 lifecycle skeleton, existing source-built BYOB fixture inputs, and current whole-package composition source. |
+| Files And ABI Surface | Engine request descriptors, direct composition input seam, real bx-vdm composition source closure, focused no-machine fixture. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | x64 `/MT` fixture proves invalid requests are rejected and every attempted setup path resets its composition state; no machine/guest artifact is linked. |
-| Expected Markers | Setup result retains category; no Bochs headers or BOP vocabulary cross the public contract; no runtime-success claim. |
+| Verification | x64 `/MT` real-owner fixture proves one valid direct install followed by reset; no machine/guest artifact is linked. |
+| Expected Markers | No environment handoff is needed by the direct path; resources are released after reset; no runtime-success claim. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record each result category and reset behavior; do not call COMMAND component closed or convert typed stops to CLI success. |
+| Reporting Requirements | Record all source-built resource identities, direct-input fields, and release evidence; do not call COMMAND component closed or convert typed stops to CLI success. |
 | Stop Conditions | Any machine initialization, guest execution, engine replacement, old-shell removal, or boundary field requiring raw pointer/Bochs type. |
-| Exit Criteria | Focused x64 `/MT` closure proves deterministic reject/setup/reset categories and no machine/guest code is linked. |
+| Exit Criteria | A real direct-install/reset closure with exact source/object inventory and no machine/guest dependency. |
 | Original Owner Request | "cli 部分应该还有一个组件 对吧？可以放入 src/cli" and the fixed core/mantle/vdm/CLI boundary decisions. |
-| Similar-Issue Sweep | Inspect composition install/reset idempotence, environment-only input assumptions, request ownership, and product-shell hook separation. |
+| Similar-Issue Sweep | Inspect descriptor conversion, drive-mask precedence, image release, search-resource release, and environment-wrapper compatibility. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -50,6 +50,10 @@
 > **T200 S12 closure:** the copied native-engine contract has a passing x64
 > `/MT` validation fixture with no machine or guest dependency.  See the
 > [contract evidence](etc/research/t200-s12-native-engine-contract-001.md).
+
+> **T200 S13 closure:** the native-engine skeleton directly enters and resets
+> bx-vdm composition through copied inputs, with no environment rewrite and no
+> machine/guest execution.  See the [lifecycle evidence](etc/research/t200-s13-native-engine-lifecycle-skeleton-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).

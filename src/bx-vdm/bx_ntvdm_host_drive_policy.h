@@ -43,6 +43,12 @@ int bx_ntvdm_host_drive_snapshot_v1_apply(uint32_t present_mask,
 int bx_ntvdm_host_drive_snapshot_v1_capture_from_environment(
     bx_ntvdm_host_drive_snapshot_v1 *out);
 
+/* Captures the real Win32 logical-drive inventory once under copied CLI policy
+ * masks.  It is the direct native-engine counterpart of the retained
+ * environment convenience wrapper. */
+int bx_ntvdm_host_drive_snapshot_v1_capture(uint32_t include_mask,
+    uint32_t exclude_mask, bx_ntvdm_host_drive_snapshot_v1 *out);
+
 int bx_ntvdm_host_drive_snapshot_v1_valid(
     const bx_ntvdm_host_drive_snapshot_v1 *snapshot);
 

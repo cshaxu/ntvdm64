@@ -78,25 +78,14 @@ int bx_ntvdm_host_drive_snapshot_v1_apply(uint32_t present_mask,
     return bx_ntvdm_host_drive_snapshot_v1_valid(out);
 }
 
-int bx_ntvdm_host_drive_snapshot_v1_capture_from_environment(
-    bx_ntvdm_host_drive_snapshot_v1 *out)
+int bx_ntvdm_host_drive_snapshot_v1_capture(uint32_t include_mask,
+    uint32_t exclude_mask, bx_ntvdm_host_drive_snapshot_v1 *out)
 {
-    wchar_t include_text[52] = {0};
-    wchar_t exclude_text[52] = {0};
     uint8_t types[26] = {0};
-    uint32_t include_mask, exclude_mask, present_mask;
-    DWORD returned;
+    uint32_t present_mask;
     uint32_t index;
 
     if (out == 0) return 0;
-    returned = GetEnvironmentVariableW(BX_NTVDM_ADAPTER_ENV_INCLUDE_DRIVES,
-        include_text, (DWORD)(sizeof(include_text) / sizeof(include_text[0])));
-    if (returned >= sizeof(include_text) / sizeof(include_text[0])) return 0;
-    returned = GetEnvironmentVariableW(BX_NTVDM_ADAPTER_ENV_EXCLUDE_DRIVES,
-        exclude_text, (DWORD)(sizeof(exclude_text) / sizeof(exclude_text[0])));
-    if (returned >= sizeof(exclude_text) / sizeof(exclude_text[0]) ||
-        !bx_ntvdm_host_drive_policy_v1_parse(include_text, &include_mask) ||
-        !bx_ntvdm_host_drive_policy_v1_parse(exclude_text, &exclude_mask)) return 0;
     present_mask = GetLogicalDrives();
     if (present_mask == 0u) return 0;
     for (index = 0u; index < 26u; ++index) {
@@ -113,4 +102,24 @@ int bx_ntvdm_host_drive_snapshot_v1_capture_from_environment(
     }
     return bx_ntvdm_host_drive_snapshot_v1_apply(present_mask, types,
         include_mask, exclude_mask, out);
+}
+
+int bx_ntvdm_host_drive_snapshot_v1_capture_from_environment(
+    bx_ntvdm_host_drive_snapshot_v1 *out)
+{
+    wchar_t include_text[52] = {0};
+    wchar_t exclude_text[52] = {0};
+    uint32_t include_mask, exclude_mask;
+    DWORD returned;
+
+    if (out == 0) return 0;
+    returned = GetEnvironmentVariableW(BX_NTVDM_ADAPTER_ENV_INCLUDE_DRIVES,
+        include_text, (DWORD)(sizeof(include_text) / sizeof(include_text[0])));
+    if (returned >= sizeof(include_text) / sizeof(include_text[0])) return 0;
+    returned = GetEnvironmentVariableW(BX_NTVDM_ADAPTER_ENV_EXCLUDE_DRIVES,
+        exclude_text, (DWORD)(sizeof(exclude_text) / sizeof(exclude_text[0])));
+    if (returned >= sizeof(exclude_text) / sizeof(exclude_text[0]) ||
+        !bx_ntvdm_host_drive_policy_v1_parse(include_text, &include_mask) ||
+        !bx_ntvdm_host_drive_policy_v1_parse(exclude_text, &exclude_mask)) return 0;
+    return bx_ntvdm_host_drive_snapshot_v1_capture(include_mask, exclude_mask, out);
 }
