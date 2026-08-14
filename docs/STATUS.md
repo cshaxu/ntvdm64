@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S19.** Its governing brief is the active
+> **Current effective packet: M0 T199 S20.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S19 -- machine-owned BOP and BIOS package source/ABI map.**
+**Active: M0 T199 S20 -- machine-BOP facade and package regression.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S19, Ordinary Mode. |
-| Admission And Approval | Owner-directed T199 complete-package implementation order; S18 closes the admitted top-level routing group and leaves the machine-owned group next. |
-| Objective | Produce one source/ABI/failure map for the remaining machine-owned BOP and BIOS forms, including `5C`, `5D`, `FD`, BIOS selectors, and retained SoftPC BIOS table variants; assign each to bx-core, bx-mantle, bx-vdm machine composition, or an explicit deferred/unavailable boundary. |
-| Non-goals | No new BOP behavior, no speculative product-variant choice, no CPU/device/firmware rewrite, no selector recognition in bx-core or bx-mantle, no trace, and no direct historical dispatcher link. |
-| Reference Baseline | T199 S11 shared XMS/DPMI machine-capability plan, T199 S16 top-level owner matrix, and S18 top-level routing closure. |
-| Files And ABI Surface | One supporting source/ABI matrix and, only if needed for classification coverage, selector-blind or bx-vdm-owned test metadata; no runtime provider ABI is admitted in this S. |
+| Identifier Mode | M0 T199 S20, Ordinary Mode. |
+| Admission And Approval | T199 S19 closes the machine/BIOS source and ownership map and admits its bounded bx-vdm routing facade. |
+| Objective | Implement one bx-vdm machine-BOP facade for existing `12`, `15:88`, and `5F` composition paths plus selected deferred/controlled-stop `5C`, `5D`, and `FD` outcomes; route each only after common ingress. |
+| Non-goals | No Bochs feature addition, no C1--C6 machine capability, no selected SoftPC BIOS branch, no keyboard/PIC/firmware emulation in bx-vdm, no `FD` transition, no trace, and no direct historical dispatcher link. |
+| Reference Baseline | T199 S19 machine/BIOS map and current bounded BIOS-memory and SPCKBD helpers. |
+| Files And ABI Surface | One bx-vdm facade, composition attachment, existing helper calls, all-member focused regression, and bound-composition regression. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-path and ABI review covers every mapped machine/BIOS identity; a bounded inventory consistency check rejects an unassigned identity. No native guest run occurs. |
-| Expected Markers | Every machine/BIOS identity has exactly one owner/disposition and any capability prerequisite is selector-blind and machine-owned. |
+| Verification | MSVC x64 `/MT` focused and bound-composition tests cover each admitted selector, exact three-byte continuation, explicit stop behavior, and no direct helper bypass. |
+| Expected Markers | `12` and `15:88` retain their existing limited profile results; `5F` retains checked action; `5C/5D/FD` never synthesize a machine operation. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source conflict, owner, ABI, prerequisite, and explicit failure/defer result for each form; distinguish inventory identity from enabled runtime capability. |
-| Stop Conditions | Need to choose a historical product variant, add a machine capability, change Bochs, or interpret an unresolved BIOS row as a BOP runtime behavior. |
-| Exit Criteria | A complete machine/BIOS owner map is evidence-backed and ready to admit one whole-package disposition/implementation S without selector-specific trace work. |
+| Reporting Requirements | Record each selector's route, result, preserved limitation, and unchanged machine owner. |
+| Stop Conditions | Need to choose a historical product variant, add C1--C6 capability, change Bochs, or introduce selector knowledge into bx-core/bx-mantle. |
+| Exit Criteria | One facade owns all six admitted machine-BOP routes with focused and composition regressions. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
-| Similar-Issue Sweep | Audit `5C/5D/FD`, selector `02/06`, BIOS `12/15`, the 41 constants, all 349 table rows, and all XMS/DPMI machine prerequisites together. |
+| Similar-Issue Sweep | Audit `12`, `15:88`, `5F`, `5C`, `5D`, `FD`, their fourth-byte handling, and every current direct machine helper together. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 
@@ -90,6 +90,10 @@
 > through common ingress; focused and composition regression preserve the
 > bounded terminal, idle, config, and machine-action results without a trace;
 > see [S18 regression](etc/research/t199-s18-top-level-package-facade-regression-001.md).
+
+> **T199 S19 completion:** all machine/BIOS identities now have an owner and
+> disposition without selecting a historical `BIOS[]` branch; see [S19
+> map](etc/research/t199-s19-machine-bios-source-abi-owner-map-001.md).
 
 ## Current Technical Baseline
 
