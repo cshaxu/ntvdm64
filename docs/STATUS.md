@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S5.** Its governing brief is the active
+> **Current effective packet: M0 T199 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S5 -- whole COMMAND source/ABI/failure package map.**
+**Active: M0 T199 S6 -- whole COMMAND provider disposition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -21,19 +21,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S5, Ordinary Mode. |
-| Admission And Approval | Owner requires complete packages, not trace-led single-service work; T199 S1 global audit orders COMMAND after the admitted whole DEM package boundary. |
-| Objective | Produce a complete original OpenNT COMMAND source/ABI/failure map for all 17 callable services and its sentinel, separating original providers, host-bound dependencies, CLI-capability candidates, source-derived rehosts, and deferred members. |
-| Non-goals | No COMMAND implementation, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no new host capability, and no new singleton recognizer. |
-| Reference Baseline | T199 S1 global audit; T198's partial `54:04`/`54:0E` endpoint evidence; T199 S4 DEM facade closure. |
-| Files And ABI Surface | Research/evidence only: original COMMAND dispatcher and service modules, existing `bx-vdm` command-plane records, and current provider tests. |
+| Identifier Mode | M0 T199 S6, Ordinary Mode. |
+| Admission And Approval | T199 S5 maps all seventeen COMMAND services and its sentinel. Owner policy requires whole-package capability planning before any implementation. |
+| Objective | Select one complete disposition for every COMMAND service: original no-op, explicitly unavailable, deferred, or bounded CLI source-derived candidate. |
+| Non-goals | No COMMAND implementation, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no new host capability, and no singleton recognizer. |
+| Reference Baseline | T199 S5 COMMAND matrix, current command plane, and partial endpoint evidence. |
+| Files And ABI Surface | Research/evidence only: COMMAND plane, existing providers/tests, profile and CLI capability contracts. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reproducible service-to-source/ABI/failure ledger for `54:00..10` and `54:11` sentinel; cross-check every current provider/partial evidence against the original source. |
-| Expected Markers | One complete package matrix, precise partial-evidence labels, and a proposed whole-package disposition suitable for a later implementation S. |
+| Verification | Every `54:00..10` member and `54:11` sentinel has one disposition, prerequisite, and compatible failure behavior; partial evidence is not promoted to closure. |
+| Expected Markers | One package disposition table and a bounded S7 facade/full-family implementation plan. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Preserve `54:04` and `54:0E` only as partial endpoint evidence; report every original host dependency and unavailable/failure disposition. |
-| Stop Conditions | Any implementation, trace, host-capability expansion, direct historical dispatcher link, Bochs/mantle modification, or a source ambiguity that prevents a complete map. |
-| Exit Criteria | A full COMMAND matrix establishes the sole admission basis for a later whole-package disposition and implementation S. |
+| Reporting Requirements | Preserve `54:04` and `54:0E` as partial evidence; identify every provider that must migrate behind a COMMAND facade. |
+| Stop Conditions | Any implementation, trace, host-capability expansion, direct historical dispatcher link, Bochs/mantle modification, or an uncovered service. |
+| Exit Criteria | A complete disposition admits one COMMAND facade/full-family implementation S without trace-led service scheduling. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -43,6 +43,10 @@
 > callable members plus sentinel, preserves seven original no-ops and the
 > separate `50:42` exception, and gates retained providers without a trace;
 > see [S4 regression](etc/research/t199-s4-dem-package-facade-regression-001.md).
+
+> **T199 S5 completion:** the complete COMMAND table, ABI dependencies,
+> sentinel safety rule, and partial endpoint evidence are in
+> [S5 matrix](etc/research/t199-s5-command-source-abi-failure-matrix-001.md).
 
 ## Current Technical Baseline
 
