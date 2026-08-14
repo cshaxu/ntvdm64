@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S80.** Its governing brief is the active
+> **Current effective packet: M0 T198 S81.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S80 -- map the original display-mode composition that selects
-the reached C000 native-INT10 path.**
+**Active: M0 T198 S81 -- observe, without changing, original BOP `5F` table
+and display-state initialization in the current native composition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ the reached C000 native-INT10 path.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S80, Ordinary Mode. |
-| Admission And Approval | S79 proves that no current approved source-built C000 input exists; see `etc/research/t198-s79-machine-image-producer-audit-001.md`. |
-| Objective | Source-map BOP `5F` keyboard/video initialization, `use_host_int10`, saved native INT 10 vectors and their CLI-host dependencies; determine whether the C000 transfer is a missing display-mode composition or a true machine-device prerequisite. |
-| Non-goals | No BOP/provider implementation, display output, CLI mode switch, ROM import/synthesis, Bochs VGA/device admission, guest binary alteration, or core semantic edit. |
-| Reference Baseline | S74/S78 trace; S79 producer audit; OpenNT `spckbd.asm`, `keybd_io.c`, SoftPC BIOS table and historical NT host display-mode sources. |
-| Files And ABI Surface | Evidence only. No BOP ABI, machine-image descriptor, adapter route, host capability or build input is added. |
+| Identifier Mode | M0 T198 S81, Ordinary Mode. |
+| Admission And Approval | S80 establishes the BOP-`5F` table/state chain and the C000 fullscreen branch; see `etc/research/t198-s80-display-mode-vector-chain-audit-001.md`. |
+| Objective | Add a default-off, adapter-side observation to identify canonical BOP `5F`, capture its declared resident `use_host_int10` locator and record the state before/after the current composition outcome. |
+| Non-goals | No provider/route change, BOP result change, guest-memory write, display output, CLI mode selection, ROM/device import, Bochs core/mantle edit, or source-map attribution beyond captured values. |
+| Reference Baseline | S80 source map; existing generic-UD copied-event bridge, checked guest-RAM action ABI, source-built NTIO fixture and instruction-history observer. |
+| Files And ABI Surface | Test/observation fixture and its documented fixed-width record only; adapter-side use of existing checked read mechanics. No production BOP or mantle/core ABI changes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Trace the historical initialization table, caller/dispatcher and writes to the resident display fields; correlate each branch with the captured registers/transfer; run documentation governance and diff checks. |
-| Expected Markers | Source-backed display-mode/vector chain, owner matrix, explicit CLI-profile dependency and a proven/unknown distinction for the exact 073B offset. |
+| Verification | Source-build the existing CPU5 x64 fixture with observation enabled; verify BOP-`5F` identification, table bounds/version handling, pre/post state record and negative non-`5F` behavior; run documentation governance and diff checks. |
+| Expected Markers | One fixed-width observed record with event identity, checked locator validity, pre/post bytes and composition outcome; explicit `not reached` result if BOP `5F` is absent. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source module/entry points, table layout/ownership, host dependencies, candidate CLI disposition and all unproven address mappings. |
-| Stop Conditions | The path requires an unapproved binary import, makes a BOP/provider or device admission necessary, or assigns a 073B offset without a valid listing/map. Stop and retain the map. |
-| Exit Criteria | A complete source-backed mode/vector chain and an evidence-backed next boundary; no implementation or profile selection is made. |
+| Reporting Requirements | Record observation layout, all checked-address failures, whether BOP `5F` reached the current composition, pre/post values and any unknown continuation. |
+| Stop Conditions | Observation would require guest writes, altered BOP outcome, a new mechanical ABI, direct Bochs memory access bypassing the checked action boundary, or a provider/device/profile decision. Stop and retain the existing trace. |
+| Exit Criteria | A source-built bounded observation or a reproducible not-reached result, with no runtime semantic change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover fullscreen/windowed/stream states, BOP `5F`/`42`/`BE`, keyboard-vector tables, saved IVT vectors, host console calls and unavailable source maps. |
+| Similar-Issue Sweep | Cover malformed tables, invalid guest ranges, wrong selector, noncanonical #UD, pre/post equality, declined outcomes and absent BOP `5F`. |
 
 ## Current Technical Baseline
 
@@ -394,6 +394,10 @@ the reached C000 native-INT10 path.**
   VGA lifecycle. S80 therefore audits the original display-mode selection
   before any profile or machine decision. See [S79 producer
   audit](etc/research/t198-s79-machine-image-producer-audit-001.md).
+- M0 T198 S80 establishes the original display-state chain: BOP `5F` supplies
+  the resident mode byte, and only fullscreen jumps to the saved native INT 10
+  vector. S81 is observation only; it will not select a CLI mode or attach a
+  provider. See [S80 chain audit](etc/research/t198-s80-display-mode-vector-chain-audit-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
