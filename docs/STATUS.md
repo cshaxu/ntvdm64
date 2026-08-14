@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S84.** Its governing brief is the active
+> **Current effective packet: M0 T198 S85.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S84 -- audit why the current passive observer does not see
-SpcKbd's BOP-`5F` before the source-owned IVT write.**
+**Active: M0 T198 S85 -- map the original BOP-`5F` host display/vector contract
+against the current narrow source-derived guest continuation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ SpcKbd's BOP-`5F` before the source-owned IVT write.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S84, Ordinary Mode. |
-| Admission And Approval | S83 proves that the `host_int10` operand changes only after the first bound canonical `50:11` ingress; see `etc/research/t198-s83-spckbd-patch-lifecycle-001.md`. |
-| Objective | Determine whether BOP `5F` is consumed by existing common routing before the passive observer, or whether the observed SpcKbd IVT write has another source-owned continuation. |
+| Identifier Mode | M0 T198 S85, Ordinary Mode. |
+| Admission And Approval | S84 proves the BOP-`5F` special continuation is consumed before passive observation and reaches original `isk_int9`; see `etc/research/t198-s84-bop5f-observer-order-001.md`. |
+| Objective | Identify the observable original `MS_bop_F`/`kb_setup_vectors` contract omitted by the narrow continuation, and classify the minimum correct owner/profile disposition. |
 | Non-goals | No guest-memory write, BOP/provider implementation, `use_host_int10` write, CLI profile selection, ROM/device import, memory mapping change, Bochs core/mantle edit, or forced control-flow change. |
-| Reference Baseline | S80 display chain; S81 passive observation; S82/S83 pointer provenance and bracket; current test-bridge/composition routing; OpenNT `spckbd.asm` and `nt_bop.c`. |
-| Files And ABI Surface | Initially read-only source and ordering audit only. Any new observer must be default-off, use existing copied event/checked-read mechanics, and requires Status re-admission if it adds a new range or changes routing. No production BOP/mantle/core ABI change. |
+| Reference Baseline | S80 display chain; S82/S83 pointer provenance/lifecycle; S84 routing order; original `nt_bop.c`, `keybd_io.c`, and `spckbd.asm`; current source-derived service. |
+| Files And ABI Surface | Read-only OpenNT-to-current contract map. No provider, display mode, machine image, ROM mapping, guest write, or core/mantle ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Review `bx_ntvdm_boot_namespace_composition_v1_handle`, registry/plane disposition for `5F`, and the test-bridge ordering; run focused static boundary checks plus documentation governance and diff checks. |
-| Expected Markers | A source-backed disposition of the observer gap: pre-consumed, unreachable, alternate continuation, or explicitly unproven. |
+| Verification | Trace original host calls and state writes, compare each with current service behavior, classify owner/profile implications, and run documentation governance and diff checks. |
+| Expected Markers | A compact contract delta table with exact source evidence and a source-backed disposition for each missing host-side effect. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record selector ownership, handler/observer ordering, evidence for every excluded route, and any unobservable period. |
-| Stop Conditions | The audit requires guest writes, a new mechanical core/mantle seam, guessed range, new ROM input, BOP/provider behavior, device admission or CLI-profile selection. Stop and retain the lifecycle gap. |
-| Exit Criteria | Source-backed BOP-`5F` observer-gap disposition or evidence-backed inability under the existing contract, with no runtime semantic change. |
+| Reporting Requirements | Record original source calls, current continuation behavior, affected guest state and concrete non-admission rationale. |
+| Stop Conditions | The audit requires a host-state write, a new BOP/provider, a guessed display policy, ROM input, machine/device admission, CLI-profile selection or a Bochs core/mantle seam. Stop and retain the contract delta. |
+| Exit Criteria | Source-backed host-contract delta and owner/profile disposition, with no runtime semantic change. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover bridge pre/post-delegate ordering, registry and plane decline paths, malformed copied events, BOP `5F` versus nearby `5E`/`42`, and historical x86/RISC split. |
+| Similar-Issue Sweep | Cover `useHostInt10`, saved INT10/42 vectors, keyboard-vector setup, fullscreen/windowed/stream modes, and x86/RISC continuations. |
 
 ## Current Technical Baseline
 
@@ -403,10 +403,10 @@ SpcKbd's BOP-`5F` before the source-owned IVT write.**
   initialization path, without forcing a mode byte or adding a provider. See
   [S81 passive observation](etc/research/t198-s81-bop5f-passive-observation-001.md).
 - M0 T198 S82 proves that `073B:0939` is a dynamically patched SpcKbd native
-  INT10 far jump, not random Bochs control flow. M0 T198 S83 then proves the
-  pointer is still zero at first bound `50:11` and changes only later. S84 now
-  audits the remaining absent-BOP-`5F` observer gap. See [S83 lifecycle
-  record](etc/research/t198-s83-spckbd-patch-lifecycle-001.md).
+  INT10 far jump, not random Bochs control flow. M0 T198 S83 brackets the
+  pointer write after first `50:11`; M0 T198 S84 proves BOP-`5F` was consumed
+  before the passive recorder. S85 now maps the original host-contract delta.
+  See [S84 observer-order audit](etc/research/t198-s84-bop5f-observer-order-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
