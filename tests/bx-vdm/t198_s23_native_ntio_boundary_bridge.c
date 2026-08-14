@@ -2,6 +2,7 @@
 #include "bx-mantle/bx_ntvdm_instruction_history.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 #include "t198_s23_fastread_attempt_ledger.h"
+#include "t198_s121_dem_lifecycle_ledger.h"
 
 static unsigned observed_5011;
 static unsigned observed_503b_resume;
@@ -37,6 +38,14 @@ static uint32_t observed_fast_read_gpr16_write_mask;
 static uint16_t observed_fast_read_ax;
 static uint32_t observed_fast_read_eflags_write_mask, observed_fast_read_eflags_values;
 static struct t198_s23_fastread_attempt_ledger_v1 observed_fast_read_attempts;
+static struct t198_s121_dem_lifecycle_ledger_v1 observed_dem_lifecycle;
+static const bx_ntvdm_boot_namespace_composition_v1 *observed_composition;
+
+void t198_s23_native_ntio_boundary_bind_observation_composition(
+    const bx_ntvdm_boot_namespace_composition_v1 *value)
+{
+    observed_composition = value;
+}
 static unsigned observed_spckbd;
 static uint16_t observed_spckbd_cs, observed_spckbd_ds, observed_spckbd_es;
 static uint32_t observed_spckbd_eip, observed_spckbd_eax, observed_spckbd_ebx,
@@ -174,6 +183,12 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
     }
     {
         int composition_accepted = bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome);
+        bx_ntvdm_boot_namespace_diagnostic_v1 namespace_diagnostic;
+        if (observed_composition != 0 &&
+            bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
+                observed_composition, &namespace_diagnostic))
+            t198_s121_dem_lifecycle_ledger_v1_record(&observed_dem_lifecycle,
+                event, outcome, composition_accepted, &namespace_diagnostic);
         t198_s23_fastread_attempt_ledger_v1_record(&observed_fast_read_attempts,
             event, outcome, composition_accepted);
         if (composition_accepted) {
@@ -377,6 +392,8 @@ unsigned t198_s23_native_ntio_boundary_observed_fast_read_eflags_write_mask(void
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_eflags_values(void) { return observed_fast_read_eflags_values; }
 unsigned t198_s23_native_ntio_boundary_fast_read_attempt_count(void) { return observed_fast_read_attempts.count; }
 int t198_s23_native_ntio_boundary_copy_fast_read_attempt(unsigned index, struct t198_s23_fastread_attempt_v1 *entry) { return t198_s23_fastread_attempt_ledger_v1_get(&observed_fast_read_attempts,index,entry); }
+unsigned t198_s23_native_ntio_boundary_dem_lifecycle_count(void) { return observed_dem_lifecycle.count; }
+int t198_s23_native_ntio_boundary_copy_dem_lifecycle(unsigned index, struct t198_s121_dem_lifecycle_entry_v1 *entry) { return t198_s121_dem_lifecycle_ledger_v1_get(&observed_dem_lifecycle,index,entry); }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd(void) { return observed_spckbd; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_cs(void) { return observed_spckbd_cs; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_ds(void) { return observed_spckbd_ds; }

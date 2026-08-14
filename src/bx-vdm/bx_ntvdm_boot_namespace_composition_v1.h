@@ -21,6 +21,18 @@ typedef struct bx_ntvdm_boot_namespace_composition_v1 {
     bx_ntvdm_dem_gset_plane_v1 gset;
 } bx_ntvdm_boot_namespace_composition_v1;
 
+/* Fixed adapter-local observation only.  It deliberately excludes pathname,
+ * image pointer, guest address, BOP identity and provider selection state. */
+typedef struct bx_ntvdm_boot_namespace_diagnostic_v1 {
+    uint32_t version;
+    uint32_t open;
+    uint32_t open_file_index;
+    uint32_t generation;
+    uint64_t offset;
+} bx_ntvdm_boot_namespace_diagnostic_v1;
+
+#define BX_NTVDM_BOOT_NAMESPACE_DIAGNOSTIC_V1_VERSION 1u
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -39,6 +51,9 @@ int bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
 int bx_ntvdm_boot_namespace_composition_v1_handle(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome);
+int bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
+    const bx_ntvdm_boot_namespace_composition_v1 *value,
+    bx_ntvdm_boot_namespace_diagnostic_v1 *out);
 #ifdef __cplusplus
 }
 #endif

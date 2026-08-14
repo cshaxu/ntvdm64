@@ -312,6 +312,21 @@ int bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
         bx_ntvdm_dem_gset_plane_v1_set_drive_snapshot(&value->gset, snapshot);
 }
 
+int bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
+    const bx_ntvdm_boot_namespace_composition_v1 *value,
+    bx_ntvdm_boot_namespace_diagnostic_v1 *out)
+{
+    const bx_ntvdm_readonly_namespace_v1 *space;
+    if (!valid(value) || !out) return 0;
+    space = &value->plane.provider.readonly_namespace;
+    out->version = BX_NTVDM_BOOT_NAMESPACE_DIAGNOSTIC_V1_VERSION;
+    out->open = space->open ? 1u : 0u;
+    out->open_file_index = space->open ? space->open_file_index : UINT32_MAX;
+    out->generation = space->generation;
+    out->offset = space->offset;
+    return 1;
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_handle(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *value)
