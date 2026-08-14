@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S102.** Its governing brief is the active
+> **Current effective packet: M0 T198 S103.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S102 -- make one rebuilt exact-input guest observation after
-the corrected DEM handle codec and classify its first unresolved boundary.**
+**Active: M0 T198 S103 -- extend the default-off copied observation for DEM
+`50:42` with BP/flags before admitting another guest run.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,12 +23,12 @@ the corrected DEM handle codec and classify its first unresolved boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S102, Ordinary Mode. |
-| Admission And Approval | S101 source-builds/tests original AX-high/BP-low token handling across admitted DEM open/seek/read/fast-read/close routes. |
-| Objective | Rebuild the exact source-built NTIO/NTDOS/COMMAND/SHARE native fixture against current composition and make exactly one finite observation; classify the first unresolved boundary. |
-| Non-goals | No provider addition, terminal transport, CLI exit-code mapping, host environment/filesystem exposure, guest artifact creation, CLI display/video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, second run, or normal completion claim without `54:11`. |
-| Reference Baseline | S97 one-run exact-input probe; S101 handle codec closure; retained T198 S74 CPU5/mantle/NTIO/NTDOS link response. |
-| Files And ABI Surface | One fresh artifact build root using the existing S97 one-run wrapper and current composition manifest only; no new runtime seam or guest-address API. |
+| Identifier Mode | M0 T198 S103, Ordinary Mode. |
+| Admission And Approval | S102's only rebuilt run still reaches `50:42`, but the existing copied marker omits BP/flags and cannot classify its provider-state outcome. |
+| Objective | Extend only the existing default-off `50:42` copied-state observation with BP and flags; source-build the observation fixture without a guest run. |
+| Non-goals | No guest run, provider/routing/ABI change, host capability expansion, guest artifact, device/ROM import, Bochs core/mantle edit, broad rebuild or continuity claim. |
+| Reference Baseline | S102 observation, existing native boundary bridge and copied generic event ABI. |
+| Files And ABI Surface | Existing default-off fixture observation fields only; no new runtime seam or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | One current-object compile/link, exactly one finite run, retained exact profile/input hashes/logs, marker order and bounded-stop classification; documentation governance and diff checks. |
 | Expected Markers | S97 predecessor markers plus an accepted/rejected `50:42` result under the corrected token codec, then the exact next boundary if execution continues. |
