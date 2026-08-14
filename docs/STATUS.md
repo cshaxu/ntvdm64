@@ -118,6 +118,11 @@
 > interrupt facility; see [S26
 > map](etc/research/t199-s26-c5-int15-owner-abi-failure-map-001.md).
 
+> **T199 S27 completion:** C4 is explicitly deferred: OpenNT DPMI descriptor
+> and protected-mode operations are a coupled LDT/session component, not a
+> safely exportable Bochs CPU API; see [S27
+> map](etc/research/t199-s27-c4-protected-mode-owner-abi-failure-map-001.md).
+
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
