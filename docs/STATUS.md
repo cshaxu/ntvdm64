@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S119.** Its governing brief is the active
+> **Current effective packet: M0 T198 S120.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S119 -- make one replacement native observation with the
-exported bounded fast-read ledger.**
+**Active: M0 T198 S120 -- source-map the exact `4E534005` declined fast-read
+lifecycle before any provider or machine change.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ exported bounded fast-read ledger.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S119, Ordinary Mode. |
-| Admission And Approval | S118 records S117 as attribution-insufficient, fixes the fixture export and source-compiles it. The registered harness now links the fixed ledger and its output site. One replacement run is required to answer the already bounded attribution question. |
-| Objective | Rebuild and execute exactly one bounded native run. Export every ledger entry, BOP `5F` and bounded terminal state; classify all observed `50:42` attempts from the copied facts without implementation change. |
-| Non-goals | No retry, provider/ABI change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S114 post-commit evidence, S115 source map, S116 ledger, S117 invalid record, S118 export closure. |
-| Files And ABI Surface | Registered native derivative and evidence only; no source change unless a pre-run build membership defect blocks the admitted build. |
+| Identifier Mode | M0 T198 S120, Ordinary Mode. |
+| Admission And Approval | S119's single provenance-locked run exported all four fixed-width attempts. `4E534005` is a genuine declined post-close generation, but not yet a file identity. The next safe action is source-only lifecycle reconstruction. |
+| Objective | Trace the relevant OpenNT NTDOS open/read/close control flow and the `bx-vdm` immutable namespace contract to identify what `4E534005` proves, what it cannot prove, and whether a minimum correction is admissible. |
+| Non-goals | No guest run/retry, provider/ABI change, host capability expansion, ROM/VGA/device import, Bochs core/mantle edit, broad rebuild or continuity claim. |
+| Reference Baseline | S115 source map and S119 exported native ledger. |
+| Files And ABI Surface | Read-only source and evidence analysis only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One provenance-locked `runs=1` record plus `run.log` contains ordered ledger entries and terminal markers. |
-| Expected Markers | Each recorded attempt has only fixed-width copied input/result fields and an accepted/declined disposition. |
+| Verification | A source-line-keyed lifecycle map reconciles each generation transition with the OpenNT `50:12/00/42/02` ABI and states any remaining ambiguity explicitly. |
+| Expected Markers | No changed runtime source, no new build root and no guest run; the map distinguishes source proof from inference. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record build provenance, run count, every entry, source disposition and confidence. |
-| Stop Conditions | Any second run, provider/ABI/semantic change, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. |
-| Exit Criteria | Ledger evidence assigns source-grounded status to every retained fast-read call or establishes one exact source-only follow-up. |
+| Reporting Requirements | Record source owner, generation rule, exact conclusion and remaining unknowns for the declined token. |
+| Stop Conditions | Any run/retry, provider/ABI/semantic change, host environment injection, core/mantle change, ROM/VGA/device admission or broad rebuild. |
+| Exit Criteria | The `4E534005` question is either source-classified or reduced to one exact next observation/implementation question. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
