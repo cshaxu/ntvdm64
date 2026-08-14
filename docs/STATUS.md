@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S134.** Its governing brief is the active
+> **Current effective packet: M0 T199 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S134 -- paired COMMAND `54:0E`/`54:04` endpoint integration closure.**
+**Active: M0 T199 S1 -- global BOP state, ownership and component-package audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -13,36 +13,31 @@
 
 ## Active Packet
 
-> **T scope:** T198 composes OpenNT service planes through `bx-vdm` against the
-> CPU5 `bx-core`/`bx-mantle` machine by complete component packages: DEM;
-> COMMAND; XMS; DPMI; Redirector; Debugger; and machine/BIOS. A trace validates
-> an assembled package and orders packages; it never creates a singleton BOP
-> implementation task.
->
-> `54:0E` and `54:04` are partial COMMAND console/launch endpoint evidence,
-> not component closure. `54:0E` proves only fixed DX=0/four-byte resume and
-> one continuation; `54:04` has only adapter-only restricted-root/failure
-> proof because S133 was terminated before a native result.
+> **T scope:** T199 globally audits every OpenNT BOP identity and maps current
+> implementation/evidence to complete owner packages: DEM; COMMAND; XMS; DPMI;
+> Redirector; Debugger; and bx-core/bx-mantle machine/BIOS. It then defines the
+> package order and acceptance contracts. Trace is a post-package integration
+> tool, not a source of per-BOP implementation tasks.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S134, Ordinary Mode. |
-| Admission And Approval | After the component-package correction, the owner explicitly authorizes closing the two already-admitted COMMAND console/launch endpoints first. |
-| Objective | Retain the existing `54:0E` native continuation evidence and run exactly one native integration observation for composed `54:04`; record the pair's bounded endpoint result. |
-| Non-goals | No claim of complete COMMAND console/launch closure, no next-BOP task, no retry, new endpoint/provider, host-drive scan, environment/filesystem expansion, Bochs/core/mantle change, or direct OpenNT dispatcher link. |
-| Reference Baseline | S129 `54:0E` composition/native continuation; S132 `54:04` adapter-only composition; S133 withdrawal; component-package replan. |
-| Files And ABI Surface | Registered native derivative and closure evidence only; no source change is admitted. |
+| Identifier Mode | M0 T199 S1, Ordinary Mode. |
+| Admission And Approval | Owner closes T198 and authorizes a full current BOP state/implementation-plan audit before further BOP implementation. |
+| Objective | Reconcile the complete OpenNT BOP inventory with actual bx-vdm/bx-core/bx-mantle code and evidence; publish a global status matrix and ordered component-package plan. |
+| Non-goals | No BOP implementation, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no host capability expansion, and no endpoint-by-endpoint task creation. |
+| Reference Baseline | OpenNT BOP inventory 005, T198 closure, current composition manifest and all retained T198 evidence. |
+| Files And ABI Surface | Read-only source/evidence audit and T199 planning documents only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One provenance-locked `runs=1` native record proves or refutes `54:04` acceptance after the existing `54:0E` evidence. |
-| Expected Markers | `54:0E` fixed DX=0/four-byte resume, `54:04` restricted root/failure integration result, and no follow-on implementation admission. |
+| Verification | Every inventory group is reconciled to one current status and package owner; counts, aliases and non-callable BIOS rows are explicitly accounted for. |
+| Expected Markers | One global matrix, component package order, prerequisites, failure dispositions, regression gates and trace-after-package rule. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | State explicitly that the pair is partial endpoint evidence and that COMMAND console/launch remains incomplete; classify the next trace endpoint as ordering information only. |
-| Stop Conditions | A second run, new endpoint/provider, trace-derived singleton scope, Bochs/mantle change, direct dispatcher link or host capability expansion. |
-| Exit Criteria | One native result is recorded for `54:04`, paired with retained `54:0E` evidence, without changing the component-package roadmap. |
+| Reporting Requirements | Preserve partial endpoint evidence as partial; distinguish source existence, composition linkage, unit regression and native integration evidence. |
+| Stop Conditions | Any implementation, trace, package selection based only on trace, Bochs/mantle change, direct dispatcher link or host capability expansion. |
+| Exit Criteria | An evidence-backed global matrix and package plan are sufficient to admit T199 S2 for one complete component's disposition design. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
-> **S134 result and hold:** its single authorized run stopped at `54:01`, not `54:04`. The result is retained as a non-closure observation. No retry or trace-derived endpoint task is admitted; await owner direction before a new S is admitted.
+> **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 
 ## Current Technical Baseline
 
@@ -555,4 +550,7 @@
 | M0 T198 S130 | Complete: the sole locked native observation resumes past composed `54:0E` and reaches `54:04`; it does not claim target or console completion. |
 | M0 T198 S131 | Complete: `54:04` is mapped to original `cmdGetCurrentDir`; its immutable-root candidate is admissible only as a globally classified CLI rehost. |
 | M0 T198 S132 | Complete: the finite `54:04` provider is composed after global classification; its focused closure verifies root write, typed no-write failure and protected-mode decline. |
+| M0 T198 S133 | Withdrawn before acceptance by owner policy correction; no native result is retained. |
+| M0 T198 S134 | One native observation stopped at `54:01`, not `54:04`; it is non-closure evidence only. |
+| M0 T198 | Closed by owner-directed reprioritization; it does not claim complete BOP, COMMAND or runtime closure. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
