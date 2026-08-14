@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S101.** Its governing brief is the active
+> **Current effective packet: M0 T198 S102.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S101 -- correct the source-derived DEM handle codec as
-OpenNT `AX:BP`, then source-build the current composition without a guest run.**
+**Active: M0 T198 S102 -- make one rebuilt exact-input guest observation after
+the corrected DEM handle codec and classify its first unresolved boundary.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ OpenNT `AX:BP`, then source-build the current composition without a guest run.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S101, Ordinary Mode. |
-| Admission And Approval | S100 proves original OpenNT uses handle `AX=high`, `BP=low`, while current contained `50:12` and token decode use the inverse layout. |
-| Objective | Correct the one shared source-derived DEM handle codec to original AX:BP order and update the complete open/seek/read/fast-read/close composition tests; source-build without a guest run. |
-| Non-goals | No guest run, new provider/fast-I/O ABI, FASTWRITE admission, host filesystem/environment expansion, terminal transport, CLI exit-code mapping, guest artifact creation, device/ROM import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, or success claim. |
-| Reference Baseline | S100 original ABI map; current readonly namespace service/provider/composition tests; S97 copied fast-read observation. |
-| Files And ABI Surface | Shared contained DEM handle encoding/decoding and focused tests only. Reuse current namespace, checked bulk write and fixed event ABI; no new seam or arbitrary guest-address API. |
+| Identifier Mode | M0 T198 S102, Ordinary Mode. |
+| Admission And Approval | S101 source-builds/tests original AX-high/BP-low token handling across admitted DEM open/seek/read/fast-read/close routes. |
+| Objective | Rebuild the exact source-built NTIO/NTDOS/COMMAND/SHARE native fixture against current composition and make exactly one finite observation; classify the first unresolved boundary. |
+| Non-goals | No provider addition, terminal transport, CLI exit-code mapping, host environment/filesystem exposure, guest artifact creation, CLI display/video, ROM/device import, Bochs core/mantle edit, PIC/keyboard/timer behavior, broad rebuild, second run, or normal completion claim without `54:11`. |
+| Reference Baseline | S97 one-run exact-input probe; S101 handle codec closure; retained T198 S74 CPU5/mantle/NTIO/NTDOS link response. |
+| Files And ABI Surface | One fresh artifact build root using the existing S97 one-run wrapper and current composition manifest only; no new runtime seam or guest-address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused source-built tests prove open returns `AX=high/BP=low`, every consumer reconstructs the same namespace token, fast-read obeys ZF/BX:SI, and invalid tokens fail explicitly; current composition closure, documentation governance and diff checks pass. |
-| Expected Markers | One generated token round-trips through `50:12`, `50:00`, `50:16`, `50:42` and `50:02` in historical AX:BP order; no other DEM service changes classification or ownership. |
+| Verification | One current-object compile/link, exactly one finite run, retained exact profile/input hashes/logs, marker order and bounded-stop classification; documentation governance and diff checks. |
+| Expected Markers | S97 predecessor markers plus an accepted/rejected `50:42` result under the corrected token codec, then the exact next boundary if execution continues. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original/corrected codec order, every affected provider/consumer/test, source-build commands/results, negative invalid-token behavior and all exclusions. |
-| Stop Conditions | Any need for new provider/ABI scope, guest run, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a continuity claim. Stop and admit a distinct S item. |
-| Exit Criteria | Current composition source-builds/tests the original AX:BP codec across the admitted lifecycle with retained evidence and no guest-run claim. |
+| Reporting Requirements | Record rebuilt/inherited objects, exact profile/input hashes, current composition membership, marker/action/result ordering, first unresolved boundary, bounded-stop meaning and exclusions. |
+| Stop Conditions | Any need for a second run, provider addition, arbitrary guest read, host environment/filesystem injection, ROM/VGA/PIC/device admission, core/mantle seam change, broad rebuild, or a claim that watchdog/process exit is a guest result. Stop and retain the observation. |
+| Exit Criteria | One reproducible exact-input observation source-classifies the post-codec first unresolved boundary, or records an exact build/link blocker. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 

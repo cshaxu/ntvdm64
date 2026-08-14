@@ -66,8 +66,8 @@ int main(void)
         &window, &action) || !bx_ntvdm_boot_namespace_provider_v1_complete_open(&provider,
         &event, &cpu, &action, path, sizeof(path), &result) || result.eflags_values != 0u)
         return 3;
-    token = ((uint32_t)result.cpu_delta.gpr16_values[5] << 16) | result.cpu_delta.gpr16_values[0];
-    cpu.eax = token & 0xffffu; cpu.ebp = token >> 16; cpu.ecx = 20u; cpu.edx = 0x80u;
+    token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) | result.cpu_delta.gpr16_values[5];
+    cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ecx = 20u; cpu.edx = 0x80u;
     cpu.eflags = 0x40u; window_for(&window, 0x50u, 0x16u);
     if (!bx_ntvdm_boot_namespace_provider_v1_read(&provider, &event, &cpu, &window,
         read_payload, sizeof(read_payload), &bulk, &result) || bulk.payload_bytes == 0u ||

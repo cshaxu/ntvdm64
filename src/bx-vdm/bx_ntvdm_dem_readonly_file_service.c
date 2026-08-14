@@ -60,7 +60,9 @@ static int read_result(const bx_ntvdm_exception_event_v1 *event,
         bx_ntvdm_cpu_result_v2_set_cf(value, carry);
 }
 
-static uint32_t token(const bx_ntvdm_cpu_state_v1 *cpu) { return ((cpu->ebp & 0xffffu) << 16) | (cpu->eax & 0xffffu); }
+/* OpenNT dem.h defines GETHANDLE(AX, BP): AX is the high word and BP the
+ * low word.  NTDOS stores that exact layout in sf_NTHandle before FASTREAD. */
+static uint32_t token(const bx_ntvdm_cpu_state_v1 *cpu) { return ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu); }
 
 int bx_ntvdm_dem_readonly_file_v1_prepare_open(const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu, const bx_ntvdm_instruction_window_v1 *window,
@@ -100,8 +102,8 @@ int bx_ntvdm_dem_readonly_file_v1_complete_open(bx_ntvdm_readonly_namespace_v1 *
     if (path[0] < L'A' || path[0] > L'Z' || !bx_ntvdm_readonly_namespace_v1_open(space,
         (uint32_t)(path[0] - L'A'), path + 2u, &handle, &size))
         return result(event, out, BX_NTVDM_ERROR_ACCESS_DENIED, 0, 0, 0, 0, 1);
-    return result(event, out, (uint16_t)handle, (uint16_t)(size >> 16), (uint16_t)size,
-        0u, (uint16_t)(handle >> 16), 0);
+    return result(event, out, (uint16_t)(handle >> 16), (uint16_t)(size >> 16),
+        (uint16_t)size, 0u, (uint16_t)handle, 0);
 }
 
 int bx_ntvdm_dem_readonly_file_v1_seek(bx_ntvdm_readonly_namespace_v1 *space,

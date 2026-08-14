@@ -42,10 +42,10 @@ int main(void)
         !bx_ntvdm_dem_readonly_file_v1_complete_open(&space, &event, &cpu, &action,
             path, sizeof(path), &result) || result.eflags_values != 0u ||
         result.cpu_delta.gpr16_values[0] == 0u) return 2;
-    token = ((uint32_t)result.cpu_delta.gpr16_values[5] << 16) |
-        result.cpu_delta.gpr16_values[0];
+    token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+        result.cpu_delta.gpr16_values[5];
 
-    cpu.eax = token & 0xffffu; cpu.ebp = token >> 16; cpu.ebx = 2u;
+    cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ebx = 2u;
     cpu.ecx = 0u; cpu.edx = 0u; service_window(&window, 0x00u);
     if (!bx_ntvdm_dem_readonly_file_v1_seek(&space, &event, &cpu, &window, &result) ||
         result.cpu_delta.gpr16_values[0] != sizeof(command)) return 3;
@@ -54,7 +54,7 @@ int main(void)
        nonzero so a result that writes anything beyond AX is observable through
        the exact write mask below. */
     cpu.ecx = 3u; cpu.edx = 0x40u; cpu.ebx = 0x1234u; cpu.esi = 0u;
-    cpu.ebp = token >> 16; cpu.eflags = 0x40u;
+    cpu.ebp = token & 0xffffu; cpu.eflags = 0x40u;
     service_window(&window, 0x16u);
     if (!bx_ntvdm_dem_readonly_file_v1_read(&space, &event, &cpu, &window, payload,
             sizeof(payload), &transaction, &result) || transaction.payload_bytes != 0u ||
@@ -94,7 +94,7 @@ int main(void)
     service_window(&window, 0x43u);
     if (bx_ntvdm_dem_readonly_file_v1_fast_read(&space, &event, &cpu, &window,
             payload, sizeof(payload), &transaction, &result)) return 12;
-    cpu.eax = token & 0xffffu; cpu.ebp = token >> 16; cpu.ebx = 0x1111u;
+    cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ebx = 0x1111u;
     cpu.ecx = 0xffffu; cpu.edx = 0xffffu; cpu.esi = 0x2222u;
     service_window(&window, 0x02u);
     if (!bx_ntvdm_dem_readonly_file_v1_close(&space, &event, &cpu, &window, &result) ||

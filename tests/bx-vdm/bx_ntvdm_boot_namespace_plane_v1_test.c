@@ -106,11 +106,11 @@ int main(void)
     if (!bx_ntvdm_boot_namespace_plane_v1_complete_read(&plane, &action, &next,
             &result) || result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         next.kind != BX_NTVDM_MECHANICAL_ACTION_V1_NONE) return 4;
-    token = ((uint32_t)result.cpu_delta.gpr16_values[5] << 16) |
-        result.cpu_delta.gpr16_values[0];
+    token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+        result.cpu_delta.gpr16_values[5];
 
-    cpu.eax = token & 0xffffu;
-    cpu.ebp = token >> 16;
+    cpu.eax = token >> 16;
+    cpu.ebp = token & 0xffffu;
     cpu.ecx = 20;
     cpu.edx = 0x80;
     cpu.eflags = 0x40;

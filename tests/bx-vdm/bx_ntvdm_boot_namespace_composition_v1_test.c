@@ -187,10 +187,10 @@ int main(void)
     memcpy(ram + 0x10040, "C:\\CONFIG.SYS", 14);
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 7;
-    token = ((uint32_t)outcome.gpr16_values[5] << 16) | outcome.gpr16_values[0];
+    token = ((uint32_t)outcome.gpr16_values[0] << 16) | outcome.gpr16_values[5];
 
     event_initialize(&event, 0x50, 0x00);
-    event.eax = token & 0xffffu; event.ebp = token >> 16;
+    event.eax = token >> 16; event.ebp = token & 0xffffu;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 8;
 
