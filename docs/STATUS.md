@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S25.** Its governing brief is the active
+> **Current effective packet: M0 T200 S26.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S25 -- first controlled terminal observation.**
+**Active: M0 T200 S26 -- COMMAND initial launch/lifecycle reconciliation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S25, Ordinary Mode. |
-| Admission And Approval | S24's first source-built engine runs end in typed controlled stop but do not identify the terminal event. T199's completed package ledger permits trace observation for repair ordering, not endpoint-driven implementation. |
-| Objective | Capture a bounded, default-off fixed-width observation of the first accepted generic STOP event in the new engine lifecycle, then source-map it to its existing BOP package/provider disposition. |
-| Non-goals | No BOP/provider patch, no trace-driven task split, no unbounded run, device/BIOS change, fixture-state reuse, OpenNT semantic move, or Bochs core patch. |
-| Reference Baseline | T199 global owner/disposition ledger, T200 S9 terminal observation, and T200 S24 controlled source-built engine terminal. |
-| Files And ABI Surface | Default-off mantle observation record, one engine test-only observation route, source map, and focused x64 `/MT` evidence. |
+| Identifier Mode | M0 T200 S26, Ordinary Mode. |
+| Admission And Approval | T199 completed the whole COMMAND family owner/disposition ledger. S25 establishes that the first source-built engine terminal is its existing `54:01` exhausted-plan disposition. The owner requires package-oriented implementation, with trace used only for integration validation. |
+| Objective | Reconcile the source-built initial COMMAND launch/lifecycle package with its original OpenNT `cmdSetInfo`/bootstrap/`cmdGetNextCmd`/return contract, then either prove the current no-command terminal is the declared CLI result or repair one source-derived package lifecycle omission. |
+| Non-goals | No per-service trace patch, interactive shell, host process, VDD/GUI/KEYB recovery, ambient command queue, unbounded run, device/BIOS change, fixture-state reuse, OpenNT semantic move, or Bochs core patch. |
+| Reference Baseline | T199 S42/S43 COMMAND maps, T200 S8/S9 exhausted-plan evidence, S24 bounded engine, and S25's `54:01` native observation. |
+| Files And ABI Surface | COMMAND package source/ABI/lifecycle map; only if evidence requires it, copied bx-vdm COMMAND session/provider state and its existing fixed-width action ABI; focused x64 `/MT` package and bounded engine evidence. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One source-built bounded engine run copies selector/service window and CS:EIP only after a generic STOP is accepted; default-off and no-stop paths remain silent. |
-| Expected Markers | No guest-memory inspection beyond the existing copied 15-byte exception window; event capture is selector-blind in mantle and mapped by bx-vdm/OpenNT evidence afterward. |
+| Verification | Audit the complete initial COMMAND lifecycle before editing; run source-built package regression for all affected lifecycle identities; then run at most one bounded engine integration witness. Documentation inventory, governance check, diff check, review, commit, and push are required. |
+| Expected Markers | Each required launch prerequisite has an OpenNT owner/source contract and one current disposition; any repair is package-wide and preserves copied ABI boundaries. The integration witness may confirm but may not generate a new endpoint task. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact event ABI, source-map confidence, package owner/disposition, and limitation; do not call a component closed or create an endpoint patch. |
-| Stop Conditions | Any service implementation, a second trace-driven endpoint task, unbounded capture, firmware/device behavior, raw Bochs type crossing a C boundary, or bypass of the declared stage. |
-| Exit Criteria | The first accepted STOP has one retained typed observation and a source-backed package-owner interpretation; no behavior changes are made. |
+| Reporting Requirements | Record source map, lifecycle state table, provider disposition, package-regression result, bounded integration result, and limitation. Do not call COMMAND closed unless every stated package criterion is evidenced. |
+| Stop Conditions | A requirement for an ambient NT command broker, host process/console/VDD/GUI capability, a new Bochs semantic intrusion, raw Bochs type crossing a C boundary, an unbounded run, or an endpoint-only trace patch pauses this S for re-admission. |
+| Exit Criteria | The initial COMMAND package has a source-backed lifecycle determination and corresponding package regression; any permitted repair has one bounded native integration witness, with remaining COMMAND capabilities explicitly limited. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect generic STOP observation reset/lifetime, existing instruction history, adapter bridge provider selection, T199 global ledger, and native trace fixture links. |
+| Similar-Issue Sweep | Inspect `cmddisp.c`, `cmdsvc.h`, `cmdmisc.c`, `cmdenv.c`, `cmdexec.c`, `cmdexit.c`, `tspc.asm`, `tcode.asm`, registration/bootstrap/get-next/return providers, launch-plan ownership, and T199's complete COMMAND ledger. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -95,6 +95,11 @@
 > loop and reports typed budget/controlled-stop results. Its first
 > source-built profile run reached controlled stop twice; see the [bounded
 > execution closure](etc/research/t200-s24-bounded-native-execution-closure-001.md).
+
+> **T200 S25 closure:** default-off bx-vdm observation captured the first
+> accepted source-built engine STOP as COMMAND `54:01` at `95AB:03C1`; its
+> source-backed exhausted-plan meaning does not close COMMAND or admit an
+> endpoint patch. See the [terminal observation](etc/research/t200-s25-first-controlled-terminal-observation-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
