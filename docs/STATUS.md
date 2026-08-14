@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S18.** Its governing brief is the active
+> **Current effective packet: M0 T200 S19.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S18 -- initial-state profile declaration design.**
+**Active: M0 T200 S19 -- initial-state evidence/profile binding.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S18, Ordinary Mode. |
-| Admission And Approval | S17 source-mapped NTIO publication and established that minimal mantle has no bound firmware/initial-state provider. |
-| Objective | Design the copied, versioned profile initial-state declaration and its evidence admission/rejection contract. |
-| Non-goals | No machine initialization, RAM publication, CPU loop, guest run, fixture preentry reuse, BOP patch, or Bochs change. |
-| Reference Baseline | T200 S16 direct startup-plan closure, S17 preentry map, and r18 first-prefix input evidence. |
-| Files And ABI Surface | bx-vdm/profile declaration and opaque typed mantle-consumer proposal only; values, RAM application, and execution are not admitted. |
+| Identifier Mode | M0 T200 S19, Ordinary Mode. |
+| Admission And Approval | S18 created the copied declaration ABI with explicit absent/present admission semantics. |
+| Objective | Bind one profile-selected, evidence-identified initial-state declaration to the minimal-machine configuration, or explicitly reject incompatible evidence. |
+| Non-goals | No RAM publication, CPU loop, guest run, device/firmware behavior, fixture preentry reuse, BOP patch, or Bochs change. |
+| Reference Baseline | T200 S17 preentry map, S18 declaration ABI, and r18 first-prefix input evidence. |
+| Files And ABI Surface | Profile/parser and bx-vdm composition binding only; a future mantle consumer remains opaque and unimplemented. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused ABI validation proves absent/unproven state is represented and rejected, while evidence identity remains copied and pointer-free. |
-| Expected Markers | No historical snapshot byte becomes a default; mantle remains selector/firmware blind; no environment or finite-run route is imported. |
+| Verification | Focused profile/composition tests prove exact evidence identity binding and prove absent/mismatched configurations cannot produce an admitted declaration. |
+| Expected Markers | No historical snapshot byte becomes a global default; mantle remains selector/firmware blind; no environment or finite-run route is imported. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record declaration fields, provenance binding, absent-state behavior, and rejected routes; do not call guest startup/COMMAND closed. |
-| Stop Conditions | Any default byte, RAM application, machine initialization, guest execution, environment/finite-run use, or raw Bochs type crossing a C boundary. |
-| Exit Criteria | A typed declaration design and focused validation either admit a later generic publisher or clearly retain an evidence blocker. |
+| Reporting Requirements | Record profile source, evidence identity, compatibility condition, absent/mismatch behavior, and rejected routes; do not call guest startup/COMMAND closed. |
+| Stop Conditions | Any RAM application, machine initialization, guest execution, environment/finite-run use, device behavior, or raw Bochs type crossing a C boundary. |
+| Exit Criteria | The declaration is source/profile-bound and a later generic publisher is precisely admitted, or incompatibility remains explicitly rejected. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect profile schema/parser, r18 snapshot evidence, machine profile ABI, startup-plan ABI, and mantle generic action interfaces. |
+| Similar-Issue Sweep | Inspect profile schema/parser, snapshot evidence format/digest, composition install lifecycle, and minimal-machine configuration identity. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -70,6 +70,9 @@
 > **T200 S17 closure:** OpenNT source locks the narrow NTIO handoff, but the
 > minimal mantle has no bound IVT/BDA/virtual-interrupt input provider; see the
 > [preentry map](etc/research/t200-s17-product-preentry-source-abi-map-001.md).
+
+> **T200 S18 closure:** bx-vdm has a copied evidence-identified initial-state
+> ABI with valid-but-unpublishable absent state; see the [ABI record](etc/research/t200-s18-initial-state-declaration-abi-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).
