@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S4.** Its governing brief is the active
+> **Current effective packet: M0 T199 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S4 -- whole DEM facade and all-service regression implementation.**
+**Active: M0 T199 S5 -- whole COMMAND source/ABI/failure package map.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -21,23 +21,28 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S4, Ordinary Mode. |
-| Admission And Approval | T199 S3 selects the whole DEM disposition, including the explicit `50:42` compatibility exception. |
-| Objective | Implement one classified DEM package facade, migrate existing partial providers behind it, and add an all-73-service plus sentinel regression without adding new singleton recognizers. |
-| Non-goals | No new host capability, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no mutable filesystem/FCB/raw-media implementation, and no new trace-derived service task. |
-| Reference Baseline | T199 S2 matrix and S3 whole-package disposition. |
-| Files And ABI Surface | `bx-vdm` DEM facade/dispatch integration, manifest and all-service regression fixture. |
+| Identifier Mode | M0 T199 S5, Ordinary Mode. |
+| Admission And Approval | Owner requires complete packages, not trace-led single-service work; T199 S1 global audit orders COMMAND after the admitted whole DEM package boundary. |
+| Objective | Produce a complete original OpenNT COMMAND source/ABI/failure map for all 17 callable services and its sentinel, separating original providers, host-bound dependencies, CLI-capability candidates, source-derived rehosts, and deferred members. |
+| Non-goals | No COMMAND implementation, no trace, no Bochs/core/mantle modification, no direct OpenNT dispatcher link, no new host capability, and no new singleton recognizer. |
+| Reference Baseline | T199 S1 global audit; T198's partial `54:04`/`54:0E` endpoint evidence; T199 S4 DEM facade closure. |
+| Files And ABI Surface | Research/evidence only: original COMMAND dispatcher and service modules, existing `bx-vdm` command-plane records, and current provider tests. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-built all-service regression enumerates 73 callable records and sentinel; verifies ownership, no-op, deferred no-mutation, `42` exception and migrated candidates. |
-| Expected Markers | One facade entry, no raw service recognizer, no bypass, and a complete regression ledger. |
+| Verification | Reproducible service-to-source/ABI/failure ledger for `54:00..10` and `54:11` sentinel; cross-check every current provider/partial evidence against the original source. |
+| Expected Markers | One complete package matrix, precise partial-evidence labels, and a proposed whole-package disposition suitable for a later implementation S. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record every migrated provider and every remaining deferred group; preserve partial current evidence as partial. |
-| Stop Conditions | Trace, Bochs/mantle change, direct dispatcher link, host capability expansion, new singleton recognizer or a result for a deferred member. |
-| Exit Criteria | DEM facade and complete regression close the package implementation boundary; a later S may run one trace. |
-| Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
+| Reporting Requirements | Preserve `54:04` and `54:0E` only as partial endpoint evidence; report every original host dependency and unavailable/failure disposition. |
+| Stop Conditions | Any implementation, trace, host-capability expansion, direct historical dispatcher link, Bochs/mantle modification, or a source ambiguity that prevents a complete map. |
+| Exit Criteria | A full COMMAND matrix establishes the sole admission basis for a later whole-package disposition and implementation S. |
+| Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
+| Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
+
+> **T199 S4 completion:** the compiled DEM package facade now classifies all 73
+> callable members plus sentinel, preserves seven original no-ops and the
+> separate `50:42` exception, and gates retained providers without a trace;
+> see [S4 regression](etc/research/t199-s4-dem-package-facade-regression-001.md).
 
 ## Current Technical Baseline
 

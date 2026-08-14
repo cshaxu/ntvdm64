@@ -1,4 +1,5 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx_ntvdm_dem_package_facade_v1.h"
 #include <string.h>
 
 static uint8_t ram[0x100000];
@@ -57,6 +58,81 @@ static void profile_initialize(byob_profile_selection *profile)
         profile->config_metadata.dos_date = profile->autoexec_metadata.dos_date = 1;
 }
 
+static int facade_existing_provider(uint32_t service)
+{
+    switch (service) {
+    case 0x00u: case 0x02u: case 0x09u: case 0x0bu: case 0x0du:
+    case 0x11u: case 0x12u: case 0x16u: case 0x18u: case 0x1bu:
+    case 0x32u: case 0x3bu: case 0x3cu: case 0x45u: case 0x46u:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static int facade_original_noop(uint32_t service)
+{
+    switch (service) {
+    case 0x1fu: case 0x24u: case 0x26u: case 0x28u:
+    case 0x2bu: case 0x40u: case 0x43u:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static int facade_regression(void)
+{
+    uint32_t service;
+    for (service = 0u; service < 73u; ++service) {
+        uint8_t bytes[4] = { 0xc4u, 0xc4u, 0x50u, (uint8_t)service };
+        bx_ntvdm_instruction_window_v1 window;
+        bx_ntvdm_bop_ingress_v1 ingress;
+        bx_ntvdm_bop_provider_selection_v1 selection;
+        bx_ntvdm_dem_package_route_v1 route;
+        uint32_t expected = facade_original_noop(service) ?
+            BX_NTVDM_DEM_PACKAGE_ORIGINAL_NOOP : service == 0x42u ?
+            BX_NTVDM_DEM_PACKAGE_FASTREAD_COMPATIBILITY :
+            facade_existing_provider(service) ? BX_NTVDM_DEM_PACKAGE_EXISTING_PROVIDER :
+            BX_NTVDM_DEM_PACKAGE_DEFERRED;
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, 4u);
+        if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+            !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+            !bx_ntvdm_dem_package_facade_v1_classify(&ingress, &selection, &route) ||
+            route.plane.service != service || route.disposition != expected) return 0;
+        if (expected == BX_NTVDM_DEM_PACKAGE_ORIGINAL_NOOP) {
+            bx_ntvdm_exception_event_v1 event;
+            bx_ntvdm_cpu_state_v1 cpu;
+            bx_ntvdm_cpu_result_v2 result;
+            memset(&event, 0, sizeof(event));
+            event.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
+            event.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
+            event.struct_bytes = sizeof(event);
+            event.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;
+            event.vector = 6u; event.fault_rip = 0x100u;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!bx_ntvdm_dem_package_facade_v1_dispatch(&ingress, &selection,
+                    &route, &event, &cpu, &result) ||
+                result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+                result.resume_rip != 0x104u ||
+                result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+                result.eflags_values != 0u) return 0;
+        }
+    }
+    {
+        uint8_t bytes[4] = { 0xc4u, 0xc4u, 0x50u, 73u };
+        bx_ntvdm_instruction_window_v1 window;
+        bx_ntvdm_bop_ingress_v1 ingress;
+        bx_ntvdm_bop_provider_selection_v1 selection;
+        bx_ntvdm_dem_package_route_v1 route;
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, 4u);
+        if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+            !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+            bx_ntvdm_dem_package_facade_v1_classify(&ingress, &selection, &route)) return 0;
+    }
+    return 1;
+}
+
 int main(void)
 {
     uint8_t command_bytes[] = { 0x90, 0xc3 };
@@ -76,6 +152,7 @@ int main(void)
     uint32_t token;
 
     profile_initialize(&profile);
+    if (!facade_regression()) return 45;
     drive_types[2] = 3u;
     profile.guest_display_state = BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1;
     profile.ntdos.bytes = sizeof(ntdos_bytes);

@@ -14,6 +14,7 @@
 #include "bx_ntvdm_dem_ioctl_metadata_provider_v1.h"
 #include "bx_ntvdm_dem_misc_plane_v1.h"
 #include "bx_ntvdm_dem_session_lifecycle_provider_v1.h"
+#include "bx_ntvdm_dem_package_facade_v1.h"
 #include <string.h>
 
 static bx_ntvdm_boot_namespace_composition_v1 *active;
@@ -425,6 +426,7 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     bx_ntvdm_instruction_window_v1 window; bx_ntvdm_bop_ingress_v1 ingress;
     bx_ntvdm_bop_provider_selection_v1 selection; bx_ntvdm_cpu_result_v2 result;
     bx_ntvdm_dem_plane_record_v1 dem_plane;
+    bx_ntvdm_dem_package_route_v1 dem_route;
     bx_ntvdm_exception_result_v1 memory_result;
     struct bx_ntvdm_mechanical_action_v1 action, next;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
@@ -466,6 +468,15 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             &window, &ingress, &result) || !bx_ntvdm_cpu_result_v2_valid(&result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH ||
         !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection)) return 0;
+    /* Every DEM member crosses one package gate before an existing provider.
+     * Deferred records produce no result, while the original no-op is complete
+     * here rather than being a detached service recognizer. */
+    if (bx_ntvdm_dem_package_facade_v1_classify(&ingress, &selection,
+            &dem_route)) {
+        if (bx_ntvdm_dem_package_facade_v1_dispatch(&ingress, &selection,
+                &dem_route, &boundary, &cpu, &result)) return outcome(&result, value);
+        dem_plane = dem_route.plane;
+    }
     if (bx_ntvdm_dem_misc_plane_v1_dispatch(&ingress, &selection, &boundary,
             &cpu, &window, &memory_result)) {
         if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
