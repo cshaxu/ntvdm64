@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S23.** Its governing brief is the active
+> **Current effective packet: M0 T200 S24.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S23 -- native engine real-mode entry arming.**
+**Active: M0 T200 S24 -- bounded native engine execution contract.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S23, Ordinary Mode. |
-| Admission And Approval | S22 established a mantle-private active machine stage and mechanical preentry order, but deliberately does not apply the startup plan's real-mode entry or execute the CPU. |
-| Objective | Define and implement the smallest mantle-private operation that applies the already validated real-mode CS:IP entry to the active machine stage, without entering the CPU loop. |
-| Non-goals | No CPU loop, guest run, BOP/provider change, BIOS/POST emulation, new device, fixture-state reuse, OpenNT semantic move, or Bochs core patch. |
-| Reference Baseline | T200 S16 startup-plan entry contract, S17 source preentry map, S21 action publication, and S22 retained machine-stage lifecycle. |
-| Files And ABI Surface | Mantle-owned fixed-width entry record or operation, engine lifecycle binding, and focused x64 `/MT` evidence with no raw Bochs object exposed. |
+| Identifier Mode | M0 T200 S24, Ordinary Mode. |
+| Admission And Approval | S23 arms source-derived `0070:0000` in an active mantle stage but deliberately has no execution loop, watchdog, or terminal contract. |
+| Objective | Define the bounded native-engine execution/terminal contract needed to admit the first post-entry CPU loop, including lifecycle ownership, instruction budget, controlled stop and reset behavior. |
+| Non-goals | No unbounded run, BOP/provider patch, BIOS/POST emulation, new device, fixture-state reuse, OpenNT semantic move, or Bochs core patch. |
+| Reference Baseline | T200 S9 controlled terminal evidence, S11-S16 engine/startup boundary, S21-S23 machine preentry and entry arming, and the retained finite-run stop mechanic. |
+| Files And ABI Surface | A mantle-owned bounded execution request/result contract, engine lifecycle binding, generic stop disposition, and focused x64 `/MT` evidence. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-built x64 `/MT` test proves only the checked CS:IP delta is applied after S22's mechanical preentry, then reset leaves no retained active machine; no CPU loop runs. |
-| Expected Markers | Engine receives no raw Bochs object; bx-vdm supplies the source-derived plan; mantle alone owns the active machine and entry application. |
+| Verification | Source/ABI map and focused x64 `/MT` test prove the first loop has a finite budget, explicit stop result, cleanup on every path, and no unbounded guest run. |
+| Expected Markers | Engine receives no raw Bochs object; mantle owns loop/timer lifecycle; bx-vdm remains the only BOP/service route when such traffic is later observed. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record entry source/ABI, lifecycle order, reset behavior, and exact non-goals; do not call guest startup/COMMAND closed. |
-| Stop Conditions | Any guest instruction, BOP trace, firmware/device behavior, raw Bochs type crossing a C boundary, unvalidated register mutation, or use of a historical snapshot as a default machine state. |
-| Exit Criteria | A source-built native-engine stage applies only the declared real-mode entry after preentry and resets every retained composition/machine resource. |
+| Reporting Requirements | Record execution ownership, stop/result ABI, timer/cleanup behavior, and first-run limitation; do not call guest startup/COMMAND closed merely because a bounded loop runs. |
+| Stop Conditions | Any unbounded execution, BOP trace-driven service patch, firmware/device behavior, raw Bochs type crossing a C boundary, or an execution mechanism that bypasses the declared stage. |
+| Exit Criteria | A source-built engine has one bounded first-loop contract and all terminal paths reset the active machine/composition. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect startup-plan preflight, real-mode entry implementation, CS:EIP observability, machine-stage active/reset guards, and finite-run's private entry mechanism. |
+| Similar-Issue Sweep | Inspect finite-run timer/stop ordering, generic #UD controlled stop, engine terminal result ABI, instruction history/observation boundaries, and all cleanup failures. |
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).
@@ -86,6 +86,10 @@
 > mantle-private mechanical preentry stage: external state, preserve, NTIO
 > write, restore, and cleanup all pass in current x64 `/MT` source closure;
 > see the [machine-stage closure](etc/research/t200-s22-native-engine-machine-stage-closure-001.md).
+
+> **T200 S23 closure:** the active stage accepts only a checked real-mode
+> CS:IP delta; `0070:0000` is copied back after arm and invalid EIP has no
+> mutation. See the [entry arming closure](etc/research/t200-s23-real-mode-entry-arming-closure-001.md).
 
 > **T200 S7/S8 closure:** original no-next-command behavior is a contained
 > typed stop after the declared plan is exhausted; see the [S8 evidence](etc/research/t200-s8-command-exhausted-plan-stop-001.md).

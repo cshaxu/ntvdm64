@@ -39,6 +39,7 @@ int wmain(int argc, wchar_t **argv)
     bx_ntvdm_startup_plan_v1 plan;
     bx_ntvdm_initial_state_v1 initial_state;
     struct bx_ntvdm_mechanical_action_v1 initial_state_action;
+    struct bx_ntvdm_machine_stage_v1_entry entry;
     const uint8_t *payload = 0;
     uint64_t payload_bytes = 0u;
     if (argc != 3 || !request_set(&request, argv[1], argv[2])) return 1;
@@ -54,6 +55,8 @@ int wmain(int argc, wchar_t **argv)
         initial_state_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE ||
         initial_state_action.range_count != 3u ||
         initial_state_action.payload_bytes != 53u ||
+        !bx_ntvdm_composition_runtime_v1_prepare_machine_stage_entry(&entry) ||
+        entry.cs != 0x70u || entry.eip != 0u ||
         !bx_ntvdm_composition_runtime_v1_prepare_startup_plan(&plan, &payload,
             &payload_bytes) || payload == 0 || payload_bytes != 0x8400u ||
         !bx_ntvdm_startup_plan_v1_preflight(&plan, 0x100000u, payload_bytes) ||
@@ -64,6 +67,8 @@ int wmain(int argc, wchar_t **argv)
     if (bx_ntvdm_composition_runtime_v1_copy_initial_state(&initial_state)) return 3;
     if (bx_ntvdm_composition_runtime_v1_prepare_initial_state_action(
             &initial_state_action)) return 3;
+    if (bx_ntvdm_composition_runtime_v1_prepare_machine_stage_entry(&entry))
+        return 3;
     if (bx_ntvdm_composition_runtime_v1_prepare_startup_plan(&plan, &payload,
             &payload_bytes)) return 3;
     return 0;

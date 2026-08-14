@@ -236,3 +236,21 @@ int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_request(
     request->preserved_state_bytes = plan.preserved_state_bytes;
     return bx_ntvdm_machine_stage_v1_request_valid(request);
 }
+
+int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_entry(
+    struct bx_ntvdm_machine_stage_v1_entry *entry)
+{
+    bx_ntvdm_startup_plan_v1 plan;
+    const uint8_t *payload;
+    uint64_t payload_bytes;
+
+    if (entry == 0 || !runtime.installed ||
+        !bx_ntvdm_composition_runtime_v1_prepare_startup_plan(&plan, &payload,
+            &payload_bytes) || payload == 0 ||
+        !bx_ntvdm_startup_plan_v1_preflight(&plan, UINT64_C(0x100000),
+            payload_bytes)) return 0;
+    bx_ntvdm_machine_stage_v1_entry_clear(entry);
+    entry->cs = plan.entry_cpu.cs;
+    entry->eip = plan.entry_cpu.eip;
+    return bx_ntvdm_machine_stage_v1_entry_valid(entry);
+}

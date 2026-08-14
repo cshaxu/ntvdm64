@@ -6,7 +6,8 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
 {
     int install_status;
     struct bx_ntvdm_machine_stage_v1_request machine_stage;
-    uint32_t machine_status, machine_reset_status;
+    struct bx_ntvdm_machine_stage_v1_entry machine_entry;
+    uint32_t machine_status, machine_entry_status, machine_reset_status;
     if (result == 0) return 0;
     if (!bx_ntvdm_engine_request_v1_valid(request))
         return bx_ntvdm_engine_result_v1_set(result,
@@ -30,14 +31,21 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION, 3u);
     }
     machine_status = bx_ntvdm_machine_stage_v1_begin(&machine_stage);
+    machine_entry_status = machine_status == BX_NTVDM_MACHINE_STAGE_V1_OK &&
+        bx_ntvdm_composition_runtime_v1_prepare_machine_stage_entry(
+            &machine_entry) ?
+        bx_ntvdm_machine_stage_v1_arm_real_mode_entry(&machine_entry) :
+        BX_NTVDM_MACHINE_STAGE_V1_REJECTED_ENTRY;
     machine_reset_status = bx_ntvdm_machine_stage_v1_reset();
     bx_ntvdm_composition_runtime_v1_reset();
     if (machine_status != BX_NTVDM_MACHINE_STAGE_V1_OK ||
+        machine_entry_status != BX_NTVDM_MACHINE_STAGE_V1_OK ||
         machine_reset_status != BX_NTVDM_MACHINE_STAGE_V1_OK)
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_MACHINE_FAILURE,
             machine_status != BX_NTVDM_MACHINE_STAGE_V1_OK ? machine_status :
-                machine_reset_status);
+            machine_entry_status != BX_NTVDM_MACHINE_STAGE_V1_OK ?
+                machine_entry_status : machine_reset_status);
     return bx_ntvdm_engine_result_v1_set(result,
         BX_NTVDM_ENGINE_TERMINAL_V1_NONE, 0u);
 }

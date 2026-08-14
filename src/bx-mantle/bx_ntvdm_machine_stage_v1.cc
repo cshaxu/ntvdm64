@@ -1,4 +1,5 @@
 #include "bochs.h"
+#include "bx-core/cpu/cpu.h"
 #include "bx-core/memory/memory.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
@@ -94,4 +95,45 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_reset(void)
 extern "C" int bx_ntvdm_machine_stage_v1_active(void)
 {
   return bx_ntvdm_machine_stage_machine != 0;
+}
+
+extern "C" void bx_ntvdm_machine_stage_v1_entry_clear(
+  struct bx_ntvdm_machine_stage_v1_entry *entry)
+{
+  if (entry == 0) return;
+  memset(entry, 0, sizeof(*entry));
+  entry->magic = BX_NTVDM_MACHINE_STAGE_V1_ENTRY_MAGIC;
+  entry->abi_version = BX_NTVDM_MACHINE_STAGE_V1_VERSION;
+  entry->struct_bytes = sizeof(*entry);
+}
+
+extern "C" int bx_ntvdm_machine_stage_v1_entry_valid(
+  const struct bx_ntvdm_machine_stage_v1_entry *entry)
+{
+  return entry != 0 && entry->magic == BX_NTVDM_MACHINE_STAGE_V1_ENTRY_MAGIC &&
+    entry->abi_version == BX_NTVDM_MACHINE_STAGE_V1_VERSION &&
+    entry->struct_bytes == sizeof(*entry) && entry->reserved0 == 0u &&
+    entry->reserved1 == 0u && entry->eip <= 0xffffu;
+}
+
+extern "C" uint32_t bx_ntvdm_machine_stage_v1_arm_real_mode_entry(
+  const struct bx_ntvdm_machine_stage_v1_entry *entry)
+{
+  if (bx_ntvdm_machine_stage_machine == 0)
+    return BX_NTVDM_MACHINE_STAGE_V1_REJECTED_INACTIVE;
+  if (!bx_ntvdm_machine_stage_v1_entry_valid(entry))
+    return BX_NTVDM_MACHINE_STAGE_V1_REJECTED_ENTRY;
+  bx_cpu.apply_real_mode_entry(entry->cs, entry->eip);
+  return BX_NTVDM_MACHINE_STAGE_V1_OK;
+}
+
+extern "C" uint32_t bx_ntvdm_machine_stage_v1_copy_real_mode_entry(
+  struct bx_ntvdm_machine_stage_v1_entry *entry)
+{
+  if (bx_ntvdm_machine_stage_machine == 0 || entry == 0)
+    return BX_NTVDM_MACHINE_STAGE_V1_REJECTED_INACTIVE;
+  bx_ntvdm_machine_stage_v1_entry_clear(entry);
+  entry->cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
+  entry->eip = bx_cpu.get_eip();
+  return BX_NTVDM_MACHINE_STAGE_V1_OK;
 }

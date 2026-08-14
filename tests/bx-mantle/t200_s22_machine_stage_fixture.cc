@@ -7,6 +7,8 @@
 int main()
 {
   struct bx_ntvdm_machine_stage_v1_request request;
+  struct bx_ntvdm_machine_stage_v1_entry entry;
+  struct bx_ntvdm_machine_stage_v1_entry observed;
   Bit8u preserved[4] = { 0, 0, 0, 0 };
   Bit8u startup[32];
 
@@ -41,11 +43,24 @@ int main()
       !bx_ntvdm_machine_stage_v1_active()) return 2;
   if (bx_ntvdm_machine_stage_v1_begin(&request) !=
       BX_NTVDM_MACHINE_STAGE_V1_REJECTED_ACTIVE) return 3;
+  bx_ntvdm_machine_stage_v1_entry_clear(&entry);
+  entry.cs = 0x70u;
+  if (bx_ntvdm_machine_stage_v1_arm_real_mode_entry(&entry) !=
+      BX_NTVDM_MACHINE_STAGE_V1_OK ||
+      bx_ntvdm_machine_stage_v1_copy_real_mode_entry(&observed) !=
+      BX_NTVDM_MACHINE_STAGE_V1_OK || observed.cs != entry.cs ||
+      observed.eip != entry.eip) return 4;
+  entry.eip = 0x10000u;
+  if (bx_ntvdm_machine_stage_v1_arm_real_mode_entry(&entry) !=
+      BX_NTVDM_MACHINE_STAGE_V1_REJECTED_ENTRY ||
+      bx_ntvdm_machine_stage_v1_copy_real_mode_entry(&observed) !=
+      BX_NTVDM_MACHINE_STAGE_V1_OK || observed.cs != 0x70u ||
+      observed.eip != 0u) return 5;
   if (!bx_mem.copy_from_ordinary_ram(0x714u, sizeof(preserved), preserved) ||
       memcmp(preserved, "\x10\x20\x30\x40", sizeof(preserved)) != 0 ||
       !bx_mem.copy_from_ordinary_ram(0x700u, sizeof(preserved), preserved) ||
-      memcmp(preserved, startup, sizeof(preserved)) != 0) return 4;
+      memcmp(preserved, startup, sizeof(preserved)) != 0) return 6;
   if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK ||
-      bx_ntvdm_machine_stage_v1_active()) return 5;
+      bx_ntvdm_machine_stage_v1_active()) return 7;
   return 0;
 }

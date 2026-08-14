@@ -41,6 +41,8 @@ int bx_ntvdm_composition_runtime_v1_prepare_initial_state_action(
  * identity; it is consumed synchronously by the mantle machine stage. */
 int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_request(
     struct bx_ntvdm_machine_stage_v1_request *request);
+int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_entry(
+    struct bx_ntvdm_machine_stage_v1_entry *entry);
 void bx_ntvdm_composition_runtime_v1_reset(void);
 
 #ifdef __cplusplus

@@ -22,7 +22,23 @@ enum bx_ntvdm_machine_stage_v1_status {
   BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE,
   BX_NTVDM_MACHINE_STAGE_V1_ACTION_FAILURE,
   BX_NTVDM_MACHINE_STAGE_V1_PRESERVE_FAILURE,
-  BX_NTVDM_MACHINE_STAGE_V1_CLEANUP_FAILURE
+  BX_NTVDM_MACHINE_STAGE_V1_CLEANUP_FAILURE,
+  BX_NTVDM_MACHINE_STAGE_V1_REJECTED_INACTIVE,
+  BX_NTVDM_MACHINE_STAGE_V1_REJECTED_ENTRY
+};
+
+#define BX_NTVDM_MACHINE_STAGE_V1_ENTRY_MAGIC UINT32_C(0x42584d45)
+
+/* A real-mode control-transfer delta.  It deliberately excludes general
+ * registers, flags, descriptor caches, and any machine object. */
+struct bx_ntvdm_machine_stage_v1_entry {
+  uint32_t magic;
+  uint32_t abi_version;
+  uint32_t struct_bytes;
+  uint32_t reserved0;
+  uint16_t cs;
+  uint16_t reserved1;
+  uint32_t eip;
 };
 
 struct bx_ntvdm_machine_stage_v1_request {
@@ -51,6 +67,16 @@ uint32_t bx_ntvdm_machine_stage_v1_begin(
 /* Releases the retained machine; no Bochs object crosses this ABI. */
 uint32_t bx_ntvdm_machine_stage_v1_reset(void);
 int bx_ntvdm_machine_stage_v1_active(void);
+void bx_ntvdm_machine_stage_v1_entry_clear(
+  struct bx_ntvdm_machine_stage_v1_entry *entry);
+int bx_ntvdm_machine_stage_v1_entry_valid(
+  const struct bx_ntvdm_machine_stage_v1_entry *entry);
+/* Applies only the checked real-mode CS:IP delta to an active stage. */
+uint32_t bx_ntvdm_machine_stage_v1_arm_real_mode_entry(
+  const struct bx_ntvdm_machine_stage_v1_entry *entry);
+/* Copies the currently armed CS:IP without exposing the native CPU object. */
+uint32_t bx_ntvdm_machine_stage_v1_copy_real_mode_entry(
+  struct bx_ntvdm_machine_stage_v1_entry *entry);
 
 #ifdef __cplusplus
 }
