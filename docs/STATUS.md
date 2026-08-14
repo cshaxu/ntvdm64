@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S123.** Its governing brief is the active
+> **Current effective packet: M0 T198 S124.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S123 -- repair and verify the common zero-byte result-only transaction seam.**
+**Active: M0 T198 S124 -- one exact-input native lifecycle regression after S123.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,19 +22,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S123, Ordinary Mode. |
-| Admission And Approval | S122 source-proves a single common transaction-mechanics failure: an empty result-only bulk transaction is sent as a mantle WRITE. |
-| Objective | Preserve the typed resume result while skipping only range-less zero-byte mechanical writes; focused-test/compile the composition, then admit one regression only if needed. |
-| Non-goals | No BOP selector/provider change, guest-byte copy, host capability, Bochs core/mantle edit, ROM/VGA/device import or broad rebuild. |
-| Reference Baseline | S122 lifecycle observation and `t198-s123-zero-byte-result-transaction-fix-001.md`. |
-| Files And ABI Surface | `src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c`, its focused tests and registered native derivative only. |
+| Identifier Mode | M0 T198 S124, Ordinary Mode. |
+| Admission And Approval | S123's shared zero-byte result-only seam has focused source/test/compile closure. One native exact-input run is needed to verify the real AUTOEXEC EOF resumes. |
+| Objective | Rebuild and execute exactly one registered native fixture, export the lifecycle ledger, and classify the next reached BOP boundary. |
+| Non-goals | No retry, BOP/provider/ABI expansion, host capability, Bochs core/mantle edit, ROM/VGA/device import, broad rebuild or continuity claim. |
+| Reference Baseline | S122 lifecycle observation and S123 focused composition test. |
+| Files And ABI Surface | Registered native derivative/evidence only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused contract test proves zero-byte result resumes without a mantle write; CPU5/x64 compile passes. |
-| Expected Markers | `AX=0`, CF clear, normal BOP resume; no guest RAM range or payload. |
+| Verification | A sole `runs=1` record shows `4E534005` accepted with `AX=0`, then records the next bounded BOP/terminal state. |
+| Expected Markers | No empty mechanical WRITE, no provider expansion, and one ordered lifecycle ledger. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record seam cause, exact no-write rule and focused verification. |
-| Stop Conditions | Selector/provider/ABI expansion, any host or Bochs change, or an unadmitted guest run. |
-| Exit Criteria | The empty AUTOEXEC fast-read resumes through the shared transaction contract, or a single exact remaining defect is evidenced. |
+| Reporting Requirements | Record provenance, run count, EOF result and next source-owned boundary. |
+| Stop Conditions | A second run, any semantic expansion, host/Bochs change or broad rebuild. |
+| Exit Criteria | Native evidence confirms/refutes the source/test result and leaves one exact next task. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
