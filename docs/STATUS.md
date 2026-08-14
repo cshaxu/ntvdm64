@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S28.** Its governing brief is the active
+> **Current effective packet: M0 T199 S29.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S28 -- XMS/DPMI whole-package disposition reconciliation.**
+**Active: M0 T199 S29 -- COMMAND whole-provider composability reassessment.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S28, Ordinary Mode. |
-| Admission And Approval | T199 S8--S11 and S21--S27 now provide the complete XMS/DPMI source and machine-capability record. The owner-authorized whole-package strategy requires one reconciled provider disposition before any family regression or trace. |
-| Objective | Reconcile every XMS/DPMI identity, current facade behavior and native capability dependency into one whole-package disposition and regression plan. |
-| Non-goals | No new BOP implementation, per-service trace patch, fabricated failure result, capability implementation, adapter policy, or bx-core modification. |
-| Reference Baseline | T199 S8--S11, S21--S27, current `bx_ntvdm_xms_dpmi_plane_v1` source/tests, and all XMS/DPMI original matrices. |
-| Files And ABI Surface | Package disposition/reconciliation record and focused existing-facade regression only; no new runtime ABI is admitted. |
+| Identifier Mode | M0 T199 S29, Ordinary Mode. |
+| Admission And Approval | The owner-required whole-package strategy forbids treating the partial `54:04` and `54:0E` evidence as a closed COMMAND component. T199 S5--S7 require reassessment against the current composition boundary before provider implementation is admitted. |
+| Objective | Re-evaluate all COMMAND identities as one original host component: composability, ABI, lifecycle, capability dependencies, source-derived fallback boundary and family-wide failure disposition. |
+| Non-goals | No individual `54:xx` patch, trace-led service selection, claim that partial endpoint evidence closes COMMAND, DOS-kernel reimplementation, or Bochs modification. |
+| Reference Baseline | T199 S5--S7, current COMMAND facade/provider sources and tests, original `nt_bop.c` routing evidence, and prior `54:04`/`54:0E` limited observations. |
+| Files And ABI Surface | Updated source/ABI/failure map and provider-composability decision under `docs/etc/research`; no runtime ABI or endpoint implementation is admitted until the full package decision exists. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Enumerate every `52:00..0B` and `53:00..18` identity against actual facade classification and original failure behavior; prove no member bypasses the package disposition. |
-| Expected Markers | One complete package table distinguishes C1/C2-ready translation prerequisites from C3/C4/C5/C6 blocked services and preserves `53:12` unavailable. |
+| Verification | Enumerate every COMMAND identity and its original owner/ABI/failure path; inspect actual facade/provider behavior and prove partial endpoints do not bypass a whole-component disposition. |
+| Expected Markers | One explicit package decision establishes whether independently composable original code exists, what CLI capabilities it requires, and which whole-provider route is admissible. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record every identity's exact disposition, regression output, original failure constraints, and preserved exclusions. |
-| Stop Conditions | Any member requiring a new unadmitted machine capability, a source-derived per-service success result, selector/service logic outside bx-vdm, or trace-led scope change. |
-| Exit Criteria | All 37 package identities have one reconciled disposition and focused regression; no false claim that C1/C2 alone closes either provider. |
+| Reporting Requirements | Record source paths/hashes, all identity dispositions, actual current endpoint limits, original failure constraints, and preserved exclusions. |
+| Stop Conditions | Need for a one-service patch, a DOS/Bochs semantic migration, an ambient host dependency, selector knowledge outside bx-vdm, or trace-led scope change. |
+| Exit Criteria | Full COMMAND package has an evidence-backed provider-composability disposition; no individual endpoint implementation begins unless the whole package is admitted. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
-| Similar-Issue Sweep | Audit ingress routing, original bounds/failure behavior, facade default results, all C1--C6 dependencies, and DPMI VCD special unavailability together. |
+| Similar-Issue Sweep | Audit bootstrap, launch, current directory, console/keyboard, execution, environment, error/exit lifecycle, host capabilities, and all existing COMMAND facade endpoints together. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 

@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1251 |
 | --- | --- |
-| Generated UTC | 2026-08-14T06:08:24Z |
+| Generated UTC | 2026-08-14T06:08:53Z |
 
 ## Entries
 
@@ -1265,7 +1265,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | fd7238086dc46754083185656ce5cb0b58a60aa11f5405f0c6fdc3ba1b52326c |
+| STATUS.md | principal control document | 23cef91916f5ff2a397ef32f5d90aa67a133d7b98b51c09494a5457d37966f7d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4bf0f6507b35494e9b2db550b08cfb66cb44f542b4aa3128ec63c1466ee1c6b4 |
