@@ -924,8 +924,7 @@ int bx_ntvdm_adapter_runtime_v4_dispatch(
         return 1;
     }
     if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x02u) &&
-        bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(
-            &bx_ntvdm_adapter_runtime.boot_namespace_provider.readonly_namespace, event, cpu_before,
+        bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(event, cpu_before,
             window, &bx_ntvdm_adapter_runtime.cmd_comspec_bootstrap, action)) {
         if (bx_ntvdm_host_session_v1_queue_guest_gather_read(
                 &bx_ntvdm_adapter_runtime.session, event, cpu_before, action))
@@ -1033,8 +1032,7 @@ int bx_ntvdm_adapter_runtime_v4_complete_guest_gather_read(
         *result = transaction.result;
         return 1;
     }
-    if (bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(
-            &bx_ntvdm_adapter_runtime.boot_namespace_provider.readonly_namespace, boundary, cpu_before,
+    if (bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(boundary, cpu_before,
             action, bytes, byte_count, &bx_ntvdm_adapter_runtime.cmd_comspec_bootstrap,
             result)) {
         return bx_ntvdm_host_session_v1_complete_guest_gather_read(

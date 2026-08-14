@@ -86,8 +86,44 @@ int main(void)
     if (outcome.resume_rip != 0x104) return 5;
     if (ram[0x10020] == 0) return 6;
 
+    /* COMMAND bootstrap is one classified pair: COMSPEC capture, environment
+     * size retry and publication, followed by original-compatible repeats. */
+    event_initialize(&event, 0x54, 0x02);
+    event.ds = 0x101u; event.edx = 0x20u; event.eax = 0xaa00u;
+    memcpy(ram + 0x1030, "C:\\COMMAND.COM", 15u);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != 1u ||
+        outcome.gpr16_values[0] != 0xaa01u ||
+        composition.command_bootstrap.stage !=
+            BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY) return 23;
+    event_initialize(&event, 0x54, 0x0f);
+    event.es = 0x200u; event.ebx = 1u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 2u ||
+        composition.command_bootstrap.stage !=
+            BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY) return 24;
+    event.ebx = 2u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 0u ||
+        memcmp(ram + 0x2000, "COMSPEC=C:\\COMMAND.COM", 23u) != 0 ||
+        composition.command_bootstrap.stage !=
+            BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED) return 25;
+    event_initialize(&event, 0x54, 0x02);
+    event.eax = 0xbb00u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != 0u) return 26;
+    event_initialize(&event, 0x54, 0x0f);
+    event.es = 0x200u; event.ebx = 0xffffu;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 0u) return 27;
+
     event_initialize(&event, 0x5f, 0);
-    event.eax = 0xbeefu; event.ds = 0x1000u; event.esi = 0x40u;
+    event.eax = 0xbeefu; event.cs = event.ds = 0x1000u; event.esi = 0x40u;
     ram[0x10062] = 0x70u; ram[0x10063] = 0u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
@@ -96,8 +132,7 @@ int main(void)
         outcome.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         ram[0x10070] != BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1) return 21;
     event_initialize(&event, 0x5f, 0);
-    event.eax = 0xbeefu; event.ds = 0xfffcu; event.esi = 0u;
-    ram[0xfffe2] = 0xffu; ram[0xfffe3] = 0xffu;
+    event.eax = 0xbeefu; event.cs = 0xffffu; event.ds = 0xfffcu; event.esi = 0u;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 22;
 
     event_initialize(&event, 0x50, 0x11);

@@ -2,18 +2,20 @@
 #define BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_H
 
 #include "bx_ntvdm_boot_namespace_plane_v1.h"
+#include "bx_ntvdm_cmd_comspec_bootstrap_service.h"
 #include "bx_ntvdm_command_launch_plane_v1.h"
 #include "bx_ntvdm_dem_error_lock_plane_v1.h"
 #include "bx_ntvdm_dem_gset_plane_v1.h"
 #include "bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_MAGIC 0x42584e43u
-#define BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION 2u
+#define BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION 3u
 
 typedef struct bx_ntvdm_boot_namespace_composition_v1 {
     uint32_t magic, abi_version, struct_bytes, bound;
     uint32_t guest_display_state;
     bx_ntvdm_boot_namespace_plane_v1 plane;
+    bx_ntvdm_cmd_comspec_bootstrap_v1 command_bootstrap;
     bx_ntvdm_command_launch_plane_v1 launch;
     bx_ntvdm_dem_error_lock_plane_v1 error_lock;
     bx_ntvdm_dem_gset_plane_v1 gset;
