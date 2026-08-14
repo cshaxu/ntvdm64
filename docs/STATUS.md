@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S23.** Its governing brief is the active
+> **Current effective packet: M0 T199 S24.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S23 -- C2 extended-memory capability admission.**
+**Active: M0 T199 S24 -- C2 bounded aperture allocator implementation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,9 +22,9 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S23, Ordinary Mode. |
+| Identifier Mode | M0 T199 S24, Ordinary Mode. |
 | Admission And Approval | T199 S21 records BX-MANTLE-078 and admits the fixed selector-blind C1 implementation. |
-| Objective | Establish C2 extended-memory aperture/allocation source ownership and a selector-blind ABI before implementation. |
+| Objective | Implement the mantle-private C2 fixed-width aperture allocator and focused lifecycle/bounds regression. |
 | Non-goals | No XMS/DPMI BOP result, adapter state, allocator/UMB/INT15 work, selector recognition below bx-vdm, trace, or bx-core modification. |
 | Reference Baseline | T199 S21 admission and BX-MANTLE-078. |
 | Files And ABI Surface | New mantle request/result wrapper, minimal-machine lifecycle gate, focused MSVC x64 `/MT` fixture and source-boundary check. |
@@ -34,7 +34,7 @@
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
 | Reporting Requirements | Record exact artifact, compiler/CRT, transition results, rejected results, and preserved exclusions. |
 | Stop Conditions | Need for a bx-core patch, product shell, callback/pointer, selector knowledge, or adapter dependency. |
-| Exit Criteria | One C2 design is ready for bounded selector-blind implementation without an XMS/DPMI BOP result. |
+| Exit Criteria | C2 allocation/free/reallocation/query/move are source-built and regression-closed without a BOP result. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit A20 initialization, wrap semantics, reset/cleanup, x86 CPU mode callers, and all existing A20 configuration paths together. |
 
