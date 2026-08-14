@@ -14,6 +14,7 @@
 typedef struct bx_ntvdm_readonly_namespace_file_v1 {
     const uint8_t *bytes;
     uint64_t byte_count;
+    uint16_t dos_time, dos_date;
     wchar_t path[BYOB_PROFILE_GUEST_PATH_MAX_CHARS];
 } bx_ntvdm_readonly_namespace_file_v1;
 
@@ -46,5 +47,8 @@ int bx_ntvdm_readonly_namespace_v1_read(
     uint32_t requested_bytes, uint32_t *read_bytes);
 int bx_ntvdm_readonly_namespace_v1_close(
     bx_ntvdm_readonly_namespace_v1 *value, uint32_t token);
+int bx_ntvdm_readonly_namespace_v1_file_times(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token,
+    uint16_t *dos_time, uint16_t *dos_date);
 
 #endif

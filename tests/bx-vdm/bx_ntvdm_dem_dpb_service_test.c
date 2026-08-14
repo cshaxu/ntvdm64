@@ -25,17 +25,17 @@ int main(void)
             &transaction, payload) || transaction.writes.write_count != 4u ||
         transaction.writes.payload_bytes != 12u ||
         transaction.writes.writes[0].guest_physical_address != 0x1200u ||
-        transaction.writes.writes[1].guest_physical_address != 0x1219u ||
-        transaction.writes.writes[2].guest_physical_address != 0x1221u ||
-        transaction.writes.writes[3].guest_physical_address != 0x123au ||
+        transaction.writes.writes[1].guest_physical_address != 0x121bu ||
+        transaction.writes.writes[2].guest_physical_address != 0x1223u ||
+        transaction.writes.writes[3].guest_physical_address != 0x123eu ||
         payload[0] != 0u || payload[1] != 0u || payload[2] != 0x21u ||
         payload[3] != 0x02u || payload[4] != 0u || payload[5] != 0x01u ||
         payload[6] != 2u || payload[7] != 2u || payload[8] != 0xffu ||
         payload[9] != 0xffu || payload[10] != 0xffu || payload[11] != 0xffu ||
         transaction.result.cpu_delta.gpr16_write_mask != (1u << 6) ||
-        transaction.result.cpu_delta.gpr16_values[6] != 0x242u ||
+        transaction.result.cpu_delta.gpr16_values[6] != 0x246u ||
         transaction.result.resume_rip != 0x758cu) return 1;
-    cpu.ebp = 0xffdfu;
+    cpu.ebp = 0xffddu;
     if (bx_ntvdm_dem_dpb_service_v1_prepare(inventory, &event, &cpu, &window,
             &transaction, payload)) return 2;
     memset(inventory, 0, sizeof(inventory));

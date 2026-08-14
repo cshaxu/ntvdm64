@@ -1,6 +1,16 @@
 #include "bx_ntvdm_dem_session_lifecycle_provider_v1.h"
+#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 
 #include <string.h>
+
+/* The lifecycle provider itself makes no mechanical action.  The shared
+ * composition closure references the mantle ABI, so provide a local fixture
+ * stub to keep this owner/precedence test independently linkable. */
+int bx_ntvdm_mantle_execute_mechanical_action_v1(
+    struct bx_ntvdm_mechanical_action_v1 *action)
+{
+    return action != 0 && bx_ntvdm_mechanical_action_v1_valid(action);
+}
 
 static int provider_initialize(bx_ntvdm_boot_namespace_provider_v1 *provider)
 {
@@ -55,8 +65,9 @@ int main(void)
     cpu.ebx = 0xabcd1234u;
     if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
         !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
-        selection.precedence != BX_NTVDM_BOP_PROVIDER_PRECEDENCE_SOURCE_DERIVED_AFTER_BLOCKER ||
+        selection.precedence != BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT ||
         !bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) ||
+        plane.component != BX_NTVDM_DEM_COMPONENT_MISC ||
         !bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, &ingress,
             &selection, &plane, &event, &cpu, &result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x404u ||

@@ -4,7 +4,8 @@
 static int existing_provider(uint8_t service)
 {
     switch (service) {
-    case 1u: case 2u: case 4u: case 5u: case 12u: case 13u: case 14u:
+    case 0u: case 1u: case 2u: case 4u: case 5u: case 7u: case 9u:
+    case 11u: case 12u: case 13u: case 14u: case 15u: case 16u:
         return 1;
     default: return 0;
     }

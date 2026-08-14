@@ -33,16 +33,22 @@ int bx_ntvdm_readonly_namespace_v1_initialize(
     memset(value, 0, sizeof(*value));
     value->files[0].bytes = command->bytes;
     value->files[0].byte_count = command->byte_count;
+    value->files[0].dos_time = selection->command_metadata.dos_time;
+    value->files[0].dos_date = selection->command_metadata.dos_date;
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[0].path,
             sizeof(value->files[0].path) / sizeof(value->files[0].path[0]),
             selection->command_placement.path)) return 0;
     value->files[1].bytes = bx_ntvdm_minimal_config_v1;
     value->files[1].byte_count = sizeof(bx_ntvdm_minimal_config_v1) - 1u;
+    value->files[1].dos_time = selection->config_metadata.dos_time;
+    value->files[1].dos_date = selection->config_metadata.dos_date;
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[1].path,
             sizeof(value->files[1].path) / sizeof(value->files[1].path[0]),
             selection->config_file.path)) return 0;
     value->files[2].bytes = bx_ntvdm_empty_autoexec_v1;
     value->files[2].byte_count = 0u;
+    value->files[2].dos_time = selection->autoexec_metadata.dos_time;
+    value->files[2].dos_date = selection->autoexec_metadata.dos_date;
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[2].path,
             sizeof(value->files[2].path) / sizeof(value->files[2].path[0]),
             selection->autoexec_file.path)) return 0;
@@ -73,6 +79,8 @@ int bx_ntvdm_readonly_namespace_v1_append_target(
         value->files[3].path[0] != L'\0') return 0;
     value->files[3].bytes = target->bytes;
     value->files[3].byte_count = target->byte_count;
+    value->files[3].dos_time = selection->target_metadata.dos_time;
+    value->files[3].dos_date = selection->target_metadata.dos_date;
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[3].path,
             sizeof(value->files[3].path) / sizeof(value->files[3].path[0]), expected)) return 0;
     value->file_count = 4u;
@@ -91,6 +99,8 @@ int bx_ntvdm_readonly_namespace_v1_append_terminal_quit(
         selection->declared_targets[1].placement.drive_index != value->drive_index) return 0;
     value->files[4].bytes = terminal_quit->bytes;
     value->files[4].byte_count = terminal_quit->byte_count;
+    value->files[4].dos_time = selection->terminal_quit_metadata.dos_time;
+    value->files[4].dos_date = selection->terminal_quit_metadata.dos_date;
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[4].path,
             sizeof(value->files[4].path) / sizeof(value->files[4].path[0]), L"\\QUIT.COM")) return 0;
     value->file_count = 5u;
@@ -152,5 +162,17 @@ int bx_ntvdm_readonly_namespace_v1_close(
     value->offset = 0u;
     ++value->generation;
     if (value->generation == 0u) ++value->generation;
+    return 1;
+}
+
+int bx_ntvdm_readonly_namespace_v1_file_times(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token,
+    uint16_t *dos_time, uint16_t *dos_date)
+{
+    if (!value || !dos_time || !dos_date || !value->open ||
+        token != value->generation || value->open_file_index >= value->file_count)
+        return 0;
+    *dos_time = value->files[value->open_file_index].dos_time;
+    *dos_date = value->files[value->open_file_index].dos_date;
     return 1;
 }

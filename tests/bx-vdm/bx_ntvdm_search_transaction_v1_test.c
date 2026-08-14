@@ -63,7 +63,9 @@ int main(void)
         memcmp(payload, "ZETA    TXT", 11u) != 0) return 5;
     memset(fcb, 0, sizeof(fcb));
     if (bx_ntvdm_search_transaction_v1_fcb_next(&value, &event, &cpu, 0x2222u,
-        0xa00u, fcb, &tx, payload, &payload_bytes) != -1 || payload_bytes != 0u)
+        0xa00u, fcb, &tx, payload, &payload_bytes) != 0 || payload_bytes != 8u ||
+        tx.result.cpu_delta.gpr16_values[0] != 0x12u ||
+        tx.result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF)
         return 6;
     memcpy(path, "C:REL\\*.TXT", 11u);
     if (bx_ntvdm_search_transaction_v1_path_first(&value, 0, &event, &cpu,

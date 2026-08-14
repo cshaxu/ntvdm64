@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S29.** Its governing brief is the active
+> **Current effective packet: M0 T199 S37.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S29 -- COMMAND whole-provider composability reassessment.**
+**Active: M0 T199 S37 -- DEM whole-package provider implementation.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S29, Ordinary Mode. |
-| Admission And Approval | The owner-required whole-package strategy forbids treating the partial `54:04` and `54:0E` evidence as a closed COMMAND component. T199 S5--S7 require reassessment against the current composition boundary before provider implementation is admitted. |
-| Objective | Re-evaluate all COMMAND identities as one original host component: composability, ABI, lifecycle, capability dependencies, source-derived fallback boundary and family-wide failure disposition. |
-| Non-goals | No individual `54:xx` patch, trace-led service selection, claim that partial endpoint evidence closes COMMAND, DOS-kernel reimplementation, or Bochs modification. |
-| Reference Baseline | T199 S5--S7, current COMMAND facade/provider sources and tests, original `nt_bop.c` routing evidence, and prior `54:04`/`54:0E` limited observations. |
-| Files And ABI Surface | Updated source/ABI/failure map and provider-composability decision under `docs/etc/research`; no runtime ABI or endpoint implementation is admitted until the full package decision exists. |
+| Identifier Mode | M0 T199 S37, Ordinary Mode. |
+| Admission And Approval | The owner directs that T199 implement all BOP identities by complete OpenNT component packages.  DEM already has its source/ABI/failure map (S2/S3), facade (S4) and one session route (S30); this S replaces remaining placeholder dispositions with a source-governed DEM provider package. |
+| Objective | Implement the complete DEM `50:xx` package as one provider family: namespace/search, session lifecycle, device/drive state, DOS load/state, error/lock, VDD/notification and original no-op paths.  Every callable identity must reach an original OpenNT provider, a contained-capability adaptation of one, a source-derived rehost, or that identity's source-proven terminal failure; no callable identity may retain a generic `package-deferred` placeholder. |
+| Non-goals | No trace-led service selection, no individual-service patch packet, no direct execution of historical `nt_bop.c`, no change to Bochs BOP recognition, no DOS/BIOS semantics in bx-vdm, and no ambient NT-host dependency.  A native trace is not an implementation technique; it is run once only after the complete package and its family regression are ready. |
+| Reference Baseline | S2/S3/S4/S30 DEM records; OpenNT DEM/NTVDM source; common ingress and provider registry; S36's native #UD integration evidence; mantle C1/C2 boundaries. |
+| Files And ABI Surface | DEM package session/provider translations, contained CLI capability interfaces where source requires them, common ingress registration, all-family source-built regression, and a source/failure record.  All Bochs/mantle calls remain behind registered typed ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Enumerate every COMMAND identity and its original owner/ABI/failure path; inspect actual facade/provider behavior and prove partial endpoints do not bypass a whole-component disposition. |
-| Expected Markers | One explicit package decision establishes whether independently composable original code exists, what CLI capabilities it requires, and which whole-provider route is admissible. |
+| Verification | First prove every `50:xx` callable identity through source-built family regression, including lifecycle, success, source-proven failure and negative boundary cases.  Then run one bounded native trace only as package integration verification; it may report a machine/guest frontier but cannot admit a new one-service task. |
+| Expected Markers | A reproducible DEM package build and family regression with no generic deferred route, followed by one explicitly bounded integration trace and a disposition report for any reached external prerequisite. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record source paths/hashes, all identity dispositions, actual current endpoint limits, original failure constraints, and preserved exclusions. |
-| Stop Conditions | Need for a one-service patch, a DOS/Bochs semantic migration, an ambient host dependency, selector knowledge outside bx-vdm, or trace-led scope change. |
-| Exit Criteria | Full COMMAND package has an evidence-backed provider-composability disposition; no individual endpoint implementation begins unless the whole package is admitted. |
-| Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
-| Similar-Issue Sweep | Audit bootstrap, launch, current directory, console/keyboard, execution, environment, error/exit lifecycle, host capabilities, and all existing COMMAND facade endpoints together. |
+| Reporting Requirements | Record source paths/hashes, provider precedence decision and blocker where a source-derived rehost is necessary, ABI/layout/return contracts, every identity's final disposition, source-proven failure constraints, contained host-capability scope, and the bounded trace result. |
+| Stop Conditions | Need for a one-service patch, a DOS/Bochs semantic migration, a direct `nt_bop.c`/historical product-shell link, an ambient host dependency, selector knowledge outside bx-vdm, or a trace-led scope change. |
+| Exit Criteria | All callable DEM identities have a non-placeholder provider or source-proven terminal failure, the complete family regression passes, and one bounded trace has been recorded strictly as integration evidence. |
+| Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only, not a reason to postpone implementation. |
+| Similar-Issue Sweep | Audit all `50:xx` identities together: namespace/search, DOS load and state, drive/device and session state, error/lock, VDD/notifications, original no-ops, provider precedence, no-bypass routing, common ingress, and composition non-regression. |
 
 > **T198 transfer fact:** S134's single authorized run stopped at `54:01`, not `54:04`. It is a non-closure observation retained in T198 history; it neither closes COMMAND nor admits a follow-on endpoint task.
 
@@ -44,6 +44,325 @@
 > callable members plus sentinel, preserves seven original no-ops and the
 > separate `50:42` exception, and gates retained providers without a trace;
 > see [S4 regression](etc/research/t199-s4-dem-package-facade-regression-001.md).
+
+> **T199 S30 completion:** DEM now has one source-built package session and
+> one composition dispatch path for all 73 callable identities; existing DEM
+> providers and `50:36` are session-gated without a trace.  See [S30
+> regression](etc/research/t199-s30-dem-package-session-regression-001.md).
+
+> **T199 S37 correction in progress:** `demdisp.c` slot audit is the
+> controlling DEM identity source. It corrected an unaccepted clock-slot
+> error and FastRead precedence before package closure; whole-family
+> provider-decline leaks remain active implementation work, not trace work.
+> See [canonical audit](etc/research/t199-s37-dem-canonical-dispatch-audit-001.md).
+
+> **T199 S37 regression milestone:** an unbound DEM-only x64 `/MT` fixture
+> now exercises every canonical `50:00..48` identity through the package
+> session, with no raw pass-through result. It also distinguishes `50:02`'s
+> original token-zero success from `50:1B`'s contained invalid-address
+> failure. This is routing/containment evidence, not whole-business-semantics
+> closure; no native trace was run. See [family regression]
+> (etc/research/t199-s37-dem-package-family-regression-001.md).
+
+> **T199 S37 namespace progress:** immutable namespace mutations `50:01`,
+> `03-06`, `08`, `17-18`, and `22` now use a dedicated source-derived
+> readonly-provider failure contract (AX=5, CF=1), rather than the common DEM
+> fallback. The r8 full-family regression passes; no native trace was run.
+
+> **T199 S37 FCB progress:** the FCB provider now retains `50:2E` null-handle
+> close success and `50:30 demDate16` packed-time semantics; open/search/write
+> FCB operations remain explicit contained failures pending a complete FCB
+> capability. The r9 full-family regression passes; no native trace was run.
+
+> **T199 S37 error/lock progress:** `50:32`, `50:33`, and `50:3F` now belong
+> to the one DEM error/lock session plane: copied registration, no-retry
+> AX=FF/CF failure, and contained lock failure respectively. The r10
+> full-family regression passes; no native trace was run.
+
+> **T199 S37 misc progress:** the non-debug, non-WOW, no-device CLI branch
+> for `50:1D`, `23`, `34-3A`, and `3E` is now a source-derived misc-plane
+> normal return, rather than generic failure. The r11 full-family regression
+> passes; no native trace was run.
+
+> **T199 S37 FCB/search admission:** the next package is defined as the
+> `50:0A/0C` SRCHBUF search capability, with its shared FCB layout and
+> per-PDB continuation state. Its source/ABI/failure map is in
+> [FCB search design](etc/research/t199-s37-fcb-search-capability-design-001.md);
+> no native trace admits or narrows it.
+
+> **T199 S37 FCB/search BOP milestone:** the immutable profile-entry FCB
+> first/next transaction is now attached to the DEM package's checked
+> copied-memory path.  The r27 source-built fixture proves `50:0A` first,
+> `50:0C` continuation, and exhausted `50:0C` no-more-files (AX=12, CF=1)
+> over the profile's two `.COM` entries, plus a no-match `50:0A` search with
+> the same AX=12/CF=1 and cleared continuation contract.  Malformed/foreign-
+> token and complete FCB-family cases remain active S37 work; r29 also proves
+> that a foreign-PDB continuation is rejected as AX=12/CF=1. No native trace
+> was run.
+
+> **T199 S37 raw-media/IOCTL progress:** r28 attaches `50:21`, `29`, and
+> `2A` to one source-derived no-device provider after the admitted `50:21`
+> metadata capability. Unsupported IOCTL returns the original
+> `ERROR_INVALID_FUNCTION` AX=1/CF result; absolute read/write return the
+> original no-BDS `DOS_DRIVE_NOT_READY` AX=21/CF result. No device, INT13,
+> raw host drive, or native trace was introduced.
+
+> **T199 S37 volume-capability foundation:** r31 source-builds a new
+> adapter-local immutable host-volume snapshot. It captures only volume
+> metadata for CLI-admitted drives during setup and retains no host path or
+> handle; a deterministic regression proves non-admitted metadata is removed
+> at that boundary. r32 attaches `50:0E demGetDriveFreeSpace`: its
+> source-built package regression verifies the DOS-form AL/BX/CX/DX/SI result
+> from an admitted immutable volume record. r34 attaches `50:10` get through
+> checked guest-RAM writes of serial, volume label, and filesystem; its set
+> branch retains the original CF-only unsupported result.
+
+> **T199 S37 volume capability r35:** the full DEM family fixture now
+> separately asserts `50:10` set's no-GPR-write/CF-only contract, and the
+> formal boot-namespace composition exposes a pre-bind immutable-volume
+> snapshot setter compiled in the same x64 `/MT` closure. No native trace was
+> run.
+
+> **T199 S37 DPB ABI correction:** source layout audit established that
+> `50:46 demGetDPBList` uses a 35-byte packed `DPB` stride and writes `Next`
+> at original offset 27, after `MediaID` and `FirstAccess`; prior 25-byte
+> placement and 33-byte stride were both incorrect. `50:25` full-DPB
+> disposition remains active work.
+
+> **T199 S37 DPB provider r41:** `50:25 demGetDPB` now restores OpenNT's
+> no-BDS fake-DPB success branch from an admitted immutable volume snapshot,
+> including the original selective writes within the packed 35-byte record.
+> An unadmitted drive reaches the documented source-derived AX=5/CF terminal
+> result. Full DEM x64 `/MT` regression passes; no native trace was run.
+
+> **T199 S37 computer-name disposition r42:** `50:41` now takes the original
+> `GetComputerNameOem` failure branch because the CLI profile declares no
+> stable guest identity: it writes NUL, clears only CH, and never queries the
+> live host name. Full DEM x64 `/MT` regression passes; no native trace was
+> run.
+
+> **T199 S37 default-drive disposition r45:** `50:1A` now preserves
+> `demSetDefaultDrive`'s checked first-byte `DL+'A'` guard and its
+> AX=1/CF mismatch result. A matching path requires the historical NT-host
+> current-directory operation, which this CLI profile does not admit, so it
+> reaches an explicit AX=5/CF contained-capability terminal result instead of
+> touching the host process directory. Full DEM x64 `/MT` regression passes;
+> no native trace was run. See [default-drive disposition]
+> (etc/research/t199-s37-dem-gset-default-drive-disposition-001.md).
+
+> **T199 S37 FCB handle-family disposition r46:** `demfcb.c`'s delete,
+> rename, create/open, I/O and file-info operations now name their shared
+> missing NT-handle/writable-filesystem backend explicitly, each with AX=5/CF.
+> The historical zero-handle close success remains separate. This is not FCB
+> package closure: immutable search and layout/continuation edge cases remain
+> active S37 work. Full DEM x64 `/MT` regression passes; no native trace was
+> run. See [FCB handle-family disposition]
+> (etc/research/t199-s37-dem-fcb-handle-family-disposition-001.md).
+
+> **T199 S37 FCB search boundary r47:** the shared `50:0A` FCB-search
+> provider rejects an aperture-crossing 128-byte pathname before any
+> mechanical read or namespace query, then reaches the explicit FCB AX=5/CF
+> result. Full DEM x64 `/MT` regression passes; no native trace was run.
+
+> **T199 S37 miscellaneous lifecycle r48:** `50:3D demExitVDM` is verified
+> as a typed controlled stop, with no synthetic guest resume, register delta
+> or flags delta. This supersedes T198's then-current deferred-disposition
+> statement without changing its historical fatal-path observation. Full DEM
+> x64 `/MT` regression passes; no native trace was run.
+
+> **T199 S37 working ledger:** all `50:00..48` identities now have a current
+> owner/package disposition and shared next-step classification in the
+> [working service ledger]
+> (etc/research/t199-s37-dem-working-service-ledger-001.md). It is a control
+> record for implementation, not a DEM-closure claim.
+
+> **T199 S37 pre-trace coverage audit:** the seven source/ABI evidence
+> families now mechanically cover each of the 73 callable `50:00..48`
+> identities exactly once, with no generic raw pass-through in fresh r87
+> all-DEM regression.  This is static package evidence, not a native-run or
+> runtime-closure claim; see [pre-trace ledger]
+> (etc/research/t199-s37-dem-pretrace-evidence-ledger-001.md).
+
+> **T199 S37 native integration r94:** the current composition manifest now
+> has a one-MSVC-environment build recipe and reaches one bounded CPU5 native
+> guest run after the DEM audit.  The run records completed DEM transactions
+> and stops under the fixture's existing controlled boundary at `54:01`; that
+> COMMAND observation creates no endpoint task or runtime-closure claim.  See
+> [native integration observation]
+> (etc/research/t199-s37-dem-native-integration-observation-001.md).
+
+> **T199 S37 closed:** the DEM whole-package provider implementation meets
+> its identity, family-regression and single bounded integration-observation
+> exit criteria.  Its retained closure is [S37 history]
+> (history/m0-t199-s37-closure-20260814.md); the `54:01` stop is not a
+> trace-led follow-on.
+
+> **T199 S37 immutable-root CDS capability r52:** one adapter provider now
+> serves `50:13`, `50:18`, and `50:1A` from CLI-admitted stable roots only.
+> It repairs a 71-byte CDS to `X:\`, accepts set/default only for that same
+> root, and retains explicit failure for all other paths or drives. It never
+> reads or changes the host process CWD. Full DEM x64 `/MT` regression passes;
+> no native trace was run.
+
+> **T199 S37 DASD/IOCTL regression r53:** the all-DEM fixture now proves the
+> admitted fixed-drive success contracts for IOCTL `44:08` and `44:09`, while
+> ordinary IOCTL remains `AX=1/CF` and never gains a device backend. Full DEM
+> x64 `/MT` regression passes; no native trace was run.
+
+> **T199 S37 runtime-composition wiring r54:** successful adapter-runtime
+> lifecycle now captures the admitted immutable volume snapshot, prepares the
+> one DEM/COMMAND composition with its drive, volume and launch snapshots, and
+> binds it before guest execution; reset unbinds it before releasing image
+> state. It is deliberately separate from the legacy adapter runtime and is
+> called only through the existing default-off pre-loop Bochs hook. MSVC x64
+> `/MT` source compilation and the unchanged full DEM family regression pass.
+> The current minimal Bochs recipe has not yet linked this expanded composition
+> closure, so this is not a native CLI-run claim and no trace was run. See
+> [wiring record](etc/research/t199-s37-runtime-composition-wiring-001.md).
+
+> **T199 S37 native-core composition-link evidence r55:** a fresh MSVC x64
+> `/MT` CPU5/Pentium-MMX bx-core/bx-mantle closure and all 94 current
+> composition-provider objects now link together with no unresolved project
+> symbols.  This is a static audit DLL only, not a CLI run or native trace;
+> see [link-closure record](etc/research/t199-s37-native-core-composition-link-closure-001.md).
+
+> **T199 S37 GSET family regression r60:** the immutable drive/volume state
+> component now has a source-built x64 `/MT` two-drive regression covering
+> boot drive, DOS geometry, drive count, full DPB, DPB-list stride/link, and
+> bad guest range.  It corrected `50:46`'s final result from SI to BP in the
+> fixed-width CPU delta; see [GSET regression](etc/research/t199-s37-dem-gset-family-regression-002.md).
+
+> **T199 S37 GSET boundary regression r87:** the same component's fresh
+> all-DEM x64 `/MT` fixture now proves unadmitted volume requests cannot read
+> host volume state or write the caller buffer, and that date/time setters keep
+> the original AL-only failure contract.  This closes the recorded GSET
+> boundary sweep, not DEM or native runtime closure; see [GSET regression]
+> (etc/research/t199-s37-dem-gset-family-regression-002.md).
+
+> **T199 S37 namespace/FCB admission r61:** the next two DEM packages are
+> governed by an original source-owner/ABI map.  The first namespace family
+> regression proves all eight writable pathname operations reach one contained
+> immutable-namespace AX=5/CF provider, not a generic fallback.  Readonly
+> handle/search and FCB continuation work remains active; see [package map](etc/research/t199-s37-dem-namespace-fcb-source-abi-map-001.md).
+
+> **T199 S37 FCB ABI correction r62:** `50:30 demDate16` now returns packed
+> time through DX, matching `demfcb.c`, rather than the previously incorrect
+> BX delta slot.  The complete DEM x64 `/MT` family fixture passes; FCB search
+> continuation and layout closure remain active work.
+
+> **T199 S37 MISC owner-routing correction r66:** source review and a bound
+> composition regression repaired two unreachable original MISC providers:
+> `50:11 demLoadDos` now copies only the admitted NTDOS image, and `50:3C
+> demTerminatePDB` now releases profile-search state.  Composition and all-DEM
+> x64 `/MT` fixtures pass; see [owner-routing record](etc/research/t199-s37-dem-misc-owner-routing-correction-001.md).
+
+> **T199 S37 PDB-search lifecycle r67:** the bound composition now proves that
+> a `50:3C` termination releases that PDB's existing search continuation: its
+> subsequent continuation attempt is rejected.  This is still DEM component
+> evidence, not a native guest trace.
+
+> **T199 S37 lifecycle fixture r68:** the standalone `demTerminatePDB` fixture
+> is now source-built, linked, and run under the corrected MISC/original-
+> OpenNT contract, including matching-PDB release, foreign-PDB retention, and
+> idempotence evidence.
+
+> **T199 S37 FCB continuation boundaries r69:** the source-built x64 `/MT`
+> all-DEM fixture now verifies `50:0A/0C` as one bounded FCB-search family for
+> multi-entry, single-entry, exhausted, empty-token, altered-token and
+> foreign-PDB continuations, as well as its retained checked-aperture boundary.
+> An altered guest token reaches the source-shaped `AX=12`/`CF` no-more-files
+> result; it is never a host handle.  This is FCB-family evidence, not a DEM
+> closure or native trace; see [FCB search design]
+> (etc/research/t199-s37-fcb-search-capability-design-001.md).
+
+> **T199 S37 MISC routing correction r71:** whole-family source regression
+> found and repaired `50:1D demSetV86KernelAddr`'s false V86-bridge
+> classification.  Its original `demdisp.c` body is an ordinary debugger
+> callout return, so it now joins the contained no-debug/no-VDD/no-WOW/no-
+> device MISC result family without adding V86 or Bochs semantics.  The full
+> x64 `/MT` DEM fixture passes; see [MISC routing record]
+> (etc/research/t199-s37-dem-misc-family-routing-correction-001.md).
+
+> **T199 S37 DASD/IOCTL family r73:** `50:21` now preserves the complete
+> `demIoctlChangeable` 08/09 metadata slice, including AX=15/CF invalid-drive
+> rather than misreporting it as an unsupported function.  The immutable
+> snapshot also covers removable and remote forms; raw IOCTL and absolute I/O
+> remain explicit no-device terminals.  The complete x64 `/MT` DEM fixture
+> passes; see [DASD/IOCTL record]
+> (etc/research/t199-s37-dem-dasd-ioctl-family-regression-001.md).
+
+> **T199 S37 hard-error locator boundary r74:** the focused x64 `/MT`
+> `demSetHardErrorInfo` fixture now proves both copied real-mode locator
+> registration and rejection of an aperture-crossing locator.  The adapter
+> retains no host pointer; `50:33/3F` keep their recorded no-retry/no-handle
+> terminal contracts.  No native trace was run.
+
+> **T199 S37 current family baseline r77:** a fresh current-worktree MSVC x64
+> `/MT` build, link and execution of the complete 73-member DEM fixture pass
+> after the MISC and DASD/IOCTL owner corrections.  It is source-built
+> package-containment evidence only, not a native Bochs trace or a DEM closure
+> claim; see [family regression]
+> (etc/research/t199-s37-dem-package-family-regression-001.md).
+
+> **T199 S37 handle-component correction r78:** source review of
+> `demhndl.c` found that `50:27 demCommit` ignores `FlushFileBuffers` failure
+> and clears CF.  Its contained readonly provider now preserves that exact
+> typed completion without manufacturing a writable host handle; the complete
+> 73-member x64 `/MT` family fixture passes.  No native trace was run.
+
+> **T199 S37 pipe-family disposition r79:** `50:47/48` now explicitly reject
+> an absent CLI pipe projection as `AX=6`/`CF=1`.  Original OpenNT calls them
+> only through COMMAND's pipe table and projected NT handle; no pipe, event or
+> host handle is synthesized.  The complete 73-member x64 `/MT` family fixture
+> passes.  This is an unavailable-pipe contract, not pipe support or a native
+> trace.
+
+> **T199 S37 device-path disposition r81:** `50:44 demCheckPath` now restores
+> OpenNT's self-contained `\\DEV\\` success branch through a checked copied
+> guest path, with DX=0 and CF clear.  The original host `NUL` creation probe
+> for other paths is deliberately excluded from the CLI profile, which returns
+> DX=0 plus AX=5/CF instead.  The complete 73-member x64 `/MT` fixture passes;
+> this neither creates a host device nor runs a native trace.
+
+> **T199 S37 file-times disposition r84:** `50:08 demFileTimes` now returns
+> immutable profile DOS time/date for an opened readonly handle, while its set
+> branch returns AX=5/CF and never creates a writable host handle.  The focused
+> and complete x64 `/MT` fixtures pass; no native trace was run.
+
+> **T199 S37 N1 family baseline r85:** fresh paired x64 `/MT` package and
+> readonly-file fixtures now regress the readonly namespace component as one
+> provider family, including no-bypass routing and handle/path contracts.  It
+> is component evidence only, not DEM closure or a native trace; see [N1
+> regression](etc/research/t199-s37-dem-n1-readonly-namespace-family-regression-001.md).
+
+> **T199 S37 S1 FCB/search baseline r85:** the current all-DEM fixture
+> consolidates bounded profile search, opaque per-PDB continuations and the
+> complete unavailable FCB-handle family.  It is not writable FCB support or
+> a native trace; see [S1 baseline]
+> (etc/research/t199-s37-dem-s1-fcb-search-family-baseline-001.md).
+
+> **T199 S37 execution proposal:** the remaining DEM work is organized by
+> complete original component package and final disposition, not trace order;
+> see [DEM completion proposal]
+> (etc/operations/t199-s37-dem-package-completion-proposal-001.md).
+
+> **T199 S31 completion:** XMS now has one source-built package session/router
+> for all twelve callable identities. Five source-derived operations use typed
+> mantle capabilities; the remainder retain explicit package-deferred
+> outcomes, with no trace. See [S31 regression](etc/research/t199-s31-xms-package-provider-regression-001.md).
+
+> **T199 S32 completion:** DPMI now has one source-built package router for
+> all 25 callable identities: `53:12` is controlled unavailable and every
+> other identity is package-deferred without CPU/DOS semantics. See [S32
+> regression](etc/research/t199-s32-dpmi-package-provider-regression-001.md).
+
+> **T199 S33 completion:** the existing Redirector package route was rebuilt
+> and rerun in the current composition: all fifty identities retain the one
+> explicit unavailable result. See [S33 reverification](etc/research/t199-s33-redirector-composition-reverification-001.md).
+
+> **T199 S34 completion:** the existing selector-only Debugger package route
+> was reverified in composition with both three- and four-byte windows. See
+> [S34 reverification](etc/research/t199-s34-debugger-composition-reverification-001.md).
 
 > **T199 S5 completion:** the complete COMMAND table, ABI dependencies,
 > sentinel safety rule, and partial endpoint evidence are in
@@ -53,6 +372,16 @@
 > failure disposition; see [S6 disposition](etc/research/t199-s6-command-whole-package-disposition-001.md).
 
 > **T199 S7 completion:** COMMAND has a compiled package facade and all-service regression without a trace; see [S7 regression](etc/research/t199-s7-command-package-facade-regression-001.md).
+
+> **T199 S29 completion:** COMMAND now has one source-built package session
+> and one composition dispatch path for all seventeen callable identities;
+> bounded providers, no-op, unavailable and deferred outcomes are verified
+> without a trace.  See [S29 regression](etc/research/t199-s29-command-package-session-regression-001.md).
+
+> **T199 S36 completion:** COMMAND now has no generic deferred callable
+> route: every `54:00..10` identity is a bounded provider, original no-op or
+> explicit unavailable result.  Its all-family x64 regression and a bounded
+> CPU5 #UD integration witness both pass; see [S36 implementation](etc/research/t199-s36-command-whole-package-provider-implementation-001.md).
 
 > **T199 S8 completion:** all XMS identities, original ABI and failure boundary are recorded in [S8 matrix](etc/research/t199-s8-xms-source-abi-failure-matrix-001.md).
 

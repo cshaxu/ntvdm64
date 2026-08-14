@@ -6,7 +6,9 @@ static int existing_provider_service(uint8_t service)
 {
     switch (service) {
     case 0x00u: case 0x02u: case 0x09u: case 0x0bu: case 0x0du:
-    case 0x11u: case 0x12u: case 0x16u: case 0x18u: case 0x1bu:
+    case 0x11u: case 0x12u: case 0x14u: case 0x15u: case 0x16u: case 0x18u:
+    case 0x19u:
+    case 0x1bu: case 0x1cu:
     case 0x32u: case 0x3bu: case 0x3cu: case 0x45u: case 0x46u:
         return 1;
     default:
@@ -30,7 +32,7 @@ int bx_ntvdm_dem_package_route_v1_valid(const bx_ntvdm_dem_package_route_v1 *rou
         route->abi_version == BX_NTVDM_DEM_PACKAGE_ROUTE_V1_VERSION &&
         route->struct_bytes == sizeof(*route) &&
         bx_ntvdm_dem_plane_v1_valid(&route->plane) &&
-        route->disposition <= BX_NTVDM_DEM_PACKAGE_EXISTING_PROVIDER &&
+        route->disposition <= BX_NTVDM_DEM_PACKAGE_EXPLICIT_SOURCE_FAILURE &&
         route->reserved0 == 0u;
 }
 
@@ -42,14 +44,14 @@ int bx_ntvdm_dem_package_facade_v1_classify(
     if (route == 0) return 0;
     bx_ntvdm_dem_package_route_v1_clear(route);
     if (!bx_ntvdm_dem_plane_v1_classify(ingress, selection, &route->plane)) return 0;
-    if (route->plane.disposition == BX_NTVDM_DEM_PLANE_ORIGINAL_NOOP)
-        route->disposition = BX_NTVDM_DEM_PACKAGE_ORIGINAL_NOOP;
-    else if (route->plane.service == 0x42u)
+    if (route->plane.service == 0x42u)
         route->disposition = BX_NTVDM_DEM_PACKAGE_FASTREAD_COMPATIBILITY;
+    else if (route->plane.disposition == BX_NTVDM_DEM_PLANE_ORIGINAL_NOOP)
+        route->disposition = BX_NTVDM_DEM_PACKAGE_ORIGINAL_NOOP;
     else if (existing_provider_service((uint8_t)route->plane.service))
         route->disposition = BX_NTVDM_DEM_PACKAGE_EXISTING_PROVIDER;
     else
-        route->disposition = BX_NTVDM_DEM_PACKAGE_DEFERRED;
+        route->disposition = BX_NTVDM_DEM_PACKAGE_EXPLICIT_SOURCE_FAILURE;
     return bx_ntvdm_dem_package_route_v1_valid(route);
 }
 

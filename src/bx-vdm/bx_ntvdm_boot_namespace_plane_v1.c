@@ -1,5 +1,10 @@
 #include "bx_ntvdm_boot_namespace_plane_v1.h"
 #include "bx_ntvdm_dem_fastio_provider_v1.h"
+#include "bx_ntvdm_dem_fcb_search_service_v1.h"
+#include "bx_ntvdm_dem_default_drive_service_v1.h"
+#include "bx_ntvdm_dem_current_dir_service_v1.h"
+#include "bx_ntvdm_dem_check_path_service_v1.h"
+#include "bx_ntvdm_dem_readonly_file_service.h"
 #include <string.h>
 
 #define BX_NTVDM_BOOT_NAMESPACE_APERTURE UINT64_C(0x100000)
@@ -10,7 +15,8 @@ static int valid(const bx_ntvdm_boot_namespace_plane_v1 *p)
         p->abi_version == BX_NTVDM_BOOT_NAMESPACE_PLANE_V1_VERSION &&
         p->struct_bytes == sizeof(*p) && p->next_action_id &&
         bx_ntvdm_boot_namespace_provider_v1_valid(&p->provider) &&
-        p->has_dta <= 1u && p->pending_kind <= BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION;
+        p->has_dta <= 1u && p->has_drive_snapshot <= 1u &&
+        p->pending_kind <= BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CHECK_PATH;
 }
 static int take_id(bx_ntvdm_boot_namespace_plane_v1 *p, uint32_t *id)
 { if (!p || !id || !p->next_action_id) return 0; *id=p->next_action_id++; if (!p->next_action_id) p->next_action_id=1; return 1; }
@@ -55,33 +61,73 @@ int bx_ntvdm_boot_namespace_plane_v1_initialize(bx_ntvdm_boot_namespace_plane_v1
     const byob_profile_selection *selection)
 { if(!p||!selection||!bx_ntvdm_boot_namespace_provider_v1_initialize(&p->provider,command,target,quit,selection))return 0;
   if(ntdos)p->ntdos=*ntdos;else memset(&p->ntdos,0,sizeof(p->ntdos));p->ntdos_identity=selection->ntdos;
-  p->magic=BX_NTVDM_BOOT_NAMESPACE_PLANE_V1_MAGIC;p->abi_version=1u;p->struct_bytes=sizeof(*p);p->next_action_id=1u;p->has_dta=0;p->pending_kind=0;p->pending_action_id=0;return valid(p); }
+  p->magic=BX_NTVDM_BOOT_NAMESPACE_PLANE_V1_MAGIC;p->abi_version=1u;p->struct_bytes=sizeof(*p);p->next_action_id=1u;p->has_dta=0;p->has_drive_snapshot=0;p->pending_kind=0;p->pending_action_id=0;p->pending_service=0;return valid(p); }
 int bx_ntvdm_boot_namespace_plane_v1_set_dta(bx_ntvdm_boot_namespace_plane_v1 *p,const bx_ntvdm_dem_dta_registration_v1 *d)
 {if(!valid(p)||!d||!d->dta_location||!d->current_pdb)return 0;p->dta=*d;p->has_dta=1;return 1;}
+int bx_ntvdm_boot_namespace_plane_v1_set_drive_snapshot(bx_ntvdm_boot_namespace_plane_v1 *p,const bx_ntvdm_host_drive_snapshot_v1 *d)
+{if(!valid(p)||!d||!bx_ntvdm_host_drive_snapshot_v1_valid(d))return 0;p->drive_snapshot=*d;p->has_drive_snapshot=1;return 1;}
 
 int bx_ntvdm_boot_namespace_plane_v1_dispatch(bx_ntvdm_boot_namespace_plane_v1 *p,
  const bx_ntvdm_bop_ingress_v1 *i,const bx_ntvdm_bop_provider_selection_v1 *s,
  const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,
  struct bx_ntvdm_mechanical_action_v1 *a,bx_ntvdm_cpu_result_v2 *r)
-{ bx_ntvdm_dem_plane_record_v1 dem; bx_ntvdm_command_plane_record_v1 cmd; bx_ntvdm_multi_write_transaction_v1 tx; bx_ntvdm_bulk_result_transaction_v1 bulk; uint8_t bytes[BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES]; bx_ntvdm_guest_read_action_v1 read; bx_ntvdm_guest_gather_read_action_v1 gather;
+{ bx_ntvdm_dem_plane_record_v1 dem; bx_ntvdm_bulk_result_transaction_v1 bulk; uint8_t bytes[BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES]; bx_ntvdm_guest_read_action_v1 read; bx_ntvdm_guest_gather_read_action_v1 gather;
  if(!valid(p)||!i||!s||!e||!c||!w||!a||!r||p->pending_kind)return 0;
  bx_ntvdm_cpu_result_v2_pass_through(r);
  bx_ntvdm_mechanical_action_v1_clear(a);
- if(i->family==BX_NTVDM_BOP_FAMILY_COMMAND && bx_ntvdm_command_plane_v1_classify(i,s,&cmd) && (i->service==12u||i->service==13u) && bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file(&p->provider,e,c,w,&tx,bytes)){ if(!put_write(p,&tx,bytes,a))return 0; *r=tx.result; return 1; }
  if(i->family!=BX_NTVDM_BOP_FAMILY_DEM||!bx_ntvdm_dem_plane_v1_classify(i,s,&dem)||dem.disposition!=BX_NTVDM_DEM_PLANE_DEFERRED)return 1;
  /* The original DEM dispatcher assigns SVC_DEMSETDTALOCATION (1Bh) to
   * demgset.c, not to the file namespace.  Its registration is retained here
   * only as the prerequisite consumed by the selected namespace provider. */
- if(i->service==0x1bu&&dem.component==BX_NTVDM_DEM_COMPONENT_GSET&&bx_ntvdm_dem_dta_service_v1_dispatch(e,c,w,&read)){if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION,e,c,&read.guest_read,1u,a))return 0;p->pending_read=read;return 1;}
- if(dem.component!=BX_NTVDM_DEM_COMPONENT_NAMESPACE)return 1;
- if(i->service==0x11u){uint32_t id=0;if(!take_id(p,&id)||!bx_ntvdm_dem_load_dos_service_v1_prepare(&p->ntdos,&p->ntdos_identity,e,c,w,id,a,r)){bx_ntvdm_mechanical_action_v1_clear(a);return bx_ntvdm_cpu_result_v2_stop(r);}return 1;}
- if(i->service==0u)return bx_ntvdm_boot_namespace_provider_v1_seek(&p->provider,e,c,w,r);
-  if(i->service==2u)return bx_ntvdm_boot_namespace_provider_v1_close(&p->provider,e,c,w,r);
-  if(i->service==0x16u&&bx_ntvdm_boot_namespace_provider_v1_read(&p->provider,e,c,w,bytes,sizeof(bytes),&bulk,r)){if(!bulk.magic)return 1;return put_bulk(p,&bulk,bytes,a);}
-  if(i->service==0x42u&&bx_ntvdm_dem_fastio_provider_v1_dispatch(&p->provider,e,c,w,bytes,sizeof(bytes),&bulk,r)){if(!bulk.magic)return 1;return put_bulk(p,&bulk,bytes,a);}
+ if(i->service==0x1bu&&dem.component==BX_NTVDM_DEM_COMPONENT_GSET){
+   if(bx_ntvdm_dem_dta_service_v1_dispatch(e,c,w,&read)){
+     if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION,e,c,&read.guest_read,1u,a))return 0;
+     p->pending_read=read;return 1;
+   }
+   /* demSetDTALocation has no historical error return, but a copied address
+    * rejected by this non-invasive composition must not escape as #UD. */
+   return bx_ntvdm_cpu_result_v2_resume(r,e->fault_rip+4u)&&
+     bx_ntvdm_cpu_delta_v1_set_gpr16(&r->cpu_delta,0u,5u)&&
+     bx_ntvdm_cpu_result_v2_set_cf(r,1);
+ }
+ if(i->service==0x1au&&dem.component==BX_NTVDM_DEM_COMPONENT_GSET&&!p->has_drive_snapshot){
+   if(bx_ntvdm_dem_default_drive_service_v1_prepare(e,c,w,&read)){
+     if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DEFAULT_DRIVE,e,c,&read.guest_read,1u,a))return 0;
+     p->pending_read=read;return 1;
+   }
+   return bx_ntvdm_cpu_result_v2_resume(r,e->fault_rip+4u)&&
+     bx_ntvdm_cpu_delta_v1_set_gpr16(&r->cpu_delta,0u,5u)&&
+     bx_ntvdm_cpu_result_v2_set_cf(r,1);
+ }
+ if((i->service==0x13u||i->service==0x18u||i->service==0x1au)&&p->has_drive_snapshot){
+   if(bx_ntvdm_dem_current_dir_service_v1_prepare(&p->drive_snapshot,e,c,w,&gather)){
+     if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CURRENT_DIR,e,c,gather.ranges,gather.range_count,a))return 0;
+     p->pending_gather=gather;p->pending_service=i->service;return 1;
+   }
+ }
+ if((i->service==0x0au||i->service==0x0cu)&&dem.component==BX_NTVDM_DEM_COMPONENT_FCB&&p->has_dta){
+   int ok=i->service==0x0au?
+     bx_ntvdm_dem_fcb_search_service_v1_prepare_first(&p->dta,e,c,w,&gather):
+     bx_ntvdm_dem_fcb_search_service_v1_prepare_next(&p->dta,e,c,w,&gather);
+   if(ok){if(!put_read(p,i->service==0x0au?BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_FCB_FIRST:BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_FCB_NEXT,e,c,gather.ranges,gather.range_count,a))return 0;p->pending_gather=gather;return 1;}
+ }
+ /* demLoadDos is owned by demmisc.c, not by the namespace or raw-media
+  * package.  Its only admitted CLI capability is the already-copied NTDOS
+  * image; the plane performs no host filesystem or device operation. */
+ if(i->service==0x11u&&dem.component==BX_NTVDM_DEM_COMPONENT_MISC){uint32_t id=0;if(!take_id(p,&id)||!bx_ntvdm_dem_load_dos_service_v1_prepare(&p->ntdos,&p->ntdos_identity,e,c,w,id,a,r)){bx_ntvdm_mechanical_action_v1_clear(a);return bx_ntvdm_cpu_result_v2_stop(r);}return 1;}
+ if(i->service==0x44u&&dem.component==BX_NTVDM_DEM_COMPONENT_NAMESPACE&&bx_ntvdm_dem_check_path_service_v1_prepare(e,c,w,&read)){
+   if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CHECK_PATH,e,c,&read.guest_read,1u,a))return 0;
+   p->pending_read=read;return 1;
+ }
+ if(dem.component!=BX_NTVDM_DEM_COMPONENT_NAMESPACE)return 0;
+  if(i->service==0u)return bx_ntvdm_boot_namespace_provider_v1_seek(&p->provider,e,c,w,r)&&bx_ntvdm_cpu_result_v2_valid(r);
+  if(i->service==2u)return bx_ntvdm_boot_namespace_provider_v1_close(&p->provider,e,c,w,r)&&bx_ntvdm_cpu_result_v2_valid(r);
+  if(i->service==8u)return bx_ntvdm_dem_readonly_file_v1_file_times(&p->provider.readonly_namespace,e,c,w,r)&&bx_ntvdm_cpu_result_v2_valid(r);
+  if(i->service==0x16u&&bx_ntvdm_boot_namespace_provider_v1_read(&p->provider,e,c,w,bytes,sizeof(bytes),&bulk,r)){if(!bulk.magic)return bx_ntvdm_cpu_result_v2_valid(r);return put_bulk(p,&bulk,bytes,a)&&bx_ntvdm_cpu_result_v2_valid(r);}
+  if(i->service==0x42u&&bx_ntvdm_dem_fastio_provider_v1_dispatch(&p->provider,e,c,w,bytes,sizeof(bytes),&bulk,r)){if(!bulk.magic)return bx_ntvdm_cpu_result_v2_valid(r);return put_bulk(p,&bulk,bytes,a)&&bx_ntvdm_cpu_result_v2_valid(r);}
   if(i->service==18u&&bx_ntvdm_boot_namespace_provider_v1_prepare_open(&p->provider,e,c,w,&read)){ if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_OPEN,e,c,&read.guest_read,1u,a))return 0;p->pending_read=read;return 1; }
  if((i->service==9u||i->service==11u)&&p->has_dta){int ok=i->service==9u?bx_ntvdm_dem_path_search_v1_prepare_first(&p->dta,e,c,w,&gather):bx_ntvdm_dem_path_search_v1_prepare_next(&p->dta,e,c,w,&gather);if(ok){if(!put_read(p,i->service==9u?BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_FIRST:BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_NEXT,e,c,gather.ranges,gather.range_count,a))return 0;p->pending_gather=gather;return 1;}}
- return 1; }
+ return 0; }
 
 int bx_ntvdm_boot_namespace_plane_v1_complete_read(bx_ntvdm_boot_namespace_plane_v1 *p,
  const struct bx_ntvdm_mechanical_action_v1 *a,struct bx_ntvdm_mechanical_action_v1 *next,bx_ntvdm_cpu_result_v2 *r)
@@ -90,7 +136,12 @@ int bx_ntvdm_boot_namespace_plane_v1_complete_read(bx_ntvdm_boot_namespace_plane
  memset(&tx,0,sizeof(tx));bx_ntvdm_cpu_result_v2_pass_through(r);bx_ntvdm_mechanical_action_v1_clear(next);
  if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_OPEN)ok=bx_ntvdm_boot_namespace_provider_v1_complete_open(&p->provider,&p->pending_event,&p->pending_cpu,&p->pending_read,a->payload,a->payload_bytes,r);
  else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION){ok=bx_ntvdm_dem_dta_service_v1_complete(&p->pending_event,&p->pending_cpu,&p->pending_read,a->payload,a->payload_bytes,&dta,r);if(ok)ok=bx_ntvdm_boot_namespace_plane_v1_set_dta(p,&dta);}
+ else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DEFAULT_DRIVE)ok=bx_ntvdm_dem_default_drive_service_v1_complete(&p->pending_event,&p->pending_cpu,&p->pending_read,a->payload,a->payload_bytes,r);
+ else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CURRENT_DIR)ok=bx_ntvdm_dem_current_dir_service_v1_complete(&p->drive_snapshot,(uint8_t)p->pending_service,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes);
+ else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CHECK_PATH)ok=bx_ntvdm_dem_check_path_service_v1_complete(&p->pending_event,&p->pending_cpu,&p->pending_read,a->payload,a->payload_bytes,r);
  else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_FIRST)ok=bx_ntvdm_dem_path_search_v1_complete_first(&p->provider.search_transaction,&p->provider.search_snapshot,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes,&used)>=0;
  else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_NEXT)ok=bx_ntvdm_dem_path_search_v1_complete_next(&p->provider.search_transaction,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes,&used)>=0;
- p->pending_kind=0;p->pending_action_id=0;if(!ok)return 0;
- if(tx.magic){if(!put_write(p,&tx,bytes,next))return 0;*r=tx.result;} return bx_ntvdm_cpu_result_v2_valid(r); }
+ else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_FCB_FIRST)ok=bx_ntvdm_dem_fcb_search_service_v1_complete_first(&p->provider.search_transaction,&p->provider.search_snapshot,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes,&used)>=0;
+ else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_FCB_NEXT)ok=bx_ntvdm_dem_fcb_search_service_v1_complete_next(&p->provider.search_transaction,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes,&used)>=0;
+ p->pending_kind=0;p->pending_action_id=0;p->pending_service=0;if(!ok)return 0;
+ if(tx.magic){if(tx.writes.write_count==0u){*r=tx.result;return bx_ntvdm_cpu_result_v2_valid(r);}if(!put_write(p,&tx,bytes,next))return 0;*r=tx.result;} return bx_ntvdm_cpu_result_v2_valid(r); }

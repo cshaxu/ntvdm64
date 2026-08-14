@@ -30,6 +30,7 @@
 #if (defined(BX_NTVDM_ENABLE_EXECUTION_PLAN) && BX_NTVDM_ENABLE_EXECUTION_PLAN) || \
     (defined(BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN) && BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN)
 #include "bx_ntvdm_adapter_runtime.h"
+#include "bx_ntvdm_composition_runtime_v1.h"
 #endif
 
 #ifdef HAVE_LOCALE_H
@@ -89,9 +90,11 @@ static int bx_apply_requested_execution_plan(void)
   uint64_t payload_bytes = 0;
   Bit8u preserved[BX_NTVDM_STARTUP_PLAN_MAX_PRESERVED_BYTES];
   unsigned failure_stage = 0;
+  int composition_status = bx_ntvdm_composition_runtime_v1_install_from_environment();
   int status = bx_ntvdm_adapter_runtime_v1_prepare_execution_plan_from_environment(
     &plan, &payload, &payload_bytes);
 
+  if (composition_status < 0) return -1;
   if (status <= 0) return status;
   if (!bx_ntvdm_startup_plan_v1_preflight(&plan, 0x100000ULL, payload_bytes) ||
       payload == NULL) failure_stage = 1;

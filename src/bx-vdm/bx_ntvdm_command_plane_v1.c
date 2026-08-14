@@ -26,6 +26,6 @@ int bx_ntvdm_command_plane_v1_classify(const bx_ntvdm_bop_ingress_v1 *i,
        s->precedence!=BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT || i->service>=17u || !(c=component(i->service))) return 0;
     r->service=i->service; r->component=c;
     r->disposition=c==BX_NTVDM_COMMAND_COMPONENT_ORIGINAL_NOOP ? BX_NTVDM_COMMAND_PLANE_ORIGINAL_NOOP :
-        ((i->service==8u || i->service==10u) ? BX_NTVDM_COMMAND_PLANE_EXPLICIT_UNAVAILABLE : BX_NTVDM_COMMAND_PLANE_DEFERRED);
+        ((i->service==6u || i->service==8u || i->service==10u) ? BX_NTVDM_COMMAND_PLANE_EXPLICIT_UNAVAILABLE : BX_NTVDM_COMMAND_PLANE_DEFERRED);
     return bx_ntvdm_command_plane_v1_valid(r);
 }

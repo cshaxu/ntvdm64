@@ -123,6 +123,38 @@ int bx_ntvdm_search_transaction_v1_fcb_first(
     return -1;
 }
 
+int bx_ntvdm_search_transaction_v1_fcb_first_entries(
+    bx_ntvdm_search_transaction_v1 *value,
+    const bx_ntvdm_host_namespace_entry_v1 *entries, uint32_t entry_count,
+    uint8_t admitted_drive_index,
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before, uint32_t owner_pdb,
+    uint64_t searchbuf_address,
+    const uint8_t path[128], uint8_t extended_fcb, uint8_t attributes,
+    bx_ntvdm_multi_write_transaction_v1 *transaction, uint8_t payload[51],
+    uint32_t *payload_bytes)
+{
+    bx_ntvdm_search_query_v1 query;
+    int result;
+    if (payload_bytes != 0) *payload_bytes = 0u;
+    if (!bx_ntvdm_search_transaction_v1_valid(value) || payload_bytes == 0 ||
+        !bx_ntvdm_search_request_v1_decode_first_fcb(path, extended_fcb,
+            attributes, &query) || query.drive_index != admitted_drive_index ||
+        query.relative_directory[0] != L'\0') return -1;
+    result = bx_ntvdm_search_plan_v1_first_entries(&value->plan, entries,
+        entry_count, boundary, cpu_before, owner_pdb,
+        BX_NTVDM_SEARCH_PLAN_V1_FCB, searchbuf_address, &query, transaction,
+        payload, payload_bytes);
+    /* demFindFirstFCB delegates a no-match to demClientError after
+     * SearchFile.  The DOS-visible search error is ERROR_NO_MORE_FILES,
+     * with the reserved FCB continuation words already clear.  Do not turn
+     * this legitimate result into the package's unrelated AX=5 fallback. */
+    return result == BX_NTVDM_SEARCH_PLAN_V1_NO_MATCH ?
+        bx_ntvdm_search_result_v1_prepare_fcb_no_more(boundary, cpu_before,
+            searchbuf_address, transaction, payload) ? (*payload_bytes = 8u, 0) : -1 :
+        result == BX_NTVDM_SEARCH_PLAN_V1_OK ? 1 : -1;
+}
+
 int bx_ntvdm_search_transaction_v1_fcb_next(
     bx_ntvdm_search_transaction_v1 *value,
     const bx_ntvdm_exception_event_v1 *boundary,
@@ -132,10 +164,17 @@ int bx_ntvdm_search_transaction_v1_fcb_next(
     uint32_t *payload_bytes)
 {
     bx_ntvdm_search_token_v1 token;
+    int result;
     if (payload_bytes != 0) *payload_bytes = 0u;
     if (!bx_ntvdm_search_transaction_v1_valid(value) || payload_bytes == 0 ||
-        !bx_ntvdm_search_request_v1_decode_next_fcb(searchbuf, &token)) return -1;
-    return bx_ntvdm_search_plan_v1_next(&value->plan, boundary, cpu_before,
+        searchbuf == 0) return -1;
+    if (!bx_ntvdm_search_request_v1_decode_next_fcb(searchbuf, &token))
+        return bx_ntvdm_search_result_v1_prepare_fcb_no_more(boundary,
+            cpu_before, address, transaction, payload) ? (*payload_bytes = 8u, 0) : -1;
+    result = bx_ntvdm_search_plan_v1_next(&value->plan, boundary, cpu_before,
         owner_pdb, BX_NTVDM_SEARCH_PLAN_V1_FCB, address, &token, transaction,
-        payload, payload_bytes) == BX_NTVDM_SEARCH_PLAN_V1_OK ? 1 : -1;
+        payload, payload_bytes);
+    return result == BX_NTVDM_SEARCH_PLAN_V1_OK ? 1 :
+        bx_ntvdm_search_result_v1_prepare_fcb_no_more(boundary, cpu_before,
+            address, transaction, payload) ? (*payload_bytes = 8u, 0) : -1;
 }

@@ -6,7 +6,7 @@ static int bx_ntvdm_dem_provider_v1_original_noop(uint8_t service)
 {
     switch (service) {
     case 31u: case 36u: case 38u: case 40u:
-    case 43u: case 64u: case 66u: case 67u:
+    case 43u: case 64u: case 67u:
         return 1;
     default:
         return 0;

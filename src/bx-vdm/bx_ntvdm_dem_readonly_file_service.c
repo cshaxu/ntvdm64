@@ -187,3 +187,22 @@ int bx_ntvdm_dem_readonly_file_v1_close(bx_ntvdm_readonly_namespace_v1 *space,
         return close_result(event, out, BX_NTVDM_ERROR_INVALID_HANDLE, 1);
     return close_result(event, out, 0u, 0);
 }
+
+int bx_ntvdm_dem_readonly_file_v1_file_times(const bx_ntvdm_readonly_namespace_v1 *space,
+    const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_cpu_result_v2 *out)
+{
+    uint16_t dos_time, dos_date;
+    if (!space || !out || !matches(event, cpu, window, 0x08u)) return 0;
+    if ((cpu->ebx & 0xffu) == 0u) {
+        if (!bx_ntvdm_readonly_namespace_v1_file_times(space, token(cpu), &dos_time, &dos_date))
+            return close_result(event, out, BX_NTVDM_ERROR_INVALID_HANDLE, 1);
+        return bx_ntvdm_cpu_result_v2_resume(out, event->fault_rip + 4u) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&out->cpu_delta, 1u, dos_time) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&out->cpu_delta, 2u, dos_date) &&
+            bx_ntvdm_cpu_result_v2_set_cf(out, 0);
+    }
+    if ((cpu->ebx & 0xffu) == 1u)
+        return close_result(event, out, BX_NTVDM_ERROR_ACCESS_DENIED, 1);
+    return close_result(event, out, BX_NTVDM_ERROR_INVALID_PARAMETER, 1);
+}

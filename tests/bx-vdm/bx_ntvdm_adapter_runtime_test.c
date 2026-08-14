@@ -296,11 +296,11 @@ static int run_t194_drive_snapshot_dpb_routing(void)
     failed |= !bx_ntvdm_adapter_runtime_v2_dispatch(&event, &state, &window, &result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x7c04u ||
         result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 6) ||
-        result.cpu_delta.gpr16_values[6] != 0x221u ||
+        result.cpu_delta.gpr16_values[6] != 0x223u ||
         !bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
             &transaction, &payload, &payload_bytes) || transaction.writes.write_count != 2u ||
         transaction.writes.writes[0].guest_physical_address != 0x1200u ||
-        transaction.writes.writes[1].guest_physical_address != 0x1219u ||
+        transaction.writes.writes[1].guest_physical_address != 0x121bu ||
         payload_bytes != 6u || payload == 0 || payload[0] != 2u || payload[1] != 2u ||
         payload[2] != 0xffu || payload[3] != 0xffu || payload[4] != 0xffu || payload[5] != 0xffu;
     bx_ntvdm_adapter_runtime_v1_reset();
@@ -480,7 +480,7 @@ int main(int argc, char **argv)
         !bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
             &multi_write, &payload, &payload_bytes) ||
         multi_write.writes.write_count != 4u || payload_bytes != 12u ||
-        multi_write.result.cpu_delta.gpr16_values[6] != 0x242u ||
+        multi_write.result.cpu_delta.gpr16_values[6] != 0x246u ||
         bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
             &multi_write, &payload, &payload_bytes);
     bx_ntvdm_instruction_window_v1_capture(&window, ud2, sizeof(ud2));

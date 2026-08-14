@@ -10,7 +10,8 @@ typedef enum bx_ntvdm_dem_package_disposition_v1 {
     BX_NTVDM_DEM_PACKAGE_DEFERRED = 0u,
     BX_NTVDM_DEM_PACKAGE_ORIGINAL_NOOP = 1u,
     BX_NTVDM_DEM_PACKAGE_FASTREAD_COMPATIBILITY = 2u,
-    BX_NTVDM_DEM_PACKAGE_EXISTING_PROVIDER = 3u
+    BX_NTVDM_DEM_PACKAGE_EXISTING_PROVIDER = 3u,
+    BX_NTVDM_DEM_PACKAGE_EXPLICIT_SOURCE_FAILURE = 4u
 } bx_ntvdm_dem_package_disposition_v1;
 
 /* One package admission record.  It chooses a disposition, never a legacy
@@ -35,7 +36,8 @@ int bx_ntvdm_dem_package_facade_v1_classify(
     const bx_ntvdm_bop_provider_selection_v1 *selection,
     bx_ntvdm_dem_package_route_v1 *route);
 /* Only demNotYetImplemented is complete at this layer. Other records carry no
- * CPU or RAM result; they are an explicit existing-provider/deferred route. */
+ * CPU or RAM result; the session selects their component provider or the
+ * explicit source-derived CLI failure boundary. */
 int bx_ntvdm_dem_package_facade_v1_dispatch(
     const bx_ntvdm_bop_ingress_v1 *ingress,
     const bx_ntvdm_bop_provider_selection_v1 *selection,

@@ -3,6 +3,7 @@
 #define BX_NTVDM_DEM_IOCTL_SERVICE 0x21u
 #define BX_NTVDM_DEM_IOCTL_CHANGEABLE 0x4408u
 #define BX_NTVDM_DEM_IOCTL_LOCATION_OR_REMOTE 0x4409u
+#define BX_NTVDM_DEM_ERROR_INVALID_DRIVE 15u
 #define BX_NTVDM_GPR16_AX 0u
 #define BX_NTVDM_GPR16_DX 3u
 
@@ -52,11 +53,18 @@ int bx_ntvdm_dem_ioctl_metadata_provider_v1_dispatch(
     bx_ntvdm_cpu_result_v2_pass_through(result);
     function = (uint16_t)cpu_before->eax;
     drive = (uint8_t)cpu_before->ebx;
-    if ((function != BX_NTVDM_DEM_IOCTL_CHANGEABLE &&
-         function != BX_NTVDM_DEM_IOCTL_LOCATION_OR_REMOTE) || drive >= 26u ||
-        (snapshot->admitted_mask & (UINT32_C(1) << drive)) == 0u ||
-        (type = snapshot->types[drive]) < 2u || type > 6u)
+    if (function != BX_NTVDM_DEM_IOCTL_CHANGEABLE &&
+        function != BX_NTVDM_DEM_IOCTL_LOCATION_OR_REMOTE)
         return 0;
+    /* demIoctlChangeable owns both 08h and 09h, including its distinct
+     * invalid-drive branch.  Do not let a recognized metadata request fall
+     * through to the unrelated demIoctlInvalid AX=1 result. */
+    if (drive >= 26u || (snapshot->admitted_mask & (UINT32_C(1) << drive)) == 0u ||
+        (type = snapshot->types[drive]) < 2u || type > 6u)
+        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta,
+                BX_NTVDM_GPR16_AX, BX_NTVDM_DEM_ERROR_INVALID_DRIVE) &&
+            bx_ntvdm_cpu_result_v2_set_cf(result, 1);
 
     if (!bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u)) return 0;
     if (function == BX_NTVDM_DEM_IOCTL_CHANGEABLE) {

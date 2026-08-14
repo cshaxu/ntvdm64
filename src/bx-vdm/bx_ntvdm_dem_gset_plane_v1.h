@@ -2,16 +2,22 @@
 #define BX_NTVDM_DEM_GSET_PLANE_V1_H
 
 #include "bx_ntvdm_dem_drive_provider_v1.h"
+#include "bx_ntvdm_host_volume_snapshot_v1.h"
 
 typedef struct bx_ntvdm_dem_gset_plane_v1 {
     uint32_t has_drive_snapshot;
     bx_ntvdm_host_drive_snapshot_v1 drive_snapshot;
+    uint32_t has_volume_snapshot;
+    bx_ntvdm_host_volume_snapshot_v1 volume_snapshot;
 } bx_ntvdm_dem_gset_plane_v1;
 
 void bx_ntvdm_dem_gset_plane_v1_clear(bx_ntvdm_dem_gset_plane_v1 *plane);
 int bx_ntvdm_dem_gset_plane_v1_set_drive_snapshot(
     bx_ntvdm_dem_gset_plane_v1 *plane,
     const bx_ntvdm_host_drive_snapshot_v1 *snapshot);
+int bx_ntvdm_dem_gset_plane_v1_set_volume_snapshot(
+    bx_ntvdm_dem_gset_plane_v1 *plane,
+    const bx_ntvdm_host_volume_snapshot_v1 *snapshot);
 int bx_ntvdm_dem_gset_plane_v1_dispatch(
     bx_ntvdm_dem_gset_plane_v1 *plane,
     const bx_ntvdm_bop_ingress_v1 *ingress,

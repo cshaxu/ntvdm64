@@ -1,9 +1,13 @@
 #include "bx_ntvdm_dem_dpb_service.h"
 
-#define BX_NTVDM_DEM_DPB_BYTES 33u
-#define BX_NTVDM_DEM_DPB_NEXT_OFFSET 25u
+#define BX_NTVDM_DEM_DPB_BYTES 35u
+/* `DPB.Next` follows MediaID (25) and FirstAccess (26) in OpenNT's packed
+ * `A_DPB`; only 50:46's DriveNum, Unit and Next fields are written. */
+#define BX_NTVDM_DEM_DPB_NEXT_OFFSET 27u
 #define BX_NTVDM_DEM_DPB_ENTRY_WRITE_COUNT 2u
-#define BX_NTVDM_DEM_DPB_BP_GPR_INDEX 6u
+/* The CPU/mantle fixed-width delta follows the Bochs 16-bit register order:
+ * AX, CX, DX, BX, SP, BP, SI, DI.  demGetDPBList advances BP, not SI. */
+#define BX_NTVDM_DEM_DPB_BP_GPR_INDEX 5u
 
 static int bx_ntvdm_dem_dpb_matches(const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu_before,

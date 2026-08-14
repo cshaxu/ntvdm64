@@ -7,7 +7,8 @@ param(
     [string]$HostArchitecture = 'x64',
     [switch]$InstructionHistory,
     [switch]$RunLifecycle,
-    [switch]$A20CapabilityFixture
+    [switch]$A20CapabilityFixture,
+    [switch]$XmsPackageFixture
 )
 
 Set-StrictMode -Version Latest
@@ -75,20 +76,33 @@ if ($InstructionHistory) {
     $sources += @{ Name = 'instruction_history'; Path = 'src\bx-mantle\bx_ntvdm_instruction_history.cc'; ExtraIncludes = @('src\bx-core', 'src\bochs\iodev') }
 }
 
+if ($XmsPackageFixture) {
+    $sources += @(
+        @{ Name = 'adapter_instruction_window'; Path = 'src\bx-vdm\bx_ntvdm_instruction_window_abi.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_cpu_delta'; Path = 'src\bx-vdm\bx_ntvdm_cpu_delta_abi.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_cpu_state'; Path = 'src\bx-vdm\bx_ntvdm_cpu_state_abi.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_exception'; Path = 'src\bx-vdm\bx_ntvdm_exception_abi.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_cpu_result'; Path = 'src\bx-vdm\bx_ntvdm_cpu_result_v2.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_bop_ingress'; Path = 'src\bx-vdm\bx_ntvdm_bop_ingress_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_bop_registry'; Path = 'src\bx-vdm\bx_ntvdm_bop_provider_registry_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_xms_plane'; Path = 'src\bx-vdm\bx_ntvdm_xms_dpmi_plane_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_xms_session'; Path = 'src\bx-vdm\bx_ntvdm_xms_package_session_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') }
+    )
+}
+
 if ($WholeCpu5Core) {
-    # Read only the original VS project source membership.  Its product
-    # settings, target and link inputs are intentionally ignored.  The
-    # CPU5 projection decides preprocessor reachability; we do not hand-pick
-    # instruction handlers from a trace.
+    # The adopted tree is the authoritative source inventory.  The retained
+    # VS2008 projects omit post-project CPU support units (stack/task/vm) and
+    # the sibling FPU/disassembler directories, while CPU5 decode still links
+    # those native methods.  Enumerate each adopted component directory as a
+    # whole; CPU5 projection decides preprocessor reachability, never a trace.
     foreach ($component in @('cpu', 'fpu', 'memory', 'disasm')) {
-        $project = Join-Path $repository ('src\bochs\vs2008\' + $component + '.vcproj')
-        if (-not (Test-Path -LiteralPath $project)) { throw "Original source inventory missing: $project" }
-        $relativeSources = Select-String -LiteralPath $project -Pattern 'RelativePath=".*\.cc"' |
-            ForEach-Object {
-                if ($_.Line -match 'RelativePath="([^"]+\.cc)"') { $matches[1] }
-            }
+        $directory = Join-Path $repository ('src\bx-core\' + $component)
+        if (-not (Test-Path -LiteralPath $directory -PathType Container)) { throw "Adopted core directory missing: $directory" }
+        $relativeSources = Get-ChildItem -LiteralPath $directory -File -Filter *.cc |
+            Sort-Object -Property Name | ForEach-Object { $_.Name }
         foreach ($relative in $relativeSources) {
-            $path = Join-Path ('src\bx-core\' + $component) (Split-Path $relative -Leaf)
+            $path = Join-Path ('src\bx-core\' + $component) $relative
             if ($sources.Path -contains $path) { continue }
             $name = 'whole_' + $component + '_' + ([IO.Path]::GetFileNameWithoutExtension($path))
             $extra = @('src\bx-core', 'src\bochs\iodev')
@@ -103,6 +117,9 @@ function New-MsvcCompileCommand([string]$source, [string]$object, [string[]]$ext
     $includes = @($includeRoots + $extraIncludes | Select-Object -Unique | ForEach-Object {
         '/I "' + (Join-Path $repository $_) + '"'
     }) -join ' '
+    if ([IO.Path]::GetExtension($source) -ieq '.c') {
+        return 'cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 ' + $includes + ' /Fo"' + $object + '" "' + $source + '"'
+    }
     return 'cl.exe /nologo /c /std:c++14 /EHsc /MT /Gy /DWIN32 ' + $includes + ' /FI "' + $config + '" /Fo"' + $object + '" "' + $source + '"'
 }
 
@@ -125,7 +142,54 @@ $compileExit = $LASTEXITCODE
 if ($compileExit -ne 0) { throw "MSVC compilation failed for the declared minimal native object set: $compileExit" }
 
 $probe = Join-Path $build 'minimal_machine_link_probe.cc'
-if ($A20CapabilityFixture) {
+if ($XmsPackageFixture) {
+@'
+#include "bochs.h"
+#include "bx-mantle/bx_ntvdm_minimal_machine.h"
+#include "bx-vdm/bx_ntvdm_xms_package_session_v1.h"
+#include <string.h>
+
+static int call(bx_ntvdm_xms_package_session_v1 *session, unsigned service,
+  unsigned ax, unsigned bx, unsigned dx, bx_ntvdm_cpu_result_v2 *result)
+{
+  Bit8u bytes[4] = { 0xc4, 0xc4, 0x52, (Bit8u)service };
+  bx_ntvdm_instruction_window_v1 window;
+  bx_ntvdm_bop_ingress_v1 ingress;
+  bx_ntvdm_bop_provider_selection_v1 selection;
+  bx_ntvdm_exception_event_v1 event = {};
+  bx_ntvdm_cpu_state_v1 cpu;
+  bx_ntvdm_instruction_window_v1_capture(&window, bytes, 4);
+  if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+      !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection)) return 0;
+  event.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
+  event.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
+  event.struct_bytes = sizeof(event);
+  event.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;
+  event.cpu_id = 1; event.vector = 6; event.fault_rip = 0x100;
+  bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+  cpu.eax = ax; cpu.ebx = bx; cpu.edx = dx;
+  return bx_ntvdm_xms_package_session_v1_dispatch(session, &ingress,
+    &selection, &event, &cpu, &window, result);
+}
+
+int main()
+{
+  bx_ntvdm_minimal_machine_c machine;
+  bx_ntvdm_xms_package_session_v1 session;
+  bx_ntvdm_cpu_result_v2 result;
+  if (machine.initialize(0x400000, 0x400000) != BX_NTVDM_MINIMAL_MACHINE_OK) return 1;
+  if (!bx_ntvdm_xms_package_session_v1_initialize(&session)) return 2;
+  if (!call(&session, 0, 0, 0, 0, &result) || result.cpu_delta.gpr16_values[0] != 1) return 3;
+  if (!call(&session, 0, 2, 0, 0, &result) || result.cpu_delta.gpr16_values[0] != 0) return 4;
+  if (!call(&session, 2, 0, 0, 64, &result) || result.cpu_delta.gpr16_values[0] != 1088) return 5;
+  if (!call(&session, 11, 1088, 96, 64, &result) || result.cpu_delta.gpr16_values[1] != 1152) return 6;
+  if (!call(&session, 3, 1152, 0, 96, &result) || result.cpu_delta.gpr16_values[0] != 1) return 7;
+  if (!call(&session, 5, 0, 0, 0, &result) || result.cpu_delta.gpr16_values[0] != 3072) return 8;
+  if (!call(&session, 1, 0, 0, 0, &result) || result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH) return 9;
+  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 10;
+}
+'@ | Set-Content -LiteralPath $probe -Encoding ascii
+} elseif ($A20CapabilityFixture) {
 @'
 #include "bochs.h"
 #include "bx-mantle/bx_ntvdm_minimal_machine.h"
@@ -209,6 +273,7 @@ $record = [ordered]@{
     wholeCpu5Core = [bool]$WholeCpu5Core
     instructionHistory = [bool]$InstructionHistory
     a20CapabilityFixture = [bool]$A20CapabilityFixture
+    xmsPackageFixture = [bool]$XmsPackageFixture
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
     configuration = 'tools/t197-s6-cpu5-mantle-config-projection.json'
     sources = @($sources | ForEach-Object { $_.Path })

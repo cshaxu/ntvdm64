@@ -29,10 +29,17 @@ struct bx_ntvdm_a20_capability_result_v1 {
   uint32_t enabled;
 };
 
-/* Minimal-machine lifecycle owner only; this is not a cross-component ABI. */
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Minimal-machine lifecycle owner only; fixed C linkage permits the adapter
+ * to call the same typed record without importing a C++ object. */
 void bx_ntvdm_a20_capability_v1_set_lifecycle_active(uint32_t active);
 void bx_ntvdm_a20_capability_v1_dispatch(
   const struct bx_ntvdm_a20_capability_request_v1 *request,
   struct bx_ntvdm_a20_capability_result_v1 *result);
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -32,12 +32,17 @@ $objects = Join-Path $build 'current-objects'
 New-Item -ItemType Directory -Path $objects | Out-Null
 $config = Join-Path $baseline 'native-core\config.h'
 $includes = @('src', 'src\bochs', 'src\bochs\instrument\stubs', 'src\bx-core', 'src\bx-core\cpu', 'src\bx-mantle', 'src\bx-vdm', 'src\cli', 'tests\bx-vdm') | ForEach-Object { '/I "' + (Join-Path $repository $_) + '"' }
+$compileCommands = [System.Collections.Generic.List[string]]::new()
 function Invoke-Compile([string]$Language, [string]$Source, [string]$Object, [string]$Defines) {
-    $common = 'call "' + $vsDevCmd + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /c /MT /DWIN32 ' +
+    $common = 'cl.exe /nologo /c /MT /DWIN32 ' +
         ($includes -join ' ') + ' /FI "' + $config + '" ' + $Defines + ' /Fo"' + $Object + '" "' + $Source + '"'
     $command = if ($Language -eq 'C') { $common.Replace('/c /MT', '/TC /c /std:c11 /W4 /WX /D_CRT_SECURE_NO_WARNINGS /MT') } else { $common.Replace('/c /MT', '/c /std:c++14 /EHsc /MT /Gy') }
-    & cmd.exe /d /s /c $command 2>&1 | Tee-Object -FilePath (Join-Path $build 'compile.log') -Append
-    if ($LASTEXITCODE -ne 0) { throw "S94 $Language compile failed: $Source" }
+    # Current-manifest sources share one x64 MSVC environment.  Re-entering
+    # VsDevCmd for every translation unit made the bounded native observation
+    # time out before link/run, without producing guest evidence.
+    $compileCommands.Add('echo ' + $Source)
+    $compileCommands.Add($command)
+    $compileCommands.Add('if errorlevel 1 exit /b %errorlevel%')
 }
 
 $current = @{}
@@ -45,7 +50,8 @@ foreach ($relative in $sources) {
     $base = [IO.Path]::GetFileNameWithoutExtension($relative)
     if ($current.ContainsKey($base)) { throw "Duplicate current object base name: $base" }
     $object = Join-Path $objects ($base + '.obj')
-    Invoke-Compile 'C' (Join-Path $repository $relative) $object ''
+    $language = if ([IO.Path]::GetExtension($relative) -eq '.cc') { 'C++' } else { 'C' }
+    Invoke-Compile $language (Join-Path $repository $relative) $object ''
     $current[$base] = $object
 }
 $bridge = Join-Path $build 'bridge.obj'
@@ -54,6 +60,13 @@ $lifecycleLedger = Join-Path $build 'dem-lifecycle-ledger.obj'
 Invoke-Compile 'C' (Join-Path $repository 'tests\bx-vdm\t198_s23_fastread_attempt_ledger.c') $ledger ''
 Invoke-Compile 'C' (Join-Path $repository 'tests\bx-vdm\t198_s121_dem_lifecycle_ledger.c') $lifecycleLedger ''
 Invoke-Compile 'C' (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_bridge.c') $bridge ''
+$compileBatch = Join-Path $build 'compile-current.cmd'
+@('@echo off', ('call "' + $vsDevCmd + '" -arch=x64 -host_arch=x64 >nul'),
+    'if errorlevel 1 exit /b %errorlevel%') + @($compileCommands) |
+    Set-Content -LiteralPath $compileBatch -Encoding ascii
+& cmd.exe /d /s /c ('call "' + $compileBatch + '"') 2>&1 |
+    Tee-Object -FilePath (Join-Path $build 'compile.log')
+if ($LASTEXITCODE -ne 0) { throw "S94 current-manifest compile failed: $LASTEXITCODE" }
 $fixture = Join-Path $prepared 'source-built-normal-return-fixture.obj'
 $commandBytes = Join-Path $prepared 'command_bytes.obj'
 $shareBytes = Join-Path $prepared 'share_bytes.obj'

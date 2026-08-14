@@ -61,3 +61,14 @@ not the underlying configuration error that selected it.
 The next work remains distinct: map the available source-built SHARE normal
 return candidate and its prerequisite startup path.  It must not mistake this
 fatal `50:3D` edge for proof of a CLI terminal result.
+
+## Current-status supersession (T199 S37)
+
+This T198 record preserves the original classification and the bounded native
+observation; its then-current “unimplemented” disposition is superseded.
+The T199 DEM package's existing `bx_ntvdm_dem_cli_unavailable_provider_v1`
+selects `50:3D` as a typed controlled stop after the miscellaneous plane
+declines it. This remains an adapter lifecycle result, not a UI recreation or
+an ambient process termination. The source-built all-DEM r48 regression
+asserts STOP with no resume RIP, register delta, or flags delta. It does not
+claim that a native guest reaching this fatal path is a successful boot.

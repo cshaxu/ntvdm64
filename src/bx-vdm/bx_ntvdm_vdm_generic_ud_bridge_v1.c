@@ -1,5 +1,6 @@
 #include "bx_ntvdm_vdm_generic_ud_bridge_v1.h"
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bx_ntvdm_native_bop_composition_v1.h"
 
 static int bx_ntvdm_vdm_generic_ud_event_valid(
     const struct bx_ntvdm_generic_ud_event_v1 *event)
@@ -53,5 +54,6 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    return bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome);
+    if (bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome)) return 1;
+    return bx_ntvdm_native_bop_composition_v1_handle(event, outcome);
 }

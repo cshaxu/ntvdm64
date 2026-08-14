@@ -67,16 +67,16 @@ static bx_bool bx_ntvdm_extmem_copy(Bit64u source, Bit64u destination,
   Bit64u offset;
   Bit64u chunk;
 
-  if (!bx_mem.ordinary_ram_readable(source, bytes) ||
-      !bx_mem.ordinary_ram_writable(destination, bytes)) return 0;
+  if (!bx_mem.backing_ram_readable(source, bytes) ||
+      !bx_mem.backing_ram_writable(destination, bytes)) return 0;
   if (destination > source && destination < source + bytes) {
     offset = bytes;
     while (offset != 0) {
       chunk = offset > BX_NTVDM_EXTMEM_COPY_CHUNK ?
         BX_NTVDM_EXTMEM_COPY_CHUNK : offset;
       offset -= chunk;
-      if (!bx_mem.copy_from_ordinary_ram(source + offset, chunk, copied) ||
-          !bx_mem.copy_to_ordinary_ram(destination + offset, chunk, copied))
+      if (!bx_mem.copy_from_backing_ram(source + offset, chunk, copied) ||
+          !bx_mem.copy_to_backing_ram(destination + offset, chunk, copied))
         return 0;
     }
   } else {
@@ -84,8 +84,8 @@ static bx_bool bx_ntvdm_extmem_copy(Bit64u source, Bit64u destination,
     while (offset != bytes) {
       chunk = bytes - offset > BX_NTVDM_EXTMEM_COPY_CHUNK ?
         BX_NTVDM_EXTMEM_COPY_CHUNK : bytes - offset;
-      if (!bx_mem.copy_from_ordinary_ram(source + offset, chunk, copied) ||
-          !bx_mem.copy_to_ordinary_ram(destination + offset, chunk, copied))
+      if (!bx_mem.copy_from_backing_ram(source + offset, chunk, copied) ||
+          !bx_mem.copy_to_backing_ram(destination + offset, chunk, copied))
         return 0;
       offset += chunk;
     }
@@ -151,7 +151,7 @@ void bx_ntvdm_extended_memory_v1_dispatch(
     }
     bytes = (Bit64u)request->kib * 1024u;
     if (!bx_ntvdm_extmem_find_free(bytes, end, &address) ||
-        !bx_mem.ordinary_ram_writable(address, bytes)) {
+        !bx_mem.backing_ram_writable(address, bytes)) {
       result->status = BX_NTVDM_EXTMEM_UNAVAILABLE;
       return;
     }
@@ -189,7 +189,7 @@ void bx_ntvdm_extended_memory_v1_dispatch(
       return;
     }
     if (!bx_ntvdm_extmem_find_free(bytes, end, &address) ||
-        !bx_mem.ordinary_ram_writable(address, bytes) ||
+        !bx_mem.backing_ram_writable(address, bytes) ||
         !bx_ntvdm_extmem_copy(bx_ntvdm_extmem_slots[index].address, address,
           bx_ntvdm_extmem_slots[index].bytes)) {
       result->status = BX_NTVDM_EXTMEM_UNAVAILABLE;

@@ -109,6 +109,7 @@ private:
 
   // BX-MEM-024: one-shot reset-window allocation without SIM or state tree.
   BX_MEM_SMF bx_bool init_memory_without_sim(Bit64u guest, Bit64u host);
+  BX_MEM_SMF bx_bool backing_ram_accessible(bx_phy_address addr, Bit64u len);
 
 public:
   BX_MEM_C();
@@ -143,6 +144,15 @@ public:
   // Performs the side-effect-free writable-span validation used by the
   // ordinary RAM copier, without copying or retaining a host mapping.
   BX_MEM_SMF bx_bool ordinary_ram_writable(bx_phy_address addr, Bit64u len);
+
+  // Checked access to unmasked physical RAM backing. Unlike ordinary-RAM
+  // access, this does not apply guest A20; it is for native backing owners.
+  BX_MEM_SMF bx_bool backing_ram_readable(bx_phy_address addr, Bit64u len);
+  BX_MEM_SMF bx_bool backing_ram_writable(bx_phy_address addr, Bit64u len);
+  BX_MEM_SMF bx_bool copy_from_backing_ram(bx_phy_address addr, Bit64u len,
+                                           Bit8u *data);
+  BX_MEM_SMF bx_bool copy_to_backing_ram(bx_phy_address addr, Bit64u len,
+                                         const Bit8u *data);
 
   // Note: accesses should always be contained within a single page
   BX_MEM_SMF void    readPhysicalPage(BX_CPU_C *cpu, bx_phy_address addr,

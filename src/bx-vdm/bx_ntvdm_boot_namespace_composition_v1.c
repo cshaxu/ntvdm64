@@ -2,7 +2,6 @@
 #include "bx_ntvdm_emm_unavailable_service.h"
 #include "bx_ntvdm_mouse_install1_mapping_service.h"
 #include "bx_ntvdm_printer_unavailable_service.h"
-#include "bx_ntvdm_vdd_create_user_notify_service.h"
 #include "bx_ntvdm_spckbd_init_service.h"
 #include "bx_ntvdm_bios_memory_service.h"
 #include "bx_ntvdm_command_plane_v1.h"
@@ -30,7 +29,9 @@ static int valid(const bx_ntvdm_boot_namespace_composition_v1 *value)
         value->abi_version == BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION &&
         value->struct_bytes == sizeof(*value) && value->bound <= 1u &&
         (value->guest_display_state == BYOB_GUEST_DISPLAY_STATE_NONE ||
-         value->guest_display_state == BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1);
+         value->guest_display_state == BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1) &&
+        bx_ntvdm_dem_package_session_v1_valid(&value->dem) &&
+        bx_ntvdm_command_package_session_v1_valid(&value->command);
 }
 
 static int unpack(const struct bx_ntvdm_generic_ud_event_v1 *event,
@@ -164,73 +165,6 @@ static int execute_mouse_install1_mapping(
     return bx_ntvdm_cpu_result_v2_valid(result);
 }
 
-/* This is one source-derived COMMAND bootstrap component, not a generic
- * selector recognizer.  The global ingress and the original-OpenNT provider
- * selection must already have classified either SVC_CMDCOMSPEC or
- * SVC_GETINITENVIRONMENT before the component may make an action. */
-static int execute_command_bootstrap(
-    bx_ntvdm_boot_namespace_composition_v1 *composition,
-    const bx_ntvdm_bop_ingress_v1 *ingress,
-    const bx_ntvdm_bop_provider_selection_v1 *selection,
-    const bx_ntvdm_exception_event_v1 *event,
-    const bx_ntvdm_cpu_state_v1 *cpu,
-    const bx_ntvdm_instruction_window_v1 *window,
-    bx_ntvdm_cpu_result_v2 *result)
-{
-    bx_ntvdm_command_plane_record_v1 command;
-    bx_ntvdm_guest_gather_read_action_v1 read;
-    bx_ntvdm_multi_write_transaction_v1 write;
-    struct bx_ntvdm_mechanical_action_v1 action;
-    uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
-    uint32_t action_id;
-
-    if (composition == 0 || ingress == 0 || selection == 0 || event == 0 ||
-        cpu == 0 || window == 0 || result == 0 ||
-        !bx_ntvdm_command_plane_v1_classify(ingress, selection, &command) ||
-        command.disposition != BX_NTVDM_COMMAND_PLANE_DEFERRED ||
-        (command.service != 2u && command.service != 15u)) return 0;
-    if (command.service == 2u) {
-        if (bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(event, cpu, window,
-                &composition->command_bootstrap, &read)) {
-            if (read.disposition != BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_NEED_READ ||
-                read.range_count != 1u ||
-                read.total_bytes != BX_NTVDM_CMD_COMSPEC_TEXT_MAX_BYTES ||
-                read.ranges[0].length != BX_NTVDM_CMD_COMSPEC_TEXT_MAX_BYTES ||
-                read.ranges[0].address > UINT64_C(0x100000) - read.ranges[0].length ||
-                composition->plane.next_action_id == 0u) return 0;
-            action_id = composition->plane.next_action_id++;
-            if (composition->plane.next_action_id == 0u)
-                composition->plane.next_action_id = 1u;
-            bx_ntvdm_mechanical_action_v1_clear(&action);
-            action.action_id = action_id;
-            action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_READ;
-            action.range_count = 1u;
-            action.payload_bytes = (uint32_t)read.total_bytes;
-            action.ranges[0].physical_address = read.ranges[0].address;
-            action.ranges[0].byte_count = (uint32_t)read.ranges[0].length;
-            action.ranges[0].payload_offset = 0u;
-            if (!bx_ntvdm_mechanical_action_v1_valid(&action) ||
-                !bx_ntvdm_mantle_execute_mechanical_action_v1(&action) ||
-                !bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(event, cpu,
-                    &read, action.payload, action.payload_bytes,
-                    &composition->command_bootstrap, result)) return 0;
-            return bx_ntvdm_cpu_result_v2_valid(result);
-        }
-        return bx_ntvdm_cmd_comspec_bootstrap_v1_repeat_comspec(event, cpu, window,
-            &composition->command_bootstrap, result) &&
-            bx_ntvdm_cpu_result_v2_valid(result);
-    }
-    if (!bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(event, cpu, window,
-            &composition->command_bootstrap, &write, payload) ||
-        !bx_ntvdm_cpu_result_v2_valid(&write.result)) return 0;
-    if (write.writes.write_count != 0u &&
-        (!execute_multi_write(composition, &write, payload) ||
-         !bx_ntvdm_cmd_comspec_bootstrap_v1_complete_environment(
-             &composition->command_bootstrap, &write))) return 0;
-    *result = write.result;
-    return bx_ntvdm_cpu_result_v2_valid(result);
-}
-
 /* Returns 1 for a completed selected stream transaction, 0 when this is not
  * a selected BOP 5F request, and -1 when a selected request cannot complete.
  * The latter deliberately declines rather than falsely taking the old
@@ -291,12 +225,9 @@ int bx_ntvdm_boot_namespace_composition_v1_initialize(
     value->abi_version = BX_NTVDM_BOOT_NAMESPACE_COMPOSITION_V1_VERSION;
     value->struct_bytes = sizeof(*value); value->bound = 0;
     value->guest_display_state = selection->guest_display_state;
-    bx_ntvdm_cmd_comspec_bootstrap_v1_initialize(&value->command_bootstrap);
-    bx_ntvdm_command_launch_plane_v1_clear(&value->launch);
-    bx_ntvdm_cmd_get_next_state_v1_initialize(&value->cmd_get_next);
-    value->has_launch_plan = 0u;
-    bx_ntvdm_dem_error_lock_plane_v1_clear(&value->error_lock);
-    bx_ntvdm_dem_gset_plane_v1_clear(&value->gset);
+    if (!bx_ntvdm_dem_package_session_v1_initialize(&value->dem,
+            &value->plane) || !bx_ntvdm_command_package_session_v1_initialize(
+            &value->command, &value->plane, &value->dem.gset)) return 0;
     return valid(value);
 }
 
@@ -319,94 +250,22 @@ int bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
     const bx_ntvdm_host_drive_snapshot_v1 *snapshot)
 {
     return valid(value) && !value->bound &&
-        bx_ntvdm_dem_gset_plane_v1_set_drive_snapshot(&value->gset, snapshot);
+        bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&value->dem, snapshot);
+}
+
+int bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(
+    bx_ntvdm_boot_namespace_composition_v1 *value,
+    const bx_ntvdm_host_volume_snapshot_v1 *snapshot)
+{
+    return valid(value) && !value->bound &&
+        bx_ntvdm_dem_package_session_v1_set_volume_snapshot(&value->dem,
+            snapshot);
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
     bx_ntvdm_boot_namespace_composition_v1 *value, const byob_launch_plan_v2 *plan)
-{
-    wchar_t encoded[BYOB_LAUNCH_PLAN_V2_ENV_CHARS]; byob_launch_plan_v2 checked;
-    if (!valid(value) || value->bound || !plan ||
-        !byob_launch_plan_v2_to_environment(plan, encoded) ||
-        !byob_launch_plan_v2_from_environment(&checked, encoded)) return 0;
-    value->launch_plan = checked; value->has_launch_plan = 1u; return 1;
-}
-
-static int execute_command_get_next(bx_ntvdm_boot_namespace_composition_v1 *x,
-    const bx_ntvdm_exception_event_v1 *e, const bx_ntvdm_cpu_state_v1 *c,
-    const bx_ntvdm_instruction_window_v1 *w, bx_ntvdm_cpu_result_v2 *r)
-{
-    bx_ntvdm_guest_gather_read_action_v1 read; bx_ntvdm_multi_write_transaction_v1 write;
-    struct bx_ntvdm_mechanical_action_v1 action; uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
-    uint32_t id;
-    if (!x || !e || !c || !w || !r || !x->has_launch_plan || !x->launch.valid ||
-        !x->gset.has_drive_snapshot || !bx_ntvdm_cmd_get_next_v1_prepare(&x->cmd_get_next,
-            &x->launch_plan,e,c,w,&read) || read.range_count != 1u ||
-        read.total_bytes != BX_NTVDM_CMDINFO_V1_BYTES || !x->plane.next_action_id) return 0;
-    id=x->plane.next_action_id++; if(!x->plane.next_action_id)x->plane.next_action_id=1u;
-    bx_ntvdm_mechanical_action_v1_clear(&action); action.action_id=id;
-    action.kind=BX_NTVDM_MECHANICAL_ACTION_V1_READ; action.range_count=1u;
-    action.payload_bytes=(uint32_t)read.total_bytes; action.ranges[0].physical_address=read.ranges[0].address;
-    action.ranges[0].byte_count=(uint32_t)read.ranges[0].length;
-    if(!bx_ntvdm_mechanical_action_v1_valid(&action)||!bx_ntvdm_mantle_execute_mechanical_action_v1(&action)||
-       !bx_ntvdm_cmd_get_next_v1_complete(&x->plane.provider.readonly_namespace,&x->launch_plan,
-          &x->gset.drive_snapshot,&x->launch.registration,&x->cmd_get_next,e,c,&read,action.payload,
-          action.payload_bytes,&write,payload)||!execute_multi_write(x,&write,payload))return 0;
-    bx_ntvdm_cmd_get_next_state_v1_commit(&x->cmd_get_next); *r=write.result; return bx_ntvdm_cpu_result_v2_valid(r);
-}
-
-/* The finite no-install response is a COMMAND console-plane capability
- * substitution.  Identity first comes from common ingress/provider selection;
- * this helper does not independently select a BOP or borrow the legacy runtime
- * gate. */
-static int execute_command_keyboard_layout(
-    const bx_ntvdm_bop_ingress_v1 *ingress,
-    const bx_ntvdm_bop_provider_selection_v1 *selection,
-    const bx_ntvdm_exception_event_v1 *event,
-    const bx_ntvdm_cpu_state_v1 *cpu,
-    const bx_ntvdm_instruction_window_v1 *window,
-    bx_ntvdm_cpu_result_v2 *result)
-{
-    bx_ntvdm_command_plane_record_v1 command;
-    return ingress != 0 && selection != 0 && event != 0 && cpu != 0 &&
-        window != 0 && result != 0 &&
-        bx_ntvdm_command_plane_v1_classify(ingress, selection, &command) &&
-        command.component == BX_NTVDM_COMMAND_COMPONENT_CONSOLE &&
-        command.disposition == BX_NTVDM_COMMAND_PLANE_DEFERRED &&
-        command.service == 14u && bx_ntvdm_cmd_keyboard_layout_v1_dispatch(
-            event, cpu, window, result);
-}
-
-/* As with the keyboard-layout capability, the original selector identity must
- * first cross the common planes.  The finite current-directory provider uses
- * only the immutable admission mask and generic RAM-write mechanics. */
-static int execute_command_current_directory(
-    bx_ntvdm_boot_namespace_composition_v1 *composition,
-    const bx_ntvdm_bop_ingress_v1 *ingress,
-    const bx_ntvdm_bop_provider_selection_v1 *selection,
-    const bx_ntvdm_exception_event_v1 *event,
-    const bx_ntvdm_cpu_state_v1 *cpu,
-    const bx_ntvdm_instruction_window_v1 *window,
-    bx_ntvdm_cpu_result_v2 *result)
-{
-    bx_ntvdm_command_plane_record_v1 command;
-    bx_ntvdm_multi_write_transaction_v1 transaction;
-    uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
-    if (composition == 0 || ingress == 0 || selection == 0 || event == 0 ||
-        cpu == 0 || window == 0 || result == 0 ||
-        !composition->gset.has_drive_snapshot ||
-        !bx_ntvdm_command_plane_v1_classify(ingress, selection, &command) ||
-        command.component != BX_NTVDM_COMMAND_COMPONENT_LAUNCH ||
-        command.disposition != BX_NTVDM_COMMAND_PLANE_DEFERRED ||
-        command.service != 4u || !bx_ntvdm_cmd_current_dir_service_v1_prepare(
-            composition->gset.drive_snapshot.admitted_mask, event, cpu, window,
-            &transaction, payload) ||
-        !bx_ntvdm_cpu_result_v2_valid(&transaction.result) ||
-        (transaction.writes.write_count != 0u &&
-         !execute_multi_write(composition, &transaction, payload))) return 0;
-    *result = transaction.result;
-    return bx_ntvdm_cpu_result_v2_valid(result);
-}
+{ return valid(value) && !value->bound &&
+      bx_ntvdm_command_package_session_v1_set_launch_plan(&value->command, plan); }
 
 int bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
     const bx_ntvdm_boot_namespace_composition_v1 *value,
@@ -430,13 +289,9 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     bx_ntvdm_exception_event_v1 boundary; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_instruction_window_v1 window; bx_ntvdm_bop_ingress_v1 ingress;
     bx_ntvdm_bop_provider_selection_v1 selection; bx_ntvdm_cpu_result_v2 result;
-    bx_ntvdm_dem_plane_record_v1 dem_plane;
-    bx_ntvdm_dem_package_route_v1 dem_route;
-    bx_ntvdm_command_package_route_v1 command_route;
     uint32_t top_level_route;
     uint32_t machine_route;
     bx_ntvdm_exception_result_v1 memory_result;
-    struct bx_ntvdm_mechanical_action_v1 action, next;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
             &cpu, &window)) return 0;
     if (bx_ntvdm_emm_unavailable_service_v1_dispatch(&boundary, &cpu, &window,
@@ -444,8 +299,6 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     if (execute_mouse_install1_mapping(active, &boundary, &cpu, &window,
             &result)) return outcome(&result, value);
     if (bx_ntvdm_printer_unavailable_service_v1_dispatch(&boundary, &cpu,
-            &window, &result)) return outcome(&result, value);
-    if (bx_ntvdm_vdd_create_user_notify_service_v1_dispatch(&boundary, &cpu,
             &window, &result)) return outcome(&result, value);
     if (!bx_ntvdm_bop_ingress_v1_dispatch(&boundary, &cpu,
             &window, &ingress, &result) || !bx_ntvdm_cpu_result_v2_valid(&result) ||
@@ -480,87 +333,15 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
                     &window, &result)) return outcome(&result, value);
         }
     }
-    /* Every DEM member crosses one package gate before an existing provider.
-     * Deferred records produce no result, while the original no-op is complete
-     * here rather than being a detached service recognizer. */
-    if (bx_ntvdm_dem_package_facade_v1_classify(&ingress, &selection,
-            &dem_route)) {
-        if (bx_ntvdm_dem_package_facade_v1_dispatch(&ingress, &selection,
-                &dem_route, &boundary, &cpu, &result)) return outcome(&result, value);
-        dem_plane = dem_route.plane;
-    }
-    if (bx_ntvdm_command_package_facade_v1_classify(&ingress, &selection,
-            &command_route) && bx_ntvdm_command_package_facade_v1_dispatch(
-            &ingress, &selection, &command_route, &boundary, &cpu, &result))
+    if (bx_ntvdm_dem_package_session_v1_dispatch(&active->dem, &ingress,
+            &selection, &boundary, &cpu, &window, &result))
+        return outcome(&result, value);
+    if (bx_ntvdm_command_package_session_v1_dispatch(&active->command,
+            &ingress, &selection, &boundary, &cpu, &window, &result))
         return outcome(&result, value);
     if (bx_ntvdm_redir_package_facade_v1_dispatch(&ingress, &selection,
             &boundary, &cpu, &result)) return outcome(&result, value);
     if (bx_ntvdm_debugger_package_facade_v1_dispatch(&ingress, &selection,
             &boundary, &cpu, &result)) return outcome(&result, value);
-    if (bx_ntvdm_dem_misc_plane_v1_dispatch(&ingress, &selection, &boundary,
-            &cpu, &window, &memory_result)) {
-        if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
-            !bx_ntvdm_cpu_result_v2_resume(&result, memory_result.resume_rip)) return 0;
-        result.cpu_delta = memory_result.cpu_delta;
-        return outcome(&result, value);
-    }
-    if (bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &dem_plane) &&
-        bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
-            &active->plane.provider, &ingress, &selection, &dem_plane,
-            &boundary, &cpu, &result)) return outcome(&result, value);
-    if (bx_ntvdm_dem_error_lock_plane_v1_dispatch(&active->error_lock,
-            &ingress, &selection, &boundary, &cpu, &window, &result))
-        return outcome(&result, value);
-    if (bx_ntvdm_dem_gset_plane_v1_dispatch(&active->gset, &ingress,
-            &selection, &boundary, &cpu, &window, &result))
-        return outcome(&result, value);
-    if (active->gset.has_drive_snapshot &&
-        bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &dem_plane) &&
-        bx_ntvdm_dem_ioctl_metadata_provider_v1_dispatch(&ingress, &selection,
-            &dem_plane, &active->gset.drive_snapshot, &boundary, &cpu,
-            &result)) return outcome(&result, value);
-    if (bx_ntvdm_dem_boot_drive_service_v1_dispatch(&boundary, &cpu,
-            &window, &memory_result)) {
-        if (memory_result.disposition != BX_NTVDM_EXCEPTION_RESULT_RESUME ||
-            !bx_ntvdm_cpu_result_v2_resume(&result, memory_result.resume_rip)) return 0;
-        result.cpu_delta = memory_result.cpu_delta;
-        return outcome(&result, value);
-    }
-    if (active->gset.has_drive_snapshot) {
-        bx_ntvdm_multi_write_transaction_v1 transaction;
-        uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
-        if (bx_ntvdm_dem_dpb_service_v1_prepare(
-                active->gset.drive_snapshot.types, &boundary, &cpu, &window,
-                &transaction, payload)) {
-            if (!execute_multi_write(active, &transaction, payload)) return 0;
-            return outcome(&transaction.result, value);
-        }
-    }
-    if (execute_command_keyboard_layout(&ingress, &selection, &boundary, &cpu,
-            &window, &result)) return outcome(&result, value);
-    if (execute_command_current_directory(active, &ingress, &selection,
-            &boundary, &cpu, &window, &result)) return outcome(&result, value);
-    if (execute_command_bootstrap(active, &ingress, &selection, &boundary, &cpu,
-            &window, &result)) return outcome(&result, value);
-    if (bx_ntvdm_command_launch_plane_v1_dispatch(&active->launch, &ingress,
-            &selection, &boundary, &cpu, &window, &result)) return outcome(&result, value);
-    if (execute_command_get_next(active, &boundary, &cpu, &window, &result))
-        return outcome(&result, value);
-    if (
-        !bx_ntvdm_boot_namespace_plane_v1_dispatch(&active->plane, &ingress,
-            &selection, &boundary, &cpu, &window, &action, &result)) return 0;
-    /* A zero-byte read is a normal typed CPU result: it has no guest RAM
-     * transfer.  Do not manufacture an empty mantle WRITE, whose mechanical
-     * action contract intentionally requires a real range. */
-    if (action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_NONE &&
-        !(action.kind == BX_NTVDM_MECHANICAL_ACTION_V1_WRITE &&
-          action.range_count == 0u && action.payload_bytes == 0u) &&
-        !bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) return 0;
-    if (action.kind == BX_NTVDM_MECHANICAL_ACTION_V1_READ) {
-        if (!bx_ntvdm_boot_namespace_plane_v1_complete_read(&active->plane,
-                &action, &next, &result)) return 0;
-        if (next.kind != BX_NTVDM_MECHANICAL_ACTION_V1_NONE &&
-            !bx_ntvdm_mantle_execute_mechanical_action_v1(&next)) return 0;
-    }
-    return outcome(&result, value);
+    return 0;
 }

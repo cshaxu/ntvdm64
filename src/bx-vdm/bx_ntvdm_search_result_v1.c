@@ -103,3 +103,20 @@ int bx_ntvdm_search_result_v1_prepare_path_no_more(
         !bx_ntvdm_cpu_result_v2_set_cf(&tx->result, 1)) return 0;
     return 1;
 }
+
+int bx_ntvdm_search_result_v1_prepare_fcb_no_more(
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before, uint64_t searchbuf_address,
+    bx_ntvdm_multi_write_transaction_v1 *tx, uint8_t payload[8])
+{
+    /* OpenNT demFindNextFCB clears DIRENT.pFFindEntry/FFindId before its
+     * ERROR_NO_MORE_FILES branch.  Those are SRCHBUF bytes 32..39. */
+    if (tx == 0 || payload == 0 || searchbuf_address > UINT64_MAX - 40u) return 0;
+    bx_ntvdm_multi_write_transaction_v1_initialize(tx, boundary, cpu_before);
+    memset(payload, 0, 8u);
+    if (!bx_ntvdm_multi_write_v1_add(&tx->writes, searchbuf_address + 32u,
+            8u, 0u) || !bx_ntvdm_search_result_finish(tx, boundary, cpu_before) ||
+        !bx_ntvdm_cpu_delta_v1_set_gpr16(&tx->result.cpu_delta, 0u, 0x12u) ||
+        !bx_ntvdm_cpu_result_v2_set_cf(&tx->result, 1)) return 0;
+    return 1;
+}

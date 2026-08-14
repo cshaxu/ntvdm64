@@ -27,12 +27,16 @@ int bx_ntvdm_search_result_v1_prepare_fcb(
     bx_ntvdm_multi_write_transaction_v1 *transaction,
     uint8_t payload[51]);
 
-/* Path FindFirst/FindNext source paths clear both continuation words and
- * return ERROR_NO_MORE_FILES. FCB error behavior remains intentionally out
- * of this API because its next-path source observation is unresolved. */
+/* Path and FCB next paths clear their retained continuation words and return
+ * ERROR_NO_MORE_FILES. Their token locations differ by the OpenNT packed
+ * DTA/SRCHBUF layouts. */
 int bx_ntvdm_search_result_v1_prepare_path_no_more(
     const bx_ntvdm_exception_event_v1 *boundary,
     const bx_ntvdm_cpu_state_v1 *cpu_before, uint64_t dta_address,
+    bx_ntvdm_multi_write_transaction_v1 *transaction, uint8_t payload[8]);
+int bx_ntvdm_search_result_v1_prepare_fcb_no_more(
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before, uint64_t searchbuf_address,
     bx_ntvdm_multi_write_transaction_v1 *transaction, uint8_t payload[8]);
 
 #endif

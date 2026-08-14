@@ -24,9 +24,12 @@ int bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
         selection->disposition != BX_NTVDM_BOP_PROVIDER_DEFERRED ||
         selection->provider_family != BX_NTVDM_BOP_PROVIDER_DEM ||
         selection->precedence !=
-            BX_NTVDM_BOP_PROVIDER_PRECEDENCE_SOURCE_DERIVED_AFTER_BLOCKER ||
+            BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT ||
         plane->service != ingress->service ||
-        plane->component != BX_NTVDM_DEM_COMPONENT_NAMESPACE ||
+        /* demTerminatePDB is implemented by demsrch.c.  It is a MISC
+         * lifecycle notification that releases per-PDB search state, not a
+         * namespace selector exception. */
+        plane->component != BX_NTVDM_DEM_COMPONENT_MISC ||
         plane->disposition != BX_NTVDM_DEM_PLANE_DEFERRED ||
         event->kind != BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION || event->vector != 6u ||
         cpu_before->execution_mode != BX_NTVDM_CPU_EXECUTION_REAL ||

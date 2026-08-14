@@ -1,6 +1,8 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
+    [ValidateSet('boot-namespace', 'dem-package', 'readonly-file')]
+    [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
 )
@@ -42,11 +44,13 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_cmd_get_next_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_current_dir_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_keyboard_layout_service.c',
+    'src\bx-vdm\bx_ntvdm_cmd_cli_profile_service.c',
     'src\bx-vdm\bx_ntvdm_cmdinfo_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_set_info_service.c',
     'src\bx-vdm\bx_ntvdm_command_launch_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_command_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_command_package_facade_v1.c',
+    'src\bx-vdm\bx_ntvdm_command_package_session_v1.c',
     'src\bx-vdm\bx_ntvdm_command_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_redir_package_facade_v1.c',
     'src\bx-vdm\bx_ntvdm_debugger_package_facade_v1.c',
@@ -61,18 +65,32 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_load_dos_service.c',
     'src\bx-vdm\bx_ntvdm_dem_debug_service.c',
     'src\bx-vdm\bx_ntvdm_dem_boot_drive_service.c',
+    'src\bx-vdm\bx_ntvdm_dem_cli_unavailable_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_dpb_service.c',
+    'src\bx-vdm\bx_ntvdm_dem_clock_service_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_check_path_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_drive_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_error_lock_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_fastio_provider_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_fcb_provider_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_fcb_search_service_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_computer_name_service_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_current_dir_service_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_default_drive_service_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_full_dpb_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_gset_plane_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_media_id_service_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_volume_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_hard_error_service.c',
     'src\bx-vdm\bx_ntvdm_dem_ioctl_metadata_provider_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_raw_media_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_misc_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_package_facade_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_package_session_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_readonly_file_service.c',
+    'src\bx-vdm\bx_ntvdm_dem_readonly_namespace_failure_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_session_lifecycle_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_system_symbol_service.c',
     'src\bx-vdm\bx_ntvdm_emm_unavailable_service.c',
@@ -82,6 +100,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_guest_read_action_v1.c',
     'src\bx-vdm\bx_ntvdm_guest_write_abi.c',
     'src\bx-vdm\bx_ntvdm_host_drive_policy.c',
+    'src\bx-vdm\bx_ntvdm_host_volume_snapshot_v1.c',
     'src\bx-vdm\bx_ntvdm_instruction_window_abi.c',
     'src\bx-vdm\bx_ntvdm_multi_write_abi.c',
     'src\bx-vdm\bx_ntvdm_multi_write_transaction.c',
@@ -102,8 +121,16 @@ $sourceRelatives = @(
     'src\cli\byob_launch_plan_v2.c',
     'src\cli\byob_launch_declaration_v1.c',
     'src\cli\byob_profile.c',
-    'tests\bx-vdm\bx_ntvdm_boot_namespace_composition_v1_test.c'
+    'tests\bx-vdm\bx_ntvdm_native_bop_composition_decline_stub.c'
 )
+if ($Fixture -eq 'dem-package') {
+    $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_package_family_v1_test.c'
+} elseif ($Fixture -eq 'readonly-file') {
+    $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_readonly_file_service_test.c'
+    $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c'
+} else {
+    $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_boot_namespace_composition_v1_test.c'
+}
 $sources = @($sourceRelatives | ForEach-Object { Join-Path $repository $_ })
 foreach ($source in $sources) {
     if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
@@ -139,7 +166,7 @@ $compileExit = $LASTEXITCODE
 $compileOutput | Out-File -LiteralPath $compileLog
 if ($compileExit -ne 0) { throw "MSVC C source closure compilation failed: $compileExit" }
 
-$exe = Join-Path $build 't198-s16-bx-vdm-boot-namespace.exe'
+$exe = Join-Path $build ('t198-s16-bx-vdm-' + $Fixture + '.exe')
 $map = Join-Path $build 'link.map'
 $response = Join-Path $build 'link.rsp'
 $linkLog = Join-Path $build 'link.log'
@@ -150,7 +177,7 @@ $linkLog = Join-Path $build 'link.log'
     ' -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 |
     Tee-Object -LiteralPath $linkLog
 $linkExit = $LASTEXITCODE
-if ($linkExit -ne 0) { throw "MSVC x64 boot-namespace link failed: $linkExit" }
+if ($linkExit -ne 0) { throw "MSVC x64 bx-vdm fixture link failed: $linkExit" }
 
 $headers = Join-Path $build 'headers.txt'
 & cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture +
@@ -160,13 +187,19 @@ $runLog = Join-Path $build 'run.log'
 & cmd.exe /d /s /c ('"' + $exe + '" > "' + $runLog + '" 2>&1')
 $runExit = $LASTEXITCODE
 $record = [ordered]@{
-    schema = 'ntdos64.t198.s16.boot-namespace-vdm-x64-probe.v1'
+    schema = 'ntdos64.t198.s16.bx-vdm-x64-probe.v2'
     architecture = $HostArchitecture
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
     runtime = '/MT'
     platformLibraries = @('bcrypt.lib')
     sourceClosure = $sourceRelatives
-    fixture = 'tests/bx-vdm/bx_ntvdm_boot_namespace_composition_v1_test.c'
+    fixture = if ($Fixture -eq 'dem-package') {
+        'tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c'
+    } elseif ($Fixture -eq 'readonly-file') {
+        'tests/bx-vdm/bx_ntvdm_dem_readonly_file_service_test.c'
+    } else {
+        'tests/bx-vdm/bx_ntvdm_boot_namespace_composition_v1_test.c'
+    }
     forbiddenInputs = $forbidden
     linkExitCode = $linkExit
     runExitCode = $runExit
@@ -179,5 +212,5 @@ $record = [ordered]@{
     runLog = 'run.log'
 }
 $record | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 't198-s16-bx-vdm-boot-namespace.json') -Encoding utf8
-if ($runExit -ne 0) { throw "MSVC x64 boot-namespace fixture failed: $runExit" }
-Write-Host "Built and ran MSVC x64 boot-namespace composition fixture: $exe"
+if ($runExit -ne 0) { throw "MSVC x64 bx-vdm fixture failed: $runExit" }
+Write-Host "Built and ran MSVC x64 bx-vdm fixture ($Fixture): $exe"

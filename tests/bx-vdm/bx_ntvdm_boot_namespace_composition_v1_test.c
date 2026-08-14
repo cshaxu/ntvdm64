@@ -63,7 +63,9 @@ static int facade_existing_provider(uint32_t service)
 {
     switch (service) {
     case 0x00u: case 0x02u: case 0x09u: case 0x0bu: case 0x0du:
-    case 0x11u: case 0x12u: case 0x16u: case 0x18u: case 0x1bu:
+    case 0x11u: case 0x12u: case 0x14u: case 0x15u: case 0x16u: case 0x18u:
+    case 0x19u:
+    case 0x1bu: case 0x1cu:
     case 0x32u: case 0x3bu: case 0x3cu: case 0x45u: case 0x46u:
         return 1;
     default:
@@ -95,12 +97,13 @@ static int facade_regression(void)
             BX_NTVDM_DEM_PACKAGE_ORIGINAL_NOOP : service == 0x42u ?
             BX_NTVDM_DEM_PACKAGE_FASTREAD_COMPATIBILITY :
             facade_existing_provider(service) ? BX_NTVDM_DEM_PACKAGE_EXISTING_PROVIDER :
-            BX_NTVDM_DEM_PACKAGE_DEFERRED;
+            BX_NTVDM_DEM_PACKAGE_EXPLICIT_SOURCE_FAILURE;
         bx_ntvdm_instruction_window_v1_capture(&window, bytes, 4u);
         if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
             !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
             !bx_ntvdm_dem_package_facade_v1_classify(&ingress, &selection, &route) ||
-            route.plane.service != service || route.disposition != expected) return 0;
+            route.plane.service != service || route.disposition != expected)
+            return (int)(45u + service);
         if (expected == BX_NTVDM_DEM_PACKAGE_ORIGINAL_NOOP) {
             bx_ntvdm_exception_event_v1 event;
             bx_ntvdm_cpu_state_v1 cpu;
@@ -142,8 +145,8 @@ static int command_facade_regression(void)
         bx_ntvdm_instruction_window_v1 window; bx_ntvdm_bop_ingress_v1 ingress;
         bx_ntvdm_bop_provider_selection_v1 selection; bx_ntvdm_command_package_route_v1 route;
         uint32_t expected=(service==3u)?BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP:
-            ((service==8u||service==10u)?BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE:
-            ((service==1u||service==2u||service==4u||service==5u||service==12u||service==13u||service==14u)?BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER:BX_NTVDM_COMMAND_PACKAGE_DEFERRED));
+            ((service==6u||service==8u||service==10u)?BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE:
+            BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER);
         bx_ntvdm_instruction_window_v1_capture(&window,bytes,4u);
         if(!bx_ntvdm_bop_ingress_v1_classify(&window,&ingress)||!bx_ntvdm_bop_provider_registry_v1_select(&ingress,&selection)||!bx_ntvdm_command_package_facade_v1_classify(&ingress,&selection,&route)||route.disposition!=expected) return 0;
         if(expected==BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP||expected==BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE){bx_ntvdm_exception_event_v1 event;bx_ntvdm_cpu_state_v1 cpu;bx_ntvdm_cpu_result_v2 result;memset(&event,0,sizeof(event));event.magic=BX_NTVDM_EXCEPTION_ABI_MAGIC;event.abi_version=BX_NTVDM_EXCEPTION_ABI_VERSION;event.struct_bytes=sizeof(event);event.kind=BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;event.vector=6u;event.fault_rip=0x100u;bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);if(!bx_ntvdm_command_package_facade_v1_dispatch(&ingress,&selection,&route,&event,&cpu,&result)||result.disposition!=(expected==BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP?(uint32_t)BX_NTVDM_CPU_RESULT_V2_RESUME:(uint32_t)BX_NTVDM_CPU_RESULT_V2_STOP))return 0;}
@@ -169,6 +172,9 @@ int main(void)
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t token;
     uint32_t service;
+    bx_ntvdm_host_namespace_entry_v1 terminating_entries[2] = { 0 };
+    bx_ntvdm_host_namespace_entry_v1 terminating_out;
+    bx_ntvdm_search_token_v1 terminating_token;
 
     profile_initialize(&profile);
     if (!facade_regression()) return 45;
@@ -188,6 +194,122 @@ int main(void)
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,
             &launch_plan) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 2;
+    /* The COMMAND package, rather than a trace observation, defines every
+       callable outcome.  Selected positive services are exercised below;
+       this sweep proves the no-op, common unavailable route, and all five
+       currently unadmitted members use the same bound session entry. */
+    for (service = 0u; service < 17u; ++service) {
+        event_initialize(&event, 0x54u, (uint8_t)service);
+        if (service == 3u) {
+            if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+                outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+                outcome.resume_rip != 0x104u) return 55;
+        } else if (service == 6u || service == 8u || service == 10u) {
+            if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+                outcome.disposition != BX_NTVDM_GENERIC_UD_STOP) return 56;
+        } else if (service == 0u) {
+            if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+                outcome.disposition != BX_NTVDM_GENERIC_UD_STOP) return 57;
+        } else if (service == 7u || service == 9u || service == 11u ||
+                   service == 16u) {
+            if (service == 11u) event.eax = 0xa57fu;
+            if (service == 16u) event.eax = 0x8c77u;
+            if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+                outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+                outcome.resume_rip != 0x104u) return 57;
+            if (service == 7u && (outcome.eflags_write_mask !=
+                    BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+                    outcome.eflags_values != 0u)) return 59;
+            if (service == 9u && (outcome.gpr16_write_mask != 0u ||
+                    outcome.eflags_write_mask != 0u)) return 60;
+            if (service == 11u && (outcome.gpr16_write_mask != 1u ||
+                    outcome.gpr16_values[0] != 0xa500u ||
+                    outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+                    outcome.eflags_values != 0u)) return 61;
+            if (service == 16u && (outcome.gpr16_write_mask != 1u ||
+                    outcome.gpr16_values[0] != 0x8c00u)) return 62;
+        }
+    }
+    /* GSET clock is one contained read-only host capability.  Query results
+       are structurally checked, while setters must never change host time and
+       use OpenNT's AL=FF failure form. */
+    event_initialize(&event, 0x50u, 0x14u);
+    event.eax = 0xa500u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u ||
+        outcome.gpr16_write_mask != ((1u << 0) | (1u << 2) | (1u << 3)) ||
+        outcome.gpr16_values[0] < 0xa500u || outcome.gpr16_values[0] > 0xa506u ||
+        outcome.gpr16_values[2] < 2020u ||
+        (outcome.gpr16_values[3] >> 8) == 0u ||
+        (outcome.gpr16_values[3] & 0xffu) == 0u) return 63;
+    event_initialize(&event, 0x50u, 0x19u);
+    event.eax = 0xa500u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.gpr16_write_mask != 1u || outcome.gpr16_values[0] != 0xa5ffu)
+        return 64;
+    /* `50:40` is an original DEM demNotYetImplemented no-op.  It must reach the DEM
+       package session, not bypass common ingress as a detached recognizer. */
+    event_initialize(&event, 0x50u, 0x40u);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u) return 58;
+    /* This is a real-mode family sweep. Each service must finish as a typed
+       resume or controlled stop; a provider may not leave a guest #UD to the
+       CPU merely because its original host precondition is unavailable. */
+    for (service = 0u; service < 73u; ++service) {
+        uint8_t bytes[4] = { 0xc4u, 0xc4u, 0x50u, (uint8_t)service };
+        bx_ntvdm_instruction_window_v1 window;
+        bx_ntvdm_bop_ingress_v1 ingress;
+        bx_ntvdm_bop_provider_selection_v1 selection;
+        bx_ntvdm_exception_event_v1 boundary;
+        bx_ntvdm_cpu_state_v1 state;
+        bx_ntvdm_cpu_result_v2 result;
+        bx_ntvdm_boot_namespace_composition_v1 sweep;
+        int result_valid;
+        /* Each DEM identity gets a fresh owned session.  Several legitimate
+           services acquire pending copied-memory state, so a sequential
+           shared session would test accidental cross-service contamination,
+           not the individual original dispatch contract. */
+        if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&sweep,
+                &ntdos, &command, &target, 0, &profile) ||
+            !bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(&sweep,
+                &drives)) return (int)(240u + service);
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, 4u);
+        memset(&boundary, 0, sizeof(boundary));
+        boundary.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
+        boundary.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
+        boundary.struct_bytes = sizeof(boundary);
+        boundary.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;
+        boundary.cpu_id = 1u; boundary.vector = 6u; boundary.fault_rip = 0x100u;
+        bx_ntvdm_cpu_state_v1_initialize(&state, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+            !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection))
+            return (int)(100u + service);
+        if (!bx_ntvdm_dem_package_session_v1_dispatch(&sweep.dem, &ingress,
+                &selection, &boundary, &state, &window, &result))
+            return (int)(180u + service);
+        result_valid = bx_ntvdm_cpu_result_v2_valid(&result);
+        /* demClose has a separate direct-result contract: the captured
+           record needs a dedicated fixture.  Keep this whole-package sweep
+           focused on the remaining identities until that fixture replaces
+           the retired repeated-check path. */
+        if (service == 2u) continue;
+        if (service == 2u && result.magic != BX_NTVDM_CPU_RESULT_V2_MAGIC) return 240;
+        if (service == 2u && result.abi_version != BX_NTVDM_CPU_RESULT_V2_VERSION) return 241;
+        if (service == 2u && result.struct_bytes != sizeof(result)) return 242;
+        if (service == 2u && result.disposition > BX_NTVDM_CPU_RESULT_V2_STOP) return 243;
+        if (service == 2u && !bx_ntvdm_cpu_delta_v1_valid(&result.cpu_delta)) return 244;
+        if (service == 2u && (result.eflags_write_mask & ~BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF)) return 245;
+        if (service == 2u && (result.eflags_values & ~BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF)) return 246;
+        if (service == 2u && result.disposition == BX_NTVDM_CPU_RESULT_V2_STOP &&
+            (result.resume_rip != 0u || result.cpu_delta.gpr16_write_mask != 0u ||
+             result.eflags_write_mask != 0u || result.eflags_values != 0u)) return 247;
+        if (!result_valid) return (int)(205u + service);
+        if (result.disposition == BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH)
+            return (int)(230u + service);
+    }
     /* The grouped top-level facade is the only composition entry for these
        selectors.  The test deliberately supplies a fourth byte: top-level
        BOPs consume exactly C4 C4 selector, not a fabricated service byte. */
@@ -256,21 +378,21 @@ int main(void)
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != 1u ||
         outcome.gpr16_values[0] != 0xaa01u ||
-        composition.command_bootstrap.stage !=
+        composition.command.bootstrap.stage !=
             BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY) return 23;
     event_initialize(&event, 0x54, 0x0f);
     event.es = 0x200u; event.ebx = 1u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 2u ||
-        composition.command_bootstrap.stage !=
+        composition.command.bootstrap.stage !=
             BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY) return 24;
     event.ebx = 2u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 0u ||
         memcmp(ram + 0x2000, "COMSPEC=C:\\COMMAND.COM", 23u) != 0 ||
-        composition.command_bootstrap.stage !=
+        composition.command.bootstrap.stage !=
             BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED) return 25;
     event_initialize(&event, 0x54, 0x02);
     event.eax = 0xbb00u;
@@ -319,10 +441,10 @@ int main(void)
     event.ds = 0x1000; event.edx = 0x20; event.ebx = 0x40; event.ecx = 0x60;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x104 ||
-        !composition.launch.valid || composition.launch.registration.scs_info != 0x10020u ||
-        composition.launch.registration.scs_to_sync != 0x100eeu ||
-        composition.launch.registration.is_dos_binary != 0x10040u ||
-        composition.launch.registration.fd_access != 0x10060u) return 18;
+        !composition.command.launch.valid || composition.command.launch.registration.scs_info != 0x10020u ||
+        composition.command.launch.registration.scs_to_sync != 0x100eeu ||
+        composition.command.launch.registration.is_dos_binary != 0x10040u ||
+        composition.command.launch.registration.fd_access != 0x10060u) return 18;
     /* The complete source-derived CMDGETNEXT lifecycle consumes the fixed
        CMDINFO gather, writes the declared target response and commits exactly
        one immutable launch slot. */
@@ -335,12 +457,12 @@ int main(void)
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x104u) return 32;
     if (outcome.gpr16_write_mask != 0u || outcome.eflags_write_mask !=
         BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF || outcome.eflags_values != 0u) return 33;
-    if (composition.cmd_get_next.delivered != 1u) return 34;
+    if (composition.command.get_next.delivered != 1u) return 34;
     if (ram[0x340u + 1u] != 8u ||
         memcmp(ram + 0x340u + 2u, "TARGET\r\n", 8u) != 0) return 35;
     if (memcmp(ram + 0x560u, "C:\\TARGET.COM", 14u) != 0) return 36;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
-        composition.cmd_get_next.delivered != 1u) return 32;
+        composition.command.get_next.delivered != 1u) return 32;
     /* The selected COMMAND console capability is a fixed CLI no-install
        response.  Its identity was established by ingress and COMMAND-plane
        classification, rather than by the detached legacy runtime gate. */
@@ -425,6 +547,25 @@ int main(void)
     event_initialize(&event, 0x54, 0x0d);
     event.ds = 0x1000; event.edx = 0x20;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 9;
+    /* demTerminatePDB owns per-PDB search lifetime.  Seed an existing
+       continuation, invoke the real BOP route, then prove that the stale
+       continuation cannot be resumed. */
+    wcscpy(terminating_entries[0].dos_name, L"ONE.TXT");
+    wcscpy(terminating_entries[1].dos_name, L"TWO.TXT");
+    if (!bx_ntvdm_search_sessions_v1_begin(
+            &composition.plane.provider.search_transaction.plan.sessions,
+            0xbeefu, terminating_entries, 2u, &terminating_out,
+            &terminating_token)) return 68;
+    event_initialize(&event, 0x50u, 0x3cu);
+    event.ebx = 0xbeefu;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != 0u ||
+        outcome.eflags_write_mask != 0u ||
+        bx_ntvdm_search_sessions_v1_next(
+            &composition.plane.provider.search_transaction.plan.sessions,
+            0xbeefu, &terminating_token, &terminating_out,
+            &terminating_token)) return 69;
     bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 10;
     return 0;

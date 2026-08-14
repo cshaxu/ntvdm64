@@ -6,6 +6,7 @@
 #include "bx_ntvdm_dem_plane_v1.h"
 #include "bx_ntvdm_dem_dta_service.h"
 #include "bx_ntvdm_dem_load_dos_service.h"
+#include "bx_ntvdm_host_drive_policy.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 
 #define BX_NTVDM_BOOT_NAMESPACE_PLANE_V1_MAGIC 0x42584e51u
@@ -16,7 +17,12 @@ enum bx_ntvdm_boot_namespace_pending_v1_kind {
     BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_OPEN = 1u,
     BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_FIRST = 2u,
     BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_NEXT = 3u,
-    BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION = 4u
+    BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION = 4u,
+    BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_FCB_FIRST = 5u,
+    BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_FCB_NEXT = 6u,
+    BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DEFAULT_DRIVE = 7u,
+    BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CURRENT_DIR = 8u,
+    BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CHECK_PATH = 9u
 };
 
 typedef struct bx_ntvdm_boot_namespace_plane_v1 {
@@ -25,7 +31,8 @@ typedef struct bx_ntvdm_boot_namespace_plane_v1 {
     byob_image ntdos;
     byob_component_descriptor ntdos_identity;
     bx_ntvdm_dem_dta_registration_v1 dta;
-    uint32_t has_dta, pending_kind, pending_action_id;
+    uint32_t has_dta, has_drive_snapshot, pending_kind, pending_action_id, pending_service;
+    bx_ntvdm_host_drive_snapshot_v1 drive_snapshot;
     bx_ntvdm_exception_event_v1 pending_event;
     bx_ntvdm_cpu_state_v1 pending_cpu;
     bx_ntvdm_guest_read_action_v1 pending_read;
@@ -40,6 +47,9 @@ int bx_ntvdm_boot_namespace_plane_v1_initialize(
 int bx_ntvdm_boot_namespace_plane_v1_set_dta(
     bx_ntvdm_boot_namespace_plane_v1 *plane,
     const bx_ntvdm_dem_dta_registration_v1 *dta);
+int bx_ntvdm_boot_namespace_plane_v1_set_drive_snapshot(
+    bx_ntvdm_boot_namespace_plane_v1 *plane,
+    const bx_ntvdm_host_drive_snapshot_v1 *snapshot);
 int bx_ntvdm_boot_namespace_plane_v1_dispatch(
     bx_ntvdm_boot_namespace_plane_v1 *plane,
     const bx_ntvdm_bop_ingress_v1 *ingress,

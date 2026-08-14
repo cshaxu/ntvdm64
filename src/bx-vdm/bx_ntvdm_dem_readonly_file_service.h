@@ -35,5 +35,9 @@ int bx_ntvdm_dem_readonly_file_v1_close(
     bx_ntvdm_readonly_namespace_v1 *space, const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu, const bx_ntvdm_instruction_window_v1 *window,
     bx_ntvdm_cpu_result_v2 *result);
+int bx_ntvdm_dem_readonly_file_v1_file_times(
+    const bx_ntvdm_readonly_namespace_v1 *space,
+    const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_cpu_result_v2 *result);
 
 #endif

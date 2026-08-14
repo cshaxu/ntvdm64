@@ -24,6 +24,7 @@ int main(void)
     bx_ntvdm_cpu_result_v2 result;
     bx_ntvdm_bulk_result_transaction_v1 transaction;
     uint32_t token;
+    uint64_t file_size;
 
     wcscpy(selection.command_placement.path, L"\\COMMAND.COM");
     selection.command_placement.drive_index = 2u; selection.has_command_placement = 1u;
@@ -109,6 +110,18 @@ int main(void)
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
         result.cpu_delta.gpr16_write_mask != 1u ||
         result.cpu_delta.gpr16_values[0] != 6u) return 14;
+    /* demFileTimes read is fulfilled from immutable profile metadata, while
+       set remains unavailable because this namespace has no writable handle. */
+    if (!bx_ntvdm_readonly_namespace_v1_open(&space, 2u, L"\\COMMAND.COM", &token, &file_size)) return 15;
+    cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ebx = 0u;
+    service_window(&window, 0x08u);
+    if (!bx_ntvdm_dem_readonly_file_v1_file_times(&space, &event, &cpu, &window, &result) ||
+        result.cpu_delta.gpr16_write_mask != ((1u << 1) | (1u << 2)) ||
+        result.eflags_values != 0u) return 16;
+    cpu.ebx = 1u;
+    if (!bx_ntvdm_dem_readonly_file_v1_file_times(&space, &event, &cpu, &window, &result) ||
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 5u ||
+        result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) return 17;
     puts("bx-ntvdm DEM readonly file service: bounded O/S/R/C lifecycle verified");
     return 0;
 }

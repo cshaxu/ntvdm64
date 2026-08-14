@@ -22,6 +22,12 @@ int main(void)
     window.bytes[3] = 0x33u;
     if (bx_ntvdm_dem_hard_error_service_v1_dispatch(&event, &cpu, &window,
             &registration, &result)) return 2;
+    window.bytes[3] = 0x32u;
+    /* The original stores real-mode locators.  The rehost must reject an
+     * aperture-crossing locator rather than retain an unbounded host pointer. */
+    cpu.ds = 0xffffu; cpu.edx = 0x0010u;
+    if (bx_ntvdm_dem_hard_error_service_v1_dispatch(&event, &cpu, &window,
+            &registration, &result)) return 3;
     puts("bx-ntvdm DemSetHardErrorInfo: source-derived locator registration verified");
     return 0;
 }
