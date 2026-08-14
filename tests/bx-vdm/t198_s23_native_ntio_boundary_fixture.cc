@@ -167,7 +167,7 @@ int main()
   static uint8_t target[] = {0xf4}; byob_image ntio={ (uint8_t*)t198_s23_ntio_bytes,0x8400};
   byob_image ntdos={(uint8_t*)t198_s25_ntdos_bytes,0x6cd2}, cmd={command,sizeof(command)}, tgt={target,sizeof(target)};
 #endif
-  byob_profile_selection p; bx_ntvdm_boot_namespace_composition_v1 c; bx_ntvdm_host_drive_snapshot_v1 drives; bx_ntvdm_preentry_input_v1 preentry; uint8_t drive_types[26]={0};
+  byob_profile_selection p; byob_launch_plan_v2 launch; bx_ntvdm_boot_namespace_composition_v1 c; bx_ntvdm_host_drive_snapshot_v1 drives; bx_ntvdm_preentry_input_v1 preentry; uint8_t drive_types[26]={0};
   static bx_ntvdm_finite_run_request r; bx_ntvdm_finite_run_terminal_snapshot terminal; bx_ntvdm_generic_ud_event_v1 generic; bx_ntvdm_instruction_history_record_v1 history[8]; bx_ntvdm_instruction_history_transition_v1 transition; bx_ntvdm_instruction_history_provenance_v1 provenance; unsigned terminal_valid, generic_valid, history_count, transition_valid, provenance_valid; int status;
   memset(&p,0,sizeof(p)); p.ntio.bytes=0x8400; p.ntdos.bytes=0x6cd2;
   /* This fixture supplies the already parser-validated v7 projection.  It
@@ -187,7 +187,8 @@ int main()
   p.command_metadata.attributes=p.target_metadata.attributes=p.config_metadata.attributes=p.autoexec_metadata.attributes=0x20;
   p.command_metadata.dos_date=p.target_metadata.dos_date=p.config_metadata.dos_date=p.autoexec_metadata.dos_date=1;
   drive_types[2]=3u;
-  if(!prepare_preentry_input(&preentry)||!bx_ntvdm_host_drive_snapshot_v1_apply(1u<<2,drive_types,0u,0u,&drives)||!bx_ntvdm_boot_namespace_composition_v1_initialize(&c,&ntdos,&cmd,&tgt,0,&p)||!bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(&c,&drives)||!bx_ntvdm_boot_namespace_composition_v1_bind(&c)||!bx_ntvdm_ntio_preentry_v1_prepare(&ntio,&p.ntio,&preentry,&r,1000000,1000000))return 1;
+  memset(&launch,0,sizeof(launch));launch.version=2u;launch.slot_count=1u;launch.first.version=1u;launch.first.target_kind=BYOB_LAUNCH_TARGET_KIND_V1_EXE;
+  if(!prepare_preentry_input(&preentry)||!bx_ntvdm_host_drive_snapshot_v1_apply(1u<<2,drive_types,0u,0u,&drives)||!bx_ntvdm_boot_namespace_composition_v1_initialize(&c,&ntdos,&cmd,&tgt,0,&p)||!bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(&c,&drives)||!bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&c,&launch)||!bx_ntvdm_boot_namespace_composition_v1_bind(&c)||!bx_ntvdm_ntio_preentry_v1_prepare(&ntio,&p.ntio,&preentry,&r,1000000,1000000))return 1;
   t198_s23_native_ntio_boundary_bind_observation_composition(&c);
   if(!bx_ntvdm_mantle_instruction_history_v1_configure(0u)||bx_ntvdm_mantle_instruction_history_v1_count()!=0u||bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(&transition)||bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_provenance(&provenance)||bx_ntvdm_mantle_instruction_history_v1_configure(BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX+1u)||!bx_ntvdm_mantle_instruction_history_v1_configure(8u)||bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(&transition)||bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_provenance(&provenance))return 1;
   if(!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(0u,0u)||bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(0x100000u,1u)||!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(0x0deau,4u))return 1;

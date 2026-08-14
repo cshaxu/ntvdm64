@@ -4,6 +4,7 @@
 #include "bx_ntvdm_boot_namespace_plane_v1.h"
 #include "bx_ntvdm_cmd_comspec_bootstrap_service.h"
 #include "bx_ntvdm_command_launch_plane_v1.h"
+#include "bx_ntvdm_cmd_get_next_service.h"
 #include "bx_ntvdm_dem_error_lock_plane_v1.h"
 #include "bx_ntvdm_dem_gset_plane_v1.h"
 #include "bx_ntvdm_generic_ud_bridge.h"
@@ -17,6 +18,9 @@ typedef struct bx_ntvdm_boot_namespace_composition_v1 {
     bx_ntvdm_boot_namespace_plane_v1 plane;
     bx_ntvdm_cmd_comspec_bootstrap_v1 command_bootstrap;
     bx_ntvdm_command_launch_plane_v1 launch;
+    byob_launch_plan_v2 launch_plan;
+    bx_ntvdm_cmd_get_next_state_v1 cmd_get_next;
+    uint32_t has_launch_plan;
     bx_ntvdm_dem_error_lock_plane_v1 error_lock;
     bx_ntvdm_dem_gset_plane_v1 gset;
 } bx_ntvdm_boot_namespace_composition_v1;
@@ -48,6 +52,9 @@ void bx_ntvdm_boot_namespace_composition_v1_unbind(
 int bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_host_drive_snapshot_v1 *snapshot);
+int bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
+    bx_ntvdm_boot_namespace_composition_v1 *value,
+    const byob_launch_plan_v2 *plan);
 int bx_ntvdm_boot_namespace_composition_v1_handle(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome);

@@ -285,6 +285,8 @@ int bx_ntvdm_boot_namespace_composition_v1_initialize(
     value->guest_display_state = selection->guest_display_state;
     bx_ntvdm_cmd_comspec_bootstrap_v1_initialize(&value->command_bootstrap);
     bx_ntvdm_command_launch_plane_v1_clear(&value->launch);
+    bx_ntvdm_cmd_get_next_state_v1_initialize(&value->cmd_get_next);
+    value->has_launch_plan = 0u;
     bx_ntvdm_dem_error_lock_plane_v1_clear(&value->error_lock);
     bx_ntvdm_dem_gset_plane_v1_clear(&value->gset);
     return valid(value);
@@ -310,6 +312,39 @@ int bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
 {
     return valid(value) && !value->bound &&
         bx_ntvdm_dem_gset_plane_v1_set_drive_snapshot(&value->gset, snapshot);
+}
+
+int bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
+    bx_ntvdm_boot_namespace_composition_v1 *value, const byob_launch_plan_v2 *plan)
+{
+    wchar_t encoded[BYOB_LAUNCH_PLAN_V2_ENV_CHARS]; byob_launch_plan_v2 checked;
+    if (!valid(value) || value->bound || !plan ||
+        !byob_launch_plan_v2_to_environment(plan, encoded) ||
+        !byob_launch_plan_v2_from_environment(&checked, encoded)) return 0;
+    value->launch_plan = checked; value->has_launch_plan = 1u; return 1;
+}
+
+static int execute_command_get_next(bx_ntvdm_boot_namespace_composition_v1 *x,
+    const bx_ntvdm_exception_event_v1 *e, const bx_ntvdm_cpu_state_v1 *c,
+    const bx_ntvdm_instruction_window_v1 *w, bx_ntvdm_cpu_result_v2 *r)
+{
+    bx_ntvdm_guest_gather_read_action_v1 read; bx_ntvdm_multi_write_transaction_v1 write;
+    struct bx_ntvdm_mechanical_action_v1 action; uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
+    uint32_t id;
+    if (!x || !e || !c || !w || !r || !x->has_launch_plan || !x->launch.valid ||
+        !x->gset.has_drive_snapshot || !bx_ntvdm_cmd_get_next_v1_prepare(&x->cmd_get_next,
+            &x->launch_plan,e,c,w,&read) || read.range_count != 1u ||
+        read.total_bytes != BX_NTVDM_CMDINFO_V1_BYTES || !x->plane.next_action_id) return 0;
+    id=x->plane.next_action_id++; if(!x->plane.next_action_id)x->plane.next_action_id=1u;
+    bx_ntvdm_mechanical_action_v1_clear(&action); action.action_id=id;
+    action.kind=BX_NTVDM_MECHANICAL_ACTION_V1_READ; action.range_count=1u;
+    action.payload_bytes=(uint32_t)read.total_bytes; action.ranges[0].physical_address=read.ranges[0].address;
+    action.ranges[0].byte_count=(uint32_t)read.ranges[0].length;
+    if(!bx_ntvdm_mechanical_action_v1_valid(&action)||!bx_ntvdm_mantle_execute_mechanical_action_v1(&action)||
+       !bx_ntvdm_cmd_get_next_v1_complete(&x->plane.provider.readonly_namespace,&x->launch_plan,
+          &x->gset.drive_snapshot,&x->launch.registration,&x->cmd_get_next,e,c,&read,action.payload,
+          action.payload_bytes,&write,payload)||!execute_multi_write(x,&write,payload))return 0;
+    bx_ntvdm_cmd_get_next_state_v1_commit(&x->cmd_get_next); *r=write.result; return bx_ntvdm_cpu_result_v2_valid(r);
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
@@ -419,6 +454,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             &window, &result)) return outcome(&result, value);
     if (bx_ntvdm_command_launch_plane_v1_dispatch(&active->launch, &ingress,
             &selection, &boundary, &cpu, &window, &result)) return outcome(&result, value);
+    if (execute_command_get_next(active, &boundary, &cpu, &window, &result))
+        return outcome(&result, value);
     if (
         !bx_ntvdm_boot_namespace_plane_v1_dispatch(&active->plane, &ingress,
             &selection, &boundary, &cpu, &window, &action, &result)) return 0;
