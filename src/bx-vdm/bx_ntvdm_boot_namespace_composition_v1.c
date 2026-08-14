@@ -18,6 +18,7 @@
 #include "bx_ntvdm_command_package_facade_v1.h"
 #include "bx_ntvdm_redir_package_facade_v1.h"
 #include "bx_ntvdm_debugger_package_facade_v1.h"
+#include "bx_ntvdm_top_level_package_facade_v1.h"
 #include <string.h>
 
 static bx_ntvdm_boot_namespace_composition_v1 *active;
@@ -431,29 +432,17 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     bx_ntvdm_dem_plane_record_v1 dem_plane;
     bx_ntvdm_dem_package_route_v1 dem_route;
     bx_ntvdm_command_package_route_v1 command_route;
+    uint32_t top_level_route;
     bx_ntvdm_exception_result_v1 memory_result;
     struct bx_ntvdm_mechanical_action_v1 action, next;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
             &cpu, &window)) return 0;
-    /* The NTIO x86 branch explicitly requests CF after its BEEF 5F handoff.
-     * This provider retains only that continuation; keyboard mechanics remain
-     * outside this composition. */
-    {
-        int stream_state = execute_spckbd_stream_state(active, &boundary, &cpu,
-            &window, &result);
-        if (stream_state > 0) return outcome(&result, value);
-        if (stream_state < 0) return 0;
-    }
-    if (bx_ntvdm_spckbd_init_service_v1_dispatch(&boundary, &cpu, &window,
-            &result)) return outcome(&result, value);
     if (bx_ntvdm_emm_unavailable_service_v1_dispatch(&boundary, &cpu, &window,
             &result)) return outcome(&result, value);
     if (execute_mouse_install1_mapping(active, &boundary, &cpu, &window,
             &result)) return outcome(&result, value);
     if (bx_ntvdm_printer_unavailable_service_v1_dispatch(&boundary, &cpu,
             &window, &result)) return outcome(&result, value);
-    if (bx_ntvdm_config_done_service_v1_dispatch(&boundary, &cpu, &window,
-            &result)) return outcome(&result, value);
     if (bx_ntvdm_vdd_create_user_notify_service_v1_dispatch(&boundary, &cpu,
             &window, &result)) return outcome(&result, value);
     /* This composition admits only the source-observed top-level memory
@@ -472,6 +461,22 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
             &window, &ingress, &result) || !bx_ntvdm_cpu_result_v2_valid(&result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH ||
         !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection)) return 0;
+    if (bx_ntvdm_top_level_package_facade_v1_classify(&ingress, &selection,
+            &top_level_route)) {
+        if (bx_ntvdm_top_level_package_facade_v1_dispatch(top_level_route,
+                &boundary, &cpu, &result)) return outcome(&result, value);
+        if (top_level_route == BX_NTVDM_TOP_LEVEL_PACKAGE_CONFIG &&
+            bx_ntvdm_config_done_service_v1_dispatch(&boundary, &cpu, &window,
+                &result)) return outcome(&result, value);
+        if (top_level_route == BX_NTVDM_TOP_LEVEL_PACKAGE_KEYBOARD) {
+            int stream_state = execute_spckbd_stream_state(active, &boundary,
+                &cpu, &window, &result);
+            if (stream_state > 0) return outcome(&result, value);
+            if (stream_state < 0) return 0;
+            if (bx_ntvdm_spckbd_init_service_v1_dispatch(&boundary, &cpu,
+                    &window, &result)) return outcome(&result, value);
+        }
+    }
     /* Every DEM member crosses one package gate before an existing provider.
      * Deferred records produce no result, while the original no-op is complete
      * here rather than being a detached service recognizer. */

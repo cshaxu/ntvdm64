@@ -188,6 +188,27 @@ int main(void)
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,
             &launch_plan) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 2;
+    /* The grouped top-level facade is the only composition entry for these
+       selectors.  The test deliberately supplies a fourth byte: top-level
+       BOPs consume exactly C4 C4 selector, not a fabricated service byte. */
+    for (service = 0u; service < 4u; ++service) {
+        static const uint8_t terminal_selectors[4] = { 0x51u, 0x59u, 0x5bu, 0xfeu };
+        event_initialize(&event, terminal_selectors[service], 0x90u);
+        if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+            outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
+            outcome.resume_rip != 0u || outcome.gpr16_write_mask != 0u ||
+            outcome.eflags_write_mask != 0u) return 51;
+    }
+    event_initialize(&event, 0x5au, 0x90u);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x103u || outcome.gpr16_write_mask != 0u ||
+        outcome.eflags_write_mask != 0u) return 52;
+    event_initialize(&event, 0x5eu, 0x90u);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x103u || outcome.gpr16_write_mask != 0u ||
+        outcome.eflags_write_mask != 0u) return 53;
     /* The Redirector plane is one whole-package source-derived failure.  The
        composition must route every defined service through it, without any
        service-specific host capability. */
