@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S86.** Its governing brief is the active
+> **Current effective packet: M0 T198 S87.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S86 -- design the explicit non-invasive CLI display profile
-and its checked K.SYS publication boundary.**
+**Active: M0 T198 S87 -- implement the exact BOP-`5F` stream-state publication
+transaction for the declared first CLI profile.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,21 +23,21 @@ and its checked K.SYS publication boundary.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S86, Ordinary Mode. |
-| Admission And Approval | S85 classifies display selection as a CLI profile contract and rejects implicit native/windowed semantics; see `etc/research/t198-s85-spckbd-host-contract-delta-001.md`. |
-| Objective | Define the sole default non-invasive CLI text-output/display state, its capability boundary, its exact guest publication prerequisite, and negative behavior for unselected profiles. |
+| Identifier Mode | M0 T198 S87, Ordinary Mode. |
+| Admission And Approval | S86 selects only explicit `STREAM_IO=2` and defines its exact source-owned kio-table transaction; see `etc/research/t198-s86-cli-stream-profile-design-001.md`. |
+| Objective | Implement and test one adapter-owned BOP-`5F` real-mode BEEF transaction: checked read of the source-defined K.SYS state offset followed by checked write of `2`, then the existing CF continuation. |
 | Non-goals | No guest-memory write, BOP/provider implementation, `use_host_int10` write, CLI profile selection, ROM/device import, memory mapping change, Bochs core/mantle edit, or forced control-flow change. |
-| Reference Baseline | S80 display chain; S85 owner matrix; existing CLI BYOB/profile selection, generic action ABI, `spckbd.asm` stream branch, and host stream-I/O source evidence. |
-| Files And ABI Surface | Design and source map only. It may define a future fixed-width capability/request record, but must not write guest memory, route text, select an actual profile, add a provider, map ROM, or change core/mantle. |
+| Reference Baseline | S85 contract map; S86 profile design; existing generic action/session ABI; `spckbd.asm` and `keybd_io.c` kio table definitions; S17/S23 native composition fixtures. |
+| Files And ABI Surface | `bx-vdm` source-derived display-state transaction and focused tests only. Reuse existing typed mechanical actions; no core/mantle ABI change and no arbitrary address API. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Compare all three historical state values with the CLI objective; identify byte address source, output/sink ownership, applicability gates, rejected choices and ABI requirements; run documentation governance and diff checks. |
-| Expected Markers | One profile decision record that distinguishes stream, windowed and native/fullscreen behavior without silently enabling any implementation. |
+| Verification | Focused positive/negative transaction tests; source-built x64 adapter closure; if composition wiring is unchanged, run the existing native fixture; documentation governance and diff checks. |
+| Expected Markers | Exact `DS:SI + 34` read, validated target write of `2`, CF/RIP result, and no write on every invalid/precondition-negative path. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record explicit profile semantics, owner/ABI direction, prerequisites and all denied options. |
-| Stop Conditions | The work requires a host-state/guest-memory write, text output behavior, a new BOP/provider, ROM input, device admission or a Bochs core/mantle seam. Stop after recording the design boundary. |
-| Exit Criteria | A source-backed non-invasive CLI profile design and implementation-admission boundary, with no runtime semantic change. |
+| Reporting Requirements | Record exact range derivation, action ordering/atomicity, transition result, runtime reachability and every excluded display behavior. |
+| Stop Conditions | Any need for a text sink, BOP `42`, a display setting/profile switch, arbitrary guest address, ROM/VGA/PIC/device admission, or core/mantle seam. Stop and retain the partial capability. |
+| Exit Criteria | Source/test-built stream-state publication with negative coverage and no output/device/ROM semantics. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
-| Similar-Issue Sweep | Cover stream text forms, mode changes, cursor/string fallbacks, no-console/error behavior, CLI flags, and native/windowed exclusion. |
+| Similar-Issue Sweep | Cover malformed `DS:SI`, 20-bit range overflow, unbound/no-stream profile, failed second action, no partial write, existing BOP-`5F` CF continuation, and native fixture reachability. |
 
 ## Current Technical Baseline
 
@@ -405,8 +405,9 @@ and its checked K.SYS publication boundary.**
 - M0 T198 S82 proves that `073B:0939` is a dynamically patched SpcKbd native
   INT10 far jump, not random Bochs control flow. M0 T198 S83 brackets the
   pointer write after first `50:11`; M0 T198 S84 proves BOP-`5F` was consumed
-  before the passive recorder; M0 T198 S85 classifies its host-contract delta.
-  S86 now designs the explicit CLI profile boundary. See [S85 contract map](etc/research/t198-s85-spckbd-host-contract-delta-001.md).
+  before the passive recorder; M0 T198 S85 classifies its host-contract delta;
+  M0 T198 S86 selects the explicit stream profile. S87 now implements only
+  its source-derived K.SYS state publication. See [S86 profile design](etc/research/t198-s86-cli-stream-profile-design-001.md).
 - M0 T97 S1 is complete: no original standalone provider exists; the frozen
   read-only and search candidates are only implementation inventory.
 - M0 T97 S2 is complete: partial runtime dispatch and the contradictory
