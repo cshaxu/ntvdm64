@@ -26,11 +26,11 @@ int main(void)
     record[8]=0x30; record[10]=0x40; record[12]=128; record[28]=0x50; record[30]=0x60; record[32]=17; record[33]=1;
     bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
     if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
-        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
+        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0u,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
         memcmp(payload + 1u,"TARGET /c smoke\r\n",17u) != 0) return 2;
     bx_ntvdm_cmd_get_next_state_v1_commit(&state);
     if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
-        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
+        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0u,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
         memcmp(payload + 1u,"QUIT\r\n",6u) != 0) return 3;
     bx_ntvdm_cmd_get_next_state_v1_commit(&state);
     if (bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a)) return 4;
@@ -38,7 +38,7 @@ int main(void)
     bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
     ns.file_count = 4u;
     if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
-        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload)) return 5;
+        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0u,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload)) return 5;
     bx_ntvdm_cmd_get_next_state_v1_commit(&state);
     if (bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&e,&c,&w,&t.result)) return 6;
@@ -52,11 +52,28 @@ int main(void)
     bx_ntvdm_instruction_window_v1_capture(&w,bop,sizeof(bop));
     bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
     if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
-        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0,&state,&e,&c,
+        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0u,0,&state,&e,&c,
             &a,record,sizeof(record),&t,payload) ||
         t.writes.write_count < 7u ||
         !bx_ntvdm_multi_write_transaction_v1_preflight(&t,UINT64_C(0x100000),
             t.writes.payload_bytes)) return 8;
-    puts("bx-ntvdm COMMAND target/terminal and single-target return lifecycles verified");
+    /* `cmdGetNextCmd` returns CF/AX before delivery when its environment
+       capacity is below the bytes already produced by 54:0F. */
+    bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
+    record[0] = 0x70u; record[1] = 0u; record[2] = 1u; record[3] = 0u;
+    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
+        !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,2u,0,&state,&e,&c,
+            &a,record,sizeof(record),&t,payload) || t.writes.write_count != 0u ||
+        t.result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        (t.result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
+        t.result.cpu_delta.gpr16_values[0] != 2u) return 9;
+    /* A caller-shaped CMDINFO must not retain or dereference a range that
+       crosses the real-mode aperture.  The checked provider declines before
+       publishing any write transaction. */
+    record[0] = 0xffu; record[1] = 0xffu; record[2] = 32u; record[3] = 0u;
+    if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
+        bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,32u,0,&state,&e,&c,
+            &a,record,sizeof(record),&t,payload)) return 10;
+    puts("bx-ntvdm COMMAND CMDINFO delivery, environment retry and terminal lifecycles verified");
     return 0;
 }

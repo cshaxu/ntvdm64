@@ -92,13 +92,14 @@ int bx_ntvdm_cmd_get_next_v1_prepare(const bx_ntvdm_cmd_get_next_state_v1 *state
 }
 int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
     const byob_launch_plan_v2 *plan, const bx_ntvdm_host_drive_snapshot_v1 *drives,
+    uint32_t initial_environment_bytes,
     const bx_ntvdm_cmd_set_info_registration_v1 *reg, const bx_ntvdm_cmd_get_next_state_v1 *state,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_guest_gather_read_action_v1 *action, const uint8_t *bytes, uint64_t byte_count,
     bx_ntvdm_multi_write_transaction_v1 *t, uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD])
 {
     byob_launch_declaration_v1 launch; bx_ntvdm_cmdinfo_v1 info; uint8_t executable[16], command[130], two[2], zero2[2] = {0,0}, zero4[4] = {0,0,0,0};
-    const char *command_name; uint32_t executable_bytes, command_count, command_bytes, used = 0u; uint16_t extension, count; uint64_t address;
+    const char *command_name; uint32_t executable_bytes, command_count, command_bytes, used = 0u; uint16_t extension, count; uint64_t address, environment_address;
     if (!ns || !plan || !drives || !state || !event || !cpu || !action || !bytes || !t || !payload ||
         state->delivered >= plan->slot_count ||
         (plan->slot_count != 1u && plan->slot_count != 2u) || plan->version != 2u) return 0;
@@ -108,13 +109,24 @@ int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
         !bx_ntvdm_cmdinfo_v1_decode(bytes, (uint32_t)byte_count, &info) || byte_count != BX_NTVDM_CMDINFO_V1_BYTES ||
         info.command_bytes != 128u || info.executable_bytes != BX_NTVDM_CMDINFO_V1_EXECPATH_BYTES ||
         !physical(info.command_segment, info.command_offset, 130u, &address)) return 0;
+    bx_ntvdm_multi_write_transaction_v1_initialize(t, event, cpu);
+    /* cmdGetNextCmd returns CF/AX before delivery when COMMAND's environment
+       allocation is too small.  The contained provider owns only the
+       previously delivered 54:0F byte count; it never reads a host process
+       environment or retains the guest address. */
+    if (initial_environment_bytes > info.environment_bytes)
+        return bx_ntvdm_cpu_result_v2_resume(&t->result, event->fault_rip + 4u) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&t->result.cpu_delta, 0u,
+                (uint16_t)initial_environment_bytes) &&
+            bx_ntvdm_cpu_result_v2_set_cf(&t->result, 1);
+    if (initial_environment_bytes != 0u &&
+        !physical(info.environment_segment, 0u, initial_environment_bytes, &environment_address)) return 0;
     command_name = state->delivered == 0u ? "TARGET" : "QUIT";
     command_count = (uint32_t)strlen(command_name) + (launch.tail_bytes ? 1u : 0u) + launch.tail_bytes + 2u;
     if (command_count > 127u) return 0;
     command[0] = (uint8_t)command_count; memcpy(command + 1u, command_name, strlen(command_name)); command_bytes = 1u + (uint32_t)strlen(command_name);
     if (launch.tail_bytes) { command[command_bytes++] = ' '; memcpy(command + command_bytes, launch.tail, launch.tail_bytes); command_bytes += launch.tail_bytes; }
     command[command_bytes++] = '\r'; command[command_bytes++] = '\n'; command[command_bytes++] = 0;
-    bx_ntvdm_multi_write_transaction_v1_initialize(t, event, cpu);
     if (!put(t,payload,&used,address + 1u,command,command_bytes) ||
         !physical(info.executable_segment, info.executable_offset, executable_bytes, &address) || !put(t,payload,&used,address,executable,executable_bytes) ||
         !physical(cpu->ds,(uint16_t)cpu->edx + 4u,2u,&address)) return 0;

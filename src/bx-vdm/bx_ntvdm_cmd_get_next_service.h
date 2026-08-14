@@ -25,6 +25,7 @@ int bx_ntvdm_cmd_get_next_v1_prepare(const bx_ntvdm_cmd_get_next_state_v1 *state
     const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_guest_gather_read_action_v1 *action);
 int bx_ntvdm_cmd_get_next_v1_complete(const bx_ntvdm_readonly_namespace_v1 *ns,
     const byob_launch_plan_v2 *plan, const bx_ntvdm_host_drive_snapshot_v1 *drives,
+    uint32_t initial_environment_bytes,
     const bx_ntvdm_cmd_set_info_registration_v1 *registration,
     const bx_ntvdm_cmd_get_next_state_v1 *state, const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu, const bx_ntvdm_guest_gather_read_action_v1 *action,

@@ -443,6 +443,7 @@ int main(void)
        registered lifecycle below still proves its normal first slot. */
     event_initialize(&event, 0x54, 0x01);
     event.ds = 0x100u; event.edx = 0x80u;
+    ram[0x1080] = 0u; ram[0x1081] = 2u; ram[0x1082] = 23u;
     ram[0x1088] = 0x30u; ram[0x108a] = 0x40u; ram[0x108c] = 128u;
     ram[0x109c] = 0x50u; ram[0x109e] = 0x60u; ram[0x10a0] = 17u;
     ram[0x10a1] = 1u;
@@ -467,6 +468,7 @@ int main(void)
        one immutable launch slot. */
     event_initialize(&event, 0x54, 0x01);
     event.ds = 0x100u; event.edx = 0x80u;
+    ram[0x1080] = 0u; ram[0x1081] = 2u; ram[0x1082] = 23u;
     ram[0x1088] = 0x30u; ram[0x108a] = 0x40u; ram[0x108c] = 128u;
     ram[0x109c] = 0x50u; ram[0x109e] = 0x60u; ram[0x10a0] = 17u;
     ram[0x10a1] = 1u;

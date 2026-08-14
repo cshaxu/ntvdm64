@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S42.** Its governing brief is the active
+> **Current effective packet: M0 T199 S43.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S42 -- COMMAND CMDINFO ABI package recovery.**
+**Active: M0 T199 S43 -- COMMAND full service-family composition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -22,21 +22,27 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S42, Ordinary Mode. |
-| Admission And Approval | S41's one authorized native observation retained `54:01` as an unhandled COMMAND-package frontier after S40 removed only the false registration prerequisite. The owner requires package-first recovery, not trace-led service patches. |
-| Objective | Recover the original COMMAND CMDINFO transaction as one package: caller construction; packed DS:DX input; bootstrap and initial-environment fields; get-next result fields; `54:05` locator interaction; return/exit lifecycle; and original-source-supported failure dispositions. |
-| Non-goals | No `54:01`-only patch, no native guest run, no direct `nt_bop.c` linking, no Bochs BOP knowledge, no DOS/BIOS semantic migration into bx-vdm, and no ambient NT-host dependency. |
-| Reference Baseline | S41 observation; S40 source/ABI map and source-built command-entry/session regressions; S38 global ledger; OpenNT `base/mvdm/inc/cmdsvc.h`, `base/mvdm/dos/v86/cmd/cmdmisc.c`, and 16-bit COMMAND caller sources. |
-| Files And ABI Surface | COMMAND source/ABI/failure map; existing CMDINFO, command-session, launch-plane and checked guest-memory records; source-built whole-package regression. Any expansion remains a fixed-width copied adapter ABI. |
+| Identifier Mode | M0 T199 S43, Ordinary Mode. |
+| Admission And Approval | S42 closed the original CMDINFO subpackage map and its source-built `54:0F → 54:01` regression. The owner requires the complete original component package, not a succession of trace-selected BOP patches. |
+| Objective | Recover and verify one coherent contained disposition for every original COMMAND `54:00..10` service: bootstrap, launch, console, execution, environment and lifecycle, with original-source ordering and explicit unavailable/deferred outcomes where CLI capability is absent. |
+| Non-goals | No individual trace-frontier patch, no native guest run, no direct `nt_bop.c` linking, no Bochs BOP knowledge, no DOS/BIOS semantic migration into bx-vdm, and no ambient NT-host dependency. |
+| Reference Baseline | S5/S6 COMMAND matrices, S40 entry-lifecycle map, S42 CMDINFO source/ABI map and regressions, S38 global ledger, `cmdsvc.h`, `cmddisp.c`, `cmdmisc.c`, `cmdenv.c`, `cmdexec.c` and current command package facade/session. |
+| Files And ABI Surface | COMMAND facade/plane/session and service providers; one full-family source-built regression and owner/disposition ledger. All memory remains fixed-width checked copied adapter action. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Audit original caller and callee layout/order first; then run fresh MSVC x64 `/MT` source-built package regression covering actual caller-shaped CMDINFO, malformed/aperture failure, bootstrap/environment ordering, registration-present/absent interaction and return lifecycle. No native trace. |
-| Expected Markers | One source/ABI/failure map, all CMDINFO fields assigned an original/provider disposition, no raw generic decline for valid caller-shaped `54:01`, and reproducible whole-package evidence. |
+| Verification | Audit all seventeen original dispatch slots against `cmddisp.c`; run fresh MSVC x64 `/MT` whole-family regression through ingress, composition and checked mechanical seams for every callable disposition, including no-op, unavailable and deferred paths. No native trace. |
+| Expected Markers | One `54:00..10` owner/disposition ledger; no accidental raw pass-through for an admitted service; positive/negative source-built evidence for each provider class; and preserved composition ordering. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record original source paths/functions, exact packed layout and offsets, caller/callee field ownership, copied input/output ranges, provider disposition, test scope and limitations. Explicitly distinguish source-built package closure from a later native integration trace. |
-| Stop Conditions | Need for a service-only patch, a DOS/Bochs semantic migration, direct historical host-shell link, ambient host dependency, selector knowledge outside bx-vdm, a second S41 run, or a trace-led scope change. |
-| Exit Criteria | Complete source/ABI/failure map; valid caller-shaped handling or source-proven terminal result for every CMDINFO field; passing whole-package regression; and no generic decline at that tested boundary. |
+| Reporting Requirements | Record every original slot, owner function, adapter/provider disposition, fixed ABI effects, regression evidence and limits. Do not call a provider-class terminal result a historical capability implementation. |
+| Stop Conditions | Need for a service-only patch, a DOS/Bochs semantic migration, direct historical host-shell link, ambient host dependency, selector knowledge outside bx-vdm, a native trace, or trace-led scope change. |
+| Exit Criteria | All 17 original COMMAND slots have verified package dispositions; one whole-family regression passes; unavailable/deferred slots cannot silently succeed; and component limitations are recorded. |
 | Original Owner Request | "按完整原始 component package 推进（COMMAND: bootstrap/launch/console/execution/environment/lifecycle）……不按 trace 添油。" |
-| Similar-Issue Sweep | Review `54:00..10` as a family; compare all CMDINFO readers/writers, `cmdSetInfo` locators, COMSPEC/bootstrap, initial environment, return exit code, field packing, guest aperture failures and bound composition ordering. |
+| Similar-Issue Sweep | Compare `cmddisp.c`'s seventeen-slot order against ingress, plane, facade and session dispatch; test launch state, initial environment, CMDINFO retry, console, boot-file, current-directory, execution refusal, return/exit and malformed-range containment. |
+
+> **T199 S42 closure:** CMDINFO is now a source-mapped contained subpackage:
+> `54:0F` environment capacity crosses to `54:01` as the original CF/AX retry
+> contract, while command/executable and environment ranges remain separately
+> checked. Fresh x64 `/MT` helper and bound-composition regressions pass; no
+> native trace ran. See the [S42 CMDINFO map](etc/research/t199-s42-command-cmdinfo-source-abi-map-001.md).
 
 > **T199 S41 closure:** its one admitted source-built CPU5 guest run compiled and
 > linked the full current composition, completed established DEM traffic, and
