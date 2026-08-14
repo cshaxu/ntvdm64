@@ -2,11 +2,11 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T198 S108.** Its governing brief is the active
+> **Current effective packet: M0 T198 S109.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T198 S108 -- source-map the reached INT10 ROM-vector #UD before
-admitting any machine capability.**
+**Active: M0 T198 S109 -- reconstruct the original DEM `50:42` fast-path
+contract before changing its runtime disposition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -23,19 +23,19 @@ admitting any machine capability.**
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T198 S108, Ordinary Mode. |
-| Admission And Approval | S107's only run accepts `50:42` and reaches a non-BOP #UD at `C000:014A`. Existing snapshot evidence identifies this exact address as the saved INT10 vector; its firmware/ROM owner must be proven before machine changes. |
-| Objective | Source-map the `C000:014A` INT10 vector, its caller/stack provenance and current minimal-machine image ownership; classify the missing behavior as admitted firmware image, Bochs mechanics, or a non-machine defect without changing code. |
-| Non-goals | No guest run, ROM/VGA/device import, provider/routing/ABI change, host capability expansion, Bochs core/mantle edit, broad rebuild or continuity claim. |
-| Reference Baseline | S107 observation; adapter-r18 snapshot and T133 firmware INT10 audit. |
-| Files And ABI Surface | Evidence and task records only; no new runtime seam or guest-address API. |
+| Identifier Mode | M0 T198 S109, Ordinary Mode. |
+| Admission And Approval | S108 proves that `C000:014A` is an unprovisioned ROM-vector target but S89/S90 prove the same stream profile reaches and commits BOP `5F`, avoids that target, and continues to `50:3D`. S107 instead accepts the S106 `50:42` no-op and never reaches `5F`. This regression invalidates S106's no-op interpretation as sufficient runtime evidence. |
+| Objective | Reconstruct `handle.asm` `FastOrSlow` and the complete `50:42` caller/return contract, including MIPS-state predicate, SVC encoding, register/flag/position effects, source-derived fast-read provider precedence, and the precise divergence between S90 and S107. Classify the corrective runtime disposition without changing code. |
+| Non-goals | No guest run, no ROM/VGA/device import, no provider/routing/ABI change, host capability expansion, Bochs core/mantle edit, broad rebuild, rollback, or continuity claim. |
+| Reference Baseline | S89/S90 stream handoff, S106 no-op family, S107 observation, OpenNT `handle.asm`, `dossvc.h`, `demdisp.c`, `vint.h`, and the retained source-derived fast-read records. |
+| Files And ABI Surface | Evidence and task records only; no new runtime seam, guest-address API, or source mutation. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Line-addressed source/snapshot map ties IVT `10h`, `C000:014A`, caller continuation and current machine image lifecycle to exactly one owner/disposition; documentation governance and diff checks. |
-| Expected Markers | One evidence table proves whether the vector's target bytes exist and identifies the smallest owner-correct next task. |
+| Verification | Line-addressed source and current-composition map proves the fast/slow predicate, success/error result contract and S90/S107 divergence; documentation governance and diff checks. |
+| Expected Markers | One owner/disposition table distinguishes historical dispatcher placeholder behavior from the exact guest fast-path contract and bounds a corrective implementation task. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record exact source/snapshot paths, physical/vector mapping, owned lifecycle, rejected interpretations and confidence. |
+| Reporting Requirements | Record exact source paths, state-bit predicate, BOP encoding, caller effects, current provider ordering, rejected no-op inference and confidence. |
 | Stop Conditions | Any need for guest execution, ROM/VGA/device admission, arbitrary guest read, host environment injection, core/mantle seam change, broad rebuild or a semantic change. Stop and retain the map. |
-| Exit Criteria | A source-grounded disposition bounds one next machine-owner task or records an exact evidence blocker. |
+| Exit Criteria | A source-grounded corrective disposition bounds one next provider/composition task or records an exact evidence blocker. |
 | Original Owner Request | Second phase: based on the new architecture, comprehensively run the BOP instruction table with global structure rather than incremental per-service hacks. |
 | Similar-Issue Sweep | Cover compile/link membership, profile declaration, generated inputs, marker recorder ordering, accepted/declined dispositions, and prior fatal `50:3D` distinction so no old synthetic or watchdog result is misreported. |
 
