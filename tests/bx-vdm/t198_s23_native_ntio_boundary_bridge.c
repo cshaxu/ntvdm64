@@ -26,7 +26,7 @@ static uint32_t observed_ioctl_eip;
 static uint32_t observed_ioctl_eax, observed_ioctl_ebx, observed_ioctl_ecx, observed_ioctl_edx;
 static unsigned observed_fast_read;
 static uint16_t observed_fast_read_cs, observed_fast_read_ds, observed_fast_read_es;
-static uint32_t observed_fast_read_eip, observed_fast_read_eax, observed_fast_read_ebx, observed_fast_read_ecx, observed_fast_read_edx, observed_fast_read_esi, observed_fast_read_edi;
+static uint32_t observed_fast_read_eip, observed_fast_read_eax, observed_fast_read_ebx, observed_fast_read_ecx, observed_fast_read_edx, observed_fast_read_esi, observed_fast_read_edi, observed_fast_read_ebp, observed_fast_read_eflags;
 static unsigned observed_spckbd;
 static uint16_t observed_spckbd_cs, observed_spckbd_ds, observed_spckbd_es;
 static uint32_t observed_spckbd_eip, observed_spckbd_eax, observed_spckbd_ebx,
@@ -255,7 +255,8 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         observed_fast_read_eip = event->eip; observed_fast_read_eax = event->eax;
         observed_fast_read_ebx = event->ebx; observed_fast_read_ecx = event->ecx;
         observed_fast_read_edx = event->edx; observed_fast_read_esi = event->esi;
-        observed_fast_read_edi = event->edi;
+        observed_fast_read_edi = event->edi; observed_fast_read_ebp = event->ebp;
+        observed_fast_read_eflags = event->eflags;
     }
     if (!observed_ioctl && event->window_bytes >= 4u &&
         event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
@@ -338,6 +339,8 @@ unsigned t198_s23_native_ntio_boundary_observed_fast_read_ecx(void) { return obs
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_edx(void) { return observed_fast_read_edx; }
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_esi(void) { return observed_fast_read_esi; }
 unsigned t198_s23_native_ntio_boundary_observed_fast_read_edi(void) { return observed_fast_read_edi; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_ebp(void) { return observed_fast_read_ebp; }
+unsigned t198_s23_native_ntio_boundary_observed_fast_read_eflags(void) { return observed_fast_read_eflags; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd(void) { return observed_spckbd; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_cs(void) { return observed_spckbd_cs; }
 unsigned t198_s23_native_ntio_boundary_observed_spckbd_ds(void) { return observed_spckbd_ds; }
