@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T199 S11.** Its governing brief is the active
+> **Current effective packet: M0 T199 S12.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T199 S11 -- whole DPMI provider disposition.**
+**Active: M0 T199 S12 -- whole Redirector source/ABI/failure package map.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -21,19 +21,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T199 S11, Ordinary Mode. |
-| Admission And Approval | T199 S10 maps all 25 DPMI identities and their machine/host dependencies. Owner policy requires package disposition before work. |
-| Objective | Select one complete DPMI disposition and merge its prerequisites into the shared bx-core/bx-mantle machine-capability boundary. |
-| Non-goals | No DPMI implementation, trace, Bochs/core/mantle modification, direct dispatcher link, host-capability expansion, or singleton recognizer. |
-| Reference Baseline | T199 S9 XMS native-boundary disposition, T199 S10 DPMI matrix, and combined classification plane. |
-| Files And ABI Surface | Research/evidence only: shared machine-capability map and DPMI ownership disposition. |
+| Identifier Mode | M0 T199 S12, Ordinary Mode. |
+| Admission And Approval | T199 S11 merges XMS/DPMI machine requirements under one ownership plan. T199 S1 orders Redirector next. |
+| Objective | Produce a complete original OpenNT Redirector source/ABI/failure map for all 49 callable services. |
+| Non-goals | No Redirector implementation, trace, Bochs/core/mantle modification, direct dispatcher link, host-capability expansion, or singleton recognizer. |
+| Reference Baseline | T199 global audit and existing Redirector classification/unavailable evidence. |
+| Files And ABI Surface | Research/evidence only: original Redirector dispatcher/module surface and current classification. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every DPMI member has one disposition and shared/native prerequisite without duplicate allocator, CPU-mode, or interrupt ownership. |
-| Expected Markers | One whole-package DPMI disposition and unified machine-capability plan. |
+| Verification | Reproducible source-to-ABI/failure ledger for all 49 callable Redirector identities. |
+| Expected Markers | One complete Redirector matrix and package disposition basis. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Explicitly identify all adapter work rejected by machine ownership. |
-| Stop Conditions | Implementation, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, duplicate machine owner, or uncovered member. |
-| Exit Criteria | Complete disposition transfers implementation behind one shared machine-capability roadmap. |
+| Reporting Requirements | Identify host DLL/VDD/redirector dependencies and complete unavailable semantics. |
+| Stop Conditions | Implementation, trace, direct dispatcher link, Bochs/mantle modification, host-capability expansion, or source ambiguity. |
+| Exit Criteria | Complete Redirector map admits an all-family unavailable/deferred disposition. |
 | Original Owner Request | "咱们目的不是按组有序实现全部BOP吗" -- implement BOP by complete ordered packages; trace is integration verification only. |
 | Similar-Issue Sweep | Audit bootstrap, launch, console, execution, environment, lifecycle, sentinel, current partial providers, and all error/return paths together. |
 
@@ -58,6 +58,8 @@
 > **T199 S9 completion:** XMS implementation is held behind four native machine capabilities; see [S9 disposition](etc/research/t199-s9-xms-whole-package-disposition-001.md).
 
 > **T199 S10 completion:** all DPMI identities, original ABI and machine dependencies are recorded in [S10 matrix](etc/research/t199-s10-dpmi-source-abi-failure-matrix-001.md).
+
+> **T199 S11 completion:** XMS and DPMI now share one selector-blind machine-capability roadmap; see [S11 plan](etc/research/t199-s11-shared-xms-dpmi-machine-capability-plan-001.md).
 
 ## Current Technical Baseline
 
