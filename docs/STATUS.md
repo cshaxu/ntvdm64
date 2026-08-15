@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T210 S2.** Its governing brief is the active
+> **Current effective packet: M0 T210 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T210 S2 -- CLI host-context provider design and regression admission.**
+**Active: M0 T210 S3 -- CLI session host-context provider recovery.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -16,24 +16,25 @@
 ## Active Packet
 
 > **T scope:** T210 recovers the host-context owner package as one unit. S1
-> closed the source/ABI/profile map; S2 designs its shared provider and full
-> owner-package regression before implementation.
+> closed the source/ABI/profile map; S2 closed the shared-provider design and
+> full owner-package regression admission. S3 recovers that one provider as a
+> whole, rather than patching individual BOP endpoints.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T210 S2, Ordinary Mode. |
-| Admission And Approval | [S1 map](etc/research/t210-s1-host-context-owner-package-map-001.md) proves all required host APIs remain available to a normal CLI process and places `13/18/1A` plus COMMAND consumers under one session host-context owner. |
-| Objective | Define the shared provider state, Win32 capability seam, profile enforcement, copied ABI and full DEM/COMMAND regression plan for selected-drive/CWD/environment recovery. |
-| Non-goals | No individual BOP implementation, trace-led work, ambient host-state access, host installation/mutation, Bochs change, host handle leakage or engine lifecycle change. |
-| Reference Baseline | T200/T201 authorities, T202 DEM evidence, T209 closure, T210 S1 map and original DEM/COMMAND context owners. |
-| Files And ABI Surface | Design/evidence only in S2; no product ABI change until an S3 implementation packet. |
+| Identifier Mode | M0 T210 S3, Ordinary Mode. |
+| Admission And Approval | [S1 map](etc/research/t210-s1-host-context-owner-package-map-001.md) and [S2 provider design](etc/research/t210-s2-host-context-provider-design-001.md) prove the whole selected-drive/CWD/environment provider boundary and regression bar. |
+| Objective | Recover one session-owned host-context provider for DEM `13/18/1A` and COMMAND `54:02/04/0F`, including shared profile enforcement and copied publication. |
+| Non-goals | No trace-led service selection, unrelated DEM/COMMAND recovery, ambient recapture, host installation/mutation, Bochs change, host handle leakage or engine lifecycle change. |
+| Reference Baseline | T200/T201 authorities, T202 DEM evidence, T209 closure, T210 S1/S2 records and original DEM/COMMAND context owners. |
+| Files And ABI Surface | `src/bx-vdm` session provider and its DEM/COMMAND integration only; existing fixed-width COMMAND projection remains the consumer ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One provider design identifies fixed state ownership, all gathers/writes, Win32 calls, profile decisions, error mapping, migration/deletion actions and whole-family regression; governance and diff checks. |
-| Expected Markers | One session provider owns host context; DEM and COMMAND only consume it; no trace endpoint selects work. |
-| Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record state/ABI design, host API/error contract, full regression matrix and S3 implementation admission. |
-| Stop Conditions | Any implementation, individual trace-service patch, synthetic CWD success, ambient host-state use, or migration into mantle/core pauses S2 for re-admission. |
-| Exit Criteria | Reviewable whole-provider design and bounded S3 implementation packet. |
+| Verification | One strict MSVC x64 `/MT` provider fixture and one bound DEM/COMMAND family fixture cover all four modes, source failure/result cases, copied publication, teardown and negative boundaries; governance and diff checks. |
+| Expected Markers | One session provider owns host context; DEM and COMMAND only consume it; no synthetic CWD fallback or trace-selected endpoint remains. |
+| Asset Needs | Existing repository source only; normal user-mode Win32 filesystem/environment API calls in focused tests only; no firmware/media/device import or host installation dependency. |
+| Reporting Requirements | Record changed ABI/state, direct-host API/error evidence, profile results, full family regression, migration/deletion facts and limitations. |
+| Stop Conditions | A missing/publicly unavailable API, need for a host installation change, Bochs/mantle semantics, an unrelated provider package, or a need to choose work from trace pauses S3 for re-admission. |
+| Exit Criteria | Whole provider is source-built and its complete DEM/COMMAND family regression passes; one later trace may only observe integration. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | `demdir.c`, `demgset.c`, `cmdmisc.c`, DEM CWD/drive/context providers, host drive policy/namespace, COMMAND context, CLI admission and all selected-drive/current-directory/environment BOP routes. |
 
@@ -44,6 +45,10 @@
 > **T210 S1 closure:** original `50:13/18/1A` and their COMMAND consumers
 > form one host-context package; all required modern Win32 APIs are available
 > to a normal CLI process. See the [owner map](etc/research/t210-s1-host-context-owner-package-map-001.md).
+
+> **T210 S2 closure:** one session-owned provider design now defines the
+> shared state, Win32 seam, four profile modes, migrations and full DEM/COMMAND
+> family regression before implementation. See the [design record](etc/research/t210-s2-host-context-provider-design-001.md).
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
