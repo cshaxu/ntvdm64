@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T216 S2.** Its governing brief is the active
+> **Current effective packet: M0 T217 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T216 S2 -- declared guest executable-image provider seam.**
+**Active: M0 T217 S1 -- SYSINIT COMMAND EXEC prerequisite map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -17,31 +17,32 @@
 > current-profile composition admission recovery is recorded in
 > [history](history/m0-t214-closure-20260815.md). **T215 closed:** its
 > startup configuration attachment and causal classification are recorded in
-> [history](history/m0-t215-closure-20260815.md).
+> [history](history/m0-t215-closure-20260815.md). **T216 closed:** its
+> declared executable-image visibility is recorded in
+> [history](history/m0-t216-closure-20260815.md).
 
 ## Active Packet
 
-> **T scope:** T216 recovers the complete declared guest executable-image
-> visibility and SYSINIT COMMAND interpreter load contract. It begins with the
-> OpenNT guest/source, provider/ABI and failure map, then follows the mandatory
-> recovery ladder as one package. It does not implement a leaf BOP merely
-> because T215 observed its terminal.
+> **T scope:** T217 maps the complete SYSINIT-to-DOS-EXEC continuation after
+> declared COMMAND image visibility. It identifies guest DOS, DEM host,
+> machine and capability prerequisites as one owner package before admitting
+> recovery; it does not implement a leaf BOP from the unchanged terminal.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T216 S2, Ordinary Mode. |
-| Admission And Approval | S1 establishes that the profile-owned all-file namespace is complete but the direct provider intentionally restricts its borrowed overlay to indices 1/2. The selected step-(b) recovery is one source-derived readonly declared-image seam with original DEM open/handle/search results, not an EXEC implementation or a `50:3D` patch. |
-| Objective | Replace the two-image direct-provider predicate with a coherent all-declared-image readonly provider seam for COMMAND/targets/CONFIG/AUTOEXEC: exact-name open, handle lifecycle, metadata, readonly mutation failure, and merged root search visibility while retaining real-host behavior for nonmatching paths. |
-| Non-goals | No DOS EXEC, BOP ingress change, new selector, FCB file-operation implementation, host-file creation, virtual drive generalization, Bochs/mantle change, profile-policy expansion, unbounded guest-memory inspection, or guest-run claim. |
+| Identifier Mode | M0 T217 S1, Ordinary Mode. |
+| Admission And Approval | T216 proves declared image visibility and its full composition run still reaches the source-backed SYSINIT terminal. The next work is a whole caller/loader prerequisite audit, not proof that one BOP is missing. |
+| Objective | Map SYSINIT command open/size/EXEC continuation and all reached DOS/DEM/machine prerequisites to owner, source, ABI, failure rule and recovery disposition. |
+| Non-goals | No implementation, BOP routing change, trace instrumentation, guest-memory inspection, Bochs/mantle change, profile change, or COMMAND-run claim. |
 | Reference Baseline | T216 S1 map; OpenNT `demfile.c`, `demhndl.c`, `demsrch.c`, `demdisp.c`, `dossvc.h`; existing readonly namespace, direct DEM provider, provider partitions and source-built S5 regression. |
-| Files And ABI Surface | bx-vdm readonly namespace, direct DEM whole provider and namespace/handle/search partitions; focused package fixture/tool and evidence. Existing versioned typed CPU/memory ABI remains unchanged. |
+| Files And ABI Surface | Research evidence and task records only. No production ABI, provider or machine change in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused source-built x64 `/MT` package test: all declared image paths open/read/seek/close/time and search; all declared mutations fail without host side effect; nonmatching path/search stays host-backed. Current full composition source-builds but native trace is deferred until package regression closure. Governance and diff checks pass. |
-| Expected Markers | One all-file provider-owned overlay, opaque readonly tokens, checked guest transactions, merged host/declared root search entries, and unchanged direct behavior outside exact declared image names. |
+| Verification | OpenNT/current-source owner and ABI audit, full prerequisite/disposition table, recovery-ladder decision, governance and diff checks. |
+| Expected Markers | A complete package plan separates DOS loader, DEM host services, machine mechanics and explicit unavailable/deferred prerequisites. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T215 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record reused OpenNT owner/failure semantics, the old two-image workaround's migration/removal, all positive/negative package results, host nonmatching proof and native nonclaim. |
-| Stop Conditions | Any need to add a BOP handler, alter selector routing, implement FCB open/read/write, create a host file, change profile mutation policy, inspect live guest memory, modify Bochs/mantle, or claim executable/COMMAND success pauses S2 for re-admission. |
-| Exit Criteria | A source-built whole-provider regression proves all declared image handle/search/readonly outcomes and host fallback for nonmatching names; no special `50:3D` behavior exists. |
+| Reporting Requirements | Record original caller/source, ownership, copied ABI, failure path, current state and recovery-ladder disposition; distinguish evidence from inference. |
+| Stop Conditions | Any implementation, guest-memory instrumentation, trace-selected service work, profile change, or Bochs/mantle change pauses S1 for re-admission. |
+| Exit Criteria | A complete source/ABI/failure map selects one source-first whole-package implementation plan or an explicit unavailable/deferred disposition. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -73,6 +74,12 @@
 > target images. Its x64 `/MT` run passes. A separate full-composition attempt
 > emitted only partial compile evidence and no link/run result, so composition
 > regression remains explicitly open.
+
+> **T216 S2 P5 closure:** all five declared image slots now share the readonly
+> provider and merged pathname/FCB-search seam. Fresh focused x64 `/MT`
+> regression passes; the full composition links and reaches the unchanged
+> source-backed `50:3D` controlled terminal. This closes visibility only, not
+> COMMAND startup; see the [closure record](history/m0-t216-closure-20260815.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS

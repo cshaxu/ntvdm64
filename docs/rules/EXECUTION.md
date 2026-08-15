@@ -99,6 +99,15 @@ unpack-and-run host non-intrusion rule may constrain a decision only when the
 owner has explicitly recorded that exception.  Convenience, a trace hit, or a
 temporary capacity limit is never a reason to skip a level.
 
+The audit must record the disposition of every rung, including whether the
+original translation unit was actually attempted or is excluded by a named
+unavailable historical dependency.  It must identify the smallest retained
+source fragment or compatibility seam before proposing a rehost, and must
+record why a registered external-code intrusion or newly authored behavior is
+unavoidable.  A passing fixture and the availability of a convenient modern
+Win32 API validate a selected seam; neither substitutes for this source-first
+analysis.
+
 For every P or Td closure:
 
 1. Re-read the owner request and map each requirement to changed files and
