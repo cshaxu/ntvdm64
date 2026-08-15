@@ -216,6 +216,15 @@
 > record transactions, BOP routing and DEM closure remain pending. See the
 > [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 progress:** r33 adds provider-internal `demfcb.c` wildcard
+> namespace handling for `50:07/20`: bounded 8.3 inputs, admitted-root
+> enumeration, normal/extended deletion, `?` rename substitution and explicit
+> profile disposition. The r9 MSVC x64 `/MT` fixture proves direct host
+> mutation only where admitted, cross-drive rejection, and no host mutation in
+> readonly/overlay/virtual modes. It is not an ingress route, a final FCB/path
+> package switch, or FCB/DEM closure; same-name rename still needs a dedicated
+> short-name witness. See the [wildcard plan](etc/operations/t202-s4-dem-fcb-wildcard-provider-plan-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

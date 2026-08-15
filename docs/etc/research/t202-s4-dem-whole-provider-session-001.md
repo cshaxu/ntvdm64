@@ -233,3 +233,14 @@ MSVC x64 `/MT` fixture covers these three outcomes in addition to the retained
 direct FCB operations.  `50:07/20` wildcard delete/rename and full FCB record
 transactions are still pending, so this is not a complete FCB partition or an
 ingress migration.
+
+Revision r33 adds the provider-internal `demfcb.c` wildcard namespace pair:
+`50:07 demDeleteFCB` and `50:20 demRenameFCB`. Their bounded OEM records are
+decoded through the existing 8.3 search parser, then operate only on admitted
+root-relative namespace entries. r9 proves normal/extended wildcard deletion
+(including hidden and read-only selection), wildcard rename substitution,
+cross-drive rejection, and readonly/overlay/virtual non-mutation. The source
+implementation also retains same-name rejection, but that short-name edge
+case has not yet received a dedicated fixture witness. Neither service is
+routed through BOP ingress; final atomic FCB/pathname migration and full FCB
+record transactions remain pending.

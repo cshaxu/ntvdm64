@@ -2,7 +2,9 @@
 #include "bx_ntvdm_dem_handle_partition_v1.h"
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
+#include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 
+#include <stdio.h>
 #include <string.h>
 #include <wctype.h>
 
@@ -38,6 +40,45 @@ static void token_into_cpu(bx_ntvdm_cpu_state_v1 *cpu, uint32_t token)
     cpu->ebp = token & 0xffffu;
 }
 
+static int oem_to_wide(const char *source, wchar_t target[MAX_PATH])
+{
+    return source != 0 && target != 0 && MultiByteToWideChar(CP_OEMCP, 0,
+        source, -1, target, MAX_PATH) != 0;
+}
+
+static int replace_extension(char target[MAX_PATH], const char *source,
+    const char *extension)
+{
+    char *dot;
+    if (target == 0 || source == 0 || extension == 0 ||
+        strcpy_s(target, MAX_PATH, source) != 0) return 0;
+    dot = strrchr(target, '.');
+    return dot != 0 && strcpy_s(dot, MAX_PATH - (size_t)(dot - target), extension) == 0;
+}
+
+static int create_oem_file(const char *path)
+{
+    wchar_t wide[MAX_PATH];
+    HANDLE file;
+    if (!oem_to_wide(path, wide)) return 0;
+    file = CreateFileW(wide, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE |
+        FILE_SHARE_DELETE, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+    if (file == INVALID_HANDLE_VALUE) return 0;
+    return CloseHandle(file) != 0;
+}
+
+static int oem_file_exists(const char *path)
+{
+    wchar_t wide[MAX_PATH];
+    return oem_to_wide(path, wide) && GetFileAttributesW(wide) != INVALID_FILE_ATTRIBUTES;
+}
+
+static void delete_oem_file(const char *path)
+{
+    wchar_t wide[MAX_PATH];
+    if (oem_to_wide(path, wide)) DeleteFileW(wide);
+}
+
 int main(void)
 {
     bx_ntvdm_mutation_profile_v1 profile;
@@ -56,7 +97,13 @@ int main(void)
     DWORD written = 0u;
     bx_ntvdm_cpu_result_v2 result;
     wchar_t temporary[MAX_PATH], short_name[MAX_PATH];
-    char oem_short[MAX_PATH], oem_created[MAX_PATH], oem_renamed[MAX_PATH], oem_dir[MAX_PATH];
+    char oem_short[MAX_PATH] = {0}, oem_created[MAX_PATH] = {0};
+    char oem_renamed[MAX_PATH] = {0}, oem_dir[MAX_PATH] = {0};
+    char oem_wild_one[MAX_PATH] = {0}, oem_wild_two[MAX_PATH] = {0};
+    char oem_wild_three[MAX_PATH] = {0};
+    char oem_wild_pattern[MAX_PATH] = {0}, oem_rename_one[MAX_PATH] = {0};
+    char oem_rename_two[MAX_PATH] = {0}, oem_rename_pattern[MAX_PATH] = {0};
+    char oem_rename_destination[MAX_PATH] = {0}, oem_profile_pattern[MAX_PATH] = {0};
     uint8_t drive;
     uint32_t service;
     int failed = 0;
@@ -128,6 +175,69 @@ int main(void)
             !bx_ntvdm_dem_file_session_v1_adopt(&provider.files, file, &token)) {
             if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
             failed = 40;
+        }
+    }
+    if (!failed && !replace_extension(oem_profile_pattern, oem_short, ".N?")) failed = 76;
+    if (!failed) {
+        char cross_drive[MAX_PATH] = {0};
+        sprintf_s(cross_drive, sizeof(cross_drive), "%c:\\N?.TMP",
+            (char)('A' + ((drive + 1u) % 26u)));
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&provider, 0x20u,
+                &boundary, &cpu, oem_profile_pattern, cross_drive, &result) ||
+            !cf_set(&result) || !ax_is(&result, 17u))) failed = 761;
+    }
+    if (!failed) {
+        wchar_t hidden[MAX_PATH];
+        wchar_t readonly[MAX_PATH];
+        if (!replace_extension(oem_wild_one, oem_short, ".W1") ||
+            !replace_extension(oem_wild_two, oem_short, ".W2") ||
+            !replace_extension(oem_wild_three, oem_short, ".W3") ||
+            !replace_extension(oem_wild_pattern, oem_short, ".W?") ||
+            !create_oem_file(oem_wild_one) || !create_oem_file(oem_wild_two) ||
+            !create_oem_file(oem_wild_three) ||
+            !oem_to_wide(oem_wild_two, hidden) ||
+            !SetFileAttributesW(hidden, FILE_ATTRIBUTE_HIDDEN) ||
+            !oem_to_wide(oem_wild_three, readonly) ||
+            !SetFileAttributesW(readonly, FILE_ATTRIBUTE_READONLY)) failed = 71;
+        if (!failed) {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 0u;
+            if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&provider, 0x07u,
+                    &boundary, &cpu, oem_wild_pattern, 0, &result) || cf_set(&result) ||
+                oem_file_exists(oem_wild_one) || !oem_file_exists(oem_wild_two) ||
+                !oem_file_exists(oem_wild_three)) failed = 72;
+        }
+        if (!failed) {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 1u; cpu.edx = FILE_ATTRIBUTE_READONLY;
+            if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&provider, 0x07u,
+                    &boundary, &cpu, oem_wild_pattern, 0, &result) || cf_set(&result) ||
+                oem_file_exists(oem_wild_three) || !oem_file_exists(oem_wild_two)) failed = 721;
+        }
+        if (!failed) {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 1u; cpu.edx = FILE_ATTRIBUTE_HIDDEN;
+            if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&provider, 0x07u,
+                    &boundary, &cpu, oem_wild_pattern, 0, &result) || cf_set(&result) ||
+                oem_file_exists(oem_wild_two)) failed = 73;
+        }
+    }
+    if (!failed) {
+        if (!replace_extension(oem_rename_one, oem_short, ".R1") ||
+            !replace_extension(oem_rename_two, oem_short, ".R2") ||
+            !replace_extension(oem_rename_pattern, oem_short, ".R?") ||
+            !replace_extension(oem_rename_destination, oem_short, ".N?") ||
+            !create_oem_file(oem_rename_one) || !create_oem_file(oem_rename_two)) failed = 74;
+        if (!failed) {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&provider, 0x20u,
+                    &boundary, &cpu, oem_rename_pattern, oem_rename_destination, &result) ||
+                cf_set(&result) || oem_file_exists(oem_rename_one) ||
+                oem_file_exists(oem_rename_two) ||
+                !replace_extension(oem_rename_one, oem_short, ".N1") ||
+                !replace_extension(oem_rename_two, oem_short, ".N2") ||
+                !oem_file_exists(oem_rename_one) || !oem_file_exists(oem_rename_two)) failed = 75;
         }
     }
     if (!failed) {
@@ -343,6 +453,12 @@ int main(void)
                     0x2cu, &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
                 !cf_set(&result) || !ax_is(&result, 5u))) failed = 623;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 0u;
+            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
+                    0x07u, &boundary, &cpu, oem_profile_pattern, 0, &result) ||
+                !cf_set(&result) || !ax_is(&result, 5u) || !oem_file_exists(oem_rename_one)))
+                failed = 624;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
                     &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
                 !ax_is(&result, 5u)) failed = 62;
@@ -371,12 +487,40 @@ int main(void)
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
                     &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
                 !ax_is(&result, 1u))) failed = 65;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 0u;
+            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
+                    0x07u, &boundary, &cpu, oem_profile_pattern, 0, &result) ||
+                !cf_set(&result) || !ax_is(&result, 1u) || !oem_file_exists(oem_rename_one)))
+                failed = 651;
+            bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
+        }
+    }
+    if (!failed) {
+        bx_ntvdm_mutation_profile_v1 alternate_profile;
+        bx_ntvdm_dem_cwd_context_v1 alternate_cwd;
+        bx_ntvdm_dem_whole_provider_v1 alternate;
+        if (!profile_for_mode(&alternate_profile, BX_NTVDM_MUTATION_MODE_V1_VIRTUAL) ||
+            !bx_ntvdm_dem_cwd_context_v1_initialize(&alternate_cwd, &alternate_profile) ||
+            !bx_ntvdm_dem_whole_provider_v1_initialize(&alternate,
+                &alternate_profile, &space, &alternate_cwd)) failed = 66;
+        else {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 0u;
+            if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate, 0x07u,
+                    &boundary, &cpu, oem_profile_pattern, 0, &result) || !cf_set(&result) ||
+                !ax_is(&result, 1u) || !oem_file_exists(oem_rename_one)) failed = 661;
             bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }
     bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
     failed |= bx_ntvdm_dem_whole_provider_v1_valid(&provider) != 0;
     bx_ntvdm_host_namespace_v1_release(&space);
+    delete_oem_file(oem_wild_one);
+    delete_oem_file(oem_wild_two);
+    delete_oem_file(oem_wild_three);
+    delete_oem_file(oem_rename_one);
+    delete_oem_file(oem_rename_two);
     DeleteFileW(temporary);
     return failed;
 }

@@ -53,7 +53,8 @@ called complete:
    read-only candidate only to delete it, and reports file-not-found versus
    access-denied with the original aggregate rule;
 3. wildcard rename applies `?` substitution and rejects an identical source
-   and destination; cross-drive/path failures do not escape the admitted root;
+   and destination in the provider; the fixture proves substitution and that a
+   cross-drive request fails before any namespace operation;
 4. readonly, overlay and virtual profiles cause no host deletion, rename or
    attribute mutation; and
 5. no raw handle, host path, guest pointer or BOP selector is present in the
@@ -62,3 +63,17 @@ called complete:
 After those checks, `50:07/20` joins the existing FCB local-handle subset in
 the final package regression. It still does not authorize an independent
 ingress route or a native trace.
+
+## r33 evidence
+
+The source-built MSVC x64 `/MT` whole-provider fixture r9 now supplies this
+subpartition's provider-internal evidence. It creates temporary 8.3 entries
+below one admitted real host drive; normal FCB delete removes only ordinary
+matches, extended delete separately removes hidden and read-only matches, and
+the read-only attribute is cleared only immediately before deletion. It also
+proves wildcard rename substitution, rejects a cross-drive target with
+`AX=17,CF=1`, and proves that readonly, overlay and virtual profiles leave the
+real entries in place with their specified errors. The implementation's
+per-candidate identical-name rejection is source-derived, but a separate
+short-name-enumeration witness is still required before calling that edge case
+fixture-covered. This is not an ingress switch or complete FCB closure.
