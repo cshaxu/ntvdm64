@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T203 S1.** Its governing brief is the active
+> **Current effective packet: M0 T204 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T203 S1 -- engine terminal-result transport admission.**
+**Active: M0 T204 S1 -- contained guest startup configuration map.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -13,28 +13,27 @@
 
 ## Active Packet
 
-> **T scope:** T203 establishes whether a normal declared-DOS terminal result
-> can cross from the engine to the CLI through a distinct fixed-width ABI. It
-> follows completed BOP owner-package dispositions and does not recover or
-> create a BOP provider.
+> **T scope:** T204 establishes the whole declared guest startup configuration
+> package before any startup BOP, guest artifact or machine expansion is
+> changed.  Its first S is source/ABI/failure mapping, not implementation.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T203 S1, Ordinary Mode. |
-| Admission And Approval | T202 closure, the first Queue candidate, and the owner's continuing CLI NTVDM objective admit this source/runtime terminal-transport analysis. Ordinary user-mode host integration is permitted; host installation or system modification is not. |
-| Objective | Map the normal declared-DOS terminal path, reproduce or explicitly fail to reproduce a bounded `54:0B` normal return, and decide whether a fixed-width engine-to-CLI terminal-result ABI can be admitted. `54:11` is the original COMMAND dispatcher sentinel, not a callable return service. |
-| Non-goals | No BOP implementation or trace-selected endpoint patch; no process exit-code overloading; no raw CPU/Bochs pointer, guest pointer, handle, callback, VDM broker, GUI/VDD or interactive session; no Bochs semantic change. |
-| Reference Baseline | [T202 closure](history/m0-t202-closure-20260815.md), `cmdReturnExitCode`/`cmdGetNextCmd`, the [terminal selector map](etc/research/t203-s1-command-terminal-selector-source-map-001.md), current declared-plan lifecycle, and the top Queue candidate. |
-| Files And ABI Surface | Source/runtime map and, only after approval, a versioned fixed-width terminal result. It may expose only copied status/category data; neither host process exit code nor private engine state is an ABI. |
+| Identifier Mode | M0 T204 S1, Ordinary Mode. |
+| Admission And Approval | T203's source/runtime defer, the first Queue candidate, and the owner's standing authorization to choose the next owner-package work admit this startup-package source/ABI/failure map. Normal user-mode host integration remains allowed; changing the host installation remains forbidden. |
+| Objective | Produce the complete contained guest startup configuration owner/ABI/failure map from NTIO entry through configuration completion and every fatal/recoverable terminal, then define whole-package implementation order. `50:3D` is one evidence leaf, not the task boundary. |
+| Non-goals | No implementation of any BOP, guest artifact or machine feature; no trace-selected patch; no synthetic boot/config file; no host-system modification; no process exit-code transport; no raw CPU/Bochs pointer, guest pointer, handle, callback, VDM broker, GUI/VDD or Bochs semantic change. |
+| Reference Baseline | [T203 closure](history/m0-t203-closure-20260815.md), [T202 closure](history/m0-t202-closure-20260815.md), original `demExitVDM`, the source-built engine witness, and [T204 S1 brief](etc/operations/t204-s1-contained-guest-startup-configuration-map-001.md). |
+| Files And ABI Surface | Research/evidence records only. No production ABI, guest image, provider, CLI, bx-vdm, bx-mantle or bx-core source may change in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source map of normal return continuation; current-source MSVC x64 `/MT` bounded observation; documentation governance and diff checks. Later ABI code requires positive/negative lifetime and no-process-exit-overload regression. |
-| Expected Markers | One explicit engine owner, terminal state, copied result shape and CLI consumer disposition, or a source/runtime-proven deferral with no fabricated result. |
-| Asset Needs | Existing repository, current source-built fixture and no new external asset. |
-| Reporting Requirements | Record the normal-return path, observation result, exact ABI candidates, engine/CLI ownership, and all limitations. A non-reached `54:0B` is a result, not permission to simulate it. |
-| Stop Conditions | Any BOP implementation expansion, selector-specific trace patch, process-exit-code transport, raw internal-state exposure, host installation change, or Bochs semantic intrusion pauses S1 for re-admission. |
-| Exit Criteria | A reviewer can identify the normal terminal owner and either see one real bounded normal-return observation plus a safe ABI admission decision, or see a reproducible non-reach proof and source-shaped deferral. |
+| Verification | Source-map cardinality and owner review; reconciliation against current profile/composition routes; documentation governance and diff checks. |
+| Expected Markers | One complete startup configuration map; unique owner and remedy layer for every path; explicit source/fixture/platform/deferred classification; and proposed whole-package S ordering. |
+| Asset Needs | Existing repository and source-built fixture only; no external source, firmware, guest media or host mutation. |
+| Reporting Requirements | Record all entry/continuation/failure paths, structure/input boundaries, present workaround action, unavailable API/dependency facts and explicit limitations. A trace hit may validate a row but cannot create a row or choose an implementation. |
+| Stop Conditions | Any proposal to patch `50:3D` alone, fabricate configuration input, add a BOP provider, modify a guest image, expand Bochs, import a new asset, or change host installation pauses S1 for re-admission. |
+| Exit Criteria | A reviewer can see that every startup configuration path is mapped to an original owner and current layer; each current workaround has one action; and the next S packages are complete component boundaries with no trace-derived endpoint tasks. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect all terminal/controlled-stop paths, COMMAND declared-plan and DOS-return paths, CLI result handling, process exit propagation, bx-mantle lifecycle seams, and global registries for duplicate terminal ownership or hidden result transport. |
+| Similar-Issue Sweep | Inspect NTIO/NTDOS/COMMAND startup handoffs; BOP `5E`, DEM `50:3D`, configuration/boot-input records, profile descriptors, guest-memory loading, terminal/engine seams, and current boot/readonly/virtual profile workarounds. |
 
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
