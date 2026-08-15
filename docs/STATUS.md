@@ -66,6 +66,11 @@
 > source bytes.  Adapter installation-time copy/bind remains pending.  See
 > the [CLI admission record](etc/research/t204-s5-cli-paired-source-admission-001.md).
 
+> **T204 S5 P4 progress:** adapter installation now reads paired sources once,
+> copies bounded OEM input and binds the ready provider; strict x64 `/MT`
+> translation-unit compilation passes.  Installation-level regression remains
+> required.  See the [reader record](etc/research/t204-s5-adapter-installation-reader-001.md).
+
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
 > target is `54:0B`; see the [selector source map](etc/research/t203-s1-command-terminal-selector-source-map-001.md).

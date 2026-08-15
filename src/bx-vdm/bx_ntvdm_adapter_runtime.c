@@ -27,6 +27,8 @@
 #include "bx_ntvdm_host_drive_policy.h"
 #include "bx_ntvdm_cmd_set_info_service.h"
 #include "bx_ntvdm_boot_namespace_provider_v1.h"
+#include "bx_ntvdm_startup_configuration_source_v1.h"
+#include "bx_ntvdm_command_profile_consumer_v1.h"
 #include "bx_ntvdm_cmd_current_dir_service.h"
 #include "bx_ntvdm_dem_path_search_service_v1.h"
 #include "bx_ntvdm_legacy_plane_gate_v1.h"
@@ -312,6 +314,8 @@ int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
     bx_ntvdm_host_service_payloads_v1 payloads;
     wchar_t launch_plan[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     DWORD launch_plan_size;
+    bx_ntvdm_mutation_profile_v1 startup_profile;
+    bx_ntvdm_startup_configuration_input_v1 startup_input;
 
     if (bx_ntvdm_adapter_runtime.installed) return 0;
     if (byob_profile_validate_file_select(profile_path, byob_root, &selection) !=
@@ -386,6 +390,18 @@ int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
             &selection)) {
         bx_ntvdm_adapter_runtime.has_boot_namespace_provider = 1;
     }
+    bx_ntvdm_mutation_profile_v1_initialize(&startup_profile,
+        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    if (!bx_ntvdm_command_profile_consumer_v1_register_class(&startup_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        !bx_ntvdm_adapter_runtime.has_boot_namespace_provider ||
+        !bx_ntvdm_startup_configuration_source_v1_from_environment(&startup_input,
+            &startup_profile) ||
+        !bx_ntvdm_boot_namespace_provider_v1_bind_startup_configuration(
+            &bx_ntvdm_adapter_runtime.boot_namespace_provider, &startup_input)) {
+        return bx_ntvdm_adapter_runtime_v1_reject_install(
+            BX_NTVDM_ADAPTER_INSTALL_DIAGNOSTIC_V1_PROFILE_OR_IMAGE);
+    }
     bx_ntvdm_cmd_comspec_bootstrap_v1_initialize(
         &bx_ntvdm_adapter_runtime.cmd_comspec_bootstrap);
     bx_ntvdm_cmd_get_next_state_v1_initialize(
@@ -439,12 +455,12 @@ int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
         }
         bx_ntvdm_adapter_runtime.has_machine_profile = 1;
         if (selection.has_machine_observation_trigger != 0u) {
-            uint32_t index;
+            uint32_t trigger_index;
             uint64_t byte_count = 0u;
-            for (index = 0u; index < selection.machine_observation_count; ++index) {
-                if (selection.machine_observations[index].id ==
+            for (trigger_index = 0u; trigger_index < selection.machine_observation_count; ++trigger_index) {
+                if (selection.machine_observations[trigger_index].id ==
                     selection.machine_observation_trigger.observation_id) {
-                    byte_count = selection.machine_observations[index].byte_count;
+                    byte_count = selection.machine_observations[trigger_index].byte_count;
                     break;
                 }
             }
@@ -457,17 +473,17 @@ int bx_ntvdm_adapter_runtime_v1_install(const wchar_t *profile_path,
             }
         }
         if (selection.has_machine_startup_snapshot_trigger != 0u) {
-            uint32_t index;
+            uint32_t snapshot_index;
             uint64_t output_bytes = 0u;
-            for (index = 0u;
-                index < selection.machine_startup_snapshot_trigger.observation_count;
-                ++index) {
+            for (snapshot_index = 0u;
+                snapshot_index < selection.machine_startup_snapshot_trigger.observation_count;
+                ++snapshot_index) {
                 uint32_t observation_index;
                 for (observation_index = 0u;
                     observation_index < selection.machine_observation_count;
                     ++observation_index) {
                     if (selection.machine_observations[observation_index].id ==
-                        selection.machine_startup_snapshot_trigger.observation_ids[index])
+                        selection.machine_startup_snapshot_trigger.observation_ids[snapshot_index])
                         break;
                 }
                 if (observation_index == selection.machine_observation_count ||
@@ -616,7 +632,8 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
     if (!bx_ntvdm_adapter_runtime.installed) return 1;
     if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x11u) &&
         bx_ntvdm_cmd_return_exit_code_v1_dispatch(
-            &bx_ntvdm_adapter_runtime.cmd_get_next, event, cpu_before, window,
+            &bx_ntvdm_adapter_runtime.cmd_get_next, &bx_ntvdm_adapter_runtime.launch_plan,
+            event, cpu_before, window,
             result)) return 1;
     if (bx_ntvdm_controlled_stop_service_v1_dispatch(event, cpu_before, window,
             result)) return 1;
@@ -843,7 +860,7 @@ int bx_ntvdm_adapter_runtime_v3_complete_guest_read(
     const uint8_t *bytes, uint64_t byte_count,
     bx_ntvdm_cpu_result_v2 *result)
 {
-    bx_ntvdm_dem_dta_registration_v1 registration;
+    bx_ntvdm_dem_dta_registration_v1 registration = { 0 };
     uint32_t consumer;
     int completed;
     if (result == 0 || action == 0 || !bx_ntvdm_adapter_runtime.installed) return 0;

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1445 |
+| Documentation records | 1446 |
 | --- | --- |
-| Generated UTC | 2026-08-15T11:10:49Z |
+| Generated UTC | 2026-08-15T11:14:25Z |
 
 ## Entries
 
@@ -695,6 +695,7 @@ content-divergent entries.
 | etc/research/t204-s2-startup-configuration-policy-abi-001.md | indexed supporting material | f17ebabad475298001c50cd5fa14e5584b92c30f70c7894ba87e5f968cb8b117 |
 | etc/research/t204-s3-configuration-transform-provider-source-contract-001.md | indexed supporting material | c30c30484caa58d0fc995c10e457ff5b6c34637719faa563d8e145f3e5277982 |
 | etc/research/t204-s4-contained-configuration-provider-core-001.md | indexed supporting material | 3866eb96956c35d91c5bba4901d8aa4bb1ad6eaf9fde69b563695a01657c624b |
+| etc/research/t204-s5-adapter-installation-reader-001.md | indexed supporting material | 551b07c71c267cd896ce41014c1ca6385603cd656670e867a907cdf4abd300f3 |
 | etc/research/t204-s5-cli-configuration-admission-map-001.md | indexed supporting material | 94288d298c5f71fd741216f1a092c3b92cab903880b8ef2a95a236b81b8258f1 |
 | etc/research/t204-s5-cli-paired-source-admission-001.md | indexed supporting material | 83f15981c731bb31bb2eb3830e6545fc56a0f9eca6d9763aa29393eeede39ca3 |
 | etc/research/t204-s5-configuration-image-path-integration-001.md | indexed supporting material | 9bf5a64e92a6a416762378852f83965c10c505e769ad8bffacc10c6960b4b79b |
@@ -1459,7 +1460,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | d6a5723ea110e0cf4bc9efa37b9e21f4e07f2ddf01507bdbb8f692321598be03 |
+| STATUS.md | principal control document | 0b46d8028b234fcf91b7f778a5a10e7b3610e9e503e98c87cbc79334385ec98d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |
