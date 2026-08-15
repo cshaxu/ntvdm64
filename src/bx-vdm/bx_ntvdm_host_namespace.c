@@ -360,6 +360,13 @@ int bx_ntvdm_host_namespace_v1_directory_exists(
     const wchar_t *relative_directory)
 {
     HANDLE handle = INVALID_HANDLE_VALUE;
+    if (!bx_ntvdm_host_namespace_v1_valid(space) || drive_index >= 26u ||
+        relative_directory == 0) return 0;
+    /* The admitted root is a valid directory but is not a child path.  Keep
+     * this explicit rather than passing an empty name to the NT relative-open
+     * routine, whose contract deliberately rejects empty child components. */
+    if (relative_directory[0] == L'\0')
+        return (space->available_mask & bx_ntvdm_host_namespace_bit(drive_index)) != 0u;
     int result = bx_ntvdm_host_namespace_v1_open_directory_ex(space, drive_index,
         relative_directory, FILE_READ_ATTRIBUTES, FILE_OPEN, &handle, 0);
     if (handle != INVALID_HANDLE_VALUE) CloseHandle(handle);

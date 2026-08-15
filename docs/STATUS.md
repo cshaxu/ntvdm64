@@ -50,6 +50,13 @@
 > shared state, Win32 seam, four profile modes, migrations and full DEM/COMMAND
 > family regression before implementation. See the [design record](etc/research/t210-s2-host-context-provider-design-001.md).
 
+> **T210 S3 P1 progress:** a single bounded session host-context provider now
+> source-builds under MSVC x64 `/MT`; it validates direct admitted roots,
+> preserves readonly refusal, and projects overlay/virtual state to COMMAND.
+> The root-directory validation repair is covered by the focused fixture. This
+> is substrate only: DEM/COMMAND consumers have not yet migrated. See the
+> [P1 evidence](etc/research/t210-s3-session-host-context-provider-p1-001.md).
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was
