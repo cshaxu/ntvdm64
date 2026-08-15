@@ -158,7 +158,7 @@ a narrow CLI seam or retain the original unavailable/deferred result.
 | `WaitIfIdle` / `WakeUpNow` | top-level `5A` (`nt_bop.c`) | internal NTVDM scheduling hooks, not public process scheduling APIs | Defer to the engine lifecycle/cancellation package; do not approximate with arbitrary sleeps or an adapter busy loop. |
 | `VDMREDIR.DLL` / `VrDispatch` | Redirector `57:00..31` | historical NTVDM DLL composition absent from the admitted x64 CLI product | Keep one reachable, source-derived unavailable family until a separately admitted network profile defines its completion ABI. |
 | `WOW32` `W32Init` / `W32Dispatch` hooks | WOW `51` | historical WOW/CCPU/VDD composition, not an independently composable ordinary host library | Keep the whole WOW package deferred; its absence does not affect direct DOS host-drive recovery. |
-| `NtSetInformationProcess` LDT path | DPMI selector/LDT (`i386/dpmi386.c`) | native/undocumented historical process-information use; availability and meaning on current x64 require an explicit experiment, not inference from export presence | Defer selector/LDT work behind admitted bx-core/mantle protected-mode mechanics; do not build an adapter LDT emulation. |
+| `NtSetLdtEntries` / `NtSetInformationProcess(ProcessLdtInformation)` LDT path | DPMI selector/LDT (`i386/dpmi386.c`) | no supported x64 user-mode LDT contract; these are native historical process-mechanism calls, not a usable modern Win32 replacement | Defer selector/LDT work behind admitted bx-core/mantle protected-mode mechanics; do not build an adapter LDT emulation. |
 
 ## DEM first-pass owner groups (`50:00..48`)
 
@@ -249,6 +249,23 @@ that the whole COMMAND BOP is implemented or admitted.
 The existing bx-vdm XMS package/session is therefore an audit candidate for
 retain/migrate/replace classification, not evidence that the full original
 XMS allocator or INT15 contract is already closed.
+
+### XMS endpoint source/API register (`52:00..0B`)
+
+| BOP | Original handler | Required owner seam | Current composition status |
+| --- | --- | --- | --- |
+| `52:00` | `xmsA20` | bx-core/mantle A20 state plus checked guest-memory transaction | partial mantle-backed candidate; audit move/flush semantics before retaining. |
+| `52:01` | `xmsMoveBlock` | XMS block table, two checked guest ranges and overlap/error rules | deferred; never replace with an unchecked host `memcpy`. |
+| `52:02` | `xmsAllocBlock` | XMS allocator, guest-visible handle/address policy | partial mantle-backed candidate; original `NtAllocateVirtualMemory` is not by itself the guest allocation contract. |
+| `52:03` | `xmsFreeBlock` | same allocation ownership and invalid-handle failure | partial mantle-backed candidate. |
+| `52:04` | `xmsSysPageSize` | admitted machine/XMS geometry | deferred; host page size must not automatically become guest XMS page geometry. |
+| `52:05` | `xmsQueryExtMem` | declared guest XMS capacity | partial mantle-backed candidate; `GetSystemInfo` is available but ambient host RAM is not authoritative. |
+| `52:06` | `xmsInitUMB` | DOS UMB layout, A20 and machine memory owner | deferred until actual guest UMB geometry is proved. |
+| `52:07` | `xmsRequestUMB` | UMB allocator and DOS ownership | deferred with `52:06`. |
+| `52:08` | `xmsReleaseUMB` | UMB allocator and DOS ownership | deferred with `52:06`. |
+| `52:09` | `xmsNotifyHookI15` | real-mode INT15/PIC/firmware delivery | deferred machine prerequisite; not an adapter interrupt implementation. |
+| `52:0A` | `xmsQueryFreeExtMem` | XMS allocator capacity/failure semantics | deferred pending complete allocator audit. |
+| `52:0B` | `xmsReallocBlock` | allocation identity, move/resize semantics | partial mantle-backed candidate; must preserve original failure and address rules. |
 
 ## DPMI first-pass owner groups (`53:00..18`)
 
