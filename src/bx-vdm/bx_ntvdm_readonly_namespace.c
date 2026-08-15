@@ -192,9 +192,10 @@ int bx_ntvdm_readonly_namespace_v1_match_startup_path(
     if (byte_count_out != 0) *byte_count_out = 0u;
     if (value == 0 || canonical_path == 0 || drive_index != value->drive_index ||
         value->file_count < 3u) return 0;
-    /* Entries 1 and 2 become nonempty only after the T204 provider has
-     * completed source admission and transformation. */
-    for (index = 1u; index <= 2u; ++index) {
+    /* The namespace is the declared-image owner.  CONFIG/AUTOEXEC become
+     * ready later than COMMAND/targets, but once a slot owns bytes it must
+     * have the same immutable DEM visibility as every other declared image. */
+    for (index = 0u; index < value->file_count; ++index) {
         if (value->files[index].bytes != 0 &&
             bx_ntvdm_readonly_namespace_v1_path_equal(canonical_path,
                 value->files[index].path)) {
@@ -209,6 +210,5 @@ int bx_ntvdm_readonly_namespace_v1_owns_token(
     const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token)
 {
     return value != 0 && value->open != 0u && token == value->generation &&
-        value->open_file_index >= 1u && value->open_file_index <= 2u &&
         value->open_file_index < value->file_count;
 }

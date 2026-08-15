@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T216 S1.** Its governing brief is the active
+> **Current effective packet: M0 T216 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T216 S1 -- guest executable-image visibility source/ABI map.**
+**Active: M0 T216 S2 -- declared guest executable-image provider seam.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -29,19 +29,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T216 S1, Ordinary Mode. |
-| Admission And Approval | T215 S6 proves that CONFIG is consumed, but SYSINIT subsequently reaches its command-interpreter load/error terminal. Current boot namespace owns the declared `COMMAND.COM` bytes, yet T215 S5's direct-provider overlay only claims CONFIG/AUTOEXEC paths. This is an already designed owner-package seam, not a `50:3D` or trace-selected BOP patch. |
-| Objective | Produce a complete source/ABI/failure and provider-disposition map for SYSINIT's open/size/EXEC path and every declared guest executable image (`COMMAND.COM`, first target, optional terminal target), identifying the smallest OpenNT-first recovery route. |
-| Non-goals | No implementation, BOP routing change, native trace, guest-memory instrumentation, Bochs/mantle change, virtual drive generalization, host-path policy expansion, or guest-run claim. |
-| Reference Baseline | T215 closure/S6 causal map; OpenNT `doskrnl/bios/sysinit1.asm`, DOS open/EXEC dispatch; boot namespace/provider; direct DEM namespace/handle provider; current profile/admission code and full BOP catalogue. |
-| Files And ABI Surface | Research/operations evidence plus any documentation-only queue/status/history changes. No production ABI or provider implementation change in S1. |
+| Identifier Mode | M0 T216 S2, Ordinary Mode. |
+| Admission And Approval | S1 establishes that the profile-owned all-file namespace is complete but the direct provider intentionally restricts its borrowed overlay to indices 1/2. The selected step-(b) recovery is one source-derived readonly declared-image seam with original DEM open/handle/search results, not an EXEC implementation or a `50:3D` patch. |
+| Objective | Replace the two-image direct-provider predicate with a coherent all-declared-image readonly provider seam for COMMAND/targets/CONFIG/AUTOEXEC: exact-name open, handle lifecycle, metadata, readonly mutation failure, and merged root search visibility while retaining real-host behavior for nonmatching paths. |
+| Non-goals | No DOS EXEC, BOP ingress change, new selector, FCB file-operation implementation, host-file creation, virtual drive generalization, Bochs/mantle change, profile-policy expansion, unbounded guest-memory inspection, or guest-run claim. |
+| Reference Baseline | T216 S1 map; OpenNT `demfile.c`, `demhndl.c`, `demsrch.c`, `demdisp.c`, `dossvc.h`; existing readonly namespace, direct DEM provider, provider partitions and source-built S5 regression. |
+| Files And ABI Surface | bx-vdm readonly namespace, direct DEM whole provider and namespace/handle/search partitions; focused package fixture/tool and evidence. Existing versioned typed CPU/memory ABI remains unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-path and current-provider audit; full disposition table for image name, path/search identity, open/seek/read/close/time/mutation and any EXEC-specific prerequisite; recovery-ladder classification; governance and diff checks. |
-| Expected Markers | A package boundary that proves which existing namespace surfaces already support each image, which direct-provider paths shadow it, and whether original source can be compiled, shimmed, source-derived, deferred or rejected. |
+| Verification | Focused source-built x64 `/MT` package test: all declared image paths open/read/seek/close/time and search; all declared mutations fail without host side effect; nonmatching path/search stays host-backed. Current full composition source-builds but native trace is deferred until package regression closure. Governance and diff checks pass. |
+| Expected Markers | One all-file provider-owned overlay, opaque readonly tokens, checked guest transactions, merged host/declared root search entries, and unchanged direct behavior outside exact declared image names. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T215 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record every original source path, caller/owner, copied ABI surface, success/failure rule, profile disposition, current workaround and retain/migrate/replace/delete decision; distinguish fact from inference. |
-| Stop Conditions | Any need to add a BOP handler, widen a path overlay, parse an unbounded guest request, alter a profile, inspect live guest memory, modify Bochs/mantle, or claim an executable is runnable pauses S1 for new admission. |
-| Exit Criteria | An auditable complete map selects a single source-first implementation plan (or an explicit unavailable/deferred disposition) for the whole package, with no leaf trace patch. |
+| Reporting Requirements | Record reused OpenNT owner/failure semantics, the old two-image workaround's migration/removal, all positive/negative package results, host nonmatching proof and native nonclaim. |
+| Stop Conditions | Any need to add a BOP handler, alter selector routing, implement FCB open/read/write, create a host file, change profile mutation policy, inspect live guest memory, modify Bochs/mantle, or claim executable/COMMAND success pauses S2 for re-admission. |
+| Exit Criteria | A source-built whole-provider regression proves all declared image handle/search/readonly outcomes and host fallback for nonmatching names; no special `50:3D` behavior exists. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -51,6 +51,12 @@
 > SYSINIT/DEM contracts select a single source-derived all-declared-image
 > provider seam, not a `50:3D` patch or Bochs change. See the [complete
 > map](etc/research/t216-s1-guest-executable-image-visibility-map-001.md).
+
+> **T216 S2 P1 progress:** the direct provider now treats every ready declared
+> namespace slot as immutable, including `COMMAND.COM`; a fresh x64 `/MT`
+> provider probe proves its opaque `50:12` token/size path and preserves the
+> existing CONFIG read/refusal checks. Host-plus-declared search merge remains
+> open, so this is not package closure. See the [P1 record](etc/research/t216-s2-declared-image-handle-p1-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
