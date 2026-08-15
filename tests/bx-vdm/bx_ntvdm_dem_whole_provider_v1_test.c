@@ -1,5 +1,6 @@
 #include "bx_ntvdm_dem_whole_provider_v1.h"
 #include "bx_ntvdm_dem_handle_partition_v1.h"
+#include "bx_ntvdm_dem_namespace_partition_v1.h"
 
 #include <string.h>
 #include <wctype.h>
@@ -11,7 +12,9 @@ static int profile_for(bx_ntvdm_mutation_profile_v1 *profile)
     return bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
         BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
         bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
-        BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu);
+        BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) &&
+        bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
+        BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu);
 }
 
 static int cf_set(const bx_ntvdm_cpu_result_v2 *result)
@@ -50,6 +53,7 @@ int main(void)
     DWORD written = 0u;
     bx_ntvdm_cpu_result_v2 result;
     wchar_t temporary[MAX_PATH], short_name[MAX_PATH];
+    char oem_short[MAX_PATH], oem_created[MAX_PATH], oem_renamed[MAX_PATH], oem_dir[MAX_PATH];
     uint8_t drive;
     uint32_t service;
     int failed = 0;
@@ -57,7 +61,8 @@ int main(void)
     if (GetTempPathW(MAX_PATH, temporary) == 0u ||
         GetTempFileNameW(temporary, L"n64", 0u, temporary) == 0u ||
         GetShortPathNameW(temporary, short_name, MAX_PATH) == 0u ||
-        short_name[1] != L':') return 1;
+        short_name[1] != L':' || WideCharToMultiByte(CP_OEMCP, 0, short_name,
+            -1, oem_short, (int)sizeof(oem_short), 0, 0) == 0) return 1;
     drive = (uint8_t)(towupper((wint_t)short_name[0]) - L'A');
     snapshot.magic = BX_NTVDM_HOST_DRIVE_SNAPSHOT_V1_MAGIC;
     snapshot.version = BX_NTVDM_HOST_DRIVE_SNAPSHOT_V1_VERSION;
@@ -187,6 +192,84 @@ int main(void)
                 &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result) ||
             bx_ntvdm_dem_file_session_v1_lookup(&provider.files, token, &file))
             failed = 48;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x01u,
+                &boundary, &cpu, oem_short, 0, &result) || cf_set(&result) ||
+            (result.cpu_delta.gpr16_write_mask & (1u << 1u)) == 0u) failed = 49;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ebx = 0u; /* demOpen: read, compatibility sharing */
+        if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
+                &boundary, &cpu, oem_short, 0, &result) || cf_set(&result) ||
+            (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 5u))) !=
+                ((1u << 0u) | (1u << 5u))) failed = 50;
+        else {
+            token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                result.cpu_delta.gpr16_values[5];
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            token_into_cpu(&cpu, token);
+            cpu.ecx = cpu.edx = 0xffffu;
+            if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x02u,
+                    &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result)) failed = 51;
+        }
+    }
+    if (!failed) {
+        char *dot;
+        strcpy_s(oem_created, sizeof(oem_created), oem_short);
+        dot = strrchr(oem_created, '.');
+        if (dot == 0) failed = 52;
+        else strcpy_s(dot, sizeof(oem_created) - (size_t)(dot - oem_created), ".N01");
+        strcpy_s(oem_renamed, sizeof(oem_renamed), oem_created);
+        dot = strrchr(oem_renamed, '.');
+        if (!failed) strcpy_s(dot, sizeof(oem_renamed) - (size_t)(dot - oem_renamed), ".N02");
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x03u,
+                &boundary, &cpu, oem_created, 0, &result) || cf_set(&result))) failed = 53;
+        if (!failed) {
+            token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                result.cpu_delta.gpr16_values[5];
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            token_into_cpu(&cpu, token); cpu.ecx = cpu.edx = 0xffffu;
+            if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x02u,
+                    &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result)) failed = 54;
+        }
+        if (!failed) {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x17u,
+                    &boundary, &cpu, oem_created, oem_renamed, &result) || cf_set(&result)) failed = 55;
+        }
+        if (!failed) {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x05u,
+                    &boundary, &cpu, oem_renamed, 0, &result) || cf_set(&result)) failed = 56;
+        }
+    }
+    if (!failed) {
+        char *dot;
+        strcpy_s(oem_dir, sizeof(oem_dir), oem_short);
+        dot = strrchr(oem_dir, '.');
+        if (dot == 0) failed = 57;
+        else strcpy_s(dot, sizeof(oem_dir) - (size_t)(dot - oem_dir), ".D01");
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x04u,
+                &boundary, &cpu, oem_dir, 0, &result) || cf_set(&result))) failed = 58;
+        if (!failed) {
+            char check_path[MAX_PATH];
+            strcpy_s(check_path, sizeof(check_path), oem_dir + 2);
+            strcat_s(check_path, sizeof(check_path), "\\");
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.edx = (uint32_t)drive + 1u;
+            if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x44u,
+                    &boundary, &cpu, check_path, 0, &result) || cf_set(&result)) failed = 59;
+        }
+        if (!failed) {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x06u,
+                    &boundary, &cpu, oem_dir, 0, &result) || cf_set(&result)) failed = 60;
+        }
     }
     bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
     failed |= bx_ntvdm_dem_whole_provider_v1_valid(&provider) != 0;

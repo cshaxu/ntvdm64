@@ -82,3 +82,13 @@ Use the root-relative primitive only behind the S4 whole-provider pathname
 decode and file-token layer.  Retain the search enumeration limitation as an
 explicit search-package test case; do not silently change it into long-name
 or host-path behavior.
+
+Revision r21 corrects a distinct directory-validation defect found while
+testing `demCheckPath`: the old `directory_exists` helper walked each
+directory by bounded enumeration, so a populated real root could fail before
+the requested directory was examined.  It now uses the same root-relative
+`NtCreateFile(FILE_DIRECTORY_FILE)` capability as directory mutation, with
+`FILE_READ_ATTRIBUTES` and no create disposition.  The result remains a
+boolean capability check with no host path or handle exposure and no NUL-file
+side effect.  The r21 whole-provider fixture passes on the actual admitted
+drive.

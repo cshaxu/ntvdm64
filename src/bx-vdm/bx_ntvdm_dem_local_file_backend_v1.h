@@ -50,6 +50,14 @@ int bx_ntvdm_dem_local_file_backend_v1_open(
     bx_ntvdm_dem_local_file_backend_v1 *backend, const char *oem_path,
     uint32_t access, DWORD creation_disposition, uint32_t *token_out);
 
+/* The whole DEM namespace partition needs the original demOpen share-mode
+ * result and a copied host error.  This remains a package-private path-to-
+ * token operation: neither the root HANDLE nor the opened HANDLE escapes. */
+int bx_ntvdm_dem_local_file_backend_v1_open_ex(
+    bx_ntvdm_dem_local_file_backend_v1 *backend, const char *oem_path,
+    uint32_t access, ULONG share_access, DWORD creation_disposition,
+    uint32_t *token_out, DWORD *win32_error_out);
+
 #ifdef __cplusplus
 }
 #endif

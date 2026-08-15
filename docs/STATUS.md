@@ -141,6 +141,13 @@
 > closure only; it is not an ingress route or service-completion claim; see
 > the [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 progress:** the same nine-identity group now has one
+> source-derived direct-host namespace/metadata partition beneath the whole
+> provider. r21 verifies its copied-path/opaque-token operation forms against
+> self-created host objects, including a no-side-effect `50:44` directory
+> check. It is one source partition only—not full DEM, BOP ingress, overlay
+> support, or native guest closure; see the [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

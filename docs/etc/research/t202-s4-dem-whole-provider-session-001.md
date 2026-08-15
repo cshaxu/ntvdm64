@@ -63,3 +63,22 @@ copied OEM-path resolution and caller-selected DEM mutation-class policy;
 the latter avoids treating the read/write-capable open operation as an
 implicitly readonly or write-only service. r15 source-builds under MSVC x64
 `/MT`. It is not a BOP route and does not yet implement the nine operations.
+
+Revision r21 replaces that skeleton with one source-derived namespace/metadata
+partition.  Its adapter-private operation ABI receives only the already copied
+OEM pathname(s), copied CPU/event records and a typed CPU result; it performs
+no guest-memory access and remains below BOP ingress.  It covers the original
+`demfile.c`/`demdir.c` local forms for `50:01` attribute query/set,
+`50:03/22` create/create-new, `50:04/05/06` directory/file mutation,
+`50:12` ordinary file open and its DOS access/share decode, `50:17` rename,
+and `50:44` path check.  Open/create returns only a session-owned opaque
+`AX:BP` token; a native `HANDLE` remains private.
+
+The r21 source-built MSVC x64 `/MT` fixture uses only its own temporary host
+objects.  It proves attributes, open/close, create, rename, deletion,
+directory create/remove and the `50:44` directory success form.  The
+partition keeps named pipes/VDMREDIR deferred, maps a disallowed EA form to
+the source-shaped failure result, and never substitutes an overlay or virtual
+mode with a direct-host write.  This is one completed source partition, not
+the complete 29-identity DEM provider, a BOP ingress route, or a native guest
+run.

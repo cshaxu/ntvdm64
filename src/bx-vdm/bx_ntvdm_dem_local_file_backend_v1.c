@@ -37,6 +37,16 @@ int bx_ntvdm_dem_local_file_backend_v1_open(
     bx_ntvdm_dem_local_file_backend_v1 *backend, const char *oem_path,
     uint32_t access, DWORD creation_disposition, uint32_t *token_out)
 {
+    return bx_ntvdm_dem_local_file_backend_v1_open_ex(backend, oem_path,
+        access, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+        creation_disposition, token_out, 0);
+}
+
+int bx_ntvdm_dem_local_file_backend_v1_open_ex(
+    bx_ntvdm_dem_local_file_backend_v1 *backend, const char *oem_path,
+    uint32_t access, ULONG share_access, DWORD creation_disposition,
+    uint32_t *token_out, DWORD *win32_error_out)
+{
     wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
     uint8_t drive;
     uint32_t mode;
@@ -45,6 +55,7 @@ int bx_ntvdm_dem_local_file_backend_v1_open(
     HANDLE handle = INVALID_HANDLE_VALUE;
     int path_result;
     if (token_out != 0) *token_out = 0u;
+    if (win32_error_out != 0) *win32_error_out = ERROR_INVALID_PARAMETER;
     if (!bx_ntvdm_dem_local_file_backend_v1_valid(backend) || token_out == 0 ||
         (access & ~(BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ |
             BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_WRITE)) != 0u || access == 0u)
@@ -75,13 +86,14 @@ int bx_ntvdm_dem_local_file_backend_v1_open(
         return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED;
     desired_access = (access & BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ ? GENERIC_READ : 0u) |
         (access & BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_WRITE ? GENERIC_WRITE : 0u);
-    if (!bx_ntvdm_host_namespace_v1_open_file(backend->host_namespace, drive,
-            relative, desired_access, FILE_SHARE_READ | FILE_SHARE_WRITE |
-            FILE_SHARE_DELETE, creation_disposition, &handle))
+    if (!bx_ntvdm_host_namespace_v1_open_file_ex(backend->host_namespace, drive,
+            relative, desired_access, share_access, creation_disposition, &handle,
+            win32_error_out))
         return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_NOT_FOUND;
     if (!bx_ntvdm_dem_file_session_v1_adopt(backend->session, handle, token_out)) {
         CloseHandle(handle);
         return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_CAPACITY;
     }
+    if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
     return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK;
 }
