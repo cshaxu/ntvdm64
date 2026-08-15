@@ -98,6 +98,13 @@
 > source-built x64 `/MT` evidence. `54:10` remains explicit deferred rather
 > than fabricated. See the [closure record](history/m0-t211-s2-closure-20260815.md).
 
+> **T211 S3 P1 closure:** original `cmdredir.c`/`cmdexec.c` and current
+> stream-child/lifecycle routes now have one four-member source/ABI/failure
+> disposition map. Modern Win32 APIs are available, but BaseSrv/CSR, raw
+> VDM pointers/handles, WOW/PIF, Redirector and ambient-state dependencies
+> remain explicit blockers rather than excuses for a simplified leaf handler.
+> See the [S3 map](etc/research/t211-s3-command-launch-execution-source-abi-map-001.md).
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was
