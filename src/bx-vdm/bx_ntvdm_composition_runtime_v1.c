@@ -170,6 +170,7 @@ static int install(const wchar_t *profile, const wchar_t *root,
 {
     byob_profile_selection selection;
     byob_launch_plan_v2 launch;
+    uint32_t failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_PROFILE;
 
     if (runtime.installed) return 1;
     if (runtime.attempted) return -1;
@@ -193,6 +194,7 @@ static int install(const wchar_t *profile, const wchar_t *root,
         (selection.declared_target_count != 1u &&
          selection.declared_target_count != 2u))
         goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_IMAGES_AND_LAUNCH;
     if (!byob_launch_plan_v2_from_environment(&launch, launch_text) ||
         launch.slot_count != selection.declared_target_count ||
         byob_image_load_exact(root, &selection.ntio, &runtime.ntio) !=
@@ -205,7 +207,10 @@ static int install(const wchar_t *profile, const wchar_t *root,
             BYOB_IMAGE_OK ||
         (selection.declared_target_count == 2u &&
          byob_image_load_exact(root, &selection.terminal_quit,
-             &runtime.terminal_quit) != BYOB_IMAGE_OK) ||
+             &runtime.terminal_quit) != BYOB_IMAGE_OK))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_HOST_CAPABILITY;
+    if (
         !bx_ntvdm_host_drive_snapshot_v1_capture(include_mask, exclude_mask,
             &runtime.drives) ||
         selection.command_placement.drive_index >= 26u ||
@@ -214,34 +219,50 @@ static int install(const wchar_t *profile, const wchar_t *root,
         !bx_ntvdm_host_namespace_v1_initialize(&runtime.host_namespace,
             &runtime.drives) ||
         !bx_ntvdm_host_volume_snapshot_v1_capture(&runtime.drives,
-            &runtime.volumes) ||
-        !bx_ntvdm_boot_namespace_composition_v1_initialize(&runtime.composition,
+            &runtime.volumes))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_NAMESPACE_INITIALIZE;
+    if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&runtime.composition,
             &runtime.ntdos, &runtime.command, &runtime.target,
             selection.declared_target_count == 2u ? &runtime.terminal_quit : 0,
-            &selection) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
-            &runtime.composition, &runtime.drives) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(
-            &runtime.composition, &runtime.volumes) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
-            &runtime.composition, &runtime.mutation_profile) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
-            &runtime.composition, &runtime.mutation_profile) ||
-        !capture_command_host_context(&runtime.command_host_context,
-            selection.command_placement.drive_index) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
-            &runtime.composition, &runtime.command_host_context) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
-            &runtime.composition, &runtime.host_namespace) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_dem_boot_drive(
-            &runtime.composition, selection.command_placement.drive_index) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
-            &runtime.composition, &launch) ||
-        !bx_ntvdm_boot_namespace_composition_v1_bind(&runtime.composition) ||
-        !bx_ntvdm_native_bop_composition_v1_initialize(&runtime.native_bop) ||
+            &selection))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_DRIVE_SNAPSHOT;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(&runtime.composition, &runtime.drives))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_VOLUME_SNAPSHOT;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(&runtime.composition, &runtime.volumes))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_DEM_PROFILE;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(&runtime.composition, &runtime.mutation_profile))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_PROFILE;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(&runtime.composition, &runtime.mutation_profile))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_CONTEXT_CAPTURE;
+    if (!capture_command_host_context(&runtime.command_host_context, selection.command_placement.drive_index))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_CONTEXT_BIND;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(&runtime.composition, &runtime.command_host_context))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_DEM_NAMESPACE_BIND;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(&runtime.composition, &runtime.host_namespace))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_DEM_BOOT_DRIVE;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_dem_boot_drive(&runtime.composition, selection.command_placement.drive_index))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_LAUNCH_PLAN;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&runtime.composition, &launch))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMPOSITION_BIND;
+    if (!bx_ntvdm_boot_namespace_composition_v1_bind(&runtime.composition))
+        goto reject;
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_NATIVE_BOP_BIND;
+    if (!bx_ntvdm_native_bop_composition_v1_initialize(&runtime.native_bop) ||
         !bx_ntvdm_native_bop_composition_v1_bind(&runtime.native_bop))
         goto reject;
     bx_ntvdm_initial_state_v1_clear(&runtime.initial_state);
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_INITIAL_STATE;
     if (selection.has_machine_external_initial_state != 0u &&
         !bx_ntvdm_initial_state_catalog_v1_select(
             (const uint16_t *)selection.machine_external_initial_state_evidence_sha256,
@@ -252,7 +273,7 @@ static int install(const wchar_t *profile, const wchar_t *root,
 reject:
     bx_ntvdm_composition_runtime_v1_reset();
     runtime.attempted = 1;
-    return -1;
+    return -(int)failure_stage;
 }
 
 int bx_ntvdm_composition_runtime_v1_install_from_environment(void)

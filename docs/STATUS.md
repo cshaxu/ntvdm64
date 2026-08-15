@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T214 S2.** Its governing brief is the active
+> **Current effective packet: M0 T214 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T214 S2 -- composition admission diagnostic.**
+**Active: M0 T214 S3 -- namespace-initialization owner map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -19,27 +19,33 @@
 ## Active Packet
 
 > **T scope:** T214 recovers the current profile's complete composition
-> admission chain before CPU entry. S1 mapped its owner stages. S2 adds one
-> selector-blind copied diagnostic so the present detail-1 rejection can be
-> attributed without changing guest behavior.
+> admission chain before CPU entry. S1 mapped its owner stages; S2 has
+> established that the current native rejection is namespace initialization.
+> S3 maps that initializer's ordered provider/DEM/COMMAND ownership before a
+> package-owned repair is admitted.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T214 S2, Ordinary Mode. |
-| Admission And Approval | T214 S1 establishes that native detail `1` collapses a complete installation chain and current direct/native closures diverge after later host-capability work. S2 admits a fixed-width composition-owned diagnostic only. |
-| Objective | Expose the first failed composition installation stage through a copied selector-blind diagnostic and prove its reset/invalid-input behavior. |
+| Identifier Mode | M0 T214 S3, Ordinary Mode. |
+| Admission And Approval | S2 established `detail=40`, the namespace-initialization stage, through source-built native evidence. S3 is admitted to map the ordered inner owners before any repair. |
+| Objective | Attribute the rejected namespace initializer to its exact provider, DEM-session, or COMMAND-session contract and record the package-level recovery disposition. |
 | Non-goals | No BOP implementation, no trace-selected patch, no Bochs/mantle/engine semantics, no host mutation policy expansion, no guest path/handle export, and no guest-run claim. |
-| Reference Baseline | T213 native observation, current composition runtime, profile/namespace/provider source, and existing profile artifacts. |
-| Files And ABI Surface | Composition runtime header/source and a focused fixture; fixed-width diagnostic only. |
+| Reference Baseline | [S2 diagnostic](etc/research/t214-s2-composition-admission-diagnostic-001.md), current boot-namespace provider/plane/composition and DEM/COMMAND session source. |
+| Files And ABI Surface | Evidence and, only if needed to prove a copied init precondition, one bounded composition-owned fixture; no runtime-provider ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MSVC x64 `/MT` focused diagnostic fixture and current native closure observation; governance and diff checks. |
-| Expected Markers | Every grouped short-circuit has a unique fixed stage; reset clears it; neither provider identity nor host object crosses the API. |
-| Asset Needs | Existing profile/root and source fixtures only; no firmware/media/device import or native guest trace. |
-| Reporting Requirements | Record stage order, current rejection stage, Win32 availability where relevant, workaround action, and next whole provider package. |
-| Stop Conditions | Any need for BOP patch, unbounded logging, Bochs/mantle change, host path/handle export, or unaudited host mutation pauses S2. |
-| Exit Criteria | A source-built fixture identifies current rejection to one owned stage and proves diagnostic reset/negative behavior. |
+| Verification | Source/ABI/failure map over the exact profile selection and a fresh focused MSVC x64 `/MT` fixture; governance and diff checks. |
+| Expected Markers | One failing inner owner or a complete evidence-backed ambiguity record; exact input invariant; retain/migrate/replace/defer action; no BOP selected from trace. |
+| Asset Needs | Existing profile/root, parser, source fixtures and current native evidence only; no firmware/media/device import. |
+| Reporting Requirements | Record ordered calls, exact profile fields consumed, current failure condition, Win32 availability if reached, workaround action and the next complete provider package. |
+| Stop Conditions | Any need for BOP patch, unbounded logging, Bochs/mantle change, host path/handle export, unaudited host mutation, or a repair before owner attribution pauses S3. |
+| Exit Criteria | A reproducible source map and fixture isolate the inner owner/precondition sufficiently to admit one whole-package repair or record a bounded external blocker. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | DEM `50:38..3D`, COMMAND `54:01/0B`, existing normal/terminal observers, engine contract/run/machine stage, CLI lifecycle classifier, and T206--T212 evidence. |
+| Similar-Issue Sweep | Boot namespace provider/plane, DEM and COMMAND session initializers, readonly namespace, search snapshot, startup configuration, direct-composition fixtures, engine rejection/reset and T204/T210--T213 evidence. |
+
+> **T214 S2 closure:** one fixed-width, selector-blind diagnostic now assigns
+> the native pre-CPU rejection to `namespace-initialize` (`detail=40`), and
+> a focused negative engine fixture proves reset/deactivation after that
+> rejection. See the [diagnostic record](etc/research/t214-s2-composition-admission-diagnostic-001.md).
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic

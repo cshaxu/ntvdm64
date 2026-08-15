@@ -43,7 +43,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         bx_ntvdm_cancellation_controller_v1_deactivate();
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION,
-            install_status < 0 ? 1u : 2u);
+            install_status < 0 ? (uint32_t)(-install_status) : 2u);
     }
     if (!bx_ntvdm_composition_runtime_v1_prepare_machine_stage_request(
             &machine_stage)) {

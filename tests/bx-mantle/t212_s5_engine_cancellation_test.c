@@ -5,6 +5,7 @@
 static int install_calls;
 static int reset_calls;
 static int cancel_during_install;
+static int install_rejection_stage;
 static int ordinary_terminal;
 static uint32_t execution_status = BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET;
 
@@ -17,6 +18,7 @@ int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
         root_chars == 0u || launch_chars == 0u || include_mask != 0u ||
         exclude_mask != 0u) return -1;
     ++install_calls;
+    if (install_rejection_stage != 0) return -install_rejection_stage;
     if (cancel_during_install && !bx_ntvdm_engine_request_cancellation_v1(
         BX_NTVDM_CANCELLATION_V1_USER_REQUEST)) return -1;
     return 1;
@@ -80,25 +82,32 @@ int main(void)
     struct bx_ntvdm_engine_request_v1 request;
     struct bx_ntvdm_engine_result_v1 result;
     request_set(&request);
+    install_rejection_stage = 40;
+    if (!bx_ntvdm_engine_run_v1(&request, &result) ||
+        result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION ||
+        result.detail_code != 40u || install_calls != 1 || reset_calls != 1 ||
+        bx_ntvdm_engine_request_cancellation_v1(
+            BX_NTVDM_CANCELLATION_V1_USER_REQUEST)) return 5;
+    install_rejection_stage = 0;
     cancel_during_install = 1;
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_HOST_CANCELLATION ||
         result.detail_code != BX_NTVDM_CANCELLATION_V1_USER_REQUEST ||
-        install_calls != 1 || reset_calls != 1 ||
+        install_calls != 2 || reset_calls != 2 ||
         bx_ntvdm_engine_request_cancellation_v1(
-            BX_NTVDM_CANCELLATION_V1_USER_REQUEST)) return 1;
+            BX_NTVDM_CANCELLATION_V1_USER_REQUEST)) return 6;
     cancel_during_install = 0;
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_EXECUTION_BUDGET ||
-        install_calls != 2 || reset_calls != 2) return 2;
+        install_calls != 3 || reset_calls != 3) return 7;
     execution_status = BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP;
     ordinary_terminal = 0;
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL ||
-        install_calls != 3 || reset_calls != 3) return 3;
+        install_calls != 4 || reset_calls != 4) return 8;
     ordinary_terminal = 1;
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_ORDINARY_GUEST_COMPLETION ||
-        install_calls != 4 || reset_calls != 4) return 4;
+        install_calls != 5 || reset_calls != 5) return 9;
     return 0;
 }
