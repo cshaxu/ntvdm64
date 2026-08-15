@@ -3,6 +3,7 @@
 #include "bx-core/memory/memory.h"
 #include "bx-mantle/pc_system.h"
 #include "bx_ntvdm_generic_ud_bridge.h"
+#include "bx_ntvdm_cancellation_controller_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
 
@@ -11,14 +12,30 @@
 static bx_ntvdm_minimal_machine_c *bx_ntvdm_machine_stage_machine;
 
 struct bx_ntvdm_machine_stage_v1_stop_state {
-  bx_bool fired;
+  bx_bool watchdog_fired;
+  bx_bool cancellation_fired;
 };
+
+static const Bit64u bx_ntvdm_machine_stage_v1_cancellation_poll_ticks = 1024u;
 
 static void bx_ntvdm_machine_stage_v1_stop(void *opaque)
 {
   bx_ntvdm_machine_stage_v1_stop_state *state =
     (bx_ntvdm_machine_stage_v1_stop_state *) opaque;
-  state->fired = 1;
+  state->watchdog_fired = 1;
+  bx_pc_system.kill_bochs_request = 1;
+}
+
+static void bx_ntvdm_machine_stage_v1_cancellation_poll(void *opaque)
+{
+  bx_ntvdm_machine_stage_v1_stop_state *state =
+    (bx_ntvdm_machine_stage_v1_stop_state *) opaque;
+#if defined(BX_NTVDM_CANCELLATION_TESTING)
+  bx_ntvdm_cancellation_controller_v1_test_poll_mark();
+#endif
+  if (bx_ntvdm_cancellation_controller_v1_requested_reason() ==
+      BX_NTVDM_CANCELLATION_V1_NONE) return;
+  state->cancellation_fired = 1;
   bx_pc_system.kill_bochs_request = 1;
 }
 
@@ -176,25 +193,42 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   const struct bx_ntvdm_machine_stage_v1_execution_request *request)
 {
   bx_ntvdm_machine_stage_v1_stop_state stop_state;
-  int stop_timer;
+  int stop_timer, cancellation_timer;
 
   if (bx_ntvdm_machine_stage_machine == 0)
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_REJECTED_INACTIVE;
   if (!bx_ntvdm_machine_stage_v1_execution_request_valid(request))
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_REJECTED_INPUT;
+  if (bx_ntvdm_cancellation_controller_v1_requested_reason() !=
+      BX_NTVDM_CANCELLATION_V1_NONE)
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_HOST_CANCELLATION;
   bx_pc_system.initialize(request->ips);
-  stop_state.fired = 0;
+  stop_state.watchdog_fired = 0;
+  stop_state.cancellation_fired = 0;
   stop_timer = bx_pc_system.register_timer_ticks(&stop_state,
     bx_ntvdm_machine_stage_v1_stop, request->instruction_tick_budget, 0, 1,
     "machine-stage-stop");
   if (stop_timer <= 0)
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
+  cancellation_timer = bx_pc_system.register_timer_ticks(&stop_state,
+    bx_ntvdm_machine_stage_v1_cancellation_poll,
+    bx_ntvdm_machine_stage_v1_cancellation_poll_ticks, 1, 1,
+    "machine-stage-cancel");
+  if (cancellation_timer <= 0) {
+    bx_pc_system.deactivate_timer((unsigned) stop_timer);
+    bx_pc_system.unregisterTimer((unsigned) stop_timer);
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
+  }
   bx_ntvdm_mantle_generic_ud_stop_observation_reset();
   bx_cpu.cpu_loop();
+  bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
+  bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
   bx_pc_system.deactivate_timer((unsigned) stop_timer);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
   if (bx_ntvdm_mantle_generic_ud_stop_observed())
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP;
-  return stop_state.fired ? BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET :
+  if (stop_state.cancellation_fired)
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_HOST_CANCELLATION;
+  return stop_state.watchdog_fired ? BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET :
     BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_UNEXPECTED_LOOP_RETURN;
 }

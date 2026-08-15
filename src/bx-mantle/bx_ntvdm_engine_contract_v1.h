@@ -61,6 +61,9 @@ void bx_ntvdm_engine_result_v1_clear(struct bx_ntvdm_engine_result_v1 *result);
 int bx_ntvdm_engine_result_v1_set(struct bx_ntvdm_engine_result_v1 *result,
     uint32_t terminal_kind, uint32_t detail_code);
 int bx_ntvdm_engine_result_v1_valid(const struct bx_ntvdm_engine_result_v1 *result);
+/* Requests cancellation of the one active process-local engine run.  The
+ * fixed reason contains no host handle, callback, guest state or selector. */
+int bx_ntvdm_engine_request_cancellation_v1(uint32_t reason);
 int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     struct bx_ntvdm_engine_result_v1 *result);
 

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T212 S5.** Its governing brief is the active
+> **Current effective packet: M0 T212 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T212 S5 -- selector-blind mechanical cancellation controller.**
+**Active: M0 T212 S6 -- CLI cancellation orchestration.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -20,24 +20,24 @@
 > audit and cleanup ownership; S2 closed the copied CLI-only policy and
 > result-classification boundary. S3 integrated that already-closed boundary
 > into the native CLI without changing engine behavior. S4 admitted the one
-> selector-blind cooperative-cancellation boundary; S5 implements its
-> mechanical mantle/engine portion only.
+> selector-blind cooperative-cancellation boundary; S5 closed its mechanical
+> mantle/engine portion. S6 composes it with CLI-owned event/worker lifetime.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T212 S5, Ordinary Mode. |
-| Admission And Approval | T212 S4 identifies one selector-blind atomic/timer candidate and rejects direct Bochs writes, raw handles and BOP cancellation. Owner approves implementation only of that mechanical boundary. |
-| Objective | Implement one mantle-private atomic cancellation controller and typed engine/machine-stage mapping that returns existing `HOST_CANCELLATION` after normal cleanup. |
-| Non-goals | No console handler/worker-thread CLI integration, no wall-time/resource limit, no normal-completion claim, no BOP implementation, no guest inspection, no raw handle/pointer/callback ABI, and no Bochs-core change. |
-| Reference Baseline | T212 S4 admission map; existing machine-stage watchdog callback, CPU loop stop latch and engine reset sequence. |
-| Files And ABI Surface | Registered mantle exception, `src/bx-mantle` lifecycle/machine-stage/engine sources, fixed typed reason/status records, focused mantle/engine fixture. |
+| Identifier Mode | M0 T212 S6, Ordinary Mode. |
+| Admission And Approval | T212 S5 closed the typed, selector-blind engine cancellation mechanism with stage and engine cleanup evidence. It admits CLI-only orchestration around that API. |
+| Objective | Add one CLI-owned worker/event lifecycle that converts a console cancellation request into the closed typed engine request and joins a copied engine result before presentation. |
+| Non-goals | No mantle/Bochs/core/BOP/OpenNT change, no host handle across the engine API, no guest cancellation semantics, no normal-completion claim, no wall-time/resource policy and no durable audit I/O. |
+| Reference Baseline | T212 S1--S5 records; retained child-runner console-event ownership; closed engine cancellation API and lifecycle ABI. |
+| Files And ABI Surface | `src/cli` lifecycle/entry sources and focused CLI orchestration fixture; engine API is called by fixed reason only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MSVC x64 `/MT` focused fixture proves pre-entry and in-flight cancellation, reason rejection, watchdog/typed-stop distinction, cleanup and second-run reuse; governance and diff checks. |
-| Expected Markers | No cancellation ABI contains host handles/pointers/callbacks or selector data; only CPU-thread timer code writes the existing Bochs stop latch; engine reports `HOST_CANCELLATION` only after reset. |
-| Asset Needs | Existing minimal machine/stage fixture source and registered mantle exception; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record intrusion registration, exact source ownership, state/lifetime ordering, build/run output and deferred CLI orchestration. |
-| Stop Conditions | Any need for a Bochs-core edit, direct CLI/adapter write to the stop latch, raw handle/pointer/callback, guest/selector awareness or additional device pauses S5 for owner direction. |
-| Exit Criteria | One source-built mechanical controller demonstrates cancellation as a typed post-cleanup engine terminal with no change to BOP/guest/Bochs-core behavior. |
+| Verification | Fresh MSVC x64 `/MT` CLI orchestration fixture proves event/request/join ordering, canceled and uncanceled typed results, handler cleanup and no raw-handle engine transfer; governance and diff checks. |
+| Expected Markers | Console handler only signals CLI-owned state; the CLI main path issues the typed fixed reason; engine result is copied after worker join and independently classified. |
+| Asset Needs | Existing lifecycle ABI, closed engine cancellation API and normal user-mode CLI test facilities; no firmware/media/device import or native trace. |
+| Reporting Requirements | Record worker/handle ownership, event ordering, result-copy boundary, negative cases and remaining wall-time/resource deferral. |
+| Stop Conditions | Any need to pass a host handle/pointer/callback into engine/mantle, alter the mechanical controller, create guest/selector semantics, or rely on `TerminateProcess` pauses S6 for re-admission. |
+| Exit Criteria | A source-built CLI-only fixture proves bounded cancellation request and joined typed result without changing engine/mantle or equating host outcome with DOS status. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, retained child cancellation, finite fixture timers, terminal observations, composition reset and T203/T206/T207 evidence. |
 
