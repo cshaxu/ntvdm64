@@ -22,19 +22,30 @@
 | --- | --- |
 | Identifier Mode | M0 T203 S1, Ordinary Mode. |
 | Admission And Approval | T202 closure, the first Queue candidate, and the owner's continuing CLI NTVDM objective admit this source/runtime terminal-transport analysis. Ordinary user-mode host integration is permitted; host installation or system modification is not. |
-| Objective | Map the normal declared-DOS terminal path, reproduce or explicitly fail to reproduce a bounded `54:11` normal return, and decide whether a fixed-width engine-to-CLI terminal-result ABI can be admitted. |
+| Objective | Map the normal declared-DOS terminal path, reproduce or explicitly fail to reproduce a bounded `54:0B` normal return, and decide whether a fixed-width engine-to-CLI terminal-result ABI can be admitted. `54:11` is the original COMMAND dispatcher sentinel, not a callable return service. |
 | Non-goals | No BOP implementation or trace-selected endpoint patch; no process exit-code overloading; no raw CPU/Bochs pointer, guest pointer, handle, callback, VDM broker, GUI/VDD or interactive session; no Bochs semantic change. |
-| Reference Baseline | [T202 closure](history/m0-t202-closure-20260815.md), `cmdReturnExitCode`/`cmdGetNextCmd`, current declared-plan lifecycle, and the top Queue candidate. |
+| Reference Baseline | [T202 closure](history/m0-t202-closure-20260815.md), `cmdReturnExitCode`/`cmdGetNextCmd`, the [terminal selector map](etc/research/t203-s1-command-terminal-selector-source-map-001.md), current declared-plan lifecycle, and the top Queue candidate. |
 | Files And ABI Surface | Source/runtime map and, only after approval, a versioned fixed-width terminal result. It may expose only copied status/category data; neither host process exit code nor private engine state is an ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Source map of normal return continuation; current-source MSVC x64 `/MT` bounded observation; documentation governance and diff checks. Later ABI code requires positive/negative lifetime and no-process-exit-overload regression. |
 | Expected Markers | One explicit engine owner, terminal state, copied result shape and CLI consumer disposition, or a source/runtime-proven deferral with no fabricated result. |
 | Asset Needs | Existing repository, current source-built fixture and no new external asset. |
-| Reporting Requirements | Record the normal-return path, observation result, exact ABI candidates, engine/CLI ownership, and all limitations. A non-reached `54:11` is a result, not permission to simulate it. |
+| Reporting Requirements | Record the normal-return path, observation result, exact ABI candidates, engine/CLI ownership, and all limitations. A non-reached `54:0B` is a result, not permission to simulate it. |
 | Stop Conditions | Any BOP implementation expansion, selector-specific trace patch, process-exit-code transport, raw internal-state exposure, host installation change, or Bochs semantic intrusion pauses S1 for re-admission. |
 | Exit Criteria | A reviewer can identify the normal terminal owner and either see one real bounded normal-return observation plus a safe ABI admission decision, or see a reproducible non-reach proof and source-shaped deferral. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Inspect all terminal/controlled-stop paths, COMMAND declared-plan and DOS-return paths, CLI result handling, process exit propagation, bx-mantle lifecycle seams, and global registries for duplicate terminal ownership or hidden result transport. |
+
+> **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
+> sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
+> target is `54:0B`; see the [selector source map](etc/research/t203-s1-command-terminal-selector-source-map-001.md).
+
+> **T203 S1 observation:** a fresh source-built MSVC x64 `/MT` CPU5 run
+> compiled and linked successfully but remained at the DEM frontier (first
+> canonical `50:11`, run exit `2`); it did not reach `54:0B`.  Although the
+> engine contract reserves `ORDINARY_GUEST_COMPLETION`, current engine code
+> cannot produce it.  No terminal-result ABI is admitted; see the
+> [observation](etc/research/t203-s1-normal-terminal-observation-001.md).
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
