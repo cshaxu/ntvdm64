@@ -94,6 +94,8 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_whole_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_handle_partition_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_handle_route_partition_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_fcb_handle_partition_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_fcb_io_route_partition_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_search_partition_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_provider_v1.c',

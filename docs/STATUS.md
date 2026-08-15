@@ -225,6 +225,14 @@
 > package switch, or FCB/DEM closure; same-name rename still needs a dedicated
 > short-name witness. See the [wildcard plan](etc/operations/t202-s4-dem-fcb-wildcard-provider-plan-001.md).
 
+> **T202 S4 progress:** r34 adds the source-derived `50:2F demFCBIO` DTA
+> transaction. It may route only when the whole provider issued the opaque
+> AX:BP token and a checked DTA registration exists; all data movement is a
+> typed guest-RAM action. r5 whole-provider and the retained host-installed
+> MSVC x64 `/MT` fixture pass. This is a conditional FCB transition, not the
+> final pathname/FCB switch, full FCB evidence, DEM closure or native trace;
+> see the [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

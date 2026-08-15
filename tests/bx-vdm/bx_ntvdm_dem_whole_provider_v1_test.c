@@ -3,6 +3,7 @@
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
+#include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -96,6 +97,8 @@ int main(void)
     HANDLE file = INVALID_HANDLE_VALUE;
     DWORD written = 0u;
     bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_instruction_window_v1 window;
+    struct bx_ntvdm_mechanical_action_v1 fcb_action;
     wchar_t temporary[MAX_PATH], short_name[MAX_PATH];
     char oem_short[MAX_PATH] = {0}, oem_created[MAX_PATH] = {0};
     char oem_renamed[MAX_PATH] = {0}, oem_dir[MAX_PATH] = {0};
@@ -130,6 +133,10 @@ int main(void)
     boundary.cpu_id = 1u;
     boundary.vector = 6u;
     boundary.fault_rip = 0x100u;
+    {
+        const uint8_t bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x2fu };
+        bx_ntvdm_instruction_window_v1_capture(&window, bop, sizeof(bop));
+    }
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     for (service = 0u; !failed && service < 0x49u; ++service) {
         const int expected = service == 0x00u || service == 0x01u ||
@@ -265,6 +272,41 @@ int main(void)
         if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
                 0x30u, &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) ||
             cf_set(&result) || (result.cpu_delta.gpr16_write_mask & 5u) != 5u)) failed = 69;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.eax = 2u; /* demOpenFCB read/write mode for the write/read route. */
+        if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider, 0x2du,
+                &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) || cf_set(&result)) failed = 691;
+        else {
+            fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                result.cpu_delta.gpr16_values[5];
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = fcb_token >> 16; cpu.ebp = fcb_token & 0xffffu;
+            cpu.ecx = 2u; cpu.ebx = 0u;
+            if (!bx_ntvdm_dem_fcb_io_route_partition_v1_dispatch(&provider, 0x2fu,
+                    &boundary, &cpu, &window, 0x300u, &fcb_action, &result) ||
+                fcb_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_READ ||
+                fcb_action.ranges[0].physical_address != 0x300u) failed = 692;
+            else {
+                memcpy(fcb_action.payload, "ab", 2u);
+                if (!bx_ntvdm_dem_fcb_io_route_partition_v1_complete_write(&provider,
+                        0x2fu, &boundary, &cpu, &fcb_action, &result) || cf_set(&result)) failed = 693;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = fcb_token >> 16; cpu.ebp = fcb_token & 0xffffu;
+            cpu.ecx = 2u; cpu.ebx = 1u;
+            if (!failed && (!bx_ntvdm_dem_fcb_io_route_partition_v1_dispatch(&provider,
+                    0x2fu, &boundary, &cpu, &window, 0x300u, &fcb_action, &result) ||
+                fcb_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE ||
+                fcb_action.payload_bytes != 2u || memcmp(fcb_action.payload, "ab", 2u) != 0 ||
+                cf_set(&result))) failed = 694;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = fcb_token >> 16; cpu.esi = fcb_token & 0xffffu;
+            if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
+                    0x2eu, &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) ||
+                cf_set(&result))) failed = 695;
+        }
     }
     if (!failed) {
         file = INVALID_HANDLE_VALUE; /* provider owns the adopted handle. */

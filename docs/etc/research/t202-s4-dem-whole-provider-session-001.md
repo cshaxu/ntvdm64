@@ -244,3 +244,14 @@ implementation also retains same-name rejection, but that short-name edge
 case has not yet received a dedicated fixture witness. Neither service is
 routed through BOP ingress; final atomic FCB/pathname migration and full FCB
 record transactions remain pending.
+
+Revision r34 adds the `demfcb.c` `50:2F demFCBIO` DTA-buffer transaction. A
+provider-issued AX:BP token and a prior checked DTA registration are both
+required before the package session admits it. Read I/O produces one typed
+guest-RAM write action; write I/O first produces one typed guest-RAM read,
+then completes only against the exact provider gather continuation. The r5
+whole-provider MSVC x64 `/MT` fixture proves a real host file write/read
+roundtrip without a host handle or guest pointer. The retained host-installed
+composition fixture recompiles and runs with this route linked. This is a
+token-qualified transition, not complete FCB, package-switch, native-trace or
+DEM closure.

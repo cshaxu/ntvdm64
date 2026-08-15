@@ -129,3 +129,13 @@ whole package switch only.  It may not create an additional endpoint task.
 4. Run the package regression, then one bounded native trace; record the
    hard-error and virtual-volume limitations rather than claiming DEM or CLI
    completion.
+
+## FCB I/O transition rule
+
+The `50:2F demFCBIO` transition may be installed before the final FCB/pathname
+switch only when both conditions are independently true: the AX:BP value is a
+live opaque token issued by this provider, and the package has a checked DTA
+registration.  The route copies bytes to or from that registered
+guest-physical range through a mechanical action; it does not dereference a
+DOS pointer, discover an FCB, or expose a native handle. All other FCB
+pathname/record requests remain behind the final atomic package switch.
