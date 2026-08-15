@@ -108,6 +108,14 @@
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
 > not a BOP implementation; see the same [session evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 progress:** the DEM whole-provider now contains one complete
+> source-derived local-handle partition (`50:00/02/08/16/1E/27`). Its r10
+> MSVC x64 `/MT` regression uses a real host file while retaining opaque
+> tokens, and covers seek/read/write/truncate/file-and-device-time/commit/
+> close plus stale-token rejection. It is not an ingress route, does not
+> close the 29-identity provider, and leaves VDMREDIR pipe specialization and
+> historic hard-error ownership explicit; see the [session evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

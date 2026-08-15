@@ -1,4 +1,5 @@
 #include "bx_ntvdm_dem_whole_provider_v1.h"
+#include "bx_ntvdm_dem_handle_partition_v1.h"
 
 #include <string.h>
 #include <wctype.h>
@@ -11,6 +12,24 @@ static int profile_for(bx_ntvdm_mutation_profile_v1 *profile)
         BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
         bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
         BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu);
+}
+
+static int cf_set(const bx_ntvdm_cpu_result_v2 *result)
+{
+    return (result->eflags_write_mask & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u &&
+        (result->eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u;
+}
+
+static int ax_is(const bx_ntvdm_cpu_result_v2 *result, uint16_t value)
+{
+    return (result->cpu_delta.gpr16_write_mask & 1u) != 0u &&
+        result->cpu_delta.gpr16_values[0] == value;
+}
+
+static void token_into_cpu(bx_ntvdm_cpu_state_v1 *cpu, uint32_t token)
+{
+    cpu->eax = token >> 16;
+    cpu->ebp = token & 0xffffu;
 }
 
 int main(void)
@@ -26,6 +45,10 @@ int main(void)
     bx_ntvdm_guest_range range = { 0x200u, 3u };
     uint8_t input[3] = { 1u, 2u, 3u }, output[256] = {0};
     uint32_t output_bytes = 0u;
+    uint32_t token = 0u;
+    HANDLE file = INVALID_HANDLE_VALUE;
+    DWORD written = 0u;
+    bx_ntvdm_cpu_result_v2 result;
     wchar_t temporary[MAX_PATH], short_name[MAX_PATH];
     uint8_t drive;
     uint32_t service;
@@ -79,6 +102,92 @@ int main(void)
         bx_ntvdm_dem_whole_provider_v1_complete_gather(&provider, 0x12u,
             &boundary, &cpu, &action, input, sizeof(input), output,
             &output_bytes) != 0)) failed = 30;
+    if (!failed) {
+        file = CreateFileW(temporary, GENERIC_READ | GENERIC_WRITE, 0, 0,
+            OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+        if (file == INVALID_HANDLE_VALUE ||
+            !WriteFile(file, "abc", 3u, &written, 0) || written != 3u ||
+            !SetFilePointerEx(file, (LARGE_INTEGER){0}, 0, FILE_BEGIN) ||
+            !bx_ntvdm_dem_file_session_v1_adopt(&provider.files, file, &token)) {
+            if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
+            failed = 40;
+        }
+    }
+    if (!failed) {
+        file = INVALID_HANDLE_VALUE; /* provider owns the adopted handle. */
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        token_into_cpu(&cpu, token);
+        cpu.ecx = 0u;
+        cpu.edx = 1u;
+        if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x00u,
+                &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result) ||
+            !ax_is(&result, 1u) || result.cpu_delta.gpr16_values[2] != 0u)
+            failed = 41;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        token_into_cpu(&cpu, token);
+        cpu.ecx = 2u;
+        cpu.eflags = 0x40u;
+        if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x16u,
+                &boundary, &cpu, output, sizeof(output), &output_bytes, &result) ||
+            cf_set(&result) || !ax_is(&result, 2u) || output_bytes != 2u ||
+            output[0] != 'b' || output[1] != 'c') failed = 42;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        token_into_cpu(&cpu, token);
+        cpu.ecx = 1u;
+        cpu.eflags = 0x40u;
+        input[0] = 'Z';
+        if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x1eu,
+                &boundary, &cpu, input, 1u, &output_bytes, &result) ||
+            cf_set(&result) || !ax_is(&result, 1u) || output_bytes != 1u)
+            failed = 43;
+    }
+    if (!failed) {
+        HANDLE observed = INVALID_HANDLE_VALUE;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        token_into_cpu(&cpu, token);
+        cpu.ecx = 0u;
+        cpu.eflags = 0u;
+        cpu.ebx = 0u;
+        cpu.esi = 2u;
+        if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x1eu,
+                &boundary, &cpu, input, 0u, &output_bytes, &result) ||
+            cf_set(&result) ||
+            !bx_ntvdm_dem_file_session_v1_lookup(&provider.files, token, &observed) ||
+            GetFileSize(observed, 0) != 2u) failed = 44;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        token_into_cpu(&cpu, token);
+        if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x08u,
+                &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result) ||
+            (result.cpu_delta.gpr16_write_mask & 6u) != 6u) failed = 45;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ebx = 2u;
+        if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x08u,
+                &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result) ||
+            (result.cpu_delta.gpr16_write_mask & 6u) != 6u) failed = 46;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        token_into_cpu(&cpu, token);
+        if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x27u,
+                &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result)) failed = 47;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        token_into_cpu(&cpu, token);
+        cpu.ecx = cpu.edx = 0xffffu;
+        if (!bx_ntvdm_dem_handle_partition_v1_dispatch(&provider, 0x02u,
+                &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result) ||
+            bx_ntvdm_dem_file_session_v1_lookup(&provider.files, token, &file))
+            failed = 48;
+    }
     bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
     failed |= bx_ntvdm_dem_whole_provider_v1_valid(&provider) != 0;
     bx_ntvdm_host_namespace_v1_release(&space);

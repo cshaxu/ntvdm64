@@ -33,10 +33,26 @@ the bytes into caller storage, and clears the pending record.  A second
 completion is refused.  The initial r5/r6 failures exposed an omitted source
 closure and an action-clobber-on-refusal defect; r7 contains both corrections.
 
+Revision r10 adds a single source-derived `demhndl.c` local-handle partition
+behind that provider state.  It owns the complete local handle family
+`50:00` (seek), `50:02` (close), `50:08` (file/device times), `50:16`
+(read), `50:1E` (write/truncate), and `50:27` (commit).  Guest-visible
+`AX:BP` remains the existing opaque token; the native `HANDLE` never crosses
+the ABI.  The focused real-host-file regression passes seek, read, write,
+zero-length truncation, file-time, handle-free device-time, commit, close and
+stale-token rejection under MSVC x64 `/MT`.
+
+The implementation deliberately preserves two source boundaries: `50:08`
+device time does not resolve a token, and the historic `demClientErrorEx`
+hard-error owner is still unavailable, so its known hard-error range returns
+the recorded source-derived `AX=FFFF, CF=1` form.  `VDMREDIR` named-pipe
+specialization remains outside this local-handle partition and is not
+silently supplied.
+
 ## Interpretation and follow-up
 
-This establishes one state/lifetime owner for the complete package; it does
-not dispatch a BOP, perform guest-memory access, or claim an implemented
-service.  The next implementation step is the provider's common pending
-gather/write transaction ABI, followed by the plan's six source partitions
-and one package regression before any old route is switched.
+This establishes one state/lifetime owner for the complete package plus one
+complete source partition.  It does not dispatch a BOP or perform live
+guest-memory access, and does not claim the 29-identity DEM package is
+complete.  The next implementation steps are the remaining original source
+partitions and one package regression before any old route is switched.
