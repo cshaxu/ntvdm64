@@ -1,6 +1,7 @@
 #include "bx_ntvdm_xms_package_session_v1.h"
 #include "bx-mantle/bx_ntvdm_a20_capability_v1.h"
 #include "bx-mantle/bx_ntvdm_extended_memory_v1.h"
+#include <windows.h>
 #include <string.h>
 
 #define BX_NTVDM_XMS_GPR_AX 0u
@@ -34,11 +35,13 @@ static int a20(const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_exception_event_v1 
 static int extmem(bx_ntvdm_xms_package_session_v1 *s,uint8_t service,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_exception_event_v1 *e,bx_ntvdm_cpu_result_v2 *r)
 { struct bx_ntvdm_extended_memory_request_v1 q;struct bx_ntvdm_extended_memory_result_v1 v;bx_ntvdm_xms_package_allocation_v1 *slot;uint16_t base=(uint16_t)c->eax,kib=(uint16_t)c->edx;
   memset(&q,0,sizeof(q));q.version=BX_NTVDM_EXTENDED_MEMORY_V1_VERSION;
+  if(service==4u){SYSTEM_INFO system_info;GetSystemInfo(&system_info);return resume(e,r)&&set16(r,BX_NTVDM_XMS_GPR_AX,(uint16_t)system_info.dwPageSize);}
   if(service==5u){q.operation=BX_NTVDM_EXTMEM_QUERY;bx_ntvdm_extended_memory_v1_dispatch(&q,&v);return resume(e,r)&&set16(r,BX_NTVDM_XMS_GPR_AX,v.status==BX_NTVDM_EXTMEM_OK?(uint16_t)v.kib:0u);}
+  if(service==10u){q.operation=BX_NTVDM_EXTMEM_QUERY_FREE;bx_ntvdm_extended_memory_v1_dispatch(&q,&v);return resume(e,r)&&set16(r,BX_NTVDM_XMS_GPR_AX,v.status==BX_NTVDM_EXTMEM_OK?(uint16_t)v.free_kib:0u)&&set16(r,BX_NTVDM_XMS_GPR_DX,v.status==BX_NTVDM_EXTMEM_OK?(uint16_t)v.largest_free_kib:0u);}
   if(service==2u){q.operation=BX_NTVDM_EXTMEM_ALLOCATE;q.kib=kib;slot=free_slot(s);if(!slot||!kib||!reserve_xms_base(s)){if(!resume(e,r))return 0;return set16(r,BX_NTVDM_XMS_GPR_AX,0u);}bx_ntvdm_extended_memory_v1_dispatch(&q,&v);if(!resume(e,r))return 0;if(v.status!=BX_NTVDM_EXTMEM_OK||v.physical_address/1024u>0xffffu)return set16(r,BX_NTVDM_XMS_GPR_AX,0u);slot->mantle_handle=v.handle;slot->kib=kib;slot->base_kib=(uint16_t)(v.physical_address/1024u);return set16(r,BX_NTVDM_XMS_GPR_AX,slot->base_kib);}
   if(service==3u){slot=find(s,base,kib);if(!resume(e,r))return 0;if(!slot)return set16(r,BX_NTVDM_XMS_GPR_AX,0u);q.operation=BX_NTVDM_EXTMEM_FREE;q.handle=slot->mantle_handle;bx_ntvdm_extended_memory_v1_dispatch(&q,&v);if(v.status!=BX_NTVDM_EXTMEM_OK)return set16(r,BX_NTVDM_XMS_GPR_AX,0u);memset(slot,0,sizeof(*slot));return set16(r,BX_NTVDM_XMS_GPR_AX,1u);}
   if(service==11u){uint16_t new_kib=(uint16_t)c->ebx;slot=find(s,base,kib);if(!resume(e,r))return 0;if(!slot||!new_kib)return set16(r,BX_NTVDM_XMS_GPR_CX,0u);q.operation=BX_NTVDM_EXTMEM_REALLOCATE;q.handle=slot->mantle_handle;q.kib=new_kib;bx_ntvdm_extended_memory_v1_dispatch(&q,&v);if(v.status!=BX_NTVDM_EXTMEM_OK||v.physical_address/1024u>0xffffu)return set16(r,BX_NTVDM_XMS_GPR_CX,0u);slot->kib=new_kib;slot->base_kib=(uint16_t)(v.physical_address/1024u);return set16(r,BX_NTVDM_XMS_GPR_CX,slot->base_kib);}
   return 0; }
 int bx_ntvdm_xms_package_session_v1_dispatch(bx_ntvdm_xms_package_session_v1 *s,const bx_ntvdm_bop_ingress_v1 *i,const bx_ntvdm_bop_provider_selection_v1 *p,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
-{ bx_ntvdm_xms_dpmi_plane_record_v1 plane;if(!bx_ntvdm_xms_package_session_v1_valid(s)||!i||!p||!e||!c||!w||!r||!bx_ntvdm_xms_dpmi_plane_v1_classify(i,p,&plane)||plane.provider_family!=BX_NTVDM_BOP_PROVIDER_XMS||c->execution_mode!=BX_NTVDM_CPU_EXECUTION_REAL||w->valid_bytes<4u||w->bytes[0]!=0xc4u||w->bytes[1]!=0xc4u||w->bytes[2]!=0x52u||w->bytes[3]!=plane.service)return 0;bx_ntvdm_cpu_result_v2_pass_through(r);if(plane.service==0u)return a20(c,e,r);if(plane.service==2u||plane.service==3u||plane.service==5u||plane.service==11u)return extmem(s,(uint8_t)plane.service,c,e,r);/* Move, page-size, UMB, INT15-hook and free-space need distinct admitted
+{ bx_ntvdm_xms_dpmi_plane_record_v1 plane;if(!bx_ntvdm_xms_package_session_v1_valid(s)||!i||!p||!e||!c||!w||!r||!bx_ntvdm_xms_dpmi_plane_v1_classify(i,p,&plane)||plane.provider_family!=BX_NTVDM_BOP_PROVIDER_XMS||c->execution_mode!=BX_NTVDM_CPU_EXECUTION_REAL||w->valid_bytes<4u||w->bytes[0]!=0xc4u||w->bytes[1]!=0xc4u||w->bytes[2]!=0x52u||w->bytes[3]!=plane.service)return 0;bx_ntvdm_cpu_result_v2_pass_through(r);if(plane.service==0u)return a20(c,e,r);if(plane.service==2u||plane.service==3u||plane.service==4u||plane.service==5u||plane.service==10u||plane.service==11u)return extmem(s,(uint8_t)plane.service,c,e,r);/* Move, UMB and INT15-hook need distinct admitted
     * mantle contracts.  Do not leak their selected BOP back as a raw #UD. */return bx_ntvdm_cpu_result_v2_stop(r); }

@@ -20,9 +20,9 @@ $recipe = Get-Content -LiteralPath $recipePath -Raw
 foreach ($pattern in @(
         'BX_NTVDM_EXTMEM_QUERY', 'BX_NTVDM_EXTMEM_ALLOCATE',
         'BX_NTVDM_EXTMEM_FREE', 'BX_NTVDM_EXTMEM_REALLOCATE',
-        'BX_NTVDM_EXTMEM_MOVE', 'uint64_t source_offset;',
+        'BX_NTVDM_EXTMEM_MOVE', 'BX_NTVDM_EXTMEM_QUERY_FREE', 'uint64_t source_offset;',
         'uint64_t destination_offset;', 'uint64_t byte_count;',
-        'uint64_t physical_address;')) {
+        'uint32_t free_kib;', 'uint32_t largest_free_kib;', 'uint64_t physical_address;')) {
     if ($header -notmatch $pattern) {
         throw "Missing fixed-width C2 ABI invariant: $pattern"
     }
@@ -30,9 +30,9 @@ foreach ($pattern in @(
 
 foreach ($pattern in @(
         'BX_NTVDM_EXTMEM_BASE BX_CONST64\(0x100000\)',
-        'BX_NTVDM_EXTMEM_SLOTS 32u', 'ordinary_ram_readable',
-        'ordinary_ram_writable', 'copy_from_ordinary_ram',
-        'copy_to_ordinary_ram', 'BX_NTVDM_EXTMEM_REALLOCATE',
+        'BX_NTVDM_EXTMEM_SLOTS 32u', 'backing_ram_readable',
+        'backing_ram_writable', 'copy_from_backing_ram',
+        'copy_to_backing_ram', 'BX_NTVDM_EXTMEM_REALLOCATE',
         'BX_NTVDM_EXTMEM_MOVE')) {
     if ($source -notmatch $pattern) {
         throw "Missing C2 owner or checked-copy invariant: $pattern"

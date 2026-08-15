@@ -38,6 +38,10 @@ int main()
       second.physical_address < first.physical_address + BX_CONST64(0x10000))
     return 5;
 
+  request.operation = BX_NTVDM_EXTMEM_QUERY_FREE;
+  if (!call(&request, &rejected) || rejected.free_kib != 2944u ||
+      rejected.largest_free_kib != 2944u) return 20;
+
   for (i = 0; i < sizeof(pattern); ++i) pattern[i] = (Bit8u)i;
   if (!bx_mem.copy_to_ordinary_ram(first.physical_address, sizeof(pattern),
       pattern)) return 6;

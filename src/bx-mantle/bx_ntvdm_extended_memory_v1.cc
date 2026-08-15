@@ -60,6 +60,38 @@ static bx_bool bx_ntvdm_extmem_find_free(Bit64u bytes, Bit64u end,
   return 1;
 }
 
+static void bx_ntvdm_extmem_query_free(Bit64u end, Bit64u *total,
+  Bit64u *largest)
+{
+  Bit64u candidate = BX_NTVDM_EXTMEM_BASE;
+  Bit64u next;
+  unsigned i;
+
+  *total = 0;
+  *largest = 0;
+  while (candidate < end) {
+    next = end;
+    for (i = 0; i < BX_NTVDM_EXTMEM_SLOTS; ++i) {
+      const bx_ntvdm_extmem_slot *slot = &bx_ntvdm_extmem_slots[i];
+      if (slot->used && slot->address >= candidate && slot->address < next)
+        next = slot->address;
+    }
+    if (next > candidate) {
+      Bit64u gap = next - candidate;
+      *total += gap;
+      if (gap > *largest) *largest = gap;
+    }
+    if (next == end) break;
+    for (i = 0; i < BX_NTVDM_EXTMEM_SLOTS; ++i) {
+      const bx_ntvdm_extmem_slot *slot = &bx_ntvdm_extmem_slots[i];
+      if (slot->used && slot->address == next) {
+        candidate = bx_ntvdm_extmem_align_kib(slot->address + slot->bytes);
+        break;
+      }
+    }
+  }
+}
+
 static bx_bool bx_ntvdm_extmem_copy(Bit64u source, Bit64u destination,
   Bit64u bytes)
 {
@@ -131,6 +163,15 @@ void bx_ntvdm_extended_memory_v1_dispatch(
     return;
   }
   if (request->operation == BX_NTVDM_EXTMEM_QUERY) {
+    result->status = BX_NTVDM_EXTMEM_OK;
+    return;
+  }
+  if (request->operation == BX_NTVDM_EXTMEM_QUERY_FREE) {
+    Bit64u total;
+    Bit64u largest;
+    bx_ntvdm_extmem_query_free(end, &total, &largest);
+    result->free_kib = (uint32_t)(total / 1024u);
+    result->largest_free_kib = (uint32_t)(largest / 1024u);
     result->status = BX_NTVDM_EXTMEM_OK;
     return;
   }

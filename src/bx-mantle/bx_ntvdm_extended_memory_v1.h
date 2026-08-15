@@ -10,7 +10,8 @@ enum bx_ntvdm_extended_memory_operation_v1 {
   BX_NTVDM_EXTMEM_ALLOCATE = 2u,
   BX_NTVDM_EXTMEM_FREE = 3u,
   BX_NTVDM_EXTMEM_REALLOCATE = 4u,
-  BX_NTVDM_EXTMEM_MOVE = 5u
+  BX_NTVDM_EXTMEM_MOVE = 5u,
+  BX_NTVDM_EXTMEM_QUERY_FREE = 6u
 };
 
 enum bx_ntvdm_extended_memory_status_v1 {
@@ -40,14 +41,16 @@ struct bx_ntvdm_extended_memory_result_v1 {
   uint32_t status;
   uint32_t handle;
   uint32_t kib;
+  uint32_t free_kib;
+  uint32_t largest_free_kib;
   uint64_t physical_address;
 };
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Minimal-machine lifecycle owner only; fixed C linkage permits the adapter
- * to call the same typed record without importing a C++ object. */
+/* Minimal-machine lifecycle owner only; fixed C linkage permits an external
+ * client to call the same typed record without importing a C++ object. */
 void bx_ntvdm_extended_memory_v1_set_lifecycle_active(uint32_t active);
 void bx_ntvdm_extended_memory_v1_dispatch(
   const struct bx_ntvdm_extended_memory_request_v1 *request,

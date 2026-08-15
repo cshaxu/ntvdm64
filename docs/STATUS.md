@@ -41,6 +41,15 @@
 > into one ordered owner-package plan. No selector implementation or trace was
 > added; see the [whole-package plan](etc/operations/t205-xms-whole-package-plan-001.md).
 
+> **T205 S2 P1 progress:** the selector-blind mantle allocator now exposes
+> bounded total/largest-free statistics, and the XMS session routes original
+> `52:04` page geometry and `52:0A` allocator statistics alongside its existing
+> A20/block paths. The strict adapter package regression passes. The current
+> broad native machine recipe compiles the changed mantle source but has an
+> inherited unrelated CPU object-link closure failure; this is negative build
+> evidence, not a passing native result. `52:01` move remains unimplemented,
+> and `06..09` remain deferred.
+
 > **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one
 > synthetic contained-profile workaround, not historical OpenNT configuration
