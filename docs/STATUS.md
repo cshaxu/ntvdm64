@@ -2,42 +2,41 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T213 S4.** Its governing brief is the active
+> **Current effective packet: M0 T214 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T213 S4 -- passive terminal integration observation.**
+**Active: M0 T214 S1 -- current-profile composition admission map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
 > [history](history/m0-t206-closure-20260815.md). **T205 closed:** its current-profile XMS boundary is recorded in
 > [history](history/m0-t205-closure-20260815.md). **T212 closed:** its CLI
 > lifecycle boundary is recorded in [history](history/m0-t212-closure-20260815.md).
+> **T213 closed:** its terminal model and COMMAND handoff are recorded in
+> [history](history/m0-t213-closure-20260815.md).
 > The table below is the sole active packet.
 
 ## Active Packet
 
-> **T scope:** T213 determines whether the selected one-shot profile has a
-> source-proven ordinary terminal model before any interactive-session or
-> normal-result implementation is admitted. S1 concluded that the current
-> `50:3D` is controlled historical teardown. S3 recovered the distinct
-> COMMAND `54:00/03/0B` lifecycle package and opaque terminal handoff. S4
-> performs one passive native integration observation; it adds no behavior.
+> **T scope:** T214 recovers the current profile's complete composition
+> admission chain before CPU entry. S1 maps each copied-input, profile,
+> image, host capability, provider, bind and initial-state failure boundary.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T213 S4, Ordinary Mode. |
-| Admission And Approval | T213 S3 source-built the whole COMMAND lifecycle terminal package and preserves controlled DEM termination. It admits passive observation only. |
-| Objective | Observe whether a current native profile reaches the already-implemented COMMAND ordinary-terminal package, and classify the result without adding behavior. |
-| Non-goals | No BOP implementation, no trace-selected patch, no DEM `50:3D` reclassification, no Bochs/mantle selector semantics, no interactive session, and no normal-run claim absent observation. |
-| Reference Baseline | T213 S3 package closure, current native engine/composition probes, and T207 passive sequence evidence. |
-| Files And ABI Surface | Existing native probe/observer and evidence documentation only; no runtime ABI or provider source change. |
+| Identifier Mode | M0 T214 S1, Ordinary Mode. |
+| Admission And Approval | T213 S4 rebuilt current objects and established a composition rejection before CPU entry. The owner authorized autonomous task ordering; this is the next full owner chain. |
+| Objective | Produce a complete source/ABI/failure map for every branch in current copied-input composition installation and identify the exact present detail-1 rejection class. |
+| Non-goals | No BOP implementation, no trace-selected patch, no Bochs/mantle/engine semantics, no host mutation policy expansion, and no guest-run claim. |
+| Reference Baseline | T213 native observation, current composition runtime, profile/namespace/provider source, and existing profile artifacts. |
+| Files And ABI Surface | Composition runtime and owned helper/provider source plus evidence documentation only; no ABI or behavior change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One existing native source-built composition run with its declared result, plus governance/diff checks. |
-| Expected Markers | `54:00` produces ordinary completion only if actually reached; `50:3D`, budget, and composition rejection retain their existing result. |
-| Asset Needs | Existing native source-built composition and passive observer facilities; no firmware/media/device import. |
-| Reporting Requirements | Record command, artifact, reached/not-reached terminal, result, and the no-new-implementation conclusion. |
-| Stop Conditions | Any need to patch a BOP due to the observation, reinterpret DEM, or add a new machine feature stops S4. |
-| Exit Criteria | One passive native observation confirms or disproves reachability of the completed package and leaves a correct next owner package. |
+| Verification | Source/ABI/failure map, deterministic focused composition-install fixture if already available, governance and diff checks. |
+| Expected Markers | Every short-circuit in installation has an owner and disposition; current detail `1` is narrowed to an evidence-backed class. |
+| Asset Needs | Existing profile/root and source fixtures only; no firmware/media/device import or native guest trace. |
+| Reporting Requirements | Record exact stage order, current rejection evidence, Win32 availability where relevant, workaround action, and next whole provider package. |
+| Stop Conditions | Any conclusion requiring a BOP patch, unbounded logging, Bochs/mantle change, or unaudited host mutation pauses S1. |
+| Exit Criteria | One map gives a unique source-backed current rejection class and an admitted complete implementation package, or proves an external input blocker. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | DEM `50:38..3D`, COMMAND `54:01/0B`, existing normal/terminal observers, engine contract/run/machine stage, CLI lifecycle classifier, and T206--T212 evidence. |
 
