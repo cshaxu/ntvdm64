@@ -268,7 +268,8 @@ int bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
 {
     return valid(value) && !value->bound &&
         bx_ntvdm_dem_package_session_v1_set_mutation_profile(&value->dem,
-            profile);
+            profile) && bx_ntvdm_command_package_session_v1_set_session_host_context(
+            &value->command, &value->dem.cwd);
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
@@ -286,7 +287,9 @@ int bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
 {
     return valid(value) && !value->bound &&
         bx_ntvdm_command_package_session_v1_set_host_context(&value->command,
-            context);
+            context) && (!value->dem.has_mutation_profile ||
+            bx_ntvdm_session_host_context_v1_seed_command(&value->dem.cwd,
+                context));
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_set_startup_configuration(

@@ -57,6 +57,13 @@
 > is substrate only: DEM/COMMAND consumers have not yet migrated. See the
 > [P1 evidence](etc/research/t210-s3-session-host-context-provider-p1-001.md).
 
+> **T210 S3 P2 progress:** DEM's old CWD type now wraps the one session
+> provider, and COMMAND dynamically projects the same state for `54:04` with
+> no synthetic-root fallback. Focused and full composition x64 `/MT` fixtures
+> pass; the deliberately namespace-free DEM package fixture still returns
+> `197` and remains negative evidence. See the [P2 migration
+> record](etc/research/t210-s3-session-host-context-provider-p2-migration-001.md).
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was

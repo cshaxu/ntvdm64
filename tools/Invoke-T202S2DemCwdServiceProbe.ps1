@@ -11,8 +11,8 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 New-Item -ItemType Directory -Path $build | Out-Null
 $exe = Join-Path $build 't202-s2-dem-cwd-service.exe'
 $sources = @('bx_ntvdm_mutation_profile_v1.c','bx_ntvdm_mutation_overlay_v1.c',
-    'bx_ntvdm_dem_profile_consumer_v1.c','bx_ntvdm_host_drive_policy.c',
-    'bx_ntvdm_host_namespace.c','bx_ntvdm_dem_cwd_context_v1.c',
+    'bx_ntvdm_dem_profile_consumer_v1.c','bx_ntvdm_command_host_context_v1.c','bx_ntvdm_host_drive_policy.c',
+    'bx_ntvdm_host_namespace.c','bx_ntvdm_session_host_context_v1.c','bx_ntvdm_dem_cwd_context_v1.c',
     'bx_ntvdm_cpu_delta_abi.c','bx_ntvdm_cpu_result_v2.c','bx_ntvdm_cpu_state_abi.c',
     'bx_ntvdm_exception_abi.c','bx_ntvdm_instruction_window_abi.c','bx_ntvdm_guest_range.c',
     'bx_ntvdm_guest_gather_read_action_v1.c','bx_ntvdm_multi_write_abi.c',

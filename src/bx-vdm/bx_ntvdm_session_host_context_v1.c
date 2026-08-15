@@ -92,8 +92,7 @@ int bx_ntvdm_session_host_context_v1_valid(const bx_ntvdm_session_host_context_v
         context->struct_bytes == sizeof(*context) && context->default_drive < 26u &&
         context->environment_bytes <= BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES &&
         bx_ntvdm_dem_profile_consumer_v1_valid(&context->profile) &&
-        (context->profile.profile.mode != BX_NTVDM_MUTATION_MODE_V1_DIRECT ||
-         bx_ntvdm_host_namespace_v1_valid(context->host_namespace)) &&
+        (context->host_namespace == 0 || bx_ntvdm_host_namespace_v1_valid(context->host_namespace)) &&
         (context->profile.profile.mode != BX_NTVDM_MUTATION_MODE_V1_OVERLAY ?
             context->overlay.magic == 0u && context->overlay.abi_version == 0u &&
             context->overlay.struct_bytes == 0u && context->overlay.record_count == 0u &&
@@ -112,7 +111,6 @@ int bx_ntvdm_session_host_context_v1_initialize(bx_ntvdm_session_host_context_v1
     context->default_drive = initial_drive;
     context->host_namespace = host_namespace;
     if (!bx_ntvdm_dem_profile_consumer_v1_initialize(&context->profile, profile_value) ||
-        (profile_value->mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT && !namespace_available(context, initial_drive)) ||
         (profile_value->mode == BX_NTVDM_MUTATION_MODE_V1_OVERLAY &&
          !bx_ntvdm_mutation_overlay_v1_initialize(&context->overlay, profile_value))) {
         memset(context, 0, sizeof(*context)); return 0;
@@ -139,6 +137,45 @@ int bx_ntvdm_session_host_context_v1_set_environment(bx_ntvdm_session_host_conte
     memset(context->environment, 0, sizeof(context->environment));
     if (environment_bytes != 0u) memcpy(context->environment, environment, environment_bytes);
     context->environment_bytes = environment_bytes;
+    return bx_ntvdm_session_host_context_v1_valid(context);
+}
+
+int bx_ntvdm_session_host_context_v1_seed_command(
+    bx_ntvdm_session_host_context_v1 *context,
+    const bx_ntvdm_command_host_context_v1 *projection)
+{
+    wchar_t relative[BX_NTVDM_SESSION_HOST_CONTEXT_V1_MAX_RELATIVE];
+    uint32_t result, index, bytes;
+    if (!policy(context, &result) || projection == 0 ||
+        !bx_ntvdm_command_host_context_v1_valid(projection) ||
+        projection->directory_bytes < 4u) return 0;
+    for (index = 3u; index + 1u < projection->directory_bytes; ++index) {
+        if (projection->selected_directory[index] > 0x7fu || index - 3u + 1u >=
+            BX_NTVDM_SESSION_HOST_CONTEXT_V1_MAX_RELATIVE) return 0;
+        relative[index - 3u] = (wchar_t)projection->selected_directory[index];
+    }
+    relative[index - 3u] = L'\0';
+    if (!valid_relative(relative) || !bx_ntvdm_session_host_context_v1_set_environment(context,
+            projection->environment, projection->environment_bytes)) return 0;
+    context->default_drive = projection->selected_drive;
+    bytes = (uint32_t)((wcslen(relative) + 1u) * sizeof(*relative));
+    if (result == BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY)
+        return bx_ntvdm_mutation_overlay_v1_replace(&context->overlay,
+            BX_NTVDM_MUTATION_OWNER_V1_DEM, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT,
+            projection->selected_drive, (const uint8_t *)relative, bytes);
+    if (result == BX_NTVDM_MUTATION_POLICY_V1_USE_VIRTUAL)
+        memcpy(context->virtual_relative[projection->selected_drive], relative, bytes);
+    else memcpy(context->direct_relative[projection->selected_drive], relative, bytes);
+    return bx_ntvdm_session_host_context_v1_valid(context);
+}
+
+int bx_ntvdm_session_host_context_v1_set_host_namespace(
+    bx_ntvdm_session_host_context_v1 *context,
+    const bx_ntvdm_host_namespace_v1 *host_namespace)
+{
+    if (!bx_ntvdm_session_host_context_v1_valid(context) ||
+        (host_namespace != 0 && !bx_ntvdm_host_namespace_v1_valid(host_namespace))) return 0;
+    context->host_namespace = host_namespace;
     return bx_ntvdm_session_host_context_v1_valid(context);
 }
 

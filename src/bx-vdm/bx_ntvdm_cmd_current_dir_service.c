@@ -42,17 +42,17 @@ int bx_ntvdm_cmd_current_dir_service_v1_prepare(uint32_t available_mask,
                 0u, 0u) && bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 1) &&
             bx_ntvdm_cpu_result_v2_valid(&transaction->result);
     }
-    if (host_context != 0 && !bx_ntvdm_command_host_context_v1_valid(host_context))
-        return 0;
-    if (host_context != 0 && host_context->selected_drive == drive) {
+    if (host_context != 0 && !bx_ntvdm_command_host_context_v1_valid(host_context)) return 0;
+    if (host_context == 0 || host_context->selected_drive != drive) {
+        return bx_ntvdm_cpu_result_v2_resume(&transaction->result,
+                event->fault_rip + 4u) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&transaction->result.cpu_delta,
+                0u, 0u) && bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 1) &&
+            bx_ntvdm_cpu_result_v2_valid(&transaction->result);
+    }
+    {
         bytes = host_context->directory_bytes;
         memcpy(payload, host_context->selected_directory, bytes);
-    } else {
-        bytes = 4u;
-        payload[0] = (uint8_t)('A' + drive);
-        payload[1] = ':';
-        payload[2] = '\\';
-        payload[3] = '\0';
     }
     if (!bx_ntvdm_cmd_current_dir_physical(cpu_before->ds,
             (uint16_t)cpu_before->esi, &address, bytes)) return 0;

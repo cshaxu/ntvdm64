@@ -27,11 +27,19 @@ int main(void)
         transaction.writes.writes[0].byte_count != 16u ||
         memcmp(payload, "C:\\WORK\\NTDOS64", 16u) != 0 || transaction.result.eflags_values != 0u ||
         transaction.result.resume_rip != 0x6778u) return 1;
+    cpu.eax = 3u;
+    if (!bx_ntvdm_cmd_current_dir_service_v1_prepare((UINT32_C(1) << 2u) |
+            (UINT32_C(1) << 3u), &context, &event, &cpu, &window,
+            &transaction, payload) || transaction.writes.write_count != 0u ||
+        transaction.result.cpu_delta.gpr16_write_mask != 1u ||
+        transaction.result.cpu_delta.gpr16_values[0] != 0u ||
+        transaction.result.eflags_values != 1u) return 2;
+    cpu.eax = 2u;
     if (!bx_ntvdm_cmd_current_dir_service_v1_prepare(0u, &context, &event, &cpu,
             &window, &transaction, payload) || transaction.writes.write_count != 0u ||
         transaction.result.cpu_delta.gpr16_write_mask != 1u ||
         transaction.result.cpu_delta.gpr16_values[0] != 0u ||
-        transaction.result.eflags_values != 1u) return 2;
+        transaction.result.eflags_values != 1u) return 3;
     puts("bx-ntvdm CMD current-directory service: root/error atomic contracts verified");
     return 0;
 }

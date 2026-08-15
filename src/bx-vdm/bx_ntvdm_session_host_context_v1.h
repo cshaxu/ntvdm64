@@ -52,6 +52,14 @@ void bx_ntvdm_session_host_context_v1_teardown(
 int bx_ntvdm_session_host_context_v1_set_environment(
     bx_ntvdm_session_host_context_v1 *context, const uint8_t *environment,
     uint32_t environment_bytes);
+/* CLI admission seeds an already copied initial context.  This performs no
+ * host operation; later BOP mutations use set() and the selected profile. */
+int bx_ntvdm_session_host_context_v1_seed_command(
+    bx_ntvdm_session_host_context_v1 *context,
+    const bx_ntvdm_command_host_context_v1 *projection);
+int bx_ntvdm_session_host_context_v1_set_host_namespace(
+    bx_ntvdm_session_host_context_v1 *context,
+    const bx_ntvdm_host_namespace_v1 *host_namespace);
 int bx_ntvdm_session_host_context_v1_set(
     bx_ntvdm_session_host_context_v1 *context, uint8_t drive_index,
     const wchar_t *relative_directory, uint32_t *win32_error_out);

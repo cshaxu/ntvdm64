@@ -81,6 +81,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_fcb_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_fcb_search_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_computer_name_service_v1.c',
+    'src\bx-vdm\bx_ntvdm_session_host_context_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_cwd_context_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_path_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_file_session_v1.c',
