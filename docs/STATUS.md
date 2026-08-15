@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T214 S1.** Its governing brief is the active
+> **Current effective packet: M0 T214 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T214 S1 -- current-profile composition admission map.**
+**Active: M0 T214 S2 -- composition admission diagnostic.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -19,24 +19,25 @@
 ## Active Packet
 
 > **T scope:** T214 recovers the current profile's complete composition
-> admission chain before CPU entry. S1 maps each copied-input, profile,
-> image, host capability, provider, bind and initial-state failure boundary.
+> admission chain before CPU entry. S1 mapped its owner stages. S2 adds one
+> selector-blind copied diagnostic so the present detail-1 rejection can be
+> attributed without changing guest behavior.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T214 S1, Ordinary Mode. |
-| Admission And Approval | T213 S4 rebuilt current objects and established a composition rejection before CPU entry. The owner authorized autonomous task ordering; this is the next full owner chain. |
-| Objective | Produce a complete source/ABI/failure map for every branch in current copied-input composition installation and identify the exact present detail-1 rejection class. |
-| Non-goals | No BOP implementation, no trace-selected patch, no Bochs/mantle/engine semantics, no host mutation policy expansion, and no guest-run claim. |
+| Identifier Mode | M0 T214 S2, Ordinary Mode. |
+| Admission And Approval | T214 S1 establishes that native detail `1` collapses a complete installation chain and current direct/native closures diverge after later host-capability work. S2 admits a fixed-width composition-owned diagnostic only. |
+| Objective | Expose the first failed composition installation stage through a copied selector-blind diagnostic and prove its reset/invalid-input behavior. |
+| Non-goals | No BOP implementation, no trace-selected patch, no Bochs/mantle/engine semantics, no host mutation policy expansion, no guest path/handle export, and no guest-run claim. |
 | Reference Baseline | T213 native observation, current composition runtime, profile/namespace/provider source, and existing profile artifacts. |
-| Files And ABI Surface | Composition runtime and owned helper/provider source plus evidence documentation only; no ABI or behavior change. |
+| Files And ABI Surface | Composition runtime header/source and a focused fixture; fixed-width diagnostic only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI/failure map, deterministic focused composition-install fixture if already available, governance and diff checks. |
-| Expected Markers | Every short-circuit in installation has an owner and disposition; current detail `1` is narrowed to an evidence-backed class. |
+| Verification | Fresh MSVC x64 `/MT` focused diagnostic fixture and current native closure observation; governance and diff checks. |
+| Expected Markers | Every grouped short-circuit has a unique fixed stage; reset clears it; neither provider identity nor host object crosses the API. |
 | Asset Needs | Existing profile/root and source fixtures only; no firmware/media/device import or native guest trace. |
-| Reporting Requirements | Record exact stage order, current rejection evidence, Win32 availability where relevant, workaround action, and next whole provider package. |
-| Stop Conditions | Any conclusion requiring a BOP patch, unbounded logging, Bochs/mantle change, or unaudited host mutation pauses S1. |
-| Exit Criteria | One map gives a unique source-backed current rejection class and an admitted complete implementation package, or proves an external input blocker. |
+| Reporting Requirements | Record stage order, current rejection stage, Win32 availability where relevant, workaround action, and next whole provider package. |
+| Stop Conditions | Any need for BOP patch, unbounded logging, Bochs/mantle change, host path/handle export, or unaudited host mutation pauses S2. |
+| Exit Criteria | A source-built fixture identifies current rejection to one owned stage and proves diagnostic reset/negative behavior. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | DEM `50:38..3D`, COMMAND `54:01/0B`, existing normal/terminal observers, engine contract/run/machine stage, CLI lifecycle classifier, and T206--T212 evidence. |
 
