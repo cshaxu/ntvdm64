@@ -42,6 +42,8 @@ int main(void)
     bx_ntvdm_search_transaction_v1_release(&search); bx_ntvdm_search_transaction_v1_initialize(&search);
     memset(request,0,sizeof(request)); sprintf_s((char *)request,sizeof(request),"%c:\\COMMAND.COM",(char)('A'+drive));
     if(!failure){int got=bx_ntvdm_search_transaction_v1_path_first_merged(&search,&space,&declared,&event,&cpu,0x1234u,0x900u,request,0u,&tx,payload,&bytes);if(got!=1||bytes!=30u||memcmp(payload+17u,"COMMAND.COM",11u)!=0||payload[13u]!=7u)failure=8;}
+    bx_ntvdm_search_transaction_v1_release(&search); bx_ntvdm_search_transaction_v1_initialize(&search);
+    if(!failure){int got=bx_ntvdm_search_transaction_v1_fcb_first_merged(&search,&space,&declared,&event,&cpu,0x1234u,0xa00u,request,0u,0u,&tx,payload,&bytes);if(got!=1||bytes!=51u||memcmp(payload,"COMMAND COM",11u)!=0||payload[15u]!=7u)failure=9;}
     if(!failure && (bx_ntvdm_search_transaction_v1_fcb_first(&search,&space,&event,&cpu,0x1234u,0xa00u,fcb_path,0u,0u,&tx,payload,&bytes)!=1 || bytes!=51u || memcmp(payload,"ALPHA   TXT",11u)!=0)) failure=7;
     bx_ntvdm_search_transaction_v1_release(&search); bx_ntvdm_host_namespace_v1_release(&space);
     DeleteFileW(alpha); DeleteFileW(zeta); RemoveDirectoryW(path); return failure;

@@ -104,8 +104,8 @@ int bx_ntvdm_dem_search_partition_v1_complete(
         if (copied_bytes != 183u || action->range_count != 3u ||
             action->ranges[0].length != 53u || action->ranges[1].length != 128u ||
             action->ranges[2].length != 2u) return 0;
-        result = bx_ntvdm_search_transaction_v1_fcb_first(&provider->search,
-            provider->host_namespace, boundary, cpu_before, word(copied + 181u),
+        result = bx_ntvdm_search_transaction_v1_fcb_first_merged(&provider->search,
+            provider->host_namespace, provider->declared_search_snapshot, boundary, cpu_before, word(copied + 181u),
             action->ranges[0].address, copied + 53u, (uint8_t)cpu_before->eax,
             (uint8_t)cpu_before->edx, transaction, payload, payload_bytes);
         break;

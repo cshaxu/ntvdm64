@@ -72,6 +72,17 @@ int bx_ntvdm_search_transaction_v1_fcb_first(
     uint8_t extended_fcb, uint8_t attributes,
     bx_ntvdm_multi_write_transaction_v1 *transaction, uint8_t payload[51],
     uint32_t *payload_bytes);
+int bx_ntvdm_search_transaction_v1_fcb_first_merged(
+    bx_ntvdm_search_transaction_v1 *value,
+    const bx_ntvdm_host_namespace_v1 *space,
+    const bx_ntvdm_profile_search_snapshot_v1 *snapshot,
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before, uint32_t owner_pdb,
+    uint64_t searchbuf_address,
+    const uint8_t path[BX_NTVDM_SEARCH_REQUEST_V1_PATH_BYTES],
+    uint8_t extended_fcb, uint8_t attributes,
+    bx_ntvdm_multi_write_transaction_v1 *transaction, uint8_t payload[51],
+    uint32_t *payload_bytes);
 /* FCB form for the declared immutable profile snapshot.  Like the pathname
  * entries form, this deliberately has no host-directory dependency. */
 int bx_ntvdm_search_transaction_v1_fcb_first_entries(

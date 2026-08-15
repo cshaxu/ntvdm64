@@ -207,6 +207,20 @@ int bx_ntvdm_search_transaction_v1_fcb_first(
         result == BX_NTVDM_SEARCH_PLAN_V1_OK ? 1 : -1;
 }
 
+int bx_ntvdm_search_transaction_v1_fcb_first_merged(
+    bx_ntvdm_search_transaction_v1 *value,const bx_ntvdm_host_namespace_v1 *space,
+    const bx_ntvdm_profile_search_snapshot_v1 *snapshot,const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,uint32_t owner_pdb,uint64_t address,
+    const uint8_t path[128],uint8_t extended_fcb,uint8_t attributes,
+    bx_ntvdm_multi_write_transaction_v1 *transaction,uint8_t payload[51],uint32_t *payload_bytes)
+{ bx_ntvdm_search_query_v1 query; bx_ntvdm_host_namespace_entry_v1 *entries; uint32_t count=0u,i,j; int result;
+  if(!bx_ntvdm_search_request_v1_decode_first_fcb(path,extended_fcb,attributes,&query)){if(payload_bytes)*payload_bytes=0u;return -1;}
+  if(!snapshot||!bx_ntvdm_profile_search_snapshot_v1_valid(snapshot)||snapshot->drive_index!=query.drive_index||query.relative_directory[0]!=L'\0') return bx_ntvdm_search_transaction_v1_fcb_first(value,space,boundary,cpu_before,owner_pdb,address,path,extended_fcb,attributes,transaction,payload,payload_bytes);
+  entries=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES*sizeof(*entries)); if(!entries||bx_ntvdm_host_namespace_v1_enumerate(space,query.drive_index,query.relative_directory,entries,BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES,&count)!=BX_NTVDM_HOST_NAMESPACE_V1_OK){if(entries)HeapFree(GetProcessHeap(),0,entries);return -1;}
+  for(i=0u;i<snapshot->entry_count;++i){for(j=0u;j<count&&_wcsicmp(entries[j].dos_name,snapshot->entries[i].dos_name);++j){}if(j<count)entries[j]=snapshot->entries[i];else{if(count==BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES){HeapFree(GetProcessHeap(),0,entries);return -1;}entries[count++]=snapshot->entries[i];}}
+  for(i=1u;i<count;++i){bx_ntvdm_host_namespace_entry_v1 item=entries[i];for(j=i;j&&_wcsicmp(entries[j-1u].dos_name,item.dos_name)>0;--j)entries[j]=entries[j-1u];entries[j]=item;}
+  result=bx_ntvdm_search_plan_v1_first_entries(&value->plan,entries,count,boundary,cpu_before,owner_pdb,BX_NTVDM_SEARCH_PLAN_V1_FCB,address,&query,transaction,payload,payload_bytes);HeapFree(GetProcessHeap(),0,entries);return result==BX_NTVDM_SEARCH_PLAN_V1_NO_MATCH?bx_ntvdm_search_result_v1_prepare_fcb_no_more(boundary,cpu_before,address,transaction,payload)?(*payload_bytes=8u,0):-1:result==BX_NTVDM_SEARCH_PLAN_V1_OK?1:-1; }
+
 int bx_ntvdm_search_transaction_v1_fcb_first_entries(
     bx_ntvdm_search_transaction_v1 *value,
     const bx_ntvdm_host_namespace_entry_v1 *entries, uint32_t entry_count,

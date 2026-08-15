@@ -63,6 +63,11 @@
 > uses declared metadata while a non-root host search keeps `ALPHA/ZETA` host
 > results. FCB search remains open; no package-closure claim is made.
 
+> **T216 S2 P3 progress:** FCB FindFirst now uses the same merged input; fresh
+> x64 `/MT` search evidence returns declared `COMMAND.COM` name/size, and the
+> complete DEM provider probe recompiles and passes. Target-image family
+> coverage and final composition regression remain open.
+
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
 > and COMMAND composition descriptions, preserves deferred/unavailable family
