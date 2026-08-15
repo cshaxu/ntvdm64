@@ -53,13 +53,13 @@ int main(void)
     const uint8_t bytes[] = { 0xc4u, 0xc4u, 0x50u, 0x3cu };
 
     wcscpy(entries[0].dos_name, L"ONE.TXT"); wcscpy(entries[1].dos_name, L"TWO.TXT");
-    if (!provider_initialize(&provider) ||
-        !bx_ntvdm_search_sessions_v1_begin(&provider.search_transaction.plan.sessions,
-            0x1234u, entries, 2u, &out, &token_a) ||
-        !bx_ntvdm_search_sessions_v1_begin(&provider.search_transaction.plan.sessions,
-            0x1234u, entries, 2u, &out, &token_b) ||
-        !bx_ntvdm_search_sessions_v1_begin(&provider.search_transaction.plan.sessions,
-            0x5678u, entries, 2u, &out, &token_foreign)) return 1;
+    if (!provider_initialize(&provider)) return 11;
+    if (!bx_ntvdm_search_sessions_v1_begin(&provider.search_transaction.plan.sessions,
+            0x1234u, entries, 2u, &out, &token_a)) return 12;
+    if (!bx_ntvdm_search_sessions_v1_begin(&provider.search_transaction.plan.sessions,
+            0x1234u, entries, 2u, &out, &token_b)) return 13;
+    if (!bx_ntvdm_search_sessions_v1_begin(&provider.search_transaction.plan.sessions,
+            0x5678u, entries, 2u, &out, &token_foreign)) return 14;
     bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ebx = 0xabcd1234u;

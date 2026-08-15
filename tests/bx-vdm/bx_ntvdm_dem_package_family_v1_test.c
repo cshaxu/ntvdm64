@@ -9,9 +9,9 @@
 #include <time.h>
 
 /* This fixture deliberately contains no bound global composition, COMMAND
- * session, or native CPU trace.  It proves the complete DEM package can turn
- * every canonical `50:00..48` identity into a typed result through one owned
- * session and its explicitly selected provider/failure path. */
+ * session, or native CPU trace.  It proves only that every canonical
+ * `50:00..48` identity has a typed session route; it is not evidence that
+ * the historical DEM providers are completely recovered. */
 static uint8_t ram[0x100000];
 static uint16_t dispatch_ax;
 static uint32_t dispatch_dpb_sentinel;
@@ -361,14 +361,15 @@ static int misc_family_regression(void)
 {
     static const uint8_t cli_no_debug_services[] = {
         0x1du, 0x23u, 0x34u, 0x35u, 0x36u, 0x37u, 0x38u, 0x39u,
-        0x3au, 0x3cu, 0x3eu, 0x45u
+        0x3au, 0x3eu, 0x45u
     };
     bx_ntvdm_cpu_result_v2 result;
     uint32_t index;
 
-    /* These are one original DEM component family, not twelve accidental
-     * trace hits: a non-debug, non-VDD, non-WOW, no-device CLI profile takes
-     * the documented ordinary-return branch for each endpoint. */
+    /* These are original ordinary-return branches in a non-debug, non-VDD,
+     * non-WOW, no-device CLI profile.  `50:3C` is intentionally excluded:
+     * it is a PDB lifecycle notification whose retained search-state cleanup
+     * has its own owner regression. */
     for (index = 0u; index < sizeof(cli_no_debug_services); ++index) {
         if (!dispatch(cli_no_debug_services[index], &result) ||
             result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||

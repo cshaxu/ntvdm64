@@ -44,6 +44,15 @@
 > a claim of debugger, VDD, engine or CLI lifecycle recovery; see the
 > [source/ABI map](etc/research/t208-s1-dem-lifecycle-termination-source-abi-map-001.md).
 
+> **T208 S2 progress:** the family fixture now keeps `3C` out of its no-debug
+> group and the common x64 fixture manifest includes the current passive
+> observer source.  Fresh source builds expose two retained negative results:
+> the whole DEM fixture's existing FCB transaction failure and an internal
+> unbound startup-configuration/namespace initialization inconsistency that
+> prevents the standalone PDB-cleanup fixture from constructing its state.
+> Neither is a BOP lifecycle implementation task or a missing Win32 API; see
+> the [reconciliation record](etc/research/t208-s2-dem-lifecycle-regression-reconciliation-001.md).
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was

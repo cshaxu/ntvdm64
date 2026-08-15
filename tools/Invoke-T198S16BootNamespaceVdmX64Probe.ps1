@@ -1,7 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [ValidateSet('boot-namespace', 'dem-package', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry')]
+    [ValidateSet('boot-namespace', 'dem-package', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry')]
     [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
@@ -141,6 +141,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_spckbd_init_service.c',
     'src\bx-vdm\bx_ntvdm_terminal_observation_v1.c',
     'src\bx-vdm\bx_ntvdm_normal_return_observation_v1.c',
+    'src\bx-vdm\bx_ntvdm_normal_terminal_sequence_observation_v1.c',
     'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c',
     'src\bx-vdm\bx_ntvdm_vdd_create_user_notify_service.c',
     'src\cli\byob_identity.c',
@@ -151,6 +152,8 @@ $sourceRelatives = @(
 )
 if ($Fixture -eq 'dem-package') {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_package_family_v1_test.c'
+} elseif ($Fixture -eq 'dem-lifecycle') {
+    $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_session_lifecycle_provider_v1_test.c'
 } elseif ($Fixture -eq 'dem-profile') {
     $sourceRelatives += @(
         'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
@@ -243,6 +246,8 @@ $record = [ordered]@{
     sourceClosure = $sourceRelatives
     fixture = if ($Fixture -eq 'dem-package') {
         'tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c'
+    } elseif ($Fixture -eq 'dem-lifecycle') {
+        'tests/bx-vdm/bx_ntvdm_dem_session_lifecycle_provider_v1_test.c'
     } elseif ($Fixture -eq 'readonly-file') {
         'tests/bx-vdm/bx_ntvdm_dem_readonly_file_service_test.c'
     } elseif ($Fixture -eq 'global-bop') {
