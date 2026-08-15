@@ -79,7 +79,7 @@ one row before the whole package is admitted.
 
 | Identity group | Checked guest transactions and session state | Source-shaped success and failure result |
 | --- | --- | --- |
-| `50:00,02,08,16,1E,27` handle operations | Decode AX:BP as a session-owned opaque file token, never as `HANDLE`.  `00` copies CX:DX/BL; `02` copies optional CX:DX final position; `08` copies BL/CX:DX; `16` gathers a CX-byte output range at DS:DX; `1E` gathers a CX-byte input range at DS:DX; `27` has no guest buffer.  `16`/`1E` copy BX:SI only when the original ZF condition requests a seek. | `00` returns the 32-bit position in DX:AX.  `02` preserves the null-token success branch and otherwise closes the owned token.  `08` returns DOS time/date in CX:DX for get and applies the source's device-time branch.  `16` returns the transferred byte count in AX and preserves broken-pipe EOF only for the later Redirector token kind.  `1E` treats CX=0 as truncate/extend at the selected position and preserves the disk-full `CX=partial, AX=1, CF=1` branch.  `27` preserves its CF-clear completion form even where `FlushFileBuffers` reports failure. |
+| `50:00,02,08,16,1E,27` handle operations | Decode AX:BP as a session-owned opaque file token, never as `HANDLE`.  `00` copies CX:DX/BL; `02` copies optional CX:DX final position; `08` copies BL/CX:DX; `16` gathers a CX-byte output range at DS:DX; `1E` gathers a CX-byte input range at DS:DX; `27` has no guest buffer.  `16`/`1E` copy BX:SI only when the original ZF condition requests a seek. | `00` returns the 32-bit position in DX:AX.  `02` preserves the null-token success branch and otherwise closes the owned token.  `08` returns DOS time/date in CX:DX for get and applies the source's device-time branch.  `16` returns the transferred byte count in AX and preserves broken-pipe EOF only for the later Redirector token kind.  `1E` treats CX=0 as truncate/extend at the selected position and preserves its own disk-full `AX=0,CF=0` branch.  The distinct FCB I/O disk-full form is `50:2F` (`CX=partial, AX=1, CF=1`).  `27` preserves its CF-clear completion form even where `FlushFileBuffers` reports failure. |
 | `50:01,03,04,05,06,12,17,22,44` pathname operations | Bounded OEM pathname gather: DS:DX for `01/04/05/06/17` source, ES:DI for `17` destination; DS:SI for `03/12/22/44`.  Paths resolve only through the selected session root/CWD context.  Open/create results allocate an opaque token and copy it to AX:BP; no host handle reaches registers. | Ordinary failures take the source `demClientError` form (AX DOS/Win32 error, CF=1).  `17` retains source same-path `AX=5,CF=1` and cross-drive `AX=11,CF=1`.  `12` returns CX:BX size and DX pipe flag; local files set DX=0, while named-pipe discovery is deferred with Redirector.  `44` retains `\\DEV\\` success and its source-shaped path probe result, but must not create a host file as a by-product of validation. |
 | `50:09,0B` path search | `09` gathers DS:DX wildcard and reads/writes the current DTA range identified by the existing DTA state.  `0B` reads/writes that same DTA range.  A session-owned search token associates the DTA location with the enumeration; it cannot be a host pointer or a value trusted from guest reserved bytes. | `09` clears continuation state before a new search, preserves volume-label-first ordering, maps file-not-found to no-more-files and bad-path/directory to path-not-found.  `0B` with absent, altered, or stale continuation returns `ERROR_NO_MORE_FILES` and clears its continuation.  Both copy `attr,time,date,size,8.3-name` into the DOS DTA before CF clear. |
 | `50:0A,0C` FCB search | `0A` gathers ES:DI wildcard and reads/writes the DS:SI `SRCHBUF`; `0C` reads/writes that `SRCHBUF`.  The continuation is session-owned and keyed to the checked record location plus a non-pointer opaque id. | Both retain extended-FCB attribute selection and volume-label branches.  `0C` missing/mismatched continuation or a volume next request returns `AX=ERROR_NO_MORE_FILES,CF=1`; it clears continuation state.  Successful records preserve blank-padded 8.3 fields, attributes, DOS date/time and 32-bit size. |
@@ -117,6 +117,51 @@ guest hard-error owner; it may not silently collapse a hard error into a
 readonly policy refusal.  If that owner is not admitted when implementation
 starts, the package needs an explicit source-derived unavailable result and a
 separate owner admission -- not a hidden adapter-side INT 24 implementation.
+
+### Current route reconciliation
+
+The following mechanical cross-check makes the prior broad workaround note
+actionable.  Every S3 identity appears once; these are **current** routes, not
+claims of direct-host implementation.  `replace` means replace the leaf with
+the later single package provider; `migrate` means retain only as fixture
+input while moving its contract into that provider; `defer` means no local
+filesystem substitute is permitted.
+
+| BOP | Current bx-vdm route | Required action |
+| --- | --- | --- |
+| `50:00` | `boot_namespace_provider_v1_seek` | migrate |
+| `50:01` | readonly failure leaf | replace |
+| `50:02` | `boot_namespace_provider_v1_close` | migrate |
+| `50:03` | readonly failure leaf | replace |
+| `50:04` | readonly failure leaf | replace |
+| `50:05` | readonly failure leaf | replace |
+| `50:06` | readonly failure leaf | replace |
+| `50:07` | `dem_fcb_provider_v1` access-denied fence | replace |
+| `50:08` | readonly failure leaf | replace |
+| `50:09` | `profile_search_snapshot` transaction | migrate |
+| `50:0A` | FCB search fixture in boot namespace plane | migrate |
+| `50:0B` | `profile_search_snapshot` transaction | migrate |
+| `50:0C` | FCB search fixture in boot namespace plane | migrate |
+| `50:12` | boot readonly open transaction | migrate |
+| `50:16` | boot readonly read transaction | migrate |
+| `50:17` | readonly failure leaf | replace |
+| `50:1E` | DEM CLI unavailable terminal | replace |
+| `50:20` | `dem_fcb_provider_v1` access-denied fence | replace |
+| `50:22` | readonly failure leaf | replace |
+| `50:27` | readonly CF-clear leaf | replace with token-aware commit |
+| `50:2C` | `dem_fcb_provider_v1` access-denied fence | replace |
+| `50:2D` | `dem_fcb_provider_v1` access-denied fence | replace |
+| `50:2E` | `dem_fcb_provider_v1` null-token special case/fence | replace |
+| `50:2F` | `dem_fcb_provider_v1` access-denied fence | replace |
+| `50:30` | `dem_fcb_provider_v1` local-clock special case | migrate |
+| `50:31` | `dem_fcb_provider_v1` access-denied fence | replace |
+| `50:44` | boot namespace device-path helper | migrate |
+| `50:47` | readonly invalid-handle leaf | defer to Redirector package |
+| `50:48` | readonly invalid-handle leaf | defer to Redirector package |
+
+This check deliberately excludes `50:32/33`: they are DEM error/lock owner
+work, not a file/handle/FCB/search identity, and therefore cannot be smuggled
+into S3 merely because hard-error classification is shared evidence.
 
 ## Follow-up
 
