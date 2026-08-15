@@ -398,3 +398,10 @@ int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_entry(
     entry->eip = plan.entry_cpu.eip;
     return bx_ntvdm_machine_stage_v1_entry_valid(entry);
 }
+
+int bx_ntvdm_composition_runtime_v1_copy_ordinary_terminal(void)
+{
+    return runtime.installed &&
+        bx_ntvdm_boot_namespace_composition_v1_copy_ordinary_terminal(
+            &runtime.composition);
+}

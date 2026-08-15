@@ -78,6 +78,10 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
 int bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
     const bx_ntvdm_boot_namespace_composition_v1 *value,
     bx_ntvdm_boot_namespace_diagnostic_v1 *out);
+/* Opaque terminal fact for the engine boundary.  The caller receives no BOP,
+ * COMMAND, DEM, guest, or provider identity. */
+int bx_ntvdm_boot_namespace_composition_v1_copy_ordinary_terminal(
+    const bx_ntvdm_boot_namespace_composition_v1 *value);
 #ifdef __cplusplus
 }
 #endif

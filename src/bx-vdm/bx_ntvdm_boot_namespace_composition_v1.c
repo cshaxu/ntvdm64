@@ -339,6 +339,18 @@ int bx_ntvdm_boot_namespace_composition_v1_copy_namespace_diagnostic(
     return 1;
 }
 
+int bx_ntvdm_boot_namespace_composition_v1_copy_ordinary_terminal(
+    const bx_ntvdm_boot_namespace_composition_v1 *value)
+{
+    bx_ntvdm_command_terminal_v1 terminal;
+    return value != 0 && value->bound != 0u &&
+        bx_ntvdm_command_lifecycle_provider_v1_copy_terminal(
+            &value->command.lifecycle_provider, &terminal) &&
+        terminal.present == 1u &&
+        terminal.terminal_kind == BX_NTVDM_COMMAND_TERMINAL_V1_TOP_LEVEL_EXIT &&
+        terminal.has_dos_exit_code == 0u;
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_handle(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *value)

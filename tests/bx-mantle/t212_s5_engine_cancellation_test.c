@@ -5,6 +5,8 @@
 static int install_calls;
 static int reset_calls;
 static int cancel_during_install;
+static int ordinary_terminal;
+static uint32_t execution_status = BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET;
 
 int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
     const uint16_t *profile, uint32_t profile_chars, const uint16_t *root,
@@ -21,6 +23,7 @@ int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
 }
 
 void bx_ntvdm_composition_runtime_v1_reset(void) { ++reset_calls; }
+int bx_ntvdm_composition_runtime_v1_copy_ordinary_terminal(void) { return ordinary_terminal; }
 int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_request(
     struct bx_ntvdm_machine_stage_v1_request *request)
 { (void)request; return 1; }
@@ -46,7 +49,7 @@ void bx_ntvdm_machine_stage_v1_execution_request_clear(
 }
 uint32_t bx_ntvdm_machine_stage_v1_execute(
     const struct bx_ntvdm_machine_stage_v1_execution_request *request)
-{ (void)request; return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET; }
+{ (void)request; return execution_status; }
 uint32_t bx_ntvdm_machine_stage_v1_reset(void)
 { return BX_NTVDM_MACHINE_STAGE_V1_OK; }
 
@@ -88,5 +91,14 @@ int main(void)
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_EXECUTION_BUDGET ||
         install_calls != 2 || reset_calls != 2) return 2;
+    execution_status = BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP;
+    ordinary_terminal = 0;
+    if (!bx_ntvdm_engine_run_v1(&request, &result) ||
+        result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL ||
+        install_calls != 3 || reset_calls != 3) return 3;
+    ordinary_terminal = 1;
+    if (!bx_ntvdm_engine_run_v1(&request, &result) ||
+        result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_ORDINARY_GUEST_COMPLETION ||
+        install_calls != 4 || reset_calls != 4) return 4;
     return 0;
 }

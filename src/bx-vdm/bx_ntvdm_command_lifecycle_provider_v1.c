@@ -1,6 +1,25 @@
 #include "bx_ntvdm_command_lifecycle_provider_v1.h"
 #include <string.h>
 
+static void terminal_clear(bx_ntvdm_command_terminal_v1 *terminal)
+{
+    memset(terminal, 0, sizeof(*terminal));
+    terminal->magic = BX_NTVDM_COMMAND_TERMINAL_V1_MAGIC;
+    terminal->abi_version = BX_NTVDM_COMMAND_TERMINAL_V1_VERSION;
+    terminal->struct_bytes = (uint32_t)sizeof(*terminal);
+}
+
+static int terminal_valid(const bx_ntvdm_command_terminal_v1 *terminal)
+{
+    return terminal != 0 && terminal->magic == BX_NTVDM_COMMAND_TERMINAL_V1_MAGIC &&
+        terminal->abi_version == BX_NTVDM_COMMAND_TERMINAL_V1_VERSION &&
+        terminal->struct_bytes == sizeof(*terminal) && terminal->present <= 1u &&
+        terminal->terminal_kind <= BX_NTVDM_COMMAND_TERMINAL_V1_TOP_LEVEL_EXIT &&
+        terminal->has_dos_exit_code == 0u && terminal->dos_exit_code == 0u &&
+        terminal->reserved0 == 0u && (!terminal->present ||
+        terminal->terminal_kind == BX_NTVDM_COMMAND_TERMINAL_V1_TOP_LEVEL_EXIT);
+}
+
 static int selected(const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_instruction_window_v1 *window)
@@ -18,7 +37,8 @@ int bx_ntvdm_command_lifecycle_provider_v1_initialize(
     memset(provider,0,sizeof(*provider));
     provider->magic=BX_NTVDM_COMMAND_LIFECYCLE_PROVIDER_V1_MAGIC;
     provider->abi_version=BX_NTVDM_COMMAND_LIFECYCLE_PROVIDER_V1_VERSION;
-    provider->struct_bytes=(uint32_t)sizeof(*provider); provider->initialized=1u;
+    provider->struct_bytes=(uint32_t)sizeof(*provider); terminal_clear(&provider->terminal);
+    provider->initialized=1u;
     return bx_ntvdm_command_lifecycle_provider_v1_valid(provider);
 }
 int bx_ntvdm_command_lifecycle_provider_v1_valid(
@@ -26,10 +46,20 @@ int bx_ntvdm_command_lifecycle_provider_v1_valid(
 {
     return provider && provider->magic==BX_NTVDM_COMMAND_LIFECYCLE_PROVIDER_V1_MAGIC &&
         provider->abi_version==BX_NTVDM_COMMAND_LIFECYCLE_PROVIDER_V1_VERSION &&
-        provider->struct_bytes==sizeof(*provider) && provider->initialized==1u;
+        provider->struct_bytes==sizeof(*provider) && provider->initialized==1u &&
+        terminal_valid(&provider->terminal);
 }
 int bx_ntvdm_command_lifecycle_provider_v1_owns_service(uint8_t service)
 { return service==0u || service==3u || service==11u; }
+int bx_ntvdm_command_lifecycle_provider_v1_copy_terminal(
+    const bx_ntvdm_command_lifecycle_provider_v1 *provider,
+    bx_ntvdm_command_terminal_v1 *terminal)
+{
+    if (!bx_ntvdm_command_lifecycle_provider_v1_valid(provider) || terminal == 0 ||
+        provider->terminal.present == 0u) return 0;
+    *terminal = provider->terminal;
+    return 1;
+}
 int bx_ntvdm_command_lifecycle_provider_v1_dispatch(
     bx_ntvdm_command_lifecycle_provider_v1 *provider,
     bx_ntvdm_cmd_get_next_state_v1 *get_next,
@@ -44,9 +74,12 @@ int bx_ntvdm_command_lifecycle_provider_v1_dispatch(
         !bx_ntvdm_command_lifecycle_provider_v1_owns_service(window->bytes[3])) return 0;
     switch (window->bytes[3]) {
     case 0u:
-        /* cmdExitVDM calls private TerminateVDM.  The current lifecycle
-           boundary may only report an accepted typed stop; it never exits
-           the host process or claims a CLI completion result. */
+        /* Exact top-level COMMAND exit.  The record is copied before the
+           typed stop, but only a later opaque composition consumer may decide
+           how to publish it after engine-owned cleanup. */
+        terminal_clear(&provider->terminal);
+        provider->terminal.present = 1u;
+        provider->terminal.terminal_kind = BX_NTVDM_COMMAND_TERMINAL_V1_TOP_LEVEL_EXIT;
         return bx_ntvdm_cpu_result_v2_stop(result);
     case 3u:
         /* cmdSaveWorld's body is compiled out in the OpenNT source. */

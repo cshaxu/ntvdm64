@@ -24,6 +24,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     struct bx_ntvdm_machine_stage_v1_execution_request machine_execution;
     uint32_t machine_status, machine_entry_status, machine_execution_status;
     uint32_t machine_reset_status, cancellation_reason = 0u;
+    int ordinary_terminal = 0;
     if (result == 0) return 0;
     if (!bx_ntvdm_engine_request_v1_valid(request))
         return bx_ntvdm_engine_result_v1_set(result,
@@ -73,6 +74,11 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_HOST_CANCELLATION :
         bx_ntvdm_machine_stage_v1_execute(&machine_execution);
     machine_reset_status = bx_ntvdm_machine_stage_v1_reset();
+    /* The engine sees only a post-stop opaque composition fact.  It cannot
+       inspect the BOP or infer terminal meaning from the CPU result. */
+    if (machine_execution_status ==
+        BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP)
+        ordinary_terminal = bx_ntvdm_composition_runtime_v1_copy_ordinary_terminal();
     bx_ntvdm_composition_runtime_v1_reset();
     bx_ntvdm_cancellation_controller_v1_deactivate();
     if (machine_status != BX_NTVDM_MACHINE_STAGE_V1_OK ||
@@ -90,6 +96,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     if (machine_execution_status ==
         BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP)
         return bx_ntvdm_engine_result_v1_set(result,
+            ordinary_terminal ? BX_NTVDM_ENGINE_TERMINAL_V1_ORDINARY_GUEST_COMPLETION :
             BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL,
             machine_execution_status);
     if (machine_execution_status ==

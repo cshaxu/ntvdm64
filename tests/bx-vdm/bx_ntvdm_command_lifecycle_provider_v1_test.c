@@ -9,6 +9,7 @@ int main(void)
     bx_ntvdm_command_lifecycle_provider_v1 provider; bx_ntvdm_cmd_get_next_state_v1 state;
     bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_instruction_window_v1 window; bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_command_terminal_v1 terminal;
     byob_launch_plan_v2 plan={2u,1u,{1u,BYOB_LAUNCH_TARGET_KIND_V1_COM,0u,{0}}};
     if(!bx_ntvdm_command_lifecycle_provider_v1_initialize(&provider)||
        !bx_ntvdm_command_lifecycle_provider_v1_valid(&provider)||
@@ -19,6 +20,9 @@ int main(void)
     event_initialize(&event); bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);
     window_initialize(&window,0u);
     if(!bx_ntvdm_command_lifecycle_provider_v1_dispatch(&provider,0,0,&event,&cpu,&window,&result)||result.disposition!=BX_NTVDM_CPU_RESULT_V2_STOP) return 2;
+    if(!bx_ntvdm_command_lifecycle_provider_v1_copy_terminal(&provider,&terminal)||
+       terminal.present!=1u||terminal.terminal_kind!=BX_NTVDM_COMMAND_TERMINAL_V1_TOP_LEVEL_EXIT||
+       terminal.has_dos_exit_code!=0u||terminal.dos_exit_code!=0u) return 7;
     window_initialize(&window,3u);
     if(!bx_ntvdm_command_lifecycle_provider_v1_dispatch(&provider,0,0,&event,&cpu,&window,&result)||result.disposition!=BX_NTVDM_CPU_RESULT_V2_RESUME||result.resume_rip!=0x204u||result.cpu_delta.gpr16_write_mask!=0u) return 3;
     window_initialize(&window,11u); cpu.eax=0xa500u;

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T213 S3.** Its governing brief is the active
+> **Current effective packet: M0 T213 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T213 S3 -- COMMAND terminal package recovery.**
+**Active: M0 T213 S4 -- passive terminal integration observation.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -19,25 +19,25 @@
 > **T scope:** T213 determines whether the selected one-shot profile has a
 > source-proven ordinary terminal model before any interactive-session or
 > normal-result implementation is admitted. S1 concluded that the current
-> `50:3D` is controlled historical teardown. S2 rejected selector-only DEM
-> normalization; S3 recovers the distinct COMMAND `54:00/03/0B` lifecycle
-> package and its opaque terminal handoff.
+> `50:3D` is controlled historical teardown. S3 recovered the distinct
+> COMMAND `54:00/03/0B` lifecycle package and opaque terminal handoff. S4
+> performs one passive native integration observation; it adds no behavior.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T213 S3, Ordinary Mode. |
-| Admission And Approval | T213 S2 rejected ambiguous DEM `50:3D` normalization. The original top-level COMMAND branch independently reaches `54:00 CMDEXITVDM`, so the existing whole COMMAND lifecycle provider admits one complete `00/03/0B` package recovery. |
-| Objective | Produce a copied COMMAND terminal record for exact `54:00`, carry it through opaque composition state, and publish ordinary engine completion only after existing cleanup. |
-| Non-goals | No DEM `50:3D` reclassification, no trace-selected implementation, no Bochs/mantle selector semantics, no historical broker/ExitProcess, no interactive session, and no DOS exit-code fabrication. |
-| Reference Baseline | T213 S1/S2 records; original `tcmd2b.asm`; existing COMMAND lifecycle provider, engine cleanup and CLI lifecycle classifier. |
-| Files And ABI Surface | COMMAND lifecycle provider/session/composition runtime, engine contract/run, existing CLI classifier, source-built focused fixtures and evidence. |
+| Identifier Mode | M0 T213 S4, Ordinary Mode. |
+| Admission And Approval | T213 S3 source-built the whole COMMAND lifecycle terminal package and preserves controlled DEM termination. It admits passive observation only. |
+| Objective | Observe whether a current native profile reaches the already-implemented COMMAND ordinary-terminal package, and classify the result without adding behavior. |
+| Non-goals | No BOP implementation, no trace-selected patch, no DEM `50:3D` reclassification, no Bochs/mantle selector semantics, no interactive session, and no normal-run claim absent observation. |
+| Reference Baseline | T213 S3 package closure, current native engine/composition probes, and T207 passive sequence evidence. |
+| Files And ABI Surface | Existing native probe/observer and evidence documentation only; no runtime ABI or provider source change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MSVC x64 `/MT` package and engine fixtures cover all three COMMAND lifecycle services, ordinary/controlled terminal distinction, cleanup ordering, malformed/unrelated routes, and governance/diff checks. |
-| Expected Markers | Exact `54:00` is the only ordinary producer; `54:03/0B` retain their contracts; `50:3D` and generic stops remain controlled; engine cleanup occurs before copied ordinary result. |
-| Asset Needs | Existing source/evidence and normal MSVC x64 fixture facilities; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record provider/record ABI, source ownership, reset order, all negative cases, and the still-unreached current boot profile. |
-| Stop Conditions | Any need to add BOP knowledge to Bochs/mantle, classify DEM by heuristic, pass host resources into engine, or change guest control flow pauses S3 for re-admission. |
-| Exit Criteria | A source-built whole-package and engine fixture prove the opaque terminal handoff and exact terminal distinction without a guest-run or interactive claim. |
+| Verification | One existing native source-built composition run with its declared result, plus governance/diff checks. |
+| Expected Markers | `54:00` produces ordinary completion only if actually reached; `50:3D`, budget, and composition rejection retain their existing result. |
+| Asset Needs | Existing native source-built composition and passive observer facilities; no firmware/media/device import. |
+| Reporting Requirements | Record command, artifact, reached/not-reached terminal, result, and the no-new-implementation conclusion. |
+| Stop Conditions | Any need to patch a BOP due to the observation, reinterpret DEM, or add a new machine feature stops S4. |
+| Exit Criteria | One passive native observation confirms or disproves reachability of the completed package and leaves a correct next owner package. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | DEM `50:38..3D`, COMMAND `54:01/0B`, existing normal/terminal observers, engine contract/run/machine stage, CLI lifecycle classifier, and T206--T212 evidence. |
 

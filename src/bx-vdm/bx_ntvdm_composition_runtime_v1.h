@@ -43,6 +43,9 @@ int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_request(
     struct bx_ntvdm_machine_stage_v1_request *request);
 int bx_ntvdm_composition_runtime_v1_prepare_machine_stage_entry(
     struct bx_ntvdm_machine_stage_v1_entry *entry);
+/* Opaque post-stop fact.  It contains neither an OpenNT/BOP identifier nor a
+ * guest or host resource and is valid only before the runtime reset. */
+int bx_ntvdm_composition_runtime_v1_copy_ordinary_terminal(void);
 void bx_ntvdm_composition_runtime_v1_reset(void);
 
 #ifdef __cplusplus
