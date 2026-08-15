@@ -164,6 +164,10 @@
 > validation right fixes a false access denial without broadening mutation
 > authority; guest ingress remains unconnected.
 
+> **T202 S4 progress:** r26 moves the verified search transaction into the
+> single DEM provider lifecycle under x64 `/MT`. This is ownership closure for
+> the search state, not ingress routing or full DEM closure.
+
 > **T202 S4 progress:** the existing session-owned `demsrch.c` search
 > transaction now admits a root-relative direct-host first-search backend and
 > remains source-built in the retained x64 closure. Dedicated direct-host

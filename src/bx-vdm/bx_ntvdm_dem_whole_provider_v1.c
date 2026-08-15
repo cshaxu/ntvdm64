@@ -28,6 +28,7 @@ int bx_ntvdm_dem_whole_provider_v1_valid(
         bx_ntvdm_dem_cwd_context_v1_valid(provider->cwd) &&
         bx_ntvdm_dem_file_session_v1_valid(&provider->files) &&
         bx_ntvdm_dem_local_file_backend_v1_valid(&provider->local_files) &&
+        bx_ntvdm_search_transaction_v1_valid(&provider->search) &&
         provider->next_action_id != 0u && provider->pending_service <= 0x48u &&
         ((provider->pending_action_id == 0u && provider->pending_bytes == 0u) ||
          (provider->pending_action_id != 0u &&
@@ -62,6 +63,11 @@ int bx_ntvdm_dem_whole_provider_v1_initialize(
         bx_ntvdm_dem_whole_provider_v1_teardown(provider);
         return 0;
     }
+    bx_ntvdm_search_transaction_v1_initialize(&provider->search);
+    if (!bx_ntvdm_search_transaction_v1_valid(&provider->search)) {
+        bx_ntvdm_dem_whole_provider_v1_teardown(provider);
+        return 0;
+    }
     return bx_ntvdm_dem_whole_provider_v1_valid(provider);
 }
 
@@ -69,6 +75,7 @@ void bx_ntvdm_dem_whole_provider_v1_teardown(
     bx_ntvdm_dem_whole_provider_v1 *provider)
 {
     if (provider == 0) return;
+    bx_ntvdm_search_transaction_v1_release(&provider->search);
     bx_ntvdm_dem_file_session_v1_teardown(&provider->files);
     memset(provider, 0, sizeof(*provider));
 }

@@ -109,6 +109,12 @@ because its root-relative listing handle was then validated through
 read-only validation right. No host path or handle crosses the search
 token/DTA/SRCHBUF ABI. Guest-memory ingress remains unconnected.
 
+Revision r26 makes that established search transaction a private lifetime
+member of the single DEM whole provider.  The whole-provider source-built
+fixture verifies initialization, validity and teardown with the complete
+search source closure under MSVC x64 `/MT`.  This is state ownership only;
+it does not switch a legacy BOP route or claim guest search completion.
+
 The next `demsrch.c` partition now enables the existing search transaction's
 direct-host first-search forms: it decodes the copied DOS request, enumerates
 only the query's admitted root-relative directory, then passes the copied
