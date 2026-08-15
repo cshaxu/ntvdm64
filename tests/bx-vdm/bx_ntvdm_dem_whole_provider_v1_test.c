@@ -1,5 +1,6 @@
 #include "bx_ntvdm_dem_whole_provider_v1.h"
 
+#include <string.h>
 #include <wctype.h>
 
 static int profile_for(bx_ntvdm_mutation_profile_v1 *profile)
@@ -19,6 +20,12 @@ int main(void)
     bx_ntvdm_host_namespace_v1 space;
     bx_ntvdm_dem_cwd_context_v1 cwd;
     bx_ntvdm_dem_whole_provider_v1 provider;
+    bx_ntvdm_exception_event_v1 boundary = {0};
+    bx_ntvdm_cpu_state_v1 cpu;
+    bx_ntvdm_guest_gather_read_action_v1 action;
+    bx_ntvdm_guest_range range = { 0x200u, 3u };
+    uint8_t input[3] = { 1u, 2u, 3u }, output[256] = {0};
+    uint32_t output_bytes = 0u;
     wchar_t temporary[MAX_PATH], short_name[MAX_PATH];
     uint8_t drive;
     uint32_t service;
@@ -37,7 +44,15 @@ int main(void)
     if (!profile_for(&profile) || !bx_ntvdm_host_namespace_v1_initialize(&space,
             &snapshot) || !bx_ntvdm_dem_cwd_context_v1_initialize(&cwd,
             &profile) || !bx_ntvdm_dem_whole_provider_v1_initialize(&provider,
-            &profile, &space, &cwd)) failed = 1;
+            &profile, &space, &cwd)) failed = 10;
+    boundary.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
+    boundary.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
+    boundary.struct_bytes = sizeof(boundary);
+    boundary.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;
+    boundary.cpu_id = 1u;
+    boundary.vector = 6u;
+    boundary.fault_rip = 0x100u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     for (service = 0u; !failed && service < 0x49u; ++service) {
         const int expected = service == 0x00u || service == 0x01u ||
             service == 0x02u || service == 0x03u || service == 0x04u ||
@@ -50,11 +65,23 @@ int main(void)
             service == 0x2fu || service == 0x30u || service == 0x31u ||
             service == 0x44u || service == 0x47u || service == 0x48u;
         if (bx_ntvdm_dem_whole_provider_v1_owns_service((uint8_t)service) != expected)
-            failed = 1;
+            failed = 20;
     }
+    if (!failed && (!bx_ntvdm_dem_whole_provider_v1_prepare_gather(&provider,
+            0x12u, &boundary, &cpu, &range, 1u, &action) ||
+        action.total_bytes != 3u ||
+        bx_ntvdm_dem_whole_provider_v1_prepare_gather(&provider, 0x12u,
+            &boundary, &cpu, &range, 1u, &action) != 0 ||
+        !bx_ntvdm_dem_whole_provider_v1_complete_gather(&provider, 0x12u,
+            &boundary, &cpu, &action, input, sizeof(input), output,
+            &output_bytes) || output_bytes != sizeof(input) ||
+        memcmp(input, output, sizeof(input)) != 0 ||
+        bx_ntvdm_dem_whole_provider_v1_complete_gather(&provider, 0x12u,
+            &boundary, &cpu, &action, input, sizeof(input), output,
+            &output_bytes) != 0)) failed = 30;
     bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
     failed |= bx_ntvdm_dem_whole_provider_v1_valid(&provider) != 0;
     bx_ntvdm_host_namespace_v1_release(&space);
     DeleteFileW(temporary);
-    return failed ? 2 : 0;
+    return failed;
 }

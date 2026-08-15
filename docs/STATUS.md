@@ -103,6 +103,11 @@
 > x64 `/MT`. This is membership and state closure only, not BOP dispatch or
 > service completion; see the [session evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 progress:** the whole-provider now owns one checked copied gather
+> continuation with exact-boundary completion and stale/concurrent refusal;
+> r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
+> not a BOP implementation; see the same [session evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

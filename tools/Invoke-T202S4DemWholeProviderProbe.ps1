@@ -15,6 +15,10 @@ $names = @(
     'bx_ntvdm_mutation_profile_v1.c', 'bx_ntvdm_mutation_overlay_v1.c',
     'bx_ntvdm_dem_profile_consumer_v1.c', 'bx_ntvdm_host_drive_policy.c',
     'bx_ntvdm_host_namespace.c', 'bx_ntvdm_dem_cwd_context_v1.c',
+    'bx_ntvdm_cpu_delta_abi.c', 'bx_ntvdm_cpu_result_v2.c',
+    'bx_ntvdm_cpu_state_abi.c', 'bx_ntvdm_exception_abi.c',
+    'bx_ntvdm_instruction_window_abi.c',
+    'bx_ntvdm_guest_gather_read_action_v1.c', 'bx_ntvdm_guest_range.c',
     'bx_ntvdm_dem_path_v1.c', 'bx_ntvdm_dem_file_session_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c', 'bx_ntvdm_dem_whole_provider_v1.c'
 )

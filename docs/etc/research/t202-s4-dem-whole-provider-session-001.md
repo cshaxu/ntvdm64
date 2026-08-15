@@ -25,6 +25,14 @@ The fixture constructs an admitted real-host namespace, profile and CWD,
 initializes the provider, verifies membership across `50:00..48`, tears it
 down, and proves the cleared provider no longer validates.
 
+Revision r7 adds and passes the provider-private copied gather lifecycle.  A
+gather binds one owned service, copied exception/CPU boundary and bounded
+range list; a competing prepare is refused without changing the first action.
+Completion accepts only the exact action/boundary/CPU and byte count, copies
+the bytes into caller storage, and clears the pending record.  A second
+completion is refused.  The initial r5/r6 failures exposed an omitted source
+closure and an action-clobber-on-refusal defect; r7 contains both corrections.
+
 ## Interpretation and follow-up
 
 This establishes one state/lifetime owner for the complete package; it does

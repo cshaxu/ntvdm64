@@ -2,6 +2,8 @@
 #define BX_NTVDM_DEM_WHOLE_PROVIDER_V1_H
 
 #include "bx_ntvdm_dem_local_file_backend_v1.h"
+#include "bx_ntvdm_exception_abi.h"
+#include "bx_ntvdm_guest_gather_read_action_v1.h"
 
 #define BX_NTVDM_DEM_WHOLE_PROVIDER_V1_MAGIC 0x42585750u
 #define BX_NTVDM_DEM_WHOLE_PROVIDER_V1_VERSION 1u
@@ -17,6 +19,13 @@ typedef struct bx_ntvdm_dem_whole_provider_v1 {
     const bx_ntvdm_dem_cwd_context_v1 *cwd;
     bx_ntvdm_dem_file_session_v1 files;
     bx_ntvdm_dem_local_file_backend_v1 local_files;
+    uint32_t next_action_id;
+    uint32_t pending_service;
+    uint32_t pending_action_id;
+    uint32_t pending_bytes;
+    bx_ntvdm_exception_event_v1 pending_boundary;
+    bx_ntvdm_cpu_state_v1 pending_cpu;
+    bx_ntvdm_guest_gather_read_action_v1 pending_gather;
 } bx_ntvdm_dem_whole_provider_v1;
 
 #ifdef __cplusplus
@@ -36,6 +45,24 @@ void bx_ntvdm_dem_whole_provider_v1_teardown(
 /* Membership is an owner-package guard. It does not imply implementation of
  * the service or permit a selector-specific profile decision. */
 int bx_ntvdm_dem_whole_provider_v1_owns_service(uint8_t service);
+
+/* One provider-private, copied gather continuation. The returned action is a
+ * mechanical request only; completion verifies its exact copied boundary and
+ * copies the bytes into caller storage before clearing the pending state. */
+int bx_ntvdm_dem_whole_provider_v1_prepare_gather(
+    bx_ntvdm_dem_whole_provider_v1 *provider, uint8_t service,
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_guest_range *ranges, uint32_t range_count,
+    bx_ntvdm_guest_gather_read_action_v1 *action_out);
+int bx_ntvdm_dem_whole_provider_v1_complete_gather(
+    bx_ntvdm_dem_whole_provider_v1 *provider, uint8_t service,
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_guest_gather_read_action_v1 *action,
+    const uint8_t *bytes, uint32_t byte_count,
+    uint8_t copied_bytes[BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_MAX_TOTAL_BYTES],
+    uint32_t *copied_byte_count);
 
 #ifdef __cplusplus
 }
