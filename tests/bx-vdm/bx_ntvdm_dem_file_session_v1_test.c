@@ -7,10 +7,10 @@ static int profile(bx_ntvdm_mutation_profile_v1 *value)
     bx_ntvdm_mutation_profile_v1_initialize(value, BX_NTVDM_MUTATION_MODE_V1_DIRECT);
     return bx_ntvdm_dem_profile_consumer_v1_register_class(value,
         BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 1u <<
-        BX_NTVDM_MUTATION_MODE_V1_DIRECT) &&
+        (BX_NTVDM_MUTATION_MODE_V1_DIRECT - 1u)) &&
         bx_ntvdm_dem_profile_consumer_v1_register_class(value,
             BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 1u <<
-            BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+            (BX_NTVDM_MUTATION_MODE_V1_DIRECT - 1u));
 }
 
 int main(void)

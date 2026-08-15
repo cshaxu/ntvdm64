@@ -81,6 +81,10 @@
 > This is a provider primitive, not a BOP completion. See the
 > [open evidence](etc/research/t202-s4-host-namespace-root-relative-open-001.md).
 
+> **T202 S4 progress:** a shared bounded OEM DOS-path resolver now selects
+> CWD/default-drive and rejects dot or long-name escape before host access.
+> It is provider substrate only; see the [path evidence](etc/research/t202-s4-dem-path-resolution-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

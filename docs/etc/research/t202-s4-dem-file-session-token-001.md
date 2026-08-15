@@ -33,6 +33,9 @@ without serializing a handle or host pointer into guest registers or memory?
   proves that a live token differs from the native handle, lookup returns the
   internal handle only to adapter code, a released token no longer resolves,
   and a reused slot receives a different generation token.
+- Reverification `t202-s4-dem-file-session-r3` passed after the focused test
+  corrected its direct-mode registration bit to the shared profile ABI's
+  `1 << (mode - 1)` convention.
 
 ## Interpretation and confidence
 
