@@ -689,6 +689,40 @@ target_include_directories(bx-ntvdm-dem-process-owner-v1-test PRIVATE
     src/bx-vdm)
 target_compile_features(bx-ntvdm-dem-process-owner-v1-test PRIVATE c_std_11)
 
+add_executable(bx-ntvdm-dem-file-session-v1-test EXCLUDE_FROM_ALL
+    src/bx-vdm/bx_ntvdm_mutation_profile_v1.c
+    src/bx-vdm/bx_ntvdm_dem_profile_consumer_v1.c
+    src/bx-vdm/bx_ntvdm_dem_file_session_v1.c
+    tests/bx-vdm/bx_ntvdm_dem_file_session_v1_test.c
+)
+target_include_directories(bx-ntvdm-dem-file-session-v1-test PRIVATE
+    src/bx-vdm)
+target_compile_features(bx-ntvdm-dem-file-session-v1-test PRIVATE c_std_11)
+target_compile_definitions(bx-ntvdm-dem-file-session-v1-test PRIVATE
+    UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
+target_link_libraries(bx-ntvdm-dem-file-session-v1-test PRIVATE ntdll)
+
+add_executable(bx-ntvdm-dem-local-file-owner-v1-test EXCLUDE_FROM_ALL
+    src/bx-vdm/bx_ntvdm_mutation_profile_v1.c
+    src/bx-vdm/bx_ntvdm_mutation_overlay_v1.c
+    src/bx-vdm/bx_ntvdm_dem_profile_consumer_v1.c
+    src/bx-vdm/bx_ntvdm_dem_file_session_v1.c
+    src/bx-vdm/bx_ntvdm_host_drive_policy.c
+    src/bx-vdm/bx_ntvdm_host_namespace.c
+    src/bx-vdm/bx_ntvdm_command_host_context_v1.c
+    src/bx-vdm/bx_ntvdm_session_host_context_v1.c
+    src/bx-vdm/bx_ntvdm_dem_cwd_context_v1.c
+    src/bx-vdm/bx_ntvdm_dem_path_v1.c
+    src/bx-vdm/bx_ntvdm_dem_local_file_backend_v1.c
+    tests/bx-vdm/bx_ntvdm_dem_local_file_backend_v1_test.c
+)
+target_include_directories(bx-ntvdm-dem-local-file-owner-v1-test PRIVATE
+    src/cli src/bx-vdm)
+target_compile_features(bx-ntvdm-dem-local-file-owner-v1-test PRIVATE c_std_11)
+target_compile_definitions(bx-ntvdm-dem-local-file-owner-v1-test PRIVATE
+    UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
+target_link_libraries(bx-ntvdm-dem-local-file-owner-v1-test PRIVATE ntdll)
+
 add_executable(bx-ntvdm-dem-hard-error-service-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
     src/bx-vdm/bx_ntvdm_cpu_result_v2.c

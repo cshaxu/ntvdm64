@@ -212,10 +212,12 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             observe_open(provider, service, 1, drive, 1, relative, oem_path, result);
             return completed;
         }
-        admitted = bx_ntvdm_dem_local_file_backend_v1_open_ex(&provider->local_files,
+        if (provider->direct_namespace_owner == 0u)
+            return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
+        admitted = bx_ntvdm_dem_local_file_backend_v1_open_ex_owned(&provider->local_files,
             oem_path, access, service == 0x12u ? open_share((uint8_t)cpu->ebx) :
                 FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-            disposition, &token, &error);
+            disposition, provider->direct_namespace_owner, &token, &error);
         if (admitted != BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK) {
             if (admitted == BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_READONLY)
                 error = DEM_ERROR_ACCESS_DENIED;

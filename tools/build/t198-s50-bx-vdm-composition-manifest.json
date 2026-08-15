@@ -109,6 +109,7 @@
     "src/bx-vdm/bx_ntvdm_dem_cwd_service_v2.c",
     "src/bx-vdm/bx_ntvdm_dem_path_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_file_session_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_process_owner_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_local_file_backend_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_fcb_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_fcb_search_service_v1.c",

@@ -27,6 +27,10 @@ typedef struct bx_ntvdm_dem_whole_provider_v1 {
     bx_ntvdm_dem_file_session_v1 files;
     bx_ntvdm_dem_local_file_backend_v1 local_files;
     bx_ntvdm_search_transaction_v1 search;
+    /* Set only around one current direct namespace open/create completion by
+     * the DEM package session.  It is copied PDB identity, never a pointer. */
+    uint16_t direct_namespace_owner;
+    uint16_t reserved_owner0;
     /* `demsrch.c` PATHFIRST resolves the registered DTA far pointer.  The
      * resulting guest-physical DTA is retained only for the matching
      * PATHNEXT transaction; it is never a host pointer. */

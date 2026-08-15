@@ -32,6 +32,7 @@ int bx_ntvdm_dem_whole_provider_v1_valid(
         (provider->declared_search_snapshot == 0 ||
          bx_ntvdm_profile_search_snapshot_v1_valid(provider->declared_search_snapshot)) &&
         provider->path_search_dta_address < UINT64_C(0x100000) &&
+        provider->reserved_owner0 == 0u &&
         provider->next_action_id != 0u && provider->pending_service <= 0x48u &&
         ((provider->pending_action_id == 0u && provider->pending_bytes == 0u) ||
          (provider->pending_action_id != 0u &&

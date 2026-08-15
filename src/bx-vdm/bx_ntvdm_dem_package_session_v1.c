@@ -18,6 +18,7 @@
 #include "bx_ntvdm_dem_misc_plane_v1.h"
 #include "bx_ntvdm_dem_session_lifecycle_provider_v1.h"
 #include "bx_ntvdm_vdd_create_user_notify_service.h"
+#include "bx_ntvdm_dem_process_owner_v1.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 #include <string.h>
 
@@ -53,6 +54,21 @@ static int gather_read(bx_ntvdm_dem_package_session_v1 *s,
   for(i=0;i<g->range_count;i++){if(g->ranges[i].length>UINT32_MAX||offset>a->payload_bytes-(uint32_t)g->ranges[i].length)return 0;
     a->ranges[i].physical_address=g->ranges[i].address;a->ranges[i].byte_count=(uint32_t)g->ranges[i].length;a->ranges[i].payload_offset=offset;offset+=a->ranges[i].byte_count;}
   return offset==a->payload_bytes&&bx_ntvdm_mechanical_action_v1_valid(a); }
+static int direct_namespace_owner(bx_ntvdm_dem_package_session_v1 *s,
+ bx_ntvdm_dem_process_owner_v1 *owner)
+{ bx_ntvdm_guest_read_action_v1 read;struct bx_ntvdm_mechanical_action_v1 a;uint32_t id;
+  if(!s||!owner||!s->namespace_plane||!s->namespace_plane->has_dta||
+    !bx_ntvdm_dem_process_owner_v1_prepare(&s->namespace_plane->dta,owner,&read)||
+    owner->status!=BX_NTVDM_DEM_PROCESS_OWNER_V1_READ_REQUIRED||
+    read.disposition!=BX_NTVDM_GUEST_READ_ACTION_V1_NEED_READ||
+    read.guest_read.length!=2u||!s->namespace_plane->next_action_id)return 0;
+  id=s->namespace_plane->next_action_id++;if(!s->namespace_plane->next_action_id)s->namespace_plane->next_action_id=1u;
+  bx_ntvdm_mechanical_action_v1_clear(&a);a.action_id=id;a.kind=BX_NTVDM_MECHANICAL_ACTION_V1_READ;
+  a.range_count=1u;a.payload_bytes=2u;a.ranges[0].physical_address=read.guest_read.address;
+  a.ranges[0].byte_count=2u;
+  return bx_ntvdm_mechanical_action_v1_valid(&a)&&action(&a)&&
+    bx_ntvdm_dem_process_owner_v1_complete(&s->namespace_plane->dta,&read,
+      a.payload,a.payload_bytes,owner)&&owner->status==BX_NTVDM_DEM_PROCESS_OWNER_V1_VALID; }
 static int search_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
  const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
  const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
@@ -95,13 +111,18 @@ static int fcb_io_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
 static int namespace_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
  const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
  const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
-{ struct bx_ntvdm_mechanical_action_v1 a;
+{ struct bx_ntvdm_mechanical_action_v1 a;bx_ntvdm_dem_process_owner_v1 owner;int needs_owner,completed;
   if(!s||!e||!c||!w||!r||!s->has_whole_provider||
     !bx_ntvdm_dem_namespace_route_partition_v1_prepare(&s->whole_provider,service,e,c,w,&a))return 0;
   if(!action(&a)){bx_ntvdm_dem_whole_provider_v1_cancel_gather(&s->whole_provider,service,e,c,
       &s->whole_provider.pending_gather);return 0;}
-  return bx_ntvdm_dem_namespace_route_partition_v1_complete(&s->whole_provider,service,e,c,&a,r)&&
-    bx_ntvdm_cpu_result_v2_valid(r); }
+  needs_owner=service==0x03u||service==0x12u||service==0x22u;
+  if(needs_owner&&!direct_namespace_owner(s,&owner))return 0;
+  if(needs_owner)s->whole_provider.direct_namespace_owner=owner.pdb_segment;
+  completed=bx_ntvdm_dem_namespace_route_partition_v1_complete(&s->whole_provider,service,e,c,&a,r)&&
+    bx_ntvdm_cpu_result_v2_valid(r);
+  s->whole_provider.direct_namespace_owner=0u;
+  return completed; }
 static int fcb_path_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
  const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
  const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)

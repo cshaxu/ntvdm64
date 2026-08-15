@@ -16,6 +16,8 @@ typedef struct bx_ntvdm_dem_file_token_slot_v1 {
     HANDLE handle;
     uint32_t generation;
     uint32_t in_use;
+    uint16_t pdb_owner;
+    uint16_t reserved0;
 } bx_ntvdm_dem_file_token_slot_v1;
 
 typedef struct bx_ntvdm_dem_file_session_v1 {
@@ -43,11 +45,17 @@ int bx_ntvdm_dem_file_session_v1_valid(
 int bx_ntvdm_dem_file_session_v1_adopt(
     bx_ntvdm_dem_file_session_v1 *session, HANDLE handle,
     uint32_t *token_out);
+int bx_ntvdm_dem_file_session_v1_adopt_owned(
+    bx_ntvdm_dem_file_session_v1 *session, HANDLE handle,
+    uint16_t pdb_owner, uint32_t *token_out);
 int bx_ntvdm_dem_file_session_v1_lookup(
     const bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
     HANDLE *handle_out);
 int bx_ntvdm_dem_file_session_v1_release(
     bx_ntvdm_dem_file_session_v1 *session, uint32_t token);
+int bx_ntvdm_dem_file_session_v1_release_owner(
+    bx_ntvdm_dem_file_session_v1 *session, uint16_t pdb_owner,
+    uint32_t *released_out);
 void bx_ntvdm_dem_file_session_v1_teardown(
     bx_ntvdm_dem_file_session_v1 *session);
 

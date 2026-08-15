@@ -42,10 +42,10 @@ int bx_ntvdm_dem_local_file_backend_v1_open(
         creation_disposition, token_out, 0);
 }
 
-int bx_ntvdm_dem_local_file_backend_v1_open_ex(
+static int open_ex_internal(
     bx_ntvdm_dem_local_file_backend_v1 *backend, const char *oem_path,
     uint32_t access, ULONG share_access, DWORD creation_disposition,
-    uint32_t *token_out, DWORD *win32_error_out)
+    uint16_t pdb_owner, uint32_t *token_out, DWORD *win32_error_out)
 {
     wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
     uint8_t drive;
@@ -90,10 +90,32 @@ int bx_ntvdm_dem_local_file_backend_v1_open_ex(
             relative, desired_access, share_access, creation_disposition, &handle,
             win32_error_out))
         return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_NOT_FOUND;
-    if (!bx_ntvdm_dem_file_session_v1_adopt(backend->session, handle, token_out)) {
+    if (!bx_ntvdm_dem_file_session_v1_adopt_owned(backend->session, handle,
+            pdb_owner, token_out)) {
         CloseHandle(handle);
         return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_CAPACITY;
     }
     if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
     return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK;
+}
+
+int bx_ntvdm_dem_local_file_backend_v1_open_ex(
+    bx_ntvdm_dem_local_file_backend_v1 *backend, const char *oem_path,
+    uint32_t access, ULONG share_access, DWORD creation_disposition,
+    uint32_t *token_out, DWORD *win32_error_out)
+{
+    return open_ex_internal(backend, oem_path, access, share_access,
+        creation_disposition, 0u, token_out, win32_error_out);
+}
+
+int bx_ntvdm_dem_local_file_backend_v1_open_ex_owned(
+    bx_ntvdm_dem_local_file_backend_v1 *backend, const char *oem_path,
+    uint32_t access, ULONG share_access, DWORD creation_disposition,
+    uint16_t pdb_owner, uint32_t *token_out, DWORD *win32_error_out)
+{
+    if (token_out != 0) *token_out = 0u;
+    if (pdb_owner == 0u || !bx_ntvdm_dem_local_file_backend_v1_valid(backend) ||
+        token_out == 0) return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED;
+    return open_ex_internal(backend, oem_path, access, share_access,
+        creation_disposition, pdb_owner, token_out, win32_error_out);
 }

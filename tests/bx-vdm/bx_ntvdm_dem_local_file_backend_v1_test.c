@@ -33,11 +33,13 @@ int main(void)
     bx_ntvdm_host_drive_snapshot_v1 snapshot = {0};
     bx_ntvdm_host_namespace_v1 space;
     bx_ntvdm_mutation_profile_v1 cwd_profile;
+    bx_ntvdm_mutation_profile_v1 direct_profile;
     bx_ntvdm_dem_cwd_context_v1 cwd;
+    bx_ntvdm_dem_local_file_backend_v1 backend;
     bx_ntvdm_dem_file_session_v1 session;
     HANDLE source = INVALID_HANDLE_VALUE, opened = INVALID_HANDLE_VALUE;
     uint8_t drive;
-    uint32_t token = 0u;
+    uint32_t token = 0u, released = 0u;
     DWORD written = 0u, read = 0u;
     char output = 0;
     int failed = 0;
@@ -67,6 +69,23 @@ int main(void)
         WideCharToMultiByte(CP_OEMCP, 0, short_name, -1, oem_path,
             MAX_PATH, 0, 0) == 0) failed = 1;
     if (!failed) {
+        if (!profile_for(BX_NTVDM_MUTATION_MODE_V1_DIRECT, &direct_profile) ||
+            !bx_ntvdm_dem_file_session_v1_initialize(&session, &direct_profile) ||
+            !bx_ntvdm_dem_local_file_backend_v1_initialize(&backend, &session,
+                &space, &cwd) ||
+            bx_ntvdm_dem_local_file_backend_v1_open_ex_owned(&backend, oem_path,
+                BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ, FILE_SHARE_READ,
+                OPEN_EXISTING, 0u, &token, 0) !=
+                BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED || token != 0u ||
+            bx_ntvdm_dem_local_file_backend_v1_open_ex_owned(&backend, oem_path,
+                BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ, FILE_SHARE_READ,
+                OPEN_EXISTING, 0x1234u, &token, 0) !=
+                BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK || token == 0u ||
+            !bx_ntvdm_dem_file_session_v1_release_owner(&session, 0x1234u,
+                &released) || released != 1u ||
+            bx_ntvdm_dem_file_session_v1_lookup(&session, token, &opened)) failed = 1;
+        bx_ntvdm_dem_file_session_v1_teardown(&session);
+        token = 0u;
         if (open_for(BX_NTVDM_MUTATION_MODE_V1_DIRECT, &space, &cwd,
                 oem_path, BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ,
                 OPEN_EXISTING, &token, &session) !=
