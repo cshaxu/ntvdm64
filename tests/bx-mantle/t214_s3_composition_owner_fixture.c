@@ -78,6 +78,9 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
         identity.admitted_drive, identity.declared_slot, identity.declared_bytes_ready,
         identity.disposition, identity.gpr16_values[0],
         identity.eflags_write_mask, identity.eflags_values);
+    printf("t217-s10 wfp-shape bytes=%u drive-prefix=%u root-separator=%u components=%u\n",
+        identity.wfp_bytes, identity.wfp_drive_prefix,
+        identity.wfp_root_separator, identity.wfp_component_count);
     bx_ntvdm_bop_sequence_observation_v1_enable(0u);
     bx_ntvdm_dem_open_observation_v1_enable(0u);
     bx_ntvdm_dem_namespace_identity_observation_v1_enable(0u);
@@ -93,7 +96,10 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
         sequence.records[sequence.record_count - 1u].service != 0x3du ||
         sequence.records[sequence.record_count - 1u].has_service != 1u ||
         sequence.records[sequence.record_count - 1u].disposition !=
-            BX_NTVDM_GENERIC_UD_STOP) return 0;
+            BX_NTVDM_GENERIC_UD_STOP || identity.wfp_bytes == 0u ||
+        identity.wfp_drive_prefix > BX_NTVDM_DEM_NAMESPACE_WFP_DRIVE_MALFORMED ||
+        identity.wfp_root_separator > BX_NTVDM_DEM_NAMESPACE_WFP_ROOT_SLASH ||
+        identity.wfp_component_count > 128u) return 0;
     return 1;
 }
 

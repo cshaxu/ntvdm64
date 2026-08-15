@@ -51,7 +51,8 @@ static int resolve_path(const bx_ntvdm_dem_whole_provider_v1 *provider,
 
 static void observe_open(const bx_ntvdm_dem_whole_provider_v1 *provider,
     uint8_t service, int resolved, uint8_t drive, int startup_path,
-    const wchar_t *relative, const bx_ntvdm_cpu_result_v2 *result)
+    const wchar_t *relative, const char *oem_path,
+    const bx_ntvdm_cpu_result_v2 *result)
 {
     uint32_t admitted_mask = 0u;
     uint32_t declared_slot = 0u, declared_bytes_ready = 0u;
@@ -62,7 +63,7 @@ static void observe_open(const bx_ntvdm_dem_whole_provider_v1 *provider,
             provider->startup_namespace, drive, relative, &declared_bytes_ready);
     bx_ntvdm_dem_namespace_identity_observation_v1_consider(service, resolved,
         drive, admitted_mask, provider != 0 ? provider->startup_namespace : 0,
-        startup_path, declared_slot, declared_bytes_ready, result);
+        startup_path, declared_slot, declared_bytes_ready, oem_path, result);
 }
 
 static int mutation(const bx_ntvdm_dem_whole_provider_v1 *provider,
@@ -136,7 +137,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u);
     if (!resolve_path(provider, oem_path, &drive, relative)) {
         int completed = fail(boundary, result, ERROR_PATH_NOT_FOUND);
-        observe_open(provider, service, 0, 0u, 0, 0, result);
+        observe_open(provider, service, 0, 0u, 0, 0, oem_path, result);
         return completed;
     }
     if (provider->startup_namespace != 0)
@@ -208,7 +209,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
                     (uint16_t)(startup_size >> 16)) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
-            observe_open(provider, service, 1, drive, 1, relative, result);
+            observe_open(provider, service, 1, drive, 1, relative, oem_path, result);
             return completed;
         }
         admitted = bx_ntvdm_dem_local_file_backend_v1_open_ex(&provider->local_files,
@@ -223,7 +224,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 error = DEM_ERROR_INVALID_FUNCTION;
             {
                 int completed = fail(boundary, result, error);
-                observe_open(provider, service, 1, drive, 0, relative, result);
+                observe_open(provider, service, 1, drive, 0, relative, oem_path, result);
                 return completed;
             }
         }
@@ -242,7 +243,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                     (uint16_t)((uint32_t)size.LowPart >> 16))) return 0;
             if (service == 0x12u) {
                 int completed = bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
-                observe_open(provider, service, 1, drive, 0, relative, result);
+                observe_open(provider, service, 1, drive, 0, relative, oem_path, result);
                 return completed;
             }
             return 1;

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S10.** Its governing brief is the active
+> **Current effective packet: M0 T217 S11.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S10 -- bounded SYSINIT WFP shape observation.**
+**Active: M0 T217 S11 -- SYSINIT command-name relocation and lifetime map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -30,19 +30,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S10, Ordinary Mode. |
-| Admission And Approval | S9 proves the source-built image and original `$Open`/`TransPath` WFP contract agree with the current declared C:`\\COMMAND.COM` seam. S6 still reports `OTHER_ADMITTED`; one default-off shape record is admitted to decide the existing seam's next repair boundary. |
-| Objective | Classify the already copied normal DEM Open pathname only by byte count, C-drive prefix, root-separator class and canonical component cardinality, without disclosing its bytes. |
-| Non-goals | No raw pathname trace or hash, BOP/provider rewrite, DOS EXEC emulation, host mutation, profile expansion, Bochs/mantle change, guest binary patch, or COMMAND-run claim. |
-| Reference Baseline | T217 S3–S6 and S9 evidence; OpenNT `sysinit1.asm`, `sysinit2.asm`, `file.asm`, `macro2.asm`; current copied DEM request and path resolver. |
-| Files And ABI Surface | Existing default-off DEM identity-observation record and its fixture only. No public/runtime ABI, provider routing or result behavior change is admitted. |
+| Identifier Mode | M0 T217 S11, Ordinary Mode. |
+| Admission And Approval | S10's native observation proves the live normal WFP is C:-rooted syntactically but has three components rather than the source-required one. The discrepancy is guest-side; no adapter compensation is admitted. |
+| Objective | Map original SYSINIT `commnd` storage, BIOS/DOS relocation and segment/data-lifetime operations against current NTIO/NTDOS boot placement, to identify the earliest source-owned handoff that can lose the leading root separator. |
+| Non-goals | No raw guest-memory/pathname observation, BOP/provider rewrite, DOS EXEC emulation, host mutation, profile expansion, Bochs/mantle change, guest binary patch, or COMMAND-run claim. |
+| Reference Baseline | T217 S3–S10 evidence; OpenNT `sysinit1.asm`, `sysinit2.asm`, BIOS/DOS make/link/relocation sources, generated NTIO/NTDOS maps and current boot-image placement. |
+| Files And ABI Surface | Evidence and Status only unless static evidence identifies an existing build/materialization defect. No runtime ABI or behavior change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused x64 `/MT` fixture proves the record classifies the four allowed predicates and rejects disabled/malformed inputs; one fresh native composition observation records no pathname bytes and no result delta. Governance and diff checks pass. |
-| Expected Markers | A source-backed decision between a minimal existing adapter canonicalization repair and a further guest realization/memory evidence step; no host/provider workaround. |
+| Verification | Map each original segment/pointer transition and corresponding current placement; distinguish direct map/byte evidence from inference; record all recovery rungs. Governance and diff checks pass. |
+| Expected Markers | A source-backed choice between an existing guest build/materialization repair and one further bounded guest-memory evidence step; no host/provider workaround. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record the four symbolic predicates, exact observer scope, native result and source-backed repair disposition; distinguish direct evidence from inference. |
-| Stop Conditions | Any raw pathname/hash, provider/routing/result change, host mutation, guest binary patch, profile expansion, or Bochs/mantle change pauses S10 for re-admission. |
-| Exit Criteria | The normal WFP request's symbolic shape selects a minimal existing seam repair or further guest realization/memory evidence. |
+| Reporting Requirements | Record every segment/pointer/data move, current placement match, confidence and repair disposition; distinguish direct evidence from inference. |
+| Stop Conditions | Any runtime observation, provider/routing/result change, host mutation, guest binary patch, profile expansion, or Bochs/mantle change pauses S11 for re-admission. |
+| Exit Criteria | The command-name lifetime chain has a recovery-ladder disposition and selects a bounded guest build/materialization repair or further evidence step. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -138,6 +138,13 @@
 > original root-path result and current declaration/resolver agree; no DEM
 > workaround is admitted. S10 may observe only the existing copied request's
 > symbolic shape. See the [realization map](etc/research/t217-s9-sysinit-command-name-realization-map-001.md).
+
+> **T217 S10 P1 closure:** the default-off native observation reports a C:
+> backslash-rooted but three-component, 32-byte WFP where original
+> `\\COMMAND.COM` requires one component and 15 bytes. This excludes a
+> separator/drive mismatch and moves the evidence boundary to guest SYSINIT
+> command-name relocation/lifetime; no DEM workaround is admitted. See the
+> [shape observation](etc/research/t217-s10-sysinit-wfp-shape-observation-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS

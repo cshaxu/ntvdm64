@@ -233,7 +233,10 @@ int main(void)
                 !bx_ntvdm_dem_namespace_identity_observation_v1_copy(&identity) ||
                 identity.identity_class != BX_NTVDM_DEM_NAMESPACE_IDENTITY_V1_DECLARED ||
                 identity.declared_slot != 1u || identity.declared_bytes_ready != 1u ||
-                identity.admitted_drive == 0u)) failed = 16;
+                identity.admitted_drive == 0u || identity.wfp_bytes != sizeof("C:\\COMMAND.COM") ||
+                identity.wfp_drive_prefix != BX_NTVDM_DEM_NAMESPACE_WFP_DRIVE_C ||
+                identity.wfp_root_separator != BX_NTVDM_DEM_NAMESPACE_WFP_ROOT_BACKSLASH ||
+                identity.wfp_component_count != 1u)) failed = 16;
             if (!failed) {
                 struct bx_ntvdm_mechanical_action_v1 close_action;
                 token_into_cpu(&cpu, ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
