@@ -61,10 +61,12 @@
 > S5 remains active rather than claiming default-route replacement.  See the
 > [integration record](etc/research/t204-s5-configuration-image-path-integration-001.md).
 
-> **T204 S5 P3 progress:** CLI now admits only paired configuration source
-> options and carries them through a child-only environment; it does not read
-> source bytes.  Adapter installation-time copy/bind remains pending.  See
-> the [CLI admission record](etc/research/t204-s5-cli-paired-source-admission-001.md).
+> **T204 S5 P3 closure:** CLI admits only paired configuration-source options
+> and carries them through a child-only environment without reading source
+> bytes. A fresh strict MSVC x64 `/MT` runner/probe exercise proves the pair
+> originates in the supplied CLI options, alongside the profile/root, drive
+> policy and versioned launch plan. See the [CLI admission
+> record](etc/research/t204-s5-cli-paired-source-admission-001.md).
 
 > **T204 S5 P4 progress:** adapter installation now reads paired sources once,
 > copies bounded OEM input and binds the ready provider; strict x64 `/MT`

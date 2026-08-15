@@ -11,8 +11,9 @@ int wmain(int argc, wchar_t **argv)
     wchar_t root[MAX_PATH];
     wchar_t include_drives[64];
     wchar_t exclude_drives[64];
-    wchar_t launch_kind[8];
-    wchar_t launch_tail[128];
+    wchar_t launch_plan[128];
+    wchar_t config_source[MAX_PATH];
+    wchar_t autoexec_source[MAX_PATH];
     char input_byte;
     DWORD input_bytes = 0u;
 
@@ -34,13 +35,16 @@ int wmain(int argc, wchar_t **argv)
         sizeof(include_drives) / sizeof(include_drives[0])) == 0u ||
         GetEnvironmentVariableW(L"NTDOS64_HOST_EXCLUDE_DRIVES", exclude_drives,
         sizeof(exclude_drives) / sizeof(exclude_drives[0])) == 0u ||
-        GetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_KIND", launch_kind,
-        sizeof(launch_kind) / sizeof(launch_kind[0])) == 0u ||
-        GetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_TAIL", launch_tail,
-        sizeof(launch_tail) / sizeof(launch_tail[0])) == 0u ||
+        GetEnvironmentVariableW(L"NTDOS64_ADAPTER_LAUNCH_PLAN", launch_plan,
+            sizeof(launch_plan) / sizeof(launch_plan[0])) == 0u ||
+        GetEnvironmentVariableW(L"NTDOS64_STARTUP_CONFIG_SOURCE", config_source,
+            sizeof(config_source) / sizeof(config_source[0])) == 0u ||
+        GetEnvironmentVariableW(L"NTDOS64_STARTUP_AUTOEXEC_SOURCE", autoexec_source,
+            sizeof(autoexec_source) / sizeof(autoexec_source[0])) == 0u ||
         wcscmp(profile, argv[2]) != 0 || wcscmp(root, argv[4]) != 0 ||
         wcscmp(include_drives, L"C,D,E") != 0 || wcscmp(exclude_drives, L"E") != 0 ||
-        wcscmp(launch_kind, L"com") != 0 || wcscmp(launch_tail, L"/c smoke") != 0) {
+        wcscmp(launch_plan, L"2,1,c,082f6320736d6f6b65") != 0 ||
+        config_source[0] == L'\0' || autoexec_source[0] == L'\0') {
         return 3;
     }
     if (!ReadFile(GetStdHandle(STD_INPUT_HANDLE), &input_byte, 1u,

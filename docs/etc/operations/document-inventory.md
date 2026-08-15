@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1446 |
 | --- | --- |
-| Generated UTC | 2026-08-15T11:32:15Z |
+| Generated UTC | 2026-08-15T11:41:12Z |
 
 ## Entries
 
@@ -170,7 +170,7 @@ content-divergent entries.
 | etc/research/r20-real-ntio-next-boundary-triage.md | indexed supporting material | b55fd794084e113a809ba4f171d45c8c3fb676fe65c193f66369922b1af2b4b4 |
 | etc/research/r23-adapter-multi-write-fixture.md | indexed supporting material | 1c21c4772c79c68cc757d3b6d285120012fefc3cb2be48ab2a49e0a4a614f852 |
 | etc/research/r23-fcb-search-capability-boundary.md | indexed supporting material | caba9c937e12fe1451a40974bd9179dec4bea6ecdffa5636fa2035b65f1b4f77 |
-| etc/research/runner-adapter-install-contract.md | indexed supporting material | 3d0ae4cc692adb6f7956c06abbcdbad7d510f0fd542494c4a37f46cf25e923f7 |
+| etc/research/runner-adapter-install-contract.md | indexed supporting material | 81f712ed71b87cf89478a5ed2be11e6fd12e05048b492acefc4be4955f48110f |
 | etc/research/t100-s1-original-unavailable-dem-plane-runtime-001.md | indexed supporting material | 78542fcccb01bda5ea91b2986dfb6d84113c0ec5a076282c29d8156a4731e13a |
 | etc/research/t101-s1-post-bop-prefetch-map-audit-001.md | indexed supporting material | 797375300fe7218db03365e030428dbc81200068d91b146157e190f215af4966 |
 | etc/research/t102-s1-aperture-entry-observation-design-audit-001.md | indexed supporting material | 8814bee49b3b2514bee0b73fd1fbae7c1f7f0bff79c4bfa53ac1b1e363d2fad6 |
@@ -697,7 +697,7 @@ content-divergent entries.
 | etc/research/t204-s4-contained-configuration-provider-core-001.md | indexed supporting material | 3866eb96956c35d91c5bba4901d8aa4bb1ad6eaf9fde69b563695a01657c624b |
 | etc/research/t204-s5-adapter-installation-reader-001.md | indexed supporting material | f8ea5ac54233eb8e13ac3c2d578a7dbcdff56c385aaff00d664cd435b13fb345 |
 | etc/research/t204-s5-cli-configuration-admission-map-001.md | indexed supporting material | 94288d298c5f71fd741216f1a092c3b92cab903880b8ef2a95a236b81b8258f1 |
-| etc/research/t204-s5-cli-paired-source-admission-001.md | indexed supporting material | 83f15981c731bb31bb2eb3830e6545fc56a0f9eca6d9763aa29393eeede39ca3 |
+| etc/research/t204-s5-cli-paired-source-admission-001.md | indexed supporting material | 015ab0eba0c8e75075dfcc926e26be556c45f1a0a4186066797c549246c13dad |
 | etc/research/t204-s5-configuration-image-path-integration-001.md | indexed supporting material | 6e3dd7ba0758857e8eea02ee78ce75952377668577d259539cc6b08edbced32d |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
@@ -1460,7 +1460,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a62917ca38555867c131fbce4f936469753e2b8318e9c527daab0538b707fd36 |
+| STATUS.md | principal control document | 04d31fe793557dd10d5692ce5b4ce178bd78d181c518eeea067cbf3967f974cb |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |

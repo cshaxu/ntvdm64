@@ -29,12 +29,14 @@ already accepted strings over in both forms:
 | Consumer | Contract |
 | --- | --- |
 | Engine command-line parser | `--byob-profile <profile> --byob-root <root> -- <target> [args...]` |
-| Adapter runtime v1 in that engine | `NTDOS64_ADAPTER_PROFILE=<profile>` and `NTDOS64_ADAPTER_ROOT=<root>` in a Unicode child-only environment block |
+| Adapter runtime v1 in that engine | `NTDOS64_ADAPTER_PROFILE=<profile>`, `NTDOS64_ADAPTER_ROOT=<root>`, the versioned launch-plan encoding, drive-policy strings, and—when both are explicitly supplied—paired startup CONFIG/AUTOEXEC source paths in a Unicode child-only environment block |
 
-The runner removes any inherited values with these two names before inserting
-the accepted values. The parent environment is not changed. The environment
-block is passed with `CREATE_UNICODE_ENVIRONMENT` and is released immediately
-after successful process creation.
+The runner removes any inherited value for every adapter-owned environment
+name before inserting the accepted value. The parent environment is not
+changed. The environment block is passed with `CREATE_UNICODE_ENVIRONMENT`
+and is released immediately after successful process creation. The runner
+does not open startup configuration files; the adapter reads and copies an
+explicit pair once during installation.
 
 The adapter's `install_from_environment()` is the only current consumer of
 these variables. It independently validates and loads the fixed identity set
@@ -54,8 +56,10 @@ engine boots NTDOS or runs COMMAND.
 
 `tests/ntdos64-run-policy.cmake` starts the test-only
 `runner-engine-probe.exe` through the production runner. The probe rejects a
-missing/incorrect command-line handoff and also compares both child environment
-variables byte-for-byte with the corresponding arguments. The isolated
+missing/incorrect command-line handoff and checks the versioned launch plan.
+The T204 S5 source-built probe additionally begins with no inherited startup
+source values and verifies that an explicitly paired CLI input reaches the
+child only through the constructed environment. The isolated
 `artifacts/build/current/adapter-cli-r1` CMake build reported:
 
 ```text

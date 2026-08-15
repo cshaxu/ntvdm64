@@ -17,6 +17,17 @@ and `/WX`; it includes the existing target-selection source plus `shell32.lib`
 and `bcrypt.lib`.  The resulting executable is
 `artifacts/build/t204-s5-cli-admission-r1/ntdos64-run.exe`.
 
-The next P is adapter installation-time admission: validate the pair, read
-bounded source data with normal user-mode APIs, convert/copy it into T204 S4
-input, bind the provider, then remove the synthetic production default.
+The production-runner handoff was then rebuilt and exercised from current
+source with MSVC x64 `/MT /W4 /WX`.  A v6 owned BYOB profile, four verified
+three-byte test artifacts, explicit CONFIG and AUTOEXEC files, and a
+test-only engine probe were used.  The parent process first removed both
+startup-source variables.  The child probe received the paired nonempty
+values together with the existing profile/root, normalized `C,D,E` include,
+`E` exclusion, and encoded `2,1,c,082f6320736d6f6b65` launch plan, then
+returned its deliberate success code `47`.  Thus the sources originate in
+the CLI options rather than inherited ambient state.  The runner still does
+not open either source file.
+
+Adapter installation-time admission, bounded copying, provider bind, and
+synthetic-byte removal are recorded in the successor S5 P4/P5 evidence; this
+CLI proof does not claim a native startup run.
