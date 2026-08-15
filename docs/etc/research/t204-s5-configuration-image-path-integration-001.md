@@ -40,15 +40,13 @@ it does not execute Bochs or a native guest trace.
 
 ## Remaining S5 condition
 
-This P deliberately does **not** claim replacement of the default installed
-adapter runtime.  `bx_ntvdm_adapter_runtime.c` still initializes its retained
-legacy provider from BYOB `minimal-comment-v1` / `empty-v1` materialization.
-S5's non-goals prohibit adding a CLI source option or host-source acquisition,
-so the new composition seam has no admissible default input at that old
-runtime entry point yet.
+This P deliberately does **not** claim startup execution closure. The later
+S5 adapter-installation path supplies the admitted paired provider input, and
+namespace initialization now retains only CONFIG/AUTOEXEC path declarations
+and metadata rather than legacy synthetic bytes. The migrated
+`bx_ntvdm_boot_namespace_provider_v1_test` binds a contained provider before
+opening CONFIG, and its strict MSVC x64 `/MT` build/run passes.
 
-Therefore S5 remains active.  The next P must identify and introduce the
-already-authorized copied configuration admission record at the composition
-owner, then remove the default synthetic image route in one change.  It must
-not solve this by hard-coding new bytes, adding a BOP special case, or making a
-host temporary file.
+Therefore S5 remains active pending the complete affected-fixture sweep and
+the full runtime closure. It must not regress by hard-coding new bytes, adding
+a BOP special case, or making a host temporary file.

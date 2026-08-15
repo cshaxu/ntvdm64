@@ -1,4 +1,5 @@
 #include "bx_ntvdm_boot_namespace_provider_v1.h"
+#include "bx_ntvdm_command_profile_consumer_v1.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -16,6 +17,8 @@ int main(void)
     byob_image command_image = { command, sizeof(command) }, target_image = { target, sizeof(target) };
     byob_profile_selection selection = { 0 };
     bx_ntvdm_boot_namespace_provider_v1 provider;
+    bx_ntvdm_startup_configuration_input_v1 startup_input = { 0 };
+    bx_ntvdm_mutation_profile_v1 startup_profile;
     bx_ntvdm_exception_event_v1 event = { BX_NTVDM_EXCEPTION_ABI_MAGIC,
         BX_NTVDM_EXCEPTION_ABI_VERSION, sizeof(event), BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION,
         0u, 6u, 0u, 0u, 0x100u };
@@ -44,6 +47,23 @@ int main(void)
         selection.config_metadata.dos_date = selection.autoexec_metadata.dos_date = 1u;
     if (!bx_ntvdm_boot_namespace_provider_v1_initialize(&provider, &command_image,
         &target_image, NULL, &selection)) return 1;
+    bx_ntvdm_mutation_profile_v1_initialize(&startup_profile,
+        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    startup_input.magic = BX_NTVDM_STARTUP_CONFIGURATION_PROVIDER_V1_MAGIC;
+    startup_input.abi_version = BX_NTVDM_STARTUP_CONFIGURATION_PROVIDER_V1_VERSION;
+    startup_input.struct_bytes = sizeof(startup_input);
+    memcpy(startup_input.system_root, "C:\\WINDOWS", 10u);
+    startup_input.system_root_bytes = 9u;
+    startup_input.country_id = 1u;
+    startup_input.oem_code_page = 437u;
+    memcpy(startup_input.config, "FILES=20\r\n", 10u);
+    startup_input.config_bytes = 10u;
+    if (!bx_ntvdm_command_profile_consumer_v1_register_class(&startup_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        !bx_ntvdm_startup_configuration_policy_v1_initialize(&startup_input.policy,
+            &startup_profile, BX_NTVDM_STARTUP_CONFIGURATION_SOURCE_V1_CONTAINED_FIXTURE) ||
+        !bx_ntvdm_boot_namespace_provider_v1_bind_startup_configuration(&provider,
+            &startup_input)) return 8;
 
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x1000u; cpu.edx = 0x20u;
@@ -71,7 +91,7 @@ int main(void)
     cpu.eflags = 0x40u; window_for(&window, 0x50u, 0x16u);
     if (!bx_ntvdm_boot_namespace_provider_v1_read(&provider, &event, &cpu, &window,
         read_payload, sizeof(read_payload), &bulk, &result) || bulk.payload_bytes == 0u ||
-        memcmp(read_payload, "REM NTVDM64\r\n", bulk.payload_bytes) != 0) return 4;
+        memcmp(read_payload, "FILES=20\r\n", bulk.payload_bytes) != 0) return 4;
     window_for(&window, 0x50u, 0x02u);
     if (!bx_ntvdm_boot_namespace_provider_v1_close(&provider, &event, &cpu, &window,
         &result) || result.eflags_values != 0u) return 5;
