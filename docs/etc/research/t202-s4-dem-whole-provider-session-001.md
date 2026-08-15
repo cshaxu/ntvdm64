@@ -165,3 +165,22 @@ path.  If a typed mechanical read cannot run, the route cancels only the
 matching service/event/CPU/gather record; the fixture then successfully opens
 and cancels a new gather.  Thus a mantle transport refusal cannot leave stale
 search state that blocks a later BOP.
+
+The host-installed route regression then exposed a genuine composition-state
+gap: PATHFIRST reads a far pointer from the GSET registration and writes the
+resolved DTA, while PATHNEXT must consume that resolved DTA rather than the
+pointer variable.  The whole provider now retains only this bounded
+guest-physical address for the matching pathname continuation.  It remains
+below the adapter boundary and carries neither a host pointer nor Bochs state.
+
+`t202-s4-search-route-behavior-r7` creates two 8.3 files in a temporary
+admitted directory, installs the shared direct profile and host namespace in
+the DEM package session, and invokes the four services through ordinary BOP
+ingress plus the checked mechanical RAM seam.  It proves pathname first/next
+(`50:09/0B`) and FCB first/next (`50:0A/0C`) produce `ALPHA` then `ZETA`
+results.  The test preflights the same root-relative enumeration separately,
+and never calls the legacy boot snapshot search transaction.  The related
+whole-provider r30 and search-partition r4 MSVC x64 `/MT` regressions pass.
+This closes the four-service route migration evidence only; it does not close
+the remaining DEM identities, overlay behavior, historic hard errors, or a
+native guest trace.

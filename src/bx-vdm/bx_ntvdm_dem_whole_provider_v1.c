@@ -29,6 +29,7 @@ int bx_ntvdm_dem_whole_provider_v1_valid(
         bx_ntvdm_dem_file_session_v1_valid(&provider->files) &&
         bx_ntvdm_dem_local_file_backend_v1_valid(&provider->local_files) &&
         bx_ntvdm_search_transaction_v1_valid(&provider->search) &&
+        provider->path_search_dta_address < UINT64_C(0x100000) &&
         provider->next_action_id != 0u && provider->pending_service <= 0x48u &&
         ((provider->pending_action_id == 0u && provider->pending_bytes == 0u) ||
          (provider->pending_action_id != 0u &&

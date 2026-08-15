@@ -51,6 +51,11 @@ int bx_ntvdm_dem_search_partition_v1_prepare(
     case 0x0bu:
         prepared = bx_ntvdm_dem_path_search_v1_prepare_next(registration,
             boundary, cpu_before, window, &gathered);
+        /* PATHNEXT consumes the actual DTA resolved by PATHFIRST, not the
+         * four-byte far-pointer variable that supplied it. */
+        if (prepared && provider->path_search_dta_address != 0u)
+            gathered.ranges[0].address = provider->path_search_dta_address;
+        else prepared = 0;
         break;
     case 0x0cu:
         prepared = bx_ntvdm_dem_fcb_search_service_v1_prepare_next(registration,
@@ -93,6 +98,7 @@ int bx_ntvdm_dem_search_partition_v1_complete(
             provider->host_namespace, boundary, cpu_before, word(copied + 132u),
             output_address, copied, (uint16_t)cpu_before->ecx, transaction,
             payload, payload_bytes);
+        if (result >= 0) provider->path_search_dta_address = output_address;
         break;
     case 0x0au:
         if (copied_bytes != 183u || action->range_count != 3u ||
@@ -110,6 +116,7 @@ int bx_ntvdm_dem_search_partition_v1_complete(
         result = bx_ntvdm_search_transaction_v1_path_next(&provider->search,
             boundary, cpu_before, word(copied + 43u), action->ranges[0].address,
             copied, transaction, payload, payload_bytes);
+        if (result <= 0) provider->path_search_dta_address = 0u;
         break;
     default:
         if (copied_bytes != 55u || action->range_count != 2u ||

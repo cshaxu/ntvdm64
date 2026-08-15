@@ -21,6 +21,10 @@ typedef struct bx_ntvdm_dem_whole_provider_v1 {
     bx_ntvdm_dem_file_session_v1 files;
     bx_ntvdm_dem_local_file_backend_v1 local_files;
     bx_ntvdm_search_transaction_v1 search;
+    /* `demsrch.c` PATHFIRST resolves the registered DTA far pointer.  The
+     * resulting guest-physical DTA is retained only for the matching
+     * PATHNEXT transaction; it is never a host pointer. */
+    uint64_t path_search_dta_address;
     uint32_t next_action_id;
     uint32_t pending_service;
     uint32_t pending_action_id;

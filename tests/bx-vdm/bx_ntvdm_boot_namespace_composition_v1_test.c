@@ -2,6 +2,7 @@
 #include "bx_ntvdm_dem_package_facade_v1.h"
 #include "bx_ntvdm_command_package_facade_v1.h"
 #include <string.h>
+#include <wctype.h>
 
 static uint8_t ram[0x100000];
 static int allow_action = 1;
@@ -57,6 +58,101 @@ static void profile_initialize(byob_profile_selection *profile)
         profile->config_metadata.attributes = profile->autoexec_metadata.attributes = 0x20;
     profile->command_metadata.dos_date = profile->target_metadata.dos_date =
         profile->config_metadata.dos_date = profile->autoexec_metadata.dos_date = 1;
+}
+
+static int direct_profile_initialize(bx_ntvdm_mutation_profile_v1 *profile)
+{
+    bx_ntvdm_mutation_profile_v1_initialize(profile,
+        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    return bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
+        BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
+        bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
+        BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) &&
+        bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
+        BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu);
+}
+
+static int direct_search_route_regression(
+    bx_ntvdm_boot_namespace_composition_v1 *composition,
+    uint8_t drive)
+{
+    wchar_t temporary[MAX_PATH], directory[MAX_PATH], short_directory[MAX_PATH];
+    wchar_t alpha[MAX_PATH], zeta[MAX_PATH];
+    char request[128];
+    DWORD written = 0u;
+    HANDLE file = INVALID_HANDLE_VALUE;
+    bx_ntvdm_dem_dta_registration_v1 dta = { 0x300u, 0x400u, 0x410u, 0x420u };
+    bx_ntvdm_search_query_v1 query;
+    static bx_ntvdm_host_namespace_entry_v1 entries[BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES];
+    uint32_t entry_count = 0u;
+    struct bx_ntvdm_generic_ud_event_v1 event;
+    struct bx_ntvdm_generic_ud_outcome_v1 outcome;
+    int failure = 0;
+    (void)drive;
+    if (!composition || !GetTempPathW(MAX_PATH, temporary) ||
+        !GetTempFileNameW(temporary, L"n64", 0u, directory) ||
+        !DeleteFileW(directory) || !CreateDirectoryW(directory, 0) ||
+        !GetShortPathNameW(directory, short_directory, MAX_PATH) ||
+        short_directory[1] != L':') return 1;
+    swprintf_s(alpha, MAX_PATH, L"%s\\ALPHA.TXT", short_directory);
+    swprintf_s(zeta, MAX_PATH, L"%s\\ZETA.TXT", short_directory);
+    file = CreateFileW(alpha, GENERIC_WRITE, 0u, 0, CREATE_NEW,
+        FILE_ATTRIBUTE_NORMAL, 0);
+    if (file == INVALID_HANDLE_VALUE || !WriteFile(file, "a", 1u, &written,
+            0) || written != 1u) failure = 2;
+    if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
+    file = CreateFileW(zeta, GENERIC_WRITE, 0u, 0, CREATE_NEW,
+        FILE_ATTRIBUTE_NORMAL, 0);
+    if (!failure && (file == INVALID_HANDLE_VALUE || !WriteFile(file, "z", 1u,
+            &written, 0) || written != 1u)) failure = 3;
+    if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
+    if (!failure && (!WideCharToMultiByte(CP_OEMCP, 0, short_directory, -1,
+            request, (int)sizeof(request) - 8, 0, 0) ||
+        strcat_s(request, sizeof(request), "\\*.TXT") != 0 ||
+        !bx_ntvdm_boot_namespace_plane_v1_set_dta(&composition->plane, &dta)))
+        failure = 4;
+    if (!failure && (!bx_ntvdm_search_request_v1_decode_first_path((const uint8_t *)request,
+            0u, &query) || bx_ntvdm_host_namespace_v1_enumerate(
+            composition->dem.whole_provider.host_namespace, query.drive_index,
+            query.relative_directory, entries, BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES,
+            &entry_count) != BX_NTVDM_HOST_NAMESPACE_V1_OK || entry_count < 2u)) failure = 41;
+    if (!failure) {
+        memset(ram, 0, sizeof(ram));
+        allow_action = 1;
+        memcpy(ram + 0x200u, request, strlen(request) + 1u);
+        ram[0x300u] = 0x00u; ram[0x301u] = 0x05u;
+        ram[0x400u] = 0x34u; ram[0x401u] = 0x12u;
+        event_initialize(&event, 0x50u, 0x09u);
+        event.ds = 0u; event.edx = 0x200u;
+        if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) failure = 51;
+        else if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) failure = 52;
+        else if ((outcome.eflags_write_mask & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u &&
+            (outcome.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u) failure = 54;
+        else if (memcmp(ram + 0x51eu, "ALPHA.TXT", 9u) != 0) failure = 53;
+    }
+    if (!failure) {
+        event_initialize(&event, 0x50u, 0x0bu);
+        if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+            outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+            memcmp(ram + 0x51eu, "ZETA.TXT", 8u) != 0) failure = 6;
+    }
+    if (!failure) {
+        memcpy(ram + 0x700u, request, strlen(request) + 1u);
+        event_initialize(&event, 0x50u, 0x0au);
+        event.ds = 0u; event.esi = 0x600u; event.es = 0u; event.edi = 0x700u;
+        if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+            outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+            memcmp(ram + 0x601u, "ALPHA   TXT", 11u) != 0) failure = 7;
+    }
+    if (!failure) {
+        event_initialize(&event, 0x50u, 0x0cu);
+        event.ds = 0u; event.esi = 0x600u;
+        if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+            outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+            memcmp(ram + 0x601u, "ZETA    TXT", 11u) != 0) failure = 8;
+    }
+    DeleteFileW(alpha); DeleteFileW(zeta); RemoveDirectoryW(directory);
+    return failure;
 }
 
 static int facade_existing_provider(uint32_t service)
@@ -165,6 +261,8 @@ int main(void)
     byob_profile_selection profile;
     bx_ntvdm_boot_namespace_composition_v1 composition;
     bx_ntvdm_host_drive_snapshot_v1 drives;
+    bx_ntvdm_host_namespace_v1 host_namespace;
+    bx_ntvdm_mutation_profile_v1 direct_profile;
     uint8_t drive_types[26] = { 0 };
     byob_launch_plan_v2 launch_plan = { 2u, 1u,
         { 1u, BYOB_LAUNCH_TARGET_KIND_V1_COM, 0u, { 0 } } };
@@ -172,6 +270,7 @@ int main(void)
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t token;
     uint32_t service;
+    int direct_search_error;
     bx_ntvdm_host_namespace_entry_v1 terminating_entries[2] = { 0 };
     bx_ntvdm_host_namespace_entry_v1 terminating_out;
     bx_ntvdm_search_token_v1 terminating_token;
@@ -191,6 +290,12 @@ int main(void)
         !bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(4), drive_types, 0u, 0u,
             &drives) || !bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
             &composition, &drives) ||
+        !direct_profile_initialize(&direct_profile) ||
+        !bx_ntvdm_host_namespace_v1_initialize(&host_namespace, &drives) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
+            &composition, &direct_profile) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
+            &composition, &host_namespace) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,
             &launch_plan) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 2;
@@ -593,7 +698,10 @@ int main(void)
             &composition.plane.provider.search_transaction.plan.sessions,
             0xbeefu, &terminating_token, &terminating_out,
             &terminating_token)) return 69;
+    direct_search_error = direct_search_route_regression(&composition, 2u);
+    if (direct_search_error != 0) return 70 + direct_search_error;
     bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
+    bx_ntvdm_host_namespace_v1_release(&host_namespace);
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 10;
     return 0;
 }

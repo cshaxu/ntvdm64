@@ -185,6 +185,14 @@
 > later gather remains admissible. This is failure-lifecycle protection, not a
 > host-installed route completion.
 
+> **T202 S4 progress:** r7 now proves the host-installed four-service search
+> route through ordinary BOP ingress and checked RAM: `50:09→0B` and
+> `50:0A→0C` return two self-created admitted-host entries in order. A retained
+> guest-physical resolved-DTA continuation fixes the first/next state gap;
+> r30 whole-provider and r4 search-partition closures also pass under MSVC x64
+> `/MT`. This closes only this four-service route migration, not full DEM or a
+> native guest trace.
+
 > **T202 S4 progress:** the existing session-owned `demsrch.c` search
 > transaction now admits a root-relative direct-host first-search backend and
 > remains source-built in the retained x64 closure. Dedicated direct-host
