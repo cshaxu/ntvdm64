@@ -69,9 +69,58 @@ S3 provider. They are not direct-host defaults. `demCommit`'s CF-clear rule
 is a retained source behavior, but must acquire an opaque token before it is
 considered implemented.
 
+## Exact ABI, continuation and failure work set
+
+The following is the required implementation contract for the later whole
+package provider.  It is intentionally more precise than a dispatcher table:
+it identifies the bounded input/output transactions and the historical result
+form that the provider must preserve.  It does **not** authorize implementing
+one row before the whole package is admitted.
+
+| Identity group | Checked guest transactions and session state | Source-shaped success and failure result |
+| --- | --- | --- |
+| `50:00,02,08,16,1E,27` handle operations | Decode AX:BP as a session-owned opaque file token, never as `HANDLE`.  `00` copies CX:DX/BL; `02` copies optional CX:DX final position; `08` copies BL/CX:DX; `16` gathers a CX-byte output range at DS:DX; `1E` gathers a CX-byte input range at DS:DX; `27` has no guest buffer.  `16`/`1E` copy BX:SI only when the original ZF condition requests a seek. | `00` returns the 32-bit position in DX:AX.  `02` preserves the null-token success branch and otherwise closes the owned token.  `08` returns DOS time/date in CX:DX for get and applies the source's device-time branch.  `16` returns the transferred byte count in AX and preserves broken-pipe EOF only for the later Redirector token kind.  `1E` treats CX=0 as truncate/extend at the selected position and preserves the disk-full `CX=partial, AX=1, CF=1` branch.  `27` preserves its CF-clear completion form even where `FlushFileBuffers` reports failure. |
+| `50:01,03,04,05,06,12,17,22,44` pathname operations | Bounded OEM pathname gather: DS:DX for `01/04/05/06/17` source, ES:DI for `17` destination; DS:SI for `03/12/22/44`.  Paths resolve only through the selected session root/CWD context.  Open/create results allocate an opaque token and copy it to AX:BP; no host handle reaches registers. | Ordinary failures take the source `demClientError` form (AX DOS/Win32 error, CF=1).  `17` retains source same-path `AX=5,CF=1` and cross-drive `AX=11,CF=1`.  `12` returns CX:BX size and DX pipe flag; local files set DX=0, while named-pipe discovery is deferred with Redirector.  `44` retains `\\DEV\\` success and its source-shaped path probe result, but must not create a host file as a by-product of validation. |
+| `50:09,0B` path search | `09` gathers DS:DX wildcard and reads/writes the current DTA range identified by the existing DTA state.  `0B` reads/writes that same DTA range.  A session-owned search token associates the DTA location with the enumeration; it cannot be a host pointer or a value trusted from guest reserved bytes. | `09` clears continuation state before a new search, preserves volume-label-first ordering, maps file-not-found to no-more-files and bad-path/directory to path-not-found.  `0B` with absent, altered, or stale continuation returns `ERROR_NO_MORE_FILES` and clears its continuation.  Both copy `attr,time,date,size,8.3-name` into the DOS DTA before CF clear. |
+| `50:0A,0C` FCB search | `0A` gathers ES:DI wildcard and reads/writes the DS:SI `SRCHBUF`; `0C` reads/writes that `SRCHBUF`.  The continuation is session-owned and keyed to the checked record location plus a non-pointer opaque id. | Both retain extended-FCB attribute selection and volume-label branches.  `0C` missing/mismatched continuation or a volume next request returns `AX=ERROR_NO_MORE_FILES,CF=1`; it clears continuation state.  Successful records preserve blank-padded 8.3 fields, attributes, DOS date/time and 32-bit size. |
+| `50:07,20,2C,2D,2E,2F,30,31` FCB file operations | `07` gathers ES:DI wildcard plus AL/DL attributes; `20` gathers DS:SI source and ES:DI template; `2C/2D/31` gather DS:SI pathname; `2E/2F` decode AX:SI or AX:BP opaque token as specified by the original owner.  `2F` reads the DTA location and performs a bounded read/write there, never a borrowed SAS pointer. | `07` preserves wildcard and extended-FCB attribute rules, including no-match `AX=ERROR_FILE_NOT_FOUND,CF=1`.  `20` preserves wildcard destination substitution and same-path `AX=5,CF=1`.  `2C/2D` return token, time/date and size in their historical register form; `2E` preserves null-token CF-clear.  `2F` returns CX transfer and AX:BX size, including the disk-full partial-write branch.  `30` is local-clock DOS date/time; `31` returns attribute/time/date/size. |
+| `50:47,48` pipe EOF | Decode AX:BP only as a typed token.  There is no local-filesystem fallback or host pointer/callback transaction. | Explicitly deferred: only a future Redirector package may supply pipe-token state and the original COMMAND/VDMREDIR EOF semantics.  Until then each call uses the documented unavailable disposition, not a fake local-file success. |
+
+### Guest record layouts and token rule
+
+`dosdef.h` defines packed historical records.  The next provider must copy the
+guest-visible non-pointer fields at their original byte positions:
+
+- `SRCHDTA`: 21-byte reserved prefix, then attributes, DOS write time/date,
+  low/high size and a 13-byte name.
+- `SRCHBUF`: drive byte, 8-byte name, 3-byte extension, block/record-size and
+  size, followed by `DIRENT` with 8.3 name, attributes, reserved continuation
+  area, DOS time/date and size.
+
+The historical `pFFindEntry` fields inside those reserved areas were host
+pointers on 32-bit NT.  A 64-bit CLI provider must never serialize either a
+pointer or a native `HANDLE` there.  It may retain the byte layout and write a
+non-address opaque identifier only if the session-owned continuation table
+also verifies the checked DTA/SRCHBUF location and generation before a next
+operation.  A copied record is therefore data, never authority to dereference
+host state.
+
+### Error classifier boundary
+
+`demerror.c:demClientErrorEx` has two source-distinct outcomes.  Ordinary
+errors become `AX=(USHORT)GetLastError(), CF=1` (with access denied if the
+last error is zero).  The range `ERROR_WRITE_PROTECT..ERROR_GEN_FAILURE` and
+`ERROR_WRONG_DISK` instead arm the historical INT 24 hard-error packet and
+set CF; they do not use the ordinary AX assignment.  The new provider must
+express that distinction through its typed result record and the available
+guest hard-error owner; it may not silently collapse a hard error into a
+readonly policy refusal.  If that owner is not admitted when implementation
+starts, the package needs an explicit source-derived unavailable result and a
+separate owner admission -- not a hidden adapter-side INT 24 implementation.
+
 ## Follow-up
 
-The next S3 evidence pass will add the exact DOS structure/range layouts,
-`demClientError` branch conditions, and per-row direct/readonly/overlay
-failure disposition. Only then may one subsequent S implement the entire
+The remaining S3 pass must reconcile each current bx-vdm workaround with this
+contract and demonstrate mechanically that all 29 identities have one
+non-overlapping row.  Only then may one subsequent S implement the entire
 file/handle/FCB/search package and its family regression.

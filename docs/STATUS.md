@@ -60,7 +60,8 @@
 > removal; see the [closure evidence](etc/research/t202-s2-dem-namespace-cwd-volume-closure-001.md).
 
 > **T202 S3 progress:** the complete 29-identity DEM file/handle/FCB/search
-> boundary is inventoried by original owner, host API and current workaround;
+> boundary is inventoried by original owner, host API and current workaround,
+> with checked range/token, search continuation and hard-error result rules;
 > this is admission evidence, not provider implementation. See the
 > [source/ABI map](etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md).
 
