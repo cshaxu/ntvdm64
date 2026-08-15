@@ -2,40 +2,39 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T206 S3.** Its governing brief is the active
+> **Current effective packet: M0 T207 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T206 S3 -- normal terminal engine/CLI admission map.**
+**Active: M0 T207 S1 -- passive normal-terminal sequence map.**
 
-> **T205 closed:** its current-profile XMS boundary is recorded in
+> **T206 closed:** its COMMAND terminal handoff boundary is recorded in
+> [history](history/m0-t206-closure-20260815.md). **T205 closed:** its current-profile XMS boundary is recorded in
 > [history](history/m0-t205-closure-20260815.md). The table below is the sole
 > active packet.
 
 ## Active Packet
 
-> **T scope:** T206 recovers a truthful one-shot normal guest terminal-result
-> boundary before the queued CLI lifecycle-governance package may begin. S1
-> identified the original `54:0B` owner and current loss points; S2 recovered
-> the package-local return record. S3 maps, but does not yet implement, the
-> separately owned engine/CLI publication contract.
+> **T scope:** T207 proves or disproves the complete post-`54:0B` normal
+> terminal sequence under the existing integrated composition. S1 maps the
+> passive observation points and admissible fixture contract before any run.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T206 S3, Ordinary Mode. |
-| Admission And Approval | T206 S1/S2 establish the original `54:0B` source owner and a package-local copied record, not normal execution completion. |
-| Objective | Produce the source/ABI/owner map required to publish a bounded normal terminal result from bx-vdm through mantle/engine to CLI, and decide whether a subsequent implementation packet is admissible. |
-| Non-goals | No engine/CLI implementation, controlled-stop reinterpretation, trace, BaseSrv/CSR broker, host-child queue, interactive console, Bochs feature/device work or host mutation. |
-| Reference Baseline | T206 S1/S2, engine contract/run sources, CLI result handling, and T202 re-entry rejection. |
-| Files And ABI Surface | Read-only map of bx-vdm terminal record, mantle/engine result contracts, CLI process-result boundary and focused test ownership. No ABI changes in S3. |
+| Identifier Mode | M0 T207 S1, Ordinary Mode. |
+| Admission And Approval | T206 closure: final `54:0B` record exists, but engine/CLI publication has no source-proven terminal boundary. |
+| Objective | Map a default-off, passive integrated observation that can distinguish final `54:0B`, subsequent declared-plan STOP, `50:3D`, budget and unrelated stop without changing any control flow or BOP provider. |
+| Non-goals | No provider/engine/CLI implementation, controlled-stop reinterpretation, host broker, host-child queue, interactive console, Bochs feature/device work or host mutation. |
+| Reference Baseline | T206 S1-S3, generic bridge, command package session, machine-stage execution and existing finite/native fixtures. |
+| Files And ABI Surface | Read-only source/fixture map only. No production ABI, bridge, observer or trace configuration change in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI map with exact producer/consumer, copied field ownership, result lifetime, refusal table and a proposed isolated regression closure; governance and diff checks. |
-| Expected Markers | No controlled stop or fixture result is treated as normal completion; the first possible publication point is explicit and has one owner. |
+| Verification | Source map identifies an existing or newly-admitted default-off passive fixture seam, expected copied fields and all negative outcomes; governance and diff checks. |
+| Expected Markers | Observation can classify order and terminal reason without selecting a BOP implementation or changing CPU state. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record source paths/hashes, field and lifetime map, exact rejected historical dependencies and recommendation for the next admitted packet. |
-| Stop Conditions | Any pressure to publish the record without a defined engine producer/consumer, reinterpret a stop, introduce a host queue or use trace as admission pauses S3 for re-admission. |
-| Exit Criteria | A reviewable admission/rejection decision for one later publication packet, without implementation or a CLI completion claim. |
+| Reporting Requirements | Record source paths/hashes, candidate observer placement, copied-data contract, expected order matrix and follow-on admission decision. |
+| Stop Conditions | Any need to decode BOP in mantle, change CPU state, make `54:0B` stop, interpret an unrelated stop as success, or use trace to select a provider pauses S1 for re-admission. |
+| Exit Criteria | Reviewable passive-observation admission/rejection decision; no normal-completion or CLI claim. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect all engine result producers, mantle result transfer, CLI exit mapping, reset/teardown paths, controlled stop, budget, fixture and machine failure. |
+| Similar-Issue Sweep | Inspect existing generic observers, terminal snapshots, `54:0B` record lifetime, `54:01` exhaustion stop, DEM exit, watchdog and every native fixture continuation. |
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
