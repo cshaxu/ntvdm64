@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T202 S3.** Its governing brief is the active
+> **Current effective packet: M0 T202 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T202 S3 -- DEM file/handle/FCB/search source/ABI/failure admission.**
+**Active: M0 T202 S4 -- DEM file/handle/FCB/search whole-provider recovery.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T202 S3, Ordinary Mode. |
-| Admission And Approval | S2 is closed by its [closure evidence](etc/research/t202-s2-dem-namespace-cwd-volume-closure-001.md). Owner-approved T202 package order now admits a whole DEM file/handle/FCB/search source/ABI/failure map before any provider implementation. |
-| Objective | Produce one complete, source-derived admission map for the DEM file, handle, FCB and path-search owner subpackage: every original dispatcher identity, caller/structure, mutation class, historical host API, modern availability, shared profile disposition, existing workaround action, and required checked ABI/failure result. |
-| Non-goals | No individual trace-selected BOP patch; no partial provider recovery; no COMMAND/Redirector/XMS/DPMI work; no raw-device/absolute-media package; no virtual boot-volume; no host installation/rebuild; no Bochs semantic change; and no native trace. |
-| Reference Baseline | [T202 S2 closure](etc/research/t202-s2-dem-namespace-cwd-volume-closure-001.md), [T200 S31 ledger](etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md), `demdisp.c`, `demfile.c`, `demhndl.c`, `demfcb.c`, `demsrch.c`, `demdir.c`, and existing bx-vdm readonly/fixture providers. |
-| Files And ABI Surface | Source/audit records, dispatcher inventory tooling if needed, and no product provider behavior except an evidence-correcting classification. The map must name all guest range, opaque handle/token, and result-record boundaries; no raw host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
+| Identifier Mode | M0 T202 S4, Ordinary Mode. |
+| Admission And Approval | S3 is closed by its [admission closure](etc/research/t202-s3-dem-file-handle-fcb-search-admission-closure-001.md). Owner-approved T202 package order now admits one source-derived provider for its complete 29-identity DEM file/handle/FCB/search work set. |
+| Objective | Replace the admitted boot/readonly/FCB/search endpoint leaves with one DEM-owned source-derived provider: session-owned opaque file/search tokens; bounded pathname, buffer, DTA and SRCHBUF transactions; direct/readonly/overlay capability selection; original result/failure forms; and explicit Redirector deferral for `50:47/48`. |
+| Non-goals | No individual trace-selected BOP patch; no COMMAND/Redirector/XMS/DPMI recovery; no raw-device/absolute-media package; no virtual boot-volume; no host installation/rebuild; no Bochs semantic change; no raw host handle/pointer transport; and no native trace before the whole package regression passes. |
+| Reference Baseline | [T202 S3 closure](etc/research/t202-s3-dem-file-handle-fcb-search-admission-closure-001.md), [S3 source/ABI map](etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md), T202 S2 closure, `demfile.c`, `demhndl.c`, `demfcb.c`, `demsrch.c`, `dosdef.h`, `demerror.c`, and existing bx-vdm fixture/failure leaves. |
+| Files And ABI Surface | New or replacement DEM package-session/provider units, versioned fixed-width token/result records, checked guest gather/write actions, source-derived host namespace calls, package tests and evidence. No host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Mechanical dispatcher inventory covers every S3 identity exactly once; each map row cites original source/caller/ABI/failure and one profile/workaround disposition; availability audit records unsupported/private APIs without blocking unrelated rows; documentation governance and diff checks pass. |
-| Expected Markers | One non-overlapping owner map covers all file/handle/FCB/search services; direct, readonly and overlay behavior is package-level rather than per-service improvisation; virtual boot-volume remains explicitly deferred; existing fixture/readonly routes have retain/migrate/replace/delete actions. |
+| Verification | Source-built MSVC x64 `/MT` direct/readonly/overlay package regression covers all 29 identities and their failure branches; negative tests prove no host-handle/pointer exposure, stale search continuation, unadmitted drive escape, readonly mutation, or fake pipe success; dispatcher inventory, documentation governance and diff checks pass. |
+| Expected Markers | One non-overlapping DEM provider owns all local file/handle/FCB/search identities; direct/readonly/overlay behavior is selected by the shared profile; legacy fixture/failure leaves are removed or isolated from product composition; `47/48` remain explicit Redirector deferred results. |
 | Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
-| Reporting Requirements | Record source/ABI/failure mapping, host API availability and each profile disposition; distinguish admission from implementation and do not claim DEM family closure. |
-| Stop Conditions | Any fallback to trace-selected work, an endpoint-only implementation, implicit synthetic host C:, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, or unsupported historical API without an audit disposition pauses S3 for re-admission. |
-| Exit Criteria | A reviewer can identify one source-derived direct/readonly/overlay/virtual disposition and one workaround action for every S3 identity, plus the complete ABI/failure work set for the following whole-package implementation S. |
+| Reporting Requirements | Record provider provenance, all 29 outcomes, source-shaped limitation/failure behavior, profile matrix, displaced workaround action and source-built test result; do not claim full DEM, Redirector or native guest closure. |
+| Stop Conditions | Any fallback to trace-selected work, an endpoint-only implementation, implicit synthetic host C:, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, hidden VDMREDIR substitute, or unadmitted hard-error mechanism pauses S4 for re-admission. |
+| Exit Criteria | A reviewer can link every S3 identity to the single provider or explicit `47/48` Redirector defer outcome; all direct/readonly/overlay and boundary-negative package regressions pass; old product-facing endpoint leaves are displaced; and source/evidence records state the remaining hard-error and virtual-volume limitations. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect `readonly_namespace`, boot namespace/provider/plane, profile search/session, FCB providers, direct host namespace, and all DEM file/handle/search terminal routes for duplicate owner, raw-handle, synthetic-root, or endpoint-only behavior. |
+| Similar-Issue Sweep | Inspect `readonly_namespace`, boot namespace/provider/plane, profile search/session, FCB providers, direct host namespace, error-lock plane, and all DEM file/handle/search terminal routes for duplicate owner, raw-handle, synthetic-root, stale continuation, or endpoint-only behavior. |
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
@@ -64,6 +64,11 @@
 > with checked range/token, search continuation and hard-error result rules;
 > this is admission evidence, not provider implementation. See the
 > [source/ABI map](etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md).
+
+> **T202 S3 closure:** all 29 identities have exact source/ABI/failure and
+> workaround dispositions. It admits S4's whole provider recovery; it does
+> not claim a recovered provider or a native trace. See the
+> [admission closure](etc/research/t202-s3-dem-file-handle-fcb-search-admission-closure-001.md).
 
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
