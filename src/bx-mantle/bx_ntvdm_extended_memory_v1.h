@@ -11,7 +11,8 @@ enum bx_ntvdm_extended_memory_operation_v1 {
   BX_NTVDM_EXTMEM_FREE = 3u,
   BX_NTVDM_EXTMEM_REALLOCATE = 4u,
   BX_NTVDM_EXTMEM_MOVE = 5u,
-  BX_NTVDM_EXTMEM_QUERY_FREE = 6u
+  BX_NTVDM_EXTMEM_QUERY_FREE = 6u,
+  BX_NTVDM_EXTMEM_MOVE_PHYSICAL = 7u
 };
 
 enum bx_ntvdm_extended_memory_status_v1 {
@@ -35,6 +36,8 @@ struct bx_ntvdm_extended_memory_request_v1 {
   uint64_t source_offset;
   uint64_t destination_offset;
   uint64_t byte_count;
+  uint64_t source_address;
+  uint64_t destination_address;
 };
 
 struct bx_ntvdm_extended_memory_result_v1 {

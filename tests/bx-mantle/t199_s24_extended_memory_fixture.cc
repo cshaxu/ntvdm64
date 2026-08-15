@@ -43,6 +43,14 @@ int main()
       rejected.largest_free_kib != 2944u) return 20;
 
   for (i = 0; i < sizeof(pattern); ++i) pattern[i] = (Bit8u)i;
+  if (!bx_mem.copy_to_ordinary_ram(0x2000u, sizeof(pattern), pattern)) return 21;
+  request.operation = BX_NTVDM_EXTMEM_MOVE_PHYSICAL;
+  request.source_address = 0x2000u;
+  request.destination_address = 0x3000u;
+  request.byte_count = sizeof(pattern);
+  if (!call(&request, &rejected) ||
+      !bx_mem.copy_from_ordinary_ram(0x3000u, sizeof(observed), observed) ||
+      memcmp(pattern, observed, sizeof(pattern)) != 0) return 22;
   if (!bx_mem.copy_to_ordinary_ram(first.physical_address, sizeof(pattern),
       pattern)) return 6;
   request.operation = BX_NTVDM_EXTMEM_MOVE;

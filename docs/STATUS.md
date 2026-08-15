@@ -47,8 +47,15 @@
 > A20/block paths. The strict adapter package regression passes. The current
 > broad native machine recipe compiles the changed mantle source but has an
 > inherited unrelated CPU object-link closure failure; this is negative build
-> evidence, not a passing native result. `52:01` move remains unimplemented,
-> and `06..09` remain deferred.
+> evidence, not a passing native result. `52:01` is covered by P2; `06..09`
+> remain deferred.
+
+> **T205 S2 P2 progress:** `52:01` reads the original 12-byte `SS:BP-12`
+> move record through the existing synchronous copied mechanical-action seam
+> and submits a selector-blind checked physical backing-RAM copy to mantle. The
+> strict package regression proves the request mapping; native machine closure
+> remains pending the existing broad CPU link failure. UMB/INT15 remain out of
+> scope.
 
 > **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one

@@ -175,6 +175,16 @@ void bx_ntvdm_extended_memory_v1_dispatch(
     result->status = BX_NTVDM_EXTMEM_OK;
     return;
   }
+  if (request->operation == BX_NTVDM_EXTMEM_MOVE_PHYSICAL) {
+    if (request->byte_count == 0 ||
+        !bx_ntvdm_extmem_copy(request->source_address,
+          request->destination_address, request->byte_count)) {
+      result->status = BX_NTVDM_EXTMEM_REJECTED_RANGE;
+      return;
+    }
+    result->status = BX_NTVDM_EXTMEM_OK;
+    return;
+  }
   if (request->operation == BX_NTVDM_EXTMEM_FREE) {
     if (!bx_ntvdm_extmem_handle(request->handle, &index)) {
       result->status = BX_NTVDM_EXTMEM_REJECTED_HANDLE;

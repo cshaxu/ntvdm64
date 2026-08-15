@@ -20,8 +20,10 @@ $recipe = Get-Content -LiteralPath $recipePath -Raw
 foreach ($pattern in @(
         'BX_NTVDM_EXTMEM_QUERY', 'BX_NTVDM_EXTMEM_ALLOCATE',
         'BX_NTVDM_EXTMEM_FREE', 'BX_NTVDM_EXTMEM_REALLOCATE',
-        'BX_NTVDM_EXTMEM_MOVE', 'BX_NTVDM_EXTMEM_QUERY_FREE', 'uint64_t source_offset;',
+        'BX_NTVDM_EXTMEM_MOVE', 'BX_NTVDM_EXTMEM_QUERY_FREE',
+        'BX_NTVDM_EXTMEM_MOVE_PHYSICAL', 'uint64_t source_offset;',
         'uint64_t destination_offset;', 'uint64_t byte_count;',
+        'uint64_t source_address;', 'uint64_t destination_address;',
         'uint32_t free_kib;', 'uint32_t largest_free_kib;', 'uint64_t physical_address;')) {
     if ($header -notmatch $pattern) {
         throw "Missing fixed-width C2 ABI invariant: $pattern"
