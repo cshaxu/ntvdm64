@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T219 S2.** Its governing brief is the active
+> **Current effective packet: M0 T220 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T219 S2 -- T200 actual bound-route reconciliation audit.**
+**Active: M0 T220 S1 -- DEM process-resource ownership recovery map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -24,60 +24,35 @@
 > are recorded in [history](history/m0-t217-closure-20260815.md).
 > **T218 closed:** its guest DOS `$Exec` structural prerequisite map is
 > recorded in [history](history/m0-t218-closure-20260815.md).
+> **T219 closed:** its T200 current bound-route reconciliation is recorded in
+> [history](history/m0-t219-closure-20260815.md).
 
 ## Active Packet
 
-> **T scope:** T219 first reconciles the full T200 BOP inventory against the
-> source routes actually bound by today's composition.  It then records a
-> corrected admission basis for the next whole owner package, including any
-> later correction to T218's `$Exec` prerequisite map.  It does not reopen a
-> closed numeric task or promote a trace hit into a leaf BOP task.
+> **T scope:** T220 is the source-first successor to T218's guest DOS `$Exec`
+> prerequisite map.  It recovers the complete DEM process-resource ownership
+> contract—entry, PDB/JFT/SFT resource lookup, termination and failure order—
+> before admitting any minimal bridge, `50:3C` cleanup, COMMAND parent return
+> or native trace.  It preserves guest DOS ownership and never promotes a
+> trace hit into a leaf BOP task.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T219 S2, Ordinary Mode. |
-| Admission And Approval | The owner directed: “use every T200 line as a checklist, verify the actual bound route in current source, flag later shims, stale fallbacks and paths that belong in the shared profile ABI; update the conclusion, then continue T218.” This is renewed approval after S2's guest-PSP-inspection stop condition. |
-| Objective | Account for all 203 T200 endpoints with their current ingress-to-bound-provider route, T200 relation, later shim/fallback status, and shared-profile migration disposition; correct the `$Exec` continuation basis without reopening closed T218. |
-| Non-goals | No BOP behavior implementation, guest `$Exec` recreation, guest PSP inspection, DOS/BIOS patch, host-mutation behavior expansion, Bochs/mantle change, COMMAND return implementation, target-execution claim, or native trace. |
-| Reference Baseline | T200 S31 ledger and exported inventory; T215 current-source reconciliation; T217 declared-image/COMMAND evidence; T218 `$Exec` map; T219 S1 lifecycle map; current bx-vdm ingress, compositions, facades, sessions, providers and shared profile ABI source. |
-| Files And ABI Surface | `docs/STATUS.md`, `docs/etc/research/` reconciliation evidence, and a read-only `tools/governance/` inventory/reconciliation helper if necessary; no runtime ABI or behavior change. |
+| Identifier Mode | M0 T220 S1, Ordinary Mode. |
+| Admission And Approval | The owner directed that the completed T200 audit update the conclusion and continue T218's `$Exec` work.  T219 establishes the needed correction: the successor begins with the original DEM PDB/JFT/SFT owner contract, not an inferred `50:36` token. |
+| Objective | Produce one complete original-source map for DEM process-resource ownership: `demEntryDosApp`, `demTerminatePDB`, `demfile.c` PDB/JFT/SFT lookup, `50:3C`, direct-host file/search/FCB resources, and all normal/abort/TSR/error ordering.  Classify the earliest usable source-recovery rung and the exact shared-profile owner. |
+| Non-goals | No runtime BOP implementation, guest-PDB inspection bridge, guest `$Exec` recreation, DOS/BIOS patch, host-mutation behavior expansion, Bochs/mantle change, COMMAND parent return implementation, target-execution claim, or native trace. |
+| Reference Baseline | T218 `$Exec` map; T219 S1 lifecycle map and T219 S2 reconciliation; original OpenNT `demfile.c`, `demsrch.c`, `demmisc.c`, `msctrlc.asm`, dispatcher and relevant headers; current DEM whole provider/file session/search partitions and shared profile ABI. |
+| Files And ABI Surface | `docs/STATUS.md` and `docs/etc/research/` source/ABI/failure evidence only; no runtime ABI or behavior change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Regenerate/validate the 203-row canonical identity set; every row has a current source route or an explicit unbound state, T200 comparison, shim/fallback disposition and profile-ABI disposition; source references resolve; documentation governance and diff checks pass. |
-| Expected Markers | No anonymous “generic ingress” is mistaken for a bound provider; all post-T200 shims and stale fallbacks are named; shared profile ownership is distinguished from package-local policy; corrected `$Exec` prerequisites name their owner-package boundary. |
-| Asset Needs | Existing OpenNT source, T200 ledger/exporter, current bx-vdm source and profile declarations, and retained evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Publish the complete row ledger, grouped source-route findings, source-first/rung disposition where a shim changed the route, limitations, and the exact successor-package recommendation. |
-| Stop Conditions | Any need to change runtime behavior, add a provider, inspect guest PSP memory, run a native trace, expand a profile, modify Bochs/mantle, or import source pauses S2 for re-admission. |
-| Exit Criteria | All 203 endpoints are reconciled; T200's stale conclusions and post-T200 changes are explicit; T218's `$Exec` continuation is affirmed, narrowed or replaced; and the next whole owner package is recommended without implementation. |
+| Verification | Map every original owner call and state field to a current resource holder or an explicit gap; prove whether direct source composition is possible; record the exact guest-memory access required before proposing any bridge; cover normal child return, abnormal exit, TSR, VDD/no-VDD, search/file/FCB state, and all four profiles; governance and diff checks pass. |
+| Expected Markers | One authoritative owner/order/failure map; no inference that `DX` at `50:36` identifies all resource ownership; no raw guest pointer ABI; and a source-first decision that names why any original translation unit cannot compose. |
+| Asset Needs | Existing OpenNT source and current bx-vdm DEM/profile source; no new image, firmware, media or external source import. |
+| Reporting Requirements | Record source paths, layouts, ordering, failure paths, composability result, profile owner, proposed minimum ABI only if justified, and all limitations. |
+| Stop Conditions | Any need to change runtime behavior, add a provider, inspect guest PSP memory beyond static source analysis, run a native trace, expand a profile, modify Bochs/mantle, or import source pauses S1 for re-admission. |
+| Exit Criteria | The original DEM ownership contract, its modern composition blockers, and the unique next source-first seam are evidenced; an implementation S may then be admitted separately. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Every DEM, COMMAND, XMS, DPMI, Redirector, debugger, WOW and top-level/machine endpoint; ingress/registry versus executable composition; package facade/session/provider branches; profile holder duplication; T200-era unavailable fallbacks; and all shims added through T219 S1. |
-
-> **T219 S2 re-admission:** the former PDB-owned resource-session implementation
-> brief is paused at its declared guest-PSP-inspection stop condition.  The
-> owner instead requires a full reconciliation of the 203-row T200 ledger
-> against current source binding before any `$Exec` continuation or new BOP
-> behavior.  T218 remains closed as required by task-number governance; this
-> audit records whether its `$Exec` prerequisite conclusion remains usable and
-> selects a new, later numeric package if continuation is warranted.
-
-> **T219 S2 P1 closure:** the regenerated 203-entry T200 identity set has one
-> current source-route record per selector/service/handler.  T200's
-> boot/fixture-only DEM and endpoint-local COMMAND descriptions are stale;
-> the current executable composition has later direct-host DEM and COMMAND
-> session seams, while DPMI, redirector and debugger remain intentional
-> unavailable/deferred families.  T218's guest-DOS ownership remains valid,
-> but its proposed copied-PDB resource seam is superseded by the original
-> guest PDB/JFT/SFT ownership requirement.  See the complete
-> [reconciliation](etc/research/t219-s2-t200-bound-route-reconciliation-001.md)
-> and its [203-row ledger](etc/research/t219-s2-t200-bound-route-reconciliation-001.json).
-
-> **T219 S1 P1 closure:** the old finite-profile `50:3C` provider releases
-> only boot-namespace search slots and cannot clean direct-host handles because
-> their current tokens lack copied PDB ownership. `50:36` remains a no-VDD
-> lifecycle notification, not a loader. T219 S2's reconciliation corrects the
-> earlier proposed ABI: original `demfile.c` obtains ownership through guest
-> PDB/JFT/SFT state, so no new resource ABI may be implemented until the
-> complete owner contract is admitted. See the [lifecycle map](etc/research/t219-s1-dem-child-pdb-lifecycle-map-001.md)
-> and [reconciliation](etc/research/t219-s2-t200-bound-route-reconciliation-001.md).
+| Similar-Issue Sweep | First/subsequent child entry; parent-owned handles crossing child entry; normal/abort/TSR exit; VDD and no-VDD branches; `50:34..3C`; file, FCB, search, pending and DTA state; current session teardown; COMMAND `54:0B`; and direct/readonly/overlay/virtual profile ownership. |
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
