@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T201 S2.** Its governing brief is the active
+> **Current effective packet: M0 T201 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T201 S2 -- mutation-profile overlay lifecycle.**
+**Active: M0 T201 S3 -- mutation-profile policy resolution regression.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T201 S2, Ordinary Mode. |
-| Admission And Approval | S1 closed the shared fixed-width profile ABI and owner enforcement under the owner-approved T201 boundary. S2 implements only session-scoped overlay lifecycle on that ABI. |
-| Objective | Define and source-build opaque per-VDM overlay lifecycle state with initialize, record, lookup and teardown operations. Teardown must erase every overlay record and prove no host state is involved. |
-| Non-goals | No DEM/COMMAND/Redirector BOP provider recovery, no host I/O, no real filesystem/registry/device mutation, no direct or readonly backend implementation, no virtual-volume materialization, no trace-led patch, and no Bochs semantic change. |
-| Reference Baseline | [T201 S1 ABI evidence](etc/research/t201-s1-mutation-profile-abi-001.md), [Unified mutation-profile proposal](etc/research/proposal-unified-host-mutation-capability-profiles-001.md), and the T200 S31 closure ledger. |
-| Files And ABI Surface | New versioned bx-vdm overlay-session records and focused tests. Values are opaque copied bytes keyed by registered owner/class; no host handle, host pointer, callback, raw Bochs type, selector, service number or guest address crosses the ABI. |
+| Identifier Mode | M0 T201 S3, Ordinary Mode. |
+| Admission And Approval | S1 closed common selection/owner enforcement and S2 closed overlay lifecycle. S3 completes the profile foundation's generic policy resolution and all-mode regression before later profile backend work. |
+| Objective | Define and source-build one generic owner/class policy-resolution result: direct host operation permitted, readonly mutation rejected, overlay session operation required, or virtual-volume operation required. It must derive solely from the shared profile and owner registration. |
+| Non-goals | No DEM/COMMAND/Redirector BOP provider recovery, no host I/O, no real filesystem/registry/device mutation, no profile-specific filesystem logic, no virtual-volume materialization, no trace-led patch, and no Bochs semantic change. |
+| Reference Baseline | [T201 S1 ABI evidence](etc/research/t201-s1-mutation-profile-abi-001.md), [T201 S2 lifecycle evidence](etc/research/t201-s2-mutation-overlay-lifecycle-001.md), and the unified mutation-profile proposal. |
+| Files And ABI Surface | The shared profile ABI's typed policy-result enum/function and focused tests only; no host handle, host pointer, callback, raw Bochs type, selector, service number or guest address crosses the ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` focused fixture: registered overlay owner can record/lookup, direct/readonly/virtual modes reject overlay mutation, unauthorized owner/class is rejected, teardown removes every value, and no BOP-service-specific branch; documentation governance and diff checks. |
-| Expected Markers | One session-owned opaque overlay record, bounded capacity, explicit teardown, profile/owner authorization before every write, and positive/negative lifecycle tests. |
+| Verification | MSVC x64 `/MT` focused fixture: each of direct/readonly/overlay/virtual resolves to its unique generic action; unregistered owner/class and mode-mask mismatch are rejected; no BOP-service-specific branch; documentation governance and diff checks. |
+| Expected Markers | One typed policy result, no caller-supplied mode parameter, all four profile modes regressions, and rejection paths shared with overlay authorization. |
 | Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
-| Reporting Requirements | Record exact overlay key/value/teardown layout and rejected cases; distinguish session-only overlay mechanics from any host capability and do not claim any BOP family is recovered. |
-| Stop Conditions | Any raw host handle/pointer, selector/service-specific policy branch, provider implementation, host mutation, Bochs semantic intrusion, or reliance on unavailable historical host API pauses S2 for re-admission. |
-| Exit Criteria | Source-built lifecycle fixture passes; all records disappear at teardown; only registered overlay owners can write; S3 may implement direct/readonly policy adapters and profile regression. |
+| Reporting Requirements | Record exact policy result mapping and rejected cases; distinguish generic direct permission from an implemented direct host backend and do not claim any BOP family is recovered. |
+| Stop Conditions | Any raw host handle/pointer, selector/service-specific policy branch, provider implementation, host mutation, Bochs semantic intrusion, or reliance on unavailable historical host API pauses S3 for re-admission. |
+| Exit Criteria | Source-built policy fixture passes for all modes and negative owner/mask cases; T201 is ready for closure/review and only then may the next owner-package recovery task be admitted. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect current readonly namespace, boot/virtual volume, synthetic CWD and direct host namespace for existing session-local shadow state that must not become a second overlay owner. |
+| Similar-Issue Sweep | Inspect current readonly namespace, boot/virtual volume, synthetic CWD and direct host namespace for ad-hoc policy selection that must migrate to the generic result in a later admitted backend task. |
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
@@ -42,6 +42,10 @@
 > **T201 S1 closure:** source-built MSVC x64 `/MT` evidence proves the common
 > session mode and owner-enforcement ABI, not host behavior; see the
 > [ABI evidence](etc/research/t201-s1-mutation-profile-abi-001.md).
+
+> **T201 S2 closure:** source-built MSVC x64 `/MT` evidence proves a bounded,
+> session-owned overlay lifecycle with teardown, not an overlay backend; see
+> the [lifecycle evidence](etc/research/t201-s2-mutation-overlay-lifecycle-001.md).
 
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition
