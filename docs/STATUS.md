@@ -45,6 +45,13 @@
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
+> **T216 S1 P1 closure:** all five declared readonly namespace slots already
+> exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
+> provider; command and targets fall through to host open/search. Original
+> SYSINIT/DEM contracts select a single source-derived all-declared-image
+> provider seam, not a `50:3D` patch or Bochs change. See the [complete
+> map](etc/research/t216-s1-guest-executable-image-visibility-map-001.md).
+
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
 > and COMMAND composition descriptions, preserves deferred/unavailable family
