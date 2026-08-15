@@ -159,6 +159,12 @@
 > state and FCB wildcard namespace work to the remaining search/FCB partition;
 > it is not a BOP route or whole DEM closure.
 
+> **T202 S4 progress:** the existing session-owned `demsrch.c` search
+> transaction now admits a root-relative direct-host first-search backend and
+> remains source-built in the retained x64 closure. Dedicated direct-host
+> search regression and the guest DTA/SRCHBUF route remain required before
+> this can be treated as a completed partition.
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

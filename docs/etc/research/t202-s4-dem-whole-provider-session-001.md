@@ -100,3 +100,13 @@ read, close, local date/time and file-information results against its
 self-created file.  Create and write code are in the same source partition
 but still need their dedicated mutation-profile regressions.  This remains a
 provider-internal partition, not a guest-memory BOP route or full DEM claim.
+
+The next `demsrch.c` partition now enables the existing search transaction's
+direct-host first-search forms: it decodes the copied DOS request, enumerates
+only the query's admitted root-relative directory, then passes the copied
+entries to the established source-shaped search plan and session-owned
+continuation table.  No directory handle, pointer or ambient path is carried
+to the DTA/SRCHBUF.  `t202-s4-search-closure-r1` source-builds the retained
+x64 boot-namespace closure after this change.  Direct-host search behavior
+still needs a dedicated fixture before this is claimed as a completed search
+partition.
