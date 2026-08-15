@@ -397,15 +397,17 @@ int main(void)
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
         if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x01u,
                 &boundary, &cpu, oem_short, 0, &result) || cf_set(&result) ||
-            (result.cpu_delta.gpr16_write_mask & (1u << 1u)) == 0u) failed = 49;
+            (result.cpu_delta.gpr16_write_mask & (1u << 2u)) == 0u) failed = 49;
     }
     if (!failed) {
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
         cpu.ebx = 0u; /* demOpen: read, compatibility sharing */
         if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
                 &boundary, &cpu, oem_short, 0, &result) || cf_set(&result) ||
-            (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 5u))) !=
-                ((1u << 0u) | (1u << 5u))) failed = 50;
+            (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 1u) |
+                (1u << 2u) | (1u << 3u) | (1u << 5u))) !=
+                ((1u << 0u) | (1u << 1u) | (1u << 2u) | (1u << 3u) |
+                 (1u << 5u))) failed = 50;
         else {
             token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
                 result.cpu_delta.gpr16_values[5];
@@ -463,7 +465,8 @@ int main(void)
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.edx = (uint32_t)drive + 1u;
             if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x44u,
-                    &boundary, &cpu, check_path, 0, &result) || cf_set(&result)) failed = 59;
+                    &boundary, &cpu, check_path, 0, &result) || cf_set(&result) ||
+                (result.cpu_delta.gpr16_write_mask & (1u << 3u)) == 0u) failed = 59;
         }
         if (!failed) {
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);

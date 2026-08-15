@@ -239,6 +239,12 @@
 > whole-provider fixture. This is an FCB ABI correction only; it does not
 > expand host capability or alter the package-transition limits above.
 
+> **T202 S4 correction:** direct `demfile.c` ABI review likewise corrects
+> `01` attribute return (`CX`), local `12` size/pipe return (`BX` high, `CX`
+> low, `DX=0`) and `44` success (`DX=0`). r1 locks those source layouts in the
+> whole-provider fixture. This remains provider-internal and does not admit
+> partial pathname ingress ahead of the final package switch.
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

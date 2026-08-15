@@ -145,3 +145,8 @@ opaque token in `AX:BP`, time/date in `BX:CX`, and size in `DX:SI`; `2F`
 returns size in `AX:BX` and transferred bytes in `CX`; `30` returns date/time
 in `AX:DX`; and `31` returns attributes/time/date/size in `AX/CX/DX/BX:DI`.
 These are guest-register layout facts, not host ABI fields.
+
+The same rule applies to the `demfile.c` pathname group: `01` reports queried
+attributes in `CX`; local `12` reports size as `BX` high / `CX` low and clears
+`DX` as its non-pipe marker; and `44` clears `DX` on the admitted check-path
+success. The provider must never repurpose these guest slots for host state.

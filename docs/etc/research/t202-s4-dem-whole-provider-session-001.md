@@ -263,3 +263,10 @@ fixture asserts the corrected masks and `CX` transfer count alongside the
 existing real-host FCB I/O transaction. This correction affects only copied
 CPU-result layout; it neither broadens host capability nor changes the route
 admission rule.
+
+Revision r36 corrects the analogous `demfile.c` copied-register layouts:
+`demChMod` query returns attributes in `CX`; local `demOpen` returns file size
+as `BX` high / `CX` low and `DX=0`; and admitted `demCheckPath` clears `DX`.
+The r1 whole-provider fixture checks all three layouts. This is still
+provider-internal source-contract work; pathname ingress remains reserved for
+the final atomic package migration.

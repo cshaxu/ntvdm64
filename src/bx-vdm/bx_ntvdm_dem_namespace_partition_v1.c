@@ -145,7 +145,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
         if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
         else attributes &= 0x37u; /* historical DOS_ATTR_MASK projection */
         return finish(boundary, result, 0u, 0, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
                 (uint16_t)attributes);
     }
     if (service == 0x03u || service == 0x22u || service == 0x12u) {
@@ -182,12 +182,12 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             if (!finish(boundary, result, (uint16_t)(token >> 16), 1, 0) ||
                 !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
                     (uint16_t)token) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
+                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
                     (uint16_t)size.LowPart) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u,
+                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
                     (uint16_t)((uint32_t)size.LowPart >> 16))) return 0;
             if (service == 0x12u)
-                return bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u);
+                return bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
             return 1;
         }
     }
@@ -231,7 +231,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
         if (!bx_ntvdm_host_namespace_v1_directory_exists(provider->host_namespace,
                 drive, relative)) return fail(boundary, result, ERROR_PATH_NOT_FOUND);
         return finish(boundary, result, 0u, 0, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u);
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
     }
     return 0;
 }
