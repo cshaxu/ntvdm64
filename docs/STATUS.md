@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T204 S1.** Its governing brief is the active
+> **Current effective packet: M0 T204 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T204 S1 -- contained guest startup configuration map.**
+**Active: M0 T204 S3 -- configuration transform/provider source contract.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -15,31 +15,36 @@
 
 > **T scope:** T204 establishes the whole declared guest startup configuration
 > package before any startup BOP, guest artifact or machine expansion is
-> changed.  Its first S is source/ABI/failure mapping, not implementation.
+> changed.  S3 recovers the whole transform/provider source contract before
+> any guest-facing provider is changed.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T204 S1, Ordinary Mode. |
-| Admission And Approval | T203's source/runtime defer, the first Queue candidate, and the owner's standing authorization to choose the next owner-package work admit this startup-package source/ABI/failure map. Normal user-mode host integration remains allowed; changing the host installation remains forbidden. |
-| Objective | Produce the complete contained guest startup configuration owner/ABI/failure map from NTIO entry through configuration completion and every fatal/recoverable terminal, then define whole-package implementation order. `50:3D` is one evidence leaf, not the task boundary. |
-| Non-goals | No implementation of any BOP, guest artifact or machine feature; no trace-selected patch; no synthetic boot/config file; no host-system modification; no process exit-code transport; no raw CPU/Bochs pointer, guest pointer, handle, callback, VDM broker, GUI/VDD or Bochs semantic change. |
-| Reference Baseline | [T203 closure](history/m0-t203-closure-20260815.md), [T202 closure](history/m0-t202-closure-20260815.md), original `demExitVDM`, the source-built engine witness, and [T204 S1 brief](etc/operations/t204-s1-contained-guest-startup-configuration-map-001.md). |
-| Files And ABI Surface | Research/evidence records only. No production ABI, guest image, provider, CLI, bx-vdm, bx-mantle or bx-core source may change in S1. |
+| Identifier Mode | M0 T204 S3, Ordinary Mode. |
+| Admission And Approval | T204 S1's complete startup map, S2's [copied policy ABI](etc/research/t204-s2-startup-configuration-policy-abi-001.md), and the owner's standing whole-package authorization admit source/ABI/failure recovery of the configuration transformation/provider contract. |
+| Objective | Produce the complete original `cmdconf.c` / configuration-provider source, ABI, failure and lifetime map, then define one contained provider design that consumes S2 without changing the bound guest route. |
+| Non-goals | No BOP implementation, guest-memory write, provider activation, file/Registry/device operation, temporary-file creation, host-system modification, synthetic content change, CLI option, Bochs change, profile parser change, raw pointer/handle/callback ABI or native trace. |
+| Reference Baseline | T204 S1 startup map, T204 S2 policy ABI, original `cmdconf.c`, `nt_pif.c`, COMMAND source and current fixture-only boot namespace. |
+| Files And ABI Surface | Research/evidence record and Status only. No bx-vdm/bx-mantle/bx-core/CLI/OpenNT source or guest artifact may change in S3. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-map cardinality and owner review; reconciliation against current profile/composition routes; documentation governance and diff checks. |
-| Expected Markers | One complete startup configuration map; unique owner and remedy layer for every path; explicit source/fixture/platform/deferred classification; and proposed whole-package S ordering. |
-| Asset Needs | Existing repository and source-built fixture only; no external source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record all entry/continuation/failure paths, structure/input boundaries, present workaround action, unavailable API/dependency facts and explicit limitations. A trace hit may validate a row but cannot create a row or choose an implementation. |
-| Stop Conditions | Any proposal to patch `50:3D` alone, fabricate configuration input, add a BOP provider, modify a guest image, expand Bochs, import a new asset, or change host installation pauses S1 for re-admission. |
-| Exit Criteria | A reviewer can see that every startup configuration path is mapped to an original owner and current layer; each current workaround has one action; and the next S packages are complete component boundaries with no trace-derived endpoint tasks. |
+| Verification | Source/ABI/failure/lifetime cardinality review against original owner code, reconciliation against S1/S2 and present workarounds, documentation governance and diff checks. |
+| Expected Markers | One mapped disposition for source selection, expansion/filtering, environment merge, path publication, cleanup, diagnostics and all original failures; one provider-owned copied data/lifetime design; no unclassified current workaround. |
+| Asset Needs | Existing repository source only; no external source, firmware, guest media or host mutation. |
+| Reporting Requirements | Record exact original structures and ordering, host API availability/permission facts, non-invasive replacement boundary, provider state ownership, required later regressions and explicit omissions. |
+| Stop Conditions | Any code/provider activation, BOP patch, guest image or RAM change, temporary/host file action, CLI option, Bochs expansion or trace run pauses S3 for re-admission. |
+| Exit Criteria | A subsequent implementation S can recover one complete contained provider without inventing a per-BOP route, recreating system temporary files or using ambient host state. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Inspect NTIO/NTDOS/COMMAND startup handoffs; BOP `5E`, DEM `50:3D`, configuration/boot-input records, profile descriptors, guest-memory loading, terminal/engine seams, and current boot/readonly/virtual profile workarounds. |
 
-> **T204 S1 progress:** the declared-profile map identifies the current
+> **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one
 > synthetic contained-profile workaround, not historical OpenNT configuration
 > closure.  Original transformation, `5E` owner actions and the fatal `50:3D`
 > disposition are separately owned.  See the [startup configuration map](etc/research/t204-s1-contained-guest-startup-configuration-map-001.md).
+
+> **T204 S2 closure:** one fixed-width copied configuration-source policy now
+> takes its mode only through the common COMMAND session-context registration;
+> it performs no host or guest action.  See the [ABI evidence](etc/research/t204-s2-startup-configuration-policy-abi-001.md).
 
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
