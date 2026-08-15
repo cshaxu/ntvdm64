@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T212 S4.** Its governing brief is the active
+> **Current effective packet: M0 T212 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T212 S4 -- cooperative cancellation admission map.**
+**Active: M0 T212 S5 -- selector-blind mechanical cancellation controller.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -19,24 +19,25 @@
 > one-shot engine. S1 mapped current engine/CLI result, cancellation, budget,
 > audit and cleanup ownership; S2 closed the copied CLI-only policy and
 > result-classification boundary. S3 integrated that already-closed boundary
-> into the native CLI without changing engine behavior. S4 maps the one
-> possible cooperative-cancellation boundary before any engine change.
+> into the native CLI without changing engine behavior. S4 admitted the one
+> selector-blind cooperative-cancellation boundary; S5 implements its
+> mechanical mantle/engine portion only.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T212 S4, Ordinary Mode. |
-| Admission And Approval | T212 S3 source-built native CLI policy/result integration and confirms current composition rejection is reported, not hidden. It admits source/ABI/failure mapping only before any in-process cancellation mechanism. |
-| Objective | Determine whether a fixed-width CLI-to-engine cooperative cancellation contract can preserve mantle cleanup, selector blindness and engine terminal ownership; also classify wall-time/resource-limit feasibility. |
-| Non-goals | No engine/machine-stage/Bochs modification, no cancellation implementation, no normal-completion claim, no raw process handles, no BOP implementation, no trace-led work, and no durable audit I/O. |
-| Reference Baseline | T212 S1/S2/S3 records, current engine/machine-stage/CLI sources, retained child-runner cancellation path and current composition closure. |
-| Files And ABI Surface | Read-only source/ABI map under `docs/etc/research`; no production source modification. |
+| Identifier Mode | M0 T212 S5, Ordinary Mode. |
+| Admission And Approval | T212 S4 identifies one selector-blind atomic/timer candidate and rejects direct Bochs writes, raw handles and BOP cancellation. Owner approves implementation only of that mechanical boundary. |
+| Objective | Implement one mantle-private atomic cancellation controller and typed engine/machine-stage mapping that returns existing `HOST_CANCELLATION` after normal cleanup. |
+| Non-goals | No console handler/worker-thread CLI integration, no wall-time/resource limit, no normal-completion claim, no BOP implementation, no guest inspection, no raw handle/pointer/callback ABI, and no Bochs-core change. |
+| Reference Baseline | T212 S4 admission map; existing machine-stage watchdog callback, CPU loop stop latch and engine reset sequence. |
+| Files And ABI Surface | Registered mantle exception, `src/bx-mantle` lifecycle/machine-stage/engine sources, fixed typed reason/status records, focused mantle/engine fixture. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Complete owner/lifetime/failure map; explicit fixed-width candidate contract or a documented rejection; governance and diff checks. |
-| Expected Markers | Every cancellation/time/resource concern has an owner and available/deferred verdict; no raw handle or guest/selector semantics is proposed across the boundary. |
-| Asset Needs | Existing source and T212 evidence only; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record the safe observation point, cleanup/result order, host API availability, rejected alternatives and the next implementation/admission boundary. |
-| Stop Conditions | Any candidate needs a callback, raw handle, guest/selector inspection, or a Bochs product-shell/device feature pauses S4 for owner direction. |
-| Exit Criteria | The map either proves one bounded cooperative contract ready for implementation or records why it is not admissible; wall-time/resource limits receive explicit dispositions. |
+| Verification | Fresh MSVC x64 `/MT` focused fixture proves pre-entry and in-flight cancellation, reason rejection, watchdog/typed-stop distinction, cleanup and second-run reuse; governance and diff checks. |
+| Expected Markers | No cancellation ABI contains host handles/pointers/callbacks or selector data; only CPU-thread timer code writes the existing Bochs stop latch; engine reports `HOST_CANCELLATION` only after reset. |
+| Asset Needs | Existing minimal machine/stage fixture source and registered mantle exception; no firmware/media/device import or native trace. |
+| Reporting Requirements | Record intrusion registration, exact source ownership, state/lifetime ordering, build/run output and deferred CLI orchestration. |
+| Stop Conditions | Any need for a Bochs-core edit, direct CLI/adapter write to the stop latch, raw handle/pointer/callback, guest/selector awareness or additional device pauses S5 for owner direction. |
+| Exit Criteria | One source-built mechanical controller demonstrates cancellation as a typed post-cleanup engine terminal with no change to BOP/guest/Bochs-core behavior. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, retained child cancellation, finite fixture timers, terminal observations, composition reset and T203/T206/T207 evidence. |
 
