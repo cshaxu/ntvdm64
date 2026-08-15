@@ -1036,7 +1036,7 @@ int bx_ntvdm_adapter_runtime_v4_complete_guest_gather_read(
         return 1;
     }
     if (bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(boundary, cpu_before,
-            action, bytes, byte_count, &bx_ntvdm_adapter_runtime.cmd_comspec_bootstrap,
+            action, bytes, byte_count, 0, &bx_ntvdm_adapter_runtime.cmd_comspec_bootstrap,
             result)) {
         return bx_ntvdm_host_session_v1_complete_guest_gather_read(
             &bx_ntvdm_adapter_runtime.session, boundary, cpu_before, result);

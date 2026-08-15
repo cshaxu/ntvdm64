@@ -39,6 +39,70 @@ typedef struct bx_ntvdm_composition_runtime_v1 {
 
 static bx_ntvdm_composition_runtime_v1 runtime;
 
+static int command_environment_name_equal(const char *value, uint32_t bytes,
+    const char *expected)
+{
+    uint32_t index;
+    for (index = 0u; expected[index] != '\0'; ++index) {
+        char character;
+        if (index >= bytes) return 0;
+        character = value[index];
+        if (character >= 'a' && character <= 'z')
+            character = (char)(character - 'a' + 'A');
+        if (character != expected[index]) return 0;
+    }
+    return index == bytes;
+}
+
+static int capture_command_environment(
+    bx_ntvdm_command_host_context_v1 *context)
+{
+    wchar_t *wide, *entry;
+    uint8_t environment[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES];
+    uint32_t used = 0u;
+    int has_prompt = 0;
+    int result = 0;
+    if (context == 0) return 0;
+    wide = GetEnvironmentStringsW();
+    if (wide == 0) return 0;
+    for (entry = wide; *entry != L'\0'; entry += wcslen(entry) + 1u) {
+        char converted[1024];
+        int bytes;
+        uint32_t index, name_bytes = 0u;
+        if (entry[0] == L'=') continue;
+        bytes = WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS, entry, -1,
+            converted, (int)sizeof(converted), 0, 0);
+        if (bytes < 3 || bytes > (int)sizeof(converted)) goto done;
+        for (index = 0u; index < (uint32_t)bytes - 1u; ++index) {
+            if (converted[index] == '=') { name_bytes = index; break; }
+        }
+        if (name_bytes == 0u || command_environment_name_equal(converted,
+                name_bytes, "COMSPEC") || command_environment_name_equal(converted,
+                name_bytes, "WINDIR")) continue;
+        for (index = 0u; index < name_bytes; ++index)
+            if (converted[index] >= 'a' && converted[index] <= 'z')
+                converted[index] = (char)(converted[index] - 'a' + 'A');
+        if (command_environment_name_equal(converted, name_bytes, "PROMPT"))
+            has_prompt = 1;
+        if (used > sizeof(environment) - (uint32_t)bytes - 1u) goto done;
+        memcpy(environment + used, converted, (uint32_t)bytes);
+        used += (uint32_t)bytes;
+    }
+    if (!has_prompt) {
+        static const uint8_t prompt[] = "PROMPT=$P$G";
+        if (used > sizeof(environment) - sizeof(prompt) - 1u) goto done;
+        memcpy(environment + used, prompt, sizeof(prompt));
+        used += (uint32_t)sizeof(prompt);
+    }
+    if (used >= sizeof(environment)) goto done;
+    environment[used++] = 0u;
+    result = bx_ntvdm_command_host_context_v1_set_environment(context,
+        environment, used);
+done:
+    FreeEnvironmentStringsW(wide);
+    return result;
+}
+
 static int capture_command_host_context(
     bx_ntvdm_command_host_context_v1 *context, uint32_t selected_drive)
 {
@@ -56,14 +120,15 @@ static int capture_command_host_context(
           (uint32_t)(current[0] - L'a') == selected_drive))) {
         bytes = WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS, current,
             -1, oem, (int)sizeof(oem), 0, 0);
-        if (bytes >= 4 && bytes <= (int)sizeof(oem))
-            return bx_ntvdm_command_host_context_v1_initialize(context,
-                selected_drive, (const uint8_t *)oem, (uint32_t)bytes - 1u);
+        if (bytes >= 4 && bytes <= (int)sizeof(oem) &&
+            bx_ntvdm_command_host_context_v1_initialize(context,
+                selected_drive, (const uint8_t *)oem, (uint32_t)bytes - 1u))
+            return capture_command_environment(context);
     }
     root[0] = (uint8_t)('A' + selected_drive);
     root[1] = ':'; root[2] = '\\'; root[3] = '\0';
     return bx_ntvdm_command_host_context_v1_initialize(context, selected_drive,
-        root, 3u);
+        root, 3u) && capture_command_environment(context);
 }
 
 void bx_ntvdm_composition_runtime_v1_reset(void)

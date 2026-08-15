@@ -2,6 +2,43 @@
 
 #include <string.h>
 
+static int equal_ci(const uint8_t *value, uint32_t bytes, const char *name)
+{
+    uint32_t index;
+    for (index = 0u; name[index] != '\0'; ++index) {
+        uint8_t byte;
+        if (index >= bytes) return 0;
+        byte = value[index];
+        if (byte >= 'a' && byte <= 'z') byte = (uint8_t)(byte - 'a' + 'A');
+        if (byte != (uint8_t)name[index]) return 0;
+    }
+    return index == bytes;
+}
+
+static int environment_valid(const uint8_t *environment, uint32_t bytes)
+{
+    uint32_t offset = 0u;
+    if (bytes == 0u) return 1;
+    if (environment == 0 || bytes < 2u ||
+        bytes > BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES ||
+        environment[bytes - 1u] != 0u || environment[bytes - 2u] != 0u)
+        return 0;
+    while (offset < bytes - 1u) {
+        uint32_t start = offset;
+        uint32_t equals = UINT32_MAX;
+        while (offset < bytes && environment[offset] != 0u) {
+            if (environment[offset] == '=' && equals == UINT32_MAX) equals = offset;
+            ++offset;
+        }
+        if (offset == start) return offset == bytes - 1u;
+        if (environment[start] == '=' || equals == UINT32_MAX || equals == start ||
+            equal_ci(environment + start, equals - start, "COMSPEC") ||
+            equal_ci(environment + start, equals - start, "WINDIR")) return 0;
+        ++offset;
+    }
+    return offset == bytes - 1u;
+}
+
 int bx_ntvdm_command_host_context_v1_valid(
     const bx_ntvdm_command_host_context_v1 *context)
 {
@@ -11,10 +48,10 @@ int bx_ntvdm_command_host_context_v1_valid(
         context->struct_bytes == sizeof(*context) &&
         context->selected_drive < 26u && context->directory_bytes >= 4u &&
         context->directory_bytes <= BX_NTVDM_COMMAND_HOST_CONTEXT_V1_DIRECTORY_BYTES &&
-        context->reserved0 == 0u &&
         context->selected_directory[0] == (uint8_t)('A' + context->selected_drive) &&
         context->selected_directory[1] == ':' && context->selected_directory[2] == '\\' &&
-        context->selected_directory[context->directory_bytes - 1u] == '\0';
+        context->selected_directory[context->directory_bytes - 1u] == '\0' &&
+        environment_valid(context->environment, context->environment_bytes);
 }
 
 int bx_ntvdm_command_host_context_v1_initialize(
@@ -32,5 +69,18 @@ int bx_ntvdm_command_host_context_v1_initialize(
     context->directory_bytes = directory_bytes + 1u;
     memcpy(context->selected_directory, directory, directory_bytes);
     context->selected_directory[directory_bytes] = '\0';
+    return bx_ntvdm_command_host_context_v1_valid(context);
+}
+
+int bx_ntvdm_command_host_context_v1_set_environment(
+    bx_ntvdm_command_host_context_v1 *context, const uint8_t *environment,
+    uint32_t environment_bytes)
+{
+    if (!bx_ntvdm_command_host_context_v1_valid(context) ||
+        !environment_valid(environment, environment_bytes)) return 0;
+    memset(context->environment, 0, sizeof(context->environment));
+    if (environment_bytes != 0u)
+        memcpy(context->environment, environment, environment_bytes);
+    context->environment_bytes = environment_bytes;
     return bx_ntvdm_command_host_context_v1_valid(context);
 }

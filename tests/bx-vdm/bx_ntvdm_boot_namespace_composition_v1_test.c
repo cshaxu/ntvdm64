@@ -328,6 +328,8 @@ int main(void)
     bx_ntvdm_host_namespace_v1 host_namespace;
     bx_ntvdm_mutation_profile_v1 direct_profile;
     bx_ntvdm_command_host_context_v1 command_context;
+    static const uint8_t command_environment[] =
+        "PATH=C:\\DOS\0PROMPT=$P$G\0";
     uint8_t drive_types[26] = { 0 };
     byob_launch_plan_v2 launch_plan = { 2u, 1u,
         { 1u, BYOB_LAUNCH_TARGET_KIND_V1_COM, 0u, { 0 } } };
@@ -362,6 +364,8 @@ int main(void)
             &composition, &direct_profile) ||
         !bx_ntvdm_command_host_context_v1_initialize(&command_context, 2u,
             (const uint8_t *)"C:\\NTDOS64", 10u) ||
+        !bx_ntvdm_command_host_context_v1_set_environment(&command_context,
+            command_environment, (uint32_t)sizeof(command_environment)) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
             &composition, &command_context) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
@@ -591,14 +595,16 @@ int main(void)
     event.es = 0x200u; event.ebx = 1u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
-        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 2u ||
+        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 3u ||
         composition.command.bootstrap.stage !=
             BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY) return 24;
-    event.ebx = 2u;
+    event.ebx = 3u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 0u ||
         memcmp(ram + 0x2000, "COMSPEC=C:\\COMMAND.COM", 23u) != 0 ||
+        memcmp(ram + 0x2000 + 23u, command_environment,
+            sizeof(command_environment)) != 0 ||
         composition.command.bootstrap.stage !=
             BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED) return 25;
     event_initialize(&event, 0x54, 0x02);
@@ -650,7 +656,7 @@ int main(void)
        registered lifecycle below still proves its normal first slot. */
     event_initialize(&event, 0x54, 0x01);
     event.ds = 0x100u; event.edx = 0x80u;
-    ram[0x1080] = 0u; ram[0x1081] = 2u; ram[0x1082] = 23u;
+    ram[0x1080] = 0u; ram[0x1081] = 2u; ram[0x1082] = 48u;
     ram[0x1088] = 0x30u; ram[0x108a] = 0x40u; ram[0x108c] = 128u;
     ram[0x109c] = 0x50u; ram[0x109e] = 0x60u; ram[0x10a0] = 17u;
     ram[0x10a1] = 1u;
@@ -675,7 +681,7 @@ int main(void)
        one immutable launch slot. */
     event_initialize(&event, 0x54, 0x01);
     event.ds = 0x100u; event.edx = 0x80u;
-    ram[0x1080] = 0u; ram[0x1081] = 2u; ram[0x1082] = 23u;
+    ram[0x1080] = 0u; ram[0x1081] = 2u; ram[0x1082] = 48u;
     ram[0x1088] = 0x30u; ram[0x108a] = 0x40u; ram[0x108c] = 128u;
     ram[0x109c] = 0x50u; ram[0x109e] = 0x60u; ram[0x10a0] = 17u;
     ram[0x10a1] = 1u;

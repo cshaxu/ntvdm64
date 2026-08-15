@@ -144,6 +144,14 @@
 > not complete COMMAND environment/lifecycle closure or a native trace. See
 > the [host-context evidence](etc/research/t202-s6-command-host-context-001.md).
 
+> **T202 S6 progress:** COMMAND's copied host context now contains a bounded,
+> double-NUL OEM initial-environment snapshot. `54:02`, `54:0F`, and `54:01`
+> consume one COMSPEC/environment/CMDINFO contract with source-shaped
+> filtering, prompt default and paragraph retry; no BOP reads ambient process
+> environment. The MSVC x64 `/MT` bound-package regression and runtime-source
+> compilation pass. This advances only the bootstrap/context slice, not full
+> COMMAND or native-guest closure; see the [environment evidence](etc/research/t202-s6-command-environment-snapshot-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

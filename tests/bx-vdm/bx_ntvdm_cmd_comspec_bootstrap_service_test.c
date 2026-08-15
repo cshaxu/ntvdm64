@@ -29,10 +29,10 @@ int main(void)
        action.range_count!=1u||action.ranges[0].address!=0x1020u||
        action.total_bytes!=BX_NTVDM_CMD_COMSPEC_TEXT_MAX_BYTES)return 1;
     memset(path,'A',sizeof(path));
-    if(bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(&e,&c,&action,path,sizeof(path),&state,&result)||
+    if(bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(&e,&c,&action,path,sizeof(path),0,&state,&result)||
        state.stage!=BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_WAIT_COMSPEC)return 6;
     memcpy(path, "C:\\ALT.COM", sizeof("C:\\ALT.COM"));
-    if(!bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(&e,&c,&action,path,sizeof(path),&state,&result)||
+    if(!bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(&e,&c,&action,path,sizeof(path),0,&state,&result)||
        result.resume_rip!=0x204u||result.cpu_delta.gpr16_values[0]!=1u||
        state.stage!=BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY||
        memcmp(state.environment,"COMSPEC=C:\\ALT.COM",19u))return 2;
