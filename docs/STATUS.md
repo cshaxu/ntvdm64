@@ -168,6 +168,12 @@
 > single DEM provider lifecycle under x64 `/MT`. This is ownership closure for
 > the search state, not ingress routing or full DEM closure.
 
+> **T202 S4 progress:** r27 adds one provider-owned `demsrch.c` partition for
+> all four `50:09/0A/0B/0C` pathname/FCB first/next forms. Its dedicated r3
+> x64 `/MT` regression covers copied DTA/SRCHBUF gathering, direct admitted-host
+> enumeration, and continuation results; BOP ingress and native trace remain
+> deliberately unconnected.
+
 > **T202 S4 progress:** the existing session-owned `demsrch.c` search
 > transaction now admits a root-relative direct-host first-search backend and
 > remains source-built in the retained x64 closure. Dedicated direct-host

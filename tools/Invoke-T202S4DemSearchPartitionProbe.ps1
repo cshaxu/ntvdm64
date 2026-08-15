@@ -10,7 +10,7 @@ if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (-not (Test-Path -LiteralPath $vs -PathType Leaf)) { throw "Required MSVC environment entry point missing: $vs" }
 New-Item -ItemType Directory -Path $build | Out-Null
-$exe = Join-Path $build 't202-s4-dem-whole-provider.exe'
+$exe = Join-Path $build 't202-s4-dem-search-partition.exe'
 $names = @(
     'bx_ntvdm_mutation_profile_v1.c', 'bx_ntvdm_mutation_overlay_v1.c',
     'bx_ntvdm_dem_profile_consumer_v1.c', 'bx_ntvdm_host_drive_policy.c',
@@ -18,11 +18,10 @@ $names = @(
     'bx_ntvdm_cpu_delta_abi.c', 'bx_ntvdm_cpu_result_v2.c',
     'bx_ntvdm_cpu_state_abi.c', 'bx_ntvdm_exception_abi.c',
     'bx_ntvdm_instruction_window_abi.c', 'bx_ntvdm_guest_read_action_v1.c',
-    'bx_ntvdm_guest_gather_read_action_v1.c', 'bx_ntvdm_guest_range.c',
-    'bx_ntvdm_dem_path_v1.c', 'bx_ntvdm_dem_file_session_v1.c',
-    'bx_ntvdm_dem_local_file_backend_v1.c', 'bx_ntvdm_dem_whole_provider_v1.c',
-    'bx_ntvdm_dem_handle_partition_v1.c', 'bx_ntvdm_dem_namespace_partition_v1.c',
-    'bx_ntvdm_dem_fcb_handle_partition_v1.c', 'bx_ntvdm_dem_search_partition_v1.c',
+    'bx_ntvdm_guest_gather_read_action_v1.c',
+    'bx_ntvdm_guest_range.c', 'bx_ntvdm_dem_path_v1.c',
+    'bx_ntvdm_dem_file_session_v1.c', 'bx_ntvdm_dem_local_file_backend_v1.c',
+    'bx_ntvdm_dem_whole_provider_v1.c', 'bx_ntvdm_dem_search_partition_v1.c',
     'bx_ntvdm_dem_dta_service.c', 'bx_ntvdm_dem_path_search_service_v1.c',
     'bx_ntvdm_dem_fcb_search_service_v1.c', 'bx_ntvdm_profile_search_snapshot_v1.c',
     'bx_ntvdm_guest_write_abi.c',
@@ -32,14 +31,14 @@ $names = @(
     'bx_ntvdm_search_transaction_v1.c'
 )
 $sources = $names | ForEach-Object { Join-Path $root ('src\bx-vdm\' + $_) }
-$sources += Join-Path $root 'tests\bx-vdm\bx_ntvdm_dem_whole_provider_v1_test.c'
+$sources += Join-Path $root 'tests\bx-vdm\bx_ntvdm_dem_search_partition_v1_test.c'
 $compile = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' +
     (Join-Path $root 'src\bx-vdm') + '" /I "' + (Join-Path $root 'src\cli') +
     '" /Fe:"' + $exe + '" ' + ($sources -join ' ') + ' /link ntdll.lib bcrypt.lib'
 & cmd.exe /d /s /c $compile 2>&1 | Tee-Object -FilePath (Join-Path $build 'compile.log')
-if ($LASTEXITCODE -ne 0) { throw "T202 S4 DEM whole-provider compilation failed: $LASTEXITCODE" }
+if ($LASTEXITCODE -ne 0) { throw "T202 S4 DEM search-partition compilation failed: $LASTEXITCODE" }
 & $exe 2>&1 | Tee-Object -FilePath (Join-Path $build 'run.log')
 $runExit = $LASTEXITCODE
-[ordered]@{ schema='ntdos64.t202.s4.dem-whole-provider.v1'; architecture='x64'; runtimeLibrary='/MT'; hostIo=$true; guestExecution=$false; runExitCode=$runExit; passed=($runExit -eq 0) } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 't202-s4-dem-whole-provider.json') -Encoding utf8
-if ($runExit -ne 0) { throw "T202 S4 DEM whole-provider probe failed: $runExit" }
-Write-Host "T202 S4 DEM whole-provider probe passed: $build"
+[ordered]@{ schema='ntdos64.t202.s4.dem-search-partition.v1'; architecture='x64'; runtimeLibrary='/MT'; hostIo=$true; guestExecution=$false; runExitCode=$runExit; passed=($runExit -eq 0) } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 't202-s4-dem-search-partition.json') -Encoding utf8
+if ($runExit -ne 0) { throw "T202 S4 DEM search-partition probe failed: $runExit" }
+Write-Host "T202 S4 DEM search-partition probe passed: $build"

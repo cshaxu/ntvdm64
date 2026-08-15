@@ -124,3 +124,22 @@ to the DTA/SRCHBUF.  `t202-s4-search-closure-r1` source-builds the retained
 x64 boot-namespace closure after this change.  Direct-host search behavior
 still needs a dedicated fixture before this is claimed as a completed search
 partition.
+
+Revision r27 establishes that dedicated `demsrch.c` partition without moving
+any selector recognition into Bochs or switching an ingress route.
+`bx_ntvdm_dem_search_partition_v1` owns the four related service forms as one
+unit: pathname first/next (`50:09/0B`) and FCB first/next (`50:0A/0C`).  It
+uses the original preparation layouts to form a checked gather, binds that
+gather to the whole provider's copied continuation, and only then invokes the
+provider-owned direct-host search transaction.  The DTA registration is copied
+adapter state; it is neither a host pointer nor an ambient guest lookup.
+
+`t202-s4-dem-search-partition-r3` source-builds with MSVC x64 `/MT` and
+creates two 8.3 files in its own temporary admitted directory.  It exercises
+pathname first/next and FCB first/next through the single partition, including
+the copied continuation token placement between each pair.  The retained
+whole-provider r27 closure compiles that partition and its source dependencies
+with the other DEM partitions.  Neither fixture performs BOP ingress routing,
+live Bochs memory access, or a native trace; those are separate package-level
+steps after the remaining partition regressions and atomic legacy-route
+migration.
