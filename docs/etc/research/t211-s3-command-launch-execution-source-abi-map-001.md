@@ -61,3 +61,13 @@ The fresh whole bx-vdm composition fixture at
 `artifacts/build/t211-s3-launch-provider-r1` compiles, links and runs with
 MSVC x64 `/MT` after the migration.  This proves ownership migration only;
 it does not claim the four-member source/failure matrix is closed.
+
+## P3 component regression
+
+The source-built MSVC x64 `/MT` fixture at
+`artifacts/build/t211-s3-launch-provider-r2` verifies all four memberships,
+the `54:06` non-direct CF failure with zero token halves, `54:07` declared
+DOS-domain branch, and the `54:08/0A` copied `ERROR_NOT_SUPPORTED` result.
+The full composition fixture at
+`artifacts/build/t211-s3-launch-provider-r3` also passes after the COMMAND
+plane changes classify the four members as `LAUNCH_EXECUTION`.

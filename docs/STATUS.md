@@ -110,6 +110,12 @@
 > composition remains source-built and passing under MSVC x64 `/MT`; member
 > outcome reconciliation and family regression remain open.
 
+> **T211 S3 P3 progress:** the new source-built component fixture and whole
+> composition fixture pass under x64 `/MT`. They cover all four memberships,
+> non-direct `54:06` no-token failure, `54:07` DOS-domain result and
+> `54:08/0A` unsupported form. Direct terminal-child failure/lifecycle and
+> final provider routing cleanup remain open.
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was

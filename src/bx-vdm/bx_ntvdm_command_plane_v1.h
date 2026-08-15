@@ -17,7 +17,8 @@ typedef enum bx_ntvdm_command_component_v1 {
     BX_NTVDM_COMMAND_COMPONENT_ENVIRONMENT = 6u,
     BX_NTVDM_COMMAND_COMPONENT_SESSION = 7u,
     BX_NTVDM_COMMAND_COMPONENT_ORIGINAL_NOOP = 8u,
-    BX_NTVDM_COMMAND_COMPONENT_BOOTSTRAP = 9u
+    BX_NTVDM_COMMAND_COMPONENT_BOOTSTRAP = 9u,
+    BX_NTVDM_COMMAND_COMPONENT_LAUNCH_EXECUTION = 10u
 } bx_ntvdm_command_component_v1;
 
 typedef enum bx_ntvdm_command_plane_disposition_v1 {
