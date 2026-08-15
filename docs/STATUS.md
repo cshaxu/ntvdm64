@@ -54,6 +54,15 @@
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | First/subsequent child entry; parent-owned handles crossing child entry; normal/abort/TSR exit; VDD and no-VDD branches; `50:34..3C`; file, FCB, search, pending and DTA state; current session teardown; COMMAND `54:0B`; and direct/readonly/overlay/virtual profile ownership. |
 
+> **T220 S1 P1 closure:** OpenNT proves `50:36` is only DOS-entry/VDD
+> notification.  The historical resource contract instead roots in the
+> guest-published `pusCurrentPDB`, PDB/JFT/SFT mappings and a guarded
+> `50:3C` termination sequence.  Current direct DEM resources lack that
+> owner identity, while the existing lifecycle provider releases only finite
+> boot state.  The next seam is a bounded copied guest-PDB read contract, but
+> it requires a new implementation S; no runtime change was made.  See the
+> [ownership map](etc/research/t220-s1-dem-process-resource-ownership-map-001.md).
+
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
 > provider; command and targets fall through to host open/search. Original
