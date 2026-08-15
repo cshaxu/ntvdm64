@@ -270,6 +270,14 @@
 > with retained source/profile error forms. This is profile evidence only, not
 > an overlay backend, route migration or DEM closure.
 
+> **T202 S4 progress:** r41 installs the atomic local DEM package switch:
+> all 27 S3 local identities now select the whole provider, with no fallback
+> from a new request/token into boot or readonly fixture leaves. Legacy tokens
+> receive new-owner failure; `47/48` remain Redirector deferred. The r1
+> whole-provider and r4 host-installed MSVC x64 `/MT` fixtures pass. This
+> closes route migration only; hard-error ownership, an overlay backend and
+> native guest execution remain open.
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

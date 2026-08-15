@@ -302,3 +302,14 @@ three non-direct modes. Readonly returns source-shaped access denied; overlay
 and virtual return their recorded unavailable form. The real temporary host
 entries survive every case. This is direct provider/profile evidence, not an
 overlay implementation or BOP route migration.
+
+Revision r41 records the T202/S4 atomic package switch. The package session
+now directs every local-file identity to the same whole provider before any
+legacy boot/readonly leaf. Invalid legacy tokens are rejected by the new
+owner; no token-qualified fallback remains. The r1 whole-provider closure and
+r4 host-installed x64 `/MT` composition fixture pass. The latter replaces its
+withdrawn synthetic CONFIG/AUTOEXEC success assumption with a source-shaped
+failure for an explicitly nonexistent real-host path; it also stops treating
+the boot fast-I/O leaf as a consumer of a new provider token. `50:47/48`
+remain Redirector deferred. This closes the route migration, not DEM's
+hard-error/overlay backend or native guest execution.

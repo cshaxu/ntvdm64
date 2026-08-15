@@ -6,6 +6,9 @@
 #include "bx_ntvdm_dem_search_partition_v1.h"
 #include "bx_ntvdm_dem_handle_route_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
+#include "bx_ntvdm_dem_namespace_route_partition_v1.h"
+#include "bx_ntvdm_dem_fcb_path_route_partition_v1.h"
+#include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_dpb_service.h"
 #include "bx_ntvdm_dem_full_dpb_service_v1.h"
 #include "bx_ntvdm_dem_computer_name_service_v1.h"
@@ -89,6 +92,34 @@ static int fcb_io_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
     !bx_ntvdm_dem_fcb_io_route_partition_v1_complete_write(&s->whole_provider,
       service,e,c,&a,r))return 0;
   return bx_ntvdm_cpu_result_v2_valid(r); }
+static int namespace_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
+ const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
+ const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
+{ struct bx_ntvdm_mechanical_action_v1 a;
+  if(!s||!e||!c||!w||!r||!s->has_whole_provider||
+    !bx_ntvdm_dem_namespace_route_partition_v1_prepare(&s->whole_provider,service,e,c,w,&a))return 0;
+  if(!action(&a)){bx_ntvdm_dem_whole_provider_v1_cancel_gather(&s->whole_provider,service,e,c,
+      &s->whole_provider.pending_gather);return 0;}
+  return bx_ntvdm_dem_namespace_route_partition_v1_complete(&s->whole_provider,service,e,c,&a,r)&&
+    bx_ntvdm_cpu_result_v2_valid(r); }
+static int fcb_path_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
+ const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
+ const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
+{ struct bx_ntvdm_mechanical_action_v1 a;
+  if(!s||!e||!c||!w||!r||!s->has_whole_provider||
+    !bx_ntvdm_dem_fcb_path_route_partition_v1_prepare(&s->whole_provider,service,e,c,w,&a))return 0;
+  if(!action(&a)){bx_ntvdm_dem_whole_provider_v1_cancel_gather(&s->whole_provider,service,e,c,
+      &s->whole_provider.pending_gather);return 0;}
+  return bx_ntvdm_dem_fcb_path_route_partition_v1_complete(&s->whole_provider,service,e,c,&a,r)&&
+    bx_ntvdm_cpu_result_v2_valid(r); }
+static int fcb_direct_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
+ const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
+ bx_ntvdm_cpu_result_v2 *r)
+{ uint32_t unused=0u;
+  return s&&e&&c&&r&&s->has_whole_provider&&
+    (service==0x2eu||service==0x30u)&&
+    bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&s->whole_provider,service,e,c,0,0,0u,
+      &unused,r)&&bx_ntvdm_cpu_result_v2_valid(r); }
 int bx_ntvdm_dem_package_session_v1_valid(const bx_ntvdm_dem_package_session_v1 *s)
 { return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_mutation_profile<=1u&&s->has_whole_provider<=1u&&s->has_boot_drive<=1u&&(!s->has_boot_drive||s->boot_drive_index<26u)&&(!s->has_mutation_profile|| (bx_ntvdm_dem_profile_consumer_v1_valid(&s->mutation_profile)&&bx_ntvdm_dem_cwd_context_v1_valid(&s->cwd)))&&(!s->has_whole_provider||bx_ntvdm_dem_whole_provider_v1_valid(&s->whole_provider)); }
 int bx_ntvdm_dem_package_session_v1_initialize(bx_ntvdm_dem_package_session_v1 *s,bx_ntvdm_boot_namespace_plane_v1 *p)
@@ -138,26 +169,30 @@ int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,
   if(bx_ntvdm_dem_raw_media_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
   if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_boot_drive_service_v2_dispatch(&s->gset.drive_snapshot,s->has_boot_drive?s->boot_drive_index:UINT32_MAX,e,c,w,&mem))return memory_result(&mem,r);
   if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_dpb_service_v1_prepare(s->gset.drive_snapshot.types,e,c,w,&tx,payload)){if(!write_tx(s,&tx,payload))return 0;*r=tx.result;return terminal_or_complete(i,p,&route,e,c,w,r);}
-  if(s->has_whole_provider&&bx_ntvdm_dem_handle_route_partition_v1_claims_request(
-      &s->whole_provider,i->service,c))
+  /* T202/S4's atomic local-file package switch.  Once this provider is
+   * installed, no identity in its 27-service work set falls through to a
+   * boot/readonly fixture leaf.  Token validation happens inside the new
+   * owner, so legacy tokens become source-shaped invalid handles. */
+  if(s->has_whole_provider&&bx_ntvdm_dem_handle_route_partition_v1_owns_service(i->service))
     return handle_dispatch(s,i->service,e,c,w,r) ? 1 :
       bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,&route,e,c,w,r);
-  /* FCBIO may cross the route boundary only after this provider issued its
-   * opaque token and the historical DTA registration supplied a checked
-   * guest-RAM location.  All other FCB requests remain behind the final
-   * package switch. */
-  if(s->has_whole_provider&&s->namespace_plane->has_dta&&
-      bx_ntvdm_dem_fcb_io_route_partition_v1_claims_request(&s->whole_provider,
-        i->service,c))
+  if(s->has_whole_provider&&bx_ntvdm_dem_namespace_route_partition_v1_owns_service(i->service))
+    return namespace_dispatch(s,i->service,e,c,w,r) ? 1 :
+      bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,&route,e,c,w,r);
+  if(s->has_whole_provider&&bx_ntvdm_dem_fcb_path_route_partition_v1_owns_service(i->service))
+    return fcb_path_dispatch(s,i->service,e,c,w,r) ? 1 :
+      bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,&route,e,c,w,r);
+  if(s->has_whole_provider&&(i->service==0x2eu||i->service==0x30u))
+    return fcb_direct_dispatch(s,i->service,e,c,r) ? 1 :
+      bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,&route,e,c,w,r);
+  if(s->has_whole_provider&&s->namespace_plane->has_dta&&i->service==0x2fu)
     return fcb_io_dispatch(s,i->service,e,c,w,r) ? 1 :
       bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,&route,e,c,w,r);
-  if(bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
-  /* All four demsrch forms migrate together.  Once the package owns a real
-   * host namespace, a failed direct-provider precondition is a DEM refusal,
-   * never a fallback to the boot snapshot search plane. */
+  /* Search is part of the same atomic provider. */
   if(bx_ntvdm_dem_search_partition_v1_owns_service(i->service)&&s->has_whole_provider)
     return search_dispatch(s,i->service,e,c,w,r) ? 1 :
       bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,&route,e,c,w,r);
+  if(bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
   /* A selected DEM provider may reject a mode/precondition.  The package
    * owns that refusal: preserve a typed pass-through instead of leaking the
    * request to a second detached recognizer. */

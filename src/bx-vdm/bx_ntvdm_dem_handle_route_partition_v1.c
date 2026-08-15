@@ -109,7 +109,7 @@ int bx_ntvdm_dem_handle_route_partition_v1_dispatch(
     bx_ntvdm_guest_gather_read_action_v1 gather;
     uint8_t bytes[BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES];
     if (action_out == 0 || result_out == 0 || !matches(service, boundary, cpu, window) ||
-        !bx_ntvdm_dem_handle_route_partition_v1_claims_request(provider, service, cpu) ||
+        !bx_ntvdm_dem_handle_route_partition_v1_owns_service(service) ||
         !bx_ntvdm_dem_whole_provider_v1_valid(provider)) return 0;
     count = (uint16_t)cpu->ecx;
     bx_ntvdm_mechanical_action_v1_clear(action_out);

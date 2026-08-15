@@ -130,6 +130,18 @@ whole package switch only.  It may not create an additional endpoint task.
    hard-error and virtual-volume limitations rather than claiming DEM or CLI
    completion.
 
+### Atomic switch result
+
+The switch is now installed in the DEM package session. When a whole provider
+is present, all 27 local identities are selected by that provider: local-handle
+operations; the nine pathname operations; four search operations; the five
+FCB pathname operations; FCB close/date/I/O; and the source-owned FCB
+wildcard operations. A legacy boot token is no longer a fallback capability:
+the new owner rejects it as an invalid token. `47/48` remain outside this
+local-filesystem set and retain their Redirector-deferred disposition. The
+former boot snapshot path/fast-I/O assertions are fixture-only evidence and
+are not a product fallback.
+
 ## FCB I/O transition rule
 
 The `50:2F demFCBIO` transition may be installed before the final FCB/pathname

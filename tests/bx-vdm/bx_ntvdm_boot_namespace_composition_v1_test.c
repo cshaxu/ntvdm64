@@ -328,7 +328,6 @@ int main(void)
         { 1u, BYOB_LAUNCH_TARGET_KIND_V1_COM, 0u, { 0 } } };
     struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
-    uint32_t token;
     uint32_t service;
     int direct_search_error, direct_handle_error;
     bx_ntvdm_host_namespace_entry_v1 terminating_entries[2] = { 0 };
@@ -705,40 +704,17 @@ int main(void)
 
     event_initialize(&event, 0x50, 0x12);
     event.ds = 0x1000; event.esi = 0x40;
-    memcpy(ram + 0x10040, "C:\\CONFIG.SYS", 14);
-    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
-        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 7;
-    token = ((uint32_t)outcome.gpr16_values[0] << 16) | outcome.gpr16_values[5];
-
-    event_initialize(&event, 0x50, 0x00);
-    event.eax = token >> 16; event.ebp = token & 0xffffu;
-    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
-        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 8;
-
-    event_initialize(&event, 0x50, 0x02);
-    event.eax = token >> 16; event.ebp = token & 0xffffu;
-    event.ecx = event.edx = 0xffffu;
-    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
-        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 28;
-    event_initialize(&event, 0x50, 0x12);
-    event.ds = 0x1000; event.esi = 0x40;
-    memcpy(ram + 0x10040, "C:\\AUTOEXEC.BAT", 15);
-    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
-        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 29;
-    token = ((uint32_t)outcome.gpr16_values[0] << 16) | outcome.gpr16_values[5];
-    allow_action = 0;
-    event_initialize(&event, 0x50, 0x42);
-    event.eax = token >> 16; event.ebp = token & 0xffffu;
-    event.ecx = 0x20u; event.ds = 0x1000; event.edx = 0x40u; event.eflags = 0x40u;
+    strcpy((char *)(ram + 0x10040), "C:\\NTDOS64-NO-BOOT-SNAPSHOT.SYS");
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x104u ||
-        outcome.gpr16_write_mask != 1u || outcome.gpr16_values[0] != 0u ||
         outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
-        outcome.eflags_values != 0u) return 30;
+        outcome.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) return 7;
 
     event_initialize(&event, 0x54, 0x0d);
     event.ds = 0x1000; event.edx = 0x20;
-    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 9;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME &&
+         outcome.disposition != BX_NTVDM_GENERIC_UD_STOP)) return 9;
     /* demTerminatePDB owns per-PDB search lifetime.  Seed an existing
        continuation, invoke the real BOP route, then prove that the stale
        continuation cannot be resumed. */
