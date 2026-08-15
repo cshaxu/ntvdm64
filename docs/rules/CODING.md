@@ -1,8 +1,14 @@
 # Coding Rules
 
-- Treat historical code as evidence before editable source. Prefer an adapter,
-  compatibility header, wrapper translation unit, or build recipe to a
-  behavioral rewrite.
+- Historical recovery is mandatory source-first engineering, not merely an
+  evidence preference. For every recovered OpenNT/guest/host behavior, attempt
+  and record this order: (1) directly composable original source; (2) the
+  smallest adapter, compatibility seam, wrapper translation unit, or build
+  shim which preserves that source contract; (3) a registered intrusion into
+  adopted external code; (4) newly authored behavior only if no usable source
+  remains. Do not select a later rung for convenience, a trace hit, or a
+  temporary capacity limit. Name the owner/source/dependencies and account for
+  layout, ordering, and failure behavior at every rejected rung.
 - Keep authored runner code, overlays, host seams, imported material, generated
   files, and fixtures visibly separate.
 - Make the smallest evidence-backed change. Preserve calling conventions,

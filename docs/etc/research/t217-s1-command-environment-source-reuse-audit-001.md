@@ -24,13 +24,15 @@ host product shell?
 ## Original Contract
 
 On the first COMMAND request, `cmdGetInitEnvironment` snapshots the process
-ANSI environment, discards drive-directory entries beginning with `=`,
-discards a host `COMSPEC`, removes `WINDIR` for DOS (except separate WOW),
-adds `PROMPT=$P$G` when absent, converts each retained ANSI entry to OEM, and
-uppercases each variable name but not its value.  It grows the copied block as
-needed, prepends the guest-supplied `COMSPEC`, and reports the required guest
-buffer size in paragraphs through `BX` before writing.  It has no 4 KiB
-policy limit.
+ANSI environment, discards drive-directory entries beginning with `=`, then
+uses its historical first-prefix state machines to discard the first matching
+`COMSPEC=` host entry and (for DOS) first `WINDIR`-prefixed entry. It retains later
+duplicates and nonempty malformed entries because the source does not require
+an equals sign. It adds `PROMPT=$P$G` when absent, converts each retained ANSI
+entry to OEM, and uppercases each variable name but not its value. It grows
+the copied block as needed, prepends the guest-supplied `COMSPEC`, and reports
+the required guest buffer size in paragraphs through `BX` before writing. It
+has no 4 KiB policy limit.
 
 `cmdCreateVDMEnvironment` is a separate later merge path: it retains a
 32-bit environment snapshot and combines it with AUTOEXEC data.  It is not
@@ -48,13 +50,13 @@ silently claimed by the initial-environment seam.
 ## Correction Selected
 
 The existing seam had already removed the obsolete 4,023-byte rejection and
-preserved the actual one-transfer bound: at most 65,535 bytes after the
-guest `COMSPEC` is prepended.  Its remaining deviation is that it obtains a
-Unicode environment and converts directly to OEM.  The correction is to use
-the same host representation and conversion sequence as OpenNT:
-`GetEnvironmentStringsA` followed by `CharToOemBuffA` per retained entry.
-The copied data remain adapter-owned; no host environment handle or pointer
-crosses a BOP boundary.
+preserved the actual one-transfer bound: at most 65,535 bytes after the guest
+`COMSPEC` is prepended. The repair now uses the same host representation and
+conversion sequence as OpenNT: `GetEnvironmentStringsA` followed by
+`CharToOemBuffA` for each retained entry, and retains the source's filtering
+order, first-prefix state, malformed-entry acceptance, and name-only case
+conversion. The copied data remain adapter-owned; no host environment handle
+or pointer crosses a BOP boundary.
 
 The 65,535-byte bound is not a replacement 4 KiB policy.  It is the largest
 fixed-width, single checked guest-RAM publication transaction and is reported
@@ -80,9 +82,12 @@ separate AUTOEXEC merge behavior of `cmdCreateVDMEnvironment`.
 `Invoke-T217S2CommandInitialEnvironmentProbe.ps1` source-builds the new
 capture seam and its focused fixture with MSVC x64 `/MT`. The fixture injects
 mixed-case ANSI data, a host `COMSPEC`, `WINDIR`, and an absent `PROMPT`; it
-proves the retained entry has an uppercased name, `COMSPEC`/`WINDIR` are
-filtered, and `PROMPT=$P$G` is supplied. The seam itself uses
-`CharToOemBuffA`, matching the OpenNT ANSI→OEM conversion call class.
+proves the retained entry has an uppercased name, the first
+`COMSPEC`/`WINDIR` are filtered, and `PROMPT=$P$G` is supplied. A
+source-permitted duplicate/malformed block also passes the copied-context
+validation, which ordinary Win32 environment APIs cannot construct for this
+test. The seam itself uses `CharToOemBuffA`, matching the OpenNT ANSI→OEM
+conversion call class.
 
 The existing x64 `/MT` host-context regression again proves a 5,001-byte
 double-NUL environment travels through `54:02`/`54:0F` and exceeds the former
@@ -93,6 +98,7 @@ COMMAND execution.
 
 ## Follow-Up
 
-Admit a narrowly scoped implementation subtask to make the ANSI/OEM source
-sequence correction and add its regression.  Do not use this finding to claim
-the separate AUTOEXEC merge or COMMAND execution is complete.
+T217 S8 completes the source-level semantic repair and focused regression.
+Resume the paused SYSINIT command-name realization map separately. Do not use
+this repair to claim the separate AUTOEXEC merge or COMMAND execution is
+complete.

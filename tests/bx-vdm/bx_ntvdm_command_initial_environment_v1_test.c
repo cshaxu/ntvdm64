@@ -77,6 +77,15 @@ int main(void)
             context.environment_bytes, "PROMPT=$P$G") || contains_name(
             context.environment, context.environment_bytes, "COMSPEC") || contains_name(
             context.environment, context.environment_bytes, "WINDIR"))) passed = 0;
+    /* OpenNT retains a nonempty malformed entry and later duplicates after
+       its first-prefix filter. The copied ABI must not erase that source
+       contract merely because normal Win32 APIs cannot create such a block. */
+    {
+        static const uint8_t source_permitted[] =
+            "COMSPEC=first\0COMSPEC=second\0NO_EQUALS\0";
+        if (passed && !bx_ntvdm_command_host_context_v1_set_environment(&context,
+                source_permitted, (uint32_t)sizeof(source_permitted))) passed = 0;
+    }
     for (index = 0u; index < sizeof(values) / sizeof(values[0]); ++index)
         if (!restore(&values[index])) passed = 0;
     if (!passed) return 1;

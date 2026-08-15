@@ -4,18 +4,18 @@
 #include <string.h>
 #include <windows.h>
 
-static int name_equal(const char *value, uint32_t bytes, const char *expected)
+static int begins_with_ci(const char *value, const char *expected)
 {
     uint32_t index;
     for (index = 0u; expected[index] != '\0'; ++index) {
         char character;
-        if (index >= bytes) return 0;
         character = value[index];
+        if (character == '\0') return 0;
         if (character >= 'a' && character <= 'z')
             character = (char)(character - 'a' + 'A');
         if (character != expected[index]) return 0;
     }
-    return index == bytes;
+    return 1;
 }
 
 int bx_ntvdm_command_initial_environment_v1_capture(
@@ -24,7 +24,7 @@ int bx_ntvdm_command_initial_environment_v1_capture(
     char *ansi, *entry;
     uint8_t *environment;
     uint32_t used = 0u;
-    int has_prompt = 0;
+    int has_prompt = 0, found_comspec = 0, found_windir = 0;
     int result = 0;
 
     if (context == 0) return 0;
@@ -39,22 +39,31 @@ int bx_ntvdm_command_initial_environment_v1_capture(
         uint32_t bytes = (uint32_t)strlen(entry) + 1u;
         uint32_t index, name_bytes = 0u;
         if (entry[0] == '=') continue;
+        /* Preserve the original prefix test and first-match state. Later
+         * duplicates and malformed nonempty entries are retained. */
+        if (!found_comspec && begins_with_ci(entry, "COMSPEC=")) {
+            found_comspec = 1;
+            continue;
+        }
+        if (!found_windir && begins_with_ci(entry, "WINDIR")) {
+            found_windir = 1;
+            continue;
+        }
         /* The original grows an intermediate block as needed.  This fixed
-         * seam has reserved the maximum COMSPEC record and therefore fails
-         * only at the actual single-transaction 16-bit transfer boundary. */
-        if (bytes < 3u || bytes >
+         * seam reserves the maximum original COMSPEC record and therefore
+         * fails only at the actual single-transaction 16-bit boundary. */
+        if (bytes < 2u || bytes >
                 BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES - used - 1u ||
             !CharToOemBuffA(entry, (char *)environment + used, bytes)) goto done;
         for (index = 0u; index < bytes - 1u; ++index) {
             if (environment[used + index] == '=') { name_bytes = index; break; }
         }
-        if (name_bytes == 0u || name_equal((const char *)environment + used,
-                name_bytes, "COMSPEC") || name_equal((const char *)environment + used,
-                name_bytes, "WINDIR")) continue;
-        for (index = 0u; index < name_bytes; ++index)
-            if (environment[used + index] >= 'a' && environment[used + index] <= 'z')
-                environment[used + index] = (uint8_t)(environment[used + index] - 'a' + 'A');
-        if (name_equal((const char *)environment + used, name_bytes, "PROMPT"))
+        if (name_bytes != 0u) {
+            for (index = 0u; index < name_bytes; ++index)
+                if (environment[used + index] >= 'a' && environment[used + index] <= 'z')
+                    environment[used + index] = (uint8_t)(environment[used + index] - 'a' + 'A');
+        }
+        if (name_bytes == 6u && begins_with_ci((const char *)environment + used, "PROMPT"))
             has_prompt = 1;
         used += bytes;
     }

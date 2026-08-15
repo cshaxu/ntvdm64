@@ -2,19 +2,6 @@
 
 #include <string.h>
 
-static int equal_ci(const uint8_t *value, uint32_t bytes, const char *name)
-{
-    uint32_t index;
-    for (index = 0u; name[index] != '\0'; ++index) {
-        uint8_t byte;
-        if (index >= bytes) return 0;
-        byte = value[index];
-        if (byte >= 'a' && byte <= 'z') byte = (uint8_t)(byte - 'a' + 'A');
-        if (byte != (uint8_t)name[index]) return 0;
-    }
-    return index == bytes;
-}
-
 static int environment_valid(const uint8_t *environment, uint32_t bytes)
 {
     uint32_t offset = 0u;
@@ -25,15 +12,10 @@ static int environment_valid(const uint8_t *environment, uint32_t bytes)
         return 0;
     while (offset < bytes - 1u) {
         uint32_t start = offset;
-        uint32_t equals = UINT32_MAX;
         while (offset < bytes && environment[offset] != 0u) {
-            if (environment[offset] == '=' && equals == UINT32_MAX) equals = offset;
             ++offset;
         }
         if (offset == start) return offset == bytes - 1u;
-        if (environment[start] == '=' || equals == UINT32_MAX || equals == start ||
-            equal_ci(environment + start, equals - start, "COMSPEC") ||
-            equal_ci(environment + start, equals - start, "WINDIR")) return 0;
         ++offset;
     }
     return offset == bytes - 1u;
