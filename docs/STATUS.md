@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T211 S3.** Its governing brief is the active
+> **Current effective packet: M0 T211 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T211 S3 -- COMMAND launch/execution component recovery.**
+**Active: M0 T211 S4 -- COMMAND console/keyboard component recovery.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -17,24 +17,24 @@
 
 > **T scope:** T211 recovers the complete COMMAND owner package by original
 > component boundary. S1 closed the all-service map. S2 closed the first
-> bootstrap/environment/config provider; S3 recovers the next whole
-> launch/execution component.
+> bootstrap/environment/config and launch/execution providers; S4 recovers
+> the next whole console/keyboard component.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T211 S3, Ordinary Mode. |
-| Admission And Approval | T211 S1 COMMAND map and closed S2 admit original `54:06/07/08/0A` as one launch/execution component. Existing stream-child and execution routes are evidence to reconcile, not a closure claim. |
-| Objective | Recover one coherent COMMAND launch/execution provider disposition, preserving original ABI/failure boundaries and removing endpoint-local capability selection. |
-| Non-goals | No BaseSrv/CSR `GetNextVDMCommand` replacement, no nested VDM queue, no console/keyboard recovery, lifecycle/engine change, trace-led work, ambient context recapture, Bochs change, or synthetic success. |
-| Reference Baseline | T211 S1 map, closed S2, original `cmdexec.c`, `cmdmisc.c`, `cmdsvc.h`, existing COMMAND execution/stream-child code and T202 S7 broker decision. |
-| Files And ABI Surface | `src/bx-vdm` COMMAND launch/execution provider/facade integration and focused tests only; fixed-width guest/machine contracts remain unchanged. |
+| Identifier Mode | M0 T211 S4, Ordinary Mode. |
+| Admission And Approval | T211 S1 COMMAND map admits original `54:09/0E` as one console/keyboard component. Existing console and keyboard helpers are evidence to reconcile, not a closure claim. |
+| Objective | Recover one coherent COMMAND console/keyboard provider disposition, preserving original ABI/failure behavior without ambient console, registry or keyboard-layout assumptions. |
+| Non-goals | No interactive console, GUI/VDD, keyboard driver installation, ambient Registry modification, lifecycle/engine change, trace-led work, Bochs change, or synthetic success. |
+| Reference Baseline | T211 S1 map, original `cmdmisc.c`/console and keyboard source, `cmdsvc.h`, existing COMMAND console/keyboard helpers and CLI capability policy. |
+| Files And ABI Surface | `src/bx-vdm` COMMAND console/keyboard provider/facade integration and focused tests only; fixed-width guest/machine contracts remain unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One source-built MSVC x64 `/MT` component fixture covers `06/07/08/0A`, its admitted direct/unsupported outcomes, malformed stream/guest inputs and no host-handle leak; governance and diff checks. |
-| Expected Markers | One component provider owns all four members and chooses the common profile/capability disposition before an endpoint can invoke host APIs. |
-| Asset Needs | Existing repository source and ordinary user-mode Win32 APIs only; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record source/ABI map reconciliation, provider state, member routing, host API availability, migrated/deleted workarounds, regression and limitations. |
-| Stop Conditions | Any need for historical broker semantics, host installation change, Bochs/mantle change, unbounded guest pointer, or endpoint-only patch pauses S3 for re-admission. |
-| Exit Criteria | The complete launch/execution component passes one family regression; later native trace only observes the package result. |
+| Verification | One source-built MSVC x64 `/MT` component fixture covers `09/0E`, explicit no-install/unavailable outcomes, malformed input and no ambient host-state change; governance and diff checks. |
+| Expected Markers | One console/keyboard provider owns both members and no detached helper picks host behavior. |
+| Asset Needs | Existing repository source and ordinary user-mode read-only console/Registry API analysis only; no firmware/media/device import or native trace. |
+| Reporting Requirements | Record source/ABI/failure map, provider state, member routing, host API availability, migrated/deleted workarounds, regression and limitations. |
+| Stop Conditions | Any need for host installation change, Bochs/mantle change, unbounded guest pointer, or endpoint-only patch pauses S4 for re-admission. |
+| Exit Criteria | The complete console/keyboard component passes one family regression; later native trace only observes the package result. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | `cmdmisc.c`, `cmdenv.c`, `cmdconf.c`, `cmdsvc.h`, COMMAND package session/facade, T209 configuration provider, T210 host context, CLI launch plan and every `01/02/04/05/0C/0D/0F/10` route. |
 
@@ -120,6 +120,10 @@
 > belongs to its provider, not the COMMAND session coordinator; fresh x64
 > `/MT` r4 composition evidence passes. The remaining work is the component
 > failure/lifecycle ledger and final family regression.
+
+> **T211 S3 closed:** one launch/execution provider owns `06/07/08/0A`,
+> resolves its own profile, and passes source-built component plus composition
+> regressions. See the [closure record](history/m0-t211-s3-closure-20260815.md).
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
