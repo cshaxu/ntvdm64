@@ -300,12 +300,12 @@ static int command_facade_regression(void)
         uint8_t bytes[4]={0xc4u,0xc4u,0x54u,(uint8_t)service};
         bx_ntvdm_instruction_window_v1 window; bx_ntvdm_bop_ingress_v1 ingress;
         bx_ntvdm_bop_provider_selection_v1 selection; bx_ntvdm_command_package_route_v1 route;
-        uint32_t expected=(service==3u)?BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP:
-            ((service==6u||service==8u||service==10u)?BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE:
-            BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER);
+        uint32_t expected=BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER;
         bx_ntvdm_instruction_window_v1_capture(&window,bytes,4u);
         if(!bx_ntvdm_bop_ingress_v1_classify(&window,&ingress)||!bx_ntvdm_bop_provider_registry_v1_select(&ingress,&selection)||!bx_ntvdm_command_package_facade_v1_classify(&ingress,&selection,&route)||route.disposition!=expected) return 0;
-        if(expected==BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP||expected==BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE){bx_ntvdm_exception_event_v1 event;bx_ntvdm_cpu_state_v1 cpu;bx_ntvdm_cpu_result_v2 result;memset(&event,0,sizeof(event));event.magic=BX_NTVDM_EXCEPTION_ABI_MAGIC;event.abi_version=BX_NTVDM_EXCEPTION_ABI_VERSION;event.struct_bytes=sizeof(event);event.kind=BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;event.vector=6u;event.fault_rip=0x100u;bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);if(!bx_ntvdm_command_package_facade_v1_dispatch(&ingress,&selection,&route,&event,&cpu,&result)||result.disposition!=(expected==BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP?(uint32_t)BX_NTVDM_CPU_RESULT_V2_RESUME:(uint32_t)BX_NTVDM_CPU_RESULT_V2_STOP))return 0;}
+        /* The facade now only classifies.  All terminal/no-op/deferred forms
+           are emitted by the bound COMMAND session so no service bypasses
+           the package owner. */
     }
     return 1;
 }

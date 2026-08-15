@@ -3,12 +3,11 @@
 
 static int existing_provider(uint8_t service)
 {
-    switch (service) {
-    case 0u: case 1u: case 2u: case 4u: case 5u: case 7u: case 9u:
-    case 11u: case 12u: case 13u: case 14u: case 15u: case 16u:
-        return 1;
-    default: return 0;
-    }
+    /* T202/S6 selects the COMMAND session as the one package owner for every
+     * callable cmddisp.c slot.  Per-service capability disposition happens
+     * inside that session; no service may be intercepted by a detached
+     * facade leaf before the provider can record its source-shaped outcome. */
+    return service < 17u;
 }
 void bx_ntvdm_command_package_route_v1_clear(bx_ntvdm_command_package_route_v1 *route)
 {
@@ -32,11 +31,7 @@ int bx_ntvdm_command_package_facade_v1_classify(const bx_ntvdm_bop_ingress_v1 *i
     if (!route) return 0;
     bx_ntvdm_command_package_route_v1_clear(route);
     if (!bx_ntvdm_command_plane_v1_classify(ingress, selection, &route->plane)) return 0;
-    if (route->plane.disposition==BX_NTVDM_COMMAND_PLANE_ORIGINAL_NOOP)
-        route->disposition=BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP;
-    else if (route->plane.disposition==BX_NTVDM_COMMAND_PLANE_EXPLICIT_UNAVAILABLE)
-        route->disposition=BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE;
-    else if (existing_provider((uint8_t)route->plane.service))
+    if (existing_provider((uint8_t)route->plane.service))
         route->disposition=BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER;
     else route->disposition=BX_NTVDM_COMMAND_PACKAGE_DEFERRED;
     return bx_ntvdm_command_package_route_v1_valid(route);
@@ -48,9 +43,6 @@ int bx_ntvdm_command_package_facade_v1_dispatch(const bx_ntvdm_bop_ingress_v1 *i
 {
     if (!result || !bx_ntvdm_command_package_route_v1_valid(route)) return 0;
     bx_ntvdm_cpu_result_v2_pass_through(result);
-    if (route->disposition==BX_NTVDM_COMMAND_PACKAGE_ORIGINAL_NOOP)
-        return bx_ntvdm_command_provider_v1_dispatch(ingress,selection,&route->plane,event,cpu_before,result);
-    if (route->disposition==BX_NTVDM_COMMAND_PACKAGE_EXPLICIT_UNAVAILABLE)
-        return bx_ntvdm_cpu_result_v2_stop(result);
+    (void)ingress; (void)selection; (void)event; (void)cpu_before;
     return 0;
 }

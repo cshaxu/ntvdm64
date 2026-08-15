@@ -27,6 +27,15 @@ int bx_ntvdm_cmd_cli_profile_v1_dispatch(
         /* cmdExitVDM: TerminateVDM().  The engine owns external status
          * transport; the host-service result is only controlled stop. */
         return bx_ntvdm_cpu_result_v2_stop(result);
+    case 3u:
+        /* cmdSaveWorld has no active body in the original source. */
+        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u);
+    case 6u: case 8u: case 10u:
+        /* Standard-stream and non-DOS process capabilities are whole
+         * COMMAND-provider slices.  Until their opaque stream/typed child
+         * lifecycle owners are admitted, retain the explicit terminal
+         * disposition here rather than bypassing this package session. */
+        return bx_ntvdm_cpu_result_v2_stop(result);
     case 7u:
         /* cmdCheckBinary's historical DontCheckDosBinaryType branch: the
          * declared CLI profile admits only DOS guest executables. */

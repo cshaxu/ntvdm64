@@ -123,6 +123,12 @@
 > console/KEYB. It is ready for closure/admission review; see the
 > [whole-provider plan](etc/operations/t202-s5-command-whole-provider-regression-plan-001.md).
 
+> **T202 S6 progress:** all callable `54:00..10` identities now enter the
+> same COMMAND package session before their no-op, terminal or deferred
+> disposition is emitted. The refreshed host-installed MSVC x64 `/MT`
+> composition fixture passes. This is an atomic owner-routing baseline, not
+> stream, child-lifecycle, VDD/KEYB or native-guest closure.
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
