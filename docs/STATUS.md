@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T218 S1.** Its governing brief is the active
+> **Current effective packet: M0 T219 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T218 S1 -- guest DOS EXEC structural prerequisite map.**
+**Active: M0 T219 S1 -- DEM child/PDB lifecycle source and ABI map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -22,32 +22,33 @@
 > [history](history/m0-t216-closure-20260815.md). **T217 closed:** its
 > source-first COMMAND prerequisite and declared-image loader family closure
 > are recorded in [history](history/m0-t217-closure-20260815.md).
+> **T218 closed:** its guest DOS `$Exec` structural prerequisite map is
+> recorded in [history](history/m0-t218-closure-20260815.md).
 
 ## Active Packet
 
-> **T scope:** T218 maps the complete guest DOS `$Exec` structural
-> prerequisites after the declared-image loader family. It establishes the
-> source/ABI/failure and profile-capability disposition before admitting any
-> execution behavior. It preserves guest DOS/DEM/COMMAND ownership and does
-> not use a trace to select a leaf BOP.
+> **T scope:** T219 recovers the first-profile guest child lifecycle as two
+> whole owner packages: DEM entry/PDB lifecycle and COMMAND one-shot parent
+> return. It preserves guest DOS ownership, uses the common host-mutation and
+> drive-view ABI, and never promotes a trace hit into a leaf BOP task.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T218 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized autonomous package-first progression. T217 closes the declared-image loader family; Queue candidate 1 is now admitted as the next whole guest EXEC prerequisite package. |
-| Objective | Produce a complete source/ABI/failure map for the first-profile DOS `$Exec` chain: program-image format/load, memory/PSP/environment construction, transfer state, termination/return and required BOP/provider capabilities. |
-| Non-goals | No trace-selected BOP implementation, guest `$Exec` recreation, DOS/BIOS patch, host mutation, profile expansion, Bochs/mantle change, VDD subsystem, COMMAND-run or normal-target-execution claim. |
-| Reference Baseline | T217 S13/S14 maps, OpenNT `msproc.asm`, `handle.asm`, SYSINIT sources, DEM/COMMAND provider maps, current profile/mutation capability records. |
+| Identifier Mode | M0 T219 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized autonomous package-first progression. T218 closed the `$Exec` prerequisite map and selected this first coherent behavior package: DEM child/PDB lifecycle before a bounded COM-child trace or COMMAND return behavior. |
+| Objective | Produce the complete source/ABI/failure and recovery-ladder map for DEM `50:36` entry and `50:3C` PDB termination, including VDD/no-VDD disposition, direct host handle/search ownership, and the precise seam to the later COMMAND `54:0B` parent return package. |
+| Non-goals | No trace-selected BOP implementation, guest `$Exec` recreation, DOS/BIOS patch, host mutation, profile expansion, Bochs/mantle change, VDD subsystem, COMMAND return implementation, target execution claim, or native trace. |
+| Reference Baseline | T218 prerequisite map; T217 S13/S14 loader-family closure; OpenNT `msproc.asm`, `msctrlc.asm`, `demmisc.c`, `demsrch.c`, `demdisp.c`; current DEM session and host mutation/drive-view records. |
 | Files And ABI Surface | Source/evidence records only; no runtime source change is admitted in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every reached `$Exec` prerequisite has an original owner/path, ABI facts, failure path, present provider/capability disposition and recovery-ladder result; governance and diff checks pass. |
-| Expected Markers | A whole-package plan identifying one smallest next capability family or a complete explicit deferral, never a trace-selected endpoint. |
-| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record every structural prerequisite, source paths, ABI/failure paths, current capability disposition and recovery-ladder result; distinguish direct proof from inference. |
+| Verification | Every lifecycle effect has its original owner/path, register or guest-memory facts, void/failure rule, current provider/session disposition and recovery-ladder result; governance and diff checks pass. |
+| Expected Markers | One whole DEM lifecycle plan that distinguishes entry notification from PDB teardown and names the exact later COMMAND parent-return handoff, never a leaf handler. |
+| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217/T218 evidence; no new image, firmware, media or external source import. |
+| Reporting Requirements | Record source paths, ABI/failure paths, present capability disposition, cleanup ownership and recovery-ladder result; distinguish direct proof from inference. |
 | Stop Conditions | Any selector-specific implementation, native trace, DOS/BIOS patch, host mutation, guest binary patch, profile expansion or Bochs/mantle change pauses S1 for re-admission. |
-| Exit Criteria | A complete whole-EXEC prerequisite map and a package-level implementation/defer plan exist; no behavior is implemented merely to advance a trace. |
+| Exit Criteria | A complete whole-DEM child/PDB lifecycle map and package-level implementation/defer plan exist; the COMMAND `54:0B` boundary is specified but not implemented. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | All DOS EXEC variants, PSP/environment/MCB sources, COM/EXE format branches, loader handle family, DEM lifecycle/entry/exit, COMMAND return/lifecycle, XMS/DPMI/Redirector ownership and profile capability records. |
+| Similar-Issue Sweep | First and subsequent child entry, no-VDD and VDD branches, PDB-owned host file/search state, TSR/abort/normal exit, debugger guards, DEM `50:34..3C`, COMMAND `54:0B`, host mutation profiles and current session teardown. |
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
