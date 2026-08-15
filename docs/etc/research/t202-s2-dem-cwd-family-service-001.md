@@ -51,6 +51,6 @@ service through the package session and boot-plane checked read/write bridge.
 
 This replaces only the current-directory/default-drive three-service family.
 It does not close DEM file/handle/FCB/search behavior, and it does not claim a
-native trace. The next S2 work is to promote this service through the bound
-composition family regression, then reconcile drive/volume observation without
-reviving ambient process CWD.
+native trace. The legacy root-only CWD/default-drive fallback was removed
+after this family became session-owned: a boot namespace plane without the
+installed DEM package context does not claim to implement these services.

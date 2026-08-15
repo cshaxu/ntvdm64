@@ -88,6 +88,11 @@
 > preserving the original media-set CF-only branch; see the same
 > [GSET evidence](etc/research/t202-s2-dem-drive-projection-gset-001.md).
 
+> **T202 S2 progress:** obsolete root-only CWD/default-drive fallbacks are
+> removed from both the runtime plane and composition closure; only the
+> session-owned v2 family may answer those services. See the
+> [CWD family evidence](etc/research/t202-s2-dem-cwd-family-service-001.md).
+
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition
 > lifecycle, repaired its strict C11 source closure, and recorded the separate

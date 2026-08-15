@@ -1,8 +1,6 @@
 #include "bx_ntvdm_boot_namespace_plane_v1.h"
 #include "bx_ntvdm_dem_fastio_provider_v1.h"
 #include "bx_ntvdm_dem_fcb_search_service_v1.h"
-#include "bx_ntvdm_dem_default_drive_service_v1.h"
-#include "bx_ntvdm_dem_current_dir_service_v1.h"
 #include "bx_ntvdm_dem_cwd_service_v2.h"
 #include "bx_ntvdm_dem_check_path_service_v1.h"
 #include "bx_ntvdm_dem_readonly_file_service.h"
@@ -98,23 +96,8 @@ int bx_ntvdm_boot_namespace_plane_v1_dispatch(bx_ntvdm_boot_namespace_plane_v1 *
      bx_ntvdm_cpu_delta_v1_set_gpr16(&r->cpu_delta,0u,5u)&&
      bx_ntvdm_cpu_result_v2_set_cf(r,1);
  }
- if(i->service==0x1au&&dem.component==BX_NTVDM_DEM_COMPONENT_GSET&&!p->has_drive_snapshot){
-   if(bx_ntvdm_dem_default_drive_service_v1_prepare(e,c,w,&read)){
-     if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DEFAULT_DRIVE,e,c,&read.guest_read,1u,a))return 0;
-     p->pending_read=read;return 1;
-   }
-   return bx_ntvdm_cpu_result_v2_resume(r,e->fault_rip+4u)&&
-     bx_ntvdm_cpu_delta_v1_set_gpr16(&r->cpu_delta,0u,5u)&&
-     bx_ntvdm_cpu_result_v2_set_cf(r,1);
- }
  if((i->service==0x13u||i->service==0x18u||i->service==0x1au)&&p->dem_cwd_context){
    if(bx_ntvdm_dem_cwd_service_v2_prepare(i->service,e,c,&gather)){
-     if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CURRENT_DIR,e,c,gather.ranges,gather.range_count,a))return 0;
-     p->pending_gather=gather;p->pending_service=i->service;return 1;
-   }
- }
- if((i->service==0x13u||i->service==0x18u||i->service==0x1au)&&p->has_drive_snapshot){
-   if(bx_ntvdm_dem_current_dir_service_v1_prepare(&p->drive_snapshot,e,c,w,&gather)){
      if(!put_read(p,BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CURRENT_DIR,e,c,gather.ranges,gather.range_count,a))return 0;
      p->pending_gather=gather;p->pending_service=i->service;return 1;
    }
@@ -150,8 +133,7 @@ int bx_ntvdm_boot_namespace_plane_v1_complete_read(bx_ntvdm_boot_namespace_plane
  memset(&tx,0,sizeof(tx));bx_ntvdm_cpu_result_v2_pass_through(r);bx_ntvdm_mechanical_action_v1_clear(next);
  if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_OPEN)ok=bx_ntvdm_boot_namespace_provider_v1_complete_open(&p->provider,&p->pending_event,&p->pending_cpu,&p->pending_read,a->payload,a->payload_bytes,r);
  else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DTA_REGISTRATION){ok=bx_ntvdm_dem_dta_service_v1_complete(&p->pending_event,&p->pending_cpu,&p->pending_read,a->payload,a->payload_bytes,&dta,r);if(ok)ok=bx_ntvdm_boot_namespace_plane_v1_set_dta(p,&dta);}
- else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_DEFAULT_DRIVE)ok=bx_ntvdm_dem_default_drive_service_v1_complete(&p->pending_event,&p->pending_cpu,&p->pending_read,a->payload,a->payload_bytes,r);
- else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CURRENT_DIR)ok=p->dem_cwd_context ? bx_ntvdm_dem_cwd_service_v2_complete(p->dem_cwd_context,p->dem_host_namespace,(uint8_t)p->pending_service,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes) : bx_ntvdm_dem_current_dir_service_v1_complete(&p->drive_snapshot,(uint8_t)p->pending_service,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes);
+ else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CURRENT_DIR)ok=bx_ntvdm_dem_cwd_service_v2_complete(p->dem_cwd_context,p->dem_host_namespace,(uint8_t)p->pending_service,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes);
  else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_CHECK_PATH)ok=bx_ntvdm_dem_check_path_service_v1_complete(&p->pending_event,&p->pending_cpu,&p->pending_read,a->payload,a->payload_bytes,r);
  else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_FIRST)ok=bx_ntvdm_dem_path_search_v1_complete_first(&p->provider.search_transaction,&p->provider.search_snapshot,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes,&used)>=0;
  else if(p->pending_kind==BX_NTVDM_BOOT_NAMESPACE_PENDING_V1_PATH_NEXT)ok=bx_ntvdm_dem_path_search_v1_complete_next(&p->provider.search_transaction,&p->pending_event,&p->pending_cpu,&p->pending_gather,a->payload,a->payload_bytes,&tx,bytes,&used)>=0;

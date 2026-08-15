@@ -19,8 +19,7 @@ namespace established in S30.
 | Surface | Current behavior | Required T202 action |
 | --- | --- | --- |
 | `bx_ntvdm_host_namespace_v1` | Opens selected real roots once and safely enumerates relative 8.3 directories; no host path/handle crosses its boundary. | Retain as direct profile root owner; add a checked relative-directory validation/query contract rather than exposing paths or handles. |
-| `bx_ntvdm_dem_current_dir_service_v1` | Reads a CDS/root request but collapses successful `50:13` to root and only accepts root-shaped `50:18/1A` inputs. | Replace with package CWD state over the shared profile. It is not a direct-host implementation. |
-| `bx_ntvdm_dem_default_drive_service_v1` | Synthesizes failure after a one-byte read. | Retire/migrate into the complete CWD/default-drive package. |
+| Legacy root-only CWD/default-drive fallbacks | Formerly collapsed `50:13` to root and synthesized a one-byte `50:1A` failure. | Deleted after v2 CWD/default-drive package adoption. A plane without the package context cannot answer these services. |
 | `bx_ntvdm_dem_gset_plane_v1` and volume snapshot | Provides copied drive/volume facts and selected original-shaped service helpers. | Retain as immutable observation owner; route mutable context through common profile resolution. |
 | boot/readonly namespace | Deterministic fixture/legacy profile state. | Retain only for declared readonly or virtual profile; never use it as implicit direct host C:. |
 
