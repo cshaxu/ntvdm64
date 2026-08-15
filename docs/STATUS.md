@@ -5,7 +5,7 @@
 > **Current effective packet: M0 T219 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T219 S2 -- PDB-owned DEM resource-session ABI.**
+**Active: M0 T219 S2 -- T200 actual bound-route reconciliation audit.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -27,35 +27,57 @@
 
 ## Active Packet
 
-> **T scope:** T219 recovers the first-profile guest child lifecycle as two
-> whole owner packages: DEM entry/PDB lifecycle and COMMAND one-shot parent
-> return. It preserves guest DOS ownership, uses the common host-mutation and
-> drive-view ABI, and never promotes a trace hit into a leaf BOP task.
+> **T scope:** T219 first reconciles the full T200 BOP inventory against the
+> source routes actually bound by today's composition.  It then records a
+> corrected admission basis for the next whole owner package, including any
+> later correction to T218's `$Exec` prerequisite map.  It does not reopen a
+> closed numeric task or promote a trace hit into a leaf BOP task.
 
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T219 S2, Ordinary Mode. |
-| Admission And Approval | T219 S1 established the direct-host child lifetime gap. This S admits the one source-derived DEM resource-session seam required by the original `demTerminatePDB` contract before any COMMAND return or native child trace. |
-| Objective | Add one fixed-width PDB-owned DEM resource-session ABI, migrate direct-host handle/search/pending resource ownership to it, and provide a `50:3C` lifecycle release path that preserves `VOID`/no-delta semantics across direct, readonly, overlay and virtual profiles. |
-| Non-goals | No trace-selected BOP implementation, guest `$Exec` recreation, DOS/BIOS patch, host mutation behavior expansion, Bochs/mantle change, VDD subsystem, COMMAND return implementation, target execution claim, or native trace. |
-| Reference Baseline | T219 S1 lifecycle map; T176 S15--S19 finite-profile lifecycle evidence; OpenNT `msctrlc.asm`, `demsrch.c`, `demmisc.c`; current direct-host DEM file/session and mutation profile source. |
-| Files And ABI Surface | `src/bx-vdm` DEM resource/session and lifecycle sources plus focused `tests/bx-vdm`; no guest, bx-core, bx-mantle or CLI ABI change. |
+| Admission And Approval | The owner directed: “use every T200 line as a checklist, verify the actual bound route in current source, flag later shims, stale fallbacks and paths that belong in the shared profile ABI; update the conclusion, then continue T218.” This is renewed approval after S2's guest-PSP-inspection stop condition. |
+| Objective | Account for all 203 T200 endpoints with their current ingress-to-bound-provider route, T200 relation, later shim/fallback status, and shared-profile migration disposition; correct the `$Exec` continuation basis without reopening closed T218. |
+| Non-goals | No BOP behavior implementation, guest `$Exec` recreation, guest PSP inspection, DOS/BIOS patch, host-mutation behavior expansion, Bochs/mantle change, COMMAND return implementation, target-execution claim, or native trace. |
+| Reference Baseline | T200 S31 ledger and exported inventory; T215 current-source reconciliation; T217 declared-image/COMMAND evidence; T218 `$Exec` map; T219 S1 lifecycle map; current bx-vdm ingress, compositions, facades, sessions, providers and shared profile ABI source. |
+| Files And ABI Surface | `docs/STATUS.md`, `docs/etc/research/` reconciliation evidence, and a read-only `tools/governance/` inventory/reconciliation helper if necessary; no runtime ABI or behavior change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Two-PDB positive release, foreign-PDB preservation, absent-PDB no-op, stale-token refusal, invalid ingress/profile declines, focused direct/readonly/overlay/virtual tests, governance and diff checks pass. |
-| Expected Markers | One common resource owner, copied PDB identity, no raw guest/host pointer ABI, original `50:3C` four-byte no-delta resume, and no profile-specific leaf bypass. |
-| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T219 S1 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record migrated resource ownership, original source rule, profile results, failure behavior, test commands and limitations. |
-| Stop Conditions | A need for VDD/device cleanup, guest PSP inspection, host-process launch, native trace, guest binary patch, profile expansion or Bochs/mantle change pauses S2 for re-admission. |
-| Exit Criteria | Direct-host and finite DEM resources have one PDB-owned lifecycle owner with focused regressions; no COMMAND return or child-run claim is made. |
+| Verification | Regenerate/validate the 203-row canonical identity set; every row has a current source route or an explicit unbound state, T200 comparison, shim/fallback disposition and profile-ABI disposition; source references resolve; documentation governance and diff checks pass. |
+| Expected Markers | No anonymous “generic ingress” is mistaken for a bound provider; all post-T200 shims and stale fallbacks are named; shared profile ownership is distinguished from package-local policy; corrected `$Exec` prerequisites name their owner-package boundary. |
+| Asset Needs | Existing OpenNT source, T200 ledger/exporter, current bx-vdm source and profile declarations, and retained evidence; no new image, firmware, media or external source import. |
+| Reporting Requirements | Publish the complete row ledger, grouped source-route findings, source-first/rung disposition where a shim changed the route, limitations, and the exact successor-package recommendation. |
+| Stop Conditions | Any need to change runtime behavior, add a provider, inspect guest PSP memory, run a native trace, expand a profile, modify Bochs/mantle, or import source pauses S2 for re-admission. |
+| Exit Criteria | All 203 endpoints are reconciled; T200's stale conclusions and post-T200 changes are explicit; T218's `$Exec` continuation is affirmed, narrowed or replaced; and the next whole owner package is recommended without implementation. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | First and subsequent child entry, no-VDD and VDD branches, PDB-owned host file/search state, TSR/abort/normal exit, debugger guards, DEM `50:34..3C`, COMMAND `54:0B`, host mutation profiles and current session teardown. |
+| Similar-Issue Sweep | Every DEM, COMMAND, XMS, DPMI, Redirector, debugger, WOW and top-level/machine endpoint; ingress/registry versus executable composition; package facade/session/provider branches; profile holder duplication; T200-era unavailable fallbacks; and all shims added through T219 S1. |
+
+> **T219 S2 re-admission:** the former PDB-owned resource-session implementation
+> brief is paused at its declared guest-PSP-inspection stop condition.  The
+> owner instead requires a full reconciliation of the 203-row T200 ledger
+> against current source binding before any `$Exec` continuation or new BOP
+> behavior.  T218 remains closed as required by task-number governance; this
+> audit records whether its `$Exec` prerequisite conclusion remains usable and
+> selects a new, later numeric package if continuation is warranted.
+
+> **T219 S2 P1 closure:** the regenerated 203-entry T200 identity set has one
+> current source-route record per selector/service/handler.  T200's
+> boot/fixture-only DEM and endpoint-local COMMAND descriptions are stale;
+> the current executable composition has later direct-host DEM and COMMAND
+> session seams, while DPMI, redirector and debugger remain intentional
+> unavailable/deferred families.  T218's guest-DOS ownership remains valid,
+> but its proposed copied-PDB resource seam is superseded by the original
+> guest PDB/JFT/SFT ownership requirement.  See the complete
+> [reconciliation](etc/research/t219-s2-t200-bound-route-reconciliation-001.md)
+> and its [203-row ledger](etc/research/t219-s2-t200-bound-route-reconciliation-001.json).
 
 > **T219 S1 P1 closure:** the old finite-profile `50:3C` provider releases
 > only boot-namespace search slots and cannot clean direct-host handles because
 > their current tokens lack copied PDB ownership. `50:36` remains a no-VDD
-> lifecycle notification, not a loader. S2 must define one PDB-owned DEM
-> resource-session ABI before any COMMAND return or native child trace. See
-> the [lifecycle map](etc/research/t219-s1-dem-child-pdb-lifecycle-map-001.md).
+> lifecycle notification, not a loader. T219 S2's reconciliation corrects the
+> earlier proposed ABI: original `demfile.c` obtains ownership through guest
+> PDB/JFT/SFT state, so no new resource ABI may be implemented until the
+> complete owner contract is admitted. See the [lifecycle map](etc/research/t219-s1-dem-child-pdb-lifecycle-map-001.md)
+> and [reconciliation](etc/research/t219-s2-t200-bound-route-reconciliation-001.md).
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
