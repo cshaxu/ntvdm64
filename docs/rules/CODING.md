@@ -11,6 +11,11 @@
   Do not select a later rung for convenience, a trace hit, a modern API, or a
   temporary capacity limit. Name the owner/source/dependencies and account for
   layout, ordering, and failure behavior at every rejected rung.
+- Treat the four-rung source-recovery audit as an implementation gate: record
+  original-source reuse, then the smallest contract-preserving adapter/shim,
+  then a registered external-code intrusion, and only last new behavior.  A
+  modern Win32 API may supply a selected OpenNT owner's host capability, but
+  never authorizes bypassing that owner's algorithm or failure contract.
 - Keep authored runner code, overlays, host seams, imported material, generated
   files, and fixtures visibly separate.
 - Make the smallest evidence-backed change. Preserve calling conventions,

@@ -83,7 +83,7 @@
 
 > **T217 S1 P1 finding:** `cmdenv.c` cannot link without the historical
 > CCPU/SoftPC/product shell, but it supplies the normative initial-environment
-> algorithm. The existing 4 KiB repair remains valid; its ANSI-to-OEM sequence
+> algorithm. The former 4,023-byte adapter ceiling was removed; its ANSI-to-OEM sequence
 > requires one source-derived seam correction before it can be treated as
 > source-first compliant. The distinct AUTOEXEC merge remains unclaimed. See
 > the [source-reuse audit](etc/research/t217-s1-command-environment-source-reuse-audit-001.md).

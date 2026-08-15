@@ -52,21 +52,41 @@ static int contains_name(const uint8_t *environment, uint32_t bytes, const char 
     return 0;
 }
 
+static int named_value_has_bytes(const uint8_t *environment, uint32_t bytes,
+    const char *name, size_t value_bytes)
+{
+    uint32_t offset = 0u;
+    size_t name_bytes = strlen(name);
+    while (offset < bytes && environment[offset] != 0u) {
+        size_t entry_bytes = strlen((const char *)environment + offset);
+        if (strncmp((const char *)environment + offset, name, name_bytes) == 0 &&
+            environment[offset + name_bytes] == '=' &&
+            entry_bytes == name_bytes + 1u + value_bytes) return 1;
+        offset += (uint32_t)entry_bytes + 1u;
+    }
+    return 0;
+}
+
 int main(void)
 {
     saved_value values[] = {
         { "NTDOS64_T217_LOWER", { 0 }, 0 },
+        { "NTDOS64_T217_LONG", { 0 }, 0 },
         { "COMSPEC", { 0 }, 0 }, { "WINDIR", { 0 }, 0 }, { "PROMPT", { 0 }, 0 }
     };
+    static char long_value[5001];
     bx_ntvdm_command_host_context_v1 context;
     uint8_t root[] = "C:\\";
     unsigned index;
     int passed = 1;
 
     memset(&context, 0, sizeof(context));
+    memset(long_value, 'X', sizeof(long_value) - 1u);
+    long_value[sizeof(long_value) - 1u] = '\0';
     for (index = 0u; index < sizeof(values) / sizeof(values[0]); ++index)
         if (!save(&values[index])) return 2;
     if (!SetEnvironmentVariableA("NTDOS64_T217_LOWER", "Value") ||
+        !SetEnvironmentVariableA("NTDOS64_T217_LONG", long_value) ||
         !SetEnvironmentVariableA("COMSPEC", "C:\\UNWANTED.COM") ||
         !SetEnvironmentVariableA("WINDIR", "C:\\UNWANTED") ||
         !SetEnvironmentVariableA("PROMPT", 0) ||
@@ -76,7 +96,10 @@ int main(void)
             "NTDOS64_T217_LOWER=Value") || !contains(context.environment,
             context.environment_bytes, "PROMPT=$P$G") || contains_name(
             context.environment, context.environment_bytes, "COMSPEC") || contains_name(
-            context.environment, context.environment_bytes, "WINDIR"))) passed = 0;
+            context.environment, context.environment_bytes, "WINDIR") ||
+            context.environment_bytes <= 4023u || !named_value_has_bytes(
+            context.environment, context.environment_bytes, "NTDOS64_T217_LONG",
+            sizeof(long_value) - 1u))) passed = 0;
     /* OpenNT retains a nonempty malformed entry and later duplicates after
        its first-prefix filter. The copied ABI must not erase that source
        contract merely because normal Win32 APIs cannot create such a block. */

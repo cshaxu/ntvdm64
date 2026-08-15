@@ -8,3 +8,9 @@
 6. Default product targets cannot depend on unreviewed artifacts, fixtures, or an unpinned third-party source snapshot.
 7. Bochs is deny-by-default. Each enabled feature needs a reached first-profile OpenNT caller, named Bochs owner, boundary rationale, explicit admission record, and focused negative test. Upstream availability is not a reason to enable it.
 8. Preserve original OpenNT service ownership, calling conventions, layouts, dispatch order, and failure behavior. Bochs and the adapter may carry a documented contract but may not recreate that behavior.
+9. Historical recovery uses a mandatory source-recovery precedence: reusable
+   OpenNT source first; its smallest contract-preserving adapter/shim second;
+   registered external-code intrusion third; newly authored behavior only when
+   no earlier route is usable.  CLI integration may use supported host APIs as
+   capabilities of the selected OpenNT-owned service, without modifying the
+   host merely to install or run this product.

@@ -108,6 +108,22 @@ unavoidable.  A passing fixture and the availability of a convenient modern
 Win32 API validate a selected seam; neither substitutes for this source-first
 analysis.
 
+### Source-Recovery Audit Criterion
+
+Every recovered behavior must carry a reviewable four-rung ledger: **original
+source reuse**, **smallest adapter/shim retaining that source contract**,
+**registered external-code intrusion**, then **newly authored behavior**.  The
+first usable rung is mandatory.  The ledger must cite the original owner and
+paths; state whether its translation unit was practically composable; identify
+the exact historical ABI, ordering, data layout, and failure rule retained; and
+name the concrete dependency that prevents every earlier rejected rung.  The
+only permitted policy constraints are an explicitly approved CLI requirement,
+Bochs-for-SoftPC substitution, one of the approved host-mutation modes, or
+the unpack-and-run rule that forbids changing the host merely to install this
+product.  A supported Win32 API is normally a capability behind the selected
+OpenNT owner—it is not authority to replace that owner with a new adapter
+policy.
+
 For every P or Td closure:
 
 1. Re-read the owner request and map each requirement to changed files and

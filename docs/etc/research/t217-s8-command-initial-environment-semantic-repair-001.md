@@ -60,11 +60,25 @@ The MSVC x64 `/MT` executable compiled and printed:
 bx-ntvdm COMMAND initial environment: OpenNT ANSI/OEM filter contract verified
 ```
 
-The focused fixture covers ANSI-to-OEM/name-case/PROMPT/first host entries;
-its source-permitted duplicate-plus-malformed block verifies that the copied
-ABI does not erase entries that the OpenNT loop can retain. It cannot make the
-ordinary Win32 process environment contain duplicate variables, so it is an
-ABI acceptance test rather than a live-host duplicate test.
+The focused fixture covers ANSI-to-OEM/name-case/PROMPT/first host entries and
+now installs a process-local 5,000-byte value before capture.  It verifies
+that the actual `GetEnvironmentStringsA` path retains that value and produces
+an OEM environment above the former 4,023-byte adapter ceiling.  Its
+source-permitted duplicate-plus-malformed block verifies that the copied ABI
+does not erase entries that the OpenNT loop can retain. It cannot make the
+ordinary Win32 process environment contain duplicate variables, so that part
+is an ABI acceptance test rather than a live-host duplicate test.
+
+The live-capture extension was rebuilt and run on 2026-08-15 with:
+
+```text
+powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T217S2CommandInitialEnvironmentProbe.ps1 \
+  -RepositoryRoot O:\repos.hobby\ntdos64 \
+  -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t217-s8-command-environment-live-over4023-r1
+```
+
+It exited `0` and wrote `run.log` plus a passed x64 `/MT` JSON record under
+that build root.
 
 ## Deliberate Limits
 
