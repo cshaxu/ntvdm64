@@ -82,6 +82,11 @@
 > historical `DosSessionId` input has no admitted CLI ABI. See the [P1
 > record](etc/research/t211-s2-command-bootstrap-provider-p1-001.md).
 
+> **T211 S2 P2 progress:** `54:10` no longer shares the host-child execution
+> path with `54:08`; its package-owned deferred disposition now yields a
+> checked controlled stop, verified by the fresh integrated x64 `/MT` r7
+> fixture. No historical `DosSessionId` result was fabricated.
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was

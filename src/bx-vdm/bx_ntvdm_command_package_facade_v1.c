@@ -7,7 +7,11 @@ static int existing_provider(uint8_t service)
      * callable cmddisp.c slot.  Per-service capability disposition happens
      * inside that session; no service may be intercepted by a detached
      * facade leaf before the provider can record its source-shaped outcome. */
-    return service < 17u;
+    /* cmdGetStartInfo reads DosSessionId.  That historical session/console
+     * broker is not an admitted CLI ABI, so it must remain observable as a
+     * package-owned deferred result rather than fall through as an unknown
+     * #UD or fabricate AL. */
+    return service < 17u && service != 16u;
 }
 void bx_ntvdm_command_package_route_v1_clear(bx_ntvdm_command_package_route_v1 *route)
 {
@@ -41,8 +45,14 @@ int bx_ntvdm_command_package_facade_v1_dispatch(const bx_ntvdm_bop_ingress_v1 *i
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu_before,
     bx_ntvdm_cpu_result_v2 *result)
 {
-    if (!result || !bx_ntvdm_command_package_route_v1_valid(route)) return 0;
+    if (!result || !bx_ntvdm_command_package_route_v1_valid(route) || !ingress ||
+        !selection || !event || !cpu_before) return 0;
     bx_ntvdm_cpu_result_v2_pass_through(result);
-    (void)ingress; (void)selection; (void)event; (void)cpu_before;
+    if (route->disposition == BX_NTVDM_COMMAND_PACKAGE_DEFERRED &&
+        route->plane.component == BX_NTVDM_COMMAND_COMPONENT_BOOTSTRAP &&
+        route->plane.service == 16u && ingress->family == BX_NTVDM_BOP_FAMILY_COMMAND &&
+        ingress->service == 16u && event->vector == 6u &&
+        cpu_before->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL)
+        return bx_ntvdm_cpu_result_v2_stop(result);
     return 0;
 }

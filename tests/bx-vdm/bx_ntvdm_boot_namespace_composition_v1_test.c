@@ -321,12 +321,13 @@ static int command_facade_regression(void)
         uint8_t bytes[4]={0xc4u,0xc4u,0x54u,(uint8_t)service};
         bx_ntvdm_instruction_window_v1 window; bx_ntvdm_bop_ingress_v1 ingress;
         bx_ntvdm_bop_provider_selection_v1 selection; bx_ntvdm_command_package_route_v1 route;
-        uint32_t expected=BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER;
+        uint32_t expected=service==16u ? BX_NTVDM_COMMAND_PACKAGE_DEFERRED :
+            BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER;
         bx_ntvdm_instruction_window_v1_capture(&window,bytes,4u);
         if(!bx_ntvdm_bop_ingress_v1_classify(&window,&ingress)||!bx_ntvdm_bop_provider_registry_v1_select(&ingress,&selection)||!bx_ntvdm_command_package_facade_v1_classify(&ingress,&selection,&route)||route.disposition!=expected) return 0;
-        /* The facade now only classifies.  All terminal/no-op/deferred forms
-           are emitted by the bound COMMAND session so no service bypasses
-           the package owner. */
+        /* The facade classifies only.  The one admitted unavailable member
+           (54:10) is emitted as a package-owned deferred stop; all others
+           reach the bound COMMAND session. */
     }
     return 1;
 }
@@ -496,10 +497,13 @@ int main(void)
         } else if (service == 0u) {
             if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
                 outcome.disposition != BX_NTVDM_GENERIC_UD_STOP) return 57;
-        } else if (service == 7u || service == 9u || service == 11u ||
-                   service == 16u) {
+        } else if (service == 16u) {
+            if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+                outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
+                outcome.resume_rip != 0u || outcome.gpr16_write_mask != 0u ||
+                outcome.eflags_write_mask != 0u) return 57;
+        } else if (service == 7u || service == 9u || service == 11u) {
             if (service == 11u) event.eax = 0xa57fu;
-            if (service == 16u) event.eax = 0x8c77u;
             if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
                 outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
                 outcome.resume_rip != 0x104u) return 57;
@@ -512,8 +516,6 @@ int main(void)
                     outcome.gpr16_values[0] != 0xa500u ||
                     outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
                     outcome.eflags_values != 0u)) return 61;
-            if (service == 16u && (outcome.gpr16_write_mask != 1u ||
-                    outcome.gpr16_values[0] != 0x8c00u)) return 62;
         }
     }
     /* GSET clock is one contained read-only host capability.  Query results
@@ -716,6 +718,14 @@ int main(void)
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 0u) return 27;
+
+    /* cmdGetStartInfo is a member of the same bootstrap component, but the
+       original DosSessionId broker has no approved CLI representation.  The
+       package must make that explicit and must not run it as cmdExecComspec32. */
+    event_initialize(&event, 0x54, 0x10);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_STOP || outcome.resume_rip != 0u ||
+        outcome.gpr16_write_mask != 0u || outcome.eflags_write_mask != 0u) return 71;
 
     event_initialize(&event, 0x5f, 0);
     event.eax = 0xbeefu; event.cs = event.ds = 0x1000u; event.esi = 0x40u;

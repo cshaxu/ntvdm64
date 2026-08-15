@@ -61,6 +61,11 @@ closure.
    at `artifacts/build/t211-s2-command-bootstrap-r2` passed.  Its provider
    fixture enumerates every `54:00..10` identity, verifies the exact eight
    memberships and rejects the dispatcher sentinel `54:11`.
+3. The refreshed `boot-namespace` fixture at
+   `artifacts/build/t211-s2-command-bootstrap-r7` additionally proves that
+   `54:10` produces the package's controlled deferred stop in both its
+   COMMAND-family sweep and direct route check.  It has no register or flags
+   delta and cannot reach the host-child execution seam.
 
 This is P1 progress only.  S2 still needs an explicit component-level
 success/failure/no-context/malformed-gather matrix and a final owner-package
