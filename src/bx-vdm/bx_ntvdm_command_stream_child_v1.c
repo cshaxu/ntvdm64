@@ -30,6 +30,12 @@ static uint32_t token(const bx_ntvdm_command_stream_child_v1 *value,
         slot;
 }
 
+static uint32_t read_u32le(const uint8_t *value)
+{
+    return (uint32_t)value[0] | ((uint32_t)value[1] << 8u) |
+        ((uint32_t)value[2] << 16u) | ((uint32_t)value[3] << 24u);
+}
+
 void bx_ntvdm_command_stream_child_v1_initialize(
     bx_ntvdm_command_stream_child_v1 *value)
 {
@@ -97,4 +103,34 @@ int bx_ntvdm_command_stream_child_v1_dispatch_stream(
         bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u) &&
         bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u,
             (uint16_t)(opaque >> 16u));
+}
+
+int bx_ntvdm_command_stream_child_v1_validate_std_handles(
+    bx_ntvdm_command_stream_child_v1 *value, const uint8_t *payload,
+    uint32_t payload_bytes)
+{
+    /* OpenNT's packed STD_HANDLES order is stderr, stdout, stdin. */
+    static const uint32_t slots[BX_NTVDM_COMMAND_STREAM_CHILD_V1_SLOT_COUNT] = {
+        2u, 1u, 0u
+    };
+    uint32_t index;
+    if (!bx_ntvdm_command_stream_child_v1_valid(value)) return 0;
+    if (payload == 0 || payload_bytes != 12u) {
+        if (value->rejected_record_count != UINT32_MAX)
+            ++value->rejected_record_count;
+        return 0;
+    }
+    for (index = 0u; index < BX_NTVDM_COMMAND_STREAM_CHILD_V1_SLOT_COUNT;
+         ++index) {
+        uint32_t slot = slots[index];
+        if ((value->available_mask & (1u << slot)) == 0u ||
+            read_u32le(payload + index * 4u) != token(value, slot)) {
+            if (value->rejected_record_count != UINT32_MAX)
+                ++value->rejected_record_count;
+            return 0;
+        }
+    }
+    if (value->validated_record_count == UINT32_MAX) return 0;
+    ++value->validated_record_count;
+    return 1;
 }

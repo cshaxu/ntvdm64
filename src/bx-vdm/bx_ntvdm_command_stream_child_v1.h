@@ -11,7 +11,8 @@
  * copied to a CPU result, guest range, or another component. */
 typedef struct bx_ntvdm_command_stream_child_v1 {
     uint32_t magic, abi_version, struct_bytes, generation;
-    uint32_t available_mask, reserved0;
+    uint32_t available_mask, validated_record_count, rejected_record_count,
+        reserved0;
     uintptr_t private_handle_values[BX_NTVDM_COMMAND_STREAM_CHILD_V1_SLOT_COUNT];
 } bx_ntvdm_command_stream_child_v1;
 
@@ -28,6 +29,9 @@ int bx_ntvdm_command_stream_child_v1_dispatch_stream(
     const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_instruction_window_v1 *window,
     bx_ntvdm_cpu_result_v2 *result);
+int bx_ntvdm_command_stream_child_v1_validate_std_handles(
+    bx_ntvdm_command_stream_child_v1 *value, const uint8_t *payload,
+    uint32_t payload_bytes);
 #ifdef __cplusplus
 }
 #endif

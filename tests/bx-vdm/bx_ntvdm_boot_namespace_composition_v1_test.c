@@ -336,6 +336,7 @@ int main(void)
     struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t service;
+    uint32_t stream_tokens[3] = { 0u, 0u, 0u };
     int direct_search_error, direct_handle_error;
     bx_ntvdm_host_namespace_entry_v1 terminating_entries[2] = { 0 };
     bx_ntvdm_host_namespace_entry_v1 terminating_out;
@@ -388,6 +389,32 @@ int main(void)
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 242;
     if (outcome.eflags_values != 0u) return 243;
     if (memcmp(ram + 0x900u, "C:\\NTDOS64", 10u) != 0) return 244;
+    for (service = 0u; service < 3u; ++service) {
+        event_initialize(&event, 0x54u, 0x06u);
+        event.ecx = service;
+        if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+            outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 249;
+        stream_tokens[service] = ((uint32_t)outcome.gpr16_values[3] << 16u) |
+            outcome.gpr16_values[1];
+    }
+    ram[0x340u] = (uint8_t)(stream_tokens[2] & 0xffu);
+    ram[0x341u] = (uint8_t)(stream_tokens[2] >> 8u);
+    ram[0x342u] = (uint8_t)(stream_tokens[2] >> 16u);
+    ram[0x343u] = (uint8_t)(stream_tokens[2] >> 24u);
+    ram[0x344u] = (uint8_t)(stream_tokens[1] & 0xffu);
+    ram[0x345u] = (uint8_t)(stream_tokens[1] >> 8u);
+    ram[0x346u] = (uint8_t)(stream_tokens[1] >> 16u);
+    ram[0x347u] = (uint8_t)(stream_tokens[1] >> 24u);
+    ram[0x348u] = (uint8_t)(stream_tokens[0] & 0xffu);
+    ram[0x349u] = (uint8_t)(stream_tokens[0] >> 8u);
+    ram[0x34au] = (uint8_t)(stream_tokens[0] >> 16u);
+    ram[0x34bu] = (uint8_t)(stream_tokens[0] >> 24u);
+    event_initialize(&event, 0x54u, 0x08u);
+    event.ss = 0u; event.ebp = 0x340u; event.eax = 0xa500u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.gpr16_values[0] != 0xa532u ||
+        composition.command.stream_child.validated_record_count != 1u) return 250;
     /* The COMMAND package, rather than a trace observation, defines every
        callable outcome.  Selected positive services are exercised below;
        this sweep proves the no-op, common unavailable route, and all five

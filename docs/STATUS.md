@@ -189,6 +189,13 @@
 > guest `STD_HANDLES` gathering, VDD/VDM broker behavior and native-guest
 > closure remain unclaimed; see the [stream-token evidence](etc/research/t202-s6-command-stream-token-001.md).
 
+> **T202 S6 progress:** the same COMMAND provider now gathers the original
+> 12-byte `54:08` `STD_HANDLES` shape from checked `SS:BP` guest RAM and
+> validates its copied stderr/stdout/stdin token order without retaining a
+> guest address.  The x64 `/MT` regression passes.  This is input substrate:
+> `54:08` still returns the existing deferred lifecycle result and no child
+> is launched; see the [gather evidence](etc/research/t202-s6-command-stream-gather-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
