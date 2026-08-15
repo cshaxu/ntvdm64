@@ -40,6 +40,15 @@ int main(void)
     selection.has_guest_search_metadata = 0u;
     if (bx_ntvdm_profile_search_snapshot_v1_initialize(&snapshot, &resource_set,
             &selection)) return 1;
+    selection.has_guest_search_metadata = 1u;
+    resource_set.files[1].bytes = NULL; resource_set.files[1].byte_count = 0u;
+    resource_set.files[2].bytes = NULL; resource_set.files[2].byte_count = 0u;
+    if (!bx_ntvdm_profile_search_snapshot_v1_initialize(&snapshot, &resource_set,
+            &selection) || snapshot.entries[1].byte_count != 0u ||
+        snapshot.entries[2].byte_count != 0u) return 2;
+    resource_set.files[0].bytes = NULL; resource_set.files[0].byte_count = 1u;
+    if (bx_ntvdm_profile_search_snapshot_v1_initialize(&snapshot, &resource_set,
+            &selection)) return 3;
     puts("profile-search-snapshot-test: finite BYOB projection verified");
     return 0;
 }

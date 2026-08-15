@@ -18,6 +18,10 @@ int main(void)
     byob_profile_selection selection = { 0 };
     bx_ntvdm_boot_namespace_provider_v1 provider;
     bx_ntvdm_startup_configuration_input_v1 startup_input = { 0 };
+    bx_ntvdm_startup_configuration_provider_v1 generated;
+    bx_ntvdm_readonly_namespace_v1 updated_namespace;
+    bx_ntvdm_profile_search_snapshot_v1 updated_snapshot;
+    bx_ntvdm_command_boot_input_v1 updated_boot_input;
     bx_ntvdm_mutation_profile_v1 startup_profile;
     bx_ntvdm_exception_event_v1 event = { BX_NTVDM_EXCEPTION_ABI_MAGIC,
         BX_NTVDM_EXCEPTION_ABI_VERSION, sizeof(event), BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION,
@@ -47,23 +51,60 @@ int main(void)
         selection.config_metadata.dos_date = selection.autoexec_metadata.dos_date = 1u;
     if (!bx_ntvdm_boot_namespace_provider_v1_initialize(&provider, &command_image,
         &target_image, NULL, &selection)) return 1;
+    if (!bx_ntvdm_boot_namespace_provider_v1_valid(&provider) ||
+        provider.has_startup_configuration != 0u ||
+        provider.readonly_namespace.files[1].bytes != NULL ||
+        provider.readonly_namespace.files[1].byte_count != 0u ||
+        provider.readonly_namespace.files[2].bytes != NULL ||
+        provider.readonly_namespace.files[2].byte_count != 0u ||
+        provider.search_snapshot.entries[1].byte_count != 0u ||
+        provider.search_snapshot.entries[2].byte_count != 0u) return 9;
     bx_ntvdm_mutation_profile_v1_initialize(&startup_profile,
         BX_NTVDM_MUTATION_MODE_V1_DIRECT);
     startup_input.magic = BX_NTVDM_STARTUP_CONFIGURATION_PROVIDER_V1_MAGIC;
     startup_input.abi_version = BX_NTVDM_STARTUP_CONFIGURATION_PROVIDER_V1_VERSION;
     startup_input.struct_bytes = sizeof(startup_input);
-    memcpy(startup_input.system_root, "C:\\WINDOWS", 10u);
-    startup_input.system_root_bytes = 9u;
+    memcpy(startup_input.system_root, "C:\\WINDOWS", 11u);
+    startup_input.system_root_bytes = 10u;
     startup_input.country_id = 1u;
     startup_input.oem_code_page = 437u;
     memcpy(startup_input.config, "FILES=20\r\n", 10u);
     startup_input.config_bytes = 10u;
     if (!bx_ntvdm_command_profile_consumer_v1_register_class(&startup_profile,
-            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
-        !bx_ntvdm_startup_configuration_policy_v1_initialize(&startup_input.policy,
-            &startup_profile, BX_NTVDM_STARTUP_CONFIGURATION_SOURCE_V1_CONTAINED_FIXTURE) ||
-        !bx_ntvdm_boot_namespace_provider_v1_bind_startup_configuration(&provider,
-            &startup_input)) return 8;
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu)) return 8;
+    if (!bx_ntvdm_startup_configuration_policy_v1_initialize(&startup_input.policy,
+            &startup_profile, BX_NTVDM_STARTUP_CONFIGURATION_SOURCE_V1_CONTAINED_FIXTURE)) return 11;
+    if (!bx_ntvdm_startup_configuration_provider_v1_build(&generated, &startup_input)) return 13;
+    if (generated.result != BX_NTVDM_STARTUP_CONFIGURATION_RESULT_V1_READY)
+        return (int)(20u + generated.result);
+    updated_namespace = provider.readonly_namespace;
+    updated_snapshot = provider.search_snapshot;
+    updated_namespace.files[1].bytes = provider.startup_configuration.config_image;
+    updated_namespace.files[1].byte_count = generated.config_image_bytes;
+    updated_namespace.files[2].bytes = provider.startup_configuration.autoexec_image;
+    updated_namespace.files[2].byte_count = generated.autoexec_image_bytes;
+    if (!bx_ntvdm_command_boot_input_v1_initialize_paths(&updated_boot_input,
+            updated_namespace.drive_index, updated_namespace.files[1].path,
+            updated_namespace.files[2].path)) return 19;
+    if (!bx_ntvdm_profile_search_snapshot_v1_reproject_contents(&updated_snapshot,
+            &updated_namespace)) return 14;
+    if (!bx_ntvdm_boot_namespace_provider_v1_bind_startup_configuration(&provider,
+            &startup_input)) {
+        if (!provider.has_startup_configuration) return 12;
+        if (!bx_ntvdm_startup_configuration_provider_v1_valid(
+                &provider.startup_configuration)) return 15;
+        if (provider.readonly_namespace.files[1].bytes !=
+                provider.startup_configuration.config_image ||
+            provider.readonly_namespace.files[2].bytes !=
+                provider.startup_configuration.autoexec_image) return 16;
+        if (!bx_ntvdm_profile_search_snapshot_v1_valid(&provider.search_snapshot)) return 17;
+        return 18;
+    }
+    if (!provider.has_startup_configuration ||
+        provider.search_snapshot.entries[1].byte_count !=
+            provider.startup_configuration.config_image_bytes ||
+        provider.search_snapshot.entries[2].byte_count !=
+            provider.startup_configuration.autoexec_image_bytes) return 10;
 
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x1000u; cpu.edx = 0x20u;
@@ -91,7 +132,8 @@ int main(void)
     cpu.eflags = 0x40u; window_for(&window, 0x50u, 0x16u);
     if (!bx_ntvdm_boot_namespace_provider_v1_read(&provider, &event, &cpu, &window,
         read_payload, sizeof(read_payload), &bulk, &result) || bulk.payload_bytes == 0u ||
-        memcmp(read_payload, "FILES=20\r\n", bulk.payload_bytes) != 0) return 4;
+        memcmp(read_payload, provider.startup_configuration.config_image,
+            bulk.payload_bytes) != 0) return 4;
     window_for(&window, 0x50u, 0x02u);
     if (!bx_ntvdm_boot_namespace_provider_v1_close(&provider, &event, &cpu, &window,
         &result) || result.eflags_values != 0u) return 5;

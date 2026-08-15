@@ -22,6 +22,9 @@ int bx_ntvdm_profile_search_snapshot_v1_initialize(
     bx_ntvdm_profile_search_snapshot_v1 *value,
     const bx_ntvdm_readonly_namespace_v1 *namespace_value,
     const byob_profile_selection *selection);
+int bx_ntvdm_profile_search_snapshot_v1_reproject_contents(
+    bx_ntvdm_profile_search_snapshot_v1 *value,
+    const bx_ntvdm_readonly_namespace_v1 *namespace_value);
 int bx_ntvdm_profile_search_snapshot_v1_valid(
     const bx_ntvdm_profile_search_snapshot_v1 *value);
 

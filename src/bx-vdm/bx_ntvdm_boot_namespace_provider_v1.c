@@ -48,19 +48,30 @@ int bx_ntvdm_boot_namespace_provider_v1_bind_startup_configuration(
 {
     bx_ntvdm_startup_configuration_provider_v1 generated;
     bx_ntvdm_command_boot_input_v1 boot_input;
+    bx_ntvdm_readonly_namespace_v1 updated_namespace;
+    bx_ntvdm_profile_search_snapshot_v1 updated_snapshot;
     if (!bx_ntvdm_boot_namespace_provider_v1_valid(value) ||
         value->has_startup_configuration ||
         !bx_ntvdm_startup_configuration_provider_v1_build(&generated, input) ||
-        generated.result != BX_NTVDM_STARTUP_CONFIGURATION_RESULT_V1_READY ||
-        !bx_ntvdm_command_boot_input_v1_initialize_paths(&boot_input,
-            value->readonly_namespace.drive_index, value->readonly_namespace.files[1].path,
-            value->readonly_namespace.files[2].path)) return 0;
+        generated.result != BX_NTVDM_STARTUP_CONFIGURATION_RESULT_V1_READY) return 0;
+    updated_namespace = value->readonly_namespace;
+    updated_snapshot = value->search_snapshot;
+    /* Point at the destination object's owned arrays before reprojecting.
+     * `generated` is a stack staging record; retaining its array addresses
+     * would make the newly bound namespace invalid after this call returns. */
+    updated_namespace.files[1].bytes = value->startup_configuration.config_image;
+    updated_namespace.files[1].byte_count = generated.config_image_bytes;
+    updated_namespace.files[2].bytes = value->startup_configuration.autoexec_image;
+    updated_namespace.files[2].byte_count = generated.autoexec_image_bytes;
+    if (!bx_ntvdm_command_boot_input_v1_initialize_paths(&boot_input,
+            updated_namespace.drive_index, updated_namespace.files[1].path,
+            updated_namespace.files[2].path) ||
+        !bx_ntvdm_profile_search_snapshot_v1_reproject_contents(&updated_snapshot,
+            &updated_namespace)) return 0;
     value->startup_configuration = generated;
-    value->readonly_namespace.files[1].bytes = value->startup_configuration.config_image;
-    value->readonly_namespace.files[1].byte_count = value->startup_configuration.config_image_bytes;
-    value->readonly_namespace.files[2].bytes = value->startup_configuration.autoexec_image;
-    value->readonly_namespace.files[2].byte_count = value->startup_configuration.autoexec_image_bytes;
+    value->readonly_namespace = updated_namespace;
     value->command_boot_input = boot_input;
+    value->search_snapshot = updated_snapshot;
     value->has_startup_configuration = 1u;
     return bx_ntvdm_boot_namespace_provider_v1_valid(value);
 }
