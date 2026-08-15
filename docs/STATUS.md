@@ -128,6 +128,13 @@
 > whole provider has not yet received a BOP ingress route or claimed this
 > partition complete; see the [root-open evidence](etc/research/t202-s4-host-namespace-root-relative-open-001.md).
 
+> **T202 S4 progress:** root-relative directory create/remove and same-drive
+> file rename now join the namespace substrate. r8/r14 MSVC x64 `/MT`
+> regressions pass; rename retains the root-relative invariant through the
+> available `NtSetInformationFile` user-mode form rather than an ambient
+> absolute-path fallback. This remains shared provider groundwork, not a BOP
+> route or a namespace/metadata completion claim; see the [root-open evidence](etc/research/t202-s4-host-namespace-root-relative-open-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

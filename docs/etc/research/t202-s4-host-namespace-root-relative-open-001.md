@@ -57,6 +57,17 @@ temporary file; r13 confirms the existing DEM provider closure still passes.
 These are ordinary available user-mode APIs on the current MSVC/x64 target;
 no missing Win32 API was encountered.
 
+Revision r8 adds root-relative directory create/remove and file rename. The
+fixture creates and removes a self-created directory, then creates, renames,
+queries and deletes self-created files. `SetFileInformationByHandle` rejected
+the required root-relative rename payload, so rename uses the available
+user-mode `ntdll!NtSetInformationFile` with the stable local
+`FileRenameInformation` class value and an already-private destination root
+handle. It preserves the admitted-root boundary instead of falling back to
+an ambient absolute path. Cross-drive rename is explicitly rejected as
+`ERROR_NOT_SAME_DEVICE`. r8 and the r14 DEM provider regression pass under
+MSVC x64 `/MT`; no missing host API remains for this primitive set.
+
 ## Interpretation and confidence
 
 The adapter now has a contained direct-host primitive required by the later

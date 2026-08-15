@@ -98,6 +98,16 @@ int bx_ntvdm_host_namespace_v1_set_file_attributes(
 int bx_ntvdm_host_namespace_v1_delete_file(
     const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
     const wchar_t *relative_path, DWORD *win32_error_out);
+int bx_ntvdm_host_namespace_v1_create_directory(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD *win32_error_out);
+int bx_ntvdm_host_namespace_v1_remove_directory(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD *win32_error_out);
+int bx_ntvdm_host_namespace_v1_rename_file(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t source_drive,
+    const wchar_t *source_relative, uint8_t destination_drive,
+    const wchar_t *destination_relative, DWORD *win32_error_out);
 
 #ifdef __cplusplus
 }

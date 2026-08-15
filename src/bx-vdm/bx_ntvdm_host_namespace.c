@@ -14,6 +14,9 @@ NTSYSAPI NTSTATUS NTAPI NtQueryDirectoryFile(HANDLE file, HANDLE event,
     PIO_STATUS_BLOCK status_block, PVOID file_information, ULONG length,
     FILE_INFORMATION_CLASS information_class, BOOLEAN return_single_entry,
     PUNICODE_STRING file_name, BOOLEAN restart_scan);
+NTSYSAPI NTSTATUS NTAPI NtSetInformationFile(HANDLE file,
+    PIO_STATUS_BLOCK status_block, PVOID file_information,
+    ULONG length, FILE_INFORMATION_CLASS information_class);
 
 /* FileIdBothDirectoryInformation (37) is a documented NT directory-query
  * information class, but its record is not declared by the user-mode SDK.
@@ -21,6 +24,9 @@ NTSYSAPI NTSTATUS NTAPI NtQueryDirectoryFile(HANDLE file, HANDLE event,
  * immediately and no native record, path, or handle crosses this module. */
 #define BX_NTVDM_FILE_ID_BOTH_DIRECTORY_INFORMATION_CLASS \
     ((FILE_INFORMATION_CLASS)37)
+/* FileRenameInformation is the stable NT file-information class 10. The
+ * user-mode SDK exposes the payload but not this enum label. */
+#define BX_NTVDM_FILE_RENAME_INFORMATION_CLASS ((FILE_INFORMATION_CLASS)10)
 typedef struct bx_ntvdm_file_id_both_dir_information_v1 {
     ULONG NextEntryOffset;
     ULONG FileIndex;
@@ -556,4 +562,143 @@ int bx_ntvdm_host_namespace_v1_delete_file(
     CloseHandle(handle);
     if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
     return 1;
+}
+
+static int bx_ntvdm_host_namespace_v1_open_directory_ex(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, ACCESS_MASK desired_access,
+    ULONG disposition, HANDLE *handle_out, DWORD *win32_error_out)
+{
+    UNICODE_STRING object_name;
+    OBJECT_ATTRIBUTES attributes;
+    IO_STATUS_BLOCK status_block;
+    BY_HANDLE_FILE_INFORMATION info;
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    NTSTATUS status;
+    size_t length;
+    if (handle_out != 0) *handle_out = INVALID_HANDLE_VALUE;
+    if (win32_error_out != 0) *win32_error_out = ERROR_INVALID_PARAMETER;
+    if (!bx_ntvdm_host_namespace_v1_valid(space) || handle_out == 0 ||
+        drive_index >= 26u ||
+        (space->available_mask & bx_ntvdm_host_namespace_bit(drive_index)) == 0u ||
+        !bx_ntvdm_host_namespace_file_relative(relative_path) ||
+        (length = wcslen(relative_path)) > UINT16_MAX / sizeof(wchar_t)) return 0;
+    object_name.Buffer = (PWSTR)relative_path;
+    object_name.Length = (USHORT)(length * sizeof(wchar_t));
+    object_name.MaximumLength = object_name.Length;
+    InitializeObjectAttributes(&attributes, &object_name,
+        OBJ_CASE_INSENSITIVE | OBJ_DONT_REPARSE, space->roots[drive_index], 0);
+    status = NtCreateFile(&handle, desired_access | SYNCHRONIZE, &attributes,
+        &status_block, 0, FILE_ATTRIBUTE_DIRECTORY,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, disposition,
+        FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT |
+        FILE_OPEN_REPARSE_POINT | FILE_OPEN_FOR_BACKUP_INTENT, 0, 0u);
+    if (status < 0 || !bx_ntvdm_host_namespace_file_info(handle, &info) ||
+        (info.dwFileAttributes & (FILE_ATTRIBUTE_DIRECTORY |
+            FILE_ATTRIBUTE_REPARSE_POINT)) != FILE_ATTRIBUTE_DIRECTORY) {
+        DWORD error = status < 0 ? (DWORD)RtlNtStatusToDosError(status) : GetLastError();
+        if (handle != INVALID_HANDLE_VALUE) CloseHandle(handle);
+        if (win32_error_out != 0)
+            *win32_error_out = error == ERROR_SUCCESS ? ERROR_INVALID_DATA : error;
+        return 0;
+    }
+    *handle_out = handle;
+    if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
+    return 1;
+}
+
+int bx_ntvdm_host_namespace_v1_create_directory(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD *win32_error_out)
+{
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    if (!bx_ntvdm_host_namespace_v1_open_directory_ex(space, drive_index,
+            relative_path, FILE_LIST_DIRECTORY | FILE_READ_ATTRIBUTES,
+            FILE_CREATE, &handle, win32_error_out)) return 0;
+    CloseHandle(handle);
+    return 1;
+}
+
+int bx_ntvdm_host_namespace_v1_remove_directory(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD *win32_error_out)
+{
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    FILE_DISPOSITION_INFO disposition;
+    DWORD error = ERROR_SUCCESS;
+    if (!bx_ntvdm_host_namespace_v1_open_directory_ex(space, drive_index,
+            relative_path, DELETE | FILE_READ_ATTRIBUTES, FILE_OPEN, &handle,
+            &error)) {
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    disposition.DeleteFile = TRUE;
+    if (!SetFileInformationByHandle(handle, FileDispositionInfo, &disposition,
+            sizeof(disposition))) {
+        error = GetLastError();
+        CloseHandle(handle);
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    CloseHandle(handle);
+    if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
+    return 1;
+}
+
+int bx_ntvdm_host_namespace_v1_rename_file(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t source_drive,
+    const wchar_t *source_relative, uint8_t destination_drive,
+    const wchar_t *destination_relative, DWORD *win32_error_out)
+{
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    FILE_RENAME_INFO *rename_info;
+    size_t name_length, bytes;
+    DWORD error = ERROR_SUCCESS;
+    if (win32_error_out != 0) *win32_error_out = ERROR_INVALID_PARAMETER;
+    if (!bx_ntvdm_host_namespace_v1_valid(space) || source_drive >= 26u ||
+        destination_drive >= 26u ||
+        source_drive != destination_drive ||
+        !bx_ntvdm_host_namespace_file_relative(destination_relative) ||
+        (name_length = wcslen(destination_relative)) > UINT32_MAX / sizeof(wchar_t)) {
+        if (win32_error_out != 0 && source_drive != destination_drive)
+            *win32_error_out = ERROR_NOT_SAME_DEVICE;
+        return 0;
+    }
+    if (!bx_ntvdm_host_namespace_v1_open_file_ex(space, source_drive,
+            source_relative, DELETE | FILE_READ_ATTRIBUTES,
+            FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+            OPEN_EXISTING, &handle, &error)) {
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    bytes = sizeof(*rename_info) + (name_length - 1u) * sizeof(wchar_t);
+    rename_info = (FILE_RENAME_INFO *)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+        bytes);
+    if (rename_info == 0) {
+        CloseHandle(handle);
+        if (win32_error_out != 0) *win32_error_out = ERROR_NOT_ENOUGH_MEMORY;
+        return 0;
+    }
+    rename_info->ReplaceIfExists = FALSE;
+    rename_info->RootDirectory = space->roots[destination_drive];
+    rename_info->FileNameLength = (DWORD)(name_length * sizeof(wchar_t));
+    memcpy(rename_info->FileName, destination_relative,
+        name_length * sizeof(wchar_t));
+    {
+        IO_STATUS_BLOCK status_block;
+        NTSTATUS status = NtSetInformationFile(handle, &status_block,
+            rename_info, (ULONG)bytes,
+            BX_NTVDM_FILE_RENAME_INFORMATION_CLASS);
+        if (status >= 0) {
+            HeapFree(GetProcessHeap(), 0u, rename_info);
+            CloseHandle(handle);
+            if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
+            return 1;
+        }
+        error = (DWORD)RtlNtStatusToDosError(status);
+    }
+    HeapFree(GetProcessHeap(), 0u, rename_info);
+    CloseHandle(handle);
+    if (win32_error_out != 0) *win32_error_out = error;
+    return 0;
 }
