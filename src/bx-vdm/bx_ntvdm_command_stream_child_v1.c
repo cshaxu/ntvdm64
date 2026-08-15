@@ -42,8 +42,7 @@ static int selected_execution(const bx_ntvdm_exception_event_v1 *event,
         cpu->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
         event->fault_rip <= UINT64_MAX - 4u && window->valid_bytes >= 4u &&
         window->bytes[0] == 0xc4u && window->bytes[1] == 0xc4u &&
-        window->bytes[2] == 0x54u &&
-        (window->bytes[3] == 8u || window->bytes[3] == 10u);
+        window->bytes[2] == 0x54u && window->bytes[3] == 8u;
 }
 
 static int terminated(const uint8_t *value, uint32_t bytes)

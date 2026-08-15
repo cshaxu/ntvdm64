@@ -31,6 +31,11 @@ Thus `54:10` is owned and visible in the component but is not credited as
 implemented.  Its historical dependency is an audit item, not a reason to
 block the other seven members.
 
+The previously shared host-child execution seam has also been narrowed to
+`54:08 cmdExec`.  It no longer accepts `54:10 cmdExecComspec32`, so an
+unadmitted host child cannot bypass the provider's explicit deferred
+disposition.
+
 ## Migration
 
 `bx_ntvdm_command_package_session_v1` no longer owns separate `bootstrap`,

@@ -45,9 +45,8 @@ static int read_exec_environment(bx_ntvdm_command_package_session_v1 *s,const bx
   for(i=1u;i<BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES;i++)if(!payload[i-1u]&&!payload[i]){*bytes=i+1u;return 1;}return 0; }
 static int dispatch_child(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,int direct,bx_ntvdm_cpu_result_v2 *r)
 { uint8_t command[125],environment[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES];uint32_t command_bytes,environment_bytes;
-  if(!s||!e||!c||!w||!r||!direct||!s->has_host_context||(w->bytes[3]!=8u&&w->bytes[3]!=10u))return 0;
-  if(w->bytes[3]==8u){if(!validate_exec_streams(s,c,w,direct)||!read_exec_tail(s,c,command,&command_bytes))return 0;}
-  else {if(!s->host_context.processor_bytes)return 0;memcpy(command,s->host_context.processor,s->host_context.processor_bytes);command_bytes=s->host_context.processor_bytes;}
+  if(!s||!e||!c||!w||!r||!direct||!s->has_host_context||w->bytes[3]!=8u)return 0;
+  if(!validate_exec_streams(s,c,w,direct)||!read_exec_tail(s,c,command,&command_bytes))return 0;
   if(!read_exec_environment(s,c,environment,&environment_bytes))return 0;
   return bx_ntvdm_command_stream_child_v1_launch(&s->stream_child,command,command_bytes,environment,environment_bytes,&s->host_context,e,c,w,r); }
 int bx_ntvdm_command_package_session_v1_valid(const bx_ntvdm_command_package_session_v1 *s)
