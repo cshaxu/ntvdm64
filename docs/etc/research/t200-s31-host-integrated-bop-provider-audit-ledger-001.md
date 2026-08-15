@@ -132,6 +132,12 @@ row's caller, layout, host API, failure path, current bx-vdm code and final
 disposition. Unknown is recorded as unknown; it is never inferred from a
 trace hit.
 
+The exporter rejects inventory drift, duplicate selector/service identities,
+blank owner/disposition/profile/action fields, and any `unclassified`
+disposition or action. It therefore prevents a missing historical API from
+silently disappearing: the row remains present with its explicit deferred,
+source-derived, or unavailable disposition.
+
 ### Mechanical reconciliation at r2
 
 The corrected source table exactly covers the service-array cardinalities

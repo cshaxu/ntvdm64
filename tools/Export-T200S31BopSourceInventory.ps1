@@ -257,6 +257,22 @@ $seeded = foreach ($entry in $ordered) {
         auditState = 'source identity and owner assigned; ABI/failure/API review pending'
     }
 }
+$duplicates = @($seeded | Group-Object {
+        "$($_.selector):$(if ($null -eq $_.service) { '-' } else { $_.service })"
+    } | Where-Object { $_.Count -ne 1 })
+if ($duplicates.Count -ne 0) {
+    throw "OpenNT BOP inventory has duplicate selector/service identities"
+}
+foreach ($entry in $seeded) {
+    if ([string]::IsNullOrWhiteSpace($entry.ownerPackage) -or
+        [string]::IsNullOrWhiteSpace($entry.targetDisposition) -or
+        [string]::IsNullOrWhiteSpace($entry.profileRelation) -or
+        [string]::IsNullOrWhiteSpace($entry.workaroundAction) -or
+        $entry.targetDisposition -eq 'unclassified' -or
+        $entry.workaroundAction -eq 'unclassified') {
+        throw "OpenNT BOP inventory has an unclassified admission record"
+    }
+}
 $expectedCounts = [ordered]@{
     '50' = 73; '52' = 12; '53' = 25; '54' = 17; '56' = 16; '57' = 50
 }
