@@ -67,6 +67,7 @@ $lines = foreach ($line in Get-Content -LiteralPath (Join-Path $baseline 'link.r
 }
 foreach ($baseName in ($current.Keys | Sort-Object)) { if (-not $emitted.ContainsKey($baseName)) { $lines += '"' + $current[$baseName] + '"' } }
 $lines += '"' + $contractObject + '"'; $lines += '"' + $genericBridgeObject + '"'
+$lines += 'ntdll.lib'
 $lines | Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 | Tee-Object -FilePath (Join-Path $build 'link.log')
 if ($LASTEXITCODE -ne 0) { throw "S16 direct startup-plan link failed: $LASTEXITCODE" }

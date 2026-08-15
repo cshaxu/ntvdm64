@@ -6,6 +6,7 @@
 #include "bx_ntvdm_dem_gset_plane_v1.h"
 #include "bx_ntvdm_dem_package_facade_v1.h"
 #include "bx_ntvdm_dem_profile_consumer_v1.h"
+#include "bx_ntvdm_dem_cwd_context_v1.h"
 
 #define BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC 0x42584453u
 #define BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION 1u
@@ -19,6 +20,7 @@ typedef struct bx_ntvdm_dem_package_session_v1 {
     bx_ntvdm_dem_error_lock_plane_v1 error_lock;
     bx_ntvdm_dem_gset_plane_v1 gset;
     bx_ntvdm_dem_profile_consumer_v1 mutation_profile;
+    bx_ntvdm_dem_cwd_context_v1 cwd;
     uint32_t has_mutation_profile;
 } bx_ntvdm_dem_package_session_v1;
 

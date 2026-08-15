@@ -68,10 +68,13 @@ $lines = foreach ($line in Get-Content -LiteralPath (Join-Path $baseline 'link.r
 }
 foreach ($base in ($current.Keys | Sort-Object)) { if (-not $emitted.ContainsKey($base)) { $lines += '"' + $current[$base] + '"' } }
 $lines += '"' + $contractObject + '"'; $lines += '"' + $entryObject + '"'; $lines += '"' + $genericBridgeObject + '"'
+$lines += 'ntdll.lib'
 $lines | Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 | Tee-Object -LiteralPath (Join-Path $build 'link.log')
 if ($LASTEXITCODE -ne 0) { throw "S14 direct composition link failed: $LASTEXITCODE" }
-& $exe $profile $byobRoot 2>&1 | Tee-Object -LiteralPath (Join-Path $build 'run.log')
+$runLog = Join-Path $build 'run.log'
+& cmd.exe /d /s /c ('"' + $exe + '" "' + $profile + '" "' + $byobRoot +
+    '" > "' + $runLog + '" 2>&1')
 $runExit = $LASTEXITCODE
 $record = [ordered]@{
     schema = 'ntdos64.t200.s14.direct-composition.v1'; architecture = 'x64'; runtimeLibrary = '/MT'

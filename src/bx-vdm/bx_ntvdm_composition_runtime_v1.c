@@ -5,6 +5,8 @@
 #include "bx_ntvdm_host_drive_policy.h"
 #include "bx_ntvdm_host_namespace.h"
 #include "bx_ntvdm_host_volume_snapshot_v1.h"
+#include "bx_ntvdm_mutation_profile_v1.h"
+#include "bx_ntvdm_dem_profile_consumer_v1.h"
 #include "byob_image.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
@@ -27,6 +29,7 @@ typedef struct bx_ntvdm_composition_runtime_v1 {
      * provider lifetime is reset. */
     bx_ntvdm_host_namespace_v1 host_namespace;
     bx_ntvdm_host_volume_snapshot_v1 volumes;
+    bx_ntvdm_mutation_profile_v1 mutation_profile;
     bx_ntvdm_boot_namespace_composition_v1 composition;
     bx_ntvdm_native_bop_composition_v1 native_bop;
     bx_ntvdm_initial_state_v1 initial_state;
@@ -64,7 +67,12 @@ static int install(const wchar_t *profile, const wchar_t *root,
     if (runtime.installed) return 1;
     if (runtime.attempted) return -1;
     runtime.attempted = 1;
-    if (profile == 0 || root == 0 || launch_text == 0 ||
+    bx_ntvdm_mutation_profile_v1_initialize(&runtime.mutation_profile,
+        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    if (!bx_ntvdm_dem_profile_consumer_v1_register_class(
+            &runtime.mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        profile == 0 || root == 0 || launch_text == 0 ||
         byob_profile_validate_file_select(profile, root, &selection) !=
             BYOB_PROFILE_ACCEPTED ||
         selection.has_command_placement == 0u ||
@@ -102,6 +110,8 @@ static int install(const wchar_t *profile, const wchar_t *root,
             &runtime.composition, &runtime.drives) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(
             &runtime.composition, &runtime.volumes) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
+            &runtime.composition, &runtime.mutation_profile) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
             &runtime.composition, &launch) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&runtime.composition) ||

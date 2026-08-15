@@ -65,6 +65,11 @@
 > this is package infrastructure, not a current-directory BOP closure. See
 > the [profile-context evidence](etc/research/t202-s2-dem-cwd-profile-context-001.md).
 
+> **T202 S2 progress:** the real direct composition now installs the same
+> shared DEM profile and CWD context before bind; complete source closure and
+> pointer-free startup-plan regressions pass. See the
+> [installation evidence](etc/research/t202-s2-dem-runtime-profile-installation-001.md).
+
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition
 > lifecycle, repaired its strict C11 source closure, and recorded the separate

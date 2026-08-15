@@ -37,7 +37,7 @@ static int write_tx(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_multi_writ
   for(i=0;i<a.range_count;i++){a.ranges[i].physical_address=t->writes.writes[i].guest_physical_address;a.ranges[i].byte_count=(uint32_t)t->writes.writes[i].byte_count;a.ranges[i].payload_offset=(uint32_t)t->writes.writes[i].payload_offset;}
   memcpy(a.payload,payload,a.payload_bytes);return bx_ntvdm_mechanical_action_v1_valid(&a)&&bx_ntvdm_mantle_execute_mechanical_action_v1(&a); }
 int bx_ntvdm_dem_package_session_v1_valid(const bx_ntvdm_dem_package_session_v1 *s)
-{ return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_mutation_profile<=1u&&(!s->has_mutation_profile||bx_ntvdm_dem_profile_consumer_v1_valid(&s->mutation_profile)); }
+{ return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_mutation_profile<=1u&&(!s->has_mutation_profile|| (bx_ntvdm_dem_profile_consumer_v1_valid(&s->mutation_profile)&&bx_ntvdm_dem_cwd_context_v1_valid(&s->cwd))); }
 int bx_ntvdm_dem_package_session_v1_initialize(bx_ntvdm_dem_package_session_v1 *s,bx_ntvdm_boot_namespace_plane_v1 *p)
 { if(!s||!p)return 0;memset(s,0,sizeof(*s));s->magic=BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC;s->abi_version=BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION;s->struct_bytes=(uint32_t)sizeof(*s);s->namespace_plane=p;bx_ntvdm_dem_error_lock_plane_v1_clear(&s->error_lock);bx_ntvdm_dem_gset_plane_v1_clear(&s->gset);s->initialized=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
 int bx_ntvdm_dem_package_session_v1_set_drive_snapshot(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_host_drive_snapshot_v1 *v)
@@ -45,7 +45,7 @@ int bx_ntvdm_dem_package_session_v1_set_drive_snapshot(bx_ntvdm_dem_package_sess
 int bx_ntvdm_dem_package_session_v1_set_volume_snapshot(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_host_volume_snapshot_v1 *v)
 { return bx_ntvdm_dem_package_session_v1_valid(s)&&bx_ntvdm_dem_gset_plane_v1_set_volume_snapshot(&s->gset,v); }
 int bx_ntvdm_dem_package_session_v1_set_mutation_profile(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_mutation_profile_v1 *p)
-{ if(!bx_ntvdm_dem_package_session_v1_valid(s)||!p||s->has_mutation_profile)return 0;if(!bx_ntvdm_dem_profile_consumer_v1_initialize(&s->mutation_profile,p))return 0;s->has_mutation_profile=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
+{ if(!bx_ntvdm_dem_package_session_v1_valid(s)||!p||s->has_mutation_profile)return 0;if(!bx_ntvdm_dem_profile_consumer_v1_initialize(&s->mutation_profile,p)||!bx_ntvdm_dem_cwd_context_v1_initialize(&s->cwd,p))return 0;s->has_mutation_profile=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
 int bx_ntvdm_dem_package_session_v1_resolve_mutation_class(const bx_ntvdm_dem_package_session_v1 *s,uint32_t c,uint32_t *r)
 { return bx_ntvdm_dem_package_session_v1_valid(s)&&s->has_mutation_profile&&bx_ntvdm_dem_profile_consumer_v1_resolve(&s->mutation_profile,c,r); }
 int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_bop_ingress_v1 *i,const bx_ntvdm_bop_provider_selection_v1 *p,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)

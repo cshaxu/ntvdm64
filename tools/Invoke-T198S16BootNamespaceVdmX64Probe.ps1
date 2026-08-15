@@ -76,6 +76,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_fcb_search_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_computer_name_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_current_dir_service_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_cwd_context_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_default_drive_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_full_dpb_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_gset_plane_v1.c',
@@ -101,11 +102,13 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_guest_read_action_v1.c',
     'src\bx-vdm\bx_ntvdm_guest_write_abi.c',
     'src\bx-vdm\bx_ntvdm_host_drive_policy.c',
+    'src\bx-vdm\bx_ntvdm_host_namespace.c',
     'src\bx-vdm\bx_ntvdm_host_volume_snapshot_v1.c',
     'src\bx-vdm\bx_ntvdm_instruction_window_abi.c',
     'src\bx-vdm\bx_ntvdm_multi_write_abi.c',
     'src\bx-vdm\bx_ntvdm_multi_write_transaction.c',
     'src\bx-vdm\bx_ntvdm_mutation_profile_v1.c',
+    'src\bx-vdm\bx_ntvdm_mutation_overlay_v1.c',
     'src\bx-vdm\bx_ntvdm_mouse_install1_mapping_service.c',
     'src\bx-vdm\bx_ntvdm_profile_search_snapshot_v1.c',
     'src\bx-vdm\bx_ntvdm_printer_unavailable_service.c',
@@ -195,7 +198,7 @@ $map = Join-Path $build 'link.map'
 $response = Join-Path $build 'link.rsp'
 $linkLog = Join-Path $build 'link.log'
 @('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') +
-    @($objects | ForEach-Object { '"' + $_ + '"' }) + @('bcrypt.lib') |
+    @($objects | ForEach-Object { '"' + $_ + '"' }) + @('bcrypt.lib', 'ntdll.lib') |
     Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture +
     ' -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 |
@@ -215,7 +218,7 @@ $record = [ordered]@{
     architecture = $HostArchitecture
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
     runtime = '/MT'
-    platformLibraries = @('bcrypt.lib')
+    platformLibraries = @('bcrypt.lib', 'ntdll.lib')
     sourceClosure = $sourceRelatives
     fixture = if ($Fixture -eq 'dem-package') {
         'tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c'
