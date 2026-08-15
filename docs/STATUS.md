@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T202 S7.** Its governing brief is the active
+> **Current effective packet: M0 T203 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T202 S7 -- COMMAND host-child re-entry capability admission.**
+**Active: M0 T203 S1 -- engine terminal-result transport admission.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -13,28 +13,28 @@
 
 ## Active Packet
 
-> **T scope:** T202 begins owner-package BOP recovery after T201's shared
-> profile foundation. It recovers providers by complete historical component
-> package, starting with DEM; trace is integration evidence only and never
-> creates an endpoint-sized implementation task.
+> **T scope:** T203 establishes whether a normal declared-DOS terminal result
+> can cross from the engine to the CLI through a distinct fixed-width ABI. It
+> follows completed BOP owner-package dispositions and does not recover or
+> create a BOP provider.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T202 S7, Ordinary Mode. |
-| Admission And Approval | S6 closure and the user's continuing request for complete, owner-package BOP recovery admit this lifecycle-contract analysis before any re-entry implementation. Ordinary user-mode host integration is permitted; host installation or system modification is not. |
-| Objective | Establish the complete source/ABI/failure and profile map for one CLI-owned typed host-child→DOS re-entry capability, or prove its source-shaped terminal deferral. |
-| Non-goals | No individual trace-selected BOP patch; no raw `HANDLE`/pointer guest transport; no historical VDM broker/event-thread/VDD substitute; no interactive console or Redirector pipe bridge; no host installation/rebuild; no Bochs semantic change; and no native trace before an admitted whole lifecycle capability passes regression. |
-| Reference Baseline | [S6 closure](history/m0-t202-s6-closure-20260815.md), [S6 ledger](etc/research/t202-s6-command-package-closure-ledger-001.md), `cmdexec.c`, `cmdmisc.c`, `cmdredir.c`, and the [S7 admission plan](etc/operations/t202-s7-command-reentry-capability-admission-plan-001.md). |
-| Files And ABI Surface | Source/ABI map and, only after admission, fixed-width session-owned request/result/cancellation records with x64 `/MT` regressions. No host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
+| Identifier Mode | M0 T203 S1, Ordinary Mode. |
+| Admission And Approval | T202 closure, the first Queue candidate, and the owner's continuing CLI NTVDM objective admit this source/runtime terminal-transport analysis. Ordinary user-mode host integration is permitted; host installation or system modification is not. |
+| Objective | Map the normal declared-DOS terminal path, reproduce or explicitly fail to reproduce a bounded `54:11` normal return, and decide whether a fixed-width engine-to-CLI terminal-result ABI can be admitted. |
+| Non-goals | No BOP implementation or trace-selected endpoint patch; no process exit-code overloading; no raw CPU/Bochs pointer, guest pointer, handle, callback, VDM broker, GUI/VDD or interactive session; no Bochs semantic change. |
+| Reference Baseline | [T202 closure](history/m0-t202-closure-20260815.md), `cmdReturnExitCode`/`cmdGetNextCmd`, current declared-plan lifecycle, and the top Queue candidate. |
+| Files And ABI Surface | Source/runtime map and, only after approval, a versioned fixed-width terminal result. It may expose only copied status/category data; neither host process exit code nor private engine state is an ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Complete source map for all connected lifecycle callers and branches; profile/failure matrix; documentation governance and diff checks. Any later implementation requires fixed-width stale/duplicate/cancelled/cross-session regressions before one bounded native trace. |
-| Expected Markers | One explicit owner/disposition for every host-child→DOS lifecycle branch; no implicit broker or endpoint fallback; a go/no-go admission decision for a bounded queue. |
-| Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
-| Reporting Requirements | Record source provenance, each lifecycle branch, queue ownership, fixed-width ABI candidates, profile disposition, ordinary host API use and any irreducible historical dependency; do not claim queue implementation or native guest closure without separate evidence. |
-| Stop Conditions | Any fallback to trace-selected work, endpoint-only implementation, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, hidden VDMREDIR substitute, unadmitted host mutation, or queue result encoded as host process exit code pauses S7 for re-admission. |
-| Exit Criteria | A reviewer can trace every connected host-child/DOS-return branch to an explicit typed queue design or documented source-shaped terminal deferral, with a justified whole-capability go/no-go decision. |
+| Verification | Source map of normal return continuation; current-source MSVC x64 `/MT` bounded observation; documentation governance and diff checks. Later ABI code requires positive/negative lifetime and no-process-exit-overload regression. |
+| Expected Markers | One explicit engine owner, terminal state, copied result shape and CLI consumer disposition, or a source/runtime-proven deferral with no fabricated result. |
+| Asset Needs | Existing repository, current source-built fixture and no new external asset. |
+| Reporting Requirements | Record the normal-return path, observation result, exact ABI candidates, engine/CLI ownership, and all limitations. A non-reached `54:11` is a result, not permission to simulate it. |
+| Stop Conditions | Any BOP implementation expansion, selector-specific trace patch, process-exit-code transport, raw internal-state exposure, host installation change, or Bochs semantic intrusion pauses S1 for re-admission. |
+| Exit Criteria | A reviewer can identify the normal terminal owner and either see one real bounded normal-return observation plus a safe ABI admission decision, or see a reproducible non-reach proof and source-shaped deferral. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect all COMMAND session/facade/profile leaves, DEM pipe consumers, CLI launch plan, terminal transport, VDD/GUI/process dependencies and global registry for duplicate owner, raw-handle, implicit scheduler or endpoint-only fallback. |
+| Similar-Issue Sweep | Inspect all terminal/controlled-stop paths, COMMAND declared-plan and DOS-return paths, CLI result handling, process exit propagation, bx-mantle lifecycle seams, and global registries for duplicate terminal ownership or hidden result transport. |
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
