@@ -1,4 +1,5 @@
 #include "bx_ntvdm_engine_contract_v1.h"
+#include "bx_ntvdm_terminal_observation_v1.h"
 
 #include <stdio.h>
 
@@ -37,19 +38,29 @@ static int request_set(struct bx_ntvdm_engine_request_v1 *request,
 static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *request)
 {
     struct bx_ntvdm_engine_result_v1 result;
+    struct bx_ntvdm_terminal_observation_v1 stop;
     int call_result = bx_ntvdm_engine_run_v1(request, &result);
     int valid_result = bx_ntvdm_engine_result_v1_valid(&result);
+    int captured = bx_ntvdm_terminal_observation_v1_copy(&stop);
     printf("t214-s3 engine call=%d valid=%d terminal=%u detail=%u\n",
         call_result, valid_result, result.terminal_kind, result.detail_code);
+    if (captured) {
+        printf("t215-s3 stop cs=%04x eip=%08x window=%02x%02x%02x%02x disposition=%u\n",
+            stop.event.cs, stop.event.eip, stop.event.window[0], stop.event.window[1],
+            stop.event.window[2], stop.event.window[3], stop.outcome.disposition);
+    }
+    bx_ntvdm_terminal_observation_v1_enable(0u);
     if (!call_result || !valid_result ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL ||
-        result.detail_code != 1u) return 0;
+        result.detail_code != 1u || !captured || stop.event.window_bytes < 4u ||
+        stop.outcome.disposition != BX_NTVDM_GENERIC_UD_STOP) return 0;
     return 1;
 }
 
 int wmain(int argc, wchar_t **argv)
 {
     struct bx_ntvdm_engine_request_v1 request;
+    bx_ntvdm_terminal_observation_v1_enable(1u);
     if (argc != 3 || !request_set(&request, argv[1], argv[2]) ||
         !controlled_terminal_once(&request)) return 1;
     return 0;
