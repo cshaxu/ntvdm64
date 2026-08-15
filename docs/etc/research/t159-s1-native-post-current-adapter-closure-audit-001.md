@@ -1,4 +1,4 @@
-# T159 S1 native POST/current-adapter closure audit 001
+﻿# T159 S1 native POST/current-adapter closure audit 001
 
 ## Question
 
@@ -46,7 +46,7 @@ executes.
 T160 must use a fresh MSVC **x86** build root and only:
 
 ```text
-tools/New-T98S1CurrentAdapterEngineDerivative.ps1 -DeferredStartupPlan
+tools/build/New-T98S1CurrentAdapterEngineDerivative.ps1 -DeferredStartupPlan
 nmake /f ntdos64-t98-current-adapter.mak ntdos64-t98-current-adapter.exe
 ```
 

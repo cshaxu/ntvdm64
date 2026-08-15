@@ -1,4 +1,4 @@
-# T198 S8 Mechanical Action Boundary Witness 001
+﻿# T198 S8 Mechanical Action Boundary Witness 001
 
 ## Question
 
@@ -13,8 +13,8 @@ dependency direction or attaching any provider?
 - New `src/bx-mantle/bx_ntvdm_mechanical_action_v1.{h,cc}`, registered first
   as `BX-MANTLE-068`.
 - Existing CPU5/Pentium-MMX/non-x86-64 seed command:
-  `tools/Invoke-T197S6MinimalMachineLinkProbe.ps1 -WholeCpu5Core`.
-- `tools/Invoke-T198S3FiniteNativeRunProbe.ps1 -MechanicalActionProbe` and
+  `tools/probe/Invoke-T197S6MinimalMachineLinkProbe.ps1 -WholeCpu5Core`.
+- `tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1 -MechanicalActionProbe` and
   `tests/bx-vdm/Test-MantleMechanicalActionBoundary.ps1`.
 - i686 MinGW GCC 16.1.0 and
   `tests/bx-vdm/bx_ntvdm_mechanical_action_v1_abi_test.c`.

@@ -32,10 +32,10 @@ FASTREAD return failure nor a FASTWRITE selection.
 
 ## Mechanics audit
 
-`src/bochs/cpu/stack.cc:92-95` rejects a non-expand-down stack write when
+`refs/bochs/cpu/stack.cc:92-95` rejects a non-expand-down stack write when
 `offset > limit-len`; it calls the architectural `#SS` path.  The same file
 uses `stackPrefetch(offset, 2)` for a word write at lines 146-152.
-`src/bochs/cpu/exception.cc:1325-1327` delivers a real-mode interrupt or
+`refs/bochs/cpu/exception.cc:1325-1327` delivers a real-mode interrupt or
 exception by pushing FLAGS, CS and IP through those same 16-bit stack writes.
 
 For the displayed instruction, 16-bit `push es` from SP=3 would first use

@@ -1,4 +1,4 @@
-# M0 T194 S52: Deferred Observation Input Audit
+﻿# M0 T194 S52: Deferred Observation Input Audit
 
 ## Question
 
@@ -7,7 +7,7 @@ observation using the retained v6 controller?
 
 ## Inputs and Procedure
 
-The audit read `tools/Invoke-T194S10V6BoundedObservation.ps1`, its static
+The audit read `tools/probe/Invoke-T194S10V6BoundedObservation.ps1`, its static
 boundary test, S51's bundle manifest, and the current process table. The
 controller retains its one-slot properties: a caller-selected bounded
 watchdog, `retryPolicy = 'none'`, a refusal to overwrite an evidence root, a

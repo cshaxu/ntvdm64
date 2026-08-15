@@ -1,4 +1,4 @@
-# T215 S6: Startup BOP Sequence Causal Map
+﻿# T215 S6: Startup BOP Sequence Causal Map
 
 ## Question
 
@@ -13,7 +13,7 @@ exit path without reading guest memory, arguments, or provider state?
   `softpc.new/host/src/nt_bop.c`, and `dos/command/cmdenv.c`.
 - Current T204 startup-image provider plus the T215 S5 direct-provider
   CONFIG/AUTOEXEC overlay.
-- `tools/Invoke-T214S3CompositionOwnerFixture.ps1`, source-built with MSVC
+- `tools/probe/Invoke-T214S3CompositionOwnerFixture.ps1`, source-built with MSVC
   x64 `/MT`.
 
 ## Procedure

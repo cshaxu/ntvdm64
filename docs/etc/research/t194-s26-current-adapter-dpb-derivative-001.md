@@ -1,11 +1,11 @@
-# M0 T194 S26: Current-Adapter DPB Derivative
+﻿# M0 T194 S26: Current-Adapter DPB Derivative
 
 Packet: M0 T194 S26  
 Disposition: source-built derivative complete; engine not started.
 
 ## Procedure
 
-`tools/New-T98S1CurrentAdapterEngineDerivative.ps1` generated `artifacts/build/current/t194-s26-current-adapter-v6-r4` from the retained r5 machine tree and current adapter/CLI source. Then the documented MSVC x86 command built only the generated target:
+`tools/build/New-T98S1CurrentAdapterEngineDerivative.ps1` generated `artifacts/build/current/t194-s26-current-adapter-v6-r4` from the retained r5 machine tree and current adapter/CLI source. Then the documented MSVC x86 command built only the generated target:
 
 ```text
 cmd.exe /d /c call VsDevCmd.bat -arch=x86 -host_arch=x86 &&

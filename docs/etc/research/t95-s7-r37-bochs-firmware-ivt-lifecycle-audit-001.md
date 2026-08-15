@@ -8,9 +8,9 @@ it?
 
 ## Local Source Evidence
 
-The selected execution-plan path is applied in `src/bochs/main.cc` after
+The selected execution-plan path is applied in `refs/bochs/main.cc` after
 `bx_init_hardware()` and immediately before the first `cpu_loop()`.  Its
-registered entry helper (`src/bochs/cpu/init.cc`) changes CS:RIP to the NTIO
+registered entry helper (`refs/bochs/cpu/init.cc`) changes CS:RIP to the NTIO
 entry.  Consequently the first executed guest instruction is NTIO, not the
 processor's reset-vector firmware instruction.
 

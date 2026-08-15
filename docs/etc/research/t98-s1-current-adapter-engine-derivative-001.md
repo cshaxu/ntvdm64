@@ -1,4 +1,4 @@
-# T98 S1 current-adapter engine derivative 001
+﻿# T98 S1 current-adapter engine derivative 001
 
 ## Purpose
 
@@ -8,7 +8,7 @@ This record closes the static part of T98 S1. It turns the retained r5 runtime i
 
 The retained input is `artifacts/build/bochs-2.6-native-s7-runtime-trace-msvc-r5`. Its `ntdos64-s7-runtime-trace.exe` SHA-256 is `F4416F20F456366CC1AFC83D8B40748BF331D02E336BB9350EE8045329582DC2`.
 
-`tools/New-T98S1CurrentAdapterEngineDerivative.ps1` created the fresh r2 derivative at `artifacts/build/bochs-2.6-t98-current-adapter-msvc-r2`. Its manifest is `t98-s1-current-adapter-engine-derivative.json`; its generated shim hash is `BD4C9E48B6A6C0D35C5D14333ACF7A5823328A2AAD3FF69C3F02E44DAA9A3EE3`. The manifest reports 65 current adapter/CLI objects and zero Bochs replacements.
+`tools/build/New-T98S1CurrentAdapterEngineDerivative.ps1` created the fresh r2 derivative at `artifacts/build/bochs-2.6-t98-current-adapter-msvc-r2`. Its manifest is `t98-s1-current-adapter-engine-derivative.json`; its generated shim hash is `BD4C9E48B6A6C0D35C5D14333ACF7A5823328A2AAD3FF69C3F02E44DAA9A3EE3`. The manifest reports 65 current adapter/CLI objects and zero Bochs replacements.
 
 ## Closure result
 

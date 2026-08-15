@@ -1,4 +1,4 @@
-# r18 First-NTIO-Prefix Input Admission
+﻿# r18 First-NTIO-Prefix Input Admission
 
 ## Decision
 
@@ -11,7 +11,7 @@ general BIOS, device, DOS, DEM, BOP or COMMAND compatibility claim.
 
 The input record is the atomically exported r18 snapshot in
 `adapter-r18-startup-snapshot-evidence-export.md`, decoded by
-`tools/Read-StartupSnapshotEvidence.ps1`:
+`tools/probe/Read-StartupSnapshotEvidence.ps1`:
 
 | NTIO source input | r18 value | First-prefix disposition |
 | --- | --- | --- |

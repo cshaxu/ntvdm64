@@ -1,4 +1,4 @@
-# T198 S47 real-mode IP-width repair
+﻿# T198 S47 real-mode IP-width repair
 
 ## Question
 
@@ -35,20 +35,20 @@ OpenNT, CLI or MinGW object in the finite executable.
 
 ```powershell
 # Positive split instruction: r4 exits zero and prints 1000:00000005.
-powershell.exe -ExecutionPolicy Bypass -File tools/Invoke-T198S3FiniteNativeRunProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s47-realmode-ip-wrap-r4 `
   -ExternalFixtureSource O:\repos.hobby\ntdos64\tests\bx-mantle\t198_s46_realmode_ip_wrap_fixture.cc `
   -HostArchitecture x64
 
 # Existing one-byte HLT: r3 exits zero.
-powershell.exe -ExecutionPolicy Bypass -File tools/Invoke-T198S3FiniteNativeRunProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s47-finite-hlt-r3 `
   -HostArchitecture x64
 
 # Existing generic UD2 STOP: r3 exits zero without timer panic.
-powershell.exe -ExecutionPolicy Bypass -File tools/Invoke-T198S3FiniteNativeRunProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s47-finite-ud2-r3 `
   -UdStopFixture -HostArchitecture x64

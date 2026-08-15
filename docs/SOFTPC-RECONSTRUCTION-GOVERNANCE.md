@@ -37,7 +37,7 @@ dispatcher，亦不是把早期的自写 CCPU/BIOS/DEM 探针提升为正式路�
 适配宿主边界，绝不拥有或重写 CCPU、BIOS、BOP、DEM、DOS 或 PC/AT 语义。
 
 对于 NT4 x86 V86 profile 未保存、但 S3 已逐条以原始 CPU caller 限定的 x64 software
-execution mechanics，可在独立的 `src/reconstruction/monitor/` 受限目录重建。该目录
+execution mechanics，可在独立的 `refs/archive/reconstruction/monitor/` 受限目录重建。该目录
 只拥有 CPU/memory/stop mechanics，并必须通过明确 bridge transport 调用历史侧
 `BIOS[]`；它不得拥有或重写 BIOS、BOP、DEM、DOS、IVT/BDA、设备或 host policy。每项
 新增实现必须同时登记在 manifest、治理台账和 S4 准入记录。
@@ -49,7 +49,7 @@ execution mechanics，可在独立的 `src/reconstruction/monitor/` 受限目录
    DOS SVC、BOP、PC/AT 设备语义或启动成功条件。
 2. 每个缺损接口先做 caller-first 审计，再定义最小受控实现和正反夹具。未知输入
    必须停止或返回原调用方可识别的失败，不可猜测成功。
-3. `src/archived/legacy-adapters/nvtdm.c` 及既有自写 CCPU lifecycle adapter、单项 BOP/DEM handler、IVT/BDA
+3. `refs/archive/legacy-adapters/nvtdm.c` 及既有自写 CCPU lifecycle adapter、单项 BOP/DEM handler、IVT/BDA
    scaffold 均只可作为 trace/instrumentation；它们不得进入 `ntvdm.exe` 的正式
    链接或执行路径。
 4. `ntvdm64/core` 只能作为仓库外的只读对比证据。它没有资格阻塞 CCPU/SoftPC

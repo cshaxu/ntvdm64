@@ -139,7 +139,7 @@ storage/initializer 视为同一版本化 composition，不能只抽取一张 vi
 ### 已检查的输入边界
 
 在本地 NT4、OpenNT 4.5 与 XP 的各自 `softpc.new` 子树，以及本项目固定的
-`src/ntvdmx64` 输入中，未找到以下任一种完整-table initialization 形式：
+`refs/ntvdmx64-derived` 输入中，未找到以下任一种完整-table initialization 形式：
 
 * `struct VideoVector Video = { ... }`；
 * `Video = C_Video` 或其地址变体；

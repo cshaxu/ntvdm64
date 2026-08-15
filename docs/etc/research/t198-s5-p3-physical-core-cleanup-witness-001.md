@@ -1,4 +1,4 @@
-# T198 S5 P3 Physical Core Cleanup Witness 001
+﻿# T198 S5 P3 Physical Core Cleanup Witness 001
 
 ## Question
 
@@ -11,7 +11,7 @@ and traverse its fixed generic `#UD` bridge to controlled stop?
 - `src/bx-core/cpu/exception.cc` after physical deletion of the historical
   callback, runtime-dispatch, guest-copy and product-exit implementation.
 - `src/bx-mantle/bx_ntvdm_generic_ud_bridge.*` and the finite CPU5 runner.
-- `tools/Invoke-T198S3FiniteNativeRunProbe.ps1` with `-UdStopFixture`.
+- `tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1` with `-UdStopFixture`.
 
 ## Procedure
 

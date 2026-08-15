@@ -1,4 +1,4 @@
-# T183 S3 CLI shim/bundle build closure 001
+﻿# T183 S3 CLI shim/bundle build closure 001
 
 Date: 2026-08-12  
 Packet: M0 T183 S3  
@@ -29,7 +29,7 @@ then final fixed shim handoff. It does not start the real bundle engine.
 
 ## Fixed bundle assembly
 
-`tools/New-T183S2FixedBochsBundle.ps1` generated
+`tools/build/New-T183S2FixedBochsBundle.ps1` generated
 `artifacts/build/current/t183-fixed-bundle-r1`. It contains exactly the named
 engine, three fixed ROMs and the five-line content-addressed manifest:
 

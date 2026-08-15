@@ -9,9 +9,9 @@ real-mode stack use?
 ## Inputs
 
 - r30 trace: `artifacts/analysis/t95-s7-runtime-trace-025-20260811-001`.
-- NTDOS source: `upstream/opennt/base/mvdm/dos/v86/doskrnl/dos/handle.asm`,
+- NTDOS source: `refs/opennt/base/mvdm/dos/v86/doskrnl/dos/handle.asm`,
   `mscode.asm`, and `msdisp.asm`.
-- NTDOS map: `upstream/opennt/base/mvdm/dos/v86/doskrnl/dos/NTDOS.MAP`.
+- NTDOS map: `refs/opennt/base/mvdm/dos/v86/doskrnl/dos/NTDOS.MAP`.
 
 ## Source path
 

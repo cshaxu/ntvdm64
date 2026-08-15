@@ -1,7 +1,7 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
-$generator = Get-Content (Join-Path $repository 'tools\New-T95S7RuntimeTraceBuildRoot.ps1') -Raw
+$generator = Get-Content (Join-Path $repository 'tools\build\New-T95S7RuntimeTraceBuildRoot.ps1') -Raw
 foreach ($required in @(
         '[switch]$DeferredStartupPlan',
         '$executionPlanMacro = if ($DeferredStartupPlan) { 0 } else { 1 }',

@@ -3,13 +3,13 @@
 ## Scope
 
 This is the one admitted CPU3 compile-only observation for
-`src/bochs/iodev/minimal_port_space.cc`. It does not compile `devices.cc` or
+`refs/bochs/iodev/minimal_port_space.cc`. It does not compile `devices.cc` or
 any batch, and it performs no link, execution, configuration, source, adapter
 or OpenNT change.
 
 The fresh analysis root is
 `artifacts/analysis/t95-s6-msvc-x86-minimal-port-compile-001-20260811-001`.
-The pinned source `src/bochs/config.h` remains
+The pinned source `refs/bochs/config.h` remains
 `A1FADC25502FB0A4644917B6F3A62987C125CC7335457F9C59E7CE7E62A45AC8`.
 Its copied root `bochs/config.h` is the accepted v2 CPU3 projection,
 `C47030F79880C894A346F56E3AB3242924308983E00B5845EDCE849450C6C19D`.

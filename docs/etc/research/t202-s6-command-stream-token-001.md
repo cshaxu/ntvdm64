@@ -1,4 +1,4 @@
-# T202 S6 COMMAND stream token substrate
+﻿# T202 S6 COMMAND stream token substrate
 
 ## Question
 
@@ -39,7 +39,7 @@ VDM broker/VDD behavior.
 Ran:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t202-s6-command-stream-token-r1 `
   -Fixture boot-namespace

@@ -1,9 +1,9 @@
-# T199 S39: package-complete native integration baseline
+﻿# T199 S39: package-complete native integration baseline
 
 ## Inputs and method
 
 One and only one guest execution was run through
-`tools/Invoke-T198S97PostBootstrapNativeProbe.ps1` into
+`tools/probe/Invoke-T198S97PostBootstrapNativeProbe.ps1` into
 `artifacts/build/t199-s39-global-native-r1/`.  It rebuilt the current
 manifest under MSVC x64 `/MT`, using the locked source-built COMMAND/SHARE
 fixture inputs and the CPU5/Pentium-MMX native core recipe.

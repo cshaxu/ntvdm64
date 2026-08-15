@@ -1,4 +1,4 @@
-# M0 T199 S36 COMMAND Whole-Package Provider Implementation
+﻿# M0 T199 S36 COMMAND Whole-Package Provider Implementation
 
 ## Question
 
@@ -15,7 +15,7 @@ COMMAND pass-through route, an NT4 host dependency, or Bochs knowledge?
 - Existing copied COMMAND package session and bounded providers for launch,
   COMSPEC/environment, current directory, registration, boot files and the
   no-keyboard-layout response.
-- `tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1`, run with an otherwise
+- `tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1`, run with an otherwise
   new build root `artifacts/build/t199-s36-command-package-r4`.
 
 ## Implementation

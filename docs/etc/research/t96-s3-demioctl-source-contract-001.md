@@ -13,10 +13,10 @@ files and SHA-256 values recorded on 2026-08-11 are:
 
 | File | SHA-256 | Role |
 | --- | --- | --- |
-| `upstream/opennt/base/mvdm/dos/dem/demioctl.c` | `6F480BF758D071B1FD2F76A137F892B77D1EA8D2D8FFB4690D395AEDF5F733FA` | Host DEM selector table and handlers. |
-| `upstream/opennt/base/mvdm/dos/dem/dosdef.h` | `82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0` | AL=08/09 definitions. |
-| `upstream/opennt/base/mvdm/dos/dem/demdasd.h` | `DE5BD5E437C17A34AF71999E6E6E7C0E749D9D9DA61BC5CC8420C0406E1A2C35` | Generic block-IOCTL codes and structures. |
-| `upstream/opennt/base/mvdm/dos/v86/doskrnl/dos/ioctl.asm` | `8DC2168299012C24A663035CA655AC14169DBEE494858CBDC895E60DF7B8D8FA` | Guest DOS caller and BOP reachability. |
+| `refs/opennt/base/mvdm/dos/dem/demioctl.c` | `6F480BF758D071B1FD2F76A137F892B77D1EA8D2D8FFB4690D395AEDF5F733FA` | Host DEM selector table and handlers. |
+| `refs/opennt/base/mvdm/dos/dem/dosdef.h` | `82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0` | AL=08/09 definitions. |
+| `refs/opennt/base/mvdm/dos/dem/demdasd.h` | `DE5BD5E437C17A34AF71999E6E6E7C0E749D9D9DA61BC5CC8420C0406E1A2C35` | Generic block-IOCTL codes and structures. |
+| `refs/opennt/base/mvdm/dos/v86/doskrnl/dos/ioctl.asm` | `8DC2168299012C24A663035CA655AC14169DBEE494858CBDC895E60DF7B8D8FA` | Guest DOS caller and BOP reachability. |
 
 The old trace-only conclusion is retained in
 `t95-s7-demioctl-4408-trace-audit.md`; this record supersedes it for provider

@@ -127,7 +127,7 @@ T-S5.1 的 clean-link helper 仍停在 source-closure 采证阶段。不得以 h
 
 ## 已完成的 layout 证据
 
-2026-08-09 已加入 `src/reconstruction/transport/historical_transport_v2.h` 与
+2026-08-09 已加入 `refs/archive/reconstruction/transport/historical_transport_v2.h` 与
 默认关闭的 layout fixture。它在下列两个彼此独立的编译域中均构建、运行并返回
 `0`：
 

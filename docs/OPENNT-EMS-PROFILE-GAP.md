@@ -27,7 +27,7 @@ base/mvdm/softpc.new/base/dos/sources: SOURCES=emm_mngr.c
 ```
 
 The exact NT4.5 source is staged without modification under
-`src/opennt-45/base/mvdm/softpc.new/base/dos/emm_mngr.c`. Its SHA-256 is
+`refs/opennt-45/base/mvdm/softpc.new/base/dos/emm_mngr.c`. Its SHA-256 is
 `FD73CE7181F7DFB61432D63466C7641C3D010CA0C60BF446666B6C0118DDB8A9`.
 The local XP source tree independently retains a later, non-identical version,
 which confirms this is a real historical EMS layer rather than a fabricated
@@ -47,7 +47,7 @@ deallocate_altreg_set(short set)
 This matches the unchanged historical `emm.h` prototype. Both types are
 16-bit in the x86 target, so this is an ABI-preserving compiler repair, not an
 EMS semantic change. The original source remains adjacent as provenance; both
-hashes and the one-line change are in `src/opennt-45/SOURCE-MANIFEST.json`.
+hashes and the one-line change are in `refs/opennt-45/SOURCE-MANIFEST.json`.
 
 The target builds successfully with the isolated x86 clang-cl gate.
 

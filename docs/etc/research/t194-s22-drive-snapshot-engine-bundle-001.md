@@ -1,4 +1,4 @@
-# T194 S22 drive-snapshot engine bundle 001
+﻿# T194 S22 drive-snapshot engine bundle 001
 
 Date: 2026-08-12  
 Packet: M0 T194 S22  
@@ -6,7 +6,7 @@ Disposition: immutable bundle assembled and hash-verified; no process started.
 
 ## Bundle
 
-`tools/New-T190S5CommandBootstrapBundle.ps1` assembled
+`tools/build/New-T190S5CommandBootstrapBundle.ps1` assembled
 `artifacts/build/current/t194-s22-drive-snapshot-bundle-r1` from the S21
 derivative and the retained S10 ROM root. Its manifest is
 `ntdos64-bochs-engine-bundle-v1` and records:

@@ -8,8 +8,8 @@ product configuration?
 
 ## Inputs
 
-- approved Bochs 2.6 import under `src/bochs/` and its source-identity record;
-- `src/bochs/bx_ntvdm_minimal_machine.cc` and the registered
+- approved Bochs 2.6 import under `refs/bochs/` and its source-identity record;
+- `refs/bochs/bx_ntvdm_minimal_machine.cc` and the registered
   `BX-MACH-023`, `BX-MEM-024`, `BX-IO-025`, and `BX-MACH-026` boundaries;
 - `cpu/init.cc`, `cpu/fetchdecode.cc`, `cpu/smm.cc`, `memory/misc_mem.cc`,
   `iodev/devices.cc`, `pc_system.cc`, `logio.cc`, and the original SIM/tree

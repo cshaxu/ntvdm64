@@ -11,7 +11,7 @@ machine as the first composition step?
 - `src/bx-ntvdm-adapter/bx_ntvdm_host_session.c/.h`.
 - Historical UCRT r14 object-only record
   `adapter-r14-profile-observation-object-closure.md`.
-- r4 default-off execution-plan seam in `src/bochs/main.cc`.
+- r4 default-off execution-plan seam in `refs/bochs/main.cc`.
 
 ## Observations
 

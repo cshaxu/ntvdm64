@@ -1,4 +1,4 @@
-# T187 S3 passive-listener engine composition 001
+﻿# T187 S3 passive-listener engine composition 001
 
 Date: 2026-08-12  
 Packet: M0 T187 S3  
@@ -6,7 +6,7 @@ Disposition: source/build closed; no guest observation.
 
 ## Inputs and closure
 
-The generator `tools/New-T187S3PassiveListenerEngineDerivative.ps1` copied the
+The generator `tools/build/New-T187S3PassiveListenerEngineDerivative.ps1` copied the
 retained current v5 engine closure into
 `artifacts/build/current/t187-passive-listener-engine-r5`. Its manifest pins
 the base engine SHA-256

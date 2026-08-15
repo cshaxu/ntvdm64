@@ -1,4 +1,4 @@
-# T155 S1 fast-read current-composition observation 001
+﻿# T155 S1 fast-read current-composition observation 001
 
 ## Question
 
@@ -7,7 +7,7 @@ source-built x86 composition while retaining the r5 Bochs machine inputs?
 
 ## Build provenance
 
-`tools/New-T98S1CurrentAdapterEngineDerivative.ps1` generated
+`tools/build/New-T98S1CurrentAdapterEngineDerivative.ps1` generated
 `artifacts/build/current/t155-fastread-r1` from the r5 root.  Its manifest
 lists 66 adapter and four CLI sources, zero Bochs replacements and six
 retained engine inputs.  It adds only

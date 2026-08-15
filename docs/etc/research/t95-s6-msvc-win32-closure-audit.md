@@ -9,10 +9,10 @@ configuration or guessing a new CPU/device composition?
 ## Inputs
 
 - approved Bochs input: `O:\repos.external\bochs-2.6-compat\bochs-2.6`,
-  represented by the manifest-verified import under `src/bochs/`;
-- imported Visual Studio metadata: `src/bochs/vs2008/bochs.sln` and the
+  represented by the manifest-verified import under `refs/bochs/`;
+- imported Visual Studio metadata: `refs/bochs/vs2008/bochs.sln` and the
   component `.vcproj` files;
-- imported configuration evidence: `src/bochs/config.h`;
+- imported configuration evidence: `refs/bochs/config.h`;
 - minimum-mechanics ledger:
   `docs/etc/research/bochs-26-minimum-mechanics-closure.md`;
 - native-fixture/UCRT evidence:

@@ -11,7 +11,7 @@ its stated fixture.
 ## Phase 0 - T95: Backend Admission
 
 1. Record the identity of the authoritative local Bochs 2.6 input, preserve
-   its layout and notices, and replace the inadmissible 3.0 `src/bochs` tree
+   its layout and notices, and replace the inadmissible 3.0 `refs/bochs` tree
    with a manifest-backed 2.6 import.
 2. Produce a reproducible, headless, no-plugin minimum configuration. Keep
    every optional device and convenience feature disabled.

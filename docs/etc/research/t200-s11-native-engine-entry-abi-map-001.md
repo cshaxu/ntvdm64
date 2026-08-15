@@ -14,7 +14,7 @@ leaking Bochs or BOP semantics into `src/cli`?
   `bx_ntvdm_finite_run.h`, and `bx_ntvdm_mechanical_action_v1.h`;
 - `src/bx-vdm/bx_ntvdm_cpu_result_v2.h` and the current boot/native BOP
   composition sources;
-- `src/bochs/main.cc`'s retained product-startup hook.
+- `refs/bochs/main.cc`'s retained product-startup hook.
 
 ## Existing ownership map
 
@@ -25,7 +25,7 @@ leaking Bochs or BOP semantics into `src/cli`?
 | `bx_ntvdm_composition_runtime_v1` | bx-vdm | Forms and binds the current package sessions from validated inputs. | Its environment-loading convenience is not a stable CLI-to-machine ABI. |
 | `bx_ntvdm_minimal_machine_c` / finite runner | bx-mantle | Owns native machine lifecycle and bounded fixture execution. | Both are C++ private fixture-facing interfaces; neither is a product ABI. |
 | `bx_ntvdm_cpu_result_v2` | bx-vdm → bx-core mechanical bridge | Correctly represents a BOP-local resume/stop result. | A BOP stop is not, by itself, a CLI exit result. |
-| `src/bochs/main.cc` hook | old Bochs product shell | Demonstrates the currently reached startup sequence. | It imports adapter composition and startup-plan semantics into full Bochs `main`, violating the intended mantle/adapter separation. |
+| `refs/bochs/main.cc` hook | old Bochs product shell | Demonstrates the currently reached startup sequence. | It imports adapter composition and startup-plan semantics into full Bochs `main`, violating the intended mantle/adapter separation. |
 
 ## Required product boundary
 
@@ -91,7 +91,7 @@ src/cli (opaque C ABI; process ownership)
 
 The entry may call `bx-vdm` installation/reset functions, but `bx-core` and
 `bx-mantle` remain selector-blind.  `bx-vdm` remains the only owner of BOP
-identity and provider selection.  The legacy full-product `src/bochs/main.cc`
+identity and provider selection.  The legacy full-product `refs/bochs/main.cc`
 hook must be deleted or compiled out only in the later implementation S after
 the new entry has equivalent startup and teardown coverage; S11 does not
 modify it.
@@ -107,7 +107,7 @@ no build was run, and no guest execution occurred.
 
 High confidence on the current call graph and its boundary violation: the
 legacy engine delegates to a complete `bochs.exe`, while the source-built
-composition is currently injected through `src/bochs/main.cc`.  High
+composition is currently injected through `refs/bochs/main.cc`.  High
 confidence that a C-only engine request/result boundary is required.  Exact
 serialized request fields, product executable location, normal DOS completion
 semantics, and process exit-number mapping remain implementation design work;

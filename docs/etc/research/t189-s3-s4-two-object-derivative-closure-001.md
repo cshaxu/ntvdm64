@@ -1,10 +1,10 @@
-# T189 S3/S4 two-object derivative closure 001
+﻿# T189 S3/S4 two-object derivative closure 001
 
 Date: 2026-08-12  
 Packet: M0 T189 S3/S4  
 Disposition: exact derivative generated and built; no guest execution.
 
-`tools/New-T188S7CopiedStateTraceDerivative.ps1` created
+`tools/build/New-T188S7CopiedStateTraceDerivative.ps1` created
 `artifacts/build/current/t189-boot-file-stage-derivative-r1` from the retained
 T187/r5 root. Its manifest declares exactly `cpu/exception.o` and
 `adapter/bx_ntvdm_adapter_runtime.obj` as targets, retains 71 adapter/CLI

@@ -1,10 +1,10 @@
 $ErrorActionPreference = 'Stop'
 
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
-$generator = Get-Content (Join-Path $repository 'tools\New-T98S1CurrentAdapterEngineDerivative.ps1') -Raw
+$generator = Get-Content (Join-Path $repository 'tools\build\New-T98S1CurrentAdapterEngineDerivative.ps1') -Raw
 foreach ($required in @(
         '[switch]$DeferredStartupPlan',
-        "@{ source = 'src\bochs\main.cc'; destination = 'main.cc'; object = 'main.o' }",
+        "@{ source = 'refs\bochs\main.cc'; destination = 'main.cc'; object = 'main.o' }",
         "@{ source = 'src\bx-core\cpu\exception.cc'; destination = 'cpu\exception.cc'; object = 'cpu\exception.o' }",
         'BX_NTVDM_ENABLE_EXECUTION_PLAN=0',
         'BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1',

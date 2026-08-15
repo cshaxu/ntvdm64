@@ -9,7 +9,7 @@ the S29 generic fault?
 ## Active Closure
 
 The current exact CPU5 build projects `BX_INSTRUMENTATION=0`, `BX_DEBUGGER=0`,
-and uses `src/bochs/instrument/stubs` only as the compile-time instrumentation
+and uses `refs/bochs/instrument/stubs` only as the compile-time instrumentation
 header path. With `BX_INSTRUMENTATION=0`, every `BX_INSTR_*` macro in the
 selected stub header expands to nothing. The x64 `/MT` finite closure links no
 active instrumentation module.

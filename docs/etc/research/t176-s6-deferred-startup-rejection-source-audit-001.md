@@ -15,7 +15,7 @@ machine handoff (`INT 6`, `0F 0B`, `CA80:0003`), and the exact source-built
 
 ## Call-chain classification
 
-`src/bochs/main.cc` calls
+`refs/bochs/main.cc` calls
 `bx_ntvdm_adapter_runtime_v1_prepare_deferred_startup_from_environment()`
 immediately after native hardware initialization. The current T174 makefile
 enables `BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN=1`; this is not a disabled

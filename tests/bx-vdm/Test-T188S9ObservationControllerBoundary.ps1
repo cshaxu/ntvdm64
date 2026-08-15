@@ -1,11 +1,11 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param([string]$RepositoryRoot = '')
 
 $ErrorActionPreference = 'Stop'
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path $MyInvocation.MyCommand.Path))
 }
-$source = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'tools\Invoke-T188S10CopiedStateObservation.ps1') -Raw
+$source = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'tools\probe\Invoke-T188S10CopiedStateObservation.ps1') -Raw
 foreach ($required in @(
     "retryPolicy = 'none'",
     "if (Test-Path -LiteralPath `$evidence) { throw",

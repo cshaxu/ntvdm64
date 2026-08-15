@@ -5,7 +5,7 @@ $ErrorActionPreference = 'Stop'
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
-$mainPath = Join-Path $RepositoryRoot 'src\bochs\main.cc'
+$mainPath = Join-Path $RepositoryRoot 'refs\bochs\main.cc'
 $cpuPath = Join-Path $RepositoryRoot 'src\bx-core\cpu\init.cc'
 foreach ($path in @($mainPath, $cpuPath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing source: $path" }

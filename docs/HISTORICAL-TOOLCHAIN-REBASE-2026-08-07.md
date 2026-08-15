@@ -1,4 +1,4 @@
-# Historical Toolchain Rebase Record
+﻿# Historical Toolchain Rebase Record
 
 Status: active evidence record, 2026-08-07.
 
@@ -61,9 +61,9 @@ bytes with SHA-256:
 ### LOADFIX.COM
 
 The stage at `artifacts/toolchain-runs/loadfix-historical-tools-v2` assembled
-the unchanged source with `tools/msdos400/MASM.EXE`, linked it with
-`tools/msdos400/LINK.EXE`, then followed the original `.exc.com` rule: copy
-the linker image to `.EXE` and invoke `tools/opennt-4.5/RELOC.EXE` by basename.
+the unchanged source with `tools/historical/msdos400/MASM.EXE`, linked it with
+`tools/historical/msdos400/LINK.EXE`, then followed the original `.exc.com` rule: copy
+the linker image to `.EXE` and invoke `tools/historical/opennt-4.5/RELOC.EXE` by basename.
 The resulting `LOADFIX.COM` is 1,131 bytes with SHA-256:
 
 ```text
@@ -73,9 +73,9 @@ The resulting `LOADFIX.COM` is 1,131 bytes with SHA-256:
 ### EXE2BIN.EXE
 
 The stage at `artifacts/toolchain-runs/exe2bin-historical-tools-v1` generated
-the original EN-US control file with `tools/opennt-4.5/BUILDMSG.EXE`, assembled
-two unchanged sources with `tools/msdos400/MASM.EXE`, and linked with
-`tools/msdos400/LINK.EXE`. The result is 8,411 bytes with SHA-256:
+the original EN-US control file with `tools/historical/opennt-4.5/BUILDMSG.EXE`, assembled
+two unchanged sources with `tools/historical/msdos400/MASM.EXE`, and linked with
+`tools/historical/msdos400/LINK.EXE`. The result is 8,411 bytes with SHA-256:
 
 ```text
 9575A03BE94D91DD60498A1F65D6D9EB0BE8E9B9199FCEB71C26034039579D08
@@ -94,9 +94,9 @@ closure. The result is 7,039 bytes with SHA-256:
 ### APPEND.EXE
 
 The stage at `artifacts/toolchain-runs/append-historical-tools-v1` generated
-the original EN-US control file with `tools/opennt-4.5/BUILDMSG.EXE`, assembled
-the unchanged `append.asm` source with `tools/msdos400/MASM.EXE`, and linked
-with `tools/msdos400/LINK.EXE`. The result is 10,761 bytes with SHA-256:
+the original EN-US control file with `tools/historical/opennt-4.5/BUILDMSG.EXE`, assembled
+the unchanged `append.asm` source with `tools/historical/msdos400/MASM.EXE`, and linked
+with `tools/historical/msdos400/LINK.EXE`. The result is 10,761 bytes with SHA-256:
 
 ```text
 918C04AB25C99BF85B73925B0372CC6FC3F3FE564CAB6BA30ABE0FBAF72BC975
@@ -105,9 +105,9 @@ with `tools/msdos400/LINK.EXE`. The result is 10,761 bytes with SHA-256:
 ### EDLIN.EXE
 
 The stage at `artifacts/toolchain-runs/edlin-historical-tools-v1` generated
-the original EN-US control file with `tools/opennt-4.5/BUILDMSG.EXE`, assembled
-all five makefile modules with `tools/msdos400/MASM.EXE`, and used the original
-`EDLIN.LNK` response file through `tools/msdos400/LINK.EXE`. The result is
+the original EN-US control file with `tools/historical/opennt-4.5/BUILDMSG.EXE`, assembled
+all five makefile modules with `tools/historical/msdos400/MASM.EXE`, and used the original
+`EDLIN.LNK` response file through `tools/historical/msdos400/LINK.EXE`. The result is
 12,629 bytes with SHA-256:
 
 ```text
@@ -117,9 +117,9 @@ all five makefile modules with `tools/msdos400/MASM.EXE`, and used the original
 ### DEBUG.EXE
 
 The stage at `artifacts/toolchain-runs/debug-historical-tools-v1` generated
-the original EN-US control file with `tools/opennt-4.5/BUILDMSG.EXE`, assembled
-all eleven makefile modules with `tools/msdos400/MASM.EXE`, and passed the
-original `DEBUG.LNK` response file to `tools/msdos400/LINK.EXE`. The result is
+the original EN-US control file with `tools/historical/opennt-4.5/BUILDMSG.EXE`, assembled
+all eleven makefile modules with `tools/historical/msdos400/MASM.EXE`, and passed the
+original `DEBUG.LNK` response file to `tools/historical/msdos400/LINK.EXE`. The result is
 20,621 bytes with SHA-256:
 
 ```text
@@ -131,7 +131,7 @@ A648BB5DF20E18B00D6140C3C7945718532C75142C6CB7A77DE1F8D3265C9511
 The stage at `artifacts/toolchain-runs/kb16-historical-tools-v1` generated
 `KEYB.CTL`, assembled all nine makefile modules, linked the original
 `KEYB.LNK`, then followed the shared `.exc.com` rule from `dos/v86/make.inc`
-using `tools/opennt-4.5/RELOC.EXE`. It produced a 14,710 byte `KB16.COM` with
+using `tools/historical/opennt-4.5/RELOC.EXE`. It produced a 14,710 byte `KB16.COM` with
 SHA-256:
 
 ```text
@@ -146,8 +146,8 @@ reference, but the final `.COM` packaging itself is directly specified.
 ### COUNTRY.SYS
 
 The stage at `artifacts/toolchain-runs/country-historical-tools-v1` assembled
-the unchanged country source with `tools/msdos400/MASM.EXE`, linked with
-`tools/msdos400/LINK.EXE`, and applied `tools/opennt-4.5/RELOC.EXE` as specified
+the unchanged country source with `tools/historical/msdos400/MASM.EXE`, linked with
+`tools/historical/msdos400/LINK.EXE`, and applied `tools/historical/opennt-4.5/RELOC.EXE` as specified
 by the original makefile. The result is 27,097 bytes with SHA-256:
 
 ```text
@@ -159,7 +159,7 @@ by the original makefile. The result is 27,097 bytes with SHA-256:
 The stage at `artifacts/toolchain-runs/ansi-historical-tools-v1` generated
 the original EN-US control file, assembled all four makefile modules, linked
 `ANSI.EXS`, then followed the shared `.exs.sys` rule from `dos/v86/make.inc`
-with `tools/opennt-4.5/RELOC.EXE`. The result is 9,029 bytes with SHA-256:
+with `tools/historical/opennt-4.5/RELOC.EXE`. The result is 9,029 bytes with SHA-256:
 
 ```text
 C929C0893BBA4C6454632D3408EE4F7661B51CF5C2CE20035DCD4283CD623C85
@@ -180,7 +180,7 @@ checked-in historical `RELOC.EXE`. The result is 40,665 bytes with SHA-256:
 
 Both one-module utilities were rebuilt in fresh stages using their original
 response files and the original `$(exelink)=/E` setting with
-`tools/msdos400/MASM.EXE` and `tools/msdos400/LINK.EXE`. Each result is 869
+`tools/historical/msdos400/MASM.EXE` and `tools/historical/msdos400/LINK.EXE`. Each result is 869
 bytes with SHA-256:
 
 ```text
@@ -210,7 +210,7 @@ pre-existing expected output before invocation. They must be rerun in fresh
 stages before promotion. This qualification does not apply to the v5 records.
 
 OpenNT makefiles name `LINK16`, not the MS-DOS 4.0 `LINK.EXE`. The checked-in
-`tools/opennt-4.5/LINK16.EXE` is Microsoft Segmented Executable Linker 5.60.220
+`tools/historical/opennt-4.5/LINK16.EXE` is Microsoft Segmented Executable Linker 5.60.220
 and is now the selected linker for the kernel profiles.
 
 `artifacts/toolchain-runs/ntio-historical-tools-v5` is a fresh unchanged-source
@@ -360,8 +360,8 @@ current guest artifact.
 
 As a post-cleanup end-to-end check,
 `artifacts/toolchain-runs/fastopen-historical-tools-v3` copied the unchanged
-source closure, ran only `tools/msdos400/MASM.EXE` under DOSBox and
-`tools/opennt-4.5/LINK16.EXE`, and recreated the 882-byte `FASTOPEN.EXE` with
+source closure, ran only `tools/historical/msdos400/MASM.EXE` under DOSBox and
+`tools/historical/opennt-4.5/LINK16.EXE`, and recreated the 882-byte `FASTOPEN.EXE` with
 SHA-256 `69DABBDB754B358AC4FE4B22DE04C0E4C93076816F14BB0730CAA9FD223996FC`.
 The stage manifest records an empty guest-transform list.
 

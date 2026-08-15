@@ -11,7 +11,7 @@ unbound fixture object?
 - `src/bx-vdm/bx_ntvdm_composition_runtime_v1.c`
 - `src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c`
 - `src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c`
-- `src/bochs/main.cc` execution-plan call site
+- `refs/bochs/main.cc` execution-plan call site
 - MSVC Build Tools 2022 x64, static `/MT` CRT
 
 ## Procedure

@@ -27,6 +27,6 @@ transaction model; it must not pass
 C++ objects, host pointers, CRT-owned storage, or raw cross-architecture
 function pointers across the boundary.
 
-Changes below `src/bochs` are exceptional. They require evidence that a core
+Changes below `refs/bochs` are exceptional. They require evidence that a core
 mechanism is hard-linked to an excluded peripheral and that an adapter-side
 solution cannot express the separation without changing behavior.

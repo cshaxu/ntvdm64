@@ -3,7 +3,7 @@
 ## Scope
 
 This is the admitted object-only inventory of the original 93 `.cc` CPU paths
-from pinned `src/bochs/vs2008/cpu.vcproj`, under the accepted CPU3 projected
+from pinned `refs/bochs/vs2008/cpu.vcproj`, under the accepted CPU3 projected
 configuration. It compiles no device, machine, SIM, GUI, adapter or OpenNT
 source, and performs no static-library creation, link, executable or run.
 

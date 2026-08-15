@@ -1,4 +1,4 @@
-# Adapter r15 Passive Observation Fixture
+﻿# Adapter r15 Passive Observation Fixture
 
 ## Exact Claim
 
@@ -20,7 +20,7 @@ native mechanics closure needed by `bochs.exe`, but does not request
 guest policy.
 
 The r15 configuration was created by
-`tools/Configure-Bochs26NativeContainer.ps1`. The sole built target was:
+`tools/build/Configure-Bochs26NativeContainer.ps1`. The sole built target was:
 
 ```text
 make -j1 ntdos64-observation-fixture.exe
@@ -55,7 +55,7 @@ transaction and calls only `copy_from_ordinary_ram`.
 The following command completed successfully:
 
 ```text
-powershell -ExecutionPolicy Bypass -File tools/Invoke-Bochs26NativeResetFixture.ps1 \
+powershell -ExecutionPolicy Bypass -File tools/probe/Invoke-Bochs26NativeResetFixture.ps1 \
   -BuildRoot artifacts/build/bochs-2.6-native-nogui-ucrt-r15 \
   -AdapterObservationFixture -BenchmarkMillions 1
 ```

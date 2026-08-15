@@ -11,11 +11,11 @@ VS2008 metadata and full `bochs.exe` aggregates are not inputs to this ledger.
 The read-only searches were:
 
 ```powershell
-rg -n "bx_ntvdm_minimal_machine|bx_ntvdm_minimal_sim|init_memory_without_sim|init_empty_port_space" src/bochs
-rg -n "init_FetchDecodeTables|BxOpcodesTable|ia_opcodes|execute[0-9A-Za-z_]*" src/bochs/cpu
-rg -n "DEV_cmos_get_reg|DEV_vga_mem_(read|write)|DEV_vga_refresh" src/bochs
-rg -n "bx_pc_system|bx_user_quit|pluginlog|bx_cpu|bx_mem|bx_devices" src/bochs
-rg -n "BX_CPU_C::(initialize|reset)|BX_MEM_C::|bx_devices_c::" src/bochs
+rg -n "bx_ntvdm_minimal_machine|bx_ntvdm_minimal_sim|init_memory_without_sim|init_empty_port_space" refs/bochs
+rg -n "init_FetchDecodeTables|BxOpcodesTable|ia_opcodes|execute[0-9A-Za-z_]*" refs/bochs/cpu
+rg -n "DEV_cmos_get_reg|DEV_vga_mem_(read|write)|DEV_vga_refresh" refs/bochs
+rg -n "bx_pc_system|bx_user_quit|pluginlog|bx_cpu|bx_mem|bx_devices" refs/bochs
+rg -n "BX_CPU_C::(initialize|reset)|BX_MEM_C::|bx_devices_c::" refs/bochs
 ```
 
 Classification means source-level reachability only: **required** is needed by

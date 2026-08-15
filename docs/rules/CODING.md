@@ -22,8 +22,32 @@
   layout, segment assumptions, dispatch order, and error propagation.
 - Each change to historical material records its source path, rationale, and
   focused verification. Unsupported cases fail explicitly.
-- Generated binaries, logs, object files, and build trees belong below
-  `artifacts/` when retained, never as source or default runtime inputs.
+- Every disposable build tree, object, archive, generated project file,
+  temporary executable and debug log belongs under the ignored repository root
+  `build/<task-id>/<run-id>/`. Do not emit compiler or linker products into the
+  repository root, `src/`, `tests/`, `tools/`, or `artifacts/`.
+- `docs/etc/` is the Git-tracked home for evidence, inventories, manifests,
+  hashes, operational records and research conclusions. `artifacts/` is never
+  a scratch area and may contain only a report explicitly requested by the
+  owner, or an explicitly approved formal deliverable below
+  `artifacts/build/<task-id>-<version>/`. The latter must include a manifest
+  with task identity, version, source revision, toolchain, architecture, CRT,
+  input hashes and the exact disposable build recipe. Do not create an
+  `artifacts/evidence`, `artifacts/analysis`, `artifacts/logs`, or
+  `artifacts/inputs` tree.
+- Before a build starts, create a new `build/<task-id>/<run-id>/` or prove by
+  manifest that an existing directory is reusable. Delete the preceding run's
+  non-reusable objects, generated files, executables and logs before the next
+  build; never accumulate retry roots as retained evidence. After a debug
+  problem is resolved, retain only the concise evidence needed to reproduce
+  the conclusion in `docs/etc/`, then delete the raw runtime/debug logs from
+  `build/`.
+- Tools are tracked source and must have one declared responsibility. Place new
+  tools below `tools/build/`, `tools/governance/`, `tools/import/`,
+  `tools/probe/`, or `tools/historical/`; the directory README states its
+  target inputs, outputs, owner and whether it may create a disposable
+  `build/` tree. Do not place generated output beside a tool. Existing
+  top-level tools are migration debt, not a precedent.
 - Keep adopted Bochs upstream files and license notices intact under `src/bx-core/`.
   Put project code in `src/bx-mantle/` or `src/bx-vdm/` by ownership; any exception is an explicit patch
   with upstream path/revision, rationale and focused test, registered in

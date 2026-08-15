@@ -23,9 +23,9 @@ engine, a BOP handler, or an emulated CPU instruction loop.
 
 | File | Responsibility | Explicitly excluded |
 | --- | --- | --- |
-| `src/archived/legacy-adapters/owned_monitor_m0.h` | fixed-width M0 public types, result codes, and operations | BOP/DOS/NTIO names, Win32 APIs, execution callbacks |
-| `src/archived/legacy-adapters/owned_monitor_m0.c` | allocation, reset, checked physical range routing, visible real-mode state | decode, host I/O, devices, interrupt delivery, mode changes |
-| `src/archived/legacy-adapters/owned_monitor_m0_test.c` | independent owned fixture and negative tests | guest payloads, historical binaries, frozen instrumentation |
+| `refs/archive/legacy-adapters/owned_monitor_m0.h` | fixed-width M0 public types, result codes, and operations | BOP/DOS/NTIO names, Win32 APIs, execution callbacks |
+| `refs/archive/legacy-adapters/owned_monitor_m0.c` | allocation, reset, checked physical range routing, visible real-mode state | decode, host I/O, devices, interrupt delivery, mode changes |
+| `refs/archive/legacy-adapters/owned_monitor_m0_test.c` | independent owned fixture and negative tests | guest payloads, historical binaries, frozen instrumentation |
 
 These files must not include or link `bop_rewrite.*`, `transition_registry.*`,
 `bootstrap_profile.*`, `whpx_com_run.c`, `nvtdm.c`, OpenNT, NTVDMx64, or
@@ -95,7 +95,7 @@ from scratch, using historical traces only as external behavior oracles.
 ## Implementation Evidence
 
 On 2026-08-07, the M0 module was added as `src/owned_monitor_m0.[ch]` with an
-independent `src/archived/legacy-adapters/owned_monitor_m0_test.c` fixture. It contains no historical
+independent `refs/archive/legacy-adapters/owned_monitor_m0_test.c` fixture. It contains no historical
 source include or dependency and is built only through the `EXCLUDE_FROM_ALL`
 `owned-monitor-m0-test` target.
 

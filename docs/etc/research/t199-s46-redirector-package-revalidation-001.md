@@ -1,4 +1,4 @@
-# T199 S46 — Redirector whole-package revalidation
+﻿# T199 S46 — Redirector whole-package revalidation
 
 ## Question
 
@@ -23,7 +23,7 @@ keeps the complete package explicitly unavailable.
 Fresh verification used:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t199-s46-redir-package-r1 `
   -Fixture boot-namespace -HostArchitecture x64

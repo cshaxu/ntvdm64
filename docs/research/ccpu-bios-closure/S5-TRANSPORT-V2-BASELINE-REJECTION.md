@@ -6,7 +6,7 @@
 
 对象为：
 
-- `src/reconstruction/transport/historical_transport_v2.h`；
+- `refs/archive/reconstruction/transport/historical_transport_v2.h`；
 - `src/opennt/local/compat/host/historical_bios_bridge_v2.c`；
 - `src/opennt/local/trace/fixtures/historical_transport_v2_helper.c`；
 - 两个 root `historical_transport_v2_*` fixture。

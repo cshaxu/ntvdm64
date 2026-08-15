@@ -1,4 +1,4 @@
-# T198 S97 post-bootstrap native observation 001
+﻿# T198 S97 post-bootstrap native observation 001
 
 ## Question
 
@@ -8,7 +8,7 @@ COMMAND/SHARE fixture?
 
 ## Procedure
 
-`tools/Invoke-T198S97PostBootstrapNativeProbe.ps1` reused S94's immutable S93
+`tools/probe/Invoke-T198S97PostBootstrapNativeProbe.ps1` reused S94's immutable S93
 input preparation and one-run harness, rebuilt the current manifest (including
 `bx_ntvdm_cmd_comspec_bootstrap_service.c`) under MSVC x64 `/MT`, and made
 exactly one native execution.  The retained root is

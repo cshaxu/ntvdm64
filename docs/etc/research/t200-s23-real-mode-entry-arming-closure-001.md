@@ -1,4 +1,4 @@
-# T200 S23 — real-mode entry arming closure
+﻿# T200 S23 — real-mode entry arming closure
 
 ## Question
 
@@ -27,7 +27,7 @@ The adapter maps the already preflighted startup-plan entry into this record.
 The machine-stage fixture was run with:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S22MachineStageProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S22MachineStageProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s23-entry-arming-r1
 ```

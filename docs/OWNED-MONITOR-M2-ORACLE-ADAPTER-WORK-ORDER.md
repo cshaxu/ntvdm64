@@ -56,9 +56,9 @@ they do not depend on wall-clock time.
 
 | File | Responsibility | Must not do |
 | --- | --- | --- |
-| `src/archived/legacy-adapters/owned_clock_snapshot.h` | neutral validated civil-date snapshot | call Win32 or expose time-zone policy |
+| `refs/archive/legacy-adapters/owned_clock_snapshot.h` | neutral validated civil-date snapshot | call Win32 or expose time-zone policy |
 | `src/nt4_oracle_date_adapter.[ch]` | pure profile-local date mapping into an M1 handler output | implement a service table, fetch guest memory, host I/O |
-| `src/archived/legacy-adapters/nt4_oracle_date_adapter_test.c` | fixed-snapshot conformance fixture | use an owner-supplied runtime or system clock |
+| `refs/archive/legacy-adapters/nt4_oracle_date_adapter_test.c` | fixed-snapshot conformance fixture | use an owner-supplied runtime or system clock |
 
 The adapter target is `EXCLUDE_FROM_ALL` and must link only M0/M1 and these
 new owned sources. It may not link the old self-authored trace files or a

@@ -1,4 +1,4 @@
-# T200 S29: excluded-drive owner map
+﻿# T200 S29: excluded-drive owner map
 
 ## Question
 
@@ -44,7 +44,7 @@ profile namespace drive index `2` and publishes drive count `0`.
 The source-built fixture ran as:
 
 ```text
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 \
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 \
   -Fixture command-entry \
   -BuildRoot artifacts\build\t200-s29-command-host-drive-separation-r1
 ```

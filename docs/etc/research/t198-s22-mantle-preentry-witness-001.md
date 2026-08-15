@@ -1,4 +1,4 @@
-# T198 S22 Mantle Pre-Entry Witness 001
+﻿# T198 S22 Mantle Pre-Entry Witness 001
 
 ## Question
 
@@ -23,7 +23,7 @@ CS:IP entry, without importing VDM or guest-service meaning?
 1. Run `powershell.exe -ExecutionPolicy Bypass -File
    tests/bx-ntvdm-finite-run-boundary.ps1`.
 2. Run `powershell.exe -ExecutionPolicy Bypass -File
-   tools/Invoke-T198S3FiniteNativeRunProbe.ps1 -RepositoryRoot
+   tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1 -RepositoryRoot
    O:\repos.hobby\ntdos64 -BuildRoot
    O:\repos.hobby\ntdos64\artifacts\build\t198-s22-preentry-r4
    -HostArchitecture x64 -UdStopFixture -ExternalFixtureSource

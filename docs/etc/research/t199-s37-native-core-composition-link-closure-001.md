@@ -1,4 +1,4 @@
-# T199 S37 Native-Core Composition Link Closure 001
+﻿# T199 S37 Native-Core Composition Link Closure 001
 
 ## Question
 
@@ -9,9 +9,9 @@ dependency?
 
 ## Inputs
 
-- `tools/Invoke-T197S6MinimalMachineLinkProbe.ps1`, invoked with
+- `tools/probe/Invoke-T197S6MinimalMachineLinkProbe.ps1`, invoked with
   `-WholeCpu5Core -HostArchitecture x64`.
-- `tools/t198-s50-bx-vdm-composition-manifest.json`, currently naming 94
+- `tools/build/t198-s50-bx-vdm-composition-manifest.json`, currently naming 94
   composition-provider sources.
 - `src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc`.
 - The T199 S37 runtime-composition lifecycle record:

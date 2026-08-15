@@ -2,7 +2,7 @@
 
 ## Result
 
-The original imported `src/bochs/Makefile` is already a generated MSVC/nmake
+The original imported `refs/bochs/Makefile` is already a generated MSVC/nmake
 makefile: it names `cl`, `/MT`, `lib`, `link`, original recursive archive
 targets and the full native lifecycle link order.  It is therefore the
 appropriate retained build owner.  The historical file's Win32/RFB linker
@@ -10,7 +10,7 @@ inputs are preserved as original compiled support; they are not a runtime
 feature admission.
 
 The fresh build-root generator
-`tools/New-T95S6MSVCNativeContainerBuildRoot.ps1` now creates the first
+`tools/build/New-T95S6MSVCNativeContainerBuildRoot.ps1` now creates the first
 non-product container root:
 
 `artifacts/build/bochs-2.6-native-nogui-msvc-cpu3-r1/`

@@ -2,7 +2,7 @@
 
 ## Result
 
-`tools/New-T95S6NativeContainerManifest.ps1` produced the first deterministic
+`tools/build/New-T95S6NativeContainerManifest.ps1` produced the first deterministic
 input manifest at:
 
 `artifacts/analysis/t95-s6-msvc-native-container-manifest-001-20260811-001/`
@@ -14,7 +14,7 @@ execute Bochs.
 
 ## Frozen inputs
 
-The manifest records SHA-256 identities for the imported `src/bochs/config.h`,
+The manifest records SHA-256 identities for the imported `refs/bochs/config.h`,
 the existing CPU3 projection used by the S6 compile-only observation, the
 original `Makefile`, `vs2008/bochs.vcproj`, `vs2008/bochs.sln`, and the two
 original reset-fixture ROM inputs.  It records BuildTools MSVC Win32/x86 with

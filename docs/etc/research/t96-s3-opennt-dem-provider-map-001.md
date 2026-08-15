@@ -1,8 +1,8 @@
-# M0 T96 S3 OpenNT DEM Provider Map 001
+﻿# M0 T96 S3 OpenNT DEM Provider Map 001
 
 ## Reproducible evidence
 
-The generator tools/Export-OpenNtDemProviderMap.ps1 consumed the immutable BOP
+The generator tools/governance/Export-OpenNtDemProviderMap.ps1 consumed the immutable BOP
 provider/module map and the pinned OpenNT DEM source tree. Its accepted output
 is artifacts/analysis/opennt-dem-provider-map-001-20260811-002/.
 

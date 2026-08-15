@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$bochsRoot = Join-Path $repositoryRoot 'src\bochs'
+$bochsRoot = Join-Path $repositoryRoot 'refs\bochs'
 $mantleRoot = Join-Path $repositoryRoot 'src\bx-mantle'
 $expectedCounts = [ordered]@{
     '..\bx-mantle\paramtree.cc' = 2

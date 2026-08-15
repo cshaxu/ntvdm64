@@ -5,7 +5,7 @@ Disposition: existing diagnostic is bounded, but current generator has no exact-
 
 ## Source Facts
 
-`src/bochs/cpu/exception.cc` defaults
+`refs/bochs/cpu/exception.cc` defaults
 `BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER` to zero. When enabled, the existing
 generic `#UD` listener copies the already captured CPU state and instruction
 window, calls the adapter-local catalogue, and appends `fault_rip`, AX, BX,

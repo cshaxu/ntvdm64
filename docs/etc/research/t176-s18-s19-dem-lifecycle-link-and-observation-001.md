@@ -1,4 +1,4 @@
-# T176 S18–S19 — Finite DEM Lifecycle Link And Observation 001
+﻿# T176 S18–S19 — Finite DEM Lifecycle Link And Observation 001
 
 ## Question
 
@@ -8,7 +8,7 @@ path reach and accept it?
 
 ## S18 narrow link closure
 
-`tools/New-T98S1CurrentAdapterEngineDerivative.ps1` is the retained current
+`tools/build/New-T98S1CurrentAdapterEngineDerivative.ps1` is the retained current
 adapter generator. Its explicit source list was extended by one file:
 `bx_ntvdm_dem_session_lifecycle_provider_v1.c`. The fresh deferred derivative
 is `artifacts/build/current/t176-s18-dem-lifecycle-r1`.

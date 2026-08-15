@@ -106,7 +106,7 @@ fresh configuration of the current source tree.
 ## Revalidation After Historical-Input Expansion
 
 On 2026-08-06, after adding the default-disabled cross-version EMS recovery
-candidate under `src/opennt-45`, the existing MinGW verification build was
+candidate under `refs/opennt-45`, the existing MinGW verification build was
 rebuilt with:
 
 ```text

@@ -4,7 +4,7 @@ $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $machineHeader = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_machine.h'
 $machineSource = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_machine.cc'
 $memoryHeader = Join-Path $repositoryRoot 'src/bx-core/memory/memory.h'
-$iodevHeader = Join-Path $repositoryRoot 'src/bochs/iodev/iodev.h'
+$iodevHeader = Join-Path $repositoryRoot 'refs/bochs/iodev/iodev.h'
 
 foreach ($path in @($machineHeader, $machineSource, $memoryHeader, $iodevHeader)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {

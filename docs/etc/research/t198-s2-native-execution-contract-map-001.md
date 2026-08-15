@@ -12,7 +12,7 @@ selector-blind way, without restoring the Bochs product shell?
 - `src/bx-core/cpu/cpu.cc`, `event.cc`, and `init.cc`.
 - `src/bx-core/memory/memory.h` and `misc_mem.cc`.
 - `src/bx-mantle/pc_system.h` and `pc_system.cc`.
-- The rejected historical execution owner, `src/bochs/main.cc`.
+- The rejected historical execution owner, `refs/bochs/main.cc`.
 
 The review traced the native reset, entry, time delivery and loop-return
 paths.  It deliberately did not execute guest bytes, link a new object, or
@@ -76,7 +76,7 @@ execution claim.
 The helper, its private request/result types and its one-shot callback belong
 in `src/bx-mantle`; it links only to the already closed whole CPU5 core and
 finite mantle.  It must not change CPU decode/exception source, add an
-adapter dependency, or use `src/bochs/main.cc`.
+adapter dependency, or use `refs/bochs/main.cc`.
 
 The following alternatives are rejected:
 

@@ -18,7 +18,7 @@ COMDAT, executable, runtime, guest, nor product-configuration result.
 
 The sole new root is
 `artifacts/analysis/t95-s6-msvc-x86-config-shape-003-20260811-001`.  It copied
-the pinned `src/bochs` input; earlier matrix roots were not changed.  The
+the pinned `refs/bochs` input; earlier matrix roots were not changed.  The
 root-local common analysis header has SHA-256
 `6E6F36368529C7EA7B29135A95D85B98DA8280B34C2B7801DDE932A5469AEA73` and adds
 only the original `config.h.in:482-497` extrema declarations to the

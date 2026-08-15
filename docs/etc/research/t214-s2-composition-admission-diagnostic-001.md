@@ -1,4 +1,4 @@
-# T214 S2 Composition Admission Diagnostic
+﻿# T214 S2 Composition Admission Diagnostic
 
 ## Question
 
@@ -18,7 +18,7 @@ state?
 1. Build the current composition runtime, engine, cancellation controller and
    bound boot-namespace composition into the retained native CLI object
    closure.
-2. Run `tools/Invoke-T214S2CompositionAdmissionDiagnostic.ps1` against that
+2. Run `tools/probe/Invoke-T214S2CompositionAdmissionDiagnostic.ps1` against that
    closure.
 3. Run the focused engine fixture with a deliberately rejected copied
    installation result, then immediately run the existing cancellation and
@@ -56,12 +56,12 @@ trace to select a BOP implementation.
 ## Reproduction
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T214S2CompositionAdmissionDiagnostic.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T214S2CompositionAdmissionDiagnostic.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t214-s2-composition-admission-diagnostic-r1 `
   -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s6-native-cli-cancellation-r2\composition
 
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T212S5EngineCancellationProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T212S5EngineCancellationProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t214-s2-engine-reset-diagnostic-r1
 ```

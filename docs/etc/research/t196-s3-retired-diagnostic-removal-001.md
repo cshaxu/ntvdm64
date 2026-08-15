@@ -9,7 +9,7 @@ associated current tool/test cleanup.
 
 ## Removed Surface
 
-The following S2 rows are removed from `src/bochs`:
+The following S2 rows are removed from `refs/bochs`:
 
 | S2 hunks | Former diagnostic | Register disposition |
 | --- | --- | --- |
@@ -41,13 +41,13 @@ diagnostic switches.
 The following source/test/tool scan returned no match:
 
 ```text
-rg -n "PREFETCH_PREDECESSOR|IRET_TF|REAL_MODE_FAR_JUMP|STACK_TRANSFER|IRQ13_TRANSFER|REAL_MODE_VECTOR|UNMATCHED_UD|X87_COMPAT" src/bochs tests tools
+rg -n "PREFETCH_PREDECESSOR|IRET_TF|REAL_MODE_FAR_JUMP|STACK_TRANSFER|IRQ13_TRANSFER|REAL_MODE_VECTOR|UNMATCHED_UD|X87_COMPAT" refs/bochs tests tools
 ```
 
 The reproducible upstream comparison remains:
 
 ```text
-git -c core.safecrlf=false diff --no-index --unified=0 -- src/bochs O:\repos.external\bochs-2.6-compat\bochs-2.6
+git -c core.safecrlf=false diff --no-index --unified=0 -- refs/bochs O:\repos.external\bochs-2.6-compat\bochs-2.6
 ```
 
 After the removal it contains 43 `@@` hunks, down from S1's corrected 60.

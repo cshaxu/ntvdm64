@@ -1,4 +1,4 @@
-# M0 T198 S83: SpcKbd `host_int10` Patch Lifecycle
+﻿# M0 T198 S83: SpcKbd `host_int10` Patch Lifecycle
 
 ## Question
 
@@ -16,7 +16,7 @@ occur later in guest execution?
   opcode. `0x7ce9` is the preceding `POPF` instruction start, not the operand.
 - The fixture binding order: composition binds before `ntio_preentry_prepare`
   publishes the exact guest image and before the CPU run begins.
-- `tools/Invoke-T198S83SpcKbdLifecycleProbe.ps1`, r6:
+- `tools/probe/Invoke-T198S83SpcKbdLifecycleProbe.ps1`, r6:
   it rebuilds `fixture.obj` and `bridge.obj`, links them against the recorded
   S74 source-built closure, and records the bounded run.
 

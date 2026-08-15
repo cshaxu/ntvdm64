@@ -1,4 +1,4 @@
-# T194 S10 one-slot observation input preparation 001
+﻿# T194 S10 one-slot observation input preparation 001
 
 Date: 2026-08-12  
 Packet: M0 T194 S10  
@@ -15,7 +15,7 @@ and wrote hashes only; it did not execute the engine.
 
 ## Controller
 
-`tools/Invoke-T194S10V6BoundedObservation.ps1` is intentionally separate from
+`tools/probe/Invoke-T194S10V6BoundedObservation.ps1` is intentionally separate from
 the retained v5 controller. It accepts only profile JSON declaring both
 `ntdos64-byob-profile-v6` and
 `nt4-en-us-command-normal-return-v6`; writes T194/v6 input and outcome

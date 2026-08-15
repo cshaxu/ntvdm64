@@ -1,4 +1,4 @@
-# T202 S6: COMMAND copied host-context foundation
+﻿# T202 S6: COMMAND copied host-context foundation
 
 ## Scope
 
@@ -36,7 +36,7 @@ removed by a separately admitted composition migration.
 ## Reproducible evidence
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t202-s6-command-host-context-r5 `
   -Fixture boot-namespace

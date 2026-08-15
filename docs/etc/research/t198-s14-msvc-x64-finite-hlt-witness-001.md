@@ -1,4 +1,4 @@
-# T198 S14 MSVC x64 Finite HLT Witness 001
+﻿# T198 S14 MSVC x64 Finite HLT Witness 001
 
 ## Question
 
@@ -9,7 +9,7 @@ runner and controlled stop?
 ## Reproducible Procedure
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools/Invoke-T198S3FiniteNativeRunProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s14-msvc-x64-finite-hlt-r1 `
   -HostArchitecture x64

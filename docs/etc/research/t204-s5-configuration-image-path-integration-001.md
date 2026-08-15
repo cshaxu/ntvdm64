@@ -1,4 +1,4 @@
-# T204 S5 P1 — configuration image/path integration
+﻿# T204 S5 P1 — configuration image/path integration
 
 ## Delivered composition seam
 
@@ -27,7 +27,7 @@ provider-data duplication.
 
 ## Build evidence
 
-`tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` was updated to include the
+`tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` was updated to include the
 new provider/policy sources and the pre-existing normal-return observer needed
 by the current generic bridge.  The first r1 attempt is retained negative
 evidence: it compiled but did not link because that existing observer source

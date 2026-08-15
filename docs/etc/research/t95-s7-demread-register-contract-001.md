@@ -7,13 +7,13 @@ OpenNT `50:16` (`SVC_DEMREAD`) and `50:42` (`SVC_DEMFASTREAD`) BOPs?
 
 ## Source evidence
 
-`upstream/opennt/base/mvdm/dos/dem/demhndl.c:93-235` implements `demRead`.
+`refs/opennt/base/mvdm/dos/dem/demhndl.c:93-235` implements `demRead`.
 Every success path calls `setCF(0)` and `setAX(dwBytesRead)`; every error path
 uses the same error convention, CF set plus AX.  It does not assign BX, CX,
 DX, BP, SI, or DI.
 
 The NTDOS call site in
-`upstream/opennt/base/mvdm/dos/v86/doskrnl/dos/handle.asm:430-540` saves BP and
+`refs/opennt/base/mvdm/dos/v86/doskrnl/dos/handle.asm:430-540` saves BP and
 BX, places the DEM handle in AX:BP, invokes `SVC_DEMREAD` or
 `SVC_DEMFASTREAD`, branches on CF, and continues the normal read path.  The
 handle's high word in BP is an input to the BOP, so clearing it is especially

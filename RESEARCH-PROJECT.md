@@ -43,13 +43,13 @@ replace SoftPC work.
 
 | Source | Local path | Revision | Intended use |
 | --- | --- | --- | --- |
-| OpenNT VDM subtree | `upstream/opennt` and fixed copy in `src/opennt` | `5c5b979ec08c17d3ca2eb70e8aad62d26515d01c` | Historical CCPU/BIOS/BOP/DEM research input, default-disabled. |
-| NTVDMx64 patches/loader | `upstream/ntvdmx64` and fixed copy in `src/ntvdmx64` | `84a13d2e7bb1a55d11148971e5b9c8ec99f670bf` | HAXM monitor reference input only, default-disabled. |
+| OpenNT VDM subtree | `refs/opennt` and fixed copy in `src/opennt` | `5c5b979ec08c17d3ca2eb70e8aad62d26515d01c` | Historical CCPU/BIOS/BOP/DEM research input, default-disabled. |
+| NTVDMx64 patches/loader | `refs/ntvdmx64` and fixed copy in `refs/ntvdmx64-derived` | `84a13d2e7bb1a55d11148971e5b9c8ec99f670bf` | HAXM monitor reference input only, default-disabled. |
 
 The fixed source roots are research-only and are never a redistributable or a
 normal product dependency. The owner has authorized OpenNT as a
 non-redistributable research build input for this workspace. `src/opennt` and
-`src/ntvdmx64` preserve separate source universes and manifests; the upstream
+`refs/ntvdmx64-derived` preserve separate source universes and manifests; the upstream
 checkouts remain unchanged. `toolchain-probe/` retains compiler/linker/trace
 evidence only. No OpenNT/NTVDMx64-derived binary may enter a normal release
 package. See `docs/HISTORICAL-SOURCE-INPUT-GATES.md`.
@@ -88,7 +88,7 @@ MinNT or old-source archive. See `docs/BUILD-INPUT-DISCOVERY.md`.
   non-content-bearing outcomes.
 * The observed OpenNT artifact/source matrix is in
   `docs/OPENNT-ARTIFACT-MATRIX.md`; use
-  `tools/Test-HistoricalBuildInputs.ps1` before any extraction or build.
+  `tools/governance/Test-HistoricalBuildInputs.ps1` before any extraction or build.
 * The isolated CCPU source-closure and standalone-adapter assessment is in
   `docs/CCPU-STANDALONE-BACKEND-ASSESSMENT.md`. It is archived research
   evidence, not an alternative implementation route or an NTDOS runtime

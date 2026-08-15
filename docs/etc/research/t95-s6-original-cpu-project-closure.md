@@ -7,7 +7,7 @@ minimal-machine target must start from after the static opcode-table decision?
 
 ## Input and procedure
 
-The pinned source project's `src/bochs/vs2008/cpu.vcproj` was parsed read-only.
+The pinned source project's `refs/bochs/vs2008/cpu.vcproj` was parsed read-only.
 Its `File` entries with a `.cc` suffix were counted and compared with the
 static-opcode evidence in `t95-s6-cpu3-static-opcode-closure-decision.md`.
 No project invocation, compiler, linker or generated configuration was used.

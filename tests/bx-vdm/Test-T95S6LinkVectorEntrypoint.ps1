@@ -1,7 +1,7 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$entrypoint = Join-Path $repositoryRoot 'tools\Invoke-T95S6LinkVectorEntrypoint.ps1'
+$entrypoint = Join-Path $repositoryRoot 'tools\probe\Invoke-T95S6LinkVectorEntrypoint.ps1'
 $powershellExe = (Get-Command powershell.exe -ErrorAction Stop).Source
 $testRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("t95-s6-link-entrypoint-" + [guid]::NewGuid().ToString('N'))
 

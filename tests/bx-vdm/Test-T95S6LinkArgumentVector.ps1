@@ -1,7 +1,7 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-. (Join-Path $repositoryRoot 'tools\New-T95S6LinkArgumentVector.ps1')
+. (Join-Path $repositoryRoot 'tools\build\New-T95S6LinkArgumentVector.ps1')
 $testRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("t95-s6-link-vector-" + [guid]::NewGuid().ToString('N'))
 
 function Assert-Throws([scriptblock]$Action, [string]$ExpectedText) {

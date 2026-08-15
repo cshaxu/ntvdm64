@@ -1,6 +1,6 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
-$tool = Get-Content (Join-Path $repository 'tools\Invoke-T95S6NarrowStartupTransactionLink.ps1') -Raw
+$tool = Get-Content (Join-Path $repository 'tools\probe\Invoke-T95S6NarrowStartupTransactionLink.ps1') -Raw
 foreach ($required in @(
         'narrow-startup-transaction-build-root.json',
         'nmake.exe /f ntdos64-native-startup-transaction.mak ntdos64-native-startup-transaction.exe',

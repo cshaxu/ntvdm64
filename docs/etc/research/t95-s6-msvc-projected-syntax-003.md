@@ -13,7 +13,7 @@ guest, adapter-runtime, or product-configuration claim.
 
 The root is
 `artifacts/analysis/t95-s6-msvc-x86-projected-syntax-003-20260811-001`.
-Before replacement its copied root config matched pinned `src/bochs/config.h`
+Before replacement its copied root config matched pinned `refs/bochs/config.h`
 at SHA-256 `A1FADC25502FB0A4644917B6F3A62987C125CC7335457F9C59E7CE7E62A45AC8`.
 Only that copied config was then replaced with accepted v2 SHA-256
 `C47030F79880C894A346F56E3AB3242924308983E00B5845EDCE849450C6C19D`.

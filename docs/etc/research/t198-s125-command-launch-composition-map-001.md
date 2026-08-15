@@ -1,4 +1,4 @@
-# M0 T198 S125: COMMAND `54:01` Launch-Plane Composition Map
+﻿# M0 T198 S125: COMMAND `54:01` Launch-Plane Composition Map
 
 ## Result
 
@@ -50,4 +50,4 @@ dependencies, add a stand-alone `54:01` shortcut or alter Bochs.
 - `src/opennt/base/mvdm/dos/v86/cmd/command/tcode.asm:540-560`
 - `src/bx-vdm/bx_ntvdm_command_launch_plane_v1.c:1-4`
 - `src/bx-vdm/bx_ntvdm_cmd_get_next_service.c`
-- `tools/t198-s50-bx-vdm-composition-manifest.json`
+- `tools/build/t198-s50-bx-vdm-composition-manifest.json`

@@ -15,10 +15,10 @@ The pinned source before and after the one invocation is SHA-256
 the manifest's `sourceConfigSha256`.  The executed command was:
 
 ```text
-powershell -ExecutionPolicy Bypass -File tools\Project-BochsConfig.ps1 \
-  -ManifestPath tools\t95-s6-msvc-config-projection-manifest.json \
+powershell -ExecutionPolicy Bypass -File tools\build\Project-BochsConfig.ps1 \
+  -ManifestPath tools\build\t95-s6-msvc-config-projection-manifest.json \
   -AnalysisRoot artifacts\analysis\t95-s6-msvc-x86-config-projection-002-20260811-001 \
-  -InputConfigPath src\bochs\config.h
+  -InputConfigPath refs\bochs\config.h
 ```
 
 The projected `config.h` SHA-256 is

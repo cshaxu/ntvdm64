@@ -9,7 +9,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 
 $register = Join-Path $RepositoryRoot 'docs\etc\research\adapter-external-intrusion-exceptions.md'
-$config = Join-Path $RepositoryRoot 'src\bochs\config.cc'
+$config = Join-Path $RepositoryRoot 'refs\bochs\config.cc'
 foreach ($path in @($register, $config)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing registered-intrusion input: $path" }
 }

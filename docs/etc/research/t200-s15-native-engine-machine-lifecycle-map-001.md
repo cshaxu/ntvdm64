@@ -14,7 +14,7 @@ legacy adapter runtime, or fixture-only finite-run behavior?
 - `src/bx-vdm/bx_ntvdm_composition_runtime_v1.[ch]`,
   `bx_ntvdm_startup_plan_abi.[ch]`, `bx_ntvdm_startup_session.c`, and
   `bx_ntvdm_ntio_preentry_v1.[ch]`;
-- retained `src/bochs/main.cc` startup hook;
+- retained `refs/bochs/main.cc` startup hook;
 - T200 S14 direct composition closure.
 
 ## Existing-source findings
@@ -26,7 +26,7 @@ legacy adapter runtime, or fixture-only finite-run behavior?
 | Current direct composition | `bx_ntvdm_composition_runtime_v1` in bx-vdm | Retain install/reset ownership.  It owns images and BOP package sessions, but currently exposes no direct startup-plan producer for its owned NTIO image. |
 | Generic exception stop | bx-core/mantle typed generic bridge | Keep selector-blind.  A stop is an engine terminal category, not a CLI success or a BOP/service rule in Bochs. |
 | Finite runner | `bx_ntvdm_finite_run` in bx-mantle | Fixture-private only: it copies an entire entry byte array and carries diagnostic snapshot controls. It is not the product engine entry or result ABI. |
-| Old startup implementation | `bx_ntvdm_adapter_runtime` + `src/bochs/main.cc` | Reject: it installs from environment and injects adapter/startup semantics into full-product Bochs `main`. It cannot be the replacement path. |
+| Old startup implementation | `bx_ntvdm_adapter_runtime` + `refs/bochs/main.cc` | Reject: it installs from environment and injects adapter/startup semantics into full-product Bochs `main`. It cannot be the replacement path. |
 
 ## Product lifecycle order
 

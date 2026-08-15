@@ -1,4 +1,4 @@
-# T198 S13 MSVC x64 Minimal Lifecycle Witness 001
+﻿# T198 S13 MSVC x64 Minimal Lifecycle Witness 001
 
 ## Question
 
@@ -12,7 +12,7 @@ Run the following from the repository root with Visual Studio Build Tools 2022
 installed:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools/Invoke-T197S6MinimalMachineLinkProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools/probe/Invoke-T197S6MinimalMachineLinkProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s13-msvc-x64-lifecycle-r3 `
   -WholeCpu5Core -HostArchitecture x64 -RunLifecycle

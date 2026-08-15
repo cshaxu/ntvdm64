@@ -1,4 +1,4 @@
-# T116 S1 unexpected-int machine-composition closure 001
+﻿# T116 S1 unexpected-int machine-composition closure 001
 
 ## Result
 
@@ -50,7 +50,7 @@ The reproducible x86 link-only command is:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File `
-  tools\Invoke-T116UnexpectedIntLinkProjection.ps1 `
+  tools\probe\Invoke-T116UnexpectedIntLinkProjection.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\current\t116-unexpected-int-link-projection-r4
 ```

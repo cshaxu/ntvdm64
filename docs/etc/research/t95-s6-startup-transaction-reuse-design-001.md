@@ -17,7 +17,7 @@ catalogue entry, or a second adapter API.
 | Source-derived preparation | `bx_ntvdm_host_service_plane_v1_prepare` | Real mode only; validates resource identity; computes historical `DI:0000`; preflights one NTDOS write. |
 | One-shot ownership | `bx_ntvdm_host_session_v1_dispatch` / `take_pending_write` | Binds pending data to the copied #UD boundary and CPU snapshot, consumes it once, and resumes at `fault_rip + 4`. |
 | Runtime installation | `bx_ntvdm_adapter_runtime_v1_dispatch` / `take_pending_write` | Owns the installed session and delegates only the existing session path. |
-| Generic mechanics | registered Bochs #UD/write consumer in `src/bochs/cpu/exception.cc` | Accepts an opaque pending write, validates matching boundary/length/resume, copies only ordinary RAM, and applies the generic resume. |
+| Generic mechanics | registered Bochs #UD/write consumer in `refs/bochs/cpu/exception.cc` | Accepts an opaque pending write, validates matching boundary/length/resume, copies only ordinary RAM, and applies the generic resume. |
 
 The bounded transaction is therefore:
 

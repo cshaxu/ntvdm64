@@ -10,7 +10,7 @@ CPU build metadata; no project file is a build input and no compiler, linker,
 archiver, configuration, or source copy was invoked.
 
 The fixed configuration facts come from
-`tools/t95-s6-msvc-config-projection-manifest-v2.json`: `BX_CPU_LEVEL=3`,
+`tools/build/t95-s6-msvc-config-projection-manifest-v2.json`: `BX_CPU_LEVEL=3`,
 `BX_SUPPORT_X86_64=0`, `BX_SUPPORT_FPU=0`, `BX_SUPPORT_SMP=0`,
 `BX_SUPPORT_APIC=0`, `BX_CONFIGURE_MSRS=0`, `BX_SUPPORT_VMX=0`,
 `BX_SUPPORT_SVM=0`, `BX_SUPPORT_AVX=0`, and `BX_WITH_WX=0`.
@@ -18,11 +18,11 @@ The fixed configuration facts come from
 Read-only searches performed:
 
 ```powershell
-rg -n "bx_define_opcode|BX_IA_FPU_ESC|BX_SUPPORT_(FPU|X86_64|AVX|3DNOW)" src/bochs/cpu/ia_opcodes.h src/bochs/cpu/fetchdecode.cc
-rg -n "init_FetchDecodeTables|BxOpcodesTable|BxError|FPU_ESC" src/bochs/cpu/fetchdecode.cc src/bochs/cpu/init.cc src/bochs/cpu/fpu_emu.cc
-Get-Content src/bochs/cpu/Makefile | Select-Object -First 170
-Get-Content src/bochs/vs2008/cpu.vcproj | Select-String -Pattern 'RelativePath="..\\cpu\\.*.cc"'
-rg -n "BX_CPU_C::(initialize|reset|cpu_loop)|DEV_cmos_get_reg|DEV_vga_mem_(read|write)|DEV_dma_raise_hlda" src/bochs/cpu
+rg -n "bx_define_opcode|BX_IA_FPU_ESC|BX_SUPPORT_(FPU|X86_64|AVX|3DNOW)" refs/bochs/cpu/ia_opcodes.h refs/bochs/cpu/fetchdecode.cc
+rg -n "init_FetchDecodeTables|BxOpcodesTable|BxError|FPU_ESC" refs/bochs/cpu/fetchdecode.cc refs/bochs/cpu/init.cc refs/bochs/cpu/fpu_emu.cc
+Get-Content refs/bochs/cpu/Makefile | Select-Object -First 170
+Get-Content refs/bochs/vs2008/cpu.vcproj | Select-String -Pattern 'RelativePath="..\\cpu\\.*.cc"'
+rg -n "BX_CPU_C::(initialize|reset|cpu_loop)|DEV_cmos_get_reg|DEV_vga_mem_(read|write)|DEV_dma_raise_hlda" refs/bochs/cpu
 ```
 
 `ia_opcodes.h` is not generated at this point: it is a checked-in static macro

@@ -1,4 +1,4 @@
-# r12 Adapter Runtime Fixture
+﻿# r12 Adapter Runtime Fixture
 
 ## Claim
 
@@ -13,7 +13,7 @@ Bochs libraries with the listed adapter, CPU exception and memory objects. It
 does not call the recursive root Makefile target. Run:
 
 ```powershell
-tools\Invoke-Bochs26NativeResetFixture.ps1 `
+tools\probe\Invoke-Bochs26NativeResetFixture.ps1 `
   -BuildRoot artifacts\build\bochs-2.6-native-nogui-ucrt-r12 `
   -AdapterRuntimeFixture -BenchmarkMillions 1
 ```

@@ -4,8 +4,8 @@
 
 | Item | Evidence location | Finding |
 | --- | --- | --- |
-| OpenNT VDM source | `upstream/opennt/base/mvdm` | Contains historical makefiles for `ntio.sys`, `ntdos.sys`, SoftPC, DEM, and device components. |
-| NTVDMx64 patch tree | `upstream/ntvdmx64/ntvdmpatch` | Contains patch/build/release scripts, not a complete independent NTVDM source tree. |
+| OpenNT VDM source | `refs/opennt/base/mvdm` | Contains historical makefiles for `ntio.sys`, `ntdos.sys`, SoftPC, DEM, and device components. |
+| NTVDMx64 patch tree | `refs/ntvdmx64/ntvdmpatch` | Contains patch/build/release scripts, not a complete independent NTVDM source tree. |
 | MINNT source input | `ntvdmpatch/doc/{autobuild,minnt}.txt` | Requires `MinNT-20170416-85fac4faadc77203db8ddc66af280a75c1b717b0.zip`. |
 | Historical source input | same | Requires `old-src.trunk.r687.20150728.7z`; the patch documentation says it supplies files that cannot be distributed for legal reasons. |
 | Additional inputs | same | Requires a 7-Zip install plus SDK/Windows ISO material selected by the build script. |

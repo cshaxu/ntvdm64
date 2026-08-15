@@ -1,4 +1,4 @@
-# T202 S6: COMMAND console capability
+﻿# T202 S6: COMMAND console capability
 
 This record covers the one COMMAND console/keyboard/start-state slice:
 `54:09`, `54:0E`, and `54:10`.
@@ -20,7 +20,7 @@ opens the registry, calls a VDD, or crosses a host resource through the ABI.
 The bound package regression was run with:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t202-s6-command-console-r1 `
   -Fixture boot-namespace

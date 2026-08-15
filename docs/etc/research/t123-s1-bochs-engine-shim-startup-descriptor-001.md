@@ -3,7 +3,7 @@
 ## Result
 
 The real engine boundary is a thin process shim, not a Bochs command-line
-extension. `src/bochs/main.cc` accepts only its native options and panics on
+extension. `refs/bochs/main.cc` accepts only its native options and panics on
 unknown dash options; in particular it cannot receive runner `--byob-*`
 arguments. BYOB admission remains child-environment-only.
 

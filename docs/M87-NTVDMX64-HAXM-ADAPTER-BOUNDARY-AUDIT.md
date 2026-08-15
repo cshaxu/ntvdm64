@@ -6,7 +6,7 @@ Status: completed source audit, 2026-08-08.
 
 The staged NTVDMx64 input is a fixed 13-file subset at upstream revision
 `84a13d2e7bb1a55d11148971e5b9c8ec99f670bf`, as recorded by
-`src/ntvdmx64/SOURCE-MANIFEST.json`. Its local CMake target is an
+`refs/ntvdmx64-derived/SOURCE-MANIFEST.json`. Its local CMake target is an
 `EXCLUDE_FROM_ALL` object-reference gate. It has no OpenNT include path and is
 not a standalone host product, a CCPU replacement, or a runtime dependency.
 

@@ -11,8 +11,8 @@ while retaining the T130 machine-composition and all non-CPU Bochs inputs?
 - T130 build root: `artifacts/build/current/t130-machine-outcome-r1`.
 - r5 CPU source/archive root:
   `artifacts/build/bochs-2.6-native-s7-runtime-trace-msvc-r5`.
-- Registered source delta: `src/bochs/cpu/cpu.cc`, BX-TRACE-056 only.
-- Generator: `tools/New-T146S1CpuArchiveDerivative.ps1`.
+- Registered source delta: `refs/bochs/cpu/cpu.cc`, BX-TRACE-056 only.
+- Generator: historical generator not retained in the current tool tree.
 - Static verifier:
   `tests/bx-ntvdm-adapter/Test-T146S1CpuArchiveDerivative.ps1`.
 

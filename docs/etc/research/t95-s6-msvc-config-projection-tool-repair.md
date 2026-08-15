@@ -5,12 +5,12 @@
 Can the proposed projection tool represent each parsed `#define` as exactly
 one definition record and reject duplicate definitions before it creates an
 output root?  This repair is limited to that internal representation and its
-synthetic-input test.  It does not project `src/bochs/config.h` or invoke any
+synthetic-input test.  It does not project `refs/bochs/config.h` or invoke any
 Bochs compiler, linker, executable, configure script, or project.
 
 ## Repair
 
-`tools/Project-BochsConfig.ps1` now installs a
+`tools/build/Project-BochsConfig.ps1` now installs a
 `System.Collections.ArrayList` for each macro key on first sight and appends
 one `PSCustomObject` record with explicit `Add`.  It no longer uses `+=` to
 store a singleton record.  Replacement validation reads the retained list's

@@ -1,8 +1,8 @@
-param([string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
+﻿param([string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-& (Join-Path $root 'tools/Export-DosWow16SourceClosureInventory.ps1') -RepositoryRoot $root -OutputDirectory (Join-Path $root 'docs') | Out-Null
+& (Join-Path $root 'tools/governance/Export-DosWow16SourceClosureInventory.ps1') -RepositoryRoot $root -OutputDirectory (Join-Path $root 'docs') | Out-Null
 $records = Get-Content -Raw (Join-Path $root 'docs/dos-wow16-source-closure-inventory.json') | ConvertFrom-Json
 $allowed = @('source-built','static-data','excluded-prebuilt','source-blocked','host/support','sample/development-only')
 if (($records | Where-Object { $allowed -notcontains $_.Classification }).Count) { throw 'Inventory contains an unknown classification.' }

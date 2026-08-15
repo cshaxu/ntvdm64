@@ -1,8 +1,8 @@
-# T95 S6 Intact Native Build Root 001
+﻿# T95 S6 Intact Native Build Root 001
 
 ## Result
 
-`tools/New-T95S6IntactNativeBuildRoot.ps1` created:
+`tools/build/New-T95S6IntactNativeBuildRoot.ps1` created:
 
 `artifacts/build/bochs-2.6-native-intact-msvc-r1/`
 

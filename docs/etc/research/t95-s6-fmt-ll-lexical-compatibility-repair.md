@@ -12,15 +12,15 @@ term, or unrelated formatting changed.
 
 | File | Adjacent occurrences repaired |
 | --- | ---: |
-| `src/bochs/gui/paramtree.cc` | 2 |
-| `src/bochs/gui/siminterface.cc` | 2 |
-| `src/bochs/iodev/hdimage/hdimage.cc` | 1 |
-| `src/bochs/iodev/usb/scsi_device.cc` | 3 |
-| `src/bochs/iodev/harddrv.cc` | 2 |
-| `src/bochs/iodev/pit.cc` | 3 |
-| `src/bochs/iodev/virt_timer.cc` | 1 |
+| `refs/bochs/gui/paramtree.cc` | 2 |
+| `refs/bochs/gui/siminterface.cc` | 2 |
+| `refs/bochs/iodev/hdimage/hdimage.cc` | 1 |
+| `refs/bochs/iodev/usb/scsi_device.cc` | 3 |
+| `refs/bochs/iodev/harddrv.cc` | 2 |
+| `refs/bochs/iodev/pit.cc` | 3 |
+| `refs/bochs/iodev/virt_timer.cc` | 1 |
 
-The read-only inventory checked every `src/bochs` `*.cc`/`*.h` source for
+The read-only inventory checked every `refs/bochs` `*.cc`/`*.h` source for
 either direct form (`"..."FMT_LL` or `FMT_LL"..."`) before the patch. It found
 exactly these 14 occurrences. The repair changes, for example,
 `"0x"FMT_LL"x"` to `"0x" FMT_LL "x"`; it does not alter the three adjacent

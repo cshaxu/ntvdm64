@@ -1,4 +1,4 @@
-# T215 S4: Startup-Configuration Attachment
+﻿# T215 S4: Startup-Configuration Attachment
 
 ## Question
 
@@ -43,7 +43,7 @@ host source mutation was added.
 The full current-source x64 `/MT` build and bounded run completed:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T214S3CompositionOwnerFixture.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T214S3CompositionOwnerFixture.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t215-s4-startup-attachment-r1
 ```

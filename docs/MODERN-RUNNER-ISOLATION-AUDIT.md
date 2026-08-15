@@ -16,7 +16,7 @@ src/runner/ntdos64_run.c
 The retired self-authored startup/BOP/DEM/IVT/BDA sources appear only in the
 `NTDOS64_ENABLE_TRACE_INSTRUMENTATION`-guarded `ntvdm-startup-reference`
 custom source target. That option was explicitly `OFF` for this audit. The
-separate `src/opennt` and `src/ntvdmx64` CMake islands cannot be added to the
+separate `src/opennt` and `refs/ntvdmx64-derived` CMake islands cannot be added to the
 modern graph; their old top-level compatibility options fail configuration.
 
 The archived `artifacts/build/legacy/referenced/build-root-pre-isolation/`

@@ -3,7 +3,7 @@
 ## Evidence Scope
 
 This is a source-derived contract for the fixed historical OpenNT VDM model
-present in `upstream/opennt/base/mvdm`. It is not a claim that an arbitrary
+present in `refs/opennt/base/mvdm`. It is not a claim that an arbitrary
 user runtime is bootable. No Microsoft binary is read by, copied to, or
 executed by the current research engine.
 
@@ -130,7 +130,7 @@ any system file, but it is still guest-image transformation and must be opt-in,
 traceable, reversible on reset, and rejected when patterns overlap or a page is
 not ordinary writable guest RAM.
 
-The owned foundation now exists in `src/archived/legacy-adapters/transition_registry.c`.  It accepts
+The owned foundation now exists in `refs/archive/legacy-adapters/transition_registry.c`.  It accepts
 only 3--16 byte physical-memory patterns during registration, rejects duplicate
 or prefix-overlapping registrations, freezes before application, delegates to
 the atomic private-image rewrite table, and exposes only the four documented

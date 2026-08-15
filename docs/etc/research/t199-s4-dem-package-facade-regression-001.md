@@ -1,4 +1,4 @@
-# M0 T199 S4 DEM Package Facade Regression
+﻿# M0 T199 S4 DEM Package Facade Regression
 
 ## Question
 
@@ -35,7 +35,7 @@ trace to choose services?
 5. Ran:
 
    ```powershell
-   powershell.exe -ExecutionPolicy Bypass -File tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+   powershell.exe -ExecutionPolicy Bypass -File tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
      -RepositoryRoot O:\repos.hobby\ntdos64 `
      -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t199-s4-dem-facade-r1
    ```

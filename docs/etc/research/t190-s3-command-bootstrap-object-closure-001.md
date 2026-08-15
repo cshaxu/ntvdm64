@@ -1,4 +1,4 @@
-# T190 S3 COMMAND bootstrap object-closure 001
+﻿# T190 S3 COMMAND bootstrap object-closure 001
 
 Date: 2026-08-12  
 Packet: M0 T190 S3  
@@ -13,7 +13,7 @@ That is the only retained composition that includes T189's current boot-file
 service and namespace-provider objects.  A T187-base derivative would silently
 restore the stale-object error that T189 proved.
 
-`tools/New-T190S3CommandBootstrapDerivative.ps1` defines the only permitted
+`tools/build/New-T190S3CommandBootstrapDerivative.ps1` defines the only permitted
 T190 build closure:
 
 | Object | Disposition | Reason |

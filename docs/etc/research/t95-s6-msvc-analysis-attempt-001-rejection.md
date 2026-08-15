@@ -68,4 +68,4 @@ unresolved.  It must occur before any new artifact configuration or build.
 This attempt makes no claim about MSVC availability, correct Win32 headers,
 object compilation, `/Gy` sections, `/OPT:REF`, maps, undefined symbols, CRT
 selection, imports, machine initialization, or guest execution.  It does not
-modify `src/bochs` and it does not authorize another build in this root.
+modify `refs/bochs` and it does not authorize another build in this root.

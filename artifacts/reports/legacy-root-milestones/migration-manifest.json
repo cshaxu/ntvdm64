@@ -1,0 +1,69 @@
+{
+    "Batch":  "legacy-root-markdown-reports-v1",
+    "MigratedAt":  "2026-08-07T16:20:16.4583380-07:00",
+    "Entries":  [
+                    {
+                        "Name":  "M11-Core-Boundary-Migration-Work-Order.md",
+                        "Source":  "M11-Core-Boundary-Migration-Work-Order.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/M11-Core-Boundary-Migration-Work-Order.md",
+                        "Bytes":  14804,
+                        "Sha256":  "06E65CF62F2A55147ED4BEF4C4EA00D8AE40AB6D7A7AB154D1B01761C923530C"
+                    },
+                    {
+                        "Name":  "M11-core-vm-boundary-audit-03.md",
+                        "Source":  "M11-core-vm-boundary-audit-03.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/M11-core-vm-boundary-audit-03.md",
+                        "Bytes":  17281,
+                        "Sha256":  "627122864678852AA801FB51F8F99C187B497E4FE5463720D41C8C0FD30BEBA7"
+                    },
+                    {
+                        "Name":  "M11-external-vdm-core-composition-boundary-reassessment-02.md",
+                        "Source":  "M11-external-vdm-core-composition-boundary-reassessment-02.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/M11-external-vdm-core-composition-boundary-reassessment-02.md",
+                        "Bytes":  21797,
+                        "Sha256":  "81C3DD46407D5F109B063B297E12098A332F4F14E291233BFA6FA79F2B97A664"
+                    },
+                    {
+                        "Name":  "M11-NT4-ENUS-wrapper-compatibility-contract.md",
+                        "Source":  "M11-NT4-ENUS-wrapper-compatibility-contract.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/M11-NT4-ENUS-wrapper-compatibility-contract.md",
+                        "Bytes":  13291,
+                        "Sha256":  "50F881F7034E8CF52BB217BFA341C66344DEA77F4071234E20771C69808688A8"
+                    },
+                    {
+                        "Name":  "M11-NTDOS-machine-platform-boundary-research.md",
+                        "Source":  "M11-NTDOS-machine-platform-boundary-research.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/M11-NTDOS-machine-platform-boundary-research.md",
+                        "Bytes":  15611,
+                        "Sha256":  "6A1A5E7D9F5C1CF941DECE5217525CD7271E021619AB60FEDEF71846D7FCEB23"
+                    },
+                    {
+                        "Name":  "M11-NTVDMx64-direct-source-evidence.md",
+                        "Source":  "M11-NTVDMx64-direct-source-evidence.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/M11-NTVDMx64-direct-source-evidence.md",
+                        "Bytes":  14463,
+                        "Sha256":  "7D89EC633B79F5A8E951289A03E35334573D63CFE931CBEACB45D5176A09EA30"
+                    },
+                    {
+                        "Name":  "M11-OpenNT-NTDOS-source-evidence.md",
+                        "Source":  "M11-OpenNT-NTDOS-source-evidence.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/M11-OpenNT-NTDOS-source-evidence.md",
+                        "Bytes":  12629,
+                        "Sha256":  "BFD059E202217B102D5BF944BF30A502915EEFB0CDA542C91E01292D68FC5E9E"
+                    },
+                    {
+                        "Name":  "M11-VM-to-core-NTDOS-compatibility-foundation.md",
+                        "Source":  "M11-VM-to-core-NTDOS-compatibility-foundation.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/M11-VM-to-core-NTDOS-compatibility-foundation.md",
+                        "Bytes":  29982,
+                        "Sha256":  "FEC080DC1B08666493E05BE81151F9CC25AE8400F92A2229D1D6382161059FE7"
+                    },
+                    {
+                        "Name":  "ntvdm64-architecture-research.md",
+                        "Source":  "ntvdm64-architecture-research.md",
+                        "Destination":  "D:/home/repos/ntdos64/artifacts/reports/legacy-root-milestones/ntvdm64-architecture-research.md",
+                        "Bytes":  25913,
+                        "Sha256":  "F7C4C974654063FCEA2EF12C083F0021F8E391B5C6F6E1E95E7B80CADF6B7F87"
+                    }
+                ]
+}

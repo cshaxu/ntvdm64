@@ -12,8 +12,8 @@ firmware, or host-capability semantics to Bochs?
 - the T196 S2 classification and T196 S3 removal record;
 - the pinned local Bochs 2.6 comparison tree at
   `O:\repos.external\bochs-2.6-compat\bochs-2.6`;
-- `src/bochs/cpu/exception.cc`, `src/bochs/iodev/devices.cc`, and
-  `src/bochs/iodev/minimal_port_space.cc`; and
+- `refs/bochs/cpu/exception.cc`, `refs/bochs/iodev/devices.cc`, and
+  `refs/bochs/iodev/minimal_port_space.cc`; and
 - the retained focused boundary scripts under `tests/`.
 
 ## Repair
@@ -44,7 +44,7 @@ its source-boundary test now require all six empty-port lifecycle definitions
 to be isolated and absent from `devices.cc`.
 
 A further build-surface review found an unregistered Windows-only `bcrypt`
-addition in `src/bochs/Makefile.in`. It is not a Bochs requirement: the
+addition in `refs/bochs/Makefile.in`. It is not a Bochs requirement: the
 current CLI/BYOB identity and image code owns BCrypt, and admitted external
 composition link recipes name `bcrypt.lib` explicitly. S4 removed the
 unconditional Bochs template injection and added a focused build-isolation
@@ -97,7 +97,7 @@ bx-ntvdm-minimal-mechanics-boundary.ps1             passed
 bx-ntvdm-minimal-sim-boundary.ps1                   passed
 ```
 
-The retired diagnostic scan over `src/bochs`, `tests`, and `tools` for the
+The retired diagnostic scan over `refs/bochs`, `tests`, and `tools` for the
 eight S3 diagnostic families returned no match. After the port-space repair, a
 zero-context comparison against the pinned upstream tree reported 25 changed
 paths and 42 physical hunks. After the unrelated BCrypt-link removal it

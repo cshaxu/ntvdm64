@@ -1,4 +1,4 @@
-# T200 S24 — bounded native execution closure
+﻿# T200 S24 — bounded native execution closure
 
 ## Question
 
@@ -26,7 +26,7 @@ The stage fixture writes one `HLT` at the already armed entry and uses a
 one-million-tick watchdog. It returned `EXECUTION_BUDGET` and reset cleanly:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S22MachineStageProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S22MachineStageProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s24-bounded-stage-r3
 ```
@@ -44,7 +44,7 @@ The current composition manifest was source-compiled at
 linked with that closure and run twice:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S22EngineMachineStageProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S22EngineMachineStageProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s24-engine-native-r3 `
   -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s24-current-composition-r1

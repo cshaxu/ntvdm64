@@ -1,4 +1,4 @@
-# OpenNT Artifact Matrix
+﻿# OpenNT Artifact Matrix
 
 ## Evidence Scope
 
@@ -137,6 +137,6 @@ different artifact's assembler or linker evidence by family resemblance.
 ## Reproduction Gate
 
 Before a historical build may be attempted, use
-`tools/Test-HistoricalBuildInputs.ps1` with owner-provided archives. The tool
+`tools/governance/Test-HistoricalBuildInputs.ps1` with owner-provided archives. The tool
 only reports existence, SHA-256, and whether the requested build root is
 outside this project. It neither extracts nor executes the archives.

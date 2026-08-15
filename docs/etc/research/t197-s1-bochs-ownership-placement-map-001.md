@@ -8,7 +8,7 @@ physical `bx-core` / `bx-mantle` move?
 
 ## Inputs
 
-- Current local adopted tree: `src/bochs/` (664 tracked files).
+- Current local adopted tree: `refs/bochs/` (664 tracked files).
 - Pinned comparison tree: `O:\repos.external\bochs-2.6-compat\bochs-2.6`.
 - T196 effective-closure audit and remaining diff/register crosswalk.
 - Current minimal entry points: `bx_ntvdm_minimal_machine.cc`,
@@ -53,13 +53,13 @@ S2 may use `git mv` for these project-owned or unambiguously native files,
 subject only to the build-metadata path repair stated in the packet:
 
 ```text
-src/bochs/bx_ntvdm_minimal_machine.cc
-src/bochs/bx_ntvdm_minimal_machine.h
-src/bochs/bx_ntvdm_minimal_sim.cc
-src/bochs/bx_ntvdm_minimal_sim.h
-src/bochs/iodev/minimal_port_space.cc
-src/bochs/pc_system.cc
-src/bochs/pc_system.h
+refs/bochs/bx_ntvdm_minimal_machine.cc
+refs/bochs/bx_ntvdm_minimal_machine.h
+refs/bochs/bx_ntvdm_minimal_sim.cc
+refs/bochs/bx_ntvdm_minimal_sim.h
+refs/bochs/iodev/minimal_port_space.cc
+refs/bochs/pc_system.cc
+refs/bochs/pc_system.h
 ```
 
 The source-tree-wide physical `src/bx-core/` move is **not** yet an S2 action:
@@ -67,7 +67,7 @@ the core candidate directories use relative includes and generated build
 metadata whose closure must first be enumerated. That is a dependency map,
 not reluctance to rename. The S2 move will place only the listed pure files
 under `src/bx-mantle/`; S3 establishes the reproducible adopted-core root and
-the exact core object vector before any bulk `src/bochs → src/bx-core` move.
+the exact core object vector before any bulk `refs/bochs → src/bx-core` move.
 
 ## Observations
 

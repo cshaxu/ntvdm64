@@ -1,4 +1,4 @@
-# r18 Startup Snapshot Evidence Export
+﻿# r18 Startup Snapshot Evidence Export
 
 ## Scope
 
@@ -59,7 +59,7 @@ The `0x714` value is likewise an observed input, not an adapter default or a
 new BIOS implementation.
 
 For the fixed layout, the offline decoder
-`tools/Read-StartupSnapshotEvidence.ps1` derives these far pointers from the
+`tools/probe/Read-StartupSnapshotEvidence.ps1` derives these far pointers from the
 raw ID 11 bytes:
 
 | Vector | IVT location | Decoded pointer |

@@ -29,7 +29,7 @@ base/mvdm/dos/v86/doskrnl/dos/NTDOS.MAP: DOSINIT
 
 ## 已执行的普通 CPU 语义
 
-`src/reconstruction/monitor/reconstructed_monitor_s4.c` 现以 ordinary RAM 仅补充这条
+`refs/archive/reconstruction/monitor/reconstructed_monitor_s4.c` 现以 ordinary RAM 仅补充这条
 真实指令流所需的 real-mode mechanics：
 
 ```text

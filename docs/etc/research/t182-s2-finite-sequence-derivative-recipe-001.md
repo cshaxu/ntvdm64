@@ -1,4 +1,4 @@
-# T182 S2 finite-sequence derivative recipe 001
+﻿# T182 S2 finite-sequence derivative recipe 001
 
 Date: 2026-08-12  
 Packet: M0 T182 S2  
@@ -6,7 +6,7 @@ Disposition: recipe defined and generator-only verified; no compile, link, or ob
 
 ## Generated closure
 
-`tools/New-T182S2FiniteSequenceEngineDerivative.ps1` generated the fresh
+`tools/build/New-T182S2FiniteSequenceEngineDerivative.ps1` generated the fresh
 derivative `artifacts/build/current/t182-s2-finite-sequence-r2` from the
 retained T177 machine root. Its generated manifest reports:
 

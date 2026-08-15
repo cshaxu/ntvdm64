@@ -42,7 +42,7 @@ or empty-port-space paths.
 ## Mixed-Edge Disposition
 
 The move makes the historical full-product metadata's reach into
-`pc_system.{cc,h}` visible. `src/bochs/Makefile*`, subordinate product
+`pc_system.{cc,h}` visible. `refs/bochs/Makefile*`, subordinate product
 Makefiles, and `vs2008/bochs.vcproj` still name the former root paths. They
 are retained evidence for the rejected full `bochs.exe` product and are not a
 build input for this mantle. Rewriting them would falsely make the old product

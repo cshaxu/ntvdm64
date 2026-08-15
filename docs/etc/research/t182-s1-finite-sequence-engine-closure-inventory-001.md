@@ -1,4 +1,4 @@
-# T182 S1 finite-sequence engine closure inventory 001
+﻿# T182 S1 finite-sequence engine closure inventory 001
 
 Date: 2026-08-12  
 Packet: M0 T182 S1  
@@ -45,7 +45,7 @@ is now mandatory:
 | CLI | `byob_profile.c` | Exact v5 profile acceptance and terminal identity. |
 | CLI | `byob_launch_plan_v2.c` | New mandatory v2 plan parser used by adapter runtime and COMMAND service. |
 
-The last unit is absent from `tools/New-T98S1CurrentAdapterEngineDerivative.ps1`.
+The last unit is absent from `tools/build/New-T98S1CurrentAdapterEngineDerivative.ps1`.
 Its current list is therefore 67 adapter plus four CLI units, rather than the
 required 67 adapter plus five CLI units.  The generator is a useful retained
 link-template reference, but it is not a valid T182 recipe unchanged.

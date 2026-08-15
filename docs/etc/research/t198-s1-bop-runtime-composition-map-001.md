@@ -12,9 +12,9 @@ and the adapter-owned holistic service plane?
 - The retained T95/T98 runtime root
   `artifacts/build/bochs-2.6-native-s7-runtime-trace-msvc-r5` and its
   `t95-s7-runtime-trace-build-root.json`.
-- `tools/New-T98S1CurrentAdapterEngineDerivative.ps1`.
+- `tools/build/New-T98S1CurrentAdapterEngineDerivative.ps1`.
 - Current `src/bx-vdm`, `src/cli/ntdos64_bochs_engine.c`, and retained
-  `src/bochs/main.cc`.
+  `refs/bochs/main.cc`.
 
 ## Procedure
 

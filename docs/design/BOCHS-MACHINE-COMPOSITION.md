@@ -13,7 +13,7 @@ authorize a project-owned composition hook or a product-shell extraction.
 
 ## Observed Lifecycle Order
 
-`src/bochs/main.cc:1118` performs, in order:
+`refs/bochs/main.cc:1118` performs, in order:
 
 1. `bx_pc_system.initialize` and benchmark timer registration;
 2. RAM allocation and system/optional ROM loading;
@@ -23,7 +23,7 @@ authorize a project-owned composition hook or a product-shell extraction.
 6. hardware reset, GUI signal setup and timer start.
 
 `DEV_init_devices()` expands to `bx_devices.init(BX_MEM(0))`. In
-`src/bochs/iodev/devices.cc`, this single call initializes virtual/slowdown
+`refs/bochs/iodev/devices.cc`, this single call initializes virtual/slowdown
 timers, loads the default device plugin set, registers port `92h`, writes CMOS
 memory fields, registers a device timer and finalizes plugins. It is therefore
 both a mechanics bootstrap and a stock-PC composition policy.

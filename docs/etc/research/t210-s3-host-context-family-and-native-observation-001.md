@@ -1,4 +1,4 @@
-# T210 S3 — host-context family regression and native observation
+﻿# T210 S3 — host-context family regression and native observation
 
 ## Question
 
@@ -9,7 +9,7 @@ after that source-built family is available?
 ## Inputs and procedure
 
 The new x64 `/MT` fixture
-`tools/Invoke-T210S3HostContextFamilyProbe.ps1` captures the current process
+`tools/probe/Invoke-T210S3HostContextFamilyProbe.ps1` captures the current process
 drive once as an explicit admitted root, creates one rooted namespace and one
 shared session context, then performs:
 

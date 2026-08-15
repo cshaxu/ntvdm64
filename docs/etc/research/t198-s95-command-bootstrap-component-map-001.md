@@ -1,4 +1,4 @@
-# T198 S95 COMMAND bootstrap component map 001
+﻿# T198 S95 COMMAND bootstrap component map 001
 
 ## Question
 
@@ -57,7 +57,7 @@ source-derived first-profile subset:
 The retained old `bx_ntvdm_adapter_runtime.c` initializes that state, queues
 the read through its historical session, completes it, and dispatches the
 environment write.  It is explicitly `availableButDetached` in
-`tools/t198-s50-bx-vdm-composition-manifest.json`, and is not an allowed
+`tools/build/t198-s50-bx-vdm-composition-manifest.json`, and is not an allowed
 runtime root.  The current `bx_ntvdm_boot_namespace_composition_v1` neither
 contains the component state nor compiles
 `bx_ntvdm_cmd_comspec_bootstrap_service.c`; after global ingress/classification

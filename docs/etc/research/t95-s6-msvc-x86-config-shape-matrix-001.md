@@ -15,9 +15,9 @@ than treating the latter diagnostics as an entry-path proof.
 
 ## Frozen input and variants
 
-Each variant contains a copied pinned `src/bochs` input.  Its generated
+Each variant contains a copied pinned `refs/bochs` input.  Its generated
 `config.h` includes the root-local `matrix-config-base.h`; none is under
-`src/bochs`.
+`refs/bochs`.
 
 | Variant | Values varied | SHA-256 of `config.h` |
 | --- | --- | --- |

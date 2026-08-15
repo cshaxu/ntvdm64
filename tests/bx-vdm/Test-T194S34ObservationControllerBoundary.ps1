@@ -1,11 +1,11 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param([string]$RepositoryRoot = '')
 
 $ErrorActionPreference = 'Stop'
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path $PSScriptRoot)
 }
-$source = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'tools\Invoke-T194S10V6BoundedObservation.ps1') -Raw
+$source = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'tools\probe\Invoke-T194S10V6BoundedObservation.ps1') -Raw
 foreach ($required in @(
     "retryPolicy = 'none'",
     'taskkill.exe /T /F /PID $process.Id',

@@ -1,4 +1,4 @@
-# M0 T199 S20 Machine-BOP Facade Regression
+﻿# M0 T199 S20 Machine-BOP Facade Regression
 
 ## Question
 
@@ -22,7 +22,7 @@ and a single `bx-vdm` facade, while leaving Bochs and mantle selector-blind?
 The focused probe was built and run with MSVC x64 `/MT`:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T199S20MachineFacadeX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T199S20MachineFacadeX64Probe.ps1 `
   -RepositoryRoot (Get-Location).Path `
   -BuildRoot (Join-Path (Get-Location).Path 'artifacts\build\t199-s20-machine-facade-r2')
 ```

@@ -9,7 +9,7 @@ not add any OpenNT service behaviour to Bochs.
 The pinned evidence input is
 `artifacts/analysis/opennt-bop-inventory-005-20260811-001/opennt-bop-inventory.json`.
 It records the source hashes and the definitions from
-`upstream/opennt/base/mvdm/inc/bop.h`, `BOP.INC`, and the six service-family
+`refs/opennt/base/mvdm/inc/bop.h`, `BOP.INC`, and the six service-family
 headers.
 
 The retained inventory has 16 OpenNT top-level selectors, 194 named service

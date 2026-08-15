@@ -14,8 +14,8 @@ The earlier CPU3 link ledger nevertheless reported unresolved VMX, SVM, MSR,
 SMX/GETSEC and ADX identities from `fetchdecode.obj`.
 
 This audit inspected the original static opcode declarations in
-`src/bochs/cpu/ia_opcodes.h` and their decoder-table references in
-`src/bochs/cpu/fetchdecode.cc`. Representative direct references are:
+`refs/bochs/cpu/ia_opcodes.h` and their decoder-table references in
+`refs/bochs/cpu/fetchdecode.cc`. Representative direct references are:
 
 - `fetchdecode.cc:509,514,1054,1059` for RDMSR and GETSEC dispatch;
 - `ia_opcodes.h:723` for RDMSR;

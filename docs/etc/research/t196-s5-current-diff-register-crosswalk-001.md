@@ -2,7 +2,7 @@
 
 ## Inputs and method
 
-The authoritative comparison is the zero-context Git diff between `src/bochs`
+The authoritative comparison is the zero-context Git diff between `refs/bochs`
 and the pinned local Bochs 2.6 tree at
 `O:\repos.external\bochs-2.6-compat\bochs-2.6`. It reports 24 paths and 41
 physical `@@` hunks. The table below accounts for every current hunk; S2's

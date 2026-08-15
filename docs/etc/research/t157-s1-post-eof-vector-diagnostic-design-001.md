@@ -5,7 +5,7 @@
 No new Bochs intrusion is needed.  The existing registered `BX-TRACE-049`
 facility is exactly the smallest evidence source for the T156 uncertainty.
 
-`src/bochs/cpu/exception.cc:1312-1343` already has the default-off
+`refs/bochs/cpu/exception.cc:1312-1343` already has the default-off
 `BX_NTVDM_ENABLE_REAL_MODE_VECTOR_DIAGNOSTIC` block.  Before original real
 mode delivery it snapshots old CS:IP and SS:SP; after the original IVT reads
 it logs vector and target CS:IP.  It then performs the unmodified `load_seg`

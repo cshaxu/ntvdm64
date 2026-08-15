@@ -1,4 +1,4 @@
-# T202 S6 COMMAND boot-input ownership recovery
+﻿# T202 S6 COMMAND boot-input ownership recovery
 
 ## Question
 
@@ -13,7 +13,7 @@ creating a host temporary file, or changing a host system boot file?
   replacement and copy its OEM pathname to the caller's `DS:DX` buffer.
 - Current selected profile boot inputs: `\\CONFIG.SYS` and `\\AUTOEXEC.BAT` on
   the selected guest drive.
-- Source closure: `tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` with
+- Source closure: `tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` with
   fixture `boot-namespace` and build root
   `artifacts/build/t202-s6-command-boot-input-r3`.
 

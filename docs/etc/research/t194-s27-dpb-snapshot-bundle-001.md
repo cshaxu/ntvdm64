@@ -1,11 +1,11 @@
-# M0 T194 S27: DPB Snapshot Bundle
+﻿# M0 T194 S27: DPB Snapshot Bundle
 
 Packet: M0 T194 S27  
 Disposition: immutable bundle assembled and hash-verified; no process started.
 
 ## Procedure
 
-`tools/New-T190S5CommandBootstrapBundle.ps1` copied the S26 engine and the
+`tools/build/New-T190S5CommandBootstrapBundle.ps1` copied the S26 engine and the
 retained S22 ROM root into
 `artifacts/build/current/t194-s27-dpb-snapshot-bundle-r1`. The tool only copies
 and hashes the declared members; it does not run the runner, shim, engine,

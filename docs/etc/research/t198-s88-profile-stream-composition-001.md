@@ -1,4 +1,4 @@
-# M0 T198 S88: Immutable Stream Profile to BOP-5F Composition
+﻿# M0 T198 S88: Immutable Stream Profile to BOP-5F Composition
 
 ## Result
 
@@ -43,7 +43,7 @@ continuation-only behavior.
 | --- | --- |
 | `tests/runner/byob_profile_test.c` | MSVC x64 `/MT` test accepts v7 only with `stream-io-v1`, projects `2`, retains zero for v6, and rejects a mutated value. |
 | `tests/bx-vdm/bx_ntvdm_boot_namespace_composition_v1_test.c` | Full current composition source closure executes selected BOP `5F`, reads the synthetic K.SYS offset, writes `2`, and returns CF/`RIP+3`. It separately rejects a selected transaction whose target is outside the one-MiB aperture. |
-| `tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` | Its source list now matches the registered current composition membership rather than the pre-provider S16 subset. r4 source-builds, links and runs the complete x64 `/MT` fixture. |
+| `tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` | Its source list now matches the registered current composition membership rather than the pre-provider S16 subset. r4 source-builds, links and runs the complete x64 `/MT` fixture. |
 
 Evidence artifacts:
 

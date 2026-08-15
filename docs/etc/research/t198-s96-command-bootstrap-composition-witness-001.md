@@ -1,4 +1,4 @@
-# T198 S96 COMMAND bootstrap composition witness 001
+﻿# T198 S96 COMMAND bootstrap composition witness 001
 
 ## Question
 
@@ -31,7 +31,7 @@ enters Bochs or mantle code.
 ## Verification
 
 1. `artifacts/build/t198-s96-command-bootstrap-composition-r2` was built and
-   run by `tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` after adding the
+   run by `tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` after adding the
    service to that current composition closure.  It is an MSVC x64 `/MT`
    source-built executable and exits zero.
 2. The composition fixture proves first COMSPEC capture, `54:0F` size retry,

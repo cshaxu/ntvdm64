@@ -1,10 +1,10 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $headerPath = Join-Path $repositoryRoot 'src\bx-mantle\bx_ntvdm_extended_memory_v1.h'
 $sourcePath = Join-Path $repositoryRoot 'src\bx-mantle\bx_ntvdm_extended_memory_v1.cc'
 $machinePath = Join-Path $repositoryRoot 'src\bx-mantle\bx_ntvdm_minimal_machine.cc'
-$recipePath = Join-Path $repositoryRoot 'tools\Invoke-T197S6MinimalMachineLinkProbe.ps1'
+$recipePath = Join-Path $repositoryRoot 'tools\probe\Invoke-T197S6MinimalMachineLinkProbe.ps1'
 
 foreach ($path in @($headerPath, $sourcePath, $machinePath, $recipePath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {

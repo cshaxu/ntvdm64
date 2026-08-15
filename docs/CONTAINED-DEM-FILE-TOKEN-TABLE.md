@@ -7,8 +7,8 @@ This is the M27 implementation proof for the host-operation seam admitted by
 fixture only.  It is not linked to `ntdos64-run`, the historical DEM object
 set, a BOP handler, or a guest execution path.
 
-The implementation is `src/archived/trace-probes/contained_dem_file_tokens.c` with its private ABI
-in `src/archived/trace-probes/contained_dem_file_tokens.h`.  It intentionally exposes only:
+The implementation is `refs/archive/trace-probes/contained_dem_file_tokens.c` with its private ABI
+in `refs/archive/trace-probes/contained_dem_file_tokens.h`.  It intentionally exposes only:
 
 ```text
 session_init(root)

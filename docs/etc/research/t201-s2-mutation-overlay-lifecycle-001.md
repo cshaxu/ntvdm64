@@ -1,4 +1,4 @@
-# T201 S2 Mutation-Overlay Lifecycle Evidence
+﻿# T201 S2 Mutation-Overlay Lifecycle Evidence
 
 The overlay is a bounded, opaque, per-VDM bx-vdm record store. It copies the
 already-validated overlay profile into session state and accepts a record only
@@ -11,7 +11,7 @@ handles, pointers, selectors, service IDs or guest addresses.
 Reproduce with:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T201S2MutationOverlayProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T201S2MutationOverlayProbe.ps1 `
   -RepositoryRoot (Get-Location).Path `
   -BuildRoot artifacts\build\t201-s2-mutation-overlay-r1
 ```

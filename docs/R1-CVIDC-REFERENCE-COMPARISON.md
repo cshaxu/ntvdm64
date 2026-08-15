@@ -37,7 +37,7 @@ NTVDMx64 在本项目中始终是外部参考：它可提示曾经出现过的�
 ## 外部对照事实
 
 本地对照 patch
-`upstream/ntvdmx64/ntvdmpatch/patches/common/cvidc.patch` 对
+`refs/ntvdmx64/ntvdmpatch/patches/common/cvidc.patch` 对
 `base/cvidc/vglfunc.c` 作出如下变更：
 
 ```diff

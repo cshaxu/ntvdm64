@@ -14,7 +14,7 @@ keyboard, VGA, CMOS, DMA, disk and other device objects. This is not a claim
 that every device is active in the chosen guest profile; it is a compile/link
 closure fact.
 
-`src/bochs/iodev/devices.cc:154-206` is the decisive runtime fact. Its
+`refs/bochs/iodev/devices.cc:154-206` is the decisive runtime fact. Its
 `bx_devices_c::init` unconditionally initializes timer infrastructure and
 loads core `cmos`, `dma`, `pic`, `pit`, `floppy`, and `vga`, followed by the
 standard keyboard path. `--disable-pci`, `--disable-usb`, `--disable-smp` and

@@ -85,7 +85,7 @@ mapping 的 RAM 中保存/恢复这 4 字节，但不得把它搬到 host-only s
 这些目标可证明当时某个原始 caller 曾被到达，但不证明它们提供了可恢复的 software monitor、
 跨位宽 transport、设备语义或 NTIO 可执行性。特别是旧 reset trace 在 C-VIDC generated
 video/global-data 组合处的停止，只能作为 R1 source-recovery 证据；它不得成为 S5 对
-`src/reconstruction/monitor` 的阻塞条件，也不得通过重新启用 local CCPU adapter、video
+`refs/archive/reconstruction/monitor` 的阻塞条件，也不得通过重新启用 local CCPU adapter、video
 callback、synthetic IVT/BDA 或 host shim 来绕过。
 
 S5 的有效基线仍是 S4 的独立 software monitor、S2 的定宽 historical bridge 与本文件列出的

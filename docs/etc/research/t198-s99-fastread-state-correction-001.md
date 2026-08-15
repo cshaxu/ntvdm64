@@ -1,4 +1,4 @@
-# T198 S99 DEMFASTREAD state correction 001
+﻿# T198 S99 DEMFASTREAD state correction 001
 
 ## Correction
 
@@ -18,7 +18,7 @@ handle, invokes `C4 C4 50 42` with ZF clear and `BX:SI=0`, and verifies the
 existing fast-read provider produces a checked three-byte `REM` bulk write
 with `AX=3`.  It then invokes `50:43` and verifies it remains pass-through.
 
-`tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` source-built, linked and
+`tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` source-built, linked and
 ran this closure as MSVC x64 `/MT` at
 `artifacts/build/t198-s99-fastread-state-r2` with zero exit.
 

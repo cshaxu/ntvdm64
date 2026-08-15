@@ -1,4 +1,4 @@
-# T165 S1 CLI terminal observer 001
+﻿# T165 S1 CLI terminal observer 001
 
 ## Question
 
@@ -7,7 +7,7 @@ changing Bochs, adapter, guest, BOP, or BYOB behavior?
 
 ## Inputs and procedure
 
-`tools/Invoke-CliNativeControlledStopObservation.ps1` records immutable hashes
+`tools/probe/Invoke-CliNativeControlledStopObservation.ps1` records immutable hashes
 for the full CLI chain (`ntdos64-run`, engine, profile, root, Bochs bundle and
 target) before launch. It redirects stdout/stderr, closes only the outer
 runner's stdin, enforces a bounded watchdog, and writes outcome JSON in all

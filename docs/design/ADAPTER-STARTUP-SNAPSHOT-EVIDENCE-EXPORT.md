@@ -1,4 +1,4 @@
-# Adapter Startup Snapshot Evidence Export v0
+﻿# Adapter Startup Snapshot Evidence Export v0
 
 ## Need
 
@@ -64,7 +64,7 @@ host DOS capability.
 4. Extend the r17 neutral-floppy fixture with the explicit profile export and
    verify the JSON against its log digest. **Completed by r18.**
 5. Add a separate evidence decoder that maps only the declared source fields.
-   **Completed:** `tools/Read-StartupSnapshotEvidence.ps1` accepts only the
+   **Completed:** `tools/probe/Read-StartupSnapshotEvidence.ps1` accepts only the
    fixed record/range layout, decodes the four source-ledger IVT locations and
    reports raw BDA/virtual-interrupt values.  It is an offline tool and has no
    engine, adapter-runtime or host-service dependency.

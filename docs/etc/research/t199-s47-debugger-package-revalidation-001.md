@@ -1,4 +1,4 @@
-# T199 S47 — Debugger package revalidation
+﻿# T199 S47 — Debugger package revalidation
 
 ## Question
 
@@ -31,7 +31,7 @@ guest stack or changing registers/flags.
 Fresh evidence was produced with:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t199-s47-debugger-package-r1 `
   -Fixture boot-namespace -HostArchitecture x64

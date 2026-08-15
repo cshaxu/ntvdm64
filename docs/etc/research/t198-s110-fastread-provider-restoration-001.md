@@ -1,4 +1,4 @@
-# M0 T198 S110: Fast-Read Provider Restoration
+﻿# M0 T198 S110: Fast-Read Provider Restoration
 
 ## Change
 
@@ -13,7 +13,7 @@ write capability was introduced.
 
 ## Verification
 
-`tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` source-built, linked and
+`tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` source-built, linked and
 ran the complete C-only current composition under MSVC x64 `/MT` at
 `artifacts/build/t198-s110-fastread-restore-x64-r2`.
 

@@ -1,4 +1,4 @@
-# T201 S3 Mutation-Policy Resolution Evidence
+﻿# T201 S3 Mutation-Policy Resolution Evidence
 
 S3 adds one generic resolution result derived solely from the shared profile
 and registered owner/class:
@@ -18,7 +18,7 @@ until the owning historical provider is recovered.
 Reproduce with:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T201S3MutationPolicyProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T201S3MutationPolicyProbe.ps1 `
   -RepositoryRoot (Get-Location).Path `
   -BuildRoot artifacts\build\t201-s3-mutation-policy-r1
 ```

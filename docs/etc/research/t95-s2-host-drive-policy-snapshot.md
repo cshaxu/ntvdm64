@@ -45,7 +45,7 @@ machine observation.
   session install and returns a value copy only to same-process adapter code.
 - `src/cli/ntdos64_run.c`: unchanged in this S; it already normalizes and
   passes the policy through the child-only engine environment.
-- `src/bochs`: unchanged.
+- `refs/bochs`: unchanged.
 
 ## Reproduction
 

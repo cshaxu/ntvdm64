@@ -1,4 +1,4 @@
-# T184 S2 process-tree watchdog controller 001
+﻿# T184 S2 process-tree watchdog controller 001
 
 Date: 2026-08-12  
 Packet: M0 T184 S2  
@@ -6,7 +6,7 @@ Disposition: controller source is statically closed; it has not launched a proce
 
 ## Controller contract
 
-`tools/Invoke-T184V5FiniteSequenceObservation.ps1` receives explicitly named
+`tools/probe/Invoke-T184V5FiniteSequenceObservation.ps1` receives explicitly named
 runner, shim, bundle engine, profile, BYOB root, target and empty evidence
 root. Before start it resolves and hashes all file inputs and writes
 `inputs.json` with a literal `retryPolicy: none`.

@@ -1,4 +1,4 @@
-# T200 S1 — Native CLI integrated-execution baseline
+﻿# T200 S1 — Native CLI integrated-execution baseline
 
 ## Question
 
@@ -11,13 +11,13 @@ which individual BOP patch—must diagnose it next?
 One guest run, and only one, was executed:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S97PostBootstrapNativeProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S97PostBootstrapNativeProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s1-native-cli-baseline-r1
 ```
 
 The harness rebuilt current composition inputs from
-`tools/t198-s50-bx-vdm-composition-manifest.json`, used MSVC x64 `/MT` for its
+`tools/build/t198-s50-bx-vdm-composition-manifest.json`, used MSVC x64 `/MT` for its
 modern fixture, and used the source-built CPU5/Pentium-MMX guest recipe.  Its
 provenance record reports `runs: 1` and guest exit `2`, the fixture's defined
 controlled-observation exit rather than a DOS/CLI exit status.

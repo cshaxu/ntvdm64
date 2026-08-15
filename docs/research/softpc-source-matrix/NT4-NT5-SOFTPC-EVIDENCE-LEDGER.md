@@ -181,7 +181,7 @@ SetMarkPointers(0)` 会在 NTIO 前动态抵达这三个通用 `Video` mark slot
 ### E-VEC-001 补充：后代 patch stack 的限定
 
 - 状态：`external-reference-only`
-- 2026-08-09 审计 `upstream/ntvdmx64/ntvdmpatch/patch.cmd`、
+- 2026-08-09 审计 `refs/ntvdmx64/ntvdmpatch/patch.cmd`、
   `patches/common/cvidc.patch`、`patches/common/ccpu.patch`、
   `patches/minnt/makefiles.patch` 与 `doc/cvidc.txt`：common patch 将声明写为
   `struct VideoVector C_Video, Video = { ... };`，其 initializer 只属于 `Video`，
@@ -383,7 +383,7 @@ SetMarkPointers(0)` 会在 NTIO 前动态抵达这三个通用 `Video` mark slot
 
 - 状态：`reference-only; negative historical-composition result`
 - 2026-08-09 审计项目内 reference-only 材料
-  `upstream/ntvdmx64/ntvdmpatch/patches/old-src/makefiles.patch`
+  `refs/ntvdmx64/ntvdmpatch/patches/old-src/makefiles.patch`
   （SHA-256 `DE527382321964E19D6A6BF5960CB5EE3235DCD361EA6B181C04E5F86ED78CD3`）和
   `patches/minnt/makefiles.patch`
   （SHA-256 `FBC3247B948D8991F0D537D2327A4F84C6D5AC1855B85C2540DDE92D9682E7DA`）。两者

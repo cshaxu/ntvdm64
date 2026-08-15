@@ -2,14 +2,14 @@
 
 ## Imported Source Input
 
-`src/ms-dos-6` is a byte-exact, source-only import from the local MS-DOS 6
+`refs/ms-dos-6` is a byte-exact, source-only import from the local MS-DOS 6
 tree. It contains the DOS 6 `BACKUP` source closure and the QB 4.5 source tree
 needed to research `QBASIC.EXE`, `EDIT.COM`, and `MSHERC.COM`. The generated
 `SOURCE-MANIFEST.json` records every imported file. Historical tools and
 prebuilt/generated binary files are intentionally excluded from `src`.
 
 The exact QB 4.5 historical tool closure is separately vendored at
-`tools/msdos6-qb45`, with its own hash manifest.
+`tools/historical/msdos6-qb45`, with its own hash manifest.
 
 ## Reference Identity
 

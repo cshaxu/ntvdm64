@@ -17,7 +17,7 @@ product-configuration result.
 
 The sole matrix root is
 `artifacts/analysis/t95-s6-msvc-x86-config-shape-002-20260811-001`.  It copied
-the pinned `src/bochs` input only.  No `instrument.h` was generated or copied:
+the pinned `refs/bochs` input only.  No `instrument.h` was generated or copied:
 the command searches the original copy's `instrument/stubs` directory.
 
 | Variant | SMF values (CPU/MEM/DEV) | Status | `config.h` SHA-256 |

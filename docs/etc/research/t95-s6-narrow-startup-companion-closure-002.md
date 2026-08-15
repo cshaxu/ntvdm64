@@ -14,7 +14,7 @@ symbols?
   `t95-s6-narrow-startup-companion-closure-001.md`.
 - `src/bx-ntvdm-adapter/bx_ntvdm_exception_abi.c` and
   `src/bx-ntvdm-adapter/bx_ntvdm_cpu_delta_abi.c`.
-- `src/bochs/cpu/exception.cc` and
+- `refs/bochs/cpu/exception.cc` and
   `src/bx-ntvdm-adapter/bx_ntvdm_cpu_result_v2.c`.
 
 ## Procedure

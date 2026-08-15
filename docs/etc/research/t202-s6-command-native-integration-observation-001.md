@@ -1,4 +1,4 @@
-# T202 S6 bounded native COMMAND integration observation
+﻿# T202 S6 bounded native COMMAND integration observation
 
 ## Question
 
@@ -10,7 +10,7 @@ after the S6 package regression passes?
 Ran the current-manifest source-built native fixture once:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t202-s6-command-native-integration-r1
 ```

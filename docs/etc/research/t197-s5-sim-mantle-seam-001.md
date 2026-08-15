@@ -14,7 +14,7 @@ header names those current locations.  The minimum path no longer calls
 | --- | --- | --- | --- |
 | Parameter object implementation | `bx-mantle` | Original `paramtree.{h,cc}` defines the `bx_list_c` and typed parameter objects used by the minimal SIM helper. | Moved by identity. |
 | Logging implementation | `bx-mantle` | Original `logio.cc` provides `SAFE_GET_IOFUNC`/`SAFE_GET_GENLOG` backing used by the minimal machine. | Moved by identity; its `BX_CPU(0)->get_eip()` diagnostic remains an explicit core edge. |
-| Product SIM/configuration | retained `src/bochs/gui/siminterface.cc` / `config.cc` | `bx_init_siminterface()` creates `bx_real_sim_c`; later product configuration constructs GUI/plugin/device parameters. | Not moved and not a minimal build input. |
+| Product SIM/configuration | retained `refs/bochs/gui/siminterface.cc` / `config.cc` | `bx_init_siminterface()` creates `bx_real_sim_c`; later product configuration constructs GUI/plugin/device parameters. | Not moved and not a minimal build input. |
 | CPU model and CPUID parameter choice | finite mantle configuration contract | `cpu/init.cc` obtains `cpu.model`; `generic_cpuid.cc` reads a broad configurable CPUID tree, while CPU5 `pentium_mmx.cc` is a fixed profile. | Owner-confirmed CPU5/Pentium MMX. |
 
 ## Why The CPU Choice Is A Gate

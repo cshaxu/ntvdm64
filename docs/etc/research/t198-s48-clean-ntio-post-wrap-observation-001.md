@@ -1,4 +1,4 @@
-# T198 S48: clean NTIO observation after real-mode IP repair
+﻿# T198 S48: clean NTIO observation after real-mode IP repair
 
 ## Result
 
@@ -16,7 +16,7 @@ runnable.
 The following command was run from a new root:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S48NtioCleanRebuildProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S48NtioCleanRebuildProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s48-clean-ntio-r11 `
   -HostArchitecture x64

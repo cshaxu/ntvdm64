@@ -1,4 +1,4 @@
-# T217 S8 — COMMAND Initial-Environment Semantic Repair
+﻿# T217 S8 — COMMAND Initial-Environment Semantic Repair
 
 ## Scope
 
@@ -49,7 +49,7 @@ policy. Oversize input fails at admission without truncation.
 On 2026-08-15, a fresh build used:
 
 ```text
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T217S2CommandInitialEnvironmentProbe.ps1 \
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T217S2CommandInitialEnvironmentProbe.ps1 \
   -RepositoryRoot O:\repos.hobby\ntdos64 \
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t217-s8-command-environment-source-first-r2
 ```
@@ -72,7 +72,7 @@ is an ABI acceptance test rather than a live-host duplicate test.
 The live-capture extension was rebuilt and run on 2026-08-15 with:
 
 ```text
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T217S2CommandInitialEnvironmentProbe.ps1 \
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T217S2CommandInitialEnvironmentProbe.ps1 \
   -RepositoryRoot O:\repos.hobby\ntdos64 \
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t217-s8-command-environment-live-over4023-r1
 ```

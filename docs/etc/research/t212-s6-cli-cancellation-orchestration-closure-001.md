@@ -1,4 +1,4 @@
-# T212 S6: CLI Cancellation Orchestration Closure
+﻿# T212 S6: CLI Cancellation Orchestration Closure
 
 Packet: M0 T212 S6, Ordinary Mode  
 Date: 2026-08-15  
@@ -51,11 +51,11 @@ the guest or BOP plane.
 Commands:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T212S6CliCancellationProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T212S6CliCancellationProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s6-cli-cancellation-r1
 
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T212S6NativeCliCancellationProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T212S6NativeCliCancellationProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s6-native-cli-cancellation-r2 `
   -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s3-current-composition-r3

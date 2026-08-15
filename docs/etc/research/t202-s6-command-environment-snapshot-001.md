@@ -1,4 +1,4 @@
-# T202 S6: COMMAND copied initial-environment snapshot
+﻿# T202 S6: COMMAND copied initial-environment snapshot
 
 ## Scope
 
@@ -41,7 +41,7 @@ handle, callback, guest pointer, or Bochs type crosses the adapter ABI.
 ## Reproducible evidence
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t202-s6-command-environment-r4 `
   -Fixture boot-namespace

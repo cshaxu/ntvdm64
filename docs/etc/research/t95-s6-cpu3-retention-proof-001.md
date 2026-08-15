@@ -12,7 +12,7 @@ The immutable analysis root is
 
 | Input | SHA-256 | Observation |
 | --- | --- | --- |
-| Copied `src/bochs/config.h` before replacement | `A1FADC25502FB0A4644917B6F3A62987C125CC7335457F9C59E7CE7E62A45AC8` | Pinned baseline. |
+| Copied `refs/bochs/config.h` before replacement | `A1FADC25502FB0A4644917B6F3A62987C125CC7335457F9C59E7CE7E62A45AC8` | Pinned baseline. |
 | Accepted v2 CPU3 projected config | `C47030F79880C894A346F56E3AB3242924308983E00B5845EDCE849450C6C19D` | Artifact root config only. |
 | Non-product fixture | `22EA4D39D76E38EF57309DBD4DE54C121EB306274A1834FCF631BB6E0578EC85` | Roots the private composition without execution. |
 
@@ -74,7 +74,7 @@ closure result. The one-link admission prohibits a retry.
 
 ## Parameter-vector repair and validation
 
-`tools/New-T95S6LinkArgumentVector.ps1`
+`tools/build/New-T95S6LinkArgumentVector.ps1`
 (`6B3BAC407392C5F9CA327E3FF1177B8A465DD2F669A5AD5DDF9290CEAD90EE31`) is
 a deterministic future-link vector generator and validator, not a build
 wrapper. Given an absolute output path, absolute map path, and existing
@@ -144,7 +144,7 @@ linkable target, add inputs, or enable a denied feature.
 
 ## Explicit PowerShell entrypoint proof
 
-`tools/Invoke-T95S6LinkVectorEntrypoint.ps1`
+`tools/probe/Invoke-T95S6LinkVectorEntrypoint.ps1`
 (`5C993833318843641A1B955D5C2E5E92589F9EDAA704B7F3AA38FB970A90E06B`) is
 the sole documented policy-safe entrypoint for the vector generator. It is
 intended only for this form:

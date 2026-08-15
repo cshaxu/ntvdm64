@@ -1,4 +1,4 @@
-# T200 S27: native CLI-to-engine handoff
+﻿# T200 S27: native CLI-to-engine handoff
 
 ## Boundary
 
@@ -23,7 +23,7 @@ objects, and admitted Bochs backend closure under MSVC x64 `/MT`, then ran the
 admitted source-built `TARGET.EXE` profile:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S27NativeCliProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S27NativeCliProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s27-native-cli-r3 `
   -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s26-current-composition-r1

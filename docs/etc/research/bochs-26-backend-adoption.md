@@ -20,9 +20,9 @@ The runtime flow is `runner -> Bochs -> typed bridge -> original OpenNT owner ->
 The authoritative Bochs 2.6 input is the local repository
 `O:\repos.external\bochs-2.6-compat\bochs-2.6`. Its `CHANGES` begins with
 `Changes in 2.6 (September 2, 2012)` and its README identifies Bochs as LGPL
-software. The current `src/bochs` checkout is not that baseline: it contains
+software. The current `refs/bochs` checkout is not that baseline: it contains
 Bochs 3.0 material and must not enter the runtime. T95 must import the local
-2.6 input into `src/bochs` with a manifest and patch record.
+2.6 input into `refs/bochs` with a manifest and patch record.
 
 Before any CMake/runtime integration, record: exact local source identity,
 upstream revision when available, archive hash when applicable, local patch

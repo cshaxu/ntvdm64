@@ -1,4 +1,4 @@
-# T212 S2: CLI Lifecycle Policy and Result ABI
+﻿# T212 S2: CLI Lifecycle Policy and Result ABI
 
 Packet: M0 T212 S2, Ordinary Mode  
 Date: 2026-08-15  
@@ -37,7 +37,7 @@ engine contract.
 Command:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T212S2CliLifecyclePolicyProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T212S2CliLifecyclePolicyProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s2-cli-lifecycle-policy-r2
 ```

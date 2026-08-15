@@ -1,4 +1,4 @@
-# T189 S5 boot-file predicate closure 001
+﻿# T189 S5 boot-file predicate closure 001
 
 Date: 2026-08-12  
 Packet: M0 T189 S5  
@@ -19,11 +19,11 @@ fixed BOP contract, namespace/address, path and transaction.  The existing
 boolean API delegates to it.  The provider gains a matching wrapper so the
 runtime does not bypass its provider boundary.
 
-`tools/New-T189S5BootFilePredicateDerivative.ps1` begins with the pinned T187
+`tools/build/New-T189S5BootFilePredicateDerivative.ps1` begins with the pinned T187
 base and permits exactly four compilations: `cpu/exception.o`, adapter runtime,
 COMMAND boot-file service, and boot-namespace provider.  It does not compile
 an archive, a device, the CLI, or any other Bochs object.  The final bundle is
-made by `tools/New-T189S5BootFilePredicateBundle.ps1`; its manifest binds the
+made by `tools/build/New-T189S5BootFilePredicateBundle.ps1`; its manifest binds the
 engine and the retained ROM hashes.
 
 Focused checks passed:

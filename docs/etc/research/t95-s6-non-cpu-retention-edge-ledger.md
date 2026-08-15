@@ -12,10 +12,10 @@ reverses owned port-space then memory state.
 Reproducible searches:
 
 ```powershell
-rg -n -C 3 "bx_ntvdm_minimal_machine|bx_ntvdm_minimal_sim|init_memory_without_sim|init_empty_port_space|cleanup_(memory|empty_port_space)" src/bochs
-rg -n -C 2 "DEV_cmos_get_reg|DEV_vga_mem_(read|write)|DEV_vga_refresh|DEV_dma_raise_hlda|DEV_(timer|pit)|bx_pc_system\.(initialize|Reset|inp|outp)" src/bochs
-rg -n -C 2 "bx_init_siminterface|bx_list_c|bx_param_bool_c|SAFE_GET_(IOFUNC|GENLOG)|pluginlog|bx_user_quit|bx_dbg" src/bochs/gui src/bochs/logio.cc src/bochs/pc_system.cc src/bochs/bx_ntvdm_minimal_machine.cc src/bochs/bx_ntvdm_minimal_sim.cc
-rg -n -C 2 "BX_CPU_C::(initialize|reset)|init_SMRAM|init_FetchDecodeTables|cpu_loop|handleWaitForEvent" src/bochs/cpu/init.cc src/bochs/cpu/cpu.cc src/bochs/cpu/event.cc src/bochs/cpu/smm.cc
+rg -n -C 3 "bx_ntvdm_minimal_machine|bx_ntvdm_minimal_sim|init_memory_without_sim|init_empty_port_space|cleanup_(memory|empty_port_space)" refs/bochs
+rg -n -C 2 "DEV_cmos_get_reg|DEV_vga_mem_(read|write)|DEV_vga_refresh|DEV_dma_raise_hlda|DEV_(timer|pit)|bx_pc_system\.(initialize|Reset|inp|outp)" refs/bochs
+rg -n -C 2 "bx_init_siminterface|bx_list_c|bx_param_bool_c|SAFE_GET_(IOFUNC|GENLOG)|pluginlog|bx_user_quit|bx_dbg" refs/bochs/gui refs/bochs/logio.cc refs/bochs/pc_system.cc refs/bochs/bx_ntvdm_minimal_machine.cc refs/bochs/bx_ntvdm_minimal_sim.cc
+rg -n -C 2 "BX_CPU_C::(initialize|reset)|init_SMRAM|init_FetchDecodeTables|cpu_loop|handleWaitForEvent" refs/bochs/cpu/init.cc refs/bochs/cpu/cpu.cc refs/bochs/cpu/event.cc refs/bochs/cpu/smm.cc
 ```
 
 One initial search used Bash-style brace paths in PowerShell and was rejected

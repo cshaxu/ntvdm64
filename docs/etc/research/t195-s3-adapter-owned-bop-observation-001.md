@@ -12,13 +12,13 @@ provider, guest result, machine handler, device, or runtime claim?
   BX-TRACE-059 through BX-TRACE-061 as the live catalogue/listener repair
   group.
 - T195 S2 fixes the copied event/state/window and generic result boundary.
-- The previous listener in `src/bochs/cpu/exception.cc` called the adapter
+- The previous listener in `refs/bochs/cpu/exception.cc` called the adapter
   catalogue, decoded BOP identity, formatted selector/service trace data, and
   additionally performed stack/frame guest-RAM diagnostics.
 
 ## Change
 
-`src/bochs/cpu/exception.cc` no longer declares
+`refs/bochs/cpu/exception.cc` no longer declares
 `BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER`, includes the catalogue, decodes BOP
 bytes, formats BOP identity, or reads the diagnostic stack/frame.  Its generic
 adapter interceptor now sends the already copied exception facts to the

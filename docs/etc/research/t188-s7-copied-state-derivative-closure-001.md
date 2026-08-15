@@ -1,4 +1,4 @@
-# T188 S7 copied-state derivative closure 001
+﻿# T188 S7 copied-state derivative closure 001
 
 Date: 2026-08-12  
 Packet: M0 T188 S7  
@@ -8,7 +8,7 @@ Disposition: r3 is build-admitted; no compiler or runtime action yet.
 
 The retained T187/r5 engine was linked with MSVC `/MT` adapter objects. The current copied-state API changes only `adapter/bx_ntvdm_adapter_runtime.c` and `.h`; its existing consumers and all other adapter/CLI interfaces are unchanged. The same r5 makefile already compiles that adapter object with `cl.exe /MT /W3 /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /Iadapter /Icli`, matching the retained island.
 
-`tools/New-T188S7CopiedStateTraceDerivative.ps1` copies the exact r5 root, replaces only current `cpu/exception.cc` and adapter runtime source/header, and emits two build rules: `cpu/exception.o` and `adapter/bx_ntvdm_adapter_runtime.obj`. Its final link keeps 71 other adapter/CLI objects, all retained Bochs archives and machine inputs. The manifest is `artifacts/build/current/t188-copied-state-derivative-r3/t188-s7-copied-state-derivative.json`.
+`tools/build/New-T188S7CopiedStateTraceDerivative.ps1` copies the exact r5 root, replaces only current `cpu/exception.cc` and adapter runtime source/header, and emits two build rules: `cpu/exception.o` and `adapter/bx_ntvdm_adapter_runtime.obj`. Its final link keeps 71 other adapter/CLI objects, all retained Bochs archives and machine inputs. The manifest is `artifacts/build/current/t188-copied-state-derivative-r3/t188-s7-copied-state-derivative.json`.
 
 ## Generator attempts
 

@@ -1,4 +1,4 @@
-# T214 S3: OpenNT COMMAND Environment Recovery
+﻿# T214 S3: OpenNT COMMAND Environment Recovery
 
 ## Question
 
@@ -56,7 +56,7 @@ than truncating or inventing a whitelist.
 
 ## Verification
 
-`tools/Invoke-T210S3HostContextFamilyProbe.ps1` source-builds with MSVC x64
+`tools/probe/Invoke-T210S3HostContextFamilyProbe.ps1` source-builds with MSVC x64
 `/MT` and exercises a 5,001-byte double-NUL OEM environment through the
 existing `54:02` COMSPEC and `54:0F` environment request path.  It verifies
 that the transaction carries the complete environment and no longer rejects

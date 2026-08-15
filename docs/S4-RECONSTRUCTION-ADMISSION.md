@@ -23,7 +23,7 @@ S4 的 software monitor 不是 OpenNT overlay：NT4 x86 原始产品的 executio
 prototype。为避免两种误归类，S4 采用受限类别：
 
 ```text
-src/reconstruction/monitor/
+refs/archive/reconstruction/monitor/
 ```
 
 它只允许实现 S3 已列出的 CPU/memory/execution mechanics。每个新增行为必须在
@@ -58,8 +58,8 @@ src/reconstruction/monitor/
 
 ## 实现与验证记录
 
-S4 implementation 位于 `src/reconstruction/monitor/reconstructed_monitor_s4.[ch]`，其
-source manifest 为 `src/reconstruction/SOURCE-MANIFEST.json`。root 的
+S4 implementation 位于 `refs/archive/reconstruction/monitor/reconstructed_monitor_s4.[ch]`，其
+source manifest 为 `refs/archive/reconstruction/SOURCE-MANIFEST.json`。root 的
 `ntdos64-reconstructed-monitor-s4-test` 已使用 MinGW x64 构建并退出 `0`，覆盖 NOP
 budget、D6 bridge refusal、完整 C4 `0xFE` exit、C4 `0x03FE` typed refusal 和 unknown
 opcode。

@@ -69,8 +69,8 @@ fallback to system hooks.
 
 ## Source Policy
 
-The `upstream/` snapshots are read-only evidence. The separately manifested
-historical research inputs in `src/opennt/` and `src/ntvdmx64/` are available
+The `refs/` snapshots are read-only evidence. The separately manifested
+historical research inputs in `src/opennt/` and `refs/ntvdmx64-derived/` are available
 only through default-disabled CMake gates and are not linked into this CLI.
 Their source roots, include paths, overlays, hashes, and research restrictions
 are recorded in `docs/HISTORICAL-SOURCE-INPUT-GATES.md`. Public and

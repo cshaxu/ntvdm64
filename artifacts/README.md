@@ -1,20 +1,16 @@
-# Generated Artifacts
+# Requested Reports And Formal Releases
 
-This directory contains generated outputs and retained research evidence. It is
-not a source, build-input, or release directory.
+`artifacts/` is a Git-tracked publication boundary. It is not a build,
+diagnostic, evidence, input, toolchain, cache, or runtime-log directory.
 
-## Layout
+Only these owner-approved contents are allowed:
 
-| Directory | Contents |
+| Directory | Allowed contents |
 | --- | --- |
-| `host-tools/` | Host-built helper objects and executables |
-| `logs/` | Captured build and probe logs |
-| `reports/` | Retained historical research reports and their migration manifests |
-| `build/current/` | Reproducible current CMake or compiler build trees |
-| `build/legacy/` | Non-relocatable historical build caches retained as evidence |
-| `stages/` | Generated historical-source stages and manifests |
-| `toolchain-runs/` | Reproducible assembler, linker, format-tool, and host-ABI comparisons |
+| `reports/<task-id>/` | A human-readable report explicitly requested by the owner. |
+| `build/<task-id>-<version>/` | An explicitly approved formal executable release and its manifest. |
 
-Every retained artifact batch must be recorded in
-`docs/governance/directory-reorganization.md` with its source, reason for
-retention, and post-move verification result.
+Evidence, inventories, hashes, operational records and research conclusions
+belong under `docs/etc/`. All temporary build, probe and debug output belongs
+under the ignored `build/<task-id>/<run-id>/` tree and must be removed when it
+is no longer reusable.

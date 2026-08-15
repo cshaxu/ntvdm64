@@ -1,4 +1,4 @@
-# T200 S3 — COMMAND CMDINFO observation fixture
+﻿# T200 S3 — COMMAND CMDINFO observation fixture
 
 ## Result
 
@@ -12,7 +12,7 @@ sources.  The result remains fixture-only.
 
 ## Verification
 
-`tools/Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 -CompileOnly`
+`tools/probe/Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 -CompileOnly`
 rebuilt the source-built COMMAND/SHARE inputs, full current x64 `/MT`
 composition, and modified bridge at
 `artifacts/build/t200-s3-cmdinfo-compile-r3/`.  Its record states `runs: 0`;

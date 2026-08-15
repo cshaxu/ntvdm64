@@ -8,9 +8,9 @@ platform declarations without continuing a hand-authored reconstruction of
 
 ## Inputs and procedure
 
-`tools/Project-BochsConfig.ps1` accepts only a fresh analysis root, the pinned
-`src/bochs/config.h`, and
-`tools/t95-s6-msvc-config-projection-manifest.json`.  The manifest pins the
+`tools/build/Project-BochsConfig.ps1` accepts only a fresh analysis root, the pinned
+`refs/bochs/config.h`, and
+`tools/build/t95-s6-msvc-config-projection-manifest.json`.  The manifest pins the
 input SHA-256 and names every permitted source-forced or deny-list replacement,
 including its exact old and new values.  The tool rejects a changed input hash,
 missing or duplicate input definition, duplicate manifest name, unexpected
@@ -29,7 +29,7 @@ facilities, or the registered #UD interception.  The latter is added as an
 explicit `BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT=0` default-off projection entry.
 
 This package does not invoke a Bochs compiler, linker, executable, configure
-script, VS project, `bochs.exe`, or `all`; it does not modify `src/bochs`,
+script, VS project, `bochs.exe`, or `all`; it does not modify `refs/bochs`,
 `config.h.in`, or Bochs code.
 
 ## Verification and interpretation

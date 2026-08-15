@@ -1,7 +1,7 @@
-# T200 S28: native CLI admission regression
+﻿# T200 S28: native CLI admission regression
 
 The S27 native CLI was rebuilt and executed by
-`tools/Invoke-T200S27NativeCliProbe.ps1` at
+`tools/probe/Invoke-T200S27NativeCliProbe.ps1` at
 `artifacts/build/t200-s28-native-cli-r2/`.  Its normal admitted run still
 returns `terminal=5 detail=1` without a child engine, Bochs shell, or
 environment transport.

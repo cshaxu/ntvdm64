@@ -23,7 +23,7 @@ report its SHA-256 fingerprint; that digest can be retained by the file owner
 in a local runtime manifest without placing the runtime in this project.
 
 No such executable is currently in the default CMake graph. The former
-`src/archived/legacy-adapters/nvtdm.c` implementation is a trace-instrumentation reference under the
+`refs/archive/legacy-adapters/nvtdm.c` implementation is a trace-instrumentation reference under the
 explicitly disabled `NTDOS64_ENABLE_TRACE_INSTRUMENTATION` source-only target;
 it contains a handwritten staging/interpreter/DOS-service probe and is not the
 future engine implementation.
@@ -74,7 +74,7 @@ documented user-mode Windows APIs and user-selected local files.
 
 ## Retired Owned Prototype
 
-`src/archived/external-probes/whpx_com_run.c` is a retired, source-only WHPX COM/MZ prototype. Its
+`refs/archive/external-probes/whpx_com_run.c` is a retired, source-only WHPX COM/MZ prototype. Its
 handwritten INT 21h adapter is frozen instrumentation and is deliberately not
 in any normal engine build. It may not be extended into the owned monitor or
 used as evidence of `dos-real-mode` or `ntdos-byob` capability.

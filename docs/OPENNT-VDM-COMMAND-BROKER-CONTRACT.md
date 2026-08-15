@@ -17,7 +17,7 @@ now contains these reference-only sources under their original paths:
 | `src/opennt/base/win32/server/srvvdm.h` | `F590EF866F87CE80671C4B6F4E3BBE94347342E6B723BC062ED6F044FBB3820F` | Server task and console-record declarations. |
 | `src/opennt/public/internal/base/inc/vdmapi.h` | `B942656BA8761DDB9325A7EEA7997394562D2E57797C923FF5688D7BE86426DE` | Private `VDMINFO` layout and state bits. |
 
-`src/opennt-45/windows/inc/pmvdm.h` is the cross-version provenance source for
+`refs/opennt-45/windows/inc/pmvdm.h` is the cross-version provenance source for
 a narrow compatibility-header admission at
 `src/opennt/public/internal/windows/inc/pmvdm.h`: fixed OpenNT and OpenNT 4.5
 `config.c` are byte-identical, and its three consumed property values persist

@@ -1,4 +1,4 @@
-# T200 S31: Host-Integrated OpenNT BOP Provider Audit Ledger
+﻿# T200 S31: Host-Integrated OpenNT BOP Provider Audit Ledger
 
 ## Status and decision rule
 
@@ -106,7 +106,7 @@ The candidate T must use the proposal's package order, not BOP trace order:
   `src/bx-vdm/bx_ntvdm_bop_ingress_v1.c` and
   `src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c`.
 - Reproducible source inventory: run
-  `tools/Export-T200S31BopSourceInventory.ps1` against the repository. Its
+  `tools/governance/Export-T200S31BopSourceInventory.ps1` against the repository. Its
   corrected output, `t200-s31-bop-source-inventory-r10`, contains 203 original
   dispatcher/header entries and is the mandatory coverage set for the
   endpoint-level ledger. Revision r1's count of 199 is superseded: its parser

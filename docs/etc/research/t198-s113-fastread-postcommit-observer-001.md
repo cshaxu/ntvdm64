@@ -1,4 +1,4 @@
-# M0 T198 S113: DEMFASTREAD Post-Commit Observer
+﻿# M0 T198 S113: DEMFASTREAD Post-Commit Observer
 
 ## Change
 
@@ -20,7 +20,7 @@ two states cannot be conflated.
 - `artifacts/build/t198-s113-postcommit-observer-compile-r2` compiles the
   updated test bridge and fixture against the locked CPU5/x64 configuration;
   it does not link or run guest code.
-- `tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` passes at
+- `tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` passes at
   `artifacts/build/t198-s113-postcommit-composition-r1`. Its existing focused
   composition test verifies `50:42` returns a checked three-byte write with
   AX=`3`, while `50:43` remains pass-through.

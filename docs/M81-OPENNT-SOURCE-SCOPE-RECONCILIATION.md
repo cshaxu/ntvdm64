@@ -1,4 +1,4 @@
-# M81 OpenNT Source-Scope Reconciliation
+﻿# M81 OpenNT Source-Scope Reconciliation
 
 Status: completed local source-scope audit, 2026-08-08.
 
@@ -25,7 +25,7 @@ artifacts are unbuilt.
 
 ## Inventory Tool Correction
 
-`tools/Export-OpenNtArtifactInventory.ps1` formerly derived relative
+`tools/governance/Export-OpenNtArtifactInventory.ps1` formerly derived relative
 descriptor names by subtracting a possibly relative input string from an
 absolute file path. Invoking it with `-OpenNtRoot .\src\opennt` consequently
 produced invalid `rc/opennt/...` descriptor names. The tool now resolves the
@@ -54,7 +54,7 @@ backend gate remains the current execution blocker.
 
 ## Evidence
 
-- `tools/Export-OpenNtArtifactInventory.ps1` run with `ExecutionPolicy Bypass`
+- `tools/governance/Export-OpenNtArtifactInventory.ps1` run with `ExecutionPolicy Bypass`
   only for temporary local scan output;
 - `src/opennt/SOURCE-MANIFEST.json`;
 - `docs/OPENNT-MVDM-ARTIFACT-INVENTORY.md`;

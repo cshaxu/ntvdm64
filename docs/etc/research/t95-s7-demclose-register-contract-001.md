@@ -7,11 +7,11 @@ general registers on successful close?
 
 ## Source and trace evidence
 
-`upstream/opennt/base/mvdm/dos/v86/doskrnl/dos/handle.asm:137-152` enters
+`refs/opennt/base/mvdm/dos/v86/doskrnl/dos/handle.asm:137-152` enters
 `SVC_DEMCLOSE` with `AX:BP` as the handle and `CX:DX` as the optional
 position. On return it restores its saved `BP`, clears the SFT reference
 count, and branches only on CF. The historical host handler,
-`upstream/opennt/base/mvdm/dos/dem/demhndl.c:28-85`, documents successful
+`refs/opennt/base/mvdm/dos/dem/demhndl.c:28-85`, documents successful
 `demClose` as CF clear and failure as CF set with AX status; its success paths
 call only `setCF(0)`.
 

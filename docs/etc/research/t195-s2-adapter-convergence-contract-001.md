@@ -3,7 +3,7 @@
 ## Purpose
 
 This record freezes the interface that repairs the two live T195 S1 targets:
-the BOP catalogue/listener in `src/bochs/cpu/exception.cc` and the direct
+the BOP catalogue/listener in `refs/bochs/cpu/exception.cc` and the direct
 machine-composition probe from that same file.  It is a target contract, not
 a source move or an assertion that any BOP provider now executes.
 

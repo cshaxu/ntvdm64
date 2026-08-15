@@ -17,7 +17,7 @@ last original instruction position before that fetch.
 
 ## Exact boundary and closure
 
-The original `BX_CPU_C::prefetch` in `src/bochs/cpu/cpu.cc` already checks
+The original `BX_CPU_C::prefetch` in `refs/bochs/cpu/cpu.cc` already checks
 `EIP > CS.limit` immediately before it calls the original #GP path. At that
 point the CPU already retains `PREV_RIP`, current CS, EIP, and the locally
 read limit. A default-off log of only those fields is sufficient to tell

@@ -1,4 +1,4 @@
-# M0 T194 S49--S51: Deferred Native-POST Metadata Composition
+﻿# M0 T194 S49--S51: Deferred Native-POST Metadata Composition
 
 ## Question
 
@@ -10,7 +10,7 @@ expanding the Bochs boundary or executing the new image?
 
 - The S39 paired metadata provider source replacement and its S42 focused
   MinGW C11 test.
-- `tools/New-T98S1CurrentAdapterEngineDerivative.ps1` at the committed source
+- `tools/build/New-T98S1CurrentAdapterEngineDerivative.ps1` at the committed source
   revision, with `-DeferredStartupPlan`.
 - Frozen S27 ROM root
   `artifacts/build/current/t194-s27-dpb-snapshot-bundle-r1/ROM`.

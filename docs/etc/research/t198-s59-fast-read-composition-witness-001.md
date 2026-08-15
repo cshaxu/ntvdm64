@@ -1,4 +1,4 @@
-# M0 T198 S59: DEM Fast-Read Finite-Composition Witness
+﻿# M0 T198 S59: DEM Fast-Read Finite-Composition Witness
 
 ## Composition repair
 
@@ -18,7 +18,7 @@ The following clean MSVC x64 `/MT` source-built run was performed from a new
 build root:
 
 ```text
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S48NtioCleanRebuildProbe.ps1 \
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S48NtioCleanRebuildProbe.ps1 \
   -RepositoryRoot O:\repos.hobby\ntdos64 \
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s59-fast-read-composition-r2 \
   -HostArchitecture x64

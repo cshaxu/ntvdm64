@@ -1,4 +1,4 @@
-# T217 S10 — SYSINIT WFP Shape Observation
+﻿# T217 S10 — SYSINIT WFP Shape Observation
 
 ## Scope
 
@@ -14,7 +14,7 @@ drive-prefix class, root-separator class, and nonempty component count.
 The focused full DEM provider probe was rebuilt with MSVC x64 `/MT`:
 
 ```text
-tools\Invoke-T202S4DemWholeProviderProbe.ps1
+tools\probe\Invoke-T202S4DemWholeProviderProbe.ps1
   -BuildRoot artifacts\build\t217-s10-dem-wfp-shape-provider-r1
 ```
 

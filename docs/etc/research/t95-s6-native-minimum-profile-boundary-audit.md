@@ -10,8 +10,8 @@ preserving the no-rewrite and no-one-off-device-patch rules?
 
 - Runtime evidence from
   `t95-s6-native-reset-controlled-stop-observation-002.md`.
-- Imported `src/bochs/config.cc:806-829,1198-1203,2857-2898`.
-- Imported `src/bochs/iodev/devices.cc:175-236`.
+- Imported `refs/bochs/config.cc:806-829,1198-1203,2857-2898`.
+- Imported `refs/bochs/iodev/devices.cc:175-236`.
 
 ## Observations
 

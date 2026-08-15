@@ -9,7 +9,7 @@ block-media composition?
 ## Inputs and procedure
 
 The primary input is pinned OpenNT
-`upstream/opennt/base/mvdm/dos/dem/demdasd.c`, SHA-256
+`refs/opennt/base/mvdm/dos/dem/demdasd.c`, SHA-256
 `7438F5D4DF1803664E66F16B7464D719C8E4341D1D9C2E7721CE7184BDF08942`, with
 the adjacent `demdasd.h` structure/API declaration and guest DOS
 `v86/doskrnl/dos/mscode.asm` BOP call sites. The immutable DEM map identifies

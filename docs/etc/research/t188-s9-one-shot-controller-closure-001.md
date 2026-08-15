@@ -1,4 +1,4 @@
-# T188 S9 one-shot controller closure 001
+﻿# T188 S9 one-shot controller closure 001
 
 Date: 2026-08-12  
 Packet: M0 T188 S9  
@@ -14,7 +14,7 @@ not Bochs, the adapter, a provider, or the CLI.
 
 ## Controller contract
 
-`tools/Invoke-T188S10CopiedStateObservation.ps1` is the only planned S10
+`tools/probe/Invoke-T188S10CopiedStateObservation.ps1` is the only planned S10
 invoker.  Before launch it rejects an existing evidence directory and writes
 an immutable input record.  It launches exactly one wrapper process and fixes
 `retryPolicy` to `none`.

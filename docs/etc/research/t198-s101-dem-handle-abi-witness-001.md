@@ -1,4 +1,4 @@
-# T198 S101 DEM handle ABI witness 001
+﻿# T198 S101 DEM handle ABI witness 001
 
 ## Change
 
@@ -9,7 +9,7 @@ token in that order.
 
 ## Verification
 
-`tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` source-built, linked and
+`tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` source-built, linked and
 ran the current composition at
 `artifacts/build/t198-s101-dem-handle-abi-r1` as one MSVC x64 `/MT` process.
 The fixture exits zero and covers:

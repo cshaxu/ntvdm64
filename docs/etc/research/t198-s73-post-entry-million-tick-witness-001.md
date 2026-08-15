@@ -1,4 +1,4 @@
-# M0 T198 S73: Post-Entry Million-Tick Witness
+﻿# M0 T198 S73: Post-Entry Million-Tick Witness
 
 ## Question
 
@@ -13,7 +13,7 @@ tick budget is `1000000`; IPS was already `1000000`. The fixture still uses
 the same NTDOS/COMMAND inputs and one-byte HLT `TARGET.COM`; it does not add
 `QUIT.COM`, guest media, devices, or a provider.
 
-`tools/Invoke-T198S48NtioCleanRebuildProbe.ps1` rebuilt the complete source
+`tools/probe/Invoke-T198S48NtioCleanRebuildProbe.ps1` rebuilt the complete source
 closure in `artifacts/build/t198-s73-post-entry-million-ticks-r1` for MSVC x64
 `/MT`, then ran `command-r1.exe`. The wrapper reports exit `2` because the
 fixture deliberately exposes an observed generic-UD stop; the native run log

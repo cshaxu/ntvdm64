@@ -1,4 +1,4 @@
-# T95 S6 MSVC configuration projection attempt 001 (implementation-blocked)
+﻿# T95 S6 MSVC configuration projection attempt 001 (implementation-blocked)
 
 ## Result
 
@@ -15,7 +15,7 @@ admitted in this packet.
 
 ## Exact observations
 
-1. Invocation of `tools/Project-BochsConfig.ps1` with the pinned manifest and
+1. Invocation of `tools/build/Project-BochsConfig.ps1` with the pinned manifest and
    the intended fresh root failed at original tool line 53 with
    `You cannot call a method on a null-valued expression.`  The fault was
    `$Matches[2].Trim()` while indexing every `#define`; it occurred before the

@@ -14,7 +14,7 @@ undefined symbols for `minimal_port_space.obj`. Three are normal MSVC CRT
 allocation/security support. The remaining two are
 `bx_devices_c::register_default_io_read_handler` and
 `bx_devices_c::register_default_io_write_handler`, whose only pre-change
-definitions were at `src/bochs/iodev/devices.cc:717-743`.
+definitions were at `refs/bochs/iodev/devices.cc:717-743`.
 
 Source review shows both functions only populate the existing
 `io_read_handlers` or `io_write_handlers` record: function pointer, object
@@ -24,8 +24,8 @@ plugin dispatch, timer, CMOS, firmware, configuration, adapter or OpenNT term.
 packet before the source edit.
 
 The two complete definitions were then moved unchanged into the already
-Bochs-internal `src/bochs/iodev/minimal_port_space.cc`; they were removed from
-`src/bochs/iodev/devices.cc`. The focused source-boundary test was expanded
+Bochs-internal `refs/bochs/iodev/minimal_port_space.cc`; they were removed from
+`refs/bochs/iodev/devices.cc`. The focused source-boundary test was expanded
 from three to five required definitions.
 
 ## Observations

@@ -8,7 +8,7 @@ OpenNT `cmdGetNextCmd` (`54:01`) for the new COMMAND provider plane?
 ## Direct source comparison
 
 Original `cmdGetNextCmd` in pinned
-`upstream/opennt/base/mvdm/dos/command/cmdmisc.c:25-369` consumes a guest
+`refs/opennt/base/mvdm/dos/command/cmdmisc.c:25-369` consumes a guest
 `CMDINFO` record via `GetVDMAddr` and coordinates all of the following:
 
 - first/repeat command state and return error;

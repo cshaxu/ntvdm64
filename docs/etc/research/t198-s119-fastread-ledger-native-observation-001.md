@@ -1,4 +1,4 @@
-# M0 T198 S119: Exported Fast-Read Ledger Native Observation
+﻿# M0 T198 S119: Exported Fast-Read Ledger Native Observation
 
 ## Result
 
@@ -40,7 +40,7 @@ device, DOS service or host capability from this record.
 ## Reproducibility
 
 ```text
-powershell.exe -ExecutionPolicy Bypass -File tools/Invoke-T198S97PostBootstrapNativeProbe.ps1 \
+powershell.exe -ExecutionPolicy Bypass -File tools/probe/Invoke-T198S97PostBootstrapNativeProbe.ps1 \
   -RepositoryRoot O:\repos.hobby\ntdos64 \
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s119-fastread-ledger-export-native-r1
 ```

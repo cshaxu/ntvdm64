@@ -1,4 +1,4 @@
-# T215 S1: Current BOP Owner-Package Reconciliation
+﻿# T215 S1: Current BOP Owner-Package Reconciliation
 
 ## Question
 
@@ -9,7 +9,7 @@ whole owner package should be admitted next without trace-led patching?
 ## Inputs And Procedure
 
 - Re-exported the pinned historical dispatcher/header inventory with
-  `tools/Export-T200S31BopSourceInventory.ps1`.
+  `tools/governance/Export-T200S31BopSourceInventory.ps1`.
 - Inspected current ingress/registry, bound boot namespace composition, native
   XMS/DPMI composition, and DEM/COMMAND/Redirector facades.
 - Reconciled prior owner-package closures T202, T205, T206, T210, T211 and

@@ -1,4 +1,4 @@
-# T199 S50 — Global BOP package closure audit
+﻿# T199 S50 — Global BOP package closure audit
 
 ## Question
 
@@ -34,13 +34,13 @@ All commands below ran successfully on the current source tree:
 
 ```powershell
 # DEM, COMMAND, Redirector, Debugger, top-level and machine/BIOS composition
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t199-s50-boot-all-families-r1 `
   -Fixture boot-namespace -HostArchitecture x64
 
 # XMS and DPMI native package sessions through the same generic ingress
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t199-s50-native-xms-dpmi-r1 `
   -Fixture global-bop -HostArchitecture x64

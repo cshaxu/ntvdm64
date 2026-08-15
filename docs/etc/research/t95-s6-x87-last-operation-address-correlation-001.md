@@ -22,7 +22,7 @@ FDS:FDP = 0000:0d41
 
 Real-mode segment:offset physical arithmetic gives respectively `0x590`, `0x0fa`, and `0x0d41`. Each is below `0x700`, hence outside the admitted NTIO payload interval.
 
-This is not an inference from a disassembler. `FPU_update_last_instruction` in `src/bochs/fpu/fpu.cc:48-56` records the current CS and committed prior RIP as the FPU last-instruction location, and records the selected data-segment address for a memory operand. The source therefore establishes that the first recorded last x87 operation and its operand are both outside the copied NTIO image. The current snapshot also has `CS=0`, not the admitted entry segment `0x70`.
+This is not an inference from a disassembler. `FPU_update_last_instruction` in `refs/bochs/fpu/fpu.cc:48-56` records the current CS and committed prior RIP as the FPU last-instruction location, and records the selected data-segment address for a memory operand. The source therefore establishes that the first recorded last x87 operation and its operand are both outside the copied NTIO image. The current snapshot also has `CS=0`, not the admitted entry segment `0x70`.
 
 ## Classification
 

@@ -1,4 +1,4 @@
-# T203 S1 engine terminal-result admission boundary
+﻿# T203 S1 engine terminal-result admission boundary
 
 ## Question
 
@@ -77,7 +77,7 @@ contains selector, provider, guest-memory, or CPU-state semantics.
 Reproduce with:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S22EngineMachineStageProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S22EngineMachineStageProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t203-s1-engine-observer-r4 `
   -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t203-s1-normal-540b-native-r5
@@ -112,4 +112,4 @@ this record.
 - `src/bx-vdm/bx_ntvdm_host_namespace.c` ordinary `ntdll` imports;
 - `tests/bx-mantle/bx_ntvdm_engine_direct_composition_v1_test.c`; and
 - `tests/bx-vdm/bx_ntvdm_terminal_observation_v1_test.c`; and
-- `tools/Invoke-T200S22EngineMachineStageProbe.ps1`.
+- `tools/probe/Invoke-T200S22EngineMachineStageProbe.ps1`.

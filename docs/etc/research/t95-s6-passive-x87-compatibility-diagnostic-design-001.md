@@ -28,7 +28,7 @@ support that conclusion.
 ## Candidate boundary
 
 If a later implementation admission is made, it must first register a new
-Bochs intrusion exception. The exception may alter only `src/bochs/fpu/fpu.cc`
+Bochs intrusion exception. The exception may alter only `refs/bochs/fpu/fpu.cc`
 and only under a new named compile-time macro that defaults to disabled.
 
 When enabled, it may emit one structured, parseable line **per existing

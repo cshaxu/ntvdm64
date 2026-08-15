@@ -21,7 +21,7 @@ yet, and no output byte is populated.
 ## Configuration Evidence
 
 `artifacts/build/bochs-2.6-native-nogui-ucrt-r14` was copied from the pinned
-`src/bochs` import and configured with the existing native `nogui` UCRT64
+`refs/bochs` import and configured with the existing native `nogui` UCRT64
 options. `configure` completed and generated `Makefile`. The wrapper timed
 out afterwards while writing its metadata file; this is recorded as wrapper
 incompletion, not as a configure failure.

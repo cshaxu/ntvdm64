@@ -1,4 +1,4 @@
-# T200 S26: COMMAND initial launch/lifecycle reconciliation
+﻿# T200 S26: COMMAND initial launch/lifecycle reconciliation
 
 ## Question
 
@@ -52,7 +52,7 @@ patch.
    run under MSVC x64 `/MT`:
 
    ```powershell
-   powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+   powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
      -RepositoryRoot O:\repos.hobby\ntdos64 `
      -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s26-command-package-r1 `
      -Fixture boot-namespace
@@ -66,7 +66,7 @@ patch.
 2. The focused lifecycle regression was freshly rebuilt and run:
 
    ```powershell
-   powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+   powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
      -RepositoryRoot O:\repos.hobby\ntdos64 `
      -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s26-command-lifecycle-r2 `
      -Fixture command-entry
@@ -83,12 +83,12 @@ patch.
    passed:
 
    ```powershell
-   powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
+   powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
      -RepositoryRoot O:\repos.hobby\ntdos64 `
      -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s26-current-composition-r1 `
      -CompileOnly
 
-   powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S22EngineMachineStageProbe.ps1 `
+   powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S22EngineMachineStageProbe.ps1 `
      -RepositoryRoot O:\repos.hobby\ntdos64 `
      -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s26-engine-native-r1 `
      -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s26-current-composition-r1

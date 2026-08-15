@@ -1,4 +1,4 @@
-# T210 S3 P1 — session host-context provider substrate
+﻿# T210 S3 P1 — session host-context provider substrate
 
 ## Question
 
@@ -34,7 +34,7 @@ relative-open contract.
 Executed:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T210S3SessionHostContextProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T210S3SessionHostContextProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t210-s3-session-host-context-r5
 ```

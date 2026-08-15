@@ -34,7 +34,7 @@ memory, decode or exception bodies; Git preserves source identity as renames.
 
 ## Retained Compatibility Edge
 
-The original root `src/bochs/bochs.h` remains temporarily mixed. It imports
+The original root `refs/bochs/bochs.h` remains temporarily mixed. It imports
 declarations from the core, mantle and retained product interfaces. A future
 minimal compile vector must provide `src/bx-core`, `src/bx-mantle`, the
 retained root and only the specifically admitted I/O header path as include
@@ -47,14 +47,14 @@ not rewritten to disguise the product target as the minimum machine build.
 
 ## Exception-Register Location Crosswalk
 
-Entries in the intrusion register use historical `src/bochs/...` paths for
+Entries in the intrusion register use historical `refs/bochs/...` paths for
 the facts at the time each exception was made. Current locations are:
 
 | Historical register prefix | Current source prefix |
 | --- | --- |
-| `src/bochs/cpu/` | `src/bx-core/cpu/` |
-| `src/bochs/fpu/` | `src/bx-core/fpu/` |
-| `src/bochs/memory/` | `src/bx-core/memory/` |
+| `refs/bochs/cpu/` | `src/bx-core/cpu/` |
+| `refs/bochs/fpu/` | `src/bx-core/fpu/` |
+| `refs/bochs/memory/` | `src/bx-core/memory/` |
 
 No exception gains new behavior from this relocation. The next modification to
 one of these files must register its current `bx-core` location before the

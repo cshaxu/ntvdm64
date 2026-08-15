@@ -1,7 +1,7 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$tool = Join-Path $repositoryRoot 'tools\Project-BochsConfig.ps1'
+$tool = Join-Path $repositoryRoot 'tools\build\Project-BochsConfig.ps1'
 $testRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("t95-s6-config-projection-" + [guid]::NewGuid().ToString('N'))
 
 function Assert-Throws([scriptblock]$Action, [string]$ExpectedText) {
@@ -53,8 +53,8 @@ try {
     if ($report.replacements.Count -ne 3) { throw 'Projection report omitted a named change.' }
     if (@($report.replacements | Where-Object { $_.name -ceq 'BX_CPU_LEVEL' }).Count -ne 1) { throw 'One exact #define was not represented as one record.' }
 
-    $v1ManifestPath = Join-Path $repositoryRoot 'tools\t95-s6-msvc-config-projection-manifest.json'
-    $v2ManifestPath = Join-Path $repositoryRoot 'tools\t95-s6-msvc-config-projection-manifest-v2.json'
+    $v1ManifestPath = Join-Path $repositoryRoot 'tools\build\t95-s6-msvc-config-projection-manifest.json'
+    $v2ManifestPath = Join-Path $repositoryRoot 'tools\build\t95-s6-msvc-config-projection-manifest-v2.json'
     if ((Get-FileHash -LiteralPath $v1ManifestPath -Algorithm SHA256).Hash.ToUpperInvariant() -cne '6815D8BD419ED9522C98F9DF55D242FB7037F42125C4504EC5766AE732FB9E28') { throw 'Projection v1 manifest is not immutable.' }
     $v1 = Get-Content -LiteralPath $v1ManifestPath -Raw | ConvertFrom-Json
     $v2 = Get-Content -LiteralPath $v2ManifestPath -Raw | ConvertFrom-Json

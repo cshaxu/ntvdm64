@@ -8,7 +8,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
 }
 
-$makefile = Join-Path $RepositoryRoot 'src\bochs\Makefile.in'
+$makefile = Join-Path $RepositoryRoot 'refs\bochs\Makefile.in'
 if (-not (Test-Path -LiteralPath $makefile -PathType Leaf)) {
     throw "Missing Bochs makefile template: $makefile"
 }

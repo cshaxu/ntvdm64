@@ -119,7 +119,7 @@ mutated, and no additional BOP is admitted by this result.
 ## Process-lifetime diagnosis
 
 The watchdog result is not evidence that the CPU loop failed to return.
-`src/bochs/main.cc:1087-1132` logs the observed CPU-loop message, calls
+`refs/bochs/main.cc:1087-1132` logs the observed CPU-loop message, calls
 `bx_atexit()`, and returns zero from the simulator entry. The outer Win32
 `bxmain` wrapper at `main.cc:357-364`, however, calls `fgets(stdin)` to wait
 for ENTER whenever `bx_user_quit` is false. The observer starts a hidden

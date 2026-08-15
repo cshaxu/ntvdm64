@@ -11,7 +11,7 @@ Status: active, incremental migration, 2026-08-07.
    subset. Record failures before continuing.
 4. Preserve historical evidence; move it with a manifest or record rather than
    deleting it.
-5. Do not move `src/`, `upstream/`, `tests/`, or `tools/` during the first
+5. Do not move `src/`, `refs/`, `tests/`, or `tools/` during the first
    migration waves.
 
 ## Target Layout

@@ -1,10 +1,10 @@
-# T198 S50: current finite-composition membership
+﻿# T198 S50: current finite-composition membership
 
 ## Result
 
 The clean NTIO recipe no longer obtains its `bx-vdm` compile membership from
 the historical S25 command script.  It consumes the tracked manifest
-`tools/t198-s50-bx-vdm-composition-manifest.json`, which names the current
+`tools/build/t198-s50-bx-vdm-composition-manifest.json`, which names the current
 finite-composition source set explicitly.
 
 The manifest distinguishes three facts that must not be conflated:

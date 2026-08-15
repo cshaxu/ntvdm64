@@ -1,14 +1,29 @@
-# Historical Toolchain Inputs
+# Tool Sources
 
-This directory vendors the exact historical Microsoft tool inputs used by the
-guest reconstruction research. It is a tool-input store, not a runtime
-distribution directory.
+`tools/` contains tracked tool sources and admitted historical tool inputs. It
+never contains a compiler working tree, generated binary, probe output or
+runtime log; those belong under the ignored `build/<task-id>/<run-id>/` tree.
+
+## Required Layout
+
+| Directory | Responsibility |
+| --- | --- |
+| `build/` | Configure, compile, package and explicit publish entry points. |
+| `governance/` | Documentation inventory, manifests and governance checks. |
+| `import/` | Admitted source and input acquisition helpers. |
+| `probe/` | Read-only or diagnostic probes; output goes only to `build/`. |
+| `historical/` | Vendored historical tool closures and their manifests. |
+
+New tools must be placed in one of these directories and state their target
+inputs and outputs. The `tools/` root contains only this directory guide.
+
+## Historical Tool Closures
 
 | Directory | Contents | Canonical use |
 | --- | --- | --- |
-| `msdos400/` | the complete MS-DOS 4.00 `TOOLS` directory | DOS-hosted MASM 5.10 and Link 3.65, plus companion utilities |
-| `opennt-4.5/` | the complete OpenNT 4.5 `tools16` directory | OpenNT-era 16-bit build, message, relocation, and packaging tools |
-| `msdos6-qb45/` | the MS-DOS 6 QuickBASIC 4.5 `TL` tool closure | Exact MASM/LINK510/CL/NMAKE support for QBASIC, EDIT, and MSHERC reconstruction probes |
+| `historical/msdos400/` | the complete MS-DOS 4.00 `TOOLS` directory | DOS-hosted MASM 5.10 and Link 3.65, plus companion utilities |
+| `historical/opennt-4.5/` | the complete OpenNT 4.5 `tools16` directory | OpenNT-era 16-bit build, message, relocation, and packaging tools |
+| `historical/msdos6-qb45/` | the MS-DOS 6 QuickBASIC 4.5 `TL` tool closure | Exact MASM/LINK510/CL/NMAKE support for QBASIC, EDIT, and MSHERC reconstruction probes |
 
 `MANIFEST.json` in each directory records every vendored file's size and
 SHA-256, along with the original local source path used for the copy. Historical

@@ -1,4 +1,4 @@
-# T212 S3: Native CLI Lifecycle Integration
+﻿# T212 S3: Native CLI Lifecycle Integration
 
 Packet: M0 T212 S3, Ordinary Mode  
 Date: 2026-08-15  
@@ -26,7 +26,7 @@ actually returned by the engine.
 ## Current composition closure repair
 
 The initial fresh rebuild exposed four stale omissions from
-`tools/t198-s50-bx-vdm-composition-manifest.json`, all already-existing
+`tools/build/t198-s50-bx-vdm-composition-manifest.json`, all already-existing
 current-composition dependencies:
 
 | Omitted source/requirement | Consumer that proved the dependency | Repair |
@@ -48,7 +48,7 @@ not used as CLI success evidence.
 Command:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T212S3NativeCliLifecycleProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T212S3NativeCliLifecycleProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s3-native-cli-lifecycle-r6 `
   -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s3-current-composition-r3

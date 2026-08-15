@@ -128,7 +128,7 @@ previous v18 disposable link; it does not replace a fresh full source-to-image
 rebuild, command execution trace, or retail-identity evidence.
 
 The v18 manifest predates the managed-source gate and names the legacy
-`upstream/opennt` checkout. It is therefore retained only as a link/layout
+`refs/opennt` checkout. It is therefore retained only as a link/layout
 observation. The current `stage-opennt-command.ps1` accepts a root only when
 it contains `src/opennt/SOURCE-MANIFEST.json`, verifies every COMMAND, shared
 include, and message input against that manifest, and applies compatibility

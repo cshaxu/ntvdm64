@@ -3,7 +3,7 @@
 ## Change
 
 After the existing interceptor validates a typed `BX_NTVDM_EXCEPTION_STOP`,
-`src/bochs/cpu/exception.cc` now calls original `SIM->quit_sim(0)`. It replaces
+`refs/bochs/cpu/exception.cc` now calls original `SIM->quit_sim(0)`. It replaces
 only the previous mechanical `async_event`/`kill_bochs_request`/CPU longjmp
 sequence. The branch does not read the instruction window, selector, service,
 guest memory, or adapter-private state.

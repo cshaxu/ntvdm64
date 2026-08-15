@@ -15,7 +15,7 @@ one diagnostic string.
 | First-prefix evidence | `artifacts/analysis/t95-s6-source-built-ntio-prefix-001-20260811-001/observation.json`, its `stderr.log`, and `guest/artifact-manifest.json`. The placed NTIO is 33,792 bytes, SHA-256 `cfc8be16576bb6acd16bb8fc9b2d9a080f544bbfdd2d2d2df07ed908b3ab4937`. |
 | NTIO layout | `artifacts/toolchain-runs/ntio-tools16-opennt-v1/base/mvdm/dos/v86/doskrnl/bios/ntio.map` and the matching source-built `NTIO.SYS`. Read the first entry bytes and the mapped `init` symbol only. |
 | OpenNT initial prefix | `src/opennt/base/mvdm/dos/v86/doskrnl/bios/msbio1.asm`, `msinit.asm`, and `src/opennt/base/mvdm/inc/intmac.inc`. |
-| Bochs diagnostic | `src/bochs/fpu/fpu.cc`, `BX_CPU_C::FPU_check_pending_exceptions`. |
+| Bochs diagnostic | `refs/bochs/fpu/fpu.cc`, `BX_CPU_C::FPU_check_pending_exceptions`. |
 | CPU-profile authority | `docs/etc/research/t95-s6-cpu-profile-authority-reconciliation.md`. |
 
 No executable, compiler, linker, configuration generator, or source file was

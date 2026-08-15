@@ -1,8 +1,8 @@
-param([string]$RepositoryRoot = (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)))
+﻿param([string]$RepositoryRoot = (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)))
 $ErrorActionPreference='Stop'
 $temporary = [IO.Path]::Combine([IO.Path]::GetTempPath(), ('ntdos64-bop-inventory-' + [guid]::NewGuid().ToString('N')))
 try {
-    & (Join-Path $RepositoryRoot 'tools\Export-OpenNtBopInventory.ps1') -RepositoryRoot $RepositoryRoot -OutputRoot $temporary
+    & (Join-Path $RepositoryRoot 'tools\governance\Export-OpenNtBopInventory.ps1') -RepositoryRoot $RepositoryRoot -OutputRoot $temporary
     $path=Join-Path $temporary 'opennt-bop-inventory.json'
     $data=Get-Content -LiteralPath $path -Raw|ConvertFrom-Json
 if (@($data.top_level_selectors).Count -ne 16) { throw 'Expected 16 top-level selectors' }

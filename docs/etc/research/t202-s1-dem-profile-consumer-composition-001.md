@@ -1,4 +1,4 @@
-# T202 S1 DEM Shared-Profile Consumer Composition
+﻿# T202 S1 DEM Shared-Profile Consumer Composition
 
 T202 S1 installs the common mutation profile at the DEM package-session and
 boot-namespace-composition boundary. The package consumer registers a DEM
@@ -13,11 +13,11 @@ class is rejected. The seam itself performs no host I/O or provider dispatch.
 Reproduction:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T202S1DemProfileConsumerProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T202S1DemProfileConsumerProbe.ps1 `
   -RepositoryRoot (Get-Location).Path `
   -BuildRoot artifacts\build\t202-s1-dem-profile-consumer-r1
 
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot (Get-Location).Path `
   -BuildRoot artifacts\build\t202-s1-dem-profile-session-r2 `
   -Fixture dem-profile

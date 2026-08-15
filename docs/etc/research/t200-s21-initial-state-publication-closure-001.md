@@ -1,4 +1,4 @@
-# T200 S21 — initial-state publication closure
+﻿# T200 S21 — initial-state publication closure
 
 ## Question
 
@@ -25,7 +25,7 @@ mantle's complete range-accessibility preflight occurs before copying.
 The reproducible command was:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S21InitialStatePublicationProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S21InitialStatePublicationProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s21-initial-state-publication-r10
 ```

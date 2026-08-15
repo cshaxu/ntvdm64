@@ -1,4 +1,4 @@
-# Execution Rules
+﻿# Execution Rules
 
 ## Request Lifecycle
 
@@ -83,6 +83,19 @@ interpretation, confidence, and follow-up in etc/ or an appropriate history/
 record. A failed or unavailable check is evidence with a limitation; it is
 never a passing result.
 
+## Build And Debug Output Hygiene
+
+An admitted build records its `build/<task-id>/<run-id>/` working root before
+execution. The run root is disposable: the next build must remove the previous
+run's non-reusable products before it begins, unless a recorded manifest proves
+their source/toolchain/input identity and reuse is intentional. Runtime and
+debug logs remain in that disposable root. Once a diagnosis is closed, retain
+only a concise reviewed excerpt, hash, manifest, or conclusion in `docs/etc/`;
+remove the raw debug log. `artifacts/` may receive only an owner-requested
+report or `artifacts/build/<task-id>-<version>/`, which is reserved for an
+explicitly approved versioned executable publication and its manifest, not for
+a configure tree, retry root, object cache, or probe.
+
 ### Historical Recovery Audit Gate
 
 Before admitting or changing a recovered OpenNT, guest, or host-service
@@ -131,7 +144,7 @@ For every P or Td closure:
 2. Inspect the actual worktree diff; run git diff --check and focused boundary
    checks.
 3. For documentation work, run
-   powershell -ExecutionPolicy Bypass -File tools/Verify-DocumentationGovernance.ps1.
+   powershell -ExecutionPolicy Bypass -File tools/governance/Verify-DocumentationGovernance.ps1.
 4. Update Status, Queue, history, and supporting evidence according to their
    separate roles. Record out-of-scope findings.
 5. Commit the reviewed result and push it. If no remote or push is available,

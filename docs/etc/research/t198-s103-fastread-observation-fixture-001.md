@@ -1,4 +1,4 @@
-# T198 S103 fast-read observation fixture 001
+﻿# T198 S103 fast-read observation fixture 001
 
 ## Question
 
@@ -13,7 +13,7 @@ Can the existing default-off `50:42` observation retain the missing `BP` and
 - Current MSVC x64 `/MT` projection:
   `artifacts/build/t198-s74-dem-pdb-termination-r1/native-core/config.h`.
 - Reproducible source-only recipe:
-  `tools/Invoke-T198S103FastReadObservationFixturePrepare.ps1`.
+  `tools/probe/Invoke-T198S103FastReadObservationFixturePrepare.ps1`.
 
 ## Procedure
 

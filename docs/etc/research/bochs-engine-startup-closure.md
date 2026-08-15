@@ -12,7 +12,7 @@ The runner's engine ABI is:
 
 By contrast, the imported Bochs 2.6 native entry accepts its own configuration
 ABI: `-q`, `-f <bochsrc>`, `-benchmark`, logging options, and then Bochs
-configuration directives. In `src/bochs/main.cc`, an unrecognized dash option
+configuration directives. In `refs/bochs/main.cc`, an unrecognized dash option
 panics and remaining non-flag arguments are passed to the Bochs configuration
 parser. Therefore forwarding the runner's engine argv to stock Bochs would be
 incorrect; it is not a missing compatibility switch.

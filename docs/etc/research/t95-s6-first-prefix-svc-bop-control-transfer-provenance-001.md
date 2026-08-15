@@ -46,7 +46,7 @@ runtime dependency and does not authorize importing SoftPC or reproducing its
 general BOP dispatcher.
 
 The pinned Bochs decoder has no OpenNT meaning for these bytes. Its C4 entry
-is the LES/VEX decoder path (`src/bochs/cpu/fetchdecode.cc:376`); with a second
+is the LES/VEX decoder path (`refs/bochs/cpu/fetchdecode.cc:376`); with a second
 byte whose high bits are set it recognizes a candidate VEX form
 (`fetchdecode.cc:1369-1408`), explicitly marks that form invalid outside
 protected mode, and its error executor raises `BX_UD_EXCEPTION`

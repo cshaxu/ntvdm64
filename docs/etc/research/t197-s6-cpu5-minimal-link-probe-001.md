@@ -9,10 +9,10 @@ historical Bochs product shell?
 ## Inputs
 
 - Pinned adopted Bochs source in `src/bx-core`, `src/bx-mantle`, and the
-  retained headers under `src/bochs`.
-- `tools/t197-s6-cpu5-mantle-config-projection.json`, whose only source-config
+  retained headers under `refs/bochs`.
+- `tools/build/t197-s6-cpu5-mantle-config-projection.json`, whose only source-config
   differences select CPU level 5 and disable x86-64.
-- `tools/Invoke-T197S6MinimalMachineLinkProbe.ps1`.
+- `tools/probe/Invoke-T197S6MinimalMachineLinkProbe.ps1`.
 - Fresh output root
   `artifacts/build/t197-s6-minimal-machine-link-probe-r1`.
 

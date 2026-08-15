@@ -4,7 +4,7 @@
 
 `BX-IO-029` and the follow-on `BX-IO-030` isolate the exact original
 empty-port initialization and default-handler registration members into
-`src/bochs/iodev/minimal_port_space.cc`:
+`refs/bochs/iodev/minimal_port_space.cc`:
 
 - `bx_devices_c::init_empty_port_space(void)`;
 - `bx_devices_c::default_read_handler(...)`; and
@@ -13,7 +13,7 @@ empty-port initialization and default-handler registration members into
 - `bx_devices_c::register_default_io_write_handler(...)`.
 
 Those five definitions were removed from
-`src/bochs/iodev/devices.cc`. Their signatures and bodies, including the
+`refs/bochs/iodev/devices.cc`. Their signatures and bodies, including the
 all-ones unmapped read default and ignored unmapped writes, were moved without
 alteration. `cleanup_empty_port_space` remains in `devices.cc` exactly as
 before.

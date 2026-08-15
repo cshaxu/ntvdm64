@@ -1,4 +1,4 @@
-# T183 S2 CLI shim/bundle recipe 001
+﻿# T183 S2 CLI shim/bundle recipe 001
 
 Date: 2026-08-12  
 Packet: M0 T183 S2  
@@ -20,7 +20,7 @@ adapter source, engine link recipe, or guest process.
 
 ## Bundle recipe
 
-`tools/New-T183S2FixedBochsBundle.ps1` accepts four explicitly named source
+`tools/build/New-T183S2FixedBochsBundle.ps1` accepts four explicitly named source
 files and an empty output root. It copies the linked engine as the one fixed
 `ntdos64-bochs.exe` name and copies the exact three ROM files under their fixed
 names. Every copy is SHA-256 verified and the script writes exactly the

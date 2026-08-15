@@ -1,4 +1,4 @@
-# M0 T194 S37: Total Observation Record
+﻿# M0 T194 S37: Total Observation Record
 
 Packet: M0 T194 S37  
 Disposition: controller repair verified; no observation was launched.
@@ -10,7 +10,7 @@ still holds `stdout.log` or `stderr.log` at cleanup time?
 
 ## Change
 
-`tools/Invoke-T194S10V6BoundedObservation.ps1` now uses one `Try-Hash` helper
+`tools/probe/Invoke-T194S10V6BoundedObservation.ps1` now uses one `Try-Hash` helper
 for both terminal log hashes. It returns null for a missing file or a
 `Get-FileHash` failure, allowing the pre-existing `finally` record write to
 continue. It does not alter the invocation, watchdog, exact `taskkill /T /F`

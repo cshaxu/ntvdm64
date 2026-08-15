@@ -1,4 +1,4 @@
-# T200 S12 — native engine contract foundation
+﻿# T200 S12 — native engine contract foundation
 
 ## Question
 
@@ -8,7 +8,7 @@ Can the planned native engine boundary be represented and validated as a standal
 
 - `src/bx-mantle/bx_ntvdm_engine_contract_v1.[ch]`;
 - `tests/bx-mantle/bx_ntvdm_engine_contract_v1_test.c`;
-- `tools/Invoke-T200S12NativeEngineContractProbe.ps1`;
+- `tools/probe/Invoke-T200S12NativeEngineContractProbe.ps1`;
 - the S11 owner/ABI map.
 
 ## Procedure
@@ -16,7 +16,7 @@ Can the planned native engine boundary be represented and validated as a standal
 Build and run the focused two-source closure with MSVC x64 `/MT`:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S12NativeEngineContractProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S12NativeEngineContractProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s12-native-engine-contract-r1
 ```

@@ -1,4 +1,4 @@
-# T200 S13 — native engine lifecycle skeleton
+﻿# T200 S13 — native engine lifecycle skeleton
 
 ## Question
 
@@ -31,7 +31,7 @@ return a non-CLI setup category—without initializing a machine?
 
 ## Observations
 
-`tools/Invoke-T200S13NativeEngineLifecycleProbe.ps1` passed at
+`tools/probe/Invoke-T200S13NativeEngineLifecycleProbe.ps1` passed at
 `artifacts/build/t200-s13-native-engine-lifecycle-r4/` using MSVC x64 `/MT`.
 Its test proves three cases: malformed request does not call installation or
 reset; both negative and absent composition outcomes call reset exactly once;

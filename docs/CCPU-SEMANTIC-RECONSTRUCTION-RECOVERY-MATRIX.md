@@ -123,7 +123,7 @@ PCjs 的 differential vector：selector base、table-limit 与 invalid-selector
 ### R2：`c_sas_touch` / `c_VirtualiseInstruction` 的来源校正
 
 2026-08-09 对 reference-only
-`upstream/ntvdmx64/ntvdmpatch/patches/common/sas4gen.patch` 的逐行审计表明，这两个
+`refs/ntvdmx64/ntvdmpatch/patches/common/sas4gen.patch` 的逐行审计表明，这两个
 typedef、`SasVector` fields、CCPU macro mappings 和 imports 都是该 patch 新增；同一树的
 `patches/common/fmstubs.c` 对二者只有 `int 3` 占位，分别返回 `NULL` 与 `0`。当前工作区
 `sascdef.c` 的 declaration/initializer 只有在对应的 patch-origin SAS header overlay 下才形成

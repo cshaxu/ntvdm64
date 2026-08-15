@@ -32,7 +32,7 @@ storage、函数地址或初始化 owner；完整 C-VIDC `C_Video` 是不同 lay
 的尾部 slots；没有任何原始 CCPU instruction source、BIOS、BOP、DEM、NTIO 或 NTDOS caller。相关 ABI
 可见于 `base/ccpu386/sas4gen.h`。
 
-名称本身来自后来的适配补丁：`src/ntvdmx64/ntvdmpatch/patches/common/fmstubs.c` 的实现会触发
+名称本身来自后来的适配补丁：`refs/ntvdmx64-derived/ntvdmpatch/patches/common/fmstubs.c` 的实现会触发
 `int 3`，随后返回 `NULL` 或零。这是明确的 fail-fast diagnostic，不是恢复输入，也没有定义 range、
 mapping、IP、FLAGS 或 return encoding 语义。
 

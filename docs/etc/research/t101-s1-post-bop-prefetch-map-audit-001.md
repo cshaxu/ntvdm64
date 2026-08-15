@@ -24,8 +24,8 @@ not the CPU's out-of-bounds/bogus-memory branch.
 
 | Layer | Direct source fact | Disposition |
 | --- | --- | --- |
-| CPU prefetch | `src/bochs/cpu/cpu.cc:636-645` asks `getHostMemAddr(..., BX_EXECUTE)` and panics when an in-range page declines direct access. | Native Bochs CPU mechanics. |
-| Physical map | `src/bochs/memory/misc_mem.cc:729-736` defines `0xA0000..0xBFFFF` as PCI/ISA video memory or SMRAM. | Native Bochs PC memory map. |
+| CPU prefetch | `refs/bochs/cpu/cpu.cc:636-645` asks `getHostMemAddr(..., BX_EXECUTE)` and panics when an in-range page declines direct access. | Native Bochs CPU mechanics. |
+| Physical map | `refs/bochs/memory/misc_mem.cc:729-736` defines `0xA0000..0xBFFFF` as PCI/ISA video memory or SMRAM. | Native Bochs PC memory map. |
 | Direct-access policy | `misc_mem.cc:750-781` permits that range only for enabled/SMM SMRAM execution, then vetoes ordinary direct reads as VGA mapped I/O. | Native Bochs protection policy. |
 | Ordinary device read | `misc_mem.cc:592-602` routes ordinary reads in the same range to the VGA memory callback; this is not a direct executable host page. | Confirms a VGA device does not make the range executable. |
 | Caller provenance | T100 has no CPU state or transfer instruction at the panic, only the prior BOP resumes. | Unresolved; no causal attribution to BOP/provider/close is justified. |

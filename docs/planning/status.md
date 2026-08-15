@@ -348,7 +348,7 @@ snapshot. It remains a default-disabled i386 trace fixture, not an x64
 transport, generic selector bridge or runtime host shim. Authority:
 `docs/S2-HISTORICAL-BRIDGE-RECORD-CONTRACT.md`.
 
-**Latest S4 evidence:** `src/reconstruction/monitor` is an explicitly admitted,
+**Latest S4 evidence:** `refs/archive/reconstruction/monitor` is an explicitly admitted,
 default-disabled independent CPU/memory mechanics slice, not an OpenNT overlay
 or archived BOP prototype. Its MinGW test exits `0`; its i386 bridge fixture
 also exits `0` after `C4 C4 50 14` reaches the original S2/BIOS/DEM date trace
@@ -602,7 +602,7 @@ historical SoftPC/CCPU reconstruction path in `ntdos64`. Authority:
 
 **Status:** Completed as a build-graph and documentation correction.
 
-**Result:** `src/archived/legacy-adapters/nvtdm.c` is reconfirmed to contain handwritten staging,
+**Result:** `refs/archive/legacy-adapters/nvtdm.c` is reconfirmed to contain handwritten staging,
 interpreter and DOS-service probes, and remains only a source listing in the
 explicitly disabled `ntvdm-startup-reference` custom target. The default
 MinGW build graph and CTest registry contain no `nvtdm` executable or source

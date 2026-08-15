@@ -1,4 +1,4 @@
-# T96 S10 Current BOP-Plane Real-Path Checkpoint
+﻿# T96 S10 Current BOP-Plane Real-Path Checkpoint
 
 ## Result
 
@@ -17,7 +17,7 @@ trace-specific handler.
 
 ## Inputs And Procedure
 
-- Generator: `tools/New-T95S7RuntimeTraceBuildRoot.ps1`, with the new `r49`
+- Generator: `tools/build/New-T95S7RuntimeTraceBuildRoot.ps1`, with the new `r49`
   root. Its closure list now includes the T96 ingress, registry, DEM,
   COMMAND, XMS/DPMI, system, and legacy-gate objects.
 - Build: MSVC BuildTools x86, `nmake /f ntdos64-s7-runtime-trace.mak
@@ -25,7 +25,7 @@ trace-specific handler.
   `artifacts/build/bochs-2.6-native-s7-native-post-handoff-msvc-r49`.
   It linked successfully; binary SHA-256:
   `D3332D7CDD5DC2BB395E0D7A6DB372DC52F13C2F4C891018BBF99D324A8CD5E6`.
-- Observation: `tools/Invoke-T95S7RuntimeTraceObservation.ps1` with the r49
+- Observation: `tools/probe/Invoke-T95S7RuntimeTraceObservation.ps1` with the r49
   build root, deferred startup plan, `-BenchmarkMillions 1`, and
   `-WatchdogSeconds 15`. The immutable record and full log are retained in
   `artifacts/analysis/t96-s10-current-bop-plane-runtime-001/`.

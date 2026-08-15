@@ -4,7 +4,7 @@
 
 T196 is a medium-sized, multi-subtask repair package. Its purpose is to
 repair the complete project delta between the pinned Bochs 2.6 source and
-`src/bochs/`; it is not an audit package whose result is merely a document.
+`refs/bochs/`; it is not an audit package whose result is merely a document.
 When it closes, every remaining Bochs delta must be either a justified,
 selector-blind mechanical/minimal-embedding/default-off diagnostic exception,
 or a separately recorded build-only compatibility correction. Guest-service,

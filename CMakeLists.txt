@@ -2,6 +2,25 @@ cmake_minimum_required(VERSION 3.20)
 
 project(ntdos64_research LANGUAGES C)
 
+# A configure tree is disposable and must never mingle with retained evidence
+# or source. Formal executable publication is an explicit post-build action.
+set(NTDOS64_TASK_ID "" CACHE STRING
+    "Governing task identity for retained runtime output (for example M0-T218-S1)")
+if(NOT NTDOS64_TASK_ID MATCHES "^(M[0-9]+-)?T[0-9]+(-S[0-9]+)?(-P[0-9]+)?$")
+    message(FATAL_ERROR
+        "Set -DNTDOS64_TASK_ID to the governing task identity, for example M0-T218-S1.")
+endif()
+
+file(REAL_PATH "${CMAKE_SOURCE_DIR}/build" _ntdos64_build_root)
+file(REAL_PATH "${CMAKE_BINARY_DIR}" _ntdos64_binary_root)
+file(RELATIVE_PATH _ntdos64_build_relative
+    "${_ntdos64_build_root}" "${_ntdos64_binary_root}")
+if(IS_ABSOLUTE "${_ntdos64_build_relative}" OR
+   _ntdos64_build_relative MATCHES "^\\.\\.")
+    message(FATAL_ERROR
+        "Configure only below ${CMAKE_SOURCE_DIR}/build; received ${CMAKE_BINARY_DIR}.")
+endif()
+
 if(NOT WIN32)
     message(FATAL_ERROR "ntdos64-run is a Windows research CLI.")
 endif()
@@ -281,22 +300,22 @@ target_compile_features(bx-ntvdm-redir-unavailable-provider-v1-test PRIVATE c_st
 # S4 is a separately admitted, default-disabled software-monitor mechanics
 # slice. It is not linked into ntdos64-run or registered in default CTest.
 add_executable(ntdos64-reconstructed-monitor-s4-test EXCLUDE_FROM_ALL
-    src/reconstruction/monitor/reconstructed_monitor_s4.c
+    refs/archive/reconstruction/monitor/reconstructed_monitor_s4.c
     tests/reconstructed_monitor_s4_test.c
 )
 target_include_directories(ntdos64-reconstructed-monitor-s4-test PRIVATE
-    src/reconstruction/monitor)
+    refs/archive/reconstruction/monitor)
 target_compile_features(ntdos64-reconstructed-monitor-s4-test PRIVATE c_std_11)
 
 # This takes a user-selected, source-built NTIO.SYS as a test input, maps the
 # entire image at 0070:0000, and records the first unimplemented CPU boundary.
 # It is neither a runtime nor a device/BOP/DEM implementation.
 add_executable(ntdos64-reconstructed-monitor-s4-ntio-strategy-fixture EXCLUDE_FROM_ALL
-    src/reconstruction/monitor/reconstructed_monitor_s4.c
+    refs/archive/reconstruction/monitor/reconstructed_monitor_s4.c
     tests/reconstructed_monitor_s4_ntio_strategy_fixture.c
 )
 target_include_directories(ntdos64-reconstructed-monitor-s4-ntio-strategy-fixture PRIVATE
-    src/reconstruction/monitor)
+    refs/archive/reconstruction/monitor)
 target_compile_features(ntdos64-reconstructed-monitor-s4-ntio-strategy-fixture PRIVATE c_std_11)
 
 # S5 v2 records are a default-disabled wire-format fixture only.  They do not
@@ -305,7 +324,7 @@ add_executable(ntdos64-historical-transport-v2-layout-test EXCLUDE_FROM_ALL
     tests/historical_transport_v2_layout_test.c
 )
 target_include_directories(ntdos64-historical-transport-v2-layout-test PRIVATE
-    src/reconstruction/transport)
+    refs/archive/reconstruction/transport)
 target_compile_features(ntdos64-historical-transport-v2-layout-test PRIVATE c_std_11)
 
 # Fixed-width adapter ABI layout only. This target is deliberately not linked
@@ -1081,7 +1100,7 @@ add_executable(ntdos64-historical-transport-v2-pipe-test EXCLUDE_FROM_ALL
     tests/historical_transport_v2_pipe_test.c
 )
 target_include_directories(ntdos64-historical-transport-v2-pipe-test PRIVATE
-    src/reconstruction/transport)
+    refs/archive/reconstruction/transport)
 target_compile_features(ntdos64-historical-transport-v2-pipe-test PRIVATE c_std_11)
 
 # This x64 half creates a named shared backing and launches an i386 helper
@@ -1090,7 +1109,7 @@ add_executable(ntdos64-shared-aperture-v1-host-fixture EXCLUDE_FROM_ALL
     tests/shared_aperture_v1_host_fixture.c
 )
 target_include_directories(ntdos64-shared-aperture-v1-host-fixture PRIVATE
-    src/reconstruction/transport)
+    refs/archive/reconstruction/transport)
 target_compile_features(ntdos64-shared-aperture-v1-host-fixture PRIVATE c_std_11)
 target_compile_definitions(ntdos64-shared-aperture-v1-host-fixture PRIVATE
     UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
@@ -1099,12 +1118,12 @@ ntdos64_use_wide_console_entry(ntdos64-shared-aperture-v1-host-fixture)
 # S4 fetches one ordinary instruction from the same section after the i386
 # original SAS lifecycle helper releases its own mapping. No BOP is executed.
 add_executable(ntdos64-shared-aperture-s4-post-sas-fixture EXCLUDE_FROM_ALL
-    src/reconstruction/monitor/reconstructed_monitor_s4.c
+    refs/archive/reconstruction/monitor/reconstructed_monitor_s4.c
     tests/shared_aperture_s4_post_sas_fixture.c
 )
 target_include_directories(ntdos64-shared-aperture-s4-post-sas-fixture PRIVATE
-    src/reconstruction/monitor
-    src/reconstruction/transport)
+    refs/archive/reconstruction/monitor
+    refs/archive/reconstruction/transport)
 target_compile_features(ntdos64-shared-aperture-s4-post-sas-fixture PRIVATE c_std_11)
 target_compile_definitions(ntdos64-shared-aperture-s4-post-sas-fixture PRIVATE
     UNICODE _UNICODE WIN32_LEAN_AND_MEAN)

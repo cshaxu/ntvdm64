@@ -1,4 +1,4 @@
-# T203 S1 normal DOS terminal observation
+﻿# T203 S1 normal DOS terminal observation
 
 ## Question
 
@@ -14,7 +14,7 @@ path that could safely expose its result?
 2. Ran the unmodified current-source fixture:
 
    ```powershell
-   powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
+   powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
      -RepositoryRoot O:\repos.hobby\ntdos64 `
      -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t203-s1-normal-540b-native-r3
    ```

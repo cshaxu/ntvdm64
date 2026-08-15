@@ -1,4 +1,4 @@
-# M0 T199 S30 DEM Package Session Regression
+﻿# M0 T199 S30 DEM Package Session Regression
 
 ## Question
 
@@ -38,7 +38,7 @@ four-byte no-op result.
 Ran:
 
 ```text
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 \
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 \
   -RepositoryRoot O:\repos.hobby\ntdos64 \
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t199-s30-dem-package-r6 \
   -HostArchitecture x64

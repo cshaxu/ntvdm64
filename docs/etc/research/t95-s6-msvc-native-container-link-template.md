@@ -7,7 +7,7 @@ ordering, without mistaking VS2008 solution order for a linker response file?
 
 ## Observation
 
-The pinned generated MSVC `src/bochs/Makefile:175-186` contains the original
+The pinned generated MSVC `refs/bochs/Makefile:175-186` contains the original
 `bochs.exe` target and `link` invocation. It supplies the following template,
 in order:
 

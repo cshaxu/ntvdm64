@@ -12,7 +12,7 @@ start with `Changes in 2.6 (September 2, 2012)`.
 The comparison command is:
 
 ```text
-git -c core.safecrlf=false diff --no-index --unified=0 -- src/bochs <baseline>
+git -c core.safecrlf=false diff --no-index --unified=0 -- refs/bochs <baseline>
 ```
 
 It is read-only and returns exit code 1 when differences exist. Files are

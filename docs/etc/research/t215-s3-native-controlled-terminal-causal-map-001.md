@@ -1,4 +1,4 @@
-# T215 S3: Native Controlled-Terminal Causal Map
+﻿# T215 S3: Native Controlled-Terminal Causal Map
 
 ## Question
 
@@ -29,7 +29,7 @@ mechanics, guest memory, or CPU state.
 The exact command was:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T214S3CompositionOwnerFixture.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T214S3CompositionOwnerFixture.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t215-s3-controlled-terminal-r2
 ```

@@ -4,7 +4,7 @@
 
 The audit treated the 58-row external-intrusion register as a ledger, not a
 live-patch count. It read each row's status and named source surface, searched
-current `src/bochs`, and inspected the S56/S57 generated makefile and final
+current `refs/bochs`, and inspected the S56/S57 generated makefile and final
 map. No source, build root, executable, or runtime process was changed.
 
 S56/S57 explicitly compiles `main.o` and `cpu/exception.o` with deferred

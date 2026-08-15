@@ -1,4 +1,4 @@
-# M0 T206 S2 — one-shot COMMAND terminal handoff
+﻿# M0 T206 S2 — one-shot COMMAND terminal handoff
 
 ## Question
 
@@ -49,7 +49,7 @@ unrelated terminal outcome create no record.
 Fresh source closure:
 
 ```text
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1
   -RepositoryRoot O:\repos.hobby\ntdos64
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t206-s2-command-terminal-r2
   -Fixture command-entry -HostArchitecture x64

@@ -1,4 +1,4 @@
-# T200 S14 — direct composition installation closure
+﻿# T200 S14 — direct composition installation closure
 
 ## Question
 
@@ -9,13 +9,13 @@ environment handoff or initializing a machine?
 ## Inputs
 
 - S13 native-engine contract/entry and copied-input composition seam;
-- `tools/t198-s50-bx-vdm-composition-manifest.json`;
+- `tools/build/t198-s50-bx-vdm-composition-manifest.json`;
 - T198 S94's source-built v7 fixture preparer and its pinned v7 resource root;
 - `tests/bx-mantle/bx_ntvdm_engine_direct_composition_v1_test.c`.
 
 ## Procedure
 
-`tools/Invoke-T200S14DirectCompositionProbe.ps1` creates a fresh build root,
+`tools/probe/Invoke-T200S14DirectCompositionProbe.ps1` creates a fresh build root,
 prepares the exact source-built v7 profile, compiles the current whole
 composition manifest in one x64 `/MT` environment, then links a fixture with:
 
@@ -34,7 +34,7 @@ release witness.  The fixture has no machine initialization or CPU-loop call.
 The successful fresh run is:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S14DirectCompositionProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S14DirectCompositionProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s14-direct-composition-r5
 ```

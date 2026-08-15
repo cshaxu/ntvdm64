@@ -1,4 +1,4 @@
-# R1 CCPU/C-VIDC Input Acquisition Contract
+﻿# R1 CCPU/C-VIDC Input Acquisition Contract
 
 状态：历史组合输入的接收与验真合同，2026-08-09。
 
@@ -38,7 +38,7 @@ harness、单个 generated `.c/.h`、匿名二进制或仅凭文件名相同的 
 首次接收时应先运行只读检查器：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\Inspect-SoftPcCompositionCandidate.ps1 `
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\probe\Inspect-SoftPcCompositionCandidate.ps1 `
   -CandidatePath <candidate> `
   -OutputDirectory artifacts\research-inputs\<source-id> `
   -ProvenanceNote '<source, version, and research restriction>'

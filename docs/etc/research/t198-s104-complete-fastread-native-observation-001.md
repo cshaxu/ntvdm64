@@ -1,4 +1,4 @@
-# T198 S104 complete fast-read native observation 001
+﻿# T198 S104 complete fast-read native observation 001
 
 ## Question
 
@@ -9,8 +9,8 @@ marker after the S101 AX:BP codec correction?
 
 - S103's source-built fixture/bridge marker.
 - Exact S93 locked COMMAND/SHARE input and v7 profile, rebuilt by
-  `tools/Invoke-T198S97PostBootstrapNativeProbe.ps1`.
-- Current `tools/t198-s50-bx-vdm-composition-manifest.json`.
+  `tools/probe/Invoke-T198S97PostBootstrapNativeProbe.ps1`.
+- Current `tools/build/t198-s50-bx-vdm-composition-manifest.json`.
 
 ## Procedure
 

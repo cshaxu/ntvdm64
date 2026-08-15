@@ -1,4 +1,4 @@
-# T202 S6 COMMAND typed child lifecycle
+﻿# T202 S6 COMMAND typed child lifecycle
 
 ## Question
 
@@ -39,7 +39,7 @@ copied `cmd.exe /c exit 7` tail and double-NUL environment.  It proves one
 private launch and completion with `CF=0`, preserved AH and `AL=7`.
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t202-s6-command-child-lifecycle-r2 `
   -Fixture boot-namespace

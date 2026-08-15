@@ -1,8 +1,8 @@
-# T95 S6 Intact Native Tuple Manifest 001
+﻿# T95 S6 Intact Native Tuple Manifest 001
 
 ## Result
 
-`tools/New-T95S6IntactNativeTupleManifest.ps1` generated:
+`tools/build/New-T95S6IntactNativeTupleManifest.ps1` generated:
 
 `artifacts/analysis/t95-s6-intact-native-tuple-manifest-001-20260811-001/`
 

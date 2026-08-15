@@ -37,7 +37,7 @@ adapter/CLI target. It has these invariants:
 3. Derive project membership and compiler/linker baseline from the original
    VS2008 metadata; do not invent a hand-selected core-object vector.
 4. Consume a copied, manifest-hashed CPU3/nogui configuration projection in
-   the fresh root only. `src/bochs/config.h` stays immutable.
+   the fresh root only. `refs/bochs/config.h` stays immutable.
 5. Materialize a declarative first-profile input that selects original
    `nogui`, declared RAM/ROM test inputs, and original optional-plugin denial
    gates. It may not declare arbitrary devices as absent by a project patch.

@@ -37,7 +37,7 @@ unreached device.
 
 | Candidate | Result | Reason |
 | --- | --- | --- |
-| Selector branch in `src/bochs/cpu/exception.cc` | Rejected | It would put selector/SoftPC semantics in Bochs; the existing #UD exception stays mechanical. |
+| Selector branch in `refs/bochs/cpu/exception.cc` | Rejected | It would put selector/SoftPC semantics in Bochs; the existing #UD exception stays mechanical. |
 | Adapter host-service plane | Rejected | It would make the adapter synchronously read/write the PIC and BIOS data area, violating both its host-service-only role and the fixed result ABI. |
 | Historical SoftPC/CCPU BIOS dispatcher | Rejected | It restores the retired execution backend and brings SAS/CCPU/device composition into the product. |
 | Separate machine-composition component | Selected | It preserves Bochs device ownership, leaves the adapter's host-service plane intact, and confines original handler selection to an auditable component. |

@@ -1,4 +1,4 @@
-# T200 S25: first controlled terminal observation
+﻿# T200 S25: first controlled terminal observation
 
 ## Question
 
@@ -17,7 +17,7 @@ exception window remains bounded to the existing fifteen bytes.
 The source-built composition was compiled with:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s25-current-composition-r1 `
   -CompileOnly
@@ -26,7 +26,7 @@ powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S94SourceBuiltNorm
 The bounded engine fixture was then run with:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S22EngineMachineStageProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S22EngineMachineStageProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s25-terminal-observation-r1 `
   -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s25-current-composition-r1

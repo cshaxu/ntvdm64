@@ -1,10 +1,10 @@
-# T190 S5 COMMAND bootstrap bundle closure 001
+﻿# T190 S5 COMMAND bootstrap bundle closure 001
 
 Date: 2026-08-12  
 Packet: M0 T190 S5  
 Disposition: immutable bundle assembled; no process launched.
 
-`tools/New-T190S5CommandBootstrapBundle.ps1` copied the explicit T190 engine
+`tools/build/New-T190S5CommandBootstrapBundle.ps1` copied the explicit T190 engine
 and retained T189 ROM directory into
 `artifacts/build/current/t190-command-bootstrap-bundle-r1`.  It refuses an
 existing destination, requires all three ROM inputs, and writes the complete

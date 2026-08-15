@@ -80,7 +80,7 @@ control flow；并证明进入 `SVC_DEMLOADDOS` 前的 guest CPU 初始化可到
 ## S5.2 monitor 扩展合同
 
 下列能力由真实入口直接要求，应按真实 x86 real-mode 语义增加到
-`src/reconstruction/monitor/`，并各自有 ordinary-RAM positive test 与越界 fail-closed test：
+`refs/archive/reconstruction/monitor/`，并各自有 ordinary-RAM positive test 与越界 fail-closed test：
 
 | 类别 | 首个来源 | S5 允许范围 |
 | --- | --- | --- |

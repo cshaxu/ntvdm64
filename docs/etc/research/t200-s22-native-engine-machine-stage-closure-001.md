@@ -1,4 +1,4 @@
-# T200 S22 — native engine machine-stage closure
+﻿# T200 S22 — native engine machine-stage closure
 
 ## Question
 
@@ -32,7 +32,7 @@ First, the full current composition manifest was source-compiled (without
 link or guest run):
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s22-current-composition-r2 `
   -CompileOnly
@@ -42,7 +42,7 @@ Then the current engine units were compiled and linked against that exact
 object closure and the retained CPU5 native-core closure:
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T200S22EngineMachineStageProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T200S22EngineMachineStageProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s22-engine-machine-stage-r1 `
   -CompositionBuildRoot O:\repos.hobby\ntdos64\artifacts\build\t200-s22-current-composition-r2

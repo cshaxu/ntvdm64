@@ -1,4 +1,4 @@
-# T198 S16 MSVC x64 Boot-Namespace Composition Witness 001
+﻿# T198 S16 MSVC x64 Boot-Namespace Composition Witness 001
 
 ## Question
 
@@ -8,7 +8,7 @@ generic-`#UD` mechanics?
 
 ## Procedure
 
-`tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` source-builds the exact
+`tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1` source-builds the exact
 adapter closure retained by the former i686 composition witness. It includes
 the boot-namespace composition/plane/provider, shared BOP ingress and provider
 registry, their direct adapter dependencies, and exactly three `src/cli`

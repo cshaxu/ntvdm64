@@ -1,4 +1,4 @@
-# M0 T199 S29 COMMAND Package Session Regression
+﻿# M0 T199 S29 COMMAND Package Session Regression
 
 ## Question
 
@@ -51,7 +51,7 @@ proof that their original subcomponents are closed.
 Ran the source-built family fixture:
 
 ```text
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 \
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T198S16BootNamespaceVdmX64Probe.ps1 \
   -RepositoryRoot O:\repos.hobby\ntdos64 \
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t199-s29-command-package-r7 \
   -HostArchitecture x64

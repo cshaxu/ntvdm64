@@ -1,4 +1,4 @@
-# T212 S5: Selector-Blind Mechanical Cancellation Closure
+﻿# T212 S5: Selector-Blind Mechanical Cancellation Closure
 
 Packet: M0 T212 S5, Ordinary Mode  
 Date: 2026-08-15  
@@ -33,7 +33,7 @@ no Windows header, handle, callback or thread code.
 ### Mechanical stage
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T212S5MechanicalCancellationProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T212S5MechanicalCancellationProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s5-mechanical-cancellation-r5
 ```
@@ -58,7 +58,7 @@ strictly evidence orchestration and is not linked into the controller or CLI.
 ### Engine cleanup/result mapping
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T212S5EngineCancellationProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T212S5EngineCancellationProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t212-s5-engine-cancellation-r3
 ```

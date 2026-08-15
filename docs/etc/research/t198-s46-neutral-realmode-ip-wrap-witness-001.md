@@ -1,4 +1,4 @@
-# T198 S46 neutral real-mode IP-wrap witness
+﻿# T198 S46 neutral real-mode IP-wrap witness
 
 ## Question
 
@@ -13,7 +13,7 @@ Does the current CPU5/Pentium-MMX `bx-core`/`bx-mantle` closure execute a neutra
 ## Reproducible procedure
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools/Invoke-T198S3FiniteNativeRunProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1 `
   -RepositoryRoot O:\repos.hobby\ntdos64 `
   -BuildRoot O:\repos.hobby\ntdos64\artifacts\build\t198-s46-realmode-ip-wrap-r4 `
   -ExternalFixtureSource O:\repos.hobby\ntdos64\tests\bx-mantle\t198_s46_realmode_ip_wrap_fixture.cc `

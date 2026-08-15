@@ -1,4 +1,4 @@
-# T201 S1 Mutation-Profile ABI Evidence
+﻿# T201 S1 Mutation-Profile ABI Evidence
 
 ## Scope
 
@@ -19,7 +19,7 @@ type, selector, service number or guest address.
 ## Reproduction
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File tools\Invoke-T201S1MutationProfileProbe.ps1 `
+powershell.exe -ExecutionPolicy Bypass -File tools\probe\Invoke-T201S1MutationProfileProbe.ps1 `
   -RepositoryRoot (Get-Location).Path `
   -BuildRoot artifacts\build\t201-s1-mutation-profile-r1
 ```

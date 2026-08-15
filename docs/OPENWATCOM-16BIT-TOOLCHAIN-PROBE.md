@@ -7,7 +7,7 @@ the historical **assembler and OMF linker** portion of the OpenNT guest-build
 toolchain. It is a toolchain probe only. It does not admit an OpenNT guest
 binary to the project, default build, runtime, or release.
 
-The input snapshot remains read-only under `upstream/opennt`. The generated
+The input snapshot remains read-only under `refs/opennt`. The generated
 objects and the self-authored DOS smoke executable are confined to
 `artifacts/build/legacy/referenced/build-openwatcom-probe/`, which is not a product input.
 

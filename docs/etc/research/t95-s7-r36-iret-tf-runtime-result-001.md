@@ -15,7 +15,7 @@ OpenNT NTIO `FIRET` path receives a frame whose flags already contain TF?
 - Binary SHA-256:
   `A5D8EC3252011EADC4A46B09C5FA820F0F27FEF70E479380EA73E766BF44CF05`.
 - Registered default-off exception `BX-TRACE-050`, limited to the original
-  `src/bochs/cpu/ctrl_xfer16.cc` real-mode IRET16 path after its three
+  `refs/bochs/cpu/ctrl_xfer16.cc` real-mode IRET16 path after its three
   original `pop_16` operations.
 - Source-built NTIO map:
   `artifacts/toolchain-runs/ntio-tools16-opennt-v1/base/mvdm/dos/v86/doskrnl/bios/ntio.map`.

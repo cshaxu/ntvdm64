@@ -1,4 +1,4 @@
-# T97 S5 Profile And Engine Checkpoint 001
+﻿# T97 S5 Profile And Engine Checkpoint 001
 
 ## Fixture results
 
@@ -10,7 +10,7 @@ profile and proves `50:1B`, `50:09`, and `50:0B` through the installed runtime.
 
 ## Bounded live-engine probe
 
-`tools/Invoke-T95S7RuntimeTraceObservation.ps1` now emits the v4 profile
+`tools/probe/Invoke-T95S7RuntimeTraceObservation.ps1` now emits the v4 profile
 contract.  It was run against the retained engine artifact
 `bochs-2.6-native-s7-runtime-trace-msvc-r5/ntdos64-s7-runtime-trace.exe` with
 a five-second watchdog. The evidence root is

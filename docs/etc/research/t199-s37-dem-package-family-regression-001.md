@@ -1,4 +1,4 @@
-# T199 S37 DEM Package Family Regression 001
+﻿# T199 S37 DEM Package Family Regression 001
 
 ## Question
 
@@ -13,7 +13,7 @@ bound COMMAND composition or a native execution trace?
   followed by its sentinel).
 - DEM package session and planes under `src/bx-vdm/`.
 - The MSVC x64 `/MT` closure selected by
-  `tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1 -Fixture dem-package`.
+  `tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1 -Fixture dem-package`.
 - The dedicated fixture
   `tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c`.
 

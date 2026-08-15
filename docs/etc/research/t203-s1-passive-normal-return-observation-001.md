@@ -1,4 +1,4 @@
-# T203 S1 passive normal-return observation
+﻿# T203 S1 passive normal-return observation
 
 ## Question
 
@@ -13,7 +13,7 @@ normal-return BOP (`C4 C4 54 0B`) before its existing declared-plan terminal?
   observation.  It records only an already accepted `54:0B` `RESUME` outcome
   whose resume IP is the existing `fault_rip + 4`; it has no guest-memory,
   CPU, timer, provider-selection, or result-mutation path.
-- `tools\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1` with build
+- `tools\probe\Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1` with build
   root `artifacts/build/t203-s1-normal-540b-native-r5`.
 
 The command rebuilt the entire current composition manifest under MSVC x64

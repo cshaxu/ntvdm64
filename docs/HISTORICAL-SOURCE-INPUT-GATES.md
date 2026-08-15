@@ -4,7 +4,7 @@ Status: source-governance record, 2026-08-06.
 
 ## Purpose
 
-`src/opennt/` and `src/ntvdmx64/` contain the fixed historical source inputs
+`src/opennt/` and `refs/ntvdmx64-derived/` contain the fixed historical source inputs
 that have been adopted for this research. They replace neither the clean
 non-invasive CLI nor the BYOB guest-file policy. They make the historical
 input set reproducible without treating an old `toolchain-probe/` object as a
@@ -79,7 +79,7 @@ either historical tree as a CMake subdirectory.
 
 Each historical root is a standalone CMake source project. `src/opennt/` is
 configured in a 32-bit compiler environment with the historical compiler
-profile that best preserves the source (currently `clang-cl`); `src/ntvdmx64/`
+profile that best preserves the source (currently `clang-cl`); `refs/ntvdmx64-derived/`
 is separately configured only when its reference inputs are being studied.
 This separation is deliberate: one CMake cache may select only one C compiler
 and CRT, so a parent/child target layout cannot enforce the required boundary.
@@ -111,7 +111,7 @@ historical-input option instead of silently compiling it with GCC.
 | Root | CMake target | Default state | Scope |
 | --- | --- | --- | --- |
 | `src/opennt/` | `ntdos64-opennt-ccpu-objects`, `ntdos64-opennt-cvidc-objects`, `ntdos64-opennt-host-stack-objects`, `ntdos64-opennt-bios-provider-objects`, `ntdos64-opennt-system-provider-objects`, `ntdos64-opennt-support-provider-objects`, `ntdos64-opennt-keymouse-provider-objects`, `ntdos64-opennt-disks-provider-objects`, `ntdos64-opennt-disk-host-backend-objects`, `ntdos64-opennt-oemuni-provider-objects`, `ntdos64-opennt-contained-media-fdisk-objects`, `ntdos64-opennt-contained-media-fdisk-test`, `ntdos64-opennt-ccpu-effective-addr-fixture`, aggregate `ntdos64-opennt-historical-objects` | Configured only with `cmake -S src/opennt`; every target is `EXCLUDE_FROM_ALL` | Fixed CCPU is isolated from the BIOS/BOP/DEM host stack and independently gated original provider layers. CVIDC is a separate original generated-C dependency gate; it is not linked into a runner. The effective-address fixture is a controlled monitor-ABI contract test, not a CCPU runtime. The aggregate currently contains CCPU plus the host stack only and performs no link. The contained-media target is a narrow original-boundary facade and test, not a historical-chain executable. |
-| `src/ntvdmx64/` | `ntdos64-ntvdmx64-haxm-reference` | Configured only with `cmake -S src/ntvdmx64`; target is `EXCLUDE_FROM_ALL` | Fixed HAXM monitor reference inputs only. It is a visible object gate, not a compilable execution backend. |
+| `refs/ntvdmx64-derived/` | `ntdos64-ntvdmx64-haxm-reference` | Configured only with `cmake -S refs/ntvdmx64-derived`; target is `EXCLUDE_FROM_ALL` | Fixed HAXM monitor reference inputs only. It is a visible object gate, not a compilable execution backend. |
 
 The targets do not export or consume one another's include paths. In
 particular, the NTVDMx64 target receives no OpenNT include root, and the

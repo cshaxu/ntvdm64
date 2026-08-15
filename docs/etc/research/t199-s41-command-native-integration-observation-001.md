@@ -1,4 +1,4 @@
-# T199 S41: COMMAND native integration observation
+﻿# T199 S41: COMMAND native integration observation
 
 ## Question
 
@@ -9,7 +9,7 @@ Does the source-built CPU5/Pentium-MMX composition handle the COMMAND
 ## Inputs and method
 
 One and only one guest execution was run through
-`tools/Invoke-T198S97PostBootstrapNativeProbe.ps1` into
+`tools/probe/Invoke-T198S97PostBootstrapNativeProbe.ps1` into
 `artifacts/build/t199-s41-command-native-r1/`.  The script rebuilt the current
 composition manifest using MSVC x64 and the static `/MT` CRT, with the locked
 source-built COMMAND.COM/SHARE.EXE fixture inputs and the CPU5/Pentium-MMX

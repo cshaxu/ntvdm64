@@ -1,4 +1,4 @@
-# r23 Adapter Multi-Write Fixture Evidence
+﻿# r23 Adapter Multi-Write Fixture Evidence
 
 ## Scope
 
@@ -26,7 +26,7 @@ run with:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File \
-  tools\Invoke-Bochs26NativeResetFixture.ps1 \
+  tools\probe\Invoke-Bochs26NativeResetFixture.ps1 \
   -BuildRoot artifacts\build\bochs-2.6-native-nogui-ucrt-r23-multiwrite-cpu5 \
   -AdapterMultiWriteFixture
 ```

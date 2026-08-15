@@ -1,4 +1,4 @@
-# DOS/WOW16 Source-Closure Evidence Register
+﻿# DOS/WOW16 Source-Closure Evidence Register
 
 Status: authoritative local evidence register, 2026-08-09.
 
@@ -6,7 +6,7 @@ This register preserves the two deliverables of the DOS/WOW16 source-closure tas
 
 | Evidence | Authority | What it proves | Regeneration / verification |
 | --- | --- | --- | --- |
-| [dos-wow16-source-closure-inventory.json](dos-wow16-source-closure-inventory.json) | Machine-readable per-artifact ledger | Each included candidate has exactly one classification, source/install anchor, source revision, and evidence or first blocker. Source-built records retain output hash/size, tool list, stage manifest, and historical command-manifest paths. | `powershell -NoProfile -ExecutionPolicy Bypass -File tools\Export-DosWow16SourceClosureInventory.ps1 -RepositoryRoot . -OutputDirectory docs` |
+| [dos-wow16-source-closure-inventory.json](dos-wow16-source-closure-inventory.json) | Machine-readable per-artifact ledger | Each included candidate has exactly one classification, source/install anchor, source revision, and evidence or first blocker. Source-built records retain output hash/size, tool list, stage manifest, and historical command-manifest paths. | `powershell -NoProfile -ExecutionPolicy Bypass -File tools\governance\Export-DosWow16SourceClosureInventory.ps1 -RepositoryRoot . -OutputDirectory docs` |
 | [DOS-WOW16-SOURCE-CLOSURE-RESULT.md](DOS-WOW16-SOURCE-CLOSURE-RESULT.md) | Human-readable closure decision | The interpretation of the ledger: 27 source-built artifacts; the four `binplace` inputs remain excluded; the five WOW16 drivers do not close the WOW16 runtime; runtime admission is separate. | Review against the generated ledger; run the verification below. |
 
 ## Required verification

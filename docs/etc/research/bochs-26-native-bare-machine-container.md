@@ -1,4 +1,4 @@
-# Bochs 2.6 Native Bare-Machine Container
+﻿# Bochs 2.6 Native Bare-Machine Container
 
 ## Decision
 
@@ -151,7 +151,7 @@ evidence for why `BX-BUILD-002` was necessary.
 
 ## Native Reset And Bounded-Stop Fixture (2026-08-10)
 
-`tools/Invoke-Bochs26NativeResetFixture.ps1` materializes a test-only original
+`tools/probe/Invoke-Bochs26NativeResetFixture.ps1` materializes a test-only original
 Bochs configuration below the r4 build directory. It selects the imported
 Bochs BIOS and VGA ROM, the original `nogui` and `textconfig` implementations,
 4 MiB RAM, no guest disk, and `-benchmark 1`. It neither loads OpenNT nor

@@ -17,9 +17,9 @@ syntax-validated or that any formatting behavior has run.
 
 ## Inputs and v1 preservation
 
-`tools/t95-s6-msvc-config-projection-manifest.json` is immutable at SHA-256
+`tools/build/t95-s6-msvc-config-projection-manifest.json` is immutable at SHA-256
 `6815D8BD419ED9522C98F9DF55D242FB7037F42125C4504EC5766AE732FB9E28`.
-`tools/t95-s6-msvc-config-projection-manifest-v2.json` retains its
+`tools/build/t95-s6-msvc-config-projection-manifest-v2.json` retains its
 `sourceConfigSha256`, replacements, and derived assertions exactly; its only
 delta is this additional additions-array record:
 
@@ -38,10 +38,10 @@ uses temporary synthetic inputs only.
 The sole actual v2 command was:
 
 ```text
-powershell -ExecutionPolicy Bypass -File tools\Project-BochsConfig.ps1 \
-  -ManifestPath tools\t95-s6-msvc-config-projection-manifest-v2.json \
+powershell -ExecutionPolicy Bypass -File tools\build\Project-BochsConfig.ps1 \
+  -ManifestPath tools\build\t95-s6-msvc-config-projection-manifest-v2.json \
   -AnalysisRoot artifacts\analysis\t95-s6-msvc-x86-config-projection-003-20260811-001 \
-  -InputConfigPath src\bochs\config.h
+  -InputConfigPath refs\bochs\config.h
 ```
 
 It succeeded and retained only `config.h` and `projection-report.json` in that

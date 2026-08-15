@@ -1,4 +1,4 @@
-# M0 T199 S18 Top-Level Package Facade Regression
+﻿# M0 T199 S18 Top-Level Package Facade Regression
 
 ## Question
 
@@ -24,10 +24,10 @@ new WOW, UI, debugger, scheduler, CONFIG, keyboard, PIC, or BIOS provider?
 3. Route `5E` and `5F` through the facade before their existing limited
    composition providers.
 4. Build and run the focused MSVC x64 `/MT` facade fixture with
-   `tools/Invoke-T199S18TopLevelFacadeX64Probe.ps1`, build root
+   `tools/probe/Invoke-T199S18TopLevelFacadeX64Probe.ps1`, build root
    `artifacts/build/t199-s18-top-level-facade-r4`.
 5. Build and run the bound MSVC x64 `/MT` composition fixture with
-   `tools/Invoke-T198S16BootNamespaceVdmX64Probe.ps1`, build root
+   `tools/probe/Invoke-T198S16BootNamespaceVdmX64Probe.ps1`, build root
    `artifacts/build/t199-s18-top-level-composition-r4`.
 
 ## Observations

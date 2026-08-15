@@ -50,7 +50,7 @@ source-derived replacement is approved.
 ## Source evidence
 
 - Top-level routing and selector-specific host composition:
-  upstream/opennt/base/mvdm/softpc.new/host/src/nt_bop.c.
+  refs/opennt/base/mvdm/softpc.new/host/src/nt_bop.c.
 - Service bounds/dispatch forms:
   dos/dem/demdisp.c, dos/command/cmddisp.c, xms.486/xmsdisp.c,
   dpmi32/dpmi32.c, vdmredir/vrdisp.c, and dbg/dbg.c.

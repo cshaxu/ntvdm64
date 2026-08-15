@@ -8,7 +8,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
 }
 
-$devicesPath = Join-Path $RepositoryRoot 'src\bochs\iodev\devices.cc'
+$devicesPath = Join-Path $RepositoryRoot 'refs\bochs\iodev\devices.cc'
 $isolatedPath = Join-Path $RepositoryRoot 'src\bx-mantle\minimal_port_space.cc'
 foreach ($path in @($devicesPath, $isolatedPath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {

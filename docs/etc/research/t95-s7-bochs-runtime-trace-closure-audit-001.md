@@ -15,7 +15,7 @@ Therefore r30 cannot consume `50:12`, `50:16`, `54:0C`, or `54:0D`; it is negati
 
 ## Current source-owned bridge
 
-1. `src/bochs/cpu/exception.cc` has the registered, default-zero `BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT` branch (`BX-UD-001`), which invokes `bx_ntvdm_adapter_runtime_v4/v3/v2` and consumes only opaque pending write/multi-write/bulk-result records.
+1. `refs/bochs/cpu/exception.cc` has the registered, default-zero `BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT` branch (`BX-UD-001`), which invokes `bx_ntvdm_adapter_runtime_v4/v3/v2` and consumes only opaque pending write/multi-write/bulk-result records.
 2. `BX-ABI-041` makes the one-range `50:16` bulk result a generic ordinary RAM preflight/copy. That Bochs code contains no selector, service, path, token, DOS, COMMAND, or OpenNT decision.
 3. `BX_NTVDM_ENABLE_BOP_CATALOG_LISTENER`, separately default-zero, observes every #UD BOP identity before dispatch. It remains observation-only.
 4. `src/bx-ntvdm-adapter/bx_ntvdm_adapter_runtime.c` owns the selected S7 semantics: v3 copied path read for `50:12`, v2 seek/read/close, and the profile-owned `54:0C/0D` pathname multi-writes.

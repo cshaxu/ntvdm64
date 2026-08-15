@@ -21,7 +21,7 @@ unresolved external symbol (?<sym>.+?)( referenced in function .+)?$'
 
 It groups by `sym` and unique referencing `obj`; the result is exactly 72,
 matching `LNK1120`. Provider searches used `rg -n -g '*.cc' -g '*.h'` from
-`src/bochs`, including exact method names and `ia_opcodes.h` map entries.
+`refs/bochs`, including exact method names and `ia_opcodes.h` map entries.
 
 ## Classification result
 
