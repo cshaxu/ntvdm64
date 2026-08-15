@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 
 #define DEM_ERROR_INVALID_FUNCTION 1u
+#define DEM_ERROR_ACCESS_DENIED 5u
 #define DEM_ERROR_INVALID_HANDLE 6u
 #define DEM_ERROR_DISK_FULL 112u
 #define DEM_ERROR_WRITE_PROTECT 19u
@@ -27,6 +28,15 @@ static int error_result(const bx_ntvdm_exception_event_v1 *boundary,
     if ((error >= DEM_ERROR_WRITE_PROTECT && error <= DEM_ERROR_GEN_FAILURE) ||
         error == DEM_ERROR_WRONG_DISK) return finish(boundary, result, 0xffffu, 1, 1);
     return finish(boundary, result, (uint16_t)(error ? error : DEM_ERROR_INVALID_FUNCTION), 1, 1);
+}
+static int backend_error(int backend_result, DWORD error)
+{
+    if (backend_result == BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_READONLY)
+        return DEM_ERROR_ACCESS_DENIED;
+    if (backend_result == BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OVERLAY ||
+        backend_result == BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_VIRTUAL)
+        return DEM_ERROR_INVALID_FUNCTION;
+    return (int)(error == ERROR_SUCCESS ? DEM_ERROR_INVALID_FUNCTION : error);
 }
 static int file_info(HANDLE handle, uint16_t *time_out, uint16_t *date_out,
     uint32_t *size_out)
@@ -89,9 +99,12 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         DWORD disposition = service == 0x2cu ? CREATE_ALWAYS : OPEN_EXISTING;
         if (!oem_path || access == 0u) return error_result(boundary, result, DEM_ERROR_INVALID_FUNCTION);
         if (mode == 0x08u && service == 0x2cu) return error_result(boundary, result, DEM_ERROR_INVALID_FUNCTION);
-        if (bx_ntvdm_dem_local_file_backend_v1_open_ex(&provider->local_files,
-                oem_path, access, share_mode(mode), disposition, &opaque, &error) !=
-            BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK) return error_result(boundary, result, error);
+        { int backend = bx_ntvdm_dem_local_file_backend_v1_open_ex(
+                &provider->local_files, oem_path, access, share_mode(mode),
+                disposition, &opaque, &error);
+          if (backend != BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK)
+              return error_result(boundary, result,
+                  (DWORD)backend_error(backend, error)); }
         if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files, opaque, &handle) ||
             !file_info(handle, &time, &date, &size)) return error_result(boundary, result, GetLastError());
         return finish(boundary, result, (uint16_t)(opaque >> 16), 1, 0) &&
@@ -110,11 +123,16 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
     }
     if (service == 0x31u) {
         uint8_t drive; wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE]; DWORD attributes;
+        int backend;
         if (!oem_path || bx_ntvdm_dem_path_v1_resolve(oem_path, provider->cwd, &drive, relative) !=
-                BX_NTVDM_DEM_PATH_V1_OK ||
-            bx_ntvdm_dem_local_file_backend_v1_open_ex(&provider->local_files, oem_path,
-                BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ, FILE_SHARE_READ, OPEN_EXISTING,
-                &opaque, &error) != BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK ||
+                BX_NTVDM_DEM_PATH_V1_OK)
+            return error_result(boundary, result, error);
+        backend = bx_ntvdm_dem_local_file_backend_v1_open_ex(&provider->local_files, oem_path,
+            BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ, FILE_SHARE_READ, OPEN_EXISTING,
+            &opaque, &error);
+        if (backend != BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK)
+            return error_result(boundary, result, (DWORD)backend_error(backend, error));
+        if (
             !bx_ntvdm_dem_file_session_v1_lookup(&provider->files, opaque, &handle) ||
             !file_info(handle, &time, &date, &size) ||
             !bx_ntvdm_host_namespace_v1_query_file_attributes(provider->host_namespace,

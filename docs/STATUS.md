@@ -208,6 +208,14 @@
 > migration evidence block, not whole DEM, profile, hard-error, Redirector or
 > native-trace closure; see the [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 progress:** r32 corrects readonly/overlay/virtual profile
+> disposition for the existing local `demfcb.c` handle subset
+> (`50:2C/2D/2E/2F/30/31`): readonly read-open is admitted, readonly create
+> returns `AX=5,CF=1`, and overlay create remains explicit unavailable. This
+> is provider-internal profile evidence only; wildcard `50:07/20`, full FCB
+> record transactions, BOP routing and DEM closure remain pending. See the
+> [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

@@ -222,3 +222,14 @@ one explicit final DEM package dispatch change, where no two providers can
 claim the same untyped pathname.  The already migrated search and
 provider-issued-token handle routes remain bounded evidence; they do not
 authorize another partial switch.
+
+Revision r32 corrects the common local-backend disposition mapping used by the
+existing six-identity `demfcb.c` local-handle subset
+(`50:2C/2D/2E/2F/30/31`).  A readonly FCB open with read access remains
+admitted, while a create is now the source-shaped access-denied result
+(`AX=5, CF=1`); overlay and virtual create remain explicit unavailable
+(`AX=1, CF=1`) rather than becoming host writes.  The r32 whole-provider
+MSVC x64 `/MT` fixture covers these three outcomes in addition to the retained
+direct FCB operations.  `50:07/20` wildcard delete/rename and full FCB record
+transactions are still pending, so this is not a complete FCB partition or an
+ingress migration.

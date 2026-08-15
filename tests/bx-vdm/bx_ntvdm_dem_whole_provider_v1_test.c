@@ -325,6 +325,24 @@ int main(void)
                 &alternate_profile, &space, &alternate_cwd)) failed = 61;
         else {
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 0u;
+            if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2du,
+                    &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
+                cf_set(&result)) failed = 621;
+            else {
+                uint32_t readonly_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                    result.cpu_delta.gpr16_values[5];
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                cpu.eax = readonly_token >> 16; cpu.esi = readonly_token & 0xffffu;
+                if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2eu,
+                        &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) || cf_set(&result))
+                    failed = 622;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate,
+                    0x2cu, &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
+                !cf_set(&result) || !ax_is(&result, 5u))) failed = 623;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
                     &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
                 !ax_is(&result, 5u)) failed = 62;
@@ -346,9 +364,13 @@ int main(void)
                 &alternate_profile, &space, &alternate_cwd)) failed = 64;
         else {
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-            if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
+            if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2cu,
+                    &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
+                !cf_set(&result) || !ax_is(&result, 1u)) failed = 641;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
                     &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
-                !ax_is(&result, 1u)) failed = 65;
+                !ax_is(&result, 1u))) failed = 65;
             bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }
