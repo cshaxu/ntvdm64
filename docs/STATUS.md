@@ -75,6 +75,13 @@
 > endpoint evidence is not component closure. See the [complete
 > map](etc/research/t211-s1-command-owner-package-source-abi-disposition-map-001.md).
 
+> **T211 S2 P1 progress:** one versioned COMMAND bootstrap/environment/config
+> provider now owns the copied state for `01/02/04/05/0C/0D/0F/10`; two fresh
+> MSVC x64 `/MT` fixtures prove exact component membership and migrated
+> composition. `54:10` remains an explicit deferred member because its
+> historical `DosSessionId` input has no admitted CLI ABI. See the [P1
+> record](etc/research/t211-s2-command-bootstrap-provider-p1-001.md).
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was

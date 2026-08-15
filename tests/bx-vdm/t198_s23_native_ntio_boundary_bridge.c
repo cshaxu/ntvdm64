@@ -240,11 +240,11 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
             observed_composition != 0) {
             observed_cmdinfo.accepted=composition_accepted?1u:0u;
             observed_cmdinfo.disposition=outcome?outcome->disposition:0u;
-            observed_cmdinfo.bootstrap_stage=observed_composition->command.bootstrap.stage;
+            observed_cmdinfo.bootstrap_stage=observed_composition->command.bootstrap_provider.comspec.stage;
             observed_cmdinfo.has_launch_plan=observed_composition->command.has_launch_plan;
             observed_cmdinfo.has_drive_snapshot=observed_composition->command.gset->has_drive_snapshot;
-            observed_cmdinfo.delivered=observed_composition->command.get_next.delivered;
-            observed_cmdinfo.launch_registration_valid=observed_composition->command.launch.valid;
+            observed_cmdinfo.delivered=observed_composition->command.bootstrap_provider.get_next.delivered;
+            observed_cmdinfo.launch_registration_valid=observed_composition->command.bootstrap_provider.set_info.valid;
         }
         bx_ntvdm_boot_namespace_diagnostic_v1 namespace_diagnostic;
         if (observed_composition != 0 &&

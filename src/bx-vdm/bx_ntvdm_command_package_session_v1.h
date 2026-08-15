@@ -5,6 +5,7 @@
 #include "bx_ntvdm_cmd_comspec_bootstrap_service.h"
 #include "bx_ntvdm_cmd_get_next_service.h"
 #include "bx_ntvdm_command_launch_plane_v1.h"
+#include "bx_ntvdm_command_bootstrap_provider_v1.h"
 #include "bx_ntvdm_command_package_facade_v1.h"
 #include "bx_ntvdm_dem_gset_plane_v1.h"
 #include "bx_ntvdm_command_profile_consumer_v1.h"
@@ -25,15 +26,12 @@ typedef struct bx_ntvdm_command_package_session_v1 {
     uint32_t magic, abi_version, struct_bytes, initialized;
     bx_ntvdm_boot_namespace_plane_v1 *namespace_plane;
     bx_ntvdm_dem_gset_plane_v1 *gset;
-    bx_ntvdm_cmd_comspec_bootstrap_v1 bootstrap;
-    bx_ntvdm_command_launch_plane_v1 launch;
+    bx_ntvdm_command_bootstrap_provider_v1 bootstrap_provider;
     byob_launch_plan_v2 launch_plan;
-    bx_ntvdm_cmd_get_next_state_v1 get_next;
     bx_ntvdm_command_profile_consumer_v1 mutation_profile;
     bx_ntvdm_command_host_context_v1 host_context;
     const bx_ntvdm_session_host_context_v1 *session_host_context;
     bx_ntvdm_command_console_capability_v1 console;
-    bx_ntvdm_command_boot_input_v1 boot_input;
     bx_ntvdm_command_execution_lifecycle_v1 execution_lifecycle;
     bx_ntvdm_command_stream_child_v1 stream_child;
     uint32_t has_launch_plan, has_mutation_profile, has_host_context, has_session_host_context;

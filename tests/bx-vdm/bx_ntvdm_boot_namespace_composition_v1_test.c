@@ -688,14 +688,14 @@ int main(void)
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != 1u ||
         outcome.gpr16_values[0] != 0xaa01u ||
-        composition.command.bootstrap.stage !=
+        composition.command.bootstrap_provider.comspec.stage !=
             BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY) return 23;
     event_initialize(&event, 0x54, 0x0f);
     event.es = 0x200u; event.ebx = 1u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 3u ||
-        composition.command.bootstrap.stage !=
+        composition.command.bootstrap_provider.comspec.stage !=
             BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY) return 24;
     event.ebx = 3u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
@@ -704,7 +704,7 @@ int main(void)
         memcmp(ram + 0x2000, "COMSPEC=C:\\COMMAND.COM", 23u) != 0 ||
         memcmp(ram + 0x2000 + 23u, command_environment,
             sizeof(command_environment)) != 0 ||
-        composition.command.bootstrap.stage !=
+        composition.command.bootstrap_provider.comspec.stage !=
             BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED) return 25;
     event_initialize(&event, 0x54, 0x02);
     event.eax = 0xbb00u;
@@ -759,22 +759,22 @@ int main(void)
     ram[0x1088] = 0x30u; ram[0x108a] = 0x40u; ram[0x108c] = 128u;
     ram[0x109c] = 0x50u; ram[0x109e] = 0x60u; ram[0x10a0] = 17u;
     ram[0x10a1] = 1u;
-    if (composition.command.launch.valid ||
+    if (composition.command.bootstrap_provider.set_info.valid ||
         !bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x104u ||
         outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         outcome.eflags_values != 0u ||
-        composition.command.get_next.delivered != 1u) return 70;
-    bx_ntvdm_cmd_get_next_state_v1_initialize(&composition.command.get_next);
+        composition.command.bootstrap_provider.get_next.delivered != 1u) return 70;
+    bx_ntvdm_cmd_get_next_state_v1_initialize(&composition.command.bootstrap_provider.get_next);
     event_initialize(&event, 0x54, 0x05);
     event.ds = 0x1000; event.edx = 0x20; event.ebx = 0x40; event.ecx = 0x60;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x104 ||
-        !composition.command.launch.valid || composition.command.launch.registration.scs_info != 0x10020u ||
-        composition.command.launch.registration.scs_to_sync != 0x100eeu ||
-        composition.command.launch.registration.is_dos_binary != 0x10040u ||
-        composition.command.launch.registration.fd_access != 0x10060u) return 18;
+        !composition.command.bootstrap_provider.set_info.valid || composition.command.bootstrap_provider.set_info.registration.scs_info != 0x10020u ||
+        composition.command.bootstrap_provider.set_info.registration.scs_to_sync != 0x100eeu ||
+        composition.command.bootstrap_provider.set_info.registration.is_dos_binary != 0x10040u ||
+        composition.command.bootstrap_provider.set_info.registration.fd_access != 0x10060u) return 18;
     /* The complete source-derived CMDGETNEXT lifecycle consumes the fixed
        CMDINFO gather, writes the declared target response and commits exactly
        one immutable launch slot. */
@@ -788,14 +788,14 @@ int main(void)
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x104u) return 32;
     if (outcome.gpr16_write_mask != 0u || outcome.eflags_write_mask !=
         BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF || outcome.eflags_values != 0u) return 33;
-    if (composition.command.get_next.delivered != 1u) return 34;
+    if (composition.command.bootstrap_provider.get_next.delivered != 1u) return 34;
     if (ram[0x340u + 1u] != 8u ||
         memcmp(ram + 0x340u + 2u, "TARGET\r\n", 8u) != 0) return 35;
     if (memcmp(ram + 0x560u, "C:\\TARGET.COM", 14u) != 0) return 36;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_STOP || outcome.resume_rip != 0u ||
         outcome.gpr16_write_mask != 0u || outcome.eflags_write_mask != 0u ||
-        composition.command.get_next.delivered != 1u) return 32;
+        composition.command.bootstrap_provider.get_next.delivered != 1u) return 32;
     /* The selected COMMAND console capability is a fixed CLI no-install
        response.  Its identity was established by ingress and COMMAND-plane
        classification, rather than by the detached legacy runtime gate. */
