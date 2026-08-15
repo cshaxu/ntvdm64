@@ -101,7 +101,7 @@ function Get-CurrentCompositionState([string]$selector, $service) {
             return 'bound deferred or explicit-unavailable COMMAND route'
         }
         '56' { return 'bound typed stop; debugger profile deferred' }
-        '57' { return 'not handled: current unavailable facade is selection-incompatible with ingress' }
+        '57' { return 'bound source-derived unavailable facade (CF=1, AX=1, RIP+4); no network profile admitted' }
         '59' { return 'bound typed stop (no-support terminal safeguard)' }
         '5A' { return 'bound resume (idle placeholder; lifecycle seam pending)' }
         '5B' { return 'bound typed stop (debug-break terminal safeguard)' }

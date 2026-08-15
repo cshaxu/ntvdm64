@@ -77,7 +77,7 @@ bound composition.
 | COMMAND | `command_package_session` reaches `54:01`, `02`, `04`, `05`, `0B`, `0C..10` through declared plan, boot namespace or limited helpers. | Endpoint-local source-derived evidence only. Re-audit under COMMAND package; no service is complete merely because it produces a typed result. |
 | XMS | fallback `native_bop_composition` implements A20 and selected allocation/query/reallocation (`52:00,02,03,05,0B`) through mantle capabilities; other XMS services produce typed stop. | Preserve as a candidate mechanical seam, then compare full XMS ABI/failure semantics before retain/migrate/replace. |
 | DPMI | fallback `native_bop_composition` classifies all 25 identities and stops them. | Correctly non-successful today; remains deferred until a complete protected-mode composition is admitted. |
-| Redirector | `redir_package_facade` intends CF/AX unavailable continuation, but requires an explicit-unavailable selection while ingress currently supplies mapped/deferred. | **Current façade is unreachable.** Treat the whole family as an unhandled composition gap, not as working unavailable behavior; repair only in the Redirector owner package. |
+| Redirector | `redir_package_facade` consumes the mapped/deferred selection through `system_plane` and returns `CF=1, AX=1, RIP+4` for all 50 slots. | This is a reachable source-derived unavailable family, not a network implementation. Retain it until an explicit network profile is admitted; delete or migrate the older unbound unavailable provider. |
 | Debugger | `debugger_package_facade` consumes the three-byte selector and returns typed stop. | Retain as a deferred non-debug profile safeguard; it is not a debugger provider. |
 | WOW/top-level/machine | WOW and selected terminal selectors stop; `5A` resumes; `5E` has bounded config/no-op paths; `12/15` use the machine memory helper; `5C/5D/FD` stop. | Each remains with its named owner. Terminal/stop handling is not historical composition recovery. |
 
@@ -105,7 +105,7 @@ The candidate T must use the proposal's package order, not BOP trace order:
   `src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c`.
 - Reproducible source inventory: run
   `tools/Export-T200S31BopSourceInventory.ps1` against the repository. Its
-  corrected output, `t200-s31-bop-source-inventory-r7`, contains 203 original
+  corrected output, `t200-s31-bop-source-inventory-r8`, contains 203 original
   dispatcher/header entries and is the mandatory coverage set for the
   endpoint-level ledger. Revision r1's count of 199 is superseded: its parser
   omitted un-commented or non-comma-terminated final entries from historical
@@ -113,7 +113,7 @@ The candidate T must use the proposal's package order, not BOP trace order:
 - Policy decision and target storage profiles:
   [host-integrated recovery proposal](proposal-host-integrated-bop-capability-recovery-001.md).
 
-The r7 artifact has one mechanically generated row for every one of those
+The r8 artifact has one mechanically generated row for every one of those
 203 endpoints, with original handler/source, exactly one owner package, the
 current ingress state, and the actual bound-composition state derived from
 the façade/session routes. It is deliberately marked `ABI/failure/API review
@@ -139,7 +139,7 @@ future owner packages, not by an ingress micro-patch:
 
 | Finding | Evidence | Required package action |
 | --- | --- | --- |
-| `57` fallback is not reachable through its declared unavailable provider | `bx_ntvdm_bop_ingress_v1.c` classifies `57:xx` as mapped/deferred while `bx_ntvdm_redir_unavailable_provider_v1` requires top-level explicit-unavailable | Redirector package must give the full family one reachable, source-derived unavailable disposition until a network profile is admitted. |
+| legacy `57` unavailable provider is unbound | `bx_ntvdm_redir_unavailable_provider_v1` requires top-level explicit-unavailable while current ingress supplies mapped/deferred; `boot_namespace_composition` instead calls `redir_package_facade` | Retain the reachable façade as the family unavailable result; delete or migrate the redundant legacy provider in the Redirector package. |
 | Current provider registry has only generic deferred/unavailable values | `bx_ntvdm_bop_provider_registry_v1.[ch]` | The shared storage/profile ABI and each owner package must replace this generic state with provider-capability selection; no service gets implementation merely from the generic registry. |
 
 ### First unavailable/private-host-API register
@@ -155,6 +155,7 @@ a narrow CLI seam or retain the original unavailable/deferred result.
 | `GetNextVDMCommand` and its `VDMINFO` transaction | COMMAND bootstrap/return/launch (`cmdmisc.c`, `cmdexec.c`) | historical NTVDM host-command broker; no ordinary x64 user-mode Win32 API/ABI that can be linked as its replacement | Record as a source-derived CLI command/session contract; do not substitute `CreateProcess` endpoint-by-endpoint. |
 | `TerminateVDM` | COMMAND exit/config/environment and top-level unsimulate | historical VDM engine terminal hook, not public process termination semantics | Use the typed engine terminal/result ABI only after its owner package is admitted; never substitute a host-process kill. |
 | `Sim32GetVDMPointer`, `Sim32FlushVDMPointer`, `Sim32FreeVDMPointer`, register macros | DEM, XMS, DPMI and `nt_bop.c` | historical VDM/CCPU/SAS composition, not a public Win32 capability | Replace only with typed, checked bx-vdm guest-memory/CPU transactions; never leak raw Bochs mappings or reintroduce CCPU. |
+| `GetVDMAddr` | DEM and COMMAND services | historical VDM guest-address macro, not a user-mode Windows API | Rehost only individual fixed-width guest gathers/writes through the existing checked bx-vdm ABI; no flat guest pointer crosses the boundary. |
 | `WaitIfIdle` / `WakeUpNow` | top-level `5A` (`nt_bop.c`) | internal NTVDM scheduling hooks, not public process scheduling APIs | Defer to the engine lifecycle/cancellation package; do not approximate with arbitrary sleeps or an adapter busy loop. |
 | `VDMREDIR.DLL` / `VrDispatch` | Redirector `57:00..31` | historical NTVDM DLL composition absent from the admitted x64 CLI product | Keep one reachable, source-derived unavailable family until a separately admitted network profile defines its completion ABI. |
 | `WOW32` `W32Init` / `W32Dispatch` hooks | WOW `51` | historical WOW/CCPU/VDD composition, not an independently composable ordinary host library | Keep the whole WOW package deferred; its absence does not affect direct DOS host-drive recovery. |
@@ -163,17 +164,20 @@ a narrow CLI seam or retain the original unavailable/deferred result.
 ## DEM first-pass owner groups (`50:00..48`)
 
 The historical `apfnSVC` array in `demdisp.c` is the authoritative ordering.
-The following is the first owner grouping; the next revision expands every
-listed service number to an individual row and verifies register/memory ABI.
+The r7 inventory supplies the individual 73 source rows.  The following
+partition corrects the earlier coarse ranges: each hex service is in exactly
+one owner row and thereby gives the per-service audit a non-overlapping work
+set.
 
-| Services | Original owners | Direct-host target | Current workaround disposition |
+| Services | Original owners / source surface | Direct-host or profile disposition | Current workaround action |
 | --- | --- | --- | --- |
-| `00..08`, `12`, `16`, `17`, `22..24`, `30`, `32`, `34`, `39`, `42`, `44..49`, `71..72` | `demfile.c`, `demhndl.c`, `demfcb.c`, `demsrch.c`, `demdir.c`, `demlock.c` | Real selected host file/handle/FCB/search namespace; normal Win32 mutation is valid in direct mode | Boot/readonly namespace and partial readonly failure providers are profile candidates; replace as default direct provider. |
-| `13..16`, `19..21`, `24..28`, `65`, `70` | `demgset.c`, `demdir.c` | Host drive, volume, current directory, date/time and computer-name APIs under explicit drive policy | Host-drive/volume foundation retained; synthetic root-CWD answers migrate to direct CWD provider. |
-| `17`, `29`, `35`, `52..62`, `69` | `demmisc.c` | Session/process/console/loader behavior must be split by original host dependency | Existing CLI-unavailable results require individual retain/replace/defer audit; no blanket non-invasive rejection. |
-| `33`, `41`, `42` | `demioctl.c`, `demdasd.c` | Selected volume/media/raw-I/O capability only when direct profile policy admits it | Raw-media and BIOS-facing operations remain separately profile-gated; do not emulate them through filesystem shortcuts. |
-| `50`, `51`, `63` | `demerror.c`, `demlock.c` | Source-defined hard-error/retry/lock behavior with direct handle context | Retain only proven source failure paths; reclassify broad fallback. |
-| `31`, `36`, `38`, `40`, `43`, `64`, `67` | `demNotYetImplemented` entries | Original explicit no-op/unimplemented behavior | Retain as original disposition, not as evidence that neighboring services are unavailable. |
+| `00,01,02,03,04,05,06,08,12,16,17,1E,22,27` | `demhndl.c`, `demfile.c`, `demdir.c`: seek, attributes, close, create/delete, directories, file time, open/read/rename/write/commit | direct host namespace/file/handle package; normal mutation follows selected-drive ACL/share results | Replace boot/readonly default path; retain it only as readonly/fixture profile backend. |
+| `07,09,0A,0B,0C,20,2C,2D,2E,2F,30,31,44` | `demfcb.c`, `demsrch.c`: FCB, DTA, find-first/next, file-info and path validation | direct host FCB/search package with copied DOS records and opaque host handles | Migrate deterministic boot search and FCB snippets into explicit profile fixtures; direct provider must use real selected roots. |
+| `0D,0E,0F,10,13,14,15,18,19,1A,1B,1C,25,41,46` | `demgset.c`, `demdir.c`: drive list/media, CWD, date/time, DTA, DPB and computer identity | direct drive-view/CWD/volume package; time-set preserves privilege failure; guest-visible DPB derives from selected view | Retain drive/volume capture foundation; replace synthetic CWD and boot-volume answers. |
+| `21,29,2A` | `demioctl.c`, `demdasd.c`: IOCTL and absolute media I/O | separately admitted direct raw-device capability; ordinary pathname provider must not emulate it | Keep profile-gated/typed failure until a device policy and volume-handle ABI exist. |
+| `11,1D,23,34,35,36,37,38,39,3A,3B,3C,3D,3E,45,47,48` | `demmisc.c`, `demdisp.c`: DOS load/kernel, dispatcher/session, console/debug, VDM/WOW and symbol/pipe behavior | split by owner: source-derived CLI lifecycle/console seam, or deferred session/WOW/debug capability | Broad CLI-unavailable fallback is not final; classify each under the owning session/console/debug package. |
+| `32,33,3F` | `demerror.c`, `demlock.c`: hard error, retry, locks | original+seam with direct opaque-handle context and source-specific DOS failure | Retain only source-proved errors; no generic success or generic adapter error. |
+| `1F,24,26,28,2B,40,42,43` | original `demNotYetImplemented` entries | original explicit no-op/unimplemented behavior | Retain as original disposition; `42` FASTREAD compatibility remains separately labelled source-derived evidence. |
 
 ### Immediate correction derived from the table
 
@@ -298,12 +302,47 @@ file operations, which remain DEM's responsibility.
 | --- | --- | --- | --- |
 | local `NetUse*`, workstation and enumeration calls | redirector package, historical network API composition | deferred until a selected network capability profile and modern API availability map exist | do not substitute direct host-drive namespace for redirector semantics |
 | named pipes/mailslots/NetBIOS/asynchronous callbacks | redirector plus VDD/SoftPC callback state | deferred/unavailable | native `HANDLE`/callback objects cannot cross into guest; requires a dedicated copied completion seam |
-| `57` ingress/failure path | `nt_bop.c:MS_bop_7` continuation adds the service byte | source-derived unavailable only while no redirector profile is admitted | replace current unreachable unavailable provider: ingress maps `57` as REDIR mapped/deferred, whereas `bx_ntvdm_redir_unavailable_provider_v1` expects TOP_LEVEL explicit-unavailable. |
+| `57` ingress/failure path | `nt_bop.c:MS_bop_7` continuation adds the service byte | source-derived unavailable only while no redirector profile is admitted | retain `redir_package_facade` (`RIP+4`, `CF=1`, `AX=1`) and delete/migrate the unbound legacy `redir_unavailable_provider`. |
 
 The first recovery proposal does not make redirector implementation a
 prerequisite for direct local drives. It requires the existing fallback to be
 honest, reachable and source-derived until a separately selected network
 profile is admitted.
+
+### Redirector endpoint partition (`57:00..31`)
+
+`rdrsvc.h` supplies all fifty identity rows in the r7 inventory.  They are a
+single network/IPC composition package, but the following non-overlapping
+partition records their eventual provider and failure work rather than
+allowing local DEM files to accidentally satisfy them.
+
+| Services | Original function family | Modern capability status / required disposition |
+| --- | --- | --- |
+| `00,01,0F` | redirector lifecycle / reset | historical `VDMREDIR` lifetime is unavailable; source-derived family-unavailable continuation until a network profile exists. |
+| `02..08` | named-pipe query/state/peek/transact/call/wait | Win32 named-pipe APIs may exist, but guest request/response buffers and asynchronous completion require a dedicated copied IPC seam; deferred. |
+| `09..0E` | mailslot creation/info/read/write | historical mailslot composition and callback state; deferred/unavailable as a family. |
+| `10..1A` | remote Net API/server/use/workstation/message | old LAN Manager API layouts and remote marshalling; deferred behind an explicit network profile, not replaced by local-drive operations. |
+| `1B..22` | network identity, NetHandle and DC queries | network identity/authorization semantics; deferred; ordinary host computer-name is DEM `50:41`, not a redirector substitute. |
+| `23,24` | asynchronous named-pipe I/O | callback/interrupt completion ABI missing; deferred, no raw OVERLAPPED/HANDLE crosses into guest. |
+| `25..27` | NetBIOS/DLC request and interrupt post | device/interrupt ownership absent; deferred behind separate machine/device admission. |
+| `28..2A` | memory window / pause-continue mode | historical redirector-memory and scheduler coupling; deferred. |
+| `2B..2E` | legacy NetUse/NetService aliases | same profile as `10..1A`; no isolated service implementation. |
+| `2F..31` | redirector interrupt acknowledgement/PM NetBIOS check | machine callback and protected-mode prerequisites; deferred. |
+
+The existing cleanup task is narrower than the whole package:
+`system_plane` classifies `57:00..31` as explicit unavailable after the
+generic deferred ingress selection, and `redir_package_facade` correctly
+turns it into `CF=1, AX=1, RIP+4`.  The separate older
+`redir_unavailable_provider` is not on that bound path and should be deleted
+or migrated during the Redirector package cleanup.  No direct host filesystem
+behavior is a permitted workaround.
+
+The existing focused source regression
+`tests/bx-vdm/bx_ntvdm_redir_package_facade_v1_test.c` iterates all fifty
+defined service bytes and separately rejects `57:32`; it is the retained
+family-level assertion for this unavailable disposition. A future network
+profile replaces that assertion only with a complete package regression, not
+with per-service trace fixes.
 
 ## WOW, debugger and top-level/machine selector audit
 
