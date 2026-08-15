@@ -51,6 +51,13 @@
 > lifecycle and four-mode policy resolution are complete; see the
 > [T201 closure record](history/m0-t201-closure-20260814.md).
 
+> **T202 S7 decision:** the complete original `cmdExec32` /
+> `cmdReturnExitCode` / `cmdGetNextCmd` lifecycle map rejects a new
+> CLI-owned host-child-to-DOS queue for this profile. `GetNextVDMCommand` is
+> the unavailable historical BaseSrv/CSR broker, not a local command list;
+> the retained bounded child transaction is therefore terminal-only. See the
+> [admission decision](etc/research/t202-s7-command-reentry-admission-decision-001.md).
+
 > **T202 S1 closure:** DEM now consumes the shared profile through one copied,
 > selector-blind package seam; see the
 > [composition evidence](etc/research/t202-s1-dem-profile-consumer-composition-001.md).
