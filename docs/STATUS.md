@@ -211,6 +211,12 @@
 > `AL=7`.  It has no VDM re-entry queue, VDD, `SetStdHandle`, raw handle/PID
 > transport or native trace claim; see the [typed-child evidence](etc/research/t202-s6-command-typed-child-lifecycle-001.md).
 
+> **T202 S6 integration observation:** one current-source CPU5 native run
+> rebuilt and linked the entire manifest, then retained its existing DEM
+> frontier (`50:11` and subsequent DEM lifecycle) with fixture exit `2`; no
+> `54:xx` identity was reached.  This is negative reach evidence only and
+> creates no endpoint task; see the [native observation](etc/research/t202-s6-command-native-integration-observation-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
