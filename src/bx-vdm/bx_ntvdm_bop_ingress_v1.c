@@ -85,7 +85,9 @@ int bx_ntvdm_bop_ingress_v1_classify(
         service = window->bytes[3];
         switch (selector) {
         case 0x50u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_DEM, 73u, 73u); break;
-        case 0x52u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_XMS, 12u, 0xffu); break;
+        /* OpenNT xmssvc.h defines XMS_LASTSVC as 0x0c: it bounds the
+         * twelve callable table entries and is never a callable service. */
+        case 0x52u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_XMS, 12u, 12u); break;
         case 0x53u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_DPMI, 25u, 0xffu); break;
         case 0x54u: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_COMMAND, 17u, 17u); break;
         default: bx_ntvdm_bop_ingress_v1_classify_service(ingress, selector, service, BX_NTVDM_BOP_FAMILY_REDIR, 50u, 0xffu); break;

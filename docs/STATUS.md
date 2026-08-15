@@ -2,40 +2,40 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T205 S5.** Its governing brief is the active
+> **Current effective packet: M0 T206 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T205 S5 -- XMS INT15 machine-capability admission.**
+**Active: M0 T206 S1 -- CLI lifecycle governance admission map.**
 
-> **T204 closed:** its contained startup-configuration boundary is recorded in
-> [history](history/m0-t204-closure-20260815.md). The table below is the sole
+> **T205 closed:** its current-profile XMS boundary is recorded in
+> [history](history/m0-t205-closure-20260815.md). The table below is the sole
 > active packet.
 
 ## Active Packet
 
-> **T scope:** T205 recovers the complete XMS (`52:00..0B`) owner package by
-> completing each gated XMS capability only after its real machine owner is
-> admitted. S3 rejected C3/UMB for this no-device profile. S5 now maps the
-> original INT15 notification requirement for `52:09`; it implements neither
-> an interrupt service nor a trace.
+> **T scope:** T206 is the queue-selected Modern CLI lifecycle governance
+> package.  It adds explicit CLI-owned cancellation, time/resource budgets,
+> audit logging, result presentation and cleanup only around the established
+> one-shot engine boundary. S1 maps the current engine/CLI ownership and
+> required fixed-width contracts before implementing any lifecycle behavior.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T205 S5, Ordinary Mode. |
-| Admission And Approval | T205 S1 plan, S2 closure and S3 C3 decision; owner direction that INT15 remains native machine/firmware-owned rather than adapter semantics. |
-| Objective | Establish source/ABI/failure and actual machine-lifecycle evidence needed to admit or reject a selector-blind interrupt-notification capability for XMS `52:09`. |
-| Non-goals | No `52:09` provider, synthetic IVT, PIC/keyboard/firmware behavior, Bochs core rewrite, trace, adapter callback, host pointer, DPMI or top-level `5E` behavior. |
-| Reference Baseline | OpenNT `xmsmisc.c`, `keybd_io.c`, INT15 callers; T199 C5 evidence; current no-device minimal machine and S2 extended-memory boundary. |
-| Files And ABI Surface | Read-only source/lifecycle inspection and evidence only. A later admitted mantle record may be fixed-width and selector-blind; no source/ABI change is authorized in S5. |
+| Identifier Mode | M0 T206 S1, Ordinary Mode. |
+| Admission And Approval | Owner's continuing CLI NTVDM objective, prior authorization to select the next ROI-ranked package, and Queue order 1. |
+| Objective | Produce the source/ABI/failure map required to admit a CLI-owned lifecycle contract around one engine run: cancellation, time/resource budget, audit result, presentation and cleanup. |
+| Non-goals | No interactive console, new BOP provider, guest lifecycle reconstruction, host service mutation, Bochs feature/device admission, ambient environment transport or native trace. |
+| Reference Baseline | Current direct CLI-to-engine handoff, T200 engine/terminal evidence, T201 profile ABI, and Queue's Modern CLI lifecycle governance admission evidence. |
+| Files And ABI Surface | Read-only inspection and an evidence record only. Later S work may add a versioned fixed-width CLI lifecycle request/result contract outside bx-vdm/Bochs private state. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect all `xmsNotifyHookI15` and downstream INT15 delivery dependencies; map vector validation, firmware/PIC/keyboard owners and failures; prove a default-off result; governance and diff checks. |
-| Expected Markers | Explicit C5 owner or explicit rejection; no synthetic IVT or callback; `52:09` remains deferred until C5 is proven; adapter has no interrupt state. |
+| Verification | Inspect CLI, engine run/result, teardown and current terminal source paths; map every input/owner/error path; governance and diff checks. |
+| Expected Markers | One owning CLI lifecycle boundary, no hidden environment/fixture transport, explicit cancellation/budget/result/cleanup dispositions and a later S order. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record source paths/hashes, vector/delivery owner inventory, lifecycle/failure disposition, current no-device constraints and a later S order. |
-| Stop Conditions | Any need to enable a device, change generic interrupt/firmware semantics, make an adapter callback, or trace guest execution pauses S5 for re-admission. |
-| Exit Criteria | A reviewable C5 decision gives a safe complete implementation or explicit continued deferral path for `52:09`. |
+| Reporting Requirements | Record source paths/hashes, input/output ownership, failure/cleanup map, unavailable prerequisites and a cohesive S sequence. |
+| Stop Conditions | Any need to alter BOP semantics, guest DOS/COMMAND behavior, Bochs lifecycle, host system state, or invoke an unproven engine/trace pauses S1 for re-admission. |
+| Exit Criteria | A reviewable whole-package CLI lifecycle admission plan establishes the single ABI and tests needed before implementation begins. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect INT15 vector validation, keyboard/BIOS/PIC callouts, IVT lifecycle, XMS capacity return, `5E` notification, DOS/EMM consumers, and DPMI dependencies. |
+| Similar-Issue Sweep | Inspect CLI option admission, cancellation, timeout/budget, result transport, audit logging, cleanup, process exit mapping, repeated invocation and Ctrl+C/console ownership. |
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
@@ -74,6 +74,19 @@
 > comparison rejects a synthetic UMB capability. `52:06..08` remain one
 > deferred XMS subgroup; their conditional provider S4 is not admitted. See
 > the [C3 decision](etc/research/t205-s3-c3-umb-machine-admission-decision-001.md).
+
+> **T205 S5 closure:** the original `52:09` handler requires IVT validation,
+> keyboard/BIOS callout state and historical recursive execution. The no-device
+> machine admits none of them, so C5 and `52:09` remain deferred. See the
+> [C5 decision](etc/research/t205-s5-c5-int15-machine-admission-decision-001.md).
+
+> **T205 S6 closure:** one strict source-built package fixture covers all
+> callable `52:00..0B`; `06..09` give typed stop and `52:0C` is the original
+> non-callable `XMS_LASTSVC` boundary. See the [convergence record](etc/research/t205-s6-xms-whole-package-convergence-001.md).
+
+> **T205 closed:** the current-profile XMS owner package is routed and
+> source-built, with C3/C5-gated functionality honestly deferred rather than
+> fabricated. See the [closure record](history/m0-t205-closure-20260815.md).
 
 > **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one

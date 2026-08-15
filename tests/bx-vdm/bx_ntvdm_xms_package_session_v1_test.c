@@ -50,5 +50,8 @@ int main(void)
   if(!dispatch(&s,10u,0u,0u,0u,&r)||r.cpu_delta.gpr16_values[0]!=2048u||r.cpu_delta.gpr16_values[2]!=1024u)return 7;
   memcpy(move_record,(const uint8_t[]){2u,0u,0u,0u,0x00u,0x20u,0u,0u,0x00u,0x30u,0u,0u},12u);
   if(!dispatch(&s,1u,0u,0u,0u,&r)||r.cpu_delta.gpr16_values[0]!=1u||moved_source!=0x2000u||moved_destination!=0x3000u||moved_bytes!=4u)return 8;
-  for(n=0;n<sizeof(deferred)/sizeof(deferred[0]);n++)if(!dispatch(&s,deferred[n],0u,0u,0u,&r)||r.disposition!=BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH)return 9;
+  for(n=0;n<sizeof(deferred)/sizeof(deferred[0]);n++)if(!dispatch(&s,deferred[n],0u,0u,0u,&r)||r.disposition!=BX_NTVDM_CPU_RESULT_V2_STOP)return 9;
+  { uint8_t bytes[4]={0xc4u,0xc4u,0x52u,12u};bx_ntvdm_instruction_window_v1 w;bx_ntvdm_bop_ingress_v1 i;
+    bx_ntvdm_instruction_window_v1_capture(&w,bytes,4u);
+    if(!bx_ntvdm_bop_ingress_v1_classify(&w,&i)||i.route!=BX_NTVDM_BOP_ROUTE_NOT_CALLABLE_SENTINEL||i.family!=BX_NTVDM_BOP_FAMILY_XMS||i.service!=12u||i.has_service!=1u)return 15; }
   return 0; }
