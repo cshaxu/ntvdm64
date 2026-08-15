@@ -473,6 +473,17 @@ int main(void)
         if (!result_valid) return (int)(205u + service);
         if (result.disposition == BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH)
             return (int)(230u + service);
+        /* `47/48` are explicitly deferred to the not-yet-admitted
+           Redirector package.  Their AX=6/CF terminal is not a readonly
+           namespace fallback and must remain stable when the local DEM
+           whole provider is installed. */
+        if ((service == 0x47u || service == 0x48u) &&
+            (result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+             result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 1u ||
+             result.cpu_delta.gpr16_values[0] != 6u ||
+             result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+             result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF))
+            return (int)(260u + service);
     }
     /* The grouped top-level facade is the only composition entry for these
        selectors.  The test deliberately supplies a fourth byte: top-level

@@ -103,6 +103,14 @@
 > x64 `/MT`. This is membership and state closure only, not BOP dispatch or
 > service completion; see the [session evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 integration observation:** the atomic provider composition now
+> gives `50:47/48` an explicit Redirector-deferred `AX=6`/CF terminal, rather
+> than a readonly-fallback route. A refreshed current-source CPU5 native
+> fixture compiles and links under MSVC x64 `/MT`, then records one bounded run
+> (exit `2`, first canonical BOP `50:11`). This is integration evidence only:
+> it neither selects a new BOP task nor claims DEM, hard-error, overlay, or
+> native-guest closure. See the [session evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

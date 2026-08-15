@@ -120,6 +120,26 @@ static int fcb_direct_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t servic
     (service==0x2eu||service==0x30u)&&
     bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&s->whole_provider,service,e,c,0,0,0u,
       &unused,r)&&bx_ntvdm_cpu_result_v2_valid(r); }
+/* `demPipeFileDataEOF` and `demPipeFileEOF` are Redirector/COMMAND pipe
+ * services, not a readonly namespace capability.  A CLI session which has
+ * not admitted that complete provider must expose the original absent-SFT
+ * outcome at the package boundary: invalid handle, carry set.  Keep this
+ * disposition explicit here so T202's local DEM switch cannot accidentally
+ * inherit a detached readonly fallback leaf. */
+static int redirector_deferred(const bx_ntvdm_bop_ingress_v1 *i,
+ const bx_ntvdm_bop_provider_selection_v1 *p,const bx_ntvdm_exception_event_v1 *e,
+ const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,
+ bx_ntvdm_cpu_result_v2 *r)
+{ return i&&p&&e&&c&&w&&r&&i->family==BX_NTVDM_BOP_FAMILY_DEM&&
+  (i->service==0x47u||i->service==0x48u)&&
+  p->provider_family==BX_NTVDM_BOP_PROVIDER_DEM&&
+  p->disposition==BX_NTVDM_BOP_PROVIDER_DEFERRED&&e->vector==6u&&
+  c->execution_mode==BX_NTVDM_CPU_EXECUTION_REAL&&w->valid_bytes>=4u&&
+  w->bytes[0]==0xc4u&&w->bytes[1]==0xc4u&&w->bytes[2]==0x50u&&
+  w->bytes[3]==i->service&&e->fault_rip<=UINT64_MAX-4u&&
+  bx_ntvdm_cpu_result_v2_resume(r,e->fault_rip+4u)&&
+  bx_ntvdm_cpu_delta_v1_set_gpr16(&r->cpu_delta,0u,6u)&&
+  bx_ntvdm_cpu_result_v2_set_cf(r,1); }
 int bx_ntvdm_dem_package_session_v1_valid(const bx_ntvdm_dem_package_session_v1 *s)
 { return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_mutation_profile<=1u&&s->has_whole_provider<=1u&&s->has_boot_drive<=1u&&(!s->has_boot_drive||s->boot_drive_index<26u)&&(!s->has_mutation_profile|| (bx_ntvdm_dem_profile_consumer_v1_valid(&s->mutation_profile)&&bx_ntvdm_dem_cwd_context_v1_valid(&s->cwd)))&&(!s->has_whole_provider||bx_ntvdm_dem_whole_provider_v1_valid(&s->whole_provider)); }
 int bx_ntvdm_dem_package_session_v1_initialize(bx_ntvdm_dem_package_session_v1 *s,bx_ntvdm_boot_namespace_plane_v1 *p)
@@ -192,6 +212,7 @@ int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,
   if(bx_ntvdm_dem_search_partition_v1_owns_service(i->service)&&s->has_whole_provider)
     return search_dispatch(s,i->service,e,c,w,r) ? 1 :
       bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,&route,e,c,w,r);
+  if(redirector_deferred(i,p,e,c,w,r))return 1;
   if(bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
   /* A selected DEM provider may reject a mode/precondition.  The package
    * owns that refusal: preserve a typed pass-through instead of leaking the

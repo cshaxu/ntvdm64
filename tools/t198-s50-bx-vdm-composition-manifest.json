@@ -89,11 +89,24 @@
     "src/bx-vdm/bx_ntvdm_dem_computer_name_service_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_cwd_context_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_cwd_service_v2.c",
+    "src/bx-vdm/bx_ntvdm_dem_path_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_file_session_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_local_file_backend_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_fcb_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_fcb_search_service_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_full_dpb_service_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_media_id_service_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_package_session_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_whole_provider_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_handle_partition_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_handle_route_partition_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_fcb_handle_partition_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_fcb_io_route_partition_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_fcb_wildcard_partition_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_fcb_path_route_partition_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_namespace_partition_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_namespace_route_partition_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_search_partition_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_raw_media_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_readonly_namespace_failure_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_volume_provider_v1.c",
@@ -119,5 +132,5 @@
     "bx_ntvdm_startup_transaction_bridge.c",
     "bx_ntvdm_host_namespace.c"
   ],
-  "rule": "Compilation membership does not imply BOP routing or runtime activation."
+  "rule": "Compilation membership does not imply BOP routing or runtime activation. The T202 DEM whole-provider units are included so a native fixture cannot silently link a pre-switch endpoint closure."
 }

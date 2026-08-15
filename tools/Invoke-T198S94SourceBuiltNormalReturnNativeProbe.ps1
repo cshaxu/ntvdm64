@@ -98,6 +98,9 @@ $responseLines += '"' + $commandBytes + '"'
 $responseLines += '"' + $shareBytes + '"'
 $responseLines += '"' + $ledger + '"'
 $responseLines += '"' + $lifecycleLedger + '"'
+# T202's admitted host namespace uses the ordinary native NT API surface.
+# The historical S74 response predated that closure and only linked bcrypt.
+if ($responseLines -notcontains 'ntdll.lib') { $responseLines += 'ntdll.lib' }
 $responseLines | Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=x64 -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 | Tee-Object -FilePath (Join-Path $build 'link.log')
 if ($LASTEXITCODE -ne 0) { throw "S94 link failed: $LASTEXITCODE" }

@@ -313,3 +313,20 @@ failure for an explicitly nonexistent real-host path; it also stops treating
 the boot fast-I/O leaf as a consumer of a new provider token. `50:47/48`
 remain Redirector deferred. This closes the route migration, not DEM's
 hard-error/overlay backend or native guest execution.
+
+Revision r42 completes the post-regression integration observation without
+turning the observed control flow into new endpoint work. `50:47/48` now take
+an explicit package-session Redirector-deferred branch (`AX=6`, `CF=1`), ahead
+of the retired readonly-namespace failure leaf; the refreshed host-installed
+x64 `/MT` composition fixture proves both results. The first native attempt
+found that the historical normal-return response omitted the current whole
+provider object closure and `ntdll.lib`. After the manifest was refreshed with
+the complete T202 DEM units and the ordinary NT API import library, the r3
+fixture compiled and linked the current source closure, then ran once and
+returned exit `2`. Its trace records the first canonical BOP as `50:11`; it
+does not reach a newly selected service and is not a DEM-completion claim.
+The nonzero return remains the existing finite-run terminal expectation gap
+(the fixture's historical generic-UD/terminal predicate), not evidence for a
+new BOP patch. The remaining limits are unchanged: hard errors require the
+historical guest INT 24 packet owner, and overlay/virtual need their separately
+admitted backends.
