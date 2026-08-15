@@ -69,7 +69,11 @@ static int direct_profile_initialize(bx_ntvdm_mutation_profile_v1 *profile)
         bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
         BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) &&
         bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
-        BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu);
+        BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu) &&
+        bx_ntvdm_command_profile_consumer_v1_register_class(profile,
+        BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
+        bx_ntvdm_command_profile_consumer_v1_register_class(profile,
+        BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x01u);
 }
 
 static int direct_search_route_regression(
@@ -353,11 +357,21 @@ int main(void)
         !bx_ntvdm_host_namespace_v1_initialize(&host_namespace, &drives) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
             &composition, &direct_profile) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
+            &composition, &direct_profile) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
             &composition, &host_namespace) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,
             &launch_plan) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 2;
+    { uint32_t policy = 0u;
+      if (!bx_ntvdm_command_package_session_v1_resolve_mutation_class(
+              &composition.command, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT,
+              &policy) || policy != BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST ||
+          !bx_ntvdm_command_package_session_v1_resolve_mutation_class(
+              &composition.command, BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL,
+              &policy) || policy != BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST)
+          return 248; }
     /* The COMMAND package, rather than a trace observation, defines every
        callable outcome.  Selected positive services are exercised below;
        this sweep proves the no-op, common unavailable route, and all five

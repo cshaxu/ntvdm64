@@ -73,6 +73,12 @@ static int install(const wchar_t *profile, const wchar_t *root,
     if (!bx_ntvdm_dem_profile_consumer_v1_register_class(
             &runtime.mutation_profile,
             BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        !bx_ntvdm_command_profile_consumer_v1_register_class(
+            &runtime.mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        !bx_ntvdm_command_profile_consumer_v1_register_class(
+            &runtime.mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x01u) ||
         profile == 0 || root == 0 || launch_text == 0 ||
         byob_profile_validate_file_select(profile, root, &selection) !=
             BYOB_PROFILE_ACCEPTED ||
@@ -112,6 +118,8 @@ static int install(const wchar_t *profile, const wchar_t *root,
         !bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(
             &runtime.composition, &runtime.volumes) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
+            &runtime.composition, &runtime.mutation_profile) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
             &runtime.composition, &runtime.mutation_profile) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
             &runtime.composition, &runtime.host_namespace) ||

@@ -129,6 +129,12 @@
 > composition fixture passes. This is an atomic owner-routing baseline, not
 > stream, child-lifecycle, VDD/KEYB or native-guest closure.
 
+> **T202 S6 progress:** COMMAND now consumes a copied, selector-blind shared
+> mutation profile for `SESSION_CONTEXT` and `HOST_GLOBAL` capability classes.
+> The current runtime installs both registrations; the x64 `/MT` composition
+> regression proves their direct-policy resolution without adding host I/O,
+> handles, pointers or BOP-specific policy. This is capability substrate only.
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

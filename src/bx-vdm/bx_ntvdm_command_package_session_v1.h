@@ -7,6 +7,7 @@
 #include "bx_ntvdm_command_launch_plane_v1.h"
 #include "bx_ntvdm_command_package_facade_v1.h"
 #include "bx_ntvdm_dem_gset_plane_v1.h"
+#include "bx_ntvdm_command_profile_consumer_v1.h"
 
 #define BX_NTVDM_COMMAND_PACKAGE_SESSION_V1_MAGIC 0x42584353u
 #define BX_NTVDM_COMMAND_PACKAGE_SESSION_V1_VERSION 1u
@@ -22,7 +23,8 @@ typedef struct bx_ntvdm_command_package_session_v1 {
     bx_ntvdm_command_launch_plane_v1 launch;
     byob_launch_plan_v2 launch_plan;
     bx_ntvdm_cmd_get_next_state_v1 get_next;
-    uint32_t has_launch_plan, reserved0;
+    bx_ntvdm_command_profile_consumer_v1 mutation_profile;
+    uint32_t has_launch_plan, has_mutation_profile;
 } bx_ntvdm_command_package_session_v1;
 
 #ifdef __cplusplus
@@ -35,6 +37,12 @@ int bx_ntvdm_command_package_session_v1_initialize(
 int bx_ntvdm_command_package_session_v1_set_launch_plan(
     bx_ntvdm_command_package_session_v1 *session,
     const byob_launch_plan_v2 *plan);
+int bx_ntvdm_command_package_session_v1_set_mutation_profile(
+    bx_ntvdm_command_package_session_v1 *session,
+    const bx_ntvdm_mutation_profile_v1 *profile);
+int bx_ntvdm_command_package_session_v1_resolve_mutation_class(
+    const bx_ntvdm_command_package_session_v1 *session,
+    uint32_t mutation_class, uint32_t *policy_result_out);
 int bx_ntvdm_command_package_session_v1_valid(
     const bx_ntvdm_command_package_session_v1 *session);
 int bx_ntvdm_command_package_session_v1_dispatch(
