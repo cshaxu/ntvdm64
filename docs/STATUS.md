@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S31.** Its governing brief is the active
+> **Current effective packet: M0 T201 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S31 -- host-integrated BOP/provider/workaround admission audit.**
+**Active: M0 T201 S1 -- shared mutation-profile ABI and owner enforcement.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -13,28 +13,31 @@
 
 ## Active Packet
 
-> **T scope:** T200 resumes native source-built CLI execution now that T199 has
-> closed the full BOP routing/disposition table. Trace is an integration
-> observation and repair-order input. A repair still belongs to its owning
-> component package; no trace hit by itself authorizes a one-service BOP patch.
+> **T scope:** T201 implements the shared capability foundation selected by
+> T200's completed global BOP admission audit. It precedes every DEM, COMMAND,
+> Redirector or device provider recovery and prevents any family from inventing
+> its own direct, readonly, overlay or virtual behavior.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S31, Ordinary Mode. |
-| Admission And Approval | S30 established real-host policy/admission and capability lifetime. S31 is the queue-head recovery proposal's required provider/workaround audit: direct host integration is the target default; readonly, volatile-overlay and virtual boot-volume are distinct explicit profiles. No trace-selected endpoint becomes an implementation task. |
-| Objective | Produce one complete source/ABI/failure/disposition and retain/migrate/replace/delete ledger for every mapped BOP selector/service and owner package: DEM, COMMAND, XMS, DPMI, Redirector, Debugger, top-level and machine/BIOS. For every host-facing path, classify direct original OpenNT composition, original-plus-CLI platform seam, source-derived rehost, readonly/overlay/virtual-profile backend, deferred/unavailable, or an erroneous over-isolated workaround. |
-| Non-goals | No endpoint implementation, trace-led patch, implicit synthetic drive, Bochs semantic change, host installation/rebuild, or unbounded guest rerun. |
-| Reference Baseline | [Unified mutation-profile proposal](etc/research/proposal-unified-host-mutation-capability-profiles-001.md), [Host-integrated recovery proposal](etc/research/proposal-host-integrated-bop-capability-recovery-001.md), OpenNT dispatcher/source families, T199 package map, S30 real-host capability map, current bx-vdm provider registry, and direct engine composition. |
-| Files And ABI Surface | Evidence/ledger and, only if necessary to correct a classification, typed bx-vdm routing records; no raw Bochs type or host handle crosses the boundary. |
+| Identifier Mode | M0 T201 S1, Ordinary Mode. |
+| Admission And Approval | Owner approved T200 closure at BOP owner/mutation-class/profile-disposition/workaround-action evidence level, and explicitly selected the queue-head Unified host mutation capability profiles package. |
+| Objective | Define and source-build one fixed-width bx-vdm capability-profile ABI plus owner-registration/enforcement records. The ABI must select direct, readonly, volatile-overlay or virtual-volume behavior once per VDM and reject ad-hoc BOP-leaf selection. |
+| Non-goals | No DEM/COMMAND/Redirector BOP provider recovery, no endpoint-specific mutation logic, no host I/O, no overlay implementation in S1, no trace-led patch, no Bochs semantic change, and no host installation/rebuild. |
+| Reference Baseline | [T200 S31 closure ledger](etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md), [Unified mutation-profile proposal](etc/research/proposal-unified-host-mutation-capability-profiles-001.md), S30 host namespace map, and current bx-vdm typed ABI conventions. |
+| Files And ABI Surface | New versioned fixed-width profile/mutation-class/owner registration records and focused bx-vdm tests only; no raw Bochs type, host handle, callback or host pointer crosses the boundary. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Reconcile the ledger mechanically with OpenNT dispatch tables and bx-vdm ingress/provider registry; reject duplicate ownership, silent success, trace-only task generation and an incorrect "non-invasive means no host API" classification; run governance and diff checks. |
-| Expected Markers | Every endpoint has one owner/package, implementation disposition and profile relation; every current workaround is retained/migrated/replaced/deleted; implementation candidates are grouped by package rather than BOP hit. |
-| Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Keep uncertainty and unlinked original providers explicit; distinguish permitted direct host integration from prohibited host installation/reconstruction; do not claim general CLI/DOS compatibility or endpoint closure. |
-| Stop Conditions | Any attempt to fill an endpoint before package mapping, implicit synthetic host-drive, host system-file modification, installation requirement, Bochs semantic intrusion, raw Bochs type crossing a C boundary, or unbounded run pauses this S for re-admission. |
-| Exit Criteria | A complete, reviewable package ledger and dependency order exist for all BOP families, with explicit evidence references, profile dispositions and workaround actions; it is sufficient to admit queue-head Host-integrated OpenNT BOP capability recovery without a trace-derived microtask backlog. |
+| Verification | MSVC x64 `/MT` focused ABI fixture: valid direct/readonly/overlay/virtual selections, duplicate/missing owner rejection, invalid class/profile rejection, and no BOP-service-specific branch; documentation governance and diff checks. |
+| Expected Markers | One common profile record, one mutation-class enum including none/mechanical, one owner-registration validation path, and a test proving a BOP leaf cannot independently choose a profile. |
+| Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
+| Reporting Requirements | Record exact ABI layout, rejected cases and ownership limitations; distinguish policy foundation from implemented host capability and do not claim any BOP family is recovered. |
+| Stop Conditions | Any raw host handle/pointer, selector/service-specific policy branch, provider implementation, host mutation, Bochs semantic intrusion, or reliance on unavailable historical host API pauses S1 for re-admission. |
+| Exit Criteria | Source-built ABI and enforcement fixture pass; direct/readonly/overlay/virtual values are validated; no owner can bypass the common profile record; S2 may then implement overlay lifecycle. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect native CLI option parser, profile/target admission, launch-plan encoding, drive parser, engine request validation, terminal mapping, and retained runner policy tests. |
+| Similar-Issue Sweep | Inspect current readonly namespace, boot/virtual volume, synthetic CWD, direct host namespace and all BOP facade routes for duplicated profile selection that S2+ must migrate or delete. |
+
+> **T200 closed:** T200 delivers a safe global BOP admission audit and route
+> replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
 
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition

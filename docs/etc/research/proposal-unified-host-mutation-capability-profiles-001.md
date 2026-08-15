@@ -39,6 +39,11 @@ Every capability endpoint has exactly one mutation class and one state owner:
 6. IPC/network state: pipes, mailslots, network uses and asynchronous
    completions.
 
+Endpoints whose original role only controls guest CPU, machine, firmware,
+debugger, or engine mechanics use the explicit `none/mechanical` class. They
+are not silently assigned a host mutation profile; their disposition remains
+deferred until their native owner package is admitted.
+
 For example, DEM `SetLocalTime` is host-global state: direct calls
 `SetLocalTime` and preserves privilege failure; readonly rejects it; overlay
 updates only a VDM virtual clock. `SetFileTime` is file metadata and must use

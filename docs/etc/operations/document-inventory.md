@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1381 |
+| Documentation records | 1382 |
 | --- | --- |
-| Generated UTC | 2026-08-15T01:51:08Z |
+| Generated UTC | 2026-08-15T01:57:50Z |
 
 ## Entries
 
@@ -153,7 +153,7 @@ content-divergent entries.
 | etc/research/proposal-host-integrated-bop-capability-recovery-001.md | indexed supporting material | 90b4698184e0e73373854018a14f901a07736ca557a4b326437faa0dbde246a0 |
 | etc/research/proposal-opennt-dpmi-host-composition-001.md | indexed supporting material | 8300fb853ed8cfa88351b62514808d6fdcb8ff5f805e7b552965be3bc4bcfb3a |
 | etc/research/proposal-opennt-redirector-network-ipc-001.md | indexed supporting material | 166ebe5781f962ad700b1c28a6bfa73d67350c850599c0bde72e364518de3c1f |
-| etc/research/proposal-unified-host-mutation-capability-profiles-001.md | indexed supporting material | fd5cba044c4dfe897bcf924eab407b4915723a2a1cf2684fb1fb8035c44bd9cb |
+| etc/research/proposal-unified-host-mutation-capability-profiles-001.md | indexed supporting material | 0da401b2a605b40d6b71adb2c5e240fce73ddf5570a1f20af30c880d369ad42e |
 | etc/research/proposal-wow16-guest-host-composition-001.md | indexed supporting material | c49eb4a04b73f9ebb4471aa45208fb11e8289fb6ce30a03b2afeaf24a43d03d3 |
 | etc/research/r20-cmd-setinfo-contract.md | indexed supporting material | b27620060f0efa8504b80f8237ed66da58a4b302e2d34ec26d92eaec5a75b235 |
 | etc/research/r20-dem-getdpblist-boundary.md | indexed supporting material | 095a4aee41c09d1d95ef69d93926d841feaaac890e52544c509d4cdc24582809 |
@@ -639,7 +639,7 @@ content-divergent entries.
 | etc/research/t200-s29-excluded-drive-owner-map-001.md | indexed supporting material | cf76b9807e5e00e871d363114890cfeabe3f1df207f2a653031a2fbdbbd48411 |
 | etc/research/t200-s2-command-cmdinfo-native-frontier-diagnosis-001.md | indexed supporting material | c95451303bb329dafb9751ac2946e6a2ef4df551f26f71e4b78937b515bde848 |
 | etc/research/t200-s30-real-host-capability-source-abi-map-001.md | indexed supporting material | 7e3e7c59e70c490e4e39ca8cb5d12ed6d05a00258eb64c43740be7e8aa97ef77 |
-| etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md | indexed supporting material | e94912a15f932d766f386686e7d6a702937bcabeec46d11c66244ab060ab8bda |
+| etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md | indexed supporting material | b9640587e3ca9ee1d23b064e94494670a92e0042628853bc1fb22709b339f6bf |
 | etc/research/t200-s3-command-cmdinfo-observation-fixture-001.md | indexed supporting material | 03f56909a31a2e66f0cc70d5fc3c45710b4b31f6cb40d6cd4759fd5fbcf01f5d |
 | etc/research/t200-s4-command-cmdinfo-native-observation-001.md | indexed supporting material | 9a8a014afde187eb5060d38ec06a008daa0165bf6c00482b3f930f52cd59c028 |
 | etc/research/t200-s5-command-return-next-lifecycle-001.md | indexed supporting material | 9c2cb0576745e1d92b805b4a8d98c47e63ed6c95debb54c90b94f5292d847a54 |
@@ -1085,6 +1085,7 @@ content-divergent entries.
 | history/m0-t199-s47-closure-20260814.md | closed task history | 77081c304af18cf56ec8994e94b783a6c3ded3e8ec8bad33a88d8f313584eb48 |
 | history/m0-t199-s48-closure-20260814.md | closed task history | 8c2ced18c8cc7cc67f91ee0e260641fb3c30eaa174ae20d3d38928641b4d2f20 |
 | history/m0-t199-s49-closure-20260814.md | closed task history | d0ae28de296807804b0ce6616e82f0cae1d6a048c885c6211b208f29c70e3903 |
+| history/m0-t200-closure-20260814.md | closed task history | 99814d93cf9f744b83b529f17cb7f7d28a2560fd418e1d0c440563648c617fd2 |
 | history/m0-t200-s10-closure-20260814.md | closed task history | b92bb4cf72c0395dc527724dec1a87c9322d321b6511bbd052575e6d22cb73a9 |
 | history/m0-t200-s11-closure-20260814.md | closed task history | f1d8f4629fb54af447ccb74c8f56e83a0638bc6b8430ae36c1cd88f2bbf3f652 |
 | history/m0-t200-s12-closure-20260814.md | closed task history | cb54983ac25a4e3472e4f09b6f007220dda0b6d5c065213d50c5da02210595ec |
@@ -1269,7 +1270,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | 93a263d3aa4763d56f28078585a1a12f4ffff831020c2ba428dfb3b36cf16c6d |
-| QUEUE.md | principal control document | 516e43d2a0640d57ccd3ee8a73f29807438d5a2deeb8b9b5110421c412dae7e0 |
+| QUEUE.md | principal control document | c31ee51fe9b43a516c0e03a70fdcdf375b895d57b83d55a38ffb3e2e332b30fe |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | fef23048d411b355f5c2e08b971fec6370359120e7d9c7da383cb883f1dfa2da |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | dd298ea27d815fb69cc843ecf334a2664ba740bb6ede8e0c90907d918c64086a |
@@ -1395,7 +1396,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | bd27106a0119b1fb56930c4d77ff6153618ac9390794dd7ae8092010bc126ce1 |
+| STATUS.md | principal control document | 3e3b1b4cd8ca0f16e27cae6240a158f7753b65853bf0ae687093bf75890fc857 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |

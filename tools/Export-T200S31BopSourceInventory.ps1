@@ -162,6 +162,50 @@ function Get-ProfileRelation([string]$selector, $service) {
     return 'default CLI profile or owning package admission required'
 }
 
+function Get-MutationClass([string]$selector, $service) {
+    $number = if ($null -eq $service) { -1 } else { [int]$service }
+    switch ($selector) {
+        '50' {
+            if ($number -in @(33, 41, 42)) { return 'device/raw-media state' }
+            if ($number -in @(21, 22, 23, 24, 25, 26, 27, 28, 29, 37, 45, 46, 65, 70)) { return 'session context' }
+            if ($number -in @(30, 35)) { return 'host-global state' }
+            if ($number -in @(71, 72)) { return 'IPC/network state' }
+            if ($number -in @(1, 8, 39, 50, 51, 63)) { return 'file metadata' }
+            return 'namespace/content'
+        }
+        '54' { return 'session context' }
+        '57' { return 'IPC/network state' }
+        '5C' { return 'device/raw-media state' }
+        '5D' { return 'device/raw-media state' }
+        'FD' { return 'device/raw-media state' }
+        default { return 'none/mechanical' }
+    }
+}
+
+function Get-ProfileDisposition([string]$selector, $service) {
+    $number = if ($null -eq $service) { -1 } else { [int]$service }
+    switch ($selector) {
+        '50' {
+            if ($number -in @(31, 36, 38, 40, 43, 64, 67)) { return 'not profile-controlled: original no-op' }
+            if ($number -in @(33, 41, 42)) { return 'deferred: opt-in device/raw-media profile' }
+            return 'shared mutation profile: direct/readonly/overlay/virtual'
+        }
+        '54' {
+            if ($number -in @(8, 10)) { return 'deferred: explicit host-launch/session profile' }
+            return 'shared mutation profile: direct/readonly/overlay/virtual'
+        }
+        '57' { return 'deferred: opt-in network/IPC profile' }
+        '51' { return 'deferred: complete WOW profile' }
+        '52' { return 'deferred: machine/XMS profile' }
+        '53' { return 'deferred: protected-mode/DPMI profile' }
+        '56' { return 'deferred: opt-in debugger profile' }
+        '5C' { return 'deferred: machine/device profile' }
+        '5D' { return 'deferred: machine/device profile' }
+        'FD' { return 'deferred: machine/device profile' }
+        default { return 'deferred: engine or machine owner admission' }
+    }
+}
+
 function Get-WorkaroundAction([string]$selector, $service) {
     $number = if ($null -eq $service) { -1 } else { [int]$service }
     switch ($selector) {
@@ -252,9 +296,11 @@ $seeded = foreach ($entry in $ordered) {
         currentIngressState = Get-CurrentIngressState $entry.selector $entry.service
         currentCompositionState = Get-CurrentCompositionState $entry.selector $entry.service
         targetDisposition = Get-TargetDisposition $entry.selector $entry.service
+        mutationClass = Get-MutationClass $entry.selector $entry.service
+        profileDisposition = Get-ProfileDisposition $entry.selector $entry.service
         profileRelation = Get-ProfileRelation $entry.selector $entry.service
         workaroundAction = Get-WorkaroundAction $entry.selector $entry.service
-        auditState = 'source identity and owner assigned; ABI/failure/API review pending'
+        auditState = 'T200 admission audit complete; detailed provider ABI/failure recovery belongs to the owner package'
     }
 }
 $duplicates = @($seeded | Group-Object {
@@ -266,6 +312,8 @@ if ($duplicates.Count -ne 0) {
 foreach ($entry in $seeded) {
     if ([string]::IsNullOrWhiteSpace($entry.ownerPackage) -or
         [string]::IsNullOrWhiteSpace($entry.targetDisposition) -or
+        [string]::IsNullOrWhiteSpace($entry.mutationClass) -or
+        [string]::IsNullOrWhiteSpace($entry.profileDisposition) -or
         [string]::IsNullOrWhiteSpace($entry.profileRelation) -or
         [string]::IsNullOrWhiteSpace($entry.workaroundAction) -or
         $entry.targetDisposition -eq 'unclassified' -or

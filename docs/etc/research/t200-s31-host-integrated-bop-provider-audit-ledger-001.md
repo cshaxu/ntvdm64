@@ -2,9 +2,10 @@
 
 ## Status and decision rule
 
-This is the admission ledger for the queue-head **Host-integrated OpenNT BOP
-capability recovery** package.  It is an audit, not an implementation
-backlog and not a trace-derived handler list.
+This is the T200 closure ledger and admission evidence for the next
+**Unified host mutation capability profiles** package, followed by
+Host-integrated OpenNT BOP capability recovery. It is an audit, not an
+implementation backlog and not a trace-derived handler list.
 
 `non-invasive` means unpack-and-run without rebuilding/modifying Windows,
 installing drivers/services/VDDs, or installation-style Registry mutation. It
@@ -13,8 +14,8 @@ permissions.  Therefore the target default is **direct host integration**;
 `readonly`, `volatile-overlay`, and `virtual boot-volume` are explicit storage
 profiles, not reasons to make direct host behavior unavailable by default.
 
-Each endpoint will receive exactly one owner package and one implementation
-disposition:
+Each endpoint receives exactly one owner package, mutation class, profile
+disposition, target implementation disposition, and workaround action:
 
 | Disposition | Meaning |
 | --- | --- |
@@ -39,14 +40,14 @@ the audit continues with the next owner package.
 
 | Selector/family | Original dispatcher/source | Callable range evidenced by current ingress | Current package boundary | Audit state |
 | --- | --- | --- | --- | --- |
-| `50:00..48` DEM | `base/mvdm/dos/dem/demdisp.c` | 73 services | DEM namespace, FCB, GSET, raw-media, misc, error/lock | in progress |
-| `51` WOW | `nt_bop.c:MS_bop_1`, WOW DLL composition | selector-only ingress | WOW host composition | pending; not a DOS direct-host substitute |
-| `52:00..0B` XMS | `base/mvdm/xms.486/xmsdisp.c` | 12 services | XMS/A20/allocator/UMB/INT15 | pending |
-| `53:00..18` DPMI | `base/mvdm/dpmi32/*` dispatcher family | 25 services | protected mode/LDT/exception/memory | pending |
-| `54:00..10` COMMAND | `base/mvdm/dos/command/cmddisp.c` | 17 services | bootstrap/launch/console/environment/lifecycle | in progress |
-| `56` debugger | `nt_bop.c` and debugger owners | selector-only ingress | debugger package | pending |
-| `57:00..31` redirector | `vdmredir.h`/redirector owners | 50 services | redirector package | pending |
-| top level (`12,15,59,5A..5F,FD,FE`) | `bop.h`, `nt_bop.c`, machine sources | selector-only ingress | machine/top-level package | pending |
+| `50:00..48` DEM | `base/mvdm/dos/dem/demdisp.c` | 73 services | DEM namespace, FCB, GSET, raw-media, misc, error/lock | closed at owner/mutation/profile/action admission level |
+| `51` WOW | `nt_bop.c:MS_bop_1`, WOW DLL composition | selector-only ingress | WOW host composition | closed as deferred; not a DOS direct-host substitute |
+| `52:00..0B` XMS | `base/mvdm/xms.486/xmsdisp.c` | 12 services | XMS/A20/allocator/UMB/INT15 | closed as deferred machine/XMS package |
+| `53:00..18` DPMI | `base/mvdm/dpmi32/*` dispatcher family | 25 services | protected mode/LDT/exception/memory | closed as deferred protected-mode package |
+| `54:00..10` COMMAND | `base/mvdm/dos/command/cmddisp.c` | 17 services | bootstrap/launch/console/environment/lifecycle | closed at owner/mutation/profile/action admission level |
+| `56` debugger | `nt_bop.c` and debugger owners | selector-only ingress | debugger package | closed as deferred debug profile |
+| `57:00..31` redirector | `vdmredir.h`/redirector owners | 50 services | redirector package | closed as deferred network/IPC profile |
+| top level (`12,15,59,5A..5F,FD,FE`) | `bop.h`, `nt_bop.c`, machine sources | selector-only ingress | machine/top-level package | closed as deferred machine/engine ownership |
 
 The `bx_ntvdm_bop_catalog_v1` maximums are inventory bounds only.  They do
 not prove a provider, ownership, or compatibility result.
@@ -119,13 +120,14 @@ The candidate T must use the proposal's package order, not BOP trace order:
 The r10 artifact has one mechanically generated row for every one of those
 203 endpoints, with original handler/source, exactly one owner package, the
 current ingress state, and the actual bound-composition state derived from
-the façade/session routes. It also assigns exactly one **target disposition**
-and profile relation to every row, plus one explicit **workaround action**:
+the façade/session routes. It also assigns exactly one **mutation class**,
+**profile disposition**, **target disposition**, and profile relation to every
+row, plus one explicit **workaround action**:
 retain an intentional source-equivalent no-op or unavailable fence, migrate
 the route into its owner package, replace a placeholder with an admitted
 composition, or delete/migrate a redundant unbound route. These are admission
-decisions for the next owner packages, not implementation claims: all rows remain marked
-`ABI/failure/API review pending` until their package supplies those fields.
+decisions for the next owner packages, not implementation claims. Detailed
+provider ABI/failure recovery is deliberately deferred to the owner package.
 A mapped/deferred route is not a provider and the generated owner is a
 coverage guard, not a compatibility claim. The human ledger expands each
 row's caller, layout, host API, failure path, current bx-vdm code and final
@@ -469,7 +471,8 @@ not a fourth-byte ingress protocol.
 The current typed stop is a safe non-debug profile result for selector `56`.
 It neither consumes an invented service byte nor constitutes debugger support.
 
-This table completes the first-pass family coverage.  It does not close the
-per-service audit: the next revisions expand DEM/COMMAND/XMS/DPMI/REDIR rows
-to ABI and failure-field level, then reconcile each current provider and
-workaround with a concrete retain/migrate/replace/delete action.
+This table closes T200's first-pass admission audit. It does not close a BOP
+provider or authorize further S31 endpoint implementation. The next task,
+T201, owns the shared profile ABI, owner enforcement, overlay lifecycle and
+direct/readonly/overlay tests; only after that task closes may a separate
+owner-package recovery task expand provider ABI and failure behavior.
