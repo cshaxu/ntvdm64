@@ -110,6 +110,14 @@ int main(void)
         bx_ntvdm_dem_whole_provider_v1_complete_gather(&provider, 0x12u,
             &boundary, &cpu, &action, input, sizeof(input), output,
             &output_bytes) != 0)) failed = 30;
+    if (!failed && (!bx_ntvdm_dem_whole_provider_v1_prepare_gather(&provider,
+            0x09u, &boundary, &cpu, &range, 1u, &action) ||
+        !bx_ntvdm_dem_whole_provider_v1_cancel_gather(&provider, 0x09u,
+            &boundary, &cpu, &action) ||
+        !bx_ntvdm_dem_whole_provider_v1_prepare_gather(&provider, 0x09u,
+            &boundary, &cpu, &range, 1u, &action) ||
+        !bx_ntvdm_dem_whole_provider_v1_cancel_gather(&provider, 0x09u,
+            &boundary, &cpu, &action))) failed = 31;
     if (!failed) {
         file = CreateFileW(temporary, GENERIC_READ | GENERIC_WRITE,
             FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, 0,

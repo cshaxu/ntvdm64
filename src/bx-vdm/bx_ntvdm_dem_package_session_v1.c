@@ -3,6 +3,7 @@
 #include "bx_ntvdm_dem_cli_unavailable_provider_v1.h"
 #include "bx_ntvdm_dem_readonly_namespace_failure_provider_v1.h"
 #include "bx_ntvdm_dem_fcb_provider_v1.h"
+#include "bx_ntvdm_dem_search_partition_v1.h"
 #include "bx_ntvdm_dem_dpb_service.h"
 #include "bx_ntvdm_dem_full_dpb_service_v1.h"
 #include "bx_ntvdm_dem_computer_name_service_v1.h"
@@ -36,10 +37,36 @@ static int write_tx(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_multi_writ
   bx_ntvdm_mechanical_action_v1_clear(&a);a.action_id=id;a.kind=BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;a.range_count=t->writes.write_count;a.payload_bytes=(uint32_t)t->writes.payload_bytes;
   for(i=0;i<a.range_count;i++){a.ranges[i].physical_address=t->writes.writes[i].guest_physical_address;a.ranges[i].byte_count=(uint32_t)t->writes.writes[i].byte_count;a.ranges[i].payload_offset=(uint32_t)t->writes.writes[i].payload_offset;}
   memcpy(a.payload,payload,a.payload_bytes);return bx_ntvdm_mechanical_action_v1_valid(&a)&&bx_ntvdm_mantle_execute_mechanical_action_v1(&a); }
+static int gather_read(bx_ntvdm_dem_package_session_v1 *s,
+ const bx_ntvdm_guest_gather_read_action_v1 *g,struct bx_ntvdm_mechanical_action_v1 *a)
+{ uint32_t i,id,offset=0u;
+  if(!s||!g||!a||g->disposition!=BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_NEED_READ||
+    !bx_ntvdm_guest_gather_read_action_v1_valid(g)||g->range_count>BX_NTVDM_MECHANICAL_ACTION_V1_MAX_RANGES||
+    g->total_bytes>BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES||!s->namespace_plane->next_action_id)return 0;
+  id=s->namespace_plane->next_action_id++;if(!s->namespace_plane->next_action_id)s->namespace_plane->next_action_id=1u;
+  bx_ntvdm_mechanical_action_v1_clear(a);a->action_id=id;a->kind=BX_NTVDM_MECHANICAL_ACTION_V1_READ;a->range_count=g->range_count;a->payload_bytes=g->total_bytes;
+  for(i=0;i<g->range_count;i++){if(g->ranges[i].length>UINT32_MAX||offset>a->payload_bytes-(uint32_t)g->ranges[i].length)return 0;
+    a->ranges[i].physical_address=g->ranges[i].address;a->ranges[i].byte_count=(uint32_t)g->ranges[i].length;a->ranges[i].payload_offset=offset;offset+=a->ranges[i].byte_count;}
+  return offset==a->payload_bytes&&bx_ntvdm_mechanical_action_v1_valid(a); }
+static int search_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service,
+ const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
+ const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
+{ bx_ntvdm_guest_gather_read_action_v1 gather;struct bx_ntvdm_mechanical_action_v1 read;
+  bx_ntvdm_multi_write_transaction_v1 tx;uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];uint32_t used=0u;
+  if(!s||!e||!c||!w||!r||!s->has_whole_provider||!s->namespace_plane->has_dta||
+    !bx_ntvdm_dem_search_partition_v1_prepare(&s->whole_provider,&s->namespace_plane->dta,
+      service,e,c,w,&gather))return 0;
+  if(!gather_read(s,&gather,&read)||!action(&read)){bx_ntvdm_dem_whole_provider_v1_cancel_gather(
+      &s->whole_provider,service,e,c,&gather);return 0;}
+  if(!bx_ntvdm_dem_search_partition_v1_complete(&s->whole_provider,service,e,c,&gather,
+      read.payload,read.payload_bytes,&tx,payload,&used)||!write_tx(s,&tx,payload))return 0;
+  *r=tx.result;return bx_ntvdm_cpu_result_v2_valid(r); }
 int bx_ntvdm_dem_package_session_v1_valid(const bx_ntvdm_dem_package_session_v1 *s)
-{ return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_mutation_profile<=1u&&s->has_boot_drive<=1u&&(!s->has_boot_drive||s->boot_drive_index<26u)&&(!s->has_mutation_profile|| (bx_ntvdm_dem_profile_consumer_v1_valid(&s->mutation_profile)&&bx_ntvdm_dem_cwd_context_v1_valid(&s->cwd))); }
+{ return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_mutation_profile<=1u&&s->has_whole_provider<=1u&&s->has_boot_drive<=1u&&(!s->has_boot_drive||s->boot_drive_index<26u)&&(!s->has_mutation_profile|| (bx_ntvdm_dem_profile_consumer_v1_valid(&s->mutation_profile)&&bx_ntvdm_dem_cwd_context_v1_valid(&s->cwd)))&&(!s->has_whole_provider||bx_ntvdm_dem_whole_provider_v1_valid(&s->whole_provider)); }
 int bx_ntvdm_dem_package_session_v1_initialize(bx_ntvdm_dem_package_session_v1 *s,bx_ntvdm_boot_namespace_plane_v1 *p)
 { if(!s||!p)return 0;memset(s,0,sizeof(*s));s->magic=BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC;s->abi_version=BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION;s->struct_bytes=(uint32_t)sizeof(*s);s->namespace_plane=p;bx_ntvdm_dem_error_lock_plane_v1_clear(&s->error_lock);bx_ntvdm_dem_gset_plane_v1_clear(&s->gset);s->initialized=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
+void bx_ntvdm_dem_package_session_v1_teardown(bx_ntvdm_dem_package_session_v1 *s)
+{ if(!s)return;if(s->has_whole_provider)bx_ntvdm_dem_whole_provider_v1_teardown(&s->whole_provider);memset(s,0,sizeof(*s)); }
 int bx_ntvdm_dem_package_session_v1_set_drive_snapshot(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_host_drive_snapshot_v1 *v)
 { return bx_ntvdm_dem_package_session_v1_valid(s)&&bx_ntvdm_dem_gset_plane_v1_set_drive_snapshot(&s->gset,v)&&bx_ntvdm_boot_namespace_plane_v1_set_drive_snapshot(s->namespace_plane,v); }
 int bx_ntvdm_dem_package_session_v1_set_volume_snapshot(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_host_volume_snapshot_v1 *v)
@@ -49,10 +76,13 @@ int bx_ntvdm_dem_package_session_v1_set_mutation_profile(bx_ntvdm_dem_package_se
 int bx_ntvdm_dem_package_session_v1_set_host_namespace(
     bx_ntvdm_dem_package_session_v1 *s,
     const bx_ntvdm_host_namespace_v1 *host_namespace)
-{ return bx_ntvdm_dem_package_session_v1_valid(s)&&s->has_mutation_profile&&
-    host_namespace&&bx_ntvdm_host_namespace_v1_valid(host_namespace)&&
-    bx_ntvdm_boot_namespace_plane_v1_set_dem_cwd_context(s->namespace_plane,
-        &s->cwd,host_namespace); }
+{ if(!bx_ntvdm_dem_package_session_v1_valid(s)||!s->has_mutation_profile||
+    s->has_whole_provider||!host_namespace||!bx_ntvdm_host_namespace_v1_valid(host_namespace)||
+    !bx_ntvdm_dem_whole_provider_v1_initialize(&s->whole_provider,
+      &s->mutation_profile.profile,host_namespace,&s->cwd))return 0;
+  if(!bx_ntvdm_boot_namespace_plane_v1_set_dem_cwd_context(s->namespace_plane,
+      &s->cwd,host_namespace)){bx_ntvdm_dem_whole_provider_v1_teardown(&s->whole_provider);return 0;}
+  s->has_whole_provider=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
 int bx_ntvdm_dem_package_session_v1_set_boot_drive(
     bx_ntvdm_dem_package_session_v1 *s, uint32_t drive)
 { if(!bx_ntvdm_dem_package_session_v1_valid(s)||s->has_boot_drive||drive>=26u||
@@ -81,6 +111,12 @@ int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,
   if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_boot_drive_service_v2_dispatch(&s->gset.drive_snapshot,s->has_boot_drive?s->boot_drive_index:UINT32_MAX,e,c,w,&mem))return memory_result(&mem,r);
   if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_dpb_service_v1_prepare(s->gset.drive_snapshot.types,e,c,w,&tx,payload)){if(!write_tx(s,&tx,payload))return 0;*r=tx.result;return terminal_or_complete(i,p,&route,e,c,w,r);}
   if(bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
+  /* All four demsrch forms migrate together.  Once the package owns a real
+   * host namespace, a failed direct-provider precondition is a DEM refusal,
+   * never a fallback to the boot snapshot search plane. */
+  if(bx_ntvdm_dem_search_partition_v1_owns_service(i->service)&&s->has_whole_provider)
+    return search_dispatch(s,i->service,e,c,w,r) ? 1 :
+      bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,&route,e,c,w,r);
   /* A selected DEM provider may reject a mode/precondition.  The package
    * owns that refusal: preserve a typed pass-through instead of leaking the
    * request to a second detached recognizer. */

@@ -146,3 +146,19 @@ int bx_ntvdm_dem_whole_provider_v1_complete_gather(
     if (provider != 0 && provider->pending_action_id != 0u) clear_pending(provider);
     return accepted;
 }
+
+int bx_ntvdm_dem_whole_provider_v1_cancel_gather(
+    bx_ntvdm_dem_whole_provider_v1 *provider, uint8_t service,
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_guest_gather_read_action_v1 *action)
+{
+    if (!bx_ntvdm_dem_whole_provider_v1_valid(provider) || boundary == 0 ||
+        cpu_before == 0 || action == 0 || provider->pending_action_id == 0u ||
+        provider->pending_service != service || memcmp(&provider->pending_boundary,
+            boundary, sizeof(*boundary)) != 0 || memcmp(&provider->pending_cpu,
+            cpu_before, sizeof(*cpu_before)) != 0 || memcmp(&provider->pending_gather,
+            action, sizeof(*action)) != 0) return 0;
+    clear_pending(provider);
+    return 1;
+}

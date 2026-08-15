@@ -49,6 +49,7 @@ void bx_ntvdm_composition_runtime_v1_reset(void)
         bx_ntvdm_search_transaction_v1_release(
             &runtime.composition.plane.provider.search_transaction);
     }
+    bx_ntvdm_dem_package_session_v1_teardown(&runtime.composition.dem);
     bx_ntvdm_host_namespace_v1_release(&runtime.host_namespace);
     byob_image_release(&runtime.ntio);
     byob_image_release(&runtime.ntdos);

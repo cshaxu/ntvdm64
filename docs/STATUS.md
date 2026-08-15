@@ -174,6 +174,17 @@
 > enumeration, and continuation results; BOP ingress and native trace remain
 > deliberately unconnected.
 
+> **T202 S4 progress:** the DEM package session now constructs and tears down
+> that provider with its admitted host namespace, and its four-service route
+> is selected together ahead of the legacy boot snapshot. The retained r2
+> composition closure passes under MSVC x64 `/MT`; a host-installed route
+> regression is still required before asserting behavioral migration.
+
+> **T202 S4 progress:** r28 adds exact-continuation cancellation for a
+> declined mechanical search gather, with a provider regression proving that a
+> later gather remains admissible. This is failure-lifecycle protection, not a
+> host-installed route completion.
+
 > **T202 S4 progress:** the existing session-owned `demsrch.c` search
 > transaction now admits a root-relative direct-host first-search backend and
 > remains source-built in the retained x64 closure. Dedicated direct-host

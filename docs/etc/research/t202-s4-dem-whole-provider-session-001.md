@@ -143,3 +143,25 @@ with the other DEM partitions.  Neither fixture performs BOP ingress routing,
 live Bochs memory access, or a native trace; those are separate package-level
 steps after the remaining partition regressions and atomic legacy-route
 migration.
+
+The first route-composition increment retains the existing GSET-owned DTA
+registration but creates the DEM whole provider only when the package session
+receives its admitted host namespace.  In that installed state, all four
+search identities are selected together before the legacy boot-plane fallback;
+an unavailable provider precondition is routed to DEM's explicit unavailable
+form rather than back to the boot snapshot.  The package teardown now releases
+the whole provider before the host namespace is released, including failed
+runtime installation cleanup.
+
+`t202-s4-search-route-closure-r2` builds and runs the retained MSVC x64 `/MT`
+boot-namespace composition fixture after adding the provider and partition to
+its exact source closure.  This is compilation and lifecycle evidence only:
+that retained fixture deliberately does not install an admitted host namespace,
+so a separate host-installed route regression remains required before claiming
+the direct search BOP route migrated.
+
+Revision r28 additionally proves the provider's exact-continuation cancellation
+path.  If a typed mechanical read cannot run, the route cancels only the
+matching service/event/CPU/gather record; the fixture then successfully opens
+and cancels a new gather.  Thus a mantle transport refusal cannot leave stale
+search state that blocks a later BOP.

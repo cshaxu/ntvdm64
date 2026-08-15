@@ -7,6 +7,7 @@
 #include "bx_ntvdm_dem_package_facade_v1.h"
 #include "bx_ntvdm_dem_profile_consumer_v1.h"
 #include "bx_ntvdm_dem_cwd_context_v1.h"
+#include "bx_ntvdm_dem_whole_provider_v1.h"
 
 #define BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC 0x42584453u
 #define BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION 1u
@@ -21,7 +22,8 @@ typedef struct bx_ntvdm_dem_package_session_v1 {
     bx_ntvdm_dem_gset_plane_v1 gset;
     bx_ntvdm_dem_profile_consumer_v1 mutation_profile;
     bx_ntvdm_dem_cwd_context_v1 cwd;
-    uint32_t has_mutation_profile;
+    bx_ntvdm_dem_whole_provider_v1 whole_provider;
+    uint32_t has_mutation_profile, has_whole_provider;
     uint32_t boot_drive_index;
     uint32_t has_boot_drive;
 } bx_ntvdm_dem_package_session_v1;
@@ -34,6 +36,8 @@ int bx_ntvdm_dem_package_session_v1_initialize(
     bx_ntvdm_boot_namespace_plane_v1 *namespace_plane);
 int bx_ntvdm_dem_package_session_v1_valid(
     const bx_ntvdm_dem_package_session_v1 *session);
+void bx_ntvdm_dem_package_session_v1_teardown(
+    bx_ntvdm_dem_package_session_v1 *session);
 int bx_ntvdm_dem_package_session_v1_set_drive_snapshot(
     bx_ntvdm_dem_package_session_v1 *session,
     const bx_ntvdm_host_drive_snapshot_v1 *snapshot);

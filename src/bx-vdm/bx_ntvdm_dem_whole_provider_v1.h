@@ -65,6 +65,14 @@ int bx_ntvdm_dem_whole_provider_v1_complete_gather(
     const uint8_t *bytes, uint32_t byte_count,
     uint8_t copied_bytes[BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_MAX_TOTAL_BYTES],
     uint32_t *copied_byte_count);
+/* A mechanical read may be declined before it produces copied bytes.  Cancel
+ * only the exact provider-owned continuation so a failed transport cannot
+ * leave a stale guest operation blocking a later BOP. */
+int bx_ntvdm_dem_whole_provider_v1_cancel_gather(
+    bx_ntvdm_dem_whole_provider_v1 *provider, uint8_t service,
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_guest_gather_read_action_v1 *action);
 
 #ifdef __cplusplus
 }
