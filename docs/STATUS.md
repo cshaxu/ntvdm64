@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T202 S4.** Its governing brief is the active
+> **Current effective packet: M0 T202 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T202 S4 -- DEM file/handle/FCB/search whole-provider recovery.**
+**Active: M0 T202 S5 -- COMMAND host-capability whole-package admission audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T202 S4, Ordinary Mode. |
-| Admission And Approval | S3 is closed by its [admission closure](etc/research/t202-s3-dem-file-handle-fcb-search-admission-closure-001.md). Owner-approved T202 package order now admits one source-derived provider for its complete 29-identity DEM file/handle/FCB/search work set. |
-| Objective | Replace the admitted boot/readonly/FCB/search endpoint leaves with one DEM-owned source-derived provider: session-owned opaque file/search tokens; bounded pathname, buffer, DTA and SRCHBUF transactions; direct/readonly/overlay capability selection; original result/failure forms; and explicit Redirector deferral for `50:47/48`. |
-| Non-goals | No individual trace-selected BOP patch; no COMMAND/Redirector/XMS/DPMI recovery; no raw-device/absolute-media package; no virtual boot-volume; no host installation/rebuild; no Bochs semantic change; no raw host handle/pointer transport; and no native trace before the whole package regression passes. |
-| Reference Baseline | [T202 S3 closure](etc/research/t202-s3-dem-file-handle-fcb-search-admission-closure-001.md), [S3 source/ABI map](etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md), T202 S2 closure, `demfile.c`, `demhndl.c`, `demfcb.c`, `demsrch.c`, `dosdef.h`, `demerror.c`, and existing bx-vdm fixture/failure leaves. |
-| Files And ABI Surface | New or replacement DEM package-session/provider units, versioned fixed-width token/result records, checked guest gather/write actions, source-derived host namespace calls, package tests and evidence. No host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
+| Identifier Mode | M0 T202 S5, Ordinary Mode. |
+| Admission And Approval | T202's owner-package order admits COMMAND only for a complete source/ABI/mutation-capability audit after [S4 closure](history/m0-t202-s4-closure-20260815.md). Owner direction permits ordinary user-mode host integration but forbids host installation or system modification. |
+| Objective | Produce one auditable map for all callable `54:00..10` services: original owner, ABI, host mutation class, direct/readonly/overlay/virtual/deferred disposition, Win32/NT capability dependency, source-shaped failure and whole-provider implementation order. |
+| Non-goals | No individual trace-selected BOP patch; no COMMAND provider implementation yet; no new native trace; no Redirector/XMS/DPMI/WOW recovery; no host state change; no host installation/rebuild; no Bochs semantic change; and no raw host handle/pointer transport. |
+| Reference Baseline | [S4 closure](history/m0-t202-s4-closure-20260815.md), [S5 admission plan](etc/operations/t202-s5-command-host-capability-admission-plan-001.md), `cmddisp.c`, COMMAND service modules, `nt_bop.c`, and retained T199 COMMAND evidence. |
+| Files And ABI Surface | One source/ABI/mutation map, provider disposition ledger, implementation/regression proposal and Status evidence only. No runtime ABI or provider route changes in S5. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-built MSVC x64 `/MT` direct/readonly/overlay package regression covers all 29 identities and their failure branches; negative tests prove no host-handle/pointer exposure, stale search continuation, unadmitted drive escape, readonly mutation, or fake pipe success; dispatcher inventory, documentation governance and diff checks pass. |
-| Expected Markers | One non-overlapping DEM provider owns all local file/handle/FCB/search identities; direct/readonly/overlay behavior is selected by the shared profile; legacy fixture/failure leaves are removed or isolated from product composition; `47/48` remain explicit Redirector deferred results. |
+| Verification | Every callable service has an original-source and caller/ABI citation; every host capability has an ordinary-API availability or recorded limitation; package-wide mutation/profile matrix and implementation order are reviewed; documentation governance and diff checks pass. |
+| Expected Markers | No service lacks an owner/disposition; unavailable Win32/NT dependencies are auditable rather than silently contained; no per-endpoint implementation or trace-driven backlog is created. |
 | Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
-| Reporting Requirements | Record provider provenance, all 29 outcomes, source-shaped limitation/failure behavior, profile matrix, displaced workaround action and source-built test result; do not claim full DEM, Redirector or native guest closure. |
-| Stop Conditions | Any fallback to trace-selected work, an endpoint-only implementation, implicit synthetic host C:, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, hidden VDMREDIR substitute, or unadmitted hard-error mechanism pauses S4 for re-admission. |
-| Exit Criteria | A reviewer can link every S3 identity to the single provider or explicit `47/48` Redirector defer outcome; all direct/readonly/overlay and boundary-negative package regressions pass; old product-facing endpoint leaves are displaced; and source/evidence records state the remaining hard-error and virtual-volume limitations. |
+| Reporting Requirements | Record original provider provenance, complete service outcomes, API availability and missing-dependency evidence, profile matrix, workaround retain/migrate/replace/delete action, and proposed whole-package regression; do not claim COMMAND or native guest closure. |
+| Stop Conditions | Any fallback to trace-selected work, endpoint-only implementation, implicit synthetic host C:, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, hidden VDMREDIR substitute, or unadmitted host mutation pauses S5 for re-admission. |
+| Exit Criteria | A reviewer can trace every callable COMMAND service to original owner/ABI, profile disposition and a whole-provider implementation or source-shaped unavailable path; all ordinary API uncertainties are recorded; and the next implementation S has one package-level regression design. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect `readonly_namespace`, boot namespace/provider/plane, profile search/session, FCB providers, direct host namespace, error-lock plane, and all DEM file/handle/search terminal routes for duplicate owner, raw-handle, synthetic-root, stale continuation, or endpoint-only behavior. |
+| Similar-Issue Sweep | Inspect all COMMAND dispatch modules, existing copied command session/launch/config/console providers, CLI host context, VDD/GUI/process dependencies, and the global BOP registry for duplicate owner, raw-handle, synthetic host state, or endpoint-only behavior. |
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
