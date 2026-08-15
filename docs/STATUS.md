@@ -11,24 +11,20 @@
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
 > [history](history/m0-t206-closure-20260815.md). **T205 closed:** its current-profile XMS boundary is recorded in
 > [history](history/m0-t205-closure-20260815.md). The table below is the sole
-> active packet.
+> active packet pending its sequential closure delivery.
 
 ## Active Packet
 
 > **T scope:** T212 adds CLI-owned lifecycle governance around the existing
-> one-shot engine. S1 mapped current engine/CLI result, cancellation, budget,
-> audit and cleanup ownership; S2 closed the copied CLI-only policy and
-> result-classification boundary. S3 integrated that already-closed boundary
-> into the native CLI without changing engine behavior. S4 admitted the one
-> selector-blind cooperative-cancellation boundary; S5 closed its mechanical
-> mantle/engine portion. S6 closed CLI-owned event/worker lifetime. S7
-> reconciles the lifecycle ledger and records the remaining explicit deferrals
-> before T212 closure.
+> one-shot engine. S1--S6 closed copied policy/presentation, cancellation
+> admission, the selector-blind producer and the CLI event/worker consumer.
+> S7 has completed its read-only convergence ledger and awaits its sequential
+> documentation delivery; it introduces no behavior.
 
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T212 S7, Ordinary Mode. |
-| Admission And Approval | T212 S1--S6 have closed the copied lifecycle classifier, native presentation, cancellation admission, mechanical/engine producer, and CLI event/worker consumer. S7 is documentation-only convergence over those records. |
+| Admission And Approval | T212 S1--S6 closed the copied lifecycle classifier, native presentation, cancellation admission, mechanical/engine producer, and CLI event/worker consumer. S7 is documentation-only convergence over those records. |
 | Objective | Reconcile all T212 lifecycle producers, presentation classes, cleanup owners and explicit deferrals into a closure ledger; decide whether T212 can close without a guest-normal-completion claim. |
 | Non-goals | No mantle/Bochs/core/BOP/OpenNT/CLI behavior change, no host handle across the engine API, no guest cancellation semantics, no normal-completion claim, no wall-time/resource policy and no durable audit I/O. |
 | Reference Baseline | T212 S1--S6 closures, including the S6 event/worker result-copy record. |
@@ -39,7 +35,7 @@
 | Asset Needs | Existing T212 evidence only; no firmware/media/device import, native trace, build or runtime action. |
 | Reporting Requirements | Record current terminal/presentation matrix, cleanup and handle ownership, deferred capability class, and the task-closure decision. |
 | Stop Conditions | Any mismatch requiring behavior change, an unclassified terminal, a raw host object across engine ABI, or a claim of guest completion pauses S7 for separate admission. |
-| Exit Criteria | One evidence ledger gives a complete, non-overclaiming T212 lifecycle disposition and supports either task closure or an explicitly scoped successor S. |
+| Exit Criteria | One evidence ledger gives a complete, non-overclaiming T212 lifecycle disposition and supports task closure. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, retained child cancellation, finite fixture timers, terminal observations, composition reset and T203/T206/T207 evidence. |
 
