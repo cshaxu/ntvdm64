@@ -21,18 +21,18 @@
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T204 S5, Ordinary Mode. |
-| Admission And Approval | T204 S4's [contained provider core](etc/research/t204-s4-contained-configuration-provider-core-001.md), S3 source contract and the owner's whole-package authorization admit paired image/path/context integration. |
-| Objective | Integrate one ready contained configuration provider with one provider-owned namespace/image state and the paired COMMAND CONFIG/AUTOEXEC path/context consumers, replacing default synthetic boot-file dependency as one package. |
-| Non-goals | No host source acquisition, PIF, file/Registry/device operation, temporary file, CLI option, Bochs change, native trace, `5E` UMB/DASD action, third-party console support, host-system modification or per-endpoint provider. |
-| Reference Baseline | T204 S1--S4, current `boot_namespace_provider`, `command_boot_input`, `cmd_boot_file_service`, COMMAND package session and checked guest transaction ABI. |
-| Files And ABI Surface | `src/bx-vdm` startup configuration/namespace, paired COMMAND boot-file/context composition and focused MSVC x64 `/MT` package tests. No bx-core/bx-mantle/OpenNT source, CLI parser, raw handle, host pointer or Bochs interface may change. |
+| Admission And Approval | T204 S4's [contained provider core](etc/research/t204-s4-contained-configuration-provider-core-001.md), S5 P1 integration, S3 source contract, and the owner's standing whole-package authorization re-admit one explicit, normal-user-mode configuration-source input path. |
+| Objective | Integrate one ready contained configuration provider with one provider-owned namespace/image state and paired COMMAND CONFIG/AUTOEXEC path/context consumers, replacing default synthetic boot-file dependency through one explicit CLI-to-adapter copied source path. |
+| Non-goals | No PIF, host temporary-file creation, source-file mutation, Registry/device operation, ambient configuration/environment read at BOP time, Bochs change, native trace, `5E` UMB/DASD action, third-party console support, host-system modification or per-endpoint provider. |
+| Reference Baseline | T204 S1--S4, S5 P1, current CLI child environment, adapter installation, `boot_namespace_provider`, `command_boot_input`, `cmd_boot_file_service`, COMMAND package session and checked guest transaction ABI. |
+| Files And ABI Surface | `src/cli` paired option/admission and child-only environment; `src/bx-vdm` installation-time bounded read/copy, startup configuration/namespace, paired COMMAND boot-file/context composition and focused MSVC x64 `/MT` package tests. No bx-core/bx-mantle/OpenNT source, raw handle, host pointer or Bochs interface may change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused x64 `/MT` whole-package positive/negative regression: provider image/path/context lifetime, paired `54:0C/0D` preparation, stale/invalid provider rejection and no synthetic default image; governance and diff checks. |
-| Expected Markers | One provider owns both images/paths and merge lifetime; both CONFIG/AUTOEXEC consumers cannot bypass readiness; no duplicate namespace/image state; typed failure remains fatal fence. |
-| Asset Needs | Existing repository source and T204 S4 fixture only; no external source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record exact replaced workaround boundaries, consumer dependencies, copied/lifetime contract, test command/result and deferred `5E`/console/host acquisition. |
-| Stop Conditions | A one-off trace-selected service, guest-image addition, host temporary/source-file action, CLI option, third-party console behavior, `5E` action, Bochs change or native trace pauses S5 for re-admission. |
-| Exit Criteria | The default startup configuration route has one ready-provider image/path/context source rather than fixed boot bytes; paired consumer regression passes without claiming native startup or `5E` closure. |
+| Verification | Focused CLI/admission and x64 `/MT` whole-package positive/negative regression: paired source option, child-only propagation, bounded copied read, provider image/path/context lifetime, paired `54:0C/0D` preparation, stale/invalid provider rejection and no synthetic default image; governance and diff checks. |
+| Expected Markers | Exactly paired input sources; one provider owns both images/paths and merge lifetime; both CONFIG/AUTOEXEC consumers cannot bypass readiness; no duplicate namespace/image state; source failures are installation rejection or typed fatal fence. |
+| Asset Needs | Existing repository source and local owner-supplied configuration test files only; no external source, firmware, guest media or host mutation. |
+| Reporting Requirements | Record option grammar, safe path/read limits, copied/lifetime contract, normal Win32 API permission facts, exact replaced workaround boundary, test command/result and deferred `5E`/console. |
+| Stop Conditions | A one-off trace-selected service, source mutation, temporary file, ambient BOP-time source read, third-party console behavior, `5E` action, Bochs change or native trace pauses S5 for re-admission. |
+| Exit Criteria | The default startup configuration route has one explicitly admitted ready-provider image/path/context source rather than fixed boot bytes; paired CLI/adapter/consumer regression passes without claiming native startup or `5E` closure. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Inspect NTIO/NTDOS/COMMAND startup handoffs; BOP `5E`, DEM `50:3D`, configuration/boot-input records, profile descriptors, guest-memory loading, terminal/engine seams, and current boot/readonly/virtual profile workarounds. |
 
