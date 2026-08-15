@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1526 |
 | --- | --- |
-| Generated UTC | 2026-08-15T19:04:35Z |
+| Generated UTC | 2026-08-15T19:11:12Z |
 
 ## Entries
 
@@ -104,7 +104,7 @@ content-divergent entries.
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
-| etc/operations/policy/source-policy.md | indexed supporting material | 7426bd00aa433780054bb69c9999c025cb3d2f638918140bb64bef58bcd54289 |
+| etc/operations/policy/source-policy.md | indexed supporting material | 975baa0c066a65b04b6ec317ae6065d70b13643a4c50ada5fadd1c7466f3b4a4 |
 | etc/operations/t188-bop-ingress-composition-plan.md | indexed supporting material | 76e13591247ef15c3c3999216011ffee2799de1b5e7fb1ccac98f053ed8c2402 |
 | etc/operations/t199-s37-dem-package-completion-proposal-001.md | indexed supporting material | d8bf32ab641bb0148d37c6da42db51bdf834c960bf00b53bbfdf692a21caba05 |
 | etc/operations/t202-s4-dem-fcb-wildcard-provider-plan-001.md | indexed supporting material | c7a025a850246501fec1b88ae7c8deaa8553c83d0f11889b4ae56e86f84ee618 |
@@ -1512,8 +1512,8 @@ content-divergent entries.
 | research/softpc-source-matrix/NT4-V86-PRODUCT-ORACLE-AUDIT.md | retained pre-governance evidence | 0cc622520f5e900d78a3f6ff1f425c4a3cfda670e29a66f89d221ccdbcb4d893 |
 | RESET-TRACE-STATUS.md | retained pre-governance evidence | dd0ce777cf9399cf4438ddf618a720b33e4ca2d5e21df66b16a8aeeb9eae55bb |
 | ROI-DRIVEN-EXECUTION-ROADMAP.md | retained pre-governance evidence | 89fe2b2d62f7f3e46bd183e7cb7ee0a637ecfe68d41450cfe0383ae3bfbfa660 |
-| rules/ARCHITECTURE.md | current rule authority | 7dba6eb31a9a94f03a5d8ffa3a9b542cfa20dc642a27731d1b198e510422421a |
-| rules/CODING.md | current rule authority | 4d9ae9c4a20a53ff3878b77626be12fddd50ee7bc6ff78e2ee8e2548563832d5 |
+| rules/ARCHITECTURE.md | current rule authority | c783b02011047e6cb0227f05e55ec73905fe0780c605e712dc11d7420e61711e |
+| rules/CODING.md | current rule authority | 890b70a4bfe4e3613b11d931e530731b44ff9c89f66763e6729d954a2bca141e |
 | rules/DOCUMENT.md | current rule authority | 9f55864347f265afe78af803a67df10bfa20fb273fca6594803c8e64c4a4cbda |
 | rules/EXECUTION.md | current rule authority | f2427e351db0f4230a577f6752bc4e13979fc5ab18d52fc42dc62e2c6a3db227 |
 | S1-HISTORICAL-HOST-CLOSURE.md | retained pre-governance evidence | 0796b7bf5f0a780fbd7a989938474045ed2d3aa2a6b68b8697605393bd2e1bb8 |
@@ -1540,7 +1540,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ecb18c89f6de59a95c0fd3c9afbaf4314a6a65fb19a913787370ae8e8cc2b6d7 |
+| STATUS.md | principal control document | 9e51c3d2786e063d74d3b163035aa022d08b046cb4207fe24cbafff9ea4c2fbc |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |

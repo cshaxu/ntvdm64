@@ -6,7 +6,9 @@
   smallest adapter, compatibility seam, wrapper translation unit, or build
   shim which preserves that source contract; (3) a registered intrusion into
   adopted external code; (4) newly authored behavior only if no usable source
-  remains. Do not select a later rung for convenience, a trace hit, or a
+  remains. This is a required implementation order: do not recast an available
+  original routine as new code merely because a local transcription is easier.
+  Do not select a later rung for convenience, a trace hit, a modern API, or a
   temporary capacity limit. Name the owner/source/dependencies and account for
   layout, ordering, and failure behavior at every rejected rung.
 - Keep authored runner code, overlays, host seams, imported material, generated

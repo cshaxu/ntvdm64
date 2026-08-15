@@ -15,7 +15,10 @@ alternatives, and validation. The mandatory recovery ladder is: reuse
 independently composable OpenNT source; reuse it through the smallest adapter,
 compatibility seam or build shim; use a registered exceptional intrusion into
 adopted external code only when essential mechanics cannot otherwise cross the
-boundary; and author new behavior only when no usable source remains. A
+boundary; and author new behavior only when no usable source remains. The
+record must demonstrate the preceding rung was attempted or name its specific
+unavailable dependency; a trace hit, a convenient Win32 API, a temporary
+buffer limit, or an easier rewrite is not such a demonstration. A
 source-derived rehost belongs to the adapter/shim step, not to free-standing
 new behavior: it must identify the original owner, source path, retained
 layout/order/failure rules and the reason the original translation unit cannot

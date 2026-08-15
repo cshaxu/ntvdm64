@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S8.** Its governing brief is the active
+> **Current effective packet: M0 T217 S9.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S8 -- OpenNT COMMAND initial-environment semantic repair.**
+**Active: M0 T217 S9 -- guest SYSINIT command-name realization map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -30,19 +30,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S8, Ordinary Mode. |
-| Admission And Approval | Owner explicitly requires source reuse as the first recovery rung, then the smallest adapter/shim, exceptional external intrusion, and only lastly newly authored behavior; and requires the COMMAND environment issue be repaired by that rule. This supersedes S7's evidence-only admission; S7 mapping is paused, not closed. |
-| Objective | Bring the existing source-derived initial COMMAND environment seam into the actually observable `cmdGetInitEnvironment` filtering/order contract, remove any remaining synthetic semantic restriction, and record the complete recovery-ladder disposition. |
-| Non-goals | No raw pathname trace, BOP/provider rewrite beyond the existing initial-environment seam, DOS EXEC emulation, host mutation, profile expansion, Bochs/mantle change, guest binary patch, AUTOEXEC merge, or COMMAND-run claim. |
-| Reference Baseline | T217 S1/S2 source-reuse audit, OpenNT `cmdenv.c`/`cmddata.c`/`cmdmisc.c`, existing x64 `/MT` seam and test; S7 SYSINIT map remains a separate paused evidence subject. |
-| Files And ABI Surface | `src/bx-vdm/bx_ntvdm_command_initial_environment_v1.*`, copied host-context validation only if source semantics require it, focused test/tool/evidence/Status and governance rules. No BOP ABI, Bochs ABI, or profile change. |
+| Identifier Mode | M0 T217 S9, Ordinary Mode. |
+| Admission And Approval | S8 is committed and pushed; the owner-approved T217 continuation resumes the paused SYSINIT command-name realization map. S6 proves the normal Open reaches admitted C: with a live declared namespace but a non-declared identity. |
+| Objective | Map OpenNT `commnd`/SYSINIT command-name source, source-built NTDOS layout/relocation and current startup materialization to determine why the guest presents a non-declared C:-root identity to the otherwise correct DEM provider. |
+| Non-goals | No raw pathname trace, BOP/provider rewrite, DOS EXEC emulation, host mutation, profile expansion, Bochs/mantle change, guest binary patch, or COMMAND-run claim. |
+| Reference Baseline | T217 S3–S6 evidence; OpenNT `sysinit1.asm`, `sysinit2.asm`, DOS build/link sources and NTDOS generated-image provenance; current startup plan/materialization and declared-image sources. S8 resolves initial-environment semantics but is not the normal-Open identity repair. |
+| Files And ABI Surface | Evidence and Status only unless the source map establishes a bounded existing build/materialization seam. No runtime ABI or behavior change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source line review for order/prefix/duplicate/malformed-entry behavior; fresh focused x64 `/MT` source build and run; recovery-ladder evidence; governance and diff checks. |
-| Expected Markers | Original source remains non-composable, the smallest seam precisely carries its retained transform contract, and no 4,023-byte or other synthetic capacity policy remains. |
-| Asset Needs | Existing OpenNT source and current bx-vdm source/tests/tool; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record each recovery rung, original owner/source lines, preserved and deliberately excluded behavior, test limits, and the paused S7 disposition. |
-| Stop Conditions | Any need for a new BOP/service, guest runtime semantics beyond the existing initial-environment seam, host mutation, guest binary patch, profile expansion, or Bochs/mantle change pauses S8 for re-admission. |
-| Exit Criteria | The seam and validation admit all source-permitted retained entries, preserve original filtering/order behavior, reject only the documented 16-bit publication bound, and focused source-built regression plus governance checks pass. |
+| Verification | Map source symbol/data contract, emitted artifact provenance/layout/relocation and startup materialization handoff; classify direct evidence versus inference; record all recovery rungs. Governance and diff checks pass. |
+| Expected Markers | A source-backed decision between an existing guest build/materialization repair and a further bounded evidence step; no host/provider workaround. |
+| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
+| Reporting Requirements | Record source symbol/data owner, artifact provenance/layout/relocation, materialization handoff, confidence and repair disposition; distinguish direct evidence from inference. |
+| Stop Conditions | Any runtime behavior change, raw pathname trace, BOP/provider change, host mutation, guest binary patch, profile expansion, or Bochs/mantle change pauses S9 for re-admission. |
+| Exit Criteria | The guest command-name realization chain has a recovery-ladder disposition and selects a bounded build/materialization repair or further evidence step. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
