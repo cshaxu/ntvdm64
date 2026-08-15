@@ -40,12 +40,12 @@
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
 > target is `54:0B`; see the [selector source map](etc/research/t203-s1-command-terminal-selector-source-map-001.md).
 
-> **T203 S1 observation:** a fresh source-built MSVC x64 `/MT` CPU5 run
-> compiled and linked successfully but remained at the DEM frontier (first
-> canonical `50:11`, run exit `2`); it did not reach `54:0B`.  Although the
-> engine contract reserves `ORDINARY_GUEST_COMPLETION`, current engine code
-> cannot produce it.  No terminal-result ABI is admitted; see the
-> [observation](etc/research/t203-s1-normal-terminal-observation-001.md).
+> **T203 S1 observation correction:** the fresh MSVC x64 `/MT` source build
+> compiled and linked, but its run exit `2` is the inherited fixture's failed
+> generic-UD diagnostic assertion—not valid evidence that `54:0B` was or was
+> not reached. The engine still has no implementation that produces
+> `ORDINARY_GUEST_COMPLETION`; no terminal-result ABI is admitted. See the
+> [validity correction](etc/research/t203-s1-normal-terminal-observation-validity-correction-001.md).
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
