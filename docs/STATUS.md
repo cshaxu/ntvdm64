@@ -217,6 +217,12 @@
 > `54:xx` identity was reached.  This is negative reach evidence only and
 > creates no endpoint task; see the [native observation](etc/research/t202-s6-command-native-integration-observation-001.md).
 
+> **T202 S6 package ledger:** all 17 `54:00..10` identities now have one
+> COMMAND-session owner and one implemented or source-shaped deferred result.
+> The remaining child re-entry, Redirector pipe and interactive VDD/KEYB
+> boundaries are explicit package limitations, not unowned BOPs; see the
+> [closure ledger](etc/research/t202-s6-command-package-closure-ledger-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

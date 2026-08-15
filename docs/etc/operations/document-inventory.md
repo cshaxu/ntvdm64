@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1424 |
+| Documentation records | 1425 |
 | --- | --- |
-| Generated UTC | 2026-08-15T09:54:06Z |
+| Generated UTC | 2026-08-15T09:55:16Z |
 
 ## Entries
 
@@ -677,6 +677,7 @@ content-divergent entries.
 | etc/research/t202-s6-command-execution-lifecycle-001.md | indexed supporting material | 17865298f1b4ab282b21d80ccf9586508de19bc25e3f795920df252bdcea2d30 |
 | etc/research/t202-s6-command-host-context-001.md | indexed supporting material | ccfd909b21016b2037ca5a1a8a0051d721af6e3a34a88b2ab7643387d3d41138 |
 | etc/research/t202-s6-command-native-integration-observation-001.md | indexed supporting material | 5362703fd528920c9a88108bfbb6511537105e1f1fa1604b69e12d1d6f03b061 |
+| etc/research/t202-s6-command-package-closure-ledger-001.md | indexed supporting material | 6f57f8568650c86eca731637afe69f0899242b7129e78a7d4ea4b6aedb5e5c1b |
 | etc/research/t202-s6-command-processor-context-001.md | indexed supporting material | 8c15d04a87ae09c63ba4641e2c305fb9bda9f07f41d31cca601839b35b1db34e |
 | etc/research/t202-s6-command-stream-gather-001.md | indexed supporting material | d409e4e8edcfa56616a7b56b2ba45b3254dde4c2f5cb6609dfd27259c2561e85 |
 | etc/research/t202-s6-command-stream-token-001.md | indexed supporting material | 3c5c9a679b52abcb675239f8921f91347031dd9aa3bf5092cfe2683ffde25c89 |
@@ -1438,7 +1439,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | f3a4229329f996a709670d055409e9d0e901c090ac43ac34914d00b6cbe6cc91 |
+| STATUS.md | principal control document | 9458385edc8e4745237bf7890430d9af5c9cfa2283a3c9fa48ad2af3927cea7d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |
