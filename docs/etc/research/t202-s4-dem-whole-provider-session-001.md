@@ -280,3 +280,10 @@ ceiling: exactly two OpenNT `MAX_PATH` (260-byte) records for `demRename`, not
 an unbounded memory-read capability. The r1 MSVC x64 `/MT` provider fixture
 proves the `01` DS:DX shape and exact continuation. There is intentionally no
 package-session route or native trace evidence yet.
+
+Revision r38 expands the r1 pathname fixture to the complete nine-service
+address matrix: every DS:DX/DS:SI service, plus `17`'s ES:DI second record.
+It verifies exact range count/address, cancellation of each exact pending
+gather, the 520-byte rename shape, and rejection/cleanup when a copied path
+has no NUL. This is transaction-boundary evidence only; it does not test or
+authorize an ingress switch.

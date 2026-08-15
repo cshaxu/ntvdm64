@@ -253,6 +253,11 @@
 > preparation for one final pathname package switch—not an individual BOP
 > route or native trace.
 
+> **T202 S4 progress:** r38 expands that transaction's source-built matrix to
+> all nine pathname identities, including `17`'s two-record shape and a
+> no-NUL cleanup refusal. It is still provider-internal transaction evidence,
+> not partial pathname routing or a package-switch claim.
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

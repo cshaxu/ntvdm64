@@ -407,6 +407,41 @@ int main(void)
         }
     }
     if (!failed) {
+        static const uint8_t services[] = { 0x01u, 0x03u, 0x04u, 0x05u,
+            0x06u, 0x12u, 0x17u, 0x22u, 0x44u };
+        uint32_t index;
+        for (index = 0u; index < sizeof(services); ++index) {
+            uint8_t bop[4] = { 0xc4u, 0xc4u, 0x50u, services[index] };
+            uint64_t first = (services[index] == 0x03u || services[index] == 0x12u ||
+                services[index] == 0x22u || services[index] == 0x44u) ? 0x230u : 0x220u;
+            bx_ntvdm_instruction_window_v1_capture(&window, bop, sizeof(bop));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0x20u; cpu.es = 0x30u; cpu.edx = 0x20u; cpu.esi = 0x30u; cpu.edi = 0x40u;
+            if (!bx_ntvdm_dem_namespace_route_partition_v1_prepare(&provider, services[index],
+                    &boundary, &cpu, &window, &fcb_action) ||
+                fcb_action.range_count != (services[index] == 0x17u ? 2u : 1u) ||
+                fcb_action.ranges[0].physical_address != first ||
+                (services[index] == 0x17u &&
+                    fcb_action.ranges[1].physical_address != 0x340u) ||
+                !bx_ntvdm_dem_whole_provider_v1_cancel_gather(&provider, services[index],
+                    &boundary, &cpu, &provider.pending_gather)) { failed = 483; break; }
+        }
+    }
+    if (!failed) {
+        const uint8_t namespace_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x03u };
+        bx_ntvdm_instruction_window_v1_capture(&window, namespace_bop, sizeof(namespace_bop));
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ds = 0x20u; cpu.esi = 0x30u;
+        if (!bx_ntvdm_dem_namespace_route_partition_v1_prepare(&provider, 0x03u,
+                &boundary, &cpu, &window, &fcb_action)) failed = 484;
+        else {
+            memset(fcb_action.payload, 'x', fcb_action.payload_bytes);
+            if (bx_ntvdm_dem_namespace_route_partition_v1_complete(&provider, 0x03u,
+                    &boundary, &cpu, &fcb_action, &result) ||
+                provider.pending_action_id != 0u) failed = 485;
+        }
+    }
+    if (!failed) {
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
         if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
                 0x31u, &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
