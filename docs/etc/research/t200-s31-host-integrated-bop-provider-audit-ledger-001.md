@@ -358,6 +358,23 @@ with per-service trace fixes.
 | `FE` unsimulate | `TerminateVDM` | source-derived engine terminal | retain/migrate only after fixed-width DOS terminal-result transport is designed. |
 | `12`, `15` memory selectors | historical machine/BIOS handlers | bx-core/bx-mantle mechanical owner with typed bx-vdm request | keep selector blind Bochs rule; no OpenNT/BOP terms enter Bochs. |
 
+### Debugger mode partition (`56`, stack-resident `00..0F`)
+
+`56` is a three-byte BOP.  Its fourth byte belongs to the following guest
+instruction; the debugger mode and arguments are read from the guest stack by
+`DBGDispatch`.  The 16 modes in `dbgsvc.h` are therefore inventory identities,
+not a fourth-byte ingress protocol.
+
+| Modes | Original role | Current / future disposition |
+| --- | --- | --- |
+| `00..04` | segment/module load, move, free | deferred debugger package; requires debug event and guest address/frame ABI. |
+| `05..09` | single-step, breakpoint, GP/divide/instruction faults | deferred; CPU exception ownership stays bx-core/bx-mantle and only a copied debug event could cross bx-vdm. |
+| `0A..0D` | task and DLL start/stop notifications | deferred debugger profile; no GUI/debugger activation in default CLI profile. |
+| `0E,0F` | attach and ToolHelp | deferred; historical debugger/UI composition is absent. |
+
+The current typed stop is a safe non-debug profile result for selector `56`.
+It neither consumes an invented service byte nor constitutes debugger support.
+
 This table completes the first-pass family coverage.  It does not close the
 per-service audit: the next revisions expand DEM/COMMAND/XMS/DPMI/REDIR rows
 to ABI and failure-field level, then reconcile each current provider and
