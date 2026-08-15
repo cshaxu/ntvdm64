@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T204 S3.** Its governing brief is the active
+> **Current effective packet: M0 T204 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T204 S3 -- configuration transform/provider source contract.**
+**Active: M0 T204 S4 -- contained configuration-provider core.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -15,24 +15,24 @@
 
 > **T scope:** T204 establishes the whole declared guest startup configuration
 > package before any startup BOP, guest artifact or machine expansion is
-> changed.  S3 recovers the whole transform/provider source contract before
-> any guest-facing provider is changed.
+> changed.  S4 implements the source-derived transform/image core before any
+> guest-facing provider is changed.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T204 S3, Ordinary Mode. |
-| Admission And Approval | T204 S1's complete startup map, S2's [copied policy ABI](etc/research/t204-s2-startup-configuration-policy-abi-001.md), and the owner's standing whole-package authorization admit source/ABI/failure recovery of the configuration transformation/provider contract. |
-| Objective | Produce the complete original `cmdconf.c` / configuration-provider source, ABI, failure and lifetime map, then define one contained provider design that consumes S2 without changing the bound guest route. |
-| Non-goals | No BOP implementation, guest-memory write, provider activation, file/Registry/device operation, temporary-file creation, host-system modification, synthetic content change, CLI option, Bochs change, profile parser change, raw pointer/handle/callback ABI or native trace. |
-| Reference Baseline | T204 S1 startup map, T204 S2 policy ABI, original `cmdconf.c`, `nt_pif.c`, COMMAND source and current fixture-only boot namespace. |
-| Files And ABI Surface | Research/evidence record and Status only. No bx-vdm/bx-mantle/bx-core/CLI/OpenNT source or guest artifact may change in S3. |
+| Identifier Mode | M0 T204 S4, Ordinary Mode. |
+| Admission And Approval | T204 S3's [complete transform/provider contract](etc/research/t204-s3-configuration-transform-provider-source-contract-001.md), the T204 S2 copied policy ABI and the owner's standing whole-package authorization admit the source-derived contained transform/image core. |
+| Objective | Implement and test one session-owned `bx-vdm` configuration transform/image provider that accepts copied inputs/facts, preserves admitted `cmdconf.c` CONFIG/AUTOEXEC behavior, and reports typed provider failure without BOP, host or guest action. |
+| Non-goals | No host source acquisition, PIF, file/Registry/device operation, temporary file, BOP dispatch, guest-memory write, current boot-namespace replacement, COMMAND binding, `5E` action, CLI option, Bochs change, native trace or host-system modification. |
+| Reference Baseline | T204 S1 map, T204 S2 policy ABI, T204 S3 contract, T201 mutation profiles and original `cmdconf.c`/`cmdenv.c`. |
+| Files And ABI Surface | New same-island fixed-width copied provider/input/image headers and implementation under `src/bx-vdm`, plus a focused MSVC x64 `/MT` test. The core exposes no host handle, path pointer, Bochs object, BOP selector or guest address. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI/failure/lifetime cardinality review against original owner code, reconciliation against S1/S2 and present workarounds, documentation governance and diff checks. |
-| Expected Markers | One mapped disposition for source selection, expansion/filtering, environment merge, path publication, cleanup, diagnostics and all original failures; one provider-owned copied data/lifetime design; no unclassified current workaround. |
+| Verification | Focused x64 `/MT` transform/image positive/negative regression; source review for no host/guest/BOP/Bochs dependency; documentation governance and diff checks. |
+| Expected Markers | Fixed copied input and output, policy authorization, CONFIG filter/append rules, AUTOEXEC image plus merge tuples, bounded failure/clear state and session teardown. |
 | Asset Needs | Existing repository source only; no external source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record exact original structures and ordering, host API availability/permission facts, non-invasive replacement boundary, provider state ownership, required later regressions and explicit omissions. |
-| Stop Conditions | Any code/provider activation, BOP patch, guest image or RAM change, temporary/host file action, CLI option, Bochs expansion or trace run pauses S3 for re-admission. |
-| Exit Criteria | A subsequent implementation S can recover one complete contained provider without inventing a per-BOP route, recreating system temporary files or using ambient host state. |
+| Reporting Requirements | Record copied bounds, original-source mapping, all provider outcomes, test command/result, unsupported source/console disposition and explicit absence of external I/O. |
+| Stop Conditions | Any BOP binding, guest-RAM change, CLI source acquisition, host temporary/source-file operation, external asset, Bochs change or trace pauses S4 for re-admission. |
+| Exit Criteria | A single provider core implements all mapped transform/image/merge behavior with no per-endpoint path and is ready for a later paired COMMAND/namespace integration S. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Inspect NTIO/NTDOS/COMMAND startup handoffs; BOP `5E`, DEM `50:3D`, configuration/boot-input records, profile descriptors, guest-memory loading, terminal/engine seams, and current boot/readonly/virtual profile workarounds. |
 
@@ -45,6 +45,11 @@
 > **T204 S2 closure:** one fixed-width copied configuration-source policy now
 > takes its mode only through the common COMMAND session-context registration;
 > it performs no host or guest action.  See the [ABI evidence](etc/research/t204-s2-startup-configuration-policy-abi-001.md).
+
+> **T204 S3 closure:** original selection, transform, merge, publication,
+> cleanup and fatal contracts now map to one session-owned contained provider;
+> normal user-mode APIs are available but temporary-file composition is
+> deliberately rejected.  See the [source contract](etc/research/t204-s3-configuration-transform-provider-source-contract-001.md).
 
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
