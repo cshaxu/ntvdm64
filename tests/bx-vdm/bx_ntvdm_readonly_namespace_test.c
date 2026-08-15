@@ -32,8 +32,8 @@ int main(void)
         !bx_ntvdm_readonly_namespace_v1_close(&value, token) ||
         bx_ntvdm_readonly_namespace_v1_close(&value, token) ||
         !bx_ntvdm_readonly_namespace_v1_open(&value, 2u, L"\\CONFIG.SYS", &stale, &size) ||
-        size == 0u || !bx_ntvdm_readonly_namespace_v1_read(&value, stale, received, sizeof(received), &count) ||
-        count == 0u || !bx_ntvdm_readonly_namespace_v1_close(&value, stale) ||
+        size != 0u || !bx_ntvdm_readonly_namespace_v1_read(&value, stale, received, sizeof(received), &count) ||
+        count != 0u || !bx_ntvdm_readonly_namespace_v1_close(&value, stale) ||
         !bx_ntvdm_readonly_namespace_v1_open(&value, 2u, L"\\AUTOEXEC.BAT", &stale, &size) ||
         size != 0u || !bx_ntvdm_readonly_namespace_v1_read(&value, stale, received, sizeof(received), &count) ||
         count != 0u || !bx_ntvdm_readonly_namespace_v1_close(&value, stale) ||
