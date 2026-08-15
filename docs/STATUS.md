@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T210 S1.** Its governing brief is the active
+> **Current effective packet: M0 T210 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T210 S1 -- CLI host-context owner-package map.**
+**Active: M0 T210 S2 -- CLI host-context provider design and regression admission.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -16,30 +16,34 @@
 ## Active Packet
 
 > **T scope:** T210 recovers the host-context owner package as one unit. S1
-> maps OpenNT current-directory/drive/environment callers, Win32 availability,
-> copied ABI and failure paths before any service implementation.
+> closed the source/ABI/profile map; S2 designs its shared provider and full
+> owner-package regression before implementation.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T210 S1, Ordinary Mode. |
-| Admission And Approval | T209 removes construction failure; the fresh complete DEM fixture now reaches the existing `demSetDefaultDrive` / synthetic-CWD assertion (`197`). This selects the complete host-context package, not that endpoint alone. |
-| Objective | Produce one source/ABI/failure/capability map for the complete selected-drive, current-directory and environment host-context package, including direct/readonly/overlay/virtual profiles and existing synthetic workaround action. |
-| Non-goals | No single-service patch, trace-led implementation, host mutation, engine lifecycle change, Bochs change, host handle leakage or ambient process-context access. |
-| Reference Baseline | T200 all-BOP owner ledger, T201 profile foundation, T202 DEM namespace evidence, T209 closure, original OpenNT DEM/COMMAND host-context owners. |
-| Files And ABI Surface | Read-only source/ABI/capability audit in S1. No product ABI change. |
+| Identifier Mode | M0 T210 S2, Ordinary Mode. |
+| Admission And Approval | [S1 map](etc/research/t210-s1-host-context-owner-package-map-001.md) proves all required host APIs remain available to a normal CLI process and places `13/18/1A` plus COMMAND consumers under one session host-context owner. |
+| Objective | Define the shared provider state, Win32 capability seam, profile enforcement, copied ABI and full DEM/COMMAND regression plan for selected-drive/CWD/environment recovery. |
+| Non-goals | No individual BOP implementation, trace-led work, ambient host-state access, host installation/mutation, Bochs change, host handle leakage or engine lifecycle change. |
+| Reference Baseline | T200/T201 authorities, T202 DEM evidence, T209 closure, T210 S1 map and original DEM/COMMAND context owners. |
+| Files And ABI Surface | Design/evidence only in S2; no product ABI change until an S3 implementation packet. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Complete source/owner table, actual Win32 availability/permission register, current route/workaround disposition, profile matrix, and one package-level S2 proposal; governance and diff checks. |
-| Expected Markers | Every host-context identity has a single owner, mutation class and direct/readonly/overlay/virtual disposition; no trace endpoint selects work. |
+| Verification | One provider design identifies fixed state ownership, all gathers/writes, Win32 calls, profile decisions, error mapping, migration/deletion actions and whole-family regression; governance and diff checks. |
+| Expected Markers | One session provider owns host context; DEM and COMMAND only consume it; no trace endpoint selects work. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record sources/hashes, API availability/permission evidence, complete state/profile table, workaround retain/migrate/replace/delete action and package S2 proposal. |
-| Stop Conditions | Any implementation before the full map, individual trace-service patch, synthetic CWD success, ambient host-state use, or migration into mantle/core pauses S1 for re-admission. |
-| Exit Criteria | Reviewable complete owner-package map and one bounded implementation/defer plan. |
+| Reporting Requirements | Record state/ABI design, host API/error contract, full regression matrix and S3 implementation admission. |
+| Stop Conditions | Any implementation, individual trace-service patch, synthetic CWD success, ambient host-state use, or migration into mantle/core pauses S2 for re-admission. |
+| Exit Criteria | Reviewable whole-provider design and bounded S3 implementation packet. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | `demdir.c`, `demgset.c`, `cmdmisc.c`, DEM CWD/drive/context providers, host drive policy/namespace, COMMAND context, CLI admission and all selected-drive/current-directory/environment BOP routes. |
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
 > content; see the [closure record](history/m0-t209-closure-20260815.md).
+
+> **T210 S1 closure:** original `50:13/18/1A` and their COMMAND consumers
+> form one host-context package; all required modern Win32 APIs are available
+> to a normal CLI process. See the [owner map](etc/research/t210-s1-host-context-owner-package-map-001.md).
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
