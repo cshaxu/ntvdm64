@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T205 S1.** Its governing brief is the active
+> **Current effective packet: M0 T205 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T205 S1 -- XMS owner-package re-admission and completion plan.**
+**Active: M0 T205 S2 -- XMS block/A20/geometry provider completion.**
 
 > **T204 closed:** its contained startup-configuration boundary is recorded in
 > [history](history/m0-t204-closure-20260815.md). The table below is the sole
@@ -14,30 +14,29 @@
 ## Active Packet
 
 > **T scope:** T205 recovers the complete XMS (`52:00..0B`) owner package by
-> reconciling partial routes against OpenNT source and the bx-core/bx-mantle
-> mechanical boundary before any implementation. S1 produces the complete
-> source/ABI/failure map and whole-package implementation order; it does no
-> endpoint implementation and no native trace.
+> completing the `00..05,0A,0B` A20/block/geometry group before UMB or INT15
+> work. S2 recovers this whole group through one selector-blind mantle request
+> ABI and one copied XMS package session; it does no UMB/INT15 work or trace.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T205 S1, Ordinary Mode. |
-| Admission And Approval | Owner's standing instruction to recover BOPs by complete original owner package; T200 global owner/mutation audit; T199 XMS source/ABI evidence; and source-policy review before OpenNT/Bochs research. |
-| Objective | Produce one current-source XMS `52:00..0B` map that distinguishes completed capabilities, partial routes, required bx-core/bx-mantle mechanics, adapter rehost work, and source-shaped unavailable behavior; then record the ordered whole-package implementation plan. |
-| Non-goals | No trace-selected handler, native trace, UMB fabrication, INT15/PIC/firmware emulation, adapter-owned Bochs allocation/device policy, CCPU/SAS restoration, DPMI implementation, or historical XMS object linkage. |
-| Reference Baseline | T200 ledger; T199 S31/S44 XMS evidence; `xmsdisp.c`, `xmsa20.c`, `xmsblock.c`, `xmsmisc.c`, `xmsumb.c`; current XMS session and mantle A20/extended-memory capabilities. |
-| Files And ABI Surface | S1 is documentation/evidence plus read-only source inspection only. Any later change must use fixed-width bx-mantle mechanics or bx-vdm copied provider records; no raw mapping, host pointer, BOP term in Bochs code, or OpenNT source edit is admitted. |
+| Identifier Mode | M0 T205 S2, Ordinary Mode. |
+| Admission And Approval | T205 S1 [whole-package plan](etc/operations/t205-xms-whole-package-plan-001.md), owner approval for whole owner-package recovery, and the existing selector-blind mantle A20/extended-memory foundations. |
+| Objective | Complete the XMS `00..05,0A,0B` group as one package: source-compatible A20 translation, opaque block lifecycle, copied move request, declared page geometry, capacity and allocator statistics, with uniform register/failure behavior. |
+| Non-goals | No `06..09` UMB/INT15 behavior, native trace, Bochs CPU/device/firmware rewrite, raw guest mapping, host pointer, adapter-owned allocator, CCPU/SAS link, DPMI work, or independent endpoint patch. |
+| Reference Baseline | T205 S1 plan; OpenNT `xmsa20.c`, `xmsblock.c`, `xmsmisc.c`; current XMS session and mantle A20/extended-memory capability contracts. |
+| Files And ABI Surface | `src/bx-mantle` selector-blind fixed-width extended-memory statistics/copy capability only if required; `src/bx-vdm` copied move gather/result and XMS session translation; focused x64 `/MT` tests and supporting evidence. No `src/bx-core` or OpenNT source change unless separately exception-registered and re-admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Re-export the BOP inventory; inspect all 12 original slots and current `52` routes; prove no duplicate allocator/A20/interrupt owner; record one disposition and failure behavior per slot; governance and diff checks. |
-| Expected Markers | One XMS owner-session plan; `52:0C` remains non-callable; every partial/deferred route is retained, migrated, replaced or deleted; UMB and INT15 are explicit machine prerequisites. |
-| Asset Needs | Existing OpenNT and adopted Bochs sources only; no new third-party source, firmware, guest media, host mutation or runtime dependency. |
-| Reporting Requirements | Record pinned source paths/hashes, current-code comparison, mechanical owner, capability gaps, API availability where relevant, failure disposition, planned S order and no-trace limitation. |
-| Stop Conditions | Any need to alter CPU decode, generic memory subsystem, firmware/device semantics, introduce raw guest mappings, or split work into trace-selected services pauses T205 for re-admission. |
-| Exit Criteria | A complete, reviewable XMS package plan establishes the only later implementation order and tests; no partial route is falsely called a complete provider. |
+| Verification | Strict MSVC x64 `/MT /W4 /WX` group regression through common ingress covering all eight slots, move overlap/failure, zero/stale/exhausted allocation, page/capacity/statistics values, A20 query/set, and exact `06..09` deferred boundary; governance and diff checks. |
+| Expected Markers | One mantle memory-capability owner, one XMS session, no host/guest pointer crossing, no ambient host-RAM capacity answer, source-shaped AX/BX/CX/DX/BL outcomes, and no UMB/INT15 side effect. |
+| Asset Needs | Existing source and local build tools only; no new third-party source, firmware, media, host mutation or runtime dependency. |
+| Reporting Requirements | Record ABI records, source register/error map, current partial-route migration, normal API permission facts for page geometry, test commands/results and deferred UMB/INT15. |
+| Stop Conditions | Need for a generic Bochs memory change, interrupt/device/firmware behavior, a raw pointer, an endpoint-only change, or a trace pauses S2 for re-admission. |
+| Exit Criteria | All eight S2 slots share a tested whole-package path; `06..09` retain their explicit deferred results and no partial route remains mislabeled. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect all 12 XMS slots, XMS/DPMI shared C1--C6 capabilities, top-level `5E` UMB notification, INT15/BIOS owner records, mantle exception registry and DPMI dependency direction. |
+| Similar-Issue Sweep | Inspect move source/destination address rules, allocator reserve/query/realloc consistency, A20 state, host page-size semantics, `52:0C` sentinel, DPMI consumers of shared mantle capability and UMB/INT15 exclusions. |
 
-> **T205 S1 progress:** current OpenNT and bx-vdm/mantle sources now map all
+> **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was
 > added; see the [whole-package plan](etc/operations/t205-xms-whole-package-plan-001.md).
