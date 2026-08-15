@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T219 S1.** Its governing brief is the active
+> **Current effective packet: M0 T219 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T219 S1 -- DEM child/PDB lifecycle source and ABI map.**
+**Active: M0 T219 S2 -- PDB-owned DEM resource-session ABI.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -34,21 +34,28 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T219 S1, Ordinary Mode. |
-| Admission And Approval | Owner authorized autonomous package-first progression. T218 closed the `$Exec` prerequisite map and selected this first coherent behavior package: DEM child/PDB lifecycle before a bounded COM-child trace or COMMAND return behavior. |
-| Objective | Produce the complete source/ABI/failure and recovery-ladder map for DEM `50:36` entry and `50:3C` PDB termination, including VDD/no-VDD disposition, direct host handle/search ownership, and the precise seam to the later COMMAND `54:0B` parent return package. |
-| Non-goals | No trace-selected BOP implementation, guest `$Exec` recreation, DOS/BIOS patch, host mutation, profile expansion, Bochs/mantle change, VDD subsystem, COMMAND return implementation, target execution claim, or native trace. |
-| Reference Baseline | T218 prerequisite map; T217 S13/S14 loader-family closure; OpenNT `msproc.asm`, `msctrlc.asm`, `demmisc.c`, `demsrch.c`, `demdisp.c`; current DEM session and host mutation/drive-view records. |
-| Files And ABI Surface | Source/evidence records only; no runtime source change is admitted in S1. |
+| Identifier Mode | M0 T219 S2, Ordinary Mode. |
+| Admission And Approval | T219 S1 established the direct-host child lifetime gap. This S admits the one source-derived DEM resource-session seam required by the original `demTerminatePDB` contract before any COMMAND return or native child trace. |
+| Objective | Add one fixed-width PDB-owned DEM resource-session ABI, migrate direct-host handle/search/pending resource ownership to it, and provide a `50:3C` lifecycle release path that preserves `VOID`/no-delta semantics across direct, readonly, overlay and virtual profiles. |
+| Non-goals | No trace-selected BOP implementation, guest `$Exec` recreation, DOS/BIOS patch, host mutation behavior expansion, Bochs/mantle change, VDD subsystem, COMMAND return implementation, target execution claim, or native trace. |
+| Reference Baseline | T219 S1 lifecycle map; T176 S15--S19 finite-profile lifecycle evidence; OpenNT `msctrlc.asm`, `demsrch.c`, `demmisc.c`; current direct-host DEM file/session and mutation profile source. |
+| Files And ABI Surface | `src/bx-vdm` DEM resource/session and lifecycle sources plus focused `tests/bx-vdm`; no guest, bx-core, bx-mantle or CLI ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every lifecycle effect has its original owner/path, register or guest-memory facts, void/failure rule, current provider/session disposition and recovery-ladder result; governance and diff checks pass. |
-| Expected Markers | One whole DEM lifecycle plan that distinguishes entry notification from PDB teardown and names the exact later COMMAND parent-return handoff, never a leaf handler. |
-| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217/T218 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record source paths, ABI/failure paths, present capability disposition, cleanup ownership and recovery-ladder result; distinguish direct proof from inference. |
-| Stop Conditions | Any selector-specific implementation, native trace, DOS/BIOS patch, host mutation, guest binary patch, profile expansion or Bochs/mantle change pauses S1 for re-admission. |
-| Exit Criteria | A complete whole-DEM child/PDB lifecycle map and package-level implementation/defer plan exist; the COMMAND `54:0B` boundary is specified but not implemented. |
+| Verification | Two-PDB positive release, foreign-PDB preservation, absent-PDB no-op, stale-token refusal, invalid ingress/profile declines, focused direct/readonly/overlay/virtual tests, governance and diff checks pass. |
+| Expected Markers | One common resource owner, copied PDB identity, no raw guest/host pointer ABI, original `50:3C` four-byte no-delta resume, and no profile-specific leaf bypass. |
+| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T219 S1 evidence; no new image, firmware, media or external source import. |
+| Reporting Requirements | Record migrated resource ownership, original source rule, profile results, failure behavior, test commands and limitations. |
+| Stop Conditions | A need for VDD/device cleanup, guest PSP inspection, host-process launch, native trace, guest binary patch, profile expansion or Bochs/mantle change pauses S2 for re-admission. |
+| Exit Criteria | Direct-host and finite DEM resources have one PDB-owned lifecycle owner with focused regressions; no COMMAND return or child-run claim is made. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | First and subsequent child entry, no-VDD and VDD branches, PDB-owned host file/search state, TSR/abort/normal exit, debugger guards, DEM `50:34..3C`, COMMAND `54:0B`, host mutation profiles and current session teardown. |
+
+> **T219 S1 P1 closure:** the old finite-profile `50:3C` provider releases
+> only boot-namespace search slots and cannot clean direct-host handles because
+> their current tokens lack copied PDB ownership. `50:36` remains a no-VDD
+> lifecycle notification, not a loader. S2 must define one PDB-owned DEM
+> resource-session ABI before any COMMAND return or native child trace. See
+> the [lifecycle map](etc/research/t219-s1-dem-child-pdb-lifecycle-map-001.md).
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
