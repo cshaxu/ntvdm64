@@ -11,7 +11,7 @@ int bx_ntvdm_command_launch_execution_provider_v1_valid(
     return value && value->magic == BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_MAGIC &&
         value->abi_version == BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_VERSION &&
         value->struct_bytes == sizeof(*value) && value->initialized == 1u &&
-        bx_ntvdm_command_execution_lifecycle_v1_valid(&value->lifecycle) &&
+        bx_ntvdm_command_execution_lifecycle_v1_valid(&value->execution) &&
         bx_ntvdm_command_stream_child_v1_valid(&value->stream_child);
 }
 int bx_ntvdm_command_launch_execution_provider_v1_initialize(
@@ -22,7 +22,7 @@ int bx_ntvdm_command_launch_execution_provider_v1_initialize(
     value->magic = BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_MAGIC;
     value->abi_version = BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_VERSION;
     value->struct_bytes = (uint32_t)sizeof(*value);
-    bx_ntvdm_command_execution_lifecycle_v1_initialize(&value->lifecycle);
+    bx_ntvdm_command_execution_lifecycle_v1_initialize(&value->execution);
     bx_ntvdm_command_stream_child_v1_initialize(&value->stream_child);
     value->initialized = 1u;
     return bx_ntvdm_command_launch_execution_provider_v1_valid(value);

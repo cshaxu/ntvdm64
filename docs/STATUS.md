@@ -38,6 +38,12 @@
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | `cmdexit.c`, `cmdmisc.c`, `cmddisp.c`, `cmdsvc.h`, COMMAND package session/facade, T203/T206/T207 engine/terminal records and all current `00/03/0B` routes. |
 
+> **T211 S5 P1 progress:** one versioned COMMAND lifecycle provider now owns
+> `54:00/03/0B`; the old detached profile helper and runtime `54:0B` gate are
+> removed.  Component and whole bx-vdm composition MSVC x64 `/MT` regressions
+> pass.  The package-local terminal record remains non-engine/non-CLI evidence;
+> see the [source/ABI map](etc/research/t211-s5-command-lifecycle-source-abi-map-001.md).
+
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
 > content; see the [closure record](history/m0-t209-closure-20260815.md).

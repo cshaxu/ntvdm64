@@ -13,7 +13,7 @@
 
 typedef struct bx_ntvdm_command_launch_execution_provider_v1 {
     uint32_t magic, abi_version, struct_bytes, initialized;
-    bx_ntvdm_command_execution_lifecycle_v1 lifecycle;
+    bx_ntvdm_command_execution_lifecycle_v1 execution;
     bx_ntvdm_command_stream_child_v1 stream_child;
 } bx_ntvdm_command_launch_execution_provider_v1;
 

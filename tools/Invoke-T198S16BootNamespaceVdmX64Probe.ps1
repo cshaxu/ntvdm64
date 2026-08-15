@@ -1,7 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard')]
+    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard', 'command-lifecycle')]
     [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
@@ -43,6 +43,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_command_boot_input_v1.c',
     'src\bx-vdm\bx_ntvdm_command_bootstrap_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_command_launch_execution_provider_v1.c',
+    'src\bx-vdm\bx_ntvdm_command_lifecycle_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_command_execution_lifecycle_v1.c',
     'src\bx-vdm\bx_ntvdm_command_stream_child_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_comspec_bootstrap_service.c',
@@ -52,7 +53,6 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_command_console_capability_v1.c',
     'src\bx-vdm\bx_ntvdm_command_console_keyboard_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_keyboard_layout_service.c',
-    'src\bx-vdm\bx_ntvdm_cmd_cli_profile_service.c',
     'src\bx-vdm\bx_ntvdm_command_profile_consumer_v1.c',
     'src\bx-vdm\bx_ntvdm_cmdinfo_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_set_info_service.c',
@@ -205,6 +205,11 @@ if ($Fixture -eq 'dem-package') {
         'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
         'tests\bx-vdm\bx_ntvdm_command_console_keyboard_provider_v1_test.c'
     )
+} elseif ($Fixture -eq 'command-lifecycle') {
+    $sourceRelatives += @(
+        'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
+        'tests\bx-vdm\bx_ntvdm_command_lifecycle_provider_v1_test.c'
+    )
 } else {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_boot_namespace_composition_v1_test.c'
 }
@@ -293,6 +298,8 @@ $record = [ordered]@{
         'tests/bx-vdm/bx_ntvdm_command_launch_execution_provider_v1_test.c'
     } elseif ($Fixture -eq 'command-console-keyboard') {
         'tests/bx-vdm/bx_ntvdm_command_console_keyboard_provider_v1_test.c'
+    } elseif ($Fixture -eq 'command-lifecycle') {
+        'tests/bx-vdm/bx_ntvdm_command_lifecycle_provider_v1_test.c'
     } else {
         'tests/bx-vdm/bx_ntvdm_boot_namespace_composition_v1_test.c'
     }

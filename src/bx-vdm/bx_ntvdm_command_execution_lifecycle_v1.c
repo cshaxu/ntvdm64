@@ -49,6 +49,8 @@ int bx_ntvdm_command_execution_lifecycle_v1_dispatch(
     bx_ntvdm_cpu_result_v2 *result)
 {
     uint16_t ax;
+    (void)get_next;
+    (void)launch_plan;
     if (!bx_ntvdm_command_execution_lifecycle_v1_valid(value) || result == 0 ||
         !selected(event, cpu, window)) return 0;
     switch (window->bytes[3]) {
@@ -71,17 +73,6 @@ int bx_ntvdm_command_execution_lifecycle_v1_dispatch(
         return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
             bx_ntvdm_cpu_result_v2_set_cf(result, 0) &&
             bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u, ax);
-    case 11u:
-        if (get_next != 0 && launch_plan != 0 && get_next->delivered != 0u)
-            return bx_ntvdm_cmd_return_exit_code_v1_dispatch(get_next, launch_plan,
-                event, cpu, window, result);
-        /* A profile-local session has no NT4 GetNextVDMCommand queue before
-         * its first delivered DOS slot.  Retain the prior source-derived
-         * terminal result, but keep it in this one lifecycle owner. */
-        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
-            bx_ntvdm_cpu_result_v2_set_cf(result, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
-                (uint16_t)(cpu->eax & 0xff00u));
     default:
         return 0;
     }

@@ -38,22 +38,22 @@ int main(void)
 
     { const uint8_t bytes[4] = {0xc4u,0xc4u,0x54u,7u};
       bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes)); }
-    if (!bx_ntvdm_command_execution_lifecycle_v1_dispatch(&provider.lifecycle,
+    if (!bx_ntvdm_command_execution_lifecycle_v1_dispatch(&provider.execution,
             0, 0, &event, &cpu, &window, &result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.eflags_values != 0u) return 5;
 
     { const uint8_t bytes[4] = {0xc4u,0xc4u,0x54u,8u};
       bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes)); }
     cpu.eax = 0xa500u;
-    if (!bx_ntvdm_command_execution_lifecycle_v1_dispatch(&provider.lifecycle,
+    if (!bx_ntvdm_command_execution_lifecycle_v1_dispatch(&provider.execution,
             0, 0, &event, &cpu, &window, &result) ||
         result.cpu_delta.gpr16_values[0] != 0xa532u || result.eflags_values != 0u) return 6;
 
     { const uint8_t bytes[4] = {0xc4u,0xc4u,0x54u,10u};
       bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes)); }
-    if (!bx_ntvdm_command_execution_lifecycle_v1_dispatch(&provider.lifecycle,
+    if (!bx_ntvdm_command_execution_lifecycle_v1_dispatch(&provider.execution,
             0, 0, &event, &cpu, &window, &result) ||
         result.cpu_delta.gpr16_values[0] != 0xa532u || result.eflags_values != 0u ||
-        provider.lifecycle.deferred_execution_count != 2u) return 7;
+        provider.execution.deferred_execution_count != 2u) return 7;
     return 0;
 }

@@ -6,8 +6,8 @@
 #define BX_NTVDM_COMMAND_EXECUTION_LIFECYCLE_V1_MAGIC 0x42584345u
 #define BX_NTVDM_COMMAND_EXECUTION_LIFECYCLE_V1_VERSION 1u
 
-/* One COMMAND-owned lifecycle boundary for cmdCheckBinary, cmdExec,
- * cmdExecComspec32 and cmdReturnExitCode.  It deliberately owns no process,
+/* COMMAND launch/execution helper for cmdCheckBinary, cmdExec and
+ * cmdExecComspec32.  It deliberately owns no process,
  * handle, guest pointer or stream: those are admitted only when the shared
  * opaque stream and typed-child capability exists. */
 typedef struct bx_ntvdm_command_execution_lifecycle_v1 {
