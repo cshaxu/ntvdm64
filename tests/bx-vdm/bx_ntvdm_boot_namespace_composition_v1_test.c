@@ -453,7 +453,7 @@ int main(void)
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_values[0] != 0xa532u ||
-        composition.command.stream_child.validated_record_count != 1u) return 250;
+        composition.command.launch_execution_provider.stream_child.validated_record_count != 1u) return 250;
     memcpy(ram + 0x360u, "cmd.exe /c exit 7\r", 18u);
     event_initialize(&event, 0x54u, 0x08u);
     event.ss = 0u; event.ebp = 0x340u; event.ds = 0u; event.esi = 0x360u;
@@ -461,9 +461,9 @@ int main(void)
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_values[0] != 0xa507u ||
-        composition.command.stream_child.launch_count != 1u ||
-        composition.command.stream_child.completion_count != 1u ||
-        composition.command.stream_child.last_result != 7u) return 251;
+        composition.command.launch_execution_provider.stream_child.launch_count != 1u ||
+        composition.command.launch_execution_provider.stream_child.completion_count != 1u ||
+        composition.command.launch_execution_provider.stream_child.last_result != 7u) return 251;
     /* The COMMAND package, rather than a trace observation, defines every
        callable outcome.  Selected positive services are exercised below;
        this sweep proves the no-op, common unavailable route, and all five

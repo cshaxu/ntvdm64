@@ -105,6 +105,11 @@
 > remain explicit blockers rather than excuses for a simplified leaf handler.
 > See the [S3 map](etc/research/t211-s3-command-launch-execution-source-abi-map-001.md).
 
+> **T211 S3 P2 progress:** one versioned launch/execution provider now owns
+> the existing stream-child and execution-lifecycle state. The full bx-vdm
+> composition remains source-built and passing under MSVC x64 `/MT`; member
+> outcome reconciliation and family regression remain open.
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was

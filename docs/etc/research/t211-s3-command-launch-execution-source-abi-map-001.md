@@ -49,3 +49,15 @@ It may invoke normal user-mode APIs only in an admitted direct capability,
 with copied input/output and session-scoped teardown.  It may not add a
 BaseSrv/CSR queue, handle/pointer export, host-wide redirection mutation or a
 Bochs change.
+
+## P2 implementation evidence
+
+`bx_ntvdm_command_launch_execution_provider_v1` now owns the existing
+execution-lifecycle and private stream-child state as one versioned component
+record.  `bx_ntvdm_command_package_session_v1` retains only composition and
+fixed-width mechanics; it no longer embeds either leaf state directly.
+
+The fresh whole bx-vdm composition fixture at
+`artifacts/build/t211-s3-launch-provider-r1` compiles, links and runs with
+MSVC x64 `/MT` after the migration.  This proves ownership migration only;
+it does not claim the four-member source/failure matrix is closed.
