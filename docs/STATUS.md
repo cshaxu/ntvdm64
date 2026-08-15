@@ -2,39 +2,45 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T204 S5.** Its governing brief is the active
+> **Current effective packet: M0 T205 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T204 S5 -- paired configuration image/path integration.**
+**Active: M0 T205 S1 -- XMS owner-package re-admission and completion plan.**
 
-> **Governance correction:** The table below is the sole active packet. T188
-> through T194 are closed. Their retained S records are evidence, not
-> concurrent active packets.
+> **T204 closed:** its contained startup-configuration boundary is recorded in
+> [history](history/m0-t204-closure-20260815.md). The table below is the sole
+> active packet.
 
 ## Active Packet
 
-> **T scope:** T204 establishes the whole declared guest startup configuration
-> package before any startup BOP, guest artifact or machine expansion is
-> changed.  S5 integrates the complete paired startup configuration package
-> before any native observation.
+> **T scope:** T205 recovers the complete XMS (`52:00..0B`) owner package by
+> reconciling partial routes against OpenNT source and the bx-core/bx-mantle
+> mechanical boundary before any implementation. S1 produces the complete
+> source/ABI/failure map and whole-package implementation order; it does no
+> endpoint implementation and no native trace.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T204 S5, Ordinary Mode. |
-| Admission And Approval | T204 S4's [contained provider core](etc/research/t204-s4-contained-configuration-provider-core-001.md), S5 P1 integration, S3 source contract, and the owner's standing whole-package authorization re-admit one explicit, normal-user-mode configuration-source input path. |
-| Objective | Integrate one ready contained configuration provider with one provider-owned namespace/image state and paired COMMAND CONFIG/AUTOEXEC path/context consumers, replacing default synthetic boot-file dependency through one explicit CLI-to-adapter copied source path. |
-| Non-goals | No PIF, host temporary-file creation, source-file mutation, Registry/device operation, ambient configuration/environment read at BOP time, Bochs change, native trace, `5E` UMB/DASD action, third-party console support, host-system modification or per-endpoint provider. |
-| Reference Baseline | T204 S1--S4, S5 P1, current CLI child environment, adapter installation, `boot_namespace_provider`, `command_boot_input`, `cmd_boot_file_service`, COMMAND package session and checked guest transaction ABI. |
-| Files And ABI Surface | `src/cli` paired option/admission and child-only environment; `src/bx-vdm` installation-time bounded read/copy, startup configuration/namespace, paired COMMAND boot-file/context composition and focused MSVC x64 `/MT` package tests. No bx-core/bx-mantle/OpenNT source, raw handle, host pointer or Bochs interface may change. |
+| Identifier Mode | M0 T205 S1, Ordinary Mode. |
+| Admission And Approval | Owner's standing instruction to recover BOPs by complete original owner package; T200 global owner/mutation audit; T199 XMS source/ABI evidence; and source-policy review before OpenNT/Bochs research. |
+| Objective | Produce one current-source XMS `52:00..0B` map that distinguishes completed capabilities, partial routes, required bx-core/bx-mantle mechanics, adapter rehost work, and source-shaped unavailable behavior; then record the ordered whole-package implementation plan. |
+| Non-goals | No trace-selected handler, native trace, UMB fabrication, INT15/PIC/firmware emulation, adapter-owned Bochs allocation/device policy, CCPU/SAS restoration, DPMI implementation, or historical XMS object linkage. |
+| Reference Baseline | T200 ledger; T199 S31/S44 XMS evidence; `xmsdisp.c`, `xmsa20.c`, `xmsblock.c`, `xmsmisc.c`, `xmsumb.c`; current XMS session and mantle A20/extended-memory capabilities. |
+| Files And ABI Surface | S1 is documentation/evidence plus read-only source inspection only. Any later change must use fixed-width bx-mantle mechanics or bx-vdm copied provider records; no raw mapping, host pointer, BOP term in Bochs code, or OpenNT source edit is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused CLI/admission and x64 `/MT` whole-package positive/negative regression: paired source option, child-only propagation, bounded copied read, provider image/path/context lifetime, paired `54:0C/0D` preparation, stale/invalid provider rejection and no synthetic default image; governance and diff checks. |
-| Expected Markers | Exactly paired input sources; one provider owns both images/paths and merge lifetime; both CONFIG/AUTOEXEC consumers cannot bypass readiness; no duplicate namespace/image state; source failures are installation rejection or typed fatal fence. |
-| Asset Needs | Existing repository source and local owner-supplied configuration test files only; no external source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record option grammar, safe path/read limits, copied/lifetime contract, normal Win32 API permission facts, exact replaced workaround boundary, test command/result and deferred `5E`/console. |
-| Stop Conditions | A one-off trace-selected service, source mutation, temporary file, ambient BOP-time source read, third-party console behavior, `5E` action, Bochs change or native trace pauses S5 for re-admission. |
-| Exit Criteria | The default startup configuration route has one explicitly admitted ready-provider image/path/context source rather than fixed boot bytes; paired CLI/adapter/consumer regression passes without claiming native startup or `5E` closure. |
+| Verification | Re-export the BOP inventory; inspect all 12 original slots and current `52` routes; prove no duplicate allocator/A20/interrupt owner; record one disposition and failure behavior per slot; governance and diff checks. |
+| Expected Markers | One XMS owner-session plan; `52:0C` remains non-callable; every partial/deferred route is retained, migrated, replaced or deleted; UMB and INT15 are explicit machine prerequisites. |
+| Asset Needs | Existing OpenNT and adopted Bochs sources only; no new third-party source, firmware, guest media, host mutation or runtime dependency. |
+| Reporting Requirements | Record pinned source paths/hashes, current-code comparison, mechanical owner, capability gaps, API availability where relevant, failure disposition, planned S order and no-trace limitation. |
+| Stop Conditions | Any need to alter CPU decode, generic memory subsystem, firmware/device semantics, introduce raw guest mappings, or split work into trace-selected services pauses T205 for re-admission. |
+| Exit Criteria | A complete, reviewable XMS package plan establishes the only later implementation order and tests; no partial route is falsely called a complete provider. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect NTIO/NTDOS/COMMAND startup handoffs; BOP `5E`, DEM `50:3D`, configuration/boot-input records, profile descriptors, guest-memory loading, terminal/engine seams, and current boot/readonly/virtual profile workarounds. |
+| Similar-Issue Sweep | Inspect all 12 XMS slots, XMS/DPMI shared C1--C6 capabilities, top-level `5E` UMB notification, INT15/BIOS owner records, mantle exception registry and DPMI dependency direction. |
+
+> **T205 S1 progress:** current OpenNT and bx-vdm/mantle sources now map all
+> twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
+> into one ordered owner-package plan. No selector implementation or trace was
+> added; see the [whole-package plan](etc/operations/t205-xms-whole-package-plan-001.md).
 
 > **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one
