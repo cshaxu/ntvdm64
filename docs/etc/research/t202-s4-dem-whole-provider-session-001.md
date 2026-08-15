@@ -294,3 +294,11 @@ original DS/ES address shape, `20`'s double-record gather, a real copied-path
 `2D` provider roundtrip and no-NUL rejection cleanup. It delegates only to
 the prior FCB source-derived providers and remains provider-internal; no FCB
 pathname BOP route is enabled.
+
+Revision r40 supplies the package mutation matrix for the complete pathname
+and FCB-wildcard write surface. It exercises all namespace mutations
+(`01/03/04/05/06/17/22`) and FCB wildcard delete/rename (`07/20`) under the
+three non-direct modes. Readonly returns source-shaped access denied; overlay
+and virtual return their recorded unavailable form. The real temporary host
+entries survive every case. This is direct provider/profile evidence, not an
+overlay implementation or BOP route migration.

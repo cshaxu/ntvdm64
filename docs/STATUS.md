@@ -264,6 +264,12 @@
 > This is still provider-internal preparation; no FCB pathname BOP route is
 > enabled before the family-wide atomic gate.
 
+> **T202 S4 progress:** r40 closes the non-direct mutation matrix for the
+> namespace and FCB-wildcard write surface: all `01/03/04/05/06/17/22` and
+> `07/20` cases refuse before host mutation under readonly/overlay/virtual,
+> with retained source/profile error forms. This is profile evidence only, not
+> an overlay backend, route migration or DEM closure.
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

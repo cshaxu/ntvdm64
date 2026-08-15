@@ -628,6 +628,22 @@ int main(void)
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate,
                     0x01u, &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
                 !ax_is(&result, 5u))) failed = 63;
+            if (!failed) {
+                static const uint8_t mutations[] = { 0x03u, 0x04u, 0x05u,
+                    0x06u, 0x17u, 0x22u };
+                uint32_t index;
+                for (index = 0u; index < sizeof(mutations); ++index) {
+                    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                    if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, mutations[index],
+                            &boundary, &cpu, oem_short,
+                            mutations[index] == 0x17u ? oem_profile_pattern : 0, &result) ||
+                        !cf_set(&result) || !ax_is(&result, 5u)) { failed = 625; break; }
+                }
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
+                    0x20u, &boundary, &cpu, oem_profile_pattern, oem_profile_pattern, &result) ||
+                !cf_set(&result) || !ax_is(&result, 5u))) failed = 626;
             bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }
@@ -654,6 +670,23 @@ int main(void)
                     0x07u, &boundary, &cpu, oem_profile_pattern, 0, &result) ||
                 !cf_set(&result) || !ax_is(&result, 1u) || !oem_file_exists(oem_rename_one)))
                 failed = 651;
+            if (!failed) {
+                static const uint8_t mutations[] = { 0x01u, 0x03u, 0x04u,
+                    0x05u, 0x06u, 0x17u, 0x22u };
+                uint32_t index;
+                for (index = 0u; index < sizeof(mutations); ++index) {
+                    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                    if (mutations[index] == 0x01u) cpu.eax = 1u;
+                    if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, mutations[index],
+                            &boundary, &cpu, oem_short,
+                            mutations[index] == 0x17u ? oem_profile_pattern : 0, &result) ||
+                        !cf_set(&result) || !ax_is(&result, 1u)) { failed = 652; break; }
+                }
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
+                    0x20u, &boundary, &cpu, oem_profile_pattern, oem_profile_pattern, &result) ||
+                !cf_set(&result) || !ax_is(&result, 1u))) failed = 653;
             bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }
@@ -671,6 +704,23 @@ int main(void)
             if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate, 0x07u,
                     &boundary, &cpu, oem_profile_pattern, 0, &result) || !cf_set(&result) ||
                 !ax_is(&result, 1u) || !oem_file_exists(oem_rename_one)) failed = 661;
+            if (!failed) {
+                static const uint8_t mutations[] = { 0x01u, 0x03u, 0x04u,
+                    0x05u, 0x06u, 0x17u, 0x22u };
+                uint32_t index;
+                for (index = 0u; index < sizeof(mutations); ++index) {
+                    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                    if (mutations[index] == 0x01u) cpu.eax = 1u;
+                    if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, mutations[index],
+                            &boundary, &cpu, oem_short,
+                            mutations[index] == 0x17u ? oem_profile_pattern : 0, &result) ||
+                        !cf_set(&result) || !ax_is(&result, 1u)) { failed = 662; break; }
+                }
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
+                    0x20u, &boundary, &cpu, oem_profile_pattern, oem_profile_pattern, &result) ||
+                !cf_set(&result) || !ax_is(&result, 1u))) failed = 663;
             bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }
