@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T211 S1.** Its governing brief is the active
+> **Current effective packet: M0 T211 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T211 S1 -- OpenNT COMMAND owner-package source/ABI/disposition map.**
+**Active: M0 T211 S2 -- COMMAND bootstrap/environment/config component recovery.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -16,27 +16,26 @@
 ## Active Packet
 
 > **T scope:** T211 recovers the complete COMMAND owner package by original
-> component boundary. S1 maps every COMMAND identity and its reachable
-> bootstrap/launch/console/execution/environment/lifecycle contract before
-> any further package implementation.
+> component boundary. S1 closed the all-service map. S2 recovers the first
+> complete bootstrap/environment/config component as one provider package.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T211 S1, Ordinary Mode. |
-| Admission And Approval | Owner-approved package-led BOP recovery, the T200/S31 complete owner/disposition audit, and T210's completed shared context foundation. |
-| Objective | Map the original COMMAND `54:00..10` family into complete owner components, source/ABI/failure contracts, provider disposition and current workaround action. |
-| Non-goals | No endpoint implementation, native trace-led work, new host lifecycle semantics, Bochs change, ambient host-state access, or claim that partial `54:04/0E` evidence closes COMMAND. |
-| Reference Baseline | T200/S31 ledger, T202/T203/T204/T206/T207 records, T210 closure, original `cmddisp.c`, `cmdmisc.c`, `cmdexec.c` and COMMAND callers. |
-| Files And ABI Surface | Evidence and governance only in S1; no product ABI change. |
+| Identifier Mode | M0 T211 S2, Ordinary Mode. |
+| Admission And Approval | T211 S1 map admits `54:01/02/04/05/0C/0D/0F/10` as one bootstrap/environment/config component on top of T209 configuration and T210 host context. |
+| Objective | Replace endpoint-local COMMAND bootstrap/environment/config routes with one package provider, preserving source-shaped ABI/failure behavior and common copied state. |
+| Non-goals | No host child launch, redirection/handle model, console/keyboard recovery, lifecycle/engine change, trace-led work, ambient context recapture, Bochs change, or synthetic success. |
+| Reference Baseline | T211 S1 map, T209 configuration closure, T210 host-context closure, original `cmdmisc.c`, `cmdenv.c`, `cmdconf.c`, `cmdsvc.h`, and current COMMAND session/facade. |
+| Files And ABI Surface | `src/bx-vdm` COMMAND bootstrap/environment/config provider/facade integration and focused tests only; fixed-width guest/machine contracts remain unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One all-identity COMMAND table identifies original source, input/output ABI, failure behavior, modern dependency status, owner component, provider disposition and retain/migrate/replace/delete action; governance and diff checks. |
-| Expected Markers | Every `54:00..10` identity, plus dispatcher sentinel, has exactly one component/disposition; existing endpoints are evidence only, never complete-component claims. |
-| Asset Needs | Existing repository source only; no firmware/media/device import, host mutation, runtime dependency or native trace. |
-| Reporting Requirements | Record original paths, service families, ABI/failure findings, unavailable historical dependencies, modern public API status and next whole-component implementation order. |
-| Stop Conditions | Any implementation, selector-specific trace patch, unclassified identity, host installation requirement, Bochs/mantle change, or absent source evidence pauses S1 for re-admission. |
-| Exit Criteria | Reviewable complete COMMAND component map that admits one bounded whole-provider S2 packet without endpoint-driven scope growth. |
+| Verification | One source-built MSVC x64 `/MT` component fixture covers every member, success/failure/no-context/malformed-gather result, shared state projection and no synthetic fallback; governance and diff checks. |
+| Expected Markers | One COMMAND component provider owns all eight members; no scattered recognizer chooses policy or bypasses the shared T209/T210 state. |
+| Asset Needs | Existing repository source only; focused ordinary user-mode host context/config input as already admitted; no firmware/media/device import or native trace. |
+| Reporting Requirements | Record provider state, member routing, source/error mapping, migrated/deleted workarounds, component regression and limitations. |
+| Stop Conditions | Any need for broker/child/console/lifecycle semantics, host installation change, Bochs/mantle change, unbounded guest pointer, or endpoint-only patch pauses S2 for re-admission. |
+| Exit Criteria | The complete bootstrap/environment/config component passes one family regression; later native trace only observes the package result. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | `cmddisp.c`, `cmdmisc.c`, `cmdexec.c`, console/keyboard/bootstrap/launch/environment/lifecycle routes, COMMAND package session/facade, common mutation profile, CLI capability seams and all `54:00..10` callers. |
+| Similar-Issue Sweep | `cmdmisc.c`, `cmdenv.c`, `cmdconf.c`, `cmdsvc.h`, COMMAND package session/facade, T209 configuration provider, T210 host context, CLI launch plan and every `01/02/04/05/0C/0D/0F/10` route. |
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
@@ -69,6 +68,12 @@
 > rejected its prior execution plan before CPU entry; it recorded no BOP and
 > does not narrow the next package. See the [closure
 > record](history/m0-t210-closure-20260815.md).
+
+> **T211 S1 closure:** all 17 COMMAND services and the dispatcher sentinel
+> now have one owner component, source/ABI/failure disposition and workaround
+> action. The first implementation packet is bootstrap/environment/config;
+> endpoint evidence is not component closure. See the [complete
+> map](etc/research/t211-s1-command-owner-package-source-abi-disposition-map-001.md).
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
