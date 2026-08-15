@@ -1,6 +1,7 @@
 #include "bx_ntvdm_engine_contract_v1.h"
 #include "bx_ntvdm_terminal_observation_v1.h"
 #include "bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bx_ntvdm_dem_open_observation_v1.h"
 
 #include <stdio.h>
 
@@ -41,6 +42,7 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
     struct bx_ntvdm_engine_result_v1 result;
     struct bx_ntvdm_terminal_observation_v1 stop;
     struct bx_ntvdm_bop_sequence_observation_v1 sequence;
+    bx_ntvdm_dem_open_observation_v1 open;
     int call_result = bx_ntvdm_engine_run_v1(request, &result);
     int valid_result = bx_ntvdm_engine_result_v1_valid(&result);
     int captured = bx_ntvdm_terminal_observation_v1_copy(&stop);
@@ -52,6 +54,7 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
             stop.event.window[2], stop.event.window[3], stop.outcome.disposition);
     }
     if (!bx_ntvdm_bop_sequence_observation_v1_copy(&sequence)) return 0;
+    if (!bx_ntvdm_dem_open_observation_v1_copy(&open)) return 0;
     printf("t215-s6 bops=%u overflow=%u\n", sequence.record_count, sequence.overflowed);
     for (uint32_t index = 0u; index < sequence.record_count; ++index) {
         const struct bx_ntvdm_bop_sequence_observation_record_v1 *entry =
@@ -60,7 +63,14 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
             index, entry->cs, entry->eip, entry->selector, entry->service,
             entry->has_service, entry->disposition);
     }
+    printf("t217-s4 dem-open seen=%u captured=%u state=%04x:%08x ds-si=%04x:%04x eax=%08x ebx=%08x accepted=%u disposition=%u resume=%llx gpr16-mask=%08x ax=%04x flags-mask=%08x flags-value=%08x\n",
+        open.seen_open_count, open.captured, open.cs, open.eip, open.ds,
+        (unsigned)(uint16_t)open.esi, open.eax, open.ebx, open.accepted,
+        open.disposition, (unsigned long long)open.resume_rip,
+        open.gpr16_write_mask, open.gpr16_values[0], open.eflags_write_mask,
+        open.eflags_values);
     bx_ntvdm_bop_sequence_observation_v1_enable(0u);
+    bx_ntvdm_dem_open_observation_v1_enable(0u);
     bx_ntvdm_terminal_observation_v1_enable(0u);
     if (!call_result || !valid_result ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL ||
@@ -84,6 +94,7 @@ int wmain(int argc, wchar_t **argv)
     if (bx_ntvdm_bop_sequence_observation_v1_copy(&disabled)) return 1;
     bx_ntvdm_terminal_observation_v1_enable(1u);
     bx_ntvdm_bop_sequence_observation_v1_enable(1u);
+    bx_ntvdm_dem_open_observation_v1_enable(1u);
     if (argc != 3 || !request_set(&request, argv[1], argv[2]) ||
         !controlled_terminal_once(&request)) return 1;
     return 0;

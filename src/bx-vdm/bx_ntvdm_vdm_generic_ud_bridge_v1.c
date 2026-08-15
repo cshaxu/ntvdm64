@@ -5,6 +5,7 @@
 #include "bx_ntvdm_normal_return_observation_v1.h"
 #include "bx_ntvdm_normal_terminal_sequence_observation_v1.h"
 #include "bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bx_ntvdm_dem_open_observation_v1.h"
 
 static int bx_ntvdm_vdm_generic_ud_event_valid(
     const struct bx_ntvdm_generic_ud_event_v1 *event)
@@ -63,6 +64,7 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         accepted = bx_ntvdm_native_bop_composition_v1_handle(event, outcome);
     if (accepted) {
         bx_ntvdm_bop_sequence_observation_v1_consider(event, outcome);
+        bx_ntvdm_dem_open_observation_v1_consider(event, outcome, accepted);
         bx_ntvdm_terminal_observation_v1_consider(event, outcome);
         bx_ntvdm_normal_return_observation_v1_consider(event, outcome);
         bx_ntvdm_normal_terminal_sequence_observation_v1_consider(event, outcome);

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S3.** Its governing brief is the active
+> **Current effective packet: M0 T217 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S3 -- SYSINIT-to-DOS-EXEC whole-package map.**
+**Active: M0 T217 S4 -- DEM normal-file package integration verification.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -30,19 +30,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S3, Ordinary Mode. |
-| Admission And Approval | T216 proves all declared image visibility, while T217 S1/S2 completes the independent COMMAND initial-environment prerequisite under the recovery ladder. The full composition still reaches the source-backed SYSINIT terminal, so the next work is a whole caller/loader map, not a `50:3D` handler request. |
-| Objective | Map the complete OpenNT SYSINIT command-open/size/EXEC continuation: guest DOS loader, DEM host calls, command bootstrap, image/PSP/memory prerequisites, machine mechanics, ABI layouts, failures, current coverage, and the source-first recovery disposition for every reached requirement. |
-| Non-goals | No implementation, BOP routing change, trace instrumentation, guest-memory inspection, Bochs/mantle change, profile change, host mutation, or COMMAND-run claim. |
+| Identifier Mode | M0 T217 S4, Ordinary Mode. |
+| Admission And Approval | S3 maps the full source chain and localizes the current terminal to the second normal DEM Open boundary. The installed whole DEM provider, rather than a leaf service, is now the bounded integration subject. |
+| Objective | Observe and classify the existing DEM normal-file provider's typed decision and result at the second SYSINIT Open, using only the fixed-width copied BOP event and existing provider/transaction result records. |
+| Non-goals | No BOP implementation, routing change, arbitrary guest-memory read, DOS/EXEC emulation, host mutation, profile change, Bochs/mantle change, or COMMAND-run claim. |
 | Reference Baseline | T216 S1 map; OpenNT `sysinit1.asm`, DOS EXEC/open/handle sources, `demfile.c`, `demhndl.c`, `demsrch.c`, `demdisp.c`, `dossvc.h`, and COMMAND `cmdenv.c`; existing readonly namespace, direct DEM provider, provider partitions and source-built S5 regression. |
-| Files And ABI Surface | Research evidence and task records only. No production ABI, provider, profile, or machine change in S3. |
+| Files And ABI Surface | Fixture-only observation record and focused fixture/tool/evidence. Production BOP, provider, profile, guest-memory, and machine ABIs remain unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | OpenNT/current-source caller, owner, ABI, and failure audit; a complete prerequisite/disposition table; recovery-ladder decision; governance and diff checks. |
-| Expected Markers | A source-first whole-package plan separates guest DOS EXEC behavior, DEM host services, COMMAND bootstrap, admitted machine mechanics, asset/profile facts, and deferred/unavailable requirements. |
+| Verification | Fresh source-built x64 `/MT` full composition records the second `50:12` event and its existing typed provider/transaction outcome; it distinguishes provider error, provider success plus guest branch, and observation failure. Governance and diff checks pass. |
+| Expected Markers | One default-off fixture observer; no production semantic change; a source-backed disposition selecting either a whole DEM integration repair or continued guest EXEC analysis. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T215 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record original caller/source, ownership, copied ABI, failure path, current state and every rung of the recovery ladder; distinguish direct evidence from inference. |
-| Stop Conditions | Any implementation, guest-memory instrumentation, trace-selected service work, profile change, host mutation, or Bochs/mantle change pauses S3 for re-admission. |
-| Exit Criteria | A complete source/ABI/failure map selects one source-first whole-package implementation plan or an explicit unavailable/deferred disposition. |
+| Reporting Requirements | Record copied event/result fields, source location, observer scope, outcome, confidence, and the next package decision; distinguish direct evidence from inference. |
+| Stop Conditions | Any production handler/provider change, arbitrary guest-memory inspection, BOP routing change, profile/host mutation, or Bochs/mantle change pauses S4 for re-admission. |
+| Exit Criteria | A fresh fixture classifies the second Open boundary without changing runtime semantics, and selects the next whole-package action. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -102,6 +102,13 @@
 > verification of the installed whole DEM file/handle package—not a `50:12`,
 > EXEC, or terminal implementation. The map also records the separate 32 KiB
 > DOS EXEC environment-scan condition. See the [whole-package map](etc/research/t217-s3-sysinit-dos-exec-whole-package-map-001.md).
+
+> **T217 S4 P1 closure:** the second SYSINIT DEM Open is accepted by the
+> installed whole provider but resumes with `AX=2` and carry set, so SYSINIT
+> correctly reaches `comerr`/`50:3D`. This invalidates any claim that focused
+> declared-image visibility alone proves native identity closure. The selected
+> next package is DEM declared-image namespace identity, not EXEC/Bochs/BOP
+> work; see the [integration result](etc/research/t217-s4-dem-normal-file-integration-result-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
