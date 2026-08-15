@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_whole_provider_v1.h"
 #include "bx_ntvdm_dem_handle_partition_v1.h"
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
+#include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
 #include "bx_ntvdm_dem_namespace_route_partition_v1.h"
 #include "bx_ntvdm_dem_handle_route_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
@@ -101,6 +102,7 @@ int main(void)
     HANDLE file = INVALID_HANDLE_VALUE;
     DWORD written = 0u;
     bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_dem_namespace_identity_observation_v1 identity;
     bx_ntvdm_instruction_window_v1 window;
     struct bx_ntvdm_mechanical_action_v1 fcb_action;
     wchar_t temporary[MAX_PATH], short_name[MAX_PATH];
@@ -193,6 +195,7 @@ int main(void)
         const uint8_t bop_open[4] = { 0xc4u, 0xc4u, 0x50u, 0x12u };
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
         cpu.ebx = 0u;
+        bx_ntvdm_dem_namespace_identity_observation_v1_enable(1u);
         if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
                 &boundary, &cpu, oem_config, 0, &result) || cf_set(&result) ||
             !ax_is(&result, (uint16_t)(startup_images.generation >> 16)) ||
@@ -226,7 +229,11 @@ int main(void)
             cpu.ebx = 0u;
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
                     &boundary, &cpu, oem_command, 0, &result) || cf_set(&result) ||
-                result.cpu_delta.gpr16_values[2] != 7u)) failed = 16;
+                result.cpu_delta.gpr16_values[2] != 7u ||
+                !bx_ntvdm_dem_namespace_identity_observation_v1_copy(&identity) ||
+                identity.identity_class != BX_NTVDM_DEM_NAMESPACE_IDENTITY_V1_DECLARED ||
+                identity.declared_slot != 1u || identity.declared_bytes_ready != 1u ||
+                identity.admitted_drive == 0u)) failed = 16;
             if (!failed) {
                 struct bx_ntvdm_mechanical_action_v1 close_action;
                 token_into_cpu(&cpu, ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
@@ -841,6 +848,7 @@ int main(void)
         }
     }
     bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
+    bx_ntvdm_dem_namespace_identity_observation_v1_enable(0u);
     failed |= bx_ntvdm_dem_whole_provider_v1_valid(&provider) != 0;
     bx_ntvdm_host_namespace_v1_release(&space);
     delete_oem_file(oem_wild_one);

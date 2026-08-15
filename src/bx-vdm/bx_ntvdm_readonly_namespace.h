@@ -56,6 +56,12 @@ int bx_ntvdm_readonly_namespace_v1_file_times(
 int bx_ntvdm_readonly_namespace_v1_match_startup_path(
     const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
     const wchar_t *canonical_path, uint64_t *byte_count_out);
+/* Returns a one-based declared-image slot for a canonical pathname, or zero.
+ * Unlike match_startup_path, this identity-only query does not require bytes
+ * to be ready and never exposes the pathname or file storage. */
+uint32_t bx_ntvdm_readonly_namespace_v1_declared_slot(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
+    const wchar_t *canonical_path, uint32_t *bytes_ready_out);
 int bx_ntvdm_readonly_namespace_v1_owns_token(
     const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token);
 

@@ -2,6 +2,7 @@
 #include "bx_ntvdm_terminal_observation_v1.h"
 #include "bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bx_ntvdm_dem_open_observation_v1.h"
+#include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
 
 #include <stdio.h>
 
@@ -43,6 +44,7 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
     struct bx_ntvdm_terminal_observation_v1 stop;
     struct bx_ntvdm_bop_sequence_observation_v1 sequence;
     bx_ntvdm_dem_open_observation_v1 open;
+    bx_ntvdm_dem_namespace_identity_observation_v1 identity;
     int call_result = bx_ntvdm_engine_run_v1(request, &result);
     int valid_result = bx_ntvdm_engine_result_v1_valid(&result);
     int captured = bx_ntvdm_terminal_observation_v1_copy(&stop);
@@ -55,6 +57,7 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
     }
     if (!bx_ntvdm_bop_sequence_observation_v1_copy(&sequence)) return 0;
     if (!bx_ntvdm_dem_open_observation_v1_copy(&open)) return 0;
+    if (!bx_ntvdm_dem_namespace_identity_observation_v1_copy(&identity)) return 0;
     printf("t215-s6 bops=%u overflow=%u\n", sequence.record_count, sequence.overflowed);
     for (uint32_t index = 0u; index < sequence.record_count; ++index) {
         const struct bx_ntvdm_bop_sequence_observation_record_v1 *entry =
@@ -69,8 +72,15 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
         open.disposition, (unsigned long long)open.resume_rip,
         open.gpr16_write_mask, open.gpr16_values[0], open.eflags_write_mask,
         open.eflags_values);
+    printf("t217-s6 dem-identity seen=%u captured=%u class=%u attached=%u generation=%08x drive=%u admitted=%u slot=%u ready=%u disposition=%u ax=%04x flags-mask=%08x flags-value=%08x\n",
+        identity.seen_open_count, identity.captured, identity.identity_class,
+        identity.namespace_attached, identity.namespace_generation, identity.drive_index,
+        identity.admitted_drive, identity.declared_slot, identity.declared_bytes_ready,
+        identity.disposition, identity.gpr16_values[0],
+        identity.eflags_write_mask, identity.eflags_values);
     bx_ntvdm_bop_sequence_observation_v1_enable(0u);
     bx_ntvdm_dem_open_observation_v1_enable(0u);
+    bx_ntvdm_dem_namespace_identity_observation_v1_enable(0u);
     bx_ntvdm_terminal_observation_v1_enable(0u);
     if (!call_result || !valid_result ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL ||
@@ -95,6 +105,7 @@ int wmain(int argc, wchar_t **argv)
     bx_ntvdm_terminal_observation_v1_enable(1u);
     bx_ntvdm_bop_sequence_observation_v1_enable(1u);
     bx_ntvdm_dem_open_observation_v1_enable(1u);
+    bx_ntvdm_dem_namespace_identity_observation_v1_enable(1u);
     if (argc != 3 || !request_set(&request, argv[1], argv[2]) ||
         !controlled_terminal_once(&request)) return 1;
     return 0;

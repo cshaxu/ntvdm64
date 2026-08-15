@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S6.** Its governing brief is the active
+> **Current effective packet: M0 T217 S7.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S6 -- DEM declared-image namespace identity classification.**
+**Active: M0 T217 S7 -- guest SYSINIT command-name realization map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -30,19 +30,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S6, Ordinary Mode. |
-| Admission And Approval | S5 maps every static identity handoff and finds them aligned; its only unresolved fact is the existing bounded pathname read at the second normal Open. S6 is the package-scoped classification needed before a repair, not a new BOP implementation. |
-| Objective | Add a default-off, fixture-only classification result to the existing DEM namespace Open transaction. It must classify the already copied bounded Open pathname and namespace attachment state as declared match, other admitted root, invalid, or fallback, then correlate that class with the existing typed DOS result. |
-| Non-goals | No BOP implementation or route change, raw pathname export/retention, arbitrary guest-memory read, path rewrite, DOS/EXEC emulation, host mutation, profile expansion, Bochs/mantle change, or COMMAND-run claim. |
-| Reference Baseline | T217 S3/S4/S5 maps; OpenNT `sysinit1.asm`, `sysinit2.asm`, `file.asm`, `demfile.c`, `demgset.c`, `demdisp.c`, `dossvc.h`; current profile, composition runtime, path, readonly namespace, namespace partition, transaction, and whole DEM provider sources. |
-| Files And ABI Surface | One versioned default-off fixture diagnostic owned by the existing DEM namespace transaction; focused fixture, full composition fixture/tool, evidence, and Status. Production routing/provider/profile/guest-memory/machine ABIs and behavior remain unchanged. |
+| Identifier Mode | M0 T217 S7, Ordinary Mode. |
+| Admission And Approval | S6 proves the failing normal Open resolves to admitted C: with an attached declared namespace, but to no declared slot. The next subject is guest SYSINIT command-name realization, not a host DEM repair. |
+| Objective | Map OpenNT `commnd`/SYSINIT command-name source, source-built NTDOS layout and current startup materialization to determine why the guest presents a non-declared C:-root identity to the otherwise correct DEM provider. |
+| Non-goals | No raw pathname trace, BOP/provider rewrite, DOS EXEC emulation, host mutation, profile expansion, Bochs/mantle change, guest binary patch, or COMMAND-run claim. |
+| Reference Baseline | T217 S3–S6 evidence; OpenNT `sysinit1.asm`, `sysinit2.asm`, DOS build/link sources and NTDOS generated-image provenance; current startup plan/materialization and declared-image sources. |
+| Files And ABI Surface | Evidence and Status only unless the source map establishes a bounded existing build/materialization seam. No runtime ABI or behavior change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused transaction tests prove every identity class without exporting strings. A fresh source-built x64 `/MT` full composition records the second Open's classification and existing typed result. Governance and diff checks pass. |
-| Expected Markers | One default-off diagnostic; no production semantic change; a source-backed repair selection based on actual identity classification. |
+| Verification | Map source symbol/data contract, emitted artifact provenance/layout and startup materialization handoff; classify direct evidence versus inference; record all recovery rungs. Governance and diff checks pass. |
+| Expected Markers | A source-backed decision between an existing guest build/materialization repair and a further bounded evidence step; no host/provider workaround. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record class, namespace generation/attachment state, existing typed outcome, source location, observer scope, confidence, and the selected repair package; distinguish direct evidence from inference. |
-| Stop Conditions | Any production handler/provider change, raw pathname output or retention, arbitrary guest-memory inspection, BOP routing change, profile/host mutation, or Bochs/mantle change pauses S6 for re-admission. |
-| Exit Criteria | Fresh focused and full-composition evidence classify the second Open without semantic change and select the whole-package repair, or prove the existing attachment/path logic correct. |
+| Reporting Requirements | Record source symbol/data owner, artifact provenance/layout, materialization handoff, confidence and repair disposition; distinguish direct evidence from inference. |
+| Stop Conditions | Any runtime behavior change, raw pathname trace, BOP/provider change, host mutation, guest binary patch, profile expansion, or Bochs/mantle change pauses S7 for re-admission. |
+| Exit Criteria | The guest command-name realization chain has a recovery-ladder disposition and selects a bounded build/materialization repair or further evidence step. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -116,6 +116,13 @@
 > all align. The sole missing fact is the existing copied normal-Open identity;
 > S6 therefore admits only a default-off package-scoped classification record,
 > not a route or behavior change. See the [identity map](etc/research/t217-s5-dem-declared-image-namespace-identity-map-001.md).
+
+> **T217 S6 P1 closure:** the normal Open is on admitted C: with a live
+> declared namespace, but is not any declared image identity; the existing
+> fallback correctly returns DOS file-not-found. Focused whole-provider and
+> full-current-source x64 `/MT` evidence pass without a semantic change. The
+> next package is guest SYSINIT command-name realization, not a DEM or Bochs
+> repair; see the [classification result](etc/research/t217-s6-dem-namespace-identity-classification-result-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS

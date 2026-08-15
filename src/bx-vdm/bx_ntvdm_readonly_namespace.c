@@ -206,6 +206,25 @@ int bx_ntvdm_readonly_namespace_v1_match_startup_path(
     return 0;
 }
 
+uint32_t bx_ntvdm_readonly_namespace_v1_declared_slot(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
+    const wchar_t *canonical_path, uint32_t *bytes_ready_out)
+{
+    uint32_t index;
+    if (bytes_ready_out != 0) *bytes_ready_out = 0u;
+    if (value == 0 || canonical_path == 0 || drive_index != value->drive_index ||
+        value->file_count < 3u) return 0u;
+    for (index = 0u; index < value->file_count; ++index) {
+        if (bx_ntvdm_readonly_namespace_v1_path_equal(canonical_path,
+                value->files[index].path)) {
+            if (bytes_ready_out != 0)
+                *bytes_ready_out = value->files[index].bytes != 0 ? 1u : 0u;
+            return index + 1u;
+        }
+    }
+    return 0u;
+}
+
 int bx_ntvdm_readonly_namespace_v1_owns_token(
     const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token)
 {

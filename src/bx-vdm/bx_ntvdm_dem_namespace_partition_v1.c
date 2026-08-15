@@ -1,4 +1,5 @@
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
+#include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
 
 #include <string.h>
 
@@ -46,6 +47,22 @@ static int resolve_path(const bx_ntvdm_dem_whole_provider_v1 *provider,
 {
     return oem_path != 0 && bx_ntvdm_dem_path_v1_resolve(oem_path,
         provider->cwd, drive_out, relative_out) == BX_NTVDM_DEM_PATH_V1_OK;
+}
+
+static void observe_open(const bx_ntvdm_dem_whole_provider_v1 *provider,
+    uint8_t service, int resolved, uint8_t drive, int startup_path,
+    const wchar_t *relative, const bx_ntvdm_cpu_result_v2 *result)
+{
+    uint32_t admitted_mask = 0u;
+    uint32_t declared_slot = 0u, declared_bytes_ready = 0u;
+    if (provider != 0 && provider->host_namespace != 0)
+        admitted_mask = provider->host_namespace->available_mask;
+    if (resolved && provider != 0 && provider->startup_namespace != 0)
+        declared_slot = bx_ntvdm_readonly_namespace_v1_declared_slot(
+            provider->startup_namespace, drive, relative, &declared_bytes_ready);
+    bx_ntvdm_dem_namespace_identity_observation_v1_consider(service, resolved,
+        drive, admitted_mask, provider != 0 ? provider->startup_namespace : 0,
+        startup_path, declared_slot, declared_bytes_ready, result);
 }
 
 static int mutation(const bx_ntvdm_dem_whole_provider_v1 *provider,
@@ -117,8 +134,11 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
     if (service == 0x44u && _stricmp(oem_path, "\\\\DEV\\") == 0)
         return finish(boundary, result, 0u, 0, 0) &&
             bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u);
-    if (!resolve_path(provider, oem_path, &drive, relative))
-        return fail(boundary, result, ERROR_PATH_NOT_FOUND);
+    if (!resolve_path(provider, oem_path, &drive, relative)) {
+        int completed = fail(boundary, result, ERROR_PATH_NOT_FOUND);
+        observe_open(provider, service, 0, 0u, 0, 0, result);
+        return completed;
+    }
     if (provider->startup_namespace != 0)
         startup_path = bx_ntvdm_readonly_namespace_v1_match_startup_path(
             provider->startup_namespace, drive, relative, &startup_size);
@@ -180,7 +200,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 !bx_ntvdm_readonly_namespace_v1_open(provider->startup_namespace,
                     drive, relative, &startup_token, &startup_size))
                 return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
-            return finish(boundary, result, (uint16_t)(startup_token >> 16), 1, 0) &&
+            int completed = finish(boundary, result, (uint16_t)(startup_token >> 16), 1, 0) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
                     (uint16_t)startup_token) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
@@ -188,6 +208,8 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
                     (uint16_t)(startup_size >> 16)) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
+            observe_open(provider, service, 1, drive, 1, relative, result);
+            return completed;
         }
         admitted = bx_ntvdm_dem_local_file_backend_v1_open_ex(&provider->local_files,
             oem_path, access, service == 0x12u ? open_share((uint8_t)cpu->ebx) :
@@ -199,7 +221,11 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             else if (admitted == BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OVERLAY ||
                 admitted == BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_VIRTUAL)
                 error = DEM_ERROR_INVALID_FUNCTION;
-            return fail(boundary, result, error);
+            {
+                int completed = fail(boundary, result, error);
+                observe_open(provider, service, 1, drive, 0, relative, result);
+                return completed;
+            }
         }
         {
             HANDLE handle;
@@ -214,8 +240,11 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                     (uint16_t)size.LowPart) ||
                 !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
                     (uint16_t)((uint32_t)size.LowPart >> 16))) return 0;
-            if (service == 0x12u)
-                return bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
+            if (service == 0x12u) {
+                int completed = bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
+                observe_open(provider, service, 1, drive, 0, relative, result);
+                return completed;
+            }
             return 1;
         }
     }

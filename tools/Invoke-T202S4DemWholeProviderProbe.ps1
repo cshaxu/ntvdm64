@@ -27,6 +27,7 @@ $names = @(
     'bx_ntvdm_dem_readonly_file_service.c', 'bx_ntvdm_readonly_namespace.c',
     'bx_ntvdm_bulk_result_transaction.c',
     'bx_ntvdm_dem_namespace_partition_v1.c',
+    'bx_ntvdm_dem_namespace_identity_observation_v1.c',
     'bx_ntvdm_dem_namespace_route_partition_v1.c',
     'bx_ntvdm_dem_fcb_handle_partition_v1.c', 'bx_ntvdm_dem_fcb_wildcard_partition_v1.c',
     'bx_ntvdm_dem_fcb_io_route_partition_v1.c',
