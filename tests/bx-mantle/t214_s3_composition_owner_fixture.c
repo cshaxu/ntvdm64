@@ -1,5 +1,6 @@
 #include "bx_ntvdm_engine_contract_v1.h"
 #include "bx_ntvdm_terminal_observation_v1.h"
+#include "bx_ntvdm_bop_sequence_observation_v1.h"
 
 #include <stdio.h>
 
@@ -39,6 +40,7 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
 {
     struct bx_ntvdm_engine_result_v1 result;
     struct bx_ntvdm_terminal_observation_v1 stop;
+    struct bx_ntvdm_bop_sequence_observation_v1 sequence;
     int call_result = bx_ntvdm_engine_run_v1(request, &result);
     int valid_result = bx_ntvdm_engine_result_v1_valid(&result);
     int captured = bx_ntvdm_terminal_observation_v1_copy(&stop);
@@ -49,18 +51,39 @@ static int controlled_terminal_once(const struct bx_ntvdm_engine_request_v1 *req
             stop.event.cs, stop.event.eip, stop.event.window[0], stop.event.window[1],
             stop.event.window[2], stop.event.window[3], stop.outcome.disposition);
     }
+    if (!bx_ntvdm_bop_sequence_observation_v1_copy(&sequence)) return 0;
+    printf("t215-s6 bops=%u overflow=%u\n", sequence.record_count, sequence.overflowed);
+    for (uint32_t index = 0u; index < sequence.record_count; ++index) {
+        const struct bx_ntvdm_bop_sequence_observation_record_v1 *entry =
+            &sequence.records[index];
+        printf("t215-s6 bop[%u] cs=%04x eip=%08x selector=%02x service=%02x has-service=%u disposition=%u\n",
+            index, entry->cs, entry->eip, entry->selector, entry->service,
+            entry->has_service, entry->disposition);
+    }
+    bx_ntvdm_bop_sequence_observation_v1_enable(0u);
     bx_ntvdm_terminal_observation_v1_enable(0u);
     if (!call_result || !valid_result ||
         result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL ||
         result.detail_code != 1u || !captured || stop.event.window_bytes < 4u ||
-        stop.outcome.disposition != BX_NTVDM_GENERIC_UD_STOP) return 0;
+        stop.outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
+        sequence.overflowed != 0u || sequence.record_count == 0u ||
+        sequence.records[sequence.record_count - 1u].cs != stop.event.cs ||
+        sequence.records[sequence.record_count - 1u].eip != stop.event.eip ||
+        sequence.records[sequence.record_count - 1u].selector != 0x50u ||
+        sequence.records[sequence.record_count - 1u].service != 0x3du ||
+        sequence.records[sequence.record_count - 1u].has_service != 1u ||
+        sequence.records[sequence.record_count - 1u].disposition !=
+            BX_NTVDM_GENERIC_UD_STOP) return 0;
     return 1;
 }
 
 int wmain(int argc, wchar_t **argv)
 {
     struct bx_ntvdm_engine_request_v1 request;
+    struct bx_ntvdm_bop_sequence_observation_v1 disabled;
+    if (bx_ntvdm_bop_sequence_observation_v1_copy(&disabled)) return 1;
     bx_ntvdm_terminal_observation_v1_enable(1u);
+    bx_ntvdm_bop_sequence_observation_v1_enable(1u);
     if (argc != 3 || !request_set(&request, argv[1], argv[2]) ||
         !controlled_terminal_once(&request)) return 1;
     return 0;

@@ -83,6 +83,22 @@ interpretation, confidence, and follow-up in etc/ or an appropriate history/
 record. A failed or unavailable check is evidence with a limitation; it is
 never a passing result.
 
+### Historical Recovery Audit Gate
+
+Before admitting or changing a recovered OpenNT, guest, or host-service
+behavior, the active S evidence must classify the proposed implementation
+against this mandatory order: (1) directly composable original OpenNT source;
+(2) that source composed through the smallest adapter, compatibility seam, or
+build shim; (3) a registered exceptional intrusion into adopted external
+code; (4) newly authored behavior only when no usable historical source
+remains.  The record names the original owner and source path, preserves or
+explicitly accounts for layout, ordering, and failure behavior, and explains
+why every earlier applicable level cannot compose.  A CLI product requirement,
+the Bochs-for-SoftPC substitution, approved host-mutation modes, or the
+unpack-and-run host non-intrusion rule may constrain a decision only when the
+owner has explicitly recorded that exception.  Convenience, a trace hit, or a
+temporary capacity limit is never a reason to skip a level.
+
 For every P or Td closure:
 
 1. Re-read the owner request and map each requirement to changed files and

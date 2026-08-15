@@ -2,6 +2,7 @@
   "schema": "ntdos64.t198.s50.bx-vdm-composition.v1",
   "compileSources": [
     "src/bx-vdm/bx_ntvdm_bios_memory_service.c",
+    "src/bx-vdm/bx_ntvdm_bop_sequence_observation_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_boot_drive_service.c",
     "src/bx-vdm/bx_ntvdm_dem_check_path_service_v1.c",
     "src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c",

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1515 |
+| Documentation records | 1516 |
 | --- | --- |
-| Generated UTC | 2026-08-15T17:34:32Z |
+| Generated UTC | 2026-08-15T17:44:00Z |
 
 ## Entries
 
@@ -744,6 +744,7 @@ content-divergent entries.
 | etc/research/t215-s3-native-controlled-terminal-causal-map-001.md | indexed supporting material | ab6ec97eb00a828c7c933c30de2c5e10fdab3bdfe1ec2feff824489018b5e134 |
 | etc/research/t215-s4-startup-configuration-attachment-001.md | indexed supporting material | cae97e70c90d6f6c31739b78a1e46aab4a470cd1afa89316b9d6a528b15e2b42 |
 | etc/research/t215-s5-startup-image-direct-provider-overlay-001.md | indexed supporting material | ada9f51712a831a19bfed0cdbc0ec18d6449588009d20c464c59cd4aa63d8e80 |
+| etc/research/t215-s6-startup-bop-sequence-causal-map-001.md | indexed supporting material | f22254f62777158fc7b65bb754562a748eca8452ad9723ae488d6f473a107f33 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -1504,7 +1505,7 @@ content-divergent entries.
 | rules/ARCHITECTURE.md | current rule authority | 7dba6eb31a9a94f03a5d8ffa3a9b542cfa20dc642a27731d1b198e510422421a |
 | rules/CODING.md | current rule authority | a1a6242ba717dccce211800a515f9e65ba8451f38206b785a2f167cb891e5279 |
 | rules/DOCUMENT.md | current rule authority | 9f55864347f265afe78af803a67df10bfa20fb273fca6594803c8e64c4a4cbda |
-| rules/EXECUTION.md | current rule authority | 45797859c45edda586a02190456ce38eb2fbd65cb24facfd63db8a1f11e0dcda |
+| rules/EXECUTION.md | current rule authority | 4dfd32e9f62f4f9024af2de825d810ba3026e0c86173549156bcb5d0be28ec55 |
 | S1-HISTORICAL-HOST-CLOSURE.md | retained pre-governance evidence | 0796b7bf5f0a780fbd7a989938474045ed2d3aa2a6b68b8697605393bd2e1bb8 |
 | S2-HISTORICAL-BRIDGE-RECORD-CONTRACT.md | retained pre-governance evidence | 87cfbdc12b2efd572fda88091b6ca9707d4bcc6dfe2b9efcf39fd2e4374f8805 |
 | S3-RECONSTRUCTED-MONITOR-SEMANTICS.md | retained pre-governance evidence | 78db2e8e9c0665b39852cc3739a142cb81304d44b6110c33c51a771aac599ffb |
@@ -1529,7 +1530,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | fe998c50132f044cd005c539c516ddce69084f6059c9d7e25fbd6fb869025d04 |
+| STATUS.md | principal control document | e8808ab3a876c9c8f2f092665507e587c019675a1799ff22fc9c4c97854e7d49 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |
