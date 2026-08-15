@@ -111,6 +111,57 @@ function Get-CurrentCompositionState([string]$selector, $service) {
     }
 }
 
+function Get-TargetDisposition([string]$selector, $service) {
+    $number = if ($null -eq $service) { -1 } else { [int]$service }
+    switch ($selector) {
+        '50' {
+            if ($number -in @(31, 36, 38, 40, 43, 64, 67)) { return 'original-no-op' }
+            if ($number -eq 66) { return 'source-derived compatibility' }
+            if ($number -in @(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30,32,34,39,44,45,46,47,48,49,65,68,70)) {
+                return 'original+CLI-seam/direct-host candidate'
+            }
+            if ($number -in @(33,41,42)) { return 'deferred/unavailable device profile' }
+            if ($number -in @(50,51,63)) { return 'original+CLI-seam/direct-handle candidate' }
+            return 'deferred/source-derived owner-package recovery'
+        }
+        '51' { return 'deferred/unavailable WOW composition' }
+        '52' {
+            if ($number -in @(0,2,3,5,11)) { return 'original+mechanical-seam candidate' }
+            if ($number -eq 9) { return 'deferred/unavailable machine interrupt profile' }
+            return 'deferred owner-package recovery'
+        }
+        '53' { return 'deferred/unavailable protected-mode composition' }
+        '54' {
+            if ($number -in @(4,6,7,9,12,13,14)) { return 'original+CLI-seam candidate' }
+            if ($number -in @(8,10)) { return 'deferred explicit host-launch profile' }
+            if ($number -in @(0,1,2,3,5,11,15,16)) { return 'source-derived CLI session/engine seam' }
+            return 'deferred/unavailable COMMAND package' }
+        '56' { return 'deferred debugger profile' }
+        '57' { return 'source-derived unavailable network/IPC profile' }
+        '59' { return 'explicit unavailable or diagnostic profile' }
+        '5A' { return 'original+CLI lifecycle seam candidate' }
+        '5B' { return 'explicit unavailable or diagnostic profile' }
+        '5C' { return 'deferred machine/device profile' }
+        '5D' { return 'deferred machine/device profile' }
+        '5E' { return 'original+mechanical-seam candidate' }
+        '5F' { return 'deferred/unavailable machine handoff' }
+        'FD' { return 'deferred machine/device profile' }
+        'FE' { return 'source-derived engine terminal' }
+        default { return 'unclassified' }
+    }
+}
+
+function Get-ProfileRelation([string]$selector, $service) {
+    $target = Get-TargetDisposition $selector $service
+    if ($target -like '*direct-host*' -or $target -like '*direct-handle*') { return 'default direct host profile' }
+    if ($target -like '*network*') { return 'default unavailable; opt-in network/IPC profile' }
+    if ($target -like '*host-launch*') { return 'default unavailable; opt-in host-launch/session profile' }
+    if ($target -like '*machine*' -or $target -like '*mechanical*') { return 'admitted machine/device profile required' }
+    if ($target -like '*debugger*') { return 'default unavailable; opt-in debugger profile' }
+    if ($target -like '*WOW*') { return 'default unavailable; complete WOW composition required' }
+    return 'default CLI profile or owning package admission required'
+}
+
 $all = [System.Collections.Generic.List[object]]::new()
 foreach ($row in (Extract-Array 'src/opennt/base/mvdm/dos/dem/demdisp.c' 'apfnSVC\s*\[\]\s*=' '50' 10)) { $all.Add($row) }
 foreach ($row in (Extract-Array 'src/opennt/base/mvdm/dos/command/cmddisp.c' 'apfnSVCCmd\s*\[\]\s*=' '54' 10)) { $all.Add($row) }
@@ -161,6 +212,8 @@ $seeded = foreach ($entry in $ordered) {
         ownerPackage = Get-OwnerPackage $entry.selector $entry.service
         currentIngressState = Get-CurrentIngressState $entry.selector $entry.service
         currentCompositionState = Get-CurrentCompositionState $entry.selector $entry.service
+        targetDisposition = Get-TargetDisposition $entry.selector $entry.service
+        profileRelation = Get-ProfileRelation $entry.selector $entry.service
         auditState = 'source identity and owner assigned; ABI/failure/API review pending'
     }
 }

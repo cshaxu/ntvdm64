@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1380 |
+| Documentation records | 1381 |
 | --- | --- |
-| Generated UTC | 2026-08-15T01:34:54Z |
+| Generated UTC | 2026-08-15T01:39:17Z |
 
 ## Entries
 
@@ -153,6 +153,7 @@ content-divergent entries.
 | etc/research/proposal-host-integrated-bop-capability-recovery-001.md | indexed supporting material | 90b4698184e0e73373854018a14f901a07736ca557a4b326437faa0dbde246a0 |
 | etc/research/proposal-opennt-dpmi-host-composition-001.md | indexed supporting material | 5d107ef9bd2a5438a960955b1f9ae3bd47692cf190f6ea5107092f8d940db16a |
 | etc/research/proposal-opennt-redirector-network-ipc-001.md | indexed supporting material | d16d2426cec6b661315baf68cba7f592baad65ca15ecfffec451dab8fdc4560f |
+| etc/research/proposal-unified-host-mutation-capability-profiles-001.md | indexed supporting material | fd5cba044c4dfe897bcf924eab407b4915723a2a1cf2684fb1fb8035c44bd9cb |
 | etc/research/proposal-wow16-guest-host-composition-001.md | indexed supporting material | 359fc63637ad8ec0891aca36166e536c6fee8b91d2618bbc8ca5f9349fc8db5f |
 | etc/research/r20-cmd-setinfo-contract.md | indexed supporting material | b27620060f0efa8504b80f8237ed66da58a4b302e2d34ec26d92eaec5a75b235 |
 | etc/research/r20-dem-getdpblist-boundary.md | indexed supporting material | 095a4aee41c09d1d95ef69d93926d841feaaac890e52544c509d4cdc24582809 |
@@ -638,7 +639,7 @@ content-divergent entries.
 | etc/research/t200-s29-excluded-drive-owner-map-001.md | indexed supporting material | cf76b9807e5e00e871d363114890cfeabe3f1df207f2a653031a2fbdbbd48411 |
 | etc/research/t200-s2-command-cmdinfo-native-frontier-diagnosis-001.md | indexed supporting material | c95451303bb329dafb9751ac2946e6a2ef4df551f26f71e4b78937b515bde848 |
 | etc/research/t200-s30-real-host-capability-source-abi-map-001.md | indexed supporting material | 7e3e7c59e70c490e4e39ca8cb5d12ed6d05a00258eb64c43740be7e8aa97ef77 |
-| etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md | indexed supporting material | f24b82a44257499de67a4baaa474ae402dc77e0af85b4a98d89fa0db3e0dc760 |
+| etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md | indexed supporting material | 1bab8c4ebcc8c9f4f4e502288fd02d2cf207b11d572c83d812bb9e37607d2a07 |
 | etc/research/t200-s3-command-cmdinfo-observation-fixture-001.md | indexed supporting material | 03f56909a31a2e66f0cc70d5fc3c45710b4b31f6cb40d6cd4759fd5fbcf01f5d |
 | etc/research/t200-s4-command-cmdinfo-native-observation-001.md | indexed supporting material | 9a8a014afde187eb5060d38ec06a008daa0165bf6c00482b3f930f52cd59c028 |
 | etc/research/t200-s5-command-return-next-lifecycle-001.md | indexed supporting material | 9c2cb0576745e1d92b805b4a8d98c47e63ed6c95debb54c90b94f5292d847a54 |
@@ -1268,7 +1269,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | 93a263d3aa4763d56f28078585a1a12f4ffff831020c2ba428dfb3b36cf16c6d |
-| QUEUE.md | principal control document | bd6b5018087442be1598ae636064b78249db23f4ab14a2bcc9873a8457211212 |
+| QUEUE.md | principal control document | 9b5be8c9f9ecfa7dbf0f32c37172db7053e5834dab35cff6e8571619add6956c |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | fef23048d411b355f5c2e08b971fec6370359120e7d9c7da383cb883f1dfa2da |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | dd298ea27d815fb69cc843ecf334a2664ba740bb6ede8e0c90907d918c64086a |
@@ -1394,7 +1395,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | c91330fffcaaa3553aeebe815c7ffb1eed5e35c9cc2dad6a15f22c3f4864711f |
+| STATUS.md | principal control document | bd27106a0119b1fb56930c4d77ff6153618ac9390794dd7ae8092010bc126ce1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |

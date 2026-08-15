@@ -85,13 +85,14 @@ bound composition.
 
 The candidate T must use the proposal's package order, not BOP trace order:
 
-1. shared CLI storage-profile and drive-view ABI;
+1. shared mutation-capability and drive-view ABI: one fixed-width direct,
+   readonly, overlay and virtual-volume selection for all host-backed state;
 2. DEM direct-host namespace/directory/cwd/volume;
 3. DEM direct-host file/handle/FCB/search/read-write;
 4. COMMAND direct-host console/environment/cwd/bootstrap/launch;
-5. complete readonly profile;
-6. volatile overlay profile;
-7. virtual boot-volume profile;
+5. migrate complete readonly behavior to the shared profile ABI;
+6. migrate volatile overlay behavior to the shared profile ABI;
+7. virtual boot-volume profile on the shared ABI;
 8. remaining-family reclassification, obsolete-code deletion, family
    regressions and bounded native integration.
 
@@ -105,23 +106,28 @@ The candidate T must use the proposal's package order, not BOP trace order:
   `src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c`.
 - Reproducible source inventory: run
   `tools/Export-T200S31BopSourceInventory.ps1` against the repository. Its
-  corrected output, `t200-s31-bop-source-inventory-r8`, contains 203 original
+  corrected output, `t200-s31-bop-source-inventory-r9`, contains 203 original
   dispatcher/header entries and is the mandatory coverage set for the
   endpoint-level ledger. Revision r1's count of 199 is superseded: its parser
   omitted un-commented or non-comma-terminated final entries from historical
   dispatch arrays; the array index is itself an ABI fact.
 - Policy decision and target storage profiles:
   [host-integrated recovery proposal](proposal-host-integrated-bop-capability-recovery-001.md).
+- Common mutation class/profile owner decision:
+  [unified mutation-profile proposal](proposal-unified-host-mutation-capability-profiles-001.md).
 
-The r8 artifact has one mechanically generated row for every one of those
+The r9 artifact has one mechanically generated row for every one of those
 203 endpoints, with original handler/source, exactly one owner package, the
 current ingress state, and the actual bound-composition state derived from
-the façade/session routes. It is deliberately marked `ABI/failure/API review
-pending`: a mapped/deferred route is not a provider and the generated owner
-is a coverage guard, not a compatibility claim. The human ledger expands
-each row's caller, layout, host API, failure path, current bx-vdm code and
-final disposition. Unknown is recorded as unknown; it is never inferred from
-a trace hit.
+the façade/session routes. It also assigns exactly one **target disposition**
+and profile relation to every row. These are admission decisions for the
+next owner packages, not implementation claims: all rows remain marked
+`ABI/failure/API review pending` until their package supplies those fields.
+A mapped/deferred route is not a provider and the generated owner is a
+coverage guard, not a compatibility claim. The human ledger expands each
+row's caller, layout, host API, failure path, current bx-vdm code and final
+disposition. Unknown is recorded as unknown; it is never inferred from a
+trace hit.
 
 ### Mechanical reconciliation at r2
 
@@ -164,7 +170,7 @@ a narrow CLI seam or retain the original unavailable/deferred result.
 ## DEM first-pass owner groups (`50:00..48`)
 
 The historical `apfnSVC` array in `demdisp.c` is the authoritative ordering.
-The r8 inventory supplies the individual 73 source rows.  The following
+The r9 inventory supplies the individual 73 source rows.  The following
 partition corrects the earlier coarse ranges: each hex service is in exactly
 one owner row and thereby gives the per-service audit a non-overlapping work
 set.
@@ -311,7 +317,7 @@ profile is admitted.
 
 ### Redirector endpoint partition (`57:00..31`)
 
-`rdrsvc.h` supplies all fifty identity rows in the r8 inventory.  They are a
+`rdrsvc.h` supplies all fifty identity rows in the r9 inventory.  They are a
 single network/IPC composition package, but the following non-overlapping
 partition records their eventual provider and failure work rather than
 allowing local DEM files to accidentally satisfy them.
