@@ -40,5 +40,5 @@ int main(void)
     gap[2] = 3u; gap[4] = 3u;
     return !test_snapshot((UINT32_C(1) << 2) | (UINT32_C(1) << 3) |
         (UINT32_C(1) << 4), contiguous, 5u) ||
-        !test_snapshot((UINT32_C(1) << 2) | (UINT32_C(1) << 4), gap, 3u);
+        !test_snapshot((UINT32_C(1) << 2) | (UINT32_C(1) << 4), gap, 5u);
 }

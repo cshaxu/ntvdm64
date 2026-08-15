@@ -7,17 +7,17 @@ static int bx_ntvdm_dem_drive_provider_v1_count(
 {
     uint32_t index;
     uint16_t value = 2u;
-    int contiguous = 1;
     if (!bx_ntvdm_host_drive_snapshot_v1_valid(snapshot) || count == 0)
         return 0;
-    /* Matches demGetDrives: A/B do not alter nDrives; C onward contributes
-     * only while types are contiguous and removable/fixed/CD/RAM. */
+    /* OpenNT counts contiguous physical drives.  A filtered host projection
+     * can intentionally contain a letter gap (for example C excluded but D
+     * admitted), so preserve DOS letter identity by reporting the highest
+     * admitted physical-letter bound rather than reindexing or hiding D:. */
     for (index = 2u; index < 26u; ++index) {
         uint8_t type = snapshot->types[index];
-        if (contiguous && (type == 2u || type == 3u || type == 5u || type == 6u))
-            ++value;
-        else
-            contiguous = 0;
+        if ((snapshot->admitted_mask & (UINT32_C(1) << index)) != 0u &&
+            (type == 2u || type == 3u || type == 5u || type == 6u))
+            value = (uint16_t)(index + 1u);
     }
     *count = value;
     return 1;

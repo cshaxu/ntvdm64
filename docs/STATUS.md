@@ -79,6 +79,10 @@
 > drive and never synthesizes C: when it is excluded; see the
 > [boot-drive evidence](etc/research/t202-s2-dem-boot-drive-admission-001.md).
 
+> **T202 S2 progress:** `50:0F` now preserves sparse admitted DOS drive
+> letters rather than hiding an admitted later drive behind an excluded gap;
+> see the [GSET projection evidence](etc/research/t202-s2-dem-drive-projection-gset-001.md).
+
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition
 > lifecycle, repaired its strict C11 source closure, and recorded the separate
