@@ -11,6 +11,7 @@ int main(void)
     uint8_t drive;
     HANDLE source = INVALID_HANDLE_VALUE, opened = INVALID_HANDLE_VALUE;
     DWORD written = 0u, read = 0u;
+    DWORD error = ERROR_SUCCESS;
     char output = 0;
     int failed = 0;
     if (GetTempPathW(MAX_PATH, temporary) == 0u ||
@@ -36,13 +37,15 @@ int main(void)
         DeleteFileW(temporary);
         return 4;
     }
-    failed |= !bx_ntvdm_host_namespace_v1_open_file(&space, drive, relative,
-        GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, &opened) ||
+    failed |= !bx_ntvdm_host_namespace_v1_open_file_ex(&space, drive, relative,
+        GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, &opened, &error) ||
+        error != ERROR_SUCCESS ||
         !ReadFile(opened, &output, 1u, &read, 0) || read != 1u || output != 'x';
     if (opened != INVALID_HANDLE_VALUE) CloseHandle(opened);
     opened = INVALID_HANDLE_VALUE;
-    failed |= bx_ntvdm_host_namespace_v1_open_file(&space, drive, L"..\\X.TXT",
-        GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, &opened) != 0;
+    failed |= bx_ntvdm_host_namespace_v1_open_file_ex(&space, drive, L"..\\X.TXT",
+        GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, &opened, &error) != 0 ||
+        error != ERROR_INVALID_PARAMETER;
     bx_ntvdm_host_namespace_v1_release(&space);
     DeleteFileW(temporary);
     return failed ? 5 : 0;

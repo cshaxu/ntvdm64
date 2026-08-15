@@ -116,6 +116,12 @@
 > close the 29-identity provider, and leaves VDMREDIR pipe specialization and
 > historic hard-error ownership explicit; see the [session evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 progress:** the selector-blind admitted-root open primitive now
+> retains a copied Win32 failure code for the namespace/metadata provider;
+> r3 root-open and r12 whole-provider regressions pass under MSVC x64 `/MT`.
+> This is shared host-capability plumbing, not a BOP dispatch or route switch;
+> see the [root-open evidence](etc/research/t202-s4-host-namespace-root-relative-open-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

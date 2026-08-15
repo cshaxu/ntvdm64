@@ -38,6 +38,15 @@ The new direct file-open path avoids using that enumeration as an I/O lookup
 mechanism.  Search still retains its separately stated 8.3 collision policy
 and must not borrow this direct-open behavior without its own source review.
 
+Revision r3 adds `bx_ntvdm_host_namespace_v1_open_file_ex`. It retains the
+same root-relative, adapter-private boundary but maps a rejected native open
+back to a Win32 error via the available `RtlNtStatusToDosError` API. The new
+output is a copied scalar for later `demClientError`-shaped results; it does
+not expose an `NTSTATUS`, root handle, or host path. The r3 focused probe
+verifies both `ERROR_SUCCESS` for the actual temporary-file open and
+`ERROR_INVALID_PARAMETER` for preflight rejection of `..`; r12 also confirms
+the existing complete-provider fixture still passes.
+
 ## Interpretation and confidence
 
 The adapter now has a contained direct-host primitive required by the later

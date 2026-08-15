@@ -421,6 +421,17 @@ int bx_ntvdm_host_namespace_v1_open_file(
     const wchar_t *relative_path, ACCESS_MASK desired_access,
     ULONG share_access, DWORD creation_disposition, HANDLE *handle_out)
 {
+    return bx_ntvdm_host_namespace_v1_open_file_ex(space, drive_index,
+        relative_path, desired_access, share_access, creation_disposition,
+        handle_out, 0);
+}
+
+int bx_ntvdm_host_namespace_v1_open_file_ex(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, ACCESS_MASK desired_access,
+    ULONG share_access, DWORD creation_disposition, HANDLE *handle_out,
+    DWORD *win32_error_out)
+{
     UNICODE_STRING object_name;
     OBJECT_ATTRIBUTES attributes;
     IO_STATUS_BLOCK status_block;
@@ -430,6 +441,7 @@ int bx_ntvdm_host_namespace_v1_open_file(
     NTSTATUS status;
     size_t length;
     if (handle_out != 0) *handle_out = INVALID_HANDLE_VALUE;
+    if (win32_error_out != 0) *win32_error_out = ERROR_INVALID_PARAMETER;
     if (!bx_ntvdm_host_namespace_v1_valid(space) || handle_out == 0 ||
         drive_index >= 26u ||
         (space->available_mask & bx_ntvdm_host_namespace_bit(drive_index)) == 0u ||
@@ -449,9 +461,13 @@ int bx_ntvdm_host_namespace_v1_open_file(
     if (status < 0 || !bx_ntvdm_host_namespace_file_info(handle, &info) ||
         (info.dwFileAttributes & (FILE_ATTRIBUTE_DIRECTORY |
             FILE_ATTRIBUTE_REPARSE_POINT)) != 0u) {
+        DWORD error = status < 0 ? (DWORD)RtlNtStatusToDosError(status) : GetLastError();
         if (handle != INVALID_HANDLE_VALUE) CloseHandle(handle);
+        if (win32_error_out != 0)
+            *win32_error_out = error == ERROR_SUCCESS ? ERROR_INVALID_DATA : error;
         return 0;
     }
     *handle_out = handle;
+    if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
     return 1;
 }

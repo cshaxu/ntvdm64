@@ -76,6 +76,15 @@ int bx_ntvdm_host_namespace_v1_open_file(
     const wchar_t *relative_path, ACCESS_MASK desired_access,
     ULONG share_access, DWORD creation_disposition, HANDLE *handle_out);
 
+/* The extended form retains the native failure as a Win32 error value for a
+ * source-derived provider's demClientError-shaped result.  Like the basic
+ * form, it keeps the root and returned handle adapter-private. */
+int bx_ntvdm_host_namespace_v1_open_file_ex(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, ACCESS_MASK desired_access,
+    ULONG share_access, DWORD creation_disposition, HANDLE *handle_out,
+    DWORD *win32_error_out);
+
 #ifdef __cplusplus
 }
 #endif
