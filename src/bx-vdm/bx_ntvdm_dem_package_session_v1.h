@@ -22,6 +22,8 @@ typedef struct bx_ntvdm_dem_package_session_v1 {
     bx_ntvdm_dem_profile_consumer_v1 mutation_profile;
     bx_ntvdm_dem_cwd_context_v1 cwd;
     uint32_t has_mutation_profile;
+    uint32_t boot_drive_index;
+    uint32_t has_boot_drive;
 } bx_ntvdm_dem_package_session_v1;
 
 #ifdef __cplusplus
@@ -44,6 +46,8 @@ int bx_ntvdm_dem_package_session_v1_set_mutation_profile(
 int bx_ntvdm_dem_package_session_v1_set_host_namespace(
     bx_ntvdm_dem_package_session_v1 *session,
     const bx_ntvdm_host_namespace_v1 *host_namespace);
+int bx_ntvdm_dem_package_session_v1_set_boot_drive(
+    bx_ntvdm_dem_package_session_v1 *session, uint32_t drive_index);
 int bx_ntvdm_dem_package_session_v1_resolve_mutation_class(
     const bx_ntvdm_dem_package_session_v1 *session,
     uint32_t mutation_class, uint32_t *policy_result_out);

@@ -280,6 +280,13 @@ int bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
             host_namespace);
 }
 
+int bx_ntvdm_boot_namespace_composition_v1_set_dem_boot_drive(
+    bx_ntvdm_boot_namespace_composition_v1 *value, uint32_t drive_index)
+{
+    return valid(value) && !value->bound &&
+        bx_ntvdm_dem_package_session_v1_set_boot_drive(&value->dem, drive_index);
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
     bx_ntvdm_boot_namespace_composition_v1 *value, const byob_launch_plan_v2 *plan)
 { return valid(value) && !value->bound &&

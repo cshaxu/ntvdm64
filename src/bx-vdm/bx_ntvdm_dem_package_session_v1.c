@@ -37,7 +37,7 @@ static int write_tx(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_multi_writ
   for(i=0;i<a.range_count;i++){a.ranges[i].physical_address=t->writes.writes[i].guest_physical_address;a.ranges[i].byte_count=(uint32_t)t->writes.writes[i].byte_count;a.ranges[i].payload_offset=(uint32_t)t->writes.writes[i].payload_offset;}
   memcpy(a.payload,payload,a.payload_bytes);return bx_ntvdm_mechanical_action_v1_valid(&a)&&bx_ntvdm_mantle_execute_mechanical_action_v1(&a); }
 int bx_ntvdm_dem_package_session_v1_valid(const bx_ntvdm_dem_package_session_v1 *s)
-{ return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_mutation_profile<=1u&&(!s->has_mutation_profile|| (bx_ntvdm_dem_profile_consumer_v1_valid(&s->mutation_profile)&&bx_ntvdm_dem_cwd_context_v1_valid(&s->cwd))); }
+{ return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_mutation_profile<=1u&&s->has_boot_drive<=1u&&(!s->has_boot_drive||s->boot_drive_index<26u)&&(!s->has_mutation_profile|| (bx_ntvdm_dem_profile_consumer_v1_valid(&s->mutation_profile)&&bx_ntvdm_dem_cwd_context_v1_valid(&s->cwd))); }
 int bx_ntvdm_dem_package_session_v1_initialize(bx_ntvdm_dem_package_session_v1 *s,bx_ntvdm_boot_namespace_plane_v1 *p)
 { if(!s||!p)return 0;memset(s,0,sizeof(*s));s->magic=BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC;s->abi_version=BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION;s->struct_bytes=(uint32_t)sizeof(*s);s->namespace_plane=p;bx_ntvdm_dem_error_lock_plane_v1_clear(&s->error_lock);bx_ntvdm_dem_gset_plane_v1_clear(&s->gset);s->initialized=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
 int bx_ntvdm_dem_package_session_v1_set_drive_snapshot(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_host_drive_snapshot_v1 *v)
@@ -53,6 +53,11 @@ int bx_ntvdm_dem_package_session_v1_set_host_namespace(
     host_namespace&&bx_ntvdm_host_namespace_v1_valid(host_namespace)&&
     bx_ntvdm_boot_namespace_plane_v1_set_dem_cwd_context(s->namespace_plane,
         &s->cwd,host_namespace); }
+int bx_ntvdm_dem_package_session_v1_set_boot_drive(
+    bx_ntvdm_dem_package_session_v1 *s, uint32_t drive)
+{ if(!bx_ntvdm_dem_package_session_v1_valid(s)||s->has_boot_drive||drive>=26u||
+    !s->gset.has_drive_snapshot||!(s->gset.drive_snapshot.admitted_mask&(UINT32_C(1)<<drive)))return 0;
+  s->boot_drive_index=drive;s->has_boot_drive=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
 int bx_ntvdm_dem_package_session_v1_resolve_mutation_class(const bx_ntvdm_dem_package_session_v1 *s,uint32_t c,uint32_t *r)
 { return bx_ntvdm_dem_package_session_v1_valid(s)&&s->has_mutation_profile&&bx_ntvdm_dem_profile_consumer_v1_resolve(&s->mutation_profile,c,r); }
 int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_bop_ingress_v1 *i,const bx_ntvdm_bop_provider_selection_v1 *p,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
@@ -71,7 +76,7 @@ int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,
   if(s->gset.has_volume_snapshot&&bx_ntvdm_dem_full_dpb_service_v1_prepare(&s->gset.volume_snapshot,e,c,w,&tx,payload)){if(!write_tx(s,&tx,payload))return 0;*r=tx.result;return 1;}
   if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_ioctl_metadata_provider_v1_dispatch(i,p,&plane,&s->gset.drive_snapshot,e,c,r))return terminal_or_complete(i,p,&route,e,c,w,r);
   if(bx_ntvdm_dem_raw_media_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
-  if(bx_ntvdm_dem_boot_drive_service_v1_dispatch(e,c,w,&mem))return memory_result(&mem,r);
+  if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_boot_drive_service_v2_dispatch(&s->gset.drive_snapshot,s->has_boot_drive?s->boot_drive_index:UINT32_MAX,e,c,w,&mem))return memory_result(&mem,r);
   if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_dpb_service_v1_prepare(s->gset.drive_snapshot.types,e,c,w,&tx,payload)){if(!write_tx(s,&tx,payload))return 0;*r=tx.result;return terminal_or_complete(i,p,&route,e,c,w,r);}
   if(bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
   /* A selected DEM provider may reject a mode/precondition.  The package

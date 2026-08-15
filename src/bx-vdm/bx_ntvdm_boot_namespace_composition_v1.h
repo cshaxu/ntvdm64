@@ -58,6 +58,8 @@ int bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
 int bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_host_namespace_v1 *host_namespace);
+int bx_ntvdm_boot_namespace_composition_v1_set_dem_boot_drive(
+    bx_ntvdm_boot_namespace_composition_v1 *value, uint32_t drive_index);
 int bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const byob_launch_plan_v2 *plan);
