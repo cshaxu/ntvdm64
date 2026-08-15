@@ -8,7 +8,9 @@
 #define BX_NTVDM_MUTATION_OVERLAY_V1_MAGIC 0x42584d4fu
 #define BX_NTVDM_MUTATION_OVERLAY_V1_VERSION 1u
 #define BX_NTVDM_MUTATION_OVERLAY_V1_MAX_RECORDS 16u
-#define BX_NTVDM_MUTATION_OVERLAY_V1_MAX_BYTES 64u
+/* Covers the largest currently admitted copied session value: the DEM CWD
+ * context's 128-wide-character relative path including its terminator. */
+#define BX_NTVDM_MUTATION_OVERLAY_V1_MAX_BYTES 256u
 
 typedef struct bx_ntvdm_mutation_overlay_record_v1 {
     uint32_t owner_id;

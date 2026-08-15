@@ -28,7 +28,8 @@ No branch invokes `SetCurrentDirectory`, creates a virtual boot volume, or
 exposes a host path/handle. A new generic overlay `replace` operation preserves
 the existing append-only `record` operation while allowing a legitimate
 stateful capability to update its already-authorized key (for example repeated
-`CD`).
+`CD`). The common overlay record capacity is 256 bytes, covering the CWD
+context's bounded 128-wide-character copied value including its terminator.
 
 ## Observations
 
