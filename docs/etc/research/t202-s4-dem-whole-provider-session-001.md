@@ -255,3 +255,11 @@ roundtrip without a host handle or guest pointer. The retained host-installed
 composition fixture recompiles and runs with this route linked. This is a
 token-qualified transition, not complete FCB, package-switch, native-trace or
 DEM closure.
+
+Revision r35 corrects the FCB result-register mapping after a direct
+`demfcb.c` comparison: `2C/2D` use `AX:BP`, `BX:CX`, `DX:SI`; `2F` uses
+`AX:BX` and `CX`; `30` uses `AX:DX`; and `31` uses `AX/CX/DX/BX:DI`. The r2
+fixture asserts the corrected masks and `CX` transfer count alongside the
+existing real-host FCB I/O transaction. This correction affects only copied
+CPU-result layout; it neither broadens host capability nor changes the route
+admission rule.

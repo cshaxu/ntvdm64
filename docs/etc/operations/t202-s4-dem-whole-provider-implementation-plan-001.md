@@ -139,3 +139,9 @@ registration.  The route copies bytes to or from that registered
 guest-physical range through a mechanical action; it does not dereference a
 DOS pointer, discover an FCB, or expose a native handle. All other FCB
 pathname/record requests remain behind the final atomic package switch.
+
+The copied CPU-result slots retain `demfcb.c` exactly: `2C/2D` return the
+opaque token in `AX:BP`, time/date in `BX:CX`, and size in `DX:SI`; `2F`
+returns size in `AX:BX` and transferred bytes in `CX`; `30` returns date/time
+in `AX:DX`; and `31` returns attributes/time/date/size in `AX/CX/DX/BX:DI`.
+These are guest-register layout facts, not host ABI fields.

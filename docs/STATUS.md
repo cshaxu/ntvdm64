@@ -233,6 +233,12 @@
 > final pathname/FCB switch, full FCB evidence, DEM closure or native trace;
 > see the [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 correction:** direct `demfcb.c` ABI review found and corrected
+> copied result-register layouts for `2C/2D/2F/30/31` (including `2F` byte
+> count in `CX`, not `BX`). r2 locks those layouts in the source-built
+> whole-provider fixture. This is an FCB ABI correction only; it does not
+> expand host capability or alter the package-transition limits above.
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

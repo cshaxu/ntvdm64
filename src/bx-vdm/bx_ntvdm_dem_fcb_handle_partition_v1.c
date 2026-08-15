@@ -88,7 +88,7 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         SYSTEMTIME now; GetLocalTime(&now);
         return finish(boundary, result, (uint16_t)((now.wYear << 9) |
             ((now.wMonth & 0x0fu) << 5) | (now.wDay & 0x1fu)), 1, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u,
                 (uint16_t)((now.wHour << 11) | ((now.wMinute & 0x3fu) << 5) |
                 ((now.wSecond / 2u) & 0x1fu)));
     }
@@ -109,10 +109,10 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
             !file_info(handle, &time, &date, &size)) return error_result(boundary, result, GetLastError());
         return finish(boundary, result, (uint16_t)(opaque >> 16), 1, 0) &&
             bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u, (uint16_t)opaque) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, time) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, date) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 6u, (uint16_t)size) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, (uint16_t)(size >> 16));
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, time) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, date) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)size) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 4u, (uint16_t)(size >> 16));
     }
     if (service == 0x2eu) {
         opaque = token_si(cpu);
@@ -140,10 +140,10 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         (void)bx_ntvdm_dem_file_session_v1_release(&provider->files, opaque);
         if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u; else attributes &= 0x37u;
         return finish(boundary, result, (uint16_t)attributes, 1, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, time) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, date) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 4u, (uint16_t)size) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)(size >> 16));
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, time) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, date) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 6u, (uint16_t)size) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)(size >> 16));
     }
     opaque = token_bp(cpu);
     if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files, opaque, &handle))
@@ -158,12 +158,12 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
     if ((cpu->ebx & 0xffffu) != 0u) {
         if (!ReadFile(handle, io_bytes, (DWORD)(cpu->ecx & 0xffffu), &transferred, 0)) return error_result(boundary, result, GetLastError());
     } else if (!WriteFile(handle, io_bytes, (DWORD)(cpu->ecx & 0xffffu), &transferred, 0)) {
-        error = GetLastError(); if (error == DEM_ERROR_DISK_FULL) return finish(boundary, result, 1u, 1, 1) && bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)transferred);
+        error = GetLastError(); if (error == DEM_ERROR_DISK_FULL) return finish(boundary, result, 1u, 1, 1) && bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, (uint16_t)transferred);
         return error_result(boundary, result, error);
     }
     if (!file_info(handle, &time, &date, &size)) return error_result(boundary, result, GetLastError());
     *io_byte_count = transferred;
     return finish(boundary, result, (uint16_t)(size >> 16), 1, 0) &&
-        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)size) &&
-        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)transferred);
+        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)size) &&
+        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, (uint16_t)transferred);
 }
