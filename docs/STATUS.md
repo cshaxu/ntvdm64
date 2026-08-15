@@ -58,6 +58,11 @@
 > existing CONFIG read/refusal checks. Host-plus-declared search merge remains
 > open, so this is not package closure. See the [P1 record](etc/research/t216-s2-declared-image-handle-p1-001.md).
 
+> **T216 S2 P2 progress:** pathname search now merges the declared root-image
+> snapshot over host entries. A fresh x64 `/MT` test proves root `COMMAND.COM`
+> uses declared metadata while a non-root host search keeps `ALPHA/ZETA` host
+> results. FCB search remains open; no package-closure claim is made.
+
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
 > and COMMAND composition descriptions, preserves deferred/unavailable family

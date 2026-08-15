@@ -29,6 +29,8 @@ int bx_ntvdm_dem_whole_provider_v1_valid(
         bx_ntvdm_dem_file_session_v1_valid(&provider->files) &&
         bx_ntvdm_dem_local_file_backend_v1_valid(&provider->local_files) &&
         bx_ntvdm_search_transaction_v1_valid(&provider->search) &&
+        (provider->declared_search_snapshot == 0 ||
+         bx_ntvdm_profile_search_snapshot_v1_valid(provider->declared_search_snapshot)) &&
         provider->path_search_dta_address < UINT64_C(0x100000) &&
         provider->next_action_id != 0u && provider->pending_service <= 0x48u &&
         ((provider->pending_action_id == 0u && provider->pending_bytes == 0u) ||
@@ -90,6 +92,17 @@ int bx_ntvdm_dem_whole_provider_v1_set_startup_namespace(
         startup_namespace->open != 0u || startup_namespace->file_count < 3u)
         return 0;
     provider->startup_namespace = startup_namespace;
+    return bx_ntvdm_dem_whole_provider_v1_valid(provider);
+}
+
+int bx_ntvdm_dem_whole_provider_v1_set_declared_search_snapshot(
+    bx_ntvdm_dem_whole_provider_v1 *provider,
+    const bx_ntvdm_profile_search_snapshot_v1 *snapshot)
+{
+    if (!bx_ntvdm_dem_whole_provider_v1_valid(provider) ||
+        provider->declared_search_snapshot != 0 || snapshot == 0 ||
+        !bx_ntvdm_profile_search_snapshot_v1_valid(snapshot)) return 0;
+    provider->declared_search_snapshot = snapshot;
     return bx_ntvdm_dem_whole_provider_v1_valid(provider);
 }
 

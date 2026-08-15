@@ -161,7 +161,9 @@ int bx_ntvdm_dem_package_session_v1_set_host_namespace(
       &s->mutation_profile.profile,host_namespace,&s->cwd))return 0;
   if(!bx_ntvdm_boot_namespace_plane_v1_set_dem_cwd_context(s->namespace_plane,
       &s->cwd,host_namespace)||!bx_ntvdm_dem_whole_provider_v1_set_startup_namespace(
-      &s->whole_provider,&s->namespace_plane->provider.readonly_namespace)){
+      &s->whole_provider,&s->namespace_plane->provider.readonly_namespace)||
+      !bx_ntvdm_dem_whole_provider_v1_set_declared_search_snapshot(
+      &s->whole_provider,&s->namespace_plane->provider.search_snapshot)){
     bx_ntvdm_dem_whole_provider_v1_teardown(&s->whole_provider);return 0;}
   s->has_whole_provider=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
 int bx_ntvdm_dem_package_session_v1_set_boot_drive(

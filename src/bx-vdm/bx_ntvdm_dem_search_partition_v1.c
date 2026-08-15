@@ -94,8 +94,8 @@ int bx_ntvdm_dem_search_partition_v1_complete(
             action->ranges[0].length != 128u || action->ranges[1].length != 4u ||
             action->ranges[2].length != 2u || !real_address(word(copied + 130u),
             word(copied + 128u), 43u, &output_address)) return 0;
-        result = bx_ntvdm_search_transaction_v1_path_first(&provider->search,
-            provider->host_namespace, boundary, cpu_before, word(copied + 132u),
+        result = bx_ntvdm_search_transaction_v1_path_first_merged(&provider->search,
+            provider->host_namespace, provider->declared_search_snapshot, boundary, cpu_before, word(copied + 132u),
             output_address, copied, (uint16_t)cpu_before->ecx, transaction,
             payload, payload_bytes);
         if (result >= 0) provider->path_search_dta_address = output_address;

@@ -6,6 +6,7 @@
 #include "bx_ntvdm_exception_abi.h"
 #include "bx_ntvdm_guest_gather_read_action_v1.h"
 #include "bx_ntvdm_readonly_namespace.h"
+#include "bx_ntvdm_profile_search_snapshot_v1.h"
 
 #define BX_NTVDM_DEM_WHOLE_PROVIDER_V1_MAGIC 0x42585750u
 #define BX_NTVDM_DEM_WHOLE_PROVIDER_V1_VERSION 1u
@@ -22,6 +23,7 @@ typedef struct bx_ntvdm_dem_whole_provider_v1 {
     /* Borrowed from the boot/startup provider.  It is restricted to its two
      * generated startup images and contains no host handle or guest pointer. */
     bx_ntvdm_readonly_namespace_v1 *startup_namespace;
+    const bx_ntvdm_profile_search_snapshot_v1 *declared_search_snapshot;
     bx_ntvdm_dem_file_session_v1 files;
     bx_ntvdm_dem_local_file_backend_v1 local_files;
     bx_ntvdm_search_transaction_v1 search;
@@ -54,6 +56,9 @@ void bx_ntvdm_dem_whole_provider_v1_teardown(
 int bx_ntvdm_dem_whole_provider_v1_set_startup_namespace(
     bx_ntvdm_dem_whole_provider_v1 *provider,
     bx_ntvdm_readonly_namespace_v1 *startup_namespace);
+int bx_ntvdm_dem_whole_provider_v1_set_declared_search_snapshot(
+    bx_ntvdm_dem_whole_provider_v1 *provider,
+    const bx_ntvdm_profile_search_snapshot_v1 *snapshot);
 
 /* Membership is an owner-package guard. It does not imply implementation of
  * the service or permit a selector-specific profile decision. */

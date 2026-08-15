@@ -2,6 +2,7 @@
 #define BX_NTVDM_SEARCH_TRANSACTION_V1_H
 
 #include "bx_ntvdm_search_request_v1.h"
+#include "bx_ntvdm_profile_search_snapshot_v1.h"
 
 #define BX_NTVDM_SEARCH_TRANSACTION_V1_MAGIC 0x42585354u
 #define BX_NTVDM_SEARCH_TRANSACTION_V1_VERSION 1u
@@ -25,6 +26,16 @@ int bx_ntvdm_search_transaction_v1_valid(
 int bx_ntvdm_search_transaction_v1_path_first(
     bx_ntvdm_search_transaction_v1 *value,
     const bx_ntvdm_host_namespace_v1 *space,
+    const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu_before, uint32_t owner_pdb,
+    uint64_t dta_address,
+    const uint8_t path[BX_NTVDM_SEARCH_REQUEST_V1_PATH_BYTES], uint16_t attributes,
+    bx_ntvdm_multi_write_transaction_v1 *transaction, uint8_t payload[51],
+    uint32_t *payload_bytes);
+int bx_ntvdm_search_transaction_v1_path_first_merged(
+    bx_ntvdm_search_transaction_v1 *value,
+    const bx_ntvdm_host_namespace_v1 *space,
+    const bx_ntvdm_profile_search_snapshot_v1 *snapshot,
     const bx_ntvdm_exception_event_v1 *boundary,
     const bx_ntvdm_cpu_state_v1 *cpu_before, uint32_t owner_pdb,
     uint64_t dta_address,
