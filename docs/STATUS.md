@@ -32,7 +32,7 @@
 | Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
 | Reporting Requirements | Record original provider provenance, complete service outcomes, API availability and missing-dependency evidence, profile matrix, workaround retain/migrate/replace/delete action, and proposed whole-package regression; do not claim COMMAND or native guest closure. |
 | Stop Conditions | Any fallback to trace-selected work, endpoint-only implementation, implicit synthetic host C:, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, hidden VDMREDIR substitute, or unadmitted host mutation pauses S5 for re-admission. |
-| Exit Criteria | A reviewer can trace every callable COMMAND service to original owner/ABI, profile disposition and a whole-provider implementation or source-shaped unavailable path; all ordinary API uncertainties are recorded; and the next implementation S has one package-level regression design. |
+| Exit Criteria | A reviewer can trace every callable COMMAND service to original owner/ABI, profile disposition and a whole-provider implementation or source-shaped unavailable path; all ordinary API uncertainties are recorded; and the [package regression design](etc/operations/t202-s5-command-whole-provider-regression-plan-001.md) defines the next implementation S. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Inspect all COMMAND dispatch modules, existing copied command session/launch/config/console providers, CLI host context, VDD/GUI/process dependencies, and the global BOP registry for duplicate owner, raw-handle, synthetic host state, or endpoint-only behavior. |
 
@@ -116,6 +116,12 @@
 > historical CCPU/SAS, VDD, raw-handle and VDM re-entry composition gaps. It
 > is admission evidence only; no `54:xx` implementation or trace was created.
 > See the [COMMAND capability map](etc/research/t202-s5-command-host-capability-source-abi-map-001.md).
+
+> **T202 S5 completion candidate:** the atomic COMMAND ownership and complete
+> package regression design now separate ordinary API use from the three true
+> composition boundaries: raw-handle streams, VDM child lifecycle and VDD
+> console/KEYB. It is ready for closure/admission review; see the
+> [whole-provider plan](etc/operations/t202-s5-command-whole-provider-regression-plan-001.md).
 
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
