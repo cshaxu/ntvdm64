@@ -4,9 +4,6 @@
 
 #define BX_NTVDM_READONLY_NAMESPACE_TOKEN 0x4e534001u
 
-static const uint8_t bx_ntvdm_minimal_config_v1[] = "REM NTVDM64\r\n";
-static const uint8_t bx_ntvdm_empty_autoexec_v1[] = "";
-
 static int bx_ntvdm_readonly_namespace_v1_copy_path(wchar_t *destination,
     size_t destination_count, const wchar_t *source)
 {
@@ -38,15 +35,13 @@ int bx_ntvdm_readonly_namespace_v1_initialize(
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[0].path,
             sizeof(value->files[0].path) / sizeof(value->files[0].path[0]),
             selection->command_placement.path)) return 0;
-    value->files[1].bytes = bx_ntvdm_minimal_config_v1;
-    value->files[1].byte_count = sizeof(bx_ntvdm_minimal_config_v1) - 1u;
+    /* Paths and metadata are profile declarations only. The paired CONFIG /
+       AUTOEXEC bytes are installed exclusively by the ready T204 provider. */
     value->files[1].dos_time = selection->config_metadata.dos_time;
     value->files[1].dos_date = selection->config_metadata.dos_date;
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[1].path,
             sizeof(value->files[1].path) / sizeof(value->files[1].path[0]),
             selection->config_file.path)) return 0;
-    value->files[2].bytes = bx_ntvdm_empty_autoexec_v1;
-    value->files[2].byte_count = 0u;
     value->files[2].dos_time = selection->autoexec_metadata.dos_time;
     value->files[2].dos_date = selection->autoexec_metadata.dos_date;
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[2].path,

@@ -74,6 +74,12 @@
 > so S5 remains active rather than claiming default-route replacement. See the
 > [reader record](etc/research/t204-s5-adapter-installation-reader-001.md).
 
+> **T204 S5 P5 progress:** readonly namespace initialization now retains only
+> declared CONFIG/AUTOEXEC paths and metadata; it no longer installs fixed
+> synthetic boot bytes.  The ready provider remains the sole byte owner after
+> bind. Legacy unbound namespace fixtures must now be converted to explicit
+> provider fixtures before S5 closure.
+
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
 > target is `54:0B`; see the [selector source map](etc/research/t203-s1-command-terminal-selector-source-map-001.md).
