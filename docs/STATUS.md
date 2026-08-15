@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S14.** Its governing brief is the active
+> **Current effective packet: M0 T218 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S14 -- composed DOS image-loader handle-family regression.**
+**Active: M0 T218 S1 -- guest DOS EXEC structural prerequisite map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -19,32 +19,35 @@
 > startup configuration attachment and causal classification are recorded in
 > [history](history/m0-t215-closure-20260815.md). **T216 closed:** its
 > declared executable-image visibility is recorded in
-> [history](history/m0-t216-closure-20260815.md).
+> [history](history/m0-t216-closure-20260815.md). **T217 closed:** its
+> source-first COMMAND prerequisite and declared-image loader family closure
+> are recorded in [history](history/m0-t217-closure-20260815.md).
 
 ## Active Packet
 
-> **T scope:** T217 first establishes source-first compliance for the COMMAND
-> initial-environment prerequisite, then maps the complete SYSINIT-to-DOS-EXEC
-> continuation after declared image visibility. It preserves DOS/DEM ownership
-> and does not implement a leaf BOP from the unchanged terminal.
+> **T scope:** T218 maps the complete guest DOS `$Exec` structural
+> prerequisites after the declared-image loader family. It establishes the
+> source/ABI/failure and profile-capability disposition before admitting any
+> execution behavior. It preserves guest DOS/DEM/COMMAND ownership and does
+> not use a trace to select a leaf BOP.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S14, Ordinary Mode. |
-| Admission And Approval | S13 proves that reached `50:36` is a no-VDD DOS-entry notification, not the implementation target. The complete loader package identifies `50:12/00/16/02[/42]` as the next shared seam; no native trace is admitted until its package regression closes. |
-| Objective | Verify and, only if evidence requires it, repair the existing composed DEM namespace/handle/FASTREAD family as one source-derived DOS image-loader provider package. |
-| Non-goals | No selector-specific handler, native trace, `$Exec` recreation, DOS/BIOS patch, host mutation, profile expansion, Bochs/mantle change, VDD subsystem or COMMAND-run claim. |
-| Reference Baseline | T217 S13 map, OpenNT `demfile.c`/`demhndl.c`/`demdisp.c`, DOS `file.asm`/`handle.asm`/`msproc.asm`, current namespace and handle-route providers. |
-| Files And ABI Surface | Existing `bx-vdm` DEM namespace/handle/FASTREAD provider family and package-scoped regression only. |
+| Identifier Mode | M0 T218 S1, Ordinary Mode. |
+| Admission And Approval | Owner authorized autonomous package-first progression. T217 closes the declared-image loader family; Queue candidate 1 is now admitted as the next whole guest EXEC prerequisite package. |
+| Objective | Produce a complete source/ABI/failure map for the first-profile DOS `$Exec` chain: program-image format/load, memory/PSP/environment construction, transfer state, termination/return and required BOP/provider capabilities. |
+| Non-goals | No trace-selected BOP implementation, guest `$Exec` recreation, DOS/BIOS patch, host mutation, profile expansion, Bochs/mantle change, VDD subsystem, COMMAND-run or normal-target-execution claim. |
+| Reference Baseline | T217 S13/S14 maps, OpenNT `msproc.asm`, `handle.asm`, SYSINIT sources, DEM/COMMAND provider maps, current profile/mutation capability records. |
+| Files And ABI Surface | Source/evidence records only; no runtime source change is admitted in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI matrix covers open, seek, read, FastRead and close; focused source-built x64 `/MT` regression proves one token/lifetime, checked writes, source-shaped failures and no host mutation. Governance and diff checks pass. |
-| Expected Markers | Family closure or an evidence-bounded shared-provider repair, never a trace-selected endpoint. |
+| Verification | Every reached `$Exec` prerequisite has an original owner/path, ABI facts, failure path, present provider/capability disposition and recovery-ladder result; governance and diff checks pass. |
+| Expected Markers | A whole-package plan identifying one smallest next capability family or a complete explicit deferral, never a trace-selected endpoint. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record family members, source paths, ABI/failure paths, current provider route, evidence and any repair disposition; distinguish direct proof from inference. |
-| Stop Conditions | Any selector-specific implementation, native trace, DOS/BIOS patch, host mutation, guest binary patch, profile expansion or Bochs/mantle change pauses S14 for re-admission. |
-| Exit Criteria | The composed image-loader handle family has a source-first closure record and bounded family regression; only then may a native trace be considered. |
+| Reporting Requirements | Record every structural prerequisite, source paths, ABI/failure paths, current capability disposition and recovery-ladder result; distinguish direct proof from inference. |
+| Stop Conditions | Any selector-specific implementation, native trace, DOS/BIOS patch, host mutation, guest binary patch, profile expansion or Bochs/mantle change pauses S1 for re-admission. |
+| Exit Criteria | A complete whole-EXEC prerequisite map and a package-level implementation/defer plan exist; no behavior is implemented merely to advance a trace. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
+| Similar-Issue Sweep | All DOS EXEC variants, PSP/environment/MCB sources, COM/EXE format branches, loader handle family, DEM lifecycle/entry/exit, COMMAND return/lifecycle, XMS/DPMI/Redirector ownership and profile capability records. |
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
