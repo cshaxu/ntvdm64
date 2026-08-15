@@ -15,6 +15,17 @@ static int bx_ntvdm_readonly_namespace_v1_copy_path(wchar_t *destination,
     return 1;
 }
 
+/* DEM's canonical relative pathname omits the leading backslash while the
+ * boot declaration keeps it.  They denote the same root-relative DOS name. */
+static int bx_ntvdm_readonly_namespace_v1_path_equal(const wchar_t *left,
+    const wchar_t *right)
+{
+    if (left == 0 || right == 0) return 0;
+    while (*left == L'\\' || *left == L'/') ++left;
+    while (*right == L'\\' || *right == L'/') ++right;
+    return _wcsicmp(left, right) == 0;
+}
+
 int bx_ntvdm_readonly_namespace_v1_initialize(
     bx_ntvdm_readonly_namespace_v1 *value, const byob_image *command,
     const byob_profile_selection *selection)
@@ -110,7 +121,8 @@ int bx_ntvdm_readonly_namespace_v1_open(
     if (value == 0 || token == 0 || byte_count == 0 || canonical_path == 0 || value->open ||
         drive_index != value->drive_index) return 0;
     for (index = 0u; index < value->file_count; ++index) {
-        if (wcscmp(canonical_path, value->files[index].path) == 0) {
+        if (bx_ntvdm_readonly_namespace_v1_path_equal(canonical_path,
+                value->files[index].path)) {
             value->open = 1u;
             value->open_file_index = index;
             value->offset = 0u;
@@ -170,4 +182,33 @@ int bx_ntvdm_readonly_namespace_v1_file_times(
     *dos_time = value->files[value->open_file_index].dos_time;
     *dos_date = value->files[value->open_file_index].dos_date;
     return 1;
+}
+
+int bx_ntvdm_readonly_namespace_v1_match_startup_path(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
+    const wchar_t *canonical_path, uint64_t *byte_count_out)
+{
+    uint32_t index;
+    if (byte_count_out != 0) *byte_count_out = 0u;
+    if (value == 0 || canonical_path == 0 || drive_index != value->drive_index ||
+        value->file_count < 3u) return 0;
+    /* Entries 1 and 2 become nonempty only after the T204 provider has
+     * completed source admission and transformation. */
+    for (index = 1u; index <= 2u; ++index) {
+        if (value->files[index].bytes != 0 &&
+            bx_ntvdm_readonly_namespace_v1_path_equal(canonical_path,
+                value->files[index].path)) {
+            if (byte_count_out != 0) *byte_count_out = value->files[index].byte_count;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int bx_ntvdm_readonly_namespace_v1_owns_token(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token)
+{
+    return value != 0 && value->open != 0u && token == value->generation &&
+        value->open_file_index >= 1u && value->open_file_index <= 2u &&
+        value->open_file_index < value->file_count;
 }

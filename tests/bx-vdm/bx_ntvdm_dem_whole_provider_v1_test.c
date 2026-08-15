@@ -2,6 +2,7 @@
 #include "bx_ntvdm_dem_handle_partition_v1.h"
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
 #include "bx_ntvdm_dem_namespace_route_partition_v1.h"
+#include "bx_ntvdm_dem_handle_route_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
@@ -89,6 +90,7 @@ int main(void)
     bx_ntvdm_host_namespace_v1 space;
     bx_ntvdm_dem_cwd_context_v1 cwd;
     bx_ntvdm_dem_whole_provider_v1 provider;
+    bx_ntvdm_readonly_namespace_v1 startup_images = {0};
     bx_ntvdm_exception_event_v1 boundary = {0};
     bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_guest_gather_read_action_v1 action;
@@ -109,6 +111,7 @@ int main(void)
     char oem_wild_pattern[MAX_PATH] = {0}, oem_rename_one[MAX_PATH] = {0};
     char oem_rename_two[MAX_PATH] = {0}, oem_rename_pattern[MAX_PATH] = {0};
     char oem_rename_destination[MAX_PATH] = {0}, oem_profile_pattern[MAX_PATH] = {0};
+    char oem_config[MAX_PATH] = {0};
     uint8_t drive;
     uint32_t service;
     int failed = 0;
@@ -128,6 +131,29 @@ int main(void)
             &snapshot) || !bx_ntvdm_dem_cwd_context_v1_initialize(&cwd,
             &profile) || !bx_ntvdm_dem_whole_provider_v1_initialize(&provider,
             &profile, &space, &cwd)) failed = 10;
+    if (!failed) {
+        static const uint8_t config_bytes[] = "FILES=20\r\n";
+        static const uint8_t autoexec_bytes[] = "@ECHO OFF\r\n";
+        startup_images.file_count = 3u;
+        startup_images.drive_index = drive;
+        startup_images.generation = UINT32_C(0x4e534001);
+        startup_images.files[1].bytes = config_bytes;
+        startup_images.files[1].byte_count = sizeof(config_bytes) - 1u;
+        startup_images.files[1].dos_time = 0x1234u;
+        startup_images.files[1].dos_date = 0x5678u;
+        startup_images.files[2].bytes = autoexec_bytes;
+        startup_images.files[2].byte_count = sizeof(autoexec_bytes) - 1u;
+        startup_images.files[2].dos_time = 0x1234u;
+        startup_images.files[2].dos_date = 0x5678u;
+        if (wcscpy_s(startup_images.files[1].path,
+                BYOB_PROFILE_GUEST_PATH_MAX_CHARS, L"\\CONFIG.SYS") != 0 ||
+            wcscpy_s(startup_images.files[2].path,
+                BYOB_PROFILE_GUEST_PATH_MAX_CHARS, L"\\AUTOEXEC.BAT") != 0 ||
+            sprintf_s(oem_config, sizeof(oem_config), "%c:\\CONFIG.SYS",
+                (char)('A' + drive)) < 0 ||
+            !bx_ntvdm_dem_whole_provider_v1_set_startup_namespace(&provider,
+                &startup_images)) failed = 11;
+    }
     boundary.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
     boundary.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
     boundary.struct_bytes = sizeof(boundary);
@@ -140,6 +166,47 @@ int main(void)
         bx_ntvdm_instruction_window_v1_capture(&window, bop, sizeof(bop));
     }
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    if (!failed) {
+        uint32_t startup_token;
+        const uint8_t bop_open[4] = { 0xc4u, 0xc4u, 0x50u, 0x12u };
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ebx = 0u;
+        if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
+                &boundary, &cpu, oem_config, 0, &result) || cf_set(&result) ||
+            !ax_is(&result, (uint16_t)(startup_images.generation >> 16)) ||
+            result.cpu_delta.gpr16_values[5] != (uint16_t)startup_images.generation ||
+            result.cpu_delta.gpr16_values[2] != sizeof("FILES=20\r\n") - 1u)
+            failed = 12;
+        startup_token = startup_images.generation;
+        if (!failed) {
+            struct bx_ntvdm_mechanical_action_v1 overlay_action;
+            bx_ntvdm_instruction_window_v1_capture(&window, bop_open, sizeof(bop_open));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            token_into_cpu(&cpu, startup_token); cpu.ecx = sizeof("FILES=20\r\n") - 1u;
+            cpu.edx = 0x300u; cpu.ds = 0u; cpu.eflags = 0x40u;
+            ((uint8_t *)window.bytes)[3] = 0x16u;
+            if (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&provider, 0x16u,
+                    &boundary, &cpu, &window, &overlay_action, &result) || cf_set(&result) ||
+                overlay_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE ||
+                overlay_action.payload_bytes != sizeof("FILES=20\r\n") - 1u ||
+                memcmp(overlay_action.payload, "FILES=20\r\n",
+                    sizeof("FILES=20\r\n") - 1u) != 0) failed = 13;
+            ((uint8_t *)window.bytes)[3] = 0x1eu;
+            if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&provider,
+                    0x1eu, &boundary, &cpu, &window, &overlay_action, &result) ||
+                !cf_set(&result) || !ax_is(&result, 5u))) failed = 14;
+            ((uint8_t *)window.bytes)[3] = 0x02u;
+            cpu.ecx = cpu.edx = 0xffffu;
+            if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&provider,
+                    0x02u, &boundary, &cpu, &window, &overlay_action, &result) ||
+                cf_set(&result) || startup_images.open != 0u)) failed = 15;
+            {
+                const uint8_t bop_fcb[4] = { 0xc4u, 0xc4u, 0x50u, 0x2fu };
+                bx_ntvdm_instruction_window_v1_capture(&window, bop_fcb,
+                    sizeof(bop_fcb));
+            }
+        }
+    }
     for (service = 0u; !failed && service < 0x49u; ++service) {
         const int expected = service == 0x00u || service == 0x01u ||
             service == 0x02u || service == 0x03u || service == 0x04u ||

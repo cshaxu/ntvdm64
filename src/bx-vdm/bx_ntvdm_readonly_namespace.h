@@ -50,5 +50,13 @@ int bx_ntvdm_readonly_namespace_v1_close(
 int bx_ntvdm_readonly_namespace_v1_file_times(
     const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token,
     uint16_t *dos_time, uint16_t *dos_date);
+/* The startup overlay intentionally exposes only the two source-derived
+ * replacement images.  COMMAND/target profile entries remain outside the
+ * direct-host DEM provider. */
+int bx_ntvdm_readonly_namespace_v1_match_startup_path(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
+    const wchar_t *canonical_path, uint64_t *byte_count_out);
+int bx_ntvdm_readonly_namespace_v1_owns_token(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token);
 
 #endif

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T215 S4.** Its governing brief is the active
+> **Current effective packet: M0 T215 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T215 S4 -- startup-configuration package attachment.**
+**Active: M0 T215 S5 -- startup-image direct-host overlay contract.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -27,19 +27,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T215 S4, Ordinary Mode. |
-| Admission And Approval | T215 S3 establishes that the current bounded terminal is OpenNT `50:3D` fatal configuration termination. Source review shows the full composition initializes the existing T204 startup-configuration provider but never attaches it. Standing owner direction requires reusing that complete package before any new adapter behavior. |
-| Objective | Attach the existing paired CLI/adapter startup-configuration reader, source-derived transform, provider-owned images and COMMAND/namespace bind to current full composition before bind; prove the whole package through source-built four-mode and native-admission regressions. |
-| Non-goals | No single-BOP patch, no trace-selected backlog, no new Bochs/mantle semantics, no host-mutation policy expansion, no guest-run or normal-terminal claim, no raw host-handle export, no temporary host files and no synthetic boot-content fallback. |
-| Reference Baseline | T204 source contract and closure, T215 S3 causal record, `cmdconf.c`/`cmdenv.c`, current composition runtime, startup reader/provider, boot-namespace composition and CLI paired-source admission. |
-| Files And ABI Surface | bx-vdm composition installation and existing versioned startup-configuration/boot-namespace contracts; fixture/tool inputs and evidence. No Bochs, guest ABI or provider layout change unless source evidence requires re-admission. |
+| Identifier Mode | M0 T215 S5, Ordinary Mode. |
+| Admission And Approval | T215 S4 attached T204's reader/transform/provider chain, but native evidence proved that T202's direct-host DEM provider has priority over the images. The remaining bounded defect is a provider-composition seam, not a new selector or parser. Standing owner direction permits an adapter-owned, provider-borrowed two-image overlay while retaining real host drives for every other path. |
+| Objective | Route only ready, provider-owned `CONFIG.SYS` and `AUTOEXEC.BAT` images through the existing complete DEM pathname/handle family before its direct Win32 backend; preserve source-shaped open/read/seek/close/time and mutation-failure contracts, then record one bounded native observation. |
+| Non-goals | No single-BOP patch, no trace-selected backlog, no new Bochs/mantle semantics, no host-mutation policy expansion, no virtual C: or general virtual filesystem, no guest-run or normal-terminal claim, no raw host-handle export, no temporary host files and no synthetic boot-content fallback. |
+| Reference Baseline | T204 source contract and closure, T215 S3/S4 records, `cmdconf.c`/`cmdenv.c`, original `demfile.c`/`demhndl.c`, current DEM whole provider, startup reader/provider, boot-namespace composition and CLI paired-source admission. |
+| Files And ABI Surface | bx-vdm direct-host DEM provider, its bounded copied pathname and typed handle routes, and existing versioned startup/boot-namespace contracts; fixture/tool inputs and evidence. No Bochs, guest ABI, OpenNT source or provider layout changes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Current composition source-builds under MSVC x64 `/MT`; explicit paired CONFIG/AUTOEXEC inputs bind the ready provider before composition bind; no-source/missing/oversize/invalid inputs fail at admission; images and merge state are owned by the provider; four profile modes use the shared policy; one bounded native run observes the changed terminal only after package regressions. Governance and diff checks pass. |
-| Expected Markers | One source-backed attachment chain: CLI paired sources -> installation-time copied input -> T204 provider -> namespace and COMMAND bind -> guest startup; no fallback fixed bytes, source handle, or source-path retention. |
+| Verification | Strict MSVC x64 `/MT` direct-provider regression proves `50:12` open, `50:16` copied read, `50:1E` write refusal and `50:02` close for a generated image; nonmatching paths remain direct-host. Current full composition source-builds with paired inputs and records one bounded native observation. Governance and diff checks pass. |
+| Expected Markers | CLI paired sources -> installation-time copied input -> T204 provider -> two-image direct-provider overlay -> COMMAND/namespace bind -> guest startup; no fallback fixed bytes, source handle, source-path retention, virtual drive, or general overlay. |
 | Asset Needs | Existing OpenNT and bx-vdm source, T204 reader/provider/fixtures, explicit test configuration files, and current source-built fixture; no firmware/media/device import. |
 | Reporting Requirements | Record original source contract, exact reuse/attachment path, all profile and failure outcomes, native observation distinction, and any unavailable historical host composition. |
-| Stop Conditions | Any need to change OpenNT guest semantics, implement a standalone BOP, alter Bochs/mantle, retain a host handle/path beyond installation, create a host temporary file, invent a configuration fallback, or infer an ABI absent from source pauses S4 for re-admission. |
-| Exit Criteria | The existing whole startup-configuration package is installed into current composition with reproducible positive/negative regression evidence and a bounded post-package native observation; its outcome is reported without a guest-run claim. |
+| Stop Conditions | Any need to change OpenNT guest semantics, implement a standalone BOP, alter Bochs/mantle, retain a host handle/path beyond installation, create a host temporary file, broaden beyond the two declared images, invent a configuration fallback, or infer an ABI absent from source pauses S5 for re-admission. |
+| Exit Criteria | The two-image overlay is installed at the direct-host provider boundary with reproducible positive/negative regression evidence and a bounded post-package native observation; its outcome is reported without a guest-run claim. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | CLI child environment propagation, legacy adapter runtime, current composition runtime, startup reader/provider, boot-namespace bind, COMMAND context merge, `54:0C/0D`, `50:3D`, all four profiles and source teardown. |
 
@@ -77,6 +77,15 @@
 > The remaining work is a whole startup-image overlay contract at that provider
 > boundary, not a parser or leaf-BOP change. See the [attachment
 > record](etc/research/t215-s4-startup-configuration-attachment-001.md).
+
+> **T215 S5 P1 progress:** the direct provider now borrows only ready T204
+> `CONFIG.SYS`/`AUTOEXEC.BAT` images and intercepts their exact root-relative
+> paths ahead of Win32 open/read/seek/close/time/mutation operations. The
+> strict x64 `/MT` package probe proves copied reads and write refusal without
+> a host-file side effect. A fresh full composition build still ends at the
+> same typed `50:3D` stop, so the overlay is a closed provider seam but not
+> evidence that the native startup path consumed it or that COMMAND is ready.
+> See the [S5 record](etc/research/t215-s5-startup-image-direct-provider-overlay-001.md).
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic

@@ -81,6 +81,18 @@ void bx_ntvdm_dem_whole_provider_v1_teardown(
     memset(provider, 0, sizeof(*provider));
 }
 
+int bx_ntvdm_dem_whole_provider_v1_set_startup_namespace(
+    bx_ntvdm_dem_whole_provider_v1 *provider,
+    bx_ntvdm_readonly_namespace_v1 *startup_namespace)
+{
+    if (!bx_ntvdm_dem_whole_provider_v1_valid(provider) ||
+        provider->startup_namespace != 0 || startup_namespace == 0 ||
+        startup_namespace->open != 0u || startup_namespace->file_count < 3u)
+        return 0;
+    provider->startup_namespace = startup_namespace;
+    return bx_ntvdm_dem_whole_provider_v1_valid(provider);
+}
+
 static void clear_pending(bx_ntvdm_dem_whole_provider_v1 *provider)
 {
     provider->pending_service = 0u;

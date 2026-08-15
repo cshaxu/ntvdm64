@@ -109,7 +109,8 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
     wchar_t second_relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
     uint8_t drive, second_drive;
     DWORD error = ERROR_SUCCESS;
-    int admitted;
+    int admitted, startup_path = 0;
+    uint64_t startup_size = 0u;
     if (!valid_call(provider, service, boundary, cpu, result) || oem_path == 0)
         return 0;
 
@@ -118,6 +119,9 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u);
     if (!resolve_path(provider, oem_path, &drive, relative))
         return fail(boundary, result, ERROR_PATH_NOT_FOUND);
+    if (provider->startup_namespace != 0)
+        startup_path = bx_ntvdm_readonly_namespace_v1_match_startup_path(
+            provider->startup_namespace, drive, relative, &startup_size);
     if (service == 0x44u) {
         /* demCheckPath's pathname has no drive prefix; DL is its one-based
          * DOS drive value and must therefore select the admitted root. */
@@ -128,6 +132,15 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
 
     if (service == 0x01u) {
         DWORD attributes;
+        if (startup_path) {
+            if ((cpu->eax & 0xffu) != 0u)
+                return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
+            /* The image is provider-owned and immutable, but preserves the
+             * ordinary DOS attribute projection expected by the startup
+             * reader; no real host file is queried or modified. */
+            return finish(boundary, result, 0u, 0, 0) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u);
+        }
         if ((cpu->eax & 0xffu) != 0u) {
             admitted = mutation(provider, BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA,
                 boundary, result);
@@ -161,6 +174,21 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             else if ((mode & 0x07u) == 1u) access = BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_WRITE;
             else if ((mode & 0x07u) != 2u) return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
         }
+        if (startup_path) {
+            uint32_t startup_token = 0u;
+            if (service != 0x12u || (cpu->ebx & 0x07u) != 0u ||
+                !bx_ntvdm_readonly_namespace_v1_open(provider->startup_namespace,
+                    drive, relative, &startup_token, &startup_size))
+                return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
+            return finish(boundary, result, (uint16_t)(startup_token >> 16), 1, 0) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
+                    (uint16_t)startup_token) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
+                    (uint16_t)startup_size) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
+                    (uint16_t)(startup_size >> 16)) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
+        }
         admitted = bx_ntvdm_dem_local_file_backend_v1_open_ex(&provider->local_files,
             oem_path, access, service == 0x12u ? open_share((uint8_t)cpu->ebx) :
                 FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
@@ -192,6 +220,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
         }
     }
     if (service == 0x04u || service == 0x05u || service == 0x06u || service == 0x17u) {
+        if (startup_path) return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
         admitted = mutation(provider, BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT,
             boundary, result);
         if (admitted <= 0) return admitted < 0;
@@ -216,6 +245,10 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
     if (service == 0x17u) {
         if (!resolve_path(provider, oem_second_path, &second_drive, second_relative))
             return fail(boundary, result, ERROR_PATH_NOT_FOUND);
+        if (provider->startup_namespace != 0 &&
+            bx_ntvdm_readonly_namespace_v1_match_startup_path(
+                provider->startup_namespace, second_drive, second_relative, 0))
+            return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
         if (drive != second_drive) return fail(boundary, result, ERROR_NOT_SAME_DEVICE);
         if (_wcsicmp(relative, second_relative) == 0)
             return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);

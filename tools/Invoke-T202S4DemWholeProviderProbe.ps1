@@ -13,6 +13,8 @@ New-Item -ItemType Directory -Path $build | Out-Null
 $exe = Join-Path $build 't202-s4-dem-whole-provider.exe'
 $names = @(
     'bx_ntvdm_mutation_profile_v1.c', 'bx_ntvdm_mutation_overlay_v1.c',
+    'bx_ntvdm_session_host_context_v1.c',
+    'bx_ntvdm_command_host_context_v1.c',
     'bx_ntvdm_dem_profile_consumer_v1.c', 'bx_ntvdm_host_drive_policy.c',
     'bx_ntvdm_host_namespace.c', 'bx_ntvdm_dem_cwd_context_v1.c',
     'bx_ntvdm_cpu_delta_abi.c', 'bx_ntvdm_cpu_result_v2.c',
@@ -22,6 +24,8 @@ $names = @(
     'bx_ntvdm_dem_path_v1.c', 'bx_ntvdm_dem_file_session_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c', 'bx_ntvdm_dem_whole_provider_v1.c',
     'bx_ntvdm_dem_handle_partition_v1.c', 'bx_ntvdm_dem_handle_route_partition_v1.c',
+    'bx_ntvdm_dem_readonly_file_service.c', 'bx_ntvdm_readonly_namespace.c',
+    'bx_ntvdm_bulk_result_transaction.c',
     'bx_ntvdm_dem_namespace_partition_v1.c',
     'bx_ntvdm_dem_namespace_route_partition_v1.c',
     'bx_ntvdm_dem_fcb_handle_partition_v1.c', 'bx_ntvdm_dem_fcb_wildcard_partition_v1.c',

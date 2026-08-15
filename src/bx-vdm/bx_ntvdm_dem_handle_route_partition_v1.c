@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_handle_route_partition_v1.h"
 
 #include "bx_ntvdm_dem_handle_partition_v1.h"
+#include "bx_ntvdm_dem_readonly_file_service.h"
 
 static int physical(uint16_t segment, uint16_t offset, uint32_t bytes,
     uint64_t *out)
@@ -75,6 +76,46 @@ static int write_action(bx_ntvdm_dem_whole_provider_v1 *provider,
     return bx_ntvdm_mechanical_action_v1_valid(action);
 }
 
+static int overlay_finish(const bx_ntvdm_exception_event_v1 *boundary,
+    bx_ntvdm_cpu_result_v2 *result, uint16_t ax, int carry)
+{
+    return bx_ntvdm_cpu_result_v2_resume(result, boundary->fault_rip + 4u) &&
+        (!carry || bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u, ax)) &&
+        bx_ntvdm_cpu_result_v2_set_cf(result, carry);
+}
+
+static int startup_overlay_dispatch(bx_ntvdm_dem_whole_provider_v1 *provider,
+    uint8_t service, const bx_ntvdm_exception_event_v1 *boundary,
+    const bx_ntvdm_cpu_state_v1 *cpu, const bx_ntvdm_instruction_window_v1 *window,
+    struct bx_ntvdm_mechanical_action_v1 *action_out,
+    bx_ntvdm_cpu_result_v2 *result_out)
+{
+    bx_ntvdm_bulk_result_transaction_v1 transaction;
+    uint8_t bytes[BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES];
+    if (provider->startup_namespace == 0 ||
+        !bx_ntvdm_readonly_namespace_v1_owns_token(provider->startup_namespace,
+            ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu))) return 0;
+    if (service == 0x00u) return bx_ntvdm_dem_readonly_file_v1_seek(
+        provider->startup_namespace, boundary, cpu, window, result_out);
+    if (service == 0x02u) return bx_ntvdm_dem_readonly_file_v1_close(
+        provider->startup_namespace, boundary, cpu, window, result_out);
+    if (service == 0x08u) return bx_ntvdm_dem_readonly_file_v1_file_times(
+        provider->startup_namespace, boundary, cpu, window, result_out);
+    if (service == 0x1eu)
+        return overlay_finish(boundary, result_out, 5u, 1);
+    if (service == 0x27u)
+        return overlay_finish(boundary, result_out, 0u, 0);
+    if (service != 0x16u || !bx_ntvdm_dem_readonly_file_v1_read(
+            provider->startup_namespace, boundary, cpu, window, bytes, sizeof(bytes),
+            &transaction, result_out)) return 0;
+    if (transaction.magic == 0u) return 1;
+    if (!bx_ntvdm_bulk_result_transaction_v1_preflight(&transaction,
+            UINT64_C(0x100000), transaction.payload_bytes)) return 0;
+    if (transaction.payload_bytes == 0u) return 1;
+    return write_action(provider, transaction.guest_physical_address, bytes,
+        transaction.payload_bytes, action_out);
+}
+
 int bx_ntvdm_dem_handle_route_partition_v1_owns_service(uint8_t service)
 {
     return service == 0x00u || service == 0x02u || service == 0x08u ||
@@ -91,7 +132,9 @@ int bx_ntvdm_dem_handle_route_partition_v1_claims_request(
         !bx_ntvdm_dem_handle_route_partition_v1_owns_service(service)) return 0;
     if (service == 0x08u && (uint8_t)(cpu->ebx & 0xffu) > 1u) return 1;
     token = ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu);
-    return (service == 0x02u && token == 0u) ||
+    return (provider->startup_namespace != 0 &&
+            bx_ntvdm_readonly_namespace_v1_owns_token(provider->startup_namespace, token)) ||
+        (service == 0x02u && token == 0u) ||
         bx_ntvdm_dem_file_session_v1_lookup(&provider->files, token, &unused);
 }
 
@@ -114,6 +157,8 @@ int bx_ntvdm_dem_handle_route_partition_v1_dispatch(
     count = (uint16_t)cpu->ecx;
     bx_ntvdm_mechanical_action_v1_clear(action_out);
     bx_ntvdm_cpu_result_v2_pass_through(result_out);
+    if (startup_overlay_dispatch(provider, service, boundary, cpu, window,
+            action_out, result_out)) return bx_ntvdm_cpu_result_v2_valid(result_out);
     if (service == 0x1eu && count != 0u) {
         if (!physical(cpu->ds, (uint16_t)cpu->edx, count, &address)) return 0;
         range.address = address;
