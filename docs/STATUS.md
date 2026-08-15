@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S4.** Its governing brief is the active
+> **Current effective packet: M0 T217 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S4 -- DEM normal-file package integration verification.**
+**Active: M0 T217 S6 -- DEM declared-image namespace identity classification.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -30,19 +30,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S4, Ordinary Mode. |
-| Admission And Approval | S3 maps the full source chain and localizes the current terminal to the second normal DEM Open boundary. The installed whole DEM provider, rather than a leaf service, is now the bounded integration subject. |
-| Objective | Observe and classify the existing DEM normal-file provider's typed decision and result at the second SYSINIT Open, using only the fixed-width copied BOP event and existing provider/transaction result records. |
-| Non-goals | No BOP implementation, routing change, arbitrary guest-memory read, DOS/EXEC emulation, host mutation, profile change, Bochs/mantle change, or COMMAND-run claim. |
-| Reference Baseline | T216 S1 map; OpenNT `sysinit1.asm`, DOS EXEC/open/handle sources, `demfile.c`, `demhndl.c`, `demsrch.c`, `demdisp.c`, `dossvc.h`, and COMMAND `cmdenv.c`; existing readonly namespace, direct DEM provider, provider partitions and source-built S5 regression. |
-| Files And ABI Surface | Fixture-only observation record and focused fixture/tool/evidence. Production BOP, provider, profile, guest-memory, and machine ABIs remain unchanged. |
+| Identifier Mode | M0 T217 S6, Ordinary Mode. |
+| Admission And Approval | S5 maps every static identity handoff and finds them aligned; its only unresolved fact is the existing bounded pathname read at the second normal Open. S6 is the package-scoped classification needed before a repair, not a new BOP implementation. |
+| Objective | Add a default-off, fixture-only classification result to the existing DEM namespace Open transaction. It must classify the already copied bounded Open pathname and namespace attachment state as declared match, other admitted root, invalid, or fallback, then correlate that class with the existing typed DOS result. |
+| Non-goals | No BOP implementation or route change, raw pathname export/retention, arbitrary guest-memory read, path rewrite, DOS/EXEC emulation, host mutation, profile expansion, Bochs/mantle change, or COMMAND-run claim. |
+| Reference Baseline | T217 S3/S4/S5 maps; OpenNT `sysinit1.asm`, `sysinit2.asm`, `file.asm`, `demfile.c`, `demgset.c`, `demdisp.c`, `dossvc.h`; current profile, composition runtime, path, readonly namespace, namespace partition, transaction, and whole DEM provider sources. |
+| Files And ABI Surface | One versioned default-off fixture diagnostic owned by the existing DEM namespace transaction; focused fixture, full composition fixture/tool, evidence, and Status. Production routing/provider/profile/guest-memory/machine ABIs and behavior remain unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh source-built x64 `/MT` full composition records the second `50:12` event and its existing typed provider/transaction outcome; it distinguishes provider error, provider success plus guest branch, and observation failure. Governance and diff checks pass. |
-| Expected Markers | One default-off fixture observer; no production semantic change; a source-backed disposition selecting either a whole DEM integration repair or continued guest EXEC analysis. |
-| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T215 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record copied event/result fields, source location, observer scope, outcome, confidence, and the next package decision; distinguish direct evidence from inference. |
-| Stop Conditions | Any production handler/provider change, arbitrary guest-memory inspection, BOP routing change, profile/host mutation, or Bochs/mantle change pauses S4 for re-admission. |
-| Exit Criteria | A fresh fixture classifies the second Open boundary without changing runtime semantics, and selects the next whole-package action. |
+| Verification | Focused transaction tests prove every identity class without exporting strings. A fresh source-built x64 `/MT` full composition records the second Open's classification and existing typed result. Governance and diff checks pass. |
+| Expected Markers | One default-off diagnostic; no production semantic change; a source-backed repair selection based on actual identity classification. |
+| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
+| Reporting Requirements | Record class, namespace generation/attachment state, existing typed outcome, source location, observer scope, confidence, and the selected repair package; distinguish direct evidence from inference. |
+| Stop Conditions | Any production handler/provider change, raw pathname output or retention, arbitrary guest-memory inspection, BOP routing change, profile/host mutation, or Bochs/mantle change pauses S6 for re-admission. |
+| Exit Criteria | Fresh focused and full-composition evidence classify the second Open without semantic change and select the whole-package repair, or prove the existing attachment/path logic correct. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -109,6 +109,13 @@
 > declared-image visibility alone proves native identity closure. The selected
 > next package is DEM declared-image namespace identity, not EXEC/Bochs/BOP
 > work; see the [integration result](etc/research/t217-s4-dem-normal-file-integration-result-001.md).
+
+> **T217 S5 P1 closure:** source mapping proves profile declaration, one-based
+> boot drive, guest default drive, DEM session default drive, rooted-path
+> canonicalization, declared namespace ownership, and fallback error mapping
+> all align. The sole missing fact is the existing copied normal-Open identity;
+> S6 therefore admits only a default-off package-scoped classification record,
+> not a route or behavior change. See the [identity map](etc/research/t217-s5-dem-declared-image-namespace-identity-map-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
