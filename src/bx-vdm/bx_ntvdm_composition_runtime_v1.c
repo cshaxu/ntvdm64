@@ -13,6 +13,7 @@
 #include "bx_ntvdm_cpu_state_abi.h"
 #include "bx_ntvdm_guest_write_abi.h"
 #include "bx_ntvdm_initial_state_catalog_v1.h"
+#include "bx_ntvdm_startup_configuration_source_v1.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -181,6 +182,7 @@ static int install(const wchar_t *profile, const wchar_t *root,
 {
     byob_profile_selection selection;
     byob_launch_plan_v2 launch;
+    bx_ntvdm_startup_configuration_input_v1 startup_input;
     uint32_t failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_PROFILE;
 
     if (runtime.installed) return 1;
@@ -255,6 +257,16 @@ static int install(const wchar_t *profile, const wchar_t *root,
         goto reject;
     failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_CONTEXT_BIND;
     if (!bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(&runtime.composition, &runtime.command_host_context))
+        goto reject;
+    /* T204 owns configuration source admission, transformation, contained
+       image lifetime and COMMAND path publication.  Compose that existing
+       package before the namespace is bound; do not revive profile bytes or
+       add a selector-specific startup shortcut here. */
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_STARTUP_CONFIGURATION_BIND;
+    if (!bx_ntvdm_startup_configuration_source_v1_from_environment(&startup_input,
+            &runtime.mutation_profile) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_startup_configuration(
+            &runtime.composition, &startup_input))
         goto reject;
     failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_DEM_NAMESPACE_BIND;
     if (!bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(&runtime.composition, &runtime.host_namespace))

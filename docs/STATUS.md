@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T215 S3.** Its governing brief is the active
+> **Current effective packet: M0 T215 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T215 S3 -- native controlled-terminal causal map.**
+**Active: M0 T215 S4 -- startup-configuration package attachment.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -20,27 +20,28 @@
 ## Active Packet
 
 > **T scope:** T215 reconciles the global OpenNT BOP owner catalog with the
-> actual integrated bx-vdm implementation, then establishes the owner of the
-> current bounded native controlled terminal. It does not select an endpoint
+> actual integrated bx-vdm implementation, then recovers the complete already
+> designed startup-configuration package attachment that the terminal evidence
+> shows is absent from current composition. It does not select an endpoint
 > from a native trace or implement a BOP from that observation.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T215 S3, Ordinary Mode. |
-| Admission And Approval | T215 S2 proves that the proposed DEM direct-host package is already closed by T202 S4 and removes the duplicate. The 203-identity reconciliation now permits one bounded native observation only to attribute the controlled terminal, not to choose a new implementation. |
-| Objective | Capture and map the existing full-source fixture's accepted generic #UD STOP through its fixed-width event/outcome, bx-vdm route and original OpenNT owner; distinguish it from watchdog, cancellation and machine-lifecycle outcomes. |
-| Non-goals | No BOP implementation or route change, no trace-selected backlog, no new Bochs/mantle semantics, no host-mutation policy expansion, no guest-run claim, no raw host-handle export and no synthetic filesystem replacement. |
-| Reference Baseline | T215 S1 reconciliation, T215 S2 correction, T214 S3 composition fixture, generic-#UD bridge, engine/machine-stage status contracts, and the selected OpenNT provider source. |
-| Files And ABI Surface | Existing default-off test observation and source-built fixture only; no product runtime ABI or provider behavior change. |
+| Identifier Mode | M0 T215 S4, Ordinary Mode. |
+| Admission And Approval | T215 S3 establishes that the current bounded terminal is OpenNT `50:3D` fatal configuration termination. Source review shows the full composition initializes the existing T204 startup-configuration provider but never attaches it. Standing owner direction requires reusing that complete package before any new adapter behavior. |
+| Objective | Attach the existing paired CLI/adapter startup-configuration reader, source-derived transform, provider-owned images and COMMAND/namespace bind to current full composition before bind; prove the whole package through source-built four-mode and native-admission regressions. |
+| Non-goals | No single-BOP patch, no trace-selected backlog, no new Bochs/mantle semantics, no host-mutation policy expansion, no guest-run or normal-terminal claim, no raw host-handle export, no temporary host files and no synthetic boot-content fallback. |
+| Reference Baseline | T204 source contract and closure, T215 S3 causal record, `cmdconf.c`/`cmdenv.c`, current composition runtime, startup reader/provider, boot-namespace composition and CLI paired-source admission. |
+| Files And ABI Surface | bx-vdm composition installation and existing versioned startup-configuration/boot-namespace contracts; fixture/tool inputs and evidence. No Bochs, guest ABI or provider layout change unless source evidence requires re-admission. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | The bounded full-source fixture yields an event/outcome record or an explicit absence; source maps the terminal status and selected route; observer disabled behavior stays unchanged; governance and diff checks pass. |
-| Expected Markers | One reproducible causal chain from engine terminal to generic STOP or watchdog/cancellation, an exact owner/disposition if STOP is present, and no architecture decision inferred from the observation. |
-| Asset Needs | Existing OpenNT and bx-vdm source, current fixture and default-off observer only; no firmware/media/device import. |
-| Reporting Requirements | Record the terminal status branch, copied instruction window, fixed-width outcome, route/provider and relevant original source path; distinguish evidence from implementation. |
-| Stop Conditions | Any need to implement a BOP, alter a route/provider/profile, change Bochs/mantle semantics, infer an ABI absent from source, pass a raw host handle or pointer into guest state, or turn the observation into a backlog item pauses S3 for re-admission. |
-| Exit Criteria | A reproducible causal record classifies the current controlled terminal and explicitly identifies its next owner package or machine boundary without changing it. |
+| Verification | Current composition source-builds under MSVC x64 `/MT`; explicit paired CONFIG/AUTOEXEC inputs bind the ready provider before composition bind; no-source/missing/oversize/invalid inputs fail at admission; images and merge state are owned by the provider; four profile modes use the shared policy; one bounded native run observes the changed terminal only after package regressions. Governance and diff checks pass. |
+| Expected Markers | One source-backed attachment chain: CLI paired sources -> installation-time copied input -> T204 provider -> namespace and COMMAND bind -> guest startup; no fallback fixed bytes, source handle, or source-path retention. |
+| Asset Needs | Existing OpenNT and bx-vdm source, T204 reader/provider/fixtures, explicit test configuration files, and current source-built fixture; no firmware/media/device import. |
+| Reporting Requirements | Record original source contract, exact reuse/attachment path, all profile and failure outcomes, native observation distinction, and any unavailable historical host composition. |
+| Stop Conditions | Any need to change OpenNT guest semantics, implement a standalone BOP, alter Bochs/mantle, retain a host handle/path beyond installation, create a host temporary file, invent a configuration fallback, or infer an ABI absent from source pauses S4 for re-admission. |
+| Exit Criteria | The existing whole startup-configuration package is installed into current composition with reproducible positive/negative regression evidence and a bounded post-package native observation; its outcome is reported without a guest-run claim. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Engine terminal mapping, machine-stage watchdog/cancellation mapping, generic #UD STOP observation, bx-vdm ingress/provider route and selected original OpenNT source. |
+| Similar-Issue Sweep | CLI child environment propagation, legacy adapter runtime, current composition runtime, startup reader/provider, boot-namespace bind, COMMAND context merge, `54:0C/0D`, `50:3D`, all four profiles and source teardown. |
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
@@ -61,6 +62,21 @@
 > controlled terminal—not a watchdog, missing `50:11`, or normal completion.
 > The observer returns to disabled after the fixture. See the [causal
 > record](etc/research/t215-s3-native-controlled-terminal-causal-map-001.md).
+
+> **T215 S4 P1 finding:** current `bx_ntvdm_composition_runtime_v1` omits the
+> existing T204 reader and `set_startup_configuration` call entirely, despite
+> the CLI already propagating the paired sources and the composition exposing
+> the bind seam. The zero-byte declared CONFIG/AUTOEXEC namespace can thus
+> select the source-backed `50:3D` fatal path. S4 recovers this whole existing
+> package attachment; it is not a new BOP implementation.
+
+> **T215 S4 P2 progress:** the existing T204 reader/provider is now compiled
+> and attached before composition bind; the full x64 `/MT` closure succeeds
+> with paired generated inputs. The native terminal remains `50:3D` because
+> T202's direct-host DEM provider has priority over the T204 contained images.
+> The remaining work is a whole startup-image overlay contract at that provider
+> boundary, not a parser or leaf-BOP change. See the [attachment
+> record](etc/research/t215-s4-startup-configuration-attachment-001.md).
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic

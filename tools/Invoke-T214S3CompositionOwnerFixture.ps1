@@ -21,6 +21,11 @@ foreach ($path in @($s94, $baseline, $manifestPath, $vs,
 if ($LASTEXITCODE -ne 0) { throw "T214 S3 full source closure compile failed: $LASTEXITCODE" }
 $prepared = Join-Path $build 'prepared'
 $profile = Join-Path $prepared 'profile-v7.json'
+$configSource = Join-Path $prepared 'config.nt'
+$autoexecSource = Join-Path $prepared 'autoexec.nt'
+$oem = [Text.Encoding]::GetEncoding(437)
+[IO.File]::WriteAllText($configSource, "FILES=20`r`n", $oem)
+[IO.File]::WriteAllText($autoexecSource, "", $oem)
 $byobRoot = Join-Path $root 'artifacts\inputs\t194-v6-normal-return-root-r1'
 $config = Join-Path $baseline 'native-core\config.h'
 $objects = Join-Path $build 'current-objects'
@@ -76,8 +81,17 @@ $lines | Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 | Tee-Object -LiteralPath (Join-Path $build 'link.log')
 if ($LASTEXITCODE -ne 0) { throw "T214 S3 fixture link failed: $LASTEXITCODE" }
 $runLog = Join-Path $build 'run.log'
-& cmd.exe /d /c ('"' + $exe + '" "' + $profile + '" "' + $byobRoot + '" > "' + $runLog + '" 2>&1')
-$run = $LASTEXITCODE
+$savedConfigSource = $env:NTDOS64_STARTUP_CONFIG_SOURCE
+$savedAutoexecSource = $env:NTDOS64_STARTUP_AUTOEXEC_SOURCE
+$env:NTDOS64_STARTUP_CONFIG_SOURCE = $configSource
+$env:NTDOS64_STARTUP_AUTOEXEC_SOURCE = $autoexecSource
+try {
+    & cmd.exe /d /c ('"' + $exe + '" "' + $profile + '" "' + $byobRoot + '" > "' + $runLog + '" 2>&1')
+    $run = $LASTEXITCODE
+} finally {
+    $env:NTDOS64_STARTUP_CONFIG_SOURCE = $savedConfigSource
+    $env:NTDOS64_STARTUP_AUTOEXEC_SOURCE = $savedAutoexecSource
+}
 Get-Content -LiteralPath $runLog
 $record = [ordered]@{schema='ntdos64.t214.s3.composition-owner-fixture.v1';architecture='x64';runtimeLibrary='/MT';fullCurrentSourceClosure=$true;runExitCode=$run;expectedRunExitCode=0;terminalKind='controlled-guest-terminal';terminalDetail=1;repeatedReset=$false;cpuEntryReached=$true;guestExecutionClaim=$false;passed=($run -eq 0)}
 $record | ConvertTo-Json -Depth 3 | Set-Content -LiteralPath (Join-Path $build 't214-s3-composition-owner-fixture.json') -Encoding utf8

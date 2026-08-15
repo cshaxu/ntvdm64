@@ -75,6 +75,7 @@
     "src/bx-vdm/bx_ntvdm_startup_plan_abi.c",
     "src/bx-vdm/bx_ntvdm_startup_configuration_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_startup_configuration_policy_v1.c",
+    "src/bx-vdm/bx_ntvdm_startup_configuration_source_v1.c",
     "src/bx-vdm/bx_ntvdm_multi_write_abi.c",
     "src/bx-vdm/bx_ntvdm_multi_write_transaction.c",
     "src/bx-vdm/bx_ntvdm_mouse_install1_mapping_service.c",
