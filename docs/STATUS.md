@@ -173,6 +173,14 @@
 > stop. The x64 `/MT` common-ingress regression passes. No child process,
 > raw handle, VDD or VDM re-entry is claimed; see the [lifecycle evidence](etc/research/t202-s6-command-execution-lifecycle-001.md).
 
+> **T202 S6 admission detail:** `54:06`, `54:08` and `54:0A` are one pending
+> COMMAND stream-and-child capability, not three trace-selected endpoints.
+> Their original packed ABI, shared `HOST_GLOBAL` profile disposition,
+> opaque-token boundary, explicit unsupported modes and typed-lifecycle
+> prerequisite are recorded in the [capability plan](etc/operations/t202-s6-command-stream-child-capability-plan-001.md).  Ordinary Win32 APIs are
+> available; the remaining prerequisite is a replacement lifecycle contract,
+> not a missing API.
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
