@@ -85,6 +85,13 @@
 > CWD/default-drive and rejects dot or long-name escape before host access.
 > It is provider substrate only; see the [path evidence](etc/research/t202-s4-dem-path-resolution-001.md).
 
+> **T202 S4 progress:** one package-local local-file backend now composes the
+> admitted root, bounded DOS path and opaque token session. Its focused MSVC
+> x64 `/MT` regression proves direct and readonly reads, profile-enforced
+> readonly write refusal, and explicit overlay/virtual non-backend results;
+> it is provider substrate only, not a completed BOP. See the
+> [backend evidence](etc/research/t202-s4-dem-local-file-backend-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the
