@@ -36,6 +36,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_config_done_service.c',
     'src\bx-vdm\bx_ntvdm_boot_namespace_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_boot_namespace_provider_v1.c',
+    'src\bx-vdm\bx_ntvdm_bop_sequence_observation_v1.c',
     'src\bx-vdm\bx_ntvdm_bop_ingress_v1.c',
     'src\bx-vdm\bx_ntvdm_bop_provider_registry_v1.c',
     'src\bx-vdm\bx_ntvdm_bulk_result_transaction.c',
@@ -109,12 +110,14 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_fcb_wildcard_partition_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_fcb_path_route_partition_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_namespace_partition_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_namespace_identity_observation_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_namespace_route_partition_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_search_partition_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_readonly_file_service.c',
     'src\bx-vdm\bx_ntvdm_dem_readonly_namespace_failure_provider_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_open_observation_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_session_lifecycle_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_system_symbol_service.c',
     'src\bx-vdm\bx_ntvdm_emm_unavailable_service.c',
@@ -260,7 +263,8 @@ $exe = Join-Path $build ('t198-s16-bx-vdm-' + $Fixture + '.exe')
 $map = Join-Path $build 'link.map'
 $response = Join-Path $build 'link.rsp'
 $linkLog = Join-Path $build 'link.log'
-@('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF') +
+@('/nologo', ('/OUT:"' + $exe + '"'), ('/MAP:"' + $map + '"'), '/OPT:REF',
+    '/STACK:8388608') +
     @($objects | ForEach-Object { '"' + $_ + '"' }) + @('bcrypt.lib', 'ntdll.lib') |
     Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture +
@@ -281,6 +285,7 @@ $record = [ordered]@{
     architecture = $HostArchitecture
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
     runtime = '/MT'
+    stackReserveBytes = 8388608
     platformLibraries = @('bcrypt.lib', 'ntdll.lib')
     sourceClosure = $sourceRelatives
     fixture = if ($Fixture -eq 'dem-package') {

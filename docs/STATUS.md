@@ -2,7 +2,7 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S13.** Its governing brief is the active
+> **Current effective packet: M0 T217 S14.** Its governing brief is the active
 > packet table below.
 
 **Active: M0 T217 S14 -- composed DOS image-loader handle-family regression.**
@@ -165,6 +165,12 @@
 > map assigns the current next seam to the shared `50:12/00/16/02[/42]`
 > image-loader handle family; S14 may regress that family but may not run a
 > trace or add a leaf handler. See the [package map](etc/research/t217-s13-dos-loader-exec-owner-package-map-001.md).
+
+> **T217 S14 P1 progress:** the full x64 composition closure required an
+> explicit 8 MiB host stack reserve because its existing bounded transaction
+> buffers nest beyond the MSVC default 1 MiB reserve. The selector-blind build
+> seam now passes; it neither closes the `50:42` positive token route nor
+> authorizes a trace or leaf handler. See the [capacity result](etc/research/t217-s14-composition-stack-capacity-result-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
