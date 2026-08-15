@@ -162,6 +162,45 @@ function Get-ProfileRelation([string]$selector, $service) {
     return 'default CLI profile or owning package admission required'
 }
 
+function Get-WorkaroundAction([string]$selector, $service) {
+    $number = if ($null -eq $service) { -1 } else { [int]$service }
+    switch ($selector) {
+        '50' {
+            if ($number -in @(31, 36, 38, 40, 43, 64, 67)) {
+                return 'retain original no-op, with package-level ABI confirmation'
+            }
+            if ($number -eq 66) {
+                return 'migrate FASTREAD compatibility branch into the DEM package or replace with its source-derived failure'
+            }
+            if ($number -in @(33, 41, 42)) {
+                return 'retain explicit unavailable result until an admitted raw-device profile replaces it'
+            }
+            return 'migrate current adapter route into the complete DEM owner package; replace synthetic leaves with the shared capability ABI'
+        }
+        '51' { return 'replace terminal-stop workaround only with complete WOW host composition' }
+        '52' {
+            if ($number -in @(0, 2, 3, 5, 11)) {
+                return 'retain partial mechanical candidate as non-success evidence; migrate only after full XMS ABI/failure review'
+            }
+            return 'retain deferred stop until the XMS owner package admits a complete provider'
+        }
+        '53' { return 'retain deferred stop until a complete protected-mode owner composition replaces it' }
+        '54' { return 'migrate source-derived helper into the complete COMMAND package; delete endpoint-local substitutes after replacement' }
+        '56' { return 'retain non-debug terminal safeguard until an opt-in debugger package replaces it' }
+        '57' { return 'retain reachable family unavailable facade; delete or migrate the unbound legacy unavailable provider during Redirector recovery' }
+        '59' { return 'retain explicit unavailable/diagnostic result; no silent success substitute' }
+        '5A' { return 'migrate simple resume placeholder to the admitted engine lifecycle/cancellation seam' }
+        '5B' { return 'retain explicit diagnostic/unavailable result outside an opt-in debugger profile' }
+        '5C' { return 'retain deferred stop until an admitted machine/device profile replaces it' }
+        '5D' { return 'retain deferred stop until an admitted machine/device profile replaces it' }
+        '5E' { return 'migrate bounded config/no-op branch into the machine/config owner after ABI review' }
+        '5F' { return 'retain explicit unavailable result; do not repurpose as adapter extension point' }
+        'FD' { return 'retain deferred stop until an admitted machine/device profile replaces it' }
+        'FE' { return 'replace terminal placeholder only with the declared engine terminal/result ABI' }
+        default { return 'unclassified' }
+    }
+}
+
 $all = [System.Collections.Generic.List[object]]::new()
 foreach ($row in (Extract-Array 'src/opennt/base/mvdm/dos/dem/demdisp.c' 'apfnSVC\s*\[\]\s*=' '50' 10)) { $all.Add($row) }
 foreach ($row in (Extract-Array 'src/opennt/base/mvdm/dos/command/cmddisp.c' 'apfnSVCCmd\s*\[\]\s*=' '54' 10)) { $all.Add($row) }
@@ -214,6 +253,7 @@ $seeded = foreach ($entry in $ordered) {
         currentCompositionState = Get-CurrentCompositionState $entry.selector $entry.service
         targetDisposition = Get-TargetDisposition $entry.selector $entry.service
         profileRelation = Get-ProfileRelation $entry.selector $entry.service
+        workaroundAction = Get-WorkaroundAction $entry.selector $entry.service
         auditState = 'source identity and owner assigned; ABI/failure/API review pending'
     }
 }
@@ -230,7 +270,7 @@ $output = [IO.Path]::GetFullPath($OutputPath)
 $parent = Split-Path -Parent $output
 if (-not (Test-Path -LiteralPath $parent)) { New-Item -ItemType Directory -Path $parent | Out-Null }
 [ordered]@{
-    schema = 'ntdos64.t200.s31.opennt-bop-source-inventory.v1'
+    schema = 'ntdos64.t200.s31.opennt-bop-source-inventory.v2'
     generatedUtc = [DateTime]::UtcNow.ToString('o')
     sourceCount = $seeded.Count
     selectorCounts = [ordered]@{

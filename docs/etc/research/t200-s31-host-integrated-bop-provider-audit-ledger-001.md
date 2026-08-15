@@ -106,7 +106,7 @@ The candidate T must use the proposal's package order, not BOP trace order:
   `src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c`.
 - Reproducible source inventory: run
   `tools/Export-T200S31BopSourceInventory.ps1` against the repository. Its
-  corrected output, `t200-s31-bop-source-inventory-r9`, contains 203 original
+  corrected output, `t200-s31-bop-source-inventory-r10`, contains 203 original
   dispatcher/header entries and is the mandatory coverage set for the
   endpoint-level ledger. Revision r1's count of 199 is superseded: its parser
   omitted un-commented or non-comma-terminated final entries from historical
@@ -116,12 +116,15 @@ The candidate T must use the proposal's package order, not BOP trace order:
 - Common mutation class/profile owner decision:
   [unified mutation-profile proposal](proposal-unified-host-mutation-capability-profiles-001.md).
 
-The r9 artifact has one mechanically generated row for every one of those
+The r10 artifact has one mechanically generated row for every one of those
 203 endpoints, with original handler/source, exactly one owner package, the
 current ingress state, and the actual bound-composition state derived from
 the façade/session routes. It also assigns exactly one **target disposition**
-and profile relation to every row. These are admission decisions for the
-next owner packages, not implementation claims: all rows remain marked
+and profile relation to every row, plus one explicit **workaround action**:
+retain an intentional source-equivalent no-op or unavailable fence, migrate
+the route into its owner package, replace a placeholder with an admitted
+composition, or delete/migrate a redundant unbound route. These are admission
+decisions for the next owner packages, not implementation claims: all rows remain marked
 `ABI/failure/API review pending` until their package supplies those fields.
 A mapped/deferred route is not a provider and the generated owner is a
 coverage guard, not a compatibility claim. The human ledger expands each
@@ -170,10 +173,29 @@ a narrow CLI seam or retain the original unavailable/deferred result.
 ## DEM first-pass owner groups (`50:00..48`)
 
 The historical `apfnSVC` array in `demdisp.c` is the authoritative ordering.
-The r9 inventory supplies the individual 73 source rows.  The following
+The r10 inventory supplies the individual 73 source rows.  The following
 partition corrects the earlier coarse ranges: each hex service is in exactly
 one owner row and thereby gives the per-service audit a non-overlapping work
 set.
+
+### Current DEM workaround reconciliation
+
+The current bx-vdm DEM path is deliberately not credited as a reconstructed
+DEM implementation merely because it can resume or fail a selector.  The
+following reconciliation records the actual leaves before the next package
+migrates them to the shared mutation-capability ABI.
+
+| Current route | Services | Actual behavior today | Required action |
+| --- | --- | --- | --- |
+| `dem_provider_v1` | `1F,24,26,28,2B,40,43` | Preserves the historical `demNotYetImplemented`/no-op subset and resumes with CF clear. | Retain only after each original no-op ABI is confirmed; do not turn this route into a generic success fallback. |
+| `dem_package_facade_v1` existing-provider classification | `00,02,09,0B,0D,11,12,14,15,16,18,19,1B,1C,32,3B,3C,45,46` | Classifies an existing adapter helper, but does not by itself prove a complete original provider, structure gather, or error path. | Migrate the individual helpers into their DEM owner planes and replace synthetic input/output with the common profile ABI. |
+| `readonly_namespace_failure_provider_v1` | `01,03,04,05,06,08,17,22,27,47,48` | Uses a contained-profile access-denied/invalid-handle result; `27` retains the original commit-success terminal behavior. | Migrate this leaf to the shared readonly profile. Direct and overlay forms must be supplied by the same owner package, not a separate BOP recognizer. |
+| `dem_cli_unavailable_provider_v1` | all remaining deferred leaves, including `33` retry and `3D` exit | Normally synthesizes access denied, with a retry-unavailable result for `33` and typed stop for `3D`. | Retain only as an explicit temporary fence; replace per service with original provider, source-derived rehost, or documented unavailable result during DEM recovery. |
+| FASTREAD compatibility | `42` | Current branch accepts a source-derived compatibility transaction although OpenNT dispatches this through `demNotYetImplemented`. | Migrate into DEM package or delete in favor of the original failure; it must not acquire status merely from native trace reachability. |
+
+This mapping also corrects the overly broad phrase "bound DEM package route":
+there is a route for every selector, but most leaf ABI/failure paths are
+still temporary classification or failure behavior, not host-integrated DEM.
 
 | Services | Original owners / source surface | Direct-host or profile disposition | Current workaround action |
 | --- | --- | --- | --- |
@@ -317,7 +339,7 @@ profile is admitted.
 
 ### Redirector endpoint partition (`57:00..31`)
 
-`rdrsvc.h` supplies all fifty identity rows in the r9 inventory.  They are a
+`rdrsvc.h` supplies all fifty identity rows in the r10 inventory.  They are a
 single network/IPC composition package, but the following non-overlapping
 partition records their eventual provider and failure work rather than
 allowing local DEM files to accidentally satisfy them.
