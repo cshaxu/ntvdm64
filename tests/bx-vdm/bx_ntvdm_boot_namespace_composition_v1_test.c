@@ -806,15 +806,23 @@ int main(void)
         outcome.disposition != BX_NTVDM_GENERIC_UD_STOP || outcome.resume_rip != 0u ||
         outcome.gpr16_write_mask != 0u || outcome.eflags_write_mask != 0u ||
         composition.command.bootstrap_provider.get_next.delivered != 1u) return 32;
-    /* The selected COMMAND console capability is a fixed CLI no-install
-       response.  Its identity was established by ingress and COMMAND-plane
-       classification, rather than by the detached legacy runtime gate. */
+    /* The selected COMMAND console/keyboard provider is reached only through
+       ingress and COMMAND-plane classification, never the legacy runtime
+       gate.  54:09 records the bounded no-VDD console disposition. */
+    event_initialize(&event, 0x54, 0x09);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != 0u ||
+        !composition.command.console_keyboard_provider.console.initialized) return 37;
+    /* 54:0E is the source-shaped no-KB16 result: DX=0 and the same console
+       disposition is recorded without creating keyboard assets. */
     event_initialize(&event, 0x54, 0x0e);
     event.edx = 1u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != (1u << 2) ||
-        outcome.gpr16_values[2] != 0u) return 37;
+        outcome.gpr16_values[2] != 0u ||
+        !composition.command.console_keyboard_provider.console.initialized) return 37;
     event_initialize(&event, 0x54, 0x0e);
     event.execution_mode = BX_NTVDM_CPU_EXECUTION_PROTECTED;
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 38;

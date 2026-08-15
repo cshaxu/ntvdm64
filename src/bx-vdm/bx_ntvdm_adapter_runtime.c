@@ -10,7 +10,6 @@
 #include "bx_ntvdm_config_done_service.h"
 #include "bx_ntvdm_cmd_comspec_bootstrap_service.h"
 #include "bx_ntvdm_cmd_get_next_service.h"
-#include "bx_ntvdm_cmd_keyboard_layout_service.h"
 #include "bx_ntvdm_controlled_stop_service.h"
 #include "bx_ntvdm_vdd_create_user_notify_service.h"
 #include "bx_ntvdm_spckbd_init_service.h"
@@ -647,9 +646,6 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
             result)) return 1;
     if (bx_ntvdm_vdd_create_user_notify_service_v1_dispatch(event, cpu_before,
             window, result)) return 1;
-    if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0eu) &&
-        bx_ntvdm_cmd_keyboard_layout_v1_dispatch(event, cpu_before, window,
-            result)) return 1;
     {
         bx_ntvdm_multi_write_transaction_v1 transaction;
         if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0fu) &&

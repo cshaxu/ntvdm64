@@ -1,7 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution')]
+    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard')]
     [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
@@ -50,6 +50,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_cmd_current_dir_service.c',
     'src\bx-vdm\bx_ntvdm_command_host_context_v1.c',
     'src\bx-vdm\bx_ntvdm_command_console_capability_v1.c',
+    'src\bx-vdm\bx_ntvdm_command_console_keyboard_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_keyboard_layout_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_cli_profile_service.c',
     'src\bx-vdm\bx_ntvdm_command_profile_consumer_v1.c',
@@ -199,6 +200,11 @@ if ($Fixture -eq 'dem-package') {
         'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
         'tests\bx-vdm\bx_ntvdm_command_launch_execution_provider_v1_test.c'
     )
+} elseif ($Fixture -eq 'command-console-keyboard') {
+    $sourceRelatives += @(
+        'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
+        'tests\bx-vdm\bx_ntvdm_command_console_keyboard_provider_v1_test.c'
+    )
 } else {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_boot_namespace_composition_v1_test.c'
 }
@@ -285,6 +291,8 @@ $record = [ordered]@{
         'tests/bx-vdm/bx_ntvdm_command_bootstrap_provider_v1_test.c'
     } elseif ($Fixture -eq 'command-launch-execution') {
         'tests/bx-vdm/bx_ntvdm_command_launch_execution_provider_v1_test.c'
+    } elseif ($Fixture -eq 'command-console-keyboard') {
+        'tests/bx-vdm/bx_ntvdm_command_console_keyboard_provider_v1_test.c'
     } else {
         'tests/bx-vdm/bx_ntvdm_boot_namespace_composition_v1_test.c'
     }

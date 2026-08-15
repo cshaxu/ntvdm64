@@ -38,6 +38,12 @@
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | `cmdmisc.c`, `cmdenv.c`, `cmdconf.c`, `cmdsvc.h`, COMMAND package session/facade, T209 configuration provider, T210 host context, CLI launch plan and every `01/02/04/05/0C/0D/0F/10` route. |
 
+> **T211 S4 P1 progress:** one versioned COMMAND console/keyboard provider
+> now owns `54:09/0E`; it records the source-shaped no-VDD/no-KB16 outcome,
+> removes the detached runtime `54:0E` route, and passes component plus full
+> bx-vdm composition MSVC x64 `/MT` regressions.  This is not interactive
+> console or keyboard-layout support; see the [source/ABI map](etc/research/t211-s4-command-console-keyboard-source-abi-map-001.md).
+
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
 > content; see the [closure record](history/m0-t209-closure-20260815.md).
