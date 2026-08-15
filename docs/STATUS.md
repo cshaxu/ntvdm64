@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T205 S2.** Its governing brief is the active
+> **Current effective packet: M0 T205 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T205 S2 -- XMS block/A20/geometry provider completion.**
+**Active: M0 T205 S3 -- XMS UMB machine-capability admission.**
 
 > **T204 closed:** its contained startup-configuration boundary is recorded in
 > [history](history/m0-t204-closure-20260815.md). The table below is the sole
@@ -14,27 +14,27 @@
 ## Active Packet
 
 > **T scope:** T205 recovers the complete XMS (`52:00..0B`) owner package by
-> completing the `00..05,0A,0B` A20/block/geometry group before UMB or INT15
-> work. S2 recovers this whole group through one selector-blind mantle request
-> ABI and one copied XMS package session; it does no UMB/INT15 work or trace.
+> completing XMS UMB services only after a real C3 machine-map/reservation
+> capability is admitted. S3 maps the actual Bochs memory regions and original
+> reserve/release semantics; it implements no `52:06..08` service or trace.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T205 S2, Ordinary Mode. |
-| Admission And Approval | T205 S1 [whole-package plan](etc/operations/t205-xms-whole-package-plan-001.md), owner approval for whole owner-package recovery, and the existing selector-blind mantle A20/extended-memory foundations. |
-| Objective | Complete the XMS `00..05,0A,0B` group as one package: source-compatible A20 translation, opaque block lifecycle, copied move request, declared page geometry, capacity and allocator statistics, with uniform register/failure behavior. |
-| Non-goals | No `06..09` UMB/INT15 behavior, native trace, Bochs CPU/device/firmware rewrite, raw guest mapping, host pointer, adapter-owned allocator, CCPU/SAS link, DPMI work, or independent endpoint patch. |
-| Reference Baseline | T205 S1 plan; OpenNT `xmsa20.c`, `xmsblock.c`, `xmsmisc.c`; current XMS session and mantle A20/extended-memory capability contracts. |
-| Files And ABI Surface | `src/bx-mantle` selector-blind fixed-width extended-memory statistics/copy capability only if required; `src/bx-vdm` copied move gather/result and XMS session translation; focused x64 `/MT` tests and supporting evidence. No `src/bx-core` or OpenNT source change unless separately exception-registered and re-admitted. |
+| Identifier Mode | M0 T205 S3, Ordinary Mode. |
+| Admission And Approval | T205 S1 plan and S2 closure; owner direction that UMB/INT15 must remain native machine-owned rather than adapter semantics. |
+| Objective | Establish the source/ABI/failure and actual-memory-map evidence needed to admit or reject a selector-blind C3 UMB reserve/release capability for XMS `52:06..08`. |
+| Non-goals | No XMS UMB implementation, synthetic UMB region, interrupt/firmware behavior, Bochs core memory rewrite, trace, adapter allocator, host pointer, DPMI or top-level `5E` behavior. |
+| Reference Baseline | OpenNT `xmsumb.c`, `umb.h`, `ReserveUMB` callers; T199 C3 evidence; current no-device minimal machine and S2 extended-memory boundary. |
+| Files And ABI Surface | Read-only source/map inspection and evidence only. A later admitted mantle record may be fixed-width and selector-blind; no source/ABI change is authorized in S3. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Strict MSVC x64 `/MT /W4 /WX` group regression through common ingress covering all eight slots, move overlap/failure, zero/stale/exhausted allocation, page/capacity/statistics values, A20 query/set, and exact `06..09` deferred boundary; governance and diff checks. |
-| Expected Markers | One mantle memory-capability owner, one XMS session, no host/guest pointer crossing, no ambient host-RAM capacity answer, source-shaped AX/BX/CX/DX/BL outcomes, and no UMB/INT15 side effect. |
-| Asset Needs | Existing source and local build tools only; no new third-party source, firmware, media, host mutation or runtime dependency. |
-| Reporting Requirements | Record ABI records, source register/error map, current partial-route migration, normal API permission facts for page geometry, test commands/results and deferred UMB/INT15. |
-| Stop Conditions | Need for a generic Bochs memory change, interrupt/device/firmware behavior, a raw pointer, an endpoint-only change, or a trace pauses S2 for re-admission. |
-| Exit Criteria | All eight S2 slots share a tested whole-package path; `06..09` retain their explicit deferred results and no partial route remains mislabeled. |
+| Verification | Inspect all real UMB candidate regions, memory owners and reservation transitions; map every `xmsInitUMB`/request/release output and failure; prove a no-map/default-off result; governance and diff checks. |
+| Expected Markers | Explicit C3 owner or explicit rejection; no guessed UMB aperture; `52:06..08` remain deferred until C3 is proven; adapter has no allocator. |
+| Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
+| Reporting Requirements | Record source paths/hashes, candidate region inventory, owner/lifecycle/failure disposition, current no-device constraints and a later S order. |
+| Stop Conditions | Any need to enable a device, change generic memory/firmware semantics, make an adapter map, or trace guest execution pauses S3 for re-admission. |
+| Exit Criteria | A reviewable C3 decision gives a safe complete implementation or explicit continued deferral path for all three UMB slots. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect move source/destination address rules, allocator reserve/query/realloc consistency, A20 state, host page-size semantics, `52:0C` sentinel, DPMI consumers of shared mantle capability and UMB/INT15 exclusions. |
+| Similar-Issue Sweep | Inspect UMB owner constants, all `ReserveUMB`/`ReleaseUMB` users, ROM/video/option apertures, `5E` UMB notification, DOS/EMM consumers, and DPMI dependencies. |
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
@@ -63,6 +63,11 @@
 > uninitialized, so S2 records no invented success result; the current bounded
 > provider fails those indeterminate requests rather than exposing undefined
 > state.
+
+> **T205 S2 closure:** the admitted eight-slot group is complete at its
+> source-built package boundary; see the [closure
+> record](history/m0-t205-s2-closure-20260815.md). `06..09` remain deferred
+> pending separately admitted C3/C5 mechanics.
 
 > **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one
