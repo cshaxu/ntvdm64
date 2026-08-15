@@ -47,6 +47,16 @@ verifies both `ERROR_SUCCESS` for the actual temporary-file open and
 `ERROR_INVALID_PARAMETER` for preflight rejection of `..`; r12 also confirms
 the existing complete-provider fixture still passes.
 
+Revision r4 extends the same file-only root-relative boundary with copied
+attribute query/set and deletion operations. The focused temporary-file
+fixture proves `GetFileInformationByHandle`, `SetFileInformationByHandle`
+(`FileBasicInfo`), and `SetFileInformationByHandle` (`FileDispositionInfo`)
+operate only after the admitted-root/open preflight and retain a Win32 error
+result. The fixture changes attributes and deletes only its self-created
+temporary file; r13 confirms the existing DEM provider closure still passes.
+These are ordinary available user-mode APIs on the current MSVC/x64 target;
+no missing Win32 API was encountered.
+
 ## Interpretation and confidence
 
 The adapter now has a contained direct-host primitive required by the later

@@ -122,6 +122,12 @@
 > This is shared host-capability plumbing, not a BOP dispatch or route switch;
 > see the [root-open evidence](etc/research/t202-s4-host-namespace-root-relative-open-001.md).
 
+> **T202 S4 progress:** the same root-relative boundary now supplies copied
+> file attribute query/set and deletion primitives, with r4/r13 source-built
+> MSVC x64 `/MT` coverage. They are namespace/metadata substrate only: the
+> whole provider has not yet received a BOP ingress route or claimed this
+> partition complete; see the [root-open evidence](etc/research/t202-s4-host-namespace-root-relative-open-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

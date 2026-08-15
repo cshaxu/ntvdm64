@@ -85,6 +85,20 @@ int bx_ntvdm_host_namespace_v1_open_file_ex(
     ULONG share_access, DWORD creation_disposition, HANDLE *handle_out,
     DWORD *win32_error_out);
 
+/* File-only metadata and removal primitives below the admitted root.  They
+ * use exactly the same relative-path and final-reparse checks as open_file;
+ * their values and failures are copied scalars, never guest authority. */
+int bx_ntvdm_host_namespace_v1_query_file_attributes(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD *attributes_out,
+    DWORD *win32_error_out);
+int bx_ntvdm_host_namespace_v1_set_file_attributes(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD attributes, DWORD *win32_error_out);
+int bx_ntvdm_host_namespace_v1_delete_file(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD *win32_error_out);
+
 #ifdef __cplusplus
 }
 #endif

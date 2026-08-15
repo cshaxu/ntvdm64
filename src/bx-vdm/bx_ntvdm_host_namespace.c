@@ -471,3 +471,89 @@ int bx_ntvdm_host_namespace_v1_open_file_ex(
     if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
     return 1;
 }
+
+int bx_ntvdm_host_namespace_v1_query_file_attributes(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD *attributes_out,
+    DWORD *win32_error_out)
+{
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    BY_HANDLE_FILE_INFORMATION info;
+    DWORD error = ERROR_SUCCESS;
+    if (attributes_out != 0) *attributes_out = 0u;
+    if (!bx_ntvdm_host_namespace_v1_open_file_ex(space, drive_index,
+            relative_path, FILE_READ_ATTRIBUTES, FILE_SHARE_READ |
+            FILE_SHARE_WRITE | FILE_SHARE_DELETE, OPEN_EXISTING, &handle,
+            &error)) {
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    if (!GetFileInformationByHandle(handle, &info)) {
+        error = GetLastError();
+        CloseHandle(handle);
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    CloseHandle(handle);
+    *attributes_out = info.dwFileAttributes;
+    if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
+    return 1;
+}
+
+int bx_ntvdm_host_namespace_v1_set_file_attributes(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD attributes, DWORD *win32_error_out)
+{
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    FILE_BASIC_INFO info;
+    DWORD error = ERROR_SUCCESS;
+    if (attributes == 0u || (attributes & FILE_ATTRIBUTE_DIRECTORY) != 0u) {
+        if (win32_error_out != 0) *win32_error_out = ERROR_INVALID_PARAMETER;
+        return 0;
+    }
+    if (!bx_ntvdm_host_namespace_v1_open_file_ex(space, drive_index,
+            relative_path, FILE_READ_ATTRIBUTES | FILE_WRITE_ATTRIBUTES,
+            FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+            OPEN_EXISTING, &handle, &error)) {
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    memset(&info, 0, sizeof(info));
+    info.FileAttributes = attributes;
+    if (!SetFileInformationByHandle(handle, FileBasicInfo, &info, sizeof(info))) {
+        error = GetLastError();
+        CloseHandle(handle);
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    CloseHandle(handle);
+    if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
+    return 1;
+}
+
+int bx_ntvdm_host_namespace_v1_delete_file(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, DWORD *win32_error_out)
+{
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    FILE_DISPOSITION_INFO disposition;
+    DWORD error = ERROR_SUCCESS;
+    if (!bx_ntvdm_host_namespace_v1_open_file_ex(space, drive_index,
+            relative_path, DELETE | FILE_READ_ATTRIBUTES,
+            FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+            OPEN_EXISTING, &handle, &error)) {
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    disposition.DeleteFile = TRUE;
+    if (!SetFileInformationByHandle(handle, FileDispositionInfo, &disposition,
+            sizeof(disposition))) {
+        error = GetLastError();
+        CloseHandle(handle);
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
+    CloseHandle(handle);
+    if (win32_error_out != 0) *win32_error_out = ERROR_SUCCESS;
+    return 1;
+}

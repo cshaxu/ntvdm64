@@ -10,7 +10,7 @@ int main(void)
     bx_ntvdm_host_namespace_v1 space;
     uint8_t drive;
     HANDLE source = INVALID_HANDLE_VALUE, opened = INVALID_HANDLE_VALUE;
-    DWORD written = 0u, read = 0u;
+    DWORD written = 0u, read = 0u, attributes = 0u;
     DWORD error = ERROR_SUCCESS;
     char output = 0;
     int failed = 0;
@@ -46,7 +46,20 @@ int main(void)
     failed |= bx_ntvdm_host_namespace_v1_open_file_ex(&space, drive, L"..\\X.TXT",
         GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, &opened, &error) != 0 ||
         error != ERROR_INVALID_PARAMETER;
+    failed |= !bx_ntvdm_host_namespace_v1_query_file_attributes(&space, drive,
+        relative, &attributes, &error) || error != ERROR_SUCCESS ||
+        (attributes & FILE_ATTRIBUTE_DIRECTORY) != 0u;
+    failed |= !bx_ntvdm_host_namespace_v1_set_file_attributes(&space, drive,
+        relative, FILE_ATTRIBUTE_HIDDEN, &error) || error != ERROR_SUCCESS ||
+        !bx_ntvdm_host_namespace_v1_query_file_attributes(&space, drive,
+            relative, &attributes, &error) ||
+        (attributes & FILE_ATTRIBUTE_HIDDEN) == 0u;
+    failed |= !bx_ntvdm_host_namespace_v1_set_file_attributes(&space, drive,
+        relative, FILE_ATTRIBUTE_NORMAL, &error) || error != ERROR_SUCCESS;
+    failed |= !bx_ntvdm_host_namespace_v1_delete_file(&space, drive, relative,
+        &error) || error != ERROR_SUCCESS;
+    temporary[0] = L'\0'; /* deletion was performed through the namespace. */
     bx_ntvdm_host_namespace_v1_release(&space);
-    DeleteFileW(temporary);
+    if (temporary[0] != L'\0') DeleteFileW(temporary);
     return failed ? 5 : 0;
 }
