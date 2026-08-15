@@ -42,6 +42,13 @@
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | DEM, COMMAND, XMS, DPMI, Redirector, debugger, top-level, machine/BIOS BOP families; provider registry, facade, native composition and profile/mutation seams. |
 
+> **T215 S1 P1 progress:** the re-exported historical inventory retains all
+> 203 identities. Current-source reconciliation corrects T200's stale XMS
+> and COMMAND composition descriptions, preserves deferred/unavailable family
+> boundaries, and selects DEM direct-host file/handle/FCB/search recovery as
+> the next whole package—without selecting any BOP from T214's terminal
+> observation. See the [reconciliation record](etc/research/t215-s1-current-bop-owner-package-reconciliation-001.md).
+
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
 > content; see the [closure record](history/m0-t209-closure-20260815.md).
