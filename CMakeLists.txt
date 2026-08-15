@@ -677,6 +677,18 @@ target_include_directories(bx-ntvdm-dem-dta-service-test PRIVATE
     src/bx-vdm)
 target_compile_features(bx-ntvdm-dem-dta-service-test PRIVATE c_std_11)
 
+add_executable(bx-ntvdm-dem-process-owner-v1-test EXCLUDE_FROM_ALL
+    src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
+    src/bx-vdm/bx_ntvdm_cpu_result_v2.c
+    src/bx-vdm/bx_ntvdm_guest_range.c
+    src/bx-vdm/bx_ntvdm_guest_read_action_v1.c
+    src/bx-vdm/bx_ntvdm_dem_process_owner_v1.c
+    tests/bx-vdm/bx_ntvdm_dem_process_owner_v1_test.c
+)
+target_include_directories(bx-ntvdm-dem-process-owner-v1-test PRIVATE
+    src/bx-vdm)
+target_compile_features(bx-ntvdm-dem-process-owner-v1-test PRIVATE c_std_11)
+
 add_executable(bx-ntvdm-dem-hard-error-service-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
     src/bx-vdm/bx_ntvdm_cpu_result_v2.c

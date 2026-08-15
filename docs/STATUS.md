@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T220 S2.** Its governing brief is the active
+> **Current effective packet: M0 T220 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T220 S2 -- bounded DEM process-resource bridge design.**
+**Active: M0 T220 S3 -- bounded DEM current-PDB helper.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -38,19 +38,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T220 S2, Ordinary Mode. |
-| Admission And Approval | The owner continued the active goal after T220 S1's source map. S1 identifies the only admissible next seam: a bounded copied read of the exact guest PDB/JFT/SFT facts the original DEM owner uses. |
-| Objective | Specify and prove the smallest versioned bx-vdm DEM process-resource read contract: its exact permitted guest ranges, copied result fields, validation/failure rules, lifecycle owner and four-profile policy inputs. Produce a focused source-built fixture; implementation is admitted only if the design proves no broader guest inspection is required. |
-| Non-goals | No generic PSP/guest-memory inspector, BOP implementation, guest `$Exec` recreation, DOS/BIOS patch, host-mutation expansion, Bochs/mantle change, COMMAND return implementation, target-execution claim, or native trace. |
-| Reference Baseline | T220 S1 ownership map; original OpenNT `demfile.c`, `demgset.c`, `demsrch.c`, `demmisc.c`, `msctrlc.asm` and DOS layout headers; current mechanical copied-read ABI and DEM whole provider/file session/search partitions. |
-| Files And ABI Surface | `src/bx-vdm` bounded DEM process-resource read declarations/fixture plus `docs/etc/research/`; no bx-core, bx-mantle, guest, CLI or public runtime ABI change. |
+| Identifier Mode | M0 T220 S3, Ordinary Mode. |
+| Admission And Approval | T220 S2 closed the two-byte design: reuse the checked `50:1B` registration and expose only copied `CurrentPDB`. This S implements exactly that isolated helper and fixture before any provider integration. |
+| Objective | Add a DEM-private, fixed-width `CurrentPDB` request/completion helper that emits at most one exact two-byte checked read, validates its exact copied completion, and publishes only a 16-bit PDB segment/status. |
+| Non-goals | No generic PSP/guest-memory inspector, BOP route change, DEM file/search/FCB integration, `50:3C` behavior change, guest `$Exec` recreation, DOS/BIOS patch, host-mutation expansion, Bochs/mantle change, COMMAND return, target-execution claim, or native trace. |
+| Reference Baseline | T220 S1 ownership map; T220 S2 bounded-read design; OpenNT `demgset.c`, `demfile.c`, `doswow.h`; current `dem_dta_service` registration and `guest_read_action_v1` ABI. |
+| Files And ABI Surface | New `src/bx-vdm/bx_ntvdm_dem_process_owner_v1.[ch]`, focused `tests/bx-vdm` fixture and CMake target, plus evidence; no public runtime ABI or composition binding change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Static layout evidence names every copied byte/range; fixture proves accepted PDB/JFT/SFT data, malformed length/pointer/unused-SFT rejection, no raw-pointer escape and no read beyond the declared ranges; governance and diff checks pass. |
-| Expected Markers | Fixed-width copied records; DEM-only symbols; caller-supplied checked read callback/action; source-shaped invalid/unused outcomes; no selector, DOS or Bochs meaning in the mechanical path. |
+| Verification | Focused MSVC x64 `/MT` fixture proves valid little-endian owner, absent registration, zero owner, aperture overflow, wrong address and wrong byte-count refusal; source review proves no pointer/handle/selector field; governance and diff checks pass. |
+| Expected Markers | Fixed-width copied record; DEM-only symbols; one exact two-byte request; no raw pointer, host handle, selector or CPU result; no profile decision. |
 | Asset Needs | Existing OpenNT source/layout headers, current bx-vdm ABI/test sources and MSVC x64 `/MT`; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record exact source fields, retained validation/order/failure semantics, selected recovery rung, test commands/results, profile relation and limitations. |
-| Stop Conditions | A need for a variable/unbounded guest read, generic PSP traversal, new Bochs/mantle capability, runtime BOP route change, host mutation behavior change, native trace, guest binary patch or external import pauses S2 for re-admission. |
-| Exit Criteria | The minimal read contract and focused fixture evidence are complete, with a separate implementation S explicitly selected or ruled out. |
+| Reporting Requirements | Record exact source field, test command/result, source-first relation and explicit non-integration limitation. |
+| Stop Conditions | A need for a variable/unbounded guest read, generic PSP traversal, PDB/JFT/SFT walk, runtime BOP route change, host mutation behavior change, new Bochs/mantle capability, native trace, guest binary patch or external import pauses S3 for re-admission. |
+| Exit Criteria | The exact helper and focused fixture pass; its absence of composition integration is recorded; a later S may decide how an admitted DEM owner consumes it. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | First/subsequent child entry; parent-owned handles crossing child entry; normal/abort/TSR exit; VDD and no-VDD branches; `50:34..3C`; file, FCB, search, pending and DTA state; current session teardown; COMMAND `54:0B`; and direct/readonly/overlay/virtual profile ownership. |
 
@@ -69,6 +69,13 @@
 > `CurrentPDB` helper, not an independent PSP scanner or PDB/JFT/SFT walker.
 > Profile policy remains outside that identity helper.  See the
 > [bounded-read design](etc/research/t220-s2-bounded-dem-process-read-design-001.md).
+
+> **T220 S3 P1 closure:** the isolated DEM-private helper now source-builds
+> under MSVC x64 `/MT` and proves exact two-byte `CurrentPDB` copying plus
+> malformed/absent refusal.  It is deliberately not bound to a BOP, a host
+> handle or `50:3C`; the next S must map the full DEM owner-association
+> transaction before integration.  See the
+> [result](etc/research/t220-s3-dem-current-pdb-helper-result-001.md).
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
