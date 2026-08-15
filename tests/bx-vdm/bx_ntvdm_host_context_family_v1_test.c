@@ -43,6 +43,7 @@ int main(void)
     wchar_t original[MAX_PATH];
     uint8_t drive, root[67] = {0}, input[67] = {0}, payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD] = {0};
     uint8_t environment[] = { 'F','O','O','=', 'B','A','R', 0u, 0u };
+    static uint8_t large_environment[5002];
     uint8_t comspec[BX_NTVDM_CMD_COMSPEC_TEXT_MAX_BYTES] = {0};
     bx_ntvdm_host_drive_snapshot_v1 snapshot;
     bx_ntvdm_host_namespace_v1 space;
@@ -54,6 +55,9 @@ int main(void)
     bx_ntvdm_multi_write_transaction_v1 tx;
     bx_ntvdm_instruction_window_v1 window;
     bx_ntvdm_cmd_comspec_bootstrap_v1 bootstrap;
+    bx_ntvdm_command_host_context_v1 large_projection;
+    bx_ntvdm_cmd_comspec_bootstrap_v1 large_bootstrap;
+    uint32_t large_bytes = 0u, variable;
     int failed = 0;
 
     if (GetCurrentDirectoryW(MAX_PATH, original) == 0u || original[0] < L'A' ||
@@ -115,6 +119,42 @@ int main(void)
             &bootstrap, &tx, payload) || tx.writes.write_count != 1u ||
         tx.writes.writes[0].guest_physical_address != 0x2000u ||
         !bx_ntvdm_cmd_comspec_bootstrap_v1_complete_environment(&bootstrap, &tx)) failed = 1;
+
+    /* OpenNT grows the initial environment and reports its paragraph demand;
+       a >4 KiB host projection must therefore reach the same 54:0F checked
+       write path rather than failing during composition admission. */
+    for (variable = 0u; variable < 5u; ++variable) {
+        large_environment[large_bytes++] = 'V';
+        large_environment[large_bytes++] = (uint8_t)('0' + variable);
+        large_environment[large_bytes++] = '=';
+        memset(large_environment + large_bytes, 'A', 996u);
+        large_bytes += 996u;
+        large_environment[large_bytes++] = 0u;
+    }
+    large_environment[large_bytes++] = 0u;
+    if (large_bytes <= 4096u ||
+        !bx_ntvdm_command_host_context_v1_initialize(&large_projection, drive, root, 3u) ||
+        !bx_ntvdm_command_host_context_v1_set_environment(&large_projection,
+            large_environment, large_bytes)) failed = 1;
+    bx_ntvdm_cmd_comspec_bootstrap_v1_initialize(&large_bootstrap);
+    event_cpu(&event, &cpu, 0x54u, 0x02u);
+    bx_ntvdm_instruction_window_v1_capture(&window,
+        (const uint8_t[]){0xc4u,0xc4u,0x54u,0x02u}, 4u);
+    {
+        bx_ntvdm_guest_gather_read_action_v1 gather;
+        if (!bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_comspec(&event, &cpu, &window,
+                &large_bootstrap, &gather) || !bx_ntvdm_cmd_comspec_bootstrap_v1_complete_comspec(
+                &event, &cpu, &gather, comspec, sizeof(comspec), &large_projection,
+                &large_bootstrap, &tx.result) ||
+            large_bootstrap.environment_bytes <= 4096u) failed = 1;
+    }
+    event_cpu(&event, &cpu, 0x54u, 0x0fu); cpu.es = 0x200u; cpu.ebx = 0xffffu;
+    bx_ntvdm_instruction_window_v1_capture(&window,
+        (const uint8_t[]){0xc4u,0xc4u,0x54u,0x0fu}, 4u);
+    if (!bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(&event, &cpu, &window,
+            &large_bootstrap, &tx, payload) || tx.writes.write_count != 1u ||
+        tx.writes.payload_bytes != large_bootstrap.environment_bytes ||
+        !bx_ntvdm_cmd_comspec_bootstrap_v1_complete_environment(&large_bootstrap, &tx)) failed = 1;
 
     bx_ntvdm_host_namespace_v1_release(&space);
     if (!SetCurrentDirectoryW(original)) return 4;

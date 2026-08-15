@@ -15,6 +15,7 @@
 #include "bx_ntvdm_initial_state_catalog_v1.h"
 
 #include <string.h>
+#include <stdlib.h>
 #include <windows.h>
 
 #define BX_NTVDM_COMPOSITION_ENV_PROFILE L"NTDOS64_ADAPTER_PROFILE"
@@ -58,48 +59,58 @@ static int capture_command_environment(
     bx_ntvdm_command_host_context_v1 *context)
 {
     wchar_t *wide, *entry;
-    uint8_t environment[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES];
+    uint8_t *environment;
     uint32_t used = 0u;
     int has_prompt = 0;
     int result = 0;
     if (context == 0) return 0;
+    environment = (uint8_t *)malloc(BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES);
+    if (environment == 0) return 0;
     wide = GetEnvironmentStringsW();
-    if (wide == 0) return 0;
+    if (wide == 0) { free(environment); return 0; }
     for (entry = wide; *entry != L'\0'; entry += wcslen(entry) + 1u) {
-        char converted[1024];
         int bytes;
         uint32_t index, name_bytes = 0u;
         if (entry[0] == L'=') continue;
+        /* OpenNT's cmdGetInitEnvironment grows its copied block as needed.
+           Query first, then write directly into the bounded 16-bit VDM
+           transaction; no per-variable 1 KiB policy limit is introduced. */
         bytes = WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS, entry, -1,
-            converted, (int)sizeof(converted), 0, 0);
-        if (bytes < 3 || bytes > (int)sizeof(converted)) goto done;
+            0, 0, 0, 0);
+        if (bytes < 3 || (uint32_t)bytes >
+                BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES - used - 1u ||
+            !WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS, entry, -1,
+                (char *)environment + used, bytes, 0, 0)) goto done;
         for (index = 0u; index < (uint32_t)bytes - 1u; ++index) {
-            if (converted[index] == '=') { name_bytes = index; break; }
+            if (environment[used + index] == '=') { name_bytes = index; break; }
         }
-        if (name_bytes == 0u || command_environment_name_equal(converted,
-                name_bytes, "COMSPEC") || command_environment_name_equal(converted,
+        if (name_bytes == 0u || command_environment_name_equal(
+                (const char *)environment + used,
+                name_bytes, "COMSPEC") || command_environment_name_equal(
+                (const char *)environment + used,
                 name_bytes, "WINDIR")) continue;
         for (index = 0u; index < name_bytes; ++index)
-            if (converted[index] >= 'a' && converted[index] <= 'z')
-                converted[index] = (char)(converted[index] - 'a' + 'A');
-        if (command_environment_name_equal(converted, name_bytes, "PROMPT"))
+            if (environment[used + index] >= 'a' && environment[used + index] <= 'z')
+                environment[used + index] = (uint8_t)(environment[used + index] - 'a' + 'A');
+        if (command_environment_name_equal((const char *)environment + used,
+                name_bytes, "PROMPT"))
             has_prompt = 1;
-        if (used > sizeof(environment) - (uint32_t)bytes - 1u) goto done;
-        memcpy(environment + used, converted, (uint32_t)bytes);
         used += (uint32_t)bytes;
     }
     if (!has_prompt) {
         static const uint8_t prompt[] = "PROMPT=$P$G";
-        if (used > sizeof(environment) - sizeof(prompt) - 1u) goto done;
+        if (used > BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES -
+                sizeof(prompt) - 1u) goto done;
         memcpy(environment + used, prompt, sizeof(prompt));
         used += (uint32_t)sizeof(prompt);
     }
-    if (used >= sizeof(environment)) goto done;
+    if (used >= BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES) goto done;
     environment[used++] = 0u;
     result = bx_ntvdm_command_host_context_v1_set_environment(context,
         environment, used);
 done:
     FreeEnvironmentStringsW(wide);
+    free(environment);
     return result;
 }
 

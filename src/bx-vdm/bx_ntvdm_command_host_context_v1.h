@@ -7,9 +7,12 @@
 #define BX_NTVDM_COMMAND_HOST_CONTEXT_V1_VERSION 1u
 /* OpenNT's MAXIMUM_VDM_CURRENT_DIR (64) plus drive, colon, slash and NUL. */
 #define BX_NTVDM_COMMAND_HOST_CONTEXT_V1_DIRECTORY_BYTES 68u
-/* The shared checked write ABI presently carries at most 4096 bytes.  A
- * COMSPEC line can consume at most 73 bytes, leaving this snapshot budget. */
-#define BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES 4023u
+/* `cmdGetInitEnvironment` reports a DOS-buffer requirement in paragraphs.
+ * The copied adapter transaction is therefore bounded only by the 16-bit
+ * COMMAND/VDM environment contract (65535 bytes), not by a 4 KiB host
+ * snapshot.  Reserve the largest possible COMSPEC record (73 bytes) so the
+ * composed environment always remains one checked guest-RAM transaction. */
+#define BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES 65462u
 #define BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES 260u
 
 /* This is copied at CLI admission.  It contains no host handle or pathname

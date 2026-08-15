@@ -29,6 +29,11 @@ static int valid_relative(const wchar_t *relative)
 {
     const wchar_t *component;
     if (relative == 0 || wcslen(relative) >= BX_NTVDM_SESSION_HOST_CONTEXT_V1_MAX_RELATIVE) return 0;
+    /* The empty relative portion denotes the root of the selected DOS drive.
+       It is the valid result of a host-CWD fallback such as `C:\\`; treating
+       it as an empty 8.3 component prevents COMMAND and DEM from sharing the
+       selected root context. */
+    if (relative[0] == L'\0') return 1;
     component = relative;
     while (*component != L'\0') {
         const wchar_t *end = wcschr(component, L'\\');

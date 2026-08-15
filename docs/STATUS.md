@@ -5,7 +5,7 @@
 > **Current effective packet: M0 T214 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T214 S3 -- namespace-initialization owner map.**
+**Active: M0 T214 S3 -- OpenNT COMMAND-environment composition repair.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -19,26 +19,27 @@
 ## Active Packet
 
 > **T scope:** T214 recovers the current profile's complete composition
-> admission chain before CPU entry. S1 mapped its owner stages; S2 has
-> established that the current native rejection is namespace initialization.
-> S3 maps that initializer's ordered provider/DEM/COMMAND ownership before a
-> package-owned repair is admitted.
+> admission chain before CPU entry. S1 mapped its owner stages. The retained
+> S2 partial-object result is not current-source attribution. S3 has now
+> attributed the full source closure's current rejection to COMMAND host
+> context capture (`detail=45`) and is admitted, by the owner's explicit
+> source-reuse direction, to repair that one OpenNT-derived environment path.
 
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T214 S3, Ordinary Mode. |
-| Admission And Approval | S2 established `detail=40`, the namespace-initialization stage, through source-built native evidence. S3 is admitted to map the ordered inner owners before any repair. |
-| Objective | Attribute the rejected namespace initializer to its exact provider, DEM-session, or COMMAND-session contract and record the package-level recovery disposition. |
-| Non-goals | No BOP implementation, no trace-selected patch, no Bochs/mantle/engine semantics, no host mutation policy expansion, no guest path/handle export, and no guest-run claim. |
-| Reference Baseline | [S2 diagnostic](etc/research/t214-s2-composition-admission-diagnostic-001.md), current boot-namespace provider/plane/composition and DEM/COMMAND session source. |
-| Files And ABI Surface | Evidence and, only if needed to prove a copied init precondition, one bounded composition-owned fixture; no runtime-provider ABI change. |
+| Admission And Approval | The owner directed OpenNT-equivalent COMMAND environment handling and authorized the governing recovery ladder. The full current-source closure reached `detail=45` (`COMMAND_CONTEXT_CAPTURE`); S3 is admitted to repair this exact source-derived provider seam. |
+| Objective | Replace the arbitrary 4 KiB COMMAND-environment rejection with the OpenNT `cmdGetInitEnvironment`/`cmdCreateVDMEnvironment` filtering, OEM conversion, sizing and insufficient-buffer contract, bounded only by the existing 16-bit guest transaction. |
+| Non-goals | No new BOP family, no trace-selected patch, no Bochs/mantle/engine semantics, no host mutation policy expansion, no guest path/handle export, and no guest-run claim. |
+| Reference Baseline | [S2 diagnostic](etc/research/t214-s2-composition-admission-diagnostic-001.md), [OpenNT COMMAND environment source](../src/opennt/base/mvdm/dos/command/cmdenv.c), current boot-namespace composition and COMMAND session source. |
+| Files And ABI Surface | `src/bx-vdm` COMMAND host-context and checked write ceiling, focused host-context fixture, S3 full-current fixture, source-derived evidence and governing recovery ladder. No Bochs or OpenNT historical source edit. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI/failure map over the exact profile selection and a fresh focused MSVC x64 `/MT` fixture; governance and diff checks. |
-| Expected Markers | One failing inner owner or a complete evidence-backed ambiguity record; exact input invariant; retain/migrate/replace/defer action; no BOP selected from trace. |
+| Verification | Source/ABI/failure map; fresh focused MSVC x64 `/MT` >4 KiB COMMAND-environment/`54:02`/`54:0F` fixture; full current-source composition fixture; governance and diff checks. |
+| Expected Markers | OpenNT filter/conversion/size behavior, >4 KiB accepted and paragraph-sized, no silent truncation, no arbitrary host-variable whitelist, and no BOP selected from trace. |
 | Asset Needs | Existing profile/root, parser, source fixtures and current native evidence only; no firmware/media/device import. |
-| Reporting Requirements | Record ordered calls, exact profile fields consumed, current failure condition, Win32 availability if reached, workaround action and the next complete provider package. |
-| Stop Conditions | Any need for BOP patch, unbounded logging, Bochs/mantle change, host path/handle export, unaudited host mutation, or a repair before owner attribution pauses S3. |
-| Exit Criteria | A reproducible source map and fixture isolate the inner owner/precondition sufficiently to admit one whole-package repair or record a bounded external blocker. |
+| Reporting Requirements | Record the original source path and non-composable dependencies, retained filter/conversion/size/failure rules, exact 16-bit ceiling, full-closure result, and any next-stage admission. |
+| Stop Conditions | Any need to change OpenNT historical code, Bochs/mantle/engine semantics, silently truncate environment entries, substitute a host-variable whitelist, exceed the 16-bit guest transaction, or alter host mutation policy pauses S3. |
+| Exit Criteria | A reproducible source-derived map and fixtures prove the OpenNT-equivalent environment behavior and full composition passes the former context-capture stage, or record an exact subsequent owner-stage rejection. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Boot namespace provider/plane, DEM and COMMAND session initializers, readonly namespace, search snapshot, startup configuration, direct-composition fixtures, engine rejection/reset and T204/T210--T213 evidence. |
 
@@ -46,6 +47,15 @@
 > the native pre-CPU rejection to `namespace-initialize` (`detail=40`), and
 > a focused negative engine fixture proves reset/deactivation after that
 > rejection. See the [diagnostic record](etc/research/t214-s2-composition-admission-diagnostic-001.md).
+
+> **T214 S3 P1 progress:** the retained S2 `detail=40` observation is now
+> classified as partial-object evidence, not current-source attribution.  A
+> fresh full current-source closure reached `detail=45`
+> (`COMMAND_CONTEXT_CAPTURE`), exposing an arbitrary 4 KiB adapter limit.
+> The admitted source-derived OpenNT environment recovery removes that limit
+> up to the 16-bit guest transaction ceiling; a focused x64 `/MT` regression
+> carries 5,001 bytes through `54:02/54:0F`, and the full closure now reaches
+> a controlled guest terminal (`detail=1`) after CPU entry. See the [recovery record](etc/research/t214-s3-opennt-command-environment-recovery-001.md).
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic

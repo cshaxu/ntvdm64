@@ -43,6 +43,15 @@ int main(void)
     if (error != ERROR_SUCCESS) { printf("direct error %lu\n", (unsigned long)error); failed = 1; }
     if (!bx_ntvdm_session_host_context_v1_set_environment(&direct, environment,
             (uint32_t)sizeof(environment))) { puts("direct environment"); failed = 1; }
+    if (!bx_ntvdm_command_host_context_v1_initialize(&command, drive, directory, 3u) ||
+        !bx_ntvdm_command_host_context_v1_set_environment(&command, environment,
+            (uint32_t)sizeof(environment)) ||
+        !bx_ntvdm_session_host_context_v1_seed_command(&direct, &command) ||
+        bx_ntvdm_session_host_context_v1_query(&direct, drive, relative,
+            BX_NTVDM_SESSION_HOST_CONTEXT_V1_MAX_RELATIVE) !=
+            BX_NTVDM_SESSION_HOST_CONTEXT_V1_OK || relative[0] != L'\0') {
+        puts("direct root seed"); failed = 1;
+    }
     if (!bx_ntvdm_session_host_context_v1_project_command(&direct, &command)) { puts("direct projection"); failed = 1; }
     if (command.selected_drive != drive || memcmp(command.selected_directory, directory, 4u) != 0 ||
         command.environment_bytes != sizeof(environment) ||

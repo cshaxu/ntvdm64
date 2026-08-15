@@ -7,7 +7,10 @@
 #define BX_NTVDM_MULTI_WRITE_ABI_MAGIC 0x42584d57u
 #define BX_NTVDM_MULTI_WRITE_ABI_VERSION 1u
 #define BX_NTVDM_MULTI_WRITE_MAX_WRITES 64u
-#define BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD 4096u
+/* A COMMAND environment is a 16-bit byte-counted guest object.  Match the
+ * mantle's already-admitted 65535-byte mechanical action ceiling so a valid
+ * OpenNT-style environment need not be rejected at adapter admission. */
+#define BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD 65535u
 
 typedef struct bx_ntvdm_multi_write_v1 {
     uint32_t magic, abi_version, struct_bytes, write_count;
