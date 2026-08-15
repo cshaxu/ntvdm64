@@ -1,18 +1,19 @@
 #include "bx_ntvdm_cmd_current_dir_service.h"
 
-#define BX_NTVDM_CMD_CURRENT_DIR_ROOT_BYTES 4u
+#include <string.h>
 
 static int bx_ntvdm_cmd_current_dir_physical(uint16_t segment, uint16_t offset,
-    uint64_t *address)
+    uint64_t *address, uint32_t bytes)
 {
     uint64_t value = ((uint64_t)segment << 4) + offset;
     if (address == 0 || value > UINT64_C(0x100000) -
-        BX_NTVDM_CMD_CURRENT_DIR_ROOT_BYTES) return 0;
+        bytes) return 0;
     *address = value;
     return 1;
 }
 
 int bx_ntvdm_cmd_current_dir_service_v1_prepare(uint32_t available_mask,
+    const bx_ntvdm_command_host_context_v1 *host_context,
     const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu_before,
     const bx_ntvdm_instruction_window_v1 *window,
@@ -20,6 +21,7 @@ int bx_ntvdm_cmd_current_dir_service_v1_prepare(uint32_t available_mask,
     uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD])
 {
     uint8_t drive;
+    uint32_t bytes;
     uint64_t address;
     if (event == 0 || cpu_before == 0 || window == 0 || transaction == 0 ||
         payload == 0 || !bx_ntvdm_exception_event_v1_valid(event) ||
@@ -40,17 +42,25 @@ int bx_ntvdm_cmd_current_dir_service_v1_prepare(uint32_t available_mask,
                 0u, 0u) && bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 1) &&
             bx_ntvdm_cpu_result_v2_valid(&transaction->result);
     }
+    if (host_context != 0 && !bx_ntvdm_command_host_context_v1_valid(host_context))
+        return 0;
+    if (host_context != 0 && host_context->selected_drive == drive) {
+        bytes = host_context->directory_bytes;
+        memcpy(payload, host_context->selected_directory, bytes);
+    } else {
+        bytes = 4u;
+        payload[0] = (uint8_t)('A' + drive);
+        payload[1] = ':';
+        payload[2] = '\\';
+        payload[3] = '\0';
+    }
     if (!bx_ntvdm_cmd_current_dir_physical(cpu_before->ds,
-            (uint16_t)cpu_before->esi, &address)) return 0;
-    payload[0] = (uint8_t)('A' + drive);
-    payload[1] = ':';
-    payload[2] = '\\';
-    payload[3] = '\0';
+            (uint16_t)cpu_before->esi, &address, bytes)) return 0;
     if (!bx_ntvdm_multi_write_v1_add(&transaction->writes, address,
-            BX_NTVDM_CMD_CURRENT_DIR_ROOT_BYTES, 0u) ||
+            bytes, 0u) ||
         !bx_ntvdm_cpu_result_v2_resume(&transaction->result,
             event->fault_rip + 4u) ||
         !bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 0)) return 0;
     return bx_ntvdm_multi_write_transaction_v1_preflight(transaction,
-        UINT64_C(0x100000), BX_NTVDM_CMD_CURRENT_DIR_ROOT_BYTES);
+        UINT64_C(0x100000), bytes);
 }

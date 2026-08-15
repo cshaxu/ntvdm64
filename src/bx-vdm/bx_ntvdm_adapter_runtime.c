@@ -751,7 +751,7 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
                 available_mask |= UINT32_C(1) << index;
         }
         if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x04u) &&
-            bx_ntvdm_cmd_current_dir_service_v1_prepare(available_mask, event,
+            bx_ntvdm_cmd_current_dir_service_v1_prepare(available_mask, 0, event,
                 cpu_before, window, &transaction,
                 bx_ntvdm_adapter_runtime.multi_write_payload)) {
             if (transaction.writes.write_count == 0u) {

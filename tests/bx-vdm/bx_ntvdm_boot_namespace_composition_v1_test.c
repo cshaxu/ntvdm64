@@ -327,6 +327,7 @@ int main(void)
     bx_ntvdm_host_drive_snapshot_v1 drives;
     bx_ntvdm_host_namespace_v1 host_namespace;
     bx_ntvdm_mutation_profile_v1 direct_profile;
+    bx_ntvdm_command_host_context_v1 command_context;
     uint8_t drive_types[26] = { 0 };
     byob_launch_plan_v2 launch_plan = { 2u, 1u,
         { 1u, BYOB_LAUNCH_TARGET_KIND_V1_COM, 0u, { 0 } } };
@@ -359,6 +360,10 @@ int main(void)
             &composition, &direct_profile) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
             &composition, &direct_profile) ||
+        !bx_ntvdm_command_host_context_v1_initialize(&command_context, 2u,
+            (const uint8_t *)"C:\\NTDOS64", 10u) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
+            &composition, &command_context) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
             &composition, &host_namespace) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,
@@ -372,6 +377,13 @@ int main(void)
               &composition.command, BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL,
               &policy) || policy != BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST)
           return 248; }
+    event_initialize(&event, 0x54u, 0x04u);
+    event.eax = 2u; event.ds = 0u; event.esi = 0x900u;
+    memset(ram + 0x900u, 0xa5, 16u);
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 241;
+    if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 242;
+    if (outcome.eflags_values != 0u) return 243;
+    if (memcmp(ram + 0x900u, "C:\\NTDOS64", 10u) != 0) return 244;
     /* The COMMAND package, rather than a trace observation, defines every
        callable outcome.  Selected positive services are exercised below;
        this sweep proves the no-op, common unavailable route, and all five
@@ -697,7 +709,7 @@ int main(void)
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x104u || outcome.eflags_write_mask !=
             BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF || outcome.eflags_values != 0u ||
-        memcmp(ram + 0x1070u, "C:\\", 4u) != 0) return 39;
+        memcmp(ram + 0x1070u, "C:\\NTDOS64", 10u) != 0) return 39;
     event.eax = 3u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 40;
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||

@@ -135,6 +135,15 @@
 > regression proves their direct-policy resolution without adding host I/O,
 > handles, pointers or BOP-specific policy. This is capability substrate only.
 
+> **T202 S6 progress:** COMMAND now owns a fixed-width copied current-directory
+> context captured once at CLI composition admission. `54:04` consumes it via
+> the package's checked RAM transaction: the selected host drive receives the
+> copied OEM directory, another admitted drive receives its source-shaped
+> root, and an unadmitted drive retains `AX=0, CF=1`. The MSVC x64 `/MT`
+> bound-package regression passes; this is one context-capability foundation,
+> not complete COMMAND environment/lifecycle closure or a native trace. See
+> the [host-context evidence](etc/research/t202-s6-command-host-context-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

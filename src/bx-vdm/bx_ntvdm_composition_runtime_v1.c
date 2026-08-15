@@ -30,6 +30,7 @@ typedef struct bx_ntvdm_composition_runtime_v1 {
     bx_ntvdm_host_namespace_v1 host_namespace;
     bx_ntvdm_host_volume_snapshot_v1 volumes;
     bx_ntvdm_mutation_profile_v1 mutation_profile;
+    bx_ntvdm_command_host_context_v1 command_host_context;
     bx_ntvdm_boot_namespace_composition_v1 composition;
     bx_ntvdm_native_bop_composition_v1 native_bop;
     bx_ntvdm_initial_state_v1 initial_state;
@@ -37,6 +38,33 @@ typedef struct bx_ntvdm_composition_runtime_v1 {
 } bx_ntvdm_composition_runtime_v1;
 
 static bx_ntvdm_composition_runtime_v1 runtime;
+
+static int capture_command_host_context(
+    bx_ntvdm_command_host_context_v1 *context, uint32_t selected_drive)
+{
+    wchar_t current[MAX_PATH];
+    uint8_t root[4];
+    char oem[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_DIRECTORY_BYTES];
+    DWORD characters;
+    int bytes;
+    if (context == 0 || selected_drive >= 26u) return 0;
+    characters = GetCurrentDirectoryW(MAX_PATH, current);
+    if (characters > 2u && characters < MAX_PATH && current[1] == L':' &&
+        ((current[0] >= L'A' && current[0] <= L'Z' &&
+          (uint32_t)(current[0] - L'A') == selected_drive) ||
+         (current[0] >= L'a' && current[0] <= L'z' &&
+          (uint32_t)(current[0] - L'a') == selected_drive))) {
+        bytes = WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS, current,
+            -1, oem, (int)sizeof(oem), 0, 0);
+        if (bytes >= 4 && bytes <= (int)sizeof(oem))
+            return bx_ntvdm_command_host_context_v1_initialize(context,
+                selected_drive, (const uint8_t *)oem, (uint32_t)bytes - 1u);
+    }
+    root[0] = (uint8_t)('A' + selected_drive);
+    root[1] = ':'; root[2] = '\\'; root[3] = '\0';
+    return bx_ntvdm_command_host_context_v1_initialize(context, selected_drive,
+        root, 3u);
+}
 
 void bx_ntvdm_composition_runtime_v1_reset(void)
 {
@@ -121,6 +149,10 @@ static int install(const wchar_t *profile, const wchar_t *root,
             &runtime.composition, &runtime.mutation_profile) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
             &runtime.composition, &runtime.mutation_profile) ||
+        !capture_command_host_context(&runtime.command_host_context,
+            selection.command_placement.drive_index) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
+            &runtime.composition, &runtime.command_host_context) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
             &runtime.composition, &runtime.host_namespace) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_boot_drive(

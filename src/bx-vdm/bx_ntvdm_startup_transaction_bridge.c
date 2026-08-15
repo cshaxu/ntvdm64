@@ -204,7 +204,7 @@ int bx_ntvdm_startup_transaction_bridge_v1_prepare_multi_write(
             bridge.multi_write_payload);
     }
     if (!prepared) prepared = bx_ntvdm_cmd_current_dir_service_v1_prepare(
-        bridge.namespace_roots.available_mask, event, cpu_before, window,
+        bridge.namespace_roots.available_mask, 0, event, cpu_before, window,
         &bridge.multi_write, bridge.multi_write_payload);
     if (!prepared) return 0;
     bridge.pending_multi_write = 1;
