@@ -164,7 +164,7 @@ a narrow CLI seam or retain the original unavailable/deferred result.
 ## DEM first-pass owner groups (`50:00..48`)
 
 The historical `apfnSVC` array in `demdisp.c` is the authoritative ordering.
-The r7 inventory supplies the individual 73 source rows.  The following
+The r8 inventory supplies the individual 73 source rows.  The following
 partition corrects the earlier coarse ranges: each hex service is in exactly
 one owner row and thereby gives the per-service audit a non-overlapping work
 set.
@@ -311,7 +311,7 @@ profile is admitted.
 
 ### Redirector endpoint partition (`57:00..31`)
 
-`rdrsvc.h` supplies all fifty identity rows in the r7 inventory.  They are a
+`rdrsvc.h` supplies all fifty identity rows in the r8 inventory.  They are a
 single network/IPC composition package, but the following non-overlapping
 partition records their eventual provider and failure work rather than
 allowing local DEM files to accidentally satisfy them.
@@ -357,6 +357,25 @@ with per-service trace fixes.
 | `5F` unimplemented interrupt | historical handoff/module registration paths | explicit unavailable/deferred | do not use it as generic adapter extension point. |
 | `FE` unsimulate | `TerminateVDM` | source-derived engine terminal | retain/migrate only after fixed-width DOS terminal-result transport is designed. |
 | `12`, `15` memory selectors | historical machine/BIOS handlers | bx-core/bx-mantle mechanical owner with typed bx-vdm request | keep selector blind Bochs rule; no OpenNT/BOP terms enter Bochs. |
+
+### Machine/BIOS selector correction (`12`, `15`)
+
+`xbios.h` names these as historical BIOS interrupt handlers (`BIOSINT_MEMORY`
+and `BIOSINT_OSHOOK`), and the SoftPC BIOS initializer owns their mechanics.
+They are not entries in OpenNT's `bop.h` host-service selector namespace.  The
+current `bx_ntvdm_bios_memory_service_v1` is a legacy, adapter-local
+source-derived workaround: it returns the recorded profile values for `12`
+and `15/AH=88`, but its hard-coded values must not become an adapter-owned
+BIOS implementation.
+
+| Selector / path | Current evidence | Required repair disposition |
+| --- | --- | --- |
+| `12` memory-size BOP | current helper returns r20 conventional-memory profile evidence | migrate value ownership to a typed bx-mantle machine-profile/memory response; bx-vdm may only issue/receive a selector-blind fixed-width request. |
+| `15` with `AH=88` | current helper returns r25 extended-memory profile evidence | same bx-mantle migration; future INT15/XMS paths must use one admitted machine memory geometry. |
+| other `15` forms | no current provider | deferred to their native BIOS/PIC/firmware owner; no adapter no-op or fabricated success. |
+
+This is a retain/migrate action for the existing helper, not permission to
+teach bx-core any BOP, OpenNT, DOS or SoftPC selector names.
 
 ### Debugger mode partition (`56`, stack-resident `00..0F`)
 
