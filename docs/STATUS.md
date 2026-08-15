@@ -60,6 +60,13 @@
 > engine/CLI lifecycle and therefore admits no terminal-result ABI. See the
 > [observation record](etc/research/t203-s1-passive-normal-return-observation-001.md).
 
+> **T203 S1 engine admission boundary:** `ORDINARY_GUEST_COMPLETION` has no
+> current engine producer, and `54:0B` records only package-local copied state.
+> The current engine fixture also needs its normal `ntdll` import and an
+> explicitly selected environment within the existing 4023-byte COMMAND ABI;
+> neither fact permits a BOP patch or an ABI fabrication. See the
+> [engine admission boundary](etc/research/t203-s1-engine-terminal-admission-boundary-001.md).
+
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
 
