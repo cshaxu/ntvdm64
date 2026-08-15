@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T213 S2.** Its governing brief is the active
+> **Current effective packet: M0 T213 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T213 S2 -- one-shot host-terminal package design.**
+**Active: M0 T213 S3 -- COMMAND terminal package recovery.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -19,24 +19,25 @@
 > **T scope:** T213 determines whether the selected one-shot profile has a
 > source-proven ordinary terminal model before any interactive-session or
 > normal-result implementation is admitted. S1 concluded that the current
-> `50:3D` is controlled historical teardown. S2 maps the whole host-terminal
-> package before any endpoint implementation.
+> `50:3D` is controlled historical teardown. S2 rejected selector-only DEM
+> normalization; S3 recovers the distinct COMMAND `54:00/03/0B` lifecycle
+> package and its opaque terminal handoff.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T213 S2, Ordinary Mode. |
-| Admission And Approval | T213 S1 established that `50:3D` is the reached historical teardown path, while `54:0B` is only a COMMAND-local fact. It admits a complete state/record design, not a provider implementation. |
-| Objective | Map the terminal state owned by COMMAND and DEM and define whether one copied host-terminal record can preserve their ordering and failure semantics for a later engine boundary. |
-| Non-goals | No BOP implementation, no trace-driven endpoint patch, no engine/mantle/Bochs/CLI behavior change, no interactive session, and no normal-completion claim. |
-| Reference Baseline | T213 S1 map, T206 COMMAND handoff, T207 sequence evidence, T208 DEM termination audit, and T212 lifecycle ledger. |
-| Files And ABI Surface | COMMAND/DEM provider and original source records plus evidence documentation only; no public ABI implementation. |
+| Identifier Mode | M0 T213 S3, Ordinary Mode. |
+| Admission And Approval | T213 S2 rejected ambiguous DEM `50:3D` normalization. The original top-level COMMAND branch independently reaches `54:00 CMDEXITVDM`, so the existing whole COMMAND lifecycle provider admits one complete `00/03/0B` package recovery. |
+| Objective | Produce a copied COMMAND terminal record for exact `54:00`, carry it through opaque composition state, and publish ordinary engine completion only after existing cleanup. |
+| Non-goals | No DEM `50:3D` reclassification, no trace-selected implementation, no Bochs/mantle selector semantics, no historical broker/ExitProcess, no interactive session, and no DOS exit-code fabrication. |
+| Reference Baseline | T213 S1/S2 records; original `tcmd2b.asm`; existing COMMAND lifecycle provider, engine cleanup and CLI lifecycle classifier. |
+| Files And ABI Surface | COMMAND lifecycle provider/session/composition runtime, engine contract/run, existing CLI classifier, source-built focused fixtures and evidence. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Read original/current source and prior evidence; run documentation governance and diff checks. No build or trace is expected. |
-| Expected Markers | A complete state/precedence/failure ledger covers both COMMAND `54:0B` and DEM `50:3D`, including the unavailable historical broker and a no-fabrication disposition. |
-| Asset Needs | Existing source/evidence only; no firmware/media/device import or runtime trace. |
-| Reporting Requirements | Record state owner, ordering, result precedence, reset/cleanup owner, host API disposition, and implementation admission decision. |
-| Stop Conditions | Any conclusion requiring a new guest/machine semantic, a trace-selected leaf patch, or a host API not available to normal user mode pauses S2 for a separately admitted package. |
-| Exit Criteria | One design ledger identifies a complete, source-derived host-terminal package or proves that the current profile must retain controlled termination. |
+| Verification | Fresh MSVC x64 `/MT` package and engine fixtures cover all three COMMAND lifecycle services, ordinary/controlled terminal distinction, cleanup ordering, malformed/unrelated routes, and governance/diff checks. |
+| Expected Markers | Exact `54:00` is the only ordinary producer; `54:03/0B` retain their contracts; `50:3D` and generic stops remain controlled; engine cleanup occurs before copied ordinary result. |
+| Asset Needs | Existing source/evidence and normal MSVC x64 fixture facilities; no firmware/media/device import or native trace. |
+| Reporting Requirements | Record provider/record ABI, source ownership, reset order, all negative cases, and the still-unreached current boot profile. |
+| Stop Conditions | Any need to add BOP knowledge to Bochs/mantle, classify DEM by heuristic, pass host resources into engine, or change guest control flow pauses S3 for re-admission. |
+| Exit Criteria | A source-built whole-package and engine fixture prove the opaque terminal handoff and exact terminal distinction without a guest-run or interactive claim. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | DEM `50:38..3D`, COMMAND `54:01/0B`, existing normal/terminal observers, engine contract/run/machine stage, CLI lifecycle classifier, and T206--T212 evidence. |
 
