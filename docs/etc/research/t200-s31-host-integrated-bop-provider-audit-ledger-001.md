@@ -268,6 +268,25 @@ that the whole COMMAND BOP is implemented or admitted.
 | `54:0F` | `cmdGetInitEnvironment`, `cmdenv.c` | environment merge and `TerminateVDM` on failure | source-derived declared environment projection; private terminal behavior cannot be linked directly. |
 | `54:10` | `cmdGetStartInfo`, `cmdmisc.c` | `VDMINFO` start fields | source-derived session bootstrap; depends on the same unavailable broker as `54:01`. |
 
+### Current COMMAND workaround reconciliation
+
+`command_package_facade_v1` labels thirteen services as "existing provider",
+but that is a routing category rather than a package-completion claim. The
+bound session currently has distinct source-derived helpers for `54:01`, `02`,
+`04`, `05`, `0B`, `0C`, `0D`, `0E`, and `0F`; the remaining classified values
+either use a bounded CLI-profile response or continue to deferred handling.
+All gather/write operations use fixed-width mantle mechanical actions, which
+is the right boundary, but several answers still come from the readonly boot
+namespace or declared launch plan rather than the required direct-host
+provider.
+
+Thus the workaround action for every COMMAND leaf is **migrate into the one
+COMMAND bootstrap/launch/console/environment/lifecycle package**, replacing
+the endpoint-local forms only when the package has a source/ABI/failure map
+and an admitted common mutation profile. In particular, `54:04` and `54:0E`
+remain evidence about their individual responses, not claims that their CWD
+or keyboard/console components are complete.
+
 ## XMS first-pass owner groups (`52:00..0B`)
 
 | Services | Original owners | Historical dependency | Target disposition | Availability/action |
@@ -298,6 +317,28 @@ XMS allocator or INT15 contract is already closed.
 | `52:09` | `xmsNotifyHookI15` | real-mode INT15/PIC/firmware delivery | deferred machine prerequisite; not an adapter interrupt implementation. |
 | `52:0A` | `xmsQueryFreeExtMem` | XMS allocator capacity/failure semantics | deferred pending complete allocator audit. |
 | `52:0B` | `xmsReallocBlock` | allocation identity, move/resize semantics | partial mantle-backed candidate; must preserve original failure and address rules. |
+
+### Current XMS/DPMI workaround reconciliation
+
+`xms_package_session_v1` is an adapter-side experiment over mantle A20 and
+extended-memory requests, not a substituted XMS implementation. It handles
+only `52:00`, `02`, `03`, `05`, and `0B`; `01`, `04`, `06..0A` stop. The
+experiment deliberately uses a copied session allocation table and returns
+the historical source's KiB-base/zero style results, but it has not yet
+proved the complete allocator geometry, move descriptor ABI, UMB layout,
+INT15 hook or all error registers. Its disposition is therefore **retain as
+non-success evidence, then migrate or replace only in the complete XMS
+package**. There is no missing ordinary Win32 API behind this boundary: the
+missing pieces are admitted machine geometry and historical SAS/SoftPC
+ownership, which must be satisfied by bx-core/bx-mantle mechanical contracts.
+
+`dpmi_package_session_v1` recognizes the whole `53:00..18` family and returns
+a typed stop. This is the correct default-unavailable profile fence, not a
+DPMI provider. Its action is to retain the fence until a full protected-mode
+package supplies selector/LDT, exception/mode-switch, interrupt and memory
+contracts. In particular, unavailable x64 LDT process mechanisms are
+recorded above; they do not authorize a new adapter-side LDT implementation
+and do not stop direct DOS/DEM work.
 
 ## DPMI first-pass owner groups (`53:00..18`)
 
