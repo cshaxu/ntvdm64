@@ -15,6 +15,30 @@ NTSYSAPI NTSTATUS NTAPI NtQueryDirectoryFile(HANDLE file, HANDLE event,
     FILE_INFORMATION_CLASS information_class, BOOLEAN return_single_entry,
     PUNICODE_STRING file_name, BOOLEAN restart_scan);
 
+/* FileIdBothDirectoryInformation (37) is a documented NT directory-query
+ * information class, but its record is not declared by the user-mode SDK.
+ * Keep the exact read-only wire layout local to the adapter: it is consumed
+ * immediately and no native record, path, or handle crosses this module. */
+#define BX_NTVDM_FILE_ID_BOTH_DIRECTORY_INFORMATION_CLASS \
+    ((FILE_INFORMATION_CLASS)37)
+typedef struct bx_ntvdm_file_id_both_dir_information_v1 {
+    ULONG NextEntryOffset;
+    ULONG FileIndex;
+    LARGE_INTEGER CreationTime;
+    LARGE_INTEGER LastAccessTime;
+    LARGE_INTEGER LastWriteTime;
+    LARGE_INTEGER ChangeTime;
+    LARGE_INTEGER EndOfFile;
+    LARGE_INTEGER AllocationSize;
+    ULONG FileAttributes;
+    ULONG FileNameLength;
+    ULONG EaSize;
+    CCHAR ShortNameLength;
+    WCHAR ShortName[12];
+    LARGE_INTEGER FileId;
+    WCHAR FileName[1];
+} bx_ntvdm_file_id_both_dir_information_v1;
+
 static uint32_t bx_ntvdm_host_namespace_bit(uint8_t index)
 {
     return UINT32_C(1) << index;
@@ -59,7 +83,7 @@ static int bx_ntvdm_host_namespace_ascii_83(const wchar_t *source,
 }
 
 static int bx_ntvdm_host_namespace_project_name(
-    const FILE_ID_BOTH_DIR_INFORMATION *info, wchar_t output[13])
+    const bx_ntvdm_file_id_both_dir_information_v1 *info, wchar_t output[13])
 {
     wchar_t source[MAX_PATH];
     size_t length;
@@ -106,10 +130,11 @@ static int bx_ntvdm_host_namespace_collect(HANDLE directory,
     buffer = (uint8_t *)HeapAlloc(GetProcessHeap(), 0u, 65536u);
     if (buffer == 0) return BX_NTVDM_HOST_NAMESPACE_V1_REJECTED;
     for (;;) {
-        FILE_ID_BOTH_DIR_INFORMATION *info;
+        bx_ntvdm_file_id_both_dir_information_v1 *info;
         IO_STATUS_BLOCK status_block;
         NTSTATUS status = NtQueryDirectoryFile(directory, 0, 0, 0,
-            &status_block, buffer, 65536u, FileIdBothDirectoryInformation,
+            &status_block, buffer, 65536u,
+            BX_NTVDM_FILE_ID_BOTH_DIRECTORY_INFORMATION_CLASS,
             FALSE, 0, restart_scan);
         restart_scan = FALSE;
         if (status < 0) {
@@ -117,7 +142,7 @@ static int bx_ntvdm_host_namespace_collect(HANDLE directory,
             result = BX_NTVDM_HOST_NAMESPACE_V1_REJECTED;
             break;
         }
-        for (info = (FILE_ID_BOTH_DIR_INFORMATION *)buffer;;) {
+        for (info = (bx_ntvdm_file_id_both_dir_information_v1 *)buffer;;) {
             size_t name_length = info->FileNameLength / sizeof(wchar_t);
             uint32_t index;
             if (name_length == 1u && info->FileName[0] == L'.') goto next;
@@ -144,7 +169,8 @@ static int bx_ntvdm_host_namespace_collect(HANDLE directory,
             ++count;
 next:
             if (info->NextEntryOffset == 0u) break;
-            info = (FILE_ID_BOTH_DIR_INFORMATION *)((uint8_t *)info + info->NextEntryOffset);
+            info = (bx_ntvdm_file_id_both_dir_information_v1 *)
+                ((uint8_t *)info + info->NextEntryOffset);
         }
     }
 done:

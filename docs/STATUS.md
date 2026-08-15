@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T200 S30.** Its governing brief is the active
+> **Current effective packet: M0 T200 S31.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T200 S30 -- guest boot-volume / host-drive projection separation.**
+**Active: M0 T200 S31 -- host-integrated BOP/provider/workaround admission audit.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,27 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T200 S30, Ordinary Mode. |
-| Admission And Approval | S29 proves that profile-owned guest C: and the filtered host-drive snapshot have distinct owners but are presently coupled in COMMAND/DEM composition. |
-| Objective | Repair the adapter composition so a fixed-width profile-owned guest boot-volume/session record is distinct from the optional host-drive projection; update COMMAND and DEM consumers according to source/ABI evidence and prove the separated cases by package fixtures. |
-| Non-goals | No BOP endpoint patch, CLI exclusion workaround, device enablement, Bochs semantic change, unbounded guest rerun, or host-drive exposure. |
-| Reference Baseline | S29 owner map, T199 S37 GSET evidence, HOST-NAMESPACE-CAPABILITY design, current boot namespace composition, and S26/S27 direct engine path. |
-| Files And ABI Surface | bx-vdm composition/COMMAND/DEM fixed-width records and bounded package fixtures; no raw Bochs type or host handle crosses the boundary. |
+| Identifier Mode | M0 T200 S31, Ordinary Mode. |
+| Admission And Approval | S30 established real-host policy/admission and capability lifetime. S31 is the queue-head recovery proposal's required provider/workaround audit: direct host integration is the target default; readonly, volatile-overlay and virtual boot-volume are distinct explicit profiles. No trace-selected endpoint becomes an implementation task. |
+| Objective | Produce one complete source/ABI/failure/disposition and retain/migrate/replace/delete ledger for every mapped BOP selector/service and owner package: DEM, COMMAND, XMS, DPMI, Redirector, Debugger, top-level and machine/BIOS. For every host-facing path, classify direct original OpenNT composition, original-plus-CLI platform seam, source-derived rehost, readonly/overlay/virtual-profile backend, deferred/unavailable, or an erroneous over-isolated workaround. |
+| Non-goals | No endpoint implementation, trace-led patch, implicit synthetic drive, Bochs semantic change, host installation/rebuild, or unbounded guest rerun. |
+| Reference Baseline | [Host-integrated recovery proposal](etc/research/proposal-host-integrated-bop-capability-recovery-001.md), OpenNT dispatcher/source families, T199 package map, S30 real-host capability map, current bx-vdm provider registry, and direct engine composition. |
+| Files And ABI Surface | Evidence/ledger and, only if necessary to correct a classification, typed bx-vdm routing records; no raw Bochs type or host handle crosses the boundary. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Build affected MSVC x64 `/MT` adapter fixtures for independent guest-volume and host-projection cases; preserve CLI include/exclude precedence; run governance and diff checks, then commit and push. |
-| Expected Markers | Guest boot C: stays profile-owned; empty host projection remains representable; host-only providers do not gain a synthetic admitted host C:. |
+| Verification | Reconcile the ledger mechanically with OpenNT dispatch tables and bx-vdm ingress/provider registry; reject duplicate ownership, silent success, trace-only task generation and an incorrect "non-invasive means no host API" classification; run governance and diff checks. |
+| Expected Markers | Every endpoint has one owner/package, implementation disposition and profile relation; every current workaround is retained/migrated/replaced/deleted; implementation candidates are grouped by package rather than BOP hit. |
 | Asset Needs | Existing repository and pinned adopted source only; no network/import action. |
-| Reporting Requirements | Record the source/ABI ownership map and all separated fixture outcomes; do not claim general CLI/DOS compatibility or timeout causality. |
-| Stop Conditions | Any synthetic host-drive re-admission, child product shell, environment-variable handoff, new Bochs semantic intrusion, raw Bochs type crossing a C boundary, or unbounded run pauses this S for re-admission. |
-| Exit Criteria | The profile boot-volume and host projection have separate documented adapter records and source-built package evidence; consumers no longer conflate their ownership. |
+| Reporting Requirements | Keep uncertainty and unlinked original providers explicit; distinguish permitted direct host integration from prohibited host installation/reconstruction; do not claim general CLI/DOS compatibility or endpoint closure. |
+| Stop Conditions | Any attempt to fill an endpoint before package mapping, implicit synthetic host-drive, host system-file modification, installation requirement, Bochs semantic intrusion, raw Bochs type crossing a C boundary, or unbounded run pauses this S for re-admission. |
+| Exit Criteria | A complete, reviewable package ledger and dependency order exist for all BOP families, with explicit evidence references, profile dispositions and workaround actions; it is sufficient to admit queue-head Host-integrated OpenNT BOP capability recovery without a trace-derived microtask backlog. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Inspect native CLI option parser, profile/target admission, launch-plan encoding, drive parser, engine request validation, terminal mapping, and retained runner policy tests. |
+
+> **T200 S30 closure:** corrected real-host capability policy and startup-drive
+> admission, bound the adapter-private real-root namespace to composition
+> lifecycle, repaired its strict C11 source closure, and recorded the separate
+> virtual boot-volume contract. The host-root fixture passed under MSVC x64
+> `/MT`; see the [source/ABI map](etc/research/t200-s30-real-host-capability-source-abi-map-001.md).
 
 > **T200 S9 closure:** exhausted `54:01` is accepted as typed stop in a native
 > run with no raw #UD; see the [terminal observation](etc/research/t200-s9-command-terminal-native-observation-001.md).

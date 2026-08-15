@@ -15,7 +15,7 @@ another.
 | VDM adapter (`src/bx-vdm`) | Typed bx↔VDM contracts, BOP ingress/egress, compatibility adaptation, and explicit composition of OpenNT host/guest contracts | CPU execution, firmware, PIC, memory model, device model, DOS/WOW kernel algorithms, or ambient-host policy |
 | Bochs mantle (`src/bx-mantle`) | Minimal native Bochs lifecycle composition: SIM/logging/no-device time state and assembly of admitted core mechanics | VDM, BOP, OpenNT, DOS, host policy, GUI, plugins, or unadmitted PC devices |
 | Bochs core (`src/bx-core`) | Adopted Bochs CPU/decode, memory, exceptions, and admitted no-device mechanics | VDM/guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
-| Contained host-capability seam | Modern host facilities selected by the VDM adapter | Guest protocol meaning, CPU/device behavior, or Bochs internals |
+| Host-capability seam | Modern user-mode Win32, device, path, disk, port and registry facilities selected by CLI policy and invoked by the VDM adapter | Guest protocol meaning, CPU/device behavior, Bochs internals, host installation, or host system-file modification |
 | Historical machine-handler islands | Individually admitted original machine-facing behavior under adapter selection | A replacement SoftPC/CCPU backend or general host-service plane |
 | Research fixtures | Reproducible evidence for a bounded question | Product behavior or implicit runtime dependencies |
 
@@ -55,8 +55,23 @@ CRT may enter this in-process composition.
   interpretation and routing needed to compose OpenNT-derived host behavior.
 - The guest owns DOS and WOW behavior. Neither the invocation shell nor the
   adapter becomes a replacement DOS kernel or filesystem implementation.
-- Modern host capability is explicit and contained. It is introduced through
-  the host capability seam, never by exposing ambient host state to the guest.
+- Modern host capability is explicit and policy-governed. It may deeply
+  integrate with the actual host through existing user-mode Win32 APIs,
+  including filesystems, devices, paths, disks, ports and registry state when
+  the caller's permissions and selected profile allow it. It never requires
+  rebuilding, replacing or modifying Windows system files, installing kernel
+  components, or making installation-style registry changes in order to
+  install, start, or sustain NTVDM itself. When a guest DOS workload explicitly
+  requests such a host operation, the selected capability may faithfully
+  forward it only under the normal host permission boundary and an explicit
+  CLI policy grant. That workload side effect is never an implicit NTVDM
+  startup prerequisite. The CLI remains unpack-and-run: all state change is
+  an ordinary, auditable process/API operation with the normal OS permission
+  boundary.
+- A virtual boot volume, if a CLI profile explicitly requests one because it
+  excludes real C:, is a separate adapter capability rather than an implicit
+  substitute for the host projection. It remains default-off and cannot
+  change the semantics of an admitted real host drive.
 - Historical code is normative source and ownership evidence. It is reused
   only through a bounded, independently auditable composition boundary; it is
   not a dependency on the unavailable historical product shell.

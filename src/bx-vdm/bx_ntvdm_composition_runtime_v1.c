@@ -3,6 +3,7 @@
 #include "bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx_ntvdm_native_bop_composition_v1.h"
 #include "bx_ntvdm_host_drive_policy.h"
+#include "bx_ntvdm_host_namespace.h"
 #include "bx_ntvdm_host_volume_snapshot_v1.h"
 #include "byob_image.h"
 #include "byob_launch_plan_v2.h"
@@ -21,6 +22,10 @@
 typedef struct bx_ntvdm_composition_runtime_v1 {
     byob_image ntio, ntdos, command, target, terminal_quit;
     bx_ntvdm_host_drive_snapshot_v1 drives;
+    /* This is the capability-owning real-host namespace.  Its retained
+     * handles remain private to bx-vdm and are released before any image or
+     * provider lifetime is reset. */
+    bx_ntvdm_host_namespace_v1 host_namespace;
     bx_ntvdm_host_volume_snapshot_v1 volumes;
     bx_ntvdm_boot_namespace_composition_v1 composition;
     bx_ntvdm_native_bop_composition_v1 native_bop;
@@ -41,6 +46,7 @@ void bx_ntvdm_composition_runtime_v1_reset(void)
         bx_ntvdm_search_transaction_v1_release(
             &runtime.composition.plane.provider.search_transaction);
     }
+    bx_ntvdm_host_namespace_v1_release(&runtime.host_namespace);
     byob_image_release(&runtime.ntio);
     byob_image_release(&runtime.ntdos);
     byob_image_release(&runtime.command);
@@ -80,6 +86,11 @@ static int install(const wchar_t *profile, const wchar_t *root,
          byob_image_load_exact(root, &selection.terminal_quit,
              &runtime.terminal_quit) != BYOB_IMAGE_OK) ||
         !bx_ntvdm_host_drive_snapshot_v1_capture(include_mask, exclude_mask,
+            &runtime.drives) ||
+        selection.command_placement.drive_index >= 26u ||
+        (runtime.drives.admitted_mask &
+            (UINT32_C(1) << selection.command_placement.drive_index)) == 0u ||
+        !bx_ntvdm_host_namespace_v1_initialize(&runtime.host_namespace,
             &runtime.drives) ||
         !bx_ntvdm_host_volume_snapshot_v1_capture(&runtime.drives,
             &runtime.volumes) ||

@@ -17,7 +17,9 @@ if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build
 foreach ($path in @($vsDevCmd, $manifestPath, (Join-Path $baseline 'link.rsp'),
     (Join-Path $baseline 'native-core\config.h'),
     (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_fixture.cc'),
-    (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_bridge.c'))) {
+    (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_bridge.c'),
+    (Join-Path $repository 'tests\bx-vdm\t198_s23_fastread_attempt_ledger.c'),
+    (Join-Path $repository 'tests\bx-vdm\t198_s121_dem_lifecycle_ledger.c'))) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Required S89 input missing: $path" }
 }
 
@@ -58,13 +60,18 @@ foreach ($relative in $sourceRelatives) {
     $base = [IO.Path]::GetFileNameWithoutExtension($relative)
     if ($current.ContainsKey($base)) { throw "Duplicate current object base name: $base" }
     $object = Join-Path $objects ($base + '.obj')
-    Invoke-Compile 'C' (Join-Path $repository $relative) $object ''
+    $language = if ([IO.Path]::GetExtension($relative).ToLowerInvariant() -eq '.cc') { 'C++' } else { 'C' }
+    Invoke-Compile $language (Join-Path $repository $relative) $object ''
     $current[$base] = $object
 }
 $fixture = Join-Path $build 'fixture.obj'
 $bridge = Join-Path $build 'bridge.obj'
+$fastReadLedger = Join-Path $build 'fastread-ledger.obj'
+$demLifecycleLedger = Join-Path $build 'dem-lifecycle-ledger.obj'
 Invoke-Compile 'C++' (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_fixture.cc') $fixture '/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1'
 Invoke-Compile 'C' (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_bridge.c') $bridge ''
+Invoke-Compile 'C' (Join-Path $repository 'tests\bx-vdm\t198_s23_fastread_attempt_ledger.c') $fastReadLedger ''
+Invoke-Compile 'C' (Join-Path $repository 'tests\bx-vdm\t198_s121_dem_lifecycle_ledger.c') $demLifecycleLedger ''
 
 $response = Join-Path $build 'link.rsp'
 $exe = Join-Path $build 'command-r1.exe'
@@ -82,6 +89,11 @@ $responseLines = foreach ($line in Get-Content -LiteralPath (Join-Path $baseline
 foreach ($base in ($current.Keys | Sort-Object)) {
     if (-not $emitted.ContainsKey($base)) { $responseLines += '"' + $current[$base] + '"' }
 }
+$responseLines += '"' + $fastReadLedger + '"'
+$responseLines += '"' + $demLifecycleLedger + '"'
+# bx_ntvdm_host_namespace uses the retained, adapter-private NT directory
+# query ABI. Keep its import library explicit in the source-built closure.
+$responseLines += 'ntdll.lib'
 $responseLines | Set-Content -LiteralPath $response -Encoding ascii
 
 & cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture +
