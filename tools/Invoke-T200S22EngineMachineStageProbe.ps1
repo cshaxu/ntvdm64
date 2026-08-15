@@ -25,6 +25,7 @@ foreach ($input in @($baseline, $manifestPath, $objects, $profile, $byobRoot, $v
     (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c'),
     (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_run_v1.c'),
     (Join-Path $root 'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_normal_terminal_sequence_observation_v1.c'),
     (Join-Path $root 'tests\bx-mantle\bx_ntvdm_engine_direct_composition_v1_test.c'))) {
     if (-not (Test-Path -LiteralPath $input)) { throw "Required S22 input missing: $input" }
 }
@@ -49,6 +50,7 @@ $sources = @(
     @{ Object = 'engine-run.obj'; Source = 'src\bx-mantle\bx_ntvdm_engine_run_v1.c' },
     @{ Object = 'generic-ud-bridge.obj'; Source = 'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c' },
     @{ Object = 'terminal-observation.obj'; Source = 'src\bx-vdm\bx_ntvdm_terminal_observation_v1.c' },
+    @{ Object = 'normal-terminal-sequence-observation.obj'; Source = 'src\bx-vdm\bx_ntvdm_normal_terminal_sequence_observation_v1.c' },
     @{ Object = 'fixture.obj'; Source = 'tests\bx-mantle\bx_ntvdm_engine_direct_composition_v1_test.c' }
 )
 $batch = Join-Path $build 'compile.cmd'
@@ -67,6 +69,7 @@ $commands | Set-Content -LiteralPath $batch -Encoding ascii
     Tee-Object -FilePath (Join-Path $build 'compile.log')
 if ($LASTEXITCODE -ne 0) { throw "S22 engine fixture compile failed: $LASTEXITCODE" }
 $current['bx_ntvdm_terminal_observation_v1'] = Join-Path $build 'terminal-observation.obj'
+$current['bx_ntvdm_normal_terminal_sequence_observation_v1'] = Join-Path $build 'normal-terminal-sequence-observation.obj'
 
 $exe = Join-Path $build 't200-s22-engine-machine-stage.exe'
 $response = Join-Path $build 'link.rsp'
@@ -84,7 +87,7 @@ $link = foreach ($line in Get-Content -LiteralPath (Join-Path $baseline 'link.rs
 foreach ($base in ($current.Keys | Sort-Object)) {
     if (-not $emitted.ContainsKey($base)) { $link += '"' + $current[$base] + '"' }
 }
-foreach ($source in $sources | Where-Object { $_.Object -notin @('fixture.obj', 'generic-ud-bridge.obj', 'terminal-observation.obj') }) {
+foreach ($source in $sources | Where-Object { $_.Object -notin @('fixture.obj', 'generic-ud-bridge.obj', 'terminal-observation.obj', 'normal-terminal-sequence-observation.obj') }) {
     $link += '"' + (Join-Path $build $source.Object) + '"'
 }
 # The current direct-host namespace uses normal user-mode ntdll imports.  The

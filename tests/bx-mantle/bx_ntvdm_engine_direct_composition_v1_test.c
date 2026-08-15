@@ -1,6 +1,7 @@
 #include "bx_ntvdm_engine_contract_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_terminal_observation_v1.h"
+#include "bx_ntvdm_normal_terminal_sequence_observation_v1.h"
 
 #include <stdio.h>
 #include <windows.h>
@@ -52,8 +53,10 @@ int wmain(int argc, wchar_t **argv)
     struct bx_ntvdm_engine_request_v1 request;
     struct bx_ntvdm_engine_result_v1 result;
     struct bx_ntvdm_terminal_observation_v1 observation;
+    struct bx_ntvdm_normal_terminal_sequence_observation_v1 sequence;
     if (argc != 3 || !request_set(&request, argv[1], argv[2])) return 1;
     bx_ntvdm_terminal_observation_v1_enable(1u);
+    bx_ntvdm_normal_terminal_sequence_observation_v1_enable(1u);
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         !bx_ntvdm_engine_result_v1_valid(&result) ||
         !terminal_valid(&result))
@@ -72,7 +75,14 @@ int wmain(int argc, wchar_t **argv)
         observation.event.window_bytes, observation.event.window[0],
         observation.event.window[1], observation.event.window[2],
         observation.event.window[3]);
+    if (!bx_ntvdm_normal_terminal_sequence_observation_v1_copy(&sequence) ||
+        sequence.normal_return_seen != 0u || sequence.stop_before_normal_seen != 1u ||
+        sequence.stop_after_normal_seen != 0u) return 6;
+    printf("t207-s3 sequence normal=%u stop-before=%u stop-after=%u\n",
+        sequence.normal_return_seen, sequence.stop_before_normal_seen,
+        sequence.stop_after_normal_seen);
     bx_ntvdm_terminal_observation_v1_enable(0u);
+    bx_ntvdm_normal_terminal_sequence_observation_v1_enable(0u);
     /* A second direct installation is the release witness: the first call's
      * unconditional reset must leave no active process-local composition. */
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||

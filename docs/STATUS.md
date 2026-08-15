@@ -2,39 +2,40 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T207 S1.** Its governing brief is the active
+> **Current effective packet: M0 T208 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T207 S1 -- passive normal-terminal sequence map.**
+**Active: M0 T208 S1 -- DEM lifecycle/termination owner-package map.**
 
-> **T206 closed:** its COMMAND terminal handoff boundary is recorded in
+> **T207 closed:** its passive normal-terminal sequence is recorded in
+> [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
 > [history](history/m0-t206-closure-20260815.md). **T205 closed:** its current-profile XMS boundary is recorded in
 > [history](history/m0-t205-closure-20260815.md). The table below is the sole
 > active packet.
 
 ## Active Packet
 
-> **T scope:** T207 proves or disproves the complete post-`54:0B` normal
-> terminal sequence under the existing integrated composition. S1 maps the
-> passive observation points and admissible fixture contract before any run.
+> **T scope:** T208 recovers the complete DEM lifecycle/termination component
+> map before any implementation decision. S1 maps `50:38..3D` and every
+> related owner/ABI/failure/profile disposition as one package.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T207 S1, Ordinary Mode. |
-| Admission And Approval | T206 closure: final `54:0B` record exists, but engine/CLI publication has no source-proven terminal boundary. |
-| Objective | Map a default-off, passive integrated observation that can distinguish final `54:0B`, subsequent declared-plan STOP, `50:3D`, budget and unrelated stop without changing any control flow or BOP provider. |
-| Non-goals | No provider/engine/CLI implementation, controlled-stop reinterpretation, host broker, host-child queue, interactive console, Bochs feature/device work or host mutation. |
-| Reference Baseline | T206 S1-S3, generic bridge, command package session, machine-stage execution and existing finite/native fixtures. |
-| Files And ABI Surface | Read-only source/fixture map only. No production ABI, bridge, observer or trace configuration change in S1. |
+| Identifier Mode | M0 T208 S1, Ordinary Mode. |
+| Admission And Approval | T207 engine lifecycle evidence: `50:3D` occurs before any final `54:0B`; no trace endpoint implementation is authorized. |
+| Objective | Create one source/ABI/failure/profile/workaround map for the DEM process and VDM lifecycle/termination component, including `50:38..3D`, process/PDB state, child/return paths and fatal exit semantics. |
+| Non-goals | No individual trace-led BOP implementation, engine/CLI terminal change, host broker, Bochs feature/device work or host mutation. |
+| Reference Baseline | T200 global BOP ledger, T202 DEM package evidence, T207 result, original DEM dispatch/lifecycle sources. |
+| Files And ABI Surface | Read-only original/current source map and whole-package regression/admission design. No ABI change in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source map identifies an existing or newly-admitted default-off passive fixture seam, expected copied fields and all negative outcomes; governance and diff checks. |
-| Expected Markers | Observation can classify order and terminal reason without selecting a BOP implementation or changing CPU state. |
+| Verification | Complete identity table with original source owner, current route/workaround, mutation class/profile disposition, source/ABI/failure evidence and package-level next-step recommendation; governance and diff checks. |
+| Expected Markers | Every lifecycle identity has one owner and disposition; no endpoint is selected merely because it appeared in a trace. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record source paths/hashes, candidate observer placement, copied-data contract, expected order matrix and follow-on admission decision. |
-| Stop Conditions | Any need to decode BOP in mantle, change CPU state, make `54:0B` stop, interpret an unrelated stop as success, or use trace to select a provider pauses S1 for re-admission. |
-| Exit Criteria | Reviewable passive-observation admission/rejection decision; no normal-completion or CLI claim. |
+| Reporting Requirements | Record sources/hashes, full owner table, capability/failure dispositions, current workaround action and package-level S2 proposal. |
+| Stop Conditions | Any attempt to implement one observed endpoint before the full family map, turn a stop into success, or move DEM semantics into mantle pauses S1 for re-admission. |
+| Exit Criteria | Reviewable complete component map and one package-level implementation/defer decision. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect existing generic observers, terminal snapshots, `54:0B` record lifetime, `54:01` exhaustion stop, DEM exit, watchdog and every native fixture continuation. |
+| Similar-Issue Sweep | DEM dispatch table, PDB terminate, DEM exit, process launch/return, fatal/error exit, shutdown/reset and every related current facade/provider route. |
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
