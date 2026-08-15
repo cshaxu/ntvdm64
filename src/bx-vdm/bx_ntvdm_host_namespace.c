@@ -210,6 +210,38 @@ static HANDLE bx_ntvdm_host_namespace_open_child(HANDLE parent,
     return child;
 }
 
+static int bx_ntvdm_host_namespace_file_relative(const wchar_t *relative)
+{
+    const wchar_t *component;
+    if (relative == 0 || relative[0] == L'\0' || wcslen(relative) >= MAX_PATH)
+        return 0;
+    component = relative;
+    for (;;) {
+        const wchar_t *end = wcschr(component, L'\\');
+        wchar_t canonical[13];
+        size_t length = end == 0 ? wcslen(component) : (size_t)(end - component);
+        if (length == 0u || length >= 13u) return 0;
+        memcpy(canonical, component, length * sizeof(wchar_t));
+        canonical[length] = L'\0';
+        if (!bx_ntvdm_host_namespace_ascii_83(canonical, canonical)) return 0;
+        if (end == 0) return 1;
+        component = end + 1u;
+        if (*component == L'\0') return 0;
+    }
+}
+
+static ULONG bx_ntvdm_host_namespace_disposition(DWORD value)
+{
+    switch (value) {
+    case CREATE_NEW: return FILE_CREATE;
+    case CREATE_ALWAYS: return FILE_OVERWRITE_IF;
+    case OPEN_EXISTING: return FILE_OPEN;
+    case OPEN_ALWAYS: return FILE_OPEN_IF;
+    case TRUNCATE_EXISTING: return FILE_OVERWRITE;
+    default: return 0u;
+    }
+}
+
 void bx_ntvdm_host_namespace_v1_release(bx_ntvdm_host_namespace_v1 *space)
 {
     uint32_t index;
@@ -250,7 +282,7 @@ int bx_ntvdm_host_namespace_v1_initialize(bx_ntvdm_host_namespace_v1 *space,
             FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, 0);
         if (!bx_ntvdm_host_namespace_file_info(handle, &info) ||
             (info.dwFileAttributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) !=
-                FILE_ATTRIBUTE_DIRECTORY) {
+            FILE_ATTRIBUTE_DIRECTORY) {
             if (handle != INVALID_HANDLE_VALUE) CloseHandle(handle);
             continue;
         }
@@ -382,4 +414,44 @@ int bx_ntvdm_host_namespace_v1_directory_exists(
 rejected:
     if (current != space->roots[drive_index]) CloseHandle(current);
     return 0;
+}
+
+int bx_ntvdm_host_namespace_v1_open_file(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, ACCESS_MASK desired_access,
+    ULONG share_access, DWORD creation_disposition, HANDLE *handle_out)
+{
+    UNICODE_STRING object_name;
+    OBJECT_ATTRIBUTES attributes;
+    IO_STATUS_BLOCK status_block;
+    BY_HANDLE_FILE_INFORMATION info;
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    ULONG disposition;
+    NTSTATUS status;
+    size_t length;
+    if (handle_out != 0) *handle_out = INVALID_HANDLE_VALUE;
+    if (!bx_ntvdm_host_namespace_v1_valid(space) || handle_out == 0 ||
+        drive_index >= 26u ||
+        (space->available_mask & bx_ntvdm_host_namespace_bit(drive_index)) == 0u ||
+        !bx_ntvdm_host_namespace_file_relative(relative_path) ||
+        (disposition = bx_ntvdm_host_namespace_disposition(creation_disposition)) == 0u ||
+        (length = wcslen(relative_path)) > UINT16_MAX / sizeof(wchar_t)) return 0;
+    object_name.Buffer = (PWSTR)relative_path;
+    object_name.Length = (USHORT)(length * sizeof(wchar_t));
+    object_name.MaximumLength = object_name.Length;
+    InitializeObjectAttributes(&attributes, &object_name,
+        OBJ_CASE_INSENSITIVE | OBJ_DONT_REPARSE, space->roots[drive_index], 0);
+    status = NtCreateFile(&handle, desired_access | SYNCHRONIZE, &attributes,
+        &status_block, 0, FILE_ATTRIBUTE_NORMAL, share_access, disposition,
+        FILE_NON_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT |
+            FILE_OPEN_REPARSE_POINT,
+        0, 0u);
+    if (status < 0 || !bx_ntvdm_host_namespace_file_info(handle, &info) ||
+        (info.dwFileAttributes & (FILE_ATTRIBUTE_DIRECTORY |
+            FILE_ATTRIBUTE_REPARSE_POINT)) != 0u) {
+        if (handle != INVALID_HANDLE_VALUE) CloseHandle(handle);
+        return 0;
+    }
+    *handle_out = handle;
+    return 1;
 }

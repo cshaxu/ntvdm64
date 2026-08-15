@@ -76,6 +76,11 @@
 > substrate only, not a completed BOP. See the
 > [token evidence](etc/research/t202-s4-dem-file-session-token-001.md).
 
+> **T202 S4 progress:** an admitted-root-relative local-file open now reaches
+> a real host file without ambient path or handle exposure; `..` is rejected.
+> This is a provider primitive, not a BOP completion. See the
+> [open evidence](etc/research/t202-s4-host-namespace-root-relative-open-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

@@ -67,6 +67,15 @@ int bx_ntvdm_host_namespace_v1_directory_exists(
     const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
     const wchar_t *relative_directory);
 
+/* Opens one DOS-relative 8.3 file below an admitted root.  The returned
+ * handle remains adapter-private: callers must place it in a session-owned
+ * opaque-token table, never in guest state.  Absolute paths, dot segments,
+ * non-8.3 components and reparse traversal are rejected. */
+int bx_ntvdm_host_namespace_v1_open_file(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, ACCESS_MASK desired_access,
+    ULONG share_access, DWORD creation_disposition, HANDLE *handle_out);
+
 #ifdef __cplusplus
 }
 #endif
