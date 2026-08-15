@@ -87,6 +87,11 @@
 > checked controlled stop, verified by the fresh integrated x64 `/MT` r7
 > fixture. No historical `DosSessionId` result was fabricated.
 
+> **T211 S2 P3 progress:** the source-built component fixture now includes
+> malformed COMSPEC/SetInfo/boot-path rejection and `54:04` no-context failure
+> with zero guest writes (r8). The remaining S2 work is a final full-member
+> result matrix and provider/facade cleanup review, not new BOP selection.
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was

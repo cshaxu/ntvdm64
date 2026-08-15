@@ -66,6 +66,12 @@ closure.
    `54:10` produces the package's controlled deferred stop in both its
    COMMAND-family sweep and direct route check.  It has no register or flags
    delta and cannot reach the host-child execution seam.
+4. The refreshed `command-bootstrap` fixture at
+   `artifacts/build/t211-s2-command-bootstrap-r8` closes the component-level
+   representative negative matrix: malformed COMSPEC gather, `cmdSetInfo`
+   locator overflow and boot-file output overflow decline before any guest
+   write; `54:04` with an admitted drive but no session context yields only
+   its checked CF failure and zero writes.
 
 This is P1 progress only.  S2 still needs an explicit component-level
 success/failure/no-context/malformed-gather matrix and a final owner-package
