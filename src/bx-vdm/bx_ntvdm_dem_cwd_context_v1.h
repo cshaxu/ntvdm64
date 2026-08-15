@@ -50,6 +50,13 @@ int bx_ntvdm_dem_cwd_context_v1_set(
 int bx_ntvdm_dem_cwd_context_v1_query(
     const bx_ntvdm_dem_cwd_context_v1 *context, uint8_t drive_index,
     wchar_t *relative_directory, uint32_t capacity);
+/* Mirrors demQueryCurrentDir's path revalidation for the direct profile. If
+ * a previously selected child no longer exists, session CWD returns to the
+ * admitted drive root. Non-direct profiles own their own state and are left
+ * unchanged. */
+int bx_ntvdm_dem_cwd_context_v1_reconcile_direct(
+    bx_ntvdm_dem_cwd_context_v1 *context,
+    const bx_ntvdm_host_namespace_v1 *host_namespace, uint8_t drive_index);
 int bx_ntvdm_dem_cwd_context_v1_set_default_drive(
     bx_ntvdm_dem_cwd_context_v1 *context,
     const bx_ntvdm_host_namespace_v1 *host_namespace, uint8_t drive_index);

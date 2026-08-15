@@ -32,12 +32,15 @@ The original `50:1A` path-letter mismatch remains `AX=1, CF=1`. The original
 ## Evidence
 
 `Invoke-T202S2DemCwdServiceProbe.ps1` at
-`artifacts/build/t202-s2-dem-cwd-service-r4` passed under MSVC x64 `/MT`.
+`artifacts/build/t202-s2-dem-cwd-service-r5` passed under MSVC x64 `/MT`.
 It verifies direct root set/query CDS writeback, valid and mismatched default
 drive, readonly refusal, overlay success, and an explicit virtual-profile
-CWD set/query round trip. The direct case reads the admitted C: root only;
-the virtual case has no host namespace lookup. The fixture performs no guest
-execution or host configuration mutation.
+CWD set/query round trip. It also verifies OpenNT's query-time stale-path
+behavior: a direct session CWD whose remembered child is no longer visible
+under the admitted root is reset to the root before CDS writeback. The direct
+case reads the admitted C: root only; the virtual case has no host namespace
+lookup. The fixture performs no guest execution or host configuration
+mutation.
 
 The complete DEM package fixture also compiled, linked and ran at
 `artifacts/build/t202-s2-dem-cwd-family-compile-r1`; it includes the new

@@ -139,6 +139,24 @@ int bx_ntvdm_dem_cwd_context_v1_query(const bx_ntvdm_dem_cwd_context_v1 *context
     return BX_NTVDM_DEM_CWD_V1_OK;
 }
 
+int bx_ntvdm_dem_cwd_context_v1_reconcile_direct(
+    bx_ntvdm_dem_cwd_context_v1 *context,
+    const bx_ntvdm_host_namespace_v1 *host_namespace, uint8_t drive_index)
+{
+    uint32_t result;
+    if (!policy(context, &result) || drive_index >= 26u)
+        return BX_NTVDM_DEM_CWD_V1_REJECTED;
+    if (result != BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST)
+        return BX_NTVDM_DEM_CWD_V1_OK;
+    if (host_namespace == 0 || !bx_ntvdm_host_namespace_v1_directory_exists(
+            host_namespace, drive_index, L""))
+        return BX_NTVDM_DEM_CWD_V1_NOT_FOUND;
+    if (!bx_ntvdm_host_namespace_v1_directory_exists(host_namespace,
+            drive_index, context->direct_relative[drive_index]))
+        context->direct_relative[drive_index][0] = L'\0';
+    return BX_NTVDM_DEM_CWD_V1_OK;
+}
+
 int bx_ntvdm_dem_cwd_context_v1_set_default_drive(
     bx_ntvdm_dem_cwd_context_v1 *context,
     const bx_ntvdm_host_namespace_v1 *host_namespace, uint8_t drive_index)

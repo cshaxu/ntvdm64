@@ -142,6 +142,10 @@ int bx_ntvdm_dem_cwd_service_v2_complete(
         if (drive >= 26u || (host_namespace != 0 &&
             !bx_ntvdm_host_namespace_v1_directory_exists(host_namespace, drive, L"")))
             return finish(transaction, event, cpu, 1, BX_NTVDM_ERROR_INVALID_DRIVE, 1);
+        result = bx_ntvdm_dem_cwd_context_v1_reconcile_direct(context,
+            host_namespace, drive);
+        if (result != BX_NTVDM_DEM_CWD_V1_OK)
+            return finish(transaction, event, cpu, 1, BX_NTVDM_ERROR_INVALID_DRIVE, 1);
         if (bx_ntvdm_dem_cwd_context_v1_query(context, drive, relative,
                 BX_NTVDM_DEM_CWD_CONTEXT_V1_MAX_RELATIVE) != BX_NTVDM_DEM_CWD_V1_OK ||
             !full_path(drive, relative, payload))

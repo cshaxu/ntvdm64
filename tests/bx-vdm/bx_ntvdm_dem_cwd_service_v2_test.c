@@ -67,6 +67,17 @@ int main(void)
             &transaction, payload) || transaction.writes.write_count != 2u ||
         memcmp(payload, "C:\\", 4u) != 0 || payload[67] != 2u ||
         payload[68] != 0u) failed = 1;
+    /* demQueryCurrentDir validates a remembered current directory. A stale
+     * direct child is reset to its admitted root rather than becoming an
+     * error or leaking an ambient process CWD. */
+    memcpy(direct.direct_relative[drive], L"NTDOS64_MISSING",
+        sizeof(L"NTDOS64_MISSING"));
+    event_cpu(&event, &cpu); cpu.eax = drive;
+    memset(input, 0xa5, sizeof(input));
+    if (!invoke(&direct, &host_namespace, 0x13u, &event, &cpu, input, 71u,
+            &transaction, payload) || transaction.writes.write_count != 2u ||
+        memcmp(payload, "C:\\", 4u) != 0 ||
+        direct.direct_relative[drive][0] != L'\0') failed = 1;
     event_cpu(&event, &cpu); cpu.edx = drive;
     memcpy(input, "C:\\", 4u);
     if (!invoke(&direct, &host_namespace, 0x1au, &event, &cpu, input, 67u,
