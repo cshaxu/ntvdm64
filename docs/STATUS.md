@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T215 S1.** Its governing brief is the active
+> **Current effective packet: M0 T215 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T215 S1 -- current BOP owner-package reconciliation.**
+**Active: M0 T215 S2 -- DEM direct-host file/handle/FCB/search source map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -20,27 +20,27 @@
 ## Active Packet
 
 > **T scope:** T215 reconciles the global OpenNT BOP owner catalog with the
-> actual integrated bx-vdm implementation after T214 made the current profile
-> reach CPU entry. It selects one complete next owner package by source,
-> dependency and ROI; it does not select an endpoint from the resulting trace.
+> actual integrated bx-vdm implementation, then prepares the highest-ROI
+> complete DEM direct-host file/handle/FCB/search owner package for recovery.
+> It does not select an endpoint from a native trace.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T215 S1, Ordinary Mode. |
-| Admission And Approval | Standing owner direction requires global, source-first BOP recovery by complete owner package and forbids trace-led leaf patches. T214 is closed with its former pre-CPU admission blocker removed. |
-| Objective | Produce one current all-BOP owner/package/state ledger that distinguishes original reuse, adapted original, source-derived rehost, unavailable/deferred and implemented dispositions, then admit the next whole package. |
-| Non-goals | No individual BOP implementation, no trace-selected backlog, no new Bochs/mantle semantics, no host-mutation policy expansion, no guest-run claim, and no status inferred from a passing fixture alone. |
-| Reference Baseline | T200 full BOP audit ledger, T205/T206/T210/T211/T214 closures, current bx-vdm provider/facade source, and OpenNT dispatcher/provider sources. |
-| Files And ABI Surface | Current-state research ledger, evidence links, Status and Queue only; no runtime ABI or product source change. |
+| Identifier Mode | M0 T215 S2, Ordinary Mode. |
+| Admission And Approval | T215 S1 selected the DEM direct-host file/handle/FCB/search owner package from the 203-identity reconciliation. Standing owner direction requires original-source and full-package recovery before implementation. |
+| Objective | Map the complete original DEM namespace/content, opaque-handle, FCB, DTA and search provider surface to copied guest ABI, current bx-vdm routes, host capability requirements, four-profile outcomes and source-shaped failures. |
+| Non-goals | No leaf BOP implementation, no trace-selected backlog, no new Bochs/mantle semantics, no host-mutation policy expansion, no guest-run claim, no raw host-handle export and no synthetic filesystem replacement. |
+| Reference Baseline | T215 S1 reconciliation, `demdisp.c`, DEM file/directory/FCB/search sources, T202 DEM closure, current DEM session/facade/provider source and shared mutation-profile ABI. |
+| Files And ABI Surface | Source/ABI/failure map and evidence only; no runtime ABI or product source change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | All selector/service pairs in the original catalog have one owner/package/disposition; current source references are checked; each alleged implementation has a focused or component evidence link; governance and diff checks pass. |
-| Expected Markers | No unowned callable BOP, no endpoint called package-closed without full-family evidence, one source-first disposition per entry, and one dependency-ranked next whole package. |
-| Asset Needs | Existing OpenNT source, bx-vdm source, historical ledgers and retained fixtures only; no firmware/media/device import and no native trace required. |
-| Reporting Requirements | Record owner, original source path, current route/provider, mutation/profile status, implementation evidence, unresolved seam, and retain/migrate/replace/defer decision for every catalogued BOP. |
-| Stop Conditions | Any need to implement a BOP, infer ownership only from a trace, alter a profile, change Bochs/mantle, or discover an unrecorded selector family pauses S1 for re-admission. |
-| Exit Criteria | A reproducible current all-BOP reconciliation closes the audit gap and names one whole package whose source/ABI/failure map can become S2; otherwise it records the exact missing source or historical-composition blocker. |
+| Verification | Every selected DEM service has one original provider/source path, copied guest input/output layout, current route, required host API/capability, direct/readonly/overlay/virtual disposition and source-shaped failure; no unassigned overlap; governance and diff checks pass. |
+| Expected Markers | One coherent DEM package matrix, an explicit boundary between ordinary filesystem and raw-device services, no invented host API replacement, and a package-wide regression design before implementation. |
+| Asset Needs | Existing OpenNT and bx-vdm source, historical ledgers, mutation profile and current fixtures only; no firmware/media/device import and no native trace required. |
+| Reporting Requirements | Record service groups, source paths, structures/segments, host APIs and availability, profile outcome, failure behavior, current workaround and retain/migrate/replace/defer action. |
+| Stop Conditions | Any need to implement a BOP, infer source/ABI from a trace, alter a profile, change Bochs/mantle, pass a raw host handle or host pointer into guest state, or fold raw-device I/O into ordinary filesystem recovery pauses S2 for re-admission. |
+| Exit Criteria | A reproducible complete DEM owner-package source/ABI/failure map admits one package implementation S3 or records an exact missing historical composition blocker. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | DEM, COMMAND, XMS, DPMI, Redirector, debugger, top-level, machine/BIOS BOP families; provider registry, facade, native composition and profile/mutation seams. |
+| Similar-Issue Sweep | DEM file, directory, handle, FCB, DTA, search, metadata, error/lock, raw-media and GSET services; current DEM facade/session/provider, shared profile seam and host namespace/drive view. |
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
@@ -48,6 +48,12 @@
 > boundaries, and selects DEM direct-host file/handle/FCB/search recovery as
 > the next whole package—without selecting any BOP from T214's terminal
 > observation. See the [reconciliation record](etc/research/t215-s1-current-bop-owner-package-reconciliation-001.md).
+
+> **T215 S2 P1 correction:** the candidate DEM direct-host package was
+> already completed by T202 S4's source map and r41/r42 atomic current-source
+> route switch. Current DEM session source confirms that no legacy fixture
+> route may claim an installed whole-provider identity. The duplicate package
+> is removed rather than reimplemented; see the [current-state correction](etc/research/t215-s2-dem-direct-host-current-state-correction-001.md).
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
