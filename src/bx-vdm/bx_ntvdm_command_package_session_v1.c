@@ -22,17 +22,34 @@ static int read_one(bx_ntvdm_command_package_session_v1 *s,uint64_t address,uint
   if(!s||!payload||!bytes||bytes>BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES||address>UINT64_C(0x100000)-bytes||!next_id(s,&id))return 0;
   bx_ntvdm_mechanical_action_v1_clear(&a);a.action_id=id;a.kind=BX_NTVDM_MECHANICAL_ACTION_V1_READ;a.range_count=1u;a.payload_bytes=bytes;a.ranges[0].physical_address=address;a.ranges[0].byte_count=bytes;
   if(!bx_ntvdm_mechanical_action_v1_valid(&a)||!bx_ntvdm_mantle_execute_mechanical_action_v1(&a))return 0;memcpy(payload,a.payload,bytes);return 1; }
-static void validate_exec_streams(bx_ntvdm_command_package_session_v1 *s,
+static int validate_exec_streams(bx_ntvdm_command_package_session_v1 *s,
     const bx_ntvdm_cpu_state_v1 *c, const bx_ntvdm_instruction_window_v1 *w,
     int direct)
 { uint8_t payload[12];uint64_t address;
-  if(!s||!c||!w||!direct||w->bytes[3]!=8u)return;
+  if(!s||!c||!w||!direct||w->bytes[3]!=8u)return 0;
   address=((uint64_t)c->ss<<4u)+(c->ebp&0xffffu);
   if(address>UINT64_C(0x100000)-sizeof(payload)||!read_one(s,address,sizeof(payload),payload)) {
     if(s->stream_child.rejected_record_count!=UINT32_MAX)++s->stream_child.rejected_record_count;
-    return;
+    return 0;
   }
-  (void)bx_ntvdm_command_stream_child_v1_validate_std_handles(&s->stream_child,payload,sizeof(payload)); }
+  return bx_ntvdm_command_stream_child_v1_validate_std_handles(&s->stream_child,payload,sizeof(payload)); }
+static int read_exec_tail(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_cpu_state_v1 *c,uint8_t payload[125],uint32_t *bytes)
+{ uint64_t address;uint32_t i;
+  if(!s||!c||!payload||!bytes)return 0;address=((uint64_t)c->ds<<4u)+(c->esi&0xffffu);
+  if(address>UINT64_C(0x100000)-124u||!read_one(s,address,124u,payload))return 0;
+  for(i=0u;i<124u;i++)if(payload[i]==0x0du){payload[i]=0u;*bytes=i+1u;return i!=0u;}return 0; }
+static int read_exec_environment(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_cpu_state_v1 *c,uint8_t payload[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES],uint32_t *bytes)
+{ uint64_t address;uint32_t i;
+  if(!s||!c||!payload||!bytes)return 0;address=(uint64_t)c->es<<4u;
+  if(address>UINT64_C(0x100000)-BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES||!read_one(s,address,BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES,payload))return 0;
+  for(i=1u;i<BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES;i++)if(!payload[i-1u]&&!payload[i]){*bytes=i+1u;return 1;}return 0; }
+static int dispatch_child(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,int direct,bx_ntvdm_cpu_result_v2 *r)
+{ uint8_t command[125],environment[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES];uint32_t command_bytes,environment_bytes;
+  if(!s||!e||!c||!w||!r||!direct||!s->has_host_context||(w->bytes[3]!=8u&&w->bytes[3]!=10u))return 0;
+  if(w->bytes[3]==8u){if(!validate_exec_streams(s,c,w,direct)||!read_exec_tail(s,c,command,&command_bytes))return 0;}
+  else {if(!s->host_context.processor_bytes)return 0;memcpy(command,s->host_context.processor,s->host_context.processor_bytes);command_bytes=s->host_context.processor_bytes;}
+  if(!read_exec_environment(s,c,environment,&environment_bytes))return 0;
+  return bx_ntvdm_command_stream_child_v1_launch(&s->stream_child,command,command_bytes,environment,environment_bytes,&s->host_context,e,c,w,r); }
 int bx_ntvdm_command_package_session_v1_valid(const bx_ntvdm_command_package_session_v1 *s)
 { return s&&s->magic==BX_NTVDM_COMMAND_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_COMMAND_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->gset&&s->has_mutation_profile<=1u&&s->has_host_context<=1u&&bx_ntvdm_command_console_capability_v1_valid(&s->console)&&bx_ntvdm_command_boot_input_v1_valid(&s->boot_input)&&bx_ntvdm_command_execution_lifecycle_v1_valid(&s->execution_lifecycle)&&bx_ntvdm_command_stream_child_v1_valid(&s->stream_child)&&(!s->has_mutation_profile||bx_ntvdm_command_profile_consumer_v1_valid(&s->mutation_profile))&&(!s->has_host_context||bx_ntvdm_command_host_context_v1_valid(&s->host_context)); }
 int bx_ntvdm_command_package_session_v1_initialize(bx_ntvdm_command_package_session_v1 *s,bx_ntvdm_boot_namespace_plane_v1 *n,bx_ntvdm_dem_gset_plane_v1 *g)
@@ -68,7 +85,7 @@ int bx_ntvdm_command_package_session_v1_dispatch(bx_ntvdm_command_package_sessio
   if(bx_ntvdm_command_console_capability_v1_dispatch(&s->console,e,c,w,r))return 1;
   if(bx_ntvdm_command_stream_child_v1_dispatch_stream(&s->stream_child,
       s->has_mutation_profile&&bx_ntvdm_command_package_session_v1_resolve_mutation_class(s,BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL,&policy)&&policy==BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST,e,c,w,r))return 1;
-  validate_exec_streams(s,c,w,s->has_mutation_profile&&bx_ntvdm_command_package_session_v1_resolve_mutation_class(s,BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL,&policy)&&policy==BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST);
+  if(dispatch_child(s,e,c,w,s->has_mutation_profile&&bx_ntvdm_command_package_session_v1_resolve_mutation_class(s,BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL,&policy)&&policy==BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST,r))return 1;
   if(bx_ntvdm_command_execution_lifecycle_v1_dispatch(&s->execution_lifecycle,&s->get_next,&s->launch_plan,e,c,w,r))return 1;
   switch(route.plane.service){
   case 1u:return get_next(s,e,c,w,r);case 2u:case 15u:return bootstrap(s,e,c,w,r);

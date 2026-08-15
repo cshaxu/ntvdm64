@@ -203,6 +203,14 @@
 > an input capability only: no child process or execution closure is claimed;
 > see the [processor-context evidence](etc/research/t202-s6-command-processor-context-001.md).
 
+> **T202 S6 progress:** direct-profile COMMAND child execution now has one
+> typed terminal transaction for `54:08/0A`: checked copied command/
+> environment inputs, opaque stream validation where applicable, private
+> duplicated inherited handles, wait/close, and source-shaped CF-clear exit
+> result.  The x64 `/MT` regression proves `cmd.exe /c exit 7` returns
+> `AL=7`.  It has no VDM re-entry queue, VDD, `SetStdHandle`, raw handle/PID
+> transport or native trace claim; see the [typed-child evidence](etc/research/t202-s6-command-typed-child-lifecycle-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
