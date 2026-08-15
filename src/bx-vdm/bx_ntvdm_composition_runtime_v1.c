@@ -14,9 +14,9 @@
 #include "bx_ntvdm_guest_write_abi.h"
 #include "bx_ntvdm_initial_state_catalog_v1.h"
 #include "bx_ntvdm_startup_configuration_source_v1.h"
+#include "bx_ntvdm_command_initial_environment_v1.h"
 
 #include <string.h>
-#include <stdlib.h>
 #include <windows.h>
 
 #define BX_NTVDM_COMPOSITION_ENV_PROFILE L"NTDOS64_ADAPTER_PROFILE"
@@ -40,80 +40,6 @@ typedef struct bx_ntvdm_composition_runtime_v1 {
 } bx_ntvdm_composition_runtime_v1;
 
 static bx_ntvdm_composition_runtime_v1 runtime;
-
-static int command_environment_name_equal(const char *value, uint32_t bytes,
-    const char *expected)
-{
-    uint32_t index;
-    for (index = 0u; expected[index] != '\0'; ++index) {
-        char character;
-        if (index >= bytes) return 0;
-        character = value[index];
-        if (character >= 'a' && character <= 'z')
-            character = (char)(character - 'a' + 'A');
-        if (character != expected[index]) return 0;
-    }
-    return index == bytes;
-}
-
-static int capture_command_environment(
-    bx_ntvdm_command_host_context_v1 *context)
-{
-    wchar_t *wide, *entry;
-    uint8_t *environment;
-    uint32_t used = 0u;
-    int has_prompt = 0;
-    int result = 0;
-    if (context == 0) return 0;
-    environment = (uint8_t *)malloc(BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES);
-    if (environment == 0) return 0;
-    wide = GetEnvironmentStringsW();
-    if (wide == 0) { free(environment); return 0; }
-    for (entry = wide; *entry != L'\0'; entry += wcslen(entry) + 1u) {
-        int bytes;
-        uint32_t index, name_bytes = 0u;
-        if (entry[0] == L'=') continue;
-        /* OpenNT's cmdGetInitEnvironment grows its copied block as needed.
-           Query first, then write directly into the bounded 16-bit VDM
-           transaction; no per-variable 1 KiB policy limit is introduced. */
-        bytes = WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS, entry, -1,
-            0, 0, 0, 0);
-        if (bytes < 3 || (uint32_t)bytes >
-                BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES - used - 1u ||
-            !WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS, entry, -1,
-                (char *)environment + used, bytes, 0, 0)) goto done;
-        for (index = 0u; index < (uint32_t)bytes - 1u; ++index) {
-            if (environment[used + index] == '=') { name_bytes = index; break; }
-        }
-        if (name_bytes == 0u || command_environment_name_equal(
-                (const char *)environment + used,
-                name_bytes, "COMSPEC") || command_environment_name_equal(
-                (const char *)environment + used,
-                name_bytes, "WINDIR")) continue;
-        for (index = 0u; index < name_bytes; ++index)
-            if (environment[used + index] >= 'a' && environment[used + index] <= 'z')
-                environment[used + index] = (uint8_t)(environment[used + index] - 'a' + 'A');
-        if (command_environment_name_equal((const char *)environment + used,
-                name_bytes, "PROMPT"))
-            has_prompt = 1;
-        used += (uint32_t)bytes;
-    }
-    if (!has_prompt) {
-        static const uint8_t prompt[] = "PROMPT=$P$G";
-        if (used > BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES -
-                sizeof(prompt) - 1u) goto done;
-        memcpy(environment + used, prompt, sizeof(prompt));
-        used += (uint32_t)sizeof(prompt);
-    }
-    if (used >= BX_NTVDM_COMMAND_HOST_CONTEXT_V1_ENVIRONMENT_BYTES) goto done;
-    environment[used++] = 0u;
-    result = bx_ntvdm_command_host_context_v1_set_environment(context,
-        environment, used);
-done:
-    FreeEnvironmentStringsW(wide);
-    free(environment);
-    return result;
-}
 
 static int capture_command_host_context(
     bx_ntvdm_command_host_context_v1 *context, uint32_t selected_drive)
@@ -144,7 +70,7 @@ static int capture_command_host_context(
     if (!bx_ntvdm_command_host_context_v1_initialize(context, selected_drive,
             root, 3u)) return 0;
 capture:
-    if (!capture_command_environment(context)) return 0;
+    if (!bx_ntvdm_command_initial_environment_v1_capture(context)) return 0;
     characters = GetEnvironmentVariableW(L"ComSpec", processor_wide,
         BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES);
     if (characters == 0u || characters >= BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES)

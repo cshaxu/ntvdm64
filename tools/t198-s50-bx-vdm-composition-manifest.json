@@ -97,6 +97,7 @@
     "src/cli/byob_launch_declaration_v1.c",
     "src/cli/byob_profile.c",
     "src/bx-vdm/bx_ntvdm_command_profile_consumer_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_initial_environment_v1.c",
     "src/bx-vdm/bx_ntvdm_command_package_session_v1.c",
     "src/bx-vdm/bx_ntvdm_composition_runtime_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_cli_unavailable_provider_v1.c",

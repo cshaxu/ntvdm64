@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S1.** Its governing brief is the active
+> **Current effective packet: M0 T217 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S1 -- SYSINIT COMMAND EXEC prerequisite map.**
+**Active: M0 T217 S2 -- COMMAND initial-environment source-sequence repair.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -23,26 +23,26 @@
 
 ## Active Packet
 
-> **T scope:** T217 maps the complete SYSINIT-to-DOS-EXEC continuation after
-> declared COMMAND image visibility. It identifies guest DOS, DEM host,
-> machine and capability prerequisites as one owner package before admitting
-> recovery; it does not implement a leaf BOP from the unchanged terminal.
+> **T scope:** T217 first establishes source-first compliance for the COMMAND
+> initial-environment prerequisite, then maps the complete SYSINIT-to-DOS-EXEC
+> continuation after declared image visibility. It preserves DOS/DEM ownership
+> and does not implement a leaf BOP from the unchanged terminal.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S1, Ordinary Mode. |
-| Admission And Approval | T216 proves declared image visibility and its full composition run still reaches the source-backed SYSINIT terminal. The next work is a whole caller/loader prerequisite audit, not proof that one BOP is missing. |
-| Objective | Map SYSINIT command open/size/EXEC continuation and all reached DOS/DEM/machine prerequisites to owner, source, ABI, failure rule and recovery disposition. |
-| Non-goals | No implementation, BOP routing change, trace instrumentation, guest-memory inspection, Bochs/mantle change, profile change, or COMMAND-run claim. |
-| Reference Baseline | T216 S1 map; OpenNT `demfile.c`, `demhndl.c`, `demsrch.c`, `demdisp.c`, `dossvc.h`; existing readonly namespace, direct DEM provider, provider partitions and source-built S5 regression. |
-| Files And ABI Surface | Research evidence and task records only. No production ABI, provider or machine change in S1. |
+| Identifier Mode | M0 T217 S2, Ordinary Mode. |
+| Admission And Approval | S1 proves that the original `cmdenv.c` cannot compose directly because of historical CCPU/SoftPC/product-shell dependencies, while identifying a one-seam correction to retain its ANSI→OEM and filter/order contract. This is a bounded prerequisite repair, not a trace-selected BOP request. |
+| Objective | Replace the current Unicode-direct capture with the OpenNT-compatible ANSI snapshot and per-entry OEM conversion sequence; preserve filtering, name-case, PROMPT, COMSPEC prepend, paragraph retry, 16-bit transfer bound and explicit failure. |
+| Non-goals | No AUTOEXEC merge recovery, BOP routing change, trace instrumentation, guest-memory inspection, Bochs/mantle change, profile change, host mutation, or COMMAND-run claim. |
+| Reference Baseline | T216 S1 map; OpenNT `sysinit1.asm`, DOS EXEC/open/handle sources, `demfile.c`, `demhndl.c`, `demsrch.c`, `demdisp.c`, `dossvc.h`, and COMMAND `cmdenv.c`; existing readonly namespace, direct DEM provider, provider partitions and source-built S5 regression. |
+| Files And ABI Surface | `bx_ntvdm_command_initial_environment_v1.{h,c}`, composition runtime, full composition manifest/link recipes, focused COMMAND host-context regression, and supporting source-reuse evidence. Existing versioned BOP and machine ABIs remain unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | OpenNT/current-source owner and ABI audit, full prerequisite/disposition table, recovery-ladder decision, governance and diff checks. |
-| Expected Markers | A complete package plan separates DOS loader, DEM host services, machine mechanics and explicit unavailable/deferred prerequisites. |
+| Verification | Focused source-built x64 `/MT` capture/publication regression: ANSI input is OEM-converted, filters and name-case match source, PROMPT is supplied, a >4 KiB environment retries/publishes, and capacity failure is explicit. Governance and diff checks pass. |
+| Expected Markers | One source-derived COMMAND environment seam with no Unicode-direct conversion and no 4 KiB policy limit. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T215 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record original caller/source, ownership, copied ABI, failure path, current state and recovery-ladder disposition; distinguish evidence from inference. |
-| Stop Conditions | Any implementation, guest-memory instrumentation, trace-selected service work, profile change, or Bochs/mantle change pauses S1 for re-admission. |
-| Exit Criteria | A complete source/ABI/failure map selects one source-first whole-package implementation plan or an explicit unavailable/deferred disposition. |
+| Reporting Requirements | Record source-rung disposition, exact retained filter/conversion/retry rules, test evidence, and the deferred AUTOEXEC merge separately from initial environment. |
+| Stop Conditions | Any AUTOEXEC merge, BOP routing change, trace-selected service work, profile change, host mutation, guest-memory instrumentation, or Bochs/mantle change pauses S2 for re-admission. |
+| Exit Criteria | A source-built regression proves the retained OpenNT initial-environment rules and the historical 4 KiB rejection cannot regress; the separate merge path remains explicitly deferred. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -80,6 +80,21 @@
 > regression passes; the full composition links and reaches the unchanged
 > source-backed `50:3D` controlled terminal. This closes visibility only, not
 > COMMAND startup; see the [closure record](history/m0-t216-closure-20260815.md).
+
+> **T217 S1 P1 finding:** `cmdenv.c` cannot link without the historical
+> CCPU/SoftPC/product shell, but it supplies the normative initial-environment
+> algorithm. The existing 4 KiB repair remains valid; its ANSI-to-OEM sequence
+> requires one source-derived seam correction before it can be treated as
+> source-first compliant. The distinct AUTOEXEC merge remains unclaimed. See
+> the [source-reuse audit](etc/research/t217-s1-command-environment-source-reuse-audit-001.md).
+
+> **T217 S2 P1 closure:** the initial-environment seam now follows the
+> OpenNT input/conversion order (`GetEnvironmentStringsA` then per-entry
+> `CharToOemBuffA`) while retaining its filters, default PROMPT, COMSPEC
+> prepend and paragraph retry. Focused x64 `/MT`, 5,001-byte capacity, and
+> full-current-source composition regressions pass. The native terminal is
+> unchanged at `50:3D`; neither AUTOEXEC merge nor COMMAND execution is
+> claimed. See the [source-reuse audit](etc/research/t217-s1-command-environment-source-reuse-audit-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS

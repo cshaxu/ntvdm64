@@ -75,6 +75,7 @@ foreach ($name in ($sources | Where-Object { $_.Object -ne 'native-cli.obj' -and
 # The current host namespace is a documented user-mode NTDLL seam.  Preserve
 # this import in the native CLI closure rather than relying on an old response.
 $lines += 'ntdll.lib'
+$lines += 'user32.lib'
 $lines | Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 | Tee-Object -FilePath (Join-Path $build 'link.log')
 if ($LASTEXITCODE -ne 0) { throw "S27 link failed: $LASTEXITCODE" }
