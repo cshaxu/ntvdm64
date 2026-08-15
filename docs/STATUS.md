@@ -59,6 +59,11 @@
 > admitted boundary, including source-shaped drive failure and legacy fallback
 > removal; see the [closure evidence](etc/research/t202-s2-dem-namespace-cwd-volume-closure-001.md).
 
+> **T202 S3 progress:** the complete 29-identity DEM file/handle/FCB/search
+> boundary is inventoried by original owner, host API and current workaround;
+> this is admission evidence, not provider implementation. See the
+> [source/ABI map](etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the
