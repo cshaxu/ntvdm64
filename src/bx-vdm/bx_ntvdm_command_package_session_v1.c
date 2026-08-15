@@ -88,9 +88,10 @@ int bx_ntvdm_command_package_session_v1_dispatch(bx_ntvdm_command_package_sessio
   if(route.disposition!=BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER)return 0;
   if(bx_ntvdm_cmd_cli_profile_v1_dispatch(e,c,w,r))return 1;
   if(bx_ntvdm_command_console_capability_v1_dispatch(&s->console,e,c,w,r))return 1;
+  policy=s->has_mutation_profile&&bx_ntvdm_command_launch_execution_provider_v1_direct_allowed(&s->launch_execution_provider,&s->mutation_profile);
   if(bx_ntvdm_command_stream_child_v1_dispatch_stream(&s->launch_execution_provider.stream_child,
-      s->has_mutation_profile&&bx_ntvdm_command_package_session_v1_resolve_mutation_class(s,BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL,&policy)&&policy==BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST,e,c,w,r))return 1;
-  if(dispatch_child(s,e,c,w,s->has_mutation_profile&&bx_ntvdm_command_package_session_v1_resolve_mutation_class(s,BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL,&policy)&&policy==BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST,r))return 1;
+      policy,e,c,w,r))return 1;
+  if(dispatch_child(s,e,c,w,policy,r))return 1;
   if(bx_ntvdm_command_execution_lifecycle_v1_dispatch(&s->launch_execution_provider.lifecycle,&s->bootstrap_provider.get_next,&s->launch_plan,e,c,w,r))return 1;
   if (bx_ntvdm_command_bootstrap_provider_v1_owns_service((uint8_t)route.plane.service)) switch(route.plane.service){
   case 1u:return get_next(s,e,c,w,r);case 2u:case 15u:return bootstrap(s,e,c,w,r);

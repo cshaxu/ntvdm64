@@ -71,3 +71,11 @@ DOS-domain branch, and the `54:08/0A` copied `ERROR_NOT_SUPPORTED` result.
 The full composition fixture at
 `artifacts/build/t211-s3-launch-provider-r3` also passes after the COMMAND
 plane changes classify the four members as `LAUNCH_EXECUTION`.
+
+## P4 owner enforcement
+
+The provider now resolves its own `HOST_GLOBAL` direct capability from the
+shared COMMAND profile.  The session coordinator no longer decides whether
+stream-token publication or terminal child execution is direct.  The refreshed
+whole composition fixture at `artifacts/build/t211-s3-launch-provider-r4`
+passes under MSVC x64 `/MT`.

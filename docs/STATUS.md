@@ -116,6 +116,11 @@
 > `54:08/0A` unsupported form. Direct terminal-child failure/lifecycle and
 > final provider routing cleanup remain open.
 
+> **T211 S3 P4 progress:** launch/execution direct-profile selection now
+> belongs to its provider, not the COMMAND session coordinator; fresh x64
+> `/MT` r4 composition evidence passes. The remaining work is the component
+> failure/lifecycle ledger and final family regression.
+
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
 > into one ordered owner-package plan. No selector implementation or trace was

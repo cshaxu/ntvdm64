@@ -27,3 +27,14 @@ int bx_ntvdm_command_launch_execution_provider_v1_initialize(
     value->initialized = 1u;
     return bx_ntvdm_command_launch_execution_provider_v1_valid(value);
 }
+
+int bx_ntvdm_command_launch_execution_provider_v1_direct_allowed(
+    const bx_ntvdm_command_launch_execution_provider_v1 *value,
+    const bx_ntvdm_command_profile_consumer_v1 *profile)
+{
+    uint32_t policy = 0u;
+    return bx_ntvdm_command_launch_execution_provider_v1_valid(value) &&
+        profile != 0 && bx_ntvdm_command_profile_consumer_v1_resolve(profile,
+            BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, &policy) &&
+        policy == BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST;
+}

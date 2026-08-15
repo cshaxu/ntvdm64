@@ -6,6 +6,7 @@
  * directly. */
 #include "bx_ntvdm_command_execution_lifecycle_v1.h"
 #include "bx_ntvdm_command_stream_child_v1.h"
+#include "bx_ntvdm_command_profile_consumer_v1.h"
 
 #define BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_MAGIC UINT32_C(0x4258434c)
 #define BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_VERSION UINT32_C(1)
@@ -24,6 +25,11 @@ int bx_ntvdm_command_launch_execution_provider_v1_initialize(
 int bx_ntvdm_command_launch_execution_provider_v1_valid(
     const bx_ntvdm_command_launch_execution_provider_v1 *value);
 int bx_ntvdm_command_launch_execution_provider_v1_owns_service(uint8_t service);
+/* The component, not its session coordinator, owns the profile decision for
+ * stream/child execution. */
+int bx_ntvdm_command_launch_execution_provider_v1_direct_allowed(
+    const bx_ntvdm_command_launch_execution_provider_v1 *value,
+    const bx_ntvdm_command_profile_consumer_v1 *profile);
 #ifdef __cplusplus
 }
 #endif
