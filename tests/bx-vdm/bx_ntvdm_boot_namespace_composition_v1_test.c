@@ -367,6 +367,10 @@ int main(void)
             (const uint8_t *)"C:\\NTDOS64", 10u) ||
         !bx_ntvdm_command_host_context_v1_set_environment(&command_context,
             command_environment, (uint32_t)sizeof(command_environment)) ||
+        !bx_ntvdm_command_host_context_v1_set_processor(&command_context,
+            (const uint8_t *)"C:\\WINDOWS\\SYSTEM32\\CMD.EXE", 28u) ||
+        command_context.processor_bytes != 28u ||
+        memcmp(command_context.processor, "C:\\WINDOWS\\SYSTEM32\\CMD.EXE", 28u) != 0 ||
         !bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
             &composition, &command_context) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(

@@ -196,6 +196,13 @@
 > `54:08` still returns the existing deferred lifecycle result and no child
 > is launched; see the [gather evidence](etc/research/t202-s6-command-stream-gather-001.md).
 
+> **T202 S6 progress:** CLI composition now captures a bounded host COMSPEC
+> equivalent once into copied COMMAND context for the future `54:0A` path;
+> the ambient general environment remains filtered and no BOP recaptures it.
+> x64 `/MT` fixture and runtime-translation-unit compilation pass.  This is
+> an input capability only: no child process or execution closure is claimed;
+> see the [processor-context evidence](etc/research/t202-s6-command-processor-context-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

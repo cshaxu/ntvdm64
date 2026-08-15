@@ -51,6 +51,10 @@ int bx_ntvdm_command_host_context_v1_valid(
         context->selected_directory[0] == (uint8_t)('A' + context->selected_drive) &&
         context->selected_directory[1] == ':' && context->selected_directory[2] == '\\' &&
         context->selected_directory[context->directory_bytes - 1u] == '\0' &&
+        context->processor_bytes <= BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES &&
+        (context->processor_bytes == 0u ||
+         (context->processor_bytes >= 2u &&
+          context->processor[context->processor_bytes - 1u] == '\0')) &&
         environment_valid(context->environment, context->environment_bytes);
 }
 
@@ -82,5 +86,19 @@ int bx_ntvdm_command_host_context_v1_set_environment(
     if (environment_bytes != 0u)
         memcpy(context->environment, environment, environment_bytes);
     context->environment_bytes = environment_bytes;
+    return bx_ntvdm_command_host_context_v1_valid(context);
+}
+
+int bx_ntvdm_command_host_context_v1_set_processor(
+    bx_ntvdm_command_host_context_v1 *context, const uint8_t *processor,
+    uint32_t processor_bytes)
+{
+    if (!bx_ntvdm_command_host_context_v1_valid(context) || processor == 0 ||
+        processor_bytes < 2u ||
+        processor_bytes > BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES ||
+        processor[processor_bytes - 1u] != '\0') return 0;
+    memset(context->processor, 0, sizeof(context->processor));
+    memcpy(context->processor, processor, processor_bytes);
+    context->processor_bytes = processor_bytes;
     return bx_ntvdm_command_host_context_v1_valid(context);
 }

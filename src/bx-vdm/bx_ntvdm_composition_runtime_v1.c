@@ -107,10 +107,12 @@ static int capture_command_host_context(
     bx_ntvdm_command_host_context_v1 *context, uint32_t selected_drive)
 {
     wchar_t current[MAX_PATH];
+    wchar_t processor_wide[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES];
     uint8_t root[4];
     char oem[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_DIRECTORY_BYTES];
+    char processor[BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES];
     DWORD characters;
-    int bytes;
+    int bytes, processor_bytes;
     if (context == 0 || selected_drive >= 26u) return 0;
     characters = GetCurrentDirectoryW(MAX_PATH, current);
     if (characters > 2u && characters < MAX_PATH && current[1] == L':' &&
@@ -123,12 +125,23 @@ static int capture_command_host_context(
         if (bytes >= 4 && bytes <= (int)sizeof(oem) &&
             bx_ntvdm_command_host_context_v1_initialize(context,
                 selected_drive, (const uint8_t *)oem, (uint32_t)bytes - 1u))
-            return capture_command_environment(context);
+            goto capture;
     }
     root[0] = (uint8_t)('A' + selected_drive);
     root[1] = ':'; root[2] = '\\'; root[3] = '\0';
-    return bx_ntvdm_command_host_context_v1_initialize(context, selected_drive,
-        root, 3u) && capture_command_environment(context);
+    if (!bx_ntvdm_command_host_context_v1_initialize(context, selected_drive,
+            root, 3u)) return 0;
+capture:
+    if (!capture_command_environment(context)) return 0;
+    characters = GetEnvironmentVariableW(L"ComSpec", processor_wide,
+        BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES);
+    if (characters == 0u || characters >= BX_NTVDM_COMMAND_HOST_CONTEXT_V1_PROCESSOR_BYTES)
+        return bx_ntvdm_command_host_context_v1_valid(context);
+    processor_bytes = WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS,
+        processor_wide, -1, processor, (int)sizeof(processor), 0, 0);
+    return processor_bytes >= 2 && processor_bytes <= (int)sizeof(processor) &&
+        bx_ntvdm_command_host_context_v1_set_processor(context,
+            (const uint8_t *)processor, (uint32_t)processor_bytes);
 }
 
 void bx_ntvdm_composition_runtime_v1_reset(void)
