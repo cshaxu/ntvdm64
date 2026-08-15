@@ -92,6 +92,12 @@
 > it is provider substrate only, not a completed BOP. See the
 > [backend evidence](etc/research/t202-s4-dem-local-file-backend-001.md).
 
+> **T202 S4 plan:** the complete one-provider state, transaction, profile,
+> partition and regression model is now recorded before legacy routes are
+> replaced. It identifies `demClientErrorEx` hard-error ownership as a single
+> package limitation rather than an endpoint exception; see the
+> [whole-provider plan](etc/operations/t202-s4-dem-whole-provider-implementation-plan-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the
