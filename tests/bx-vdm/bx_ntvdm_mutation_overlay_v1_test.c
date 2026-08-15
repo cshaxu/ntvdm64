@@ -18,6 +18,7 @@ int main(void)
     bx_ntvdm_mutation_profile_v1 profile;
     bx_ntvdm_mutation_overlay_v1 overlay;
     uint8_t value[] = { 1u, 2u, 3u };
+    uint8_t replacement[] = { 3u, 2u, 1u };
     uint8_t output[3] = { 0u, 0u, 0u };
     uint32_t output_bytes = 0u;
     if (!overlay_profile(&profile, BX_NTVDM_MUTATION_MODE_V1_OVERLAY) ||
@@ -30,11 +31,15 @@ int main(void)
             BX_NTVDM_MUTATION_OWNER_V1_DEM,
             BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 7u, value,
             sizeof(value)) ||
+        !bx_ntvdm_mutation_overlay_v1_replace(&overlay,
+            BX_NTVDM_MUTATION_OWNER_V1_DEM,
+            BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 7u,
+            replacement, sizeof(replacement)) ||
         !bx_ntvdm_mutation_overlay_v1_lookup(&overlay,
             BX_NTVDM_MUTATION_OWNER_V1_DEM,
             BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 7u, output,
             sizeof(output), &output_bytes) || output_bytes != sizeof(value) ||
-        memcmp(output, value, sizeof(value)) != 0) return 1;
+        output[0] != 3u || output[1] != 2u || output[2] != 1u) return 1;
     if (bx_ntvdm_mutation_overlay_v1_record(&overlay,
             BX_NTVDM_MUTATION_OWNER_V1_COMMAND,
             BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 8u, value,

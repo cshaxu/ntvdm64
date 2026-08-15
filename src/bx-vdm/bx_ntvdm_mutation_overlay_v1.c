@@ -89,6 +89,30 @@ int bx_ntvdm_mutation_overlay_v1_record(
     return bx_ntvdm_mutation_overlay_v1_valid(overlay);
 }
 
+int bx_ntvdm_mutation_overlay_v1_replace(
+    bx_ntvdm_mutation_overlay_v1 *overlay, uint32_t owner_id,
+    uint32_t mutation_class, uint32_t key, const uint8_t *value,
+    uint32_t value_bytes)
+{
+    uint32_t index;
+    if (overlay == 0 || value == 0 || value_bytes == 0u ||
+        value_bytes > BX_NTVDM_MUTATION_OVERLAY_V1_MAX_BYTES ||
+        !bx_ntvdm_mutation_overlay_v1_valid(overlay) ||
+        !overlay_owner_allowed(overlay, owner_id, mutation_class)) return 0;
+    for (index = 0u; index < overlay->record_count; ++index) {
+        bx_ntvdm_mutation_overlay_record_v1 *record = &overlay->records[index];
+        if (record->owner_id == owner_id &&
+            record->mutation_class == mutation_class && record->key == key) {
+            memset(record->value, 0, sizeof(record->value));
+            memcpy(record->value, value, value_bytes);
+            record->value_bytes = value_bytes;
+            return bx_ntvdm_mutation_overlay_v1_valid(overlay);
+        }
+    }
+    return bx_ntvdm_mutation_overlay_v1_record(overlay, owner_id,
+        mutation_class, key, value, value_bytes);
+}
+
 int bx_ntvdm_mutation_overlay_v1_lookup(
     const bx_ntvdm_mutation_overlay_v1 *overlay, uint32_t owner_id,
     uint32_t mutation_class, uint32_t key, uint8_t *value,

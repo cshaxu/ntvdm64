@@ -45,6 +45,13 @@ int bx_ntvdm_mutation_overlay_v1_record(
     bx_ntvdm_mutation_overlay_v1 *overlay, uint32_t owner_id,
     uint32_t mutation_class, uint32_t key, const uint8_t *value,
     uint32_t value_bytes);
+/* Replaces an existing owned key or records a new one.  It preserves the
+ * same session/profile authorization as record(), while making stateful
+ * session capabilities possible without a side store. */
+int bx_ntvdm_mutation_overlay_v1_replace(
+    bx_ntvdm_mutation_overlay_v1 *overlay, uint32_t owner_id,
+    uint32_t mutation_class, uint32_t key, const uint8_t *value,
+    uint32_t value_bytes);
 int bx_ntvdm_mutation_overlay_v1_lookup(
     const bx_ntvdm_mutation_overlay_v1 *overlay, uint32_t owner_id,
     uint32_t mutation_class, uint32_t key, uint8_t *value,
