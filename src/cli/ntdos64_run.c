@@ -175,13 +175,17 @@ static int environment_name_compare(const wchar_t *entry, const wchar_t *name)
  * environment. This does not expose guest payloads or add a Bochs option. */
 static wchar_t *build_adapter_environment(const wchar_t *profile,
     const wchar_t *root, const wchar_t *include_drives,
-    const wchar_t *exclude_drives, const wchar_t *launch_plan)
+    const wchar_t *exclude_drives, const wchar_t *launch_plan,
+    const wchar_t *config_source, const wchar_t *autoexec_source)
 {
     static const wchar_t *const names[] = {
         L"NTDOS64_ADAPTER_PROFILE", L"NTDOS64_ADAPTER_ROOT", L"NTDOS64_ADAPTER_LAUNCH_PLAN",
-        L"NTDOS64_HOST_EXCLUDE_DRIVES", L"NTDOS64_HOST_INCLUDE_DRIVES"
+        L"NTDOS64_HOST_EXCLUDE_DRIVES", L"NTDOS64_HOST_INCLUDE_DRIVES",
+        L"NTDOS64_STARTUP_CONFIG_SOURCE", L"NTDOS64_STARTUP_AUTOEXEC_SOURCE"
     };
-    const wchar_t *values[] = { profile, root, launch_plan, exclude_drives, include_drives };
+    const wchar_t *values[] = { profile, root, launch_plan, exclude_drives, include_drives,
+        config_source != NULL ? config_source : L"",
+        autoexec_source != NULL ? autoexec_source : L"" };
     LPWCH inherited;
     const wchar_t *entry;
     size_t capacity = 1u;
@@ -254,7 +258,8 @@ static wchar_t *build_adapter_environment(const wchar_t *profile,
 
 static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
     const wchar_t *adapter_root, const wchar_t *include_drives,
-    const wchar_t *exclude_drives, const wchar_t *launch_plan)
+    const wchar_t *exclude_drives, const wchar_t *launch_plan,
+    const wchar_t *config_source, const wchar_t *autoexec_source)
 {
     STARTUPINFOW startup = { .cb = sizeof(startup) };
     PROCESS_INFORMATION process = {0};
@@ -271,7 +276,7 @@ static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
     if (adapter_profile != NULL || adapter_root != NULL || include_drives != NULL || exclude_drives != NULL ||
         launch_plan != NULL) {
         environment = build_adapter_environment(adapter_profile, adapter_root,
-            include_drives, exclude_drives, launch_plan);
+            include_drives, exclude_drives, launch_plan, config_source, autoexec_source);
         if (environment == NULL) {
             HeapFree(GetProcessHeap(), 0, line);
             return 1;
@@ -373,6 +378,8 @@ int wmain(void)
     const wchar_t *bochs = NULL;
     const wchar_t *byob_profile = NULL;
     const wchar_t *byob_root = NULL;
+    const wchar_t *config_source = NULL;
+    const wchar_t *autoexec_source = NULL;
     wchar_t include_drives[52] = {0};
     wchar_t exclude_drives[52] = {0};
     int target_index = 1;
@@ -385,7 +392,7 @@ int wmain(void)
     int result;
 
     if (argv == NULL || argc < 2) {
-        fwprintf(stderr, L"usage: ntdos64-run [--byob-profile profile.json --byob-root directory] [--include-drives c,d] [--exclude-drives e] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
+        fwprintf(stderr, L"usage: ntdos64-run [--byob-profile profile.json --byob-root directory --config-source config.nt --autoexec-source autoexec.nt] [--include-drives c,d] [--exclude-drives e] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
         return 2;
     }
     while (target_index < argc && wcsncmp(argv[target_index], L"--", 2u) == 0) {
@@ -412,6 +419,14 @@ int wmain(void)
         } else if (_wcsicmp(argv[target_index], L"--exclude-drives") == 0 &&
             target_index + 1 < argc && exclude_drives[0] == L'\0' &&
             normalize_drive_list(argv[target_index + 1], exclude_drives)) {
+            target_index += 2;
+        } else if (_wcsicmp(argv[target_index], L"--config-source") == 0 &&
+            target_index + 1 < argc && config_source == NULL) {
+            config_source = argv[target_index + 1];
+            target_index += 2;
+        } else if (_wcsicmp(argv[target_index], L"--autoexec-source") == 0 &&
+            target_index + 1 < argc && autoexec_source == NULL) {
+            autoexec_source = argv[target_index + 1];
             target_index += 2;
         } else {
             fwprintf(stderr, L"ntdos64-run: invalid option\n");
@@ -442,14 +457,18 @@ int wmain(void)
             fwprintf(stderr, L"ntdos64-run: drive policy requires a BYOB DOS engine\n");
             result = 2;
         } else {
-            result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL);
+            if (config_source != NULL || autoexec_source != NULL) {
+                fwprintf(stderr, L"ntdos64-run: configuration sources require a BYOB DOS engine\n");
+                result = 2;
+            } else result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         }
     } else if (kind == IMAGE_KIND_DOS && engine != NULL) {
         int engine_argc = bochs == NULL ? 6 : 8;
         wchar_t **engine_argv = NULL;
         int index;
 
-        if (byob_profile == NULL || byob_root == NULL) {
+        if (byob_profile == NULL || byob_root == NULL ||
+            (config_source == NULL) != (autoexec_source == NULL)) {
             fwprintf(stderr, L"ntdos64-run: DOS engine requires --byob-profile and --byob-root\n");
             result = 3;
         } else if (byob_profile_validate_file_select(byob_profile, byob_root, &selection) != BYOB_PROFILE_ACCEPTED ||
@@ -485,7 +504,7 @@ int wmain(void)
                 }
                 (void)index;
                 result = run_process(engine_argc, engine_argv, byob_profile, byob_root,
-                    include_drives, exclude_drives, launch_plan);
+                    include_drives, exclude_drives, launch_plan, config_source, autoexec_source);
                 HeapFree(GetProcessHeap(), 0, engine_argv);
             }
         }

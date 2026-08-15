@@ -61,6 +61,11 @@
 > S5 remains active rather than claiming default-route replacement.  See the
 > [integration record](etc/research/t204-s5-configuration-image-path-integration-001.md).
 
+> **T204 S5 P3 progress:** CLI now admits only paired configuration source
+> options and carries them through a child-only environment; it does not read
+> source bytes.  Adapter installation-time copy/bind remains pending.  See
+> the [CLI admission record](etc/research/t204-s5-cli-paired-source-admission-001.md).
+
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
 > target is `54:0B`; see the [selector source map](etc/research/t203-s1-command-terminal-selector-source-map-001.md).
