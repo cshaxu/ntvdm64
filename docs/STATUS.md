@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T212 S2.** Its governing brief is the active
+> **Current effective packet: M0 T212 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T212 S2 -- CLI lifecycle policy/result ABI.**
+**Active: M0 T212 S4 -- cooperative cancellation admission map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -17,24 +17,26 @@
 
 > **T scope:** T212 adds CLI-owned lifecycle governance around the existing
 > one-shot engine. S1 mapped current engine/CLI result, cancellation, budget,
-> audit and cleanup ownership; S2 defines the first copied CLI-only policy and
-> result-classification boundary before any engine behavior is changed.
+> audit and cleanup ownership; S2 closed the copied CLI-only policy and
+> result-classification boundary. S3 integrated that already-closed boundary
+> into the native CLI without changing engine behavior. S4 maps the one
+> possible cooperative-cancellation boundary before any engine change.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T212 S2, Ordinary Mode. |
-| Admission And Approval | T212 S1 mapped all lifecycle owners and found no missing normal user-mode Win32 API; it admits one CLI-only copied policy/result ABI before any cooperative engine cancellation seam. |
-| Objective | Define and source-build a fixed-width CLI-owned lifecycle policy, terminal classification and in-memory audit/result record that makes every currently possible engine outcome explicit. |
-| Non-goals | No normal-completion claim, no reinterpretation of a COMMAND terminal record, no engine result ABI change, no in-flight cancellation, no BOP implementation, no trace-led work, and no Bochs/mantle change. |
-| Reference Baseline | T212 S1 map; T203/T206/T207 closures; current engine contract/run and native CLI result mapping. |
-| Files And ABI Surface | New project-owned fixed-width C ABI and focused test under `src/cli`/`tests`; native CLI may consume it without changing the engine contract. |
+| Identifier Mode | M0 T212 S4, Ordinary Mode. |
+| Admission And Approval | T212 S3 source-built native CLI policy/result integration and confirms current composition rejection is reported, not hidden. It admits source/ABI/failure mapping only before any in-process cancellation mechanism. |
+| Objective | Determine whether a fixed-width CLI-to-engine cooperative cancellation contract can preserve mantle cleanup, selector blindness and engine terminal ownership; also classify wall-time/resource-limit feasibility. |
+| Non-goals | No engine/machine-stage/Bochs modification, no cancellation implementation, no normal-completion claim, no raw process handles, no BOP implementation, no trace-led work, and no durable audit I/O. |
+| Reference Baseline | T212 S1/S2/S3 records, current engine/machine-stage/CLI sources, retained child-runner cancellation path and current composition closure. |
+| Files And ABI Surface | Read-only source/ABI map under `docs/etc/research`; no production source modification. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source-built MSVC x64 `/MT` policy/classification fixture, negative validation cases, governance and diff checks. |
-| Expected Markers | Every engine terminal is classified exactly once; no policy can manufacture ordinary completion or in-flight cancellation; audit data carries no host handle or guest state. |
-| Asset Needs | Existing engine contract header and modern x64 CLI fixture toolchain only; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record ABI ownership, terminal mapping, policy defaults, negative cases and deferred cooperative-cancellation boundary. |
-| Stop Conditions | Any need to change engine/machine-stage/Bochs ABI, to import a guest result, or to use raw process handles pauses S2 for re-admission. |
-| Exit Criteria | One versioned copied ABI and focused test prove validation, distinct classification and no-result-fabrication; the active native CLI has a clear next integration boundary. |
+| Verification | Complete owner/lifetime/failure map; explicit fixed-width candidate contract or a documented rejection; governance and diff checks. |
+| Expected Markers | Every cancellation/time/resource concern has an owner and available/deferred verdict; no raw handle or guest/selector semantics is proposed across the boundary. |
+| Asset Needs | Existing source and T212 evidence only; no firmware/media/device import or native trace. |
+| Reporting Requirements | Record the safe observation point, cleanup/result order, host API availability, rejected alternatives and the next implementation/admission boundary. |
+| Stop Conditions | Any candidate needs a callback, raw handle, guest/selector inspection, or a Bochs product-shell/device feature pauses S4 for owner direction. |
+| Exit Criteria | The map either proves one bounded cooperative contract ready for implementation or records why it is not admissible; wall-time/resource limits receive explicit dispositions. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, retained child cancellation, finite fixture timers, terminal observations, composition reset and T203/T206/T207 evidence. |
 

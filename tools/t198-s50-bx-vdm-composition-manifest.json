@@ -24,6 +24,10 @@
     "src/bx-vdm/bx_ntvdm_cmdinfo_v1.c",
     "src/bx-vdm/bx_ntvdm_cmd_set_info_service.c",
     "src/bx-vdm/bx_ntvdm_command_launch_plane_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_bootstrap_provider_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_launch_execution_provider_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_console_keyboard_provider_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_lifecycle_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_command_plane_v1.c",
     "src/bx-vdm/bx_ntvdm_command_package_facade_v1.c",
     "src/bx-vdm/bx_ntvdm_command_provider_v1.c",
@@ -34,6 +38,7 @@
     "src/bx-vdm/bx_ntvdm_system_plane_v1.c",
     "src/bx-vdm/bx_ntvdm_terminal_observation_v1.c",
     "src/bx-vdm/bx_ntvdm_normal_return_observation_v1.c",
+    "src/bx-vdm/bx_ntvdm_normal_terminal_sequence_observation_v1.c",
     "src/bx-vdm/bx_ntvdm_cpu_delta_abi.c",
     "src/bx-vdm/bx_ntvdm_cpu_result_v2.c",
     "src/bx-vdm/bx_ntvdm_cpu_state_abi.c",
@@ -68,6 +73,8 @@
     "src/bx-vdm/bx_ntvdm_initial_state_action_v1.c",
     "src/bx-vdm/bx_ntvdm_initial_state_catalog_v1.c",
     "src/bx-vdm/bx_ntvdm_startup_plan_abi.c",
+    "src/bx-vdm/bx_ntvdm_startup_configuration_provider_v1.c",
+    "src/bx-vdm/bx_ntvdm_startup_configuration_policy_v1.c",
     "src/bx-vdm/bx_ntvdm_multi_write_abi.c",
     "src/bx-vdm/bx_ntvdm_multi_write_transaction.c",
     "src/bx-vdm/bx_ntvdm_mouse_install1_mapping_service.c",
@@ -87,7 +94,6 @@
     "src/cli/byob_launch_plan_v2.c",
     "src/cli/byob_launch_declaration_v1.c",
     "src/cli/byob_profile.c",
-    "src/bx-vdm/bx_ntvdm_cmd_cli_profile_service.c",
     "src/bx-vdm/bx_ntvdm_command_profile_consumer_v1.c",
     "src/bx-vdm/bx_ntvdm_command_package_session_v1.c",
     "src/bx-vdm/bx_ntvdm_composition_runtime_v1.c",
@@ -117,18 +123,19 @@
     "src/bx-vdm/bx_ntvdm_dem_raw_media_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_readonly_namespace_failure_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_volume_provider_v1.c",
-    "src/bx-vdm/bx_ntvdm_host_volume_snapshot_v1.c"
-    ,"src/bx-vdm/bx_ntvdm_mutation_profile_v1.c"
-    ,"src/bx-vdm/bx_ntvdm_mutation_overlay_v1.c"
-    ,"src/bx-vdm/bx_ntvdm_dem_profile_consumer_v1.c"
-    ,"src/bx-vdm/bx_ntvdm_native_bop_composition_v1.c"
-    ,"src/bx-vdm/bx_ntvdm_xms_package_session_v1.c"
-    ,"src/bx-vdm/bx_ntvdm_dpmi_package_session_v1.c"
-    ,"src/bx-vdm/bx_ntvdm_xms_dpmi_plane_v1.c"
-    ,"src/bx-mantle/bx_ntvdm_a20_capability_v1.cc"
-    ,"src/bx-mantle/bx_ntvdm_extended_memory_v1.cc"
-    ,"src/bx-mantle/bx_ntvdm_machine_stage_v1.cc"
-    ,"src/bx-core/memory/misc_mem.cc"
+    "src/bx-vdm/bx_ntvdm_host_volume_snapshot_v1.c",
+    "src/bx-vdm/bx_ntvdm_session_host_context_v1.c",
+    "src/bx-vdm/bx_ntvdm_mutation_profile_v1.c",
+    "src/bx-vdm/bx_ntvdm_mutation_overlay_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_profile_consumer_v1.c",
+    "src/bx-vdm/bx_ntvdm_native_bop_composition_v1.c",
+    "src/bx-vdm/bx_ntvdm_xms_package_session_v1.c",
+    "src/bx-vdm/bx_ntvdm_dpmi_package_session_v1.c",
+    "src/bx-vdm/bx_ntvdm_xms_dpmi_plane_v1.c",
+    "src/bx-mantle/bx_ntvdm_a20_capability_v1.cc",
+    "src/bx-mantle/bx_ntvdm_extended_memory_v1.cc",
+    "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
+    "src/bx-core/memory/misc_mem.cc"
   ],
   "linkedCompositionRoot": "bx_ntvdm_composition_runtime_v1 (boot namespace + native XMS/DPMI sessions)",
   "compileOnlySources": [

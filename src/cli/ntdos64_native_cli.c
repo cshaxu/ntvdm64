@@ -3,6 +3,7 @@
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
 #include "byob_target_selection.h"
+#include "ntdos64_lifecycle_v1.h"
 
 #include <stdio.h>
 #include <wchar.h>
@@ -22,16 +23,16 @@ static int copied_text(uint16_t *out, uint32_t maximum, const wchar_t *text,
     return index != 0u;
 }
 
-static int result_exit(const struct bx_ntvdm_engine_result_v1 *result)
+static int result_exit(const struct ntdos64_lifecycle_v1_audit *audit)
 {
-    if (!result || !bx_ntvdm_engine_result_v1_valid(result)) return 1;
-    if (result->terminal_kind == BX_NTVDM_ENGINE_TERMINAL_V1_CONTROLLED_GUEST_TERMINAL ||
-        result->terminal_kind == BX_NTVDM_ENGINE_TERMINAL_V1_ORDINARY_GUEST_COMPLETION)
+    if (!audit || !ntdos64_lifecycle_v1_audit_valid(audit)) return 1;
+    if (audit->presentation == NTDOS64_LIFECYCLE_V1_PRESENTATION_CONTROLLED_GUEST_TERMINAL ||
+        audit->presentation == NTDOS64_LIFECYCLE_V1_PRESENTATION_ORDINARY_GUEST_COMPLETION)
         return 0;
-    if (result->terminal_kind == BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_REQUEST ||
-        result->terminal_kind == BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION)
+    if (audit->presentation == NTDOS64_LIFECYCLE_V1_PRESENTATION_REJECTED_ENGINE_REQUEST ||
+        audit->presentation == NTDOS64_LIFECYCLE_V1_PRESENTATION_REJECTED_COMPOSITION)
         return 3;
-    if (result->terminal_kind == BX_NTVDM_ENGINE_TERMINAL_V1_EXECUTION_BUDGET) return 4;
+    if (audit->presentation == NTDOS64_LIFECYCLE_V1_PRESENTATION_EXECUTION_BUDGET) return 4;
     return 1;
 }
 
@@ -47,6 +48,8 @@ int wmain(int argc, wchar_t **argv)
     byob_launch_plan_v2 launch;
     struct bx_ntvdm_engine_request_v1 request;
     struct bx_ntvdm_engine_result_v1 result;
+    struct ntdos64_lifecycle_v1_policy lifecycle_policy;
+    struct ntdos64_lifecycle_v1_audit lifecycle_audit;
 
     if (argc < 6) goto usage;
     while (index < argc && wcsncmp(argv[index], L"--", 2u) == 0) {
@@ -75,6 +78,9 @@ int wmain(int argc, wchar_t **argv)
         !byob_launch_plan_v2_to_environment(&launch, launch_text)) {
         fwprintf(stderr, L"ntdos64-native: BYOB admission failed\n"); return 3;
     }
+    ntdos64_lifecycle_v1_policy_clear(&lifecycle_policy);
+    lifecycle_policy.instruction_tick_budget = UINT64_C(1000000);
+    if (!ntdos64_lifecycle_v1_policy_valid(&lifecycle_policy)) return 3;
     bx_ntvdm_engine_request_v1_clear(&request);
     if (!copied_text(request.profile_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
             profile, &request.profile_descriptor_chars) ||
@@ -84,7 +90,7 @@ int wmain(int argc, wchar_t **argv)
             launch_text, &request.launch_descriptor_chars)) return 3;
     request.admitted_drive_mask = include_mask;
     request.excluded_drive_mask = exclude_mask;
-    request.instruction_tick_budget = UINT64_C(1000000);
+    request.instruction_tick_budget = lifecycle_policy.instruction_tick_budget;
     if (!bx_ntvdm_engine_request_v1_valid(&request)) return 3;
     if (validate_only) {
         wprintf(L"ntdos64-native: request include=%08x exclude=%08x\n",
@@ -93,8 +99,12 @@ int wmain(int argc, wchar_t **argv)
     }
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         !bx_ntvdm_engine_result_v1_valid(&result)) return 1;
-    wprintf(L"ntdos64-native: terminal=%u detail=%u\n", result.terminal_kind, result.detail_code);
-    return result_exit(&result);
+    if (!ntdos64_lifecycle_v1_classify(&lifecycle_policy, &result,
+            &lifecycle_audit) || !ntdos64_lifecycle_v1_audit_valid(&lifecycle_audit)) return 1;
+    wprintf(L"ntdos64-native: terminal=%u detail=%u lifecycle=%u presentation=%u cancellation=%u\n",
+        result.terminal_kind, result.detail_code, lifecycle_audit.lifecycle_terminal,
+        lifecycle_audit.presentation, lifecycle_audit.cancellation_request);
+    return result_exit(&lifecycle_audit);
 usage:
     fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
     return 2;
