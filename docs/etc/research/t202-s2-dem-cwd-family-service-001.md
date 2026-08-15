@@ -41,6 +41,12 @@ The complete DEM package fixture also compiled, linked and ran at
 `artifacts/build/t202-s2-dem-cwd-family-compile-r1`; it includes the new
 service in the manifest closure.
 
+The bound `dem-package` fixture at
+`artifacts/build/t202-s2-dem-cwd-family-r3` installs the shared overlay
+profile into the DEM session before dispatch. Its generated
+`t198-s16-bx-vdm-dem-package.exe` returned zero after exercising the new
+service through the package session and boot-plane checked read/write bridge.
+
 ## Limits and follow-up
 
 This replaces only the current-directory/default-drive three-service family.

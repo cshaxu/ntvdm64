@@ -112,6 +112,7 @@ static int dispatch(uint8_t service, bx_ntvdm_cpu_result_v2 *result)
     bx_ntvdm_host_drive_snapshot_v1 drives;
     bx_ntvdm_host_volume_snapshot_v1 volumes;
     bx_ntvdm_host_volume_record_v1 volume_records[26] = {0};
+    bx_ntvdm_mutation_profile_v1 mutation_profile;
     bx_ntvdm_instruction_window_v1 window;
     bx_ntvdm_bop_ingress_v1 ingress;
     bx_ntvdm_bop_provider_selection_v1 selection;
@@ -130,9 +131,15 @@ static int dispatch(uint8_t service, bx_ntvdm_cpu_result_v2 *result)
     volume_records[0].total_clusters = 200u;
     memcpy(volume_records[0].label, L"VOL", sizeof(L"VOL"));
     memcpy(volume_records[0].file_system, L"FAT", sizeof(L"FAT"));
+    bx_ntvdm_mutation_profile_v1_initialize(&mutation_profile,
+        BX_NTVDM_MUTATION_MODE_V1_OVERLAY);
     if (!bx_ntvdm_boot_namespace_plane_v1_initialize(&namespace_plane,
             &ntdos, &command, &target, 0, &profile) ||
         !bx_ntvdm_dem_package_session_v1_initialize(&session, &namespace_plane) ||
+        !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        !bx_ntvdm_dem_package_session_v1_set_mutation_profile(&session,
+            &mutation_profile) ||
         !bx_ntvdm_host_drive_snapshot_v1_apply(7u, drive_types, 0u, 0u, &drives) ||
         !bx_ntvdm_host_volume_snapshot_v1_apply(&drives, volume_records, &volumes) ||
         !bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&session, &drives) ||
