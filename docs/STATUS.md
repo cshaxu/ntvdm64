@@ -166,11 +166,13 @@
 > image-loader handle family; S14 may regress that family but may not run a
 > trace or add a leaf handler. See the [package map](etc/research/t217-s13-dos-loader-exec-owner-package-map-001.md).
 
-> **T217 S14 P1 progress:** the full x64 composition closure required an
-> explicit 8 MiB host stack reserve because its existing bounded transaction
-> buffers nest beyond the MSVC default 1 MiB reserve. The selector-blind build
-> seam now passes; it neither closes the `50:42` positive token route nor
-> authorizes a trace or leaf handler. See the [capacity result](etc/research/t217-s14-composition-stack-capacity-result-001.md).
+> **T217 S14 P1 closure:** the full x64 composition closure uses an explicit
+> 8 MiB host stack reserve because its existing bounded transaction buffers
+> nest beyond the MSVC default 1 MiB reserve. A dedicated source-built
+> loader-family regression now proves one declared-image token across
+> `50:12 → 50:00 → 50:42 → 50:16 → 50:02`, including original ZF/seek ABI and
+> forged-token refusal. It neither claims DOS EXEC/COMMAND completion nor runs
+> a native trace. See the [family result](etc/research/t217-s14-dem-loader-family-result-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
