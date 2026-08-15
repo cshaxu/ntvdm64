@@ -5,7 +5,7 @@
 > **Current effective packet: M0 T206 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T206 S1 -- CLI lifecycle governance admission map.**
+**Active: M0 T206 S1 -- one-shot normal terminal source/ABI map.**
 
 > **T205 closed:** its current-profile XMS boundary is recorded in
 > [history](history/m0-t205-closure-20260815.md). The table below is the sole
@@ -13,29 +13,29 @@
 
 ## Active Packet
 
-> **T scope:** T206 is the queue-selected Modern CLI lifecycle governance
-> package.  It adds explicit CLI-owned cancellation, time/resource budgets,
-> audit logging, result presentation and cleanup only around the established
-> one-shot engine boundary. S1 maps the current engine/CLI ownership and
-> required fixed-width contracts before implementing any lifecycle behavior.
+> **T scope:** T206 recovers a truthful one-shot normal guest terminal-result
+> boundary before the queued CLI lifecycle-governance package may begin. S1
+> maps the original COMMAND terminal path, current engine terminal values,
+> CLI exit mapping, ownership and failures before any terminal behavior is
+> implemented.
 
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T206 S1, Ordinary Mode. |
-| Admission And Approval | Owner's continuing CLI NTVDM objective, prior authorization to select the next ROI-ranked package, and Queue order 1. |
-| Objective | Produce the source/ABI/failure map required to admit a CLI-owned lifecycle contract around one engine run: cancellation, time/resource budget, audit result, presentation and cleanup. |
-| Non-goals | No interactive console, new BOP provider, guest lifecycle reconstruction, host service mutation, Bochs feature/device admission, ambient environment transport or native trace. |
-| Reference Baseline | Current direct CLI-to-engine handoff, T200 engine/terminal evidence, T201 profile ABI, and Queue's Modern CLI lifecycle governance admission evidence. |
-| Files And ABI Surface | Read-only inspection and an evidence record only. Later S work may add a versioned fixed-width CLI lifecycle request/result contract outside bx-vdm/Bochs private state. |
+| Admission And Approval | Owner's continuing CLI NTVDM objective and prior authorization to select the next dependency/ROI-ranked package. The queue's lifecycle package is deliberately not admitted because its normal-terminal prerequisite is not yet proven. |
+| Objective | Produce the complete source/ABI/failure map required to recover a truthful normal guest terminal result from OpenNT COMMAND through bx-vdm, engine and CLI. |
+| Non-goals | No cancellation or audit-log feature, interactive console, new unrelated BOP provider, host service mutation, Bochs feature/device admission, ambient environment transport or trace-selected endpoint patch. |
+| Reference Baseline | Current direct CLI-to-engine handoff, T200/T203 terminal evidence, COMMAND `54:01/54:0B` source, and the queue lifecycle package's normal-terminal prerequisite. |
+| Files And ABI Surface | Read-only inspection and an evidence record only. Later S work may add one versioned fixed-width terminal result contract between bx-vdm, mantle engine and CLI; it cannot expose CPU or guest pointers. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect CLI, engine run/result, teardown and current terminal source paths; map every input/owner/error path; governance and diff checks. |
-| Expected Markers | One owning CLI lifecycle boundary, no hidden environment/fixture transport, explicit cancellation/budget/result/cleanup dispositions and a later S order. |
+| Verification | Inspect COMMAND normal/re-entry terminal paths, current adapter result production, engine terminal mapping and CLI exit logic; map every input/owner/error path; governance and diff checks. |
+| Expected Markers | One source-backed normal-terminal owner, no fixture-only result substitution, exact unreachable/blocked edges, and a later S order for one terminal result ABI. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record source paths/hashes, input/output ownership, failure/cleanup map, unavailable prerequisites and a cohesive S sequence. |
-| Stop Conditions | Any need to alter BOP semantics, guest DOS/COMMAND behavior, Bochs lifecycle, host system state, or invoke an unproven engine/trace pauses S1 for re-admission. |
-| Exit Criteria | A reviewable whole-package CLI lifecycle admission plan establishes the single ABI and tests needed before implementation begins. |
+| Reporting Requirements | Record source paths/hashes, caller/return ownership, current engine/CLI loss points, failure disposition, unavailable prerequisites and a cohesive S sequence. |
+| Stop Conditions | Any need to alter unrelated BOP semantics, guest DOS/COMMAND behavior, Bochs lifecycle, host system state, or use a trace as the basis of an endpoint patch pauses S1 for re-admission. |
+| Exit Criteria | A reviewable T206 plan identifies the one truthful terminal-result ABI and all source-backed requirements needed before implementation begins. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect CLI option admission, cancellation, timeout/budget, result transport, audit logging, cleanup, process exit mapping, repeated invocation and Ctrl+C/console ownership. |
+| Similar-Issue Sweep | Inspect COMMAND bootstrap, `54:01`, `54:0B`, normal return/re-entry, exhausted-plan stop, DOS exit code, adapter typed result, engine terminal map, CLI process exit, cleanup and repeated runs. |
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
