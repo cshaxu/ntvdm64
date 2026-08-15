@@ -88,6 +88,7 @@ static int startup_configuration_initialize(
             profile, BX_NTVDM_STARTUP_CONFIGURATION_SOURCE_V1_CONTAINED_FIXTURE)) return 0;
     memcpy(input->system_root, "C:\\Windows", 11u); input->system_root_bytes = 10u;
     input->country_id = 1u; input->oem_code_page = 437u;
+    input->shell_capability = BX_NTVDM_STARTUP_CONFIGURATION_SHELL_V1_ORIGINAL_HOST;
     memcpy(input->config, "files=20\r\n", 10u); input->config_bytes = 10u;
     memcpy(input->autoexec, "prompt=$p$g\r\n", 13u); input->autoexec_bytes = 13u;
     return bx_ntvdm_startup_configuration_input_v1_valid(input);

@@ -68,6 +68,7 @@ int main(void)
     startup_input.system_root_bytes = 10u;
     startup_input.country_id = 1u;
     startup_input.oem_code_page = 437u;
+    startup_input.shell_capability = BX_NTVDM_STARTUP_CONFIGURATION_SHELL_V1_ORIGINAL_HOST;
     memcpy(startup_input.config, "FILES=20\r\n", 10u);
     startup_input.config_bytes = 10u;
     if (!bx_ntvdm_command_profile_consumer_v1_register_class(&startup_profile,

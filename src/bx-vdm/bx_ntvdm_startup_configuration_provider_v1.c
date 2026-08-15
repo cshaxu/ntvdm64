@@ -116,7 +116,12 @@ static int append_config_shell(bx_ntvdm_startup_configuration_provider_v1 *provi
         input->country_id, input->oem_code_page, (int)input->system_root_bytes, input->system_root);
     if (count < 0 || (uint32_t)count >= sizeof(country) ||
         !append(provider->config_image, sizeof(provider->config_image), &used,
-            (const uint8_t *)country, (uint32_t)count) ||
+            (const uint8_t *)country, (uint32_t)count)) return 0;
+    if (input->shell_capability == BX_NTVDM_STARTUP_CONFIGURATION_SHELL_V1_DECLARED_GUEST) {
+        provider->config_image_bytes = used;
+        return 1;
+    }
+    if (input->shell_capability != BX_NTVDM_STARTUP_CONFIGURATION_SHELL_V1_ORIGINAL_HOST ||
         !append_text(provider->config_image, sizeof(provider->config_image), &used, "shell=") ||
         !append(provider->config_image, sizeof(provider->config_image), &used,
             input->system_root, input->system_root_bytes) ||
@@ -153,6 +158,8 @@ int bx_ntvdm_startup_configuration_input_v1_valid(
         input->config_bytes != 0u && input->config_bytes <= sizeof(input->config) &&
         input->autoexec_bytes <= sizeof(input->autoexec) && input->country_id != 0u &&
         input->oem_code_page != 0u &&
+        (input->shell_capability == BX_NTVDM_STARTUP_CONFIGURATION_SHELL_V1_ORIGINAL_HOST ||
+         input->shell_capability == BX_NTVDM_STARTUP_CONFIGURATION_SHELL_V1_DECLARED_GUEST) &&
         (index = input->system_root_bytes, input->system_root[index] == 0u);
 }
 

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S12.** Its governing brief is the active
+> **Current effective packet: M0 T217 S13.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S12 -- COMMAND configuration shell capability seam.**
+**Active: M0 T217 S13 -- DOS loader/EXEC owner-package map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -30,19 +30,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S12, Ordinary Mode. |
-| Admission And Approval | S11 maps S10's shape to OpenNT `cmdconf.c`'s generated `SHELL=%SystemRoot%\\System32\\command.com`; the required historical host command file is absent on this modern host. The owner-approved CLI product may use the original SYSINIT default only under an explicit copied absent-capability disposition. |
-| Objective | Add a single installation-time COMMAND shell-capability disposition to the existing complete configuration provider: preserve the original generated shell when available; otherwise omit only that unavailable override so original SYSINIT opens the declared guest `\\COMMAND.COM`. |
-| Non-goals | No BOP leaf handler, DOS/BIOS patch, raw pathname observation, host file creation/modification, host-system modification, profile expansion, Bochs/mantle change, or COMMAND-run claim. |
-| Reference Baseline | T217 S3–S11; OpenNT `cmdconf.c`, `sysconf.asm`, `sysinit1.asm`, existing T204/T211 configuration provider and declared guest command namespace. |
-| Files And ABI Surface | Existing startup-configuration input/policy/provider, its copied CLI source admission, whole-provider fixture and native normal-startup fixture. The field is copied installation-time capability data; no BOP ABI changes. |
+| Identifier Mode | M0 T217 S13, Ordinary Mode. |
+| Admission And Approval | S12's source-derived shell capability seam crosses the former `50:3D` terminal and reaches `50:36`. The ordinal Open observer is explicitly not a final COMMAND identity proof. The next work maps the whole reached DOS loader/EXEC owner package before considering any endpoint. |
+| Objective | Produce a complete source/ABI/failure/disposition map for the DOS loader/EXEC package containing the reached `50:36`, its callers, dependent DEM handle/file/PSP/EXEC paths and all related selector members. |
+| Non-goals | No `50:36` leaf implementation, trace-led patch, DOS/BIOS patch, host mutation, profile expansion, Bochs/mantle change or COMMAND-run claim. |
+| Reference Baseline | T217 S3–S12; OpenNT DOS loader/EXEC sources, `nt_bop` selector map, DEM package map and current provider registry. |
+| Files And ABI Surface | Evidence, Status and owner-package inventory only. No runtime behavior or ABI change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused x64 `/MT` provider regression proves both dispositions, CONFIG/AUTOEXEC/country/merge preservation and no generated shell in absent mode; one fresh native normal-startup integration proves the declared command Open no longer takes host fallback. Governance and diff checks pass. |
-| Expected Markers | Source-backed continued normal startup after the command Open, or an explicitly classified next owner boundary; no fabricated success. |
+| Verification | Every related selector/service has an original owner, caller, ABI, capability disposition and failure rule; distinguish direct source proof from inference. Governance and diff checks pass. |
+| Expected Markers | A coherent implementation order for the whole loader/EXEC package, not a next-trace patch. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record host-command availability, both source-derived configuration outputs, fixture/native result and recovery-rung disposition; distinguish direct evidence from inference. |
-| Stop Conditions | Any BOP leaf implementation, DOS/BIOS patch, host mutation, guest binary patch, profile expansion, Bochs/mantle change or raw pathname observation pauses S12 for re-admission. |
-| Exit Criteria | The configuration provider selects the original host shell only when the capability exists and otherwise reaches the declared guest command Open through original SYSINIT. |
+| Reporting Requirements | Record all member selectors, original source paths, ABI/failure paths, provider availability and required package-wide regressions; distinguish direct evidence from inference. |
+| Stop Conditions | Any selector-specific implementation, trace-led patch, DOS/BIOS patch, host mutation, guest binary patch, profile expansion or Bochs/mantle change pauses S13 for re-admission. |
+| Exit Criteria | The loader/EXEC package has a source-first recovery plan and a bounded first implementation S. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -152,6 +152,13 @@
 > host system directories; no missing Win32 API is involved. S12 admits one
 > explicit COMMAND configuration capability seam that retains the original
 > override only when it is actually available. See the [disposition](etc/research/t217-s11-command-shell-capability-disposition-001.md).
+
+> **T217 S12 P1 closure:** the copied two-state COMMAND shell capability
+> preserves OpenNT's host shell only when present and otherwise omits that
+> unavailable override. Focused x64 closures pass; the native run crosses the
+> former `50:3D` terminal and reaches `50:36`. The ordinal Open observer is
+> not a final command-load identity claim. S13 maps the full DOS loader/EXEC
+> package before any new selector implementation. See the [result](etc/research/t217-s12-command-shell-capability-result-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS

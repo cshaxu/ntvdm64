@@ -32,6 +32,7 @@ static int prepare_input(bx_ntvdm_startup_configuration_input_v1 *input,
     input->system_root_bytes = 10u;
     input->country_id = 1u;
     input->oem_code_page = 437u;
+    input->shell_capability = BX_NTVDM_STARTUP_CONFIGURATION_SHELL_V1_ORIGINAL_HOST;
     memcpy(input->config, config, config_bytes);
     memcpy(input->autoexec, autoexec, autoexec_bytes);
     input->config_bytes = (uint32_t)config_bytes;
@@ -63,6 +64,13 @@ int main(void)
         !bx_ntvdm_startup_configuration_provider_v1_build(&provider, &input) ||
         provider.result != BX_NTVDM_STARTUP_CONFIGURATION_RESULT_V1_CONSOLE_DEFERRED ||
         !bx_ntvdm_startup_configuration_provider_v1_valid(&provider)) return 2;
+
+    if (!prepare_input(&input, BX_NTVDM_MUTATION_MODE_V1_DIRECT, "files=20\r\n", "")) return 9;
+    input.shell_capability = BX_NTVDM_STARTUP_CONFIGURATION_SHELL_V1_DECLARED_GUEST;
+    if (!bx_ntvdm_startup_configuration_provider_v1_build(&provider, &input) ||
+        provider.result != BX_NTVDM_STARTUP_CONFIGURATION_RESULT_V1_READY ||
+        !text_equal(provider.config_image, provider.config_image_bytes,
+            "files=20\r\ncountry=001,437,C:\\Windows\\system32\\country.sys\r\n")) return 10;
 
     if (!prepare_input(&input, BX_NTVDM_MUTATION_MODE_V1_OVERLAY, "x", "") ) return 3;
     input.config_bytes = 0u;
