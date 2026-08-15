@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_volume_provider_v1.h"
 
 #define BX_NTVDM_DEM_GET_DRIVE_FREE_SPACE 0x0eu
+#define BX_NTVDM_DEM_ERROR_INVALID_DRIVE 15u
 
 static int selected(const bx_ntvdm_bop_ingress_v1 *ingress,
     const bx_ntvdm_bop_provider_selection_v1 *selection,
@@ -77,8 +78,16 @@ int bx_ntvdm_dem_volume_provider_v1_dispatch(
             cpu_before, window) || ingress->service != BX_NTVDM_DEM_GET_DRIVE_FREE_SPACE)
         return 0;
     drive = (uint8_t)cpu_before->eax;
+    /* demGetDriveFreeSpace calls demClientError when its host volume query
+     * fails.  An excluded or absent snapshot drive corresponds to the
+     * ordinary ERROR_INVALID_DRIVE path, not the package's generic access
+     * refusal.  The snapshot remains the sole host-observation source. */
     if (drive >= 26u || (volumes->drives.admitted_mask & (UINT32_C(1) << drive)) == 0u ||
-        (record = &volumes->volumes[drive])->available == 0u) return 0;
+        (record = &volumes->volumes[drive])->available == 0u)
+        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
+                BX_NTVDM_DEM_ERROR_INVALID_DRIVE) &&
+            bx_ntvdm_cpu_result_v2_set_cf(result, 1);
     if (!bx_ntvdm_dem_volume_provider_v1_dos_geometry(record, &bytes_per_sector,
             &sectors_per_cluster, &total_clusters, &free_clusters)) return 0;
     return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&

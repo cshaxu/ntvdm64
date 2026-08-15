@@ -3,6 +3,7 @@
 
 #define BX_NTVDM_DEM_DPB_BYTES 35u
 #define BX_NTVDM_DEM_DPB_DRIVE_ADDR UINT32_C(0x04bc04bc)
+#define BX_NTVDM_DEM_ERROR_INVALID_DRIVE 15u
 
 static int selected(const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu, const bx_ntvdm_instruction_window_v1 *window)
@@ -87,4 +88,25 @@ int bx_ntvdm_dem_full_dpb_service_v1_prepare(
         !bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 0)) return 0;
     return bx_ntvdm_multi_write_transaction_v1_preflight(transaction,
         UINT64_C(0x100000), transaction->writes.payload_bytes);
+}
+
+int bx_ntvdm_dem_full_dpb_service_v1_snapshot_failure(
+    const bx_ntvdm_host_volume_snapshot_v1 *volumes,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    uint8_t drive;
+    if (volumes == 0 || event == 0 || cpu == 0 || window == 0 || result == 0 ||
+        !bx_ntvdm_host_volume_snapshot_v1_valid(volumes) ||
+        !selected(event, cpu, window)) return 0;
+    drive = (uint8_t)cpu->eax;
+    if (drive < 26u && (volumes->drives.admitted_mask &
+            (UINT32_C(1) << drive)) != 0u && volumes->volumes[drive].available != 0u)
+        return 0;
+    return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
+        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
+            BX_NTVDM_DEM_ERROR_INVALID_DRIVE) &&
+        bx_ntvdm_cpu_result_v2_set_cf(result, 1);
 }

@@ -449,23 +449,32 @@ int main(void)
         result.cpu_delta.gpr16_values[0] != 3u ||
         result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         result.eflags_values != 0u) return 207;
-    /* GSET failures remain inside the immutable snapshot boundary.  An
-     * unadmitted drive must neither query a live host volume nor alter its
-     * caller buffer; it reaches the package's explicit terminal result. */
+    /* All volume-observation services use demClientError's direct host-query
+     * failure shape.  An unadmitted drive must neither query a live host
+     * volume nor alter its caller buffer, and reports ERROR_INVALID_DRIVE. */
     dispatch_ax = 25u;
     if (!dispatch(0x0eu, &result) ||
         result.cpu_delta.gpr16_write_mask != 1u ||
-        result.cpu_delta.gpr16_values[0] != 5u ||
+        result.cpu_delta.gpr16_values[0] != 15u ||
         result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) return 216;
     dispatch_ax = 0u; dispatch_bx = 25u;
     memset(ram + 2u, 0xa5, 23u);
     if (!dispatch(0x10u, &result) ||
         result.cpu_delta.gpr16_write_mask != 1u ||
-        result.cpu_delta.gpr16_values[0] != 5u ||
+        result.cpu_delta.gpr16_values[0] != 15u ||
         result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         ram[2u] != 0xa5u || ram[24u] != 0xa5u) return 217;
+    dispatch_ax = 25u; dispatch_di = 0x200u;
+    memset(ram + dispatch_di, 0xa5, 35u);
+    if (!dispatch(0x25u, &result) ||
+        result.cpu_delta.gpr16_write_mask != 1u ||
+        result.cpu_delta.gpr16_values[0] != 15u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        ram[dispatch_di] != 0xa5u || ram[dispatch_di + 34u] != 0xa5u) return 220;
+    dispatch_ax = 0u; dispatch_di = 0u;
     dispatch_bx = 0u;
     /* demSetDate and demSetTime set AL only on failure.  The contained CLI
      * profile must retain that register contract without writing the ambient

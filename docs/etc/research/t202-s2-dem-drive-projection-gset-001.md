@@ -23,8 +23,28 @@ MSVC x64 `/MT` probe `t202-s2-dem-drive-provider-r1` passed without host I/O
 or guest execution. It covers a contiguous C:/D:/E: projection and a C:/E:
 projection with D: absent; both return the DOS bound 5 in AX with CF clear.
 
+## Volume-observation failure reconciliation
+
+The same immutable snapshot now supplies one source-shaped failure group for
+`50:0E demGetDriveFreeSpace`, `50:10 demGSetMediaID` when `AL=0`, and
+`50:25 demGetDPB`.  In `demgset.c`, each successful host-volume path calls
+`demClientError` when its underlying query fails.  `demerror.c` preserves a
+normal Win32 error in AX and sets CF; a drive excluded by CLI admission is
+therefore represented as `ERROR_INVALID_DRIVE` (15), not the unrelated
+generic `ERROR_ACCESS_DENIED` (5) provider fence.
+
+The source-specific `50:10 AL!=0` branch remains unchanged: OpenNT does not
+support setting media information and sets CF without assigning AX.  No host
+volume write is admitted.
+
+The source-built `t202-s2-volume-failure-r1` package fixture passed under
+MSVC x64 `/MT`.  It proves that an excluded drive yields AX=15/CF=1 for all
+three observation services; media and DPB destination bytes remain unchanged.
+The fixture uses an immutable in-process snapshot and performs no host I/O or
+guest execution.
+
 ## Follow-up
 
 Continue the same immutable GSET snapshot package: volume/DPB/free-space
-queries must retain excluded-drive failure and never rescan an ambient host
-drive. File/handle/FCB/search remains outside this subpackage.
+queries must never rescan an ambient host drive. File/handle/FCB/search
+remains outside this subpackage.

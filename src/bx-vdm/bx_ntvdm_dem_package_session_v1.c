@@ -71,9 +71,11 @@ int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,
   if(bx_ntvdm_dem_error_lock_plane_v1_dispatch(&s->error_lock,i,p,e,c,w,r))return terminal_or_complete(i,p,&route,e,c,w,r);
   if(bx_ntvdm_dem_gset_plane_v1_dispatch(&s->gset,i,p,e,c,w,r))return terminal_or_complete(i,p,&route,e,c,w,r);
   if(s->gset.has_volume_snapshot&&bx_ntvdm_dem_media_id_service_v1_prepare(&s->gset.volume_snapshot,e,c,w,&tx,payload)){if(!write_tx(s,&tx,payload))return 0;*r=tx.result;return 1;}
+  if(s->gset.has_volume_snapshot&&bx_ntvdm_dem_media_id_service_v1_snapshot_failure(&s->gset.volume_snapshot,e,c,w,r))return 1;
   if(bx_ntvdm_dem_media_id_service_v1_set_failure(e,c,w,r))return 1;
   if(bx_ntvdm_dem_computer_name_service_v1_prepare(e,c,w,&tx,payload)){if(!write_tx(s,&tx,payload))return 0;*r=tx.result;return 1;}
   if(s->gset.has_volume_snapshot&&bx_ntvdm_dem_full_dpb_service_v1_prepare(&s->gset.volume_snapshot,e,c,w,&tx,payload)){if(!write_tx(s,&tx,payload))return 0;*r=tx.result;return 1;}
+  if(s->gset.has_volume_snapshot&&bx_ntvdm_dem_full_dpb_service_v1_snapshot_failure(&s->gset.volume_snapshot,e,c,w,r))return 1;
   if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_ioctl_metadata_provider_v1_dispatch(i,p,&plane,&s->gset.drive_snapshot,e,c,r))return terminal_or_complete(i,p,&route,e,c,w,r);
   if(bx_ntvdm_dem_raw_media_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
   if(s->gset.has_drive_snapshot&&bx_ntvdm_dem_boot_drive_service_v2_dispatch(&s->gset.drive_snapshot,s->has_boot_drive?s->boot_drive_index:UINT32_MAX,e,c,w,&mem))return memory_result(&mem,r);

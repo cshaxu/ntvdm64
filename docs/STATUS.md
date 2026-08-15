@@ -83,6 +83,11 @@
 > letters rather than hiding an admitted later drive behind an excluded gap;
 > see the [GSET projection evidence](etc/research/t202-s2-dem-drive-projection-gset-001.md).
 
+> **T202 S2 progress:** the GSET/DPB volume-observation group now maps an
+> excluded drive to OpenNT's `demClientError`-shaped `AX=15, CF=1`, while
+> preserving the original media-set CF-only branch; see the same
+> [GSET evidence](etc/research/t202-s2-dem-drive-projection-gset-001.md).
+
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition
 > lifecycle, repaired its strict C11 source closure, and recorded the separate
