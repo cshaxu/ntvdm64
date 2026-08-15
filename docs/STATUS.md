@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T211 S5.** Its governing brief is the active
+> **Current effective packet: M0 T212 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T211 S5 -- COMMAND lifecycle component recovery.**
+**Active: M0 T212 S1 -- CLI lifecycle governance source/ABI map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -15,34 +15,27 @@
 
 ## Active Packet
 
-> **T scope:** T211 recovers the complete COMMAND owner package by original
-> component boundary. S1 mapped all services; S2, S3 and S4 closed the
-> bootstrap/environment/config, launch/execution and console/keyboard
-> components. S5 recovers the final lifecycle component.
+> **T scope:** T212 adds CLI-owned lifecycle governance around the existing
+> one-shot engine. S1 maps current engine/CLI result, cancellation, budget,
+> audit and cleanup ownership before any public lifecycle behavior is changed.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T211 S5, Ordinary Mode. |
-| Admission And Approval | T211 S1 assigns original `54:00/03/0B` to one lifecycle component; T203, T206 and T207 provide bounded engine/terminal evidence but do not close COMMAND lifecycle. |
-| Objective | Recover one coherent COMMAND lifecycle provider disposition for VDM exit, original save-world no-op and return-exit-code without replacing the engine or exposing private NT broker semantics. |
-| Non-goals | No `TerminateVDM`/`ExitProcess` substitution, engine/CLI lifecycle rewrite, ambient broker, trace-led work, Bochs change, or fabricated normal process completion. |
-| Reference Baseline | T211 S1 map, original `cmdexit.c`/`cmdmisc.c`, `cmdsvc.h`, T203/T206/T207 terminal and engine evidence, existing CLI profile and terminal helpers. |
-| Files And ABI Surface | `src/bx-vdm` COMMAND lifecycle provider/facade integration and focused tests only; fixed-width terminal and guest/machine contracts remain unchanged. |
+| Identifier Mode | M0 T212 S1, Ordinary Mode. |
+| Admission And Approval | T211 closed COMMAND BOP composition but T203/T206/T207 prove that no normal engine/CLI completion is currently admitted. Queue-head CLI governance is selected as the next medium package. |
+| Objective | Produce one source/ABI/failure map for CLI cancellation, budgets, audit, result presentation and cleanup around the existing engine; identify the minimum coherent lifecycle provider boundary. |
+| Non-goals | No normal-completion claim, no reinterpretation of a COMMAND terminal record, no engine result ABI change, no BOP implementation, no trace-led work, and no Bochs change. |
+| Reference Baseline | T203/T206/T207 closures, current `bx_ntvdm_engine_run_v1`, CLI runner and capability roadmap governance proposal. |
+| Files And ABI Surface | Read-only source/ABI map and focused fixture plan under `docs/etc/research`; no production source modification in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One source-built MSVC x64 `/MT` component fixture covers all `00/03/0B` outcomes, invalid context and terminal-result boundaries; one composition regression; governance and diff checks. |
-| Expected Markers | One lifecycle provider owns every member; `03` retains original no-op and `00/0B` use checked typed results with no host-process termination. |
+| Verification | A complete current-state source/ABI/failure table and fixed-width candidate-boundary diagram; governance and diff checks. |
+| Expected Markers | Every lifecycle concern has one owner, an available/deferred verdict and no implicit conversion of controlled stop into normal completion. |
 | Asset Needs | Existing repository source and current engine/CLI boundary evidence only; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record source/ABI/failure map, provider state, member routing, engine ownership, migrated/deleted workarounds, regression and limitations. |
-| Stop Conditions | Any need to introduce a new engine result ABI, invoke host-process termination, change Bochs/mantle, or make endpoint-only trace fixes pauses S5 for re-admission. |
-| Exit Criteria | The complete lifecycle component passes one family regression and proves it does not claim engine/CLI closure; later native trace only observes the package result. |
+| Reporting Requirements | Record current producers/consumers, lifetime/cleanup order, host API availability, negative cases and the next S admission boundary. |
+| Stop Conditions | Any required public lifecycle semantics not supported by source evidence, or any need to alter engine/BOP/Bochs behavior, pauses S1 for re-admission. |
+| Exit Criteria | The map covers every named lifecycle concern, identifies a coherent next implementation S, and leaves no outcome implied by a trace or package-local record. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | `cmdexit.c`, `cmdmisc.c`, `cmddisp.c`, `cmdsvc.h`, COMMAND package session/facade, T203/T206/T207 engine/terminal records and all current `00/03/0B` routes. |
-
-> **T211 S5 P1 progress:** one versioned COMMAND lifecycle provider now owns
-> `54:00/03/0B`; the old detached profile helper and runtime `54:0B` gate are
-> removed.  Component and whole bx-vdm composition MSVC x64 `/MT` regressions
-> pass.  The package-local terminal record remains non-engine/non-CLI evidence;
-> see the [source/ABI map](etc/research/t211-s5-command-lifecycle-source-abi-map-001.md).
+| Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, cancellation/budget helpers, terminal observations, composition reset and T203/T206/T207 evidence. |
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic

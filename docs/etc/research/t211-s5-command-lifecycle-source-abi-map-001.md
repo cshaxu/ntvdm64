@@ -56,3 +56,19 @@ does it publish a DOS exit code through engine or CLI.  T203/T206/T207 remain
 the controlling negative evidence for that missing post-return normal-terminal
 sequence.  S5 remains open pending its final provider/failure review and
 whole COMMAND package closure; native trace is an integration observer only.
+
+## Final package regression
+
+`tests/bx-vdm/bx_ntvdm_command_package_family_v1_test.c` is the final
+T211 ownership invariant.  It iterates every callable COMMAND slot
+`54:00..10`, performs the normal ingress/registry/COMMAND-plane/facade
+classification and asserts that exactly one of the bootstrap, launch/execution,
+console/keyboard or lifecycle providers owns it.  The special `54:10`
+bootstrap member is additionally asserted to remain package-deferred.
+
+The fresh MSVC x64 `/MT` run at
+`artifacts/build/t211-s5-command-package-r1` passed.  This is an ownership and
+route regression; service semantics remain covered by the focused S2, S3, S4
+and S5 fixtures.  Together they close T211's COMMAND owner package without
+claiming an engine/CLI normal completion or using native trace as an
+implementation selector.

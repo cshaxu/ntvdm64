@@ -1,7 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard', 'command-lifecycle')]
+    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard', 'command-lifecycle', 'command-package')]
     [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
@@ -210,6 +210,11 @@ if ($Fixture -eq 'dem-package') {
         'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
         'tests\bx-vdm\bx_ntvdm_command_lifecycle_provider_v1_test.c'
     )
+} elseif ($Fixture -eq 'command-package') {
+    $sourceRelatives += @(
+        'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
+        'tests\bx-vdm\bx_ntvdm_command_package_family_v1_test.c'
+    )
 } else {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_boot_namespace_composition_v1_test.c'
 }
@@ -300,6 +305,8 @@ $record = [ordered]@{
         'tests/bx-vdm/bx_ntvdm_command_console_keyboard_provider_v1_test.c'
     } elseif ($Fixture -eq 'command-lifecycle') {
         'tests/bx-vdm/bx_ntvdm_command_lifecycle_provider_v1_test.c'
+    } elseif ($Fixture -eq 'command-package') {
+        'tests/bx-vdm/bx_ntvdm_command_package_family_v1_test.c'
     } else {
         'tests/bx-vdm/bx_ntvdm_boot_namespace_composition_v1_test.c'
     }
