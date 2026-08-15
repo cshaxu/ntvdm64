@@ -8,13 +8,15 @@
 #define BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_MAGIC 0x42584e50u
 #define BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_VERSION 1u
 
-/* One adapter-local owner for the profile-declared boot namespace.  This
- * combines COMMAND config-path production with DEM normal read-only file and
- * pathname-search consumption.  It owns no host path, handle or guest pointer. */
+/* One adapter-local owner for the profile-declared boot namespace.  The
+ * COMMAND session copies its own boot input at composition time.  This record
+ * retains an isolated copy only for old diagnostic/runtime compatibility;
+ * neither record owns a host path, handle or guest pointer. */
 typedef struct bx_ntvdm_boot_namespace_provider_v1 {
     uint32_t magic;
     uint32_t version;
     bx_ntvdm_readonly_namespace_v1 readonly_namespace;
+    bx_ntvdm_command_boot_input_v1 command_boot_input;
     bx_ntvdm_profile_search_snapshot_v1 search_snapshot;
     bx_ntvdm_search_transaction_v1 search_transaction;
 } bx_ntvdm_boot_namespace_provider_v1;

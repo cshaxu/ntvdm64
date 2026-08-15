@@ -573,12 +573,19 @@ int main(void)
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
         outcome.resume_rip != 0u) return 50;
+    /* COMMAND takes a private boot-input copy when composition is assembled.
+       Deliberately alter the mutable DEM/boot namespace after bind: 54:0C/D
+       must still return the selected COMMAND paths, not borrow that record. */
+    wcscpy(composition.plane.provider.readonly_namespace.files[1].path,
+        L"\\MUTATED-CONFIG.SYS");
+    wcscpy(composition.plane.provider.readonly_namespace.files[2].path,
+        L"\\MUTATED-AUTOEXEC.BAT");
     event_initialize(&event, 0x54u, 0x0cu);
     event.ds = 0x1000; event.edx = 0x20;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 3;
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME) return 4;
     if (outcome.resume_rip != 0x104) return 5;
-    if (ram[0x10020] == 0) return 6;
+    if (memcmp(ram + 0x10020u, "C:\\CONFIG.SYS", 14u) != 0) return 6;
 
     /* COMMAND bootstrap is one classified pair: COMSPEC capture, environment
      * size retry and publication, followed by original-compatible repeats. */
@@ -757,7 +764,8 @@ int main(void)
     event.ds = 0x1000; event.edx = 0x20;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME &&
-         outcome.disposition != BX_NTVDM_GENERIC_UD_STOP)) return 9;
+         outcome.disposition != BX_NTVDM_GENERIC_UD_STOP) ||
+        memcmp(ram + 0x10020u, "C:\\AUTOEXEC.BAT", 15u) != 0) return 9;
     /* demTerminatePDB owns per-PDB search lifetime.  Seed an existing
        continuation, invoke the real BOP route, then prove that the stale
        continuation cannot be resumed. */

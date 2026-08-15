@@ -158,6 +158,14 @@
 > not claim VDD, interactive console, keyboard installation, streams or
 > native-guest closure. See the [console evidence](etc/research/t202-s6-command-console-capability-001.md).
 
+> **T202 S6 progress:** `54:0C/0D` now consume one COMMAND-owned copied
+> boot-input record rather than borrowing mutable DEM/boot-namespace state at
+> dispatch time. A bound x64 `/MT` regression mutates the latter after binding
+> and still proves the selected CONFIG/AUTOEXEC guest-path results, with no
+> host temporary or system-file operation. This closes only the default
+> boot-input pathname boundary, not host-backed expansion, streams, lifecycle
+> or native-guest closure; see the [boot-input evidence](etc/research/t202-s6-command-boot-input-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

@@ -16,7 +16,7 @@ static int bx_ntvdm_cmd_boot_file_physical(uint16_t segment, uint16_t offset,
 }
 
 int bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(
-    const bx_ntvdm_readonly_namespace_v1 *namespace_value,
+    const bx_ntvdm_command_boot_input_v1 *boot_input,
     const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu_before,
     const bx_ntvdm_instruction_window_v1 *window,
@@ -29,7 +29,7 @@ int bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(
     uint64_t address;
     size_t index, bytes;
 
-    if (diagnostic == 0 || namespace_value == 0 || event == 0 || cpu_before == 0 ||
+    if (diagnostic == 0 || boot_input == 0 || event == 0 || cpu_before == 0 ||
         window == 0 || transaction == 0 || payload == 0) return 0;
     *diagnostic = BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_ARGUMENT;
     if (!bx_ntvdm_exception_event_v1_valid(event)) {
@@ -52,14 +52,14 @@ int bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(
         *diagnostic = BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_CONTRACT;
         return 0;
     }
-    if (namespace_value->drive_index >= 26u || !bx_ntvdm_cmd_boot_file_physical(
+    if (!bx_ntvdm_command_boot_input_v1_valid(boot_input) || !bx_ntvdm_cmd_boot_file_physical(
             cpu_before->ds, (uint16_t)cpu_before->edx, &address)) {
         *diagnostic = BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_NAMESPACE;
         return 0;
     }
 
     file_index = window->bytes[3] == 0x0cu ? 1u : 2u;
-    guest_path = namespace_value->files[file_index].path;
+    guest_path = file_index == 1u ? boot_input->config_path : boot_input->autoexec_path;
     if (guest_path[0] != L'\\') {
         *diagnostic = BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_PATH;
         return 0;
@@ -69,7 +69,7 @@ int bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(
         *diagnostic = BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_PATH;
         return 0;
     }
-    payload[0] = (uint8_t)('A' + namespace_value->drive_index);
+    payload[0] = (uint8_t)('A' + boot_input->drive_index);
     payload[1] = ':';
     for (index = 0u; index <= wcslen(guest_path); ++index) {
         if (guest_path[index] > 0x7fu) {
@@ -91,7 +91,7 @@ int bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(
 }
 
 int bx_ntvdm_cmd_boot_file_service_v1_prepare(
-    const bx_ntvdm_readonly_namespace_v1 *namespace_value,
+    const bx_ntvdm_command_boot_input_v1 *boot_input,
     const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu_before,
     const bx_ntvdm_instruction_window_v1 *window,
@@ -99,6 +99,6 @@ int bx_ntvdm_cmd_boot_file_service_v1_prepare(
     uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD])
 {
     bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 diagnostic;
-    return bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(namespace_value, event,
+    return bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(boot_input, event,
         cpu_before, window, transaction, payload, &diagnostic);
 }

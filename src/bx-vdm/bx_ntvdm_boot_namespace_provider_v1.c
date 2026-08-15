@@ -7,6 +7,7 @@ int bx_ntvdm_boot_namespace_provider_v1_valid(
 {
     return value != 0 && value->magic == BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_MAGIC &&
         value->version == BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_VERSION &&
+        bx_ntvdm_command_boot_input_v1_valid(&value->command_boot_input) &&
         bx_ntvdm_profile_search_snapshot_v1_valid(&value->search_snapshot) &&
         bx_ntvdm_search_transaction_v1_valid(&value->search_transaction);
 }
@@ -23,6 +24,8 @@ int bx_ntvdm_boot_namespace_provider_v1_initialize(
         (selection->declared_target_count == 2u &&
          (terminal_quit == 0 || !bx_ntvdm_readonly_namespace_v1_append_terminal_quit(
              &value->readonly_namespace, terminal_quit, selection))) ||
+        !bx_ntvdm_command_boot_input_v1_initialize(&value->command_boot_input,
+            &value->readonly_namespace) ||
         !bx_ntvdm_profile_search_snapshot_v1_initialize(&value->search_snapshot,
             &value->readonly_namespace, selection)) return 0;
     bx_ntvdm_search_transaction_v1_initialize(&value->search_transaction);
@@ -39,7 +42,7 @@ int bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(
     bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 *diagnostic)
 {
     if (diagnostic == 0 || !bx_ntvdm_boot_namespace_provider_v1_valid(value)) return 0;
-    return bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(&value->readonly_namespace,
+    return bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(&value->command_boot_input,
         event, cpu_before, window, transaction, payload, diagnostic);
 }
 

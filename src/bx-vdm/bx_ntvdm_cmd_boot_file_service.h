@@ -7,7 +7,7 @@
 #include "bx_ntvdm_exception_abi.h"
 #include "bx_ntvdm_instruction_window_abi.h"
 #include "bx_ntvdm_multi_write_transaction.h"
-#include "bx_ntvdm_readonly_namespace.h"
+#include "bx_ntvdm_command_boot_input_v1.h"
 
 /* Implements only COMMAND's two boot-file pathname services (54:0c/0d).
  * The returned OEM pathname names an already profile-materialized guest file;
@@ -28,7 +28,7 @@ typedef enum bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 {
 /* This is a same-island diagnostic of the existing boolean contract.  It
  * reveals only which source condition group declined, never guest values. */
 int bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(
-    const bx_ntvdm_readonly_namespace_v1 *namespace_value,
+    const bx_ntvdm_command_boot_input_v1 *boot_input,
     const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu_before,
     const bx_ntvdm_instruction_window_v1 *window,
@@ -37,7 +37,7 @@ int bx_ntvdm_cmd_boot_file_service_v1_prepare_diagnostic(
     bx_ntvdm_cmd_boot_file_prepare_diagnostic_v1 *diagnostic);
 
 int bx_ntvdm_cmd_boot_file_service_v1_prepare(
-    const bx_ntvdm_readonly_namespace_v1 *namespace_value,
+    const bx_ntvdm_command_boot_input_v1 *boot_input,
     const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu_before,
     const bx_ntvdm_instruction_window_v1 *window,
