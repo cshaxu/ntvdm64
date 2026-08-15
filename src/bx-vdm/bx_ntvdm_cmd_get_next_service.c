@@ -56,10 +56,35 @@ static uint16_t drive_count(const bx_ntvdm_host_drive_snapshot_v1 *drives)
     for (index = 0u; index < 26u; ++index) if ((drives->admitted_mask & (UINT32_C(1) << index)) != 0u) ++count;
     return (uint16_t)count;
 }
+static void terminal_clear(bx_ntvdm_cmd_terminal_record_v1 *value)
+{
+    memset(value, 0, sizeof(*value));
+    value->magic = BX_NTVDM_CMD_TERMINAL_RECORD_V1_MAGIC;
+    value->abi_version = BX_NTVDM_CMD_TERMINAL_RECORD_V1_VERSION;
+    value->struct_bytes = (uint32_t)sizeof(*value);
+}
+int bx_ntvdm_cmd_terminal_record_v1_valid(const bx_ntvdm_cmd_terminal_record_v1 *value)
+{
+    if (!value || value->magic != BX_NTVDM_CMD_TERMINAL_RECORD_V1_MAGIC ||
+        value->abi_version != BX_NTVDM_CMD_TERMINAL_RECORD_V1_VERSION ||
+        value->struct_bytes != sizeof(*value) || value->reserved0 != 0u || value->reserved1 != 0u ||
+        value->present > 1u || value->dos_exit_code > 0xffu) return 0;
+    return value->present ? value->reason == BX_NTVDM_CMD_TERMINAL_REASON_V1_DECLARED_PLAN_EXHAUSTED :
+        value->reason == BX_NTVDM_CMD_TERMINAL_REASON_V1_NONE && value->dos_exit_code == 0u;
+}
 void bx_ntvdm_cmd_get_next_state_v1_initialize(bx_ntvdm_cmd_get_next_state_v1 *value)
-{ if (value) memset(value, 0, sizeof(*value)); }
+{ if (value) { memset(value, 0, sizeof(*value)); terminal_clear(&value->terminal); } }
+int bx_ntvdm_cmd_get_next_terminal_v1_copy(const bx_ntvdm_cmd_get_next_state_v1 *state,
+    bx_ntvdm_cmd_terminal_record_v1 *out)
+{
+    if (!state || !out || !bx_ntvdm_cmd_terminal_record_v1_valid(&state->terminal) ||
+        state->terminal.present == 0u) return 0;
+    *out = state->terminal;
+    return 1;
+}
 void bx_ntvdm_cmd_get_next_state_v1_commit(bx_ntvdm_cmd_get_next_state_v1 *state)
-{ if (state && state->delivered < 2u) ++state->delivered; }
+{ if (state && state->delivered < 2u) { ++state->delivered; state->returned = 0u;
+    state->terminal_dos_exit_code = 0u; terminal_clear(&state->terminal); } }
 int bx_ntvdm_cmd_return_exit_code_v1_dispatch(bx_ntvdm_cmd_get_next_state_v1 *state,
     const byob_launch_plan_v2 *plan,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
@@ -80,7 +105,13 @@ int bx_ntvdm_cmd_return_exit_code_v1_dispatch(bx_ntvdm_cmd_get_next_state_v1 *st
     if (!bx_ntvdm_cpu_result_v2_set_cf(result, reenter)) return 0;
     if (!reenter && !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
         (uint16_t)(cpu->edx & 0xffu))) return 0;
-    state->terminal_dos_exit_code = (uint16_t)cpu->edx;
+    if (!reenter) {
+        state->terminal_dos_exit_code = (uint16_t)(cpu->edx & 0xffu);
+        terminal_clear(&state->terminal);
+        state->terminal.present = 1u;
+        state->terminal.reason = BX_NTVDM_CMD_TERMINAL_REASON_V1_DECLARED_PLAN_EXHAUSTED;
+        state->terminal.dos_exit_code = state->terminal_dos_exit_code;
+    }
     state->returned = 1u;
     return 1;
 }

@@ -630,7 +630,7 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
     if (legacy.disposition != BX_NTVDM_EXCEPTION_RESULT_PASS_THROUGH ||
         !bx_ntvdm_cpu_result_v2_valid(result)) return 0;
     if (!bx_ntvdm_adapter_runtime.installed) return 1;
-    if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x11u) &&
+    if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0bu) &&
         bx_ntvdm_cmd_return_exit_code_v1_dispatch(
             &bx_ntvdm_adapter_runtime.cmd_get_next, &bx_ntvdm_adapter_runtime.launch_plan,
             event, cpu_before, window,

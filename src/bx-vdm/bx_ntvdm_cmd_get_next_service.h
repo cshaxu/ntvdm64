@@ -9,6 +9,27 @@
 #include "bx_ntvdm_readonly_namespace.h"
 #include "byob_launch_plan_v2.h"
 
+#define BX_NTVDM_CMD_TERMINAL_RECORD_V1_MAGIC UINT32_C(0x42584354)
+#define BX_NTVDM_CMD_TERMINAL_RECORD_V1_VERSION UINT32_C(1)
+
+typedef enum bx_ntvdm_cmd_terminal_reason_v1 {
+    BX_NTVDM_CMD_TERMINAL_REASON_V1_NONE = 0,
+    BX_NTVDM_CMD_TERMINAL_REASON_V1_DECLARED_PLAN_EXHAUSTED = 1
+} bx_ntvdm_cmd_terminal_reason_v1;
+
+/* A copied package result.  It is deliberately not an engine result and
+ * contains neither CPU state nor guest/host references. */
+typedef struct bx_ntvdm_cmd_terminal_record_v1 {
+    uint32_t magic;
+    uint32_t abi_version;
+    uint32_t struct_bytes;
+    uint32_t present;
+    uint32_t reason;
+    uint32_t dos_exit_code;
+    uint32_t reserved0;
+    uint32_t reserved1;
+} bx_ntvdm_cmd_terminal_record_v1;
+
 /* Each committed 54:01 consumes one immutable slot.  It does not imply a
  * 54:11 result, a host queue, or a guest pointer retained by the adapter. */
 typedef struct bx_ntvdm_cmd_get_next_state_v1 {
@@ -16,9 +37,13 @@ typedef struct bx_ntvdm_cmd_get_next_state_v1 {
     uint32_t returned;
     uint16_t terminal_dos_exit_code;
     uint16_t reserved0;
+    bx_ntvdm_cmd_terminal_record_v1 terminal;
 } bx_ntvdm_cmd_get_next_state_v1;
 
 void bx_ntvdm_cmd_get_next_state_v1_initialize(bx_ntvdm_cmd_get_next_state_v1 *value);
+int bx_ntvdm_cmd_terminal_record_v1_valid(const bx_ntvdm_cmd_terminal_record_v1 *value);
+int bx_ntvdm_cmd_get_next_terminal_v1_copy(const bx_ntvdm_cmd_get_next_state_v1 *state,
+    bx_ntvdm_cmd_terminal_record_v1 *out);
 int bx_ntvdm_cmd_get_next_v1_prepare(const bx_ntvdm_cmd_get_next_state_v1 *state,
     const byob_launch_plan_v2 *plan,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,

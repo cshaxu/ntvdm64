@@ -9,6 +9,7 @@ static void event(bx_ntvdm_exception_event_v1 *e)
 int main(void)
 {
     bx_ntvdm_cmd_get_next_state_v1 state; bx_ntvdm_readonly_namespace_v1 ns = {0};
+    bx_ntvdm_cmd_terminal_record_v1 terminal;
     bx_ntvdm_host_drive_snapshot_v1 drives; bx_ntvdm_cmd_set_info_registration_v1 reg = {0x1000u,0x1100u,0x1200u,0};
     byob_launch_plan_v2 plan = {2u,2u,{1u,BYOB_LAUNCH_TARGET_KIND_V1_COM,8u,{'/','c',' ','s','m','o','k','e'}}};
     bx_ntvdm_exception_event_v1 e; bx_ntvdm_cpu_state_v1 c; bx_ntvdm_instruction_window_v1 w;
@@ -25,6 +26,7 @@ int main(void)
     bx_ntvdm_instruction_window_v1_capture(&w,bop,sizeof(bop));
     record[8]=0x30; record[10]=0x40; record[12]=128; record[28]=0x50; record[30]=0x60; record[32]=17; record[33]=1;
     bx_ntvdm_cmd_get_next_state_v1_initialize(&state);
+    if (bx_ntvdm_cmd_get_next_terminal_v1_copy(&state, &terminal)) return 13;
     if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0u,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
         memcmp(payload + 1u,"TARGET /c smoke\r\n",17u) != 0) return 2;
@@ -32,8 +34,7 @@ int main(void)
     bx_ntvdm_instruction_window_v1_capture(&w,returned_bop,sizeof(returned_bop));
     if (!bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result) ||
         (t.result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
-        state.returned != 1u) return 11;
-    state.returned = 0u;
+        state.returned != 1u || bx_ntvdm_cmd_get_next_terminal_v1_copy(&state, &terminal)) return 11;
     bx_ntvdm_instruction_window_v1_capture(&w,bop,sizeof(bop));
     if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0u,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
@@ -49,15 +50,21 @@ int main(void)
     if (bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result)) return 6;
     bx_ntvdm_instruction_window_v1_capture(&w,returned_bop,sizeof(returned_bop));
-    /* `cmdReturnExitCode` returns the low byte of the DOS return code in
-       DX.  The preceding CMDINFO setup used DX as its DS:DX locator, so make
-       the terminal-case input explicit before asserting the zero result. */
-    c.edx=0u;
+    /* `cmdReturnExitCode` returns only the low byte of DX.  The preceding
+       CMDINFO setup used DX as its DS:DX locator, so make the terminal input
+       explicit and prove that the copied record is equally narrow. */
+    c.edx=0x1234u;
     if (!bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result) ||
         t.result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         (t.result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
-        t.result.cpu_delta.gpr16_values[0] != 0u || state.returned != 1u ||
+        t.result.cpu_delta.gpr16_values[0] != 0x34u || state.returned != 1u ||
+        !bx_ntvdm_cmd_get_next_terminal_v1_copy(&state,&terminal) ||
+        !bx_ntvdm_cmd_terminal_record_v1_valid(&terminal) || terminal.present != 1u ||
+        terminal.reason != BX_NTVDM_CMD_TERMINAL_REASON_V1_DECLARED_PLAN_EXHAUSTED ||
+        terminal.dos_exit_code != 0x34u ||
         bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result)) return 7;
+    bx_ntvdm_instruction_window_v1_capture(&w,(const uint8_t[]){0xc4,0xc4,0x54,0x11},4u);
+    if (bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result)) return 14;
     /* cmdGetNextCmd does not consume cmdSetInfo's SCS/DOSDATA locators.
        A pre-registration entry may still build the copied CMDINFO response;
        it must not manufacture zero-address registration writes. */
