@@ -329,3 +329,57 @@ int bx_ntvdm_host_namespace_v1_enumerate(const bx_ntvdm_host_namespace_v1 *space
     HeapFree(GetProcessHeap(), 0u, items);
     return result;
 }
+
+int bx_ntvdm_host_namespace_v1_directory_exists(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_directory)
+{
+    HANDLE current;
+    const wchar_t *component;
+    if (!bx_ntvdm_host_namespace_v1_valid(space) || drive_index >= 26u ||
+        relative_directory == 0 ||
+        (space->available_mask & bx_ntvdm_host_namespace_bit(drive_index)) == 0u)
+        return 0;
+    current = space->roots[drive_index];
+    component = relative_directory;
+    while (*component != L'\0') {
+        wchar_t requested[13];
+        const wchar_t *end = wcschr(component, L'\\');
+        size_t length = end == 0 ? wcslen(component) : (size_t)(end - component);
+        bx_ntvdm_host_namespace_internal_entry_v1 *items;
+        uint32_t count = 0u, index;
+        int result;
+        HANDLE child = INVALID_HANDLE_VALUE;
+        if (length == 0u || length >= 13u) goto rejected;
+        memcpy(requested, component, length * sizeof(wchar_t));
+        requested[length] = L'\0';
+        if (!bx_ntvdm_host_namespace_ascii_83(requested, requested)) goto rejected;
+        items = (bx_ntvdm_host_namespace_internal_entry_v1 *)HeapAlloc(
+            GetProcessHeap(), HEAP_ZERO_MEMORY,
+            BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES * sizeof(*items));
+        if (items == 0) goto rejected;
+        result = bx_ntvdm_host_namespace_collect(current, items,
+            BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES, &count);
+        if (result == BX_NTVDM_HOST_NAMESPACE_V1_OK) {
+            for (index = 0u; index < count; ++index) {
+                if (_wcsicmp(requested, items[index].projected.dos_name) == 0 &&
+                    (items[index].projected.attributes & FILE_ATTRIBUTE_DIRECTORY) != 0u) {
+                    child = bx_ntvdm_host_namespace_open_child(current,
+                        items[index].host_name);
+                    break;
+                }
+            }
+        }
+        HeapFree(GetProcessHeap(), 0u, items);
+        if (current != space->roots[drive_index]) CloseHandle(current);
+        if (child == INVALID_HANDLE_VALUE) return 0;
+        current = child;
+        component = end == 0 ? component + length : end + 1u;
+        if (end != 0 && *component == L'\0') goto rejected;
+    }
+    if (current != space->roots[drive_index]) CloseHandle(current);
+    return 1;
+rejected:
+    if (current != space->roots[drive_index]) CloseHandle(current);
+    return 0;
+}

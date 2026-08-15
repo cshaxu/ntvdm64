@@ -62,9 +62,17 @@ int main(void)
             wcscmp(entries[2].dos_name, L"ZETA.TXT") != 0;
         failed |= bx_ntvdm_host_namespace_v1_enumerate(&space, drive,
             L"..", entries, 8u, &count) != BX_NTVDM_HOST_NAMESPACE_V1_REJECTED;
+        failed |= !bx_ntvdm_host_namespace_v1_directory_exists(&space, drive,
+            relative);
+        failed |= !bx_ntvdm_host_namespace_v1_directory_exists(&space, drive,
+            L"");
+        failed |= bx_ntvdm_host_namespace_v1_directory_exists(&space, drive,
+            L"..");
         if (wcslen(relative) + wcslen(L"\\SUBDIR") + 1u < MAX_PATH) {
             wchar_t nested[MAX_PATH];
             swprintf(nested, MAX_PATH, L"%ls\\SUBDIR", relative);
+            failed |= !bx_ntvdm_host_namespace_v1_directory_exists(&space,
+                drive, nested);
             nested_result = bx_ntvdm_host_namespace_v1_enumerate(&space, drive, nested,
                 entries, 8u, &count);
             failed |= nested_result != BX_NTVDM_HOST_NAMESPACE_V1_OK || count != 1u ||

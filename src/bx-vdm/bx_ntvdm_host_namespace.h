@@ -60,6 +60,13 @@ int bx_ntvdm_host_namespace_v1_enumerate(
     bx_ntvdm_host_namespace_entry_v1 *entries, uint32_t entry_capacity,
     uint32_t *out_count);
 
+/* Confirms that one DOS-relative directory exists below an admitted root.
+ * It exposes no host path or handle and changes no ambient process directory.
+ * An empty relative name denotes the admitted drive root. */
+int bx_ntvdm_host_namespace_v1_directory_exists(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_directory);
+
 #ifdef __cplusplus
 }
 #endif

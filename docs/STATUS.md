@@ -55,6 +55,11 @@
 > selector-blind package seam; see the
 > [composition evidence](etc/research/t202-s1-dem-profile-consumer-composition-001.md).
 
+> **T202 S2 progress:** the first package primitive validates an admitted
+> real-host DOS-relative directory beneath retained root handles without host
+> path/handle exposure or ambient-CWD mutation; see the
+> [validation evidence](etc/research/t202-s2-host-namespace-directory-validation-001.md).
+
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition
 > lifecycle, repaired its strict C11 source closure, and recorded the separate
