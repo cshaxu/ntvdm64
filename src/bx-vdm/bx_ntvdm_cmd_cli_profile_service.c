@@ -19,8 +19,6 @@ int bx_ntvdm_cmd_cli_profile_v1_dispatch(
     const bx_ntvdm_instruction_window_v1 *window,
     bx_ntvdm_cpu_result_v2 *result)
 {
-    uint16_t ax;
-
     if (!result || !selected(event, cpu, window)) return 0;
     switch (window->bytes[3]) {
     case 0u:
@@ -41,21 +39,13 @@ int bx_ntvdm_cmd_cli_profile_v1_dispatch(
          * declared CLI profile admits only DOS guest executables. */
         return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
             bx_ntvdm_cpu_result_v2_set_cf(result, 0);
-    case 9u:
-        /* cmdInitConsole changes only historical VDD/event-thread state. */
-        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u);
     case 11u:
         /* cmdReturnExitCode with no queued command: CF clear and AL receives
          * the contained profile's fixed successful child result (zero). */
-        ax = (uint16_t)(cpu->eax & 0xff00u);
         return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
             bx_ntvdm_cpu_result_v2_set_cf(result, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u, ax);
-    case 16u:
-        /* cmdGetStartInfo: no separately created console in this profile. */
-        ax = (uint16_t)(cpu->eax & 0xff00u);
-        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u, ax);
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
+                (uint16_t)(cpu->eax & 0xff00u));
     default:
         return 0;
     }

@@ -152,6 +152,12 @@
 > compilation pass. This advances only the bootstrap/context slice, not full
 > COMMAND or native-guest closure; see the [environment evidence](etc/research/t202-s6-command-environment-snapshot-001.md).
 
+> **T202 S6 progress:** `54:09`, `54:0E`, and `54:10` now share one
+> session-owned console capability with the source-shaped no-console/no-KEYB
+> disposition. The MSVC x64 `/MT` bound-package regression passes; this does
+> not claim VDD, interactive console, keyboard installation, streams or
+> native-guest closure. See the [console evidence](etc/research/t202-s6-command-console-capability-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
