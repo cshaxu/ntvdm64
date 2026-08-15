@@ -89,6 +89,7 @@
     "src/bx-vdm/bx_ntvdm_dem_computer_name_service_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_current_dir_service_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_cwd_context_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_cwd_service_v2.c",
     "src/bx-vdm/bx_ntvdm_dem_default_drive_service_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_fcb_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_fcb_search_service_v1.c",

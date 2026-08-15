@@ -70,6 +70,11 @@
 > pointer-free startup-plan regressions pass. See the
 > [installation evidence](etc/research/t202-s2-dem-runtime-profile-installation-001.md).
 
+> **T202 S2 progress:** `50:13`, `50:18`, and `50:1A` now share a
+> source-mapped DEM CWD/default-drive service with checked guest-memory
+> transactions and common profile outcomes; focused direct/readonly/overlay
+> regression passes. See the [family evidence](etc/research/t202-s2-dem-cwd-family-service-001.md).
+
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition
 > lifecycle, repaired its strict C11 source closure, and recorded the separate

@@ -77,6 +77,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_computer_name_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_current_dir_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_cwd_context_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_cwd_service_v2.c',
     'src\bx-vdm\bx_ntvdm_dem_default_drive_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_full_dpb_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_gset_plane_v1.c',

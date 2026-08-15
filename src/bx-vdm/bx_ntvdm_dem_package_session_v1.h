@@ -41,6 +41,9 @@ int bx_ntvdm_dem_package_session_v1_set_volume_snapshot(
 int bx_ntvdm_dem_package_session_v1_set_mutation_profile(
     bx_ntvdm_dem_package_session_v1 *session,
     const bx_ntvdm_mutation_profile_v1 *profile);
+int bx_ntvdm_dem_package_session_v1_set_host_namespace(
+    bx_ntvdm_dem_package_session_v1 *session,
+    const bx_ntvdm_host_namespace_v1 *host_namespace);
 int bx_ntvdm_dem_package_session_v1_resolve_mutation_class(
     const bx_ntvdm_dem_package_session_v1 *session,
     uint32_t mutation_class, uint32_t *policy_result_out);

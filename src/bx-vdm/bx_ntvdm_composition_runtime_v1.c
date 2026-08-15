@@ -112,6 +112,8 @@ static int install(const wchar_t *profile, const wchar_t *root,
             &runtime.composition, &runtime.volumes) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
             &runtime.composition, &runtime.mutation_profile) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
+            &runtime.composition, &runtime.host_namespace) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
             &runtime.composition, &launch) ||
         !bx_ntvdm_boot_namespace_composition_v1_bind(&runtime.composition) ||

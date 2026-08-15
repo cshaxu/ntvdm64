@@ -7,6 +7,7 @@
 #include "bx_ntvdm_dem_dta_service.h"
 #include "bx_ntvdm_dem_load_dos_service.h"
 #include "bx_ntvdm_host_drive_policy.h"
+#include "bx_ntvdm_dem_cwd_context_v1.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 
 #define BX_NTVDM_BOOT_NAMESPACE_PLANE_V1_MAGIC 0x42584e51u
@@ -37,6 +38,8 @@ typedef struct bx_ntvdm_boot_namespace_plane_v1 {
     bx_ntvdm_cpu_state_v1 pending_cpu;
     bx_ntvdm_guest_read_action_v1 pending_read;
     bx_ntvdm_guest_gather_read_action_v1 pending_gather;
+    bx_ntvdm_dem_cwd_context_v1 *dem_cwd_context;
+    const bx_ntvdm_host_namespace_v1 *dem_host_namespace;
 } bx_ntvdm_boot_namespace_plane_v1;
 
 int bx_ntvdm_boot_namespace_plane_v1_initialize(
@@ -50,6 +53,12 @@ int bx_ntvdm_boot_namespace_plane_v1_set_dta(
 int bx_ntvdm_boot_namespace_plane_v1_set_drive_snapshot(
     bx_ntvdm_boot_namespace_plane_v1 *plane,
     const bx_ntvdm_host_drive_snapshot_v1 *snapshot);
+/* DEM retains CWD state; the boot plane borrows it only to carry the checked
+ * guest-memory read/write transaction for the complete CWD service family. */
+int bx_ntvdm_boot_namespace_plane_v1_set_dem_cwd_context(
+    bx_ntvdm_boot_namespace_plane_v1 *plane,
+    bx_ntvdm_dem_cwd_context_v1 *context,
+    const bx_ntvdm_host_namespace_v1 *host_namespace);
 int bx_ntvdm_boot_namespace_plane_v1_dispatch(
     bx_ntvdm_boot_namespace_plane_v1 *plane,
     const bx_ntvdm_bop_ingress_v1 *ingress,

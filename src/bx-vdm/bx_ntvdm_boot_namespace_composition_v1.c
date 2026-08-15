@@ -271,6 +271,15 @@ int bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
             profile);
 }
 
+int bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
+    bx_ntvdm_boot_namespace_composition_v1 *value,
+    const bx_ntvdm_host_namespace_v1 *host_namespace)
+{
+    return valid(value) && !value->bound &&
+        bx_ntvdm_dem_package_session_v1_set_host_namespace(&value->dem,
+            host_namespace);
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
     bx_ntvdm_boot_namespace_composition_v1 *value, const byob_launch_plan_v2 *plan)
 { return valid(value) && !value->bound &&
