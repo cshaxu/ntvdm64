@@ -5,10 +5,9 @@
 #include <string.h>
 #include <wctype.h>
 
-static int profile_for(bx_ntvdm_mutation_profile_v1 *profile)
+static int profile_for_mode(bx_ntvdm_mutation_profile_v1 *profile, uint32_t mode)
 {
-    bx_ntvdm_mutation_profile_v1_initialize(profile,
-        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    bx_ntvdm_mutation_profile_v1_initialize(profile, mode);
     return bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
         BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
         bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
@@ -16,6 +15,9 @@ static int profile_for(bx_ntvdm_mutation_profile_v1 *profile)
         bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
         BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu);
 }
+
+static int profile_for(bx_ntvdm_mutation_profile_v1 *profile)
+{ return profile_for_mode(profile, BX_NTVDM_MUTATION_MODE_V1_DIRECT); }
 
 static int cf_set(const bx_ntvdm_cpu_result_v2 *result)
 {
@@ -269,6 +271,43 @@ int main(void)
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x06u,
                     &boundary, &cpu, oem_dir, 0, &result) || cf_set(&result)) failed = 60;
+        }
+    }
+    if (!failed) {
+        bx_ntvdm_mutation_profile_v1 alternate_profile;
+        bx_ntvdm_dem_cwd_context_v1 alternate_cwd;
+        bx_ntvdm_dem_whole_provider_v1 alternate;
+        if (!profile_for_mode(&alternate_profile, BX_NTVDM_MUTATION_MODE_V1_READONLY) ||
+            !bx_ntvdm_dem_cwd_context_v1_initialize(&alternate_cwd, &alternate_profile) ||
+            !bx_ntvdm_dem_whole_provider_v1_initialize(&alternate,
+                &alternate_profile, &space, &alternate_cwd)) failed = 61;
+        else {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
+                    &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
+                !ax_is(&result, 5u)) failed = 62;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 1u; cpu.ecx = FILE_ATTRIBUTE_HIDDEN;
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate,
+                    0x01u, &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
+                !ax_is(&result, 5u))) failed = 63;
+            bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
+        }
+    }
+    if (!failed) {
+        bx_ntvdm_mutation_profile_v1 alternate_profile;
+        bx_ntvdm_dem_cwd_context_v1 alternate_cwd;
+        bx_ntvdm_dem_whole_provider_v1 alternate;
+        if (!profile_for_mode(&alternate_profile, BX_NTVDM_MUTATION_MODE_V1_OVERLAY) ||
+            !bx_ntvdm_dem_cwd_context_v1_initialize(&alternate_cwd, &alternate_profile) ||
+            !bx_ntvdm_dem_whole_provider_v1_initialize(&alternate,
+                &alternate_profile, &space, &alternate_cwd)) failed = 64;
+        else {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
+                    &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
+                !ax_is(&result, 1u)) failed = 65;
+            bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }
     bx_ntvdm_dem_whole_provider_v1_teardown(&provider);

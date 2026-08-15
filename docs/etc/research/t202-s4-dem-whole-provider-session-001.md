@@ -82,3 +82,10 @@ the source-shaped failure result, and never substitutes an overlay or virtual
 mode with a direct-host write.  This is one completed source partition, not
 the complete 29-identity DEM provider, a BOP ingress route, or a native guest
 run.
+
+Revision r22 adds profile-negative coverage for this same partition.  A
+readonly provider rejects both create and attribute mutation with the
+source-shaped access-denied result, while an overlay-mode create reports its
+current explicit unavailable form rather than falling through to a direct
+host write.  The direct-host fixture object is reused only for read/query;
+these negative checks make no additional host mutation.

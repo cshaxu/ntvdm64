@@ -148,6 +148,11 @@
 > check. It is one source partition only—not full DEM, BOP ingress, overlay
 > support, or native guest closure; see the [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S4 progress:** r22 additionally proves this partition never turns a
+> readonly or presently unbacked overlay profile into a direct-host mutation.
+> This is a profile boundary regression, not overlay implementation or whole
+> DEM closure; see the same [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the
