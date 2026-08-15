@@ -79,7 +79,9 @@
 > synthetic boot bytes.  The ready provider remains the sole byte owner after
 > bind. The direct namespace fixture now proves unbound declared boot files
 > have zero content, while the bound-provider fixture proves explicit content;
-> the targeted strict x64 `/MT` regressions pass.
+> the targeted strict x64 `/MT` regressions pass. A fresh full
+> configuration-integration object closure also compiles, links and runs under
+> MSVC x64 `/MT` after synthetic-byte removal.
 
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
