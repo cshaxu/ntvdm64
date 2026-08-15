@@ -34,6 +34,13 @@ enum bx_ntvdm_mutation_owner_v1 {
     BX_NTVDM_MUTATION_OWNER_V1_ENGINE = 5u
 };
 
+enum bx_ntvdm_mutation_policy_result_v1 {
+    BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST = 1u,
+    BX_NTVDM_MUTATION_POLICY_V1_REJECT_READONLY = 2u,
+    BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY = 3u,
+    BX_NTVDM_MUTATION_POLICY_V1_USE_VIRTUAL = 4u
+};
+
 typedef struct bx_ntvdm_mutation_owner_registration_v1 {
     uint32_t owner_id;
     uint32_t mutation_class;
@@ -66,6 +73,9 @@ int bx_ntvdm_mutation_profile_v1_valid(
 int bx_ntvdm_mutation_profile_v1_authorize(
     const bx_ntvdm_mutation_profile_v1 *profile, uint32_t owner_id,
     uint32_t mutation_class, uint32_t *mode_out);
+int bx_ntvdm_mutation_profile_v1_resolve(
+    const bx_ntvdm_mutation_profile_v1 *profile, uint32_t owner_id,
+    uint32_t mutation_class, uint32_t *policy_result_out);
 
 #ifdef __cplusplus
 }

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T201 S3.** Its governing brief is the active
+> **Current effective packet: M0 T202 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T201 S3 -- mutation-profile policy resolution regression.**
+**Active: M0 T202 S1 -- DEM shared-profile consumer composition.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -13,28 +13,28 @@
 
 ## Active Packet
 
-> **T scope:** T201 implements the shared capability foundation selected by
-> T200's completed global BOP admission audit. It precedes every DEM, COMMAND,
-> Redirector or device provider recovery and prevents any family from inventing
-> its own direct, readonly, overlay or virtual behavior.
+> **T scope:** T202 begins owner-package BOP recovery after T201's shared
+> profile foundation. It recovers providers by complete historical component
+> package, starting with DEM; trace is integration evidence only and never
+> creates an endpoint-sized implementation task.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T201 S3, Ordinary Mode. |
-| Admission And Approval | S1 closed common selection/owner enforcement and S2 closed overlay lifecycle. S3 completes the profile foundation's generic policy resolution and all-mode regression before later profile backend work. |
-| Objective | Define and source-build one generic owner/class policy-resolution result: direct host operation permitted, readonly mutation rejected, overlay session operation required, or virtual-volume operation required. It must derive solely from the shared profile and owner registration. |
-| Non-goals | No DEM/COMMAND/Redirector BOP provider recovery, no host I/O, no real filesystem/registry/device mutation, no profile-specific filesystem logic, no virtual-volume materialization, no trace-led patch, and no Bochs semantic change. |
-| Reference Baseline | [T201 S1 ABI evidence](etc/research/t201-s1-mutation-profile-abi-001.md), [T201 S2 lifecycle evidence](etc/research/t201-s2-mutation-overlay-lifecycle-001.md), and the unified mutation-profile proposal. |
-| Files And ABI Surface | The shared profile ABI's typed policy-result enum/function and focused tests only; no host handle, host pointer, callback, raw Bochs type, selector, service number or guest address crosses the ABI. |
+| Identifier Mode | M0 T202 S1, Ordinary Mode. |
+| Admission And Approval | Owner directed T200 to close at global audit evidence and T201 to implement the shared profile foundation before BOP recovery. T201 is closed; this is the queue-head Host-integrated OpenNT BOP capability recovery package. |
+| Objective | Establish one DEM package consumer-composition seam for the shared mutation profile: explicit package owner registration and generic policy resolution must reach the DEM composition before any direct/readonly/overlay/virtual leaf backend is added. |
+| Non-goals | No individual trace-selected BOP implementation, no COMMAND/Redirector/XMS/DPMI recovery, no host mutation in S1, no direct file provider, no raw device work, no virtual-volume materialization, and no Bochs semantic change. |
+| Reference Baseline | [T200 S31 closure ledger](etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md), [T201 closure](history/m0-t201-closure-20260814.md), OpenNT `demdisp.c` package map, and current DEM composition/session sources. |
+| Files And ABI Surface | Typed bx-vdm DEM package-composition profile seam and focused test only; it carries shared-profile owner/class/policy result, never raw host handle, host pointer, callback, Bochs type, selector or guest address. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` focused fixture: each of direct/readonly/overlay/virtual resolves to its unique generic action; unregistered owner/class and mode-mask mismatch are rejected; no BOP-service-specific branch; documentation governance and diff checks. |
-| Expected Markers | One typed policy result, no caller-supplied mode parameter, all four profile modes regressions, and rejection paths shared with overlay authorization. |
+| Verification | MSVC x64 `/MT` focused composition fixture: DEM owner registration resolves all four modes through the shared ABI; unregistered/mismatched class rejection; no service-number or host-I/O branch; documentation governance and diff checks. |
+| Expected Markers | One DEM package-level profile consumer, no leaf-selected mode, no duplicate DEM readonly/overlay policy, and four-mode regression evidence. |
 | Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
-| Reporting Requirements | Record exact policy result mapping and rejected cases; distinguish generic direct permission from an implemented direct host backend and do not claim any BOP family is recovered. |
-| Stop Conditions | Any raw host handle/pointer, selector/service-specific policy branch, provider implementation, host mutation, Bochs semantic intrusion, or reliance on unavailable historical host API pauses S3 for re-admission. |
-| Exit Criteria | Source-built policy fixture passes for all modes and negative owner/mask cases; T201 is ready for closure/review and only then may the next owner-package recovery task be admitted. |
+| Reporting Requirements | Record the package seam and rejected cases; distinguish DEM package profile adoption from recovered DEM host behavior and do not claim endpoint or family closure. |
+| Stop Conditions | Any raw host handle/pointer, selector/service-specific policy branch, direct host operation, host mutation, Bochs semantic intrusion, or reliance on unavailable historical host API pauses S1 for re-admission. |
+| Exit Criteria | Source-built composition fixture passes across all four modes with no BOP leaf selection; S2 may then recover one complete DEM subpackage against the common seam. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect current readonly namespace, boot/virtual volume, synthetic CWD and direct host namespace for ad-hoc policy selection that must migrate to the generic result in a later admitted backend task. |
+| Similar-Issue Sweep | Inspect DEM package facade/session, readonly namespace failure provider, boot namespace and direct host namespace for separate profile selection that must migrate to the new DEM package seam. |
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
@@ -46,6 +46,10 @@
 > **T201 S2 closure:** source-built MSVC x64 `/MT` evidence proves a bounded,
 > session-owned overlay lifecycle with teardown, not an overlay backend; see
 > the [lifecycle evidence](etc/research/t201-s2-mutation-overlay-lifecycle-001.md).
+
+> **T201 closed:** common profile selection, owner enforcement, overlay
+> lifecycle and four-mode policy resolution are complete; see the
+> [T201 closure record](history/m0-t201-closure-20260814.md).
 
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition

@@ -102,3 +102,28 @@ int bx_ntvdm_mutation_profile_v1_authorize(
     }
     return 0;
 }
+
+int bx_ntvdm_mutation_profile_v1_resolve(
+    const bx_ntvdm_mutation_profile_v1 *profile, uint32_t owner_id,
+    uint32_t mutation_class, uint32_t *policy_result_out)
+{
+    uint32_t mode;
+    if (policy_result_out == 0 || !bx_ntvdm_mutation_profile_v1_authorize(
+            profile, owner_id, mutation_class, &mode)) return 0;
+    switch (mode) {
+    case BX_NTVDM_MUTATION_MODE_V1_DIRECT:
+        *policy_result_out = BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST;
+        return 1;
+    case BX_NTVDM_MUTATION_MODE_V1_READONLY:
+        *policy_result_out = BX_NTVDM_MUTATION_POLICY_V1_REJECT_READONLY;
+        return 1;
+    case BX_NTVDM_MUTATION_MODE_V1_OVERLAY:
+        *policy_result_out = BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY;
+        return 1;
+    case BX_NTVDM_MUTATION_MODE_V1_VIRTUAL:
+        *policy_result_out = BX_NTVDM_MUTATION_POLICY_V1_USE_VIRTUAL;
+        return 1;
+    default:
+        return 0;
+    }
+}
