@@ -28,24 +28,11 @@ int bx_ntvdm_cmd_cli_profile_v1_dispatch(
     case 3u:
         /* cmdSaveWorld has no active body in the original source. */
         return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u);
-    case 6u: case 8u: case 10u:
-        /* Standard-stream and non-DOS process capabilities are whole
-         * COMMAND-provider slices.  Until their opaque stream/typed child
-         * lifecycle owners are admitted, retain the explicit terminal
-         * disposition here rather than bypassing this package session. */
+    case 6u:
+        /* Standard streams remain deferred until their opaque stream table is
+         * admitted.  Execution services are instead owned together by the
+         * COMMAND execution-lifecycle provider. */
         return bx_ntvdm_cpu_result_v2_stop(result);
-    case 7u:
-        /* cmdCheckBinary's historical DontCheckDosBinaryType branch: the
-         * declared CLI profile admits only DOS guest executables. */
-        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
-            bx_ntvdm_cpu_result_v2_set_cf(result, 0);
-    case 11u:
-        /* cmdReturnExitCode with no queued command: CF clear and AL receives
-         * the contained profile's fixed successful child result (zero). */
-        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
-            bx_ntvdm_cpu_result_v2_set_cf(result, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
-                (uint16_t)(cpu->eax & 0xff00u));
     default:
         return 0;
     }

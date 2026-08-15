@@ -398,9 +398,17 @@ int main(void)
             if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
                 outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
                 outcome.resume_rip != 0x104u) return 55;
-        } else if (service == 6u || service == 8u || service == 10u) {
+        } else if (service == 6u) {
             if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
                 outcome.disposition != BX_NTVDM_GENERIC_UD_STOP) return 56;
+        } else if (service == 8u || service == 10u) {
+            event.eax = 0xa500u;
+            if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+                outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+                outcome.resume_rip != 0x104u || outcome.gpr16_write_mask != 1u ||
+                outcome.gpr16_values[0] != 0xa532u ||
+                outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+                outcome.eflags_values != 0u) return 56;
         } else if (service == 0u) {
             if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
                 outcome.disposition != BX_NTVDM_GENERIC_UD_STOP) return 57;

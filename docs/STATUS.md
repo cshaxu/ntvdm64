@@ -166,6 +166,13 @@
 > boot-input pathname boundary, not host-backed expansion, streams, lifecycle
 > or native-guest closure; see the [boot-input evidence](etc/research/t202-s6-command-boot-input-001.md).
 
+> **T202 S6 progress:** one COMMAND execution-lifecycle provider now owns
+> `54:07/08/0A/0B`. The declared DOS binary and typed return paths retain their
+> source-shaped results; the two external-execution paths now return a checked
+> `CF=0, AL=ERROR_NOT_SUPPORTED` deferred outcome rather than a false machine
+> stop. The x64 `/MT` common-ingress regression passes. No child process,
+> raw handle, VDD or VDM re-entry is claimed; see the [lifecycle evidence](etc/research/t202-s6-command-execution-lifecycle-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

@@ -41,6 +41,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_bulk_result_transaction.c',
     'src\bx-vdm\bx_ntvdm_cmd_boot_file_service.c',
     'src\bx-vdm\bx_ntvdm_command_boot_input_v1.c',
+    'src\bx-vdm\bx_ntvdm_command_execution_lifecycle_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_comspec_bootstrap_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_get_next_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_current_dir_service.c',

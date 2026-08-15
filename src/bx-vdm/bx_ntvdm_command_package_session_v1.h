@@ -11,6 +11,7 @@
 #include "bx_ntvdm_command_host_context_v1.h"
 #include "bx_ntvdm_command_console_capability_v1.h"
 #include "bx_ntvdm_command_boot_input_v1.h"
+#include "bx_ntvdm_command_execution_lifecycle_v1.h"
 
 #define BX_NTVDM_COMMAND_PACKAGE_SESSION_V1_MAGIC 0x42584353u
 #define BX_NTVDM_COMMAND_PACKAGE_SESSION_V1_VERSION 1u
@@ -30,6 +31,7 @@ typedef struct bx_ntvdm_command_package_session_v1 {
     bx_ntvdm_command_host_context_v1 host_context;
     bx_ntvdm_command_console_capability_v1 console;
     bx_ntvdm_command_boot_input_v1 boot_input;
+    bx_ntvdm_command_execution_lifecycle_v1 execution_lifecycle;
     uint32_t has_launch_plan, has_mutation_profile, has_host_context;
 } bx_ntvdm_command_package_session_v1;
 
