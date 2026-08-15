@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T212 S1.** Its governing brief is the active
+> **Current effective packet: M0 T212 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T212 S1 -- CLI lifecycle governance source/ABI map.**
+**Active: M0 T212 S2 -- CLI lifecycle policy/result ABI.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -16,26 +16,27 @@
 ## Active Packet
 
 > **T scope:** T212 adds CLI-owned lifecycle governance around the existing
-> one-shot engine. S1 maps current engine/CLI result, cancellation, budget,
-> audit and cleanup ownership before any public lifecycle behavior is changed.
+> one-shot engine. S1 mapped current engine/CLI result, cancellation, budget,
+> audit and cleanup ownership; S2 defines the first copied CLI-only policy and
+> result-classification boundary before any engine behavior is changed.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T212 S1, Ordinary Mode. |
-| Admission And Approval | T211 closed COMMAND BOP composition but T203/T206/T207 prove that no normal engine/CLI completion is currently admitted. Queue-head CLI governance is selected as the next medium package. |
-| Objective | Produce one source/ABI/failure map for CLI cancellation, budgets, audit, result presentation and cleanup around the existing engine; identify the minimum coherent lifecycle provider boundary. |
-| Non-goals | No normal-completion claim, no reinterpretation of a COMMAND terminal record, no engine result ABI change, no BOP implementation, no trace-led work, and no Bochs change. |
-| Reference Baseline | T203/T206/T207 closures, current `bx_ntvdm_engine_run_v1`, CLI runner and capability roadmap governance proposal. |
-| Files And ABI Surface | Read-only source/ABI map and focused fixture plan under `docs/etc/research`; no production source modification in S1. |
+| Identifier Mode | M0 T212 S2, Ordinary Mode. |
+| Admission And Approval | T212 S1 mapped all lifecycle owners and found no missing normal user-mode Win32 API; it admits one CLI-only copied policy/result ABI before any cooperative engine cancellation seam. |
+| Objective | Define and source-build a fixed-width CLI-owned lifecycle policy, terminal classification and in-memory audit/result record that makes every currently possible engine outcome explicit. |
+| Non-goals | No normal-completion claim, no reinterpretation of a COMMAND terminal record, no engine result ABI change, no in-flight cancellation, no BOP implementation, no trace-led work, and no Bochs/mantle change. |
+| Reference Baseline | T212 S1 map; T203/T206/T207 closures; current engine contract/run and native CLI result mapping. |
+| Files And ABI Surface | New project-owned fixed-width C ABI and focused test under `src/cli`/`tests`; native CLI may consume it without changing the engine contract. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | A complete current-state source/ABI/failure table and fixed-width candidate-boundary diagram; governance and diff checks. |
-| Expected Markers | Every lifecycle concern has one owner, an available/deferred verdict and no implicit conversion of controlled stop into normal completion. |
-| Asset Needs | Existing repository source and current engine/CLI boundary evidence only; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record current producers/consumers, lifetime/cleanup order, host API availability, negative cases and the next S admission boundary. |
-| Stop Conditions | Any required public lifecycle semantics not supported by source evidence, or any need to alter engine/BOP/Bochs behavior, pauses S1 for re-admission. |
-| Exit Criteria | The map covers every named lifecycle concern, identifies a coherent next implementation S, and leaves no outcome implied by a trace or package-local record. |
+| Verification | Source-built MSVC x64 `/MT` policy/classification fixture, negative validation cases, governance and diff checks. |
+| Expected Markers | Every engine terminal is classified exactly once; no policy can manufacture ordinary completion or in-flight cancellation; audit data carries no host handle or guest state. |
+| Asset Needs | Existing engine contract header and modern x64 CLI fixture toolchain only; no firmware/media/device import or native trace. |
+| Reporting Requirements | Record ABI ownership, terminal mapping, policy defaults, negative cases and deferred cooperative-cancellation boundary. |
+| Stop Conditions | Any need to change engine/machine-stage/Bochs ABI, to import a guest result, or to use raw process handles pauses S2 for re-admission. |
+| Exit Criteria | One versioned copied ABI and focused test prove validation, distinct classification and no-result-fabrication; the active native CLI has a clear next integration boundary. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, cancellation/budget helpers, terminal observations, composition reset and T203/T206/T207 evidence. |
+| Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, retained child cancellation, finite fixture timers, terminal observations, composition reset and T203/T206/T207 evidence. |
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
