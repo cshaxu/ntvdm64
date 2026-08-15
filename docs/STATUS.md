@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T215 S6.** Its governing brief is the active
+> **Current effective packet: M0 T216 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T215 S6 -- bounded startup BOP sequence observation.**
+**Active: M0 T216 S1 -- guest executable-image visibility source/ABI map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -15,33 +15,35 @@
 > **T213 closed:** its terminal model and COMMAND handoff are recorded in
 > [history](history/m0-t213-closure-20260815.md). **T214 closed:** its
 > current-profile composition admission recovery is recorded in
-> [history](history/m0-t214-closure-20260815.md).
+> [history](history/m0-t214-closure-20260815.md). **T215 closed:** its
+> startup configuration attachment and causal classification are recorded in
+> [history](history/m0-t215-closure-20260815.md).
 
 ## Active Packet
 
-> **T scope:** T215 reconciles the global OpenNT BOP owner catalog with the
-> actual integrated bx-vdm implementation, then recovers the complete already
-> designed startup-configuration package attachment that the terminal evidence
-> shows is absent from current composition. It does not select an endpoint
-> from a native trace or implement a BOP from that observation.
+> **T scope:** T216 recovers the complete declared guest executable-image
+> visibility and SYSINIT COMMAND interpreter load contract. It begins with the
+> OpenNT guest/source, provider/ABI and failure map, then follows the mandatory
+> recovery ladder as one package. It does not implement a leaf BOP merely
+> because T215 observed its terminal.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T215 S6, Ordinary Mode. |
-| Admission And Approval | S5 has completed its two-image direct-provider overlay and recorded an unchanged `50:3D` terminal. OpenNT source has two reachable `SVC_DEMEXITVDM` call sites with different owners (`doskrnl/bios/sysinit1.asm` and `cmd/command/init.asm`). A default-off, selector-blind bounded sequence observer is the smallest non-semantic evidence step needed to select the next existing owner package. |
-| Objective | Observe, in one native source-built run, the bounded ordered sequence of already accepted BOP selector/service identities and CS:EIP before the first terminal; map the terminal's predecessor sequence to the original SYSINIT or COMMAND source path. |
-| Non-goals | No BOP implementation, routing alteration, guest-memory read, BOP argument parsing, CPU/result mutation, Bochs/mantle change, host policy change, trace-derived backlog or guest-run claim. |
-| Reference Baseline | T215 S3/S5 evidence; `dossvc.h`; `doskrnl/bios/sysinit1.asm`; `cmd/command/init.asm`; existing generic-UD bridge and disabled terminal observer. |
-| Files And ABI Surface | A bx-vdm test-only fixed-capacity observation record, generic bridge call-site and existing native fixture output. No production provider, Bochs, guest or OpenNT ABI change. |
+| Identifier Mode | M0 T216 S1, Ordinary Mode. |
+| Admission And Approval | T215 S6 proves that CONFIG is consumed, but SYSINIT subsequently reaches its command-interpreter load/error terminal. Current boot namespace owns the declared `COMMAND.COM` bytes, yet T215 S5's direct-provider overlay only claims CONFIG/AUTOEXEC paths. This is an already designed owner-package seam, not a `50:3D` or trace-selected BOP patch. |
+| Objective | Produce a complete source/ABI/failure and provider-disposition map for SYSINIT's open/size/EXEC path and every declared guest executable image (`COMMAND.COM`, first target, optional terminal target), identifying the smallest OpenNT-first recovery route. |
+| Non-goals | No implementation, BOP routing change, native trace, guest-memory instrumentation, Bochs/mantle change, virtual drive generalization, host-path policy expansion, or guest-run claim. |
+| Reference Baseline | T215 closure/S6 causal map; OpenNT `doskrnl/bios/sysinit1.asm`, DOS open/EXEC dispatch; boot namespace/provider; direct DEM namespace/handle provider; current profile/admission code and full BOP catalogue. |
+| Files And ABI Surface | Research/operations evidence plus any documentation-only queue/status/history changes. No production ABI or provider implementation change in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused observer contract test plus one current full composition MSVC x64 `/MT` run with the observer enabled only by the fixture. The record must be empty when disabled, bounded, and contain only copied selector/service identity, CS:EIP and accepted disposition. Governance and diff checks pass. |
-| Expected Markers | A finite ordered BOP sequence ending in `50:3D`, with a source-backed predecessor classification; no changed outcome, new handler, or guest-memory read. |
-| Asset Needs | Existing OpenNT and bx-vdm source, T204 reader/provider/fixtures, explicit test configuration files, and current source-built fixture; no firmware/media/device import. |
-| Reporting Requirements | Record observer lifetime, exact copied fields, sequence, source mapping confidence and all nonclaims. |
-| Stop Conditions | Any need to inspect guest memory, record BOP arguments, change control flow/provider behavior, expand the fixed capacity, alter Bochs/mantle, or select/implement a BOP from the trace pauses S6 for re-admission. |
-| Exit Criteria | A reproducible bounded sequence establishes whether `50:3D` belongs to the SYSINIT or COMMAND path, or honestly records that the available trace cannot distinguish them. |
+| Verification | Source-path and current-provider audit; full disposition table for image name, path/search identity, open/seek/read/close/time/mutation and any EXEC-specific prerequisite; recovery-ladder classification; governance and diff checks. |
+| Expected Markers | A package boundary that proves which existing namespace surfaces already support each image, which direct-provider paths shadow it, and whether original source can be compiled, shimmed, source-derived, deferred or rejected. |
+| Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T215 evidence; no new image, firmware, media or external source import. |
+| Reporting Requirements | Record every original source path, caller/owner, copied ABI surface, success/failure rule, profile disposition, current workaround and retain/migrate/replace/delete decision; distinguish fact from inference. |
+| Stop Conditions | Any need to add a BOP handler, widen a path overlay, parse an unbounded guest request, alter a profile, inspect live guest memory, modify Bochs/mantle, or claim an executable is runnable pauses S1 for new admission. |
+| Exit Criteria | An auditable complete map selects a single source-first implementation plan (or an explicit unavailable/deferred disposition) for the whole package, with no leaf trace patch. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Generic bridge variants, ingress classification, terminal/normal-return observers, fixture-only enable/disable, source call sites, and absence of guest-memory/CPU/result access. |
+| Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
