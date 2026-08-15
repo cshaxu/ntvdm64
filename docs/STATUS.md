@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T206 S1.** Its governing brief is the active
+> **Current effective packet: M0 T206 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T206 S1 -- one-shot normal terminal source/ABI map.**
+**Active: M0 T206 S2 -- one-shot COMMAND terminal handoff.**
 
 > **T205 closed:** its current-profile XMS boundary is recorded in
 > [history](history/m0-t205-closure-20260815.md). The table below is the sole
@@ -15,27 +15,27 @@
 
 > **T scope:** T206 recovers a truthful one-shot normal guest terminal-result
 > boundary before the queued CLI lifecycle-governance package may begin. S1
-> maps the original COMMAND terminal path, current engine terminal values,
-> CLI exit mapping, ownership and failures before any terminal behavior is
-> implemented.
+> identified the original `54:0B` owner and current loss points. S2 recovers
+> the full one-shot COMMAND terminal handoff only; engine/CLI publication is
+> later work.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T206 S1, Ordinary Mode. |
-| Admission And Approval | Owner's continuing CLI NTVDM objective and prior authorization to select the next dependency/ROI-ranked package. The queue's lifecycle package is deliberately not admitted because its normal-terminal prerequisite is not yet proven. |
-| Objective | Produce the complete source/ABI/failure map required to recover a truthful normal guest terminal result from OpenNT COMMAND through bx-vdm, engine and CLI. |
-| Non-goals | No cancellation or audit-log feature, interactive console, new unrelated BOP provider, host service mutation, Bochs feature/device admission, ambient environment transport or trace-selected endpoint patch. |
-| Reference Baseline | Current direct CLI-to-engine handoff, T200/T203 terminal evidence, COMMAND `54:01/54:0B` source, and the queue lifecycle package's normal-terminal prerequisite. |
-| Files And ABI Surface | Read-only inspection and an evidence record only. Later S work may add one versioned fixed-width terminal result contract between bx-vdm, mantle engine and CLI; it cannot expose CPU or guest pointers. |
+| Identifier Mode | M0 T206 S2, Ordinary Mode. |
+| Admission And Approval | T206 S1 source/ABI map and owner direction that normal completion cannot be fabricated from controlled stop or historical host-broker behavior. |
+| Objective | Recover one source-derived COMMAND package handoff for declared-plan ordinary terminal return: correct `54:0B` routing, terminal record, exact refusal cases and package regression. |
+| Non-goals | No engine/CLI publication, controlled-stop reinterpretation, trace, BaseSrv/CSR broker, host-child queue, interactive console, Bochs feature/device work or host mutation. |
+| Reference Baseline | T206 S1 map, original `cmddisp.c`/`cmdexec.c`, existing `54:01`/`54:0B` session state, and T202 re-entry rejection. |
+| Files And ABI Surface | bx-vdm COMMAND session/adapter route and focused tests only. Any record is versioned, fixed-width, copied and contains no CPU state, guest address, pointer or host handle. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect COMMAND normal/re-entry terminal paths, current adapter result production, engine terminal mapping and CLI exit logic; map every input/owner/error path; governance and diff checks. |
-| Expected Markers | One source-backed normal-terminal owner, no fixture-only result substitution, exact unreachable/blocked edges, and a later S order for one terminal result ABI. |
+| Verification | Strict MSVC x64 `/MT` regression covering `54:01`, `54:0B`, `54:11`, repeated return, re-entry and terminal-record absence/presence; governance and diff checks. |
+| Expected Markers | `54:0B` route is reachable only under its original service identity; terminal record is created only at declared-plan exhaustion; no BOP/host/fixture side channel. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record source paths/hashes, caller/return ownership, current engine/CLI loss points, failure disposition, unavailable prerequisites and a cohesive S sequence. |
-| Stop Conditions | Any need to alter unrelated BOP semantics, guest DOS/COMMAND behavior, Bochs lifecycle, host system state, or use a trace as the basis of an endpoint patch pauses S1 for re-admission. |
-| Exit Criteria | A reviewable T206 plan identifies the one truthful terminal-result ABI and all source-backed requirements needed before implementation begins. |
+| Reporting Requirements | Record source paths/hashes, terminal record layout, exact route/failure table, test recipe and remaining engine/CLI publication boundary. |
+| Stop Conditions | Any need to make normal return stop the CPU, alter host-broker behavior, add Bochs/guest semantics, use a trace as endpoint admission or publish to CLI pauses S2 for re-admission. |
+| Exit Criteria | One source-built COMMAND handoff and regression prove a bounded terminal record and exact source service routing, with no engine/CLI completion claim. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect COMMAND bootstrap, `54:01`, `54:0B`, normal return/re-entry, exhausted-plan stop, DOS exit code, adapter typed result, engine terminal map, CLI process exit, cleanup and repeated runs. |
+| Similar-Issue Sweep | Inspect `54:01`, `54:0B`, `54:11`, declared one/two-slot plans, repeat/re-entry, existing controlled stop, terminal record reset and every adapter route to COMMAND lifecycle. |
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
@@ -87,6 +87,10 @@
 > **T205 closed:** the current-profile XMS owner package is routed and
 > source-built, with C3/C5-gated functionality honestly deferred rather than
 > fabricated. See the [closure record](history/m0-t205-closure-20260815.md).
+
+> **T206 S1 closure:** original `54:0B` is currently blocked by an incorrect
+> `0x11` adapter gate; even a repaired return remains package-local until a
+> later engine/CLI ABI exists. See the [source/ABI map](etc/research/t206-s1-one-shot-normal-terminal-source-abi-map-001.md).
 
 > **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one
