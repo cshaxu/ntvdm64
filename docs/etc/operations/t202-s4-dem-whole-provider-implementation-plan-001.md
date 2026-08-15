@@ -115,6 +115,10 @@ whole package switch only.  It may not create an additional endpoint task.
    direct/readonly/overlay regression without binding legacy BOP routes.
 2. Add the six partitions above behind that same provider and expand the one
    package regression until all 29 identities are covered.
+
+   The remaining FCB wildcard delete/rename source contract and provider
+   regression are specified by
+   [the FCB wildcard provider plan](t202-s4-dem-fcb-wildcard-provider-plan-001.md).
 3. Switch DEM package dispatch once, displacing all S3-listed workaround
    routes as retain/migrate/replace/defer requires.  A partition may have a
    narrow transition route only when it can prove that its input token was
