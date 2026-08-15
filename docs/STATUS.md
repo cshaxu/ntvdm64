@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T208 S2.** Its governing brief is the active
+> **Current effective packet: M0 T209 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T208 S2 -- DEM lifecycle/termination reconciliation and family-regression admission.**
+**Active: M0 T209 S1 -- boot-namespace/startup-configuration construction map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -15,43 +15,32 @@
 
 ## Active Packet
 
-> **T scope:** T208 audits the complete DEM lifecycle/termination owner
-> package before any implementation decision. S1 closed the `50:38..3D`
-> source/ABI/failure/profile/workaround map; S2 reconciles its declared
-> family outcomes and admits one package-level close/defer decision.
+> **T scope:** T209 repairs the independent boot-namespace/startup-
+> configuration initialization closure uncovered by T208. S1 maps the
+> declared-but-unbound state, its construction/bind order and every caller
+> before any source change.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T208 S2, Ordinary Mode. |
-| Admission And Approval | [S1's complete map](etc/research/t208-s1-dem-lifecycle-termination-source-abi-map-001.md) identifies one ordinary no-debug group (`38..3B`), one retained bounded PDB cleanup (`3C`) and one fatal terminal fence (`3D`). S2 reconciles that entire declared family. |
-| Objective | Make the whole `50:38..3D` regression and evidence wording explicitly distinguish source-equivalent no-debug no-ops, the bounded PDB-search cleanup, and fatal VDM termination; then record the package-level close/defer decision. |
-| Non-goals | No new BOP behavior, trace-led endpoint implementation, engine/CLI terminal change, VDD/host broker recovery, Bochs feature/device work or host mutation. A trace may only validate a later, fully admitted package result. |
-| Reference Baseline | T200 global BOP ledger, T201 shared mutation-capability foundation, T202 DEM package evidence, T208 S1 map, and original DEM dispatch/lifecycle sources. |
-| Files And ABI Surface | Test/evidence reconciliation only. No product ABI change and no new provider route. |
+| Identifier Mode | M0 T209 S1, Ordinary Mode. |
+| Admission And Approval | T208's [S2 reconciliation](etc/research/t208-s2-dem-lifecycle-regression-reconciliation-001.md) proves an unbound CONFIG/AUTOEXEC declaration cannot currently construct `bx_ntvdm_boot_namespace_provider_v1`, despite T204's explicit decision that unbound bytes remain zero. |
+| Objective | Map the complete current construction/bind/lifecycle contract for declared-but-unbound CONFIG/AUTOEXEC entries, profile search metadata and every boot-namespace consumer; produce one owner-preserving repair design. |
+| Non-goals | No BOP selector implementation, synthetic boot-byte restoration, trace-led work, host API integration, engine/CLI lifecycle change, Bochs change, or provider routing change. |
+| Reference Baseline | T204 startup-configuration evidence, T208 negative regression evidence, current boot namespace/configuration sources and the T200/T201 ownership/profile authorities. |
+| Files And ABI Surface | Read-only source and ABI map only in S1. Any later repair remains inside `src/bx-vdm` configuration/namespace ownership and preserves fixed-width external contracts. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One whole-family regression records the six declared outcomes; all assertions and evidence distinguish no-debug, bounded cleanup and fatal terminal behavior; governance and diff checks. |
-| Expected Markers | Every lifecycle identity has one owner and declared outcome; no endpoint is selected merely because it appeared in a trace. |
+| Verification | Complete state-transition table from profile declaration through provider construction, optional bind, search snapshot and consumers; sources/hashes, invariant list, repair alternatives and one S2 proposal; governance and diff checks. |
+| Expected Markers | Unbound and bound configuration state each has one valid owner, payload rule and consumer disposition; no synthetic byte or BOP workaround is assumed. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record the focused regression/evidence outcome, every retained/deferred limit, and the package-level close/defer decision. |
-| Stop Conditions | Any attempt to add a BOP implementation, turn a stop into success, use a trace as a source of task selection, or move DEM semantics into mantle pauses S2 for re-admission. |
-| Exit Criteria | Reviewable family reconciliation and one package-level close/defer decision. |
+| Reporting Requirements | Record sources/hashes, construction state table, all reachable consumers, exact rejected invariant, repair alternatives and S2 admission recommendation. |
+| Stop Conditions | Any implementation before the full state/caller map, restoration of synthetic startup bytes, change to BOP semantics, or migration into mantle/core pauses S1 for re-admission. |
+| Exit Criteria | Reviewable source/ABI/lifecycle map and one bounded owner-preserving repair design. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | DEM dispatch table, PDB terminate, DEM exit, process launch/return, fatal/error exit, shutdown/reset and every related current facade/provider route. |
+| Similar-Issue Sweep | `readonly_namespace`, `boot_namespace_provider/plane/composition`, startup configuration policy/provider, profile search snapshot, COMMAND boot input/file routes, DEM PDB/search fixture and every initialization/bind call site. |
 
-> **T208 S1 closure:** original `50:38..3D` divides into the selected
-> no-debug diagnostic group (`38..3B`), bounded per-PDB search-state cleanup
-> (`3C`) and fatal VDM termination (`3D`).  This is an owner-package map, not
-> a claim of debugger, VDD, engine or CLI lifecycle recovery; see the
-> [source/ABI map](etc/research/t208-s1-dem-lifecycle-termination-source-abi-map-001.md).
-
-> **T208 S2 progress:** the family fixture now keeps `3C` out of its no-debug
-> group and the common x64 fixture manifest includes the current passive
-> observer source.  Fresh source builds expose two retained negative results:
-> the whole DEM fixture's existing FCB transaction failure and an internal
-> unbound startup-configuration/namespace initialization inconsistency that
-> prevents the standalone PDB-cleanup fixture from constructing its state.
-> Neither is a BOP lifecycle implementation task or a missing Win32 API; see
-> the [reconciliation record](etc/research/t208-s2-dem-lifecycle-regression-reconciliation-001.md).
+> **T208 closed:** its lifecycle/termination owner-package audit deliberately
+> did not add BOP behavior. The resulting cross-package construction gap is
+> now T209; see the [closure record](history/m0-t208-closure-20260815.md).
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates

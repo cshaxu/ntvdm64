@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1465 |
+| Documentation records | 1466 |
 | --- | --- |
-| Generated UTC | 2026-08-15T12:47:19Z |
+| Generated UTC | 2026-08-15T12:49:51Z |
 
 ## Entries
 
@@ -1198,6 +1198,7 @@ content-divergent entries.
 | history/m0-t205-s2-closure-20260815.md | closed task history | e42ef6560de89d2664f54aed813bf3dbb3bb4352a132ffd72c68c5743537ed87 |
 | history/m0-t206-closure-20260815.md | closed task history | d7d85956a0ce7e6fb94ba69fc61f85f93ccdd669b9552313484928d3eb9de9ed |
 | history/m0-t207-closure-20260815.md | closed task history | 6d0f2a78c35ff96ce49c1da31a8c45dc4df4481addc148076fdbc05b0e24cce5 |
+| history/m0-t208-closure-20260815.md | closed task history | 35fb5c4df1d6e9922094c2dd20167c5c7df3a93c001e447f17fbbf1dbf849ec8 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | 9b40b99939aad1233b4901b7f7f6569c64ac90b83a351e9a78268251d63c9154 |
@@ -1353,7 +1354,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | 93a263d3aa4763d56f28078585a1a12f4ffff831020c2ba428dfb3b36cf16c6d |
-| QUEUE.md | principal control document | c6d3c809c27d65462270387c67719fe1e6e7b7165c7f2cf78ac729e8a2f149b6 |
+| QUEUE.md | principal control document | 424ed38f54af22eb28ff9fbbb0e2eef310e1ade503ed1ae4ba1f72dcdcf137af |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | fef23048d411b355f5c2e08b971fec6370359120e7d9c7da383cb883f1dfa2da |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | dd298ea27d815fb69cc843ecf334a2664ba740bb6ede8e0c90907d918c64086a |
@@ -1479,7 +1480,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 7714f4c8906b95e7d18c8768249ad046fec829fc1de5163654a6c01c44139769 |
+| STATUS.md | principal control document | d17989f762723be643e48b01b4310153957751bb3d4c0b0010f80093cf409197 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |
