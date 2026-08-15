@@ -35,6 +35,12 @@
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Inspect NTIO/NTDOS/COMMAND startup handoffs; BOP `5E`, DEM `50:3D`, configuration/boot-input records, profile descriptors, guest-memory loading, terminal/engine seams, and current boot/readonly/virtual profile workarounds. |
 
+> **T204 S1 progress:** the declared-profile map identifies the current
+> `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one
+> synthetic contained-profile workaround, not historical OpenNT configuration
+> closure.  Original transformation, `5E` owner actions and the fatal `50:3D`
+> disposition are separately owned.  See the [startup configuration map](etc/research/t204-s1-contained-guest-startup-configuration-map-001.md).
+
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
 > target is `54:0B`; see the [selector source map](etc/research/t203-s1-command-terminal-selector-source-map-001.md).
