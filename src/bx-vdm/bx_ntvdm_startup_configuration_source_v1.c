@@ -6,7 +6,8 @@
 #define BX_NTVDM_CONFIG_ENV L"NTDOS64_STARTUP_CONFIG_SOURCE"
 #define BX_NTVDM_AUTOEXEC_ENV L"NTDOS64_STARTUP_AUTOEXEC_SOURCE"
 
-static int read_oem(const wchar_t *path, uint8_t *out, uint32_t *bytes)
+static int read_oem(const wchar_t *path, uint8_t *out, uint32_t *bytes,
+    int require_nonempty)
 {
     HANDLE file; LARGE_INTEGER size; DWORD read = 0u;
     if (!path || !*path || !out || !bytes) return 0;
@@ -17,7 +18,7 @@ static int read_oem(const wchar_t *path, uint8_t *out, uint32_t *bytes)
     if (!ReadFile(file, out, (DWORD)size.QuadPart, &read, 0) || read != (DWORD)size.QuadPart) { CloseHandle(file); return 0; }
     CloseHandle(file);
     *bytes = read;
-    return *bytes != 0u;
+    return !require_nonempty || *bytes != 0u;
 }
 
 int bx_ntvdm_startup_configuration_source_v1_from_environment(
@@ -40,8 +41,8 @@ int bx_ntvdm_startup_configuration_source_v1_from_environment(
             BX_NTVDM_STARTUP_CONFIGURATION_SOURCE_V1_EXPLICIT_HOST) ||
         !WideCharToMultiByte(CP_OEMCP, 0, root, -1, (char *)input->system_root,
             sizeof(input->system_root), 0, 0) ||
-        !read_oem(config, input->config, &input->config_bytes) ||
-        !read_oem(autoexec, input->autoexec, &input->autoexec_bytes)) return 0;
+        !read_oem(config, input->config, &input->config_bytes, 1) ||
+        !read_oem(autoexec, input->autoexec, &input->autoexec_bytes, 0)) return 0;
     input->system_root_bytes = (uint32_t)strlen((const char *)input->system_root);
     input->country_id = 1u; input->oem_code_page = cp;
     return bx_ntvdm_startup_configuration_input_v1_valid(input);

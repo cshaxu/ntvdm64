@@ -4,7 +4,9 @@ The adapter now has an installation-time reader for the paired CLI child
 environment values.  It accepts only both nonempty paths, opens each once for
 read, limits each raw OEM input to 4095 bytes, copies the bytes into the fixed
 T204 provider input, captures OEM root/code-page facts, and discards every
-path and handle before provider construction.
+path and handle before provider construction. `CONFIG.SYS` must be nonempty;
+an empty `AUTOEXEC.BAT` remains a valid explicit input, matching the provider
+ABI rather than accidentally reviving a synthetic empty default.
 
 `bx_ntvdm_adapter_runtime_v1_install` creates the current direct-mode COMMAND
 session-context policy, invokes the reader, and binds the ready provider into
@@ -19,3 +21,10 @@ DTA registration local.  No BOP or Bochs behavior changed.
 
 An installation-level positive/negative fixture remains required before S5
 closure.
+
+The focused reader regression
+`tests/bx-vdm/bx_ntvdm_startup_configuration_source_v1_test.c` was built and
+run with MSVC x64 `/MT /W4 /WX`. It proves a copied nonempty CONFIG plus an
+empty explicit AUTOEXEC, then rejects a missing paired value, empty CONFIG and
+a 4096-byte source. This is reader-boundary evidence only; it does not replace
+the pending adapter-installation fixture.
