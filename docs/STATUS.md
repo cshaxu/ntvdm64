@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T202 S6.** Its governing brief is the active
+> **Current effective packet: M0 T202 S7.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T202 S6 -- COMMAND whole-provider recovery.**
+**Active: M0 T202 S7 -- COMMAND host-child re-entry capability admission.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T202 S6, Ordinary Mode. |
-| Admission And Approval | [S5 closure](history/m0-t202-s5-closure-20260815.md) admits the complete COMMAND provider against its source/ABI/mutation map and package regression plan. Ordinary user-mode host integration is permitted; host installation or system modification is not. |
-| Objective | Recover one atomic bx-vdm COMMAND provider for all `54:00..10` identities, with session-private copied host-context, console, stream and process-lifecycle capability dispositions and no legacy endpoint fallback. |
-| Non-goals | No individual trace-selected BOP patch; no raw `HANDLE`/pointer guest transport; no child-VDM broker substitute; no VDD/GUI dependency; no host installation/rebuild; no Bochs semantic change; no Redirector/XMS/DPMI/WOW recovery; and no native trace before package regression passes. |
-| Reference Baseline | [S5 closure](history/m0-t202-s5-closure-20260815.md), [S5 map](etc/research/t202-s5-command-host-capability-source-abi-map-001.md), [S5 regression plan](etc/operations/t202-s5-command-whole-provider-regression-plan-001.md), `cmddisp.c` and its original COMMAND modules. |
-| Files And ABI Surface | New COMMAND session-private capability/provider records, fixed-width copied actions/results, package dispatcher changes, x64 `/MT` regression and evidence. No host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
+| Identifier Mode | M0 T202 S7, Ordinary Mode. |
+| Admission And Approval | S6 closure and the user's continuing request for complete, owner-package BOP recovery admit this lifecycle-contract analysis before any re-entry implementation. Ordinary user-mode host integration is permitted; host installation or system modification is not. |
+| Objective | Establish the complete source/ABI/failure and profile map for one CLI-owned typed host-child→DOS re-entry capability, or prove its source-shaped terminal deferral. |
+| Non-goals | No individual trace-selected BOP patch; no raw `HANDLE`/pointer guest transport; no historical VDM broker/event-thread/VDD substitute; no interactive console or Redirector pipe bridge; no host installation/rebuild; no Bochs semantic change; and no native trace before an admitted whole lifecycle capability passes regression. |
+| Reference Baseline | [S6 closure](history/m0-t202-s6-closure-20260815.md), [S6 ledger](etc/research/t202-s6-command-package-closure-ledger-001.md), `cmdexec.c`, `cmdmisc.c`, `cmdredir.c`, and the [S7 admission plan](etc/operations/t202-s7-command-reentry-capability-admission-plan-001.md). |
+| Files And ABI Surface | Source/ABI map and, only after admission, fixed-width session-owned request/result/cancellation records with x64 `/MT` regressions. No host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One MSVC x64 `/MT` bound-package regression covers all 17 services, profile decisions and stated negative cases; no raw handle/pointer crosses the ABI; dispatcher inventory, documentation governance and diff checks pass. A bounded native trace follows only after that regression. |
-| Expected Markers | One non-overlapping COMMAND provider owns every callable service; source-derived deferred results are provider-owned; legacy leaves are displaced from product composition; direct host context is capability-gated. |
+| Verification | Complete source map for all connected lifecycle callers and branches; profile/failure matrix; documentation governance and diff checks. Any later implementation requires fixed-width stale/duplicate/cancelled/cross-session regressions before one bounded native trace. |
+| Expected Markers | One explicit owner/disposition for every host-child→DOS lifecycle branch; no implicit broker or endpoint fallback; a go/no-go admission decision for a bounded queue. |
 | Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
-| Reporting Requirements | Record provider provenance, all 17 outcomes, profile matrix, direct-host API use, deferred composition boundaries, displaced workaround action and source-built result; do not claim Redirector, child lifecycle or native guest closure without their separate evidence. |
-| Stop Conditions | Any fallback to trace-selected work, endpoint-only implementation, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, hidden VDMREDIR substitute, unadmitted host mutation, or child-process result encoded as host exit code pauses S6 for re-admission. |
-| Exit Criteria | A reviewer can link every callable identity to the one COMMAND provider; package regression proves all listed positive/negative capability boundaries; old product-facing leaves are displaced; and evidence states remaining stream, child-lifecycle and VDD limitations. |
+| Reporting Requirements | Record source provenance, each lifecycle branch, queue ownership, fixed-width ABI candidates, profile disposition, ordinary host API use and any irreducible historical dependency; do not claim queue implementation or native guest closure without separate evidence. |
+| Stop Conditions | Any fallback to trace-selected work, endpoint-only implementation, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, hidden VDMREDIR substitute, unadmitted host mutation, or queue result encoded as host process exit code pauses S7 for re-admission. |
+| Exit Criteria | A reviewer can trace every connected host-child/DOS-return branch to an explicit typed queue design or documented source-shaped terminal deferral, with a justified whole-capability go/no-go decision. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect all COMMAND session/facade/profile leaves, DEM pipe consumers, CLI host context, VDD/GUI/process dependencies and global registry for duplicate owner, raw-handle, synthetic host state, or endpoint-only fallback. |
+| Similar-Issue Sweep | Inspect all COMMAND session/facade/profile leaves, DEM pipe consumers, CLI launch plan, terminal transport, VDD/GUI/process dependencies and global registry for duplicate owner, raw-handle, implicit scheduler or endpoint-only fallback. |
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
