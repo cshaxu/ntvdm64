@@ -112,6 +112,7 @@ int main(void)
     char oem_rename_two[MAX_PATH] = {0}, oem_rename_pattern[MAX_PATH] = {0};
     char oem_rename_destination[MAX_PATH] = {0}, oem_profile_pattern[MAX_PATH] = {0};
     char oem_config[MAX_PATH] = {0}, oem_command[MAX_PATH] = {0};
+    char oem_target[MAX_PATH] = {0}, oem_quit[MAX_PATH] = {0};
     uint8_t drive;
     uint32_t service;
     int failed = 0;
@@ -135,7 +136,9 @@ int main(void)
         static const uint8_t config_bytes[] = "FILES=20\r\n";
         static const uint8_t autoexec_bytes[] = "@ECHO OFF\r\n";
         static const uint8_t command_bytes[] = "COMMAND";
-        startup_images.file_count = 3u;
+        static const uint8_t target_bytes[] = "TARGET";
+        static const uint8_t quit_bytes[] = "QUIT";
+        startup_images.file_count = 5u;
         startup_images.drive_index = drive;
         startup_images.generation = UINT32_C(0x4e534001);
         startup_images.files[0].bytes = command_bytes;
@@ -148,15 +151,27 @@ int main(void)
         startup_images.files[2].byte_count = sizeof(autoexec_bytes) - 1u;
         startup_images.files[2].dos_time = 0x1234u;
         startup_images.files[2].dos_date = 0x5678u;
+        startup_images.files[3].bytes = target_bytes;
+        startup_images.files[3].byte_count = sizeof(target_bytes) - 1u;
+        startup_images.files[4].bytes = quit_bytes;
+        startup_images.files[4].byte_count = sizeof(quit_bytes) - 1u;
         if (wcscpy_s(startup_images.files[0].path,
                 BYOB_PROFILE_GUEST_PATH_MAX_CHARS, L"\\COMMAND.COM") != 0 ||
             wcscpy_s(startup_images.files[1].path,
                 BYOB_PROFILE_GUEST_PATH_MAX_CHARS, L"\\CONFIG.SYS") != 0 ||
             wcscpy_s(startup_images.files[2].path,
                 BYOB_PROFILE_GUEST_PATH_MAX_CHARS, L"\\AUTOEXEC.BAT") != 0 ||
+            wcscpy_s(startup_images.files[3].path,
+                BYOB_PROFILE_GUEST_PATH_MAX_CHARS, L"\\TARGET.COM") != 0 ||
+            wcscpy_s(startup_images.files[4].path,
+                BYOB_PROFILE_GUEST_PATH_MAX_CHARS, L"\\QUIT.COM") != 0 ||
             sprintf_s(oem_config, sizeof(oem_config), "%c:\\CONFIG.SYS",
                 (char)('A' + drive)) < 0 ||
             sprintf_s(oem_command, sizeof(oem_command), "%c:\\COMMAND.COM",
+                (char)('A' + drive)) < 0 ||
+            sprintf_s(oem_target, sizeof(oem_target), "%c:\\TARGET.COM",
+                (char)('A' + drive)) < 0 ||
+            sprintf_s(oem_quit, sizeof(oem_quit), "%c:\\QUIT.COM",
                 (char)('A' + drive)) < 0 ||
             !bx_ntvdm_dem_whole_provider_v1_set_startup_namespace(&provider,
                 &startup_images)) failed = 11;
@@ -212,6 +227,28 @@ int main(void)
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
                     &boundary, &cpu, oem_command, 0, &result) || cf_set(&result) ||
                 result.cpu_delta.gpr16_values[2] != 7u)) failed = 16;
+            if (!failed) {
+                struct bx_ntvdm_mechanical_action_v1 close_action;
+                token_into_cpu(&cpu, ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                    result.cpu_delta.gpr16_values[5]);
+                if (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&provider, 0x02u,
+                        &boundary, &cpu, &window, &close_action, &result) || cf_set(&result)) failed = 17;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.ebx = 0u;
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
+                    &boundary, &cpu, oem_target, 0, &result) || cf_set(&result) ||
+                result.cpu_delta.gpr16_values[2] != 6u)) failed = 18;
+            if (!failed) {
+                struct bx_ntvdm_mechanical_action_v1 close_action;
+                token_into_cpu(&cpu, ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                    result.cpu_delta.gpr16_values[5]);
+                if (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&provider, 0x02u,
+                        &boundary, &cpu, &window, &close_action, &result) || cf_set(&result)) failed = 19;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.ebx = 0u;
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
+                    &boundary, &cpu, oem_quit, 0, &result) || cf_set(&result) ||
+                result.cpu_delta.gpr16_values[2] != 4u)) failed = 20;
             {
                 const uint8_t bop_fcb[4] = { 0xc4u, 0xc4u, 0x50u, 0x2fu };
                 bx_ntvdm_instruction_window_v1_capture(&window, bop_fcb,

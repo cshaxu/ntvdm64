@@ -68,6 +68,12 @@
 > complete DEM provider probe recompiles and passes. Target-image family
 > coverage and final composition regression remain open.
 
+> **T216 S2 P4 progress:** the whole-provider fixture now proves readonly
+> open/token lifecycle for declared COMMAND, first target and optional terminal
+> target images. Its x64 `/MT` run passes. A separate full-composition attempt
+> emitted only partial compile evidence and no link/run result, so composition
+> regression remains explicitly open.
+
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
 > and COMMAND composition descriptions, preserves deferred/unavailable family
