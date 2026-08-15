@@ -57,6 +57,13 @@
 > remains pending the existing broad CPU link failure. UMB/INT15 remain out of
 > scope.
 
+> **T205 S2 P3 progress:** the package regression now covers zero-size
+> allocation and stale free/reallocate as explicit source-derived safe failures
+> (`AX=0` or `CX=0`). OpenNT leaves some zero/same-size temporaries
+> uninitialized, so S2 records no invented success result; the current bounded
+> provider fails those indeterminate requests rather than exposing undefined
+> state.
+
 > **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one
 > synthetic contained-profile workaround, not historical OpenNT configuration

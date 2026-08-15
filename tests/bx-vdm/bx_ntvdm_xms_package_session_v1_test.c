@@ -40,6 +40,11 @@ int main(void)
   if(!dispatch(&s,0u,2u,0u,0u,&r)||r.cpu_delta.gpr16_values[0]!=0u||r.cpu_delta.gpr16_values[3]!=0u)return 2;
   if(!dispatch(&s,2u,0u,0u,64u,&r)||r.cpu_delta.gpr16_values[0]!=1088u)return 3;
   if(!dispatch(&s,3u,1088u,0u,64u,&r)||r.cpu_delta.gpr16_values[0]!=1u)return 4;
+  if(!dispatch(&s,2u,0u,0u,0u,&r)||r.cpu_delta.gpr16_values[0]!=0u)return 10;
+  if(!dispatch(&s,3u,0x2222u,0u,64u,&r)||r.cpu_delta.gpr16_values[0]!=0u)return 11;
+  if(!dispatch(&s,11u,0x2222u,64u,128u,&r)||r.cpu_delta.gpr16_values[1]!=0u)return 12;
+  if(!dispatch(&s,2u,0u,0u,64u,&r)||r.cpu_delta.gpr16_values[0]==0u)return 13;
+  if(!dispatch(&s,11u,r.cpu_delta.gpr16_values[0],64u,64u,&r)||r.cpu_delta.gpr16_values[1]!=0u)return 14;
   if(!dispatch(&s,5u,0u,0u,0u,&r)||r.cpu_delta.gpr16_values[0]!=3072u)return 5;
   if(!dispatch(&s,4u,0u,0u,0u,&r)||r.cpu_delta.gpr16_values[0]==0u)return 6;
   if(!dispatch(&s,10u,0u,0u,0u,&r)||r.cpu_delta.gpr16_values[0]!=2048u||r.cpu_delta.gpr16_values[2]!=1024u)return 7;
