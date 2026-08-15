@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T220 S3.** Its governing brief is the active
+> **Current effective packet: M0 T220 S4.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T220 S3 -- bounded DEM current-PDB helper.**
+**Active: M0 T220 S4 -- direct DEM process-resource transaction map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -38,19 +38,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T220 S3, Ordinary Mode. |
-| Admission And Approval | T220 S2 closed the two-byte design: reuse the checked `50:1B` registration and expose only copied `CurrentPDB`. This S implements exactly that isolated helper and fixture before any provider integration. |
-| Objective | Add a DEM-private, fixed-width `CurrentPDB` request/completion helper that emits at most one exact two-byte checked read, validates its exact copied completion, and publishes only a 16-bit PDB segment/status. |
-| Non-goals | No generic PSP/guest-memory inspector, BOP route change, DEM file/search/FCB integration, `50:3C` behavior change, guest `$Exec` recreation, DOS/BIOS patch, host-mutation expansion, Bochs/mantle change, COMMAND return, target-execution claim, or native trace. |
-| Reference Baseline | T220 S1 ownership map; T220 S2 bounded-read design; OpenNT `demgset.c`, `demfile.c`, `doswow.h`; current `dem_dta_service` registration and `guest_read_action_v1` ABI. |
-| Files And ABI Surface | New `src/bx-vdm/bx_ntvdm_dem_process_owner_v1.[ch]`, focused `tests/bx-vdm` fixture and CMake target, plus evidence; no public runtime ABI or composition binding change. |
+| Identifier Mode | M0 T220 S4, Ordinary Mode. |
+| Admission And Approval | T220 S3 proved the isolated copied identity seam. This S maps the whole direct DEM resource transaction before any composition binding: host open/create, owner snapshot, commit/rollback, ordinary close and PDB termination. |
+| Objective | Establish one source/ABI/failure transaction contract for direct DEM namespace handles (`50:03`, `50:12`, `50:22`), identifying the unique commit point and the exact later `50:3C` release scope. |
+| Non-goals | No runtime BOP route change, DEM file/search/FCB integration, `50:3C` behavior change, generic PSP/guest-memory inspector, guest `$Exec` recreation, DOS/BIOS patch, Bochs/mantle change, COMMAND return, target-execution claim, or native trace. |
+| Reference Baseline | T220 S1--S3 evidence; original OpenNT `demfile.c`, `demsrch.c`, `demgset.c`, `msctrlc.asm`; current direct DEM namespace/handle/session/local-file sources and shared profile ABI. |
+| Files And ABI Surface | `docs/STATUS.md` and `docs/etc/research/` transaction evidence only; no runtime ABI or behavior change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused MSVC x64 `/MT` fixture proves valid little-endian owner, absent registration, zero owner, aperture overflow, wrong address and wrong byte-count refusal; source review proves no pointer/handle/selector field; governance and diff checks pass. |
-| Expected Markers | Fixed-width copied record; DEM-only symbols; one exact two-byte request; no raw pointer, host handle, selector or CPU result; no profile decision. |
-| Asset Needs | Existing OpenNT source/layout headers, current bx-vdm ABI/test sources and MSVC x64 `/MT`; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record exact source field, test command/result, source-first relation and explicit non-integration limitation. |
-| Stop Conditions | A need for a variable/unbounded guest read, generic PSP traversal, PDB/JFT/SFT walk, runtime BOP route change, host mutation behavior change, new Bochs/mantle capability, native trace, guest binary patch or external import pauses S3 for re-admission. |
-| Exit Criteria | The exact helper and focused fixture pass; its absence of composition integration is recorded; a later S may decide how an admitted DEM owner consumes it. |
+| Verification | Account for all current direct-handle creation and release paths, compare their order with original DEM/DOS facts, and identify a no-leak rollback rule plus exact foreign-PDB/TSR behavior; governance and diff checks pass. |
+| Expected Markers | No token is committed before a valid copied owner; ordinary close preserves token ownership checks; `50:3C` is PDB-scoped; boot-fixture lifecycle remains distinct; profile policy never selects process identity. |
+| Asset Needs | Existing OpenNT source and current bx-vdm direct DEM/profile source; no new image, firmware, media or external source import. |
+| Reporting Requirements | Record the transaction diagram, owner/failure/order mapping, existing-gap disposition, and a separately admitted minimal implementation seam if one remains justified. |
+| Stop Conditions | A need for variable/unbounded guest reads, generic PSP traversal, PDB/JFT/SFT walk, runtime BOP route change, host mutation behavior change, new Bochs/mantle capability, native trace, guest binary patch or external import pauses S4 for re-admission. |
+| Exit Criteria | A complete direct-handle transaction contract is evidenced and a narrow implementation S is selected without merging FCB/search or pretending all DEM lifecycle is closed. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | First/subsequent child entry; parent-owned handles crossing child entry; normal/abort/TSR exit; VDD and no-VDD branches; `50:34..3C`; file, FCB, search, pending and DTA state; current session teardown; COMMAND `54:0B`; and direct/readonly/overlay/virtual profile ownership. |
 
@@ -76,6 +76,12 @@
 > handle or `50:3C`; the next S must map the full DEM owner-association
 > transaction before integration.  See the
 > [result](etc/research/t220-s3-dem-current-pdb-helper-result-001.md).
+
+> **T220 S4 P1 closure:** the direct namespace-handle transaction must copy
+> `CurrentPDB` before host open/adopt, commit that owner with the opaque token,
+> and later release only equal-PDB tokens.  FCB/search and `50:3C` binding
+> remain explicitly outside this package.  See the
+> [transaction map](etc/research/t220-s4-direct-dem-resource-transaction-map-001.md).
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
