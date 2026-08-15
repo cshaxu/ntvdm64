@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T220 S1.** Its governing brief is the active
+> **Current effective packet: M0 T220 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T220 S1 -- DEM process-resource ownership recovery map.**
+**Active: M0 T220 S2 -- bounded DEM process-resource bridge design.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -38,19 +38,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T220 S1, Ordinary Mode. |
-| Admission And Approval | The owner directed that the completed T200 audit update the conclusion and continue T218's `$Exec` work.  T219 establishes the needed correction: the successor begins with the original DEM PDB/JFT/SFT owner contract, not an inferred `50:36` token. |
-| Objective | Produce one complete original-source map for DEM process-resource ownership: `demEntryDosApp`, `demTerminatePDB`, `demfile.c` PDB/JFT/SFT lookup, `50:3C`, direct-host file/search/FCB resources, and all normal/abort/TSR/error ordering.  Classify the earliest usable source-recovery rung and the exact shared-profile owner. |
-| Non-goals | No runtime BOP implementation, guest-PDB inspection bridge, guest `$Exec` recreation, DOS/BIOS patch, host-mutation behavior expansion, Bochs/mantle change, COMMAND parent return implementation, target-execution claim, or native trace. |
-| Reference Baseline | T218 `$Exec` map; T219 S1 lifecycle map and T219 S2 reconciliation; original OpenNT `demfile.c`, `demsrch.c`, `demmisc.c`, `msctrlc.asm`, dispatcher and relevant headers; current DEM whole provider/file session/search partitions and shared profile ABI. |
-| Files And ABI Surface | `docs/STATUS.md` and `docs/etc/research/` source/ABI/failure evidence only; no runtime ABI or behavior change. |
+| Identifier Mode | M0 T220 S2, Ordinary Mode. |
+| Admission And Approval | The owner continued the active goal after T220 S1's source map. S1 identifies the only admissible next seam: a bounded copied read of the exact guest PDB/JFT/SFT facts the original DEM owner uses. |
+| Objective | Specify and prove the smallest versioned bx-vdm DEM process-resource read contract: its exact permitted guest ranges, copied result fields, validation/failure rules, lifecycle owner and four-profile policy inputs. Produce a focused source-built fixture; implementation is admitted only if the design proves no broader guest inspection is required. |
+| Non-goals | No generic PSP/guest-memory inspector, BOP implementation, guest `$Exec` recreation, DOS/BIOS patch, host-mutation expansion, Bochs/mantle change, COMMAND return implementation, target-execution claim, or native trace. |
+| Reference Baseline | T220 S1 ownership map; original OpenNT `demfile.c`, `demgset.c`, `demsrch.c`, `demmisc.c`, `msctrlc.asm` and DOS layout headers; current mechanical copied-read ABI and DEM whole provider/file session/search partitions. |
+| Files And ABI Surface | `src/bx-vdm` bounded DEM process-resource read declarations/fixture plus `docs/etc/research/`; no bx-core, bx-mantle, guest, CLI or public runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Map every original owner call and state field to a current resource holder or an explicit gap; prove whether direct source composition is possible; record the exact guest-memory access required before proposing any bridge; cover normal child return, abnormal exit, TSR, VDD/no-VDD, search/file/FCB state, and all four profiles; governance and diff checks pass. |
-| Expected Markers | One authoritative owner/order/failure map; no inference that `DX` at `50:36` identifies all resource ownership; no raw guest pointer ABI; and a source-first decision that names why any original translation unit cannot compose. |
-| Asset Needs | Existing OpenNT source and current bx-vdm DEM/profile source; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record source paths, layouts, ordering, failure paths, composability result, profile owner, proposed minimum ABI only if justified, and all limitations. |
-| Stop Conditions | Any need to change runtime behavior, add a provider, inspect guest PSP memory beyond static source analysis, run a native trace, expand a profile, modify Bochs/mantle, or import source pauses S1 for re-admission. |
-| Exit Criteria | The original DEM ownership contract, its modern composition blockers, and the unique next source-first seam are evidenced; an implementation S may then be admitted separately. |
+| Verification | Static layout evidence names every copied byte/range; fixture proves accepted PDB/JFT/SFT data, malformed length/pointer/unused-SFT rejection, no raw-pointer escape and no read beyond the declared ranges; governance and diff checks pass. |
+| Expected Markers | Fixed-width copied records; DEM-only symbols; caller-supplied checked read callback/action; source-shaped invalid/unused outcomes; no selector, DOS or Bochs meaning in the mechanical path. |
+| Asset Needs | Existing OpenNT source/layout headers, current bx-vdm ABI/test sources and MSVC x64 `/MT`; no new image, firmware, media or external source import. |
+| Reporting Requirements | Record exact source fields, retained validation/order/failure semantics, selected recovery rung, test commands/results, profile relation and limitations. |
+| Stop Conditions | A need for a variable/unbounded guest read, generic PSP traversal, new Bochs/mantle capability, runtime BOP route change, host mutation behavior change, native trace, guest binary patch or external import pauses S2 for re-admission. |
+| Exit Criteria | The minimal read contract and focused fixture evidence are complete, with a separate implementation S explicitly selected or ruled out. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | First/subsequent child entry; parent-owned handles crossing child entry; normal/abort/TSR exit; VDD and no-VDD branches; `50:34..3C`; file, FCB, search, pending and DTA state; current session teardown; COMMAND `54:0B`; and direct/readonly/overlay/virtual profile ownership. |
 
@@ -62,6 +62,13 @@
 > boot state.  The next seam is a bounded copied guest-PDB read contract, but
 > it requires a new implementation S; no runtime change was made.  See the
 > [ownership map](etc/research/t220-s1-dem-process-resource-ownership-map-001.md).
+
+> **T220 S2 P1 closure:** the existing `50:1B` source-derived registration
+> already holds the checked `CurrentPDB` physical word needed for the first
+> owner association.  T220 therefore admits only a two-byte copied
+> `CurrentPDB` helper, not an independent PSP scanner or PDB/JFT/SFT walker.
+> Profile policy remains outside that identity helper.  See the
+> [bounded-read design](etc/research/t220-s2-bounded-dem-process-read-design-001.md).
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
