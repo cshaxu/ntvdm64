@@ -283,7 +283,9 @@ int bx_ntvdm_host_namespace_v1_initialize(bx_ntvdm_host_namespace_v1 *space,
         BY_HANDLE_FILE_INFORMATION info;
         HANDLE handle;
         if ((snapshot->admitted_mask & bx_ntvdm_host_namespace_bit((uint8_t)index)) == 0u) continue;
-        handle = CreateFileW(root, FILE_LIST_DIRECTORY | FILE_READ_ATTRIBUTES,
+        /* A root-relative child open requires traverse on the retained root.
+         * This remains a read/list capability; it grants no host mutation. */
+        handle = CreateFileW(root, GENERIC_READ | SYNCHRONIZE,
             FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, 0, OPEN_EXISTING,
             FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, 0);
         if (!bx_ntvdm_host_namespace_file_info(handle, &info) ||
@@ -298,15 +300,20 @@ int bx_ntvdm_host_namespace_v1_initialize(bx_ntvdm_host_namespace_v1 *space,
     return bx_ntvdm_host_namespace_v1_valid(space);
 }
 
+static int bx_ntvdm_host_namespace_v1_open_directory_ex(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_path, ACCESS_MASK desired_access,
+    ULONG disposition, HANDLE *handle_out, DWORD *win32_error_out);
+
 int bx_ntvdm_host_namespace_v1_enumerate(const bx_ntvdm_host_namespace_v1 *space,
     uint8_t drive_index, const wchar_t *relative_directory,
     bx_ntvdm_host_namespace_entry_v1 *entries, uint32_t entry_capacity,
     uint32_t *out_count)
 {
-    HANDLE current;
-    const wchar_t *component;
+    HANDLE current = INVALID_HANDLE_VALUE;
     bx_ntvdm_host_namespace_internal_entry_v1 *items;
     uint32_t count = 0u, index;
+    DWORD open_error = ERROR_INVALID_PARAMETER;
     int result;
     if (out_count != 0) *out_count = 0u;
     if (!bx_ntvdm_host_namespace_v1_valid(space) || drive_index >= 26u ||
@@ -314,37 +321,12 @@ int bx_ntvdm_host_namespace_v1_enumerate(const bx_ntvdm_host_namespace_v1 *space
         entry_capacity > BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES ||
         (space->available_mask & bx_ntvdm_host_namespace_bit(drive_index)) == 0u)
         return BX_NTVDM_HOST_NAMESPACE_V1_REJECTED;
-    current = space->roots[drive_index];
-    component = relative_directory;
-    while (*component != L'\0') {
-        wchar_t requested[13];
-        const wchar_t *end = wcschr(component, L'\\');
-        size_t length = end == 0 ? wcslen(component) : (size_t)(end - component);
-        HANDLE child = INVALID_HANDLE_VALUE;
-        if (length == 0u || length >= 13u) return BX_NTVDM_HOST_NAMESPACE_V1_REJECTED;
-        memcpy(requested, component, length * sizeof(wchar_t)); requested[length] = L'\0';
-        if (!bx_ntvdm_host_namespace_ascii_83(requested, requested)) return BX_NTVDM_HOST_NAMESPACE_V1_REJECTED;
-        items = (bx_ntvdm_host_namespace_internal_entry_v1 *)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-            BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES * sizeof(*items));
-        if (items == 0) return BX_NTVDM_HOST_NAMESPACE_V1_REJECTED;
-        result = bx_ntvdm_host_namespace_collect(current, items,
-            BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES, &count);
-        if (result == BX_NTVDM_HOST_NAMESPACE_V1_OK) {
-            for (index = 0u; index < count; ++index) {
-                if (_wcsicmp(requested, items[index].projected.dos_name) == 0 &&
-                    (items[index].projected.attributes & FILE_ATTRIBUTE_DIRECTORY) != 0u) {
-                    child = bx_ntvdm_host_namespace_open_child(current, items[index].host_name);
-                    break;
-                }
-            }
-        }
-        HeapFree(GetProcessHeap(), 0u, items);
-        if (current != space->roots[drive_index]) CloseHandle(current);
-        if (child == INVALID_HANDLE_VALUE) return result == BX_NTVDM_HOST_NAMESPACE_V1_OK ?
-            BX_NTVDM_HOST_NAMESPACE_V1_REJECTED : result;
-        current = child;
-        component = end == 0 ? component + length : end + 1u;
-        if (end != 0 && *component == L'\0') { CloseHandle(current); return BX_NTVDM_HOST_NAMESPACE_V1_REJECTED; }
+    if (relative_directory[0] == L'\0') current = space->roots[drive_index];
+    else if (!bx_ntvdm_host_namespace_v1_open_directory_ex(space, drive_index,
+            relative_directory, FILE_LIST_DIRECTORY | FILE_READ_ATTRIBUTES,
+            FILE_OPEN, &current, &open_error)) {
+        SetLastError(open_error);
+        return BX_NTVDM_HOST_NAMESPACE_V1_REJECTED;
     }
     items = (bx_ntvdm_host_namespace_internal_entry_v1 *)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
         entry_capacity * sizeof(*items));
@@ -554,7 +536,7 @@ static int bx_ntvdm_host_namespace_v1_open_directory_ex(
         &status_block, 0, FILE_ATTRIBUTE_DIRECTORY,
         FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, disposition,
         FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT |
-        FILE_OPEN_REPARSE_POINT | FILE_OPEN_FOR_BACKUP_INTENT, 0, 0u);
+        FILE_OPEN_REPARSE_POINT, 0, 0u);
     if (status < 0 || !bx_ntvdm_host_namespace_file_info(handle, &info) ||
         (info.dwFileAttributes & (FILE_ATTRIBUTE_DIRECTORY |
             FILE_ATTRIBUTE_REPARSE_POINT)) != FILE_ATTRIBUTE_DIRECTORY) {

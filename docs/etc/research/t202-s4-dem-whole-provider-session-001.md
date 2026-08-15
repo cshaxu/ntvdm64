@@ -101,6 +101,14 @@ self-created file.  Create and write code are in the same source partition
 but still need their dedicated mutation-profile regressions.  This remains a
 provider-internal partition, not a guest-memory BOP route or full DEM claim.
 
+Revision r12 provides the direct-search fixture: two 8.3 files in a
+self-created real-host directory prove admitted-host pathname first/next and
+FCB-first results. Directory enumeration had falsely returned access denied
+because its root-relative listing handle was then validated through
+`GetFileInformationByHandle` without `FILE_READ_ATTRIBUTES`; r12 adds that
+read-only validation right. No host path or handle crosses the search
+token/DTA/SRCHBUF ABI. Guest-memory ingress remains unconnected.
+
 The next `demsrch.c` partition now enables the existing search transaction's
 direct-host first-search forms: it decodes the copied DOS request, enumerates
 only the query's admitted root-relative directory, then passes the copied
