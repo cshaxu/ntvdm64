@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1505 |
+| Documentation records | 1507 |
 | --- | --- |
-| Generated UTC | 2026-08-15T15:42:40Z |
+| Generated UTC | 2026-08-15T15:44:56Z |
 
 ## Entries
 
@@ -736,6 +736,7 @@ content-divergent entries.
 | etc/research/t213-s2-one-shot-host-terminal-package-design-001.md | indexed supporting material | 2e3faffdd270bdd5a3a8b5734c9d1a5e1ba466ec23596b34569dc863cfa4ef86 |
 | etc/research/t213-s3-command-terminal-package-admission-001.md | indexed supporting material | 6d70ee8d84f53c21bf185acec49c3bfa18af6267a84fe618d47db4d948e6e82d |
 | etc/research/t213-s3-command-terminal-package-closure-001.md | indexed supporting material | e8a141dfa8ed42ba6583ca77d4db315a60ef48f05a1410a3ebc7320513c767ab |
+| etc/research/t213-s4-native-terminal-observation-001.md | indexed supporting material | 156ef3a3be4783347e5be6b825d295a8b1007229b1343af7d6903547168a8e33 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -1235,6 +1236,7 @@ content-divergent entries.
 | history/m0-t212-s4-closure-20260815.md | closed task history | 6d2fa2c85b1ebaa23b47e5552347bfbf3307398f81adef5aed050a233a3c8811 |
 | history/m0-t212-s5-closure-20260815.md | closed task history | 4606fcf26f090c26bbbce40fb741264d4c9ea8ce30f90cf8cdb7b94ebfa915a6 |
 | history/m0-t212-s6-closure-20260815.md | closed task history | bd37d35c1c33ad8488bd1e1bc6f0087677a508a7ff26954d930f1b20a68901f9 |
+| history/m0-t213-closure-20260815.md | closed task history | 45cb9f5a5bf92eba81def32485ab06042a1a32fea8f6a2a788942e29c2a30838 |
 | history/m0-t213-s1-closure-20260815.md | closed task history | a6628f2c8efd58ec25c8172363a90a8d8de4981ebedcbfb2d29f8dde4519797d |
 | history/m0-t213-s2-closure-20260815.md | closed task history | 8a27fbb3a1061b8fa49e38d34ee6f8a5542f6324696338072365930a78b5de50 |
 | history/m0-t213-s3-closure-20260815.md | closed task history | 13d1dcc361f0b5e1db6b2798613664c575ccbd251b75d7eda6acfd7e271d6178 |
