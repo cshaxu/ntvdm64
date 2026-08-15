@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T208 S1.** Its governing brief is the active
+> **Current effective packet: M0 T208 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T208 S1 -- DEM lifecycle/termination owner-package map.**
+**Active: M0 T208 S2 -- DEM lifecycle/termination reconciliation and family-regression admission.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -15,27 +15,34 @@
 
 ## Active Packet
 
-> **T scope:** T208 recovers the complete DEM lifecycle/termination component
-> map before any implementation decision. S1 maps `50:38..3D` and every
-> related owner/ABI/failure/profile disposition as one package.
+> **T scope:** T208 audits the complete DEM lifecycle/termination owner
+> package before any implementation decision. S1 closed the `50:38..3D`
+> source/ABI/failure/profile/workaround map; S2 reconciles its declared
+> family outcomes and admits one package-level close/defer decision.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T208 S1, Ordinary Mode. |
-| Admission And Approval | T200/S31 has closed the all-identity BOP owner/mutation/profile/workaround audit; T201 has closed the common profile ABI, owner enforcement and overlay lifecycle. T208 selects the complete DEM lifecycle/termination **owner package**, not an observed selector. |
-| Objective | Create one source/ABI/failure/profile/workaround map for the DEM process and VDM lifecycle/termination component, including `50:38..3D`, process/PDB state, child/return paths and fatal exit semantics, then make one package-level recovery/defer recommendation. |
-| Non-goals | No individual trace-led BOP implementation, engine/CLI terminal change, host broker, Bochs feature/device work or host mutation. A trace may only validate a later, fully admitted package result. |
-| Reference Baseline | T200 global BOP ledger, T201 shared mutation-capability foundation, T202 DEM package evidence, and original DEM dispatch/lifecycle sources. T207 is retained only as passive integration evidence. |
-| Files And ABI Surface | Read-only original/current source map and whole-package regression/admission design. No ABI change in S1. |
+| Identifier Mode | M0 T208 S2, Ordinary Mode. |
+| Admission And Approval | [S1's complete map](etc/research/t208-s1-dem-lifecycle-termination-source-abi-map-001.md) identifies one ordinary no-debug group (`38..3B`), one retained bounded PDB cleanup (`3C`) and one fatal terminal fence (`3D`). S2 reconciles that entire declared family. |
+| Objective | Make the whole `50:38..3D` regression and evidence wording explicitly distinguish source-equivalent no-debug no-ops, the bounded PDB-search cleanup, and fatal VDM termination; then record the package-level close/defer decision. |
+| Non-goals | No new BOP behavior, trace-led endpoint implementation, engine/CLI terminal change, VDD/host broker recovery, Bochs feature/device work or host mutation. A trace may only validate a later, fully admitted package result. |
+| Reference Baseline | T200 global BOP ledger, T201 shared mutation-capability foundation, T202 DEM package evidence, T208 S1 map, and original DEM dispatch/lifecycle sources. |
+| Files And ABI Surface | Test/evidence reconciliation only. No product ABI change and no new provider route. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Complete identity table with original source owner, current route/workaround, mutation class/profile disposition, source/ABI/failure evidence and package-level next-step recommendation; governance and diff checks. |
-| Expected Markers | Every lifecycle identity has one owner and disposition; no endpoint is selected merely because it appeared in a trace. |
+| Verification | One whole-family regression records the six declared outcomes; all assertions and evidence distinguish no-debug, bounded cleanup and fatal terminal behavior; governance and diff checks. |
+| Expected Markers | Every lifecycle identity has one owner and declared outcome; no endpoint is selected merely because it appeared in a trace. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record sources/hashes, full owner table, capability/failure dispositions, current workaround action and package-level S2 proposal. |
-| Stop Conditions | Any attempt to implement one observed endpoint before the full family map, turn a stop into success, use a trace as a source of task selection, or move DEM semantics into mantle pauses S1 for re-admission. |
-| Exit Criteria | Reviewable complete component map and one package-level implementation/defer decision. |
+| Reporting Requirements | Record the focused regression/evidence outcome, every retained/deferred limit, and the package-level close/defer decision. |
+| Stop Conditions | Any attempt to add a BOP implementation, turn a stop into success, use a trace as a source of task selection, or move DEM semantics into mantle pauses S2 for re-admission. |
+| Exit Criteria | Reviewable family reconciliation and one package-level close/defer decision. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | DEM dispatch table, PDB terminate, DEM exit, process launch/return, fatal/error exit, shutdown/reset and every related current facade/provider route. |
+
+> **T208 S1 closure:** original `50:38..3D` divides into the selected
+> no-debug diagnostic group (`38..3B`), bounded per-PDB search-state cleanup
+> (`3C`) and fatal VDM termination (`3D`).  This is an owner-package map, not
+> a claim of debugger, VDD, engine or CLI lifecycle recovery; see the
+> [source/ABI map](etc/research/t208-s1-dem-lifecycle-termination-source-abi-map-001.md).
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
