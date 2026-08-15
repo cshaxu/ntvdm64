@@ -24,6 +24,9 @@ extern "C" {
 int bx_ntvdm_command_boot_input_v1_initialize(
     bx_ntvdm_command_boot_input_v1 *value,
     const bx_ntvdm_readonly_namespace_v1 *namespace_value);
+int bx_ntvdm_command_boot_input_v1_initialize_paths(
+    bx_ntvdm_command_boot_input_v1 *value, uint32_t drive_index,
+    const wchar_t *config_path, const wchar_t *autoexec_path);
 int bx_ntvdm_command_boot_input_v1_valid(
     const bx_ntvdm_command_boot_input_v1 *value);
 #ifdef __cplusplus

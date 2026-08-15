@@ -4,6 +4,7 @@
 #include "bx_ntvdm_cmd_boot_file_service.h"
 #include "bx_ntvdm_dem_path_search_service_v1.h"
 #include "bx_ntvdm_dem_readonly_file_service.h"
+#include "bx_ntvdm_startup_configuration_provider_v1.h"
 
 #define BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_MAGIC 0x42584e50u
 #define BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_VERSION 1u
@@ -17,8 +18,10 @@ typedef struct bx_ntvdm_boot_namespace_provider_v1 {
     uint32_t version;
     bx_ntvdm_readonly_namespace_v1 readonly_namespace;
     bx_ntvdm_command_boot_input_v1 command_boot_input;
+    bx_ntvdm_startup_configuration_provider_v1 startup_configuration;
     bx_ntvdm_profile_search_snapshot_v1 search_snapshot;
     bx_ntvdm_search_transaction_v1 search_transaction;
+    uint32_t has_startup_configuration;
 } bx_ntvdm_boot_namespace_provider_v1;
 
 int bx_ntvdm_boot_namespace_provider_v1_initialize(
@@ -27,6 +30,9 @@ int bx_ntvdm_boot_namespace_provider_v1_initialize(
     const byob_profile_selection *selection);
 int bx_ntvdm_boot_namespace_provider_v1_valid(
     const bx_ntvdm_boot_namespace_provider_v1 *value);
+int bx_ntvdm_boot_namespace_provider_v1_bind_startup_configuration(
+    bx_ntvdm_boot_namespace_provider_v1 *value,
+    const bx_ntvdm_startup_configuration_input_v1 *input);
 
 /* Preserves the provider boundary while exposing the subordinate source
  * condition group to same-island diagnostics. */

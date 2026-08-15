@@ -60,6 +60,8 @@ int bx_ntvdm_command_package_session_v1_set_mutation_profile(bx_ntvdm_command_pa
 { if(!bx_ntvdm_command_package_session_v1_valid(s)||!p||s->has_mutation_profile||!bx_ntvdm_command_profile_consumer_v1_initialize(&s->mutation_profile,p))return 0;s->has_mutation_profile=1u;return bx_ntvdm_command_package_session_v1_valid(s); }
 int bx_ntvdm_command_package_session_v1_set_host_context(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_command_host_context_v1 *c)
 { if(!bx_ntvdm_command_package_session_v1_valid(s)||!c||s->has_host_context||!bx_ntvdm_command_host_context_v1_valid(c))return 0;s->host_context=*c;s->has_host_context=1u;return bx_ntvdm_command_package_session_v1_valid(s); }
+int bx_ntvdm_command_package_session_v1_set_boot_input(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_command_boot_input_v1 *b)
+{ if(!bx_ntvdm_command_package_session_v1_valid(s)||!b||!bx_ntvdm_command_boot_input_v1_valid(b))return 0;s->boot_input=*b;return bx_ntvdm_command_package_session_v1_valid(s); }
 int bx_ntvdm_command_package_session_v1_resolve_mutation_class(const bx_ntvdm_command_package_session_v1 *s,uint32_t c,uint32_t *r)
 { return bx_ntvdm_command_package_session_v1_valid(s)&&s->has_mutation_profile&&bx_ntvdm_command_profile_consumer_v1_resolve(&s->mutation_profile,c,r); }
 static int bootstrap(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)

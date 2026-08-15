@@ -55,6 +55,12 @@
 > admitted CONFIG/AUTOEXEC contract and yields bounded images/merge state with
 > no external I/O.  See the [core evidence](etc/research/t204-s4-contained-configuration-provider-core-001.md).
 
+> **T204 S5 P1 progress:** the provider now owns paired generated image bytes
+> in the composable namespace and COMMAND copies its paired paths before bind.
+> The old adapter-runtime profile still supplies synthetic materialization, so
+> S5 remains active rather than claiming default-route replacement.  See the
+> [integration record](etc/research/t204-s5-configuration-image-path-integration-001.md).
+
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
 > target is `54:0B`; see the [selector source map](etc/research/t203-s1-command-terminal-selector-source-map-001.md).

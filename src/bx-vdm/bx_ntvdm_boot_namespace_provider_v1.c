@@ -9,7 +9,15 @@ int bx_ntvdm_boot_namespace_provider_v1_valid(
         value->version == BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_VERSION &&
         bx_ntvdm_command_boot_input_v1_valid(&value->command_boot_input) &&
         bx_ntvdm_profile_search_snapshot_v1_valid(&value->search_snapshot) &&
-        bx_ntvdm_search_transaction_v1_valid(&value->search_transaction);
+        bx_ntvdm_search_transaction_v1_valid(&value->search_transaction) &&
+        value->has_startup_configuration <= 1u &&
+        (!value->has_startup_configuration ||
+         (bx_ntvdm_startup_configuration_provider_v1_valid(&value->startup_configuration) &&
+          value->startup_configuration.result == BX_NTVDM_STARTUP_CONFIGURATION_RESULT_V1_READY &&
+          value->readonly_namespace.files[1].bytes == value->startup_configuration.config_image &&
+          value->readonly_namespace.files[1].byte_count == value->startup_configuration.config_image_bytes &&
+          value->readonly_namespace.files[2].bytes == value->startup_configuration.autoexec_image &&
+          value->readonly_namespace.files[2].byte_count == value->startup_configuration.autoexec_image_bytes));
 }
 
 int bx_ntvdm_boot_namespace_provider_v1_initialize(
@@ -31,6 +39,29 @@ int bx_ntvdm_boot_namespace_provider_v1_initialize(
     bx_ntvdm_search_transaction_v1_initialize(&value->search_transaction);
     value->magic = BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_MAGIC;
     value->version = BX_NTVDM_BOOT_NAMESPACE_PROVIDER_V1_VERSION;
+    return bx_ntvdm_boot_namespace_provider_v1_valid(value);
+}
+
+int bx_ntvdm_boot_namespace_provider_v1_bind_startup_configuration(
+    bx_ntvdm_boot_namespace_provider_v1 *value,
+    const bx_ntvdm_startup_configuration_input_v1 *input)
+{
+    bx_ntvdm_startup_configuration_provider_v1 generated;
+    bx_ntvdm_command_boot_input_v1 boot_input;
+    if (!bx_ntvdm_boot_namespace_provider_v1_valid(value) ||
+        value->has_startup_configuration ||
+        !bx_ntvdm_startup_configuration_provider_v1_build(&generated, input) ||
+        generated.result != BX_NTVDM_STARTUP_CONFIGURATION_RESULT_V1_READY ||
+        !bx_ntvdm_command_boot_input_v1_initialize_paths(&boot_input,
+            value->readonly_namespace.drive_index, value->readonly_namespace.files[1].path,
+            value->readonly_namespace.files[2].path)) return 0;
+    value->startup_configuration = generated;
+    value->readonly_namespace.files[1].bytes = value->startup_configuration.config_image;
+    value->readonly_namespace.files[1].byte_count = value->startup_configuration.config_image_bytes;
+    value->readonly_namespace.files[2].bytes = value->startup_configuration.autoexec_image;
+    value->readonly_namespace.files[2].byte_count = value->startup_configuration.autoexec_image_bytes;
+    value->command_boot_input = boot_input;
+    value->has_startup_configuration = 1u;
     return bx_ntvdm_boot_namespace_provider_v1_valid(value);
 }
 

@@ -76,6 +76,23 @@ static int direct_profile_initialize(bx_ntvdm_mutation_profile_v1 *profile)
         BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x01u);
 }
 
+static int startup_configuration_initialize(
+    bx_ntvdm_startup_configuration_input_v1 *input,
+    const bx_ntvdm_mutation_profile_v1 *profile)
+{
+    memset(input, 0, sizeof(*input));
+    input->magic = BX_NTVDM_STARTUP_CONFIGURATION_PROVIDER_V1_MAGIC;
+    input->abi_version = BX_NTVDM_STARTUP_CONFIGURATION_PROVIDER_V1_VERSION;
+    input->struct_bytes = (uint32_t)sizeof(*input);
+    if (!bx_ntvdm_startup_configuration_policy_v1_initialize(&input->policy,
+            profile, BX_NTVDM_STARTUP_CONFIGURATION_SOURCE_V1_CONTAINED_FIXTURE)) return 0;
+    memcpy(input->system_root, "C:\\Windows", 11u); input->system_root_bytes = 10u;
+    input->country_id = 1u; input->oem_code_page = 437u;
+    memcpy(input->config, "files=20\r\n", 10u); input->config_bytes = 10u;
+    memcpy(input->autoexec, "prompt=$p$g\r\n", 13u); input->autoexec_bytes = 13u;
+    return bx_ntvdm_startup_configuration_input_v1_valid(input);
+}
+
 static int direct_search_route_regression(
     bx_ntvdm_boot_namespace_composition_v1 *composition,
     uint8_t drive)
@@ -329,6 +346,7 @@ int main(void)
     bx_ntvdm_mutation_profile_v1 direct_profile;
     bx_ntvdm_command_host_context_v1 command_context;
     bx_ntvdm_command_host_context_v1 processor_context;
+    bx_ntvdm_startup_configuration_input_v1 startup_configuration;
     static const uint8_t command_environment[] =
         "PATH=C:\\DOS\0PROMPT=$P$G\0";
     uint8_t drive_types[26] = { 0 };
@@ -344,6 +362,8 @@ int main(void)
     bx_ntvdm_search_token_v1 terminating_token;
 
     profile_initialize(&profile);
+    if (!direct_profile_initialize(&direct_profile) ||
+        !startup_configuration_initialize(&startup_configuration, &direct_profile)) return 246;
     if (!bx_ntvdm_command_host_context_v1_initialize(&processor_context, 2u,
             (const uint8_t *)"C:\\", 3u) ||
         !bx_ntvdm_command_host_context_v1_set_processor(&processor_context,
@@ -365,7 +385,6 @@ int main(void)
         !bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(4), drive_types, 0u, 0u,
             &drives) || !bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
             &composition, &drives) ||
-        !direct_profile_initialize(&direct_profile) ||
         !bx_ntvdm_host_namespace_v1_initialize(&host_namespace, &drives) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
             &composition, &direct_profile) ||
@@ -377,6 +396,17 @@ int main(void)
             command_environment, (uint32_t)sizeof(command_environment)) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
             &composition, &command_context) ||
+        !bx_ntvdm_boot_namespace_composition_v1_set_startup_configuration(
+            &composition, &startup_configuration) ||
+        !composition.plane.provider.has_startup_configuration ||
+        composition.plane.provider.readonly_namespace.files[1].bytes !=
+            composition.plane.provider.startup_configuration.config_image ||
+        composition.plane.provider.readonly_namespace.files[2].bytes !=
+            composition.plane.provider.startup_configuration.autoexec_image ||
+        composition.plane.provider.readonly_namespace.files[1].byte_count !=
+            strlen("files=20\r\ncountry=001,437,C:\\Windows\\system32\\country.sys\r\nshell=C:\\Windows\\System32\\command.com /p C:\\Windows\\system32\r\n") ||
+        composition.plane.provider.readonly_namespace.files[2].byte_count !=
+            strlen("prompt=$p$g\r\n") ||
         !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
             &composition, &host_namespace) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,

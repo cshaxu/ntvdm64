@@ -61,6 +61,9 @@ int bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
 int bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_command_host_context_v1 *context);
+int bx_ntvdm_boot_namespace_composition_v1_set_startup_configuration(
+    bx_ntvdm_boot_namespace_composition_v1 *value,
+    const bx_ntvdm_startup_configuration_input_v1 *input);
 int bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_host_namespace_v1 *host_namespace);

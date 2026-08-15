@@ -289,6 +289,17 @@ int bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
             context);
 }
 
+int bx_ntvdm_boot_namespace_composition_v1_set_startup_configuration(
+    bx_ntvdm_boot_namespace_composition_v1 *value,
+    const bx_ntvdm_startup_configuration_input_v1 *input)
+{
+    if (!valid(value) || value->bound ||
+        !bx_ntvdm_boot_namespace_provider_v1_bind_startup_configuration(
+            &value->plane.provider, input)) return 0;
+    return bx_ntvdm_command_package_session_v1_set_boot_input(&value->command,
+        &value->plane.provider.command_boot_input);
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_host_namespace_v1 *host_namespace)

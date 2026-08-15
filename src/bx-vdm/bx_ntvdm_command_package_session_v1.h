@@ -53,6 +53,9 @@ int bx_ntvdm_command_package_session_v1_set_mutation_profile(
 int bx_ntvdm_command_package_session_v1_set_host_context(
     bx_ntvdm_command_package_session_v1 *session,
     const bx_ntvdm_command_host_context_v1 *context);
+int bx_ntvdm_command_package_session_v1_set_boot_input(
+    bx_ntvdm_command_package_session_v1 *session,
+    const bx_ntvdm_command_boot_input_v1 *boot_input);
 int bx_ntvdm_command_package_session_v1_resolve_mutation_class(
     const bx_ntvdm_command_package_session_v1 *session,
     uint32_t mutation_class, uint32_t *policy_result_out);
