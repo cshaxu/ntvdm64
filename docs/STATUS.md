@@ -53,6 +53,13 @@
 > must be default-off, passive and copied-data-only; see the
 > [harness map](etc/research/t203-s1-normal-return-observation-harness-map-001.md).
 
+> **T203 S1 passive observation:** a fresh full-manifest MSVC x64 `/MT` CPU5
+> run now uses a default-off copied `54:0B` resume observer and records no
+> normal return before the existing `54:01` declared-plan STOP. This is a
+> stronger native non-observation, but the finite-run fixture is not the
+> engine/CLI lifecycle and therefore admits no terminal-result ABI. See the
+> [observation record](etc/research/t203-s1-passive-normal-return-observation-001.md).
+
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
 

@@ -1,6 +1,7 @@
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
 #include "bx-vdm/bx_ntvdm_cmdinfo_v1.h"
 #include "bx-vdm/bx_ntvdm_native_bop_composition_v1.h"
+#include "bx-vdm/bx_ntvdm_normal_return_observation_v1.h"
 #include "bx-mantle/bx_ntvdm_instruction_history.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 #include "t198_s23_fastread_attempt_ledger.h"
@@ -231,6 +232,8 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         if (!composition_accepted)
             composition_accepted = bx_ntvdm_native_bop_composition_v1_handle(
                 event, outcome);
+        if (composition_accepted)
+            bx_ntvdm_normal_return_observation_v1_consider(event, outcome);
         if (observed_cmdinfo.observed && event != 0 && event->window_bytes >= 4u &&
             event->window[0] == 0xc4u && event->window[1] == 0xc4u &&
             event->window[2] == 0x54u && event->window[3] == 0x01u &&

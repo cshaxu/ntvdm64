@@ -58,7 +58,7 @@ Invoke-Cl $profileArgs (Join-Path $build 'profile-compile.log')
 if ($LASTEXITCODE -ne 0) { throw 'S93 exact v8 profile selection failed.' }
 
 $fixtureObject = Join-Path $build 'source-built-normal-return-fixture.obj'
-$fixtureArgs = '/c /std:c++14 /EHsc /MT /Gy /DWIN32 /DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1 /DT198_S93_SOURCE_BUILT_NORMAL_RETURN ' + ($includes -join ' ') +
+$fixtureArgs = '/c /std:c++14 /EHsc /MT /Gy /DWIN32 /DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1 /DT198_S93_SOURCE_BUILT_NORMAL_RETURN /DT203_S1_PASSIVE_NORMAL_RETURN_OBSERVATION ' + ($includes -join ' ') +
     ' /FI "' + $config + '" /Fo"' + $fixtureObject + '" "' + (Join-Path $repository 'tests\bx-vdm\t198_s23_native_ntio_boundary_fixture.cc') + '"'
 Invoke-Cl $fixtureArgs (Join-Path $build 'fixture-compile.log')
 foreach ($name in @('command_bytes.cc', 'share_bytes.cc')) {

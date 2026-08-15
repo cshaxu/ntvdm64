@@ -35,14 +35,19 @@ constraints:
 The listener is not a terminal-result transport.  It would establish only the
 precondition for a later, separately admitted engine/CLI copied result ABI.
 
-## Missing prerequisites
+## Current boundary result
 
-No existing fixture satisfies that boundary.  A future implementation must
-first provide a fixed-width passive observation record and prove it has no
-effect when disabled.  It must then run one fresh source-built profile through
-the normal lifecycle.  If the run ends at a different existing controlled
-terminal or budget, that is a valid observation result—not permission to add
-a BOP handler or alter the bridge.
+The successor [passive observation record](t203-s1-passive-normal-return-observation-001.md)
+now supplies the fixed-width, default-off recorder and proves its positive and
+negative predicate behavior.  Its fresh source-built finite-run execution did
+not reach `54:0B` before the existing `54:01` declared-plan terminal.
+
+This does **not** make the finite-run fixture an engine-qualified harness:
+it does not enter through `bx_ntvdm_engine_run_v1`'s copied request,
+installation and cleanup path.  A future engine-level normal-lifecycle run is
+still required before terminal-result transport can be admitted.  A different
+existing controlled terminal or budget is evidence, not permission to add a
+BOP handler or alter the bridge.
 
 ## Disposition
 
