@@ -2,42 +2,43 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T212 S7.** Its governing brief is the active
+> **Current effective packet: M0 T213 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T212 S7 -- lifecycle convergence and deferral ledger.**
+**Active: M0 T213 S2 -- one-shot host-terminal package design.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
 > [history](history/m0-t206-closure-20260815.md). **T205 closed:** its current-profile XMS boundary is recorded in
-> [history](history/m0-t205-closure-20260815.md). The table below is the sole
-> active packet pending its sequential closure delivery.
+> [history](history/m0-t205-closure-20260815.md). **T212 closed:** its CLI
+> lifecycle boundary is recorded in [history](history/m0-t212-closure-20260815.md).
+> The table below is the sole active packet.
 
 ## Active Packet
 
-> **T scope:** T212 adds CLI-owned lifecycle governance around the existing
-> one-shot engine. S1--S6 closed copied policy/presentation, cancellation
-> admission, the selector-blind producer and the CLI event/worker consumer.
-> S7 has completed its read-only convergence ledger and awaits its sequential
-> documentation delivery; it introduces no behavior.
+> **T scope:** T213 determines whether the selected one-shot profile has a
+> source-proven ordinary terminal model before any interactive-session or
+> normal-result implementation is admitted. S1 concluded that the current
+> `50:3D` is controlled historical teardown. S2 maps the whole host-terminal
+> package before any endpoint implementation.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T212 S7, Ordinary Mode. |
-| Admission And Approval | T212 S1--S6 closed the copied lifecycle classifier, native presentation, cancellation admission, mechanical/engine producer, and CLI event/worker consumer. S7 is documentation-only convergence over those records. |
-| Objective | Reconcile all T212 lifecycle producers, presentation classes, cleanup owners and explicit deferrals into a closure ledger; decide whether T212 can close without a guest-normal-completion claim. |
-| Non-goals | No mantle/Bochs/core/BOP/OpenNT/CLI behavior change, no host handle across the engine API, no guest cancellation semantics, no normal-completion claim, no wall-time/resource policy and no durable audit I/O. |
-| Reference Baseline | T212 S1--S6 closures, including the S6 event/worker result-copy record. |
-| Files And ABI Surface | Documentation and focused read-only source/ABI reconciliation only. |
+| Identifier Mode | M0 T213 S2, Ordinary Mode. |
+| Admission And Approval | T213 S1 established that `50:3D` is the reached historical teardown path, while `54:0B` is only a COMMAND-local fact. It admits a complete state/record design, not a provider implementation. |
+| Objective | Map the terminal state owned by COMMAND and DEM and define whether one copied host-terminal record can preserve their ordering and failure semantics for a later engine boundary. |
+| Non-goals | No BOP implementation, no trace-driven endpoint patch, no engine/mantle/Bochs/CLI behavior change, no interactive session, and no normal-completion claim. |
+| Reference Baseline | T213 S1 map, T206 COMMAND handoff, T207 sequence evidence, T208 DEM termination audit, and T212 lifecycle ledger. |
+| Files And ABI Surface | COMMAND/DEM provider and original source records plus evidence documentation only; no public ABI implementation. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Read-only reconciliation of S1--S6 evidence, source symbols and terminal mapping; documentation governance and diff checks. |
-| Expected Markers | Every lifecycle producer has one owner, every presentation has an evidenced current source or explicit absence, and wall-time/resource/audit/normal-completion remain named deferrals. |
-| Asset Needs | Existing T212 evidence only; no firmware/media/device import, native trace, build or runtime action. |
-| Reporting Requirements | Record current terminal/presentation matrix, cleanup and handle ownership, deferred capability class, and the task-closure decision. |
-| Stop Conditions | Any mismatch requiring behavior change, an unclassified terminal, a raw host object across engine ABI, or a claim of guest completion pauses S7 for separate admission. |
-| Exit Criteria | One evidence ledger gives a complete, non-overclaiming T212 lifecycle disposition and supports task closure. |
+| Verification | Read original/current source and prior evidence; run documentation governance and diff checks. No build or trace is expected. |
+| Expected Markers | A complete state/precedence/failure ledger covers both COMMAND `54:0B` and DEM `50:3D`, including the unavailable historical broker and a no-fabrication disposition. |
+| Asset Needs | Existing source/evidence only; no firmware/media/device import or runtime trace. |
+| Reporting Requirements | Record state owner, ordering, result precedence, reset/cleanup owner, host API disposition, and implementation admission decision. |
+| Stop Conditions | Any conclusion requiring a new guest/machine semantic, a trace-selected leaf patch, or a host API not available to normal user mode pauses S2 for a separately admitted package. |
+| Exit Criteria | One design ledger identifies a complete, source-derived host-terminal package or proves that the current profile must retain controlled termination. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, retained child cancellation, finite fixture timers, terminal observations, composition reset and T203/T206/T207 evidence. |
+| Similar-Issue Sweep | DEM `50:38..3D`, COMMAND `54:01/0B`, existing normal/terminal observers, engine contract/run/machine stage, CLI lifecycle classifier, and T206--T212 evidence. |
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
