@@ -22,17 +22,17 @@
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T208 S1, Ordinary Mode. |
-| Admission And Approval | T207 engine lifecycle evidence: `50:3D` occurs before any final `54:0B`; no trace endpoint implementation is authorized. |
-| Objective | Create one source/ABI/failure/profile/workaround map for the DEM process and VDM lifecycle/termination component, including `50:38..3D`, process/PDB state, child/return paths and fatal exit semantics. |
-| Non-goals | No individual trace-led BOP implementation, engine/CLI terminal change, host broker, Bochs feature/device work or host mutation. |
-| Reference Baseline | T200 global BOP ledger, T202 DEM package evidence, T207 result, original DEM dispatch/lifecycle sources. |
+| Admission And Approval | T200/S31 has closed the all-identity BOP owner/mutation/profile/workaround audit; T201 has closed the common profile ABI, owner enforcement and overlay lifecycle. T208 selects the complete DEM lifecycle/termination **owner package**, not an observed selector. |
+| Objective | Create one source/ABI/failure/profile/workaround map for the DEM process and VDM lifecycle/termination component, including `50:38..3D`, process/PDB state, child/return paths and fatal exit semantics, then make one package-level recovery/defer recommendation. |
+| Non-goals | No individual trace-led BOP implementation, engine/CLI terminal change, host broker, Bochs feature/device work or host mutation. A trace may only validate a later, fully admitted package result. |
+| Reference Baseline | T200 global BOP ledger, T201 shared mutation-capability foundation, T202 DEM package evidence, and original DEM dispatch/lifecycle sources. T207 is retained only as passive integration evidence. |
 | Files And ABI Surface | Read-only original/current source map and whole-package regression/admission design. No ABI change in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
 | Verification | Complete identity table with original source owner, current route/workaround, mutation class/profile disposition, source/ABI/failure evidence and package-level next-step recommendation; governance and diff checks. |
 | Expected Markers | Every lifecycle identity has one owner and disposition; no endpoint is selected merely because it appeared in a trace. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
 | Reporting Requirements | Record sources/hashes, full owner table, capability/failure dispositions, current workaround action and package-level S2 proposal. |
-| Stop Conditions | Any attempt to implement one observed endpoint before the full family map, turn a stop into success, or move DEM semantics into mantle pauses S1 for re-admission. |
+| Stop Conditions | Any attempt to implement one observed endpoint before the full family map, turn a stop into success, use a trace as a source of task selection, or move DEM semantics into mantle pauses S1 for re-admission. |
 | Exit Criteria | Reviewable complete component map and one package-level implementation/defer decision. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | DEM dispatch table, PDB terminate, DEM exit, process launch/return, fatal/error exit, shutdown/reset and every related current facade/provider route. |
