@@ -163,3 +163,10 @@ v2 admits a maximum 520-byte transaction for precisely this bounded case.
 No pathname service is routed through the package session until all nine
 services and their direct/readonly/overlay/virtual matrix meet the final
 atomic-switch gate.
+
+The analogous FCB pathname record group (`07/20/2C/2D/31`) uses the same
+bounded rule with its original address choices: `07` reads ES:DI, `20` reads
+DS:SI and ES:DI, and `2C/2D/31` read DS:SI. Its transaction only forwards
+copied records to the existing FCB wildcard/local-handle provider; it cannot
+interpret an FCB or use a host handle. It remains un-routed until the complete
+FCB family passes the atomic package gate.

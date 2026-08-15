@@ -5,6 +5,7 @@
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
+#include "bx_ntvdm_dem_fcb_path_route_partition_v1.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -425,6 +426,63 @@ int main(void)
                     fcb_action.ranges[1].physical_address != 0x340u) ||
                 !bx_ntvdm_dem_whole_provider_v1_cancel_gather(&provider, services[index],
                     &boundary, &cpu, &provider.pending_gather)) { failed = 483; break; }
+        }
+    }
+    if (!failed) {
+        static const uint8_t services[] = { 0x07u, 0x20u, 0x2cu, 0x2du, 0x31u };
+        uint32_t index;
+        for (index = 0u; index < sizeof(services); ++index) {
+            uint8_t bop[4] = { 0xc4u, 0xc4u, 0x50u, services[index] };
+            uint64_t first = services[index] == 0x07u ? 0x340u : 0x230u;
+            bx_ntvdm_instruction_window_v1_capture(&window, bop, sizeof(bop));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0x20u; cpu.es = 0x30u; cpu.esi = 0x30u; cpu.edi = 0x40u;
+            if (!bx_ntvdm_dem_fcb_path_route_partition_v1_prepare(&provider, services[index],
+                    &boundary, &cpu, &window, &fcb_action) ||
+                fcb_action.range_count != (services[index] == 0x20u ? 2u : 1u) ||
+                fcb_action.ranges[0].physical_address != first ||
+                (services[index] == 0x20u &&
+                    fcb_action.ranges[1].physical_address != 0x340u) ||
+                !bx_ntvdm_dem_whole_provider_v1_cancel_gather(&provider, services[index],
+                    &boundary, &cpu, &provider.pending_gather)) { failed = 486; break; }
+        }
+    }
+    if (!failed) {
+        const uint8_t fcb_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x2du };
+        bx_ntvdm_instruction_window_v1_capture(&window, fcb_bop, sizeof(fcb_bop));
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ds = 0x20u; cpu.esi = 0x30u;
+        if (!bx_ntvdm_dem_fcb_path_route_partition_v1_prepare(&provider, 0x2du,
+                &boundary, &cpu, &window, &fcb_action)) failed = 487;
+        else {
+            memset(fcb_action.payload, 0, fcb_action.payload_bytes);
+            if (strcpy_s((char *)fcb_action.payload, fcb_action.payload_bytes, oem_short) != 0 ||
+                !bx_ntvdm_dem_fcb_path_route_partition_v1_complete(&provider, 0x2du,
+                    &boundary, &cpu, &fcb_action, &result) || cf_set(&result) ||
+                (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 5u))) !=
+                    ((1u << 0u) | (1u << 5u))) failed = 488;
+            else {
+                uint32_t fcb_path_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                    result.cpu_delta.gpr16_values[5];
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                cpu.eax = fcb_path_token >> 16; cpu.esi = fcb_path_token & 0xffffu;
+                if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider, 0x2eu,
+                        &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) || cf_set(&result)) failed = 489;
+            }
+        }
+    }
+    if (!failed) {
+        const uint8_t fcb_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x31u };
+        bx_ntvdm_instruction_window_v1_capture(&window, fcb_bop, sizeof(fcb_bop));
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ds = 0x20u; cpu.esi = 0x30u;
+        if (!bx_ntvdm_dem_fcb_path_route_partition_v1_prepare(&provider, 0x31u,
+                &boundary, &cpu, &window, &fcb_action)) failed = 490;
+        else {
+            memset(fcb_action.payload, 'x', fcb_action.payload_bytes);
+            if (bx_ntvdm_dem_fcb_path_route_partition_v1_complete(&provider, 0x31u,
+                    &boundary, &cpu, &fcb_action, &result) ||
+                provider.pending_action_id != 0u) failed = 491;
         }
     }
     if (!failed) {

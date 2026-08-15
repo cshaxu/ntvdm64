@@ -287,3 +287,10 @@ It verifies exact range count/address, cancellation of each exact pending
 gather, the 520-byte rename shape, and rejection/cleanup when a copied path
 has no NUL. This is transaction-boundary evidence only; it does not test or
 authorize an ingress switch.
+
+Revision r39 introduces the matching five-service `demfcb.c` pathname
+transaction for `07/20/2C/2D/31`. Its r2 MSVC x64 `/MT` fixture checks every
+original DS/ES address shape, `20`'s double-record gather, a real copied-path
+`2D` provider roundtrip and no-NUL rejection cleanup. It delegates only to
+the prior FCB source-derived providers and remains provider-internal; no FCB
+pathname BOP route is enabled.

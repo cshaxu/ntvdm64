@@ -258,6 +258,12 @@
 > no-NUL cleanup refusal. It is still provider-internal transaction evidence,
 > not partial pathname routing or a package-switch claim.
 
+> **T202 S4 progress:** r39 adds the five-service `demfcb.c` pathname
+> transaction (`07/20/2C/2D/31`), including original DS/ES shapes, two-path
+> rename and no-NUL cleanup. It delegates to the existing FCB providers only.
+> This is still provider-internal preparation; no FCB pathname BOP route is
+> enabled before the family-wide atomic gate.
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the
