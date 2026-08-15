@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T205 S3.** Its governing brief is the active
+> **Current effective packet: M0 T205 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T205 S3 -- XMS UMB machine-capability admission.**
+**Active: M0 T205 S5 -- XMS INT15 machine-capability admission.**
 
 > **T204 closed:** its contained startup-configuration boundary is recorded in
 > [history](history/m0-t204-closure-20260815.md). The table below is the sole
@@ -14,27 +14,28 @@
 ## Active Packet
 
 > **T scope:** T205 recovers the complete XMS (`52:00..0B`) owner package by
-> completing XMS UMB services only after a real C3 machine-map/reservation
-> capability is admitted. S3 maps the actual Bochs memory regions and original
-> reserve/release semantics; it implements no `52:06..08` service or trace.
+> completing each gated XMS capability only after its real machine owner is
+> admitted. S3 rejected C3/UMB for this no-device profile. S5 now maps the
+> original INT15 notification requirement for `52:09`; it implements neither
+> an interrupt service nor a trace.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T205 S3, Ordinary Mode. |
-| Admission And Approval | T205 S1 plan and S2 closure; owner direction that UMB/INT15 must remain native machine-owned rather than adapter semantics. |
-| Objective | Establish the source/ABI/failure and actual-memory-map evidence needed to admit or reject a selector-blind C3 UMB reserve/release capability for XMS `52:06..08`. |
-| Non-goals | No XMS UMB implementation, synthetic UMB region, interrupt/firmware behavior, Bochs core memory rewrite, trace, adapter allocator, host pointer, DPMI or top-level `5E` behavior. |
-| Reference Baseline | OpenNT `xmsumb.c`, `umb.h`, `ReserveUMB` callers; T199 C3 evidence; current no-device minimal machine and S2 extended-memory boundary. |
-| Files And ABI Surface | Read-only source/map inspection and evidence only. A later admitted mantle record may be fixed-width and selector-blind; no source/ABI change is authorized in S3. |
+| Identifier Mode | M0 T205 S5, Ordinary Mode. |
+| Admission And Approval | T205 S1 plan, S2 closure and S3 C3 decision; owner direction that INT15 remains native machine/firmware-owned rather than adapter semantics. |
+| Objective | Establish source/ABI/failure and actual machine-lifecycle evidence needed to admit or reject a selector-blind interrupt-notification capability for XMS `52:09`. |
+| Non-goals | No `52:09` provider, synthetic IVT, PIC/keyboard/firmware behavior, Bochs core rewrite, trace, adapter callback, host pointer, DPMI or top-level `5E` behavior. |
+| Reference Baseline | OpenNT `xmsmisc.c`, `keybd_io.c`, INT15 callers; T199 C5 evidence; current no-device minimal machine and S2 extended-memory boundary. |
+| Files And ABI Surface | Read-only source/lifecycle inspection and evidence only. A later admitted mantle record may be fixed-width and selector-blind; no source/ABI change is authorized in S5. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Inspect all real UMB candidate regions, memory owners and reservation transitions; map every `xmsInitUMB`/request/release output and failure; prove a no-map/default-off result; governance and diff checks. |
-| Expected Markers | Explicit C3 owner or explicit rejection; no guessed UMB aperture; `52:06..08` remain deferred until C3 is proven; adapter has no allocator. |
+| Verification | Inspect all `xmsNotifyHookI15` and downstream INT15 delivery dependencies; map vector validation, firmware/PIC/keyboard owners and failures; prove a default-off result; governance and diff checks. |
+| Expected Markers | Explicit C5 owner or explicit rejection; no synthetic IVT or callback; `52:09` remains deferred until C5 is proven; adapter has no interrupt state. |
 | Asset Needs | Existing repository source only; no firmware/media/device import, host mutation or runtime dependency. |
-| Reporting Requirements | Record source paths/hashes, candidate region inventory, owner/lifecycle/failure disposition, current no-device constraints and a later S order. |
-| Stop Conditions | Any need to enable a device, change generic memory/firmware semantics, make an adapter map, or trace guest execution pauses S3 for re-admission. |
-| Exit Criteria | A reviewable C3 decision gives a safe complete implementation or explicit continued deferral path for all three UMB slots. |
+| Reporting Requirements | Record source paths/hashes, vector/delivery owner inventory, lifecycle/failure disposition, current no-device constraints and a later S order. |
+| Stop Conditions | Any need to enable a device, change generic interrupt/firmware semantics, make an adapter callback, or trace guest execution pauses S5 for re-admission. |
+| Exit Criteria | A reviewable C5 decision gives a safe complete implementation or explicit continued deferral path for `52:09`. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect UMB owner constants, all `ReserveUMB`/`ReleaseUMB` users, ROM/video/option apertures, `5E` UMB notification, DOS/EMM consumers, and DPMI dependencies. |
+| Similar-Issue Sweep | Inspect INT15 vector validation, keyboard/BIOS/PIC callouts, IVT lifecycle, XMS capacity return, `5E` notification, DOS/EMM consumers, and DPMI dependencies. |
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
@@ -68,6 +69,11 @@
 > source-built package boundary; see the [closure
 > record](history/m0-t205-s2-closure-20260815.md). `06..09` remain deferred
 > pending separately admitted C3/C5 mechanics.
+
+> **T205 S3 closure:** the complete C3 source and no-device machine-map
+> comparison rejects a synthetic UMB capability. `52:06..08` remain one
+> deferred XMS subgroup; their conditional provider S4 is not admitted. See
+> the [C3 decision](etc/research/t205-s3-c3-umb-machine-admission-decision-001.md).
 
 > **T204 S1 closure:** the declared-profile map identifies the current
 > `minimal-comment-v1` / empty boot files and `54:0C/0D` C:-path answers as one

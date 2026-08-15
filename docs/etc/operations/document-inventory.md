@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1452 |
+| Documentation records | 1453 |
 | --- | --- |
-| Generated UTC | 2026-08-15T12:04:25Z |
+| Generated UTC | 2026-08-15T12:07:34Z |
 
 ## Entries
 
@@ -114,7 +114,7 @@ content-divergent entries.
 | etc/operations/t202-s6-command-stream-child-capability-plan-001.md | indexed supporting material | ad8b65d9000524012c4a251f9bc1a40c61a2ffbb84facacdde8d8ef4cde11738 |
 | etc/operations/t202-s7-command-reentry-capability-admission-plan-001.md | indexed supporting material | b182e51cafb1084df5e74544488c0b5891a04f9ca6a8f629d4597f46523138f4 |
 | etc/operations/t204-s1-contained-guest-startup-configuration-map-001.md | indexed supporting material | cb9a0f5b503f70f0246a57632f40ddd3b2d1a754b8fc97b11f76c9aefb621e36 |
-| etc/operations/t205-xms-whole-package-plan-001.md | indexed supporting material | 1bc38b3a99fc616fdb225181e3e88502a4e9da9453758a8bffcaf67bef54757e |
+| etc/operations/t205-xms-whole-package-plan-001.md | indexed supporting material | b04aaaca806d230f11ce39fa7d3a0adbb59fc2692246b5272d9936b144d2845e |
 | etc/operations/task-identifier-governance.md | indexed supporting material | f019e4c9700b7330bc14860053a5c205c8cd2a4670608ab3229fab290af29dbf |
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
@@ -703,6 +703,7 @@ content-divergent entries.
 | etc/research/t205-s2-p1-xms-geometry-statistics-001.md | indexed supporting material | 82d05a4ecfc7c7185abfff251fc57f42f77baaec71912f831e5cc9abe09cdaf8 |
 | etc/research/t205-s2-p2-xms-move-bridge-001.md | indexed supporting material | 760beda7cfa37bf3730d5e7363437d4f1175f3d38d9b726cec2cc868e53607ff |
 | etc/research/t205-s2-p3-xms-block-failure-matrix-001.md | indexed supporting material | 6ebdb174462c2498d6f63b8fef4cad07497dce4b0fb4605579ddc2314f56b150 |
+| etc/research/t205-s3-c3-umb-machine-admission-decision-001.md | indexed supporting material | 84079a237d216e3e00453705831673540c16720ffba89b12b55d036bd2564282 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | b048cd5f8496669c107d9988f91a9c4bb5a82c90707430224127cac27adf2fb6 |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -1466,7 +1467,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 981518f70d6faf94188eb1b30e0627efbebc2e76b15fec6dc84a6aae67506a36 |
+| STATUS.md | principal control document | c191842cec71afd25f54f8ff170a8e52265b4aaaef108b7da76a110d04c256f4 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |

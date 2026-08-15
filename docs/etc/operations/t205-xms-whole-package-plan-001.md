@@ -58,8 +58,10 @@ provider or runtime claim.
    and whole-group tests.
 2. **S3 — C3 UMB capability admission:** actual memory regions,
    reserve/release lifecycle and negative no-map behavior before XMS code.
-3. **S4 — UMB provider completion:** `06..08` together, including paragraph
-   split/coalesce and `B0/B1/B2` errors.
+3. **S4 — UMB provider completion:** conditional on S3 admission only:
+   `06..08` together, including paragraph split/coalesce and `B0/B1/B2`
+   errors.  S3 rejected C3 for the current no-device profile, so S4 is not
+   admitted; see the [S3 decision](../research/t205-s3-c3-umb-machine-admission-decision-001.md).
 4. **S5 — C5 INT15 capability and provider completion:** native default-off
    interrupt lifecycle first, then `09` with capacity regression.
 5. **S6 — family convergence:** all `52:00..0B` through common ingress,
