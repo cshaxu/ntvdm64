@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T212 S6.** Its governing brief is the active
+> **Current effective packet: M0 T212 S7.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T212 S6 -- CLI cancellation orchestration.**
+**Active: M0 T212 S7 -- lifecycle convergence and deferral ledger.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -21,23 +21,25 @@
 > result-classification boundary. S3 integrated that already-closed boundary
 > into the native CLI without changing engine behavior. S4 admitted the one
 > selector-blind cooperative-cancellation boundary; S5 closed its mechanical
-> mantle/engine portion. S6 composes it with CLI-owned event/worker lifetime.
+> mantle/engine portion. S6 closed CLI-owned event/worker lifetime. S7
+> reconciles the lifecycle ledger and records the remaining explicit deferrals
+> before T212 closure.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T212 S6, Ordinary Mode. |
-| Admission And Approval | T212 S5 closed the typed, selector-blind engine cancellation mechanism with stage and engine cleanup evidence. It admits CLI-only orchestration around that API. |
-| Objective | Add one CLI-owned worker/event lifecycle that converts a console cancellation request into the closed typed engine request and joins a copied engine result before presentation. |
-| Non-goals | No mantle/Bochs/core/BOP/OpenNT change, no host handle across the engine API, no guest cancellation semantics, no normal-completion claim, no wall-time/resource policy and no durable audit I/O. |
-| Reference Baseline | T212 S1--S5 records; retained child-runner console-event ownership; closed engine cancellation API and lifecycle ABI. |
-| Files And ABI Surface | `src/cli` lifecycle/entry sources and focused CLI orchestration fixture; engine API is called by fixed reason only. |
+| Identifier Mode | M0 T212 S7, Ordinary Mode. |
+| Admission And Approval | T212 S1--S6 have closed the copied lifecycle classifier, native presentation, cancellation admission, mechanical/engine producer, and CLI event/worker consumer. S7 is documentation-only convergence over those records. |
+| Objective | Reconcile all T212 lifecycle producers, presentation classes, cleanup owners and explicit deferrals into a closure ledger; decide whether T212 can close without a guest-normal-completion claim. |
+| Non-goals | No mantle/Bochs/core/BOP/OpenNT/CLI behavior change, no host handle across the engine API, no guest cancellation semantics, no normal-completion claim, no wall-time/resource policy and no durable audit I/O. |
+| Reference Baseline | T212 S1--S6 closures, including the S6 event/worker result-copy record. |
+| Files And ABI Surface | Documentation and focused read-only source/ABI reconciliation only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Fresh MSVC x64 `/MT` CLI orchestration fixture proves event/request/join ordering, canceled and uncanceled typed results, handler cleanup and no raw-handle engine transfer; governance and diff checks. |
-| Expected Markers | Console handler only signals CLI-owned state; the CLI main path issues the typed fixed reason; engine result is copied after worker join and independently classified. |
-| Asset Needs | Existing lifecycle ABI, closed engine cancellation API and normal user-mode CLI test facilities; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record worker/handle ownership, event ordering, result-copy boundary, negative cases and remaining wall-time/resource deferral. |
-| Stop Conditions | Any need to pass a host handle/pointer/callback into engine/mantle, alter the mechanical controller, create guest/selector semantics, or rely on `TerminateProcess` pauses S6 for re-admission. |
-| Exit Criteria | A source-built CLI-only fixture proves bounded cancellation request and joined typed result without changing engine/mantle or equating host outcome with DOS status. |
+| Verification | Read-only reconciliation of S1--S6 evidence, source symbols and terminal mapping; documentation governance and diff checks. |
+| Expected Markers | Every lifecycle producer has one owner, every presentation has an evidenced current source or explicit absence, and wall-time/resource/audit/normal-completion remain named deferrals. |
+| Asset Needs | Existing T212 evidence only; no firmware/media/device import, native trace, build or runtime action. |
+| Reporting Requirements | Record current terminal/presentation matrix, cleanup and handle ownership, deferred capability class, and the task-closure decision. |
+| Stop Conditions | Any mismatch requiring behavior change, an unclassified terminal, a raw host object across engine ABI, or a claim of guest completion pauses S7 for separate admission. |
+| Exit Criteria | One evidence ledger gives a complete, non-overclaiming T212 lifecycle disposition and supports either task closure or an explicitly scoped successor S. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | engine contract/run/machine stage, CLI entry/result, retained child cancellation, finite fixture timers, terminal observations, composition reset and T203/T206/T207 evidence. |
 

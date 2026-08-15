@@ -4,6 +4,8 @@
 #include "byob_profile.h"
 #include "byob_target_selection.h"
 #include "ntdos64_lifecycle_v1.h"
+#include "ntdos64_console_cancellation_v1.h"
+#include "ntdos64_engine_worker_v1.h"
 
 #include <stdio.h>
 #include <wchar.h>
@@ -50,6 +52,8 @@ int wmain(int argc, wchar_t **argv)
     struct bx_ntvdm_engine_result_v1 result;
     struct ntdos64_lifecycle_v1_policy lifecycle_policy;
     struct ntdos64_lifecycle_v1_audit lifecycle_audit;
+    HANDLE cancellation_event;
+    uint32_t cancellation_accepted = 0u;
 
     if (argc < 6) goto usage;
     while (index < argc && wcsncmp(argv[index], L"--", 2u) == 0) {
@@ -97,8 +101,16 @@ int wmain(int argc, wchar_t **argv)
             request.admitted_drive_mask, request.excluded_drive_mask);
         return 0;
     }
-    if (!bx_ntvdm_engine_run_v1(&request, &result) ||
-        !bx_ntvdm_engine_result_v1_valid(&result)) return 1;
+    if (!ntdos64_console_cancellation_v1_begin(&cancellation_event)) return 1;
+    if (!ntdos64_engine_worker_v1_run(&request, cancellation_event, &result,
+            &cancellation_accepted)) {
+        ntdos64_console_cancellation_v1_end();
+        return 1;
+    }
+    ntdos64_console_cancellation_v1_end();
+    lifecycle_policy.cancellation_request = cancellation_accepted ?
+        NTDOS64_LIFECYCLE_V1_CANCELLATION_REQUESTED :
+        NTDOS64_LIFECYCLE_V1_CANCELLATION_NONE;
     if (!ntdos64_lifecycle_v1_classify(&lifecycle_policy, &result,
             &lifecycle_audit) || !ntdos64_lifecycle_v1_audit_valid(&lifecycle_audit)) return 1;
     wprintf(L"ntdos64-native: terminal=%u detail=%u lifecycle=%u presentation=%u cancellation=%u\n",
