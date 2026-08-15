@@ -11,6 +11,13 @@ APIs under explicit CLI policy and normal permissions.  Non-invasive means
 that the product remains unpack-and-run: it does not restore or install
 `VDMREDIR.DLL`, drivers, VDDs, services, kernel APIs, or Windows system files.
 
+`VDMREDIR.DLL` and its `VrDispatch` entry are historical NTVDM product
+composition, not reusable modern Win32 APIs.  The DLL's service, device,
+callback and VDM-memory contracts are absent from the x64 CLI product.  A
+future provider must therefore use the original dispatcher/layout/failure
+evidence while composing only admitted modern host capabilities; loading or
+reinstalling the historical DLL is explicitly out of scope.
+
 ## Boundary
 
 ```text
@@ -68,6 +75,10 @@ This package depends on:
   disconnect semantics; and
 - opt-in virtual-device capability profiles before NetBIOS/DLC or guest
   interrupt completion can be admitted.
+
+The source/ABI map must separately identify every former `VrDispatch` call,
+its copied request/result layout, completion ownership and failure path before
+its subfamily is admitted.
 
 It is therefore ordered after those packages and before DPMI/WOW closure.  A
 network profile does not block direct local DOS drive recovery, DPMI, or WOW;

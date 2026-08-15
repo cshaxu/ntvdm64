@@ -15,6 +15,14 @@ OpenNT DPMI, however, combines those mechanics with process-LDT setup,
 `VdmTib`, flat address translation, DOSX stack frames, protected-mode IRET
 hooks, INT 21h crossings, DPMI application state and memory/session lifetime.
 
+The old x86 process-LDT routes (`NtSetLdtEntries` and
+`NtSetInformationProcess(ProcessLdtInformation)`) are not a supported x64
+user-mode composition contract.  They cannot be directly reused merely by
+declaring their native signatures.  Their OpenNT callers remain source and
+failure evidence; the selected DPMI profile must instead rely on admitted
+bx-core/bx-mantle protected-mode/descriptor mechanics, or retain the original
+unavailable/deferred result.
+
 The current C4 finding therefore rejects an adapter or mantle API that directly
 sets CR0, edits LDT entries, or manufactures protected-mode callbacks. Such an
 API would either expose Bochs internals across the architecture boundary or
@@ -47,6 +55,8 @@ Bochs and mantle remain selector-, BOP- and OpenNT-blind.
 3. Classify each reached OpenNT DPMI module as independently composable,
    composable with declared contained host capabilities, minimal
    source-derived rehost, or explicitly unavailable/deferred.
+   This map must identify all historical LDT calls and prove that no raw LDT
+   or process-descriptor operation crosses the bx-vdm boundary.
 4. Define one session-scoped provider contract in `bx-vdm`; it may transport
    fixed-width copied state and checked guest-memory ranges only.
 5. Admit only source-proven machine prerequisites. C1/C2 are native inputs;

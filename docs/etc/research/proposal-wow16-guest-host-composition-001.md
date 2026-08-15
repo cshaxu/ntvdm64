@@ -25,6 +25,13 @@ services. Conversely, historical WOWEXEC/WOW32 host composition cannot be
 assumed to link into the modern CLI process because it binds old NT GUI,
 VDD, process, message and memory mechanisms.
 
+In particular, the WOW32 initialization/dispatch hooks are not public Win32
+extension points.  They require the historical WOWEXEC/WOW32 process and VDM
+composition, including its thunk, callback and address-space contracts.  They
+must be source-mapped and either composed through admitted CLI capabilities
+or explicitly deferred; the project will not load a historical WOW32 DLL as a
+shortcut or recreate its host installation requirements.
+
 The intended path is:
 
 ```text
@@ -41,7 +48,8 @@ Win16 NE application
 1. Inventory every required WOW16 and DPMI guest artifact as source-built,
    static, prebuilt, blocked, or unavailable.
 2. Map the complete original WOW host composition, including WOWEXEC/WOW32
-   dispatcher, thunk, GUI, file, input and lifecycle dependencies.
+   dispatcher, hooks, thunk, GUI, file, input and lifecycle dependencies,
+   with a separate ABI/failure disposition for every unavailable WOW32 hook.
 3. Classify each host dependency as independently reusable, capability-adapted,
    source-derived, explicit unavailable, or deferred.
 4. Build a minimal non-GUI NE fixture closure: loader, selector/LDT, protected

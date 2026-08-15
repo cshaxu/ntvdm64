@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1381 |
 | --- | --- |
-| Generated UTC | 2026-08-15T01:45:37Z |
+| Generated UTC | 2026-08-15T01:51:08Z |
 
 ## Entries
 
@@ -151,10 +151,10 @@ content-divergent entries.
 | etc/research/proposal-cli-interactive-command-session-001.md | indexed supporting material | b0d0454ddf0be218f836574368326f466d11a4d0a147044d9cf6c8a12d47e39d |
 | etc/research/proposal-cli-noninvasive-capability-roadmap-001.md | indexed supporting material | d8a05adcd3a5e697e101f6be0fad1c8b0cfb1fbc1082d9eb000b54abdd22b5c6 |
 | etc/research/proposal-host-integrated-bop-capability-recovery-001.md | indexed supporting material | 90b4698184e0e73373854018a14f901a07736ca557a4b326437faa0dbde246a0 |
-| etc/research/proposal-opennt-dpmi-host-composition-001.md | indexed supporting material | 5d107ef9bd2a5438a960955b1f9ae3bd47692cf190f6ea5107092f8d940db16a |
-| etc/research/proposal-opennt-redirector-network-ipc-001.md | indexed supporting material | d16d2426cec6b661315baf68cba7f592baad65ca15ecfffec451dab8fdc4560f |
+| etc/research/proposal-opennt-dpmi-host-composition-001.md | indexed supporting material | 8300fb853ed8cfa88351b62514808d6fdcb8ff5f805e7b552965be3bc4bcfb3a |
+| etc/research/proposal-opennt-redirector-network-ipc-001.md | indexed supporting material | 166ebe5781f962ad700b1c28a6bfa73d67350c850599c0bde72e364518de3c1f |
 | etc/research/proposal-unified-host-mutation-capability-profiles-001.md | indexed supporting material | fd5cba044c4dfe897bcf924eab407b4915723a2a1cf2684fb1fb8035c44bd9cb |
-| etc/research/proposal-wow16-guest-host-composition-001.md | indexed supporting material | 359fc63637ad8ec0891aca36166e536c6fee8b91d2618bbc8ca5f9349fc8db5f |
+| etc/research/proposal-wow16-guest-host-composition-001.md | indexed supporting material | c49eb4a04b73f9ebb4471aa45208fb11e8289fb6ce30a03b2afeaf24a43d03d3 |
 | etc/research/r20-cmd-setinfo-contract.md | indexed supporting material | b27620060f0efa8504b80f8237ed66da58a4b302e2d34ec26d92eaec5a75b235 |
 | etc/research/r20-dem-getdpblist-boundary.md | indexed supporting material | 095a4aee41c09d1d95ef69d93926d841feaaac890e52544c509d4cdc24582809 |
 | etc/research/r20-dem-getdrives-contract.md | indexed supporting material | e9db3649f1b800cfce09dc9fd4b50189882a3a09730ee806d3f7be13577fb1af |
@@ -1269,7 +1269,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | 93a263d3aa4763d56f28078585a1a12f4ffff831020c2ba428dfb3b36cf16c6d |
-| QUEUE.md | principal control document | 9b5be8c9f9ecfa7dbf0f32c37172db7053e5834dab35cff6e8571619add6956c |
+| QUEUE.md | principal control document | 516e43d2a0640d57ccd3ee8a73f29807438d5a2deeb8b9b5110421c412dae7e0 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | fef23048d411b355f5c2e08b971fec6370359120e7d9c7da383cb883f1dfa2da |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | dd298ea27d815fb69cc843ecf334a2664ba740bb6ede8e0c90907d918c64086a |
