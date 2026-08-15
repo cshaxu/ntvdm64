@@ -47,6 +47,12 @@
 > `ORDINARY_GUEST_COMPLETION`; no terminal-result ABI is admitted. See the
 > [validity correction](etc/research/t203-s1-normal-terminal-observation-validity-correction-001.md).
 
+> **T203 S1 harness map:** no existing engine or native fixture can observe
+> normal `54:0B` without either requiring a controlled `54:01` stop or
+> converting an unrelated generic fault into one. A later admitted observer
+> must be default-off, passive and copied-data-only; see the
+> [harness map](etc/research/t203-s1-normal-return-observation-harness-map-001.md).
+
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
 
