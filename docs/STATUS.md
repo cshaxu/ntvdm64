@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T210 S3.** Its governing brief is the active
+> **Current effective packet: M0 T211 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T210 S3 -- CLI session host-context provider recovery.**
+**Active: M0 T211 S1 -- OpenNT COMMAND owner-package source/ABI/disposition map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -15,28 +15,28 @@
 
 ## Active Packet
 
-> **T scope:** T210 recovers the host-context owner package as one unit. S1
-> closed the source/ABI/profile map; S2 closed the shared-provider design and
-> full owner-package regression admission. S3 recovers that one provider as a
-> whole, rather than patching individual BOP endpoints.
+> **T scope:** T211 recovers the complete COMMAND owner package by original
+> component boundary. S1 maps every COMMAND identity and its reachable
+> bootstrap/launch/console/execution/environment/lifecycle contract before
+> any further package implementation.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T210 S3, Ordinary Mode. |
-| Admission And Approval | [S1 map](etc/research/t210-s1-host-context-owner-package-map-001.md) and [S2 provider design](etc/research/t210-s2-host-context-provider-design-001.md) prove the whole selected-drive/CWD/environment provider boundary and regression bar. |
-| Objective | Recover one session-owned host-context provider for DEM `13/18/1A` and COMMAND `54:02/04/0F`, including shared profile enforcement and copied publication. |
-| Non-goals | No trace-led service selection, unrelated DEM/COMMAND recovery, ambient recapture, host installation/mutation, Bochs change, host handle leakage or engine lifecycle change. |
-| Reference Baseline | T200/T201 authorities, T202 DEM evidence, T209 closure, T210 S1/S2 records and original DEM/COMMAND context owners. |
-| Files And ABI Surface | `src/bx-vdm` session provider and its DEM/COMMAND integration only; existing fixed-width COMMAND projection remains the consumer ABI. |
+| Identifier Mode | M0 T211 S1, Ordinary Mode. |
+| Admission And Approval | Owner-approved package-led BOP recovery, the T200/S31 complete owner/disposition audit, and T210's completed shared context foundation. |
+| Objective | Map the original COMMAND `54:00..10` family into complete owner components, source/ABI/failure contracts, provider disposition and current workaround action. |
+| Non-goals | No endpoint implementation, native trace-led work, new host lifecycle semantics, Bochs change, ambient host-state access, or claim that partial `54:04/0E` evidence closes COMMAND. |
+| Reference Baseline | T200/S31 ledger, T202/T203/T204/T206/T207 records, T210 closure, original `cmddisp.c`, `cmdmisc.c`, `cmdexec.c` and COMMAND callers. |
+| Files And ABI Surface | Evidence and governance only in S1; no product ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One strict MSVC x64 `/MT` provider fixture and one bound DEM/COMMAND family fixture cover all four modes, source failure/result cases, copied publication, teardown and negative boundaries; governance and diff checks. |
-| Expected Markers | One session provider owns host context; DEM and COMMAND only consume it; no synthetic CWD fallback or trace-selected endpoint remains. |
-| Asset Needs | Existing repository source only; normal user-mode Win32 filesystem/environment API calls in focused tests only; no firmware/media/device import or host installation dependency. |
-| Reporting Requirements | Record changed ABI/state, direct-host API/error evidence, profile results, full family regression, migration/deletion facts and limitations. |
-| Stop Conditions | A missing/publicly unavailable API, need for a host installation change, Bochs/mantle semantics, an unrelated provider package, or a need to choose work from trace pauses S3 for re-admission. |
-| Exit Criteria | Whole provider is source-built and its complete DEM/COMMAND family regression passes; one later trace may only observe integration. |
+| Verification | One all-identity COMMAND table identifies original source, input/output ABI, failure behavior, modern dependency status, owner component, provider disposition and retain/migrate/replace/delete action; governance and diff checks. |
+| Expected Markers | Every `54:00..10` identity, plus dispatcher sentinel, has exactly one component/disposition; existing endpoints are evidence only, never complete-component claims. |
+| Asset Needs | Existing repository source only; no firmware/media/device import, host mutation, runtime dependency or native trace. |
+| Reporting Requirements | Record original paths, service families, ABI/failure findings, unavailable historical dependencies, modern public API status and next whole-component implementation order. |
+| Stop Conditions | Any implementation, selector-specific trace patch, unclassified identity, host installation requirement, Bochs/mantle change, or absent source evidence pauses S1 for re-admission. |
+| Exit Criteria | Reviewable complete COMMAND component map that admits one bounded whole-provider S2 packet without endpoint-driven scope growth. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | `demdir.c`, `demgset.c`, `cmdmisc.c`, DEM CWD/drive/context providers, host drive policy/namespace, COMMAND context, CLI admission and all selected-drive/current-directory/environment BOP routes. |
+| Similar-Issue Sweep | `cmddisp.c`, `cmdmisc.c`, `cmdexec.c`, console/keyboard/bootstrap/launch/environment/lifecycle routes, COMMAND package session/facade, common mutation profile, CLI capability seams and all `54:00..10` callers. |
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
@@ -63,6 +63,12 @@
 > pass; the deliberately namespace-free DEM package fixture still returns
 > `197` and remains negative evidence. See the [P2 migration
 > record](etc/research/t210-s3-session-host-context-provider-p2-migration-001.md).
+
+> **T210 closed:** one source-built family now covers DEM `13/18/1A` and
+> COMMAND `02/04/0F` through one session context. A later native observer
+> rejected its prior execution plan before CPU entry; it recorded no BOP and
+> does not narrow the next package. See the [closure
+> record](history/m0-t210-closure-20260815.md).
 
 > **T205 S1 closure:** current OpenNT and bx-vdm/mantle sources map all
 > twelve XMS slots, the partial routes and the necessary C3/C5 machine gates
