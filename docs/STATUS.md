@@ -68,9 +68,11 @@
 
 > **T204 S5 P4 progress:** adapter installation now reads paired sources once,
 > copies bounded OEM input and binds the ready provider; strict x64 `/MT`
-> translation-unit compilation and focused reader positive/negative regression
-> pass (including explicit empty AUTOEXEC). Installation-level regression
-> remains required. See the [reader record](etc/research/t204-s5-adapter-installation-reader-001.md).
+> reader and runtime-installation regressions pass (including explicit empty
+> AUTOEXEC, source-file deletion after install and checked `54:0C` path
+> preparation). The legacy profile initializer still materializes before bind,
+> so S5 remains active rather than claiming default-route replacement. See the
+> [reader record](etc/research/t204-s5-adapter-installation-reader-001.md).
 
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`

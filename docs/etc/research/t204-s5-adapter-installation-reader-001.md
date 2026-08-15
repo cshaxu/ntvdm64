@@ -28,3 +28,14 @@ run with MSVC x64 `/MT /W4 /WX`. It proves a copied nonempty CONFIG plus an
 empty explicit AUTOEXEC, then rejects a missing paired value, empty CONFIG and
 a 4096-byte source. This is reader-boundary evidence only; it does not replace
 the pending adapter-installation fixture.
+
+`tests/bx-vdm/bx_ntvdm_adapter_runtime_startup_configuration_install_test.c`
+now supplies the paired environment, performs a full adapter installation,
+deletes both source files immediately after installation, and then proves that
+the bound COMMAND `54:0C` preparation returns `C:\\CONFIG.SYS`. Its MSVC x64
+`/MT /W4 /WX` object closure links with `bcrypt.lib` and `ntdll.lib` and runs
+successfully. The source-file deletion proves that dispatch does not retain a
+source handle or path. The fixture deliberately still uses the legacy profile
+materialization descriptors because the namespace initializer currently needs
+them before bind; it does not claim the remaining synthetic initializer has
+been eliminated.
