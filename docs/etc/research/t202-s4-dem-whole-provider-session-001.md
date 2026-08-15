@@ -89,3 +89,14 @@ source-shaped access-denied result, while an overlay-mode create reports its
 current explicit unavailable form rather than falling through to a direct
 host write.  The direct-host fixture object is reused only for read/query;
 these negative checks make no additional host mutation.
+
+Revision r25 adds the `demfcb.c` local-handle partition for the complete
+`50:2C/2D/2E/2F/30/31` group.  It reuses the provider-owned opaque-token
+session rather than serializing a host `HANDLE`; it preserves the historical
+AX:SI FCB-close token form separately from AX:BP FCB I/O, returns FCB time,
+date and size in their original register placements, and retains the distinct
+partial disk-full form.  The r25 MSVC x64 `/MT` fixture exercises FCB open,
+read, close, local date/time and file-information results against its
+self-created file.  Create and write code are in the same source partition
+but still need their dedicated mutation-profile regressions.  This remains a
+provider-internal partition, not a guest-memory BOP route or full DEM claim.

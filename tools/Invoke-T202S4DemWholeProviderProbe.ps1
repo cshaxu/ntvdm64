@@ -21,7 +21,8 @@ $names = @(
     'bx_ntvdm_guest_gather_read_action_v1.c', 'bx_ntvdm_guest_range.c',
     'bx_ntvdm_dem_path_v1.c', 'bx_ntvdm_dem_file_session_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c', 'bx_ntvdm_dem_whole_provider_v1.c',
-    'bx_ntvdm_dem_handle_partition_v1.c', 'bx_ntvdm_dem_namespace_partition_v1.c'
+    'bx_ntvdm_dem_handle_partition_v1.c', 'bx_ntvdm_dem_namespace_partition_v1.c',
+    'bx_ntvdm_dem_fcb_handle_partition_v1.c'
 )
 $sources = $names | ForEach-Object { Join-Path $root ('src\bx-vdm\' + $_) }
 $sources += Join-Path $root 'tests\bx-vdm\bx_ntvdm_dem_whole_provider_v1_test.c'

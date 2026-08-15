@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_whole_provider_v1.h"
 #include "bx_ntvdm_dem_handle_partition_v1.h"
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
+#include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 
 #include <string.h>
 #include <wctype.h>
@@ -50,7 +51,7 @@ int main(void)
     bx_ntvdm_guest_range range = { 0x200u, 3u };
     uint8_t input[3] = { 1u, 2u, 3u }, output[256] = {0};
     uint32_t output_bytes = 0u;
-    uint32_t token = 0u;
+    uint32_t token = 0u, fcb_token = 0u;
     HANDLE file = INVALID_HANDLE_VALUE;
     DWORD written = 0u;
     bx_ntvdm_cpu_result_v2 result;
@@ -110,7 +111,8 @@ int main(void)
             &boundary, &cpu, &action, input, sizeof(input), output,
             &output_bytes) != 0)) failed = 30;
     if (!failed) {
-        file = CreateFileW(temporary, GENERIC_READ | GENERIC_WRITE, 0, 0,
+        file = CreateFileW(temporary, GENERIC_READ | GENERIC_WRITE,
+            FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, 0,
             OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
         if (file == INVALID_HANDLE_VALUE ||
             !WriteFile(file, "abc", 3u, &written, 0) || written != 3u ||
@@ -119,6 +121,32 @@ int main(void)
             if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
             failed = 40;
         }
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider, 0x2du,
+                &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
+            cf_set(&result) || (result.cpu_delta.gpr16_write_mask &
+                ((1u << 0u) | (1u << 5u))) != ((1u << 0u) | (1u << 5u))) failed = 66;
+        else {
+            fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                result.cpu_delta.gpr16_values[5];
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            token_into_cpu(&cpu, fcb_token); cpu.ebx = 1u; cpu.ecx = 2u;
+            if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider, 0x2fu,
+                    &boundary, &cpu, 0, output, sizeof(output), &output_bytes, &result) ||
+                cf_set(&result) || output_bytes != 2u ||
+                result.cpu_delta.gpr16_values[1] != 2u) failed = 67;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = fcb_token >> 16; cpu.esi = fcb_token & 0xffffu;
+            if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
+                    0x2eu, &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) ||
+                cf_set(&result))) failed = 68;
+        }
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
+                0x30u, &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) ||
+            cf_set(&result) || (result.cpu_delta.gpr16_write_mask & 5u) != 5u)) failed = 69;
     }
     if (!failed) {
         file = INVALID_HANDLE_VALUE; /* provider owns the adopted handle. */
@@ -194,6 +222,12 @@ int main(void)
                 &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result) ||
             bx_ntvdm_dem_file_session_v1_lookup(&provider.files, token, &file))
             failed = 48;
+    }
+    if (!failed) {
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
+                0x31u, &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
+            cf_set(&result) || (result.cpu_delta.gpr16_write_mask & 0x1fu) != 0x1fu) failed = 70;
     }
     if (!failed) {
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
