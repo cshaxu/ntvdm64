@@ -55,10 +55,10 @@
 > admitted CONFIG/AUTOEXEC contract and yields bounded images/merge state with
 > no external I/O.  See the [core evidence](etc/research/t204-s4-contained-configuration-provider-core-001.md).
 
-> **T204 S5 P1 progress:** the provider now owns paired generated image bytes
+> **T204 S5 P1 closure:** the provider owns paired generated image bytes
 > in the composable namespace and COMMAND copies its paired paths before bind.
-> The old adapter-runtime profile still supplies synthetic materialization, so
-> S5 remains active rather than claiming default-route replacement.  See the
+> The later S5 installation path removes the synthetic initializer; this P
+> alone does not claim default-route replacement. See the
 > [integration record](etc/research/t204-s5-configuration-image-path-integration-001.md).
 
 > **T204 S5 P3 closure:** CLI admits only paired configuration-source options
@@ -68,22 +68,24 @@
 > policy and versioned launch plan. See the [CLI admission
 > record](etc/research/t204-s5-cli-paired-source-admission-001.md).
 
-> **T204 S5 P4 progress:** adapter installation now reads paired sources once,
+> **T204 S5 P4 closure:** adapter installation reads paired sources once,
 > copies bounded OEM input and binds the ready provider; strict x64 `/MT`
 > reader and runtime-installation regressions pass (including explicit empty
 > AUTOEXEC, source-file deletion after install and checked `54:0C` path
-> preparation). The legacy profile initializer still materializes before bind,
-> so S5 remains active rather than claiming default-route replacement. See the
+> preparation). The retained profile descriptors now declare only paired paths
+> and metadata before bind; they materialize no startup bytes. See the
 > [reader record](etc/research/t204-s5-adapter-installation-reader-001.md).
 
-> **T204 S5 P5 progress:** readonly namespace initialization now retains only
+> **T204 S5 P5 closure:** readonly namespace initialization retains only
 > declared CONFIG/AUTOEXEC paths and metadata; it no longer installs fixed
 > synthetic boot bytes.  The ready provider remains the sole byte owner after
 > bind. The direct namespace fixture now proves unbound declared boot files
 > have zero content, while the bound-provider fixture proves explicit content;
 > the targeted strict x64 `/MT` regressions pass. A fresh full
 > configuration-integration object closure also compiles, links and runs under
-> MSVC x64 `/MT` after synthetic-byte removal.
+> MSVC x64 `/MT` after synthetic-byte removal. Together with P3/P4, this
+> satisfies S5's configuration-boundary exit evidence; T204 remains active
+> until its final governance handoff is committed and pushed.
 
 > **T203 S1 correction:** `54:11` is `SVC_CMDLASTSVC`, an original dispatcher
 > sentinel, not a callable normal-return BOP. The normal `cmdReturnExitCode`
