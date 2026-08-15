@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T217 S11.** Its governing brief is the active
+> **Current effective packet: M0 T217 S12.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S11 -- SYSINIT command-name relocation and lifetime map.**
+**Active: M0 T217 S12 -- COMMAND configuration shell capability seam.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -30,19 +30,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S11, Ordinary Mode. |
-| Admission And Approval | S10's native observation proves the live normal WFP is C:-rooted syntactically but has three components rather than the source-required one. The discrepancy is guest-side; no adapter compensation is admitted. |
-| Objective | Map original SYSINIT `commnd` storage, BIOS/DOS relocation and segment/data-lifetime operations against current NTIO/NTDOS boot placement, to identify the earliest source-owned handoff that can lose the leading root separator. |
-| Non-goals | No raw guest-memory/pathname observation, BOP/provider rewrite, DOS EXEC emulation, host mutation, profile expansion, Bochs/mantle change, guest binary patch, or COMMAND-run claim. |
-| Reference Baseline | T217 S3–S10 evidence; OpenNT `sysinit1.asm`, `sysinit2.asm`, BIOS/DOS make/link/relocation sources, generated NTIO/NTDOS maps and current boot-image placement. |
-| Files And ABI Surface | Evidence and Status only unless static evidence identifies an existing build/materialization defect. No runtime ABI or behavior change is admitted. |
+| Identifier Mode | M0 T217 S12, Ordinary Mode. |
+| Admission And Approval | S11 maps S10's shape to OpenNT `cmdconf.c`'s generated `SHELL=%SystemRoot%\\System32\\command.com`; the required historical host command file is absent on this modern host. The owner-approved CLI product may use the original SYSINIT default only under an explicit copied absent-capability disposition. |
+| Objective | Add a single installation-time COMMAND shell-capability disposition to the existing complete configuration provider: preserve the original generated shell when available; otherwise omit only that unavailable override so original SYSINIT opens the declared guest `\\COMMAND.COM`. |
+| Non-goals | No BOP leaf handler, DOS/BIOS patch, raw pathname observation, host file creation/modification, host-system modification, profile expansion, Bochs/mantle change, or COMMAND-run claim. |
+| Reference Baseline | T217 S3–S11; OpenNT `cmdconf.c`, `sysconf.asm`, `sysinit1.asm`, existing T204/T211 configuration provider and declared guest command namespace. |
+| Files And ABI Surface | Existing startup-configuration input/policy/provider, its copied CLI source admission, whole-provider fixture and native normal-startup fixture. The field is copied installation-time capability data; no BOP ABI changes. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Map each original segment/pointer transition and corresponding current placement; distinguish direct map/byte evidence from inference; record all recovery rungs. Governance and diff checks pass. |
-| Expected Markers | A source-backed choice between an existing guest build/materialization repair and one further bounded guest-memory evidence step; no host/provider workaround. |
+| Verification | Focused x64 `/MT` provider regression proves both dispositions, CONFIG/AUTOEXEC/country/merge preservation and no generated shell in absent mode; one fresh native normal-startup integration proves the declared command Open no longer takes host fallback. Governance and diff checks pass. |
+| Expected Markers | Source-backed continued normal startup after the command Open, or an explicitly classified next owner boundary; no fabricated success. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record every segment/pointer/data move, current placement match, confidence and repair disposition; distinguish direct evidence from inference. |
-| Stop Conditions | Any runtime observation, provider/routing/result change, host mutation, guest binary patch, profile expansion, or Bochs/mantle change pauses S11 for re-admission. |
-| Exit Criteria | The command-name lifetime chain has a recovery-ladder disposition and selects a bounded guest build/materialization repair or further evidence step. |
+| Reporting Requirements | Record host-command availability, both source-derived configuration outputs, fixture/native result and recovery-rung disposition; distinguish direct evidence from inference. |
+| Stop Conditions | Any BOP leaf implementation, DOS/BIOS patch, host mutation, guest binary patch, profile expansion, Bochs/mantle change or raw pathname observation pauses S12 for re-admission. |
+| Exit Criteria | The configuration provider selects the original host shell only when the capability exists and otherwise reaches the declared guest command Open through original SYSINIT. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -145,6 +145,13 @@
 > separator/drive mismatch and moves the evidence boundary to guest SYSINIT
 > command-name relocation/lifetime; no DEM workaround is admitted. See the
 > [shape observation](etc/research/t217-s10-sysinit-wfp-shape-observation-001.md).
+
+> **T217 S11 P1 closure:** the three-component WFP is the exact source-derived
+> CONFIG `SHELL=%SystemRoot%\\System32\\command.com` override, not a BIOS
+> relocation fault. The historical command file is absent from both current
+> host system directories; no missing Win32 API is involved. S12 admits one
+> explicit COMMAND configuration capability seam that retains the original
+> override only when it is actually available. See the [disposition](etc/research/t217-s11-command-shell-capability-disposition-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
