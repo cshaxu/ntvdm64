@@ -70,6 +70,12 @@
 > not claim a recovered provider or a native trace. See the
 > [admission closure](etc/research/t202-s3-dem-file-handle-fcb-search-admission-closure-001.md).
 
+> **T202 S4 progress:** the adapter-private opaque file-token session now
+> source-builds under x64 `/MT`; its first focused lifecycle probe proves
+> stale-token rejection without exposing a `HANDLE`. This is provider
+> substrate only, not a completed BOP. See the
+> [token evidence](etc/research/t202-s4-dem-file-session-token-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the
