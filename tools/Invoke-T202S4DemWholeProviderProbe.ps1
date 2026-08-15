@@ -21,7 +21,8 @@ $names = @(
     'bx_ntvdm_guest_gather_read_action_v1.c', 'bx_ntvdm_guest_range.c',
     'bx_ntvdm_dem_path_v1.c', 'bx_ntvdm_dem_file_session_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c', 'bx_ntvdm_dem_whole_provider_v1.c',
-    'bx_ntvdm_dem_handle_partition_v1.c', 'bx_ntvdm_dem_namespace_partition_v1.c',
+    'bx_ntvdm_dem_handle_partition_v1.c', 'bx_ntvdm_dem_handle_route_partition_v1.c',
+    'bx_ntvdm_dem_namespace_partition_v1.c',
     'bx_ntvdm_dem_fcb_handle_partition_v1.c', 'bx_ntvdm_dem_search_partition_v1.c',
     'bx_ntvdm_dem_dta_service.c', 'bx_ntvdm_dem_path_search_service_v1.c',
     'bx_ntvdm_dem_fcb_search_service_v1.c', 'bx_ntvdm_profile_search_snapshot_v1.c',
@@ -34,7 +35,8 @@ $names = @(
 $sources = $names | ForEach-Object { Join-Path $root ('src\bx-vdm\' + $_) }
 $sources += Join-Path $root 'tests\bx-vdm\bx_ntvdm_dem_whole_provider_v1_test.c'
 $compile = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' +
-    (Join-Path $root 'src\bx-vdm') + '" /I "' + (Join-Path $root 'src\cli') +
+    (Join-Path $root 'src\bx-vdm') + '" /I "' + (Join-Path $root 'src') +
+    '" /I "' + (Join-Path $root 'src\cli') +
     '" /Fe:"' + $exe + '" ' + ($sources -join ' ') + ' /link ntdll.lib bcrypt.lib'
 & cmd.exe /d /s /c $compile 2>&1 | Tee-Object -FilePath (Join-Path $build 'compile.log')
 if ($LASTEXITCODE -ne 0) { throw "T202 S4 DEM whole-provider compilation failed: $LASTEXITCODE" }

@@ -199,6 +199,15 @@
 > search regression and the guest DTA/SRCHBUF route remain required before
 > this can be treated as a completed partition.
 
+> **T202 S4 progress:** r31 routes the complete local `demhndl.c` group
+> (`50:00/02/08/16/1E/27`) through the DEM whole-provider for only its own
+> opaque tokens. Its source-built MSVC x64 `/MT` host-installed regression
+> exercises seek/read/write/file-time/commit/close through ordinary BOP
+> ingress and checked RAM, while proving that retained legacy tokens stay with
+> their former owner during the atomic-package migration. This is one route
+> migration evidence block, not whole DEM, profile, hard-error, Redirector or
+> native-trace closure; see the [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

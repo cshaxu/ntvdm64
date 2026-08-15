@@ -155,6 +155,66 @@ static int direct_search_route_regression(
     return failure;
 }
 
+static int direct_handle_route_regression(
+    bx_ntvdm_boot_namespace_composition_v1 *composition)
+{
+    wchar_t temporary[MAX_PATH], path[MAX_PATH];
+    HANDLE file = INVALID_HANDLE_VALUE;
+    DWORD written = 0u;
+    uint32_t token = 0u;
+    struct bx_ntvdm_generic_ud_event_v1 event;
+    struct bx_ntvdm_generic_ud_outcome_v1 outcome;
+    if (composition == 0 || !GetTempPathW(MAX_PATH, temporary) ||
+        !GetTempFileNameW(temporary, L"n64", 0u, path)) return 1;
+    file = CreateFileW(path, GENERIC_READ | GENERIC_WRITE, 0, 0, CREATE_ALWAYS,
+        FILE_ATTRIBUTE_TEMPORARY | FILE_FLAG_DELETE_ON_CLOSE, 0);
+    if (file == INVALID_HANDLE_VALUE || !WriteFile(file, "ONE", 3u, &written, 0) ||
+        written != 3u || !bx_ntvdm_dem_file_session_v1_adopt(
+            &composition->dem.whole_provider.files, file, &token)) {
+        if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
+        DeleteFileW(path);
+        return 2;
+    }
+    file = INVALID_HANDLE_VALUE; /* The provider owns it after adopt. */
+    memset(ram + 0x7000u, 0, 32u);
+    event_initialize(&event, 0x50u, 0x00u);
+    event.eax = token >> 16; event.ebp = token & 0xffffu;
+    event.ebx = 0u; event.ecx = 0u; event.edx = 0u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.gpr16_write_mask != ((1u << 0) | (1u << 2)) ||
+        outcome.gpr16_values[0] != 0u || outcome.gpr16_values[2] != 0u ||
+        outcome.eflags_values != 0u) return 3;
+    event_initialize(&event, 0x50u, 0x16u);
+    event.eax = token >> 16; event.ebp = token & 0xffffu;
+    event.ecx = 3u; event.ds = 0u; event.edx = 0x7000u; event.eflags = 0x40u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.gpr16_values[0] != 3u || outcome.eflags_values != 0u ||
+        memcmp(ram + 0x7000u, "ONE", 3u) != 0) return 4;
+    memcpy(ram + 0x7010u, "XY", 2u);
+    event_initialize(&event, 0x50u, 0x1eu);
+    event.eax = token >> 16; event.ebp = token & 0xffffu;
+    event.ecx = 2u; event.ds = 0u; event.edx = 0x7010u; event.eflags = 0u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+        outcome.gpr16_values[0] != 2u || outcome.eflags_values != 0u) return 5;
+    event_initialize(&event, 0x50u, 0x08u);
+    event.eax = token >> 16; event.ebp = token & 0xffffu; event.ebx = 0u;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.eflags_values != 0u) return 6;
+    event_initialize(&event, 0x50u, 0x27u);
+    event.eax = token >> 16; event.ebp = token & 0xffffu;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.eflags_values != 0u) return 7;
+    event_initialize(&event, 0x50u, 0x02u);
+    event.eax = token >> 16; event.ebp = token & 0xffffu;
+    event.ecx = event.edx = 0xffffu;
+    if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.eflags_values != 0u) return 8;
+    return 0;
+}
+
 static int facade_existing_provider(uint32_t service)
 {
     switch (service) {
@@ -270,7 +330,7 @@ int main(void)
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t token;
     uint32_t service;
-    int direct_search_error;
+    int direct_search_error, direct_handle_error;
     bx_ntvdm_host_namespace_entry_v1 terminating_entries[2] = { 0 };
     bx_ntvdm_host_namespace_entry_v1 terminating_out;
     bx_ntvdm_search_token_v1 terminating_token;
@@ -700,6 +760,8 @@ int main(void)
             &terminating_token)) return 69;
     direct_search_error = direct_search_route_regression(&composition, 2u);
     if (direct_search_error != 0) return 70 + direct_search_error;
+    direct_handle_error = direct_handle_route_regression(&composition);
+    if (direct_handle_error != 0) return 90 + direct_handle_error;
     bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
     bx_ntvdm_host_namespace_v1_release(&host_namespace);
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 10;

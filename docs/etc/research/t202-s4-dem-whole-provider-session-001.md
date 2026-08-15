@@ -184,3 +184,24 @@ whole-provider r30 and search-partition r4 MSVC x64 `/MT` regressions pass.
 This closes the four-service route migration evidence only; it does not close
 the remaining DEM identities, overlay behavior, historic hard errors, or a
 native guest trace.
+
+Revision r31 adds the corresponding `demhndl.c` route as one six-identity
+partition: `50:00/02/08/16/1E/27`.  The route is selector-blind below the
+common BOP ingress: it accepts only a provider-issued opaque token, translates
+the two buffer forms through the existing copied mechanical read/write action,
+and otherwise leaves a retained legacy fixture token with its existing owner.
+This migration guard is necessary until the final one-provider switch; it does
+not place a host `HANDLE`, DOS meaning, or BOP selector in bx-core or
+bx-mantle.
+
+`t202-s4-handle-route-closure-r1` source-builds the added route with the
+complete whole-provider fixture under MSVC x64 `/MT`.  The host-installed
+`t202-s4-handle-route-behavior-r1` fixture then adopts a temporary local file
+inside the provider only, calls the six identities through ordinary BOP
+ingress and checked RAM, and verifies seek, read, write, get-time, commit and
+close results.  During that check the existing `50:42` legacy fast-read
+fixture exposed a token-owner collision; the route now declines tokens it did
+not issue, restoring the legacy result without treating it as a new provider
+fallback.  This closes route evidence for this six-identity partition only.
+It does not claim all 29 identities, readonly/overlay behavior, hard-error
+delivery, Redirector pipes, or a native guest trace.
