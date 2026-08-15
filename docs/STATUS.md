@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T202 S2.** Its governing brief is the active
+> **Current effective packet: M0 T202 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T202 S2 -- DEM direct-host namespace/CWD/volume package.**
+**Active: M0 T202 S3 -- DEM file/handle/FCB/search source/ABI/failure admission.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T202 S2, Ordinary Mode. |
-| Admission And Approval | S1 closed DEM package adoption of the shared profile. S2 now recovers the complete DEM namespace/CWD/volume owner subpackage, beginning from the original DEM source and S30 host-root capability rather than trace hits. |
-| Objective | Produce one DEM package design and implementation plan for direct host roots, per-drive current directory, drive/volume observation and their readonly/overlay/virtual dispositions. Then implement the entire admitted package with family regression, retaining source-shaped host permission and failure behavior. |
-| Non-goals | No individual trace-selected BOP patch, no COMMAND/Redirector/XMS/DPMI recovery, no raw-device/absolute-media package, no host installation/rebuild, no Bochs semantic change, and no unbounded native run. |
-| Reference Baseline | [T202 S1 composition seam](etc/research/t202-s1-dem-profile-consumer-composition-001.md), [T202 S2 source/ABI map](etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md), [T200 S31 ledger](etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md), OpenNT `demdir.c`/`demgset.c`, and S30 host namespace/drive/volume evidence. |
-| Files And ABI Surface | DEM package profile consumer, copied direct host-root/CWD/volume capability records, shared mutation profile/overlay seam, and package regression; no raw host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
+| Identifier Mode | M0 T202 S3, Ordinary Mode. |
+| Admission And Approval | S2 is closed by its [closure evidence](etc/research/t202-s2-dem-namespace-cwd-volume-closure-001.md). Owner-approved T202 package order now admits a whole DEM file/handle/FCB/search source/ABI/failure map before any provider implementation. |
+| Objective | Produce one complete, source-derived admission map for the DEM file, handle, FCB and path-search owner subpackage: every original dispatcher identity, caller/structure, mutation class, historical host API, modern availability, shared profile disposition, existing workaround action, and required checked ABI/failure result. |
+| Non-goals | No individual trace-selected BOP patch; no partial provider recovery; no COMMAND/Redirector/XMS/DPMI work; no raw-device/absolute-media package; no virtual boot-volume; no host installation/rebuild; no Bochs semantic change; and no native trace. |
+| Reference Baseline | [T202 S2 closure](etc/research/t202-s2-dem-namespace-cwd-volume-closure-001.md), [T200 S31 ledger](etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md), `demdisp.c`, `demfile.c`, `demhndl.c`, `demfcb.c`, `demsrch.c`, `demdir.c`, and existing bx-vdm readonly/fixture providers. |
+| Files And ABI Surface | Source/audit records, dispatcher inventory tooling if needed, and no product provider behavior except an evidence-correcting classification. The map must name all guest range, opaque handle/token, and result-record boundaries; no raw host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Source/ABI/failure map reconciled to `demdir.c`/`demgset.c`; MSVC x64 `/MT` complete namespace/CWD/volume regression across direct/readonly/overlay/virtual; host permission/drive-exclusion negative cases; documentation governance and diff checks. |
-| Expected Markers | Direct profile observes selected real host roots and source-shaped failure; readonly/overlay/virtual use the common profile result; no duplicate CWD/drive policy or isolated synthetic default path; all admitted services regress as one package. |
+| Verification | Mechanical dispatcher inventory covers every S3 identity exactly once; each map row cites original source/caller/ABI/failure and one profile/workaround disposition; availability audit records unsupported/private APIs without blocking unrelated rows; documentation governance and diff checks pass. |
+| Expected Markers | One non-overlapping owner map covers all file/handle/FCB/search services; direct, readonly and overlay behavior is package-level rather than per-service improvisation; virtual boot-volume remains explicitly deferred; existing fixture/readonly routes have retain/migrate/replace/delete actions. |
 | Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
-| Reporting Requirements | Record source/ABI/failure mapping, host API availability and each profile disposition; distinguish this subpackage from file/handle/FCB/search and do not claim DEM family closure. |
-| Stop Conditions | Any fallback to trace-selected work, implicit synthetic host C:, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, or unsupported historical API without an audit disposition pauses S2 for re-admission. |
-| Exit Criteria | Source-built package regression proves the direct selected-root behavior and all explicit non-direct profile outcomes with no leaf-selected mode; only then may the file/handle/FCB/search DEM subpackage begin. |
+| Reporting Requirements | Record source/ABI/failure mapping, host API availability and each profile disposition; distinguish admission from implementation and do not claim DEM family closure. |
+| Stop Conditions | Any fallback to trace-selected work, an endpoint-only implementation, implicit synthetic host C:, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, or unsupported historical API without an audit disposition pauses S3 for re-admission. |
+| Exit Criteria | A reviewer can identify one source-derived direct/readonly/overlay/virtual disposition and one workaround action for every S3 identity, plus the complete ABI/failure work set for the following whole-package implementation S. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect DEM current-directory, default-drive, GSET, DPB, boot namespace, host drive policy and host namespace for duplicate root/CWD/volume owners or old synthetic C: behavior. |
+| Similar-Issue Sweep | Inspect `readonly_namespace`, boot namespace/provider/plane, profile search/session, FCB providers, direct host namespace, and all DEM file/handle/search terminal routes for duplicate owner, raw-handle, synthetic-root, or endpoint-only behavior. |
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
@@ -54,6 +54,10 @@
 > **T202 S1 closure:** DEM now consumes the shared profile through one copied,
 > selector-blind package seam; see the
 > [composition evidence](etc/research/t202-s1-dem-profile-consumer-composition-001.md).
+
+> **T202 S2 closure:** direct-host namespace/CWD/volume is closed at its
+> admitted boundary, including source-shaped drive failure and legacy fallback
+> removal; see the [closure evidence](etc/research/t202-s2-dem-namespace-cwd-volume-closure-001.md).
 
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
