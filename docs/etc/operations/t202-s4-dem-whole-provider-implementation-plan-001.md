@@ -116,7 +116,12 @@ whole package switch only.  It may not create an additional endpoint task.
 2. Add the six partitions above behind that same provider and expand the one
    package regression until all 29 identities are covered.
 3. Switch DEM package dispatch once, displacing all S3-listed workaround
-   routes as retain/migrate/replace/defer requires.
+   routes as retain/migrate/replace/defer requires.  A partition may have a
+   narrow transition route only when it can prove that its input token was
+   issued by the new provider; an unqualified pathname entry (notably
+   `50:01/03/04/05/06/12/17/22/44`) must not be partially switched merely
+   because a temporary host fixture can exercise it.  It remains provider
+   internal until the atomic package switch.
 4. Run the package regression, then one bounded native trace; record the
    hard-error and virtual-volume limitations rather than claiming DEM or CLI
    completion.

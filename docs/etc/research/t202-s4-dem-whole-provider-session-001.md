@@ -205,3 +205,20 @@ not issue, restoring the legacy result without treating it as a new provider
 fallback.  This closes route evidence for this six-identity partition only.
 It does not claim all 29 identities, readonly/overlay behavior, hard-error
 delivery, Redirector pipes, or a native guest trace.
+
+## Remaining route-order guard
+
+The next namespace/metadata partition has no inbound opaque token by which a
+transition route can distinguish a new direct-host request from the retained
+boot fixture.  In particular, `50:12` is a pathname-only open entry; switching
+it alone would force a choice between the profile's admitted host namespace
+and the still-retained boot-file provider.  That is a package-composition
+decision, not a per-service implementation detail.
+
+Accordingly, no further pathname or FCB ingress route is admitted merely from
+a focused fixture.  Their provider-internal direct/readonly/overlay regression
+must close first.  The remaining legacy pathname/FCB leaves will then move in
+one explicit final DEM package dispatch change, where no two providers can
+claim the same untyped pathname.  The already migrated search and
+provider-issued-token handle routes remain bounded evidence; they do not
+authorize another partial switch.
