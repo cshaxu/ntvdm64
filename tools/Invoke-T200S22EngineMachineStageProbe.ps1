@@ -48,6 +48,7 @@ $sources = @(
     @{ Object = 'engine-contract.obj'; Source = 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c' },
     @{ Object = 'engine-run.obj'; Source = 'src\bx-mantle\bx_ntvdm_engine_run_v1.c' },
     @{ Object = 'generic-ud-bridge.obj'; Source = 'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c' },
+    @{ Object = 'terminal-observation.obj'; Source = 'src\bx-vdm\bx_ntvdm_terminal_observation_v1.c' },
     @{ Object = 'fixture.obj'; Source = 'tests\bx-mantle\bx_ntvdm_engine_direct_composition_v1_test.c' }
 )
 $batch = Join-Path $build 'compile.cmd'
@@ -65,6 +66,7 @@ $commands | Set-Content -LiteralPath $batch -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $batch + '"') 2>&1 |
     Tee-Object -FilePath (Join-Path $build 'compile.log')
 if ($LASTEXITCODE -ne 0) { throw "S22 engine fixture compile failed: $LASTEXITCODE" }
+$current['bx_ntvdm_terminal_observation_v1'] = Join-Path $build 'terminal-observation.obj'
 
 $exe = Join-Path $build 't200-s22-engine-machine-stage.exe'
 $response = Join-Path $build 'link.rsp'
@@ -82,17 +84,38 @@ $link = foreach ($line in Get-Content -LiteralPath (Join-Path $baseline 'link.rs
 foreach ($base in ($current.Keys | Sort-Object)) {
     if (-not $emitted.ContainsKey($base)) { $link += '"' + $current[$base] + '"' }
 }
-foreach ($source in $sources | Where-Object { $_.Object -ne 'fixture.obj' -and $_.Object -ne 'generic-ud-bridge.obj' }) {
+foreach ($source in $sources | Where-Object { $_.Object -notin @('fixture.obj', 'generic-ud-bridge.obj', 'terminal-observation.obj') }) {
     $link += '"' + (Join-Path $build $source.Object) + '"'
 }
+# The current direct-host namespace uses normal user-mode ntdll imports.  The
+# original S22 response predates that source closure.
+if ($link -notcontains 'ntdll.lib') { $link += 'ntdll.lib' }
 $link | Set-Content -LiteralPath $response -Encoding ascii
 & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && link.exe @"' + $response + '"') 2>&1 |
     Tee-Object -FilePath (Join-Path $build 'link.log')
 if ($LASTEXITCODE -ne 0) { throw "S22 engine fixture link failed: $LASTEXITCODE" }
 
-& cmd.exe /d /s /c ('"' + $exe + '" "' + $profile + '" "' + $byobRoot + '" 2>&1') |
-    Tee-Object -FilePath (Join-Path $build 'run.log')
-$runExit = $LASTEXITCODE
+$start = [Diagnostics.ProcessStartInfo]::new()
+$start.FileName = $exe
+$start.Arguments = '"' + $profile + '" "' + $byobRoot + '"'
+$start.WorkingDirectory = $root
+$start.UseShellExecute = $false
+$start.RedirectStandardOutput = $true
+$start.RedirectStandardError = $true
+# The engine contract copies a bounded OEM environment.  This fixture selects
+# its small input explicitly, so a developer's unrelated shell state cannot
+# turn an engine-lifecycle test into an admission failure.
+$start.Environment.Clear()
+$start.Environment['ComSpec'] = Join-Path $env:SystemRoot 'System32\cmd.exe'
+$start.Environment['PROMPT'] = '$P$G'
+$process = [Diagnostics.Process]::new()
+$process.StartInfo = $start
+if (-not $process.Start()) { throw 'S22 engine fixture did not start.' }
+$stdout = $process.StandardOutput.ReadToEnd()
+$stderr = $process.StandardError.ReadToEnd()
+$process.WaitForExit()
+($stdout + $stderr) | Set-Content -LiteralPath (Join-Path $build 'run.log') -Encoding utf8
+$runExit = $process.ExitCode
 $record = [ordered]@{
     schema = 'ntdos64.t200.s22.engine-machine-stage.v1'
     architecture = 'x64'

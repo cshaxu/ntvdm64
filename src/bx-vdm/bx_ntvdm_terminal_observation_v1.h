@@ -25,6 +25,11 @@ extern "C" {
 #endif
 
 void bx_ntvdm_terminal_observation_v1_enable(uint32_t enabled);
+/* Test-only count of accepted product-bridge calls.  It contains no guest,
+ * selector, provider, or outcome data and is zero whenever disabled. */
+uint32_t bx_ntvdm_terminal_observation_v1_considered_count(void);
+/* Test-only count of accepted STOP outcomes; it carries no event data. */
+uint32_t bx_ntvdm_terminal_observation_v1_stop_count(void);
 int bx_ntvdm_terminal_observation_v1_copy(
     struct bx_ntvdm_terminal_observation_v1 *value);
 void bx_ntvdm_terminal_observation_v1_consider(

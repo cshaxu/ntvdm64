@@ -62,9 +62,9 @@
 
 > **T203 S1 engine admission boundary:** `ORDINARY_GUEST_COMPLETION` has no
 > current engine producer, and `54:0B` records only package-local copied state.
-> The current engine fixture also needs its normal `ntdll` import and an
-> explicitly selected environment within the existing 4023-byte COMMAND ABI;
-> neither fact permits a BOP patch or an ABI fabrication. See the
+> A refreshed engine fixture now proves one product-accepted `50:3D` STOP and
+> cleanup across two runs under an explicitly selected bounded environment;
+> this is neither `54:01` nor `54:0B`, and permits no ABI fabrication. See the
 > [engine admission boundary](etc/research/t203-s1-engine-terminal-admission-boundary-001.md).
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route

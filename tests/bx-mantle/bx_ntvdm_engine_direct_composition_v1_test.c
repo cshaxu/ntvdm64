@@ -60,10 +60,13 @@ int wmain(int argc, wchar_t **argv)
         return 2;
     printf("t200-s24 first terminal=%u detail=%u\n", result.terminal_kind,
         result.detail_code);
+    if (bx_ntvdm_terminal_observation_v1_considered_count() == 0u ||
+        bx_ntvdm_terminal_observation_v1_stop_count() != 1u)
+        return 3;
     if (!bx_ntvdm_terminal_observation_v1_copy(&observation) ||
         observation.captured != 1u || observation.event.vector != 6u ||
         observation.outcome.disposition != BX_NTVDM_GENERIC_UD_STOP)
-        return 3;
+        return 4;
     printf("t200-s25 stop cs=%04x eip=%08x bytes=%u %02x %02x %02x %02x\n",
         observation.event.cs, observation.event.eip,
         observation.event.window_bytes, observation.event.window[0],
@@ -75,7 +78,7 @@ int wmain(int argc, wchar_t **argv)
     if (!bx_ntvdm_engine_run_v1(&request, &result) ||
         !bx_ntvdm_engine_result_v1_valid(&result) ||
         !terminal_valid(&result))
-        return 4;
+        return 5;
     printf("t200-s24 second terminal=%u detail=%u\n", result.terminal_kind,
         result.detail_code);
     return 0;
