@@ -270,3 +270,13 @@ as `BX` high / `CX` low and `DX=0`; and admitted `demCheckPath` clears `DX`.
 The r1 whole-provider fixture checks all three layouts. This is still
 provider-internal source-contract work; pathname ingress remains reserved for
 the final atomic package migration.
+
+Revision r37 introduces the shared provider-internal pathname transaction for
+the entire nine-service `demfile.c`/`demdir.c` group. It chooses the original
+DS:DX, DS:SI and ES:DI input locations by service, gathers only bounded OEM
+bytes, requires a NUL in every copied record, then calls the already-admitted
+namespace partition. The generic gather record is ABI v2 with a 520-byte
+ceiling: exactly two OpenNT `MAX_PATH` (260-byte) records for `demRename`, not
+an unbounded memory-read capability. The r1 MSVC x64 `/MT` provider fixture
+proves the `01` DS:DX shape and exact continuation. There is intentionally no
+package-session route or native trace evidence yet.

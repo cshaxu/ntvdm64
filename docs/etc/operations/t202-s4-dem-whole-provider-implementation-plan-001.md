@@ -150,3 +150,16 @@ The same rule applies to the `demfile.c` pathname group: `01` reports queried
 attributes in `CX`; local `12` reports size as `BX` high / `CX` low and clears
 `DX` as its non-pipe marker; and `44` clears `DX` on the admitted check-path
 success. The provider must never repurpose these guest slots for host state.
+
+## Shared pathname transaction rule
+
+The complete `01/03/04/05/06/12/17/22/44` group uses one provider-internal
+transaction: DS:DX supplies the first path for `01/04/05/06/17`; DS:SI
+supplies it for `03/12/22/44`; and `17` obtains its destination from ES:DI.
+Every input is an independently range-checked, NUL-required OEM `MAX_PATH`
+copy. The gathered bytes are the only inputs to the namespace partition.
+`demRename` therefore needs two full 260-byte records; the generic gather ABI
+v2 admits a maximum 520-byte transaction for precisely this bounded case.
+No pathname service is routed through the package session until all nine
+services and their direct/readonly/overlay/virtual matrix meet the final
+atomic-switch gate.

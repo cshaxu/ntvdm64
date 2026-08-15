@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_whole_provider_v1.h"
 #include "bx_ntvdm_dem_handle_partition_v1.h"
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
+#include "bx_ntvdm_dem_namespace_route_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
@@ -386,6 +387,24 @@ int main(void)
                 &boundary, &cpu, 0, 0u, 0, &result) || cf_set(&result) ||
             bx_ntvdm_dem_file_session_v1_lookup(&provider.files, token, &file))
             failed = 48;
+    }
+    if (!failed) {
+        const uint8_t namespace_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x01u };
+        bx_ntvdm_instruction_window_v1_capture(&window, namespace_bop, sizeof(namespace_bop));
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ds = 0x20u; cpu.edx = 0x20u;
+        if (!bx_ntvdm_dem_namespace_route_partition_v1_prepare(&provider, 0x01u,
+                &boundary, &cpu, &window, &fcb_action) ||
+            fcb_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_READ ||
+            fcb_action.payload_bytes != BX_NTVDM_DEM_PATH_V1_MAX_OEM_BYTES ||
+            fcb_action.ranges[0].physical_address != 0x220u) failed = 481;
+        else {
+            memset(fcb_action.payload, 0, fcb_action.payload_bytes);
+            if (strcpy_s((char *)fcb_action.payload, fcb_action.payload_bytes, oem_short) != 0 ||
+                !bx_ntvdm_dem_namespace_route_partition_v1_complete(&provider, 0x01u,
+                    &boundary, &cpu, &fcb_action, &result) || cf_set(&result) ||
+                (result.cpu_delta.gpr16_write_mask & (1u << 2u)) == 0u) failed = 482;
+        }
     }
     if (!failed) {
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);

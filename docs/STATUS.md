@@ -245,6 +245,14 @@
 > whole-provider fixture. This remains provider-internal and does not admit
 > partial pathname ingress ahead of the final package switch.
 
+> **T202 S4 progress:** r37 adds one provider-internal pathname transaction
+> for all nine `demfile.c`/`demdir.c` identities. It preserves original
+> DS:DX/DS:SI/ES:DI input selection and makes `demRename`'s two bounded
+> `MAX_PATH` strings explicit; generic gather ABI v2 raises its ceiling only
+> to the required 520 bytes. r1 source-builds under MSVC x64 `/MT`. This is
+> preparation for one final pathname package switch—not an individual BOP
+> route or native trace.
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the

@@ -13,9 +13,12 @@ extern "C" {
 /* Generic mechanical gather transport. It intentionally has no consumer,
  * selector, service, guest pointer, or host pointer field. */
 #define BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_MAGIC 0x42584747u
-#define BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_VERSION 1u
+#define BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_VERSION 2u
 #define BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_MAX_RANGES 4u
-#define BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_MAX_TOTAL_BYTES 256u
+/* Two bounded OpenNT MAX_PATH OEM strings are the largest admitted DEM
+ * pathname transaction (demRename).  This remains far below the mantle's
+ * generic mechanical-action limit and does not admit unbounded inspection. */
+#define BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_MAX_TOTAL_BYTES 520u
 
 enum bx_ntvdm_guest_gather_read_action_v1_disposition {
     BX_NTVDM_GUEST_GATHER_READ_ACTION_V1_PASS_THROUGH = 0u,
