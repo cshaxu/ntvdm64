@@ -105,7 +105,7 @@ The candidate T must use the proposal's package order, not BOP trace order:
   `src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c`.
 - Reproducible source inventory: run
   `tools/Export-T200S31BopSourceInventory.ps1` against the repository. Its
-  corrected output, `t200-s31-bop-source-inventory-r6`, contains 203 original
+  corrected output, `t200-s31-bop-source-inventory-r7`, contains 203 original
   dispatcher/header entries and is the mandatory coverage set for the
   endpoint-level ledger. Revision r1's count of 199 is superseded: its parser
   omitted un-commented or non-comma-terminated final entries from historical
@@ -113,7 +113,7 @@ The candidate T must use the proposal's package order, not BOP trace order:
 - Policy decision and target storage profiles:
   [host-integrated recovery proposal](proposal-host-integrated-bop-capability-recovery-001.md).
 
-The r6 artifact has one mechanically generated row for every one of those
+The r7 artifact has one mechanically generated row for every one of those
 203 endpoints, with original handler/source, exactly one owner package, the
 current ingress state, and the actual bound-composition state derived from
 the façade/session routes. It is deliberately marked `ABI/failure/API review
@@ -153,6 +153,7 @@ a narrow CLI seam or retain the original unavailable/deferred result.
 | Historical surface | Reached owner scope | Modern CLI availability verdict | Required treatment |
 | --- | --- | --- | --- |
 | `GetNextVDMCommand` and its `VDMINFO` transaction | COMMAND bootstrap/return/launch (`cmdmisc.c`, `cmdexec.c`) | historical NTVDM host-command broker; no ordinary x64 user-mode Win32 API/ABI that can be linked as its replacement | Record as a source-derived CLI command/session contract; do not substitute `CreateProcess` endpoint-by-endpoint. |
+| `TerminateVDM` | COMMAND exit/config/environment and top-level unsimulate | historical VDM engine terminal hook, not public process termination semantics | Use the typed engine terminal/result ABI only after its owner package is admitted; never substitute a host-process kill. |
 | `Sim32GetVDMPointer`, `Sim32FlushVDMPointer`, `Sim32FreeVDMPointer`, register macros | DEM, XMS, DPMI and `nt_bop.c` | historical VDM/CCPU/SAS composition, not a public Win32 capability | Replace only with typed, checked bx-vdm guest-memory/CPU transactions; never leak raw Bochs mappings or reintroduce CCPU. |
 | `WaitIfIdle` / `WakeUpNow` | top-level `5A` (`nt_bop.c`) | internal NTVDM scheduling hooks, not public process scheduling APIs | Defer to the engine lifecycle/cancellation package; do not approximate with arbitrary sleeps or an adapter busy loop. |
 | `VDMREDIR.DLL` / `VrDispatch` | Redirector `57:00..31` | historical NTVDM DLL composition absent from the admitted x64 CLI product | Keep one reachable, source-derived unavailable family until a separately admitted network profile defines its completion ABI. |
@@ -208,6 +209,32 @@ separate capability with its own caller, lifecycle and failure proof.
 
 Current `54:04` and `54:0E` evidence remains endpoint-local only.  It does
 not close COMMAND cwd, console, launch, environment or lifecycle packages.
+
+### COMMAND endpoint source/API register (`54:00..10`)
+
+This is an endpoint-level source/API pass.  `direct API` here only means that
+the named host API is eligible for the CLI capability seam; it never means
+that the whole COMMAND BOP is implemented or admitted.
+
+| BOP | Original handler/source | Principal historical surface | Current disposition for package recovery |
+| --- | --- | --- | --- |
+| `54:00` | `cmdExitVDM`, `cmdexit.c` | `TerminateVDM` | Historical private VDM termination; source-derived engine terminal contract, not `ExitProcess`. |
+| `54:01` | `cmdGetNextCmd`, `cmdmisc.c` | `GetNextVDMCommand` / `VDMINFO` | Missing private broker; source-derived declared CLI command/session transaction. |
+| `54:02` | `cmdComSpec`, `cmdmisc.c` | guest CMD structures, COMSPEC state | source-derived bootstrap using declared profile/guest memory; do not infer host `COMSPEC`. |
+| `54:03` | `cmdSaveWorld`, `cmdmisc.c` | guest register/image save and historical `savevdm.wld` path | deferred engine lifecycle; no host system-file write or fixed `C:\\nt\\bin86` dependency. |
+| `54:04` | `cmdGetCurrentDir`, `cmdmisc.c` | current-directory state | original+CLI drive-view seam; existing response is endpoint-local and synthetic/profile-shaped, so replace for direct mode. |
+| `54:05` | `cmdSetInfo`, `cmdmisc.c` | `VDMINFO`, `SetCurrentDirectory` | source-derived command-session registration plus direct current-directory seam; private broker remains unavailable. |
+| `54:06` | `cmdGetStdHandle`, `cmdredir.c` | standard handles/redirection files | ordinary APIs exist, but guest handle model belongs to the future complete DOS handle/redirection capability; no raw HANDLE crossing. |
+| `54:07` | `cmdCheckBinary`, `cmdexec.c` | executable classification, WOW compatibility registry key | original+CLI storage/registry seam candidate; registry reads are allowed, but WOW launch remains out of this DOS package. |
+| `54:08` | `cmdExec`, `cmdexec.c` | `CreateProcess`, temporary standard-handle rebinding, re-entry count | deferred explicit host-launch/session capability; no implicit host child process. |
+| `54:09` | `cmdInitConsole`, `cmdmisc.c` | console mode/title/state | original+CLI console profile candidate; headless/redirected failure must be preserved. |
+| `54:0A` | `cmdExecComspec32`, `cmdexec.c` | `CreateProcess`, parent/re-entry lifecycle | deferred with `54:08`; not made available merely because `CreateProcess` exists. |
+| `54:0B` | `cmdReturnExitCode`, `cmdexec.c` | `GetNextVDMCommand` return transaction | source-derived session/terminal transport; existing typed result is not a general return closure. |
+| `54:0C` | `cmdGetConfigSys`, `cmdconf.c` | guest config discovery, `CreateFile` | direct drive-view/guest-startup policy seam; must not materialize host boot files. |
+| `54:0D` | `cmdGetAutoexecBat`, `cmdconf.c` | guest autoexec discovery, `CreateFile` | same package as `54:0C`; direct profile and virtual boot profile need distinct answers. |
+| `54:0E` | `cmdGetKbdLayout`, `cmdkeyb.c` | `GetConsoleKeyboardLayoutName`, registry reads, `GetConsoleCP`, `GetSystemDirectory` | APIs remain available, but historical `KB16.COM`/`KEYBOARD.SYS` host assets are not guaranteed on modern x64. Make their absence a source-shaped no-install/failure result; do not fabricate files. |
+| `54:0F` | `cmdGetInitEnvironment`, `cmdenv.c` | environment merge and `TerminateVDM` on failure | source-derived declared environment projection; private terminal behavior cannot be linked directly. |
+| `54:10` | `cmdGetStartInfo`, `cmdmisc.c` | `VDMINFO` start fields | source-derived session bootstrap; depends on the same unavailable broker as `54:01`. |
 
 ## XMS first-pass owner groups (`52:00..0B`)
 

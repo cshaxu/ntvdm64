@@ -76,10 +76,15 @@ function Get-CurrentCompositionState([string]$selector, $service) {
             if ($number -in @(31, 36, 38, 40, 43, 64, 67)) {
                 return 'bound original-no-op provider (not a direct-host capability)'
             }
-            if ($number -in @(0, 2, 9, 11, 13, 17, 18, 20, 21, 22, 24, 25, 27, 28, 50, 59, 60, 69, 70)) {
-                return 'bound mixed boot/readonly/snapshot provider; direct-host status not established'
+            if ($number -eq 66) {
+                return 'bound FASTREAD compatibility branch; source-derived contract review pending'
             }
-            return 'bound explicit source-failure or CLI-unavailable fallback; direct-host status not established'
+            # DEM session dispatch fans out through GSET, FCB, raw-media,
+            # boot namespace and fallback planes after its facade.  A facade
+            # membership list alone cannot truthfully say which leaf owns a
+            # given runtime precondition; leave that exact leaf for the
+            # per-service ABI/failure audit rather than fabricate failure.
+            return 'bound DEM package route; individual provider/failure branch review pending'
         }
         '51' { return 'bound typed stop through top-level facade; WOW composition absent' }
         '52' {
