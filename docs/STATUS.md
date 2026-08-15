@@ -111,6 +111,12 @@
 > it neither selects a new BOP task nor claims DEM, hard-error, overlay, or
 > native-guest closure. See the [session evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
 
+> **T202 S5 progress:** the complete COMMAND `54:00..10` source/ABI/mutation
+> audit distinguishes ordinary modern user-mode APIs (available) from the
+> historical CCPU/SAS, VDD, raw-handle and VDM re-entry composition gaps. It
+> is admission evidence only; no `54:xx` implementation or trace was created.
+> See the [COMMAND capability map](etc/research/t202-s5-command-host-capability-source-abi-map-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,
