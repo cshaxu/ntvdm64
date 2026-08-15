@@ -5,7 +5,7 @@
 > **Current effective packet: M0 T217 S13.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T217 S13 -- DOS loader/EXEC owner-package map.**
+**Active: M0 T217 S14 -- composed DOS image-loader handle-family regression.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -30,19 +30,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T217 S13, Ordinary Mode. |
-| Admission And Approval | S12's source-derived shell capability seam crosses the former `50:3D` terminal and reaches `50:36`. The ordinal Open observer is explicitly not a final COMMAND identity proof. The next work maps the whole reached DOS loader/EXEC owner package before considering any endpoint. |
-| Objective | Produce a complete source/ABI/failure/disposition map for the DOS loader/EXEC package containing the reached `50:36`, its callers, dependent DEM handle/file/PSP/EXEC paths and all related selector members. |
-| Non-goals | No `50:36` leaf implementation, trace-led patch, DOS/BIOS patch, host mutation, profile expansion, Bochs/mantle change or COMMAND-run claim. |
-| Reference Baseline | T217 S3–S12; OpenNT DOS loader/EXEC sources, `nt_bop` selector map, DEM package map and current provider registry. |
-| Files And ABI Surface | Evidence, Status and owner-package inventory only. No runtime behavior or ABI change is admitted. |
+| Identifier Mode | M0 T217 S14, Ordinary Mode. |
+| Admission And Approval | S13 proves that reached `50:36` is a no-VDD DOS-entry notification, not the implementation target. The complete loader package identifies `50:12/00/16/02[/42]` as the next shared seam; no native trace is admitted until its package regression closes. |
+| Objective | Verify and, only if evidence requires it, repair the existing composed DEM namespace/handle/FASTREAD family as one source-derived DOS image-loader provider package. |
+| Non-goals | No selector-specific handler, native trace, `$Exec` recreation, DOS/BIOS patch, host mutation, profile expansion, Bochs/mantle change, VDD subsystem or COMMAND-run claim. |
+| Reference Baseline | T217 S13 map, OpenNT `demfile.c`/`demhndl.c`/`demdisp.c`, DOS `file.asm`/`handle.asm`/`msproc.asm`, current namespace and handle-route providers. |
+| Files And ABI Surface | Existing `bx-vdm` DEM namespace/handle/FASTREAD provider family and package-scoped regression only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Every related selector/service has an original owner, caller, ABI, capability disposition and failure rule; distinguish direct source proof from inference. Governance and diff checks pass. |
-| Expected Markers | A coherent implementation order for the whole loader/EXEC package, not a next-trace patch. |
+| Verification | Source/ABI matrix covers open, seek, read, FastRead and close; focused source-built x64 `/MT` regression proves one token/lifetime, checked writes, source-shaped failures and no host mutation. Governance and diff checks pass. |
+| Expected Markers | Family closure or an evidence-bounded shared-provider repair, never a trace-selected endpoint. |
 | Asset Needs | Existing OpenNT source, current bx-vdm source/tests/profile declarations and T217 evidence; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record all member selectors, original source paths, ABI/failure paths, provider availability and required package-wide regressions; distinguish direct evidence from inference. |
-| Stop Conditions | Any selector-specific implementation, trace-led patch, DOS/BIOS patch, host mutation, guest binary patch, profile expansion or Bochs/mantle change pauses S13 for re-admission. |
-| Exit Criteria | The loader/EXEC package has a source-first recovery plan and a bounded first implementation S. |
+| Reporting Requirements | Record family members, source paths, ABI/failure paths, current provider route, evidence and any repair disposition; distinguish direct proof from inference. |
+| Stop Conditions | Any selector-specific implementation, native trace, DOS/BIOS patch, host mutation, guest binary patch, profile expansion or Bochs/mantle change pauses S14 for re-admission. |
+| Exit Criteria | The composed image-loader handle family has a source-first closure record and bounded family regression; only then may a native trace be considered. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | All readonly namespace slots, boot provider, direct DEM path/handle/search/FCB partitions, profile component/target declarations, SYSINIT/DOS open/EXEC callers, COMMAND bootstrap and source-policy recovery records. |
 
@@ -159,6 +159,12 @@
 > former `50:3D` terminal and reaches `50:36`. The ordinal Open observer is
 > not a final command-load identity claim. S13 maps the full DOS loader/EXEC
 > package before any new selector implementation. See the [result](etc/research/t217-s12-command-shell-capability-result-001.md).
+
+> **T217 S13 P1 closure:** `50:36` is the original no-VDD DOS-entry
+> notification, not a loader or launch implementation point. The complete
+> map assigns the current next seam to the shared `50:12/00/16/02[/42]`
+> image-loader handle family; S14 may regress that family but may not run a
+> trace or add a leaf handler. See the [package map](etc/research/t217-s13-dos-loader-exec-owner-package-map-001.md).
 
 > **T215 S1 P1 progress:** the re-exported historical inventory retains all
 > 203 identities. Current-source reconciliation corrects T200's stale XMS
