@@ -1,7 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [ValidateSet('boot-namespace', 'dem-package', 'readonly-file', 'global-bop', 'command-entry')]
+    [ValidateSet('boot-namespace', 'dem-package', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry')]
     [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
@@ -86,6 +86,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_raw_media_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_misc_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_package_facade_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_profile_consumer_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_package_session_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_provider_v1.c',
@@ -104,6 +105,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_instruction_window_abi.c',
     'src\bx-vdm\bx_ntvdm_multi_write_abi.c',
     'src\bx-vdm\bx_ntvdm_multi_write_transaction.c',
+    'src\bx-vdm\bx_ntvdm_mutation_profile_v1.c',
     'src\bx-vdm\bx_ntvdm_mouse_install1_mapping_service.c',
     'src\bx-vdm\bx_ntvdm_profile_search_snapshot_v1.c',
     'src\bx-vdm\bx_ntvdm_printer_unavailable_service.c',
@@ -125,6 +127,11 @@ $sourceRelatives = @(
 )
 if ($Fixture -eq 'dem-package') {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_package_family_v1_test.c'
+} elseif ($Fixture -eq 'dem-profile') {
+    $sourceRelatives += @(
+        'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
+        'tests\bx-vdm\bx_ntvdm_dem_package_profile_v1_test.c'
+    )
 } elseif ($Fixture -eq 'readonly-file') {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_readonly_file_service_test.c'
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c'

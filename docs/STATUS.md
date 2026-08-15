@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T202 S1.** Its governing brief is the active
+> **Current effective packet: M0 T202 S2.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T202 S1 -- DEM shared-profile consumer composition.**
+**Active: M0 T202 S2 -- DEM direct-host namespace/CWD/volume package.**
 
 > **Governance correction:** The table below is the sole active packet. T188
 > through T194 are closed. Their retained S records are evidence, not
@@ -20,21 +20,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T202 S1, Ordinary Mode. |
-| Admission And Approval | Owner directed T200 to close at global audit evidence and T201 to implement the shared profile foundation before BOP recovery. T201 is closed; this is the queue-head Host-integrated OpenNT BOP capability recovery package. |
-| Objective | Establish one DEM package consumer-composition seam for the shared mutation profile: explicit package owner registration and generic policy resolution must reach the DEM composition before any direct/readonly/overlay/virtual leaf backend is added. |
-| Non-goals | No individual trace-selected BOP implementation, no COMMAND/Redirector/XMS/DPMI recovery, no host mutation in S1, no direct file provider, no raw device work, no virtual-volume materialization, and no Bochs semantic change. |
-| Reference Baseline | [T200 S31 closure ledger](etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md), [T201 closure](history/m0-t201-closure-20260814.md), OpenNT `demdisp.c` package map, and current DEM composition/session sources. |
-| Files And ABI Surface | Typed bx-vdm DEM package-composition profile seam and focused test only; it carries shared-profile owner/class/policy result, never raw host handle, host pointer, callback, Bochs type, selector or guest address. |
+| Identifier Mode | M0 T202 S2, Ordinary Mode. |
+| Admission And Approval | S1 closed DEM package adoption of the shared profile. S2 now recovers the complete DEM namespace/CWD/volume owner subpackage, beginning from the original DEM source and S30 host-root capability rather than trace hits. |
+| Objective | Produce one DEM package design and implementation plan for direct host roots, per-drive current directory, drive/volume observation and their readonly/overlay/virtual dispositions. Then implement the entire admitted package with family regression, retaining source-shaped host permission and failure behavior. |
+| Non-goals | No individual trace-selected BOP patch, no COMMAND/Redirector/XMS/DPMI recovery, no raw-device/absolute-media package, no host installation/rebuild, no Bochs semantic change, and no unbounded native run. |
+| Reference Baseline | [T202 S1 composition seam](etc/research/t202-s1-dem-profile-consumer-composition-001.md), [T200 S31 ledger](etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md), OpenNT `demdir.c`/`demgset.c`, and S30 host namespace/drive/volume evidence. |
+| Files And ABI Surface | DEM package profile consumer, copied direct host-root/CWD/volume capability records, shared mutation profile/overlay seam, and package regression; no raw host handle, pointer, callback, Bochs type or guest pointer crosses the ABI. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | MSVC x64 `/MT` focused composition fixture: DEM owner registration resolves all four modes through the shared ABI; unregistered/mismatched class rejection; no service-number or host-I/O branch; documentation governance and diff checks. |
-| Expected Markers | One DEM package-level profile consumer, no leaf-selected mode, no duplicate DEM readonly/overlay policy, and four-mode regression evidence. |
+| Verification | Source/ABI/failure map reconciled to `demdir.c`/`demgset.c`; MSVC x64 `/MT` complete namespace/CWD/volume regression across direct/readonly/overlay/virtual; host permission/drive-exclusion negative cases; documentation governance and diff checks. |
+| Expected Markers | Direct profile observes selected real host roots and source-shaped failure; readonly/overlay/virtual use the common profile result; no duplicate CWD/drive policy or isolated synthetic default path; all admitted services regress as one package. |
 | Asset Needs | Existing repository only; no network/import, host state change, or external runtime asset. |
-| Reporting Requirements | Record the package seam and rejected cases; distinguish DEM package profile adoption from recovered DEM host behavior and do not claim endpoint or family closure. |
-| Stop Conditions | Any raw host handle/pointer, selector/service-specific policy branch, direct host operation, host mutation, Bochs semantic intrusion, or reliance on unavailable historical host API pauses S1 for re-admission. |
-| Exit Criteria | Source-built composition fixture passes across all four modes with no BOP leaf selection; S2 may then recover one complete DEM subpackage against the common seam. |
+| Reporting Requirements | Record source/ABI/failure mapping, host API availability and each profile disposition; distinguish this subpackage from file/handle/FCB/search and do not claim DEM family closure. |
+| Stop Conditions | Any fallback to trace-selected work, implicit synthetic host C:, raw host handle/pointer crossing, host installation change, Bochs semantic intrusion, or unsupported historical API without an audit disposition pauses S2 for re-admission. |
+| Exit Criteria | Source-built package regression proves the direct selected-root behavior and all explicit non-direct profile outcomes with no leaf-selected mode; only then may the file/handle/FCB/search DEM subpackage begin. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Inspect DEM package facade/session, readonly namespace failure provider, boot namespace and direct host namespace for separate profile selection that must migrate to the new DEM package seam. |
+| Similar-Issue Sweep | Inspect DEM current-directory, default-drive, GSET, DPB, boot namespace, host drive policy and host namespace for duplicate root/CWD/volume owners or old synthetic C: behavior. |
 
 > **T200 closed:** T200 delivers a safe global BOP admission audit and route
 > replan, not BOP execution closure. See the [T200 closure record](history/m0-t200-closure-20260814.md).
@@ -50,6 +50,10 @@
 > **T201 closed:** common profile selection, owner enforcement, overlay
 > lifecycle and four-mode policy resolution are complete; see the
 > [T201 closure record](history/m0-t201-closure-20260814.md).
+
+> **T202 S1 closure:** DEM now consumes the shared profile through one copied,
+> selector-blind package seam; see the
+> [composition evidence](etc/research/t202-s1-dem-profile-consumer-composition-001.md).
 
 > **T200 S30 closure:** corrected real-host capability policy and startup-drive
 > admission, bound the adapter-private real-root namespace to composition

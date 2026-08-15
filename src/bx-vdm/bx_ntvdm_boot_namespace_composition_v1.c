@@ -262,6 +262,15 @@ int bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(
             snapshot);
 }
 
+int bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
+    bx_ntvdm_boot_namespace_composition_v1 *value,
+    const bx_ntvdm_mutation_profile_v1 *profile)
+{
+    return valid(value) && !value->bound &&
+        bx_ntvdm_dem_package_session_v1_set_mutation_profile(&value->dem,
+            profile);
+}
+
 int bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
     bx_ntvdm_boot_namespace_composition_v1 *value, const byob_launch_plan_v2 *plan)
 { return valid(value) && !value->bound &&

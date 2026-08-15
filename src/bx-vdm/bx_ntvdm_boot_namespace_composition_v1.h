@@ -50,6 +50,11 @@ int bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(
 int bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_host_volume_snapshot_v1 *snapshot);
+/* Installs the session-selected common profile into DEM's package consumer.
+ * It does not select a BOP leaf or perform host I/O. */
+int bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
+    bx_ntvdm_boot_namespace_composition_v1 *value,
+    const bx_ntvdm_mutation_profile_v1 *profile);
 int bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const byob_launch_plan_v2 *plan);
