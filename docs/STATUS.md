@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T211 S4.** Its governing brief is the active
+> **Current effective packet: M0 T211 S5.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T211 S4 -- COMMAND console/keyboard component recovery.**
+**Active: M0 T211 S5 -- COMMAND lifecycle component recovery.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -16,33 +16,27 @@
 ## Active Packet
 
 > **T scope:** T211 recovers the complete COMMAND owner package by original
-> component boundary. S1 closed the all-service map. S2 closed the first
-> bootstrap/environment/config and launch/execution providers; S4 recovers
-> the next whole console/keyboard component.
+> component boundary. S1 mapped all services; S2, S3 and S4 closed the
+> bootstrap/environment/config, launch/execution and console/keyboard
+> components. S5 recovers the final lifecycle component.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T211 S4, Ordinary Mode. |
-| Admission And Approval | T211 S1 COMMAND map admits original `54:09/0E` as one console/keyboard component. Existing console and keyboard helpers are evidence to reconcile, not a closure claim. |
-| Objective | Recover one coherent COMMAND console/keyboard provider disposition, preserving original ABI/failure behavior without ambient console, registry or keyboard-layout assumptions. |
-| Non-goals | No interactive console, GUI/VDD, keyboard driver installation, ambient Registry modification, lifecycle/engine change, trace-led work, Bochs change, or synthetic success. |
-| Reference Baseline | T211 S1 map, original `cmdmisc.c`/console and keyboard source, `cmdsvc.h`, existing COMMAND console/keyboard helpers and CLI capability policy. |
-| Files And ABI Surface | `src/bx-vdm` COMMAND console/keyboard provider/facade integration and focused tests only; fixed-width guest/machine contracts remain unchanged. |
+| Identifier Mode | M0 T211 S5, Ordinary Mode. |
+| Admission And Approval | T211 S1 assigns original `54:00/03/0B` to one lifecycle component; T203, T206 and T207 provide bounded engine/terminal evidence but do not close COMMAND lifecycle. |
+| Objective | Recover one coherent COMMAND lifecycle provider disposition for VDM exit, original save-world no-op and return-exit-code without replacing the engine or exposing private NT broker semantics. |
+| Non-goals | No `TerminateVDM`/`ExitProcess` substitution, engine/CLI lifecycle rewrite, ambient broker, trace-led work, Bochs change, or fabricated normal process completion. |
+| Reference Baseline | T211 S1 map, original `cmdexit.c`/`cmdmisc.c`, `cmdsvc.h`, T203/T206/T207 terminal and engine evidence, existing CLI profile and terminal helpers. |
+| Files And ABI Surface | `src/bx-vdm` COMMAND lifecycle provider/facade integration and focused tests only; fixed-width terminal and guest/machine contracts remain unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | One source-built MSVC x64 `/MT` component fixture covers `09/0E`, explicit no-install/unavailable outcomes, malformed input and no ambient host-state change; governance and diff checks. |
-| Expected Markers | One console/keyboard provider owns both members and no detached helper picks host behavior. |
-| Asset Needs | Existing repository source and ordinary user-mode read-only console/Registry API analysis only; no firmware/media/device import or native trace. |
-| Reporting Requirements | Record source/ABI/failure map, provider state, member routing, host API availability, migrated/deleted workarounds, regression and limitations. |
-| Stop Conditions | Any need for host installation change, Bochs/mantle change, unbounded guest pointer, or endpoint-only patch pauses S4 for re-admission. |
-| Exit Criteria | The complete console/keyboard component passes one family regression; later native trace only observes the package result. |
+| Verification | One source-built MSVC x64 `/MT` component fixture covers all `00/03/0B` outcomes, invalid context and terminal-result boundaries; one composition regression; governance and diff checks. |
+| Expected Markers | One lifecycle provider owns every member; `03` retains original no-op and `00/0B` use checked typed results with no host-process termination. |
+| Asset Needs | Existing repository source and current engine/CLI boundary evidence only; no firmware/media/device import or native trace. |
+| Reporting Requirements | Record source/ABI/failure map, provider state, member routing, engine ownership, migrated/deleted workarounds, regression and limitations. |
+| Stop Conditions | Any need to introduce a new engine result ABI, invoke host-process termination, change Bochs/mantle, or make endpoint-only trace fixes pauses S5 for re-admission. |
+| Exit Criteria | The complete lifecycle component passes one family regression and proves it does not claim engine/CLI closure; later native trace only observes the package result. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | `cmdmisc.c`, `cmdenv.c`, `cmdconf.c`, `cmdsvc.h`, COMMAND package session/facade, T209 configuration provider, T210 host context, CLI launch plan and every `01/02/04/05/0C/0D/0F/10` route. |
-
-> **T211 S4 P1 progress:** one versioned COMMAND console/keyboard provider
-> now owns `54:09/0E`; it records the source-shaped no-VDD/no-KB16 outcome,
-> removes the detached runtime `54:0E` route, and passes component plus full
-> bx-vdm composition MSVC x64 `/MT` regressions.  This is not interactive
-> console or keyboard-layout support; see the [source/ABI map](etc/research/t211-s4-command-console-keyboard-source-abi-map-001.md).
+| Similar-Issue Sweep | `cmdexit.c`, `cmdmisc.c`, `cmddisp.c`, `cmdsvc.h`, COMMAND package session/facade, T203/T206/T207 engine/terminal records and all current `00/03/0B` routes. |
 
 > **T209 closed:** declared CONFIG/AUTOEXEC entries can now exist unbound,
 > bind to provider-owned images and reproject their metadata without synthetic
