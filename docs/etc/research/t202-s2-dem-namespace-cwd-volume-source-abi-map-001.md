@@ -12,7 +12,7 @@ namespace established in S30.
 | `50:13 demQueryCurrentDir` | Validate the selected drive; validate a CDS path; reset an invalid path to root and update per-drive current-directory state. | Validate only under an admitted real root; copy the resolved DOS path/state back. | Same read/validation, no host mutation. | Read/validate base then use VDM overlay CWD state. | Resolve entirely against virtual-volume state. |
 | `50:18 demSetCurrentDir` | `SetCurrentDirectoryOem` then update `=X:` environment state; source failure remains a DOS error. | Resolve an 8.3 DOS path under an admitted root and set VDM session CWD; no ambient process CWD mutation. | Reject mutation through the common profile result. | Store per-drive CWD in overlay, after base-path validation. | Store in virtual-volume state. |
 | `50:1A demSetDefaultDrive` | Verify `DL` agrees with the path drive, then `SetCurrentDirectoryOem`; invalid drive/path preserves error. | Same drive/path guard, then selected-root VDM session CWD update. | Reject mutation through the common profile result. | Overlay per-drive CWD update. | Virtual-volume CWD update. |
-| `50:0D,0E,0F,10,14,15,19,1B,1C,25,41,46` GSET/volume state | Drive count/type, media/volume, boot/default drive, free space, date/time, DTA, DPB and machine identity use host/machine observations and source-specific errors. | Use copied selected-drive/volume snapshot and permitted host observations; preserve excluded-drive failure. | Same read-only observation. | Overlay only mutable context/time classes; immutable volume facts remain copied observations. | Virtual-volume facts are virtual state. |
+| `50:0D,0E,0F,10,14,15,19,1B,1C,25,41,46` GSET/volume state | Drive count/type, media/volume, boot/default drive, free space, date/time, DTA, DPB and machine identity use host/machine observations and source-specific errors. | Use copied selected-drive/volume snapshot and permitted host observations; preserve excluded-drive failure. | Same read-only observation. | Overlay only mutable context/time classes; immutable volume facts remain copied observations. | No virtual-volume facts are supplied by S2; the explicit virtual boot-volume package remains deferred. |
 
 ## Existing code disposition
 
@@ -38,3 +38,14 @@ The old `GetVDMAddr` and register macros are not usable APIs. Their only
 modern replacement is the existing copied, checked guest gather/write ABI.
 No unavailable historical API blocks this package: the missing work is the
 source-derived state composition and exact DOS record/failure mapping.
+
+## Virtual-volume boundary
+
+The shared virtual profile currently covers only the admitted DEM session-CWD
+state. It must not be read as a virtual disk implementation. The separate
+virtual boot-volume capability remains default-off and requires the independent
+whole-package review specified by `design/HOST-NAMESPACE-CAPABILITY.md`:
+namespace, guest-RAM materialization, volume observations, read/write behavior,
+teardown, and proof that no host boot files are created. Until that package is
+admitted, S2 never manufactures a drive, volume serial, DPB, free-space value,
+or host-C: substitute for a virtual profile.
