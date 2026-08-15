@@ -181,6 +181,14 @@
 > available; the remaining prerequisite is a replacement lifecycle contract,
 > not a missing API.
 
+> **T202 S6 progress:** the first stream-and-child substrate is now one
+> session-private COMMAND stream table.  Under the shared direct
+> `HOST_GLOBAL` grant, `54:06` returns only a generation-bound opaque token
+> in its historical register shape; it never returns a `HANDLE`.  The MSVC
+> x64 `/MT` 17-service common-ingress regression passes.  Child execution,
+> guest `STD_HANDLES` gathering, VDD/VDM broker behavior and native-guest
+> closure remain unclaimed; see the [stream-token evidence](etc/research/t202-s6-command-stream-token-001.md).
+
 > **T202 S4 progress:** the whole-provider now owns one checked copied gather
 > continuation with exact-boundary completion and stale/concurrent refusal;
 > r7 source-builds under MSVC x64 `/MT`. It is common transaction substrate,

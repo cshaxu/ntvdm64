@@ -28,11 +28,6 @@ int bx_ntvdm_cmd_cli_profile_v1_dispatch(
     case 3u:
         /* cmdSaveWorld has no active body in the original source. */
         return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u);
-    case 6u:
-        /* Standard streams remain deferred until their opaque stream table is
-         * admitted.  Execution services are instead owned together by the
-         * COMMAND execution-lifecycle provider. */
-        return bx_ntvdm_cpu_result_v2_stop(result);
     default:
         return 0;
     }
