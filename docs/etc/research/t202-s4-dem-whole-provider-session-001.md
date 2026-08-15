@@ -56,3 +56,10 @@ complete source partition.  It does not dispatch a BOP or perform live
 guest-memory access, and does not claim the 29-identity DEM package is
 complete.  The next implementation steps are the remaining original source
 partitions and one package regression before any old route is switched.
+
+Revision r15 adds the namespace/metadata partition skeleton for the complete
+`50:01/03/04/05/06/12/17/22/44` owner group. It centralizes membership,
+copied OEM-path resolution and caller-selected DEM mutation-class policy;
+the latter avoids treating the read/write-capable open operation as an
+implicitly readonly or write-only service. r15 source-builds under MSVC x64
+`/MT`. It is not a BOP route and does not yet implement the nine operations.

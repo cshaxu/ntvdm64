@@ -135,6 +135,12 @@
 > absolute-path fallback. This remains shared provider groundwork, not a BOP
 > route or a namespace/metadata completion claim; see the [root-open evidence](etc/research/t202-s4-host-namespace-root-relative-open-001.md).
 
+> **T202 S4 progress:** the nine-identity namespace/metadata group now has
+> one source-built provider skeleton that centralizes membership, copied path
+> resolution and explicit mutation-class profile selection. r15 proves source
+> closure only; it is not an ingress route or service-completion claim; see
+> the [whole-provider evidence](etc/research/t202-s4-dem-whole-provider-session-001.md).
+
 > **T202 S2 progress:** the first package primitive validates an admitted
 > real-host DOS-relative directory beneath retained root handles without host
 > path/handle exposure or ambient-CWD mutation; see the
