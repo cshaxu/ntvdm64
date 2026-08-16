@@ -112,6 +112,7 @@ static int namespace_dispatch(bx_ntvdm_dem_package_session_v1 *s,uint8_t service
  const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
  const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
 { struct bx_ntvdm_mechanical_action_v1 a;bx_ntvdm_dem_process_owner_v1 owner;int needs_owner,completed;
+  bx_ntvdm_dem_process_owner_v1_clear(&owner);
   if(!s||!e||!c||!w||!r||!s->has_whole_provider||
     !bx_ntvdm_dem_namespace_route_partition_v1_prepare(&s->whole_provider,service,e,c,w,&a))return 0;
   if(!action(&a)){bx_ntvdm_dem_whole_provider_v1_cancel_gather(&s->whole_provider,service,e,c,

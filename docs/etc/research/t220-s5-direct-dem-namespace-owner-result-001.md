@@ -50,23 +50,30 @@ The changed production translation units (`file_session`, `local_file_backend`,
 under the same MSVC x64 `/MT` command with the normal `src`, `src/cli`, and
 `src/bx-vdm` include surface.
 
-## Interpretation, confidence, and composition limitation
+## Interpretation, confidence, and source-only composition closure
 
-The current full-composition compile script was invoked with a fresh S5 build
-root, but cannot begin because its declared historical baseline
-`artifacts/build/t198-s74-dem-pdb-termination-r1/link.rsp` is absent from this
-checkout. This is a missing verification input, not a compile pass or a
-runtime result. The current composition manifest nevertheless now includes
-`bx_ntvdm_dem_process_owner_v1.c`, preventing a later full link from silently
-omitting the package-session dependency.
+The former current-composition script could not begin because it required the
+untracked T198 S74 link response. S5 therefore adds the reproducible
+`tools/probe/Invoke-T220S5SourceCompositionClosure.ps1` recipe instead of
+restoring that artifact. It projects the pinned CPU5 configuration, rebuilds
+the complete T197 core/mantle closure, compiles 138 current composition
+sources from the current manifest, and links them with the mantle mechanical
+and generic-UD bridge as a no-entry audit DLL.
 
-Confidence is high for the isolated direct-token transaction and its profile
-declines, and intentionally limited for the unlinked composition path. No
-native guest-execution conclusion follows from these fixtures.
+The fresh `build/M0-T220-S5/004/` result links with exit code zero under MSVC
+x64 `/MT`. It forbids the S74 artifact, `bochs.exe`, `main.cc`, `config.cc`,
+and GUI/plugin/device archives. Duplicate seed-owned mantle/core objects were
+intentionally excluded from the composition half, so each native owner is
+linked once. The recipe also exposed and corrected the new S5 transaction's
+strict `/W4 /WX` uninitialized-owner diagnostic.
+
+Confidence is high for the direct-token transaction, its profile declines, and
+the source-only machine-plus-composition link closure. The audit DLL has no
+entry point and does not execute a guest; no native guest-execution conclusion
+follows from it.
 
 ## Follow-up
 
-Restore or re-admit a source-built full-composition verification closure before
-claiming T220 S5 complete. A later lifecycle S may decide whether the proven
+T220 S5 is complete. A later lifecycle S may decide whether the proven
 PDB-scoped release belongs in the guarded `50:3C` contract; it must separately
 map child/parent, TSR, FCB, search, VDD, and host-device behavior.

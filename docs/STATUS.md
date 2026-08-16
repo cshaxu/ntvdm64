@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T220 S5.** Its governing brief is the active
+> **Current effective packet: M0 T220 S6.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T220 S5 -- direct DEM namespace owner transaction.**
+**Active: M0 T220 S6 -- guarded DEM PDB termination admission map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -38,19 +38,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T220 S5, Ordinary Mode. |
-| Admission And Approval | T220 S4 establishes the direct namespace-handle transaction and selects its first implementation: current-PDB snapshot before direct Open/Create/CreateNew, followed by an atomic owner-bearing token commit. |
-| Objective | Implement one direct DEM namespace owner transaction for `50:03`, `50:12`, `50:22`: exact copied current-PDB read, source-derived refusal before host open on absent/malformed owner, owner-bearing opaque token adoption, and ordinary token close preservation. |
-| Non-goals | No `50:3C` binding, FCB/search owner integration, generic PSP/guest-memory inspector, guest PDB/JFT/SFT walk, host-mutation expansion, Bochs/mantle change, COMMAND return, target-execution claim, or native trace. |
-| Reference Baseline | T220 S1--S4 evidence; original OpenNT `demfile.c`, `demgset.c`, `doswow.h`; current direct DEM namespace/handle/session/local-file sources and shared profile ABI. |
-| Files And ABI Surface | `src/bx-vdm` direct DEM session/local-file/namespace transaction sources and focused `tests/bx-vdm`, plus evidence; no bx-core, bx-mantle, guest or CLI ABI change. |
+| Identifier Mode | M0 T220 S6, Ordinary Mode. |
+| Admission And Approval | T220 S1 and S4 map the historical guarded PDB termination route; S5 now supplies only a proven direct-token owner-release primitive. S6 admits a source/ABI/failure map before any lifecycle binding. |
+| Objective | Map `50:3C` from original child-removal guard through `demTerminatePDB` and current lifecycle composition; classify exactly whether and where PDB-scoped direct-token release can preserve the original VOID/RIP contract. |
+| Non-goals | No `50:3C` binding or source change, FCB/search ownership claim, generic PSP/guest-memory inspector, PDB/JFT/SFT walk, host-mutation expansion, Bochs/mantle change, COMMAND return, target execution or native trace. |
+| Reference Baseline | T220 S1--S5 evidence; original OpenNT `msctrlc.asm`, `demsrch.c`, `demfile.c`, `demgset.c`, `doswow.h`; current lifecycle/direct namespace/file-session sources. |
+| Files And ABI Surface | Evidence and current-source analysis only; no bx-core, bx-mantle, guest, CLI, or runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Focused x64 `/MT` tests prove valid owner commit, absent/malformed owner pre-open refusal, no ownerless direct token, ordinary close, stale-token refusal, and unchanged readonly/overlay/virtual declines; full current-source composition build must compile. |
-| Expected Markers | The namespace session asks only the registered two-byte location; `open_ex_owned` cannot adopt owner zero; token slots retain only a copied 16-bit PDB; profile policy stays independent; no selector-specific detached handler is added. |
-| Asset Needs | Existing OpenNT source, current bx-vdm composition/test sources and MSVC x64 `/MT`; no new image, firmware, media or external source import. |
-| Reporting Requirements | Record changed source ordering, failure behavior, focused/full build results, profile results and explicit `50:3C`/FCB/search limitation. |
-| Stop Conditions | A need for variable/unbounded guest reads, generic PSP traversal, PDB/JFT/SFT walk, `50:3C` binding, FCB/search ownership, host-mutation expansion, Bochs/mantle capability, native trace, guest binary patch or external import pauses S5 for re-admission. |
-| Exit Criteria | The direct namespace owner transaction is source-built and tested with no ownerless direct token; subsequent lifecycle integration remains separately admitted. |
+| Verification | The map names caller, guard, dispatcher/provider, input/output ABI, ordering, VDD/device/search/FCB dispositions, profile independence, exact failure/no-op semantics and the narrowest later implementation seam. |
+| Expected Markers | `50:3C` remains unbound; direct token release is not confused with a global teardown; a true child-removal guard remains guest DOS-owned; no selector-specific detached handler is added. |
+| Asset Needs | Existing OpenNT source and current bx-vdm sources; no new image, firmware, media, external source import or build artifact. |
+| Reporting Requirements | Record the source path and guard, current composition route, every resource-family disposition, failure/no-op behavior, and any prerequisite for a later binding S. |
+| Stop Conditions | A need to bind `50:3C`, add a guest read, expand FCB/search/device/VDD semantics, alter host mutation, touch Bochs/mantle, run native trace, patch a guest binary or import an external input pauses S6 for re-admission. |
+| Exit Criteria | One source/ABI/failure map proves or rejects a bounded direct-token lifecycle binding; implementation remains separately admitted. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | First/subsequent child entry; parent-owned handles crossing child entry; normal/abort/TSR exit; VDD and no-VDD branches; `50:34..3C`; file, FCB, search, pending and DTA state; current session teardown; COMMAND `54:0B`; and direct/readonly/overlay/virtual profile ownership. |
 
@@ -83,12 +83,12 @@
 > remain explicitly outside this package.  See the
 > [transaction map](etc/research/t220-s4-direct-dem-resource-transaction-map-001.md).
 
-> **T220 S5 P1 progress:** `50:03/12/22` now perform the registered exact
+> **T220 S5 P1 closure:** `50:03/12/22` now perform the registered exact
 > two-byte `CurrentPDB` read before the owned direct backend can open or
 > publish a token. Focused x64 `/MT` owner/session and local-backend fixtures
-> pass, and the changed production units compile. Full composition is not yet
-> verified because the declared T198 S74 link-response baseline is absent from
-> this checkout; `50:3C`, FCB and search ownership remain unbound. See the
+> pass, and 138 current composition sources plus the complete CPU5
+> core/mantle seed link as a fresh source-only audit DLL. `50:3C`, FCB and
+> search ownership remain unbound. See the
 > [result](etc/research/t220-s5-direct-dem-namespace-owner-result-001.md).
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
