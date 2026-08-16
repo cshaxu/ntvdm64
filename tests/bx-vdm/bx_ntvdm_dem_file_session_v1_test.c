@@ -19,7 +19,7 @@ int main(void)
     bx_ntvdm_dem_file_session_v1 session;
     wchar_t path[MAX_PATH];
     HANDLE file, looked_up;
-    uint32_t first, second, third, released, kind;
+    uint32_t first, second, third, fourth, backend, released, kind;
     if (!profile(&mutation) || !bx_ntvdm_dem_file_session_v1_initialize(&session, &mutation) ||
         GetTempPathW(MAX_PATH, path) == 0u ||
         GetTempFileNameW(path, L"nd6", 0u, path) == 0u) return 1;
@@ -63,7 +63,25 @@ int main(void)
         DeleteFileW(path);
         return 4;
     }
+    if (!bx_ntvdm_dem_file_session_v1_adopt_backend(&session,
+            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, 0x12345678u,
+            0u, &fourth) || !bx_ntvdm_dem_file_session_v1_token_kind(
+            &session, fourth, &kind) ||
+        kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE ||
+        !bx_ntvdm_dem_file_session_v1_lookup_backend(&session, fourth,
+            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, &backend) ||
+        backend != 0x12345678u ||
+        bx_ntvdm_dem_file_session_v1_lookup_backend(&session, fourth,
+            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE, &backend) ||
+        !bx_ntvdm_dem_file_session_v1_release_backend(&session, fourth,
+            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE) ||
+        bx_ntvdm_dem_file_session_v1_lookup_backend(&session, fourth,
+            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, &backend)) {
+        bx_ntvdm_dem_file_session_v1_teardown(&session);
+        DeleteFileW(path);
+        return 5;
+    }
     bx_ntvdm_dem_file_session_v1_teardown(&session);
     DeleteFileW(path);
-    return bx_ntvdm_dem_file_session_v1_valid(&session) ? 5 : 0;
+    return bx_ntvdm_dem_file_session_v1_valid(&session) ? 6 : 0;
 }
