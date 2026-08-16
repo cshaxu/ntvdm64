@@ -347,6 +347,13 @@
 > add partition-local BOP shims. See the [P44 transport map]
 > (etc/research/t221-s3-package-session-matrix-transport-map-001.md).
 
+> **T221 S3 P45 progress:** boot-namespace plane initialization now clears
+> every borrowed session field before reconstructing its owned provider. A
+> source-built MSVC x64 `/MT` regression creates isolated Direct, Readonly,
+> Overlay and Virtual sessions and sends `50:00`, `50:47` and `50:48` through
+> normal ingress/registry/session dispatch in each. This closes only the
+> four-profile installation lifecycle, not the 29-identity matrix; see the
+> [P45 record](etc/research/t221-s3-package-session-profile-lifecycle-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

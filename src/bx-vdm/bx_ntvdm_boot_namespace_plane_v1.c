@@ -59,7 +59,7 @@ static int put_bulk(bx_ntvdm_boot_namespace_plane_v1 *p,
 int bx_ntvdm_boot_namespace_plane_v1_initialize(bx_ntvdm_boot_namespace_plane_v1 *p,
     const byob_image *ntdos,const byob_image *command,const byob_image *target,const byob_image *quit,
     const byob_profile_selection *selection)
-{ if(!p||!selection||!bx_ntvdm_boot_namespace_provider_v1_initialize(&p->provider,command,target,quit,selection))return 0;
+{ if(!p||!selection)return 0; memset(p,0,sizeof(*p)); if(!bx_ntvdm_boot_namespace_provider_v1_initialize(&p->provider,command,target,quit,selection))return 0;
   if(ntdos)p->ntdos=*ntdos;else memset(&p->ntdos,0,sizeof(p->ntdos));p->ntdos_identity=selection->ntdos;
   p->magic=BX_NTVDM_BOOT_NAMESPACE_PLANE_V1_MAGIC;p->abi_version=1u;p->struct_bytes=sizeof(*p);p->next_action_id=1u;p->has_dta=0;p->has_drive_snapshot=0;p->pending_kind=0;p->pending_action_id=0;p->pending_service=0;return valid(p); }
 int bx_ntvdm_boot_namespace_plane_v1_set_dta(bx_ntvdm_boot_namespace_plane_v1 *p,const bx_ntvdm_dem_dta_registration_v1 *d)

@@ -78,35 +78,47 @@ static int cf_ax(const bx_ntvdm_cpu_result_v2 *result, uint16_t ax)
 
 int main(void)
 {
+    static const uint32_t modes[] = {
+        BX_NTVDM_MUTATION_MODE_V1_DIRECT,
+        BX_NTVDM_MUTATION_MODE_V1_READONLY,
+        BX_NTVDM_MUTATION_MODE_V1_OVERLAY,
+        BX_NTVDM_MUTATION_MODE_V1_VIRTUAL
+    };
     uint8_t ntdos_bytes[] = { 0xf4u }, command_bytes[] = { 0xf4u }, target_bytes[] = { 0xf4u };
     uint8_t drive_types[26] = {0}; byob_image ntdos = { ntdos_bytes, sizeof(ntdos_bytes) };
     byob_image command = { command_bytes, sizeof(command_bytes) }, target = { target_bytes, sizeof(target_bytes) };
-    byob_profile_selection profile; bx_ntvdm_boot_namespace_plane_v1 plane;
-    bx_ntvdm_dem_package_session_v1 session; bx_ntvdm_mutation_profile_v1 mutation;
-    bx_ntvdm_host_drive_snapshot_v1 drives; bx_ntvdm_host_namespace_v1 host;
-    bx_ntvdm_cpu_state_v1 cpu; bx_ntvdm_cpu_result_v2 result; wchar_t root[4] = L"C:\\";
-    DWORD type;
+    byob_profile_selection profile; bx_ntvdm_host_drive_snapshot_v1 drives;
+    bx_ntvdm_host_namespace_v1 host; wchar_t root[4] = L"C:\\"; DWORD type;
+    uint32_t index;
     profile_initialize(&profile); type = GetDriveTypeW(root);
     if (type == DRIVE_NO_ROOT_DIR || type == DRIVE_UNKNOWN) return 1;
     drive_types[2] = (uint8_t)type;
-    bx_ntvdm_mutation_profile_v1_initialize(&mutation, BX_NTVDM_MUTATION_MODE_V1_OVERLAY);
-    if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
-        !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) ||
-        !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu) ||
-        !bx_ntvdm_host_drive_snapshot_v1_apply(1u << 2u, drive_types, 0u, 0u, &drives) ||
-        !bx_ntvdm_host_namespace_v1_initialize(&host, &drives) ||
-        !bx_ntvdm_boot_namespace_plane_v1_initialize(&plane, &ntdos, &command, &target, 0, &profile) ||
-        !bx_ntvdm_dem_package_session_v1_initialize(&session, &plane) ||
-        !bx_ntvdm_dem_package_session_v1_set_mutation_profile(&session, &mutation) ||
-        !bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&session, &drives) ||
-        !bx_ntvdm_dem_package_session_v1_set_host_namespace(&session, &host) || !session.has_whole_provider) return 2;
-    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-    /* 00's invalid opaque token is handled by the installed file provider (6),
-     * differentiating it from generic CLI unavailable (5). */
-    if (!dispatch(&session, 0x00u, &cpu, &result) || !cf_ax(&result, 6u)) return 3;
-    /* 47/48 remain explicit Redirector deferment, not file-provider fallbacks. */
-    if (!dispatch(&session, 0x47u, &cpu, &result) || !cf_ax(&result, 6u) ||
-        !dispatch(&session, 0x48u, &cpu, &result) || !cf_ax(&result, 6u)) return 4;
-    bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host);
+    if (!bx_ntvdm_host_drive_snapshot_v1_apply(1u << 2u, drive_types, 0u, 0u, &drives) ||
+        !bx_ntvdm_host_namespace_v1_initialize(&host, &drives)) return 2;
+    for (index = 0u; index < sizeof(modes) / sizeof(modes[0]); ++index) {
+        bx_ntvdm_boot_namespace_plane_v1 plane; bx_ntvdm_dem_package_session_v1 session;
+        bx_ntvdm_mutation_profile_v1 mutation; bx_ntvdm_cpu_state_v1 cpu;
+        bx_ntvdm_cpu_result_v2 result;
+        bx_ntvdm_mutation_profile_v1_initialize(&mutation, modes[index]);
+        if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+            !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) ||
+            !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu) ||
+            !bx_ntvdm_boot_namespace_plane_v1_initialize(&plane, &ntdos, &command, &target, 0, &profile) ||
+            !bx_ntvdm_dem_package_session_v1_initialize(&session, &plane) ||
+            !bx_ntvdm_dem_package_session_v1_set_mutation_profile(&session, &mutation) ||
+            !bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&session, &drives) ||
+            !bx_ntvdm_dem_package_session_v1_set_host_namespace(&session, &host) ||
+            !session.has_whole_provider) { bx_ntvdm_host_namespace_v1_release(&host); return 10 + (int)index; }
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        /* All four profile views must reach the same installed provider. */
+        if (!dispatch(&session, 0x00u, &cpu, &result) || !cf_ax(&result, 6u) ||
+            !dispatch(&session, 0x47u, &cpu, &result) || !cf_ax(&result, 6u) ||
+            !dispatch(&session, 0x48u, &cpu, &result) || !cf_ax(&result, 6u)) {
+            bx_ntvdm_dem_package_session_v1_teardown(&session);
+            bx_ntvdm_host_namespace_v1_release(&host); return 20 + (int)index;
+        }
+        bx_ntvdm_dem_package_session_v1_teardown(&session);
+    }
+    bx_ntvdm_host_namespace_v1_release(&host);
     return 0;
 }
