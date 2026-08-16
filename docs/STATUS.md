@@ -239,6 +239,13 @@
 > not yet exist; current Virtual unavailable results remain correct. See the
 > [P28 admission](etc/research/t221-s3-explicit-virtual-boot-volume-package-admission-001.md).
 
+> **T221 S3 P29 progress:** the frozen T200 203-identity set has been
+> rechecked against current bridge, composition and package-session source.
+> It records 125 unchanged routes, 77 later-shim changes, and the retained
+> `50:3C` direct-resource lifecycle gap. The audit is static route evidence,
+> not provider or runtime closure; see the [all-family audit]
+> (etc/research/t221-s3-t200-current-bound-route-audit-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
