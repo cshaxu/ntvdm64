@@ -209,6 +209,12 @@
 > required before this owner package is closed. See the [P23 record]
 > (etc/research/t221-s3-fcb-wildcard-overlay-binding-001.md).
 
+> **T221 S3 P24 progress:** the FCB wildcard owner family (`50:07/20`) is
+> closed for Direct/Readonly/Overlay/Virtual disposition. Overlay delete and
+> distinct-template rename prove private state transitions and host isolation;
+> no native trace has been run. See the [P24 closure]
+> (etc/research/t221-s3-fcb-wildcard-overlay-closure-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

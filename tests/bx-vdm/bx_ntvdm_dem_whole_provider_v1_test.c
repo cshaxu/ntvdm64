@@ -1107,6 +1107,34 @@ int main(void)
                     0x07u, &boundary, &cpu, oem_profile_pattern, 0, &result) ||
                 cf_set(&result) || !oem_file_exists(oem_rename_one)))
                 failed = 651;
+            {
+                char overlay_wild_source[MAX_PATH], overlay_wild_destination[MAX_PATH];
+                wchar_t overlay_wild_relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+                wchar_t overlay_wild_target[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+                uint8_t overlay_wild_drive = 0u;
+                if (!failed && (!replace_extension(overlay_wild_source, oem_short, ".OW1") ||
+                    !replace_extension(overlay_wild_destination, oem_short, ".NEW") ||
+                    bx_ntvdm_dem_path_v1_resolve(overlay_wild_source, &alternate_cwd,
+                        &overlay_wild_drive, overlay_wild_relative) != BX_NTVDM_DEM_PATH_V1_OK ||
+                    bx_ntvdm_dem_path_v1_resolve(overlay_wild_destination, &alternate_cwd,
+                        &overlay_wild_drive, overlay_wild_target) != BX_NTVDM_DEM_PATH_V1_OK ||
+                    !bx_ntvdm_dem_overlay_store_v1_put_file(&alternate.overlay_store,
+                        overlay_wild_drive, overlay_wild_relative, FILE_ATTRIBUTE_NORMAL,
+                        (const uint8_t *)"cow", 3u))) failed = 645;
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
+                        0x20u, &boundary, &cpu, overlay_wild_source, overlay_wild_destination,
+                        &result) || cf_set(&result) ||
+                    bx_ntvdm_dem_overlay_store_v1_lookup(&alternate.overlay_store,
+                        overlay_wild_drive, overlay_wild_relative) == 0 ||
+                    bx_ntvdm_dem_overlay_store_v1_lookup(&alternate.overlay_store,
+                        overlay_wild_drive, overlay_wild_relative)->state !=
+                        BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE ||
+                    bx_ntvdm_dem_overlay_store_v1_lookup(&alternate.overlay_store,
+                        overlay_wild_drive, overlay_wild_target) == 0 ||
+                    bx_ntvdm_dem_overlay_store_v1_lookup(&alternate.overlay_store,
+                        overlay_wild_drive, overlay_wild_target)->byte_count != 3u)) failed = 646;
+            }
             strcpy_s(overlay_dir, sizeof(overlay_dir), oem_short);
             strcpy_s(overlay_renamed, sizeof(overlay_renamed), oem_short);
             overlay_dot = strrchr(overlay_dir, '.');
