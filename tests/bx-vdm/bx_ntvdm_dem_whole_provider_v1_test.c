@@ -300,6 +300,7 @@ int main(void)
         wchar_t overlay_relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
         uint8_t overlay_drive = 0u;
         DWORD overlay_error = ERROR_INVALID_PARAMETER;
+        int overlay_empty = 0;
         bx_ntvdm_dem_overlay_namespace_node_v1 overlay_node;
         if (!profile_for_mode(&overlay_profile, BX_NTVDM_MUTATION_MODE_V1_OVERLAY) ||
             !bx_ntvdm_dem_cwd_context_v1_initialize(&overlay_cwd, &overlay_profile) ||
@@ -422,17 +423,26 @@ int main(void)
             if (!failed && (!bx_ntvdm_dem_overlay_namespace_view_v1_query(
                     &overlay->overlay_store, &space, overlay_drive, overlay_relative,
                     &overlay_node, &overlay_error) ||
-                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_FILE ||
-                !bx_ntvdm_dem_overlay_store_v1_put_directory(&overlay->overlay_store,
-                    overlay_drive, L"OVERLAYDIR", 0u) ||
-                !bx_ntvdm_dem_overlay_store_v1_add_relocation(&overlay->overlay_store,
-                    overlay_drive, L"MOVEDDIR", L"OVERLAYDIR") ||
-                !bx_ntvdm_dem_overlay_namespace_view_v1_query(&overlay->overlay_store,
-                    &space, overlay_drive, L"MOVEDDIR", &overlay_node, &overlay_error) ||
-                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_DIRECTORY ||
-                !bx_ntvdm_dem_overlay_namespace_view_v1_query(&overlay->overlay_store,
-                    &space, overlay_drive, L"OVERLAYDIR", &overlay_node, &overlay_error) ||
-                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT)) failed = 234;
+                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_FILE)) failed = 234;
+            if (!failed && !bx_ntvdm_dem_overlay_store_v1_put_directory(
+                    &overlay->overlay_store, overlay_drive, L"N64OVD99", 0u)) failed = 235;
+            if (!failed && !bx_ntvdm_dem_overlay_store_v1_add_relocation(
+                    &overlay->overlay_store, overlay_drive, L"N64MVD99", L"N64OVD99")) failed = 236;
+            if (!failed && (!bx_ntvdm_dem_overlay_namespace_view_v1_query(&overlay->overlay_store,
+                    &space, overlay_drive, L"N64MVD99", &overlay_node, &overlay_error) ||
+                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_DIRECTORY)) failed = 237;
+            if (!failed && (!bx_ntvdm_dem_overlay_namespace_view_v1_query(&overlay->overlay_store,
+                    &space, overlay_drive, L"N64OVD99", &overlay_node, &overlay_error) ||
+                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT)) failed = 238;
+            if (!failed && !bx_ntvdm_dem_overlay_namespace_view_v1_directory_empty(
+                    &overlay->overlay_store, &space, overlay_drive, L"N64MVD99",
+                    &overlay_empty, &overlay_error)) failed = 239;
+            if (!failed && !overlay_empty) failed = 242;
+            if (!failed && !bx_ntvdm_dem_overlay_store_v1_put_file(&overlay->overlay_store,
+                    overlay_drive, L"N64MVD99\\CHILD.TXT", 0u, 0, 0u)) failed = 240;
+            if (!failed && (!bx_ntvdm_dem_overlay_namespace_view_v1_directory_empty(
+                    &overlay->overlay_store, &space, overlay_drive, L"N64MVD99",
+                    &overlay_empty, &overlay_error) || overlay_empty)) failed = 241;
             file = CreateFileW(temporary, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, 0, 0);
             if (!failed && (file == INVALID_HANDLE_VALUE || !ReadFile(file, output, 4u, &written, 0) ||
                 written != 4u || memcmp(output, "host", 4u) != 0)) failed = 232;

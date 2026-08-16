@@ -24,4 +24,12 @@ int bx_ntvdm_dem_overlay_namespace_view_v1_query(
     const wchar_t *visible_relative,
     bx_ntvdm_dem_overlay_namespace_node_v1 *node_out, DWORD *error_out);
 
+/* Determines whether one visible Overlay directory has no visible children.
+ * It merges admitted-root enumeration with COW entries/tombstones, and never
+ * creates, removes, or opens a host item for mutation. */
+int bx_ntvdm_dem_overlay_namespace_view_v1_directory_empty(
+    const bx_ntvdm_dem_overlay_store_v1 *store,
+    const bx_ntvdm_host_namespace_v1 *host_namespace, uint8_t drive_index,
+    const wchar_t *visible_relative, int *empty_out, DWORD *error_out);
+
 #endif

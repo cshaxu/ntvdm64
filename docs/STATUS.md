@@ -146,6 +146,11 @@
 > their effective source. It has no BOP route and no merged-child operation
 > yet. See the [P12 record](etc/research/t221-s3-overlay-visible-node-foundation-001.md).
 
+> **T221 S3 P13 progress:** the same Overlay view now has a bounded merged
+> child/empty-directory query: it combines host-root enumeration, tombstones,
+> COW children and relocation before deciding emptiness. It remains below the
+> four namespace mutation services. See the [P13 record](etc/research/t221-s3-overlay-merged-child-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
