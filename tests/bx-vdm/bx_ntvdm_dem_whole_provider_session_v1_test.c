@@ -236,6 +236,17 @@ int main(void)
             bx_ntvdm_dem_package_session_v1_teardown(&session);
             bx_ntvdm_host_namespace_v1_release(&host); return 50 + (int)index;
         }
+        /* A released opaque handle must remain invalid across the two admitted
+         * host-mutation views; do not fall through to a profile-default path. */
+        if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_DIRECT ||
+            modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x00u, &cpu, &result) || !cf_ax(&result, 6u)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 51 + (int)index;
+            }
+        }
         /* Readonly must refuse the entire host-mutation surface by capability,
          * rather than depending on whether a test path happens to exist. */
         if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {

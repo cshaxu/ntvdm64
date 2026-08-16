@@ -466,7 +466,11 @@
 > **T221 S3 P65 progress:** Direct `08` set-time now runs on a self-owned
 > temporary file, while the Readonly declared-image set-time branch returns
 > `CF/AX=5`; both retain their existing get-time behavior. See the [P65 record]
-> (etc/research/t221-s3-direct-readonly-file-times-001.md).
+> (etc/research/t221-s3-direct-readonly-file-times-001.md).> **T221 S3 P66 progress:** a closed Direct or Readonly opaque file token now
+> proves the shared original-shaped stale-handle terminal: `50:00` returns
+> `CF/AX=6` rather than accessing a host handle or falling through to a profile
+> default. This adds only two-profile regression evidence; see the [P66 record]
+> (etc/research/t221-s3-direct-readonly-stale-token-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
