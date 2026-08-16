@@ -24,6 +24,7 @@ $names = @(
     'bx_ntvdm_dem_file_view_v1.c', 'bx_ntvdm_dem_file_session_v1.c',
     'bx_ntvdm_dem_overlay_store_v1.c', 'bx_ntvdm_dem_overlay_file_v1.c',
     'bx_ntvdm_dem_overlay_namespace_view_v1.c',
+    'bx_ntvdm_dem_virtual_namespace_view_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c',
     'bx_ntvdm_dem_whole_provider_v1.c', 'bx_ntvdm_dem_search_partition_v1.c',
     'bx_ntvdm_dem_dta_service.c', 'bx_ntvdm_dem_path_search_service_v1.c',

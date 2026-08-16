@@ -323,6 +323,14 @@
 > package. See the [FCB closure]
 > (etc/research/t221-s3-virtual-fcb-family-closure-001.md).
 
+> **T221 S3 P42 progress:** the four-service Virtual `demsrch.c` family
+> (`09..0C`) now selects one private entry view for both pathname and FCB
+> first-search, then retains typed next-search continuation. Dedicated and
+> whole-provider x64 `/MT` fixtures prove that private `GAMMA/OMEGA` results
+> hide present host `ALPHA/ZETA` entries. This closes that subfamily only—not
+> the complete DEM package. See the [search closure]
+> (etc/research/t221-s3-virtual-search-family-closure-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

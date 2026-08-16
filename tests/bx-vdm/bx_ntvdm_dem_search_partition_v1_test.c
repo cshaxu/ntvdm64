@@ -195,6 +195,66 @@ int main(void)
                 sizeof(fcb_next), &transaction, payload, &payload_bytes) ||
             payload_bytes != 51u || memcmp(payload, "ZETA    TXT", 11u)) failed = 14;
     }
+    if (!failed) {
+        bx_ntvdm_search_query_v1 virtual_query;
+        wchar_t virtual_gamma[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+        wchar_t virtual_omega[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+        bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
+        if (!profile_for(&profile, BX_NTVDM_MUTATION_MODE_V1_VIRTUAL) ||
+            !bx_ntvdm_dem_cwd_context_v1_initialize(&cwd, &profile) ||
+            !bx_ntvdm_dem_whole_provider_v1_initialize(&provider, &profile, &space, &cwd) ||
+            !bx_ntvdm_search_request_v1_decode_first_path((const uint8_t *)request, 0u,
+                &virtual_query) ||
+            (virtual_query.relative_directory[0] != L'\0' &&
+             !bx_ntvdm_dem_overlay_store_v1_put_directory(&provider.overlay_store, drive,
+                virtual_query.relative_directory, FILE_ATTRIBUTE_DIRECTORY)) ||
+            swprintf_s(virtual_gamma, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, L"%s\\GAMMA.TXT",
+                virtual_query.relative_directory) < 0 ||
+            swprintf_s(virtual_omega, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, L"%s\\OMEGA.TXT",
+                virtual_query.relative_directory) < 0 ||
+            !bx_ntvdm_dem_overlay_store_v1_put_file(&provider.overlay_store, drive,
+                virtual_gamma, FILE_ATTRIBUTE_NORMAL, (const uint8_t *)"g", 1u) ||
+            !bx_ntvdm_dem_overlay_store_v1_put_file(&provider.overlay_store, drive,
+                virtual_omega, FILE_ATTRIBUTE_NORMAL, (const uint8_t *)"o", 1u)) failed = 15;
+    }
+    if (!failed) {
+        memset(path_first, 0, sizeof(path_first));
+        memcpy(path_first, request, strlen(request) + 1u);
+        dta_bytes = path_first + 128u;
+        dta_bytes[0] = 0x00u; dta_bytes[1] = 0x09u;
+        path_first[132] = 0x34u; path_first[133] = 0x12u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!invoke(&provider, &dta, 0x09u, &boundary, &cpu, path_first,
+                sizeof(path_first), &transaction, payload, &payload_bytes) ||
+            payload_bytes != 30u || memcmp(payload + 17u, "GAMMA.TXT", 9u)) failed = 16;
+    }
+    if (!failed) {
+        memcpy(path_next, payload, 8u); path_next[43] = 0x34u; path_next[44] = 0x12u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!invoke(&provider, &dta, 0x0bu, &boundary, &cpu, path_next,
+                sizeof(path_next), &transaction, payload, &payload_bytes) ||
+            payload_bytes != 30u || memcmp(payload + 17u, "OMEGA.TXT", 9u)) failed = 17;
+    }
+    if (!failed) {
+        bx_ntvdm_search_transaction_v1_release(&provider.search);
+        bx_ntvdm_search_transaction_v1_initialize(&provider.search);
+        memset(fcb_first, 0, sizeof(fcb_first));
+        memcpy(fcb_first + 53u, request, strlen(request) + 1u);
+        fcb_first[181] = 0x34u; fcb_first[182] = 0x12u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!invoke(&provider, &dta, 0x0au, &boundary, &cpu, fcb_first,
+                sizeof(fcb_first), &transaction, payload, &payload_bytes) ||
+            payload_bytes != 51u || memcmp(payload, "GAMMA   TXT", 11u)) failed = 18;
+    }
+    if (!failed) {
+        memset(fcb_next, 0, sizeof(fcb_next));
+        memcpy(fcb_next + 32u, payload + 31u, 8u);
+        fcb_next[53] = 0x34u; fcb_next[54] = 0x12u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!invoke(&provider, &dta, 0x0cu, &boundary, &cpu, fcb_next,
+                sizeof(fcb_next), &transaction, payload, &payload_bytes) ||
+            payload_bytes != 51u || memcmp(payload, "OMEGA   TXT", 11u)) failed = 19;
+    }
     if (!failed) bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
     if (space.magic != 0u) bx_ntvdm_host_namespace_v1_release(&space);
     DeleteFileW(alpha); DeleteFileW(zeta); RemoveDirectoryW(directory);
