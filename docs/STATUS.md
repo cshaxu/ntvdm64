@@ -373,6 +373,12 @@
 > continuation by a successful `50:0B`, not random-token byte values. FCB
 > file/I-O and private search remain open. See the [P48 record]
 > (etc/research/t221-s3-package-session-fcb-terminals-001.md).
+> **T221 S3 P49 progress:** Overlay and Virtual now create `C:\\FCBTEST.COM`
+> through `50:03`, open it through `50:2D`, and close it through `50:2E` in the
+> normal package session. The fixture is entirely private—no host file
+> mutation or backend-token injection occurs. This is not FCB I/O/wildcard
+> closure; see the [P49 record]
+> (etc/research/t221-s3-package-session-private-fcb-chain-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

@@ -179,6 +179,33 @@ int main(void)
                 bx_ntvdm_host_namespace_v1_release(&host); return 70 + (int)index;
             }
         }
+        /* Overlay and Virtual must create their own private file through the
+         * namespace owner before the FCB path owner can open it. */
+        if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_OVERLAY ||
+            modes[index] == BX_NTVDM_MUTATION_MODE_V1_VIRTUAL) {
+            memcpy(ram + 0x800u, "C:\\FCBTEST.COM", sizeof("C:\\FCBTEST.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.ecx = 0u;
+            if (!dispatch(&session, 0x03u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 80 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.eax = 2u;
+            if (!dispatch(&session, 0x2du, &cpu, &result) || !success(&result) ||
+                (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 5u))) !=
+                    ((1u << 0u) | (1u << 5u)) || token_from(&result) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 90 + (int)index;
+            }
+            token = token_from(&result);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.esi = token & 0xffffu;
+            if (!dispatch(&session, 0x2eu, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 100 + (int)index;
+            }
+        }
         /* The source-owned FCB direct route has two safe, profile-independent
          * terminals: DOS date query and no-op close of a zero opaque token. */
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
