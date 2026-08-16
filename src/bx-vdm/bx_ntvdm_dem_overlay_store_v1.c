@@ -190,6 +190,7 @@ int bx_ntvdm_dem_overlay_store_v1_add_relocation(
     const wchar_t *destination, const wchar_t *source)
 {
     bx_ntvdm_dem_overlay_store_v1_relocation *entry;
+    wchar_t effective_source[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
     uint32_t index;
     if (!bx_ntvdm_dem_overlay_store_v1_valid(store) ||
         !valid_path(drive, destination) || !valid_path(drive, source) ||
@@ -199,6 +200,12 @@ int bx_ntvdm_dem_overlay_store_v1_add_relocation(
         if (entry->drive_index == drive &&
             _wcsicmp(entry->destination, destination) == 0) return 0;
     }
+    /* Normalize through the existing private maps before recording the next
+     * move.  It makes an A->B then B->A cycle impossible to install and
+     * keeps future lookup to one effective source chain. */
+    if (!bx_ntvdm_dem_overlay_store_v1_resolve_relocation(store, drive, source,
+            effective_source) || _wcsicmp(destination, effective_source) == 0 ||
+        prefix(destination, effective_source)) return 0;
     if (store->relocation_count == store->relocation_capacity) {
         uint32_t next = store->relocation_capacity == 0u ? 8u :
             store->relocation_capacity * 2u;
@@ -216,7 +223,7 @@ int bx_ntvdm_dem_overlay_store_v1_add_relocation(
     entry = &store->relocations[store->relocation_count++];
     entry->drive_index = drive;
     wcscpy_s(entry->destination, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, destination);
-    wcscpy_s(entry->source, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, source);
+    wcscpy_s(entry->source, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, effective_source);
     return bx_ntvdm_dem_overlay_store_v1_valid(store);
 }
 

@@ -67,6 +67,8 @@ int main(void)
         _wcsicmp(effective, L"WORK\\DIR\\CHILD") != 0) return 4;
     if (bx_ntvdm_dem_overlay_store_v1_add_relocation(&store, 2u,
             L"WORK\\DIR\\LOOP", L"WORK\\DIR")) return 5;
+    if (bx_ntvdm_dem_overlay_store_v1_add_relocation(&store, 2u,
+            L"WORK\\DIR", L"WORK\\MOVED")) return 6;
     bx_ntvdm_dem_overlay_file_v1_teardown(&files);
     bx_ntvdm_dem_overlay_store_v1_teardown(&store);
     return 0;
