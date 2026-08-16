@@ -361,6 +361,12 @@
 > transport and opaque-token lifecycle only; the broader 29-identity matrix
 > remains open. See the [P46 record]
 > (etc/research/t221-s3-package-session-startup-handle-chain-001.md).
+> **T221 S3 P47 progress:** Direct and Readonly now send original-shaped
+> `50:09`/`50:0B` pathname search through the package session, including the
+> DTA far output pointer, copied CurrentPDB and 43-byte continuation. Overlay
+> and Virtual intentionally remain outside this declared-snapshot path pending
+> their private-view legs. See the [P47 record]
+> (etc/research/t221-s3-package-session-declared-search-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

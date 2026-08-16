@@ -159,6 +159,27 @@ int main(void)
             bx_ntvdm_dem_package_session_v1_teardown(&session);
             bx_ntvdm_host_namespace_v1_release(&host); return 50 + (int)index;
         }
+        /* Direct and Readonly use the declared merged snapshot.  The private
+         * Overlay/Virtual search views are exercised by their own matrix leg. */
+        if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_DIRECT ||
+            modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {
+            memset(ram + 0x600u, 0, 43u);
+            ram[0x400u] = 0x00u; ram[0x401u] = 0x06u;
+            ram[0x402u] = 0x00u; ram[0x403u] = 0x00u;
+            memcpy(ram + 0x700u, "C:\\*.*", sizeof("C:\\*.*"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x700u; cpu.ecx = 0u;
+            if (!dispatch(&session, 0x09u, &cpu, &result) || !success(&result) ||
+                ram[0x600u] == 0u || ram[0x601u] == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 60 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!dispatch(&session, 0x0bu, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 70 + (int)index;
+            }
+        }
         /* All four profile views must reach the same installed provider. */
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
         if (!dispatch(&session, 0x00u, &cpu, &result) || !cf_ax(&result, 6u) ||
