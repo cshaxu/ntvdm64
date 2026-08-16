@@ -10,6 +10,9 @@ int bx_ntvdm_dem_local_file_backend_v1_valid(
         backend->abi_version == BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_VERSION &&
         backend->struct_bytes == sizeof(*backend) && backend->reserved0 == 0u &&
         bx_ntvdm_dem_file_session_v1_valid(backend->session) &&
+        bx_ntvdm_dem_file_view_v1_valid(backend->view) &&
+        memcmp(&backend->session->profile.profile, &backend->view->profile.profile,
+            sizeof(backend->session->profile.profile)) == 0 &&
         bx_ntvdm_host_namespace_v1_valid(backend->host_namespace) &&
         bx_ntvdm_dem_cwd_context_v1_valid(backend->cwd);
 }
@@ -17,10 +20,12 @@ int bx_ntvdm_dem_local_file_backend_v1_valid(
 int bx_ntvdm_dem_local_file_backend_v1_initialize(
     bx_ntvdm_dem_local_file_backend_v1 *backend,
     bx_ntvdm_dem_file_session_v1 *session,
+    const bx_ntvdm_dem_file_view_v1 *view,
     const bx_ntvdm_host_namespace_v1 *host_namespace,
     const bx_ntvdm_dem_cwd_context_v1 *cwd)
 {
     if (backend == 0 || !bx_ntvdm_dem_file_session_v1_valid(session) ||
+        !bx_ntvdm_dem_file_view_v1_valid(view) ||
         !bx_ntvdm_host_namespace_v1_valid(host_namespace) ||
         !bx_ntvdm_dem_cwd_context_v1_valid(cwd)) return 0;
     memset(backend, 0, sizeof(*backend));
@@ -28,6 +33,7 @@ int bx_ntvdm_dem_local_file_backend_v1_initialize(
     backend->abi_version = BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_VERSION;
     backend->struct_bytes = sizeof(*backend);
     backend->session = session;
+    backend->view = view;
     backend->host_namespace = host_namespace;
     backend->cwd = cwd;
     return bx_ntvdm_dem_local_file_backend_v1_valid(backend);
@@ -49,8 +55,7 @@ static int open_ex_internal(
 {
     wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
     uint8_t drive;
-    uint32_t mode;
-    uint32_t policy;
+    int view_result;
     ACCESS_MASK desired_access;
     HANDLE handle = INVALID_HANDLE_VALUE;
     int path_result;
@@ -60,25 +65,19 @@ static int open_ex_internal(
         (access & ~(BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ |
             BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_WRITE)) != 0u || access == 0u)
         return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED;
-    mode = backend->session->profile.profile.mode;
-    if ((access & BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_WRITE) != 0u ||
-        creation_disposition != OPEN_EXISTING) {
-        if (!bx_ntvdm_dem_profile_consumer_v1_resolve(&backend->session->profile,
-                BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, &policy))
-            return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED;
-        if (policy == BX_NTVDM_MUTATION_POLICY_V1_REJECT_READONLY)
-            return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_READONLY;
-        if (policy == BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY)
-            return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OVERLAY;
-        if (policy == BX_NTVDM_MUTATION_POLICY_V1_USE_VIRTUAL)
-            return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_VIRTUAL;
-        if (policy != BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST)
-            return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED;
-    }
-    if (mode == BX_NTVDM_MUTATION_MODE_V1_VIRTUAL)
-        return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_VIRTUAL;
-    if (mode == BX_NTVDM_MUTATION_MODE_V1_OVERLAY)
+    view_result = bx_ntvdm_dem_file_view_v1_admit(backend->view,
+        (access & BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_WRITE) != 0u ||
+        creation_disposition != OPEN_EXISTING ?
+        BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT :
+        BX_NTVDM_MUTATION_CLASS_V1_NONE_MECHANICAL);
+    if (view_result == BX_NTVDM_DEM_FILE_VIEW_V1_DENIED_READONLY)
+        return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_READONLY;
+    if (view_result == BX_NTVDM_DEM_FILE_VIEW_V1_NEEDS_OVERLAY_BACKEND)
         return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OVERLAY;
+    if (view_result == BX_NTVDM_DEM_FILE_VIEW_V1_NEEDS_VIRTUAL_BACKEND)
+        return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_VIRTUAL;
+    if (view_result != BX_NTVDM_DEM_FILE_VIEW_V1_OK)
+        return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED;
     path_result = bx_ntvdm_dem_path_v1_resolve(oem_path, backend->cwd, &drive, relative);
     if (path_result == BX_NTVDM_DEM_PATH_V1_CAPACITY)
         return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_CAPACITY;

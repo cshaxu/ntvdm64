@@ -25,6 +25,7 @@ typedef struct bx_ntvdm_dem_whole_provider_v1 {
     bx_ntvdm_readonly_namespace_v1 *startup_namespace;
     const bx_ntvdm_profile_search_snapshot_v1 *declared_search_snapshot;
     bx_ntvdm_dem_file_session_v1 files;
+    bx_ntvdm_dem_file_view_v1 file_view;
     bx_ntvdm_dem_local_file_backend_v1 local_files;
     bx_ntvdm_search_transaction_v1 search;
     /* Set only around one current direct namespace open/create completion by

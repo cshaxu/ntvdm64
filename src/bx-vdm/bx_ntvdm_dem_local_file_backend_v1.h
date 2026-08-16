@@ -2,6 +2,7 @@
 #define BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_H
 
 #include "bx_ntvdm_dem_file_session_v1.h"
+#include "bx_ntvdm_dem_file_view_v1.h"
 #include "bx_ntvdm_dem_path_v1.h"
 #include "bx_ntvdm_host_namespace.h"
 
@@ -31,6 +32,7 @@ typedef struct bx_ntvdm_dem_local_file_backend_v1 {
     uint32_t struct_bytes;
     uint32_t reserved0;
     bx_ntvdm_dem_file_session_v1 *session;
+    const bx_ntvdm_dem_file_view_v1 *view;
     const bx_ntvdm_host_namespace_v1 *host_namespace;
     const bx_ntvdm_dem_cwd_context_v1 *cwd;
 } bx_ntvdm_dem_local_file_backend_v1;
@@ -42,6 +44,7 @@ extern "C" {
 int bx_ntvdm_dem_local_file_backend_v1_initialize(
     bx_ntvdm_dem_local_file_backend_v1 *backend,
     bx_ntvdm_dem_file_session_v1 *session,
+    const bx_ntvdm_dem_file_view_v1 *view,
     const bx_ntvdm_host_namespace_v1 *host_namespace,
     const bx_ntvdm_dem_cwd_context_v1 *cwd);
 int bx_ntvdm_dem_local_file_backend_v1_valid(

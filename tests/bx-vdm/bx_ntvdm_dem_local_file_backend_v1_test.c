@@ -18,10 +18,12 @@ static int open_for(uint32_t mode, const bx_ntvdm_host_namespace_v1 *space,
 {
     bx_ntvdm_mutation_profile_v1 profile;
     bx_ntvdm_dem_local_file_backend_v1 backend;
+    bx_ntvdm_dem_file_view_v1 view;
     if (!profile_for(mode, &profile) ||
         !bx_ntvdm_dem_file_session_v1_initialize(session_out, &profile) ||
+        !bx_ntvdm_dem_file_view_v1_initialize(&view, &profile) ||
         !bx_ntvdm_dem_local_file_backend_v1_initialize(&backend, session_out,
-            space, cwd)) return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED;
+            &view, space, cwd)) return BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_REJECTED;
     return bx_ntvdm_dem_local_file_backend_v1_open(&backend, path, access,
         creation, token_out);
 }
@@ -37,6 +39,8 @@ int main(void)
     bx_ntvdm_dem_cwd_context_v1 cwd;
     bx_ntvdm_dem_local_file_backend_v1 backend;
     bx_ntvdm_dem_file_session_v1 session;
+    bx_ntvdm_dem_file_view_v1 direct_view;
+    bx_ntvdm_dem_file_view_v1 mismatched_view;
     HANDLE source = INVALID_HANDLE_VALUE, opened = INVALID_HANDLE_VALUE;
     uint8_t drive;
     uint32_t token = 0u, released = 0u;
@@ -71,8 +75,9 @@ int main(void)
     if (!failed) {
         if (!profile_for(BX_NTVDM_MUTATION_MODE_V1_DIRECT, &direct_profile) ||
             !bx_ntvdm_dem_file_session_v1_initialize(&session, &direct_profile) ||
+            !bx_ntvdm_dem_file_view_v1_initialize(&direct_view, &direct_profile) ||
             !bx_ntvdm_dem_local_file_backend_v1_initialize(&backend, &session,
-                &space, &cwd) ||
+                &direct_view, &space, &cwd) ||
             bx_ntvdm_dem_local_file_backend_v1_open_ex_owned(&backend, oem_path,
                 BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ, FILE_SHARE_READ,
                 OPEN_EXISTING, 0u, &token, 0) !=
@@ -84,6 +89,13 @@ int main(void)
             !bx_ntvdm_dem_file_session_v1_release_owner(&session, 0x1234u,
                 &released) || released != 1u ||
             bx_ntvdm_dem_file_session_v1_lookup(&session, token, &opened)) failed = 1;
+        if (!failed) {
+            bx_ntvdm_mutation_profile_v1 readonly_profile;
+            if (!profile_for(BX_NTVDM_MUTATION_MODE_V1_READONLY, &readonly_profile) ||
+                !bx_ntvdm_dem_file_view_v1_initialize(&mismatched_view, &readonly_profile) ||
+                bx_ntvdm_dem_local_file_backend_v1_initialize(&backend, &session,
+                    &mismatched_view, &space, &cwd)) failed = 1;
+        }
         bx_ntvdm_dem_file_session_v1_teardown(&session);
         token = 0u;
         if (open_for(BX_NTVDM_MUTATION_MODE_V1_DIRECT, &space, &cwd,

@@ -706,6 +706,7 @@ add_executable(bx-ntvdm-dem-local-file-owner-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_mutation_profile_v1.c
     src/bx-vdm/bx_ntvdm_mutation_overlay_v1.c
     src/bx-vdm/bx_ntvdm_dem_profile_consumer_v1.c
+    src/bx-vdm/bx_ntvdm_dem_file_view_v1.c
     src/bx-vdm/bx_ntvdm_dem_file_session_v1.c
     src/bx-vdm/bx_ntvdm_host_drive_policy.c
     src/bx-vdm/bx_ntvdm_host_namespace.c

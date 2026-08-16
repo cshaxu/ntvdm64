@@ -88,6 +88,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_session_host_context_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_cwd_context_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_path_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_file_view_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_file_session_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_local_file_backend_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_cwd_service_v2.c',

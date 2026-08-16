@@ -68,6 +68,13 @@
 > migration decision, and family regression matrix. Pipes remain Redirector
 > deferred. See the [whole-provider disposition](etc/research/t221-s2-file-provider-disposition-001.md).
 
+> **T221 S3 P1 progress:** `dem_whole_provider` now owns one selector-blind
+> file-view authority. Direct/Readonly local-file admission migrated through
+> it; Overlay/Virtual explicitly require later package-owned backends and
+> cannot fall through to Direct. A focused MSVC x64 `/MT` fixture also rejects
+> mismatched token-session/view profiles. This is boundary progress only, not
+> a subfamily or package closure; see the [P1 record](etc/research/t221-s3-file-view-boundary-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
