@@ -157,6 +157,33 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
         result.eflags_values != 0u) {
         bx_ntvdm_dem_package_session_v1_teardown(&session); return 7;
     }
+    /* demGSetMediaID get retains its original VOLINFO layout: two caller
+     * bytes stay untouched, then the provider writes serial, label and FS
+     * through checked guest-RAM ranges.  Set remains the original CF-only
+     * unsupported volume mutation under both Direct and Readonly. */
+    memset(ram + 0x180u, 0xa5, 25u);
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 0u; cpu.ebx = 2u; cpu.ds = 0u; cpu.edx = 0x180u;
+    if (!dispatch(&session, 0x10u, &cpu, &result) || !success(&result) ||
+        ram[0x180u] != 0xa5u || ram[0x181u] != 0xa5u ||
+        ram[0x182u] != (uint8_t)volumes->volumes[2u].serial_number ||
+        ram[0x183u] != (uint8_t)(volumes->volumes[2u].serial_number >> 8) ||
+        ram[0x184u] != (uint8_t)(volumes->volumes[2u].serial_number >> 16) ||
+        ram[0x185u] != (uint8_t)(volumes->volumes[2u].serial_number >> 24) ||
+        ram[0x198u] == 0xa5u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 8;
+    }
+    memset(ram + 0x180u, 0xa5, 25u);
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 1u; cpu.ebx = 2u; cpu.ds = 0u; cpu.edx = 0x180u;
+    if (!dispatch(&session, 0x10u, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != 0u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        ram[0x180u] != 0xa5u || ram[0x198u] != 0xa5u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 9;
+    }
     memset(ram + 0x120u, 0xa5, 71u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0u; cpu.esi = 0x120u; cpu.eax = 2u;

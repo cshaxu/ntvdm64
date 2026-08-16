@@ -88,6 +88,10 @@
 > **T222 S2 P10 progress:** 50:0F now verifies the admitted C: drive bound under
 > Direct/Readonly normal session; see the [P10 record]
 > (etc/research/t222-s2-drive-view-drive-list-session-regression-001.md).
+> **T222 S2 P11 progress:** 50:10 now proves source-shaped checked `VOLINFO`
+> writes from the admitted immutable snapshot, and its CF-only set refusal, in
+> both Direct/Readonly normal sessions; see the [P11 record]
+> (etc/research/t222-s2-drive-view-media-id-session-regression-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
