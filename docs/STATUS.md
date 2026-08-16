@@ -57,6 +57,13 @@
 > package session retains checked mechanical write execution. Focused family and
 > whole-session x64 `/MT` fixtures pass; CWD/default-drive/DTA remains open. See
 > the [P2 migration](etc/research/t222-s2-drive-view-observation-route-migration-001.md).
+> **T222 S2 P3 progress:** the Direct/Readonly CWD/default-drive wrapper
+> (`50:13/18/1A`) now belongs to `dem_drive_view_provider_v1`; it keeps the
+> package session as the sole checked machine-action executor and declines
+> Overlay/Virtual. A focused x64 `/MT` provider fixture proves Direct success,
+> Readonly refusal and retained profile isolation. This is not the 15-identity
+> package closure: normal session regression and DTA migration remain open;
+> see the [P3 record](etc/research/t222-s2-drive-view-cwd-provider-migration-001.md).
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code

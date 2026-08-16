@@ -194,7 +194,7 @@ int bx_ntvdm_dem_package_session_v1_set_boot_drive(
     bx_ntvdm_dem_drive_view_provider_v1_set_boot_drive(&s->drive_view, drive); }int bx_ntvdm_dem_package_session_v1_resolve_mutation_class(const bx_ntvdm_dem_package_session_v1 *s,uint32_t c,uint32_t *r)
 { return bx_ntvdm_dem_package_session_v1_valid(s)&&s->drive_view.has_mutation_profile&&bx_ntvdm_dem_profile_consumer_v1_resolve(&s->drive_view.mutation_profile,c,r); }
 int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_bop_ingress_v1 *i,const bx_ntvdm_bop_provider_selection_v1 *p,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
-{ bx_ntvdm_dem_package_route_v1 route;bx_ntvdm_dem_plane_record_v1 plane;bx_ntvdm_exception_result_v1 mem;struct bx_ntvdm_mechanical_action_v1 a,next;bx_ntvdm_multi_write_transaction_v1 tx;uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];uint32_t drive_view_write;
+{ bx_ntvdm_dem_package_route_v1 route;bx_ntvdm_dem_plane_record_v1 plane;bx_ntvdm_exception_result_v1 mem;struct bx_ntvdm_mechanical_action_v1 a,next;bx_ntvdm_guest_gather_read_action_v1 gather;bx_ntvdm_multi_write_transaction_v1 tx;uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];uint32_t drive_view_write;
   if(!bx_ntvdm_dem_package_session_v1_valid(s)||!i||!p||!e||!c||!w||!r||!bx_ntvdm_dem_package_facade_v1_classify(i,p,&route))return 0;
   bx_ntvdm_cpu_result_v2_pass_through(r);
   if(bx_ntvdm_dem_package_facade_v1_dispatch(i,p,&route,e,c,r))return terminal_or_complete(i,p,&route,e,c,w,r);plane=route.plane;
@@ -211,7 +211,10 @@ int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,
   if(bx_ntvdm_dem_raw_media_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
   if(s->drive_view.gset.has_drive_snapshot&&bx_ntvdm_dem_boot_drive_service_v2_dispatch(&s->drive_view.gset.drive_snapshot,s->drive_view.has_boot_drive?s->drive_view.boot_drive_index:UINT32_MAX,e,c,w,&mem))return memory_result(&mem,r);
 
-  /* T202/S4's atomic local-file package switch.  Once this provider is
+  if(bx_ntvdm_dem_drive_view_provider_v1_prepare_cwd(&s->drive_view,i->service,e,c,&gather)){
+    if(!gather_read(s,&gather,&a)||!action(&a)||!bx_ntvdm_dem_drive_view_provider_v1_complete_cwd(&s->drive_view,s->namespace_plane->dem_host_namespace,i->service,e,c,&gather,a.payload,a.payload_bytes,&tx,payload)||!write_tx(s,&tx,payload))return 0;
+    *r=tx.result;return bx_ntvdm_cpu_result_v2_valid(r);
+  }  /* T202/S4's atomic local-file package switch.  Once this provider is
    * installed, no identity in its 27-service work set falls through to a
    * boot/readonly fixture leaf.  Token validation happens inside the new
    * owner, so legacy tokens become source-shaped invalid handles. */
