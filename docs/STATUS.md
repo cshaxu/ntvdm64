@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T220 S7.** Its governing brief is the active
+> **Current effective packet: M0 T221 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T220 S7 -- direct-token JFT/SFT representation map.**
+**Active: M0 T221 S1 -- DEM owner-package source/ABI/failure ledger.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -26,33 +26,36 @@
 > recorded in [history](history/m0-t218-closure-20260815.md).
 > **T219 closed:** its T200 current bound-route reconciliation is recorded in
 > [history](history/m0-t219-closure-20260815.md).
+> **T220 closed:** its bounded direct-token ownership transaction and rejected
+> lifecycle/JFT-SFT shortcuts are recorded in
+> [history](history/m0-t220-closure-20260815.md).
 
 ## Active Packet
 
-> **T scope:** T220 is the source-first successor to T218's guest DOS `$Exec`
-> prerequisite map.  It recovers the complete DEM process-resource ownership
-> contract—entry, PDB/JFT/SFT resource lookup, termination and failure order—
-> before admitting any minimal bridge, `50:3C` cleanup, COMMAND parent return
-> or native trace.  It preserves guest DOS ownership and never promotes a
-> trace hit into a leaf BOP task.
+> **T scope:** T221 recovers the DEM host namespace and handle owner package
+> as a coherent source-first unit: direct namespace, token handles, FCB,
+> search, device/VDD boundary and lifecycle disposition.  It begins with a
+> complete original-source/ABI/failure ledger and shared host-mutation profile
+> disposition; it neither promotes trace hits into leaf work nor treats the
+> existing direct-token slice as package closure.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T220 S7, Ordinary Mode. |
-| Admission And Approval | S6 rejects pre-`DOS_ABORT` PDB cleanup. T220 now requires the exact guest JFT/SFT representation and post-abort release route before any lifecycle bridge can be proposed. |
-| Objective | Map the original direct file handle's PDB/JFT/SFT allocation, DOS handle publication, `$close`/`SVC_DEMCLOSE` path, and the current opaque-token mismatch; decide whether a bounded source-derived representation is feasible. |
-| Non-goals | No guest-memory read or write, JFT/SFT implementation, `50:3C` binding, FCB/search/device/VDD semantics, host-mutation expansion, Bochs/mantle change, COMMAND return, target execution or native trace. |
-| Reference Baseline | T220 S1--S6 evidence; original OpenNT `demfile.c`, DOS `abort.asm`, close/handle call chain and `doswow.h`; current direct namespace/handle/file-session sources. |
-| Files And ABI Surface | Evidence and current-source analysis only; no bx-core, bx-mantle, guest, CLI, or runtime ABI change. |
+| Identifier Mode | M0 T221 S1, Ordinary Mode. |
+| Admission And Approval | Owner direction requires complete BOP recovery by original owner package, not trace-led leaf patches. T220 closes only the direct-token process-resource slice. T221 is selected from the top unnumbered queue candidate under the owner's standing authorization to order and admit work. |
+| Objective | Produce one complete DEM ledger for every current 50h-family route: original owner/source and practical composability; ABI/layout/order/failure rule; current bound route; host-mutation class and shared-profile disposition; and retain/migrate/replace/delete decision for each existing shim or fallback. |
+| Non-goals | No BOP provider implementation, runtime-source change, guest-memory expansion, JFT/SFT reconstruction, `50:3C` lifecycle binding, Bochs/mantle change, guest/CLI behavior change, target execution or native trace. |
+| Reference Baseline | T219's 203-row route reconciliation; T220 S1--S7 direct-token evidence; current bx-vdm source and T200 audit; OpenNT DEM/DOS sources and source-policy rules. |
+| Files And ABI Surface | Evidence ledger, Status and (if needed) documentation indexes only; no runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | The map names original structures and offsets, allocation/publication/release order, all current adapter owners, failure behavior, and a precise feasibility decision without using runtime behavior as a substitute. |
-| Expected Markers | `50:3C` remains unbound; no direct token is misrepresented as a DOS JFN/SFT; guest DOS remains owner of process close order; no selector-specific detached handler is added. |
-| Asset Needs | Existing OpenNT source and current bx-vdm sources; no new image, firmware, media, external source import or build artifact. |
-| Reporting Requirements | Record source paths, layouts, current token ABI mismatch, required guest ranges/operations for a possible bridge, failure order and explicit retained/deferred/rejected dispositions. |
-| Stop Conditions | A need to implement a JFT/SFT map, add guest read/write, bind `50:3C`, expand FCB/search/device/VDD semantics, alter host mutation, touch Bochs/mantle, run native trace, patch a guest binary or import an external input pauses S7 for re-admission. |
-| Exit Criteria | One source/ABI/failure map proves whether the current direct-token model can reach a bounded JFT/SFT-compatible lifecycle seam; implementation remains separately admitted. |
+| Verification | Cross-check every T200 DEM row against current bound source and current composition manifests; inspect OpenNT source and available original dependencies; perform a mechanical completeness check over the ledger; run documentation governance verification and `git diff --check`. |
+| Expected Markers | Every DEM BOP endpoint has one owner and one current disposition; direct/readonly/shadow/virtual/deferred and mutation authority are not independently reinvented by DEM; each existing shim/fallback has an explicit disposition; no endpoint is inferred from trace alone. |
+| Asset Needs | Existing OpenNT/current source, retained T200/T219/T220 evidence and local tools; no new image, firmware, media or external import. |
+| Reporting Requirements | Record exact source paths and dependencies, rung-by-rung source-recovery decision, ABI/failure contract, current route evidence, profile/mutation disposition, obsolete fallback disposition, confidence and subsequent whole-package S ordering. |
+| Stop Conditions | A need to change provider behavior, add a shim, adopt a new host capability, perform guest read/write, bind lifecycle, alter Bochs/mantle, run native trace, patch a guest binary or import external input pauses S1 for re-admission. |
+| Exit Criteria | A reviewed complete owner/package ledger supports bounded, source-first S2 planning without hidden route, profile, or fallback ambiguity; governance checks pass and the evidence is pushed. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | First/subsequent child entry; parent-owned handles crossing child entry; normal/abort/TSR exit; VDD and no-VDD branches; `50:34..3C`; file, FCB, search, pending and DTA state; current session teardown; COMMAND `54:0B`; and direct/readonly/overlay/virtual profile ownership. |
+| Similar-Issue Sweep | `50:00..48`; direct open/create/read/write/seek/close; FCB and DTA search; FindFirst/FindNext; DOS device and VDD routes; PDB/JFT/SFT and normal/abort/TSR exit; current session teardown; all direct/readonly/shadow/virtual/deferred profile paths; and every current adapter fallback or no-op. |
 
 > **T220 S1 P1 closure:** OpenNT proves `50:36` is only DOS-entry/VDD
 > notification.  The historical resource contract instead roots in the
@@ -95,8 +98,15 @@
 > termination notification before guest DOS runs `DOS_ABORT`'s JFT/FCB/SFT
 > close path. The current finite provider preserves only that no-result
 > notification. S5's direct-token `release_owner` must therefore **not** be
-> bound to `50:3C`; it awaits a separately admitted JFT/SFT representation
-> map. See the [admission map](etc/research/t220-s6-dem-pdb-termination-admission-map-001.md).
+> bound to `50:3C`; S7 subsequently confirmed that an adapter JFT/SFT map
+> would duplicate guest DOS. See the
+> [admission map](etc/research/t220-s6-dem-pdb-termination-admission-map-001.md).
+
+> **T220 S7 P1 closure:** direct DEM tokens preserve OpenNT's `AX:BP`
+> host-handle placement as the guest-owned JFT/SFT close path's private
+> substitute. Reconstructing JFT/SFT in the adapter would duplicate guest DOS;
+> no `release_owner` lifecycle caller is admitted. See the
+> [representation map](etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md).
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
