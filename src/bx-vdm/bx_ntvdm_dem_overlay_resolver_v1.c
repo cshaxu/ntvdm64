@@ -30,9 +30,9 @@ static int load_base(const bx_ntvdm_host_namespace_v1 *space, uint8_t drive,
     return 1;
 }
 
-int bx_ntvdm_dem_overlay_resolver_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
+int bx_ntvdm_dem_overlay_resolver_v1_open_shared(bx_ntvdm_dem_overlay_file_v1 *files,
     const bx_ntvdm_host_namespace_v1 *space, uint8_t drive, const wchar_t *relative,
-    uint32_t access, DWORD disposition, uint32_t *token_out, uint32_t *size_out,
+    uint32_t access, uint32_t share_access, DWORD disposition, uint32_t *token_out, uint32_t *size_out,
     DWORD *error_out)
 {
     const bx_ntvdm_dem_overlay_store_v1_entry *entry;
@@ -41,7 +41,8 @@ int bx_ntvdm_dem_overlay_resolver_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
     if (token_out) *token_out = 0u; if (size_out) *size_out = 0u;
     if (error_out) *error_out = ERROR_INVALID_PARAMETER;
     if (!bx_ntvdm_dem_overlay_file_v1_valid(files) || !bx_ntvdm_host_namespace_v1_valid(space) ||
-        !relative || !token_out || !size_out || !error_out || access == 0u || (access & ~3u) != 0u)
+        !relative || !token_out || !size_out || !error_out || access == 0u || (access & ~3u) != 0u ||
+        (share_access & ~3u) != 0u)
         return 0;
     entry = bx_ntvdm_dem_overlay_store_v1_lookup(files->store, drive, relative);
     exists = entry != 0 && entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE;
@@ -60,7 +61,7 @@ int bx_ntvdm_dem_overlay_resolver_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
         truncate = 1; break;
     default: *error_out = ERROR_INVALID_PARAMETER; goto done;
     }
-    if (!bx_ntvdm_dem_overlay_file_v1_open(files, drive, relative, access, base,
+    if (!bx_ntvdm_dem_overlay_file_v1_open_shared(files, drive, relative, access, share_access, base,
             base_count, attributes, exists, !exists, &token)) { *error_out = ERROR_NOT_ENOUGH_MEMORY; goto done; }
     if (truncate && !bx_ntvdm_dem_overlay_file_v1_truncate(files, token)) {
         (void)bx_ntvdm_dem_overlay_file_v1_close(files, token); *error_out = ERROR_WRITE_FAULT; goto done;
@@ -74,3 +75,10 @@ done:
     if (base) HeapFree(GetProcessHeap(), 0u, base);
     return *token_out != 0u;
 }
+
+int bx_ntvdm_dem_overlay_resolver_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive, const wchar_t *relative,
+    uint32_t access, DWORD disposition, uint32_t *token_out, uint32_t *size_out,
+    DWORD *error_out)
+{ return bx_ntvdm_dem_overlay_resolver_v1_open_shared(files, space, drive, relative,
+    access, 3u, disposition, token_out, size_out, error_out); }
