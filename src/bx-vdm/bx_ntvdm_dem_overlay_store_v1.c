@@ -32,8 +32,12 @@ int bx_ntvdm_dem_overlay_store_v1_valid(const bx_ntvdm_dem_overlay_store_v1 *sto
         const bx_ntvdm_dem_overlay_store_v1_entry *entry = &store->entries[index];
         if (!valid_path(entry->drive_index, entry->relative) ||
             (entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE &&
-             entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE) ||
-            (entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE &&
+             entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE &&
+             entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY &&
+             entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY_TOMBSTONE) ||
+            ((entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE ||
+              entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY ||
+              entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY_TOMBSTONE) &&
              (entry->bytes != 0 || entry->byte_count != 0u || entry->byte_capacity != 0u)) ||
             (entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE &&
              (entry->byte_count > entry->byte_capacity ||
@@ -113,6 +117,30 @@ int bx_ntvdm_dem_overlay_store_v1_tombstone(bx_ntvdm_dem_overlay_store_v1 *store
     if (entry->bytes) HeapFree(GetProcessHeap(), 0u, entry->bytes);
     entry->bytes = 0; entry->byte_count = entry->byte_capacity = entry->attributes = 0u;
     entry->state = BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE;
+    return bx_ntvdm_dem_overlay_store_v1_valid(store);
+}
+
+int bx_ntvdm_dem_overlay_store_v1_put_directory(bx_ntvdm_dem_overlay_store_v1 *store,
+    uint8_t drive, const wchar_t *relative, uint32_t attributes)
+{
+    bx_ntvdm_dem_overlay_store_v1_entry *entry;
+    if (!bx_ntvdm_dem_overlay_store_v1_valid(store) || !valid_path(drive, relative)) return 0;
+    entry = entry_for(store, drive, relative); if (!entry) return 0;
+    if (entry->bytes) HeapFree(GetProcessHeap(), 0u, entry->bytes);
+    entry->bytes = 0; entry->byte_count = entry->byte_capacity = 0u;
+    entry->attributes = attributes; entry->state = BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY;
+    return bx_ntvdm_dem_overlay_store_v1_valid(store);
+}
+
+int bx_ntvdm_dem_overlay_store_v1_tombstone_directory(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive, const wchar_t *relative)
+{
+    bx_ntvdm_dem_overlay_store_v1_entry *entry;
+    if (!bx_ntvdm_dem_overlay_store_v1_valid(store) || !valid_path(drive, relative)) return 0;
+    entry = entry_for(store, drive, relative); if (!entry) return 0;
+    if (entry->bytes) HeapFree(GetProcessHeap(), 0u, entry->bytes);
+    entry->bytes = 0; entry->byte_count = entry->byte_capacity = entry->attributes = 0u;
+    entry->state = BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY_TOMBSTONE;
     return bx_ntvdm_dem_overlay_store_v1_valid(store);
 }
 

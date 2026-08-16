@@ -11,7 +11,9 @@
 
 enum bx_ntvdm_dem_overlay_store_v1_state {
     BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE = 1u,
-    BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE = 2u
+    BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE = 2u,
+    BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY = 3u,
+    BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY_TOMBSTONE = 4u
 };
 
 typedef struct bx_ntvdm_dem_overlay_store_v1_entry {
@@ -39,6 +41,11 @@ int bx_ntvdm_dem_overlay_store_v1_put_file(bx_ntvdm_dem_overlay_store_v1 *store,
     const uint8_t *bytes, uint32_t byte_count);
 int bx_ntvdm_dem_overlay_store_v1_tombstone(bx_ntvdm_dem_overlay_store_v1 *store,
     uint8_t drive_index, const wchar_t *relative);
+int bx_ntvdm_dem_overlay_store_v1_put_directory(bx_ntvdm_dem_overlay_store_v1 *store,
+    uint8_t drive_index, const wchar_t *relative, uint32_t attributes);
+int bx_ntvdm_dem_overlay_store_v1_tombstone_directory(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
+    const wchar_t *relative);
 const bx_ntvdm_dem_overlay_store_v1_entry *bx_ntvdm_dem_overlay_store_v1_lookup(
     const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
     const wchar_t *relative);

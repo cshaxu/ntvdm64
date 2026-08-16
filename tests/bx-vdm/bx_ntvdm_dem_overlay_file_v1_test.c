@@ -40,6 +40,12 @@ int main(void)
         !bx_ntvdm_dem_overlay_file_v1_open_shared(&files, 2u, L"WORK\\SHARE.TXT",
             BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE, 3u, 0, 0u, 0x20u, 1, 0, &second_token) ||
         !bx_ntvdm_dem_overlay_file_v1_close(&files, second_token) ||
+        !bx_ntvdm_dem_overlay_store_v1_put_directory(&store, 2u, L"WORK\\DIR", 0x10u) ||
+        (entry = bx_ntvdm_dem_overlay_store_v1_lookup(&store, 2u, L"work\\dir")) == 0 ||
+        entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY ||
+        !bx_ntvdm_dem_overlay_store_v1_tombstone_directory(&store, 2u, L"WORK\\DIR") ||
+        (entry = bx_ntvdm_dem_overlay_store_v1_lookup(&store, 2u, L"work\\dir")) == 0 ||
+        entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY_TOMBSTONE ||
         bx_ntvdm_dem_overlay_file_v1_open(&files, 2u, L"WORK\\GONE.TXT",
             BX_NTVDM_DEM_OVERLAY_FILE_V1_READ, 0, 0u, 0u, 0, 0, &token)) {
         bx_ntvdm_dem_overlay_file_v1_teardown(&files);
