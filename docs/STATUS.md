@@ -43,6 +43,11 @@
 > behavior; overlay and virtual are explicitly unavailable. This confirms the
 > later package must complete one provider view rather than add BOP-local
 > mode branches. See the [current-state map](etc/research/t221-s2-file-provider-current-state-001.md).
+> **T222 S1 P2 closure:** one selector-blind Direct/Readonly drive-view
+> provider design now groups the 15 services by source owner and transport,
+> with explicit CWD and clock-capability rules. The next S implements this
+> owner boundary, not individual BOP leaves; see the [P2 design]
+> (etc/research/t222-s1-drive-view-provider-design-001.md).
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
