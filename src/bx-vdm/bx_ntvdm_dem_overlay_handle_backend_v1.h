@@ -16,5 +16,7 @@ int bx_ntvdm_dem_overlay_handle_backend_v1_seek(bx_ntvdm_dem_file_session_v1 *se
     uint32_t origin, uint32_t *position_out);
 int bx_ntvdm_dem_overlay_handle_backend_v1_close(bx_ntvdm_dem_file_session_v1 *session,
     bx_ntvdm_dem_overlay_file_v1 *files, uint32_t token);
+int bx_ntvdm_dem_overlay_handle_backend_v1_flush(
+    bx_ntvdm_dem_file_session_v1 *session, uint32_t token);
 
 #endif

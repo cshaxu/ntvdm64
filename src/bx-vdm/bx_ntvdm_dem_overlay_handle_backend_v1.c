@@ -28,3 +28,6 @@ int bx_ntvdm_dem_overlay_handle_backend_v1_close(bx_ntvdm_dem_file_session_v1 *s
     bx_ntvdm_dem_overlay_file_v1_close(files, value) &&
     bx_ntvdm_dem_file_session_v1_release_backend(session, token,
         BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE); }
+int bx_ntvdm_dem_overlay_handle_backend_v1_flush(
+    bx_ntvdm_dem_file_session_v1 *session, uint32_t token)
+{ uint32_t value; return backend(session, token, &value); /* volatile COW: no host flush */ }
