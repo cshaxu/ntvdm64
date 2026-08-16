@@ -111,6 +111,7 @@ static int initialize_session(uint32_t mode,
         bx_ntvdm_dem_package_session_v1_set_mutation_profile(session, &mutation) &&
         bx_ntvdm_dem_package_session_v1_set_drive_snapshot(session, drives) &&
         bx_ntvdm_dem_package_session_v1_set_volume_snapshot(session, volumes) &&
+        bx_ntvdm_dem_package_session_v1_set_boot_drive(session, 2u) &&
         bx_ntvdm_dem_package_session_v1_set_drive_view_host_namespace(session, host) &&
         session->has_whole_provider == 0u && session->drive_view_host_namespace == host;
 }
@@ -130,6 +131,14 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
     if (!initialize_session(mode, &plane, &session, drives, volumes, host, ntdos, command,
             target, profile)) return 1;
 
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    if (!dispatch(&session, 0x0du, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (result.cpu_delta.gpr16_write_mask & 1u) == 0u ||
+        (result.cpu_delta.gpr16_values[0] & 0xffu) != 3u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 2;
+    }
     memset(ram + 0x120u, 0xa5, 71u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0u; cpu.esi = 0x120u; cpu.eax = 2u;

@@ -79,6 +79,9 @@
 > immutable admitted volume snapshot, preserving its CWD/DTA regression. This is the
 > required baseline for media/DPB/full-family assertions, not their closure; see the
 > [P7 record](etc/research/t222-s2-drive-view-session-volume-baseline-001.md).
+> **T222 S2 P8 progress:** selected-drive 50:0D is now asserted through the same
+> Direct/Readonly normal session, returning the admitted C: one-based identity; see the
+> [P8 record](etc/research/t222-s2-drive-view-selected-drive-regression-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
