@@ -291,6 +291,13 @@ int main(void)
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 238;
             }
+            memcpy(ram + 0x800u, direct_file_oem, strlen(direct_file_oem) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u;
+            if (!dispatch(&session, 0x2cu, &cpu, &result) || !cf_ax(&result, 5u)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 239;
+            }
             memcpy(ram + 0x800u, "C:\\*.COM", sizeof("C:\\*.COM"));
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.es = 0u; cpu.edi = 0x800u;
@@ -451,6 +458,22 @@ int main(void)
             cpu.ds = 0u; cpu.edx = 0x800u;
             if (!dispatch(&session, 0x05u, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 245;
+            }
+            memcpy(ram + 0x800u, direct_file_oem, strlen(direct_file_oem) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u;
+            if (!dispatch(&session, 0x2cu, &cpu, &result) || !success(&result) || token_from(&result) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 251;
+            }
+            token = token_from(&result); bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.esi = token & 0xffffu;
+            if (!dispatch(&session, 0x2eu, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 252;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u;
+            if (!dispatch(&session, 0x05u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 253;
             }
             if (!create_owned_direct_file(direct_fcb_delete_one) ||
                 !create_owned_direct_file(direct_fcb_delete_two)) {

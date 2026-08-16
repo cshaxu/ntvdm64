@@ -448,6 +448,11 @@
 > deliberately does not assume ambient host C: sort order; frozen Overlay/
 > Virtual behavior remains unchanged. See the [P61 record]
 > (etc/research/t221-s3-package-session-direct-readonly-fcb-search-001.md).
+> **T221 S3 P62 progress:** Direct now proves `2C→2E→05` FCB create/close/
+> cleanup in its self-owned temporary C: root, while Readonly receives
+> `CF/AX=5` from the shared file-view admission before creation. No FCB-local
+> profile exception was introduced, and Overlay/Virtual remain frozen; see the
+> [P62 record](etc/research/t221-s3-package-session-direct-readonly-fcb-create-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
