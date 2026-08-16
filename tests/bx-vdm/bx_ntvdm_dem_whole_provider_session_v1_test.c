@@ -37,6 +37,14 @@ static void cleanup_direct_temp_root(void)
  * historical 73-service/GSET fixture. */
 static uint8_t ram[0x100000];
 
+static int create_owned_direct_file(const char *path)
+{
+    HANDLE handle = CreateFileA(path, GENERIC_WRITE, 0u, 0, CREATE_ALWAYS,
+        FILE_ATTRIBUTE_NORMAL, 0);
+    if (handle == INVALID_HANDLE_VALUE) return 0;
+    return CloseHandle(handle) != 0;
+}
+
 int bx_ntvdm_mantle_execute_mechanical_action_v1(
     struct bx_ntvdm_mechanical_action_v1 *action)
 {
@@ -128,7 +136,7 @@ int main(void)
     byob_image command = { command_bytes, sizeof(command_bytes) }, target = { target_bytes, sizeof(target_bytes) };
     byob_profile_selection profile; bx_ntvdm_host_drive_snapshot_v1 drives;
     bx_ntvdm_host_namespace_v1 host; wchar_t root[4] = L"C:\\"; DWORD type;
-    wchar_t system_directory[MAX_PATH], temporary_path[MAX_PATH]; char fcb_host_path[MAX_PATH], direct_temp_oem[MAX_PATH], direct_file_oem[MAX_PATH], direct_renamed_oem[MAX_PATH], direct_dir_oem[MAX_PATH]; UINT system_length, temporary_length;
+    wchar_t system_directory[MAX_PATH], temporary_path[MAX_PATH]; char fcb_host_path[MAX_PATH], direct_temp_oem[MAX_PATH], direct_file_oem[MAX_PATH], direct_renamed_oem[MAX_PATH], direct_dir_oem[MAX_PATH], direct_fcb_delete_pattern[MAX_PATH], direct_fcb_rename_pattern[MAX_PATH], direct_fcb_rename_template[MAX_PATH], direct_fcb_delete_one[MAX_PATH], direct_fcb_delete_two[MAX_PATH], direct_fcb_rename_one[MAX_PATH], direct_fcb_rename_two[MAX_PATH], direct_fcb_rename_out_one[MAX_PATH], direct_fcb_rename_out_two[MAX_PATH]; UINT system_length, temporary_length;
     uint32_t index;
     profile_initialize(&profile); type = GetDriveTypeW(root);
     if (type == DRIVE_NO_ROOT_DIR || type == DRIVE_UNKNOWN) return 1;
@@ -151,7 +159,25 @@ int main(void)
         strcpy_s(direct_renamed_oem, MAX_PATH, direct_temp_oem) != 0 ||
         strcat_s(direct_renamed_oem, MAX_PATH, "\\RENAMED.DAT") != 0 ||
         strcpy_s(direct_dir_oem, MAX_PATH, direct_temp_oem) != 0 ||
-        strcat_s(direct_dir_oem, MAX_PATH, "\\DOSDIR") != 0) {
+        strcat_s(direct_dir_oem, MAX_PATH, "\\DOSDIR") != 0 ||
+        strcpy_s(direct_fcb_delete_pattern, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_delete_pattern, MAX_PATH, "\\FCBD?.DAT") != 0 ||
+        strcpy_s(direct_fcb_rename_pattern, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_rename_pattern, MAX_PATH, "\\FCBR?.DAT") != 0 ||
+        strcpy_s(direct_fcb_rename_template, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_rename_template, MAX_PATH, "\\REN??.TMP") != 0 ||
+        strcpy_s(direct_fcb_delete_one, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_delete_one, MAX_PATH, "\\FCBD1.DAT") != 0 ||
+        strcpy_s(direct_fcb_delete_two, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_delete_two, MAX_PATH, "\\FCBD2.DAT") != 0 ||
+        strcpy_s(direct_fcb_rename_one, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_rename_one, MAX_PATH, "\\FCBR1.DAT") != 0 ||
+        strcpy_s(direct_fcb_rename_two, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_rename_two, MAX_PATH, "\\FCBR2.DAT") != 0 ||
+        strcpy_s(direct_fcb_rename_out_one, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_rename_out_one, MAX_PATH, "\\RENR1.TMP") != 0 ||
+        strcpy_s(direct_fcb_rename_out_two, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_fcb_rename_out_two, MAX_PATH, "\\RENR2.TMP") != 0) {
         cleanup_direct_temp_root(); return 4;
     }
     drive_types[2] = (uint8_t)type;
@@ -264,6 +290,20 @@ int main(void)
             if (!dispatch(&session, 0x17u, &cpu, &result) || !cf_ax(&result, 5u)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 238;
+            }
+            memcpy(ram + 0x800u, "C:\\*.COM", sizeof("C:\\*.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.es = 0u; cpu.edi = 0x800u;
+            if (!dispatch(&session, 0x07u, &cpu, &result) || !cf_ax(&result, 5u)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 239;
+            }
+            memcpy(ram + 0x900u, "C:\\REN??.TMP", sizeof("C:\\REN??.TMP"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.es = 0u; cpu.edi = 0x900u;
+            if (!dispatch(&session, 0x20u, &cpu, &result) || !cf_ax(&result, 5u)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 246;
             }
         }
         /* Direct and Readonly use the declared merged snapshot.  The private
@@ -392,6 +432,35 @@ int main(void)
             cpu.ds = 0u; cpu.edx = 0x800u;
             if (!dispatch(&session, 0x05u, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 245;
+            }
+            if (!create_owned_direct_file(direct_fcb_delete_one) ||
+                !create_owned_direct_file(direct_fcb_delete_two)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 247;
+            }
+            memset(ram + 0x800u, 0, 128u);
+            memcpy(ram + 0x800u, direct_fcb_delete_pattern, strlen(direct_fcb_delete_pattern) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.es = 0u; cpu.edi = 0x800u;
+            if (!dispatch(&session, 0x07u, &cpu, &result) || !success(&result) ||
+                GetFileAttributesA(direct_fcb_delete_one) != INVALID_FILE_ATTRIBUTES ||
+                GetFileAttributesA(direct_fcb_delete_two) != INVALID_FILE_ATTRIBUTES) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 248;
+            }
+            if (!create_owned_direct_file(direct_fcb_rename_one) ||
+                !create_owned_direct_file(direct_fcb_rename_two)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 249;
+            }
+            memset(ram + 0x800u, 0, 128u); memset(ram + 0x900u, 0, 128u);
+            memcpy(ram + 0x800u, direct_fcb_rename_pattern, strlen(direct_fcb_rename_pattern) + 1u);
+            memcpy(ram + 0x900u, direct_fcb_rename_template, strlen(direct_fcb_rename_template) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.es = 0u; cpu.edi = 0x900u;
+            if (!dispatch(&session, 0x20u, &cpu, &result) || !success(&result) ||
+                GetFileAttributesA(direct_fcb_rename_one) != INVALID_FILE_ATTRIBUTES ||
+                GetFileAttributesA(direct_fcb_rename_two) != INVALID_FILE_ATTRIBUTES ||
+                GetFileAttributesA(direct_fcb_rename_out_one) == INVALID_FILE_ATTRIBUTES ||
+                GetFileAttributesA(direct_fcb_rename_out_two) == INVALID_FILE_ATTRIBUTES) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 250;
             }
         }
         /* Direct and Readonly retain OpenNT-style host file access.  Use a

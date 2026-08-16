@@ -436,6 +436,12 @@
 > seams, while Readonly's policy refusal and frozen Overlay/Virtual contracts
 > remain unchanged; see the [P59 record]
 > (etc/research/t221-s3-package-session-direct-namespace-positive-001.md).
+> **T221 S3 P60 progress:** Direct now proves FCB wildcard delete/rename
+> (`07,20`) over files in its self-owned temporary C: root; Readonly returns
+> `CF/AX=5` for the same pair before host enumeration. The rename witness
+> follows the original wildcard-template rule (`FCBR1.DAT → RENR1.TMP`), and
+> Overlay/Virtual behavior is unchanged; see the [P60 record]
+> (etc/research/t221-s3-package-session-direct-readonly-fcb-wildcard-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
