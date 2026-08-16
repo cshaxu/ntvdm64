@@ -52,6 +52,11 @@
 > package-session owner of copied profile, drive/volume, CWD and boot state;
 > normal DEM whole-provider regression remains green. See the [P1 migration]
 > (etc/research/t222-s2-drive-view-state-owner-migration-001.md).
+> **T222 S2 P2 progress:** the source-admitted observation/layout group
+> (`0E,0F,10,14,15,19,1C,25,41,46`) now routes through that provider while
+> package session retains checked mechanical write execution. Focused family and
+> whole-session x64 `/MT` fixtures pass; CWD/default-drive/DTA remains open. See
+> the [P2 migration](etc/research/t222-s2-drive-view-observation-route-migration-001.md).
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
@@ -2103,7 +2108,8 @@
   `/MT` closure, with no adapter/provider or product input; see [T198 S14
   witness](etc/research/t198-s14-msvc-x64-finite-hlt-witness-001.md).
 - M0 T198 S15 is complete: r6 repeats the neutral UD2 fixture under MSVC x64
-  `/MT` and observes the selector-blind copied-event bridge's typed controlled+  stop. Earlier r1--r5 observations are retained as rejected diagnostics;
+  `/MT` and observes the selector-blind copied-event bridge's typed controlled
++  stop. Earlier r1--r5 observations are retained as rejected diagnostics;
   no BOP/provider/OpenNT claim follows. See [T198 S15 observation](etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md)
   and [closure](history/m0-t198-s15-closure-20260813.md).
 - M0 T198 S16 is complete: the retained boot-namespace composition and its

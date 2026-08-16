@@ -1,4 +1,8 @@
 #include "bx_ntvdm_dem_drive_view_provider_v1.h"
+#include "bx_ntvdm_dem_computer_name_service_v1.h"
+#include "bx_ntvdm_dem_dpb_service.h"
+#include "bx_ntvdm_dem_full_dpb_service_v1.h"
+#include "bx_ntvdm_dem_media_id_service_v1.h"
 
 #include <string.h>
 
@@ -85,3 +89,71 @@ int bx_ntvdm_dem_drive_view_provider_v1_set_boot_drive(
     provider->has_boot_drive = 1u;
     return bx_ntvdm_dem_drive_view_provider_v1_valid(provider);
 }
+
+int bx_ntvdm_dem_drive_view_provider_v1_dispatch_observation(
+    bx_ntvdm_dem_drive_view_provider_v1 *provider,
+    const bx_ntvdm_bop_ingress_v1 *ingress,
+    const bx_ntvdm_bop_provider_selection_v1 *selection,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu_before,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_multi_write_transaction_v1 *transaction,
+    uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD],
+    uint32_t *needs_write,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    if (!bx_ntvdm_dem_drive_view_provider_v1_valid(provider) ||
+        !ingress || !selection || !event || !cpu_before || !window ||
+        !transaction || !payload || !needs_write || !result ||
+        !bx_ntvdm_dem_drive_view_provider_v1_owns_observation(ingress->service))
+        return 0;
+    *needs_write = 0u;
+    if (bx_ntvdm_dem_gset_plane_v1_dispatch(&provider->gset, ingress,
+            selection, event, cpu_before, window, result))
+        return 1;
+    if (provider->gset.has_volume_snapshot &&
+        bx_ntvdm_dem_media_id_service_v1_prepare(&provider->gset.volume_snapshot,
+            event, cpu_before, window, transaction, payload)) {
+        *needs_write = transaction->writes.write_count != 0u;
+        *result = transaction->result;
+        return 1;
+    }
+    if (provider->gset.has_volume_snapshot &&
+        bx_ntvdm_dem_media_id_service_v1_snapshot_failure(
+            &provider->gset.volume_snapshot, event, cpu_before, window, result))
+        return 1;
+    if (bx_ntvdm_dem_media_id_service_v1_set_failure(event, cpu_before,
+            window, result))
+        return 1;
+    if (bx_ntvdm_dem_computer_name_service_v1_prepare(event, cpu_before,
+            window, transaction, payload)) {
+        *needs_write = transaction->writes.write_count != 0u;
+        *result = transaction->result;
+        return 1;
+    }
+    if (provider->gset.has_volume_snapshot &&
+        bx_ntvdm_dem_full_dpb_service_v1_prepare(&provider->gset.volume_snapshot,
+            event, cpu_before, window, transaction, payload)) {
+        *needs_write = transaction->writes.write_count != 0u;
+        *result = transaction->result;
+        return 1;
+    }
+    if (provider->gset.has_volume_snapshot &&
+        bx_ntvdm_dem_full_dpb_service_v1_snapshot_failure(
+            &provider->gset.volume_snapshot, event, cpu_before, window, result))
+        return 1;
+    if (provider->gset.has_drive_snapshot &&
+        bx_ntvdm_dem_dpb_service_v1_prepare(provider->gset.drive_snapshot.types,
+            event, cpu_before, window, transaction, payload)) {
+        *needs_write = transaction->writes.write_count != 0u;
+        *result = transaction->result;
+        return 1;
+    }
+    return 0;
+}
+
+int bx_ntvdm_dem_drive_view_provider_v1_owns_observation(uint8_t service)
+{ return service == 0x0eu || service == 0x0fu || service == 0x10u ||
+    service == 0x14u || service == 0x15u || service == 0x19u ||
+    service == 0x1cu || service == 0x25u || service == 0x41u ||
+    service == 0x46u; }
