@@ -9,6 +9,7 @@
 #define DEM_ERROR_WRONG_DISK 34u
 
 #include "bx_ntvdm_dem_fcb_overlay_backend_v1.h"
+#include "bx_ntvdm_dem_virtual_namespace_backend_v1.h"
 
 static uint32_t token_bp(const bx_ntvdm_cpu_state_v1 *cpu)
 { return ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu); }
@@ -114,10 +115,20 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         DWORD disposition = service == 0x2cu ? CREATE_ALWAYS : OPEN_EXISTING;
         if (!oem_path || access == 0u) return error_result(boundary, result, DEM_ERROR_INVALID_FUNCTION);
         if (mode == 0x08u && service == 0x2cu) return error_result(boundary, result, DEM_ERROR_INVALID_FUNCTION);
-        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY ||
+            provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
             uint8_t drive; wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
             if (bx_ntvdm_dem_path_v1_resolve(oem_path, provider->cwd, &drive, relative) !=
-                BX_NTVDM_DEM_PATH_V1_OK || !bx_ntvdm_dem_fcb_overlay_backend_v1_open(
+                BX_NTVDM_DEM_PATH_V1_OK) return error_result(boundary, result, error);
+            if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
+                uint32_t virtual_attributes = 0u;
+                if (!bx_ntvdm_dem_virtual_namespace_backend_v1_open(&provider->files,
+                    &provider->overlay_files, drive, relative, access, service == 0x2cu ? 3u :
+                    overlay_share_mode(mode), disposition, mode, 0u, &opaque, &size, &error) ||
+                    !bx_ntvdm_dem_fcb_overlay_backend_v1_info(&provider->files,
+                    &provider->overlay_files, opaque, &virtual_attributes, &size, &time, &date))
+                    return error_result(boundary, result, error);
+            } else if (!bx_ntvdm_dem_fcb_overlay_backend_v1_open(
                     &provider->files, &provider->overlay_files, provider->host_namespace,
                     drive, relative, access, service == 0x2cu ? 3u :
                     overlay_share_mode(mode), disposition, mode, &opaque, &size,
@@ -148,7 +159,8 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
     if (service == 0x2eu) {
         opaque = token_si(cpu);
         if (opaque == 0u) return finish(boundary, result, 0u, 0, 0);
-        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY &&
+        if ((provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY ||
+             provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) &&
             bx_ntvdm_dem_overlay_handle_backend_v1_close(&provider->files,
                 &provider->overlay_files, opaque)) return finish(boundary, result, 0u, 0, 0);
         if (!bx_ntvdm_dem_file_session_v1_release(&provider->files, opaque))
@@ -204,7 +216,8 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
     {
         uint32_t kind = BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_NONE;
         if (bx_ntvdm_dem_file_session_v1_token_kind(&provider->files, opaque, &kind) &&
-            kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE) {
+            (kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE ||
+             kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE)) {
             uint32_t position, overlay_attributes, overlay_transferred;
             int32_t distance = (int32_t)(uint32_t)(((cpu->edi & 0xffffu) << 16) |
                 (cpu->edx & 0xffffu));

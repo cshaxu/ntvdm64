@@ -56,7 +56,8 @@ int bx_ntvdm_dem_fcb_io_route_partition_v1_claims_request(
     return provider != 0 && cpu != 0 && service == 0x2fu &&
         (bx_ntvdm_dem_file_session_v1_lookup(&provider->files, token(cpu), &ignored) ||
          (bx_ntvdm_dem_file_session_v1_token_kind(&provider->files, token(cpu), &kind) &&
-          kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE));
+          (kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE ||
+           kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE)));
 }
 
 int bx_ntvdm_dem_fcb_io_route_partition_v1_dispatch(
