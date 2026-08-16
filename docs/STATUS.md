@@ -266,6 +266,12 @@
 > PDB cleanup path; see the [token foundation]
 > (etc/research/t221-s3-virtual-private-token-foundation-001.md).
 
+> **T221 S3 P33 progress:** Virtual directory tombstones now mask private
+> descendants for both query and enumeration, preserving a single future
+> namespace/search/wildcard view. The no-host-I/O x64 fixture remains green;
+> see the [visibility record]
+> (etc/research/t221-s3-virtual-directory-tombstone-visibility-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

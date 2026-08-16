@@ -21,6 +21,9 @@ int main(void)
         !bx_ntvdm_dem_virtual_namespace_view_v1_query(&store, 2u, L"BIN\\TEST.COM", &node, &error) ||
         node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_FILE ||
         !bx_ntvdm_dem_virtual_namespace_view_v1_query(&store, 2u, L"MISSING.COM", &node, &error) ||
+        node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT || error != ERROR_FILE_NOT_FOUND ||
+        !bx_ntvdm_dem_overlay_store_v1_tombstone_directory(&store, 2u, L"BIN") ||
+        !bx_ntvdm_dem_virtual_namespace_view_v1_query(&store, 2u, L"BIN\\TEST.COM", &node, &error) ||
         node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT || error != ERROR_FILE_NOT_FOUND) {
         bx_ntvdm_dem_overlay_store_v1_teardown(&store); return 1;
     }

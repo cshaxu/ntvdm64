@@ -19,6 +19,28 @@ static int visible(const bx_ntvdm_dem_overlay_store_v1_entry *entry)
         entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY;
 }
 
+static int prefix(const wchar_t *path, const wchar_t *candidate)
+{
+    size_t length;
+    if (path == 0 || candidate == 0) return 0;
+    length = wcslen(candidate);
+    return _wcsnicmp(path, candidate, length) == 0 &&
+        (path[length] == L'\0' || path[length] == L'\\');
+}
+
+static int hidden(const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
+    const wchar_t *relative)
+{
+    uint32_t index;
+    for (index = 0u; index < store->count; ++index) {
+        const bx_ntvdm_dem_overlay_store_v1_entry *entry = &store->entries[index];
+        if (entry->drive_index == drive &&
+            entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY_TOMBSTONE &&
+            prefix(relative, entry->relative)) return 1;
+    }
+    return 0;
+}
+
 static int add(bx_ntvdm_host_namespace_entry_v1 *entries, uint32_t capacity,
     uint32_t *count, const bx_ntvdm_dem_overlay_store_v1_entry *entry,
     const wchar_t *name)
@@ -57,6 +79,7 @@ int bx_ntvdm_dem_virtual_namespace_view_v1_query(
         *error_out = ERROR_SUCCESS;
         return 1;
     }
+    if (hidden(store, drive, relative)) { *error_out = ERROR_FILE_NOT_FOUND; return 1; }
     entry = bx_ntvdm_dem_overlay_store_v1_lookup(store, drive, relative);
     if (entry == 0 || !visible(entry)) { *error_out = ERROR_FILE_NOT_FOUND; return 1; }
     node->kind = entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY ?
@@ -83,7 +106,8 @@ int bx_ntvdm_dem_virtual_namespace_view_v1_enumerate(
     for (index = 0u; index < store->count; ++index) {
         const bx_ntvdm_dem_overlay_store_v1_entry *entry = &store->entries[index];
         const wchar_t *name;
-        if (entry->drive_index != drive || !visible(entry) || !direct_child(relative, entry->relative)) continue;
+        if (entry->drive_index != drive || !visible(entry) || hidden(store, drive, entry->relative) ||
+            !direct_child(relative, entry->relative)) continue;
         name = entry->relative + (relative[0] == L'\0' ? 0u : wcslen(relative) + 1u);
         if (!add(entries, capacity, &count, entry, name)) { *error_out = ERROR_BUFFER_OVERFLOW; return 0; }
     }
