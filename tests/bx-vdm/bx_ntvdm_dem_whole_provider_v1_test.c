@@ -455,6 +455,15 @@ int main(void)
             if (!failed && (!bx_ntvdm_dem_overlay_namespace_view_v1_directory_empty(
                     &overlay->overlay_store, &space, overlay_drive, L"N64MVD99",
                     &overlay_empty, &overlay_error) || overlay_empty)) failed = 241;
+            {
+                bx_ntvdm_host_namespace_entry_v1 overlay_entries[4];
+                uint32_t overlay_entry_count = 0u;
+                if (!failed && (!bx_ntvdm_dem_overlay_namespace_view_v1_enumerate(
+                        &overlay->overlay_store, &space, overlay_drive, L"N64MVD99",
+                        overlay_entries, 4u, &overlay_entry_count, &overlay_error) ||
+                    overlay_error != ERROR_SUCCESS || overlay_entry_count != 1u ||
+                    _wcsicmp(overlay_entries[0].dos_name, L"CHILD.TXT") != 0)) failed = 243;
+            }
             if (!failed && (!bx_ntvdm_dem_overlay_mutation_backend_v1_create_directory(
                     &overlay->overlay_store, &space, overlay_drive, L"N64MUTD",
                     &overlay_error) || overlay_error != ERROR_SUCCESS ||

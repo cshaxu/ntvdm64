@@ -197,6 +197,12 @@
 > Overlay directory enumeration; Direct fallback is expressly rejected. See
 > the [P21 audit](etc/research/t221-s3-fcb-wildcard-overlay-enumeration-audit-001.md).
 
+> **T221 S3 P22 progress:** the required selector-blind Overlay visible
+> enumeration now merges host base, COW nodes, tombstones and relocations into
+> adapter-local DOS entries. Its focused whole-provider evidence passes; the
+> two wildcard services are still deliberately unbound. See the [P22 record]
+> (etc/research/t221-s3-overlay-visible-enumeration-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
