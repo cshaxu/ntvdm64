@@ -379,6 +379,12 @@
 > mutation or backend-token injection occurs. This is not FCB I/O/wildcard
 > closure; see the [P49 record]
 > (etc/research/t221-s3-package-session-private-fcb-chain-001.md).
+> **T221 S3 P50 progress:** the private Overlay/Virtual FCB chain now includes
+> `50:2F` write and read through the DTA guest-RAM address between `50:2D` open
+> and `50:2E` close. The original `AX:BP` token ABI and mechanical action path
+> are proven without host I/O. FCB wildcard/metadata and other profile legs
+> remain open; see the [P50 record]
+> (etc/research/t221-s3-package-session-private-fcb-io-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

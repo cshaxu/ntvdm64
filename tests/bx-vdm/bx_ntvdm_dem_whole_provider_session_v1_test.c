@@ -199,6 +199,23 @@ int main(void)
                 bx_ntvdm_host_namespace_v1_release(&host); return 90 + (int)index;
             }
             token = token_from(&result);
+            ram[0x400u] = 'a'; ram[0x401u] = 'b';
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            cpu.ecx = 2u; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x2fu, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 100 + (int)index;
+            }
+            ram[0x400u] = 0u; ram[0x401u] = 0u;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            cpu.ecx = 2u; cpu.ebx = 1u;
+            if (!dispatch(&session, 0x2fu, &cpu, &result) || !success(&result) ||
+                ram[0x400u] != 'a' || ram[0x401u] != 'b') {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 110 + (int)index;
+            }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = token >> 16; cpu.esi = token & 0xffffu;
             if (!dispatch(&session, 0x2eu, &cpu, &result) || !success(&result)) {
