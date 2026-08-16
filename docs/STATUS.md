@@ -2,61 +2,38 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T221 S3.** Its governing brief is the active
+> **Current effective packet: M0 T222 S1.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T221 S3 -- DEM file/handle/FCB/search whole-provider implementation.**
+**Active: M0 T222 S1 -- DEM Direct/Readonly drive-view source and ABI ledger.**
 
-> **T207 closed:** its passive normal-terminal sequence is recorded in
-> [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
-> [history](history/m0-t206-closure-20260815.md). **T205 closed:** its current-profile XMS boundary is recorded in
-> [history](history/m0-t205-closure-20260815.md). **T212 closed:** its CLI
-> lifecycle boundary is recorded in [history](history/m0-t212-closure-20260815.md).
-> **T213 closed:** its terminal model and COMMAND handoff are recorded in
-> [history](history/m0-t213-closure-20260815.md). **T214 closed:** its
-> current-profile composition admission recovery is recorded in
-> [history](history/m0-t214-closure-20260815.md). **T215 closed:** its
-> startup configuration attachment and causal classification are recorded in
-> [history](history/m0-t215-closure-20260815.md). **T216 closed:** its
-> declared executable-image visibility is recorded in
-> [history](history/m0-t216-closure-20260815.md). **T217 closed:** its
-> source-first COMMAND prerequisite and declared-image loader family closure
-> are recorded in [history](history/m0-t217-closure-20260815.md).
-> **T218 closed:** its guest DOS `$Exec` structural prerequisite map is
-> recorded in [history](history/m0-t218-closure-20260815.md).
-> **T219 closed:** its T200 current bound-route reconciliation is recorded in
-> [history](history/m0-t219-closure-20260815.md).
-> **T220 closed:** its bounded direct-token ownership transaction and rejected
-> lifecycle/JFT-SFT shortcuts are recorded in
-> [history](history/m0-t220-closure-20260815.md).
+> **T221 closed:** its Direct/Readonly whole-provider
+> closure is recorded in [history](history/m0-t221-closure-20260816.md).
 
 ## Active Packet
 
-> **T scope:** T221 recovers the DEM host namespace and handle owner package
-> as a coherent source-first unit: direct namespace, token handles, FCB,
-> search, device/VDD boundary and lifecycle disposition.  It begins with a
-> complete original-source/ABI/failure ledger and shared host-mutation profile
-> disposition; it neither promotes trace hits into leaf work nor treats the
-> existing direct-token slice as package closure.
+> **T scope:** T222 recovers the next complete DEM owner family as one shared
+> Direct/Readonly drive-view package: CWD, selected-drive state, clock,
+> checked DTA transport, DPB/media and machine identity.  It follows T221's
+> host namespace/file view but does not reopen it or promote BOP trace hits.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T221 S3, Ordinary Mode. |
-| Admission And Approval | T221 S2 P1--P2 establishes the complete 29-service provider state, profile, token, continuation, migration and regression design. Owner direction requires implementation by complete component package, not trace-led endpoint patches. |
-| Objective | Implement the one `dem_whole_provider` file/handle/FCB/search view backend for all selected identities in Direct/Readonly: retain and migrate source-shaped host paths, validate backend-kind tokens/continuations, preserve source-shaped failure/pipe-unavailable behavior, and deliver the two-profile family regression. Existing Overlay and Virtual code/evidence is frozen, not removed; new Overlay/Virtual work is deferred to TODO pending re-admission. |
-| Non-goals | No BOP implementation outside the 29-service package; no Redirector/pipe support; no JFT/SFT mirror or `50:3C` token cleanup; no new CCPU pointer or raw host-handle ABI; no raw-device/GSET/MISC work; no Bochs/mantle change; no native trace until package regression closes. |
-| Reference Baseline | T221 S1 ledger and P5 disposition; T221 S2 provider design; T202 S3 ABI map; T220 PDB/JFT/SFT limits; current `dem_whole_provider`, profile, namespace/handle/FCB/search, host namespace and test sources. |
-| Files And ABI Surface | `src/bx-vdm` provider/view/token/search/profile implementation and `tests/bx-vdm` package regression; only fixed-width existing adapter ABI and checked guest actions may cross the machine boundary. |
-| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Build focused MSVC x64 `/MT` package fixtures under recorded `build/M0-T221-S3/<run>` roots; prove all 29 identities route through one provider view; run Direct/Readonly positive and negative family cases; retain existing Overlay/Virtual evidence without adding behavior; prove pipes remain unavailable and no profile fallback occurs; inspect diff, run `git diff --check` and governance verification. |
-| Expected Markers | One provider state/view owner, backend-kind/generation validation, no host pointers/handles in guest values, no selector-local profile policy, source-shaped source/failure results, and a complete 29-service family regression. |
-| Asset Needs | Existing OpenNT/current source, local MSVC x64 `/MT`, existing test harnesses and disposable build roots; no new firmware, guest media or external source import. |
-| Reporting Requirements | Per P record changed source/test interfaces, source-contract mapping, build command/result, profile/subfamily coverage, negative isolation proof, retained limitation and next package P. |
-| Stop Conditions | A need for new guest ABI/range, source behavior outside the defined package, JFT/SFT reconstruction, `50:3C` lifecycle binding, pipe/Redirector or raw-device implementation, Bochs/mantle change, native trace before full regression, guest binary patch or external import pauses S3 for re-admission. |
-| Exit Criteria | All 29 identities enter the one provider view with source-reviewed Direct/Readonly disposition and full-family positive/negative regression; existing Overlay/Virtual code/evidence remains retained and their uncompleted work is recorded in TODO; pipes remain source-labelled unavailable; a source-built composition closes before any separately admitted native trace. |
-| Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Every selected identity and its source peer; Direct/Readonly views; token kind/generation/PDB owner; stale continuation; DTA/SRCHBUF integrity; namespace mutation and FCB wildcard paths; direct host error mapping; pipes; session teardown; current CWD/drive root; declared startup images; PDB/JFT/SFT boundaries; retained selector-blind seams; and retention (not expansion) of existing Overlay/Virtual evidence. |
-
+| Identifier Mode | M0 T222 S1, Ordinary Mode. |
+| Admission And Approval | Owner direction: complete remaining BOPs by original component package; Direct and Readonly first, retained Overlay/Virtual interfaces without new behavior. T200/T219 global BOP audit and T221 closure select this adjacent DEM owner family. |
+| Objective | Establish the full original-source/ABI/failure and four-rung recovery ledger for `0D,0E,0F,10,13,14,15,18,19,1A,1B,1C,25,41,46`, then admit one shared Direct/Readonly provider plan—not endpoint patches. |
+| Non-goals | No raw-media/DASD (`21,29,2A`), file/handle/FCB/search reopen, Redirector, COMMAND, XMS, DPMI, WOW, Bochs/mantle change, Overlay/Virtual behavior, or native trace. |
+| Reference Baseline | T200 S31 host-integrated BOP ledger; T219 reconciliation; T221 closure; OpenNT `demgset.c`, `demdir.c`, `demdisp.c`, `demmsg.c` and existing bx-vdm drive/CWD/DPB/DTA/clock sources. |
+| Files And ABI Surface | Initial S1 is source/evidence and may update only `docs/etc/research`, Status and the inventory. Any later implementation remains in the existing fixed-width `src/bx-vdm` host capability/provider seams. |
+| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
+| Verification | Complete one non-overlapping service ledger with original source, caller/register/memory ABI, failure rule, historical dependency, profile disposition and current-route/workaround decision; verify documentation governance and diff. |
+| Expected Markers | Every selected identity has exactly one original owner and one package disposition; unavailable historical APIs are explicit evidence, not a blocker or silent rewrite. |
+| Asset Needs | Existing OpenNT source and current tracked code only; no external import, firmware, guest media or runtime build. |
+| Reporting Requirements | Record per-identity source/rung/reuse disposition, API availability/permission verdict, retained/deleted/migrated workaround and implementation grouping. |
+| Stop Conditions | Need for raw-device policy, new guest ABI/range, JFT/SFT reconstruction, historical host/kernel rebuild, Bochs change, external import or trace-led service work pauses for re-admission. |
+| Exit Criteria | One source-reviewed ledger and package plan covers all 15 identities, including explicit disposition for unavailable or privilege-sensitive host APIs, and names a safe coherent S2 implementation boundary. |
+| Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
+| Similar-Issue Sweep | Selected drive filtering, host CWD/session scope, privilege-sensitive time/set-drive behavior, DTA/DPB fixed layouts, volume/media identity, synthetic-root leftovers, Direct/Readonly fallback isolation and current provider ownership. |
 > **T221 S2 P1 progress:** current code has the correct package-local state
 > owners and shared profile authority, but only direct/readonly backends have
 > behavior; overlay and virtual are explicitly unavailable. This confirms the
