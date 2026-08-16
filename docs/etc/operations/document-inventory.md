@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1574 |
+| Documentation records | 1575 |
 | --- | --- |
-| Generated UTC | 2026-08-16T02:18:39Z |
+| Generated UTC | 2026-08-16T02:19:54Z |
 
 ## Entries
 
@@ -787,6 +787,7 @@ content-divergent entries.
 | etc/research/t221-s3-file-view-boundary-001.md | indexed supporting material | ab04ce734ba6eb8f26c2b57dd6be267c8352d5eea3f061730fed2b907286bec9 |
 | etc/research/t221-s3-overlay-file-object-001.md | indexed supporting material | 2da03f8fdf0b5b5965a5d04f1a24e16e088078d4e80997b6e2beb929b0263e9a |
 | etc/research/t221-s3-overlay-handle-subfamily-001.md | indexed supporting material | 1d88ad079400bb99d8e69bb3f4e43834eb5e89a21b1243c3b4d7b6a27ce7caf4 |
+| etc/research/t221-s3-overlay-namespace-mutation-admission-001.md | indexed supporting material | dbb37183af662294fa3a779ee8c4963d3cefa9145c8b6ee203ce693b7be89594 |
 | etc/research/t221-s3-overlay-namespace-open-closure-001.md | indexed supporting material | 1ade1a8c3b969a83c73c5126ad0b7934505cc494d394ff1c9d695d313682c410 |
 | etc/research/t221-s3-overlay-namespace-source-abi-audit-001.md | indexed supporting material | b74d9aada6b018405e907a2494709cb8406e50d8d637996f4944185887508dd0 |
 | etc/research/t221-s3-overlay-resolver-001.md | indexed supporting material | c8283e6d6231f07fdea7896a7253334839952f5e9917ef83e88b7049441e6a6f |
