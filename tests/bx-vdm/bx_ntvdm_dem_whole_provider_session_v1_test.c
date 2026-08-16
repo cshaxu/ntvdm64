@@ -325,6 +325,25 @@ int main(void)
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 70 + (int)index;
             }
+            /* OpenNT demFindFirstFCB/demFindNextFCB retain their separate
+             * SRCHBUF contract: first gathers DS:SI + ES:DI + PDB, then next
+             * consumes that same SRCHBUF token state. */
+            memset(ram + 0x600u, 0, 53u);
+            memcpy(ram + 0x700u, "C:\\*.COM", sizeof("C:\\*.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x600u; cpu.es = 0u; cpu.edi = 0x700u;
+            if (!dispatch(&session, 0x0au, &cpu, &result) || !success(&result) ||
+                (ram[0x620u] | ram[0x621u] | ram[0x622u] | ram[0x623u] |
+                 ram[0x624u] | ram[0x625u] | ram[0x626u] | ram[0x627u]) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 75 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x600u;
+            if (!dispatch(&session, 0x0cu, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 77 + (int)index;
+            }
         }
         /* Direct package chain: the test-owned temporary root permits an
          * original-shaped create/write/seek/read/time/commit/close/delete

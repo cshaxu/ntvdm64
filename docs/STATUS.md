@@ -442,6 +442,12 @@
 > follows the original wildcard-template rule (`FCBR1.DAT → RENR1.TMP`), and
 > Overlay/Virtual behavior is unchanged; see the [P60 record]
 > (etc/research/t221-s3-package-session-direct-readonly-fcb-wildcard-001.md).
+> **T221 S3 P61 progress:** Direct and Readonly now both prove the FCB search
+> continuation pair `0A→0C` through one package session: checked SRCHBUF/path/
+> PDB gather, returned continuation state, then consumed next state. The witness
+> deliberately does not assume ambient host C: sort order; frozen Overlay/
+> Virtual behavior remains unchanged. See the [P61 record]
+> (etc/research/t221-s3-package-session-direct-readonly-fcb-search-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
