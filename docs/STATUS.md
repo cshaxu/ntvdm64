@@ -246,6 +246,13 @@
 > not provider or runtime closure; see the [all-family audit]
 > (etc/research/t221-s3-t200-current-bound-route-audit-001.md).
 
+> **T221 S3 P30 progress:** the default-off Virtual boot-volume implementation
+> is now constrained to one selector-blind private-root view. It reuses the
+> existing profile, private-token and checked-transaction contracts but may
+> not call an admitted host root or reuse Overlay COW materialization. CLI and
+> engine admission remain outside the package until its full family regression;
+> see the [source/ABI map](etc/research/t221-s3-virtual-namespace-source-abi-map-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
