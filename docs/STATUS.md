@@ -114,6 +114,13 @@
 > Overlay metadata owner is admitted. Namespace/FCB/search and Virtual remain
 > open, so this is only a subfamily checkpoint. See the [P7 record](etc/research/t221-s3-overlay-handle-subfamily-001.md).
 
+> **T221 S3 P8 progress:** source/ABI review of the Overlay namespace
+> open/create subfamily proves that `50:03/12/22` must wait for one shared
+> private access/share/disposition/attribute request, rather than attaching
+> the existing base-file resolver to individual BOPs. The unresolved
+> volume-label and Redirector paths remain explicit exclusions. See the [P8
+> audit](etc/research/t221-s3-overlay-namespace-source-abi-audit-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
