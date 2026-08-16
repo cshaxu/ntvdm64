@@ -125,6 +125,12 @@ int main(void)
         GetShortPathNameW(temporary, short_name, MAX_PATH) == 0u ||
         short_name[1] != L':' || WideCharToMultiByte(CP_OEMCP, 0, short_name,
             -1, oem_short, (int)sizeof(oem_short), 0, 0) == 0) return 1;
+    file = CreateFileW(temporary, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE |
+        FILE_SHARE_DELETE, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+    if (file == INVALID_HANDLE_VALUE || !WriteFile(file, "host", 4u, &written, 0) ||
+        written != 4u) { if (file != INVALID_HANDLE_VALUE) CloseHandle(file); return 1; }
+    if (!CloseHandle(file)) return 1;
+    file = INVALID_HANDLE_VALUE;
     drive = (uint8_t)(towupper((wint_t)short_name[0]) - L'A');
     snapshot.magic = BX_NTVDM_HOST_DRIVE_SNAPSHOT_V1_MAGIC;
     snapshot.version = BX_NTVDM_HOST_DRIVE_SNAPSHOT_V1_VERSION;
@@ -402,6 +408,10 @@ int main(void)
             if (!failed && (!bx_ntvdm_dem_file_session_v1_token_kind(&overlay->files,
                     opened, &service) || service != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE))
                 failed = 227;
+            file = CreateFileW(temporary, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, 0, 0);
+            if (!failed && (file == INVALID_HANDLE_VALUE || !ReadFile(file, output, 4u, &written, 0) ||
+                written != 4u || memcmp(output, "host", 4u) != 0)) failed = 232;
+            if (file != INVALID_HANDLE_VALUE) { CloseHandle(file); file = INVALID_HANDLE_VALUE; }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(overlay, 0x22u,
                     &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
