@@ -367,6 +367,12 @@
 > and Virtual intentionally remain outside this declared-snapshot path pending
 > their private-view legs. See the [P47 record]
 > (etc/research/t221-s3-package-session-declared-search-001.md).
+> **T221 S3 P48 progress:** all four profile sessions now cover the original
+> FCB date (`50:30`) and zero-token close (`50:2E`) terminals. The declared
+> pathname search pattern is narrowed to the two declared COM images and proves
+> continuation by a successful `50:0B`, not random-token byte values. FCB
+> file/I-O and private search remain open. See the [P48 record]
+> (etc/research/t221-s3-package-session-fcb-terminals-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

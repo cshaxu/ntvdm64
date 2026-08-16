@@ -166,11 +166,10 @@ int main(void)
             memset(ram + 0x600u, 0, 43u);
             ram[0x400u] = 0x00u; ram[0x401u] = 0x06u;
             ram[0x402u] = 0x00u; ram[0x403u] = 0x00u;
-            memcpy(ram + 0x700u, "C:\\*.*", sizeof("C:\\*.*"));
+            memcpy(ram + 0x700u, "C:\\*.COM", sizeof("C:\\*.COM"));
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.ds = 0u; cpu.edx = 0x700u; cpu.ecx = 0u;
-            if (!dispatch(&session, 0x09u, &cpu, &result) || !success(&result) ||
-                ram[0x600u] == 0u || ram[0x601u] == 0u) {
+            if (!dispatch(&session, 0x09u, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 60 + (int)index;
             }
@@ -179,6 +178,20 @@ int main(void)
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 70 + (int)index;
             }
+        }
+        /* The source-owned FCB direct route has two safe, profile-independent
+         * terminals: DOS date query and no-op close of a zero opaque token. */
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!dispatch(&session, 0x30u, &cpu, &result) || !success(&result) ||
+            (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 2u))) !=
+                ((1u << 0u) | (1u << 2u))) {
+            bx_ntvdm_dem_package_session_v1_teardown(&session);
+            bx_ntvdm_host_namespace_v1_release(&host); return 80 + (int)index;
+        }
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!dispatch(&session, 0x2eu, &cpu, &result) || !success(&result)) {
+            bx_ntvdm_dem_package_session_v1_teardown(&session);
+            bx_ntvdm_host_namespace_v1_release(&host); return 90 + (int)index;
         }
         /* All four profile views must reach the same installed provider. */
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
