@@ -1,0 +1,592 @@
+﻿{
+    "schema":  "ntdos64.t221.s1.dem-workaround-disposition.v1",
+    "generatedUtc":  "2026-08-16T00:38:54.8538934Z",
+    "serviceCount":  73,
+    "staticOnly":  true,
+    "entries":  [
+                    {
+                        "identity":  "50:00",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "currentFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:01",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:02",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "currentFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:03",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:04",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:05",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:06",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:07",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM FCB path seam",
+                        "currentFallback":  "cli-unavailable after partition rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:08",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "currentFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:09",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "currentFallback":  "cli-unavailable after search-provider rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:0A",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "currentFallback":  "cli-unavailable after search-provider rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:0B",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "currentFallback":  "cli-unavailable after search-provider rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:0C",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "currentFallback":  "cli-unavailable after search-provider rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:0D",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:0E",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "replace: generic fallback with source-shaped shared drive/volume capability result"
+                    },
+                    {
+                        "identity":  "50:0F",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:10",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "replace: generic fallback with source-shaped shared drive/volume capability result"
+                    },
+                    {
+                        "identity":  "50:11",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:12",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:13",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:14",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:15",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:16",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "currentFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:17",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:18",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:19",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:1A",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:1B",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:1C",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:1D",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:1E",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "currentFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:1F",
+                        "sourceOwnerGroup":  "original-noop",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentShim":  null,
+                        "currentFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "disposition":  "retain: original CF-clear no-op contract is already the owner result"
+                    },
+                    {
+                        "identity":  "50:20",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM FCB path seam",
+                        "currentFallback":  "cli-unavailable after partition rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:21",
+                        "sourceOwnerGroup":  "dasd-ioctl",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "migrate: retain metadata subfunctions under explicit raw-device profile policy; keep unsupported subfunctions unavailable"
+                    },
+                    {
+                        "identity":  "50:22",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:23",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:24",
+                        "sourceOwnerGroup":  "original-noop",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentShim":  null,
+                        "currentFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "disposition":  "retain: original CF-clear no-op contract is already the owner result"
+                    },
+                    {
+                        "identity":  "50:25",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:26",
+                        "sourceOwnerGroup":  "original-noop",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentShim":  null,
+                        "currentFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "disposition":  "retain: original CF-clear no-op contract is already the owner result"
+                    },
+                    {
+                        "identity":  "50:27",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "currentFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:28",
+                        "sourceOwnerGroup":  "original-noop",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentShim":  null,
+                        "currentFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "disposition":  "retain: original CF-clear no-op contract is already the owner result"
+                    },
+                    {
+                        "identity":  "50:29",
+                        "sourceOwnerGroup":  "dasd-ioctl",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "retain: source-shaped no-BDS/raw-device unavailable result until a device profile exists"
+                    },
+                    {
+                        "identity":  "50:2A",
+                        "sourceOwnerGroup":  "dasd-ioctl",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "retain: source-shaped no-BDS/raw-device unavailable result until a device profile exists"
+                    },
+                    {
+                        "identity":  "50:2B",
+                        "sourceOwnerGroup":  "original-noop",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentShim":  null,
+                        "currentFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "disposition":  "retain: original CF-clear no-op contract is already the owner result"
+                    },
+                    {
+                        "identity":  "50:2C",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:2D",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM FCB path seam",
+                        "currentFallback":  "cli-unavailable after partition rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:2E",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB direct/I-O partition when DTA prerequisites hold",
+                        "currentShim":  "T202 direct-host DEM FCB state seam",
+                        "currentFallback":  "cli-unavailable after prerequisite or provider rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:2F",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB direct/I-O partition when DTA prerequisites hold",
+                        "currentShim":  "T202 direct-host DEM FCB state seam",
+                        "currentFallback":  "cli-unavailable after prerequisite or provider rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:30",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "replace: generic fallback with the original local-clock FCB contract in the FCB package"
+                    },
+                    {
+                        "identity":  "50:31",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM FCB path seam",
+                        "currentFallback":  "cli-unavailable after partition rejection",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:32",
+                        "sourceOwnerGroup":  "error-lock",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "replace: generic cli-unavailable with source-shaped error/lock owner disposition"
+                    },
+                    {
+                        "identity":  "50:33",
+                        "sourceOwnerGroup":  "error-lock",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "replace: generic cli-unavailable with source-shaped error/lock owner disposition"
+                    },
+                    {
+                        "identity":  "50:34",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:35",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:36",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:37",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:38",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:39",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:3A",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:3B",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:3C",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-session-lifecycle-provider -\u003e finite boot-namespace termination only",
+                        "currentShim":  null,
+                        "currentFallback":  "stale for direct host resources: no copied PDB ownership, so direct file/search resources are not released",
+                        "disposition":  "replace: finite boot cleanup cannot stand for complete PDB/VDD/DOS_ABORT lifecycle ownership"
+                    },
+                    {
+                        "identity":  "50:3D",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:3E",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "currentFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:3F",
+                        "sourceOwnerGroup":  "error-lock",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "replace: generic cli-unavailable with source-shaped error/lock owner disposition"
+                    },
+                    {
+                        "identity":  "50:40",
+                        "sourceOwnerGroup":  "original-noop",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentShim":  null,
+                        "currentFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "disposition":  "retain: original CF-clear no-op contract is already the owner result"
+                    },
+                    {
+                        "identity":  "50:41",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:42",
+                        "sourceOwnerGroup":  "fastread-exception",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: absorb or replace the standalone compatibility branch in the complete DEM token-I/O package"
+                    },
+                    {
+                        "identity":  "50:43",
+                        "sourceOwnerGroup":  "original-noop",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentShim":  null,
+                        "currentFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "disposition":  "retain: original CF-clear no-op contract is already the owner result"
+                    },
+                    {
+                        "identity":  "50:44",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "migrate: retain seam only as a shared-profile backend of the complete file/handle/FCB/search package"
+                    },
+                    {
+                        "identity":  "50:45",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentShim":  null,
+                        "currentFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "disposition":  "migrate: retain only documented no-VDD/no-debug/no-WOW or terminal result inside the formal MISC/lifecycle package"
+                    },
+                    {
+                        "identity":  "50:46",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "currentFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "disposition":  "migrate: retain snapshot/context seam under the shared profile ABI and GSET package"
+                    },
+                    {
+                        "identity":  "50:47",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "retain: explicit Redirector-deferred pipe unavailable fence"
+                    },
+                    {
+                        "identity":  "50:48",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "currentFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "disposition":  "retain: explicit Redirector-deferred pipe unavailable fence"
+                    }
+                ]
+}

@@ -83,6 +83,12 @@
 > It does not upgrade historical fixture evidence into current package
 > closure. See the [recovery ledger](etc/research/t221-s1-dem-recovery-ledger-001.md).
 
+> **T221 S1 P5 closure:** the current shim/fallback action is now explicit
+> for all 73 DEM services: 55 migrate, seven replace, and eleven retain; no
+> deletion is yet justified. S1 is complete and recommends a package-wide
+> file/handle/FCB/search provider disposition next, rather than a trace-led
+> endpoint patch. See the [workaround disposition](etc/research/t221-s1-dem-workaround-disposition-001.md).
+
 > **T220 S1 P1 closure:** OpenNT proves `50:36` is only DOS-entry/VDD
 > notification.  The historical resource contract instead roots in the
 > guest-published `pusCurrentPDB`, PDB/JFT/SFT mappings and a guarded
