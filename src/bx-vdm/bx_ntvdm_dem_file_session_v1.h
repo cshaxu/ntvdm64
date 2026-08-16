@@ -17,7 +17,8 @@ enum bx_ntvdm_dem_file_token_kind_v1 {
     BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_NONE = 0u,
     BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE = 1u,
     BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE = 2u,
-    BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE = 3u
+    BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE = 3u,
+    BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE = 4u
 };
 
 /* The token is a copied guest-visible value, not a Win32 handle.  The low

@@ -259,6 +259,13 @@
 > startup or CLI admission is bound, so executable Virtual remains unavailable.
 > See the [foundation record](etc/research/t221-s3-virtual-private-root-foundation-001.md).
 
+> **T221 S3 P32 progress:** one selector-blind Virtual open/create backend
+> now returns only `VIRTUAL_FILE` opaque tokens over private storage. Its x64
+> `/MT` probe proves create/read/write/stale-token/not-found behavior with no
+> host I/O. It remains below BOP routing and does not extend the Direct-only
+> PDB cleanup path; see the [token foundation]
+> (etc/research/t221-s3-virtual-private-token-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

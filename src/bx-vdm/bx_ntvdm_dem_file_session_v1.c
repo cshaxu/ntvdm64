@@ -49,7 +49,8 @@ int bx_ntvdm_dem_file_session_v1_valid(
             if (slot->handle == 0 || slot->handle == INVALID_HANDLE_VALUE ||
                 slot->backend_token != 0u) return 0;
         } else if (slot->kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE ||
-                   slot->kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE) {
+                   slot->kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE ||
+                   slot->kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE) {
             if (slot->handle != INVALID_HANDLE_VALUE || slot->backend_token == 0u)
                 return 0;
         } else return 0;
@@ -115,7 +116,8 @@ int bx_ntvdm_dem_file_session_v1_adopt_backend(
     if (token_out != 0) *token_out = 0u;
     if (!bx_ntvdm_dem_file_session_v1_valid(session) || token_out == 0 ||
         (kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE &&
-         kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE) ||
+         kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE &&
+         kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE) ||
         backend_token == 0u) return 0;
     for (index = 0u; index < BX_NTVDM_DEM_FILE_SESSION_V1_MAX_TOKENS; ++index) {
         bx_ntvdm_dem_file_token_slot_v1 *slot = &session->slots[index];
@@ -157,7 +159,8 @@ int bx_ntvdm_dem_file_session_v1_lookup_backend(
     if (backend_token_out != 0) *backend_token_out = 0u;
     if (!bx_ntvdm_dem_file_session_v1_valid(session) || backend_token_out == 0 ||
         (expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE &&
-         expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE) ||
+         expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE &&
+         expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE) ||
         !decode(token, &index, &generation)) return 0;
     slot = &session->slots[index];
     if (slot->in_use == 0u || slot->generation != generation ||
@@ -204,7 +207,8 @@ int bx_ntvdm_dem_file_session_v1_release_backend(
     bx_ntvdm_dem_file_token_slot_v1 *slot;
     if (!bx_ntvdm_dem_file_session_v1_valid(session) ||
         (expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE &&
-         expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE) ||
+         expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE &&
+         expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE) ||
         !decode(token, &index, &generation)) return 0;
     slot = &session->slots[index];
     if (slot->in_use == 0u || slot->generation != generation ||
