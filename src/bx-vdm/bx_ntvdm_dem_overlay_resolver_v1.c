@@ -30,6 +30,20 @@ static int load_base(const bx_ntvdm_host_namespace_v1 *space, uint8_t drive,
     return 1;
 }
 
+static int share_conflict(const bx_ntvdm_dem_overlay_file_v1 *files,
+    uint8_t drive, const wchar_t *relative, uint32_t access, uint32_t share)
+{
+    uint32_t index;
+    for (index = 0u; index < BX_NTVDM_DEM_OVERLAY_FILE_V1_MAX_HANDLES; ++index) {
+        const bx_ntvdm_dem_overlay_file_v1_handle *open = &files->handles[index];
+        if (open->in_use && open->drive_index == drive &&
+            _wcsicmp(open->relative, relative) == 0 &&
+            ((open->share_access & access) != access ||
+             (share & open->access) != open->access)) return 1;
+    }
+    return 0;
+}
+
 int bx_ntvdm_dem_overlay_resolver_v1_open_shared(bx_ntvdm_dem_overlay_file_v1 *files,
     const bx_ntvdm_host_namespace_v1 *space, uint8_t drive, const wchar_t *relative,
     uint32_t access, uint32_t share_access, DWORD disposition, uint32_t *token_out, uint32_t *size_out,
@@ -60,6 +74,9 @@ int bx_ntvdm_dem_overlay_resolver_v1_open_shared(bx_ntvdm_dem_overlay_file_v1 *f
         if ((access & BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE) == 0u) { *error_out = ERROR_ACCESS_DENIED; goto done; }
         truncate = 1; break;
     default: *error_out = ERROR_INVALID_PARAMETER; goto done;
+    }
+    if (share_conflict(files, drive, relative, access, share_access)) {
+        *error_out = ERROR_SHARING_VIOLATION; goto done;
     }
     if (!bx_ntvdm_dem_overlay_file_v1_open_shared(files, drive, relative, access, share_access, base,
             base_count, attributes, exists, !exists, &token)) { *error_out = ERROR_NOT_ENOUGH_MEMORY; goto done; }
