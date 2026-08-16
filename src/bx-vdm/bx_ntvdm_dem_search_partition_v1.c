@@ -2,6 +2,8 @@
 
 #include "bx_ntvdm_dem_fcb_search_service_v1.h"
 #include "bx_ntvdm_dem_path_search_service_v1.h"
+#include "bx_ntvdm_dem_overlay_namespace_view_v1.h"
+#include "bx_ntvdm_search_request_v1.h"
 
 #include <string.h>
 
@@ -18,6 +20,25 @@ static int real_address(uint16_t segment, uint16_t offset, uint64_t bytes,
         address > BX_NTVDM_DEM_SEARCH_APERTURE - bytes) return 0;
     *address_out = address;
     return 1;
+}
+
+static int overlay_entries(const bx_ntvdm_dem_whole_provider_v1 *provider,
+    const bx_ntvdm_search_query_v1 *query,
+    bx_ntvdm_host_namespace_entry_v1 **entries_out, uint32_t *count_out)
+{
+    bx_ntvdm_host_namespace_entry_v1 *entries;
+    DWORD error = ERROR_SUCCESS;
+    if (entries_out) *entries_out = 0; if (count_out) *count_out = 0u;
+    if (provider == 0 || query == 0 || entries_out == 0 || count_out == 0) return 0;
+    entries = (bx_ntvdm_host_namespace_entry_v1 *)HeapAlloc(GetProcessHeap(),
+        HEAP_ZERO_MEMORY, BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES * sizeof(*entries));
+    if (entries == 0) return 0;
+    if (!bx_ntvdm_dem_overlay_namespace_view_v1_enumerate(&provider->overlay_store,
+            provider->host_namespace, query->drive_index, query->relative_directory,
+            entries, BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES, count_out, &error)) {
+        HeapFree(GetProcessHeap(), 0u, entries); return 0;
+    }
+    *entries_out = entries; return 1;
 }
 
 int bx_ntvdm_dem_search_partition_v1_owns_service(uint8_t service)
@@ -94,7 +115,17 @@ int bx_ntvdm_dem_search_partition_v1_complete(
             action->ranges[0].length != 128u || action->ranges[1].length != 4u ||
             action->ranges[2].length != 2u || !real_address(word(copied + 130u),
             word(copied + 128u), 43u, &output_address)) return 0;
-        result = bx_ntvdm_search_transaction_v1_path_first_merged(&provider->search,
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
+            bx_ntvdm_search_query_v1 query; bx_ntvdm_host_namespace_entry_v1 *entries;
+            uint32_t count;
+            if (!bx_ntvdm_search_request_v1_decode_first_path(copied,
+                    (uint16_t)cpu_before->ecx, &query) || !overlay_entries(provider,
+                    &query, &entries, &count)) return 0;
+            result = bx_ntvdm_search_transaction_v1_path_first_entries(&provider->search,
+                entries, count, query.drive_index, boundary, cpu_before, word(copied + 132u),
+                output_address, copied, (uint16_t)cpu_before->ecx, transaction, payload, payload_bytes);
+            HeapFree(GetProcessHeap(), 0u, entries);
+        } else result = bx_ntvdm_search_transaction_v1_path_first_merged(&provider->search,
             provider->host_namespace, provider->declared_search_snapshot, boundary, cpu_before, word(copied + 132u),
             output_address, copied, (uint16_t)cpu_before->ecx, transaction,
             payload, payload_bytes);
@@ -104,7 +135,18 @@ int bx_ntvdm_dem_search_partition_v1_complete(
         if (copied_bytes != 183u || action->range_count != 3u ||
             action->ranges[0].length != 53u || action->ranges[1].length != 128u ||
             action->ranges[2].length != 2u) return 0;
-        result = bx_ntvdm_search_transaction_v1_fcb_first_merged(&provider->search,
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
+            bx_ntvdm_search_query_v1 query; bx_ntvdm_host_namespace_entry_v1 *entries;
+            uint32_t count;
+            if (!bx_ntvdm_search_request_v1_decode_first_fcb(copied + 53u,
+                    (uint8_t)cpu_before->eax, (uint8_t)cpu_before->edx, &query) ||
+                !overlay_entries(provider, &query, &entries, &count)) return 0;
+            result = bx_ntvdm_search_transaction_v1_fcb_first_entries(&provider->search,
+                entries, count, query.drive_index, boundary, cpu_before, word(copied + 181u),
+                action->ranges[0].address, copied + 53u, (uint8_t)cpu_before->eax,
+                (uint8_t)cpu_before->edx, transaction, payload, payload_bytes);
+            HeapFree(GetProcessHeap(), 0u, entries);
+        } else result = bx_ntvdm_search_transaction_v1_fcb_first_merged(&provider->search,
             provider->host_namespace, provider->declared_search_snapshot, boundary, cpu_before, word(copied + 181u),
             action->ranges[0].address, copied + 53u, (uint8_t)cpu_before->eax,
             (uint8_t)cpu_before->edx, transaction, payload, payload_bytes);

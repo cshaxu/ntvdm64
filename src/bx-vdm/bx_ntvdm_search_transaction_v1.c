@@ -147,7 +147,7 @@ int bx_ntvdm_search_transaction_v1_path_first_entries(
     if (payload_bytes != 0) *payload_bytes = 0u;
     if (!bx_ntvdm_search_transaction_v1_valid(value) || payload_bytes == 0 ||
         !bx_ntvdm_search_request_v1_decode_first_path(path, attributes, &query) ||
-        query.drive_index != admitted_drive_index || query.relative_directory[0] != L'\0')
+        query.drive_index != admitted_drive_index)
         return -1;
     result = bx_ntvdm_search_plan_v1_first_entries(&value->plan, entries, entry_count,
         boundary, cpu_before, owner_pdb, BX_NTVDM_SEARCH_PLAN_V1_PATH,
@@ -237,8 +237,7 @@ int bx_ntvdm_search_transaction_v1_fcb_first_entries(
     if (payload_bytes != 0) *payload_bytes = 0u;
     if (!bx_ntvdm_search_transaction_v1_valid(value) || payload_bytes == 0 ||
         !bx_ntvdm_search_request_v1_decode_first_fcb(path, extended_fcb,
-            attributes, &query) || query.drive_index != admitted_drive_index ||
-        query.relative_directory[0] != L'\0') return -1;
+            attributes, &query) || query.drive_index != admitted_drive_index) return -1;
     result = bx_ntvdm_search_plan_v1_first_entries(&value->plan, entries,
         entry_count, boundary, cpu_before, owner_pdb,
         BX_NTVDM_SEARCH_PLAN_V1_FCB, searchbuf_address, &query, transaction,

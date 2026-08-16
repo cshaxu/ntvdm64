@@ -221,6 +221,12 @@
 > individual service binding may change. See the [P25 admission]
 > (etc/research/t221-s3-search-owner-package-admission-001.md).
 
+> **T221 S3 P26 progress:** Overlay `50:09/0A` now choose the shared visible
+> enumeration before the retained pathname/FCB transaction encoders; `0B/0C`
+> retain typed continuation. It source-builds, but dedicated four-service
+> Overlay regression is still required. See the [P26 binding]
+> (etc/research/t221-s3-overlay-search-entry-binding-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
