@@ -1016,7 +1016,16 @@ int main(void)
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2cu,
                     &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
-                !cf_set(&result) || !ax_is(&result, 1u)) failed = 641;
+                cf_set(&result)) failed = 641;
+            if (!failed) {
+                uint32_t overlay_fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                    result.cpu_delta.gpr16_values[5];
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                cpu.eax = overlay_fcb_token >> 16; cpu.esi = overlay_fcb_token & 0xffffu;
+                if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2eu,
+                        &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) || cf_set(&result))
+                    failed = 641;
+            }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
                     &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
