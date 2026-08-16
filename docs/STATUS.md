@@ -291,6 +291,12 @@
 > deliberately unbound. See the [partition binding]
 > (etc/research/t221-s3-virtual-namespace-partition-binding-001.md).
 
+> **T221 S3 P37 progress:** `VIRTUAL_FILE` tokens now enter private handle
+> mechanics and cannot be claimed by the Direct Win32-handle path. The x64
+> `/MT` fixture proves open/seek/close/stale-token refusal; controlled I/O,
+> truncate and commit remain open within the same handle subfamily. See the
+> [typed routing record](etc/research/t221-s3-virtual-handle-token-routing-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

@@ -4,7 +4,9 @@ static int backend(bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
     uint32_t *backend_token_out)
 {
     return bx_ntvdm_dem_file_session_v1_lookup_backend(session, token,
-        BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, backend_token_out);
+        BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, backend_token_out) ||
+        bx_ntvdm_dem_file_session_v1_lookup_backend(session, token,
+        BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE, backend_token_out);
 }
 
 int bx_ntvdm_dem_overlay_handle_backend_v1_read(bx_ntvdm_dem_file_session_v1 *session,
@@ -29,10 +31,10 @@ int bx_ntvdm_dem_overlay_handle_backend_v1_truncate(
     bx_ntvdm_dem_overlay_file_v1_truncate(files, value); }
 int bx_ntvdm_dem_overlay_handle_backend_v1_close(bx_ntvdm_dem_file_session_v1 *session,
     bx_ntvdm_dem_overlay_file_v1 *files, uint32_t token)
-{ uint32_t value; return backend(session, token, &value) &&
+{ uint32_t value, kind; return backend(session, token, &value) &&
     bx_ntvdm_dem_overlay_file_v1_close(files, value) &&
-    bx_ntvdm_dem_file_session_v1_release_backend(session, token,
-        BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE); }
+    bx_ntvdm_dem_file_session_v1_token_kind(session, token, &kind) &&
+    bx_ntvdm_dem_file_session_v1_release_backend(session, token, kind); }
 int bx_ntvdm_dem_overlay_handle_backend_v1_flush(
     bx_ntvdm_dem_file_session_v1 *session, uint32_t token)
 { uint32_t value; return backend(session, token, &value); /* volatile COW: no host flush */ }

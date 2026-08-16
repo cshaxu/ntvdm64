@@ -1189,6 +1189,7 @@ int main(void)
         else {
             char virtual_dir[MAX_PATH] = {0}, virtual_file[MAX_PATH] = {0};
             char virtual_renamed[MAX_PATH] = {0}, virtual_check[MAX_PATH] = {0};
+            uint32_t virtual_token = 0u;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = 0u;
             if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate, 0x07u,
@@ -1205,6 +1206,9 @@ int main(void)
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
                     &boundary, &cpu, virtual_file, 0, &result) || cf_set(&result))) failed = 664;
+            if (!failed) virtual_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                result.cpu_delta.gpr16_values[5];
+            if (!failed && virtual_token == 0u) failed = 664;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = 1u; cpu.ecx = FILE_ATTRIBUTE_HIDDEN;
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x01u,
@@ -1216,6 +1220,21 @@ int main(void)
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.edx = drive + 1u;
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x44u,
                     &boundary, &cpu, virtual_check, 0, &result) || cf_set(&result))) failed = 667;
+            if (!failed) {
+                const uint8_t bop_seek[4] = { 0xc4u, 0xc4u, 0x50u, 0x00u };
+                struct bx_ntvdm_mechanical_action_v1 handle_action;
+                bx_ntvdm_instruction_window_v1_capture(&window, bop_seek, sizeof(bop_seek));
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                token_into_cpu(&cpu, virtual_token); cpu.ebx = 0u;
+                if (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&alternate, 0x00u,
+                        &boundary, &cpu, &window, &handle_action, &result) || cf_set(&result)) failed = 6671;
+                ((uint8_t *)window.bytes)[3] = 0x02u;
+                cpu.ecx = cpu.edx = 0xffffu;
+                if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&alternate, 0x02u,
+                        &boundary, &cpu, &window, &handle_action, &result) || cf_set(&result))) failed = 6672;
+                if (!failed && bx_ntvdm_dem_handle_route_partition_v1_claims_request(
+                        &alternate, 0x00u, &cpu)) failed = 6673;
+            }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x17u,
                     &boundary, &cpu, virtual_file, virtual_renamed, &result) || cf_set(&result))) failed = 668;

@@ -103,8 +103,10 @@ static int overlay_token(const bx_ntvdm_dem_whole_provider_v1 *provider,
 {
     uint32_t ignored;
     return provider != 0 && cpu != 0 &&
-        bx_ntvdm_dem_file_session_v1_lookup_backend(&provider->files, token(cpu),
-            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, &ignored);
+        (bx_ntvdm_dem_file_session_v1_lookup_backend(&provider->files, token(cpu),
+            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, &ignored) ||
+         bx_ntvdm_dem_file_session_v1_lookup_backend(&provider->files, token(cpu),
+            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE, &ignored));
 }
 
 static void substitute_token(bx_ntvdm_cpu_state_v1 *destination,
