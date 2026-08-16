@@ -309,6 +309,12 @@
 > state. Virtual set→get passes under x64 `/MT` without host mutation; see the
 > [file-time record](etc/research/t221-s3-private-file-times-001.md).
 
+> **T221 S3 P40 progress:** the six-service Virtual handle owner family
+> (`00,02,08,16,1E,27`) now has typed-token lifecycle, checked I/O, file-time,
+> truncate and commit evidence under x64 `/MT`; no Direct handle fallback is
+> possible. This closes that subfamily only—not FCB or search. See the
+> [handle closure](etc/research/t221-s3-virtual-handle-family-closure-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

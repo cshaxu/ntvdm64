@@ -1264,6 +1264,14 @@ int main(void)
                         &boundary, &cpu, &window, &handle_action, &result) || cf_set(&result) ||
                     result.cpu_delta.gpr16_values[1] != 0x1234u ||
                     result.cpu_delta.gpr16_values[2] != 0x5678u)) failed = 66752;
+                ((uint8_t *)window.bytes)[3] = 0x1eu;
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                token_into_cpu(&cpu, virtual_token);
+                if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&alternate, 0x1eu,
+                        &boundary, &cpu, &window, &handle_action, &result) || cf_set(&result))) failed = 66753;
+                ((uint8_t *)window.bytes)[3] = 0x27u;
+                if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&alternate, 0x27u,
+                        &boundary, &cpu, &window, &handle_action, &result) || cf_set(&result))) failed = 66754;
                 ((uint8_t *)window.bytes)[3] = 0x02u;
                 cpu.ecx = cpu.edx = 0xffffu;
                 if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&alternate, 0x02u,
