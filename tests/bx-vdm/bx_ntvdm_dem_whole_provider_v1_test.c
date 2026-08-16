@@ -607,9 +607,9 @@ int main(void)
                 &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
             cf_set(&result) || (result.cpu_delta.gpr16_write_mask &
                 ((1u << 0u) | (1u << 1u) | (1u << 2u) | (1u << 3u) |
-                 (1u << 4u) | (1u << 5u))) !=
+                 (1u << 5u) | (1u << 6u))) !=
                 ((1u << 0u) | (1u << 1u) | (1u << 2u) | (1u << 3u) |
-                 (1u << 4u) | (1u << 5u))) failed = 66;
+                 (1u << 5u) | (1u << 6u))) failed = 66;
         else {
             fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
                 result.cpu_delta.gpr16_values[5];
@@ -618,7 +618,7 @@ int main(void)
             if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider, 0x2fu,
                 &boundary, &cpu, 0, output, sizeof(output), &output_bytes, &result) ||
                 cf_set(&result) || output_bytes != 2u ||
-                result.cpu_delta.gpr16_values[2] != 2u) failed = 67;
+                result.cpu_delta.gpr16_values[1] != 2u) failed = 67;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = fcb_token >> 16; cpu.esi = fcb_token & 0xffffu;
             if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
@@ -628,7 +628,7 @@ int main(void)
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
         if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
                 0x30u, &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) ||
-            cf_set(&result) || (result.cpu_delta.gpr16_write_mask & 9u) != 9u)) failed = 69;
+            cf_set(&result) || (result.cpu_delta.gpr16_write_mask & 5u) != 5u)) failed = 69;
     }
     if (!failed) {
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
@@ -649,7 +649,7 @@ int main(void)
                 memcpy(fcb_action.payload, "ab", 2u);
                 if (!bx_ntvdm_dem_fcb_io_route_partition_v1_complete_write(&provider,
                         0x2fu, &boundary, &cpu, &fcb_action, &result) || cf_set(&result) ||
-                    result.cpu_delta.gpr16_values[2] != 2u) failed = 693;
+                    result.cpu_delta.gpr16_values[1] != 2u) failed = 693;
             }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = fcb_token >> 16; cpu.ebp = fcb_token & 0xffffu;
@@ -658,7 +658,7 @@ int main(void)
                     0x2fu, &boundary, &cpu, &window, 0x300u, &fcb_action, &result) ||
                 fcb_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE ||
                 fcb_action.payload_bytes != 2u || memcmp(fcb_action.payload, "ab", 2u) != 0 ||
-                cf_set(&result) || result.cpu_delta.gpr16_values[2] != 2u)) failed = 694;
+                cf_set(&result) || result.cpu_delta.gpr16_values[1] != 2u)) failed = 694;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = fcb_token >> 16; cpu.esi = fcb_token & 0xffffu;
             if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
@@ -855,7 +855,7 @@ int main(void)
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
         if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&provider,
                 0x31u, &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
-            cf_set(&result) || (result.cpu_delta.gpr16_write_mask & 0x4fu) != 0x4fu) failed = 70;
+            cf_set(&result) || (result.cpu_delta.gpr16_write_mask & 0x8fu) != 0x8fu) failed = 70;
     }
     if (!failed) {
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
@@ -1013,12 +1013,56 @@ int main(void)
         else {
             char overlay_dir[MAX_PATH], overlay_renamed[MAX_PATH];
             char *overlay_dot;
+            const uint8_t fcb_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x2fu };
+            uint32_t overlay_fcb_token;
+            uint32_t overlay_fcb_size = 0u;
+            uint8_t overlay_host_before[8] = {0}, overlay_host_after[8] = {0};
+            DWORD overlay_host_bytes = 0u, overlay_host_after_bytes = 0u;
+            /* Exercise the complete Overlay FCB handle lifecycle against the
+             * host-base file before the later 2C create truncates its private
+             * COW copy.  The read result is a checked DTA write action. */
+            file = CreateFileW(temporary, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE |
+                FILE_SHARE_DELETE, 0, OPEN_EXISTING, 0, 0);
+            if (file == INVALID_HANDLE_VALUE || !ReadFile(file, overlay_host_before,
+                    sizeof(overlay_host_before), &overlay_host_bytes, 0)) failed = 639;
+            if (file != INVALID_HANDLE_VALUE) { CloseHandle(file); file = INVALID_HANDLE_VALUE; }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 0u;
+            if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2du,
+                    &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
+                cf_set(&result)) failed = 640;
+            else {
+                overlay_fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                    result.cpu_delta.gpr16_values[5];
+                overlay_fcb_size = ((uint32_t)result.cpu_delta.gpr16_values[2] << 16) |
+                    result.cpu_delta.gpr16_values[6];
+                bx_ntvdm_instruction_window_v1_capture(&window, fcb_bop, sizeof(fcb_bop));
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                token_into_cpu(&cpu, overlay_fcb_token); cpu.ebx = 1u; cpu.ecx = 2u;
+                if (!bx_ntvdm_dem_fcb_io_route_partition_v1_dispatch(&alternate, 0x2fu,
+                        &boundary, &cpu, &window, 0x300u, &fcb_action, &result) ||
+                    cf_set(&result) || fcb_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE ||
+                    fcb_action.payload_bytes != 2u || memcmp(fcb_action.payload, "ab", 2u) != 0 ||
+                    result.cpu_delta.gpr16_values[1] != 2u) failed = 641;
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                cpu.eax = overlay_fcb_token >> 16; cpu.esi = overlay_fcb_token & 0xffffu;
+                if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate,
+                        0x2eu, &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) ||
+                    cf_set(&result))) failed = 642;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && !bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate,
+                    0x31u, &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result)) failed = 6430;
+            else if (!failed && cf_set(&result)) failed = 6431;
+            else if (!failed && result.cpu_delta.gpr16_values[7] != (uint16_t)overlay_fcb_size) failed = 6432;
+            else if (!failed && result.cpu_delta.gpr16_values[3] !=
+                (uint16_t)(overlay_fcb_size >> 16)) failed = 6433;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2cu,
                     &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
                 cf_set(&result)) failed = 641;
             if (!failed) {
-                uint32_t overlay_fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                overlay_fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
                     result.cpu_delta.gpr16_values[5];
                 bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
                 cpu.eax = overlay_fcb_token >> 16; cpu.esi = overlay_fcb_token & 0xffffu;
@@ -1026,6 +1070,13 @@ int main(void)
                         &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) || cf_set(&result))
                     failed = 641;
             }
+            file = CreateFileW(temporary, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE |
+                FILE_SHARE_DELETE, 0, OPEN_EXISTING, 0, 0);
+            if (!failed && (file == INVALID_HANDLE_VALUE || !ReadFile(file, overlay_host_after,
+                    sizeof(overlay_host_after), &overlay_host_after_bytes, 0) ||
+                overlay_host_after_bytes != overlay_host_bytes || memcmp(overlay_host_after,
+                    overlay_host_before, overlay_host_bytes) != 0)) failed = 644;
+            if (file != INVALID_HANDLE_VALUE) { CloseHandle(file); file = INVALID_HANDLE_VALUE; }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
                     &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
@@ -1093,10 +1144,10 @@ int main(void)
         bx_ntvdm_mutation_profile_v1 alternate_profile;
         bx_ntvdm_dem_cwd_context_v1 alternate_cwd;
         bx_ntvdm_dem_whole_provider_v1 alternate;
-        if (!profile_for_mode(&alternate_profile, BX_NTVDM_MUTATION_MODE_V1_VIRTUAL) ||
-            !bx_ntvdm_dem_cwd_context_v1_initialize(&alternate_cwd, &alternate_profile) ||
-            !bx_ntvdm_dem_whole_provider_v1_initialize(&alternate,
-                &alternate_profile, &space, &alternate_cwd)) failed = 66;
+        if (!profile_for_mode(&alternate_profile, BX_NTVDM_MUTATION_MODE_V1_VIRTUAL)) failed = 6601;
+        else if (!bx_ntvdm_dem_cwd_context_v1_initialize(&alternate_cwd, &alternate_profile)) failed = 6602;
+        else if (!bx_ntvdm_dem_whole_provider_v1_initialize(&alternate,
+                &alternate_profile, &space, &alternate_cwd)) failed = 6603;
         else {
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = 0u;

@@ -185,6 +185,13 @@
 > services remain unbound until the full lifecycle/register/DTA family is
 > integrated. See the [P19 record](etc/research/t221-s3-fcb-overlay-lifecycle-foundation-001.md).
 
+> **T221 S3 P20 progress:** the complete Overlay FCB lifecycle binding
+> (`50:2C..31`) now routes through the one private provider, including its
+> checked-DTA `2F` transfer. The corrected source-derived FCB result layouts
+> and private share translation pass the full x64 `/MT` provider fixture;
+> wildcard mutation, search and Virtual remain open. See the [P20 record]
+> (etc/research/t221-s3-fcb-overlay-lifecycle-binding-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

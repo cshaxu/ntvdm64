@@ -59,6 +59,19 @@ static ULONG share_mode(uint8_t mode)
     default: return FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE;
     }
 }
+/* The Overlay backend has a deliberately small, provider-private share ABI:
+ * bit 0 permits readers and bit 1 permits writers.  Do not leak Win32's
+ * FILE_SHARE_DELETE flag into it. */
+static uint32_t overlay_share_mode(uint8_t mode)
+{
+    switch (mode & 0x70u) {
+    case 0x10u: return 0u;
+    case 0x20u: return BX_NTVDM_DEM_OVERLAY_FILE_V1_READ;
+    case 0x30u: return BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE;
+    default: return BX_NTVDM_DEM_OVERLAY_FILE_V1_READ |
+        BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE;
+    }
+}
 static uint32_t access_mode(uint8_t mode)
 {
     if ((mode & 0x0fu) == 0u) return BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ;
@@ -90,7 +103,7 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         SYSTEMTIME now; GetLocalTime(&now);
         return finish(boundary, result, (uint16_t)((now.wYear << 9) |
             ((now.wMonth & 0x0fu) << 5) | (now.wDay & 0x1fu)), 1, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u,
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
                 (uint16_t)((now.wHour << 11) | ((now.wMinute & 0x3fu) << 5) |
                 ((now.wSecond / 2u) & 0x1fu)));
     }
@@ -107,15 +120,15 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
                 BX_NTVDM_DEM_PATH_V1_OK || !bx_ntvdm_dem_fcb_overlay_backend_v1_open(
                     &provider->files, &provider->overlay_files, provider->host_namespace,
                     drive, relative, access, service == 0x2cu ? 3u :
-                    (uint32_t)share_mode(mode), disposition, mode, &opaque, &size,
+                    overlay_share_mode(mode), disposition, mode, &opaque, &size,
                     &time, &date, &error))
                 return error_result(boundary, result, error);
             return finish(boundary, result, (uint16_t)(opaque >> 16), 1, 0) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, time) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, date) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u, (uint16_t)opaque) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, time) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, date) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)size) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 4u, (uint16_t)(size >> 16));
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 6u, (uint16_t)size) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, (uint16_t)(size >> 16));
         }
         { int backend = bx_ntvdm_dem_local_file_backend_v1_open_ex(
                 &provider->local_files, oem_path, access, share_mode(mode),
@@ -126,11 +139,11 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files, opaque, &handle) ||
             !file_info(handle, &time, &date, &size)) return error_result(boundary, result, GetLastError());
         return finish(boundary, result, (uint16_t)(opaque >> 16), 1, 0) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, time) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, date) &&
             bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u, (uint16_t)opaque) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, time) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, date) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)size) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 4u, (uint16_t)(size >> 16));
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 6u, (uint16_t)size) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, (uint16_t)(size >> 16));
     }
     if (service == 0x2eu) {
         opaque = token_si(cpu);
@@ -162,10 +175,10 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
                 attributes = overlay_attributes;
                 if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u; else attributes &= 0x37u;
                 return finish(boundary, result, (uint16_t)attributes, 1, 0) &&
-                    bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, time) &&
-                    bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, date) &&
-                    bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 6u, (uint16_t)size) &&
-                    bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)(size >> 16));
+                    bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, time) &&
+                    bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, date) &&
+                    bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 7u, (uint16_t)size) &&
+                    bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)(size >> 16));
             }
             return error_result(boundary, result, error);
         }
@@ -182,10 +195,10 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         (void)bx_ntvdm_dem_file_session_v1_release(&provider->files, opaque);
         if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u; else attributes &= 0x37u;
         return finish(boundary, result, (uint16_t)attributes, 1, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, time) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, date) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 6u, (uint16_t)size) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)(size >> 16));
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, time) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, date) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 7u, (uint16_t)size) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)(size >> 16));
     }
     opaque = token_bp(cpu);
     {
@@ -215,8 +228,8 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
                     &time, &date)) return error_result(boundary, result, DEM_ERROR_INVALID_HANDLE);
             transferred = overlay_transferred; *io_byte_count = transferred;
             return finish(boundary, result, (uint16_t)(size >> 16), 1, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)size) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, (uint16_t)transferred);
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)size) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)transferred);
         }
     }
     if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files, opaque, &handle))
@@ -231,12 +244,12 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
     if ((cpu->ebx & 0xffffu) != 0u) {
         if (!ReadFile(handle, io_bytes, (DWORD)(cpu->ecx & 0xffffu), &transferred, 0)) return error_result(boundary, result, GetLastError());
     } else if (!WriteFile(handle, io_bytes, (DWORD)(cpu->ecx & 0xffffu), &transferred, 0)) {
-        error = GetLastError(); if (error == DEM_ERROR_DISK_FULL) return finish(boundary, result, 1u, 1, 1) && bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, (uint16_t)transferred);
+        error = GetLastError(); if (error == DEM_ERROR_DISK_FULL) return finish(boundary, result, 1u, 1, 1) && bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)transferred);
         return error_result(boundary, result, error);
     }
     if (!file_info(handle, &time, &date, &size)) return error_result(boundary, result, GetLastError());
     *io_byte_count = transferred;
     return finish(boundary, result, (uint16_t)(size >> 16), 1, 0) &&
-        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)size) &&
-        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, (uint16_t)transferred);
+        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, (uint16_t)size) &&
+        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)transferred);
 }
