@@ -193,6 +193,13 @@ int main(void)
             modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {
             memcpy(ram + 0x800u, fcb_host_path, strlen(fcb_host_path) + 1u);
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u;
+            if (!dispatch(&session, 0x31u, &cpu, &result) || !success(&result) ||
+                (result.cpu_delta.gpr16_write_mask & 0x8fu) != 0x8fu) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 185 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.ds = 0u; cpu.esi = 0x800u; cpu.eax = 0u;
             if (!dispatch(&session, 0x2du, &cpu, &result) || !success(&result) ||
                 (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 5u))) !=
@@ -228,6 +235,7 @@ int main(void)
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 80 + (int)index;
             }
+
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.ds = 0u; cpu.esi = 0x800u; cpu.eax = 2u;
             if (!dispatch(&session, 0x2du, &cpu, &result) || !success(&result) ||

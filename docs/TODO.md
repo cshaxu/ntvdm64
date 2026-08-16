@@ -7,5 +7,5 @@
 | P2 | Produce a neutral Bochs/OpenNT hard-boundary report for later `ntvdm64` architecture work. | First admitted bridge slice with no runtime dependency on `ntvdm64`. |
 | P2 | Research original OpenNT shell-out/session-broker paths for a DOS guest request to launch or wait for a Win32 program, a WOW16 program, or another VDM. | Establish exact OpenNT caller/ABI/failure maps and decide whether a modern non-invasive, explicitly permitted host-launch capability exists; otherwise retain an explicit permanent deferral. |
 | P3 | Migrate indexed legacy documentation without breaking provenance links. | One manifest-backed migration batch with link verification. |
-
+| P1 | Resume the frozen Virtual mutation-profile BOP/provider/session/CLI work after the Direct/Readonly/Overlay T221 matrix closes; retain and revalidate all existing Virtual source and evidence rather than replacing it. | A separately admitted owner-package plan with an updated OpenNT source/ABI/failure map, current-state audit of retained Virtual code, and full Virtual regression matrix. |
 This ledger contains no active work, roadmap, or completed-task record.

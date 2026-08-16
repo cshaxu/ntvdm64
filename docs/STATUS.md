@@ -43,19 +43,19 @@
 | --- | --- |
 | Identifier Mode | M0 T221 S3, Ordinary Mode. |
 | Admission And Approval | T221 S2 P1--P2 establishes the complete 29-service provider state, profile, token, continuation, migration and regression design. Owner direction requires implementation by complete component package, not trace-led endpoint patches. |
-| Objective | Implement the one `dem_whole_provider` file/handle/FCB/search view backend for all selected identities: retain and migrate direct/readonly paths, add isolated overlay and explicit virtual views, validate backend-kind tokens/continuations, preserve source-shaped failure/pipe-unavailable behavior, and deliver the complete family regression. |
+| Objective | Implement the one `dem_whole_provider` file/handle/FCB/search view backend for all selected identities in Direct/Readonly/Overlay: retain and migrate host paths, complete isolated Overlay behavior, validate backend-kind tokens/continuations, preserve source-shaped failure/pipe-unavailable behavior, and deliver the three-profile family regression. Existing Virtual code/evidence is frozen, not removed; new Virtual work is deferred to TODO pending re-admission. |
 | Non-goals | No BOP implementation outside the 29-service package; no Redirector/pipe support; no JFT/SFT mirror or `50:3C` token cleanup; no new CCPU pointer or raw host-handle ABI; no raw-device/GSET/MISC work; no Bochs/mantle change; no native trace until package regression closes. |
 | Reference Baseline | T221 S1 ledger and P5 disposition; T221 S2 provider design; T202 S3 ABI map; T220 PDB/JFT/SFT limits; current `dem_whole_provider`, profile, namespace/handle/FCB/search, host namespace and test sources. |
 | Files And ABI Surface | `src/bx-vdm` provider/view/token/search/profile implementation and `tests/bx-vdm` package regression; only fixed-width existing adapter ABI and checked guest actions may cross the machine boundary. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Build focused MSVC x64 `/MT` package fixtures under recorded `build/M0-T221-S3/<run>` roots; prove all 29 identities route through one provider view; run Direct/Readonly/Overlay/Virtual positive and negative family cases; prove pipes remain unavailable and no direct fallback occurs; inspect diff, run `git diff --check` and governance verification. |
+| Verification | Build focused MSVC x64 `/MT` package fixtures under recorded `build/M0-T221-S3/<run>` roots; prove all 29 identities route through one provider view; run Direct/Readonly/Overlay positive and negative family cases; retain existing Virtual evidence without adding behavior; prove pipes remain unavailable and no direct fallback occurs; inspect diff, run `git diff --check` and governance verification. |
 | Expected Markers | One provider state/view owner, backend-kind/generation validation, no host pointers/handles in guest values, no selector-local profile policy, source-shaped source/failure results, and a complete 29-service family regression. |
 | Asset Needs | Existing OpenNT/current source, local MSVC x64 `/MT`, existing test harnesses and disposable build roots; no new firmware, guest media or external source import. |
 | Reporting Requirements | Per P record changed source/test interfaces, source-contract mapping, build command/result, profile/subfamily coverage, negative isolation proof, retained limitation and next package P. |
 | Stop Conditions | A need for new guest ABI/range, source behavior outside the defined package, JFT/SFT reconstruction, `50:3C` lifecycle binding, pipe/Redirector or raw-device implementation, Bochs/mantle change, native trace before full regression, guest binary patch or external import pauses S3 for re-admission. |
-| Exit Criteria | All 29 identities enter the one provider view with source-reviewed direct/readonly/overlay/virtual disposition and full-family positive/negative regression; pipes remain source-labelled unavailable; a source-built composition closes before any separately admitted native trace. |
+| Exit Criteria | All 29 identities enter the one provider view with source-reviewed Direct/Readonly/Overlay disposition and full-family positive/negative regression; existing Virtual code/evidence remains retained and its uncompleted work is recorded in TODO; pipes remain source-labelled unavailable; a source-built composition closes before any separately admitted native trace. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Every selected identity and its source peer; all four profile views; token kind/generation/PDB owner; stale continuation; DTA/SRCHBUF integrity; namespace mutation and FCB wildcard paths; direct host error mapping; overlay/virtual isolation; pipes; session teardown; current CWD/drive root; declared startup images; and PDB/JFT/SFT boundaries. |
+| Similar-Issue Sweep | Every selected identity and its source peer; Direct/Readonly/Overlay views; token kind/generation/PDB owner; stale continuation; DTA/SRCHBUF integrity; namespace mutation and FCB wildcard paths; direct host error mapping; Overlay isolation; pipes; session teardown; current CWD/drive root; declared startup images; PDB/JFT/SFT boundaries; and retention (not expansion) of existing Virtual evidence. |
 
 > **T221 S2 P1 progress:** current code has the correct package-local state
 > owners and shared profile authority, but only direct/readonly backends have
@@ -404,6 +404,16 @@
 > permitted Win32 host integration, with no host mutation; it is not FCB-family
 > or package closure. See the [P53 record]
 > (etc/research/t221-s3-package-session-direct-readonly-fcb-001.md).
+> **T221 S3 P54 scope amendment:** new Virtual provider/session/CLI work is
+> deferred. Existing Virtual implementation and evidence remain retained; this
+> pass completes the Direct/Readonly/Overlay matrix and must not claim
+> four-profile closure. The later package-level resumption is in `TODO.md`; see
+> the [P54 decision](etc/research/t221-s3-virtual-work-deferral-001.md).
+> **T221 S3 P55 progress:** Direct and Readonly now send original-shaped FCB
+> file information (`50:31`) through the normal package session for an existing
+> host `C:` system file. `AX/CX/DX/BX:DI` result layout and no-mutation host
+> integration pass under MSVC x64 `/MT`; Virtual receives no new behavior. See
+> the [P55 record](etc/research/t221-s3-package-session-direct-readonly-fcb-info-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

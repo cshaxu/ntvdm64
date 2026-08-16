@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1620 |
+| Documentation records | 1622 |
 | --- | --- |
-| Generated UTC | 2026-08-16T16:12:15Z |
+| Generated UTC | 2026-08-16T16:17:46Z |
 
 ## Entries
 
@@ -812,6 +812,7 @@ content-divergent entries.
 | etc/research/t221-s3-overlay-visible-node-foundation-001.md | indexed supporting material | e439d175b987ec5acab0899199a7ab3cdfb7bd45803c06dde23cd73a2f8839c5 |
 | etc/research/t221-s3-package-session-declared-search-001.md | indexed supporting material | 5752a2427266c7d1eabfd33a03c2c24545cc327cde099f3f01143312f3cae39c |
 | etc/research/t221-s3-package-session-direct-readonly-fcb-001.md | indexed supporting material | caec169dcb1fa7524792929dc3b079a62a0267c208231d7c6cbe96fbea9d1488 |
+| etc/research/t221-s3-package-session-direct-readonly-fcb-info-001.md | indexed supporting material | 11dcf71a97af65a27b883427e639a8e4badbd326145e4bb2a4e1adf698db7124 |
 | etc/research/t221-s3-package-session-fcb-terminals-001.md | indexed supporting material | ec89a2ba921ba5d56c103d75c9508bf431be6d0b236969f8dcb2b26655874b39 |
 | etc/research/t221-s3-package-session-matrix-transport-map-001.md | indexed supporting material | caf1e694589293702e490f9a7e8f7303696feb5e8dd4dcb4d3fcb54fae97a629 |
 | etc/research/t221-s3-package-session-private-fcb-chain-001.md | indexed supporting material | 07ec40f93462274a469274822e5047ffe4fdfc588179bb84463d52fce972ca8c |
@@ -838,6 +839,7 @@ content-divergent entries.
 | etc/research/t221-s3-virtual-private-root-foundation-001.md | indexed supporting material | 4e3909a73a096d950b64ce59e56697b91d136d86c7bfae52df18e19bbf0a20e4 |
 | etc/research/t221-s3-virtual-private-token-foundation-001.md | indexed supporting material | 1b843f200f66bdde203aa951d1edfe65ea772683f527b1ccc643991c8d504d7a |
 | etc/research/t221-s3-virtual-search-family-closure-001.md | indexed supporting material | e8f9b388aaa5a086831aa0a20150ffc0603cd176ae149398437516bdf1fcf1e5 |
+| etc/research/t221-s3-virtual-work-deferral-001.md | indexed supporting material | 7f0875b5ac915bd44f1af3782baf8939c63a4d8084e0c2cd09b232ff4c097e53 |
 | etc/research/t221-s3-whole-provider-session-integration-001.md | indexed supporting material | 8aeb95867232c5d0c4d7ba06893d31fd0094513a3f82c6a8b97ae5549fb12c07 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | 55430d57246660e10fc32c95b843f83d84939f5b50f4a55240a08e41ca9bd6fb |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
@@ -1634,9 +1636,9 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 944eef9e56272f03d78b9ddb70de2cd51b6edb2d17e7a254972eaf46fae2d1ba |
+| STATUS.md | principal control document | ca81d3b16041bd1658790e965f65a969c1bff140c3538c50d46064d623a4a05f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
-| TODO.md | principal control document | 44649dfb13a01496d4eea7e5a518bcbb97b2b740e68109e71603dd914a654ec8 |
+| TODO.md | principal control document | 01f7b2cd7abcce53ad21b2655996d7a7296a083562a2e58c7ae863179a8dbba6 |
 | WHPX-BACKEND-RESEARCH.md | retained pre-governance evidence | 1c914aaeb4f42b4f04a839c77baec69312b791f75c595ee583da77f3c63e54f8 |
 | WIN32-HOST-API-BOUNDARY.md | retained pre-governance evidence | 37a3c277001248596b2819f105fe5d422f37de32cfd0b5d83730e66138b716df |
