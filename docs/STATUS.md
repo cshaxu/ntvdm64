@@ -297,6 +297,13 @@
 > truncate and commit remain open within the same handle subfamily. See the
 > [typed routing record](etc/research/t221-s3-virtual-handle-token-routing-001.md).
 
+> **T221 S3 P38 progress:** Virtual handle I/O now proves the two checked
+> directions: `1E` gathers guest bytes into the private file and `16` emits a
+> checked guest write after seek. The x64 `/MT` fixture also retains close and
+> stale-token refusal. File-time/commit/truncate remain in this subfamily's
+> final sweep; see the [I/O transaction record]
+> (etc/research/t221-s3-virtual-handle-io-transaction-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
