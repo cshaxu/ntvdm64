@@ -3,6 +3,7 @@
 
 #include "bx_ntvdm_dem_cwd_context_v1.h"
 #include "bx_ntvdm_dem_gset_plane_v1.h"
+#include "bx_ntvdm_dem_dta_service.h"
 #include "bx_ntvdm_dem_profile_consumer_v1.h"
 #include "bx_ntvdm_multi_write_transaction.h"
 #include "bx_ntvdm_guest_gather_read_action_v1.h"
@@ -72,4 +73,21 @@ int bx_ntvdm_dem_drive_view_provider_v1_complete_cwd(
     const uint8_t *bytes, uint64_t byte_count,
     bx_ntvdm_multi_write_transaction_v1 *transaction,
     uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD]);
+
+/* demSetDTALocation belongs to demgset.c.  The provider owns its typed
+ * source-derived registration; package session remains the only reader of
+ * guest RAM and the owner of the completed registration lifetime. */
+int bx_ntvdm_dem_drive_view_provider_v1_prepare_dta(
+    const bx_ntvdm_dem_drive_view_provider_v1 *provider,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_guest_read_action_v1 *action);
+int bx_ntvdm_dem_drive_view_provider_v1_complete_dta(
+    const bx_ntvdm_dem_drive_view_provider_v1 *provider,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_guest_read_action_v1 *action, const uint8_t *bytes,
+    uint64_t byte_count, bx_ntvdm_dem_dta_registration_v1 *registration,
+    bx_ntvdm_cpu_result_v2 *result);
 #endif

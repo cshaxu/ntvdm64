@@ -65,7 +65,25 @@ static int gather_read(bx_ntvdm_dem_package_session_v1 *s,
   for(i=0;i<g->range_count;i++){if(g->ranges[i].length>UINT32_MAX||offset>a->payload_bytes-(uint32_t)g->ranges[i].length)return 0;
     a->ranges[i].physical_address=g->ranges[i].address;a->ranges[i].byte_count=(uint32_t)g->ranges[i].length;a->ranges[i].payload_offset=offset;offset+=a->ranges[i].byte_count;}
   return offset==a->payload_bytes&&bx_ntvdm_mechanical_action_v1_valid(a); }
-static int direct_namespace_owner(bx_ntvdm_dem_package_session_v1 *s,
+static int dta_dispatch(bx_ntvdm_dem_package_session_v1 *s,
+ const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,
+ const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
+{ bx_ntvdm_guest_read_action_v1 read;struct bx_ntvdm_mechanical_action_v1 a;
+  bx_ntvdm_dem_dta_registration_v1 dta;uint32_t id;
+  if(!s||!e||!c||!w||!r||!s->namespace_plane||
+    !bx_ntvdm_dem_drive_view_provider_v1_prepare_dta(&s->drive_view,e,c,w,&read)||
+    read.disposition!=BX_NTVDM_GUEST_READ_ACTION_V1_NEED_READ||
+    read.guest_read.length>BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES||
+    !s->namespace_plane->next_action_id)return 0;
+  id=s->namespace_plane->next_action_id++;if(!s->namespace_plane->next_action_id)s->namespace_plane->next_action_id=1u;
+  bx_ntvdm_mechanical_action_v1_clear(&a);a.action_id=id;a.kind=BX_NTVDM_MECHANICAL_ACTION_V1_READ;
+  a.range_count=1u;a.payload_bytes=(uint32_t)read.guest_read.length;
+  a.ranges[0].physical_address=read.guest_read.address;a.ranges[0].byte_count=a.payload_bytes;
+  if(!bx_ntvdm_mechanical_action_v1_valid(&a)||!action(&a)||
+    !bx_ntvdm_dem_drive_view_provider_v1_complete_dta(&s->drive_view,e,c,&read,
+      a.payload,a.payload_bytes,&dta,r)||!bx_ntvdm_boot_namespace_plane_v1_set_dta(
+      s->namespace_plane,&dta))return 0;
+  return bx_ntvdm_cpu_result_v2_valid(r); }static int direct_namespace_owner(bx_ntvdm_dem_package_session_v1 *s,
  bx_ntvdm_dem_process_owner_v1 *owner)
 { bx_ntvdm_guest_read_action_v1 read;struct bx_ntvdm_mechanical_action_v1 a;uint32_t id;
   if(!s||!owner||!s->namespace_plane||!s->namespace_plane->has_dta||
@@ -232,6 +250,8 @@ int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,
   if(s->drive_view.gset.has_drive_snapshot&&bx_ntvdm_dem_ioctl_metadata_provider_v1_dispatch(i,p,&plane,&s->drive_view.gset.drive_snapshot,e,c,r))return terminal_or_complete(i,p,&route,e,c,w,r);
   if(bx_ntvdm_dem_raw_media_provider_v1_dispatch(i,p,&route,e,c,w,r))return 1;
   if(s->drive_view.gset.has_drive_snapshot&&bx_ntvdm_dem_boot_drive_service_v2_dispatch(&s->drive_view.gset.drive_snapshot,s->drive_view.has_boot_drive?s->drive_view.boot_drive_index:UINT32_MAX,e,c,w,&mem))return memory_result(&mem,r);
+
+  if(i->service==0x1bu&&dta_dispatch(s,e,c,w,r))return 1;
 
   if(bx_ntvdm_dem_drive_view_provider_v1_prepare_cwd(&s->drive_view,i->service,e,c,&gather)){
     if(!gather_read(s,&gather,&a)||!action(&a)||!bx_ntvdm_dem_drive_view_provider_v1_complete_cwd(&s->drive_view,s->namespace_plane->dem_host_namespace,i->service,e,c,&gather,a.payload,a.payload_bytes,&tx,payload)||!write_tx(s,&tx,payload))return 0;

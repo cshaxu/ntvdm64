@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_drive_view_provider_v1.h"
 #include "bx_ntvdm_dem_computer_name_service_v1.h"
 #include "bx_ntvdm_dem_cwd_service_v2.h"
+#include "bx_ntvdm_dem_dta_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
 #include "bx_ntvdm_dem_full_dpb_service_v1.h"
 #include "bx_ntvdm_dem_media_id_service_v1.h"
@@ -196,3 +197,29 @@ int bx_ntvdm_dem_drive_view_provider_v1_owns_observation(uint8_t service)
     service == 0x14u || service == 0x15u || service == 0x19u ||
     service == 0x1cu || service == 0x25u || service == 0x41u ||
     service == 0x46u; }
+
+int bx_ntvdm_dem_drive_view_provider_v1_prepare_dta(
+    const bx_ntvdm_dem_drive_view_provider_v1 *provider,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_instruction_window_v1 *window,
+    bx_ntvdm_guest_read_action_v1 *action)
+{
+    return bx_ntvdm_dem_drive_view_provider_v1_valid(provider) &&
+        provider->has_mutation_profile &&
+        bx_ntvdm_dem_dta_service_v1_dispatch(event, cpu, window, action);
+}
+
+int bx_ntvdm_dem_drive_view_provider_v1_complete_dta(
+    const bx_ntvdm_dem_drive_view_provider_v1 *provider,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    const bx_ntvdm_guest_read_action_v1 *action, const uint8_t *bytes,
+    uint64_t byte_count, bx_ntvdm_dem_dta_registration_v1 *registration,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    return bx_ntvdm_dem_drive_view_provider_v1_valid(provider) &&
+        provider->has_mutation_profile &&
+        bx_ntvdm_dem_dta_service_v1_complete(event, cpu, action, bytes,
+            byte_count, registration, result);
+}

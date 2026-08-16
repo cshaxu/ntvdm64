@@ -71,6 +71,10 @@
 > admitting fully validated CPU-only CWD results; its focused x64 /MT fixture passes.
 > DTA and the remaining drive-view groups are still open; see the [P5 record]
 > (etc/research/t222-s2-drive-view-cwd-normal-session-regression-001.md).
+> **T222 S2 P6 progress:** 50:1B demSetDTALocation now reaches the same 
+> drive-view provider through normal package session; its OpenNT-shaped no-flags 
+> resume and four copied guest locators pass under Direct/Readonly x64 /MT. 
+> See the [P6 record](etc/research/t222-s2-drive-view-dta-provider-migration-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily

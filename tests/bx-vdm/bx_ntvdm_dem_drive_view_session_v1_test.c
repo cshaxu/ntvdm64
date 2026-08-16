@@ -144,7 +144,15 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
     cpu.ds = 0u; cpu.esi = 0x120u; cpu.edx = 2u;
     if (!dispatch(&session, 0x1au, &cpu, &result) ||
         !(readonly ? access_denied(&result) : success(&result))) { bx_ntvdm_dem_package_session_v1_teardown(&session); return 4; }
-    bx_ntvdm_dem_package_session_v1_teardown(&session);
+    ram[0x220u] = 0x00u; ram[0x221u] = 0x06u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.ds = 0u; cpu.esi = 0x200u; cpu.eax = 0x300u; cpu.edx = 0x400u;
+    cpu.ecx = 0x500u;
+    if (!dispatch(&session, 0x1bu, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        !plane.has_dta || plane.dta.dta_location != 0x300u ||
+        plane.dta.current_pdb != 0x400u || plane.dta.extended_error != 0x500u ||
+        plane.dta.sft_head != 0x600u) { bx_ntvdm_dem_package_session_v1_teardown(&session); return 5; }    bx_ntvdm_dem_package_session_v1_teardown(&session);
     return 0;
 }
 
