@@ -107,6 +107,13 @@
 > an Overlay modification leaves the real temporary host file unchanged.  No
 > namespace or handle BOP route adopts this token yet. See the [P6 record](etc/research/t221-s3-overlay-resolver-001.md).
 
+> **T221 S3 P7 progress:** the Overlay handle-operation subfamily
+> (`50:00/02/16/1E/27`) now routes through one typed private file backend;
+> it proves COW gather/write/readback, flush, close and stale-token refusal
+> without a Direct fallback. `50:08` remains explicit unsupported because no
+> Overlay metadata owner is admitted. Namespace/FCB/search and Virtual remain
+> open, so this is only a subfamily checkpoint. See the [P7 record](etc/research/t221-s3-overlay-handle-subfamily-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

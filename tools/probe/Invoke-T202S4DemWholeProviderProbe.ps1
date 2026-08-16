@@ -51,7 +51,7 @@ $sources += Join-Path $root 'tests\bx-vdm\bx_ntvdm_dem_whole_provider_v1_test.c'
 $compile = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' +
     (Join-Path $root 'src\bx-vdm') + '" /I "' + (Join-Path $root 'src') +
     '" /I "' + (Join-Path $root 'src\cli') +
-    '" /Fe:"' + $exe + '" ' + ($sources -join ' ') + ' /link ntdll.lib bcrypt.lib'
+    '" /Fe:"' + $exe + '" ' + ($sources -join ' ') + ' /link ntdll.lib bcrypt.lib /STACK:4194304'
 & cmd.exe /d /s /c $compile 2>&1 | Tee-Object -FilePath (Join-Path $build 'compile.log')
 if ($LASTEXITCODE -ne 0) { throw "T202 S4 DEM whole-provider compilation failed: $LASTEXITCODE" }
 & $exe 2>&1 | Tee-Object -FilePath (Join-Path $build 'run.log')

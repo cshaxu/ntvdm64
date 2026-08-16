@@ -136,13 +136,14 @@ int bx_ntvdm_dem_overlay_file_v1_write(bx_ntvdm_dem_overlay_file_v1 *files,
         BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE);
     const bx_ntvdm_dem_overlay_store_v1_entry *entry;
     uint8_t *copy;
-    uint32_t end;
+    uint32_t end, write_end;
     if (written_out != 0) *written_out = 0u;
     if (handle == 0 || written_out == 0 || (byte_count != 0u && bytes == 0)) return 0;
     if (byte_count > UINT32_MAX - handle->position) return 0;
     entry = bx_ntvdm_dem_overlay_store_v1_lookup(files->store, handle->drive_index, handle->relative);
     if (entry == 0 || entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE) return 0;
-    end = handle->position + byte_count;
+    write_end = handle->position + byte_count;
+    end = entry->byte_count > write_end ? entry->byte_count : write_end;
     copy = end == 0u ? 0 : (uint8_t *)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, end);
     if (end != 0u && copy == 0) return 0;
     if (entry->byte_count != 0u) memcpy(copy, entry->bytes, entry->byte_count);
@@ -152,7 +153,7 @@ int bx_ntvdm_dem_overlay_file_v1_write(bx_ntvdm_dem_overlay_file_v1 *files,
         if (copy != 0) HeapFree(GetProcessHeap(), 0u, copy); return 0;
     }
     if (copy != 0) HeapFree(GetProcessHeap(), 0u, copy);
-    handle->position = end; *written_out = byte_count;
+    handle->position = write_end; *written_out = byte_count;
     return 1;
 }
 

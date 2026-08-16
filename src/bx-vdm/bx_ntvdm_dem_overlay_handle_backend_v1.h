@@ -14,6 +14,9 @@ int bx_ntvdm_dem_overlay_handle_backend_v1_write(bx_ntvdm_dem_file_session_v1 *s
 int bx_ntvdm_dem_overlay_handle_backend_v1_seek(bx_ntvdm_dem_file_session_v1 *session,
     bx_ntvdm_dem_overlay_file_v1 *files, uint32_t token, int32_t distance,
     uint32_t origin, uint32_t *position_out);
+int bx_ntvdm_dem_overlay_handle_backend_v1_truncate(
+    bx_ntvdm_dem_file_session_v1 *session, bx_ntvdm_dem_overlay_file_v1 *files,
+    uint32_t token);
 int bx_ntvdm_dem_overlay_handle_backend_v1_close(bx_ntvdm_dem_file_session_v1 *session,
     bx_ntvdm_dem_overlay_file_v1 *files, uint32_t token);
 int bx_ntvdm_dem_overlay_handle_backend_v1_flush(

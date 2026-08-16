@@ -22,6 +22,11 @@ int bx_ntvdm_dem_overlay_handle_backend_v1_seek(bx_ntvdm_dem_file_session_v1 *se
     uint32_t origin, uint32_t *position_out)
 { uint32_t value; return backend(session, token, &value) &&
     bx_ntvdm_dem_overlay_file_v1_seek(files, value, distance, origin, position_out); }
+int bx_ntvdm_dem_overlay_handle_backend_v1_truncate(
+    bx_ntvdm_dem_file_session_v1 *session, bx_ntvdm_dem_overlay_file_v1 *files,
+    uint32_t token)
+{ uint32_t value; return backend(session, token, &value) &&
+    bx_ntvdm_dem_overlay_file_v1_truncate(files, value); }
 int bx_ntvdm_dem_overlay_handle_backend_v1_close(bx_ntvdm_dem_file_session_v1 *session,
     bx_ntvdm_dem_overlay_file_v1 *files, uint32_t token)
 { uint32_t value; return backend(session, token, &value) &&

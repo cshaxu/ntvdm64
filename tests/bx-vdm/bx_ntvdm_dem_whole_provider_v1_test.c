@@ -4,6 +4,7 @@
 #include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
 #include "bx_ntvdm_dem_namespace_route_partition_v1.h"
 #include "bx_ntvdm_dem_handle_route_partition_v1.h"
+#include "bx_ntvdm_dem_overlay_handle_backend_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
@@ -282,6 +283,86 @@ int main(void)
             service == 0x44u || service == 0x47u || service == 0x48u;
         if (bx_ntvdm_dem_whole_provider_v1_owns_service((uint8_t)service) != expected)
             failed = 20;
+    }
+    if (!failed) {
+        static const uint8_t base[] = "base";
+        bx_ntvdm_mutation_profile_v1 overlay_profile;
+        bx_ntvdm_dem_cwd_context_v1 overlay_cwd;
+        bx_ntvdm_dem_whole_provider_v1 *overlay = 0;
+        uint32_t backend_token, overlay_token;
+        if (!profile_for_mode(&overlay_profile, BX_NTVDM_MUTATION_MODE_V1_OVERLAY) ||
+            !bx_ntvdm_dem_cwd_context_v1_initialize(&overlay_cwd, &overlay_profile) ||
+            (overlay = (bx_ntvdm_dem_whole_provider_v1 *)HeapAlloc(GetProcessHeap(),
+                HEAP_ZERO_MEMORY, sizeof(*overlay))) == 0 ||
+            !bx_ntvdm_dem_whole_provider_v1_initialize(overlay, &overlay_profile,
+                &space, &overlay_cwd) ||
+            !bx_ntvdm_dem_overlay_file_v1_open(&overlay->overlay_files, drive,
+                L"overlay.bin", BX_NTVDM_DEM_OVERLAY_FILE_V1_READ |
+                BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE, base, sizeof(base) - 1u,
+                FILE_ATTRIBUTE_NORMAL, 1, 0, &backend_token) ||
+            !bx_ntvdm_dem_file_session_v1_adopt_backend(&overlay->files,
+                BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, backend_token,
+                0u, &overlay_token)) failed = 21;
+        else {
+            const uint8_t handle_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x00u };
+            bx_ntvdm_instruction_window_v1_capture(&window, handle_bop, sizeof(handle_bop));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            token_into_cpu(&cpu, overlay_token);
+            cpu.ebx = cpu.ecx = cpu.edx = cpu.esi = cpu.eflags = 0u;
+            if (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x00u,
+                    &boundary, &cpu, &window, &fcb_action, &result) || cf_set(&result) ||
+                !ax_is(&result, 0u)) failed = 211;
+            ((uint8_t *)window.bytes)[3] = 0x1eu;
+            token_into_cpu(&cpu, overlay_token); cpu.ecx = 3u; cpu.edx = 0x500u;
+            cpu.ds = 0u; cpu.eflags = 0x40u;
+            if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x1eu,
+                    &boundary, &cpu, &window, &fcb_action, &result) ||
+                fcb_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_READ ||
+                fcb_action.payload_bytes != 3u)) failed = 212;
+            if (!failed) {
+                memcpy(fcb_action.payload, "COW", 3u);
+                if (!bx_ntvdm_dem_handle_route_partition_v1_complete_read(overlay, 0x1eu,
+                        &boundary, &cpu, &fcb_action, &result) || cf_set(&result) ||
+                    !ax_is(&result, 3u)) failed = 213;
+            }
+            ((uint8_t *)window.bytes)[3] = 0x00u;
+            token_into_cpu(&cpu, overlay_token);
+            cpu.ebx = cpu.ecx = cpu.edx = cpu.esi = cpu.eflags = 0u;
+            if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x00u,
+                    &boundary, &cpu, &window, &fcb_action, &result) || cf_set(&result))) failed = 214;
+            ((uint8_t *)window.bytes)[3] = 0x16u;
+            token_into_cpu(&cpu, overlay_token); cpu.ecx = 4u; cpu.edx = 0x600u;
+            cpu.ds = 0u; cpu.eflags = 0x40u;
+            if (!failed && !bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x16u,
+                    &boundary, &cpu, &window, &fcb_action, &result)) failed = 215;
+            else if (!failed && cf_set(&result)) failed = 216;
+            else if (!failed && fcb_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE) failed = 217;
+            else if (!failed && fcb_action.payload_bytes != 4u) failed = 218;
+            else if (!failed && memcmp(fcb_action.payload, "COWe", 4u) != 0) failed = 219;
+            ((uint8_t *)window.bytes)[3] = 0x08u;
+            token_into_cpu(&cpu, overlay_token);
+            if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x08u,
+                    &boundary, &cpu, &window, &fcb_action, &result) || !cf_set(&result) ||
+                !ax_is(&result, 1u))) failed = 220;
+            ((uint8_t *)window.bytes)[3] = 0x27u;
+            token_into_cpu(&cpu, overlay_token);
+            if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x27u,
+                    &boundary, &cpu, &window, &fcb_action, &result) || cf_set(&result))) failed = 221;
+            ((uint8_t *)window.bytes)[3] = 0x02u;
+            token_into_cpu(&cpu, overlay_token); cpu.ecx = cpu.edx = 0xffffu;
+            if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x02u,
+                    &boundary, &cpu, &window, &fcb_action, &result) || cf_set(&result) ||
+                bx_ntvdm_dem_file_session_v1_token_kind(&overlay->files, overlay_token,
+                    &service))) failed = 222;
+        }
+        if (overlay != 0) {
+            bx_ntvdm_dem_whole_provider_v1_teardown(overlay);
+            HeapFree(GetProcessHeap(), 0, overlay);
+        }
+        {
+            const uint8_t fcb_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x2fu };
+            bx_ntvdm_instruction_window_v1_capture(&window, fcb_bop, sizeof(fcb_bop));
+        }
     }
     if (!failed && (!bx_ntvdm_dem_whole_provider_v1_prepare_gather(&provider,
             0x12u, &boundary, &cpu, &range, 1u, &action) ||
