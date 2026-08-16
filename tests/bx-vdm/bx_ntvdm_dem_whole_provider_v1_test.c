@@ -198,11 +198,14 @@ int main(void)
         bx_ntvdm_dem_namespace_identity_observation_v1_enable(1u);
         if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
                 &boundary, &cpu, oem_config, 0, &result) || cf_set(&result) ||
-            !ax_is(&result, (uint16_t)(startup_images.generation >> 16)) ||
-            result.cpu_delta.gpr16_values[5] != (uint16_t)startup_images.generation ||
             result.cpu_delta.gpr16_values[2] != sizeof("FILES=20\r\n") - 1u)
             failed = 12;
-        startup_token = startup_images.generation;
+        startup_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+            result.cpu_delta.gpr16_values[5];
+        if (!failed && (startup_token == 0u ||
+            !bx_ntvdm_dem_file_session_v1_token_kind(&provider.files, startup_token,
+                &service) || service != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE))
+            failed = 12;
         if (!failed) {
             struct bx_ntvdm_mechanical_action_v1 overlay_action;
             bx_ntvdm_instruction_window_v1_capture(&window, bop_open, sizeof(bop_open));
@@ -639,6 +642,9 @@ int main(void)
     }
     if (!failed) {
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        /* The direct call below bypasses package_session's copied CurrentPDB
+         * transaction, so supply its already-validated test owner explicitly. */
+        provider.direct_namespace_owner = 0x1234u;
         cpu.ebx = 0u; /* demOpen: read, compatibility sharing */
         if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&provider, 0x12u,
                 &boundary, &cpu, oem_short, 0, &result) || cf_set(&result) ||

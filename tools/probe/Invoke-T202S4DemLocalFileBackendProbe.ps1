@@ -13,7 +13,8 @@ New-Item -ItemType Directory -Path $build | Out-Null
 $exe = Join-Path $build 't202-s4-dem-local-file-backend.exe'
 $names = @(
     'bx_ntvdm_mutation_profile_v1.c', 'bx_ntvdm_mutation_overlay_v1.c',
-    'bx_ntvdm_dem_profile_consumer_v1.c', 'bx_ntvdm_host_drive_policy.c',
+    'bx_ntvdm_dem_profile_consumer_v1.c', 'bx_ntvdm_dem_file_view_v1.c',
+    'bx_ntvdm_host_drive_policy.c',
     'bx_ntvdm_host_namespace.c', 'bx_ntvdm_dem_cwd_context_v1.c',
     'bx_ntvdm_dem_path_v1.c', 'bx_ntvdm_dem_file_session_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c'

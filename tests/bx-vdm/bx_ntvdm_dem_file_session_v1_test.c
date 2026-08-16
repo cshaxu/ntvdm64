@@ -19,7 +19,7 @@ int main(void)
     bx_ntvdm_dem_file_session_v1 session;
     wchar_t path[MAX_PATH];
     HANDLE file, looked_up;
-    uint32_t first, second, third, released;
+    uint32_t first, second, third, released, kind;
     if (!profile(&mutation) || !bx_ntvdm_dem_file_session_v1_initialize(&session, &mutation) ||
         GetTempPathW(MAX_PATH, path) == 0u ||
         GetTempFileNameW(path, L"nd6", 0u, path) == 0u) return 1;
@@ -29,8 +29,11 @@ int main(void)
         !bx_ntvdm_dem_file_session_v1_adopt(&session, file, &first) ||
         first == 0u || first == (uint32_t)(uintptr_t)file ||
         !bx_ntvdm_dem_file_session_v1_lookup(&session, first, &looked_up) ||
+        !bx_ntvdm_dem_file_session_v1_token_kind(&session, first, &kind) ||
+        kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE ||
         looked_up != file || !bx_ntvdm_dem_file_session_v1_release(&session, first) ||
-        bx_ntvdm_dem_file_session_v1_lookup(&session, first, &looked_up)) {
+        bx_ntvdm_dem_file_session_v1_lookup(&session, first, &looked_up) ||
+        bx_ntvdm_dem_file_session_v1_token_kind(&session, first, &kind)) {
         bx_ntvdm_dem_file_session_v1_teardown(&session);
         DeleteFileW(path);
         return 2;

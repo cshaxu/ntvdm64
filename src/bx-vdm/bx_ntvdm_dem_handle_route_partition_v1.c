@@ -84,6 +84,29 @@ static int overlay_finish(const bx_ntvdm_exception_event_v1 *boundary,
         bx_ntvdm_cpu_result_v2_set_cf(result, carry);
 }
 
+static uint32_t token(const bx_ntvdm_cpu_state_v1 *cpu)
+{ return ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu); }
+
+static int readonly_token(const bx_ntvdm_dem_whole_provider_v1 *provider,
+    const bx_ntvdm_cpu_state_v1 *cpu, uint32_t *backend_token_out)
+{
+    return provider != 0 && provider->startup_namespace != 0 && cpu != 0 &&
+        bx_ntvdm_dem_file_session_v1_lookup_backend(&provider->files, token(cpu),
+            BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE, backend_token_out) &&
+        bx_ntvdm_readonly_namespace_v1_owns_token(provider->startup_namespace,
+            *backend_token_out);
+}
+
+static void substitute_token(bx_ntvdm_cpu_state_v1 *destination,
+    const bx_ntvdm_cpu_state_v1 *source, uint32_t backend_token)
+{
+    *destination = *source;
+    destination->eax = (destination->eax & UINT32_C(0xffff0000)) |
+        (backend_token >> 16);
+    destination->ebp = (destination->ebp & UINT32_C(0xffff0000)) |
+        (backend_token & 0xffffu);
+}
+
 static int startup_overlay_dispatch(bx_ntvdm_dem_whole_provider_v1 *provider,
     uint8_t service, const bx_ntvdm_exception_event_v1 *boundary,
     const bx_ntvdm_cpu_state_v1 *cpu, const bx_ntvdm_instruction_window_v1 *window,
@@ -92,21 +115,29 @@ static int startup_overlay_dispatch(bx_ntvdm_dem_whole_provider_v1 *provider,
 {
     bx_ntvdm_bulk_result_transaction_v1 transaction;
     uint8_t bytes[BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES];
-    if (provider->startup_namespace == 0 ||
-        !bx_ntvdm_readonly_namespace_v1_owns_token(provider->startup_namespace,
-            ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu))) return 0;
+    bx_ntvdm_cpu_state_v1 readonly_cpu;
+    uint32_t backend_token;
+    if (!readonly_token(provider, cpu, &backend_token)) return 0;
+    substitute_token(&readonly_cpu, cpu, backend_token);
     if (service == 0x00u) return bx_ntvdm_dem_readonly_file_v1_seek(
-        provider->startup_namespace, boundary, cpu, window, result_out);
-    if (service == 0x02u) return bx_ntvdm_dem_readonly_file_v1_close(
-        provider->startup_namespace, boundary, cpu, window, result_out);
+        provider->startup_namespace, boundary, &readonly_cpu, window, result_out);
+    if (service == 0x02u) {
+        if (!bx_ntvdm_dem_readonly_file_v1_close(provider->startup_namespace,
+                boundary, &readonly_cpu, window, result_out)) return 0;
+        if (!bx_ntvdm_readonly_namespace_v1_owns_token(provider->startup_namespace,
+                backend_token) && !bx_ntvdm_dem_file_session_v1_release_backend(
+                    &provider->files, token(cpu),
+                    BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE)) return 0;
+        return 1;
+    }
     if (service == 0x08u) return bx_ntvdm_dem_readonly_file_v1_file_times(
-        provider->startup_namespace, boundary, cpu, window, result_out);
+        provider->startup_namespace, boundary, &readonly_cpu, window, result_out);
     if (service == 0x1eu)
         return overlay_finish(boundary, result_out, 5u, 1);
     if (service == 0x27u)
         return overlay_finish(boundary, result_out, 0u, 0);
     if (service != 0x16u || !bx_ntvdm_dem_readonly_file_v1_read(
-            provider->startup_namespace, boundary, cpu, window, bytes, sizeof(bytes),
+            provider->startup_namespace, boundary, &readonly_cpu, window, bytes, sizeof(bytes),
             &transaction, result_out)) return 0;
     if (transaction.magic == 0u) return 1;
     if (!bx_ntvdm_bulk_result_transaction_v1_preflight(&transaction,
@@ -127,15 +158,13 @@ int bx_ntvdm_dem_handle_route_partition_v1_claims_request(
     const bx_ntvdm_cpu_state_v1 *cpu)
 {
     HANDLE unused;
-    uint32_t token;
+    uint32_t backend_token;
     if (provider == 0 || cpu == 0 ||
         !bx_ntvdm_dem_handle_route_partition_v1_owns_service(service)) return 0;
     if (service == 0x08u && (uint8_t)(cpu->ebx & 0xffu) > 1u) return 1;
-    token = ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu);
-    return (provider->startup_namespace != 0 &&
-            bx_ntvdm_readonly_namespace_v1_owns_token(provider->startup_namespace, token)) ||
-        (service == 0x02u && token == 0u) ||
-        bx_ntvdm_dem_file_session_v1_lookup(&provider->files, token, &unused);
+    return readonly_token(provider, cpu, &backend_token) ||
+        (service == 0x02u && token(cpu) == 0u) ||
+        bx_ntvdm_dem_file_session_v1_lookup(&provider->files, token(cpu), &unused);
 }
 
 int bx_ntvdm_dem_handle_route_partition_v1_dispatch(

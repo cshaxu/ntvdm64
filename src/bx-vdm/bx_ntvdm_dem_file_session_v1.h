@@ -10,6 +10,15 @@
 #define BX_NTVDM_DEM_FILE_SESSION_V1_VERSION 1u
 #define BX_NTVDM_DEM_FILE_SESSION_V1_MAX_TOKENS 64u
 
+/* The guest-visible token is never a native handle.  Its backend kind is
+ * checked before any backend-specific operation; later readonly/overlay/
+ * virtual entries must not be accepted by the Direct Win32-handle paths. */
+enum bx_ntvdm_dem_file_token_kind_v1 {
+    BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_NONE = 0u,
+    BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE = 1u,
+    BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE = 2u
+};
+
 /* The token is a copied guest-visible value, not a Win32 handle.  The low
  * 16 bits name one bounded slot and the high bits reject stale reuse. */
 typedef struct bx_ntvdm_dem_file_token_slot_v1 {
@@ -17,7 +26,9 @@ typedef struct bx_ntvdm_dem_file_token_slot_v1 {
     uint32_t generation;
     uint32_t in_use;
     uint16_t pdb_owner;
+    uint16_t kind;
     uint16_t reserved0;
+    uint32_t backend_token;
 } bx_ntvdm_dem_file_token_slot_v1;
 
 typedef struct bx_ntvdm_dem_file_session_v1 {
@@ -48,11 +59,23 @@ int bx_ntvdm_dem_file_session_v1_adopt(
 int bx_ntvdm_dem_file_session_v1_adopt_owned(
     bx_ntvdm_dem_file_session_v1 *session, HANDLE handle,
     uint16_t pdb_owner, uint32_t *token_out);
+int bx_ntvdm_dem_file_session_v1_adopt_backend(
+    bx_ntvdm_dem_file_session_v1 *session, uint32_t kind,
+    uint32_t backend_token, uint16_t pdb_owner, uint32_t *token_out);
 int bx_ntvdm_dem_file_session_v1_lookup(
     const bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
     HANDLE *handle_out);
+int bx_ntvdm_dem_file_session_v1_token_kind(
+    const bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
+    uint32_t *kind_out);
+int bx_ntvdm_dem_file_session_v1_lookup_backend(
+    const bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
+    uint32_t expected_kind, uint32_t *backend_token_out);
 int bx_ntvdm_dem_file_session_v1_release(
     bx_ntvdm_dem_file_session_v1 *session, uint32_t token);
+int bx_ntvdm_dem_file_session_v1_release_backend(
+    bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
+    uint32_t expected_kind);
 int bx_ntvdm_dem_file_session_v1_release_owner(
     bx_ntvdm_dem_file_session_v1 *session, uint16_t pdb_owner,
     uint32_t *released_out);

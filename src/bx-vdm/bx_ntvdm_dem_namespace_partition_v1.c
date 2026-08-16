@@ -196,14 +196,21 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             else if ((mode & 0x07u) != 2u) return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
         }
         if (startup_path) {
-            uint32_t startup_token = 0u;
+            uint32_t startup_token = 0u, provider_token = 0u;
             if (service != 0x12u || (cpu->ebx & 0x07u) != 0u ||
                 !bx_ntvdm_readonly_namespace_v1_open(provider->startup_namespace,
                     drive, relative, &startup_token, &startup_size))
                 return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
-            int completed = finish(boundary, result, (uint16_t)(startup_token >> 16), 1, 0) &&
+            if (!bx_ntvdm_dem_file_session_v1_adopt_backend(&provider->files,
+                    BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE,
+                    startup_token, 0u, &provider_token)) {
+                (void)bx_ntvdm_readonly_namespace_v1_close(provider->startup_namespace,
+                    startup_token);
+                return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
+            }
+            int completed = finish(boundary, result, (uint16_t)(provider_token >> 16), 1, 0) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
-                    (uint16_t)startup_token) &&
+                    (uint16_t)provider_token) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
                     (uint16_t)startup_size) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
@@ -212,12 +219,19 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             observe_open(provider, service, 1, drive, 1, relative, oem_path, result);
             return completed;
         }
-        if (provider->direct_namespace_owner == 0u)
-            return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
-        admitted = bx_ntvdm_dem_local_file_backend_v1_open_ex_owned(&provider->local_files,
-            oem_path, access, service == 0x12u ? open_share((uint8_t)cpu->ebx) :
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_DIRECT) {
+            if (provider->direct_namespace_owner == 0u)
+                return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
+            admitted = bx_ntvdm_dem_local_file_backend_v1_open_ex_owned(
+                &provider->local_files, oem_path, access,
+                service == 0x12u ? open_share((uint8_t)cpu->ebx) :
+                    FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                disposition, provider->direct_namespace_owner, &token, &error);
+        } else admitted = bx_ntvdm_dem_local_file_backend_v1_open_ex(
+            &provider->local_files, oem_path, access,
+            service == 0x12u ? open_share((uint8_t)cpu->ebx) :
                 FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-            disposition, provider->direct_namespace_owner, &token, &error);
+            disposition, &token, &error);
         if (admitted != BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_OK) {
             if (admitted == BX_NTVDM_DEM_LOCAL_FILE_BACKEND_V1_READONLY)
                 error = DEM_ERROR_ACCESS_DENIED;

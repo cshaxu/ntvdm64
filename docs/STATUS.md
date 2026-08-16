@@ -75,6 +75,20 @@
 > mismatched token-session/view profiles. This is boundary progress only, not
 > a subfamily or package closure; see the [P1 record](etc/research/t221-s3-file-view-boundary-001.md).
 
+> **T221 S3 P2 progress:** opaque file-session tokens now carry and validate
+> `DIRECT_WIN32_HANDLE` kind before any `HANDLE` lookup; stale tokens and
+> session/view-profile mismatch remain rejected. This is the required typed
+> token precondition, not an Overlay/Virtual implementation; see the [P2
+> record](etc/research/t221-s3-typed-direct-token-001.md).
+
+> **T221 S3 P3 progress:** declared readonly startup images now enter the
+> same opaque session token boundary as Direct files under a checked
+> `READONLY_NAMESPACE` kind; only the provider sees its private backend token.
+> Direct PDB-owner admission now occurs only after the Direct view is chosen,
+> restoring Readonly source-shaped refusal. The full source-built whole-provider
+> fixture passes under MSVC x64 `/MT`; Overlay/Virtual remain unimplemented.
+> See the [P3 record](etc/research/t221-s3-readonly-token-migration-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

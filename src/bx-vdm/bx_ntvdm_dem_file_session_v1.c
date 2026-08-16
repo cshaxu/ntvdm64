@@ -18,6 +18,17 @@ static int decode(uint32_t token, uint32_t *index_out, uint32_t *generation_out)
     return *generation_out != 0u;
 }
 
+static void clear_slot(bx_ntvdm_dem_file_token_slot_v1 *slot)
+{
+    slot->handle = INVALID_HANDLE_VALUE;
+    slot->backend_token = 0u;
+    slot->in_use = 0u;
+    slot->pdb_owner = 0u;
+    slot->kind = BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_NONE;
+    ++slot->generation;
+    if (slot->generation == 0u) slot->generation = 1u;
+}
+
 int bx_ntvdm_dem_file_session_v1_valid(
     const bx_ntvdm_dem_file_session_v1 *session)
 {
@@ -28,10 +39,19 @@ int bx_ntvdm_dem_file_session_v1_valid(
         !bx_ntvdm_dem_profile_consumer_v1_valid(&session->profile)) return 0;
     for (index = 0u; index < BX_NTVDM_DEM_FILE_SESSION_V1_MAX_TOKENS; ++index) {
         const bx_ntvdm_dem_file_token_slot_v1 *slot = &session->slots[index];
-        if (slot->generation == 0u || slot->in_use > 1u || slot->reserved0 != 0u ||
-            (slot->in_use != 0u &&
-             (slot->handle == 0 || slot->handle == INVALID_HANDLE_VALUE)) ||
-            (slot->in_use == 0u && slot->pdb_owner != 0u)) return 0;
+        if (slot->generation == 0u || slot->in_use > 1u || slot->reserved0 != 0u)
+            return 0;
+        if (slot->in_use == 0u) {
+            if (slot->pdb_owner != 0u ||
+                slot->kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_NONE ||
+                slot->backend_token != 0u) return 0;
+        } else if (slot->kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE) {
+            if (slot->handle == 0 || slot->handle == INVALID_HANDLE_VALUE ||
+                slot->backend_token != 0u) return 0;
+        } else if (slot->kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE) {
+            if (slot->handle != INVALID_HANDLE_VALUE || slot->backend_token == 0u)
+                return 0;
+        } else return 0;
     }
     return 1;
 }
@@ -77,6 +97,32 @@ int bx_ntvdm_dem_file_session_v1_adopt_owned(
             slot->handle = handle;
             slot->in_use = 1u;
             slot->pdb_owner = pdb_owner;
+            slot->kind = BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE;
+            slot->backend_token = 0u;
+            *token_out = token_for(index, slot->generation);
+            return bx_ntvdm_dem_file_session_v1_valid(session);
+        }
+    }
+    return 0;
+}
+
+int bx_ntvdm_dem_file_session_v1_adopt_backend(
+    bx_ntvdm_dem_file_session_v1 *session, uint32_t kind,
+    uint32_t backend_token, uint16_t pdb_owner, uint32_t *token_out)
+{
+    uint32_t index;
+    if (token_out != 0) *token_out = 0u;
+    if (!bx_ntvdm_dem_file_session_v1_valid(session) || token_out == 0 ||
+        kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE ||
+        backend_token == 0u) return 0;
+    for (index = 0u; index < BX_NTVDM_DEM_FILE_SESSION_V1_MAX_TOKENS; ++index) {
+        bx_ntvdm_dem_file_token_slot_v1 *slot = &session->slots[index];
+        if (slot->in_use == 0u) {
+            slot->handle = INVALID_HANDLE_VALUE;
+            slot->backend_token = backend_token;
+            slot->in_use = 1u;
+            slot->pdb_owner = pdb_owner;
+            slot->kind = (uint16_t)kind;
             *token_out = token_for(index, slot->generation);
             return bx_ntvdm_dem_file_session_v1_valid(session);
         }
@@ -94,8 +140,41 @@ int bx_ntvdm_dem_file_session_v1_lookup(
     if (!bx_ntvdm_dem_file_session_v1_valid(session) || handle_out == 0 ||
         !decode(token, &index, &generation)) return 0;
     slot = &session->slots[index];
-    if (slot->in_use == 0u || slot->generation != generation) return 0;
+    if (slot->in_use == 0u || slot->generation != generation ||
+        slot->kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE) return 0;
     *handle_out = slot->handle;
+    return 1;
+}
+
+int bx_ntvdm_dem_file_session_v1_lookup_backend(
+    const bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
+    uint32_t expected_kind, uint32_t *backend_token_out)
+{
+    uint32_t index, generation;
+    const bx_ntvdm_dem_file_token_slot_v1 *slot;
+    if (backend_token_out != 0) *backend_token_out = 0u;
+    if (!bx_ntvdm_dem_file_session_v1_valid(session) || backend_token_out == 0 ||
+        expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE ||
+        !decode(token, &index, &generation)) return 0;
+    slot = &session->slots[index];
+    if (slot->in_use == 0u || slot->generation != generation ||
+        slot->kind != expected_kind) return 0;
+    *backend_token_out = slot->backend_token;
+    return 1;
+}
+
+int bx_ntvdm_dem_file_session_v1_token_kind(
+    const bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
+    uint32_t *kind_out)
+{
+    uint32_t index, generation;
+    const bx_ntvdm_dem_file_token_slot_v1 *slot;
+    if (kind_out != 0) *kind_out = BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_NONE;
+    if (!bx_ntvdm_dem_file_session_v1_valid(session) || kind_out == 0 ||
+        !decode(token, &index, &generation)) return 0;
+    slot = &session->slots[index];
+    if (slot->in_use == 0u || slot->generation != generation) return 0;
+    *kind_out = slot->kind;
     return 1;
 }
 
@@ -108,12 +187,25 @@ int bx_ntvdm_dem_file_session_v1_release(
         !decode(token, &index, &generation)) return 0;
     slot = &session->slots[index];
     if (slot->in_use == 0u || slot->generation != generation ||
+        slot->kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE ||
         !CloseHandle(slot->handle)) return 0;
-    slot->handle = INVALID_HANDLE_VALUE;
-    slot->in_use = 0u;
-    slot->pdb_owner = 0u;
-    ++slot->generation;
-    if (slot->generation == 0u) slot->generation = 1u;
+    clear_slot(slot);
+    return bx_ntvdm_dem_file_session_v1_valid(session);
+}
+
+int bx_ntvdm_dem_file_session_v1_release_backend(
+    bx_ntvdm_dem_file_session_v1 *session, uint32_t token,
+    uint32_t expected_kind)
+{
+    uint32_t index, generation;
+    bx_ntvdm_dem_file_token_slot_v1 *slot;
+    if (!bx_ntvdm_dem_file_session_v1_valid(session) ||
+        expected_kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_READONLY_NAMESPACE ||
+        !decode(token, &index, &generation)) return 0;
+    slot = &session->slots[index];
+    if (slot->in_use == 0u || slot->generation != generation ||
+        slot->kind != expected_kind) return 0;
+    clear_slot(slot);
     return bx_ntvdm_dem_file_session_v1_valid(session);
 }
 
@@ -127,13 +219,10 @@ int bx_ntvdm_dem_file_session_v1_release_owner(
         return 0;
     for (index = 0u; index < BX_NTVDM_DEM_FILE_SESSION_V1_MAX_TOKENS; ++index) {
         bx_ntvdm_dem_file_token_slot_v1 *slot = &session->slots[index];
-        if (slot->in_use == 0u || slot->pdb_owner != pdb_owner) continue;
+        if (slot->in_use == 0u || slot->pdb_owner != pdb_owner ||
+            slot->kind != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE) continue;
         if (!CloseHandle(slot->handle)) return 0;
-        slot->handle = INVALID_HANDLE_VALUE;
-        slot->in_use = 0u;
-        slot->pdb_owner = 0u;
-        ++slot->generation;
-        if (slot->generation == 0u) slot->generation = 1u;
+        clear_slot(slot);
         ++released;
     }
     if (released_out != 0) *released_out = released;
@@ -148,7 +237,9 @@ void bx_ntvdm_dem_file_session_v1_teardown(
     if (session->magic == BX_NTVDM_DEM_FILE_SESSION_V1_MAGIC) {
         for (index = 0u; index < BX_NTVDM_DEM_FILE_SESSION_V1_MAX_TOKENS; ++index) {
             bx_ntvdm_dem_file_token_slot_v1 *slot = &session->slots[index];
-            if (slot->in_use != 0u && slot->handle != 0 &&
+            if (slot->in_use != 0u &&
+                slot->kind == BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_DIRECT_WIN32_HANDLE &&
+                slot->handle != 0 &&
                 slot->handle != INVALID_HANDLE_VALUE) CloseHandle(slot->handle);
         }
     }
