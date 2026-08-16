@@ -215,6 +215,12 @@
 > no native trace has been run. See the [P24 closure]
 > (etc/research/t221-s3-fcb-wildcard-overlay-closure-001.md).
 
+> **T221 S3 P25 progress:** `50:09..0C` are admitted as one stateful
+> `demsrch.c` owner package. Existing checked DTA/SRCHBUF transport is
+> retained, but Overlay needs one selected search-entry source before any
+> individual service binding may change. See the [P25 admission]
+> (etc/research/t221-s3-search-owner-package-admission-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
