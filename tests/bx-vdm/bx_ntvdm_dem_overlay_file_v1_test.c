@@ -41,6 +41,8 @@ int main(void)
             BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE, 3u, 0, 0u, 0x20u, 1, 0, &second_token) ||
         !bx_ntvdm_dem_overlay_file_v1_close(&files, second_token) ||
         !bx_ntvdm_dem_overlay_store_v1_put_directory(&store, 2u, L"WORK\\DIR", 0x10u) ||
+        !bx_ntvdm_dem_overlay_store_v1_put_file(&store, 2u, L"WORK\\DIR\\CHILD", 0u, 0, 0u) ||
+        !bx_ntvdm_dem_overlay_store_v1_has_descendant(&store, 2u, L"WORK\\DIR") ||
         (entry = bx_ntvdm_dem_overlay_store_v1_lookup(&store, 2u, L"work\\dir")) == 0 ||
         entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY ||
         !bx_ntvdm_dem_overlay_store_v1_tombstone_directory(&store, 2u, L"WORK\\DIR") ||

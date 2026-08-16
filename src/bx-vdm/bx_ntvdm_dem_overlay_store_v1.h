@@ -49,5 +49,8 @@ int bx_ntvdm_dem_overlay_store_v1_tombstone_directory(
 const bx_ntvdm_dem_overlay_store_v1_entry *bx_ntvdm_dem_overlay_store_v1_lookup(
     const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
     const wchar_t *relative);
+int bx_ntvdm_dem_overlay_store_v1_has_descendant(
+    const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
+    const wchar_t *relative);
 
 #endif

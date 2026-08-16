@@ -147,3 +147,20 @@ int bx_ntvdm_dem_overlay_store_v1_tombstone_directory(
 const bx_ntvdm_dem_overlay_store_v1_entry *bx_ntvdm_dem_overlay_store_v1_lookup(
     const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive, const wchar_t *relative)
 { uint32_t index; return locate(store, drive, relative, &index) ? &store->entries[index] : 0; }
+
+int bx_ntvdm_dem_overlay_store_v1_has_descendant(
+    const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
+    const wchar_t *relative)
+{
+    uint32_t index; size_t length;
+    if (!bx_ntvdm_dem_overlay_store_v1_valid(store) || !valid_path(drive, relative)) return 0;
+    length = wcslen(relative);
+    for (index = 0u; index < store->count; ++index) {
+        const bx_ntvdm_dem_overlay_store_v1_entry *entry = &store->entries[index];
+        if (entry->drive_index == drive && _wcsnicmp(entry->relative, relative, length) == 0 &&
+            entry->relative[length] == L'\\' &&
+            entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE &&
+            entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY_TOMBSTONE) return 1;
+    }
+    return 0;
+}
