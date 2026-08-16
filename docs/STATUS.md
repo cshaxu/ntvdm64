@@ -157,6 +157,13 @@
 > EA/error/result mapping and all profile dispositions remain the next
 > four-service integration unit. See the [P14 record](etc/research/t221-s3-overlay-mutation-backend-001.md).
 
+> **T221 S3 P15 progress:** Overlay `50:04/05/06/17` now enter that one
+> backend through the normal bounded namespace route after shared profile
+> selection. Direct/Readonly/Virtual retain their prior dispositions, and the
+> full provider fixture covers Overlay create/remove/rename/delete without a
+> host mutation. This closes only the Overlay mutation binding; see the [P15
+> record](etc/research/t221-s3-overlay-namespace-mutation-binding-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
 #include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
 #include "bx_ntvdm_dem_overlay_namespace_backend_v1.h"
+#include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
 
 #include <string.h>
 
@@ -137,7 +138,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
 {
     wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
     wchar_t second_relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
-    uint8_t drive, second_drive;
+    uint8_t drive, second_drive = 0u;
     DWORD error = ERROR_SUCCESS;
     int admitted, startup_path = 0;
     uint64_t startup_size = 0u;
@@ -300,6 +301,47 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
     }
     if (service == 0x04u || service == 0x05u || service == 0x06u || service == 0x17u) {
         if (startup_path) return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
+            int completed = 0;
+            uint32_t policy = 0u;
+            if (!bx_ntvdm_dem_profile_consumer_v1_resolve(&provider->files.profile,
+                    BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, &policy) ||
+                policy != BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY) return 0;
+            if (service == 0x04u &&
+                ((cpu->ebx & 0xffffu) != 0u || (cpu->esi & 0xffffu) != 0u))
+                return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
+            if (service == 0x17u) {
+                if (!resolve_path(provider, oem_second_path, &second_drive, second_relative))
+                    return fail(boundary, result, ERROR_PATH_NOT_FOUND);
+                if (provider->startup_namespace != 0 &&
+                    bx_ntvdm_readonly_namespace_v1_match_startup_path(
+                        provider->startup_namespace, second_drive, second_relative, 0))
+                    return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
+            }
+            switch (service) {
+            case 0x04u:
+                completed = bx_ntvdm_dem_overlay_mutation_backend_v1_create_directory(
+                    &provider->overlay_store, provider->host_namespace, drive, relative, &error);
+                break;
+            case 0x05u:
+                completed = bx_ntvdm_dem_overlay_mutation_backend_v1_delete_file(
+                    &provider->overlay_store, provider->host_namespace, drive, relative, &error);
+                break;
+            case 0x06u:
+                completed = bx_ntvdm_dem_overlay_mutation_backend_v1_remove_directory(
+                    &provider->overlay_store, provider->host_namespace, drive, relative, &error);
+                break;
+            default:
+                completed = bx_ntvdm_dem_overlay_mutation_backend_v1_rename(
+                    &provider->overlay_store, &provider->overlay_files,
+                    provider->host_namespace, drive, relative, second_drive,
+                    second_relative, &error);
+                break;
+            }
+            if (!completed) return 0;
+            return error == ERROR_SUCCESS ? finish(boundary, result, 0u, 0, 0) :
+                fail(boundary, result, error);
+        }
         admitted = mutation(provider, BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT,
             boundary, result);
         if (admitted <= 0) return admitted < 0;

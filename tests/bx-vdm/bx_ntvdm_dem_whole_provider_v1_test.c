@@ -1000,6 +1000,8 @@ int main(void)
             !bx_ntvdm_dem_whole_provider_v1_initialize(&alternate,
                 &alternate_profile, &space, &alternate_cwd)) failed = 64;
         else {
+            char overlay_dir[MAX_PATH], overlay_renamed[MAX_PATH];
+            char *overlay_dot;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2cu,
                     &boundary, &cpu, oem_short, 0, 0u, &output_bytes, &result) ||
@@ -1014,9 +1016,32 @@ int main(void)
                     0x07u, &boundary, &cpu, oem_profile_pattern, 0, &result) ||
                 !cf_set(&result) || !ax_is(&result, 1u) || !oem_file_exists(oem_rename_one)))
                 failed = 651;
+            strcpy_s(overlay_dir, sizeof(overlay_dir), oem_short);
+            strcpy_s(overlay_renamed, sizeof(overlay_renamed), oem_short);
+            overlay_dot = strrchr(overlay_dir, '.');
+            if (!failed && overlay_dot == 0) failed = 654;
+            else if (!failed) strcpy_s(overlay_dot,
+                sizeof(overlay_dir) - (size_t)(overlay_dot - overlay_dir), ".OD1");
+            overlay_dot = strrchr(overlay_renamed, '.');
+            if (!failed && overlay_dot == 0) failed = 655;
+            else if (!failed) strcpy_s(overlay_dot,
+                sizeof(overlay_renamed) - (size_t)(overlay_dot - overlay_renamed), ".OR1");
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate,
+                    0x04u, &boundary, &cpu, overlay_dir, 0, &result) || cf_set(&result))) failed = 656;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate,
+                    0x06u, &boundary, &cpu, overlay_dir, 0, &result) || cf_set(&result))) failed = 657;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate,
+                    0x17u, &boundary, &cpu, oem_short, overlay_renamed, &result) ||
+                cf_set(&result))) failed = 658;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate,
+                    0x05u, &boundary, &cpu, overlay_renamed, 0, &result) ||
+                cf_set(&result))) failed = 659;
             if (!failed) {
-                static const uint8_t mutations[] = { 0x01u, 0x03u, 0x04u,
-                    0x05u, 0x06u, 0x17u, 0x22u };
+                static const uint8_t mutations[] = { 0x01u, 0x03u, 0x22u };
                 uint32_t index;
                 for (index = 0u; index < sizeof(mutations); ++index) {
                     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
