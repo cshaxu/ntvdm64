@@ -203,6 +203,12 @@
 > two wildcard services are still deliberately unbound. See the [P22 record]
 > (etc/research/t221-s3-overlay-visible-enumeration-foundation-001.md).
 
+> **T221 S3 P23 progress:** `50:07/20` now select the shared Overlay
+> wildcard provider without Direct fallback. Delete isolation and same-name
+> rename failure pass; a distinct-template rename success regression remains
+> required before this owner package is closed. See the [P23 record]
+> (etc/research/t221-s3-fcb-wildcard-overlay-binding-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

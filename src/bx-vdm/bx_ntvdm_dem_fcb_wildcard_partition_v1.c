@@ -1,6 +1,8 @@
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 
 #include "bx_ntvdm_search_request_v1.h"
+#include "bx_ntvdm_dem_overlay_namespace_view_v1.h"
+#include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
 
 #include <string.h>
 #include <wctype.h>
@@ -87,13 +89,14 @@ static int destination_name(const wchar_t *source, const wchar_t *template_name,
     return out[0] != L'\0';
 }
 
-static int direct_mutation(const bx_ntvdm_dem_whole_provider_v1 *provider,
+static int mutation_view(const bx_ntvdm_dem_whole_provider_v1 *provider,
     const bx_ntvdm_exception_event_v1 *boundary, bx_ntvdm_cpu_result_v2 *result)
 {
     uint32_t policy;
     if (!bx_ntvdm_dem_profile_consumer_v1_resolve(&provider->files.profile,
             BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, &policy)) return 0;
     if (policy == BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST) return 1;
+    if (policy == BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY) return 2;
     return policy == BX_NTVDM_MUTATION_POLICY_V1_REJECT_READONLY ?
         -fail(boundary, result, DEM_ERROR_ACCESS_DENIED) :
         -fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
@@ -116,7 +119,7 @@ int bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(
         !bx_ntvdm_cpu_state_v1_valid(cpu) ||
         cpu->execution_mode != BX_NTVDM_CPU_EXECUTION_REAL ||
         boundary->fault_rip > UINT64_MAX - 4u || !query(source_oem, &source)) return 0;
-    admitted = direct_mutation(provider, boundary, result);
+    admitted = mutation_view(provider, boundary, result);
     if (admitted <= 0) return admitted < 0;
     if (service == 0x07u && (uint8_t)cpu->eax != 0u &&
         (uint8_t)cpu->edx == 0x08u) return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
@@ -124,7 +127,13 @@ int bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(
     if (service == 0x20u && (!query(destination_oem, &destination) ||
         source.drive_index != destination.drive_index))
         return fail(boundary, result, DEM_ERROR_NOT_SAME_DEVICE);
-    if (bx_ntvdm_host_namespace_v1_enumerate(provider->host_namespace,
+    if (admitted == 2) {
+        DWORD overlay_error = ERROR_SUCCESS;
+        if (!bx_ntvdm_dem_overlay_namespace_view_v1_enumerate(&provider->overlay_store,
+                provider->host_namespace, source.drive_index, source.relative_directory,
+                entries, BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES, &count, &overlay_error))
+            return fail(boundary, result, overlay_error ? overlay_error : DEM_ERROR_PATH_NOT_FOUND);
+    } else if (bx_ntvdm_host_namespace_v1_enumerate(provider->host_namespace,
             source.drive_index, source.relative_directory, entries,
             BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES, &count) != BX_NTVDM_HOST_NAMESPACE_V1_OK)
         return fail(boundary, result, DEM_ERROR_PATH_NOT_FOUND);
@@ -139,12 +148,18 @@ int bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(
             DWORD error = ERROR_SUCCESS;
             if ((!extended && special != 0u) ||
                 (extended && (special & allowed) != special)) { rejected = 1; continue; }
-            if ((entries[index].attributes & FILE_ATTRIBUTE_READONLY) != 0u &&
+            if (admitted == 2) {
+                if (!bx_ntvdm_dem_overlay_mutation_backend_v1_delete_file(
+                        &provider->overlay_store, provider->host_namespace,
+                        source.drive_index, current, &error))
+                    return fail(boundary, result, error);
+                if (error != ERROR_SUCCESS) { rejected = 1; continue; }
+            } else if ((entries[index].attributes & FILE_ATTRIBUTE_READONLY) != 0u &&
                 !bx_ntvdm_host_namespace_v1_set_file_attributes(provider->host_namespace,
                     source.drive_index, current, FILE_ATTRIBUTE_NORMAL, &error)) {
                 rejected = 1; continue;
             }
-            if (!bx_ntvdm_host_namespace_v1_delete_file(provider->host_namespace,
+            if (admitted != 2 && !bx_ntvdm_host_namespace_v1_delete_file(provider->host_namespace,
                     source.drive_index, current, &error)) return fail(boundary, result, error);
             success = 1;
         } else {
@@ -153,7 +168,12 @@ int bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(
             if (!destination_name(entries[index].dos_name, destination.pattern, name) ||
                 !relative_name(&destination, name, target)) return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
             if (_wcsicmp(current, target) == 0) return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
-            if (!bx_ntvdm_host_namespace_v1_rename_file(provider->host_namespace,
+            if (admitted == 2) {
+                if (!bx_ntvdm_dem_overlay_mutation_backend_v1_rename(&provider->overlay_store,
+                        &provider->overlay_files, provider->host_namespace, source.drive_index,
+                        current, destination.drive_index, target, &error)) return fail(boundary, result, error);
+                if (error != ERROR_SUCCESS) return fail(boundary, result, error);
+            } else if (!bx_ntvdm_host_namespace_v1_rename_file(provider->host_namespace,
                     source.drive_index, current, destination.drive_index, target, &error))
                 return fail(boundary, result, error);
             success = 1;

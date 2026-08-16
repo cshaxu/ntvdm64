@@ -1105,7 +1105,7 @@ int main(void)
             cpu.eax = 0u;
             if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
                     0x07u, &boundary, &cpu, oem_profile_pattern, 0, &result) ||
-                !cf_set(&result) || !ax_is(&result, 1u) || !oem_file_exists(oem_rename_one)))
+                cf_set(&result) || !oem_file_exists(oem_rename_one)))
                 failed = 651;
             strcpy_s(overlay_dir, sizeof(overlay_dir), oem_short);
             strcpy_s(overlay_renamed, sizeof(overlay_renamed), oem_short);
@@ -1143,9 +1143,10 @@ int main(void)
                 }
             }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
-                    0x20u, &boundary, &cpu, oem_profile_pattern, oem_profile_pattern, &result) ||
-                !cf_set(&result) || !ax_is(&result, 1u))) failed = 653;
+            if (!failed && !bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
+                    0x20u, &boundary, &cpu, oem_profile_pattern, oem_profile_pattern, &result)) failed = 6530;
+            else if (!failed && !cf_set(&result)) failed = 6531;
+            else if (!failed && !oem_file_exists(oem_rename_one)) failed = 6532;
             bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }
