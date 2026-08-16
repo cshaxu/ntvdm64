@@ -192,6 +192,11 @@
 > wildcard mutation, search and Virtual remain open. See the [P20 record]
 > (etc/research/t221-s3-fcb-overlay-lifecycle-binding-001.md).
 
+> **T221 S3 P21 progress:** source review admits `50:07/20` only as one
+> wildcard owner family. Its missing prerequisite is a selector-blind merged
+> Overlay directory enumeration; Direct fallback is expressly rejected. See
+> the [P21 audit](etc/research/t221-s3-fcb-wildcard-overlay-enumeration-audit-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
