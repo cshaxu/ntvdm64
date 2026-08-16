@@ -94,6 +94,13 @@
 > source-built fixtures pass. It is storage only—no BOP yet routes through it,
 > and Overlay/Virtual remain unimplemented. See the [P4 record](etc/research/t221-s3-overlay-store-foundation-001.md).
 
+> **T221 S3 P5 progress:** the same provider now owns a selector-blind,
+> opaque-token Overlay file object with private offset/read/write/seek/truncate
+> lifecycle.  Its focused x64 `/MT` fixture proves copy-on-write data isolation
+> and stale-token refusal; the full whole-provider fixture remains green.  It
+> has no namespace resolver or BOP route yet, so Overlay and Virtual remain
+> unimplemented. See the [P5 record](etc/research/t221-s3-overlay-file-object-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
