@@ -1,0 +1,40 @@
+#ifndef BX_NTVDM_DEM_DRIVE_VIEW_PROVIDER_V1_H
+#define BX_NTVDM_DEM_DRIVE_VIEW_PROVIDER_V1_H
+
+#include "bx_ntvdm_dem_cwd_context_v1.h"
+#include "bx_ntvdm_dem_gset_plane_v1.h"
+#include "bx_ntvdm_dem_profile_consumer_v1.h"
+
+#define BX_NTVDM_DEM_DRIVE_VIEW_PROVIDER_V1_MAGIC 0x42584456u
+#define BX_NTVDM_DEM_DRIVE_VIEW_PROVIDER_V1_VERSION 1u
+
+/* One DEM-owned session state for all drive-view/CWD/GSET services.  It
+ * contains copied adapter state only; no guest pointer, host handle, Bochs
+ * object or selector/service identity crosses this boundary. */
+typedef struct bx_ntvdm_dem_drive_view_provider_v1 {
+    uint32_t magic, abi_version, struct_bytes, initialized;
+    bx_ntvdm_dem_gset_plane_v1 gset;
+    bx_ntvdm_dem_profile_consumer_v1 mutation_profile;
+    bx_ntvdm_dem_cwd_context_v1 cwd;
+    uint32_t has_mutation_profile, boot_drive_index, has_boot_drive;
+} bx_ntvdm_dem_drive_view_provider_v1;
+
+void bx_ntvdm_dem_drive_view_provider_v1_clear(
+    bx_ntvdm_dem_drive_view_provider_v1 *provider);
+int bx_ntvdm_dem_drive_view_provider_v1_initialize(
+    bx_ntvdm_dem_drive_view_provider_v1 *provider);
+int bx_ntvdm_dem_drive_view_provider_v1_valid(
+    const bx_ntvdm_dem_drive_view_provider_v1 *provider);
+int bx_ntvdm_dem_drive_view_provider_v1_set_drive_snapshot(
+    bx_ntvdm_dem_drive_view_provider_v1 *provider,
+    const bx_ntvdm_host_drive_snapshot_v1 *snapshot);
+int bx_ntvdm_dem_drive_view_provider_v1_set_volume_snapshot(
+    bx_ntvdm_dem_drive_view_provider_v1 *provider,
+    const bx_ntvdm_host_volume_snapshot_v1 *snapshot);
+int bx_ntvdm_dem_drive_view_provider_v1_set_mutation_profile(
+    bx_ntvdm_dem_drive_view_provider_v1 *provider,
+    const bx_ntvdm_mutation_profile_v1 *profile);
+int bx_ntvdm_dem_drive_view_provider_v1_set_boot_drive(
+    bx_ntvdm_dem_drive_view_provider_v1 *provider, uint32_t drive_index);
+
+#endif

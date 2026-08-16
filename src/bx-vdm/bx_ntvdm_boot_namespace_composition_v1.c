@@ -227,7 +227,7 @@ int bx_ntvdm_boot_namespace_composition_v1_initialize(
     value->guest_display_state = selection->guest_display_state;
     if (!bx_ntvdm_dem_package_session_v1_initialize(&value->dem,
             &value->plane) || !bx_ntvdm_command_package_session_v1_initialize(
-            &value->command, &value->plane, &value->dem.gset)) return 0;
+            &value->command, &value->plane, &value->dem.drive_view.gset)) return 0;
     return valid(value);
 }
 
@@ -269,7 +269,7 @@ int bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
     return valid(value) && !value->bound &&
         bx_ntvdm_dem_package_session_v1_set_mutation_profile(&value->dem,
             profile) && bx_ntvdm_command_package_session_v1_set_session_host_context(
-            &value->command, &value->dem.cwd);
+            &value->command, &value->dem.drive_view.cwd);
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
@@ -287,8 +287,8 @@ int bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
 {
     return valid(value) && !value->bound &&
         bx_ntvdm_command_package_session_v1_set_host_context(&value->command,
-            context) && (!value->dem.has_mutation_profile ||
-            bx_ntvdm_session_host_context_v1_seed_command(&value->dem.cwd,
+            context) && (!value->dem.drive_view.has_mutation_profile ||
+            bx_ntvdm_session_host_context_v1_seed_command(&value->dem.drive_view.cwd,
                 context));
 }
 

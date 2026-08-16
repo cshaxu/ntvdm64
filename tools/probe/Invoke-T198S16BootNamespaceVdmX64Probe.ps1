@@ -107,6 +107,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_dem_cwd_service_v2.c',
     'src\bx-vdm\bx_ntvdm_dem_full_dpb_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_gset_plane_v1.c',
+    'src\bx-vdm\bx_ntvdm_dem_drive_view_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_media_id_service_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_volume_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_hard_error_service.c',

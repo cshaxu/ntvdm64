@@ -3,7 +3,7 @@
 
 #include "bx_ntvdm_boot_namespace_plane_v1.h"
 #include "bx_ntvdm_dem_error_lock_plane_v1.h"
-#include "bx_ntvdm_dem_gset_plane_v1.h"
+#include "bx_ntvdm_dem_drive_view_provider_v1.h"
 #include "bx_ntvdm_dem_package_facade_v1.h"
 #include "bx_ntvdm_dem_profile_consumer_v1.h"
 #include "bx_ntvdm_dem_cwd_context_v1.h"
@@ -19,13 +19,9 @@ typedef struct bx_ntvdm_dem_package_session_v1 {
     uint32_t magic, abi_version, struct_bytes, initialized;
     bx_ntvdm_boot_namespace_plane_v1 *namespace_plane;
     bx_ntvdm_dem_error_lock_plane_v1 error_lock;
-    bx_ntvdm_dem_gset_plane_v1 gset;
-    bx_ntvdm_dem_profile_consumer_v1 mutation_profile;
-    bx_ntvdm_dem_cwd_context_v1 cwd;
+    bx_ntvdm_dem_drive_view_provider_v1 drive_view;
     bx_ntvdm_dem_whole_provider_v1 whole_provider;
-    uint32_t has_mutation_profile, has_whole_provider;
-    uint32_t boot_drive_index;
-    uint32_t has_boot_drive;
+    uint32_t has_whole_provider;
 } bx_ntvdm_dem_package_session_v1;
 
 #ifdef __cplusplus

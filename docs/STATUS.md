@@ -48,6 +48,10 @@
 > with explicit CWD and clock-capability rules. The next S implements this
 > owner boundary, not individual BOP leaves; see the [P2 design]
 > (etc/research/t222-s1-drive-view-provider-design-001.md).
+> **T222 S2 P1 progress:** `dem_drive_view_provider_v1` is now the sole
+> package-session owner of copied profile, drive/volume, CWD and boot state;
+> normal DEM whole-provider regression remains green. See the [P1 migration]
+> (etc/research/t222-s2-drive-view-state-owner-migration-001.md).
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
