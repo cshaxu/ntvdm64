@@ -476,6 +476,11 @@
 > commit have explicit source-shaped outcomes. Overlay/Virtual receive no new
 > behavior; see the [P67 record]
 > (etc/research/t221-s3-direct-readonly-handle-family-matrix-001.md).
+> **T221 S3 P68 closure evidence:** all 29 selected identities now have an
+> original-owner map, one package-provider route and explicit Direct/Readonly
+> family evidence; pipes remain unavailable and Overlay/Virtual remain frozen.
+> See the [29-identity audit]
+> (etc/research/t221-s3-direct-readonly-29-identity-closure-audit-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
