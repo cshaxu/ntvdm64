@@ -57,6 +57,12 @@
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | Every selected identity; direct open/create/read/write/seek/close; FCB and DTA/SRCHBUF first/next; mixed declared-image/host lookup; direct/readonly/overlay/virtual profile transitions; host deny/share/path errors; token/session teardown; pipe kinds; current CWD/drive roots; profile fallback; and interactions with PDB/JFT/SFT boundaries. |
 
+> **T221 S2 P1 progress:** current code has the correct package-local state
+> owners and shared profile authority, but only direct/readonly backends have
+> behavior; overlay and virtual are explicitly unavailable. This confirms the
+> later package must complete one provider view rather than add BOP-local
+> mode branches. See the [current-state map](etc/research/t221-s2-file-provider-current-state-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
