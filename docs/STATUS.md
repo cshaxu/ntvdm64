@@ -82,6 +82,9 @@
 > **T222 S2 P8 progress:** selected-drive 50:0D is now asserted through the same
 > Direct/Readonly normal session, returning the admitted C: one-based identity; see the
 > [P8 record](etc/research/t222-s2-drive-view-selected-drive-regression-001.md).
+> **T222 S2 P9 progress:** 50:0E now proves its five-register volume result and CF-clear
+> terminal from the admitted Direct/Readonly session snapshot; see the [P9 record]
+> (etc/research/t222-s2-drive-view-free-space-session-regression-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
