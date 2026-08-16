@@ -214,3 +214,23 @@ int bx_ntvdm_dem_overlay_file_v1_close(bx_ntvdm_dem_overlay_file_v1 *files,
     clear_handle(handle);
     return bx_ntvdm_dem_overlay_file_v1_valid(files);
 }
+
+int bx_ntvdm_dem_overlay_file_v1_info(bx_ntvdm_dem_overlay_file_v1 *files,
+    uint32_t token, uint32_t *attributes_out, uint32_t *size_out,
+    uint16_t *time_out, uint16_t *date_out)
+{
+    bx_ntvdm_dem_overlay_file_v1_handle *handle = handle_for(files, token, 0u);
+    const bx_ntvdm_dem_overlay_store_v1_entry *entry;
+    if (attributes_out != 0) *attributes_out = 0u;
+    if (size_out != 0) *size_out = 0u;
+    if (time_out != 0) *time_out = 0u;
+    if (date_out != 0) *date_out = 0u;
+    if (handle == 0 || attributes_out == 0 || size_out == 0 || time_out == 0 ||
+        date_out == 0) return 0;
+    entry = bx_ntvdm_dem_overlay_store_v1_lookup(files->store, handle->drive_index,
+        handle->relative);
+    if (entry == 0 || entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE) return 0;
+    *attributes_out = entry->attributes; *size_out = entry->byte_count;
+    *time_out = entry->dos_time; *date_out = entry->dos_date;
+    return 1;
+}

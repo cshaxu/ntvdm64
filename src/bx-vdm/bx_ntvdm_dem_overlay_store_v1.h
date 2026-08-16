@@ -18,6 +18,8 @@ enum bx_ntvdm_dem_overlay_store_v1_state {
 
 typedef struct bx_ntvdm_dem_overlay_store_v1_entry {
     uint32_t state, attributes, byte_count, byte_capacity;
+    uint16_t dos_time, dos_date;
+    uint32_t reserved_time0;
     uint8_t drive_index;
     uint8_t reserved0[3];
     wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];

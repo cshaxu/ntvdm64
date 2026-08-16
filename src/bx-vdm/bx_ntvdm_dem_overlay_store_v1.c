@@ -7,6 +7,18 @@ static int valid_path(uint8_t drive, const wchar_t *relative)
 { return drive < 26u && relative != 0 && relative[0] != L'\0' &&
     wcslen(relative) < BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE; }
 
+static void timestamp(bx_ntvdm_dem_overlay_store_v1_entry *entry)
+{
+    SYSTEMTIME now;
+    FILETIME utc, local;
+    WORD date = 0u, time = 0u;
+    if (entry == 0) return;
+    GetLocalTime(&now);
+    if (SystemTimeToFileTime(&now, &utc) && FileTimeToLocalFileTime(&utc, &local))
+        (void)FileTimeToDosDateTime(&local, &date, &time);
+    entry->dos_time = time; entry->dos_date = date;
+}
+
 static int locate(const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
     const wchar_t *relative, uint32_t *index_out)
 {
@@ -125,6 +137,7 @@ int bx_ntvdm_dem_overlay_store_v1_put_file(bx_ntvdm_dem_overlay_store_v1 *store,
     entry->state = BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE;
     entry->attributes = attributes;
     entry->bytes = copy; entry->byte_count = byte_count; entry->byte_capacity = byte_count;
+    timestamp(entry);
     return bx_ntvdm_dem_overlay_store_v1_valid(store);
 }
 
@@ -161,6 +174,7 @@ int bx_ntvdm_dem_overlay_store_v1_tombstone(bx_ntvdm_dem_overlay_store_v1 *store
     entry = entry_for(store, drive, relative); if (entry == 0) return 0;
     if (entry->bytes) HeapFree(GetProcessHeap(), 0u, entry->bytes);
     entry->bytes = 0; entry->byte_count = entry->byte_capacity = entry->attributes = 0u;
+    entry->dos_time = entry->dos_date = 0u;
     entry->state = BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE;
     return bx_ntvdm_dem_overlay_store_v1_valid(store);
 }
@@ -174,6 +188,7 @@ int bx_ntvdm_dem_overlay_store_v1_put_directory(bx_ntvdm_dem_overlay_store_v1 *s
     if (entry->bytes) HeapFree(GetProcessHeap(), 0u, entry->bytes);
     entry->bytes = 0; entry->byte_count = entry->byte_capacity = 0u;
     entry->attributes = attributes; entry->state = BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY;
+    timestamp(entry);
     return bx_ntvdm_dem_overlay_store_v1_valid(store);
 }
 
@@ -185,6 +200,7 @@ int bx_ntvdm_dem_overlay_store_v1_tombstone_directory(
     entry = entry_for(store, drive, relative); if (!entry) return 0;
     if (entry->bytes) HeapFree(GetProcessHeap(), 0u, entry->bytes);
     entry->bytes = 0; entry->byte_count = entry->byte_capacity = entry->attributes = 0u;
+    entry->dos_time = entry->dos_date = 0u;
     entry->state = BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY_TOMBSTONE;
     return bx_ntvdm_dem_overlay_store_v1_valid(store);
 }

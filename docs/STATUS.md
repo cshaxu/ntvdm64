@@ -176,6 +176,10 @@
 > explicit; the next implementation must add a typed FCB Overlay seam before
 > either family is bound. See the [P17 record](etc/research/t221-s3-fcb-owner-package-admission-001.md).
 
+> **T221 S3 P18 progress:** Overlay file tokens now expose private
+> attributes/size/DOS time/date, the prerequisite information seam for the FCB
+> lifecycle; no FCB service is yet bound. See the [P18 record](etc/research/t221-s3-overlay-file-info-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

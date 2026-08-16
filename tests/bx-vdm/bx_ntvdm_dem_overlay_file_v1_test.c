@@ -9,7 +9,8 @@ int main(void)
     const bx_ntvdm_dem_overlay_store_v1_entry *entry;
     wchar_t effective[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
     static const uint8_t base[] = { 'b', 'a', 's', 'e' };
-    uint8_t read[8]; uint32_t token, second_token, count, position;
+    uint8_t read[8]; uint32_t token, second_token, count, position, attributes, size;
+    uint16_t dos_time, dos_date;
     if (!bx_ntvdm_dem_overlay_store_v1_initialize(&store) ||
         !bx_ntvdm_dem_overlay_file_v1_initialize(&files, &store) ||
         !bx_ntvdm_dem_overlay_file_v1_open(&files, 2u, L"WORK\\A.TXT",
@@ -22,6 +23,9 @@ int main(void)
         !bx_ntvdm_dem_overlay_file_v1_seek(&files, token, 0, BX_NTVDM_DEM_OVERLAY_FILE_V1_SEEK_BEGIN, &position) ||
         !bx_ntvdm_dem_overlay_file_v1_read(&files, token, read, sizeof(read), &count) ||
         count != 4u || memcmp(read, "baXX", 4u) != 0 ||
+        !bx_ntvdm_dem_overlay_file_v1_info(&files, token, &attributes, &size,
+            &dos_time, &dos_date) || attributes != 0x20u || size != 4u ||
+        (dos_time == 0u && dos_date == 0u) ||
         !bx_ntvdm_dem_overlay_file_v1_seek(&files, token, 2, BX_NTVDM_DEM_OVERLAY_FILE_V1_SEEK_BEGIN, &position) ||
         !bx_ntvdm_dem_overlay_file_v1_truncate(&files, token) ||
         (entry = bx_ntvdm_dem_overlay_store_v1_lookup(&store, 2u, L"work\\a.txt")) == 0 ||
