@@ -2,6 +2,7 @@
 #include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
 #include "bx_ntvdm_dem_overlay_namespace_backend_v1.h"
 #include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
+#include "bx_ntvdm_dem_overlay_metadata_backend_v1.h"
 
 #include <string.h>
 
@@ -176,6 +177,19 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u);
         }
         if ((cpu->eax & 0xffu) != 0u) {
+            if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
+                uint32_t policy = 0u;
+                if (!bx_ntvdm_dem_profile_consumer_v1_resolve(&provider->files.profile,
+                        BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, &policy) ||
+                    policy != BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY) return 0;
+                attributes = cpu->ecx & 0xffffu;
+                if (attributes == 0u) attributes = FILE_ATTRIBUTE_NORMAL;
+                if (!bx_ntvdm_dem_overlay_metadata_backend_v1_set(&provider->overlay_store,
+                        &provider->overlay_files, provider->host_namespace, drive, relative,
+                        attributes & 0x37u, &error)) return 0;
+                return error == ERROR_SUCCESS ? finish(boundary, result, 0u, 0, 0) :
+                    fail(boundary, result, error);
+            }
             admitted = mutation(provider, BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA,
                 boundary, result);
             if (admitted <= 0) return admitted < 0;
@@ -185,6 +199,18 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                     provider->host_namespace, drive, relative, attributes, &error))
                 return fail(boundary, result, error);
             return finish(boundary, result, 0u, 0, 0);
+        }
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
+            uint32_t overlay_attributes = 0u;
+            if (!bx_ntvdm_dem_overlay_metadata_backend_v1_query(&provider->overlay_store,
+                    provider->host_namespace, drive, relative, &overlay_attributes, &error)) return 0;
+            if (error != ERROR_SUCCESS) return fail(boundary, result, error);
+            attributes = overlay_attributes;
+            if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
+            else attributes &= 0x37u;
+            return finish(boundary, result, 0u, 0, 0) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
+                    (uint16_t)attributes);
         }
         if (!bx_ntvdm_host_namespace_v1_query_file_attributes(
                 provider->host_namespace, drive, relative, &attributes, &error))
@@ -382,6 +408,14 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
         /* OpenNT probes with a temporary NUL create.  The bounded adapter
          * instead verifies the directory directly, so this check has no host
          * side effect while preserving success/failure meaning. */
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
+            if (!bx_ntvdm_dem_overlay_metadata_backend_v1_check_directory(
+                    &provider->overlay_store, provider->host_namespace, drive, relative,
+                    &error)) return 0;
+            if (error != ERROR_SUCCESS) return fail(boundary, result, error);
+            return finish(boundary, result, 0u, 0, 0) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
+        }
         if (!bx_ntvdm_host_namespace_v1_directory_exists(provider->host_namespace,
                 drive, relative)) return fail(boundary, result, ERROR_PATH_NOT_FOUND);
         return finish(boundary, result, 0u, 0, 0) &&

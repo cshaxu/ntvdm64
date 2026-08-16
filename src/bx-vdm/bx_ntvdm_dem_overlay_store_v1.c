@@ -141,6 +141,18 @@ int bx_ntvdm_dem_overlay_store_v1_copy_file(
         entry->attributes, entry->bytes, entry->byte_count);
 }
 
+int bx_ntvdm_dem_overlay_store_v1_set_attributes(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
+    const wchar_t *relative, uint32_t attributes)
+{
+    uint32_t index;
+    if (!locate(store, drive, relative, &index)) return 0;
+    if (store->entries[index].state != BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE &&
+        store->entries[index].state != BX_NTVDM_DEM_OVERLAY_STORE_V1_DIRECTORY) return 0;
+    store->entries[index].attributes = attributes;
+    return bx_ntvdm_dem_overlay_store_v1_valid(store);
+}
+
 int bx_ntvdm_dem_overlay_store_v1_tombstone(bx_ntvdm_dem_overlay_store_v1 *store,
     uint8_t drive, const wchar_t *relative)
 {

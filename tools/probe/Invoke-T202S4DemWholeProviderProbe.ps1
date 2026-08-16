@@ -26,6 +26,7 @@ $names = @(
     'bx_ntvdm_dem_overlay_file_v1.c',
     'bx_ntvdm_dem_overlay_namespace_view_v1.c',
     'bx_ntvdm_dem_overlay_mutation_backend_v1.c',
+    'bx_ntvdm_dem_overlay_metadata_backend_v1.c',
     'bx_ntvdm_dem_overlay_resolver_v1.c',
     'bx_ntvdm_dem_overlay_namespace_backend_v1.c',
     'bx_ntvdm_dem_overlay_handle_backend_v1.c',

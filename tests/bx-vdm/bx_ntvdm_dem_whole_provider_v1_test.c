@@ -1011,6 +1011,17 @@ int main(void)
                     &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
                 !ax_is(&result, 1u))) failed = 65;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x01u,
+                    &boundary, &cpu, oem_short, 0, &result) || cf_set(&result))) failed = 660;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 1u; cpu.ecx = FILE_ATTRIBUTE_HIDDEN;
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x01u,
+                    &boundary, &cpu, oem_short, 0, &result) || cf_set(&result))) failed = 664;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x01u,
+                    &boundary, &cpu, oem_short, 0, &result) || cf_set(&result) ||
+                result.cpu_delta.gpr16_values[2] != FILE_ATTRIBUTE_HIDDEN)) failed = 665;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = 0u;
             if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
                     0x07u, &boundary, &cpu, oem_profile_pattern, 0, &result) ||
@@ -1041,11 +1052,10 @@ int main(void)
                     0x05u, &boundary, &cpu, overlay_renamed, 0, &result) ||
                 cf_set(&result))) failed = 659;
             if (!failed) {
-                static const uint8_t mutations[] = { 0x01u, 0x03u, 0x22u };
+                static const uint8_t mutations[] = { 0x03u, 0x22u };
                 uint32_t index;
                 for (index = 0u; index < sizeof(mutations); ++index) {
                     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-                    if (mutations[index] == 0x01u) cpu.eax = 1u;
                     if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, mutations[index],
                             &boundary, &cpu, oem_short,
                             mutations[index] == 0x17u ? oem_profile_pattern : 0, &result) ||

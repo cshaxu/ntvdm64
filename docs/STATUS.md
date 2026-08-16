@@ -164,6 +164,12 @@
 > host mutation. This closes only the Overlay mutation binding; see the [P15
 > record](etc/research/t221-s3-overlay-namespace-mutation-binding-001.md).
 
+> **T221 S3 P16 progress:** Overlay `50:01/44` now use the shared visible
+> namespace: COW attributes replace host mutation, and check-path replaces the
+> historical temporary-NUL create with a visible directory query. The provider
+> regression proves attribute set/readback and host-base preservation. See the
+> [P16 record](etc/research/t221-s3-overlay-metadata-check-path-binding-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

@@ -57,6 +57,9 @@ int bx_ntvdm_dem_overlay_store_v1_put_file(bx_ntvdm_dem_overlay_store_v1 *store,
 int bx_ntvdm_dem_overlay_store_v1_copy_file(
     bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
     const wchar_t *source, const wchar_t *destination);
+int bx_ntvdm_dem_overlay_store_v1_set_attributes(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
+    const wchar_t *relative, uint32_t attributes);
 int bx_ntvdm_dem_overlay_store_v1_tombstone(bx_ntvdm_dem_overlay_store_v1 *store,
     uint8_t drive_index, const wchar_t *relative);
 int bx_ntvdm_dem_overlay_store_v1_put_directory(bx_ntvdm_dem_overlay_store_v1 *store,
