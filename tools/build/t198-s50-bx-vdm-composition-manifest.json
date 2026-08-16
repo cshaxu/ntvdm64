@@ -113,6 +113,7 @@
     "src/bx-vdm/bx_ntvdm_dem_overlay_namespace_view_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_overlay_mutation_backend_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_overlay_metadata_backend_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_fcb_overlay_backend_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_overlay_file_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_overlay_resolver_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_overlay_namespace_backend_v1.c",

@@ -7,6 +7,7 @@
 #include "bx_ntvdm_dem_overlay_handle_backend_v1.h"
 #include "bx_ntvdm_dem_overlay_namespace_view_v1.h"
 #include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
+#include "bx_ntvdm_dem_fcb_overlay_backend_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
@@ -302,13 +303,23 @@ int main(void)
         uint8_t overlay_drive = 0u;
         DWORD overlay_error = ERROR_INVALID_PARAMETER;
         int overlay_empty = 0;
+        uint16_t overlay_time = 0u, overlay_date = 0u;
         bx_ntvdm_dem_overlay_namespace_node_v1 overlay_node;
         if (!profile_for_mode(&overlay_profile, BX_NTVDM_MUTATION_MODE_V1_OVERLAY) ||
             !bx_ntvdm_dem_cwd_context_v1_initialize(&overlay_cwd, &overlay_profile) ||
             (overlay = (bx_ntvdm_dem_whole_provider_v1 *)HeapAlloc(GetProcessHeap(),
                 HEAP_ZERO_MEMORY, sizeof(*overlay))) == 0 ||
-            !bx_ntvdm_dem_whole_provider_v1_initialize(overlay, &overlay_profile,
+                !bx_ntvdm_dem_whole_provider_v1_initialize(overlay, &overlay_profile,
                 &space, &overlay_cwd) ||
+            bx_ntvdm_dem_path_v1_resolve(oem_short, &overlay_cwd, &overlay_drive,
+                overlay_relative) != BX_NTVDM_DEM_PATH_V1_OK ||
+            !bx_ntvdm_dem_fcb_overlay_backend_v1_open(&overlay->files,
+                &overlay->overlay_files, &space, overlay_drive, overlay_relative,
+                BX_NTVDM_DEM_OVERLAY_FILE_V1_READ, 3u, OPEN_EXISTING, 0u,
+                &overlay_token, &backend_token, &overlay_time,
+                &overlay_date, &overlay_error) ||
+            !bx_ntvdm_dem_overlay_handle_backend_v1_close(&overlay->files,
+                &overlay->overlay_files, overlay_token) ||
             !bx_ntvdm_dem_overlay_file_v1_open(&overlay->overlay_files, drive,
                 L"overlay.bin", BX_NTVDM_DEM_OVERLAY_FILE_V1_READ |
                 BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE, base, sizeof(base) - 1u,

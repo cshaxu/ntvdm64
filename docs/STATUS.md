@@ -180,6 +180,11 @@
 > attributes/size/DOS time/date, the prerequisite information seam for the FCB
 > lifecycle; no FCB service is yet bound. See the [P18 record](etc/research/t221-s3-overlay-file-info-foundation-001.md).
 
+> **T221 S3 P19 progress:** one selector-blind FCB Overlay open/info/close
+> backend now source-builds and passes the whole-provider fixture; FCB BOP
+> services remain unbound until the full lifecycle/register/DTA family is
+> integrated. See the [P19 record](etc/research/t221-s3-fcb-overlay-lifecycle-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
