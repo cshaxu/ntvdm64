@@ -36,7 +36,7 @@ static bx_ntvdm_dem_overlay_file_v1_handle *handle_for(
 static void clear_handle(bx_ntvdm_dem_overlay_file_v1_handle *handle)
 {
     memset(handle->relative, 0, sizeof(handle->relative));
-    handle->in_use = handle->access = handle->position = 0u;
+    handle->in_use = handle->access = handle->share_access = handle->position = 0u;
     handle->drive_index = 0u;
     ++handle->generation;
     if (handle->generation == 0u) handle->generation = 1u;
@@ -53,7 +53,8 @@ int bx_ntvdm_dem_overlay_file_v1_valid(const bx_ntvdm_dem_overlay_file_v1 *files
         const bx_ntvdm_dem_overlay_file_v1_handle *handle = &files->handles[index];
         if (handle->generation == 0u || handle->in_use > 1u ||
             (handle->in_use && (!valid_path(handle->drive_index, handle->relative) ||
-             handle->access == 0u || (handle->access & ~3u) != 0u))) return 0;
+             handle->access == 0u || (handle->access & ~3u) != 0u ||
+             (handle->share_access & ~3u) != 0u))) return 0;
     }
     return 1;
 }
@@ -75,8 +76,8 @@ int bx_ntvdm_dem_overlay_file_v1_initialize(bx_ntvdm_dem_overlay_file_v1 *files,
 void bx_ntvdm_dem_overlay_file_v1_teardown(bx_ntvdm_dem_overlay_file_v1 *files)
 { if (files != 0) memset(files, 0, sizeof(*files)); }
 
-int bx_ntvdm_dem_overlay_file_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
-    uint8_t drive, const wchar_t *relative, uint32_t access,
+int bx_ntvdm_dem_overlay_file_v1_open_shared(bx_ntvdm_dem_overlay_file_v1 *files,
+    uint8_t drive, const wchar_t *relative, uint32_t access, uint32_t share_access,
     const uint8_t *base_bytes, uint32_t base_byte_count, uint32_t base_attributes,
     int base_exists, int create_if_missing, uint32_t *token_out)
 {
@@ -85,6 +86,7 @@ int bx_ntvdm_dem_overlay_file_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
     if (token_out != 0) *token_out = 0u;
     if (!bx_ntvdm_dem_overlay_file_v1_valid(files) || token_out == 0 ||
         !valid_path(drive, relative) || access == 0u || (access & ~3u) != 0u ||
+        (share_access & ~3u) != 0u ||
         (!base_exists && base_byte_count != 0u) ||
         (base_byte_count != 0u && base_bytes == 0)) return 0;
     entry = bx_ntvdm_dem_overlay_store_v1_lookup(files->store, drive, relative);
@@ -98,9 +100,16 @@ int bx_ntvdm_dem_overlay_file_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
             relative, base_attributes, base_exists ? base_bytes : 0,
             base_exists ? base_byte_count : 0u)) return 0;
     for (index = 0u; index < BX_NTVDM_DEM_OVERLAY_FILE_V1_MAX_HANDLES; ++index) {
+        const bx_ntvdm_dem_overlay_file_v1_handle *open = &files->handles[index];
+        if (open->in_use && open->drive_index == drive && _wcsicmp(open->relative, relative) == 0 &&
+            ((open->share_access & access) != access ||
+             (share_access & open->access) != open->access)) return 0;
+    }
+    for (index = 0u; index < BX_NTVDM_DEM_OVERLAY_FILE_V1_MAX_HANDLES; ++index) {
         bx_ntvdm_dem_overlay_file_v1_handle *handle = &files->handles[index];
         if (!handle->in_use) {
-            handle->in_use = 1u; handle->access = access; handle->position = 0u;
+            handle->in_use = 1u; handle->access = access; handle->share_access = share_access;
+            handle->position = 0u;
             handle->drive_index = drive;
             wcscpy_s(handle->relative, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, relative);
             *token_out = token_for(index, handle->generation);
@@ -109,6 +118,13 @@ int bx_ntvdm_dem_overlay_file_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
     }
     return 0;
 }
+
+int bx_ntvdm_dem_overlay_file_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
+    uint8_t drive, const wchar_t *relative, uint32_t access,
+    const uint8_t *base_bytes, uint32_t base_byte_count, uint32_t base_attributes,
+    int base_exists, int create_if_missing, uint32_t *token_out)
+{ return bx_ntvdm_dem_overlay_file_v1_open_shared(files, drive, relative, access, 3u,
+    base_bytes, base_byte_count, base_attributes, base_exists, create_if_missing, token_out); }
 
 int bx_ntvdm_dem_overlay_file_v1_read(bx_ntvdm_dem_overlay_file_v1 *files,
     uint32_t token, uint8_t *bytes, uint32_t capacity, uint32_t *byte_count_out)

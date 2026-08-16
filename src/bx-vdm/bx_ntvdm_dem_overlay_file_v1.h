@@ -25,7 +25,7 @@ enum bx_ntvdm_dem_overlay_file_v1_seek_origin {
 };
 
 typedef struct bx_ntvdm_dem_overlay_file_v1_handle {
-    uint32_t generation, in_use, access, position;
+    uint32_t generation, in_use, access, share_access, position;
     uint8_t drive_index;
     uint8_t reserved0[3];
     wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
@@ -48,6 +48,10 @@ void bx_ntvdm_dem_overlay_file_v1_teardown(bx_ntvdm_dem_overlay_file_v1 *files);
  * otherwise an absent path fails. */
 int bx_ntvdm_dem_overlay_file_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
     uint8_t drive_index, const wchar_t *relative, uint32_t access,
+    const uint8_t *base_bytes, uint32_t base_byte_count, uint32_t base_attributes,
+    int base_exists, int create_if_missing, uint32_t *token_out);
+int bx_ntvdm_dem_overlay_file_v1_open_shared(bx_ntvdm_dem_overlay_file_v1 *files,
+    uint8_t drive_index, const wchar_t *relative, uint32_t access, uint32_t share_access,
     const uint8_t *base_bytes, uint32_t base_byte_count, uint32_t base_attributes,
     int base_exists, int create_if_missing, uint32_t *token_out);
 int bx_ntvdm_dem_overlay_file_v1_read(bx_ntvdm_dem_overlay_file_v1 *files,

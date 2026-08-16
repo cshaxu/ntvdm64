@@ -8,7 +8,7 @@ int main(void)
     bx_ntvdm_dem_overlay_file_v1 files;
     const bx_ntvdm_dem_overlay_store_v1_entry *entry;
     static const uint8_t base[] = { 'b', 'a', 's', 'e' };
-    uint8_t read[8]; uint32_t token, count, position;
+    uint8_t read[8]; uint32_t token, second_token, count, position;
     if (!bx_ntvdm_dem_overlay_store_v1_initialize(&store) ||
         !bx_ntvdm_dem_overlay_file_v1_initialize(&files, &store) ||
         !bx_ntvdm_dem_overlay_file_v1_open(&files, 2u, L"WORK\\A.TXT",
@@ -31,6 +31,15 @@ int main(void)
             BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE, 0, 0u, 0x20u, 0, 1, &token) ||
         !bx_ntvdm_dem_overlay_file_v1_write(&files, token, (const uint8_t *)"N", 1u, &count) ||
         count != 1u || !bx_ntvdm_dem_overlay_file_v1_close(&files, token) ||
+        !bx_ntvdm_dem_overlay_file_v1_open_shared(&files, 2u, L"WORK\\SHARE.TXT",
+            BX_NTVDM_DEM_OVERLAY_FILE_V1_READ, BX_NTVDM_DEM_OVERLAY_FILE_V1_READ,
+            base, sizeof(base), 0x20u, 1, 0, &token) ||
+        bx_ntvdm_dem_overlay_file_v1_open_shared(&files, 2u, L"WORK\\SHARE.TXT",
+            BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE, 3u, 0, 0u, 0x20u, 1, 0, &second_token) ||
+        !bx_ntvdm_dem_overlay_file_v1_close(&files, token) ||
+        !bx_ntvdm_dem_overlay_file_v1_open_shared(&files, 2u, L"WORK\\SHARE.TXT",
+            BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE, 3u, 0, 0u, 0x20u, 1, 0, &second_token) ||
+        !bx_ntvdm_dem_overlay_file_v1_close(&files, second_token) ||
         bx_ntvdm_dem_overlay_file_v1_open(&files, 2u, L"WORK\\GONE.TXT",
             BX_NTVDM_DEM_OVERLAY_FILE_V1_READ, 0, 0u, 0u, 0, 0, &token)) {
         bx_ntvdm_dem_overlay_file_v1_teardown(&files);
