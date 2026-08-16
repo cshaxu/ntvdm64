@@ -272,6 +272,11 @@
 > see the [visibility record]
 > (etc/research/t221-s3-virtual-directory-tombstone-visibility-001.md).
 
+> **T221 S3 P34 progress:** Virtual now has one no-host-I/O private mutation
+> backend for create/delete/rmdir, with a passing x64 `/MT` fixture. Rename
+> and BOP binding remain open pending the complete directory relocation unit;
+> see the [mutation foundation](etc/research/t221-s3-virtual-mutation-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

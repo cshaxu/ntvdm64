@@ -18,9 +18,11 @@ $sources = @(
     'src\bx-vdm\bx_ntvdm_dem_virtual_namespace_view_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_overlay_file_v1.c',
     'src\bx-vdm\bx_ntvdm_dem_virtual_namespace_backend_v1.c'
+    ,'src\bx-vdm\bx_ntvdm_dem_virtual_mutation_backend_v1.c'
 ) | ForEach-Object { Join-Path $root $_ }
 $tests = @('bx_ntvdm_dem_virtual_namespace_view_v1_test.c',
-    'bx_ntvdm_dem_virtual_namespace_backend_v1_test.c')
+    'bx_ntvdm_dem_virtual_namespace_backend_v1_test.c',
+    'bx_ntvdm_dem_virtual_mutation_backend_v1_test.c')
 foreach ($test in $tests) {
     $stem = [IO.Path]::GetFileNameWithoutExtension($test)
     $exe = Join-Path $build ($stem + '.exe')
