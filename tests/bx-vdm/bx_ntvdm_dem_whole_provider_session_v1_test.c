@@ -67,6 +67,19 @@ static int dispatch(bx_ntvdm_dem_package_session_v1 *session, uint8_t service,
             &event, cpu, &window, result);
 }
 
+static uint32_t token_from(const bx_ntvdm_cpu_result_v2 *result)
+{
+    return ((uint32_t)result->cpu_delta.gpr16_values[0] << 16) |
+        result->cpu_delta.gpr16_values[5];
+}
+
+static int success(const bx_ntvdm_cpu_result_v2 *result)
+{
+    return result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME &&
+        result->resume_rip == 0x104u &&
+        ((result->eflags_write_mask & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
+         (result->eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u);
+}
 static int cf_ax(const bx_ntvdm_cpu_result_v2 *result, uint16_t ax)
 {
     return result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME &&
@@ -98,7 +111,7 @@ int main(void)
     for (index = 0u; index < sizeof(modes) / sizeof(modes[0]); ++index) {
         bx_ntvdm_boot_namespace_plane_v1 plane; bx_ntvdm_dem_package_session_v1 session;
         bx_ntvdm_mutation_profile_v1 mutation; bx_ntvdm_cpu_state_v1 cpu;
-        bx_ntvdm_cpu_result_v2 result;
+        bx_ntvdm_cpu_result_v2 result; uint32_t token;
         bx_ntvdm_mutation_profile_v1_initialize(&mutation, modes[index]);
         if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
             !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) ||
@@ -109,8 +122,45 @@ int main(void)
             !bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&session, &drives) ||
             !bx_ntvdm_dem_package_session_v1_set_host_namespace(&session, &host) ||
             !session.has_whole_provider) { bx_ntvdm_host_namespace_v1_release(&host); return 10 + (int)index; }
+        memset(ram, 0, sizeof(ram));
+        /* Register the bounded DTA/PDB transport once, then exercise a real
+         * declared-image namespace -> handle -> RAM -> close chain. */
+        ram[0x520u] = 0x00u; ram[0x521u] = 0x06u;
+        ram[0x450u] = 0x34u; ram[0x451u] = 0x12u;
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ds = 0u; cpu.esi = 0x500u; cpu.eax = 0x400u;
+        cpu.edx = 0x450u; cpu.ecx = 0x460u;
+        if (!dispatch(&session, 0x1bu, &cpu, &result) ||
+            result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME) {
+            bx_ntvdm_dem_package_session_v1_teardown(&session);
+            bx_ntvdm_host_namespace_v1_release(&host); return 20 + (int)index;
+        }
+        memcpy(ram + 0x200u, "C:\\COMMAND.COM", sizeof("C:\\COMMAND.COM"));
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ds = 0u; cpu.esi = 0x200u; cpu.ebx = 0u;
+        if (!dispatch(&session, 0x12u, &cpu, &result) || !success(&result) ||
+            (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 5u))) !=
+                ((1u << 0u) | (1u << 5u)) || token_from(&result) == 0u) {
+            bx_ntvdm_dem_package_session_v1_teardown(&session);
+            bx_ntvdm_host_namespace_v1_release(&host); return 30 + (int)index;
+        }
+        token = token_from(&result);
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.ds = 0u; cpu.edx = 0x300u; cpu.ecx = 1u;
+        cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+        if (!dispatch(&session, 0x16u, &cpu, &result) || !success(&result) ||
+            ram[0x300u] != 0xf4u) {
+            bx_ntvdm_dem_package_session_v1_teardown(&session);
+            bx_ntvdm_host_namespace_v1_release(&host); return 40 + (int)index;
+        }
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+        if (!dispatch(&session, 0x02u, &cpu, &result) || !success(&result)) {
+            bx_ntvdm_dem_package_session_v1_teardown(&session);
+            bx_ntvdm_host_namespace_v1_release(&host); return 50 + (int)index;
+        }
         /* All four profile views must reach the same installed provider. */
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
         if (!dispatch(&session, 0x00u, &cpu, &result) || !cf_ax(&result, 6u) ||
             !dispatch(&session, 0x47u, &cpu, &result) || !cf_ax(&result, 6u) ||
             !dispatch(&session, 0x48u, &cpu, &result) || !cf_ax(&result, 6u)) {

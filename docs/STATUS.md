@@ -354,6 +354,13 @@
 > normal ingress/registry/session dispatch in each. This closes only the
 > four-profile installation lifecycle, not the 29-identity matrix; see the
 > [P45 record](etc/research/t221-s3-package-session-profile-lifecycle-001.md).
+> **T221 S3 P46 progress:** one positive package-session chain now registers
+> DTA/CurrentPDB through `50:1B`, opens declared `COMMAND.COM` through `50:12`,
+> copies one byte by `50:16`, and closes by `50:02`, in isolated Direct,
+> Readonly, Overlay and Virtual sessions. It proves normal ingress, checked RAM
+> transport and opaque-token lifecycle only; the broader 29-identity matrix
+> remains open. See the [P46 record]
+> (etc/research/t221-s3-package-session-startup-handle-chain-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
