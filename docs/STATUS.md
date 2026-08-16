@@ -425,6 +425,10 @@
 > without touching ambient host files; Readonly and remaining owner families
 > stay open. See the [P57 record]
 > (etc/research/t221-s3-package-session-direct-handle-namespace-chain-001.md).
+> **T221 S3 P58 progress:** Readonly now refuses normal-session handle write
+> and namespace mutation `1E,03,22,04,05,06,17` with source-shaped `CF/AX=5`
+> on valid test-owned paths. It changes no Overlay/Virtual behavior; see the
+> [P58 record](etc/research/t221-s3-package-session-readonly-mutation-refusal-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
