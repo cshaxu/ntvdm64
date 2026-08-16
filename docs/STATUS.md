@@ -233,6 +233,12 @@
 > ordering; Virtual remains explicitly unavailable. See the [P27 closure]
 > (etc/research/t221-s3-overlay-search-family-closure-001.md).
 
+> **T221 S3 P28 progress:** explicit Virtual is admitted as one default-off
+> virtual boot-volume namespace package, not a leaf fallback. Existing profile
+> and CWD state are reusable, but namespace/token/search/startup backends do
+> not yet exist; current Virtual unavailable results remain correct. See the
+> [P28 admission](etc/research/t221-s3-explicit-virtual-boot-volume-package-admission-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
