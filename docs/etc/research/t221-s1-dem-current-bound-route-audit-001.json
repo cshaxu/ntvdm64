@@ -1,0 +1,1452 @@
+﻿{
+    "schema":  "ntdos64.t221.s1.dem-bound-route-audit.v1",
+    "generatedUtc":  "2026-08-16T00:25:04.9175474Z",
+    "sourceInputs":  [
+                         "docs/etc/research/t219-s2-t200-bound-route-reconciliation-001.json",
+                         "src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c",
+                         "src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c",
+                         "src/bx-vdm/bx_ntvdm_dem_package_session_v1.c",
+                         "src/bx-vdm/bx_ntvdm_dem_package_facade_v1.c",
+                         "src/bx-vdm/bx_ntvdm_dem_whole_provider_v1.c",
+                         "src/bx-vdm/bx_ntvdm_dem_plane_v1.c"
+                     ],
+    "serviceCount":  73,
+    "staticOnly":  true,
+    "entries":  [
+                    {
+                        "identity":  "50:00",
+                        "originalHandler":  "demChgFilePtr",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "handle_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "temporaryFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:01",
+                        "originalHandler":  "demChMod",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:02",
+                        "originalHandler":  "demClose",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "handle_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "temporaryFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:03",
+                        "originalHandler":  "demCreate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:04",
+                        "originalHandler":  "demCreateDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:05",
+                        "originalHandler":  "demDelete",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:06",
+                        "originalHandler":  "demDeleteDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:07",
+                        "originalHandler":  "demDeleteFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "fcb_path_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM FCB path seam",
+                        "temporaryFallback":  "cli-unavailable after partition rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:08",
+                        "originalHandler":  "demFileTimes",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "handle_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "temporaryFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:09",
+                        "originalHandler":  "demFindFirst",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "search_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "temporaryFallback":  "cli-unavailable after search-provider rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:0A",
+                        "originalHandler":  "demFindFirstFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "search_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "temporaryFallback":  "cli-unavailable after search-provider rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:0B",
+                        "originalHandler":  "demFindNext",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "search_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "temporaryFallback":  "cli-unavailable after search-provider rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:0C",
+                        "originalHandler":  "demFindNextFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "search_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "temporaryFallback":  "cli-unavailable after search-provider rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:0D",
+                        "originalHandler":  "demGetBootDrive",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:0E",
+                        "originalHandler":  "demGetDriveFreeSpace",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:0F",
+                        "originalHandler":  "demGetDrives",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:10",
+                        "originalHandler":  "demGSetMediaID",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:11",
+                        "originalHandler":  "demLoadDos",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:12",
+                        "originalHandler":  "demOpen",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:13",
+                        "originalHandler":  "demQueryCurrentDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:14",
+                        "originalHandler":  "demQueryDate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:15",
+                        "originalHandler":  "demQueryTime",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:16",
+                        "originalHandler":  "demRead",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "handle_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "temporaryFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:17",
+                        "originalHandler":  "demRename",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:18",
+                        "originalHandler":  "demSetCurrentDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:19",
+                        "originalHandler":  "demSetDate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:1A",
+                        "originalHandler":  "demSetDefaultDrive",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:1B",
+                        "originalHandler":  "demSetDTALocation",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:1C",
+                        "originalHandler":  "demSetTime",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:1D",
+                        "originalHandler":  "demSetV86KernelAddr",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:1E",
+                        "originalHandler":  "demWrite",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "handle_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "temporaryFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:1F",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_package_facade_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:20",
+                        "originalHandler":  "demRenameFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "fcb_path_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM FCB path seam",
+                        "temporaryFallback":  "cli-unavailable after partition rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:21",
+                        "originalHandler":  "demIOCTL",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:22",
+                        "originalHandler":  "demCreateNew",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:23",
+                        "originalHandler":  "demDiskReset",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:24",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_package_facade_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:25",
+                        "originalHandler":  "demGetDPB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:26",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_package_facade_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:27",
+                        "originalHandler":  "demCommit",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "handle_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "temporaryFallback":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:28",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_package_facade_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:29",
+                        "originalHandler":  "demAbsRead",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:2A",
+                        "originalHandler":  "demAbsWrite",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:2B",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_package_facade_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:2C",
+                        "originalHandler":  "demCreateFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:2D",
+                        "originalHandler":  "demOpenFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "fcb_path_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM FCB path seam",
+                        "temporaryFallback":  "cli-unavailable after partition rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:2E",
+                        "originalHandler":  "demCloseFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB direct/I-O partition when DTA prerequisites hold",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "fcb_direct_dispatch",
+                                                                          "fcb_io_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM FCB state seam",
+                        "temporaryFallback":  "cli-unavailable after prerequisite or provider rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:2F",
+                        "originalHandler":  "demFCBIO",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB direct/I-O partition when DTA prerequisites hold",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "fcb_direct_dispatch",
+                                                                          "fcb_io_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM FCB state seam",
+                        "temporaryFallback":  "cli-unavailable after prerequisite or provider rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:30",
+                        "originalHandler":  "demDate16",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:31",
+                        "originalHandler":  "demGetFileInfo",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "fcb_path_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM FCB path seam",
+                        "temporaryFallback":  "cli-unavailable after partition rejection",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:32",
+                        "originalHandler":  "demSetHardErrorInfo",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:33",
+                        "originalHandler":  "demRetry",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:34",
+                        "originalHandler":  "demLoadDosAppSym",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:35",
+                        "originalHandler":  "demFreeDosAppSym",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:36",
+                        "originalHandler":  "demEntryDosApp",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:37",
+                        "originalHandler":  "demDOSDispCall",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:38",
+                        "originalHandler":  "demDOSDispRet",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:39",
+                        "originalHandler":  "demOutputString",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:3A",
+                        "originalHandler":  "demInputString",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:3B",
+                        "originalHandler":  "demIsDebug",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:3C",
+                        "originalHandler":  "demTerminatePDB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-session-lifecycle-provider -\u003e finite boot-namespace termination only",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed-with-gap",
+                        "laterShim":  null,
+                        "temporaryFallback":  "stale for direct host resources: no copied PDB ownership, so direct file/search resources are not released",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi-after-PDB-owner-design",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:3D",
+                        "originalHandler":  "demExitVDM",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:3E",
+                        "originalHandler":  "demWOWFiles",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_misc_plane_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "post-T200 DEM misc-plane helper routing",
+                        "temporaryFallback":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:3F",
+                        "originalHandler":  "demLockOper",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:40",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_package_facade_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:41",
+                        "originalHandler":  "demGetComputerName",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:42",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:43",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_package_facade_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "none; source-shaped original no-op is terminal for this route",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:44",
+                        "originalHandler":  "demCheckPath",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:45",
+                        "originalHandler":  "demSystemSymbolOp",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_readonly_namespace_failure_provider_v1_dispatch",
+                                                                          "bx_ntvdm_boot_namespace_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "confirmed",
+                        "laterShim":  null,
+                        "temporaryFallback":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:46",
+                        "originalHandler":  "demGetDPBList",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "bx_ntvdm_dem_gset_plane_v1_dispatch",
+                                                                          "bx_ntvdm_dem_media_id_service_v1_prepare",
+                                                                          "bx_ntvdm_dem_full_dpb_service_v1_prepare"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "temporaryFallback":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:47",
+                        "originalHandler":  "demPipeFileDataEOF",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    },
+                    {
+                        "identity":  "50:48",
+                        "originalHandler":  "demPipeFileEOF",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "ownerPackage":  "DEM direct-host namespace/file/FCB/search/state package",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentSourceProof":  {
+                                                   "sessionSymbols":  [
+                                                                          "namespace_dispatch"
+                                                                      ],
+                                                   "status":  "verified against current source text; not runtime execution evidence",
+                                                   "staticChain":  "generic-ud bridge -\u003e boot namespace composition -\u003e dem package session"
+                                               },
+                        "t219Relation":  "changed",
+                        "laterShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "temporaryFallback":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "t221Disposition":  "ABI/failure and source-recovery rung mapping pending in T221 S1 P2; no provider completeness inferred"
+                    }
+                ]
+}

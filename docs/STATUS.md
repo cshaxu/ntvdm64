@@ -57,6 +57,13 @@
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | `50:00..48`; direct open/create/read/write/seek/close; FCB and DTA search; FindFirst/FindNext; DOS device and VDD routes; PDB/JFT/SFT and normal/abort/TSR exit; current session teardown; all direct/readonly/shadow/virtual/deferred profile paths; and every current adapter fallback or no-op. |
 
+> **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
+> against the current generic bridge, composition, package session, facade,
+> whole-provider, and plane source. All ten static route classes remain
+> present; this is deliberately not a provider or runtime claim. The next
+> P adds the source/ABI/failure and four-rung recovery ledger. See the
+> [current route audit](etc/research/t221-s1-dem-current-bound-route-audit-001.md).
+
 > **T220 S1 P1 closure:** OpenNT proves `50:36` is only DOS-entry/VDD
 > notification.  The historical resource contract instead roots in the
 > guest-published `pusCurrentPDB`, PDB/JFT/SFT mappings and a guarded
