@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T221 S2.** Its governing brief is the active
+> **Current effective packet: M0 T221 S3.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T221 S2 -- DEM file/handle/FCB/search whole-provider disposition.**
+**Active: M0 T221 S3 -- DEM file/handle/FCB/search whole-provider implementation.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -41,21 +41,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T221 S2, Ordinary Mode. |
-| Admission And Approval | T221 S1 closes the 73-row owner/source/ABI/failure/current-route/workaround audit. Its owner-package result selects the 29-service file/handle/FCB/search group, not an observed trace endpoint, for the first whole-provider disposition. |
-| Objective | Define one implementation-ready source-first provider disposition for `50:00..0C`, `12`, `16`, `17`, `1E`, `20`, `22`, `27`, `2C..31`, `44`, `47`, and `48`: subfamily contracts, shared direct/readonly/overlay/virtual policy use, opaque token and search-continuation ownership, current-shim migration, failure boundaries, source units, and one full-family regression plan. |
-| Non-goals | No runtime/provider implementation, no selective BOP behavior change, no guest-memory expansion beyond already admitted copied ABI forms, no guest JFT/SFT reconstruction, no PDB lifecycle binding, no Redirector pipe implementation, no Bochs/mantle change, no target execution or native trace. |
-| Reference Baseline | T221 S1 P1--P5; T202 S3 file/handle/FCB/search ABI map; T220 direct-token/JFT-SFT evidence; current `dem_package_session`, `dem_whole_provider`, local-file/session/partition sources, and shared mutation profile ABI. |
-| Files And ABI Surface | Evidence/design and Status only; identify but do not alter bx-vdm provider, profile, test or composition interfaces. |
+| Identifier Mode | M0 T221 S3, Ordinary Mode. |
+| Admission And Approval | T221 S2 P1--P2 establishes the complete 29-service provider state, profile, token, continuation, migration and regression design. Owner direction requires implementation by complete component package, not trace-led endpoint patches. |
+| Objective | Implement the one `dem_whole_provider` file/handle/FCB/search view backend for all selected identities: retain and migrate direct/readonly paths, add isolated overlay and explicit virtual views, validate backend-kind tokens/continuations, preserve source-shaped failure/pipe-unavailable behavior, and deliver the complete family regression. |
+| Non-goals | No BOP implementation outside the 29-service package; no Redirector/pipe support; no JFT/SFT mirror or `50:3C` token cleanup; no new CCPU pointer or raw host-handle ABI; no raw-device/GSET/MISC work; no Bochs/mantle change; no native trace until package regression closes. |
+| Reference Baseline | T221 S1 ledger and P5 disposition; T221 S2 provider design; T202 S3 ABI map; T220 PDB/JFT/SFT limits; current `dem_whole_provider`, profile, namespace/handle/FCB/search, host namespace and test sources. |
+| Files And ABI Surface | `src/bx-vdm` provider/view/token/search/profile implementation and `tests/bx-vdm` package regression; only fixed-width existing adapter ABI and checked guest actions may cross the machine boundary. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | Prove all 29 identities appear exactly once in the provider plan; cross-check every declared input/output against the T202 source/ABI map and T220 ownership limits; prove a profile decision uses the shared ABI rather than selector-local policy; identify one positive and one negative regression per subfamily; run governance verification and `git diff --check`. |
-| Expected Markers | A single provider state/lifecycle owner; no raw host handle, CCPU pointer, JFT/SFT mirror or unowned search continuation; readonly/overlay/virtual choices are shared-profile backend choices; pipe endpoints remain explicitly Redirector-deferred. |
-| Asset Needs | Existing OpenNT/current source, T221 evidence, existing profile/token/session/partition test sources; no new image, firmware, media or external import. |
-| Reporting Requirements | Record original source units, retained ABI/order/failure rules, rejected direct-composition dependency, chosen recovery rung, current-code retain/migrate/replace decision, profile authority, state owner, regression matrix and proposed implementation ordering. |
-| Stop Conditions | A need to change provider behavior, invent a selector-local profile, add a guest range/ABI, expose host handles/pointers, reconstruct JFT/SFT, bind `50:3C`, implement pipes/Redirector, alter Bochs/mantle, run native trace, patch guest input or import external material pauses S2 for re-admission. |
-| Exit Criteria | A source-reviewed complete 29-service provider disposition and family regression design supports one bounded implementation S without individual-service ambiguity; governance checks pass and evidence is pushed. |
+| Verification | Build focused MSVC x64 `/MT` package fixtures under recorded `build/M0-T221-S3/<run>` roots; prove all 29 identities route through one provider view; run Direct/Readonly/Overlay/Virtual positive and negative family cases; prove pipes remain unavailable and no direct fallback occurs; inspect diff, run `git diff --check` and governance verification. |
+| Expected Markers | One provider state/view owner, backend-kind/generation validation, no host pointers/handles in guest values, no selector-local profile policy, source-shaped source/failure results, and a complete 29-service family regression. |
+| Asset Needs | Existing OpenNT/current source, local MSVC x64 `/MT`, existing test harnesses and disposable build roots; no new firmware, guest media or external source import. |
+| Reporting Requirements | Per P record changed source/test interfaces, source-contract mapping, build command/result, profile/subfamily coverage, negative isolation proof, retained limitation and next package P. |
+| Stop Conditions | A need for new guest ABI/range, source behavior outside the defined package, JFT/SFT reconstruction, `50:3C` lifecycle binding, pipe/Redirector or raw-device implementation, Bochs/mantle change, native trace before full regression, guest binary patch or external import pauses S3 for re-admission. |
+| Exit Criteria | All 29 identities enter the one provider view with source-reviewed direct/readonly/overlay/virtual disposition and full-family positive/negative regression; pipes remain source-labelled unavailable; a source-built composition closes before any separately admitted native trace. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
-| Similar-Issue Sweep | Every selected identity; direct open/create/read/write/seek/close; FCB and DTA/SRCHBUF first/next; mixed declared-image/host lookup; direct/readonly/overlay/virtual profile transitions; host deny/share/path errors; token/session teardown; pipe kinds; current CWD/drive roots; profile fallback; and interactions with PDB/JFT/SFT boundaries. |
+| Similar-Issue Sweep | Every selected identity and its source peer; all four profile views; token kind/generation/PDB owner; stale continuation; DTA/SRCHBUF integrity; namespace mutation and FCB wildcard paths; direct host error mapping; overlay/virtual isolation; pipes; session teardown; current CWD/drive root; declared startup images; and PDB/JFT/SFT boundaries. |
 
 > **T221 S2 P1 progress:** current code has the correct package-local state
 > owners and shared profile authority, but only direct/readonly backends have
