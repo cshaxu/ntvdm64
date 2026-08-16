@@ -356,6 +356,25 @@ int main(void)
                     &service))) failed = 222;
         }
         if (overlay != 0) {
+            uint32_t opened;
+            overlay->direct_namespace_owner = 0x1234u;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ebx = 0u;
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(overlay, 0x12u,
+                    &boundary, &cpu, oem_short, 0, &result) || cf_set(&result))) failed = 223;
+            opened = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                result.cpu_delta.gpr16_values[5];
+            if (!failed && (!bx_ntvdm_dem_file_session_v1_token_kind(&overlay->files,
+                    opened, &service) || service != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE))
+                failed = 224;
+            if (!failed) {
+                const uint8_t close_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x02u };
+                bx_ntvdm_instruction_window_v1_capture(&window, close_bop, sizeof(close_bop));
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                token_into_cpu(&cpu, opened); cpu.ecx = cpu.edx = 0xffffu;
+                if (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x02u,
+                        &boundary, &cpu, &window, &fcb_action, &result) || cf_set(&result)) failed = 225;
+            }
             bx_ntvdm_dem_whole_provider_v1_teardown(overlay);
             HeapFree(GetProcessHeap(), 0, overlay);
         }
