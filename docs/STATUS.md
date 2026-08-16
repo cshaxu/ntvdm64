@@ -340,6 +340,13 @@
 > four-profile DEM provider matrix. See the [P43 record]
 > (etc/research/t221-s3-whole-provider-session-integration-001.md).
 
+> **T221 S3 P44 progress:** the 29 identities are now mapped to the one
+> package-session's five routes and their shared transport prerequisites:
+> bounded RAM gather/write, copied CurrentPDB, and registered DTA. The next
+> matrix fixture will install those prerequisites once per profile rather than
+> add partition-local BOP shims. See the [P44 transport map]
+> (etc/research/t221-s3-package-session-matrix-transport-map-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
