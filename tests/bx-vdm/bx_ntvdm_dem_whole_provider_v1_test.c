@@ -5,6 +5,7 @@
 #include "bx_ntvdm_dem_namespace_route_partition_v1.h"
 #include "bx_ntvdm_dem_handle_route_partition_v1.h"
 #include "bx_ntvdm_dem_overlay_handle_backend_v1.h"
+#include "bx_ntvdm_dem_overlay_namespace_view_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
@@ -297,7 +298,9 @@ int main(void)
         bx_ntvdm_dem_whole_provider_v1 *overlay = 0;
         uint32_t backend_token, overlay_token;
         wchar_t overlay_relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
-        uint8_t overlay_drive;
+        uint8_t overlay_drive = 0u;
+        DWORD overlay_error = ERROR_INVALID_PARAMETER;
+        bx_ntvdm_dem_overlay_namespace_node_v1 overlay_node;
         if (!profile_for_mode(&overlay_profile, BX_NTVDM_MUTATION_MODE_V1_OVERLAY) ||
             !bx_ntvdm_dem_cwd_context_v1_initialize(&overlay_cwd, &overlay_profile) ||
             (overlay = (bx_ntvdm_dem_whole_provider_v1 *)HeapAlloc(GetProcessHeap(),
@@ -416,6 +419,20 @@ int main(void)
                     overlay_relative) == 0 || bx_ntvdm_dem_overlay_store_v1_lookup(
                     &overlay->overlay_store, overlay_drive, overlay_relative)->attributes !=
                     FILE_ATTRIBUTE_HIDDEN)) failed = 233;
+            if (!failed && (!bx_ntvdm_dem_overlay_namespace_view_v1_query(
+                    &overlay->overlay_store, &space, overlay_drive, overlay_relative,
+                    &overlay_node, &overlay_error) ||
+                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_FILE ||
+                !bx_ntvdm_dem_overlay_store_v1_put_directory(&overlay->overlay_store,
+                    overlay_drive, L"OVERLAYDIR", 0u) ||
+                !bx_ntvdm_dem_overlay_store_v1_add_relocation(&overlay->overlay_store,
+                    overlay_drive, L"MOVEDDIR", L"OVERLAYDIR") ||
+                !bx_ntvdm_dem_overlay_namespace_view_v1_query(&overlay->overlay_store,
+                    &space, overlay_drive, L"MOVEDDIR", &overlay_node, &overlay_error) ||
+                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_DIRECTORY ||
+                !bx_ntvdm_dem_overlay_namespace_view_v1_query(&overlay->overlay_store,
+                    &space, overlay_drive, L"OVERLAYDIR", &overlay_node, &overlay_error) ||
+                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT)) failed = 234;
             file = CreateFileW(temporary, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, 0, 0);
             if (!failed && (file == INVALID_HANDLE_VALUE || !ReadFile(file, output, 4u, &written, 0) ||
                 written != 4u || memcmp(output, "host", 4u) != 0)) failed = 232;

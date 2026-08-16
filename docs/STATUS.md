@@ -140,6 +140,12 @@
 > routing; old-source masking and merged child enumeration are still required
 > before the namespace-mutation family can be bound. See the [P11 record](etc/research/t221-s3-overlay-directory-relocation-foundation-001.md).
 
+> **T221 S3 P12 progress:** one selector-blind Overlay visible-node view now
+> applies COW nodes, tombstones and lazy relocation before a bounded read-only
+> host-root query; old relocation sources are masked while destinations retain
+> their effective source. It has no BOP route and no merged-child operation
+> yet. See the [P12 record](etc/research/t221-s3-overlay-visible-node-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

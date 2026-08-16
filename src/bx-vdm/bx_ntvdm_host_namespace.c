@@ -359,17 +359,33 @@ int bx_ntvdm_host_namespace_v1_directory_exists(
     const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
     const wchar_t *relative_directory)
 {
+    return bx_ntvdm_host_namespace_v1_directory_exists_ex(space, drive_index,
+        relative_directory, 0);
+}
+
+int bx_ntvdm_host_namespace_v1_directory_exists_ex(
+    const bx_ntvdm_host_namespace_v1 *space, uint8_t drive_index,
+    const wchar_t *relative_directory, DWORD *win32_error_out)
+{
     HANDLE handle = INVALID_HANDLE_VALUE;
+    DWORD error = ERROR_INVALID_PARAMETER;
     if (!bx_ntvdm_host_namespace_v1_valid(space) || drive_index >= 26u ||
-        relative_directory == 0) return 0;
+        relative_directory == 0) {
+        if (win32_error_out != 0) *win32_error_out = error;
+        return 0;
+    }
     /* The admitted root is a valid directory but is not a child path.  Keep
      * this explicit rather than passing an empty name to the NT relative-open
      * routine, whose contract deliberately rejects empty child components. */
-    if (relative_directory[0] == L'\0')
-        return (space->available_mask & bx_ntvdm_host_namespace_bit(drive_index)) != 0u;
+    if (relative_directory[0] == L'\0') {
+        int available = (space->available_mask & bx_ntvdm_host_namespace_bit(drive_index)) != 0u;
+        if (win32_error_out != 0) *win32_error_out = available ? ERROR_SUCCESS : ERROR_PATH_NOT_FOUND;
+        return available;
+    }
     int result = bx_ntvdm_host_namespace_v1_open_directory_ex(space, drive_index,
-        relative_directory, FILE_READ_ATTRIBUTES, FILE_OPEN, &handle, 0);
+        relative_directory, FILE_READ_ATTRIBUTES, FILE_OPEN, &handle, &error);
     if (handle != INVALID_HANDLE_VALUE) CloseHandle(handle);
+    if (win32_error_out != 0) *win32_error_out = result ? ERROR_SUCCESS : error;
     return result;
 }
 
