@@ -88,7 +88,11 @@ int bx_ntvdm_dem_overlay_file_v1_open(bx_ntvdm_dem_overlay_file_v1 *files,
         (!base_exists && base_byte_count != 0u) ||
         (base_byte_count != 0u && base_bytes == 0)) return 0;
     entry = bx_ntvdm_dem_overlay_store_v1_lookup(files->store, drive, relative);
-    if (entry != 0 && entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE) return 0;
+    if (entry != 0 && entry->state == BX_NTVDM_DEM_OVERLAY_STORE_V1_TOMBSTONE) {
+        if (!create_if_missing || !bx_ntvdm_dem_overlay_store_v1_put_file(files->store,
+                drive, relative, base_attributes, 0, 0u)) return 0;
+        entry = bx_ntvdm_dem_overlay_store_v1_lookup(files->store, drive, relative);
+    }
     if (entry == 0 && !base_exists && !create_if_missing) return 0;
     if (entry == 0 && !bx_ntvdm_dem_overlay_store_v1_put_file(files->store, drive,
             relative, base_attributes, base_exists ? base_bytes : 0,

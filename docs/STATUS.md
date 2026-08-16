@@ -101,6 +101,12 @@
 > has no namespace resolver or BOP route yet, so Overlay and Virtual remain
 > unimplemented. See the [P5 record](etc/research/t221-s3-overlay-file-object-001.md).
 
+> **T221 S3 P6 progress:** a selector-blind resolver now copies an admitted
+> host file through a read-only root handle into the provider COW object and
+> returns only its private backend token.  Its focused x64 `/MT` fixture proves
+> an Overlay modification leaves the real temporary host file unchanged.  No
+> namespace or handle BOP route adopts this token yet. See the [P6 record](etc/research/t221-s3-overlay-resolver-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
