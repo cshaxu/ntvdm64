@@ -331,6 +331,15 @@
 > the complete DEM package. See the [search closure]
 > (etc/research/t221-s3-virtual-search-family-closure-001.md).
 
+> **T221 S3 P43 progress:** a distinct package-session fixture now proves
+> the installed `dem_whole_provider` is reached through normal ingress,
+> registry and session dispatch: its `50:00` invalid-token result is distinct
+> from generic unavailable, while `50:47/48` retain Redirector-deferred
+> disposition. MSVC x64 `/MT` source closure, link and run all pass. This is
+> an installation-seam witness only; it does not close the 29-identity,
+> four-profile DEM provider matrix. See the [P43 record]
+> (etc/research/t221-s3-whole-provider-session-integration-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
