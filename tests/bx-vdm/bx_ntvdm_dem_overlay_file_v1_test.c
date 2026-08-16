@@ -7,6 +7,7 @@ int main(void)
     bx_ntvdm_dem_overlay_store_v1 store;
     bx_ntvdm_dem_overlay_file_v1 files;
     const bx_ntvdm_dem_overlay_store_v1_entry *entry;
+    wchar_t effective[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
     static const uint8_t base[] = { 'b', 'a', 's', 'e' };
     uint8_t read[8]; uint32_t token, second_token, count, position;
     if (!bx_ntvdm_dem_overlay_store_v1_initialize(&store) ||
@@ -54,6 +55,18 @@ int main(void)
         bx_ntvdm_dem_overlay_store_v1_teardown(&store);
         return 1;
     }
+    if (!bx_ntvdm_dem_overlay_store_v1_add_relocation(&store, 2u,
+            L"WORK\\MOVED", L"WORK\\DIR")) return 2;
+    if (!bx_ntvdm_dem_overlay_store_v1_resolve_relocation(&store, 2u,
+            L"WORK\\MOVED\\CHILD", effective) ||
+        _wcsicmp(effective, L"WORK\\DIR\\CHILD") != 0) return 3;
+    if (!bx_ntvdm_dem_overlay_store_v1_add_relocation(&store, 2u,
+            L"WORK\\FINAL", L"WORK\\MOVED") ||
+        !bx_ntvdm_dem_overlay_store_v1_resolve_relocation(&store, 2u,
+            L"WORK\\FINAL\\CHILD", effective) ||
+        _wcsicmp(effective, L"WORK\\DIR\\CHILD") != 0) return 4;
+    if (bx_ntvdm_dem_overlay_store_v1_add_relocation(&store, 2u,
+            L"WORK\\DIR\\LOOP", L"WORK\\DIR")) return 5;
     bx_ntvdm_dem_overlay_file_v1_teardown(&files);
     bx_ntvdm_dem_overlay_store_v1_teardown(&store);
     return 0;

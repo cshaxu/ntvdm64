@@ -24,11 +24,23 @@ typedef struct bx_ntvdm_dem_overlay_store_v1_entry {
     uint8_t *bytes;
 } bx_ntvdm_dem_overlay_store_v1_entry;
 
+/* A lazy directory move never copies an admitted host-base tree.  This record
+ * keeps the visible destination prefix and the private effective-source
+ * prefix; both remain DOS-relative values inside the provider. */
+typedef struct bx_ntvdm_dem_overlay_store_v1_relocation {
+    uint8_t drive_index;
+    uint8_t reserved0[3];
+    wchar_t destination[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+    wchar_t source[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+} bx_ntvdm_dem_overlay_store_v1_relocation;
+
 /* Session-private COW state.  It has no guest pointer, host path or handle.
  * The base host namespace is intentionally not mutated by this component. */
 typedef struct bx_ntvdm_dem_overlay_store_v1 {
     uint32_t magic, abi_version, struct_bytes, count, capacity;
     bx_ntvdm_dem_overlay_store_v1_entry *entries;
+    uint32_t relocation_count, relocation_capacity;
+    bx_ntvdm_dem_overlay_store_v1_relocation *relocations;
 } bx_ntvdm_dem_overlay_store_v1;
 
 int bx_ntvdm_dem_overlay_store_v1_initialize(bx_ntvdm_dem_overlay_store_v1 *store);
@@ -52,5 +64,20 @@ const bx_ntvdm_dem_overlay_store_v1_entry *bx_ntvdm_dem_overlay_store_v1_lookup(
 int bx_ntvdm_dem_overlay_store_v1_has_descendant(
     const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
     const wchar_t *relative);
+
+/* Adds a private lazy directory relocation.  `destination` is the path DOS
+ * sees after rename; `source` is the effective pre-rename tree.  It has no
+ * host-side effect and rejects self/ancestor cycles. */
+int bx_ntvdm_dem_overlay_store_v1_add_relocation(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
+    const wchar_t *destination, const wchar_t *source);
+
+/* Resolves the longest matching visible destination prefix through any
+ * private relocation chain.  The output remains a bounded DOS-relative path;
+ * a cycle or invalid model is rejected. */
+int bx_ntvdm_dem_overlay_store_v1_resolve_relocation(
+    const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
+    const wchar_t *visible_relative,
+    wchar_t effective_relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE]);
 
 #endif

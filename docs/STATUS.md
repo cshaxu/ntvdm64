@@ -134,6 +134,12 @@
 > route changed; this prevents a file-only or Direct-fallback implementation.
 > See the [P10 state model](etc/research/t221-s3-overlay-namespace-mutation-state-model-001.md).
 
+> **T221 S3 P11 progress:** the private Overlay store now has bounded lazy
+> directory relocation records and longest-prefix resolution, with focused
+> chained-relocation and cycle-rejection evidence. It remains below BOP
+> routing; old-source masking and merged child enumeration are still required
+> before the namespace-mutation family can be bound. See the [P11 record](etc/research/t221-s3-overlay-directory-relocation-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
