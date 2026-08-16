@@ -3,6 +3,8 @@
 #include "bx_ntvdm_search_request_v1.h"
 #include "bx_ntvdm_dem_overlay_namespace_view_v1.h"
 #include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
+#include "bx_ntvdm_dem_virtual_namespace_view_v1.h"
+#include "bx_ntvdm_dem_virtual_mutation_backend_v1.h"
 
 #include <string.h>
 #include <wctype.h>
@@ -97,6 +99,7 @@ static int mutation_view(const bx_ntvdm_dem_whole_provider_v1 *provider,
             BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, &policy)) return 0;
     if (policy == BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST) return 1;
     if (policy == BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY) return 2;
+    if (policy == BX_NTVDM_MUTATION_POLICY_V1_USE_VIRTUAL) return 3;
     return policy == BX_NTVDM_MUTATION_POLICY_V1_REJECT_READONLY ?
         -fail(boundary, result, DEM_ERROR_ACCESS_DENIED) :
         -fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
@@ -133,6 +136,12 @@ int bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(
                 provider->host_namespace, source.drive_index, source.relative_directory,
                 entries, BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES, &count, &overlay_error))
             return fail(boundary, result, overlay_error ? overlay_error : DEM_ERROR_PATH_NOT_FOUND);
+    } else if (admitted == 3) {
+        DWORD virtual_error = ERROR_SUCCESS;
+        if (!bx_ntvdm_dem_virtual_namespace_view_v1_enumerate(&provider->overlay_store,
+                source.drive_index, source.relative_directory, entries,
+                BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES, &count, &virtual_error))
+            return fail(boundary, result, virtual_error ? virtual_error : DEM_ERROR_PATH_NOT_FOUND);
     } else if (bx_ntvdm_host_namespace_v1_enumerate(provider->host_namespace,
             source.drive_index, source.relative_directory, entries,
             BX_NTVDM_HOST_NAMESPACE_V1_MAX_ENTRIES, &count) != BX_NTVDM_HOST_NAMESPACE_V1_OK)
@@ -154,12 +163,17 @@ int bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(
                         source.drive_index, current, &error))
                     return fail(boundary, result, error);
                 if (error != ERROR_SUCCESS) { rejected = 1; continue; }
+            } else if (admitted == 3) {
+                if (!bx_ntvdm_dem_virtual_mutation_backend_v1_delete_file(
+                        &provider->overlay_store, source.drive_index, current, &error))
+                    return fail(boundary, result, error);
+                if (error != ERROR_SUCCESS) { rejected = 1; continue; }
             } else if ((entries[index].attributes & FILE_ATTRIBUTE_READONLY) != 0u &&
                 !bx_ntvdm_host_namespace_v1_set_file_attributes(provider->host_namespace,
                     source.drive_index, current, FILE_ATTRIBUTE_NORMAL, &error)) {
                 rejected = 1; continue;
             }
-            if (admitted != 2 && !bx_ntvdm_host_namespace_v1_delete_file(provider->host_namespace,
+            if (admitted == 1 && !bx_ntvdm_host_namespace_v1_delete_file(provider->host_namespace,
                     source.drive_index, current, &error)) return fail(boundary, result, error);
             success = 1;
         } else {
@@ -172,6 +186,11 @@ int bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(
                 if (!bx_ntvdm_dem_overlay_mutation_backend_v1_rename(&provider->overlay_store,
                         &provider->overlay_files, provider->host_namespace, source.drive_index,
                         current, destination.drive_index, target, &error)) return fail(boundary, result, error);
+                if (error != ERROR_SUCCESS) return fail(boundary, result, error);
+            } else if (admitted == 3) {
+                if (!bx_ntvdm_dem_virtual_mutation_backend_v1_rename(&provider->overlay_store,
+                        source.drive_index, current, destination.drive_index, target, &error))
+                    return fail(boundary, result, error);
                 if (error != ERROR_SUCCESS) return fail(boundary, result, error);
             } else if (!bx_ntvdm_host_namespace_v1_rename_file(provider->host_namespace,
                     source.drive_index, current, destination.drive_index, target, &error))

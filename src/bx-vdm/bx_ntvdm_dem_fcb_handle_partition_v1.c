@@ -173,12 +173,22 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         if (!oem_path || bx_ntvdm_dem_path_v1_resolve(oem_path, provider->cwd, &drive, relative) !=
                 BX_NTVDM_DEM_PATH_V1_OK)
             return error_result(boundary, result, error);
-        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
-            if (bx_ntvdm_dem_fcb_overlay_backend_v1_open(&provider->files,
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY ||
+            provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
+            uint32_t overlay_attributes;
+            int opened;
+            if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
+                opened = bx_ntvdm_dem_virtual_namespace_backend_v1_open(
+                    &provider->files, &provider->overlay_files, drive, relative,
+                    BX_NTVDM_DEM_OVERLAY_FILE_V1_READ, 3u, OPEN_EXISTING, 0u,
+                    0u, &opaque, &size, &error);
+            } else {
+                opened = bx_ntvdm_dem_fcb_overlay_backend_v1_open(&provider->files,
                     &provider->overlay_files, provider->host_namespace, drive, relative,
                     BX_NTVDM_DEM_OVERLAY_FILE_V1_READ, 3u, OPEN_EXISTING, 0u,
-                    &opaque, &size, &time, &date, &error)) {
-                uint32_t overlay_attributes;
+                    &opaque, &size, &time, &date, &error);
+            }
+            if (opened) {
                 if (!bx_ntvdm_dem_fcb_overlay_backend_v1_info(&provider->files,
                         &provider->overlay_files, opaque, &overlay_attributes, &size,
                         &time, &date) || !bx_ntvdm_dem_overlay_handle_backend_v1_close(

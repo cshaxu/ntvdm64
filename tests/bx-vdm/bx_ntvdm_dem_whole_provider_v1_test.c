@@ -1190,16 +1190,19 @@ int main(void)
         else {
             char virtual_dir[MAX_PATH] = {0}, virtual_file[MAX_PATH] = {0};
             char virtual_renamed[MAX_PATH] = {0}, virtual_check[MAX_PATH] = {0};
-            uint32_t virtual_token = 0u;
+            char virtual_fcb[MAX_PATH] = {0}, virtual_wild[MAX_PATH] = {0};
+            uint32_t virtual_token = 0u, virtual_fcb_token = 0u;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = 0u;
             if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate, 0x07u,
                     &boundary, &cpu, oem_profile_pattern, 0, &result) || !cf_set(&result) ||
-                !ax_is(&result, 1u) || !oem_file_exists(oem_rename_one)) failed = 661;
+                !ax_is(&result, 2u) || !oem_file_exists(oem_rename_one)) failed = 661;
             if (!failed && (sprintf_s(virtual_dir, sizeof(virtual_dir), "%c:\\VRTDIR",
                     (char)('A' + drive)) < 0 || sprintf_s(virtual_file, sizeof(virtual_file),
                     "%s\\VRT.TXT", virtual_dir) < 0 || sprintf_s(virtual_renamed,
                     sizeof(virtual_renamed), "%s\\NEW.TXT", virtual_dir) < 0 ||
+                    sprintf_s(virtual_fcb, sizeof(virtual_fcb), "%s\\FCB.TXT", virtual_dir) < 0 ||
+                    sprintf_s(virtual_wild, sizeof(virtual_wild), "%s\\WILD.TXT", virtual_dir) < 0 ||
                     strcpy_s(virtual_check, sizeof(virtual_check), virtual_dir + 2) != 0)) failed = 662;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x04u,
@@ -1279,6 +1282,76 @@ int main(void)
                 if (!failed && bx_ntvdm_dem_handle_route_partition_v1_claims_request(
                         &alternate, 0x00u, &cpu)) failed = 6677;
             }
+            /* The FCB lifecycle must use the same private file object as the
+             * ordinary handle path: no host lookup is available in Virtual. */
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 2u; /* demOpenFCB read/write access */
+            if (!failed && !bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2du,
+                    &boundary, &cpu, virtual_file, 0, 0u, &output_bytes, &result)) failed = 6678;
+            else if (!failed && cf_set(&result)) failed = 66780 + result.cpu_delta.gpr16_values[0];
+            if (!failed) virtual_fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                result.cpu_delta.gpr16_values[5];
+            if (!failed && virtual_fcb_token == 0u) failed = 6679;
+            if (!failed) {
+                const uint8_t fcb_bop[4] = { 0xc4u, 0xc4u, 0x50u, 0x2fu };
+                bx_ntvdm_instruction_window_v1_capture(&window, fcb_bop, sizeof(fcb_bop));
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                token_into_cpu(&cpu, virtual_fcb_token); cpu.ecx = 2u;
+                if (!bx_ntvdm_dem_fcb_io_route_partition_v1_dispatch(&alternate, 0x2fu,
+                        &boundary, &cpu, &window, 0x300u, &fcb_action, &result) ||
+                    fcb_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_READ ||
+                    fcb_action.payload_bytes != 2u) failed = 6680;
+                else {
+                    fcb_action.payload[0] = 'v'; fcb_action.payload[1] = 'f';
+                    if (!bx_ntvdm_dem_fcb_io_route_partition_v1_complete_write(&alternate, 0x2fu,
+                            &boundary, &cpu, &fcb_action, &result) || cf_set(&result) ||
+                        result.cpu_delta.gpr16_values[1] != 2u) failed = 66801;
+                }
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                cpu.eax = virtual_fcb_token >> 16; cpu.esi = virtual_fcb_token & 0xffffu;
+                if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate,
+                        0x2eu, &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) ||
+                    cf_set(&result))) failed = 6681;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x31u,
+                    &boundary, &cpu, virtual_file, 0, 0u, &output_bytes, &result) ||
+                cf_set(&result) || result.cpu_delta.gpr16_values[7] != 2u)) failed = 6682;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2cu,
+                    &boundary, &cpu, virtual_fcb, 0, 0u, &output_bytes, &result) ||
+                cf_set(&result))) failed = 6683;
+            if (!failed) {
+                virtual_fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                    result.cpu_delta.gpr16_values[5];
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                cpu.eax = virtual_fcb_token >> 16; cpu.esi = virtual_fcb_token & 0xffffu;
+                if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2eu,
+                        &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) || cf_set(&result))
+                    failed = 6684;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2cu,
+                    &boundary, &cpu, virtual_wild, 0, 0u, &output_bytes, &result) ||
+                cf_set(&result))) failed = 6685;
+            if (!failed) {
+                virtual_fcb_token = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                    result.cpu_delta.gpr16_values[5];
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                cpu.eax = virtual_fcb_token >> 16; cpu.esi = virtual_fcb_token & 0xffffu;
+                if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(&alternate, 0x2eu,
+                        &boundary, &cpu, 0, 0, 0u, &output_bytes, &result) || cf_set(&result))
+                    failed = 6686;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate, 0x20u,
+                    &boundary, &cpu, virtual_wild, virtual_renamed, &result) || cf_set(&result))) failed = 6687;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate, 0x07u,
+                    &boundary, &cpu, virtual_renamed, 0, &result) || cf_set(&result))) failed = 6688;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate, 0x07u,
+                    &boundary, &cpu, virtual_fcb, 0, &result) || cf_set(&result))) failed = 6689;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x17u,
                     &boundary, &cpu, virtual_file, virtual_renamed, &result) || cf_set(&result))) failed = 668;
@@ -1291,7 +1364,7 @@ int main(void)
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
                     0x20u, &boundary, &cpu, oem_profile_pattern, oem_profile_pattern, &result) ||
-                !cf_set(&result) || !ax_is(&result, 1u))) failed = 671;
+                !cf_set(&result) || !ax_is(&result, 2u))) failed = 671;
             bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }

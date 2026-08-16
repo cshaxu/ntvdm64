@@ -315,6 +315,14 @@
 > possible. This closes that subfamily only—not FCB or search. See the
 > [handle closure](etc/research/t221-s3-virtual-handle-family-closure-001.md).
 
+> **T221 S3 P41 progress:** the eight-service Virtual FCB owner family
+> (`07,20,2C..31`) now uses the one private Virtual view/token lifecycle,
+> including checked `2F` DTA gather and no-host-I/O wildcard rename/delete.
+> The fresh x64 `/MT` whole-provider fixture proves no host namespace fallback.
+> This closes that subfamily only—not Virtual search or the complete DEM
+> package. See the [FCB closure]
+> (etc/research/t221-s3-virtual-fcb-family-closure-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

@@ -36,8 +36,13 @@ int bx_ntvdm_dem_fcb_overlay_backend_v1_info(
     uint16_t *time_out, uint16_t *date_out)
 {
     uint32_t backend;
-    return bx_ntvdm_dem_file_session_v1_lookup_backend(session, token,
-        BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, &backend) &&
+    /* FCB information is private-file mechanics, not an Overlay-only
+     * semantic.  Virtual uses the same opaque object and must not reach a
+     * host namespace merely to answer demGetFileInfo. */
+    return (bx_ntvdm_dem_file_session_v1_lookup_backend(session, token,
+        BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE, &backend) ||
+        bx_ntvdm_dem_file_session_v1_lookup_backend(session, token,
+        BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_VIRTUAL_FILE, &backend)) &&
         bx_ntvdm_dem_overlay_file_v1_info(files, backend, attributes_out,
             size_out, time_out, date_out);
 }
