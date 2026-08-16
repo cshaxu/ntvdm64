@@ -51,6 +51,12 @@ void bx_ntvdm_dem_overlay_store_v1_teardown(bx_ntvdm_dem_overlay_store_v1 *store
 int bx_ntvdm_dem_overlay_store_v1_put_file(bx_ntvdm_dem_overlay_store_v1 *store,
     uint8_t drive_index, const wchar_t *relative, uint32_t attributes,
     const uint8_t *bytes, uint32_t byte_count);
+/* Copies one existing private file node to another private path. This is a
+ * store-only transaction primitive; source and destination host paths are
+ * never consulted or changed. */
+int bx_ntvdm_dem_overlay_store_v1_copy_file(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
+    const wchar_t *source, const wchar_t *destination);
 int bx_ntvdm_dem_overlay_store_v1_tombstone(bx_ntvdm_dem_overlay_store_v1 *store,
     uint8_t drive_index, const wchar_t *relative);
 int bx_ntvdm_dem_overlay_store_v1_put_directory(bx_ntvdm_dem_overlay_store_v1 *store,

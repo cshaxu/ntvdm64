@@ -6,6 +6,7 @@
 #include "bx_ntvdm_dem_handle_route_partition_v1.h"
 #include "bx_ntvdm_dem_overlay_handle_backend_v1.h"
 #include "bx_ntvdm_dem_overlay_namespace_view_v1.h"
+#include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
@@ -443,6 +444,41 @@ int main(void)
             if (!failed && (!bx_ntvdm_dem_overlay_namespace_view_v1_directory_empty(
                     &overlay->overlay_store, &space, overlay_drive, L"N64MVD99",
                     &overlay_empty, &overlay_error) || overlay_empty)) failed = 241;
+            if (!failed && (!bx_ntvdm_dem_overlay_mutation_backend_v1_create_directory(
+                    &overlay->overlay_store, &space, overlay_drive, L"N64MUTD",
+                    &overlay_error) || overlay_error != ERROR_SUCCESS ||
+                !bx_ntvdm_dem_overlay_store_v1_put_file(&overlay->overlay_store,
+                    overlay_drive, L"N64MUTD\\CHILD.TXT", 0u, 0, 0u) ||
+                !bx_ntvdm_dem_overlay_mutation_backend_v1_remove_directory(
+                    &overlay->overlay_store, &space, overlay_drive, L"N64MUTD",
+                    &overlay_error) || overlay_error != ERROR_DIR_NOT_EMPTY)) failed = 250;
+            if (!failed && (!bx_ntvdm_dem_overlay_mutation_backend_v1_delete_file(
+                    &overlay->overlay_store, &space, overlay_drive, L"N64MUTD\\CHILD.TXT",
+                    &overlay_error) || overlay_error != ERROR_SUCCESS ||
+                !bx_ntvdm_dem_overlay_mutation_backend_v1_remove_directory(
+                    &overlay->overlay_store, &space, overlay_drive, L"N64MUTD",
+                    &overlay_error) || overlay_error != ERROR_SUCCESS)) failed = 251;
+            if (!failed && (!bx_ntvdm_dem_overlay_store_v1_put_file(&overlay->overlay_store,
+                    overlay_drive, L"N64MUTA.TXT", 0u, (const uint8_t *)"cow", 3u) ||
+                !bx_ntvdm_dem_overlay_mutation_backend_v1_rename(&overlay->overlay_store,
+                    &overlay->overlay_files, &space, overlay_drive, L"N64MUTA.TXT",
+                    overlay_drive, L"N64MUTB.TXT", &overlay_error) ||
+                overlay_error != ERROR_SUCCESS ||
+                bx_ntvdm_dem_overlay_store_v1_lookup(&overlay->overlay_store, overlay_drive,
+                    L"N64MUTB.TXT") == 0 || bx_ntvdm_dem_overlay_store_v1_lookup(
+                    &overlay->overlay_store, overlay_drive, L"N64MUTB.TXT")->byte_count != 3u)) failed = 252;
+            if (!failed && (!bx_ntvdm_dem_overlay_mutation_backend_v1_create_directory(
+                    &overlay->overlay_store, &space, overlay_drive, L"N64MUTR",
+                    &overlay_error) || overlay_error != ERROR_SUCCESS ||
+                !bx_ntvdm_dem_overlay_mutation_backend_v1_rename(&overlay->overlay_store,
+                    &overlay->overlay_files, &space, overlay_drive, L"N64MUTR",
+                    overlay_drive, L"N64MUTS", &overlay_error) || overlay_error != ERROR_SUCCESS ||
+                !bx_ntvdm_dem_overlay_namespace_view_v1_query(&overlay->overlay_store, &space,
+                    overlay_drive, L"N64MUTS", &overlay_node, &overlay_error) ||
+                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_DIRECTORY ||
+                !bx_ntvdm_dem_overlay_namespace_view_v1_query(&overlay->overlay_store, &space,
+                    overlay_drive, L"N64MUTR", &overlay_node, &overlay_error) ||
+                overlay_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT)) failed = 253;
             file = CreateFileW(temporary, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, 0, 0);
             if (!failed && (file == INVALID_HANDLE_VALUE || !ReadFile(file, output, 4u, &written, 0) ||
                 written != 4u || memcmp(output, "host", 4u) != 0)) failed = 232;

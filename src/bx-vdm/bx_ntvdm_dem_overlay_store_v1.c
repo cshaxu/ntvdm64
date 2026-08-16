@@ -128,6 +128,19 @@ int bx_ntvdm_dem_overlay_store_v1_put_file(bx_ntvdm_dem_overlay_store_v1 *store,
     return bx_ntvdm_dem_overlay_store_v1_valid(store);
 }
 
+int bx_ntvdm_dem_overlay_store_v1_copy_file(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
+    const wchar_t *source, const wchar_t *destination)
+{
+    const bx_ntvdm_dem_overlay_store_v1_entry *entry;
+    if (!bx_ntvdm_dem_overlay_store_v1_valid(store) || !valid_path(drive, source) ||
+        !valid_path(drive, destination) || _wcsicmp(source, destination) == 0) return 0;
+    entry = bx_ntvdm_dem_overlay_store_v1_lookup(store, drive, source);
+    if (entry == 0 || entry->state != BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE) return 0;
+    return bx_ntvdm_dem_overlay_store_v1_put_file(store, drive, destination,
+        entry->attributes, entry->bytes, entry->byte_count);
+}
+
 int bx_ntvdm_dem_overlay_store_v1_tombstone(bx_ntvdm_dem_overlay_store_v1 *store,
     uint8_t drive, const wchar_t *relative)
 {

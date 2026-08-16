@@ -151,6 +151,12 @@
 > COW children and relocation before deciding emptiness. It remains below the
 > four namespace mutation services. See the [P13 record](etc/research/t221-s3-overlay-merged-child-foundation-001.md).
 
+> **T221 S3 P14 progress:** one selector-blind Overlay mutation backend now
+> owns create/delete/rmdir/file-rename/directory-rename private transactions;
+> its family fixture proves no host-base mutation. It has no BOP binding yet:
+> EA/error/result mapping and all profile dispositions remain the next
+> four-service integration unit. See the [P14 record](etc/research/t221-s3-overlay-mutation-backend-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
