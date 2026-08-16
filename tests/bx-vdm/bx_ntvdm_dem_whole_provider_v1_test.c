@@ -296,6 +296,8 @@ int main(void)
         bx_ntvdm_dem_cwd_context_v1 overlay_cwd;
         bx_ntvdm_dem_whole_provider_v1 *overlay = 0;
         uint32_t backend_token, overlay_token;
+        wchar_t overlay_relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+        uint8_t overlay_drive;
         if (!profile_for_mode(&overlay_profile, BX_NTVDM_MUTATION_MODE_V1_OVERLAY) ||
             !bx_ntvdm_dem_cwd_context_v1_initialize(&overlay_cwd, &overlay_profile) ||
             (overlay = (bx_ntvdm_dem_whole_provider_v1 *)HeapAlloc(GetProcessHeap(),
@@ -408,6 +410,12 @@ int main(void)
             if (!failed && (!bx_ntvdm_dem_file_session_v1_token_kind(&overlay->files,
                     opened, &service) || service != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE))
                 failed = 227;
+            if (!failed && (bx_ntvdm_dem_path_v1_resolve(oem_short, &overlay_cwd,
+                    &overlay_drive, overlay_relative) != BX_NTVDM_DEM_PATH_V1_OK ||
+                bx_ntvdm_dem_overlay_store_v1_lookup(&overlay->overlay_store, overlay_drive,
+                    overlay_relative) == 0 || bx_ntvdm_dem_overlay_store_v1_lookup(
+                    &overlay->overlay_store, overlay_drive, overlay_relative)->attributes !=
+                    FILE_ATTRIBUTE_HIDDEN)) failed = 233;
             file = CreateFileW(temporary, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, 0, 0);
             if (!failed && (file == INVALID_HANDLE_VALUE || !ReadFile(file, output, 4u, &written, 0) ||
                 written != 4u || memcmp(output, "host", 4u) != 0)) failed = 232;
