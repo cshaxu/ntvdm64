@@ -3,10 +3,9 @@
 #include <string.h>
 #include <wctype.h>
 
-static int profile_for(bx_ntvdm_mutation_profile_v1 *profile)
+static int profile_for(bx_ntvdm_mutation_profile_v1 *profile, uint32_t mode)
 {
-    bx_ntvdm_mutation_profile_v1_initialize(profile,
-        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    bx_ntvdm_mutation_profile_v1_initialize(profile, mode);
     return bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
         BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
         bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
@@ -89,7 +88,7 @@ int main(void)
     snapshot.present_mask = UINT32_C(1) << drive;
     snapshot.admitted_mask = snapshot.present_mask;
     snapshot.types[drive] = DRIVE_FIXED;
-    if (!failed && (!profile_for(&profile) || !bx_ntvdm_host_namespace_v1_initialize(
+    if (!failed && (!profile_for(&profile, BX_NTVDM_MUTATION_MODE_V1_DIRECT) || !bx_ntvdm_host_namespace_v1_initialize(
             &space, &snapshot) || !bx_ntvdm_dem_cwd_context_v1_initialize(&cwd,
             &profile) || !bx_ntvdm_dem_whole_provider_v1_initialize(&provider,
             &profile, &space, &cwd))) failed = 4;
@@ -138,6 +137,64 @@ int main(void)
         !bx_ntvdm_dem_search_partition_v1_owns_service(0x0bu) ||
         !bx_ntvdm_dem_search_partition_v1_owns_service(0x0cu) ||
         bx_ntvdm_dem_search_partition_v1_owns_service(0x0du))) failed = 9;
+    if (!failed) {
+        bx_ntvdm_search_query_v1 overlay_query;
+        wchar_t overlay_alpha[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+        wchar_t overlay_beta[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+        bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
+        if (!profile_for(&profile, BX_NTVDM_MUTATION_MODE_V1_OVERLAY) ||
+            !bx_ntvdm_dem_cwd_context_v1_initialize(&cwd, &profile) ||
+            !bx_ntvdm_dem_whole_provider_v1_initialize(&provider, &profile, &space, &cwd) ||
+            !bx_ntvdm_search_request_v1_decode_first_path((const uint8_t *)request, 0u,
+                &overlay_query) ||
+            swprintf_s(overlay_alpha, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, L"%s\\ALPHA.TXT",
+                overlay_query.relative_directory) < 0 ||
+            swprintf_s(overlay_beta, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, L"%s\\BETA.TXT",
+                overlay_query.relative_directory) < 0 ||
+            !bx_ntvdm_dem_overlay_store_v1_tombstone(&provider.overlay_store, drive,
+                overlay_alpha) || !bx_ntvdm_dem_overlay_store_v1_put_file(
+                &provider.overlay_store, drive, overlay_beta, FILE_ATTRIBUTE_NORMAL,
+                (const uint8_t *)"b", 1u)) failed = 10;
+    }
+    if (!failed) {
+        memset(path_first, 0, sizeof(path_first));
+        memcpy(path_first, request, strlen(request) + 1u);
+        dta_bytes = path_first + 128u;
+        dta_bytes[0] = 0x00u; dta_bytes[1] = 0x09u;
+        path_first[132] = 0x34u; path_first[133] = 0x12u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!invoke(&provider, &dta, 0x09u, &boundary, &cpu, path_first,
+                sizeof(path_first), &transaction, payload, &payload_bytes)) failed = 110;
+        else if (payload_bytes != 30u) failed = 111;
+        else if (memcmp(payload + 17u, "BETA.TXT", 8u)) failed = 112;
+    }
+    if (!failed) {
+        memcpy(path_next, payload, 8u); path_next[43] = 0x34u; path_next[44] = 0x12u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!invoke(&provider, &dta, 0x0bu, &boundary, &cpu, path_next,
+                sizeof(path_next), &transaction, payload, &payload_bytes) ||
+            payload_bytes != 30u || memcmp(payload + 17u, "ZETA.TXT", 8u)) failed = 12;
+    }
+    if (!failed) {
+        bx_ntvdm_search_transaction_v1_release(&provider.search);
+        bx_ntvdm_search_transaction_v1_initialize(&provider.search);
+        memset(fcb_first, 0, sizeof(fcb_first));
+        memcpy(fcb_first + 53u, request, strlen(request) + 1u);
+        fcb_first[181] = 0x34u; fcb_first[182] = 0x12u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!invoke(&provider, &dta, 0x0au, &boundary, &cpu, fcb_first,
+                sizeof(fcb_first), &transaction, payload, &payload_bytes) ||
+            payload_bytes != 51u || memcmp(payload, "BETA    TXT", 11u)) failed = 13;
+    }
+    if (!failed) {
+        memset(fcb_next, 0, sizeof(fcb_next));
+        memcpy(fcb_next + 32u, payload + 31u, 8u);
+        fcb_next[53] = 0x34u; fcb_next[54] = 0x12u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        if (!invoke(&provider, &dta, 0x0cu, &boundary, &cpu, fcb_next,
+                sizeof(fcb_next), &transaction, payload, &payload_bytes) ||
+            payload_bytes != 51u || memcmp(payload, "ZETA    TXT", 11u)) failed = 14;
+    }
     if (!failed) bx_ntvdm_dem_whole_provider_v1_teardown(&provider);
     if (space.magic != 0u) bx_ntvdm_host_namespace_v1_release(&space);
     DeleteFileW(alpha); DeleteFileW(zeta); RemoveDirectoryW(directory);

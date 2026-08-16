@@ -13,6 +13,7 @@ New-Item -ItemType Directory -Path $build | Out-Null
 $exe = Join-Path $build 't202-s4-dem-search-partition.exe'
 $names = @(
     'bx_ntvdm_mutation_profile_v1.c', 'bx_ntvdm_mutation_overlay_v1.c',
+    'bx_ntvdm_session_host_context_v1.c', 'bx_ntvdm_command_host_context_v1.c',
     'bx_ntvdm_dem_profile_consumer_v1.c', 'bx_ntvdm_host_drive_policy.c',
     'bx_ntvdm_host_namespace.c', 'bx_ntvdm_dem_cwd_context_v1.c',
     'bx_ntvdm_cpu_delta_abi.c', 'bx_ntvdm_cpu_result_v2.c',
@@ -21,6 +22,8 @@ $names = @(
     'bx_ntvdm_guest_gather_read_action_v1.c',
     'bx_ntvdm_guest_range.c', 'bx_ntvdm_dem_path_v1.c',
     'bx_ntvdm_dem_file_view_v1.c', 'bx_ntvdm_dem_file_session_v1.c',
+    'bx_ntvdm_dem_overlay_store_v1.c', 'bx_ntvdm_dem_overlay_file_v1.c',
+    'bx_ntvdm_dem_overlay_namespace_view_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c',
     'bx_ntvdm_dem_whole_provider_v1.c', 'bx_ntvdm_dem_search_partition_v1.c',
     'bx_ntvdm_dem_dta_service.c', 'bx_ntvdm_dem_path_search_service_v1.c',

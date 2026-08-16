@@ -205,6 +205,14 @@ int bx_ntvdm_dem_overlay_namespace_view_v1_enumerate(
         if (!add_entry(entries, capacity, &count, name, entry->attributes,
                 entry->byte_count, entry->dos_time, entry->dos_date)) { *error_out = ERROR_BUFFER_OVERFLOW; return 0; }
     }
+    for (index = 1u; index < count; ++index) {
+        bx_ntvdm_host_namespace_entry_v1 item = entries[index];
+        uint32_t prior = index;
+        while (prior != 0u && _wcsicmp(entries[prior - 1u].dos_name, item.dos_name) > 0) {
+            entries[prior] = entries[prior - 1u]; --prior;
+        }
+        entries[prior] = item;
+    }
     *count_out = count; *error_out = ERROR_SUCCESS; return 1;
 }
 
