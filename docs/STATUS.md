@@ -70,6 +70,13 @@
 > that the existing bx-vdm partitions compose those units. See the
 > [source-owner map](etc/research/t221-s1-dem-source-owner-map-001.md).
 
+> **T221 S1 P3 progress:** dependency evidence separates ordinary filesystem
+> capability from the pervasive historical CCPU/SAS/SoftPC/VDD/engine and
+> raw-device dependencies. No complete original DEM translation unit is
+> directly admitted into the modern x64 graph; recovery must use the smallest
+> checked seam or a documented source-derived contract. See the
+> [dependency map](etc/research/t221-s1-dem-dependency-map-001.md).
+
 > **T220 S1 P1 closure:** OpenNT proves `50:36` is only DOS-entry/VDD
 > notification.  The historical resource contract instead roots in the
 > guest-published `pusCurrentPDB`, PDB/JFT/SFT mappings and a guarded
