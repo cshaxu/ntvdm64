@@ -234,3 +234,11 @@ int bx_ntvdm_dem_overlay_file_v1_info(bx_ntvdm_dem_overlay_file_v1 *files,
     *time_out = entry->dos_time; *date_out = entry->dos_date;
     return 1;
 }
+
+int bx_ntvdm_dem_overlay_file_v1_set_dos_time(bx_ntvdm_dem_overlay_file_v1 *files,
+    uint32_t token, uint16_t dos_time, uint16_t dos_date)
+{
+    bx_ntvdm_dem_overlay_file_v1_handle *handle = handle_for(files, token, 0u);
+    return handle != 0 && bx_ntvdm_dem_overlay_store_v1_set_dos_time(files->store,
+        handle->drive_index, handle->relative, dos_time, dos_date);
+}

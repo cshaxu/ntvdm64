@@ -21,5 +21,8 @@ int bx_ntvdm_dem_overlay_handle_backend_v1_close(bx_ntvdm_dem_file_session_v1 *s
     bx_ntvdm_dem_overlay_file_v1 *files, uint32_t token);
 int bx_ntvdm_dem_overlay_handle_backend_v1_flush(
     bx_ntvdm_dem_file_session_v1 *session, uint32_t token);
+int bx_ntvdm_dem_overlay_handle_backend_v1_file_times(
+    bx_ntvdm_dem_file_session_v1 *session, bx_ntvdm_dem_overlay_file_v1 *files,
+    uint32_t token, uint8_t option, uint16_t *time_in_out, uint16_t *date_in_out);
 
 #endif

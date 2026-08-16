@@ -366,8 +366,9 @@ int main(void)
             ((uint8_t *)window.bytes)[3] = 0x08u;
             token_into_cpu(&cpu, overlay_token);
             if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x08u,
-                    &boundary, &cpu, &window, &fcb_action, &result) || !cf_set(&result) ||
-                !ax_is(&result, 1u))) failed = 220;
+                    &boundary, &cpu, &window, &fcb_action, &result) || cf_set(&result) ||
+                (result.cpu_delta.gpr16_write_mask & ((1u << 1u) | (1u << 2u))) !=
+                    ((1u << 1u) | (1u << 2u)))) failed = 220;
             ((uint8_t *)window.bytes)[3] = 0x27u;
             token_into_cpu(&cpu, overlay_token);
             if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x27u,
@@ -1251,6 +1252,18 @@ int main(void)
                         &boundary, &cpu, &window, &handle_action, &result) || cf_set(&result) ||
                     handle_action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE ||
                     handle_action.payload_bytes != 2u || memcmp(handle_action.payload, "hi", 2u) != 0)) failed = 6675;
+                ((uint8_t *)window.bytes)[3] = 0x08u;
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                token_into_cpu(&cpu, virtual_token); cpu.ebx = 1u;
+                cpu.ecx = 0x1234u; cpu.edx = 0x5678u;
+                if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&alternate, 0x08u,
+                        &boundary, &cpu, &window, &handle_action, &result) || cf_set(&result))) failed = 66751;
+                bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                token_into_cpu(&cpu, virtual_token);
+                if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&alternate, 0x08u,
+                        &boundary, &cpu, &window, &handle_action, &result) || cf_set(&result) ||
+                    result.cpu_delta.gpr16_values[1] != 0x1234u ||
+                    result.cpu_delta.gpr16_values[2] != 0x5678u)) failed = 66752;
                 ((uint8_t *)window.bytes)[3] = 0x02u;
                 cpu.ecx = cpu.edx = 0xffffu;
                 if (!failed && (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(&alternate, 0x02u,

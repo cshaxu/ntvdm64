@@ -38,3 +38,9 @@ int bx_ntvdm_dem_overlay_handle_backend_v1_close(bx_ntvdm_dem_file_session_v1 *s
 int bx_ntvdm_dem_overlay_handle_backend_v1_flush(
     bx_ntvdm_dem_file_session_v1 *session, uint32_t token)
 { uint32_t value; return backend(session, token, &value); /* volatile COW: no host flush */ }
+int bx_ntvdm_dem_overlay_handle_backend_v1_file_times(
+    bx_ntvdm_dem_file_session_v1 *session, bx_ntvdm_dem_overlay_file_v1 *files,
+    uint32_t token, uint8_t option, uint16_t *time, uint16_t *date)
+{ uint32_t value, attributes, size; if (!time || !date || !backend(session, token, &value)) return 0;
+  if (option == 0u) return bx_ntvdm_dem_overlay_file_v1_info(files, value, &attributes, &size, time, date);
+  return option == 1u && bx_ntvdm_dem_overlay_file_v1_set_dos_time(files, value, *time, *date); }

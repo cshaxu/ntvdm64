@@ -183,7 +183,16 @@ static int overlay_handle_dispatch(bx_ntvdm_dem_whole_provider_v1 *provider,
     uint32_t count = (uint16_t)cpu->ecx, value = 0u;
     uint64_t address;
     if (!overlay_token(provider, cpu)) return 0;
-    if (service == 0x08u) return overlay_finish(boundary, result_out, 1u, 1);
+    if (service == 0x08u) {
+        uint16_t time = (uint16_t)cpu->ecx, date = (uint16_t)cpu->edx;
+        uint8_t option = (uint8_t)cpu->ebx;
+        if (!bx_ntvdm_dem_overlay_handle_backend_v1_file_times(&provider->files,
+                &provider->overlay_files, token(cpu), option, &time, &date))
+            return overlay_error(boundary, result_out);
+        return overlay_finish(boundary, result_out, 0u, 0) &&
+            (option != 0u || (bx_ntvdm_cpu_delta_v1_set_gpr16(&result_out->cpu_delta, 1u, time) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result_out->cpu_delta, 2u, date)));
+    }
     if (service == 0x00u) {
         uint8_t origin = (uint8_t)(cpu->ebx & 0xffu);
         if (origin > BX_NTVDM_DEM_OVERLAY_FILE_V1_SEEK_END ||

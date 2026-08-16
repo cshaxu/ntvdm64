@@ -166,6 +166,18 @@ int bx_ntvdm_dem_overlay_store_v1_set_attributes(
     return bx_ntvdm_dem_overlay_store_v1_valid(store);
 }
 
+int bx_ntvdm_dem_overlay_store_v1_set_dos_time(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
+    const wchar_t *relative, uint16_t dos_time, uint16_t dos_date)
+{
+    uint32_t index;
+    if (!locate(store, drive, relative, &index) ||
+        store->entries[index].state != BX_NTVDM_DEM_OVERLAY_STORE_V1_FILE) return 0;
+    store->entries[index].dos_time = dos_time;
+    store->entries[index].dos_date = dos_date;
+    return bx_ntvdm_dem_overlay_store_v1_valid(store);
+}
+
 int bx_ntvdm_dem_overlay_store_v1_tombstone(bx_ntvdm_dem_overlay_store_v1 *store,
     uint8_t drive, const wchar_t *relative)
 {

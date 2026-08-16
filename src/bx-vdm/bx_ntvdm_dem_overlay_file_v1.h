@@ -68,5 +68,7 @@ int bx_ntvdm_dem_overlay_file_v1_close(bx_ntvdm_dem_overlay_file_v1 *files,
 int bx_ntvdm_dem_overlay_file_v1_info(bx_ntvdm_dem_overlay_file_v1 *files,
     uint32_t token, uint32_t *attributes_out, uint32_t *size_out,
     uint16_t *time_out, uint16_t *date_out);
+int bx_ntvdm_dem_overlay_file_v1_set_dos_time(bx_ntvdm_dem_overlay_file_v1 *files,
+    uint32_t token, uint16_t dos_time, uint16_t dos_date);
 
 #endif

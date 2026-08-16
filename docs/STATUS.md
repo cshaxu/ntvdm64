@@ -304,6 +304,11 @@
 > final sweep; see the [I/O transaction record]
 > (etc/research/t221-s3-virtual-handle-io-transaction-001.md).
 
+> **T221 S3 P39 progress:** private Overlay/Virtual file objects now preserve
+> the original `50:08` DOS time/date get/set contract through typed store
+> state. Virtual set→get passes under x64 `/MT` without host mutation; see the
+> [file-time record](etc/research/t221-s3-private-file-times-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
