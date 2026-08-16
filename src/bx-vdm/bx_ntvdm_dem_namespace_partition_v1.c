@@ -1,5 +1,6 @@
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
 #include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
+#include "bx_ntvdm_dem_overlay_namespace_backend_v1.h"
 
 #include <string.h>
 
@@ -90,6 +91,17 @@ static ULONG open_share(uint8_t mode)
     case 0x40u: return FILE_SHARE_WRITE;
     case 0x50u: return FILE_SHARE_READ | FILE_SHARE_WRITE;
     default: return FILE_SHARE_READ | FILE_SHARE_WRITE;
+    }
+}
+
+static uint32_t overlay_share(uint8_t mode)
+{
+    switch (mode & 0x70u) {
+    case 0x20u: return 0u;
+    case 0x30u: return BX_NTVDM_DEM_OVERLAY_FILE_V1_READ;
+    case 0x40u: return BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE;
+    default: return BX_NTVDM_DEM_OVERLAY_FILE_V1_READ |
+        BX_NTVDM_DEM_OVERLAY_FILE_V1_WRITE;
     }
 }
 
@@ -218,6 +230,27 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
             observe_open(provider, service, 1, drive, 1, relative, oem_path, result);
             return completed;
+        }
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
+            uint32_t size = 0u;
+            if (provider->direct_namespace_owner == 0u)
+                return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
+            if (!bx_ntvdm_dem_overlay_namespace_backend_v1_open(&provider->files,
+                    &provider->overlay_files, provider->host_namespace, drive, relative,
+                    access, service == 0x12u ? overlay_share((uint8_t)cpu->ebx) : 3u,
+                    disposition, service == 0x12u ? 0u : (cpu->ecx & 0xffffu),
+                    provider->direct_namespace_owner, &token, &size, &error))
+                return fail(boundary, result, error);
+            if (!finish(boundary, result, (uint16_t)(token >> 16), 1, 0) ||
+                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
+                    (uint16_t)token) ||
+                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
+                    (uint16_t)size) || !bx_ntvdm_cpu_delta_v1_set_gpr16(
+                    &result->cpu_delta, 1u, (uint16_t)(size >> 16))) return 0;
+            if (service == 0x12u && !bx_ntvdm_cpu_delta_v1_set_gpr16(
+                    &result->cpu_delta, 3u, 0u)) return 0;
+            observe_open(provider, service, 1, drive, 0, relative, oem_path, result);
+            return 1;
         }
         if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_DIRECT) {
             if (provider->direct_namespace_owner == 0u)
