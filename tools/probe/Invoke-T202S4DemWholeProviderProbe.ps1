@@ -25,6 +25,7 @@ $names = @(
     'bx_ntvdm_dem_overlay_store_v1.c',
     'bx_ntvdm_dem_overlay_file_v1.c',
     'bx_ntvdm_dem_overlay_resolver_v1.c',
+    'bx_ntvdm_dem_overlay_namespace_backend_v1.c',
     'bx_ntvdm_dem_overlay_handle_backend_v1.c',
     'bx_ntvdm_dem_file_session_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c', 'bx_ntvdm_dem_whole_provider_v1.c',
