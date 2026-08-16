@@ -15,4 +15,8 @@ int bx_ntvdm_dem_virtual_namespace_view_v1_enumerate(
     const wchar_t *relative, bx_ntvdm_host_namespace_entry_v1 *entries,
     uint32_t entry_capacity, uint32_t *entry_count_out, DWORD *error_out);
 
+int bx_ntvdm_dem_virtual_namespace_view_v1_directory_empty(
+    const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
+    const wchar_t *relative, int *empty_out, DWORD *error_out);
+
 #endif

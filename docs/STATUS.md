@@ -268,7 +268,7 @@
 
 > **T221 S3 P33 progress:** Virtual directory tombstones now mask private
 > descendants for both query and enumeration, preserving a single future
-> namespace/search/wildcard view. The no-host-I/O x64 fixture remains green;
+> namespace/search/wildcard/rmdir view. The no-host-I/O x64 fixture remains green;
 > see the [visibility record]
 > (etc/research/t221-s3-virtual-directory-tombstone-visibility-001.md).
 

@@ -120,3 +120,28 @@ int bx_ntvdm_dem_virtual_namespace_view_v1_enumerate(
     }
     *count_out = count; *error_out = ERROR_SUCCESS; return 1;
 }
+
+int bx_ntvdm_dem_virtual_namespace_view_v1_directory_empty(
+    const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
+    const wchar_t *relative, int *empty_out, DWORD *error_out)
+{
+    bx_ntvdm_dem_overlay_namespace_node_v1 node;
+    uint32_t index;
+    if (empty_out != 0) *empty_out = 0;
+    if (error_out != 0) *error_out = ERROR_INVALID_PARAMETER;
+    if (store == 0 || relative == 0 || empty_out == 0 || error_out == 0 ||
+        !bx_ntvdm_dem_virtual_namespace_view_v1_query(store, drive, relative,
+            &node, error_out)) return 0;
+    if (node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_DIRECTORY) {
+        if (node.kind == BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT &&
+            *error_out == ERROR_FILE_NOT_FOUND) *error_out = ERROR_PATH_NOT_FOUND;
+        else *error_out = ERROR_ACCESS_DENIED;
+        return 1;
+    }
+    for (index = 0u; index < store->count; ++index) {
+        const bx_ntvdm_dem_overlay_store_v1_entry *entry = &store->entries[index];
+        if (entry->drive_index == drive && visible(entry) && !hidden(store, drive, entry->relative) &&
+            direct_child(relative, entry->relative)) { *error_out = ERROR_SUCCESS; return 1; }
+    }
+    *empty_out = 1; *error_out = ERROR_SUCCESS; return 1;
+}

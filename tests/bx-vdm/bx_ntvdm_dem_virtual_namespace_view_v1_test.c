@@ -8,7 +8,7 @@ int main(void)
     bx_ntvdm_dem_overlay_namespace_node_v1 node;
     bx_ntvdm_host_namespace_entry_v1 entries[4];
     DWORD error = ERROR_GEN_FAILURE;
-    uint32_t count = 0u;
+    uint32_t count = 0u; int empty = 0;
     memset(&store, 0, sizeof(store));
     if (!bx_ntvdm_dem_overlay_store_v1_initialize(&store) ||
         !bx_ntvdm_dem_overlay_store_v1_put_directory(&store, 2u, L"BIN", FILE_ATTRIBUTE_DIRECTORY) ||
@@ -27,5 +27,8 @@ int main(void)
         node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT || error != ERROR_FILE_NOT_FOUND) {
         bx_ntvdm_dem_overlay_store_v1_teardown(&store); return 1;
     }
+    if (!bx_ntvdm_dem_overlay_store_v1_put_directory(&store, 2u, L"EMPTY", FILE_ATTRIBUTE_DIRECTORY) ||
+        !bx_ntvdm_dem_virtual_namespace_view_v1_directory_empty(&store, 2u, L"EMPTY", &empty, &error) ||
+        !empty || error != ERROR_SUCCESS) { bx_ntvdm_dem_overlay_store_v1_teardown(&store); return 2; }
     bx_ntvdm_dem_overlay_store_v1_teardown(&store); return 0;
 }
