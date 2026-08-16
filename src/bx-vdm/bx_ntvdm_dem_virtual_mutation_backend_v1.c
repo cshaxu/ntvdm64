@@ -53,3 +53,30 @@ int bx_ntvdm_dem_virtual_mutation_backend_v1_remove_directory(
     if (!bx_ntvdm_dem_overlay_store_v1_tombstone_directory(store, drive, path)) { *error = ERROR_NOT_ENOUGH_MEMORY; return 1; }
     *error = ERROR_SUCCESS; return 1;
 }
+
+int bx_ntvdm_dem_virtual_mutation_backend_v1_rename(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t source_drive,
+    const wchar_t *source, uint8_t destination_drive, const wchar_t *destination,
+    DWORD *error)
+{
+    bx_ntvdm_dem_overlay_namespace_node_v1 source_node, destination_node;
+    if (error != 0) *error = ERROR_INVALID_PARAMETER;
+    if (store == 0 || source == 0 || destination == 0 || error == 0) return 0;
+    if (source_drive != destination_drive) { *error = ERROR_NOT_SAME_DEVICE; return 1; }
+    if (_wcsicmp(source, destination) == 0) { *error = ERROR_ACCESS_DENIED; return 1; }
+    if (!bx_ntvdm_dem_virtual_namespace_view_v1_query(store, source_drive,
+            source, &source_node, error)) return 0;
+    if (source_node.kind == BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT) return 1;
+    if (!bx_ntvdm_dem_virtual_namespace_view_v1_query(store, source_drive,
+            destination, &destination_node, error)) return 0;
+    if (destination_node.kind != BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_ABSENT) {
+        *error = ERROR_ALREADY_EXISTS; return 1;
+    }
+    if (!parent(store, source_drive, destination, error)) return 1;
+    if (source_node.kind == BX_NTVDM_DEM_OVERLAY_NAMESPACE_NODE_V1_DIRECTORY &&
+        _wcsnicmp(destination, source, wcslen(source)) == 0 &&
+        destination[wcslen(source)] == L'\\') { *error = ERROR_ACCESS_DENIED; return 1; }
+    if (!bx_ntvdm_dem_overlay_store_v1_move_private_subtree(store, source_drive,
+            source, destination)) { *error = ERROR_NOT_ENOUGH_MEMORY; return 1; }
+    *error = ERROR_SUCCESS; return 1;
+}

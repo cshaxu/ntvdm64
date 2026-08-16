@@ -226,6 +226,56 @@ int bx_ntvdm_dem_overlay_store_v1_has_descendant(
     return 0;
 }
 
+static void remove_prefix(bx_ntvdm_dem_overlay_store_v1 *store,
+    uint8_t drive, const wchar_t *relative)
+{
+    uint32_t read, write = 0u;
+    for (read = 0u; read < store->count; ++read) {
+        bx_ntvdm_dem_overlay_store_v1_entry *entry = &store->entries[read];
+        if (entry->drive_index == drive && prefix(entry->relative, relative)) {
+            if (entry->bytes != 0) HeapFree(GetProcessHeap(), 0u, entry->bytes);
+            continue;
+        }
+        if (write != read) store->entries[write] = *entry;
+        ++write;
+    }
+    store->count = write;
+}
+
+int bx_ntvdm_dem_overlay_store_v1_move_private_subtree(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
+    const wchar_t *source, const wchar_t *destination)
+{
+    uint32_t index;
+    size_t source_length, destination_length;
+    if (!bx_ntvdm_dem_overlay_store_v1_valid(store) || !valid_path(drive, source) ||
+        !valid_path(drive, destination) || _wcsicmp(source, destination) == 0 ||
+        prefix(destination, source)) return 0;
+    source_length = wcslen(source);
+    destination_length = wcslen(destination);
+    for (index = 0u; index < store->count; ++index) {
+        const bx_ntvdm_dem_overlay_store_v1_entry *entry = &store->entries[index];
+        if (entry->drive_index == drive && prefix(entry->relative, source) &&
+            destination_length + wcslen(entry->relative + source_length) >=
+                BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE) return 0;
+    }
+    /* The visible destination was preflighted by the caller.  Discard only
+     * its private hidden residue before changing source paths, so the move
+     * has no duplicate key and cannot expose an old tombstone there. */
+    remove_prefix(store, drive, destination);
+    for (index = 0u; index < store->count; ++index) {
+        bx_ntvdm_dem_overlay_store_v1_entry *entry = &store->entries[index];
+        if (entry->drive_index == drive && prefix(entry->relative, source)) {
+            wchar_t moved[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
+            const wchar_t *suffix = entry->relative + source_length;
+            wcscpy_s(moved, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, destination);
+            wcscat_s(moved, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, suffix);
+            wcscpy_s(entry->relative, BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE, moved);
+        }
+    }
+    return bx_ntvdm_dem_overlay_store_v1_valid(store);
+}
+
 int bx_ntvdm_dem_overlay_store_v1_add_relocation(
     bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive,
     const wchar_t *destination, const wchar_t *source)

@@ -277,6 +277,13 @@
 > and BOP binding remain open pending the complete directory relocation unit;
 > see the [mutation foundation](etc/research/t221-s3-virtual-mutation-foundation-001.md).
 
+> **T221 S3 P35 progress:** Virtual now has one selector-blind private
+> file/directory rename transaction. It moves the complete private subtree,
+> including tombstones, rejects cross-drive and descendant targets, and has no
+> host-root input or I/O. The focused x64 `/MT` `hostIo=false` fixture passes;
+> DEM BOP binding, CLI/engine admission and native trace remain open. See the
+> [rename record](etc/research/t221-s3-virtual-directory-rename-transaction-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

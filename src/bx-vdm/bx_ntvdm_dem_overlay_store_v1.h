@@ -76,6 +76,15 @@ int bx_ntvdm_dem_overlay_store_v1_has_descendant(
     const bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
     const wchar_t *relative);
 
+/* Moves an entirely private visible path or directory subtree.  The caller
+ * must already have applied its view-specific existence and parent rules.
+ * This operation includes private tombstones below the source so a move
+ * cannot reveal entries the same private namespace had hidden.  It has no
+ * host namespace input or effect. */
+int bx_ntvdm_dem_overlay_store_v1_move_private_subtree(
+    bx_ntvdm_dem_overlay_store_v1 *store, uint8_t drive_index,
+    const wchar_t *source, const wchar_t *destination);
+
 /* Adds a private lazy directory relocation.  `destination` is the path DOS
  * sees after rename; `source` is the effective pre-rename tree.  It has no
  * host-side effect and rejects self/ancestor cycles. */
