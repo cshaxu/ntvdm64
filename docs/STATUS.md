@@ -4,7 +4,7 @@
 
 > **Current effective packet: M0 T222 S1.** Its governing brief appears immediately below.
 
-**Active: M0 T222 S1 -- DEM Direct/Readonly drive-view source and ABI ledger.**
+**Active: M0 T222 S2 -- DEM Direct/Readonly drive-view provider implementation.**
 
 > **T221 closed:** its Direct/Readonly whole-provider
 > closure is recorded in [history](history/m0-t221-closure-20260816.md).
@@ -18,19 +18,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T222 S1, Ordinary Mode. |
+| Identifier Mode | M0 T222 S2, Ordinary Mode. |
 | Admission And Approval | Owner direction: complete remaining BOPs by original component package; Direct and Readonly first, retained Overlay/Virtual interfaces without new behavior. T200/T219 global BOP audit and T221 closure select this adjacent DEM owner family. |
-| Objective | Establish the full original-source/ABI/failure and four-rung recovery ledger for `0D,0E,0F,10,13,14,15,18,19,1A,1B,1C,25,41,46`, then admit one shared Direct/Readonly provider plan—not endpoint patches. |
+| Objective | Implement one `dem_drive_view_provider_v1` boundary for `0D,0E,0F,10,13,14,15,18,19,1A,1B,1C,25,41,46`, migrate existing typed helpers through it, and deliver the full Direct/Readonly family regression. |
 | Non-goals | No raw-media/DASD (`21,29,2A`), file/handle/FCB/search reopen, Redirector, COMMAND, XMS, DPMI, WOW, Bochs/mantle change, Overlay/Virtual behavior, or native trace. |
 | Reference Baseline | T200 S31 host-integrated BOP ledger; T219 reconciliation; T221 closure; OpenNT `demgset.c`, `demdir.c`, `demdisp.c`, `demmsg.c` and existing bx-vdm drive/CWD/DPB/DTA/clock sources. |
-| Files And ABI Surface | Initial S1 is source/evidence and may update only `docs/etc/research`, Status and the inventory. Any later implementation remains in the existing fixed-width `src/bx-vdm` host capability/provider seams. |
+| Files And ABI Surface | `src/bx-vdm` package session, drive/volume snapshot, CWD, DTA, DPB, media, clock and identity provider seams; `tests/bx-vdm` family fixture; only existing fixed-width checked actions cross the machine boundary. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Complete one non-overlapping service ledger with original source, caller/register/memory ABI, failure rule, historical dependency, profile disposition and current-route/workaround decision; verify documentation governance and diff. |
-| Expected Markers | Every selected identity has exactly one original owner and one package disposition; unavailable historical APIs are explicit evidence, not a blocker or silent rewrite. |
-| Asset Needs | Existing OpenNT source and current tracked code only; no external import, firmware, guest media or runtime build. |
-| Reporting Requirements | Record per-identity source/rung/reuse disposition, API availability/permission verdict, retained/deleted/migrated workaround and implementation grouping. |
-| Stop Conditions | Need for raw-device policy, new guest ABI/range, JFT/SFT reconstruction, historical host/kernel rebuild, Bochs change, external import or trace-led service work pauses for re-admission. |
-| Exit Criteria | One source-reviewed ledger and package plan covers all 15 identities, including explicit disposition for unavailable or privilege-sensitive host APIs, and names a safe coherent S2 implementation boundary. |
+| Verification | Build a focused MSVC x64 `/MT` family fixture below `build/M0-T222-S2/<run>`; exercise all 15 identities through normal package session in Direct/Readonly; prove excluded-drive, checked-output, no-fallback and clock-capability terminals; verify governance and diff. |
+| Expected Markers | One provider state owner, no raw guest/host pointers, no selector-local profile policy, source-shaped result layouts, Direct/Readonly isolation and no generic unavailable fallback. |
+| Asset Needs | Existing OpenNT/current source, local MSVC x64 `/MT` and disposable build roots; no external import, firmware or guest media. |
+| Reporting Requirements | Per delivery record changed source/test interfaces, grouped original contract, profile coverage, focused build/result, retained limitation and next package step. |
+| Stop Conditions | Need for raw-device policy, new guest ABI/range, JFT/SFT reconstruction, host/kernel rebuild, Bochs change, external import, ambient process-CWD side effect or native trace pauses for re-admission. |
+| Exit Criteria | All 15 identities select the one provider with complete Direct/Readonly family regression; clock-set has an explicit source-shaped profile disposition; existing Overlay/Virtual interfaces remain unchanged; no identity falls through to a generic unavailable provider. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | Selected drive filtering, host CWD/session scope, privilege-sensitive time/set-drive behavior, DTA/DPB fixed layouts, volume/media identity, synthetic-root leftovers, Direct/Readonly fallback isolation and current provider ownership. |
 > **T222 S1 P1 progress:** the complete 15-identity DEM drive-view/CWD/GSET
