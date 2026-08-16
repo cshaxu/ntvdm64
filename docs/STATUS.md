@@ -2,10 +2,10 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T220 S6.** Its governing brief is the active
+> **Current effective packet: M0 T220 S7.** Its governing brief is the active
 > packet table below.
 
-**Active: M0 T220 S6 -- guarded DEM PDB termination admission map.**
+**Active: M0 T220 S7 -- direct-token JFT/SFT representation map.**
 
 > **T207 closed:** its passive normal-terminal sequence is recorded in
 > [history](history/m0-t207-closure-20260815.md). **T206 closed:** its COMMAND terminal handoff boundary is recorded in
@@ -38,19 +38,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T220 S6, Ordinary Mode. |
-| Admission And Approval | T220 S1 and S4 map the historical guarded PDB termination route; S5 now supplies only a proven direct-token owner-release primitive. S6 admits a source/ABI/failure map before any lifecycle binding. |
-| Objective | Map `50:3C` from original child-removal guard through `demTerminatePDB` and current lifecycle composition; classify exactly whether and where PDB-scoped direct-token release can preserve the original VOID/RIP contract. |
-| Non-goals | No `50:3C` binding or source change, FCB/search ownership claim, generic PSP/guest-memory inspector, PDB/JFT/SFT walk, host-mutation expansion, Bochs/mantle change, COMMAND return, target execution or native trace. |
-| Reference Baseline | T220 S1--S5 evidence; original OpenNT `msctrlc.asm`, `demsrch.c`, `demfile.c`, `demgset.c`, `doswow.h`; current lifecycle/direct namespace/file-session sources. |
+| Identifier Mode | M0 T220 S7, Ordinary Mode. |
+| Admission And Approval | S6 rejects pre-`DOS_ABORT` PDB cleanup. T220 now requires the exact guest JFT/SFT representation and post-abort release route before any lifecycle bridge can be proposed. |
+| Objective | Map the original direct file handle's PDB/JFT/SFT allocation, DOS handle publication, `$close`/`SVC_DEMCLOSE` path, and the current opaque-token mismatch; decide whether a bounded source-derived representation is feasible. |
+| Non-goals | No guest-memory read or write, JFT/SFT implementation, `50:3C` binding, FCB/search/device/VDD semantics, host-mutation expansion, Bochs/mantle change, COMMAND return, target execution or native trace. |
+| Reference Baseline | T220 S1--S6 evidence; original OpenNT `demfile.c`, DOS `abort.asm`, close/handle call chain and `doswow.h`; current direct namespace/handle/file-session sources. |
 | Files And ABI Surface | Evidence and current-source analysis only; no bx-core, bx-mantle, guest, CLI, or runtime ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, design/GOAL.md, design/ARCHITECTURE.md, design/CODING.md, and etc/operations/policy/source-policy.md. |
-| Verification | The map names caller, guard, dispatcher/provider, input/output ABI, ordering, VDD/device/search/FCB dispositions, profile independence, exact failure/no-op semantics and the narrowest later implementation seam. |
-| Expected Markers | `50:3C` remains unbound; direct token release is not confused with a global teardown; a true child-removal guard remains guest DOS-owned; no selector-specific detached handler is added. |
+| Verification | The map names original structures and offsets, allocation/publication/release order, all current adapter owners, failure behavior, and a precise feasibility decision without using runtime behavior as a substitute. |
+| Expected Markers | `50:3C` remains unbound; no direct token is misrepresented as a DOS JFN/SFT; guest DOS remains owner of process close order; no selector-specific detached handler is added. |
 | Asset Needs | Existing OpenNT source and current bx-vdm sources; no new image, firmware, media, external source import or build artifact. |
-| Reporting Requirements | Record the source path and guard, current composition route, every resource-family disposition, failure/no-op behavior, and any prerequisite for a later binding S. |
-| Stop Conditions | A need to bind `50:3C`, add a guest read, expand FCB/search/device/VDD semantics, alter host mutation, touch Bochs/mantle, run native trace, patch a guest binary or import an external input pauses S6 for re-admission. |
-| Exit Criteria | One source/ABI/failure map proves or rejects a bounded direct-token lifecycle binding; implementation remains separately admitted. |
+| Reporting Requirements | Record source paths, layouts, current token ABI mismatch, required guest ranges/operations for a possible bridge, failure order and explicit retained/deferred/rejected dispositions. |
+| Stop Conditions | A need to implement a JFT/SFT map, add guest read/write, bind `50:3C`, expand FCB/search/device/VDD semantics, alter host mutation, touch Bochs/mantle, run native trace, patch a guest binary or import an external input pauses S7 for re-admission. |
+| Exit Criteria | One source/ABI/failure map proves whether the current direct-token model can reach a bounded JFT/SFT-compatible lifecycle seam; implementation remains separately admitted. |
 | Original Owner Request | "以最小 bochs 作为 softpc 的替代品，实现 ntdos64，一个基于 cli 的非侵入式 ntvdm。" |
 | Similar-Issue Sweep | First/subsequent child entry; parent-owned handles crossing child entry; normal/abort/TSR exit; VDD and no-VDD branches; `50:34..3C`; file, FCB, search, pending and DTA state; current session teardown; COMMAND `54:0B`; and direct/readonly/overlay/virtual profile ownership. |
 
@@ -90,6 +90,13 @@
 > core/mantle seed link as a fresh source-only audit DLL. `50:3C`, FCB and
 > search ownership remain unbound. See the
 > [result](etc/research/t220-s5-direct-dem-namespace-owner-result-001.md).
+
+> **T220 S6 P1 closure:** original `50:3C` is a guarded search/VDD/host
+> termination notification before guest DOS runs `DOS_ABORT`'s JFT/FCB/SFT
+> close path. The current finite provider preserves only that no-result
+> notification. S5's direct-token `release_owner` must therefore **not** be
+> bound to `50:3C`; it awaits a separately admitted JFT/SFT representation
+> map. See the [admission map](etc/research/t220-s6-dem-pdb-termination-admission-map-001.md).
 
 > **T216 S1 P1 closure:** all five declared readonly namespace slots already
 > exist, but only CONFIG/AUTOEXEC are claimed by the installed direct DEM
