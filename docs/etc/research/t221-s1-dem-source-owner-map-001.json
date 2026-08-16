@@ -1,0 +1,814 @@
+﻿{
+    "schema":  "ntdos64.t221.s1.dem-source-owner-map.v1",
+    "generatedUtc":  "2026-08-16T00:28:57.3102182Z",
+    "sourceRoot":  "src/opennt/base/mvdm/dos/dem",
+    "sourceCount":  16,
+    "serviceCount":  73,
+    "staticOnly":  true,
+    "byOriginalImplementation":  [
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demdasd.c",
+                                         "serviceCount":  2,
+                                         "services":  [
+                                                          "50:29",
+                                                          "50:2A"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demdir.c",
+                                         "serviceCount":  4,
+                                         "services":  [
+                                                          "50:04",
+                                                          "50:06",
+                                                          "50:13",
+                                                          "50:18"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                                         "serviceCount":  9,
+                                         "services":  [
+                                                          "50:1D",
+                                                          "50:1F",
+                                                          "50:24",
+                                                          "50:26",
+                                                          "50:28",
+                                                          "50:2B",
+                                                          "50:40",
+                                                          "50:42",
+                                                          "50:43"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demerror.c",
+                                         "serviceCount":  2,
+                                         "services":  [
+                                                          "50:32",
+                                                          "50:33"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                                         "serviceCount":  8,
+                                         "services":  [
+                                                          "50:07",
+                                                          "50:20",
+                                                          "50:2C",
+                                                          "50:2D",
+                                                          "50:2E",
+                                                          "50:2F",
+                                                          "50:30",
+                                                          "50:31"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demfile.c",
+                                         "serviceCount":  7,
+                                         "services":  [
+                                                          "50:01",
+                                                          "50:03",
+                                                          "50:05",
+                                                          "50:12",
+                                                          "50:17",
+                                                          "50:22",
+                                                          "50:44"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                                         "serviceCount":  13,
+                                         "services":  [
+                                                          "50:0D",
+                                                          "50:0E",
+                                                          "50:0F",
+                                                          "50:10",
+                                                          "50:14",
+                                                          "50:15",
+                                                          "50:19",
+                                                          "50:1A",
+                                                          "50:1B",
+                                                          "50:1C",
+                                                          "50:25",
+                                                          "50:41",
+                                                          "50:46"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                                         "serviceCount":  8,
+                                         "services":  [
+                                                          "50:00",
+                                                          "50:02",
+                                                          "50:08",
+                                                          "50:16",
+                                                          "50:1E",
+                                                          "50:27",
+                                                          "50:47",
+                                                          "50:48"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demioctl.c",
+                                         "serviceCount":  1,
+                                         "services":  [
+                                                          "50:21"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demlock.c",
+                                         "serviceCount":  1,
+                                         "services":  [
+                                                          "50:3F"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                                         "serviceCount":  13,
+                                         "services":  [
+                                                          "50:11",
+                                                          "50:23",
+                                                          "50:34",
+                                                          "50:35",
+                                                          "50:36",
+                                                          "50:37",
+                                                          "50:38",
+                                                          "50:39",
+                                                          "50:3A",
+                                                          "50:3B",
+                                                          "50:3D",
+                                                          "50:3E",
+                                                          "50:45"
+                                                      ]
+                                     },
+                                     {
+                                         "source":  "src/opennt/base/mvdm/dos/dem/demsrch.c",
+                                         "serviceCount":  5,
+                                         "services":  [
+                                                          "50:09",
+                                                          "50:0A",
+                                                          "50:0B",
+                                                          "50:0C",
+                                                          "50:3C"
+                                                      ]
+                                     }
+                                 ],
+    "entries":  [
+                    {
+                        "identity":  "50:00",
+                        "originalHandler":  "demChgFilePtr",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:01",
+                        "originalHandler":  "demChMod",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfile.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:02",
+                        "originalHandler":  "demClose",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:03",
+                        "originalHandler":  "demCreate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfile.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:04",
+                        "originalHandler":  "demCreateDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdir.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:05",
+                        "originalHandler":  "demDelete",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfile.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:06",
+                        "originalHandler":  "demDeleteDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdir.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:07",
+                        "originalHandler":  "demDeleteFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:08",
+                        "originalHandler":  "demFileTimes",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:09",
+                        "originalHandler":  "demFindFirst",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demsrch.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:0A",
+                        "originalHandler":  "demFindFirstFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demsrch.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:0B",
+                        "originalHandler":  "demFindNext",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demsrch.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:0C",
+                        "originalHandler":  "demFindNextFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demsrch.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:0D",
+                        "originalHandler":  "demGetBootDrive",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:0E",
+                        "originalHandler":  "demGetDriveFreeSpace",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:0F",
+                        "originalHandler":  "demGetDrives",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:10",
+                        "originalHandler":  "demGSetMediaID",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:11",
+                        "originalHandler":  "demLoadDos",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:12",
+                        "originalHandler":  "demOpen",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfile.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:13",
+                        "originalHandler":  "demQueryCurrentDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdir.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:14",
+                        "originalHandler":  "demQueryDate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:15",
+                        "originalHandler":  "demQueryTime",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:16",
+                        "originalHandler":  "demRead",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:17",
+                        "originalHandler":  "demRename",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfile.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:18",
+                        "originalHandler":  "demSetCurrentDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdir.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:19",
+                        "originalHandler":  "demSetDate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:1A",
+                        "originalHandler":  "demSetDefaultDrive",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:1B",
+                        "originalHandler":  "demSetDTALocation",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:1C",
+                        "originalHandler":  "demSetTime",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:1D",
+                        "originalHandler":  "demSetV86KernelAddr",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:1E",
+                        "originalHandler":  "demWrite",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:1F",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:20",
+                        "originalHandler":  "demRenameFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:21",
+                        "originalHandler":  "demIOCTL",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demioctl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:22",
+                        "originalHandler":  "demCreateNew",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfile.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:23",
+                        "originalHandler":  "demDiskReset",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:24",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:25",
+                        "originalHandler":  "demGetDPB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:26",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:27",
+                        "originalHandler":  "demCommit",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:28",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:29",
+                        "originalHandler":  "demAbsRead",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdasd.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:2A",
+                        "originalHandler":  "demAbsWrite",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdasd.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:2B",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:2C",
+                        "originalHandler":  "demCreateFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:2D",
+                        "originalHandler":  "demOpenFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:2E",
+                        "originalHandler":  "demCloseFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB direct/I-O partition when DTA prerequisites hold",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:2F",
+                        "originalHandler":  "demFCBIO",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB direct/I-O partition when DTA prerequisites hold",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:30",
+                        "originalHandler":  "demDate16",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:31",
+                        "originalHandler":  "demGetFileInfo",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfcb.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:32",
+                        "originalHandler":  "demSetHardErrorInfo",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demerror.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:33",
+                        "originalHandler":  "demRetry",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demerror.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:34",
+                        "originalHandler":  "demLoadDosAppSym",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:35",
+                        "originalHandler":  "demFreeDosAppSym",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:36",
+                        "originalHandler":  "demEntryDosApp",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:37",
+                        "originalHandler":  "demDOSDispCall",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:38",
+                        "originalHandler":  "demDOSDispRet",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:39",
+                        "originalHandler":  "demOutputString",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:3A",
+                        "originalHandler":  "demInputString",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:3B",
+                        "originalHandler":  "demIsDebug",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:3C",
+                        "originalHandler":  "demTerminatePDB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demsrch.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-session-lifecycle-provider -\u003e finite boot-namespace termination only",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:3D",
+                        "originalHandler":  "demExitVDM",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:3E",
+                        "originalHandler":  "demWOWFiles",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:3F",
+                        "originalHandler":  "demLockOper",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demlock.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:40",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:41",
+                        "originalHandler":  "demGetComputerName",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:42",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:43",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:44",
+                        "originalHandler":  "demCheckPath",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demfile.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:45",
+                        "originalHandler":  "demSystemSymbolOp",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demmisc.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:46",
+                        "originalHandler":  "demGetDPBList",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demgset.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:47",
+                        "originalHandler":  "demPipeFileDataEOF",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    },
+                    {
+                        "identity":  "50:48",
+                        "originalHandler":  "demPipeFileEOF",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "originalImplementation":  "src/opennt/base/mvdm/dos/dem/demhndl.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "currentRouteAudit":  "T221 S1 P1 current-source static route audit",
+                        "recoveryRung":  "pending: source/ABI/failure analysis"
+                    }
+                ]
+}

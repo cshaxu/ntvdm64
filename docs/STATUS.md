@@ -64,6 +64,12 @@
 > P adds the source/ABI/failure and four-rung recovery ledger. See the
 > [current route audit](etc/research/t221-s1-dem-current-bound-route-audit-001.md).
 
+> **T221 S1 P2 progress:** each of the 73 historical handlers now has one
+> source-owner location across twelve DEM translation units. This is the
+> module-level decomposition for the source/ABI/failure ledger, not a claim
+> that the existing bx-vdm partitions compose those units. See the
+> [source-owner map](etc/research/t221-s1-dem-source-owner-map-001.md).
+
 > **T220 S1 P1 closure:** OpenNT proves `50:36` is only DOS-entry/VDD
 > notification.  The historical resource contract instead roots in the
 > guest-published `pusCurrentPDB`, PDB/JFT/SFT mappings and a guarded
