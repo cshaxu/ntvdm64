@@ -127,6 +127,13 @@
 > host-base preservation. This closes only that Overlay opening subfamily, not
 > the wider namespace or DEM package. See the [P9 record](etc/research/t221-s3-overlay-namespace-open-closure-001.md).
 
+> **T221 S3 P10 progress:** source review confirms the Overlay namespace
+> mutation subfamily (`50:04/05/06/17`) needs a single private directory
+> relocation/tombstone/merged-child model: original `demRename` can move a
+> directory, including unmaterialized host-base descendants. No mutation BOP
+> route changed; this prevents a file-only or Direct-fallback implementation.
+> See the [P10 state model](etc/research/t221-s3-overlay-namespace-mutation-state-model-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
