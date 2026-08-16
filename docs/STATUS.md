@@ -463,6 +463,10 @@
 > shared file-view admission before any Win32 `WriteFile` and returns `CF/AX=5`.
 > Direct and retained private-backend routes are unchanged; see the [P64 record]
 > (etc/research/t221-s3-readonly-fcb-write-admission-001.md).
+> **T221 S3 P65 progress:** Direct `08` set-time now runs on a self-owned
+> temporary file, while the Readonly declared-image set-time branch returns
+> `CF/AX=5`; both retain their existing get-time behavior. See the [P65 record]
+> (etc/research/t221-s3-direct-readonly-file-times-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
