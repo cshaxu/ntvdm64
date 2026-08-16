@@ -2,6 +2,7 @@
 #define BX_NTVDM_DEM_WHOLE_PROVIDER_V1_H
 
 #include "bx_ntvdm_dem_local_file_backend_v1.h"
+#include "bx_ntvdm_dem_overlay_store_v1.h"
 #include "bx_ntvdm_search_transaction_v1.h"
 #include "bx_ntvdm_exception_abi.h"
 #include "bx_ntvdm_guest_gather_read_action_v1.h"
@@ -26,6 +27,7 @@ typedef struct bx_ntvdm_dem_whole_provider_v1 {
     const bx_ntvdm_profile_search_snapshot_v1 *declared_search_snapshot;
     bx_ntvdm_dem_file_session_v1 files;
     bx_ntvdm_dem_file_view_v1 file_view;
+    bx_ntvdm_dem_overlay_store_v1 overlay_store;
     bx_ntvdm_dem_local_file_backend_v1 local_files;
     bx_ntvdm_search_transaction_v1 search;
     /* Set only around one current direct namespace open/create completion by

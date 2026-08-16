@@ -28,6 +28,7 @@ int bx_ntvdm_dem_whole_provider_v1_valid(
         bx_ntvdm_dem_cwd_context_v1_valid(provider->cwd) &&
         bx_ntvdm_dem_file_session_v1_valid(&provider->files) &&
         bx_ntvdm_dem_file_view_v1_valid(&provider->file_view) &&
+        bx_ntvdm_dem_overlay_store_v1_valid(&provider->overlay_store) &&
         bx_ntvdm_dem_local_file_backend_v1_valid(&provider->local_files) &&
         bx_ntvdm_search_transaction_v1_valid(&provider->search) &&
         (provider->declared_search_snapshot == 0 ||
@@ -64,6 +65,7 @@ int bx_ntvdm_dem_whole_provider_v1_initialize(
     provider->cwd = cwd;
     if (!bx_ntvdm_dem_file_session_v1_initialize(&provider->files, profile) ||
         !bx_ntvdm_dem_file_view_v1_initialize(&provider->file_view, profile) ||
+        !bx_ntvdm_dem_overlay_store_v1_initialize(&provider->overlay_store) ||
         !bx_ntvdm_dem_local_file_backend_v1_initialize(&provider->local_files,
             &provider->files, &provider->file_view, host_namespace, cwd)) {
         bx_ntvdm_dem_whole_provider_v1_teardown(provider);
@@ -82,6 +84,7 @@ void bx_ntvdm_dem_whole_provider_v1_teardown(
 {
     if (provider == 0) return;
     bx_ntvdm_search_transaction_v1_release(&provider->search);
+    bx_ntvdm_dem_overlay_store_v1_teardown(&provider->overlay_store);
     bx_ntvdm_dem_file_session_v1_teardown(&provider->files);
     memset(provider, 0, sizeof(*provider));
 }

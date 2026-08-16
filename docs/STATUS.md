@@ -89,6 +89,11 @@
 > fixture passes under MSVC x64 `/MT`; Overlay/Virtual remain unimplemented.
 > See the [P3 record](etc/research/t221-s3-readonly-token-migration-001.md).
 
+> **T221 S3 P4 progress:** the whole provider now owns a dynamic volatile
+> COW/tombstone store with teardown lifecycle; focused and full provider
+> source-built fixtures pass. It is storage only—no BOP yet routes through it,
+> and Overlay/Virtual remain unimplemented. See the [P4 record](etc/research/t221-s3-overlay-store-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

@@ -22,6 +22,7 @@ $names = @(
     'bx_ntvdm_instruction_window_abi.c', 'bx_ntvdm_guest_read_action_v1.c',
     'bx_ntvdm_guest_gather_read_action_v1.c', 'bx_ntvdm_guest_range.c',
     'bx_ntvdm_dem_path_v1.c', 'bx_ntvdm_dem_file_view_v1.c',
+    'bx_ntvdm_dem_overlay_store_v1.c',
     'bx_ntvdm_dem_file_session_v1.c',
     'bx_ntvdm_dem_local_file_backend_v1.c', 'bx_ntvdm_dem_whole_provider_v1.c',
     'bx_ntvdm_dem_handle_partition_v1.c', 'bx_ntvdm_dem_handle_route_partition_v1.c',
