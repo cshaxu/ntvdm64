@@ -244,6 +244,33 @@ int main(void)
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 140 + (int)index;
             }
+            memcpy(ram + 0x800u, "C:\\FCBTWO.COM", sizeof("C:\\FCBTWO.COM"));
+            memcpy(ram + 0x900u, "C:\\FCBREN.COM", sizeof("C:\\FCBREN.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u; cpu.es = 0u; cpu.edi = 0x900u;
+            if (!dispatch(&session, 0x17u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 150 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x900u;
+            if (!dispatch(&session, 0x05u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 160 + (int)index;
+            }
+            memcpy(ram + 0x800u, "C:\\FCBDIR", sizeof("C:\\FCBDIR"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u;
+            if (!dispatch(&session, 0x04u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 170 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u;
+            if (!dispatch(&session, 0x06u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 180 + (int)index;
+            }
         }
         /* The source-owned FCB direct route has two safe, profile-independent
          * terminals: DOS date query and no-op close of a zero opaque token. */

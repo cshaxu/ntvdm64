@@ -391,6 +391,13 @@
 > namespace nor declared snapshot supplies those results. FCB search and other
 > owner families remain open; see the [P51 record]
 > (etc/research/t221-s3-package-session-private-search-001.md).
+> **T221 S3 P52 progress:** Overlay and Virtual now run the original-shaped
+> namespace mutation quartet through the package session: `50:17` rename,
+> `50:05` delete, `50:04` mkdir, and `50:06` rmdir. The source-defined
+> delete/delete-directory service numbers were verified against `dossvc.h`;
+> private state changes do not mutate the host. This is a planned namespace
+> family leg, not DEM-package closure; see the [P52 record]
+> (etc/research/t221-s3-package-session-private-namespace-mutation-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
