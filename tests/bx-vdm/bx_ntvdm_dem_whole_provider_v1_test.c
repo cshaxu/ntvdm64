@@ -375,6 +375,19 @@ int main(void)
                 if (!bx_ntvdm_dem_handle_route_partition_v1_dispatch(overlay, 0x02u,
                         &boundary, &cpu, &window, &fcb_action, &result) || cf_set(&result)) failed = 225;
             }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ecx = FILE_ATTRIBUTE_HIDDEN;
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(overlay, 0x03u,
+                    &boundary, &cpu, oem_short, 0, &result) || cf_set(&result))) failed = 226;
+            opened = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16) |
+                result.cpu_delta.gpr16_values[5];
+            if (!failed && (!bx_ntvdm_dem_file_session_v1_token_kind(&overlay->files,
+                    opened, &service) || service != BX_NTVDM_DEM_FILE_TOKEN_KIND_V1_OVERLAY_FILE))
+                failed = 227;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(overlay, 0x22u,
+                    &boundary, &cpu, oem_short, 0, &result) || !cf_set(&result) ||
+                !ax_is(&result, ERROR_FILE_EXISTS))) failed = 228;
             bx_ntvdm_dem_whole_provider_v1_teardown(overlay);
             HeapFree(GetProcessHeap(), 0, overlay);
         }
