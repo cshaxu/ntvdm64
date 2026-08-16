@@ -65,6 +65,12 @@
 > package closure: normal session regression and DTA migration remain open;
 > see the [P3 record](etc/research/t222-s2-drive-view-cwd-provider-migration-001.md).
 > **T222 S2 P4 progress:** CWD's borrowed admitted host namespace is now bound independently of file/search whole-provider construction; the existing whole-provider session fixture remains green. See the [P4 record](etc/research/t222-s2-drive-view-host-namespace-boundary-001.md).
+> **T222 S2 P5 progress:** normal package-session ingress now covers CWD/default-drive
+> 50:13/18/1A through the Direct/Readonly drive-view provider without
+> whole-provider construction. The package executor preserves checked writes while
+> admitting fully validated CPU-only CWD results; its focused x64 /MT fixture passes.
+> DTA and the remaining drive-view groups are still open; see the [P5 record]
+> (etc/research/t222-s2-drive-view-cwd-normal-session-regression-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily

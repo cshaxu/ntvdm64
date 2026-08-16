@@ -1,7 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-drive-view-provider', 'dem-whole-provider-session', 'dem-loader-family', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard', 'command-lifecycle', 'command-package')]
+    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-drive-view-provider', 'dem-drive-view-session', 'dem-whole-provider-session', 'dem-loader-family', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard', 'command-lifecycle', 'command-package')]
     [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
@@ -180,6 +180,8 @@ if ($Fixture -eq 'dem-package') {
         'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
         'tests\bx-vdm\bx_ntvdm_dem_drive_view_provider_v1_test.c'
     )
+} elseif ($Fixture -eq 'dem-drive-view-session') {
+    $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_drive_view_session_v1_test.c'
 } elseif ($Fixture -eq 'dem-whole-provider-session') {
     $sourceRelatives += 'tests\bx-vdm\bx_ntvdm_dem_whole_provider_session_v1_test.c'
 } elseif ($Fixture -eq 'dem-loader-family') {
@@ -315,6 +317,10 @@ $record = [ordered]@{
     sourceClosure = $sourceRelatives
     fixture = if ($Fixture -eq 'dem-package') {
         'tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c'
+    } elseif ($Fixture -eq 'dem-drive-view-provider') {
+        'tests/bx-vdm/bx_ntvdm_dem_drive_view_provider_v1_test.c'
+    } elseif ($Fixture -eq 'dem-drive-view-session') {
+        'tests/bx-vdm/bx_ntvdm_dem_drive_view_session_v1_test.c'
     } elseif ($Fixture -eq 'dem-whole-provider-session') {
         'tests/bx-vdm/bx_ntvdm_dem_whole_provider_session_v1_test.c'
     } elseif ($Fixture -eq 'dem-loader-family') {

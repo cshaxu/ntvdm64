@@ -36,8 +36,19 @@ static int terminal_or_complete(const bx_ntvdm_bop_ingress_v1 *i,
   bx_ntvdm_dem_cli_unavailable_provider_v1_dispatch(i,p,route,e,c,w,r); }
 static int write_tx(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_multi_write_transaction_v1 *t,const uint8_t *payload)
 { struct bx_ntvdm_mechanical_action_v1 a;uint32_t i,id;
-  if(!s||!t||!payload||!bx_ntvdm_multi_write_transaction_v1_preflight(t,UINT64_C(0x100000),t->writes.payload_bytes))return 0;
-  if(!t->writes.write_count)return 1;
+  if(!s||!t||!payload)return 0;
+  /* A source-shaped CPU-only service (for example demSetCurrentDir) has no
+   * guest-RAM copy.  The session remains its checked executor, but there is
+   * no multi-write record to preflight or submit. */
+  if(!t->writes.write_count)return t->magic==BX_NTVDM_MULTI_WRITE_TRANSACTION_MAGIC&&
+    t->abi_version==BX_NTVDM_MULTI_WRITE_TRANSACTION_VERSION&&
+    t->struct_bytes==sizeof(*t)&&t->flags==0u&&
+    bx_ntvdm_exception_event_v1_valid(&t->boundary)&&
+    bx_ntvdm_cpu_state_v1_valid(&t->cpu_before)&&
+    bx_ntvdm_cpu_result_v2_valid(&t->result)&&
+    t->result.disposition==BX_NTVDM_CPU_RESULT_V2_RESUME&&
+    t->result.resume_rip>t->boundary.fault_rip;
+  if(!bx_ntvdm_multi_write_transaction_v1_preflight(t,UINT64_C(0x100000),t->writes.payload_bytes))return 0;
   if(t->writes.write_count>BX_NTVDM_MECHANICAL_ACTION_V1_MAX_RANGES||t->writes.payload_bytes>BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES||!s->namespace_plane->next_action_id)return 0;
   id=s->namespace_plane->next_action_id++;if(!s->namespace_plane->next_action_id)s->namespace_plane->next_action_id=1u;
   bx_ntvdm_mechanical_action_v1_clear(&a);a.action_id=id;a.kind=BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;a.range_count=t->writes.write_count;a.payload_bytes=(uint32_t)t->writes.payload_bytes;
