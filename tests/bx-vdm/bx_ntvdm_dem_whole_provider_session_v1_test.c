@@ -259,6 +259,13 @@ int main(void)
                 bx_ntvdm_host_namespace_v1_release(&host); return 230;
             }
             token = token_from(&result);
+            /* A valid readonly namespace token still owns ordinary seek state. */
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x00u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 257;
+            }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
             cpu.ebx = 1u; cpu.ecx = 0x0020u; cpu.edx = 0x5841u;
@@ -274,11 +281,19 @@ int main(void)
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 231;
             }
+            /* demCommit has no content mutation in a readonly namespace; it
+             * retains the source-shaped successful no-op terminal. */
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            if (!dispatch(&session, 0x27u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 232;
+            }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
             if (!dispatch(&session, 0x02u, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
-                bx_ntvdm_host_namespace_v1_release(&host); return 232;
+                bx_ntvdm_host_namespace_v1_release(&host); return 233;
             }
             memcpy(ram + 0x800u, direct_file_oem, strlen(direct_file_oem) + 1u);
             memcpy(ram + 0x900u, direct_renamed_oem, strlen(direct_renamed_oem) + 1u);
