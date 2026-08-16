@@ -128,7 +128,7 @@ int main(void)
     byob_image command = { command_bytes, sizeof(command_bytes) }, target = { target_bytes, sizeof(target_bytes) };
     byob_profile_selection profile; bx_ntvdm_host_drive_snapshot_v1 drives;
     bx_ntvdm_host_namespace_v1 host; wchar_t root[4] = L"C:\\"; DWORD type;
-    wchar_t system_directory[MAX_PATH], temporary_path[MAX_PATH]; char fcb_host_path[MAX_PATH], direct_temp_oem[MAX_PATH], direct_file_oem[MAX_PATH], direct_renamed_oem[MAX_PATH]; UINT system_length, temporary_length;
+    wchar_t system_directory[MAX_PATH], temporary_path[MAX_PATH]; char fcb_host_path[MAX_PATH], direct_temp_oem[MAX_PATH], direct_file_oem[MAX_PATH], direct_renamed_oem[MAX_PATH], direct_dir_oem[MAX_PATH]; UINT system_length, temporary_length;
     uint32_t index;
     profile_initialize(&profile); type = GetDriveTypeW(root);
     if (type == DRIVE_NO_ROOT_DIR || type == DRIVE_UNKNOWN) return 1;
@@ -149,7 +149,9 @@ int main(void)
         strcpy_s(direct_file_oem, MAX_PATH, direct_temp_oem) != 0 ||
         strcat_s(direct_file_oem, MAX_PATH, "\\HNDL.DAT") != 0 ||
         strcpy_s(direct_renamed_oem, MAX_PATH, direct_temp_oem) != 0 ||
-        strcat_s(direct_renamed_oem, MAX_PATH, "\\RENAMED.DAT") != 0) {
+        strcat_s(direct_renamed_oem, MAX_PATH, "\\RENAMED.DAT") != 0 ||
+        strcpy_s(direct_dir_oem, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_dir_oem, MAX_PATH, "\\DOSDIR") != 0) {
         cleanup_direct_temp_root(); return 4;
     }
     drive_types[2] = (uint8_t)type;
@@ -347,6 +349,49 @@ int main(void)
             if (!dispatch(&session, 0x05u, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 227;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.ecx = 0u;
+            if (!dispatch(&session, 0x22u, &cpu, &result) || !success(&result) || token_from(&result) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 228;
+            }
+            token = token_from(&result); bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            if (!dispatch(&session, 0x02u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 229;
+            }
+            memcpy(ram + 0x900u, direct_renamed_oem, strlen(direct_renamed_oem) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u; cpu.es = 0u; cpu.edi = 0x900u;
+            if (!dispatch(&session, 0x17u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 240;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x900u;
+            if (!dispatch(&session, 0x01u, &cpu, &result) || !success(&result) || (result.cpu_delta.gpr16_write_mask & (1u << 2u)) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 241;
+            }
+            memcpy(ram + 0x800u, direct_dir_oem, strlen(direct_dir_oem) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u;
+            if (!dispatch(&session, 0x04u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 242;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.edx = 3u;
+            if (!dispatch(&session, 0x44u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 243;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u;
+            if (!dispatch(&session, 0x06u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 244;
+            }
+            memcpy(ram + 0x800u, direct_renamed_oem, strlen(direct_renamed_oem) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u;
+            if (!dispatch(&session, 0x05u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 245;
             }
         }
         /* Direct and Readonly retain OpenNT-style host file access.  Use a

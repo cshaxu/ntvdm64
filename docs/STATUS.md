@@ -429,6 +429,13 @@
 > and namespace mutation `1E,03,22,04,05,06,17` with source-shaped `CF/AX=5`
 > on valid test-owned paths. It changes no Overlay/Virtual behavior; see the
 > [P58 record](etc/research/t221-s3-package-session-readonly-mutation-refusal-001.md).
+> **T221 S3 P59 progress:** Direct now also proves the remaining normal
+> namespace-positive chain in its self-owned temporary C: root:
+> `22,17,01,04,44,06,05` (create-new, rename, attribute query, mkdir,
+> check-path, rmdir and delete). This uses the same checked RAM and typed-token
+> seams, while Readonly's policy refusal and frozen Overlay/Virtual contracts
+> remain unchanged; see the [P59 record]
+> (etc/research/t221-s3-package-session-direct-namespace-positive-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
