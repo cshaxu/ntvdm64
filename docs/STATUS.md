@@ -170,6 +170,12 @@
 > regression proves attribute set/readback and host-base preservation. See the
 > [P16 record](etc/research/t221-s3-overlay-metadata-check-path-binding-001.md).
 
+> **T221 S3 P17 progress:** the remaining FCB identities are now admitted as
+> two original-owner packages: wildcard mutation (`50:07/20`) and one FCB
+> handle/info/I-O lifecycle (`50:2C..31`). Current Overlay refusal remains
+> explicit; the next implementation must add a typed FCB Overlay seam before
+> either family is bound. See the [P17 record](etc/research/t221-s3-fcb-owner-package-admission-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
