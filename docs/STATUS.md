@@ -385,6 +385,12 @@
 > are proven without host I/O. FCB wildcard/metadata and other profile legs
 > remain open; see the [P50 record]
 > (etc/research/t221-s3-package-session-private-fcb-io-001.md).
+> **T221 S3 P51 progress:** Overlay and Virtual now create two private COM
+> files through `50:03` and enumerate them through `50:09`/`50:0B` using their
+> private namespace views, DTA output and copied CurrentPDB. Neither host
+> namespace nor declared snapshot supplies those results. FCB search and other
+> owner families remain open; see the [P51 record]
+> (etc/research/t221-s3-package-session-private-search-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

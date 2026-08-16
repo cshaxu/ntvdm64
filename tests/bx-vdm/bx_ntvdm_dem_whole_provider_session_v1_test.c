@@ -222,6 +222,28 @@ int main(void)
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 100 + (int)index;
             }
+            memcpy(ram + 0x800u, "C:\\FCBTWO.COM", sizeof("C:\\FCBTWO.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.ecx = 0u;
+            if (!dispatch(&session, 0x03u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 120 + (int)index;
+            }
+            memset(ram + 0x600u, 0, 43u);
+            ram[0x400u] = 0x00u; ram[0x401u] = 0x06u;
+            ram[0x402u] = 0x00u; ram[0x403u] = 0x00u;
+            memcpy(ram + 0x700u, "C:\\FCB*.COM", sizeof("C:\\FCB*.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x700u; cpu.ecx = 0u;
+            if (!dispatch(&session, 0x09u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 130 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!dispatch(&session, 0x0bu, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 140 + (int)index;
+            }
         }
         /* The source-owned FCB direct route has two safe, profile-independent
          * terminals: DOS date query and no-op close of a zero opaque token. */
