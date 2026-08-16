@@ -419,6 +419,12 @@
 > authority and evidence remain retained; Direct/Readonly completion may not
 > remove, bypass or change their selector-blind contracts. This pass therefore
 > seeks only two-profile closure; the later resumption is in `TODO.md`.
+> **T221 S3 P57 progress:** Direct now runs a self-cleaning temporary-host
+> package-session chain through `03,1E,00,16,08,27,02,05`: create/write/seek/
+> read/time/commit/close/delete. It proves typed token and checked RAM transport
+> without touching ambient host files; Readonly and remaining owner families
+> stay open. See the [P57 record]
+> (etc/research/t221-s3-package-session-direct-handle-namespace-chain-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
