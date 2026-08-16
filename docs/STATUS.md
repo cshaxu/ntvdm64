@@ -75,6 +75,10 @@
 > drive-view provider through normal package session; its OpenNT-shaped no-flags
 > resume and four copied guest locators pass under Direct/Readonly x64 /MT.
 > See the [P6 record](etc/research/t222-s2-drive-view-dta-provider-migration-001.md).
+> **T222 S2 P7 progress:** the normal Direct/Readonly session fixture now binds an
+> immutable admitted volume snapshot, preserving its CWD/DTA regression. This is the
+> required baseline for media/DPB/full-family assertions, not their closure; see the
+> [P7 record](etc/research/t222-s2-drive-view-session-volume-baseline-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily

@@ -3,6 +3,7 @@
 #include "bx_ntvdm_bop_provider_registry_v1.h"
 #include "bx_ntvdm_dem_package_session_v1.h"
 #include "bx_ntvdm_host_namespace.h"
+#include "bx_ntvdm_host_volume_snapshot_v1.h"
 
 #include <string.h>
 
@@ -95,6 +96,7 @@ static int initialize_session(uint32_t mode,
     bx_ntvdm_boot_namespace_plane_v1 *plane,
     bx_ntvdm_dem_package_session_v1 *session,
     const bx_ntvdm_host_drive_snapshot_v1 *drives,
+    const bx_ntvdm_host_volume_snapshot_v1 *volumes,
     const bx_ntvdm_host_namespace_v1 *host,
     const byob_image *ntdos, const byob_image *command,
     const byob_image *target, const byob_profile_selection *profile)
@@ -108,11 +110,13 @@ static int initialize_session(uint32_t mode,
         bx_ntvdm_dem_package_session_v1_initialize(session, plane) &&
         bx_ntvdm_dem_package_session_v1_set_mutation_profile(session, &mutation) &&
         bx_ntvdm_dem_package_session_v1_set_drive_snapshot(session, drives) &&
+        bx_ntvdm_dem_package_session_v1_set_volume_snapshot(session, volumes) &&
         bx_ntvdm_dem_package_session_v1_set_drive_view_host_namespace(session, host) &&
         session->has_whole_provider == 0u && session->drive_view_host_namespace == host;
 }
 
 static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives,
+    const bx_ntvdm_host_volume_snapshot_v1 *volumes,
     const bx_ntvdm_host_namespace_v1 *host, const byob_image *ntdos,
     const byob_image *command, const byob_image *target,
     const byob_profile_selection *profile)
@@ -123,7 +127,7 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
     bx_ntvdm_cpu_result_v2 result;
     int readonly = mode == BX_NTVDM_MUTATION_MODE_V1_READONLY;
     memset(ram, 0, sizeof(ram));
-    if (!initialize_session(mode, &plane, &session, drives, host, ntdos, command,
+    if (!initialize_session(mode, &plane, &session, drives, volumes, host, ntdos, command,
             target, profile)) return 1;
 
     memset(ram + 0x120u, 0xa5, 71u);
@@ -165,6 +169,7 @@ int main(void)
     byob_image target = { target_bytes, sizeof(target_bytes) };
     byob_profile_selection profile;
     bx_ntvdm_host_drive_snapshot_v1 drives;
+    bx_ntvdm_host_volume_snapshot_v1 volumes;
     bx_ntvdm_host_namespace_v1 host;
     wchar_t original[MAX_PATH];
     DWORD original_bytes, type;
@@ -175,10 +180,11 @@ int main(void)
         original_bytes == 0u || original_bytes >= MAX_PATH) return 1;
     drive_types[2] = (uint8_t)type;
     if (!bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(1) << 2u, drive_types,
-            0u, 0u, &drives) || !bx_ntvdm_host_namespace_v1_initialize(&host, &drives)) return 2;
-    if (exercise(BX_NTVDM_MUTATION_MODE_V1_DIRECT, &drives, &host, &ntdos,
+            0u, 0u, &drives) || !bx_ntvdm_host_volume_snapshot_v1_capture(&drives, &volumes) ||
+        !bx_ntvdm_host_namespace_v1_initialize(&host, &drives)) return 2;
+    if (exercise(BX_NTVDM_MUTATION_MODE_V1_DIRECT, &drives, &volumes, &host, &ntdos,
             &command, &target, &profile) != 0 || !SetCurrentDirectoryW(original) ||
-        exercise(BX_NTVDM_MUTATION_MODE_V1_READONLY, &drives, &host, &ntdos,
+        exercise(BX_NTVDM_MUTATION_MODE_V1_READONLY, &drives, &volumes, &host, &ntdos,
             &command, &target, &profile) != 0) {
         SetCurrentDirectoryW(original);
         bx_ntvdm_host_namespace_v1_release(&host);
