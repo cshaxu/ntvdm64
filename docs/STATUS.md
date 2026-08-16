@@ -253,6 +253,12 @@
 > engine admission remain outside the package until its full family regression;
 > see the [source/ABI map](etc/research/t221-s3-virtual-namespace-source-abi-map-001.md).
 
+> **T221 S3 P31 progress:** the first selector-blind Virtual private-root
+> view now queries and enumerates only private bounded store entries; its x64
+> `/MT` probe proves `hostIo=false`. It is a foundation only: no BOP, token,
+> startup or CLI admission is bound, so executable Virtual remains unavailable.
+> See the [foundation record](etc/research/t221-s3-virtual-private-root-foundation-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
