@@ -2,7 +2,7 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T222 S1.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T222 S2.** Its governing brief appears immediately below.
 
 **Active: M0 T222 S2 -- DEM Direct/Readonly drive-view provider implementation.**
 
