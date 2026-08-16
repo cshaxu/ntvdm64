@@ -10,6 +10,7 @@
 
 #include "bx_ntvdm_dem_fcb_overlay_backend_v1.h"
 #include "bx_ntvdm_dem_virtual_namespace_backend_v1.h"
+#include "bx_ntvdm_dem_file_view_v1.h"
 
 static uint32_t token_bp(const bx_ntvdm_cpu_state_v1 *cpu)
 { return ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu); }
@@ -255,7 +256,15 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, (uint16_t)transferred);
         }
     }
-    if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files, opaque, &handle))
+    /* demFCBIO writes are namespace-content mutations.  The FCB token may
+     * have been opened read-only, so enforce the same provider-owned view
+     * admission here before any Win32 WriteFile call.  Overlay/Virtual took
+     * their private backend path above; this only gates Direct/Readonly. */
+    if (service == 0x2fu && (cpu->ebx & 0xffffu) == 0u &&
+        bx_ntvdm_dem_file_view_v1_admit(&provider->file_view,
+            BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT) ==
+            BX_NTVDM_DEM_FILE_VIEW_V1_DENIED_READONLY)
+        return error_result(boundary, result, DEM_ERROR_ACCESS_DENIED);    if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files, opaque, &handle))
         return error_result(boundary, result, DEM_ERROR_INVALID_HANDLE);
     if (io_byte_count == 0 || (cpu->ecx & 0xffffu) > io_capacity ||
         ((cpu->ecx & 0xffffu) && !io_bytes)) return 0;

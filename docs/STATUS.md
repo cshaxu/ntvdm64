@@ -459,6 +459,10 @@
 > The fixture uses its empty owned C: root, not ambient-directory ordering;
 > Overlay/Virtual remain frozen. See the [P63 record]
 > (etc/research/t221-s3-package-session-direct-readonly-query-search-terminal-001.md).
+> **T221 S3 P64 progress:** Readonly FCB I/O write (`2F`, `BX=0`) now reaches
+> shared file-view admission before any Win32 `WriteFile` and returns `CF/AX=5`.
+> Direct and retained private-backend routes are unchanged; see the [P64 record]
+> (etc/research/t221-s3-readonly-fcb-write-admission-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

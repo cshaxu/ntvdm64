@@ -557,7 +557,17 @@ int main(void)
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 190 + (int)index;
             }
-            token = token_from(&result); ram[0x600u] = 0u;
+            token = token_from(&result);
+            if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {
+                ram[0x600u] = 'x'; bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+                cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+                cpu.ecx = 1u; cpu.ebx = 0u;
+                if (!dispatch(&session, 0x2fu, &cpu, &result) || !cf_ax(&result, 5u)) {
+                    bx_ntvdm_dem_package_session_v1_teardown(&session);
+                    bx_ntvdm_host_namespace_v1_release(&host); return 195 + (int)index;
+                }
+            }
+            ram[0x600u] = 0u;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
             cpu.ecx = 1u; cpu.ebx = 1u;
