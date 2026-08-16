@@ -2,8 +2,7 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T222 S1.** Its governing brief is the active
-> packet table below.
+> **Current effective packet: M0 T222 S1.** Its governing brief appears immediately below.
 
 **Active: M0 T222 S1 -- DEM Direct/Readonly drive-view source and ABI ledger.**
 
