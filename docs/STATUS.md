@@ -63,6 +63,11 @@
 > later package must complete one provider view rather than add BOP-local
 > mode branches. See the [current-state map](etc/research/t221-s2-file-provider-current-state-001.md).
 
+> **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
+> provider disposition, a shared four-mode backend contract, current-code
+> migration decision, and family regression matrix. Pipes remain Redirector
+> deferred. See the [whole-provider disposition](etc/research/t221-s2-file-provider-disposition-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
