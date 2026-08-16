@@ -1187,28 +1187,48 @@ int main(void)
         else if (!bx_ntvdm_dem_whole_provider_v1_initialize(&alternate,
                 &alternate_profile, &space, &alternate_cwd)) failed = 6603;
         else {
+            char virtual_dir[MAX_PATH] = {0}, virtual_file[MAX_PATH] = {0};
+            char virtual_renamed[MAX_PATH] = {0}, virtual_check[MAX_PATH] = {0};
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = 0u;
             if (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate, 0x07u,
                     &boundary, &cpu, oem_profile_pattern, 0, &result) || !cf_set(&result) ||
                 !ax_is(&result, 1u) || !oem_file_exists(oem_rename_one)) failed = 661;
-            if (!failed) {
-                static const uint8_t mutations[] = { 0x01u, 0x03u, 0x04u,
-                    0x05u, 0x06u, 0x17u, 0x22u };
-                uint32_t index;
-                for (index = 0u; index < sizeof(mutations); ++index) {
-                    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-                    if (mutations[index] == 0x01u) cpu.eax = 1u;
-                    if (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, mutations[index],
-                            &boundary, &cpu, oem_short,
-                            mutations[index] == 0x17u ? oem_profile_pattern : 0, &result) ||
-                        !cf_set(&result) || !ax_is(&result, 1u)) { failed = 662; break; }
-                }
-            }
+            if (!failed && (sprintf_s(virtual_dir, sizeof(virtual_dir), "%c:\\VRTDIR",
+                    (char)('A' + drive)) < 0 || sprintf_s(virtual_file, sizeof(virtual_file),
+                    "%s\\VRT.TXT", virtual_dir) < 0 || sprintf_s(virtual_renamed,
+                    sizeof(virtual_renamed), "%s\\NEW.TXT", virtual_dir) < 0 ||
+                    strcpy_s(virtual_check, sizeof(virtual_check), virtual_dir + 2) != 0)) failed = 662;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x04u,
+                    &boundary, &cpu, virtual_dir, 0, &result) || cf_set(&result))) failed = 663;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x03u,
+                    &boundary, &cpu, virtual_file, 0, &result) || cf_set(&result))) failed = 664;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = 1u; cpu.ecx = FILE_ATTRIBUTE_HIDDEN;
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x01u,
+                    &boundary, &cpu, virtual_file, 0, &result) || cf_set(&result))) failed = 665;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x01u,
+                    &boundary, &cpu, virtual_file, 0, &result) || cf_set(&result) ||
+                result.cpu_delta.gpr16_values[2] != FILE_ATTRIBUTE_HIDDEN)) failed = 666;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.edx = drive + 1u;
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x44u,
+                    &boundary, &cpu, virtual_check, 0, &result) || cf_set(&result))) failed = 667;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x17u,
+                    &boundary, &cpu, virtual_file, virtual_renamed, &result) || cf_set(&result))) failed = 668;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x05u,
+                    &boundary, &cpu, virtual_renamed, 0, &result) || cf_set(&result))) failed = 669;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            if (!failed && (!bx_ntvdm_dem_namespace_partition_v1_dispatch(&alternate, 0x06u,
+                    &boundary, &cpu, virtual_dir, 0, &result) || cf_set(&result))) failed = 670;
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             if (!failed && (!bx_ntvdm_dem_fcb_wildcard_partition_v1_dispatch(&alternate,
                     0x20u, &boundary, &cpu, oem_profile_pattern, oem_profile_pattern, &result) ||
-                !cf_set(&result) || !ax_is(&result, 1u))) failed = 663;
+                !cf_set(&result) || !ax_is(&result, 1u))) failed = 671;
             bx_ntvdm_dem_whole_provider_v1_teardown(&alternate);
         }
     }

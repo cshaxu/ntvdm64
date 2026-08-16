@@ -3,6 +3,9 @@
 #include "bx_ntvdm_dem_overlay_namespace_backend_v1.h"
 #include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
 #include "bx_ntvdm_dem_overlay_metadata_backend_v1.h"
+#include "bx_ntvdm_dem_virtual_namespace_backend_v1.h"
+#include "bx_ntvdm_dem_virtual_mutation_backend_v1.h"
+#include "bx_ntvdm_dem_virtual_metadata_backend_v1.h"
 
 #include <string.h>
 
@@ -190,6 +193,14 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 return error == ERROR_SUCCESS ? finish(boundary, result, 0u, 0, 0) :
                     fail(boundary, result, error);
             }
+            if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
+                attributes = cpu->ecx & 0xffffu;
+                if (attributes == 0u) attributes = FILE_ATTRIBUTE_NORMAL;
+                if (!bx_ntvdm_dem_virtual_metadata_backend_v1_set(&provider->overlay_store,
+                        drive, relative, attributes & 0x37u, &error)) return 0;
+                return error == ERROR_SUCCESS ? finish(boundary, result, 0u, 0, 0) :
+                    fail(boundary, result, error);
+            }
             admitted = mutation(provider, BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA,
                 boundary, result);
             if (admitted <= 0) return admitted < 0;
@@ -206,6 +217,18 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                     provider->host_namespace, drive, relative, &overlay_attributes, &error)) return 0;
             if (error != ERROR_SUCCESS) return fail(boundary, result, error);
             attributes = overlay_attributes;
+            if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
+            else attributes &= 0x37u;
+            return finish(boundary, result, 0u, 0, 0) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
+                    (uint16_t)attributes);
+        }
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
+            uint32_t virtual_attributes = 0u;
+            if (!bx_ntvdm_dem_virtual_metadata_backend_v1_query(&provider->overlay_store,
+                    drive, relative, &virtual_attributes, &error)) return 0;
+            if (error != ERROR_SUCCESS) return fail(boundary, result, error);
+            attributes = virtual_attributes;
             if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
             else attributes &= 0x37u;
             return finish(boundary, result, 0u, 0, 0) &&
@@ -274,6 +297,25 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
                     (uint16_t)size) || !bx_ntvdm_cpu_delta_v1_set_gpr16(
                     &result->cpu_delta, 1u, (uint16_t)(size >> 16))) return 0;
+            if (service == 0x12u && !bx_ntvdm_cpu_delta_v1_set_gpr16(
+                    &result->cpu_delta, 3u, 0u)) return 0;
+            observe_open(provider, service, 1, drive, 0, relative, oem_path, result);
+            return 1;
+        }
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
+            uint32_t size = 0u;
+            if (!bx_ntvdm_dem_virtual_namespace_backend_v1_open(&provider->files,
+                    &provider->overlay_files, drive, relative, access,
+                    service == 0x12u ? overlay_share((uint8_t)cpu->ebx) : 3u,
+                    disposition, service == 0x12u ? 0u : (cpu->ecx & 0xffffu), 0u,
+                    &token, &size, &error)) return 0;
+            if (error != ERROR_SUCCESS) return fail(boundary, result, error);
+            if (!finish(boundary, result, (uint16_t)(token >> 16), 1, 0) ||
+                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
+                    (uint16_t)token) || !bx_ntvdm_cpu_delta_v1_set_gpr16(
+                    &result->cpu_delta, 2u, (uint16_t)size) ||
+                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
+                    (uint16_t)(size >> 16))) return 0;
             if (service == 0x12u && !bx_ntvdm_cpu_delta_v1_set_gpr16(
                     &result->cpu_delta, 3u, 0u)) return 0;
             observe_open(provider, service, 1, drive, 0, relative, oem_path, result);
@@ -368,6 +410,27 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             return error == ERROR_SUCCESS ? finish(boundary, result, 0u, 0, 0) :
                 fail(boundary, result, error);
         }
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
+            int completed = 0;
+            if (service == 0x04u &&
+                ((cpu->ebx & 0xffffu) != 0u || (cpu->esi & 0xffffu) != 0u))
+                return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
+            if (service == 0x17u && !resolve_path(provider, oem_second_path,
+                    &second_drive, second_relative)) return fail(boundary, result, ERROR_PATH_NOT_FOUND);
+            switch (service) {
+            case 0x04u: completed = bx_ntvdm_dem_virtual_mutation_backend_v1_create_directory(
+                    &provider->overlay_store, drive, relative, &error); break;
+            case 0x05u: completed = bx_ntvdm_dem_virtual_mutation_backend_v1_delete_file(
+                    &provider->overlay_store, drive, relative, &error); break;
+            case 0x06u: completed = bx_ntvdm_dem_virtual_mutation_backend_v1_remove_directory(
+                    &provider->overlay_store, drive, relative, &error); break;
+            default: completed = bx_ntvdm_dem_virtual_mutation_backend_v1_rename(
+                    &provider->overlay_store, drive, relative, second_drive, second_relative, &error); break;
+            }
+            if (!completed) return 0;
+            return error == ERROR_SUCCESS ? finish(boundary, result, 0u, 0, 0) :
+                fail(boundary, result, error);
+        }
         admitted = mutation(provider, BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT,
             boundary, result);
         if (admitted <= 0) return admitted < 0;
@@ -412,6 +475,13 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             if (!bx_ntvdm_dem_overlay_metadata_backend_v1_check_directory(
                     &provider->overlay_store, provider->host_namespace, drive, relative,
                     &error)) return 0;
+            if (error != ERROR_SUCCESS) return fail(boundary, result, error);
+            return finish(boundary, result, 0u, 0, 0) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
+        }
+        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
+            if (!bx_ntvdm_dem_virtual_metadata_backend_v1_check_directory(
+                    &provider->overlay_store, drive, relative, &error)) return 0;
             if (error != ERROR_SUCCESS) return fail(boundary, result, error);
             return finish(boundary, result, 0u, 0, 0) &&
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);

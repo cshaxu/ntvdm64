@@ -284,6 +284,13 @@
 > DEM BOP binding, CLI/engine admission and native trace remain open. See the
 > [rename record](etc/research/t221-s3-virtual-directory-rename-transaction-001.md).
 
+> **T221 S3 P36 progress:** the whole DEM namespace/path partition now
+> selects the completed private Virtual backend for `01,03,04,05,06,12,17,22,44`
+> as one view, including private metadata and check-path. The full x64 `/MT`
+> provider fixture passes; Virtual handle, FCB and search subfamilies remain
+> deliberately unbound. See the [partition binding]
+> (etc/research/t221-s3-virtual-namespace-partition-binding-001.md).
+
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
