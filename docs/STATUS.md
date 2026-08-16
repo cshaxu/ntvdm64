@@ -77,6 +77,12 @@
 > checked seam or a documented source-derived contract. See the
 > [dependency map](etc/research/t221-s1-dem-dependency-map-001.md).
 
+> **T221 S1 P4 progress:** a 73-row source/ABI/failure recovery ledger now
+> assigns every DEM service to one of seven non-overlapping source-owner
+> groups while retaining its current bound route and shim/fallback evidence.
+> It does not upgrade historical fixture evidence into current package
+> closure. See the [recovery ledger](etc/research/t221-s1-dem-recovery-ledger-001.md).
+
 > **T220 S1 P1 closure:** OpenNT proves `50:36` is only DOS-entry/VDD
 > notification.  The historical resource contract instead roots in the
 > guest-published `pusCurrentPDB`, PDB/JFT/SFT mappings and a guarded
