@@ -33,6 +33,11 @@
 | Exit Criteria | One source-reviewed ledger and package plan covers all 15 identities, including explicit disposition for unavailable or privilege-sensitive host APIs, and names a safe coherent S2 implementation boundary. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | Selected drive filtering, host CWD/session scope, privilege-sensitive time/set-drive behavior, DTA/DPB fixed layouts, volume/media identity, synthetic-root leftovers, Direct/Readonly fallback isolation and current provider ownership. |
+> **T222 S1 P1 progress:** the complete 15-identity DEM drive-view/CWD/GSET
+> source, ABI, failure and current-route ledger is now recorded. It identifies
+> reusable typed seams and rejects their mixed deferred/fixture composition as
+> package closure; see the [P1 ledger]
+> (etc/research/t222-s1-dem-drive-view-source-abi-failure-ledger-001.md).
 > **T221 S2 P1 progress:** current code has the correct package-local state
 > owners and shared profile authority, but only direct/readonly backends have
 > behavior; overlay and virtual are explicitly unavailable. This confirms the
