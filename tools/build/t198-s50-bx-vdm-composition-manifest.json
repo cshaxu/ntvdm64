@@ -112,6 +112,7 @@
     "src/bx-vdm/bx_ntvdm_dem_overlay_store_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_overlay_file_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_overlay_resolver_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_overlay_handle_backend_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_file_session_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_process_owner_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_local_file_backend_v1.c",
