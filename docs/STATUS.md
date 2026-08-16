@@ -398,6 +398,12 @@
 > private state changes do not mutate the host. This is a planned namespace
 > family leg, not DEM-package closure; see the [P52 record]
 > (etc/research/t221-s3-package-session-private-namespace-mutation-001.md).
+> **T221 S3 P53 progress:** Direct and Readonly now open one existing host
+> `C:` system file through `50:2D`, read one byte to the registered DTA by
+> `50:2F`, then close its opaque FCB token by `50:2E`. This is source-shaped
+> permitted Win32 host integration, with no host mutation; it is not FCB-family
+> or package closure. See the [P53 record]
+> (etc/research/t221-s3-package-session-direct-readonly-fcb-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain

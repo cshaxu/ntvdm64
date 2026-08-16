@@ -102,9 +102,16 @@ int main(void)
     byob_image command = { command_bytes, sizeof(command_bytes) }, target = { target_bytes, sizeof(target_bytes) };
     byob_profile_selection profile; bx_ntvdm_host_drive_snapshot_v1 drives;
     bx_ntvdm_host_namespace_v1 host; wchar_t root[4] = L"C:\\"; DWORD type;
+    wchar_t system_directory[MAX_PATH]; char fcb_host_path[MAX_PATH]; UINT system_length;
     uint32_t index;
     profile_initialize(&profile); type = GetDriveTypeW(root);
     if (type == DRIVE_NO_ROOT_DIR || type == DRIVE_UNKNOWN) return 1;
+    system_length = GetSystemDirectoryW(system_directory, MAX_PATH);
+    if (system_length == 0u || system_length >= MAX_PATH ||
+        _wcsnicmp(system_directory, L"C:\\", 3u) != 0 ||
+        wcscat_s(system_directory, MAX_PATH, L"\\kernel32.dll") != 0 ||
+        WideCharToMultiByte(CP_OEMCP, 0, system_directory, -1, fcb_host_path,
+            MAX_PATH, 0, 0) == 0) return 3;
     drive_types[2] = (uint8_t)type;
     if (!bx_ntvdm_host_drive_snapshot_v1_apply(1u << 2u, drive_types, 0u, 0u, &drives) ||
         !bx_ntvdm_host_namespace_v1_initialize(&host, &drives)) return 2;
@@ -177,6 +184,37 @@ int main(void)
             if (!dispatch(&session, 0x0bu, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 70 + (int)index;
+            }
+        }
+        /* Direct and Readonly retain OpenNT-style host file access.  Use a
+         * real host file only for a read-only FCB open/read/close chain; no
+         * host mutation is admitted by this session matrix leg. */
+        if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_DIRECT ||
+            modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {
+            memcpy(ram + 0x800u, fcb_host_path, strlen(fcb_host_path) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.eax = 0u;
+            if (!dispatch(&session, 0x2du, &cpu, &result) || !success(&result) ||
+                (result.cpu_delta.gpr16_write_mask & ((1u << 0u) | (1u << 5u))) !=
+                    ((1u << 0u) | (1u << 5u)) || token_from(&result) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 190 + (int)index;
+            }
+            token = token_from(&result); ram[0x600u] = 0u;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            cpu.ecx = 1u; cpu.ebx = 1u;
+            if (!dispatch(&session, 0x2fu, &cpu, &result) || !success(&result) ||
+                (result.cpu_delta.gpr16_write_mask & (1u << 1u)) == 0u ||
+                result.cpu_delta.gpr16_values[1] != 1u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 200 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.esi = token & 0xffffu;
+            if (!dispatch(&session, 0x2eu, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 210 + (int)index;
             }
         }
         /* Overlay and Virtual must create their own private file through the
