@@ -136,7 +136,7 @@ int main(void)
     byob_image command = { command_bytes, sizeof(command_bytes) }, target = { target_bytes, sizeof(target_bytes) };
     byob_profile_selection profile; bx_ntvdm_host_drive_snapshot_v1 drives;
     bx_ntvdm_host_namespace_v1 host; wchar_t root[4] = L"C:\\"; DWORD type;
-    wchar_t system_directory[MAX_PATH], temporary_path[MAX_PATH]; char fcb_host_path[MAX_PATH], direct_temp_oem[MAX_PATH], direct_file_oem[MAX_PATH], direct_renamed_oem[MAX_PATH], direct_dir_oem[MAX_PATH], direct_fcb_delete_pattern[MAX_PATH], direct_fcb_rename_pattern[MAX_PATH], direct_fcb_rename_template[MAX_PATH], direct_fcb_delete_one[MAX_PATH], direct_fcb_delete_two[MAX_PATH], direct_fcb_rename_one[MAX_PATH], direct_fcb_rename_two[MAX_PATH], direct_fcb_rename_out_one[MAX_PATH], direct_fcb_rename_out_two[MAX_PATH]; UINT system_length, temporary_length;
+    wchar_t system_directory[MAX_PATH], temporary_path[MAX_PATH]; char fcb_host_path[MAX_PATH], direct_temp_oem[MAX_PATH], direct_file_oem[MAX_PATH], direct_renamed_oem[MAX_PATH], direct_dir_oem[MAX_PATH], direct_fcb_delete_pattern[MAX_PATH], direct_fcb_rename_pattern[MAX_PATH], direct_fcb_rename_template[MAX_PATH], direct_fcb_delete_one[MAX_PATH], direct_fcb_delete_two[MAX_PATH], direct_fcb_rename_one[MAX_PATH], direct_fcb_rename_two[MAX_PATH], direct_fcb_rename_out_one[MAX_PATH], direct_fcb_rename_out_two[MAX_PATH], direct_missing_oem[MAX_PATH]; UINT system_length, temporary_length;
     uint32_t index;
     profile_initialize(&profile); type = GetDriveTypeW(root);
     if (type == DRIVE_NO_ROOT_DIR || type == DRIVE_UNKNOWN) return 1;
@@ -177,7 +177,9 @@ int main(void)
         strcpy_s(direct_fcb_rename_out_one, MAX_PATH, direct_temp_oem) != 0 ||
         strcat_s(direct_fcb_rename_out_one, MAX_PATH, "\\RENR1.TMP") != 0 ||
         strcpy_s(direct_fcb_rename_out_two, MAX_PATH, direct_temp_oem) != 0 ||
-        strcat_s(direct_fcb_rename_out_two, MAX_PATH, "\\RENR2.TMP") != 0) {
+        strcat_s(direct_fcb_rename_out_two, MAX_PATH, "\\RENR2.TMP") != 0 ||
+        strcpy_s(direct_missing_oem, MAX_PATH, direct_temp_oem) != 0 ||
+        strcat_s(direct_missing_oem, MAX_PATH, "\\NTDNOPE?.ZZZ") != 0) {
         cleanup_direct_temp_root(); return 4;
     }
     drive_types[2] = (uint8_t)type;
@@ -350,6 +352,35 @@ int main(void)
             if (!dispatch(&session, 0x0cu, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 77 + (int)index;
+            }
+            memcpy(ram + 0x800u, "C:\\COMMAND.COM", sizeof("C:\\COMMAND.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x800u;
+            if (!dispatch(&session, 0x01u, &cpu, &result) || !success(&result) ||
+                (result.cpu_delta.gpr16_write_mask & (1u << 2u)) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 79 + (int)index;
+            }
+            memcpy(ram + 0x800u, direct_temp_oem, strlen(direct_temp_oem) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x800u; cpu.edx = 3u;
+            if (!dispatch(&session, 0x44u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 81 + (int)index;
+            }
+            memset(ram + 0x600u, 0, 53u);
+            memcpy(ram + 0x700u, direct_missing_oem, strlen(direct_missing_oem) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x700u;
+            if (!dispatch(&session, 0x09u, &cpu, &result) || !cf_ax(&result, 18u)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 83 + (int)index;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x600u; cpu.es = 0u; cpu.edi = 0x700u;
+            if (!dispatch(&session, 0x0au, &cpu, &result) || !cf_ax(&result, 18u)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 85 + (int)index;
             }
         }
         /* Direct package chain: the test-owned temporary root permits an

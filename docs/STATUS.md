@@ -453,6 +453,12 @@
 > `CF/AX=5` from the shared file-view admission before creation. No FCB-local
 > profile exception was introduced, and Overlay/Virtual remain frozen; see the
 > [P62 record](etc/research/t221-s3-package-session-direct-readonly-fcb-create-001.md).
+> **T221 S3 P63 progress:** Direct/Readonly now share `01` read-only metadata
+> query and `44` actual-host-path query evidence; valid 8.3 no-match requests
+> for pathname/FCB first-search (`09,0A`) return original-shaped `CF/AX=18`.
+> The fixture uses its empty owned C: root, not ambient-directory ordering;
+> Overlay/Virtual remain frozen. See the [P63 record]
+> (etc/research/t221-s3-package-session-direct-readonly-query-search-terminal-001.md).
 > **T221 S1 P1 progress:** the T219/T200 73-row DEM ledger has been checked
 > against the current generic bridge, composition, package session, facade,
 > whole-provider, and plane source. All ten static route classes remain
