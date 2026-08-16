@@ -21,6 +21,8 @@ change. The existing whole-provider session fixture was rebuilt from the same
 source closure in `build/M0-T222-S2/013-whole-provider-compat` and its linked
 executable exited zero.
 
+The existing whole-provider session fixture now binds set_drive_view_host_namespace before set_host_namespace, asserts has_whole_provider == 0 at that point, then completes the original whole-provider lifecycle. Its updated x64 /MT executable exited zero.
+
 ## Interpretation
 
 CWD host capability no longer has a hidden dependency on file/search provider

@@ -197,6 +197,8 @@ int main(void)
             !bx_ntvdm_dem_package_session_v1_initialize(&session, &plane) ||
             !bx_ntvdm_dem_package_session_v1_set_mutation_profile(&session, &mutation) ||
             !bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&session, &drives) ||
+            !bx_ntvdm_dem_package_session_v1_set_drive_view_host_namespace(&session, &host) ||
+            session.has_whole_provider || session.drive_view_host_namespace != &host ||
             !bx_ntvdm_dem_package_session_v1_set_host_namespace(&session, &host) ||
             !session.has_whole_provider) { bx_ntvdm_host_namespace_v1_release(&host); return 10 + (int)index; }
         memset(ram, 0, sizeof(ram));
