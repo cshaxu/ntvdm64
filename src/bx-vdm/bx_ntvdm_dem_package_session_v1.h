@@ -21,6 +21,7 @@ typedef struct bx_ntvdm_dem_package_session_v1 {
     bx_ntvdm_dem_error_lock_plane_v1 error_lock;
     bx_ntvdm_dem_drive_view_provider_v1 drive_view;
     bx_ntvdm_dem_whole_provider_v1 whole_provider;
+    const bx_ntvdm_host_namespace_v1 *drive_view_host_namespace;
     uint32_t has_whole_provider;
 } bx_ntvdm_dem_package_session_v1;
 
@@ -43,6 +44,11 @@ int bx_ntvdm_dem_package_session_v1_set_volume_snapshot(
 int bx_ntvdm_dem_package_session_v1_set_mutation_profile(
     bx_ntvdm_dem_package_session_v1 *session,
     const bx_ntvdm_mutation_profile_v1 *profile);
+/* Binds only the borrowed host namespace required by drive-view/CWD. It does
+ * not initialize the independent file/search whole provider. */
+int bx_ntvdm_dem_package_session_v1_set_drive_view_host_namespace(
+    bx_ntvdm_dem_package_session_v1 *session,
+    const bx_ntvdm_host_namespace_v1 *host_namespace);
 int bx_ntvdm_dem_package_session_v1_set_host_namespace(
     bx_ntvdm_dem_package_session_v1 *session,
     const bx_ntvdm_host_namespace_v1 *host_namespace);

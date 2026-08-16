@@ -163,7 +163,7 @@ static int redirector_deferred(const bx_ntvdm_bop_ingress_v1 *i,
   bx_ntvdm_cpu_delta_v1_set_gpr16(&r->cpu_delta,0u,6u)&&
   bx_ntvdm_cpu_result_v2_set_cf(r,1); }
 int bx_ntvdm_dem_package_session_v1_valid(const bx_ntvdm_dem_package_session_v1 *s)
-{ return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_whole_provider<=1u&&bx_ntvdm_dem_drive_view_provider_v1_valid(&s->drive_view)&&(!s->has_whole_provider||bx_ntvdm_dem_whole_provider_v1_valid(&s->whole_provider)); }
+{ return s&&s->magic==BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->has_whole_provider<=1u&&(!s->drive_view_host_namespace||bx_ntvdm_host_namespace_v1_valid(s->drive_view_host_namespace))&&bx_ntvdm_dem_drive_view_provider_v1_valid(&s->drive_view)&&(!s->has_whole_provider||bx_ntvdm_dem_whole_provider_v1_valid(&s->whole_provider)); }
 int bx_ntvdm_dem_package_session_v1_initialize(bx_ntvdm_dem_package_session_v1 *s,bx_ntvdm_boot_namespace_plane_v1 *p)
 { if(!s||!p)return 0;memset(s,0,sizeof(*s));s->magic=BX_NTVDM_DEM_PACKAGE_SESSION_V1_MAGIC;s->abi_version=BX_NTVDM_DEM_PACKAGE_SESSION_V1_VERSION;s->struct_bytes=(uint32_t)sizeof(*s);s->namespace_plane=p;bx_ntvdm_dem_error_lock_plane_v1_clear(&s->error_lock);bx_ntvdm_dem_drive_view_provider_v1_initialize(&s->drive_view);s->initialized=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
 void bx_ntvdm_dem_package_session_v1_teardown(bx_ntvdm_dem_package_session_v1 *s)
@@ -174,10 +174,21 @@ int bx_ntvdm_dem_package_session_v1_set_volume_snapshot(bx_ntvdm_dem_package_ses
 { return bx_ntvdm_dem_package_session_v1_valid(s)&&bx_ntvdm_dem_drive_view_provider_v1_set_volume_snapshot(&s->drive_view,v); }
 int bx_ntvdm_dem_package_session_v1_set_mutation_profile(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_mutation_profile_v1 *p)
 { if(!bx_ntvdm_dem_package_session_v1_valid(s)||!p||s->drive_view.has_mutation_profile)return 0;if(!bx_ntvdm_dem_drive_view_provider_v1_set_mutation_profile(&s->drive_view,p)||!bx_ntvdm_boot_namespace_plane_v1_set_dem_cwd_context(s->namespace_plane,&s->drive_view.cwd,0))return 0;s->drive_view.has_mutation_profile=1u;return bx_ntvdm_dem_package_session_v1_valid(s); }
-int bx_ntvdm_dem_package_session_v1_set_host_namespace(
+int bx_ntvdm_dem_package_session_v1_set_drive_view_host_namespace(
     bx_ntvdm_dem_package_session_v1 *s,
     const bx_ntvdm_host_namespace_v1 *host_namespace)
 { if(!bx_ntvdm_dem_package_session_v1_valid(s)||!s->drive_view.has_mutation_profile||
+    !host_namespace||!bx_ntvdm_host_namespace_v1_valid(host_namespace)||
+    (s->drive_view_host_namespace&&s->drive_view_host_namespace!=host_namespace)||
+    !bx_ntvdm_boot_namespace_plane_v1_set_dem_cwd_context(s->namespace_plane,
+      &s->drive_view.cwd,host_namespace))return 0;
+  s->drive_view_host_namespace=host_namespace;
+  return bx_ntvdm_dem_package_session_v1_valid(s); }
+
+int bx_ntvdm_dem_package_session_v1_set_host_namespace(
+    bx_ntvdm_dem_package_session_v1 *s,
+    const bx_ntvdm_host_namespace_v1 *host_namespace)
+{ if(!bx_ntvdm_dem_package_session_v1_set_drive_view_host_namespace(s,host_namespace)||
     s->has_whole_provider||!host_namespace||!bx_ntvdm_host_namespace_v1_valid(host_namespace)||
     !bx_ntvdm_dem_whole_provider_v1_initialize(&s->whole_provider,
       &s->drive_view.mutation_profile.profile,host_namespace,&s->drive_view.cwd))return 0;
