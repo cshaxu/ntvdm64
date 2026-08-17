@@ -34,6 +34,8 @@
 | Similar-Issue Sweep | DEM entry/termination, per-PDB search/file tokens, Direct/Readonly/Overlay/Virtual file-view lifecycles, COMMAND `54:0B` separation, and machine/CLI terminal boundaries. |
 > **T225 S2 P0 admission:** S1 is closed as an audit in [its owner/ABI/failure map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md). S2 now recovers the complete DEM child/PDB lifecycle package before EXEC file-I/O or COMMAND parent-return work.
 
+> **T225 S2 P1 progress:** the [source/ABI/failure map](etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md) fixes `50:36/3C` as one DEM lifecycle package. Direct PDB-owned host handles require cleanup; Readonly startup capability remains session-scoped; Overlay/Virtual are explicit deferred hooks. No DOS teardown or VDD behavior is admitted.
+
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
