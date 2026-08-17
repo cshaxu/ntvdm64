@@ -358,8 +358,8 @@
     {
       "name": "t225-s25-startup-machine-interrupt-fixture",
       "source": "tests/bx-mantle/t225_s25_startup_machine_interrupt_fixture.cc",
-      "libraries": ["bx-core", "bx-mantle", "bx-vdm", "opennt-host"],
-      "platformLibraries": []
+      "libraries": ["bx-core", "bx-mantle", "bx-vdm", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     },
     {
       "name": "t225-s23-int06-transaction-fixture",
