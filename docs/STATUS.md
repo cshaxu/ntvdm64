@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S6.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S7.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S6 -- Guest DOS one-shot fixture admission.**
+**Active: M0 T225 S7 -- Ninja full module graph and cache retirement.**
 
 ## Active Packet
 
@@ -14,21 +14,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S6, Ordinary Mode. |
-| Admission And Approval | Queue order 1; completed S2 lifecycle, S3 file-I/O, S4 COM ownership admission and S5 native-continuity disposition. |
-| Objective | Establish the source-built NTDOS/COMMAND/COM artifact, entry and BOP-owner fixture closure needed for original guest DOS one-shot EXEC. |
-| Non-goals | No adapter COM loader, PSP/MCB/JFN implementation, MZ work, virtual boot volume, host child or trace-led leaf BOP patch. |
-| Reference Baseline | T225 S4 COM map, S5 current-source machine disposition, T199/T221 BOP ledgers and artifact inventory. |
-| Files And ABI Surface | Guest artifact/fixture records and existing bx-vdm composition/profile ABI. No new guest loader or Bochs semantic surface. |
+| Identifier Mode | M0 T225 S7, Ordinary Mode. |
+| Admission And Approval | Owner-approved Ninja formal executor and eventual custom-cache removal; S6 now supplies the verified Direct/Readonly fixture input and current-source closure. |
+| Objective | Generate one manifest-bound Ninja graph that incrementally compiles the admitted CPU5/P `bx-core`, `bx-mantle`, `bx-vdm` and `cli` modules into static libraries, then freshly links the admitted fixtures/CLI targets. |
+| Non-goals | No BOP/provider semantics, guest trace, new Bochs feature, source import, custom object-cache enhancement, or deletion of historical cache evidence before Ninja replacement passes. |
+| Reference Baseline | T225 S7 P1 custom-cache evidence, S7 P2 two-object Ninja pilot, T220/S6 current source closures, and the audited composition manifests. |
+| Files And ABI Surface | `tools/build` graph generator and manifest(s), local `build/t225-s7/` graph roots, and existing module source lists. No runtime ABI or guest/Bochs semantic surface. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Source/artifact/entry/BOP dependency ledger; Direct/Readonly fixture admission tests; one native run only after whole-fixture closure. |
-| Expected Markers | Original guest `$Exec` remains sole process owner; each required BOP already has a package owner/disposition; no Overlay fallback; retired Virtual is never selected. |
-| Asset Needs | Existing local OpenNT/MS-DOS sources, artifact records, current composition and MSVC x64 /MT. Owner-approved, hash-locked local reference binaries may be staged only as `artifacts/` research inputs under the source policy; no external import or host modification. |
-| Reporting Requirements | Separate source/artifact facts, BOP package dispositions, fixture gaps and rejected substitute loaders. |
-| Stop Conditions | Any substitute loader/PSP/MCB, unowned BOP leaf, ambient host capability, Overlay fallback, retired Virtual selection, or native run before fixture closure. |
-| Exit Criteria | A reviewed, reproducible one-shot fixture plan with every input and BOP owner disposition. This does not claim COM execution or parent return. |
-| Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | NTIO/NTDOS/COMMAND artifacts, COM child, guest entry/return, DEM/COMMAND BOP owner packages and profile modes. |
+| Verification | Cold/hot/header-change Ninja builds under MSVC x64 `/MT`; explicit module archives; fresh fixture/CLI link; manifest identity review; `deps = msvc`; and independent existing fixture regression. |
+| Expected Markers | Explicit non-glob source membership, no empty claimed archives, reusable object invalidation by headers, each target freshly linked, and no `artifacts/build` input. |
+| Asset Needs | Existing local module sources/manifests, Ninja 1.13.2, MSVC x64 `/MT`, and current CPU5/P config projection. No guest image or external import is needed. |
+| Reporting Requirements | Record source lists, toolchain/config hashes, generated graph, cache-retirement decision, cold/hot/invalidation evidence, and remaining target exclusions. |
+| Stop Conditions | Any hidden glob/ambient source, stale-object reuse without manifest identity, untracked prebuilt input, runtime semantic change, or cache deletion before full graph evidence. |
+| Exit Criteria | A reviewed full admitted module graph reproduces cold/hot/header invalidation and fresh target links; then the P1 custom-cache implementation is deleted while its historical evidence remains indexed. |
+| Original Owner Request | "我更建议用 Ninja 作为正式的增量构建执行器。… 等ninja做好了以后，自制缓存要清理干净。" |
+| Similar-Issue Sweep | CPU5/P config projection, module source ownership, static archive ordering, fixture/CLI targets, `/showIncludes` dependency propagation, and retired custom-cache paths. |
 > **T225 S4 P0 admission:** S3 is closed in [its file-I/O source/ABI record](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md). S4 begins with the complete COM branch source and prerequisite map; it must not implement a substitute loader.
 
 > **T225 S4 P1 progress:** the [COM control-flow/prerequisite map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) confirms `$Exec` remains the only COM loader. Artifact and S3 file evidence exist; real guest arena/PSP/entry reach is not yet proven and requires a bounded guest fixture.
@@ -46,10 +46,14 @@
 > **T225 S6 P10 approved reference-input staging:** the owner approved a controlled local OpenNT reference-binary staging set whose four hashes and sizes exactly match the locked source-built identities. Its [provenance record](etc/evidence/t225-s6-reference-guest-input-admission-001.md) permits only this fixture's installation verification; it is neither a new source build nor a default runtime/release input, and does not admit a guest trace.
 
 > **T225 S6 P10 installation closure:** the current-source x64 `/MT` four-image fixture accepts Direct and Readonly against the approved hash-locked reference sequence, prepares the NTIO startup plan, and rejects deferred Overlay plus retired Virtual. The [result](etc/research/t225-s6-reference-direct-readonly-installation-result-001.md) attributes the prior Readonly failure to unconditional Direct-only CLI-stream admission, not BOP or Bochs behavior. This remains installation evidence only, never a guest trace or source-build claim.
+> **T225 S6 closure:** the reviewed one-shot fixture plan now has declared artifact identities, entry/order, package BOP dispositions, Direct/Readonly installation evidence, and explicit Overlay/Virtual rejection. Its approved reference sequence remains installation-only; source-built primary-sequence cross-validation and every guest trace remain separate future work.
+
 
 > **T225 S7 P1 closure:** the [incremental composition-build result](etc/research/t225-s7-incremental-composition-build-result-001.md) proves a manifest-bound `bx-vdm` cold/hot/invalidation cache with a fresh x64 `/MT` fixture link on every run. S6 resumes; its runtime/profile diagnosis remains unchanged.
 
 > **T225 S7 P2 closure:** the [Ninja graph result](etc/research/t225-s7-p2-ninja-build-graph-result-001.md) proves `deps = msvc` header propagation, `bx-vdm.lib`, fresh fixture linking and no-op rebuild behavior under MSVC x64 `/MT`. The custom P1 cache remains evidence only until a complete admitted module graph replaces it. S6 resumes.
+
+> **T225 S7 P3 verification:** the [full graph result](etc/research/t225-s7-full-ninja-module-graph-result-001.md) records a clean 303-edge MSVC x64 /MT Ninja build, four static archives, fresh fixture/native-CLI links, actual MSVC header invalidation, no-op rebuild, and the admitted Direct/Readonly installation regression. The graph now supersedes the P1 executor; only its two implementation scripts remain to be removed, while P1/P2 evidence stays indexed.
 
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 
