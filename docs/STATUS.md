@@ -33,6 +33,8 @@
 | Exit Criteria | Every admitted standard-handle/redirection identity has an original owner/source/ABI/failure map and profile disposition; dependencies are classified; implementation is partitioned into complete owner subpackages with a recommended first S2 package. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | COMMAND stream/child/launch services, DOS standard handles/devices/pipes, DEM PDB/handle lifecycle, Redirector pipe/IPC boundaries, mutation-profile owner enforcement, and opaque-token/no-ambient-handle rules. |
+
+> **T224 S1 P1 closure:** the complete standard-handle/redirection owner map covers COMMAND 54:06/07/08/0A, DEM 50:47/48, and the necessary bootstrap/cleanup lifecycle. It rejects direct historical composition for named CCPU/SAS, 32-bit pointer, SoftPC and legacy-thread dependencies, and partitions future work by complete providers; see the [source/ABI/failure map](etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md).
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
