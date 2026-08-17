@@ -55,3 +55,24 @@ entry address, set guest registers, or select the return destination.
 | Smallest seam | Retain S3's typed file I/O only. |
 | External intrusion | Rejected. |
 | New behavior | Rejected: no adapter loader or synthetic DOS process. |
+
+## P2 Native Fixture Admission Result
+
+The retained source-built artifacts are present: NTIO.SYS, NTDOS.SYS, and
+COMMAND.COM have the DOS/WOW16 closure evidence, and S3 supplies their DEM
+file I/O. However, current native startup observation scripts explicitly
+place only NTIO.SYS. NTDOS.SYS is recorded as an identity-only input and
+COMMAND.COM is only a profile/namespace input. Existing tests that use three
+byte files or synthetic command images validate composition contracts, not
+real guest execution.
+
+Therefore a real `$Exec` COM fixture is not presently admissible. The first
+missing owner package is machine/startup continuity: original NTIO must reach
+original NTDOS, and NTDOS must reach its normal COMMAND open/EXEC sequence on
+a minimal machine with the required firmware, RAM, CPU, and interrupt state.
+This is not a request to put those semantics in bx-vdm. It is a prerequisite
+for a later guest-owned COM fixture.
+
+S4 remains an admission/audit package. Its output is the concrete handoff to
+the machine/startup owner; no COM execution claim, native trace, or adapter
+loader implementation is made.

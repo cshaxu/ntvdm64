@@ -33,6 +33,8 @@
 
 > **T225 S4 P1 progress:** the [COM control-flow/prerequisite map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) confirms `$Exec` remains the only COM loader. Artifact and S3 file evidence exist; real guest arena/PSP/entry reach is not yet proven and requires a bounded guest fixture.
 
+> **T225 S4 P2 admission result:** current native startup stages only NTIO; NTDOS is identity-only and COMMAND remains namespace input. The [map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) records machine/startup continuity as the first missing owner package. S4 does not authorize a synthetic loader or native COM trace.
+
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 
 > **T225 S2 P3 closure:** the source-built Direct/Readonly whole-provider fixture passes under MSVC x64 `/MT`: `50:3C` invalidates the target Direct PDB token but retains the Readonly session token, while preserving void resume. The separate lifecycle fixture passes; `50:41` remains an independently proven baseline failure. S2 closes only DEM notification cleanup, not guest EXEC or parent return.
