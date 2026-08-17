@@ -838,7 +838,7 @@ int main(void)
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 40;
     if (outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x104u) return 42;
-    if (outcome.gpr16_write_mask != 1u || outcome.gpr16_values[0] != 0u) return 43;
+    if (outcome.gpr16_write_mask != 1u || outcome.gpr16_values[0] != 1u) return 43;
     if (outcome.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         outcome.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) return 44;
     event.execution_mode = BX_NTVDM_CPU_EXECUTION_PROTECTED;
