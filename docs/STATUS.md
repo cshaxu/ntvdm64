@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S7.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S8.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S7 -- Ninja full module graph and cache retirement.**
+**Active: M0 T225 S8 -- primary source-built four-image cross-validation.**
 
 ## Active Packet
 
@@ -14,21 +14,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S7, Ordinary Mode. |
-| Admission And Approval | Owner-approved Ninja formal executor and eventual custom-cache removal; S6 now supplies the verified Direct/Readonly fixture input and current-source closure. |
-| Objective | Generate one manifest-bound Ninja graph that incrementally compiles the admitted CPU5/P `bx-core`, `bx-mantle`, `bx-vdm` and `cli` modules into static libraries, then freshly links the admitted fixtures/CLI targets. |
-| Non-goals | No BOP/provider semantics, guest trace, new Bochs feature, source import, custom object-cache enhancement, or deletion of historical cache evidence before Ninja replacement passes. |
-| Reference Baseline | T225 S7 P1 custom-cache evidence, S7 P2 two-object Ninja pilot, T220/S6 current source closures, and the audited composition manifests. |
-| Files And ABI Surface | `tools/build` graph generator and manifest(s), local `build/t225-s7/` graph roots, and existing module source lists. No runtime ABI or guest/Bochs semantic surface. |
+| Identifier Mode | M0 T225 S8, Ordinary Mode. |
+| Admission And Approval | S6 has the complete Direct/Readonly installation fixture and a deliberately separate approved reference sequence. S7 has replaced the custom object cache with the formal Ninja graph. |
+| Objective | Restore and validate the physically distinct primary original-toolchain NTIO/NTDOS/COMMAND/SHARE input sequence, then run the existing installation fixture independently in Direct and Readonly and compare it with the secondary reference sequence. |
+| Non-goals | No guest trace, BOP implementation, substitute artifact, reference-to-primary reclassification, Bochs feature, DOS loader, or host-system mutation. |
+| Reference Baseline | DOS/WOW16 source-closure inventory; T225 S6 input admission and fixture record; T225 S7 Ninja graph; four locked source-built identity records. |
+| Files And ABI Surface | A provenance-checking primary-input stager, source-artifact records, and existing fixture/profile ABI only. No runtime ABI or guest/Bochs semantic surface. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Cold/hot/header-change Ninja builds under MSVC x64 `/MT`; explicit module archives; fresh fixture/CLI link; manifest identity review; `deps = msvc`; and independent existing fixture regression. |
-| Expected Markers | Explicit non-glob source membership, no empty claimed archives, reusable object invalidation by headers, each target freshly linked, and no `artifacts/build` input. |
-| Asset Needs | Existing local module sources/manifests, Ninja 1.13.2, MSVC x64 `/MT`, and current CPU5/P config projection. No guest image or external import is needed. |
-| Reporting Requirements | Record source lists, toolchain/config hashes, generated graph, cache-retirement decision, cold/hot/invalidation evidence, and remaining target exclusions. |
-| Stop Conditions | Any hidden glob/ambient source, stale-object reuse without manifest identity, untracked prebuilt input, runtime semantic change, or cache deletion before full graph evidence. |
-| Exit Criteria | A reviewed full admitted module graph reproduces cold/hot/header invalidation and fresh target links; then the P1 custom-cache implementation is deleted while its historical evidence remains indexed. |
-| Original Owner Request | "我更建议用 Ninja 作为正式的增量构建执行器。… 等ninja做好了以后，自制缓存要清理干净。" |
-| Similar-Issue Sweep | CPU5/P config projection, module source ownership, static archive ordering, fixture/CLI targets, `/showIncludes` dependency propagation, and retired custom-cache paths. |
+| Verification | Each source-built stage manifest and output identity must be present and hash-match; fresh Ninja-linked Direct/Readonly installation runs must pass; Overlay and retired Virtual must reject; the result must compare primary and reference provenance separately. |
+| Expected Markers | Four distinct original-toolchain stage roots, explicit manifest paths, exact bytes/SHA-256, no `refs/opennt` fallback, two accepted primary installation modes, and two rejected unavailable modes. |
+| Asset Needs | The original-toolchain outputs under `artifacts/toolchain-runs/ntio-tools16-opennt-v1`, `ntdos-tools16-historical-v1`, `command-tools16-opennt-v1`, and `share-tools16-opennt-v1`, each with its declared build manifest. |
+| Reporting Requirements | Record stage presence/absence, manifest and artifact identities, Direct/Readonly results, mode rejections, and a provenance-preserving comparison to the reference sequence. |
+| Stop Conditions | Any missing primary manifest/artifact, identity mismatch, source-tree/reference fallback, unreviewed binary import, native guest execution, or change to BOP/Bochs/guest semantics. |
+| Exit Criteria | A reproducible primary-sequence staging and Direct/Readonly installation comparison, or a precise artifact-restoration record that refuses execution until all four primary source-built roots are available. |
+| Original Owner Request | "原始文件当然更好更权威了；属于两个不同序列的guest镜像，可交叉验证！" |
+| Similar-Issue Sweep | NTIO, NTDOS, COMMAND and SHARE source-build provenance, staging manifests, fixture profile identity, Direct/Readonly policy, and reference/primary non-conflation. |
+> **T225 S8 P1 availability:** the strict [availability record](etc/evidence/t225-s8-primary-source-built-input-availability-001.md) confirms the primary rtifacts/toolchain-runs manifests are absent; its new stager refuses before any copy or fallback. Restore the four manifest-bearing stage roots before the Direct/Readonly cross-validation run.
 > **T225 S4 P0 admission:** S3 is closed in [its file-I/O source/ABI record](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md). S4 begins with the complete COM branch source and prerequisite map; it must not implement a substitute loader.
 
 > **T225 S4 P1 progress:** the [COM control-flow/prerequisite map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) confirms `$Exec` remains the only COM loader. Artifact and S3 file evidence exist; real guest arena/PSP/entry reach is not yet proven and requires a bounded guest fixture.
