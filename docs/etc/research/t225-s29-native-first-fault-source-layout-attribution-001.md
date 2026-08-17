@@ -137,3 +137,15 @@ Bochs source establishes its mechanical two-byte access path.  Medium: the
 address is compatible with a formal NTDOS load.  Intentionally unresolved:
 the actual loaded segment, the access tuple, the exact guest source routine,
 and whether guest state or core access mechanics is wrong.
+
+## Later S35/S36 supersession
+
+S35 subsequently bound the BOP transcript and first fault in one invocation.
+That transcript records `54:02`, `54:0D`, and `54:0F` calls from CS=`0C41`
+before selector `06h` and the fault.  S36 therefore corrects the interpretation
+of the conditional `EDI=0C41` arithmetic above: it remains a valid hypothetical
+NTDOS interval calculation, but it is not a demonstrated runtime load segment
+and must not be used to attribute `0C41:2357` to NTDOS.  See
+`t225-s36-startup-machine-postreturn-component-audit-001.md` for the current
+COMMAND-plane candidate disposition.  This addendum preserves S29's original
+mechanical/access findings and does not alter its historical closure.

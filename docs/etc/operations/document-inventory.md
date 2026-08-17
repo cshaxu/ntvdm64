@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1770 |
+| Documentation records | 1772 |
 | --- | --- |
-| Generated UTC | 2026-08-17T23:21:46Z |
+| Generated UTC | 2026-08-17T23:26:18Z |
 
 ## Entries
 
@@ -952,13 +952,14 @@ content-divergent entries.
 | etc/research/t225-s27-command-parent-return-source-abi-failure-map-001.md | indexed supporting material | 88d5668f7e8563967e35d1be81e6ce5f95456b39c43140f81fa4088bc69f57a1 |
 | etc/research/t225-s27-native-parent-return-gate-prerequisite-map-001.md | indexed supporting material | 84322260e760785c2e9c5d98681449bdfc556d628992ed318499fa48fae5f3c3 |
 | etc/research/t225-s28-native-segment-fault-diagnostic-source-abi-map-001.md | indexed supporting material | 5e133c73beb1434fdcde44be2db94836188e156250cfe96e33a907ce04a19726 |
-| etc/research/t225-s29-native-first-fault-source-layout-attribution-001.md | indexed supporting material | b5d05106753b1824f398a1b5aed74d0f14ab31b6a8bc2b382e742aeb3539677b |
+| etc/research/t225-s29-native-first-fault-source-layout-attribution-001.md | indexed supporting material | 8bce6626357cda430d07ad051d74b5b95cfd648ba6e0ce0cfa3aae4d7aad30c7 |
 | etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 11b658c92de1e09bdaac0f77f2424ecffde4532350ae07308e971eeed90b02e7 |
 | etc/research/t225-s30-segment-access-tuple-source-abi-failure-map-001.md | indexed supporting material | f9fa458bdee641eb51409c1654a5e57294d9dadf5d30b1fd15ea02202474ea5b |
 | etc/research/t225-s31-ds-ffff-source-lifecycle-attribution-001.md | indexed supporting material | 51428d071ba26e6fd39523ba181ea5431ee0d6c8bffd8bd89635e672db5cc426 |
 | etc/research/t225-s32-bootstrap-device-header-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 0e1ac110e5fefff0df5cb093091c882d789e5bb7c74368519acec60ce2447698 |
 | etc/research/t225-s33-bootstrap-continuity-observation-admission-map-001.md | indexed supporting material | 2491ba209c6f5cac653902084eb13d0f516fabd9712a9072cfd7a86c328d5a3c |
 | etc/research/t225-s34-post-bootstrap-first-fault-source-build-attribution-001.md | indexed supporting material | 84220da99cb8808f42547e332370661c68fac159f721b1135a469203512c61a2 |
+| etc/research/t225-s36-startup-machine-postreturn-component-audit-001.md | indexed supporting material | dd0b11075b96aa28c872369d02eef0ba92cbf9c1b2a69ca0b96a098933e85547 |
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
@@ -1503,6 +1504,7 @@ content-divergent entries.
 | history/m0-t225-s33-closure-20260817.md | closed task history | 2f39b699b705d578ec3313ee644a1f52b0e5587c0e7553af2747311e7815ea80 |
 | history/m0-t225-s34-closure-20260817.md | closed task history | 4ada5f5f3e588b7a6d843a9e74504dc7a37a981fa2fb5c2b00cbba891f2edcba |
 | history/m0-t225-s35-closure-20260817.md | closed task history | 2cc3ff48fa9315b5df9682a77ff72cff32c1ab8c0143e8292dcc6641f8939ffd |
+| history/m0-t225-s36-closure-20260817.md | closed task history | f1e429566dd9804cc0bcb2f59dd01a0daf43ff62f3eef0ab6810a51d49c2a3df |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -1784,7 +1786,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 840c5ceb509502e0c12bcee9f991091a9395833099c97047fc223205331f9dc7 |
+| STATUS.md | principal control document | a9bfa9cc09b1fecc1e8680bb06383589e38fc7e7b5c9fae5310093fa146ccad0 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
