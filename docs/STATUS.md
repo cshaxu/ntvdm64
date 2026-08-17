@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S12.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S14.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S12 -- adapter-owned bounded BOP observation.**
+**Active: M0 T225 S14 -- primary pre-BOP execution continuity source map.**
 
 ## Active Packet
 
@@ -14,23 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S12, Ordinary Mode. |
-| Admission And Approval | The owner-required BOP inventory/listening direction, T225 goal, S10 continuity evidence, and S11 normal internal run control admit this observation-only package. |
-| Objective | Make the existing bx-vdm bounded BOP sequence observer explicitly selectable from the CLI and report every reached C4 C4 invocation after a normal run, including declined/unconnected invocations, without changing provider behavior. |
-| Non-goals | No BOP/provider implementation, selector-specific behavior, guest-byte change, guest-memory inspection, engine/mantle ABI change, Bochs change, host mutation, Overlay selection, or Virtual selection. |
-| Reference Baseline | T225 S9 bootstrap map, S10 observation/run-control map, S11 internal-budget closure, current bx_ntvdm_bop_sequence_observation_v1 and generic UD bridge. |
-| Files And ABI Surface | src/bx-vdm/bx_ntvdm_bop_sequence_observation_v1.[ch], src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c, src/cli/ntdos64_native_cli.c, focused test/fixture as needed, governed evidence and Status. No bx-core/bx-mantle or engine-contract change. |
+| Identifier Mode | M0 T225 S14, Ordinary Mode. |
+| Admission And Approval | S13's bounded Direct/Readonly ladder found no BOP through 100,000 ticks. The owner requires source-led diagnosis rather than trace-led BOP patching. |
+| Objective | Map the reached pre-BOP native execution path and observed instruction classes to immutable OpenNT source/artifact context; identify the first unproven prerequisite and its original owner. |
+| Non-goals | No BOP/provider implementation, no trace-led service task, no guest image change, no Bochs/bx-core/bx-mantle/adapter patch, no device enablement, and no higher-budget run. |
+| Reference Baseline | T225 S9 bootstrap map; S10 primary stage; S11 budget control; S12 observer; S13 [bounded ladder result](etc/evidence/t225-s13-primary-first-bop-ladder-result-001.md). |
+| Files And ABI Surface | Governed source/ABI research, evidence and Status only. Existing runtime source and build graph are read-only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md and design authorities. |
-| Verification | Fresh Ninja/MSVC x64 /MT link; default-off check; accepted and declined synthetic adapter cases; Direct/Readonly native budget runs with explicit observation flag; invalid/duplicate flag rejection; Overlay refusal; governance and diff checks. |
-| Expected Markers | Bounded record count/overflow state; CS:EIP, selector/service-shape and result disposition for each C4 C4 event; declined entries carry only PASS_THROUGH and cause no changed CPU result. |
-| Asset Needs | Existing sequence observer/bridge, S10 source-built primary stage, S11 native build procedure and current focused test infrastructure. |
-| Reporting Requirements | Record observer ownership, default-off lifecycle, accepted/declined semantics, no-provider-change proof, Direct/Readonly output, reached/not-reached limitation, and next package boundary. |
-| Stop Conditions | Any need to alter a BOP provider or route, add guest memory reads, classify guest DOS semantics in mantle/core, modify Bochs, expand record beyond its fixed bound, or infer unobserved BOPs. Stop and revise. |
-| Exit Criteria | Explicit CLI observation is default-off without the flag; enabled output captures both accepted and declined C4 C4 events in a focused fixture; Direct/Readonly native output is normal and bounded; all records remain adapter-owned facts only. |
-| Original Owner Request | “找出opennt中所有的BOP的定义，在adapter层面接入bochs……然后监听每个BOP的调用；未实现的BOP再针对性去实现。” |
-| Similar-Issue Sweep | BOP catalogue/ingress, generic UD decline, accepted BOP observation, adapter lifecycle reset, CLI parser/output, Direct/Readonly lifecycle and Overlay/Virtual refusal. |
+| Verification | Cite source/artifact locations and instruction/control-flow correspondence; classify each prerequisite by original owner; run documentation governance and diff checks. |
+| Expected Markers | A source-backed distinction between expected guest code, unsupported/minimal-machine mechanics, and unproven inference; no invented selector disposition. |
+| Asset Needs | Immutable S10 staged inputs, S13 concise result, source-built guest/source records, existing bx-core/mantle boundary evidence. |
+| Reporting Requirements | Record exact source/asset evidence, observed versus inferred facts, owner assignment, rejected shortcuts and next bounded admission. |
+| Stop Conditions | Missing or contradictory source/artifact identity, a required runtime experiment, or a proposed mechanic/provider change. Stop and re-admit; do not patch. |
+| Exit Criteria | A reviewable pre-BOP continuity source map that names the next owner-scoped package without attributing a failure to an unobserved BOP. |
+| Original Owner Request | “参照 opennt源代码来解读这些指令的大体目的，帮助辨明方向 看看是缺失了什么功能还是做错了什么功能。” |
+| Similar-Issue Sweep | Startup image layout, entry/continuation ownership, CPU decode diagnostics, x87/IRQ13/PIC/IVT preconditions, mapped memory, and observer boundary. |
 
-> **T225 S12 closure:** [the adapter observation result](etc/evidence/t225-s12-adapter-bop-observation-result-001.md) proves the default-off CLI flag copies the bounded bx-vdm BOP sequence after a normal run. The focused declined-bridge fixture records `50:11` as PASS_THROUGH while retaining the original decline and caller outcome. Direct/Readonly primary runs at 1000 and Direct at 10000 ticks report zero reached BOPs and ordinary budget termination. This is observation only; no provider, guest, Bochs or engine/mantle semantic changed.
+> **T225 S13 closure:** [the primary first-BOP ladder result](etc/evidence/t225-s13-primary-first-bop-ladder-result-001.md) records normal internal Direct/Readonly budget termination at 50,000 and 100,000 ticks, with zero BOP records, zero overflow and no mode discrepancy. It proves only a shared pre-BOP continuity gate. S14 owns source-led classification; no BOP or machine repair is admitted by S13.
 > **T225 S10 closure:** the [bounded primary observation](etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md) and [run-control/observation map](etc/research/t225-s10-native-run-control-observation-map-001.md) establish identical early Direct/Readonly reset behavior but no public normal-result or continuity marker before the fixed one-million-tick run returns. Existing UD2 profile observations would alter immutable guest input, and fixture-only BOP observations are not CLI outputs. S10 closes as an evidence gate; S11 owns only the smallest generic CLI run-control seam.
 
 > **T225 S11 closure:** [the run-control result](etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md) proves the optional positive-decimal budget is copied through the existing CLI/engine/mantle contract. Direct and Readonly each return the normal internal budget terminal at 1000 ticks with exit 4; default one-million behavior, invalid-budget rejection and Overlay refusal are verified. No BOP, guest, adapter semantic or Bochs mechanic changed. The next package must separately admit post-run continuity observation.
