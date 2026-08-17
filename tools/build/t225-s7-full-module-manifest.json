@@ -14,6 +14,7 @@
     "src/cli",
     "src/bx-vdm",
     "src/bx-mantle",
+    "src/opennt/local/compat/host",
     "refs/bochs",
     "refs/bochs/instrument/stubs",
     "src/bx-core",
@@ -325,6 +326,12 @@
       ]
     },
     {
+      "name": "opennt-host",
+      "sources": [
+        "src/opennt/local/compat/host/opennt_int06_provider_v1.c"
+      ]
+    },
+    {
       "name": "cli",
       "sources": [
         "src/cli/byob_identity.c",
@@ -340,6 +347,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t225-s23-opennt-int06-provider-fixture",
+      "source": "tests/opennt/opennt_int06_provider_v1_test.c",
+      "libraries": ["opennt-host"],
+      "platformLibraries": []
+    },
     {
       "name": "t225-s23-native-pic-lifecycle-fixture",
       "source": "tests/bx-mantle/t225_s23_native_pic_lifecycle_fixture.cc",
@@ -452,7 +465,8 @@
         "cli",
         "bx-mantle",
         "bx-core",
-        "bx-vdm"
+        "bx-vdm",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",

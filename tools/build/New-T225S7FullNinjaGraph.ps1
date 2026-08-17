@@ -39,13 +39,13 @@ $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
 if ($manifest.schema -ne 'ntdos64.t225.s7.full-module-manifest.v1' -or $manifest.architecture -ne 'x64' -or $manifest.runtimeLibrary -ne '/MT') {
     throw 'Unsupported T225 S7 full-module manifest.'
 }
-if (@($manifest.modules).Count -ne 4) { throw 'Full module manifest must contain exactly four owned modules.' }
+if (@($manifest.modules).Count -ne 5) { throw 'Full module manifest must contain exactly five owned modules.' }
 foreach ($module in @($manifest.modules)) {
-    if ($module.name -notin @('bx-core', 'bx-mantle', 'bx-vdm', 'cli') -or @($module.sources).Count -eq 0) {
+    if ($module.name -notin @('bx-core', 'bx-mantle', 'bx-vdm', 'opennt-host', 'cli') -or @($module.sources).Count -eq 0) {
         throw 'Module ownership or source list is invalid.'
     }
     foreach ($source in @($module.sources)) {
-        if ($source -notmatch '^src/(bx-core|bx-mantle|bx-vdm|cli)/.+\.(c|cc)$' -or
+        if ($source -notmatch '^(?:src/(bx-core|bx-mantle|bx-vdm|cli)/.+|src/opennt/local/compat/host/.+)\.(c|cc)$' -or
             !(Test-Path -LiteralPath (Join-Path $root $source) -PathType Leaf)) {
             throw "Invalid or missing manifest source: $source"
         }
