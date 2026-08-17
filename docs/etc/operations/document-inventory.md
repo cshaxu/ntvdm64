@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1710 |
+| Documentation records | 1712 |
 | --- | --- |
-| Generated UTC | 2026-08-17T16:31:14Z |
+| Generated UTC | 2026-08-17T16:34:33Z |
 
 ## Entries
 
@@ -91,7 +91,8 @@ content-divergent entries.
 | etc/evidence/t225-s16-formal-generic-ud-bridge-gate-result-001.md | indexed supporting material | 23c02d5f6f0a577cc966c406c850f732195603c690d377ffe532445a01e66ff2 |
 | etc/evidence/t225-s17-external-generic-ud-bridge-composition-result-001.md | indexed supporting material | 0e4c6c98ceb6d516d41013899913422d50a1cc0a8c141bd3a5c8789ff6c7e8c4 |
 | etc/evidence/t225-s19-dem-direct-readonly-package-regression-result-001.md | indexed supporting material | a602e0b97e4f521d13abe23619a6ef5215f5441dbb9fbd2f311bc1c5fd82d13b |
-| etc/evidence/t225-s19-dem-pdb-lifecycle-ordering-result-001.md | indexed supporting material | 499119957faaa6bf72ebacdb99f11f6924d478ebd77dfb1443846fd01cdb49a6 |
+| etc/evidence/t225-s19-dem-dpb-failure-regression-result-001.md | indexed supporting material | 771600f16c3ad3c9dd384ba1a1cd9d7425e576862eae52f13655ceb5e888bf85 |
+| etc/evidence/t225-s19-dem-pdb-lifecycle-ordering-result-001.md | indexed supporting material | 628180b707ed815f3b0a79633f3792086b03f040285891b833739028175f1d03 |
 | etc/evidence/t225-s6-reference-guest-input-admission-001.md | indexed supporting material | b5932c62e4917b60205caced3f2dfa78ef9ed782f338e6cfc29d890f1c9bf891 |
 | etc/evidence/t225-s8-archived-nosrvbld-extractor-rejection-001.md | indexed supporting material | 99112829a78552229e2fe7904acbb8c65aaa2893b59f63ec2cac894d186f99c3 |
 | etc/evidence/t225-s8-dosbox-completion-runner-001.md | indexed supporting material | 6966863f9b3990c98df4eaa44faa134124ef610558a5f2566f620e834c65aabd |
@@ -910,6 +911,7 @@ content-divergent entries.
 | etc/research/t225-s10-native-run-control-observation-map-001.md | indexed supporting material | f2d931819595e84b4b6cfa6aeedaa9a5dcdec32e82f201af1a0b982502577120 |
 | etc/research/t225-s14-primary-pre-bop-continuity-source-map-001.md | indexed supporting material | cfc99198937fe7c1d0ed469d2ab57c58398f9c90efb45fa92ed251e7904feb6a |
 | etc/research/t225-s18-reached-bop-owner-package-disposition-map-001.md | indexed supporting material | 358b3a45526cb03ca23eab5e527b826e2183397229961fb31fdd146b136c1614 |
+| etc/research/t225-s19-dem-dpb-failure-source-map-001.md | indexed supporting material | b4e83bacda1426e99c44755871b3d5f143308cf646669bfa78842eb8e5b157d1 |
 | etc/research/t225-s19-dem-full-package-route-reconciliation-001.md | indexed supporting material | 0feb91faf2595a10e0caaf10ea1055b5286ef560ee963553b36525228d080474 |
 | etc/research/t225-s19-dem-pdb-lifecycle-ordering-correction-001.md | indexed supporting material | 2c1095f326dd43a320001b741e0aa49bbfb973edc7d5f7c9b614b02066d04cca |
 | etc/research/t225-s19-legacy-runtime-route-inventory-001.md | indexed supporting material | 0a050ef9d4aceecca252250c0a97e3dafefcd5950a5101462264303b8f42e6f5 |
@@ -1724,7 +1726,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 8af62c3c2b473a2c11d0e33597bc4eb5646c0a1b1dcab3ba268d7a7c702bd3f6 |
+| STATUS.md | principal control document | 4105673150b41a8f931510d3cecf0f78328a9d13adc5d3a1669d1453f000cd88 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

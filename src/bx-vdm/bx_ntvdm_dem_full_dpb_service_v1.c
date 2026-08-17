@@ -3,6 +3,11 @@
 
 #define BX_NTVDM_DEM_DPB_BYTES 35u
 #define BX_NTVDM_DEM_DPB_DRIVE_ADDR UINT32_C(0x04bc04bc)
+/* demGetDPB calls demClientError after demGetDiskFreeSpace fails.  In this
+ * snapshot-only path no Win32 failure is carried, so demerror.c takes its
+ * documented zero-last-error fallback: ERROR_ACCESS_DENIED (5), not an
+ * invented invalid-drive result. */
+#define BX_NTVDM_DEM_ERROR_DEMCLIENT_FALLBACK 5u
 #define BX_NTVDM_DEM_ERROR_INVALID_DRIVE 15u
 
 static int selected(const bx_ntvdm_exception_event_v1 *event,
@@ -102,11 +107,15 @@ int bx_ntvdm_dem_full_dpb_service_v1_snapshot_failure(
         !bx_ntvdm_host_volume_snapshot_v1_valid(volumes) ||
         !selected(event, cpu, window)) return 0;
     drive = (uint8_t)cpu->eax;
-    if (drive < 26u && (volumes->drives.admitted_mask &
-            (UINT32_C(1) << drive)) != 0u && volumes->volumes[drive].available != 0u)
-        return 0;
+    if (drive >= 26u || (volumes->drives.admitted_mask &
+            (UINT32_C(1) << drive)) == 0u)
+        return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
+                BX_NTVDM_DEM_ERROR_INVALID_DRIVE) &&
+            bx_ntvdm_cpu_result_v2_set_cf(result, 1);
+    if (volumes->volumes[drive].available != 0u) return 0;
     return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u) &&
         bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 0u,
-            BX_NTVDM_DEM_ERROR_INVALID_DRIVE) &&
+            BX_NTVDM_DEM_ERROR_DEMCLIENT_FALLBACK) &&
         bx_ntvdm_cpu_result_v2_set_cf(result, 1);
 }

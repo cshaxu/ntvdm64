@@ -43,10 +43,10 @@ ninja -C build/M0-T225-S19/package-lifecycle-r2 -n \
   -> ninja: no work to do; exit 0
 ```
 
-## Limitation
+## Follow-up
 
-The unparameterized legacy all-family invocation currently exits `194` in
-both Direct and Readonly. That is its `50:25` DPB negative assertion, outside
-this P4 lifecycle change; it is recorded here as a baseline limitation, not a pass or
-an explanation.  S19 still requires a later complete Direct/Readonly family
-regression before closure.
+The initial full-family invocation exposed a `50:25` DPB failure mismatch.
+That issue is now resolved separately by the
+[DPB failure result](t225-s19-dem-dpb-failure-regression-result-001.md): the
+complete Direct and Readonly family fixture passes.  This P4 record remains
+limited to PDB termination ordering.
