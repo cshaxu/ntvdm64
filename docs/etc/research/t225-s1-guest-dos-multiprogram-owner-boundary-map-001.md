@@ -200,3 +200,95 @@ does not dispatch Direct `50:42`, and it does not prove terminal return.  It
 therefore corroborates P3's shared-ABI conclusion but leaves the T225 package
 gate unclosed.  The disposable build root may be removed after this evidence
 record; no build product is an acceptance artifact.
+## P5 Parent Return, PDB Cleanup, And Terminal Gate
+
+### Original Return Ownership
+
+The guest owns the order of child teardown.  In `msctrlc.asm:reset_environment`,
+the still-current child PDB is passed in BX to `SVC_PDBTERMINATE`; guest DOS
+then frees its allocation blocks, runs `DOS_ABORT` to close guest JFN/SFT/FCB
+state, restores `CurrentPDB` and its parent stack, and returns through the
+parent's saved terminate address.  `demsrch.c:demTerminatePDB` is a void host
+notification: it performs optional VDD termination, calls `HostTerminatePDB`,
+and releases the per-PSP find-first list.  It neither performs DOS teardown
+nor selects the parent return target.
+
+Current `50:3C` correctly resumes as a void notification, but it calls only
+`search_sessions_v1_release_pdb`.  The current file-session already stores a
+PDB owner for each opaque Direct token and has
+`bx_ntvdm_dem_file_session_v1_release_owner`; that release is not reached by
+the `50:3C` route.  Therefore a guest child which acquired Direct files may
+leave host-private Direct tokens open after its guest DOS teardown.  Readonly,
+Overlay, and Virtual backend token cleanup likewise need an explicitly
+provider-owned disposition; they must not fall through to Direct cleanup.
+
+### COMMAND Return Is Distinct From Top-Level Exit
+
+The original COMMAND table maps `54:00` to `cmdExitVDM` and `54:0B` to
+`cmdReturnExitCode`.  `cmdReturnExitCode` sends the low DX exit code to the
+historical `GetNextVDMCommand` broker; CF is set only when another DOS command
+is supplied, otherwise it clears CF and returns the broker's exit result in
+AL.  Its original translation unit also depends on the NT event thread,
+redirection completion and VDM command broker, so it is not independently
+composable in the CLI runtime.
+
+Current code preserves the two paths separately:
+
+- `54:00` records an opaque top-level COMMAND exit, requests a typed stop, and
+  the current composition/engine can publish ordinary guest completion after
+  machine cleanup.
+- `54:0B` preserves the bounded declared-plan reentry/low-DX result in
+  `bx_ntvdm_cmd_get_next_state_v1`; it resumes rather than stops.  Its
+  package-local terminal record is not copied into the lifecycle provider
+  consumed by `copy_ordinary_terminal`.
+
+Thus the current ordinary-completion producer does not prove guest child
+return, and the current `54:0B` fixture does not prove engine/CLI terminal
+transport.  The retained T203 no-admission decision remains valid specifically
+for `54:0B`, while its statement that the engine has no ordinary producer is
+superseded by the current `54:00` path.
+
+### S1 Admission Decision
+
+T225 may **not** enter a native parent/child/return fixture or claim a first
+profile EXEC closure.  Three whole-package prerequisites remain:
+
+1. **Guest EXEC file-I/O compatibility:** choose and regress Direct `50:42`
+   (typed failure to `$Read` slow path, or a source-derived fast-read
+   transaction), then prove real `$Exec` DTA/CurrentPDB and SFT/JFN use for
+   COM before considering MZ relocation.
+2. **DEM child/PDB lifecycle:** recover `50:36/3C` as one lifecycle provider
+   package.  It must preserve void notification semantics and release every
+   host-private resource owned by the terminating PDB through each selected
+   file-view backend, without taking over DOS MCB/PSP/JFN teardown or adding
+   VDD semantics.
+3. **COMMAND parent-return lifecycle:** recover the one-shot `54:0B`
+   contract as a named CLI-compatible broker seam, including copied exit
+   result/reentry state and its terminal hand-off.  `54:00` remains a distinct
+   top-level exit path, not a substitute for `54:0B`.
+
+Only after all three package regressions pass may one source-built COM
+parent/child/return fixture run.  That fixture must prove an ordinary guest
+parent return, PDB-scoped cleanup, parent continuation, and a fixed-width CLI
+terminal result.  It may not use a nested host process, substitute a COMMAND
+BOP for guest `$Exec`, enable a Bochs device, or use trace hits to select
+individual BOP implementation.
+
+### Ordered T225 Implementation Plan
+
+1. S2: full source/ABI/failure map and implementation of the DEM child/PDB
+   lifecycle package (`50:36/3C`) for Direct and Readonly; retain explicit
+   Overlay/Virtual backend lifecycle hooks without enabling their unfinished
+   surfaces.
+2. S3: full source/ABI/failure map and implementation of the Direct/Readonly
+   guest EXEC file-I/O compatibility package (`50:12/00/42/16/02`), then a
+   guest-path COM loader fixture.
+3. S4: full source/ABI/failure map and implementation of the one-shot
+   COMMAND parent-return package (`54:0B`), including fixed-width engine/CLI
+   terminal hand-off.  Do not merge it with top-level `54:00`.
+4. S5: compose S2--S4 in one source-built COM parent/child/return fixture;
+   expand to MZ only after the COM result is stable.  Interactive COMMAND,
+   WOW/DPMI and Redirector remain separate owner-package admissions.
+
+S1 is complete as an audit only.  It neither implements nor claims any of
+these package closures.
