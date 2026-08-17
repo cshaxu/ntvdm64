@@ -268,6 +268,19 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
         ram[0x35du] != 0xffu || ram[0x35eu] != 0xffu || ram[0x363u] != 0xa5u) {
         bx_ntvdm_dem_package_session_v1_teardown(&session); return 16;
     }
+    /* OpenNT's OEM host-name capability always writes a fixed 16-byte guest
+     * field on success and marks CX=01FF; profile mode does not alter identity
+     * observation. */
+    memset(ram + 0x3c0u, 0xa5, 17u);
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.ds = 0u; cpu.edx = 0x3c0u; cpu.ecx = 0xa5b7u;
+    if (!dispatch(&session, 0x41u, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != (1u << 2) ||
+        result.cpu_delta.gpr16_values[2] != 0x01ffu || result.eflags_write_mask != 0u ||
+        ram[0x3c0u] == 0u || ram[0x3cfu] != 0u || ram[0x3d0u] != 0xa5u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 18;
+    }
     memset(ram + 0x120u, 0xa5, 71u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0u; cpu.esi = 0x120u; cpu.eax = 2u;

@@ -3,8 +3,8 @@
 
 #include "bx_ntvdm_multi_write_transaction.h"
 
-/* Source-derived demGetComputerName branch for a CLI profile that does not
- * declare a stable guest machine identity. */
+/* Source-derived demGetComputerName capability: use the host computer name
+ * through the OpenNT GetComputerNameOem contract, with a contained OEM shim. */
 int bx_ntvdm_dem_computer_name_service_v1_prepare(
     const bx_ntvdm_exception_event_v1 *event,
     const bx_ntvdm_cpu_state_v1 *cpu_before,

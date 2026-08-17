@@ -100,6 +100,10 @@
 > normal-session regression for full-DPB, excluded-drive refusal and DPB-list
 > layout/link/BP progression; see the [P13 record]
 > (etc/research/t222-s2-drive-view-dpb-session-regression-001.md).
+> **T222 S2 P14 progress:** 50:41 now uses a minimal source-derived host OEM
+> computer-name capability and has Direct/Readonly normal-session evidence for
+> its checked 16-byte/CX=01FF success contract; see the [P14 record]
+> (etc/research/t222-s2-drive-view-computer-name-session-regression-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
