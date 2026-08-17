@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T224 S1.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T224 S2.** Its governing brief appears immediately below.
 
-**Active: M0 T224 S1 -- standard-handle/redirection source, ABI and failure map.**
+**Active: M0 T224 S2 -- shared COMMAND stream-session provider.**
 
 > **T223 closed:** its COMMAND bootstrap/environment/config package closure is
 > recorded in [history](history/m0-t223-closure-20260817.md).
@@ -12,28 +12,27 @@
 ## Active Packet
 
 > **T scope:** T224 recovers the Queue-selected standard-handle and redirection
-> capability as an original owner package. It begins with a complete source/ABI/
-> failure and profile-disposition map; subsequent S work may implement only whole
-> admitted owner subpackages, never trace-hit endpoint patches.
+> capability as an original owner package. S2 implements only its first shared
+> provider: a CLI-admitted stream session and `54:06` contract. It does not
+> implement child execution or pipe conversion by trace-driven increments.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T224 S1, Ordinary Mode. |
-| Admission And Approval | Owner direction is to continue completing remaining BOPs as original component packages, with Direct/Readonly first and no trace-driven singleton work. Queue candidate 1 is selected after T223 closure. |
-| Objective | Produce the source-first owner/ABI/failure and Direct/Readonly disposition map for the full guest DOS/COMMAND standard-handle, device, pipe and redirection capability surface, including reached COMMAND `54:06/07/08/0A` relationships and DEM/Redirector dependencies. |
-| Non-goals | No endpoint implementation, no host-child launch, no ambient Windows handle transfer, no pipe backend, no console/keyboard expansion, no native trace, and no Bochs/mantle change in S1. |
-| Reference Baseline | T223 closure; Queue candidate 1; OpenNT COMMAND/DEM/Redirector caller and dispatcher sources; existing bx-vdm stream/child interfaces and profile ABI. |
-| Files And ABI Surface | Read-only OpenNT and bx-vdm source inspection; one T224 S1 evidence ledger. No new guest ABI or runtime provider is admitted by this S. |
+| Identifier Mode | M0 T224 S2, Ordinary Mode. |
+| Admission And Approval | S1's complete source/ABI/failure map selects its first shared provider. Owner direction remains original component packages with Direct/Readonly first and no singleton trace work. |
+| Objective | Replace ambient `stream_child` standard-handle capture with one COMMAND-owned, CLI-admitted stream-session provider that holds host handles privately, returns versioned opaque tokens for `54:06` only in Direct, and produces an explicit source-derived refusal in Readonly. |
+| Non-goals | No `54:08/0A` host-child execution, no `50:47/48` pipe continuation, no worker thread/temp file lifecycle, no raw HANDLE in guest/bridge ABI, no ambient capture during provider initialization, no Bochs/mantle change, and no native trace. |
+| Reference Baseline | T224 S1 map; OpenNT `cmdredir.c:183-315`, `cmdmisc.c:356-358`, `cmdsvc.h`, and current `command_stream_child` partial seam. |
+| Files And ABI Surface | `src/bx-vdm` COMMAND stream/provider/session and profile interfaces, focused x64 fixture/probe and evidence. Guest boundary remains fixed-width registers and checked transactions only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Complete owner-to-identity matrix; each row has original source path, caller, copied ABI, failure behavior, mutation class/profile disposition, current route and source-recovery rung. Governance and diff checks. |
-| Expected Markers | No unowned standard-handle/redirection identity; no hidden raw HANDLE/CCPU/SAS dependency; explicit Direct/Readonly result for every reached identity and deferred dependency. |
-| Asset Needs | Existing OpenNT/current source and local documentation tools only; no external import, firmware, guest media, build or host mutation. |
-| Reporting Requirements | Record component boundaries, rejected direct-composition dependencies, existing workaround retain/migrate/replace/delete decision, and the next whole subpackage proposal. |
-| Stop Conditions | A new guest ABI, need for a host-system modification, Bochs change, unavailable historical source, or a proposal to bind an individual trace hit before the whole map is approved. |
-| Exit Criteria | Every admitted standard-handle/redirection identity has an original owner/source/ABI/failure map and profile disposition; dependencies are classified; implementation is partitioned into complete owner subpackages with a recommended first S2 package. |
+| Verification | MSVC x64 `/MT` focused provider/session fixture: Direct explicit snapshot/opaque token and stale/invalid rejection; Readonly refusal; no raw handle value in CPU result; no initialization-time host capture; governance and diff. |
+| Expected Markers | COMMAND-owned token generation/lifecycle; a CLI admission seam; one profile selection before routing; Direct-only source-shaped success; Readonly explicit failure; no `54:08/0A` or `50:47/48` behavior change. |
+| Asset Needs | Existing OpenNT/current source, supported Win32 standard-handle APIs as CLI capability, local MSVC x64 `/MT`; no external import, guest media or host modification. |
+| Reporting Requirements | Record original/adapter ABI correspondence, rejected original composition dependencies, provider lifecycle, Direct/Readonly matrix, focused build result, and retained child/pipe limitations. |
+| Stop Conditions | Need to expose a host HANDLE or pointer to guest, need for raw pipe worker/thread behavior, new guest ABI, Bochs change, host-system modification, or an attempt to bind `54:08/0A` or `50:47/48` before a new S admission. |
+| Exit Criteria | One shared provider owns stream admission, opaque token lifecycle and `54:06`; Direct/Readonly source-shaped terminals and negative token tests pass; existing ambient initialization path is removed or explicitly quarantined; child/pipe identities remain unchanged and deferred. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | COMMAND stream/child/launch services, DOS standard handles/devices/pipes, DEM PDB/handle lifecycle, Redirector pipe/IPC boundaries, mutation-profile owner enforcement, and opaque-token/no-ambient-handle rules. |
-
+| Similar-Issue Sweep | Current stream-child initialization, opaque token generation, mutation profile host-global authorization, `STD_HANDLES` ordering, launch path consumers, DEM pipe terminals, stale session teardown, and test/probe source closure. |
 > **T224 S1 P1 closure:** the complete standard-handle/redirection owner map covers COMMAND 54:06/07/08/0A, DEM 50:47/48, and the necessary bootstrap/cleanup lifecycle. It rejects direct historical composition for named CCPU/SAS, 32-bit pointer, SoftPC and legacy-thread dependencies, and partitions future work by complete providers; see the [source/ABI/failure map](etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md).
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
