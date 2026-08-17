@@ -2,110 +2,37 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T222 S2.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T223 S1.** Its governing brief appears immediately below.
 
-**Active: M0 T222 S2 -- DEM Direct/Readonly drive-view provider implementation.**
+**Active: M0 T223 S1 -- Contained CLI interactive COMMAND session source/ABI admission.**
 
-> **T221 closed:** its Direct/Readonly whole-provider
-> closure is recorded in [history](history/m0-t221-closure-20260816.md).
+> **T222 closed:** its Direct/Readonly DEM drive-view provider closure is recorded in
+> [history](history/m0-t222-closure-20260816.md).
 
 ## Active Packet
 
-> **T scope:** T222 recovers the next complete DEM owner family as one shared
-> Direct/Readonly drive-view package: CWD, selected-drive state, clock,
-> checked DTA transport, DPB/media and machine identity.  It follows T221's
-> host namespace/file view but does not reopen it or promote BOP trace hits.
+> **T scope:** T223 recovers the next complete original COMMAND host-service package
+> for a contained opt-in CLI interactive session. It begins with one full source/ABI/
+> failure and profile-disposition map, then admits implementation by original COMMAND
+> component rather than by trace-hit service.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T222 S2, Ordinary Mode. |
-| Admission And Approval | Owner direction: complete remaining BOPs by original component package; Direct and Readonly first, retained Overlay/Virtual interfaces without new behavior. T200/T219 global BOP audit and T221 closure select this adjacent DEM owner family. |
-| Objective | Implement one `dem_drive_view_provider_v1` boundary for `0D,0E,0F,10,13,14,15,18,19,1A,1B,1C,25,41,46`, migrate existing typed helpers through it, and deliver the full Direct/Readonly family regression. |
-| Non-goals | No raw-media/DASD (`21,29,2A`), file/handle/FCB/search reopen, Redirector, COMMAND, XMS, DPMI, WOW, Bochs/mantle change, Overlay/Virtual behavior, or native trace. |
-| Reference Baseline | T200 S31 host-integrated BOP ledger; T219 reconciliation; T221 closure; OpenNT `demgset.c`, `demdir.c`, `demdisp.c`, `demmsg.c` and existing bx-vdm drive/CWD/DPB/DTA/clock sources. |
-| Files And ABI Surface | `src/bx-vdm` package session, drive/volume snapshot, CWD, DTA, DPB, media, clock and identity provider seams; `tests/bx-vdm` family fixture; only existing fixed-width checked actions cross the machine boundary. |
+| Identifier Mode | M0 T223 S1, Ordinary Mode. |
+| Admission And Approval | Owner direction: continue completing remaining BOPs as original component packages; Direct/Readonly are complete for admitted DEM views, with Overlay/Virtual retained. Queue candidate 1 is selected after T222 closure. |
+| Objective | Map the complete COMMAND selector/service package to original OpenNT dispatchers, ABI, lifecycle, host dependencies, Direct/Readonly/CLI dispositions and source-first recovery choices; select the first bounded implementation component. |
+| Non-goals | No terminal/console implementation, native trace, new Bochs/mantle semantics, ambient GUI/VDD/NT session dependency, or per-trace BOP patch. |
+| Reference Baseline | T198 closure, T200/T219 BOP ledgers, OpenNT COMMAND source and T222 closure. |
+| Files And ABI Surface | `src/opennt` COMMAND source, existing `src/bx-vdm` COMMAND facade/session/provider seams, and `docs/etc/research`; no guest ABI change in S1. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Build a focused MSVC x64 `/MT` family fixture below `build/M0-T222-S2/<run>`; exercise all 15 identities through normal package session in Direct/Readonly; prove excluded-drive, checked-output, no-fallback and clock-capability terminals; verify governance and diff. |
-| Expected Markers | One provider state owner, no raw guest/host pointers, no selector-local profile policy, source-shaped result layouts, Direct/Readonly isolation and no generic unavailable fallback. |
-| Asset Needs | Existing OpenNT/current source, local MSVC x64 `/MT` and disposable build roots; no external import, firmware or guest media. |
-| Reporting Requirements | Per delivery record changed source/test interfaces, grouped original contract, profile coverage, focused build/result, retained limitation and next package step. |
-| Stop Conditions | Need for raw-device policy, new guest ABI/range, JFT/SFT reconstruction, host/kernel rebuild, Bochs change, external import, ambient process-CWD side effect or native trace pauses for re-admission. |
-| Exit Criteria | All 15 identities select the one provider with complete Direct/Readonly family regression; clock-set has an explicit source-shaped profile disposition; existing Overlay/Virtual interfaces remain unchanged; no identity falls through to a generic unavailable provider. |
+| Verification | Complete source/ABI/failure/disposition table, current-route reconciliation, focused static ownership checks, governance and diff. |
+| Expected Markers | Every COMMAND BOP has one original owner and explicit provider disposition; historical host bindings are classified rather than silently rehosted. |
+| Asset Needs | Existing OpenNT/current source and local tools only; no external import, firmware or guest media. |
+| Reporting Requirements | Record source files, caller ABI, host dependencies, reusable original/shim/deferred choice, Direct/Readonly disposition and next component package. |
+| Stop Conditions | Need for a new guest ABI, Bochs change, host-system modification, unavailable source, or a profile capability beyond the selected contained CLI boundary. |
+| Exit Criteria | A complete COMMAND owner-package admission record supports one subsequent bounded implementation S without a trace-derived service backlog. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | Selected drive filtering, host CWD/session scope, privilege-sensitive time/set-drive behavior, DTA/DPB fixed layouts, volume/media identity, synthetic-root leftovers, Direct/Readonly fallback isolation and current provider ownership. |
-> **T222 S1 P1 progress:** the complete 15-identity DEM drive-view/CWD/GSET
-> source, ABI, failure and current-route ledger is now recorded. It identifies
-> reusable typed seams and rejects their mixed deferred/fixture composition as
-> package closure; see the [P1 ledger]
-> (etc/research/t222-s1-dem-drive-view-source-abi-failure-ledger-001.md).
-> **T221 S2 P1 progress:** current code has the correct package-local state
-> owners and shared profile authority, but only direct/readonly backends have
-> behavior; overlay and virtual are explicitly unavailable. This confirms the
-> later package must complete one provider view rather than add BOP-local
-> mode branches. See the [current-state map](etc/research/t221-s2-file-provider-current-state-001.md).
-> **T222 S1 P2 closure:** one selector-blind Direct/Readonly drive-view
-> provider design now groups the 15 services by source owner and transport,
-> with explicit CWD and clock-capability rules. The next S implements this
-> owner boundary, not individual BOP leaves; see the [P2 design]
-> (etc/research/t222-s1-drive-view-provider-design-001.md).
-> **T222 S2 P1 progress:** `dem_drive_view_provider_v1` is now the sole
-> package-session owner of copied profile, drive/volume, CWD and boot state;
-> normal DEM whole-provider regression remains green. See the [P1 migration]
-> (etc/research/t222-s2-drive-view-state-owner-migration-001.md).
-> **T222 S2 P2 progress:** the source-admitted observation/layout group
-> (`0E,0F,10,14,15,19,1C,25,41,46`) now routes through that provider while
-> package session retains checked mechanical write execution. Focused family and
-> whole-session x64 `/MT` fixtures pass; CWD/default-drive/DTA remains open. See
-> the [P2 migration](etc/research/t222-s2-drive-view-observation-route-migration-001.md).
-> **T222 S2 P3 progress:** the Direct/Readonly CWD/default-drive wrapper
-> (`50:13/18/1A`) now belongs to `dem_drive_view_provider_v1`; it keeps the
-> package session as the sole checked machine-action executor and declines
-> Overlay/Virtual. A focused x64 `/MT` provider fixture proves Direct success,
-> Readonly refusal and retained profile isolation. This is not the 15-identity
-> package closure: normal session regression and DTA migration remain open;
-> see the [P3 record](etc/research/t222-s2-drive-view-cwd-provider-migration-001.md).
-> **T222 S2 P4 progress:** CWD's borrowed admitted host namespace is now bound independently of file/search whole-provider construction; the existing whole-provider session fixture remains green. See the [P4 record](etc/research/t222-s2-drive-view-host-namespace-boundary-001.md).
-> **T222 S2 P5 progress:** normal package-session ingress now covers CWD/default-drive
-> 50:13/18/1A through the Direct/Readonly drive-view provider without
-> whole-provider construction. The package executor preserves checked writes while
-> admitting fully validated CPU-only CWD results; its focused x64 /MT fixture passes.
-> DTA and the remaining drive-view groups are still open; see the [P5 record]
-> (etc/research/t222-s2-drive-view-cwd-normal-session-regression-001.md).
-> **T222 S2 P6 progress:** 50:1B demSetDTALocation now reaches the same
-> drive-view provider through normal package session; its OpenNT-shaped no-flags
-> resume and four copied guest locators pass under Direct/Readonly x64 /MT.
-> See the [P6 record](etc/research/t222-s2-drive-view-dta-provider-migration-001.md).
-> **T222 S2 P7 progress:** the normal Direct/Readonly session fixture now binds an
-> immutable admitted volume snapshot, preserving its CWD/DTA regression. This is the
-> required baseline for media/DPB/full-family assertions, not their closure; see the
-> [P7 record](etc/research/t222-s2-drive-view-session-volume-baseline-001.md).
-> **T222 S2 P8 progress:** selected-drive 50:0D is now asserted through the same
-> Direct/Readonly normal session, returning the admitted C: one-based identity; see the
-> [P8 record](etc/research/t222-s2-drive-view-selected-drive-regression-001.md).
-> **T222 S2 P9 progress:** 50:0E now proves its five-register volume result and CF-clear
-> terminal from the admitted Direct/Readonly session snapshot; see the [P9 record]
-> (etc/research/t222-s2-drive-view-free-space-session-regression-001.md).
-> **T222 S2 P10 progress:** 50:0F now verifies the admitted C: drive bound under
-> Direct/Readonly normal session; see the [P10 record]
-> (etc/research/t222-s2-drive-view-drive-list-session-regression-001.md).
-> **T222 S2 P11 progress:** 50:10 now proves source-shaped checked `VOLINFO`
-> writes from the admitted immutable snapshot, and its CF-only set refusal, in
-> both Direct/Readonly normal sessions; see the [P11 record]
-> (etc/research/t222-s2-drive-view-media-id-session-regression-001.md).
-> **T222 S2 P12 progress:** the 50:14/15/19/1C clock owner now has a grouped
-> Direct/Readonly normal-session regression: query layouts remain source-shaped
-> and the currently unadmitted setters retain AL-only non-mutating failure; see
-> the [P12 record](etc/research/t222-s2-drive-view-clock-session-regression-001.md).
-> **T222 S2 P13 progress:** the 50:25/46 DPB family now has one Direct/Readonly
-> normal-session regression for full-DPB, excluded-drive refusal and DPB-list
-> layout/link/BP progression; see the [P13 record]
-> (etc/research/t222-s2-drive-view-dpb-session-regression-001.md).
-> **T222 S2 P14 progress:** 50:41 now uses a minimal source-derived host OEM
-> computer-name capability and has Direct/Readonly normal-session evidence for
-> its checked 16-byte/CX=01FF success contract; see the [P14 record]
-> (etc/research/t222-s2-drive-view-computer-name-session-regression-001.md).
-
-
+| Similar-Issue Sweep | T198 partial endpoints, bootstrap/launch/console/execution/environment/lifecycle, CLI terminal boundaries, historical WOW/VDD/GUI bindings and failure terminals. |
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
