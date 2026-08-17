@@ -33,6 +33,7 @@
 | Exit Criteria | A complete COMMAND owner-package admission record supports one subsequent bounded implementation S without a trace-derived service backlog. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | T198 partial endpoints, bootstrap/launch/console/execution/environment/lifecycle, CLI terminal boundaries, historical WOW/VDD/GUI bindings and failure terminals. |
+> **T223 S1 P1 progress:** the authoritative 17-slot 54:xx dispatcher and current bx-vdm route inventory is recorded; it identifies environment/session-broker ownership errors that preclude treating existing routes as complete. See the [P1 inventory](etc/research/t223-s1-command-dispatcher-current-route-inventory-001.md).
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
