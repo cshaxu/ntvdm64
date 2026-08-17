@@ -34,6 +34,8 @@
 | Similar-Issue Sweep | DEM entry/termination, per-PDB search/file tokens, Direct/Readonly/Overlay/Virtual file-view lifecycles, COMMAND `54:0B` separation, and machine/CLI terminal boundaries. |
 > **T225 S3 P0 admission:** S2 is closed in [its lifecycle source/ABI/failure record](etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md). S3 now recovers the complete guest EXEC file-I/O owner package before COM loading or COMMAND parent-return work.
 
+> **T225 S3 P1 progress:** the [source/ABI/FastRead map](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md) selects a source-derived Direct `50:42` transfer through the existing typed file owner. Guest `FastOrSlow` and SFT position update remain guest-owned; no adapter EXEC semantics are admitted.
+
 > **T225 S2 P1 progress:** the [source/ABI/failure map](etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md) fixes `50:36/3C` as one DEM lifecycle package. Direct PDB-owned host handles require cleanup; Readonly startup capability remains session-scoped; Overlay/Virtual are explicit deferred hooks. No DOS teardown or VDD behavior is admitted.
 
 > **T225 S2 P2 progress:** one lifecycle provider now owns no-VDD `50:36` and Direct/search `50:3C` cleanup; the old parallel VDD leaf is removed. Focused x64 `/MT` lifecycle evidence passes. The wider DEM fixture's `50:41` return 195 is proven baseline, while Direct/Readonly package-session lifecycle regression remains the next required proof.
