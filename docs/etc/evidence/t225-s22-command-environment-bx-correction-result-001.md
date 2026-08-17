@@ -23,7 +23,7 @@ Direct and Readonly coverage.
 ## Limitation
 
 The subsequent one-million-tick Direct/Readonly native observation remains
-identical at the later `074A:0740` unclassified `C4 C4 06` boundary. Therefore
-this correction is source-proven and regression-tested but not sufficient to
-close startup continuity. The next audit remains the original COMMAND error
-and return control flow; it does not authorize an unknown-selector provider.
+identical at the later `074A:0740` source-defined `C4 C4 06` machine boundary.
+Therefore this correction is source-proven and regression-tested but not sufficient
+to close startup continuity. S22 P3 assigns that boundary to the original SoftPC
+INT 06 machine path; it does not authorize an adapter provider.

@@ -47,12 +47,13 @@ boundaries in order:
    paragraph-capacity/retry contract: it first reports the required paragraph
    count and then supplies the COMSPEC plus double-NUL initial environment.
 
-After those calls, the observer records an unclassified `C4 C4 06` at
+After those calls, the observer records a source-defined `C4 C4 06` at
 `074A:0740`, repeatedly until its fixed record capacity overflows. The Bochs
 log then reports a real-mode stack-prefetch fault and third unresolved
 exception. The observer's `selector=06`, `has-service=0`, `disposition=0`
-means this is not a mapped BOP service and not evidence to append a service
-handler.
+means only that this is not a mapped host-service route. S22 P3 identifies it
+as the original SoftPC INT 06 `illegal_op_int` machine path, not an adapter
+service or debugger selector.
 
 ## Original-Source Comparison
 
@@ -80,4 +81,4 @@ repair is admitted.
 
 No BOP implementation, guest EXEC implementation, host child process, or
 Bochs device follows from this observation. In particular, the repeated
-unknown selector is a symptom boundary, not a leaf-task queue.
+selector `06h` is a source-defined machine boundary, not a leaf-task queue.

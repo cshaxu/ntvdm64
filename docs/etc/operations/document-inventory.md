@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1724 |
+| Documentation records | 1725 |
 | --- | --- |
-| Generated UTC | 2026-08-17T17:43:32Z |
+| Generated UTC | 2026-08-17T17:49:34Z |
 
 ## Entries
 
@@ -96,8 +96,8 @@ content-divergent entries.
 | etc/evidence/t225-s19-dem-pdb-lifecycle-ordering-result-001.md | indexed supporting material | 628180b707ed815f3b0a79633f3792086b03f040285891b833739028175f1d03 |
 | etc/evidence/t225-s20-command-direct-readonly-package-regression-result-001.md | indexed supporting material | 5026b4ea89ef42d1f17325992f8c3d6e8671c880af7e714affc8b236681ead6e |
 | etc/evidence/t225-s20-command-native-package-validation-result-001.md | indexed supporting material | 04f73b66a4b135010c8522a8977e24647c9779d49d8e306547313e6bab4ea0aa |
-| etc/evidence/t225-s22-command-environment-bx-correction-result-001.md | indexed supporting material | f32e2972a46bfe3ce5a7a150368645551a3cf16322145481eeb0e1d014cb4d3a |
-| etc/evidence/t225-s22-native-startup-continuity-observation-result-001.md | indexed supporting material | 48190a148c2066af04bee8cd744ab2020df4505fba6dce6795ba92463e4a4702 |
+| etc/evidence/t225-s22-command-environment-bx-correction-result-001.md | indexed supporting material | 7b7e34168d55fa6de245fd78189a42db3e5817ee45ea7853e760ea3fb0a4c50c |
+| etc/evidence/t225-s22-native-startup-continuity-observation-result-001.md | indexed supporting material | b6406830be84a991240d00b2233ff8fe90a412a3997eee5d941e24881e9f1f9e |
 | etc/evidence/t225-s6-reference-guest-input-admission-001.md | indexed supporting material | b5932c62e4917b60205caced3f2dfa78ef9ed782f338e6cfc29d890f1c9bf891 |
 | etc/evidence/t225-s8-archived-nosrvbld-extractor-rejection-001.md | indexed supporting material | 99112829a78552229e2fe7904acbb8c65aaa2893b59f63ec2cac894d186f99c3 |
 | etc/evidence/t225-s8-dosbox-completion-runner-001.md | indexed supporting material | 6966863f9b3990c98df4eaa44faa134124ef610558a5f2566f620e834c65aabd |
@@ -926,6 +926,7 @@ content-divergent entries.
 | etc/research/t225-s20-command-live-route-inventory-001.md | indexed supporting material | b93d2434f07d811d8805a184e89bcd810a422db87dde92592fce0c29e13958fc |
 | etc/research/t225-s20-command-sensitive-subfamily-source-map-001.md | indexed supporting material | d05d480213dba6bcf5ee193c36a4a3b3872614f7600b2fe3b6b5ccca5587a6c8 |
 | etc/research/t225-s21-guest-dos-exec-psp-return-source-map-001.md | indexed supporting material | 1603940d64adc1d2fe30b88f55db14c0c202d1ba081ffc3095e18c973b13af73 |
+| etc/research/t225-s22-int06-machine-boundary-correction-001.md | indexed supporting material | 47ed9e202c28de5684cb09c138995bfb4af3caaae4f2a39c7c4ce81dcff4566e |
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
@@ -1738,7 +1739,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 367f1b7905467c28ca0dc4717121c8c73924d34fd69ae35895cda0336bade60f |
+| STATUS.md | principal control document | c70b24b70148d53c092ecff8315f1fe0d9dd6b1f00d9c71dc2e084ecb19e51ab |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
