@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S1.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S2.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S1 -- Guest DOS multi-program execution admission audit.**
+**Active: M0 T225 S2 -- DEM child/PDB lifecycle recovery.**
 
 > **T224 closed:** its COMMAND standard-handle and child-redirection owner
 > package is recorded in [history](history/m0-t224-closure-20260817.md).
@@ -17,26 +17,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S1, Ordinary Mode. |
-| Admission And Approval | Queue order 1 and the capability roadmap's multi-program section. S1 is admission/source mapping only; implementation requires its package gate. |
-| Objective | Establish the complete original guest-DOS/host-service owner, ABI, failure and current-route map for parent/child `EXEC`, PSP/memory ownership, executable/file-view loading and return to the guest parent. |
-| Non-goals | No individual trace-led BOP patch, no nested host process/NTVDM launch, no new Bochs device, no DPMI/WOW/Redirector recovery, and no native trace as implementation evidence. |
-| Reference Baseline | Capability roadmap § Guest DOS multi-program execution; existing whole BOP disposition and current guest DOS/OpenNT sources. |
-| Files And ABI Surface | Source/evidence records initially; any later code must remain in its original guest DOS/OpenNT owner or a source-derived declared seam. |
+| Identifier Mode | M0 T225 S2, Ordinary Mode. |
+| Admission And Approval | Queue order 1, the capability roadmap, and completed T225 S1 admission decision. S2 is the first ordered owner package from that decision. |
+| Objective | Recover the complete DEM child/PDB lifecycle package around `50:36/3C`: preserve original void notification order, release selected Direct/Readonly host-private resources by terminating PDB, and retain explicit deferred Overlay/Virtual lifecycle hooks. |
+| Non-goals | No DOS EXEC/PSP/MCB/JFN implementation, no COMMAND `54:0B` implementation, no individual trace-led BOP patch, no nested host process/NTVDM launch, no new Bochs device, and no VDD/DPMI/WOW/Redirector recovery. |
+| Reference Baseline | T225 S1 owner/ABI/failure map; `demmisc.c:demEntryDosApp`, `demsrch.c:demTerminatePDB`, `msctrlc.asm:reset_environment`, current PDB-owned file-session and search-session code. |
+| Files And ABI Surface | `src/bx-vdm` DEM lifecycle/session/file-view seams and focused tests only; fixed-width BOP result ABI, copied PDB word, private file-view resource lifecycle. No Bochs or guest DOS code change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Complete source/ABI/failure map, prerequisite/BOP-gate disposition, owner-package implementation plan, and a future parent/child/return fixture specification. |
-| Expected Markers | One owner per executable/PSP/return concern; no host-child substitute; explicit file-view and normal-termination prerequisites. |
-| Asset Needs | Current local OpenNT/MS-DOS sources and existing source-built fixtures; no external import or host modification. |
-| Reporting Requirements | Cite original paths, rejected direct composition dependencies, retained ABI/layout/order/failures, bound-route gaps and a package—not service—work breakdown. |
-| Stop Conditions | A proposed host nested-process substitute, adapter DOS-kernel reimplementation, unadmitted guest ABI, Bochs semantic intrusion, or trace-selected leaf patch. |
-| Exit Criteria | An evidence-backed whole-package admission decision and ordered implementation plan; no success/execution claim is permitted from S1 alone. |
+| Verification | Four-rung source-recovery ledger; full `50:36/3C` package map; focused Direct/Readonly PDB cleanup, void-result, stale-token/search and negative no-VDD regressions under MSVC x64 `/MT`; whole-provider regression. |
+| Expected Markers | One lifecycle owner, exact PDB copied from BX, Direct token release after `50:3C`, readonly resource disposition, preserved void resume/no fabricated register result, and no host-child substitute. |
+| Asset Needs | Existing local OpenNT/MS-DOS sources, `dem-whole-provider-session` and lifecycle fixtures, MSVC x64 `/MT`; no external import or host modification. |
+| Reporting Requirements | Cite original lifecycle order and void contract, record the recovery ladder, distinguish each profile resource disposition, and report remaining EXEC/COMMAND work as separate packages. |
+| Stop Conditions | Any attempt to implement DOS teardown in the adapter, alter Bochs, add VDD behavior, clean a resource without source/owner evidence, use a host-child substitute, or broaden into EXEC/COMMAND return. |
+| Exit Criteria | Source/ABI/failure map and recovery ledger are complete; `50:36/3C` package regression passes for Direct/Readonly with explicit Overlay/Virtual deferred disposition; reviewed evidence is committed and pushed. No parent/child EXEC claim is permitted. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | COMMAND launch/return, guest DOS EXEC/PSP/MCB/loader paths, DEM process ownership, file views, guest normal termination and existing BOP/package dispositions. |
-> **T225 S1 P1 progress:** original guest DOS, not `bx-vdm`, owns `$Exec`, PSP/JFN inheritance, MCB/image memory, child entry and parent return. `50:60` is only the bounded `demTerminatePDB` search-state notification. The source map rejects nested host launch and records the still-unproven first-profile normal-termination gate; see the [P1 map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md).
-> **T225 S1 P2 progress:** original non-pipe `$Read` reaches `50:42` before `50:16`; the present `50:42` route only covers readonly startup images, so Direct child EXEC is not closed and cannot be replaced by a host launch. T203 also proves no qualified normal guest terminal result. The required next unit is the whole EXEC file-I/O compatibility subpackage; see the same [S1 map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md).
-> **T225 S1 P3 progress:** Direct/readonly already share the original AX:BP opaque-file-token ABI, which is compatible with deferred overlay/virtual providers. But OpenNT's retained 50:42 table entry clears CF through demNotYetImplemented; the DOS fallback branch alone therefore does not prove a Direct provider result. The package must choose and test a typed CF-set fallback or a source-derived Direct FastRead transaction before EXEC admission; see the same [S1 map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md).
-> **T225 S1 P4 progress:** an isolated MSVC x64 regression now re-proves the existing Direct/readonly 50:12 -> 50:16 -> 50:02 opaque-token/RAM route and readonly mutation refusal; it expressly excludes $Exec, Direct 50:42, terminal return, Bochs and an OpenNT runtime. It corroborates ABI readiness but does not close T225; see the same [S1 map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md).
-> **T225 S1 P5 progress:** parent-return audit is complete. 50:3C currently releases only search state—not PDB-owned Direct tokens—and 54:0B package-local return differs from the current 54:00 top-level ordinary terminal. S1's ordered S2--S5 package plan records the three prerequisite owner packages before one COM parent/child/return fixture; see the same [S1 map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md).
+| Similar-Issue Sweep | DEM entry/termination, per-PDB search/file tokens, Direct/Readonly/Overlay/Virtual file-view lifecycles, COMMAND `54:0B` separation, and machine/CLI terminal boundaries. |
+> **T225 S2 P0 admission:** S1 is closed as an audit in [its owner/ABI/failure map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md). S2 now recovers the complete DEM child/PDB lifecycle package before EXEC file-I/O or COMMAND parent-return work.
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
