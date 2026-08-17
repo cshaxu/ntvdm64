@@ -22,6 +22,7 @@ extern "C" int bx_ntvdm_mantle_execute_mechanical_action_v1(
       bx_mem.ordinary_ram_writable(range->physical_address, range->byte_count);
     if (!accessible) return 0;
   }
+  if (action->kind == BX_NTVDM_MECHANICAL_ACTION_V1_PREFLIGHT_WRITE) return 1;
   for (index = 0; index < action->range_count; ++index) {
     const struct bx_ntvdm_mechanical_action_v1_range *range =
       &action->ranges[index];

@@ -355,6 +355,12 @@
       "platformLibraries": []
     },
     {
+      "name": "t225-s23-ram-preflight-fixture",
+      "source": "tests/bx-mantle/t225_s23_ram_preflight_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle"],
+      "platformLibraries": []
+    },
+    {
       "name": "t225-s23-native-pic-lifecycle-fixture",
       "source": "tests/bx-mantle/t225_s23_native_pic_lifecycle_fixture.cc",
       "libraries": ["bx-core", "bx-mantle"],

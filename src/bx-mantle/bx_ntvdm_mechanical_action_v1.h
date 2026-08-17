@@ -20,7 +20,8 @@
 enum bx_ntvdm_mechanical_action_v1_kind {
   BX_NTVDM_MECHANICAL_ACTION_V1_NONE = 0u,
   BX_NTVDM_MECHANICAL_ACTION_V1_READ = 1u,
-  BX_NTVDM_MECHANICAL_ACTION_V1_WRITE = 2u
+  BX_NTVDM_MECHANICAL_ACTION_V1_WRITE = 2u,
+  BX_NTVDM_MECHANICAL_ACTION_V1_PREFLIGHT_WRITE = 3u
 };
 
 struct bx_ntvdm_mechanical_action_v1_range {
@@ -60,8 +61,9 @@ static inline int bx_ntvdm_mechanical_action_v1_valid(
   if (action == 0 || action->magic != BX_NTVDM_MECHANICAL_ACTION_V1_MAGIC ||
       action->abi_version != BX_NTVDM_MECHANICAL_ACTION_V1_VERSION ||
       action->struct_bytes != sizeof(*action) || action->action_id == 0 ||
-      (action->kind != BX_NTVDM_MECHANICAL_ACTION_V1_READ &&
-       action->kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE) ||
+      ((action->kind != BX_NTVDM_MECHANICAL_ACTION_V1_READ &&
+       action->kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE &&
+       action->kind != BX_NTVDM_MECHANICAL_ACTION_V1_PREFLIGHT_WRITE)) ||
       action->range_count == 0 ||
       action->range_count > BX_NTVDM_MECHANICAL_ACTION_V1_MAX_RANGES ||
       action->payload_bytes == 0 ||
