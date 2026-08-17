@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1760 |
+| Documentation records | 1761 |
 | --- | --- |
-| Generated UTC | 2026-08-17T23:06:35Z |
+| Generated UTC | 2026-08-17T23:08:53Z |
 
 ## Entries
 
@@ -954,6 +954,7 @@ content-divergent entries.
 | etc/research/t225-s29-native-first-fault-source-layout-attribution-001.md | indexed supporting material | b5d05106753b1824f398a1b5aed74d0f14ab31b6a8bc2b382e742aeb3539677b |
 | etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 11b658c92de1e09bdaac0f77f2424ecffde4532350ae07308e971eeed90b02e7 |
 | etc/research/t225-s30-segment-access-tuple-source-abi-failure-map-001.md | indexed supporting material | f9fa458bdee641eb51409c1654a5e57294d9dadf5d30b1fd15ea02202474ea5b |
+| etc/research/t225-s31-ds-ffff-source-lifecycle-attribution-001.md | indexed supporting material | 51428d071ba26e6fd39523ba181ea5431ee0d6c8bffd8bd89635e672db5cc426 |
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
