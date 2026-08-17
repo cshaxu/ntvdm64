@@ -103,3 +103,21 @@ source-built identities, then prove the existing runtime installs it as one
 composition lifetime. The later native run is allowed only after that
 source-built installation regression passes; it must observe, not extend, the
 already package-owned BOP routes.
+
+## P3 Current Package Regression
+
+A fresh scratch root `build/t225-s6/boot-namespace-composition-r1` ran the
+existing `Invoke-T198S16BootNamespaceVdmX64Probe.ps1` with fixture
+`boot-namespace` and MSVC x64 `/MT`. It source-built the current DEM and
+COMMAND package membership and generated
+`t198-s16-bx-vdm-boot-namespace.exe` successfully (process exit zero).
+
+This establishes that the current package composition links as one executable;
+it does **not** execute the four declared source-built guest images and is not
+an `$Exec` or parent-return result. The scratch evidence has been summarized
+here and may be discarded under the scratch-build rule.
+
+The next S6 implementation item is a dedicated installation fixture that
+validates the exact NTIO/NTDOS/COMMAND/SHARE profile under Direct and Readonly
+mode, including rejection of any unselected Overlay/Virtual route. Its native
+execution remains separately gated.
