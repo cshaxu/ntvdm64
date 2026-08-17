@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T224 S2.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T224 S3.** Its governing brief appears immediately below.
 
-**Active: M0 T224 S2 -- shared COMMAND stream-session provider.**
+**Active: M0 T224 S3 -- DEM pipe/SFT continuation provider admission.**
 
 > **T223 closed:** its COMMAND bootstrap/environment/config package closure is
 > recorded in [history](history/m0-t223-closure-20260817.md).
@@ -12,28 +12,30 @@
 ## Active Packet
 
 > **T scope:** T224 recovers the Queue-selected standard-handle and redirection
-> capability as an original owner package. S2 implements only its first shared
-> provider: a CLI-admitted stream session and `54:06` contract. It does not
-> implement child execution or pipe conversion by trace-driven increments.
+> capability as an original owner package. S3 admits its next complete shared
+> owner subpackage: DEM pipe/SFT continuation (`50:47/48`). It does not
+> implement trace-selected redirection leaves.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T224 S2, Ordinary Mode. |
-| Admission And Approval | S1's complete source/ABI/failure map selects its first shared provider. Owner direction remains original component packages with Direct/Readonly first and no singleton trace work. |
-| Objective | Replace ambient `stream_child` standard-handle capture with one COMMAND-owned, CLI-admitted stream-session provider that holds host handles privately, returns versioned opaque tokens for `54:06` only in Direct, and produces an explicit source-derived refusal in Readonly. |
-| Non-goals | No `54:08/0A` host-child execution, no `50:47/48` pipe continuation, no worker thread/temp file lifecycle, no raw HANDLE in guest/bridge ABI, no ambient capture during provider initialization, no Bochs/mantle change, and no native trace. |
-| Reference Baseline | T224 S1 map; OpenNT `cmdredir.c:183-315`, `cmdmisc.c:356-358`, `cmdsvc.h`, and current `command_stream_child` partial seam. |
-| Files And ABI Surface | `src/bx-vdm` COMMAND stream/provider/session and profile interfaces, focused x64 fixture/probe and evidence. Guest boundary remains fixed-width registers and checked transactions only. |
+| Identifier Mode | M0 T224 S3, Ordinary Mode. |
+| Admission And Approval | S1 and completed S2 select DEM's paired pipe-continuation provider. Owner direction remains original component packages with Direct/Readonly first and no singleton trace work. |
+| Objective | Establish the complete source/ABI/failure and state-ownership boundary for DEM `50:47/48`, then admit one shared pipe/SFT continuation provider only if its Direct/Readonly terminals can be represented without raw handles, worker threads, or leaf fallbacks. |
+| Non-goals | No `54:08/0A` host-child execution, no raw HANDLE in guest/bridge ABI, no worker thread/temp-file lifecycle, no Bochs/mantle change, no native trace, and no standalone implementation of only `50:47` or only `50:48`. |
+| Reference Baseline | T224 S1 map; OpenNT `demhndl.c:553-605`, `demdisp.c`, guest `handle.asm`, `dossvc.h`, and the completed S2 stream-session boundary. |
+| Files And ABI Surface | `src/bx-vdm` DEM pipe/SFT provider/session and profile interfaces, focused x64 fixture/probe and evidence. Guest boundary remains fixed-width registers and checked transactions only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | MSVC x64 `/MT` focused provider/session fixture: Direct explicit snapshot/opaque token and stale/invalid rejection; Readonly refusal; no raw handle value in CPU result; no initialization-time host capture; governance and diff. |
-| Expected Markers | COMMAND-owned token generation/lifecycle; a CLI admission seam; one profile selection before routing; Direct-only source-shaped success; Readonly explicit failure; no `54:08/0A` or `50:47/48` behavior change. |
-| Asset Needs | Existing OpenNT/current source, supported Win32 standard-handle APIs as CLI capability, local MSVC x64 `/MT`; no external import, guest media or host modification. |
-| Reporting Requirements | Record original/adapter ABI correspondence, rejected original composition dependencies, provider lifecycle, Direct/Readonly matrix, focused build result, and retained child/pipe limitations. |
-| Stop Conditions | Need to expose a host HANDLE or pointer to guest, need for raw pipe worker/thread behavior, new guest ABI, Bochs change, host-system modification, or an attempt to bind `54:08/0A` or `50:47/48` before a new S admission. |
-| Exit Criteria | One shared provider owns stream admission, opaque token lifecycle and `54:06`; Direct/Readonly source-shaped terminals and negative token tests pass; existing ambient initialization path is removed or explicitly quarantined; child/pipe identities remain unchanged and deferred. |
+| Verification | First record an owner-wide source/state/failure table. Before any implementation, identify the legal Direct and Readonly terminals, retained S2 token boundary and all prohibited historic worker/SAS/SoftPC dependencies; then run governance and diff. |
+| Expected Markers | One paired DEM provider owner; shared EOF/size/disconnect state model; profile disposition before route selection; and a named source-shaped no-pipe terminal. |
+| Asset Needs | Existing OpenNT/current source and local MSVC x64 `/MT`; no external import, guest media, worker subsystem, or host modification. |
+| Reporting Requirements | Record both identities' original/guest ABI, shared historical pipe state and cleanup dependencies, current bound routes, Direct/Readonly/Overlay/Virtual disposition, and the admissible provider boundary. |
+| Stop Conditions | Need to expose a host HANDLE or pointer to guest, need for raw pipe worker/thread behavior, new guest ABI, Bochs change, host-system modification, or any attempt to bind either member of `50:47/48` before the shared provider is admitted. |
+| Exit Criteria | One owner-wide, evidence-backed pipe/SFT provider disposition and source/ABI/failure map exists for both identities and their cleanup lifecycle; it either admits one safe shared implementation seam or records a precise blocked/deferred condition without changing leaf routes. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | Current stream-child initialization, opaque token generation, mutation profile host-global authorization, `STD_HANDLES` ordering, launch path consumers, DEM pipe terminals, stale session teardown, and test/probe source closure. |
-> **T224 S1 P1 closure:** the complete standard-handle/redirection owner map covers COMMAND 54:06/07/08/0A, DEM 50:47/48, and the necessary bootstrap/cleanup lifecycle. It rejects direct historical composition for named CCPU/SAS, 32-bit pointer, SoftPC and legacy-thread dependencies, and partitions future work by complete providers; see the [source/ABI/failure map](etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md).> **T224 S2 closure:** COMMAND now owns one host-neutral stream session.
+| Similar-Issue Sweep | OpenNT `demhndl` pipe state, guest `handle.asm` consumers, SFT/opaque token ownership, EOF/size flags, cleanup dependencies, profile selection, current absent-pipe terminals, and test/probe source closure. |
+> **T224 S1 P1 closure:** the complete standard-handle/redirection owner map covers COMMAND 54:06/07/08/0A, DEM 50:47/48, and the necessary bootstrap/cleanup lifecycle. It rejects direct historical composition for named CCPU/SAS, 32-bit pointer, SoftPC and legacy-thread dependencies, and partitions future work by complete providers; see the [source/ABI/failure map](etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md).
+
+> **T224 S2 closure:** COMMAND now owns one host-neutral stream session.
 > Direct CLI composition explicitly admits its private standard-handle snapshot;
 > `54:06` publishes only generation-scoped opaque tokens, while Readonly
 > refuses without capture. The focused x64 `/MT` evidence includes stale-token
@@ -442,7 +444,9 @@
 > **T221 S3 P65 progress:** Direct `08` set-time now runs on a self-owned
 > temporary file, while the Readonly declared-image set-time branch returns
 > `CF/AX=5`; both retain their existing get-time behavior. See the [P65 record]
-> (etc/research/t221-s3-direct-readonly-file-times-001.md).`r`n`r`n> **T221 S3 P66 progress:** a closed Direct or Readonly opaque file token now
+> (etc/research/t221-s3-direct-readonly-file-times-001.md).
+
+> **T221 S3 P66 progress:** a closed Direct or Readonly opaque file token now
 > proves the shared original-shaped stale-handle terminal: `50:00` returns
 > `CF/AX=6` rather than accessing a host handle or falling through to a profile
 > default. This adds only two-profile regression evidence; see the [P66 record]
