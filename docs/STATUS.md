@@ -2,62 +2,42 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T224 S5.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S1.** Its governing brief appears immediately below.
 
-**Active: M0 T224 S5 -- COMMAND shared child-redirection provider.**
+**Active: M0 T225 S1 -- Guest DOS multi-program execution admission audit.**
 
-> **T223 closed:** its COMMAND bootstrap/environment/config package closure is
-> recorded in [history](history/m0-t223-closure-20260817.md).
+> **T224 closed:** its COMMAND standard-handle and child-redirection owner
+> package is recorded in [history](history/m0-t224-closure-20260817.md).
 
 ## Active Packet
 
-> **T scope:** T224 recovers the Queue-selected standard-handle and redirection
-> capability as an original owner package. S4 admits one COMMAND child-redirection
-> provider for `54:08/0A/0B`, including creation and cleanup ownership for the
-> private pipe session required before any DEM continuation success path.
+> **T scope:** T225 is the Queue-selected Guest DOS multi-program execution
+> closure: a declared sequence of guest DOS programs must use guest DOS
+> `EXEC`/PSP/return semantics inside one VDM, never nested host NTVDM processes.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T224 S5, Ordinary Mode. |
-| Admission And Approval | S4 has mapped the one original COMMAND owner and rejected the former synchronous `CreateProcessW` leaf seam as closure. The attached S5 admission records the smaller source-derived composition seam needed because OpenNT's broker/event-thread product composition cannot link into the CLI runtime. |
-| Objective | Replace the direct launch leaf with one COMMAND-owned typed child-redirection provider for `54:08/0A/0B`: two source-shaped launch preparations, Direct-only private completion backend, and one checked completion disposition. |
-| Non-goals | No raw HANDLE or pointer in guest/bridge ABI, no Bochs/mantle change, no native trace, no historical worker/thread import, no DEM `50:47/48` success path, and no Overlay/Virtual launch fallback. |
-| Reference Baseline | T224 S1--S4 maps; OpenNT `cmdexec.c`, `cmdredir.c`, `cmdsvc.h`, guest `tcode.asm`, and the completed S2 stream-session boundary. |
-| Files And ABI Surface | `src/bx-vdm` COMMAND child-redirection provider/backend/session and profile interfaces, focused x64 fixture/probe and S5 evidence. Guest boundary remains fixed-width registers and checked transactions only. |
+| Identifier Mode | M0 T225 S1, Ordinary Mode. |
+| Admission And Approval | Queue order 1 and the capability roadmap's multi-program section. S1 is admission/source mapping only; implementation requires its package gate. |
+| Objective | Establish the complete original guest-DOS/host-service owner, ABI, failure and current-route map for parent/child `EXEC`, PSP/memory ownership, executable/file-view loading and return to the guest parent. |
+| Non-goals | No individual trace-led BOP patch, no nested host process/NTVDM launch, no new Bochs device, no DPMI/WOW/Redirector recovery, and no native trace as implementation evidence. |
+| Reference Baseline | Capability roadmap § Guest DOS multi-program execution; existing whole BOP disposition and current guest DOS/OpenNT sources. |
+| Files And ABI Surface | Source/evidence records initially; any later code must remain in its original guest DOS/OpenNT owner or a source-derived declared seam. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Focused x64 `/MT` provider-family fixture proves both launch preparations use the shared provider, Direct completion is an adapter-private typed record, Readonly refuses before host launch, and `54:0B` consumes only that record. Run governance and diff. |
-| Expected Markers | One COMMAND child-redirection owner; typed private stream/completion lifecycle; profile disposition before route selection; and source-shaped launch/environment failure terminals. |
-| Asset Needs | Existing OpenNT/current source and local MSVC x64 `/MT`; no external import, guest media or host modification. |
-| Reporting Requirements | Record the original-source rejection, source-derived provider layout/order/failures, actual bound routes, Direct/Readonly/Overlay/Virtual disposition, fixture result, and retained DEM pipe limitation. |
-| Stop Conditions | Need to expose a host HANDLE or pointer to guest, new guest ABI, Bochs change, host-system modification, a raw historical worker import, or a separate `54:08`/`54:0A`/`54:0B` lifecycle. |
-| Exit Criteria | One shared provider owns both launch ABI preparations and completion consumption; Direct uses one typed private backend and completion record; Readonly and unimplemented profiles explicitly refuse; focused source-built family evidence passes without a native trace. |
+| Verification | Complete source/ABI/failure map, prerequisite/BOP-gate disposition, owner-package implementation plan, and a future parent/child/return fixture specification. |
+| Expected Markers | One owner per executable/PSP/return concern; no host-child substitute; explicit file-view and normal-termination prerequisites. |
+| Asset Needs | Current local OpenNT/MS-DOS sources and existing source-built fixtures; no external import or host modification. |
+| Reporting Requirements | Cite original paths, rejected direct composition dependencies, retained ABI/layout/order/failures, bound-route gaps and a package—not service—work breakdown. |
+| Stop Conditions | A proposed host nested-process substitute, adapter DOS-kernel reimplementation, unadmitted guest ABI, Bochs semantic intrusion, or trace-selected leaf patch. |
+| Exit Criteria | An evidence-backed whole-package admission decision and ordered implementation plan; no success/execution claim is permitted from S1 alone. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | OpenNT `cmdexec`/`cmdredir` launch and cleanup state, guest `tcode.asm` callers, S2 stream-token ownership, child environment/tail contracts, profile selection, and test/probe source closure. |
-> **T224 S1 P1 closure:** the complete standard-handle/redirection owner map covers COMMAND 54:06/07/08/0A, DEM 50:47/48, and the necessary bootstrap/cleanup lifecycle. It rejects direct historical composition for named CCPU/SAS, 32-bit pointer, SoftPC and legacy-thread dependencies, and partitions future work by complete providers; see the [source/ABI/failure map](etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md).
+| Similar-Issue Sweep | COMMAND launch/return, guest DOS EXEC/PSP/MCB/loader paths, DEM process ownership, file views, guest normal termination and existing BOP/package dispositions. |
 
-> **T224 S2 closure:** COMMAND now owns one host-neutral stream session.
-> Direct CLI composition explicitly admits its private standard-handle snapshot;
-> `54:06` publishes only generation-scoped opaque tokens, while Readonly
-> refuses without capture. The focused x64 `/MT` evidence includes stale-token
-> rejection and no raw-handle result; `54:08/0A` and DEM `50:47/48` remain
-> deferred. See the [S2 record](etc/research/t224-s2-command-stream-session-provider-001.md).
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
 > deferred. See the [whole-provider disposition](etc/research/t221-s2-file-provider-disposition-001.md).
 
-> **T224 S3 closure:** the paired DEM `50:47/48` source-state audit confirms that no profile currently creates a pipe/SFT producer. All retain the checked no-pipe `ERROR_INVALID_HANDLE` terminal; any stateful success path must follow one COMMAND child-redirection lifecycle. See the [S3 record](etc/research/t224-s3-dem-pipe-sft-state-abi-failure-map-001.md).
-> **T224 S4 closure:** `54:08`, `54:0A` and `54:0B` are one original COMMAND
-> lifecycle, not independently closable endpoints. The map rejects the former
-> synchronous host-child leaf as closure and admits a typed private composition
-> seam because the historical broker/event-thread composition cannot enter the
-> MSVC x64 CLI runtime. See the [S4 map](etc/research/t224-s4-command-child-redirection-source-abi-failure-map-001.md)
-> and [S5 admission](etc/research/t224-s5-command-shared-child-redirection-provider-admission-001.md).
-> **T224 S5 P1 progress:** the former direct host-child leaf now sits behind
-> one COMMAND-private typed Direct backend. Its deterministic MSVC x64 `/MT`
-> fixture proves `54:08` and `54:0A` select the one provider and that `54:0B`
-> consumes its completion once; package-session routing and Readonly launch
-> refusal remain S5 work. See the [S5 record](etc/research/t224-s5-command-shared-child-redirection-provider-admission-001.md).
 
 > **T221 S3 P1 progress:** `dem_whole_provider` now owns one selector-blind
 > file-view authority. Direct/Readonly local-file admission migrated through

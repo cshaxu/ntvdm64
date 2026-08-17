@@ -89,4 +89,38 @@ need their own whole-provider exercise, and no pipe/DEM success claim follows.
 
 ## P2 Package-Session Observation
 
-The focused command-child-redirection-package fixture passed under MSVC x64 /MT (linkExitCode: 0, unExitCode: 0). It exercises the actual COMMAND package-session route: Direct 54:0A reaches the shared private backend and its 54:0B completion; Readonly 54:0A returns the retained explicit ERROR_NOT_SUPPORTED terminal before the backend is called. This remains non-pipe evidence only.
+The focused command-child-redirection-package fixture passed under MSVC x64 /MT (linkExitCode: 0,
+runExitCode: 0). It exercises the actual COMMAND package-session route: Direct 54:0A reaches the shared private backend and its 54:0B completion; Readonly 54:0A returns the retained explicit ERROR_NOT_SUPPORTED terminal before the backend is called. This remains non-pipe evidence only.
+
+## P3 Full Package-Route Observation
+
+The refreshed `command-child-redirection-package` fixture compiled, linked and
+ran with MSVC x64 `/MT` at the disposable recipe
+`build/M0-T224-S5/012-package-route-profiles/` (`linkExitCode: 0`,
+`runExitCode: 0`, `passed: true`). It exercises the actual COMMAND package
+session rather than calling the child provider directly:
+
+- Direct `54:06` publishes three generation-scoped opaque stream tokens; the
+  fixture packs them in OpenNT `STD_HANDLES` order (stderr, stdout, stdin).
+- Direct `54:08` gathers its checked real-mode tail, environment and packed
+  stream record, reaches the shared typed backend, and exposes only the
+  recorded exit result through one `54:0B` consumption.
+- Direct `54:0A` reaches that same backend through its host-context command
+  preparation and its `54:0B` completion.
+- Readonly `54:08` and `54:0A`, plus Overlay `54:08` and Virtual `54:0A`,
+  retain `ERROR_NOT_SUPPORTED` before the fake backend observes a request.
+  They cannot fall through to Direct host-child semantics.
+
+This is a deterministic source-built provider-family regression, not a native
+trace or pipe claim. No `cmdPipeList`, pipe/SFT producer, DEM `50:47/48`
+success route, ambient child process, raw `HANDLE`, or guest-visible pointer
+is exercised.
+
+## S5 Interpretation
+
+The S5 exit conditions are met: `54:08`, `54:0A` and `54:0B` have one
+COMMAND-owned shared provider, Direct has one typed private backend and
+completion record, and the remaining three profile modes refuse explicitly.
+The historical broker/event-thread composition remains rejected for this x64
+CLI product; its unavailable pipe lifecycle is a separate future owner-package
+concern rather than a successful child launch.
