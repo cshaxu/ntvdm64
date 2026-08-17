@@ -154,6 +154,7 @@
     "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
     "src/bx-core/memory/misc_mem.cc",
     "src/bx-vdm/bx_ntvdm_command_child_redirection_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_child_backend_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_drive_view_provider_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_virtual_namespace_backend_v1.c",
     "src/bx-vdm/bx_ntvdm_dem_virtual_namespace_view_v1.c",
