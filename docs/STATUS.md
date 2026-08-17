@@ -2,47 +2,37 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T223 S2.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T224 S1.** Its governing brief appears immediately below.
 
-**Active: M0 T223 S2 -- COMMAND bootstrap/environment/config package recovery.**
+**Active: M0 T224 S1 -- standard-handle/redirection source, ABI and failure map.**
 
-> **T222 closed:** its Direct/Readonly DEM drive-view provider closure is recorded in
-> [history](history/m0-t222-closure-20260816.md).
+> **T223 closed:** its COMMAND bootstrap/environment/config package closure is
+> recorded in [history](history/m0-t223-closure-20260817.md).
 
 ## Active Packet
 
-> **T scope:** T223 recovers the next complete original COMMAND host-service package
-> for a contained opt-in CLI interactive session. It begins with one full source/ABI/
-> failure and profile-disposition map, then admits implementation by original COMMAND
-> component rather than by trace-hit service.
+> **T scope:** T224 recovers the Queue-selected standard-handle and redirection
+> capability as an original owner package. It begins with a complete source/ABI/
+> failure and profile-disposition map; subsequent S work may implement only whole
+> admitted owner subpackages, never trace-hit endpoint patches.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T223 S2, Ordinary Mode. |
-| Admission And Approval | Owner direction: continue completing remaining BOPs as original component packages; Direct/Readonly are complete for admitted DEM views, with Overlay/Virtual retained. Queue candidate 1 is selected after T222 closure. |
-| Objective | Recover the selected COMMAND bootstrap/environment/config component (`54:01/02/04/05/0C/0D/0F`) as one package through normal COMMAND session, preserving source-shaped copied ABI, lifecycle and Direct/Readonly capability disposition. |
-| Non-goals | No stream/pipe or host-child execution (`54:06/07/08/0A`), console/keyboard (`54:09/0E`), lifecycle (`54:00/0B`), session broker (`54:10`), native trace, Bochs/mantle change, or per-trace BOP patch. |
-| Reference Baseline | T223 S1 dispatcher inventory and ABI/component selection; OpenNT `cmddisp.c`, `cmdmisc.c`, `cmdenv.c`, `cmdconf.c` and existing bx-vdm COMMAND package sources. |
-| Files And ABI Surface | `src/bx-vdm` COMMAND package session/bootstrap/environment/config helpers and tests; existing fixed-width checked actions are the only guest boundary. |
+| Identifier Mode | M0 T224 S1, Ordinary Mode. |
+| Admission And Approval | Owner direction is to continue completing remaining BOPs as original component packages, with Direct/Readonly first and no trace-driven singleton work. Queue candidate 1 is selected after T223 closure. |
+| Objective | Produce the source-first owner/ABI/failure and Direct/Readonly disposition map for the full guest DOS/COMMAND standard-handle, device, pipe and redirection capability surface, including reached COMMAND `54:06/07/08/0A` relationships and DEM/Redirector dependencies. |
+| Non-goals | No endpoint implementation, no host-child launch, no ambient Windows handle transfer, no pipe backend, no console/keyboard expansion, no native trace, and no Bochs/mantle change in S1. |
+| Reference Baseline | T223 closure; Queue candidate 1; OpenNT COMMAND/DEM/Redirector caller and dispatcher sources; existing bx-vdm stream/child interfaces and profile ABI. |
+| Files And ABI Surface | Read-only OpenNT and bx-vdm source inspection; one T224 S1 evidence ledger. No new guest ABI or runtime provider is admitted by this S. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Focused MSVC x64 `/MT` COMMAND package fixture below `build/M0-T223-S2/<run>` covering all seven services under Direct/Readonly, source-shaped success/failure and no fallback; governance and diff. |
-| Expected Markers | One package-owned bootstrap/environment/config state, checked guest reads/writes, no raw CCPU pointers, explicit Direct/Readonly behavior and no generic fallback. |
-| Asset Needs | Existing OpenNT/current source, local MSVC x64 `/MT` and disposable build roots; no external import, firmware or guest media. |
-| Reporting Requirements | Record changed provider/session interfaces, service-family outcomes, Direct/Readonly coverage, focused build result, retained limitation and next component. |
-| Stop Conditions | Need for a new guest ABI, host-system modification, Bochs change, unsupported environment/registry capability, new terminal/stream semantics or native trace. |
-| Exit Criteria | All seven services traverse the one COMMAND session under Direct/Readonly with source-shaped terminal behavior and full package regression; later COMMAND components remain explicitly deferred. |
+| Verification | Complete owner-to-identity matrix; each row has original source path, caller, copied ABI, failure behavior, mutation class/profile disposition, current route and source-recovery rung. Governance and diff checks. |
+| Expected Markers | No unowned standard-handle/redirection identity; no hidden raw HANDLE/CCPU/SAS dependency; explicit Direct/Readonly result for every reached identity and deferred dependency. |
+| Asset Needs | Existing OpenNT/current source and local documentation tools only; no external import, firmware, guest media, build or host mutation. |
+| Reporting Requirements | Record component boundaries, rejected direct-composition dependencies, existing workaround retain/migrate/replace/delete decision, and the next whole subpackage proposal. |
+| Stop Conditions | A new guest ABI, need for a host-system modification, Bochs change, unavailable historical source, or a proposal to bind an individual trace hit before the whole map is approved. |
+| Exit Criteria | Every admitted standard-handle/redirection identity has an original owner/source/ABI/failure map and profile disposition; dependencies are classified; implementation is partitioned into complete owner subpackages with a recommended first S2 package. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | Existing `54:01/04/05/0C/0D/0E/0F` helpers, CMDINFO/SCSINFO lifetime, insufficient-environment buffer, current-directory errors, declared boot inputs and profile fallback isolation. |
-> **T223 S1 P1 progress:** the authoritative 17-slot 54:xx dispatcher and current bx-vdm route inventory is recorded; it identifies environment/session-broker ownership errors that preclude treating existing routes as complete. See the [P1 inventory](etc/research/t223-s1-command-dispatcher-current-route-inventory-001.md).
-> **T223 S1 P2 closure:** source ABI and host-dependency mapping select COMMAND bootstrap/environment/config (01/02/04/05/0C/0D/0F) as the first whole implementation component; stream/launch, console, lifecycle and session broker remain separately owned. See the [P2 selection](etc/research/t223-s1-command-abi-component-selection-001.md).
-
-> **T223 S2 P1 progress:** source reconciliation corrects 54:04 cmdGetCurrentDir invalid-drive failure to original CF=1, AX=1; the focused COMMAND bootstrap x64 /MT fixture passes. This is a repair checkpoint, not component closure; see the [ABI repair record](etc/research/t223-s2-command-current-directory-abi-repair-001.md).
-
-> **T223 S2 P2 progress:** source mapping separates 54:10 cmdGetStartInfo from bootstrap: it is a deferred COMMAND session-broker capability, not an implementation claim. Bootstrap and all-slot route fixtures pass; see the [routing correction](etc/research/t223-s2-command-session-broker-routing-001.md).
-
-> **T223 S2 P3 progress:** the first-command/return/retry state map distinguishes recoverable contained CLI bootstrap semantics from later BASE/console/launch ownership; see the [state-machine map](etc/research/t223-s2-command-bootstrap-state-machine-map-001.md).
-
-> **T223 S2 P4 progress:** a dedicated composition fixture now traverses all seven admitted COMMAND bootstrap/environment/config services through independent Direct and Readonly sessions, with generic COMMAND profile classes resolving to their selected policy and no cross-profile fallback. The complementary original-owner bootstrap fixture passes under MSVC x64 /MT; see the [profile-session regression](etc/research/t223-s2-command-profile-session-regression-001.md).
+| Similar-Issue Sweep | COMMAND stream/child/launch services, DOS standard handles/devices/pipes, DEM PDB/handle lifecycle, Redirector pipe/IPC boundaries, mutation-profile owner enforcement, and opaque-token/no-ambient-handle rules. |
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
