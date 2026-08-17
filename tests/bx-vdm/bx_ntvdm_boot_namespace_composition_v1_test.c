@@ -463,10 +463,10 @@ int main(void)
     event.eax = 0xa500u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
-        outcome.gpr16_values[0] != 0xa507u ||
-        composition.command.launch_execution_provider.stream_session.launch_count != 1u ||
-        composition.command.launch_execution_provider.stream_session.completion_count != 1u ||
-        composition.command.launch_execution_provider.stream_session.last_result != 7u) return 251;
+        outcome.gpr16_values[0] != 0xa507u) return 251;
+    if (composition.command.launch_execution_provider.child_redirection.launch_count != 1u) return 252;
+    if (composition.command.launch_execution_provider.child_redirection.completion_count != 1u) return 253;
+    if (composition.command.launch_execution_provider.child_redirection.last_result != 7u) return 254;
     /* The COMMAND package, rather than a trace observation, defines every
        callable outcome.  Selected positive services are exercised below;
        this sweep proves the no-op, common unavailable route, and all five

@@ -6,6 +6,7 @@
  * directly. */
 #include "bx_ntvdm_command_execution_lifecycle_v1.h"
 #include "bx_ntvdm_command_stream_session_v1.h"
+#include "bx_ntvdm_command_child_redirection_v1.h"
 #include "bx_ntvdm_command_profile_consumer_v1.h"
 
 #define BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_MAGIC UINT32_C(0x4258434c)
@@ -15,6 +16,7 @@ typedef struct bx_ntvdm_command_launch_execution_provider_v1 {
     uint32_t magic, abi_version, struct_bytes, initialized;
     bx_ntvdm_command_execution_lifecycle_v1 execution;
     bx_ntvdm_command_stream_session_v1 stream_session;
+    bx_ntvdm_command_child_redirection_v1 child_redirection;
 } bx_ntvdm_command_launch_execution_provider_v1;
 
 #ifdef __cplusplus

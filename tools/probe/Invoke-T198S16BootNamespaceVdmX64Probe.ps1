@@ -47,6 +47,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_command_lifecycle_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_command_execution_lifecycle_v1.c',
     'src\bx-vdm\bx_ntvdm_command_stream_session_v1.c',
+    'src\bx-vdm\bx_ntvdm_command_child_redirection_v1.c',
     'src\bx-vdm\bx_ntvdm_cmd_comspec_bootstrap_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_get_next_service.c',
     'src\bx-vdm\bx_ntvdm_cmd_current_dir_service.c',
