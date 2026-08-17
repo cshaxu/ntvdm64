@@ -176,16 +176,20 @@ static int environment_name_compare(const wchar_t *entry, const wchar_t *name)
 static wchar_t *build_adapter_environment(const wchar_t *profile,
     const wchar_t *root, const wchar_t *include_drives,
     const wchar_t *exclude_drives, const wchar_t *launch_plan,
-    const wchar_t *config_source, const wchar_t *autoexec_source)
+    const wchar_t *config_source, const wchar_t *autoexec_source,
+    const wchar_t *mutation_mode)
 {
+    /* CreateProcess requires its Unicode environment block sorted by name. */
     static const wchar_t *const names[] = {
-        L"NTDOS64_ADAPTER_PROFILE", L"NTDOS64_ADAPTER_ROOT", L"NTDOS64_ADAPTER_LAUNCH_PLAN",
-        L"NTDOS64_HOST_EXCLUDE_DRIVES", L"NTDOS64_HOST_INCLUDE_DRIVES",
-        L"NTDOS64_STARTUP_CONFIG_SOURCE", L"NTDOS64_STARTUP_AUTOEXEC_SOURCE"
+        L"NTDOS64_ADAPTER_LAUNCH_PLAN", L"NTDOS64_ADAPTER_PROFILE",
+        L"NTDOS64_ADAPTER_ROOT", L"NTDOS64_HOST_EXCLUDE_DRIVES",
+        L"NTDOS64_HOST_INCLUDE_DRIVES", L"NTDOS64_MUTATION_MODE",
+        L"NTDOS64_STARTUP_AUTOEXEC_SOURCE", L"NTDOS64_STARTUP_CONFIG_SOURCE"
     };
-    const wchar_t *values[] = { profile, root, launch_plan, exclude_drives, include_drives,
-        config_source != NULL ? config_source : L"",
-        autoexec_source != NULL ? autoexec_source : L"" };
+    const wchar_t *values[] = { launch_plan, profile, root, exclude_drives,
+        include_drives, mutation_mode,
+        autoexec_source != NULL ? autoexec_source : L"",
+        config_source != NULL ? config_source : L"" };
     LPWCH inherited;
     const wchar_t *entry;
     size_t capacity = 1u;
@@ -194,7 +198,7 @@ static wchar_t *build_adapter_environment(const wchar_t *profile,
     wchar_t *cursor;
 
     if (profile == NULL || root == NULL || include_drives == NULL || exclude_drives == NULL ||
-        launch_plan == NULL ||
+        launch_plan == NULL || mutation_mode == NULL ||
         *profile == L'\0' || *root == L'\0') return NULL;
     inherited = GetEnvironmentStringsW();
     if (inherited == NULL) return NULL;
@@ -259,7 +263,8 @@ static wchar_t *build_adapter_environment(const wchar_t *profile,
 static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
     const wchar_t *adapter_root, const wchar_t *include_drives,
     const wchar_t *exclude_drives, const wchar_t *launch_plan,
-    const wchar_t *config_source, const wchar_t *autoexec_source)
+    const wchar_t *config_source, const wchar_t *autoexec_source,
+    const wchar_t *mutation_mode)
 {
     STARTUPINFOW startup = { .cb = sizeof(startup) };
     PROCESS_INFORMATION process = {0};
@@ -274,9 +279,10 @@ static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
 
     if (line == NULL) return 1;
     if (adapter_profile != NULL || adapter_root != NULL || include_drives != NULL || exclude_drives != NULL ||
-        launch_plan != NULL) {
+        launch_plan != NULL || mutation_mode != NULL) {
         environment = build_adapter_environment(adapter_profile, adapter_root,
-            include_drives, exclude_drives, launch_plan, config_source, autoexec_source);
+            include_drives, exclude_drives, launch_plan, config_source, autoexec_source,
+            mutation_mode);
         if (environment == NULL) {
             HeapFree(GetProcessHeap(), 0, line);
             return 1;
@@ -380,6 +386,8 @@ int wmain(void)
     const wchar_t *byob_root = NULL;
     const wchar_t *config_source = NULL;
     const wchar_t *autoexec_source = NULL;
+    const wchar_t *mutation_mode = L"direct";
+    int has_mutation_mode = 0;
     wchar_t include_drives[52] = {0};
     wchar_t exclude_drives[52] = {0};
     int target_index = 1;
@@ -392,7 +400,7 @@ int wmain(void)
     int result;
 
     if (argv == NULL || argc < 2) {
-        fwprintf(stderr, L"usage: ntdos64-run [--byob-profile profile.json --byob-root directory --config-source config.nt --autoexec-source autoexec.nt] [--include-drives c,d] [--exclude-drives e] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
+        fwprintf(stderr, L"usage: ntdos64-run [--byob-profile profile.json --byob-root directory --config-source config.nt --autoexec-source autoexec.nt] [--mutation-mode direct|readonly] [--include-drives c,d] [--exclude-drives e] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
         return 2;
     }
     while (target_index < argc && wcsncmp(argv[target_index], L"--", 2u) == 0) {
@@ -428,6 +436,14 @@ int wmain(void)
             target_index + 1 < argc && autoexec_source == NULL) {
             autoexec_source = argv[target_index + 1];
             target_index += 2;
+        } else if (_wcsicmp(argv[target_index], L"--mutation-mode") == 0 &&
+            target_index + 1 < argc && !has_mutation_mode &&
+            (_wcsicmp(argv[target_index + 1], L"direct") == 0 ||
+             _wcsicmp(argv[target_index + 1], L"readonly") == 0)) {
+            mutation_mode = _wcsicmp(argv[target_index + 1], L"readonly") == 0 ?
+                L"readonly" : L"direct";
+            has_mutation_mode = 1;
+            target_index += 2;
         } else {
             fwprintf(stderr, L"ntdos64-run: invalid option\n");
             LocalFree(argv);
@@ -453,14 +469,15 @@ int wmain(void)
     argv[target_index] = full_path;
     kind = classify_image(full_path);
     if (kind == IMAGE_KIND_PE32 || kind == IMAGE_KIND_PE64) {
-        if (include_drives[0] != L'\0' || exclude_drives[0] != L'\0' || bochs != NULL) {
-            fwprintf(stderr, L"ntdos64-run: drive policy requires a BYOB DOS engine\n");
+        if (include_drives[0] != L'\0' || exclude_drives[0] != L'\0' || bochs != NULL ||
+            has_mutation_mode) {
+            fwprintf(stderr, L"ntdos64-run: DOS profile options require a BYOB DOS engine\n");
             result = 2;
         } else {
             if (config_source != NULL || autoexec_source != NULL) {
                 fwprintf(stderr, L"ntdos64-run: configuration sources require a BYOB DOS engine\n");
                 result = 2;
-            } else result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+            } else result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         }
     } else if (kind == IMAGE_KIND_DOS && engine != NULL) {
         int engine_argc = bochs == NULL ? 6 : 8;
@@ -504,7 +521,8 @@ int wmain(void)
                 }
                 (void)index;
                 result = run_process(engine_argc, engine_argv, byob_profile, byob_root,
-                    include_drives, exclude_drives, launch_plan, config_source, autoexec_source);
+                    include_drives, exclude_drives, launch_plan, config_source, autoexec_source,
+                    mutation_mode);
                 HeapFree(GetProcessHeap(), 0, engine_argv);
             }
         }

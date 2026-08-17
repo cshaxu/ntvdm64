@@ -12,9 +12,16 @@
 
 #define BX_NTVDM_ENGINE_REQUEST_V1_MAGIC UINT32_C(0x42584551)
 #define BX_NTVDM_ENGINE_RESULT_V1_MAGIC  UINT32_C(0x42584552)
-#define BX_NTVDM_ENGINE_CONTRACT_V1_VERSION UINT32_C(1)
+#define BX_NTVDM_ENGINE_CONTRACT_V1_VERSION UINT32_C(2)
 #define BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS UINT32_C(260)
 #define BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS UINT32_C(256)
+
+/* Fixed composition-selection values.  The engine carries only this copied
+ * value; bx-vdm owns its profile interpretation and all host capability. */
+enum bx_ntvdm_engine_mutation_mode_v1 {
+    BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT = 1u,
+    BX_NTVDM_ENGINE_MUTATION_MODE_V1_READONLY = 2u
+};
 
 enum bx_ntvdm_engine_terminal_kind_v1 {
     BX_NTVDM_ENGINE_TERMINAL_V1_NONE = 0u,
@@ -33,6 +40,8 @@ struct bx_ntvdm_engine_request_v1 {
     uint32_t struct_bytes;
     uint32_t admitted_drive_mask;
     uint32_t excluded_drive_mask;
+    uint32_t mutation_mode;
+    uint32_t reserved0;
     uint32_t profile_descriptor_chars;
     uint32_t root_descriptor_chars;
     uint32_t launch_descriptor_chars;

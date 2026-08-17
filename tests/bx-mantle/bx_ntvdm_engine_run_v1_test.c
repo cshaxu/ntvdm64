@@ -5,14 +5,15 @@ static int install_calls;
 static int reset_calls;
 static int install_response;
 
-int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
+int bx_ntvdm_composition_runtime_v1_install_from_copied_input_with_mode(
     const uint16_t *profile, uint32_t profile_chars, const uint16_t *root,
     uint32_t root_chars, const uint16_t *launch, uint32_t launch_chars,
-    uint32_t include_mask, uint32_t exclude_mask)
+    uint32_t include_mask, uint32_t exclude_mask, uint32_t mutation_mode)
 {
     if (profile == 0 || root == 0 || launch == 0 || profile_chars == 0u ||
         root_chars == 0u || launch_chars == 0u || include_mask != 0u ||
-        exclude_mask != 0u) return -1;
+        exclude_mask != 0u || (mutation_mode != BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT &&
+        mutation_mode != BX_NTVDM_ENGINE_MUTATION_MODE_V1_READONLY)) return -1;
     ++install_calls;
     return install_response;
 }

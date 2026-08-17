@@ -25,6 +25,20 @@ static int copied_text(uint16_t *out, uint32_t maximum, const wchar_t *text,
     return index != 0u;
 }
 
+static int parse_mutation_mode(const wchar_t *text, uint32_t *out_mode)
+{
+    if (text == 0 || out_mode == 0) return 0;
+    if (_wcsicmp(text, L"direct") == 0) {
+        *out_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
+        return 1;
+    }
+    if (_wcsicmp(text, L"readonly") == 0) {
+        *out_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_READONLY;
+        return 1;
+    }
+    return 0;
+}
+
 static int result_exit(const struct ntdos64_lifecycle_v1_audit *audit)
 {
     if (!audit || !ntdos64_lifecycle_v1_audit_valid(audit)) return 1;
@@ -43,7 +57,8 @@ int wmain(int argc, wchar_t **argv)
     const wchar_t *profile = 0, *root = 0, *target;
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     uint32_t include_mask = 0u, exclude_mask = 0u;
-    int has_include = 0, has_exclude = 0;
+    int has_include = 0, has_exclude = 0, has_mutation_mode = 0;
+    uint32_t mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
     int validate_only = 0;
     int index = 1;
     byob_profile_selection selection;
@@ -69,6 +84,9 @@ int wmain(int argc, wchar_t **argv)
             !has_exclude && argv[index + 1][0] != L'\0' &&
             bx_ntvdm_host_drive_policy_v1_parse(argv[index + 1], &exclude_mask))
             has_exclude = 1, index += 2;
+        else if (wcscmp(argv[index], L"--mutation-mode") == 0 && index + 1 < argc &&
+            !has_mutation_mode && parse_mutation_mode(argv[index + 1], &mutation_mode))
+            has_mutation_mode = 1, index += 2;
         else if (wcscmp(argv[index], L"--validate-only") == 0 && !validate_only)
             validate_only = 1, ++index;
         else goto usage;
@@ -94,11 +112,13 @@ int wmain(int argc, wchar_t **argv)
             launch_text, &request.launch_descriptor_chars)) return 3;
     request.admitted_drive_mask = include_mask;
     request.excluded_drive_mask = exclude_mask;
+    request.mutation_mode = mutation_mode;
     request.instruction_tick_budget = lifecycle_policy.instruction_tick_budget;
     if (!bx_ntvdm_engine_request_v1_valid(&request)) return 3;
     if (validate_only) {
-        wprintf(L"ntdos64-native: request include=%08x exclude=%08x\n",
-            request.admitted_drive_mask, request.excluded_drive_mask);
+        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u\n",
+            request.admitted_drive_mask, request.excluded_drive_mask,
+            request.mutation_mode);
         return 0;
     }
     if (!ntdos64_console_cancellation_v1_begin(&cancellation_event)) return 1;
@@ -118,6 +138,6 @@ int wmain(int argc, wchar_t **argv)
         lifecycle_audit.presentation, lifecycle_audit.cancellation_request);
     return result_exit(&lifecycle_audit);
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
+    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
     return 2;
 }

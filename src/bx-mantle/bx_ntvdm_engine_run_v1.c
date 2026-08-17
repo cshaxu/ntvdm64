@@ -32,11 +32,12 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     if (!bx_ntvdm_cancellation_controller_v1_activate())
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_MACHINE_FAILURE, 4u);
-    install_status = bx_ntvdm_composition_runtime_v1_install_from_copied_input(
+    install_status = bx_ntvdm_composition_runtime_v1_install_from_copied_input_with_mode(
         request->profile_descriptor, request->profile_descriptor_chars,
         request->root_descriptor, request->root_descriptor_chars,
         request->launch_descriptor, request->launch_descriptor_chars,
-        request->admitted_drive_mask, request->excluded_drive_mask);
+        request->admitted_drive_mask, request->excluded_drive_mask,
+        request->mutation_mode);
     if (install_status != 1)
     {
         bx_ntvdm_composition_runtime_v1_reset();

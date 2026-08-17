@@ -155,11 +155,44 @@ unavailable at the present runtime boundary.
 `bx_ntvdm_composition_runtime_v1` now reads `NTDOS64_MUTATION_MODE` at
 installation time. Missing or `direct` selects Direct; `readonly` selects
 Readonly. Invalid, `overlay`, and `virtual` strings fail before image, host
-namespace, DEM or COMMAND binding. The copied-input installation ABI remains
-Direct-only so no existing opaque caller gains a new mode parameter.
+namespace, DEM or COMMAND binding. At that point the copied-input installation ABI remained Direct-only; P7 now admits one versioned engine request field so the native CLI can select the same two modes without a string/environment side channel.
 
 The changed translation unit compiled successfully with the generated CPU5/P
 pinned configuration under MSVC x64 `/W4 /WX /MT`. A prior full T220 closure
 attempt ended during the CPU seed and has no success record; it is not used as
 proof. The dedicated Direct/Readonly installation fixture remains the next
 required runtime test.
+
+## P7 CLI And Typed-Engine Selection Admission
+
+Both CLI paths now have one explicit `--mutation-mode direct|readonly` option.
+When omitted, they select Direct. They reject every other spelling before
+process launch or engine execution; Overlay and Virtual therefore cannot fall
+through to Direct merely because their shared ABI values already exist.
+
+- `ntdos64-run` creates one sorted child-only environment and writes
+  `NTDOS64_MUTATION_MODE` beside its existing immutable BYOB inputs. PE
+  dispatch rejects a supplied DOS mutation option rather than ignoring it.
+- `ntdos64-native` carries the mode through a version-2 fixed-width engine
+  request. The engine contract accepts only the Direct and Readonly numeric
+  values, and `bx-vdm` validates them before profile/image/host binding.
+- The existing no-mode copied-input entry remains an explicit Direct wrapper,
+  preserving old callers. The new `with_mode` entry is the only native-engine
+  selector and does not expose host handles, BOP IDs, DOS semantics, or Bochs
+  objects.
+
+### Focused verification
+
+`Invoke-T200S12NativeEngineContractProbe.ps1` rebuilt and ran its contract
+fixture under MSVC x64 `/MT` in
+`build/t225-s6/engine-contract-profile-r1` with exit zero. It proves Direct
+is the clear-time default, Readonly is accepted, and numeric mode `3` is
+rejected. Both changed CLI translation units also compile under MSVC x64
+`/W4 /WX /MT` in `build/t225-s6/cli-profile-compile-r1`.
+
+The historical T200 S13 lifecycle recipe no longer represents the current
+machine-stage closure: it omits the current cancellation/machine-stage
+objects and fails link before execution. It is retained only as a stale recipe
+observation, not as a failure of the changed mode contract. P8 must provide
+the current exact-image Direct/Readonly installation fixture before a native
+guest integration run is admissible.

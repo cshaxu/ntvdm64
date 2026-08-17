@@ -39,6 +39,15 @@ extern "C" {
 int bx_ntvdm_composition_runtime_v1_install_from_environment(void);
 /* Copied strings are borrowed only for this call; the installed composition
  * retains only its own validated/resource-owned state. */
+/* The explicit mode form is the native-engine ABI seam.  It admits only the
+ * currently implemented Direct and Readonly modes; Overlay/Virtual are not
+ * silently substituted. */
+int bx_ntvdm_composition_runtime_v1_install_from_copied_input_with_mode(
+    const uint16_t *profile, uint32_t profile_chars,
+    const uint16_t *root, uint32_t root_chars,
+    const uint16_t *launch, uint32_t launch_chars,
+    uint32_t include_mask, uint32_t exclude_mask, uint32_t mutation_mode);
+/* Compatibility entry for existing callers: it explicitly selects Direct. */
 int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
     const uint16_t *profile, uint32_t profile_chars,
     const uint16_t *root, uint32_t root_chars,

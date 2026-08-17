@@ -295,20 +295,33 @@ static int descriptor_to_wide(const uint16_t *source, uint32_t chars,
     return 1;
 }
 
+int bx_ntvdm_composition_runtime_v1_install_from_copied_input_with_mode(
+    const uint16_t *profile_input, uint32_t profile_chars,
+    const uint16_t *root_input, uint32_t root_chars,
+    const uint16_t *launch_input, uint32_t launch_chars,
+    uint32_t include_mask, uint32_t exclude_mask, uint32_t mutation_mode)
+{
+    wchar_t profile[261], root[261], launch[257];
+    if ((mutation_mode != BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         mutation_mode != BX_NTVDM_MUTATION_MODE_V1_READONLY) ||
+        !descriptor_to_wide(profile_input, profile_chars, profile, 261u) ||
+        !descriptor_to_wide(root_input, root_chars, root, 261u) ||
+        !descriptor_to_wide(launch_input, launch_chars, launch, 257u)) return -1;
+    return install(profile, root, launch, include_mask, exclude_mask,
+        mutation_mode);
+}
+
 int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
     const uint16_t *profile_input, uint32_t profile_chars,
     const uint16_t *root_input, uint32_t root_chars,
     const uint16_t *launch_input, uint32_t launch_chars,
     uint32_t include_mask, uint32_t exclude_mask)
 {
-    wchar_t profile[261], root[261], launch[257];
-    if (!descriptor_to_wide(profile_input, profile_chars, profile, 261u) ||
-        !descriptor_to_wide(root_input, root_chars, root, 261u) ||
-        !descriptor_to_wide(launch_input, launch_chars, launch, 257u)) return -1;
-    return install(profile, root, launch, include_mask, exclude_mask,
+    return bx_ntvdm_composition_runtime_v1_install_from_copied_input_with_mode(
+        profile_input, profile_chars, root_input, root_chars, launch_input,
+        launch_chars, include_mask, exclude_mask,
         BX_NTVDM_MUTATION_MODE_V1_DIRECT);
 }
-
 int bx_ntvdm_composition_runtime_v1_prepare_startup_plan(
     bx_ntvdm_startup_plan_v1 *plan, const uint8_t **payload,
     uint64_t *payload_bytes)

@@ -12,6 +12,12 @@ static int descriptor_valid(const uint16_t *text, uint32_t chars, uint32_t maxim
     return 1;
 }
 
+static int mutation_mode_valid(uint32_t mutation_mode)
+{
+    return mutation_mode == BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT ||
+        mutation_mode == BX_NTVDM_ENGINE_MUTATION_MODE_V1_READONLY;
+}
+
 static int terminal_kind_valid(uint32_t terminal_kind)
 {
     return terminal_kind <= BX_NTVDM_ENGINE_TERMINAL_V1_HOST_CANCELLATION;
@@ -24,13 +30,15 @@ void bx_ntvdm_engine_request_v1_clear(struct bx_ntvdm_engine_request_v1 *request
     request->magic = BX_NTVDM_ENGINE_REQUEST_V1_MAGIC;
     request->abi_version = BX_NTVDM_ENGINE_CONTRACT_V1_VERSION;
     request->struct_bytes = (uint32_t) sizeof(*request);
+    request->mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
 }
 
 int bx_ntvdm_engine_request_v1_valid(const struct bx_ntvdm_engine_request_v1 *request)
 {
     if (request == 0 || request->magic != BX_NTVDM_ENGINE_REQUEST_V1_MAGIC ||
         request->abi_version != BX_NTVDM_ENGINE_CONTRACT_V1_VERSION ||
-        request->struct_bytes != sizeof(*request) ||
+        request->struct_bytes != sizeof(*request) || request->reserved0 != 0u ||
+        !mutation_mode_valid(request->mutation_mode) ||
         request->instruction_tick_budget == 0u ||
         !descriptor_valid(request->profile_descriptor,
             request->profile_descriptor_chars,

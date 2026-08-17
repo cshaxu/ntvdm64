@@ -39,6 +39,8 @@
 
 > **T225 S5 P0 admission:** [the native continuity ledger](etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md) converts the S4 handoff into one owner-scoped sequence. Direct/Readonly BOP capability stays stable; Overlay/Virtual receive neither fallback nor new behavior.
 
+> **T225 S6 P7 progress:** both CLI paths now select default Direct or explicit Readonly through one typed composition boundary; Overlay/Virtual are rejected, never substituted. The [admission record](etc/research/t225-s6-guest-dos-one-shot-fixture-admission-001.md) carries the fixed engine ABI and focused x64 `/MT` evidence. Exact source-built fixture installation remains the next gate.
+
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 
 > **T225 S2 P3 closure:** the source-built Direct/Readonly whole-provider fixture passes under MSVC x64 `/MT`: `50:3C` invalidates the target Direct PDB token but retains the Readonly session token, while preserving void resume. The separate lifecycle fixture passes; `50:41` remains an independently proven baseline failure. S2 closes only DEM notification cleanup, not guest EXEC or parent return.

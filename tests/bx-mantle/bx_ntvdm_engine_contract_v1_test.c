@@ -29,7 +29,13 @@ int main(void)
     request.instruction_tick_budget = UINT64_C(1000);
     request.admitted_drive_mask = UINT32_C(4);
     request.excluded_drive_mask = UINT32_C(16);
-    if (!bx_ntvdm_engine_request_v1_valid(&request)) return 1;
+    if (request.mutation_mode != BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT ||
+        !bx_ntvdm_engine_request_v1_valid(&request)) return 1;
+    request.mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_READONLY;
+    if (!bx_ntvdm_engine_request_v1_valid(&request)) return 2;
+    request.mutation_mode = 3u;
+    if (bx_ntvdm_engine_request_v1_valid(&request)) return 3;
+    request.mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
     request.launch_descriptor[request.launch_descriptor_chars] = 1u;
     if (bx_ntvdm_engine_request_v1_valid(&request)) return 2;
     request.launch_descriptor[request.launch_descriptor_chars] = 0u;
