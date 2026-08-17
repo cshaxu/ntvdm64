@@ -29,6 +29,7 @@
 | Exit Criteria | The v2 recorder passes focused/boundary/native evidence without changing non-observation execution semantics. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
 | Similar-Issue Sweep | v1/v2 compatibility, generic copied event state, default-off/reset behavior, capacity/overflow, CLI formatting, bx-core/bx-mantle boundary, Direct/Readonly parity and no selector-specific path. |
+> **T225 S39 current attempt:** [the native attempt record](etc/evidence/t225-s39-native-observation-attempt-001.md) confirms formal v2 recorder/fixture/boundary build facts but records a non-convergent existing tick-budget run. It claims no BOP, COMMAND, guest, profile or Bochs repair and leaves S39 active.
 > **T225 S38 closure:** [the closure record](history/m0-t225-s38-closure-20260817.md) admits only the versioned default-off selector-blind BOP snapshot observer; it admits no guest, provider or Bochs semantic change.
 > **T225 S37 closure:** [the closure record](history/m0-t225-s37-closure-20260817.md) separates COMMAND artifact, guest-loader and host-service ownership; it admits only a whole guest-image continuity observation design.
 > **T225 S36 closure:** [the closure record](history/m0-t225-s36-closure-20260817.md) proves selector `06h` has no direct DS/code mutation path and corrects `0C41` to an active COMMAND-plane candidate segment; it admits only a whole selector-blind BOP snapshot observation implementation.

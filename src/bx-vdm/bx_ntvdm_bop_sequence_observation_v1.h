@@ -6,12 +6,12 @@
 #include "bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_MAGIC UINT32_C(0x4258534f)
-#define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_VERSION UINT32_C(1)
+#define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_VERSION UINT32_C(2)
 #define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_MAX_RECORDS 128u
 
 /* Default-off copied sequence of reached C4 C4 instructions. It records
- * accepted and declined invocations alike, but carries no CPU registers,
- * guest-memory data, provider identity, or semantic interpretation. */
+ * accepted and declined invocations alike, with a fixed-width pre-dispatch
+ * CPU snapshot only; it carries no guest-memory data, provider identity, or semantic interpretation. */
 struct bx_ntvdm_bop_sequence_observation_record_v1 {
     uint16_t cs;
     uint16_t reserved0;
@@ -20,6 +20,9 @@ struct bx_ntvdm_bop_sequence_observation_record_v1 {
     uint8_t service;
     uint8_t has_service;
     uint8_t disposition;
+    uint32_t eax, ebx, ecx, edx, esi, edi, eflags;
+    uint16_t ds, es, ss;
+    uint16_t reserved1;
 };
 
 struct bx_ntvdm_bop_sequence_observation_v1 {

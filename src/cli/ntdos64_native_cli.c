@@ -71,9 +71,11 @@ static void print_bop_sequence(const struct bx_ntvdm_bop_sequence_observation_v1
     for (index = 0u; index < sequence->record_count; ++index) {
         const struct bx_ntvdm_bop_sequence_observation_record_v1 *record =
             &sequence->records[index];
-        wprintf(L"ntdos64-native: bop[%u] cs=%04x eip=%08x selector=%02x service=%02x has-service=%u disposition=%u\n",
+        wprintf(L"ntdos64-native: bop[%u] cs=%04x eip=%08x selector=%02x service=%02x has-service=%u disposition=%u eax=%08x ebx=%08x ecx=%08x edx=%08x esi=%08x edi=%08x flags=%08x ds=%04x es=%04x ss=%04x\n",
             index, record->cs, record->eip, record->selector, record->service,
-            record->has_service, record->disposition);
+            record->has_service, record->disposition, record->eax, record->ebx,
+            record->ecx, record->edx, record->esi, record->edi, record->eflags,
+            record->ds, record->es, record->ss);
     }
 }
 static void print_generic_ud_sequence(const struct bx_ntvdm_generic_ud_sequence_observation_v1 *sequence)

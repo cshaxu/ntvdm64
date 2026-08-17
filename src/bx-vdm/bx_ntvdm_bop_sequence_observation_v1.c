@@ -47,4 +47,8 @@ void bx_ntvdm_bop_sequence_observation_v1_consider(
         event->window[2] == 0x57u;
     slot->service = slot->has_service && event->window_bytes >= 4u ? event->window[3] : 0u;
     slot->disposition = (uint8_t)outcome->disposition;
+    slot->eax = event->eax; slot->ebx = event->ebx; slot->ecx = event->ecx;
+    slot->edx = event->edx; slot->esi = event->esi; slot->edi = event->edi;
+    slot->eflags = event->eflags; slot->ds = event->ds; slot->es = event->es;
+    slot->ss = event->ss;
 }
