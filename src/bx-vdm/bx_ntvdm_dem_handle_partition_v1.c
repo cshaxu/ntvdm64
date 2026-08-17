@@ -11,7 +11,7 @@ static uint32_t token(const bx_ntvdm_cpu_state_v1 *cpu)
 { return ((cpu->eax & 0xffffu) << 16) | (cpu->ebp & 0xffffu); }
 static int selected(uint8_t service)
 { return service == 0x00u || service == 0x02u || service == 0x08u ||
-    service == 0x16u || service == 0x1eu || service == 0x27u; }
+    service == 0x16u || service == 0x42u || service == 0x1eu || service == 0x27u; }
 static int finish(const bx_ntvdm_exception_event_v1 *boundary,
     bx_ntvdm_cpu_result_v2 *result, uint16_t ax, int write_ax, int cf)
 {
@@ -125,7 +125,7 @@ int bx_ntvdm_dem_handle_partition_v1_dispatch(
     if (!seek_if_requested(handle, cpu)) return error_result(boundary, result, GetLastError());
     if (io_byte_count == 0 || (cpu->ecx & 0xffffu) > io_capacity ||
         ((cpu->ecx & 0xffffu) != 0u && io_bytes == 0)) return 0;
-    if (service == 0x16u) {
+    if (service == 0x16u || service == 0x42u) {
         if (!ReadFile(handle, io_bytes, (DWORD)(cpu->ecx & 0xffffu), &transferred, 0))
             return error_result(boundary, result, GetLastError());
         *io_byte_count = transferred;

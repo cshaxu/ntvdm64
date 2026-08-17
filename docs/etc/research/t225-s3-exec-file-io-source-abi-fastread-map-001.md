@@ -69,3 +69,24 @@ proves a real guest EXEC/PSP path; COM loading remains a later owner package.
 | Smallest adapter seam | Extend one existing whole-provider read owner with a typed Direct 50:42 transfer. |
 | External code intrusion | Rejected. No Bochs or guest DOS change. |
 | New behavior | Rejected. No adapter EXEC loader or synthetic child process. |
+
+## P2 Direct and Readonly FastRead Closure
+
+A fresh source-built whole-provider fixture in build/M0-T225-S3/001 compiled,
+linked, and ran under MSVC x64 /MT. Its manifest records linkExitCode=0,
+runExitCode=0, and passed=true over 145 source-closure inputs.
+
+The fixture registers the copied DTA/CurrentPDB transport, then proves:
+
+- Direct opens an admitted host-view file with 50:12, uses 50:42 to copy one
+  byte through checked guest RAM, receives AX=1 and carry clear, and closes by
+  50:02;
+- Readonly opens declared COMMAND.COM with the same opaque AX:BP layout, uses
+  50:42 to copy its F4 byte into guest RAM with AX=1 and carry clear, and
+  closes by 50:02;
+- existing 50:00, 50:16, and stale-token checks remain part of the same
+  fixture's Direct/Readonly matrix.
+
+The S3 result is a file-I/O compatibility closure only. It makes no claim
+that guest EXEC, COM/MZ loading, PSP/MCB/JFN construction, or parent return
+has run.

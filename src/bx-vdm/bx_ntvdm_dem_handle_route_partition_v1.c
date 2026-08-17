@@ -148,9 +148,12 @@ static int startup_overlay_dispatch(bx_ntvdm_dem_whole_provider_v1 *provider,
         return overlay_finish(boundary, result_out, 5u, 1);
     if (service == 0x27u)
         return overlay_finish(boundary, result_out, 0u, 0);
-    if (service != 0x16u || !bx_ntvdm_dem_readonly_file_v1_read(
+    if ((service != 0x16u && service != 0x42u) ||
+        !(service == 0x42u ? bx_ntvdm_dem_readonly_file_v1_fast_read(
             provider->startup_namespace, boundary, &readonly_cpu, window, bytes, sizeof(bytes),
-            &transaction, result_out)) return 0;
+            &transaction, result_out) : bx_ntvdm_dem_readonly_file_v1_read(
+            provider->startup_namespace, boundary, &readonly_cpu, window, bytes, sizeof(bytes),
+            &transaction, result_out))) return 0;
     if (transaction.magic == 0u) return 1;
     if (!bx_ntvdm_bulk_result_transaction_v1_preflight(&transaction,
             UINT64_C(0x100000), transaction.payload_bytes)) return 0;
@@ -236,7 +239,7 @@ static int overlay_handle_dispatch(bx_ntvdm_dem_whole_provider_v1 *provider,
 int bx_ntvdm_dem_handle_route_partition_v1_owns_service(uint8_t service)
 {
     return service == 0x00u || service == 0x02u || service == 0x08u ||
-        service == 0x16u || service == 0x1eu || service == 0x27u;
+        service == 0x16u || service == 0x42u || service == 0x1eu || service == 0x27u;
 }
 
 int bx_ntvdm_dem_handle_route_partition_v1_claims_request(
@@ -292,7 +295,7 @@ int bx_ntvdm_dem_handle_route_partition_v1_dispatch(
         return bx_ntvdm_dem_whole_provider_v1_prepare_gather(provider, service,
             boundary, cpu, &range, 1u, &gather) && read_action(provider, &gather, action_out);
     }
-    if (service == 0x16u && count != 0u) {
+    if ((service == 0x16u || service == 0x42u) && count != 0u) {
         if (!physical(cpu->ds, (uint16_t)cpu->edx, count, &address) ||
             !bx_ntvdm_dem_handle_partition_v1_dispatch(provider, service, boundary,
                 cpu, bytes, count, &used, result_out) || used > count) return 0;

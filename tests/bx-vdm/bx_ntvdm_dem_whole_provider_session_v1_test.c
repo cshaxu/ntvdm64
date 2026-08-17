@@ -238,6 +238,59 @@ int main(void)
             bx_ntvdm_dem_package_session_v1_teardown(&session);
             bx_ntvdm_host_namespace_v1_release(&host); return 50 + (int)index;
         }
+        /* S3 FastRead integration. Direct uses an admitted host-view file;
+         * Readonly uses the declared startup namespace. Both routes must
+         * preserve AX:BP token layout and complete a checked guest-RAM write. */
+        if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_DIRECT) {
+            memcpy(ram + 0x200u, fcb_host_path, strlen(fcb_host_path) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x200u; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x12u, &cpu, &result) || !success(&result) ||
+                token_from(&result) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 52;
+            }
+            token = token_from(&result); ram[0x310u] = 0u;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x310u; cpu.ecx = 1u;
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            if (!dispatch(&session, 0x42u, &cpu, &result) || !success(&result) ||
+                result.cpu_delta.gpr16_values[0] != 1u || ram[0x310u] == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 53;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            if (!dispatch(&session, 0x02u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 54;
+            }
+        }
+        if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {
+            memcpy(ram + 0x200u, "C:\\COMMAND.COM", sizeof("C:\\COMMAND.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x200u; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x12u, &cpu, &result) || !success(&result) ||
+                token_from(&result) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 55;
+            }
+            token = token_from(&result); ram[0x311u] = 0u;
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x311u; cpu.ecx = 1u;
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            if (!dispatch(&session, 0x42u, &cpu, &result) || !success(&result) ||
+                result.cpu_delta.gpr16_values[0] != 1u || ram[0x311u] != 0xf4u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 56;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            if (!dispatch(&session, 0x02u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 57;
+            }
+        }
         /* A released opaque handle must remain invalid across the two admitted
          * host-mutation views; do not fall through to a profile-default path. */
         if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_DIRECT ||
