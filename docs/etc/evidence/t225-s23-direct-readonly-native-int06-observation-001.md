@@ -1,0 +1,3 @@
+# T225 S23 P9 — Bounded Direct/Readonly Native INT06 Observation
+
+Using immutable `build/M0-T225-S10/primary-bootstrap-inputs-r2` and the P8 native executable, Direct and Readonly each returned the normal one-million-tick terminal (`exit=4`). Their observed BOP/#UD sequences were identical. Both reached `074A:0740`, `C4 C4 06`, with accepted disposition 1, proving the new machine-plane transaction is live on the real NTIO/NTDOS/COMMAND path. The next observed selector is `02h` at `074A:03FF`, still disposition 0, then `06h` recurs. This is evidence for the next whole machine/BIOS owner audit only; it authorizes neither a trace-led singleton provider nor any host capability expansion.
