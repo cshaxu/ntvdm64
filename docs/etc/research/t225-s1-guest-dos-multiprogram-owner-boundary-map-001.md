@@ -130,3 +130,52 @@ launch shortcut:
 
 No direct code change, Bochs change, host process, nested VDM, or trace-led
 BOP patch is admitted by P2.
+## P3 Token ABI And FastRead Source Boundary
+
+### Token ABI Is Shared And Profile-Neutral
+
+OpenNT `dem.h` defines `GETHANDLE(hi, lo)` as `GETULONG(hi, lo)`.  The DOS
+kernel writes `AX:BP` to `sf_NTHandle+2:sf_NTHandle` after `SVC_DEMOPEN`, and
+later reloads that same `AX:BP` pair for `SVC_DEMCHGFILEPTR`, `SVC_DEMREAD`,
+`SVC_DEMFASTREAD`, and `SVC_DEMCLOSE`.  The current namespace partition
+returns token high to AX and token low to BP for Direct, Readonly, Overlay,
+and Virtual; its file-session mapping retains host HANDLEs privately.
+
+The existing whole-provider session fixture proves a bounded DTA/PDB
+registration, `50:12 -> 50:16 -> 50:02` chain for Direct and Readonly, and
+uses the same opaque token representation.  Thus the shared token ABI is a
+valid seam to retain for all four profiles; no profile may substitute a raw
+host HANDLE or a different guest register layout.
+
+### FastRead Is Not A Proven Original Direct Provider
+
+`handle.asm` branches to `SVC_DEMREAD` if `SVC_DEMFASTREAD` returns CF set.
+However the retained OpenNT `demdisp.c` maps `SVC_DEMFASTREAD` to
+`demNotYetImplemented`, whose retained body clears CF.  This source tree
+therefore proves the *control-flow fallback exists*, but does not prove that
+the historical dispatcher selected that fallback for normal non-pipe reads.
+It also cannot by itself prove a successful Direct fast-read byte-transfer
+contract.
+
+The current `50:42` source-derived provider is deliberately narrower: it
+performs the copied fast-read contract only for the readonly declared startup
+namespace.  It is not evidence for Direct.  The Direct package must therefore
+choose and test one explicit result contract before any real EXEC admission:
+
+1. a typed CF-set disposition that demonstrably reaches the original `50:16`
+   path with the required preserved registers; or
+2. a Direct fast-read provider that uses the existing private token and checked
+   guest-RAM transaction ABI, with source-derived evidence for every result
+   register and SFT-position effect.
+
+Neither choice changes the shared profile ABI.  Overlay and Virtual remain
+future providers behind that ABI and receive no implied implementation by this
+record.
+
+### Corrected Admission Result
+
+P2's statement about the `50:16` fallback denotes the DOS kernel branch only,
+not an established original-host FastRead failure disposition.  The core P2
+conclusion remains: Direct EXEC is unadmitted until FastRead's Direct result
+contract and the real CurrentPDB/DTA guest path are closed.  No implementation
+or native trace is authorized by P3.
