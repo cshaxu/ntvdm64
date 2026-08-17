@@ -34,7 +34,7 @@ int main(void)
     bx_ntvdm_instruction_window_v1_capture(&w,returned_bop,sizeof(returned_bop));
     if (!bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result) ||
         (t.result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
-        state.returned != 1u || bx_ntvdm_cmd_get_next_terminal_v1_copy(&state, &terminal)) return 11;
+        state.returned != 1u || bx_ntvdm_cmd_get_next_ordinary_completion_v1(&state) || bx_ntvdm_cmd_get_next_terminal_v1_copy(&state, &terminal)) return 11;
     bx_ntvdm_instruction_window_v1_capture(&w,bop,sizeof(bop));
     if (!bx_ntvdm_cmd_get_next_v1_prepare(&state,&plan,&e,&c,&w,&a) ||
         !bx_ntvdm_cmd_get_next_v1_complete(&ns,&plan,&drives,0u,&reg,&state,&e,&c,&a,record,sizeof(record),&t,payload) ||
@@ -62,6 +62,7 @@ int main(void)
         !bx_ntvdm_cmd_terminal_record_v1_valid(&terminal) || terminal.present != 1u ||
         terminal.reason != BX_NTVDM_CMD_TERMINAL_REASON_V1_DECLARED_PLAN_EXHAUSTED ||
         terminal.dos_exit_code != 0x34u ||
+        !bx_ntvdm_cmd_get_next_ordinary_completion_v1(&state) ||
         bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result)) return 7;
     bx_ntvdm_instruction_window_v1_capture(&w,(const uint8_t[]){0xc4,0xc4,0x54,0x11},4u);
     if (bx_ntvdm_cmd_return_exit_code_v1_dispatch(&state,&plan,&e,&c,&w,&t.result)) return 14;

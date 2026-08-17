@@ -69,6 +69,10 @@ int bx_ntvdm_command_package_session_v1_resolve_mutation_class(
     uint32_t mutation_class, uint32_t *policy_result_out);
 int bx_ntvdm_command_package_session_v1_valid(
     const bx_ntvdm_command_package_session_v1 *session);
+/* Opaque post-return fact for the outer composition.  No command identity,
+ * guest state, DOS code, or host resource leaves the package. */
+int bx_ntvdm_command_package_session_v1_copy_ordinary_completion(
+    const bx_ntvdm_command_package_session_v1 *session);
 int bx_ntvdm_command_package_session_v1_dispatch(
     bx_ntvdm_command_package_session_v1 *session,
     const bx_ntvdm_bop_ingress_v1 *ingress,

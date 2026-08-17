@@ -349,12 +349,14 @@ int bx_ntvdm_boot_namespace_composition_v1_copy_ordinary_terminal(
     const bx_ntvdm_boot_namespace_composition_v1 *value)
 {
     bx_ntvdm_command_terminal_v1 terminal;
-    return value != 0 && value->bound != 0u &&
-        bx_ntvdm_command_lifecycle_provider_v1_copy_terminal(
+    if (value == 0 || value->bound == 0u) return 0;
+    if (bx_ntvdm_command_lifecycle_provider_v1_copy_terminal(
             &value->command.lifecycle_provider, &terminal) &&
         terminal.present == 1u &&
         terminal.terminal_kind == BX_NTVDM_COMMAND_TERMINAL_V1_TOP_LEVEL_EXIT &&
-        terminal.has_dos_exit_code == 0u;
+        terminal.has_dos_exit_code == 0u) return 1;
+    return bx_ntvdm_command_package_session_v1_copy_ordinary_completion(
+        &value->command);
 }
 
 int bx_ntvdm_boot_namespace_composition_v1_handle(

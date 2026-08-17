@@ -44,6 +44,10 @@ void bx_ntvdm_cmd_get_next_state_v1_initialize(bx_ntvdm_cmd_get_next_state_v1 *v
 int bx_ntvdm_cmd_terminal_record_v1_valid(const bx_ntvdm_cmd_terminal_record_v1 *value);
 int bx_ntvdm_cmd_get_next_terminal_v1_copy(const bx_ntvdm_cmd_get_next_state_v1 *state,
     bx_ntvdm_cmd_terminal_record_v1 *out);
+/* Opaque COMMAND completion fact.  It is true only after the source-shaped
+ * no-next-command return has recorded one valid exhausted-plan result. */
+int bx_ntvdm_cmd_get_next_ordinary_completion_v1(
+    const bx_ntvdm_cmd_get_next_state_v1 *state);
 int bx_ntvdm_cmd_get_next_v1_prepare(const bx_ntvdm_cmd_get_next_state_v1 *state,
     const byob_launch_plan_v2 *plan,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,

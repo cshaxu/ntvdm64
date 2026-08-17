@@ -87,6 +87,14 @@ int bx_ntvdm_cmd_get_next_terminal_v1_copy(const bx_ntvdm_cmd_get_next_state_v1 
     *out = state->terminal;
     return 1;
 }
+int bx_ntvdm_cmd_get_next_ordinary_completion_v1(
+    const bx_ntvdm_cmd_get_next_state_v1 *state)
+{
+    return state != 0 && state->returned == 1u &&
+        bx_ntvdm_cmd_terminal_record_v1_valid(&state->terminal) &&
+        state->terminal.present == 1u &&
+        state->terminal.reason == BX_NTVDM_CMD_TERMINAL_REASON_V1_DECLARED_PLAN_EXHAUSTED;
+}
 void bx_ntvdm_cmd_get_next_state_v1_commit(bx_ntvdm_cmd_get_next_state_v1 *state)
 { if (state && state->delivered < 2u) { ++state->delivered; state->returned = 0u;
     state->terminal_dos_exit_code = 0u; terminal_clear(&state->terminal); } }
