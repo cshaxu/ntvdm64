@@ -218,3 +218,26 @@ the existing CPU5/P MSVC x64 `/W4 /WX /MT` configuration in
 fixture uses the retained profile ABI correctly: Direct and Readonly are the
 two required admissions, while deferred Overlay and retired Virtual reject.
 It is not yet a linked composition or guest-execution result.
+
+## P9 Current Source Fixture Link Closure
+
+`Invoke-T225S6FourImageProfileFixture.ps1` is the reproducible current-source
+recipe. It first invokes the CPU5/P `T220 S5` source closure, compiles
+`tests/bx-mantle/t225_s6_four_image_profile_fixture.c`, then links one x64
+`/MT` executable from the generated bx-core, bx-mantle and current bx-vdm
+objects. It rejects an existing build root by default and permits `-Resume`
+only after the T220 record reports a successful source link.
+
+A fresh `-CompileOnly` run in
+`build/t225-s6/four-image-profile-link-r5` completed with exit zero. Its JSON
+record names Direct and Readonly as required fixture admissions, Overlay as
+deferred, and Virtual as retired/unselected. The closure forbids the old S74
+response root, `bochs.exe`, `main.cc` and GUI/plugin/device archives. This is
+a source-link result only: `nativeGuestExecution` is false.
+
+The locked source-built NTIO/NTDOS/COMMAND/SHARE input root is not currently
+present in this working tree, so no profile execution was attempted. This is
+an artifact-availability gate, not a rejected BOP, a substituted guest image,
+or a Bochs/runtime failure. A later non-compile-only invocation must provide
+those exact locked inputs and profile before it can claim installation
+execution; it still must not begin a guest trace.

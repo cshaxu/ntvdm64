@@ -25,6 +25,16 @@ function Assert-OnlyProperties([object]$Object, [string[]]$Allowed, [string]$Con
     }
 }
 
+function Get-Sha256([string]$Path) {
+    $stream = [System.IO.File]::OpenRead($Path)
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        return ([System.BitConverter]::ToString($sha.ComputeHash($stream))).Replace('-', '')
+    } finally {
+        $sha.Dispose()
+        $stream.Dispose()
+    }
+}
 if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) { throw "Missing manifest: $ManifestPath" }
 if (Test-Path -LiteralPath $AnalysisRoot) { throw "Analysis root must be fresh: $AnalysisRoot" }
 
@@ -41,7 +51,7 @@ if ([string]::IsNullOrWhiteSpace($InputConfigPath)) {
     $InputConfigPath = Join-Path (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) 'refs\bochs\config.h'
 }
 if (-not (Test-Path -LiteralPath $InputConfigPath -PathType Leaf)) { throw "Missing input config: $InputConfigPath" }
-$actualHash = (Get-FileHash -LiteralPath $InputConfigPath -Algorithm SHA256).Hash.ToUpperInvariant()
+$actualHash = (Get-Sha256 $InputConfigPath).ToUpperInvariant()
 if ($actualHash -ne $expectedHash) { throw "Pinned source hash mismatch: expected $expectedHash, got $actualHash." }
 
 $sourceLines = [System.IO.File]::ReadAllLines((Resolve-Path -LiteralPath $InputConfigPath))
@@ -115,7 +125,7 @@ $outputText = ($sourceLines -join "`r`n") + "`r`n"
 New-Item -ItemType Directory -Path $AnalysisRoot -Force | Out-Null
 $outputPath = Join-Path $AnalysisRoot 'config.h'
 [System.IO.File]::WriteAllText($outputPath, $outputText, [System.Text.UTF8Encoding]::new($false))
-$outputHash = (Get-FileHash -LiteralPath $outputPath -Algorithm SHA256).Hash.ToUpperInvariant()
+$outputHash = (Get-Sha256 $outputPath).ToUpperInvariant()
 $report = [ordered]@{
     schemaVersion = 1
     inputConfig = (Resolve-Path -LiteralPath $InputConfigPath).Path
