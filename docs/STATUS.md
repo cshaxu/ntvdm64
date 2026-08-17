@@ -42,7 +42,7 @@
 
 > **T223 S2 P3 progress:** the first-command/return/retry state map distinguishes recoverable contained CLI bootstrap semantics from later BASE/console/launch ownership; see the [state-machine map](etc/research/t223-s2-command-bootstrap-state-machine-map-001.md).
 
-> **T223 S2 P4 progress:** a dedicated composition fixture now traverses all seven admitted COMMAND bootstrap/environment/config services through one Readonly session, with generic COMMAND profile classes resolving to REJECT_READONLY and no Direct fallback. The complementary original-owner bootstrap fixture passes under MSVC x64 /MT; see the [Readonly session regression](etc/research/t223-s2-command-readonly-session-regression-001.md).
+> **T223 S2 P4 progress:** a dedicated composition fixture now traverses all seven admitted COMMAND bootstrap/environment/config services through independent Direct and Readonly sessions, with generic COMMAND profile classes resolving to their selected policy and no cross-profile fallback. The complementary original-owner bootstrap fixture passes under MSVC x64 /MT; see the [profile-session regression](etc/research/t223-s2-command-profile-session-regression-001.md).
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector

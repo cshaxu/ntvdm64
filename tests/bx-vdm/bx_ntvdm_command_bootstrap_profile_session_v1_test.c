@@ -61,9 +61,9 @@ static void selection_initialize(byob_profile_selection *selection)
         selection->config_metadata.dos_date = selection->autoexec_metadata.dos_date = 1u;
 }
 
-static int readonly_profile_initialize(bx_ntvdm_mutation_profile_v1 *profile)
+static int profile_initialize(bx_ntvdm_mutation_profile_v1 *profile, uint32_t mode)
 {
-    bx_ntvdm_mutation_profile_v1_initialize(profile, BX_NTVDM_MUTATION_MODE_V1_READONLY);
+    bx_ntvdm_mutation_profile_v1_initialize(profile, mode);
     return bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
         BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
         bx_ntvdm_dem_profile_consumer_v1_register_class(profile,
@@ -76,7 +76,7 @@ static int readonly_profile_initialize(bx_ntvdm_mutation_profile_v1 *profile)
         BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x03u);
 }
 
-int main(void)
+static int run_session(uint32_t mode)
 {
     uint8_t ntdos_bytes[] = { 0xfa, 0xfc, 0xf4 };
     uint8_t command_bytes[] = { 0x90, 0xc3 };
@@ -97,13 +97,15 @@ int main(void)
     struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t policy = 0u;
+    uint32_t expected_policy = mode == BX_NTVDM_MUTATION_MODE_V1_READONLY ?
+        BX_NTVDM_MUTATION_POLICY_V1_REJECT_READONLY : BX_NTVDM_MUTATION_POLICY_V1_DIRECT_HOST;
     int failure = 0;
 
     selection_initialize(&selection);
     drive_types[2] = 3u;
     memset(&composition, 0, sizeof(composition));
     memset(&host_namespace, 0, sizeof(host_namespace));
-    if (!readonly_profile_initialize(&mutation_profile) ||
+    if (!profile_initialize(&mutation_profile, mode) ||
         !bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
             &ntdos, &command, &target, 0, &selection) ||
         !bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(4), drive_types, 0u, 0u,
@@ -126,10 +128,10 @@ int main(void)
         !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) failure = 1;
     if (!failure && (!bx_ntvdm_command_package_session_v1_resolve_mutation_class(
             &composition.command, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, &policy) ||
-        policy != BX_NTVDM_MUTATION_POLICY_V1_REJECT_READONLY ||
+        policy != expected_policy ||
         !bx_ntvdm_command_package_session_v1_resolve_mutation_class(
             &composition.command, BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, &policy) ||
-        policy != BX_NTVDM_MUTATION_POLICY_V1_REJECT_READONLY)) failure = 2;
+        policy != expected_policy)) failure = 2;
     event_initialize(&event, 0x02u);
     event.ds = 0x101u; event.edx = 0x20u; event.eax = 0xaa00u;
     memcpy(ram + 0x1030u, "C:\\COMMAND.COM", 15u);
@@ -171,4 +173,11 @@ int main(void)
     if (composition.bound) bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
     bx_ntvdm_host_namespace_v1_release(&host_namespace);
     return failure;
+}
+
+int main(void)
+{
+    int failure = run_session(BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    if (failure != 0) return failure;
+    return run_session(BX_NTVDM_MUTATION_MODE_V1_READONLY);
 }
