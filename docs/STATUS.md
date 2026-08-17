@@ -47,6 +47,8 @@
 
 > **T225 S7 P1 closure:** the [incremental composition-build result](etc/research/t225-s7-incremental-composition-build-result-001.md) proves a manifest-bound `bx-vdm` cold/hot/invalidation cache with a fresh x64 `/MT` fixture link on every run. S6 resumes; its runtime/profile diagnosis remains unchanged.
 
+> **T225 S7 P2 closure:** the [Ninja graph result](etc/research/t225-s7-p2-ninja-build-graph-result-001.md) proves `deps = msvc` header propagation, `bx-vdm.lib`, fresh fixture linking and no-op rebuild behavior under MSVC x64 `/MT`. The custom P1 cache remains evidence only until a complete admitted module graph replaces it. S6 resumes.
+
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 
 > **T225 S2 P3 closure:** the source-built Direct/Readonly whole-provider fixture passes under MSVC x64 `/MT`: `50:3C` invalidates the target Direct PDB token but retains the Readonly session token, while preserving void resume. The separate lifecycle fixture passes; `50:41` remains an independently proven baseline failure. S2 closes only DEM notification cleanup, not guest EXEC or parent return.
