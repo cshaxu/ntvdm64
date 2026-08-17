@@ -96,6 +96,10 @@
 > Direct/Readonly normal-session regression: query layouts remain source-shaped
 > and the currently unadmitted setters retain AL-only non-mutating failure; see
 > the [P12 record](etc/research/t222-s2-drive-view-clock-session-regression-001.md).
+> **T222 S2 P13 progress:** the 50:25/46 DPB family now has one Direct/Readonly
+> normal-session regression for full-DPB, excluded-drive refusal and DPB-list
+> layout/link/BP progression; see the [P13 record]
+> (etc/research/t222-s2-drive-view-dpb-session-regression-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily

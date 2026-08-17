@@ -230,6 +230,44 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
         result.eflags_write_mask != 0u) {
         bx_ntvdm_dem_package_session_v1_teardown(&session); return 13;
     }
+    /* The DPB owner consumes the same admitted immutable volume inventory.
+     * Validate its full 35-byte output, its excluded-drive terminal, and the
+     * DPB-list chain as one package family rather than independent leaves. */
+    memset(ram + 0x280u, 0xa5, 35u);
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 2u; cpu.ds = 0u; cpu.edi = 0x280u;
+    if (!dispatch(&session, 0x25u, &cpu, &result) || !success(&result) ||
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 0u ||
+        ram[0x280u] != 2u || ram[0x281u] != 2u ||
+        ram[0x282u] == 0xa5u || ram[0x283u] == 0xa5u ||
+        ram[0x28au] != 2u || ram[0x28du] != 0xa5u || ram[0x28eu] != 0xa5u ||
+        ram[0x299u] != 0xf8u || ram[0x29au] != 10u ||
+        ram[0x29fu] != 0xa5u || ram[0x2a0u] != 0xa5u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 14;
+    }
+    memset(ram + 0x280u, 0xa5, 35u);
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 3u; cpu.ds = 0u; cpu.edi = 0x280u;
+    if (!dispatch(&session, 0x25u, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 15u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF || ram[0x280u] != 0xa5u ||
+        ram[0x2a2u] != 0xa5u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 15;
+    }
+    memset(ram + 0x340u, 0xa5, 71u);
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.es = 0u; cpu.ebp = 0x340u;
+    if (!dispatch(&session, 0x46u, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != (1u << 5) ||
+        result.cpu_delta.gpr16_values[5] != 0x363u || result.eflags_write_mask != 0u ||
+        ram[0x340u] != 2u || ram[0x341u] != 2u ||
+        ram[0x35bu] != 0xffu || ram[0x35cu] != 0xffu ||
+        ram[0x35du] != 0xffu || ram[0x35eu] != 0xffu || ram[0x363u] != 0xa5u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 16;
+    }
     memset(ram + 0x120u, 0xa5, 71u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0u; cpu.esi = 0x120u; cpu.eax = 2u;
@@ -273,6 +311,7 @@ int main(void)
     bx_ntvdm_host_namespace_v1 host;
     wchar_t original[MAX_PATH];
     DWORD original_bytes, type;
+    int exercise_result;
     profile_initialize(&profile);
     type = GetDriveTypeW(L"C:\\");
     original_bytes = GetCurrentDirectoryW(MAX_PATH, original);
@@ -282,13 +321,15 @@ int main(void)
     if (!bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(1) << 2u, drive_types,
             0u, 0u, &drives) || !bx_ntvdm_host_volume_snapshot_v1_capture(&drives, &volumes) ||
         !bx_ntvdm_host_namespace_v1_initialize(&host, &drives)) return 2;
-    if (exercise(BX_NTVDM_MUTATION_MODE_V1_DIRECT, &drives, &volumes, &host, &ntdos,
-            &command, &target, &profile) != 0 || !SetCurrentDirectoryW(original) ||
-        exercise(BX_NTVDM_MUTATION_MODE_V1_READONLY, &drives, &volumes, &host, &ntdos,
-            &command, &target, &profile) != 0) {
+    exercise_result = exercise(BX_NTVDM_MUTATION_MODE_V1_DIRECT, &drives, &volumes, &host,
+        &ntdos, &command, &target, &profile);
+    if (exercise_result == 0 && !SetCurrentDirectoryW(original)) exercise_result = 17;
+    if (exercise_result == 0) exercise_result = exercise(BX_NTVDM_MUTATION_MODE_V1_READONLY,
+        &drives, &volumes, &host, &ntdos, &command, &target, &profile);
+    if (exercise_result != 0) {
         SetCurrentDirectoryW(original);
         bx_ntvdm_host_namespace_v1_release(&host);
-        return 3;
+        return exercise_result;
     }
     bx_ntvdm_host_namespace_v1_release(&host);
     return 0;
