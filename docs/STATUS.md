@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S28.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S29.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S28 -- native segment-fault diagnostic closure.**
+**Active: M0 T225 S29 -- native first-fault source/layout attribution.**
 
 ## Active Packet
 
@@ -14,22 +14,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S28, Ordinary Mode. |
-| Admission And Approval | S27 P4/P5 prove that the real source-built path must precede parent-return evidence and then observed a repeat native segment-limit failure. The owner has granted standing approval for evidence-backed, bounded Bochs mechanical diagnostic/fix exceptions, with prior register entry. |
-| Objective | Establish one default-off, selector-blind, first-failure diagnostic boundary for the native segment-limit failure: record its typed CPU exception fact and stop through existing finite mechanics, then reproduce the immutable primary Direct/Readonly run once each to identify the next native owner without interpreting BOP or guest services. |
-| Non-goals | No BOP/provider/COMMAND/DEM implementation; no guest memory inspection or mutation; no guest-image, descriptor, BIOS, PIC, FPU, timer or host-capability repair; no feature enablement; no mutation-policy change; no claim that parent return is reached. |
-| Reference Baseline | S27 P1--P5, especially the native prerequisite map and bounded Direct attempt; original Bochs `access.cc`, `access32.cc`, and `exception.cc`; current generic-UD and finite-run mechanical bridges; immutable primary guest inputs and formal Ninja graph. |
-| Files And ABI Surface | One source/ABI/failure map; the exception register; only a default-off fixed-width bx-core-to-bx-mantle diagnostic event/outcome if direct reuse of the existing #UD-only bridge cannot express a non-UD fault; finite-run/fixture evidence, Status and no adapter provider surface. |
-| Applicable Rules | rules/EXECUTION.md, source policy, source-recovery audit criterion, design authorities, source-first coding rules, Bochs deny-by-default, and the T225 prohibition on trace-led singleton repair. |
-| Verification | Prove disabled path preserves the original exception flow; prove a test-owned non-UD fault records exactly one copied event and takes controlled stop; rebuild the formal MSVC x64 `/MT` CPU5 graph; then perform one immutable primary Direct and one Readonly observation with a finite diagnostic stop. Compare typed first-fault facts only. |
-| Expected Markers | Fixed-width first-fault record with vector/error, pre-delivery CPU register/selector state and fault RIP; no selector/service/OpenNT/DOS vocabulary in bx-core; native termination classified as accepted diagnostic stop rather than watchdog or ordinary completion. |
-| Asset Needs | Pinned adopted Bochs source, existing mantle finite-run and generic-UD mechanics, S27 primary profile inputs, formal module manifest, and retained S27 evidence hashes. |
-| Reporting Requirements | Cite original access/exception behavior; rejected direct-reuse alternatives; exact register entry; default-off/negative behavior; Direct/Readonly first-fault comparison; and the selected next owner only if evidence distinguishes it. |
-| Stop Conditions | Any need to decode BOP/service meaning, inspect/copy guest memory, change guest execution state beyond existing controlled-stop mechanics, widen into a machine/device fix, or add an unregistered Bochs intrusion. Record the result and return to owner-package planning. |
-| Exit Criteria | Source/ABI/failure map, pre-registered implementation if needed, focused disabled/first-fault tests, formal full-closure build, one bounded Direct and Readonly primary observation, and an evidence record that either identifies a next owner or explicitly preserves ambiguity. |
+| Identifier Mode | M0 T225 S29, Ordinary Mode. |
+| Admission And Approval | S28's verified default-off first-fault result records identical immutable Direct/Readonly `#GP(13)` state at `0C41:2357`; the owner requires source-first, non-trace-led recovery and has granted standing approval for bounded diagnostic work. |
+| Objective | Attribute the observed typed first failure using only source-built image/layout, original OpenNT control-flow evidence and adopted Bochs segment-access source. Determine the smallest next owner class, or explicitly preserve ambiguity. |
+| Non-goals | No BOP/provider implementation; no machine, guest, descriptor, BIOS, PIC, FPU, timer or host-capability fix; no new Bochs intrusion; no additional runtime trace unless static evidence proves it is the smallest differentiator. |
+| Reference Baseline | S27 P5, S28 map/fixture/native result, immutable S10 profile images, current startup-plan staging (`0x0700..0x8AFF`), adopted Bochs `access32.cc`/`exception.cc`, original OpenNT NTIO/NTDOS source. |
+| Files And ABI Surface | One source/layout/owner map and Status/history/evidence only unless a separately admitted differentiating observation becomes necessary. No runtime ABI or source implementation change is admitted. |
+| Applicable Rules | rules/EXECUTION.md, source policy, source-recovery audit criterion, design authorities, Bochs deny-by-default, and T225's prohibition on trace-led singleton repair. |
+| Verification | Recompute `0C41:2357 -> 0xE767`; verify immutable image hashes and staged intervals; map reached source/control-flow and the exact Bochs access fault path; compare all viable owner hypotheses against the typed Direct/Readonly invariant. |
+| Expected Markers | A reviewed table distinguishing NTIO/NTDOS/COMMAND/other staged ranges, the source/control-flow candidate, segment register/access fact, and either one justified next owner or a precise unresolved boundary. |
+| Asset Needs | S10 immutable primary root, source-built manifests, current staging source, OpenNT source tree, adopted Bochs source, S28 evidence. |
+| Reporting Requirements | Cite source paths and image identity; show address arithmetic and range membership; state rejected hypotheses; distinguish source evidence from inference; retain any unresolved condition without a repair claim. |
+| Stop Conditions | Any need to inspect/mutate a live guest, add a trace field, alter a descriptor, change Bochs mechanics, or implement a BOP/provider. Stop and re-admit only the smallest evidenced next action. |
+| Exit Criteria | A source/layout attribution record covers the observed first fault, validates its inputs, names one next owner or preserves the remaining ambiguity, and leaves no unrecorded implementation change. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | Non-UD exception vectors, original exception delivery, segment-check failures, first-fault versus repeat logging, finite controlled stop versus watchdog, Direct/Readonly profile neutrality, and no #UD/BOP bridge conflation. |
-
+| Similar-Issue Sweep | Startup image placement, real-mode/protected-mode transition, source-built guest segment assumptions, Bochs 32-bit segment checks, exception delivery, and profile neutrality. |
 > **T225 S25 closure:** [the closure record](history/m0-t225-s25-closure-20260817.md) completes the one-surface startup-machine package and its whole-family/native evidence. It transfers only the source/current route reconciliation for guest multi-program execution.
 > **T225 S26 P1 current-route reconciliation:** [the map](etc/research/t225-s26-guest-exec-current-route-reconciliation-001.md) confirms DEM file/lifecycle and startup-machine prerequisites are package-closed; it identifies complete COMMAND parent-return lifecycle recovery as the only next owner package, without a trace-led BOP repair.
 > **T225 S26 closure:** [the closure record](history/m0-t225-s26-closure-20260817.md) completes the original NTDOS source/current-route reconciliation and admits only S27's complete COMMAND parent-return package. It does not claim a guest child can yet execute or return.
@@ -37,6 +36,7 @@
 > **T225 S27 P2 focused parent-return result:** [the result](etc/evidence/t225-s27-command-parent-return-focused-result-001.md) formal-builds the 54:0B no-next/re-entry record query and proves its narrow failure rules. Composition/engine terminal distinction, Direct/Readonly parity and native observation remain open.
 > **T225 S27 P3 composition-family result:** [the result](etc/evidence/t225-s27-command-parent-return-composition-family-result-001.md) proves actual bound 54:0B exhaustion/re-entry/repeat and separate 54:00 origins in Direct and Readonly. **P4** [maps the native gate prerequisite](etc/research/t225-s27-native-parent-return-gate-prerequisite-map-001.md): it requires a real source-built NTIO-to-NTDOS-to-COMMAND-to-child return, not an injected BOP or fake runtime. S27 remains active pending that separately admitted guest/machine continuity predecessor. **P5** [records the first native attempt](etc/evidence/t225-s27-native-parent-return-attempt-result-001.md): Direct did not return through the internal tick watchdog, so it is a bounded-run owner diagnosis rather than a parent-return result; Readonly was deliberately not duplicated.
 > **T225 S28 P1 source/ABI/failure map:** [the map](etc/research/t225-s28-native-segment-fault-diagnostic-source-abi-map-001.md) rejects reuse of the #UD/BOP bridge and admits only a default-off selector-blind non-UD first-fault observer. **P2** [fixture result](etc/evidence/t225-s28-first-fault-observation-fixture-result-001.md) formal-builds the isolated CPU5 x64 `/MT` closure and proves its one-shot #DE capture/controlled-stop path. **P3** [native result](etc/evidence/t225-s28-native-first-fault-direct-readonly-result-001.md) records byte-identical immutable Direct/Readonly `#GP(13)` facts at `0C41:2357` and a finite first-fault terminal. It explicitly preserves owner ambiguity; no BOP or machine repair is admitted.
+> **T225 S28 closure:** [the closure record](history/m0-t225-s28-closure-20260817.md) completes the default-off mechanical diagnostic and transfers only a source/layout attribution question to S29; it admits no repair.
 > **T225 S24 closure:** [the closure record](history/m0-t225-s24-closure-20260817.md) completes the whole machine/BIOS owner audit and transfers one normalized startup-machine package to S25.
 > **T225 S25 P1 source/ABI/failure map:** [the package map](etc/research/t225-s25-startup-machine-source-abi-failure-map-001.md) fixes all eight retained startup-machine contracts, the shared `02`/`06` transcript boundary, and the one-composition migration rule before implementation.
 > **T225 S25 P2 shared interrupt result:** [the focused result](etc/evidence/t225-s25-startup-machine-interrupt-result-001.md) source-builds and verifies the common source-derived 02h/06h PIC/BDA transcript, including their distinct frame behavior. Whole-family regression and native validation remain pending.
