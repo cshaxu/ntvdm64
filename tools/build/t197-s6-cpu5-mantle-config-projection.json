@@ -21,7 +21,14 @@
       "classification": "MSVC x64 host pointer width; guest CPU level remains independently CPU5"
     }
   ],
-  "additions": [],
+  "additions": [
+    {
+      "name": "BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE",
+      "expectedSource": "<absent>",
+      "newValue": "1",
+      "classification": "BX-MANTLE-067 existing registered selector-blind core-to-mantle bridge; formal Ninja graph must compile the same gate as its prior CPU5 witnesses"
+    }
+  ],
   "derivedAssertions": [
     {
       "name": "BX_SUPPORT_APIC",
