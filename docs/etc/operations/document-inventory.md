@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1750 |
+| Documentation records | 1752 |
 | --- | --- |
-| Generated UTC | 2026-08-17T21:17:27Z |
+| Generated UTC | 2026-08-17T21:44:07Z |
 
 ## Entries
 
@@ -108,6 +108,7 @@ content-divergent entries.
 | etc/evidence/t225-s27-command-parent-return-composition-family-result-001.md | indexed supporting material | 8b123890fe810a614256ee44b012cd9002b6c3c371bfe0c52621c37cb6fc0878 |
 | etc/evidence/t225-s27-command-parent-return-focused-result-001.md | indexed supporting material | 6ba2a9b05a262a00ebb83111e426c3af8355a97da8509101afec2f6db78d0bf7 |
 | etc/evidence/t225-s27-native-parent-return-attempt-result-001.md | indexed supporting material | db3d12cbfca08e67522c1c485f1c9b8044ca6840a611c2e3b79abebc6f2e7884 |
+| etc/evidence/t225-s28-first-fault-observation-fixture-result-001.md | indexed supporting material | 5bcbe3e6f6f6b75b1fcb3356789cac55ca58276388239c39002e27377a677e86 |
 | etc/evidence/t225-s6-reference-guest-input-admission-001.md | indexed supporting material | b5932c62e4917b60205caced3f2dfa78ef9ed782f338e6cfc29d890f1c9bf891 |
 | etc/evidence/t225-s8-archived-nosrvbld-extractor-rejection-001.md | indexed supporting material | 99112829a78552229e2fe7904acbb8c65aaa2893b59f63ec2cac894d186f99c3 |
 | etc/evidence/t225-s8-dosbox-completion-runner-001.md | indexed supporting material | 6966863f9b3990c98df4eaa44faa134124ef610558a5f2566f620e834c65aabd |
@@ -161,7 +162,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | bcb11d9a226d95b0da5f282c4b994fb103152c115d7328218e87712a5a831a4d |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | f4d4fe6128fd42597a29d6e1ef26e6d859ce5e84350c346ac8ef1d751e8dbc5e |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -946,6 +947,7 @@ content-divergent entries.
 | etc/research/t225-s26-guest-exec-current-route-reconciliation-001.md | indexed supporting material | dfcc66fe89af758a288af78b171bbd530ae061583056e0fc046c82b65f49f527 |
 | etc/research/t225-s27-command-parent-return-source-abi-failure-map-001.md | indexed supporting material | 88d5668f7e8563967e35d1be81e6ce5f95456b39c43140f81fa4088bc69f57a1 |
 | etc/research/t225-s27-native-parent-return-gate-prerequisite-map-001.md | indexed supporting material | 84322260e760785c2e9c5d98681449bdfc556d628992ed318499fa48fae5f3c3 |
+| etc/research/t225-s28-native-segment-fault-diagnostic-source-abi-map-001.md | indexed supporting material | 5e133c73beb1434fdcde44be2db94836188e156250cfe96e33a907ce04a19726 |
 | etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 11b658c92de1e09bdaac0f77f2424ecffde4532350ae07308e971eeed90b02e7 |
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
@@ -1764,7 +1766,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | fd10421e3534fae0ea4acbd3f3b829771af453523e7fd6d94f884d4d88438d43 |
+| STATUS.md | principal control document | 636f3c3bea521884e2c09e07271f0bebf8059b336ac3341042f0725a1bb548e2 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

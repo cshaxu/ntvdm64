@@ -157,7 +157,9 @@
         "src/bx-mantle/bx_ntvdm_engine_contract_v1.c",
         "src/bx-mantle/bx_ntvdm_engine_run_v1.c",
         "src/bx-mantle/bx_ntvdm_extended_memory_v1.cc",
+        "src/bx-mantle/bx_ntvdm_finite_run.cc",
         "src/bx-mantle/bx_ntvdm_generic_ud_bridge.cc",
+        "src/bx-mantle/bx_ntvdm_first_fault_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
         "src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc",
         "src/bx-mantle/bx_ntvdm_port_action_v1.cc",
@@ -415,6 +417,12 @@
         "ntdll.lib",
         "user32.lib"
       ]
+    },
+    {
+      "name": "t225-s28-first-fault-observation-fixture",
+      "source": "tests/bx-mantle/t225_s28_first_fault_observation_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle"],
+      "platformLibraries": []
     },
     {
       "name": "t225-s15-generic-ud-observation-fixture",

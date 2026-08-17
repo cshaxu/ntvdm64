@@ -29,8 +29,16 @@
 #define BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE 0
 #endif
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+#define BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER 0
+#endif
+
 #if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
 #include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#endif
+
+#if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+#include "bx-mantle/bx_ntvdm_first_fault_observation_v1.h"
 #endif
 
 
@@ -837,8 +845,42 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
   bx_ntvdm_generic_ud_event_v1 mantle_event;
   bx_ntvdm_generic_ud_outcome_v1 mantle_outcome;
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+  bx_ntvdm_first_fault_observation_v1 first_fault_event;
+#endif
 
   BX_INSTR_EXCEPTION(BX_CPU_ID, vector, error_code);
+
+#if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+  if (vector != BX_UD_EXCEPTION) {
+    memset(&first_fault_event, 0, sizeof(first_fault_event));
+    first_fault_event.magic = BX_NTVDM_FIRST_FAULT_OBSERVATION_V1_MAGIC;
+    first_fault_event.abi_version = BX_NTVDM_FIRST_FAULT_OBSERVATION_V1_VERSION;
+    first_fault_event.struct_bytes = sizeof(first_fault_event);
+    first_fault_event.cpu_id = BX_CPU_ID;
+    first_fault_event.vector = vector;
+    first_fault_event.error_code = error_code;
+    first_fault_event.execution_mode = real_mode() ? 1u : (v8086_mode() ? 3u : 2u);
+    first_fault_event.fault_rip = BX_CPU_THIS_PTR prev_rip;
+    first_fault_event.eax = EAX; first_fault_event.ebx = EBX;
+    first_fault_event.ecx = ECX; first_fault_event.edx = EDX;
+    first_fault_event.esi = ESI; first_fault_event.edi = EDI;
+    first_fault_event.ebp = EBP; first_fault_event.esp = ESP;
+    first_fault_event.eip = (Bit32u) BX_CPU_THIS_PTR prev_rip;
+    first_fault_event.eflags = read_eflags();
+    first_fault_event.cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value;
+    first_fault_event.ds = BX_CPU_THIS_PTR sregs[BX_SEG_REG_DS].selector.value;
+    first_fault_event.es = BX_CPU_THIS_PTR sregs[BX_SEG_REG_ES].selector.value;
+    first_fault_event.ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value;
+    first_fault_event.fs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_FS].selector.value;
+    first_fault_event.gs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_GS].selector.value;
+    if (bx_ntvdm_mantle_first_fault_observation_v1(&first_fault_event)) {
+      bx_pc_system.kill_bochs_request = 1;
+      BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
+      longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
+    }
+  }
+#endif
 
 #if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
   if (vector == BX_UD_EXCEPTION) {

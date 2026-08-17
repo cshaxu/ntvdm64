@@ -10,6 +10,7 @@
 #include "bx-mantle/pc_system.h"
 #include "bx_ntvdm_finite_run.h"
 #include "bx_ntvdm_generic_ud_bridge.h"
+#include "bx_ntvdm_first_fault_observation_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
 
 struct bx_ntvdm_finite_run_stop_state {
@@ -147,6 +148,7 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   }
 
   bx_ntvdm_mantle_generic_ud_fixture_stop(request->stop_on_ud_fixture);
+  bx_ntvdm_mantle_first_fault_observation_fixture_stop(request->stop_on_first_fault_fixture);
   bx_ntvdm_mantle_generic_ud_stop_observation_reset();
   bx_cpu.cpu_loop();
   if (request->capture_terminal_snapshot) {
@@ -164,6 +166,7 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     terminal_snapshot.valid = 1;
   }
   bx_ntvdm_mantle_generic_ud_fixture_stop(0);
+  bx_ntvdm_mantle_first_fault_observation_fixture_stop(0);
   /* A bridge STOP may return before the finite watchdog fires.  The native
    * timer contract requires explicit deactivation before unregistration. */
   bx_pc_system.deactivate_timer((unsigned) stop_timer);
@@ -173,6 +176,9 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   }
   if (bx_ntvdm_mantle_generic_ud_stop_observed()) {
     return BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP;
+  }
+  if (bx_ntvdm_mantle_first_fault_observation_observed()) {
+    return BX_NTVDM_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP;
   }
   return stop_state.fired ? BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET :
     BX_NTVDM_FINITE_RUN_UNEXPECTED_LOOP_RETURN;

@@ -33,6 +33,12 @@
       "expectedSource": "<absent>",
       "newValue": "1",
       "classification": "BX-MANTLE-067 documented external adapter composition: retain mantle stop-observation helpers while compiling out only mantle's fixture-default bridge definition"
+    },
+    {
+      "name": "BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER",
+      "expectedSource": "<absent>",
+      "newValue": "1",
+      "classification": "BX-TRACE-084 default-off runtime observer compiled into the formal graph; only a fixture can arm it"
     }
   ],
   "derivedAssertions": [

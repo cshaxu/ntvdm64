@@ -17,10 +17,11 @@ enum bx_ntvdm_finite_run_status {
   BX_NTVDM_FINITE_RUN_MACHINE_ERROR,
   BX_NTVDM_FINITE_RUN_UNEXPECTED_LOOP_RETURN,
   BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP,
+  BX_NTVDM_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP,
   BX_NTVDM_FINITE_RUN_ENTRY_BYTES_MISMATCH
 };
 
-#define BX_NTVDM_FINITE_RUN_REQUEST_VERSION 2
+#define BX_NTVDM_FINITE_RUN_REQUEST_VERSION 3
 #define BX_NTVDM_FINITE_RUN_MAX_ENTRY_BYTES 65536
 #define BX_NTVDM_FINITE_RUN_TERMINAL_SNAPSHOT_MAX_BYTES 64
 
@@ -43,6 +44,7 @@ struct bx_ntvdm_finite_run_request {
   Bit64u instruction_tick_budget;
   Bit32u ips;
   bx_bool stop_on_ud_fixture;
+  bx_bool stop_on_first_fault_fixture;
   /* Optional fixed copied ordinary-RAM action executed before any preserved
    * range is captured or entry bytes are placed.  Its content remains opaque
    * to this private mantle request. */
