@@ -281,6 +281,11 @@ int bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
             profile);
 }
 
+int bx_ntvdm_boot_namespace_composition_v1_admit_command_cli_streams(
+    bx_ntvdm_boot_namespace_composition_v1 *value)
+{ return value != 0 && valid(value) &&
+    bx_ntvdm_command_package_session_v1_admit_cli_streams(&value->command); }
+
 int bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_command_host_context_v1 *context)

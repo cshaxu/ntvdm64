@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1661 |
+| Documentation records | 1662 |
 | --- | --- |
-| Generated UTC | 2026-08-17T01:06:13Z |
+| Generated UTC | 2026-08-17T01:18:56Z |
 
 ## Entries
 
@@ -876,7 +876,8 @@ content-divergent entries.
 | etc/research/t223-s2-command-current-directory-abi-repair-001.md | indexed supporting material | ef5045149652236bb428debf1f8a3733fd0e1d14fcd81e302b0105de4717592b |
 | etc/research/t223-s2-command-profile-session-regression-001.md | indexed supporting material | c480044305b47496d4f13e1f47b371391e4483b1d3d2a3165a7e29753d1c2a91 |
 | etc/research/t223-s2-command-session-broker-routing-001.md | indexed supporting material | 63a4c35cb0cd05af041d9ea3f532280de754adcc26f8306ff8ac64477104a5de |
-| etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md | indexed supporting material | ba8c60fb1fe1e92ffa007990165ea54743df4004fad56daaf1096d34daa7115c |
+| etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md | indexed supporting material | c38c81262a0ca35061d4fb4e2bb77451ac7a6a0e9124875174e3bc79a8e1a13f |
+| etc/research/t224-s2-command-stream-session-provider-001.md | indexed supporting material | 431ad1731ab2ec689469d03deaada49b8d593d5f53d63863462917299b578217 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | 55430d57246660e10fc32c95b843f83d84939f5b50f4a55240a08e41ca9bd6fb |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -1675,7 +1676,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 33bf21fb78fa79a677fc88e5c1bedd4267c929827135a120023edef94f258576 |
+| STATUS.md | principal control document | 8df3771630f65dd96098763fc82bc1a0248fd5f9a817fea7e354a1adec33b13b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 45b2d93104e42e2e9fd0f3a2dcee194c7f269c820a0e3cc64d59372a9c7fe984 |

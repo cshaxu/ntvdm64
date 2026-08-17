@@ -12,7 +12,7 @@ int bx_ntvdm_command_launch_execution_provider_v1_valid(
         value->abi_version == BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_VERSION &&
         value->struct_bytes == sizeof(*value) && value->initialized == 1u &&
         bx_ntvdm_command_execution_lifecycle_v1_valid(&value->execution) &&
-        bx_ntvdm_command_stream_child_v1_valid(&value->stream_child);
+        bx_ntvdm_command_stream_session_v1_valid(&value->stream_session);
 }
 int bx_ntvdm_command_launch_execution_provider_v1_initialize(
     bx_ntvdm_command_launch_execution_provider_v1 *value)
@@ -23,9 +23,18 @@ int bx_ntvdm_command_launch_execution_provider_v1_initialize(
     value->abi_version = BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_VERSION;
     value->struct_bytes = (uint32_t)sizeof(*value);
     bx_ntvdm_command_execution_lifecycle_v1_initialize(&value->execution);
-    bx_ntvdm_command_stream_child_v1_initialize(&value->stream_child);
+    bx_ntvdm_command_stream_session_v1_initialize(&value->stream_session);
     value->initialized = 1u;
     return bx_ntvdm_command_launch_execution_provider_v1_valid(value);
+}
+
+int bx_ntvdm_command_launch_execution_provider_v1_admit_cli_streams(
+    bx_ntvdm_command_launch_execution_provider_v1 *value,
+    const bx_ntvdm_command_profile_consumer_v1 *profile)
+{
+    return bx_ntvdm_command_launch_execution_provider_v1_direct_allowed(value,
+        profile) && bx_ntvdm_command_stream_session_v1_admit_cli_standard_handles(
+            &value->stream_session);
 }
 
 int bx_ntvdm_command_launch_execution_provider_v1_direct_allowed(

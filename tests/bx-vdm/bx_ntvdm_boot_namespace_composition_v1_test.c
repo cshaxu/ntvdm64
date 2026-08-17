@@ -392,6 +392,8 @@ int main(void)
             &composition, &direct_profile) ||
         !bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
             &composition, &direct_profile) ||
+        !bx_ntvdm_boot_namespace_composition_v1_admit_command_cli_streams(
+            &composition) ||
         !bx_ntvdm_command_host_context_v1_initialize(&command_context, 2u,
             (const uint8_t *)"C:\\NTDOS64", 10u) ||
         !bx_ntvdm_command_host_context_v1_set_environment(&command_context,
@@ -454,7 +456,7 @@ int main(void)
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_values[0] != 0xa532u ||
-        composition.command.launch_execution_provider.stream_child.validated_record_count != 1u) return 250;
+        composition.command.launch_execution_provider.stream_session.validated_record_count != 1u) return 250;
     memcpy(ram + 0x360u, "cmd.exe /c exit 7\r", 18u);
     event_initialize(&event, 0x54u, 0x08u);
     event.ss = 0u; event.ebp = 0x340u; event.ds = 0u; event.esi = 0x360u;
@@ -462,9 +464,9 @@ int main(void)
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
         outcome.gpr16_values[0] != 0xa507u ||
-        composition.command.launch_execution_provider.stream_child.launch_count != 1u ||
-        composition.command.launch_execution_provider.stream_child.completion_count != 1u ||
-        composition.command.launch_execution_provider.stream_child.last_result != 7u) return 251;
+        composition.command.launch_execution_provider.stream_session.launch_count != 1u ||
+        composition.command.launch_execution_provider.stream_session.completion_count != 1u ||
+        composition.command.launch_execution_provider.stream_session.last_result != 7u) return 251;
     /* The COMMAND package, rather than a trace observation, defines every
        callable outcome.  Selected positive services are exercised below;
        this sweep proves the no-op, common unavailable route, and all five

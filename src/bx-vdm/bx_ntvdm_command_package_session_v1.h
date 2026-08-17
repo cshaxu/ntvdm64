@@ -14,7 +14,7 @@
 #include "bx_ntvdm_command_console_keyboard_provider_v1.h"
 #include "bx_ntvdm_command_boot_input_v1.h"
 #include "bx_ntvdm_command_execution_lifecycle_v1.h"
-#include "bx_ntvdm_command_stream_child_v1.h"
+#include "bx_ntvdm_command_stream_session_v1.h"
 #include "bx_ntvdm_command_launch_execution_provider_v1.h"
 #include "bx_ntvdm_command_lifecycle_provider_v1.h"
 
@@ -52,6 +52,9 @@ int bx_ntvdm_command_package_session_v1_set_launch_plan(
 int bx_ntvdm_command_package_session_v1_set_mutation_profile(
     bx_ntvdm_command_package_session_v1 *session,
     const bx_ntvdm_mutation_profile_v1 *profile);
+/* The caller is the CLI composition after the session profile is bound. */
+int bx_ntvdm_command_package_session_v1_admit_cli_streams(
+    bx_ntvdm_command_package_session_v1 *session);
 int bx_ntvdm_command_package_session_v1_set_host_context(
     bx_ntvdm_command_package_session_v1 *session,
     const bx_ntvdm_command_host_context_v1 *context);

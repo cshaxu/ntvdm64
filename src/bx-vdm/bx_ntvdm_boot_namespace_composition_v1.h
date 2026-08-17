@@ -58,6 +58,9 @@ int bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
 int bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_mutation_profile_v1 *profile);
+/* Explicit post-profile CLI admission; it is not part of provider init. */
+int bx_ntvdm_boot_namespace_composition_v1_admit_command_cli_streams(
+    bx_ntvdm_boot_namespace_composition_v1 *value);
 int bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
     bx_ntvdm_boot_namespace_composition_v1 *value,
     const bx_ntvdm_command_host_context_v1 *context);

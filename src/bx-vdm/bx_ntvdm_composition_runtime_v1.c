@@ -178,6 +178,11 @@ static int install(const wchar_t *profile, const wchar_t *root,
     failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_PROFILE;
     if (!bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(&runtime.composition, &runtime.mutation_profile))
         goto reject;
+    /* The profile is now fixed.  Capture CLI standard streams once through
+       COMMAND's shared session; provider initialization remains host-neutral. */
+    if (!bx_ntvdm_boot_namespace_composition_v1_admit_command_cli_streams(
+            &runtime.composition))
+        goto reject;
     failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_CONTEXT_CAPTURE;
     if (!capture_command_host_context(&runtime.command_host_context, selection.command_placement.drive_index))
         goto reject;

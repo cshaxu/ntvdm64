@@ -33,7 +33,12 @@
 | Exit Criteria | One shared provider owns stream admission, opaque token lifecycle and `54:06`; Direct/Readonly source-shaped terminals and negative token tests pass; existing ambient initialization path is removed or explicitly quarantined; child/pipe identities remain unchanged and deferred. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | Current stream-child initialization, opaque token generation, mutation profile host-global authorization, `STD_HANDLES` ordering, launch path consumers, DEM pipe terminals, stale session teardown, and test/probe source closure. |
-> **T224 S1 P1 closure:** the complete standard-handle/redirection owner map covers COMMAND 54:06/07/08/0A, DEM 50:47/48, and the necessary bootstrap/cleanup lifecycle. It rejects direct historical composition for named CCPU/SAS, 32-bit pointer, SoftPC and legacy-thread dependencies, and partitions future work by complete providers; see the [source/ABI/failure map](etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md).
+> **T224 S1 P1 closure:** the complete standard-handle/redirection owner map covers COMMAND 54:06/07/08/0A, DEM 50:47/48, and the necessary bootstrap/cleanup lifecycle. It rejects direct historical composition for named CCPU/SAS, 32-bit pointer, SoftPC and legacy-thread dependencies, and partitions future work by complete providers; see the [source/ABI/failure map](etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md).> **T224 S2 closure:** COMMAND now owns one host-neutral stream session.
+> Direct CLI composition explicitly admits its private standard-handle snapshot;
+> `54:06` publishes only generation-scoped opaque tokens, while Readonly
+> refuses without capture. The focused x64 `/MT` evidence includes stale-token
+> rejection and no raw-handle result; `54:08/0A` and DEM `50:47/48` remain
+> deferred. See the [S2 record](etc/research/t224-s2-command-stream-session-provider-001.md).
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector

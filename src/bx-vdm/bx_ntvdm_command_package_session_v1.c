@@ -27,10 +27,10 @@ static int validate_exec_streams(bx_ntvdm_command_package_session_v1 *s,
   if(!s||!c||!w||!direct||w->bytes[3]!=8u)return 0;
   address=((uint64_t)c->ss<<4u)+(c->ebp&0xffffu);
   if(address>UINT64_C(0x100000)-sizeof(payload)||!read_one(s,address,sizeof(payload),payload)) {
-    if(s->launch_execution_provider.stream_child.rejected_record_count!=UINT32_MAX)++s->launch_execution_provider.stream_child.rejected_record_count;
+    if(s->launch_execution_provider.stream_session.rejected_record_count!=UINT32_MAX)++s->launch_execution_provider.stream_session.rejected_record_count;
     return 0;
   }
-  return bx_ntvdm_command_stream_child_v1_validate_std_handles(&s->launch_execution_provider.stream_child,payload,sizeof(payload)); }
+  return bx_ntvdm_command_stream_session_v1_validate_std_handles(&s->launch_execution_provider.stream_session,payload,sizeof(payload)); }
 static int read_exec_tail(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_cpu_state_v1 *c,uint8_t payload[125],uint32_t *bytes)
 { uint64_t address;uint32_t i;
   if(!s||!c||!payload||!bytes)return 0;address=((uint64_t)c->ds<<4u)+(c->esi&0xffffu);
@@ -46,7 +46,7 @@ static int dispatch_child(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_
   if(!s||!e||!c||!w||!r||!direct||!s->has_host_context||w->bytes[3]!=8u)return 0;
   if(!validate_exec_streams(s,c,w,direct)||!read_exec_tail(s,c,command,&command_bytes))return 0;
   if(!read_exec_environment(s,c,environment,&environment_bytes))return 0;
-  return bx_ntvdm_command_stream_child_v1_launch(&s->launch_execution_provider.stream_child,command,command_bytes,environment,environment_bytes,&s->host_context,e,c,w,r); }
+  return bx_ntvdm_command_stream_session_v1_launch(&s->launch_execution_provider.stream_session,command,command_bytes,environment,environment_bytes,&s->host_context,e,c,w,r); }
 int bx_ntvdm_command_package_session_v1_valid(const bx_ntvdm_command_package_session_v1 *s)
 { return s&&s->magic==BX_NTVDM_COMMAND_PACKAGE_SESSION_V1_MAGIC&&s->abi_version==BX_NTVDM_COMMAND_PACKAGE_SESSION_V1_VERSION&&s->struct_bytes==sizeof(*s)&&s->initialized==1u&&s->namespace_plane&&s->gset&&s->has_mutation_profile<=1u&&s->has_host_context<=1u&&s->has_session_host_context<=1u&&bx_ntvdm_command_bootstrap_provider_v1_valid(&s->bootstrap_provider)&&bx_ntvdm_command_launch_execution_provider_v1_valid(&s->launch_execution_provider)&&bx_ntvdm_command_console_keyboard_provider_v1_valid(&s->console_keyboard_provider)&&bx_ntvdm_command_lifecycle_provider_v1_valid(&s->lifecycle_provider)&&(!s->has_mutation_profile||bx_ntvdm_command_profile_consumer_v1_valid(&s->mutation_profile))&&(!s->has_host_context||bx_ntvdm_command_host_context_v1_valid(&s->host_context))&&(!s->has_session_host_context||bx_ntvdm_session_host_context_v1_valid(s->session_host_context)); }
 int bx_ntvdm_command_package_session_v1_initialize(bx_ntvdm_command_package_session_v1 *s,bx_ntvdm_boot_namespace_plane_v1 *n,bx_ntvdm_dem_gset_plane_v1 *g)
@@ -55,6 +55,11 @@ int bx_ntvdm_command_package_session_v1_set_launch_plan(bx_ntvdm_command_package
 { wchar_t encoded[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];byob_launch_plan_v2 checked;if(!bx_ntvdm_command_package_session_v1_valid(s)||!p||!byob_launch_plan_v2_to_environment(p,encoded)||!byob_launch_plan_v2_from_environment(&checked,encoded))return 0;s->launch_plan=checked;s->has_launch_plan=1u;return 1; }
 int bx_ntvdm_command_package_session_v1_set_mutation_profile(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_mutation_profile_v1 *p)
 { if(!bx_ntvdm_command_package_session_v1_valid(s)||!p||s->has_mutation_profile||!bx_ntvdm_command_profile_consumer_v1_initialize(&s->mutation_profile,p))return 0;s->has_mutation_profile=1u;return bx_ntvdm_command_package_session_v1_valid(s); }
+int bx_ntvdm_command_package_session_v1_admit_cli_streams(
+    bx_ntvdm_command_package_session_v1 *s)
+{ return bx_ntvdm_command_package_session_v1_valid(s) && s->has_mutation_profile &&
+    bx_ntvdm_command_launch_execution_provider_v1_admit_cli_streams(
+        &s->launch_execution_provider, &s->mutation_profile); }
 int bx_ntvdm_command_package_session_v1_set_host_context(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_command_host_context_v1 *c)
 { if(!bx_ntvdm_command_package_session_v1_valid(s)||!c||s->has_host_context||!bx_ntvdm_command_host_context_v1_valid(c))return 0;s->host_context=*c;s->has_host_context=1u;return bx_ntvdm_command_package_session_v1_valid(s); }
 int bx_ntvdm_command_package_session_v1_set_session_host_context(bx_ntvdm_command_package_session_v1 *s,const bx_ntvdm_session_host_context_v1 *c)
@@ -87,7 +92,7 @@ int bx_ntvdm_command_package_session_v1_dispatch(bx_ntvdm_command_package_sessio
   if(bx_ntvdm_command_console_keyboard_provider_v1_dispatch(&s->console_keyboard_provider,e,c,w,r))return 1;
   if(bx_ntvdm_command_lifecycle_provider_v1_dispatch(&s->lifecycle_provider,&s->bootstrap_provider.get_next,&s->launch_plan,e,c,w,r))return 1;
   policy=s->has_mutation_profile&&bx_ntvdm_command_launch_execution_provider_v1_direct_allowed(&s->launch_execution_provider,&s->mutation_profile);
-  if(bx_ntvdm_command_stream_child_v1_dispatch_stream(&s->launch_execution_provider.stream_child,
+  if(bx_ntvdm_command_stream_session_v1_dispatch_stream(&s->launch_execution_provider.stream_session,
       policy,e,c,w,r))return 1;
   if(dispatch_child(s,e,c,w,policy,r))return 1;
   if(bx_ntvdm_command_execution_lifecycle_v1_dispatch(&s->launch_execution_provider.execution,&s->bootstrap_provider.get_next,&s->launch_plan,e,c,w,r))return 1;

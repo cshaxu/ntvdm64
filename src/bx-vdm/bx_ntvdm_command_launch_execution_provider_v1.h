@@ -5,7 +5,7 @@
  * capability state and execution disposition; callers never select one leaf
  * directly. */
 #include "bx_ntvdm_command_execution_lifecycle_v1.h"
-#include "bx_ntvdm_command_stream_child_v1.h"
+#include "bx_ntvdm_command_stream_session_v1.h"
 #include "bx_ntvdm_command_profile_consumer_v1.h"
 
 #define BX_NTVDM_COMMAND_LAUNCH_EXECUTION_PROVIDER_V1_MAGIC UINT32_C(0x4258434c)
@@ -14,7 +14,7 @@
 typedef struct bx_ntvdm_command_launch_execution_provider_v1 {
     uint32_t magic, abi_version, struct_bytes, initialized;
     bx_ntvdm_command_execution_lifecycle_v1 execution;
-    bx_ntvdm_command_stream_child_v1 stream_child;
+    bx_ntvdm_command_stream_session_v1 stream_session;
 } bx_ntvdm_command_launch_execution_provider_v1;
 
 #ifdef __cplusplus
@@ -24,6 +24,11 @@ int bx_ntvdm_command_launch_execution_provider_v1_initialize(
     bx_ntvdm_command_launch_execution_provider_v1 *value);
 int bx_ntvdm_command_launch_execution_provider_v1_valid(
     const bx_ntvdm_command_launch_execution_provider_v1 *value);
+/* This is the only standard-handle capture seam.  It accepts Direct policy
+ * from the owning COMMAND session, never a BOP leaf. */
+int bx_ntvdm_command_launch_execution_provider_v1_admit_cli_streams(
+    bx_ntvdm_command_launch_execution_provider_v1 *value,
+    const bx_ntvdm_command_profile_consumer_v1 *profile);
 int bx_ntvdm_command_launch_execution_provider_v1_owns_service(uint8_t service);
 /* The component, not its session coordinator, owns the profile decision for
  * stream/child execution. */

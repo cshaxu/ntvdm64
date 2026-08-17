@@ -15,7 +15,7 @@ implementation begins?
 - DOS continuation and DEM endpoints:
   `base/mvdm/dos/v86/doskrnl/dos/handle.asm`,
   `base/mvdm/dos/dem/demdisp.c`, `demhndl.c`, and `inc/dossvc.h`.
-- Current routes: `bx_ntvdm_command_stream_child_v1.*`,
+- Current routes: `bx_ntvdm_command_stream_session_v1.*`,
   `bx_ntvdm_command_execution_lifecycle_v1.c`,
   `bx_ntvdm_command_package_session_v1.c`, and the DEM package session.
 
@@ -23,8 +23,8 @@ implementation begins?
 
 | Identity / dependency | Original owner and caller | Historical copied contract and terminal behavior | Current bound route | Direct / Readonly disposition | Recovery decision |
 | --- | --- | --- | --- | --- | --- |
-| bootstrap redirection snapshot (not a BOP) | `cmdmisc.c:356-358` calls `cmdCheckStandardHandles`; `cmdredir.c:183-223` | Copies stdin/stdout/stderr presence into `CMDINFO.bStdHandles`, stores a 32-bit `pRdrInfo`, and notifies SoftPC redirection state. No redirection stores NULL. | No session-owned source-shaped replacement; `stream_child` captures ambient standard handles during provider initialization. | Direct: later CLI capture capability; Readonly: no host-global stream mutation/capture by default. | Replace the ambient initialization with one CLI-admitted, session-owned stream snapshot before any service binding. |
-| `54:06` `SVC_GETSTDHANDLE` | `cmdredir.c:225-315`; `tcode.asm:1567-1573` | CX selects stdin/out/err; AX:BX carries `pRdrInfo`; returns a 32-bit handle in BX:CX, zero DX:AX size, CF clear. Pipe conversion failure terminates VDM and sets CF. | `command_stream_child` recognizes only this service and returns an adapter opaque token in BX:CX for Direct; unavailable/direct-denied returns CF set and zeroed AX/DX. | Direct: source-derived opaque session token only after selected stream capture; Readonly: explicit refusal, never a host handle. | Migrate current partial shim into the shared stream provider. It must keep guest-visible token/SFT contract separate from host HANDLE storage and retain the source slot/order/failure distinction. |
+| bootstrap redirection snapshot (not a BOP) | `cmdmisc.c:356-358` calls `cmdCheckStandardHandles`; `cmdredir.c:183-223` | Copies stdin/stdout/stderr presence into `CMDINFO.bStdHandles`, stores a 32-bit `pRdrInfo`, and notifies SoftPC redirection state. No redirection stores NULL. | No session-owned source-shaped replacement; the COMMAND stream session is initialized host-neutral; Direct CLI composition later admits its standard-handle snapshot. | Direct: later CLI capture capability; Readonly: no host-global stream mutation/capture by default. | Replace the ambient initialization with one CLI-admitted, session-owned stream snapshot before any service binding. |
+| `54:06` `SVC_GETSTDHANDLE` | `cmdredir.c:225-315`; `tcode.asm:1567-1573` | CX selects stdin/out/err; AX:BX carries `pRdrInfo`; returns a 32-bit handle in BX:CX, zero DX:AX size, CF clear. Pipe conversion failure terminates VDM and sets CF. | `command_stream_session` recognizes only this service and returns an adapter opaque token in BX:CX for Direct; unavailable/direct-denied returns CF set and zeroed AX/DX. | Direct: source-derived opaque session token only after selected stream capture; Readonly: explicit refusal, never a host handle. | Migrate current partial shim into the shared stream provider. It must keep guest-visible token/SFT contract separate from host HANDLE storage and retain the source slot/order/failure distinction. |
 | `54:07` `SVC_CMDCHECKBINARY` | `cmddisp.c`, COMMAND execution caller path | Binary classification is adjacent launch preparation, not standard-handle routing. | Current lifecycle returns the declared DOS-only success branch. | Direct/Readonly: retain current non-host classifier disposition. | Keep outside the stream/pipe implementation package; test it as an adjacent no-cross-fallback regression. |
 | `54:08` `SVC_CMDEXEC` | `cmdexec.c:525-587`; `tcode.asm:1342-1348` | Reads DS:SI command tail, ES environment, SS:BP packed `STD_HANDLES`; malformed tail returns CF clear/AL `ERROR_BAD_FORMAT`; `/c` COMSPEC failure returns CF clear/AL `ERROR_BAD_ENVIRONMENT`; otherwise enters `cmdExec32`. | Current Direct-only path validates a 12-byte adapter token record then uses `CreateProcessW`; absent admission falls through to copied `ERROR_NOT_SUPPORTED` with CF clear. | Direct: later complete child/stream package; Readonly: copied non-launch failure. | Existing child launch is a partial source-derived rehost; migrate only after stream provider and lifecycle are complete. Do not treat a successful host spawn as T224 closure. |
 | `54:0A` `SVC_EXECCOMSPEC32` | `cmdexec.c:491-523`; `tcode.asm:1186-1191` | Reads ES environment and AL drive; absent/oversized COMSPEC gives CF clear/AL `ERROR_BAD_ENVIRONMENT`; otherwise calls `cmdExec32`. | Current execution lifecycle returns copied `ERROR_NOT_SUPPORTED`; it does not share the Direct child route. | Direct/Readonly: explicit unavailable until the same child provider admits COMSPEC launch. | Keep coupled to `54:08` in one child-execution subpackage; no singleton implementation. |
@@ -46,7 +46,7 @@ implementation begins?
    while holding host handles privately behind opaque typed tokens.
 3. **No Bochs intrusion is admissible.** CPU, device, and selector mechanics
    are unrelated to this host-service package.
-4. **Authored behavior is not admitted in S1.** Existing `stream_child` and
+4. **Authored behavior is not admitted in S1.** Existing stream-session and
    execution-lifecycle code are classified as partial source-derived seams;
    they must be retained, migrated, replaced, or deleted by a later complete
    owner-package S—not extended from a trace hit.
