@@ -73,3 +73,33 @@ missing route is repaired only as its complete owner package; a trace marker
 cannot authorize a leaf handler. Overlay and Virtual remain explicitly
 unselected and must fail through their declared package policy rather than
 falling back to Direct.
+
+## P2 Current Composition Reconciliation
+
+The current runtime closes the prior detached-composition gap:
+
+- `bx_ntvdm_composition_runtime_v1` exact-loads NTIO, NTDOS, COMMAND, target
+  and optional terminal image from one validated BYOB selection before guest
+  entry.
+- It captures the selected real host-drive and volume snapshots, binds one
+  DEM mutation-profile consumer and one COMMAND mutation-profile consumer,
+  then installs `bx_ntvdm_boot_namespace_composition_v1` and the native BOP
+  composition in one resettable lifetime.
+- The tracked `t198-s50-bx-vdm-composition-manifest.json` includes the
+  composition runtime, both package sessions and their provider families.
+- T199 S50's source-built x64 `/MT` global BOP package regression proves that
+  every ingress identity has a package-owned success, unavailable, deferred,
+  no-op or terminal disposition. It is routing/disposition closure, not a
+  false claim that every historical host feature succeeds.
+
+For this fixture, the Direct runtime selects actual host roots through the
+CLI drive policy. Readonly uses its explicit namespace/provider policy. The
+composition must reject any absent profile mode rather than silently choosing
+Direct; Overlay and Virtual have no S6 runtime selection.
+
+The remaining S6 implementation question is therefore narrow and testable:
+construct a profile whose declared COMMAND and SHARE inputs use the pinned
+source-built identities, then prove the existing runtime installs it as one
+composition lifetime. The later native run is allowed only after that
+source-built installation regression passes; it must observe, not extend, the
+already package-owned BOP routes.
