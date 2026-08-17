@@ -62,7 +62,14 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
     int accepted = bx_ntvdm_boot_namespace_composition_v1_handle(event, outcome);
     if (!accepted)
         accepted = bx_ntvdm_native_bop_composition_v1_handle(event, outcome);
-    if (accepted) {
+    if (!accepted) {
+        struct bx_ntvdm_generic_ud_outcome_v1 declined = {0};
+        declined.abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+        declined.disposition = BX_NTVDM_GENERIC_UD_PASS_THROUGH;
+        /* Record the bounded C4 C4 fact before preserving the native
+         * exception path. This observer changes neither route nor CPU state. */
+        bx_ntvdm_bop_sequence_observation_v1_consider(event, &declined);
+    } else {
         bx_ntvdm_bop_sequence_observation_v1_consider(event, outcome);
         bx_ntvdm_dem_open_observation_v1_consider(event, outcome, accepted);
         bx_ntvdm_terminal_observation_v1_consider(event, outcome);

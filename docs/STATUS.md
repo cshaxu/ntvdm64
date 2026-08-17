@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S11.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S12.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S11 -- bounded native CLI run-control closure.**
+**Active: M0 T225 S12 -- adapter-owned bounded BOP observation.**
 
 ## Active Packet
 
@@ -14,22 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S11, Ordinary Mode. |
-| Admission And Approval | The owner-approved CLI target and S10/P3 run-control map select this generic control package. S10 closed because it proved the existing fixed CLI surface cannot produce its requested normal observation without a separately admitted change. |
-| Objective | Expose the already-defined engine instruction-tick budget as one validated optional native CLI argument; preserve the default one-million tick behavior and obtain ordinary Direct/Readonly engine terminal results without an external process kill. |
-| Non-goals | No BOP/DEM/COMMAND/DOS provider, adapter route, BOP trace export, guest-byte change, arbitrary guest-memory observation, Bochs CPU/device/firmware change, host-system mutation, Overlay selection, or Virtual selection. |
-| Reference Baseline | T225 S7 formal Ninja graph, S8 primary source-built images, S9 bootstrap map, and S10 P1--P3 bounded observation/run-control records. |
-| Files And ABI Surface | src/cli/ntdos64_native_cli.c, focused CLI/run-control test or probe, Ninja manifest membership only if a new tracked test requires it, governed evidence and Status. Existing engine request/mantle ABI remains unchanged. |
-| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Fresh Ninja/MSVC x64 /MT link; default compatibility; malformed/zero/overflow budget rejection; Direct and Readonly finite-budget terminal output; Overlay refusal; focused source/boundary checks, governance and diff checks. |
-| Expected Markers | Parsed requested budget equals the copied engine request; valid finite runs print a normal engine/lifecycle terminal rather than require a host watchdog; Direct/Readonly results remain separately labeled. |
-| Asset Needs | Current S10 primary stage/profile, formal Ninja manifest/graph, native CLI/engine/machine-stage sources, and existing lifecycle/engine tests. |
-| Reporting Requirements | Record parser grammar/range, default behavior, copied ABI path, source recovery disposition, mode/result/exit code, build identity, and whether any BOP or guest observation was intentionally absent. |
-| Stop Conditions | Any need to change engine/mantle ABI, expose CPU/guest state, alter source-built images, add BOP interpretation, modify bx-core, enable a device, silently select Overlay/Virtual, or substitute an external watchdog for the internal result. Stop and revise rather than patch. |
-| Exit Criteria | Fresh source build accepts an explicit finite budget and returns the normal budget terminal in Direct and Readonly; default remains one million; invalid inputs reject; no prohibited semantic/boundary change occurs. |
-| Original Owner Request | “实施当前规划好的，以最小 bochs 作为 softpc 的替代品，实现一个基于 cli 的 ntvdm……要有全局观，避免添油战术。” |
-| Similar-Issue Sweep | CLI argument parsing, copied engine request validation, lifecycle classification, worker cancellation, machine-stage budget status, Direct/Readonly selection, Overlay/Virtual refusal and fixture-only observation routes. |
+| Identifier Mode | M0 T225 S12, Ordinary Mode. |
+| Admission And Approval | The owner-required BOP inventory/listening direction, T225 goal, S10 continuity evidence, and S11 normal internal run control admit this observation-only package. |
+| Objective | Make the existing bx-vdm bounded BOP sequence observer explicitly selectable from the CLI and report every reached C4 C4 invocation after a normal run, including declined/unconnected invocations, without changing provider behavior. |
+| Non-goals | No BOP/provider implementation, selector-specific behavior, guest-byte change, guest-memory inspection, engine/mantle ABI change, Bochs change, host mutation, Overlay selection, or Virtual selection. |
+| Reference Baseline | T225 S9 bootstrap map, S10 observation/run-control map, S11 internal-budget closure, current bx_ntvdm_bop_sequence_observation_v1 and generic UD bridge. |
+| Files And ABI Surface | src/bx-vdm/bx_ntvdm_bop_sequence_observation_v1.[ch], src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c, src/cli/ntdos64_native_cli.c, focused test/fixture as needed, governed evidence and Status. No bx-core/bx-mantle or engine-contract change. |
+| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md and design authorities. |
+| Verification | Fresh Ninja/MSVC x64 /MT link; default-off check; accepted and declined synthetic adapter cases; Direct/Readonly native budget runs with explicit observation flag; invalid/duplicate flag rejection; Overlay refusal; governance and diff checks. |
+| Expected Markers | Bounded record count/overflow state; CS:EIP, selector/service-shape and result disposition for each C4 C4 event; declined entries carry only PASS_THROUGH and cause no changed CPU result. |
+| Asset Needs | Existing sequence observer/bridge, S10 source-built primary stage, S11 native build procedure and current focused test infrastructure. |
+| Reporting Requirements | Record observer ownership, default-off lifecycle, accepted/declined semantics, no-provider-change proof, Direct/Readonly output, reached/not-reached limitation, and next package boundary. |
+| Stop Conditions | Any need to alter a BOP provider or route, add guest memory reads, classify guest DOS semantics in mantle/core, modify Bochs, expand record beyond its fixed bound, or infer unobserved BOPs. Stop and revise. |
+| Exit Criteria | Explicit CLI observation is default-off without the flag; enabled output captures both accepted and declined C4 C4 events in a focused fixture; Direct/Readonly native output is normal and bounded; all records remain adapter-owned facts only. |
+| Original Owner Request | “找出opennt中所有的BOP的定义，在adapter层面接入bochs……然后监听每个BOP的调用；未实现的BOP再针对性去实现。” |
+| Similar-Issue Sweep | BOP catalogue/ingress, generic UD decline, accepted BOP observation, adapter lifecycle reset, CLI parser/output, Direct/Readonly lifecycle and Overlay/Virtual refusal. |
 
+> **T225 S12 closure:** [the adapter observation result](etc/evidence/t225-s12-adapter-bop-observation-result-001.md) proves the default-off CLI flag copies the bounded bx-vdm BOP sequence after a normal run. The focused declined-bridge fixture records `50:11` as PASS_THROUGH while retaining the original decline and caller outcome. Direct/Readonly primary runs at 1000 and Direct at 10000 ticks report zero reached BOPs and ordinary budget termination. This is observation only; no provider, guest, Bochs or engine/mantle semantic changed.
 > **T225 S10 closure:** the [bounded primary observation](etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md) and [run-control/observation map](etc/research/t225-s10-native-run-control-observation-map-001.md) establish identical early Direct/Readonly reset behavior but no public normal-result or continuity marker before the fixed one-million-tick run returns. Existing UD2 profile observations would alter immutable guest input, and fixture-only BOP observations are not CLI outputs. S10 closes as an evidence gate; S11 owns only the smallest generic CLI run-control seam.
 
 > **T225 S11 closure:** [the run-control result](etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md) proves the optional positive-decimal budget is copied through the existing CLI/engine/mantle contract. Direct and Readonly each return the normal internal budget terminal at 1000 ticks with exit 4; default one-million behavior, invalid-budget rejection and Overlay refusal are verified. No BOP, guest, adapter semantic or Bochs mechanic changed. The next package must separately admit post-run continuity observation.

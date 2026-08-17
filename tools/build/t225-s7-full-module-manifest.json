@@ -357,6 +357,23 @@
         "ntdll.lib",
         "user32.lib"
       ]
+    },
+    {
+      "name": "t225-s12-bop-decline-observation-fixture",
+      "source": "tests/bx-vdm/t225_s12_bop_decline_observation_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
     }
   ],
   "forbiddenInputs": [

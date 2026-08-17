@@ -9,9 +9,9 @@
 #define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_VERSION UINT32_C(1)
 #define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_MAX_RECORDS 128u
 
-/* Test-only copied sequence of already accepted BOP instructions.  It is
- * default-off and deliberately carries no CPU registers, guest-memory data,
- * provider identity, or semantic interpretation. */
+/* Default-off copied sequence of reached C4 C4 instructions. It records
+ * accepted and declined invocations alike, but carries no CPU registers,
+ * guest-memory data, provider identity, or semantic interpretation. */
 struct bx_ntvdm_bop_sequence_observation_record_v1 {
     uint16_t cs;
     uint16_t reserved0;
