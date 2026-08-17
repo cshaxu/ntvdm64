@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S21.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S22.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S21 -- guest DOS EXEC/PSP/return source-package admission.**
+**Active: M0 T225 S22 -- original NTIO-to-NTDOS-to-COMMAND continuity admission.**
 
 ## Active Packet
 
@@ -14,22 +14,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S21, Ordinary Mode. |
-| Admission And Approval | S20 is closed in [its closure record](history/m0-t225-s20-closure-20260817.md). The active T scope and owner request select the next original owner package: guest DOS EXEC/PSP/parent-return. |
-| Objective | Establish a complete source/ABI/failure and current-route map for the guest DOS EXEC, PSP, parent linkage, termination and return package needed for a declared multi-program sequence inside one VDM. |
-| Non-goals | No trace-led BOP work, no nested host NTVDM/process substitute, no new Bochs device/CPU/firmware feature, no adapter DOS-kernel reimplementation, no interactive host-command broker, and no Overlay behavior beyond retained ABI compatibility. |
-| Reference Baseline | T225 scope; S20 closure; original OpenNT NTDOS/DOS kernel sources; source-built primary guest identities; existing COMMAND declared-plan and DEM package closures. |
-| Files And ABI Surface | `src/opennt` guest DOS source and artifact evidence; checked bx-vdm/mantle handoff inspection; focused source/ABI research and Status only until a separately admitted implementation S. |
+| Identifier Mode | M0 T225 S22, Ordinary Mode. |
+| Admission And Approval | S21 is closed in [its closure record](history/m0-t225-s21-closure-20260817.md). The owner-approved T225 scope and S21 source map select the smallest prerequisite: original source-built guest startup continuity. |
+| Objective | Establish the source/ABI/current-route closure and, if admitted by that evidence, the smallest native startup composition needed to reach original NTDOS initialization and its normal COMMAND handoff from source-built NTIO inputs. |
+| Non-goals | No guest EXEC/PSP implementation, no trace-led BOP repair, no nested host process, no adapter DOS loader, no new Bochs device/CPU/firmware feature without reached evidence, no interactive host-command broker, and no Overlay behavior beyond retained ABI compatibility. |
+| Reference Baseline | S21 closure and source map; source-built primary NTIO/NTDOS/COMMAND identities; S19 DEM and S20 COMMAND package closures; current generic UD/native composition and formal Ninja graph. |
+| Files And ABI Surface | Original OpenNT NTIO/NTDOS/COMMAND startup sources; source-built guest artifact identities; bx-vdm startup/initial-state and checked guest-RAM action interfaces; bx-mantle machine-stage ABI; focused evidence/fixtures/Status. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source policy, and design authorities. |
-| Verification | Map every reached and prerequisite EXEC/PSP/return function to original source, caller/callee layout, required DOS/Bochs/host owner, failure outcome and four-rung recovery disposition; audit that the current route contains no host-process substitute. |
-| Expected Markers | One whole guest-DOS owner package map; explicit distinction between guest code to preserve, missing machine prerequisite, existing host BOP service and deferred host capability; no new selector recognizer or loader. |
-| Asset Needs | Existing source-built NTDOS/NTIO/COMMAND inputs, original OpenNT DOS kernel source, existing host-service package records, and current native composition map. |
-| Reporting Requirements | Record sources, exact guest ABI/segment assumptions, parent/child lifecycle, termination/return order, dependencies, Direct/Readonly/Overlay relevance, unavailable historical host dependencies and rejected recovery rungs. |
-| Stop Conditions | A requirement belongs to a new Bochs mechanical owner, a non-admitted host-service package, an unproven guest artifact, or contradicts source/ABI evidence. Record that dependency and continue independent source mapping; do not invent a loader or BOP. |
-| Exit Criteria | A reviewable guest-DOS EXEC/PSP/return package map identifies the smallest next implementation closure, proves ownership boundaries and has no unclassified prerequisite or hidden host-process substitute. |
+| Verification | First map original NTIO-to-NTDOS startup handoff, current initial-state bytes and every `50:11` input/return constraint. Then build only an admitted source-built Direct/Readonly continuity fixture under the formal Ninja graph; record its first original guest boundary without changing guest bytes. |
+| Expected Markers | One source-first startup handoff map; explicit original/adapter/Bochs ownership; one smallest closure decision; if implementation is admitted, a fresh Ninja build plus Direct/Readonly bounded native observation with an unambiguous first guest terminal or continuation marker. |
+| Asset Needs | Existing source-built primary guest images, OpenNT DOS startup sources, current initial-state evidence, formal Ninja graph, and a disposable `build/M0-T225-S22/<run>` root. |
+| Reporting Requirements | Record original startup layouts/order, initial-state ownership, NTDOS load destination/continuation contract, current versus missing state, Direct/Readonly relevance, four-rung recovery ledger, exact build/run inputs and limitations. |
+| Stop Conditions | A needed behavior is an unclassified OpenNT host service, requires a new Bochs mechanic, lacks source-built identity, or demands guest-byte mutation. Record it, continue independent mapping, and do not invent a startup substitute. |
+| Exit Criteria | A reviewable source/ABI/current-route closure identifies and, where evidence permits, validates the smallest startup change or proves no change is admissible; it leaves no unclassified startup dependency and no hidden adapter/host-process substitute. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | EXEC loader branches, memory arena/PSP, inherited handles/environment/FCBs, parent return, INT 20/21 termination, COMMAND `54:01/0B`, DEM file/session ownership, native startup continuity, and host-child exclusion. |
-
+| Similar-Issue Sweep | NTIO entry state, `50:11` NTDOS destination and resume, NTDOS entry header/relocation assumptions, COMMAND handoff/configuration, initial-state catalog, DEM load/session services, machine stage, guest-image identity, and Direct/Readonly parity. |
 > **T225 S20 closure:** [the closure record](history/m0-t225-s20-closure-20260817.md) completes the original COMMAND `54:00..10` owner package: 17-slot source/route disposition, sensitive-source audit, Direct/Readonly family regression, live-route inventory, and one bounded native validation. It neither claims guest program completion nor permits trace-led BOP work.
 > **T225 S19 closure:** [the closure record](history/m0-t225-s19-closure-20260817.md) proves DEM’s 73-slot disposition, Direct/Readonly whole-family regression, no-live-bypass inventory, and one bounded native package validation. It neither claims guest program completion nor admits trace-led BOP work.
 > **T225 S20 P1 source/route reconciliation:** [the 17-slot map](etc/research/t225-s20-command-full-package-route-reconciliation-001.md) assigns every callable `54:00..10` identity to the current COMMAND package route and recovery rung, rejects the 4023-byte environment myth from OpenNT source, and selects full-family source/ABI regression before any native trace or singleton service work.
