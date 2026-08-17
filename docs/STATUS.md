@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S35.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S36.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S35 -- paired bootstrap/first-fault native observation.**
+**Active: M0 T225 S36 -- startup-machine post-return component audit.**
 
 ## Active Packet
 
@@ -14,21 +14,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S35, Ordinary Mode. |
-| Admission And Approval | S34 proves attribution requires one same-invocation correlation and that both needed default-off observers already exist. Standing owner approval covers bounded evidence work. |
-| Objective | Run immutable source-built inputs once each in Direct and Readonly with the existing BOP-sequence and first-fault observers together; record the exact sequence before the first fault. |
-| Non-goals | No code/build configuration/source image/profile/provider/machine change; no guest-memory dump, new trace, new observer, BOP implementation, CPU/Bochs repair, or host mutation beyond selected Direct semantics. |
-| Reference Baseline | S10 immutable input root, S19 BOP transcript, S28/S30 first-fault evidence, S31 candidate, S32/S33 bootstrap map, S34 attribution ledger, and formal S30 Ninja closure. |
-| Files And ABI Surface | Disposable S35 build-root logs and one reviewed evidence result/status/history only. No source or ABI change is admitted. |
-| Applicable Rules | rules/EXECUTION.md build-output hygiene, source policy, design authorities, Bochs deny-by-default, Direct/Readonly policy, and T225 prohibition on trace-led implementation. |
-| Verification | Verify manifest/source identity before reuse or build a fresh formal root; run each mode exactly once with paired startup sources and both existing observer options; compare complete transcripts and hashes; preserve concise evidence only. |
-| Expected Markers | BOP count/overflow and ordered records; first-fault and segment-access tuples; terminal/exit; Direct/Readonly equivalence or precise divergence; no source diff. |
-| Asset Needs | Immutable S10 primary root, paired startup config/autoexec, formal Ninja manifest/toolchain projection, existing native CLI closure, and S34 map. |
-| Reporting Requirements | Record exact command, build-root identity, image/profile hashes, stdout/stderr hashes, all output facts, and any inability to run; do not infer unobserved states from S19. |
-| Stop Conditions | Missing immutable input/identity, need for source change, a second retry beyond the one run per mode, any mutation outside selected Direct behavior, or any request to implement from a trace hit. Stop and re-admit the smallest action. |
-| Exit Criteria | One reviewed Direct and one reviewed Readonly result bind BOP and first-fault records within each invocation, or an explicit reproducible run blocker is recorded; no implementation behavior changes. |
+| Identifier Mode | M0 T225 S36, Ordinary Mode. |
+| Admission And Approval | S35 establishes only same-run ordering: existing selector `06h` returns accepted before the non-UD fault. The next owner is the complete already-admitted startup-machine component, not a singleton trace patch. |
+| Objective | Audit the original/OpenNT and current startup-machine package’s selector `06h` caller ABI, result/frame/return state and all component siblings that can affect the immediate caller continuation; classify whether the observed fault can be attributed or remains independent. |
+| Non-goals | No BOP/provider implementation, no trace run, no guest/memory patch, no CPU segment repair, and no selector-specific workaround. |
+| Reference Baseline | S23/S25 whole startup-machine package records, S35 paired evidence, original OpenNT/SoftPC source, current bx-core/bx-mantle/bx-vdm source, and S28-S34 fault evidence. |
+| Files And ABI Surface | One whole-component source/ABI/failure audit, Status/history/evidence only. No runtime ABI or code change is admitted. |
+| Applicable Rules | rules/EXECUTION.md, source policy, source-recovery criterion, architecture boundaries, Bochs deny-by-default, and T225 anti-attrition rule. |
+| Verification | Compare original and current selector-06 caller/return contracts, all related startup-machine selector contracts, frame/register/memory actions and current test coverage; distinguish ordering from causality. |
+| Expected Markers | Whole-component ledger, exact source paths, source-recovery rung dispositions, rejected causal leaps, and one owner-scoped next package or bounded ambiguity. |
+| Asset Needs | S23/S25 records, original OpenNT/SoftPC sources, source-built maps, S35 result/raw hashes, current formal manifest and source tree. |
+| Reporting Requirements | Cite original and current code; account for sibling selectors; state whether trace coverage proves only entry/order or result/return semantics; no inferred repair. |
+| Stop Conditions | Need for a new trace, source change, selector-specific behavior, Bochs intrusion, guest mutation, or host provider change. Stop and re-admit the smallest action. |
+| Exit Criteria | A complete startup-machine package audit classifies the `06h` relationship to the first fault without implementing behavior. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | Observer enable/reset order, BOP/UD output capacity, first-fault/segment capture, immutable-image and startup-source identity, Direct/Readonly host policy, build-root reuse identity, and cleanup of raw logs after evidence extraction. |
+| Similar-Issue Sweep | `02h/06h` shared transcript, PIC/BDA actions, frame handling, native port actions, source-derived opennt-host provider, selector return/resume, caller CS:EIP, Direct/Readonly neutrality, and all S23/S25 sibling identities. |
+> **T225 S35 closure:** [the closure record](history/m0-t225-s35-closure-20260817.md) binds same-invocation BOP and first-fault facts in Direct/Readonly, but assigns no cause; it admits only a whole startup-machine component audit.
 > **T225 S34 closure:** [the closure record](history/m0-t225-s34-closure-20260817.md) rejects merging distinct S19/S30 dynamic histories and admits only paired reuse of existing observations; it authorizes no new trace mechanism or repair.
 > **T225 S33 closure:** [the closure record](history/m0-t225-s33-closure-20260817.md) proves existing selector-blind BOP observation already establishes reach of `sysinit`, `DosInit`, and post-`charinit` `continit`; it admits no new observer or repair.
 > **T225 S32 closure:** [the closure record](history/m0-t225-s32-closure-20260817.md) proves the `50:11` narrow original-shaped RAM/resume seam and maps the original bootstrap/device-header lifecycle. It transfers only a non-invasive continuity-observation admission; it admits no repair.

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1768 |
+| Documentation records | 1770 |
 | --- | --- |
-| Generated UTC | 2026-08-17T23:20:05Z |
+| Generated UTC | 2026-08-17T23:21:46Z |
 
 ## Entries
 
@@ -112,6 +112,7 @@ content-divergent entries.
 | etc/evidence/t225-s28-native-first-fault-direct-readonly-result-001.md | indexed supporting material | 006e1e752282e9098562a6756a3aeaeae5782cef51a2e9c3f26d6c3e9ae827e3 |
 | etc/evidence/t225-s30-native-segment-access-direct-readonly-result-001.md | indexed supporting material | d85c14906efdf4f5d3f454359307b5345d62910e020ccbf03fd73d958764ea3e |
 | etc/evidence/t225-s30-segment-access-observation-fixture-result-001.md | indexed supporting material | af081bab9b92d6ab7016aaad73d71cd0ac0d21f0c3f4141c305a5956f5f938ea |
+| etc/evidence/t225-s35-paired-bootstrap-first-fault-observation-result-001.md | indexed supporting material | a6bbbb14451311655090930b110dd46b90528be65fb4c78480b1abfa49424256 |
 | etc/evidence/t225-s6-reference-guest-input-admission-001.md | indexed supporting material | b5932c62e4917b60205caced3f2dfa78ef9ed782f338e6cfc29d890f1c9bf891 |
 | etc/evidence/t225-s8-archived-nosrvbld-extractor-rejection-001.md | indexed supporting material | 99112829a78552229e2fe7904acbb8c65aaa2893b59f63ec2cac894d186f99c3 |
 | etc/evidence/t225-s8-dosbox-completion-runner-001.md | indexed supporting material | 6966863f9b3990c98df4eaa44faa134124ef610558a5f2566f620e834c65aabd |
@@ -1501,6 +1502,7 @@ content-divergent entries.
 | history/m0-t225-s32-closure-20260817.md | closed task history | b5becc19bacdb52b1a13baa3079e7c08b80f2c20b77db8bf8a11d1b6d00a958d |
 | history/m0-t225-s33-closure-20260817.md | closed task history | 2f39b699b705d578ec3313ee644a1f52b0e5587c0e7553af2747311e7815ea80 |
 | history/m0-t225-s34-closure-20260817.md | closed task history | 4ada5f5f3e588b7a6d843a9e74504dc7a37a981fa2fb5c2b00cbba891f2edcba |
+| history/m0-t225-s35-closure-20260817.md | closed task history | 2cc3ff48fa9315b5df9682a77ff72cff32c1ab8c0143e8292dcc6641f8939ffd |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -1782,7 +1784,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 7da63d453c523798f0cb4187d391daecf3ed9ed2ac4dee28d2b6f3e18f1818f1 |
+| STATUS.md | principal control document | 840c5ceb509502e0c12bcee9f991091a9395833099c97047fc223205331f9dc7 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
