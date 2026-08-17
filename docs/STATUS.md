@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S26.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S27.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S26 -- guest DOS EXEC/PSP/parent-return reconciliation.**
+**Active: M0 T225 S27 -- COMMAND parent-return lifecycle recovery.**
 
 ## Active Packet
 
@@ -14,23 +14,25 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S26, Ordinary Mode. |
-| Admission And Approval | T225 owner objective; completed S25 machine-package closure; and the prior S21 guest source map admit an owner-package source/current-route reconciliation before any guest execution change. |
-| Objective | Produce one complete original NTDOS EXEC/PSP/parent-return source and current-composition gap map that identifies the next smallest owner-scoped closure for declared multi-program execution. |
+| Identifier Mode | M0 T225 S27, Ordinary Mode. |
+| Admission And Approval | T225 owner objective; S26 source/current-route reconciliation; completed DEM file/lifecycle and startup-machine packages. |
+| Objective | Recover one complete COMMAND-owned parent-return lifecycle package so an original guest DOS child exit can either re-enter a declared guest command or report the ordinary parent result without becoming a top-level VDM exit. |
 | Non-goals | No trace-led BOP work, synthetic DOS EXEC/PSP/arena implementation, nested host process, new BIOS/device feature, Overlay implementation, or mutation-policy change. |
-| Reference Baseline | S21 guest source map; S19 DEM and S20 COMMAND whole-package closures; S25 machine-family closure; immutable primary guest inputs; current formal CLI graph. |
-| Files And ABI Surface | Read-only original NTDOS/NTIO/COMMAND source and current bx-vdm/guest staging contracts; one research map, Status, history/evidence only unless a separately admitted source-derived seam is proven. |
+| Reference Baseline | S26 reconciliation; S20 COMMAND `54:00..10` map; S21 guest source map; S19 DEM and S25 machine closures; immutable primary guest inputs; current formal CLI graph. |
+| Files And ABI Surface | Original COMMAND dispatcher/broker sources; current `54:0B` provider, launch plan and engine terminal/re-entry contracts; a source/ABI/failure map, the smallest COMMAND-owned fixed-width seam, tests, Status and evidence. |
 | Applicable Rules | rules/EXECUTION.md, source policy, source-recovery audit criterion, design authorities, and the T225 prohibition on trace-led singleton repair. |
-| Verification | Account for EXEC, PSP/arena/JFN/environment construction, entry transfer, termination, parent return, every crossed BOP/host boundary, and current Direct/Readonly disposition; review no implementation route is silently assumed. |
-| Expected Markers | One owner map distinguishes original guest-owned behavior from host BOP services, bx mechanics, and unavailable prerequisites; names the smallest next component package without redefining DOS semantics. |
-| Asset Needs | Pinned OpenNT source tree, source-built/primary guest identities, current bx-vdm composition sources, existing S19--S25 evidence. |
-| Reporting Requirements | Cite original paths and routines, current route/boundary, recovery rung, failure/absence, Direct/Readonly impact, and a globally scoped next-package recommendation. |
-| Stop Conditions | Missing source identity, need for a new guest semantics substitute, ambiguous historical contract, or a requirement for an unadmitted Bochs/device/host capability. Record rather than invent behavior. |
-| Exit Criteria | Complete source/current-route matrix for the declared guest EXEC lifecycle, explicit owner/disposition for every prerequisite, and one admissible follow-on component package stated without trace-derived leaf work. |
+| Verification | First map every `54:0B` source branch and Direct/Readonly/Overlay disposition; then exercise no-next-command, declared-next-command, invalid/repeated return, Direct/Readonly parity, and `54:00` distinction through the formal graph. Native trace is permitted only once the full package regression passes. |
+| Expected Markers | A COMMAND-owned fixed-width terminal/re-entry contract after engine cleanup; no adapter DOS queue, host child, or top-level-exit alias; source-defined failure behavior for unavailable historical broker features. |
+| Asset Needs | Pinned OpenNT COMMAND source tree, source-built/primary guest identities, current bx-vdm composition sources, existing S19--S26 evidence and formal Ninja graph. |
+| Reporting Requirements | Cite original `cmdReturnExitCode` dispatcher/broker ordering, current route/boundary, recovery rung, failure/absence, Direct/Readonly impact, and any explicitly deferred Overlay behavior. |
+| Stop Conditions | Missing source identity, need for a new guest semantics substitute, ambiguous parent-return contract, or a requirement for an unadmitted Bochs/device/host capability. Record rather than invent behavior. |
+| Exit Criteria | Complete parent-return source/ABI/failure map; source-derived implementation only if direct COMMAND reuse cannot compose; full-family regression; and one bounded native parent-return observation with `54:00` still distinct. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | DOS EXEC branches, EXE/COM/overlay loaders, PSP/arena/JFN/environment, child entry, termination/parent return, DEM lifecycle and COMMAND launch, guest file I/O, machine memory/interrupt prerequisites, Direct/Readonly parity. |
+| Similar-Issue Sweep | COMMAND launch and termination, `54:00` versus `54:0B`, declared next-command delivery, invalid/repeated returns, DOS exit-code width, engine cleanup order, COM before MZ child fixture, Direct/Readonly/Overlay disposition. |
 
 > **T225 S25 closure:** [the closure record](history/m0-t225-s25-closure-20260817.md) completes the one-surface startup-machine package and its whole-family/native evidence. It transfers only the source/current route reconciliation for guest multi-program execution.
+> **T225 S26 P1 current-route reconciliation:** [the map](etc/research/t225-s26-guest-exec-current-route-reconciliation-001.md) confirms DEM file/lifecycle and startup-machine prerequisites are package-closed; it identifies complete COMMAND parent-return lifecycle recovery as the only next owner package, without a trace-led BOP repair.
+> **T225 S26 closure:** [the closure record](history/m0-t225-s26-closure-20260817.md) completes the original NTDOS source/current-route reconciliation and admits only S27's complete COMMAND parent-return package. It does not claim a guest child can yet execute or return.
 > **T225 S24 closure:** [the closure record](history/m0-t225-s24-closure-20260817.md) completes the whole machine/BIOS owner audit and transfers one normalized startup-machine package to S25.
 > **T225 S25 P1 source/ABI/failure map:** [the package map](etc/research/t225-s25-startup-machine-source-abi-failure-map-001.md) fixes all eight retained startup-machine contracts, the shared `02`/`06` transcript boundary, and the one-composition migration rule before implementation.
 > **T225 S25 P2 shared interrupt result:** [the focused result](etc/evidence/t225-s25-startup-machine-interrupt-result-001.md) source-builds and verifies the common source-derived 02h/06h PIC/BDA transcript, including their distinct frame behavior. Whole-family regression and native validation remain pending.
