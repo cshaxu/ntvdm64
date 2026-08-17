@@ -13,23 +13,23 @@
 
 > **T scope:** T224 recovers the Queue-selected standard-handle and redirection
 > capability as an original owner package. S4 admits one COMMAND child-redirection
-> provider for `54:08/0A`, including creation and cleanup ownership for the
+> provider for `54:08/0A/0B`, including creation and cleanup ownership for the
 > private pipe session required before any DEM continuation success path.
 
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T224 S4, Ordinary Mode. |
 | Admission And Approval | S1 through completed S3 show that COMMAND owns the producer and lifecycle needed by the paired DEM continuation provider. Owner direction remains original component packages with Direct/Readonly first and no singleton trace work. |
-| Objective | Establish the full COMMAND `54:08/0A` child-redirection source/ABI/failure boundary, including the typed private pipe-session lifecycle that is prerequisite to DEM `50:47/48`; do not revive direct `CreateProcessW` as a leaf shortcut. |
+| Objective | Establish the full COMMAND `54:08/0A/0B` child-redirection source/ABI/failure boundary, including the typed private pipe-session lifecycle that is prerequisite to DEM `50:47/48`; do not revive direct `CreateProcessW` as a leaf shortcut. |
 | Non-goals | No raw HANDLE in guest/bridge ABI, no Bochs/mantle change, no native trace, no raw historical worker import, and no standalone implementation of `54:08` or `54:0A`. |
 | Reference Baseline | T224 S1/S3 maps; OpenNT `cmdexec.c`, `cmdredir.c`, `cmdsvc.h`, guest `tcode.asm`, and the completed S2 stream-session boundary. |
 | Files And ABI Surface | `src/bx-vdm` COMMAND child-redirection provider/session and profile interfaces, focused x64 fixture/probe and evidence. Guest boundary remains fixed-width registers and checked transactions only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | First record one owner-wide source/ABI/failure and lifecycle table. Before any implementation, classify `54:08/0A` Direct/Readonly/Overlay/Virtual terminals, stream-token consumption, and all prohibited historic worker/SAS/SoftPC dependencies; then run governance and diff. |
+| Verification | First record one owner-wide source/ABI/failure and lifecycle table. Before any implementation, classify `54:08/0A/0B` Direct/Readonly/Overlay/Virtual terminals, stream-token consumption, and all prohibited historic worker/SAS/SoftPC dependencies; then run governance and diff. |
 | Expected Markers | One COMMAND child-redirection owner; typed private stream/pipe-session lifecycle; profile disposition before route selection; and source-shaped launch/environment failure terminals. |
 | Asset Needs | Existing OpenNT/current source and local MSVC x64 `/MT`; no external import, guest media or host modification. |
 | Reporting Requirements | Record both launch identities' original/guest ABI, pipe session creation/cleanup dependencies, current bound routes, Direct/Readonly/Overlay/Virtual disposition, and the admissible provider boundary. |
-| Stop Conditions | Need to expose a host HANDLE or pointer to guest, new guest ABI, Bochs change, host-system modification, or any attempt to bind `54:08`/`54:0A` separately from their shared lifecycle. |
+| Stop Conditions | Need to expose a host HANDLE or pointer to guest, new guest ABI, Bochs change, host-system modification, or any attempt to bind `54:08`/`54:0A`/`54:0B` separately from their shared lifecycle. |
 | Exit Criteria | One owner-wide, evidence-backed child-redirection provider disposition and source/ABI/failure map exists for both identities and their stream/pipe cleanup lifecycle; it either admits one safe shared seam or records a precise blocked/deferred condition without changing leaf routes. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | OpenNT `cmdexec`/`cmdredir` launch and cleanup state, guest `tcode.asm` callers, S2 stream-token ownership, child environment/tail contracts, profile selection, and test/probe source closure. |
