@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1766 |
+| Documentation records | 1768 |
 | --- | --- |
-| Generated UTC | 2026-08-17T23:17:41Z |
+| Generated UTC | 2026-08-17T23:20:05Z |
 
 ## Entries
 
@@ -955,8 +955,9 @@ content-divergent entries.
 | etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 11b658c92de1e09bdaac0f77f2424ecffde4532350ae07308e971eeed90b02e7 |
 | etc/research/t225-s30-segment-access-tuple-source-abi-failure-map-001.md | indexed supporting material | f9fa458bdee641eb51409c1654a5e57294d9dadf5d30b1fd15ea02202474ea5b |
 | etc/research/t225-s31-ds-ffff-source-lifecycle-attribution-001.md | indexed supporting material | 51428d071ba26e6fd39523ba181ea5431ee0d6c8bffd8bd89635e672db5cc426 |
-| etc/research/t225-s32-bootstrap-device-header-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 047332485524db8e2371161aff85cc32e9c354413b83a0f9869d59a9b1766575 |
+| etc/research/t225-s32-bootstrap-device-header-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 0e1ac110e5fefff0df5cb093091c882d789e5bb7c74368519acec60ce2447698 |
 | etc/research/t225-s33-bootstrap-continuity-observation-admission-map-001.md | indexed supporting material | 2491ba209c6f5cac653902084eb13d0f516fabd9712a9072cfd7a86c328d5a3c |
+| etc/research/t225-s34-post-bootstrap-first-fault-source-build-attribution-001.md | indexed supporting material | 84220da99cb8808f42547e332370661c68fac159f721b1135a469203512c61a2 |
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
@@ -1499,6 +1500,7 @@ content-divergent entries.
 | history/m0-t225-s31-closure-20260817.md | closed task history | e0fd7571d9908f46f9ebb222ab2ef67caf74f5fc941f5a2527ebc87fd890ae04 |
 | history/m0-t225-s32-closure-20260817.md | closed task history | b5becc19bacdb52b1a13baa3079e7c08b80f2c20b77db8bf8a11d1b6d00a958d |
 | history/m0-t225-s33-closure-20260817.md | closed task history | 2f39b699b705d578ec3313ee644a1f52b0e5587c0e7553af2747311e7815ea80 |
+| history/m0-t225-s34-closure-20260817.md | closed task history | 4ada5f5f3e588b7a6d843a9e74504dc7a37a981fa2fb5c2b00cbba891f2edcba |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -1780,7 +1782,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | f0bf77c9043f7ea854afdbb61b99c35399258ec265d4bb74e8b2c1e3bc8965ba |
+| STATUS.md | principal control document | 7da63d453c523798f0cb4187d391daecf3ed9ed2ac4dee28d2b6f3e18f1818f1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
