@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S2.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S3.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S2 -- DEM child/PDB lifecycle recovery.**
+**Active: M0 T225 S3 -- Guest EXEC file-I/O compatibility recovery.**
 
 > **T224 closed:** its COMMAND standard-handle and child-redirection owner
 > package is recorded in [history](history/m0-t224-closure-20260817.md).
@@ -17,22 +17,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S2, Ordinary Mode. |
-| Admission And Approval | Queue order 1, the capability roadmap, and completed T225 S1 admission decision. S2 is the first ordered owner package from that decision. |
-| Objective | Recover the complete DEM child/PDB lifecycle package around `50:36/3C`: preserve original void notification order, release selected Direct/Readonly host-private resources by terminating PDB, and retain explicit deferred Overlay/Virtual lifecycle hooks. |
-| Non-goals | No DOS EXEC/PSP/MCB/JFN implementation, no COMMAND `54:0B` implementation, no individual trace-led BOP patch, no nested host process/NTVDM launch, no new Bochs device, and no VDD/DPMI/WOW/Redirector recovery. |
-| Reference Baseline | T225 S1 owner/ABI/failure map; `demmisc.c:demEntryDosApp`, `demsrch.c:demTerminatePDB`, `msctrlc.asm:reset_environment`, current PDB-owned file-session and search-session code. |
-| Files And ABI Surface | `src/bx-vdm` DEM lifecycle/session/file-view seams and focused tests only; fixed-width BOP result ABI, copied PDB word, private file-view resource lifecycle. No Bochs or guest DOS code change is admitted. |
+| Identifier Mode | M0 T225 S3, Ordinary Mode. |
+| Admission And Approval | Queue order 1, the capability roadmap, T225 S1 file/terminal prerequisite map, and completed T225 S2 lifecycle package. S3 is the ordered guest EXEC file-I/O owner package. |
+| Objective | Recover the source-shaped guest EXEC file-I/O compatibility package around `50:12/00/42/16/02`: prove the SFT token ABI, choose Direct FastRead semantics, and establish the real DTA/CurrentPDB prerequisite without replacing guest DOS EXEC. |
+| Non-goals | No adapter EXEC/PSP/MCB/JFN/COM/EXE loader implementation, no COMMAND `54:0B` implementation, no trace-led leaf patch, no nested host process, no new Bochs device, and no VDD/DPMI/WOW/Redirector recovery. |
+| Reference Baseline | T225 S1 P2/P3 file-path and token ABI map; OpenNT `msproc.asm:$Exec`, `handle.asm:FastOrSlow`, `dem.h:GETHANDLE`, `demdisp.c:SVC_DEMFASTREAD`, and current whole-provider Direct/Readonly routes. |
+| Files And ABI Surface | `src/bx-vdm` DEM whole-provider/file-view/FastRead seams and focused tests only; opaque AX:BP token ABI, checked guest-RAM transaction, copied DTA/PDB identity. No Bochs or guest DOS code change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Four-rung source-recovery ledger; full `50:36/3C` package map; focused Direct/Readonly PDB cleanup, void-result, stale-token/search and negative no-VDD regressions under MSVC x64 `/MT`; whole-provider regression. |
-| Expected Markers | One lifecycle owner, exact PDB copied from BX, Direct token release after `50:3C`, readonly resource disposition, preserved void resume/no fabricated register result, and no host-child substitute. |
+| Verification | Source/ABI/failure map for all five file services; selected Direct FastRead result contract; focused Direct/Readonly source-built fixtures under MSVC x64 `/MT`; negative stale-token/profile-isolation regressions; no native trace until the package is closed. |
+| Expected Markers | One shared AX:BP token ABI, an explicit Direct FastRead success-or-carry contract, checked RAM transfer, source-shaped handle/seek/read/close results, and no host-child or adapter loader substitute. |
 | Asset Needs | Existing local OpenNT/MS-DOS sources, `dem-whole-provider-session` and lifecycle fixtures, MSVC x64 `/MT`; no external import or host modification. |
-| Reporting Requirements | Cite original lifecycle order and void contract, record the recovery ladder, distinguish each profile resource disposition, and report remaining EXEC/COMMAND work as separate packages. |
-| Stop Conditions | Any attempt to implement DOS teardown in the adapter, alter Bochs, add VDD behavior, clean a resource without source/owner evidence, use a host-child substitute, or broaden into EXEC/COMMAND return. |
-| Exit Criteria | Source/ABI/failure map and recovery ledger are complete; `50:36/3C` package regression passes for Direct/Readonly with explicit Overlay/Virtual deferred disposition; reviewed evidence is committed and pushed. No parent/child EXEC claim is permitted. |
+| Reporting Requirements | Cite original `$Exec` and FastOrSlow control flow, record selected Direct/Readonly profile disposition and failure contract, and separate COM loader/parent return work into later S packages. |
+| Stop Conditions | Any attempt to implement EXEC, PSP, MCB, JFN, COM/EXE load, parent return, or a host child in the adapter; alter Bochs; expand Overlay/Virtual; or declare FastRead from trace alone. |
+| Exit Criteria | Source/ABI/failure map is complete; Direct/Readonly `50:12/00/42/16/02` package regression passes with an explicit Direct FastRead contract and real DTA/PDB admission; reviewed evidence is committed and pushed. No COM/EXE or parent-return claim is permitted. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | DEM entry/termination, per-PDB search/file tokens, Direct/Readonly/Overlay/Virtual file-view lifecycles, COMMAND `54:0B` separation, and machine/CLI terminal boundaries. |
-> **T225 S2 P0 admission:** S1 is closed as an audit in [its owner/ABI/failure map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md). S2 now recovers the complete DEM child/PDB lifecycle package before EXEC file-I/O or COMMAND parent-return work.
+> **T225 S3 P0 admission:** S2 is closed in [its lifecycle source/ABI/failure record](etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md). S3 now recovers the complete guest EXEC file-I/O owner package before COM loading or COMMAND parent-return work.
 
 > **T225 S2 P1 progress:** the [source/ABI/failure map](etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md) fixes `50:36/3C` as one DEM lifecycle package. Direct PDB-owned host handles require cleanup; Readonly startup capability remains session-scoped; Overlay/Virtual are explicit deferred hooks. No DOS teardown or VDD behavior is admitted.
 
