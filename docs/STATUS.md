@@ -33,6 +33,7 @@
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | COMMAND launch/return, guest DOS EXEC/PSP/MCB/loader paths, DEM process ownership, file views, guest normal termination and existing BOP/package dispositions. |
 > **T225 S1 P1 progress:** original guest DOS, not `bx-vdm`, owns `$Exec`, PSP/JFN inheritance, MCB/image memory, child entry and parent return. `50:60` is only the bounded `demTerminatePDB` search-state notification. The source map rejects nested host launch and records the still-unproven first-profile normal-termination gate; see the [P1 map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md).
+> **T225 S1 P2 progress:** original non-pipe `$Read` reaches `50:42` before `50:16`; the present `50:42` route only covers readonly startup images, so Direct child EXEC is not closed and cannot be replaced by a host launch. T203 also proves no qualified normal guest terminal result. The required next unit is the whole EXEC file-I/O compatibility subpackage; see the same [S1 map](etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md).
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code

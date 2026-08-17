@@ -71,3 +71,62 @@ Map the concrete kernel build/artifact closure and each `$Exec` file-service
 prerequisite against the Direct and Readonly provider dispositions; then map
 normal termination's terminal result path. Only after those two maps can S1
 state whether T225 may enter a source-built parent/child/return fixture phase.
+## P2 EXEC File-Path And Terminal-Prerequisite Comparison
+
+### Procedure
+
+The original `$Exec:get_binary_type` and `ExecRead` calls were traced through
+`$Open`, `$Lseek`, `$Read` and `$Close`, then compared with the current
+`bx_ntvdm_dem_package_session_v1` dispatch ordering and its Direct/Readonly
+provider partitions. Retained T203 normal-terminal evidence was reviewed
+rather than inferred from the existence of a `54:0B` handler.
+
+### EXEC File Contract
+
+| Original guest operation | DEM BOP | Current bound route | T225 relevance |
+| --- | --- | --- | --- |
+| `$Open` from `get_binary_type` | `50:12` / `SVC_DEMOPEN` | Whole-provider namespace partition; Direct opens host-view objects, Readonly opens declared startup images | Required; it must create the source-shaped SFT/JFN handle state which `$Exec` later consumes. |
+| `$Lseek` | `50:00` / `SVC_DEMCHGFILEPTR` | Whole-provider handle partition | Required for EXE relocation and COM/EXE load positioning. |
+| `$Read` slow path | `50:16` / `SVC_DEMREAD` | Whole-provider handle partition; checked guest RAM transaction | Required fallback and image-byte transfer. |
+| `$Close` | `50:02` / `SVC_DEMCLOSE` | Whole-provider handle partition | Required on all `$Exec` success/error paths. |
+| `$Read` fast path | `50:42` / `SVC_DEMFASTREAD` | Boot namespace provider calls only its readonly startup-file service | **Not closed for Direct child images.** |
+
+`handle.asm:FastOrSlow` selects the fast path for every non-pipe read unless
+the MIPS bit is set. The x86 CLI profile therefore reaches `50:42` before
+`50:16` for a normal child image. In the historical flow, a carry result from
+FastRead deliberately falls through to `SVC_DEMREAD`. The current `50:42`
+provider is source-derived for declared readonly startup images; it neither
+owns an admitted Direct-token route nor records a source-shaped Direct
+carry-set fallback. Consequently a Direct child EXEC cannot presently be
+claimed to reach its existing `50:16` loader path.
+
+The existing Direct `50:12` namespace path also requires its copied
+`direct_namespace_owner`, which the session obtains from the registered DTA's
+CurrentPDB read. This may be a valid bounded host-file ownership seam, but no
+current evidence proves that the real `$Exec` sequence has established that
+registration and source-shaped SFT/JFN state before it invokes `50:12`.
+
+### Normal-Terminal Comparison
+
+T203's final evidence is controlling: its source-built observer did **not**
+see a valid `54:0B` normal return on the current finite fixture, while the
+product engine instead reached `50:3D`/`demExitVDM` and a fatal `config.nt`
+path. `ORDINARY_GUEST_COMPLETION` has no engine producer. Existing local
+`54:0B` code and a diagnostic observer therefore do not satisfy the roadmap's
+"real declared target through normal guest termination" gate.
+
+### Disposition
+
+S1 remains unclosed. The next package plan must first admit one complete
+**guest EXEC file I/O compatibility subpackage**, rather than add a child
+launch shortcut:
+
+1. prove the original SFT/JFN token layout against `50:12/00/42/16/02`;
+2. select exactly one Direct `50:42` disposition that preserves original
+   carry-to-`50:16` fallback or source-equivalent Direct fast read;
+3. establish the real CurrentPDB/DTA prerequisite with a guest-path fixture;
+4. only then admit COM first, EXE relocation second, and parent return/terminal
+   result last as one parent/child/return package.
+
+No direct code change, Bochs change, host process, nested VDM, or trace-led
+BOP patch is admitted by P2.
