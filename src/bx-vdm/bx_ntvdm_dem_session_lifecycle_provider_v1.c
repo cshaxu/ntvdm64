@@ -12,7 +12,7 @@ int bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
     const bx_ntvdm_cpu_state_v1 *cpu_before,
     bx_ntvdm_cpu_result_v2 *result)
 {
-    uint32_t released_slots;
+    uint32_t released_search_slots;
     uint16_t pdb;
     if (result == 0 || !bx_ntvdm_boot_namespace_provider_v1_valid(provider) ||
         !bx_ntvdm_bop_ingress_v1_valid(ingress) ||
@@ -42,17 +42,19 @@ int bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
      * profile. Its retained result contract is the original void return. */
     if (ingress->service == 36u)
         return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u);
+    /* SVC_PDBTERMINATE precedes DOS_ABORT.  OpenNT's abort path later walks
+     * the guest JFT/SFT and emits ordinary SVC_DEMCLOSE calls.  Our opaque
+     * Direct token occupies the historical SFT NT-handle position, so it
+     * must remain live here for that later close; treating its diagnostic
+     * PDB copy as a second close authority would forge a stale handle.
+     *
+     * demTerminatePDB itself owns only its per-PSP FindFirst/FindNext state
+     * in this no-VDD/no-device CLI profile.  `whole_provider` remains part
+     * of the package ABI but intentionally has no lifecycle action here. */
+    (void)whole_provider;
     pdb = (uint16_t)cpu_before->ebx;
     if (!bx_ntvdm_boot_namespace_provider_v1_terminate_pdb(provider, pdb,
-            &released_slots)) return 0;
-    /* Direct handles are the only current PDB-owned file resource. Readonly
-     * startup tokens are session-scoped; Overlay/Virtual require their own
-     * later lifecycle providers and never fall through to this cleanup. */
-    if (whole_provider != 0 && !bx_ntvdm_dem_whole_provider_v1_valid(whole_provider))
-        return 0;
-    if (whole_provider != 0 && pdb != 0u &&
-        !bx_ntvdm_dem_file_session_v1_release_owner(&whole_provider->files,
-            pdb, &released_slots)) return 0;
-    (void)released_slots;
+            &released_search_slots)) return 0;
+    (void)released_search_slots;
     return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u);
 }

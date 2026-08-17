@@ -23,7 +23,7 @@ contains exactly 73 DEM records. Its static reconciliation reports:
 | --- | ---: | --- |
 | `changed` | 53 | Later package/session or compatibility seam exists; it must be retained, migrated, replaced, or explicitly rejected by the final package owner. |
 | `confirmed` | 19 | The old T200 route still matches the source-visible current route; this is not automatically a compatibility claim. |
-| `confirmed-with-gap` | 1 (`50:3C`) | Child PDB termination lacks a source-proven owner for all Direct file/search resources. |
+| `confirmed-with-gap` | 1 (`50:3C`) | Historical PDB ownership needed a source-order review; P4 corrects it to per-PSP search cleanup only, with Direct token release retained at guest-selected `50:02`. |
 
 The same audit assigns 31 slots `migrate-to-shared-profile-abi`, 11 slots
 `already-consumes-shared-profile-abi; remove remaining snapshot/synthetic
@@ -59,9 +59,9 @@ covers every callable slot without claiming all services work at runtime.
    Original `demTerminatePDB` (`50:3C`) pairs with `demEntryDosApp` (`50:36`)
    but does not derive file/search ownership from the latter notification.
    The current session lifecycle releases only known private resources. The
-   next implementation must recover the guest PDB/JFT/SFT ownership relation
-   from original DEM/DOS source before expanding cleanup; it may not infer it
-   from a BOP number or host handle.
+   source-order review is now complete: guest DOS retains JFT/SFT ownership and
+   emits `50:02` after `50:3C`; the adapter must not infer a second cleanup
+   authority from a BOP number or host handle.
 
 ## Package execution order
 
@@ -83,8 +83,8 @@ trace-selected BOP task.
    hard-error and lock outcomes.
 4. **Raw-media, misc/lifecycle and PDB closure.** Keep device/firmware work
    outside bx-vdm; give every raw-media/IOCTL/misc entry its original failure,
-   no-op or explicit deferred rule. Recover PDB/JFT/SFT resource ownership
-   before making `50:3C` a complete Direct cleanup path.
+   no-op or explicit deferred rule. P4 proves that `50:3C` is deliberately not
+   a Direct token-cleanup path; normal guest-selected `50:02` owns it.
 5. **Single all-family regression, then one native validation.** The native
    run is only a post-package integration check. It must never create a new
    singleton implementation item.

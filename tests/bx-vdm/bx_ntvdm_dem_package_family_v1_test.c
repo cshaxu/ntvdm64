@@ -383,6 +383,104 @@ static int fcb_bop_transaction_regression(void)
     return 0;
 }
 
+/* This is deliberately package-level rather than a detached token unit test:
+ * it reaches the selected 50:3C route and the subsequent 50:02 close through
+ * one Direct DEM session.  OpenNT executes SVC_PDBTERMINATE before DOS_ABORT,
+ * whose JFT/SFT walk emits SVC_DEMCLOSE; therefore 3C may release search
+ * continuations but must not pre-close the opaque Direct SFT token. */
+static int direct_pdb_lifecycle_regression(void)
+{
+    uint8_t ntdos_bytes[] = { 0xf4u }, command_bytes[] = { 0xf4u };
+    uint8_t target_bytes[] = { 0xf4u }, drive_types[26] = { 0u };
+    uint8_t bytes[] = { 0xc4u, 0xc4u, 0x50u, 0x3cu };
+    byob_image ntdos = { ntdos_bytes, sizeof(ntdos_bytes) };
+    byob_image command = { command_bytes, sizeof(command_bytes) };
+    byob_image target = { target_bytes, sizeof(target_bytes) };
+    byob_profile_selection profile;
+    bx_ntvdm_boot_namespace_plane_v1 plane;
+    bx_ntvdm_dem_package_session_v1 session;
+    bx_ntvdm_host_drive_snapshot_v1 drives;
+    bx_ntvdm_host_namespace_v1 host_namespace;
+    bx_ntvdm_mutation_profile_v1 mutation_profile;
+    bx_ntvdm_instruction_window_v1 window;
+    bx_ntvdm_bop_ingress_v1 ingress;
+    bx_ntvdm_bop_provider_selection_v1 selection;
+    bx_ntvdm_exception_event_v1 event;
+    bx_ntvdm_cpu_state_v1 cpu;
+    bx_ntvdm_cpu_result_v2 result;
+    wchar_t temporary[MAX_PATH], path[MAX_PATH];
+    HANDLE file = INVALID_HANDLE_VALUE, looked_up = INVALID_HANDLE_VALUE;
+    DWORD written = 0u;
+    uint32_t token = 0u;
+    int status = 1;
+
+    memset(&session, 0, sizeof(session));
+    memset(&host_namespace, 0, sizeof(host_namespace));
+    profile_initialize(&profile);
+    bx_ntvdm_mutation_profile_v1_initialize(&mutation_profile,
+        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) ||
+        !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu)) goto cleanup;
+    drive_types[2] = (uint8_t)GetDriveTypeW(L"C:\\");
+    if (drive_types[2] == DRIVE_NO_ROOT_DIR || drive_types[2] == DRIVE_UNKNOWN ||
+        !bx_ntvdm_boot_namespace_plane_v1_initialize(&plane, &ntdos, &command,
+            &target, 0, &profile) ||
+        !bx_ntvdm_dem_package_session_v1_initialize(&session, &plane) ||
+        !bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(1) << 2u, drive_types,
+            0u, 0u, &drives) ||
+        !bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&session, &drives) ||
+        !bx_ntvdm_dem_package_session_v1_set_mutation_profile(&session,
+            &mutation_profile) ||
+        !bx_ntvdm_host_namespace_v1_initialize(&host_namespace, &drives) ||
+        !bx_ntvdm_dem_package_session_v1_set_host_namespace(&session,
+            &host_namespace)) goto cleanup;
+    if (!GetTempPathW(MAX_PATH, temporary) ||
+        !GetTempFileNameW(temporary, L"n64", 0u, path)) goto cleanup;
+    file = CreateFileW(path, GENERIC_READ | GENERIC_WRITE, 0, 0, CREATE_ALWAYS,
+        FILE_ATTRIBUTE_TEMPORARY | FILE_FLAG_DELETE_ON_CLOSE, 0);
+    if (file == INVALID_HANDLE_VALUE || !WriteFile(file, "ONE", 3u, &written, 0) ||
+        written != 3u || !bx_ntvdm_dem_file_session_v1_adopt_owned(
+            &session.whole_provider.files, file, 0xbeefu, &token)) goto cleanup;
+    file = INVALID_HANDLE_VALUE;
+    memset(&event, 0, sizeof(event));
+    event.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
+    event.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
+    event.struct_bytes = sizeof(event);
+    event.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;
+    event.cpu_id = 1u; event.vector = 6u; event.fault_rip = 0x100u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.ebx = 0xbeefu;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 0u ||
+        result.eflags_write_mask != 0u ||
+        !bx_ntvdm_dem_file_session_v1_lookup(&session.whole_provider.files,
+            token, &looked_up)) goto cleanup;
+    bytes[3] = 0x02u;
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.eflags_values != 0u || bx_ntvdm_dem_file_session_v1_lookup(
+            &session.whole_provider.files, token, &looked_up)) goto cleanup;
+    status = 0;
+cleanup:
+    if (file != INVALID_HANDLE_VALUE) { CloseHandle(file); DeleteFileW(path); }
+    bx_ntvdm_dem_package_session_v1_teardown(&session);
+    bx_ntvdm_host_namespace_v1_release(&host_namespace);
+    return status;
+}
 static int misc_family_regression(void)
 {
     static const uint8_t cli_no_debug_services[] = {
@@ -419,13 +517,18 @@ static int misc_family_regression(void)
 int main(int argc, char **argv)
 {
     uint32_t service;
-    if (argc != 2) return 93;
+    if (argc != 2 && argc != 3) return 93;
     if (strcmp(argv[1], "direct") == 0) {
         dispatch_mode = BX_NTVDM_MUTATION_MODE_V1_DIRECT;
     } else if (strcmp(argv[1], "readonly") == 0) {
         dispatch_mode = BX_NTVDM_MUTATION_MODE_V1_READONLY;
     } else {
         return 94;
+    }
+    if (argc == 3) {
+        if (strcmp(argv[2], "pdb-lifecycle") != 0) return 96;
+        return dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT ?
+            direct_pdb_lifecycle_regression() : 97;
     }
     static const uint8_t fcb_unavailable[] = {
         0x07u, 0x20u, 0x2cu, 0x2du, 0x2fu, 0x31u
@@ -439,6 +542,8 @@ int main(int argc, char **argv)
     if (!fcb_search_core_regression()) return 90;
     { int fcb_status = fcb_bop_transaction_regression(); if (fcb_status != 0) return 91 + fcb_status; }
     if (!misc_family_regression()) return 92;
+    if (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+        direct_pdb_lifecycle_regression() != 0) return 95;
     for (service = 0u; service < 73u; ++service) {
         if (!dispatch((uint8_t)service, &result) ||
             !bx_ntvdm_cpu_result_v2_valid(&result) ||
