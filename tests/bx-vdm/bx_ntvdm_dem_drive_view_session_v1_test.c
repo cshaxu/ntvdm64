@@ -184,6 +184,52 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
         ram[0x180u] != 0xa5u || ram[0x198u] != 0xa5u) {
         bx_ntvdm_dem_package_session_v1_teardown(&session); return 9;
     }
+    /* The clock owner is profile-neutral for observation.  Without an explicit
+     * Direct clock capability, both setters preserve OpenNT's AL-only failure
+     * shape and never mutate the ambient host clock. */
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 0xa500u;
+    if (!dispatch(&session, 0x14u, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != ((1u << 0) | (1u << 2) | (1u << 3)) ||
+        (result.cpu_delta.gpr16_values[0] & 0xff00u) != 0xa500u ||
+        (result.cpu_delta.gpr16_values[0] & 0xffu) > 6u ||
+        result.cpu_delta.gpr16_values[2] < 1980u ||
+        (result.cpu_delta.gpr16_values[3] & 0xff00u) == 0u ||
+        (result.cpu_delta.gpr16_values[3] & 0xff00u) > 0x0c00u ||
+        (result.cpu_delta.gpr16_values[3] & 0xffu) == 0u ||
+        result.eflags_write_mask != 0u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 10;
+    }
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 0x5a00u;
+    if (!dispatch(&session, 0x15u, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != ((1u << 0) | (1u << 2) | (1u << 3)) ||
+        result.cpu_delta.gpr16_values[0] != 0x5a00u ||
+        (result.cpu_delta.gpr16_values[2] & 0xff00u) > 0x1700u ||
+        (result.cpu_delta.gpr16_values[2] & 0xffu) > 59u ||
+        (result.cpu_delta.gpr16_values[3] & 0xff00u) > 0x3b00u ||
+        (result.cpu_delta.gpr16_values[3] & 0xffu) != 0u ||
+        result.eflags_write_mask != 0u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 11;
+    }
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 0xa500u;
+    if (!dispatch(&session, 0x19u, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 0xa5ffu ||
+        result.eflags_write_mask != 0u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 12;
+    }
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 0x5a00u;
+    if (!dispatch(&session, 0x1cu, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 0x5affu ||
+        result.eflags_write_mask != 0u) {
+        bx_ntvdm_dem_package_session_v1_teardown(&session); return 13;
+    }
     memset(ram + 0x120u, 0xa5, 71u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0u; cpu.esi = 0x120u; cpu.eax = 2u;

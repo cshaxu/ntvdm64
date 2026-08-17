@@ -92,6 +92,10 @@
 > writes from the admitted immutable snapshot, and its CF-only set refusal, in
 > both Direct/Readonly normal sessions; see the [P11 record]
 > (etc/research/t222-s2-drive-view-media-id-session-regression-001.md).
+> **T222 S2 P12 progress:** the 50:14/15/19/1C clock owner now has a grouped
+> Direct/Readonly normal-session regression: query layouts remain source-shaped
+> and the currently unadmitted setters retain AL-only non-mutating failure; see
+> the [P12 record](etc/research/t222-s2-drive-view-clock-session-regression-001.md).
 
 
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
