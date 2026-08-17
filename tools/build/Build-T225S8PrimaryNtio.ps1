@@ -38,7 +38,7 @@ Remove-Item -LiteralPath @("$bios\MSBIO.CL3", "$bios\MSBIO.CL4", "$bios\MSBIO.CL
 Copy-Item -LiteralPath (Join-Path $stageMvdm 'dos\v86\messages\usa-ms.msg'), (Join-Path $stageMvdm 'dos\v86\messages\usa-ms.idx') -Destination $bios
 Copy-Item -LiteralPath (Join-Path $toolsRoot 'nosrvbld.exe'), (Join-Path $toolsRoot 'buildidx.exe') -Destination $bios
 [IO.File]::WriteAllText((Join-Path $bios 'RUN.BAT'), "@echo off`r`nbuildidx usa-ms.msg > B.LOG`r`nnosrvbld msbio.skl usa-ms.msg > N.LOG`r`necho done > DONE.OK`r`n", [Text.ASCIIEncoding]::new())
-& $runner -RepositoryRoot $repository -WorkingDirectory $bios -BatchFile 'RUN.BAT' -CompletionMarker 'DONE.OK' -TimeoutSeconds 30
+& $runner -RepositoryRoot $repository -WorkingDirectory $bios -BatchFile 'RUN.BAT' -CompletionFiles @('MSBIO.CL3','MSBIO.CL4','MSBIO.CL5','MSBIO.CL6') -TimeoutSeconds 60
 
 $classHashes = [ordered]@{
     'MSBIO.CL3' = '279d5cf516a39248f910a17e02647f37737b2c4607a6cd119dc7236affed78e2'
@@ -63,7 +63,7 @@ try {
 
 Copy-Item -LiteralPath (Join-Path $toolsRoot 'reloc.exe') -Destination $bios
 [IO.File]::WriteAllText((Join-Path $bios 'PACK.BAT'), "@echo off`r`nreloc ntio.exe ntio.sys 70 > R.LOG`r`necho done > PACK.OK`r`n", [Text.ASCIIEncoding]::new())
-& $runner -RepositoryRoot $repository -WorkingDirectory $bios -BatchFile 'PACK.BAT' -CompletionMarker 'PACK.OK' -TimeoutSeconds 30
+& $runner -RepositoryRoot $repository -WorkingDirectory $bios -BatchFile 'PACK.BAT' -CompletionFiles @('ntio.sys') -TimeoutSeconds 60
 
 $output = Join-Path $bios 'ntio.sys'
 if (-not (Test-Path -LiteralPath $output)) { throw 'RELOC did not produce NTIO.SYS' }

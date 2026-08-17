@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$WorkingDirectory,
     [Parameter(Mandatory = $true)][string]$BatchFile,
-    [Parameter(Mandatory = $true)][string]$CompletionMarker,
+    [Parameter(Mandatory = $true)][string[]]$CompletionFiles,
     [ValidateRange(1, 60)][int]$TimeoutSeconds = 30,
     [string]$DosBoxPath = 'C:\Program Files (x86)\DOSBox-0.74-3\DOSBox.exe'
 )
@@ -23,36 +23,41 @@ function Resolve-ContainedPath([string]$Root, [string]$Candidate, [string]$Label
 $repository = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $buildRoot = [IO.Path]::GetFullPath((Join-Path $repository 'build'))
 $working = Resolve-ContainedPath $buildRoot $WorkingDirectory 'WorkingDirectory'
-if (-not (Test-Path -LiteralPath $working -PathType Container)) {
-    throw "WorkingDirectory does not exist: $working"
-}
-if (-not (Test-Path -LiteralPath $DosBoxPath -PathType Leaf)) {
-    throw "DOSBox executable is unavailable: $DosBoxPath"
-}
-
-if ([IO.Path]::IsPathRooted($BatchFile) -or [IO.Path]::IsPathRooted($CompletionMarker)) {
-    throw 'BatchFile and CompletionMarker must be relative stage paths.'
-}
+if (-not (Test-Path -LiteralPath $working -PathType Container)) { throw "WorkingDirectory does not exist: $working" }
+if (-not (Test-Path -LiteralPath $DosBoxPath -PathType Leaf)) { throw "DOSBox executable is unavailable: $DosBoxPath" }
+if ([IO.Path]::IsPathRooted($BatchFile)) { throw 'BatchFile must be a relative stage path.' }
 $batch = Resolve-ContainedPath $working (Join-Path $working $BatchFile) 'BatchFile'
-$marker = Resolve-ContainedPath $working (Join-Path $working $CompletionMarker) 'CompletionMarker'
-if (-not (Test-Path -LiteralPath $batch -PathType Leaf)) {
-    throw "BatchFile does not exist: $batch"
-}
-if (Test-Path -LiteralPath $marker) {
-    throw "CompletionMarker already exists: $marker"
+if (-not (Test-Path -LiteralPath $batch -PathType Leaf)) { throw "BatchFile does not exist: $batch" }
+if ($CompletionFiles.Count -eq 0) { throw 'CompletionFiles must name at least one expected stage output.' }
+$completion = foreach ($file in $CompletionFiles) {
+    if ([IO.Path]::IsPathRooted($file)) { throw "CompletionFile must be a relative stage path: $file" }
+    Resolve-ContainedPath $working (Join-Path $working $file) 'CompletionFile'
 }
 
 $dosBatch = $BatchFile.Replace('/', '\')
-$mount = 'mount c "' + $working + '"'
-& $DosBoxPath -noconsole -c $mount -c 'c:' -c ('call ' + $dosBatch) -c 'exit'
-
+$mount = 'mount c ' + $working
+$arguments = '-noconsole -c "' + $mount + '" -c "c:" -c "call ' + $dosBatch + '" -c "exit"'
+$process = Start-Process -FilePath $DosBoxPath -ArgumentList $arguments -PassThru
 $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
+$previous = $null
+$stableSamples = 0
+$completed = $false
 while ([DateTime]::UtcNow -lt $deadline) {
-    if (Test-Path -LiteralPath $marker -PathType Leaf) {
-        Write-Host "DOS batch completed: $marker"
-        return
+    $snapshot = @($completion | ForEach-Object {
+        if (Test-Path -LiteralPath $_ -PathType Leaf) { (Get-Item -LiteralPath $_).Length } else { -1 }
+    })
+    if (($snapshot -notcontains -1) -and $null -ne $previous -and (@($snapshot) -join ',') -eq (@($previous) -join ',')) {
+        $stableSamples++
+        if ($stableSamples -ge 10) {
+            $completed = $true
+            break
+        }
+    } else {
+        $stableSamples = 0
     }
-    Start-Sleep -Milliseconds 200
+    $previous = $snapshot
+    Start-Sleep -Milliseconds 500
 }
-
-throw "DOS batch completion marker was not observed within $TimeoutSeconds seconds: $marker"
+if (-not $process.HasExited) { Stop-Process -Id $process.Id -Force }
+if (-not $completed) { throw "DOS batch did not produce stable declared outputs within $TimeoutSeconds seconds: $batch" }
+Write-Host "DOSBox batch produced stable outputs: $batch"
