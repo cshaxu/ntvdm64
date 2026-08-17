@@ -86,3 +86,7 @@ behind one typed private backend, while COMMAND retains the BOP ownership and
 completion lifecycle. This is P1 boundary evidence, not full S5 closure:
 package-session memory-gather routing and the Readonly launch terminal still
 need their own whole-provider exercise, and no pipe/DEM success claim follows.
+
+## P2 Package-Session Observation
+
+The focused command-child-redirection-package fixture passed under MSVC x64 /MT (linkExitCode: 0, unExitCode: 0). It exercises the actual COMMAND package-session route: Direct 54:0A reaches the shared private backend and its 54:0B completion; Readonly 54:0A returns the retained explicit ERROR_NOT_SUPPORTED terminal before the backend is called. This remains non-pipe evidence only.

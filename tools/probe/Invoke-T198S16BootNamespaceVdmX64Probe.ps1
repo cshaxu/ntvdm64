@@ -1,7 +1,7 @@
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-drive-view-provider', 'dem-drive-view-session', 'dem-whole-provider-session', 'dem-loader-family', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard', 'command-lifecycle', 'command-package', 'command-bootstrap-profile-session')]
+    [ValidateSet('boot-namespace', 'boot-namespace-provider', 'profile-search-snapshot', 'dem-package', 'dem-drive-view-provider', 'dem-drive-view-session', 'dem-whole-provider-session', 'dem-loader-family', 'dem-lifecycle', 'dem-profile', 'readonly-file', 'global-bop', 'command-entry', 'command-bootstrap', 'command-launch-execution', 'command-console-keyboard', 'command-lifecycle', 'command-package', 'command-bootstrap-profile-session', 'command-child-redirection-package')]
     [string]$Fixture = 'boot-namespace',
     [ValidateSet('x64')]
     [string]$HostArchitecture = 'x64'
@@ -247,6 +247,10 @@ if ($Fixture -eq 'dem-package') {
         'tests\bx-vdm\bx_ntvdm_mantle_mechanical_action_decline_stub.c',
         'tests\bx-vdm\bx_ntvdm_command_package_family_v1_test.c'
     )
+} elseif ($Fixture -eq 'command-child-redirection-package') {
+    $sourceRelatives += @(
+        'tests\bx-vdm\bx_ntvdm_command_child_redirection_package_v1_test.c'
+    )
 } elseif ($Fixture -eq 'command-bootstrap-profile-session') {
     $sourceRelatives += @(
         'tests\bx-vdm\bx_ntvdm_command_bootstrap_profile_session_v1_test.c'
@@ -353,6 +357,8 @@ $record = [ordered]@{
         'tests/bx-vdm/bx_ntvdm_command_lifecycle_provider_v1_test.c'
     } elseif ($Fixture -eq 'command-package') {
         'tests/bx-vdm/bx_ntvdm_command_package_family_v1_test.c'
+    } elseif ($Fixture -eq 'command-child-redirection-package') {
+        'tests/bx-vdm/bx_ntvdm_command_child_redirection_package_v1_test.c'
     } elseif ($Fixture -eq 'command-bootstrap-profile-session') {
         'tests/bx-vdm/bx_ntvdm_command_bootstrap_profile_session_v1_test.c'
     } else {
