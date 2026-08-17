@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S25.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S26.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S25 -- startup-machine composition normalization.**
+**Active: M0 T225 S26 -- guest DOS EXEC/PSP/parent-return reconciliation.**
 
 ## Active Packet
 
@@ -14,22 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S25, Ordinary Mode. |
-| Admission And Approval | The owner-approved T225 objective, repeated prohibition on trace-led singleton repairs, and [S24 closure](history/m0-t225-s24-closure-20260817.md) admit one complete startup-machine composition package. S24 identifies the whole nine-identity reachable family and transfers no isolated selector implementation. |
-| Objective | Normalize the complete reached startup-machine family under one audited bx-vdm composition surface: share the original `unexpected_int` mechanics for `02` and retained `06`; migrate or verify `12`, `15:AH=88`, `17`, `5F`, `66`, and `C8`; preserve `5E` in its OpenNT top-level owner; then pass one whole-family regression before a bounded Direct/Readonly native validation. |
-| Non-goals | No full BIOS[] table, no new PC device, firmware, keyboard, mouse, printer, EMS/LIM, cassette, monitor/DPMI transition, host GUI, or host capability. No selector/OpenNT/DOS term in bx-core or bx-mantle; no raw callback/TLS/CCPU/SAS route; no trace-led leaf delivery; no Overlay implementation. |
-| Reference Baseline | S23 typed INT 06 transaction and Direct/Readonly observation; S24 full selector/current-route ledger; original `bios.c`, `illegalp.c`, `unexp_nt.c`, `nt_bop.c`, `spckbd.asm`, `spcemm.asm`, `printer_.c`, and `nt_mouse.c`; current boot and native composition sessions; formal five-library Ninja graph. |
-| Files And ABI Surface | `src/opennt/local/compat/host` source-derived fixed-width machine transcripts; `src/bx-vdm` one package-owned startup-machine selection/composition surface; existing selector-blind `src/bx-mantle` typed RAM/PIC actions only; formal manifest, whole-family fixture, evidence and Status. No bx-core API or product ABI extension without separate admission. |
-| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source policy, source-recovery audit criterion, and design authorities. |
-| Verification | First record one source/ABI/failure map for every retained member and direct-reuse failure. Then source-build the formal MSVC x64 /MT graph; run a whole-family positive/negative fixture that covers all nine identities and rejects all unadmitted variants; make one bounded native Direct/Readonly observation only after the family is unified. |
-| Expected Markers | `02` and `06` preserve their distinct original frame ordering while sharing the `unexpected_int` PIC/BDA protocol; no legacy callback/TLS island is selected; every accepted route is copied/typed; `5E` remains top-level; Direct/Readonly are identical for profile-neutral machine operations; no extra device/firmware feature appears in the manifest. |
-| Asset Needs | Pinned OpenNT/SoftPC source identity; adopted Bochs 2.6 PIC/RAM mechanics; source-built primary guest inputs; formal MSVC x64 /MT Ninja graph; and disposable `build/M0-T225-S25/<run>` roots. |
-| Reporting Requirements | Record source owner, direct-reuse disposition, copied ABI/order/failure behavior, old-route migration/disposition, formal source list, focused regression command/output, Direct/Readonly result and all excluded BIOS/device capabilities. |
-| Stop Conditions | Any member requires a new Bochs device, firmware behavior, product-shell dependency, raw pointer/callback/TLS ABI, a changed OpenNT failure contract, x86/prebuilt link, or a host capability. Record and transfer the blocker; continue independent package mapping but do not emulate or enable it. |
-| Exit Criteria | All eight startup-machine routes are selected through one package-owned composition surface, `02`/`06` share only the original common protocol while retaining their distinct prelude, `5E` remains outside the package, no legacy callback/TLS route is live, full-family regression passes under formal x64 graph, and one bounded Direct/Readonly native validation records the family result. |
+| Identifier Mode | M0 T225 S26, Ordinary Mode. |
+| Admission And Approval | T225 owner objective; completed S25 machine-package closure; and the prior S21 guest source map admit an owner-package source/current-route reconciliation before any guest execution change. |
+| Objective | Produce one complete original NTDOS EXEC/PSP/parent-return source and current-composition gap map that identifies the next smallest owner-scoped closure for declared multi-program execution. |
+| Non-goals | No trace-led BOP work, synthetic DOS EXEC/PSP/arena implementation, nested host process, new BIOS/device feature, Overlay implementation, or mutation-policy change. |
+| Reference Baseline | S21 guest source map; S19 DEM and S20 COMMAND whole-package closures; S25 machine-family closure; immutable primary guest inputs; current formal CLI graph. |
+| Files And ABI Surface | Read-only original NTDOS/NTIO/COMMAND source and current bx-vdm/guest staging contracts; one research map, Status, history/evidence only unless a separately admitted source-derived seam is proven. |
+| Applicable Rules | rules/EXECUTION.md, source policy, source-recovery audit criterion, design authorities, and the T225 prohibition on trace-led singleton repair. |
+| Verification | Account for EXEC, PSP/arena/JFN/environment construction, entry transfer, termination, parent return, every crossed BOP/host boundary, and current Direct/Readonly disposition; review no implementation route is silently assumed. |
+| Expected Markers | One owner map distinguishes original guest-owned behavior from host BOP services, bx mechanics, and unavailable prerequisites; names the smallest next component package without redefining DOS semantics. |
+| Asset Needs | Pinned OpenNT source tree, source-built/primary guest identities, current bx-vdm composition sources, existing S19--S25 evidence. |
+| Reporting Requirements | Cite original paths and routines, current route/boundary, recovery rung, failure/absence, Direct/Readonly impact, and a globally scoped next-package recommendation. |
+| Stop Conditions | Missing source identity, need for a new guest semantics substitute, ambiguous historical contract, or a requirement for an unadmitted Bochs/device/host capability. Record rather than invent behavior. |
+| Exit Criteria | Complete source/current-route matrix for the declared guest EXEC lifecycle, explicit owner/disposition for every prerequisite, and one admissible follow-on component package stated without trace-derived leaf work. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | `02`/`06` handler split and shared PIC/BDA ordering; `12`/`15:88` bounded profile values; `17` no-printer contract; `5F` SPCKBD/ICA boundaries; `66` no-EMS failure; `C8` headless vector mapping; `5E` top-level collision; bridge precedence; legacy TLS/callback island; manifest device/source drift; Direct/Readonly parity. |
+| Similar-Issue Sweep | DOS EXEC branches, EXE/COM/overlay loaders, PSP/arena/JFN/environment, child entry, termination/parent return, DEM lifecycle and COMMAND launch, guest file I/O, machine memory/interrupt prerequisites, Direct/Readonly parity. |
 
+> **T225 S25 closure:** [the closure record](history/m0-t225-s25-closure-20260817.md) completes the one-surface startup-machine package and its whole-family/native evidence. It transfers only the source/current route reconciliation for guest multi-program execution.
 > **T225 S24 closure:** [the closure record](history/m0-t225-s24-closure-20260817.md) completes the whole machine/BIOS owner audit and transfers one normalized startup-machine package to S25.
 > **T225 S25 P1 source/ABI/failure map:** [the package map](etc/research/t225-s25-startup-machine-source-abi-failure-map-001.md) fixes all eight retained startup-machine contracts, the shared `02`/`06` transcript boundary, and the one-composition migration rule before implementation.
 > **T225 S25 P2 shared interrupt result:** [the focused result](etc/evidence/t225-s25-startup-machine-interrupt-result-001.md) source-builds and verifies the common source-derived 02h/06h PIC/BDA transcript, including their distinct frame behavior. Whole-family regression and native validation remain pending.
