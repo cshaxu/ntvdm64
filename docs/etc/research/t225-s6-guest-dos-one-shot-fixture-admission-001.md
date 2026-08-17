@@ -121,3 +121,17 @@ The next S6 implementation item is a dedicated installation fixture that
 validates the exact NTIO/NTDOS/COMMAND/SHARE profile under Direct and Readonly
 mode, including rejection of any unselected Overlay/Virtual route. Its native
 execution remains separately gated.
+
+## P4 Legacy Recipe Replacement Decision
+
+The existing S94 compile-only entry is intentionally not used: it requires the
+absent historical `artifacts/build/t198-s74-dem-pdb-termination-r1/link.rsp`.
+That dependency cannot be restored with prebuilt objects or a product shell.
+
+`tools/probe/Invoke-T220S5SourceCompositionClosure.ps1` is the admissible
+replacement build basis. It rebuilds the current CPU5/P bx-core/bx-mantle seed
+and all tracked composition-manifest sources under MSVC x64 `/MT`, and its
+explicit forbidden-input list excludes the S74 root, `bochs.exe`, `main.cc`,
+GUI/plugin/device archives. The next implementation adds a new exact-image
+fixture recipe on this basis; it must not repair S94 or inherit its response
+file.
