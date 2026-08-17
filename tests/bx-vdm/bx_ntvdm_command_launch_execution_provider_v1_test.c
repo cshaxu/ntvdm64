@@ -18,6 +18,17 @@ static int profile_initialize(bx_ntvdm_mutation_profile_v1 *profile,
         BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x03u) &&
         bx_ntvdm_command_profile_consumer_v1_initialize(consumer, profile);
 }
+static int fake_child_backend(
+    const bx_ntvdm_command_child_backend_v1_request *request,
+    bx_ntvdm_command_child_backend_v1_result *result)
+{
+    if (!bx_ntvdm_command_child_backend_v1_request_valid(request) || !result)
+        return 0;
+    bx_ntvdm_command_child_backend_v1_result_clear(result);
+    result->completed = 1u;
+    result->exit_code = request->launch_service == 8u ? 23u : 24u;
+    return bx_ntvdm_command_child_backend_v1_result_valid(result);
+}
 
 static uint32_t dispatch_token(bx_ntvdm_command_launch_execution_provider_v1 *provider,
     bx_ntvdm_exception_event_v1 *event, bx_ntvdm_cpu_state_v1 *cpu,
@@ -43,6 +54,7 @@ int main(void)
     bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_instruction_window_v1 window;
     bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_command_host_context_v1 host_context;
     uint32_t service, slot = 0u, token, stale, current[3];
     uint8_t packed[12];
     const uint8_t expected[17] = { 0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,0,0 };
@@ -94,6 +106,44 @@ int main(void)
             &later.stream_session, packed, sizeof(packed)) ||
         later.stream_session.validated_record_count != 1u) return 9;
 
+    { const uint8_t directory[] = "C:\\";
+      const uint8_t processor[] = "COMMAND.COM";
+      const uint8_t environment[] = { 0u, 0u };
+      const uint8_t command[] = "COMMAND.COM /C EXIT";
+      if (!bx_ntvdm_command_host_context_v1_initialize(&host_context, 2u,
+              directory, (uint32_t)sizeof(directory) - 1u) ||
+          !bx_ntvdm_command_host_context_v1_set_processor(&host_context,
+              processor, (uint32_t)sizeof(processor)) ||
+          provider.child_redirection.launch_count != 0u) return 10;
+      provider.child_redirection.execute = fake_child_backend;
+      { const uint8_t bytes[4] = {0xc4u,0xc4u,0x54u,8u};
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes)); }
+      if (!bx_ntvdm_command_child_redirection_v1_launch(&provider.child_redirection,
+              &provider.stream_session, command, (uint32_t)sizeof(command),
+              environment, (uint32_t)sizeof(environment), &host_context,
+              &event, &cpu, &window, &result) ||
+          result.cpu_delta.gpr16_values[0] != 23u ||
+          provider.child_redirection.completion_present != 1u) return 11;
+      { const uint8_t bytes[4] = {0xc4u,0xc4u,0x54u,11u};
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes)); }
+      if (!bx_ntvdm_command_child_redirection_v1_complete(&provider.child_redirection,
+              &event, &cpu, &window, &result) ||
+          result.cpu_delta.gpr16_values[0] != 23u ||
+          provider.child_redirection.completion_consumed != 1u ||
+          bx_ntvdm_command_child_redirection_v1_complete(&provider.child_redirection,
+              &event, &cpu, &window, &result)) return 12;
+      { const uint8_t bytes[4] = {0xc4u,0xc4u,0x54u,10u};
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes)); }
+      if (!bx_ntvdm_command_child_redirection_v1_launch(&provider.child_redirection,
+              0, processor, (uint32_t)sizeof(processor), environment,
+              (uint32_t)sizeof(environment), &host_context, &event, &cpu,
+              &window, &result) || result.cpu_delta.gpr16_values[0] != 24u ||
+          provider.child_redirection.launch_count != 2u ||
+          provider.child_redirection.completion_count != 2u) return 13;
+    }
+
+    { const uint8_t bytes[4] = {0xc4u,0xc4u,0x54u,6u};
+      bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes)); }
     if (!bx_ntvdm_command_launch_execution_provider_v1_initialize(&readonly) ||
         !profile_initialize(&readonly_profile, &readonly_consumer,
             BX_NTVDM_MUTATION_MODE_V1_READONLY) ||
