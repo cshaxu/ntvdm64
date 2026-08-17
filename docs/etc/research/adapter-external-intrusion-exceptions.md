@@ -33,6 +33,7 @@ Every new exception must name its current path, not the historical prefix.
 | ID | Owner approval | Imported code changed | Scope | Status |
 | --- | --- | --- | --- | --- |
 | BX-MANTLE-082 | 2026-08-17: T225 S23 P2 source-builds the original 8259 PIC and proves the minimal machine cannot clean up a non-default port map without the original unregistration bodies | Adopted `src/bx-mantle/pic.cc`/`pic.h`; project-owned `src/bx-mantle/minimal_port_space.cc` and minimal-machine lifecycle | Replace the original PIC plugin entry only with mantle-private create/destroy helpers that bind the original `thePic` singleton required by CPU5 `BX_USE_PIC_SMF`; bind one native `bx_pic_c` after the established empty port-space, register only `20h`, `21h`, `A0h`, `A1h` byte handlers through original `init()`, then use the exact original unregistration semantics to restore the stub/default state before normal cleanup. | Implemented and verified: formal MSVC x64 `/MT` Ninja fixture proves native mask/IRQ/IAC/EOI behavior and two consecutive clean lifecycles; the source scan and focused boundary test reject plugin/registry/service dependencies. No bx-core change, plugin loader/registry, `register_state` invocation, debugger, timer, firmware, second device, BOP/selector/OpenNT/DOS term, guest-memory operation, host capability, or adapter callback is allowed. Direct/Readonly are structurally identical because PIC has no host mutation; their bounded native observation remains an S23 exit requirement. Reject if the native PIC needs an unclassified product-shell dependency. |
+| BX-MANTLE-083 | 2026-08-17: T225 S23 P5 proves that the source-derived original INT 06 operation transcript needs synchronous native byte-port execution, while bx-vdm must not obtain a Bochs object/callback | Project-authored `src/bx-mantle/bx_ntvdm_port_action_v1.h/.cc` and only the existing minimal-machine lifecycle gate | Expose versioned copied byte port read/write requests; accept only while the established minimal machine owns initialized native port space; delegate exactly to existing `bx_devices.inp/outp`; return only copied success/value. | Admitted before implementation. No selector/BOP/OpenNT/DOS term, device registration, firmware, callback, object pointer, generic device API, host capability or new Bochs source patch is permitted. The focused native lifecycle fixture must prove inactive rejection, native PIC dispatch, copied read result, and post-cleanup rejection. |
 | BX-MANTLE-081 | 2026-08-15: T212 S4 maps cooperative CLI cancellation and owner authorizes only its selector-blind mechanical boundary | Project-owned `src/bx-mantle/bx_ntvdm_machine_stage_v1.*` and `bx_ntvdm_engine_*`; no `src/bx-core` source | Add mantle-private atomic cancellation state, a fixed `uint32_t` reason API, and one bounded existing CPU-thread timer poll that may set the existing `kill_bochs_request` latch. After normal stage/composition reset, map that distinct stage status to the pre-existing copied engine `HOST_CANCELLATION` terminal. | Registered before implementation. No Bochs-core edit, CLI/Win32 include or handle, callback/pointer, selector/BOP/OpenNT/DOS term, guest-memory/state inspection, device/firmware feature, direct asynchronous latch write, normal-completion producer, wall-time/resource policy or adapter route is allowed. A focused x64 `/MT` fixture must prove pre-entry/in-flight cancel, invalid reason, budget/typed-stop distinction and two-run cleanup. Reject/remove if a raw cross-thread Bochs field write, core edit, product shell or non-mechanical host semantics is needed. |
 | BX-ABI-080 | 2026-08-14: owner authorizes registered Bochs intrusions and requires the adapter to define the real BOP boundary; T199 S37 rejects linking its whole-package lifecycle through the legacy runtime monolith | `refs/bochs/main.cc` | In the existing default-off execution-plan block, call one adapter-owned composition-lifecycle installer after the opaque execution-plan preparation. Bochs receives only absent/ready/rejected; it neither sees a selector, BOP, OpenNT/DOS term, image, host capability nor composition state. | Registered before implementation. The adapter lifecycle unit must own all profile/image/drive/volume capture and unbind its process-local state; the call must reject a declared malformed composition before the CPU loop. A focused MSVC x64 source/link closure and default-off source scan are required. |
 | BX-MANTLE-079 | 2026-08-13: T199 S23 admits C2 as the second shared XMS/DPMI prerequisite; owner permits individually registered minimal Bochs intrusions | New project-authored `src/bx-mantle/bx_ntvdm_extended_memory_v1.*`; minimal lifecycle gate in `bx_ntvdm_minimal_machine.*`; declared source membership in the finite-machine link recipe | Expose a fixed-size, mantle-private allocation table over the already initialized native RAM aperture from 1 MiB through `get_memory_len`, with fixed-width query/allocate/free/resize/move records and existing checked ordinary-RAM copies. The pre-existing fixed records may use C linkage so a separately compiled adapter can call the same typed wrapper; no field, state or capability is added. | S24 governance remediation: the uncommitted prototype existed before this row; this row was entered before final implementation acceptance and commit. No selector/BOP/XMS/DPMI/OpenNT/DOS term, adapter state, host pointer, host allocator, device, firmware, interrupt, CPU decoding, or bx-core change is permitted. |
@@ -1235,6 +1236,36 @@ product-shell API, callback, raw host pointer, host allocator,
 selector-specific branch, device/firmware/interrupt behavior, or direct
 adapter dependency.
 
+### BX-MANTLE-083: Selector-Blind Native Byte-Port Action
+
+**Need.** The P5 source-derived `illegal_op_int`/`unexpected_int` transcript
+contains original byte PIC operations.  The existing mantle owns the native
+PIC and port space, while `bx-vdm` may not receive a Bochs object, callback, or
+port table.  A fixed copied-operation seam is therefore the smallest
+composition capability.
+
+**Procedure.** Add only `bx_ntvdm_port_action_v1.h/.cc` in `src/bx-mantle`.
+The record permits exactly one byte read or byte write at a 16-bit port.  A
+private lifecycle bit becomes true only after the existing minimal machine has
+finished memory, port-space, PIC, CPU reset and its existing capability setup;
+it becomes false before PIC/port cleanup.  The executor rejects invalid or
+inactive records and otherwise calls the already-owned `bx_devices.inp/outp`.
+It returns a copied read value or success/failure only.
+
+**Boundary.** The files contain no selector, BOP, OpenNT, DOS/WOW/DEM,
+provider, host-capability, device-registration, firmware, callback, raw
+Bochs-object, or pointer ABI.  They create no device and alter no core source:
+the fixed native PIC remains the sole current port owner.
+
+**Negative cases and verification.** A formal MSVC x64 `/MT` native fixture
+must prove invalid/pre-initialize/post-cleanup rejection, one native PIC mask
+write/read through this seam, and no effect on rejected requests.  A static
+source scan must reject semantic and product-shell terms.  Direct and Readonly
+are structurally identical because no host mutation occurs.
+
+**Review condition.** Reject/remove this entry if it needs a selector branch,
+a port-range policy, an arbitrary-width or batch API, a second device,
+firmware, callback/object export, or any bx-core change.
 ## OpenNT Intrusions
 
 None authorized or implemented. OpenNT remains unmodified by the adapter
