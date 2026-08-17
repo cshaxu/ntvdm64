@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S4.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S5.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S4 -- Guest DOS COM EXEC control-flow admission.**
+**Active: M0 T225 S5 -- Minimal native NTIO continuity closure.**
 
 ## Active Packet
 
@@ -14,21 +14,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S4, Ordinary Mode. |
-| Admission And Approval | Queue order 1; T225 S1 source map; completed S2 lifecycle and S3 file-I/O packages. |
-| Objective | Establish the source-owned COM branch admission: exact `$Exec` COM control flow, entry/stack/PSP/MCB prerequisites, required existing guest artifact closure, and a source-built fixture plan. |
-| Non-goals | No adapter COM loader, no PSP/MCB/JFN implementation, no MZ relocation, no parent return, no trace-led patch, no host child, no Bochs change. |
-| Reference Baseline | OpenNT `msproc.asm:$Exec`, `ExecRead`, `get_binary_type`; S3 five-service closure; current guest artifact inventory and machine startup evidence. |
-| Files And ABI Surface | Evidence, guest artifact/build records and focused source fixture planning. No production adapter, Bochs, or guest DOS code change until owner/entry closure is proven. |
+| Identifier Mode | M0 T225 S5, Ordinary Mode. |
+| Admission And Approval | Queue order 1; completed S2 lifecycle, S3 file-I/O and S4 COM ownership/prerequisite admission. |
+| Objective | Close the minimal native Bochs machine prerequisite needed to observe continuous source-built NTIO execution beyond the first recorded x87/IRQ13 branch. |
+| Non-goals | No BOP provider, no adapter IRQ/BIOS/DOS behavior, no COM loader, no arbitrary device enablement, no NTDOS/COMMAND or COM runtime claim. |
+| Reference Baseline | T225 S4 COM map; immutable source-built NTIO prefix observation/correlation; current bx-core/bx-mantle minimal machine sources. |
+| Files And ABI Surface | bx-core/bx-mantle native mechanics, bounded native probe/evidence. bx-vdm ABI is frozen except existing opaque mechanical calls. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Source/ABI/failure map for COM branch; artifact/build/entry evidence; declared fixture closure proving guest-owned prerequisites, then one native trace only after source fixture admission. |
-| Expected Markers | Guest `$Exec` owns load/PSP/MCB/entry; adapter supplies only already-admitted file capability; no synthetic process or loader. |
-| Asset Needs | Existing local OpenNT/MS-DOS sources, artifact inventory, S3 fixture evidence, MSVC x64 `/MT`; no external import or host modification. |
-| Reporting Requirements | Separate source facts, existing evidence, missing prerequisites, and future COM/MZ/return packages. |
-| Stop Conditions | Any adapter loader/process semantics, synthetic PSP/MCB, host child, Bochs change, MZ work, or native trace before fixture admission. |
-| Exit Criteria | COM source/ABI/failure map and reproducible fixture plan are complete, all prerequisite owners have a disposition, and reviewed evidence is committed/pushed. No COM execution or parent-return claim is permitted. |
+| Verification | Default-off diagnostic boundary; one immutable-input native observation; source/trace owner ledger; focused source-built closure test and a bounded rerun only after admission. |
+| Expected Markers | Concrete first reached condition classified as entry/FPU-IRQ/PIC-IVT/map; no selector-aware Bochs change; no accidental device product-shell expansion. |
+| Asset Needs | Existing local OpenNT, current bx-core/bx-mantle, source-built NTIO fixture and MSVC x64 /MT; no external import or host modification. |
+| Reporting Requirements | Separate actual trace facts, source facts, candidate machine requirements, rejected mechanisms and current profile impact. |
+| Stop Conditions | Any adapter-owned IRQ/BIOS/DOS behavior, BOP selector logic in Bochs, broad stock-PC enablement, guest-byte change, or extra host capability. |
+| Exit Criteria | A reproducible continuous-prefix classification and an evidence-backed minimal native closure decision. This does not close guest EXEC. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | Guest DOS EXEC/PSP/MCB/JFN/termination, Direct/Readonly artifact access, COMMAND handoff, machine startup, and CLI terminal boundary. |
+| Similar-Issue Sweep | CPU/FPU reset, IRQ/PIC/IVT, physical maps, SIM/lifecycle/port-space and native startup entry. |
 > **T225 S4 P0 admission:** S3 is closed in [its file-I/O source/ABI record](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md). S4 begins with the complete COM branch source and prerequisite map; it must not implement a substitute loader.
 
 > **T225 S4 P1 progress:** the [COM control-flow/prerequisite map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) confirms `$Exec` remains the only COM loader. Artifact and S3 file evidence exist; real guest arena/PSP/entry reach is not yet proven and requires a bounded guest fixture.
@@ -36,6 +36,8 @@
 > **T225 S4 P2 admission result:** current native startup stages only NTIO; NTDOS is identity-only and COMMAND remains namespace input. The [map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) records machine/startup continuity as the first missing owner package. S4 does not authorize a synthetic loader or native COM trace.
 
 > **T225 S4 P3 handoff:** the same record now assigns the first native continuity requirements by owner: lifecycle/port-space, x87/IRQ13, PIC/IVT, and the reached `0xA1800` map are all Bochs-machine questions, not adapter work. The next package begins from those reached facts only.
+
+> **T225 S5 P0 admission:** [the native continuity ledger](etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md) converts the S4 handoff into one owner-scoped sequence. Direct/Readonly BOP capability stays stable; Overlay/Virtual receive neither fallback nor new behavior.
 
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 
