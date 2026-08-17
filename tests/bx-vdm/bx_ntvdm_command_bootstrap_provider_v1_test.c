@@ -84,7 +84,7 @@ int main(void)
             &event, &cpu, &command_instruction, &transaction, payload) ||
         transaction.writes.write_count != 0u ||
         transaction.result.cpu_delta.gpr16_write_mask != 1u ||
-        transaction.result.cpu_delta.gpr16_values[0] != 0u ||
+        transaction.result.cpu_delta.gpr16_values[0] != 1u ||
         transaction.result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         transaction.result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) return 9;
     return 0;

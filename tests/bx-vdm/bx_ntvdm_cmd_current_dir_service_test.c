@@ -32,13 +32,13 @@ int main(void)
             (UINT32_C(1) << 3u), &context, &event, &cpu, &window,
             &transaction, payload) || transaction.writes.write_count != 0u ||
         transaction.result.cpu_delta.gpr16_write_mask != 1u ||
-        transaction.result.cpu_delta.gpr16_values[0] != 0u ||
+        transaction.result.cpu_delta.gpr16_values[0] != 1u ||
         transaction.result.eflags_values != 1u) return 2;
     cpu.eax = 2u;
     if (!bx_ntvdm_cmd_current_dir_service_v1_prepare(0u, &context, &event, &cpu,
             &window, &transaction, payload) || transaction.writes.write_count != 0u ||
         transaction.result.cpu_delta.gpr16_write_mask != 1u ||
-        transaction.result.cpu_delta.gpr16_values[0] != 0u ||
+        transaction.result.cpu_delta.gpr16_values[0] != 1u ||
         transaction.result.eflags_values != 1u) return 3;
     puts("bx-ntvdm CMD current-directory service: root/error atomic contracts verified");
     return 0;

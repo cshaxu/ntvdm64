@@ -39,7 +39,7 @@ int bx_ntvdm_cmd_current_dir_service_v1_prepare(uint32_t available_mask,
         return bx_ntvdm_cpu_result_v2_resume(&transaction->result,
                 event->fault_rip + 4u) &&
             bx_ntvdm_cpu_delta_v1_set_gpr16(&transaction->result.cpu_delta,
-                0u, 0u) && bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 1) &&
+                0u, 1u) && bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 1) &&
             bx_ntvdm_cpu_result_v2_valid(&transaction->result);
     }
     if (host_context != 0 && !bx_ntvdm_command_host_context_v1_valid(host_context)) return 0;
@@ -47,7 +47,7 @@ int bx_ntvdm_cmd_current_dir_service_v1_prepare(uint32_t available_mask,
         return bx_ntvdm_cpu_result_v2_resume(&transaction->result,
                 event->fault_rip + 4u) &&
             bx_ntvdm_cpu_delta_v1_set_gpr16(&transaction->result.cpu_delta,
-                0u, 0u) && bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 1) &&
+                0u, 1u) && bx_ntvdm_cpu_result_v2_set_cf(&transaction->result, 1) &&
             bx_ntvdm_cpu_result_v2_valid(&transaction->result);
     }
     {

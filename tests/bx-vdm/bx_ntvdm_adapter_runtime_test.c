@@ -466,7 +466,7 @@ int main(int argc, char **argv)
     failed |= !bx_ntvdm_adapter_runtime_v2_dispatch(&event, &state, &window,
         &read_result) || read_result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         read_result.cpu_delta.gpr16_write_mask != 1u ||
-        read_result.cpu_delta.gpr16_values[0] != 0u ||
+        read_result.cpu_delta.gpr16_values[0] != 1u ||
         (read_result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
         bx_ntvdm_adapter_runtime_v1_take_pending_multi_write(&event, &state,
             &multi_write, &payload, &payload_bytes);
