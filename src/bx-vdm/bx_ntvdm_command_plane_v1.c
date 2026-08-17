@@ -12,7 +12,7 @@ int bx_ntvdm_command_plane_v1_valid(const bx_ntvdm_command_plane_record_v1 *r) {
         r->disposition<=BX_NTVDM_COMMAND_PLANE_ORIGINAL_NOOP && !r->reserved0;
 }
 static uint32_t component(uint8_t s) {
-    switch(s) { case 0:return 1; case 1:case 2:case 4:case 5:case 12:case 13:case 15:case 16:return 9;
+    switch(s) { case 0:return 1; case 1:case 2:case 4:case 5:case 12:case 13:case 15:return 9; case 16:return 7;
     case 6:case 7:case 8:case 10:return 10; case 11:return 4;
     case 9:case 14:return 5; case 3:return 8;
     default:return 0; }

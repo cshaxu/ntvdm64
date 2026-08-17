@@ -37,7 +37,7 @@ int main(void)
     uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];
     uint32_t service;
     const uint8_t expected[17] = {
-        0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1
+        0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0
     };
 
     memset(&ns, 0, sizeof(ns));
@@ -60,6 +60,12 @@ int main(void)
             return 4;
     }
     if (bx_ntvdm_command_bootstrap_provider_v1_owns_service(17u)) return 5;
+    command_window(&command_instruction, 16u);
+    if (!bx_ntvdm_bop_ingress_v1_classify(&command_instruction, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_command_plane_v1_classify(&ingress, &selection, &route) ||
+        route.component != BX_NTVDM_COMMAND_COMPONENT_SESSION ||
+        route.disposition != BX_NTVDM_COMMAND_PLANE_DEFERRED) return 10;
 
     /* The provider's members decline malformed guest addresses before a
        machine action or partial result can escape their common boundary. */

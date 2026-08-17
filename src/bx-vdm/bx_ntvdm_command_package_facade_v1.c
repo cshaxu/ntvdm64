@@ -49,7 +49,7 @@ int bx_ntvdm_command_package_facade_v1_dispatch(const bx_ntvdm_bop_ingress_v1 *i
         !selection || !event || !cpu_before) return 0;
     bx_ntvdm_cpu_result_v2_pass_through(result);
     if (route->disposition == BX_NTVDM_COMMAND_PACKAGE_DEFERRED &&
-        route->plane.component == BX_NTVDM_COMMAND_COMPONENT_BOOTSTRAP &&
+        route->plane.component == BX_NTVDM_COMMAND_COMPONENT_SESSION &&
         route->plane.service == 16u && ingress->family == BX_NTVDM_BOP_FAMILY_COMMAND &&
         ingress->service == 16u && event->vector == 6u &&
         cpu_before->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL)

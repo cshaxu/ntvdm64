@@ -37,6 +37,8 @@
 > **T223 S1 P2 closure:** source ABI and host-dependency mapping select COMMAND bootstrap/environment/config (01/02/04/05/0C/0D/0F) as the first whole implementation component; stream/launch, console, lifecycle and session broker remain separately owned. See the [P2 selection](etc/research/t223-s1-command-abi-component-selection-001.md).
 
 > **T223 S2 P1 progress:** source reconciliation corrects 54:04 cmdGetCurrentDir invalid-drive failure to original CF=1, AX=1; the focused COMMAND bootstrap x64 /MT fixture passes. This is a repair checkpoint, not component closure; see the [ABI repair record](etc/research/t223-s2-command-current-directory-abi-repair-001.md).
+
+> **T223 S2 P2 progress:** source mapping separates 54:10 cmdGetStartInfo from bootstrap: it is a deferred COMMAND session-broker capability, not an implementation claim. Bootstrap and all-slot route fixtures pass; see the [routing correction](etc/research/t223-s2-command-session-broker-routing-001.md).
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector

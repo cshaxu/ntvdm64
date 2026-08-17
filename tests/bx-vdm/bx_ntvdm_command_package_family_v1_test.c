@@ -23,10 +23,10 @@ int main(void)
         owners += bx_ntvdm_command_launch_execution_provider_v1_owns_service(service)!=0;
         owners += bx_ntvdm_command_console_keyboard_provider_v1_owns_service(service)!=0;
         owners += bx_ntvdm_command_lifecycle_provider_v1_owns_service(service)!=0;
-        if (owners!=1u) return 2;
         if (service==16u) {
-            if (route.disposition!=BX_NTVDM_COMMAND_PACKAGE_DEFERRED) return 3;
-        } else if (route.disposition!=BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER) return 4;
+            if (owners!=0u || route.plane.component!=BX_NTVDM_COMMAND_COMPONENT_SESSION ||
+                route.disposition!=BX_NTVDM_COMMAND_PACKAGE_DEFERRED) return 3;
+        } else if (owners!=1u || route.disposition!=BX_NTVDM_COMMAND_PACKAGE_EXISTING_PROVIDER) return 4;
     }
     return 0;
 }

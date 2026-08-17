@@ -4,7 +4,7 @@
 int bx_ntvdm_command_bootstrap_provider_v1_owns_service(uint8_t service)
 {
     switch (service) {
-    case 1u: case 2u: case 4u: case 5u: case 12u: case 13u: case 15u: case 16u:
+    case 1u: case 2u: case 4u: case 5u: case 12u: case 13u: case 15u:
         return 1;
     default:
         return 0;
