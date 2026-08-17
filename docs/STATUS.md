@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T223 S1.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T223 S2.** Its governing brief appears immediately below.
 
-**Active: M0 T223 S1 -- Contained CLI interactive COMMAND session source/ABI admission.**
+**Active: M0 T223 S2 -- COMMAND bootstrap/environment/config package recovery.**
 
 > **T222 closed:** its Direct/Readonly DEM drive-view provider closure is recorded in
 > [history](history/m0-t222-closure-20260816.md).
@@ -18,23 +18,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T223 S1, Ordinary Mode. |
+| Identifier Mode | M0 T223 S2, Ordinary Mode. |
 | Admission And Approval | Owner direction: continue completing remaining BOPs as original component packages; Direct/Readonly are complete for admitted DEM views, with Overlay/Virtual retained. Queue candidate 1 is selected after T222 closure. |
-| Objective | Map the complete COMMAND selector/service package to original OpenNT dispatchers, ABI, lifecycle, host dependencies, Direct/Readonly/CLI dispositions and source-first recovery choices; select the first bounded implementation component. |
-| Non-goals | No terminal/console implementation, native trace, new Bochs/mantle semantics, ambient GUI/VDD/NT session dependency, or per-trace BOP patch. |
-| Reference Baseline | T198 closure, T200/T219 BOP ledgers, OpenNT COMMAND source and T222 closure. |
-| Files And ABI Surface | `src/opennt` COMMAND source, existing `src/bx-vdm` COMMAND facade/session/provider seams, and `docs/etc/research`; no guest ABI change in S1. |
+| Objective | Recover the selected COMMAND bootstrap/environment/config component (`54:01/02/04/05/0C/0D/0F`) as one package through normal COMMAND session, preserving source-shaped copied ABI, lifecycle and Direct/Readonly capability disposition. |
+| Non-goals | No stream/pipe or host-child execution (`54:06/07/08/0A`), console/keyboard (`54:09/0E`), lifecycle (`54:00/0B`), session broker (`54:10`), native trace, Bochs/mantle change, or per-trace BOP patch. |
+| Reference Baseline | T223 S1 dispatcher inventory and ABI/component selection; OpenNT `cmddisp.c`, `cmdmisc.c`, `cmdenv.c`, `cmdconf.c` and existing bx-vdm COMMAND package sources. |
+| Files And ABI Surface | `src/bx-vdm` COMMAND package session/bootstrap/environment/config helpers and tests; existing fixed-width checked actions are the only guest boundary. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Complete source/ABI/failure/disposition table, current-route reconciliation, focused static ownership checks, governance and diff. |
-| Expected Markers | Every COMMAND BOP has one original owner and explicit provider disposition; historical host bindings are classified rather than silently rehosted. |
-| Asset Needs | Existing OpenNT/current source and local tools only; no external import, firmware or guest media. |
-| Reporting Requirements | Record source files, caller ABI, host dependencies, reusable original/shim/deferred choice, Direct/Readonly disposition and next component package. |
-| Stop Conditions | Need for a new guest ABI, Bochs change, host-system modification, unavailable source, or a profile capability beyond the selected contained CLI boundary. |
-| Exit Criteria | A complete COMMAND owner-package admission record supports one subsequent bounded implementation S without a trace-derived service backlog. |
+| Verification | Focused MSVC x64 `/MT` COMMAND package fixture below `build/M0-T223-S2/<run>` covering all seven services under Direct/Readonly, source-shaped success/failure and no fallback; governance and diff. |
+| Expected Markers | One package-owned bootstrap/environment/config state, checked guest reads/writes, no raw CCPU pointers, explicit Direct/Readonly behavior and no generic fallback. |
+| Asset Needs | Existing OpenNT/current source, local MSVC x64 `/MT` and disposable build roots; no external import, firmware or guest media. |
+| Reporting Requirements | Record changed provider/session interfaces, service-family outcomes, Direct/Readonly coverage, focused build result, retained limitation and next component. |
+| Stop Conditions | Need for a new guest ABI, host-system modification, Bochs change, unsupported environment/registry capability, new terminal/stream semantics or native trace. |
+| Exit Criteria | All seven services traverse the one COMMAND session under Direct/Readonly with source-shaped terminal behavior and full package regression; later COMMAND components remain explicitly deferred. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | T198 partial endpoints, bootstrap/launch/console/execution/environment/lifecycle, CLI terminal boundaries, historical WOW/VDD/GUI bindings and failure terminals. |
+| Similar-Issue Sweep | Existing `54:01/04/05/0C/0D/0E/0F` helpers, CMDINFO/SCSINFO lifetime, insufficient-environment buffer, current-directory errors, declared boot inputs and profile fallback isolation. |
 > **T223 S1 P1 progress:** the authoritative 17-slot 54:xx dispatcher and current bx-vdm route inventory is recorded; it identifies environment/session-broker ownership errors that preclude treating existing routes as complete. See the [P1 inventory](etc/research/t223-s1-command-dispatcher-current-route-inventory-001.md).
-> **T223 S1 P2 progress:** source ABI and host-dependency mapping select COMMAND bootstrap/environment/config (01/02/04/05/0C/0D/0F) as the first whole implementation component; stream/launch, console, lifecycle and session broker remain separately owned. See the [P2 selection](etc/research/t223-s1-command-abi-component-selection-001.md).
+> **T223 S1 P2 closure:** source ABI and host-dependency mapping select COMMAND bootstrap/environment/config (01/02/04/05/0C/0D/0F) as the first whole implementation component; stream/launch, console, lifecycle and session broker remain separately owned. See the [P2 selection](etc/research/t223-s1-command-abi-component-selection-001.md).
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
