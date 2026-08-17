@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1752 |
+| Documentation records | 1753 |
 | --- | --- |
-| Generated UTC | 2026-08-17T22:12:15Z |
+| Generated UTC | 2026-08-17T22:31:13Z |
 
 ## Entries
 
@@ -108,7 +108,8 @@ content-divergent entries.
 | etc/evidence/t225-s27-command-parent-return-composition-family-result-001.md | indexed supporting material | 8b123890fe810a614256ee44b012cd9002b6c3c371bfe0c52621c37cb6fc0878 |
 | etc/evidence/t225-s27-command-parent-return-focused-result-001.md | indexed supporting material | 6ba2a9b05a262a00ebb83111e426c3af8355a97da8509101afec2f6db78d0bf7 |
 | etc/evidence/t225-s27-native-parent-return-attempt-result-001.md | indexed supporting material | db3d12cbfca08e67522c1c485f1c9b8044ca6840a611c2e3b79abebc6f2e7884 |
-| etc/evidence/t225-s28-first-fault-observation-fixture-result-001.md | indexed supporting material | 5bcbe3e6f6f6b75b1fcb3356789cac55ca58276388239c39002e27377a677e86 |
+| etc/evidence/t225-s28-first-fault-observation-fixture-result-001.md | indexed supporting material | d953587b2143b60006ddc791f98f0002cb7c402c38130d802007977c066cfbd6 |
+| etc/evidence/t225-s28-native-first-fault-direct-readonly-result-001.md | indexed supporting material | 006e1e752282e9098562a6756a3aeaeae5782cef51a2e9c3f26d6c3e9ae827e3 |
 | etc/evidence/t225-s6-reference-guest-input-admission-001.md | indexed supporting material | b5932c62e4917b60205caced3f2dfa78ef9ed782f338e6cfc29d890f1c9bf891 |
 | etc/evidence/t225-s8-archived-nosrvbld-extractor-rejection-001.md | indexed supporting material | 99112829a78552229e2fe7904acbb8c65aaa2893b59f63ec2cac894d186f99c3 |
 | etc/evidence/t225-s8-dosbox-completion-runner-001.md | indexed supporting material | 6966863f9b3990c98df4eaa44faa134124ef610558a5f2566f620e834c65aabd |
@@ -162,7 +163,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | f4d4fe6128fd42597a29d6e1ef26e6d859ce5e84350c346ac8ef1d751e8dbc5e |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 3cffc11d31ca28dd9f7b2ef8d03839d7fc9fe7ac2bebb07be260223cd624f4a5 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -1766,7 +1767,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 3a0b42278504f0199ead4912a46411dd6952eac4c130646346c6626422a449ed |
+| STATUS.md | principal control document | 3c434e8d8db16078d7ca4902f814252b1711c16f665714c9733e910cefefc53a |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

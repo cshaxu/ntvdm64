@@ -22,15 +22,17 @@ adapter/service provider?
 2. The fixture writes only four opaque test-owned entry bytes: `xor ax,ax` /
    `div ax`. The second instruction produces native vector 0 (`#DE`), not
    `#UD`.
-3. It arms the private first-fault observer, runs the existing finite-machine
+3. Before arming, the fixture submits a valid test-owned non-UD record and
+   verifies the default-off observer declines it without recording a fact.
+4. It arms the private first-fault observer, runs the existing finite-machine
    loop, copies the record after its controlled stop, and verifies magic,
    version, size, vector 0, CS `0e00`, AX zero and fault EIP two.
-4. It resets the observer and verifies that the copied record is unavailable.
+5. It resets the observer and verifies that the copied record is unavailable.
 
 ## Observations
 
 - The fresh 145-edge fixture closure compiled and linked successfully.
-- The fixture exited `0`.
+- The fixture exited `0`, including an explicit default-off valid-event decline before its armed #DE run.
 - Its only runtime output was ordinary CPU/reset/APIC/RAM initialization; it
   emitted no BOP, provider, OpenNT, DOS, path or host-capability trace.
 - Two earlier disposable graphs exposed graph-boundary issues only: r1 omitted

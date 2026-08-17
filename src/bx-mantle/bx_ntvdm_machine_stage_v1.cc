@@ -3,6 +3,7 @@
 #include "bx-core/memory/memory.h"
 #include "bx-mantle/pc_system.h"
 #include "bx_ntvdm_generic_ud_bridge.h"
+#include "bx_ntvdm_first_fault_observation_v1.h"
 #include "bx_ntvdm_cancellation_controller_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
@@ -220,11 +221,14 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
   }
   bx_ntvdm_mantle_generic_ud_stop_observation_reset();
+  bx_ntvdm_mantle_first_fault_observation_reset();
   bx_cpu.cpu_loop();
   bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
   bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
   bx_pc_system.deactivate_timer((unsigned) stop_timer);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
+  if (bx_ntvdm_mantle_first_fault_observation_observed())
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_FIRST_FAULT_STOP;
   if (bx_ntvdm_mantle_generic_ud_stop_observed())
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP;
   if (stop_state.cancellation_fired)

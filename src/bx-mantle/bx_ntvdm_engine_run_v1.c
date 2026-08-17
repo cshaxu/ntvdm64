@@ -90,6 +90,9 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
             machine_status != BX_NTVDM_MACHINE_STAGE_V1_OK ? machine_status :
             machine_entry_status != BX_NTVDM_MACHINE_STAGE_V1_OK ?
                 machine_entry_status : machine_reset_status);
+    if (machine_execution_status == BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_FIRST_FAULT_STOP)
+        return bx_ntvdm_engine_result_v1_set(result,
+            BX_NTVDM_ENGINE_TERMINAL_V1_MACHINE_FAILURE, machine_execution_status);
     if (machine_execution_status == BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET)
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_EXECUTION_BUDGET,

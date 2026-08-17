@@ -19,10 +19,20 @@ extern "C" void bx_ntvdm_mantle_first_fault_observation_reset(void)
   memset(&bx_ntvdm_first_fault_event, 0, sizeof(bx_ntvdm_first_fault_event));
 }
 
-extern "C" void bx_ntvdm_mantle_first_fault_observation_fixture_stop(int enabled)
+extern "C" void bx_ntvdm_mantle_first_fault_observation_enable(int enabled)
 {
   if (enabled) bx_ntvdm_mantle_first_fault_observation_reset();
   bx_ntvdm_first_fault_fixture_enabled = enabled != 0;
+}
+
+extern "C" int bx_ntvdm_mantle_first_fault_observation_enabled(void)
+{
+  return bx_ntvdm_first_fault_fixture_enabled;
+}
+
+extern "C" void bx_ntvdm_mantle_first_fault_observation_fixture_stop(int enabled)
+{
+  bx_ntvdm_mantle_first_fault_observation_enable(enabled);
 }
 
 extern "C" int bx_ntvdm_mantle_first_fault_observation_observed(void)

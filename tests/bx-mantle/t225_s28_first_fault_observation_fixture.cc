@@ -17,6 +17,15 @@ int main(void)
   struct bx_ntvdm_first_fault_observation_v1 event;
   bx_ntvdm_finite_run_status status;
 
+  memset(&event, 0, sizeof(event));
+  event.magic = BX_NTVDM_FIRST_FAULT_OBSERVATION_V1_MAGIC;
+  event.abi_version = BX_NTVDM_FIRST_FAULT_OBSERVATION_V1_VERSION;
+  event.struct_bytes = sizeof(event);
+  event.vector = 0u;
+  bx_ntvdm_mantle_first_fault_observation_enable(0);
+  if (bx_ntvdm_mantle_first_fault_observation_v1(&event) ||
+      bx_ntvdm_mantle_first_fault_observation_observed()) return 6;
+
   memset(&request, 0, sizeof(request));
   request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
   request.entry_bytes[0] = 0x31u; /* xor ax, ax */

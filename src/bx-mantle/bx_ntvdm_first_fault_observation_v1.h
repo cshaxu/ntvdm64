@@ -30,6 +30,8 @@ extern "C" {
 int bx_ntvdm_mantle_first_fault_observation_v1(
   const struct bx_ntvdm_first_fault_observation_v1 *event);
 void bx_ntvdm_mantle_first_fault_observation_reset(void);
+void bx_ntvdm_mantle_first_fault_observation_enable(int enabled);
+int bx_ntvdm_mantle_first_fault_observation_enabled(void);
 void bx_ntvdm_mantle_first_fault_observation_fixture_stop(int enabled);
 int bx_ntvdm_mantle_first_fault_observation_observed(void);
 int bx_ntvdm_mantle_first_fault_observation_copy(
