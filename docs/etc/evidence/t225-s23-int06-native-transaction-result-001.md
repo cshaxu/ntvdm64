@@ -1,0 +1,3 @@
+# T225 S23 P8 — Native INT06 Transaction Result
+
+The formal x64 `/MT` fixture `build/M0-T225-S23/int06-transaction-r1/bin/t225-s23-int06-transaction-fixture.exe` exited zero. It initializes the native minimal machine, binds bx-vdm composition, stages a real-mode saved frame at `0070:0479`, and sends `C4 C4 06`. The source-derived provider plus typed RAM preflight/RAM actions/native PIC action resumes at `fault_rip+3`, increments saved IP from `1234h` to `1235h`, and writes `FFh` to BDA `046Bh` on the original software-interrupt branch. No synthetic RAM/PIC backend or host profile branch is used.

@@ -355,6 +355,12 @@
       "platformLibraries": []
     },
     {
+      "name": "t225-s23-int06-transaction-fixture",
+      "source": "tests/bx-mantle/t225_s23_int06_transaction_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle", "bx-vdm", "opennt-host"],
+      "platformLibraries": []
+    },
+    {
       "name": "t225-s23-ram-preflight-fixture",
       "source": "tests/bx-mantle/t225_s23_ram_preflight_fixture.cc",
       "libraries": ["bx-core", "bx-mantle"],
