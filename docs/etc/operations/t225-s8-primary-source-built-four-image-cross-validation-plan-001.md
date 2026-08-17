@@ -6,18 +6,25 @@ Can the existing four-image installation fixture consume the *primary*,
 original-toolchain output sequence independently from the already accepted
 same-hash OpenNT-tree reference sequence?
 
-## Required primary roots
+## Required primary stages
 
-| Role | Required root | Required manifest | Artifact |
+| Role | Reproducible disposable stage | Required manifest | Artifact |
 | --- | --- | --- | --- |
-| NTIO | `artifacts/toolchain-runs/ntio-tools16-opennt-v1` | `ntio-build-manifest.json` | `base/mvdm/dos/v86/doskrnl/bios/NTIO.SYS` |
-| NTDOS | `artifacts/toolchain-runs/ntdos-tools16-historical-v1` | `ntdos-build-manifest.json` | `base/mvdm/dos/v86/doskrnl/dos/NTDOS.SYS` |
-| COMMAND | `artifacts/toolchain-runs/command-tools16-opennt-v1` | `command-build-manifest.json` | `base/mvdm/dos/v86/cmd/command/COMMAND.COM` |
-| SHARE | `artifacts/toolchain-runs/share-tools16-opennt-v1` | `share-build-manifest.json` | `base/mvdm/dos/v86/cmd/share/SHARE.EXE` |
+| NTIO | `build/M0-T225-S8/ntio-primary-source-build-r8` | `ntio-build-manifest.json` | `base/mvdm/dos/v86/doskrnl/bios/NTIO.SYS` |
+| NTDOS | `build/M0-T225-S8/ntdos-primary-source-build-r1` | `ntdos-build-manifest.json` | `base/mvdm/dos/v86/doskrnl/dos/NTDOS.SYS` |
+| COMMAND | `build/M0-T225-S8/command-primary-source-build-r6` | `command-build-manifest.json` | `base/mvdm/dos/v86/cmd/command/COMMAND.COM` |
+| SHARE | `build/M0-T225-S8/share-primary-source-build-r1` | `share-build-manifest.json` | `base/mvdm/dos/v86/cmd/share/SHARE.EXE` |
 
-The primary stager must require each root and manifest before copying any byte.
+The primary stager must require each stage and manifest before copying any byte.
 It verifies the locked size/SHA-256 identities but does not treat hash equality
 with `refs/opennt` or the secondary reference root as provenance equality.
+The earlier availability record names unavailable `artifacts/toolchain-runs/`
+roots. Those were an initial restoration hypothesis, not a permitted
+long-lived build location. The managed source-build scripts supersede that
+hypothesis by reproducibly creating the manifest-bearing inputs under the
+disposable `build/M0-T225-S8/` hierarchy, consistent with the build-output
+rules. The corresponding primary-source-build evidence records the toolchain
+and exact identities.
 
 ## Procedure
 
