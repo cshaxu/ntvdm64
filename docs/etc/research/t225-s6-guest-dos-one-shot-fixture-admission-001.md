@@ -37,3 +37,39 @@ A source/artifact/entry/BOP dependency ledger must name every fixture input and
 its disposition. It must prove that Direct and Readonly have no Overlay or
 Virtual fallback and that a missing BOP retains its package-defined failure.
 Only then can staging or a bounded native integration run be admitted.
+
+## P1 Existing Whole-Fixture Dependency Ledger
+
+### Declared guest inputs
+
+| Role | Source-built identity | Guest responsibility | Fixture disposition |
+| --- | --- | --- | --- |
+| NTIO.SYS | 33,792 bytes; `cfc8be16…b3ab4937` | BIOS-facing startup and NTDOS handoff | existing native input |
+| NTDOS.SYS | 27,858 bytes; `95766232…7f93bc84` | DOS initialization, file services, `$Exec`, PSP/MCB and termination | must be promoted from identity-only to executed input |
+| COMMAND.COM | 50,384 bytes; `908a77ac…c732c43` | command bootstrap and parent-side return handling | must be executed unchanged through namespace input |
+| SHARE.EXE | 882 bytes; `69dabbdb…3996fc` | bounded original child: `INT 21h/AH=4Ch` normal termination | declared COM target; no fabricated smoke program |
+
+The identities and source provenance come from the DOS/WOW16 closure ledger and
+T198 S92/S93.  They are sufficient artifact evidence, but not execution
+proof.
+
+### Required host BOP packages
+
+| Guest stage | BOP family | Existing package disposition | S6 action |
+| --- | --- | --- | --- |
+| NTIO -> NTDOS | DEM load, memory and GSET (`50:11`, `12`, `50:0D/0F`, `50:1B/32/46`) | T199/T202 package routes; current native evidence reaches typed resumes | verify the current composition admits the same package set |
+| NTDOS file and EXEC | DEM file I/O, lifecycle (`50:12/00/42/16/02`, `50:36/3C`) | T225 S2/S3 Direct/Readonly source-built regression | bind only the existing typed provider; no loader seam |
+| COMMAND bootstrap | `54:02`, `54:0F` | T198 S95/S96 and later COMMAND package evidence: one shared bootstrap state machine | verify no detached or historical route remains |
+| COMMAND launch/lifecycle | `54:01`, `54:04`, `54:05`, `54:0E`, return `54:11` | global COMMAND package ledger; endpoint evidence is not whole-package closure by itself | reconcile every selected profile route before run |
+| Child termination | `50:3C -> 54:11` | original guest DOS/COMMAND owner; S2 handles only host-side notification cleanup | retain as the single end-to-end acceptance path |
+
+### Current gaps and decision
+
+The artifacts and component packages exist, but the current evidence does not
+prove one *current* composition links all of them as a guest-executed path.
+S6 P2 must therefore audit current manifest membership and runtime installation
+for every row above, including Direct and Readonly profile selection. Any
+missing route is repaired only as its complete owner package; a trace marker
+cannot authorize a leaf handler. Overlay and Virtual remain explicitly
+unselected and must fail through their declared package policy rather than
+falling back to Direct.
