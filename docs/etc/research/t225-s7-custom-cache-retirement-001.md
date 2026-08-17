@@ -23,3 +23,9 @@ run through Ninja in a disposable `build/` root.
 This deletes no guest artifact, Bochs/OpenNT source, fixture, profile,
 prebuilt output, or documentation evidence. It adds no runtime or BOP
 semantics.
+
+## Metadata Follow-up
+
+The full-graph generator now emits P1 implementation retired; historical evidence
+retained in its disposable graph record. This corrects an obsolete pending-deletion
+label only; it neither restores nor replaces a custom-cache executor.

@@ -153,5 +153,5 @@ foreach ($entry in @($manifest.fixtures) + @($manifest.targets)) {
 $graph.Add('build all: phony ' + ($outputs -join ' '))
 $graph.Add('default all')
 $graph | Set-Content -LiteralPath (Join-Path $build 'build.ninja') -Encoding ascii
-[ordered]@{ schema='ntdos64.t225.s7.ninja-full-graph-record.v1'; buildRoot=$build; graph='build.ninja'; manifest='module-manifest.json'; configurationSha256=$configurationHash; formalCacheExecutor='Ninja'; customCacheDisposition='P1 implementation pending deletion after full-graph verification' } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 't225-s7-full-ninja-graph.json') -Encoding utf8
+[ordered]@{ schema='ntdos64.t225.s7.ninja-full-graph-record.v1'; buildRoot=$build; graph='build.ninja'; manifest='module-manifest.json'; configurationSha256=$configurationHash; formalCacheExecutor='Ninja'; customCacheDisposition='P1 implementation retired; historical evidence retained' } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 't225-s7-full-ninja-graph.json') -Encoding utf8
 Write-Host "Generated T225 S7 full Ninja graph: $build"
