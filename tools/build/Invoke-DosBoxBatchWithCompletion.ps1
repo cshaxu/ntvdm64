@@ -50,7 +50,7 @@ $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
 while ([DateTime]::UtcNow -lt $deadline) {
     if (Test-Path -LiteralPath $marker -PathType Leaf) {
         Write-Host "DOS batch completed: $marker"
-        exit 0
+        return
     }
     Start-Sleep -Milliseconds 200
 }
