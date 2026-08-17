@@ -1,5 +1,10 @@
 # T225 S7 incremental composition-build result
 
+> **Historical record.** Its two custom-cache implementation scripts were retired
+> after the full manifest-bound Ninja graph passed; see
+> [T225 S7 custom-cache retirement](t225-s7-custom-cache-retirement-001.md).
+> Commands below are retained evidence, not current build instructions.
+
 ## Result
 
 S7 establishes a local, reproducible module-object cache for focused `bx-vdm`

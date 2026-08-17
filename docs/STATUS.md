@@ -55,6 +55,10 @@
 
 > **T225 S7 P3 verification:** the [full graph result](etc/research/t225-s7-full-ninja-module-graph-result-001.md) records a clean 303-edge MSVC x64 /MT Ninja build, four static archives, fresh fixture/native-CLI links, actual MSVC header invalidation, no-op rebuild, and the admitted Direct/Readonly installation regression. The graph now supersedes the P1 executor; only its two implementation scripts remain to be removed, while P1/P2 evidence stays indexed.
 
+> **T225 S7 P4 retirement:** the [retirement record](etc/research/t225-s7-custom-cache-retirement-001.md) confirms removal of exactly the two superseded custom-cache scripts. Historical P1/P2 evidence is retained and indexed; all new incremental builds use the full Ninja graph.
+
+> **T225 S7 closure:** its exit criteria are met: the explicit full Ninja graph has cold-build, header-invalidation, no-op, static-archive, fresh-link, and admitted fixture evidence; the superseded cache implementation is removed and its evidence retained. Selection of a follow-on S remains a separate owner/governance action.
+
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 
 > **T225 S2 P3 closure:** the source-built Direct/Readonly whole-provider fixture passes under MSVC x64 `/MT`: `50:3C` invalidates the target Direct PDB token but retains the Readonly session token, while preserving void resume. The separate lifecycle fixture passes; `50:41` remains an independently proven baseline failure. S2 closes only DEM notification cleanup, not guest EXEC or parent return.
