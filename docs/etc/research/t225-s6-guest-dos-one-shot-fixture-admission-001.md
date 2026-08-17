@@ -135,3 +135,31 @@ explicit forbidden-input list excludes the S74 root, `bochs.exe`, `main.cc`,
 GUI/plugin/device archives. The next implementation adds a new exact-image
 fixture recipe on this basis; it must not repair S94 or inherit its response
 file.
+
+## P5 Direct/Readonly Runtime-Selection Admission
+
+The shared mutation ABI already represents all four modes, but current
+`bx_ntvdm_composition_runtime_v1` initializes it as Direct unconditionally.
+S6 admits a composition-only correction: read one explicit runtime mode,
+default it to `direct`, accept only `direct` or `readonly`, and reject invalid,
+`overlay`, and `virtual` values before profile/image/host capability binding.
+
+The selected immutable mode must initialize the existing shared profile before
+DEM and COMMAND owner registration. No endpoint receives a caller-selected
+mode, and no mode changes after binding. This is not Overlay/Virtual feature
+implementation; their interface values remain reserved and explicitly
+unavailable at the present runtime boundary.
+
+## P6 Direct/Readonly Selection Source Closure
+
+`bx_ntvdm_composition_runtime_v1` now reads `NTDOS64_MUTATION_MODE` at
+installation time. Missing or `direct` selects Direct; `readonly` selects
+Readonly. Invalid, `overlay`, and `virtual` strings fail before image, host
+namespace, DEM or COMMAND binding. The copied-input installation ABI remains
+Direct-only so no existing opaque caller gains a new mode parameter.
+
+The changed translation unit compiled successfully with the generated CPU5/P
+pinned configuration under MSVC x64 `/W4 /WX /MT`. A prior full T220 closure
+attempt ended during the CPU seed and has no success record; it is not used as
+proof. The dedicated Direct/Readonly installation fixture remains the next
+required runtime test.

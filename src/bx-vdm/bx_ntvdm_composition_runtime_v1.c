@@ -22,6 +22,7 @@
 #define BX_NTVDM_COMPOSITION_ENV_PROFILE L"NTDOS64_ADAPTER_PROFILE"
 #define BX_NTVDM_COMPOSITION_ENV_ROOT L"NTDOS64_ADAPTER_ROOT"
 #define BX_NTVDM_COMPOSITION_ENV_LAUNCH_PLAN L"NTDOS64_ADAPTER_LAUNCH_PLAN"
+#define BX_NTVDM_COMPOSITION_ENV_MUTATION_MODE L"NTDOS64_MUTATION_MODE"
 
 typedef struct bx_ntvdm_composition_runtime_v1 {
     byob_image ntio, ntdos, command, target, terminal_quit;
@@ -103,8 +104,23 @@ void bx_ntvdm_composition_runtime_v1_reset(void)
     memset(&runtime, 0, sizeof(runtime));
 }
 
+static int parse_mutation_mode(const wchar_t *text, uint32_t *mode)
+{
+    if (mode == 0) return 0;
+    if (text == 0 || text[0] == L'\0' || wcscmp(text, L"direct") == 0) {
+        *mode = BX_NTVDM_MUTATION_MODE_V1_DIRECT;
+        return 1;
+    }
+    if (wcscmp(text, L"readonly") == 0) {
+        *mode = BX_NTVDM_MUTATION_MODE_V1_READONLY;
+        return 1;
+    }
+    return 0;
+}
+
 static int install(const wchar_t *profile, const wchar_t *root,
-    const wchar_t *launch_text, uint32_t include_mask, uint32_t exclude_mask)
+    const wchar_t *launch_text, uint32_t include_mask, uint32_t exclude_mask,
+    uint32_t mutation_mode)
 {
     byob_profile_selection selection;
     byob_launch_plan_v2 launch;
@@ -115,7 +131,7 @@ static int install(const wchar_t *profile, const wchar_t *root,
     if (runtime.attempted) return -1;
     runtime.attempted = 1;
     bx_ntvdm_mutation_profile_v1_initialize(&runtime.mutation_profile,
-        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+        mutation_mode);
     if (!bx_ntvdm_dem_profile_consumer_v1_register_class(
             &runtime.mutation_profile,
             BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
@@ -237,6 +253,8 @@ int bx_ntvdm_composition_runtime_v1_install_from_environment(void)
     DWORD profile_size, root_size, launch_size, profile_error, root_error;
     uint32_t include_mask, exclude_mask;
     wchar_t include_text[52] = {0}, exclude_text[52] = {0};
+    wchar_t mutation_text[16] = {0};
+    uint32_t mutation_mode;
     DWORD include_size, exclude_size;
 
     if (runtime.installed) return 1;
@@ -251,6 +269,11 @@ int bx_ntvdm_composition_runtime_v1_install_from_environment(void)
     launch_size = GetEnvironmentVariableW(BX_NTVDM_COMPOSITION_ENV_LAUNCH_PLAN, launch_text, BYOB_LAUNCH_PLAN_V2_ENV_CHARS);
     include_size = GetEnvironmentVariableW(L"NTDOS64_HOST_INCLUDE_DRIVES", include_text, 52u);
     exclude_size = GetEnvironmentVariableW(L"NTDOS64_HOST_EXCLUDE_DRIVES", exclude_text, 52u);
+    if (GetEnvironmentVariableW(BX_NTVDM_COMPOSITION_ENV_MUTATION_MODE,
+        mutation_text, 16u) >= 16u || !parse_mutation_mode(mutation_text, &mutation_mode)) {
+        runtime.attempted = 1;
+        return -1;
+    }
     if (profile_size == 0u || root_size == 0u || profile_size >= MAX_PATH || root_size >= MAX_PATH ||
         launch_size == 0u || launch_size >= BYOB_LAUNCH_PLAN_V2_ENV_CHARS || include_size >= 52u || exclude_size >= 52u ||
         !bx_ntvdm_host_drive_policy_v1_parse(include_text, &include_mask) ||
@@ -258,7 +281,8 @@ int bx_ntvdm_composition_runtime_v1_install_from_environment(void)
         runtime.attempted = 1;
         return -1;
     }
-    return install(profile, root, launch_text, include_mask, exclude_mask);
+    return install(profile, root, launch_text, include_mask, exclude_mask,
+        mutation_mode);
 }
 
 static int descriptor_to_wide(const uint16_t *source, uint32_t chars,
@@ -281,7 +305,8 @@ int bx_ntvdm_composition_runtime_v1_install_from_copied_input(
     if (!descriptor_to_wide(profile_input, profile_chars, profile, 261u) ||
         !descriptor_to_wide(root_input, root_chars, root, 261u) ||
         !descriptor_to_wide(launch_input, launch_chars, launch, 257u)) return -1;
-    return install(profile, root, launch, include_mask, exclude_mask);
+    return install(profile, root, launch, include_mask, exclude_mask,
+        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
 }
 
 int bx_ntvdm_composition_runtime_v1_prepare_startup_plan(
