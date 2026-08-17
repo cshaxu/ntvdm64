@@ -15,7 +15,7 @@
     "src/bx-vdm/bx_ntvdm_cmd_boot_file_service.c",
     "src/bx-vdm/bx_ntvdm_command_boot_input_v1.c",
     "src/bx-vdm/bx_ntvdm_command_execution_lifecycle_v1.c",
-    "src/bx-vdm/bx_ntvdm_command_stream_child_v1.c",
+    "src/bx-vdm/bx_ntvdm_command_stream_session_v1.c",
     "src/bx-vdm/bx_ntvdm_cmd_comspec_bootstrap_service.c",
     "src/bx-vdm/bx_ntvdm_cmd_get_next_service.c",
     "src/bx-vdm/bx_ntvdm_cmd_current_dir_service.c",
@@ -152,7 +152,13 @@
     "src/bx-mantle/bx_ntvdm_cancellation_controller_v1.cc",
     "src/bx-mantle/bx_ntvdm_extended_memory_v1.cc",
     "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
-    "src/bx-core/memory/misc_mem.cc"
+    "src/bx-core/memory/misc_mem.cc",
+    "src/bx-vdm/bx_ntvdm_command_child_redirection_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_drive_view_provider_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_virtual_namespace_backend_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_virtual_namespace_view_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_virtual_mutation_backend_v1.c",
+    "src/bx-vdm/bx_ntvdm_dem_virtual_metadata_backend_v1.c"
   ],
   "linkedCompositionRoot": "bx_ntvdm_composition_runtime_v1 (boot namespace + native XMS/DPMI sessions)",
   "compileOnlySources": [
