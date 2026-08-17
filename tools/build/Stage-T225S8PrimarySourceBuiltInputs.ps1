@@ -16,22 +16,24 @@ $output = [IO.Path]::GetFullPath($OutputDirectory)
 if (Test-Path -LiteralPath $output) { throw "Refusing to overwrite staged primary input root: $output" }
 
 $items = @(
-    [ordered]@{ role='ntio'; stage='ntio-tools16-opennt-v1'; manifest='ntio-build-manifest.json'; relative='base\mvdm\dos\v86\doskrnl\bios\NTIO.SYS'; file='NTIO.SYS'; bytes=33792; sha256='cfc8be16576bb6acd16bb8fc9b2d9a080f544bbfdd2d2d2df07ed908b3ab4937' },
-    [ordered]@{ role='ntdos'; stage='ntdos-tools16-historical-v1'; manifest='ntdos-build-manifest.json'; relative='base\mvdm\dos\v86\doskrnl\dos\NTDOS.SYS'; file='NTDOS.SYS'; bytes=27858; sha256='957662320654ad5251c3a8b228a5dadec28aa65dddbcba38c3658a6e7f93bc84' },
-    [ordered]@{ role='command'; stage='command-tools16-opennt-v1'; manifest='command-build-manifest.json'; relative='base\mvdm\dos\v86\cmd\command\COMMAND.COM'; file='COMMAND.COM'; bytes=50384; sha256='908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43' },
-    [ordered]@{ role='target'; stage='share-tools16-opennt-v1'; manifest='share-build-manifest.json'; relative='base\mvdm\dos\v86\cmd\share\SHARE.EXE'; file='SHARE.EXE'; bytes=882; sha256='69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc' }
+    [ordered]@{ role='ntio'; stage='build\M0-T225-S8\ntio-primary-source-build-r8'; manifest='ntio-build-manifest.json'; relative='base\mvdm\dos\v86\doskrnl\bios\NTIO.SYS'; file='NTIO.SYS'; bytes=33792; sha256='cfc8be16576bb6acd16bb8fc9b2d9a080f544bbfdd2d2d2df07ed908b3ab4937' },
+    [ordered]@{ role='ntdos'; stage='build\M0-T225-S8\ntdos-primary-source-build-r1'; manifest='ntdos-build-manifest.json'; relative='base\mvdm\dos\v86\doskrnl\dos\NTDOS.SYS'; file='NTDOS.SYS'; bytes=27858; sha256='957662320654ad5251c3a8b228a5dadec28aa65dddbcba38c3658a6e7f93bc84' },
+    [ordered]@{ role='command'; stage='build\M0-T225-S8\command-primary-source-build-r6'; manifest='command-build-manifest.json'; relative='base\mvdm\dos\v86\cmd\command\COMMAND.COM'; file='COMMAND.COM'; bytes=50384; sha256='908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43' },
+    [ordered]@{ role='target'; stage='build\M0-T225-S8\share-primary-source-build-r1'; manifest='share-build-manifest.json'; relative='base\mvdm\dos\v86\cmd\share\SHARE.EXE'; file='SHARE.EXE'; bytes=882; sha256='69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc' }
 )
 
 foreach ($item in $items) {
-    $stageRoot = Join-Path $root ('artifacts\toolchain-runs\' + $item.stage)
+    $stageRoot = Join-Path $root $item.stage
     $manifest = Join-Path $stageRoot $item.manifest
     $artifact = Join-Path $stageRoot $item.relative
     if (!(Test-Path -LiteralPath $manifest -PathType Leaf)) { throw "Primary stage manifest missing for $($item.role): $manifest" }
     if (!(Test-Path -LiteralPath $artifact -PathType Leaf)) { throw "Primary source-built artifact missing for $($item.role): $artifact" }
+    $manifestObject = Get-Content -Raw -LiteralPath $manifest | ConvertFrom-Json
+    if ($manifestObject.classification -ne 'primary-original-toolchain-source-built') { throw "Primary stage classification mismatch for $($item.role): $manifest" }
     if ((Get-Item -LiteralPath $artifact).Length -ne $item.bytes -or (Get-Sha256 $artifact) -ne $item.sha256) {
         throw "Primary source-built identity mismatch for $($item.role): $artifact"
     }
-    $item.stage_root = ('artifacts/toolchain-runs/' + $item.stage)
+    $item.stage_root = $item.stage.Replace('\','/')
     $item.manifest_sha256 = Get-Sha256 $manifest
 }
 
@@ -40,7 +42,7 @@ foreach ($item in $items) {
     Copy-Item -LiteralPath (Join-Path $root ($item.stage_root.Replace('/','\') + '\' + $item.relative)) -Destination (Join-Path $output $item.file)
 }
 $profile = [ordered]@{
-    schema='ntdos64-byob-profile-v8'; profile='nt4-en-us-cli-stream-v8-primary-source-built'; architecture='x86'; locale='en-US'; compatibility_group='t225-s8-primary-source-built-cross-validation'
+    schema='ntdos64-byob-profile-v8'; profile='nt4-en-us-cli-stream-v8'; architecture='x86'; locale='en-US'; compatibility_group='t225-s6-reference-identity-fixture'
     components=@($items | ForEach-Object { [ordered]@{role=$_.role;file_name=$_.file;required=$true;bytes=$_.bytes;sha256=$_.sha256;version=$null} })
     features=@(); owner_note='Primary original-toolchain source-built sequence; never substitute with reference-tree provenance.'
     guest_command_placement=[ordered]@{path='\COMMAND.COM';drive_index=2}
