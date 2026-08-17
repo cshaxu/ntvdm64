@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S22.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S23.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S22 -- original NTIO-to-NTDOS-to-COMMAND continuity admission.**
+**Active: M0 T225 S23 -- bx-mantle INT 06 machine-composition recovery.**
 
 ## Active Packet
 
@@ -14,26 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S22, Ordinary Mode. |
-| Admission And Approval | S21 is closed in [its closure record](history/m0-t225-s21-closure-20260817.md). The owner-approved T225 scope and S21 source map select the smallest prerequisite: original source-built guest startup continuity. |
-| Objective | Establish the source/ABI/current-route closure and, if admitted by that evidence, the smallest native startup composition needed to reach original NTDOS initialization and its normal COMMAND handoff from source-built NTIO inputs. |
-| Non-goals | No guest EXEC/PSP implementation, no trace-led BOP repair, no nested host process, no adapter DOS loader, no new Bochs device/CPU/firmware feature without reached evidence, no interactive host-command broker, and no Overlay behavior beyond retained ABI compatibility. |
-| Reference Baseline | S21 closure and source map; source-built primary NTIO/NTDOS/COMMAND identities; S19 DEM and S20 COMMAND package closures; current generic UD/native composition and formal Ninja graph. |
-| Files And ABI Surface | Original OpenNT NTIO/NTDOS/COMMAND startup sources; source-built guest artifact identities; bx-vdm startup/initial-state and checked guest-RAM action interfaces; bx-mantle machine-stage ABI; focused evidence/fixtures/Status. |
-| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source policy, and design authorities. |
-| Verification | First map original NTIO-to-NTDOS startup handoff, current initial-state bytes and every `50:11` input/return constraint. Then build only an admitted source-built Direct/Readonly continuity fixture under the formal Ninja graph; record its first original guest boundary without changing guest bytes. |
-| Expected Markers | One source-first startup handoff map; explicit original/adapter/Bochs ownership; one smallest closure decision; if implementation is admitted, a fresh Ninja build plus Direct/Readonly bounded native observation with an unambiguous first guest terminal or continuation marker. |
-| Asset Needs | Existing source-built primary guest images, OpenNT DOS startup sources, current initial-state evidence, formal Ninja graph, and a disposable `build/M0-T225-S22/<run>` root. |
-| Reporting Requirements | Record original startup layouts/order, initial-state ownership, NTDOS load destination/continuation contract, current versus missing state, Direct/Readonly relevance, four-rung recovery ledger, exact build/run inputs and limitations. |
-| Stop Conditions | A needed behavior is an unclassified OpenNT host service, requires a new Bochs mechanic, lacks source-built identity, or demands guest-byte mutation. Record it, continue independent mapping, and do not invent a startup substitute. |
-| Exit Criteria | A reviewable source/ABI/current-route closure identifies and, where evidence permits, validates the smallest startup change or proves no change is admissible; it leaves no unclassified startup dependency and no hidden adapter/host-process substitute. |
+| Identifier Mode | M0 T225 S23, Ordinary Mode. |
+| Admission And Approval | The owner-approved T225 objective and ongoing instruction to continue select the S22-transferred machine prerequisite. [S22 closure](history/m0-t225-s22-closure-20260817.md) proves the reached original INT 06 boundary and excludes adapter-service repair. |
+| Objective | Recover one whole bx-mantle INT 06 machine composition: source-map the original `illegal_op_int`/`unexpected_int` pair, establish the minimum native Bochs PIC/ordinary-RAM lifecycle and typed x64 mechanics seam, then compose its bx-vdm machine-plane selection through the formal Ninja graph for one bounded Direct/Readonly native observation. |
+| Non-goals | No DEM/COMMAND/debugger/XMS/DPMI/Redirector implementation; no selector or OpenNT semantics in bx-core; no BOP host-service provider for `06h`; no x86/prebuilt OpenNT object in the x64 runner; no fabricated PIC response, host process, guest-byte mutation, optional device beyond the reached PIC prerequisite, or Overlay implementation. |
+| Reference Baseline | S22 P1--P4; original OpenNT `illegalp.c` and `unexp_nt.c`; original `spckbd.asm` INT 06 vector; current bx-core exception bridge, bx-mantle minimal machine/default port-space, bx-vdm machine-composition legacy island, and formal Ninja manifest. |
+| Files And ABI Surface | `src/bx-mantle` native PIC/machine-mechanics and lifecycle surfaces; `src/bx-vdm` machine-plane selector/result integration only; original OpenNT sources as semantic references; manifest/generator, focused tests, evidence and Status. |
+| Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source policy, source-recovery audit criterion, and design authorities. |
+| Verification | First complete the four-rung source/ABI/failure map and direct versus deferred PIC disposition. Then compile only formal Ninja module sources under MSVC x64 `/MT`, run focused positive/negative mechanics tests, and make one bounded Direct/Readonly native observation only after the whole machine package is linked. |
+| Expected Markers | Exact original saved-frame increment/carry and `unexpected_int` ordering; native PIC command/mask/EOI port evidence; selector remains in bx-vdm while bx-core stays selector-blind; no prebuilt/x86 object link; fresh Ninja static-library and native target evidence. |
+| Asset Needs | Source-built primary NTIO/NTDOS/COMMAND inputs, original OpenNT source manifest/overlays, adopted Bochs PIC source identity, MSVC x64 `/MT` Ninja graph, and disposable `build/M0-T225-S23/<run>` roots. |
+| Reporting Requirements | Record every recovery rung, original data/ordering/failure contract, exact Bochs PIC source identity and boundary, old-island migration/disposition, toolchain/CRT/ABI evidence, Direct/Readonly parity, build/run commands and all limitations. |
+| Stop Conditions | Missing original handler detail, PIC lifecycle requiring unclassified Bochs product dependencies, a necessary new device beyond PIC, a cross-ABI object proposal, a required guest-byte mutation, or any attempt to route `06h` through host-service plane. Record the issue; continue independent source/ABI mapping; do not invent a substitute. |
+| Exit Criteria | A reviewable whole-machine package either source-builds and validates the original handler contract through the formal x64 graph with a bounded native observation, or proves the first non-composable native prerequisite with a complete four-rung ledger and explicit transfer. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | NTIO entry state, `50:11` NTDOS destination and resume, NTDOS entry header/relocation assumptions, COMMAND handoff/configuration, initial-state catalog, DEM load/session services, machine stage, guest-image identity, and Direct/Readonly parity. |
-> **T225 S22 P1 native continuity observation:** [the result](etc/evidence/t225-s22-native-startup-continuity-observation-result-001.md) freshly builds the formal Ninja graph and proves identical Direct/Readonly continuity through original `50:11`, NTDOS initialization, `50:36`, and COMMAND `54:02/0D/0F`. The first later boundary is `C4 C4 06`/stack fault after the two source-shaped `54:0F` calls; [P3 corrects its owner](etc/research/t225-s22-int06-machine-boundary-correction-001.md) to the original SoftPC INT 06 machine path, not a new BOP work item.
-> **T225 S22 P2 COMMAND environment BX correction:** [the result](etc/evidence/t225-s22-command-environment-bx-correction-result-001.md) restores OpenNT `54:0F` success BX paragraph semantics and passes the formal COMMAND family fixture. The bounded native terminal is unchanged, so this is a verified correction rather than a false continuity-closure claim.
-> **T225 S22 P3 INT 06 owner correction:** [the source/route record](etc/research/t225-s22-int06-machine-boundary-correction-001.md) identifies `C4 C4 06` as the original SoftPC `illegal_op_int` machine path, not the debugger `56h` selector or an adapter BOP provider. The formal Ninja graph omits the legacy handler island; no restoration or new runtime behavior is admitted by this evidence alone.
-> **T225 S22 P4 handler build/ABI admission:** [the closure record](etc/research/t225-s22-int06-handler-build-abi-admission-001.md) proves the original pair is an x86 clang-cl historical island, while the formal product is MSVC x64 /MT with no src/opennt compilation edge. Empty port-space is not a PIC substitute. S22 therefore closes its admission result and transfers recovery to a separately admitted bx-mantle package.
+| Similar-Issue Sweep | `02h`/`06h` machine selectors, original `illegalp.c`/`unexp_nt.c` calls, saved real-mode fault frame, PIC lifecycle/ports/IRQ state, default port-space, BDA writes, handler diagnostics, old machine island, formal manifest source ownership, and Direct/Readonly parity. |
 
+> **T225 S22 closure:** [the closure record](history/m0-t225-s22-closure-20260817.md) proves source-built Direct/Readonly continuity through original NTIO, NTDOS and early COMMAND, corrects `54:0F` BX semantics, and transfers the reached `06h` path as a whole bx-mantle machine package rather than a BOP service patch.
 > **T225 S20 closure:** [the closure record](history/m0-t225-s20-closure-20260817.md) completes the original COMMAND `54:00..10` owner package: 17-slot source/route disposition, sensitive-source audit, Direct/Readonly family regression, live-route inventory, and one bounded native validation. It neither claims guest program completion nor permits trace-led BOP work.
 > **T225 S19 closure:** [the closure record](history/m0-t225-s19-closure-20260817.md) proves DEM’s 73-slot disposition, Direct/Readonly whole-family regression, no-live-bypass inventory, and one bounded native package validation. It neither claims guest program completion nor admits trace-led BOP work.
 > **T225 S20 P1 source/route reconciliation:** [the 17-slot map](etc/research/t225-s20-command-full-package-route-reconciliation-001.md) assigns every callable `54:00..10` identity to the current COMMAND package route and recovery rung, rejects the 4023-byte environment myth from OpenNT source, and selects full-family source/ABI regression before any native trace or singleton service work.
