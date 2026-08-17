@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S9.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S10.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S9 -- source-built guest bootstrap-to-EXEC admission map.**
+**Active: M0 T225 S10 -- primary-image native bootstrap-continuity fixture.**
 
 ## Active Packet
 
@@ -14,22 +14,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S9, Ordinary Mode. |
-| Admission And Approval | T225 is the owner-selected multi-program package. S8 is closed with primary/reference image installation cross-validation; S9 selects the next prerequisite stated by T225 S1/S4: source-backed bootstrap continuity before any COM `$Exec` fixture. |
-| Objective | Establish one complete original-source and current-composition map from reset/startup input through `50:11 demLoadDos`, NTDOS entry, COMMAND bootstrap, and the first guest-owned `$Exec` eligibility point; identify the minimal exact-image fixture and its Direct/Readonly capability requirements. |
-| Non-goals | No guest trace, BOP implementation, substitute DOS loader, synthetic PSP/MCB/EXEC, nested host process, Bochs feature/device change, host-system mutation, or Overlay implementation. |
-| Reference Baseline | T225 S1--S5 source/prerequisite maps; S2 DEM lifecycle, S3 file-I/O closures; S6/S7 fixture/build closures; and S8 source-built four-image cross-validation. |
-| Files And ABI Surface | `docs/etc/research/t225-s9-*` map and current source inspection only. Existing profile, image, mechanical-action, CPU-result and BOP ingress ABI are read-only baselines. |
+| Identifier Mode | M0 T225 S10, Ordinary Mode. |
+| Admission And Approval | S9/P1 source/ABI map completes its gate and selects this exact-image native continuity fixture. T225 remains the owner-selected multi-program package. |
+| Objective | Build and run one bounded, source-built primary-image fixture that observes the existing native reset/NTIO entry, `50:11 demLoadDos` mechanical commit/resume, and the first NTDOS-owned continuation fact in separate Direct and Readonly profiles. |
+| Non-goals | No BOP/provider implementation, DOS/COMMAND loader, PSP/MCB/EXEC behavior, host child process, Bochs feature/device change, host-system mutation, Overlay selection, Virtual selection, or trace-led repair. |
+| Reference Baseline | T225 S2/S3 package closures, S5 native continuity baseline, S6/S7 composition graph, S8 primary images, and S9/P1 bootstrap map. |
+| Files And ABI Surface | New fixture/probe and evidence only, using existing fixed-width machine-stage, mechanical-action, CPU-result, BOP ingress and profile ABI. No production semantic ABI change. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Cite original OpenNT callers and current source routes; account for every transition and copied image; classify each reached BOP by owner/package/disposition; compare Direct and Readonly without a hidden fallback; run documentation governance and diff checks. |
-| Expected Markers | One ordered reset→NTIO→`50:11`→NTDOS→COMMAND→`$Exec` map, image physical/segment placement contract, all missing prerequisites by owner, and a fixture admission/refusal decision. |
-| Asset Needs | The four primary source-built stages and manifests from S8, managed `src/opennt`, current bx-core/bx-mantle/bx-vdm sources, and prior T225 evidence. |
-| Reporting Requirements | Record source paths, copied ABI fields, profile/mutation disposition, current bound route, historical failure behavior, unresolved dependency, and next package boundary. |
-| Stop Conditions | A required transition depends on unadmitted Bochs mechanics, an unclassified BOP family, missing source evidence, or any proposal to make bx-vdm own DOS/PSP/MCB/EXEC semantics. Pause for a revised package rather than patching a trace leaf. |
-| Exit Criteria | A reviewed source/ABI/fixture-gate record that either admits one smallest source-owned bootstrap implementation package or precisely refuses it with owner-scoped missing prerequisites. |
-| Original Owner Request | “实施当前规划好的，以最小 bochs 作为 softpc 的替代品，实现一个基于 cli 的 ntvdm……要有全局观，避免添油战术。” |
-| Similar-Issue Sweep | NTIO→NTDOS loading, NTDOS header/entry state, COMMAND bootstrap, image placements, Direct/Readonly provider selection, DEM/COMMAND BOP ownership, terminal/return path, and bochs machine ownership. |
-> **T225 S9 P1 bootstrap map:** the [source/ABI admission map](etc/research/t225-s9-source-built-guest-bootstrap-to-exec-admission-map-001.md) proves that primary images and `50:11`''s checked DI:0 write/resume route exist, but no evidence yet joins native NTIO continuation to NTDOS/COMMAND execution. It selects a separate bootstrap-continuity fixture package; no BOP, loader or Bochs change is admitted here.
+| Verification | Fresh Ninja/MSVC x64 `/MT` link; primary manifest identities; Direct and Readonly bounded runs; explicit Overlay/Virtual refusal; selector-blind observation fields; governed evidence and diff checks. |
+| Expected Markers | Initial NTIO entry fact, one exact `50:11` action/continuation fact if reached, and the earliest subsequent owner-scoped terminal/NTDOS entry fact for each mode. |
+| Asset Needs | S8 primary build stages, current Ninja manifest/graph, primary profile stager, current native machine-stage/CLI sources and existing focused test infrastructure. |
+| Reporting Requirements | Record image identity, build root, mode, budget, observed fixed-width facts, absence/presence of `50:11`, termination reason, interpretation and next owner boundary. |
+| Stop Conditions | Any needed new BOP semantic, Bochs feature/device, synthetic guest transfer, Direct fallback in Readonly, unbounded guest inspection, or inability to identify the first divergent owner. Stop and revise rather than patch. |
+| Exit Criteria | A reproducible Direct/Readonly primary-image observation, or a source/build admission record precisely proving why the current graph cannot perform it without an out-of-scope change. |
+| Original Owner Request | “以最小 bochs 作为 softpc 的替代品，实现一个基于 cli 的 ntvdm……要有全局观，避免添油战术。” |
+| Similar-Issue Sweep | Initial-state action, startup plan, `50:11` dispatch/commit/resume, exact-image staging, profile selection, native stop ownership, and all existing observation mechanisms. |
+> **T225 S9 closure:** the [bootstrap map](etc/research/t225-s9-source-built-guest-bootstrap-to-exec-admission-map-001.md) completes S9's source/ABI fixture gate: it identifies continuous native execution, rather than a missing BOP or image, as the next prerequisite. S10 is the separately admitted observation package; no execution result is implied by S9.
+
+> **T225 S10 P1 input/build record:** the source-built primary staging contract and the fresh Ninja x64 `/MT` native link closure are recorded in [the S10 observation result](etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md). The `SHARE.EXE` to `TARGET.EXE` profile alias is byte-identical and exists only for current CLI admission; it is not a new artifact identity.
+
+> **T225 S10 P2 bounded native observation:** Direct and Readonly both reached early CPU reset diagnostics and did not return within their separate external ten-second budgets. The observer records null exit codes after terminating only its own PIDs; it observed neither an NTIO, `50:11`, nor NTDOS marker. This is a selector-blind lifecycle/observability result, not permission for a BOP/provider repair. S10 remains active pending an admitted generic observation/run-control map.
 > **T225 S4 P0 admission:** S3 is closed in [its file-I/O source/ABI record](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md). S4 begins with the complete COM branch source and prerequisite map; it must not implement a substitute loader.
 
 > **T225 S4 P1 progress:** the [COM control-flow/prerequisite map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) confirms `$Exec` remains the only COM loader. Artifact and S3 file evidence exist; real guest arena/PSP/entry reach is not yet proven and requires a bounded guest fixture.
