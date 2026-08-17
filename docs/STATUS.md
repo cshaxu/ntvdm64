@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S14.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S15.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S14 -- primary pre-BOP execution continuity source map.**
+**Active: M0 T225 S15 -- bounded generic-UD continuity observation.**
 
 ## Active Packet
 
@@ -14,23 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S14, Ordinary Mode. |
-| Admission And Approval | S13's bounded Direct/Readonly ladder found no BOP through 100,000 ticks. The owner requires source-led diagnosis rather than trace-led BOP patching. |
-| Objective | Map the reached pre-BOP native execution path and observed instruction classes to immutable OpenNT source/artifact context; identify the first unproven prerequisite and its original owner. |
-| Non-goals | No BOP/provider implementation, no trace-led service task, no guest image change, no Bochs/bx-core/bx-mantle/adapter patch, no device enablement, and no higher-budget run. |
-| Reference Baseline | T225 S9 bootstrap map; S10 primary stage; S11 budget control; S12 observer; S13 [bounded ladder result](etc/evidence/t225-s13-primary-first-bop-ladder-result-001.md). |
-| Files And ABI Surface | Governed source/ABI research, evidence and Status only. Existing runtime source and build graph are read-only. |
+| Identifier Mode | M0 T225 S15, Ordinary Mode. |
+| Admission And Approval | S14 [source map](etc/research/t225-s14-primary-pre-bop-continuity-source-map-001.md) proves that a static NTIO `50:11` precedes the observed address-free `SLDT` diagnostic, so one selector-blind location witness is required before any owner repair. |
+| Objective | Expose a fixed-capacity, default-off adapter observation of every existing generic `#UD` event, then use bounded Direct/Readonly runs to identify the first actual CS:EIP/window without changing its disposition. |
+| Non-goals | No BOP/provider implementation, no selector/service routing change, no guest-memory read, no guest byte/input change, no CPU/mantle/Bochs change, no device enablement, no CCPU reintroduction, no higher budget, and no Overlay selection. |
+| Reference Baseline | T225 S11 budget, S12 BOP-only observer, S13 bounded zero-BOP result and S14 source map. |
+| Files And ABI Surface | bx-vdm generic-UD observation/bridge and CLI default-off rendering, focused fixture, governed evidence/Status and Ninja manifest only. bx-core/bx-mantle and provider contracts are read-only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md and design authorities. |
-| Verification | Cite source/artifact locations and instruction/control-flow correspondence; classify each prerequisite by original owner; run documentation governance and diff checks. |
-| Expected Markers | A source-backed distinction between expected guest code, unsupported/minimal-machine mechanics, and unproven inference; no invented selector disposition. |
-| Asset Needs | Immutable S10 staged inputs, S13 concise result, source-built guest/source records, existing bx-core/mantle boundary evidence. |
-| Reporting Requirements | Record exact source/asset evidence, observed versus inferred facts, owner assignment, rejected shortcuts and next bounded admission. |
-| Stop Conditions | Missing or contradictory source/artifact identity, a required runtime experiment, or a proposed mechanic/provider change. Stop and re-admit; do not patch. |
-| Exit Criteria | A reviewable pre-BOP continuity source map that names the next owner-scoped package without attributing a failure to an unobserved BOP. |
+| Verification | Focused fixture proves accepted and declined generic `#UD` records preserve the original bridge result; fresh Ninja/MSVC x64 `/MT` link; default-off CLI check; bounded Direct/Readonly run at no more than 100,000 ticks; governance and diff checks. |
+| Expected Markers | Fixed copied CS:EIP, execution mode and instruction window; default-off output absence; unchanged BOP observer/provider outcome and no core/mantle modification. |
+| Asset Needs | Existing generic UD event, S12 observer lifecycle pattern, S13 primary stage and S14 static map. |
+| Reporting Requirements | Record exact record bound/layout, accepted/declined preservation, Direct/Readonly first generic event or absence, relation to static `0x0b75`, and owner classification without a repair. |
+| Stop Conditions | Any need for guest-memory access, selector decoding, a CPU/mantle/Bochs patch, unbounded logging, a provider change, an event-state mutation, mode discrepancy, or a run beyond 100,000 ticks. Stop and re-admit. |
+| Exit Criteria | A reproducible, default-off selector-blind first-generic-UD witness (or bounded absence) in both modes, with source-backed classification of the pre-BOP boundary. |
 | Original Owner Request | “参照 opennt源代码来解读这些指令的大体目的，帮助辨明方向 看看是缺失了什么功能还是做错了什么功能。” |
-| Similar-Issue Sweep | Startup image layout, entry/continuation ownership, CPU decode diagnostics, x87/IRQ13/PIC/IVT preconditions, mapped memory, and observer boundary. |
+| Similar-Issue Sweep | Generic UD event capture, declined/accepted bridge behavior, observer lifecycle/reset, CLI output/argument contract, bounded execution, BOP observer non-interference and Direct/Readonly parity. |
 
-> **T225 S13 closure:** [the primary first-BOP ladder result](etc/evidence/t225-s13-primary-first-bop-ladder-result-001.md) records normal internal Direct/Readonly budget termination at 50,000 and 100,000 ticks, with zero BOP records, zero overflow and no mode discrepancy. It proves only a shared pre-BOP continuity gate. S14 owns source-led classification; no BOP or machine repair is admitted by S13.
+> **T225 S14 closure:** [the primary pre-BOP continuity source map](etc/research/t225-s14-primary-pre-bop-continuity-source-map-001.md) establishes that the current source plan retains OpenNT's `0070:0000` NTIO entry and that the immutable image's `C4 C4 50 11` at physical `0x0b75` precedes its static `SLDT` occurrences. The address-free CPU diagnostics do not identify the execution path. S15 owns only a selector-blind generic-UD location witness; it admits neither a BOP nor a machine repair.
 > **T225 S10 closure:** the [bounded primary observation](etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md) and [run-control/observation map](etc/research/t225-s10-native-run-control-observation-map-001.md) establish identical early Direct/Readonly reset behavior but no public normal-result or continuity marker before the fixed one-million-tick run returns. Existing UD2 profile observations would alter immutable guest input, and fixture-only BOP observations are not CLI outputs. S10 closes as an evidence gate; S11 owns only the smallest generic CLI run-control seam.
 
 > **T225 S11 closure:** [the run-control result](etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md) proves the optional positive-decimal budget is copied through the existing CLI/engine/mantle contract. Direct and Readonly each return the normal internal budget terminal at 1000 ticks with exit 4; default one-million behavior, invalid-budget rejection and Overlay refusal are verified. No BOP, guest, adapter semantic or Bochs mechanic changed. The next package must separately admit post-run continuity observation.
