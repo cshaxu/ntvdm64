@@ -179,3 +179,24 @@ not an established original-host FastRead failure disposition.  The core P2
 conclusion remains: Direct EXEC is unadmitted until FastRead's Direct result
 contract and the real CurrentPDB/DTA guest path are closed.  No implementation
 or native trace is authorized by P3.
+## P4 Reproducible Direct/Readonly Shared-Route Witness
+
+The existing `dem-whole-provider-session` fixture was rebuilt in the fresh
+`build/M0-T225-S1/001` disposable root with MSVC x64 `/MT`.  Its manifest
+reported `compileExitCode=0`, `linkExitCode=0`, `runExitCode=0`, and
+`passed=true`.  Its source closure explicitly excludes `bx-core`, `bx-mantle`,
+Bochs binaries, an OpenNT runtime and a CLI engine.
+
+The fixture drives real-mode `C4 C4 50 xx` through ingress, registry and DEM
+package-session dispatch.  For both Direct and Readonly it proves the bounded
+DTA/PDB transport, `50:12` open, `50:16` checked guest-RAM read and `50:02`
+close using the same opaque `AX:BP` token.  It also proves released tokens
+return the source-shaped invalid-handle result rather than falling through to
+a profile default.  Readonly separately refuses its write/mutation surface by
+capability.
+
+This witness is deliberately limited: it does not execute guest `$Exec`, it
+does not dispatch Direct `50:42`, and it does not prove terminal return.  It
+therefore corroborates P3's shared-ABI conclusion but leaves the T225 package
+gate unclosed.  The disposable build root may be removed after this evidence
+record; no build product is an acceptance artifact.
