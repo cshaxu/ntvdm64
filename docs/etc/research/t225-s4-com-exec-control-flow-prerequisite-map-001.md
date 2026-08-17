@@ -76,3 +76,24 @@ for a later guest-owned COM fixture.
 S4 remains an admission/audit package. Its output is the concrete handoff to
 the machine/startup owner; no COM execution claim, native trace, or adapter
 loader implementation is made.
+
+## P3 Machine/Startup Continuity Handoff
+
+The machine prerequisite is not an authorization to enable a complete PC/AT
+product shell. Existing evidence assigns the first known requirements as
+follows:
+
+| Requirement | Owner | Current evidence/disposition |
+| --- | --- | --- |
+| CPU5/P real-mode decode and ordinary RAM | bx-core/bx-mantle | present as bounded mechanics; native NTIO continuation not yet closed |
+| SIM, logging, PC-time and reset lifecycle | bx-mantle | minimal assembly exists, but still requires a closed native lifecycle |
+| default port-space | bx-mantle | generic empty/default port-space exists; concrete reached port requirements are unproven |
+| FPU/x87 exception and IRQ13 | bx-core plus native PIC/firmware | first post-BOP trace reached this branch; must be source/trace proven before admission |
+| PIC, IVT and interrupt timing | native Bochs machine owner | not an adapter responsibility; concrete vector/mask/timing evidence required |
+| 0xA1800 memory access | native memory/machine owner | reached-map disposition remains unproven; no blanket VGA/device enablement is authorized |
+| NTIO to NTDOS load sequence | original guest plus admitted DEM and machine owners | not yet observed as a continuous native path |
+
+The next implementation package must start from the first post-transaction
+control-flow evidence, classify every reached mechanic as required, default but
+unneeded, or rejected, and build only the resulting native closure. It must not
+put IRQ, BIOS, device, DOS, or BOP semantics into bx-vdm.
