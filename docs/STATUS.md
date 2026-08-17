@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S32.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S33.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S32 -- original bootstrap/device-header lifecycle package map.**
+**Active: M0 T225 S33 -- original bootstrap continuity observation admission map.**
 
 ## Active Packet
 
@@ -14,21 +14,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S32, Ordinary Mode. |
-| Admission And Approval | S31 identifies original NTDOS/NTIO bootstrap device-header lifecycle as the only next owner package. The owner requires source-first whole-component recovery and standing approval covers bounded evidence work. |
-| Objective | Map the entire original NTIO-to-NTDOS bootstrap/device-header lifecycle: 50:11 image load, sysinit relocation, DosInit/DOSDATA placement, resident device chain, charinit request preparation and DEVIOCALL2 input contract. Give each stage a source/ABI/failure disposition. |
-| Non-goals | No BOP/provider implementation; no preseeded DS:SI, CALLDEVAD, request packet or device header; no CPU wrap/descriptor/machine repair; no new runtime trace or Bochs intrusion. |
-| Reference Baseline | S29 image layout, S30 segment tuple, S31 DS:FFFF source attribution, immutable S10 images, original NTDOS/NTIO source and source-built map. |
-| Files And ABI Surface | One whole-package source/ABI/failure map, lifecycle ledger, Status/history/evidence only. No runtime ABI or code change is admitted. |
+| Identifier Mode | M0 T225 S33, Ordinary Mode. |
+| Admission And Approval | S32 closes the whole original bootstrap/device-header package map and transfers only the bounded continuity-observation question. Standing owner approval covers bounded evidence work. |
+| Objective | Produce a source/ABI/failure admission map for one non-invasive observation that can distinguish original guest reach of `sysinit`, `DosInit`, and first `charinit`/device-call preparation, without changing guest execution. |
+| Non-goals | No new guest/BOP/provider behavior; no guest-byte or state preseed; no device/header/request synthesis; no CPU wrap, descriptor, RAM, PIC, firmware, or lifecycle repair; no new Bochs intrusion without separately registered admission. |
+| Reference Baseline | S28 first-fault observer, S30 selector-blind segment-access observer, S31 static candidate, S32 original lifecycle map, immutable S10 images, and current bx-vdm 50:11 seam. |
+| Files And ABI Surface | One observation source/ABI/failure map plus Status/history/evidence. No code or runtime ABI change is admitted by S33. |
 | Applicable Rules | rules/EXECUTION.md, source policy, source-recovery audit criterion, design authorities, Bochs deny-by-default, and T225's prohibition on trace-led singleton repair. |
-| Verification | Reconcile every original lifecycle stage with current 50:11/startup composition; identify required original state, source owner, current provision, failure semantics and missing proof; validate all address conversions against immutable images. |
-| Expected Markers | A complete stage table from NTDOS load through DEVIOCALL2, explicit owner/boundary assignment, rejected synthetic substitutes, and one justified next package or retained ambiguity. |
-| Asset Needs | S10 immutable root, S29-S31 records, original OpenNT source tree, S8 source build/map, current bx-vdm startup/load sources, adopted Bochs source. |
-| Reporting Requirements | Cite original source paths and build artifacts; distinguish current implementation, original contract and inference; state every missing prerequisite and whether it belongs to guest, bx-core/mantle, bx-vdm or host capability. |
-| Stop Conditions | Any need to run a new trace, copy live guest memory, prewrite lifecycle state, alter Bochs/guest behavior, or implement a BOP/provider. Stop and re-admit only the smallest evidenced action. |
-| Exit Criteria | A source-first whole-package map covers all listed lifecycle stages, identifies the exact current gap or preserves ambiguity, and makes no unrecorded implementation change. |
+| Verification | Inventory existing mechanical observability surfaces; reconcile them with original source-map stage boundaries; show why each earlier source/adapter/Bochs/new-code rung is retained or rejected; governance and diff checks. |
+| Expected Markers | A fixed observation tuple and boundary, original stage-to-address/ABI correlation, selector-blindness proof, and either one justified smallest implementation package or an explicitly retained blocker. |
+| Asset Needs | S10 immutable root, S28-S32 records, original OpenNT source and source-built maps, current bx-core/bx-mantle/bx-vdm source, adopted Bochs source. |
+| Reporting Requirements | Cite current and original source paths; distinguish static address map from dynamic reach; record any required external intrusion separately; classify every proposed observation rung. |
+| Stop Conditions | Any need to copy arbitrary guest memory, parse BOP/service semantics, alter CPU state, modify guest bytes, add a Bochs hook, or run a native trace. Stop and re-admit the smallest evidenced action. |
+| Exit Criteria | A complete source-first admission record fixes a non-invasive observation contract or proves no presently admissible observation; it makes no implementation change. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | NTDOS staging, sysinit/DosInit relocation, DOSDATA/SS state, device header chain, source-built NTIO pointers, charinit packet lifecycle, DEM 50:11 contract, and profile neutrality. |
+| Similar-Issue Sweep | Existing fault/segment observers, reset/startup plan, 50:11 continuation, original sysinit/DosInit/charinit/DEVIOCALL2 addresses, guest source-built maps, and bx-core/bx-mantle observer seams. |
+> **T225 S32 closure:** [the closure record](history/m0-t225-s32-closure-20260817.md) proves the `50:11` narrow original-shaped RAM/resume seam and maps the original bootstrap/device-header lifecycle. It transfers only a non-invasive continuity-observation admission; it admits no repair.
 > **T225 S31 closure:** [the closure record](history/m0-t225-s31-closure-20260817.md) identifies `DEVIOCALL2` as a source/build-compatible candidate but proves only a broader original bootstrap/device-header lifecycle package may follow; it admits no repair.> **T225 S25 closure:** [the closure record](history/m0-t225-s25-closure-20260817.md) completes the one-surface startup-machine package and its whole-family/native evidence. It transfers only the source/current route reconciliation for guest multi-program execution.
 > **T225 S26 P1 current-route reconciliation:** [the map](etc/research/t225-s26-guest-exec-current-route-reconciliation-001.md) confirms DEM file/lifecycle and startup-machine prerequisites are package-closed; it identifies complete COMMAND parent-return lifecycle recovery as the only next owner package, without a trace-led BOP repair.
 > **T225 S26 closure:** [the closure record](history/m0-t225-s26-closure-20260817.md) completes the original NTDOS source/current-route reconciliation and admits only S27's complete COMMAND parent-return package. It does not claim a guest child can yet execute or return.
