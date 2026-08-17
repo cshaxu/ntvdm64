@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1717 |
+| Documentation records | 1718 |
 | --- | --- |
-| Generated UTC | 2026-08-17T17:13:41Z |
+| Generated UTC | 2026-08-17T17:17:12Z |
 
 ## Entries
 
@@ -919,6 +919,7 @@ content-divergent entries.
 | etc/research/t225-s19-legacy-runtime-route-inventory-001.md | indexed supporting material | 0a050ef9d4aceecca252250c0a97e3dafefcd5950a5101462264303b8f42e6f5 |
 | etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md | indexed supporting material | 89150191019f066887b0ec774d131c75b8ec2c4ab7487f1f0ca4fe6cce34042e |
 | etc/research/t225-s20-command-full-package-route-reconciliation-001.md | indexed supporting material | 62bb3fb42b03bac1e1f5e8ef56cd0ddee5d43f9cf2ff9c999b512b9385c12c06 |
+| etc/research/t225-s20-command-live-route-inventory-001.md | indexed supporting material | b93d2434f07d811d8805a184e89bcd810a422db87dde92592fce0c29e13958fc |
 | etc/research/t225-s20-command-sensitive-subfamily-source-map-001.md | indexed supporting material | d05d480213dba6bcf5ee193c36a4a3b3872614f7600b2fe3b6b5ccca5587a6c8 |
 | etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 11b658c92de1e09bdaac0f77f2424ecffde4532350ae07308e971eeed90b02e7 |
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
@@ -1731,7 +1732,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4decfd9119df727f61465dd195e813938d2aec218ea0ea5786174d18b06138e8 |
+| STATUS.md | principal control document | 4f8abe769261b2d118bfa6a7754bb65ac76eb4f33f7c6f767d3c0bbe586903a7 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
