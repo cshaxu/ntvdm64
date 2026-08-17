@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T224 S3.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T224 S4.** Its governing brief appears immediately below.
 
-**Active: M0 T224 S3 -- DEM pipe/SFT continuation provider admission.**
+**Active: M0 T224 S4 -- COMMAND child-redirection provider admission.**
 
 > **T223 closed:** its COMMAND bootstrap/environment/config package closure is
 > recorded in [history](history/m0-t223-closure-20260817.md).
@@ -12,27 +12,27 @@
 ## Active Packet
 
 > **T scope:** T224 recovers the Queue-selected standard-handle and redirection
-> capability as an original owner package. S3 admits its next complete shared
-> owner subpackage: DEM pipe/SFT continuation (`50:47/48`). It does not
-> implement trace-selected redirection leaves.
+> capability as an original owner package. S4 admits one COMMAND child-redirection
+> provider for `54:08/0A`, including creation and cleanup ownership for the
+> private pipe session required before any DEM continuation success path.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T224 S3, Ordinary Mode. |
-| Admission And Approval | S1 and completed S2 select DEM's paired pipe-continuation provider. Owner direction remains original component packages with Direct/Readonly first and no singleton trace work. |
-| Objective | Establish the complete source/ABI/failure and state-ownership boundary for DEM `50:47/48`, then admit one shared pipe/SFT continuation provider only if its Direct/Readonly terminals can be represented without raw handles, worker threads, or leaf fallbacks. |
-| Non-goals | No `54:08/0A` host-child execution, no raw HANDLE in guest/bridge ABI, no worker thread/temp-file lifecycle, no Bochs/mantle change, no native trace, and no standalone implementation of only `50:47` or only `50:48`. |
-| Reference Baseline | T224 S1 map; OpenNT `demhndl.c:553-605`, `demdisp.c`, guest `handle.asm`, `dossvc.h`, and the completed S2 stream-session boundary. |
-| Files And ABI Surface | `src/bx-vdm` DEM pipe/SFT provider/session and profile interfaces, focused x64 fixture/probe and evidence. Guest boundary remains fixed-width registers and checked transactions only. |
+| Identifier Mode | M0 T224 S4, Ordinary Mode. |
+| Admission And Approval | S1 through completed S3 show that COMMAND owns the producer and lifecycle needed by the paired DEM continuation provider. Owner direction remains original component packages with Direct/Readonly first and no singleton trace work. |
+| Objective | Establish the full COMMAND `54:08/0A` child-redirection source/ABI/failure boundary, including the typed private pipe-session lifecycle that is prerequisite to DEM `50:47/48`; do not revive direct `CreateProcessW` as a leaf shortcut. |
+| Non-goals | No raw HANDLE in guest/bridge ABI, no Bochs/mantle change, no native trace, no raw historical worker import, and no standalone implementation of `54:08` or `54:0A`. |
+| Reference Baseline | T224 S1/S3 maps; OpenNT `cmdexec.c`, `cmdredir.c`, `cmdsvc.h`, guest `tcode.asm`, and the completed S2 stream-session boundary. |
+| Files And ABI Surface | `src/bx-vdm` COMMAND child-redirection provider/session and profile interfaces, focused x64 fixture/probe and evidence. Guest boundary remains fixed-width registers and checked transactions only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | First record an owner-wide source/state/failure table. Before any implementation, identify the legal Direct and Readonly terminals, retained S2 token boundary and all prohibited historic worker/SAS/SoftPC dependencies; then run governance and diff. |
-| Expected Markers | One paired DEM provider owner; shared EOF/size/disconnect state model; profile disposition before route selection; and a named source-shaped no-pipe terminal. |
-| Asset Needs | Existing OpenNT/current source and local MSVC x64 `/MT`; no external import, guest media, worker subsystem, or host modification. |
-| Reporting Requirements | Record both identities' original/guest ABI, shared historical pipe state and cleanup dependencies, current bound routes, Direct/Readonly/Overlay/Virtual disposition, and the admissible provider boundary. |
-| Stop Conditions | Need to expose a host HANDLE or pointer to guest, need for raw pipe worker/thread behavior, new guest ABI, Bochs change, host-system modification, or any attempt to bind either member of `50:47/48` before the shared provider is admitted. |
-| Exit Criteria | One owner-wide, evidence-backed pipe/SFT provider disposition and source/ABI/failure map exists for both identities and their cleanup lifecycle; it either admits one safe shared implementation seam or records a precise blocked/deferred condition without changing leaf routes. |
+| Verification | First record one owner-wide source/ABI/failure and lifecycle table. Before any implementation, classify `54:08/0A` Direct/Readonly/Overlay/Virtual terminals, stream-token consumption, and all prohibited historic worker/SAS/SoftPC dependencies; then run governance and diff. |
+| Expected Markers | One COMMAND child-redirection owner; typed private stream/pipe-session lifecycle; profile disposition before route selection; and source-shaped launch/environment failure terminals. |
+| Asset Needs | Existing OpenNT/current source and local MSVC x64 `/MT`; no external import, guest media or host modification. |
+| Reporting Requirements | Record both launch identities' original/guest ABI, pipe session creation/cleanup dependencies, current bound routes, Direct/Readonly/Overlay/Virtual disposition, and the admissible provider boundary. |
+| Stop Conditions | Need to expose a host HANDLE or pointer to guest, new guest ABI, Bochs change, host-system modification, or any attempt to bind `54:08`/`54:0A` separately from their shared lifecycle. |
+| Exit Criteria | One owner-wide, evidence-backed child-redirection provider disposition and source/ABI/failure map exists for both identities and their stream/pipe cleanup lifecycle; it either admits one safe shared seam or records a precise blocked/deferred condition without changing leaf routes. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | OpenNT `demhndl` pipe state, guest `handle.asm` consumers, SFT/opaque token ownership, EOF/size flags, cleanup dependencies, profile selection, current absent-pipe terminals, and test/probe source closure. |
+| Similar-Issue Sweep | OpenNT `cmdexec`/`cmdredir` launch and cleanup state, guest `tcode.asm` callers, S2 stream-token ownership, child environment/tail contracts, profile selection, and test/probe source closure. |
 > **T224 S1 P1 closure:** the complete standard-handle/redirection owner map covers COMMAND 54:06/07/08/0A, DEM 50:47/48, and the necessary bootstrap/cleanup lifecycle. It rejects direct historical composition for named CCPU/SAS, 32-bit pointer, SoftPC and legacy-thread dependencies, and partitions future work by complete providers; see the [source/ABI/failure map](etc/research/t224-s1-standard-handle-redirection-source-abi-failure-map-001.md).
 
 > **T224 S2 closure:** COMMAND now owns one host-neutral stream session.
@@ -45,6 +45,8 @@
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
 > deferred. See the [whole-provider disposition](etc/research/t221-s2-file-provider-disposition-001.md).
+
+> **T224 S3 closure:** the paired DEM `50:47/48` source-state audit confirms that no profile currently creates a pipe/SFT producer. All retain the checked no-pipe `ERROR_INVALID_HANDLE` terminal; any stateful success path must follow one COMMAND child-redirection lifecycle. See the [S3 record](etc/research/t224-s3-dem-pipe-sft-state-abi-failure-map-001.md).
 
 > **T221 S3 P1 progress:** `dem_whole_provider` now owns one selector-blind
 > file-view authority. Direct/Readonly local-file admission migrated through
