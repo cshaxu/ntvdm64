@@ -13,6 +13,8 @@ foreach ($required in @(
     'OPENNT_INT06_PROVIDER_V1_OPERATION_RAM_READ8',
     'OPENNT_INT06_PROVIDER_V1_OPERATION_PORT_WRITE8',
     'opennt_int06_provider_v1_begin',
+    'opennt_int06_provider_v1_begin_unexpected',
+    's->phase = P_MASTER_OCW3',
     'P_IP_LO', 'P_WRITE_CS_LO', 'P_MASTER_OCW3', 'P_SLAVE_EOI', 'P_BDA',
     's->saved_ip == 0xffffu',
     's->master_isr == 0u ? 0xffu : s->master_isr',

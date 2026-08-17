@@ -47,6 +47,10 @@ extern "C" {
 void opennt_int06_provider_v1_initialize(struct opennt_int06_provider_v1_state *state);
 int opennt_int06_provider_v1_begin(struct opennt_int06_provider_v1_state *state,
   uint16_t ss, uint32_t esp);
+/* Begins the original unexpected_int common suffix directly.  This is used
+ * for the direct 02h entry; it deliberately does not read or modify a saved frame. */
+int opennt_int06_provider_v1_begin_unexpected(
+  struct opennt_int06_provider_v1_state *state);
 int opennt_int06_provider_v1_next(const struct opennt_int06_provider_v1_state *state,
   struct opennt_int06_provider_v1_operation *operation);
 int opennt_int06_provider_v1_accept(struct opennt_int06_provider_v1_state *state,

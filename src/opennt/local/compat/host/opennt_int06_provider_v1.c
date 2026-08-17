@@ -35,6 +35,15 @@ int opennt_int06_provider_v1_begin(struct opennt_int06_provider_v1_state *s,
   if (stack > UINT32_MAX - 3u) { s->status = OPENNT_INT06_PROVIDER_V1_STATUS_INVALID; return 0; }
   s->stack_physical = stack; s->phase = P_IP_LO; return 1;
 }
+int opennt_int06_provider_v1_begin_unexpected(
+  struct opennt_int06_provider_v1_state *s) {
+  if (s == 0 || s->magic != OPENNT_INT06_PROVIDER_V1_MAGIC ||
+      s->abi_version != OPENNT_INT06_PROVIDER_V1_VERSION ||
+      s->struct_bytes != sizeof(*s) || s->status != OPENNT_INT06_PROVIDER_V1_STATUS_PENDING ||
+      s->phase != 0u) return 0;
+  s->phase = P_MASTER_OCW3;
+  return 1;
+}
 int opennt_int06_provider_v1_next(const struct opennt_int06_provider_v1_state *s,
   struct opennt_int06_provider_v1_operation *o) {
   if (o == 0 || !valid(s)) return 0;

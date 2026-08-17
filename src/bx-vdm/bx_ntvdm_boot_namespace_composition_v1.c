@@ -19,6 +19,7 @@
 #include "bx_ntvdm_debugger_package_facade_v1.h"
 #include "bx_ntvdm_top_level_package_facade_v1.h"
 #include "bx_ntvdm_machine_bop_facade_v1.h"
+#include "bx_ntvdm_startup_machine_interrupt_v1.h"
 #include <string.h>
 
 static bx_ntvdm_boot_namespace_composition_v1 *active;
@@ -368,6 +369,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
     bx_ntvdm_exception_result_v1 memory_result;
     if (!valid(active) || !active->bound || !value || !unpack(event, &boundary,
             &cpu, &window)) return 0;
+    if (bx_ntvdm_startup_machine_interrupt_v1_dispatch(event, &result))
+        return outcome(&result, value);
     if (bx_ntvdm_emm_unavailable_service_v1_dispatch(&boundary, &cpu, &window,
             &result)) return outcome(&result, value);
     if (execute_mouse_install1_mapping(active, &boundary, &cpu, &window,

@@ -25,4 +25,12 @@ static int hardware_carry_slave_case(void) {
   if (!step(&s,4,0xa1u,0x82u,0)||!step(&s,4,0xa0u,0x20u,0)||!step(&s,4,0x21u,0x29u,0)||!step(&s,4,0x20u,0x20u,0)||!step(&s,2,0x46bu,0x09u,0)||!opennt_int06_provider_v1_complete(&s)) return 5;
   return 0;
 }
-int main(void) { int x=software_case(); if(x) return x; return hardware_carry_slave_case(); }
+static int unexpected_suffix_case(void) {
+  struct opennt_int06_provider_v1_state s;
+  opennt_int06_provider_v1_initialize(&s);
+  if (!opennt_int06_provider_v1_begin_unexpected(&s)) return 1;
+  if (!step(&s, 4, 0x20u, 0x0bu, 0) || !step(&s, 3, 0x20u, 0, 0)) return 2;
+  if (!step(&s, 2, 0x46bu, 0xffu, 0) || !opennt_int06_provider_v1_complete(&s)) return 3;
+  return 0;
+}
+int main(void) { int x=software_case(); if(x) return x; x=hardware_carry_slave_case(); if(x) return x; return unexpected_suffix_case(); }

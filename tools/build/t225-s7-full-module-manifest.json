@@ -300,6 +300,7 @@
         "src/bx-vdm/bx_ntvdm_mutation_overlay_v1.c",
         "src/bx-vdm/bx_ntvdm_mutation_profile_v1.c",
         "src/bx-vdm/bx_ntvdm_native_bop_composition_v1.c",
+        "src/bx-vdm/bx_ntvdm_startup_machine_interrupt_v1.c",
         "src/bx-vdm/bx_ntvdm_normal_return_observation_v1.c",
         "src/bx-vdm/bx_ntvdm_normal_terminal_sequence_observation_v1.c",
         "src/bx-vdm/bx_ntvdm_printer_unavailable_service.c",
@@ -352,6 +353,12 @@
       "name": "t225-s23-opennt-int06-provider-fixture",
       "source": "tests/opennt/opennt_int06_provider_v1_test.c",
       "libraries": ["opennt-host"],
+      "platformLibraries": []
+    },
+    {
+      "name": "t225-s25-startup-machine-interrupt-fixture",
+      "source": "tests/bx-mantle/t225_s25_startup_machine_interrupt_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle", "bx-vdm", "opennt-host"],
       "platformLibraries": []
     },
     {
