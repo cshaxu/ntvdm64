@@ -705,7 +705,7 @@ int main(void)
     event.ebx = 3u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
-        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 0u ||
+        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 3u ||
         memcmp(ram + 0x2000, "COMSPEC=C:\\COMMAND.COM", 23u) != 0 ||
         memcmp(ram + 0x2000 + 23u, command_environment,
             sizeof(command_environment)) != 0 ||

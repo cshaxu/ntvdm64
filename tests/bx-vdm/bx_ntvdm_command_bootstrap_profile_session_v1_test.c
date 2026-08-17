@@ -164,7 +164,7 @@ static int run_session(uint32_t mode)
         outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 3u)) failure = 4;
     event.ebx = 3u;
     if (!failure && (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
-        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 0u ||
+        outcome.gpr16_write_mask != (1u << 3) || outcome.gpr16_values[3] != 3u ||
         memcmp(ram + 0x2000u, "COMSPEC=C:\\COMMAND.COM", 23u) != 0)) failure = 5;
     event_initialize(&event, 0x05u);
     event.ds = 0x1000u; event.edx = 0x20u; event.ebx = 0x40u; event.ecx = 0x60u;

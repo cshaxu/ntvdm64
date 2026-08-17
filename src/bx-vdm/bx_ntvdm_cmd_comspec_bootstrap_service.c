@@ -140,7 +140,7 @@ int bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(
     if (!bx_ntvdm_multi_write_v1_add(&transaction->writes, address,
             state->environment_bytes, 0u) ||
         !bx_ntvdm_cpu_result_v2_resume(&transaction->result, event->fault_rip + 4u) ||
-        !bx_ntvdm_cpu_delta_v1_set_gpr16(&transaction->result.cpu_delta, 3u, 0u))
+        !bx_ntvdm_cpu_delta_v1_set_gpr16(&transaction->result.cpu_delta, 3u, (uint16_t)paragraphs))
         return 0;
     return bx_ntvdm_multi_write_transaction_v1_preflight(transaction,
         BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_APERTURE, state->environment_bytes);
@@ -156,7 +156,7 @@ int bx_ntvdm_cmd_comspec_bootstrap_v1_complete_environment(
         !bx_ntvdm_cpu_result_v2_valid(&transaction->result) ||
         transaction->result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         transaction->result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 3) ||
-        transaction->result.cpu_delta.gpr16_values[3] != 0u) return 0;
+        transaction->result.cpu_delta.gpr16_values[3] != ((state->environment_bytes + 15u) >> 4)) return 0;
     state->stage = BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED;
     return 1;
 }
