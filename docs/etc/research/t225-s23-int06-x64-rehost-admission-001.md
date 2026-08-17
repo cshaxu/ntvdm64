@@ -14,6 +14,30 @@ of only the original `illegal_op_int` plus `unexpected_int` algorithm.  The
 implementation is not a new interpretation: OpenNT source remains the
 operation-order and error-contract authority.
 
+## Recovery-ladder evidence
+
+1. **Original source reuse:** the existing `src/opennt` historical gate builds
+   unmodified `unexp_nt.c` with clang-cl/i686 as an object-only input.  Its
+   three semantic imports are `_inb`, `_outb`, and `_c_sas_store`; see
+   [T113 closure](../../../history/m0-t113-closure-20260812.md) and the
+   [compile projection](t113-s1-unexpected-interrupt-compile-projection-001.md).
+   `illegalp.c` belongs to the same default-disabled system-provider gate.
+2. **Direct product composition:** rejected by concrete ABI evidence.  The
+   historical island is i686 and requests dynamic `msvcrt.lib`; the formal
+   runner is MSVC x64 `/MT`.  The prior CRT audit records the conflict and
+   forbids treating an apparently linked research island as a general product
+   pattern; see [T132 audit](t132-s1-original-handler-crt-island-audit-001.md)
+   and [S22 build/ABI admission](t225-s22-int06-handler-build-abi-admission-001.md).
+3. **Smallest compatible seam:** a source-derived rehost retains only the
+   two functions' data order, byte layout, PIC transaction order, BDA address,
+   and fail-closed outcome through fixed copied values.  It must not reproduce
+   legacy SAS/CCPU globals or callbacks.
+4. **External-code intrusion:** the needed native PIC lifecycle has already
+   been separately admitted under `BX-MANTLE-082`; no new Bochs intrusion is
+   implied by this handler rehost.
+5. **New behavior:** none is admitted.  Any operation absent from the two
+   original functions is out of scope rather than a reason to invent a
+   substitute.
 ## Original algorithm, fixed in order
 
 `illegalp.c:79-134` performs the following sequence:
