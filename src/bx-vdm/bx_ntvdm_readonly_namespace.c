@@ -68,27 +68,22 @@ int bx_ntvdm_readonly_namespace_v1_append_target(
     bx_ntvdm_readonly_namespace_v1 *value, const byob_image *target,
     const byob_profile_selection *selection)
 {
-    const wchar_t *expected;
+    const wchar_t *placement;
     if (value == 0 || target == 0 || selection == 0 || value->open ||
         target->bytes == 0 || target->byte_count == 0u ||
-        (!selection->has_target_placement && selection->declared_target_count != 2u) ||
-        (selection->has_target_placement && selection->target_placement.drive_index != value->drive_index) ||
-        (selection->declared_target_count == 2u &&
-         selection->declared_targets[0].placement.drive_index != value->drive_index) ||
-        (wcscmp(selection->target.file_name, L"TARGET.COM") != 0 &&
-         wcscmp(selection->target.file_name, L"TARGET.EXE") != 0)) return 0;
-    expected = wcscmp(selection->target.file_name, L"TARGET.COM") == 0 ?
-        L"\\TARGET.COM" : L"\\TARGET.EXE";
-    if ((selection->has_target_placement && wcscmp(selection->target_placement.path, expected) != 0) ||
-        (selection->declared_target_count == 2u &&
-         wcscmp(selection->declared_targets[0].placement.path, expected) != 0) ||
-        value->files[3].path[0] != L'\0') return 0;
+        selection->declared_target_count == 0u ||
+        selection->declared_target_count > 2u ||
+        selection->declared_targets[0].placement.drive_index != value->drive_index ||
+        selection->declared_targets[0].placement.path[0] != L'\\' ||
+        wcscmp(selection->declared_targets[0].placement.path + 1,
+            selection->target.file_name) != 0 || value->files[3].path[0] != L'\0') return 0;
+    placement = selection->declared_targets[0].placement.path;
     value->files[3].bytes = target->bytes;
     value->files[3].byte_count = target->byte_count;
     value->files[3].dos_time = selection->target_metadata.dos_time;
     value->files[3].dos_date = selection->target_metadata.dos_date;
     if (!bx_ntvdm_readonly_namespace_v1_copy_path(value->files[3].path,
-            sizeof(value->files[3].path) / sizeof(value->files[3].path[0]), expected)) return 0;
+            sizeof(value->files[3].path) / sizeof(value->files[3].path[0]), placement)) return 0;
     value->file_count = 4u;
     return 1;
 }

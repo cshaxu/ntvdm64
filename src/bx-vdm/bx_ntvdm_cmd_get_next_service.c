@@ -36,12 +36,17 @@ static int path(const bx_ntvdm_readonly_namespace_v1 *ns, const byob_launch_decl
     uint32_t used = 0u;
     if (!ns || !launch || !out || !out_bytes || !out_extension || ns->drive_index >= 26u ||
         slot >= 2u || ns->file_count < 4u + slot || ns->file_count > 5u ||
-        ns->files[3u + slot].bytes == 0 ||
-        ns->files[3u + slot].byte_count == 0u) return 0;
-    name = slot == 0u ? (launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L"TARGET.COM" :
-        launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE ? L"TARGET.EXE" : 0) : L"QUIT.COM";
-    if (!name || wcscmp(ns->files[3u + slot].path, slot == 1u ? L"\\QUIT.COM" :
-        (launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L"\\TARGET.COM" : L"\\TARGET.EXE")) != 0) return 0;
+        ns->files[3u + slot].bytes == 0 || ns->files[3u + slot].byte_count == 0u ||
+        ns->files[3u + slot].path[0] != L'\\') return 0;
+    name = ns->files[3u + slot].path + 1;
+    if (slot == 0u && ((launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM &&
+            wcslen(name) < 4u) || (launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE &&
+            wcslen(name) < 4u))) return 0;
+    if (slot == 0u && ((launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM &&
+            _wcsicmp(name + wcslen(name) - 4u, L".COM") != 0) ||
+        (launch->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE &&
+            _wcsicmp(name + wcslen(name) - 4u, L".EXE") != 0))) return 0;
+    if (slot == 1u && wcscmp(ns->files[4].path, L"\\QUIT.COM") != 0) return 0;
     out[used++] = (uint8_t)('A' + ns->drive_index); out[used++] = ':'; out[used++] = '\\';
     while (*name) { if (*name > 0x7f || used >= 15u) return 0; out[used++] = (uint8_t)*name++; }
     out[used++] = 0;

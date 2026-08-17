@@ -50,6 +50,12 @@ static void selection_initialize(byob_profile_selection *selection)
     selection->target_placement.drive_index = 2u;
     selection->has_target_placement = 1u;
     memcpy(selection->target.file_name, L"TARGET.COM", sizeof(L"TARGET.COM"));
+    selection->declared_target_count = 1u;
+    memcpy(selection->declared_targets[0].component.file_name, L"TARGET.COM",
+        sizeof(L"TARGET.COM"));
+    memcpy(selection->declared_targets[0].placement.path, L"\\TARGET.COM",
+        sizeof(L"\\TARGET.COM"));
+    selection->declared_targets[0].placement.drive_index = 2u;
     memcpy(selection->config_file.path, L"\\CONFIG.SYS", sizeof(L"\\CONFIG.SYS"));
     selection->config_file.materialization = BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;
     memcpy(selection->autoexec_file.path, L"\\AUTOEXEC.BAT", sizeof(L"\\AUTOEXEC.BAT"));
@@ -59,6 +65,7 @@ static void selection_initialize(byob_profile_selection *selection)
         selection->config_metadata.attributes = selection->autoexec_metadata.attributes = 0x20u;
     selection->command_metadata.dos_date = selection->target_metadata.dos_date =
         selection->config_metadata.dos_date = selection->autoexec_metadata.dos_date = 1u;
+    selection->declared_targets[0].metadata = selection->target_metadata;
 }
 
 static int profile_initialize(bx_ntvdm_mutation_profile_v1 *profile, uint32_t mode)
@@ -87,6 +94,7 @@ static int run_session(uint32_t mode)
     static const uint8_t environment[] = "PATH=C:\\DOS\0PROMPT=$P$G\0";
     bx_ntvdm_boot_namespace_composition_v1 composition;
     bx_ntvdm_host_drive_snapshot_v1 drives;
+    bx_ntvdm_host_volume_snapshot_v1 volumes;
     bx_ntvdm_host_namespace_v1 host_namespace;
     bx_ntvdm_mutation_profile_v1 mutation_profile;
     bx_ntvdm_command_host_context_v1 context;
@@ -94,6 +102,7 @@ static int run_session(uint32_t mode)
     byob_launch_plan_v2 launch = { 2u, 1u,
         { 1u, BYOB_LAUNCH_TARGET_KIND_V1_COM, 0u, { 0 } } };
     uint8_t drive_types[26] = { 0u };
+    bx_ntvdm_host_volume_record_v1 volume_records[26] = { 0 };
     struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t policy = 0u;
@@ -103,29 +112,41 @@ static int run_session(uint32_t mode)
 
     selection_initialize(&selection);
     drive_types[2] = 3u;
+    volume_records[2].available = 1u;
+    volume_records[2].bytes_per_sector = 512u;
+    volume_records[2].sectors_per_cluster = 1u;
+    volume_records[2].total_clusters = 1u;
     memset(&composition, 0, sizeof(composition));
     memset(&host_namespace, 0, sizeof(host_namespace));
-    if (!profile_initialize(&mutation_profile, mode) ||
-        !bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
-            &ntdos, &command, &target, 0, &selection) ||
-        !bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(4), drive_types, 0u, 0u,
-            &drives) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(&composition, &drives) ||
-        !bx_ntvdm_host_namespace_v1_initialize(&host_namespace, &drives) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
-            &composition, &mutation_profile) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
-            &composition, &mutation_profile) ||
-        !bx_ntvdm_command_host_context_v1_initialize(&context, 2u,
-            (const uint8_t *)"C:\\NTDOS64", 10u) ||
-        !bx_ntvdm_command_host_context_v1_set_environment(&context,
-            environment, (uint32_t)sizeof(environment)) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
-            &composition, &context) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
-            &composition, &host_namespace) ||
-        !bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition, &launch) ||
-        !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) failure = 1;
+    if (!profile_initialize(&mutation_profile, mode)) failure = 10;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
+            &ntdos, &command, &target, 0, &selection)) failure = 11;
+    else if (!bx_ntvdm_host_drive_snapshot_v1_apply(UINT32_C(4), drive_types, 0u, 0u,
+            &drives)) failure = 12;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_set_drive_snapshot(&composition,
+            &drives)) failure = 13;
+    else if (!bx_ntvdm_host_volume_snapshot_v1_apply(&drives, volume_records,
+            &volumes)) failure = 14;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(&composition,
+            &volumes)) failure = 15;
+    else if (!bx_ntvdm_host_namespace_v1_initialize(&host_namespace, &drives)) failure = 16;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
+            &composition, &mutation_profile)) failure = 17;
+    else if (!bx_ntvdm_command_package_session_v1_valid(&composition.command)) failure = 18;
+    else if (composition.command.has_mutation_profile != 0u) failure = 19;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
+            &composition, &mutation_profile)) failure = 20;
+    else if (!bx_ntvdm_command_host_context_v1_initialize(&context, 2u,
+            (const uint8_t *)"C:\\NTDOS64", 10u)) failure = 19;
+    else if (!bx_ntvdm_command_host_context_v1_set_environment(&context,
+            environment, (uint32_t)sizeof(environment))) failure = 20;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_set_command_host_context(
+            &composition, &context)) failure = 21;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_set_dem_host_namespace(
+            &composition, &host_namespace)) failure = 22;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_set_launch_plan(&composition,
+            &launch)) failure = 23;
+    else if (!bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) failure = 24;
     if (!failure && (!bx_ntvdm_command_package_session_v1_resolve_mutation_class(
             &composition.command, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, &policy) ||
         policy != expected_policy ||

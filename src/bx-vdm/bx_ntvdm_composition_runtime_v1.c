@@ -135,12 +135,18 @@ static int install(const wchar_t *profile, const wchar_t *root,
     if (!bx_ntvdm_dem_profile_consumer_v1_register_class(
             &runtime.mutation_profile,
             BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        !bx_ntvdm_dem_profile_consumer_v1_register_class(
+            &runtime.mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) ||
+        !bx_ntvdm_dem_profile_consumer_v1_register_class(
+            &runtime.mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu) ||
         !bx_ntvdm_command_profile_consumer_v1_register_class(
             &runtime.mutation_profile,
             BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
         !bx_ntvdm_command_profile_consumer_v1_register_class(
             &runtime.mutation_profile,
-            BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x01u) ||
+            BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x03u) ||
         profile == 0 || root == 0 || launch_text == 0 ||
         byob_profile_validate_file_select(profile, root, &selection) !=
             BYOB_PROFILE_ACCEPTED ||
@@ -188,15 +194,31 @@ static int install(const wchar_t *profile, const wchar_t *root,
     failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_VOLUME_SNAPSHOT;
     if (!bx_ntvdm_boot_namespace_composition_v1_set_volume_snapshot(&runtime.composition, &runtime.volumes))
         goto reject;
+    /* The DEM package owns its CWD context and its handoff to COMMAND. Keep
+       the existing whole-package binder intact: splitting its two mechanics
+       bypassed the session-context attachment required by the consumer ABI. */
     failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_DEM_PROFILE;
-    if (!bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(&runtime.composition, &runtime.mutation_profile))
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_dem_mutation_profile(
+            &runtime.composition, &runtime.mutation_profile))
         goto reject;
-    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_PROFILE;
-    if (!bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(&runtime.composition, &runtime.mutation_profile))
+    if (!bx_ntvdm_command_package_session_v1_valid(&runtime.composition.command)) {
+        failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_PROFILE_SESSION_INVALID;
         goto reject;
-    /* The profile is now fixed.  Capture CLI standard streams once through
-       COMMAND's shared session; provider initialization remains host-neutral. */
-    if (!bx_ntvdm_boot_namespace_composition_v1_admit_command_cli_streams(
+    }
+    if (runtime.composition.command.has_mutation_profile != 0u) {
+        failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_PROFILE_ALREADY_BOUND;
+        goto reject;
+    }
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_PROFILE_CONSUMER;
+    if (!bx_ntvdm_boot_namespace_composition_v1_set_command_mutation_profile(
+            &runtime.composition, &runtime.mutation_profile))
+        goto reject;
+    /* CLI streams are a Direct host capability.  Readonly installs the same
+       COMMAND package without retaining host stream handles; its provider
+       consequently follows the already-defined readonly dispositions. */
+    failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_CLI_STREAM_ADMISSION;
+    if (mutation_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+        !bx_ntvdm_boot_namespace_composition_v1_admit_command_cli_streams(
             &runtime.composition))
         goto reject;
     failure_stage = BX_NTVDM_COMPOSITION_INSTALL_STAGE_V1_COMMAND_CONTEXT_CAPTURE;

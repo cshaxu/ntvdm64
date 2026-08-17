@@ -45,6 +45,8 @@
 
 > **T225 S6 P10 approved reference-input staging:** the owner approved a controlled local OpenNT reference-binary staging set whose four hashes and sizes exactly match the locked source-built identities. Its [provenance record](etc/evidence/t225-s6-reference-guest-input-admission-001.md) permits only this fixture's installation verification; it is neither a new source build nor a default runtime/release input, and does not admit a guest trace.
 
+> **T225 S6 P10 installation closure:** the current-source x64 `/MT` four-image fixture accepts Direct and Readonly against the approved hash-locked reference sequence, prepares the NTIO startup plan, and rejects deferred Overlay plus retired Virtual. The [result](etc/research/t225-s6-reference-direct-readonly-installation-result-001.md) attributes the prior Readonly failure to unconditional Direct-only CLI-stream admission, not BOP or Bochs behavior. This remains installation evidence only, never a guest trace or source-build claim.
+
 > **T225 S7 P1 closure:** the [incremental composition-build result](etc/research/t225-s7-incremental-composition-build-result-001.md) proves a manifest-bound `bx-vdm` cold/hot/invalidation cache with a fresh x64 `/MT` fixture link on every run. S6 resumes; its runtime/profile diagnosis remains unchanged.
 
 > **T225 S7 P2 closure:** the [Ninja graph result](etc/research/t225-s7-p2-ninja-build-graph-result-001.md) proves `deps = msvc` header propagation, `bx-vdm.lib`, fresh fixture linking and no-op rebuild behavior under MSVC x64 `/MT`. The custom P1 cache remains evidence only until a complete admitted module graph replaces it. S6 resumes.

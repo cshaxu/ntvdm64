@@ -1,10 +1,50 @@
 #include <stdint.h>
+#include <stdio.h>
 #include <wchar.h>
 
 #include "bx_ntvdm_composition_runtime_v1.h"
+#include "byob_profile.h"
+#include "bx_ntvdm_command_profile_consumer_v1.h"
+#include "bx_ntvdm_dem_profile_consumer_v1.h"
+#include "bx_ntvdm_dem_drive_view_provider_v1.h"
 #include "bx_ntvdm_engine_contract_v1.h"
 #include "bx_ntvdm_mutation_profile_v1.h"
 
+static int profile_contract_accepted(uint32_t mode)
+{
+    bx_ntvdm_mutation_profile_v1 profile;
+    bx_ntvdm_command_profile_consumer_v1 consumer;
+    bx_ntvdm_mutation_profile_v1_initialize(&profile, mode);
+    return bx_ntvdm_dem_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
+        bx_ntvdm_dem_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) &&
+        bx_ntvdm_dem_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu) &&
+        bx_ntvdm_command_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
+        bx_ntvdm_command_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x03u) &&
+        bx_ntvdm_command_profile_consumer_v1_initialize(&consumer, &profile);
+}
+static int dem_drive_view_profile_accepted(uint32_t mode)
+{
+    bx_ntvdm_mutation_profile_v1 profile;
+    bx_ntvdm_dem_drive_view_provider_v1 view;
+    bx_ntvdm_mutation_profile_v1_initialize(&profile, mode);
+    return bx_ntvdm_dem_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
+        bx_ntvdm_dem_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) &&
+        bx_ntvdm_dem_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu) &&
+        bx_ntvdm_command_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
+        bx_ntvdm_command_profile_consumer_v1_register_class(&profile,
+            BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x03u) &&
+        bx_ntvdm_dem_drive_view_provider_v1_initialize(&view) &&
+        bx_ntvdm_dem_drive_view_provider_v1_set_mutation_profile(&view, &profile);
+}
 static int copy_wide_input(uint16_t *output, uint32_t capacity,
                            const wchar_t *input, uint32_t *count_out)
 {
@@ -32,14 +72,26 @@ static int install_one_profile(const wchar_t *profile, const wchar_t *root,
     const uint8_t *ntio = 0;
     uint64_t ntio_bytes = 0u;
 
-    if (!copy_wide_input(profile_input, 260u, profile, &profile_chars) ||
+    if (!dem_drive_view_profile_accepted(mutation_mode) ||
+        !profile_contract_accepted(mutation_mode) ||
+        byob_profile_validate_file(profile, root) != BYOB_PROFILE_ACCEPTED ||
+        !copy_wide_input(profile_input, 260u, profile, &profile_chars) ||
         !copy_wide_input(root_input, 260u, root, &root_chars) ||
         !copy_wide_input(launch_input, 256u, L"2,1,e,00", &launch_chars)) return 0;
-    if (bx_ntvdm_composition_runtime_v1_install_from_copied_input_with_mode(
+    {
+        int install_result = bx_ntvdm_composition_runtime_v1_install_from_copied_input_with_mode(
             profile_input, profile_chars, root_input, root_chars,
-            launch_input, launch_chars, 4u, 0u, mutation_mode) != 1) return 0;
+            launch_input, launch_chars, 4u, 0u, mutation_mode);
+        if (install_result != 1) {
+            wprintf(L"T225 S6 install rejected: mode=%u stage=%d\n",
+                (unsigned)mutation_mode, install_result);
+            return 0;
+        }
+    }
     if (!bx_ntvdm_composition_runtime_v1_prepare_startup_plan(
             &plan, &ntio, &ntio_bytes) || ntio == 0 || ntio_bytes != 33792u) {
+        wprintf(L"T225 S6 startup-plan rejected: mode=%u\n",
+            (unsigned)mutation_mode);
         bx_ntvdm_composition_runtime_v1_reset();
         return 0;
     }
@@ -49,9 +101,9 @@ static int install_one_profile(const wchar_t *profile, const wchar_t *root,
 
 int wmain(int argc, wchar_t **argv)
 {
-    if (argc != 3) return 1;
-    if (!install_one_profile(argv[1], argv[2],
-                             BX_NTVDM_MUTATION_MODE_V1_DIRECT) ||
+    if (argc != 3 && (argc != 4 || wcscmp(argv[3], L"readonly-only") != 0)) return 1;
+    if ((argc == 3 && !install_one_profile(argv[1], argv[2],
+                             BX_NTVDM_MUTATION_MODE_V1_DIRECT)) ||
         !install_one_profile(argv[1], argv[2],
                              BX_NTVDM_MUTATION_MODE_V1_READONLY)) return 2;
 

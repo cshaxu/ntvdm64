@@ -253,3 +253,7 @@ does not turn the staged binaries into a new source-build result, default
 runtime input, release input, or guest-trace admission. The remaining P10
 action is therefore an exact-image **installation** fixture under Direct and
 Readonly; Overlay and retired Virtual remain rejection cases.
+
+## P10 Installation Result
+
+The approved reference sequence was subsequently installed by the current-source CPU5/P x64 `/MT` fixture in both Direct and Readonly mode. Overlay and retired Virtual were explicitly rejected. The detailed result is [T225 S6 reference Direct/Readonly installation result](t225-s6-reference-direct-readonly-installation-result-001.md). This supersedes the preceding statement that the P10 installation action remained pending; all provenance and non-trace boundaries remain unchanged.

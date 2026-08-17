@@ -1179,9 +1179,9 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         size_t prior;
         unsigned int feature;
         if (strcmp(component->role, "target") == 0 &&
-            (is_v3 || is_v4 || is_v5 || is_v6 || is_v7 || is_v8) &&
-            (strcmp(component->file_name, "TARGET.COM") == 0 ||
-             strcmp(component->file_name, "TARGET.EXE") == 0)) {
+            (is_v3 || is_v4 || is_v5 || is_v6 || is_v7 || is_v8)) {
+            /* A target is an explicitly placed, identity-checked guest artifact,
+             * not a synthetic TARGET.COM/TARGET.EXE smoke-image name. */
             canonical = component->file_name;
             target_component = component;
         }
@@ -1216,8 +1216,8 @@ static byob_profile_result validate_document(const byob_profile_document *docume
     }
     if (required_roles != (is_v5 ? 31u : (is_v8 || is_v7 || is_v6 || is_v3 || is_v4 ? 15u : 7u))) return BYOB_PROFILE_ROLE_MISSING_OR_DUPLICATE;
     if ((is_v3 || is_v4) && (target_component == NULL ||
-        strcmp(document->target_placement.path,
-            strcmp(target_component->file_name, "TARGET.COM") == 0 ? "\\TARGET.COM" : "\\TARGET.EXE") != 0 ||
+        document->target_placement.path[0] != '\\' ||
+        strcmp(document->target_placement.path + 1, target_component->file_name) != 0 ||
         document->target_placement.drive_index != document->command_placement.drive_index))
         return BYOB_PROFILE_FORMAT_INVALID;
     if (is_v5 && (target_component == NULL || terminal_quit_component == NULL ||
@@ -1225,15 +1225,15 @@ static byob_profile_result validate_document(const byob_profile_document *docume
         terminal_quit_component->bytes != 3u ||
         strcmp(terminal_quit_component->sha256,
             "06a37dff559df7325de8b003f4df53c188f733e0ca312aad961c34dae48d7b83") != 0 ||
-        strcmp(document->declared_targets[0].placement.path,
-            strcmp(target_component->file_name, "TARGET.COM") == 0 ? "\\TARGET.COM" : "\\TARGET.EXE") != 0 ||
+        document->declared_targets[0].placement.path[0] != '\\' ||
+        strcmp(document->declared_targets[0].placement.path + 1, target_component->file_name) != 0 ||
         strcmp(document->declared_targets[1].placement.path, "\\QUIT.COM") != 0 ||
         document->declared_targets[0].placement.drive_index != document->command_placement.drive_index ||
         document->declared_targets[1].placement.drive_index != document->command_placement.drive_index))
         return BYOB_PROFILE_FORMAT_INVALID;
     if ((is_v6 || is_v7 || is_v8) && (target_component == NULL ||
-        strcmp(document->declared_targets[0].placement.path,
-            strcmp(target_component->file_name, "TARGET.COM") == 0 ? "\\TARGET.COM" : "\\TARGET.EXE") != 0 ||
+        document->declared_targets[0].placement.path[0] != '\\' ||
+        strcmp(document->declared_targets[0].placement.path + 1, target_component->file_name) != 0 ||
         document->declared_targets[0].placement.drive_index != document->command_placement.drive_index))
         return BYOB_PROFILE_FORMAT_INVALID;
     for (index = 0u; index < document->component_count; ++index) {

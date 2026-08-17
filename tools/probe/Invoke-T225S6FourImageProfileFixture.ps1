@@ -83,9 +83,18 @@ if ($LASTEXITCODE -ne 0) { throw "T225 S6 fixture link failed: $LASTEXITCODE" }
 
 $runExit = $null
 if (!$CompileOnly) {
-    & $exe $ProfilePath $InputRoot 2>&1 |
-        Tee-Object -FilePath (Join-Path $build 'fixture-run.log')
-    $runExit = $LASTEXITCODE
+    $oldConfig = $env:NTDOS64_STARTUP_CONFIG_SOURCE
+    $oldAutoexec = $env:NTDOS64_STARTUP_AUTOEXEC_SOURCE
+    $env:NTDOS64_STARTUP_CONFIG_SOURCE = Join-Path $InputRoot 'fixture-config.nt'
+    $env:NTDOS64_STARTUP_AUTOEXEC_SOURCE = Join-Path $InputRoot 'fixture-autoexec.nt'
+    try {
+        & $exe $ProfilePath $InputRoot 2>&1 |
+            Tee-Object -FilePath (Join-Path $build 'fixture-run.log')
+        $runExit = $LASTEXITCODE
+    } finally {
+        $env:NTDOS64_STARTUP_CONFIG_SOURCE = $oldConfig
+        $env:NTDOS64_STARTUP_AUTOEXEC_SOURCE = $oldAutoexec
+    }
     if ($runExit -ne 0) { throw "T225 S6 fixture execution failed: $runExit" }
 }
 
