@@ -116,6 +116,14 @@ int main(void)
         writes.writes.write_count != 1u ||
         writes.writes.writes[0].byte_count != sizeof("C:\\CONFIG.SYS")) return 2;
 
+    window_for(&window, 0x54u, 0x0du);
+    if (!bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(&provider, &event,
+        &cpu, &window, &writes, payload, &boot_file_diagnostic) ||
+        boot_file_diagnostic != BX_NTVDM_CMD_BOOT_FILE_PREPARE_DIAGNOSTIC_V1_ACCEPTED ||
+        writes.writes.write_count != 1u ||
+        writes.writes.writes[0].byte_count != sizeof("C:\\AUTOEXEC.BAT") ||
+        memcmp(payload, "C:\\AUTOEXEC.BAT", sizeof("C:\\AUTOEXEC.BAT")) != 0) return 19;
+
     event.vector = 5u;
     if (bx_ntvdm_boot_namespace_provider_v1_prepare_boot_file_diagnostic(&provider, &event,
         &cpu, &window, &writes, payload, &boot_file_diagnostic) ||
