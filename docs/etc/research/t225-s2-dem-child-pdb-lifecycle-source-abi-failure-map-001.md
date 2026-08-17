@@ -110,3 +110,24 @@ This checkpoint does not close S2. It still needs one focused package-session
 fixture that proves the newly wired 50:3C call invalidates a Direct token while
 retaining a Readonly startup token's session scope. Overlay and Virtual remain
 explicitly deferred.
+
+## P3 Closure Evidence
+
+A fresh source-built whole-provider fixture in build/M0-T225-S2/003 compiled,
+linked, and ran under MSVC x64 /MT with manifest exit codes 0, 0, and 0.
+It drives ordinary DEM package-session ingress. In Direct mode it opens a
+PDB-owned host-view token, invokes 50:3C with BX=1234h, receives the void
+resume at RIP+4 with no register/flag delta, and then observes the established
+invalid-handle result on seek. In Readonly mode it opens the declared
+COMMAND.COM startup token, invokes the same 50:3C void notification, then
+successfully seeks and closes that token. The test thereby proves that the
+lifecycle route has no Direct fallback for Readonly session capability.
+
+A separate fresh dem-lifecycle source closure in build/M0-T225-S2/004 linked
+and directly ran with exit code 0. It covers the exact no-VDD lifecycle ABI.
+The broader dem-package 50:41 failure remains the recorded pre-change
+baseline and is not relied on for this closure.
+
+S2 is closed: the recovered package is limited to the original host
+notification boundary. It neither claims EXEC, PSP/MCB/JFN teardown, VDD
+recovery, Overlay/Virtual lifecycle completion, nor COMMAND parent return.

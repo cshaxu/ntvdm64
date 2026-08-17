@@ -721,6 +721,69 @@ int main(void)
                 bx_ntvdm_host_namespace_v1_release(&host); return 180 + (int)index;
             }
         }
+        /* S2 lifecycle integration: 50:3C must release only Direct tokens
+         * owned by the copied PDB, yet preserve Readonly startup namespace
+         * tokens whose owner is session scope (zero). Both notifications are
+         * source-shaped void resumes; the following seek distinguishes their
+         * private-resource dispositions. */
+        if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_DIRECT) {
+            memcpy(ram + 0x200u, fcb_host_path, strlen(fcb_host_path) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x200u; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x12u, &cpu, &result) || !success(&result) ||
+                token_from(&result) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 260;
+            }
+            token = token_from(&result);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ebx = 0x1234u;
+            if (!dispatch(&session, 0x3cu, &cpu, &result) ||
+                result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+                result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 0u ||
+                result.eflags_write_mask != 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 261;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x00u, &cpu, &result) || !cf_ax(&result, 6u)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 262;
+            }
+        }
+        if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {
+            memcpy(ram + 0x200u, "C:\\COMMAND.COM", sizeof("C:\\COMMAND.COM"));
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.esi = 0x200u; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x12u, &cpu, &result) || !success(&result) ||
+                token_from(&result) == 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 263;
+            }
+            token = token_from(&result);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ebx = 0x1234u;
+            if (!dispatch(&session, 0x3cu, &cpu, &result) ||
+                result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+                result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 0u ||
+                result.eflags_write_mask != 0u) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 264;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ebx = 0u;
+            if (!dispatch(&session, 0x00u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 265;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            if (!dispatch(&session, 0x02u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 266;
+            }
+        }
         /* The source-owned FCB direct route has two safe, profile-independent
          * terminals: DOS date query and no-op close of a zero opaque token. */
         bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);

@@ -38,6 +38,8 @@
 
 > **T225 S2 P2 progress:** one lifecycle provider now owns no-VDD `50:36` and Direct/search `50:3C` cleanup; the old parallel VDD leaf is removed. Focused x64 `/MT` lifecycle evidence passes. The wider DEM fixture's `50:41` return 195 is proven baseline, while Direct/Readonly package-session lifecycle regression remains the next required proof.
 
+> **T225 S2 P3 closure:** the source-built Direct/Readonly whole-provider fixture passes under MSVC x64 `/MT`: `50:3C` invalidates the target Direct PDB token but retains the Readonly session token, while preserving void resume. The separate lifecycle fixture passes; `50:41` remains an independently proven baseline failure. S2 closes only DEM notification cleanup, not guest EXEC or parent return.
+
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
