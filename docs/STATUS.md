@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S8.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S9.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S8 -- primary source-built four-image cross-validation.**
+**Active: M0 T225 S9 -- source-built guest bootstrap-to-EXEC admission map.**
 
 ## Active Packet
 
@@ -14,33 +14,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S8, Ordinary Mode. |
-| Admission And Approval | S6 has the complete Direct/Readonly installation fixture and a deliberately separate approved reference sequence. S7 has replaced the custom object cache with the formal Ninja graph. |
-| Objective | Restore and validate the physically distinct primary original-toolchain NTIO/NTDOS/COMMAND/SHARE input sequence, then run the existing installation fixture independently in Direct and Readonly and compare it with the secondary reference sequence. |
-| Non-goals | No guest trace, BOP implementation, substitute artifact, reference-to-primary reclassification, Bochs feature, DOS loader, or host-system mutation. |
-| Reference Baseline | DOS/WOW16 source-closure inventory; T225 S6 input admission and fixture record; T225 S7 Ninja graph; four locked source-built identity records. |
-| Files And ABI Surface | A provenance-checking primary-input stager, source-artifact records, and existing fixture/profile ABI only. No runtime ABI or guest/Bochs semantic surface. |
+| Identifier Mode | M0 T225 S9, Ordinary Mode. |
+| Admission And Approval | T225 is the owner-selected multi-program package. S8 is closed with primary/reference image installation cross-validation; S9 selects the next prerequisite stated by T225 S1/S4: source-backed bootstrap continuity before any COM `$Exec` fixture. |
+| Objective | Establish one complete original-source and current-composition map from reset/startup input through `50:11 demLoadDos`, NTDOS entry, COMMAND bootstrap, and the first guest-owned `$Exec` eligibility point; identify the minimal exact-image fixture and its Direct/Readonly capability requirements. |
+| Non-goals | No guest trace, BOP implementation, substitute DOS loader, synthetic PSP/MCB/EXEC, nested host process, Bochs feature/device change, host-system mutation, or Overlay implementation. |
+| Reference Baseline | T225 S1--S5 source/prerequisite maps; S2 DEM lifecycle, S3 file-I/O closures; S6/S7 fixture/build closures; and S8 source-built four-image cross-validation. |
+| Files And ABI Surface | `docs/etc/research/t225-s9-*` map and current source inspection only. Existing profile, image, mechanical-action, CPU-result and BOP ingress ABI are read-only baselines. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Each source-built stage manifest and output identity must be present and hash-match; fresh Ninja-linked Direct/Readonly installation runs must pass; Overlay and retired Virtual must reject; the result must compare primary and reference provenance separately. |
-| Expected Markers | Four distinct original-toolchain stage roots, explicit manifest paths, exact bytes/SHA-256, no `refs/opennt` fallback, two accepted primary installation modes, and two rejected unavailable modes. |
-| Asset Needs | The original-toolchain outputs under `artifacts/toolchain-runs/ntio-tools16-opennt-v1`, `ntdos-tools16-historical-v1`, `command-tools16-opennt-v1`, and `share-tools16-opennt-v1`, each with its declared build manifest. |
-| Reporting Requirements | Record stage presence/absence, manifest and artifact identities, Direct/Readonly results, mode rejections, and a provenance-preserving comparison to the reference sequence. |
-| Stop Conditions | Any missing primary manifest/artifact, identity mismatch, source-tree/reference fallback, unreviewed binary import, native guest execution, or change to BOP/Bochs/guest semantics. |
-| Exit Criteria | A reproducible primary-sequence staging and Direct/Readonly installation comparison, or a precise artifact-restoration record that refuses execution until all four primary source-built roots are available. |
-| Original Owner Request | "原始文件当然更好更权威了；属于两个不同序列的guest镜像，可交叉验证！" |
-| Similar-Issue Sweep | NTIO, NTDOS, COMMAND and SHARE source-build provenance, staging manifests, fixture profile identity, Direct/Readonly policy, and reference/primary non-conflation. |
-> **T225 S8 P1 availability:** the strict [availability record](etc/evidence/t225-s8-primary-source-built-input-availability-001.md) confirms the primary rtifacts/toolchain-runs manifests are absent; its new stager refuses before any copy or fallback. Restore the four manifest-bearing stage roots before the Direct/Readonly cross-validation run.
-> **T225 S8 P2 NTIO bootstrap:** the [NOSRVBLD audit](etc/evidence/t225-s8-ntio-nosrvbld-bootstrap-audit-001.md) proves the tracked DOS tool emits all four classes but not the required OpenNT-compatible bytes. It is rejected as a primary NTIO build input; no assembly, link, fixture, or fallback is admitted.
-> **T225 S8 P3 archived-generator:** the [extractor rejection](etc/evidence/t225-s8-archived-nosrvbld-extractor-rejection-001.md) eliminates the only retained source-derived NOSRVBLD candidate: all four class outputs differ. It remains evidence-only; no fallback or primary stage is admitted.
-> **T225 S8 P4 OpenNT NOSRVBLD:** the [successor resolution](etc/evidence/t225-s8-opennt-nosrvbld-bootstrap-resolution-001.md) proves the distinct pinned OpenNT 4.5 tools16 `NOSRVBLD.EXE` regenerates all four MSBIO classes byte-exactly. The MS-DOS 4 tool and archived helper remain rejected; NTIO may now proceed only through the original OpenNT tools16 closure.
-> **T225 S8 P5 DOSBox completion:** the [runner record](etc/evidence/t225-s8-dosbox-completion-runner-001.md) admits only a bounded stage-batch completion wait. Its first source-tool verification regenerated all MSBIO classes byte-exactly; it supplies no guest/build semantics.
-> **T225 S8 P6 primary NTIO:** the [source-build result](etc/evidence/t225-s8-primary-ntio-source-build-result-001.md) proves a fresh manifest-bearing original-tools16 NTIO stage at the locked 33,792-byte identity. It is provenance only; NTDOS, COMMAND and SHARE still gate fixture admission.
-> **T225 S8 P7 primary SHARE:** the [source-build result](etc/evidence/t225-s8-primary-share-source-build-result-001.md) proves a fresh manifest-bearing original-tools16 SHARE stage at its locked identity. COMMAND and NTDOS remain the only missing primary S8 inputs.
-> **T225 S8 P8 primary COMMAND:** the [source-build result](etc/evidence/t225-s8-primary-command-source-build-result-001.md) proves a fresh manifest-bearing original-tools16 COMMAND stage at its locked 50,384-byte identity. NTDOS is now the only missing primary S8 input.
-> **T225 S8 P9 primary NTDOS:** the [source-build result](etc/evidence/t225-s8-primary-ntdos-source-build-result-001.md) proves a fresh manifest-bearing original-tools16 NTDOS stage at its locked 27,858-byte identity. All four primary inputs now exist; staging and the already admitted Direct/Readonly comparison are next.
-> **T225 S8 P10 primary installation:** the [result](etc/evidence/t225-s8-primary-direct-readonly-installation-result-001.md) proves the formal Ninja fixture accepts the four primary-source-built inputs in Direct and Readonly, while rejecting deferred Overlay and retired Virtual. No guest trace was run.
-> **T225 S8 P11 provenance comparison:** the [comparison](etc/evidence/t225-s8-primary-reference-provenance-comparison-001.md) verifies that the primary original-toolchain and approved reference sequences have the same four locked image identities and the same bounded installation outcomes while retaining their distinct classifications.
-> **T225 S8 closure:** all four primary source-built stages, strict provenance staging, Direct/Readonly installation, Overlay/Virtual rejection, and the required separate-sequence comparison are complete. This closes installation cross-validation only; it does not admit or prove guest execution, BOP recovery, COMMAND lifecycle, DOS `EXEC`, or child return.
+| Verification | Cite original OpenNT callers and current source routes; account for every transition and copied image; classify each reached BOP by owner/package/disposition; compare Direct and Readonly without a hidden fallback; run documentation governance and diff checks. |
+| Expected Markers | One ordered reset→NTIO→`50:11`→NTDOS→COMMAND→`$Exec` map, image physical/segment placement contract, all missing prerequisites by owner, and a fixture admission/refusal decision. |
+| Asset Needs | The four primary source-built stages and manifests from S8, managed `src/opennt`, current bx-core/bx-mantle/bx-vdm sources, and prior T225 evidence. |
+| Reporting Requirements | Record source paths, copied ABI fields, profile/mutation disposition, current bound route, historical failure behavior, unresolved dependency, and next package boundary. |
+| Stop Conditions | A required transition depends on unadmitted Bochs mechanics, an unclassified BOP family, missing source evidence, or any proposal to make bx-vdm own DOS/PSP/MCB/EXEC semantics. Pause for a revised package rather than patching a trace leaf. |
+| Exit Criteria | A reviewed source/ABI/fixture-gate record that either admits one smallest source-owned bootstrap implementation package or precisely refuses it with owner-scoped missing prerequisites. |
+| Original Owner Request | “实施当前规划好的，以最小 bochs 作为 softpc 的替代品，实现一个基于 cli 的 ntvdm……要有全局观，避免添油战术。” |
+| Similar-Issue Sweep | NTIO→NTDOS loading, NTDOS header/entry state, COMMAND bootstrap, image placements, Direct/Readonly provider selection, DEM/COMMAND BOP ownership, terminal/return path, and bochs machine ownership. |
+> **T225 S9 P1 bootstrap map:** the [source/ABI admission map](etc/research/t225-s9-source-built-guest-bootstrap-to-exec-admission-map-001.md) proves that primary images and `50:11`''s checked DI:0 write/resume route exist, but no evidence yet joins native NTIO continuation to NTDOS/COMMAND execution. It selects a separate bootstrap-continuity fixture package; no BOP, loader or Bochs change is admitted here.
 > **T225 S4 P0 admission:** S3 is closed in [its file-I/O source/ABI record](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md). S4 begins with the complete COM branch source and prerequisite map; it must not implement a substitute loader.
 
 > **T225 S4 P1 progress:** the [COM control-flow/prerequisite map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) confirms `$Exec` remains the only COM loader. Artifact and S3 file evidence exist; real guest arena/PSP/entry reach is not yet proven and requires a bounded guest fixture.
