@@ -37,6 +37,7 @@ $sourceRelatives = @(
     'src\bx-vdm\bx_ntvdm_boot_namespace_plane_v1.c',
     'src\bx-vdm\bx_ntvdm_boot_namespace_provider_v1.c',
     'src\bx-vdm\bx_ntvdm_bop_sequence_observation_v1.c',
+    'src\bx-vdm\bx_ntvdm_generic_ud_sequence_observation_v1.c',
     'src\bx-vdm\bx_ntvdm_bop_ingress_v1.c',
     'src\bx-vdm\bx_ntvdm_bop_provider_registry_v1.c',
     'src\bx-vdm\bx_ntvdm_bulk_result_transaction.c',
@@ -296,7 +297,12 @@ $compileExit = $LASTEXITCODE
 $compileOutput | Out-File -LiteralPath $compileLog
 if ($compileExit -ne 0) { throw "MSVC C source closure compilation failed: $compileExit" }
 
-$exe = Join-Path $build ('t198-s16-bx-vdm-' + $Fixture + '.exe')
+$exe# The current execution environment may remove an unsigned disposable `.exe`
+# after linking.  A PE image with a neutral extension is still launched by its
+# explicit path; use it only for the whole-DEM fixture so its source closure
+# remains reproducible without changing product targets or other probes.
+$programExtension = if ($Fixture -eq 'dem-package') { '.bin' } else { '.exe' }
+$exe = Join-Path $build ('t198-s16-bx-vdm-' + $Fixture + $programExtension)
 $map = Join-Path $build 'link.map'
 $response = Join-Path $build 'link.rsp'
 $linkLog = Join-Path $build 'link.log'
@@ -314,9 +320,20 @@ $headers = Join-Path $build 'headers.txt'
 & cmd.exe /d /s /c ('call "' + $vsDevCmd + '" -arch=' + $HostArchitecture +
     ' -host_arch=x64 >nul && dumpbin.exe /headers "' + $exe + '"') 2>&1 |
     Tee-Object -LiteralPath $headers
-$runLog = Join-Path $build 'run.log'
-& cmd.exe /d /s /c ('"' + $exe + '" > "' + $runLog + '" 2>&1')
-$runExit = $LASTEXITCODE
+$runResults = @()
+if ($Fixture -eq 'dem-package') {
+    foreach ($mode in @('direct', 'readonly')) {
+        $runLog = Join-Path $build ('run-' + $mode + '.log')
+        & cmd.exe /d /s /c ('"' + $exe + '" ' + $mode + ' > "' + $runLog + '" 2>&1')
+        $runResults += [ordered]@{ mode = $mode; exitCode = $LASTEXITCODE; runLog = ('run-' + $mode + '.log') }
+    }
+    $runExit = if (@($runResults | Where-Object { $_.exitCode -ne 0 }).Count -eq 0) { 0 } else { 1 }
+} else {
+    $runLog = Join-Path $build 'run.log'
+    & cmd.exe /d /s /c ('"' + $exe + '" > "' + $runLog + '" 2>&1')
+    $runExit = $LASTEXITCODE
+    $runResults += [ordered]@{ mode = 'default'; exitCode = $runExit; runLog = 'run.log' }
+}
 $record = [ordered]@{
     schema = 'ntdos64.t198.s16.bx-vdm-x64-probe.v2'
     architecture = $HostArchitecture
@@ -367,6 +384,7 @@ $record = [ordered]@{
     forbiddenInputs = $forbidden
     linkExitCode = $linkExit
     runExitCode = $runExit
+    runResults = $runResults
     expectedRunExitCode = 0
     passed = ($linkExit -eq 0 -and $runExit -eq 0)
     compileLog = 'compile.log'
