@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S17.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S18.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S17 -- external generic-UD bridge composition closure.**
+**Active: M0 T225 S18 -- reached BOP owner-package disposition map.**
 
 ## Active Packet
 
@@ -14,23 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S17, Ordinary Mode. |
-| Admission And Approval | S16 [gate result](etc/evidence/t225-s16-formal-generic-ud-bridge-gate-result-001.md) proves the formal graph compiles the existing core gate but links mantle's default fixture bridge instead of the adapter provider. |
-| Objective | Make the existing `BX_NTVDM_EXTERNAL_GENERIC_UD_BRIDGE` composition explicit and order the native static libraries so bx-vdm supplies the one generic bridge; then re-run the same bounded observation. |
-| Non-goals | No bx-core/Bochs source edit, no bridge ABI change, no BOP/provider/selector behavior, no guest-memory access, no guest/profile change, no CCPU/device/firmware work, no budget above 100,000 and no Overlay selection. |
-| Reference Baseline | BX-MANTLE-067, S15 adapter fixture, S16 projected core gate and archive-symbol evidence. |
-| Files And ABI Surface | CPU5 projection manifest, full Ninja native target library order, generated disposable build records, evidence/Status and inventory only. Core/mantle/bx-vdm source and all provider contracts are read-only. |
+| Identifier Mode | M0 T225 S18, Ordinary Mode. |
+| Admission And Approval | S17 [composition result](etc/evidence/t225-s17-external-generic-ud-bridge-composition-result-001.md) is the first current formal native witness of the intended NTIO `50:11` and a bounded 33-event sequence. The owner requires package-first, not trace-led leaf implementation. |
+| Objective | Map every distinct S17 reached selector/service to its original OpenNT owner package, current provider route/disposition, Direct/Readonly/Overlay posture and full-package completion boundary. |
+| Non-goals | No provider implementation, no per-service patch, no trace rerun, no guest or machine change, no selector-driven task split, no CCPU/device work and no Overlay implementation. |
+| Reference Baseline | T199 all-BOP package ledgers, T200 profile audit, S14 static path map, S15/S16 bridge evidence and S17 bounded native sequence. |
+| Files And ABI Surface | Governed owner/source/ABI research, evidence and Status only. Runtime, build manifests and all providers are read-only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md and design authorities. |
-| Verification | Generated config sets both existing composition macros; fresh 308-edge Ninja/MSVC x64 `/MT` build; focused S15 fixture; static symbol check; Direct/Readonly bounded generic observation <=100,000; governance and diff checks. |
-| Expected Markers | Mantle default bridge definition is compiled out, bx-vdm is the native bridge provider, and first generic-UD records preserve the existing outcome without a BOP interpretation. |
-| Asset Needs | Pinned config/projection, formal manifest, S15 fixture, S16 archive evidence and immutable S10 primary stage. |
-| Reporting Requirements | Record target library order, config hash, source guard relation, fixture/symbol evidence, Direct/Readonly output and post-observation owner classification. |
-| Stop Conditions | Need for a source/ABI change, a selector/BOP branch, guest-memory access, a new device, an unresolved cyclic link closure, mode discrepancy or execution above 100,000 ticks. Stop and re-admit. |
-| Exit Criteria | One formal native executable resolves its generic bridge from bx-vdm, preserves the focused fixture, and reports the first bounded generic event or stronger bounded absence in Direct and Readonly. |
-| Original Owner Request | “adapter 的首选职责是截获并路由到 OpenNT 原始 host 代码，而不是重写 BOP。” |
-| Similar-Issue Sweep | Mantle fixture-only symbols, external bridge guard, static library dependency order, target versus fixture linkage, generic event observer, BOP observer non-interference and Direct/Readonly parity. |
+| Verification | Cross-reference every distinct reached endpoint with original selector dispatch and existing provider ledger; classify route as source reuse, source-derived rehost, unavailable/deferred, or unproven; governance and diff checks. |
+| Expected Markers | Whole-package grouping (DEM, COMMAND, machine/top-level and other), no orphan endpoint, explicit profile disposition and a next package selected by owner scope rather than trace order. |
+| Asset Needs | S17 concise sequence, OpenNT `nt_bop.c`/dispatch sources, existing T199/T200/T221 package ledgers and source policy. |
+| Reporting Requirements | Record endpoint-to-owner mapping, current bound-route evidence, source-first rung, package gap, refusal/defer rule and accepted next full package. |
+| Stop Conditions | A missing/contradictory dispatch source, a needed runtime experiment, an implementation proposal, a selector-specific S task, or a requirement to change a profile/machine. Stop and re-admit. |
+| Exit Criteria | Every reached S17 endpoint is assigned to one whole owner package and current disposition, with the next implementation package justified globally rather than by the next trace event. |
+| Original Owner Request | “闭合了以后开始全面审查所有BOP状态并分包全局实现，避免通过trace实施添油战术.” |
+| Similar-Issue Sweep | Selector families 02/06/12/15/17/50/52/53/54/57 and top-level selectors, DEM/COMMAND/machine ownership, Direct/Readonly/Overlay compatibility, provider ledgers and historical unavailable behavior. |
 
-> **T225 S16 closure:** [the formal bridge-gate result](etc/evidence/t225-s16-formal-generic-ud-bridge-gate-result-001.md) proves the existing core gate is now compiled in, but native static linking still resolves the generic symbol to mantle's guarded fixture-default bridge. S17 owns only the documented external-bridge guard and link-order closure. No BOP, machine or host-capability repair is admitted.
+> **T225 S17 closure:** [the external bridge composition result](etc/evidence/t225-s17-external-generic-ud-bridge-composition-result-001.md) proves the formal native target now reaches `0070:0475` / physical `0x0b75` `50:11` and an identical 33-event Direct/Readonly sequence through bx-vdm's generic bridge. The repair was only existing guard/config/link order. S18 owns package-level disposition mapping; it admits no individual BOP implementation.
 > **T225 S10 closure:** the [bounded primary observation](etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md) and [run-control/observation map](etc/research/t225-s10-native-run-control-observation-map-001.md) establish identical early Direct/Readonly reset behavior but no public normal-result or continuity marker before the fixed one-million-tick run returns. Existing UD2 profile observations would alter immutable guest input, and fixture-only BOP observations are not CLI outputs. S10 closes as an evidence gate; S11 owns only the smallest generic CLI run-control seam.
 
 > **T225 S11 closure:** [the run-control result](etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md) proves the optional positive-decimal budget is copied through the existing CLI/engine/mantle contract. Direct and Readonly each return the normal internal budget terminal at 1000 ticks with exit 4; default one-million behavior, invalid-budget rejection and Overlay refusal are verified. No BOP, guest, adapter semantic or Bochs mechanic changed. The next package must separately admit post-run continuity observation.

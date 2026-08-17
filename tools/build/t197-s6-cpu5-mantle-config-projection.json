@@ -27,6 +27,12 @@
       "expectedSource": "<absent>",
       "newValue": "1",
       "classification": "BX-MANTLE-067 existing registered selector-blind core-to-mantle bridge; formal Ninja graph must compile the same gate as its prior CPU5 witnesses"
+    },
+    {
+      "name": "BX_NTVDM_EXTERNAL_GENERIC_UD_BRIDGE",
+      "expectedSource": "<absent>",
+      "newValue": "1",
+      "classification": "BX-MANTLE-067 documented external adapter composition: retain mantle stop-observation helpers while compiling out only mantle's fixture-default bridge definition"
     }
   ],
   "derivedAssertions": [

@@ -407,10 +407,10 @@
       "name": "ntdos64-native",
       "source": "src/cli/ntdos64_native_cli.c",
       "libraries": [
-        "bx-vdm",
         "cli",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "bx-vdm"
       ],
       "platformLibraries": [
         "libcmt.lib",
