@@ -3,6 +3,7 @@
 #include "bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "bx_ntvdm_first_fault_observation_v1.h"
+#include "bx_ntvdm_segment_access_observation_v1.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
 #include "byob_target_selection.h"
@@ -189,11 +190,17 @@ int wmain(int argc, wchar_t **argv)
     }
     if (observe_bop_sequence) bx_ntvdm_bop_sequence_observation_v1_enable(1u);
     if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(1u);
-    if (observe_first_fault) bx_ntvdm_mantle_first_fault_observation_enable(1);
+    if (observe_first_fault) {
+        bx_ntvdm_mantle_first_fault_observation_enable(1);
+        bx_ntvdm_mantle_segment_access_observation_enable(1);
+    }
     if (!ntdos64_console_cancellation_v1_begin(&cancellation_event)) {
         if (observe_bop_sequence) bx_ntvdm_bop_sequence_observation_v1_enable(0u);
         if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(0u);
-        if (observe_first_fault) bx_ntvdm_mantle_first_fault_observation_enable(0);
+        if (observe_first_fault) {
+            bx_ntvdm_mantle_segment_access_observation_enable(0);
+            bx_ntvdm_mantle_first_fault_observation_enable(0);
+        }
         return 1;
     }
     if (!ntdos64_engine_worker_v1_run(&request, cancellation_event, &result,
@@ -201,7 +208,10 @@ int wmain(int argc, wchar_t **argv)
         ntdos64_console_cancellation_v1_end();
         if (observe_bop_sequence) bx_ntvdm_bop_sequence_observation_v1_enable(0u);
         if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(0u);
-        if (observe_first_fault) bx_ntvdm_mantle_first_fault_observation_enable(0);
+        if (observe_first_fault) {
+            bx_ntvdm_mantle_segment_access_observation_enable(0);
+            bx_ntvdm_mantle_first_fault_observation_enable(0);
+        }
         return 1;
     }
     ntdos64_console_cancellation_v1_end();
@@ -215,12 +225,18 @@ int wmain(int argc, wchar_t **argv)
     }
     if (observe_first_fault) {
         struct bx_ntvdm_first_fault_observation_v1 first_fault;
+        struct bx_ntvdm_segment_access_observation_v1 segment_access;
         if (bx_ntvdm_mantle_first_fault_observation_copy(&first_fault))
             wprintf(L"ntdos64-native: first-fault vector=%u error=%u cs=%04x eip=%08x eax=%08x eflags=%08x mode=%u\n",
                 first_fault.vector, first_fault.error_code, first_fault.cs, first_fault.eip,
                 first_fault.eax, first_fault.eflags, first_fault.execution_mode);
         else
             wprintf(L"ntdos64-native: first-fault unavailable\n");
+        if (bx_ntvdm_mantle_segment_access_observation_copy(&segment_access))
+            wprintf(L"ntdos64-native: segment-access kind=%u branch=%u seg-index=%u selector=%04x offset=%08x width=%u limit=%08x valid=%08x\n", segment_access.access_kind, segment_access.branch_kind, segment_access.segment_index, segment_access.segment_selector, segment_access.offset, segment_access.width, segment_access.limit_scaled, segment_access.cache_valid);
+        else
+            wprintf(L"ntdos64-native: segment-access unavailable\n");
+        bx_ntvdm_mantle_segment_access_observation_enable(0);
         bx_ntvdm_mantle_first_fault_observation_enable(0);
     }
     if (observe_generic_ud_sequence) {
