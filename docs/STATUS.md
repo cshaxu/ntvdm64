@@ -30,6 +30,7 @@
 | Original Owner Request | "原始文件当然更好更权威了；属于两个不同序列的guest镜像，可交叉验证！" |
 | Similar-Issue Sweep | NTIO, NTDOS, COMMAND and SHARE source-build provenance, staging manifests, fixture profile identity, Direct/Readonly policy, and reference/primary non-conflation. |
 > **T225 S8 P1 availability:** the strict [availability record](etc/evidence/t225-s8-primary-source-built-input-availability-001.md) confirms the primary rtifacts/toolchain-runs manifests are absent; its new stager refuses before any copy or fallback. Restore the four manifest-bearing stage roots before the Direct/Readonly cross-validation run.
+> **T225 S8 P2 NTIO bootstrap:** the [NOSRVBLD audit](etc/evidence/t225-s8-ntio-nosrvbld-bootstrap-audit-001.md) proves the tracked DOS tool emits all four classes but not the required OpenNT-compatible bytes. It is rejected as a primary NTIO build input; no assembly, link, fixture, or fallback is admitted.
 > **T225 S4 P0 admission:** S3 is closed in [its file-I/O source/ABI record](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md). S4 begins with the complete COM branch source and prerequisite map; it must not implement a substitute loader.
 
 > **T225 S4 P1 progress:** the [COM control-flow/prerequisite map](etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md) confirms `$Exec` remains the only COM loader. Artifact and S3 file evidence exist; real guest arena/PSP/entry reach is not yet proven and requires a bounded guest fixture.
