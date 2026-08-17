@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S19.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S20.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S19 -- DEM whole-package recovery and route convergence.**
+**Active: M0 T225 S20 -- COMMAND whole-package recovery and route convergence.**
 
 ## Active Packet
 
@@ -14,22 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S19, Ordinary Mode. |
-| Admission And Approval | S18 [owner-package disposition map](etc/research/t225-s18-reached-bop-owner-package-disposition-map-001.md) accounts for every S17 reached identity and selects DEM by complete owner scope, not trace order. |
-| Objective | Reconcile and recover the full original DEM `50:00..48` package through one source-owned package session: every callable slot must have a reusable-original, source-derived, original no-op/failure, or explicitly deferred disposition, with Direct and Readonly behavior and all-family regression. |
-| Non-goals | No trace-led selector task, no new BOP merely because a trace reaches it, no COMMAND/XMS/DPMI/Redirector/Debugger implementation, no Bochs device/CPU/firmware work, no guest loader replacement, and no Overlay behavior beyond ABI-compatible extension points. |
-| Reference Baseline | S18 map; T199 S37 package matrix; T221 S3 P29 current-route audit; original `demdisp.c` and DEM owner sources; current Direct/Readonly profile ABI. |
-| Files And ABI Surface | `src/bx-vdm` DEM package-session/provider and capability seams, focused `tests/bx-vdm`, governed source/ABI/failure evidence, Status, and build-manifest additions only when a focused fixture requires them. |
+| Identifier Mode | M0 T225 S20, Ordinary Mode. |
+| Admission And Approval | S18’s owner-package map places COMMAND after DEM; [S19 closure](history/m0-t225-s19-closure-20260817.md) completes the selected DEM package without creating trace-led work. The prior complete `cmddisp.c` ledger is a baseline, not a current-composition acceptance claim. |
+| Objective | Reconcile and recover the complete original COMMAND `54:00..10` package through one source-owned package session: every callable slot must have a reusable-original, source-derived, original no-op/failure, or explicitly deferred disposition, with Direct and Readonly behavior and an all-family regression. |
+| Non-goals | No trace-led selector task, no new BOP merely because a trace reaches it, no DEM/XMS/DPMI/Redirector/Debugger implementation, no Bochs device/CPU/firmware work, no guest loader replacement, and no Overlay behavior beyond ABI-compatible extension points. |
+| Reference Baseline | S18 map; S19 closure; T199 S43 COMMAND ledger; T221 current-route audit; original `cmddisp.c` and COMMAND owner sources; current Direct/Readonly profile ABI. |
+| Files And ABI Surface | `src/bx-vdm` COMMAND package-session/provider and capability seams, focused `tests/bx-vdm`, governed source/ABI/failure evidence, Status, and build-manifest additions only when a focused fixture requires them. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source policy, and design authorities. |
-| Verification | First reconcile all 73 source table entries against current routes and source-recovery rungs; then build one whole-package regression that exercises each admitted Direct/Readonly route and each original no-op/failure terminal. Native trace is permitted only after the package regression passes. |
-| Expected Markers | No raw selector recognizer added to the adapter runtime; one package session owns selection; no Direct fallback for Readonly or deferred Overlay; stale endpoint-local shims are retained, migrated, replaced, or deleted with evidence. |
-| Asset Needs | Existing DEM ledgers, original OpenNT DEM sources, active shared profile ABI, existing package session/whole-provider fixtures, and source-built guest inputs only for the later package-level native verification. |
-| Reporting Requirements | Maintain a 73-slot source/ABI/failure map, record every migration decision and rejected source-recovery rung, report Direct/Readonly/Overlay posture per subfamily, and distinguish family regression from native execution evidence. |
-| Stop Conditions | A required behavior belongs to another original owner, requires an unadmitted host mutation/profile rule, contradicts original source/failure behavior, needs a Bochs machine feature, or lacks a usable source/ABI fact. Stop that subfamily, record it as deferred, and continue independent DEM subfamilies. |
-| Exit Criteria | Every DEM callable slot has a source-proven package disposition, all retained/replaced routes pass the complete Direct/Readonly family regression, no stale shim bypasses the package session, and one bounded native trace is run only as package validation. |
-| Original Owner Request | “全盘审查当前BOP状态和实现方案，以大局观来安排实现，不要通过trace进行添油战术，trace只是辅助手段.” |
-| Similar-Issue Sweep | All `50:00..48` slots; namespace/handle, FCB/search, GSET/state, raw-media/IOCTL, error/lock, misc/lifecycle, no-op and fast-I/O exception; Direct/Readonly/Overlay policy and every legacy adapter-runtime route. |
+| Verification | First reconcile all 17 callable source-table entries against current routes and the four source-recovery rungs; then build one whole-package regression covering each admitted Direct/Readonly route and each original no-op/failure terminal. Native trace is permitted only after the package regression passes. |
+| Expected Markers | No raw selector recognizer added to the adapter runtime; one package session owns selection; no Direct fallback for Readonly or deferred Overlay; no synthetic root/CWD or console success retained where the source-owned host-capability route is required; stale endpoint-local shims are retained, migrated, replaced, or deleted with evidence. |
+| Asset Needs | Existing COMMAND ledgers, original OpenNT COMMAND sources, active shared profile ABI, existing package-session/family fixtures, and source-built guest inputs only for later package-level native validation. |
+| Reporting Requirements | Maintain a 17-slot source/ABI/failure map, record every migration decision and rejected source-recovery rung, report Direct/Readonly/Overlay posture per subfamily, identify unavailable historical Win32 dependencies without stopping independent slots, and distinguish family regression from native execution evidence. |
+| Stop Conditions | A required behavior belongs to another original owner, requires an unadmitted host mutation/profile rule, contradicts original source/failure behavior, needs a Bochs machine feature, or lacks a usable source/ABI fact. Stop that subfamily, record it as deferred, and continue independent COMMAND subfamilies. |
+| Exit Criteria | Every COMMAND callable slot has a source-proven package disposition, all retained/replaced routes pass the complete Direct/Readonly family regression, no stale shim bypasses the package session, and one bounded native trace is run only as package validation. |
+| Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
+| Similar-Issue Sweep | All `54:00..10` slots; bootstrap/CMDINFO, launch/execution/exit, COMSPEC/environment, configuration/boot files, current-directory/console/keyboard, standard handles/redirection, no-op and explicit unavailable terminals; Direct/Readonly/Overlay policy and every legacy adapter-runtime route. |
 
+> **T225 S19 closure:** [the closure record](history/m0-t225-s19-closure-20260817.md) proves DEM’s 73-slot disposition, Direct/Readonly whole-family regression, no-live-bypass inventory, and one bounded native package validation. It neither claims guest program completion nor admits trace-led BOP work.
 > **T225 S18 closure:** [the reached owner-package disposition map](etc/research/t225-s18-reached-bop-owner-package-disposition-map-001.md) normalizes all 33 S17 records into 23 identities: 14 DEM, two COMMAND and seven machine/top-level. It distinguishes accepted execution from complete package recovery, identifies retained endpoint-local shims, and selects whole DEM recovery as the next owner-scoped package. No runtime behavior changed.
 > **T225 S19 P1 source/route reconciliation:** [the full-package map](etc/research/t225-s19-dem-full-package-route-reconciliation-001.md) confirms the 73-slot DEM table has 53 changed, 19 confirmed and one PDB-owner-gap route. It admits Direct/Readonly all-family regression and legacy-route inventory first; it does not add a provider or use trace order.
 > **T225 S19 P2 Direct/Readonly package regression:** [the result](etc/evidence/t225-s19-dem-direct-readonly-package-regression-result-001.md) links the fresh focused MSVC x64 /MT closure and passes the entire 50:00..48 fixture in both supported modes. It is package-route/profile evidence only; legacy adapter-runtime migration and later bounded native validation remain open.
