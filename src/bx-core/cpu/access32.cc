@@ -26,6 +26,34 @@
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
+#define BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER 0
+#endif
+
+#if BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
+#include "bx-mantle/bx_ntvdm_segment_access_observation_v1.h"
+
+static void bx_ntvdm_observe_virtual_word_failure(unsigned segment_index,
+  const bx_segment_reg_t *segment, Bit32u offset, Bit32u branch_kind)
+{
+  bx_ntvdm_segment_access_observation_v1 event;
+  memset(&event, 0, sizeof(event));
+  event.magic = BX_NTVDM_SEGMENT_ACCESS_OBSERVATION_V1_MAGIC;
+  event.abi_version = BX_NTVDM_SEGMENT_ACCESS_OBSERVATION_V1_VERSION;
+  event.struct_bytes = sizeof(event);
+  event.cpu_id = BX_CPU_ID;
+  event.access_kind = BX_NTVDM_SEGMENT_ACCESS_KIND_V1_READ_WORD;
+  event.branch_kind = branch_kind;
+  event.segment_index = segment_index;
+  event.width = 2u;
+  event.offset = offset;
+  event.limit_scaled = segment->cache.u.segment.limit_scaled;
+  event.cache_valid = segment->cache.valid;
+  event.segment_selector = segment->selector.value;
+  (void) bx_ntvdm_mantle_segment_access_observation_v1(&event);
+}
+#endif
+
   void BX_CPP_AttrRegparmN(3)
 BX_CPU_C::write_virtual_byte_32(unsigned s, Bit32u offset, Bit8u data)
 {
@@ -536,12 +564,21 @@ accessOK:
     }
     else {
       BX_ERROR(("read_virtual_word_32(): segment limit violation"));
+#if BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
+      bx_ntvdm_observe_virtual_word_failure(s, seg, offset,
+        BX_NTVDM_SEGMENT_ACCESS_BRANCH_V1_DIRECT_LIMIT);
+#endif
       exception(int_number(s), 0);
     }
   }
 
-  if (!read_virtual_checks(seg, offset, 2))
+  if (!read_virtual_checks(seg, offset, 2)) {
+#if BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
+    bx_ntvdm_observe_virtual_word_failure(s, seg, offset,
+      BX_NTVDM_SEGMENT_ACCESS_BRANCH_V1_READ_CHECK);
+#endif
     exception(int_number(s), 0);
+  }
   goto accessOK;
 }
 

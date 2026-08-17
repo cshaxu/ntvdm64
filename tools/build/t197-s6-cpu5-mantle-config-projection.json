@@ -39,6 +39,12 @@
       "expectedSource": "<absent>",
       "newValue": "1",
       "classification": "BX-TRACE-084 default-off runtime observer compiled into the formal graph; only a fixture can arm it"
+    },
+    {
+      "name": "BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER",
+      "expectedSource": "<absent>",
+      "newValue": "1",
+      "classification": "BX-TRACE-085 default-off runtime observer compiled only in the formal graph; it is armed only with the existing first-fault diagnostic"
     }
   ],
   "derivedAssertions": [
