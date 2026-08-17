@@ -2,12 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S3.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S4.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S3 -- Guest EXEC file-I/O compatibility recovery.**
-
-> **T224 closed:** its COMMAND standard-handle and child-redirection owner
-> package is recorded in [history](history/m0-t224-closure-20260817.md).
+**Active: M0 T225 S4 -- Guest DOS COM EXEC control-flow admission.**
 
 ## Active Packet
 
@@ -17,33 +14,26 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S3, Ordinary Mode. |
-| Admission And Approval | Queue order 1, the capability roadmap, T225 S1 file/terminal prerequisite map, and completed T225 S2 lifecycle package. S3 is the ordered guest EXEC file-I/O owner package. |
-| Objective | Recover the source-shaped guest EXEC file-I/O compatibility package around `50:12/00/42/16/02`: prove the SFT token ABI, choose Direct FastRead semantics, and establish the real DTA/CurrentPDB prerequisite without replacing guest DOS EXEC. |
-| Non-goals | No adapter EXEC/PSP/MCB/JFN/COM/EXE loader implementation, no COMMAND `54:0B` implementation, no trace-led leaf patch, no nested host process, no new Bochs device, and no VDD/DPMI/WOW/Redirector recovery. |
-| Reference Baseline | T225 S1 P2/P3 file-path and token ABI map; OpenNT `msproc.asm:$Exec`, `handle.asm:FastOrSlow`, `dem.h:GETHANDLE`, `demdisp.c:SVC_DEMFASTREAD`, and current whole-provider Direct/Readonly routes. |
-| Files And ABI Surface | `src/bx-vdm` DEM whole-provider/file-view/FastRead seams and focused tests only; opaque AX:BP token ABI, checked guest-RAM transaction, copied DTA/PDB identity. No Bochs or guest DOS code change is admitted. |
+| Identifier Mode | M0 T225 S4, Ordinary Mode. |
+| Admission And Approval | Queue order 1; T225 S1 source map; completed S2 lifecycle and S3 file-I/O packages. |
+| Objective | Establish the source-owned COM branch admission: exact `$Exec` COM control flow, entry/stack/PSP/MCB prerequisites, required existing guest artifact closure, and a source-built fixture plan. |
+| Non-goals | No adapter COM loader, no PSP/MCB/JFN implementation, no MZ relocation, no parent return, no trace-led patch, no host child, no Bochs change. |
+| Reference Baseline | OpenNT `msproc.asm:$Exec`, `ExecRead`, `get_binary_type`; S3 five-service closure; current guest artifact inventory and machine startup evidence. |
+| Files And ABI Surface | Evidence, guest artifact/build records and focused source fixture planning. No production adapter, Bochs, or guest DOS code change until owner/entry closure is proven. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Source/ABI/failure map for all five file services; selected Direct FastRead result contract; focused Direct/Readonly source-built fixtures under MSVC x64 `/MT`; negative stale-token/profile-isolation regressions; no native trace until the package is closed. |
-| Expected Markers | One shared AX:BP token ABI, an explicit Direct FastRead success-or-carry contract, checked RAM transfer, source-shaped handle/seek/read/close results, and no host-child or adapter loader substitute. |
-| Asset Needs | Existing local OpenNT/MS-DOS sources, `dem-whole-provider-session` and lifecycle fixtures, MSVC x64 `/MT`; no external import or host modification. |
-| Reporting Requirements | Cite original `$Exec` and FastOrSlow control flow, record selected Direct/Readonly profile disposition and failure contract, and separate COM loader/parent return work into later S packages. |
-| Stop Conditions | Any attempt to implement EXEC, PSP, MCB, JFN, COM/EXE load, parent return, or a host child in the adapter; alter Bochs; expand Overlay/Virtual; or declare FastRead from trace alone. |
-| Exit Criteria | Source/ABI/failure map is complete; Direct/Readonly `50:12/00/42/16/02` package regression passes with an explicit Direct FastRead contract and real DTA/PDB admission; reviewed evidence is committed and pushed. No COM/EXE or parent-return claim is permitted. |
+| Verification | Source/ABI/failure map for COM branch; artifact/build/entry evidence; declared fixture closure proving guest-owned prerequisites, then one native trace only after source fixture admission. |
+| Expected Markers | Guest `$Exec` owns load/PSP/MCB/entry; adapter supplies only already-admitted file capability; no synthetic process or loader. |
+| Asset Needs | Existing local OpenNT/MS-DOS sources, artifact inventory, S3 fixture evidence, MSVC x64 `/MT`; no external import or host modification. |
+| Reporting Requirements | Separate source facts, existing evidence, missing prerequisites, and future COM/MZ/return packages. |
+| Stop Conditions | Any adapter loader/process semantics, synthetic PSP/MCB, host child, Bochs change, MZ work, or native trace before fixture admission. |
+| Exit Criteria | COM source/ABI/failure map and reproducible fixture plan are complete, all prerequisite owners have a disposition, and reviewed evidence is committed/pushed. No COM execution or parent-return claim is permitted. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
-| Similar-Issue Sweep | DEM entry/termination, per-PDB search/file tokens, Direct/Readonly/Overlay/Virtual file-view lifecycles, COMMAND `54:0B` separation, and machine/CLI terminal boundaries. |
-> **T225 S3 P0 admission:** S2 is closed in [its lifecycle source/ABI/failure record](etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md). S3 now recovers the complete guest EXEC file-I/O owner package before COM loading or COMMAND parent-return work.
-
-> **T225 S3 P1 progress:** the [source/ABI/FastRead map](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md) selects a source-derived Direct `50:42` transfer through the existing typed file owner. Guest `FastOrSlow` and SFT position update remain guest-owned; no adapter EXEC semantics are admitted.
+| Similar-Issue Sweep | Guest DOS EXEC/PSP/MCB/JFN/termination, Direct/Readonly artifact access, COMMAND handoff, machine startup, and CLI terminal boundary. |
+> **T225 S4 P0 admission:** S3 is closed in [its file-I/O source/ABI record](etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md). S4 begins with the complete COM branch source and prerequisite map; it must not implement a substitute loader.
 
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 
-> **T225 S2 P1 progress:** the [source/ABI/failure map](etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md) fixes `50:36/3C` as one DEM lifecycle package. Direct PDB-owned host handles require cleanup; Readonly startup capability remains session-scoped; Overlay/Virtual are explicit deferred hooks. No DOS teardown or VDD behavior is admitted.
-
-> **T225 S2 P2 progress:** one lifecycle provider now owns no-VDD `50:36` and Direct/search `50:3C` cleanup; the old parallel VDD leaf is removed. Focused x64 `/MT` lifecycle evidence passes. The wider DEM fixture's `50:41` return 195 is proven baseline, while Direct/Readonly package-session lifecycle regression remains the next required proof.
-
 > **T225 S2 P3 closure:** the source-built Direct/Readonly whole-provider fixture passes under MSVC x64 `/MT`: `50:3C` invalidates the target Direct PDB token but retains the Readonly session token, while preserving void resume. The separate lifecycle fixture passes; `50:41` remains an independently proven baseline failure. S2 closes only DEM notification cleanup, not guest EXEC or parent return.
-
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector
