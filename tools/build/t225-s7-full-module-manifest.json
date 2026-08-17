@@ -165,7 +165,8 @@
         "src/bx-mantle/minimal_port_space.cc",
         "src/bx-mantle/minimal_product_shell.cc",
         "src/bx-mantle/paramtree.cc",
-        "src/bx-mantle/pc_system.cc"
+        "src/bx-mantle/pc_system.cc",
+        "src/bx-mantle/pic.cc"
       ]
     },
     {
@@ -339,6 +340,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t225-s23-native-pic-lifecycle-fixture",
+      "source": "tests/bx-mantle/t225_s23_native_pic_lifecycle_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle"],
+      "platformLibraries": []
+    },
     {
       "name": "t225-s6-four-image-profile-fixture",
       "source": "tests/bx-mantle/t225_s6_four_image_profile_fixture.c",

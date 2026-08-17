@@ -8,12 +8,16 @@
 #ifndef BX_NTVDM_MINIMAL_MACHINE_H
 #define BX_NTVDM_MINIMAL_MACHINE_H
 
+class bx_pic_c;
+
 enum bx_ntvdm_minimal_machine_status {
   BX_NTVDM_MINIMAL_MACHINE_OK = 0,
   BX_NTVDM_MINIMAL_MACHINE_ALREADY_ATTEMPTED,
   BX_NTVDM_MINIMAL_MACHINE_SIM_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_MEMORY_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_PORT_SPACE_FAILED,
+  BX_NTVDM_MINIMAL_MACHINE_PIC_FAILED,
+  BX_NTVDM_MINIMAL_MACHINE_PIC_CLEANUP_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_PORT_SPACE_CLEANUP_FAILED
 };
 
@@ -30,6 +34,8 @@ private:
   bx_bool attempted;
   bx_bool memory_owned;
   bx_bool port_space_owned;
+  bx_bool pic_owned;
+  bx_pic_c *pic;
 };
 
 #endif

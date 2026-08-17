@@ -9,6 +9,7 @@
 #include "bx-core/cpu/cpu.h"
 #include "bx-core/memory/memory.h"
 #include "iodev/iodev.h"
+#include "bx-mantle/pic.h"
 #include "bx-mantle/pc_system.h"
 #include "bx_ntvdm_minimal_sim.h"
 #include "bx_ntvdm_minimal_machine.h"
@@ -29,6 +30,8 @@ bx_ntvdm_minimal_machine_c::bx_ntvdm_minimal_machine_c()
   attempted = 0;
   memory_owned = 0;
   port_space_owned = 0;
+  pic_owned = 0;
+  pic = NULL;
 }
 
 bx_ntvdm_minimal_machine_status
@@ -58,6 +61,22 @@ bx_ntvdm_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
   }
   port_space_owned = 1;
 
+  // BX-MANTLE-082-BEGIN
+  // Fixed native 8259 assembly: no plugin registry, device discovery or
+  // state-registration path is entered.
+  pic = bx_ntvdm_mantle_pic_create_v1();
+  if (pic == NULL) {
+    bx_devices.cleanup_empty_port_space();
+    port_space_owned = 0;
+    bx_mem.cleanup_memory();
+    memory_owned = 0;
+    return BX_NTVDM_MINIMAL_MACHINE_PIC_FAILED;
+  }
+  bx_devices.pluginPicDevice = pic;
+  pic->init();
+  pic_owned = 1;
+  // BX-MANTLE-082-END
+
   bx_cpu.initialize();
   bx_pc_system.set_enable_a20(1);
   bx_cpu.reset(BX_RESET_HARDWARE);
@@ -69,6 +88,16 @@ bx_ntvdm_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
 
 bx_ntvdm_minimal_machine_status bx_ntvdm_minimal_machine_c::cleanup(void)
 {
+  if (pic_owned) {
+    if (!pic->fini()) {
+      return BX_NTVDM_MINIMAL_MACHINE_PIC_CLEANUP_FAILED;
+    }
+    bx_devices.pluginPicDevice = &bx_devices.stubPic;
+    bx_ntvdm_mantle_pic_destroy_v1(pic);
+    pic = NULL;
+    pic_owned = 0;
+  }
+
   if (port_space_owned) {
     if (!bx_devices.cleanup_empty_port_space()) {
       return BX_NTVDM_MINIMAL_MACHINE_PORT_SPACE_CLEANUP_FAILED;

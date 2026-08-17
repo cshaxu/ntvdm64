@@ -205,6 +205,193 @@ bx_bool bx_devices_c::cleanup_empty_port_space(void)
   return 1;
 }
 
+// BX-MANTLE-082-BEGIN
+// Original per-port registration and cleanup used by the one native PIC.
+bx_bool bx_devices_c::register_io_read_handler(void *this_ptr, bx_read_handler_t f,
+                                               Bit32u addr, const char *name, Bit8u mask)
+{
+  addr &= 0xffff;
+
+  if (!f)
+    return 0;
+
+  /* first check if the port already has a handlers != the default handler */
+  if (read_port_to_handler[addr] &&
+      read_port_to_handler[addr] != &io_read_handlers) { // the default
+    BX_ERROR(("IO device address conflict(read) at IO address %Xh",
+              (unsigned) addr));
+    BX_ERROR(("  conflicting devices: %s & %s",
+              read_port_to_handler[addr]->handler_name, name));
+    return 0;
+  }
+
+  /* first find existing handle for function or create new one */
+  struct io_handler_struct *curr = &io_read_handlers;
+  struct io_handler_struct *io_read_handler = NULL;
+  do {
+    if (curr->funct == f &&
+        curr->mask == mask &&
+        curr->this_ptr == this_ptr &&
+        !strcmp(curr->handler_name, name)) { // really want the same name too
+      io_read_handler = curr;
+      break;
+    }
+    curr = curr->next;
+  } while (curr->next != &io_read_handlers);
+
+  if (!io_read_handler) {
+    io_read_handler = new struct io_handler_struct;
+    io_read_handler->funct = (void *)f;
+    io_read_handler->this_ptr = this_ptr;
+    io_read_handler->handler_name = new char[strlen(name)+1];
+    strcpy(io_read_handler->handler_name, name);
+    io_read_handler->mask = mask;
+    io_read_handler->usage_count = 0;
+    // add the handler to the double linked list of handlers
+    io_read_handlers.prev->next = io_read_handler;
+    io_read_handler->next = &io_read_handlers;
+    io_read_handler->prev = io_read_handlers.prev;
+    io_read_handlers.prev = io_read_handler;
+  }
+
+  io_read_handler->usage_count++;
+  read_port_to_handler[addr] = io_read_handler;
+  return 1; // address mapped successfully
+}
+
+bx_bool bx_devices_c::register_io_write_handler(void *this_ptr, bx_write_handler_t f,
+                                                Bit32u addr, const char *name, Bit8u mask)
+{
+  addr &= 0xffff;
+
+  if (!f)
+    return 0;
+
+  /* first check if the port already has a handlers != the default handler */
+  if (write_port_to_handler[addr] &&
+      write_port_to_handler[addr] != &io_write_handlers) { // the default
+    BX_ERROR(("IO device address conflict(write) at IO address %Xh",
+              (unsigned) addr));
+    BX_ERROR(("  conflicting devices: %s & %s",
+              write_port_to_handler[addr]->handler_name, name));
+    return 0;
+  }
+
+  /* first find existing handle for function or create new one */
+  struct io_handler_struct *curr = &io_write_handlers;
+  struct io_handler_struct *io_write_handler = NULL;
+  do {
+    if (curr->funct == f &&
+        curr->mask == mask &&
+        curr->this_ptr == this_ptr &&
+        !strcmp(curr->handler_name, name)) { // really want the same name too
+      io_write_handler = curr;
+      break;
+    }
+    curr = curr->next;
+  } while (curr->next != &io_write_handlers);
+
+  if (!io_write_handler) {
+    io_write_handler = new struct io_handler_struct;
+    io_write_handler->funct = (void *)f;
+    io_write_handler->this_ptr = this_ptr;
+    io_write_handler->handler_name = new char[strlen(name)+1];
+    strcpy(io_write_handler->handler_name, name);
+    io_write_handler->mask = mask;
+    io_write_handler->usage_count = 0;
+    // add the handler to the double linked list of handlers
+    io_write_handlers.prev->next = io_write_handler;
+    io_write_handler->next = &io_write_handlers;
+    io_write_handler->prev = io_write_handlers.prev;
+    io_write_handlers.prev = io_write_handler;
+  }
+
+  io_write_handler->usage_count++;
+  write_port_to_handler[addr] = io_write_handler;
+  return 1; // address mapped successfully
+}
+
+bx_bool bx_devices_c::unregister_io_read_handler(void *this_ptr, bx_read_handler_t f,
+                                         Bit32u addr, Bit8u mask)
+{
+  addr &= 0xffff;
+
+  struct io_handler_struct *io_read_handler = read_port_to_handler[addr];
+
+  //BX_INFO(("Unregistering I/O read handler at %#x", addr));
+
+  if (!io_read_handler) {
+    BX_ERROR((">>> NO IO_READ_HANDLER <<<"));
+    return 0;
+  }
+
+  if (io_read_handler == &io_read_handlers) {
+    BX_ERROR((">>> CANNOT UNREGISTER THE DEFAULT IO_READ_HANDLER <<<"));
+    return 0; // cannot unregister the default handler
+  }
+
+  if (io_read_handler->funct != f) {
+    BX_ERROR((">>> NOT THE SAME IO_READ_HANDLER FUNC <<<"));
+    return 0;
+  }
+
+  if (io_read_handler->this_ptr != this_ptr) {
+    BX_ERROR((">>> NOT THE SAME IO_READ_HANDLER THIS_PTR <<<"));
+    return 0;
+  }
+
+  if (io_read_handler->mask != mask) {
+    BX_ERROR((">>> NOT THE SAME IO_READ_HANDLER MASK <<<"));
+    return 0;
+  }
+
+  read_port_to_handler[addr] = &io_read_handlers; // reset to default
+  io_read_handler->usage_count--;
+
+  if (!io_read_handler->usage_count) { // kill this handler entry
+    io_read_handler->prev->next = io_read_handler->next;
+    io_read_handler->next->prev = io_read_handler->prev;
+    delete [] io_read_handler->handler_name;
+    delete io_read_handler;
+  }
+  return 1;
+}
+
+bx_bool bx_devices_c::unregister_io_write_handler(void *this_ptr, bx_write_handler_t f,
+                                          Bit32u addr, Bit8u mask)
+{
+  addr &= 0xffff;
+
+  struct io_handler_struct *io_write_handler = write_port_to_handler[addr];
+
+  if (!io_write_handler)
+    return 0;
+
+  if (io_write_handler == &io_write_handlers)
+    return 0; // cannot unregister the default handler
+
+  if (io_write_handler->funct != f)
+    return 0;
+
+  if (io_write_handler->this_ptr != this_ptr)
+    return 0;
+
+  if (io_write_handler->mask != mask)
+    return 0;
+
+  write_port_to_handler[addr] = &io_write_handlers; // reset to default
+  io_write_handler->usage_count--;
+
+  if (!io_write_handler->usage_count) { // kill this handler entry
+    io_write_handler->prev->next = io_write_handler->next;
+    io_write_handler->next->prev = io_write_handler->prev;
+    delete [] io_write_handler->handler_name;
+    delete io_write_handler;
+  }
+  return 1;
+}
+// BX-MANTLE-082-END
+
 // BX-MANTLE-065-DISPATCH-BEGIN
 Bit32u BX_CPP_AttrRegparmN(2)
 bx_devices_c::inp(Bit16u addr, unsigned io_len)
