@@ -241,3 +241,15 @@ an artifact-availability gate, not a rejected BOP, a substituted guest image,
 or a Bochs/runtime failure. A later non-compile-only invocation must provide
 those exact locked inputs and profile before it can claim installation
 execution; it still must not begin a guest trace.
+## P10 Approved Reference-Identity Input Staging
+
+The owner has approved a temporary, controlled local staging set for the
+otherwise unavailable locked identities. The detailed [provenance,
+classification and use boundary](../evidence/t225-s6-reference-guest-input-admission-001.md)
+records its OpenNT source revision, paths, hashes, sizes, and manifest.
+
+This supersedes only P9''s statement that no exact input root was available. It
+does not turn the staged binaries into a new source-build result, default
+runtime input, release input, or guest-trace admission. The remaining P10
+action is therefore an exact-image **installation** fixture under Direct and
+Readonly; Overlay and retired Virtual remain rejection cases.

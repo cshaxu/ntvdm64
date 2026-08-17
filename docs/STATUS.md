@@ -23,7 +23,7 @@
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
 | Verification | Source/artifact/entry/BOP dependency ledger; Direct/Readonly fixture admission tests; one native run only after whole-fixture closure. |
 | Expected Markers | Original guest `$Exec` remains sole process owner; each required BOP already has a package owner/disposition; no Overlay fallback; retired Virtual is never selected. |
-| Asset Needs | Existing local OpenNT/MS-DOS sources, artifact records, current composition and MSVC x64 /MT; no external import or host modification. |
+| Asset Needs | Existing local OpenNT/MS-DOS sources, artifact records, current composition and MSVC x64 /MT. Owner-approved, hash-locked local reference binaries may be staged only as `artifacts/` research inputs under the source policy; no external import or host modification. |
 | Reporting Requirements | Separate source/artifact facts, BOP package dispositions, fixture gaps and rejected substitute loaders. |
 | Stop Conditions | Any substitute loader/PSP/MCB, unowned BOP leaf, ambient host capability, Overlay fallback, retired Virtual selection, or native run before fixture closure. |
 | Exit Criteria | A reviewed, reproducible one-shot fixture plan with every input and BOP owner disposition. This does not claim COM execution or parent return. |
@@ -42,6 +42,10 @@
 > **T225 S6 P8 policy amendment:** product profiles are Direct, Readonly and deferred Overlay. Current CLI/engine composition enables only Direct/Readonly; Overlay remains ABI-compatible but explicitly unselected, never substituted. Virtual is retired from the product contract: its code/evidence are retained without deletion, but it is never selected and receives no new behavior. The [admission record](etc/research/t225-s6-guest-dos-one-shot-fixture-admission-001.md) carries the fixed engine ABI and focused x64 `/MT` evidence. Exact source-built fixture installation remains the next gate.
 
 > **T225 S6 P9 source-link closure:** `Invoke-T225S6FourImageProfileFixture.ps1 -CompileOnly` rebuilds and links the current CPU5/P bx-core/bx-mantle/bx-vdm closure plus the four-image profile fixture under MSVC x64 `/MT`. It passes without S74/prebuilt composition inputs; its result is explicitly compile-only, not guest execution. The exact locked NTIO/NTDOS/COMMAND/SHARE input root is currently absent, so profile execution remains an artifact gate rather than a BOP or Bochs failure.
+
+> **T225 S6 P10 approved reference-input staging:** the owner approved a controlled local OpenNT reference-binary staging set whose four hashes and sizes exactly match the locked source-built identities. Its [provenance record](etc/evidence/t225-s6-reference-guest-input-admission-001.md) permits only this fixture's installation verification; it is neither a new source build nor a default runtime/release input, and does not admit a guest trace.
+
+> **T225 S7 P1 closure:** the [incremental composition-build result](etc/research/t225-s7-incremental-composition-build-result-001.md) proves a manifest-bound `bx-vdm` cold/hot/invalidation cache with a fresh x64 `/MT` fixture link on every run. S6 resumes; its runtime/profile diagnosis remains unchanged.
 
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 
