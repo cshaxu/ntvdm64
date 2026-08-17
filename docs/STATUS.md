@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S37.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S38.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S37 -- COMMAND guest-image/lifecycle provenance audit.**
+**Active: M0 T225 S38 -- COMMAND guest-image continuity observation design.**
 
 ## Active Packet
 
@@ -14,22 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S37, Ordinary Mode. |
-| Admission And Approval | S36 proves that the accepted `06h` provider is not a direct DS/code mutation path and that the same live `0C41` segment issues COMMAND BOPs. The next owner is the complete COMMAND guest-image/lifecycle provenance package, not a singleton BOP repair. |
-| Objective | Audit source-built COMMAND image loading/segment identity, bootstrap and initialization transitions, existing `54h` caller context, and bounded fault-location evidence to classify the `0C41:2357` COMMAND-plane candidate without inventing a symbolic source map. |
-| Non-goals | No BOP/provider implementation, no trace run, no guest/memory patch, no CPU segment repair, no COMMAND source-map reconstruction, and no selector-specific workaround. |
-| Reference Baseline | S20 whole COMMAND host-service package, S35 paired evidence, S36 startup-machine audit, T145 source-map availability, source-built COMMAND provenance, and original OpenNT COMMAND/NTDOS source. |
-| Files And ABI Surface | One whole guest-image/lifecycle source/ABI/failure audit, Status/history/evidence only. No runtime ABI or code change is admitted. |
+| Identifier Mode | M0 T225 S38, Ordinary Mode. |
+| Admission And Approval | S37 separates artifact identity, the original `$Exec` guest-image lifecycle and existing COMMAND host-service routing. The next owner is a complete COMMAND guest-image continuity observation design, not a singleton BOP repair. |
+| Objective | Map the original `$Exec` allocation/read/entry ABI and define one default-off selector-blind observation that can correlate the actual COMMAND image range, PSP/entry state and later BOP/fault CS without changing guest behavior. |
+| Non-goals | No BOP/provider implementation, no native trace execution, no guest/memory patch, no CPU segment repair, no COMMAND source-map reconstruction, and no selector-specific workaround. |
+| Reference Baseline | S37 provenance audit, original OpenNT NTDOS `$Exec` source, source-built COMMAND provenance, current bx-core/bx-mantle observation seams, and S35 paired evidence. |
+| Files And ABI Surface | One whole observation source/ABI/failure design, Status/history/evidence only. No runtime ABI or code change is admitted. |
 | Applicable Rules | rules/EXECUTION.md, source policy, source-recovery criterion, architecture boundaries, Bochs deny-by-default, and T225 anti-attrition rule. |
-| Verification | Reconcile original COMMAND/NTDOS load and launch contracts with the exact source-built artifact/provenance and the S35 `0C41` BOP locations; distinguish source identity, segment identity, and fault routine identity. |
-| Expected Markers | Whole-package lifecycle ledger, exact source/build paths, explicit symbolic-map limitation, rejected causal leaps, and one owner-scoped next package or bounded ambiguity. |
-| Asset Needs | S20/T145/S35/S36 records, original OpenNT COMMAND/NTDOS source, source-built COMMAND provenance, and current formal manifest/source tree. |
-| Reporting Requirements | Cite original and current code; account for `54h` caller context and guest load/return stages; state precisely what dynamic evidence proves and does not prove; no inferred repair. |
-| Stop Conditions | Need for a new trace, source change, BOP/provider behavior, Bochs intrusion, guest mutation, or host provider change. Stop and re-admit the smallest action. |
-| Exit Criteria | A complete COMMAND guest-image/lifecycle audit classifies the live-segment/fault attribution boundary without implementing behavior. |
+| Verification | Identify the smallest existing or new selector-blind mechanical state surface sufficient to bind `$Exec` allocation/read/entry state with later execution CS; reject inadequate or semantic routes before implementation. |
+| Expected Markers | Whole observation ledger, exact source/current paths, fixed record ABI, default-off/no-semantic-change proof plan, and bounded data-retention rules. |
+| Asset Needs | S35/S37 records, original NTDOS `$Exec` source, existing bx-core/bx-mantle trace/CPU contracts, current formal manifest/source tree, and source-built COMMAND provenance. |
+| Reporting Requirements | Cite original and current code; distinguish loader state from BOP selectors; define positive/negative fixture and one future bounded native-observation gate; no inferred repair. |
+| Stop Conditions | Need for a semantic trace, source change, BOP/provider behavior, guest mutation, or host provider change. Stop and re-admit the smallest action. |
+| Exit Criteria | A complete observation design admits at most the smallest selector-blind implementation needed to gather guest-loader continuity facts. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | COMMAND.COM source/build identity, NTDOS load/EXEC handoff, COMMAND bootstrap and initialization, `54:02/0D/0F` caller contexts, segment allocation/relocation, symbolic-map availability, Direct/Readonly neutrality, and S35 first-fault boundaries. |
-> **T225 S36 closure:** [the closure record](history/m0-t225-s36-closure-20260817.md) proves selector `06h` has no direct DS/code mutation path and corrects `0C41` to an active COMMAND-plane candidate segment; it admits only a whole COMMAND guest-image/lifecycle provenance audit.
+| Similar-Issue Sweep | `$Exec` allocation/read/relocation/entry state, PSP/initial stack, existing generic observer ABI, default-off lifecycle, Direct/Readonly neutrality, record overflow/stop behavior, and S35 BOP/fault correlation. |
+> **T225 S37 closure:** [the closure record](history/m0-t225-s37-closure-20260817.md) separates COMMAND artifact, guest-loader and host-service ownership; it admits only a whole guest-image continuity observation design.
+> **T225 S36 closure:** [the closure record](history/m0-t225-s36-closure-20260817.md) proves selector `06h` has no direct DS/code mutation path and corrects `0C41` to an active COMMAND-plane candidate segment; it admits only a whole COMMAND guest-image continuity observation design.
 > **T225 S35 closure:** [the closure record](history/m0-t225-s35-closure-20260817.md) binds same-invocation BOP and first-fault facts in Direct/Readonly, but assigns no cause; it admits only a whole startup-machine component audit.
 > **T225 S34 closure:** [the closure record](history/m0-t225-s34-closure-20260817.md) rejects merging distinct S19/S30 dynamic histories and admits only paired reuse of existing observations; it authorizes no new trace mechanism or repair.
 > **T225 S33 closure:** [the closure record](history/m0-t225-s33-closure-20260817.md) proves existing selector-blind BOP observation already establishes reach of `sysinit`, `DosInit`, and post-`charinit` `continit`; it admits no new observer or repair.

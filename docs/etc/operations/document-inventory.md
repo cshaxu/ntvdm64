@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1772 |
+| Documentation records | 1774 |
 | --- | --- |
-| Generated UTC | 2026-08-17T23:26:18Z |
+| Generated UTC | 2026-08-17T23:28:22Z |
 
 ## Entries
 
@@ -960,6 +960,7 @@ content-divergent entries.
 | etc/research/t225-s33-bootstrap-continuity-observation-admission-map-001.md | indexed supporting material | 2491ba209c6f5cac653902084eb13d0f516fabd9712a9072cfd7a86c328d5a3c |
 | etc/research/t225-s34-post-bootstrap-first-fault-source-build-attribution-001.md | indexed supporting material | 84220da99cb8808f42547e332370661c68fac159f721b1135a469203512c61a2 |
 | etc/research/t225-s36-startup-machine-postreturn-component-audit-001.md | indexed supporting material | dd0b11075b96aa28c872369d02eef0ba92cbf9c1b2a69ca0b96a098933e85547 |
+| etc/research/t225-s37-command-guest-image-lifecycle-provenance-audit-001.md | indexed supporting material | b79503a67838870e45163586b442ab804c629208643030537dcce31fe3ea5ce0 |
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
@@ -1505,6 +1506,7 @@ content-divergent entries.
 | history/m0-t225-s34-closure-20260817.md | closed task history | 4ada5f5f3e588b7a6d843a9e74504dc7a37a981fa2fb5c2b00cbba891f2edcba |
 | history/m0-t225-s35-closure-20260817.md | closed task history | 2cc3ff48fa9315b5df9682a77ff72cff32c1ab8c0143e8292dcc6641f8939ffd |
 | history/m0-t225-s36-closure-20260817.md | closed task history | f1e429566dd9804cc0bcb2f59dd01a0daf43ff62f3eef0ab6810a51d49c2a3df |
+| history/m0-t225-s37-closure-20260817.md | closed task history | 87a157c6c305f9808b4f62271fdf8502acc62f115d76eb9e2e934f24fcae5a23 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -1786,7 +1788,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a9bfa9cc09b1fecc1e8680bb06383589e38fc7e7b5c9fae5310093fa146ccad0 |
+| STATUS.md | principal control document | 21420e5afe1e3c1ca6694fb588b96318fac53ec389fefcfe294e0ce9002d4256 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
