@@ -68,7 +68,7 @@ int main(void)
         selection.precedence != BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT ||
         !bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) ||
         plane.component != BX_NTVDM_DEM_COMPONENT_MISC ||
-        !bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, &ingress,
+        !bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, 0, &ingress,
             &selection, &plane, &event, &cpu, &result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x404u ||
         result.cpu_delta.gpr16_write_mask != 0u || result.eflags_values != 0u ||
@@ -78,10 +78,10 @@ int main(void)
             0x1234u, &token_b, &out, &token_b) ||
         !bx_ntvdm_search_sessions_v1_next(&provider.search_transaction.plan.sessions,
             0x5678u, &token_foreign, &out, &token_a)) return 2;
-    if (!bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, &ingress,
+    if (!bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, 0, &ingress,
             &selection, &plane, &event, &cpu, &result)) return 3; /* absent list is success */
     event.vector = 13u;
-    if (bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, &ingress,
+    if (bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, 0, &ingress,
             &selection, &plane, &event, &cpu, &result)) return 4;
     bx_ntvdm_search_transaction_v1_release(&provider.search_transaction);
     return 0;

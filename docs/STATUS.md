@@ -36,6 +36,8 @@
 
 > **T225 S2 P1 progress:** the [source/ABI/failure map](etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md) fixes `50:36/3C` as one DEM lifecycle package. Direct PDB-owned host handles require cleanup; Readonly startup capability remains session-scoped; Overlay/Virtual are explicit deferred hooks. No DOS teardown or VDD behavior is admitted.
 
+> **T225 S2 P2 progress:** one lifecycle provider now owns no-VDD `50:36` and Direct/search `50:3C` cleanup; the old parallel VDD leaf is removed. Focused x64 `/MT` lifecycle evidence passes. The wider DEM fixture's `50:41` return 195 is proven baseline, while Direct/Readonly package-session lifecycle regression remains the next required proof.
+
 > **T221 S2 P2 progress:** all 29 identities now have one five-subfamily
 > provider disposition, a shared four-mode backend contract, current-code
 > migration decision, and family regression matrix. Pipes remain Redirector

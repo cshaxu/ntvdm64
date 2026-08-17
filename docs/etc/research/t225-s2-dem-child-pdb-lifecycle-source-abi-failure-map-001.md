@@ -90,3 +90,23 @@ no-VDD profile disposition is an explicit source-shaped omission.
 5. The whole-provider Direct/Readonly file-chain fixture remains green under
    MSVC x64 `/MT`. Overlay/Virtual are asserted deferred, not exercised as
    completed lifecycle providers.
+
+## P2 Implementation and Regression Checkpoint
+
+The lifecycle provider now owns both selectors before the package facade: it
+returns the no-VDD void form for 50:36, and for 50:3C it releases the existing
+search slots plus only PDB-owned Direct file-session handles. The standalone
+adapter runtime no longer keeps a parallel VDD-create recognizer; it invokes
+the same lifecycle provider before its generic DEM unavailable provider.
+
+A fresh MSVC x64 /MT dem-lifecycle fixture compiled, linked, and directly ran
+with exit code 0. A broader dem-package fixture compiled and linked but ran
+with exit code 195 at its pre-existing 50:41 media-ID assertion. The same
+fixture was rebuilt and run from detached pre-change commit d798e509; it also
+returned 195. Thus that failure is baseline evidence for the media package,
+not a T225/S2 regression and not a reason to weaken lifecycle tests.
+
+This checkpoint does not close S2. It still needs one focused package-session
+fixture that proves the newly wired 50:3C call invalidates a Direct token while
+retaining a Readonly startup token's session scope. Overlay and Virtual remain
+explicitly deferred.

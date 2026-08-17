@@ -11,7 +11,6 @@
 #include "bx_ntvdm_cmd_comspec_bootstrap_service.h"
 #include "bx_ntvdm_cmd_get_next_service.h"
 #include "bx_ntvdm_controlled_stop_service.h"
-#include "bx_ntvdm_vdd_create_user_notify_service.h"
 #include "bx_ntvdm_spckbd_init_service.h"
 #include "bx_ntvdm_wait_if_idle_service.h"
 #include "bx_ntvdm_dem_dta_service.h"
@@ -167,7 +166,7 @@ static int bx_ntvdm_adapter_runtime_v1_dispatch_dem_session_lifecycle(
         bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) &&
         bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) &&
         bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
-            &bx_ntvdm_adapter_runtime.boot_namespace_provider, &ingress,
+            &bx_ntvdm_adapter_runtime.boot_namespace_provider, 0, &ingress,
             &selection, &plane, event, cpu_before, result);
 }
 
@@ -639,8 +638,6 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
             result)) return 1;
     if (bx_ntvdm_config_done_service_v1_dispatch(event, cpu_before, window,
             result)) return 1;
-    if (bx_ntvdm_vdd_create_user_notify_service_v1_dispatch(event, cpu_before,
-            window, result)) return 1;
     {
         bx_ntvdm_multi_write_transaction_v1 transaction;
         if (bx_ntvdm_legacy_plane_gate_v1_command(window, 0x0fu) &&
@@ -717,9 +714,9 @@ int bx_ntvdm_adapter_runtime_v2_dispatch(
                 bx_ntvdm_adapter_runtime.bulk_payload, transaction.payload_bytes);
         }
     }
-    if (bx_ntvdm_adapter_runtime_v1_dispatch_original_unavailable_dem(event,
-            cpu_before, window, result)) return 1;
     if (bx_ntvdm_adapter_runtime_v1_dispatch_dem_session_lifecycle(event,
+            cpu_before, window, result)) return 1;
+    if (bx_ntvdm_adapter_runtime_v1_dispatch_original_unavailable_dem(event,
             cpu_before, window, result)) return 1;
     if (bx_ntvdm_adapter_runtime.has_boot_namespace_provider &&
         bx_ntvdm_legacy_plane_gate_v1_dem(window, 0x16u)) {

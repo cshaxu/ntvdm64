@@ -17,7 +17,6 @@
 #include "bx_ntvdm_dem_media_id_service_v1.h"
 #include "bx_ntvdm_dem_misc_plane_v1.h"
 #include "bx_ntvdm_dem_session_lifecycle_provider_v1.h"
-#include "bx_ntvdm_vdd_create_user_notify_service.h"
 #include "bx_ntvdm_dem_process_owner_v1.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 #include <string.h>
@@ -236,11 +235,11 @@ int bx_ntvdm_dem_package_session_v1_set_boot_drive(
 int bx_ntvdm_dem_package_session_v1_dispatch(bx_ntvdm_dem_package_session_v1 *s,const bx_ntvdm_bop_ingress_v1 *i,const bx_ntvdm_bop_provider_selection_v1 *p,const bx_ntvdm_exception_event_v1 *e,const bx_ntvdm_cpu_state_v1 *c,const bx_ntvdm_instruction_window_v1 *w,bx_ntvdm_cpu_result_v2 *r)
 { bx_ntvdm_dem_package_route_v1 route;bx_ntvdm_dem_plane_record_v1 plane;bx_ntvdm_exception_result_v1 mem;struct bx_ntvdm_mechanical_action_v1 a,next;bx_ntvdm_guest_gather_read_action_v1 gather;bx_ntvdm_multi_write_transaction_v1 tx;uint8_t payload[BX_NTVDM_MULTI_WRITE_MAX_PAYLOAD];uint32_t drive_view_write;
   if(!bx_ntvdm_dem_package_session_v1_valid(s)||!i||!p||!e||!c||!w||!r||!bx_ntvdm_dem_package_facade_v1_classify(i,p,&route))return 0;
-  bx_ntvdm_cpu_result_v2_pass_through(r);
-  if(bx_ntvdm_dem_package_facade_v1_dispatch(i,p,&route,e,c,r))return terminal_or_complete(i,p,&route,e,c,w,r);plane=route.plane;
-  if(bx_ntvdm_vdd_create_user_notify_service_v1_dispatch(e,c,w,r))return terminal_or_complete(i,p,&route,e,c,w,r);
+  bx_ntvdm_cpu_result_v2_pass_through(r);plane=route.plane;
+  if(bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&s->namespace_plane->provider,
+      s->has_whole_provider ? &s->whole_provider : 0,i,p,&plane,e,c,r))return terminal_or_complete(i,p,&route,e,c,w,r);
+  if(bx_ntvdm_dem_package_facade_v1_dispatch(i,p,&route,e,c,r))return terminal_or_complete(i,p,&route,e,c,w,r);
   if(bx_ntvdm_dem_misc_plane_v1_dispatch(i,p,e,c,w,&mem))return memory_result(&mem,r);
-  if(bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&s->namespace_plane->provider,i,p,&plane,e,c,r))return terminal_or_complete(i,p,&route,e,c,w,r);
   if(bx_ntvdm_dem_error_lock_plane_v1_dispatch(&s->error_lock,i,p,e,c,w,r))return terminal_or_complete(i,p,&route,e,c,w,r);
   if(bx_ntvdm_dem_drive_view_provider_v1_dispatch_observation(&s->drive_view,
       i,p,e,c,w,&tx,payload,&drive_view_write,r)){
