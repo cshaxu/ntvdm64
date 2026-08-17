@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1756 |
+| Documentation records | 1757 |
 | --- | --- |
-| Generated UTC | 2026-08-17T22:42:05Z |
+| Generated UTC | 2026-08-17T22:44:23Z |
 
 ## Entries
 
@@ -163,7 +163,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 3cffc11d31ca28dd9f7b2ef8d03839d7fc9fe7ac2bebb07be260223cd624f4a5 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | e29661e6efaa49200d7b93a333f9c740e95c636e9e712378b7b9cff24a5acc7b |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -951,6 +951,7 @@ content-divergent entries.
 | etc/research/t225-s28-native-segment-fault-diagnostic-source-abi-map-001.md | indexed supporting material | 5e133c73beb1434fdcde44be2db94836188e156250cfe96e33a907ce04a19726 |
 | etc/research/t225-s29-native-first-fault-source-layout-attribution-001.md | indexed supporting material | b5d05106753b1824f398a1b5aed74d0f14ab31b6a8bc2b382e742aeb3539677b |
 | etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 11b658c92de1e09bdaac0f77f2424ecffde4532350ae07308e971eeed90b02e7 |
+| etc/research/t225-s30-segment-access-tuple-source-abi-failure-map-001.md | indexed supporting material | f9fa458bdee641eb51409c1654a5e57294d9dadf5d30b1fd15ea02202474ea5b |
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
