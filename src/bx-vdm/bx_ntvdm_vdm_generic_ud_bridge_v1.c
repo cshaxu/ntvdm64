@@ -5,6 +5,7 @@
 #include "bx_ntvdm_normal_return_observation_v1.h"
 #include "bx_ntvdm_normal_terminal_sequence_observation_v1.h"
 #include "bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "bx_ntvdm_dem_open_observation_v1.h"
 
 static int bx_ntvdm_vdm_generic_ud_event_valid(
@@ -69,8 +70,10 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         /* Record the bounded C4 C4 fact before preserving the native
          * exception path. This observer changes neither route nor CPU state. */
         bx_ntvdm_bop_sequence_observation_v1_consider(event, &declined);
+        bx_ntvdm_generic_ud_sequence_observation_v1_consider(event, &declined);
     } else {
         bx_ntvdm_bop_sequence_observation_v1_consider(event, outcome);
+        bx_ntvdm_generic_ud_sequence_observation_v1_consider(event, outcome);
         bx_ntvdm_dem_open_observation_v1_consider(event, outcome, accepted);
         bx_ntvdm_terminal_observation_v1_consider(event, outcome);
         bx_ntvdm_normal_return_observation_v1_consider(event, outcome);

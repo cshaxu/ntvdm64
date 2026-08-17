@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S15.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S16.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S15 -- bounded generic-UD continuity observation.**
+**Active: M0 T225 S16 -- formal generic-UD bridge build closure.**
 
 ## Active Packet
 
@@ -14,23 +14,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S15, Ordinary Mode. |
-| Admission And Approval | S14 [source map](etc/research/t225-s14-primary-pre-bop-continuity-source-map-001.md) proves that a static NTIO `50:11` precedes the observed address-free `SLDT` diagnostic, so one selector-blind location witness is required before any owner repair. |
-| Objective | Expose a fixed-capacity, default-off adapter observation of every existing generic `#UD` event, then use bounded Direct/Readonly runs to identify the first actual CS:EIP/window without changing its disposition. |
-| Non-goals | No BOP/provider implementation, no selector/service routing change, no guest-memory read, no guest byte/input change, no CPU/mantle/Bochs change, no device enablement, no CCPU reintroduction, no higher budget, and no Overlay selection. |
-| Reference Baseline | T225 S11 budget, S12 BOP-only observer, S13 bounded zero-BOP result and S14 source map. |
-| Files And ABI Surface | bx-vdm generic-UD observation/bridge and CLI default-off rendering, focused fixture, governed evidence/Status and Ninja manifest only. bx-core/bx-mantle and provider contracts are read-only. |
+| Identifier Mode | M0 T225 S16, Ordinary Mode. |
+| Admission And Approval | S15 [result](etc/evidence/t225-s15-generic-ud-continuity-observation-result-001.md) proves the formal graph compiles out an already-registered selector-blind generic-UD bridge because its CPU5 projection omits the gate macro. |
+| Objective | Close only the formal Ninja CPU5 configuration projection so the existing `BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE` implementation is compiled in; then re-run the same bounded Direct/Readonly generic observation. |
+| Non-goals | No bx-core/Bochs source edit, no new external-code exception behavior, no BOP/provider change, no selector interpretation, no guest-memory access, no guest/profile change, no device/firmware/CCPU work, no budget above 100,000 and no Overlay selection. |
+| Reference Baseline | Existing registered BX-MANTLE-067 bridge, targeted bridge-enabled witnesses, S14 source map and S15 observer result. |
+| Files And ABI Surface | CPU5 configuration projection manifest, generated disposable config/build records, S15 observer evidence/Status and document inventory only. Existing bridge/core/mantle/adapter ABI is read-only. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md and design authorities. |
-| Verification | Focused fixture proves accepted and declined generic `#UD` records preserve the original bridge result; fresh Ninja/MSVC x64 `/MT` link; default-off CLI check; bounded Direct/Readonly run at no more than 100,000 ticks; governance and diff checks. |
-| Expected Markers | Fixed copied CS:EIP, execution mode and instruction window; default-off output absence; unchanged BOP observer/provider outcome and no core/mantle modification. |
-| Asset Needs | Existing generic UD event, S12 observer lifecycle pattern, S13 primary stage and S14 static map. |
-| Reporting Requirements | Record exact record bound/layout, accepted/declined preservation, Direct/Readonly first generic event or absence, relation to static `0x0b75`, and owner classification without a repair. |
-| Stop Conditions | Any need for guest-memory access, selector decoding, a CPU/mantle/Bochs patch, unbounded logging, a provider change, an event-state mutation, mode discrepancy, or a run beyond 100,000 ticks. Stop and re-admit. |
-| Exit Criteria | A reproducible, default-off selector-blind first-generic-UD witness (or bounded absence) in both modes, with source-backed classification of the pre-BOP boundary. |
-| Original Owner Request | “参照 opennt源代码来解读这些指令的大体目的，帮助辨明方向 看看是缺失了什么功能还是做错了什么功能。” |
-| Similar-Issue Sweep | Generic UD event capture, declined/accepted bridge behavior, observer lifecycle/reset, CLI output/argument contract, bounded execution, BOP observer non-interference and Direct/Readonly parity. |
+| Verification | Projection explicitly records the absent-source macro addition; fresh formal Ninja/MSVC x64 `/MT` build; focused S15 fixture; default-off check; bounded Direct/Readonly observations at <=100,000; governance and diff checks. |
+| Expected Markers | Generated `config.h` has bridge macro=1; generic observer receives copied event(s) if native #UD occurs; unchanged BOP/provider outcomes and no bx-core source diff. |
+| Asset Needs | Pinned Bochs config identity, CPU5 projection tool/manifest, S15 source/fixture and immutable S10 primary stage. |
+| Reporting Requirements | Record input/output config hashes, exact macro reason, full graph identity, Direct/Readonly output, first generic event or bounded absence, and follow-on owner classification. |
+| Stop Conditions | Need for a core source change, altered bridge ABI, selector/BOP logic, guest-memory access, a new device, inconsistency with BX-MANTLE-067, mode discrepancy, or an execution budget above 100,000. Stop and re-admit. |
+| Exit Criteria | The formal graph compiles the existing generic bridge gate, S15 fixture remains green, and equivalent Direct/Readonly observation establishes the first event or a stronger bounded absence. |
+| Original Owner Request | “bochs语义也不得塞入NTVDM，同理。” |
+| Similar-Issue Sweep | Pinned config projection, macro source of truth, formal versus targeted compile definitions, core/mantle bridge ABI, generic versus BOP observer lifecycle, Direct/Readonly parity. |
 
-> **T225 S14 closure:** [the primary pre-BOP continuity source map](etc/research/t225-s14-primary-pre-bop-continuity-source-map-001.md) establishes that the current source plan retains OpenNT's `0070:0000` NTIO entry and that the immutable image's `C4 C4 50 11` at physical `0x0b75` precedes its static `SLDT` occurrences. The address-free CPU diagnostics do not identify the execution path. S15 owns only a selector-blind generic-UD location witness; it admits neither a BOP nor a machine repair.
+> **T225 S15 closure:** [the generic-UD observation result](etc/evidence/t225-s15-generic-ud-continuity-observation-result-001.md) proves a default-off selector-blind adapter observer preserves both decline and accepted result paths. Its full primary runs expose a formal build defect: `BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE` is absent from the generated CPU5 config, so no core event reaches either observer despite native invalid-operation diagnostics. S16 owns only the existing gate's projection; no BOP or machine repair is admitted.
 > **T225 S10 closure:** the [bounded primary observation](etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md) and [run-control/observation map](etc/research/t225-s10-native-run-control-observation-map-001.md) establish identical early Direct/Readonly reset behavior but no public normal-result or continuity marker before the fixed one-million-tick run returns. Existing UD2 profile observations would alter immutable guest input, and fixture-only BOP observations are not CLI outputs. S10 closes as an evidence gate; S11 owns only the smallest generic CLI run-control seam.
 
 > **T225 S11 closure:** [the run-control result](etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md) proves the optional positive-decimal budget is copied through the existing CLI/engine/mantle contract. Direct and Readonly each return the normal internal budget terminal at 1000 ticks with exit 4; default one-million behavior, invalid-budget rejection and Overlay refusal are verified. No BOP, guest, adapter semantic or Bochs mechanic changed. The next package must separately admit post-run continuity observation.

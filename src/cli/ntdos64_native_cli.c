@@ -1,6 +1,7 @@
 #include "bx_ntvdm_engine_contract_v1.h"
 #include "bx_ntvdm_host_drive_policy.h"
 #include "bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
 #include "byob_target_selection.h"
@@ -73,6 +74,23 @@ static void print_bop_sequence(const struct bx_ntvdm_bop_sequence_observation_v1
             record->has_service, record->disposition);
     }
 }
+static void print_generic_ud_sequence(const struct bx_ntvdm_generic_ud_sequence_observation_v1 *sequence)
+{
+    uint32_t index, byte_index;
+    if (sequence == 0) return;
+    wprintf(L"ntdos64-native: ud-sequence count=%u overflow=%u\n",
+        sequence->record_count, sequence->overflowed);
+    for (index = 0u; index < sequence->record_count; ++index) {
+        const struct bx_ntvdm_generic_ud_sequence_observation_record_v1 *record =
+            &sequence->records[index];
+        wprintf(L"ntdos64-native: ud[%u] cs=%04x eip=%08x mode=%u disposition=%u window=",
+            index, record->cs, record->eip, record->execution_mode,
+            record->disposition);
+        for (byte_index = 0u; byte_index < record->window_bytes; ++byte_index)
+            wprintf(L"%02x", record->window[byte_index]);
+        wprintf(L"\n");
+    }
+}
 static int result_exit(const struct ntdos64_lifecycle_v1_audit *audit)
 {
     if (!audit || !ntdos64_lifecycle_v1_audit_valid(audit)) return 1;
@@ -92,10 +110,10 @@ int wmain(int argc, wchar_t **argv)
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     uint32_t include_mask = 0u, exclude_mask = 0u;
     int has_include = 0, has_exclude = 0, has_mutation_mode = 0, has_tick_budget = 0,
-        has_bop_observation = 0;
+        has_bop_observation = 0, has_generic_ud_observation = 0;
     uint32_t mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
     uint64_t instruction_tick_budget = UINT64_C(1000000);
-    int validate_only = 0, observe_bop_sequence = 0;
+    int validate_only = 0, observe_bop_sequence = 0, observe_generic_ud_sequence = 0;
     int index = 1;
     byob_profile_selection selection;
     byob_launch_plan_v2 launch;
@@ -126,6 +144,8 @@ int wmain(int argc, wchar_t **argv)
         else if (wcscmp(argv[index], L"--instruction-tick-budget") == 0 && index + 1 < argc &&
             !has_tick_budget && parse_instruction_tick_budget(argv[index + 1], &instruction_tick_budget))
             has_tick_budget = 1, index += 2;
+        else if (wcscmp(argv[index], L"--observe-ud-sequence") == 0 && !has_generic_ud_observation)
+            has_generic_ud_observation = 1, observe_generic_ud_sequence = 1, ++index;
         else if (wcscmp(argv[index], L"--observe-bop-sequence") == 0 && !has_bop_observation)
             has_bop_observation = 1, observe_bop_sequence = 1, ++index;
         else if (wcscmp(argv[index], L"--validate-only") == 0 && !validate_only)
@@ -157,21 +177,24 @@ int wmain(int argc, wchar_t **argv)
     request.instruction_tick_budget = lifecycle_policy.instruction_tick_budget;
     if (!bx_ntvdm_engine_request_v1_valid(&request)) return 3;
     if (validate_only) {
-        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu observe-bop-sequence=%u\n",
+        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu observe-bop-sequence=%u observe-ud-sequence=%u\n",
             request.admitted_drive_mask, request.excluded_drive_mask,
             request.mutation_mode, (unsigned long long)request.instruction_tick_budget,
-            observe_bop_sequence ? 1u : 0u);
+            observe_bop_sequence ? 1u : 0u, observe_generic_ud_sequence ? 1u : 0u);
         return 0;
     }
     if (observe_bop_sequence) bx_ntvdm_bop_sequence_observation_v1_enable(1u);
+    if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(1u);
     if (!ntdos64_console_cancellation_v1_begin(&cancellation_event)) {
         if (observe_bop_sequence) bx_ntvdm_bop_sequence_observation_v1_enable(0u);
+        if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(0u);
         return 1;
     }
     if (!ntdos64_engine_worker_v1_run(&request, cancellation_event, &result,
             &cancellation_accepted)) {
         ntdos64_console_cancellation_v1_end();
         if (observe_bop_sequence) bx_ntvdm_bop_sequence_observation_v1_enable(0u);
+        if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(0u);
         return 1;
     }
     ntdos64_console_cancellation_v1_end();
@@ -182,6 +205,14 @@ int wmain(int argc, wchar_t **argv)
         else
             wprintf(L"ntdos64-native: bop-sequence unavailable\n");
         bx_ntvdm_bop_sequence_observation_v1_enable(0u);
+    }
+    if (observe_generic_ud_sequence) {
+        struct bx_ntvdm_generic_ud_sequence_observation_v1 sequence;
+        if (bx_ntvdm_generic_ud_sequence_observation_v1_copy(&sequence))
+            print_generic_ud_sequence(&sequence);
+        else
+            wprintf(L"ntdos64-native: ud-sequence unavailable\n");
+        bx_ntvdm_generic_ud_sequence_observation_v1_enable(0u);
     }
     lifecycle_policy.cancellation_request = cancellation_accepted ?
         NTDOS64_LIFECYCLE_V1_CANCELLATION_REQUESTED :
@@ -194,6 +225,6 @@ int wmain(int argc, wchar_t **argv)
         (unsigned long long)request.instruction_tick_budget);
     return result_exit(&lifecycle_audit);
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
+    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
     return 2;
 }

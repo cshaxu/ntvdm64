@@ -178,6 +178,7 @@
         "src/bx-vdm/bx_ntvdm_bop_ingress_v1.c",
         "src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c",
         "src/bx-vdm/bx_ntvdm_bop_sequence_observation_v1.c",
+        "src/bx-vdm/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/bx-vdm/bx_ntvdm_bulk_result_transaction.c",
         "src/bx-vdm/bx_ntvdm_cmd_boot_file_service.c",
         "src/bx-vdm/bx_ntvdm_cmd_comspec_bootstrap_service.c",
@@ -361,6 +362,23 @@
     {
       "name": "t225-s12-bop-decline-observation-fixture",
       "source": "tests/bx-vdm/t225_s12_bop_decline_observation_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t225-s15-generic-ud-observation-fixture",
+      "source": "tests/bx-vdm/t225_s15_generic_ud_observation_fixture.c",
       "libraries": [
         "bx-vdm"
       ],
