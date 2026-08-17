@@ -22,10 +22,10 @@
 | Files And ABI Surface | Guest artifact/fixture records and existing bx-vdm composition/profile ABI. No new guest loader or Bochs semantic surface. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
 | Verification | Source/artifact/entry/BOP dependency ledger; Direct/Readonly fixture admission tests; one native run only after whole-fixture closure. |
-| Expected Markers | Original guest `$Exec` remains sole process owner; each required BOP already has a package owner/disposition; no Overlay/Virtual fallback. |
+| Expected Markers | Original guest `$Exec` remains sole process owner; each required BOP already has a package owner/disposition; no Overlay fallback; retired Virtual is never selected. |
 | Asset Needs | Existing local OpenNT/MS-DOS sources, artifact records, current composition and MSVC x64 /MT; no external import or host modification. |
 | Reporting Requirements | Separate source/artifact facts, BOP package dispositions, fixture gaps and rejected substitute loaders. |
-| Stop Conditions | Any substitute loader/PSP/MCB, unowned BOP leaf, ambient host capability, Virtual/Overlay fallback, or native run before fixture closure. |
+| Stop Conditions | Any substitute loader/PSP/MCB, unowned BOP leaf, ambient host capability, Overlay fallback, retired Virtual selection, or native run before fixture closure. |
 | Exit Criteria | A reviewed, reproducible one-shot fixture plan with every input and BOP owner disposition. This does not claim COM execution or parent return. |
 | Original Owner Request | "可以，那么请你加油做好default和readonly profile，确保overlay和virtual的接口和兼容性，开始全盘完成剩下的BOP！" |
 | Similar-Issue Sweep | NTIO/NTDOS/COMMAND artifacts, COM child, guest entry/return, DEM/COMMAND BOP owner packages and profile modes. |
@@ -39,7 +39,7 @@
 
 > **T225 S5 P0 admission:** [the native continuity ledger](etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md) converts the S4 handoff into one owner-scoped sequence. Direct/Readonly BOP capability stays stable; Overlay/Virtual receive neither fallback nor new behavior.
 
-> **T225 S6 P7 progress:** both CLI paths now select default Direct or explicit Readonly through one typed composition boundary; Overlay/Virtual are rejected, never substituted. The [admission record](etc/research/t225-s6-guest-dos-one-shot-fixture-admission-001.md) carries the fixed engine ABI and focused x64 `/MT` evidence. Exact source-built fixture installation remains the next gate.
+> **T225 S6 P8 policy amendment:** product profiles are Direct, Readonly and deferred Overlay. Current CLI/engine composition enables only Direct/Readonly; Overlay remains ABI-compatible but explicitly unselected, never substituted. Virtual is retired from the product contract: its code/evidence are retained without deletion, but it is never selected and receives no new behavior. The [admission record](etc/research/t225-s6-guest-dos-one-shot-fixture-admission-001.md) carries the fixed engine ABI and focused x64 `/MT` evidence. Exact source-built fixture installation remains the next gate.
 
 > **T225 S3 P2 closure:** the x64 `/MT` whole-provider fixture passes Direct and Readonly `50:12/00/42/16/02` compatibility. `50:42` now enters the one typed file owner, returns AX bytes/CF clear, and leaves SFT position to guest DOS. S3 closes file I/O only, not EXEC or parent return.
 

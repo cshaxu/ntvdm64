@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1672 |
 | --- | --- |
-| Generated UTC | 2026-08-17T03:20:38Z |
+| Generated UTC | 2026-08-17T03:49:16Z |
 
 ## Entries
 
@@ -886,7 +886,7 @@ content-divergent entries.
 | etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
-| etc/research/t225-s6-guest-dos-one-shot-fixture-admission-001.md | indexed supporting material | 966aa19e4f383f9b2609b7fb89c12e4654e100f897d7b434cb72d99cde174f40 |
+| etc/research/t225-s6-guest-dos-one-shot-fixture-admission-001.md | indexed supporting material | 31c200eb69eaa65540731cbc80655a66a2d280600b87fa585a2cf936c3e24c98 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | 55430d57246660e10fc32c95b843f83d84939f5b50f4a55240a08e41ca9bd6fb |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |
@@ -1658,7 +1658,7 @@ content-divergent entries.
 | research/softpc-source-matrix/NT4-V86-PRODUCT-ORACLE-AUDIT.md | retained pre-governance evidence | 0cc622520f5e900d78a3f6ff1f425c4a3cfda670e29a66f89d221ccdbcb4d893 |
 | RESET-TRACE-STATUS.md | retained pre-governance evidence | dd0ce777cf9399cf4438ddf618a720b33e4ca2d5e21df66b16a8aeeb9eae55bb |
 | ROI-DRIVEN-EXECUTION-ROADMAP.md | retained pre-governance evidence | 89fe2b2d62f7f3e46bd183e7cb7ee0a637ecfe68d41450cfe0383ae3bfbfa660 |
-| rules/ARCHITECTURE.md | current rule authority | 19fd7a36d4d9888c784a1ff3e7524fb6d7c38d362a706244d391e27ae8066a3b |
+| rules/ARCHITECTURE.md | current rule authority | 7c95f63aa5e096f9ad42f716f418059c2a2b7ffe44c2db4123f914f495719c0c |
 | rules/CODING.md | current rule authority | 209b48cdc01a7ace16756016e5ef2cf5a6d5ab184235ac11492dbbb47a996d7f |
 | rules/DOCUMENT.md | current rule authority | 9f55864347f265afe78af803a67df10bfa20fb273fca6594803c8e64c4a4cbda |
 | rules/EXECUTION.md | current rule authority | b6d396de07a928f73fc94fc8535617a2ecd12c9f11b2d73dcefe9191d6a4e388 |
@@ -1686,9 +1686,9 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 873b35f7625c4e151928a68ae6ee18844e9615cb29d173c1ecb506681d35b78a |
+| STATUS.md | principal control document | 5e4775192e60e558f395bffea606327a4265a21b3a99f35a31d31d0d018dfb44 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
-| TODO.md | principal control document | 45b2d93104e42e2e9fd0f3a2dcee194c7f269c820a0e3cc64d59372a9c7fe984 |
+| TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
 | WHPX-BACKEND-RESEARCH.md | retained pre-governance evidence | 1c914aaeb4f42b4f04a839c77baec69312b791f75c595ee583da77f3c63e54f8 |
 | WIN32-HOST-API-BOUNDARY.md | retained pre-governance evidence | 37a3c277001248596b2819f105fe5d422f37de32cfd0b5d83730e66138b716df |

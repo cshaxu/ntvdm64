@@ -20,7 +20,7 @@ and guest `$Exec` code perform all process work.
 - Map each required host BOP to its already-existing owner package/disposition
   in the T199/T221 global ledgers; no individual trace hit creates a service.
 - Define one Direct and one Readonly fixture configuration using the shared
-  profile ABI. Overlay and Virtual stay interface-compatible but deferred.
+  profile ABI. Overlay stays interface-compatible but deferred; Virtual is retained only as retired implementation and is not a product profile.
 - Implement only missing fixture/staging composition after the map proves its
   owner and lifecycle. No guest process semantics may cross into bx-vdm.
 
@@ -95,7 +95,7 @@ The current runtime closes the prior detached-composition gap:
 For this fixture, the Direct runtime selects actual host roots through the
 CLI drive policy. Readonly uses its explicit namespace/provider policy. The
 composition must reject any absent profile mode rather than silently choosing
-Direct; Overlay and Virtual have no S6 runtime selection.
+Direct; deferred Overlay and retired Virtual have no S6 runtime selection.
 
 The remaining S6 implementation question is therefore narrow and testable:
 construct a profile whose declared COMMAND and SHARE inputs use the pinned
@@ -119,7 +119,7 @@ here and may be discarded under the scratch-build rule.
 
 The next S6 implementation item is a dedicated installation fixture that
 validates the exact NTIO/NTDOS/COMMAND/SHARE profile under Direct and Readonly
-mode, including rejection of any unselected Overlay/Virtual route. Its native
+mode, including rejection of the deferred Overlay route and retired Virtual route. Its native
 execution remains separately gated.
 
 ## P4 Legacy Recipe Replacement Decision
@@ -138,23 +138,24 @@ file.
 
 ## P5 Direct/Readonly Runtime-Selection Admission
 
-The shared mutation ABI already represents all four modes, but current
-`bx_ntvdm_composition_runtime_v1` initializes it as Direct unconditionally.
-S6 admits a composition-only correction: read one explicit runtime mode,
-default it to `direct`, accept only `direct` or `readonly`, and reject invalid,
-`overlay`, and `virtual` values before profile/image/host capability binding.
+The retained shared mutation ABI still represents four historical values, while
+the product profile contract is Direct, Readonly and deferred Overlay. S6
+admits a composition-only correction: read one explicit runtime mode, default
+it to `direct`, accept only `direct` or `readonly`, and reject invalid,
+deferred `overlay`, and retired `virtual` values before profile/image/host
+capability binding.
 
 The selected immutable mode must initialize the existing shared profile before
 DEM and COMMAND owner registration. No endpoint receives a caller-selected
-mode, and no mode changes after binding. This is not Overlay/Virtual feature
-implementation; their interface values remain reserved and explicitly
-unavailable at the present runtime boundary.
-
+mode, and no mode changes after binding. This is not an Overlay implementation:
+its interface value remains reserved and explicitly unavailable at the present
+runtime boundary. Virtual is retained only for source compatibility and is
+retired from product selection.
 ## P6 Direct/Readonly Selection Source Closure
 
 `bx_ntvdm_composition_runtime_v1` now reads `NTDOS64_MUTATION_MODE` at
 installation time. Missing or `direct` selects Direct; `readonly` selects
-Readonly. Invalid, `overlay`, and `virtual` strings fail before image, host
+Readonly. Invalid, deferred `overlay`, and retired `virtual` strings fail before image, host
 namespace, DEM or COMMAND binding. At that point the copied-input installation ABI remained Direct-only; P7 now admits one versioned engine request field so the native CLI can select the same two modes without a string/environment side channel.
 
 The changed translation unit compiled successfully with the generated CPU5/P
@@ -167,8 +168,8 @@ required runtime test.
 
 Both CLI paths now have one explicit `--mutation-mode direct|readonly` option.
 When omitted, they select Direct. They reject every other spelling before
-process launch or engine execution; Overlay and Virtual therefore cannot fall
-through to Direct merely because their shared ABI values already exist.
+process launch or engine execution; deferred Overlay and retired Virtual cannot
+fall through to Direct merely because retained ABI values already exist.
 
 - `ntdos64-run` creates one sorted child-only environment and writes
   `NTDOS64_MUTATION_MODE` beside its existing immutable BYOB inputs. PE
@@ -196,3 +197,24 @@ objects and fails link before execution. It is retained only as a stale recipe
 observation, not as a failure of the changed mode contract. P8 must provide
 the current exact-image Direct/Readonly installation fixture before a native
 guest integration run is admissible.
+## P8 Product Profile Policy Amendment
+
+The product profile contract is now **Direct, Readonly and Overlay**. Direct
+and Readonly are the only enabled runtime selections in S6. Overlay remains a
+declared, ABI-compatible extension point: its existing source and evidence are
+retained, but no CLI/engine route may select it or silently substitute Direct.
+
+Virtual is retired from the product profile contract. Its existing source, ABI
+constant and historical evidence remain temporarily retained for compatibility and
+future removal planning; S6 must not add Virtual behavior. If retained Virtual
+code demonstrably blocks Direct, Readonly or Overlay progress, a separately
+evidenced minimal removal is permitted. Every current product boundary rejects
+Virtual explicitly. This amendment replaces
+prior S6 references that treated Overlay and Virtual as equivalent deferred modes.
+
+The new `tests/bx-mantle/t225_s6_four_image_profile_fixture.c` compiles under
+the existing CPU5/P MSVC x64 `/W4 /WX /MT` configuration in
+`build/t225-s6/four-image-profile-fixture-syntax-r1`. It proves only that the
+fixture uses the retained profile ABI correctly: Direct and Readonly are the
+two required admissions, while deferred Overlay and retired Virtual reject.
+It is not yet a linked composition or guest-execution result.
