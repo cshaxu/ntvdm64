@@ -2,33 +2,37 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S10.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S11.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S10 -- primary-image native bootstrap-continuity fixture.**
+**Active: M0 T225 S11 -- bounded native CLI run-control closure.**
 
 ## Active Packet
 
 > **T scope:** T225 is the Queue-selected Guest DOS multi-program execution
 > closure: a declared sequence of guest DOS programs must use guest DOS
-> `EXEC`/PSP/return semantics inside one VDM, never nested host NTVDM processes.
+> EXEC/PSP/return semantics inside one VDM, never nested host NTVDM processes.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S10, Ordinary Mode. |
-| Admission And Approval | S9/P1 source/ABI map completes its gate and selects this exact-image native continuity fixture. T225 remains the owner-selected multi-program package. |
-| Objective | Build and run one bounded, source-built primary-image fixture that observes the existing native reset/NTIO entry, `50:11 demLoadDos` mechanical commit/resume, and the first NTDOS-owned continuation fact in separate Direct and Readonly profiles. |
-| Non-goals | No BOP/provider implementation, DOS/COMMAND loader, PSP/MCB/EXEC behavior, host child process, Bochs feature/device change, host-system mutation, Overlay selection, Virtual selection, or trace-led repair. |
-| Reference Baseline | T225 S2/S3 package closures, S5 native continuity baseline, S6/S7 composition graph, S8 primary images, and S9/P1 bootstrap map. |
-| Files And ABI Surface | New fixture/probe and evidence only, using existing fixed-width machine-stage, mechanical-action, CPU-result, BOP ingress and profile ABI. No production semantic ABI change. |
+| Identifier Mode | M0 T225 S11, Ordinary Mode. |
+| Admission And Approval | The owner-approved CLI target and S10/P3 run-control map select this generic control package. S10 closed because it proved the existing fixed CLI surface cannot produce its requested normal observation without a separately admitted change. |
+| Objective | Expose the already-defined engine instruction-tick budget as one validated optional native CLI argument; preserve the default one-million tick behavior and obtain ordinary Direct/Readonly engine terminal results without an external process kill. |
+| Non-goals | No BOP/DEM/COMMAND/DOS provider, adapter route, BOP trace export, guest-byte change, arbitrary guest-memory observation, Bochs CPU/device/firmware change, host-system mutation, Overlay selection, or Virtual selection. |
+| Reference Baseline | T225 S7 formal Ninja graph, S8 primary source-built images, S9 bootstrap map, and S10 P1--P3 bounded observation/run-control records. |
+| Files And ABI Surface | src/cli/ntdos64_native_cli.c, focused CLI/run-control test or probe, Ninja manifest membership only if a new tracked test requires it, governed evidence and Status. Existing engine request/mantle ABI remains unchanged. |
 | Applicable Rules | rules/EXECUTION.md, rules/ARCHITECTURE.md, rules/CODING.md, rules/DOCUMENT.md, source-policy.md and design authorities. |
-| Verification | Fresh Ninja/MSVC x64 `/MT` link; primary manifest identities; Direct and Readonly bounded runs; explicit Overlay/Virtual refusal; selector-blind observation fields; governed evidence and diff checks. |
-| Expected Markers | Initial NTIO entry fact, one exact `50:11` action/continuation fact if reached, and the earliest subsequent owner-scoped terminal/NTDOS entry fact for each mode. |
-| Asset Needs | S8 primary build stages, current Ninja manifest/graph, primary profile stager, current native machine-stage/CLI sources and existing focused test infrastructure. |
-| Reporting Requirements | Record image identity, build root, mode, budget, observed fixed-width facts, absence/presence of `50:11`, termination reason, interpretation and next owner boundary. |
-| Stop Conditions | Any needed new BOP semantic, Bochs feature/device, synthetic guest transfer, Direct fallback in Readonly, unbounded guest inspection, or inability to identify the first divergent owner. Stop and revise rather than patch. |
-| Exit Criteria | A reproducible Direct/Readonly primary-image observation, or a source/build admission record precisely proving why the current graph cannot perform it without an out-of-scope change. |
-| Original Owner Request | “以最小 bochs 作为 softpc 的替代品，实现一个基于 cli 的 ntvdm……要有全局观，避免添油战术。” |
-| Similar-Issue Sweep | Initial-state action, startup plan, `50:11` dispatch/commit/resume, exact-image staging, profile selection, native stop ownership, and all existing observation mechanisms. |
+| Verification | Fresh Ninja/MSVC x64 /MT link; default compatibility; malformed/zero/overflow budget rejection; Direct and Readonly finite-budget terminal output; Overlay refusal; focused source/boundary checks, governance and diff checks. |
+| Expected Markers | Parsed requested budget equals the copied engine request; valid finite runs print a normal engine/lifecycle terminal rather than require a host watchdog; Direct/Readonly results remain separately labeled. |
+| Asset Needs | Current S10 primary stage/profile, formal Ninja manifest/graph, native CLI/engine/machine-stage sources, and existing lifecycle/engine tests. |
+| Reporting Requirements | Record parser grammar/range, default behavior, copied ABI path, source recovery disposition, mode/result/exit code, build identity, and whether any BOP or guest observation was intentionally absent. |
+| Stop Conditions | Any need to change engine/mantle ABI, expose CPU/guest state, alter source-built images, add BOP interpretation, modify bx-core, enable a device, silently select Overlay/Virtual, or substitute an external watchdog for the internal result. Stop and revise rather than patch. |
+| Exit Criteria | Fresh source build accepts an explicit finite budget and returns the normal budget terminal in Direct and Readonly; default remains one million; invalid inputs reject; no prohibited semantic/boundary change occurs. |
+| Original Owner Request | “实施当前规划好的，以最小 bochs 作为 softpc 的替代品，实现一个基于 cli 的 ntvdm……要有全局观，避免添油战术。” |
+| Similar-Issue Sweep | CLI argument parsing, copied engine request validation, lifecycle classification, worker cancellation, machine-stage budget status, Direct/Readonly selection, Overlay/Virtual refusal and fixture-only observation routes. |
+
+> **T225 S10 closure:** the [bounded primary observation](etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md) and [run-control/observation map](etc/research/t225-s10-native-run-control-observation-map-001.md) establish identical early Direct/Readonly reset behavior but no public normal-result or continuity marker before the fixed one-million-tick run returns. Existing UD2 profile observations would alter immutable guest input, and fixture-only BOP observations are not CLI outputs. S10 closes as an evidence gate; S11 owns only the smallest generic CLI run-control seam.
+
+> **T225 S11 closure:** [the run-control result](etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md) proves the optional positive-decimal budget is copied through the existing CLI/engine/mantle contract. Direct and Readonly each return the normal internal budget terminal at 1000 ticks with exit 4; default one-million behavior, invalid-budget rejection and Overlay refusal are verified. No BOP, guest, adapter semantic or Bochs mechanic changed. The next package must separately admit post-run continuity observation.
 > **T225 S9 closure:** the [bootstrap map](etc/research/t225-s9-source-built-guest-bootstrap-to-exec-admission-map-001.md) completes S9's source/ABI fixture gate: it identifies continuous native execution, rather than a missing BOP or image, as the next prerequisite. S10 is the separately admitted observation package; no execution result is implied by S9.
 
 > **T225 S10 P1 input/build record:** the source-built primary staging contract and the fresh Ninja x64 `/MT` native link closure are recorded in [the S10 observation result](etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md). The `SHARE.EXE` to `TARGET.EXE` profile alias is byte-identical and exists only for current CLI admission; it is not a new artifact identity.

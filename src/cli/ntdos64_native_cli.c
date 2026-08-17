@@ -39,6 +39,25 @@ static int parse_mutation_mode(const wchar_t *text, uint32_t *out_mode)
     return 0;
 }
 
+/* The engine/mantle contract already owns the finite tick watchdog. This
+ * parser only selects its existing copied value; it has no guest, BOP or
+ * machine-state meaning. */
+static int parse_instruction_tick_budget(const wchar_t *text, uint64_t *out_budget)
+{
+    uint64_t value = 0u;
+    uint32_t index;
+    if (text == 0 || out_budget == 0 || text[0] == L'\0') return 0;
+    for (index = 0u; text[index] != L'\0'; ++index) {
+        uint32_t digit;
+        if (text[index] < L'0' || text[index] > L'9') return 0;
+        digit = (uint32_t)(text[index] - L'0');
+        if (value > (UINT64_MAX - digit) / UINT64_C(10)) return 0;
+        value = value * UINT64_C(10) + digit;
+    }
+    if (value == 0u) return 0;
+    *out_budget = value;
+    return 1;
+}
 static int result_exit(const struct ntdos64_lifecycle_v1_audit *audit)
 {
     if (!audit || !ntdos64_lifecycle_v1_audit_valid(audit)) return 1;
@@ -57,8 +76,9 @@ int wmain(int argc, wchar_t **argv)
     const wchar_t *profile = 0, *root = 0, *target;
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     uint32_t include_mask = 0u, exclude_mask = 0u;
-    int has_include = 0, has_exclude = 0, has_mutation_mode = 0;
+    int has_include = 0, has_exclude = 0, has_mutation_mode = 0, has_tick_budget = 0;
     uint32_t mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
+    uint64_t instruction_tick_budget = UINT64_C(1000000);
     int validate_only = 0;
     int index = 1;
     byob_profile_selection selection;
@@ -87,7 +107,9 @@ int wmain(int argc, wchar_t **argv)
         else if (wcscmp(argv[index], L"--mutation-mode") == 0 && index + 1 < argc &&
             !has_mutation_mode && parse_mutation_mode(argv[index + 1], &mutation_mode))
             has_mutation_mode = 1, index += 2;
-        else if (wcscmp(argv[index], L"--validate-only") == 0 && !validate_only)
+        else if (wcscmp(argv[index], L"--instruction-tick-budget") == 0 && index + 1 < argc &&
+            !has_tick_budget && parse_instruction_tick_budget(argv[index + 1], &instruction_tick_budget))
+            has_tick_budget = 1, index += 2;        else if (wcscmp(argv[index], L"--validate-only") == 0 && !validate_only)
             validate_only = 1, ++index;
         else goto usage;
     }
@@ -101,7 +123,7 @@ int wmain(int argc, wchar_t **argv)
         fwprintf(stderr, L"ntdos64-native: BYOB admission failed\n"); return 3;
     }
     ntdos64_lifecycle_v1_policy_clear(&lifecycle_policy);
-    lifecycle_policy.instruction_tick_budget = UINT64_C(1000000);
+    lifecycle_policy.instruction_tick_budget = instruction_tick_budget;
     if (!ntdos64_lifecycle_v1_policy_valid(&lifecycle_policy)) return 3;
     bx_ntvdm_engine_request_v1_clear(&request);
     if (!copied_text(request.profile_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
@@ -116,9 +138,9 @@ int wmain(int argc, wchar_t **argv)
     request.instruction_tick_budget = lifecycle_policy.instruction_tick_budget;
     if (!bx_ntvdm_engine_request_v1_valid(&request)) return 3;
     if (validate_only) {
-        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u\n",
+        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu\n",
             request.admitted_drive_mask, request.excluded_drive_mask,
-            request.mutation_mode);
+            request.mutation_mode, (unsigned long long)request.instruction_tick_budget);
         return 0;
     }
     if (!ntdos64_console_cancellation_v1_begin(&cancellation_event)) return 1;
@@ -133,11 +155,12 @@ int wmain(int argc, wchar_t **argv)
         NTDOS64_LIFECYCLE_V1_CANCELLATION_NONE;
     if (!ntdos64_lifecycle_v1_classify(&lifecycle_policy, &result,
             &lifecycle_audit) || !ntdos64_lifecycle_v1_audit_valid(&lifecycle_audit)) return 1;
-    wprintf(L"ntdos64-native: terminal=%u detail=%u lifecycle=%u presentation=%u cancellation=%u\n",
+    wprintf(L"ntdos64-native: terminal=%u detail=%u lifecycle=%u presentation=%u cancellation=%u budget=%llu\n",
         result.terminal_kind, result.detail_code, lifecycle_audit.lifecycle_terminal,
-        lifecycle_audit.presentation, lifecycle_audit.cancellation_request);
+        lifecycle_audit.presentation, lifecycle_audit.cancellation_request,
+        (unsigned long long)request.instruction_tick_budget);
     return result_exit(&lifecycle_audit);
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
+    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
     return 2;
 }
