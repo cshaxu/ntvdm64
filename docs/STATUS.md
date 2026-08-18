@@ -28,6 +28,7 @@
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
 | Similar-Issue Sweep | Repeated `50:36`, entry-versus-target attribution, `50:3C` ordering, `54:0B` ordering/reentry, outcome validation, default-off cleanup, capacity/overflow, Direct/Readonly parity, and no guest-memory inspection. |
 
+> **T225 S48 result:** [the result](etc/evidence/t225-s48-source-built-guest-exec-lifecycle-ledger-result-001.md) and [closure record](history/m0-t225-s48-closure-20260817.md) prove the default-off ledger, whole formal build, and bounded paired observation; they do not claim child execution or select a repair.
 > **T225 S47 closure:** [the closure record](history/m0-t225-s47-closure-20260817.md) maps the whole source/current route, corrects first-entry attribution, and admits only a neutral lifecycle ledger.
 > **T225 S46 closure:** [the closure record](history/m0-t225-s46-closure-20260817.md) creates and validates the source-built fixture/observer, proves only the paired `50:36` reach, and transfers a whole post-entry owner reconciliation.
 > **T225 S45 closure:** [the closure record](history/m0-t225-s45-closure-20260817.md) selects the immutable source-built SHARE child and rejects top-level QUIT; it claims no implementation or native result.

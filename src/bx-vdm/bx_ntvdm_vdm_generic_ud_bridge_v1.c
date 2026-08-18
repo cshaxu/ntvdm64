@@ -7,6 +7,7 @@
 #include "bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "bx_ntvdm_guest_exec_lifecycle_observation_v1.h"
+#include "bx_ntvdm_guest_exec_lifecycle_ledger_v1.h"
 #include "bx_ntvdm_dem_open_observation_v1.h"
 
 static int bx_ntvdm_vdm_generic_ud_event_valid(
@@ -80,6 +81,7 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         bx_ntvdm_normal_return_observation_v1_consider(event, outcome);
         bx_ntvdm_normal_terminal_sequence_observation_v1_consider(event, outcome);
         bx_ntvdm_guest_exec_lifecycle_observation_v1_consider(event, outcome);
+        bx_ntvdm_guest_exec_lifecycle_ledger_v1_consider(event, outcome);
     }
     return accepted;
 }
