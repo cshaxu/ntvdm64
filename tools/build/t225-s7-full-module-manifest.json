@@ -470,6 +470,23 @@
       ]
     },
     {
+      "name": "t225-s55-command-image-materialization-fixture",
+      "source": "tests/bx-vdm/t225_s55_command_image_materialization_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
       "name": "t225-s19-dem-package-lifecycle-fixture",
       "source": "tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c",
       "libraries": [

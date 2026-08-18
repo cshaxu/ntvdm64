@@ -31,6 +31,8 @@
 > **T225 S55 paired integration:** [the result](etc/evidence/t225-s55-full-package-paired-integration-result-001.md) records a fresh full-graph Direct/Readonly run with byte-identical budget-terminal output. It neither proves guest child reach nor selects a leaf repair.
 
 > **T225 S55 bootstrap reconciliation:** [the map](etc/research/t225-s55-bootstrap-provider-reconciliation-001.md) closes the original DosInit/COMMAND-configuration provider prefix: it finds no unowned bootstrap BOP or configuration-materialization gap and transfers only the whole guest $Exec/child/return lifecycle comparison.
+> **T225 S55 image materialization:** [the formal result](etc/evidence/t225-s55-command-image-materialization-result-001.md) proves the current declared COMMAND.COM open/read/checked-RAM-write/close route preserves a 50,384-byte image in Direct and Readonly. It excludes that provider path, not native guest execution, as the cause of the static mismatch.
+
 
 > **T225 S53 closure:** [the closure record](history/m0-t225-s53-closure-20260817.md) records the identical Direct/Readonly `BOUND` diagnostic and its non-terminal limitation. It transfers no trace-selected repair.
 > **T225 S51 closure:** [the closure record](history/m0-t225-s51-closure-20260817.md) records the unchanged paired boundary and admits only source/current limit reconciliation; it selects no repair.
