@@ -34,6 +34,8 @@
 > **T225 S55 image materialization:** [the formal result](etc/evidence/t225-s55-command-image-materialization-result-001.md) proves the current declared COMMAND.COM open/read/checked-RAM-write/close route preserves a 50,384-byte image in Direct and Readonly. It excludes that provider path, not native guest execution, as the cause of the static mismatch.
 > **T225 S55 COMMAND segment correlation:** [the static map](etc/research/t225-s55-command-segment-static-offset-correlation-001.md) validates the ordinary COM offset mapping at four same-run BOP sites; under that mapping, the copied first-fault EIP names help text, not a source instruction. It admits no BOP, CPU or guest repair.
 
+> **T225 S55 COMMAND/EXEC stage ledger:** [the source/current-route ledger](etc/research/t225-s55-command-init-exec-stage-ledger-001.md) reconciles initial COM loading, COMMAND INIT/transient ownership, the recognized machine interruption and the unobserved child-return suffix. It finds no package-owned host or BOP repair and preserves the bounded native terminal as an unclassified guest/core continuity question.
+
 
 
 > **T225 S53 closure:** [the closure record](history/m0-t225-s53-closure-20260817.md) records the identical Direct/Readonly `BOUND` diagnostic and its non-terminal limitation. It transfers no trace-selected repair.
