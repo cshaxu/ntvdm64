@@ -100,3 +100,33 @@ whether to admit a separate, whole SoftPC CPU compatibility-profile package,
 with complete real/V86 operand, stack and control-transfer semantics and
 regression, or to retain native Bochs segment semantics and accept that this
 candidate cannot close T225. No address-specific workaround is permitted.
+## Implementation decision
+
+Under the owner's standing authority for individually registered, source-proven
+Bochs exceptions, this project adopts the complete compatibility-profile route.
+The profile is default-off and is assembled by bx-mantle before CPU execution;
+it is neither a CLI mutation mode nor an adapter/BOP/OpenNT policy. Direct,
+Readonly and future Overlay use the same CPU setting for a declared minimal
+guest-machine profile.
+
+The implementation is partitioned by native CPU ownership:
+
+| Group | Bochs owner | Required profile result |
+| --- | --- | --- |
+| Scalar virtual data access | access32.cc and access.cc | In real/V86 only, suppress only the historical segment-span limit rejection while retaining descriptor-present/type, paging, alignment and physical-memory checks. |
+| String and RMW access | access32.cc callers, string.cc and io.cc | Use the same scalar access rule; no separate string/DOS behavior. |
+| Stack access | stack16.cc and access32 stack helpers | Use the same real/V86 access rule for ordinary stack words/dwords; retain stack pointer width and all protected-mode checks. |
+| Instruction fetch | cpu.cc, icache.cc and access checks | Reconcile only the source-defined real/V86 span behavior with already retained 16-bit IP wrapping; no command-address or opcode branch. |
+| Far control and interrupt return | call/ret/jmp/iret/exception transfer checks | Audit and apply the same mode rule only where Bochs independently raises an equivalent segment-limit failure; no relaxed privilege, descriptor, task-switch or protected-mode rule. |
+
+The profile must expose one mantle-private lifecycle setter/query and a
+selector-blind core predicate. It will be inactive by default, reset to
+inactive during machine teardown, and be enabled only by the declared
+minimal-machine composition before the guest starts. It names no guest,
+service, BOP, host path or mutation mode.
+
+This is a whole CPU compatibility component within T225, not an alternate
+emulator and not a reimplementation of SoftPC. S56 P2 may now implement the
+core/mantle gate and the scalar-access family first; subsequent P parts must
+complete stack/fetch/control-transfer groups before any claim that the profile
+is complete.

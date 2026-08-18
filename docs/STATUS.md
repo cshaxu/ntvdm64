@@ -13,9 +13,9 @@
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T225 S56, Ordinary Mode. |
-| Admission And Approval | S55 closes its source/current-route ledger with one source-proven mechanical candidate. The owner has standing authorization for strict, registered Bochs mechanical exceptions; S56 admits only the classification and pre-implementation verification of that candidate. |
-| Objective | Establish the complete SoftPC-versus-Bochs real-mode/V86 segment-limit compatibility boundary and prove a default-off, selector-blind implementation design before any CPU source patch. |
-| Non-goals | No BOP/provider patch; no adapter CPU emulation; no COMMAND/DOS/PSP/EXEC repair; no guest-address special case; no device/firmware expansion; no native trace until the classified fixture closes. |
+| Admission And Approval | S55 closes its source/current-route ledger with one source-proven mechanical candidate. Under the owner standing authorization for strict, registered Bochs mechanical exceptions, S56 admits the complete default-off SoftPC real/V86 limit-compatibility profile; no narrow address/path patch is permitted. |
+| Objective | Implement and verify the complete default-off SoftPC real/V86 segment-limit compatibility profile through bx-core/bx-mantle, retaining native protected-mode behavior and no guest-service semantics. |
+| Non-goals | No BOP/provider patch; no adapter CPU emulation; no COMMAND/DOS/PSP/EXEC repair; no guest-address special case; no device/firmware expansion; no protected-mode relaxation or native trace until each classified group closes. |
 | Reference Baseline | T225 S30 exact DS:FFFF word-read tuple; S55 startup/COMMAND stage ledger; OpenNT CCPU c_addr.c:limit_check; current Bochs access32.cc; current CPU5/P-MMX chaining configuration. |
 | Files And ABI Surface | src/bx-core/cpu/access32.cc only if later admitted; the existing exception register; a new private fixture and formal manifest membership only after the full source map. No cross-layer ABI. |
 | Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, deny-by-default Bochs admission, and intrusion-register rules. |
@@ -24,11 +24,11 @@
 | Asset Needs | Retained OpenNT SoftPC CCPU source, adopted bx-core source, CPU5/P-MMX MSVC x64 /MT Ninja graph and existing immutable guest inputs. |
 | Reporting Requirements | Distinguish historical CCPU semantics from Bochs default semantics; record every classified access family, exact exception behavior, and whether the candidate remains bounded. |
 | Stop Conditions | The candidate needs protected-mode changes, selector/address/service vocabulary, adapter/callback/mapping behavior, a device, or any semantics not expressly present in the CCPU source. |
-| Exit Criteria | A complete source/ABI/failure map and registered exception row are reviewed; implementation is either narrowly admitted with full fixture requirements or rejected with no code change. |
+| Exit Criteria | Every classified scalar, string/RMW, stack, fetch and control-transfer group has source/fixture evidence; the default-off core/mantle gate has full formal-graph and Direct/Readonly native evidence; no protected-mode or semantic leakage remains. |
 | Original Owner Request | Implement the CLI NTVDM through minimal Bochs, preserve OpenNT ownership, support Direct and Readonly, retain Overlay compatibility, and avoid piecemeal trace-driven recovery. |
 | Similar-Issue Sweep | Real/V86/protected modes; read/write; byte/word/dword; expand-up/down; aligned/unaligned crossings; source-defined fault/continuation behavior. |
 
-> **T225 S56 SoftPC compatibility map:** [the source/ABI/failure map](etc/research/t225-s56-softpc-realmode-segment-limit-source-abi-failure-map-001.md) proves the observed real-mode DS:FFFF word rejection differs from the historical CCPU default, but its whole-family sweep spans operand, stack and control-transfer behavior. S56 rejects an address/path patch; BX-CORE-086 remains unimplemented pending owner choice on a separate complete CPU compatibility profile.
+> **T225 S56 SoftPC compatibility map:** [the source/ABI/failure map](etc/research/t225-s56-softpc-realmode-segment-limit-source-abi-failure-map-001.md) proves the observed real-mode DS:FFFF word rejection differs from the historical CCPU default and defines the admitted complete default-off bx-core/bx-mantle compatibility profile. It rejects any address/path patch and preserves protected-mode Bochs semantics.
 
 > **T225 S55 closure:** [the closure record](history/m0-t225-s55-closure-20260817.md) completes the startup/COMMAND/EXEC source-current route and transfers only the registered SoftPC real-mode segment-limit compatibility boundary. It admits no BOP, DOS, COMMAND, adapter or guest-address repair.
 > **T225 S55 paired integration:** [the result](etc/evidence/t225-s55-full-package-paired-integration-result-001.md) records a fresh full-graph Direct/Readonly run with byte-identical budget-terminal output. It neither proves guest child reach nor selects a leaf repair.
