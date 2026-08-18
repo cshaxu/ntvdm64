@@ -13,7 +13,7 @@
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T225 S47, Ordinary Mode. |
-| Admission And Approval | S46 proves a fresh source-built four-image fixture reaches the existing `50:36` no-VDD resume in equal bounded Direct/Readonly runs, but does not reach termination or parent return. The next admitted work is whole-component source/ABI/failure reconciliation, not a trace-selected repair. |
+| Admission And Approval | S46 proves a fresh source-built four-image fixture reaches one existing `50:36` no-VDD resume in equal bounded Direct/Readonly runs; its COM-style `DS:SI` cannot identify selected MZ SHARE entry, and it does not reach termination or parent return. The next admitted work is whole-component source/ABI/failure reconciliation, not a trace-selected repair. |
 | Objective | Reconcile all original guest, bx-core and bx-mantle owners and the live formal composition from the `50:36` resume through original `$Exec` child entry, ordinary termination and COMMAND parent-return; classify every presently evidenced discontinuity without implementing a repair. |
 | Non-goals | No BOP/provider implementation, guest-byte change, synthetic child, host-child substitute, Bochs feature/device enablement, selector-specific instrumentation, trace-led patch, or Direct/Readonly/Overlay semantic change. |
 | Reference Baseline | S44 whole-path map, S45 source-built asset map, S46 paired fixture result, original NTDOS/COMMAND sources and formal Ninja graph. |

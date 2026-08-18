@@ -65,10 +65,15 @@ change.  Raw logs remain only in the disposable S46 build root.
 
 ## Interpretation and limitation
 
-This proves that the manifest-bound source-built guest path reaches the
-existing no-VDD `50:36` resume once in both supported mutation modes.  It does
-not prove the original `$Exec` `retf` reached SHARE, SHARE's `INT 21h/4Ch`,
-NTDOS `$Exit/$Abort/reset_environment`, `50:3C`, COMMAND `54:0B`, parent
-state restoration, or ordinary CLI completion.  The unchanged bounded result
-is evidence for the existing guest/machine continuity owner identified by S44;
-it does not authorize a trace-selected BOP, device, provider, or Bochs repair.
+This proves only that the manifest-bound source-built fixture reaches one
+existing no-VDD `50:36` resume in both supported mutation modes. It does not
+identify that notification as the selected SHARE target: the copied
+`DS:SI=0c41:0100` geometry is the normal COM-style entry shape, whereas the
+selected SHARE artifact is an MZ EXE with its own header CS:IP geometry. The
+first record is therefore compatible with initial COMMAND.COM entry and cannot
+prove target-child start. It also does not prove the original `$Exec` `retf`,
+SHARE's `INT 21h/4Ch`, NTDOS `$Exit/$Abort/reset_environment`, `50:3C`,
+COMMAND `54:0B`, parent restoration, or ordinary CLI completion. The
+unchanged bounded result is evidence for the existing guest/machine continuity
+owner identified by S44; it does not authorize a trace-selected BOP, device,
+provider, or Bochs repair.
