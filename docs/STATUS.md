@@ -279,6 +279,18 @@
 | Exit Criteria | The option is diagnostic-only, lifecycle-clean, and records only copied P20 facts; the paired run attributes at most the existing complete COMMAND/NTDOS owner domain. |
 | Stop Conditions | Any semantic filter, adapter route, guest byte capture, profile distinction without source evidence, leaf BOP proposal, or altered interrupt delivery. |
 > **T228 S1 P21 result:** [the bounded CLI observation result](etc/evidence/t228-s1-software-interrupt-cli-observation-result-001.md) proves diagnostic-only CLI consumption of P20 in hash-locked Direct/Readonly runs. The 64-record outputs and terminal are byte-identical; they transfer only the existing complete COMMAND/NTDOS owner question and select no BOP or repair.
+### T228 S1 P22 -- COMMAND transient BOP correlation
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P22, Ordinary Mode. |
+| Admission And Approval | P21 transfers the complete COMMAND/NTDOS owner question. The existing default-off BOP-sequence observer is already adapter-local, CLI-exposed and fixture-covered; one bounded cleared-environment correlation run is admitted to decide whether its complete DEM file dependency is actually reached after `EndInit`. |
+| Objective | Correlate the existing BOP sequence and P20 copied software-interrupt records against P15's exact COMMAND map without implementing or modifying a BOP provider. |
+| Non-goals | No BOP implementation, guest-byte capture, host capability/profile change, guest-image mutation, Bochs change, address/function-specific observer, or repair claim. |
+| Verification | Two independent cleared-environment Direct/Readonly pairs using the P21 executable and hash-locked input; no-overflow BOP ring; exact map/source comparison; retained hashes and governance checks. |
+| Exit Criteria | Establish whether the complete `50:12/00/16/02[/42]` family is reached after map-supported `EndInit`, or explicitly reject that repair rung without a leaf task. |
+
+> **T228 S1 P22 result:** [the COMMAND transient BOP correlation](etc/evidence/t228-s1-command-transient-bop-correlation-result-001.md) records that the full DEM file lifecycle is accepted before `50:36`, while no member is observed after the two mapped `EndInit` `54:0F` calls in a non-overflow ring. It rejects an adapter file-family repair and transfers only the original guest COMMAND/NTDOS interrupt-return/control-state question.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
