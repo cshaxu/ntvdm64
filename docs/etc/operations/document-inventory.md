@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1809 |
+| Documentation records | 1810 |
 | --- | --- |
-| Generated UTC | 2026-08-18T02:06:28Z |
+| Generated UTC | 2026-08-18T02:13:28Z |
 
 ## Entries
 
@@ -985,6 +985,7 @@ content-divergent entries.
 | etc/research/t225-s49-post-entry-realmode-mechanical-continuity-map-001.md | indexed supporting material | cff9ccf6f97ef7a78b891672d389630abb53c1e329b14f6a38c4ef8bf09664e5 |
 | etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s52-generic-limit-diagnostic-owner-reconciliation-001.md | indexed supporting material | 4a38a0d4ee55d6e8ecabe8de76e10b71055673561dffc246d20d3f2aeef3ba09 |
+| etc/research/t225-s55-bootstrap-provider-reconciliation-001.md | indexed supporting material | d0a19f59620e6723a595f35228587eb031f34d1e51b29db5e6bc328f26011ec0 |
 | etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
 | etc/research/t225-s6-guest-dos-one-shot-fixture-admission-001.md | indexed supporting material | d1b4414a9f9b3e201ea367c750d59f0791f9a8a92d30349ff4caaa2d3680f2f3 |
 | etc/research/t225-s6-reference-direct-readonly-installation-result-001.md | indexed supporting material | 2a2ad3ee79ff8225d1e5de4bd809f516aff65ee9b09b2ab200b66aa9d06d5454 |
@@ -1823,7 +1824,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | c7524cce7743973f7ad18969202a770aaf8bfc8654c7e748092f94e4bf1a6e2e |
+| STATUS.md | principal control document | c2127cbe784c4a12f798fd6a61d27a02c68db3af7c8ae3831021ed37c1b11d2d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
