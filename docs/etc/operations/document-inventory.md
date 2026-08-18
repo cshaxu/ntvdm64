@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1825 |
+| Documentation records | 1826 |
 | --- | --- |
-| Generated UTC | 2026-08-18T04:29:43Z |
+| Generated UTC | 2026-08-18T04:38:15Z |
 
 ## Entries
 
@@ -139,6 +139,7 @@ content-divergent entries.
 | etc/evidence/t225-s8-primary-share-source-build-result-001.md | indexed supporting material | da0e24d5217841fecb54991bd7644fefb9d3b488f6fbce5e4e2de34d6496282c |
 | etc/evidence/t225-s8-primary-source-built-input-availability-001.md | indexed supporting material | 8dd7cd9f8b54960adf87bdfb52394a22e89ff99af6b449cfe94fd086b4c803d3 |
 | etc/evidence/t225-s8-share-primary-source-rebuild-001.md | indexed supporting material | e85f39671ec94c1ff6586e8d47df98697022d288cbe1e8b04b7305ba36a3e4c1 |
+| etc/evidence/t226-s2-formal-dem-baseline-build-result-001.md | indexed supporting material | d516ebc45904a3b5d4b317cc6cd593a0ad572c46d3163633128b169276c1b7dc |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |
