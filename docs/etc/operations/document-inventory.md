@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1871 |
+| Documentation records | 1872 |
 | --- | --- |
-| Generated UTC | 2026-08-18T16:23:29Z |
+| Generated UTC | 2026-08-18T16:27:50Z |
 
 ## Entries
 
@@ -152,6 +152,7 @@ content-divergent entries.
 | etc/evidence/t226-s8-all-package-code-complete-formal-result-001.md | indexed supporting material | 3532c187cdc344ff38523265b3b9709217769f307b31292833c4c52584120f47 |
 | etc/evidence/t227-s1-bop-semantic-code-complete-revalidation-result-001.md | indexed supporting material | 20abd6e4833296b9c37c0488a1e397a73dfcc236af3b37ec42ba0f42896f79ac |
 | etc/evidence/t228-s1-bop-code-complete-reproducibility-result-001.md | indexed supporting material | ef9d5518b5c37e14e7550625dfc3dcae76d8a92f85b6d2794b8d9738e8019ac7 |
+| etc/evidence/t228-s1-bounded-guest-continuity-bracket-result-001.md | indexed supporting material | 6cea33d430e4f0d0a3fc8fc7e7fa1a14c399c40b493fb3ddb2386daeb5928e7b |
 | etc/evidence/t228-s1-budget-terminal-position-local-result-001.md | indexed supporting material | 14af60981bd338a37391b959cf52c875e25db336173d6b952911163f44abacea |
 | etc/evidence/t228-s1-budget-terminal-position-native-observation-001.md | indexed supporting material | c997a553972f68a1d36f257370d98f9fb2b09c9e69e0a75a820682f2a9d30aa2 |
 | etc/evidence/t228-s1-command-transient-reverse-string-mechanics-result-001.md | indexed supporting material | da64bb4b5b35bcebdb2e69ebab40de54631cbc569fcc3bbf3930318dea9771cc |
@@ -1885,7 +1886,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 9f10a35b4dc3fcf3a3a4b12ec1d4da2a9ae1c8dd22021d1a71804c401aa670f1 |
+| STATUS.md | principal control document | 84391a49b0c81f60d6573e2589fe0be9b5cd524be886ae5bec434c5928352714 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
