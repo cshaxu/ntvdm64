@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1904 |
+| Documentation records | 1915 |
 | --- | --- |
-| Generated UTC | 2026-08-18T22:30:28Z |
+| Generated UTC | 2026-08-18T22:46:48Z |
 
 ## Entries
 
@@ -206,6 +206,16 @@ content-divergent entries.
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
 | etc/operations/policy/source-policy.md | indexed supporting material | 975baa0c066a65b04b6ec317ae6065d70b13643a4c50ada5fadd1c7466f3b4a4 |
+| etc/operations/proposal-bop-cross-family-completion-audit-001.md | indexed supporting material | fd5996979a637f474575bff558e4a0291e8cfb606897ebd07a47bd61c17bbecf |
+| etc/operations/proposal-bx-machine-bios-selector-owner-package-completion-001.md | indexed supporting material | 40a7cbf4902abcb5f1b542ffc2b7f9199c27de83f5491a7b6dfd796128d7d885 |
+| etc/operations/proposal-opennt-command-owner-package-completion-001.md | indexed supporting material | 852e1642680f2c3d529070f93d9e0c675c6dc3efbaf6713c4b6a4cc7f3d8d3bc |
+| etc/operations/proposal-opennt-debugger-vdd-top-level-owner-package-completion-001.md | indexed supporting material | 94858789c968c1178c6e800ccb50123af1607f9e6b0fb467dc001804432cd9fe |
+| etc/operations/proposal-opennt-dem-owner-package-completion-001.md | indexed supporting material | 30ba01ae5f5d06d404443369c717b3f8ed682c582454401a117b7852db767731 |
+| etc/operations/proposal-opennt-dpmi-owner-package-completion-001.md | indexed supporting material | 17c7f33b022c7743850473a93ed828f0b35af17c5f6512a603af5e3f1339d89f |
+| etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | dc98dfbb3ac22365ac5217b4efbe08afe5b905b256b470d1c0e463fd1621c3ea |
+| etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | cfdde491a83d6b2c3d1167ac8dce6997179dd9233fc5445a473929947c90a364 |
+| etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | c292be5d76f2deb81a5a0005ebf9e0ae805c03b2f9771337bcbb738416e1c3ac |
+| etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
 | etc/operations/t188-bop-ingress-composition-plan.md | indexed supporting material | 76e13591247ef15c3c3999216011ffee2799de1b5e7fb1ccac98f053ed8c2402 |
 | etc/operations/t199-s37-dem-package-completion-proposal-001.md | indexed supporting material | d8bf32ab641bb0148d37c6da42db51bdf834c960bf00b53bbfdf692a21caba05 |
 | etc/operations/t202-s4-dem-fcb-wildcard-provider-plan-001.md | indexed supporting material | c7a025a850246501fec1b88ae7c8deaa8553c83d0f11889b4ae56e86f84ee618 |
@@ -1667,6 +1677,7 @@ content-divergent entries.
 | history/m0-t97-closure-20260812.md | closed task history | 8a4134628fafb1c4ed4519de5790378f7b5acaa646bdc4f77b317bbf8c0c3b7f |
 | history/m0-t98-closure-20260812.md | closed task history | 70e6ca589b84dbffbb1faff7cdbab2111e45de7c54d58c0a918a2aec145e3e57 |
 | history/m0-t99-closure-20260812.md | closed task history | 2a222b1dbb8bb859f7e3786d3b70bc6be313c4245febb2bb8443acbfea096668 |
+| history/m0-td-s1-p4-bop-owner-package-sequencing-20260818.md | closed task history | 15ac68f64790ba73f7f4f0c78b15a32453e3d0795190dc632e44420225f0b1cf |
 | history/task-index.md | closed task history | 650dbf90485884e24494a2c9f18eba6a2c1293eb7dc40af432aad28ebc436377 |
 | HOST-APPLINIT-PREFIX-TRACE.md | retained pre-governance evidence | 1d43eca6ad570ac29479420ec0773724a160c058e9cf16bc85e3450f286efabe |
 | HOST-CONSOLE-UI-BOUNDARY.md | retained pre-governance evidence | fb9a692c698c144e8860379aff13d82499d03847a0ddfda1bbf60351ad7d2e2f |
@@ -1792,7 +1803,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | 392ff829c068dbb20d36dbb91bbcc035649dab8c0b7f68d0e82549ded3635039 |
+| QUEUE.md | principal control document | 8e693b01fde1f463e349e214dfffdbf3435ebf4ce6a69bdf6e8f26a0434cf7d6 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -1918,7 +1929,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | e2469884c77d7966ff56565b2407298d3b452be47379c8cd949958a95a4a0cef |
+| STATUS.md | principal control document | 568f01e5740f11b34cd677c30418e326ba3b0cdd041022791583591d09fc82e3 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

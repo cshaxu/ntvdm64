@@ -6,6 +6,8 @@
 
 **Active: M0 T228 S1 -- governance-retention record only; T228 is closed and admits no further implementation.**
 
+> **M0 Td S1 P4 completed:** [BOP owner-package sequencing governance](history/m0-td-s1-p4-bop-owner-package-sequencing-20260818.md) records eight complete family candidates, a ninth cross-family closure audit/integration candidate, and Overlay as the tenth candidate. It admits no numeric T.
+
 ## Active Packet
 
 > **Closed scope:** T228 performed immutable Guest DOS integration in Direct and Readonly and repaired only demonstrated defects by complete original owner domain. It did not reopen BOP architecture from trace order. Its original multi-program lifecycle exit criterion was not met; the owner closed it for reprioritization. See [the closure record](history/m0-t228-closure-20260818.md).
