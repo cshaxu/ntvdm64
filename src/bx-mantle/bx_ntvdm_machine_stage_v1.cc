@@ -15,6 +15,10 @@
 #define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY 0
 #endif
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+#define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE 0
+#endif
+
 static bx_ntvdm_minimal_machine_c *bx_ntvdm_machine_stage_machine;
 static uint32_t bx_ntvdm_machine_stage_v1_terminal_position_enabled;
 static struct bx_ntvdm_machine_stage_v1_terminal_position
@@ -22,6 +26,9 @@ static struct bx_ntvdm_machine_stage_v1_terminal_position
 static uint32_t bx_ntvdm_machine_stage_v1_terminal_history_enabled;
 static struct bx_ntvdm_machine_stage_v1_terminal_history
   bx_ntvdm_machine_stage_v1_terminal_history;
+static uint32_t bx_ntvdm_machine_stage_v1_terminal_provenance_enabled;
+static struct bx_ntvdm_machine_stage_v1_terminal_provenance
+  bx_ntvdm_machine_stage_v1_terminal_provenance;
 
 static void bx_ntvdm_machine_stage_v1_terminal_position_clear(void)
 {
@@ -46,6 +53,55 @@ static void bx_ntvdm_machine_stage_v1_terminal_history_clear(void)
   bx_ntvdm_machine_stage_v1_terminal_history.struct_bytes =
     sizeof(bx_ntvdm_machine_stage_v1_terminal_history);
 }
+
+static void bx_ntvdm_machine_stage_v1_terminal_provenance_clear(void)
+{
+  memset(&bx_ntvdm_machine_stage_v1_terminal_provenance, 0,
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_provenance));
+  bx_ntvdm_machine_stage_v1_terminal_provenance.magic =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_PROVENANCE_MAGIC;
+  bx_ntvdm_machine_stage_v1_terminal_provenance.abi_version =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_PROVENANCE_VERSION;
+  bx_ntvdm_machine_stage_v1_terminal_provenance.struct_bytes =
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_provenance);
+}
+
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+static bx_bool bx_ntvdm_machine_stage_v1_real_address(uint16_t segment,
+  uint16_t offset, uint32_t bytes, bx_phy_address *address)
+{
+  Bit32u value;
+  if (address == 0 || bytes == 0u) return 0;
+  value = ((Bit32u) segment << 4) + offset;
+  if (value > 0x100000u - bytes) return 0;
+  *address = value;
+  return 1;
+}
+
+static void bx_ntvdm_machine_stage_v1_terminal_provenance_capture(void)
+{
+  bx_phy_address instruction_address;
+  bx_phy_address stack_address;
+  struct bx_ntvdm_machine_stage_v1_terminal_provenance *value =
+    &bx_ntvdm_machine_stage_v1_terminal_provenance;
+
+  value->cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
+  value->ss = bx_cpu.sregs[BX_SEG_REG_SS].selector.value;
+  value->sp = bx_cpu.get_reg16(BX_16BIT_REG_SP);
+  value->eip = bx_cpu.get_eip();
+  if (bx_ntvdm_machine_stage_v1_real_address(value->cs,
+      (uint16_t) value->eip, BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
+      &instruction_address) && bx_mem.copy_from_ordinary_ram(instruction_address,
+      BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
+      value->instruction_bytes)) value->instruction_valid = 1u;
+  if (bx_ntvdm_machine_stage_v1_real_address(value->ss, value->sp,
+      BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES, &stack_address) &&
+      bx_mem.copy_from_ordinary_ram(stack_address,
+      BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES,
+      value->stack_bytes)) value->stack_valid = 1u;
+  value->valid = 1u;
+}
+#endif
 
 struct bx_ntvdm_machine_stage_v1_stop_state {
   bx_bool watchdog_fired;
@@ -209,6 +265,32 @@ extern "C" int bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(
   return 1;
 }
 
+extern "C" void bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(
+  uint32_t enabled)
+{
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+  bx_ntvdm_machine_stage_v1_terminal_provenance_enabled = enabled == 1u;
+#else
+  (void) enabled;
+  bx_ntvdm_machine_stage_v1_terminal_provenance_enabled = 0u;
+#endif
+  bx_ntvdm_machine_stage_v1_terminal_provenance_clear();
+}
+
+extern "C" int bx_ntvdm_machine_stage_v1_terminal_provenance_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_provenance *provenance)
+{
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+  if (provenance == 0 || !bx_ntvdm_machine_stage_v1_terminal_provenance_enabled ||
+      !bx_ntvdm_machine_stage_v1_terminal_provenance.valid) return 0;
+  *provenance = bx_ntvdm_machine_stage_v1_terminal_provenance;
+  return 1;
+#else
+  (void) provenance;
+  return 0;
+#endif
+}
+
 extern "C" void bx_ntvdm_machine_stage_v1_entry_clear(
   struct bx_ntvdm_machine_stage_v1_entry *entry)
 {
@@ -304,6 +386,7 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   bx_ntvdm_mantle_first_fault_observation_reset();
   bx_ntvdm_machine_stage_v1_terminal_position_clear();
   bx_ntvdm_machine_stage_v1_terminal_history_clear();
+  bx_ntvdm_machine_stage_v1_terminal_provenance_clear();
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
   if (bx_ntvdm_machine_stage_v1_terminal_history_enabled)
     (void) bx_ntvdm_mantle_instruction_history_v1_configure(
@@ -342,6 +425,13 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
     bx_ntvdm_machine_stage_v1_terminal_history.count = count;
     bx_ntvdm_machine_stage_v1_terminal_history.valid = 1u;
   }
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+  if (bx_ntvdm_machine_stage_v1_terminal_provenance_enabled &&
+      stop_state.watchdog_fired && !stop_state.cancellation_fired &&
+      !bx_ntvdm_mantle_first_fault_observation_observed() &&
+      !bx_ntvdm_mantle_generic_ud_stop_observed())
+    bx_ntvdm_machine_stage_v1_terminal_provenance_capture();
 #endif
   if (bx_ntvdm_mantle_first_fault_observation_observed())
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_FIRST_FAULT_STOP;

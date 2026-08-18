@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [string]$ManifestPath = '',
-    [switch]$InstructionHistoryDiagnostic
+    [switch]$InstructionHistoryDiagnostic,
+    [switch]$InstructionHistoryProvenanceDiagnostic
 )
 
 Set-StrictMode -Version Latest
@@ -37,7 +38,7 @@ foreach ($input in @($manifestPath, $vs, (Join-Path $root 'tools\build\Project-B
     if (!(Test-Path -LiteralPath $input -PathType Leaf)) { throw "Required graph input missing: $input" }
 }
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-if ($InstructionHistoryDiagnostic) {
+if ($InstructionHistoryDiagnostic -or $InstructionHistoryProvenanceDiagnostic) {
     $mantle = @($manifest.modules | Where-Object { $_.name -eq 'bx-mantle' })
     if ($mantle.Count -ne 1) { throw 'Diagnostic graph requires one bx-mantle module.' }
     $mantle[0].sources = @($mantle[0].sources) + 'src/bx-mantle/bx_ntvdm_instruction_history.cc'
@@ -81,7 +82,7 @@ $environment = Join-Path $build 'msvc-x64-mt.cmd'
 $manifestHash = Get-FileSha256 $manifestPath
 $configHash = Get-FileSha256 $config
 $toolchainHash = Get-TextSha256 (($compiler | Out-String).Trim())
-$diagnosticDefines = if ($InstructionHistoryDiagnostic) { '/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1' } else { '' }
+$diagnosticDefines = if ($InstructionHistoryProvenanceDiagnostic) { '/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1 /DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE=1' } elseif ($InstructionHistoryDiagnostic) { '/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1' } else { '' }
 $buildManifest = [ordered]@{
     schema = 'ntdos64.t225.s7.ninja-full-graph.v1'
     sourceManifest = $manifestPath.Substring($root.Length + 1).Replace('\','/')
@@ -93,6 +94,7 @@ $buildManifest = [ordered]@{
     modules = $manifest.modules; fixtures = $manifest.fixtures; targets = $manifest.targets
     forbiddenInputs = $manifest.forbiddenInputs
     instructionHistoryDiagnostic = [bool]$InstructionHistoryDiagnostic
+    instructionHistoryProvenanceDiagnostic = [bool]$InstructionHistoryProvenanceDiagnostic
 }
 $configurationHash = Get-TextSha256 ($buildManifest | ConvertTo-Json -Depth 10)
 $buildManifest.configurationSha256 = $configurationHash

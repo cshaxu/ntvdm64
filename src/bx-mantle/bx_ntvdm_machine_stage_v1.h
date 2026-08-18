@@ -62,6 +62,29 @@ struct bx_ntvdm_machine_stage_v1_terminal_history {
     records[BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX];
 };
 
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_PROVENANCE_MAGIC UINT32_C(0x42585056)
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_PROVENANCE_VERSION UINT32_C(1)
+
+/* Explicit-provenance diagnostic only. It copies fixed ordinary-RAM windows
+ * after an already-returned watchdog budget outcome; it neither decodes the
+ * bytes nor affects CPU, service, or stop semantics. */
+struct bx_ntvdm_machine_stage_v1_terminal_provenance {
+  uint32_t magic;
+  uint32_t abi_version;
+  uint32_t struct_bytes;
+  uint32_t valid;
+  uint16_t cs;
+  uint16_t ss;
+  uint16_t sp;
+  uint16_t reserved0;
+  uint32_t eip;
+  uint8_t instruction_bytes[BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES];
+  uint8_t stack_bytes[BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES];
+  uint8_t instruction_valid;
+  uint8_t stack_valid;
+  uint16_t reserved1;
+};
+
 /* A real-mode control-transfer delta.  It deliberately excludes general
  * registers, flags, descriptor caches, and any machine object. */
 struct bx_ntvdm_machine_stage_v1_entry {
@@ -151,6 +174,13 @@ void bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(
   uint32_t enabled);
 int bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(
   struct bx_ntvdm_machine_stage_v1_terminal_history *history);
+
+/* Requires the separately compiled explicit-provenance diagnostic graph.
+ * Default and scalar-history graphs retain no terminal RAM window. */
+void bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(
+  uint32_t enabled);
+int bx_ntvdm_machine_stage_v1_terminal_provenance_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_provenance *provenance);
 
 #ifdef __cplusplus
 }
