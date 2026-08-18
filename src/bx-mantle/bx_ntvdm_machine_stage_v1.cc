@@ -25,7 +25,7 @@ static void bx_ntvdm_machine_stage_v1_stop(void *opaque)
     (bx_ntvdm_machine_stage_v1_stop_state *) opaque;
   state->watchdog_fired = 1;
   bx_pc_system.kill_bochs_request = 1;
-  bx_cpu.async_event |= BX_ASYNC_EVENT_STOP_TRACE;
+  bx_cpu.async_event = 1;
 }
 
 static void bx_ntvdm_machine_stage_v1_cancellation_poll(void *opaque)
@@ -39,7 +39,7 @@ static void bx_ntvdm_machine_stage_v1_cancellation_poll(void *opaque)
       BX_NTVDM_CANCELLATION_V1_NONE) return;
   state->cancellation_fired = 1;
   bx_pc_system.kill_bochs_request = 1;
-  bx_cpu.async_event |= BX_ASYNC_EVENT_STOP_TRACE;
+  bx_cpu.async_event = 1;
 }
 
 static bx_bool bx_ntvdm_machine_stage_preserved_range_valid(
