@@ -23,6 +23,23 @@ static int finish(const bx_ntvdm_exception_event_v1 *boundary,
         bx_ntvdm_cpu_result_v2_set_cf(result, cf);
 }
 
+static int finish_open_result(const bx_ntvdm_exception_event_v1 *boundary,
+    bx_ntvdm_cpu_result_v2 *result, uint32_t token, uint32_t size,
+    int include_pipe_flag)
+{
+    /* OpenNT demOpen/demCreate ABI: AX:BP token; BX:CX file size;
+     * demOpen alone returns pipe flag zero in DX. */
+    return finish(boundary, result, (uint16_t)(token >> 16), 1, 0) &&
+        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
+            (uint16_t)token) &&
+        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u,
+            (uint16_t)(size >> 16)) &&
+        bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
+            (uint16_t)size) &&
+        (!include_pipe_flag || bx_ntvdm_cpu_delta_v1_set_gpr16(
+            &result->cpu_delta, 2u, 0u));
+}
+
 static int fail(const bx_ntvdm_exception_event_v1 *boundary,
     bx_ntvdm_cpu_result_v2 *result, DWORD error)
 {
@@ -270,14 +287,8 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                     startup_token);
                 return fail(boundary, result, DEM_ERROR_INVALID_FUNCTION);
             }
-            int completed = finish(boundary, result, (uint16_t)(provider_token >> 16), 1, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
-                    (uint16_t)provider_token) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
-                    (uint16_t)startup_size) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
-                    (uint16_t)(startup_size >> 16)) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
+            int completed = finish_open_result(boundary, result, provider_token,
+                (uint32_t)startup_size, service == 0x12u);
             observe_open(provider, service, 1, drive, 1, relative, oem_path, result);
             return completed;
         }
@@ -291,14 +302,8 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                     disposition, service == 0x12u ? 0u : (cpu->ecx & 0xffffu),
                     provider->direct_namespace_owner, &token, &size, &error))
                 return fail(boundary, result, error);
-            if (!finish(boundary, result, (uint16_t)(token >> 16), 1, 0) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
-                    (uint16_t)token) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
-                    (uint16_t)size) || !bx_ntvdm_cpu_delta_v1_set_gpr16(
-                    &result->cpu_delta, 1u, (uint16_t)(size >> 16))) return 0;
-            if (service == 0x12u && !bx_ntvdm_cpu_delta_v1_set_gpr16(
-                    &result->cpu_delta, 3u, 0u)) return 0;
+            if (!finish_open_result(boundary, result, token, size,
+                    service == 0x12u)) return 0;
             observe_open(provider, service, 1, drive, 0, relative, oem_path, result);
             return 1;
         }
@@ -310,14 +315,8 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                     disposition, service == 0x12u ? 0u : (cpu->ecx & 0xffffu), 0u,
                     &token, &size, &error)) return 0;
             if (error != ERROR_SUCCESS) return fail(boundary, result, error);
-            if (!finish(boundary, result, (uint16_t)(token >> 16), 1, 0) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
-                    (uint16_t)token) || !bx_ntvdm_cpu_delta_v1_set_gpr16(
-                    &result->cpu_delta, 2u, (uint16_t)size) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
-                    (uint16_t)(size >> 16))) return 0;
-            if (service == 0x12u && !bx_ntvdm_cpu_delta_v1_set_gpr16(
-                    &result->cpu_delta, 3u, 0u)) return 0;
+            if (!finish_open_result(boundary, result, token, size,
+                    service == 0x12u)) return 0;
             observe_open(provider, service, 1, drive, 0, relative, oem_path, result);
             return 1;
         }
@@ -352,18 +351,10 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files, token, &handle) ||
                 !GetFileSizeEx(handle, &size) || size.QuadPart > UINT32_MAX)
                 return fail(boundary, result, GetLastError());
-            if (!finish(boundary, result, (uint16_t)(token >> 16), 1, 0) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 5u,
-                    (uint16_t)token) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
-                    (uint16_t)size.LowPart) ||
-                !bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
-                    (uint16_t)((uint32_t)size.LowPart >> 16))) return 0;
-            if (service == 0x12u) {
-                int completed = bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u, 0u);
+            if (!finish_open_result(boundary, result, token, (uint32_t)size.LowPart,
+                    service == 0x12u)) return 0;
+            if (service == 0x12u)
                 observe_open(provider, service, 1, drive, 0, relative, oem_path, result);
-                return completed;
-            }
             return 1;
         }
     }
