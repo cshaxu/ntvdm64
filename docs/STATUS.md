@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S52.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S53.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S52 -- generic limit-diagnostic source/current owner reconciliation.**
+**Active: M0 T225 S53 -- existing first-fault access-tuple observation.**
 
 ## Active Packet
 
@@ -12,21 +12,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S52, Ordinary Mode. |
-| Admission And Approval | Owner-authorized autonomous continuation. S51 retains an unchanged generic limit diagnostic; S52 is source/current owner reconciliation only. |
-| Objective | Determine whether the current `read beyond limit` diagnostic can be attributed from existing source/current code and historical evidence, or retain a bounded origin limitation. |
-| Non-goals | No new observer, BOP/provider/device behavior, guest inspection, FPU/PIC/VGA admission, machine change, or trace-selected repair. |
-| Reference Baseline | S49/S50 mechanics maps, S51 paired logs, bx-core access checks, and retained T95 post-transaction source audits. |
-| Files And ABI Surface | Research/evidence/Status/history only. No runtime or build-graph behavior change. |
-| Applicable Rules | Execution, architecture, coding, recovery ladder, deny-by-default and T225 anti-attrition. |
-| Verification | Static source/current comparison, historical-evidence provenance review, governance verifier and diff check. |
-| Expected Markers | Exact generic check condition, possible owner classes, superseded historical symptoms, and explicit unreached/unknown origin limits. |
-| Asset Needs | bx-core access/decoder sources, S51 logs, T95 source records, original NTDOS sources and S49/S50 maps. |
-| Reporting Requirements | Separate a generic diagnostic from an instruction-origin attribution; state that a log string cannot select a repair. |
-| Stop Conditions | Need instruction-origin tracing, guest-memory inspection, BOP/provider/machine change, external-code intrusion or trace-selected repair. |
-| Exit Criteria | A complete owner map either identifies a source/current discontinuity or explicitly rejects unproven old-path diagnoses; no implementation follows automatically. |
-| Original Owner Request | Continue globally scoped source-first work without trace-led incremental BOP patching. |
-| Similar-Issue Sweep | read versus execute check, segment type/limit, BOUND access, old x87/IRQ13/VGA tail, real-mode cache rules, and Direct/Readonly neutrality. |
+| Identifier Mode | M0 T225 S53, Ordinary Mode. |
+| Admission And Approval | S52 proves a source-origin tuple is required. Existing CLI `--observe-first-fault` already enables the fixed-width selector-blind segment-access observer; this S reuses it unchanged. |
+| Objective | Run one bounded source-built Direct/Readonly pair with the existing first-fault option and classify the copied first fault/access tuple. |
+| Non-goals | No new observer, CPU/Bochs semantic change, BOP/provider change, guest-memory read, device enablement or trace-selected repair. |
+| Reference Baseline | S51 integration logs, S52 owner map, existing first-fault/segment-access observer ABI and CLI wiring. |
+| Files And ABI Surface | Staging/run evidence and Status/history only. No source ABI change. |
+| Applicable Rules | Execution, architecture, coding, deny-by-default and T225 anti-attrition. |
+| Verification | Fresh input staging; existing formal native CLI; one bounded Direct/Readonly pair; copied tuple parity; governance verifier and diff check. |
+| Expected Markers | First-fault vector/CS:EIP and, where applicable, segment selector/offset/width/limit/branch; equal mode results or explicit divergence. |
+| Asset Needs | S51 input stager, existing lifecycle-r3 native CLI and S30 observer ABI. |
+| Reporting Requirements | Treat tuple as mechanical attribution only; do not select a repair from a single event. |
+| Stop Conditions | Need observer extension, guest inspection, BOP/provider/machine change or trace-selected repair. |
+| Exit Criteria | Reproducible paired tuple evidence identifies a bounded owner class or records absence; no runtime code changes. |
+| Original Owner Request | Continue source-first whole-package recovery without trace-led BOP patching. |
+| Similar-Issue Sweep | Option default-off, observer reset, first-fault versus access tuple order, Direct/Readonly parity, and no lifecycle/BOP mutation. |
 
 > **T225 S51 closure:** [the closure record](history/m0-t225-s51-closure-20260817.md) records the unchanged paired boundary and admits only source/current limit reconciliation; it selects no repair.
 
