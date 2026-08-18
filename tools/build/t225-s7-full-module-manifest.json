@@ -193,6 +193,7 @@
         "src/bx-vdm/bx_ntvdm_cmd_current_dir_service.c",
         "src/bx-vdm/bx_ntvdm_cmd_get_next_service.c",
         "src/bx-vdm/bx_ntvdm_cmd_keyboard_layout_service.c",
+        "src/bx-vdm/bx_ntvdm_cmd_launch_envelope_v1.c",
         "src/bx-vdm/bx_ntvdm_cmd_set_info_service.c",
         "src/bx-vdm/bx_ntvdm_cmdinfo_v1.c",
         "src/bx-vdm/bx_ntvdm_command_boot_input_v1.c",
@@ -642,6 +643,96 @@
       "name": "t226-s2-dem-fcb-direct-readonly-conformance-fixture",
       "source": "tests/bx-vdm/t226_s2_dem_fcb_direct_readonly_conformance_fixture.c",
       "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-bootstrap-provider-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_bootstrap_provider_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-bootstrap-session-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_bootstrap_profile_session_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-console-keyboard-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_console_keyboard_provider_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-environment-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_initial_environment_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-launch-execution-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_launch_execution_provider_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-lifecycle-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_lifecycle_provider_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-child-redirection-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_child_redirection_package_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-cmdinfo-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_cmdinfo_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-current-dir-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_cmd_current_dir_service_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-keyboard-layout-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_cmd_keyboard_layout_service_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-set-info-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_cmd_set_info_service_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-launch-envelope-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_cmd_launch_envelope_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-comspec-bootstrap-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_cmd_comspec_bootstrap_service_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-plane-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_plane_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s3-command-provider-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_command_provider_v1_test.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
       "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     }
   ],
