@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T226 S7.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T226 S8.** Its governing brief appears immediately below.
 
-**Active: M0 T226 S7 -- Debugger, top-level/machine and WOW host-composition package.**
+**Active: M0 T226 S8 -- All-package 203-row reconciliation.**
 
 ## Active Packet
 
@@ -12,22 +12,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T226 S7, Ordinary Mode. |
-| Admission And Approval | T226 S6 closes Redirector's 50 rows; S1 binds the remaining 26 Debugger/top-level/machine/WOW rows. Direct/Readonly are enabled; Overlay remains ABI-only. |
-| Objective | Reconcile and complete the remaining Debugger, top-level/machine and WOW host-composition identities with whole-family deferred, unavailable, no-op and ownership dispositions. |
-| Non-goals | No native guest trace, no trace-selected leaf work, no debugger or WOW runtime, no adapter-owned machine semantics, no Bochs semantic intrusion, no Overlay implementation. |
-| Reference Baseline | T226 S1 manifest; T225 S57 owner ledger; retained nt_bop/SoftPC/WOW sources; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
-| Files And ABI Surface | `src/bx-vdm/` debugger and top-level facades plus machine/WOW ownership seams. No debugger/WOW runtime, export of Bochs internals or guest ABI change is admitted. |
+| Identifier Mode | M0 T226 S8, Ordinary Mode. |
+| Admission And Approval | T226 S7 closes the remaining 26 rows. All 203 S1 identities are now eligible for local package reconciliation; Direct/Readonly are enabled and Overlay remains ABI-only. |
+| Objective | Run the formal local regressions for every T226 owner package, verify the 203-row manifest maps each identity exactly once, and record any stale route or fixture gap. |
+| Non-goals | No native guest trace, no trace-selected leaf work, no new provider semantics, no Bochs semantic intrusion, no Overlay implementation. |
+| Reference Baseline | T226 S1 203-row manifest; T226 S2--S7 formal results; T225 S57 owner ledger; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
+| Files And ABI Surface | Formal fixture manifest and existing owner-package seams only. No new guest ABI, provider, Bochs or host capability surface is admitted. |
 | Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, whole-package routing, mutation-profile and formal-build rules. |
-| Verification | Source/ABI/failure map for all 26 rows; local deferred/no-op/unavailable fixtures; formal Ninja build, governance verification, and `git diff --check`. |
-| Expected Markers | Every remaining identity has one source-proven owner/disposition and local assertion that no host-service or machine semantic is fabricated. |
-| Asset Needs | T226 S1 manifest; retained debugger/top-level/machine/WOW source; current facades and formal manifest. |
+| Verification | Deterministic 203-row manifest verification, every package-local formal fixture, governance verification, and `git diff --check`. |
+| Expected Markers | Every one of 203 identities has exactly one owner-package fixture mapping and every mapped formal package regression returns zero. |
+| Asset Needs | T226 S1 manifest, T226 S2--S7 fixture registrations and formal Ninja graph. |
 | Reporting Requirements | Separate source facts, current routes and rehost inference; record rejected rungs; preserve Direct/Readonly behavior and Overlay reservation. |
-| Stop Conditions | Trace-selected leaf work, fabricated debugger/WOW success, adapter machine semantics, Bochs semantic change, or skipped source-recovery rung. |
-| Exit Criteria | All remaining 26 rows meet T226 code-complete definition and pass their local package regression. |
+| Stop Conditions | Native guest trace, trace-selected leaf work, new provider semantics, skipped package fixture, or mismatched manifest mapping. |
+| Exit Criteria | All 203 rows pass deterministic mapping validation and their owner-package local regression; any mismatch is recorded and resolved or explicitly returned to the correct package. |
 | Original Owner Request | Recover whole original owner packages before trace-led integration, using original source first and source-derived seams only where necessary. |
-| Similar-Issue Sweep | debugger deferral, WOW absence, top-level no-op/failure, machine handoff and accidental adapter ownership. |
+| Similar-Issue Sweep | stale fixture registrations, missing formal targets, duplicate identity mappings, Direct/Readonly parity and untested deferred/unavailable routes. |
 
+> **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
 > **T226 S4 closure:** [the formal XMS result](etc/evidence/t226-s4-xms-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s4-closure-20260817.md) close the 12-row XMS owner package at the local code-complete gate. They claim no native guest execution.
