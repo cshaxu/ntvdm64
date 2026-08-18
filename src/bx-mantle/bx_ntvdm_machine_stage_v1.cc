@@ -11,6 +11,21 @@
 #include <string.h>
 
 static bx_ntvdm_minimal_machine_c *bx_ntvdm_machine_stage_machine;
+static uint32_t bx_ntvdm_machine_stage_v1_terminal_position_enabled;
+static struct bx_ntvdm_machine_stage_v1_terminal_position
+  bx_ntvdm_machine_stage_v1_terminal_position;
+
+static void bx_ntvdm_machine_stage_v1_terminal_position_clear(void)
+{
+  memset(&bx_ntvdm_machine_stage_v1_terminal_position, 0,
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_position));
+  bx_ntvdm_machine_stage_v1_terminal_position.magic =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_POSITION_MAGIC;
+  bx_ntvdm_machine_stage_v1_terminal_position.abi_version =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_POSITION_VERSION;
+  bx_ntvdm_machine_stage_v1_terminal_position.struct_bytes =
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_position);
+}
 
 struct bx_ntvdm_machine_stage_v1_stop_state {
   bx_bool watchdog_fired;
@@ -136,6 +151,22 @@ extern "C" int bx_ntvdm_machine_stage_v1_active(void)
   return bx_ntvdm_machine_stage_machine != 0;
 }
 
+extern "C" void bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(
+  uint32_t enabled)
+{
+  bx_ntvdm_machine_stage_v1_terminal_position_enabled = enabled == 1u;
+  bx_ntvdm_machine_stage_v1_terminal_position_clear();
+}
+
+extern "C" int bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_position *position)
+{
+  if (position == 0 || !bx_ntvdm_machine_stage_v1_terminal_position_enabled ||
+      !bx_ntvdm_machine_stage_v1_terminal_position.valid) return 0;
+  *position = bx_ntvdm_machine_stage_v1_terminal_position;
+  return 1;
+}
+
 extern "C" void bx_ntvdm_machine_stage_v1_entry_clear(
   struct bx_ntvdm_machine_stage_v1_entry *entry)
 {
@@ -229,11 +260,21 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   }
   bx_ntvdm_mantle_generic_ud_stop_observation_reset();
   bx_ntvdm_mantle_first_fault_observation_reset();
+  bx_ntvdm_machine_stage_v1_terminal_position_clear();
   bx_cpu.cpu_loop();
   bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
   bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
   bx_pc_system.deactivate_timer((unsigned) stop_timer);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
+  if (bx_ntvdm_machine_stage_v1_terminal_position_enabled &&
+      stop_state.watchdog_fired && !stop_state.cancellation_fired &&
+      !bx_ntvdm_mantle_first_fault_observation_observed() &&
+      !bx_ntvdm_mantle_generic_ud_stop_observed()) {
+    bx_ntvdm_machine_stage_v1_terminal_position.cs =
+      bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
+    bx_ntvdm_machine_stage_v1_terminal_position.eip = bx_cpu.get_eip();
+    bx_ntvdm_machine_stage_v1_terminal_position.valid = 1u;
+  }
   if (bx_ntvdm_mantle_first_fault_observation_observed())
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_FIRST_FAULT_STOP;
   if (bx_ntvdm_mantle_generic_ud_stop_observed())

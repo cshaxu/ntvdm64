@@ -30,6 +30,21 @@ enum bx_ntvdm_machine_stage_v1_status {
 #define BX_NTVDM_MACHINE_STAGE_V1_ENTRY_MAGIC UINT32_C(0x42584d45)
 #define BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_MAGIC UINT32_C(0x42584d58)
 
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_POSITION_MAGIC UINT32_C(0x42584d54)
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_POSITION_VERSION UINT32_C(1)
+
+/* Default-off, copied budget-terminal position. It exposes no Bochs object,
+ * guest byte, selector/service identity, or register state beyond CS:IP. */
+struct bx_ntvdm_machine_stage_v1_terminal_position {
+  uint32_t magic;
+  uint32_t abi_version;
+  uint32_t struct_bytes;
+  uint32_t valid;
+  uint16_t cs;
+  uint16_t reserved0;
+  uint32_t eip;
+};
+
 /* A real-mode control-transfer delta.  It deliberately excludes general
  * registers, flags, descriptor caches, and any machine object. */
 struct bx_ntvdm_machine_stage_v1_entry {
@@ -105,6 +120,13 @@ int bx_ntvdm_machine_stage_v1_execution_request_valid(
  * generic STOP outcome returns control. It never owns a BOP/provider policy. */
 uint32_t bx_ntvdm_machine_stage_v1_execute(
   const struct bx_ntvdm_machine_stage_v1_execution_request *request);
+
+/* Enables one default-off copied CS:IP capture only for a watchdog budget
+ * return. The observation never changes machine execution. */
+void bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(
+  uint32_t enabled);
+int bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_position *position);
 
 #ifdef __cplusplus
 }

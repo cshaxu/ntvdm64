@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1851 |
+| Documentation records | 1853 |
 | --- | --- |
-| Generated UTC | 2026-08-18T06:50:19Z |
+| Generated UTC | 2026-08-18T07:41:21Z |
 
 ## Entries
 
@@ -151,6 +151,7 @@ content-divergent entries.
 | etc/evidence/t226-s7-system-code-complete-formal-result-001.md | indexed supporting material | 4e513976c9c8d75d5cdd280750f7820c5de26dfc4b0f0f5165c2c41ed6551a85 |
 | etc/evidence/t226-s8-all-package-code-complete-formal-result-001.md | indexed supporting material | 3532c187cdc344ff38523265b3b9709217769f307b31292833c4c52584120f47 |
 | etc/evidence/t227-s1-bop-semantic-code-complete-revalidation-result-001.md | indexed supporting material | 20abd6e4833296b9c37c0488a1e397a73dfcc236af3b37ec42ba0f42896f79ac |
+| etc/evidence/t228-s1-budget-terminal-position-local-result-001.md | indexed supporting material | 14af60981bd338a37391b959cf52c875e25db336173d6b952911163f44abacea |
 | etc/evidence/t228-s1-immutable-multiprogram-integration-observation-001.md | indexed supporting material | e4c8e9b41780d6134d80710c773c4fa2dbc8232f9fd192b7c67ac940321710f5 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
@@ -1021,6 +1022,7 @@ content-divergent entries.
 | etc/research/t225-s7-p2-ninja-build-graph-result-001.md | indexed supporting material | a8530c1ce8eaae78da1e2137dee10c87b04f9439acf28a5641a7bdf7042d3281 |
 | etc/research/t225-s9-source-built-guest-bootstrap-to-exec-admission-map-001.md | indexed supporting material | 5409647344b31d0496e9646d11b3d4585d65bcbf5984e2af2f4aa5b767c5de1c |
 | etc/research/t226-s2-dem-lifecycle-routing-source-abi-correction-001.md | indexed supporting material | 72c064dc67b98e8e0d94057f443d80d802cc0d53951d13943e2c4023cbbe6599 |
+| etc/research/t228-s1-budget-terminal-position-diagnostic-admission-001.md | indexed supporting material | 167b3d86d514fb1ea025e6714fba3131cd7c6855f09aad265e9fa3e3a8270f82 |
 | etc/research/t228-s1-immutable-input-staging-source-audit-001.md | indexed supporting material | a4cc947d9872420d311fbb382ed7d0eefde9891e207b389c838874b704d58f10 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | 55430d57246660e10fc32c95b843f83d84939f5b50f4a55240a08e41ca9bd6fb |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
