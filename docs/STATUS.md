@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S44.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S45.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S44 -- guest `$Exec` transfer and parent-return owner-package reconciliation.**
+**Active: M0 T225 S45 -- source-built guest parent/child/return fixture admission.**
 
 ## Active Packet
 
@@ -12,21 +12,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S44, Ordinary Mode. |
-| Admission And Approval | S43 fixed the observed `$Exec` pre-transfer notification as source evidence. This S admits the next whole guest-execution owner-package map, not a trace-selected BOP repair. |
-| Objective | Reconcile the complete original guest `EXEC`/PSP/entry-transfer/termination/parent-return path with the present source-built CLI composition; identify the first missing owner-scoped capability and its Direct/Readonly contract. |
-| Non-goals | No singleton BOP implementation, no inferred repair from a trace record, no synthetic loader/host process substitute, no provider/profile change, and no new native trace until a subsequent admitted package selects one. |
-| Reference Baseline | T225 S21/S26 source maps, S27 parent-return map, S42 paired observation and S43 source attribution. |
-| Files And ABI Surface | One whole-path source/current-route map, Status, and S44 closure history. No runtime or ABI change. |
-| Applicable Rules | Execution, architecture, coding, source policy, recovery ladder, deny-by-default and T225 anti-attrition. |
-| Verification | Read-only original-source/current-graph route inventory; full-owner and Direct/Readonly disposition review; documentation governance verifier and diff check. |
-| Expected Markers | A source-ordered crossing map from request through child entry and parent return; every crossing has an owner, bound route/disposition, dependency and failure result; exactly one next package candidate is justified. |
-| Asset Needs | Admitted `src/opennt` source, current Ninja manifest/current source graph, T225 S21/S26/S27/S43 records, and source-built guest artifact identity records. |
-| Reporting Requirements | Separate source facts, current bound routes, absent dependencies and unproven execution; do not describe a map as completed program execution. |
-| Stop Conditions | Need for runtime/BOP/provider/guest/profile/CLI change, a trace-selected service repair, a new machine feature, or any source-derived implementation before a separate S admission. |
-| Exit Criteria | Whole-path map names all crossings and owner dispositions, rejects any host/substitute bypass, selects at most one evidence-backed next owner package, and is committed/pushed with Status/history. |
+| Identifier Mode | M0 T225 S45, Ordinary Mode. |
+| Admission And Approval | S44 identifies a whole guest-native source-built parent/child/return fixture as the first remaining execution package. This S admits its source/asset/ABI/failure design before implementation or native validation. |
+| Objective | Select or reproduce a source-built guest child whose original code has a bounded ordinary termination contract, and define the parent/child/return fixture crossings, inputs, markers, Direct/Readonly expectations and owner boundaries. |
+| Non-goals | No trace-selected BOP repair, no host child substitute, no synthetic DOS loader/PSP, no guest-byte marker injection, no Bochs feature enablement, and no native execution until a later S admits the completed fixture. |
+| Reference Baseline | S44 whole-path map; original OpenNT NTDOS/COMMAND source; S8/S10 source-built guest artifact records and current Ninja graph. |
+| Files And ABI Surface | One source/asset/ABI/failure map, Status and S45 closure history. No runtime or guest binary change. |
+| Applicable Rules | Execution, architecture, coding, source policy, recovery ladder, artifact provenance, deny-by-default and T225 anti-attrition. |
+| Verification | Read-only original-source and artifact-manifest review; current CLI/profile admission review; Direct/Readonly capability review; documentation governance verifier and diff check. |
+| Expected Markers | A source-built child identity with exact provenance; source-defined entry/exit/parent-return observations; fixture crossing table; explicit rejection of unsuitable artifacts and host/substitute paths. |
+| Asset Needs | Existing source-built artifact/manifests, historical guest build inputs/toolchain records, original source and current CLI profile schema. |
+| Reporting Requirements | State whether the selected artifact is directly usable, must be reproduced from original source, or is unavailable; distinguish an admitted design from execution proof. |
+| Stop Conditions | Need to author a new guest program, modify a historical guest binary, import unapproved guest media/source, change runtime/BOP/provider/profile/Bochs code, or run native validation before a separate implementation S. |
+| Exit Criteria | Map selects one source-first fixture asset strategy, defines bounded observations and exact owner/capability dispositions, rejects host/substitute paths, and is committed/pushed with Status/history. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | COM/EXE paths, PSP/environment/arena/JFN setup, child entry and initial stack, DEM notifications, COMMAND lifecycle, termination/abort, parent return, machine prerequisites, and both supported mutation modes. |
+| Similar-Issue Sweep | COM versus EXE, normal exit versus TSR/terminate-and-stay-resident, DOS `INT 21h/4Ch` versus other termination paths, source-built provenance, command tail/environment, Direct/Readonly host effects, and parent-return `54:0B` semantics. |
+> **T225 S44 closure:** [the closure record](history/m0-t225-s44-closure-20260817.md) reconciles the entire guest `EXEC`/parent-return route and selects one source-built fixture package; it claims no native child execution.
 > **T225 S43 closure:** [the closure record](history/m0-t225-s43-closure-20260817.md) fixes only the original `$Exec` pre-transfer attribution for the observed `50:36` record; it claims no child execution, provider or package closure.
 > **T225 S42 closure:** [the closure record](history/m0-t225-s42-closure-20260817.md) closes mantle delivery and paired observation only.
 > **T225 S41 current attempt:** [the resumed attempt record](etc/evidence/t225-s41-resumed-native-snapshot-attempt-001.md) distinguishes the remaining exception-longjmp watchdog gap from S40's fixed normal-loop path. It records no BOP fact or repair and leaves S41 active.
