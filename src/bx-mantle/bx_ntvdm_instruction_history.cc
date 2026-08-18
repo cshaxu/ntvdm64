@@ -83,7 +83,7 @@ void bx_ntvdm_mantle_instruction_history_v1_record(
     bx_ntvdm_instruction_history_latest_cs_transition.current = *record;
     bx_ntvdm_instruction_history_latest_cs_transition_valid = 1;
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
-    bx_phy_address predecessor_address, stack_address;
+    bx_phy_address predecessor_address, successor_address, stack_address;
     memset(&bx_ntvdm_instruction_history_latest_cs_provenance, 0,
       sizeof(bx_ntvdm_instruction_history_latest_cs_provenance));
     bx_ntvdm_instruction_history_latest_cs_provenance.transition =
@@ -96,6 +96,14 @@ void bx_ntvdm_mantle_instruction_history_v1_record(
           predecessor_address, BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
           bx_ntvdm_instruction_history_latest_cs_provenance.predecessor_bytes)) {
       bx_ntvdm_instruction_history_latest_cs_provenance.predecessor_valid = 1u;
+    }
+    if (bx_ntvdm_instruction_history_real_address(record->cs,
+        (uint16_t)record->rip,
+        BX_NTVDM_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES,
+        &successor_address) && bx_mem.copy_from_ordinary_ram(
+          successor_address, BX_NTVDM_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES,
+          bx_ntvdm_instruction_history_latest_cs_provenance.successor_bytes)) {
+      bx_ntvdm_instruction_history_latest_cs_provenance.successor_valid = 1u;
     }
     if (bx_ntvdm_instruction_history_real_address(record->ss, record->sp,
         BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES, &stack_address) &&

@@ -73,6 +73,8 @@
 
 > **T228 S1 P4 result:** [the CS-transition provenance result](etc/evidence/t228-s1-terminal-cs-transition-provenance-result-001.md) records the paired `1797:3AB8 → 5A5F:5EF9` transition and proves its copied predecessor bytes are absent from all declared source-built inputs. It transfers only the runtime guest-memory producer/control-transfer owner question.
 
+> **T228 S1 P5 result:** [the generic successor-provenance result](etc/evidence/t228-s1-transition-successor-provenance-result-001.md) proves that 5A5F:5EF9 was already zero-filled ordinary RAM at the retained CS transition. It excludes late-only corruption and transfers only the original far-call pointer producer/current register-state question.
+
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.

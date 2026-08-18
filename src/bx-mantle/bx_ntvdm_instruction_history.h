@@ -14,6 +14,7 @@
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_VERSION 1u
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX 16u
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES 15u
+#define BX_NTVDM_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES 15u
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES 10u
 
 struct bx_ntvdm_instruction_history_record_v1 {
@@ -35,10 +36,12 @@ struct bx_ntvdm_instruction_history_transition_v1 {
 struct bx_ntvdm_instruction_history_provenance_v1 {
   struct bx_ntvdm_instruction_history_transition_v1 transition;
   uint8_t predecessor_bytes[BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES];
+  uint8_t successor_bytes[BX_NTVDM_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES];
   uint8_t stack_bytes[BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES];
   uint8_t predecessor_valid;
+  uint8_t successor_valid;
   uint8_t stack_valid;
-  uint16_t reserved0;
+  uint8_t reserved0;
 };
 
 #ifdef __cplusplus
