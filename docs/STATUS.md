@@ -166,6 +166,27 @@
 | Similar-Issue Sweep | T145 map/listing limitation, command build hash, original link response, historical-tool manifest, and source-policy ladder. |
 
 > **T228 S1 P15 result:** [the reproducible COMMAND link-map recovery result](etc/evidence/t228-s1-command-link-map-recovery-result-001.md) records an exact-hash original-toolchain rebuild and its `command.map`. It binds both P13 `54:0F` sites to the original `EndInit` procedure and transfers repair only to the complete COMMAND `EndInit` / NTDOS MCB allocation-and-transient-placement package; no per-instruction source label or repair is claimed.
+### T228 S1 P16 -- Reproducible NTDOS allocation-map recovery
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P16, Ordinary Mode. |
+| Admission And Approval | P15 map-supports the COMMAND `EndInit` side of the selected owner package. The original NTDOS `msdos.lnk` explicitly emits `NTDOS.MAP`, and the repository retains its original source-build script/tool closure. |
+| Objective | Rebuild the immutable source-built NTDOS.SYS in a new disposable build root and recover the exact-map disposition for arena initialization and `$ALLOC`, so the COMMAND/NTDOS owner boundary is evidenced on both sides. |
+| Non-goals | No source transform, runtime input replacement, guest patch, allocator reimplementation, BOP provider change, machine change, or repair. |
+| Reference Baseline | P15 COMMAND map; original `rdata.asm` EndInit; `alloc.asm`; `msinit.asm`; `msdos.lnk`; T228 immutable NTDOS identity. |
+| Files And ABI Surface | Existing `Build-T225S8PrimaryNtdos.ps1`, original historical tools and staging only; disposable map/output and evidence. |
+| Applicable Rules | Source policy; immutable guest input; active T228 package; formal/generative evidence. |
+| Verification | Fresh output must be 27,858 bytes and SHA-256 `957662320654ad5251c3a8b228a5dadec28aa65dddbcba38c3658a6e7f93bc84`; inspect the original map and, if its public-symbol table is insufficient, one original LINK16 `/SEGMENTS` evidence relink over unchanged objects followed by the same RELOC/STRIPZ identity check. Map output remains evidence only. |
+| Expected Markers | Original linker produces NTDOS.MAP or a documented limitation; it identifies the linked module/procedure boundaries relevant to arena initialization and allocation. |
+| Asset Needs | Repository-local OpenNT source, historical tools and DOSBox only. |
+| Reporting Requirements | Record exact output/map/tool identities, map-supported `$ALLOC`/arena facts, connection to P15, and remaining runtime-state limitation. |
+| Stop Conditions | Hash mismatch, source transform, fallback tool, use as runtime input, or any inferred instruction-level claim absent map/list support. |
+| Exit Criteria | Both sides of the selected COMMAND/NTDOS owner package have exact-image map disposition, enabling a bounded state-observation or complete owner repair admission. |
+| Original Owner Request | Reuse original source/toolchain before adapter or Bochs change; repair by complete owner package. |
+| Similar-Issue Sweep | P15 command map, NTDOS build identity, `msdos.lnk`, `alloc.asm`, `msinit.asm`, and build-runner behavior. |
+
+> **T228 S1 P16 result:** [the reproducible NTDOS allocation-map recovery result](etc/evidence/t228-s1-ntdos-allocation-map-recovery-result-001.md) records an exact-hash original-toolchain NTDOS rebuild and a segment-only `NTDOS.MAP`; the original `/SEGMENTS` trial adds no private allocator symbols. It confirms the complete COMMAND `EndInit` / NTDOS MCB package boundary but selects no allocator instruction, BOP, guest-image or Bochs repair.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
