@@ -13,7 +13,7 @@
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T226 S8, Ordinary Mode. |
-| Admission And Approval | T226 S7 closes the remaining 26 rows. All 203 S1 identities are now eligible for local package reconciliation; Direct/Readonly are enabled and Overlay remains ABI-only. |
+| Admission And Approval | T226 S7 closes the remaining 26 rows. All 203 S1 identities are admitted for local package reconciliation; Direct/Readonly are enabled and Overlay remains ABI-only. |
 | Objective | Run the formal local regressions for every T226 owner package, verify the 203-row manifest maps each identity exactly once, and record any stale route or fixture gap. |
 | Non-goals | No native guest trace, no trace-selected leaf work, no new provider semantics, no Bochs semantic intrusion, no Overlay implementation. |
 | Reference Baseline | T226 S1 203-row manifest; T226 S2--S7 formal results; T225 S57 owner ledger; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
@@ -27,7 +27,6 @@
 | Exit Criteria | All 203 rows pass deterministic mapping validation and their owner-package local regression; any mismatch is recorded and resolved or explicitly returned to the correct package. |
 | Original Owner Request | Recover whole original owner packages before trace-led integration, using original source first and source-derived seams only where necessary. |
 | Similar-Issue Sweep | stale fixture registrations, missing formal targets, duplicate identity mappings, Direct/Readonly parity and untested deferred/unavailable routes. |
-
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
