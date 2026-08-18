@@ -625,6 +625,18 @@
       "source": "tests/bx-vdm/bx_ntvdm_dem_process_owner_v1_test.c",
       "libraries": ["bx-vdm"],
       "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s2-dem-loader-fastread-conformance-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_dem_loader_family_v1_test.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s2-dem-direct-search-conformance-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_dem_direct_search_transaction_v1_test.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     }
   ],
   "forbiddenInputs": [
