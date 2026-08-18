@@ -553,6 +553,12 @@
         "ntdll.lib",
         "user32.lib"
       ]
+    },
+    {
+      "name": "t226-s2-dem-error-lock-conformance-fixture",
+      "source": "tests/bx-vdm/t226_s2_dem_error_lock_conformance_fixture.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     }
   ],
   "forbiddenInputs": [
