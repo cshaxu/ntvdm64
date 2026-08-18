@@ -18,6 +18,10 @@
 #include <wchar.h>
 #include <windows.h>
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+#define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY 0
+#endif
+
 static int copied_text(uint16_t *out, uint32_t maximum, const wchar_t *text,
     uint32_t *out_chars)
 {
@@ -133,10 +137,18 @@ int wmain(int argc, wchar_t **argv)
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     uint32_t include_mask = 0u, exclude_mask = 0u;
     int has_include = 0, has_exclude = 0, has_mutation_mode = 0, has_tick_budget = 0,
-        has_bop_observation = 0, has_generic_ud_observation = 0, has_first_fault_observation = 0, has_guest_exec_observation = 0, has_guest_exec_ledger = 0, has_budget_terminal_position_observation = 0;
+        has_bop_observation = 0, has_generic_ud_observation = 0, has_first_fault_observation = 0, has_guest_exec_observation = 0, has_guest_exec_ledger = 0, has_budget_terminal_position_observation = 0
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+        , has_terminal_history_observation = 0
+#endif
+        ;
     uint32_t mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
     uint64_t instruction_tick_budget = UINT64_C(1000000);
-    int validate_only = 0, observe_bop_sequence = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_guest_exec_lifecycle = 0, observe_guest_exec_lifecycle_ledger = 0, observe_budget_terminal_position = 0;
+    int validate_only = 0, observe_bop_sequence = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_guest_exec_lifecycle = 0, observe_guest_exec_lifecycle_ledger = 0, observe_budget_terminal_position = 0
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+        , observe_terminal_history = 0
+#endif
+        ;
     int index = 1;
     byob_profile_selection selection;
     byob_launch_plan_v2 launch;
@@ -177,6 +189,10 @@ int wmain(int argc, wchar_t **argv)
             has_guest_exec_ledger = 1, observe_guest_exec_lifecycle_ledger = 1, ++index;
         else if (wcscmp(argv[index], L"--observe-budget-terminal-position") == 0 && !has_budget_terminal_position_observation)
             has_budget_terminal_position_observation = 1, observe_budget_terminal_position = 1, ++index;
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+        else if (wcscmp(argv[index], L"--observe-budget-terminal-history") == 0 && !has_terminal_history_observation)
+            has_terminal_history_observation = 1, observe_terminal_history = 1, ++index;
+#endif
         else if (wcscmp(argv[index], L"--observe-first-fault") == 0 && !has_first_fault_observation)
             has_first_fault_observation = 1, observe_first_fault = 1, ++index;
         else if (wcscmp(argv[index], L"--validate-only") == 0 && !validate_only)
@@ -221,6 +237,9 @@ int wmain(int argc, wchar_t **argv)
     if (observe_guest_exec_lifecycle) bx_ntvdm_guest_exec_lifecycle_observation_v1_enable(1u);
     if (observe_guest_exec_lifecycle_ledger) bx_ntvdm_guest_exec_lifecycle_ledger_v1_enable(1u);
     if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(1u);
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+    if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(1u);
+#endif
     if (observe_first_fault) {
         bx_ntvdm_mantle_first_fault_observation_enable(1);
         bx_ntvdm_mantle_segment_access_observation_enable(1);
@@ -231,6 +250,9 @@ int wmain(int argc, wchar_t **argv)
         if (observe_guest_exec_lifecycle) bx_ntvdm_guest_exec_lifecycle_observation_v1_enable(0u);
         if (observe_guest_exec_lifecycle_ledger) bx_ntvdm_guest_exec_lifecycle_ledger_v1_enable(0u);
         if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+        if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
+#endif
         if (observe_first_fault) {
             bx_ntvdm_mantle_segment_access_observation_enable(0);
             bx_ntvdm_mantle_first_fault_observation_enable(0);
@@ -245,6 +267,9 @@ int wmain(int argc, wchar_t **argv)
         if (observe_guest_exec_lifecycle) bx_ntvdm_guest_exec_lifecycle_observation_v1_enable(0u);
         if (observe_guest_exec_lifecycle_ledger) bx_ntvdm_guest_exec_lifecycle_ledger_v1_enable(0u);
         if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+        if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
+#endif
         if (observe_first_fault) {
             bx_ntvdm_mantle_segment_access_observation_enable(0);
             bx_ntvdm_mantle_first_fault_observation_enable(0);
@@ -301,6 +326,18 @@ int wmain(int argc, wchar_t **argv)
         else wprintf(L"ntdos64-native: budget-terminal-position unavailable\n");
         bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
     }
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+    if (observe_terminal_history) {
+        struct bx_ntvdm_machine_stage_v1_terminal_history history;
+        uint32_t history_index;
+        if (bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(&history)) {
+            wprintf(L"ntdos64-native: budget-terminal-history count=%u\n", history.count);
+            for (history_index = 0u; history_index < history.count; ++history_index)
+                wprintf(L"ntdos64-native: history[%u] sequence=%llu cs=%04x eip=%016llx ss=%04x sp=%04x\n", history_index, (unsigned long long)history.records[history_index].sequence, history.records[history_index].cs, (unsigned long long)history.records[history_index].rip, history.records[history_index].ss, history.records[history_index].sp);
+        } else wprintf(L"ntdos64-native: budget-terminal-history unavailable\n");
+        bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
+    }
+#endif
     if (observe_generic_ud_sequence) {
         struct bx_ntvdm_generic_ud_sequence_observation_v1 sequence;
         if (bx_ntvdm_generic_ud_sequence_observation_v1_copy(&sequence))
@@ -320,6 +357,10 @@ int wmain(int argc, wchar_t **argv)
         (unsigned long long)request.instruction_tick_budget);
     return result_exit(&lifecycle_audit);
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position] [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
+    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+        L" [--observe-budget-terminal-history]"
+#endif
+        L" [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
     return 2;
 }

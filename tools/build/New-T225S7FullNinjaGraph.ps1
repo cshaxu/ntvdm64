@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$BuildRoot,
-    [string]$ManifestPath = ''
+    [string]$ManifestPath = '',
+    [switch]$InstructionHistoryDiagnostic
 )
 
 Set-StrictMode -Version Latest
@@ -36,6 +37,11 @@ foreach ($input in @($manifestPath, $vs, (Join-Path $root 'tools\build\Project-B
     if (!(Test-Path -LiteralPath $input -PathType Leaf)) { throw "Required graph input missing: $input" }
 }
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+if ($InstructionHistoryDiagnostic) {
+    $mantle = @($manifest.modules | Where-Object { $_.name -eq 'bx-mantle' })
+    if ($mantle.Count -ne 1) { throw 'Diagnostic graph requires one bx-mantle module.' }
+    $mantle[0].sources = @($mantle[0].sources) + 'src/bx-mantle/bx_ntvdm_instruction_history.cc'
+}
 if ($manifest.schema -ne 'ntdos64.t225.s7.full-module-manifest.v1' -or $manifest.architecture -ne 'x64' -or $manifest.runtimeLibrary -ne '/MT') {
     throw 'Unsupported T225 S7 full-module manifest.'
 }
@@ -71,10 +77,11 @@ if (!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'CPU5 config proje
 $compiler = & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && (cl.exe /Bv 2>&1 & exit /b 0)') 2>&1
 if ($LASTEXITCODE -ne 0) { throw 'Unable to query MSVC identity.' }
 $environment = Join-Path $build 'msvc-x64-mt.cmd'
-@('@echo off', 'set "NTDOS64_NINJA_CALLER_CWD=%CD%"', ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', 'cd /d "%NTDOS64_NINJA_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
+@('@echo off', 'set "NTDOS64_NINJA_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ntdos64_msvc_ready', ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ntdos64_msvc_ready', 'cd /d "%NTDOS64_NINJA_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
 $manifestHash = Get-FileSha256 $manifestPath
 $configHash = Get-FileSha256 $config
 $toolchainHash = Get-TextSha256 (($compiler | Out-String).Trim())
+$diagnosticDefines = if ($InstructionHistoryDiagnostic) { '/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1' } else { '' }
 $buildManifest = [ordered]@{
     schema = 'ntdos64.t225.s7.ninja-full-graph.v1'
     sourceManifest = $manifestPath.Substring($root.Length + 1).Replace('\','/')
@@ -85,6 +92,7 @@ $buildManifest = [ordered]@{
     architecture = 'x64'; runtimeLibrary = '/MT'; cpuConfiguration = $manifest.cpuConfiguration
     modules = $manifest.modules; fixtures = $manifest.fixtures; targets = $manifest.targets
     forbiddenInputs = $manifest.forbiddenInputs
+    instructionHistoryDiagnostic = [bool]$InstructionHistoryDiagnostic
 }
 $configurationHash = Get-TextSha256 ($buildManifest | ConvertTo-Json -Depth 10)
 $buildManifest.configurationSha256 = $configurationHash
@@ -100,13 +108,13 @@ $graph.Add('configuration_sha256 = ' + $configurationHash)
 $graph.Add('build_root = ' + $buildNinja)
 $graph.Add('')
 $graph.Add('rule cc')
-$graph.Add('  command = cmd.exe /d /s /c call ' + $envNinja + ' cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 /D_CRT_SECURE_NO_WARNINGS /showIncludes /FI "' + $configNinja + '" ' + $includeArgs + ' /Fo$out $in')
+$graph.Add('  command = cmd.exe /d /s /c call ' + $envNinja + ' cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 /D_CRT_SECURE_NO_WARNINGS /showIncludes /FI "' + $configNinja + '" ' + $includeArgs + ' ' + $diagnosticDefines + ' /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('  description = CC $out')
 $graph.Add('')
 $graph.Add('rule cxx')
-$graph.Add('  command = cmd.exe /d /s /c call ' + $envNinja + ' cl.exe /nologo /TP /c /std:c++14 /EHsc /MT /Gy /DWIN32 /showIncludes /FI "' + $configNinja + '" ' + $includeArgs + ' /Fo$out $in')
+$graph.Add('  command = cmd.exe /d /s /c call ' + $envNinja + ' cl.exe /nologo /TP /c /std:c++14 /EHsc /MT /Gy /DWIN32 /showIncludes /FI "' + $configNinja + '" ' + $includeArgs + ' ' + $diagnosticDefines + ' /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('  description = CXX $out')

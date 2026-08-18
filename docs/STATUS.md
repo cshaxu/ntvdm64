@@ -49,6 +49,26 @@
 | Similar-Issue Sweep | All `copy_from_ordinary_ram` uses in instruction-history code, all history feature macros, public query behavior when provenance is disabled, and manifest/probe compile definitions. |
 
 > **T228 S1 P1 result:** [the provenance-boundary result](etc/evidence/t228-s1-instruction-history-provenance-boundary-result-001.md) records successful base and explicit-provenance full CPU5 fixtures. The fresh [formal Ninja graph](../build/M0-T228-S1/formal-ninja-20260818b/build.ninja) completed all 433 targets under its manifest. This P closes only the registered diagnostic-boundary repair; T228 S1 guest integration remains active.
+
+### T228 S1 P2 -- Immutable terminal instruction-history observation
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P2, Ordinary Mode. |
+| Admission And Approval | The owner-approved T228 objective requires classifying the bounded immutable terminal by complete owner domain. P1 proves the existing history boundary is scalar-only unless explicitly extended; this P uses only that scalar form. |
+| Objective | Build one separate current-source CPU5 diagnostic graph with instruction history enabled and provenance disabled; on an existing watchdog-budget return, copy at most the registered fixed-width ring and print it through an explicit CLI observation option. |
+| Non-goals | No BOP/service recognition, no UD interception or stop behavior, no guest-RAM copy/provenance, no CPU semantic change, no guest image mutation, no address/opcode rule, no new host capability, and no repair selected from the result. |
+| Reference Baseline | T228 immutable Direct/Readonly budget terminal 5A5F:9F51; P1 scalar/provenance boundary result; BX-CORE-071, BX-MANTLE-072, and BX-CORE-074; existing terminal-position observer. |
+| Files And ABI Surface | Separate diagnostic manifest/graph, bx-mantle copied terminal-history observer, CLI parsing/output, focused mantle/CLI fixture, source/ABI/failure admission and result records. The default formal manifest and ordinary CLI ABI remain unchanged. |
+| Applicable Rules | Active T228 packet; CPU compatibility completion gate; architecture/coding rules; formal-build and immutable-input rules; existing intrusion register only. |
+| Verification | Fresh diagnostic graph rebuilds the full CPU5 closure with instruction history enabled and no provenance definition; focused default/enable/budget/reset fixture; paired immutable Direct/Readonly run; fresh default formal Ninja build stays unchanged. |
+| Expected Markers | Disabled/default output has no history; an enabled watchdog terminal reports ordered copied scalar records, no bytes/register extensions, and Direct/Readonly byte-identical output. |
+| Asset Needs | Hash-locked four-image T228 inputs, existing current source manifest, CPU5 projection, and no historical object, response file, or prebuilt executable. |
+| Reporting Requirements | Record source membership/config hash, exact copied records, input identity, Direct/Readonly parity, source-map disposition, and explicitly reject BOP/leaf repair selection. |
+| Stop Conditions | Any need for a historical object/link response, provenance/RAM copy, generic-UD change, selector/service term, instruction decode, guest-specific filter, CPU semantic change, or output that cannot remain default-off. |
+| Exit Criteria | Diagnostic graph and focused fixture pass; paired immutable result is retained; the terminal is classified or explicitly transferred to one complete owner-domain source map without a trace-led leaf task. |
+| Original Owner Request | Continue T228 comprehensive immutable integration/owner-domain diagnosis after the code-complete BOP package, without trace-driven BOP additions. |
+| Similar-Issue Sweep | Existing generic-UD/first-fault probes, terminal-position observer, old T198 history recipes, formal manifest inputs, and all history/provenance compile definitions. |
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.

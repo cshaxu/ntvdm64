@@ -7,13 +7,21 @@
 #include "bx_ntvdm_cancellation_controller_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
+#include "bx_ntvdm_instruction_history.h"
 
 #include <string.h>
+
+#ifndef BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+#define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY 0
+#endif
 
 static bx_ntvdm_minimal_machine_c *bx_ntvdm_machine_stage_machine;
 static uint32_t bx_ntvdm_machine_stage_v1_terminal_position_enabled;
 static struct bx_ntvdm_machine_stage_v1_terminal_position
   bx_ntvdm_machine_stage_v1_terminal_position;
+static uint32_t bx_ntvdm_machine_stage_v1_terminal_history_enabled;
+static struct bx_ntvdm_machine_stage_v1_terminal_history
+  bx_ntvdm_machine_stage_v1_terminal_history;
 
 static void bx_ntvdm_machine_stage_v1_terminal_position_clear(void)
 {
@@ -25,6 +33,18 @@ static void bx_ntvdm_machine_stage_v1_terminal_position_clear(void)
     BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_POSITION_VERSION;
   bx_ntvdm_machine_stage_v1_terminal_position.struct_bytes =
     sizeof(bx_ntvdm_machine_stage_v1_terminal_position);
+}
+
+static void bx_ntvdm_machine_stage_v1_terminal_history_clear(void)
+{
+  memset(&bx_ntvdm_machine_stage_v1_terminal_history, 0,
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_history));
+  bx_ntvdm_machine_stage_v1_terminal_history.magic =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_HISTORY_MAGIC;
+  bx_ntvdm_machine_stage_v1_terminal_history.abi_version =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_HISTORY_VERSION;
+  bx_ntvdm_machine_stage_v1_terminal_history.struct_bytes =
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_history);
 }
 
 struct bx_ntvdm_machine_stage_v1_stop_state {
@@ -167,6 +187,28 @@ extern "C" int bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(
   return 1;
 }
 
+extern "C" void bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(
+  uint32_t enabled)
+{
+  bx_ntvdm_machine_stage_v1_terminal_history_enabled = enabled == 1u;
+  bx_ntvdm_machine_stage_v1_terminal_history_clear();
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+  (void) bx_ntvdm_mantle_instruction_history_v1_configure(
+    enabled ? BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX : 0u);
+#else
+  (void) enabled;
+#endif
+}
+
+extern "C" int bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_history *history)
+{
+  if (history == 0 || !bx_ntvdm_machine_stage_v1_terminal_history_enabled ||
+      !bx_ntvdm_machine_stage_v1_terminal_history.valid) return 0;
+  *history = bx_ntvdm_machine_stage_v1_terminal_history;
+  return 1;
+}
+
 extern "C" void bx_ntvdm_machine_stage_v1_entry_clear(
   struct bx_ntvdm_machine_stage_v1_entry *entry)
 {
@@ -261,6 +303,12 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   bx_ntvdm_mantle_generic_ud_stop_observation_reset();
   bx_ntvdm_mantle_first_fault_observation_reset();
   bx_ntvdm_machine_stage_v1_terminal_position_clear();
+  bx_ntvdm_machine_stage_v1_terminal_history_clear();
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+  if (bx_ntvdm_machine_stage_v1_terminal_history_enabled)
+    (void) bx_ntvdm_mantle_instruction_history_v1_configure(
+      BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX);
+#endif
   bx_cpu.cpu_loop();
   bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
   bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
@@ -275,6 +323,26 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
     bx_ntvdm_machine_stage_v1_terminal_position.eip = bx_cpu.get_eip();
     bx_ntvdm_machine_stage_v1_terminal_position.valid = 1u;
   }
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+  if (bx_ntvdm_machine_stage_v1_terminal_history_enabled &&
+      stop_state.watchdog_fired && !stop_state.cancellation_fired &&
+      !bx_ntvdm_mantle_first_fault_observation_observed() &&
+      !bx_ntvdm_mantle_generic_ud_stop_observed()) {
+    uint32_t count = bx_ntvdm_mantle_instruction_history_v1_count();
+    uint32_t index;
+    if (count > BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX)
+      count = BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX;
+    for (index = 0u; index < count; ++index) {
+      if (!bx_ntvdm_mantle_instruction_history_v1_get(index,
+          &bx_ntvdm_machine_stage_v1_terminal_history.records[index])) {
+        count = 0u;
+        break;
+      }
+    }
+    bx_ntvdm_machine_stage_v1_terminal_history.count = count;
+    bx_ntvdm_machine_stage_v1_terminal_history.valid = 1u;
+  }
+#endif
   if (bx_ntvdm_mantle_first_fault_observation_observed())
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_FIRST_FAULT_STOP;
   if (bx_ntvdm_mantle_generic_ud_stop_observed())

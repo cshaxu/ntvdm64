@@ -60,18 +60,22 @@ int main()
   struct bx_ntvdm_machine_stage_v1_request request;
   struct bx_ntvdm_machine_stage_v1_execution_request execution;
   struct bx_ntvdm_machine_stage_v1_terminal_position position;
+  struct bx_ntvdm_machine_stage_v1_terminal_history history;
 
   bx_ntvdm_machine_stage_v1_execution_request_clear(&execution);
   execution.ips = 1000000u;
   execution.instruction_tick_budget = 16u;
   bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
+  bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
   if (!prepare(&request, loop, sizeof(loop)) ||
       bx_ntvdm_machine_stage_v1_execute(&execution) !=
         BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET ||
       bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(&position) ||
+      bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(&history) ||
       bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 1;
 
   bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(1u);
+  bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(1u);
   if (!prepare(&request, loop, sizeof(loop)) ||
       bx_ntvdm_machine_stage_v1_execute(&execution) !=
         BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET ||
@@ -82,14 +86,28 @@ int main()
       position.cs != 0x70u || position.eip > 1u ||
       bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 2;
 
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+  if (!bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(&history) ||
+      history.magic != BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_HISTORY_MAGIC ||
+      history.abi_version != BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_HISTORY_VERSION ||
+      history.struct_bytes != sizeof(history) || history.valid != 1u ||
+      history.count == 0u ||
+      history.count > BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX) return 5;
+#else
+  if (bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(&history)) return 5;
+#endif
+
   stop_on_ud = 1;
   if (!prepare(&request, ud2, sizeof(ud2)) ||
       bx_ntvdm_machine_stage_v1_execute(&execution) !=
         BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP ||
       bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(&position) ||
+      bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(&history) ||
       bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 3;
   stop_on_ud = 0;
 
   bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
-  return bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(&position) ? 4 : 0;
+  bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
+  return bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(&position) ||
+    bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(&history) ? 4 : 0;
 }

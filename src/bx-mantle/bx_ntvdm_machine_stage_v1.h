@@ -11,6 +11,7 @@
 #include <stdint.h>
 
 #include "bx_ntvdm_mechanical_action_v1.h"
+#include "bx_ntvdm_instruction_history.h"
 
 #define BX_NTVDM_MACHINE_STAGE_V1_MAGIC UINT32_C(0x42584d53)
 #define BX_NTVDM_MACHINE_STAGE_V1_VERSION UINT32_C(1)
@@ -43,6 +44,22 @@ struct bx_ntvdm_machine_stage_v1_terminal_position {
   uint16_t cs;
   uint16_t reserved0;
   uint32_t eip;
+};
+
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_HISTORY_MAGIC UINT32_C(0x42584d48)
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_HISTORY_VERSION UINT32_C(1)
+
+/* Default-off scalar history copied only after an existing watchdog budget
+ * return. It carries no bytes, decoded instruction, BOP identity, or object. */
+struct bx_ntvdm_machine_stage_v1_terminal_history {
+  uint32_t magic;
+  uint32_t abi_version;
+  uint32_t struct_bytes;
+  uint32_t valid;
+  uint32_t count;
+  uint32_t reserved0;
+  struct bx_ntvdm_instruction_history_record_v1
+    records[BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX];
 };
 
 /* A real-mode control-transfer delta.  It deliberately excludes general
@@ -127,6 +144,13 @@ void bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(
   uint32_t enabled);
 int bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(
   struct bx_ntvdm_machine_stage_v1_terminal_position *position);
+
+/* Requires the separately compiled instruction-history diagnostic graph.
+ * Default graphs retain no history and this copy returns unavailable. */
+void bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(
+  uint32_t enabled);
+int bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_history *history);
 
 #ifdef __cplusplus
 }
