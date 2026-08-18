@@ -32,6 +32,8 @@
 
 > **T225 S55 bootstrap reconciliation:** [the map](etc/research/t225-s55-bootstrap-provider-reconciliation-001.md) closes the original DosInit/COMMAND-configuration provider prefix: it finds no unowned bootstrap BOP or configuration-materialization gap and transfers only the whole guest $Exec/child/return lifecycle comparison.
 > **T225 S55 image materialization:** [the formal result](etc/evidence/t225-s55-command-image-materialization-result-001.md) proves the current declared COMMAND.COM open/read/checked-RAM-write/close route preserves a 50,384-byte image in Direct and Readonly. It excludes that provider path, not native guest execution, as the cause of the static mismatch.
+> **T225 S55 COMMAND segment correlation:** [the static map](etc/research/t225-s55-command-segment-static-offset-correlation-001.md) validates the ordinary COM offset mapping at four same-run BOP sites; under that mapping, the copied first-fault EIP names help text, not a source instruction. It admits no BOP, CPU or guest repair.
+
 
 
 > **T225 S53 closure:** [the closure record](history/m0-t225-s53-closure-20260817.md) records the identical Direct/Readonly `BOUND` diagnostic and its non-terminal limitation. It transfers no trace-selected repair.
