@@ -14,3 +14,7 @@ needed to map runtime `0C41:1F97` uniquely to a source-map offset. Therefore
 the result proves a guest `#BR` boundary condition and rejects a generic
 segment-limit, VGA, PIC, FPU, BOP or adapter attribution; it does not name a
 source function or authorize a repair.
+
+## Correction
+
+The first-fault option deliberately stops at the first delivered exception. Normal paired runs without that option continue to the established budget terminal. Therefore this record is a mechanical first-exception classification only; it does not establish BOUND as a runtime terminal, a guest-layout failure, or a repair candidate.
