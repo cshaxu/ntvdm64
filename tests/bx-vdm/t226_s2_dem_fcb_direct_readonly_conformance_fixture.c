@@ -1,5 +1,6 @@
 #include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
 #include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
+#include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -54,12 +55,21 @@ int main(void)
     bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 result;
     uint8_t drive;
+    HANDLE file = INVALID_HANDLE_VALUE;
+    DWORD written = 0u;
     uint32_t bytes = 0u, token;
+    bx_ntvdm_instruction_window_v1 window;
+    struct bx_ntvdm_mechanical_action_v1 action;
     int status = 1;
 
     if (!GetTempPathW(MAX_PATH, temporary) ||
-        !GetTempFileNameW(temporary, L"n64", 0u, temporary) ||
-        !GetShortPathNameW(temporary, short_name, MAX_PATH) || short_name[1] != L':') goto done;
+        !GetTempFileNameW(temporary, L"n64", 0u, temporary)) goto done;
+    file = CreateFileW(temporary, GENERIC_WRITE, 0u, 0, CREATE_ALWAYS,
+        FILE_ATTRIBUTE_TEMPORARY, 0);
+    if (file == INVALID_HANDLE_VALUE || !WriteFile(file, "ab", 2u, &written, 0) ||
+        written != 2u || !CloseHandle(file)) goto done;
+    file = INVALID_HANDLE_VALUE;
+    if (!GetShortPathNameW(temporary, short_name, MAX_PATH) || short_name[1] != L':') goto done;
     drive = (uint8_t)(towupper((wint_t)short_name[0]) - L'A');
     if (!WideCharToMultiByte(CP_OEMCP, 0, short_name, -1, oem_path,
             (int)sizeof(oem_path), 0, 0) ||
@@ -86,6 +96,18 @@ int main(void)
     if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(direct, 0x2du, &boundary,
             &cpu, oem_path, 0, 0u, &bytes, &result) || cf_set(&result) ||
         (token = token_of(&result)) == 0u) goto done;
+    {
+        const uint8_t bop[] = { 0xc4u, 0xc4u, 0x50u, 0x2fu };
+        bx_ntvdm_instruction_window_v1_capture(&window, bop, sizeof(bop));
+    }
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ecx = 2u; cpu.ebx = 1u;
+    if (!bx_ntvdm_dem_fcb_io_route_partition_v1_dispatch(direct, 0x2fu, &boundary,
+            &cpu, &window, 0x300u, &action, &result) ||
+        action.kind != BX_NTVDM_MECHANICAL_ACTION_V1_WRITE || action.payload_bytes != 2u ||
+        memcmp(action.payload, "ab", 2u) != 0 || cf_set(&result) ||
+        result.cpu_delta.gpr16_values[1] != 2u) goto done;
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.eax = token >> 16u; cpu.esi = token & 0xffffu;
     if (!bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(direct, 0x2eu, &boundary,
@@ -110,6 +132,7 @@ int main(void)
         result.cpu_delta.gpr16_values[0] != 5u) goto done;
     status = 0;
 done:
+    if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
     if (direct) { bx_ntvdm_dem_whole_provider_v1_teardown(direct); free(direct); }
     if (readonly) { bx_ntvdm_dem_whole_provider_v1_teardown(readonly); free(readonly); }
     bx_ntvdm_host_namespace_v1_release(&host);
