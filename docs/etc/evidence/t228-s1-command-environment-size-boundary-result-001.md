@@ -49,12 +49,8 @@ NTDOS MCB allocation behavior; they are not BOP-provider work.
 ## Attribution And Next Repair Boundary
 
 The current provider's size/retry transaction is source-shaped and has a
-separate greater-than-4-KiB focused regression. The runtime boundary is now
-the complete original guest **COMMAND environment-reallocation / NTDOS MCB /
-transient placement** domain. No adapter environment truncation, BOP leaf,
+separate greater-than-4-KiB focused regression. The runtime boundary is now the original guest **COMMAND image/lifecycle** domain, including its environment-reallocation, NTDOS MCB interaction and transient-placement subpaths. No adapter environment truncation, BOP leaf,
 synthetic guest write, or Bochs address-specific change is admitted.
 
-The next repair packet must inspect the original guest memory-allocation and
-transient-placement state across the first and second `54:0F` calls, then
-repair only a demonstrated owner-domain defect. Trace is evidence for that
+The next repair packet must inspect COMMAND guest-image/lifecycle state across the first and second `54:0F` calls, including its NTDOS allocation interaction and transient placement, then repair only a demonstrated owner-domain defect. Trace is evidence for that
 package; it does not select a new service task.
