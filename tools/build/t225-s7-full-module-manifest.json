@@ -162,6 +162,7 @@
         "src/bx-mantle/bx_ntvdm_first_fault_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_segment_access_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_software_interrupt_observation_v1.cc",
+        "src/bx-mantle/bx_ntvdm_interrupt_return_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
         "src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc",
         "src/bx-mantle/bx_ntvdm_port_action_v1.cc",
@@ -462,6 +463,11 @@
     {
       "name": "t228-s1-software-interrupt-observation-fixture",
       "source": "tests/bx-mantle/t228_s1_software_interrupt_observation_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle"],
+      "platformLibraries": []
+    },    {
+      "name": "t228-s1-interrupt-return-observation-fixture",
+      "source": "tests/bx-mantle/t228_s1_interrupt_return_observation_fixture.cc",
       "libraries": ["bx-core", "bx-mantle"],
       "platformLibraries": []
     },

@@ -24,6 +24,36 @@
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+#define BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION 0
+#endif
+
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+#include "bx-mantle/bx_ntvdm_interrupt_return_observation_v1.h"
+#define BX_NTVDM_RECORD_INTERRUPT_RETURN(width_value) do { \
+  if (BX_CPU_THIS_PTR real_mode() || BX_CPU_THIS_PTR v8086_mode()) { \
+    struct bx_ntvdm_interrupt_return_observation_v1_record record; \
+    record.version = BX_NTVDM_INTERRUPT_RETURN_OBSERVATION_V1_VERSION; \
+    record.cpu_id = BX_CPU_ID; \
+    record.sequence = BX_CPU_THIS_PTR icount; \
+    record.rip = RIP; \
+    record.eflags = BX_CPU_THIS_PTR read_eflags(); \
+    record.sp = ESP; \
+    record.cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value; \
+    record.ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value; \
+    record.ax = AX; record.bx = BX; record.cx = CX; record.dx = DX; \
+    record.ds = BX_CPU_THIS_PTR sregs[BX_SEG_REG_DS].selector.value; \
+    record.es = BX_CPU_THIS_PTR sregs[BX_SEG_REG_ES].selector.value; \
+    record.execution_mode = BX_CPU_THIS_PTR real_mode() ? 1u : 3u; \
+    record.operand_width = (Bit8u)(width_value); \
+    record.reserved0 = 0u; \
+    bx_ntvdm_mantle_interrupt_return_observation_v1_record(&record); \
+  } \
+} while (0)
+#else
+#define BX_NTVDM_RECORD_INTERRUPT_RETURN(width_value) do { } while (0)
+#endif
+
 #if BX_CPU_LEVEL >= 3
 
 BX_CPP_INLINE void BX_CPP_AttrRegparmN(1) BX_CPU_C::branch_near32(Bit32u new_EIP)
@@ -624,6 +654,7 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::IRET32(bxInstruction_c *i)
   }
 
   RSP_COMMIT;
+  BX_NTVDM_RECORD_INTERRUPT_RETURN(32u);
 
 done:
 

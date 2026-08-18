@@ -5,7 +5,8 @@ param(
     [string]$ManifestPath = '',
     [switch]$InstructionHistoryDiagnostic,
     [switch]$InstructionHistoryProvenanceDiagnostic,
-    [switch]$SoftwareInterruptDiagnostic
+    [switch]$SoftwareInterruptDiagnostic,
+    [switch]$InterruptReturnDiagnostic
 )
 
 Set-StrictMode -Version Latest
@@ -93,6 +94,9 @@ if ($InstructionHistoryProvenanceDiagnostic) {
 if ($SoftwareInterruptDiagnostic) {
     $diagnosticDefineParts.Add('/DBX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION=1')
 }
+if ($InterruptReturnDiagnostic) {
+    $diagnosticDefineParts.Add('/DBX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION=1')
+}
 $diagnosticDefines = $diagnosticDefineParts -join ' '
 $buildManifest = [ordered]@{
     schema = 'ntdos64.t225.s7.ninja-full-graph.v1'
@@ -107,6 +111,7 @@ $buildManifest = [ordered]@{
     instructionHistoryDiagnostic = [bool]$InstructionHistoryDiagnostic
     instructionHistoryProvenanceDiagnostic = [bool]$InstructionHistoryProvenanceDiagnostic
     softwareInterruptDiagnostic = [bool]$SoftwareInterruptDiagnostic
+    interruptReturnDiagnostic = [bool]$InterruptReturnDiagnostic
 }
 $configurationHash = Get-TextSha256 ($buildManifest | ConvertTo-Json -Depth 10)
 $buildManifest.configurationSha256 = $configurationHash

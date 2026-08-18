@@ -308,6 +308,8 @@
 
 > **T228 S1 P23 admission:** [the real/V86 IRET observation admission](etc/research/t228-s1-real-v86-iret-observation-admission-001.md) records that current BX_INSTR_FAR_BRANCH is a no-op stub in the minimal graph and that neither OpenNT nor bx-vdm can expose this CPU boundary. It permits only the registered, default-off mechanical profile and no repair or native observation.
 
+> **T228 S1 P23 result:** [the real/V86 IRET observation result](etc/evidence/t228-s1-real-v86-iret-observation-result-001.md) closes the registered default-off profile: disabled and enabled real-mode IRET16/IRET32, protected-mode negative behavior, copied-ring wrap/reset, fresh diagnostic CPU5 x64 /MT fixture and fresh default native target link all pass. V86 has source-path coverage only because no admitted fixed-machine V86 entry setup exists. It selects no BOP, provider or repair.
+
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
