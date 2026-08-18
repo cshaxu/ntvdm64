@@ -17,9 +17,9 @@
 | Objective | Implement and verify the complete default-off SoftPC real/V86 segment-limit compatibility profile through bx-core/bx-mantle, retaining native protected-mode behavior and no guest-service semantics. |
 | Non-goals | No BOP/provider patch; no adapter CPU emulation; no COMMAND/DOS/PSP/EXEC repair; no guest-address special case; no device/firmware expansion; no protected-mode relaxation or native trace until each classified group closes. |
 | Reference Baseline | T225 S30 exact DS:FFFF word-read tuple; S55 startup/COMMAND stage ledger; OpenNT CCPU c_addr.c:limit_check; current Bochs access32.cc; current CPU5/P-MMX chaining configuration. |
-| Files And ABI Surface | src/bx-core/cpu/access32.cc only if later admitted; the existing exception register; a new private fixture and formal manifest membership only after the full source map. No cross-layer ABI. |
+| Files And ABI Surface | bx-core CPU state, access.cc/access32.cc scalar paths; bx-mantle minimal-machine/machine-stage and fixture-private finite-run selection; one formal fixture/manifest entry. No bx-vdm, BOP, CLI or cross-layer ABI. |
 | Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, deny-by-default Bochs admission, and intrusion-register rules. |
-| Verification | Complete mode/width/direction classification; register review; focused disabled/enabled/protected-mode fixture design; full formal graph and Direct/Readonly paired native validation only after an admitted patch. |
+| Verification | The fresh formal CPU5/P-MMX x64 `/MT` grouped fixture proves disabled native rejection plus enabled scalar, RMW/string, stack and fetch/control continuation; S30 default-off regression passes. One paired Direct/Readonly native invocation is byte-identical but rejects current composition before machine stage (`terminal=2`, `detail=53`), so it is not CPU runtime evidence. |
 | Expected Markers | Explicit original SoftPC rule; exact current Bochs branches; a no-semantic-leak source scan; default-off negative result; defined stop boundary. |
 | Asset Needs | Retained OpenNT SoftPC CCPU source, adopted bx-core source, CPU5/P-MMX MSVC x64 /MT Ninja graph and existing immutable guest inputs. |
 | Reporting Requirements | Distinguish historical CCPU semantics from Bochs default semantics; record every classified access family, exact exception behavior, and whether the candidate remains bounded. |
@@ -29,6 +29,8 @@
 | Similar-Issue Sweep | Real/V86/protected modes; read/write; byte/word/dword; expand-up/down; aligned/unaligned crossings; source-defined fault/continuation behavior. |
 
 > **T225 S56 SoftPC compatibility map:** [the source/ABI/failure map](etc/research/t225-s56-softpc-realmode-segment-limit-source-abi-failure-map-001.md) proves the observed real-mode DS:FFFF word rejection differs from the historical CCPU default and defines the admitted complete default-off bx-core/bx-mantle compatibility profile. It rejects any address/path patch and preserves protected-mode Bochs semantics.
+
+> **T225 S56 grouped result:** [the grouped result](etc/evidence/t225-s56-grouped-realmode-segment-limit-result-001.md) records all four CPU compatibility groups and their formal regressions. Its single paired native invocation rejects the current composition before machine-stage entry in both modes; it does not select a trace-led repair.
 
 > **T225 S55 closure:** [the closure record](history/m0-t225-s55-closure-20260817.md) completes the startup/COMMAND/EXEC source-current route and transfers only the registered SoftPC real-mode segment-limit compatibility boundary. It admits no BOP, DOS, COMMAND, adapter or guest-address repair.
 > **T225 S55 paired integration:** [the result](etc/evidence/t225-s55-full-package-paired-integration-result-001.md) records a fresh full-graph Direct/Readonly run with byte-identical budget-terminal output. It neither proves guest child reach nor selects a leaf repair.

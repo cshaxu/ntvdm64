@@ -71,7 +71,7 @@ if (!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'CPU5 config proje
 $compiler = & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && (cl.exe /Bv 2>&1 & exit /b 0)') 2>&1
 if ($LASTEXITCODE -ne 0) { throw 'Unable to query MSVC identity.' }
 $environment = Join-Path $build 'msvc-x64-mt.cmd'
-@('@echo off', ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
+@('@echo off', 'set "NTDOS64_NINJA_CALLER_CWD=%CD%"', ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', 'cd /d "%NTDOS64_NINJA_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
 $manifestHash = Get-FileSha256 $manifestPath
 $configHash = Get-FileSha256 $config
 $toolchainHash = Get-TextSha256 (($compiler | Out-String).Trim())

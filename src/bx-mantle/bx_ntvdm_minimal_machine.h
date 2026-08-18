@@ -18,7 +18,8 @@ enum bx_ntvdm_minimal_machine_status {
   BX_NTVDM_MINIMAL_MACHINE_PORT_SPACE_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_PIC_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_PIC_CLEANUP_FAILED,
-  BX_NTVDM_MINIMAL_MACHINE_PORT_SPACE_CLEANUP_FAILED
+  BX_NTVDM_MINIMAL_MACHINE_PORT_SPACE_CLEANUP_FAILED,
+  BX_NTVDM_MINIMAL_MACHINE_CPU_CONFIGURATION_FAILED
 };
 
 // This C++-only owner exposes neither original-object pointers nor an ABI.
@@ -30,11 +31,17 @@ public:
   bx_ntvdm_minimal_machine_status initialize(Bit64u guest, Bit64u host);
   bx_ntvdm_minimal_machine_status cleanup(void);
 
+  // Private mantle lifecycle control for the CPU compatibility gate.
+  // It is valid only after initialize and before cleanup.
+  bx_bool set_realmode_segment_limit_compatibility(bx_bool enabled);
+  bx_bool realmode_segment_limit_compatibility_active(void);
+
 private:
   bx_bool attempted;
   bx_bool memory_owned;
   bx_bool port_space_owned;
   bx_bool pic_owned;
+  bx_bool cpu_initialized;
   bx_pic_c *pic;
 };
 

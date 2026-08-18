@@ -45,12 +45,18 @@ BX_CPU_C::BX_CPU_C(unsigned id): bx_cpuid(id)
 
   isa_extensions_bitmask = BX_SUPPORT_FPU ? BX_ISA_X87 : 0;
   cpu_extensions_bitmask = 0;
+  realmode_segment_limit_compatibility = 0;
 #if BX_SUPPORT_VMX
   vmx_extensions_bitmask = 0;
 #endif
 #if BX_SUPPORT_SVM
   svm_extensions_bitmask = 0;
 #endif
+}
+
+void BX_CPU_C::set_realmode_segment_limit_compatibility(bx_bool enabled)
+{
+  realmode_segment_limit_compatibility = enabled ? 1 : 0;
 }
 
 void BX_CPU_C::apply_real_mode_state(Bit32u eax, Bit32u ebx, Bit32u ecx, Bit32u edx,

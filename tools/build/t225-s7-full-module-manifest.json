@@ -453,6 +453,12 @@
       "platformLibraries": []
     },
     {
+      "name": "t225-s56-realmode-segment-limit-compatibility-fixture",
+      "source": "tests/bx-mantle/t225_s56_realmode_segment_limit_compatibility_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle"],
+      "platformLibraries": []
+    },
+    {
       "name": "t225-s15-generic-ud-observation-fixture",
       "source": "tests/bx-vdm/t225_s15_generic_ud_observation_fixture.c",
       "libraries": [

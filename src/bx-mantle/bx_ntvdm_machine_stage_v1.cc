@@ -89,6 +89,11 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_begin(
     bx_ntvdm_machine_stage_machine = 0;
     return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
   }
+  if (!bx_ntvdm_machine_stage_machine->
+      set_realmode_segment_limit_compatibility(1u)) {
+    bx_ntvdm_machine_stage_v1_reset();
+    return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
+  }
 
   initial_state_action = request->initial_state_action;
   startup_action = request->startup_action;

@@ -687,7 +687,7 @@ void BX_CPU_C::real_mode_int(Bit8u vector, bx_bool push_error, Bit16u error_code
 
   Bit16u new_ip = system_read_word(BX_CPU_THIS_PTR idtr.base + 4 * vector);
   // CS.LIMIT can't change when in real/v8086 mode
-  if (new_ip > BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].cache.u.segment.limit_scaled) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() && (new_ip > BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].cache.u.segment.limit_scaled)) {
     BX_ERROR(("interrupt(real mode): instruction pointer not within code segment limits"));
     exception(BX_GP_EXCEPTION, 0);
   }

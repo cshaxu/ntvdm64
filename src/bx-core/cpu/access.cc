@@ -62,8 +62,9 @@ BX_CPU_C::write_virtual_checks(bx_segment_reg_t *seg, Bit32u offset, unsigned le
       return 0;
 
     case 2: case 3: /* read/write */
-      if (offset > (seg->cache.u.segment.limit_scaled - length)
-          || length > seg->cache.u.segment.limit_scaled)
+      if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+          (offset > (seg->cache.u.segment.limit_scaled - length)
+           || length > seg->cache.u.segment.limit_scaled))
       {
         BX_ERROR(("write_virtual_checks(): write beyond limit, r/w"));
         return 0;
@@ -85,8 +86,9 @@ BX_CPU_C::write_virtual_checks(bx_segment_reg_t *seg, Bit32u offset, unsigned le
         upper_limit = 0xffffffff;
       else
         upper_limit = 0x0000ffff;
-      if (offset <= seg->cache.u.segment.limit_scaled ||
-           offset > upper_limit || (upper_limit - offset) < length)
+      if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+          (offset <= seg->cache.u.segment.limit_scaled ||
+           offset > upper_limit || (upper_limit - offset) < length))
       {
         BX_ERROR(("write_virtual_checks(): write beyond limit, r/w ED"));
         return 0;
@@ -122,8 +124,9 @@ BX_CPU_C::read_virtual_checks(bx_segment_reg_t *seg, Bit32u offset, unsigned len
     case 2: case 3: /* read/write */
     case 10: case 11: /* execute/read */
     case 14: case 15: /* execute/read-only, conforming */
-      if (offset > (seg->cache.u.segment.limit_scaled - length)
-          || length > seg->cache.u.segment.limit_scaled)
+      if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+          (offset > (seg->cache.u.segment.limit_scaled - length)
+           || length > seg->cache.u.segment.limit_scaled))
       {
         BX_ERROR(("read_virtual_checks(): read beyond limit"));
         return 0;
@@ -141,8 +144,9 @@ BX_CPU_C::read_virtual_checks(bx_segment_reg_t *seg, Bit32u offset, unsigned len
         upper_limit = 0xffffffff;
       else
         upper_limit = 0x0000ffff;
-      if (offset <= seg->cache.u.segment.limit_scaled ||
-           offset > upper_limit || (upper_limit - offset) < length)
+      if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+          (offset <= seg->cache.u.segment.limit_scaled ||
+           offset > upper_limit || (upper_limit - offset) < length))
       {
         BX_ERROR(("read_virtual_checks(): read beyond limit ED"));
         return 0;
@@ -184,8 +188,9 @@ BX_CPU_C::execute_virtual_checks(bx_segment_reg_t *seg, Bit32u offset, unsigned 
     case 2: case 3: /* read/write */
     case 10: case 11: /* execute/read */
     case 14: case 15: /* execute/read-only, conforming */
-      if (offset > (seg->cache.u.segment.limit_scaled - length)
-          || length > seg->cache.u.segment.limit_scaled)
+      if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+          (offset > (seg->cache.u.segment.limit_scaled - length)
+           || length > seg->cache.u.segment.limit_scaled))
       {
         BX_ERROR(("execute_virtual_checks(): read beyond limit"));
         return 0;
@@ -199,8 +204,9 @@ BX_CPU_C::execute_virtual_checks(bx_segment_reg_t *seg, Bit32u offset, unsigned 
 
     case 8: case 9: /* execute only */
     case 12: case 13: /* execute only, conforming */
-      if (offset > (seg->cache.u.segment.limit_scaled - length)
-          || length > seg->cache.u.segment.limit_scaled)
+      if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+          (offset > (seg->cache.u.segment.limit_scaled - length)
+           || length > seg->cache.u.segment.limit_scaled))
       {
         BX_ERROR(("execute_virtual_checks(): read beyond limit execute only"));
         return 0;
@@ -213,8 +219,9 @@ BX_CPU_C::execute_virtual_checks(bx_segment_reg_t *seg, Bit32u offset, unsigned 
         upper_limit = 0xffffffff;
       else
         upper_limit = 0x0000ffff;
-      if (offset <= seg->cache.u.segment.limit_scaled ||
-           offset > upper_limit || (upper_limit - offset) < length)
+      if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+          (offset <= seg->cache.u.segment.limit_scaled ||
+           offset > upper_limit || (upper_limit - offset) < length))
       {
         BX_ERROR(("execute_virtual_checks(): read beyond limit ED"));
         return 0;

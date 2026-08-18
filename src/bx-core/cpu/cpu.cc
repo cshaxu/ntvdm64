@@ -578,14 +578,16 @@ void BX_CPU_C::prefetch(void)
     BX_CPU_THIS_PTR eipPageBias = (bx_address) pageOffset - EIP;
 
     Bit32u limit = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].cache.u.segment.limit_scaled;
-    if (EIP > limit) {
-      BX_ERROR(("prefetch: EIP [%08x] > CS.limit [%08x]", EIP, limit));
-      exception(BX_GP_EXCEPTION, 0);
-    }
-
     BX_CPU_THIS_PTR eipPageWindowSize = 4096;
-    if (limit + BX_CPU_THIS_PTR eipPageBias < 4096) {
-      BX_CPU_THIS_PTR eipPageWindowSize = (Bit32u)(limit + BX_CPU_THIS_PTR eipPageBias + 1);
+    if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) {
+      if (EIP > limit) {
+        BX_ERROR(("prefetch: EIP [%08x] > CS.limit [%08x]", EIP, limit));
+        exception(BX_GP_EXCEPTION, 0);
+      }
+
+      if (limit + BX_CPU_THIS_PTR eipPageBias < 4096) {
+        BX_CPU_THIS_PTR eipPageWindowSize = (Bit32u)(limit + BX_CPU_THIS_PTR eipPageBias + 1);
+      }
     }
   }
 

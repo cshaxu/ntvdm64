@@ -103,6 +103,12 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
 
+  if (!machine.set_realmode_segment_limit_compatibility(
+      request->enable_realmode_segment_limit_compatibility)) {
+    machine.cleanup();
+    return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
+  }
+
   if (request->has_preentry_action) {
     struct bx_ntvdm_mechanical_action_v1 action = request->preentry_action;
     if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) {

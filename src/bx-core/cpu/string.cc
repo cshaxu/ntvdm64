@@ -38,6 +38,8 @@ Bit32u BX_CPU_C::FastRepMOVSB(bxInstruction_c *i, unsigned srcSeg, bx_address sr
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
+  if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return 0;
+
   bx_segment_reg_t *srcSegPtr = &BX_CPU_THIS_PTR sregs[srcSeg];
   if (!(srcSegPtr->cache.valid & SegAccessROK))
     return 0;
@@ -107,6 +109,8 @@ Bit32u BX_CPU_C::FastRepMOVSW(bxInstruction_c *i, unsigned srcSeg, bx_address sr
   Bit8u *hostAddrSrc, *hostAddrDst;
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
+
+  if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return 0;
 
   bx_segment_reg_t *srcSegPtr = &BX_CPU_THIS_PTR sregs[srcSeg];
   if (!(srcSegPtr->cache.valid & SegAccessROK))
@@ -181,6 +185,8 @@ Bit32u BX_CPU_C::FastRepMOVSD(bxInstruction_c *i, unsigned srcSeg, bx_address sr
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
+  if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return 0;
+
   bx_segment_reg_t *srcSegPtr = &BX_CPU_THIS_PTR sregs[srcSeg];
   if (!(srcSegPtr->cache.valid & SegAccessROK))
     return 0;
@@ -254,6 +260,8 @@ Bit32u BX_CPU_C::FastRepSTOSB(bxInstruction_c *i, unsigned dstSeg, bx_address ds
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
+  if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return 0;
+
   bx_segment_reg_t *dstSegPtr = &BX_CPU_THIS_PTR sregs[dstSeg];
   if (!(dstSegPtr->cache.valid & SegAccessWOK))
     return 0;
@@ -307,6 +315,8 @@ Bit32u BX_CPU_C::FastRepSTOSW(bxInstruction_c *i, unsigned dstSeg, bx_address ds
   Bit8u *hostAddrDst;
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
+
+  if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return 0;
 
   bx_segment_reg_t *dstSegPtr = &BX_CPU_THIS_PTR sregs[dstSeg];
   if (!(dstSegPtr->cache.valid & SegAccessWOK))
@@ -363,6 +373,8 @@ Bit32u BX_CPU_C::FastRepSTOSD(bxInstruction_c *i, unsigned dstSeg, bx_address ds
   Bit8u *hostAddrDst;
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
+
+  if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return 0;
 
   bx_segment_reg_t *dstSegPtr = &BX_CPU_THIS_PTR sregs[dstSeg];
   if (!(dstSegPtr->cache.valid & SegAccessWOK))

@@ -41,6 +41,8 @@ Bit32u BX_CPU_C::FastRepINSW(bxInstruction_c *i, bx_address dstOff, Bit16u port,
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
+  if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return 0;
+
   bx_segment_reg_t *dstSegPtr = &BX_CPU_THIS_PTR sregs[BX_SEG_REG_ES];
   if (!(dstSegPtr->cache.valid & SegAccessWOK))
     return 0;
@@ -113,6 +115,8 @@ Bit32u BX_CPU_C::FastRepOUTSW(bxInstruction_c *i, unsigned srcSeg, bx_address sr
   unsigned count;
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
+
+  if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return 0;
 
   bx_segment_reg_t *srcSegPtr = &BX_CPU_THIS_PTR sregs[srcSeg];
   if (!(srcSegPtr->cache.valid & SegAccessROK))

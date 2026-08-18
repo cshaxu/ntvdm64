@@ -900,6 +900,11 @@ public: // for now...
   // state outside CS:RIP. Callers own validation and lifecycle policy.
   void apply_real_mode_entry(Bit16u cs, Bit32u eip);
 
+  // Default-off real/V86 segment-span compatibility gate.  The CPU retains
+  // native protected-mode behavior.
+  void set_realmode_segment_limit_compatibility(bx_bool enabled);
+  BX_CPP_INLINE bx_bool realmode_segment_limit_compatibility_active(void);
+
   unsigned bx_cpuid;
 
 #if BX_CPU_LEVEL >= 4
@@ -1114,6 +1119,7 @@ public: // for now...
 #endif
   bx_bool  in_smm;
   unsigned cpu_mode;
+  bx_bool realmode_segment_limit_compatibility;
   bx_bool  user_pl;
   bx_bool  INTR;
   bx_bool  pending_SMI;
@@ -4569,6 +4575,12 @@ BX_CPP_INLINE unsigned BX_CPU_C::get_cr8(void)
 BX_CPP_INLINE bx_bool BX_CPU_C::real_mode(void)
 {
   return (BX_CPU_THIS_PTR cpu_mode == BX_MODE_IA32_REAL);
+}
+
+BX_CPP_INLINE bx_bool BX_CPU_C::realmode_segment_limit_compatibility_active(void)
+{
+  return BX_CPU_THIS_PTR realmode_segment_limit_compatibility &&
+    (BX_CPU_THIS_PTR real_mode() || BX_CPU_THIS_PTR v8086_mode());
 }
 
 BX_CPP_INLINE bx_bool BX_CPU_C::smm_mode(void)

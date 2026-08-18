@@ -32,6 +32,7 @@ bx_ntvdm_minimal_machine_c::bx_ntvdm_minimal_machine_c()
   memory_owned = 0;
   port_space_owned = 0;
   pic_owned = 0;
+  cpu_initialized = 0;
   pic = NULL;
 }
 
@@ -79,6 +80,8 @@ bx_ntvdm_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
   // BX-MANTLE-082-END
 
   bx_cpu.initialize();
+  cpu_initialized = 1;
+  bx_cpu.set_realmode_segment_limit_compatibility(0);
   bx_pc_system.set_enable_a20(1);
   bx_cpu.reset(BX_RESET_HARDWARE);
   bx_ntvdm_a20_capability_v1_set_lifecycle_active(1u);
@@ -88,9 +91,26 @@ bx_ntvdm_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
   return BX_NTVDM_MINIMAL_MACHINE_OK;
 }
 
+bx_bool bx_ntvdm_minimal_machine_c::set_realmode_segment_limit_compatibility(
+  bx_bool enabled)
+{
+  if (!cpu_initialized) return 0;
+  bx_cpu.set_realmode_segment_limit_compatibility(enabled);
+  return 1;
+}
+
+bx_bool bx_ntvdm_minimal_machine_c::realmode_segment_limit_compatibility_active(void)
+{
+  return cpu_initialized && bx_cpu.realmode_segment_limit_compatibility_active();
+}
+
 bx_ntvdm_minimal_machine_status bx_ntvdm_minimal_machine_c::cleanup(void)
 {
   bx_ntvdm_port_action_v1_set_lifecycle_active(0u);
+  if (cpu_initialized) {
+    bx_cpu.set_realmode_segment_limit_compatibility(0);
+    cpu_initialized = 0;
+  }
   if (pic_owned) {
     if (!pic->fini()) {
       return BX_NTVDM_MINIMAL_MACHINE_PIC_CLEANUP_FAILED;

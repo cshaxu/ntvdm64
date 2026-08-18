@@ -67,6 +67,10 @@ void BX_CPP_AttrRegparmN(2) BX_CPU_C::stackPrefetch(bx_address offset, unsigned 
     BX_ASSERT(BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].cache.p);
     BX_ASSERT(IS_DATA_SEGMENT_WRITEABLE(BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].cache.type));
 
+    // Real/V86 compatibility retains the native virtual-access path and its
+    // type/paging checks, but leaves the cached segment window empty.
+    if (BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active()) return;
+
     // check that the begining of the page is within stack segment limits
     // problem can happen with EXPAND DOWN segments
     if (IS_DATA_SEGMENT_EXPAND_DOWN(BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].cache.type)) {

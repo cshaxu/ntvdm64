@@ -62,7 +62,8 @@ BX_CPU_C::write_virtual_byte_32(unsigned s, Bit32u offset, Bit8u data)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= seg->cache.u.segment.limit_scaled) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -105,7 +106,8 @@ BX_CPU_C::write_virtual_word_32(unsigned s, Bit32u offset, Bit16u data)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset < seg->cache.u.segment.limit_scaled) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -162,7 +164,8 @@ BX_CPU_C::write_virtual_dword_32(unsigned s, Bit32u offset, Bit32u data)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset < (seg->cache.u.segment.limit_scaled-2)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -219,7 +222,8 @@ BX_CPU_C::write_virtual_qword_32(unsigned s, Bit32u offset, Bit64u data)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-7)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -278,7 +282,8 @@ BX_CPU_C::write_virtual_dqword_32(unsigned s, Bit32u offset, const BxPackedXmmRe
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-15)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -330,7 +335,8 @@ BX_CPU_C::write_virtual_dqword_aligned_32(unsigned s, Bit32u offset, const BxPac
     exception(BX_GP_EXCEPTION, 0);
   }
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-15)) {
 accessOK:
       unsigned tlbIndex = BX_TLB_INDEX_OF(laddr, 0);
@@ -377,7 +383,8 @@ void BX_CPU_C::write_virtual_dword_vector_32(unsigned s, Bit32u offset, unsigned
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-len+1)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -433,7 +440,8 @@ void BX_CPU_C::write_virtual_dword_vector_aligned_32(unsigned s, Bit32u offset, 
     exception(BX_GP_EXCEPTION, 0);
   }
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-len+1)) {
 accessOK:
       unsigned tlbIndex = BX_TLB_INDEX_OF(laddr, 0);
@@ -483,7 +491,8 @@ BX_CPU_C::read_virtual_byte_32(unsigned s, Bit32u offset)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessROK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessROK)) {
     if (offset <= seg->cache.u.segment.limit_scaled) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -526,7 +535,8 @@ BX_CPU_C::read_virtual_word_32(unsigned s, Bit32u offset)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessROK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessROK)) {
     if (offset < seg->cache.u.segment.limit_scaled) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -591,7 +601,8 @@ BX_CPU_C::read_virtual_dword_32(unsigned s, Bit32u offset)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessROK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessROK)) {
     if (offset < (seg->cache.u.segment.limit_scaled-2)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -647,7 +658,8 @@ BX_CPU_C::read_virtual_qword_32(unsigned s, Bit32u offset)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessROK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessROK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-7)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -704,7 +716,8 @@ BX_CPU_C::read_virtual_dqword_32(unsigned s, Bit32u offset, BxPackedXmmRegister 
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessROK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessROK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-15)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -753,7 +766,8 @@ BX_CPU_C::read_virtual_dqword_aligned_32(unsigned s, Bit32u offset, BxPackedXmmR
     exception(BX_GP_EXCEPTION, 0);
   }
 
-  if (seg->cache.valid & SegAccessROK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessROK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-15)) {
 accessOK:
       unsigned tlbIndex = BX_TLB_INDEX_OF(laddr, 0);
@@ -798,7 +812,8 @@ void BX_CPU_C::read_virtual_dword_vector_32(unsigned s, Bit32u offset, unsigned 
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessROK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessROK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-len+1)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -851,7 +866,8 @@ void BX_CPU_C::read_virtual_dword_vector_aligned_32(unsigned s, Bit32u offset, u
     exception(BX_GP_EXCEPTION, 0);
   }
 
-  if (seg->cache.valid & SegAccessROK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessROK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-len+1)) {
 accessOK:
       unsigned tlbIndex = BX_TLB_INDEX_OF(laddr, 0);
@@ -904,7 +920,8 @@ BX_CPU_C::read_RMW_virtual_byte_32(unsigned s, Bit32u offset)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= seg->cache.u.segment.limit_scaled) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -950,7 +967,8 @@ BX_CPU_C::read_RMW_virtual_word_32(unsigned s, Bit32u offset)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset < seg->cache.u.segment.limit_scaled) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -1010,7 +1028,8 @@ BX_CPU_C::read_RMW_virtual_dword_32(unsigned s, Bit32u offset)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset < (seg->cache.u.segment.limit_scaled-2)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -1070,7 +1089,8 @@ BX_CPU_C::read_RMW_virtual_qword_32(unsigned s, Bit32u offset)
 
   BX_ASSERT(BX_CPU_THIS_PTR cpu_mode != BX_MODE_LONG_64);
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-7)) {
 accessOK:
       laddr = get_laddr32(s, offset);
@@ -1274,7 +1294,8 @@ void BX_CPU_C::write_new_stack_word_32(bx_segment_reg_t *seg, Bit32u offset, uns
 {
   Bit32u laddr;
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset < seg->cache.u.segment.limit_scaled) {
 accessOK:
       laddr = (Bit32u)(seg->cache.u.segment.base) + offset;
@@ -1332,7 +1353,8 @@ void BX_CPU_C::write_new_stack_dword_32(bx_segment_reg_t *seg, Bit32u offset, un
 {
   Bit32u laddr;
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset < (seg->cache.u.segment.limit_scaled-2)) {
 accessOK:
       laddr = (Bit32u)(seg->cache.u.segment.base) + offset;
@@ -1390,7 +1412,8 @@ void BX_CPU_C::write_new_stack_qword_32(bx_segment_reg_t *seg, Bit32u offset, un
 {
   Bit32u laddr;
 
-  if (seg->cache.valid & SegAccessWOK) {
+  if (!BX_CPU_THIS_PTR realmode_segment_limit_compatibility_active() &&
+      (seg->cache.valid & SegAccessWOK)) {
     if (offset <= (seg->cache.u.segment.limit_scaled-7)) {
 accessOK:
       laddr = (Bit32u)(seg->cache.u.segment.base) + offset;
