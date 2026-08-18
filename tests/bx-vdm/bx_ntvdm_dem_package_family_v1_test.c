@@ -385,10 +385,10 @@ static int fcb_bop_transaction_regression(void)
 
 /* This is deliberately package-level rather than a detached token unit test:
  * it reaches the selected 50:3C route and the subsequent 50:02 close through
- * one Direct DEM session.  OpenNT executes SVC_PDBTERMINATE before DOS_ABORT,
+ * one installed DEM session.  OpenNT executes SVC_PDBTERMINATE before DOS_ABORT,
  * whose JFT/SFT walk emits SVC_DEMCLOSE; therefore 3C may release search
  * continuations but must not pre-close the opaque Direct SFT token. */
-static int direct_pdb_lifecycle_regression(void)
+static int whole_provider_pdb_lifecycle_regression(void)
 {
     uint8_t ntdos_bytes[] = { 0xf4u }, command_bytes[] = { 0xf4u };
     uint8_t target_bytes[] = { 0xf4u }, drive_types[26] = { 0u };
@@ -408,7 +408,9 @@ static int direct_pdb_lifecycle_regression(void)
     bx_ntvdm_exception_event_v1 event;
     bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 result;
-    wchar_t temporary[MAX_PATH], path[MAX_PATH];
+    bx_ntvdm_dem_dta_registration_v1 dta = { 0x800u, 0x810u, 0x820u, 0x830u };
+    wchar_t temporary[MAX_PATH], path[MAX_PATH], fcb_path[MAX_PATH];
+    char oem_fcb_path[128], readback[3];
     HANDLE file = INVALID_HANDLE_VALUE, looked_up = INVALID_HANDLE_VALUE;
     DWORD written = 0u;
     uint32_t token = 0u;
@@ -416,9 +418,12 @@ static int direct_pdb_lifecycle_regression(void)
 
     memset(&session, 0, sizeof(session));
     memset(&host_namespace, 0, sizeof(host_namespace));
+    memset(fcb_path, 0, sizeof(fcb_path));
     profile_initialize(&profile);
-    bx_ntvdm_mutation_profile_v1_initialize(&mutation_profile,
-        BX_NTVDM_MUTATION_MODE_V1_DIRECT);
+    /* The same installed whole provider must preserve token lifecycle in both
+     * Direct and Readonly modes.  This path only adopts, seeks and closes a
+     * test-owned handle; it never writes through the host namespace. */
+    bx_ntvdm_mutation_profile_v1_initialize(&mutation_profile, dispatch_mode);
     if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
             BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
         !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
@@ -474,10 +479,171 @@ static int direct_pdb_lifecycle_regression(void)
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         result.eflags_values != 0u || bx_ntvdm_dem_file_session_v1_lookup(
             &session.whole_provider.files, token, &looked_up)) goto cleanup;
+    /* OpenNT demOpenFCB accepts a DS:SI OEM pathname and returns an opaque
+     * AX:BP token.  Exercise the actual whole-provider route with a fixture-
+     * owned file, then close through demCloseFCB's AX:SI contract.  Both
+     * Direct and Readonly may perform this read-only lifecycle. */
+    if (!GetTempFileNameW(temporary, L"n64", 0u, fcb_path)) goto cleanup;
+    file = CreateFileW(fcb_path, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+        0, CREATE_ALWAYS, FILE_ATTRIBUTE_TEMPORARY, 0);
+    if (file == INVALID_HANDLE_VALUE || !WriteFile(file, "FCB", 3u, &written, 0) ||
+        written != 3u) goto cleanup;
+    CloseHandle(file); file = INVALID_HANDLE_VALUE;
+    if (WideCharToMultiByte(CP_OEMCP, 0, fcb_path, -1, oem_fcb_path,
+            (int)sizeof(oem_fcb_path), 0, 0) == 0) goto cleanup;
+    memset(ram + 0x700u, 0, sizeof(oem_fcb_path));
+    memcpy(ram + 0x700u, oem_fcb_path, strlen(oem_fcb_path) + 1u);
+    /* demGetFileInfo is an FCB-family host query, not a generic fallback:
+     * it returns attrs/time/date and the 32-bit size in BX:DI. */
+    bytes[3] = 0x31u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.esi = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask !=
+            ((UINT32_C(1) << 0u) | (UINT32_C(1) << 1u) |
+             (UINT32_C(1) << 2u) | (UINT32_C(1) << 3u) |
+             (UINT32_C(1) << 7u)) ||
+        result.cpu_delta.gpr16_values[3u] != 0u ||
+        result.cpu_delta.gpr16_values[7u] != 3u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u) goto cleanup;
+    bytes[3] = 0x2du;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    /* Direct needs a writable token for the paired write; Readonly opens the
+     * same file read-only and must reject the later mutation. */
+    cpu.eax = dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT ? 2u : 0u;
+    cpu.esi = 0x700u; /* DS defaults to zero, selecting the copied OEM path. */
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask !=
+            ((UINT32_C(1) << 0u) | (UINT32_C(1) << 1u) |
+             (UINT32_C(1) << 2u) | (UINT32_C(1) << 3u) |
+             (UINT32_C(1) << 5u) | (UINT32_C(1) << 6u)) ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u) goto cleanup;
+    token = ((uint32_t)result.cpu_delta.gpr16_values[0u] << 16u) |
+        result.cpu_delta.gpr16_values[5u];
+    if (token == 0u || !bx_ntvdm_boot_namespace_plane_v1_set_dta(&plane, &dta))
+        goto cleanup;
+    /* demFCBIO obtains its buffer through the registered DTA, never a host
+     * pointer.  A read is legal in both modes and must complete as one
+     * mechanical guest-RAM write with AX:BX size and CX transfer count. */
+    memset(ram + dta.dta_location, 0, 3u);
+    bytes[3] = 0x2fu;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ebx = 1u; cpu.ecx = 3u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask !=
+            ((UINT32_C(1) << 0u) | (UINT32_C(1) << 1u) | (UINT32_C(1) << 3u)) ||
+        result.cpu_delta.gpr16_values[0u] != 0u ||
+        result.cpu_delta.gpr16_values[1u] != 3u ||
+        result.cpu_delta.gpr16_values[3u] != 3u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u || memcmp(ram + dta.dta_location, "FCB", 3u) != 0)
+        goto cleanup;
+    /* The paired write proves the profile split at the same original FCB I/O
+     * ABI: Direct writes fixture-owned storage; Readonly is rejected before
+     * WriteFile and leaves its file unchanged. */
+    memcpy(ram + dta.dta_location, "XYZ", 3u);
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu; cpu.ecx = 3u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.cpu_delta.gpr16_write_mask !=
+             ((UINT32_C(1) << 0u) | (UINT32_C(1) << 1u) | (UINT32_C(1) << 3u)) ||
+          result.cpu_delta.gpr16_values[0u] != 0u ||
+          result.cpu_delta.gpr16_values[1u] != 3u ||
+          result.cpu_delta.gpr16_values[3u] != 3u ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != 0u)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF))) goto cleanup;
+    bytes[3] = 0x2eu;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.esi = token & 0xffffu;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.eflags_write_mask !=
+            BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF || result.eflags_values != 0u) goto cleanup;
+    file = CreateFileW(fcb_path, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE,
+        0, OPEN_EXISTING, FILE_ATTRIBUTE_TEMPORARY, 0);
+    if (file == INVALID_HANDLE_VALUE || !ReadFile(file, readback, sizeof(readback),
+            &written, 0) || written != sizeof(readback) ||
+        memcmp(readback, dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT ?
+            "XYZ" : "FCB", sizeof(readback)) != 0) goto cleanup;
+    CloseHandle(file); file = INVALID_HANDLE_VALUE;
+    /* demCreateDir/demDeleteDir are ordinary Direct host mutations.  Their
+     * Readonly result must be source-shaped ACCESS_DENIED before a namespace
+     * API is reached; the fixture path is removed outside DEM before testing
+     * so no pre-existing host entry can mask the assertion. */
+    if (!DeleteFileW(fcb_path)) goto cleanup;
+    bytes[3] = 0x04u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.edx = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != 0u ||
+          (GetFileAttributesW(fcb_path) & FILE_ATTRIBUTE_DIRECTORY) == 0u)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          GetFileAttributesW(fcb_path) != INVALID_FILE_ATTRIBUTES))) goto cleanup;
+    if (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT) {
+        bytes[3] = 0x06u;
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+        if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+            !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+            !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+                &selection, &event, &cpu, &window, &result) ||
+            result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+            result.resume_rip != 0x104u ||
+            result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+            result.eflags_values != 0u ||
+            GetFileAttributesW(fcb_path) != INVALID_FILE_ATTRIBUTES) goto cleanup;
+    }
     status = 0;
 cleanup:
     if (file != INVALID_HANDLE_VALUE) { CloseHandle(file); DeleteFileW(path); }
     bx_ntvdm_dem_package_session_v1_teardown(&session);
+    if (fcb_path[0] != L'\0') DeleteFileW(fcb_path);
     bx_ntvdm_host_namespace_v1_release(&host_namespace);
     return status;
 }
@@ -535,8 +701,7 @@ int main(int argc, char **argv)
     }
     if (argc == 3) {
         if (strcmp(argv[2], "pdb-lifecycle") != 0) return 96;
-        return dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT ?
-            direct_pdb_lifecycle_regression() : 97;
+        return whole_provider_pdb_lifecycle_regression();
     }
     static const uint8_t fcb_unavailable[] = {
         0x07u, 0x20u, 0x2cu, 0x2du, 0x2fu, 0x31u
@@ -550,8 +715,7 @@ int main(int argc, char **argv)
     if (!fcb_search_core_regression()) return 90;
     { int fcb_status = fcb_bop_transaction_regression(); if (fcb_status != 0) return 91 + fcb_status; }
     if (!misc_family_regression()) return 92;
-    if (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
-        direct_pdb_lifecycle_regression() != 0) return 95;
+    if (whole_provider_pdb_lifecycle_regression() != 0) return 95;
     for (service = 0u; service < 73u; ++service) {
         if (!dispatch((uint8_t)service, &result) ||
             !bx_ntvdm_cpu_result_v2_valid(&result) ||

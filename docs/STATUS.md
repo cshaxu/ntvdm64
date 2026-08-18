@@ -2,31 +2,31 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T229 S1.** The first queued owner-package task is admitted in Ordinary Mode. Its detailed audit plan is [M0 T229 S1 DEM source/ABI/failure audit](etc/operations/m0-t229-s1-dem-source-abi-failure-audit-plan-001.md).
+> **Current effective packet: M0 T229 S2.** S1's complete 73-row source/ABI/failure audit is delivered in [its result](etc/evidence/t229-s1-dem-complete-source-abi-failure-audit-result-001.md). S2 performs the corresponding whole-package Direct/Readonly implementation and conformance work under [the S2 plan](etc/operations/m0-t229-s2-dem-whole-package-implementation-plan-001.md).
 
-**Active: M0 T229 S1 -- OpenNT DEM owner-package source/ABI/failure audit.**
+**Active: M0 T229 S2 -- OpenNT DEM whole-package Direct/Readonly implementation.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T229 S1, Ordinary Mode. |
-| Admission And Approval | The owner selected Queue item 1: “start the first item.” The Td sequence requires complete DEM package recovery before cross-family audit or Overlay. |
-| Objective | Produce one reviewable map for all 73 `50:00..48` DEM services: original owner/source and ABI/failure rule; actual bound bx-vdm route; Direct/Readonly disposition; and retain/migrate/replace/delete action. |
-| Non-goals | No trace-selected single-service patch; no new DOS, CPU, firmware, Bochs, COMMAND, XMS, DPMI, Redirector, WOW16 or Overlay behavior; no guest-image mutation; no native integration trace before complete DEM local package work. |
-| Reference Baseline | T226/T227's 203-entry local BOP code-complete evidence; T228 P30 DEM concurrent namespace repair; the complete DEM proposal; and the T200/T225 route/disposition ledgers. |
-| Files And ABI Surface | `src/opennt/base/mvdm/dos/dem/demdisp.c` and associated original DEM sources; current `src/bx-vdm/bx_ntvdm_dem_*`, BOP ingress/catalogue/registry and composition routes; audit evidence and only any source-derived seam later justified by this S. |
-| Applicable Rules | Execution, source policy, source-recovery audit, architecture/coding boundaries, Direct/Readonly mutation-profile rules, formal-build and documentation-governance rules. |
-| Verification | Cross-check every service against original `DemDispatch` table and the 73-entry ingress cardinality; inspect actual local provider/plane routes; validate uniqueness/completeness mechanically where an existing ledger can be reused; run governance verification and `git diff --check`. |
-| Expected Markers | Exactly 73 classified services; one original owner/source location and one current route/disposition per service; explicit direct-composable/shim/intrusion/new-code recovery rung and unavailable dependency where applicable. |
-| Asset Needs | Pinned local OpenNT source and manifests, current bx-vdm source, T200/T225/T226/T227 evidence, formal Ninja manifest where a route fixture must be checked. |
-| Reporting Requirements | Record inputs, procedure, current route, source ABI/failure fact, recovery-rung disposition, profile behavior, confidence and next-package action. Separate proven source facts from current implementation and from deferred work. |
-| Stop Conditions | Missing original source or an ambiguous dispatch table; discovery that a proposed change crosses DEM ownership; any need to select a route from native trace order; an unavailable dependency that cannot be classified without a new owner decision. |
-| Exit Criteria | A complete 73-row DEM source/ABI/failure and bound-route map with no unclassified entry; evidence identifies the complete S2 implementation scope and whole-family Direct/Readonly regression plan. |
-| Original Owner Request | “那就开始做第一项吧” after the owner-directed queue sequencing: eight BOP owner-package completion tasks, then cross-family audit/integration, then Overlay. |
-| Similar-Issue Sweep | DEM namespace/search/FCB/file, process/session, device/state, drive/GSET, file-handle and error/lock routes; profile enforcement; existing shim, fallback, Virtual-retained and Overlay-reserved paths. |
+| Identifier Mode | M0 T229 S2, Ordinary Mode. |
+| Admission And Approval | Owner objective: “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” S1 provides the mandatory 73-row source/ABI/failure map. |
+| Objective | Bring every `50:00..48` DEM identity to a source-backed Direct and Readonly provider outcome—original reuse where composable, otherwise the smallest source-derived CLI seam—while preserving original ABI, dispatch order and failure/continuation rule. |
+| Non-goals | No trace-selected BOP work; no Bochs CPU/device/firmware semantics; no guest-image mutation; no Virtual behavior; no Overlay behavior beyond ABI-compatible registration/dispatch seams; no claim that a typed route alone is completed semantics. |
+| Reference Baseline | T229 S1 73-row ledger and result; original `demdisp.c`; T225 full-route reconciliation; formal T226/T227 package fixtures; T228 P30 concurrent immutable-handle repair. |
+| Files And ABI Surface | Current `src/bx-vdm/bx_ntvdm_dem_*`, BOP ingress/registry/package session and shared mutation profile; original `src/opennt/base/mvdm/dos/dem/*`; package fixtures/manifests and T229 evidence. No Bochs/OpenNT guest ABI change unless separately admitted. |
+| Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, Direct/Readonly/Overlay profile contract, formal Ninja and documentation governance rules. |
+| Verification | Group-focused Direct/Readonly fixtures during implementation; all-73 fixture parameterized for product modes; full formal Ninja graph; static route/ledger reconciliation; one bounded native integration observation only after the package passes its complete local regression. |
+| Expected Markers | 73 unique identities with a source-proven provider/no-op/unavailable/deferred outcome; Direct performs admitted host operations; Readonly preserves same ABI/ordering and source-derived refusal; Overlay receives no behavior but remains installable as an ABI extension. |
+| Asset Needs | S1 ledger; pinned OpenNT DEM source; current source and manifest; MSVC x64 `/MT` formal Ninja graph; existing package fixtures and declared host namespace test roots. |
+| Reporting Requirements | For each owner group, record original source and non-composable dependency, selected recovery rung, Direct/Readonly ABI/failure result, retained/migrated/replaced/deleted shim and full-regression result. |
+| Stop Conditions | A route requires a new machine/VDD/WOW/Redirector owner package, a proposed shim cannot preserve original ABI/failure behavior, a host capability modifies the system merely to install the product, a new Bochs intrusion, or a trace is used to select a leaf implementation. |
+| Exit Criteria | All 73 callable DEM services have complete source-backed Direct/Readonly behavior or their original source-proven unavailable/no-op/deferred outcome; all-group and all-73 regressions pass; one post-package native observation is classified without creating a leaf backlog. |
+| Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” |
+| Similar-Issue Sweep | All seven S1 owner groups, existing exact-window adapter bypasses, shared profile consumers, retained Virtual code, Overlay registration, no-op/invalid-service CF behavior, current host namespace and source-built package fixtures. |
+> **T229 S2 P1:** [whole-provider Direct/Readonly conformance evidence](etc/evidence/t229-s2-p1-dem-whole-provider-direct-readonly-conformance-001.md) verifies source-derived FCB and namespace paths without claiming whole-package completion.
 
-> **T229 S1 P1 result:** [the complete DEM source/ABI/failure audit](etc/evidence/t229-s1-dem-complete-source-abi-failure-audit-result-001.md) regenerates and validates the unique 73-row 50:00..48 ledger. It establishes the whole-package implementation scope; it does not claim provider completion or native integration.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
