@@ -29,6 +29,8 @@
 
 > **T229 S2 P2:** [handle mutation Readonly enforcement evidence](etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md) records source-backed pre-host rejection for `50:08` set-time and `50:1E` write/truncate.
 
+> **T229 S2 group ledger:** [file/handle/FCB/search conformance ledger](etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md) is the 29-row semantic checklist; route reachability alone does not close a row.
+
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

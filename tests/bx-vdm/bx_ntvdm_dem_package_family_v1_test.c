@@ -657,11 +657,35 @@ static int whole_provider_pdb_lifecycle_regression(void)
         memcmp(readback, dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT ?
             "XYZ" : "FCB", sizeof(readback)) != 0) goto cleanup;
     CloseHandle(file); file = INVALID_HANDLE_VALUE;
+    /* demDeleteFCB consumes an ES:DI FCB pathname/wildcard.  The Direct path
+     * may delete the fixture file; Readonly must reject before enumeration or
+     * DeleteFile and leave that file in place. */
+    bytes[3] = 0x07u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.edi = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != 0u ||
+          GetFileAttributesW(fcb_path) != INVALID_FILE_ATTRIBUTES)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          GetFileAttributesW(fcb_path) == INVALID_FILE_ATTRIBUTES))) goto cleanup;
     /* demCreateDir/demDeleteDir are ordinary Direct host mutations.  Their
      * Readonly result must be source-shaped ACCESS_DENIED before a namespace
      * API is reached; the fixture path is removed outside DEM before testing
      * so no pre-existing host entry can mask the assertion. */
-    if (!DeleteFileW(fcb_path)) goto cleanup;
+    if (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY && !DeleteFileW(fcb_path))
+        goto cleanup;
     bytes[3] = 0x04u;
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.edx = 0x700u;
