@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1882 |
+| Documentation records | 1883 |
 | --- | --- |
-| Generated UTC | 2026-08-18T17:39:15Z |
+| Generated UTC | 2026-08-18T17:48:03Z |
 
 ## Entries
 
@@ -159,6 +159,7 @@ content-divergent entries.
 | etc/evidence/t228-s1-command-link-map-recovery-result-001.md | indexed supporting material | 93d1f2d12164a68f19ecc46e838d8bee01b1a3b3ecce017dc765a5d822fec6f9 |
 | etc/evidence/t228-s1-command-transient-reverse-string-mechanics-result-001.md | indexed supporting material | da64bb4b5b35bcebdb2e69ebab40de54631cbc569fcc3bbf3930318dea9771cc |
 | etc/evidence/t228-s1-cs-transition-ring-result-001.md | indexed supporting material | c27e733f784025ad3da66caddac44d6d80ad28f7e14a7758a04661bb32c3b71b |
+| etc/evidence/t228-s1-endinit-transient-continuity-sweep-result-001.md | indexed supporting material | a53d5040e3855040b4adebff1927394694f97f1598997d4ff01b2df7a1e7a3f2 |
 | etc/evidence/t228-s1-environment-first-fault-boundary-result-001.md | indexed supporting material | 6317084de303061654a182a1944fa071d3b089d74eb3cae07114abf473a63781 |
 | etc/evidence/t228-s1-far-call-base-pointer-provenance-result-001.md | indexed supporting material | ecd13914950f30d721f099b863125fbdb235a64181c419aa02fad7ee4e4043f8 |
 | etc/evidence/t228-s1-immutable-multiprogram-integration-observation-001.md | indexed supporting material | e4c8e9b41780d6134d80710c773c4fa2dbc8232f9fd192b7c67ac940321710f5 |
@@ -1896,7 +1897,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | c001d06652ee6e149fc67b1ab82d85e8a6b4b62cac0c0292a9676dd9493a3537 |
+| STATUS.md | principal control document | f42d36862038e8ad271f838554e881a98dba5da1bf4ae14b666b8a821ee65a75 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

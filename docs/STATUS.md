@@ -187,6 +187,26 @@
 | Similar-Issue Sweep | P15 command map, NTDOS build identity, `msdos.lnk`, `alloc.asm`, `msinit.asm`, and build-runner behavior. |
 
 > **T228 S1 P16 result:** [the reproducible NTDOS allocation-map recovery result](etc/evidence/t228-s1-ntdos-allocation-map-recovery-result-001.md) records an exact-hash original-toolchain NTDOS rebuild and a segment-only `NTDOS.MAP`; the original `/SEGMENTS` trial adds no private allocator symbols. It confirms the complete COMMAND `EndInit` / NTDOS MCB package boundary but selects no allocator instruction, BOP, guest-image or Bochs repair.
+### T228 S1 P17 -- EndInit-to-transient bounded continuity sweep
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P17, Ordinary Mode. |
+| Admission And Approval | P13 selects the environment-size branch; P15/P16 map the complete COMMAND EndInit / NTDOS MCB package. Existing P2/P11 scalar diagnostic graph and BOP/lifecycle observers are sufficient without product source change. |
+| Objective | In the one P13 controlled-large child environment, establish whether the map-supported second `54:0F` return reaches a stable continuation, and bound the subsequent transfer into the invalid dynamic transient control state across fixed 300,000, 1,000,000 and 10,000,000 instruction budgets. |
+| Non-goals | No trace-selected BOP work, selector/address filter, guest-byte/provenance capture, allocator implementation, source/disassembly instruction claim, guest change, CPU semantic change, or repair selection. |
+| Reference Baseline | P13 environment boundary; P15 COMMAND EndInit map; P16 NTDOS map disposition; P2/P11 fixed-width scalar history; immutable source-built four-image inputs. |
+| Files And ABI Surface | Existing diagnostic executable and CLI options only; disposable observation output plus evidence. No source or ordinary CLI ABI change. |
+| Applicable Rules | Active T228 packet; immutable input; whole-owner diagnosis; source-recovery audit; registered diagnostics. |
+| Verification | Direct controlled-large runs at exactly the three declared budgets with BOP sequence, lifecycle ledger, terminal position/history/CS-transition observers; identical startup paths and environment name/length ledger. |
+| Expected Markers | The result records whether both `54:0F` endpoints are reached, the terminal CS:EIP/last scalar transition at each budget, and whether a normal child lifecycle ever appears. It is a bounded continuity classification, not a cause claim. |
+| Asset Needs | Existing current-source history diagnostic graph and P13 input identity only. |
+| Reporting Requirements | Record executable/config/input/environment identities, each budget outcome, map-supported procedure relation, Direct-only limitation, and rejected repair alternatives. |
+| Stop Conditions | Need for RAM bytes, source/opcode filters, additional BOP implementation, source/binary mutation, or a fourth unplanned budget. |
+| Exit Criteria | The three declared observations are reproducible and delimit the complete EndInit/transient continuity state without selecting a leaf repair. |
+| Original Owner Request | Diagnose and repair a demonstrated whole owner domain; use trace only to validate/sort the complete package. |
+| Similar-Issue Sweep | P13 environment form, P14 first-fault non-result, P15 EndInit map, P9/P11 scalar bracket, Direct/Readonly scope, and instruction-history gates. |
+> **T228 S1 P17 result:** [the EndInit-to-transient bounded continuity sweep](etc/evidence/t228-s1-endinit-transient-continuity-sweep-result-001.md) proves that the map-supported 54:0F pair returns into  C41 by 300,000 ticks, but that a third same-site request with 4444 state and the scalar transfer  C41:1DC6 -> 4444:4444 occur before one million. Ten million ticks add no child lifecycle. It preserves the complete original COMMAND EndInit / NTDOS MCB allocation-and-transient-placement package as the sole repair boundary; no BOP or Bochs repair is selected.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
