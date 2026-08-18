@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T226 S3.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T226 S4.** Its governing brief appears immediately below.
 
-**Active: M0 T226 S3 -- COMMAND bootstrap/launch/console/environment/lifecycle package.**
+**Active: M0 T226 S4 -- XMS A20/allocator/UMB/INT15 package.**
 
 ## Active Packet
 
@@ -12,22 +12,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T226 S3, Ordinary Mode. |
-| Admission And Approval | T226 S2 has closed DEM's 73 rows with the formal local package result; S1 binds COMMAND's 17 rows to this package. Direct/Readonly are the enabled modes; Overlay remains ABI-only. |
-| Objective | Reconcile and complete the complete COMMAND `54:00..10` bootstrap, launch, console, environment, current-directory, and lifecycle package against original OpenNT sources and the shared S1 contract. |
-| Non-goals | No native guest trace, no trace-selected leaf work, no guest-image edit, no Bochs semantic intrusion, no Overlay implementation, and no claim of full historical NT host composition. |
-| Reference Baseline | T226 S1 conformance manifest; T225 S20 COMMAND source/current evidence; T225 S57 owner/disposition ledger; Direct/Readonly profile ABI; formal MSVC x64 `/MT` Ninja graph. |
-| Files And ABI Surface | `src/bx-vdm/` COMMAND package seams and existing `tests/bx-vdm/t225_s20_command_package_family_fixture.c`; retained OpenNT COMMAND sources and CLI capability seams. No Bochs or guest ABI change is admitted. |
-| Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, whole-package BOP routing, mutation-profile and formal-build rules. |
-| Verification | Source/ABI/failure map for all 17 COMMAND rows; whole-family Direct/Readonly local fixture; negative tests for unavailable/deferred outcomes; formal Ninja build, documentation governance, and `git diff --check`. |
-| Expected Markers | Every `54:00..10` identity has one source-recovery disposition, one bound provider or source-proven failure/no-op, and one local package assertion. |
-| Asset Needs | T226 S1 manifest; retained OpenNT `nt_bop.c` and COMMAND service sources; current COMMAND session/facade/profile code; S20 evidence and formal build manifest. |
-| Reporting Requirements | Separate original-source facts, current routes and rehost inference; record rejected recovery rungs; classify Direct/Readonly behavior and preserve Overlay ABI reservation. |
-| Stop Conditions | A service is implemented solely because it appears in a trace; a provider duplicates mutation policy; a result fabricates historical success; a Bochs semantic change is proposed; or a source-recovery rung is skipped. |
-| Exit Criteria | Every COMMAND row has one source-recovery disposition, a bound provider or source-proven no-op/unavailable/deferred behavior, and a local family assertion. |
-| Original Owner Request | Use original OpenNT service ownership first, source-derived seams only when composition is unavailable, and work by whole owner packages rather than trace-led service patches. |
-| Similar-Issue Sweep | Registration, launch/CMDINFO, current directory, keyboard layout, console, initial environment, execution, error and parent-return lifecycle. |
+| Identifier Mode | M0 T226 S4, Ordinary Mode. |
+| Admission And Approval | T226 S3 closes COMMAND's 17 rows; S1 binds XMS's 12 rows. Direct/Readonly are enabled; Overlay remains ABI-only. |
+| Objective | Reconcile and complete the XMS `52:00..0B` A20, allocator, UMB and INT15 package against retained OpenNT source and mantle-owned mechanics. |
+| Non-goals | No native guest trace, no trace-selected leaf work, no extra machine devices by convenience, no Bochs semantic intrusion, no Overlay implementation. |
+| Reference Baseline | T226 S1 manifest; T225 S57 owner ledger; retained XMS sources; mantle mechanics; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
+| Files And ABI Surface | `src/bx-vdm/` XMS package seams, `src/bx-mantle/` typed mechanics and retained OpenNT XMS sources. No export of Bochs internals or guest ABI change is admitted. |
+| Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, whole-package routing, mutation-profile and formal-build rules. |
+| Verification | Source/ABI/failure map for all 12 rows; local availability and negative fixtures; formal Ninja build, governance verification, and `git diff --check`. |
+| Expected Markers | Every `52:00..0B` identity has one source-recovery disposition, bound provider or source-proven unavailable/no-op behavior, and a local assertion. |
+| Asset Needs | T226 S1 manifest; retained XMS source; current XMS session/provider code; mantle capability seams and formal manifest. |
+| Reporting Requirements | Separate source facts, current routes and rehost inference; record rejected rungs; preserve Direct/Readonly behavior and Overlay reservation. |
+| Stop Conditions | Trace-selected leaf work, fabricated success, extra machine feature enablement, Bochs semantic change, or skipped source-recovery rung. |
+| Exit Criteria | All 12 XMS rows meet T226 code-complete definition and pass their local package regression. |
+| Original Owner Request | Recover whole original owner packages before trace-led integration, using original source first and source-derived seams only where necessary. |
+| Similar-Issue Sweep | A20, allocation/free, move/lock, HMA/UMB, INT15, unavailable XMS backends and ownership boundary with mantle mechanics. |
 
+> **T226 S3 closure:** [the formal COMMAND result](etc/evidence/t226-s3-command-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s3-closure-20260817.md) close the 17-row COMMAND owner package at the local gate. They claim no native guest execution.
 > **T226 S2 closure:** [the formal DEM result](etc/evidence/t226-s2-dem-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s2-closure-20260817.md) close the 73-row DEM owner package at the local code-complete gate. They claim no native guest execution.
 > **T226 S1 closure:** [the generated 203-row local conformance manifest](etc/operations/t226-s1-bop-local-conformance-manifest-001.json), [its deterministic verifier](../tools/governance/Test-T226S1BopConformanceManifest.ps1), and [the closure record](history/m0-t226-s1-closure-20260817.md) bind every original BOP identity to exactly one owner-package fixture target. This is a test-inventory closure, not provider completion.
 > **T225 task closure:** owner-directed reprioritization closes T225 after its package-route, compatibility and full 203-endpoint disposition evidence. It does not claim guest multi-program execution. The retained `BOUND` continuity question returns to the Queue as a later integration package; [the closure record](history/m0-t225-closure-20260817.md) records the exact handoff.
