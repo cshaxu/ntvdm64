@@ -324,6 +324,27 @@
 > **T228 S1 P24 admission:** [the bounded post-IRET CLI observation admission](etc/research/t228-s1-post-iret-cli-observation-admission-001.md) permits only copied P23 ring consumption and one immutable paired observation; it creates no BOP work.
 
 > **T228 S1 P24 result:** [the bounded post-IRET CLI observation result](etc/evidence/t228-s1-post-iret-cli-observation-result-001.md) closes default-off CLI lifecycle and the single hash-locked Direct/Readonly pair. Both runs reach budget exit 4 with byte-identical output and interrupt-returns count=0; therefore no successfully completed observed real/V86 IRET occurs in the bounded interval. It selects no BOP/provider/CPU repair and transfers only the complete original guest COMMAND/NTDOS interrupt-delivery/control-state domain.
+### T228 S1 P25 -- BOP return and INT 21 termination source audit
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P25, Ordinary Mode. |
+| Admission And Approval | P24 reached its declared negative result; the active T228 owner-domain objective admits a source-only interpretation before any further repair or observation. |
+| Objective | Establish whether the current BOP resume ABI or the original guest COMMAND/NTDOS lifecycle owns the remaining no-completed-IRET state. |
+| Non-goals | No new diagnostic, BOP/provider implementation, CPU change, guest-memory capture, guest-image mutation, or runtime retry. |
+| Reference Baseline | P18 source-derived environment repair; P19 owner map; P21/P22/P23/P24 immutable observations. |
+| Files And ABI Surface | One source-audit evidence record and compact Status result only. |
+| Applicable Rules | Execution, source policy, source-recovery, architecture and coding rules. |
+| Verification | Original-source path/contract review; current typed-resume source review; documentation governance and diff check. |
+| Expected Markers | Historical `BOP + service-byte` IP convention; NTDOS `LeaveDos -> DOIRET -> FIRET`; COMMAND `LodCom_Trap`/`Patch_stub` transfer chain. |
+| Asset Needs | Current source tree and retained T228 evidence only. |
+| Reporting Requirements | Distinguish BOP continuation from guest INT return; name the retained owner and rejected cross-owner repairs. |
+| Stop Conditions | Any need for new runtime observation, guest-memory capture, BOP service selection, or semantic repair. |
+| Exit Criteria | Resume ABI is source-accounted, no false IRET/BOP inference remains, and the next owner-domain comparison requirement is explicit. |
+| Original Owner Request | Continue comprehensive guest integration and repair by complete original owner domain, never BOP trace leaf. |
+| Similar-Issue Sweep | BOP macro/host dispatch, CMD service macro, EndInit, NTDOS dispatcher/return, COMMAND stub relocation and current typed resume. |
+
+> **T228 S1 P25 result:** [the BOP-return and INT21 termination source audit](etc/research/t228-s1-bop-return-and-int21-termination-source-audit-001.md) proves current `fault_rip + 4` is equivalent to the original CMD BOP continuation and separates it from the guest `INT 21 -> LeaveDos -> DOIRET -> FIRET` path. The remaining owner is the complete original COMMAND/NTDOS transient lifecycle, including `LodCom` stub relocation/transfer; no BOP, provider or CPU repair is selected.
 
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
