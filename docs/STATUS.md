@@ -364,7 +364,7 @@
 | Exit Criteria | The observed transition is source-classified or retained as an explicit whole-package unknown; no new runtime code and no BOP leaf task result. |
 | Original Owner Request | Diagnose and repair through complete original owner domains; trace remains integration evidence rather than a BOP task selector. |
 | Similar-Issue Sweep | P5/P6 provenance ABI, P23/P24 IRET result, BOP continuation, EndInit/NTDOS/LodCom source paths, Direct/Readonly parity and default graph isolation. |
-> **T228 S1 P26 result:** [the EndInit-to-LodCom provenance result](etc/evidence/t228-s1-endinit-lodcom-transition-provenance-result-001.md) records the identical Direct/Readonly `0C41:7ED7 -> 6972:645B` transition. Its predecessor is immutable COMMAND code, while its successor window is already zero; the exact source label and zero writer remain a complete original COMMAND transient/NTDOS MCB lifecycle unknown. It selects no BOP, provider, CPU, adapter, or profile repair.
+> **T228 S1 P26 result:** [the EndInit-to-LodCom provenance result](etc/evidence/t228-s1-endinit-lodcom-transition-provenance-result-001.md) records the identical Direct/Readonly `0C41:7ED7 -> 6972:645B` transition. The reproducible COMMAND map localizes its immutable predecessor to the original `TPRINTF` message-service expansion, while its successor window is already zero; the exact indirect-call target and zero writer remain a complete original COMMAND message/transient plus NTDOS MCB lifecycle unknown. It selects no BOP, provider, CPU, adapter, or profile repair.
 
 ### T228 S1 P27 -- Explicit-provenance fixture lifecycle repair
 

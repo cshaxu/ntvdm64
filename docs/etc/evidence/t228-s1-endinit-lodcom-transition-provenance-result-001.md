@@ -30,10 +30,15 @@ retrofitting the observation to an old address.
 
 The predecessor starts with an ordinary indirect near-call encoding
 (`FF 1E 8C 91`), but the fixed-width capture intentionally does not read the
-referenced runtime word.  There is no retained listing/map that binds this
-exact COM offset to a single original source label.  P26 therefore does not
-claim that it has identified a particular `LodCom` entry, `Patch_stub` slot,
-or individual BOP.
+referenced runtime word.  The exact-hash recovered `command.map` does improve
+the locality: file offset `0x7DD7` is linked `TRANGROUP 0249:5947`, between
+public `Tsysgetmsg` at `0249:589E` and `$M_GET_MSG_ADDRESS` at `0249:597C`.
+`TPRINTF.ASM` and its `MSG_SERVICES` expansion identify that bounded region as
+original guest message-retrieval code, not the `LodCom` entry or a host BOP
+dispatcher.  The map is not an instruction listing, however, so it cannot bind
+the captured indirect call to one source statement or reveal its runtime
+word.  P26 therefore does not claim an individual service, `Patch_stub` slot,
+nor BOP.
 
 Original source nevertheless defines the only admissible owner domain:
 

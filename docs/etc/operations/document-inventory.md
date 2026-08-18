@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1898 |
 | --- | --- |
-| Generated UTC | 2026-08-18T20:30:39Z |
+| Generated UTC | 2026-08-18T20:34:51Z |
 
 ## Entries
 
@@ -161,7 +161,7 @@ content-divergent entries.
 | etc/evidence/t228-s1-command-transient-bop-correlation-result-001.md | indexed supporting material | bc74672891161363dd1ec7a3180913bc8e21390cf6d9ef5bbc6d2bd743bf595d |
 | etc/evidence/t228-s1-command-transient-reverse-string-mechanics-result-001.md | indexed supporting material | da64bb4b5b35bcebdb2e69ebab40de54631cbc569fcc3bbf3930318dea9771cc |
 | etc/evidence/t228-s1-cs-transition-ring-result-001.md | indexed supporting material | c27e733f784025ad3da66caddac44d6d80ad28f7e14a7758a04661bb32c3b71b |
-| etc/evidence/t228-s1-endinit-lodcom-transition-provenance-result-001.md | indexed supporting material | a217468271289d81ced8e465ce24b6dcc0edfe74b9a4a13782c1b103e6ac0cf7 |
+| etc/evidence/t228-s1-endinit-lodcom-transition-provenance-result-001.md | indexed supporting material | e632d8bdb1de7aac4647985f5152b70f6b9b7e93f6db02648bc721139467db42 |
 | etc/evidence/t228-s1-endinit-transient-continuity-sweep-result-001.md | indexed supporting material | a53d5040e3855040b4adebff1927394694f97f1598997d4ff01b2df7a1e7a3f2 |
 | etc/evidence/t228-s1-environment-first-fault-boundary-result-001.md | indexed supporting material | 6317084de303061654a182a1944fa071d3b089d74eb3cae07114abf473a63781 |
 | etc/evidence/t228-s1-far-call-base-pointer-provenance-result-001.md | indexed supporting material | ecd13914950f30d721f099b863125fbdb235a64181c419aa02fad7ee4e4043f8 |
@@ -1912,7 +1912,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 72aaa9a681206148fe263b2d1a7b01fba0cd127744098641c69f36ad938a6a28 |
+| STATUS.md | principal control document | 5f8cd381777ba80f0a5c870e2d1b502350e844137d8fe294cbabf09e6d700e2d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
