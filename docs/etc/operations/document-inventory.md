@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1885 |
+| Documentation records | 1887 |
 | --- | --- |
-| Generated UTC | 2026-08-18T18:27:15Z |
+| Generated UTC | 2026-08-18T18:49:31Z |
 
 ## Entries
 
@@ -167,6 +167,7 @@ content-divergent entries.
 | etc/evidence/t228-s1-instruction-history-provenance-boundary-result-001.md | indexed supporting material | 93ad1446bff44590ebeac7b703669d9f22dcbae4ec2cfe3818162c6154fe3d8f |
 | etc/evidence/t228-s1-large-reverse-copy-result-001.md | indexed supporting material | f93784a5c86b8a45aaea2cd362cfcdd312280c5edec56d690daaa075681c2780 |
 | etc/evidence/t228-s1-ntdos-allocation-map-recovery-result-001.md | indexed supporting material | 3b080939d369bcddc2ca4393e6f728e6ab31ad2c66e8677eb790db75285fdbfb |
+| etc/evidence/t228-s1-software-interrupt-observation-profile-result-001.md | indexed supporting material | c2658de395156d67bff46252ac4da3ba22b39fe3adffc6fc28748d6b30ea6f2f |
 | etc/evidence/t228-s1-source-built-transient-continuity-correlation-001.md | indexed supporting material | 505193706db9e5e5e18de697b0f0ebc1774bff6914f1c2fea0d5953612bfe3cc |
 | etc/evidence/t228-s1-terminal-cs-transition-provenance-result-001.md | indexed supporting material | 302c58671ee8249da4d51afff91a962530a1431c9acfd8c0df7412ca3c6e331b |
 | etc/evidence/t228-s1-terminal-instruction-history-result-001.md | indexed supporting material | 031ea34a34d5154070096b07075202f02262765e1074d39bccf689eff68cb3f3 |
@@ -220,7 +221,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 22f226f2468e7921840ac93d38a92e4eb356fdcd03cd1dcb30e90bc8366e9952 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 28caef8ccb621486c7d29d13c6832e7de00afabd7d011e269b88f198ab9a1447 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -1052,6 +1053,7 @@ content-divergent entries.
 | etc/research/t228-s1-guest-control-flow-cpu-owner-map-001.md | indexed supporting material | 1e841e3b46b18e218c5b418aa038f014797dd4b75c38563e3cd54cde15dc693a |
 | etc/research/t228-s1-immutable-input-staging-source-audit-001.md | indexed supporting material | a4cc947d9872420d311fbb382ed7d0eefde9891e207b389c838874b704d58f10 |
 | etc/research/t228-s1-instruction-history-provenance-boundary-admission-001.md | indexed supporting material | f4d3a4070a7e2f2ca827a669dd8bf18fdeeb903e6038a9f6055a6dbe2eae1693 |
+| etc/research/t228-s1-software-interrupt-observation-profile-admission-001.md | indexed supporting material | 83e0464fbc9191db8db939ba94986966211ea16f040a3c32ff3f6e083e82cb7d |
 | etc/research/t228-s1-terminal-cs-transition-provenance-admission-001.md | indexed supporting material | c2442a9fc85d132c81dbb7b4be0cf26501e9bf156b11955d817b8493fccc0fbd |
 | etc/research/t228-s1-terminal-instruction-history-admission-001.md | indexed supporting material | 433c4b57ea4f88adf092975a589c0374f84bcdc3e168324eec84ebea71344a71 |
 | etc/research/t228-s1-terminal-provenance-admission-001.md | indexed supporting material | bd435b8366510a539090ba9e16d0542e1d3a062802f54e892135859ae061bde5 |
@@ -1899,7 +1901,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 89dc0100cd972fe68376b05ebdf82d8242b5001761a1882eb6e0d0164c1ea486 |
+| STATUS.md | principal control document | e2fd58942a897a10ac8ab10f83b240e341ce6694284a1aaa8aea2156f0546aa4 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

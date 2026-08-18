@@ -24,6 +24,36 @@
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
+#define BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION 0
+#endif
+
+#if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
+#include "bx-mantle/bx_ntvdm_software_interrupt_observation_v1.h"
+#define BX_NTVDM_RECORD_SOFTWARE_INTERRUPT(vector_value) do { \
+  if (BX_CPU_THIS_PTR real_mode() || BX_CPU_THIS_PTR v8086_mode()) { \
+    struct bx_ntvdm_software_interrupt_observation_v1_record record; \
+    record.version = BX_NTVDM_SOFTWARE_INTERRUPT_OBSERVATION_V1_VERSION; \
+    record.cpu_id = BX_CPU_ID; \
+    record.sequence = BX_CPU_THIS_PTR icount; \
+    record.rip = RIP; \
+    record.eflags = BX_CPU_THIS_PTR read_eflags(); \
+    record.cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value; \
+    record.ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value; \
+    record.sp = SP; \
+    record.ax = AX; record.bx = BX; record.cx = CX; record.dx = DX; \
+    record.ds = BX_CPU_THIS_PTR sregs[BX_SEG_REG_DS].selector.value; \
+    record.es = BX_CPU_THIS_PTR sregs[BX_SEG_REG_ES].selector.value; \
+    record.vector = (Bit8u)(vector_value); \
+    record.execution_mode = BX_CPU_THIS_PTR real_mode() ? 1u : 3u; \
+    record.reserved0 = 0u; \
+    bx_ntvdm_mantle_software_interrupt_observation_v1_record(&record); \
+  } \
+} while (0)
+#else
+#define BX_NTVDM_RECORD_SOFTWARE_INTERRUPT(vector_value) do { } while (0)
+#endif
+
 BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::BOUND_GwMa(bxInstruction_c *i)
 {
   Bit16s op1_16 = BX_READ_16BIT_REG(i->dst());
@@ -140,6 +170,8 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::INT_Ib(bxInstruction_c *i)
 #if BX_DEBUGGER
   BX_CPU_THIS_PTR show_flag |= Flag_softint;
 #endif
+
+  BX_NTVDM_RECORD_SOFTWARE_INTERRUPT(vector);
 
   interrupt(vector, BX_SOFTWARE_INTERRUPT, 0, 0);
 

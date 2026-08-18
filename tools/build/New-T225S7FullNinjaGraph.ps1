@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [string]$ManifestPath = '',
     [switch]$InstructionHistoryDiagnostic,
-    [switch]$InstructionHistoryProvenanceDiagnostic
+    [switch]$InstructionHistoryProvenanceDiagnostic,
+    [switch]$SoftwareInterruptDiagnostic
 )
 
 Set-StrictMode -Version Latest
@@ -82,7 +83,17 @@ $environment = Join-Path $build 'msvc-x64-mt.cmd'
 $manifestHash = Get-FileSha256 $manifestPath
 $configHash = Get-FileSha256 $config
 $toolchainHash = Get-TextSha256 (($compiler | Out-String).Trim())
-$diagnosticDefines = if ($InstructionHistoryProvenanceDiagnostic) { '/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1 /DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE=1' } elseif ($InstructionHistoryDiagnostic) { '/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1' } else { '' }
+$diagnosticDefineParts = [Collections.Generic.List[string]]::new()
+if ($InstructionHistoryDiagnostic -or $InstructionHistoryProvenanceDiagnostic) {
+    $diagnosticDefineParts.Add('/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY=1')
+}
+if ($InstructionHistoryProvenanceDiagnostic) {
+    $diagnosticDefineParts.Add('/DBX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE=1')
+}
+if ($SoftwareInterruptDiagnostic) {
+    $diagnosticDefineParts.Add('/DBX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION=1')
+}
+$diagnosticDefines = $diagnosticDefineParts -join ' '
 $buildManifest = [ordered]@{
     schema = 'ntdos64.t225.s7.ninja-full-graph.v1'
     sourceManifest = $manifestPath.Substring($root.Length + 1).Replace('\','/')
@@ -95,6 +106,7 @@ $buildManifest = [ordered]@{
     forbiddenInputs = $manifest.forbiddenInputs
     instructionHistoryDiagnostic = [bool]$InstructionHistoryDiagnostic
     instructionHistoryProvenanceDiagnostic = [bool]$InstructionHistoryProvenanceDiagnostic
+    softwareInterruptDiagnostic = [bool]$SoftwareInterruptDiagnostic
 }
 $configurationHash = Get-TextSha256 ($buildManifest | ConvertTo-Json -Depth 10)
 $buildManifest.configurationSha256 = $configurationHash
