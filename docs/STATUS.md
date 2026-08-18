@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S51.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S52.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S51 -- source-built four-image post-handoff integration observation.**
+**Active: M0 T225 S52 -- generic limit-diagnostic source/current owner reconciliation.**
 
 ## Active Packet
 
@@ -12,21 +12,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S51, Ordinary Mode. |
-| Admission And Approval | Owner-authorized autonomous continuation. S50 now proves the complete generic handoff mechanics; S51 may reuse existing default-off lifecycle observation only for one whole four-image Direct/Readonly integration run. |
-| Objective | Re-stage immutable original-toolchain NTIO, NTDOS, COMMAND and SHARE/TARGET inputs and record whether a bounded native run advances beyond the existing post-`50:36` lifecycle boundary. |
-| Non-goals | No BOP/provider implementation, new observer, guest-memory inspection, image change, synthetic child, trace-selected repair, device enablement or Bochs intrusion. |
-| Reference Baseline | S46/S48 lifecycle observations, S49 owner map, S50 generic handoff proof, source-built S8 artifact identities and formal Ninja graph. |
-| Files And ABI Surface | Stage/run evidence, Status/history only. Existing CLI and lifecycle-ledger ABI are reused unchanged. |
-| Applicable Rules | Execution, architecture, coding, source policy, recovery ladder, artifact provenance, deny-by-default and T225 anti-attrition. |
-| Verification | Fresh source-built input staging; existing formal native CLI identity; one bounded Direct and one bounded Readonly invocation using the existing ledger; input hashes, output comparison, governance verifier and diff check. |
-| Expected Markers | Four immutable input identities; mode parity; ledger order/count/overflow; terminal classification; and an explicit boundary if no later lifecycle event is reached. |
-| Asset Needs | S48 stager, existing formal native CLI, S50 result, source-built S8 stages and process-local config/autoexec inputs. |
-| Reporting Requirements | Report native integration facts separately from fixture proof; no event selects an implementation; do not equate entry with target execution. |
-| Stop Conditions | Need a new observer, guest-state inspection, BOP/provider/machine semantic change, new external-code intrusion, or trace-selected repair. |
-| Exit Criteria | A fully reproducible paired observation records identities, lifecycle result and terminal without changing runtime code; any unchanged boundary is retained as a whole-owner limitation. |
-| Original Owner Request | Continue authorized routine engineering work autonomously, with global component ownership and no trace-led patching. |
-| Similar-Issue Sweep | Source-built identity, staging mutation, Direct/Readonly parity, option default-off behavior, ledger capacity/order, terminal/watchdog classification, and no new route or semantic change. |
+| Identifier Mode | M0 T225 S52, Ordinary Mode. |
+| Admission And Approval | Owner-authorized autonomous continuation. S51 retains an unchanged generic limit diagnostic; S52 is source/current owner reconciliation only. |
+| Objective | Determine whether the current `read beyond limit` diagnostic can be attributed from existing source/current code and historical evidence, or retain a bounded origin limitation. |
+| Non-goals | No new observer, BOP/provider/device behavior, guest inspection, FPU/PIC/VGA admission, machine change, or trace-selected repair. |
+| Reference Baseline | S49/S50 mechanics maps, S51 paired logs, bx-core access checks, and retained T95 post-transaction source audits. |
+| Files And ABI Surface | Research/evidence/Status/history only. No runtime or build-graph behavior change. |
+| Applicable Rules | Execution, architecture, coding, recovery ladder, deny-by-default and T225 anti-attrition. |
+| Verification | Static source/current comparison, historical-evidence provenance review, governance verifier and diff check. |
+| Expected Markers | Exact generic check condition, possible owner classes, superseded historical symptoms, and explicit unreached/unknown origin limits. |
+| Asset Needs | bx-core access/decoder sources, S51 logs, T95 source records, original NTDOS sources and S49/S50 maps. |
+| Reporting Requirements | Separate a generic diagnostic from an instruction-origin attribution; state that a log string cannot select a repair. |
+| Stop Conditions | Need instruction-origin tracing, guest-memory inspection, BOP/provider/machine change, external-code intrusion or trace-selected repair. |
+| Exit Criteria | A complete owner map either identifies a source/current discontinuity or explicitly rejects unproven old-path diagnoses; no implementation follows automatically. |
+| Original Owner Request | Continue globally scoped source-first work without trace-led incremental BOP patching. |
+| Similar-Issue Sweep | read versus execute check, segment type/limit, BOUND access, old x87/IRQ13/VGA tail, real-mode cache rules, and Direct/Readonly neutrality. |
+
+> **T225 S51 closure:** [the closure record](history/m0-t225-s51-closure-20260817.md) records the unchanged paired boundary and admits only source/current limit reconciliation; it selects no repair.
 
 > **T225 S50 P1 result:** [the fixture record](etc/evidence/t225-s50-realmode-handoff-fixture-result-001.md) proves only generic source-shaped real-mode handoff mechanics under the formal graph; it neither runs an immutable guest child nor changes BOP semantics.
 
