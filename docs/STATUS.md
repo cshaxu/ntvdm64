@@ -348,6 +348,27 @@
 
 > **T228 S1 P29 result:** [the EndInit reentry mechanics correction](etc/research/t228-s1-endinit-reentry-mechanics-correction-001.md) proves the first original `EndInit` pass has valid `UsedEnv=001Eh` and `TrnSize=0A14h`; `4444h` appears only on a later, invalid reentry to the deliberately discarded `EndInit`/`Pipe1` region. It supersedes the initial-environment interpretation of that value and narrows the live repair domain to the original COMMAND resident-stub relocation/termination-reload continuity plus the NTDOS parent return handoff. No BOP, adapter, guest-image, or Bochs semantic change is selected.
 
+### T228 S1 P30 -- DEM concurrent immutable namespace repair and COMMAND bootstrap attribution
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P30, Ordinary Mode. |
+| Admission And Approval | T228 requires repair only after complete owner-domain attribution. P29 leaves the COMMAND/NTDOS lifecycle active; the demonstrated immutable namespace single-handle limitation is an adjacent DEM owner defect and is repaired without selecting a BOP leaf. |
+| Objective | Give each active immutable startup file its own opaque backend handle state, preserve the outer DEM handle ABI, and classify the source-built initial `50:36` image identity. |
+| Non-goals | No child completion claim, synthetic EXEC/PSP/return, target-loader shortcut, host-child process, guest-image mutation, Bochs change, or trace-selected BOP implementation. |
+| Reference Baseline | T226 DEM/COMMAND code-complete packages; T228 source-built four-image input identity; original `get_binary_type` in `msproc.asm`; P29 owner conclusion. |
+| Files And ABI Surface | bx-vdm readonly namespace and DEM file-service seam; default-off copied diagnostic output; one focused fixture, formal manifest, evidence and governance inventory. |
+| Applicable Rules | Execution, source policy, source-recovery, whole-package routing, immutable guest input, mutation-profile and formal-build rules. |
+| Verification | Fresh formal CPU5 x64 `/MT` Ninja graph; concurrent namespace and readonly O/S/R/C fixtures; bounded Direct/Readonly source-built observation; documentation governance and diff checks. |
+| Expected Markers | Independent COMMAND/TARGET offsets and stale-token rejection; `get_binary_type` read handle maps to COMMAND slot 1; TARGET maps separately to declared slot 3. |
+| Asset Needs | Hash-locked NTIO, NTDOS, COMMAND and TARGET inputs; existing formal module graph; no external source or product patch. |
+| Reporting Requirements | Separate repair fact from the bootstrap interpretation, preserve Direct/Readonly limitation, and reject target-loader/BOP/Bochs alternatives. |
+| Stop Conditions | Any need to synthesize command execution, change guest images, classify the initial COMMAND COM transfer as TARGET, or introduce a selector-specific machine behavior. |
+| Exit Criteria | Namespace handle table and O/S/R/C seam pass focused checks; source-built observation distinguishes COMMAND bootstrap from TARGET; result is committed and pushed. |
+| Original Owner Request | Implement the planned minimal-Bochs CLI NTVDM with complete owner packages; trace is integration evidence, not a leaf implementation selector. |
+| Similar-Issue Sweep | Outer DEM token generation, backend-token mapping, seek origins, command/target path identity, Direct/Readonly parity and stale handles. |
+
+> **T228 S1 P30 result:** [the concurrent namespace and COMMAND bootstrap result](etc/evidence/t228-s1-dem-concurrent-namespace-and-command-bootstrap-result-001.md) records the formal build, focused repairs and source-built attribution. Commit `6791e93d` is pushed. It closes this DEM owner defect only; the COMMAND/NTDOS resident-stub relocation/termination-reload continuity remains active.
 ### T228 S1 P26 -- EndInit-to-LodCom generic transition provenance comparison
 
 | Field | Required record |
