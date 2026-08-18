@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S57.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S58.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S57 -- whole BOP owner/package and profile-disposition reconciliation.**
+**Active: M0 T225 S58 -- DEM process-resource ownership and cleanup source/ABI map.**
 
 ## Active Packet
 
@@ -12,21 +12,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S57, Ordinary Mode. |
-| Admission And Approval | S56 is closed by its grouped CPU evidence and paired Direct/Readonly machine-stage run. The standing owner direction requires whole owner-package work and rejects trace-led singleton BOP patches. |
-| Objective | Reconcile every retained OpenNT BOP selector/service identity to one current owner package, source-recovery rung, Direct/Readonly/Overlay disposition, and actual bound route or explicit absence. |
-| Non-goals | No new BOP provider, no trace-selected implementation, no Bochs CPU/device change, no guest-image edit, and no claim that a routing classification itself implements a service. |
-| Reference Baseline | OpenNT selector/service inventory; prior DEM, COMMAND, XMS/DPMI, Redirector, Debugger and system package maps; current `bx-vdm` composition; S56 paired native result. |
-| Files And ABI Surface | Documentation, inventory/ledger generators and read-only current-source audit only. No runtime source or ABI change without a separately admitted follow-on S. |
-| Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, BOP whole-package routing, mutation-profile and evidence rules. |
-| Verification | Reproducible full inventory, source/current route cross-check, Direct/Readonly/Overlay disposition sweep, stale-workaround classification, governance verification and diff review. |
-| Expected Markers | Every identity has one owner and disposition; no hidden fallback, duplicate owner, unclassified reachable route, or trace-derived implementation admission remains. |
-| Asset Needs | Retained OpenNT source and BOP inventory, current module manifest/source, prior package evidence, MSVC/Ninja only if a read-only source build identity check is needed. |
-| Reporting Requirements | Separate directly composable original source, adapter/shim, registered external intrusion and newly authored behavior; state exact host mutation disposition and deferred/unavailable semantics. |
-| Stop Conditions | Any item needs a new provider, changes a host mutation contract, exposes an unclassified Bochs semantic dependency, or contradicts existing package evidence; pause and admit a bounded package S. |
-| Exit Criteria | Complete current BOP ledger and owner-package implementation ordering exist; all active workarounds are retain/migrate/replace/delete classified; the next S can implement one whole package without trace-led scope selection. |
+| Identifier Mode | M0 T225 S58, Ordinary Mode. |
+| Admission And Approval | S57's 203-endpoint ledger selects DEM as the first complete owner package. The owner direction requires source-first package work, Direct/Readonly support, Overlay ABI retention, and no trace-led singleton patch. |
+| Objective | Map the complete original DEM process-resource contract—PDB, JFT, SFT, file/search tokens and `50:3C` cleanup ordering—to the smallest current checked-memory and session seam needed for a subsequent whole-package implementation. |
+| Non-goals | No leaf `50:3C` patch, no BOP trace run, no COMMAND parent-return claim, no Bochs semantic/device change, no new host mutation mode, and no synthetic process identity. |
+| Reference Baseline | S57 full ledger; `demfile.c`, `demhndl.c`, `demmisc.c`, `demdisp.c`; T219 PDB/JFT/SFT finding; current DEM session/whole-provider and mutation-profile ABI. |
+| Files And ABI Surface | Source/ABI/failure map and focused source-only or fixture design. No runtime change unless the map admits one separately in a later S. |
+| Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, whole-package BOP routing, and mutation-profile rules. |
+| Verification | Complete service/resource matrix, four-rung recovery ledger, Direct/Readonly/Overlay disposition, current-route comparison, ownership and failure-order review, governance verification and diff review. |
+| Expected Markers | One named original owner per resource lifetime; no DX-as-PDB inference; checked fixed-width guest gather/write boundary only; no raw CCPU/SAS pointer or adapter-owned DOS filesystem behavior. |
+| Asset Needs | Retained OpenNT DEM sources, existing bx-vdm guest-memory ABI, current DEM package source and existing Direct/Readonly fixtures. |
+| Reporting Requirements | Record data layouts, acquisition/release ordering, provider ownership, historical unavailable dependencies and every rejected recovery rung; distinguish a map from an implemented service. |
+| Stop Conditions | A proposed seam needs unbounded guest pointer access, CCPU/SAS restoration, Bochs semantic intrusion, unclassified host mutation, or a trace-selected service scope. |
+| Exit Criteria | A complete DEM process-resource source/ABI/failure ledger chooses one bounded implementation S with full-family regression scope; no `50:3C` or COMMAND work is admitted alone. |
 | Original Owner Request | Implement the CLI NTVDM through minimal Bochs, preserve OpenNT ownership, support Direct and Readonly, retain Overlay compatibility, and avoid piecemeal trace-driven recovery. |
-| Similar-Issue Sweep | All selector families, callable and no-op slots, host mutations, CLI capabilities, Direct/Readonly/Overlay routes, startup/machine ownership and historical host dependencies. |
+| Similar-Issue Sweep | PDB/JFT/SFT acquisition and cleanup across ordinary/FCB/search/file handles, child/parent transition, Direct/Readonly/Overlay token ownership, `demExitVDM`, `demEntryDosApp`, and COMMAND completion consumers. |
+> **T225 S57 closure:** [the reconciliation](etc/research/t225-s57-bop-owner-package-profile-reconciliation-001.md), [203-row generated ledger](etc/research/t225-s57-bop-owner-package-profile-ledger-001.json), and [closure record](history/m0-t225-s57-closure-20260817.md) establish complete current route/disposition coverage. They do not claim provider completion and select S58's whole DEM resource map.
 > **T225 S56 SoftPC compatibility map:** [the source/ABI/failure map](etc/research/t225-s56-softpc-realmode-segment-limit-source-abi-failure-map-001.md) proves the observed real-mode DS:FFFF word rejection differs from the historical CCPU default and defines the admitted complete default-off bx-core/bx-mantle compatibility profile. It rejects any address/path patch and preserves protected-mode Bochs semantics.
 
 > **T225 S56 closure:** [the grouped result](etc/evidence/t225-s56-grouped-realmode-segment-limit-result-001.md) and [closure record](history/m0-t225-s56-closure-20260817.md) complete the grouped CPU boundary and its paired Direct/Readonly native evidence. The later BOUND marker is observation only and selects no leaf repair.
