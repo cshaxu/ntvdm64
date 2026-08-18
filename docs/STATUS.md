@@ -2,31 +2,31 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T226 S8.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T227 S1.** Its governing brief appears immediately below.
 
-**Active: M0 T226 S8 -- All-package 203-row reconciliation.**
+**Active: M0 T227 S1 -- Guest DOS multi-program integration admission baseline.**
 
 ## Active Packet
 
-> **T scope:** T226 converts the T225 S57 203-endpoint owner ledger into uniformly testable local code-complete behavior before native guest trace is admitted.
+> **T scope:** T227 validates one declared source-built Guest DOS parent/child/return sequence in Direct and Readonly, then assigns each runtime gap to its complete original owner domain before repair.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T226 S8, Ordinary Mode. |
-| Admission And Approval | T226 S7 closes the remaining 26 rows. All 203 S1 identities are admitted for local package reconciliation; Direct/Readonly are enabled and Overlay remains ABI-only. |
-| Objective | Run the formal local regressions for every T226 owner package, verify the 203-row manifest maps each identity exactly once, and record any stale route or fixture gap. |
-| Non-goals | No native guest trace, no trace-selected leaf work, no new provider semantics, no Bochs semantic intrusion, no Overlay implementation. |
-| Reference Baseline | T226 S1 203-row manifest; T226 S2--S7 formal results; T225 S57 owner ledger; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
-| Files And ABI Surface | Formal fixture manifest and existing owner-package seams only. No new guest ABI, provider, Bochs or host capability surface is admitted. |
-| Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, whole-package routing, mutation-profile and formal-build rules. |
-| Verification | Deterministic 203-row manifest verification, every package-local formal fixture, governance verification, and `git diff --check`. |
-| Expected Markers | Every one of 203 identities has exactly one owner-package fixture mapping and every mapped formal package regression returns zero. |
-| Asset Needs | T226 S1 manifest, T226 S2--S7 fixture registrations and formal Ninja graph. |
-| Reporting Requirements | Separate source facts, current routes and rehost inference; record rejected rungs; preserve Direct/Readonly behavior and Overlay reservation. |
-| Stop Conditions | Native guest trace, trace-selected leaf work, new provider semantics, skipped package fixture, or mismatched manifest mapping. |
-| Exit Criteria | All 203 rows pass deterministic mapping validation and their owner-package local regression; any mismatch is recorded and resolved or explicitly returned to the correct package. |
-| Original Owner Request | Recover whole original owner packages before trace-led integration, using original source first and source-derived seams only where necessary. |
-| Similar-Issue Sweep | stale fixture registrations, missing formal targets, duplicate identity mappings, Direct/Readonly parity and untested deferred/unavailable routes. |
+| Identifier Mode | M0 T227 S1, Ordinary Mode. |
+| Admission And Approval | Owner-authorized next package after T226 code-complete closure; Queue candidate 1 is admitted as the next global T. |
+| Objective | Establish the immutable four-image multi-program witness, original/current lifecycle map, and bounded Direct/Readonly integration acceptance contract. |
+| Non-goals | No BOP singleton work, no synthetic EXEC/PSP/return, no host child process, no guest image mutation, no Bochs semantic repair, and no Overlay implementation. |
+| Reference Baseline | T226 S8 formal reconciliation; T225 S44/S45/S55 source/current lifecycle records; retained NTIO/NTDOS/COMMAND/SHARE source-built identities; Direct/Readonly ABI. |
+| Files And ABI Surface | `docs/etc/operations/`, source-built input/staging contracts, fixture/witness planning seams only. No new product ABI or provider admitted in S1. |
+| Applicable Rules | Execution, source policy, source-recovery audit, whole-package routing, mutation-profile, formal-build and immutable-guest-input rules. |
+| Verification | Exact source/input identity, source/ABI/failure map for the complete lifecycle, declared bounded witness design, Direct/Readonly parity contract, governance verification and `git diff --check`. |
+| Expected Markers | One normal-return child, all lifecycle stage markers, one owner classification for each terminal class, and no trace-selected leaf backlog. |
+| Asset Needs | Source-built NTIO, NTDOS, COMMAND and SHARE identities; existing formal Ninja graph; retained T225 lifecycle evidence. |
+| Reporting Requirements | Separate original source facts, current route, immutable input identity, observation limits and rejected recovery rungs. |
+| Stop Conditions | Missing exact guest input, need for synthetic DOS/host-child behavior, trace-selected BOP repair, input-specific Bochs patch, or unclassified cross-owner mutation. |
+| Exit Criteria | A reviewed immutable input/staging contract and whole-path source/current map select a bounded end-to-end witness without changing runtime semantics. |
+| Original Owner Request | After code-complete BOP coverage, perform comprehensive integration testing and fix defects by complete owner domain rather than trace-led patches. |
+| Similar-Issue Sweep | EXEC/PSP/MCB transfer, COM image loading, child termination, PDB cleanup, COMMAND parent return, startup-machine/CPU terminal, Direct/Readonly parity. |
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
