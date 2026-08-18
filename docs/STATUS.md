@@ -267,6 +267,18 @@
 | Original Owner Request | Continue whole-owner repair without trace-led BOP leaf work; invasive Bochs changes are allowed only when registered and necessary. |
 | Similar-Issue Sweep | `INT_Ib`, `INT3`, `INTO`, task/protected/V86 delivery paths, history bridge/ring reset, machine lifecycle reset, manifest macros, default and diagnostic Ninja graphs, source scan, and exception register. |
 > **T228 S1 P20 result:** [the software-interrupt observation result](etc/evidence/t228-s1-software-interrupt-observation-profile-result-001.md) closes the registered default-off `INT_Ib` mechanical profile: disabled, real-mode multi-vector, protected-mode-negative, ring/reset, diagnostic x64 `/MT`, and retained default-graph checks pass. It selects no BOP or guest repair; a later bounded immutable integration observation may only attribute the complete COMMAND/NTDOS owner domain.
+### T228 S1 P21 -- bounded software-interrupt CLI observation
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P21, Ordinary Mode. |
+| Admission And Approval | P20 is complete; its result permits one bounded immutable Direct/Readonly integration observation through the existing guarded CLI diagnostic lifecycle. |
+| Objective | Expose only P20 copied records through a diagnostic-only CLI flag and compare one hash-locked Direct/Readonly bounded run against P19’s complete owner map. |
+| Non-goals | No BOP/provider work, guest-memory inspection, selector/service recognition, guest-image change, host mutation-policy change, Bochs patch, or repair claim. |
+| Verification | Diagnostic native x64 `/MT` build; focused P20 ring fixture; default CLI negative; paired immutable Direct/Readonly invocation and byte/output comparison; governance and diff checks. |
+| Exit Criteria | The option is diagnostic-only, lifecycle-clean, and records only copied P20 facts; the paired run attributes at most the existing complete COMMAND/NTDOS owner domain. |
+| Stop Conditions | Any semantic filter, adapter route, guest byte capture, profile distinction without source evidence, leaf BOP proposal, or altered interrupt delivery. |
+> **T228 S1 P21 result:** [the bounded CLI observation result](etc/evidence/t228-s1-software-interrupt-cli-observation-result-001.md) proves diagnostic-only CLI consumption of P20 in hash-locked Direct/Readonly runs. The 64-record outputs and terminal are byte-identical; they transfer only the existing complete COMMAND/NTDOS owner question and select no BOP or repair.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
