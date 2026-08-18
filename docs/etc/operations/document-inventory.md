@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1853 |
+| Documentation records | 1854 |
 | --- | --- |
-| Generated UTC | 2026-08-18T07:41:21Z |
+| Generated UTC | 2026-08-18T07:45:03Z |
 
 ## Entries
 
@@ -152,6 +152,7 @@ content-divergent entries.
 | etc/evidence/t226-s8-all-package-code-complete-formal-result-001.md | indexed supporting material | 3532c187cdc344ff38523265b3b9709217769f307b31292833c4c52584120f47 |
 | etc/evidence/t227-s1-bop-semantic-code-complete-revalidation-result-001.md | indexed supporting material | 20abd6e4833296b9c37c0488a1e397a73dfcc236af3b37ec42ba0f42896f79ac |
 | etc/evidence/t228-s1-budget-terminal-position-local-result-001.md | indexed supporting material | 14af60981bd338a37391b959cf52c875e25db336173d6b952911163f44abacea |
+| etc/evidence/t228-s1-budget-terminal-position-native-observation-001.md | indexed supporting material | c997a553972f68a1d36f257370d98f9fb2b09c9e69e0a75a820682f2a9d30aa2 |
 | etc/evidence/t228-s1-immutable-multiprogram-integration-observation-001.md | indexed supporting material | e4c8e9b41780d6134d80710c773c4fa2dbc8232f9fd192b7c67ac940321710f5 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
