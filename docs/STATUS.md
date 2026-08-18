@@ -323,7 +323,7 @@
 
 > **T228 S1 P24 admission:** [the bounded post-IRET CLI observation admission](etc/research/t228-s1-post-iret-cli-observation-admission-001.md) permits only copied P23 ring consumption and one immutable paired observation; it creates no BOP work.
 
-> **T228 S1 P24 result:** [the bounded post-IRET CLI observation result](etc/evidence/t228-s1-post-iret-cli-observation-result-001.md) closes default-off CLI lifecycle and the single hash-locked Direct/Readonly pair. Both runs reach budget exit 4 with byte-identical output and interrupt-returns count=0; therefore no successfully completed observed real/V86 IRET occurs in the bounded interval. It selects no BOP/provider/CPU repair and transfers only the complete original guest COMMAND/NTDOS interrupt-delivery/control-state domain.
+> **T228 S1 P24 result:** [the bounded post-IRET CLI observation result](etc/evidence/t228-s1-post-iret-cli-observation-result-001.md) closes default-off CLI lifecycle and the single hash-locked Direct/Readonly pair. Both runs reach budget exit 4 with byte-identical output and interrupt-returns count=0; therefore no successfully completed observed real/V86 IRET occurs in the bounded interval. [P28's original-source correction](etc/research/t228-s1-firet-return-mechanics-correction-001.md) establishes that normal x86 `FIRET` is usually `RETF 2`, so this count is not a normal INT 21 completion oracle. It selects no BOP/provider/CPU repair and transfers only the complete original guest COMMAND/NTDOS lifecycle domain.
 ### T228 S1 P25 -- BOP return and INT 21 termination source audit
 
 | Field | Required record |
@@ -344,7 +344,7 @@
 | Original Owner Request | Continue comprehensive guest integration and repair by complete original owner domain, never BOP trace leaf. |
 | Similar-Issue Sweep | BOP macro/host dispatch, CMD service macro, EndInit, NTDOS dispatcher/return, COMMAND stub relocation and current typed resume. |
 
-> **T228 S1 P25 result:** [the BOP-return and INT21 termination source audit](etc/research/t228-s1-bop-return-and-int21-termination-source-audit-001.md) proves current `fault_rip + 4` is equivalent to the original CMD BOP continuation and separates it from the guest `INT 21 -> LeaveDos -> DOIRET -> FIRET` path. The remaining owner is the complete original COMMAND/NTDOS transient lifecycle, including `LodCom` stub relocation/transfer; no BOP, provider or CPU repair is selected.
+> **T228 S1 P25 result:** [the BOP-return and INT21 termination source audit](etc/research/t228-s1-bop-return-and-int21-termination-source-audit-001.md) proves current `fault_rip + 4` is equivalent to the original CMD BOP continuation and separates it from the guest `INT 21 -> LeaveDos -> DOIRET -> FIRET` path. [P28](etc/research/t228-s1-firet-return-mechanics-correction-001.md) corrects the retained record's IRET interpretation: ordinary x86 `FIRET` normally uses `RETF 2`. The remaining owner is the complete original COMMAND/NTDOS transient lifecycle, including `LodCom` stub relocation/transfer; no BOP, provider or CPU repair is selected.
 ### T228 S1 P26 -- EndInit-to-LodCom generic transition provenance comparison
 
 | Field | Required record |
