@@ -1,0 +1,1396 @@
+﻿{
+    "schema":  "ntdos64.t221.s1.dem-recovery-ledger.v1",
+    "generatedUtc":  "2026-08-18T23:00:10.7088236Z",
+    "serviceCount":  73,
+    "staticOnly":  true,
+    "ownerGroups":  [
+                        {
+                            "name":  "file-handle-fcb-search",
+                            "serviceCount":  29,
+                            "services":  [
+                                             "00",
+                                             "01",
+                                             "02",
+                                             "03",
+                                             "04",
+                                             "05",
+                                             "06",
+                                             "07",
+                                             "08",
+                                             "09",
+                                             "0A",
+                                             "0B",
+                                             "0C",
+                                             "12",
+                                             "16",
+                                             "17",
+                                             "1E",
+                                             "20",
+                                             "22",
+                                             "27",
+                                             "2C",
+                                             "2D",
+                                             "2E",
+                                             "2F",
+                                             "30",
+                                             "31",
+                                             "44",
+                                             "47",
+                                             "48"
+                                         ]
+                        },
+                        {
+                            "name":  "gset-drive-cwd-volume",
+                            "serviceCount":  15,
+                            "services":  [
+                                             "0D",
+                                             "0E",
+                                             "0F",
+                                             "10",
+                                             "13",
+                                             "14",
+                                             "15",
+                                             "18",
+                                             "19",
+                                             "1A",
+                                             "1B",
+                                             "1C",
+                                             "25",
+                                             "41",
+                                             "46"
+                                         ]
+                        },
+                        {
+                            "name":  "misc-lifecycle-console-wow",
+                            "serviceCount":  15,
+                            "services":  [
+                                             "11",
+                                             "1D",
+                                             "23",
+                                             "34",
+                                             "35",
+                                             "36",
+                                             "37",
+                                             "38",
+                                             "39",
+                                             "3A",
+                                             "3B",
+                                             "3C",
+                                             "3D",
+                                             "3E",
+                                             "45"
+                                         ]
+                        },
+                        {
+                            "name":  "error-lock",
+                            "serviceCount":  3,
+                            "services":  [
+                                             "32",
+                                             "33",
+                                             "3F"
+                                         ]
+                        },
+                        {
+                            "name":  "dasd-ioctl",
+                            "serviceCount":  3,
+                            "services":  [
+                                             "21",
+                                             "29",
+                                             "2A"
+                                         ]
+                        },
+                        {
+                            "name":  "original-noop",
+                            "serviceCount":  7,
+                            "services":  [
+                                             "1F",
+                                             "24",
+                                             "26",
+                                             "28",
+                                             "2B",
+                                             "40",
+                                             "43"
+                                         ]
+                        },
+                        {
+                            "name":  "fastread-exception",
+                            "serviceCount":  1,
+                            "services":  [
+                                             "42"
+                                         ]
+                        }
+                    ],
+    "entries":  [
+                    {
+                        "identity":  "50:00",
+                        "originalHandler":  "demChgFilePtr",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "fallbackDisposition":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:01",
+                        "originalHandler":  "demChMod",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:02",
+                        "originalHandler":  "demClose",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "fallbackDisposition":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:03",
+                        "originalHandler":  "demCreate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:04",
+                        "originalHandler":  "demCreateDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:05",
+                        "originalHandler":  "demDelete",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:06",
+                        "originalHandler":  "demDeleteDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:07",
+                        "originalHandler":  "demDeleteFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM FCB path seam",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:08",
+                        "originalHandler":  "demFileTimes",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "fallbackDisposition":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:09",
+                        "originalHandler":  "demFindFirst",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "fallbackDisposition":  "cli-unavailable after search-provider rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:0A",
+                        "originalHandler":  "demFindFirstFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "fallbackDisposition":  "cli-unavailable after search-provider rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:0B",
+                        "originalHandler":  "demFindNext",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "fallbackDisposition":  "cli-unavailable after search-provider rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:0C",
+                        "originalHandler":  "demFindNextFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider merged host/declared search partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host merged search seam; declared-image overlay is post-T200",
+                        "fallbackDisposition":  "cli-unavailable after search-provider rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:0D",
+                        "originalHandler":  "demGetBootDrive",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:0E",
+                        "originalHandler":  "demGetDriveFreeSpace",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:0F",
+                        "originalHandler":  "demGetDrives",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:10",
+                        "originalHandler":  "demGSetMediaID",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:11",
+                        "originalHandler":  "demLoadDos",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:12",
+                        "originalHandler":  "demOpen",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:13",
+                        "originalHandler":  "demQueryCurrentDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:14",
+                        "originalHandler":  "demQueryDate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:15",
+                        "originalHandler":  "demQueryTime",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:16",
+                        "originalHandler":  "demRead",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "fallbackDisposition":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:17",
+                        "originalHandler":  "demRename",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:18",
+                        "originalHandler":  "demSetCurrentDir",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:19",
+                        "originalHandler":  "demSetDate",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:1A",
+                        "originalHandler":  "demSetDefaultDrive",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:1B",
+                        "originalHandler":  "demSetDTALocation",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:1C",
+                        "originalHandler":  "demSetTime",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:1D",
+                        "originalHandler":  "demSetV86KernelAddr",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:1E",
+                        "originalHandler":  "demWrite",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "fallbackDisposition":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:1F",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "sourceOwnerGroup":  "original-noop",
+                        "sourceAbiFailureContract":  "demNotYetImplemented clears CF and resumes; no file, device, or host operation occurs.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s2-dem-source-abi-failure-matrix-001.md",
+                                               "docs/etc/research/t198-s105-dem-fast-io-disposition-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "reuse original visible no-op contract; retain only after current facade/source mapping confirms it.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "none; source-shaped original no-op is terminal for this route",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:20",
+                        "originalHandler":  "demRenameFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM FCB path seam",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:21",
+                        "originalHandler":  "demIOCTL",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "dasd-ioctl",
+                        "sourceAbiFailureContract":  "IOCTL metadata and absolute disk I/O preserve subfunction-specific invalid-drive/no-BDS failures; they are not pathname file services.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-dasd-ioctl-family-regression-001.md",
+                                               "docs/etc/research/t96-s3-demioctl-source-contract-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "raw-device/VDD/SoftPC composition deferred behind an explicit device profile; retain only source-shaped metadata or unavailable results.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:22",
+                        "originalHandler":  "demCreateNew",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:23",
+                        "originalHandler":  "demDiskReset",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:24",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "sourceOwnerGroup":  "original-noop",
+                        "sourceAbiFailureContract":  "demNotYetImplemented clears CF and resumes; no file, device, or host operation occurs.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s2-dem-source-abi-failure-matrix-001.md",
+                                               "docs/etc/research/t198-s105-dem-fast-io-disposition-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "reuse original visible no-op contract; retain only after current facade/source mapping confirms it.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "none; source-shaped original no-op is terminal for this route",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:25",
+                        "originalHandler":  "demGetDPB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:26",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "sourceOwnerGroup":  "original-noop",
+                        "sourceAbiFailureContract":  "demNotYetImplemented clears CF and resumes; no file, device, or host operation occurs.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s2-dem-source-abi-failure-matrix-001.md",
+                                               "docs/etc/research/t198-s105-dem-fast-io-disposition-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "reuse original visible no-op contract; retain only after current facade/source mapping confirms it.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "none; source-shaped original no-op is terminal for this route",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:27",
+                        "originalHandler":  "demCommit",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider handle partition (when installed and token/precondition matches)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM whole-provider / file-session seam",
+                        "fallbackDisposition":  "cli-unavailable after an owning whole-provider rejection; legacy boot namespace is no longer a primary handle path",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:28",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "sourceOwnerGroup":  "original-noop",
+                        "sourceAbiFailureContract":  "demNotYetImplemented clears CF and resumes; no file, device, or host operation occurs.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s2-dem-source-abi-failure-matrix-001.md",
+                                               "docs/etc/research/t198-s105-dem-fast-io-disposition-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "reuse original visible no-op contract; retain only after current facade/source mapping confirms it.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "none; source-shaped original no-op is terminal for this route",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:29",
+                        "originalHandler":  "demAbsRead",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "dasd-ioctl",
+                        "sourceAbiFailureContract":  "IOCTL metadata and absolute disk I/O preserve subfunction-specific invalid-drive/no-BDS failures; they are not pathname file services.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-dasd-ioctl-family-regression-001.md",
+                                               "docs/etc/research/t96-s3-demioctl-source-contract-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "raw-device/VDD/SoftPC composition deferred behind an explicit device profile; retain only source-shaped metadata or unavailable results.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:2A",
+                        "originalHandler":  "demAbsWrite",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "dasd-ioctl",
+                        "sourceAbiFailureContract":  "IOCTL metadata and absolute disk I/O preserve subfunction-specific invalid-drive/no-BDS failures; they are not pathname file services.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-dasd-ioctl-family-regression-001.md",
+                                               "docs/etc/research/t96-s3-demioctl-source-contract-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "raw-device/VDD/SoftPC composition deferred behind an explicit device profile; retain only source-shaped metadata or unavailable results.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:2B",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "sourceOwnerGroup":  "original-noop",
+                        "sourceAbiFailureContract":  "demNotYetImplemented clears CF and resumes; no file, device, or host operation occurs.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s2-dem-source-abi-failure-matrix-001.md",
+                                               "docs/etc/research/t198-s105-dem-fast-io-disposition-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "reuse original visible no-op contract; retain only after current facade/source mapping confirms it.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "none; source-shaped original no-op is terminal for this route",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:2C",
+                        "originalHandler":  "demCreateFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:2D",
+                        "originalHandler":  "demOpenFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM FCB path seam",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:2E",
+                        "originalHandler":  "demCloseFCB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB direct/I-O partition when DTA prerequisites hold",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM FCB state seam",
+                        "fallbackDisposition":  "cli-unavailable after prerequisite or provider rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:2F",
+                        "originalHandler":  "demFCBIO",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB direct/I-O partition when DTA prerequisites hold",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM FCB state seam",
+                        "fallbackDisposition":  "cli-unavailable after prerequisite or provider rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:30",
+                        "originalHandler":  "demDate16",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:31",
+                        "originalHandler":  "demGetFileInfo",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider FCB path partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM FCB path seam",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:32",
+                        "originalHandler":  "demSetHardErrorInfo",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "error-lock",
+                        "sourceAbiFailureContract":  "Hard-error locator registration, retry and handle-lock semantics use source-specific register/packet failure forms and cannot collapse into a generic ACL refusal.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-working-service-ledger-001.md",
+                                               "docs/etc/research/r20-dem-setharderrorinfo-contract.md"
+                                           ],
+                        "recoveryRungDisposition":  "original guest packet body excluded; retain checked registration and source-derived unavailable/retry outcomes until the complete error/lock owner is admitted.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:33",
+                        "originalHandler":  "demRetry",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "error-lock",
+                        "sourceAbiFailureContract":  "Hard-error locator registration, retry and handle-lock semantics use source-specific register/packet failure forms and cannot collapse into a generic ACL refusal.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-working-service-ledger-001.md",
+                                               "docs/etc/research/r20-dem-setharderrorinfo-contract.md"
+                                           ],
+                        "recoveryRungDisposition":  "original guest packet body excluded; retain checked registration and source-derived unavailable/retry outcomes until the complete error/lock owner is admitted.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:34",
+                        "originalHandler":  "demLoadDosAppSym",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:35",
+                        "originalHandler":  "demFreeDosAppSym",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:36",
+                        "originalHandler":  "demEntryDosApp",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:37",
+                        "originalHandler":  "demDOSDispCall",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:38",
+                        "originalHandler":  "demDOSDispRet",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:39",
+                        "originalHandler":  "demOutputString",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:3A",
+                        "originalHandler":  "demInputString",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:3B",
+                        "originalHandler":  "demIsDebug",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:3C",
+                        "originalHandler":  "demTerminatePDB",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-session-lifecycle-provider -\u003e finite boot-namespace termination only",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi-after-PDB-owner-design",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "stale for direct host resources: no copied PDB ownership, so direct file/search resources are not released",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:3D",
+                        "originalHandler":  "demExitVDM",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:3E",
+                        "originalHandler":  "demWOWFiles",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-misc-plane -\u003e source-derived resume/no-op or named debug/system-symbol helper",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  "post-T200 DEM misc-plane helper routing",
+                        "fallbackDisposition":  "if the helper declines, the ordered DEM chain reaches cli-unavailable",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:3F",
+                        "originalHandler":  "demLockOper",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "error-lock",
+                        "sourceAbiFailureContract":  "Hard-error locator registration, retry and handle-lock semantics use source-specific register/packet failure forms and cannot collapse into a generic ACL refusal.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-working-service-ledger-001.md",
+                                               "docs/etc/research/r20-dem-setharderrorinfo-contract.md"
+                                           ],
+                        "recoveryRungDisposition":  "original guest packet body excluded; retain checked registration and source-derived unavailable/retry outcomes until the complete error/lock owner is admitted.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:40",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "sourceOwnerGroup":  "original-noop",
+                        "sourceAbiFailureContract":  "demNotYetImplemented clears CF and resumes; no file, device, or host operation occurs.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s2-dem-source-abi-failure-matrix-001.md",
+                                               "docs/etc/research/t198-s105-dem-fast-io-disposition-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "reuse original visible no-op contract; retain only after current facade/source mapping confirms it.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "none; source-shaped original no-op is terminal for this route",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:41",
+                        "originalHandler":  "demGetComputerName",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:42",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "fastread-exception",
+                        "sourceAbiFailureContract":  "Original table selects demNotYetImplemented; the retained compatibility branch is separately source-derived and must not be conflated with original no-op.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t198-s105-dem-fast-io-disposition-map-001.md",
+                                               "docs/etc/research/t198-s109-dem-fastread-contract-reconciliation-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "re-evaluate retained compatibility branch as a complete DEM package decision; delete it if source-shaped original failure is selected.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:43",
+                        "originalHandler":  "demNotYetImplemented",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-package-facade -\u003e dem-provider original-noop",
+                        "sourceOwnerGroup":  "original-noop",
+                        "sourceAbiFailureContract":  "demNotYetImplemented clears CF and resumes; no file, device, or host operation occurs.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s2-dem-source-abi-failure-matrix-001.md",
+                                               "docs/etc/research/t198-s105-dem-fast-io-disposition-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "reuse original visible no-op contract; retain only after current facade/source mapping confirms it.",
+                        "sharedProfileDisposition":  "not-applicable",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "none; source-shaped original no-op is terminal for this route",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:44",
+                        "originalHandler":  "demCheckPath",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:45",
+                        "originalHandler":  "demSystemSymbolOp",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e ordered DEM special-plane chain -\u003e boot-namespace plane or cli-unavailable",
+                        "sourceOwnerGroup":  "misc-lifecycle-console-wow",
+                        "sourceAbiFailureContract":  "DOS-load, VDD/debug/WOW, process and terminal operations have distinct continuation/no-op/controlled-stop contracts; no generic success fallback is valid.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-misc-family-routing-correction-001.md",
+                                               "docs/etc/research/t220-s6-dem-pdb-termination-admission-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "split by original subfamily; VDD, private engine terminal and WOW dependencies remain unavailable/deferred unless a complete owner package admits them.",
+                        "sharedProfileDisposition":  "review-at-owner-package-admission",
+                        "currentShim":  null,
+                        "fallbackDisposition":  "T200-era generic cli-unavailable remains the final package fallback; exact source failure is not yet recovered",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:46",
+                        "originalHandler":  "demGetDPBList",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e DEM GSET/CWD/drive-or-volume source-derived providers, conditional on snapshots/session context",
+                        "sourceOwnerGroup":  "gset-drive-cwd-volume",
+                        "sourceAbiFailureContract":  "Copied drive/CWD/DTA/DPB records and source-specific date/time, volume and failure layouts; snapshot is data, not an ambient-host substitute.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t199-s37-dem-gset-dpb-source-abi-001.md",
+                                               "docs/etc/research/t202-s2-dem-namespace-cwd-volume-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s2-bounded-dem-process-read-design-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SoftPC body excluded; retain source-shaped fixed-width capability seam and migrate synthetic answers to the shared profile ABI.",
+                        "sharedProfileDisposition":  "already-consumes-shared-profile-abi; remove remaining snapshot/synthetic fallbacks",
+                        "currentShim":  "T210 shared session host-context consumer and later direct-host drive/CWD migrations",
+                        "fallbackDisposition":  "older snapshot/synthetic or cli-unavailable branches remain reachable if shared context is absent",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:47",
+                        "originalHandler":  "demPipeFileDataEOF",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    },
+                    {
+                        "identity":  "50:48",
+                        "originalHandler":  "demPipeFileEOF",
+                        "originalDispatcher":  "src/opennt/base/mvdm/dos/dem/demdisp.c",
+                        "currentBoundRoute":  "generic-ud-bridge -\u003e boot-namespace-composition -\u003e dem-package-session -\u003e dem-whole-provider namespace partition (when installed)",
+                        "sourceOwnerGroup":  "file-handle-fcb-search",
+                        "sourceAbiFailureContract":  "Checked path, token, DTA or SRCHBUF copies; original register/error layouts differ by service. No host HANDLE/pointer crosses the boundary.",
+                        "sourceEvidence":  [
+                                               "docs/etc/research/t202-s3-dem-file-handle-fcb-search-source-abi-map-001.md",
+                                               "docs/etc/research/t220-s7-direct-token-jft-sft-representation-map-001.md"
+                                           ],
+                        "recoveryRungDisposition":  "original CCPU/SAS body excluded; smallest checked seam then source-derived owner rehost; pipes remain Redirector-deferred.",
+                        "sharedProfileDisposition":  "migrate-to-shared-profile-abi",
+                        "currentShim":  "T202 direct-host DEM namespace partition, with declared startup-image overlay",
+                        "fallbackDisposition":  "cli-unavailable after partition rejection; boot namespace remains only a declared-image/fixture fallback",
+                        "status":  "audit only: no provider completeness or runtime claim"
+                    }
+                ]
+}
