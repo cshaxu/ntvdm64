@@ -21,6 +21,8 @@ static int call(bx_ntvdm_xms_package_session_v1 *session, unsigned service,
   event.cpu_id = 1; event.vector = 6; event.fault_rip = 0x100;
   bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
   cpu.eax = ax; cpu.ebx = bx; cpu.edx = dx;
+  /* XMS move takes its fixed twelve-byte descriptor from SS:BP. */
+  cpu.ss = 0x100; cpu.ebp = 0x20;
   return bx_ntvdm_xms_package_session_v1_dispatch(session, &ingress,
     &selection, &event, &cpu, &window, result);
 }
@@ -30,6 +32,8 @@ int main()
   bx_ntvdm_minimal_machine_c machine;
   bx_ntvdm_xms_package_session_v1 session;
   bx_ntvdm_cpu_result_v2 result;
+  Bit8u descriptor[12] = { 2, 0, 0, 0, 0, 0x20, 0, 0, 0, 0x30, 0, 0 };
+  Bit8u source[4] = { 0x10, 0x20, 0x30, 0x40 }, observed[4] = {};
   if (machine.initialize(0x400000, 0x400000) != BX_NTVDM_MINIMAL_MACHINE_OK) return 1;
   if (!bx_ntvdm_xms_package_session_v1_initialize(&session)) return 2;
   if (!call(&session, 0, 0, 0, 0, &result) || result.cpu_delta.gpr16_values[0] != 1) return 3;
@@ -38,6 +42,12 @@ int main()
   if (!call(&session, 11, 1088, 96, 64, &result) || result.cpu_delta.gpr16_values[1] != 1152) return 6;
   if (!call(&session, 3, 1152, 0, 96, &result) || result.cpu_delta.gpr16_values[0] != 1) return 7;
   if (!call(&session, 5, 0, 0, 0, &result) || result.cpu_delta.gpr16_values[0] != 3072) return 8;
-  if (!call(&session, 1, 0, 0, 0, &result) || result.disposition != BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH) return 9;
-  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 10;
+  if (!bx_mem.copy_to_ordinary_ram(0x1014u, sizeof(descriptor), descriptor) ||
+      !bx_mem.copy_to_ordinary_ram(0x2000u, sizeof(source), source)) return 9;
+  if (!call(&session, 1, 0, 0, 0, &result) ||
+      result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+      result.cpu_delta.gpr16_values[0] != 1 ||
+      !bx_mem.copy_from_ordinary_ram(0x3000u, sizeof(observed), observed) ||
+      memcmp(source, observed, sizeof(source)) != 0) return 10;
+  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 11;
 }

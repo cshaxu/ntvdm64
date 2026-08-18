@@ -734,6 +734,36 @@
       "source": "tests/bx-vdm/bx_ntvdm_command_provider_v1_test.c",
       "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
       "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s4-xms-package-session-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_xms_package_session_v1_test.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s4-xms-plane-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_xms_dpmi_plane_v1_test.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s4-a20-mantle-fixture",
+      "source": "tests/bx-mantle/t199_s22_a20_capability_fixture.cc",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s4-extended-memory-mantle-fixture",
+      "source": "tests/bx-mantle/t199_s24_extended_memory_fixture.cc",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s4-xms-native-mantle-fixture",
+      "source": "tests/bx-mantle/t199_s31_xms_native_fixture.cc",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host", "cli"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     }
   ],
   "forbiddenInputs": [

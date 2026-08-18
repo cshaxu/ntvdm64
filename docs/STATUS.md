@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T226 S4.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T226 S5.** Its governing brief appears immediately below.
 
-**Active: M0 T226 S4 -- XMS A20/allocator/UMB/INT15 package.**
+**Active: M0 T226 S5 -- DPMI protected-mode/LDT/exception/memory package.**
 
 ## Active Packet
 
@@ -13,21 +13,22 @@
 | Field | Required record |
 | --- | --- |
 | Identifier Mode | M0 T226 S4, Ordinary Mode. |
-| Admission And Approval | T226 S3 closes COMMAND's 17 rows; S1 binds XMS's 12 rows. Direct/Readonly are enabled; Overlay remains ABI-only. |
-| Objective | Reconcile and complete the XMS `52:00..0B` A20, allocator, UMB and INT15 package against retained OpenNT source and mantle-owned mechanics. |
-| Non-goals | No native guest trace, no trace-selected leaf work, no extra machine devices by convenience, no Bochs semantic intrusion, no Overlay implementation. |
-| Reference Baseline | T226 S1 manifest; T225 S57 owner ledger; retained XMS sources; mantle mechanics; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
-| Files And ABI Surface | `src/bx-vdm/` XMS package seams, `src/bx-mantle/` typed mechanics and retained OpenNT XMS sources. No export of Bochs internals or guest ABI change is admitted. |
+| Admission And Approval | T226 S4 closes XMS's 12 rows; S1 binds DPMI's 25 rows. Direct/Readonly are enabled; Overlay remains ABI-only. |
+| Objective | Reconcile and complete the DPMI `53:00..18` protected-mode, LDT, exception, memory, DOS bridge, session, debugger and VDD package against retained OpenNT source and typed owner mechanics. |
+| Non-goals | No native guest trace, no trace-selected leaf work, no invented protected-mode runtime, no extra machine devices by convenience, no Bochs semantic intrusion, no Overlay implementation. |
+| Reference Baseline | T226 S1 manifest; T225 S57 owner ledger; retained DPMI sources; typed CPU/memory/interrupt mechanics; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
+| Files And ABI Surface | `src/bx-vdm/` DPMI package seams, typed CPU/memory/interrupt mechanics and retained OpenNT DPMI sources. No export of Bochs internals or guest ABI change is admitted. |
 | Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, whole-package routing, mutation-profile and formal-build rules. |
-| Verification | Source/ABI/failure map for all 12 rows; local availability and negative fixtures; formal Ninja build, governance verification, and `git diff --check`. |
-| Expected Markers | Every `52:00..0B` identity has one source-recovery disposition, bound provider or source-proven unavailable/no-op behavior, and a local assertion. |
-| Asset Needs | T226 S1 manifest; retained XMS source; current XMS session/provider code; mantle capability seams and formal manifest. |
+| Verification | Source/ABI/failure map for all 25 rows; local availability and negative fixtures; formal Ninja build, governance verification, and `git diff --check`. |
+| Expected Markers | Every `53:00..18` identity has one source-recovery disposition, bound provider or source-proven unavailable/no-op behavior, and a local assertion. |
+| Asset Needs | T226 S1 manifest; retained DPMI source; current DPMI provider/plane code; typed owner seams and formal manifest. |
 | Reporting Requirements | Separate source facts, current routes and rehost inference; record rejected rungs; preserve Direct/Readonly behavior and Overlay reservation. |
-| Stop Conditions | Trace-selected leaf work, fabricated success, extra machine feature enablement, Bochs semantic change, or skipped source-recovery rung. |
-| Exit Criteria | All 12 XMS rows meet T226 code-complete definition and pass their local package regression. |
+| Stop Conditions | Trace-selected leaf work, fabricated success, invented protected-mode semantics, extra machine feature enablement, Bochs semantic change, or skipped source-recovery rung. |
+| Exit Criteria | All 25 DPMI rows meet T226 code-complete definition and pass their local package regression. |
 | Original Owner Request | Recover whole original owner packages before trace-led integration, using original source first and source-derived seams only where necessary. |
-| Similar-Issue Sweep | A20, allocation/free, move/lock, HMA/UMB, INT15, unavailable XMS backends and ownership boundary with mantle mechanics. |
+| Similar-Issue Sweep | protected-mode switch, LDT/descriptors, exception/interrupt bridge, DOS allocation bridge, memory services, session/debug/VDD and typed unavailable boundaries. |
 
+> **T226 S4 closure:** [the formal XMS result](etc/evidence/t226-s4-xms-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s4-closure-20260817.md) close the 12-row XMS owner package at the local code-complete gate. They claim no native guest execution.
 > **T226 S3 closure:** [the formal COMMAND result](etc/evidence/t226-s3-command-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s3-closure-20260817.md) close the 17-row COMMAND owner package at the local gate. They claim no native guest execution.
 > **T226 S2 closure:** [the formal DEM result](etc/evidence/t226-s2-dem-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s2-closure-20260817.md) close the 73-row DEM owner package at the local code-complete gate. They claim no native guest execution.
 > **T226 S1 closure:** [the generated 203-row local conformance manifest](etc/operations/t226-s1-bop-local-conformance-manifest-001.json), [its deterministic verifier](../tools/governance/Test-T226S1BopConformanceManifest.ps1), and [the closure record](history/m0-t226-s1-closure-20260817.md) bind every original BOP identity to exactly one owner-package fixture target. This is a test-inventory closure, not provider completion.
