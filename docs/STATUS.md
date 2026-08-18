@@ -2,13 +2,13 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T228 S1.** Its governing brief appears immediately below.
+> **Closure-retention packet: M0 T228 S1.** It closed by owner-directed reprioritization on 2026-08-18; see [the closure record](history/m0-t228-closure-20260818.md). This retained packet authorizes no implementation work. The next numeric T must be selected and admitted from Queue after the planned review.
 
-**Active: M0 T228 S1 -- Guest DOS multi-program integration and owner-domain repair.**
+**Active: M0 T228 S1 -- governance-retention record only; T228 is closed and admits no further implementation.**
 
 ## Active Packet
 
-> **T scope:** T228 performs comprehensive immutable Guest DOS integration in Direct and Readonly and repairs demonstrated defects by complete original owner domain. It does not reopen BOP architecture from trace order.
+> **Closed scope:** T228 performed immutable Guest DOS integration in Direct and Readonly and repaired only demonstrated defects by complete original owner domain. It did not reopen BOP architecture from trace order. Its original multi-program lifecycle exit criterion was not met; the owner closed it for reprioritization. See [the closure record](history/m0-t228-closure-20260818.md).
 
 | Field | Required record |
 | --- | --- |
