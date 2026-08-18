@@ -88,6 +88,26 @@
 | Exit Criteria | Ring is default-off, fixed-width and ordered; all focused/default/paired checks pass; result attributes only a complete owner domain and selects no leaf repair. |
 | Original Owner Request | Continue the active minimal-Bochs CLI NTVDM work with whole-owner diagnosis and no trace-led BOP patches. |
 | Similar-Issue Sweep | Latest-transition/provenance gates, terminal-history ABI, CLI option reset paths, history macro definitions, formal manifest membership, and exception registry. |
+
+### T228 S1 P12 -- Large reverse-copy and far-pointer mechanics
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P12, Ordinary Mode. |
+| Admission And Approval | P11 plus the original HeadCall contract map prove that the live fault depends on a large reverse transient move and copied far-pointer handoff. This P validates the complete selector-blind CPU/memory prerequisite before an owner-package repair. |
+| Objective | Prove current bx-core/bx-mantle executes an opaque 50KiB real-mode reverse `STD; REP MOVSB; CLD` move, preserves a copied four-byte far pointer, and performs the ordinary indirect far call/return mechanics. |
+| Non-goals | No COMMAND/DOS/OpenNT/BOP naming or source change, guest-image loading, address-specific production logic, adapter route, host capability, RAM diagnostic, CPU patch, or runtime repair. |
+| Reference Baseline | P7 scalar reverse-string result; P11 scalar chain; HeadCall contract map; existing S56 compatibility fixture. |
+| Files And ABI Surface | One mantle-only formal fixture plus manifest membership and source/ABI/failure/result records. No product ABI or source change. |
+| Applicable Rules | Execution, architecture, coding, formal-build, immutable-input, source-recovery audit rules. |
+| Verification | Focused CPU5 x64 /MT fixture; source-boundary scan; fresh default formal Ninja graph. |
+| Expected Markers | One opaque 50KiB destination range preserves sentinel bytes and pointer bytes; target `RETF` returns to fixture-only controlled stop. |
+| Asset Needs | Existing finite-run fixture seam and local current source only; no external input or guest media. |
+| Reporting Requirements | Separate original mechanical form, fixture-only bytes, positive/negative scope, and remaining COMMAND/NTDOS owner question. |
+| Stop Conditions | Need for COMMAND/BOP/source names in runtime code, guest-specific address, adapter/host capability, core semantic patch, or any production ABI. |
+| Exit Criteria | The complete mechanical pattern passes under the formal CPU5 graph and leaves the remaining live defect solely in the original COMMAND/NTDOS lifecycle owner domain. |
+| Original Owner Request | Diagnose source-built guest control flow through original source before changing Bochs or hand-authoring a workaround. |
+| Similar-Issue Sweep | Reverse string direction/count, copied far pointer order, indirect far call/return, real-mode segment compatibility, default graph membership. |
 > **T228 S1 P3 result:** [the terminal provenance result](etc/evidence/t228-s1-terminal-provenance-result-001.md) proves that the identical Direct/Readonly budget terminal executes a zero-filled ordinary-RAM window at `5A5F:9F51`; it transfers only the complete guest-control-flow / bx-core-bx-mantle continuity question, never a BOP leaf repair.
 
 > **T228 S1 P4 result:** [the CS-transition provenance result](etc/evidence/t228-s1-terminal-cs-transition-provenance-result-001.md) records the paired `1797:3AB8 → 5A5F:5EF9` transition and proves its copied predecessor bytes are absent from all declared source-built inputs. It transfers only the runtime guest-memory producer/control-transfer owner question.
@@ -102,6 +122,7 @@
 > **T228 S1 P10 result:** [the source-built transient continuity correlation](etc/evidence/t228-s1-source-built-transient-continuity-correlation-001.md) maps P9 0C41:8097 exactly to immutable COMMAND.COM offset 7F97, proving original transient code is intact through 300,000 ticks. The next owner boundary is the original initial-image-to-dynamic-transient transition, not BOP/provider staging.
 
 > **T228 S1 P11 result:** [the scalar CS-transition ring result](etc/evidence/t228-s1-cs-transition-ring-result-001.md) records sixteen default-off, fixed-width transition pairs at the identical Direct/Readonly one-million-tick terminal. It captures the ordered `0C41:25A9 -> 2073:7365` transfer without byte capture or BOP interpretation, and transfers only the complete original COMMAND/NTDOS dynamic transient lifecycle domain; no leaf repair is selected.
+> **T228 S1 P12 result:** [the large reverse-copy result](etc/evidence/t228-s1-large-reverse-copy-result-001.md) proves the full selector-blind 50KiB reverse-copy, copied opaque far-pointer, indirect far-call and far-return shape under the current CPU5 formal graph. It excludes that generic bx-core/bx-mantle mechanics group but does not close the original COMMAND/NTDOS lifecycle that wrote the live invalid HeadCall value.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.

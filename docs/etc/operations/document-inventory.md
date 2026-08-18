@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1876 |
+| Documentation records | 1878 |
 | --- | --- |
-| Generated UTC | 2026-08-18T16:58:28Z |
+| Generated UTC | 2026-08-18T17:06:08Z |
 
 ## Entries
 
@@ -160,6 +160,7 @@ content-divergent entries.
 | etc/evidence/t228-s1-far-call-base-pointer-provenance-result-001.md | indexed supporting material | ecd13914950f30d721f099b863125fbdb235a64181c419aa02fad7ee4e4043f8 |
 | etc/evidence/t228-s1-immutable-multiprogram-integration-observation-001.md | indexed supporting material | e4c8e9b41780d6134d80710c773c4fa2dbc8232f9fd192b7c67ac940321710f5 |
 | etc/evidence/t228-s1-instruction-history-provenance-boundary-result-001.md | indexed supporting material | 93ad1446bff44590ebeac7b703669d9f22dcbae4ec2cfe3818162c6154fe3d8f |
+| etc/evidence/t228-s1-large-reverse-copy-result-001.md | indexed supporting material | f93784a5c86b8a45aaea2cd362cfcdd312280c5edec56d690daaa075681c2780 |
 | etc/evidence/t228-s1-source-built-transient-continuity-correlation-001.md | indexed supporting material | 505193706db9e5e5e18de697b0f0ebc1774bff6914f1c2fea0d5953612bfe3cc |
 | etc/evidence/t228-s1-terminal-cs-transition-provenance-result-001.md | indexed supporting material | 302c58671ee8249da4d51afff91a962530a1431c9acfd8c0df7412ca3c6e331b |
 | etc/evidence/t228-s1-terminal-instruction-history-result-001.md | indexed supporting material | 031ea34a34d5154070096b07075202f02262765e1074d39bccf689eff68cb3f3 |
@@ -208,6 +209,7 @@ content-divergent entries.
 | etc/operations/t226-s1-bop-local-conformance-manifest-001.json | indexed supporting material | 626df39fe34ccb29f0ee43b3742d4ec5d654c31a45a92634186dcf8dbd685121 |
 | etc/operations/t228-s1-command-transient-owner-package-map-001.md | indexed supporting material | 7fda477e1b5f7a8c249d1a016a286fb294e4ce291e423ce15143d1b6aa24b6d6 |
 | etc/operations/t228-s1-cs-transition-ring-admission-001.md | indexed supporting material | 7de247676a7eaf00e24558c4646edaabefcad845bf4b00df2e9375217f583d6c |
+| etc/operations/t228-s1-large-reverse-copy-admission-001.md | indexed supporting material | 3c17c40f500b9973eb7d529793e16f1f84b74cd4612cc215cd7d5e840e2fc017 |
 | etc/operations/task-identifier-governance.md | indexed supporting material | fe8b587771c9ac4d355d520d8120c9860881da1555b76ec9a0e9aa0f5645ec9e |
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
@@ -1890,7 +1892,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 0fbf779982d7e4b9f3089822692a25c2caa94c2fac53e10aaad4a41f2ac6a01b |
+| STATUS.md | principal control document | b847d051e463b7ebd10bca27b2c7bff9ece142482dcd861a0ed01c280717bf61 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

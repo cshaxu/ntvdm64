@@ -452,6 +452,11 @@
       "source": "tests/bx-mantle/t228_s1_budget_terminal_position_fixture.cc",
       "libraries": ["bx-core", "bx-mantle"],
       "platformLibraries": []
+    },    {
+      "name": "t228-s1-large-reverse-copy-fixture",
+      "source": "tests/bx-mantle/t228_s1_large_reverse_copy_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle"],
+      "platformLibraries": []
     },
     {
       "name": "t225-s30-segment-access-observation-fixture",
