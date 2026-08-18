@@ -2,9 +2,8 @@
 
 ## Scope
 
-This record rechecks the existing T226/T227 local code-complete baseline. It
-is not a claim that a new all-fixture executable graph was rebuilt from the
-current worktree, and it makes no native Guest DOS runtime claim.
+This record rechecks the existing T226/T227 local code-complete baseline from
+the current worktree. It makes no native Guest DOS runtime claim.
 
 ## Current-source inventory check
 
@@ -18,11 +17,13 @@ passed on 2026-08-18 and exported/verified exactly 203 T226 S1 conformance
 rows. The manifest binds each original BOP identity to one owner-package
 fixture target.
 
-## Retained formal-fixture execution
+## Fresh formal build and execution
 
-The retained formal root `build/M0-T226-S8/all-package-20260817a` contains all
-40 manifest-registered `t226-*` fixture executables. Each executable was run
-without rebuilding sources; all returned zero:
+A fresh isolated MSVC x64 `/MT` Ninja graph was generated at
+`build/M0-T228-S1/bop-codecomplete-20260818a`. It built exactly the 40
+manifest-registered `t226-*` BOP fixture targets in 391 graph edges, without
+using the earlier premature-end work directory. Every freshly built executable
+then returned zero:
 
 | Owner package | Fixtures |
 | --- | ---: |
@@ -34,12 +35,18 @@ without rebuilding sources; all returned zero:
 | Debugger/WOW/top-level | 3 |
 | Total | 40 |
 
+## Retained-root cross-check
+
+The previously retained formal root `build/M0-T226-S8/all-package-20260817a`
+also contains the same 40 fixture executables, all of which independently
+returned zero in a no-rebuild reproducibility run. This cross-check is
+supporting evidence; the fresh current-source graph above is the operative
+code-complete result.
+
 ## Boundary
 
-The retained-fixture run establishes executable reproducibility of the
-previous formal T226 result. The manifest verifier establishes the current
-203-row route/fixture inventory. The two facts do not substitute for a fresh
-all-fixture rebuild after later mantle/CLI observation changes. That rebuild
-is deliberately not claimed because the disposable current Ninja root had a
-premature-end log recovery failure. No BOP implementation, provider
-selection, profile behavior, or guest input changed during this recheck.
+Together, the current 203-row inventory verification and the fresh 40-fixture
+build/execution establish the local BOP owner-package code-complete gate. They
+do not prove native Guest DOS continuous execution, child/parent lifecycle,
+or a complete host-product replacement. No BOP implementation, provider
+selection, profile behavior, or guest input changed during this revalidation.
