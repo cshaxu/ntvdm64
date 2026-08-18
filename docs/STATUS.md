@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S45.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S46.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S45 -- source-built guest parent/child/return fixture admission.**
+**Active: M0 T225 S46 -- source-built guest parent/child/return fixture implementation.**
 
 ## Active Packet
 
@@ -12,21 +12,22 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S45, Ordinary Mode. |
-| Admission And Approval | S44 identifies a whole guest-native source-built parent/child/return fixture as the first remaining execution package. This S admits its source/asset/ABI/failure design before implementation or native validation. |
-| Objective | Select or reproduce a source-built guest child whose original code has a bounded ordinary termination contract, and define the parent/child/return fixture crossings, inputs, markers, Direct/Readonly expectations and owner boundaries. |
-| Non-goals | No trace-selected BOP repair, no host child substitute, no synthetic DOS loader/PSP, no guest-byte marker injection, no Bochs feature enablement, and no native execution until a later S admits the completed fixture. |
-| Reference Baseline | S44 whole-path map; original OpenNT NTDOS/COMMAND source; S8/S10 source-built guest artifact records and current Ninja graph. |
-| Files And ABI Surface | One source/asset/ABI/failure map, Status and S45 closure history. No runtime or guest binary change. |
+| Identifier Mode | M0 T225 S46, Ordinary Mode. |
+| Admission And Approval | S45 selects the source-built OpenNT SHARE child and fixes the complete fixture contract. This S admits implementation of that one whole fixture and its paired integration validation. |
+| Objective | Build the fresh manifest-bound source-built four-image fixture, implement only its declared default-off lifecycle observation and focused negative checks, then run one bounded Direct/Readonly integration pair. |
+| Non-goals | No trace-selected BOP repair, host child substitute, synthetic DOS loader/PSP, guest-byte marker injection, Bochs feature enablement, provider/profile semantic change, or follow-on implementation selected from the trace. |
+| Reference Baseline | S44 whole-path map, S45 fixture asset/ABI map, source-built S8 artifacts and current Ninja graph. |
+| Files And ABI Surface | Fresh S46 staging manifest/input root, fixture/observer source only if required by the S45 contract, Status and S46 closure history. No guest binary or service ABI change. |
 | Applicable Rules | Execution, architecture, coding, source policy, recovery ladder, artifact provenance, deny-by-default and T225 anti-attrition. |
-| Verification | Read-only original-source and artifact-manifest review; current CLI/profile admission review; Direct/Readonly capability review; documentation governance verifier and diff check. |
-| Expected Markers | A source-built child identity with exact provenance; source-defined entry/exit/parent-return observations; fixture crossing table; explicit rejection of unsuitable artifacts and host/substitute paths. |
-| Asset Needs | Existing source-built artifact/manifests, historical guest build inputs/toolchain records, original source and current CLI profile schema. |
-| Reporting Requirements | State whether the selected artifact is directly usable, must be reproduced from original source, or is unavailable; distinguish an admitted design from execution proof. |
-| Stop Conditions | Need to author a new guest program, modify a historical guest binary, import unapproved guest media/source, change runtime/BOP/provider/profile/Bochs code, or run native validation before a separate implementation S. |
-| Exit Criteria | Map selects one source-first fixture asset strategy, defines bounded observations and exact owner/capability dispositions, rejects host/substitute paths, and is committed/pushed with Status/history. |
+| Verification | Fresh Ninja x64 /MT build; source-built identity/stager checks; focused positive/negative fixture checks; one bounded Direct/Readonly native pair; governance verifier and diff check. |
+| Expected Markers | Exact four-image provenance, no guest-byte mutation, source-defined child entry/termination/parent-return observation disposition, equal Direct/Readonly inputs, and bounded terminal evidence or explicit owner-classified limitation. |
+| Asset Needs | Reproducible S8 source-built stages, current formal Ninja graph, S45 source map and existing CLI profile schema. |
+| Reporting Requirements | Separate fixture mechanics from guest/BOP semantics; report each Direct/Readonly result and all unproven lifecycle phases; do not call a bounded trace a repair. |
+| Stop Conditions | Need to author/modify guest code, add a BOP/provider/machine semantic change, enable a Bochs feature, select Overlay/Virtual, or repair a trace observation. |
+| Exit Criteria | Fresh fixture is provenance-closed; focused checks and one paired native integration result are recorded; all missing phases have an owner-qualified limitation; Status/history are committed and pushed. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | COM versus EXE, normal exit versus TSR/terminate-and-stay-resident, DOS `INT 21h/4Ch` versus other termination paths, source-built provenance, command tail/environment, Direct/Readonly host effects, and parent-return `54:0B` semantics. |
+| Similar-Issue Sweep | Source artifact identity, stager scope, default-off observer, COM/EXE dispatch, no guest mutation, Direct/Readonly parity, watchdog/cancellation cleanup, and top-level versus parent-return terminal distinction. |
+> **T225 S45 closure:** [the closure record](history/m0-t225-s45-closure-20260817.md) selects the immutable source-built SHARE child and rejects top-level QUIT; it claims no implementation or native result.
 > **T225 S44 closure:** [the closure record](history/m0-t225-s44-closure-20260817.md) reconciles the entire guest `EXEC`/parent-return route and selects one source-built fixture package; it claims no native child execution.
 > **T225 S43 closure:** [the closure record](history/m0-t225-s43-closure-20260817.md) fixes only the original `$Exec` pre-transfer attribution for the observed `50:36` record; it claims no child execution, provider or package closure.
 > **T225 S42 closure:** [the closure record](history/m0-t225-s42-closure-20260817.md) closes mantle delivery and paired observation only.
