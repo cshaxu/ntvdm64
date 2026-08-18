@@ -30,7 +30,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:0A` | `demFindFirstFCB` | P — checked FCB search transaction | host enumeration/extended-FCB matrix |
 | `50:0B` | `demFindNext` | R | DTA continuation/stale-state matrix |
 | `50:0C` | `demFindNextFCB` | P — continuation/no-more-files | host enumeration variant |
-| `50:12` | `demOpen` | R | Direct/Readonly local open and pipe exclusion |
+| `50:12` | `demOpen` | P — whole-provider token/size/pipe ABI | share/access and pipe-token variants |
 | `50:16` | `demRead` | R | checked output write + EOF behavior |
 | `50:17` | `demRename` | R | two-path Direct/Readonly ABI |
 | `50:1E` | `demWrite` | P — Direct write, pre-host Readonly refusal | zero-length/disk-full variants |
@@ -52,7 +52,8 @@ ledger: a typed route is not counted as semantic completion.
 - P1: whole-provider `demOpenFCB`, `demGetFileInfo`, `demFCBIO`,
   `demCloseFCB`, `demCreateDir`, `demDeleteDir`.
 - P2: `demFileTimes` metadata and `demWrite` owner-level Readonly gates.
-- P3 (current uncommitted checkpoint): `demDeleteFCB` wildcard mutation.
+- P3: `demDeleteFCB` wildcard mutation.
+- P4: `demOpen` whole-provider PDB/path transaction and `AX:BP`, `BX:CX`, `DX` success ABI.
 
 ## Completion rule
 

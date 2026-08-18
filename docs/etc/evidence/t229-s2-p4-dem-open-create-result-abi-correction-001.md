@@ -41,10 +41,11 @@ build/M0-T229-S2/formal-direct-readonly-20260818b/bin/t225-s19-dem-package-lifec
 build/M0-T229-S2/formal-direct-readonly-20260818b/bin/t225-s19-dem-package-lifecycle-fixture.exe readonly pdb-lifecycle
 ```
 
-A proposed whole-provider `50:12` assertion was deliberately not retained:
-its test fixture has not yet admitted the required PDB/path gather lifecycle.
-That missing transaction is a separate DEM package closure item; this evidence
-does not claim it passed or bypass it with a partition-only test.
+The fixture now asserts the complete `50:12` transaction in both modes: ingress
+and provider selection, checked 260-byte guest pathname copy, checked two-byte
+current-PDB owner read, Direct/Readonly open, exact success registers, then
+the paired `50:02` close.  Its fixture-owned three-byte file proves `BX=0`,
+`CX=3`, and `DX=0`; `AX:BP` is retained only as an opaque nonzero token.
 
 ## Scope limit
 

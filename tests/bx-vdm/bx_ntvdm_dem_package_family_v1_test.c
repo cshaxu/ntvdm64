@@ -413,7 +413,7 @@ static int whole_provider_pdb_lifecycle_regression(void)
     char oem_fcb_path[128], readback[3];
     HANDLE file = INVALID_HANDLE_VALUE, looked_up = INVALID_HANDLE_VALUE;
     DWORD written = 0u;
-    uint32_t token = 0u;
+    uint32_t token = 0u, open_token = 0u;
     int status = 1;
 
     memset(&session, 0, sizeof(session));
@@ -569,6 +569,43 @@ static int whole_provider_pdb_lifecycle_regression(void)
         result.cpu_delta.gpr16_values[5u];
     if (token == 0u || !bx_ntvdm_boot_namespace_plane_v1_set_dta(&plane, &dta))
         goto cleanup;
+    /* Original demOpen returns the opaque SFT token in AX:BP, the exact
+     * 32-bit file size in BX:CX, and an ordinary-file pipe flag of zero in
+     * DX.  Exercise this through ingress, the whole provider, a checked
+     * guest path copy, PDB owner discovery, and its paired close. */
+    ram[dta.current_pdb] = 0x34u; ram[dta.current_pdb + 1u] = 0x12u;
+    bytes[3] = 0x12u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 0u; cpu.ebx = 0u; cpu.esi = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask !=
+            ((UINT32_C(1) << 0u) | (UINT32_C(1) << 1u) |
+             (UINT32_C(1) << 2u) | (UINT32_C(1) << 3u) |
+             (UINT32_C(1) << 5u)) ||
+        result.cpu_delta.gpr16_values[3u] != 0u ||
+        result.cpu_delta.gpr16_values[1u] != 3u ||
+        result.cpu_delta.gpr16_values[2u] != 0u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u) goto cleanup;
+    open_token = ((uint32_t)result.cpu_delta.gpr16_values[0u] << 16u) |
+        result.cpu_delta.gpr16_values[5u];
+    if (open_token == 0u) goto cleanup;
+    bytes[3] = 0x02u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = open_token >> 16u; cpu.ebp = open_token & 0xffffu;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u) goto cleanup;
     /* demFileTimes option 1 mutates metadata.  Direct changes only the
      * fixture-owned file; Readonly is rejected by the shared profile before
      * SetFileTime can touch a host HANDLE. */
