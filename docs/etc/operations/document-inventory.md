@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1804 |
+| Documentation records | 1805 |
 | --- | --- |
-| Generated UTC | 2026-08-18T01:45:28Z |
+| Generated UTC | 2026-08-18T01:48:43Z |
 
 ## Entries
 
@@ -937,6 +937,7 @@ content-divergent entries.
 | etc/research/t224-s3-dem-pipe-sft-state-abi-failure-map-001.md | indexed supporting material | c9108a7fcac22867debff1722da447a083d12ed45c9d9f4ef61f5b4890f7b76f |
 | etc/research/t224-s4-command-child-redirection-source-abi-failure-map-001.md | indexed supporting material | 758374c044b70ff7554d3ef7fd350caf09e1dd8f79156ac3724ee37eed04f2d8 |
 | etc/research/t224-s5-command-shared-child-redirection-provider-admission-001.md | indexed supporting material | 3dce540a99784ec66f1461d87645300ef452f27cd874429aa02ec0335e94c3c9 |
+| etc/research/t225-guest-image-layout-lifecycle-correction-001.md | indexed supporting material | 6a4dd314856cb829090b37baa68952b13c66785b3991fd498170687664994451 |
 | etc/research/t225-s10-native-run-control-observation-map-001.md | indexed supporting material | f2d931819595e84b4b6cfa6aeedaa9a5dcdec32e82f201af1a0b982502577120 |
 | etc/research/t225-s14-primary-pre-bop-continuity-source-map-001.md | indexed supporting material | cfc99198937fe7c1d0ed469d2ab57c58398f9c90efb45fa92ed251e7904feb6a |
 | etc/research/t225-s18-reached-bop-owner-package-disposition-map-001.md | indexed supporting material | 358b3a45526cb03ca23eab5e527b826e2183397229961fb31fdd146b136c1614 |
