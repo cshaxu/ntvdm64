@@ -6,8 +6,15 @@
 
 #include "bochs.h"
 #include "bx_ntvdm_instruction_history.h"
-#include "bx-core/memory/memory.h"
 #include <string.h>
+
+#ifndef BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+#define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE 0
+#endif
+
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+#include "bx-core/memory/memory.h"
+#endif
 
 static struct bx_ntvdm_instruction_history_record_v1
   bx_ntvdm_instruction_history_records[BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX];
@@ -20,6 +27,7 @@ static unsigned bx_ntvdm_instruction_history_last_record_valid;
 static struct bx_ntvdm_instruction_history_transition_v1
   bx_ntvdm_instruction_history_latest_cs_transition;
 static unsigned bx_ntvdm_instruction_history_latest_cs_transition_valid;
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
 static struct bx_ntvdm_instruction_history_provenance_v1
   bx_ntvdm_instruction_history_latest_cs_provenance;
 static unsigned bx_ntvdm_instruction_history_latest_cs_provenance_valid;
@@ -34,6 +42,7 @@ static bx_bool bx_ntvdm_instruction_history_real_address(uint16_t segment,
   *address = value;
   return 1;
 }
+#endif
 
 void bx_ntvdm_mantle_instruction_history_v1_reset(void)
 {
@@ -47,9 +56,11 @@ void bx_ntvdm_mantle_instruction_history_v1_reset(void)
   memset(&bx_ntvdm_instruction_history_latest_cs_transition, 0,
     sizeof(bx_ntvdm_instruction_history_latest_cs_transition));
   bx_ntvdm_instruction_history_latest_cs_transition_valid = 0;
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
   memset(&bx_ntvdm_instruction_history_latest_cs_provenance, 0,
     sizeof(bx_ntvdm_instruction_history_latest_cs_provenance));
   bx_ntvdm_instruction_history_latest_cs_provenance_valid = 0;
+#endif
 }
 
 int bx_ntvdm_mantle_instruction_history_v1_configure(uint32_t capacity)
@@ -67,11 +78,12 @@ void bx_ntvdm_mantle_instruction_history_v1_record(
       bx_ntvdm_instruction_history_capacity == 0) return;
   if (bx_ntvdm_instruction_history_last_record_valid &&
       bx_ntvdm_instruction_history_last_record.cs != record->cs) {
-    bx_phy_address predecessor_address, stack_address;
     bx_ntvdm_instruction_history_latest_cs_transition.previous =
       bx_ntvdm_instruction_history_last_record;
     bx_ntvdm_instruction_history_latest_cs_transition.current = *record;
     bx_ntvdm_instruction_history_latest_cs_transition_valid = 1;
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+    bx_phy_address predecessor_address, stack_address;
     memset(&bx_ntvdm_instruction_history_latest_cs_provenance, 0,
       sizeof(bx_ntvdm_instruction_history_latest_cs_provenance));
     bx_ntvdm_instruction_history_latest_cs_provenance.transition =
@@ -93,6 +105,7 @@ void bx_ntvdm_mantle_instruction_history_v1_record(
       bx_ntvdm_instruction_history_latest_cs_provenance.stack_valid = 1u;
     }
     bx_ntvdm_instruction_history_latest_cs_provenance_valid = 1;
+#endif
   }
   bx_ntvdm_instruction_history_last_record = *record;
   bx_ntvdm_instruction_history_last_record_valid = 1;
@@ -135,8 +148,13 @@ int bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(
 int bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_provenance(
   struct bx_ntvdm_instruction_history_provenance_v1 *provenance)
 {
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
   if (!provenance || !bx_ntvdm_instruction_history_latest_cs_provenance_valid)
     return 0;
   *provenance = bx_ntvdm_instruction_history_latest_cs_provenance;
   return 1;
+#else
+  (void)provenance;
+  return 0;
+#endif
 }

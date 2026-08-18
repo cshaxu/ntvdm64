@@ -27,6 +27,28 @@
 | Exit Criteria | The declared multi-program sequence reaches a classified terminal in both profiles and each repaired defect has complete owner-package evidence; no synthetic route or trace-derived BOP backlog remains. |
 | Original Owner Request | After code coverage and local BOP semantic tests are complete, use the next T for comprehensive testing and defect repair. |
 | Similar-Issue Sweep | EXEC/PSP/MCB transfer, COM loading, child exit, PDB cleanup, COMMAND parent return, machine/CPU terminal, CLI profile admission, and Direct/Readonly parity. |
+
+### T228 S1 P1 -- Instruction-history provenance boundary repair
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P1, Ordinary Mode. |
+| Admission And Approval | Owner approved the repair after the read-only review found that the existing implementation conflated registered `BX-CORE-071`/`BX-MANTLE-072`/`BX-CORE-074` scalar history with separately registered `BX-MANTLE-075` guest-RAM provenance. |
+| Objective | Make base default-off instruction history and scalar CS-transition retention incapable of guest-RAM access unless a separately explicit provenance build option is enabled. |
+| Non-goals | No CPU execution change, BOP/provider work, guest trace repair, provenance interpretation, new Bochs exception, or guest-image change. |
+| Reference Baseline | Registered exception rows `BX-CORE-071`, `BX-MANTLE-072`, `BX-CORE-074`, and `BX-MANTLE-075`; current `bx_ntvdm_instruction_history.cc`; retained T225 S58 candidate materials remain isolated. |
+| Files And ABI Surface | `src/bx-mantle/bx_ntvdm_instruction_history.*`, an admitted mantle fixture/build recipe, exception-register clarification, and evidence. Public copied query ABI remains stable. |
+| Applicable Rules | Execution, coding, architecture-boundary, formal-build, and source-recovery rules; existing exception registration only. |
+| Verification | Source boundary scan; MSVC x64 `/MT` CPU5 fixture with base history enabled and provenance disabled; separate explicit-provenance fixture; existing formal Ninja module build and documentation governance checks. |
+| Expected Markers | Base/transition fixture returns copied records and reports no provenance; explicit provenance fixture alone reports copied ordinary-RAM evidence; default build retains neither instruction history nor provenance. |
+| Asset Needs | Existing CPU5 minimal-machine probe, registered history API, formal Ninja graph, and no new external input. |
+| Reporting Requirements | State the prior conflation, exact compile-time gates, build inputs, positive and negative result, and retained limitation. |
+| Stop Conditions | Any required core semantic change, selector/guest-address filter, new guest-memory primitive, adapter/BOP dependency, or failure to prove the two build modes separate. |
+| Exit Criteria | Base history is scalar-only in its enabled build, provenance is explicit and default-off, both focused configurations pass, and the formal build remains valid. |
+| Original Owner Request | "批准" of the proposed diagnostic-boundary package following the finding that basic history currently reads guest RAM. |
+| Similar-Issue Sweep | All `copy_from_ordinary_ram` uses in instruction-history code, all history feature macros, public query behavior when provenance is disabled, and manifest/probe compile definitions. |
+
+> **T228 S1 P1 result:** [the provenance-boundary result](etc/evidence/t228-s1-instruction-history-provenance-boundary-result-001.md) records successful base and explicit-provenance full CPU5 fixtures. The fresh [formal Ninja graph](../build/M0-T228-S1/formal-ninja-20260818b/build.ninja) completed all 433 targets under its manifest. This P closes only the registered diagnostic-boundary repair; T228 S1 guest integration remains active.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.

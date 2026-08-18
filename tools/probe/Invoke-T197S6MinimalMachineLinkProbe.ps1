@@ -6,6 +6,7 @@ param(
     [ValidateSet('x64', 'x86')]
     [string]$HostArchitecture = 'x64',
     [switch]$InstructionHistory,
+    [switch]$InstructionHistoryBoundaryFixture,
     [switch]$RunLifecycle,
     [switch]$A20CapabilityFixture,
     [switch]$XmsPackageFixture
@@ -47,6 +48,11 @@ $sources = @(
     @{ Name = 'a20_capability'; Path = 'src\bx-mantle\bx_ntvdm_a20_capability_v1.cc'; ExtraIncludes = @('src\bx-core', 'refs\bochs\iodev') },
     @{ Name = 'extended_memory'; Path = 'src\bx-mantle\bx_ntvdm_extended_memory_v1.cc'; ExtraIncludes = @('src\bx-core', 'refs\bochs\iodev') },
     @{ Name = 'minimal_port_space'; Path = 'src\bx-mantle\minimal_port_space.cc'; ExtraIncludes = @('refs\bochs\iodev') },
+    @{ Name = 'pic'; Path = 'src\bx-mantle\pic.cc'; ExtraIncludes = @('refs\bochs\iodev') },
+    @{ Name = 'port_action'; Path = 'src\bx-mantle\bx_ntvdm_port_action_v1.cc'; ExtraIncludes = @('refs\bochs\iodev') },
+    @{ Name = 'generic_ud_bridge'; Path = 'src\bx-mantle\bx_ntvdm_generic_ud_bridge.cc'; ExtraIncludes = @() },
+    @{ Name = 'first_fault_observation'; Path = 'src\bx-mantle\bx_ntvdm_first_fault_observation_v1.cc'; ExtraIncludes = @() },
+    @{ Name = 'segment_access_observation'; Path = 'src\bx-mantle\bx_ntvdm_segment_access_observation_v1.cc'; ExtraIncludes = @() },
     @{ Name = 'minimal_product_shell'; Path = 'src\bx-mantle\minimal_product_shell.cc'; ExtraIncludes = @('src\bx-core', 'refs\bochs\iodev') },
     @{ Name = 'paramtree'; Path = 'src\bx-mantle\paramtree.cc'; ExtraIncludes = @() },
     @{ Name = 'logio'; Path = 'src\bx-mantle\logio.cc'; ExtraIncludes = @('src\bx-core', 'refs\bochs\iodev') },
@@ -72,6 +78,9 @@ $sources = @(
     @{ Name = 'cpudb_amd_k6_2_chomper'; Path = 'src\bx-core\cpu\cpudb\amd_k6_2_chomper.cc'; ExtraIncludes = @('src\bx-core', 'refs\bochs\iodev', 'src\bx-core\cpu') }
 )
 
+if ($InstructionHistoryBoundaryFixture -and -not $InstructionHistory) {
+    throw 'InstructionHistoryBoundaryFixture requires InstructionHistory.'
+}
 if ($InstructionHistory) {
     $sources += @{ Name = 'instruction_history'; Path = 'src\bx-mantle\bx_ntvdm_instruction_history.cc'; ExtraIncludes = @('src\bx-core', 'refs\bochs\iodev') }
 }
@@ -189,6 +198,78 @@ int main()
   return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 10;
 }
 '@ | Set-Content -LiteralPath $probe -Encoding ascii
+} elseif ($InstructionHistoryBoundaryFixture) {
+@'
+#include "bochs.h"
+#include "bx-core/memory/memory.h"
+#include "bx-mantle/bx_ntvdm_instruction_history.h"
+#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "bx-mantle/bx_ntvdm_minimal_machine.h"
+#include <string.h>
+
+#ifndef BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+#define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE 0
+#endif
+
+extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
+  const struct bx_ntvdm_generic_ud_event_v1 *event,
+  struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+{
+  (void)event; (void)outcome; return 0;
+}
+
+static int same_bytes(const Bit8u *actual, Bit8u value, unsigned count)
+{
+  unsigned i;
+  for (i = 0; i < count; ++i) if (actual[i] != value) return 0;
+  return 1;
+}
+
+int main()
+{
+  bx_ntvdm_minimal_machine_c machine;
+  bx_ntvdm_instruction_history_record_v1 previous = {};
+  bx_ntvdm_instruction_history_record_v1 current = {};
+  bx_ntvdm_instruction_history_transition_v1 transition = {};
+  bx_ntvdm_instruction_history_provenance_v1 provenance = {};
+  Bit8u predecessor[BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES];
+  Bit8u stack[BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES];
+
+  memset(predecessor, 0xa5, sizeof(predecessor));
+  memset(stack, 0x5a, sizeof(stack));
+  if (machine.initialize(0x100000, 0x100000) != BX_NTVDM_MINIMAL_MACHINE_OK) return 1;
+  if (!bx_mem.copy_to_ordinary_ram(0x1020, sizeof(predecessor), predecessor) ||
+      !bx_mem.copy_to_ordinary_ram(0x2030, sizeof(stack), stack)) return 2;
+  if (!bx_ntvdm_mantle_instruction_history_v1_configure(4u)) return 3;
+  previous.version = BX_NTVDM_INSTRUCTION_HISTORY_V1_VERSION;
+  previous.cpu_id = 1u; previous.sequence = 1u;
+  previous.cs = 0x0100u; previous.rip = 0x20u;
+  previous.ss = 0x0200u; previous.sp = 0x10u;
+  current = previous;
+  current.sequence = 2u; current.cs = 0x0300u;
+  current.ss = 0x0200u; current.sp = 0x30u;
+  bx_ntvdm_mantle_instruction_history_v1_record(&previous);
+  bx_ntvdm_mantle_instruction_history_v1_record(&current);
+  if (bx_ntvdm_mantle_instruction_history_v1_count() != 2u ||
+      !bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(&transition) ||
+      transition.previous.cs != previous.cs || transition.previous.rip != previous.rip ||
+      transition.current.cs != current.cs || transition.current.ss != current.ss ||
+      transition.current.sp != current.sp) return 4;
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+  if (!bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_provenance(&provenance) ||
+      !provenance.predecessor_valid || !provenance.stack_valid ||
+      !same_bytes(provenance.predecessor_bytes, 0xa5, sizeof(predecessor)) ||
+      !same_bytes(provenance.stack_bytes, 0x5a, sizeof(stack))) return 5;
+#else
+  if (bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_provenance(&provenance)) return 6;
+#endif
+  if (!bx_ntvdm_mantle_instruction_history_v1_configure(0u) ||
+      bx_ntvdm_mantle_instruction_history_v1_count() != 0u ||
+      bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(&transition) ||
+      bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_provenance(&provenance)) return 7;
+  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 8;
+}
+'@ | Set-Content -LiteralPath $probe -Encoding ascii
 } elseif ($A20CapabilityFixture) {
 @'
 #include "bochs.h"
@@ -272,6 +353,7 @@ $record = [ordered]@{
     profile = 'CPU5/Pentium-MMX, non-x86-64'
     wholeCpu5Core = [bool]$WholeCpu5Core
     instructionHistory = [bool]$InstructionHistory
+    instructionHistoryBoundaryFixture = [bool]$InstructionHistoryBoundaryFixture
     a20CapabilityFixture = [bool]$A20CapabilityFixture
     xmsPackageFixture = [bool]$XmsPackageFixture
     compiler = 'MSVC cl.exe/link.exe via VsDevCmd'
