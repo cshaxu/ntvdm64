@@ -381,6 +381,19 @@
 | Exit Criteria | Record whether allocation persistence is an original contract and retain only the complete guest owner boundary for any later observation. |
 
 > **T228 S1 P31 result:** [the arena-persistence source audit](etc/research/t228-s1-command-transient-arena-persistence-source-audit-001.md) proves original `$ALLOC`/`$DEALLOC` do not clear payload and that COMMAND expressly depends on preserved transient bytes. The observed zero target remains a complete guest COMMAND/NTDOS transient/arena lifecycle question; no BOP, adapter, profile, or Bochs repair is selected.
+
+### T228 S1 P32 -- COMMAND bootstrap BOP correlation correction
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P32, Ordinary Mode. |
+| Admission And Approval | P31 leaves the original transient/arena owner question. Retained P22 entry-state BOP and software-interrupt evidence must be interpreted against the original service definitions before it can be used to attribute any failure. |
+| Objective | Correctly classify the two retained `54:0F` entry records and the subsequent `50:10` record against original OpenNT source and the immutable COMMAND binary, without changing runtime code. |
+| Non-goals | No BOP/provider implementation or alteration, trace rerun, diagnostic implementation, guest-image change, adapter/Bochs change, or repair selection. |
+| Verification | Original `cmdsvc.h`, `dossvc.h`, `rdata.asm`, `cmddisp.c`, `demdisp.c` and immutable COMMAND disassembly cross-read; retained P22 entry-state record review. |
+| Exit Criteria | Establish whether the retained entries evidence a provider defect or instead preserve the original environment retry and DEM media-ID identities; retain only the complete transient/arena owner question. |
+
+> **T228 S1 P32 result:** [the bootstrap BOP correlation correction](etc/research/t228-s1-command-bootstrap-bop-correlation-correction-001.md) proves `54:0F` records BOP entry state, so its second `BX=010Fh` is the original post-allocation retry capacity, not a provider return; `50:10` is `SVC_DEMGSETMEDIAID`, not `demExitVDM`. No current BOP provider defect is evidenced, and the complete COMMAND/NTDOS transient/arena lifecycle remains active.
 ### T228 S1 P26 -- EndInit-to-LodCom generic transition provenance comparison
 
 | Field | Required record |
