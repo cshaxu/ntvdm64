@@ -207,6 +207,26 @@
 | Original Owner Request | Diagnose and repair a demonstrated whole owner domain; use trace only to validate/sort the complete package. |
 | Similar-Issue Sweep | P13 environment form, P14 first-fault non-result, P15 EndInit map, P9/P11 scalar bracket, Direct/Readonly scope, and instruction-history gates. |
 > **T228 S1 P17 result:** [the EndInit-to-transient bounded continuity sweep](etc/evidence/t228-s1-endinit-transient-continuity-sweep-result-001.md) proves that the map-supported `54:0F` pair returns into `0C41` by 300,000 ticks, but that a third same-site request with `4444` state and the scalar transfer `0C41:1DC6 -> 4444:4444` occur before one million. Ten million ticks add no child lifecycle. It preserves the complete original COMMAND `EndInit` / NTDOS MCB allocation-and-transient-placement package as the sole repair boundary; no BOP or Bochs repair is selected.
+### T228 S1 P18 -- COMMAND initial-environment lifecycle source-parity repair
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P18, Ordinary Mode. |
+| Admission And Approval | P17 observes a third pre-child `54:0F`; direct source comparison identifies a lifecycle divergence in the existing source-derived COMMAND provider, not a selector-specific trace task. |
+| Objective | Restore the original `cmdGetInitEnvironment` lifecycle: retain an immutable CLI snapshot as reissuable through initial COMMAND setup, then close it only after successful `cmdGetNext` delivery. |
+| Non-goals | No host re-capture after admission, BOP expansion, synthetic guest state, guest-image change, NTDOS allocator rewrite, Bochs/mantle change, address rule, or claim that this alone repairs the dynamic transient failure. |
+| Reference Baseline | OpenNT `cmdenv.c:179..330`, especially `IsFirstCall`, post-copy `cchInitEnvironment=0`, and `cmdmisc.c` first-command transition; P13/P17 controlled-large lifecycle boundary. |
+| Files And ABI Surface | COMMAND bootstrap state, its COMMAND package consumers, focused local lifecycle tests, evidence, and formal graph membership only. The #UD/adapter ABI and guest service bytes remain unchanged. |
+| Applicable Rules | Active T228 packet; source-policy ladder; whole-owner diagnosis; original-source-first repair; mutation-profile and formal-build rules. |
+| Verification | Focused retry/reissue/close test: capacity retry, first write, second pre-`54:01` write, then `54:01` commit and exact `BX=0` post-close response; Direct/Readonly local package regression; fresh formal Ninja build; one controlled-large native observation only after package tests pass. |
+| Expected Markers | A pre-close repeated `54:0F` writes the same snapshot and returns the same paragraph count; post-close has no guest write and returns zero; no host environment is reread. |
+| Asset Needs | Current immutable host-context snapshot, existing COMMAND package fixtures and current formal Ninja graph only. |
+| Reporting Requirements | Separate original source contract, current divergence, exact state transition, focused positive/negative tests, native observation, and remaining COMMAND/NTDOS owner limitation. |
+| Stop Conditions | Need for a new BOP, selector/address special case, ambient host recapture, guest mutation, NTDOS/Bochs patch, failure to preserve post-first-command zero semantics, or a source-inconsistent workaround. |
+| Exit Criteria | The entire source-derived initial-environment lifecycle is locally closed and formally built; the native result is classified without claiming complete transient repair unless its own markers prove it. |
+| Original Owner Request | Repair a demonstrated whole owner domain from OpenNT source rather than trace-led BOP patches. |
+| Similar-Issue Sweep | All `ENVIRONMENT_CONSUMED` users, legacy runtime path, package-session path, first-command environment byte handoff, Direct/Readonly behavior, and environment retry tests. |
+> **T228 S1 P18 result:** [the initial-environment lifecycle result](etc/evidence/t228-s1-command-initial-environment-lifecycle-result-001.md) restores the complete OpenNT-shaped reissue/close contract, passes fresh formal focused fixtures, and is newly linked into the native executable. The one controlled-large Direct observation still reaches a third `54:0F` with `4444` state and ends after `0C41:1DC6 -> 4444:4444`; P18 therefore closes only the source-derived provider divergence and preserves the deeper COMMAND/NTDOS owner boundary.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.

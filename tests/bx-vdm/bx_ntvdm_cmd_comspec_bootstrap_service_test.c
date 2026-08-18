@@ -48,11 +48,17 @@ int main(void)
        tx.writes.writes[0].byte_count!=state.environment_bytes||tx.result.cpu_delta.gpr16_values[3]!=need||
        memcmp(payload,state.environment,state.environment_bytes))return 4;
     if(!bx_ntvdm_cmd_comspec_bootstrap_v1_complete_environment(&state,&tx)||
-       state.stage!=BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED)return 8;
+       state.stage!=BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_DELIVERED)return 8;
     c.ebx=0xffffu;
     if(!bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(&e,&c,&w,&state,&tx,payload)||
+       tx.writes.write_count!=1u||tx.result.cpu_delta.gpr16_values[3]!=need||
+       memcmp(payload,state.environment,state.environment_bytes)||
+       !bx_ntvdm_cmd_comspec_bootstrap_v1_complete_environment(&state,&tx))return 9;
+    if(!bx_ntvdm_cmd_comspec_bootstrap_v1_close_initial_environment(&state)||
+       state.stage!=BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CLOSED)return 10;
+    if(!bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(&e,&c,&w,&state,&tx,payload)||
        tx.writes.write_count!=0u||tx.result.cpu_delta.gpr16_write_mask!=(1u<<3)||
-       tx.result.cpu_delta.gpr16_values[3]!=0u)return 9;
+       tx.result.cpu_delta.gpr16_values[3]!=0u)return 11;
     puts("bx-ntvdm COMMAND COMSPEC bootstrap: gather, retry, and environment write verified");
     return 0;
 }

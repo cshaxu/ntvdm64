@@ -122,10 +122,11 @@ int bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(
     if (!transaction || !payload || !state ||
         !bx_ntvdm_cmd_comspec_bootstrap_v1_match(event, cpu, window, 15u)) return 0;
     bx_ntvdm_multi_write_transaction_v1_initialize(transaction, event, cpu);
-    if (state->stage == BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED)
+    if (state->stage == BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CLOSED)
         return bx_ntvdm_cpu_result_v2_resume(&transaction->result, event->fault_rip + 4u) &&
             bx_ntvdm_cpu_delta_v1_set_gpr16(&transaction->result.cpu_delta, 3u, 0u);
-    if (state->stage != BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY ||
+    if ((state->stage != BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY &&
+         state->stage != BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_DELIVERED) ||
         state->environment_bytes < 10u ||
         state->environment_bytes > sizeof(state->environment)) return 0;
     paragraphs = (state->environment_bytes + 15u) >> 4;
@@ -151,12 +152,21 @@ int bx_ntvdm_cmd_comspec_bootstrap_v1_complete_environment(
     const bx_ntvdm_multi_write_transaction_v1 *transaction)
 {
     if (!state || !transaction ||
-        state->stage != BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY ||
+        (state->stage != BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY &&
+         state->stage != BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_DELIVERED) ||
         transaction->writes.write_count != 1u ||
         !bx_ntvdm_cpu_result_v2_valid(&transaction->result) ||
         transaction->result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         transaction->result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 3) ||
         transaction->result.cpu_delta.gpr16_values[3] != ((state->environment_bytes + 15u) >> 4)) return 0;
-    state->stage = BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED;
+    state->stage = BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_DELIVERED;
+    return 1;
+}
+
+int bx_ntvdm_cmd_comspec_bootstrap_v1_close_initial_environment(
+    bx_ntvdm_cmd_comspec_bootstrap_v1 *state)
+{
+    if (!state || state->stage != BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_DELIVERED) return 0;
+    state->stage = BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CLOSED;
     return 1;
 }

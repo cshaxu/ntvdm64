@@ -122,15 +122,11 @@ $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('  description = CXX $out')
 $graph.Add('')
 $graph.Add('rule lib')
-$graph.Add('  command = cmd.exe /d /s /c cd /d ' + $buildNinja + ' && call ' + $envNinja + ' lib.exe /nologo /OUT:$build_root/$out @$rspfile')
-$graph.Add('  rspfile = $build_root/$out.rsp')
-$graph.Add('  rspfile_content = $in')
+$graph.Add('  command = cmd.exe /d /s /c cd /d ' + $buildNinja + ' && call ' + $envNinja + ' lib.exe /nologo /OUT:$build_root/$out @$out.rsp')
 $graph.Add('  description = LIB $out')
 $graph.Add('')
 $graph.Add('rule link')
-$graph.Add('  command = cmd.exe /d /s /c cd /d ' + $buildNinja + ' && call ' + $envNinja + ' link.exe /nologo /OPT:REF /OUT:$build_root/$out @$rspfile')
-$graph.Add('  rspfile = $build_root/$out.rsp')
-$graph.Add('  rspfile_content = $in $platform')
+$graph.Add('  command = cmd.exe /d /s /c cd /d ' + $buildNinja + ' && call ' + $envNinja + ' link.exe /nologo /OPT:REF /OUT:$build_root/$out @$out.rsp')
 $graph.Add('  description = LINK $out')
 $graph.Add('')
 
@@ -145,6 +141,8 @@ foreach ($module in @($manifest.modules)) {
         $objects.Add($object)
     }
     $library = 'lib/' + $module.name + '.lib'
+    $libraryResponse = Join-Path $build ($library + '.rsp')
+    [IO.File]::WriteAllText($libraryResponse, (($objects -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
     $graph.Add('build ' + $library + ': lib ' + ($objects -join ' '))
     $graph.Add('')
     $moduleLibraries[$module.name] = $library
@@ -156,6 +154,9 @@ foreach ($entry in @($manifest.fixtures) + @($manifest.targets)) {
     $rule = if ($entry.source.EndsWith('.cc')) { 'cxx' } else { 'cc' }
     $output = 'bin/' + $entry.name + '.exe'
     $libraries = @($entry.libraries | ForEach-Object { if (!$moduleLibraries.ContainsKey($_)) { throw "Target $($entry.name) references unknown module $_" }; $moduleLibraries[$_] })
+    $linkResponse = Join-Path $build ($output + '.rsp')
+    $linkInputs = @($object) + $libraries + @($entry.platformLibraries)
+    [IO.File]::WriteAllText($linkResponse, (($linkInputs -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
     $graph.Add('build ' + $object + ': ' + $rule + ' ' + $source)
     $graph.Add('build ' + $output + ': link ' + $object + ' ' + ($libraries -join ' '))
     $graph.Add('  platform = ' + (@($entry.platformLibraries) -join ' '))

@@ -12,7 +12,8 @@
 typedef enum bx_ntvdm_cmd_comspec_bootstrap_stage_v1 {
     BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_WAIT_COMSPEC = 0u,
     BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_READY = 1u,
-    BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED = 2u
+    BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_DELIVERED = 2u,
+    BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CLOSED = 3u
 } bx_ntvdm_cmd_comspec_bootstrap_stage_v1;
 
 typedef struct bx_ntvdm_cmd_comspec_bootstrap_v1 {
@@ -46,5 +47,7 @@ int bx_ntvdm_cmd_comspec_bootstrap_v1_prepare_environment(
 int bx_ntvdm_cmd_comspec_bootstrap_v1_complete_environment(
     bx_ntvdm_cmd_comspec_bootstrap_v1 *state,
     const bx_ntvdm_multi_write_transaction_v1 *transaction);
+int bx_ntvdm_cmd_comspec_bootstrap_v1_close_initial_environment(
+    bx_ntvdm_cmd_comspec_bootstrap_v1 *state);
 
 #endif

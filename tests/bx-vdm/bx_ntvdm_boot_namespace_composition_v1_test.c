@@ -710,7 +710,7 @@ int main(void)
         memcmp(ram + 0x2000 + 23u, command_environment,
             sizeof(command_environment)) != 0 ||
         composition.command.bootstrap_provider.comspec.stage !=
-            BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_CONSUMED) return 25;
+            BX_NTVDM_CMD_COMSPEC_BOOTSTRAP_ENVIRONMENT_DELIVERED) return 25;
     event_initialize(&event, 0x54, 0x02);
     event.eax = 0xbb00u;
     if (!bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) ||
