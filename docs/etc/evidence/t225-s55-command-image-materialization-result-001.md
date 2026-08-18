@@ -1,6 +1,6 @@
 # T225 S55 COMMAND image materialization evidence
 
-Date: 2026-08-17  
+Date: 2026-08-17
 Status: passed provider-path regression; not native guest-execution proof.
 
 ## Question

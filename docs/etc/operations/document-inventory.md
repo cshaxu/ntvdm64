@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1811 |
 | --- | --- |
-| Generated UTC | 2026-08-18T02:34:54Z |
+| Generated UTC | 2026-08-18T02:35:57Z |
 
 ## Entries
 
@@ -123,7 +123,7 @@ content-divergent entries.
 | etc/evidence/t225-s51-post-handoff-integration-observation-result-001.md | indexed supporting material | ada30325b5663d0e3366ca01d9464cef81c5dbe20687792175eda6c44e36f4ad |
 | etc/evidence/t225-s53-first-fault-bound-observation-result-001.md | indexed supporting material | 34730489873da32a8bdb581fcda84e8366684585d03ac52f2b2b40157ad299c7 |
 | etc/evidence/t225-s54-bop-sequence-load-address-observation-result-001.md | indexed supporting material | 0db1b129b5a355080161737c4dbff14062719718ba4093f33ef6f9ae321e8c38 |
-| etc/evidence/t225-s55-command-image-materialization-result-001.md | indexed supporting material | 1a3e4051749903a9790099a12e9e21d87da1e793bd3634ad75ce38b684c36b44 |
+| etc/evidence/t225-s55-command-image-materialization-result-001.md | indexed supporting material | 76c62414e470538b96408704fdb52d2ee8cb8cc21efdc9f20a5b4e436a29eace |
 | etc/evidence/t225-s55-full-package-paired-integration-result-001.md | indexed supporting material | 56f8ebc3d80c8036ba6424fecb1b181bcbb32ae402698b769c9b2486836e24b3 |
 | etc/evidence/t225-s6-reference-guest-input-admission-001.md | indexed supporting material | b5932c62e4917b60205caced3f2dfa78ef9ed782f338e6cfc29d890f1c9bf891 |
 | etc/evidence/t225-s8-archived-nosrvbld-extractor-rejection-001.md | indexed supporting material | 99112829a78552229e2fe7904acbb8c65aaa2893b59f63ec2cac894d186f99c3 |
