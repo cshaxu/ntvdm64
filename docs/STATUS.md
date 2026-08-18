@@ -19,16 +19,16 @@
 | Reference Baseline | S47 source/ABI map, S48 default-off ledger, S49 owner map, existing formal MSVC x64 /MT Ninja graph and T198 IP-width repair. |
 | Files And ABI Surface | A focused bx-core/bx-mantle fixture, its formal Ninja manifest inputs, evidence/history/Status only. No public or runtime CLI ABI change. |
 | Applicable Rules | Execution, architecture, coding, source policy, recovery ladder, artifact provenance, deny-by-default and T225 anti-attrition. |
-| Verification | Fresh formal MSVC x64 /MT focused fixture build/run, negative malformed-frame/limit case, Ninja graph review, governance verifier and diff check. |
-| Expected Markers | Source-order-equivalent final SS:SP/DS:ES/AX/CS:IP state, exact wrapped far-return frame, successful 16-bit `retf`, and isolated negative rejection without BOP recognition. |
+| Verification | Fresh formal MSVC x64 /MT focused fixture build/run, negative invalid-fixture-input rejection, Ninja graph review, governance verifier and diff check. |
+| Expected Markers | Source-order-equivalent final SS:SP/DS:ES/AX/CS:IP state, exact retained far-return frame, successful 16-bit `retf`, and isolated invalid-input rejection without BOP recognition. |
 | Asset Needs | Original NTDOS `$Exec` transfer source; adopted bx-core CPU/stack/segment/far-return sources; existing focused fixture conventions and formal graph. |
 | Reporting Requirements | State that the fixture proves generic mechanics only; report every departure from original sequence; do not call it child execution or a native guest result. |
 | Stop Conditions | Need a BOP/provider/machine semantic change, guest-memory inspection, selector-specific routing, an external-code intrusion, or a trace-selected repair. |
 | Exit Criteria | One focused source-shaped fixture and negative boundary case pass under the formal graph; evidence maps all instruction mechanics to original and bx-core owners, with no runtime behavior change. |
 | Original Owner Request | “我好像之前给你说过类似问题应该怎么处理？” — continue authorized routine work autonomously; pause only for material architectural or high-risk decisions. |
-| Similar-Issue Sweep | 16-bit IP/SP wrap, real-mode segment bases and limits, stack-word order, `retf` pop order, `STI` sequencing, code-limit rejection, default build isolation, and Direct/Readonly non-applicability. |
+| Similar-Issue Sweep | 16-bit IP/SP wrap, real-mode segment bases and limits, stack-word order, `retf` pop order, `STI` sequencing, invalid-input rejection, default build isolation, and Direct/Readonly non-applicability. |
 
-> **T225 S49 closure:** [the closure record](history/m0-t225-s49-closure-20260817.md) establishes the whole original/generic owner map and admits only S50's generic fixture; it claims no native child execution or repair.
+> **T225 S50 P1 result:** [the fixture record](etc/evidence/t225-s50-realmode-handoff-fixture-result-001.md) proves only generic source-shaped real-mode handoff mechanics under the formal graph; it neither runs an immutable guest child nor changes BOP semantics.`r`n`r`n> **T225 S49 closure:** [the closure record](history/m0-t225-s49-closure-20260817.md) establishes the whole original/generic owner map and admits only S50's generic fixture; it claims no native child execution or repair.
 
 > **T225 S48 result:** [the result](etc/evidence/t225-s48-source-built-guest-exec-lifecycle-ledger-result-001.md) and [closure record](history/m0-t225-s48-closure-20260817.md) prove the default-off ledger, whole formal build, and bounded paired observation; they do not claim child execution or select a repair.
 > **T225 S47 closure:** [the closure record](history/m0-t225-s47-closure-20260817.md) maps the whole source/current route, corrects first-entry attribution, and admits only a neutral lifecycle ledger.
