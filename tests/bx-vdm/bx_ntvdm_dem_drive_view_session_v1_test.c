@@ -39,6 +39,12 @@ static void profile_initialize(byob_profile_selection *profile)
     memcpy(profile->target_placement.path, L"\\TARGET.COM", sizeof(L"\\TARGET.COM"));
     profile->target_placement.drive_index = 2u;
     profile->has_target_placement = 1u;
+    profile->declared_target_count = 1u;
+    memcpy(profile->declared_targets[0].component.file_name, L"TARGET.COM",
+        sizeof(L"TARGET.COM"));
+    memcpy(profile->declared_targets[0].placement.path, L"\\TARGET.COM",
+        sizeof(L"\\TARGET.COM"));
+    profile->declared_targets[0].placement.drive_index = 2u;
     memcpy(profile->target.file_name, L"TARGET.COM", sizeof(L"TARGET.COM"));
     memcpy(profile->config_file.path, L"\\CONFIG.SYS", sizeof(L"\\CONFIG.SYS"));
     profile->config_file.materialization = BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;

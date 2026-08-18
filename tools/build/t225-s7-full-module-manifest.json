@@ -601,6 +601,12 @@
       "source": "tests/bx-vdm/bx_ntvdm_dem_file_session_v1_test.c",
       "libraries": ["bx-vdm"],
       "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s2-dem-drive-state-conformance-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_dem_drive_view_session_v1_test.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     }
   ],
   "forbiddenInputs": [
