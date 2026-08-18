@@ -1,6 +1,6 @@
 # T225 S55 COMMAND segment static offset correlation
 
-Date: 2026-08-17  
+Date: 2026-08-17
 Status: source/image attribution only; no execution or repair claim.
 
 ## Question
