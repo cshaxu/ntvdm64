@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1892 |
+| Documentation records | 1894 |
 | --- | --- |
-| Generated UTC | 2026-08-18T19:56:35Z |
+| Generated UTC | 2026-08-18T20:06:02Z |
 
 ## Entries
 
@@ -168,6 +168,7 @@ content-divergent entries.
 | etc/evidence/t228-s1-instruction-history-provenance-boundary-result-001.md | indexed supporting material | 93ad1446bff44590ebeac7b703669d9f22dcbae4ec2cfe3818162c6154fe3d8f |
 | etc/evidence/t228-s1-large-reverse-copy-result-001.md | indexed supporting material | f93784a5c86b8a45aaea2cd362cfcdd312280c5edec56d690daaa075681c2780 |
 | etc/evidence/t228-s1-ntdos-allocation-map-recovery-result-001.md | indexed supporting material | 3b080939d369bcddc2ca4393e6f728e6ab31ad2c66e8677eb790db75285fdbfb |
+| etc/evidence/t228-s1-post-iret-cli-observation-result-001.md | indexed supporting material | 62a64e64ad1698215f457ed1a38d0619d24fcb273433ef24744305874beb98f4 |
 | etc/evidence/t228-s1-real-v86-iret-observation-result-001.md | indexed supporting material | 9d70429571f3b526a7c5babf6fe9e8e6488b5d12c310e517b5dfa52d064f0d86 |
 | etc/evidence/t228-s1-software-interrupt-cli-observation-result-001.md | indexed supporting material | 466c42213ea58783302ecb47562260b39c39fea41827983ffc19ec2e4d8ea762 |
 | etc/evidence/t228-s1-software-interrupt-observation-profile-result-001.md | indexed supporting material | c2658de395156d67bff46252ac4da3ba22b39fe3adffc6fc28748d6b30ea6f2f |
@@ -1056,6 +1057,7 @@ content-divergent entries.
 | etc/research/t228-s1-guest-control-flow-cpu-owner-map-001.md | indexed supporting material | 1e841e3b46b18e218c5b418aa038f014797dd4b75c38563e3cd54cde15dc693a |
 | etc/research/t228-s1-immutable-input-staging-source-audit-001.md | indexed supporting material | a4cc947d9872420d311fbb382ed7d0eefde9891e207b389c838874b704d58f10 |
 | etc/research/t228-s1-instruction-history-provenance-boundary-admission-001.md | indexed supporting material | f4d3a4070a7e2f2ca827a669dd8bf18fdeeb903e6038a9f6055a6dbe2eae1693 |
+| etc/research/t228-s1-post-iret-cli-observation-admission-001.md | indexed supporting material | 2e66136ee049efb74a079f0c27d1c9d42e244f42504267fa52ecd569d0b6619a |
 | etc/research/t228-s1-real-v86-iret-observation-admission-001.md | indexed supporting material | 670212bcf7392e9b194c85293ee0b629eff27e5b9685151adf79a9c5480bd80c |
 | etc/research/t228-s1-software-interrupt-cli-observation-admission-001.md | indexed supporting material | bafc62ad4d2b129cd2ca2bb13628b3e8421ae883d8c49f1425dfb424ac0b84a1 |
 | etc/research/t228-s1-software-interrupt-observation-profile-admission-001.md | indexed supporting material | 83e0464fbc9191db8db939ba94986966211ea16f040a3c32ff3f6e083e82cb7d |
@@ -1906,7 +1908,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 3d9cb47fccaa2eb3721e991e08f3abaff545f29e061291cf66049273a6bd3e0b |
+| STATUS.md | principal control document | cc6f218f8bcb2a7a36ce9bec339858763be4874c723f13daaaaf0cabb21eb28a |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

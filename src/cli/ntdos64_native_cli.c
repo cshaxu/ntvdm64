@@ -5,6 +5,7 @@
 #include "bx_ntvdm_first_fault_observation_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_software_interrupt_observation_v1.h"
+#include "bx_ntvdm_interrupt_return_observation_v1.h"
 #include "bx_ntvdm_guest_exec_lifecycle_observation_v1.h"
 #include "bx_ntvdm_guest_exec_lifecycle_ledger_v1.h"
 #include "bx_ntvdm_segment_access_observation_v1.h"
@@ -144,6 +145,19 @@ static void print_software_interrupt_observation(void)
     }
 }
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+static void print_interrupt_return_observation(void)
+{
+    struct bx_ntvdm_interrupt_return_observation_v1_record record;
+    uint32_t index;
+    uint32_t count = bx_ntvdm_mantle_interrupt_return_observation_v1_count();
+    wprintf(L"ntdos64-native: interrupt-returns count=%u\n", count);
+    for (index = 0u; index < count; ++index) {
+        if (bx_ntvdm_mantle_interrupt_return_observation_v1_get(index, &record))
+            wprintf(L"ntdos64-native: interrupt-return[%u] sequence=%llu mode=%u width=%u cs=%04x eip=%08llx flags=%08x ax=%04x bx=%04x cx=%04x dx=%04x ds=%04x es=%04x ss=%04x sp=%08x\n", index, (unsigned long long)record.sequence, record.execution_mode, record.operand_width, record.cs, (unsigned long long)record.rip, record.eflags, record.ax, record.bx, record.cx, record.dx, record.ds, record.es, record.ss, record.sp);
+    }
+}
+#endif
 static int result_exit(const struct ntdos64_lifecycle_v1_audit *audit)
 {
     if (!audit || !ntdos64_lifecycle_v1_audit_valid(audit)) return 1;
@@ -167,6 +181,9 @@ int wmain(int argc, wchar_t **argv)
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         , has_software_interrupt_observation = 0
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+        , has_interrupt_return_observation = 0
+#endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         , has_terminal_history_observation = 0, has_terminal_cs_transitions_observation = 0
 #endif
@@ -179,6 +196,9 @@ int wmain(int argc, wchar_t **argv)
     int validate_only = 0, observe_bop_sequence = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_guest_exec_lifecycle = 0, observe_guest_exec_lifecycle_ledger = 0, observe_budget_terminal_position = 0
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         , observe_software_interrupts = 0
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+        , observe_interrupt_returns = 0
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         , observe_terminal_history = 0, observe_terminal_cs_transitions = 0
@@ -230,6 +250,10 @@ int wmain(int argc, wchar_t **argv)
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         else if (wcscmp(argv[index], L"--observe-software-interrupts") == 0 && !has_software_interrupt_observation)
             has_software_interrupt_observation = 1, observe_software_interrupts = 1, ++index;
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+        else if (wcscmp(argv[index], L"--observe-interrupt-returns") == 0 && !has_interrupt_return_observation)
+            has_interrupt_return_observation = 1, observe_interrupt_returns = 1, ++index;
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         else if (wcscmp(argv[index], L"--observe-budget-terminal-history") == 0 && !has_terminal_history_observation)
@@ -288,6 +312,9 @@ int wmain(int argc, wchar_t **argv)
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
     if (observe_software_interrupts && !bx_ntvdm_mantle_software_interrupt_observation_v1_configure(BX_NTVDM_SOFTWARE_INTERRUPT_OBSERVATION_V1_CAPACITY_MAX)) return 1;
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+    if (observe_interrupt_returns && !bx_ntvdm_mantle_interrupt_return_observation_v1_configure(BX_NTVDM_INTERRUPT_RETURN_OBSERVATION_V1_CAPACITY_MAX)) return 1;
+#endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
     if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(1u);
     if (observe_terminal_cs_transitions) bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(1u);
@@ -308,6 +335,9 @@ int wmain(int argc, wchar_t **argv)
         if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         if (observe_software_interrupts) bx_ntvdm_mantle_software_interrupt_observation_v1_configure(0u);
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+        if (observe_interrupt_returns) bx_ntvdm_mantle_interrupt_return_observation_v1_configure(0u);
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
@@ -334,6 +364,9 @@ int wmain(int argc, wchar_t **argv)
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         if (observe_software_interrupts) bx_ntvdm_mantle_software_interrupt_observation_v1_configure(0u);
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+        if (observe_interrupt_returns) bx_ntvdm_mantle_interrupt_return_observation_v1_configure(0u);
+#endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
         if (observe_terminal_cs_transitions) bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(0u);
@@ -353,6 +386,12 @@ int wmain(int argc, wchar_t **argv)
     if (observe_software_interrupts) {
         print_software_interrupt_observation();
         bx_ntvdm_mantle_software_interrupt_observation_v1_configure(0u);
+    }
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+    if (observe_interrupt_returns) {
+        print_interrupt_return_observation();
+        bx_ntvdm_mantle_interrupt_return_observation_v1_configure(0u);
     }
 #endif
     if (observe_bop_sequence) {
@@ -484,6 +523,9 @@ usage:
     fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         L" [--observe-software-interrupts]"
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+        L" [--observe-interrupt-returns]"
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         L" [--observe-budget-terminal-history] [--observe-budget-terminal-cs-transitions]"

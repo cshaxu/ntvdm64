@@ -309,6 +309,21 @@
 > **T228 S1 P23 admission:** [the real/V86 IRET observation admission](etc/research/t228-s1-real-v86-iret-observation-admission-001.md) records that current BX_INSTR_FAR_BRANCH is a no-op stub in the minimal graph and that neither OpenNT nor bx-vdm can expose this CPU boundary. It permits only the registered, default-off mechanical profile and no repair or native observation.
 
 > **T228 S1 P23 result:** [the real/V86 IRET observation result](etc/evidence/t228-s1-real-v86-iret-observation-result-001.md) closes the registered default-off profile: disabled and enabled real-mode IRET16/IRET32, protected-mode negative behavior, copied-ring wrap/reset, fresh diagnostic CPU5 x64 /MT fixture and fresh default native target link all pass. V86 has source-path coverage only because no admitted fixed-machine V86 entry setup exists. It selects no BOP, provider or repair.
+### T228 S1 P24 -- bounded post-IRET CLI observation
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P24, Ordinary Mode. |
+| Admission And Approval | P23 closes the registered IRET profile; the active T228 packet authorizes one bounded immutable integration observation to choose a complete original owner domain. |
+| Objective | Expose only P23 copied post-IRET records through a diagnostic CLI option and compare one hash-locked Direct/Readonly pair against the P19/P22 COMMAND/NTDOS map. |
+| Non-goals | No BOP/provider work, vector/function pairing, guest-memory inspection, image or profile change, Bochs patch, execution change, or repair claim. |
+| Verification | Diagnostic and default x64 /MT CLI build; P23 fixture; default-option negative; cleared-environment immutable paired Direct/Readonly run; byte comparison and source-map disposition. |
+| Exit Criteria | Option lifecycle is clean/default-off and paired output attributes at most the existing complete COMMAND/NTDOS owner question. |
+| Stop Conditions | Any semantic pairing/filter, guest capture, adapter route, altered result, profile difference without source evidence, or leaf repair proposal. |
+
+> **T228 S1 P24 admission:** [the bounded post-IRET CLI observation admission](etc/research/t228-s1-post-iret-cli-observation-admission-001.md) permits only copied P23 ring consumption and one immutable paired observation; it creates no BOP work.
+
+> **T228 S1 P24 result:** [the bounded post-IRET CLI observation result](etc/evidence/t228-s1-post-iret-cli-observation-result-001.md) closes default-off CLI lifecycle and the single hash-locked Direct/Readonly pair. Both runs reach budget exit 4 with byte-identical output and interrupt-returns count=0; therefore no successfully completed observed real/V86 IRET occurs in the bounded interval. It selects no BOP/provider/CPU repair and transfers only the complete original guest COMMAND/NTDOS interrupt-delivery/control-state domain.
 
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
