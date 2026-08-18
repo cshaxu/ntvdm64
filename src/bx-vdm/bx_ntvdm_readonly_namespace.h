@@ -8,6 +8,7 @@
 
 #define BX_NTVDM_READONLY_NAMESPACE_MAX_FILES 5u
 #define BX_NTVDM_READONLY_NAMESPACE_MAX_READ_BYTES 65536u
+#define BX_NTVDM_READONLY_NAMESPACE_MAX_OPEN_HANDLES 8u
 
 /* Adapter-local metadata only.  `bytes` is immutable image/profile storage;
  * this type never crosses the Bochs boundary or contains a host handle. */
@@ -18,10 +19,20 @@ typedef struct bx_ntvdm_readonly_namespace_file_v1 {
     wchar_t path[BYOB_PROFILE_GUEST_PATH_MAX_CHARS];
 } bx_ntvdm_readonly_namespace_file_v1;
 
+typedef struct bx_ntvdm_readonly_namespace_handle_v1 {
+    uint32_t generation;
+    uint32_t file_index;
+    uint64_t offset;
+    uint32_t in_use;
+} bx_ntvdm_readonly_namespace_handle_v1;
+
 typedef struct bx_ntvdm_readonly_namespace_v1 {
     bx_ntvdm_readonly_namespace_file_v1 files[BX_NTVDM_READONLY_NAMESPACE_MAX_FILES];
+    bx_ntvdm_readonly_namespace_handle_v1 handles[BX_NTVDM_READONLY_NAMESPACE_MAX_OPEN_HANDLES];
     uint32_t file_count;
     uint32_t drive_index;
+    /* Legacy-shaped diagnostic summary of the most recently addressed
+     * immutable handle; data operations use `handles` exclusively. */
     uint32_t generation;
     uint32_t open;
     uint32_t open_file_index;
@@ -47,6 +58,9 @@ int bx_ntvdm_readonly_namespace_v1_read(
     uint32_t requested_bytes, uint32_t *read_bytes);
 int bx_ntvdm_readonly_namespace_v1_close(
     bx_ntvdm_readonly_namespace_v1 *value, uint32_t token);
+int bx_ntvdm_readonly_namespace_v1_position(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token,
+    uint64_t *offset_out, uint64_t *size_out);
 int bx_ntvdm_readonly_namespace_v1_file_times(
     const bx_ntvdm_readonly_namespace_v1 *value, uint32_t token,
     uint16_t *dos_time, uint16_t *dos_date);

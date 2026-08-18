@@ -110,13 +110,15 @@ int bx_ntvdm_dem_readonly_file_v1_seek(bx_ntvdm_readonly_namespace_v1 *space,
     const bx_ntvdm_exception_event_v1 *event, const bx_ntvdm_cpu_state_v1 *cpu,
     const bx_ntvdm_instruction_window_v1 *window, bx_ntvdm_cpu_result_v2 *out)
 {
-    int64_t displacement; uint64_t position, base;
+    int64_t displacement; uint64_t position, base, current_offset, current_size;
     if (space == 0 || out == 0 || !matches(event, cpu, window, 0x00u)) return 0;
     if ((cpu->ebx & 0xffu) > 2u) return 1; /* source caller rejects this; retain listener path */
+    if (!bx_ntvdm_readonly_namespace_v1_position(space, token(cpu), &current_offset,
+            &current_size))
+        return result(event, out, BX_NTVDM_ERROR_INVALID_HANDLE, 0, 0, 0, 0, 1);
     displacement = (int32_t)(((cpu->ecx & 0xffffu) << 16) | (cpu->edx & 0xffffu));
     base = (cpu->ebx & 0xffu) == 0u ? 0u :
-        ((cpu->ebx & 0xffu) == 1u ? space->offset :
-            (space->open ? space->files[space->open_file_index].byte_count : 0u));
+        ((cpu->ebx & 0xffu) == 1u ? current_offset : current_size);
     if ((displacement < 0 && (uint64_t)(-displacement) > base) ||
         (displacement > 0 && (uint64_t)displacement > UINT64_MAX - base))
         return result(event, out, BX_NTVDM_ERROR_INVALID_PARAMETER, 0, 0, 0, 0, 1);

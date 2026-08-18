@@ -42,16 +42,24 @@ int main(void)
     wcscpy(selection.target_placement.path, L"\\TARGET.COM");
     selection.target_placement.drive_index = 2u;
     selection.has_target_placement = 1u;
-    if (!bx_ntvdm_readonly_namespace_v1_open(&value, 2u, L"\\COMMAND.COM", &token, &size) ||
-        bx_ntvdm_readonly_namespace_v1_append_target(&value, &target_image, &selection) ||
-        !bx_ntvdm_readonly_namespace_v1_close(&value, token) ||
-        !bx_ntvdm_readonly_namespace_v1_append_target(&value, &target_image, &selection) ||
-        !bx_ntvdm_readonly_namespace_v1_open(&value, 2u, L"\\TARGET.COM", &token, &size) ||
-        size != sizeof(target) || !bx_ntvdm_readonly_namespace_v1_read(&value, token,
-            received, sizeof(received), &count) || count != sizeof(target) ||
-        memcmp(received, target, sizeof(target)) != 0 ||
-        !bx_ntvdm_readonly_namespace_v1_close(&value, token) ||
+    selection.declared_target_count = 1u;
+    wcscpy(selection.declared_targets[0].component.file_name, L"TARGET.COM");
+    wcscpy(selection.declared_targets[0].placement.path, L"\\TARGET.COM");
+    selection.declared_targets[0].placement.drive_index = 2u;
+    if (!bx_ntvdm_readonly_namespace_v1_append_target(&value, &target_image, &selection) ||
+        !bx_ntvdm_readonly_namespace_v1_open(&value, 2u, L"\\COMMAND.COM", &token, &size) ||
+        !bx_ntvdm_readonly_namespace_v1_open(&value, 2u, L"\\TARGET.COM", &stale, &size) ||
+        size != sizeof(target) || value.open != 2u ||
+        !bx_ntvdm_readonly_namespace_v1_read(&value, token, received, 1u, &count) ||
+        count != 1u || received[0] != command[0] ||
+        !bx_ntvdm_readonly_namespace_v1_read(&value, stale, received, sizeof(received), &count) ||
+        count != sizeof(target) || memcmp(received, target, sizeof(target)) != 0 ||
+        !bx_ntvdm_readonly_namespace_v1_read(&value, token, received, sizeof(received), &count) ||
+        count != sizeof(command) - 1u || memcmp(received, command + 1u, count) != 0 ||
+        !bx_ntvdm_readonly_namespace_v1_close(&value, stale) ||
+        bx_ntvdm_readonly_namespace_v1_read(&value, stale, received, 1u, &count) ||
+        !bx_ntvdm_readonly_namespace_v1_close(&value, token) || value.open != 0u ||
         bx_ntvdm_readonly_namespace_v1_append_target(&value, &target_image, &selection)) return 1;
-    puts("bx-ntvdm-readonly-namespace-test: canonical read-only file lifecycle verified");
+    puts("bx-ntvdm-readonly-namespace-test: concurrent immutable file handles verified");
     return 0;
 }

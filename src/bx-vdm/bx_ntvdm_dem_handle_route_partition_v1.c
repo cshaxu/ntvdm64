@@ -3,6 +3,7 @@
 #include "bx_ntvdm_dem_handle_partition_v1.h"
 #include "bx_ntvdm_dem_overlay_handle_backend_v1.h"
 #include "bx_ntvdm_dem_readonly_file_service.h"
+#include "bx_ntvdm_dem_read_observation_v1.h"
 
 static int physical(uint16_t segment, uint16_t offset, uint32_t bytes,
     uint64_t *out)
@@ -158,6 +159,8 @@ static int startup_overlay_dispatch(bx_ntvdm_dem_whole_provider_v1 *provider,
     if (!bx_ntvdm_bulk_result_transaction_v1_preflight(&transaction,
             UINT64_C(0x100000), transaction.payload_bytes)) return 0;
     if (transaction.payload_bytes == 0u) return 1;
+    bx_ntvdm_dem_read_observation_v1_consider(boundary, cpu, service, bytes,
+        transaction.payload_bytes);
     return write_action(provider, transaction.guest_physical_address, bytes,
         transaction.payload_bytes, action_out);
 }

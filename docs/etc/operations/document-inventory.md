@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1900 |
+| Documentation records | 1901 |
 | --- | --- |
-| Generated UTC | 2026-08-18T20:56:11Z |
+| Generated UTC | 2026-08-18T21:59:54Z |
 
 ## Entries
 
@@ -161,6 +161,7 @@ content-divergent entries.
 | etc/evidence/t228-s1-command-transient-bop-correlation-result-001.md | indexed supporting material | bc74672891161363dd1ec7a3180913bc8e21390cf6d9ef5bbc6d2bd743bf595d |
 | etc/evidence/t228-s1-command-transient-reverse-string-mechanics-result-001.md | indexed supporting material | da64bb4b5b35bcebdb2e69ebab40de54631cbc569fcc3bbf3930318dea9771cc |
 | etc/evidence/t228-s1-cs-transition-ring-result-001.md | indexed supporting material | c27e733f784025ad3da66caddac44d6d80ad28f7e14a7758a04661bb32c3b71b |
+| etc/evidence/t228-s1-dem-concurrent-namespace-and-command-bootstrap-result-001.md | indexed supporting material | e2598764d507f2f3b162c920e72f1307d8ca07a915893afb30c8a496bfbe177f |
 | etc/evidence/t228-s1-endinit-lodcom-transition-provenance-result-001.md | indexed supporting material | e632d8bdb1de7aac4647985f5152b70f6b9b7e93f6db02648bc721139467db42 |
 | etc/evidence/t228-s1-endinit-transient-continuity-sweep-result-001.md | indexed supporting material | a53d5040e3855040b4adebff1927394694f97f1598997d4ff01b2df7a1e7a3f2 |
 | etc/evidence/t228-s1-environment-first-fault-boundary-result-001.md | indexed supporting material | 6317084de303061654a182a1944fa071d3b089d74eb3cae07114abf473a63781 |
