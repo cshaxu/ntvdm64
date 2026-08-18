@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S50.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S51.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S50 -- source-shaped generic real-mode handoff fixture.**
+**Active: M0 T225 S51 -- source-built four-image post-handoff integration observation.**
 
 ## Active Packet
 
@@ -12,23 +12,25 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S50, Ordinary Mode. |
-| Admission And Approval | Owner-authorized autonomous continuation after S49. S49 admits a whole generic mechanical proof only; this S implements that proof without changing native guest behavior. |
-| Objective | Build and run one source-shaped bx-core real-mode fixture that proves the complete post-`50:36` instruction mechanics: `mov SS`, `mov SP`, `STI`, two 16-bit pushes, segment loads, `mov AX`, and `retf`. |
-| Non-goals | No BOP/provider route, guest-image/runtime-byte change, native trace, target attribution, guest-memory observer, synthetic child, machine device, or new Bochs intrusion. |
-| Reference Baseline | S47 source/ABI map, S48 default-off ledger, S49 owner map, existing formal MSVC x64 /MT Ninja graph and T198 IP-width repair. |
-| Files And ABI Surface | A focused bx-core/bx-mantle fixture, its formal Ninja manifest inputs, evidence/history/Status only. No public or runtime CLI ABI change. |
+| Identifier Mode | M0 T225 S51, Ordinary Mode. |
+| Admission And Approval | Owner-authorized autonomous continuation. S50 now proves the complete generic handoff mechanics; S51 may reuse existing default-off lifecycle observation only for one whole four-image Direct/Readonly integration run. |
+| Objective | Re-stage immutable original-toolchain NTIO, NTDOS, COMMAND and SHARE/TARGET inputs and record whether a bounded native run advances beyond the existing post-`50:36` lifecycle boundary. |
+| Non-goals | No BOP/provider implementation, new observer, guest-memory inspection, image change, synthetic child, trace-selected repair, device enablement or Bochs intrusion. |
+| Reference Baseline | S46/S48 lifecycle observations, S49 owner map, S50 generic handoff proof, source-built S8 artifact identities and formal Ninja graph. |
+| Files And ABI Surface | Stage/run evidence, Status/history only. Existing CLI and lifecycle-ledger ABI are reused unchanged. |
 | Applicable Rules | Execution, architecture, coding, source policy, recovery ladder, artifact provenance, deny-by-default and T225 anti-attrition. |
-| Verification | Fresh formal MSVC x64 /MT focused fixture build/run, negative invalid-fixture-input rejection, Ninja graph review, governance verifier and diff check. |
-| Expected Markers | Source-order-equivalent final SS:SP/DS:ES/AX/CS:IP state, exact retained far-return frame, successful 16-bit `retf`, and isolated invalid-input rejection without BOP recognition. |
-| Asset Needs | Original NTDOS `$Exec` transfer source; adopted bx-core CPU/stack/segment/far-return sources; existing focused fixture conventions and formal graph. |
-| Reporting Requirements | State that the fixture proves generic mechanics only; report every departure from original sequence; do not call it child execution or a native guest result. |
-| Stop Conditions | Need a BOP/provider/machine semantic change, guest-memory inspection, selector-specific routing, an external-code intrusion, or a trace-selected repair. |
-| Exit Criteria | One focused source-shaped fixture and negative boundary case pass under the formal graph; evidence maps all instruction mechanics to original and bx-core owners, with no runtime behavior change. |
-| Original Owner Request | “我好像之前给你说过类似问题应该怎么处理？” — continue authorized routine work autonomously; pause only for material architectural or high-risk decisions. |
-| Similar-Issue Sweep | 16-bit IP/SP wrap, real-mode segment bases and limits, stack-word order, `retf` pop order, `STI` sequencing, invalid-input rejection, default build isolation, and Direct/Readonly non-applicability. |
+| Verification | Fresh source-built input staging; existing formal native CLI identity; one bounded Direct and one bounded Readonly invocation using the existing ledger; input hashes, output comparison, governance verifier and diff check. |
+| Expected Markers | Four immutable input identities; mode parity; ledger order/count/overflow; terminal classification; and an explicit boundary if no later lifecycle event is reached. |
+| Asset Needs | S48 stager, existing formal native CLI, S50 result, source-built S8 stages and process-local config/autoexec inputs. |
+| Reporting Requirements | Report native integration facts separately from fixture proof; no event selects an implementation; do not equate entry with target execution. |
+| Stop Conditions | Need a new observer, guest-state inspection, BOP/provider/machine semantic change, new external-code intrusion, or trace-selected repair. |
+| Exit Criteria | A fully reproducible paired observation records identities, lifecycle result and terminal without changing runtime code; any unchanged boundary is retained as a whole-owner limitation. |
+| Original Owner Request | Continue authorized routine engineering work autonomously, with global component ownership and no trace-led patching. |
+| Similar-Issue Sweep | Source-built identity, staging mutation, Direct/Readonly parity, option default-off behavior, ledger capacity/order, terminal/watchdog classification, and no new route or semantic change. |
 
-> **T225 S50 P1 result:** [the fixture record](etc/evidence/t225-s50-realmode-handoff-fixture-result-001.md) proves only generic source-shaped real-mode handoff mechanics under the formal graph; it neither runs an immutable guest child nor changes BOP semantics.`r`n`r`n> **T225 S49 closure:** [the closure record](history/m0-t225-s49-closure-20260817.md) establishes the whole original/generic owner map and admits only S50's generic fixture; it claims no native child execution or repair.
+> **T225 S50 P1 result:** [the fixture record](etc/evidence/t225-s50-realmode-handoff-fixture-result-001.md) proves only generic source-shaped real-mode handoff mechanics under the formal graph; it neither runs an immutable guest child nor changes BOP semantics.
+
+> **T225 S49 closure:** [the closure record](history/m0-t225-s49-closure-20260817.md) establishes the whole original/generic owner map and admits only S50's generic fixture; it claims no native child execution or repair.
 
 > **T225 S48 result:** [the result](etc/evidence/t225-s48-source-built-guest-exec-lifecycle-ledger-result-001.md) and [closure record](history/m0-t225-s48-closure-20260817.md) prove the default-off ledger, whole formal build, and bounded paired observation; they do not claim child execution or select a repair.
 > **T225 S47 closure:** [the closure record](history/m0-t225-s47-closure-20260817.md) maps the whole source/current route, corrects first-entry attribution, and admits only a neutral lifecycle ledger.
