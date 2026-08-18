@@ -143,7 +143,7 @@ int wmain(int argc, wchar_t **argv)
     int has_include = 0, has_exclude = 0, has_mutation_mode = 0, has_tick_budget = 0,
         has_bop_observation = 0, has_generic_ud_observation = 0, has_first_fault_observation = 0, has_guest_exec_observation = 0, has_guest_exec_ledger = 0, has_budget_terminal_position_observation = 0
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
-        , has_terminal_history_observation = 0
+        , has_terminal_history_observation = 0, has_terminal_cs_transitions_observation = 0
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         , has_terminal_provenance_observation = 0
@@ -153,7 +153,7 @@ int wmain(int argc, wchar_t **argv)
     uint64_t instruction_tick_budget = UINT64_C(1000000);
     int validate_only = 0, observe_bop_sequence = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_guest_exec_lifecycle = 0, observe_guest_exec_lifecycle_ledger = 0, observe_budget_terminal_position = 0
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
-        , observe_terminal_history = 0
+        , observe_terminal_history = 0, observe_terminal_cs_transitions = 0
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         , observe_terminal_provenance = 0
@@ -202,6 +202,8 @@ int wmain(int argc, wchar_t **argv)
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         else if (wcscmp(argv[index], L"--observe-budget-terminal-history") == 0 && !has_terminal_history_observation)
             has_terminal_history_observation = 1, observe_terminal_history = 1, ++index;
+        else if (wcscmp(argv[index], L"--observe-budget-terminal-cs-transitions") == 0 && !has_terminal_cs_transitions_observation)
+            has_terminal_cs_transitions_observation = 1, observe_terminal_cs_transitions = 1, ++index;
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         else if (wcscmp(argv[index], L"--observe-budget-terminal-provenance") == 0 && !has_terminal_provenance_observation)
@@ -253,6 +255,7 @@ int wmain(int argc, wchar_t **argv)
     if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(1u);
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
     if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(1u);
+    if (observe_terminal_cs_transitions) bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(1u);
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
     if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(1u);
@@ -270,6 +273,7 @@ int wmain(int argc, wchar_t **argv)
         if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
+        if (observe_terminal_cs_transitions) bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(0u);
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(0u);
@@ -291,6 +295,7 @@ int wmain(int argc, wchar_t **argv)
         if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
+        if (observe_terminal_cs_transitions) bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(0u);
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(0u);
@@ -363,6 +368,25 @@ int wmain(int argc, wchar_t **argv)
         } else wprintf(L"ntdos64-native: budget-terminal-history unavailable\n");
         bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
     }
+    if (observe_terminal_cs_transitions) {
+        struct bx_ntvdm_machine_stage_v1_terminal_cs_transitions transitions;
+        uint32_t transition_index;
+        if (bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_copy(&transitions)) {
+            wprintf(L"ntdos64-native: budget-terminal-cs-transitions count=%u\n", transitions.value.count);
+            for (transition_index = 0u; transition_index < transitions.value.count; ++transition_index) {
+                const struct bx_ntvdm_instruction_history_transition_v1 *transition =
+                    &transitions.value.transitions[transition_index];
+                wprintf(L"ntdos64-native: cs-transition[%u] previous=%04x:%08x ss=%04x sp=%04x bp=%04x sequence=%llu current=%04x:%08x ss=%04x sp=%04x bp=%04x sequence=%llu\n", transition_index,
+                    transition->previous.cs, (unsigned)transition->previous.rip,
+                    transition->previous.ss, transition->previous.sp, transition->previous.bp,
+                    (unsigned long long)transition->previous.sequence,
+                    transition->current.cs, (unsigned)transition->current.rip,
+                    transition->current.ss, transition->current.sp, transition->current.bp,
+                    (unsigned long long)transition->current.sequence);
+            }
+        } else wprintf(L"ntdos64-native: budget-terminal-cs-transitions unavailable\n");
+        bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(0u);
+    }
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
     if (observe_terminal_provenance) {
@@ -412,7 +436,7 @@ int wmain(int argc, wchar_t **argv)
 usage:
     fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
-        L" [--observe-budget-terminal-history]"
+        L" [--observe-budget-terminal-history] [--observe-budget-terminal-cs-transitions]"
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         L" [--observe-budget-terminal-provenance]"

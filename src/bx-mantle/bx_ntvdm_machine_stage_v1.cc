@@ -26,6 +26,9 @@ static struct bx_ntvdm_machine_stage_v1_terminal_position
 static uint32_t bx_ntvdm_machine_stage_v1_terminal_history_enabled;
 static struct bx_ntvdm_machine_stage_v1_terminal_history
   bx_ntvdm_machine_stage_v1_terminal_history;
+static uint32_t bx_ntvdm_machine_stage_v1_terminal_cs_transitions_enabled;
+static struct bx_ntvdm_machine_stage_v1_terminal_cs_transitions
+  bx_ntvdm_machine_stage_v1_terminal_cs_transitions;
 static uint32_t bx_ntvdm_machine_stage_v1_terminal_provenance_enabled;
 static struct bx_ntvdm_machine_stage_v1_terminal_provenance
   bx_ntvdm_machine_stage_v1_terminal_provenance;
@@ -56,6 +59,28 @@ static void bx_ntvdm_machine_stage_v1_terminal_history_clear(void)
   bx_ntvdm_machine_stage_v1_terminal_history.struct_bytes =
     sizeof(bx_ntvdm_machine_stage_v1_terminal_history);
 }
+
+static void bx_ntvdm_machine_stage_v1_terminal_cs_transitions_clear(void)
+{
+  memset(&bx_ntvdm_machine_stage_v1_terminal_cs_transitions, 0,
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_cs_transitions));
+  bx_ntvdm_machine_stage_v1_terminal_cs_transitions.magic =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_CS_TRANSITIONS_MAGIC;
+  bx_ntvdm_machine_stage_v1_terminal_cs_transitions.abi_version =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_CS_TRANSITIONS_VERSION;
+  bx_ntvdm_machine_stage_v1_terminal_cs_transitions.struct_bytes =
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_cs_transitions);
+}
+
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+static void bx_ntvdm_machine_stage_v1_instruction_history_configure(void)
+{
+  (void) bx_ntvdm_mantle_instruction_history_v1_configure(
+    (bx_ntvdm_machine_stage_v1_terminal_history_enabled ||
+     bx_ntvdm_machine_stage_v1_terminal_cs_transitions_enabled) ?
+      BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX : 0u);
+}
+#endif
 
 static void bx_ntvdm_machine_stage_v1_terminal_provenance_clear(void)
 {
@@ -264,8 +289,7 @@ extern "C" void bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(
   bx_ntvdm_machine_stage_v1_terminal_history_enabled = enabled == 1u;
   bx_ntvdm_machine_stage_v1_terminal_history_clear();
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
-  (void) bx_ntvdm_mantle_instruction_history_v1_configure(
-    enabled ? BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX : 0u);
+  bx_ntvdm_machine_stage_v1_instruction_history_configure();
 #else
   (void) enabled;
 #endif
@@ -278,6 +302,34 @@ extern "C" int bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(
       !bx_ntvdm_machine_stage_v1_terminal_history.valid) return 0;
   *history = bx_ntvdm_machine_stage_v1_terminal_history;
   return 1;
+}
+
+extern "C" void bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(
+  uint32_t enabled)
+{
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+  bx_ntvdm_machine_stage_v1_terminal_cs_transitions_enabled = enabled == 1u;
+  bx_ntvdm_machine_stage_v1_instruction_history_configure();
+#else
+  (void) enabled;
+  bx_ntvdm_machine_stage_v1_terminal_cs_transitions_enabled = 0u;
+#endif
+  bx_ntvdm_machine_stage_v1_terminal_cs_transitions_clear();
+}
+
+extern "C" int bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_cs_transitions *transitions)
+{
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+  if (transitions == 0 ||
+      !bx_ntvdm_machine_stage_v1_terminal_cs_transitions_enabled ||
+      !bx_ntvdm_machine_stage_v1_terminal_cs_transitions.valid) return 0;
+  *transitions = bx_ntvdm_machine_stage_v1_terminal_cs_transitions;
+  return 1;
+#else
+  (void) transitions;
+  return 0;
+#endif
 }
 
 extern "C" void bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(
@@ -429,11 +481,10 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   bx_ntvdm_mantle_first_fault_observation_reset();
   bx_ntvdm_machine_stage_v1_terminal_position_clear();
   bx_ntvdm_machine_stage_v1_terminal_history_clear();
+  bx_ntvdm_machine_stage_v1_terminal_cs_transitions_clear();
   bx_ntvdm_machine_stage_v1_terminal_provenance_clear();
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
-  if (bx_ntvdm_machine_stage_v1_terminal_history_enabled)
-    (void) bx_ntvdm_mantle_instruction_history_v1_configure(
-      BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX);
+  bx_ntvdm_machine_stage_v1_instruction_history_configure();
 #endif
   bx_cpu.cpu_loop();
   bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
@@ -467,6 +518,24 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
     }
     bx_ntvdm_machine_stage_v1_terminal_history.count = count;
     bx_ntvdm_machine_stage_v1_terminal_history.valid = 1u;
+  }
+  if (bx_ntvdm_machine_stage_v1_terminal_cs_transitions_enabled &&
+      stop_state.watchdog_fired && !stop_state.cancellation_fired &&
+      !bx_ntvdm_mantle_first_fault_observation_observed() &&
+      !bx_ntvdm_mantle_generic_ud_stop_observed()) {
+    uint32_t count = bx_ntvdm_mantle_instruction_history_v1_cs_transition_count();
+    uint32_t index;
+    if (count > BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX)
+      count = BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX;
+    for (index = 0u; index < count; ++index) {
+      if (!bx_ntvdm_mantle_instruction_history_v1_get_cs_transition(index,
+          &bx_ntvdm_machine_stage_v1_terminal_cs_transitions.value.transitions[index])) {
+        count = 0u;
+        break;
+      }
+    }
+    bx_ntvdm_machine_stage_v1_terminal_cs_transitions.value.count = count;
+    bx_ntvdm_machine_stage_v1_terminal_cs_transitions.valid = 1u;
   }
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE

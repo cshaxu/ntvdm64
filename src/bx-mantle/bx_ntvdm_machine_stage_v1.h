@@ -62,6 +62,20 @@ struct bx_ntvdm_machine_stage_v1_terminal_history {
     records[BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX];
 };
 
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_CS_TRANSITIONS_MAGIC UINT32_C(0x42584354)
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_CS_TRANSITIONS_VERSION UINT32_C(1)
+
+/* Default-off chronological scalar CS transition ring. It is copied only
+ * after an existing watchdog budget return and carries no guest bytes,
+ * decoded instruction, service identity, or machine object. */
+struct bx_ntvdm_machine_stage_v1_terminal_cs_transitions {
+  uint32_t magic;
+  uint32_t abi_version;
+  uint32_t struct_bytes;
+  uint32_t valid;
+  struct bx_ntvdm_instruction_history_transition_history_v1 value;
+};
+
 #define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_PROVENANCE_MAGIC UINT32_C(0x42585056)
 #define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_PROVENANCE_VERSION UINT32_C(1)
 
@@ -186,6 +200,13 @@ void bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(
   uint32_t enabled);
 int bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(
   struct bx_ntvdm_machine_stage_v1_terminal_history *history);
+
+/* Requires the separately compiled scalar instruction-history diagnostic
+ * graph. Default graphs retain no transition ring and this copy is unavailable. */
+void bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(
+  uint32_t enabled);
+int bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_cs_transitions *transitions);
 
 /* Requires the separately compiled explicit-provenance diagnostic graph.
  * Default and scalar-history graphs retain no terminal RAM window. */

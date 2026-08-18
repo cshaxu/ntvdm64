@@ -7,6 +7,7 @@ param(
     [ValidateRange(1, 100000000)][uint64]$InstructionTickBudget = 1000000,
     [switch]$ObserveBudgetTerminalPosition,
     [switch]$ObserveBudgetTerminalHistory,
+    [switch]$ObserveBudgetTerminalCsTransitions,
     [switch]$ObserveBudgetTerminalProvenance
 )
 Set-StrictMode -Version Latest
@@ -27,6 +28,7 @@ foreach ($mode in @('direct','readonly')) {
     $argumentVector = @('--byob-profile',(Join-Path $input 'profile.json'),'--byob-root',$input,'--mutation-mode',$mode,'--instruction-tick-budget',[string]$InstructionTickBudget,'--observe-guest-exec-lifecycle-ledger')
     if ($ObserveBudgetTerminalPosition) { $argumentVector += '--observe-budget-terminal-position' }
     if ($ObserveBudgetTerminalHistory) { $argumentVector += '--observe-budget-terminal-history' }
+    if ($ObserveBudgetTerminalCsTransitions) { $argumentVector += '--observe-budget-terminal-cs-transitions' }
     if ($ObserveBudgetTerminalProvenance) { $argumentVector += '--observe-budget-terminal-provenance' }
     $argumentVector += (Join-Path $input 'TARGET.EXE')
     $oldConfig = [Environment]::GetEnvironmentVariable('NTDOS64_STARTUP_CONFIG_SOURCE','Process')
@@ -56,5 +58,5 @@ foreach ($mode in @('direct','readonly')) {
         [Environment]::SetEnvironmentVariable('NTDOS64_STARTUP_AUTOEXEC_SOURCE',$oldAutoexec,'Process')
     }
 }
-[ordered]@{schema='ntdos64.t228.s1.guest-exec-integration-observation.v1';nativeExecutable=[ordered]@{path=$exe;sha256=(Hash $exe)};inputRoot=$input;inputManifestSha256=(Hash (Join-Path $input 'guest-exec-lifecycle-ledger-inputs-manifest.json'));watchdogSeconds=$WatchdogSeconds;instructionTickBudget=$InstructionTickBudget;observation=[ordered]@{guestExecLifecycleLedger=$true;budgetTerminalPosition=[bool]$ObserveBudgetTerminalPosition;budgetTerminalHistory=[bool]$ObserveBudgetTerminalHistory;budgetTerminalProvenance=[bool]$ObserveBudgetTerminalProvenance};runs=$records} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $run 'observation.json'),$_+[Environment]::NewLine,[Text.UTF8Encoding]::new($false)) }
+[ordered]@{schema='ntdos64.t228.s1.guest-exec-integration-observation.v1';nativeExecutable=[ordered]@{path=$exe;sha256=(Hash $exe)};inputRoot=$input;inputManifestSha256=(Hash (Join-Path $input 'guest-exec-lifecycle-ledger-inputs-manifest.json'));watchdogSeconds=$WatchdogSeconds;instructionTickBudget=$InstructionTickBudget;observation=[ordered]@{guestExecLifecycleLedger=$true;budgetTerminalPosition=[bool]$ObserveBudgetTerminalPosition;budgetTerminalHistory=[bool]$ObserveBudgetTerminalHistory;budgetTerminalCsTransitions=[bool]$ObserveBudgetTerminalCsTransitions;budgetTerminalProvenance=[bool]$ObserveBudgetTerminalProvenance};runs=$records} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $run 'observation.json'),$_+[Environment]::NewLine,[Text.UTF8Encoding]::new($false)) }
 Write-Host "Recorded T228 S1 Direct/Readonly guest-exec integration observation: $run"

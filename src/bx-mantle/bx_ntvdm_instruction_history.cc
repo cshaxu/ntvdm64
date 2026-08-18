@@ -27,6 +27,11 @@ static unsigned bx_ntvdm_instruction_history_last_record_valid;
 static struct bx_ntvdm_instruction_history_transition_v1
   bx_ntvdm_instruction_history_latest_cs_transition;
 static unsigned bx_ntvdm_instruction_history_latest_cs_transition_valid;
+static struct bx_ntvdm_instruction_history_transition_v1
+  bx_ntvdm_instruction_history_cs_transitions[
+    BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX];
+static uint32_t bx_ntvdm_instruction_history_cs_transition_count_value;
+static uint32_t bx_ntvdm_instruction_history_cs_transition_next;
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
 static struct bx_ntvdm_instruction_history_provenance_v1
   bx_ntvdm_instruction_history_latest_cs_provenance;
@@ -56,6 +61,10 @@ void bx_ntvdm_mantle_instruction_history_v1_reset(void)
   memset(&bx_ntvdm_instruction_history_latest_cs_transition, 0,
     sizeof(bx_ntvdm_instruction_history_latest_cs_transition));
   bx_ntvdm_instruction_history_latest_cs_transition_valid = 0;
+  memset(bx_ntvdm_instruction_history_cs_transitions, 0,
+    sizeof(bx_ntvdm_instruction_history_cs_transitions));
+  bx_ntvdm_instruction_history_cs_transition_count_value = 0;
+  bx_ntvdm_instruction_history_cs_transition_next = 0;
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
   memset(&bx_ntvdm_instruction_history_latest_cs_provenance, 0,
     sizeof(bx_ntvdm_instruction_history_latest_cs_provenance));
@@ -82,6 +91,15 @@ void bx_ntvdm_mantle_instruction_history_v1_record(
       bx_ntvdm_instruction_history_last_record;
     bx_ntvdm_instruction_history_latest_cs_transition.current = *record;
     bx_ntvdm_instruction_history_latest_cs_transition_valid = 1;
+    bx_ntvdm_instruction_history_cs_transitions[
+      bx_ntvdm_instruction_history_cs_transition_next] =
+      bx_ntvdm_instruction_history_latest_cs_transition;
+    bx_ntvdm_instruction_history_cs_transition_next =
+      (bx_ntvdm_instruction_history_cs_transition_next + 1u) %
+      BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX;
+    if (bx_ntvdm_instruction_history_cs_transition_count_value <
+        BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX)
+      bx_ntvdm_instruction_history_cs_transition_count_value++;
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
     bx_phy_address predecessor_address, successor_address, stack_address;
     memset(&bx_ntvdm_instruction_history_latest_cs_provenance, 0,
@@ -150,6 +168,27 @@ int bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(
   if (!transition || !bx_ntvdm_instruction_history_latest_cs_transition_valid)
     return 0;
   *transition = bx_ntvdm_instruction_history_latest_cs_transition;
+  return 1;
+}
+
+uint32_t bx_ntvdm_mantle_instruction_history_v1_cs_transition_count(void)
+{
+  return bx_ntvdm_instruction_history_cs_transition_count_value;
+}
+
+int bx_ntvdm_mantle_instruction_history_v1_get_cs_transition(uint32_t index,
+  struct bx_ntvdm_instruction_history_transition_v1 *transition)
+{
+  uint32_t oldest;
+  uint32_t slot;
+  if (!transition || index >= bx_ntvdm_instruction_history_cs_transition_count_value)
+    return 0;
+  oldest = bx_ntvdm_instruction_history_cs_transition_count_value ==
+    BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX ?
+    bx_ntvdm_instruction_history_cs_transition_next : 0u;
+  slot = (oldest + index) %
+    BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX;
+  *transition = bx_ntvdm_instruction_history_cs_transitions[slot];
   return 1;
 }
 

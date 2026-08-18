@@ -69,6 +69,25 @@
 | Exit Criteria | Diagnostic graph and focused fixture pass; paired immutable result is retained; the terminal is classified or explicitly transferred to one complete owner-domain source map without a trace-led leaf task. |
 | Original Owner Request | Continue T228 comprehensive immutable integration/owner-domain diagnosis after the code-complete BOP package, without trace-driven BOP additions. |
 | Similar-Issue Sweep | Existing generic-UD/first-fault probes, terminal-position observer, old T198 history recipes, formal manifest inputs, and all history/provenance compile definitions. |
+### T228 S1 P11 -- Scalar CS-transition ring diagnostic
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P11, Ordinary Mode. |
+| Admission And Approval | P9/P10 show the initial source-built COMMAND transient image is intact before a later zero-code transition; standing owner authorization permits a registered minimal Bochs/mantle diagnostic exception. |
+| Objective | Retain and expose a fixed, default-off chronological ring of already copied scalar CS transitions so the first dynamic transient continuity loss can be attributed by complete owner domain. |
+| Non-goals | No BOP/provider work, guest-memory read, decode, selector/address/service filter, CPU/guest mutation, guest-image change, adapter route, device, firmware, or repair. |
+| Reference Baseline | P9 bounded continuity bracket; P10 source-built transient correlation; registered BX-CORE-071, BX-MANTLE-072, BX-CORE-074, BX-CORE-087 and BX-MANTLE-075. |
+| Files And ABI Surface | Project-owned bx-mantle history/machine-stage records, explicit CLI diagnostic option, fixture/build recipe, new registered exception, and supporting admission/result evidence. |
+| Applicable Rules | Execution, architecture, coding, formal-build, immutable-input, and source-recovery audit rules. |
+| Verification | Disabled/ordered/wrap/reset fixture; forbidden-surface scan; fresh CPU5 /MT explicit diagnostic and default formal Ninja builds; paired immutable Direct/Readonly result; governance and diff checks. |
+| Expected Markers | Ordered copied scalar predecessor/current pairs at watchdog return; no output in default/disabled modes; byte-identical paired output. |
+| Asset Needs | Existing registered scalar history seam, current CPU5 graph, and hash-locked T228 input bundle; no new external source. |
+| Reporting Requirements | Distinguish source facts, copied diagnostic facts, owner attribution, Direct/Readonly parity, and retained limitation. |
+| Stop Conditions | Any need for RAM/byte capture, semantic decode, BOP/name filter, guest or CPU mutation, adapter/host capability, device/firmware behavior, or source-built guest edit. |
+| Exit Criteria | Ring is default-off, fixed-width and ordered; all focused/default/paired checks pass; result attributes only a complete owner domain and selects no leaf repair. |
+| Original Owner Request | Continue the active minimal-Bochs CLI NTVDM work with whole-owner diagnosis and no trace-led BOP patches. |
+| Similar-Issue Sweep | Latest-transition/provenance gates, terminal-history ABI, CLI option reset paths, history macro definitions, formal manifest membership, and exception registry. |
 > **T228 S1 P3 result:** [the terminal provenance result](etc/evidence/t228-s1-terminal-provenance-result-001.md) proves that the identical Direct/Readonly budget terminal executes a zero-filled ordinary-RAM window at `5A5F:9F51`; it transfers only the complete guest-control-flow / bx-core-bx-mantle continuity question, never a BOP leaf repair.
 
 > **T228 S1 P4 result:** [the CS-transition provenance result](etc/evidence/t228-s1-terminal-cs-transition-provenance-result-001.md) records the paired `1797:3AB8 → 5A5F:5EF9` transition and proves its copied predecessor bytes are absent from all declared source-built inputs. It transfers only the runtime guest-memory producer/control-transfer owner question.
@@ -80,7 +99,9 @@
 
 > **T228 S1 P8 result:** [the ownership-boundary correction](etc/research/t228-s1-command-transient-ownership-boundary-correction-001.md) proves from original source that initial transient allocation/move and final allocation/relocation are guest COMMAND plus guest NTDOS allocator behavior, not BOP/adapter behavior; only a proven checksum-reload branch may engage the DEM file lifecycle.
 > **T228 S1 P9 result:** [the bounded guest-continuity bracket](etc/evidence/t228-s1-bounded-guest-continuity-bracket-result-001.md) proves identical Direct/Readonly execution stays in resident COMMAND through 300,000 ticks but is in zero-filled 2073 code by 1,000,000 ticks. This precedes the later 5A5F transfer and excludes a trace-led BOP or mutation-profile repair.
-> **T228 S1 P10 result:** [the source-built transient correlation](etc/evidence/t228-s1-source-built-transient-continuity-correlation-001.md) maps P9 0C41:8097 exactly to immutable COMMAND.COM offset 7F97, proving original transient code is intact through 300,000 ticks. The next owner boundary is the original initial-image-to-dynamic-transient transition, not BOP/provider staging.
+> **T228 S1 P10 result:** [the source-built transient continuity correlation](etc/evidence/t228-s1-source-built-transient-continuity-correlation-001.md) maps P9 0C41:8097 exactly to immutable COMMAND.COM offset 7F97, proving original transient code is intact through 300,000 ticks. The next owner boundary is the original initial-image-to-dynamic-transient transition, not BOP/provider staging.
+
+> **T228 S1 P11 result:** [the scalar CS-transition ring result](etc/evidence/t228-s1-cs-transition-ring-result-001.md) records sixteen default-off, fixed-width transition pairs at the identical Direct/Readonly one-million-tick terminal. It captures the ordered `0C41:25A9 -> 2073:7365` transfer without byte capture or BOP interpretation, and transfers only the complete original COMMAND/NTDOS dynamic transient lifecycle domain; no leaf repair is selected.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.

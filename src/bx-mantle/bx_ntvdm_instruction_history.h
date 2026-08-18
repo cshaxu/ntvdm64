@@ -13,6 +13,7 @@
 
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_VERSION 1u
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX 16u
+#define BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX 16u
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES 15u
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES 15u
 #define BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES 10u
@@ -32,6 +33,13 @@ struct bx_ntvdm_instruction_history_record_v1 {
 struct bx_ntvdm_instruction_history_transition_v1 {
   struct bx_ntvdm_instruction_history_record_v1 previous;
   struct bx_ntvdm_instruction_history_record_v1 current;
+};
+
+struct bx_ntvdm_instruction_history_transition_history_v1 {
+  uint32_t count;
+  uint32_t reserved0;
+  struct bx_ntvdm_instruction_history_transition_v1
+    transitions[BX_NTVDM_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX];
 };
 
 struct bx_ntvdm_instruction_history_provenance_v1 {
@@ -57,6 +65,9 @@ uint32_t bx_ntvdm_mantle_instruction_history_v1_count(void);
 int bx_ntvdm_mantle_instruction_history_v1_get(uint32_t index,
   struct bx_ntvdm_instruction_history_record_v1 *record);
 int bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_transition(
+  struct bx_ntvdm_instruction_history_transition_v1 *transition);
+uint32_t bx_ntvdm_mantle_instruction_history_v1_cs_transition_count(void);
+int bx_ntvdm_mantle_instruction_history_v1_get_cs_transition(uint32_t index,
   struct bx_ntvdm_instruction_history_transition_v1 *transition);
 int bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_provenance(
   struct bx_ntvdm_instruction_history_provenance_v1 *provenance);
