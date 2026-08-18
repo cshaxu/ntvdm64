@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1823 |
+| Documentation records | 1825 |
 | --- | --- |
-| Generated UTC | 2026-08-18T04:23:49Z |
+| Generated UTC | 2026-08-18T04:29:43Z |
 
 ## Entries
 
@@ -176,6 +176,7 @@ content-divergent entries.
 | etc/operations/t225-s7-p2-ninja-build-graph-plan-001.md | indexed supporting material | 1dd8db8cc7bd5036a1b4deb90609f5dc79d5715a02b0f9fadc85f769cdf36b9d |
 | etc/operations/t225-s7-p3-full-ninja-module-graph-plan-001.md | indexed supporting material | c8fd553b89ebb6d64bf893a7ed574b53dc06332fe08acb718c64bc6f31f6153e |
 | etc/operations/t225-s8-primary-source-built-four-image-cross-validation-plan-001.md | indexed supporting material | 850010a42b562cff11a6f18e15bd7fc7df56c49644ea91ca82780fd1050e8c16 |
+| etc/operations/t226-s1-bop-local-conformance-manifest-001.json | indexed supporting material | 626df39fe34ccb29f0ee43b3742d4ec5d654c31a45a92634186dcf8dbd685121 |
 | etc/operations/task-identifier-governance.md | indexed supporting material | fe8b587771c9ac4d355d520d8120c9860881da1555b76ec9a0e9aa0f5645ec9e |
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
@@ -1556,6 +1557,7 @@ content-divergent entries.
 | history/m0-t225-s55-closure-20260817.md | closed task history | 3a1fd3c4b17efd0dc9484fff0ea406d8798e8d86a638cefa34f6046369421d94 |
 | history/m0-t225-s56-closure-20260817.md | closed task history | 021bb06021f963a8a8b7679a78cecb8b04b2c9cf1d671db7bc8ee5ea56c7ca65 |
 | history/m0-t225-s57-closure-20260817.md | closed task history | e09adced786b9b8ff36e17317751489d146defeb4cabd500d34de9b013cdb15c |
+| history/m0-t226-s1-closure-20260817.md | closed task history | 0f11f166ef9f8342e1f66653c42c8adfda12867e1f81bb4825b47c9443830587 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -1837,7 +1839,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a824877256979a875d8541f1390c62aee9ad7d3f82b7ac170f13d86b137b71be |
+| STATUS.md | principal control document | 614d829174b865766eb4bac726199f64d99cc472b1e0fad89503e832fc3c59c6 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

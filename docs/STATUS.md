@@ -8,25 +8,27 @@
 
 ## Active Packet
 
-> **T scope:** T226 is the owner-selected OpenNT BOP owner-package code-completion task. It turns the T225 S57 203-endpoint ownership ledger into a uniformly testable local implementation baseline before any new native guest trace is admitted.
+> **T scope:** T226 is the owner-selected OpenNT BOP owner-package code-completion task. It turns the T225 S57 203-endpoint ownership ledger into uniformly testable local implementation behavior before any native guest trace is admitted.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T226 S1, Ordinary Mode. |
-| Admission And Approval | Owner directs a rapid T225 replan: first reach BOP code completeness with local unit tests, then use native trace only for completed package integration. S57's 203-entry owner/disposition ledger is the required input. |
-| Objective | Establish the shared local conformance contract, test inventory and package execution plan that every T226 BOP provider must use, preserving the existing T225 DEM and COMMAND package closures as baseline rather than reopening endpoints by trace order. |
-| Non-goals | No native guest trace, no `BOUND` repair, no per-trace BOP patch, no selector recognition in Bochs, no guest-image edit, no Bochs semantic intrusion, no Overlay implementation, and no claim that all historical host functionality is available. |
-| Reference Baseline | T225 closure; S57 203-endpoint ledger; T225 S19 DEM closure; T225 S20 COMMAND closure; Direct/Readonly shared profile ABI; current formal MSVC x64 `/MT` Ninja graph. |
-| Files And ABI Surface | `docs/etc/operations/m0-t226-bop-owner-package-code-completion-plan.md`; existing ledger/export tools; local BOP family regression fixtures under `tests/bx-vdm/` and their bound `src/bx-vdm/` provider seams. No Bochs API or guest ABI change is admitted by S1. |
+| Identifier Mode | M0 T226 S2, Ordinary Mode. |
+| Admission And Approval | T226 S1 generated and verified the 203-row owner/package conformance manifest. It binds DEM's 73 rows to this package and preserves Direct/Readonly as the only enabled mutation profiles. |
+| Objective | Reconcile and complete the whole DEM `50:00..48` direct-host namespace/file/FCB/search/state package against its original OpenNT source, source/current ABI/failure map, and shared S1 fixture contract. |
+| Non-goals | No native guest trace, no leaf service selected by trace order, no COMMAND/XMS/DPMI/Redirector/Debugger recovery, no guest-image edit, no Bochs semantic intrusion, no Overlay implementation, and no claim that all historical NT host composition is available. |
+| Reference Baseline | T226 S1 conformance manifest; T225 S19 DEM closure and source maps; T225 S57 owner/disposition ledger; Direct/Readonly shared profile ABI; current formal MSVC x64 `/MT` Ninja graph. |
+| Files And ABI Surface | `src/bx-vdm/` DEM package seams and `tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c`; retained OpenNT DEM sources; Direct/Readonly profile registration. No Bochs API or guest ABI change is admitted. |
 | Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, whole-package BOP routing, mutation-profile and formal-build rules. |
-| Verification | Reconcile all 203 ledger rows to one package/test disposition; prove every package has a defined local conformance target; run documentation governance verification and `git diff --check`. |
-| Expected Markers | One ordered package plan; one definition of code-complete; one local-test acceptance shape for Direct/Readonly; explicit separation of completed packages, future source-reuse recovery, and deferred host compositions. |
-| Asset Needs | S57 JSON ledger and reconciliation; retained OpenNT sources; existing S19/S20 package regressions; current MSVC/Ninja formal build graph. |
-| Reporting Requirements | Record source fact versus implementation inference; list every package's endpoint count, owner, required recovery ladder, test form and native-trace prohibition; retain no endpoint-specific trace backlog. |
-| Stop Conditions | A proposed plan assigns a service by trace order, bypasses the source-recovery ladder, duplicates Direct/Readonly policy inside a provider, requires a Bochs semantic change, or treats a typed stop as implemented historical behavior. |
-| Exit Criteria | The complete 203-entry population is assigned to bounded whole-package S work with local conformance acceptance; T225 completed-package evidence is reused without overclaim; the next S can start one package without architectural replanning. |
-| Original Owner Request | First perform broadly covered code completion with local unit tests; then execute and repair from integration evidence, avoiding trace-led piecemeal BOP implementation. |
-| Similar-Issue Sweep | All selectors `50h`, `51h`, `52h`, `53h`, `54h`, `56h`, `57h`, `59h..5Fh`, `FDh`, `FEh`; Direct/Readonly policy reuse; external host dependencies; existing provider fallbacks and stale shims. |
+| Verification | Complete source/ABI/failure map for all 73 endpoints; whole-family Direct/Readonly fixture through the formal Ninja graph; explicit negative tests for unavailable/deferred outcomes; documentation governance verification and `git diff --check`. |
+| Expected Markers | Every `50:00..48` endpoint has one source-recovery disposition, one bound provider or source-proven failure/no-op, and one local family-test assertion. No typed route is presented as historical provider completion. |
+| Asset Needs | T226 S1 manifest; retained OpenNT `demdisp.c` and service sources; current DEM session/facade/profile code; existing S19 evidence and formal build manifest. |
+| Reporting Requirements | Separate original-source facts, current routes and rehost inference; record each rejected recovery rung; classify every Direct/Readonly operation and preserve Overlay ABI reservation. |
+| Stop Conditions | A service is implemented solely because it appears in a trace; a provider duplicates mutation policy; a result fabricates historical success; a Bochs semantic change is proposed; or a source-recovery rung is skipped. |
+| Exit Criteria | All 73 DEM rows meet T226's code-complete definition and pass their entire Direct/Readonly family regression; the S1 manifest has no stale DEM fixture binding; no native trace has selected leaf work. |
+| Original Owner Request | Use original OpenNT service ownership first, source-derived seams only when composition is unavailable, and work by whole owner packages rather than trace-led service patches. |
+| Similar-Issue Sweep | All DEM namespace, file/FCB, search, drive/DPB, session/PDB, raw-media/device, no-op and error/termination services; Direct/Readonly enforcement and stale shim/fallback removal. |
+
+> **T226 S1 closure:** [the generated 203-row local conformance manifest](etc/operations/t226-s1-bop-local-conformance-manifest-001.json), [its deterministic verifier](../tools/governance/Test-T226S1BopConformanceManifest.ps1), and [the closure record](history/m0-t226-s1-closure-20260817.md) bind every original BOP identity to exactly one owner-package fixture target. This is a test-inventory closure, not provider completion.
 > **T225 task closure:** owner-directed reprioritization closes T225 after its package-route, compatibility and full 203-endpoint disposition evidence. It does not claim guest multi-program execution. The retained `BOUND` continuity question returns to the Queue as a later integration package; [the closure record](history/m0-t225-closure-20260817.md) records the exact handoff.
 >
 > **T225 S58 correction record:** S57's initially stated DEM-resource handoff is superseded by [the S58 correction](etc/research/t225-s58-post-bop-continuity-admission-correction-001.md): T225 S19 already closed DEM at that boundary. S58 therefore begins post-BOP guest execution ownership diagnosis rather than reopening DEM.
