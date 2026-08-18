@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1821 |
 | --- | --- |
-| Generated UTC | 2026-08-18T03:55:33Z |
+| Generated UTC | 2026-08-18T03:58:11Z |
 
 ## Entries
 
@@ -1810,7 +1810,7 @@ content-divergent entries.
 | rules/ARCHITECTURE.md | current rule authority | 7c95f63aa5e096f9ad42f716f418059c2a2b7ffe44c2db4123f914f495719c0c |
 | rules/CODING.md | current rule authority | 209b48cdc01a7ace16756016e5ef2cf5a6d5ab184235ac11492dbbb47a996d7f |
 | rules/DOCUMENT.md | current rule authority | 9f55864347f265afe78af803a67df10bfa20fb273fca6594803c8e64c4a4cbda |
-| rules/EXECUTION.md | current rule authority | b6d396de07a928f73fc94fc8535617a2ecd12c9f11b2d73dcefe9191d6a4e388 |
+| rules/EXECUTION.md | current rule authority | 1256a507a35fedd00e264d27839d09d2f76d7e97168f30c60a43b13cfa81c36a |
 | S1-HISTORICAL-HOST-CLOSURE.md | retained pre-governance evidence | 0796b7bf5f0a780fbd7a989938474045ed2d3aa2a6b68b8697605393bd2e1bb8 |
 | S2-HISTORICAL-BRIDGE-RECORD-CONTRACT.md | retained pre-governance evidence | 87cfbdc12b2efd572fda88091b6ca9707d4bcc6dfe2b9efcf39fd2e4374f8805 |
 | S3-RECONSTRUCTED-MONITOR-SEMANTICS.md | retained pre-governance evidence | 78db2e8e9c0665b39852cc3739a142cb81304d44b6110c33c51a771aac599ffb |

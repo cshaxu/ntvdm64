@@ -121,6 +121,25 @@ unavoidable.  A passing fixture and the availability of a convenient modern
 Win32 API validate a selected seam; neither substitutes for this source-first
 analysis.
 
+### CPU Compatibility Profile Completion Gate
+
+CPU and machine-mechanics compatibility work is admitted and delivered as one
+complete, source-defined compatibility profile, never as an opcode or trace
+leaf patch. Before implementation, the active S must name the profile
+predicate, owner boundary, source/current semantic difference, and every
+affected mechanical group. A profile that touches instruction execution must
+cover the applicable scalar, read-modify-write/string, stack, and
+fetch/control groups; an inapplicable group requires an explicit source/ABI
+justification, not omission by default.
+
+The implementer may work continuously within that admitted profile and run
+focused tests during its implementation. The group-level evidence record,
+governance update, and post-package native guest trace occur only after the
+entire profile has passed its focused group regressions. That native trace is
+integration evidence for the completed profile: it may reveal the next owner
+domain, but cannot select a new opcode-level repair, change the completed
+profile's boundary, or create a trace-derived task list.
+
 ### Source-Recovery Audit Criterion
 
 Every recovered behavior must carry a reviewable four-rung ledger: **original
