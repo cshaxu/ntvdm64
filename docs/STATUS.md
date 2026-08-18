@@ -345,6 +345,48 @@
 | Similar-Issue Sweep | BOP macro/host dispatch, CMD service macro, EndInit, NTDOS dispatcher/return, COMMAND stub relocation and current typed resume. |
 
 > **T228 S1 P25 result:** [the BOP-return and INT21 termination source audit](etc/research/t228-s1-bop-return-and-int21-termination-source-audit-001.md) proves current `fault_rip + 4` is equivalent to the original CMD BOP continuation and separates it from the guest `INT 21 -> LeaveDos -> DOIRET -> FIRET` path. The remaining owner is the complete original COMMAND/NTDOS transient lifecycle, including `LodCom` stub relocation/transfer; no BOP, provider or CPU repair is selected.
+### T228 S1 P26 -- EndInit-to-LodCom generic transition provenance comparison
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P26, Ordinary Mode. |
+| Admission And Approval | P25 identifies the next whole-package uncertainty and permits a separately admitted comparison; existing registered `BX-MANTLE-075` explicit-provenance mechanics are reused unchanged. |
+| Objective | In one fresh, hash-locked Direct/Readonly comparison, copy the already retained final generic CS transition's fixed predecessor/successor/stack windows and determine whether the observed resident-COM transfer has an original-source control form. |
+| Non-goals | No source change, new exception, selector/service/function filter, instruction decoding in product code, CPU change, BOP/provider work, guest-image mutation, or runtime retry beyond the paired observation. |
+| Reference Baseline | P5/P6 existing explicit provenance closure; P17/P18 0C41-to-4444 state; P25 source boundary. |
+| Files And ABI Surface | Status and a result evidence record only; existing provenance graph, mantle ABI and diagnostic CLI option. |
+| Applicable Rules | Execution, source policy, architecture/coding, formal-build and immutable-input rules. |
+| Verification | Fresh CPU5 x64 /MT explicit-provenance Ninja graph; existing focused provenance fixture; one hash-locked Direct/Readonly pair at the retained one-million budget; default formal graph remains unmodified; governance and diff checks. |
+| Expected Markers | Valid copied generic predecessor/successor/stack windows, profile parity, and a source-map disposition that names no leaf BOP. |
+| Asset Needs | Existing P5/P6 mechanics, exact T228 input manifest and current module manifest. |
+| Reporting Requirements | Record build/input identity, copied facts, source correlation, parity, limitation and rejected cross-owner alternatives. |
+| Stop Conditions | Need for any code change, address/selector/function condition in product code, mutable guest input, new capture field, or a selected BOP/provider repair. |
+| Exit Criteria | The observed transition is source-classified or retained as an explicit whole-package unknown; no new runtime code and no BOP leaf task result. |
+| Original Owner Request | Diagnose and repair through complete original owner domains; trace remains integration evidence rather than a BOP task selector. |
+| Similar-Issue Sweep | P5/P6 provenance ABI, P23/P24 IRET result, BOP continuation, EndInit/NTDOS/LodCom source paths, Direct/Readonly parity and default graph isolation. |
+> **T228 S1 P26 result:** [the EndInit-to-LodCom provenance result](etc/evidence/t228-s1-endinit-lodcom-transition-provenance-result-001.md) records the identical Direct/Readonly `0C41:7ED7 -> 6972:645B` transition. Its predecessor is immutable COMMAND code, while its successor window is already zero; the exact source label and zero writer remain a complete original COMMAND transient/NTDOS MCB lifecycle unknown. It selects no BOP, provider, CPU, adapter, or profile repair.
+
+### T228 S1 P27 -- Explicit-provenance fixture lifecycle repair
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P27, Ordinary Mode. |
+| Admission And Approval | P26 focused verification demonstrated a deterministic test-only lifecycle defect; P1 already separately proves provenance reads under an active machine. |
+| Objective | Make the existing budget-terminal fixture avoid post-reset synthetic instruction-history transitions when explicit provenance is compiled, while retaining its default/scalar coverage and leaving product behavior unchanged. |
+| Non-goals | No product source change, new Bochs exception, provenance ABI change, guest execution, BOP/provider work, CPU change, or host capability. |
+| Reference Baseline | P1 active-machine provenance fixture; P5/P6 explicit provenance closure; P26 fresh failing provenance graph. |
+| Files And ABI Surface | `tests/bx-mantle/t228_s1_budget_terminal_position_fixture.cc`, P27 evidence and Status only; no runtime module ABI. |
+| Applicable Rules | Execution, coding, formal-build and architecture-boundary rules. |
+| Verification | Fresh P26 provenance graph fixture passes; default formal fixture remains valid; source scan proves production sources unchanged; governance and diff checks. |
+| Expected Markers | No post-reset provenance read, explicit graph focused fixture exit 0, preserved scalar/default assertions. |
+| Asset Needs | Existing P26 graph and P1 provenance result. |
+| Reporting Requirements | State why the old fixture was invalid only in explicit provenance mode and identify the independent retained coverage. |
+| Stop Conditions | Any needed production code/ABI change, new capture field, new source exception, or guest runtime modification. |
+| Exit Criteria | Fixture is lifecycle-valid in both scalar and explicit provenance graphs and P26 may resume with no product semantic change. |
+| Original Owner Request | Use complete owner-domain evidence; do not bypass a failed verification or add a trace-led workaround. |
+| Similar-Issue Sweep | All post-reset manual history writes, provenance compile guards, P1 fixture coverage, P5/P6 lifecycle and default graph isolation. |
+
+> **T228 S1 P27 result:** [the provenance-fixture lifecycle result](etc/evidence/t228-s1-provenance-fixture-lifecycle-result-001.md) records passing explicit-provenance and default/scalar fixtures after a test-only compile guard. P1 retains active-machine positive provenance coverage; no product source or guest behavior changed.
 
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.

@@ -5,6 +5,10 @@
 
 #include <string.h>
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+#define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE 0
+#endif
+
 static int stop_on_ud;
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
@@ -120,7 +124,7 @@ int main()
   bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
   bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
   bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(0u);
-#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY && !BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
   {
     struct bx_ntvdm_instruction_history_record_v1 record;
     struct bx_ntvdm_instruction_history_transition_v1 transition;
