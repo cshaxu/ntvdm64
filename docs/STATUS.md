@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S53.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S55.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S53 -- existing first-fault access-tuple observation.**
+**Active: M0 T225 S55 -- whole guest startup, EXEC, and parent-return lifecycle closure.**
 
 ## Active Packet
 
@@ -12,22 +12,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S53, Ordinary Mode. |
-| Admission And Approval | S52 proves a source-origin tuple is required. Existing CLI `--observe-first-fault` already enables the fixed-width selector-blind segment-access observer; this S reuses it unchanged. |
-| Objective | Run one bounded source-built Direct/Readonly pair with the existing first-fault option and classify the copied first fault/access tuple. |
-| Non-goals | No new observer, CPU/Bochs semantic change, BOP/provider change, guest-memory read, device enablement or trace-selected repair. |
-| Reference Baseline | S51 integration logs, S52 owner map, existing first-fault/segment-access observer ABI and CLI wiring. |
-| Files And ABI Surface | Staging/run evidence and Status/history only. No source ABI change. |
-| Applicable Rules | Execution, architecture, coding, deny-by-default and T225 anti-attrition. |
-| Verification | Fresh input staging; existing formal native CLI; one bounded Direct/Readonly pair; copied tuple parity; governance verifier and diff check. |
-| Expected Markers | First-fault vector/CS:EIP and, where applicable, segment selector/offset/width/limit/branch; equal mode results or explicit divergence. |
-| Asset Needs | S51 input stager, existing lifecycle-r3 native CLI and S30 observer ABI. |
-| Reporting Requirements | Treat tuple as mechanical attribution only; do not select a repair from a single event. |
-| Stop Conditions | Need observer extension, guest inspection, BOP/provider/machine change or trace-selected repair. |
-| Exit Criteria | Reproducible paired tuple evidence identifies a bounded owner class or records absence; no runtime code changes. |
-| Original Owner Request | Continue source-first whole-package recovery without trace-led BOP patching. |
-| Similar-Issue Sweep | Option default-off, observer reset, first-fault versus access tuple order, Direct/Readonly parity, and no lifecycle/BOP mutation. |
+| Identifier Mode | M0 T225 S55, Ordinary Mode. |
+| Admission And Approval | The owner directs continuous CLI NTVDM recovery with a global, source-first approach and prohibits trace-led service patches. S53 is closed without admitting a repair. |
+| Objective | Close one coherent source/ABI/failure package from guest startup through original NTDOS EXEC, child teardown, and COMMAND parent return; identify and implement only the package-owned host/machine gap proved by that whole map. |
+| Non-goals | No new one-off trace observer; no standalone BOP implementation; no adapter EXEC/PSP/MCB/DOS filesystem; no synthetic host child process; no Bochs semantic/device expansion without a reached source-owned mechanical prerequisite. |
+| Reference Baseline | T225 S19 DEM and S20 COMMAND package evidence; S23/S25 machine closure; S21/S26 guest EXEC maps; S47--S54 lifecycle evidence. Initial NTDOS load address is not a persistent runtime mapping. |
+| Files And ABI Surface | Original NTDOS/COMMAND source maps, existing `bx-vdm` package seams and their tests; any new or changed fixed-width contract must be admitted after the complete source map. |
+| Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, deny-by-default Bochs admission, and Direct/Readonly/Overlay profile policy. |
+| Verification | Review all package owners and recovery rungs; focused package fixture(s) and full module graph; Direct/Readonly family regression; only then one bounded paired native integration run. Governance verifier and diff check are mandatory. |
+| Expected Markers | A complete stage ledger for `50:11`, DEM normal file/lifecycle, `50:36/3C`, guest `$Exec`/PSP/arena/termination, and COMMAND `54:0B`; explicit retain/migrate/replace/defer disposition; no unresolved adapter DOS ownership. |
+| Asset Needs | Source-built NTIO/NTDOS/COMMAND/SHARE inputs, original OpenNT DOS/DEM/COMMAND sources, current formal Ninja graph and declared Direct/Readonly profiles. |
+| Reporting Requirements | Record the first missing owner package or exact already-closed prerequisite; distinguish source proof, focused fixture proof and native reach. Do not claim child execution or completion from a BOP/exception observation. |
+| Stop Conditions | The package requires a new CPU decoder, generic memory/device/firmware rewrite, host system installation/change, or an unclassified cross-island ABI; pause for re-admission. |
+| Exit Criteria | A complete owner map and recovery ladder are reviewed; every selected gap has whole-package regression; one paired native run is classified without selecting follow-on leaf repairs. |
+| Original Owner Request | Implement the CLI NTVDM through minimal Bochs, preserve OpenNT ownership, support Direct and Readonly, retain Overlay compatibility, and avoid piecemeal trace-driven recovery. |
+| Similar-Issue Sweep | COM/MZ/unknown executable boundaries; initial versus EXEC environment limits; PDB search/file cleanup; `54:00` versus `54:0B`; Direct/Readonly/Overlay disposition; startup relocation versus later runtime segments. |
 
+> **T225 S53 closure:** [the closure record](history/m0-t225-s53-closure-20260817.md) records the identical Direct/Readonly `BOUND` diagnostic and its non-terminal limitation. It transfers no trace-selected repair.
 > **T225 S51 closure:** [the closure record](history/m0-t225-s51-closure-20260817.md) records the unchanged paired boundary and admits only source/current limit reconciliation; it selects no repair.
 
 > **T225 S50 P1 result:** [the fixture record](etc/evidence/t225-s50-realmode-handoff-fixture-result-001.md) proves only generic source-shaped real-mode handoff mechanics under the formal graph; it neither runs an immutable guest child nor changes BOP semantics.
