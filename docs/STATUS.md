@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T226 S6.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T226 S7.** Its governing brief appears immediately below.
 
-**Active: M0 T226 S6 -- Redirector network and IPC package.**
+**Active: M0 T226 S7 -- Debugger, top-level/machine and WOW host-composition package.**
 
 ## Active Packet
 
@@ -12,22 +12,23 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T226 S4, Ordinary Mode. |
-| Admission And Approval | T226 S5 closes DPMI's 25 rows; S1 binds Redirector's 50 rows. Direct/Readonly are enabled; Overlay remains ABI-only. |
-| Objective | Reconcile and complete the Redirector `57:00..31` network and IPC package through one retained OpenNT source-proven unavailable disposition and full family regression. |
-| Non-goals | No native guest trace, no trace-selected leaf work, no network/IPC enablement, no host redirector substitute, no Bochs semantic intrusion, no Overlay implementation. |
-| Reference Baseline | T226 S1 manifest; T225 S57 owner ledger; retained Redirector sources; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
-| Files And ABI Surface | `src/bx-vdm/` Redirector package facade and retained OpenNT Redirector sources. No network backend, export of Bochs internals or guest ABI change is admitted. |
+| Identifier Mode | M0 T226 S7, Ordinary Mode. |
+| Admission And Approval | T226 S6 closes Redirector's 50 rows; S1 binds the remaining 26 Debugger/top-level/machine/WOW rows. Direct/Readonly are enabled; Overlay remains ABI-only. |
+| Objective | Reconcile and complete the remaining Debugger, top-level/machine and WOW host-composition identities with whole-family deferred, unavailable, no-op and ownership dispositions. |
+| Non-goals | No native guest trace, no trace-selected leaf work, no debugger or WOW runtime, no adapter-owned machine semantics, no Bochs semantic intrusion, no Overlay implementation. |
+| Reference Baseline | T226 S1 manifest; T225 S57 owner ledger; retained nt_bop/SoftPC/WOW sources; Direct/Readonly ABI; formal MSVC x64 `/MT` Ninja graph. |
+| Files And ABI Surface | `src/bx-vdm/` debugger and top-level facades plus machine/WOW ownership seams. No debugger/WOW runtime, export of Bochs internals or guest ABI change is admitted. |
 | Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, whole-package routing, mutation-profile and formal-build rules. |
-| Verification | Source/ABI/failure map for all 50 rows; local whole-family unavailable fixture; formal Ninja build, governance verification, and `git diff --check`. |
-| Expected Markers | Every `57:00..31` identity has one source-proven unavailable disposition and a local assertion that it cannot report network/IPC success. |
-| Asset Needs | T226 S1 manifest; retained Redirector source; current Redirector facade and formal manifest. |
+| Verification | Source/ABI/failure map for all 26 rows; local deferred/no-op/unavailable fixtures; formal Ninja build, governance verification, and `git diff --check`. |
+| Expected Markers | Every remaining identity has one source-proven owner/disposition and local assertion that no host-service or machine semantic is fabricated. |
+| Asset Needs | T226 S1 manifest; retained debugger/top-level/machine/WOW source; current facades and formal manifest. |
 | Reporting Requirements | Separate source facts, current routes and rehost inference; record rejected rungs; preserve Direct/Readonly behavior and Overlay reservation. |
-| Stop Conditions | Trace-selected leaf work, fabricated network/IPC success, host redirector substitution, Bochs semantic change, or skipped source-recovery rung. |
-| Exit Criteria | All 50 Redirector rows meet T226 code-complete definition and pass their local package regression. |
+| Stop Conditions | Trace-selected leaf work, fabricated debugger/WOW success, adapter machine semantics, Bochs semantic change, or skipped source-recovery rung. |
+| Exit Criteria | All remaining 26 rows meet T226 code-complete definition and pass their local package regression. |
 | Original Owner Request | Recover whole original owner packages before trace-led integration, using original source first and source-derived seams only where necessary. |
-| Similar-Issue Sweep | file/network redirector, pipes/IPC, redirected device state, network errors, source-shaped failure and accidental host fallback. |
+| Similar-Issue Sweep | debugger deferral, WOW absence, top-level no-op/failure, machine handoff and accidental adapter ownership. |
 
+> **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
 > **T226 S4 closure:** [the formal XMS result](etc/evidence/t226-s4-xms-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s4-closure-20260817.md) close the 12-row XMS owner package at the local code-complete gate. They claim no native guest execution.
 > **T226 S3 closure:** [the formal COMMAND result](etc/evidence/t226-s3-command-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s3-closure-20260817.md) close the 17-row COMMAND owner package at the local gate. They claim no native guest execution.

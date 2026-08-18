@@ -770,6 +770,12 @@
       "source": "tests/bx-vdm/bx_ntvdm_dpmi_package_session_v1_test.c",
       "libraries": ["bx-vdm"],
       "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t226-s6-redir-package-facade-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_redir_package_facade_v1_test.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     }
   ],
   "forbiddenInputs": [

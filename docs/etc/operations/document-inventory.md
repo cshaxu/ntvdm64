@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1838 |
+| Documentation records | 1840 |
 | --- | --- |
-| Generated UTC | 2026-08-18T06:10:45Z |
+| Generated UTC | 2026-08-18T06:14:14Z |
 
 ## Entries
 
@@ -147,6 +147,7 @@ content-divergent entries.
 | etc/evidence/t226-s3-command-code-complete-formal-result-001.md | indexed supporting material | 5a73ba48b29c9d27744306e6945a4ef45bf90c06102a87fda311ca46a5c6163e |
 | etc/evidence/t226-s4-xms-code-complete-formal-result-001.md | indexed supporting material | 2cf0a7da858819c7f9c0f49636cbd35f8c1ca4cd975d1d19364716937ae9b87e |
 | etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md | indexed supporting material | b9f4cf73445aaaeffea5553a0688a30bb7642279f6bc34e58259c897ba0c7729 |
+| etc/evidence/t226-s6-redir-code-complete-formal-result-001.md | indexed supporting material | a50b949d253496d804aa66ad7722e8850f3826b0edf755c1bca692544d498ae8 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |
@@ -1571,6 +1572,7 @@ content-divergent entries.
 | history/m0-t226-s3-closure-20260817.md | closed task history | fe333484faafb55db94caed32adecb4b7f649e914d76a760128f6ff774a0019b |
 | history/m0-t226-s4-closure-20260817.md | closed task history | 2b9206b2509e9168edbd17daa2d7958d9098f010d3d3eb81559a7d952421eddb |
 | history/m0-t226-s5-closure-20260817.md | closed task history | 52692f795232d71fb2237024ddd92370f9c34d6558538b64a74ee159a997e880 |
+| history/m0-t226-s6-closure-20260817.md | closed task history | 6feae562abaf31f183c1e969ce062e8ffd4f3d3764cd83247eccb48dd6dc97b2 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -1852,7 +1854,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | fc0399d7d82919d374c31715b9888c91c2f6cd088fc290e26cf70b8181ac4b36 |
+| STATUS.md | principal control document | e9333303a3fb3168473a8e95e206742c292c573cce6204f7263032c0417a70df |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
