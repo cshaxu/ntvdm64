@@ -23,16 +23,16 @@ int bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
     bx_ntvdm_cpu_result_v2_pass_through(result);
     if (ingress->route != BX_NTVDM_BOP_ROUTE_MAPPED_DEFERRED ||
         ingress->family != BX_NTVDM_BOP_FAMILY_DEM ||
-        (ingress->service != 36u && ingress->service != 60u) ||
+        (ingress->service != 0x36u && ingress->service != 0x3cu) ||
         selection->disposition != BX_NTVDM_BOP_PROVIDER_DEFERRED ||
         selection->provider_family != BX_NTVDM_BOP_PROVIDER_DEM ||
         selection->precedence !=
             BX_NTVDM_BOP_PROVIDER_PRECEDENCE_ORIGINAL_OPENNT ||
         plane->service != ingress->service ||
-        (ingress->service == 36u &&
-            (plane->component != BX_NTVDM_DEM_COMPONENT_ORIGINAL_NOOP ||
-             plane->disposition != BX_NTVDM_DEM_PLANE_ORIGINAL_NOOP)) ||
-        (ingress->service == 60u &&
+        (ingress->service == 0x36u &&
+            (plane->component != BX_NTVDM_DEM_COMPONENT_MISC ||
+             plane->disposition != BX_NTVDM_DEM_PLANE_DEFERRED)) ||
+        (ingress->service == 0x3cu &&
             (plane->component != BX_NTVDM_DEM_COMPONENT_MISC ||
              plane->disposition != BX_NTVDM_DEM_PLANE_DEFERRED)) ||
         event->kind != BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION || event->vector != 6u ||
@@ -40,7 +40,7 @@ int bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(
         event->fault_rip > UINT64_MAX - 4u) return 0;
     /* demEntryDosApp only calls VDDCreateUserHook outside this no-VDD CLI
      * profile. Its retained result contract is the original void return. */
-    if (ingress->service == 36u)
+    if (ingress->service == 0x36u)
         return bx_ntvdm_cpu_result_v2_resume(result, event->fault_rip + 4u);
     /* SVC_PDBTERMINATE precedes DOS_ABORT.  OpenNT's abort path later walks
      * the guest JFT/SFT and emits ordinary SVC_DEMCLOSE calls.  Our opaque

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1827 |
+| Documentation records | 1829 |
 | --- | --- |
-| Generated UTC | 2026-08-18T04:51:20Z |
+| Generated UTC | 2026-08-18T05:08:44Z |
 
 ## Entries
 
@@ -139,6 +139,7 @@ content-divergent entries.
 | etc/evidence/t225-s8-primary-share-source-build-result-001.md | indexed supporting material | da0e24d5217841fecb54991bd7644fefb9d3b488f6fbce5e4e2de34d6496282c |
 | etc/evidence/t225-s8-primary-source-built-input-availability-001.md | indexed supporting material | 8dd7cd9f8b54960adf87bdfb52394a22e89ff99af6b449cfe94fd086b4c803d3 |
 | etc/evidence/t225-s8-share-primary-source-rebuild-001.md | indexed supporting material | e85f39671ec94c1ff6586e8d47df98697022d288cbe1e8b04b7305ba36a3e4c1 |
+| etc/evidence/t226-s2-dem-dasd-lifecycle-formal-result-001.md | indexed supporting material | b2bc2ec83ff86d11964066af33306a40a254b956fd029d656abd46f6f944a36d |
 | etc/evidence/t226-s2-dem-error-lock-conformance-result-001.md | indexed supporting material | 54e234fca750c26767b9a283e67116a3368d6580923e9a38823078c9ea606907 |
 | etc/evidence/t226-s2-formal-dem-baseline-build-result-001.md | indexed supporting material | d516ebc45904a3b5d4b317cc6cd593a0ad572c46d3163633128b169276c1b7dc |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
@@ -1006,6 +1007,7 @@ content-divergent entries.
 | etc/research/t225-s7-incremental-composition-build-result-001.md | indexed supporting material | 96853c5deeca6e8e7c9d824305ff591d93827fa2caa14d9eb04f65a0e6d43232 |
 | etc/research/t225-s7-p2-ninja-build-graph-result-001.md | indexed supporting material | a8530c1ce8eaae78da1e2137dee10c87b04f9439acf28a5641a7bdf7042d3281 |
 | etc/research/t225-s9-source-built-guest-bootstrap-to-exec-admission-map-001.md | indexed supporting material | 5409647344b31d0496e9646d11b3d4585d65bcbf5984e2af2f4aa5b767c5de1c |
+| etc/research/t226-s2-dem-lifecycle-routing-source-abi-correction-001.md | indexed supporting material | 72c064dc67b98e8e0d94057f443d80d802cc0d53951d13943e2c4023cbbe6599 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | 55430d57246660e10fc32c95b843f83d84939f5b50f4a55240a08e41ca9bd6fb |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
 | etc/research/t95-s4-host-namespace-projection.md | indexed supporting material | 3ba892a9a2089ea4293c3510d457b9927286b845954506348f4b3a851a9f1e1c |

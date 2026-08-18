@@ -511,6 +511,14 @@ static int misc_family_regression(void)
         result.cpu_delta.gpr16_values[0] != 0xa500u ||
         result.eflags_write_mask != 0u) return 0;
     dispatch_ax = 0u;
+    /* demNotYetImplemented clears CF.  50:24 must not be intercepted by
+     * the 50:36 entry lifecycle provider merely because its decimal index is
+     * also 36. */
+    if (!dispatch(0x24u, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 0u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u) return 0;
     return 1;
 }
 

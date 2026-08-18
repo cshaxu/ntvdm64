@@ -23,6 +23,10 @@ static int provider_initialize(bx_ntvdm_boot_namespace_provider_v1 *provider)
     wcscpy(selection.target_placement.path, L"\\TARGET.COM");
     selection.target_placement.drive_index = 2u; selection.has_target_placement = 1u;
     wcscpy(selection.target.file_name, L"TARGET.COM");
+    selection.declared_target_count = 1u;
+    wcscpy(selection.declared_targets[0].component.file_name, L"TARGET.COM");
+    wcscpy(selection.declared_targets[0].placement.path, L"\\TARGET.COM");
+    selection.declared_targets[0].placement.drive_index = 2u;
     wcscpy(selection.config_file.path, L"\\CONFIG.SYS");
     selection.config_file.materialization = BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;
     wcscpy(selection.autoexec_file.path, L"\\AUTOEXEC.BAT");
@@ -51,9 +55,28 @@ int main(void)
     bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 result;
     const uint8_t bytes[] = { 0xc4u, 0xc4u, 0x50u, 0x3cu };
+    uint8_t entry_bytes[] = { 0xc4u, 0xc4u, 0x50u, 0x36u };
 
     wcscpy(entries[0].dos_name, L"ONE.TXT"); wcscpy(entries[1].dos_name, L"TWO.TXT");
     if (!provider_initialize(&provider)) return 11;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    bx_ntvdm_instruction_window_v1_capture(&window, entry_bytes, sizeof(entry_bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) ||
+        plane.component != BX_NTVDM_DEM_COMPONENT_MISC ||
+        !bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, 0, &ingress,
+            &selection, &plane, &event, &cpu, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x404u ||
+        result.cpu_delta.gpr16_write_mask != 0u || result.eflags_write_mask != 0u) return 20;
+    entry_bytes[3] = 0x24u;
+    bx_ntvdm_instruction_window_v1_capture(&window, entry_bytes, sizeof(entry_bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_plane_v1_classify(&ingress, &selection, &plane) ||
+        plane.component != BX_NTVDM_DEM_COMPONENT_ORIGINAL_NOOP ||
+        bx_ntvdm_dem_session_lifecycle_provider_v1_dispatch(&provider, 0, &ingress,
+            &selection, &plane, &event, &cpu, &result)) return 21;
     if (!bx_ntvdm_search_sessions_v1_begin(&provider.search_transaction.plan.sessions,
             0x1234u, entries, 2u, &out, &token_a)) return 12;
     if (!bx_ntvdm_search_sessions_v1_begin(&provider.search_transaction.plan.sessions,
