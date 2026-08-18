@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1854 |
+| Documentation records | 1855 |
 | --- | --- |
-| Generated UTC | 2026-08-18T07:45:03Z |
+| Generated UTC | 2026-08-18T07:46:39Z |
 
 ## Entries
 
@@ -1024,6 +1024,7 @@ content-divergent entries.
 | etc/research/t225-s9-source-built-guest-bootstrap-to-exec-admission-map-001.md | indexed supporting material | 5409647344b31d0496e9646d11b3d4585d65bcbf5984e2af2f4aa5b767c5de1c |
 | etc/research/t226-s2-dem-lifecycle-routing-source-abi-correction-001.md | indexed supporting material | 72c064dc67b98e8e0d94057f443d80d802cc0d53951d13943e2c4023cbbe6599 |
 | etc/research/t228-s1-budget-terminal-position-diagnostic-admission-001.md | indexed supporting material | 167b3d86d514fb1ea025e6714fba3131cd7c6855f09aad265e9fa3e3a8270f82 |
+| etc/research/t228-s1-guest-control-flow-cpu-owner-map-001.md | indexed supporting material | 1e841e3b46b18e218c5b418aa038f014797dd4b75c38563e3cd54cde15dc693a |
 | etc/research/t228-s1-immutable-input-staging-source-audit-001.md | indexed supporting material | a4cc947d9872420d311fbb382ed7d0eefde9891e207b389c838874b704d58f10 |
 | etc/research/t95-s2-host-drive-policy-snapshot.md | indexed supporting material | 55430d57246660e10fc32c95b843f83d84939f5b50f4a55240a08e41ca9bd6fb |
 | etc/research/t95-s3-dos-search-family-contract.md | indexed supporting material | b451a24a17da59ffc0859aef85baf2c725b38694b8228543b129f83732073e31 |
