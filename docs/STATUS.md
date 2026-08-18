@@ -145,6 +145,27 @@
 | Similar-Issue Sweep | P13 absolute-target admission constraint, S28 startup-source environment, history/provenance compile gates, Direct/Readonly profile boundary, and T145 symbol-map limitation. |
 
 > **T228 S1 P14 result:** [the environment-size first-fault boundary result](etc/evidence/t228-s1-environment-first-fault-boundary-result-001.md) records that the minimal form completes and the controlled opaque greater-than-4-KiB form reaches its budget terminal, while neither reaches an accepted non-UD first fault. It excludes the retained first-fault symptom as the first mechanical divergence of this environment-size branch and leaves the complete original COMMAND guest-image/lifecycle owner domain unchanged; it selects no repair.
+### T228 S1 P15 -- Reproducible COMMAND link-map recovery
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P15, Ordinary Mode. |
+| Admission And Approval | T145 records that no retained exact COMMAND listing/map supports source-offset attribution. The current repository retains the original COMMAND build script, original OpenNT MASM/LINK16/RELOC tool closure, and original `command.lnk` `/map +` directive. |
+| Objective | Rebuild the immutable source-built COMMAND.COM in a new disposable build root and determine whether the original linker emits a map that is byte-identity-bound to the controlled artifact and sufficient to connect the P13/P14 lifecycle region to original source/module boundaries. |
+| Non-goals | No guest source transform, replacement image, runtime input substitution, production source change, disassembly-based attribution, BOP work, or machine repair. |
+| Reference Baseline | T145 source-map gap; T225 S8 original toolchain source build; P13/P14 COMMAND lifecycle boundary; `src/opennt/base/mvdm/dos/v86/cmd/command/command.lnk`. |
+| Files And ABI Surface | Existing `Build-T225S8PrimaryCommand.ps1`, staged immutable OpenNT source and historical tools, disposable build root, evidence only. |
+| Applicable Rules | Source policy; immutable guest input; formal-build/generative evidence; active T228 packet. |
+| Verification | Fresh build must reproduce exactly 50,384 bytes and SHA-256 `908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43`; inspect map/list outputs and their link relationship without making them runtime inputs. |
+| Expected Markers | Original `/map +` either emits a reusable map tied to the exact output or produces a documented tool/output limitation. |
+| Asset Needs | Repository-local OpenNT source, historical tools and DOSBox only; no external source or binary acquisition. |
+| Reporting Requirements | Record source/tool identities, output identity, map/list output names and hashes, symbol/segment coverage, exact utility and retained limitation. |
+| Stop Conditions | Any source transform, hash mismatch, use of a map from a nonidentical image, fallback assembler/linker, or use of generated mapping as runtime behavior. |
+| Exit Criteria | The P15 map disposition is recorded, and only direct map-supported module/segment facts may inform the next complete owner-package repair. |
+| Original Owner Request | Use original source/toolchains before adapter/shim or intrusion; avoid source-label guesses. |
+| Similar-Issue Sweep | T145 map/listing limitation, command build hash, original link response, historical-tool manifest, and source-policy ladder. |
+
+> **T228 S1 P15 result:** [the reproducible COMMAND link-map recovery result](etc/evidence/t228-s1-command-link-map-recovery-result-001.md) records an exact-hash original-toolchain rebuild and its `command.map`. It binds both P13 `54:0F` sites to the original `EndInit` procedure and transfers repair only to the complete COMMAND `EndInit` / NTDOS MCB allocation-and-transient-placement package; no per-instruction source label or repair is claimed.
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
