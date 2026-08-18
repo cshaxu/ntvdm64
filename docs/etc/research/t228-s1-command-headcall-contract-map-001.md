@@ -31,6 +31,12 @@ transient DS and enters the resident HeadFix path.  Thus the historical
 contract is not a call to an arbitrary transient routine: `HeadCall` must hold
 the resident HeadFix trap address after the `HavCom` transfer.
 
+The source-built initial storage for `HeadCall` itself (COMMAND.COM file offset
+`B980h`, derived from map address `0249:95F0`) is four zero bytes, as are the
+adjacent transient handoff fields. Therefore the observed nonzero far target
+cannot be inherited from the static image; it was introduced by subsequent
+guest lifecycle execution.
+
 The dynamic destination offset `7365h` maps, under the same source-built
 TRANGROUP layout, to COMMAND.COM file offset `96F5h`.  That file window begins
 ASCII help text (`"ve:][path][filename]..."`), not an executable HeadFix trap

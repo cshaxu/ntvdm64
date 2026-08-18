@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1876 |
 | --- | --- |
-| Generated UTC | 2026-08-18T16:56:47Z |
+| Generated UTC | 2026-08-18T16:58:28Z |
 
 ## Entries
 
@@ -1037,7 +1037,7 @@ content-divergent entries.
 | etc/research/t225-s9-source-built-guest-bootstrap-to-exec-admission-map-001.md | indexed supporting material | 5409647344b31d0496e9646d11b3d4585d65bcbf5984e2af2f4aa5b767c5de1c |
 | etc/research/t226-s2-dem-lifecycle-routing-source-abi-correction-001.md | indexed supporting material | 72c064dc67b98e8e0d94057f443d80d802cc0d53951d13943e2c4023cbbe6599 |
 | etc/research/t228-s1-budget-terminal-position-diagnostic-admission-001.md | indexed supporting material | 167b3d86d514fb1ea025e6714fba3131cd7c6855f09aad265e9fa3e3a8270f82 |
-| etc/research/t228-s1-command-headcall-contract-map-001.md | indexed supporting material | 4f27c36be42cb1e1d24325c95f16a9fceb6ba97ae1bfe845769699258fbde97b |
+| etc/research/t228-s1-command-headcall-contract-map-001.md | indexed supporting material | c05dcae985f5de49aaabd44af06096c5932b6433371a8f68d8d1379316a83296 |
 | etc/research/t228-s1-command-transient-ownership-boundary-correction-001.md | indexed supporting material | 7d623ed0752668c6e74a2e18b6e32e6892563695a2b32df1194e11d3fabe810c |
 | etc/research/t228-s1-far-call-base-pointer-admission-001.md | indexed supporting material | 2513f43fc968e2932f1a15971f5d8ad6e4da91354c62d86c3b618cd217e992c8 |
 | etc/research/t228-s1-guest-control-flow-cpu-owner-map-001.md | indexed supporting material | 1e841e3b46b18e218c5b418aa038f014797dd4b75c38563e3cd54cde15dc693a |
