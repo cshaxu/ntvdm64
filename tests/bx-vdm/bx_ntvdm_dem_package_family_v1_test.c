@@ -469,6 +469,40 @@ static int whole_provider_pdb_lifecycle_regression(void)
         result.eflags_write_mask != 0u ||
         !bx_ntvdm_dem_file_session_v1_lookup(&session.whole_provider.files,
             token, &looked_up)) goto cleanup;
+    /* demWrite shares the profile owner with FCB I/O: Direct writes the
+     * fixture-owned token; Readonly must return ACCESS_DENIED before its
+     * host WriteFile path. */
+    memcpy(ram + 0x600u, "TWO", 3u);
+    bytes[3] = 0x1eu;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ecx = 3u; cpu.edx = 0x600u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 3u ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != 0u)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF))) goto cleanup;
+    {
+        LARGE_INTEGER origin;
+        origin.QuadPart = 0;
+        if (!SetFilePointerEx(looked_up, origin, 0, FILE_BEGIN) ||
+            !ReadFile(looked_up, readback, sizeof(readback), &written, 0) ||
+            written != sizeof(readback) || memcmp(readback,
+                dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT ? "TWO" : "ONE",
+                sizeof(readback)) != 0) goto cleanup;
+    }
     bytes[3] = 0x02u;
     cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
     bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
@@ -535,6 +569,28 @@ static int whole_provider_pdb_lifecycle_regression(void)
         result.cpu_delta.gpr16_values[5u];
     if (token == 0u || !bx_ntvdm_boot_namespace_plane_v1_set_dta(&plane, &dta))
         goto cleanup;
+    /* demFileTimes option 1 mutates metadata.  Direct changes only the
+     * fixture-owned file; Readonly is rejected by the shared profile before
+     * SetFileTime can touch a host HANDLE. */
+    bytes[3] = 0x08u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ebx = 1u; cpu.ecx = 0u; cpu.edx = 0x21u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != 0u)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF))) goto cleanup;
     /* demFCBIO obtains its buffer through the registered DTA, never a host
      * pointer.  A read is legal in both modes and must complete as one
      * mechanical guest-RAM write with AX:BX size and CX transfer count. */

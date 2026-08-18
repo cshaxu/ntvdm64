@@ -1,6 +1,7 @@
 #include "bx_ntvdm_dem_handle_partition_v1.h"
 
 #define DEM_ERROR_INVALID_FUNCTION 1u
+#define DEM_ERROR_ACCESS_DENIED 5u
 #define DEM_ERROR_INVALID_HANDLE 6u
 #define DEM_ERROR_DISK_FULL 112u
 #define DEM_ERROR_WRITE_PROTECT 19u
@@ -110,6 +111,13 @@ int bx_ntvdm_dem_handle_partition_v1_dispatch(
         if (option == 0u) {
             if (!GetFileTime(handle, 0, 0, &file_time)) return error_result(boundary, result, GetLastError());
         } else if (option == 1u) {
+            /* Setting a timestamp is a metadata mutation.  Readonly must
+             * reject it at DEM's shared profile boundary rather than relying
+             * on a read-only Win32 HANDLE to fail after the host API call. */
+            if (bx_ntvdm_dem_file_view_v1_admit(&provider->file_view,
+                    BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA) !=
+                BX_NTVDM_DEM_FILE_VIEW_V1_OK)
+                return error_result(boundary, result, DEM_ERROR_ACCESS_DENIED);
             if (!DosDateTimeToFileTime((WORD)(cpu->edx & 0xffffu),
                     (WORD)(cpu->ecx & 0xffffu), &local_time) ||
                 !LocalFileTimeToFileTime(&local_time, &file_time)) return finish(boundary, result, 0u, 0, 0);
@@ -122,6 +130,13 @@ int bx_ntvdm_dem_handle_partition_v1_dispatch(
             bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, time) &&
             bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, date);
     }
+    /* demWrite, including its zero-length truncate form, is a namespace
+     * content mutation.  Enforce the profile before seeking or WriteFile so
+     * Readonly never reaches a host mutation API. */
+    if (service == 0x1eu && bx_ntvdm_dem_file_view_v1_admit(&provider->file_view,
+            BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT) !=
+        BX_NTVDM_DEM_FILE_VIEW_V1_OK)
+        return error_result(boundary, result, DEM_ERROR_ACCESS_DENIED);
     if (!seek_if_requested(handle, cpu)) return error_result(boundary, result, GetLastError());
     if (io_byte_count == 0 || (cpu->ecx & 0xffffu) > io_capacity ||
         ((cpu->ecx & 0xffffu) != 0u && io_bytes == 0)) return 0;

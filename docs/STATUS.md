@@ -27,6 +27,8 @@
 | Similar-Issue Sweep | All seven S1 owner groups, existing exact-window adapter bypasses, shared profile consumers, retained Virtual code, Overlay registration, no-op/invalid-service CF behavior, current host namespace and source-built package fixtures. |
 > **T229 S2 P1:** [whole-provider Direct/Readonly conformance evidence](etc/evidence/t229-s2-p1-dem-whole-provider-direct-readonly-conformance-001.md) verifies source-derived FCB and namespace paths without claiming whole-package completion.
 
+> **T229 S2 P2:** [handle mutation Readonly enforcement evidence](etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md) records source-backed pre-host rejection for `50:08` set-time and `50:1E` write/truncate.
+
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
