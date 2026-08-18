@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S48.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S49.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S48 -- source-built guest whole-lifecycle ledger implementation.**
+**Active: M0 T225 S49 -- whole post-entry real-mode mechanical-continuity audit.**
 
 ## Active Packet
 
@@ -12,19 +12,19 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S48, Ordinary Mode. |
-| Admission And Approval | S47 establishes the original/living owner map and proves the S46 single-entry record cannot identify selected MZ SHARE. This S admits one default-off whole-lifecycle observer and its paired fixture/integration evidence only. |
-| Objective | Replace the S46 first-match lifecycle record with a fixed-capacity copied ledger for every accepted `50:36`, `50:3C`, and `54:0B` event; validate repeated entry/termination/return ordering in a focused fixture and one bounded source-built Direct/Readonly pair. |
-| Non-goals | No BOP/provider/machine/guest behavior change; no guest-memory read or target recognition; no guest-byte change, synthetic child, host-child substitute, Bochs feature/device enablement, trace-led repair, or Direct/Readonly/Overlay semantic change. |
+| Identifier Mode | M0 T225 S49, Ordinary Mode. |
+| Admission And Approval | S47 requires a whole post-entry mechanical-continuity proof before any observer or repair; S48 supplies raw arrival order without target attribution. This S admits source/ABI/current-code reconciliation only. |
+| Objective | Reconcile original NTDOS EXEC post-50:36 real-mode stack, segment, far-return and image-layout contracts against adopted bx-core 16-bit mechanics and mantle staging; establish the first owner-qualified discontinuity or retain the bounded limitation. |
+| Non-goals | No BOP/provider implementation, guest-byte change, synthetic child, guest-memory inspection, selector-specific trace extension, Bochs intrusion, device enablement, or trace-selected repair. |
 | Reference Baseline | S44 whole path, S45 asset map, S46 paired fixture result, S47 source/ABI/failure map, source-built S8 artifacts and formal Ninja graph. |
-| Files And ABI Surface | bx-vdm default-off observation/fixture and CLI output only if required; fresh S48 staging root/evidence, Status and history. No provider, guest or machine ABI change. |
+| Files And ABI Surface | Research/evidence/Status only. No runtime ABI or behavior change. |
 | Applicable Rules | Execution, architecture, coding, source policy, recovery ladder, artifact provenance, deny-by-default and T225 anti-attrition. |
 | Verification | Formal incremental Ninja x64 /MT build; positive repeated-lifecycle and negative observer fixtures; fresh staging identity check; one bounded Direct/Readonly pair; governance verifier and diff check. |
 | Expected Markers | Fixed capacity/overflow behavior, source-event ordering evidence, default-off and non-mutating disposition, exact four-image provenance, equal Direct/Readonly input/result, and explicit unproven phase limits. |
 | Asset Needs | Source-built S8 stages, S47 source map, current formal graph and CLI profile schema. |
 | Reporting Requirements | Report raw lifecycle identity/order separately from any target inference; do not equate an entry record with target execution; do not use a later trace event to select a repair. |
 | Stop Conditions | Need guest-memory inspection, selector-to-target behavior, a BOP/provider/machine semantics change, a new Bochs intrusion, or an implementation selected from trace behavior. |
-| Exit Criteria | The ledger and focused fixtures are source/ABI-closed; paired native result distinguishes all reached lifecycle phases without target overclaim; Status/history are committed and pushed. |
+| Exit Criteria | One complete source/current owner map covers post-50:36 instruction stream, 16-bit stack/segment/far-return semantics and image layout; it either admits one whole owner package or records an owner-qualified limitation. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
 | Similar-Issue Sweep | Repeated `50:36`, entry-versus-target attribution, `50:3C` ordering, `54:0B` ordering/reentry, outcome validation, default-off cleanup, capacity/overflow, Direct/Readonly parity, and no guest-memory inspection. |
 
