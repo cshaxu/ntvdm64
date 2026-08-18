@@ -345,6 +345,9 @@
 | Similar-Issue Sweep | BOP macro/host dispatch, CMD service macro, EndInit, NTDOS dispatcher/return, COMMAND stub relocation and current typed resume. |
 
 > **T228 S1 P25 result:** [the BOP-return and INT21 termination source audit](etc/research/t228-s1-bop-return-and-int21-termination-source-audit-001.md) proves current `fault_rip + 4` is equivalent to the original CMD BOP continuation and separates it from the guest `INT 21 -> LeaveDos -> DOIRET -> FIRET` path. [P28](etc/research/t228-s1-firet-return-mechanics-correction-001.md) corrects the retained record's IRET interpretation: ordinary x86 `FIRET` normally uses `RETF 2`. The remaining owner is the complete original COMMAND/NTDOS transient lifecycle, including `LodCom` stub relocation/transfer; no BOP, provider or CPU repair is selected.
+
+> **T228 S1 P29 result:** [the EndInit reentry mechanics correction](etc/research/t228-s1-endinit-reentry-mechanics-correction-001.md) proves the first original `EndInit` pass has valid `UsedEnv=001Eh` and `TrnSize=0A14h`; `4444h` appears only on a later, invalid reentry to the deliberately discarded `EndInit`/`Pipe1` region. It supersedes the initial-environment interpretation of that value and narrows the live repair domain to the original COMMAND resident-stub relocation/termination-reload continuity plus the NTDOS parent return handoff. No BOP, adapter, guest-image, or Bochs semantic change is selected.
+
 ### T228 S1 P26 -- EndInit-to-LodCom generic transition provenance comparison
 
 | Field | Required record |
