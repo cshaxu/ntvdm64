@@ -45,6 +45,20 @@ int main(void)
     0xbf, 0xf0, 0xff,             // mov di,fff0h
     0xb9, 0x01, 0x00,             // mov cx,1
     0xf3, 0xa5,                   // rep movsw: source crosses FFFFh
+    0xb8, 0x34, 0x12,             // mov ax,1234h
+    0xa3, 0x00, 0x08,             // mov [0800h],ax
+    0xb8, 0x78, 0x56,             // mov ax,5678h
+    0xa3, 0x02, 0x08,             // mov [0802h],ax
+    0xbe, 0x03, 0x08,             // mov si,0803h
+    0xbf, 0x13, 0x08,             // mov di,0813h
+    0xb9, 0x04, 0x00,             // mov cx,4
+    0xfd,                         // std
+    0xf3, 0xa4,                   // rep movsb: reverse source/destination movement
+    0xfc,                         // cld
+    0xa1, 0x10, 0x08,             // mov ax,[0810h]
+    0xa3, 0xe0, 0xff,             // mov [ffe0h],ax
+    0xa1, 0x12, 0x08,             // mov ax,[0812h]
+    0xa3, 0xe2, 0xff,             // mov [ffe2h],ax
     0xbc, 0x01, 0x00,             // mov sp,0001h
     0xb8, 0x9a, 0xbc,             // mov ax,bc9ah
     0x50,                         // push ax: SS:ffffh word crossing
@@ -86,10 +100,14 @@ int main(void)
   request.enable_realmode_segment_limit_compatibility = 1u;
   request.capture_terminal_snapshot = 1u;
   if (!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
-      0xfff0u, 18u)) return 3;
+      0xffe0u, 34u)) return 3;
   status = bx_ntvdm_run_finite_bare_bytes(&request);
   {
     static const Bit8u expected[] = {
+      /* EndInit-equivalent STD/REP MOVSB result at 0810h, copied here. */
+      0x34, 0x12, 0x78, 0x56,
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+      0x00, 0x00, 0x00, 0x00,
       0x57, 0x34, 0x00, 0x00, 0x57, 0x34, 0x9a, 0xbc, 0x78,
       0x56, 0x34, 0x12, 0x34, 0x12, 0x78, 0x9a, 0xbc, 0x12
     };
