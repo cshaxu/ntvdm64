@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S39.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S41.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S39 -- selector-blind BOP snapshot observation implementation.**
+**Active: M0 T225 S41 -- resumed selector-blind BOP snapshot native observation.**
 
 ## Active Packet
 
@@ -14,21 +14,21 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S39, Ordinary Mode. |
-| Admission And Approval | S37 separates artifact identity, the original `$Exec` guest-image lifecycle and existing COMMAND host-service routing. The next owner is a complete selector-blind BOP snapshot observation implementation, not a singleton BOP repair. |
-| Objective | Implement the versioned default-off BOP-sequence snapshot recorder in bx-vdm/CLI, with exact copied-register ordering, fixed capacity and no semantic behavior changes. |
-| Non-goals | No BOP/provider implementation, no native trace execution, no guest/memory patch, no CPU segment repair, no COMMAND source-map reconstruction, and no selector-specific workaround. |
-| Reference Baseline | S37 provenance audit, original OpenNT NTDOS `$Exec` source, source-built COMMAND provenance, current bx-core/bx-mantle observation seams, and S35 paired evidence. |
-| Files And ABI Surface | One bx-vdm/CLI observation ABI, focused fixtures, boundary scans and Status/history/evidence. No provider, guest, profile or Bochs semantic change is admitted. |
-| Applicable Rules | rules/EXECUTION.md, source policy, source-recovery criterion, architecture boundaries, Bochs deny-by-default, and T225 anti-attrition rule. |
-| Verification | Build focused record/CLI fixtures, prove disabled and overflow behavior, scan architecture boundaries, then perform exactly one paired Direct/Readonly native observation with the existing option. |
-| Expected Markers | Versioned record and CLI contract, focused positive/negative/overflow tests, boundary scans, paired native result and explicit no-repair disposition. |
-| Asset Needs | S38 design, existing bx-vdm BOP-sequence/exception-observer sources, CLI option contract, current formal manifest/source tree and S35 inputs. |
-| Reporting Requirements | Report all ABI changes, fixtures, boundary evidence and the native observation separately; interpret `$Exec` only offline from source; no inferred repair. |
-| Stop Conditions | Need for any selector-specific behavior, guest read/write, provider/profile change, Bochs core/mantle change or changed normal CLI output. Stop and re-admit the smallest action. |
-| Exit Criteria | The v2 recorder passes focused/boundary/native evidence without changing non-observation execution semantics. |
+| Identifier Mode | M0 T225 S41, Ordinary Mode. |
+| Admission And Approval | S40 closes the existing mantle watchdog prerequisite. The owner has authorized autonomous, evidence-backed execution within this goal. S41 resumes only S39's previously admitted paired observer validation. |
+| Objective | Run exactly one bounded Direct/Readonly native pair using the implemented v2 selector-blind BOP snapshot recorder and record the resulting copied facts without inferring repair. |
+| Non-goals | No source change, BOP/provider implementation, selector-specific behavior, guest access/mutation, profile change, machine/Bochs change, OpenNT change, trace-led repair or additional native retries. |
+| Reference Baseline | S38 design, S39 implementation/attempt, S40 watchdog closure, formal S40 native executable and immutable S10 inputs. |
+| Files And ABI Surface | No runtime ABI/source surface. Disposable runtime logs plus Status/evidence/history only. |
+| Applicable Rules | rules/EXECUTION.md, T225 anti-attrition rule, architecture boundaries, and the S38 selector-blind observation contract. |
+| Verification | One sequential Direct/Readonly invocation with the same immutable inputs, `--observe-bop-sequence` and the existing 1,000,000-tick budget; record exit/output hashes and exact captured sequence facts. |
+| Expected Markers | Both runs return the existing budget or another typed terminal, emit v2 BOP sequence output, and preserve a fact-only/no-repair disposition. |
+| Asset Needs | S40 formal executable, S10 inputs and S39 observer ABI. |
+| Reporting Requirements | Distinguish observed facts from source interpretation; explicitly say whether `50:36` was reached. |
+| Stop Conditions | Any source or retry need, mismatch requiring semantics, missing native terminal, or request to infer/repair a BOP. Stop; record the result and re-admit separately. |
+| Exit Criteria | One bounded paired result is recorded and committed/pushed; no behavior beyond observation is claimed. |
 | Original Owner Request | “以新架构和三种模式为基础，全面实现跑通BOP表格的指令。” |
-| Similar-Issue Sweep | v1/v2 compatibility, generic copied event state, default-off/reset behavior, capacity/overflow, CLI formatting, bx-core/bx-mantle boundary, Direct/Readonly parity and no selector-specific path. |
+| Similar-Issue Sweep | Direct/Readonly parity, recorder default-off boundary, all selectors equally observed, result terminal, capacity/overflow and no observer-driven repair. |
 > **T225 S39 current attempt:** [the native attempt record](etc/evidence/t225-s39-native-observation-attempt-001.md) confirms formal v2 recorder/fixture/boundary build facts but records a non-convergent existing tick-budget run. It claims no BOP, COMMAND, guest, profile or Bochs repair and leaves S39 active.
 > **T225 S38 closure:** [the closure record](history/m0-t225-s38-closure-20260817.md) admits only the versioned default-off selector-blind BOP snapshot observer; it admits no guest, provider or Bochs semantic change.
 > **T225 S37 closure:** [the closure record](history/m0-t225-s37-closure-20260817.md) separates COMMAND artifact, guest-loader and host-service ownership; it admits only a whole guest-image continuity observation design.

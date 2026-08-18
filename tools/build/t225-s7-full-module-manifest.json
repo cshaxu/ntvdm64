@@ -420,6 +420,12 @@
       ]
     },
     {
+      "name": "t225-s40-mantle-watchdog-normal-loop-fixture",
+      "source": "tests/bx-mantle/t225_s40_mantle_watchdog_normal_loop_fixture.cc",
+      "libraries": ["bx-core", "bx-mantle"],
+      "platformLibraries": []
+    },
+    {
       "name": "t225-s30-segment-access-observation-fixture",
       "source": "tests/bx-mantle/t225_s30_segment_access_observation_fixture.cc",
       "libraries": ["bx-core", "bx-mantle"],
