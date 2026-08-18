@@ -291,6 +291,23 @@
 | Exit Criteria | Establish whether the complete `50:12/00/16/02[/42]` family is reached after map-supported `EndInit`, or explicitly reject that repair rung without a leaf task. |
 
 > **T228 S1 P22 result:** [the COMMAND transient BOP correlation](etc/evidence/t228-s1-command-transient-bop-correlation-result-001.md) records that the full DEM file lifecycle is accepted before `50:36`, while no member is observed after the two mapped `EndInit` `54:0F` calls in a non-overflow ring. It rejects an adapter file-family repair and transfers only the original guest COMMAND/NTDOS interrupt-return/control-state question.
+
+### T228 S1 P23 -- real/V86 IRET completion observation admission
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P23, Ordinary Mode. |
+| Admission And Approval | P22 rejects the next adapter file-family repair; standing owner authority permits a registered, minimal Bochs mechanical diagnostic only after native instrumentation and all recovery rungs are audited. |
+| Objective | Define the selector-blind, default-off real/V86 IRET completion observation profile needed to distinguish post-interrupt guest control-state divergence without changing execution. |
+| Non-goals | No BOP/provider work, interrupt/vector/function recognition, guest memory or stack-frame capture, CPU mutation, adapter callback, instrumentation activation, repair, or native trace. |
+| Reference Baseline | P19 owner map; P20 pre-delivery software-interrupt records; P22 BOP correlation; original BX_INSTR_FAR_BRANCH stub audit; removed historical BX-TRACE-050. |
+| Files And ABI Surface | Admission record and prospective BX-CORE-089 only. Any later implementation is limited to ctrl_xfer16.cc, ctrl_xfer32.cc, mantle copied ring/query, fixture and diagnostic manifest definition. |
+| Verification | Recovery-rung audit, registry-before-edit check, source scan, complete IRET16/IRET32/real/V86/protected/default/reset/wrap fixture plan, default-graph preservation. |
+| Exit Criteria | A source/ABI/failure record proves whether the restricted profile may be implemented; it makes no runtime claim and selects no repair. |
+| Stop Conditions | Any semantic filter, memory/frame capture, instrumentation subsystem activation, state/delivery change, adapter route, or leaf repair selection. |
+
+> **T228 S1 P23 admission:** [the real/V86 IRET observation admission](etc/research/t228-s1-real-v86-iret-observation-admission-001.md) records that current BX_INSTR_FAR_BRANCH is a no-op stub in the minimal graph and that neither OpenNT nor bx-vdm can expose this CPU boundary. It permits only the registered, default-off mechanical profile and no repair or native observation.
+
 > **T226 S7 closure:** [the formal system-package result](etc/evidence/t226-s7-system-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s7-closure-20260817.md) close the remaining 26 BOP identities at the local code-complete gate. They claim no debugger, WOW or machine runtime.
 > **T226 S6 closure:** [the formal Redirector result](etc/evidence/t226-s6-redir-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s6-closure-20260817.md) close the 50-row Redirector owner package at the local code-complete gate. They claim no network or IPC capability.
 > **T226 S5 closure:** [the formal DPMI result](etc/evidence/t226-s5-dpmi-code-complete-formal-result-001.md) and [closure record](history/m0-t226-s5-closure-20260817.md) close the 25-row DPMI owner package at the local code-complete gate. They claim no DPMI runtime or native guest execution.
