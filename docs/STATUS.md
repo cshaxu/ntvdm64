@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T225 S56.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T225 S57.** Its governing brief appears immediately below.
 
-**Active: M0 T225 S56 -- SoftPC real-mode segment-limit compatibility boundary closure.**
+**Active: M0 T225 S57 -- whole BOP owner/package and profile-disposition reconciliation.**
 
 ## Active Packet
 
@@ -12,25 +12,24 @@
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T225 S56, Ordinary Mode. |
-| Admission And Approval | S55 closes its source/current-route ledger with one source-proven mechanical candidate. Under the owner standing authorization for strict, registered Bochs mechanical exceptions, S56 admits the complete default-off SoftPC real/V86 limit-compatibility profile; no narrow address/path patch is permitted. |
-| Objective | Implement and verify the complete default-off SoftPC real/V86 segment-limit compatibility profile through bx-core/bx-mantle, retaining native protected-mode behavior and no guest-service semantics. |
-| Non-goals | No BOP/provider patch; no adapter CPU emulation; no COMMAND/DOS/PSP/EXEC repair; no guest-address special case; no device/firmware expansion; no protected-mode relaxation or native trace until each classified group closes. |
-| Reference Baseline | T225 S30 exact DS:FFFF word-read tuple; S55 startup/COMMAND stage ledger; OpenNT CCPU c_addr.c:limit_check; current Bochs access32.cc; current CPU5/P-MMX chaining configuration. |
-| Files And ABI Surface | bx-core CPU state, access.cc/access32.cc scalar paths; bx-mantle minimal-machine/machine-stage and fixture-private finite-run selection; one formal fixture/manifest entry. No bx-vdm, BOP, CLI or cross-layer ABI. |
-| Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, deny-by-default Bochs admission, and intrusion-register rules. |
-| Verification | The fresh formal CPU5/P-MMX x64 `/MT` grouped fixture proves disabled native rejection plus enabled scalar, RMW/string, stack and fetch/control continuation; S30 default-off regression passes. One paired Direct/Readonly native invocation is byte-identical but rejects current composition before machine stage (`terminal=2`, `detail=53`), so it is not CPU runtime evidence. |
-| Expected Markers | Explicit original SoftPC rule; exact current Bochs branches; a no-semantic-leak source scan; default-off negative result; defined stop boundary. |
-| Asset Needs | Retained OpenNT SoftPC CCPU source, adopted bx-core source, CPU5/P-MMX MSVC x64 /MT Ninja graph and existing immutable guest inputs. |
-| Reporting Requirements | Distinguish historical CCPU semantics from Bochs default semantics; record every classified access family, exact exception behavior, and whether the candidate remains bounded. |
-| Stop Conditions | The candidate needs protected-mode changes, selector/address/service vocabulary, adapter/callback/mapping behavior, a device, or any semantics not expressly present in the CCPU source. |
-| Exit Criteria | Every classified scalar, string/RMW, stack, fetch and control-transfer group has source/fixture evidence; the default-off core/mantle gate has full formal-graph and Direct/Readonly native evidence; no protected-mode or semantic leakage remains. |
+| Identifier Mode | M0 T225 S57, Ordinary Mode. |
+| Admission And Approval | S56 is closed by its grouped CPU evidence and paired Direct/Readonly machine-stage run. The standing owner direction requires whole owner-package work and rejects trace-led singleton BOP patches. |
+| Objective | Reconcile every retained OpenNT BOP selector/service identity to one current owner package, source-recovery rung, Direct/Readonly/Overlay disposition, and actual bound route or explicit absence. |
+| Non-goals | No new BOP provider, no trace-selected implementation, no Bochs CPU/device change, no guest-image edit, and no claim that a routing classification itself implements a service. |
+| Reference Baseline | OpenNT selector/service inventory; prior DEM, COMMAND, XMS/DPMI, Redirector, Debugger and system package maps; current `bx-vdm` composition; S56 paired native result. |
+| Files And ABI Surface | Documentation, inventory/ledger generators and read-only current-source audit only. No runtime source or ABI change without a separately admitted follow-on S. |
+| Applicable Rules | Execution, architecture, coding, source policy, source-recovery audit, BOP whole-package routing, mutation-profile and evidence rules. |
+| Verification | Reproducible full inventory, source/current route cross-check, Direct/Readonly/Overlay disposition sweep, stale-workaround classification, governance verification and diff review. |
+| Expected Markers | Every identity has one owner and disposition; no hidden fallback, duplicate owner, unclassified reachable route, or trace-derived implementation admission remains. |
+| Asset Needs | Retained OpenNT source and BOP inventory, current module manifest/source, prior package evidence, MSVC/Ninja only if a read-only source build identity check is needed. |
+| Reporting Requirements | Separate directly composable original source, adapter/shim, registered external intrusion and newly authored behavior; state exact host mutation disposition and deferred/unavailable semantics. |
+| Stop Conditions | Any item needs a new provider, changes a host mutation contract, exposes an unclassified Bochs semantic dependency, or contradicts existing package evidence; pause and admit a bounded package S. |
+| Exit Criteria | Complete current BOP ledger and owner-package implementation ordering exist; all active workarounds are retain/migrate/replace/delete classified; the next S can implement one whole package without trace-led scope selection. |
 | Original Owner Request | Implement the CLI NTVDM through minimal Bochs, preserve OpenNT ownership, support Direct and Readonly, retain Overlay compatibility, and avoid piecemeal trace-driven recovery. |
-| Similar-Issue Sweep | Real/V86/protected modes; read/write; byte/word/dword; expand-up/down; aligned/unaligned crossings; source-defined fault/continuation behavior. |
-
+| Similar-Issue Sweep | All selector families, callable and no-op slots, host mutations, CLI capabilities, Direct/Readonly/Overlay routes, startup/machine ownership and historical host dependencies. |
 > **T225 S56 SoftPC compatibility map:** [the source/ABI/failure map](etc/research/t225-s56-softpc-realmode-segment-limit-source-abi-failure-map-001.md) proves the observed real-mode DS:FFFF word rejection differs from the historical CCPU default and defines the admitted complete default-off bx-core/bx-mantle compatibility profile. It rejects any address/path patch and preserves protected-mode Bochs semantics.
 
-> **T225 S56 grouped result:** [the grouped result](etc/evidence/t225-s56-grouped-realmode-segment-limit-result-001.md) records all four CPU compatibility groups and their formal regressions. Its single paired native invocation rejects the current composition before machine-stage entry in both modes; it does not select a trace-led repair.
+> **T225 S56 closure:** [the grouped result](etc/evidence/t225-s56-grouped-realmode-segment-limit-result-001.md) and [closure record](history/m0-t225-s56-closure-20260817.md) complete the grouped CPU boundary and its paired Direct/Readonly native evidence. The later BOUND marker is observation only and selects no leaf repair.
 
 > **T225 S55 closure:** [the closure record](history/m0-t225-s55-closure-20260817.md) completes the startup/COMMAND/EXEC source-current route and transfers only the registered SoftPC real-mode segment-limit compatibility boundary. It admits no BOP, DOS, COMMAND, adapter or guest-address repair.
 > **T225 S55 paired integration:** [the result](etc/evidence/t225-s55-full-package-paired-integration-result-001.md) records a fresh full-graph Direct/Readonly run with byte-identical budget-terminal output. It neither proves guest child reach nor selects a leaf repair.

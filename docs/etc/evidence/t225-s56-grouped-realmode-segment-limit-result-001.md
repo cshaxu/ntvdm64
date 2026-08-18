@@ -37,18 +37,36 @@ Passed:
 ## One paired native observation
 
 The locked original-toolchain source-built NTIO, NTDOS, COMMAND and target
-inputs were staged once.  The current native CLI was then invoked once in
-Direct and once in Readonly mode, with identical inputs and a 1,000,000-tick
-budget and no BOP, first-fault or instruction-history observation option.
+inputs were staged once.  The CLI's existing startup-configuration contract
+also requires the staged `fixture-config.nt` and `fixture-autoexec.nt` to be
+passed through `NTDOS64_STARTUP_CONFIG_SOURCE` and
+`NTDOS64_STARTUP_AUTOEXEC_SOURCE`.  The native CLI was invoked once in each
+supported mode with the same inputs and a 1,000,000-tick budget; no BOP,
+first-fault or instruction-history observation option was enabled.
 
-| Mode | Exit | Terminal output SHA-256 | stderr SHA-256 | Result |
-| --- | ---: | --- | --- | --- |
-| Direct | 3 | `cffc211f1f8953e7bbcbb925385adc735269681f38a38e3cd07839e8317bd9c2` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `terminal=2 detail=53 lifecycle=3 presentation=3` |
-| Readonly | 3 | `cffc211f1f8953e7bbcbb925385adc735269681f38a38e3cd07839e8317bd9c2` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `terminal=2 detail=53 lifecycle=3 presentation=3` |
+| Mode | Exit | stdout SHA-256 | stderr SHA-256 | stderr bytes | Terminal |
+| --- | ---: | --- | --- | ---: | --- |
+| Direct | 4 | `6442c836088d95943d52e506e84895fecddfad88647e8d324da1979f592637f8` | `39bbea117986b48b8eca12a26bf767b704c5ad67a1861e289e78f68049271607` | 383 | `terminal=4 detail=0 lifecycle=5 presentation=5` |
+| Readonly | 4 | `6442c836088d95943d52e506e84895fecddfad88647e8d324da1979f592637f8` | `39bbea117986b48b8eca12a26bf767b704c5ad67a1861e289e78f68049271607` | 383 | `terminal=4 detail=0 lifecycle=5 presentation=5` |
 
-The engine maps a failed composition install to terminal kind 2 before machine
-stage creation.  Therefore this paired result is byte-identical pre-machine
-composition rejection; it neither exercises nor disproves the newly completed
-CPU profile, and it does not authorize a follow-on BOP, guest or CPU patch.
-S56 remains active only because its required native machine-stage evidence has
-not yet been admitted by a successfully installed current composition.
+Both runs installed composition, entered the native machine stage, reached the
+finite execution budget, and emitted the same original Bochs marker:
+`BOUND_GdMa: fails bounds test`.  They are byte-identical across Direct and
+Readonly.
+
+An initial unconfigured invocation returned `terminal=2 detail=53` in both
+modes.  The stage enum identifies 53 as
+`STARTUP_CONFIGURATION_BIND`; the audit found that the invocation had staged
+but not supplied the two required startup-configuration environment variables.
+The configured rerun above supersedes that incomplete procedure.  It is not a
+CPU, BOP, guest, or composition implementation defect.
+
+## Closure limitation and transfer
+
+The formal fixture establishes the full admitted mechanical profile and the
+paired native run proves it can enter the current machine composition in both
+supported modes.  The later `BOUND` marker is a single native observation, not
+a new leaf implementation admission.  S56 therefore closes its CPU boundary;
+the next S must globally reconcile the current BOP owner/package disposition
+before any further provider work, using trace only after a selected package
+has been completed.
