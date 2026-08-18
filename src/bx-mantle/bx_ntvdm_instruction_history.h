@@ -25,6 +25,7 @@ struct bx_ntvdm_instruction_history_record_v1 {
   uint16_t cs;
   uint16_t ss;
   uint16_t sp;
+  uint16_t bp;
   uint16_t reserved0;
 };
 

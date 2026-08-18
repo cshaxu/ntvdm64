@@ -378,7 +378,7 @@ int wmain(int argc, wchar_t **argv)
         {
             struct bx_ntvdm_machine_stage_v1_terminal_cs_provenance transition;
             if (bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_copy(&transition)) {
-                wprintf(L"ntdos64-native: budget-terminal-cs-transition previous=%04x:%08x current=%04x:%08x predecessor-valid=%u successor-valid=%u stack-valid=%u predecessor=", transition.value.transition.previous.cs, (unsigned)transition.value.transition.previous.rip, transition.value.transition.current.cs, (unsigned)transition.value.transition.current.rip, transition.value.predecessor_valid, transition.value.successor_valid, transition.value.stack_valid);
+                wprintf(L"ntdos64-native: budget-terminal-cs-transition previous=%04x:%08x bp=%04x current=%04x:%08x bp=%04x predecessor-valid=%u successor-valid=%u stack-valid=%u predecessor=", transition.value.transition.previous.cs, (unsigned)transition.value.transition.previous.rip, transition.value.transition.previous.bp, transition.value.transition.current.cs, (unsigned)transition.value.transition.current.rip, transition.value.transition.current.bp, transition.value.predecessor_valid, transition.value.successor_valid, transition.value.stack_valid);
                 for (provenance_index = 0u; provenance_index < BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES; ++provenance_index) wprintf(L"%02x", transition.value.predecessor_bytes[provenance_index]);
                 wprintf(L" successor=");
                 for (provenance_index = 0u; provenance_index < BX_NTVDM_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES; ++provenance_index) wprintf(L"%02x", transition.value.successor_bytes[provenance_index]);
