@@ -369,6 +369,18 @@
 | Similar-Issue Sweep | Outer DEM token generation, backend-token mapping, seek origins, command/target path identity, Direct/Readonly parity and stale handles. |
 
 > **T228 S1 P30 result:** [the concurrent namespace and COMMAND bootstrap result](etc/evidence/t228-s1-dem-concurrent-namespace-and-command-bootstrap-result-001.md) records the formal build, focused repairs and source-built attribution. Commit `6791e93d` is pushed. It closes this DEM owner defect only; the COMMAND/NTDOS resident-stub relocation/termination-reload continuity remains active.
+`r`n### T228 S1 P31 -- COMMAND transient arena-persistence source audit
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T228 S1 P31, Ordinary Mode. |
+| Admission And Approval | P26/P29 leave one complete guest COMMAND/NTDOS transient lifecycle question. This source-only part checks the original allocation persistence rule before any new mechanic or repair is considered. |
+| Objective | Determine whether original `EndInit`/`LodCom` relies on preserved DOS arena payload, and classify the observed zero transient without changing runtime code. |
+| Non-goals | No diagnostic implementation, BOP/provider work, guest-image change, adapter MCB/PSP synthesis, Bochs change, runtime retry, or repair selection. |
+| Verification | Original COMMAND and NTDOS source cross-read; P26/P29 comparison; source-body scan for allocation/deallocation payload clearing. |
+| Exit Criteria | Record whether allocation persistence is an original contract and retain only the complete guest owner boundary for any later observation. |
+
+> **T228 S1 P31 result:** [the arena-persistence source audit](etc/research/t228-s1-command-transient-arena-persistence-source-audit-001.md) proves original `$ALLOC`/`$DEALLOC` do not clear payload and that COMMAND expressly depends on preserved transient bytes. The observed zero target remains a complete guest COMMAND/NTDOS transient/arena lifecycle question; no BOP, adapter, profile, or Bochs repair is selected.
 ### T228 S1 P26 -- EndInit-to-LodCom generic transition provenance comparison
 
 | Field | Required record |

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1901 |
+| Documentation records | 1902 |
 | --- | --- |
-| Generated UTC | 2026-08-18T22:02:34Z |
+| Generated UTC | 2026-08-18T22:10:05Z |
 
 ## Entries
 
@@ -1055,6 +1055,7 @@ content-divergent entries.
 | etc/research/t228-s1-bop-return-and-int21-termination-source-audit-001.md | indexed supporting material | 230c9d52268fcae788872316d34e7f43a236a5361207647ed5939372fd7bb5ef |
 | etc/research/t228-s1-budget-terminal-position-diagnostic-admission-001.md | indexed supporting material | 167b3d86d514fb1ea025e6714fba3131cd7c6855f09aad265e9fa3e3a8270f82 |
 | etc/research/t228-s1-command-headcall-contract-map-001.md | indexed supporting material | c05dcae985f5de49aaabd44af06096c5932b6433371a8f68d8d1379316a83296 |
+| etc/research/t228-s1-command-transient-arena-persistence-source-audit-001.md | indexed supporting material | 34c4d757cf68358a8e869be7dfd669210c84febbb36d44a1f172c60453697a70 |
 | etc/research/t228-s1-command-transient-ownership-boundary-correction-001.md | indexed supporting material | 7d623ed0752668c6e74a2e18b6e32e6892563695a2b32df1194e11d3fabe810c |
 | etc/research/t228-s1-endinit-ntdos-mcb-transient-source-abi-failure-map-001.md | indexed supporting material | 8436c60e3791580004c2e5f0d1f1b125b1f29157aac9ff6155b4fc7982ddd928 |
 | etc/research/t228-s1-endinit-reentry-mechanics-correction-001.md | indexed supporting material | 6ea55d23ee82832964a2f127d4b9fa0ea0cf23a443d6208f81edffe155701c85 |
@@ -1915,7 +1916,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a59a8d7466260179aedf31b48955a09b535215a2ed5cf6171638fbd490c6ea35 |
+| STATUS.md | principal control document | 8eed714ce911745058ebd5fb762b7b9cb0c271b6f0b14b09a2870d4423054183 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
