@@ -2,9 +2,9 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T226 S1.** Its governing brief appears immediately below.
+> **Current effective packet: M0 T226 S2.** Its governing brief appears immediately below.
 
-**Active: M0 T226 S1 -- BOP package conformance foundation.**
+**Active: M0 T226 S2 -- DEM direct-host namespace/file/FCB/search/state package.**
 
 ## Active Packet
 
