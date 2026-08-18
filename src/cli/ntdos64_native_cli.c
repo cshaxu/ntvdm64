@@ -256,6 +256,7 @@ int wmain(int argc, wchar_t **argv)
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
     if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(1u);
+    if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_enable(1u);
 #endif
     if (observe_first_fault) {
         bx_ntvdm_mantle_first_fault_observation_enable(1);
@@ -272,6 +273,7 @@ int wmain(int argc, wchar_t **argv)
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(0u);
+        if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_enable(0u);
 #endif
         if (observe_first_fault) {
             bx_ntvdm_mantle_segment_access_observation_enable(0);
@@ -292,6 +294,7 @@ int wmain(int argc, wchar_t **argv)
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(0u);
+        if (observe_terminal_provenance) bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_enable(0u);
 #endif
         if (observe_first_fault) {
             bx_ntvdm_mantle_segment_access_observation_enable(0);
@@ -372,6 +375,17 @@ int wmain(int argc, wchar_t **argv)
             for (provenance_index = 0u; provenance_index < BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES; ++provenance_index) wprintf(L"%02x", provenance.stack_bytes[provenance_index]);
             wprintf(L"\n");
         } else wprintf(L"ntdos64-native: budget-terminal-provenance unavailable\n");
+        {
+            struct bx_ntvdm_machine_stage_v1_terminal_cs_provenance transition;
+            if (bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_copy(&transition)) {
+                wprintf(L"ntdos64-native: budget-terminal-cs-transition previous=%04x:%08x current=%04x:%08x predecessor-valid=%u stack-valid=%u predecessor=", transition.value.transition.previous.cs, (unsigned)transition.value.transition.previous.rip, transition.value.transition.current.cs, (unsigned)transition.value.transition.current.rip, transition.value.predecessor_valid, transition.value.stack_valid);
+                for (provenance_index = 0u; provenance_index < BX_NTVDM_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES; ++provenance_index) wprintf(L"%02x", transition.value.predecessor_bytes[provenance_index]);
+                wprintf(L" stack=");
+                for (provenance_index = 0u; provenance_index < BX_NTVDM_INSTRUCTION_HISTORY_V1_STACK_BYTES; ++provenance_index) wprintf(L"%02x", transition.value.stack_bytes[provenance_index]);
+                wprintf(L"\n");
+            } else wprintf(L"ntdos64-native: budget-terminal-cs-transition unavailable\n");
+            bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_enable(0u);
+        }
         bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(0u);
     }
 #endif

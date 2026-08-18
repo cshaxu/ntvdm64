@@ -84,6 +84,18 @@ struct bx_ntvdm_machine_stage_v1_terminal_provenance {
   uint8_t stack_valid;
   uint16_t reserved1;
 };
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_CS_PROVENANCE_MAGIC UINT32_C(0x42584350)
+#define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_CS_PROVENANCE_VERSION UINT32_C(1)
+
+/* An already captured BX-MANTLE-075 record, copied only after the existing
+ * watchdog return in an explicit provenance diagnostic graph. */
+struct bx_ntvdm_machine_stage_v1_terminal_cs_provenance {
+  uint32_t magic;
+  uint32_t abi_version;
+  uint32_t struct_bytes;
+  uint32_t valid;
+  struct bx_ntvdm_instruction_history_provenance_v1 value;
+};
 
 /* A real-mode control-transfer delta.  It deliberately excludes general
  * registers, flags, descriptor caches, and any machine object. */
@@ -181,6 +193,10 @@ void bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable(
   uint32_t enabled);
 int bx_ntvdm_machine_stage_v1_terminal_provenance_observation_copy(
   struct bx_ntvdm_machine_stage_v1_terminal_provenance *provenance);
+void bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_enable(
+  uint32_t enabled);
+int bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_cs_provenance *provenance);
 
 #ifdef __cplusplus
 }

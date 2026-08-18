@@ -29,6 +29,9 @@ static struct bx_ntvdm_machine_stage_v1_terminal_history
 static uint32_t bx_ntvdm_machine_stage_v1_terminal_provenance_enabled;
 static struct bx_ntvdm_machine_stage_v1_terminal_provenance
   bx_ntvdm_machine_stage_v1_terminal_provenance;
+static uint32_t bx_ntvdm_machine_stage_v1_terminal_cs_provenance_enabled;
+static struct bx_ntvdm_machine_stage_v1_terminal_cs_provenance
+  bx_ntvdm_machine_stage_v1_terminal_cs_provenance;
 
 static void bx_ntvdm_machine_stage_v1_terminal_position_clear(void)
 {
@@ -64,6 +67,18 @@ static void bx_ntvdm_machine_stage_v1_terminal_provenance_clear(void)
     BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_PROVENANCE_VERSION;
   bx_ntvdm_machine_stage_v1_terminal_provenance.struct_bytes =
     sizeof(bx_ntvdm_machine_stage_v1_terminal_provenance);
+}
+
+static void bx_ntvdm_machine_stage_v1_terminal_cs_provenance_clear(void)
+{
+  memset(&bx_ntvdm_machine_stage_v1_terminal_cs_provenance, 0,
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_cs_provenance));
+  bx_ntvdm_machine_stage_v1_terminal_cs_provenance.magic =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_CS_PROVENANCE_MAGIC;
+  bx_ntvdm_machine_stage_v1_terminal_cs_provenance.abi_version =
+    BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_CS_PROVENANCE_VERSION;
+  bx_ntvdm_machine_stage_v1_terminal_cs_provenance.struct_bytes =
+    sizeof(bx_ntvdm_machine_stage_v1_terminal_cs_provenance);
 }
 
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
@@ -275,6 +290,7 @@ extern "C" void bx_ntvdm_machine_stage_v1_terminal_provenance_observation_enable
   bx_ntvdm_machine_stage_v1_terminal_provenance_enabled = 0u;
 #endif
   bx_ntvdm_machine_stage_v1_terminal_provenance_clear();
+  bx_ntvdm_machine_stage_v1_terminal_cs_provenance_clear();
 }
 
 extern "C" int bx_ntvdm_machine_stage_v1_terminal_provenance_observation_copy(
@@ -284,6 +300,33 @@ extern "C" int bx_ntvdm_machine_stage_v1_terminal_provenance_observation_copy(
   if (provenance == 0 || !bx_ntvdm_machine_stage_v1_terminal_provenance_enabled ||
       !bx_ntvdm_machine_stage_v1_terminal_provenance.valid) return 0;
   *provenance = bx_ntvdm_machine_stage_v1_terminal_provenance;
+  return 1;
+#else
+  (void) provenance;
+  return 0;
+#endif
+}
+
+extern "C" void bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_enable(
+  uint32_t enabled)
+{
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+  bx_ntvdm_machine_stage_v1_terminal_cs_provenance_enabled = enabled == 1u;
+#else
+  (void) enabled;
+  bx_ntvdm_machine_stage_v1_terminal_cs_provenance_enabled = 0u;
+#endif
+  bx_ntvdm_machine_stage_v1_terminal_cs_provenance_clear();
+}
+
+extern "C" int bx_ntvdm_machine_stage_v1_terminal_cs_provenance_observation_copy(
+  struct bx_ntvdm_machine_stage_v1_terminal_cs_provenance *provenance)
+{
+#if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
+  if (provenance == 0 ||
+      !bx_ntvdm_machine_stage_v1_terminal_cs_provenance_enabled ||
+      !bx_ntvdm_machine_stage_v1_terminal_cs_provenance.valid) return 0;
+  *provenance = bx_ntvdm_machine_stage_v1_terminal_cs_provenance;
   return 1;
 #else
   (void) provenance;
@@ -432,6 +475,10 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
       !bx_ntvdm_mantle_first_fault_observation_observed() &&
       !bx_ntvdm_mantle_generic_ud_stop_observed())
     bx_ntvdm_machine_stage_v1_terminal_provenance_capture();
+  if (bx_ntvdm_machine_stage_v1_terminal_cs_provenance_enabled &&
+      bx_ntvdm_mantle_instruction_history_v1_get_latest_cs_provenance(
+        &bx_ntvdm_machine_stage_v1_terminal_cs_provenance.value))
+    bx_ntvdm_machine_stage_v1_terminal_cs_provenance.valid = 1u;
 #endif
   if (bx_ntvdm_mantle_first_fault_observation_observed())
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_FIRST_FAULT_STOP;
