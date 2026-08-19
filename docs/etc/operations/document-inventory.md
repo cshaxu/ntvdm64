@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1933 |
+| Documentation records | 1934 |
 | --- | --- |
-| Generated UTC | 2026-08-19T00:28:17Z |
+| Generated UTC | 2026-08-19T00:51:01Z |
 
 ## Entries
 
@@ -181,12 +181,13 @@ content-divergent entries.
 | etc/evidence/t228-s1-terminal-provenance-result-001.md | indexed supporting material | ec8b1dd65f40f595d0c42739ad6185bdfbb833ea2df86ea90ba0a813883a86c7 |
 | etc/evidence/t228-s1-transition-successor-provenance-result-001.md | indexed supporting material | 225cb28a2d24ea8cf8c4ff31edc2601bfc8ceb1d3a42e11eb68840c98a768f61 |
 | etc/evidence/t229-s1-dem-complete-source-abi-failure-audit-result-001.md | indexed supporting material | a926a4b8d368112f73c26cd543704f96916d79bceeaf03728cb0022fd2696ab0 |
-| etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md | indexed supporting material | 63c02cf28f199e246dfffa3f0df6e451b0ac362897bf30c5870d85eb3896be33 |
+| etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md | indexed supporting material | 3b7ce09f1aadac8871e6d22b3223125cd3212d2da77f380a2705f60285a411f0 |
 | etc/evidence/t229-s2-p10-dem-read-direct-readonly-001.md | indexed supporting material | 889b052699568de6c0f5b341ef2b585aa070ba0e165d906aca2539744b5146ff |
 | etc/evidence/t229-s2-p11-dem-commit-direct-readonly-001.md | indexed supporting material | 8f571894cfc8210450f66bf1185b2e9061456f115eb8ce2a760efa9da34f2ede |
 | etc/evidence/t229-s2-p12-dem-handle-cursor-eof-direct-readonly-001.md | indexed supporting material | 6dc727fde7aef42386b668cce160087280913489f11ff68d47d18adbf429ad06 |
 | etc/evidence/t229-s2-p13-dem-create-fcb-direct-readonly-001.md | indexed supporting material | e2d16fe8f3a2589fb35ba7f4e124a4dae985ae51d3758cb61f4e9ed144146fa7 |
 | etc/evidence/t229-s2-p14-dem-rename-fcb-direct-readonly-001.md | indexed supporting material | c5c25f3a398254e394a5ce10a9cbdd999fc29e1dafd845d13a01afcb25663b35 |
+| etc/evidence/t229-s2-p15-dem-path-search-direct-readonly-001.md | indexed supporting material | 7ec50fe98c9ceab65b6fb36633eec23c326440a1e2916380de8fc4e9104c4991 |
 | etc/evidence/t229-s2-p1-dem-whole-provider-direct-readonly-conformance-001.md | indexed supporting material | 8e7015badd3ab6f3ab372ba59544c65917d05ef3d3a99d4533eebdfa5a2dd65e |
 | etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md | indexed supporting material | 2134dbbf4ff68d4412124616f1fb6167d69333bb54b86f47f5bd661a0af24c6c |
 | etc/evidence/t229-s2-p4-dem-open-create-result-abi-correction-001.md | indexed supporting material | 7d971223bc554754b156fb3bd4badabf631eb5dff0ca38aa9d3c5a363656fb98 |
@@ -1947,7 +1948,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4ace121dc22ed4226551a0ae726f8dad1c6eca731f6348a304079e6db2edd473 |
+| STATUS.md | principal control document | e18346efbfa8801aadd36ea358fe08de3cc56722306ec1087bea4b2f46955f05 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

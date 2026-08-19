@@ -37,6 +37,8 @@
 
 > **T229 S2 P13:** [demCreateFCB Direct/Readonly conformance evidence](etc/evidence/t229-s2-p13-dem-create-fcb-direct-readonly-001.md) records the source-shaped FCB result ABI and shared pre-host Readonly refusal.
 
+> **T229 S2 P15:** [DEM pathname search Direct/Readonly conformance evidence](etc/evidence/t229-s2-p15-dem-path-search-direct-readonly-001.md) records source-shaped DTA FindFirst/FindNext continuation and the `AX=18`, CF no-match terminal.
+
 > **T229 S2 P14:** [demRenameFCB Direct/Readonly conformance evidence](etc/evidence/t229-s2-p14-dem-rename-fcb-direct-readonly-001.md) records the source-shaped two-path FCB rename and pre-enumeration Readonly refusal.
 
 > **T229 S2 P9:** [demChMod Direct/Readonly conformance evidence](etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md) records the source-derived CX result-ABI repair and metadata policy split.

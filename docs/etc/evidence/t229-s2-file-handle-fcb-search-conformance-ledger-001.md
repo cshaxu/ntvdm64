@@ -26,9 +26,9 @@ ledger: a typed route is not counted as semantic completion.
 | `50:06` | `demDeleteDir` | P — Direct remove | source error variants |
 | `50:07` | `demDeleteFCB` | P — Direct wildcard delete, Readonly refusal | extended-FCB/attribute variants |
 | `50:08` | `demFileTimes` | P — Direct set, pre-host Readonly refusal | get/device-time variants |
-| `50:09` | `demFindFirst` | R | host DTA first-search matrix |
+| `50:09` | `demFindFirst` | P — Direct/Readonly DTA first/next and no-match terminal | stale-DTA/attribute variants |
 | `50:0A` | `demFindFirstFCB` | P — checked FCB search transaction | host enumeration/extended-FCB matrix |
-| `50:0B` | `demFindNext` | R | DTA continuation/stale-state matrix |
+| `50:0B` | `demFindNext` | P — Direct/Readonly DTA continuation after FindFirst | stale-DTA/attribute variants |
 | `50:0C` | `demFindNextFCB` | P — continuation/no-more-files | host enumeration variant |
 | `50:12` | `demOpen` | P — whole-provider token/size/pipe ABI | share/access and pipe-token variants |
 | `50:16` | `demRead` | P — checked output, ZF cursor continuation and EOF | host-read error variants |
@@ -58,6 +58,7 @@ ledger: a typed route is not counted as semantic completion.
 - P6: `demCreateNew` Direct collision and pre-host Readonly refusal.
 - P7: `demDelete` Direct deletion and pre-host Readonly refusal.
 - P8: `demRename` Direct two-path rename and pre-host Readonly refusal.
+- P15: `demFindFirst`/`demFindNext` Direct/Readonly DTA continuation and no-match terminal.
 
 ## Completion rule
 

@@ -615,9 +615,16 @@
       "source": "tests/bx-vdm/bx_ntvdm_readonly_namespace_test.c",
       "libraries": ["bx-vdm"],
       "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
-    },    {
+    },
+    {
       "name": "t226-s2-dem-path-search-conformance-fixture",
       "source": "tests/bx-vdm/bx_ntvdm_dem_path_search_service_v1_test.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t229-s2-dem-whole-provider-session-fixture",
+      "source": "tests/bx-vdm/bx_ntvdm_dem_whole_provider_session_v1_test.c",
       "libraries": ["bx-vdm"],
       "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     },

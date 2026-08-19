@@ -73,12 +73,20 @@ static void profile_initialize(byob_profile_selection *profile)
     profile->command_placement.drive_index = 2u; profile->has_command_placement = 1u;
     memcpy(profile->target_placement.path, L"\\TARGET.COM", sizeof(L"\\TARGET.COM"));
     profile->target_placement.drive_index = 2u; profile->has_target_placement = 1u;
+    profile->declared_target_count = 1u;
+    memcpy(profile->declared_targets[0].component.file_name, L"TARGET.COM", sizeof(L"TARGET.COM"));
+    memcpy(profile->declared_targets[0].placement.path, L"\\TARGET.COM", sizeof(L"\\TARGET.COM"));
+    profile->declared_targets[0].placement.drive_index = 2u;
     memcpy(profile->target.file_name, L"TARGET.COM", sizeof(L"TARGET.COM"));
     memcpy(profile->config_file.path, L"\\CONFIG.SYS", sizeof(L"\\CONFIG.SYS"));
     profile->config_file.materialization = BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1;
     memcpy(profile->autoexec_file.path, L"\\AUTOEXEC.BAT", sizeof(L"\\AUTOEXEC.BAT"));
     profile->autoexec_file.materialization = BYOB_GUEST_BOOT_FILE_EMPTY_V1;
     profile->has_guest_boot_files = 1u; profile->has_guest_search_metadata = 1u;
+    profile->command_metadata.attributes = 0x20u; profile->target_metadata.attributes = 0x20u;
+    profile->command_metadata.dos_date = 1u; profile->target_metadata.dos_date = 1u;
+    profile->config_metadata.attributes = 0x20u; profile->autoexec_metadata.attributes = 0x20u;
+    profile->config_metadata.dos_date = 1u; profile->autoexec_metadata.dos_date = 1u;
     profile->guest_display_state = BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1;
     profile->ntdos.bytes = 1u;
     memcpy(profile->ntdos.file_name, L"NTDOS.SYS", sizeof(L"NTDOS.SYS"));
@@ -123,7 +131,7 @@ static int cf_ax(const bx_ntvdm_cpu_result_v2 *result, uint16_t ax)
         result->eflags_values == BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF;
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     static const uint32_t modes[] = {
         BX_NTVDM_MUTATION_MODE_V1_DIRECT,
@@ -138,6 +146,7 @@ int main(void)
     bx_ntvdm_host_namespace_v1 host; wchar_t root[4] = L"C:\\"; DWORD type;
     wchar_t system_directory[MAX_PATH], temporary_path[MAX_PATH]; char fcb_host_path[MAX_PATH], direct_temp_oem[MAX_PATH], direct_file_oem[MAX_PATH], direct_renamed_oem[MAX_PATH], direct_dir_oem[MAX_PATH], direct_fcb_delete_pattern[MAX_PATH], direct_fcb_rename_pattern[MAX_PATH], direct_fcb_rename_template[MAX_PATH], direct_fcb_delete_one[MAX_PATH], direct_fcb_delete_two[MAX_PATH], direct_fcb_rename_one[MAX_PATH], direct_fcb_rename_two[MAX_PATH], direct_fcb_rename_out_one[MAX_PATH], direct_fcb_rename_out_two[MAX_PATH], direct_missing_oem[MAX_PATH]; UINT system_length, temporary_length;
     uint32_t index;
+    int search_only = argc == 2 && strcmp(argv[1], "search-only") == 0;
     profile_initialize(&profile); type = GetDriveTypeW(root);
     if (type == DRIVE_NO_ROOT_DIR || type == DRIVE_UNKNOWN) return 1;
     system_length = GetSystemDirectoryW(system_directory, MAX_PATH);
@@ -186,21 +195,22 @@ int main(void)
     if (!bx_ntvdm_host_drive_snapshot_v1_apply(1u << 2u, drive_types, 0u, 0u, &drives) ||
         !bx_ntvdm_host_namespace_v1_initialize(&host, &drives)) return 2;
     for (index = 0u; index < sizeof(modes) / sizeof(modes[0]); ++index) {
+        if (search_only && index >= 2u) break;
         bx_ntvdm_boot_namespace_plane_v1 plane; bx_ntvdm_dem_package_session_v1 session;
         bx_ntvdm_mutation_profile_v1 mutation; bx_ntvdm_cpu_state_v1 cpu;
         bx_ntvdm_cpu_result_v2 result; uint32_t token;
         bx_ntvdm_mutation_profile_v1_initialize(&mutation, modes[index]);
-        if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
-            !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) ||
-            !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu) ||
-            !bx_ntvdm_boot_namespace_plane_v1_initialize(&plane, &ntdos, &command, &target, 0, &profile) ||
-            !bx_ntvdm_dem_package_session_v1_initialize(&session, &plane) ||
-            !bx_ntvdm_dem_package_session_v1_set_mutation_profile(&session, &mutation) ||
-            !bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&session, &drives) ||
-            !bx_ntvdm_dem_package_session_v1_set_drive_view_host_namespace(&session, &host) ||
-            session.has_whole_provider || session.drive_view_host_namespace != &host ||
-            !bx_ntvdm_dem_package_session_v1_set_host_namespace(&session, &host) ||
-            !session.has_whole_provider) { bx_ntvdm_host_namespace_v1_release(&host); return 10 + (int)index; }
+        if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu)) { bx_ntvdm_host_namespace_v1_release(&host); return 10 + (int)index; }
+        if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu)) { bx_ntvdm_host_namespace_v1_release(&host); return 14 + (int)index; }
+        if (!bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation, BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu)) { bx_ntvdm_host_namespace_v1_release(&host); return 18 + (int)index; }
+        if (!bx_ntvdm_boot_namespace_plane_v1_initialize(&plane, &ntdos, &command, &target, 0, &profile)) { bx_ntvdm_host_namespace_v1_release(&host); return 22 + (int)index; }
+        if (!bx_ntvdm_dem_package_session_v1_initialize(&session, &plane)) { bx_ntvdm_host_namespace_v1_release(&host); return 26 + (int)index; }
+        if (!bx_ntvdm_dem_package_session_v1_set_mutation_profile(&session, &mutation)) { bx_ntvdm_host_namespace_v1_release(&host); return 30 + (int)index; }
+        if (!bx_ntvdm_dem_package_session_v1_set_drive_snapshot(&session, &drives)) { bx_ntvdm_host_namespace_v1_release(&host); return 34 + (int)index; }
+        if (!bx_ntvdm_dem_package_session_v1_set_drive_view_host_namespace(&session, &host)) { bx_ntvdm_host_namespace_v1_release(&host); return 38 + (int)index; }
+        if (session.has_whole_provider || session.drive_view_host_namespace != &host) { bx_ntvdm_host_namespace_v1_release(&host); return 42 + (int)index; }
+        if (!bx_ntvdm_dem_package_session_v1_set_host_namespace(&session, &host)) { bx_ntvdm_host_namespace_v1_release(&host); return 46 + (int)index; }
+        if (!session.has_whole_provider) { bx_ntvdm_host_namespace_v1_release(&host); return 50 + (int)index; }
         memset(ram, 0, sizeof(ram));
         /* Register the bounded DTA/PDB transport once, then exercise a real
          * declared-image namespace -> handle -> RAM -> close chain. */
@@ -441,6 +451,19 @@ int main(void)
             if (!dispatch(&session, 0x0cu, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 77 + (int)index;
+            }
+            /* A no-match FindFirst must retain the OpenNT DOS error terminal
+             * (AX=18, CF=1), independently of later file-info services. */
+            memcpy(ram + 0x700u, direct_missing_oem, strlen(direct_missing_oem) + 1u);
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.ds = 0u; cpu.edx = 0x700u;
+            if (!dispatch(&session, 0x09u, &cpu, &result) || !cf_ax(&result, 18u)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 83 + (int)index;
+            }
+            if (search_only) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                continue;
             }
             memcpy(ram + 0x800u, "C:\\COMMAND.COM", sizeof("C:\\COMMAND.COM"));
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
