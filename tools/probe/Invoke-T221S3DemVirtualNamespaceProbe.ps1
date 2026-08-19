@@ -11,14 +11,14 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 if (-not (Test-Path -LiteralPath $vs -PathType Leaf)) { throw "Required MSVC environment entry point missing: $vs" }
 New-Item -ItemType Directory -Path $build | Out-Null
 $sources = @(
-    'src\bx-vdm\bx_ntvdm_dem_overlay_store_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_dem_overlay_store_v1.c',
     'src\bx-vdm\bx_ntvdm_mutation_profile_v1.c',
-    'src\bx-vdm\bx_ntvdm_dem_profile_consumer_v1.c',
-    'src\bx-vdm\bx_ntvdm_dem_file_session_v1.c',
-    'src\bx-vdm\bx_ntvdm_dem_virtual_namespace_view_v1.c',
-    'src\bx-vdm\bx_ntvdm_dem_overlay_file_v1.c',
-    'src\bx-vdm\bx_ntvdm_dem_virtual_namespace_backend_v1.c'
-    ,'src\bx-vdm\bx_ntvdm_dem_virtual_mutation_backend_v1.c'
+    'src\bx-vdm\bop-v1\bx_ntvdm_dem_profile_consumer_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_dem_file_session_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_dem_virtual_namespace_view_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_dem_overlay_file_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_dem_virtual_namespace_backend_v1.c'
+    ,'src\bx-vdm\bop-v1\bx_ntvdm_dem_virtual_mutation_backend_v1.c'
 ) | ForEach-Object { Join-Path $root $_ }
 $tests = @('bx_ntvdm_dem_virtual_namespace_view_v1_test.c',
     'bx_ntvdm_dem_virtual_namespace_backend_v1_test.c',

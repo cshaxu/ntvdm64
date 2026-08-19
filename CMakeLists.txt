@@ -180,10 +180,10 @@ add_executable(bx-ntvdm-boot-namespace-provider-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_search_plan_v1.c
     src/bx-vdm/bx_ntvdm_search_request_v1.c
     src/bx-vdm/bx_ntvdm_search_transaction_v1.c
-    src/bx-vdm/bx_ntvdm_dem_path_search_service_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_path_search_service_v1.c
     src/bx-vdm/bx_ntvdm_dem_readonly_file_service.c
     src/bx-vdm/bx_ntvdm_cmd_boot_file_service.c
-    src/bx-vdm/bx_ntvdm_boot_namespace_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_provider_v1.c
     tests/bx-vdm/bx_ntvdm_boot_namespace_provider_v1_test.c
 )
 target_include_directories(bx-ntvdm-boot-namespace-provider-test PRIVATE src/cli src/bx-vdm)
@@ -210,15 +210,15 @@ add_executable(bx-ntvdm-dem-session-lifecycle-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_search_plan_v1.c
     src/bx-vdm/bx_ntvdm_search_request_v1.c
     src/bx-vdm/bx_ntvdm_search_transaction_v1.c
-    src/bx-vdm/bx_ntvdm_dem_path_search_service_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_path_search_service_v1.c
     src/bx-vdm/bx_ntvdm_dem_readonly_file_service.c
     src/bx-vdm/bx_ntvdm_cmd_boot_file_service.c
-    src/bx-vdm/bx_ntvdm_boot_namespace_provider_v1.c
-    src/bx-vdm/bx_ntvdm_bop_catalog_v1.c
-    src/bx-vdm/bx_ntvdm_bop_ingress_v1.c
-    src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c
-    src/bx-vdm/bx_ntvdm_dem_plane_v1.c
-    src/bx-vdm/bx_ntvdm_dem_session_lifecycle_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_catalog_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_ingress_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_session_lifecycle_provider_v1.c
     tests/bx-vdm/bx_ntvdm_dem_session_lifecycle_provider_v1_test.c
 )
 target_include_directories(bx-ntvdm-dem-session-lifecycle-provider-v1-test PRIVATE src/cli src/bx-vdm)
@@ -231,12 +231,12 @@ add_executable(bx-ntvdm-dem-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_exception_abi.c
     src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
     src/bx-vdm/bx_ntvdm_cpu_result_v2.c
-    src/bx-vdm/bx_ntvdm_bop_catalog_v1.c
-    src/bx-vdm/bx_ntvdm_bop_ingress_v1.c
-    src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c
-    src/bx-vdm/bx_ntvdm_dem_plane_v1.c
-    src/bx-vdm/bx_ntvdm_dem_provider_v1.c
-    src/bx-vdm/bx_ntvdm_dem_session_lifecycle_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_catalog_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_ingress_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_session_lifecycle_provider_v1.c
     tests/bx-vdm/bx_ntvdm_dem_provider_v1_test.c
 )
 target_include_directories(bx-ntvdm-dem-provider-v1-test PRIVATE src/bx-vdm)
@@ -251,8 +251,8 @@ add_executable(bx-ntvdm-vdm-generic-ud-bridge-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_exception_abi.c
     src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
     src/bx-vdm/bx_ntvdm_cpu_result_v2.c
-    src/bx-vdm/bx_ntvdm_bop_ingress_v1.c
-    src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_ingress_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_provider_registry_v1.c
     src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c
     tests/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1_test.c
 )
@@ -273,11 +273,11 @@ add_executable(bx-ntvdm-dem-drive-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_exception_abi.c
     src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
     src/bx-vdm/bx_ntvdm_cpu_result_v2.c
-    src/bx-vdm/bx_ntvdm_bop_ingress_v1.c
-    src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c
-    src/bx-vdm/bx_ntvdm_dem_plane_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_ingress_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c
     src/bx-vdm/bx_ntvdm_host_drive_policy.c
-    src/bx-vdm/bx_ntvdm_dem_drive_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_drive_provider_v1.c
     tests/bx-vdm/bx_ntvdm_dem_drive_provider_v1_test.c
 )
 target_include_directories(bx-ntvdm-dem-drive-provider-v1-test PRIVATE src/bx-vdm)
@@ -289,9 +289,9 @@ add_executable(bx-ntvdm-redir-unavailable-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_exception_abi.c
     src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
     src/bx-vdm/bx_ntvdm_cpu_result_v2.c
-    src/bx-vdm/bx_ntvdm_bop_ingress_v1.c
-    src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c
-    src/bx-vdm/bx_ntvdm_redir_unavailable_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_ingress_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_redir_unavailable_provider_v1.c
     tests/bx-vdm/bx_ntvdm_redir_unavailable_provider_v1_test.c
 )
 target_include_directories(bx-ntvdm-redir-unavailable-provider-v1-test PRIVATE src/bx-vdm)
@@ -574,7 +574,7 @@ target_include_directories(bx-ntvdm-cmd-comspec-bootstrap-service-test PRIVATE
 target_compile_features(bx-ntvdm-cmd-comspec-bootstrap-service-test PRIVATE c_std_11)
 
 add_executable(bx-ntvdm-cmd-launch-envelope-v1-test EXCLUDE_FROM_ALL
-    src/bx-vdm/bx_ntvdm_cmd_launch_envelope_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_cmd_launch_envelope_v1.c
     tests/bx-vdm/bx_ntvdm_cmd_launch_envelope_v1_test.c
 )
 target_include_directories(bx-ntvdm-cmd-launch-envelope-v1-test PRIVATE
@@ -582,7 +582,7 @@ target_include_directories(bx-ntvdm-cmd-launch-envelope-v1-test PRIVATE
 target_compile_features(bx-ntvdm-cmd-launch-envelope-v1-test PRIVATE c_std_11)
 
 add_executable(bx-ntvdm-cmdinfo-v1-test EXCLUDE_FROM_ALL
-    src/bx-vdm/bx_ntvdm_cmdinfo_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_cmdinfo_v1.c
     tests/bx-vdm/bx_ntvdm_cmdinfo_v1_test.c
 )
 target_include_directories(bx-ntvdm-cmdinfo-v1-test PRIVATE src/bx-vdm)
@@ -625,7 +625,7 @@ add_executable(bx-ntvdm-bop-catalog-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_cpu_state_abi.c
     src/bx-vdm/bx_ntvdm_instruction_window_abi.c
     src/bx-vdm/bx_ntvdm_exception_abi.c
-    src/bx-vdm/bx_ntvdm_bop_catalog_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_catalog_v1.c
     tests/bx-vdm/bx_ntvdm_bop_catalog_v1_test.c
 )
 target_include_directories(bx-ntvdm-bop-catalog-v1-test PRIVATE
@@ -651,11 +651,11 @@ add_executable(bx-ntvdm-dem-ioctl-metadata-provider-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_cpu_state_abi.c
     src/bx-vdm/bx_ntvdm_instruction_window_abi.c
     src/bx-vdm/bx_ntvdm_exception_abi.c
-    src/bx-vdm/bx_ntvdm_bop_ingress_v1.c
-    src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c
-    src/bx-vdm/bx_ntvdm_dem_plane_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_ingress_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c
     src/bx-vdm/bx_ntvdm_host_drive_policy.c
-    src/bx-vdm/bx_ntvdm_dem_ioctl_metadata_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_ioctl_metadata_provider_v1.c
     tests/bx-vdm/bx_ntvdm_dem_ioctl_metadata_provider_v1_test.c
 )
 target_include_directories(bx-ntvdm-dem-ioctl-metadata-provider-v1-test PRIVATE src/bx-vdm)
@@ -682,7 +682,7 @@ add_executable(bx-ntvdm-dem-process-owner-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_cpu_result_v2.c
     src/bx-vdm/bx_ntvdm_guest_range.c
     src/bx-vdm/bx_ntvdm_guest_read_action_v1.c
-    src/bx-vdm/bx_ntvdm_dem_process_owner_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_process_owner_v1.c
     tests/bx-vdm/bx_ntvdm_dem_process_owner_v1_test.c
 )
 target_include_directories(bx-ntvdm-dem-process-owner-v1-test PRIVATE
@@ -691,8 +691,8 @@ target_compile_features(bx-ntvdm-dem-process-owner-v1-test PRIVATE c_std_11)
 
 add_executable(bx-ntvdm-dem-file-session-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_mutation_profile_v1.c
-    src/bx-vdm/bx_ntvdm_dem_profile_consumer_v1.c
-    src/bx-vdm/bx_ntvdm_dem_file_session_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_profile_consumer_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_file_session_v1.c
     tests/bx-vdm/bx_ntvdm_dem_file_session_v1_test.c
 )
 target_include_directories(bx-ntvdm-dem-file-session-v1-test PRIVATE
@@ -705,16 +705,16 @@ target_link_libraries(bx-ntvdm-dem-file-session-v1-test PRIVATE ntdll)
 add_executable(bx-ntvdm-dem-local-file-owner-v1-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_mutation_profile_v1.c
     src/bx-vdm/bx_ntvdm_mutation_overlay_v1.c
-    src/bx-vdm/bx_ntvdm_dem_profile_consumer_v1.c
-    src/bx-vdm/bx_ntvdm_dem_file_view_v1.c
-    src/bx-vdm/bx_ntvdm_dem_file_session_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_profile_consumer_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_file_view_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_file_session_v1.c
     src/bx-vdm/bx_ntvdm_host_drive_policy.c
     src/bx-vdm/bx_ntvdm_host_namespace.c
-    src/bx-vdm/bx_ntvdm_command_host_context_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_command_host_context_v1.c
     src/bx-vdm/bx_ntvdm_session_host_context_v1.c
-    src/bx-vdm/bx_ntvdm_dem_cwd_context_v1.c
-    src/bx-vdm/bx_ntvdm_dem_path_v1.c
-    src/bx-vdm/bx_ntvdm_dem_local_file_backend_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_cwd_context_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_path_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_local_file_backend_v1.c
     tests/bx-vdm/bx_ntvdm_dem_local_file_backend_v1_test.c
 )
 target_include_directories(bx-ntvdm-dem-local-file-owner-v1-test PRIVATE
@@ -1018,7 +1018,7 @@ add_executable(bx-ntvdm-cmd-get-next-service-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_instruction_window_abi.c
     src/bx-vdm/bx_ntvdm_multi_write_abi.c
     src/bx-vdm/bx_ntvdm_multi_write_transaction.c
-    src/bx-vdm/bx_ntvdm_cmdinfo_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_cmdinfo_v1.c
     src/bx-vdm/bx_ntvdm_cmd_get_next_service.c
     tests/bx-vdm/bx_ntvdm_cmd_get_next_service_test.c
 )
@@ -1093,23 +1093,23 @@ add_executable(bx-vdm-runtime-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_guest_gather_read_action_v1.c
     src/bx-vdm/bx_ntvdm_adapter_runtime.c
     src/bx-vdm/bx_ntvdm_exception_observer_v1.c
-    src/bx-vdm/bx_ntvdm_bop_catalog_v1.c
-    src/bx-vdm/bx_ntvdm_boot_namespace_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_catalog_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_provider_v1.c
     src/bx-vdm/bx_ntvdm_profile_search_snapshot_v1.c
     src/bx-vdm/bx_ntvdm_search_session.c
     src/bx-vdm/bx_ntvdm_search_result_v1.c
     src/bx-vdm/bx_ntvdm_search_plan_v1.c
     src/bx-vdm/bx_ntvdm_search_request_v1.c
     src/bx-vdm/bx_ntvdm_search_transaction_v1.c
-    src/bx-vdm/bx_ntvdm_dem_path_search_service_v1.c
-    src/bx-vdm/bx_ntvdm_bop_ingress_v1.c
-    src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c
-    src/bx-vdm/bx_ntvdm_dem_plane_v1.c
-    src/bx-vdm/bx_ntvdm_dem_provider_v1.c
-    src/bx-vdm/bx_ntvdm_dem_session_lifecycle_provider_v1.c
-    src/bx-vdm/bx_ntvdm_dem_drive_provider_v1.c
-    src/bx-vdm/bx_ntvdm_dem_fastio_provider_v1.c
-    src/bx-vdm/bx_ntvdm_command_plane_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_path_search_service_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_ingress_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_bop_provider_registry_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_session_lifecycle_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_drive_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_fastio_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_command_plane_v1.c
     src/bx-vdm/bx_ntvdm_legacy_plane_gate_v1.c
     src/bx-vdm/bx_ntvdm_bios_memory_service.c
     src/bx-vdm/bx_ntvdm_dem_boot_drive_service.c
@@ -1120,14 +1120,14 @@ add_executable(bx-vdm-runtime-test EXCLUDE_FROM_ALL
     src/bx-vdm/bx_ntvdm_config_done_service.c
     src/bx-vdm/bx_ntvdm_cmd_comspec_bootstrap_service.c
     src/bx-vdm/bx_ntvdm_cmd_get_next_service.c
-    src/bx-vdm/bx_ntvdm_cmdinfo_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_cmdinfo_v1.c
     src/bx-vdm/bx_ntvdm_cmd_keyboard_layout_service.c
     src/bx-vdm/bx_ntvdm_controlled_stop_service.c
     src/bx-vdm/bx_ntvdm_vdd_create_user_notify_service.c
     src/bx-vdm/bx_ntvdm_spckbd_init_service.c
     src/bx-vdm/bx_ntvdm_wait_if_idle_service.c
     src/bx-vdm/bx_ntvdm_dem_drive_service.c
-    src/bx-vdm/bx_ntvdm_dem_ioctl_metadata_provider_v1.c
+    src/bx-vdm/bop-v1/bx_ntvdm_dem_ioctl_metadata_provider_v1.c
     src/bx-vdm/bx_ntvdm_dem_dta_service.c
     src/bx-vdm/bx_ntvdm_dem_hard_error_service.c
     src/bx-vdm/bx_ntvdm_cmd_boot_file_service.c

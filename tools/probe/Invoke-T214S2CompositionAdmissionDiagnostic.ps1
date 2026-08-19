@@ -26,10 +26,10 @@ $includes = @('src','src\cli','refs\bochs','refs\bochs\instrument\stubs','src\bx
 $objects = Join-Path $composition 'current-objects'
 $sources = @(
     @{Language='C++'; Source='src\bx-mantle\bx_ntvdm_cancellation_controller_v1.cc'},
-    @{Language='C'; Source='src\bx-vdm\bx_ntvdm_command_lifecycle_provider_v1.c'},
-    @{Language='C'; Source='src\bx-vdm\bx_ntvdm_command_initial_environment_v1.c'},
-    @{Language='C'; Source='src\bx-vdm\bx_ntvdm_boot_namespace_composition_v1.c'},
-    @{Language='C'; Source='src\bx-vdm\bx_ntvdm_composition_runtime_v1.c'},
+    @{Language='C'; Source='src\bx-vdm\bop-v1\bx_ntvdm_command_lifecycle_provider_v1.c'},
+    @{Language='C'; Source='src\bx-vdm\bop-v1\bx_ntvdm_command_initial_environment_v1.c'},
+    @{Language='C'; Source='src\bx-vdm\bop-v1\bx_ntvdm_boot_namespace_composition_v1.c'},
+    @{Language='C'; Source='src\bx-vdm\bop-v1\bx_ntvdm_composition_runtime_v1.c'},
     @{Language='C'; Source='src\bx-mantle\bx_ntvdm_engine_run_v1.c'}
 )
 $commands = @('@echo off', ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%')

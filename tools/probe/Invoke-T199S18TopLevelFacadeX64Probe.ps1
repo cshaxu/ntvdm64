@@ -1,4 +1,4 @@
-﻿param(
+param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = ''
 )
@@ -18,9 +18,9 @@ $vsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Comm
 if (-not (Test-Path -LiteralPath $vsDevCmd -PathType Leaf)) { throw "Required MSVC environment entry point missing: $vsDevCmd" }
 
 $relatives = @(
-    'src\bx-vdm\bx_ntvdm_top_level_package_facade_v1.c',
-    'src\bx-vdm\bx_ntvdm_bop_provider_registry_v1.c',
-    'src\bx-vdm\bx_ntvdm_bop_ingress_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_top_level_package_facade_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_bop_provider_registry_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_bop_ingress_v1.c',
     'src\bx-vdm\bx_ntvdm_cpu_result_v2.c',
     'src\bx-vdm\bx_ntvdm_cpu_delta_abi.c',
     'src\bx-vdm\bx_ntvdm_cpu_state_abi.c',

@@ -13,8 +13,8 @@ New-Item -ItemType Directory -Path $build | Out-Null
 $exe = Join-Path $build 't202-s4-dem-file-session.exe'
 $sources = @(
     (Join-Path $root 'src\bx-vdm\bx_ntvdm_mutation_profile_v1.c'),
-    (Join-Path $root 'src\bx-vdm\bx_ntvdm_dem_profile_consumer_v1.c'),
-    (Join-Path $root 'src\bx-vdm\bx_ntvdm_dem_file_session_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bop-v1\bx_ntvdm_dem_profile_consumer_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bop-v1\bx_ntvdm_dem_file_session_v1.c'),
     (Join-Path $root 'tests\bx-vdm\bx_ntvdm_dem_file_session_v1_test.c')
 )
 $compile = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' +

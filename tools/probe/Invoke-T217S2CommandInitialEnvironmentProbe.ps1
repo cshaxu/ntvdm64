@@ -11,8 +11,8 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 New-Item -ItemType Directory -Path $build | Out-Null
 $exe = Join-Path $build 't217-s2-command-initial-environment.exe'
 $sources = @(
-    'src\bx-vdm\bx_ntvdm_command_host_context_v1.c',
-    'src\bx-vdm\bx_ntvdm_command_initial_environment_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_command_host_context_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_command_initial_environment_v1.c',
     'tests\bx-vdm\bx_ntvdm_command_initial_environment_v1_test.c'
 ) | ForEach-Object { Join-Path $root $_ }
 $compile = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' +

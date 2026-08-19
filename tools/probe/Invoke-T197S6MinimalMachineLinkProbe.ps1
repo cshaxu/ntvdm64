@@ -92,10 +92,10 @@ if ($XmsPackageFixture) {
         @{ Name = 'adapter_cpu_state'; Path = 'src\bx-vdm\bx_ntvdm_cpu_state_abi.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
         @{ Name = 'adapter_exception'; Path = 'src\bx-vdm\bx_ntvdm_exception_abi.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
         @{ Name = 'adapter_cpu_result'; Path = 'src\bx-vdm\bx_ntvdm_cpu_result_v2.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
-        @{ Name = 'adapter_bop_ingress'; Path = 'src\bx-vdm\bx_ntvdm_bop_ingress_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
-        @{ Name = 'adapter_bop_registry'; Path = 'src\bx-vdm\bx_ntvdm_bop_provider_registry_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
-        @{ Name = 'adapter_xms_plane'; Path = 'src\bx-vdm\bx_ntvdm_xms_dpmi_plane_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
-        @{ Name = 'adapter_xms_session'; Path = 'src\bx-vdm\bx_ntvdm_xms_package_session_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') }
+        @{ Name = 'adapter_bop_ingress'; Path = 'src\bx-vdm\bop-v1\bx_ntvdm_bop_ingress_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_bop_registry'; Path = 'src\bx-vdm\bop-v1\bx_ntvdm_bop_provider_registry_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_xms_plane'; Path = 'src\bx-vdm\bop-v1\bx_ntvdm_xms_dpmi_plane_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') },
+        @{ Name = 'adapter_xms_session'; Path = 'src\bx-vdm\bop-v1\bx_ntvdm_xms_package_session_v1.c'; ExtraIncludes = @('src\bx-vdm', 'src\bx-mantle') }
     )
 }
 

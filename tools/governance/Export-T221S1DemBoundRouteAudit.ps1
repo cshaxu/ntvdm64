@@ -38,12 +38,12 @@ if ($duplicates.Count -ne 0) { throw 'T219 DEM reconciliation has duplicate serv
 $missing = @(0..72 | Where-Object { ('{0:X2}' -f $_) -notin $rows.service })
 if ($missing.Count -ne 0) { throw "T219 DEM reconciliation has missing services: $($missing -join ',')" }
 
-$session = Read-Required 'src/bx-vdm/bx_ntvdm_dem_package_session_v1.c'
-$facade = Read-Required 'src/bx-vdm/bx_ntvdm_dem_package_facade_v1.c'
-$whole = Read-Required 'src/bx-vdm/bx_ntvdm_dem_whole_provider_v1.c'
-$plane = Read-Required 'src/bx-vdm/bx_ntvdm_dem_plane_v1.c'
+$session = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_session_v1.c'
+$facade = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_facade_v1.c'
+$whole = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_whole_provider_v1.c'
+$plane = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c'
 $genericBridge = Read-Required 'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c'
-$composition = Read-Required 'src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c'
+$composition = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_composition_v1.c'
 
 Require-Text $genericBridge 'boot_namespace_composition' 'generic UD bridge to boot namespace composition'
 Require-Text $composition 'bx_ntvdm_dem_package_session_v1_dispatch' 'composition dispatch to DEM package session'
@@ -114,11 +114,11 @@ if (-not (Test-Path -LiteralPath $parent)) { New-Item -ItemType Directory -Path 
     sourceInputs = @(
         $reconciliationPath,
         'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c',
-        'src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c',
-        'src/bx-vdm/bx_ntvdm_dem_package_session_v1.c',
-        'src/bx-vdm/bx_ntvdm_dem_package_facade_v1.c',
-        'src/bx-vdm/bx_ntvdm_dem_whole_provider_v1.c',
-        'src/bx-vdm/bx_ntvdm_dem_plane_v1.c')
+        'src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_composition_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_session_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_facade_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_dem_whole_provider_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c')
     serviceCount = $outRows.Count
     staticOnly = $true
     entries = $outRows

@@ -23,12 +23,12 @@ function Require-Text([string]$text, [string]$needle, [string]$description) {
 }
 
 $bridge = Read-Required 'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c'
-$boot = Read-Required 'src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c'
-$native = Read-Required 'src/bx-vdm/bx_ntvdm_native_bop_composition_v1.c'
-$dem = Read-Required 'src/bx-vdm/bx_ntvdm_dem_package_session_v1.c'
-$command = Read-Required 'src/bx-vdm/bx_ntvdm_command_package_session_v1.c'
-$xms = Read-Required 'src/bx-vdm/bx_ntvdm_xms_package_session_v1.c'
-$dpmi = Read-Required 'src/bx-vdm/bx_ntvdm_dpmi_package_session_v1.c'
+$boot = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_composition_v1.c'
+$native = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_native_bop_composition_v1.c'
+$dem = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_session_v1.c'
+$command = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_command_package_session_v1.c'
+$xms = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_xms_package_session_v1.c'
+$dpmi = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dpmi_package_session_v1.c'
 
 Require-Text $bridge 'bx_ntvdm_boot_namespace_composition_v1_handle' 'first boot-composition offer'
 Require-Text $bridge 'bx_ntvdm_native_bop_composition_v1_handle' 'native fallback offer'
@@ -98,12 +98,12 @@ if (-not (Test-Path -LiteralPath $directory)) { New-Item -ItemType Directory -Fo
     sourceCount = $outRows.Count
     sourceInputs = @(
         'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c',
-        'src/bx-vdm/bx_ntvdm_boot_namespace_composition_v1.c',
-        'src/bx-vdm/bx_ntvdm_native_bop_composition_v1.c',
-        'src/bx-vdm/bx_ntvdm_dem_package_session_v1.c',
-        'src/bx-vdm/bx_ntvdm_command_package_session_v1.c',
-        'src/bx-vdm/bx_ntvdm_xms_package_session_v1.c',
-        'src/bx-vdm/bx_ntvdm_dpmi_package_session_v1.c')
+        'src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_composition_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_native_bop_composition_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_session_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_command_package_session_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_xms_package_session_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_dpmi_package_session_v1.c')
     entries = $outRows
 } | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $output -Encoding utf8
 Write-Host "Exported $($outRows.Count) current T200 bound-route audit rows to $output"

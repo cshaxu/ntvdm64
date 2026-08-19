@@ -12,8 +12,8 @@ if (-not (Test-Path -LiteralPath $vs -PathType Leaf)) { throw "Required MSVC env
 New-Item -ItemType Directory -Path $build | Out-Null
 $exe = Join-Path $build 't221-s3-dem-overlay-file.exe'
 $sources = @(
-    'src\bx-vdm\bx_ntvdm_dem_overlay_store_v1.c',
-    'src\bx-vdm\bx_ntvdm_dem_overlay_file_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_dem_overlay_store_v1.c',
+    'src\bx-vdm\bop-v1\bx_ntvdm_dem_overlay_file_v1.c',
     'tests\bx-vdm\bx_ntvdm_dem_overlay_file_v1_test.c'
 ) | ForEach-Object { Join-Path $root $_ }
 $compile = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' +

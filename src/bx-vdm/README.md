@@ -30,3 +30,11 @@ function pointers across the boundary.
 Changes below `refs/bochs` are exceptional. They require evidence that a core
 mechanism is hard-linked to an excluded peripheral and that an adapter-side
 solution cannot express the separation without changing behavior.
+## BOP Implementation Layout
+
+`bop/` contains the current source-parity provider work. `bop-v1/` contains
+retained v1 BOP owner-package implementation bodies (DEM, COMMAND, XMS/DPMI,
+Redirector, Debugger, top-level and BOP composition). Their public headers
+remain in this directory so the adapter ABI stays stable while v2 providers
+replace a package incrementally. Generic machine, guest-memory and session ABI
+implementations remain at this directory root.
