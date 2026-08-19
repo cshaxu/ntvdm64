@@ -85,6 +85,16 @@ This closes only the source-shaped local Direct package: it does not claim
 selector routing, Redirector/COMMAND pipe composition, `demerror.c` INT 24,
 or native guest integration.
 
+### S8 — `demerror.c` / `demlock.c` direct-import local closure
+
+The original owner files are mirrored directly under `bop/opennt/dem/`.
+Their only new composition is the fixed VHE/SYSDEV retained guest-layout seam,
+the pointer-width-neutral Direct handle token, and an explicit failure for an
+as-yet-unbound historical retry slot.  The formal fixture reaches all three
+owned bodies; see [S8 direct-import map](../evidence/t230-s8-demerror-demlock-direct-import-map-001.md).
+This is local Direct source parity, not an INT 24, full dispatcher or native
+guest claim.
+
 ## Dependency order
 
 `S1` is the sole common foundation. `S2` and `S3` share the token seam but

@@ -342,6 +342,22 @@ int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
         real_mode_address(segment, offset), (uint8_t *)buffer, bytes);
 }
 
+uint32_t bx_ntvdm_demhndl_current_service(void)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    return active != NULL && active->call != NULL ? active->call->service : UINT32_MAX;
+}
+
+int bx_ntvdm_demhndl_write_guest(USHORT segment, USHORT offset,
+    const void *buffer, uint32_t bytes)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    if (active == NULL || active->call == NULL || buffer == NULL ||
+        active->call->guest_write == NULL) return 0;
+    return active->call->guest_write(active->call->guest_state,
+        real_mode_address(segment, offset), (const uint8_t *)buffer, bytes);
+}
+
 void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back)
 {
@@ -411,6 +427,10 @@ int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
         return 0;
     g_active_call = &active;
     body();
+    /* demerror.c is the only imported owner that intentionally retains the
+     * VHE address across calls.  Its shim flushes that fixed guest layout
+     * while this checked-call context is still live. */
+    bx_ntvdm_demerror_flush_hard_error();
     if ((is_demdir_cds_service(call->service) || active.flush_guest_buffer_on_return) &&
         active.guest_buffer != NULL &&
         !call->guest_write(call->guest_state, active.guest_address,

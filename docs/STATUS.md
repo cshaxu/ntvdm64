@@ -2,23 +2,23 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T230 S7.** T229 demonstrated only a 73-row local route/disposition closure; its retained `deferred` terminals and Virtual implementation do not satisfy the owner's functional-completion requirement. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint, native observation, or retired-virtual cleanup may be handed to a later task as T230 completion.
+> **Current effective packet: M0 T230 S9.** T229 demonstrated only a 73-row local route/disposition closure; its retained `deferred` terminals and Virtual implementation do not satisfy the owner's functional-completion requirement. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint, native observation, or retired-virtual cleanup may be handed to a later task as T230 completion.
 
-**Active: M0 T230 S7 -- OpenNT `demdasd.c` / `demioctl.c` mirror package.**
+**Active: M0 T230 S9 -- OpenNT `demmisc.c` mirror package.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T230 S7, Ordinary Mode. |
+| Identifier Mode | M0 T230 S9, Ordinary Mode. |
 | Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
-| Objective | Directly import the complete original OpenNT `demdasd.c` / `demioctl.c` owner package beneath `src/bx-vdm/bop/opennt/dem/`, retaining any old implementation only as comparison material. Adapt the files in place through the smallest raw-device, packed-guest-buffer, host-capability and typed-result shims. They own `50:21`, `29`, `2A`. |
-| Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected single-service scope, or new v2 Readonly/Overlay/Virtual behavior. Legacy v1 and partial v2 code are comparison material only; S7 does not modify them for compatibility or require them to run. |
+| Objective | Directly import the complete original OpenNT `demmisc.c` owner package beneath `src/bx-vdm/bop/opennt/dem/`, retaining old implementations only as comparison material. Adapt it in place through the smallest lifecycle, console, host-process and typed-result shims. It owns `50:11`, `23`, `34`--`3E`, `45`. |
+| Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected single-service scope, or new v2 Readonly/Overlay/Virtual behavior. Legacy v1 and partial v2 code are comparison material only; S9 does not modify them for compatibility or require them to run. |
 | Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current Direct/Readonly provider graph; retained Virtual branches/tests; T229 closure transfer correction. |
-| Files And ABI Surface | `src/bx-vdm/bop/opennt/dem/demdasd.c`, `demioctl.c` and neutral `bop/shim/*`; original `src/opennt/base/mvdm/dos/dem/*`; formal Ninja manifest and focused Direct fixtures. |
+| Files And ABI Surface | `src/bx-vdm/bop/opennt/dem/demmisc.c` and neutral `bop/shim/*`; original `src/opennt/base/mvdm/dos/dem/demmisc.c`; formal Ninja manifest and focused Direct fixtures. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, Direct/Readonly/Overlay profile contract, formal Ninja and documentation governance rules. |
-| Verification | Source-build the formal Ninja target and run focused Direct tests for every owned IOCTL/absolute-disk service. The directly imported original files preserve their function/data/error ordering; every raw-device, CCPU/SAS, guest-memory or host-composition divergence is an adjacent comment naming the original source path and shim. |
-| Expected Markers | `demdasd.c` / `demioctl.c` own executable, source-backed Direct routes for every listed service; no generic pass-through or unimplemented terminal remains in this package. The mirror remains free of Readonly, Overlay and Virtual policy; retained v1 policy does not become v2 completion evidence. |
+| Verification | Source-build the formal Ninja target and run focused Direct tests for every owned lifecycle/console service. The directly imported original file preserves its function/data/error ordering; every CCPU/SAS, guest-memory or host-composition divergence is an adjacent comment naming the original source path and shim. |
+| Expected Markers | `demmisc.c` owns executable, source-backed Direct routes for every listed service; no generic pass-through or unimplemented terminal remains in this package. The mirror remains free of Readonly, Overlay and Virtual policy; retained v1 policy does not become v2 completion evidence. |
 | Asset Needs | Pinned OpenNT DEM source; T229 ledger/evidence; formal MSVC x64 `/MT` Ninja graph; declared host namespace roots; retained Virtual source/test membership; bounded native observation fixture. |
 | Reporting Requirements | Record every owned identity's original function, recovery rung, raw-device/host-capability dependency, exact Direct failure contract and focused regression. Bounded native observation remains S10-only unless a separate admission changes the plan. |
 | Stop Conditions | A requirement needs a new Bochs intrusion, guest-image mutation, host modification merely to install the product, or cannot retain source ABI/failure semantics. Such a fact pauses implementation for owner decision; it does not silently become a deferred T230 endpoint or transfer item. |
@@ -46,7 +46,9 @@
 
 > **T230 S6:** [direct `demgset.c` import map](etc/evidence/t230-s6-demgset-direct-import-map-001.md) records the imported source, 32-bit guest DPB/DTA and Direct-clock seams, every owned service's focused Direct witness, and the zero-exit formal Ninja result. It is local source parity only—not whole DEM, raw-DASD/IOCTL ownership, selector routing, or native guest proof.
 
-> **T230 S7 (in progress):** [direct `demdasd.c` / `demioctl.c` import map](etc/evidence/t230-s7-demdasd-demioctl-direct-import-map-001.md) records the direct owner mirrors, their formal static-library closure and the bounded IOCTL/absolute-disk local witness. Raw-device transfer remains an explicit OpenNT host-capability dependency, not a bx-vdm implementation claim.
+> **T230 S7:** [direct `demdasd.c` / `demioctl.c` import map](etc/evidence/t230-s7-demdasd-demioctl-direct-import-map-001.md) records the direct owner mirrors, their formal static-library closure and the bounded IOCTL/absolute-disk local witness. Raw-device transfer remains an explicit OpenNT host-capability dependency, not a bx-vdm implementation claim.
+
+> **T230 S8:** [direct `demerror.c` / `demlock.c` import map](etc/evidence/t230-s8-demerror-demlock-direct-import-map-001.md) records the original owner mirrors, persistent fixed hard-error guest layouts, the explicit unbound retry failure and the temporary-file lock/unlock witness. It is local Direct source parity only—not an INT 24, whole dispatcher or native guest claim.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

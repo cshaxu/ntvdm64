@@ -130,6 +130,15 @@ HANDLE bx_ntvdm_demhndl_get_handle(USHORT high, USHORT low);
 LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset);
 int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
     uint32_t bytes);
+/* A directly imported owner that retains a historical guest address across
+ * calls may use these bounded context operations.  They remain checked RAM
+ * transport, not a DOS or BOP dispatcher. */
+uint32_t bx_ntvdm_demhndl_current_service(void);
+int bx_ntvdm_demhndl_write_guest(USHORT segment, USHORT offset,
+    const void *buffer, uint32_t bytes);
+/* Optional fixed-layout completion hook implemented by the demerror shim.
+ * It is a no-op unless that original owner has retained VHE state. */
+void bx_ntvdm_demerror_flush_hard_error(void);
 void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back);
 void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
