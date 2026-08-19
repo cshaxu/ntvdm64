@@ -41,9 +41,9 @@ ledger: a typed route is not counted as semantic completion.
 | `50:2D` | `demOpenFCB` | P — OEM path, `AX:BP` token | share/access matrix |
 | `50:2E` | `demCloseFCB` | P — `AX:SI` token release | null-token variant |
 | `50:2F` | `demFCBIO` | P — DTA read; Direct write/Readonly refusal | partial/disk-full variants |
-| `50:30` | `demDate16` | R | local-clock result layout |
+| `50:30` | `demDate16` | P — Direct/Readonly packed local date/time ABI | clock-range variants |
 | `50:31` | `demGetFileInfo` | P — `BX:DI` size | attributes/error variants |
-| `50:44` | `demCheckPath` | R | ordinary/`\\DEV\\`/missing path matrix |
+| `50:44` | `demCheckPath` | P — `\\DEV\\` success and contained failure in Direct/Readonly | ordinary host-path variants |
 | `50:47` | `demPipeFileDataEOF` | D — Redirector | only Redirector may supply pipe-token owner |
 | `50:48` | `demPipeFileEOF` | D — Redirector | only Redirector may supply pipe-token owner |
 
@@ -59,6 +59,7 @@ ledger: a typed route is not counted as semantic completion.
 - P7: `demDelete` Direct deletion and pre-host Readonly refusal.
 - P8: `demRename` Direct two-path rename and pre-host Readonly refusal.
 - P15: `demFindFirst`/`demFindNext` Direct/Readonly DTA continuation and no-match terminal.
+- P16: `demDate16` packed date/time ABI and `demCheckPath` device-directory result/failure behavior.
 
 ## Completion rule
 
