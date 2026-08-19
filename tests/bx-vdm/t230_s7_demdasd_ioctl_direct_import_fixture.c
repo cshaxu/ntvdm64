@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demdasd_ioctl_shim.h"
 
 typedef struct fixture_context { uint8_t guest[0x10000]; } fixture_context;
@@ -33,7 +34,7 @@ static int invoke(fixture_context *state, bx_ntvdm_dem_direct_context *direct,
     call.struct_bytes=sizeof(call); call.service=service; call.direct=direct;
     call.boundary=event; call.cpu=cpu; call.result=result; call.guest_state=state;
     call.guest_read=read_guest; call.guest_write=write_guest;
-    return bx_ntvdm_demdasd_ioctl_invoke(&call) &&
+    return bx_ntvdm_demdisp_invoke(&call) &&
         result->disposition==BX_NTVDM_CPU_RESULT_V2_RESUME;
 }
 

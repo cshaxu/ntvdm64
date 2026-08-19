@@ -36,11 +36,17 @@
 #define ATTR_ARCHIVE 0x20
 #define ATTR_DEVICE 0x40
 #define ATTR_ALL (ATTR_HIDDEN | ATTR_SYSTEM | ATTR_DIRECTORY)
+#ifndef DOS_VOLUME_NAME_SIZE
 #define DOS_VOLUME_NAME_SIZE 11
+#endif
+#ifndef NT_VOLUME_NAME_SIZE
 #define NT_VOLUME_NAME_SIZE 255
+#endif
 #define FETCHWORD(value) ((WORD)(value))
 #define FETCHDWORD(value) ((DWORD)(value))
+#ifndef ASSERT
 #define ASSERT(value) ((void)0)
+#endif
 #define MSG_INVALID_HFIND 7u
 #define MSG_FILEINFO 8u
 #define MSG_FILESIZE_TOOBIG 9u
@@ -54,7 +60,9 @@ typedef struct _SRCHDTA { ULONG FFindRef; ULONG FFindId; BYTE bReserved[13]; UCH
 typedef struct _DIRENT { CHAR FileName[8]; CHAR FileExt[3]; UCHAR uchAttributes; ULONG FFindRef; ULONG FFindId; USHORT usDummy; USHORT usTime; USHORT usDate; USHORT usReserved2; ULONG ulFileSize; } DIRENT, *PDIRENT;
 typedef struct _SRCHBUF { UCHAR uchDriveNumber; CHAR FileName[8]; CHAR FileExt[3]; USHORT usCurBlkNumber; USHORT usRecordSize; ULONG ulFileSize; DIRENT DirEnt; } SRCHBUF, *PSRCHBUF;
 #pragma pack(pop)
+#ifndef STOREDWORD
 #define STOREDWORD(destination, source) ((destination) = (DWORD)(source))
+#endif
 #define BX_NTVDM_DEMSEARCH_REFERENCE(find_id) ((DWORD)(find_id))
 #define InitializeListHead(list_head) do { (list_head)->Flink = (list_head); (list_head)->Blink = (list_head); } while (0)
 #define IsListEmpty(list_head) ((list_head)->Flink == (list_head))

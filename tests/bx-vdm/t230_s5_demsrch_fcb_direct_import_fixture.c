@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demsrch_fcb_shim.h"
 
 typedef struct fixture_context { uint8_t guest[0x20000]; HANDLE handles[4]; } fixture_context;
@@ -41,7 +42,7 @@ int main(void)
     call.service = 0x30u; call.direct = &direct; call.boundary = &event;
     call.cpu = &cpu; call.result = &result; call.guest_state = &state;
     call.guest_read = read_guest; call.guest_write = write_guest;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         (result.cpu_delta.gpr16_write_mask & ((1u << 0) | (1u << 2))) !=
             ((1u << 0) | (1u << 2)) ||
@@ -64,13 +65,13 @@ int main(void)
     cpu.edx = 0u;
     cpu.ecx = 0u;
     call.service = 0x09u;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         state.guest[0x2000u + 30u] == 0u) return 3;
     memcpy(first_name, state.guest + 0x2000u + 30u, sizeof(first_name));
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     call.service = 0x0bu;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         state.guest[0x2000u + 30u] == 0u ||
         memcmp(first_name, state.guest + 0x2000u + 30u, sizeof(first_name)) == 0) return 4;
@@ -79,14 +80,14 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x100u; cpu.es = 0x100u; cpu.esi = 0x200u;
     call.service = 0x0au;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         state.guest[0x1201u] == 0u) return 5;
     memcpy(first_name, state.guest + 0x1201u, 11u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x100u; cpu.esi = 0x200u;
     call.service = 0x0cu;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         state.guest[0x1201u] == 0u ||
         memcmp(first_name, state.guest + 0x1201u, 11u) == 0) return 6;
@@ -94,7 +95,7 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x100u;
     call.service = 0x2du;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         (result.cpu_delta.gpr16_write_mask & ((1u << 0) | (1u << 5))) !=
             ((1u << 0) | (1u << 5)) || result.cpu_delta.gpr16_values[5] == 0u ||
@@ -106,7 +107,7 @@ int main(void)
     cpu.ebx = 1u;
     cpu.ecx = 2u;
     call.service = 0x2fu;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         memcmp(state.guest + 0x2000u, "OK", 2u) != 0) return 7;
     CloseHandle(state.handles[0]);
@@ -115,7 +116,7 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x100u;
     call.service = 0x31u;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u) return 8;
     if (sprintf_s(renamed, sizeof(renamed), "%s.ren", temporary_second) < 0) return 8;
     memcpy(state.guest + 0x1000u, temporary_second, strlen(temporary_second) + 1u);
@@ -123,14 +124,14 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x100u; cpu.es = 0x100u; cpu.edi = 0x100u;
     call.service = 0x20u;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         GetFileAttributesA(renamed) == INVALID_FILE_ATTRIBUTES) return 9;
     memcpy(state.guest + 0x1000u, renamed, strlen(renamed) + 1u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.es = 0x100u;
     call.service = 0x07u;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         GetFileAttributesA(renamed) != INVALID_FILE_ATTRIBUTES) return 10;
     if (sprintf_s(created, sizeof(created), "%s.new", temporary_second) < 0) return 10;
@@ -138,19 +139,19 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x100u;
     call.service = 0x2cu;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         GetFileAttributesA(created) == INVALID_FILE_ATTRIBUTES || state.handles[0] == NULL) return 11;
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.eax = result.cpu_delta.gpr16_values[0];
     cpu.esi = result.cpu_delta.gpr16_values[5];
     call.service = 0x2eu;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         state.handles[0] != NULL) return 12;
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     call.service = 0x3cu;
-    if (!bx_ntvdm_demsrch_fcb_invoke(&call) ||
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME) return 13;
     DeleteFileA(temporary);
     DeleteFileA(temporary_second);

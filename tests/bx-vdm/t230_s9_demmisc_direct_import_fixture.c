@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demmisc_shim.h"
 
 typedef struct fixture_context {
@@ -41,7 +42,7 @@ static int invoke(fixture_context *state, bx_ntvdm_dem_direct_context *direct,
     call.struct_bytes = sizeof(call); call.service = service; call.direct = direct;
     call.boundary = event; call.cpu = cpu; call.result = result;
     call.guest_state = state; call.guest_read = read_guest; call.guest_write = write_guest;
-    return bx_ntvdm_demmisc_invoke(&call) && bx_ntvdm_cpu_result_v2_valid(result);
+    return bx_ntvdm_demdisp_invoke(&call) && bx_ntvdm_cpu_result_v2_valid(result);
 }
 
 int main(void)

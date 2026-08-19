@@ -2,6 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
+#include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demfile_shim.h"
 
 typedef struct fixture_context {
@@ -52,7 +53,7 @@ static int invoke(fixture_context *state, bx_ntvdm_dem_direct_context *direct,
     call.struct_bytes = sizeof(call); call.service = service; call.direct = direct;
     call.boundary = event; call.cpu = cpu; call.result = result; call.guest_state = state;
     call.guest_read = guest_read; call.guest_write = guest_write;
-    return bx_ntvdm_demfile_invoke(&call) && result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME;
+    return bx_ntvdm_demdisp_invoke(&call) && result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME;
 }
 static void reset_cpu(bx_ntvdm_cpu_state_v1 *cpu)
 { bx_ntvdm_cpu_state_v1_initialize(cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu->ds = 0x100u; cpu->es = 0x100u; }

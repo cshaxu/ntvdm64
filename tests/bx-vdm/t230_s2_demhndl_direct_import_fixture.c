@@ -125,7 +125,7 @@ static int invoke(fixture_context *state, bx_ntvdm_dem_direct_context *direct,
     call.guest_state = state;
     call.guest_read = guest_read;
     call.guest_write = guest_write;
-    return bx_ntvdm_demhndl_invoke(&call) &&
+    return bx_ntvdm_demdisp_invoke(&call) &&
         result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME &&
         result->resume_rip == event->fault_rip + 4u;
 }

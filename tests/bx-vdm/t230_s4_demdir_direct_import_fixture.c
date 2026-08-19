@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
+#include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demdir_shim.h"
 
 typedef struct context { uint8_t guest[0x20000]; } context;
@@ -12,7 +13,7 @@ static int attrset(void*s,uint8_t d,const wchar_t*p,DWORD a,DWORD*e){(void)s;(vo
 static int readg(void*s,uint32_t a,uint8_t*b,uint32_t n){context*c=s;if(!c||a>sizeof(c->guest)||n>sizeof(c->guest)-a)return 0;memcpy(b,c->guest+a,n);return 1;}
 static int writeg(void*s,uint32_t a,const uint8_t*b,uint32_t n){context*c=s;if(!c||a>sizeof(c->guest)||n>sizeof(c->guest)-a)return 0;memcpy(c->guest+a,b,n);return 1;}
 static int cf(const bx_ntvdm_cpu_result_v2*r){return (r->eflags_values&BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF)!=0;}
-static int invoke(context*c,bx_ntvdm_dem_direct_context*d,bx_ntvdm_exception_event_v1*e,bx_ntvdm_cpu_state_v1*cpu,bx_ntvdm_cpu_result_v2*r,uint32_t svc){bx_ntvdm_demhndl_call x;memset(&x,0,sizeof(x));x.magic=BX_NTVDM_DEMHNDL_CALL_MAGIC;x.abi_version=BX_NTVDM_DEMHNDL_CALL_VERSION;x.struct_bytes=sizeof(x);x.service=svc;x.direct=d;x.boundary=e;x.cpu=cpu;x.result=r;x.guest_state=c;x.guest_read=readg;x.guest_write=writeg;return bx_ntvdm_demdir_invoke(&x)&&r->disposition==BX_NTVDM_CPU_RESULT_V2_RESUME;}
+static int invoke(context*c,bx_ntvdm_dem_direct_context*d,bx_ntvdm_exception_event_v1*e,bx_ntvdm_cpu_state_v1*cpu,bx_ntvdm_cpu_result_v2*r,uint32_t svc){bx_ntvdm_demhndl_call x;memset(&x,0,sizeof(x));x.magic=BX_NTVDM_DEMHNDL_CALL_MAGIC;x.abi_version=BX_NTVDM_DEMHNDL_CALL_VERSION;x.struct_bytes=sizeof(x);x.service=svc;x.direct=d;x.boundary=e;x.cpu=cpu;x.result=r;x.guest_state=c;x.guest_read=readg;x.guest_write=writeg;return bx_ntvdm_demdisp_invoke(&x)&&r->disposition==BX_NTVDM_CPU_RESULT_V2_RESUME;}
 static void cpuinit(bx_ntvdm_cpu_state_v1*c){bx_ntvdm_cpu_state_v1_initialize(c,BX_NTVDM_CPU_EXECUTION_REAL);c->ds=0x100;c->es=0x100;}
 int main(void){char tmp[MAX_PATH],dir[MAX_PATH],old[MAX_PATH];context c;bx_ntvdm_dem_direct_context d;bx_ntvdm_exception_event_v1 e;bx_ntvdm_cpu_state_v1 cpu;bx_ntvdm_cpu_result_v2 r;CDS cds;DWORD n;char drive;
  if(!GetCurrentDirectoryA(MAX_PATH,old)||!GetTempPathA(MAX_PATH,tmp))return 1;sprintf_s(dir,sizeof(dir),"%st230-dir",tmp);RemoveDirectoryA(dir);memset(&c,0,sizeof(c));memset(&d,0,sizeof(d));d.magic=BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;d.abi_version=BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION;d.struct_bytes=sizeof(d);d.state=&c;d.publish_handle=publish;d.lookup_handle=lookup;d.release_handle=release;d.query_attributes=attrget;d.set_attributes=attrset;memset(&e,0,sizeof(e));e.magic=BX_NTVDM_EXCEPTION_ABI_MAGIC;e.abi_version=BX_NTVDM_EXCEPTION_ABI_VERSION;e.struct_bytes=sizeof(e);e.kind=BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;e.fault_rip=0x1000;

@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demerror_lock_shim.h"
+
+extern SAVEDEMWORLD RetryInfo;
 
 typedef struct fixture_context {
     uint8_t guest[0x10000];
@@ -52,7 +55,7 @@ static int invoke(fixture_context *state, bx_ntvdm_dem_direct_context *direct,
     call.struct_bytes=sizeof(call); call.service=service; call.direct=direct;
     call.boundary=event; call.cpu=cpu; call.result=result; call.guest_state=state;
     call.guest_read=read_guest; call.guest_write=write_guest;
-    return bx_ntvdm_demerror_lock_invoke(&call) &&
+    return bx_ntvdm_demdisp_invoke(&call) &&
         result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME;
 }
 
@@ -86,11 +89,15 @@ int main(void)
     reset_cpu(&cpu); cpu.edx=0x0200u; cpu.ebx=0x0220u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x32u) || carry(&result)) return 3;
 
-    /* Original demRetry restores saved state then invokes its table entry.
-     * The still-unbound catalogue slot is deliberately an explicit DOS error. */
+    /* Original demRetry restores the saved service identity and reinvokes the
+     * original table entry.  Retry a historical ordinary-return slot: this
+     * proves the dispatcher-owned table is used, without inventing a retry
+     * provider or taking an unrecorded host action. */
+    memset(&RetryInfo, 0, sizeof(RetryInfo));
+    RetryInfo.iSVC = 0x1fu;
     reset_cpu(&cpu);
-    if (!invoke(&state,&direct,&event,&cpu,&result,0x33u) || !carry(&result) ||
-        result.cpu_delta.gpr16_values[0] != ERROR_CALL_NOT_IMPLEMENTED) return 4;
+    if (!invoke(&state,&direct,&event,&cpu,&result,0x33u) || carry(&result) ||
+        CurrentISVC != 0x1fu) return 4;
 
     /* Original demlock.c obtains an opaque token through BX:BP and calls
      * Win32 LockFile/UnlockFile, preserving its own success/failure flow. */
@@ -99,6 +106,6 @@ int main(void)
     reset_cpu(&cpu); cpu.eax=1u; cpu.ebx=0x1234u; cpu.ebp=0x5678u; cpu.esi=0u; cpu.edi=1u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x3fu) || carry(&result)) return 6;
     CloseHandle(state.file); DeleteFileA(path);
-    puts("T230 S8 direct OpenNT demerror/demlock import: hard-error setup, retry failure and file lock contracts verified");
+    puts("T230 S8 direct OpenNT demerror/demlock import: hard-error setup, dispatcher retry and file lock contracts verified");
     return 0;
 }

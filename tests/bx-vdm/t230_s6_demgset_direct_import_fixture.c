@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demgset_shim.h"
 
 /* The fixture crosses the already-imported search owner after DTA
@@ -27,7 +28,7 @@ static int write_guest(void *s, uint32_t a, const uint8_t *b, uint32_t n)
 static int invoke(fixture_context *s, bx_ntvdm_dem_direct_context *d,
     bx_ntvdm_exception_event_v1 *e, bx_ntvdm_cpu_state_v1 *cpu,
     bx_ntvdm_cpu_result_v2 *r, uint32_t service, int search)
-{ bx_ntvdm_demhndl_call c; memset(&c, 0, sizeof(c)); c.magic=BX_NTVDM_DEMHNDL_CALL_MAGIC; c.abi_version=BX_NTVDM_DEMHNDL_CALL_VERSION; c.struct_bytes=sizeof(c); c.service=service; c.direct=d; c.boundary=e; c.cpu=cpu; c.result=r; c.guest_state=s; c.guest_read=read_guest; c.guest_write=write_guest; return (search ? bx_ntvdm_demsrch_fcb_invoke(&c) : bx_ntvdm_demgset_invoke(&c)) && r->disposition==BX_NTVDM_CPU_RESULT_V2_RESUME; }
+{ bx_ntvdm_demhndl_call c; (void)search; memset(&c, 0, sizeof(c)); c.magic=BX_NTVDM_DEMHNDL_CALL_MAGIC; c.abi_version=BX_NTVDM_DEMHNDL_CALL_VERSION; c.struct_bytes=sizeof(c); c.service=service; c.direct=d; c.boundary=e; c.cpu=cpu; c.result=r; c.guest_state=s; c.guest_read=read_guest; c.guest_write=write_guest; return bx_ntvdm_demdisp_invoke(&c) && r->disposition==BX_NTVDM_CPU_RESULT_V2_RESUME; }
 static void reset_cpu(bx_ntvdm_cpu_state_v1 *c)
 { bx_ntvdm_cpu_state_v1_initialize(c, BX_NTVDM_CPU_EXECUTION_REAL); c->ds=0x100u; c->es=0x100u; }
 static int carry(const bx_ntvdm_cpu_result_v2 *r)
