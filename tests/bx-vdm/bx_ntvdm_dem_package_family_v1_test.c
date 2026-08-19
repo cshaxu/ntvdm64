@@ -491,6 +491,20 @@ static int whole_provider_pdb_lifecycle_regression(void)
         result.cpu_delta.gpr16_values[0u] != 3u ||
         result.eflags_values != 0u || memcmp(ram + 0x600u, "ONE", 3u) != 0)
         goto cleanup;
+    /* OpenNT demCommit tolerates a read-only FlushFileBuffers failure in
+     * release builds, then clears CF.  It is therefore legal in both modes. */
+    bytes[3] = 0x27u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 0u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u) goto cleanup;
     /* demWrite shares the profile owner with FCB I/O: Direct writes the
      * fixture-owned token; Readonly must return ACCESS_DENIED before its
      * host WriteFile path. */

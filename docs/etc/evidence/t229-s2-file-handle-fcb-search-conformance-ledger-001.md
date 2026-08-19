@@ -36,7 +36,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:1E` | `demWrite` | P — Direct write, pre-host Readonly refusal | zero-length/disk-full variants |
 | `50:20` | `demRenameFCB` | R | wildcard source/destination matrix |
 | `50:22` | `demCreateNew` | P — whole-provider collision/refusal ABI | success/attribute variants |
-| `50:27` | `demCommit` | R | token-aware CF-clear behavior |
+| `50:27` | `demCommit` | P — token-aware Direct/Readonly CF-clear | invalid-handle variant |
 | `50:2C` | `demCreateFCB` | R | create result/layout + Readonly refusal |
 | `50:2D` | `demOpenFCB` | P — OEM path, `AX:BP` token | share/access matrix |
 | `50:2E` | `demCloseFCB` | P — `AX:SI` token release | null-token variant |
