@@ -54,7 +54,7 @@
 
 > **T230 S10 (local Direct matrix):** [DEM Direct matrix and legacy exclusion](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md) records the fresh direct OpenNT `demdisp.c` 73-slot dispatcher fixture, all eight imported-owner Direct fixtures, and the removal of the source-derived CWD experiment from the formal `bx-vdm` module. It does not claim bounded native observation or final legacy deletion.
 
-> **T230 S10 (native Direct gap):** [native Direct DEM composition gap](etc/research/t230-s10-native-direct-dem-composition-gap-001.md) records that the native engine still installs the retained v1 composition runtime, while the Direct mirror now has a bounded v1-free ingress.  The missing bridge is a session-owned checked guest-memory composition boundary, not a DEM source/provider gap.
+> **T230 S10 (native Direct gap):** [native Direct DEM composition gap](etc/research/t230-s10-native-direct-dem-composition-gap-001.md) records that the native engine still installs the retained v1 composition runtime.  A bounded v1-free Direct session now converts copied #UD events to the original dispatcher; binding it to the existing machine checked-memory transport remains the gap, not a DEM source/provider gap.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

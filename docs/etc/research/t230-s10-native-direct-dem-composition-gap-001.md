@@ -63,10 +63,28 @@ recognize only the bounded `50:xx` encoding already admitted by
 semantics, or reuse the v1 provider registry.  The source-owned DEM bodies
 and `DemDispatch` remain unchanged.
 
+## First bridge closure
+
+`bop/shim/dem_native_session_shim.{h,c}` now implements the adapter half of
+that boundary.  Its explicit per-session bind owns a Direct context and
+checked guest read/write callbacks; it converts a copied generic-UD event to
+the existing fixed boundary/CPU/window records, calls the v1-free
+`dem_ingress_shim`, and converts the typed DEM result back to the fixed
+generic-UD outcome.  It does not install the mantle's global bridge and does
+not use a Bochs pointer.
+
+The formal `t230-s10-dem-native-session-direct-fixture` verifies an admitted
+`C4 C4 50 1F` copied event reaches the original ordinary-return dispatcher
+slot and publishes a typed resume.  It separately proves rejection of a
+COMMAND selector and dispatch after unbind.  This is adapter-composition
+closure for the bounded Direct path; it is not yet a native CPU execution
+claim.
+
 ## Follow-up
 
-Before a bounded native observation can be claimed, introduce and test that
-session-owned checked-memory bridge, replace the engine's v1 runtime install,
-and prove a native `50:xx` transaction through the original dispatcher.  The
-next implementation decision is the existing machine-contract location for
-the checked guest-memory callbacks; it must be reused rather than duplicated.
+Before a bounded native observation can be claimed, bind this session to the
+existing machine-contract checked-memory transport, replace the engine's v1
+runtime install, and prove a native `50:xx` transaction through the original
+dispatcher.  The next implementation decision is the existing
+machine-contract location for those callbacks; it must be reused rather than
+duplicated.

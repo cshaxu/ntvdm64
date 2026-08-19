@@ -204,6 +204,7 @@
         "src/bx-vdm/bop/shim/demerror_lock_shim.c",
         "src/bx-vdm/bop/shim/demdisp_shim.c",
         "src/bx-vdm/bop/shim/dem_ingress_shim.c",
+        "src/bx-vdm/bop/shim/dem_native_session_shim.c",
         "src/bx-vdm/bop/shim/demmisc_shim.c",
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
@@ -773,6 +774,25 @@
     {
       "name": "t230-s10-dem-ingress-direct-fixture",
       "source": "tests/bx-vdm/t230_s10_dem_ingress_direct_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s10-dem-native-session-direct-fixture",
+      "source": "tests/bx-vdm/t230_s10_dem_native_session_direct_fixture.c",
       "libraries": [
         "bx-vdm"
       ],
