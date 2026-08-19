@@ -82,6 +82,11 @@
 > source and formal-manifest exclusion audit.  The retained `bop-v1` directory
 > is now non-DEM historical debt only; this deletion does not assert the v2
 > 73-slot runtime/native closure.
+
+> **T230 S15 P4 (post-deletion matrix):** the formal Ninja graph built and
+> ran all 14 T230 OpenNT-DEM fixtures with zero exit, including the original
+> 73-slot dispatcher table and v2 copied-UD composition.  It is local v2
+> regression evidence; native guest observation remains open.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

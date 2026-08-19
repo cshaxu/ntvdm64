@@ -105,6 +105,15 @@ no `bop-v1` source.  Consequently this record does not claim the 73-slot v2
 runtime/native closure: the pre-stage rejection and one bounded native Direct
 observation remain open.
 
+After deletion, the same formal graph built and ran all 14 T230 fixtures with
+zero exit: checked RAM; Direct host/native session; `demhndl`, `demfile` /
+`demlabel`, `demdir`, `demsrch` / `demfcb`, `demgset`, `demdasd` /
+`demioctl`, `demerror` / `demlock`, and `demmisc`; the original `demdisp.c`
+73-slot table; bounded ingress; and copied-UD composition.  The fixture
+outputs explicitly report the original dispatcher and v1-free composition.
+This is a complete post-deletion local regression of the formal T230 fixture
+set, but it remains distinct from an executing guest's native observation.
+
 ## CLI link sweep
 
 The two selector-blind BOP/#UD sequence observers were moved from `bop-v1` to
@@ -116,7 +125,8 @@ Direct session.  Their removal does not remove a DEM service or failure path.
 Fresh formal build root `build/M0-T230-S15/cli-v2-observation-r1` now compiles
 the complete v2 `bx-vdm`, `bx-core`, `bx-mantle`, `cli` and `opennt-host`
 archives.  The `ntdos64-native` link no longer reports legacy observers or
-unlinked OpenNT host APIs.  Its only remaining unresolved symbols are the five
-startup functions of `bx_ntvdm_composition_runtime_v1`.  This precisely
-isolates the next removal prerequisite: a v2 startup/composition owner, not a
-remaining DEM handler, shim, observer, or Win32 API issue.
+unlinked OpenNT host APIs.  The then-remaining five startup symbols were
+subsequently replaced by `dem_v2_startup_composition.c`; the fresh
+`v2-startup-r2` graph now links `ntdos64-native.exe` without the legacy
+composition runtime.  This does not turn the pre-stage rejection into a
+native DEM execution claim.
