@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1930 |
+| Documentation records | 1931 |
 | --- | --- |
-| Generated UTC | 2026-08-19T00:14:30Z |
+| Generated UTC | 2026-08-19T00:16:30Z |
 
 ## Entries
 
@@ -181,8 +181,9 @@ content-divergent entries.
 | etc/evidence/t228-s1-terminal-provenance-result-001.md | indexed supporting material | ec8b1dd65f40f595d0c42739ad6185bdfbb833ea2df86ea90ba0a813883a86c7 |
 | etc/evidence/t228-s1-transition-successor-provenance-result-001.md | indexed supporting material | 225cb28a2d24ea8cf8c4ff31edc2601bfc8ceb1d3a42e11eb68840c98a768f61 |
 | etc/evidence/t229-s1-dem-complete-source-abi-failure-audit-result-001.md | indexed supporting material | a926a4b8d368112f73c26cd543704f96916d79bceeaf03728cb0022fd2696ab0 |
-| etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md | indexed supporting material | eb8694d37fd520425d90d29319349033c7a444c189e7e15911b8199a9700ece5 |
+| etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md | indexed supporting material | 805841de272cbbf890afaeff96f942237ac4eb422f7655b1ea363ab9607cd8bf |
 | etc/evidence/t229-s2-p10-dem-read-direct-readonly-001.md | indexed supporting material | 889b052699568de6c0f5b341ef2b585aa070ba0e165d906aca2539744b5146ff |
+| etc/evidence/t229-s2-p11-dem-commit-direct-readonly-001.md | indexed supporting material | 8f571894cfc8210450f66bf1185b2e9061456f115eb8ce2a760efa9da34f2ede |
 | etc/evidence/t229-s2-p1-dem-whole-provider-direct-readonly-conformance-001.md | indexed supporting material | 8e7015badd3ab6f3ab372ba59544c65917d05ef3d3a99d4533eebdfa5a2dd65e |
 | etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md | indexed supporting material | 2134dbbf4ff68d4412124616f1fb6167d69333bb54b86f47f5bd661a0af24c6c |
 | etc/evidence/t229-s2-p4-dem-open-create-result-abi-correction-001.md | indexed supporting material | 7d971223bc554754b156fb3bd4badabf631eb5dff0ca38aa9d3c5a363656fb98 |
