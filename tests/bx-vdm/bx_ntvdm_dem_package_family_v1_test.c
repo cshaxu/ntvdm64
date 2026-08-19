@@ -1111,24 +1111,36 @@ cleanup:
 }
 static int misc_family_regression(void)
 {
-    static const uint8_t cli_no_debug_services[] = {
-        0x1du, 0x23u, 0x34u, 0x35u, 0x36u, 0x37u, 0x38u, 0x39u,
-        0x3au, 0x3eu, 0x45u
+    static const uint8_t ordinary_no_debug_services[] = {
+        0x1du, 0x34u, 0x35u, 0x36u, 0x37u, 0x38u, 0x39u, 0x3au, 0x3eu
     };
     bx_ntvdm_cpu_result_v2 result;
     uint32_t index;
 
     /* These are original ordinary-return branches in a non-debug, non-VDD,
-     * non-WOW, no-device CLI profile.  `50:3C` is intentionally excluded:
-     * it is a PDB lifecycle notification whose retained search-state cleanup
-     * has its own owner regression. */
-    for (index = 0u; index < sizeof(cli_no_debug_services); ++index) {
-        if (!dispatch(cli_no_debug_services[index], &result) ||
+     * non-WOW CLI profile.  `50:3C` is intentionally excluded: it is a PDB
+     * lifecycle notification whose retained search-state cleanup has its own
+     * owner regression. */
+    for (index = 0u; index < sizeof(ordinary_no_debug_services); ++index) {
+        if (!dispatch(ordinary_no_debug_services[index], &result) ||
             result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
             result.resume_rip != 0x104u ||
             result.cpu_delta.gpr16_write_mask != 0u ||
             result.eflags_write_mask != 0u) return 0;
     }
+    /* demDiskReset is only the no-media/no-COMMAND-registration branch here.
+     * It must stay separate from ordinary debug/WOW no-ops until the fixed
+     * cmdSetInfo fd_access locator is composed with a media owner. */
+    if (!dispatch(0x23u, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 0u ||
+        result.eflags_write_mask != 0u) return 0;
+    /* demSystemSymbolOp's non-debug branch is independently routed so it
+     * cannot silently inherit the generic ordinary-return classifier. */
+    if (!dispatch(0x45u, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 0u ||
+        result.eflags_write_mask != 0u) return 0;
 
     /* demIsDebug is deliberately different: demmisc.c calls setAL(), so
      * contained no-debug must clear AL but preserve AH and all flags. */
