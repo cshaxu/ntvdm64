@@ -76,6 +76,12 @@
 > observation rejects before machine-stage creation (`terminal=2 detail=3`),
 > so this is route-retirement progress, not native DEM execution or T230
 > closure.  The successor details are retained in the linked P4 evidence.
+
+> **T230 S15 P4 (legacy DEM deletion):** all 140 tracked handwritten
+> `bop-v1/bx_ntvdm_dem_*` implementation/header files are deleted after a
+> source and formal-manifest exclusion audit.  The retained `bop-v1` directory
+> is now non-DEM historical debt only; this deletion does not assert the v2
+> 73-slot runtime/native closure.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

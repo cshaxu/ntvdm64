@@ -97,13 +97,13 @@ claiming the S16 native observation.
 ## Remaining S15 work
 
 The native engine no longer calls
-`bop-v1/bx_ntvdm_composition_runtime_v1` for startup.  Nevertheless, retained
-v1 DEM source still exists as comparison material and the generic host ABI has
-one remaining historical catalog include.  Consequently this record does not
-claim that retained v1 DEM files can already be deleted.  S15 remains active
-until scans prove every product route excludes those sources or the sources
-are removed, and until the pre-stage rejection and the bounded native Direct
-observation are closed.
+`bop-v1/bx_ntvdm_composition_runtime_v1` for startup.  The audited 140 tracked
+handwritten `bop-v1/bx_ntvdm_dem_*` implementation/header files are now
+deleted.  The surviving `bop-v1` directory contains only non-DEM historical
+families and their shared legacy scaffolding; the formal module manifest has
+no `bop-v1` source.  Consequently this record does not claim the 73-slot v2
+runtime/native closure: the pre-stage rejection and one bounded native Direct
+observation remain open.
 
 ## CLI link sweep
 
