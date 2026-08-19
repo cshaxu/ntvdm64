@@ -1,7 +1,7 @@
 #include "bx_ntvdm_legacy_plane_gate_v1.h"
-#include "bx_ntvdm_bop_provider_registry_v1.h"
-#include "bx_ntvdm_dem_plane_v1.h"
-#include "bx_ntvdm_command_plane_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_dem_plane_v1.h"
+#include "bop-v1/bx_ntvdm_command_plane_v1.h"
 
 int bx_ntvdm_legacy_plane_gate_v1_dem(const bx_ntvdm_instruction_window_v1 *w,
     uint8_t expected) {

@@ -1,4 +1,4 @@
-#include "bx_ntvdm_cmd_current_dir_service.h"
+#include "bop-v1/bx_ntvdm_cmd_current_dir_service.h"
 
 #include <stdio.h>
 #include <string.h>

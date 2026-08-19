@@ -1,4 +1,4 @@
-#include "../../src/bx-vdm/bx_ntvdm_dem_virtual_mutation_backend_v1.h"
+#include "../../src/bx-vdm/bop-v1/bx_ntvdm_dem_virtual_mutation_backend_v1.h"
 int main(void) { bx_ntvdm_dem_overlay_store_v1 s; DWORD e; int empty;
  bx_ntvdm_dem_overlay_namespace_node_v1 n;
  if(!bx_ntvdm_dem_overlay_store_v1_initialize(&s)) return 1;

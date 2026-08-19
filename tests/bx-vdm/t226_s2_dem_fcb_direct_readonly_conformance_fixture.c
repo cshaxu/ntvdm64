@@ -1,6 +1,6 @@
-#include "bx_ntvdm_dem_fcb_handle_partition_v1.h"
-#include "bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
-#include "bx_ntvdm_dem_fcb_io_route_partition_v1.h"
+#include "bop-v1/bx_ntvdm_dem_fcb_handle_partition_v1.h"
+#include "bop-v1/bx_ntvdm_dem_fcb_wildcard_partition_v1.h"
+#include "bop-v1/bx_ntvdm_dem_fcb_io_route_partition_v1.h"
 
 #include <stdlib.h>
 #include <stdio.h>

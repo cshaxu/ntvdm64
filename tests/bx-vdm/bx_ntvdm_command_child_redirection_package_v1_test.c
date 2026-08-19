@@ -1,5 +1,5 @@
-#include "bx_ntvdm_command_package_session_v1.h"
-#include "bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_command_package_session_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 #include <string.h>
 

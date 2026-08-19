@@ -1,11 +1,11 @@
-#include "bx_ntvdm_boot_namespace_plane_v1.h"
-#include "bx_ntvdm_bop_ingress_v1.h"
-#include "bx_ntvdm_bop_provider_registry_v1.h"
-#include "bx_ntvdm_dem_package_session_v1.h"
+#include "bop-v1/bx_ntvdm_boot_namespace_plane_v1.h"
+#include "bop-v1/bx_ntvdm_bop_ingress_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_dem_package_session_v1.h"
 #include "bx_ntvdm_host_drive_policy.h"
 #include "bx_ntvdm_host_namespace.h"
-#include "bx_ntvdm_host_volume_snapshot_v1.h"
-#include "bx_ntvdm_search_transaction_v1.h"
+#include "bop-v1/bx_ntvdm_host_volume_snapshot_v1.h"
+#include "bop-v1/bx_ntvdm_search_transaction_v1.h"
 #include <string.h>
 #include <time.h>
 

@@ -1,5 +1,5 @@
 #include "bx_ntvdm_generic_ud_bridge.h"
-#include "bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bop-v1/bx_ntvdm_bop_sequence_observation_v1.h"
 
 #include <string.h>
 

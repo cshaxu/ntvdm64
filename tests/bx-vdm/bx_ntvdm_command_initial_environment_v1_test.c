@@ -1,4 +1,4 @@
-#include "bx_ntvdm_command_initial_environment_v1.h"
+#include "bop-v1/bx_ntvdm_command_initial_environment_v1.h"
 
 #include <stdio.h>
 #include <string.h>

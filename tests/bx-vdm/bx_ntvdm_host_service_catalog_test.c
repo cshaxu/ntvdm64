@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#include "bx_ntvdm_host_service_catalog.h"
+#include "bop-v1/bx_ntvdm_host_service_catalog.h"
 
 int main(void)
 {

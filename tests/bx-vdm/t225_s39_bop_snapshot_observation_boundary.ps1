@@ -16,7 +16,7 @@ foreach ($path in $coreAndMantle) {
     if ($null -ne $match) { throw "BOP snapshot observer crossed its bx-vdm/CLI boundary: $path" }
 }
 
-$header = Get-Content -LiteralPath (Join-Path $root 'src/bx-vdm/bx_ntvdm_bop_sequence_observation_v1.h') -Raw
+$header = Get-Content -LiteralPath (Join-Path $root 'src/bx-vdm/bop-v1/bx_ntvdm_bop_sequence_observation_v1.h') -Raw
 $observer = Get-Content -LiteralPath (Join-Path $root 'src/bx-vdm/bop-v1/bx_ntvdm_bop_sequence_observation_v1.c') -Raw
 $cli = Get-Content -LiteralPath (Join-Path $root 'src/cli/ntdos64_native_cli.c') -Raw
 

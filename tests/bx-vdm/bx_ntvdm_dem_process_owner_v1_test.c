@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "bx_ntvdm_dem_process_owner_v1.h"
+#include "bop-v1/bx_ntvdm_dem_process_owner_v1.h"
 
 int main(void)
 {

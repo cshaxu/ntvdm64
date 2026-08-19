@@ -1,4 +1,4 @@
-#include "bx_ntvdm_command_plane_v1.h"
+#include "bop-v1/bx_ntvdm_command_plane_v1.h"
 int main(void) {
     bx_ntvdm_instruction_window_v1 w; bx_ntvdm_bop_ingress_v1 i;
     bx_ntvdm_bop_provider_selection_v1 s; bx_ntvdm_command_plane_record_v1 r; uint32_t n; int bad=0;

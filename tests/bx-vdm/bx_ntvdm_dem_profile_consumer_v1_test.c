@@ -1,4 +1,4 @@
-#include "bx_ntvdm_dem_profile_consumer_v1.h"
+#include "bop-v1/bx_ntvdm_dem_profile_consumer_v1.h"
 
 static int resolves(uint32_t mode, uint32_t expected)
 {

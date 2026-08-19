@@ -1,9 +1,9 @@
-#include "bx_ntvdm_bop_ingress_v1.h"
-#include "bx_ntvdm_bop_provider_registry_v1.h"
-#include "bx_ntvdm_dem_plane_v1.h"
-#include "bx_ntvdm_command_plane_v1.h"
+#include "bop-v1/bx_ntvdm_bop_ingress_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_dem_plane_v1.h"
+#include "bop-v1/bx_ntvdm_command_plane_v1.h"
 #include "bx_ntvdm_xms_dpmi_plane_v1.h"
-#include "bx_ntvdm_system_plane_v1.h"
+#include "bop-v1/bx_ntvdm_system_plane_v1.h"
 
 static int classify(uint8_t selector, uint32_t count) {
     bx_ntvdm_instruction_window_v1 w; bx_ntvdm_bop_ingress_v1 i;

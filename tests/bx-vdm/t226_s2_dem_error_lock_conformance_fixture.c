@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "bx_ntvdm_bop_ingress_v1.h"
-#include "bx_ntvdm_bop_provider_registry_v1.h"
-#include "bx_ntvdm_dem_error_lock_plane_v1.h"
+#include "bop-v1/bx_ntvdm_bop_ingress_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_dem_error_lock_plane_v1.h"
 
 static int prepare(uint8_t service, bx_ntvdm_exception_event_v1 *event,
     bx_ntvdm_cpu_state_v1 *cpu, bx_ntvdm_instruction_window_v1 *window,

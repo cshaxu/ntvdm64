@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "bx_ntvdm_search_request_v1.h"
+#include "bop-v1/bx_ntvdm_search_request_v1.h"
 
 int main(void)
 {

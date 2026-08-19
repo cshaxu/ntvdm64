@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "bx_ntvdm_bop_ingress_v1.h"
-#include "bx_ntvdm_bop_provider_registry_v1.h"
-#include "bx_ntvdm_dem_package_facade_v1.h"
+#include "bop-v1/bx_ntvdm_bop_ingress_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_dem_package_facade_v1.h"
 
 static int dispatch(uint8_t service, bx_ntvdm_cpu_result_v2 *result)
 {

@@ -1,8 +1,8 @@
 #include "bx_ntvdm_engine_contract_v1.h"
 #include "bx_ntvdm_terminal_observation_v1.h"
-#include "bx_ntvdm_bop_sequence_observation_v1.h"
-#include "bx_ntvdm_dem_open_observation_v1.h"
-#include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
+#include "bop-v1/bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bop-v1/bx_ntvdm_dem_open_observation_v1.h"
+#include "bop-v1/bx_ntvdm_dem_namespace_identity_observation_v1.h"
 
 #include <stdio.h>
 

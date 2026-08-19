@@ -1,7 +1,7 @@
-#include "bx_ntvdm_command_bootstrap_provider_v1.h"
-#include "bx_ntvdm_cmd_current_dir_service.h"
-#include "bx_ntvdm_cmd_boot_file_service.h"
-#include "bx_ntvdm_command_plane_v1.h"
+#include "bop-v1/bx_ntvdm_command_bootstrap_provider_v1.h"
+#include "bop-v1/bx_ntvdm_cmd_current_dir_service.h"
+#include "bop-v1/bx_ntvdm_cmd_boot_file_service.h"
+#include "bop-v1/bx_ntvdm_command_plane_v1.h"
 #include <string.h>
 
 static void command_event(bx_ntvdm_exception_event_v1 *event, uint64_t rip)

@@ -22,7 +22,7 @@ function Require-Text([string]$text, [string]$needle, [string]$description) {
     }
 }
 
-$bridge = Read-Required 'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c'
+$bridge = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_vdm_generic_ud_bridge_v1.c'
 $boot = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_composition_v1.c'
 $native = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_native_bop_composition_v1.c'
 $dem = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_session_v1.c'
@@ -97,7 +97,7 @@ if (-not (Test-Path -LiteralPath $directory)) { New-Item -ItemType Directory -Fo
     staticOnly = $true
     sourceCount = $outRows.Count
     sourceInputs = @(
-        'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_vdm_generic_ud_bridge_v1.c',
         'src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_composition_v1.c',
         'src/bx-vdm/bop-v1/bx_ntvdm_native_bop_composition_v1.c',
         'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_session_v1.c',

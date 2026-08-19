@@ -1,4 +1,4 @@
-#include "bx_ntvdm_command_console_keyboard_provider_v1.h"
+#include "bop-v1/bx_ntvdm_command_console_keyboard_provider_v1.h"
 
 static void event_initialize(bx_ntvdm_exception_event_v1 *event)
 {

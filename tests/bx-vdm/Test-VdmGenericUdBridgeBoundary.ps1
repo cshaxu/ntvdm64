@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$sourcePath = Join-Path $repositoryRoot 'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c'
-$headerPath = Join-Path $repositoryRoot 'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.h'
+$sourcePath = Join-Path $repositoryRoot 'src/bx-vdm/bop-v1/bx_ntvdm_vdm_generic_ud_bridge_v1.c'
+$headerPath = Join-Path $repositoryRoot 'src/bx-vdm/bop-v1/bx_ntvdm_vdm_generic_ud_bridge_v1.h'
 $source = Get-Content -LiteralPath $sourcePath -Raw
 $header = Get-Content -LiteralPath $headerPath -Raw
 

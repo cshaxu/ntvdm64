@@ -1,6 +1,6 @@
-#include "bx_ntvdm_bop_ingress_v1.h"
-#include "bx_ntvdm_bop_provider_registry_v1.h"
-#include "bx_ntvdm_dem_package_session_v1.h"
+#include "bop-v1/bx_ntvdm_bop_ingress_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_dem_package_session_v1.h"
 #include "bx_ntvdm_host_namespace.h"
 
 #include <string.h>

@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#include "bx_ntvdm_bop_selector_probe.h"
+#include "bop-v1/bx_ntvdm_bop_selector_probe.h"
 
 int main(void)
 {

@@ -1,4 +1,4 @@
-#include "bx_ntvdm_dpmi_package_session_v1.h"
+#include "bop-v1/bx_ntvdm_dpmi_package_session_v1.h"
 #include <string.h>
 
 static int dispatch(bx_ntvdm_dpmi_package_session_v1 *s,uint8_t service,

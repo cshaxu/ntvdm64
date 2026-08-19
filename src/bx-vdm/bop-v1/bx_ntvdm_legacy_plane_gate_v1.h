@@ -2,7 +2,7 @@
 #define BX_NTVDM_LEGACY_PLANE_GATE_V1_H
 
 #include <stdint.h>
-#include "bx_ntvdm_bop_ingress_v1.h"
+#include "bop-v1/bx_ntvdm_bop_ingress_v1.h"
 
 #ifdef __cplusplus
 extern "C" {

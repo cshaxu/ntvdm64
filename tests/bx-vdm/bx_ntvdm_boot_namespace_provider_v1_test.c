@@ -1,5 +1,5 @@
-#include "bx_ntvdm_boot_namespace_provider_v1.h"
-#include "bx_ntvdm_command_profile_consumer_v1.h"
+#include "bop-v1/bx_ntvdm_boot_namespace_provider_v1.h"
+#include "bop-v1/bx_ntvdm_command_profile_consumer_v1.h"
 
 #include <stdio.h>
 #include <string.h>

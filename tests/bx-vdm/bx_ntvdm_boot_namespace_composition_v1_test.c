@@ -1,6 +1,6 @@
-#include "bx_ntvdm_boot_namespace_composition_v1.h"
-#include "bx_ntvdm_dem_package_facade_v1.h"
-#include "bx_ntvdm_command_package_facade_v1.h"
+#include "bop-v1/bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bop-v1/bx_ntvdm_dem_package_facade_v1.h"
+#include "bop-v1/bx_ntvdm_command_package_facade_v1.h"
 #include <string.h>
 #include <wctype.h>
 

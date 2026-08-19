@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "bx_ntvdm_command_profile_consumer_v1.h"
-#include "bx_ntvdm_startup_configuration_source_v1.h"
+#include "bop-v1/bx_ntvdm_command_profile_consumer_v1.h"
+#include "bop-v1/bx_ntvdm_startup_configuration_source_v1.h"
 
 static int write_bytes(const wchar_t *path, const void *bytes, DWORD byte_count)
 {

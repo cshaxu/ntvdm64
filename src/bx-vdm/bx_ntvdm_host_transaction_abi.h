@@ -5,7 +5,7 @@
 
 #include "bx_ntvdm_cpu_state_abi.h"
 #include "bx_ntvdm_guest_write_abi.h"
-#include "bx_ntvdm_host_service_catalog.h"
+#include "bop-v1/bx_ntvdm_host_service_catalog.h"
 
 #define BX_NTVDM_HOST_TRANSACTION_ABI_MAGIC 0x42585458u
 #define BX_NTVDM_HOST_TRANSACTION_ABI_VERSION 1u

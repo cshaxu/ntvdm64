@@ -1,6 +1,6 @@
 #include "bx_ntvdm_exception_observer_v1.h"
 
-#include "bx_ntvdm_bop_catalog_v1.h"
+#include "bop-v1/bx_ntvdm_bop_catalog_v1.h"
 
 #include <stdio.h>
 

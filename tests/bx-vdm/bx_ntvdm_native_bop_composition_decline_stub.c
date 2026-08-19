@@ -1,4 +1,4 @@
-#include "bx_ntvdm_native_bop_composition_v1.h"
+#include "bop-v1/bx_ntvdm_native_bop_composition_v1.h"
 
 /* The boot-namespace composition fixture deliberately has no mantle-backed
  * native root.  Its bridge-order regression needs the ordinary unbound-root

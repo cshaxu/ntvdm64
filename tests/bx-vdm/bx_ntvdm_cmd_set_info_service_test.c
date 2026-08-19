@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "bx_ntvdm_cmd_set_info_service.h"
+#include "bop-v1/bx_ntvdm_cmd_set_info_service.h"
 int main(void) {
  bx_ntvdm_exception_event_v1 e={BX_NTVDM_EXCEPTION_ABI_MAGIC,BX_NTVDM_EXCEPTION_ABI_VERSION,sizeof(e),BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION,0u,6u,0u,0u,0x749du};
  bx_ntvdm_cpu_state_v1 c; bx_ntvdm_instruction_window_v1 w; bx_ntvdm_cmd_set_info_registration_v1 r; bx_ntvdm_cpu_result_v2 x;

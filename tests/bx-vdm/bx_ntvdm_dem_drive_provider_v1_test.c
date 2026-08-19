@@ -1,4 +1,4 @@
-#include "bx_ntvdm_dem_drive_provider_v1.h"
+#include "bop-v1/bx_ntvdm_dem_drive_provider_v1.h"
 
 static int test_snapshot(uint32_t present_mask, const uint8_t types[26],
     uint16_t expected)

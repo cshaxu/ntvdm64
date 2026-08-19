@@ -1,6 +1,6 @@
 #include "bx_ntvdm_engine_contract_v1.h"
 #include "bx_ntvdm_cancellation_controller_v1.h"
-#include "bx_ntvdm_composition_runtime_v1.h"
+#include "bop-v1/bx_ntvdm_composition_runtime_v1.h"
 
 static int bx_ntvdm_engine_cancelled(uint32_t *reason)
 {

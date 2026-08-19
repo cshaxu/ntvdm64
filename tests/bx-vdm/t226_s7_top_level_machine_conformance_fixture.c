@@ -1,5 +1,5 @@
-#include "bx_ntvdm_top_level_package_facade_v1.h"
-#include "bx_ntvdm_machine_bop_facade_v1.h"
+#include "bop-v1/bx_ntvdm_top_level_package_facade_v1.h"
+#include "bop-v1/bx_ntvdm_machine_bop_facade_v1.h"
 #include <string.h>
 
 static int invoke(uint8_t selector, uint32_t route, uint32_t disposition, int machine)

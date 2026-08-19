@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <wchar.h>
 
-#include "bx_ntvdm_composition_runtime_v1.h"
+#include "bop-v1/bx_ntvdm_composition_runtime_v1.h"
 #include "byob_profile.h"
-#include "bx_ntvdm_command_profile_consumer_v1.h"
-#include "bx_ntvdm_dem_profile_consumer_v1.h"
-#include "bx_ntvdm_dem_drive_view_provider_v1.h"
+#include "bop-v1/bx_ntvdm_command_profile_consumer_v1.h"
+#include "bop-v1/bx_ntvdm_dem_profile_consumer_v1.h"
+#include "bop-v1/bx_ntvdm_dem_drive_view_provider_v1.h"
 #include "bx_ntvdm_engine_contract_v1.h"
-#include "bx_ntvdm_mutation_profile_v1.h"
+#include "bop-v1/bx_ntvdm_mutation_profile_v1.h"
 
 static int profile_contract_accepted(uint32_t mode)
 {

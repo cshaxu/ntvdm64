@@ -1,13 +1,13 @@
 #include "bx_ntvdm_cpu_result_bridge_v1.h"
 
 #include "bx_ntvdm_bios_memory_service.h"
-#include "bx_ntvdm_dem_boot_drive_service.h"
-#include "bx_ntvdm_cmd_set_info_service.h"
-#include "bx_ntvdm_dem_debug_service.h"
-#include "bx_ntvdm_dem_dta_service.h"
-#include "bx_ntvdm_dem_drive_service.h"
-#include "bx_ntvdm_dem_hard_error_service.h"
-#include "bx_ntvdm_startup_transaction_bridge.h"
+#include "bop-v1/bx_ntvdm_dem_boot_drive_service.h"
+#include "bop-v1/bx_ntvdm_cmd_set_info_service.h"
+#include "bop-v1/bx_ntvdm_dem_debug_service.h"
+#include "bop-v1/bx_ntvdm_dem_dta_service.h"
+#include "bop-v1/bx_ntvdm_dem_drive_service.h"
+#include "bop-v1/bx_ntvdm_dem_hard_error_service.h"
+#include "bop-v1/bx_ntvdm_startup_transaction_bridge.h"
 
 int bx_ntvdm_cpu_result_bridge_v1_dispatch(
     const bx_ntvdm_exception_event_v1 *event,

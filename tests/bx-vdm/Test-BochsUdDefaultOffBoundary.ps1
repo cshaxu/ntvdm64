@@ -35,7 +35,7 @@ $includeBlock = $source.Substring($includeStart, $includeEnd - $includeStart)
 foreach ($token in @(
         '#include "bx_ntvdm_exception_intercept.h"',
         '#include "bx_ntvdm_exception_abi.h"',
-        '#include "bx_ntvdm_adapter_runtime.h"',
+        '#include "bop-v1/bx_ntvdm_adapter_runtime.h"',
         '#include "bx_ntvdm_guest_gather_read_action_v1.h"',
         'bx_ntvdm_try_intercept_ud')) {
     if (-not $includeBlock.Contains($token)) {

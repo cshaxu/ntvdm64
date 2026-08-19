@@ -1,4 +1,4 @@
-#include "bx_ntvdm_boot_namespace_plane_v1.h"
+#include "bop-v1/bx_ntvdm_boot_namespace_plane_v1.h"
 #include <string.h>
 
 static void window_capture(bx_ntvdm_instruction_window_v1 *window,

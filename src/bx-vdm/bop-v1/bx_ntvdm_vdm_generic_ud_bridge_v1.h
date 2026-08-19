@@ -1,7 +1,7 @@
 #ifndef BX_NTVDM_VDM_GENERIC_UD_BRIDGE_V1_H
 #define BX_NTVDM_VDM_GENERIC_UD_BRIDGE_V1_H
 
-#include "bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
 #include "bx_ntvdm_generic_ud_bridge.h"
 
 #ifdef __cplusplus

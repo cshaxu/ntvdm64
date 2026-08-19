@@ -1,4 +1,4 @@
-#include "bx_ntvdm_dem_plane_v1.h"
+#include "bop-v1/bx_ntvdm_dem_plane_v1.h"
 
 static uint32_t expected_component(uint8_t service)
 {

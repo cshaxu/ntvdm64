@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
 
 #define BX_NTVDM_XMS_DPMI_PLANE_V1_MAGIC 0x42585831u
 #define BX_NTVDM_XMS_DPMI_PLANE_V1_VERSION 1u

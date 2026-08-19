@@ -1,5 +1,5 @@
-#include "bx_ntvdm_bop_ingress_v1.h"
-#include "bx_ntvdm_bop_provider_registry_v1.h"
+#include "bop-v1/bx_ntvdm_bop_ingress_v1.h"
+#include "bop-v1/bx_ntvdm_bop_provider_registry_v1.h"
 
 static int classify(uint8_t selector, uint8_t service, uint32_t bytes,
     uint32_t route, uint16_t family)

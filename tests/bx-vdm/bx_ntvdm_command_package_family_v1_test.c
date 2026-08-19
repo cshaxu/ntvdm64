@@ -1,8 +1,8 @@
-#include "bx_ntvdm_command_bootstrap_provider_v1.h"
-#include "bx_ntvdm_command_console_keyboard_provider_v1.h"
-#include "bx_ntvdm_command_launch_execution_provider_v1.h"
-#include "bx_ntvdm_command_lifecycle_provider_v1.h"
-#include "bx_ntvdm_command_package_facade_v1.h"
+#include "bop-v1/bx_ntvdm_command_bootstrap_provider_v1.h"
+#include "bop-v1/bx_ntvdm_command_console_keyboard_provider_v1.h"
+#include "bop-v1/bx_ntvdm_command_launch_execution_provider_v1.h"
+#include "bop-v1/bx_ntvdm_command_lifecycle_provider_v1.h"
+#include "bop-v1/bx_ntvdm_command_package_facade_v1.h"
 
 int main(void)
 {

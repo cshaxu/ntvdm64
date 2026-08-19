@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "bx_ntvdm_search_plan_v1.h"
+#include "bop-v1/bx_ntvdm_search_plan_v1.h"
 
 static int write_file(const wchar_t *path)
 {

@@ -1,5 +1,5 @@
-#include "bx_ntvdm_cpu_result_bridge_v1.h"
-#include "bx_ntvdm_dem_dta_service.h"
+#include "bop-v1/bx_ntvdm_cpu_result_bridge_v1.h"
+#include "bop-v1/bx_ntvdm_dem_dta_service.h"
 #include <stdio.h>
 
 static bx_ntvdm_dem_dta_registration_v1 stored;

@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "bx_ntvdm_adapter_runtime.h"
-#include "bx_ntvdm_host_session.h"
+#include "bop-v1/bx_ntvdm_adapter_runtime.h"
+#include "bop-v1/bx_ntvdm_host_session.h"
 #include "byob_profile.h"
 #include "byob_identity.h"
 

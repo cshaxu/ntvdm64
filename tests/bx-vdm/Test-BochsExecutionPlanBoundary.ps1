@@ -20,7 +20,7 @@ if ($main.IndexOf($executionGuard, [System.StringComparison]::Ordinal) -lt 0 -or
     $main.IndexOf($deferredGuard, [System.StringComparison]::Ordinal) -lt 0) {
     throw 'Execution-plan and deferred-startup adapter seams must both be explicit default-off opt-ins.'
 }
-$runtimeInclude = $main.IndexOf('#include "bx_ntvdm_adapter_runtime.h"', [System.StringComparison]::Ordinal)
+$runtimeInclude = $main.IndexOf('#include "bop-v1/bx_ntvdm_adapter_runtime.h"', [System.StringComparison]::Ordinal)
 $runtimeGuard = $main.LastIndexOf('#if (defined(BX_NTVDM_ENABLE_EXECUTION_PLAN)', $runtimeInclude, [System.StringComparison]::Ordinal)
 if ($runtimeInclude -lt 0 -or $runtimeGuard -lt 0) {
     throw 'Adapter runtime include escapes the combined default-off guard.'

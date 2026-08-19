@@ -1,4 +1,4 @@
-#include "bx_ntvdm_mouse_install1_mapping_service.h"
+#include "bop-v1/bx_ntvdm_mouse_install1_mapping_service.h"
 
 #include <stdint.h>
 #include <stdio.h>

@@ -1,6 +1,6 @@
 #include "bx_ntvdm_dem_cwd_service_v2.h"
-#include "bx_ntvdm_cmd_current_dir_service.h"
-#include "bx_ntvdm_cmd_comspec_bootstrap_service.h"
+#include "bop-v1/bx_ntvdm_cmd_current_dir_service.h"
+#include "bop-v1/bx_ntvdm_cmd_comspec_bootstrap_service.h"
 
 #include <string.h>
 #include <windows.h>

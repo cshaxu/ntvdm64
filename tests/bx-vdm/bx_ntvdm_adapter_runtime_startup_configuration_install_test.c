@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "bx_ntvdm_adapter_runtime.h"
+#include "bop-v1/bx_ntvdm_adapter_runtime.h"
 
 static const char sha256_abc[] =
     "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";

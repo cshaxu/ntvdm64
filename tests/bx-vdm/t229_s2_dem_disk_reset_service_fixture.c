@@ -1,4 +1,4 @@
-#include "bx_ntvdm_dem_disk_reset_service_v1.h"
+#include "bop-v1/bx_ntvdm_dem_disk_reset_service_v1.h"
 
 #include <string.h>
 

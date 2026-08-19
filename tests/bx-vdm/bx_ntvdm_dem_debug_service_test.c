@@ -1,4 +1,4 @@
-#include "bx_ntvdm_dem_debug_service.h"
+#include "bop-v1/bx_ntvdm_dem_debug_service.h"
 #include <stdio.h>
 
 int main(void)

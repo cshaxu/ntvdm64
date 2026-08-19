@@ -1,4 +1,4 @@
-#include "bx_ntvdm_startup_configuration_policy_v1.h"
+#include "bop-v1/bx_ntvdm_startup_configuration_policy_v1.h"
 
 static int initialize_profile(bx_ntvdm_mutation_profile_v1 *profile,
     uint32_t mode, uint32_t permitted_mode_mask)

@@ -42,7 +42,7 @@ $session = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_session_v1.c'
 $facade = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_facade_v1.c'
 $whole = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_whole_provider_v1.c'
 $plane = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c'
-$genericBridge = Read-Required 'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c'
+$genericBridge = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_vdm_generic_ud_bridge_v1.c'
 $composition = Read-Required 'src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_composition_v1.c'
 
 Require-Text $genericBridge 'boot_namespace_composition' 'generic UD bridge to boot namespace composition'
@@ -113,7 +113,7 @@ if (-not (Test-Path -LiteralPath $parent)) { New-Item -ItemType Directory -Path 
     generatedUtc = [DateTime]::UtcNow.ToString('o')
     sourceInputs = @(
         $reconciliationPath,
-        'src/bx-vdm/bx_ntvdm_vdm_generic_ud_bridge_v1.c',
+        'src/bx-vdm/bop-v1/bx_ntvdm_vdm_generic_ud_bridge_v1.c',
         'src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_composition_v1.c',
         'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_session_v1.c',
         'src/bx-vdm/bop-v1/bx_ntvdm_dem_package_facade_v1.c',

@@ -1,4 +1,4 @@
-#include "../../src/bx-vdm/bx_ntvdm_dem_virtual_namespace_backend_v1.h"
+#include "../../src/bx-vdm/bop-v1/bx_ntvdm_dem_virtual_namespace_backend_v1.h"
 
 #include <string.h>
 

@@ -1,4 +1,4 @@
-#include "bx_ntvdm_mutation_profile_v1.h"
+#include "bop-v1/bx_ntvdm_mutation_profile_v1.h"
 
 static int profile_case(uint32_t mode)
 {

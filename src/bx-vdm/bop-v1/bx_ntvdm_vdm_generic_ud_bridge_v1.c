@@ -1,14 +1,14 @@
 #include "bx_ntvdm_vdm_generic_ud_bridge_v1.h"
-#include "bx_ntvdm_boot_namespace_composition_v1.h"
-#include "bx_ntvdm_native_bop_composition_v1.h"
+#include "bop-v1/bx_ntvdm_boot_namespace_composition_v1.h"
+#include "bop-v1/bx_ntvdm_native_bop_composition_v1.h"
 #include "bx_ntvdm_terminal_observation_v1.h"
 #include "bx_ntvdm_normal_return_observation_v1.h"
 #include "bx_ntvdm_normal_terminal_sequence_observation_v1.h"
-#include "bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bop-v1/bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "bx_ntvdm_guest_exec_lifecycle_observation_v1.h"
 #include "bx_ntvdm_guest_exec_lifecycle_ledger_v1.h"
-#include "bx_ntvdm_dem_open_observation_v1.h"
+#include "bop-v1/bx_ntvdm_dem_open_observation_v1.h"
 
 static int bx_ntvdm_vdm_generic_ud_event_valid(
     const struct bx_ntvdm_generic_ud_event_v1 *event)
