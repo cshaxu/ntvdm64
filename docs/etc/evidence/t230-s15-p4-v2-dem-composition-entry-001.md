@@ -43,11 +43,11 @@ not the S15 completion claim.
 ## Engine binding
 
 `dem_v2_runtime_session.c` owns the process-local Direct host/native-session
-pair.  `bx_ntvdm_engine_run_v1` binds it after the retained startup composition
-has validated its inputs but before `bx_ntvdm_machine_stage_v1_begin`; it
-resets the pair on every subsequent rejection and after stage reset.  The
-adapter session's only guest-memory callbacks are the selector-blind mantle
-checked-RAM functions, so no access can occur while the stage is inactive.
+pair.  `bx_ntvdm_engine_run_v1` binds it after the v2 startup composition has
+validated its inputs but before `bx_ntvdm_machine_stage_v1_begin`; it resets
+the pair on every subsequent rejection and after stage reset.  The adapter
+session's only guest-memory callbacks are the selector-blind mantle checked-
+RAM functions, so no access can occur while the stage is inactive.
 
 The fresh `dem-v2-runtime-r2` graph compiled the modified mantle archive and
 the full v2 `bx-vdm` archive.  Its
@@ -64,16 +64,46 @@ include, the v2 entry recognizes and dispatches DEM, and the engine binds and
 resets the v2 session.  It intentionally reports the historical v1 bridge as
 retained outside the formal graph rather than hiding that remaining cleanup.
 
+## Startup replacement
+
+`dem_v2_startup_composition.c` now replaces the five startup-composition
+interfaces formerly called by `bx_ntvdm_engine_run_v1`: install, reset,
+machine-stage request, stage entry and ordinary-terminal classification.  It
+uses the copied BYOB descriptors, exact identity-checked guest images and the
+existing selector-blind initial-state/startup-plan ABI; it does not include or
+call `bop-v1`.
+
+The only source-shaped DEM-specific composition is setting the imported
+`dem.c` global `pszDefaultDOSDirectory` to the validated CLI BYOB root.  This
+is the recorded replacement for OpenNT's installed-system-directory lookup.
+The two frees in imported `demmisc.c` now null that global after preserving
+the original free ordering: a reusable Direct engine session can otherwise
+re-enter reset after an original `demLoadDos` (`50:11`) has released it.
+
+A fresh formal Ninja graph at
+`build/M0-T230-S15/v2-startup-r2` source-built the complete 221-edge graph and
+linked `bin/ntdos64-native.exe`.  The route-precedence gate passed with no
+`bop-v1` manifest input.  A no-argument executable invocation printed usage
+and returned 2, proving the formal executable's normal CLI front door.
+
+The hash-locked primary original-toolchain input set was staged only below the
+disposable `build/M0-T230-S15/v2-startup-inputs-r1` and invoked with a 128-tick
+budget.  It returned `terminal=2 detail=3`, i.e. rejected composition while
+preparing the machine-stage request.  This proves neither successful guest
+execution nor native DEM dispatch.  It is retained as a v1-free startup
+replacement observation; the pre-stage rejection must be diagnosed before
+claiming the S16 native observation.
+
 ## Remaining S15 work
 
-The old native engine still installs `bop-v1/bx_ntvdm_composition_runtime_v1`
-for startup and other unported package state.  The new binding makes its DEM
-provider state non-authoritative only when the v2 composition entry is the
-linked external generic-UD symbol.  Consequently this record does not claim
-that every historical derivative has been recomposed, nor that retained v1
-DEM files can already be deleted.  S15 remains active until route scans prove
-each product/derivative selects the v2 entry and every retained DEM v1 member
-is unreachable or removed; S16 then owns the bounded native observation.
+The native engine no longer calls
+`bop-v1/bx_ntvdm_composition_runtime_v1` for startup.  Nevertheless, retained
+v1 DEM source still exists as comparison material and the generic host ABI has
+one remaining historical catalog include.  Consequently this record does not
+claim that retained v1 DEM files can already be deleted.  S15 remains active
+until scans prove every product route excludes those sources or the sources
+are removed, and until the pre-stage rejection and the bounded native Direct
+observation are closed.
 
 ## CLI link sweep
 

@@ -199,6 +199,7 @@
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/dem_v2_composition_bridge.c",
         "src/bx-vdm/bop/dem_v2_runtime_session.c",
+        "src/bx-vdm/bop/dem_v2_startup_composition.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_bop_sequence_observation_v1.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/bx-vdm/bop/shim/dem_direct_host_session.c",

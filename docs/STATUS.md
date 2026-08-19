@@ -69,6 +69,13 @@
 > **T230 S15 P3:** [v2 Direct host session](etc/evidence/t230-s15-p3-v2-direct-host-session-001.md) binds token ownership and checked RAM to the v2 native DEM session with zero-exit local evidence and no v1 input.
 
 > **T230 S15 P4 (partial local composition):** [v2 DEM composition entry](etc/evidence/t230-s15-p4-v2-dem-composition-entry-001.md) source-builds the v2-only external generic-UD entry and proves its bound/non-DEM/unbound behavior. It explicitly does not close the old native-engine binding or v1 deletion requirements.
+
+> **T230 S15 P4 (startup replacement):** the native engine now calls the v2
+> startup composition rather than `bop-v1`'s composition runtime; the fresh
+> formal Ninja CLI target links.  The first source-built primary input
+> observation rejects before machine-stage creation (`terminal=2 detail=3`),
+> so this is route-retirement progress, not native DEM execution or T230
+> closure.  The successor details are retained in the linked P4 evidence.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

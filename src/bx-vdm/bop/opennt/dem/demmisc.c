@@ -202,6 +202,11 @@ DWORD	BytesRead;
 
     if (!IsDebuggee()) {
         free(pszDefaultDOSDirectory);
+        /* bx-vdm lifetime seam: the Direct CLI composition owns this imported
+         * dem.c global across a reusable engine session.  The original NT
+         * process teardown did not re-enter the owner after this free; clear
+         * it here so v2 reset cannot double-free after a real 50:11. */
+        pszDefaultDOSDirectory = NULL;
     }
     return;
 }
@@ -424,6 +429,9 @@ VOID demSystemSymbolOp(VOID)
 
         if (pszDefaultDOSDirectory != NULL) {
             free(pszDefaultDOSDirectory);
+            /* See demLoadDos above: preserve the original cleanup order but
+             * make repeated Direct-session reset safe on modern hosts. */
+            pszDefaultDOSDirectory = NULL;
         }
 
     }

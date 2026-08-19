@@ -1,0 +1,23 @@
+#ifndef BX_NTVDM_BOP_DEM_V2_STARTUP_COMPOSITION_H
+#define BX_NTVDM_BOP_DEM_V2_STARTUP_COMPOSITION_H
+
+#include <stdint.h>
+
+#include "bx_ntvdm_initial_state_abi.h"
+#include "bx_ntvdm_initial_state_action_v1.h"
+#include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
+
+/* Direct v2 startup composition.  These are copied CLI descriptors and
+ * mechanical stage records only; no legacy BOP provider/session is exposed. */
+int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile, uint32_t profile_chars,
+    const uint16_t *root, uint32_t root_chars, const uint16_t *launch,
+    uint32_t launch_chars, uint32_t include_mask, uint32_t exclude_mask,
+    uint32_t mutation_mode);
+void bx_ntvdm_dem_v2_startup_reset(void);
+int bx_ntvdm_dem_v2_startup_prepare_machine_stage_request(
+    struct bx_ntvdm_machine_stage_v1_request *request);
+int bx_ntvdm_dem_v2_startup_prepare_machine_stage_entry(
+    struct bx_ntvdm_machine_stage_v1_entry *entry);
+int bx_ntvdm_dem_v2_startup_copy_ordinary_terminal(void);
+
+#endif
