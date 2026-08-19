@@ -8,6 +8,7 @@
 #define BX_NTVDM_CPU_RESULT_V2_MAGIC 0x42584352u
 #define BX_NTVDM_CPU_RESULT_V2_VERSION 2u
 #define BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF 0x00000001u
+#define BX_NTVDM_CPU_RESULT_V2_EFLAGS_ZF 0x00000040u
 
 enum bx_ntvdm_cpu_result_v2_disposition {
     BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH = 0u,
@@ -34,6 +35,7 @@ int bx_ntvdm_cpu_result_v2_resume(bx_ntvdm_cpu_result_v2 *result,
 int bx_ntvdm_cpu_result_v2_stop(bx_ntvdm_cpu_result_v2 *result);
 int bx_ntvdm_cpu_result_v2_valid(const bx_ntvdm_cpu_result_v2 *result);
 int bx_ntvdm_cpu_result_v2_set_cf(bx_ntvdm_cpu_result_v2 *result, int value);
+int bx_ntvdm_cpu_result_v2_set_zf(bx_ntvdm_cpu_result_v2 *result, int value);
 #ifdef __cplusplus
 }
 #endif

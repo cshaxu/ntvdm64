@@ -934,6 +934,8 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
       }
       if ((mantle_outcome.eflags_write_mask & 1u) != 0u)
         BX_CPU_THIS_PTR set_CF((mantle_outcome.eflags_values & 1u) != 0u);
+      if ((mantle_outcome.eflags_write_mask & 0x40u) != 0u)
+        BX_CPU_THIS_PTR set_ZF((mantle_outcome.eflags_values & 0x40u) != 0u);
       RIP = mantle_outcome.resume_rip;
       longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
     }

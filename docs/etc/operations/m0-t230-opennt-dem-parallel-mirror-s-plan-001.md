@@ -71,6 +71,20 @@ Ninja target; run focused Direct tests for all owned BOPs; and update the
 | S9 | `demmisc.c` | 11, 23, 34–3E, 45 | Mirror DOS-load, reset, symbol, DOS-app/WOW, diagnostic and lifecycle helpers. |
 | S10 | whole `demdisp.c` table and S1–S9 mirrors | 00–48 | Reconcile all 73 identities, delete superseded partial v2 and no-longer-needed v1 comparison material, run full Direct local matrix and one bounded native integration observation. |
 
+## Completed package records
+
+### S2 — `demhndl.c` direct-import local closure
+
+The original file was copied directly to `bop/opennt/dem/demhndl.c`; the
+former partial v2 file is comparison-only material under `bop/reference-v2/`.
+The neutral `demhndl_shim` supplies scoped CPU, checked guest-memory and
+opaque-handle mechanics, and the formal MSVC x64 `/MT` Ninja fixture runs all
+eight functions. See
+[S2 direct-import map](../evidence/t230-s2-demhndl-direct-import-map-001.md).
+This closes only the source-shaped local Direct package: it does not claim
+selector routing, Redirector/COMMAND pipe composition, `demerror.c` INT 24,
+or native guest integration.
+
 ## Dependency order
 
 `S1` is the sole common foundation. `S2` and `S3` share the token seam but

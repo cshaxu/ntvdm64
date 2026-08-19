@@ -2,25 +2,25 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T230 S2.** T229 demonstrated only a 73-row local route/disposition closure; its retained `deferred` terminals and Virtual implementation do not satisfy the owner's functional-completion requirement. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint, native observation, or retired-virtual cleanup may be handed to a later task as T230 completion.
+> **Current effective packet: M0 T230 S3.** T229 demonstrated only a 73-row local route/disposition closure; its retained `deferred` terminals and Virtual implementation do not satisfy the owner's functional-completion requirement. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint, native observation, or retired-virtual cleanup may be handed to a later task as T230 completion.
 
-**Active: M0 T230 S2 -- OpenNT `demhndl.c` mirror package.**
+**Active: M0 T230 S3 -- OpenNT `demfile.c` / `demlabel.c` mirror package.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T230 S2, Ordinary Mode. |
+| Identifier Mode | M0 T230 S3, Ordinary Mode. |
 | Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
-| Objective | Preserve the partial `demhndl.c` only as comparison material, directly import the complete original OpenNT `demhndl.c` beneath `src/bx-vdm/bop/opennt/dem/`, and adapt that translation unit in place through neutral host-handle, guest-memory and typed-result shims. It owns seek, close, handle times, read/write, commit and pipe EOF (`50:00`, `02`, `08`, `16`, `1E`, `27`, `47`, `48`). |
+| Objective | Preserve partial `demfile.c` / `demlabel.c` implementations only as comparison material, directly import the complete original OpenNT source files beneath `src/bx-vdm/bop/opennt/dem/`, and adapt them in place through the smallest neutral pathname, host-capability, guest-memory, token and typed-result shims. It owns file attribute/open/create/delete/rename/new and label services (`50:01`, `03`, `05`, `12`, `17`, `22`, `44`). |
 | Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected single-service scope, or new v2 Readonly/Overlay/Virtual behavior. Legacy v1 and partial v2 code are comparison material only; S2 does not modify them for compatibility or require them to run. |
 | Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current Direct/Readonly provider graph; retained Virtual branches/tests; T229 closure transfer correction. |
-| Files And ABI Surface | `src/bx-vdm/bx_ntvdm_dem_*`, shared mutation-profile/host-capability seams, Direct/Readonly fixtures and formal Ninja manifests; original `src/opennt/base/mvdm/dos/dem/*`. Any required `50:47/48` capability is admitted as a bounded DEM-callable dependency, not deferred to another T. |
+| Files And ABI Surface | `src/bx-vdm/bop/opennt/dem/demfile.c`, `demlabel.c` and neutral `bop/shim/*`; original `src/opennt/base/mvdm/dos/dem/*`; formal Ninja manifest and new focused Direct fixture. Host path/namespace calls may use standard Win32 APIs, but their ordering and failure rules remain the imported DEM owner's. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, Direct/Readonly/Overlay profile contract, formal Ninja and documentation governance rules. |
-| Verification | Source-build the formal Ninja target and run focused Direct tests for every `demhndl.c` service. The directly imported original file preserves its function/data/error ordering; every host-handle, CCPU/SAS, guest-memory or host-composition divergence is an adjacent comment in that file naming the original source path and shim. |
-| Expected Markers | `demhndl.c` owns executable, source-backed Direct routes for every listed service; no generic pass-through or unimplemented terminal remains in this package. The mirror remains free of Readonly, Overlay and Virtual policy; retained v1 policy does not become v2 completion evidence. |
+| Verification | Source-build the formal Ninja target and run focused Direct tests for every `demfile.c` / `demlabel.c` service. Each directly imported original file preserves its function/data/error ordering; every host-path, CCPU/SAS, guest-memory, token or host-composition divergence is an adjacent comment naming the original source path and shim. |
+| Expected Markers | `demfile.c` / `demlabel.c` own executable, source-backed Direct routes for every listed service; no generic pass-through or unimplemented terminal remains in this package. The mirror remains free of Readonly, Overlay and Virtual policy; retained v1 policy does not become v2 completion evidence. |
 | Asset Needs | Pinned OpenNT DEM source; T229 ledger/evidence; formal MSVC x64 `/MT` Ninja graph; declared host namespace roots; retained Virtual source/test membership; bounded native observation fixture. |
-| Reporting Requirements | Record each `demhndl.c` identity's original function, recovery rung, host-handle dependency, exact Direct failure contract and focused regression. Bounded native observation remains S10-only unless a separate admission changes the plan. |
+| Reporting Requirements | Record every owned identity's original function, recovery rung, pathname/host-handle dependency, exact Direct failure contract and focused regression. Bounded native observation remains S10-only unless a separate admission changes the plan. |
 | Stop Conditions | A requirement needs a new Bochs intrusion, guest-image mutation, host modification merely to install the product, or cannot retain source ABI/failure semantics. Such a fact pauses implementation for owner decision; it does not silently become a deferred T230 endpoint or transfer item. |
 | Exit Criteria | All 73 callable DEM services are owned by source-shaped v2 mirror files under `src/bx-vdm/bop/opennt/dem/`; required neutral seams are under `src/bx-vdm/bop/shim/`; their Direct routes and focused package tests source-build; all divergences are recorded; v1 is no longer on a migrated v2 route; formal Ninja and the bounded native observation are recorded without a hidden transfer backlog. |
 | Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” plus “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” |
@@ -35,6 +35,8 @@
 > **T230 S1 P3:** [50:00--50:02 Direct parity scope correction](etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md) records the owner decision: v2 is Direct-only OpenNT source parity; it contains no Readonly, Overlay or Virtual behavior, and v1 remains retained.
 
 > **T230 S1 P4:** [DEM common-foundation witness](etc/evidence/t230-s1-p4-dem-common-foundation-witness-001.md) records the `opennt/dem` / neutral-shim layout, `dem.c`/`demdata.c`/`demmsg.c`/`demdisp.c` mirror foundation, 73-entry owner catalog, and zero-exit formal Ninja fixture for the already-migrated `50:00`--`50:02` Direct paths. It is the S1 common foundation, not full `demhndl.c`, `demfile.c`, DEM, or native closure.
+
+> **T230 S2:** [direct `demhndl.c` import map](etc/evidence/t230-s2-demhndl-direct-import-map-001.md) records the source baseline, the six adjacent imported-file divergences, the scoped token/guest-memory/typed-result seam, all eight local service invocations and the zero-exit formal Ninja witness. It is local Direct source parity only—not selector routing, Redirector/COMMAND pipe composition, INT 24 composition or native guest proof.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
