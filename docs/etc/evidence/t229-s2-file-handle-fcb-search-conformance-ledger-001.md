@@ -22,7 +22,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:02` | `demClose` | P — opaque token release | final-location and null-token variants |
 | `50:03` | `demCreate` | P — whole-provider create + owner/PDB ABI | attribute/error variants |
 | `50:04` | `demCreateDir` | P — Direct create, Readonly refusal | source error variants |
-| `50:05` | `demDelete` | R | Direct delete, Readonly refusal |
+| `50:05` | `demDelete` | P — whole-provider Direct delete/Readonly refusal | source error variants |
 | `50:06` | `demDeleteDir` | P — Direct remove | source error variants |
 | `50:07` | `demDeleteFCB` | P — Direct wildcard delete, Readonly refusal | extended-FCB/attribute variants |
 | `50:08` | `demFileTimes` | P — Direct set, pre-host Readonly refusal | get/device-time variants |
@@ -56,6 +56,7 @@ ledger: a typed route is not counted as semantic completion.
 - P4: `demOpen` whole-provider PDB/path transaction and `AX:BP`, `BX:CX`, `DX` success ABI.
 - P5: `demCreate` Direct creation/close and pre-host Readonly refusal.
 - P6: `demCreateNew` Direct collision and pre-host Readonly refusal.
+- P7: `demDelete` Direct deletion and pre-host Readonly refusal.
 
 ## Completion rule
 

@@ -678,6 +678,28 @@ static int whole_provider_pdb_lifecycle_regression(void)
          (result.cpu_delta.gpr16_values[0u] != 5u ||
           result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
           GetFileAttributesW(create_path) != INVALID_FILE_ATTRIBUTES))) goto cleanup;
+    /* demDelete takes DS:DX.  Direct removes only the fixture-owned file;
+     * Readonly takes the shared namespace-content refusal before DeleteFile. */
+    bytes[3] = 0x05u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.edx = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.cpu_delta.gpr16_write_mask != 0u ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != 0u ||
+          GetFileAttributesW(create_path) != INVALID_FILE_ATTRIBUTES)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          GetFileAttributesW(create_path) != INVALID_FILE_ATTRIBUTES))) goto cleanup;
     /* Restore the independent FCB pathname used by later package checks. */
     memset(ram + 0x700u, 0, 260u);
     memcpy(ram + 0x700u, oem_fcb_path, strlen(oem_fcb_path) + 1u);
