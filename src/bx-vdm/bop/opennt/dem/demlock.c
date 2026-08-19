@@ -59,4 +59,3 @@ DWORD	dwFileOffset,cbLock;
     demClientError(hFile, (CHAR)-1);
     return;
 }
-
