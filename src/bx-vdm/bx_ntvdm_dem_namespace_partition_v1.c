@@ -116,44 +116,6 @@ static ULONG open_share(uint8_t mode)
     }
 }
 
-static int host_file_info(const bx_ntvdm_dem_whole_provider_v1 *provider,
-    uint8_t drive, const wchar_t *relative, DWORD *attributes_out,
-    uint16_t *time_out, uint16_t *date_out, uint32_t *size_out, DWORD *error_out)
-{
-    HANDLE handle = INVALID_HANDLE_VALUE;
-    FILETIME file_time, local_time;
-    LARGE_INTEGER size;
-    DWORD error = ERROR_SUCCESS;
-    if (attributes_out == 0 || time_out == 0 || date_out == 0 || size_out == 0 ||
-        error_out == 0 || provider == 0) return 0;
-    *attributes_out = 0u; *time_out = 0u; *date_out = 0u; *size_out = 0u;
-    if (!bx_ntvdm_host_namespace_v1_open_file_ex(provider->host_namespace, drive,
-            relative, GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, &handle, &error)) {
-        *error_out = error;
-        return 0;
-    }
-    if (!GetFileTime(handle, 0, 0, &file_time) ||
-        !FileTimeToLocalFileTime(&file_time, &local_time) ||
-        !FileTimeToDosDateTime(&local_time, date_out, time_out) ||
-        !GetFileSizeEx(handle, &size) || size.QuadPart < 0 ||
-        (uint64_t)size.QuadPart > UINT32_MAX) {
-        error = GetLastError();
-        if (error == ERROR_SUCCESS) error = ERROR_INVALID_DATA;
-        CloseHandle(handle);
-        *error_out = error;
-        return 0;
-    }
-    CloseHandle(handle);
-    if (!bx_ntvdm_host_namespace_v1_query_file_attributes(provider->host_namespace,
-            drive, relative, attributes_out, &error)) {
-        *error_out = error;
-        return 0;
-    }
-    *size_out = (uint32_t)size.QuadPart;
-    *error_out = ERROR_SUCCESS;
-    return 1;
-}
-
 static uint32_t overlay_share(uint8_t mode)
 {
     switch (mode & 0x70u) {
@@ -201,7 +163,6 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
     DWORD error = ERROR_SUCCESS;
     int admitted, startup_path = 0;
     uint64_t startup_size = 0u;
-    uint16_t startup_time = 0u, startup_date = 0u;
     if (!valid_call(provider, service, boundary, cpu, result) || oem_path == 0)
         return 0;
 
@@ -229,19 +190,11 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
         if (startup_path) {
             if ((cpu->eax & 0xffu) != 0u)
                 return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
-            if (!bx_ntvdm_readonly_namespace_v1_query_startup_file(
-                    provider->startup_namespace, drive, relative, &startup_size,
-                    &startup_time, &startup_date)) return 0;
-            /* OpenNT demGetFileInfo returns AX attributes, CX time, DX date,
-             * and BX:DI size.  A profile-owned immutable image is a normal
-             * DOS file, so its attribute projection is zero. */
-            return finish(boundary, result, 0u, 1, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, startup_time) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, startup_date) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u,
-                    (uint16_t)(startup_size >> 16)) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 7u,
-                    (uint16_t)startup_size);
+            /* The image is provider-owned and immutable, but preserves the
+             * ordinary DOS attribute projection expected by the startup
+             * reader; no real host file is queried or modified. */
+            return finish(boundary, result, 0u, 0, 0) &&
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, 0u);
         }
         if ((cpu->eax & 0xffu) != 0u) {
             if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
@@ -299,21 +252,14 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
                 bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
                     (uint16_t)attributes);
         }
-        {
-            uint16_t file_time, file_date;
-            uint32_t file_size;
-            if (!host_file_info(provider, drive, relative, &attributes, &file_time,
-                    &file_date, &file_size, &error)) return fail(boundary, result, error);
-            if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
-            else attributes &= 0x37u; /* historical DOS_ATTR_MASK projection */
-            return finish(boundary, result, (uint16_t)attributes, 1, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, file_time) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, file_date) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 3u,
-                    (uint16_t)(file_size >> 16)) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 7u,
-                    (uint16_t)file_size);
-        }
+        if (!bx_ntvdm_host_namespace_v1_query_file_attributes(
+                provider->host_namespace, drive, relative, &attributes, &error))
+            return fail(boundary, result, error);
+        if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
+        else attributes &= 0x37u; /* historical DOS_ATTR_MASK projection */
+        return finish(boundary, result, 0u, 0, 0) &&
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
+                (uint16_t)attributes);
     }
     if (service == 0x03u || service == 0x22u || service == 0x12u) {
         uint32_t access = BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ |

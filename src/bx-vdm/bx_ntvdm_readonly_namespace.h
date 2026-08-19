@@ -70,13 +70,6 @@ int bx_ntvdm_readonly_namespace_v1_file_times(
 int bx_ntvdm_readonly_namespace_v1_match_startup_path(
     const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
     const wchar_t *canonical_path, uint64_t *byte_count_out);
-/* Returns immutable startup-image metadata for a pathname without opening a
- * guest-visible handle.  Attributes are intentionally normal (zero in DOS
- * projection); time/date and byte count come from the profile image. */
-int bx_ntvdm_readonly_namespace_v1_query_startup_file(
-    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
-    const wchar_t *canonical_path, uint64_t *byte_count_out,
-    uint16_t *dos_time_out, uint16_t *dos_date_out);
 /* Returns a one-based declared-image slot for a canonical pathname, or zero.
  * Unlike match_startup_path, this identity-only query does not require bytes
  * to be ready and never exposes the pathname or file storage. */
