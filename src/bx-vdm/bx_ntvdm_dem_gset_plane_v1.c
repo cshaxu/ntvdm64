@@ -52,8 +52,11 @@ int bx_ntvdm_dem_gset_plane_v1_dispatch(
         !bx_ntvdm_dem_plane_v1_classify(ingress, selection, &record) ||
         record.component != BX_NTVDM_DEM_COMPONENT_GSET ||
         record.disposition != BX_NTVDM_DEM_PLANE_DEFERRED) return 0;
-    if (bx_ntvdm_dem_clock_service_v1_dispatch(event, cpu_before, window, result))
-        return 1;
+    /* Date/time queries are pure observations. Setters require the drive-view
+     * provider because only it owns the shared HOST_GLOBAL profile policy. */
+    if ((ingress->service == 0x14u || ingress->service == 0x15u) &&
+        bx_ntvdm_dem_clock_service_v1_dispatch_with_profile(0, event,
+            cpu_before, window, result)) return 1;
     if (plane->has_volume_snapshot &&
         bx_ntvdm_dem_volume_provider_v1_dispatch(ingress, selection, &record,
             &plane->volume_snapshot, event, cpu_before, window, result))

@@ -147,6 +147,8 @@ static int dispatch(uint8_t service, bx_ntvdm_cpu_result_v2 *result)
         !bx_ntvdm_dem_package_session_v1_initialize(&session, &namespace_plane) ||
         !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
             BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) ||
+        !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x03u) ||
         !bx_ntvdm_dem_package_session_v1_set_mutation_profile(&session,
             &mutation_profile) ||
         !bx_ntvdm_host_drive_snapshot_v1_apply(7u, drive_types, 0u, 0u, &drives) ||
@@ -432,7 +434,9 @@ static int whole_provider_pdb_lifecycle_regression(void)
         !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
             BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT, 0x0fu) ||
         !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
-            BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu)) goto cleanup;
+            BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, 0x0fu) ||
+        !bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation_profile,
+            BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x03u)) goto cleanup;
     drive_types[2] = (uint8_t)GetDriveTypeW(L"C:\\");
     if (drive_types[2] == DRIVE_NO_ROOT_DIR || drive_types[2] == DRIVE_UNKNOWN ||
         !bx_ntvdm_boot_namespace_plane_v1_initialize(&plane, &ntdos, &command,
@@ -1246,18 +1250,25 @@ int main(int argc, char **argv)
         ram[dispatch_di] != 0xa5u || ram[dispatch_di + 34u] != 0xa5u) return 220;
     dispatch_ax = 0u; dispatch_di = 0u;
     dispatch_bx = 0u;
-    /* demSetDate and demSetTime set AL only on failure.  The contained CLI
-     * profile must retain that register contract without writing the ambient
-     * host clock or synthesizing a carry result. */
-    dispatch_ax = 0xa500u;
+    /* Invalid setter inputs cannot alter the ambient clock. Readonly returns
+     * AL=ff; Direct also permits OpenNT's AL=0 privilege fallback. */
+    dispatch_ax = 0xa500u; dispatch_cx = dispatch_dx = 0u;
     if (!dispatch(0x19u, &result) ||
         result.cpu_delta.gpr16_write_mask != 1u ||
-        result.cpu_delta.gpr16_values[0] != 0xa5ffu ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         result.cpu_delta.gpr16_values[0] != 0xa5ffu) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         result.cpu_delta.gpr16_values[0] != 0xa500u &&
+         result.cpu_delta.gpr16_values[0] != 0xa5ffu) ||
         result.eflags_write_mask != 0u) return 218;
-    dispatch_ax = 0x5a00u;
+    dispatch_ax = 0x5a00u; dispatch_cx = dispatch_dx = 0u;
     if (!dispatch(0x1cu, &result) ||
         result.cpu_delta.gpr16_write_mask != 1u ||
-        result.cpu_delta.gpr16_values[0] != 0x5affu ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         result.cpu_delta.gpr16_values[0] != 0x5affu) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         result.cpu_delta.gpr16_values[0] != 0x5a00u &&
+         result.cpu_delta.gpr16_values[0] != 0x5affu) ||
         result.eflags_write_mask != 0u) return 219;
     dispatch_ax = 0u;
     dispatch_di = 0x200u;

@@ -1,5 +1,6 @@
 #include "bx_ntvdm_dem_drive_view_provider_v1.h"
 #include "bx_ntvdm_dem_computer_name_service_v1.h"
+#include "bx_ntvdm_dem_clock_service_v1.h"
 #include "bx_ntvdm_dem_cwd_service_v2.h"
 #include "bx_ntvdm_dem_dta_service.h"
 #include "bx_ntvdm_dem_dpb_service.h"
@@ -110,6 +111,9 @@ int bx_ntvdm_dem_drive_view_provider_v1_dispatch_observation(
         !bx_ntvdm_dem_drive_view_provider_v1_owns_observation(ingress->service))
         return 0;
     *needs_write = 0u;
+    if (provider->has_mutation_profile &&
+        bx_ntvdm_dem_clock_service_v1_dispatch_with_profile(&provider->mutation_profile,
+            event, cpu_before, window, result)) return 1;
     if (bx_ntvdm_dem_gset_plane_v1_dispatch(&provider->gset, ingress,
             selection, event, cpu_before, window, result))
         return 1;
