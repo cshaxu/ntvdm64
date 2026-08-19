@@ -32,7 +32,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:0C` | `demFindNextFCB` | P — continuation/no-more-files | host enumeration variant |
 | `50:12` | `demOpen` | P — whole-provider token/size/pipe ABI | share/access and pipe-token variants |
 | `50:16` | `demRead` | R | checked output write + EOF behavior |
-| `50:17` | `demRename` | R | two-path Direct/Readonly ABI |
+| `50:17` | `demRename` | P — whole-provider Direct rename/Readonly refusal | cross-drive/same-path variants |
 | `50:1E` | `demWrite` | P — Direct write, pre-host Readonly refusal | zero-length/disk-full variants |
 | `50:20` | `demRenameFCB` | R | wildcard source/destination matrix |
 | `50:22` | `demCreateNew` | P — whole-provider collision/refusal ABI | success/attribute variants |
@@ -57,6 +57,7 @@ ledger: a typed route is not counted as semantic completion.
 - P5: `demCreate` Direct creation/close and pre-host Readonly refusal.
 - P6: `demCreateNew` Direct collision and pre-host Readonly refusal.
 - P7: `demDelete` Direct deletion and pre-host Readonly refusal.
+- P8: `demRename` Direct two-path rename and pre-host Readonly refusal.
 
 ## Completion rule
 

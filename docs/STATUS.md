@@ -29,6 +29,8 @@
 
 > **T229 S2 P2:** [handle mutation Readonly enforcement evidence](etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md) records source-backed pre-host rejection for `50:08` set-time and `50:1E` write/truncate.
 
+> **T229 S2 P8:** [demRename Direct/Readonly conformance evidence](etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md) records `50:17` two-path mutation/refusal behavior without claiming error-matrix closure.
+
 > **T229 S2 P7:** [demDelete Direct/Readonly conformance evidence](etc/evidence/t229-s2-p7-dem-delete-direct-readonly-001.md) closes `50:05` ordinary deletion/refusal without claiming all error variants.
 
 > **T229 S2 P6:** [demCreateNew Direct/Readonly conformance evidence](etc/evidence/t229-s2-p6-dem-create-new-direct-readonly-001.md) records the original host-error collision contract and pre-host Readonly refusal.

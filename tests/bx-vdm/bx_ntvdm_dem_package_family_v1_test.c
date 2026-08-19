@@ -409,8 +409,8 @@ static int whole_provider_pdb_lifecycle_regression(void)
     bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 result;
     bx_ntvdm_dem_dta_registration_v1 dta = { 0x800u, 0x810u, 0x820u, 0x830u };
-    wchar_t temporary[MAX_PATH], path[MAX_PATH], fcb_path[MAX_PATH], create_path[MAX_PATH];
-    char oem_fcb_path[128], oem_create_path[128], readback[3];
+    wchar_t temporary[MAX_PATH], path[MAX_PATH], fcb_path[MAX_PATH], create_path[MAX_PATH], rename_source[MAX_PATH], rename_target[MAX_PATH];
+    char oem_fcb_path[128], oem_create_path[128], oem_rename_source[128], oem_rename_target[128], readback[3];
     HANDLE file = INVALID_HANDLE_VALUE, looked_up = INVALID_HANDLE_VALUE;
     DWORD written = 0u;
     uint32_t token = 0u, open_token = 0u, create_token = 0u;
@@ -420,6 +420,8 @@ static int whole_provider_pdb_lifecycle_regression(void)
     memset(&host_namespace, 0, sizeof(host_namespace));
     memset(fcb_path, 0, sizeof(fcb_path));
     memset(create_path, 0, sizeof(create_path));
+    memset(rename_source, 0, sizeof(rename_source));
+    memset(rename_target, 0, sizeof(rename_target));
     profile_initialize(&profile);
     /* The same installed whole provider must preserve token lifecycle in both
      * Direct and Readonly modes.  This path only adopts, seeks and closes a
@@ -700,6 +702,44 @@ static int whole_provider_pdb_lifecycle_regression(void)
           result.cpu_delta.gpr16_values[0u] != 5u ||
           result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
           GetFileAttributesW(create_path) != INVALID_FILE_ATTRIBUTES))) goto cleanup;
+    /* demRename copies two guest OEM paths.  Build source and target outside
+     * DEM; Direct may rename this fixture pair, while Readonly must refuse
+     * before MoveFile and retain the source. */
+    if (!GetTempFileNameW(temporary, L"n64", 0u, rename_source) ||
+        !GetTempFileNameW(temporary, L"n64", 0u, rename_target) ||
+        !DeleteFileW(rename_target) ||
+        WideCharToMultiByte(CP_OEMCP, 0, rename_source, -1, oem_rename_source,
+            (int)sizeof(oem_rename_source), 0, 0) == 0 ||
+        WideCharToMultiByte(CP_OEMCP, 0, rename_target, -1, oem_rename_target,
+            (int)sizeof(oem_rename_target), 0, 0) == 0) goto cleanup;
+    file = CreateFileW(rename_source, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+        0, CREATE_ALWAYS, FILE_ATTRIBUTE_TEMPORARY, 0);
+    if (file == INVALID_HANDLE_VALUE || !WriteFile(file, "RN", 2u, &written, 0) ||
+        written != 2u) goto cleanup;
+    CloseHandle(file); file = INVALID_HANDLE_VALUE;
+    memset(ram + 0x700u, 0, 260u); memset(ram + 0x900u, 0, 260u);
+    memcpy(ram + 0x700u, oem_rename_source, strlen(oem_rename_source) + 1u);
+    memcpy(ram + 0x900u, oem_rename_target, strlen(oem_rename_target) + 1u);
+    bytes[3] = 0x17u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.edx = 0x700u; cpu.edi = 0x900u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.cpu_delta.gpr16_write_mask != 0u || result.eflags_values != 0u ||
+          GetFileAttributesW(rename_source) != INVALID_FILE_ATTRIBUTES ||
+          GetFileAttributesW(rename_target) == INVALID_FILE_ATTRIBUTES)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          GetFileAttributesW(rename_source) == INVALID_FILE_ATTRIBUTES ||
+          GetFileAttributesW(rename_target) != INVALID_FILE_ATTRIBUTES))) goto cleanup;
     /* Restore the independent FCB pathname used by later package checks. */
     memset(ram + 0x700u, 0, 260u);
     memcpy(ram + 0x700u, oem_fcb_path, strlen(oem_fcb_path) + 1u);
@@ -859,6 +899,8 @@ cleanup:
     bx_ntvdm_dem_package_session_v1_teardown(&session);
     if (fcb_path[0] != L'\0') DeleteFileW(fcb_path);
     if (create_path[0] != L'\0') DeleteFileW(create_path);
+    if (rename_source[0] != L'\0') DeleteFileW(rename_source);
+    if (rename_target[0] != L'\0') DeleteFileW(rename_target);
     bx_ntvdm_host_namespace_v1_release(&host_namespace);
     return status;
 }
