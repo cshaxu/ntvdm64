@@ -4,15 +4,15 @@
 
 > **Current effective packet: M0 T230 S15.** T229 demonstrated only a 73-row local route/disposition closure. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint or native observation may be handed to a later task as T230 completion.
 
-**Active: M0 T230 S15 P3 -- v2 Direct DEM host session.**
+**Active: M0 T230 S15 P4 -- v2 DEM generic-bridge precedence.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T230 S15 P3, Ordinary Mode. |
+| Identifier Mode | M0 T230 S15 P4, Ordinary Mode. |
 | Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
-| Objective | Bind the v2 Direct OpenNT DEM session to real host-handle/token state and the selector-blind checked-RAM transport, without any `bop-v1` DEM provider or dispatcher dependency. |
+| Objective | Compose the v2 Direct DEM bridge ahead of every legacy route and prove every valid `C4 C4 50 00..48` window cannot fall through to a `bop-v1` DEM provider, dispatcher or result bridge. |
 | Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected leaf implementation, or repair of legacy v1/partial v2 comparison code. |
 | Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current OpenNT mirror/provider graph; retained v1 comparison branches/tests; T229 closure transfer correction. |
 | Files And ABI Surface | whole `src/bx-vdm/bop/opennt/dem/`, neutral `bop/shim/*`, original `demdisp.c`, formal Ninja manifest and all Direct fixtures. `bop-v1/` is comparison-only and is not a formal DEM runtime input. |
@@ -65,6 +65,8 @@
 > **T230 S15 P1:** [v1 DEM route-retirement map](etc/evidence/t230-s15-p1-v1-dem-route-retirement-map-001.md) identifies the real engine/runtime dependency boundary and admits P2--P5; it does not claim v1 retirement.
 
 > **T230 S15 P2:** [checked-RAM transport](etc/evidence/t230-s15-p2-checked-ram-transport-001.md) is source-built and locally verified for active-stage bounds and lifecycle. It remains selector-blind and does not itself bind DEM.
+
+> **T230 S15 P3:** [v2 Direct host session](etc/evidence/t230-s15-p3-v2-direct-host-session-001.md) binds token ownership and checked RAM to the v2 native DEM session with zero-exit local evidence and no v1 input.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

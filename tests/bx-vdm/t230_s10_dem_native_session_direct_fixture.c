@@ -2,7 +2,16 @@
 #include <string.h>
 
 #include "bop/shim/dem_native_session_shim.h"
+#include "bop/shim/dem_direct_host_session.h"
 #include "bop/dem_v2_generic_ud_bridge.h"
+
+/* The CPU5 core projection requires an external generic-UD symbol.  This
+ * focused v2 session fixture invokes the bridge directly, so its link stub
+ * must always decline and cannot select any legacy provider. */
+int bx_ntvdm_mantle_generic_ud_bridge_v1(
+    const struct bx_ntvdm_generic_ud_event_v1 *event,
+    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+{ (void)event; (void)outcome; return 0; }
 
 typedef struct fixture_state { uint8_t bytes[32]; } fixture_state;
 
@@ -29,14 +38,15 @@ static void event_initialize(struct bx_ntvdm_generic_ud_event_v1 *event,
 
 int main(void)
 {
-    fixture_state state={{0}}; bx_ntvdm_dem_direct_context direct;
+    fixture_state state={{0}}; bx_ntvdm_dem_direct_host_session host;
     bx_ntvdm_dem_native_session session; struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
-    memset(&direct,0,sizeof(direct)); direct.magic=BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
-    direct.abi_version=BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION; direct.struct_bytes=sizeof(direct);
-    direct.state=&state; direct.publish_handle=publish; direct.lookup_handle=lookup;
-    direct.release_handle=release; direct.query_attributes=query; direct.set_attributes=set;
-    if(!bx_ntvdm_dem_native_session_initialize(&session,&direct,&state,read_guest,write_guest) ||
+    (void)state; (void)publish; (void)lookup; (void)release; (void)query; (void)set;
+    if(!bx_ntvdm_dem_direct_host_session_initialize(&host) ||
+       !bx_ntvdm_dem_native_session_initialize(&session,
+           bx_ntvdm_dem_direct_host_session_context(&host), &host,
+           bx_ntvdm_dem_direct_host_session_guest_read,
+           bx_ntvdm_dem_direct_host_session_guest_write) ||
        !bx_ntvdm_dem_native_session_bind(&session)) return 1;
     event_initialize(&event,0x50u,0x1fu); memset(&outcome,0,sizeof(outcome));
     if(!bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome) ||
@@ -45,6 +55,7 @@ int main(void)
     event_initialize(&event,0x54u,0x1fu);
     if(bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome)) return 3;
     bx_ntvdm_dem_native_session_unbind(&session);
+    bx_ntvdm_dem_direct_host_session_reset(&host);
     event_initialize(&event,0x50u,0x1fu);
     if(bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome)) return 4;
     puts("T230 Direct DEM v2 bridge: copied #UD reaches original dispatcher without v1 fallback");

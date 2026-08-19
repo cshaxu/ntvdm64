@@ -197,6 +197,7 @@
         "src/bx-vdm/bop/opennt/dem/demioctl.c",
         "src/bx-vdm/bop/opennt/dem/demsrch.c",
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/shim/dem_direct_host_session.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_dem_direct_context.c",
         "src/bx-vdm/bop/shim/demdir_shim.c",
         "src/bx-vdm/bop/shim/demfile_shim.c",
@@ -257,6 +258,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t230-s15-direct-host-session-fixture",
+      "source": "tests/bx-vdm/t230_s15_direct_host_session_fixture.c",
+      "libraries": [ "bx-vdm", "bx-mantle", "bx-core" ],
+      "platformLibraries": [ "libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib" ]
+    },
     {
       "name": "t230-s15-checked-ram-fixture",
       "source": "tests/bx-mantle/t230_s15_checked_ram_fixture.cc",
