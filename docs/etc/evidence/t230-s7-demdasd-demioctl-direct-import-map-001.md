@@ -54,9 +54,17 @@ returns a genuine unsupported host error on those still-uncomposed calls, so
 the imported DEM code performs its original error conversion; it never
 pretends a raw transfer succeeded.
 
-Their future recovery belongs to a separately admitted OpenNT host-capability
-package with its own source/ABI/failure map.  That package may replace this
-temporary ABI endpoint but may not migrate device mechanics into bx-vdm.
+The reached fixed-volume subset is now a source-derived OpenNT host-capability
+seam: it preserves `nt_fdisk.c`'s physical-index-to-logical-drive table and
+its geometry/BPB/read/write/verify/close contract, but uses documented Win32
+volume handles instead of the former NT-native `\\DosDevices`/FAT-only host
+composition.  The Direct path may therefore admit a real fixed volume when
+the process has access.  The fixture environment did not register one, so it
+does not claim a successful raw transfer.
+
+`nt_rflop.c` remains a separately admitted future host-device package.  Its
+FDC/DMA/CMOS/timer mechanics cannot migrate into bx-vdm; uncomposed floppy
+calls continue to fail explicitly.
 
 ## Verification
 
