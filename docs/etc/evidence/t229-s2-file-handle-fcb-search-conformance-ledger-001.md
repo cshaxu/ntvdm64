@@ -35,7 +35,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:17` | `demRename` | R | two-path Direct/Readonly ABI |
 | `50:1E` | `demWrite` | P — Direct write, pre-host Readonly refusal | zero-length/disk-full variants |
 | `50:20` | `demRenameFCB` | R | wildcard source/destination matrix |
-| `50:22` | `demCreateNew` | R | create-new collision and owner/PDB ABI |
+| `50:22` | `demCreateNew` | P — whole-provider collision/refusal ABI | success/attribute variants |
 | `50:27` | `demCommit` | R | token-aware CF-clear behavior |
 | `50:2C` | `demCreateFCB` | R | create result/layout + Readonly refusal |
 | `50:2D` | `demOpenFCB` | P — OEM path, `AX:BP` token | share/access matrix |
@@ -55,6 +55,7 @@ ledger: a typed route is not counted as semantic completion.
 - P3: `demDeleteFCB` wildcard mutation.
 - P4: `demOpen` whole-provider PDB/path transaction and `AX:BP`, `BX:CX`, `DX` success ABI.
 - P5: `demCreate` Direct creation/close and pre-host Readonly refusal.
+- P6: `demCreateNew` Direct collision and pre-host Readonly refusal.
 
 ## Completion rule
 
