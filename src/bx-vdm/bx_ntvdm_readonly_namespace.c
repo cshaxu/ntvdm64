@@ -282,6 +282,30 @@ int bx_ntvdm_readonly_namespace_v1_match_startup_path(
     return 0;
 }
 
+int bx_ntvdm_readonly_namespace_v1_query_startup_file(
+    const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
+    const wchar_t *canonical_path, uint64_t *byte_count_out,
+    uint16_t *dos_time_out, uint16_t *dos_date_out)
+{
+    uint32_t index;
+    if (byte_count_out != 0) *byte_count_out = 0u;
+    if (dos_time_out != 0) *dos_time_out = 0u;
+    if (dos_date_out != 0) *dos_date_out = 0u;
+    if (value == 0 || canonical_path == 0 || byte_count_out == 0 ||
+        dos_time_out == 0 || dos_date_out == 0 || drive_index != value->drive_index ||
+        value->file_count < 3u) return 0;
+    for (index = 0u; index < value->file_count; ++index) {
+        if (value->files[index].bytes != 0 &&
+            path_equal(canonical_path, value->files[index].path)) {
+            *byte_count_out = value->files[index].byte_count;
+            *dos_time_out = value->files[index].dos_time;
+            *dos_date_out = value->files[index].dos_date;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 uint32_t bx_ntvdm_readonly_namespace_v1_declared_slot(
     const bx_ntvdm_readonly_namespace_v1 *value, uint32_t drive_index,
     const wchar_t *canonical_path, uint32_t *bytes_ready_out)
