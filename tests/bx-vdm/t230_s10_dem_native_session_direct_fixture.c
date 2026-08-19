@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "bop/shim/dem_native_session_shim.h"
+#include "bop/dem_v2_generic_ud_bridge.h"
 
 typedef struct fixture_state { uint8_t bytes[32]; } fixture_state;
 
@@ -38,14 +39,14 @@ int main(void)
     if(!bx_ntvdm_dem_native_session_initialize(&session,&direct,&state,read_guest,write_guest) ||
        !bx_ntvdm_dem_native_session_bind(&session)) return 1;
     event_initialize(&event,0x50u,0x1fu); memset(&outcome,0,sizeof(outcome));
-    if(!bx_ntvdm_dem_native_session_dispatch(&event,&outcome) ||
+    if(!bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome) ||
        outcome.disposition!=BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip!=0x2404u ||
        (outcome.eflags_values&BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF)!=0u) return 2;
     event_initialize(&event,0x54u,0x1fu);
-    if(bx_ntvdm_dem_native_session_dispatch(&event,&outcome)) return 3;
+    if(bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome)) return 3;
     bx_ntvdm_dem_native_session_unbind(&session);
     event_initialize(&event,0x50u,0x1fu);
-    if(bx_ntvdm_dem_native_session_dispatch(&event,&outcome)) return 4;
-    puts("T230 S10 Direct DEM native session: copied #UD reaches original dispatcher without v1");
+    if(bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome)) return 4;
+    puts("T230 Direct DEM v2 bridge: copied #UD reaches original dispatcher without v1 fallback");
     return 0;
 }

@@ -15,7 +15,7 @@
 #include <windows.h>
 #include <winternl.h>
 #include <winioctl.h>
-#include "../../../../opennt/local/compat/compiler/opennt_dem_ntdecl_compat.h"
+#include "../../../opennt/local/compat/compiler/opennt_dem_ntdecl_compat.h"
 #include "demdir_shim.h"
 /* Direct source mirror: shared exact DASD/IOCTL layout and constants. */
 #include "../opennt/dem/demdasd.h"
