@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1963 |
 | --- | --- |
-| Generated UTC | 2026-08-19T19:30:16Z |
+| Generated UTC | 2026-08-19T19:35:24Z |
 
 ## Entries
 
@@ -206,7 +206,7 @@ content-divergent entries.
 | etc/evidence/t229-s2-p7-dem-delete-direct-readonly-001.md | indexed supporting material | 06d64962801ff69cb04d658e3150765b82587786353dc941021aa24258b2844b |
 | etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md | indexed supporting material | 148a377518db6d37b07add573ec9d0e9b8b8e43db0b9c859aa56119ec1036308 |
 | etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md | indexed supporting material | 609a30412820d1550d9b93023498c209c56e2e93bca476dd994985c741f31010 |
-| etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md | indexed supporting material | f6abe09b5ab69a3c02794816618632eafdec280385419d3a8e69d91a17d6ee38 |
+| etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md | indexed supporting material | ce7fac5928e1d05bd55fc6ca225935ed9ebc2e979b4ba369ee64b53497a04c73 |
 | etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md | indexed supporting material | 2fafd3c798bc64422ff028d5b537c93e1957e30f819a63f577483ff3e696b748 |
 | etc/evidence/t230-s1-bop-50-00-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | 64fa3856447f854b30b9e75cb48841fddbd82998128439a191c0d3bc8a411715 |
 | etc/evidence/t230-s1-bop-50-01-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | eb70c11fb9763e1b726744beb6cb59af3768e33c512a25536193c650c4f97e52 |

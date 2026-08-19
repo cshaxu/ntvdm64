@@ -110,6 +110,25 @@ DEM fixture routes.  As with the original r4 witness, it is local Direct
 source-parity evidence only; it does not prove a native selector ingress or
 guest execution.
 
+## Bounded Direct DEM ingress
+
+The standalone CLI cannot link historical `nt_bop.c`: that translation unit
+combines selector decoding with CCPU/SAS, DLL, VDD, GUI and other unavailable
+NTVDM-product composition.  The Direct replacement is deliberately smaller:
+`bop/shim/dem_ingress_shim.c` accepts only a copied four-byte
+`C4 C4 50 <service>` window, requires the supplied checked call to name that
+same service in the original `0..48h` range, and invokes the original
+`DemDispatch` table through `demdisp_shim`.  It has no route for any other
+selector and no DEM service body.
+
+The fresh formal `dem-ingress-r6` graph source-builds this shim with the full
+direct DEM library.  `t230-s10-dem-ingress-direct-fixture` verifies the
+original `50:1F` ordinary-return slot and rejects a COMMAND selector, a
+truncated BOP, and the `49h` non-callable endpoint.  This is the first
+v1-free bridge from a bounded BOP observation to the original DEM dispatcher.
+It still is not a native guest-execution result: binding a real machine event
+to a checked DEM call context is separate composition work.
+
 ## Remaining S10 work
 
 This witness does not authorize deletion of all `bop-v1` material: other BOP
