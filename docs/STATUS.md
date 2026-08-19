@@ -41,7 +41,11 @@
 
 > **T229 S2 P19:** [DEM misc subcontract separation evidence](etc/evidence/t229-s2-p19-dem-misc-subcontract-separation-001.md) corrects the former generic-no-op claim and isolates the outstanding 50:23 COMMAND/media composition prerequisite.
 
-> **T229 S2 P20:** [DEM original-noop owner-group evidence](etc/evidence/t229-s2-p20-dem-original-noop-owner-group-001.md) records all seven demNotYetImplemented identities as source-shaped CF-clear resumes in Direct and Readonly.
+> **T229 S2 P20:** [DEM original-noop owner-group evidence](etc/evidence/t229-s2-p20-dem-original-noop-owner-group-001.md) records all seven demNotYetImplemented identities as source-shaped CF-clear resumes in Direct and Readonly.
+
+> **T229 S2 P21:** [DEM DASD/IOCTL owner-group evidence](etc/evidence/t229-s2-p21-dem-dasd-ioctl-owner-group-001.md) closes Direct/Readonly metadata plus original no-device failure behavior without admitting raw host media.
+
+> **T229 S2 P22:** [DEM error/lock owner-group evidence](etc/evidence/t229-s2-p22-dem-error-lock-owner-group-001.md) closes locator registration, no-retry and no-handle source terminals in Direct and Readonly.
 
 > **T229 S2 P17:** [DEM GSET clock-mutation Direct/Readonly conformance evidence](etc/evidence/t229-s2-p17-dem-gset-clock-mutation-direct-readonly-001.md) records source-shaped `SetLocalTime` Direct behavior and the pre-Win32 Readonly refusal.
 
