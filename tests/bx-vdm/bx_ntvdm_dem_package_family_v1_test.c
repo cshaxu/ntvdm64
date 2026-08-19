@@ -472,6 +472,39 @@ static int whole_provider_pdb_lifecycle_regression(void)
         result.eflags_write_mask != 0u ||
         !bx_ntvdm_dem_file_session_v1_lookup(&session.whole_provider.files,
             token, &looked_up)) goto cleanup;
+    /* demChgFilePtr is the common handle cursor contract: OpenNT consumes
+     * CX:DX and BL, returns the resulting 32-bit offset in DX:AX, and keeps
+     * it profile-neutral.  Reset the fixture cursor before the paired read. */
+    bytes[3] = 0x00u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ebx = 0u; cpu.ecx = 0u; cpu.edx = 0u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask !=
+            ((UINT32_C(1) << 0u) | (UINT32_C(1) << 2u)) ||
+        result.cpu_delta.gpr16_values[0u] != 0u ||
+        result.cpu_delta.gpr16_values[2u] != 0u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u) goto cleanup;
+    /* An unknown opaque token is not a pass-through: demChgFilePtr reaches
+     * demClientError with ERROR_INVALID_HANDLE (AX=6, CF set). */
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 0xfaceu; cpu.ebp = 0xbeefu;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+        result.cpu_delta.gpr16_values[0u] != ERROR_INVALID_HANDLE ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) goto cleanup;
     /* demRead is a non-mutating handle operation in both profiles.  Its
      * output reaches guest RAM only through the checked whole-provider I/O
      * transaction, and AX reports the transferred byte count. */
@@ -490,6 +523,27 @@ static int whole_provider_pdb_lifecycle_regression(void)
         result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
         result.cpu_delta.gpr16_values[0u] != 3u ||
         result.eflags_values != 0u || memcmp(ram + 0x600u, "ONE", 3u) != 0)
+        goto cleanup;
+    /* A second read at EOF reports AX=0/CF-clear and must not produce a
+     * checked guest-RAM write.  This is the ordinary ReadFile result, not a
+     * synthetic end-of-file failure, in both Direct and Readonly profiles. */
+    memset(ram + 0x600u, 0x5au, 3u);
+    bytes[3] = 0x16u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ecx = 3u; cpu.edx = 0x600u; cpu.eflags = 0x40u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+        result.cpu_delta.gpr16_values[0u] != 0u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != 0u ||
+        ram[0x600u] != 0x5au || ram[0x601u] != 0x5au || ram[0x602u] != 0x5au)
         goto cleanup;
     /* OpenNT demCommit tolerates a read-only FlushFileBuffers failure in
      * release builds, then clears CF.  It is therefore legal in both modes. */

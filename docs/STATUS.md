@@ -33,6 +33,8 @@
 
 > **T229 S2 P11:** [demCommit Direct/Readonly conformance evidence](etc/evidence/t229-s2-p11-dem-commit-direct-readonly-001.md) records OpenNT release-build CF-clear commit behavior in both profiles.
 
+> **T229 S2 P12:** [DEM handle cursor/EOF Direct/Readonly conformance evidence](etc/evidence/t229-s2-p12-dem-handle-cursor-eof-direct-readonly-001.md) records source-shaped 50:00 seek, invalid-token and ZF-controlled 50:16 EOF behavior.
+
 > **T229 S2 P9:** [demChMod Direct/Readonly conformance evidence](etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md) records the source-derived CX result-ABI repair and metadata policy split.
 
 > **T229 S2 P8:** [demRename Direct/Readonly conformance evidence](etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md) records `50:17` two-path mutation/refusal behavior without claiming error-matrix closure.

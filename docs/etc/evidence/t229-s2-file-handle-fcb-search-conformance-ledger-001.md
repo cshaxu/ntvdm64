@@ -17,7 +17,7 @@ ledger: a typed route is not counted as semantic completion.
 
 | BOP | OpenNT handler | Present semantic evidence | Next package work |
 | --- | --- | --- | --- |
-| `50:00` | `demChgFilePtr` | P — opaque handle seek lifecycle | add nonzero/origin/error matrix |
+| `50:00` | `demChgFilePtr` | P — opaque handle seek, result ABI and invalid-token error | add nonzero/origin matrix |
 | `50:01` | `demChMod` | P — CX query, Direct set/Readonly refusal | source error variants |
 | `50:02` | `demClose` | P — opaque token release | final-location and null-token variants |
 | `50:03` | `demCreate` | P — whole-provider create + owner/PDB ABI | attribute/error variants |
@@ -31,7 +31,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:0B` | `demFindNext` | R | DTA continuation/stale-state matrix |
 | `50:0C` | `demFindNextFCB` | P — continuation/no-more-files | host enumeration variant |
 | `50:12` | `demOpen` | P — whole-provider token/size/pipe ABI | share/access and pipe-token variants |
-| `50:16` | `demRead` | P — checked Direct/Readonly output | EOF/error variants |
+| `50:16` | `demRead` | P — checked output, ZF cursor continuation and EOF | host-read error variants |
 | `50:17` | `demRename` | P — whole-provider Direct rename/Readonly refusal | cross-drive/same-path variants |
 | `50:1E` | `demWrite` | P — Direct write, pre-host Readonly refusal | zero-length/disk-full variants |
 | `50:20` | `demRenameFCB` | R | wildcard source/destination matrix |
