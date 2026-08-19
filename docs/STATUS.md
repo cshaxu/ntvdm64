@@ -27,6 +27,8 @@
 | Similar-Issue Sweep | All 73 `demdisp.c` identities; current source-derived terminals; `50:47/48` pipe routes; shared mutation profile consumers; CLI mode parsing; Virtual enum, backend, token, provider, build-manifest and fixture membership; Overlay selection rejection; whole-provider/all-73/native observation paths. |
 
 > **T230 S1 plan:** [DEM functional-completion admission plan](etc/operations/m0-t230-s1-dem-functional-completion-admission-plan-001.md) replaces T229's route/disposition criterion with actual functional and retired-Virtual closure criteria.
+
+> **T230 S1 P1:** [203-entry Chinese BOP implementation tracker](etc/operations/opennt-bop-implementation-tracker-001.md) records instruction entry, original handler, high-level purpose, actual strict status and Direct/Readonly/Overlay disposition; it establishes zero fully complete entries at this baseline.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
