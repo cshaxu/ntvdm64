@@ -82,6 +82,11 @@ typedef struct bx_ntvdm_demhndl_call {
 
 int bx_ntvdm_demhndl_call_valid(const bx_ntvdm_demhndl_call *call);
 int bx_ntvdm_demhndl_invoke(bx_ntvdm_demhndl_call *call);
+/* A second directly imported DEM owner may execute through the same scoped
+ * CCPU/SAS replacement.  This remains a mechanical call boundary: the caller
+ * owns service selection and the imported function owns its DEM semantics. */
+int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
+    void (*body)(void));
 
 #define errLOC_Net 2u
 #define errCLASS_TempSit 0x0bu
@@ -93,11 +98,16 @@ USHORT bx_ntvdm_demhndl_get_bx(void);
 USHORT bx_ntvdm_demhndl_get_cx(void);
 USHORT bx_ntvdm_demhndl_get_dx(void);
 USHORT bx_ntvdm_demhndl_get_si(void);
+USHORT bx_ntvdm_demhndl_get_di(void);
 USHORT bx_ntvdm_demhndl_get_bp(void);
 USHORT bx_ntvdm_demhndl_get_ds(void);
+USHORT bx_ntvdm_demhndl_get_es(void);
+USHORT bx_ntvdm_demhndl_get_al(void);
 USHORT bx_ntvdm_demhndl_get_bl(void);
+USHORT bx_ntvdm_demhndl_get_dl(void);
 int bx_ntvdm_demhndl_get_zf(void);
 void bx_ntvdm_demhndl_set_ax(USHORT value);
+void bx_ntvdm_demhndl_set_bx(USHORT value);
 void bx_ntvdm_demhndl_set_bp(USHORT value);
 void bx_ntvdm_demhndl_set_cx(USHORT value);
 void bx_ntvdm_demhndl_set_dx(USHORT value);
@@ -111,17 +121,23 @@ void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back);
 void bx_ntvdm_demhndl_client_error(HANDLE file, CHAR drive);
 BOOL bx_ntvdm_demhndl_close_handle(HANDLE file);
+BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
 
 #define getAX() bx_ntvdm_demhndl_get_ax()
 #define getBX() bx_ntvdm_demhndl_get_bx()
 #define getCX() bx_ntvdm_demhndl_get_cx()
 #define getDX() bx_ntvdm_demhndl_get_dx()
 #define getSI() bx_ntvdm_demhndl_get_si()
+#define getDI() bx_ntvdm_demhndl_get_di()
 #define getBP() bx_ntvdm_demhndl_get_bp()
 #define getDS() bx_ntvdm_demhndl_get_ds()
+#define getES() bx_ntvdm_demhndl_get_es()
+#define getAL() bx_ntvdm_demhndl_get_al()
 #define getBL() bx_ntvdm_demhndl_get_bl()
+#define getDL() bx_ntvdm_demhndl_get_dl()
 #define getZF() bx_ntvdm_demhndl_get_zf()
 #define setAX(value) bx_ntvdm_demhndl_set_ax(value)
+#define setBX(value) bx_ntvdm_demhndl_set_bx(value)
 #define setBP(value) bx_ntvdm_demhndl_set_bp(value)
 #define setCX(value) bx_ntvdm_demhndl_set_cx(value)
 #define setDX(value) bx_ntvdm_demhndl_set_dx(value)

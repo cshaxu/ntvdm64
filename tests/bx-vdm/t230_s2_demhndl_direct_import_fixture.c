@@ -12,6 +12,18 @@ typedef struct fixture_context {
     uint8_t guest[0x20000];
 } fixture_context;
 
+static int publish_handle(void *state, HANDLE handle, uint32_t *token_out,
+    DWORD *error_out)
+{
+    fixture_context *context = (fixture_context *)state;
+    if (token_out != 0) *token_out = 0u;
+    if (error_out != 0) *error_out = ERROR_INVALID_HANDLE;
+    if (context == 0 || context->handle != handle || context->released) return 0;
+    if (token_out != 0) *token_out = context->token;
+    if (error_out != 0) *error_out = ERROR_SUCCESS;
+    return 1;
+}
+
 static int lookup_handle(void *state, uint32_t token, HANDLE *handle_out)
 {
     fixture_context *context = (fixture_context *)state;
@@ -89,6 +101,7 @@ static void direct_initialize(bx_ntvdm_dem_direct_context *direct,
     direct->abi_version = BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION;
     direct->struct_bytes = sizeof(*direct);
     direct->state = state;
+    direct->publish_handle = publish_handle;
     direct->lookup_handle = lookup_handle;
     direct->release_handle = release_handle;
     direct->query_attributes = query_attributes;

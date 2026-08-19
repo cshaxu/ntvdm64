@@ -18,6 +18,8 @@ typedef struct bx_ntvdm_dem_direct_context {
     uint32_t struct_bytes;
     uint32_t reserved0;
     void *state;
+    int (*publish_handle)(void *state, HANDLE handle, uint32_t *token_out,
+        DWORD *error_out);
     int (*lookup_handle)(void *state, uint32_t token, HANDLE *handle_out);
     int (*release_handle)(void *state, uint32_t token, DWORD *error_out);
     int (*query_attributes)(void *state, uint8_t drive,

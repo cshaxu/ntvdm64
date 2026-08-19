@@ -28,6 +28,8 @@ typedef struct bx_ntvdm_demhndl_active_call {
     uint32_t guest_address;
     uint32_t guest_bytes;
     uint8_t *guest_buffer;
+    uint8_t *path_buffers[4];
+    uint32_t path_buffer_count;
     int transfer_from_guest;
 } bx_ntvdm_demhndl_active_call;
 
@@ -48,6 +50,48 @@ static uint32_t real_mode_address(USHORT segment, USHORT offset)
 static uint16_t low16(uint32_t value)
 {
     return (uint16_t)(value & 0xffffu);
+}
+
+static int is_demfile_path_service(uint32_t service)
+{
+    switch (service) {
+    case 0x01u: case 0x03u: case 0x05u: case 0x12u:
+    case 0x17u: case 0x22u: case 0x44u:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static LPVOID acquire_guest_oem_path(bx_ntvdm_demhndl_active_call *active,
+    uint32_t address)
+{
+    uint8_t *buffer;
+    uint32_t index;
+
+    if (active->path_buffer_count >= 4u) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return NULL;
+    }
+    /* OpenNT received an unbounded flat SAS pointer.  The replacement reads
+     * one NUL-terminated OEM pathname through checked RAM and caps it at the
+     * Win32 path contract; this is the ABI boundary, not a DEM pathname
+     * algorithm. */
+    buffer = (uint8_t *)malloc(MAX_PATH + 1u);
+    if (buffer == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
+    for (index = 0u; index < MAX_PATH; ++index) {
+        if (!active->call->guest_read(active->call->guest_state, address + index,
+                buffer + index, 1u)) {
+            free(buffer); SetLastError(ERROR_INVALID_ADDRESS); return NULL;
+        }
+        if (buffer[index] == 0u) {
+            active->path_buffers[active->path_buffer_count++] = buffer;
+            return buffer;
+        }
+    }
+    free(buffer);
+    SetLastError(ERROR_BUFFER_OVERFLOW);
+    return NULL;
 }
 
 static int set_register(uint32_t register_index, USHORT value)
@@ -75,14 +119,22 @@ USHORT bx_ntvdm_demhndl_get_bx(void) { return low16(active_call()->call->cpu->eb
 USHORT bx_ntvdm_demhndl_get_cx(void) { return low16(active_call()->call->cpu->ecx); }
 USHORT bx_ntvdm_demhndl_get_dx(void) { return low16(active_call()->call->cpu->edx); }
 USHORT bx_ntvdm_demhndl_get_si(void) { return low16(active_call()->call->cpu->esi); }
+USHORT bx_ntvdm_demhndl_get_di(void) { return low16(active_call()->call->cpu->edi); }
 USHORT bx_ntvdm_demhndl_get_bp(void) { return low16(active_call()->call->cpu->ebp); }
 USHORT bx_ntvdm_demhndl_get_ds(void) { return active_call()->call->cpu->ds; }
+USHORT bx_ntvdm_demhndl_get_es(void) { return active_call()->call->cpu->es; }
+USHORT bx_ntvdm_demhndl_get_al(void) { return (USHORT)(active_call()->call->cpu->eax & 0xffu); }
 USHORT bx_ntvdm_demhndl_get_bl(void) { return (USHORT)(active_call()->call->cpu->ebx & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_dl(void) { return (USHORT)(active_call()->call->cpu->edx & 0xffu); }
 int bx_ntvdm_demhndl_get_zf(void) { return (active_call()->call->cpu->eflags & 0x40u) != 0u; }
 void bx_ntvdm_demhndl_set_ax(USHORT value) { (void)set_register(0u, value); }
+void bx_ntvdm_demhndl_set_bx(USHORT value) { (void)set_register(3u, value); }
 void bx_ntvdm_demhndl_set_bp(USHORT value) { (void)set_register(5u, value); }
-void bx_ntvdm_demhndl_set_cx(USHORT value) { (void)set_register(2u, value); }
-void bx_ntvdm_demhndl_set_dx(USHORT value) { (void)set_register(3u, value); }
+/* The copied-result GPR numbering is Bochs AX,CX,DX,BX,SP,BP,SI,DI; keep
+ * the historical helper spellings at this neutral boundary rather than make
+ * imported DEM code depend on Bochs headers. */
+void bx_ntvdm_demhndl_set_cx(USHORT value) { (void)set_register(1u, value); }
+void bx_ntvdm_demhndl_set_dx(USHORT value) { (void)set_register(2u, value); }
 void bx_ntvdm_demhndl_set_cf(int value) { (void)bx_ntvdm_cpu_result_v2_set_cf(active_call()->call->result, value); }
 void bx_ntvdm_demhndl_set_zf(int value) { (void)bx_ntvdm_cpu_result_v2_set_zf(active_call()->call->result, value); }
 
@@ -118,14 +170,32 @@ BOOL bx_ntvdm_demhndl_close_handle(HANDLE file)
     return TRUE;
 }
 
+BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    DWORD error = ERROR_INVALID_HANDLE;
+    uint32_t token = 0u;
+    if (active == NULL || active->call == NULL || file == INVALID_HANDLE_VALUE ||
+        !active->call->direct->publish_handle(active->call->direct->state, file,
+            &token, &error) || token == 0u) {
+        SetLastError(error);
+        return FALSE;
+    }
+    bx_ntvdm_demhndl_set_ax((USHORT)(token >> 16));
+    bx_ntvdm_demhndl_set_bp((USHORT)token);
+    return TRUE;
+}
+
 LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
 {
     bx_ntvdm_demhndl_active_call *active = active_call();
     uint32_t bytes;
 
     if (active == 0 || active->call == 0) return NULL;
-    bytes = bx_ntvdm_demhndl_get_cx();
     active->guest_address = real_mode_address(segment, offset);
+    if (is_demfile_path_service(active->call->service))
+        return acquire_guest_oem_path(active, active->guest_address);
+    bytes = bx_ntvdm_demhndl_get_cx();
     active->guest_bytes = bytes;
     /* A zero-length DOS transfer still supplies a valid historical pointer:
      * demWrite may use it before its CX==0 truncate/extend branch. */
@@ -198,24 +268,13 @@ int cmdPipeFileDataEOF(HANDLE file, BOOL *eof_out)
 int cmdPipeFileEOF(HANDLE file)
 { bx_ntvdm_demhndl_active_call *active = active_call(); return active != NULL && active->call->pipe_eof != NULL ? active->call->pipe_eof(active->call->pipe_state, file) : 0; }
 
-int bx_ntvdm_demhndl_invoke(bx_ntvdm_demhndl_call *call)
+int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
+    void (*body)(void))
 {
     bx_ntvdm_demhndl_active_call active;
-    void (*service)(void) = NULL;
 
-    if (!bx_ntvdm_demhndl_call_valid(call) || g_active_call != NULL ||
+    if (!bx_ntvdm_demhndl_call_valid(call) || body == NULL || g_active_call != NULL ||
         call->boundary->fault_rip > UINT64_MAX - 4u) return 0;
-    switch (call->service) {
-    case BX_NTVDM_DEMHNDL_CHG_FILE_PTR: service = demChgFilePtr; break;
-    case BX_NTVDM_DEMHNDL_CLOSE: service = demClose; break;
-    case BX_NTVDM_DEMHNDL_FILE_TIMES: service = demFileTimes; break;
-    case BX_NTVDM_DEMHNDL_READ: service = demRead; break;
-    case BX_NTVDM_DEMHNDL_WRITE: service = demWrite; break;
-    case BX_NTVDM_DEMHNDL_COMMIT: service = demCommit; break;
-    case BX_NTVDM_DEMHNDL_PIPE_DATA_EOF: service = demPipeFileDataEOF; break;
-    case BX_NTVDM_DEMHNDL_PIPE_EOF: service = demPipeFileEOF; break;
-    default: return 0;
-    }
     memset(&active, 0, sizeof(active));
     active.call = call;
     active.transfer_from_guest = call->service == BX_NTVDM_DEMHNDL_WRITE;
@@ -227,8 +286,29 @@ int bx_ntvdm_demhndl_invoke(bx_ntvdm_demhndl_call *call)
     if (!bx_ntvdm_cpu_result_v2_resume(call->result, call->boundary->fault_rip + 4u))
         return 0;
     g_active_call = &active;
-    service();
+    body();
     if (active.guest_buffer != NULL) free(active.guest_buffer);
+    while (active.path_buffer_count != 0u)
+        free(active.path_buffers[--active.path_buffer_count]);
     g_active_call = NULL;
     return bx_ntvdm_cpu_result_v2_valid(call->result);
+}
+
+int bx_ntvdm_demhndl_invoke(bx_ntvdm_demhndl_call *call)
+{
+    void (*service)(void) = NULL;
+
+    if (!bx_ntvdm_demhndl_call_valid(call)) return 0;
+    switch (call->service) {
+    case BX_NTVDM_DEMHNDL_CHG_FILE_PTR: service = demChgFilePtr; break;
+    case BX_NTVDM_DEMHNDL_CLOSE: service = demClose; break;
+    case BX_NTVDM_DEMHNDL_FILE_TIMES: service = demFileTimes; break;
+    case BX_NTVDM_DEMHNDL_READ: service = demRead; break;
+    case BX_NTVDM_DEMHNDL_WRITE: service = demWrite; break;
+    case BX_NTVDM_DEMHNDL_COMMIT: service = demCommit; break;
+    case BX_NTVDM_DEMHNDL_PIPE_DATA_EOF: service = demPipeFileDataEOF; break;
+    case BX_NTVDM_DEMHNDL_PIPE_EOF: service = demPipeFileEOF; break;
+    default: return 0;
+    }
+    return bx_ntvdm_demhndl_invoke_body(call, service);
 }
