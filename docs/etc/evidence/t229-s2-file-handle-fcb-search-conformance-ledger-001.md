@@ -18,7 +18,7 @@ ledger: a typed route is not counted as semantic completion.
 | BOP | OpenNT handler | Present semantic evidence | Next package work |
 | --- | --- | --- | --- |
 | `50:00` | `demChgFilePtr` | P — opaque handle seek lifecycle | add nonzero/origin/error matrix |
-| `50:01` | `demChMod` | R | query/set metadata Direct/Readonly |
+| `50:01` | `demChMod` | P — CX query, Direct set/Readonly refusal | source error variants |
 | `50:02` | `demClose` | P — opaque token release | final-location and null-token variants |
 | `50:03` | `demCreate` | P — whole-provider create + owner/PDB ABI | attribute/error variants |
 | `50:04` | `demCreateDir` | P — Direct create, Readonly refusal | source error variants |

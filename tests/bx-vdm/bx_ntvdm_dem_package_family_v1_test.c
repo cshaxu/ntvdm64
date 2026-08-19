@@ -743,6 +743,36 @@ static int whole_provider_pdb_lifecycle_regression(void)
     /* Restore the independent FCB pathname used by later package checks. */
     memset(ram + 0x700u, 0, 260u);
     memcpy(ram + 0x700u, oem_fcb_path, strlen(oem_fcb_path) + 1u);
+    /* OpenNT demChMod returns query attributes in CX; its set form is a
+     * FILE_METADATA mutation. Query stays available in both profiles. */
+    bytes[3] = 0x01u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 0u; cpu.edx = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 1u) ||
+        result.cpu_delta.gpr16_values[1u] != (uint16_t)
+            (GetFileAttributesW(fcb_path) == FILE_ATTRIBUTE_NORMAL ? 0u :
+             (GetFileAttributesW(fcb_path) & 0x37u)) || result.eflags_values != 0u)
+        goto cleanup;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = 1u; cpu.ecx = FILE_ATTRIBUTE_ARCHIVE; cpu.edx = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.cpu_delta.gpr16_write_mask != 0u || result.eflags_values != 0u)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF))) goto cleanup;
     /* demFileTimes option 1 mutates metadata.  Direct changes only the
      * fixture-owned file; Readonly is rejected by the shared profile before
      * SetFileTime can touch a host HANDLE. */

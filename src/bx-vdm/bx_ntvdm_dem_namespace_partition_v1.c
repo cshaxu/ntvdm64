@@ -194,7 +194,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
              * ordinary DOS attribute projection expected by the startup
              * reader; no real host file is queried or modified. */
             return finish(boundary, result, 0u, 0, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u, 0u);
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, 0u);
         }
         if ((cpu->eax & 0xffu) != 0u) {
             if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
@@ -237,7 +237,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
             else attributes &= 0x37u;
             return finish(boundary, result, 0u, 0, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
                     (uint16_t)attributes);
         }
         if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
@@ -249,7 +249,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
             if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
             else attributes &= 0x37u;
             return finish(boundary, result, 0u, 0, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
+                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
                     (uint16_t)attributes);
         }
         if (!bx_ntvdm_host_namespace_v1_query_file_attributes(
@@ -258,7 +258,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
         if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
         else attributes &= 0x37u; /* historical DOS_ATTR_MASK projection */
         return finish(boundary, result, 0u, 0, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
+            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
                 (uint16_t)attributes);
     }
     if (service == 0x03u || service == 0x22u || service == 0x12u) {
