@@ -37,6 +37,8 @@
 
 > **T229 S2 P13:** [demCreateFCB Direct/Readonly conformance evidence](etc/evidence/t229-s2-p13-dem-create-fcb-direct-readonly-001.md) records the source-shaped FCB result ABI and shared pre-host Readonly refusal.
 
+> **T229 S2 P18:** [DEM GSET/drive/CWD/volume whole-group conformance evidence](etc/evidence/t229-s2-p18-dem-gset-drive-cwd-volume-whole-group-001.md) records all fifteen source-owner endpoints through one Direct/Readonly formal session regression.
+
 > **T229 S2 P17:** [DEM GSET clock-mutation Direct/Readonly conformance evidence](etc/evidence/t229-s2-p17-dem-gset-clock-mutation-direct-readonly-001.md) records source-shaped `SetLocalTime` Direct behavior and the pre-Win32 Readonly refusal.
 
 > **T229 S2 P16:** [DEM clock/path Direct/Readonly conformance evidence](etc/evidence/t229-s2-p16-dem-clock-path-direct-readonly-001.md) records the original date/time register ABI and `demCheckPath` device-directory terminal.

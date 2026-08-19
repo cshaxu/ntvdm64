@@ -111,6 +111,8 @@ static int initialize_session(uint32_t mode,
     bx_ntvdm_mutation_profile_v1_initialize(&mutation, mode);
     return bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation,
         BX_NTVDM_MUTATION_CLASS_V1_SESSION_CONTEXT, 0x0fu) &&
+        bx_ntvdm_dem_profile_consumer_v1_register_class(&mutation,
+        BX_NTVDM_MUTATION_CLASS_V1_HOST_GLOBAL, 0x03u) &&
         bx_ntvdm_boot_namespace_plane_v1_initialize(plane, ntdos, command,
             target, 0, profile) &&
         bx_ntvdm_dem_package_session_v1_initialize(session, plane) &&
@@ -190,9 +192,9 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
         ram[0x180u] != 0xa5u || ram[0x198u] != 0xa5u) {
         bx_ntvdm_dem_package_session_v1_teardown(&session); return 9;
     }
-    /* The clock owner is profile-neutral for observation.  Without an explicit
-     * Direct clock capability, both setters preserve OpenNT's AL-only failure
-     * shape and never mutate the ambient host clock. */
+    /* Date/time queries are profile-neutral observations. Setters use invalid
+     * input so no host clock changes; Direct retains either original AL=00
+     * privilege fallback or AL=ff validation failure, while Readonly is ff. */
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.eax = 0xa500u;
     if (!dispatch(&session, 0x14u, &cpu, &result) ||
@@ -221,22 +223,25 @@ static int exercise(uint32_t mode, const bx_ntvdm_host_drive_snapshot_v1 *drives
         bx_ntvdm_dem_package_session_v1_teardown(&session); return 11;
     }
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-    cpu.eax = 0xa500u;
+    cpu.eax = 0xa500u; cpu.ecx = cpu.edx = 0u;
     if (!dispatch(&session, 0x19u, &cpu, &result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
-        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 0xa5ffu ||
+        result.cpu_delta.gpr16_write_mask != 1u ||
+        (readonly ? result.cpu_delta.gpr16_values[0] != 0xa5ffu :
+         (result.cpu_delta.gpr16_values[0] != 0xa500u && result.cpu_delta.gpr16_values[0] != 0xa5ffu)) ||
         result.eflags_write_mask != 0u) {
         bx_ntvdm_dem_package_session_v1_teardown(&session); return 12;
     }
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-    cpu.eax = 0x5a00u;
+    cpu.eax = 0x5a00u; cpu.ecx = cpu.edx = 0u;
     if (!dispatch(&session, 0x1cu, &cpu, &result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME || result.resume_rip != 0x104u ||
-        result.cpu_delta.gpr16_write_mask != 1u || result.cpu_delta.gpr16_values[0] != 0x5affu ||
+        result.cpu_delta.gpr16_write_mask != 1u ||
+        (readonly ? result.cpu_delta.gpr16_values[0] != 0x5affu :
+         (result.cpu_delta.gpr16_values[0] != 0x5a00u && result.cpu_delta.gpr16_values[0] != 0x5affu)) ||
         result.eflags_write_mask != 0u) {
         bx_ntvdm_dem_package_session_v1_teardown(&session); return 13;
-    }
-    /* The DPB owner consumes the same admitted immutable volume inventory.
+    }    /* The DPB owner consumes the same admitted immutable volume inventory.
      * Validate its full 35-byte output, its excluded-drive terminal, and the
      * DPB-list chain as one package family rather than independent leaves. */
     memset(ram + 0x280u, 0xa5, 35u);
