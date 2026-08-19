@@ -190,6 +190,7 @@
         "src/bx-vdm/bop/opennt/dem/demfile.c",
         "src/bx-vdm/bop/opennt/dem/demlabel.c",
         "src/bx-vdm/bop/opennt/dem/demlock.c",
+        "src/bx-vdm/bop/opennt/dem/demmisc.c",
         "src/bx-vdm/bop/opennt/dem/demmsg.c",
         "src/bx-vdm/bop/opennt/dem/demfcb.c",
         "src/bx-vdm/bop/opennt/dem/demgset.c",
@@ -201,6 +202,7 @@
         "src/bx-vdm/bop/shim/demgset_shim.c",
         "src/bx-vdm/bop/shim/demdasd_ioctl_shim.c",
         "src/bx-vdm/bop/shim/demerror_lock_shim.c",
+        "src/bx-vdm/bop/shim/demmisc_shim.c",
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
         "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_observation_v1.c",
@@ -707,6 +709,25 @@
     {
       "name": "t230-s8-demerror-lock-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s8_demerror_lock_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s9-demmisc-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s9_demmisc_direct_import_fixture.c",
       "libraries": [
         "bx-vdm"
       ],

@@ -10,7 +10,7 @@
 | 未完成 | 当前为 deferred、unavailable、placeholder，或尚未完成 owner package。 |
 | 完成 | 仅当原始 source 契约、Direct/Readonly、Overlay ABI、全族回归和该任务要求的 native observation 全部通过时才可使用；当前没有条目可标为完成。 |
 
-生成基线：`docs/etc/research/t225-s57-bop-owner-package-profile-ledger-001.json`（203 entries）；实际状态复核：T229/P24、T230/S1。生成日期：2026-08-18。
+生成基线：`docs/etc/research/t225-s57-bop-owner-package-profile-ledger-001.json`（203 entries）；实际状态复核：T229/P24、T230/S1--S9。生成日期：2026-08-19。
 
 ## 1. DEM / DOS（73）
 
@@ -33,7 +33,7 @@
 | `50:0E` | `demGetDriveFreeSpace` | 取得驱动器剩余空间 | S6：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：host C: disk space | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s6-demgset-direct-import-map-001.md` |
 | `50:0F` | `demGetDrives` | 取得驱动器位图 | S6：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：physical-drive enumeration | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s6-demgset-direct-import-map-001.md` |
 | `50:10` | `demGSetMediaID` | 读取/设置介质标识 | S6：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：25-byte guest VOLINFO | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s6-demgset-direct-import-map-001.md` |
-| `50:11` | `demLoadDos` | 装入 NTDOS guest 映像 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:11` | `demLoadDos` | 装入 NTDOS guest 映像 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 16 KiB 读取循环 + checked guest RAM，20,000-byte 实文件回归通过 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
 | `50:12` | `demOpen` | 打开文件 | OpenNT `demfile.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 local-file body + opaque token；named-pipe Redirector 仍按原始失败路径 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c`；T230 S3 |
 | `50:13` | `demQueryCurrentDir` | 取得当前目录 | OpenNT `demdir.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 CDS validation/reset body + fixed-width guest copy seam | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demdir.c`；T230 S4 |
 | `50:14` | `demQueryDate` | 取得宿主日期 | S6：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：typed date fields | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s6-demgset-direct-import-map-001.md` |
@@ -51,7 +51,7 @@
 | `50:20` | `demRenameFCB` | 按 FCB 重命名文件 | S5：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：重命名临时 host 文件 | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s5-demsrch-demfcb-direct-import-map-001.md` |
 | `50:21` | `demIOCTL` | DOS 设备/驱动器 IOCTL | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:22` | `demCreateNew` | 仅在不存在时创建文件 | OpenNT `demfile.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 create-new body + token shim；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c`；T230 S3 |
-| `50:23` | `demDiskReset` | 重置磁盘/软盘状态 | 局部：仅恢复 pFDAccess 清零；原始 raw-media reset 未实现 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:23` | `demDiskReset` | 重置磁盘/软盘状态 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 reset 调用顺序及 bound `pFDAccess` 清零已测；当前 raw transfer 无常驻 handle | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
 | `50:24` | `demNotYetImplemented` | OpenNT 原始未实现服务：CF-clear no-op（50:42 例外为 FastRead 兼容路径） | 局部已验证：原始 CF-clear no-op；T230 全族/原生验收未完成 | 原始 no-op（已本地验证） | 原始 no-op（已本地验证） | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:25` | `demGetDPB` | 取得 DOS Drive Parameter Block | S6：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：packed guest DPB | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s6-demgset-direct-import-map-001.md` |
 | `50:26` | `demNotYetImplemented` | OpenNT 原始未实现服务：CF-clear no-op（50:42 例外为 FastRead 兼容路径） | 局部已验证：原始 CF-clear no-op；T230 全族/原生验收未完成 | 原始 no-op（已本地验证） | 原始 no-op（已本地验证） | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
@@ -68,24 +68,24 @@
 | `50:31` | `demGetFileInfo` | 取得文件属性、时间、日期和大小 | S5：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：临时文件元数据 | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s5-demsrch-demfcb-direct-import-map-001.md` |
 | `50:32` | `demSetHardErrorInfo` | 登记硬错误信息 | S8：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：固定 VHE/SYSDEV 地址登记 | 不在 v2 范围 | 不在 v2 范围 | `t230-s8-demerror-demlock-direct-import-map-001.md` |
 | `50:33` | `demRetry` | 硬错误重试控制 | S8：OpenNT 镜像 Direct 局部通过；未绑定重试槽显式失败 | OpenNT Direct fixture：保存/恢复后 `ERROR_CALL_NOT_IMPLEMENTED` + CF | 不在 v2 范围 | 不在 v2 范围 | `t230-s8-demerror-demlock-direct-import-map-001.md` |
-| `50:34` | `demLoadDosAppSym` | 装入 DOS 应用符号 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
-| `50:35` | `demFreeDosAppSym` | 释放 DOS 应用符号 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
-| `50:36` | `demEntryDosApp` | 进入 DOS 应用生命周期 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
-| `50:37` | `demDOSDispCall` | DOS dispatcher 调用 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
-| `50:38` | `demDOSDispRet` | DOS dispatcher 返回 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
-| `50:39` | `demOutputString` | 控制台输出字符串 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
-| `50:3A` | `demInputString` | 控制台输入字符串 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
-| `50:3B` | `demIsDebug` | 查询调试状态 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:34` | `demLoadDosAppSym` | 装入 DOS 应用符号 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 `ES:DI` path 与调试门控 body 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
+| `50:35` | `demFreeDosAppSym` | 释放 DOS 应用符号 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 path / symbol-free body 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
+| `50:36` | `demEntryDosApp` | 进入 DOS 应用生命周期 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 first-call/VDD gate body 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
+| `50:37` | `demDOSDispCall` | DOS dispatcher 调用 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 diagnostic gate body 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
+| `50:38` | `demDOSDispRet` | DOS dispatcher 返回 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 diagnostic gate body 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
+| `50:39` | `demOutputString` | 控制台输出字符串 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 debugger-only output body 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
+| `50:3A` | `demInputString` | 控制台输入字符串 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 debugger-only input body 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
+| `50:3B` | `demIsDebug` | 查询调试状态 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 debug-port query / AL contract 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
 | `50:3C` | `demTerminatePDB` | 终止 PDB 的搜索状态 | S5：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：PDB search-state cleanup | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s5-demsrch-demfcb-direct-import-map-001.md` |
-| `50:3D` | `demExitVDM` | 退出 VDM | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
-| `50:3E` | `demWOWFiles` | WOW 文件转换/查询 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:3D` | `demExitVDM` | 退出 VDM | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 diagnostic→terminate 顺序映射为 typed controlled stop | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
+| `50:3E` | `demWOWFiles` | WOW 文件转换/查询 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 non-WOW preserve / WOW AL=255 两分支已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
 | `50:3F` | `demLockOper` | 文件/记录锁定操作 | S8：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：真实临时文件 token 的 lock/unlock | 不在 v2 范围 | 不在 v2 范围 | `t230-s8-demerror-demlock-direct-import-map-001.md` |
 | `50:40` | `demNotYetImplemented` | OpenNT 原始未实现服务：CF-clear no-op（50:42 例外为 FastRead 兼容路径） | 局部已验证：原始 CF-clear no-op；T230 全族/原生验收未完成 | 原始 no-op（已本地验证） | 原始 no-op（已本地验证） | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:41` | `demGetComputerName` | 取得计算机名 | S6：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：16-byte guest name | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s6-demgset-direct-import-map-001.md` |
 | `50:42` | `demNotYetImplemented` | OpenNT 原始未实现服务：CF-clear no-op（50:42 例外为 FastRead 兼容路径） | 局部：FastRead 兼容 provider；原始全契约未验收 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:43` | `demNotYetImplemented` | OpenNT 原始未实现服务：CF-clear no-op（50:42 例外为 FastRead 兼容路径） | 局部已验证：原始 CF-clear no-op；T230 全族/原生验收未完成 | 原始 no-op（已本地验证） | 原始 no-op（已本地验证） | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:44` | `demCheckPath` | 检查 DOS 路径 | OpenNT `demfile.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 device/path probe body；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c`；T230 S3 |
-| `50:45` | `demSystemSymbolOp` | 系统符号操作 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:45` | `demSystemSymbolOp` | 系统符号操作 | S9：OpenNT `demmisc.c` 镜像 Direct 局部通过；非全 DEM/guest 完成 | 原始 system-symbol/debug gate body 已测 | 不在 v2 范围 | 不在 v2 范围 | `t230-s9-demmisc-direct-import-map-001.md` |
 | `50:46` | `demGetDPBList` | 取得 DPB 链表 | S6：OpenNT 镜像 Direct 局部通过；非全 DEM/guest 完成 | OpenNT Direct fixture：packed guest DPB list | 局部路径，T230 未验收 | ABI 预留，未启用 | `t230-s6-demgset-direct-import-map-001.md` |
 | `50:47` | `demPipeFileDataEOF` | 检查命名管道数据/EOF | Direct 原始 `demhndl.c` 镜像已局部闭合；COMMAND pipe backend 未组合，native/runtime 未验证 | 原函数与其 CF/ZF 合同已通过 optional pipe callback 进入；无 backend 时保留 source-shaped non-EOF 查询，不伪造 pipe 服务 | 不在 v2 范围 | 不在 v2 范围 | `bop/opennt/dem/demhndl.c`、`bop/shim/demhndl_shim.*`；T230 S2 map；待 COMMAND pipe 包 |
 | `50:48` | `demPipeFileEOF` | 检查命名管道 EOF | Direct 原始 `demhndl.c` 镜像已局部闭合；COMMAND pipe backend 未组合，native/runtime 未验证 | 原函数与 EOF/size register 合同已通过 optional pipe callback 进入；无 backend 不伪造 EOF | 不在 v2 范围 | 不在 v2 范围 | `bop/opennt/dem/demhndl.c`、`bop/shim/demhndl_shim.*`；T230 S2 map；待 COMMAND pipe 包 |

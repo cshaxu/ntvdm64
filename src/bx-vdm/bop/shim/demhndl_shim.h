@@ -136,6 +136,11 @@ int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
 uint32_t bx_ntvdm_demhndl_current_service(void);
 int bx_ntvdm_demhndl_write_guest(USHORT segment, USHORT offset,
     const void *buffer, uint32_t bytes);
+/* demmisc.c needs only these non-return/loader mechanics formerly provided
+ * by the NTVDM product shell and SAS.  They neither classify BOPs nor own
+ * the OpenNT loader algorithm. */
+void bx_ntvdm_demhndl_terminate(void);
+int bx_ntvdm_demhndl_loader_write(const void *buffer, uint32_t bytes);
 /* Optional fixed-layout completion hook implemented by the demerror shim.
  * It is a no-op unless that original owner has retained VHE state. */
 void bx_ntvdm_demerror_flush_hard_error(void);

@@ -95,6 +95,17 @@ owned bodies; see [S8 direct-import map](../evidence/t230-s8-demerror-demlock-di
 This is local Direct source parity, not an INT 24, full dispatcher or native
 guest claim.
 
+### S9 — `demmisc.c` direct-import local closure
+
+The complete original `demmisc.c` is mirrored under `bop/opennt/dem/`.  Its
+sole in-file change is the adjacent, documented x86/x64-safe replacement for
+the original `ULONG` loader-pointer truncation; the loader loop, lifecycle,
+debug gates and error ordering remain source-owned.  The formal fixture
+exercises all thirteen service bodies, including a 20,000-byte real
+`ntdos.sys` load and typed non-returning termination.  See the
+[S9 direct-import map](../evidence/t230-s9-demmisc-direct-import-map-001.md).
+This is local Direct source parity, not whole DEM or native guest closure.
+
 ## Dependency order
 
 `S1` is the sole common foundation. `S2` and `S3` share the token seam but

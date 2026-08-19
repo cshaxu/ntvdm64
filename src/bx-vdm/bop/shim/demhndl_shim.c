@@ -11,6 +11,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <setjmp.h>
 
 /* Imported, verbatim-order OpenNT service bodies. */
 void demClose(void);
@@ -32,6 +33,8 @@ typedef struct bx_ntvdm_demhndl_active_call {
     uint32_t path_buffer_count;
     int transfer_from_guest;
     int flush_guest_buffer_on_return;
+    int loader_mode;
+    jmp_buf terminate_jump;
 } bx_ntvdm_demhndl_active_call;
 
 static __declspec(thread) bx_ntvdm_demhndl_active_call *g_active_call;
@@ -91,7 +94,7 @@ static int is_demfile_path_service(uint32_t service)
     switch (service) {
     case 0x01u: case 0x03u: case 0x04u: case 0x05u: case 0x06u: case 0x12u:
     case 0x17u: case 0x22u: case 0x44u:
-    case 0x18u:
+    case 0x18u: case 0x34u: case 0x35u:
         return 1;
     default:
         return 0;
@@ -271,6 +274,26 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
 
     if (active == 0 || active->call == 0) return NULL;
     active->guest_address = real_mode_address(segment, offset);
+    if (active->call->service == 0x11u) {
+        /* Original demLoadDos increments its initial SAS pointer as it reads
+         * NTDOS.SYS in 16 KiB chunks.  Reserve the remaining real-mode
+         * aperture as a private bounce span; demmisc_shim writes each actual
+         * host-read chunk back through checked guest RAM. */
+        if (active->guest_address >= 0x100000u) {
+            SetLastError(ERROR_INVALID_ADDRESS);
+            return NULL;
+        }
+        bytes = 0x100000u - active->guest_address;
+        /* The source body asks ReadFile for 16 KiB even for its final, short
+         * chunk.  Keep an adjacent guard allocation so that the host API has
+         * a valid destination; loader_write still rejects any bytes beyond
+         * the actual real-mode aperture. */
+        active->guest_buffer = (uint8_t *)malloc(bytes + 0x4000u);
+        if (active->guest_buffer == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
+        active->guest_bytes = bytes;
+        active->loader_mode = 1;
+        return active->guest_buffer;
+    }
     /* OpenNT demsrch.c maps fixed DOS DTA/SRCHBUF layouts directly through
      * SAS.  The Direct CLI maps the same exact 43/52-byte guest layouts via a
      * checked bounce span and writes them back after the imported body.  The
@@ -358,6 +381,31 @@ int bx_ntvdm_demhndl_write_guest(USHORT segment, USHORT offset,
         real_mode_address(segment, offset), (const uint8_t *)buffer, bytes);
 }
 
+int bx_ntvdm_demhndl_loader_write(const void *buffer, uint32_t bytes)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    uintptr_t base, cursor;
+    uint32_t offset;
+
+    if (active == NULL || active->call == NULL || !active->loader_mode ||
+        active->guest_buffer == NULL || buffer == NULL) return 0;
+    base = (uintptr_t)active->guest_buffer;
+    cursor = (uintptr_t)buffer;
+    if (cursor < base || cursor - base > active->guest_bytes ||
+        bytes > active->guest_bytes - (uint32_t)(cursor - base)) return 0;
+    offset = (uint32_t)(cursor - base);
+    return active->call->guest_write(active->call->guest_state,
+        active->guest_address + offset, (const uint8_t *)buffer, bytes);
+}
+
+void bx_ntvdm_demhndl_terminate(void)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    if (active == NULL || active->call == NULL) return;
+    (void)bx_ntvdm_cpu_result_v2_stop(active->call->result);
+    longjmp(active->terminate_jump, 1);
+}
+
 void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back)
 {
@@ -426,7 +474,8 @@ int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
     if (!bx_ntvdm_cpu_result_v2_resume(call->result, call->boundary->fault_rip + 4u))
         return 0;
     g_active_call = &active;
-    body();
+    if (setjmp(active.terminate_jump) == 0)
+        body();
     /* demerror.c is the only imported owner that intentionally retains the
      * VHE address across calls.  Its shim flushes that fixed guest layout
      * while this checked-call context is still live. */
