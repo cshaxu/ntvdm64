@@ -1162,6 +1162,29 @@ static int misc_family_regression(void)
     return 1;
 }
 
+static int original_noop_family_regression(void)
+{
+    static const uint8_t services[] = {
+        0x1fu, 0x24u, 0x26u, 0x28u, 0x2bu, 0x40u, 0x43u
+    };
+    bx_ntvdm_cpu_result_v2 result;
+    uint32_t index;
+
+    /* demdisp.c routes these seven identities to demNotYetImplemented.  That
+     * original routine does not model an unavailable device: it explicitly
+     * clears CF and returns, preserving all general registers. */
+    for (index = 0u; index < sizeof(services); ++index) {
+        dispatch_ax = 0xa55au;
+        if (!dispatch(services[index], &result) ||
+            result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+            result.resume_rip != 0x104u ||
+            result.cpu_delta.gpr16_write_mask != 0u ||
+            result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+            result.eflags_values != 0u) return 0;
+    }
+    dispatch_ax = 0u;
+    return 1;
+}
 int main(int argc, char **argv)
 {
     uint32_t service;
@@ -1189,6 +1212,7 @@ int main(int argc, char **argv)
     if (!fcb_search_core_regression()) return 90;
     { int fcb_status = fcb_bop_transaction_regression(); if (fcb_status != 0) return 91 + fcb_status; }
     if (!misc_family_regression()) return 92;
+    if (!original_noop_family_regression()) return 97;
     if (whole_provider_pdb_lifecycle_regression() != 0) return 95;
     for (service = 0u; service < 73u; ++service) {
         if (!dispatch((uint8_t)service, &result) ||
