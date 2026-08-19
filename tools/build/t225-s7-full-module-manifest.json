@@ -199,6 +199,8 @@
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/dem_v2_composition_bridge.c",
         "src/bx-vdm/bop/dem_v2_runtime_session.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_bop_sequence_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/bx-vdm/bop/shim/dem_direct_host_session.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_dem_direct_context.c",
         "src/bx-vdm/bop/shim/demdir_shim.c",
@@ -1594,6 +1596,8 @@
         "libucrt.lib",
         "legacy_stdio_definitions.lib",
         "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
         "bcrypt.lib",
         "ntdll.lib",
         "user32.lib"

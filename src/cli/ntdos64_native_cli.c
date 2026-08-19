@@ -1,15 +1,13 @@
 #include "bx_ntvdm_engine_contract_v1.h"
 #include "bx_ntvdm_host_drive_policy.h"
-#include "bop-v1/bx_ntvdm_bop_sequence_observation_v1.h"
-#include "bop-v1/bx_ntvdm_generic_ud_sequence_observation_v1.h"
+#include "bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "bx_ntvdm_first_fault_observation_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_software_interrupt_observation_v1.h"
 #include "bx_ntvdm_interrupt_return_observation_v1.h"
 #include "bx_ntvdm_guest_exec_lifecycle_observation_v1.h"
 #include "bx_ntvdm_guest_exec_lifecycle_ledger_v1.h"
-#include "bop-v1/bx_ntvdm_dem_read_observation_v1.h"
-#include "bop-v1/bx_ntvdm_dem_namespace_identity_observation_v1.h"
 #include "bx_ntvdm_segment_access_observation_v1.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
@@ -97,24 +95,7 @@ static void print_bop_sequence(const struct bx_ntvdm_bop_sequence_observation_v1
             record->ds, record->es, record->ss);
     }
 }
-static void print_dem_read_observation(const bx_ntvdm_dem_read_observation_v1 *record)
-{
-    if (record == 0) return;
-    wprintf(L"ntdos64-native: dem-read-header seen=%u captured=%u cs=%04x eip=%08x destination=%04x:%04x handle=%04x:%04x bytes=%02x%02x%02x%02x\n",
-        record->seen_count, record->captured, record->cs, record->eip, record->ds,
-        record->destination_offset, record->handle_ax, record->handle_bp, record->bytes[0], record->bytes[1], record->bytes[2],
-        record->bytes[3]);
-}
-static void print_dem_namespace_identity(
-    const bx_ntvdm_dem_namespace_identity_observation_v1 *record)
-{
-    if (record == 0) return;
-    wprintf(L"ntdos64-native: dem-namespace-identity seen=%u captured=%u class=%u slot=%u ready=%u drive=%u admitted=%u namespace=%u result=%u ax=%04x bp=%04x\n",
-        record->seen_open_count, record->captured, record->identity_class,
-        record->declared_slot, record->declared_bytes_ready, record->drive_index,
-        record->admitted_drive, record->namespace_attached, record->disposition,
-        record->gpr16_values[0], record->gpr16_values[5]);
-}static void print_generic_ud_sequence(const struct bx_ntvdm_generic_ud_sequence_observation_v1 *sequence)
+static void print_generic_ud_sequence(const struct bx_ntvdm_generic_ud_sequence_observation_v1 *sequence)
 {
     uint32_t index, byte_index;
     if (sequence == 0) return;
@@ -212,7 +193,7 @@ int wmain(int argc, wchar_t **argv)
         ;
     uint32_t mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
     uint64_t instruction_tick_budget = UINT64_C(1000000);
-    int validate_only = 0, observe_bop_sequence = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_guest_exec_lifecycle = 0, observe_guest_exec_lifecycle_ledger = 0, observe_dem_read_header = 0, observe_dem_namespace_identity = 0, observe_budget_terminal_position = 0
+    int validate_only = 0, observe_bop_sequence = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_guest_exec_lifecycle = 0, observe_guest_exec_lifecycle_ledger = 0, observe_budget_terminal_position = 0
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         , observe_software_interrupts = 0
 #endif
@@ -264,11 +245,6 @@ int wmain(int argc, wchar_t **argv)
             has_guest_exec_observation = 1, observe_guest_exec_lifecycle = 1, ++index;
         else if (wcscmp(argv[index], L"--observe-guest-exec-lifecycle-ledger") == 0 && !has_guest_exec_ledger)
             has_guest_exec_ledger = 1, observe_guest_exec_lifecycle_ledger = 1, ++index;
-        else if (wcscmp(argv[index], L"--observe-dem-read-header") == 0 && !observe_dem_read_header)
-            observe_dem_read_header = 1, ++index;
-        else if (wcscmp(argv[index], L"--observe-dem-namespace-identity") == 0 &&
-            !observe_dem_namespace_identity)
-            observe_dem_namespace_identity = 1, ++index;
         else if (wcscmp(argv[index], L"--observe-budget-terminal-position") == 0 && !has_budget_terminal_position_observation)
             has_budget_terminal_position_observation = 1, observe_budget_terminal_position = 1, ++index;
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
@@ -332,8 +308,6 @@ int wmain(int argc, wchar_t **argv)
     if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(1u);
     if (observe_guest_exec_lifecycle) bx_ntvdm_guest_exec_lifecycle_observation_v1_enable(1u);
     if (observe_guest_exec_lifecycle_ledger) bx_ntvdm_guest_exec_lifecycle_ledger_v1_enable(1u);
-    if (observe_dem_read_header) bx_ntvdm_dem_read_observation_v1_enable(1u);
-    if (observe_dem_namespace_identity) bx_ntvdm_dem_namespace_identity_observation_v1_enable(1u);
     if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(1u);
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
     if (observe_software_interrupts && !bx_ntvdm_mantle_software_interrupt_observation_v1_configure(BX_NTVDM_SOFTWARE_INTERRUPT_OBSERVATION_V1_CAPACITY_MAX)) return 1;
@@ -427,22 +401,6 @@ int wmain(int argc, wchar_t **argv)
         else
             wprintf(L"ntdos64-native: bop-sequence unavailable\n");
         bx_ntvdm_bop_sequence_observation_v1_enable(0u);
-    }
-    if (observe_dem_read_header) {
-        bx_ntvdm_dem_read_observation_v1 record;
-        if (bx_ntvdm_dem_read_observation_v1_copy(&record))
-            print_dem_read_observation(&record);
-        else
-            wprintf(L"ntdos64-native: dem-read-header unavailable\n");
-        bx_ntvdm_dem_read_observation_v1_enable(0u);
-    }
-    if (observe_dem_namespace_identity) {
-        bx_ntvdm_dem_namespace_identity_observation_v1 record;
-        if (bx_ntvdm_dem_namespace_identity_observation_v1_copy(&record))
-            print_dem_namespace_identity(&record);
-        else
-            wprintf(L"ntdos64-native: dem-namespace-identity unavailable\n");
-        bx_ntvdm_dem_namespace_identity_observation_v1_enable(0u);
     }
     if (observe_guest_exec_lifecycle) {
         struct bx_ntvdm_guest_exec_lifecycle_observation_v1 guest_exec;
@@ -562,7 +520,7 @@ int wmain(int argc, wchar_t **argv)
         (unsigned long long)request.instruction_tick_budget);
     return result_exit(&lifecycle_audit);
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-dem-read-header] [--observe-dem-namespace-identity] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
+    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         L" [--observe-software-interrupts]"
 #endif

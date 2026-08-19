@@ -74,3 +74,19 @@ that every historical derivative has been recomposed, nor that retained v1
 DEM files can already be deleted.  S15 remains active until route scans prove
 each product/derivative selects the v2 entry and every retained DEM v1 member
 is unreachable or removed; S16 then owns the bounded native observation.
+
+## CLI link sweep
+
+The two selector-blind BOP/#UD sequence observers were moved from `bop-v1` to
+`bop/observation` and are invoked by the v2 composition entry.  The CLI-only
+`dem-read-header` and `dem-namespace-identity` switches were removed because
+they observed legacy provider-private state and would falsely describe the v2
+Direct session.  Their removal does not remove a DEM service or failure path.
+
+Fresh formal build root `build/M0-T230-S15/cli-v2-observation-r1` now compiles
+the complete v2 `bx-vdm`, `bx-core`, `bx-mantle`, `cli` and `opennt-host`
+archives.  The `ntdos64-native` link no longer reports legacy observers or
+unlinked OpenNT host APIs.  Its only remaining unresolved symbols are the five
+startup functions of `bx_ntvdm_composition_runtime_v1`.  This precisely
+isolates the next removal prerequisite: a v2 startup/composition owner, not a
+remaining DEM handler, shim, observer, or Win32 API issue.

@@ -1,4 +1,4 @@
-#include "bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
 
 #include <string.h>
 
