@@ -4,7 +4,7 @@
 
 The formal `bx-vdm` module now builds the complete directly imported OpenNT
 DEM owner set without compiling the superseded source-derived CWD experiment.
-The nine focused Direct fixtures source-build and return zero from one fresh
+The nine focused Direct fixtures source-build and return zero from a fresh
 MSVC x64 `/MT` Ninja graph.  This is local Direct source-parity evidence only;
 it is not a BOP-ingress or native guest-execution claim.
 
@@ -31,6 +31,22 @@ under `src/bx-vdm/bop/opennt/dem/`:
 All imported-file divergences remain adjacent to their original source site
 and route only through `src/bx-vdm/bop/shim/`.
 
+## Dispatcher correction
+
+The earlier S10 catalogue was a source-derived owner ledger, not the original
+dispatcher translation unit.  It is now retained only as
+`src/bx-vdm/bop/reference-v2/demdisp_catalog_v2.c/.h`.  The active
+`src/bx-vdm/bop/opennt/dem/demdisp.c` directly retains OpenNT's 73-entry
+`apfnSVC[]`, `DemDispatch`, `CurrentISVC`, hard-error reset, and the original
+`demNotYetImplemented` / `demSetV86KernelAddr` bodies.  Its only in-file
+change is the documented replacement of the historical product include
+closure by `demdisp_shim.h`.
+
+The shim does not select a BOP family.  After a higher-level route has already
+chosen DEM, its typed bounded-call wrapper invokes the original `DemDispatch`
+table.  The S2 fixture now proves this path for original slot `50:1F`, including
+`CurrentISVC`, checked resume, and the original CF-clear no-op result.
+
 ## Deliberate legacy exclusion
 
 The former `bx_ntvdm_dem_cwd_service_v2.c` / `.h` is a source-derived,
@@ -45,14 +61,15 @@ source-owner replacement, not an attempt to preserve the old implementation.
 
 ## Fresh formal witness
 
-Build root:
+Current build root:
 
 ```text
-build/M0-T230-S10/dem-matrix-r3
+build/M0-T230-S10/demdisp-direct-r4
 ```
 
 The graph was generated from `tools/build/t225-s7-full-module-manifest.json`.
-It compiled `bx-vdm.lib` without the legacy CWD source, then built and ran:
+It compiled `bx-vdm.lib` with the direct dispatcher and without the legacy CWD
+source, then built and ran:
 
 ```text
 t230-s2-demhndl-direct-import-fixture

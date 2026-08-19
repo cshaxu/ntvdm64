@@ -2,7 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
-#include "bop/opennt/dem/demdisp.h"
+#include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demhndl_shim.h"
 
 typedef struct fixture_context {
@@ -130,6 +130,29 @@ static int invoke(fixture_context *state, bx_ntvdm_dem_direct_context *direct,
         result->resume_rip == event->fault_rip + 4u;
 }
 
+static int invoke_dispatch_noop(fixture_context *state,
+    bx_ntvdm_dem_direct_context *direct, bx_ntvdm_exception_event_v1 *event,
+    bx_ntvdm_cpu_state_v1 *cpu, bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_demhndl_call call;
+    memset(&call, 0, sizeof(call));
+    call.magic = BX_NTVDM_DEMHNDL_CALL_MAGIC;
+    call.abi_version = BX_NTVDM_DEMHNDL_CALL_VERSION;
+    call.struct_bytes = sizeof(call);
+    call.service = 0x1fu; /* original demNotYetImplemented table slot */
+    call.direct = direct;
+    call.boundary = event;
+    call.cpu = cpu;
+    call.result = result;
+    call.guest_state = state;
+    call.guest_read = guest_read;
+    call.guest_write = guest_write;
+    return bx_ntvdm_demdisp_invoke(&call) && CurrentISVC == call.service &&
+        result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME &&
+        result->resume_rip == event->fault_rip + 4u &&
+        (result->eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u;
+}
+
 int main(void)
 {
     wchar_t path[MAX_PATH], directory[MAX_PATH];
@@ -139,7 +162,6 @@ int main(void)
     bx_ntvdm_cpu_result_v2 result;
     fixture_context state;
     uint32_t address = 0x1000u;
-    const bx_ntvdm_opennt_dem_service_entry *entry;
 
     if (GetTempPathW(MAX_PATH, directory) == 0u ||
         GetTempFileNameW(directory, L"dhs", 0u, path) == 0u) return 1;
@@ -150,18 +172,18 @@ int main(void)
     if (state.handle == INVALID_HANDLE_VALUE) { DeleteFileW(path); return 2; }
     direct_initialize(&direct, &state);
     event_initialize(&event);
-    entry = bx_ntvdm_opennt_dem_service_at(BX_NTVDM_DEMHNDL_READ);
-    if (!bx_ntvdm_dem_direct_context_valid(&direct) || entry == 0 ||
-        strcmp(entry->handler, "demRead") != 0 ||
-        strcmp(entry->owner_file, "demhndl.c") != 0) return 3;
+    if (!bx_ntvdm_dem_direct_context_valid(&direct) ||
+        bx_ntvdm_demdisp_handler_at(BX_NTVDM_DEMHNDL_READ) != demRead) return 3;
 
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eflags = BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF;
+    if (!invoke_dispatch_noop(&state, &direct, &event, &cpu, &result)) return 4;
     cpu.eax = 0u; cpu.ebp = 1u; cpu.ds = 0x100u; cpu.edx = 0u;
     memcpy(state.guest + address, "hello", 5u);
     cpu.ecx = 5u; cpu.eflags = 0x40u;
     if (!invoke(&state, &direct, &event, &cpu, &result,
             BX_NTVDM_DEMHNDL_WRITE) || result.cpu_delta.gpr16_values[0] != 5u ||
-        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u) return 4;
+        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u) return 5;
 
     cpu.ebx = 0u; cpu.esi = 0u; cpu.ecx = 0u; cpu.edx = 0u; cpu.eflags = 0u;
     if (!invoke(&state, &direct, &event, &cpu, &result,

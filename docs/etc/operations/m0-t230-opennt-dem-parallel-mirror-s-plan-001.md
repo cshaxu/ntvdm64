@@ -78,10 +78,12 @@ Ninja target; run focused Direct tests for all owned BOPs; and update the
 ### S10 progress — Direct matrix and legacy exclusion
 
 The complete imported-owner Direct matrix now source-builds from one fresh
-Ninja graph with a 73-entry `demdisp.c` catalogue witness.  The source-derived
-CWD `13/18/1A` experiment is excluded from the formal module and retained
-only under `bop-v1/`; its original owner replacements are `demdir.c` and
-`demgset.c`.  See [S10 matrix evidence](../evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md).
+Ninja graph with the directly imported `demdisp.c` `apfnSVC[]` and
+`DemDispatch` witness.  The prior hand-written catalogue is retained only
+under `bop/reference-v2/`.  The source-derived CWD `13/18/1A` experiment is
+excluded from the formal module and retained only under `bop-v1/`; its
+original owner replacements are `demdir.c` and `demgset.c`.  See
+[S10 matrix evidence](../evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md).
 The remaining S10 work is the exact reference-deletion audit and the bounded
 native observation; neither is implied by this local fixture result.
 

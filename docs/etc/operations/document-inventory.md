@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1963 |
 | --- | --- |
-| Generated UTC | 2026-08-19T18:55:42Z |
+| Generated UTC | 2026-08-19T19:08:36Z |
 
 ## Entries
 
@@ -206,7 +206,7 @@ content-divergent entries.
 | etc/evidence/t229-s2-p7-dem-delete-direct-readonly-001.md | indexed supporting material | 06d64962801ff69cb04d658e3150765b82587786353dc941021aa24258b2844b |
 | etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md | indexed supporting material | 148a377518db6d37b07add573ec9d0e9b8b8e43db0b9c859aa56119ec1036308 |
 | etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md | indexed supporting material | 609a30412820d1550d9b93023498c209c56e2e93bca476dd994985c741f31010 |
-| etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md | indexed supporting material | 159f50763ccb3eefa07e5f784a7bbb0f6427f49ac2d392cc6672a5e85c9442b2 |
+| etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md | indexed supporting material | 61cef3e3c13e7e1c4b1e1035cfabac856740bbc48908a1f4132f4b3a7445da6d |
 | etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md | indexed supporting material | 2fafd3c798bc64422ff028d5b537c93e1957e30f819a63f577483ff3e696b748 |
 | etc/evidence/t230-s1-bop-50-00-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | 64fa3856447f854b30b9e75cb48841fddbd82998128439a191c0d3bc8a411715 |
 | etc/evidence/t230-s1-bop-50-01-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | eb70c11fb9763e1b726744beb6cb59af3768e33c512a25536193c650c4f97e52 |
@@ -243,7 +243,7 @@ content-divergent entries.
 | etc/operations/m0-t228-s1-guest-multiprogram-integration-owner-repair-001.md | indexed supporting material | 98d2ee352193b1746e726ec83916bb5e828b28e74f527f192e45eecb0bb8bc0b |
 | etc/operations/m0-t229-s1-dem-source-abi-failure-audit-plan-001.md | indexed supporting material | cd9a3d19f1b6bf154e698178c4d1a7f7bc34b9adbe1e6ca3cf2626a2d509110e |
 | etc/operations/m0-t229-s2-dem-whole-package-implementation-plan-001.md | indexed supporting material | 2266fd046f26449d99f5fde7a32aeeb5e9a799bbf20a316367612ae427f08906 |
-| etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md | indexed supporting material | 14ab14b52367e6e723d07e46a0a6e2289a278217a663a3274e20202ede72cf1f |
+| etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md | indexed supporting material | 654e96f7b39fa5670bc5c0d9c7247c68ca174c06477be971eb49750b5507679c |
 | etc/operations/m0-t230-s1-dem-functional-completion-admission-plan-001.md | indexed supporting material | b367653378c754292b23403159846f8d6d5ae5d67844ad55d5278c5b82d97a8a |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
@@ -1977,7 +1977,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ec5ec4190919ba9d34cfcf3b2061da496fe0b5dbe6c9f62e9fd8f01610d70f18 |
+| STATUS.md | principal control document | ba94411a1f24a4a6f20aa0a18faaddd68448cf565e1dba439d6e82ff8f4c0fd7 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |

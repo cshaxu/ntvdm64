@@ -202,6 +202,7 @@
         "src/bx-vdm/bop/shim/demgset_shim.c",
         "src/bx-vdm/bop/shim/demdasd_ioctl_shim.c",
         "src/bx-vdm/bop/shim/demerror_lock_shim.c",
+        "src/bx-vdm/bop/shim/demdisp_shim.c",
         "src/bx-vdm/bop/shim/demmisc_shim.c",
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",

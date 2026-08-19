@@ -52,7 +52,7 @@
 
 > **T230 S9:** [direct `demmisc.c` import map](etc/evidence/t230-s9-demmisc-direct-import-map-001.md) records the complete imported lifecycle owner, its x86/x64 loader-pointer seam and the 13-service Direct fixture. It is local Direct source parity only—not whole DEM or native guest closure.
 
-> **T230 S10 (local Direct matrix):** [DEM Direct matrix and legacy exclusion](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md) records the fresh 73-row source-owner catalogue fixture, all eight imported-owner Direct fixtures, and the removal of the source-derived CWD experiment from the formal `bx-vdm` module. It does not claim bounded native observation or final legacy deletion.
+> **T230 S10 (local Direct matrix):** [DEM Direct matrix and legacy exclusion](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md) records the fresh direct OpenNT `demdisp.c` 73-slot dispatcher fixture, all eight imported-owner Direct fixtures, and the removal of the source-derived CWD experiment from the formal `bx-vdm` module. It does not claim bounded native observation or final legacy deletion.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
