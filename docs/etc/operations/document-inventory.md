@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1927 |
+| Documentation records | 1928 |
 | --- | --- |
-| Generated UTC | 2026-08-19T00:07:23Z |
+| Generated UTC | 2026-08-19T00:12:05Z |
 
 ## Entries
 
@@ -181,7 +181,7 @@ content-divergent entries.
 | etc/evidence/t228-s1-terminal-provenance-result-001.md | indexed supporting material | ec8b1dd65f40f595d0c42739ad6185bdfbb833ea2df86ea90ba0a813883a86c7 |
 | etc/evidence/t228-s1-transition-successor-provenance-result-001.md | indexed supporting material | 225cb28a2d24ea8cf8c4ff31edc2601bfc8ceb1d3a42e11eb68840c98a768f61 |
 | etc/evidence/t229-s1-dem-complete-source-abi-failure-audit-result-001.md | indexed supporting material | a926a4b8d368112f73c26cd543704f96916d79bceeaf03728cb0022fd2696ab0 |
-| etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md | indexed supporting material | 0eaef8d40d375605a458509ac061ef31e9b1e33cc61f01d98509ec8743399e69 |
+| etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md | indexed supporting material | 78ee97957d22495c698e14878d53f0577308cd0d440d215d08a2c57a5987b0fc |
 | etc/evidence/t229-s2-p1-dem-whole-provider-direct-readonly-conformance-001.md | indexed supporting material | 8e7015badd3ab6f3ab372ba59544c65917d05ef3d3a99d4533eebdfa5a2dd65e |
 | etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md | indexed supporting material | 2134dbbf4ff68d4412124616f1fb6167d69333bb54b86f47f5bd661a0af24c6c |
 | etc/evidence/t229-s2-p4-dem-open-create-result-abi-correction-001.md | indexed supporting material | 7d971223bc554754b156fb3bd4badabf631eb5dff0ca38aa9d3c5a363656fb98 |
@@ -189,6 +189,7 @@ content-divergent entries.
 | etc/evidence/t229-s2-p6-dem-create-new-direct-readonly-001.md | indexed supporting material | 22505f7b5e13a186eae4a0a8f11cd2eea0c6e379ca4febe5da380efaf77a1bd0 |
 | etc/evidence/t229-s2-p7-dem-delete-direct-readonly-001.md | indexed supporting material | 06d64962801ff69cb04d658e3150765b82587786353dc941021aa24258b2844b |
 | etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md | indexed supporting material | 148a377518db6d37b07add573ec9d0e9b8b8e43db0b9c859aa56119ec1036308 |
+| etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md | indexed supporting material | 609a30412820d1550d9b93023498c209c56e2e93bca476dd994985c741f31010 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |
@@ -1941,7 +1942,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | b193264f0709448ecb52052663a3add59d2ea66919c4fcc4accc0059f817cc65 |
+| STATUS.md | principal control document | e06c762243b7f925cb5641dc46a273b08646daa1f2bfcffcae2cab3d8dca825f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
