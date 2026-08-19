@@ -122,6 +122,8 @@ void bx_ntvdm_demhndl_set_ch(USHORT value);
 void bx_ntvdm_demhndl_set_dx(USHORT value);
 void bx_ntvdm_demhndl_set_dl(USHORT value);
 void bx_ntvdm_demhndl_set_dh(USHORT value);
+USHORT bx_ntvdm_demhndl_get_ah(void);
+void bx_ntvdm_demhndl_set_ah(USHORT value);
 void bx_ntvdm_demhndl_set_cf(int value);
 void bx_ntvdm_demhndl_set_zf(int value);
 HANDLE bx_ntvdm_demhndl_get_handle(USHORT high, USHORT low);

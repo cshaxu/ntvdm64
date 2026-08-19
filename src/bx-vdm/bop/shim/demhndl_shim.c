@@ -187,10 +187,13 @@ USHORT bx_ntvdm_demhndl_get_ch(void) { return (USHORT)((active_call()->call->cpu
 USHORT bx_ntvdm_demhndl_get_bl(void) { return (USHORT)(active_call()->call->cpu->ebx & 0xffu); }
 USHORT bx_ntvdm_demhndl_get_dh(void) { return (USHORT)((active_call()->call->cpu->edx >> 8) & 0xffu); }
 USHORT bx_ntvdm_demhndl_get_dl(void) { return (USHORT)(active_call()->call->cpu->edx & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_ah(void) { return (USHORT)((active_call()->call->cpu->eax >> 8) & 0xffu); }
 int bx_ntvdm_demhndl_get_zf(void) { return (active_call()->call->cpu->eflags & 0x40u) != 0u; }
 void bx_ntvdm_demhndl_set_ax(USHORT value) { (void)set_register(0u, value); }
 void bx_ntvdm_demhndl_set_al(USHORT value)
 { bx_ntvdm_demhndl_set_ax((USHORT)((bx_ntvdm_demhndl_get_ax() & 0xff00u) | (value & 0xffu))); }
+void bx_ntvdm_demhndl_set_ah(USHORT value)
+{ bx_ntvdm_demhndl_set_ax((USHORT)((bx_ntvdm_demhndl_get_ax() & 0x00ffu) | ((value & 0xffu) << 8))); }
 void bx_ntvdm_demhndl_set_bx(USHORT value) { (void)set_register(3u, value); }
 void bx_ntvdm_demhndl_set_bl(USHORT value)
 { bx_ntvdm_demhndl_set_bx((USHORT)((bx_ntvdm_demhndl_get_bx() & 0xff00u) | (value & 0xffu))); }

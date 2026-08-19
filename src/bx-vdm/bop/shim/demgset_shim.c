@@ -38,13 +38,10 @@ BOOL bx_ntvdm_demgset_set_local_time(const SYSTEMTIME *time)
 void bx_ntvdm_demgset_set_clock_writer(bx_ntvdm_demgset_clock_writer writer)
 { g_clock_writer = writer; }
 
-/* Original demgset.c uses BDS only when the historical raw-DASD owner has
- * registered a physical-drive record.  That owner is not yet imported (S7),
- * so NULL deliberately selects demgset.c's own documented synthetic-DPB
- * fallback.  This seam must be replaced by the original S7 BDS owner, not by
- * new drive semantics here. */
-PBDS demGetBDS(BYTE drive) { (void)drive; return NULL; }
-BOOL demGetBPB(PBDS bds) { (void)bds; SetLastError(ERROR_NOT_READY); return FALSE; }
+/* demGetBDS/demGetBPB are now owned by the directly imported OpenNT
+ * demdasd.c mirror (src/opennt/base/mvdm/dos/dem/demdasd.c).  Keeping the
+ * former S6 synthetic fallback here would replace the original owner and
+ * collide at link time, so it is intentionally absent. */
 
 /* Persistent, typed replacement for the original CCPU/SAS pointer aliases
  * installed by demSetDTALocation.  The imported search owner consumes the

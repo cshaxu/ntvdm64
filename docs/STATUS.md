@@ -45,6 +45,8 @@
 > **T230 S5:** [direct `demsrch.c` / `demfcb.c` import map](etc/evidence/t230-s5-demsrch-demfcb-direct-import-map-001.md) records the two imported source files, the x64-safe search/token/guest-buffer seams, every owned service's focused Direct witness, and the zero-exit formal Ninja result. It is local source parity only—not whole DEM, selector routing, or native guest proof.
 
 > **T230 S6:** [direct `demgset.c` import map](etc/evidence/t230-s6-demgset-direct-import-map-001.md) records the imported source, 32-bit guest DPB/DTA and Direct-clock seams, every owned service's focused Direct witness, and the zero-exit formal Ninja result. It is local source parity only—not whole DEM, raw-DASD/IOCTL ownership, selector routing, or native guest proof.
+
+> **T230 S7 (in progress):** [direct `demdasd.c` / `demioctl.c` import map](etc/evidence/t230-s7-demdasd-demioctl-direct-import-map-001.md) records the direct owner mirrors, their formal static-library closure and the bounded IOCTL/absolute-disk local witness. Raw-device transfer remains an explicit OpenNT host-capability dependency, not a bx-vdm implementation claim.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

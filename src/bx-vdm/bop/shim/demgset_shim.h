@@ -14,55 +14,22 @@
 
 #include <windows.h>
 #include <winternl.h>
+#include <winioctl.h>
 #include "../../../../opennt/local/compat/compiler/opennt_dem_ntdecl_compat.h"
 #include "demdir_shim.h"
+/* Direct source mirror: shared exact DASD/IOCTL layout and constants. */
+#include "../opennt/dem/demdasd.h"
 
 #define MSG_DEFAULT_DRIVE 4u
 #define DOS_VOLUME_NAME_SIZE 11u
 #define NT_VOLUME_NAME_SIZE 255u
 #define FILESYS_NAME_SIZE 8u
-#define DOS_DIR_ENTRY_LENGTH_SHIFT_COUNT 5u
-#define NON_REMOVABLE 0x01u
+/* demdasd.h above owns the exact historical DASD constants, including
+ * DOS_DIR_ENTRY_LENGTH_SHIFT_COUNT and NON_REMOVABLE. */
 #define ASSERT(expression) ((void)0)
 #define STOREDWORD(member, value) ((member) = (ULONG)(value))
 
 #pragma pack(push, 1)
-typedef struct A_BPB {
-    WORD SectorSize;
-    BYTE ClusterSize;
-    WORD ReservedSectors;
-    BYTE FATs;
-    WORD RootDirs;
-    WORD Sectors;
-    BYTE MediaID;
-    WORD FATSize;
-    WORD TrackSize;
-    WORD Heads;
-    DWORD HiddenSectors;
-    DWORD BigSectors;
-} BPB, *PBPB;
-
-typedef struct A_DPB {
-    BYTE DriveNum;
-    BYTE Unit;
-    WORD SectorSize;
-    WORD ClusterMask;
-    BYTE ClusterShift;
-    WORD FATSector;
-    BYTE FATs;
-    WORD RootDirs;
-    WORD FirstDataSector;
-    WORD MaxCluster;
-    WORD FATSize;
-    WORD DirSector;
-    DWORD DriveAddr;
-    BYTE MediaID;
-    BYTE FirstAccess;
-    ULONG Next;
-    WORD FreeCluster;
-    WORD FreeClusters;
-} DPB, *PDPB;
-
 typedef struct _VOLINFO {
     USHORT usInfoLevel;
     ULONG ulSerialNumber;
@@ -82,17 +49,6 @@ typedef struct _DOSWOWDATA {
     DWORD lpSftAddr;
 } DOSWOWDATA, *PDOSWOWDATA;
 
-typedef struct A_BDS {
-    struct A_BDS *Next;
-    BYTE DrivePhys;
-    BYTE DriveLog;
-    BPB bpb;
-    BYTE FatSize;
-    WORD OpenCount;
-    BYTE MediaType;
-    WORD Flags;
-    WORD Cylinders;
-} BDS, *PBDS;
 #pragma pack(pop)
 
 extern uintptr_t *pulDTALocation;

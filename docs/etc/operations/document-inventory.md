@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1957 |
+| Documentation records | 1960 |
 | --- | --- |
-| Generated UTC | 2026-08-19T16:32:24Z |
+| Generated UTC | 2026-08-19T17:54:17Z |
 
 ## Entries
 
@@ -214,6 +214,9 @@ content-divergent entries.
 | etc/evidence/t230-s2-demhndl-direct-import-map-001.md | indexed supporting material | 8e7a263ae9e060326e94467a9ed9333faddce22e35fc69b89fa9535a01b1d96b |
 | etc/evidence/t230-s3-demfile-direct-import-map-001.md | indexed supporting material | 0eac337aa3ac38d54691e905d9c0e78b01291d546305c0580f9dcb56a28ae546 |
 | etc/evidence/t230-s4-demdir-direct-import-map-001.md | indexed supporting material | a28ec3ca85fbd98718fc0478c2773101d852908013e1edbadc9dd1be76de2db5 |
+| etc/evidence/t230-s5-demsrch-demfcb-direct-import-map-001.md | indexed supporting material | ab1077fa3408e6c6ac9c084dff86b466185ad49cda26206b6b634ce9268fa95c |
+| etc/evidence/t230-s6-demgset-direct-import-map-001.md | indexed supporting material | 80d40df5c53ea6b9f4dd3848f92ab83cbeda430b8823dc96879d835689c95037 |
+| etc/evidence/t230-s7-demdasd-demioctl-direct-import-map-001.md | indexed supporting material | 57f5387c01075671dfaf4fa910463b1b59a742ccd52bbded2b9122c32c6c90c3 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |
@@ -243,7 +246,7 @@ content-divergent entries.
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
-| etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | e76b40b8bebecba92f2f8aa511b2b80ab1fb367c2e90c88652e1a2fb25db6559 |
+| etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | e6c5d0b4ecba867ec6b35bb90f14f2660dd1e42536d605e000b1ac27cebeb9d4 |
 | etc/operations/policy/source-policy.md | indexed supporting material | 975baa0c066a65b04b6ec317ae6065d70b13643a4c50ada5fadd1c7466f3b4a4 |
 | etc/operations/proposal-bop-cross-family-completion-audit-001.md | indexed supporting material | fd5996979a637f474575bff558e4a0291e8cfb606897ebd07a47bd61c17bbecf |
 | etc/operations/proposal-bx-machine-bios-selector-owner-package-completion-001.md | indexed supporting material | 40a7cbf4902abcb5f1b542ffc2b7f9199c27de83f5491a7b6dfd796128d7d885 |
@@ -1971,7 +1974,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 0419433ebc43fd721dbf0562f3a9e7bc5f1b0cafa38e96530846b7e5094ce556 |
+| STATUS.md | principal control document | b6d3fa659842e823bf141fc5911d275fef5ea3647afe921ccb160b8a69f37259 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | b282f6ae8b887d070cf657b2ec78fa8334e74f2f789988c47d00b290d025a16f |
