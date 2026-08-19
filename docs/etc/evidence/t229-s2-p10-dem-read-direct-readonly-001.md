@@ -1,0 +1,3 @@
+# T229 S2 P10 — DEM demRead Direct/Readonly conformance
+
+OpenNT demRead returns bytes read in AX and copies bytes to the guest buffer. The formal whole-provider fixture reads three owned-file bytes through ingress, handle routing and checked guest RAM output. Direct and Readonly both return AX=3, CF clear, and guest bytes ONE; Readonly does not block reading. All four formal fixture modes exited zero on 2026-08-18.

@@ -31,7 +31,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:0B` | `demFindNext` | R | DTA continuation/stale-state matrix |
 | `50:0C` | `demFindNextFCB` | P — continuation/no-more-files | host enumeration variant |
 | `50:12` | `demOpen` | P — whole-provider token/size/pipe ABI | share/access and pipe-token variants |
-| `50:16` | `demRead` | R | checked output write + EOF behavior |
+| `50:16` | `demRead` | P — checked Direct/Readonly output | EOF/error variants |
 | `50:17` | `demRename` | P — whole-provider Direct rename/Readonly refusal | cross-drive/same-path variants |
 | `50:1E` | `demWrite` | P — Direct write, pre-host Readonly refusal | zero-length/disk-full variants |
 | `50:20` | `demRenameFCB` | R | wildcard source/destination matrix |
