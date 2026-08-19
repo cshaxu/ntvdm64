@@ -1,4 +1,5 @@
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
+#include "bop/demfile.h"
 #include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
 #include "bx_ntvdm_dem_overlay_namespace_backend_v1.h"
 #include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
@@ -185,82 +186,7 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
         drive = (uint8_t)(dl - 1u);
     }
 
-    if (service == 0x01u) {
-        DWORD attributes;
-        if (startup_path) {
-            if ((cpu->eax & 0xffu) != 0u)
-                return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
-            /* The image is provider-owned and immutable, but preserves the
-             * ordinary DOS attribute projection expected by the startup
-             * reader; no real host file is queried or modified. */
-            return finish(boundary, result, 0u, 0, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u, 0u);
-        }
-        if ((cpu->eax & 0xffu) != 0u) {
-            if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
-                uint32_t policy = 0u;
-                if (!bx_ntvdm_dem_profile_consumer_v1_resolve(&provider->files.profile,
-                        BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA, &policy) ||
-                    policy != BX_NTVDM_MUTATION_POLICY_V1_USE_OVERLAY) return 0;
-                attributes = cpu->ecx & 0xffffu;
-                if (attributes == 0u) attributes = FILE_ATTRIBUTE_NORMAL;
-                if (!bx_ntvdm_dem_overlay_metadata_backend_v1_set(&provider->overlay_store,
-                        &provider->overlay_files, provider->host_namespace, drive, relative,
-                        attributes & 0x37u, &error)) return 0;
-                return error == ERROR_SUCCESS ? finish(boundary, result, 0u, 0, 0) :
-                    fail(boundary, result, error);
-            }
-            if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
-                attributes = cpu->ecx & 0xffffu;
-                if (attributes == 0u) attributes = FILE_ATTRIBUTE_NORMAL;
-                if (!bx_ntvdm_dem_virtual_metadata_backend_v1_set(&provider->overlay_store,
-                        drive, relative, attributes & 0x37u, &error)) return 0;
-                return error == ERROR_SUCCESS ? finish(boundary, result, 0u, 0, 0) :
-                    fail(boundary, result, error);
-            }
-            admitted = mutation(provider, BX_NTVDM_MUTATION_CLASS_V1_FILE_METADATA,
-                boundary, result);
-            if (admitted <= 0) return admitted < 0;
-            attributes = cpu->ecx & 0xffffu;
-            if (attributes == 0u) attributes = FILE_ATTRIBUTE_NORMAL;
-            if (!bx_ntvdm_host_namespace_v1_set_file_attributes(
-                    provider->host_namespace, drive, relative, attributes, &error))
-                return fail(boundary, result, error);
-            return finish(boundary, result, 0u, 0, 0);
-        }
-        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY) {
-            uint32_t overlay_attributes = 0u;
-            if (!bx_ntvdm_dem_overlay_metadata_backend_v1_query(&provider->overlay_store,
-                    provider->host_namespace, drive, relative, &overlay_attributes, &error)) return 0;
-            if (error != ERROR_SUCCESS) return fail(boundary, result, error);
-            attributes = overlay_attributes;
-            if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
-            else attributes &= 0x37u;
-            return finish(boundary, result, 0u, 0, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
-                    (uint16_t)attributes);
-        }
-        if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
-            uint32_t virtual_attributes = 0u;
-            if (!bx_ntvdm_dem_virtual_metadata_backend_v1_query(&provider->overlay_store,
-                    drive, relative, &virtual_attributes, &error)) return 0;
-            if (error != ERROR_SUCCESS) return fail(boundary, result, error);
-            attributes = virtual_attributes;
-            if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
-            else attributes &= 0x37u;
-            return finish(boundary, result, 0u, 0, 0) &&
-                bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
-                    (uint16_t)attributes);
-        }
-        if (!bx_ntvdm_host_namespace_v1_query_file_attributes(
-                provider->host_namespace, drive, relative, &attributes, &error))
-            return fail(boundary, result, error);
-        if (attributes == FILE_ATTRIBUTE_NORMAL) attributes = 0u;
-        else attributes &= 0x37u; /* historical DOS_ATTR_MASK projection */
-        return finish(boundary, result, 0u, 0, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 1u,
-                (uint16_t)attributes);
-    }
+    if (service == 0x01u) return bx_ntvdm_bop_dem_ch_mod_v2(provider, boundary, cpu, drive, relative, startup_path, result);
     if (service == 0x03u || service == 0x22u || service == 0x12u) {
         uint32_t access = BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ |
             BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_WRITE;
