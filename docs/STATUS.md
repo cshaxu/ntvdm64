@@ -15,14 +15,14 @@
 | Objective | Reconcile the complete original `demdisp.c` 73-entry table against S1--S9 mirrors; remove superseded comparison implementations only after all-family source/ABI proof; run the full Direct local matrix and one bounded native observation. |
 | Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected leaf implementation, or repair of legacy v1/partial v2 comparison code. |
 | Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current Direct/Readonly provider graph; retained Virtual branches/tests; T229 closure transfer correction. |
-| Files And ABI Surface | whole `src/bx-vdm/bop/opennt/dem/`, neutral `bop/shim/*`, original `demdisp.c`, formal Ninja manifest and all Direct fixtures. |
+| Files And ABI Surface | whole `src/bx-vdm/bop/opennt/dem/`, neutral `bop/shim/*`, original `demdisp.c`, formal Ninja manifest and all Direct fixtures. `bop-v1/` is comparison-only and is not a formal DEM runtime input. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, Direct/Readonly/Overlay profile contract, formal Ninja and documentation governance rules. |
 | Verification | Source-build the formal Ninja all-DEM matrix, verify all 73 source-owned Direct routes and exact dispositions, then record one bounded native observation without converting trace results into leaf patches. |
 | Expected Markers | One source-shaped mirror owner per `demdisp.c` identity; old comparison implementations are deleted only after their replacements are proved; no Virtual policy enters the mirror. |
 | Asset Needs | Pinned OpenNT DEM source; T229 ledger/evidence; formal MSVC x64 `/MT` Ninja graph; declared host namespace roots; retained Virtual source/test membership; bounded native observation fixture. |
 | Reporting Requirements | Reconcile the tracker and every package map, record deletion decisions and the bounded native observation separately from local Direct evidence. |
 | Stop Conditions | A requirement needs a new Bochs intrusion, guest-image mutation, host modification merely to install the product, or cannot retain source ABI/failure semantics. Such a fact pauses implementation for owner decision; it does not silently become a deferred T230 endpoint or transfer item. |
-| Exit Criteria | All 73 callable DEM services are owned by source-shaped v2 mirror files under `src/bx-vdm/bop/opennt/dem/`; required neutral seams are under `src/bx-vdm/bop/shim/`; their Direct routes and focused package tests source-build; all divergences are recorded; v1 is no longer on a migrated v2 route; formal Ninja and the bounded native observation are recorded without a hidden transfer backlog. |
+| Exit Criteria | All 73 callable DEM services are owned by source-shaped v2 mirror files under `src/bx-vdm/bop/opennt/dem/`; required neutral seams are under `src/bx-vdm/bop/shim/`; their Direct routes and focused package tests source-build; all divergences are recorded; v1 is no longer on a migrated v2 route; formal Ninja and the bounded native observation are recorded without a hidden transfer backlog. T230 does not repair or test v1 in order to satisfy this criterion. |
 | Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” plus “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” |
 | Similar-Issue Sweep | All 73 `demdisp.c` identities; current source-derived terminals; `50:47/48` pipe routes; shared mutation profile consumers; CLI mode parsing; Virtual enum, backend, token, provider, build-manifest and fixture membership; Overlay selection rejection; whole-provider/all-73/native observation paths. |
 
@@ -51,6 +51,8 @@
 > **T230 S8:** [direct `demerror.c` / `demlock.c` import map](etc/evidence/t230-s8-demerror-demlock-direct-import-map-001.md) records the original owner mirrors, persistent fixed hard-error guest layouts, the explicit unbound retry failure and the temporary-file lock/unlock witness. It is local Direct source parity only—not an INT 24, whole dispatcher or native guest claim.
 
 > **T230 S9:** [direct `demmisc.c` import map](etc/evidence/t230-s9-demmisc-direct-import-map-001.md) records the complete imported lifecycle owner, its x86/x64 loader-pointer seam and the 13-service Direct fixture. It is local Direct source parity only—not whole DEM or native guest closure.
+
+> **T230 S10 (local Direct matrix):** [DEM Direct matrix and legacy exclusion](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md) records the fresh 73-row source-owner catalogue fixture, all eight imported-owner Direct fixtures, and the removal of the source-derived CWD experiment from the formal `bx-vdm` module. It does not claim bounded native observation or final legacy deletion.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

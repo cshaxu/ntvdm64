@@ -44,6 +44,10 @@ handlers. Every in-place change has an adjacent comment naming the original
 path, the unavailable historical dependency, and the shim that replaces it.
 No copied v1 profile, Readonly, Overlay or Virtual policy enters either new
 directory. No T230 acceptance depends on v1 callers reaching the new file.
+Superseded source-derived experiments, including the former CWD `13/18/1A`
+service, belong in `bop-v1/` until final deletion; they are removed from the
+formal `bx-vdm` module rather than repaired.  The imported `demdir.c` and
+`demgset.c` own those services in the Direct mirror.
 
 ## Common acceptance rules
 
@@ -70,6 +74,16 @@ Ninja target; run focused Direct tests for all owned BOPs; and update the
 | S8 | `demerror.c`, `demlock.c` | 32, 33, 3F | Mirror hard-error/retry and lock behavior with source-shaped continuations. |
 | S9 | `demmisc.c` | 11, 23, 34–3E, 45 | Mirror DOS-load, reset, symbol, DOS-app/WOW, diagnostic and lifecycle helpers. |
 | S10 | whole `demdisp.c` table and S1–S9 mirrors | 00–48 | Reconcile all 73 identities, delete superseded partial v2 and no-longer-needed v1 comparison material, run full Direct local matrix and one bounded native integration observation. |
+
+### S10 progress — Direct matrix and legacy exclusion
+
+The complete imported-owner Direct matrix now source-builds from one fresh
+Ninja graph with a 73-entry `demdisp.c` catalogue witness.  The source-derived
+CWD `13/18/1A` experiment is excluded from the formal module and retained
+only under `bop-v1/`; its original owner replacements are `demdir.c` and
+`demgset.c`.  See [S10 matrix evidence](../evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md).
+The remaining S10 work is the exact reference-deletion audit and the bounded
+native observation; neither is implied by this local fixture result.
 
 ## Completed package records
 

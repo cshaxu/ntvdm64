@@ -1,7 +1,7 @@
 #ifndef BX_NTVDM_DEM_CWD_SERVICE_V2_H
 #define BX_NTVDM_DEM_CWD_SERVICE_V2_H
 
-#include "bx_ntvdm_dem_cwd_context_v1.h"
+#include "bop-v1/bx_ntvdm_dem_cwd_context_v1.h"
 #include "bx_ntvdm_guest_gather_read_action_v1.h"
 #include "bx_ntvdm_multi_write_transaction.h"
 
