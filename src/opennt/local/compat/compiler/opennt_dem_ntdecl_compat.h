@@ -25,8 +25,14 @@
 
 /* Retained OpenNT headers: status values, historical SEH spellings, and the
  * VdmQueryDir request layout used by demsrch.c. */
+#pragma warning(push)
+#pragma warning(disable:4005)
 #include <ntstatus.h>
-#include <crt/excpt.h>
+#pragma warning(pop)
+/* OpenNT's crt/excpt.h supplied only the two legacy spellings below.  The
+ * modern standalone SDK closure has no such header, so retain the spelling
+ * adaptation locally instead of making this imported DEM declaration bridge
+ * depend on a missing CRT include. */
 #define OPENNT_STAGE_VDM_TYPES 1
 #include "vdm.h"
 

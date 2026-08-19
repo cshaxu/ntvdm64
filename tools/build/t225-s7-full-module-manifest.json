@@ -188,9 +188,12 @@
         "src/bx-vdm/bop/opennt/dem/demfile.c",
         "src/bx-vdm/bop/opennt/dem/demlabel.c",
         "src/bx-vdm/bop/opennt/dem/demmsg.c",
+        "src/bx-vdm/bop/opennt/dem/demfcb.c",
+        "src/bx-vdm/bop/opennt/dem/demsrch.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_dem_direct_context.c",
         "src/bx-vdm/bop/shim/demdir_shim.c",
         "src/bx-vdm/bop/shim/demfile_shim.c",
+        "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
         "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_observation_v1.c",
         "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_ledger_v1.c",
@@ -241,6 +244,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t230-s5-demsrch-fcb-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s5_demsrch_fcb_direct_import_fixture.c",
+      "libraries": [ "bx-vdm" ],
+      "platformLibraries": [ "kernel32.lib", "gdi32.lib", "user32.lib", "ntdll.lib" ]
+    },
     {
       "name": "t230-s4-demdir-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s4_demdir_direct_import_fixture.c",

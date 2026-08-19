@@ -31,6 +31,7 @@ typedef struct bx_ntvdm_demhndl_active_call {
     uint8_t *path_buffers[4];
     uint32_t path_buffer_count;
     int transfer_from_guest;
+    int flush_guest_buffer_on_return;
 } bx_ntvdm_demhndl_active_call;
 
 static __declspec(thread) bx_ntvdm_demhndl_active_call *g_active_call;
@@ -40,6 +41,39 @@ __declspec(thread) bx_ntvdm_demhndl_extended_error *pExtendedError;
 static bx_ntvdm_demhndl_active_call *active_call(void)
 {
     return g_active_call;
+}
+
+static int is_demsrch_dta_service(uint32_t service)
+{
+    return service == 0x09u || service == 0x0bu;
+}
+
+static int is_demsrch_fcb_service(uint32_t service)
+{
+    return service == 0x0au || service == 0x0cu;
+}
+
+static int is_demfcb_path_service(uint32_t service)
+{
+    return service == 0x07u || service == 0x20u || service == 0x2cu ||
+        service == 0x2du || service == 0x31u;
+}
+
+static LPVOID acquire_fixed_guest_span(bx_ntvdm_demhndl_active_call *active,
+    uint32_t bytes)
+{
+    if (active == NULL || active->call == NULL || active->guest_buffer != NULL)
+        return NULL;
+    active->guest_bytes = bytes;
+    active->guest_buffer = (uint8_t *)malloc(bytes);
+    if (active->guest_buffer == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
+    if (!active->call->guest_read(active->call->guest_state, active->guest_address,
+            active->guest_buffer, bytes)) {
+        free(active->guest_buffer); active->guest_buffer = NULL;
+        SetLastError(ERROR_INVALID_ADDRESS); return NULL;
+    }
+    active->flush_guest_buffer_on_return = 1;
+    return active->guest_buffer;
 }
 
 static uint32_t real_mode_address(USHORT segment, USHORT offset)
@@ -141,6 +175,8 @@ void bx_ntvdm_demhndl_set_bp(USHORT value) { (void)set_register(5u, value); }
  * imported DEM code depend on Bochs headers. */
 void bx_ntvdm_demhndl_set_cx(USHORT value) { (void)set_register(1u, value); }
 void bx_ntvdm_demhndl_set_dx(USHORT value) { (void)set_register(2u, value); }
+void bx_ntvdm_demhndl_set_si(USHORT value) { (void)set_register(6u, value); }
+void bx_ntvdm_demhndl_set_di(USHORT value) { (void)set_register(7u, value); }
 void bx_ntvdm_demhndl_set_cf(int value) { (void)bx_ntvdm_cpu_result_v2_set_cf(active_call()->call->result, value); }
 void bx_ntvdm_demhndl_set_zf(int value) { (void)bx_ntvdm_cpu_result_v2_set_zf(active_call()->call->result, value); }
 
@@ -199,6 +235,22 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
 
     if (active == 0 || active->call == 0) return NULL;
     active->guest_address = real_mode_address(segment, offset);
+    /* OpenNT demsrch.c maps fixed DOS DTA/SRCHBUF layouts directly through
+     * SAS.  The Direct CLI maps the same exact 43/52-byte guest layouts via a
+     * checked bounce span and writes them back after the imported body.  The
+     * first FindFirst/FindFirstFCB pointer is still its original OEM path. */
+    if (is_demsrch_dta_service(active->call->service)) {
+        if (active->call->service == 0x09u && active->path_buffer_count == 0u)
+            return acquire_guest_oem_path(active, active->guest_address);
+        return acquire_fixed_guest_span(active, 43u);
+    }
+    if (is_demsrch_fcb_service(active->call->service)) {
+        if (active->call->service == 0x0au && active->path_buffer_count == 0u)
+            return acquire_guest_oem_path(active, active->guest_address);
+        return acquire_fixed_guest_span(active, 52u);
+    }
+    if (is_demfcb_path_service(active->call->service))
+        return acquire_guest_oem_path(active, active->guest_address);
     if (is_demfile_path_service(active->call->service))
         return acquire_guest_oem_path(active, active->guest_address);
     if (is_demdir_cds_service(active->call->service)) {
@@ -308,7 +360,8 @@ int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
         return 0;
     g_active_call = &active;
     body();
-    if (is_demdir_cds_service(call->service) && active.guest_buffer != NULL &&
+    if ((is_demdir_cds_service(call->service) || active.flush_guest_buffer_on_return) &&
+        active.guest_buffer != NULL &&
         !call->guest_write(call->guest_state, active.guest_address,
             active.guest_buffer, active.guest_bytes))
         SetLastError(ERROR_INVALID_ADDRESS);

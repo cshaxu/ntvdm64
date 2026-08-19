@@ -109,6 +109,8 @@ int bx_ntvdm_demhndl_get_zf(void);
 void bx_ntvdm_demhndl_set_ax(USHORT value);
 void bx_ntvdm_demhndl_set_bx(USHORT value);
 void bx_ntvdm_demhndl_set_bp(USHORT value);
+void bx_ntvdm_demhndl_set_si(USHORT value);
+void bx_ntvdm_demhndl_set_di(USHORT value);
 void bx_ntvdm_demhndl_set_cx(USHORT value);
 void bx_ntvdm_demhndl_set_dx(USHORT value);
 void bx_ntvdm_demhndl_set_cf(int value);
@@ -139,6 +141,8 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
 #define setAX(value) bx_ntvdm_demhndl_set_ax(value)
 #define setBX(value) bx_ntvdm_demhndl_set_bx(value)
 #define setBP(value) bx_ntvdm_demhndl_set_bp(value)
+#define setSI(value) bx_ntvdm_demhndl_set_si(value)
+#define setDI(value) bx_ntvdm_demhndl_set_di(value)
 #define setCX(value) bx_ntvdm_demhndl_set_cx(value)
 #define setDX(value) bx_ntvdm_demhndl_set_dx(value)
 #define setCF(value) bx_ntvdm_demhndl_set_cf(value)
