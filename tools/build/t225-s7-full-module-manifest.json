@@ -230,6 +230,7 @@
         "src/bx-vdm/bx_ntvdm_dem_cwd_context_v1.c",
         "src/bx-vdm/bx_ntvdm_dem_cwd_service_v2.c",
         "src/bx-vdm/bx_ntvdm_dem_debug_service.c",
+        "src/bx-vdm/bx_ntvdm_dem_disk_reset_service_v1.c",
         "src/bx-vdm/bx_ntvdm_dem_dpb_service.c",
         "src/bx-vdm/bx_ntvdm_dem_drive_provider_v1.c",
         "src/bx-vdm/bx_ntvdm_dem_drive_view_provider_v1.c",
@@ -823,6 +824,12 @@
     {
       "name": "t226-s7-wow-negative-fixture",
       "source": "tests/bx-vdm/t226_s7_wow_conformance_negative_fixture.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
+    },
+    {
+      "name": "t229-s2-dem-disk-reset-service-fixture",
+      "source": "tests/bx-vdm/t229_s2_dem_disk_reset_service_fixture.c",
       "libraries": ["bx-vdm"],
       "platformLibraries": ["libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib"]
     },

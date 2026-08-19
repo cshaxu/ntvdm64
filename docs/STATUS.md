@@ -47,6 +47,8 @@
 
 > **T229 S2 P22:** [DEM error/lock owner-group evidence](etc/evidence/t229-s2-p22-dem-error-lock-owner-group-001.md) closes locator registration, no-retry and no-handle source terminals in Direct and Readonly.
 
+> **T229 S2 P23:** [DEM disk-reset COMMAND-composition evidence](etc/evidence/t229-s2-p23-dem-disk-reset-command-composition-001.md) closes the original pFDAccess guest-word clear without pretending that unadmitted raw-media resets exist.
+
 > **T229 S2 P17:** [DEM GSET clock-mutation Direct/Readonly conformance evidence](etc/evidence/t229-s2-p17-dem-gset-clock-mutation-direct-readonly-001.md) records source-shaped `SetLocalTime` Direct behavior and the pre-Win32 Readonly refusal.
 
 > **T229 S2 P16:** [DEM clock/path Direct/Readonly conformance evidence](etc/evidence/t229-s2-p16-dem-clock-path-direct-readonly-001.md) records the original date/time register ABI and `demCheckPath` device-directory terminal.

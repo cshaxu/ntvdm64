@@ -20,6 +20,7 @@
 #include "bx_ntvdm_top_level_package_facade_v1.h"
 #include "bx_ntvdm_machine_bop_facade_v1.h"
 #include "bx_ntvdm_startup_machine_interrupt_v1.h"
+#include "bx_ntvdm_dem_disk_reset_service_v1.h"
 #include <string.h>
 
 static bx_ntvdm_boot_namespace_composition_v1 *active;
@@ -359,6 +360,29 @@ int bx_ntvdm_boot_namespace_composition_v1_copy_ordinary_terminal(
         &value->command);
 }
 
+/* OpenNT demDiskReset (demmisc.c) resets the owned floppy/fdisk state and
+ * clears COMMAND cmdSetInfo''s FDAccess WORD.  The CLI composition has no
+ * raw-media owner to reset; after 54:05 registration it preserves the
+ * remaining cross-package guest-RAM contract through the typed mantle write.
+ * No Bochs, DOS, or selector knowledge is introduced below this boundary. */
+static int execute_dem_disk_reset(
+    bx_ntvdm_boot_namespace_composition_v1 *composition,
+    const bx_ntvdm_bop_ingress_v1 *ingress,
+    const bx_ntvdm_exception_event_v1 *event,
+    const bx_ntvdm_cpu_state_v1 *cpu,
+    bx_ntvdm_cpu_result_v2 *result)
+{
+    struct bx_ntvdm_mechanical_action_v1 action;
+    uint32_t action_id;
+    if (composition == 0 || !composition->command.bootstrap_provider.set_info.valid ||
+        composition->plane.next_action_id == 0u) return 0;
+    action_id = composition->plane.next_action_id++;
+    if (composition->plane.next_action_id == 0u) composition->plane.next_action_id = 1u;
+    return bx_ntvdm_dem_disk_reset_service_v1_prepare(
+        composition->command.bootstrap_provider.set_info.registration.fd_access,
+        ingress, event, cpu, action_id, &action, result) &&
+        bx_ntvdm_mantle_execute_mechanical_action_v1(&action);
+}
 int bx_ntvdm_boot_namespace_composition_v1_handle(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *value)
@@ -412,6 +436,8 @@ int bx_ntvdm_boot_namespace_composition_v1_handle(
                     &window, &result)) return outcome(&result, value);
         }
     }
+    if (execute_dem_disk_reset(active, &ingress, &boundary, &cpu, &result))
+        return outcome(&result, value);
     if (bx_ntvdm_dem_package_session_v1_dispatch(&active->dem, &ingress,
             &selection, &boundary, &cpu, &window, &result))
         return outcome(&result, value);
