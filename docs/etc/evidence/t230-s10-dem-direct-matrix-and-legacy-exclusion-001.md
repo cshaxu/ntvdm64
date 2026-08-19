@@ -34,8 +34,8 @@ and route only through `src/bx-vdm/bop/shim/`.
 ## Dispatcher correction
 
 The earlier S10 catalogue was a source-derived owner ledger, not the original
-dispatcher translation unit.  It is now retained only as
-`src/bx-vdm/bop/reference-v2/demdisp_catalog_v2.c/.h`.  The active
+dispatcher translation unit.  After the direct dispatcher passed its focused
+fixture and reference audit, that obsolete catalogue was deleted.  The active
 `src/bx-vdm/bop/opennt/dem/demdisp.c` directly retains OpenNT's 73-entry
 `apfnSVC[]`, `DemDispatch`, `CurrentISVC`, hard-error reset, and the original
 `demNotYetImplemented` / `demSetV86KernelAddr` bodies.  Its only in-file
@@ -50,9 +50,9 @@ table.  The S2 fixture now proves this path for original slot `50:1F`, including
 ## Common-foundation correction
 
 The active `dem.c`, `demdata.c`, and `demmsg.c` are also now direct OpenNT
-translation-unit mirrors.  Their earlier source-derived forms are retained
-under `bop/reference-v2/`, not linked by the formal module.  The only newly
-admitted seam correction is exact OpenNT DTA state typing:
+translation-unit mirrors.  Their earlier source-derived forms were deleted
+after the direct replacements passed the formal matrix and reference audit.
+The only newly admitted seam correction is exact OpenNT DTA state typing:
 `pulDTALocation` is `ULONG UNALIGNED *`, a pointer to a 32-bit guest FAR
 address, rather than an incorrectly widened host-pointer type.  The fresh S6
 fixture compiles and runs with that original state declaration.
