@@ -31,6 +31,8 @@
 
 > **T229 S2 P10:** [demRead Direct/Readonly conformance evidence](etc/evidence/t229-s2-p10-dem-read-direct-readonly-001.md) records checked guest output and shared read admission.
 
+> **T229 S2 P11:** [demCommit Direct/Readonly conformance evidence](etc/evidence/t229-s2-p11-dem-commit-direct-readonly-001.md) records OpenNT release-build CF-clear commit behavior in both profiles.
+
 > **T229 S2 P9:** [demChMod Direct/Readonly conformance evidence](etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md) records the source-derived CX result-ABI repair and metadata policy split.
 
 > **T229 S2 P8:** [demRename Direct/Readonly conformance evidence](etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md) records `50:17` two-path mutation/refusal behavior without claiming error-matrix closure.
