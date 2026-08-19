@@ -40,11 +40,30 @@ The fixture proves: bound `50:1f` reaches imported `DemDispatch`; `54:1f`
 declines; and unbound `50:1f` declines.  It is a local composition witness,
 not the S15 completion claim.
 
+## Engine binding
+
+`dem_v2_runtime_session.c` owns the process-local Direct host/native-session
+pair.  `bx_ntvdm_engine_run_v1` binds it after the retained startup composition
+has validated its inputs but before `bx_ntvdm_machine_stage_v1_begin`; it
+resets the pair on every subsequent rejection and after stage reset.  The
+adapter session's only guest-memory callbacks are the selector-blind mantle
+checked-RAM functions, so no access can occur while the stage is inactive.
+
+The fresh `dem-v2-runtime-r2` graph compiled the modified mantle archive and
+the full v2 `bx-vdm` archive.  Its
+`t230-s15-v2-runtime-session-fixture` linked against both and exited zero:
+
+```text
+T230 v2 runtime session owns DEM and declines without legacy fallback
+```
+
 ## Remaining S15 work
 
 The old native engine still installs `bop-v1/bx_ntvdm_composition_runtime_v1`
-for startup and other unported package state.  Consequently this record does
-not claim that the old engine image has been recomposed, nor that retained
-v1 DEM files can already be deleted.  S15 remains active until that engine
-path is bound to the v2 entry and every retained DEM v1 member is unreachable
-or removed; S16 then owns the bounded native observation.
+for startup and other unported package state.  The new binding makes its DEM
+provider state non-authoritative only when the v2 composition entry is the
+linked external generic-UD symbol.  Consequently this record does not claim
+that every historical derivative has been recomposed, nor that retained v1
+DEM files can already be deleted.  S15 remains active until route scans prove
+each product/derivative selects the v2 entry and every retained DEM v1 member
+is unreachable or removed; S16 then owns the bounded native observation.
