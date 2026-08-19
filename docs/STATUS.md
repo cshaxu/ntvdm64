@@ -2,25 +2,25 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T230 S1.** T229 demonstrated only a 73-row local route/disposition closure; its retained `deferred` terminals and Virtual implementation do not satisfy the owner's functional-completion requirement. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint, native observation, or retired-virtual cleanup may be handed to a later task as T230 completion.
+> **Current effective packet: M0 T230 S2.** T229 demonstrated only a 73-row local route/disposition closure; its retained `deferred` terminals and Virtual implementation do not satisfy the owner's functional-completion requirement. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint, native observation, or retired-virtual cleanup may be handed to a later task as T230 completion.
 
-**Active: M0 T230 S1 -- OpenNT DEM parallel-mirror foundation and source-file-package plan.**
+**Active: M0 T230 S2 -- OpenNT `demhndl.c` mirror package.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T230 S1, Ordinary Mode. |
+| Identifier Mode | M0 T230 S2, Ordinary Mode. |
 | Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
-| Objective | Establish a complete Direct-only, source-shaped OpenNT DEM mirror for every callable `50:00..48` service beneath `src/bx-vdm/bop/opennt/dem/`, with required neutral ABI/host-composition seams beneath `src/bx-vdm/bop/shim/`. Organize and accept work by original DEM source-file package. |
+| Objective | Mirror the complete original `demhndl.c` package beneath `src/bx-vdm/bop/opennt/dem/`: seek, close, handle times, read/write, commit and pipe EOF (`50:00`, `02`, `08`, `16`, `1E`, `27`, `47`, `48`) with the width-safe host-handle seam established by S1. |
 | Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected single-service scope, or new v2 Readonly/Overlay/Virtual behavior. Legacy v1 implementations remain isolated during staged migration; they are not v2 completion evidence. |
 | Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current Direct/Readonly provider graph; retained Virtual branches/tests; T229 closure transfer correction. |
 | Files And ABI Surface | `src/bx-vdm/bx_ntvdm_dem_*`, shared mutation-profile/host-capability seams, Direct/Readonly fixtures and formal Ninja manifests; original `src/opennt/base/mvdm/dos/dem/*`. Any required `50:47/48` capability is admitted as a bounded DEM-callable dependency, not deferred to another T. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, Direct/Readonly/Overlay profile contract, formal Ninja and documentation governance rules. |
-| Verification | Implement and test by the ordered original-file S packages in the parallel-mirror plan. Each package source-builds and has focused Direct tests for all owned services; S10 reconciles all 73 identities and performs one bounded native integration observation. |
-| Expected Markers | Each callable identity has an executable source-backed Direct result and a source-backed Readonly result, including source-correct failure where the selected host capability genuinely cannot provide the operation; no `deferred`, generic pass-through, or unimplemented terminal remains. Overlay is rejected/deferred at the public selection boundary but its typed ABI seam remains. Virtual enum/selection/provider/backend/test membership is removed or isolated outside the runnable graph with a recorded justification. |
+| Verification | Source-build the formal Ninja target and run focused Direct tests for every `demhndl.c` service. Preserve original source function/data/error ordering where possible; record each host-handle, CCPU/SAS, or guest-memory divergence adjacent to the adaptation. |
+| Expected Markers | `demhndl.c` owns executable, source-backed Direct routes for every listed service; no generic pass-through or unimplemented terminal remains in this package. The mirror remains free of Readonly, Overlay and Virtual policy; retained v1 policy does not become v2 completion evidence. |
 | Asset Needs | Pinned OpenNT DEM source; T229 ledger/evidence; formal MSVC x64 `/MT` Ninja graph; declared host namespace roots; retained Virtual source/test membership; bounded native observation fixture. |
-| Reporting Requirements | For each identity record original source, recovery rung, Direct/Readonly behavior, selected host-capability dependency, exact failure contract, Virtual disposition and regression. Record the bounded native observation in T230, whether it passes or exposes a separate owner boundary. |
+| Reporting Requirements | Record each `demhndl.c` identity's original function, recovery rung, host-handle dependency, exact Direct failure contract and focused regression. Bounded native observation remains S10-only unless a separate admission changes the plan. |
 | Stop Conditions | A requirement needs a new Bochs intrusion, guest-image mutation, host modification merely to install the product, or cannot retain source ABI/failure semantics. Such a fact pauses implementation for owner decision; it does not silently become a deferred T230 endpoint or transfer item. |
 | Exit Criteria | All 73 callable DEM services are owned by source-shaped v2 mirror files under `src/bx-vdm/bop/opennt/dem/`; required neutral seams are under `src/bx-vdm/bop/shim/`; their Direct routes and focused package tests source-build; all divergences are recorded; v1 is no longer on a migrated v2 route; formal Ninja and the bounded native observation are recorded without a hidden transfer backlog. |
 | Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” plus “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” |
