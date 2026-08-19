@@ -637,16 +637,31 @@ static int whole_provider_pdb_lifecycle_regression(void)
                 dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT ? "TWO" : "ONE",
                 sizeof(readback)) != 0) goto cleanup;
     }
+    /* demClose preserves OpenNT's CX:DX=FFFFFFFF no-seek sentinel, clears
+     * only CF, and retires the opaque AX:BP token after the host close. */
     bytes[3] = 0x02u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ecx = 0xffffu; cpu.edx = 0xffffu;
     bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
     if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
         !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
         !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
             &selection, &event, &cpu, &window, &result) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u || result.cpu_delta.gpr16_write_mask != 0u ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         result.eflags_values != 0u || bx_ntvdm_dem_file_session_v1_lookup(
             &session.whole_provider.files, token, &looked_up)) goto cleanup;
+    /* A retired token must take demClose's source-derived invalid-handle
+     * failure rather than becoming a second successful close. */
+    if (!bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+        result.cpu_delta.gpr16_values[0u] != ERROR_INVALID_HANDLE ||
+        result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+        result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) goto cleanup;
     /* OpenNT demOpenFCB accepts a DS:SI OEM pathname and returns an opaque
      * AX:BP token.  Exercise the actual whole-provider route with a fixture-
      * owned file, then close through demCloseFCB's AX:SI contract.  Both

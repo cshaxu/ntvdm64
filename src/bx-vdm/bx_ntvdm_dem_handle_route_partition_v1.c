@@ -254,8 +254,11 @@ int bx_ntvdm_dem_handle_route_partition_v1_claims_request(
     if (provider == 0 || cpu == 0 ||
         !bx_ntvdm_dem_handle_route_partition_v1_owns_service(service)) return 0;
     if (service == 0x08u && (uint8_t)(cpu->ebx & 0xffu) > 1u) return 1;
+    /* demClose itself owns both the null-handle success and invalid-handle
+     * error branches.  Claim every 50:02 request so its OpenNT-shaped v2
+     * provider, rather than the generic package terminal, returns that ABI. */
+    if (service == 0x02u) return 1;
     return readonly_token(provider, cpu, &backend_token) || overlay_token(provider, cpu) ||
-        (service == 0x02u && token(cpu) == 0u) ||
         bx_ntvdm_dem_file_session_v1_lookup(&provider->files, token(cpu), &unused);
 }
 

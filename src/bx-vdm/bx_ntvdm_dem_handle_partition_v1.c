@@ -60,7 +60,8 @@ int bx_ntvdm_dem_handle_partition_v1_dispatch(
         !bx_ntvdm_exception_event_v1_valid(boundary) ||
         !bx_ntvdm_cpu_state_v1_valid(cpu) || boundary->fault_rip > UINT64_MAX - 4u ||
         cpu->execution_mode != BX_NTVDM_CPU_EXECUTION_REAL) return 0;
-    if (service == 0x02u && token(cpu) == 0u) return finish(boundary, result, 0u, 0, 0);
+    if (service == 0x02u)
+        return bx_ntvdm_bop_dem_close_v2(provider, boundary, cpu, result);
     /* demFileTimes deliberately does not consume AX:BP for its device-time
      * case.  Keep that historical distinction before resolving a local
      * opaque token. */
@@ -82,18 +83,6 @@ int bx_ntvdm_dem_handle_partition_v1_dispatch(
         return error_result(boundary, result, DEM_ERROR_INVALID_HANDLE);
     if (service == 0x00u)
         return bx_ntvdm_bop_dem_chg_file_ptr_v2(provider, boundary, cpu, result);
-    if (service == 0x02u) {
-        uint32_t location = ((cpu->ecx & 0xffffu) << 16) | (cpu->edx & 0xffffu);
-        if (location != 0xffffffffu) {
-            LARGE_INTEGER distance, ignored;
-            distance.QuadPart = (LONG)location;
-            if (!SetFilePointerEx(handle, distance, &ignored, FILE_BEGIN))
-                return error_result(boundary, result, GetLastError());
-        }
-        if (!bx_ntvdm_dem_file_session_v1_release(&provider->files, token(cpu)))
-            return error_result(boundary, result, GetLastError());
-        return finish(boundary, result, 0u, 0, 0);
-    }
     if (service == 0x27u) { (void)FlushFileBuffers(handle); return finish(boundary, result, 0u, 0, 0); }
     if (service == 0x08u) {
         uint8_t option = (uint8_t)(cpu->ebx & 0xffu);
