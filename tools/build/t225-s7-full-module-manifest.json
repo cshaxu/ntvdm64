@@ -186,6 +186,7 @@
         "src/bx-vdm/bx_ntvdm_bop_ingress_v1.c",
         "src/bx-vdm/bx_ntvdm_bop_provider_registry_v1.c",
         "src/bx-vdm/bx_ntvdm_bop_sequence_observation_v1.c",
+        "src/bx-vdm/bop/demhndl.c",
         "src/bx-vdm/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_observation_v1.c",
         "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_ledger_v1.c",

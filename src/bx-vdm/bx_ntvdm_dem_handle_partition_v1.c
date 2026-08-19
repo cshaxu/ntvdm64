@@ -1,4 +1,5 @@
 #include "bx_ntvdm_dem_handle_partition_v1.h"
+#include "bop/demhndl.h"
 
 #define DEM_ERROR_INVALID_FUNCTION 1u
 #define DEM_ERROR_ACCESS_DENIED 5u
@@ -79,18 +80,8 @@ int bx_ntvdm_dem_handle_partition_v1_dispatch(
     }
     if (!local_handle(provider, cpu, &handle))
         return error_result(boundary, result, DEM_ERROR_INVALID_HANDLE);
-    if (service == 0x00u) {
-        LARGE_INTEGER distance, position;
-        uint8_t origin = (uint8_t)(cpu->ebx & 0xffu);
-        if (origin > FILE_END) return error_result(boundary, result, DEM_ERROR_INVALID_FUNCTION);
-        distance.QuadPart = (LONG)(uint32_t)(((cpu->ecx & 0xffffu) << 16) |
-            (cpu->edx & 0xffffu));
-        if (!SetFilePointerEx(handle, distance, &position, origin))
-            return error_result(boundary, result, GetLastError());
-        return finish(boundary, result, (uint16_t)position.LowPart, 1, 0) &&
-            bx_ntvdm_cpu_delta_v1_set_gpr16(&result->cpu_delta, 2u,
-                (uint16_t)((uint64_t)position.QuadPart >> 16));
-    }
+    if (service == 0x00u)
+        return bx_ntvdm_bop_dem_chg_file_ptr_v2(provider, boundary, cpu, result);
     if (service == 0x02u) {
         uint32_t location = ((cpu->ecx & 0xffffu) << 16) | (cpu->edx & 0xffffu);
         if (location != 0xffffffffu) {

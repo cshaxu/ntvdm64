@@ -29,6 +29,8 @@
 > **T230 S1 plan:** [DEM functional-completion admission plan](etc/operations/m0-t230-s1-dem-functional-completion-admission-plan-001.md) replaces T229's route/disposition criterion with actual functional and retired-Virtual closure criteria.
 
 > **T230 S1 P1:** [203-entry Chinese BOP implementation tracker](etc/operations/opennt-bop-implementation-tracker-001.md) records instruction entry, original handler, high-level purpose, actual strict status and Direct/Readonly/Overlay disposition; it establishes zero fully complete entries at this baseline.
+
+> **T230 S1 P2:** [50:00 OpenNT-shaped v2 provider evidence](etc/evidence/t230-s1-bop-50-00-opennt-shaped-v2-provider-evidence-001.md) records the smallest source-derived seam, all divergences and focused Direct/Readonly regression. It is an implementation practice, not DEM, native or T230 closure.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

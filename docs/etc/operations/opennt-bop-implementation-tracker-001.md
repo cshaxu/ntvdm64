@@ -16,7 +16,7 @@
 
 | 入口 | 原始 handler | 作用（高层） | 当前实际状态 | Direct | Readonly | Overlay | 原始 source / 下一步 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `50:00` | `demChgFilePtr` | 改变已打开文件的读写位置 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:00` | `demChgFilePtr` | 改变已打开文件的读写位置 | 局部：OpenNT-shaped v2 Direct provider；T230 严格功能验收未完成 | Direct：v2 局部三种定位基准已测，未完成 T230 验收 | Readonly：现有 namespace 路径局部回归，未完成 T230 验收 | ABI 预留，未启用 | `demdisp.c`、`demhndl.c:342-389`；T230 S1 P2 |
 | `50:01` | `demChMod` | 查询或修改文件属性 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:02` | `demClose` | 关闭 DOS 文件句柄 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:03` | `demCreate` | 创建或截断文件 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |

@@ -495,6 +495,46 @@ static int whole_provider_pdb_lifecycle_regression(void)
         result.cpu_delta.gpr16_values[2u] != 0u ||
         result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         result.eflags_values != 0u) goto cleanup;
+    /* demChgFilePtr must keep OpenNT's three BL origins, not merely the
+     * absolute-zero startup case.  The same direct Win32 token is exercised
+     * under both Direct and Readonly profiles; seek changes only session
+     * cursor state and is not a host namespace mutation. */
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ebx = FILE_CURRENT; cpu.ecx = 0u; cpu.edx = 2u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.cpu_delta.gpr16_write_mask != ((UINT32_C(1) << 0u) |
+            (UINT32_C(1) << 2u)) || result.cpu_delta.gpr16_values[0u] != 2u ||
+        result.cpu_delta.gpr16_values[2u] != 0u || result.eflags_values != 0u)
+        goto cleanup;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ebx = FILE_END; cpu.ecx = 0xffffu; cpu.edx = 0xffffu;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.cpu_delta.gpr16_write_mask != ((UINT32_C(1) << 0u) |
+            (UINT32_C(1) << 2u)) || result.cpu_delta.gpr16_values[0u] != 2u ||
+        result.cpu_delta.gpr16_values[2u] != 0u || result.eflags_values != 0u)
+        goto cleanup;
+    /* Restore the cursor expected by the paired demRead regression below. */
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax = token >> 16u; cpu.ebp = token & 0xffffu;
+    cpu.ebx = FILE_BEGIN; cpu.ecx = 0u; cpu.edx = 0u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.cpu_delta.gpr16_values[0u] != 0u ||
+        result.cpu_delta.gpr16_values[2u] != 0u || result.eflags_values != 0u)
+        goto cleanup;
     /* An unknown opaque token is not a pass-through: demChgFilePtr reaches
      * demClientError with ERROR_INVALID_HANDLE (AX=6, CF set). */
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
