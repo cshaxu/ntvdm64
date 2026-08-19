@@ -20,9 +20,9 @@
 | `50:01` | `demChMod` | 查询或修改文件属性 | OpenNT `demfile.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 body + OEM/guest/token shim；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c`；T230 S3；待 native 验证 |
 | `50:02` | `demClose` | 关闭 DOS 文件句柄 | Direct 原始 `demhndl.c` 镜像已局部闭合；native/runtime 未验证 | 原始可选 seek/close 顺序保留；仅以 shim close 同时退役不透明 token，局部关闭回归已测 | 不在 v2 范围 | 不在 v2 范围 | `bop/opennt/dem/demhndl.c`、`bop/shim/demhndl_shim.*`；T230 S2 map；待 native 验证 |
 | `50:03` | `demCreate` | 创建或截断文件 | OpenNT `demfile.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 create/volume-label body + token shim；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c`、`demlabel.c`；T230 S3 |
-| `50:04` | `demCreateDir` | 创建目录 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:04` | `demCreateDir` | 创建目录 | OpenNT `demdir.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 body + OEM directory shim；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demdir.c`；T230 S4 |
 | `50:05` | `demDelete` | 删除文件 | OpenNT `demfile.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 body + OEM pathname shim；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c`；T230 S3 |
-| `50:06` | `demDeleteDir` | 删除目录 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:06` | `demDeleteDir` | 删除目录 | OpenNT `demdir.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 body + OEM directory shim；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demdir.c`；T230 S4 |
 | `50:07` | `demDeleteFCB` | 按 FCB 删除文件 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:08` | `demFileTimes` | 查询或设置文件日期时间 | Direct 原始 `demhndl.c` 镜像已局部闭合；native/runtime 未验证 | 原始 get/set/device-time 分支保留；get-time Direct 调用已测，完整 host session 集成待后续包验证 | 不在 v2 范围 | 不在 v2 范围 | `bop/opennt/dem/demhndl.c`、T230 S2 map；待 native 验证 |
 | `50:09` | `demFindFirst` | 目录枚举起始 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
@@ -35,12 +35,12 @@
 | `50:10` | `demGSetMediaID` | 读取/设置介质标识 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:11` | `demLoadDos` | 装入 NTDOS guest 映像 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:12` | `demOpen` | 打开文件 | OpenNT `demfile.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 local-file body + opaque token；named-pipe Redirector 仍按原始失败路径 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c`；T230 S3 |
-| `50:13` | `demQueryCurrentDir` | 取得当前目录 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:13` | `demQueryCurrentDir` | 取得当前目录 | OpenNT `demdir.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 CDS validation/reset body + fixed-width guest copy seam | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demdir.c`；T230 S4 |
 | `50:14` | `demQueryDate` | 取得宿主日期 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:15` | `demQueryTime` | 取得宿主时间 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:16` | `demRead` | 从文件读入 guest 缓冲区 | Direct 原始 `demhndl.c` 镜像已局部闭合；native/runtime 未验证 | 原始 seek/read/flush/free/error顺序保留；checked guest bounce 回写与 host round-trip 已测 | 不在 v2 范围 | 不在 v2 范围 | `bop/opennt/dem/demhndl.c`、`bop/shim/demhndl_shim.*`；T230 S2 map；待 native 验证 |
 | `50:17` | `demRename` | 重命名文件 | OpenNT `demfile.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 cross-drive/same-name checks + OEM shim；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c`；T230 S3 |
-| `50:18` | `demSetCurrentDir` | 改变当前目录 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
+| `50:18` | `demSetCurrentDir` | 改变当前目录 | OpenNT `demdir.c` Direct 镜像局部闭合；native/runtime 未验证 | 原始 process-CWD / `=X:` environment body；局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demdir.c`；T230 S4 |
 | `50:19` | `demSetDate` | 设置宿主日期 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:1A` | `demSetDefaultDrive` | 改变默认驱动器/当前目录 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:1B` | `demSetDTALocation` | 登记 DOS DTA 缓冲区 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |

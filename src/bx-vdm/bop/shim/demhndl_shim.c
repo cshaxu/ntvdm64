@@ -55,12 +55,18 @@ static uint16_t low16(uint32_t value)
 static int is_demfile_path_service(uint32_t service)
 {
     switch (service) {
-    case 0x01u: case 0x03u: case 0x05u: case 0x12u:
+    case 0x01u: case 0x03u: case 0x04u: case 0x05u: case 0x06u: case 0x12u:
     case 0x17u: case 0x22u: case 0x44u:
+    case 0x18u:
         return 1;
     default:
         return 0;
     }
+}
+
+static int is_demdir_cds_service(uint32_t service)
+{
+    return service == 0x13u;
 }
 
 static LPVOID acquire_guest_oem_path(bx_ntvdm_demhndl_active_call *active,
@@ -195,6 +201,21 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
     active->guest_address = real_mode_address(segment, offset);
     if (is_demfile_path_service(active->call->service))
         return acquire_guest_oem_path(active, active->guest_address);
+    if (is_demdir_cds_service(active->call->service)) {
+        /* OpenNT demdir.c maps the packed 71-byte CDS in place.  Copy its
+         * fixed historical layout through checked RAM and write it back after
+         * the imported body, rather than exporting a guest pointer. */
+        bytes = 71u;
+        active->guest_bytes = bytes;
+        active->guest_buffer = (uint8_t *)malloc(bytes);
+        if (active->guest_buffer == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
+        if (!active->call->guest_read(active->call->guest_state, active->guest_address,
+                active->guest_buffer, bytes)) {
+            free(active->guest_buffer); active->guest_buffer = NULL;
+            SetLastError(ERROR_INVALID_ADDRESS); return NULL;
+        }
+        return active->guest_buffer;
+    }
     bytes = bx_ntvdm_demhndl_get_cx();
     active->guest_bytes = bytes;
     /* A zero-length DOS transfer still supplies a valid historical pointer:
@@ -287,6 +308,10 @@ int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
         return 0;
     g_active_call = &active;
     body();
+    if (is_demdir_cds_service(call->service) && active.guest_buffer != NULL &&
+        !call->guest_write(call->guest_state, active.guest_address,
+            active.guest_buffer, active.guest_bytes))
+        SetLastError(ERROR_INVALID_ADDRESS);
     if (active.guest_buffer != NULL) free(active.guest_buffer);
     while (active.path_buffer_count != 0u)
         free(active.path_buffers[--active.path_buffer_count]);
