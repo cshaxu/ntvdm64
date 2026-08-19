@@ -4,25 +4,25 @@
 
 > **Current effective packet: M0 T230 S9.** T229 demonstrated only a 73-row local route/disposition closure. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint or native observation may be handed to a later task as T230 completion.
 
-**Active: M0 T230 S10 -- whole-DEM reconciliation and bounded native observation.**
+**Active: M0 T230 S11 -- whole-table DEM source/ABI/failure ledger.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T230 S10, Ordinary Mode. |
+| Identifier Mode | M0 T230 S11, Ordinary Mode. |
 | Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
-| Objective | Reconcile the complete original `demdisp.c` 73-entry table against S1--S9 mirrors; remove superseded comparison implementations only after all-family source/ABI proof; run the full Direct local matrix and one bounded native observation. |
+| Objective | Establish the complete original `demdisp.c` 73-slot source/ABI/failure ledger and use it to drive the remaining source-shaped local execution, v1 DEM-route retirement and native checked-memory composition sequence. |
 | Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected leaf implementation, or repair of legacy v1/partial v2 comparison code. |
 | Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current OpenNT mirror/provider graph; retained v1 comparison branches/tests; T229 closure transfer correction. |
 | Files And ABI Surface | whole `src/bx-vdm/bop/opennt/dem/`, neutral `bop/shim/*`, original `demdisp.c`, formal Ninja manifest and all Direct fixtures. `bop-v1/` is comparison-only and is not a formal DEM runtime input. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, original OpenNT host-service semantics, formal Ninja and documentation governance rules. |
-| Verification | Source-build the formal Ninja all-DEM matrix, verify all 73 source-owned routes and exact dispositions, then record one bounded native observation without converting trace results into leaf patches. |
-| Expected Markers | One source-shaped mirror owner per `demdisp.c` identity; old comparison implementations are deleted only after their replacements are proved; no project-authored mutation policy enters the mirror. |
+| Verification | For all 73 slots, prove source owner plus local register/guest-memory/failure behavior; then prove no product route enters v1 DEM code, source-build the formal Ninja all-DEM matrix, and record one bounded native observation through the Direct session. |
+| Expected Markers | One source-shaped mirror owner and one exact local witness per `demdisp.c` identity; v1 DEM product routes are deleted or unreachable; no project-authored mutation policy enters the mirror. |
 | Asset Needs | Pinned OpenNT DEM source; T229 ledger/evidence; formal MSVC x64 `/MT` Ninja graph; declared host namespace roots; retained v1 source/test membership; bounded native observation fixture. |
 | Reporting Requirements | Reconcile the tracker and every package map, record deletion decisions and the bounded native observation separately from local Direct evidence. |
 | Stop Conditions | A requirement needs a new Bochs intrusion, guest-image mutation, host modification merely to install the product, or cannot retain source ABI/failure semantics. Such a fact pauses implementation for owner decision; it does not silently become a deferred T230 endpoint or transfer item. |
-| Exit Criteria | All 73 callable DEM services are owned by source-shaped v2 mirror files under `src/bx-vdm/bop/opennt/dem/`; required neutral seams are under `src/bx-vdm/bop/shim/`; their Direct routes and focused package tests source-build; all divergences are recorded; v1 is no longer on a migrated v2 route; formal Ninja and the bounded native observation are recorded without a hidden transfer backlog. T230 does not repair or test v1 in order to satisfy this criterion. |
+| Exit Criteria | All 73 original `demdisp.c` slots have source/ABI/failure-ledger rows and exact local witnesses; all implemented slots run their recovered original behavior or exact original failure path, and all original ordinary/no-op slots retain that exact behavior. The full Direct mirror and every required shim source-build. No native or formal product route can invoke v1 DEM providers, dispatcher, result bridge or composition runtime for `50:00..48`; retained v1 comparison code is unreachable or removed. The native engine binds the Direct DEM session through the mantle checked-memory transport and one bounded native observation is recorded. No DEM completion work is transferred to another T. |
 | Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。” plus “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” |
 | Similar-Issue Sweep | All 73 `demdisp.c` identities; current source-derived terminals; `50:47/48` pipe routes; legacy profile consumers, CLI parsing, v1 enum/backend/token/provider/build-manifest/fixture membership; whole-provider/all-73/native observation paths. |
 
@@ -55,6 +55,8 @@
 > **T230 S10 (local Direct matrix):** [DEM Direct matrix and legacy exclusion](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md) records the fresh direct OpenNT `demdisp.c` 73-slot dispatcher fixture, all eight imported-owner Direct fixtures, and the removal of the source-derived CWD experiment from the formal `bx-vdm` module. It does not claim bounded native observation or final legacy deletion.
 
 > **T230 S10 (native Direct gap):** [native Direct DEM composition gap](etc/research/t230-s10-native-direct-dem-composition-gap-001.md) records that the native engine still installs the retained v1 composition runtime.  A bounded v1-free Direct session now converts copied #UD events to the original dispatcher; binding it to the existing machine checked-memory transport remains the gap, not a DEM source/provider gap.
+
+> **T230 S11--S16:** [whole-DEM completion sequence](etc/operations/m0-t230-dem-completion-sequence-002.md) makes individual original-slot semantics, v1 DEM-route retirement and native checked-memory composition mandatory T230 exit criteria. The pre-existing S10 table-compilation fixture is not a substitute for those requirements.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
