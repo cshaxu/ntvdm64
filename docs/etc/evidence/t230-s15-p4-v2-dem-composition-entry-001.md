@@ -57,6 +57,13 @@ the full v2 `bx-vdm` archive.  Its
 T230 v2 runtime session owns DEM and declines without legacy fallback
 ```
 
+`tools/governance/Test-T230S15V2DemRoutePrecedence.ps1` is the repeatable
+source-membership check for this boundary.  It verifies that the formal Ninja
+manifest has no `bop-v1` input, the v2 composition source has no `bop-v1`
+include, the v2 entry recognizes and dispatches DEM, and the engine binds and
+resets the v2 session.  It intentionally reports the historical v1 bridge as
+retained outside the formal graph rather than hiding that remaining cleanup.
+
 ## Remaining S15 work
 
 The old native engine still installs `bop-v1/bx_ntvdm_composition_runtime_v1`
