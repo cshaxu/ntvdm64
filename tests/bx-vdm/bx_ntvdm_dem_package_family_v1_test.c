@@ -971,7 +971,48 @@ static int whole_provider_pdb_lifecycle_regression(void)
           result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
           result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
           GetFileAttributesW(fcb_path) == INVALID_FILE_ATTRIBUTES))) goto cleanup;
-    /* demCreateDir/demDeleteDir are ordinary Direct host mutations.  Their
+    /* demCreateFCB follows demfcb.c's CREATE_ALWAYS path and returns the
+     * opaque AX:BP handle, BX/CX DOS time/date, and DX:SI size layout.
+     * Readonly must refuse before its backend can create/truncate the file. */
+    bytes[3] = 0x2cu;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.esi = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.cpu_delta.gpr16_write_mask !=
+             ((UINT32_C(1) << 0u) | (UINT32_C(1) << 1u) |
+              (UINT32_C(1) << 2u) | (UINT32_C(1) << 3u) |
+              (UINT32_C(1) << 5u) | (UINT32_C(1) << 6u)) ||
+          result.cpu_delta.gpr16_values[6u] != 0u ||
+          result.cpu_delta.gpr16_values[2u] != 0u ||
+          result.eflags_values != 0u ||
+          GetFileAttributesW(fcb_path) == INVALID_FILE_ATTRIBUTES)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != ERROR_ACCESS_DENIED ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          GetFileAttributesW(fcb_path) == INVALID_FILE_ATTRIBUTES))) goto cleanup;
+    if (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT) {
+        create_token = ((uint32_t)result.cpu_delta.gpr16_values[0u] << 16u) |
+            result.cpu_delta.gpr16_values[5u];
+        bytes[3] = 0x2eu;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.eax = create_token >> 16u; cpu.esi = create_token & 0xffffu;
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+        if (create_token == 0u || !bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+            !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+            !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+                &selection, &event, &cpu, &window, &result) ||
+            result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+            result.eflags_values != 0u || !DeleteFileW(fcb_path)) goto cleanup;
+    }    /* demCreateDir/demDeleteDir are ordinary Direct host mutations.  Their
      * Readonly result must be source-shaped ACCESS_DENIED before a namespace
      * API is reached; the fixture path is removed outside DEM before testing
      * so no pre-existing host entry can mask the assertion. */

@@ -116,6 +116,13 @@ int bx_ntvdm_dem_fcb_handle_partition_v1_dispatch(
         DWORD disposition = service == 0x2cu ? CREATE_ALWAYS : OPEN_EXISTING;
         if (!oem_path || access == 0u) return error_result(boundary, result, DEM_ERROR_INVALID_FUNCTION);
         if (mode == 0x08u && service == 0x2cu) return error_result(boundary, result, DEM_ERROR_INVALID_FUNCTION);
+        /* demCreateFCB is CREATE_ALWAYS in original demfcb.c.  Apply the
+         * shared namespace-content policy before any local-file backend can
+         * reach CreateFile, so Readonly is an explicit provider refusal. */
+        if (service == 0x2cu && bx_ntvdm_dem_file_view_v1_admit(&provider->file_view,
+                BX_NTVDM_MUTATION_CLASS_V1_NAMESPACE_CONTENT) !=
+            BX_NTVDM_DEM_FILE_VIEW_V1_OK)
+            return error_result(boundary, result, DEM_ERROR_ACCESS_DENIED);
         if (provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_OVERLAY ||
             provider->file_view.kind == BX_NTVDM_DEM_FILE_VIEW_V1_VIRTUAL) {
             uint8_t drive; wchar_t relative[BX_NTVDM_DEM_PATH_V1_MAX_RELATIVE];
