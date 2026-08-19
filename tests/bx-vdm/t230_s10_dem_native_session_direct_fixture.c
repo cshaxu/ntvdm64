@@ -5,14 +5,6 @@
 #include "bop/shim/dem_direct_host_session.h"
 #include "bop/dem_v2_generic_ud_bridge.h"
 
-/* The CPU5 core projection requires an external generic-UD symbol.  This
- * focused v2 session fixture invokes the bridge directly, so its link stub
- * must always decline and cannot select any legacy provider. */
-int bx_ntvdm_mantle_generic_ud_bridge_v1(
-    const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
-{ (void)event; (void)outcome; return 0; }
-
 typedef struct fixture_state { uint8_t bytes[32]; } fixture_state;
 
 static int publish(void *s,HANDLE h,uint32_t *t,DWORD *e) { (void)s;(void)h;if(t)*t=0u;if(e)*e=ERROR_INVALID_HANDLE;return 0; }
@@ -49,15 +41,15 @@ int main(void)
            bx_ntvdm_dem_direct_host_session_guest_write) ||
        !bx_ntvdm_dem_native_session_bind(&session)) return 1;
     event_initialize(&event,0x50u,0x1fu); memset(&outcome,0,sizeof(outcome));
-    if(!bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome) ||
+    if(!bx_ntvdm_mantle_generic_ud_bridge_v1(&event,&outcome) ||
        outcome.disposition!=BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip!=0x2404u ||
        (outcome.eflags_values&BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF)!=0u) return 2;
     event_initialize(&event,0x54u,0x1fu);
-    if(bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome)) return 3;
+    if(bx_ntvdm_mantle_generic_ud_bridge_v1(&event,&outcome)) return 3;
     bx_ntvdm_dem_native_session_unbind(&session);
     bx_ntvdm_dem_direct_host_session_reset(&host);
     event_initialize(&event,0x50u,0x1fu);
-    if(bx_ntvdm_dem_v2_generic_ud_dispatch(&event,&outcome)) return 4;
-    puts("T230 Direct DEM v2 bridge: copied #UD reaches original dispatcher without v1 fallback");
+    if(bx_ntvdm_mantle_generic_ud_bridge_v1(&event,&outcome)) return 4;
+    puts("T230 Direct DEM v2 composition: copied #UD reaches original dispatcher without v1 fallback");
     return 0;
 }

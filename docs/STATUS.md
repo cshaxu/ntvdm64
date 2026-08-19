@@ -67,6 +67,8 @@
 > **T230 S15 P2:** [checked-RAM transport](etc/evidence/t230-s15-p2-checked-ram-transport-001.md) is source-built and locally verified for active-stage bounds and lifecycle. It remains selector-blind and does not itself bind DEM.
 
 > **T230 S15 P3:** [v2 Direct host session](etc/evidence/t230-s15-p3-v2-direct-host-session-001.md) binds token ownership and checked RAM to the v2 native DEM session with zero-exit local evidence and no v1 input.
+
+> **T230 S15 P4 (partial local composition):** [v2 DEM composition entry](etc/evidence/t230-s15-p4-v2-dem-composition-entry-001.md) source-builds the v2-only external generic-UD entry and proves its bound/non-DEM/unbound behavior. It explicitly does not close the old native-engine binding or v1 deletion requirements.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

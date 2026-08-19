@@ -7,6 +7,11 @@
 
 #include "shim/dem_native_session_shim.h"
 
+/* Recognition is exported separately so the composition entry can make DEM
+ * ownership terminal before any other BOP family is considered. */
+int bx_ntvdm_dem_v2_generic_ud_recognizes(
+    const struct bx_ntvdm_generic_ud_event_v1 *event);
+
 int bx_ntvdm_dem_v2_generic_ud_dispatch(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome);

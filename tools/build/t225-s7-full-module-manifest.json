@@ -197,6 +197,7 @@
         "src/bx-vdm/bop/opennt/dem/demioctl.c",
         "src/bx-vdm/bop/opennt/dem/demsrch.c",
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/dem_v2_composition_bridge.c",
         "src/bx-vdm/bop/shim/dem_direct_host_session.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_dem_direct_context.c",
         "src/bx-vdm/bop/shim/demdir_shim.c",
@@ -808,7 +809,9 @@
       "name": "t230-s10-dem-native-session-direct-fixture",
       "source": "tests/bx-vdm/t230_s10_dem_native_session_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
       ],
       "platformLibraries": [
         "libcmt.lib",
