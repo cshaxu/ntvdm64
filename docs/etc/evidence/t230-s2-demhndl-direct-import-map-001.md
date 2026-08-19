@@ -8,9 +8,10 @@
 - Role: the directly imported source baseline for the complete DEM
   handle-service package.
 
-The former partial implementation is not a runtime dependency.  It was moved
-to `src/bx-vdm/bop/reference-v2/dem/demhndl.partial-v2.{c,h}` solely for
-comparison while the imported translation unit is adapted.
+The former partial implementation was never a runtime dependency.  After the
+direct imported package passed its focused fixture and reference audit, its
+comparison files were deleted; the imported translation unit is the sole
+active implementation.
 
 ## Complete original function set
 

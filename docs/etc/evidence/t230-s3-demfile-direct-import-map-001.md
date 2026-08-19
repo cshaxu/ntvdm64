@@ -5,7 +5,8 @@
 - Source: `src/opennt/base/mvdm/dos/dem/demfile.c` and `demlabel.c`
 - Baseline commit: `d450bfc1b7711234072eebfdfa23735ea509e7c5`
 - Destinations: `src/bx-vdm/bop/opennt/dem/demfile.c` and `demlabel.c`
-- Comparison-only predecessor: `bop/reference-v2/dem/demfile.partial-v2.{c,h}`
+- The comparison-only predecessor was deleted after the direct imported
+  package passed its focused fixture and reference audit.
 
 ## Owned BOP service bodies
 
