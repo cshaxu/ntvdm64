@@ -31,6 +31,8 @@
 > **T230 S1 P1:** [203-entry Chinese BOP implementation tracker](etc/operations/opennt-bop-implementation-tracker-001.md) records instruction entry, original handler, high-level purpose, actual strict status and Direct/Readonly/Overlay disposition; it establishes zero fully complete entries at this baseline.
 
 > **T230 S1 P2:** [50:00 OpenNT-shaped v2 provider evidence](etc/evidence/t230-s1-bop-50-00-opennt-shaped-v2-provider-evidence-001.md) records the smallest source-derived seam, all divergences and focused Direct/Readonly regression. It is an implementation practice, not DEM, native or T230 closure.
+
+> **T230 S1 P3:** [50:00--50:02 Direct parity scope correction](etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md) records the owner decision: v2 is Direct-only OpenNT source parity; it contains no Readonly, Overlay or Virtual behavior, and v1 remains retained.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

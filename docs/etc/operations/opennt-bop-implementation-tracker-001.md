@@ -16,9 +16,9 @@
 
 | 入口 | 原始 handler | 作用（高层） | 当前实际状态 | Direct | Readonly | Overlay | 原始 source / 下一步 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `50:00` | `demChgFilePtr` | 改变已打开文件的读写位置 | 代码完成：Direct OpenNT-shaped v2；Readonly 已有可执行 provider；native/runtime 未验证 | 已代码完成；局部三种定位基准已测 | 已代码完成；readonly provider 局部回归已通过 | ABI 预留，未启用 | `demdisp.c`、`demhndl.c:342-389`；T230 S1 P2；待 native 验证 |
-| `50:01` | `demChMod` | 查询或修改文件属性 | 代码完成：OpenNT-shaped `demfile.c` v2；native/runtime 未验证 | Direct：真实 host metadata get/set，局部回归已通过 | Readonly：查询可用、写入预先拒绝，局部回归已通过 | ABI 预留，未启用 | `demdisp.c`、`demfile.c:437-506`；T230 S1；待 native 验证 |
-| `50:02` | `demClose` | 关闭 DOS 文件句柄 | 代码完成：OpenNT-shaped `demhndl.c` v2；native/runtime 未验证 | Direct：真实 host handle close、可选 seek、token 退役与 stale-token AX/CF 失败，局部回归已通过 | Readonly：现有 readonly provider 关闭 token，局部回归已通过 | ABI 预留，未启用 | `demdisp.c`、`demhndl.c:28-90`；T230 S1；待 native 验证 |
+| `50:00` | `demChgFilePtr` | 改变已打开文件的读写位置 | Direct source-parity v2；native/runtime 未验证 | v2：OpenNT-shaped `demhndl.c`，局部 Direct 定位基准已测 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demhndl.c:342-389`；T230 S1 P3；待 native 验证 |
+| `50:01` | `demChMod` | 查询或修改文件属性 | Direct source-parity v2；native/runtime 未验证 | v2：真实 host metadata get/set，局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demfile.c:437-506`；T230 S1 P3；待 native 验证 |
+| `50:02` | `demClose` | 关闭 DOS 文件句柄 | Direct source-parity v2；native/runtime 未验证 | v2：真实 host handle close、可选 seek、token 退役与 stale-token AX/CF 失败，局部 Direct 回归已通过 | 不在 v2 范围 | 不在 v2 范围 | `demdisp.c`、`demhndl.c:28-90`；T230 S1 P3；待 native 验证 |
 | `50:03` | `demCreate` | 创建或截断文件 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:04` | `demCreateDir` | 创建目录 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |
 | `50:05` | `demDelete` | 删除文件 | 局部：存在 source-derived/host-capability 路径；T230 严格功能验收未完成 | 局部路径，T230 未验收 | 局部路径，T230 未验收 | ABI 预留，未启用 | `src/opennt/base/mvdm/dos/dem/demdisp.c；T230` |

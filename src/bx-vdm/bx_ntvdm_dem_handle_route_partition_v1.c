@@ -120,6 +120,12 @@ static void substitute_token(bx_ntvdm_cpu_state_v1 *destination,
         (backend_token & 0xffffu);
 }
 
+/* TODO(M0 T230 S1): retain 50:00 and 50:02 Readonly token translation,
+ * seek and close as the executable v1 compatibility baseline.  The current
+ * v2 scope is Direct-only OpenNT source parity, so do not migrate or delete
+ * these branches while completing 50:00--50:02.  A later owner-package
+ * decision must retire v1 as a whole; other handle BOPs also use this route. */
+
 static int startup_overlay_dispatch(bx_ntvdm_dem_whole_provider_v1 *provider,
     uint8_t service, const bx_ntvdm_exception_event_v1 *boundary,
     const bx_ntvdm_cpu_state_v1 *cpu, const bx_ntvdm_instruction_window_v1 *window,
