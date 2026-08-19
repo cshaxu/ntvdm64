@@ -57,6 +57,8 @@
 > **T230 S10 (native Direct gap):** [native Direct DEM composition gap](etc/research/t230-s10-native-direct-dem-composition-gap-001.md) records that the native engine still installs the retained v1 composition runtime.  A bounded v1-free Direct session now converts copied #UD events to the original dispatcher; binding it to the existing machine checked-memory transport remains the gap, not a DEM source/provider gap.
 
 > **T230 S11--S16:** [whole-DEM completion sequence](etc/operations/m0-t230-dem-completion-sequence-002.md) makes individual original-slot semantics, v1 DEM-route retirement and native checked-memory composition mandatory T230 exit criteria. The pre-existing S10 table-compilation fixture is not a substitute for those requirements.
+
+> **T230 S11:** [73-slot local-execution audit](etc/evidence/t230-s11-dem-73-slot-local-execution-audit-001.md) proves imported ownership and owner-level local witnesses for every slot, but identifies the remaining shared-`DemDispatch` integration gap. S12--S14 now close that gap by owner package.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
