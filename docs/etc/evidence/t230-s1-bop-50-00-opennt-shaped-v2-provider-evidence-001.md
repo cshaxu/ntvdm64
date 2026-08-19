@@ -2,8 +2,7 @@
 
 ## Scope
 
-This is a bounded source-recovery practice for DEM `50:00` only.  It does not
-close the DEM owner package, the `50:00` native integration path, or T230.
+This is a bounded source-recovery practice for DEM `50:00` only.  It establishes`r`ncode completion for this endpoint; it does not close the DEM owner package, the`r`n`50:00` native integration path, or T230.
 
 ## Original source and role
 
@@ -72,6 +71,5 @@ direct=0 readonly=0
 
 The extended fixture covers `FILE_BEGIN`, `FILE_CURRENT` and `FILE_END`
 (including a negative end-relative displacement) through the common `50:00`
-route.  It confirms only local Direct/Readonly service semantics.  A full
-73-service matrix, retired-Virtual removal and the bounded native observation
+route.  It confirms code-complete local Direct/Readonly service semantics.  A full`r`n73-service matrix, retired-Virtual removal and the bounded native observation
 remain required by T230.
