@@ -99,6 +99,17 @@ returns.  A transient locked S8 fixture object inside this disposable build
 root was removed and regenerated; no source file or evidence input was
 changed to address it.
 
+## Fresh r5 revalidation
+
+On 2026-08-19, the same nine fixture executables were rebuilt from a new,
+disposable `build/M0-T230-S10/direct-matrix-r5` Ninja graph generated from
+the current formal manifest.  All nine returned zero again.  This confirms
+that the active `bx-vdm` library still compiles the sixteen direct OpenNT DEM
+translation units and neutral shims, without making `bop-v1/` an input to the
+DEM fixture routes.  As with the original r4 witness, it is local Direct
+source-parity evidence only; it does not prove a native selector ingress or
+guest execution.
+
 ## Remaining S10 work
 
 This witness does not authorize deletion of all `bop-v1` material: other BOP
