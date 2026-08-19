@@ -468,8 +468,11 @@ int main(int argc, char **argv)
             memcpy(ram + 0x800u, "C:\\COMMAND.COM", sizeof("C:\\COMMAND.COM"));
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.ds = 0u; cpu.edx = 0x800u;
+            /* 50:01 is OpenNT demChMod, not demGetFileInfo.  Its query form
+             * returns the DOS attribute projection in CX. */
             if (!dispatch(&session, 0x01u, &cpu, &result) || !success(&result) ||
-                (result.cpu_delta.gpr16_write_mask & (1u << 2u)) == 0u) {
+                result.cpu_delta.gpr16_write_mask != (1u << 1u) ||
+                result.cpu_delta.gpr16_values[1] != 0u) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 79 + (int)index;
             }
@@ -584,7 +587,11 @@ int main(int argc, char **argv)
             }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.ds = 0u; cpu.edx = 0x900u;
-            if (!dispatch(&session, 0x01u, &cpu, &result) || !success(&result) || (result.cpu_delta.gpr16_write_mask & (1u << 2u)) == 0u) {
+            if (!dispatch(&session, 0x01u, &cpu, &result) || !success(&result) ||
+                result.cpu_delta.gpr16_write_mask != (1u << 1u) ||
+                result.cpu_delta.gpr16_values[1] != (uint16_t)
+                    (GetFileAttributesA(direct_renamed_oem) == FILE_ATTRIBUTE_NORMAL ?
+                        0u : (GetFileAttributesA(direct_renamed_oem) & 0x37u))) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session); bx_ntvdm_host_namespace_v1_release(&host); return 241;
             }
             memcpy(ram + 0x800u, direct_dir_oem, strlen(direct_dir_oem) + 1u);
@@ -797,11 +804,9 @@ int main(int argc, char **argv)
                 bx_ntvdm_host_namespace_v1_release(&host); return 180 + (int)index;
             }
         }
-        /* S2 lifecycle integration: 50:3C must release only Direct tokens
-         * owned by the copied PDB, yet preserve Readonly startup namespace
-         * tokens whose owner is session scope (zero). Both notifications are
-         * source-shaped void resumes; the following seek distinguishes their
-         * private-resource dispositions. */
+        /* OpenNT demTerminatePDB releases only its per-PSP FindFirst/FindNext
+         * state. DOS_ABORT later emits ordinary DEMCLOSE calls for SFT-backed
+         * handles, so both Direct and Readonly tokens must remain usable here. */
         if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_DIRECT) {
             memcpy(ram + 0x200u, fcb_host_path, strlen(fcb_host_path) + 1u);
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
@@ -823,9 +828,15 @@ int main(int argc, char **argv)
             }
             bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
             cpu.eax = token >> 16; cpu.ebp = token & 0xffffu; cpu.ebx = 0u;
-            if (!dispatch(&session, 0x00u, &cpu, &result) || !cf_ax(&result, 6u)) {
+            if (!dispatch(&session, 0x00u, &cpu, &result) || !success(&result)) {
                 bx_ntvdm_dem_package_session_v1_teardown(&session);
                 bx_ntvdm_host_namespace_v1_release(&host); return 262;
+            }
+            bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+            cpu.eax = token >> 16; cpu.ebp = token & 0xffffu;
+            if (!dispatch(&session, 0x02u, &cpu, &result) || !success(&result)) {
+                bx_ntvdm_dem_package_session_v1_teardown(&session);
+                bx_ntvdm_host_namespace_v1_release(&host); return 267;
             }
         }
         if (modes[index] == BX_NTVDM_MUTATION_MODE_V1_READONLY) {
