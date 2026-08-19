@@ -901,14 +901,14 @@ PDOSSFT GetFreeSftEntry(PDOSSF pSfHead, PWORD usSFN)
  *  will be unavailable to other callers trying to issue DOS Open or Create api
  *  calls. It is the caller's responsibility to release this file handle (with
  *  a call to VDDReleaseDosHandle).
- *  
+ *
  *  If the pPDB pointer is not supplied (e.g., is NULL), then the current
  *  PDB as reported by DOS will be used.
  *
  *  Although the ppSFT parameter is technically optional, it is a required
  *  parameter of the VDDAssociateNtHandle call. This was done to avoid a
  *  second handle lookup in the Associate call.
- *  
+ *
  */
 
 SHORT VDDAllocateDosHandle (pPDB,ppSFT,ppJFT)
@@ -1026,7 +1026,7 @@ WORD        wAccess;
  * EXIT -
  *      TRUE  - the file handle was released
  *      FALSE - The file handle was not valid or open
- * 
+ *
  * Comments:
  *  This routine updates the DOS file system data areas to free the passed
  *  file handle. No effort is made to determine if this handle was previously
@@ -1080,7 +1080,7 @@ HANDLE  ntHandle;
  *                            associated with the given PDB.
  *
  *
- * EXIT - 
+ * EXIT -
  *      SUCCESS - returns 4byte NT handle
  *      FAILURE - returns 0
  *
@@ -1088,14 +1088,14 @@ HANDLE  ntHandle;
  *  The value returned by this function will be the NT handle passed in a
  *  previous VDDAssociateNtHandle call. If no previous call is made to the
  *  the Associate api, then the value returned by this function is undefined.
- *  
+ *
  *  If the pPDB pointer is not supplied (e.g., is NULL), then the current
  *  PDB as reported by DOS will be used.
  *
  *  Although the ppSFT parameter is technically optional, it is a required
  *  parameter of the VDDAssociateNtHandle call. This was done to avoid a
  *  second handle lookup in the Associate call.
- *  
+ *
  *  The third and fourth parameters are provided to provide the caller the
  *  ability to update the DOS system data areas directly. This may be useful
  *  for performance reasons, or necessary depending on the application. In
