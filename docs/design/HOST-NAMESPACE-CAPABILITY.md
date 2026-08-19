@@ -43,25 +43,26 @@ NTIO, NTDOS and COMMAND are loaded as guest-memory startup inputs and are not
 copied or materialized as `IO.SYS`, `MSDOS.SYS`, `COMMAND.COM`, `CONFIG.SYS`
 or `AUTOEXEC.BAT` on a real host drive.
 
-## Storage profiles
+## Host-storage capability
 
-The default `direct` profile maps each admitted logical host drive under the
-same DOS drive letter and recovers the original OpenNT host API behavior where
-that owner package can be composed. It may perform ordinary user-authorized
-host mutations; this is still non-invasive because NTVDM itself neither
-installs nor modifies Windows.
+The sole product capability maps each admitted logical host drive under the
+same DOS drive letter and recovers the applicable original OpenNT host API
+behavior where that owner package can be composed. It may perform ordinary
+user-authorized host mutations; this is still non-invasive because NTVDM
+itself neither installs nor modifies Windows. No project-authored `readonly`,
+`overlay`, or `virtual` mode is part of the product contract. Such retained v1
+material is historical comparison code, not selectable or extensible
+capability.
 
-`readonly`, `volatile-overlay`, and `virtual boot-volume` are separate,
-explicit profiles. Readonly refuses the complete mutation family through
-source-derived DOS failures; overlay makes changes session-volatile; a virtual
-boot volume may fill an explicitly excluded letter without replacing an
-admitted real drive or materializing BYOB artifacts on the host.
-
-If a direct-profile startup requires C: and policy excludes C:, admission
-rejects before guest execution unless the user explicitly selects a separately
-admitted virtual boot-volume profile. Read, directory enumeration, path
-normalization and current-directory behavior are selected direct-host
-capabilities, not ambient guest access.
+VDM startup does not require any projected host drive: NTIO, NTDOS, COMMAND,
+CONFIG/AUTOEXEC and the declared target are immutable guest-memory inputs.
+A profile's `command_placement.drive_index` is a guest DOS placement, not a
+requirement to project the same host letter. If a later guest operation selects
+an excluded host C: (or any excluded drive), the selected OpenNT service
+returns its source-derived unavailable/path failure; admission does not reject
+startup merely for that exclusion. Read, directory enumeration, path
+normalization and current-directory behavior are selected host capabilities,
+not ambient guest access.
 - A guest path is normalized and matched only within its selected admitted
   drive; it cannot select another root, escape through `..`, traverse reparse
   points or cause a volume change.
@@ -85,6 +86,6 @@ uses the same search session and must be admitted in the same design review.
 No new Bochs intrusion is proposed. Host-drive enumeration occurs at
 CLI/adapter session admission under the explicit user policy, never in Bochs.
 Implementation requires source-derived field/error tables for FCB, DTA,
-path/current-directory and the complete read-only mutation-failure family.
-The optional virtual boot-volume fallback, if admitted, requires an additional
-whole-package review before it is implemented.
+path/current-directory and every reached OpenNT mutation/error path. A shim
+may adapt only unavailable historical host-composition mechanics; it must not
+introduce a separate mutation policy.
