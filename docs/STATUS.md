@@ -4,15 +4,15 @@
 
 > **Current effective packet: M0 T230 S15.** T229 demonstrated only a 73-row local route/disposition closure. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint or native observation may be handed to a later task as T230 completion.
 
-**Active: M0 T230 S15 P1 -- v1 DEM route-retirement map.**
+**Active: M0 T230 S15 P3 -- v2 Direct DEM host session.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T230 S15 P1, Ordinary Mode. |
+| Identifier Mode | M0 T230 S15 P3, Ordinary Mode. |
 | Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
-| Objective | Map every active engine-to-v1 path as startup/non-DEM/DEM, then use the proven route boundary to retire every formal and native `50:00..48` path through `bop-v1`. |
+| Objective | Bind the v2 Direct OpenNT DEM session to real host-handle/token state and the selector-blind checked-RAM transport, without any `bop-v1` DEM provider or dispatcher dependency. |
 | Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected leaf implementation, or repair of legacy v1/partial v2 comparison code. |
 | Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current OpenNT mirror/provider graph; retained v1 comparison branches/tests; T229 closure transfer correction. |
 | Files And ABI Surface | whole `src/bx-vdm/bop/opennt/dem/`, neutral `bop/shim/*`, original `demdisp.c`, formal Ninja manifest and all Direct fixtures. `bop-v1/` is comparison-only and is not a formal DEM runtime input. |
@@ -63,6 +63,8 @@
 > **T230 S12--S14:** [shared dispatcher local matrix](etc/evidence/t230-s12-s14-shared-demdispatch-local-matrix-001.md) proves every owner fixture now enters the original `DemDispatch` table; it explicitly leaves v1-route retirement and native checked-memory composition to S15--S16.
 
 > **T230 S15 P1:** [v1 DEM route-retirement map](etc/evidence/t230-s15-p1-v1-dem-route-retirement-map-001.md) identifies the real engine/runtime dependency boundary and admits P2--P5; it does not claim v1 retirement.
+
+> **T230 S15 P2:** [checked-RAM transport](etc/evidence/t230-s15-p2-checked-ram-transport-001.md) is source-built and locally verified for active-stage bounds and lifecycle. It remains selector-blind and does not itself bind DEM.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

@@ -81,6 +81,14 @@ static inline int bx_ntvdm_mechanical_action_v1_valid(
 int bx_ntvdm_mantle_execute_mechanical_action_v1(
   struct bx_ntvdm_mechanical_action_v1 *action);
 
+/* Synchronous checked ordinary-RAM transport for an active machine stage.
+ * This is deliberately selector-blind: callers provide only an address and
+ * copied bytes, and no guest/service meaning crosses this mantle boundary. */
+int bx_ntvdm_mantle_checked_ram_read_v1(uint64_t physical_address,
+  uint8_t *bytes, uint32_t byte_count);
+int bx_ntvdm_mantle_checked_ram_write_v1(uint64_t physical_address,
+  const uint8_t *bytes, uint32_t byte_count);
+
 #ifdef __cplusplus
 }
 #endif

@@ -7,6 +7,32 @@
 #include "bochs.h"
 #include "bx-core/memory/memory.h"
 #include "bx_ntvdm_mechanical_action_v1.h"
+#include "bx_ntvdm_machine_stage_v1.h"
+
+static int bx_ntvdm_mantle_checked_ram_range_valid(uint64_t physical_address,
+  const uint8_t *bytes, uint32_t byte_count, int write)
+{
+  if (!bx_ntvdm_machine_stage_v1_active() || bytes == 0 || byte_count == 0u ||
+      physical_address > UINT64_MAX - byte_count) return 0;
+  return write ? bx_mem.ordinary_ram_writable(physical_address, byte_count) :
+    bx_mem.ordinary_ram_readable(physical_address, byte_count);
+}
+
+extern "C" int bx_ntvdm_mantle_checked_ram_read_v1(uint64_t physical_address,
+  uint8_t *bytes, uint32_t byte_count)
+{
+  return bx_ntvdm_mantle_checked_ram_range_valid(physical_address, bytes,
+    byte_count, 0) && bx_mem.copy_from_ordinary_ram(physical_address,
+      byte_count, bytes);
+}
+
+extern "C" int bx_ntvdm_mantle_checked_ram_write_v1(uint64_t physical_address,
+  const uint8_t *bytes, uint32_t byte_count)
+{
+  return bx_ntvdm_mantle_checked_ram_range_valid(physical_address, bytes,
+    byte_count, 1) && bx_mem.copy_to_ordinary_ram(physical_address,
+      byte_count, bytes);
+}
 
 extern "C" int bx_ntvdm_mantle_execute_mechanical_action_v1(
   struct bx_ntvdm_mechanical_action_v1 *action)
