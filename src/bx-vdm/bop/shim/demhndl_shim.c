@@ -103,6 +103,24 @@ static int is_demdir_cds_service(uint32_t service)
     return service == 0x13u;
 }
 
+static int is_demgset_path_service(uint32_t service)
+{
+    return service == 0x1au;
+}
+
+static uint32_t demgset_fixed_guest_bytes(uint32_t service)
+{
+    /* These are original packed 16-bit guest data structures.  Their bytes
+     * enter/leave the imported body only through the checked bounce span. */
+    switch (service) {
+    case 0x10u: return 25u;       /* VOLINFO */
+    case 0x25u: return 33u;       /* DPB: 32-bit Next on either host width */
+    case 0x41u: return 16u;       /* DOS computer-name buffer */
+    case 0x46u: return 33u * 26u; /* one DPB per DOS drive */
+    default: return 0u;
+    }
+}
+
 static LPVOID acquire_guest_oem_path(bx_ntvdm_demhndl_active_call *active,
     uint32_t address)
 {
@@ -164,17 +182,32 @@ USHORT bx_ntvdm_demhndl_get_bp(void) { return low16(active_call()->call->cpu->eb
 USHORT bx_ntvdm_demhndl_get_ds(void) { return active_call()->call->cpu->ds; }
 USHORT bx_ntvdm_demhndl_get_es(void) { return active_call()->call->cpu->es; }
 USHORT bx_ntvdm_demhndl_get_al(void) { return (USHORT)(active_call()->call->cpu->eax & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_cl(void) { return (USHORT)(active_call()->call->cpu->ecx & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_ch(void) { return (USHORT)((active_call()->call->cpu->ecx >> 8) & 0xffu); }
 USHORT bx_ntvdm_demhndl_get_bl(void) { return (USHORT)(active_call()->call->cpu->ebx & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_dh(void) { return (USHORT)((active_call()->call->cpu->edx >> 8) & 0xffu); }
 USHORT bx_ntvdm_demhndl_get_dl(void) { return (USHORT)(active_call()->call->cpu->edx & 0xffu); }
 int bx_ntvdm_demhndl_get_zf(void) { return (active_call()->call->cpu->eflags & 0x40u) != 0u; }
 void bx_ntvdm_demhndl_set_ax(USHORT value) { (void)set_register(0u, value); }
+void bx_ntvdm_demhndl_set_al(USHORT value)
+{ bx_ntvdm_demhndl_set_ax((USHORT)((bx_ntvdm_demhndl_get_ax() & 0xff00u) | (value & 0xffu))); }
 void bx_ntvdm_demhndl_set_bx(USHORT value) { (void)set_register(3u, value); }
+void bx_ntvdm_demhndl_set_bl(USHORT value)
+{ bx_ntvdm_demhndl_set_bx((USHORT)((bx_ntvdm_demhndl_get_bx() & 0xff00u) | (value & 0xffu))); }
 void bx_ntvdm_demhndl_set_bp(USHORT value) { (void)set_register(5u, value); }
 /* The copied-result GPR numbering is Bochs AX,CX,DX,BX,SP,BP,SI,DI; keep
  * the historical helper spellings at this neutral boundary rather than make
  * imported DEM code depend on Bochs headers. */
 void bx_ntvdm_demhndl_set_cx(USHORT value) { (void)set_register(1u, value); }
+void bx_ntvdm_demhndl_set_cl(USHORT value)
+{ bx_ntvdm_demhndl_set_cx((USHORT)((bx_ntvdm_demhndl_get_cx() & 0xff00u) | (value & 0xffu))); }
+void bx_ntvdm_demhndl_set_ch(USHORT value)
+{ bx_ntvdm_demhndl_set_cx((USHORT)((bx_ntvdm_demhndl_get_cx() & 0x00ffu) | ((value & 0xffu) << 8))); }
 void bx_ntvdm_demhndl_set_dx(USHORT value) { (void)set_register(2u, value); }
+void bx_ntvdm_demhndl_set_dl(USHORT value)
+{ bx_ntvdm_demhndl_set_dx((USHORT)((bx_ntvdm_demhndl_get_dx() & 0xff00u) | (value & 0xffu))); }
+void bx_ntvdm_demhndl_set_dh(USHORT value)
+{ bx_ntvdm_demhndl_set_dx((USHORT)((bx_ntvdm_demhndl_get_dx() & 0x00ffu) | ((value & 0xffu) << 8))); }
 void bx_ntvdm_demhndl_set_si(USHORT value) { (void)set_register(6u, value); }
 void bx_ntvdm_demhndl_set_di(USHORT value) { (void)set_register(7u, value); }
 void bx_ntvdm_demhndl_set_cf(int value) { (void)bx_ntvdm_cpu_result_v2_set_cf(active_call()->call->result, value); }
@@ -253,6 +286,8 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
         return acquire_guest_oem_path(active, active->guest_address);
     if (is_demfile_path_service(active->call->service))
         return acquire_guest_oem_path(active, active->guest_address);
+    if (is_demgset_path_service(active->call->service))
+        return acquire_guest_oem_path(active, active->guest_address);
     if (is_demdir_cds_service(active->call->service)) {
         /* OpenNT demdir.c maps the packed 71-byte CDS in place.  Copy its
          * fixed historical layout through checked RAM and write it back after
@@ -268,6 +303,9 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
         }
         return active->guest_buffer;
     }
+    bytes = demgset_fixed_guest_bytes(active->call->service);
+    if (bytes != 0u)
+        return acquire_fixed_guest_span(active, bytes);
     bytes = bx_ntvdm_demhndl_get_cx();
     active->guest_bytes = bytes;
     /* A zero-length DOS transfer still supplies a valid historical pointer:
@@ -289,6 +327,16 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
         return NULL;
     }
     return active->guest_buffer;
+}
+
+int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
+    uint32_t bytes)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    if (active == NULL || active->call == NULL || buffer == NULL ||
+        active->call->guest_read == NULL) return 0;
+    return active->call->guest_read(active->call->guest_state,
+        real_mode_address(segment, offset), (uint8_t *)buffer, bytes);
 }
 
 void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,

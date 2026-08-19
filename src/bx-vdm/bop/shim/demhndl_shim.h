@@ -103,20 +103,31 @@ USHORT bx_ntvdm_demhndl_get_bp(void);
 USHORT bx_ntvdm_demhndl_get_ds(void);
 USHORT bx_ntvdm_demhndl_get_es(void);
 USHORT bx_ntvdm_demhndl_get_al(void);
+USHORT bx_ntvdm_demhndl_get_cl(void);
+USHORT bx_ntvdm_demhndl_get_ch(void);
 USHORT bx_ntvdm_demhndl_get_bl(void);
+USHORT bx_ntvdm_demhndl_get_dh(void);
 USHORT bx_ntvdm_demhndl_get_dl(void);
 int bx_ntvdm_demhndl_get_zf(void);
 void bx_ntvdm_demhndl_set_ax(USHORT value);
+void bx_ntvdm_demhndl_set_al(USHORT value);
 void bx_ntvdm_demhndl_set_bx(USHORT value);
+void bx_ntvdm_demhndl_set_bl(USHORT value);
 void bx_ntvdm_demhndl_set_bp(USHORT value);
 void bx_ntvdm_demhndl_set_si(USHORT value);
 void bx_ntvdm_demhndl_set_di(USHORT value);
 void bx_ntvdm_demhndl_set_cx(USHORT value);
+void bx_ntvdm_demhndl_set_cl(USHORT value);
+void bx_ntvdm_demhndl_set_ch(USHORT value);
 void bx_ntvdm_demhndl_set_dx(USHORT value);
+void bx_ntvdm_demhndl_set_dl(USHORT value);
+void bx_ntvdm_demhndl_set_dh(USHORT value);
 void bx_ntvdm_demhndl_set_cf(int value);
 void bx_ntvdm_demhndl_set_zf(int value);
 HANDLE bx_ntvdm_demhndl_get_handle(USHORT high, USHORT low);
 LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset);
+int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
+    uint32_t bytes);
 void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back);
 void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
@@ -135,16 +146,25 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
 #define getDS() bx_ntvdm_demhndl_get_ds()
 #define getES() bx_ntvdm_demhndl_get_es()
 #define getAL() bx_ntvdm_demhndl_get_al()
+#define getCL() bx_ntvdm_demhndl_get_cl()
+#define getCH() bx_ntvdm_demhndl_get_ch()
 #define getBL() bx_ntvdm_demhndl_get_bl()
+#define getDH() bx_ntvdm_demhndl_get_dh()
 #define getDL() bx_ntvdm_demhndl_get_dl()
 #define getZF() bx_ntvdm_demhndl_get_zf()
 #define setAX(value) bx_ntvdm_demhndl_set_ax(value)
+#define setAL(value) bx_ntvdm_demhndl_set_al(value)
 #define setBX(value) bx_ntvdm_demhndl_set_bx(value)
+#define setBL(value) bx_ntvdm_demhndl_set_bl(value)
 #define setBP(value) bx_ntvdm_demhndl_set_bp(value)
 #define setSI(value) bx_ntvdm_demhndl_set_si(value)
 #define setDI(value) bx_ntvdm_demhndl_set_di(value)
 #define setCX(value) bx_ntvdm_demhndl_set_cx(value)
+#define setCL(value) bx_ntvdm_demhndl_set_cl(value)
+#define setCH(value) bx_ntvdm_demhndl_set_ch(value)
 #define setDX(value) bx_ntvdm_demhndl_set_dx(value)
+#define setDL(value) bx_ntvdm_demhndl_set_dl(value)
+#define setDH(value) bx_ntvdm_demhndl_set_dh(value)
 #define setCF(value) bx_ntvdm_demhndl_set_cf(value)
 #define setZF(value) bx_ntvdm_demhndl_set_zf(value)
 #define GETHANDLE(high, low) bx_ntvdm_demhndl_get_handle(high, low)
