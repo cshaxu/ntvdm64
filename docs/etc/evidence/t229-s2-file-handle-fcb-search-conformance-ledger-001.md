@@ -34,7 +34,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:16` | `demRead` | P — checked output, ZF cursor continuation and EOF | host-read error variants |
 | `50:17` | `demRename` | P — whole-provider Direct rename/Readonly refusal | cross-drive/same-path variants |
 | `50:1E` | `demWrite` | P — Direct write, pre-host Readonly refusal | zero-length/disk-full variants |
-| `50:20` | `demRenameFCB` | R | wildcard source/destination matrix |
+| `50:20` | `demRenameFCB` | P — two-path Direct rename + pre-enumeration Readonly refusal | wildcard/template/error variants |
 | `50:22` | `demCreateNew` | P — whole-provider collision/refusal ABI | success/attribute variants |
 | `50:27` | `demCommit` | P — token-aware Direct/Readonly CF-clear | invalid-handle variant |
 | `50:2C` | `demCreateFCB` | P — Direct create/result layout + pre-host Readonly refusal | source attribute/error variants |

@@ -971,7 +971,50 @@ static int whole_provider_pdb_lifecycle_regression(void)
           result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
           result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
           GetFileAttributesW(fcb_path) == INVALID_FILE_ATTRIBUTES))) goto cleanup;
-    /* demCreateFCB follows demfcb.c's CREATE_ALWAYS path and returns the
+    /* demRenameFCB owns two checked FCB paths.  It enumerates source matches
+     * and performs DOS ? substitution for the target name.  This fixture uses
+     * an exact source/template pair, while Readonly must reject before host
+     * enumeration or MoveFile. */
+    (void)DeleteFileW(rename_source); (void)DeleteFileW(rename_target);
+    if (!GetTempFileNameW(temporary, L"n64", 0u, rename_source) ||
+        !GetTempFileNameW(temporary, L"n64", 0u, rename_target) ||
+        !DeleteFileW(rename_target) ||
+        WideCharToMultiByte(CP_OEMCP, 0, rename_source, -1, oem_rename_source,
+            (int)sizeof(oem_rename_source), 0, 0) == 0 ||
+        WideCharToMultiByte(CP_OEMCP, 0, rename_target, -1, oem_rename_target,
+            (int)sizeof(oem_rename_target), 0, 0) == 0) goto cleanup;
+    file = CreateFileW(rename_source, GENERIC_WRITE,
+        FILE_SHARE_READ | FILE_SHARE_WRITE, 0, CREATE_ALWAYS,
+        FILE_ATTRIBUTE_TEMPORARY, 0);
+    if (file == INVALID_HANDLE_VALUE || !WriteFile(file, "FR", 2u, &written, 0) ||
+        written != 2u) goto cleanup;
+    CloseHandle(file); file = INVALID_HANDLE_VALUE;
+    memset(ram + 0x700u, 0, 260u); memset(ram + 0x900u, 0, 260u);
+    memcpy(ram + 0x700u, oem_rename_source, strlen(oem_rename_source) + 1u);
+    memcpy(ram + 0x900u, oem_rename_target, strlen(oem_rename_target) + 1u);
+    bytes[3] = 0x20u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.esi = 0x700u; cpu.edi = 0x900u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.cpu_delta.gpr16_write_mask != 0u || result.eflags_values != 0u ||
+          GetFileAttributesW(rename_source) != INVALID_FILE_ATTRIBUTES ||
+          GetFileAttributesW(rename_target) == INVALID_FILE_ATTRIBUTES)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != ERROR_ACCESS_DENIED ||
+          result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          GetFileAttributesW(rename_source) == INVALID_FILE_ATTRIBUTES ||
+          GetFileAttributesW(rename_target) != INVALID_FILE_ATTRIBUTES))) goto cleanup;
+    memset(ram + 0x700u, 0, 260u);
+    memcpy(ram + 0x700u, oem_fcb_path, strlen(oem_fcb_path) + 1u);    /* demCreateFCB follows demfcb.c's CREATE_ALWAYS path and returns the
      * opaque AX:BP handle, BX/CX DOS time/date, and DX:SI size layout.
      * Readonly must refuse before its backend can create/truncate the file. */
     bytes[3] = 0x2cu;
