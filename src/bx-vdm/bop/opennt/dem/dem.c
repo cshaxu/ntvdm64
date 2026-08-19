@@ -1,38 +1,65 @@
-/* OpenNT source mirror: base/mvdm/dos/dem/dem.c. */
+/*
+ *  dem.c - Main Module of DOS Emulation DLL.
+ *
+ *  Sudeepb 09-Apr-1991 Craeted
+ */
 
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
-#include <windows.h>
+/* Direct import from src/opennt/base/mvdm/dos/dem/dem.c.
+ * Divergence: the historical io.h/dem.h closure is unavailable outside the
+ * NTVDM product shell; dem_common_shim.h supplies only its declarations and
+ * exact diagnostic constants. */
+#include "../../shim/dem_common_shim.h"
 
-#include "dem_shared.h"
+/* DemInit - DEM Initialiazation routine. (This name may change when DEM is
+ *           converted to DLL). */
 
-char *pszDefaultDOSDirectory;
-char demDebugBuffer[256];
+PSZ pszDefaultDOSDirectory;
 
-int DemInit(int argc, char *argv[])
+extern VOID TerminateVDM(VOID);
+
+CHAR demDebugBuffer [256];
+
+#if DBG
+BOOL ToDebugOnF11 = FALSE;
+#endif
+
+BOOL DemInit (int argc, char *argv[])
 {
-    char *psz;
+    PSZ psz;
     DWORD dw;
 
-    SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
-    free(pszDefaultDOSDirectory);
-    pszDefaultDOSDirectory = (char *)malloc(MAX_PATH + 14u);
-    if (pszDefaultDOSDirectory == 0 ||
-        (dw = GetSystemDirectoryA(pszDefaultDOSDirectory, MAX_PATH)) == 0u ||
-        dw >= MAX_PATH) return 0;
+    SetErrorMode (SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 
-    /* Divergence: VDMForWOW is a historical global host-composition choice.
-     * A CLI Direct DEM mirror has no implicit WOW short-circuit here. */
-    while (--argc > 0) {
-        psz = *++argv;
-        if (*psz == '-' || *psz == '/') {
-            ++psz;
-            if (tolower((unsigned char)*psz) == 'd') {
-                fShowSVCMsg = 1u;
-                break;
-            }
+    pszDefaultDOSDirectory =  (PCHAR) malloc(MAX_PATH+14);
+    if (!pszDefaultDOSDirectory ||
+        !(dw = GetSystemDirectory(pszDefaultDOSDirectory, MAX_PATH)) ||
+        dw >= MAX_PATH )
+      {
+        return FALSE;
         }
+
+    if (VDMForWOW)
+        return TRUE;
+
+    while (--argc > 0) {
+	psz = *++argv;
+	if (*psz == '-' || *psz == '/') {
+	    psz++;
+	    if(tolower(*psz) == 'd'){
+		fShowSVCMsg = DEMDOSDISP | DEMFILIO;
+		break;
+	    }
+	}
     }
-    return 1;
+
+#if DBG
+#ifndef i386
+    if( getenv( "YODA" ) != 0 )
+#else
+    if( getenv( "DEBUGDOS" ) != 0 )
+#endif
+	ToDebugOnF11 = TRUE;
+#endif
+
+    return TRUE;
 }

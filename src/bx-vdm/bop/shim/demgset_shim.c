@@ -67,7 +67,7 @@ int bx_ntvdm_demgset_register_dta(USHORT ds, USHORT dta_offset,
     g_dta_location = dta_location;
     g_current_pdb = current_pdb;
     memset(&g_extended_error, 0, sizeof(g_extended_error));
-    pulDTALocation = (uintptr_t *)&g_dta_location;
+    pulDTALocation = &g_dta_location;
     pusCurrentPDB = (PSHORT)&g_current_pdb;
     pExtendedError = &g_extended_error;
     return 1;

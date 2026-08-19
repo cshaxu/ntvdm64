@@ -60,7 +60,7 @@ typedef struct _SRCHBUF { UCHAR uchDriveNumber; CHAR FileName[8]; CHAR FileExt[3
 #define IsListEmpty(list_head) ((list_head)->Flink == (list_head))
 #define InsertHeadList(list_head, entry) do { PLIST_ENTRY const bx_next = (list_head)->Flink; (entry)->Flink = bx_next; (entry)->Blink = (list_head); bx_next->Blink = (entry); (list_head)->Flink = (entry); } while (0)
 #define RemoveEntryList(entry) (((entry)->Blink->Flink = (entry)->Flink), ((entry)->Flink->Blink = (entry)->Blink), TRUE)
-extern ULONG *pulDTALocation;
+extern ULONG UNALIGNED *pulDTALocation;
 
 HANDLE FindFirstFileOem(LPSTR name, LPWIN32_FIND_DATAA data);
 BOOL FindNextFileOem(HANDLE find, LPWIN32_FIND_DATAA data);

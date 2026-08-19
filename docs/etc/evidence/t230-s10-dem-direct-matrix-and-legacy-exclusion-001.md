@@ -47,6 +47,16 @@ chosen DEM, its typed bounded-call wrapper invokes the original `DemDispatch`
 table.  The S2 fixture now proves this path for original slot `50:1F`, including
 `CurrentISVC`, checked resume, and the original CF-clear no-op result.
 
+## Common-foundation correction
+
+The active `dem.c`, `demdata.c`, and `demmsg.c` are also now direct OpenNT
+translation-unit mirrors.  Their earlier source-derived forms are retained
+under `bop/reference-v2/`, not linked by the formal module.  The only newly
+admitted seam correction is exact OpenNT DTA state typing:
+`pulDTALocation` is `ULONG UNALIGNED *`, a pointer to a 32-bit guest FAR
+address, rather than an incorrectly widened host-pointer type.  The fresh S6
+fixture compiles and runs with that original state declaration.
+
 ## Deliberate legacy exclusion
 
 The former `bx_ntvdm_dem_cwd_service_v2.c` / `.h` is a source-derived,

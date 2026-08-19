@@ -1,10 +1,23 @@
-/* OpenNT source mirror: base/mvdm/dos/dem/demdata.c. */
+/* demdata.c - All the VDM instance Data.
+ *
+ * Sudeepb 06-Apr-1991 Created
+ */
 
-#include "dem_shared.h"
+/* Direct import from src/opennt/base/mvdm/dos/dem/demdata.c.
+ * Divergence: the historical dem.h closure is represented by the declaration
+ * only dem_common_shim.h; the original state identities and types remain. */
+#include "../../shim/dem_common_shim.h"
 
-/* Divergence: CCPU/SAS guest pointers are not host-dereferenceable in bx-vdm.
- * These preserve the original DEM state identities as opaque typed values. */
-uintptr_t *pulDTALocation;
-uint16_t *pusCurrentPDB;
-void *pSFTHead;
-void *pExtendedError;
+/** VDM's DTA Address **/
+ULONG  UNALIGNED *pulDTALocation;
+
+/** VDM's Current PDB **/
+PUSHORT pusCurrentPDB;
+
+/** SFT Chain Head **/
+PDOSSF pSFTHead = NULL;
+
+//
+// address of extended error information in DOS data segment
+//
+PDEMEXTERR pExtendedError;

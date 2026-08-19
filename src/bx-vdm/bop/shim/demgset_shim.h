@@ -51,7 +51,9 @@ typedef struct _DOSWOWDATA {
 
 #pragma pack(pop)
 
-extern uintptr_t *pulDTALocation;
+/* Exact OpenNT demdata.c type: this points to a 32-bit guest FAR address,
+ * not to a host pointer. */
+extern ULONG UNALIGNED *pulDTALocation;
 typedef bx_ntvdm_demhndl_extended_error *PDEMEXTERR;
 
 UINT GetDriveTypeOem(LPCSTR root);

@@ -34,7 +34,7 @@
 
 > **T230 S1 P3:** [50:00--50:02 Direct parity scope correction](etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md) records the owner decision: v2 is Direct-only OpenNT source parity; it contains no Readonly, Overlay or Virtual behavior, and v1 remains retained.
 
-> **T230 S1 P4:** [DEM common-foundation witness](etc/evidence/t230-s1-p4-dem-common-foundation-witness-001.md) records the `opennt/dem` / neutral-shim layout, `dem.c`/`demdata.c`/`demmsg.c`/`demdisp.c` mirror foundation, 73-entry owner catalog, and zero-exit formal Ninja fixture for the already-migrated `50:00`--`50:02` Direct paths. It is the S1 common foundation, not full `demhndl.c`, `demfile.c`, DEM, or native closure.
+> **T230 S1 P4:** [DEM common-foundation witness](etc/evidence/t230-s1-p4-dem-common-foundation-witness-001.md) records the `opennt/dem` / neutral-shim layout and initial foundation. The active common files and dispatcher have subsequently been replaced by direct OpenNT translation-unit mirrors; see the [S10 correction record](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md). It is not full DEM or native closure.
 
 > **T230 S2:** [direct `demhndl.c` import map](etc/evidence/t230-s2-demhndl-direct-import-map-001.md) records the source baseline, the six adjacent imported-file divergences, the scoped token/guest-memory/typed-result seam, all eight local service invocations and the zero-exit formal Ninja witness. It is local Direct source parity only—not selector routing, Redirector/COMMAND pipe composition, INT 24 composition or native guest proof.
 
