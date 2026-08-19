@@ -2,77 +2,31 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T229 S2 — closed.** S1's complete 73-row source/ABI/failure audit is delivered in [its result](etc/evidence/t229-s1-dem-complete-source-abi-failure-audit-result-001.md). S2's whole-package Direct/Readonly local code completion is recorded in [P24](etc/evidence/t229-s2-p24-dem-whole-package-local-code-completion-001.md). The bounded native observation formerly included in this packet is transferred to the later cross-family integration package; it authorizes no trace-selected DEM repair.
+> **Current effective packet: M0 T230 S1.** T229 demonstrated only a 73-row local route/disposition closure; its retained `deferred` terminals and Virtual implementation do not satisfy the owner's functional-completion requirement. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint, native observation, or retired-virtual cleanup may be handed to a later task as T230 completion.
 
-**Active: M0 T229 S2 -- closed local code-completion record (validator-compatible; authorizes no implementation).**
+**Active: M0 T230 S1 -- OpenNT DEM functional completion correction and retired-Virtual removal.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T229 S2, Ordinary Mode. |
-| Admission And Approval | Owner objective: “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” S1 provides the mandatory 73-row source/ABI/failure map. Owner subsequently approved closing after local code completion and transferring native integration observation to the cross-family integration package. |
-| Objective | Closed: establish every `50:00..48` DEM identity's source-backed Direct and Readonly local provider outcome—original reuse where composable, otherwise the smallest source-derived CLI seam—while preserving original ABI, dispatch order and failure/continuation rule. |
-| Non-goals | Native guest execution; trace-selected BOP work; Bochs CPU/device/firmware semantics; guest-image mutation; Virtual behavior; Overlay behavior beyond ABI-compatible registration/dispatch seams; any claim that a typed route alone is completed semantics. |
-| Reference Baseline | T229 S1 73-row ledger and result; original `demdisp.c`; T225 full-route reconciliation; formal T226/T227 package fixtures; T228 P30 concurrent immutable-handle repair. |
-| Files And ABI Surface | Current `src/bx-vdm/bx_ntvdm_dem_*`, BOP ingress/registry/package session and shared mutation profile; original `src/opennt/base/mvdm/dos/dem/*`; package fixtures/manifests and T229 evidence. No Bochs/OpenNT guest ABI change unless separately admitted. |
+| Identifier Mode | M0 T230 S1, Ordinary Mode. |
+| Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
+| Objective | Establish a complete source-backed Direct and Readonly implementation outcome for every callable `50:00..48` DEM service, remove retired Virtual behavior from the runnable/provider graph, retain only an ABI-compatible deferred Overlay seam, and complete the bounded native DEM observation within T230. |
+| Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, Virtual product mode, or trace-selected single-service scope. No claim that an unavailable/deferred route is completed merely because it has a typed terminal. |
+| Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current Direct/Readonly provider graph; retained Virtual branches/tests; T229 closure transfer correction. |
+| Files And ABI Surface | `src/bx-vdm/bx_ntvdm_dem_*`, shared mutation-profile/host-capability seams, Direct/Readonly fixtures and formal Ninja manifests; original `src/opennt/base/mvdm/dos/dem/*`. Any required `50:47/48` capability is admitted as a bounded DEM-callable dependency, not deferred to another T. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, Direct/Readonly/Overlay profile contract, formal Ninja and documentation governance rules. |
-| Verification | Completed: group-focused Direct/Readonly fixtures; all-73 fixture parameterized for product modes; formal Ninja graph; static route/ledger reconciliation. Deferred: one bounded native integration observation in the later cross-family completion audit, where it may classify integration only and cannot select a leaf repair. |
-| Expected Markers | Delivered: 73 unique identities with a source-proven provider/no-op/unavailable/deferred outcome; Direct performs admitted host operations; Readonly preserves same ABI/ordering and source-derived refusal; Overlay receives no behavior but remains installable as an ABI extension. |
-| Asset Needs | S1 ledger; pinned OpenNT DEM source; current source and manifest; MSVC x64 `/MT` formal Ninja graph; existing package fixtures and declared host namespace test roots. |
-| Reporting Requirements | Delivered: each owner group records original source and non-composable dependency, selected recovery rung, Direct/Readonly ABI/failure result, retained/migrated/replaced/deleted shim and full-regression result. The transfer limitation is recorded in the T229 closure history. |
-| Stop Conditions | Closed. A route that requires a new machine/VDD/WOW/Redirector owner package, a shim that cannot preserve original ABI/failure behavior, a host capability that modifies the system merely to install the product, a new Bochs intrusion, or trace-selected leaf work belongs to a separately admitted package. |
-| Exit Criteria | Met under owner-approved scope split: all 73 callable DEM services have a complete source-backed Direct/Readonly local behavior or original source-proven unavailable/no-op/deferred outcome, and all-group/all-73 local regressions pass. The one post-package native observation is intentionally transferred to the later cross-family integration package and is not a T229 closure condition. |
-| Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” |
-| Similar-Issue Sweep | All seven S1 owner groups, existing exact-window adapter bypasses, shared profile consumers, retained Virtual code, Overlay registration, no-op/invalid-service CF behavior, current host namespace and source-built package fixtures. |
-> **T229 S2 P1:** [whole-provider Direct/Readonly conformance evidence](etc/evidence/t229-s2-p1-dem-whole-provider-direct-readonly-conformance-001.md) verifies source-derived FCB and namespace paths without claiming whole-package completion.
+| Verification | S1 creates a complete actual-behavior and Virtual-removal map; later S packets implement by owner group, run Direct/Readonly semantic regressions for all 73, verify rejected Overlay behavior, prove no runnable Virtual selection/path, and run one bounded native observation before T230 closes. |
+| Expected Markers | Each callable identity has an executable source-backed Direct result and a source-backed Readonly result, including source-correct failure where the selected host capability genuinely cannot provide the operation; no `deferred`, generic pass-through, or unimplemented terminal remains. Overlay is rejected/deferred at the public selection boundary but its typed ABI seam remains. Virtual enum/selection/provider/backend/test membership is removed or isolated outside the runnable graph with a recorded justification. |
+| Asset Needs | Pinned OpenNT DEM source; T229 ledger/evidence; formal MSVC x64 `/MT` Ninja graph; declared host namespace roots; retained Virtual source/test membership; bounded native observation fixture. |
+| Reporting Requirements | For each identity record original source, recovery rung, Direct/Readonly behavior, selected host-capability dependency, exact failure contract, Virtual disposition and regression. Record the bounded native observation in T230, whether it passes or exposes a separate owner boundary. |
+| Stop Conditions | A requirement needs a new Bochs intrusion, guest-image mutation, host modification merely to install the product, or cannot retain source ABI/failure semantics. Such a fact pauses implementation for owner decision; it does not silently become a deferred T230 endpoint or transfer item. |
+| Exit Criteria | All 73 callable DEM services have source-backed executable Direct/Readonly behavior or a source-correct operational failure after the actual selected capability is attempted; no callable DEM row remains deferred/unavailable as a completion substitute; Overlay is ABI-preserved but not enabled; retired Virtual behavior is absent from the runnable/provider graph; all formal local regressions pass; and one bounded native DEM observation is recorded in T230 without creating a hidden transfer backlog. |
+| Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” plus “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” |
+| Similar-Issue Sweep | All 73 `demdisp.c` identities; current source-derived terminals; `50:47/48` pipe routes; shared mutation profile consumers; CLI mode parsing; Virtual enum, backend, token, provider, build-manifest and fixture membership; Overlay selection rejection; whole-provider/all-73/native observation paths. |
 
-> **T229 S2 P2:** [handle mutation Readonly enforcement evidence](etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md) records source-backed pre-host rejection for `50:08` set-time and `50:1E` write/truncate.
-
-> **T229 S2 P10:** [demRead Direct/Readonly conformance evidence](etc/evidence/t229-s2-p10-dem-read-direct-readonly-001.md) records checked guest output and shared read admission.
-
-> **T229 S2 P11:** [demCommit Direct/Readonly conformance evidence](etc/evidence/t229-s2-p11-dem-commit-direct-readonly-001.md) records OpenNT release-build CF-clear commit behavior in both profiles.
-
-> **T229 S2 P12:** [DEM handle cursor/EOF Direct/Readonly conformance evidence](etc/evidence/t229-s2-p12-dem-handle-cursor-eof-direct-readonly-001.md) records source-shaped 50:00 seek, invalid-token and ZF-controlled 50:16 EOF behavior.
-
-> **T229 S2 P13:** [demCreateFCB Direct/Readonly conformance evidence](etc/evidence/t229-s2-p13-dem-create-fcb-direct-readonly-001.md) records the source-shaped FCB result ABI and shared pre-host Readonly refusal.
-
-> **T229 S2 P18:** [DEM GSET/drive/CWD/volume whole-group conformance evidence](etc/evidence/t229-s2-p18-dem-gset-drive-cwd-volume-whole-group-001.md) records all fifteen source-owner endpoints through one Direct/Readonly formal session regression.
-
-> **T229 S2 P19:** [DEM misc subcontract separation evidence](etc/evidence/t229-s2-p19-dem-misc-subcontract-separation-001.md) corrects the former generic-no-op claim and isolates the outstanding 50:23 COMMAND/media composition prerequisite.
-
-> **T229 S2 P20:** [DEM original-noop owner-group evidence](etc/evidence/t229-s2-p20-dem-original-noop-owner-group-001.md) records all seven demNotYetImplemented identities as source-shaped CF-clear resumes in Direct and Readonly.
-
-> **T229 S2 P21:** [DEM DASD/IOCTL owner-group evidence](etc/evidence/t229-s2-p21-dem-dasd-ioctl-owner-group-001.md) closes Direct/Readonly metadata plus original no-device failure behavior without admitting raw host media.
-
-> **T229 S2 P22:** [DEM error/lock owner-group evidence](etc/evidence/t229-s2-p22-dem-error-lock-owner-group-001.md) closes locator registration, no-retry and no-handle source terminals in Direct and Readonly.
-
-> **T229 S2 P23:** [DEM disk-reset COMMAND-composition evidence](etc/evidence/t229-s2-p23-dem-disk-reset-command-composition-001.md) closes the original pFDAccess guest-word clear without pretending that unadmitted raw-media resets exist.
-
-> **T229 S2 P24:** [DEM whole-package local code-completion evidence](etc/evidence/t229-s2-p24-dem-whole-package-local-code-completion-001.md) records source-corrected 50:01/50:31 and 50:3C assertions, all owner fixtures, and all-73 Direct/Readonly local regressions.
-
-> **T229 S2 P17:** [DEM GSET clock-mutation Direct/Readonly conformance evidence](etc/evidence/t229-s2-p17-dem-gset-clock-mutation-direct-readonly-001.md) records source-shaped `SetLocalTime` Direct behavior and the pre-Win32 Readonly refusal.
-
-> **T229 S2 P16:** [DEM clock/path Direct/Readonly conformance evidence](etc/evidence/t229-s2-p16-dem-clock-path-direct-readonly-001.md) records the original date/time register ABI and `demCheckPath` device-directory terminal.
-
-> **T229 S2 P15:** [DEM pathname search Direct/Readonly conformance evidence](etc/evidence/t229-s2-p15-dem-path-search-direct-readonly-001.md) records source-shaped DTA FindFirst/FindNext continuation and the `AX=18`, CF no-match terminal.
-
-> **T229 S2 P14:** [demRenameFCB Direct/Readonly conformance evidence](etc/evidence/t229-s2-p14-dem-rename-fcb-direct-readonly-001.md) records the source-shaped two-path FCB rename and pre-enumeration Readonly refusal.
-
-> **T229 S2 P9:** [demChMod Direct/Readonly conformance evidence](etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md) records the source-derived CX result-ABI repair and metadata policy split.
-
-> **T229 S2 P8:** [demRename Direct/Readonly conformance evidence](etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md) records `50:17` two-path mutation/refusal behavior without claiming error-matrix closure.
-
-> **T229 S2 P7:** [demDelete Direct/Readonly conformance evidence](etc/evidence/t229-s2-p7-dem-delete-direct-readonly-001.md) closes `50:05` ordinary deletion/refusal without claiming all error variants.
-
-> **T229 S2 P6:** [demCreateNew Direct/Readonly conformance evidence](etc/evidence/t229-s2-p6-dem-create-new-direct-readonly-001.md) records the original host-error collision contract and pre-host Readonly refusal.
-
-> **T229 S2 P5:** [demCreate Direct/Readonly conformance evidence](etc/evidence/t229-s2-p5-dem-create-direct-readonly-001.md) closes the source-shaped whole-provider `50:03` success/refusal contract, not `50:22` or the full package.
-
-> **T229 S2 P4:** [OpenNT open/create result-ABI correction evidence](etc/evidence/t229-s2-p4-dem-open-create-result-abi-correction-001.md) records the shared `AX:BP`, `BX:CX`, and `DX` repair without claiming the open/create package closed.
-
-> **T229 S2 group ledger:** [file/handle/FCB/search conformance ledger](etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md) is the 29-row semantic checklist; route reachability alone does not close a row.
-
+> **T230 S1 plan:** [DEM functional-completion admission plan](etc/operations/m0-t230-s1-dem-functional-completion-admission-plan-001.md) replaces T229's route/disposition criterion with actual functional and retired-Virtual closure criteria.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
