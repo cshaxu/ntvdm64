@@ -1,5 +1,6 @@
 #include "bx_ntvdm_dem_handle_partition_v1.h"
-#include "bop/demhndl.h"
+#include "../bop/opennt/dem/demhndl.h"
+#include "bx_ntvdm_dem_direct_context_legacy_v1.h"
 
 #define DEM_ERROR_INVALID_FUNCTION 1u
 #define DEM_ERROR_ACCESS_DENIED 5u
@@ -60,8 +61,11 @@ int bx_ntvdm_dem_handle_partition_v1_dispatch(
         !bx_ntvdm_exception_event_v1_valid(boundary) ||
         !bx_ntvdm_cpu_state_v1_valid(cpu) || boundary->fault_rip > UINT64_MAX - 4u ||
         cpu->execution_mode != BX_NTVDM_CPU_EXECUTION_REAL) return 0;
-    if (service == 0x02u)
-        return bx_ntvdm_bop_dem_close_v2(provider, boundary, cpu, result);
+    if (service == 0x02u) {
+        bx_ntvdm_dem_direct_context context;
+        return bx_ntvdm_dem_direct_context_legacy_v1_make(provider, &context) &&
+            bx_ntvdm_bop_dem_close_v2(&context, boundary, cpu, result);
+    }
     /* demFileTimes deliberately does not consume AX:BP for its device-time
      * case.  Keep that historical distinction before resolving a local
      * opaque token. */
@@ -81,8 +85,11 @@ int bx_ntvdm_dem_handle_partition_v1_dispatch(
     }
     if (!local_handle(provider, cpu, &handle))
         return error_result(boundary, result, DEM_ERROR_INVALID_HANDLE);
-    if (service == 0x00u)
-        return bx_ntvdm_bop_dem_chg_file_ptr_v2(provider, boundary, cpu, result);
+    if (service == 0x00u) {
+        bx_ntvdm_dem_direct_context context;
+        return bx_ntvdm_dem_direct_context_legacy_v1_make(provider, &context) &&
+            bx_ntvdm_bop_dem_chg_file_ptr_v2(&context, boundary, cpu, result);
+    }
     if (service == 0x27u) { (void)FlushFileBuffers(handle); return finish(boundary, result, 0u, 0, 0); }
     if (service == 0x08u) {
         uint8_t option = (uint8_t)(cpu->ebx & 0xffu);

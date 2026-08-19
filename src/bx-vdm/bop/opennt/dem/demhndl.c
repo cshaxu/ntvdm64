@@ -78,7 +78,7 @@ static int setCF_clear_for_close(const bx_ntvdm_exception_event_v1 *boundary,
  * Exit: CF clear on success; CF set and AX status on failure.
  */
 int bx_ntvdm_bop_dem_close_v2(
-    bx_ntvdm_dem_whole_provider_v1 *provider,
+    bx_ntvdm_dem_direct_context *context,
     const bx_ntvdm_exception_event_v1 *boundary,
     const bx_ntvdm_cpu_state_v1 *cpu,
     bx_ntvdm_cpu_result_v2 *result)
@@ -87,9 +87,10 @@ int bx_ntvdm_bop_dem_close_v2(
     LONG lLoc;
     USHORT usDX, usCX;
     uint32_t handle_token;
+    DWORD release_error;
 
-    if (provider == 0 || boundary == 0 || cpu == 0 || result == 0 ||
-        !bx_ntvdm_dem_whole_provider_v1_valid(provider) ||
+    if (context == 0 || boundary == 0 || cpu == 0 || result == 0 ||
+        !bx_ntvdm_dem_direct_context_valid(context) ||
         !bx_ntvdm_exception_event_v1_valid(boundary) ||
         !bx_ntvdm_cpu_state_v1_valid(cpu) ||
         cpu->execution_mode != BX_NTVDM_CPU_EXECUTION_REAL ||
@@ -101,7 +102,7 @@ int bx_ntvdm_bop_dem_close_v2(
     if (handle_token == 0u) {
         return setCF_clear_for_close(boundary, result);
     }
-    if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files, handle_token,
+    if (!context->lookup_handle(context->state, handle_token,
             &hFile)) {
         return demCloseClientError(boundary, result, DEM_ERROR_INVALID_HANDLE);
     }
@@ -121,8 +122,8 @@ int bx_ntvdm_bop_dem_close_v2(
     /* Original: CloseHandle(hFile).  Divergence: session release owns both
      * CloseHandle and opaque-token retirement, preventing stale 64-bit host
      * handle reuse by a guest on either x86 or x64 host builds. */
-    if (!bx_ntvdm_dem_file_session_v1_release(&provider->files, handle_token)) {
-        return demCloseClientError(boundary, result, GetLastError());
+    if (!context->release_handle(context->state, handle_token, &release_error)) {
+        return demCloseClientError(boundary, result, release_error);
     }
 
     /* The original conditionally calls VrRemoveOpenNamedPipeInfo when the
@@ -136,7 +137,7 @@ int bx_ntvdm_bop_dem_close_v2(
  * OpenNT source mirror: demhndl.c lines 342--389.
  */
 int bx_ntvdm_bop_dem_chg_file_ptr_v2(
-    bx_ntvdm_dem_whole_provider_v1 *provider,
+    bx_ntvdm_dem_direct_context *context,
     const bx_ntvdm_exception_event_v1 *boundary,
     const bx_ntvdm_cpu_state_v1 *cpu,
     bx_ntvdm_cpu_result_v2 *result)
@@ -149,8 +150,8 @@ int bx_ntvdm_bop_dem_chg_file_ptr_v2(
 #error "Win32 values not DOS compatible"
 #endif
 
-    if (provider == 0 || boundary == 0 || cpu == 0 || result == 0 ||
-        !bx_ntvdm_dem_whole_provider_v1_valid(provider) ||
+    if (context == 0 || boundary == 0 || cpu == 0 || result == 0 ||
+        !bx_ntvdm_dem_direct_context_valid(context) ||
         !bx_ntvdm_exception_event_v1_valid(boundary) ||
         !bx_ntvdm_cpu_state_v1_valid(cpu) ||
         cpu->execution_mode != BX_NTVDM_CPU_EXECUTION_REAL ||
@@ -158,7 +159,7 @@ int bx_ntvdm_bop_dem_chg_file_ptr_v2(
         return 0;
 
     /* Original: hFile = GETHANDLE(getAX(), getBP()). */
-    if (!bx_ntvdm_dem_file_session_v1_lookup(&provider->files,
+    if (!context->lookup_handle(context->state,
             GETHANDLE_TOKEN(cpu), &hFile)) {
         return demClientError(boundary, result, DEM_ERROR_INVALID_HANDLE);
     }

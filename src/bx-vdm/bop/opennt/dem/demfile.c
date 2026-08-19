@@ -43,7 +43,7 @@ static int demClientError(const bx_ntvdm_exception_event_v1 *boundary,
  * OpenNT source mirror: demfile.c lines 437--506.
  */
 int bx_ntvdm_bop_dem_ch_mod_v2(
-    bx_ntvdm_dem_whole_provider_v1 *provider,
+    bx_ntvdm_dem_direct_context *context,
     const bx_ntvdm_exception_event_v1 *boundary,
     const bx_ntvdm_cpu_state_v1 *cpu,
     uint8_t drive,
@@ -54,8 +54,8 @@ int bx_ntvdm_bop_dem_ch_mod_v2(
     DWORD dwAttr;
     DWORD error = 0u;
 
-    if (provider == 0 || boundary == 0 || cpu == 0 || relative_path == 0 ||
-        result == 0 || !bx_ntvdm_dem_whole_provider_v1_valid(provider) ||
+    if (context == 0 || boundary == 0 || cpu == 0 || relative_path == 0 ||
+        result == 0 || !bx_ntvdm_dem_direct_context_valid(context) ||
         !bx_ntvdm_exception_event_v1_valid(boundary) ||
         !bx_ntvdm_cpu_state_v1_valid(cpu) ||
         cpu->execution_mode != BX_NTVDM_CPU_EXECUTION_REAL ||
@@ -73,8 +73,7 @@ int bx_ntvdm_bop_dem_ch_mod_v2(
         /* Original: dwAttr = GetFileAttributesOem(lpFileName).
          * Divergence: use the admitted CLI host-namespace capability, whose
          * drive policy and UTF-16 conversion are outside OpenNT's OEM helper. */
-        if (!bx_ntvdm_host_namespace_v1_query_file_attributes(
-                provider->host_namespace, drive, lpFileName, &dwAttr, &error)) {
+        if (!context->query_attributes(context->state, drive, lpFileName, &dwAttr, &error)) {
             goto dcerr;
         }
 
@@ -98,8 +97,7 @@ int bx_ntvdm_bop_dem_ch_mod_v2(
 
     /* Original: if (!SetFileAttributesOem(lpFileName, dwAttr)) goto dcerr.
      * The capability call is the x86/x64-safe host integration substitute. */
-    if (!bx_ntvdm_host_namespace_v1_set_file_attributes(provider->host_namespace,
-            drive, lpFileName, dwAttr, &error)) {
+    if (!context->set_attributes(context->state, drive, lpFileName, dwAttr, &error)) {
         goto dcerr;
     }
 

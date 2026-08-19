@@ -1,5 +1,6 @@
 #include "bx_ntvdm_dem_namespace_partition_v1.h"
-#include "bop/demfile.h"
+#include "../bop/opennt/dem/demfile.h"
+#include "bx_ntvdm_dem_direct_context_legacy_v1.h"
 #include "bx_ntvdm_dem_namespace_identity_observation_v1.h"
 #include "bx_ntvdm_dem_overlay_namespace_backend_v1.h"
 #include "bx_ntvdm_dem_overlay_mutation_backend_v1.h"
@@ -192,8 +193,12 @@ int bx_ntvdm_dem_namespace_partition_v1_dispatch(
          * migrated; never let them fall through to host metadata mutation. */
         if (provider->file_view.kind != BX_NTVDM_DEM_FILE_VIEW_V1_DIRECT)
             return fail(boundary, result, DEM_ERROR_ACCESS_DENIED);
-        return bx_ntvdm_bop_dem_ch_mod_v2(provider, boundary, cpu, drive,
-            relative, result);
+        {
+            bx_ntvdm_dem_direct_context context;
+            return bx_ntvdm_dem_direct_context_legacy_v1_make(provider, &context) &&
+                bx_ntvdm_bop_dem_ch_mod_v2(&context, boundary, cpu, drive,
+                    relative, result);
+        }
     }
     if (service == 0x03u || service == 0x22u || service == 0x12u) {
         uint32_t access = BX_NTVDM_DEM_LOCAL_FILE_ACCESS_V1_READ |

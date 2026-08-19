@@ -4,7 +4,7 @@
 
 > **Current effective packet: M0 T230 S1.** T229 demonstrated only a 73-row local route/disposition closure; its retained `deferred` terminals and Virtual implementation do not satisfy the owner's functional-completion requirement. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint, native observation, or retired-virtual cleanup may be handed to a later task as T230 completion.
 
-**Active: M0 T230 S1 -- OpenNT DEM functional completion correction and retired-Virtual removal.**
+**Active: M0 T230 S1 -- OpenNT DEM parallel-mirror foundation and source-file-package plan.**
 
 ## Active Packet
 
@@ -12,27 +12,29 @@
 | --- | --- |
 | Identifier Mode | M0 T230 S1, Ordinary Mode. |
 | Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
-| Objective | Establish a complete source-backed Direct and Readonly implementation outcome for every callable `50:00..48` DEM service, remove retired Virtual behavior from the runnable/provider graph, retain only an ABI-compatible deferred Overlay seam, and complete the bounded native DEM observation within T230. |
-| Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, Virtual product mode, or trace-selected single-service scope. No claim that an unavailable/deferred route is completed merely because it has a typed terminal. |
+| Objective | Establish a complete Direct-only, source-shaped OpenNT DEM mirror for every callable `50:00..48` service beneath `src/bx-vdm/bop/opennt/dem/`, with required neutral ABI/host-composition seams beneath `src/bx-vdm/bop/shim/`. Organize and accept work by original DEM source-file package. |
+| Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected single-service scope, or new v2 Readonly/Overlay/Virtual behavior. Legacy v1 implementations remain isolated during staged migration; they are not v2 completion evidence. |
 | Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current Direct/Readonly provider graph; retained Virtual branches/tests; T229 closure transfer correction. |
 | Files And ABI Surface | `src/bx-vdm/bx_ntvdm_dem_*`, shared mutation-profile/host-capability seams, Direct/Readonly fixtures and formal Ninja manifests; original `src/opennt/base/mvdm/dos/dem/*`. Any required `50:47/48` capability is admitted as a bounded DEM-callable dependency, not deferred to another T. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, Direct/Readonly/Overlay profile contract, formal Ninja and documentation governance rules. |
-| Verification | S1 creates a complete actual-behavior and Virtual-removal map; later S packets implement by owner group, run Direct/Readonly semantic regressions for all 73, verify rejected Overlay behavior, prove no runnable Virtual selection/path, and run one bounded native observation before T230 closes. |
+| Verification | Implement and test by the ordered original-file S packages in the parallel-mirror plan. Each package source-builds and has focused Direct tests for all owned services; S10 reconciles all 73 identities and performs one bounded native integration observation. |
 | Expected Markers | Each callable identity has an executable source-backed Direct result and a source-backed Readonly result, including source-correct failure where the selected host capability genuinely cannot provide the operation; no `deferred`, generic pass-through, or unimplemented terminal remains. Overlay is rejected/deferred at the public selection boundary but its typed ABI seam remains. Virtual enum/selection/provider/backend/test membership is removed or isolated outside the runnable graph with a recorded justification. |
 | Asset Needs | Pinned OpenNT DEM source; T229 ledger/evidence; formal MSVC x64 `/MT` Ninja graph; declared host namespace roots; retained Virtual source/test membership; bounded native observation fixture. |
 | Reporting Requirements | For each identity record original source, recovery rung, Direct/Readonly behavior, selected host-capability dependency, exact failure contract, Virtual disposition and regression. Record the bounded native observation in T230, whether it passes or exposes a separate owner boundary. |
 | Stop Conditions | A requirement needs a new Bochs intrusion, guest-image mutation, host modification merely to install the product, or cannot retain source ABI/failure semantics. Such a fact pauses implementation for owner decision; it does not silently become a deferred T230 endpoint or transfer item. |
-| Exit Criteria | All 73 callable DEM services have source-backed executable Direct/Readonly behavior or a source-correct operational failure after the actual selected capability is attempted; no callable DEM row remains deferred/unavailable as a completion substitute; Overlay is ABI-preserved but not enabled; retired Virtual behavior is absent from the runnable/provider graph; all formal local regressions pass; and one bounded native DEM observation is recorded in T230 without creating a hidden transfer backlog. |
+| Exit Criteria | All 73 callable DEM services are owned by source-shaped v2 mirror files under `src/bx-vdm/bop/opennt/dem/`; required neutral seams are under `src/bx-vdm/bop/shim/`; their Direct routes and focused package tests source-build; all divergences are recorded; v1 is no longer on a migrated v2 route; formal Ninja and the bounded native observation are recorded without a hidden transfer backlog. |
 | Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。实现direct和readonly访问模式，并为overlay留好接口。” plus “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” |
 | Similar-Issue Sweep | All 73 `demdisp.c` identities; current source-derived terminals; `50:47/48` pipe routes; shared mutation profile consumers; CLI mode parsing; Virtual enum, backend, token, provider, build-manifest and fixture membership; Overlay selection rejection; whole-provider/all-73/native observation paths. |
 
-> **T230 S1 plan:** [DEM functional-completion admission plan](etc/operations/m0-t230-s1-dem-functional-completion-admission-plan-001.md) replaces T229's route/disposition criterion with actual functional and retired-Virtual closure criteria.
+> **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 
 > **T230 S1 P1:** [203-entry Chinese BOP implementation tracker](etc/operations/opennt-bop-implementation-tracker-001.md) records instruction entry, original handler, high-level purpose, actual strict status and Direct/Readonly/Overlay disposition; it establishes zero fully complete entries at this baseline.
 
 > **T230 S1 P2:** [50:00 OpenNT-shaped v2 provider evidence](etc/evidence/t230-s1-bop-50-00-opennt-shaped-v2-provider-evidence-001.md) records the smallest source-derived seam, all divergences and focused Direct/Readonly regression. It is an implementation practice, not DEM, native or T230 closure.
 
 > **T230 S1 P3:** [50:00--50:02 Direct parity scope correction](etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md) records the owner decision: v2 is Direct-only OpenNT source parity; it contains no Readonly, Overlay or Virtual behavior, and v1 remains retained.
+
+> **T230 S1 P4:** [DEM common-foundation witness](etc/evidence/t230-s1-p4-dem-common-foundation-witness-001.md) records the `opennt/dem` / neutral-shim layout, `dem.c`/`demdata.c`/`demmsg.c`/`demdisp.c` mirror foundation, 73-entry owner catalog, and zero-exit formal Ninja fixture for the already-migrated `50:00`--`50:02` Direct paths. It is the S1 common foundation, not full `demhndl.c`, `demfile.c`, DEM, or native closure.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
