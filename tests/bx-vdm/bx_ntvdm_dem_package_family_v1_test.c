@@ -409,16 +409,17 @@ static int whole_provider_pdb_lifecycle_regression(void)
     bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 result;
     bx_ntvdm_dem_dta_registration_v1 dta = { 0x800u, 0x810u, 0x820u, 0x830u };
-    wchar_t temporary[MAX_PATH], path[MAX_PATH], fcb_path[MAX_PATH];
-    char oem_fcb_path[128], readback[3];
+    wchar_t temporary[MAX_PATH], path[MAX_PATH], fcb_path[MAX_PATH], create_path[MAX_PATH];
+    char oem_fcb_path[128], oem_create_path[128], readback[3];
     HANDLE file = INVALID_HANDLE_VALUE, looked_up = INVALID_HANDLE_VALUE;
     DWORD written = 0u;
-    uint32_t token = 0u, open_token = 0u;
+    uint32_t token = 0u, open_token = 0u, create_token = 0u;
     int status = 1;
 
     memset(&session, 0, sizeof(session));
     memset(&host_namespace, 0, sizeof(host_namespace));
     memset(fcb_path, 0, sizeof(fcb_path));
+    memset(create_path, 0, sizeof(create_path));
     profile_initialize(&profile);
     /* The same installed whole provider must preserve token lifecycle in both
      * Direct and Readonly modes.  This path only adopts, seeks and closes a
@@ -606,6 +607,56 @@ static int whole_provider_pdb_lifecycle_regression(void)
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         result.eflags_write_mask != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
         result.eflags_values != 0u) goto cleanup;
+    /* demCreate follows demCreateCommon: it owns the same checked pathname
+     * and PDB transaction, returns AX:BP plus zero BX:CX for a new file, and
+     * has no DX pipe result.  Readonly must fail before CreateFile. */
+    if (!GetTempFileNameW(temporary, L"n64", 0u, create_path) ||
+        !DeleteFileW(create_path) || WideCharToMultiByte(CP_OEMCP, 0,
+            create_path, -1, oem_create_path, (int)sizeof(oem_create_path),
+            0, 0) == 0) goto cleanup;
+    memset(ram + 0x700u, 0, 260u);
+    memcpy(ram + 0x700u, oem_create_path, strlen(oem_create_path) + 1u);
+    bytes[3] = 0x03u;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.ecx = 0u; cpu.esi = 0x700u;
+    bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+    if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+        !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+        !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+            &selection, &event, &cpu, &window, &result) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.resume_rip != 0x104u ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT &&
+         (result.cpu_delta.gpr16_write_mask !=
+             ((UINT32_C(1) << 0u) | (UINT32_C(1) << 1u) |
+              (UINT32_C(1) << 3u) | (UINT32_C(1) << 5u)) ||
+          result.cpu_delta.gpr16_values[1u] != 0u ||
+          result.cpu_delta.gpr16_values[3u] != 0u ||
+          result.eflags_values != 0u ||
+          GetFileAttributesW(create_path) == INVALID_FILE_ATTRIBUTES)) ||
+        (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_READONLY &&
+         (result.cpu_delta.gpr16_write_mask != (UINT32_C(1) << 0u) ||
+          result.cpu_delta.gpr16_values[0u] != 5u ||
+          result.eflags_values != BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF ||
+          GetFileAttributesW(create_path) != INVALID_FILE_ATTRIBUTES))) goto cleanup;
+    if (dispatch_mode == BX_NTVDM_MUTATION_MODE_V1_DIRECT) {
+        create_token = ((uint32_t)result.cpu_delta.gpr16_values[0u] << 16u) |
+            result.cpu_delta.gpr16_values[5u];
+        if (create_token == 0u) goto cleanup;
+        bytes[3] = 0x02u;
+        bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+        cpu.eax = create_token >> 16u; cpu.ebp = create_token & 0xffffu;
+        bx_ntvdm_instruction_window_v1_capture(&window, bytes, sizeof(bytes));
+        if (!bx_ntvdm_bop_ingress_v1_classify(&window, &ingress) ||
+            !bx_ntvdm_bop_provider_registry_v1_select(&ingress, &selection) ||
+            !bx_ntvdm_dem_package_session_v1_dispatch(&session, &ingress,
+                &selection, &event, &cpu, &window, &result) ||
+            result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+            result.eflags_values != 0u) goto cleanup;
+    }
+    /* Restore the independent FCB pathname used by later package checks. */
+    memset(ram + 0x700u, 0, 260u);
+    memcpy(ram + 0x700u, oem_fcb_path, strlen(oem_fcb_path) + 1u);
     /* demFileTimes option 1 mutates metadata.  Direct changes only the
      * fixture-owned file; Readonly is rejected by the shared profile before
      * SetFileTime can touch a host HANDLE. */
@@ -761,6 +812,7 @@ cleanup:
     if (file != INVALID_HANDLE_VALUE) { CloseHandle(file); DeleteFileW(path); }
     bx_ntvdm_dem_package_session_v1_teardown(&session);
     if (fcb_path[0] != L'\0') DeleteFileW(fcb_path);
+    if (create_path[0] != L'\0') DeleteFileW(create_path);
     bx_ntvdm_host_namespace_v1_release(&host_namespace);
     return status;
 }

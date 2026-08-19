@@ -20,7 +20,7 @@ ledger: a typed route is not counted as semantic completion.
 | `50:00` | `demChgFilePtr` | P — opaque handle seek lifecycle | add nonzero/origin/error matrix |
 | `50:01` | `demChMod` | R | query/set metadata Direct/Readonly |
 | `50:02` | `demClose` | P — opaque token release | final-location and null-token variants |
-| `50:03` | `demCreate` | R | create + owner/PDB ABI |
+| `50:03` | `demCreate` | P — whole-provider create + owner/PDB ABI | attribute/error variants |
 | `50:04` | `demCreateDir` | P — Direct create, Readonly refusal | source error variants |
 | `50:05` | `demDelete` | R | Direct delete, Readonly refusal |
 | `50:06` | `demDeleteDir` | P — Direct remove | source error variants |
@@ -54,6 +54,7 @@ ledger: a typed route is not counted as semantic completion.
 - P2: `demFileTimes` metadata and `demWrite` owner-level Readonly gates.
 - P3: `demDeleteFCB` wildcard mutation.
 - P4: `demOpen` whole-provider PDB/path transaction and `AX:BP`, `BX:CX`, `DX` success ABI.
+- P5: `demCreate` Direct creation/close and pre-host Readonly refusal.
 
 ## Completion rule
 

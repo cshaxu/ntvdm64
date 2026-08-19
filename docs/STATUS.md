@@ -29,6 +29,8 @@
 
 > **T229 S2 P2:** [handle mutation Readonly enforcement evidence](etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md) records source-backed pre-host rejection for `50:08` set-time and `50:1E` write/truncate.
 
+> **T229 S2 P5:** [demCreate Direct/Readonly conformance evidence](etc/evidence/t229-s2-p5-dem-create-direct-readonly-001.md) closes the source-shaped whole-provider `50:03` success/refusal contract, not `50:22` or the full package.
+
 > **T229 S2 P4:** [OpenNT open/create result-ABI correction evidence](etc/evidence/t229-s2-p4-dem-open-create-result-abi-correction-001.md) records the shared `AX:BP`, `BX:CX`, and `DX` repair without claiming the open/create package closed.
 
 > **T229 S2 group ledger:** [file/handle/FCB/search conformance ledger](etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md) is the 29-row semantic checklist; route reachability alone does not close a row.
