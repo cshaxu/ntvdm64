@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1993 |
 | --- | --- |
-| Generated UTC | 2026-08-20T18:37:19Z |
+| Generated UTC | 2026-08-20T18:40:02Z |
 
 ## Entries
 
@@ -240,7 +240,7 @@ content-divergent entries.
 | etc/evidence/t231-s9-command-exit-direct-001.md | indexed supporting material | 5f6c729ee32a95c70b31684c0c18fed79b27ac2e9bbbfb88d58a26f666ceedfc |
 | etc/evidence/t232-s1-host-handle-manager-foundation-result-001.md | indexed supporting material | 6c049e8c8b0aa1293cb5205d0f73f3a2327e7574e5ac5192865608e2116aa97d |
 | etc/evidence/t232-s2-dem-unified-handle-migration-result-001.md | indexed supporting material | f2aa298b7528038b5f4d0033843fc7f6979abf9821d72e0cedd7b4928bad2281 |
-| etc/evidence/t232-s3-command-unified-handle-migration-result-001.md | indexed supporting material | 004730f026d989ac94c3ecf61888143d0e0fbe4da2e370ef29eb72f8dfa4c852 |
+| etc/evidence/t232-s3-command-unified-handle-migration-result-001.md | indexed supporting material | 559d40c8784be041a0f57b07b3baa6ccfc3aed68ace4098dd1b3589e4cdbaf12 |
 | etc/evidence/t232-s4-non-v1-handle-cleanup-result-001.md | indexed supporting material | 4288975a2f79ad341f12710b514bab07e5a3df285f307fa271a3c7995e79fff9 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
@@ -310,7 +310,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 14c6bcb7cc6cf7b834a359df81e103462dfb95a1bf9673f5db3f5838ed05d347 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | e5be3a4e06615e27edfa71f1bfaa31c855158f6b98af56ffe267d5cd0013f72d |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -1724,7 +1724,7 @@ content-divergent entries.
 | history/m0-t229-closure-20260818.md | closed task history | 7d5592aea813d523145bb856242c1293c9adbd3d4cb036b9103e942fe8694108 |
 | history/m0-t230-closure-20260819.md | closed task history | b80da12e878aa96cf4bc223b5890ca64c2cc9c4fcd84c975ab4fd09bb558d2f5 |
 | history/m0-t231-closure-20260820.md | closed task history | d668191b18085be3f7eaddd8e242a24d097fb5a063b647d062d334b1bee24b98 |
-| history/m0-t232-closure-20260820.md | closed task history | 7141de5a337f602ab605c1493d1319898e9f6d73f9b9a6166bcef75570f9f13c |
+| history/m0-t232-closure-20260820.md | closed task history | 618bdf57d94e76d6447fc68d875d74a29c9ae50469000fcf937007d4885ad623 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

@@ -28,6 +28,55 @@ crosswalk and negative scope are recorded in
 [`t197-s4-core-path-migration-001.md`](t197-s4-core-path-migration-001.md).
 Every new exception must name its current path, not the historical prefix.
 
+## Adapter ABI Divergences (Not External Intrusions)
+
+These rows record deliberate, source-derived ABI substitutions inside
+`src/bx-vdm`. They are not patches to adopted Bochs or OpenNT source and do
+not authorize such patches. They are retained here because they change an
+original OpenNT host-composition assumption and must remain as auditable as an
+external intrusion.
+
+### BX-VDM-001: Native-Width Host-Handle Representation
+
+**Owner approval.** On 2026-08-20 the owner confirmed that the unified
+host-handle manager is definitely unlike the historical OpenNT implementation
+and must be recorded as an explicit exception.
+
+**Need.** Original NT4 DEM and COMMAND composition assumes a 32-bit host
+`HANDLE` can cross guest-facing register pairs (`AX:BP` or `BX:CX`). That
+assumption is not safe for a modern x64 host, and preserving raw host values
+would also make the product's x86/x64 ABI behavior depend on host pointer
+width. Direct original-source reuse is therefore impossible at this ABI seam;
+the original provider bodies remain reusable.
+
+**Procedure.** `src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.{h,c}` owns
+one session-scoped bidirectional map between a private native `HANDLE` and a
+nonzero `uint16_t` guest ID. DEM publishes owned handles and COMMAND publishes
+borrowed standard/redirection handles. Original register layouts remain in
+place, but the high 16 bits must be zero and the low 16 bits carry the opaque
+ID. The manager owns only representation and lifetime; it has no BOP,
+OpenNT-service, DOS, path, drive, device, CPU, or Bochs policy.
+
+**Retained behavior and failure rule.** The original DEM/COMMAND dispatcher,
+provider order, parameter layout, result registers, carry/error paths, and
+host capability calls remain their original owners. A zero, unknown, or
+nonzero-high-half guest token follows the existing invalid-handle failure
+route; no raw host pointer is reconstructed. Owned entries close on release or
+session reset; borrowed entries are forgotten but never closed. A future
+combined DEM/COMMAND runtime session must inject one manager instance rather
+than add a new private table.
+
+**Files and verification.** The active routes are
+`dem_direct_host_session.c`, `demhndl_shim.c`, `command_misc_shim.c`, and
+`command_native_session_shim.c`; focused DEM/COMMAND fixtures and the manager
+fixture are recorded by [T232 S3](../evidence/t232-s3-command-unified-handle-migration-result-001.md)
+and [T232 S4](../evidence/t232-s4-non-v1-handle-cleanup-result-001.md).
+
+**Review condition.** Reject or revise this exception if it acquires a
+selector/service branch, DOS JFN/SFT policy, host-path policy, Bochs/mantle
+dependency, raw pointer export, pointer-width-dependent guest ABI, or any
+second active non-v1 host-handle/token table.
+
 ## Active Exceptions
 
 | ID | Owner approval | Imported code changed | Scope | Status |

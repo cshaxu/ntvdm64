@@ -4,6 +4,10 @@
 /*
  * Session-owned host-handle representation for the modern BOP composition.
  *
+ * BX-VDM-001 is the registered adapter ABI divergence: the original NT4
+ * service composition could place a 32-bit HANDLE in guest register pairs;
+ * x86/x64 modern hosts instead use this opaque guest-ID representation.
+ *
  * OpenNT's 16-bit callers reserve two registers for a 32-bit NT HANDLE.  A
  * contemporary x64 HANDLE cannot use that representation.  This manager is
  * the only adapter-owned representation bridge: guest-visible values are

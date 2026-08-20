@@ -39,12 +39,12 @@ keeping OpenNT's `BX:CX` guest ABI and original error path intact?
 ## Interpretation And Confidence
 
 COMMAND now uses the same adapter-owned manager implementation and ownership
-contract as DEM. The only divergence from the original NT4 composition is the
-documented native-width representation shim; original COMMAND provider bodies
-and their control/error semantics remain the owner. Confidence is high for
-the published COMMAND routes. There is not yet a native execution session
-that composes DEM and COMMAND simultaneously, so this result does not claim
-cross-family handle sharing at runtime.
+contract as DEM. This is the explicit `BX-VDM-001` native-width host-handle
+representation exception, not an assertion that OpenNT used this mechanism.
+Original COMMAND provider bodies and their control/error semantics remain the
+owner. Confidence is high for the published COMMAND routes. There is not yet
+a native execution session that composes DEM and COMMAND simultaneously, so
+this result does not claim cross-family handle sharing at runtime.
 
 ## Follow-up
 
