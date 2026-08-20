@@ -795,6 +795,12 @@
       "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
     },
     {
+      "name": "t231-s8-command-lifecycle-direct-fixture",
+      "source": "tests/bx-vdm/t231_s8_command_lifecycle_direct_fixture.c",
+      "libraries": [ "bx-vdm" ],
+      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+    },
+    {
       "name": "t230-s7-demdasd-ioctl-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s7_demdasd_ioctl_direct_import_fixture.c",
       "libraries": [

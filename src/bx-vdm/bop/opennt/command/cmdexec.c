@@ -11,6 +11,7 @@
  * Divergence: the admitted binary classifier uses the narrow COMMAND binary
  * shim for the unavailable CCPU/SAS/RTL include closure. */
 #define BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY 1
+#define BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE 1
 #define BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE 1
 #include "../../shim/command_misc_shim.h"
 
@@ -497,6 +498,9 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     return;
 }
 
+#endif /* !BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE */
+
+#if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
 /* cmdExecComspec32 - Exec 32bit COMSPEC
  *
  *
@@ -610,17 +614,20 @@ VOID cmdExec (VOID)
 
 VOID cmdReturnExitCode (VOID)
 {
-VDMINFO VDMInfo;
+/* DIVERGENCE: cmdmisc.c's admitted original body exports the historical
+ * global VDMInfo.  Keep this function's local return record distinct under
+ * modern /W4 /WX without changing its lifecycle ordering. */
+VDMINFO ReturnVDMInfo;
 PREDIRCOMPLETE_INFO pRdrInfo;
 
-    VDMInfo.VDMState = RETURN_ON_NO_COMMAND;
-    VDMInfo.EnviornmentSize = 0;
-    VDMInfo.ErrorCode = (ULONG)getDX();
-    VDMInfo.CmdSize = 0;
-    VDMInfo.TitleLen = 0;
-    VDMInfo.ReservedLen = 0;
-    VDMInfo.DesktopLen = 0;
-    VDMInfo.CurDirectoryLen = 0;
+    ReturnVDMInfo.VDMState = RETURN_ON_NO_COMMAND;
+    ReturnVDMInfo.EnviornmentSize = 0;
+    ReturnVDMInfo.ErrorCode = (ULONG)getDX();
+    ReturnVDMInfo.CmdSize = 0;
+    ReturnVDMInfo.TitleLen = 0;
+    ReturnVDMInfo.ReservedLen = 0;
+    ReturnVDMInfo.DesktopLen = 0;
+    ReturnVDMInfo.CurDirectoryLen = 0;
 
 
     CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
@@ -634,13 +641,16 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     cmdUpdateCurrentDirectories((BYTE)getAL());
 
     // Check for any copying needed for redirection
-    pRdrInfo = (PREDIRCOMPLETE_INFO) (((ULONG)getBX() << 16) + (ULONG)getCX());
+    /* DIVERGENCE: BX:CX is a historical 32-bit guest redirection token, not
+     * a host pointer on x86/x64. */
+    pRdrInfo = bx_ntvdm_command_misc_redirection_from_guest(
+        ((ULONG)getBX() << 16) + (ULONG)getCX());
 
     if (cmdCheckCopyForRedirection (pRdrInfo) == FALSE)
-            VDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;
+            ReturnVDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;
 
-    GetNextVDMCommand (&VDMInfo);
-    if (VDMInfo.CmdSize > 0){
+    GetNextVDMCommand (&ReturnVDMInfo);
+    if (ReturnVDMInfo.CmdSize > 0){
         setCF(1);
         IsRepeatCall = TRUE;
     }
@@ -657,4 +667,4 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 
     return;
 }
-#endif /* !BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE */
+#endif /* BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE */

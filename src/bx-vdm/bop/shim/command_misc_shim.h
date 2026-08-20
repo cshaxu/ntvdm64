@@ -75,6 +75,9 @@ typedef struct _RedirComplete_Info {
 #define ASKING_FOR_DOS_BINARY    0x0004u
 #define ASKING_FOR_SECOND_TIME   0x0008u
 #define ASKING_FOR_ENVIRONMENT   0x0400u
+#define NO_PARENT_TO_WAKE        0x0040u
+#define RETURN_ON_NO_COMMAND     0x0080u
+#define CNTRL_SHELLCOUNT         0x0000ffffu
 #ifndef CREATE_FORCEDOS
 #define CREATE_FORCEDOS          0x00000200u
 #endif
@@ -153,6 +156,9 @@ enum bx_ntvdm_command_misc_service {
     BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT = 0x0eu,
     BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT = 0x0fu,
     BX_NTVDM_COMMAND_MISC_CHECK_BINARY = 0x07u,
+    BX_NTVDM_COMMAND_MISC_EXEC = 0x08u,
+    BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32 = 0x0au,
+    BX_NTVDM_COMMAND_MISC_RETURN_EXIT_CODE = 0x0bu,
     BX_NTVDM_COMMAND_MISC_GET_START_INFO = 0x10u
 };
 
@@ -234,8 +240,11 @@ USHORT bx_ntvdm_command_misc_get_cx(void);
 USHORT bx_ntvdm_command_misc_get_si(void);
 USHORT bx_ntvdm_command_misc_get_ds(void);
 USHORT bx_ntvdm_command_misc_get_es(void);
+USHORT bx_ntvdm_command_misc_get_ss(void);
+USHORT bx_ntvdm_command_misc_get_bp(void);
 USHORT bx_ntvdm_command_misc_get_ax(void);
 UCHAR bx_ntvdm_command_misc_get_al(void);
+UCHAR bx_ntvdm_command_misc_get_ah(void);
 void bx_ntvdm_command_misc_set_ax(USHORT value);
 void bx_ntvdm_command_misc_set_al(USHORT value);
 void bx_ntvdm_command_misc_set_cf(int value);
@@ -311,6 +320,7 @@ void RtlFreeAnsiString(PANSI_STRING string);
 ULONG RtlNtStatusToDosError(NTSTATUS status);
 uint32_t bx_ntvdm_command_binary_scs_address(uint32_t offset);
 BOOL IsWowAppRunnable(LPSTR app_name);
+void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment);
 
 #ifndef SCS_DOS_BINARY
 #define SCS_DOS_BINARY 1u
@@ -348,6 +358,10 @@ extern USHORT nDrives;
 extern VDMINFO VDMInfo;
 extern VDMENVBLK cmdVDMEnvBlk;
 extern CHAR cmdHomeDirectory[MAX_PATH + 1u];
+extern CHAR chDefaultDrive;
+extern DWORD dwExitCode32;
+extern BOOL fSoftpcRedirectionOnShellOut;
+extern ULONG CntrlHandlerState;
 extern PIF_DATA pfdata;
 extern UINT VdmExitCode;
 extern BOOL DontCheckDosBinaryType;
@@ -360,7 +374,10 @@ ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info);
 #define getSI() bx_ntvdm_command_misc_get_si()
 #define getDS() bx_ntvdm_command_misc_get_ds()
 #define getES() bx_ntvdm_command_misc_get_es()
+#define getSS() bx_ntvdm_command_misc_get_ss()
+#define getBP() bx_ntvdm_command_misc_get_bp()
 #define getAL() bx_ntvdm_command_misc_get_al()
+#define getAH() bx_ntvdm_command_misc_get_ah()
 #define getAX() bx_ntvdm_command_misc_get_ax()
 #define setAX(value) bx_ntvdm_command_misc_set_ax(value)
 #define setAL(value) bx_ntvdm_command_misc_set_al(value)
@@ -371,6 +388,9 @@ ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info);
 #define setDS(value) bx_ntvdm_command_misc_set_ds(value)
 #define setES(value) bx_ntvdm_command_misc_set_es(value)
 #define GetVDMAddr(segment, offset) bx_ntvdm_command_misc_get_vdm_addr(segment, offset)
+#if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE)
+#define cmdExec32(command, environment) bx_ntvdm_command_lifecycle_exec((command), (environment))
+#endif
 /* The production default is the public Win32 system directory.  The narrow
  * test override only supplies historical KB16 fixture media; cmdkeyb.c keeps
  * its original registry, file-presence and result algorithm. */

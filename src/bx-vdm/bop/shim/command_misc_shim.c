@@ -16,6 +16,9 @@ void cmdGetAutoexecBat(void);
 void cmdGetInitEnvironment(void);
 void cmdCheckBinary(void);
 void cmdGetNextCmd(void);
+void cmdExec(void);
+void cmdExecComspec32(void);
+void cmdReturnExitCode(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -39,6 +42,10 @@ VDMENVBLK cmdVDMEnvBlk;
 CHAR cmdHomeDirectory[MAX_PATH + 1];
 PIF_DATA pfdata;
 UINT VdmExitCode;
+DWORD dwExitCode32;
+CHAR chDefaultDrive;
+BOOL fSoftpcRedirectionOnShellOut;
+ULONG CntrlHandlerState;
 void nt_std_handle_notification(BOOL enabled) { (void)enabled; }
 
 #pragma warning(push)
@@ -186,6 +193,87 @@ void GetWowKernelCmdLine(void) { TerminateVDM(); }
 ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info)
 { return info == NULL ? 0u : bx_ntvdm_command_misc_active_session()->redirection_token; }
 
+void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
+{
+    STARTUPINFOA startup;
+    PROCESS_INFORMATION process;
+    VDMINFO next;
+    CHAR command_copy[1024u];
+    CHAR environment_copy[1024u];
+    DWORD environment_bytes = 0u;
+    DWORD exit_code = ERROR_BAD_FORMAT;
+    uint32_t standard_handles[3];
+    size_t command_bytes;
+    if (g_active_call == NULL || command == NULL) return;
+    command_bytes = strlen(command);
+    if (command_bytes == 0u || command_bytes >= sizeof(command_copy)) {
+        bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_BAD_FORMAT); return;
+    }
+    memcpy(command_copy, command, command_bytes + 1u);
+    /* DIVERGENCE: cmdCreateProcess used a CCPU worker thread and temporarily
+     * changed process-global standard handles.  The portable CLI executes the
+     * same declared command synchronously with explicit inherited handles,
+     * keeping the caller's host process untouched. */
+    if (environment != NULL) {
+        while (environment_bytes + 1u < sizeof(environment_copy)) {
+            if (environment[environment_bytes] == '\0' && environment[environment_bytes + 1u] == '\0') {
+                environment_bytes += 2u; break;
+            }
+            ++environment_bytes;
+        }
+        if (environment_bytes == 0u || environment_bytes > sizeof(environment_copy)) {
+            bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_BAD_ENVIRONMENT); return;
+        }
+        if (!OemToCharBuffA(environment, environment_copy, environment_bytes)) {
+            bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_BAD_ENVIRONMENT); return;
+        }
+    }
+    memset(&startup, 0, sizeof(startup)); memset(&process, 0, sizeof(process));
+    startup.cb = sizeof(startup);
+    startup.dwFlags = STARTF_USESTDHANDLES;
+    startup.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
+    if (g_active_call->call->service == BX_NTVDM_COMMAND_MISC_EXEC) {
+        bx_ntvdm_command_misc_session *session = g_active_call->call->session;
+        uint32_t address = real_mode_address(g_active_call->call->cpu->ss,
+            (USHORT)g_active_call->call->cpu->ebp);
+        HANDLE *targets[3] = { &startup.hStdError, &startup.hStdOutput, &startup.hStdInput };
+        uint32_t index;
+        if (session == NULL || address > 0x100000u - sizeof(standard_handles) ||
+            !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
+                (uint8_t *)standard_handles, sizeof(standard_handles))) {
+            bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_INVALID_HANDLE); return;
+        }
+        for (index = 0u; index < 3u; ++index) {
+            uint32_t token = standard_handles[index];
+            if (token == UINT32_MAX) continue;
+            /* DIVERGENCE: original cmdCreateProcess temporarily installed the
+             * decoded guest handles into the parent process.  Resolve the
+             * fixed token directly into STARTUPINFO instead. */
+            if ((token >> 16u) != 0u || (token & 0xffffu) == 0u ||
+                (token & 0xffffu) > 64u || session->handle_tokens[(token & 0xffffu) - 1u] == NULL) {
+                bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_INVALID_HANDLE); return;
+            }
+            *targets[index] = session->handle_tokens[(token & 0xffffu) - 1u];
+        }
+    }
+    if (!CreateProcessA(NULL, command_copy, NULL, NULL, TRUE, CREATE_DEFAULT_ERROR_MODE,
+            environment == NULL ? NULL : environment_copy, NULL, &startup, &process)) {
+        exit_code = GetLastError();
+    } else {
+        (void)WaitForSingleObject(process.hProcess, INFINITE);
+        if (!GetExitCodeProcess(process.hProcess, &exit_code)) exit_code = GetLastError();
+        CloseHandle(process.hThread); CloseHandle(process.hProcess);
+    }
+    dwExitCode32 = exit_code;
+    memset(&next, 0, sizeof(next));
+    next.VDMState = 0x00c0u; /* NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND */
+    (void)GetNextVDMCommand(&next);
+    if (next.CmdSize > 0u) { IsRepeatCall = TRUE; bx_ntvdm_command_misc_set_cf(1); }
+    else { IsRepeatCall = FALSE; bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)dwExitCode32); }
+}
+
 static int validate_comspec_input(const bx_ntvdm_command_misc_call *call)
 {
     uint8_t value;
@@ -215,8 +303,11 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
          call->service == BX_NTVDM_COMMAND_MISC_INIT_CONSOLE ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT ||
-         call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT ||
-         call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY ||
+          call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT ||
+          call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY ||
+          call->service == BX_NTVDM_COMMAND_MISC_EXEC ||
+          call->service == BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32 ||
+          call->service == BX_NTVDM_COMMAND_MISC_RETURN_EXIT_CODE ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO ||
          call->service == 0x06u) &&
@@ -237,8 +328,11 @@ USHORT bx_ntvdm_command_misc_get_cx(void) { return (USHORT)g_active_call->call->
 USHORT bx_ntvdm_command_misc_get_si(void) { return (USHORT)g_active_call->call->cpu->esi; }
 USHORT bx_ntvdm_command_misc_get_ds(void) { return g_active_call->call->cpu->ds; }
 USHORT bx_ntvdm_command_misc_get_es(void) { return g_active_call->call->cpu->es; }
+USHORT bx_ntvdm_command_misc_get_ss(void) { return g_active_call->call->cpu->ss; }
+USHORT bx_ntvdm_command_misc_get_bp(void) { return (USHORT)g_active_call->call->cpu->ebp; }
 USHORT bx_ntvdm_command_misc_get_ax(void) { return (USHORT)g_active_call->call->cpu->eax; }
 UCHAR bx_ntvdm_command_misc_get_al(void) { return (UCHAR)(g_active_call->call->cpu->eax & 0xffu); }
+UCHAR bx_ntvdm_command_misc_get_ah(void) { return (UCHAR)((g_active_call->call->cpu->eax >> 8u) & 0xffu); }
 void bx_ntvdm_command_misc_set_ax(USHORT value) { (void)set_ax(value); }
 void bx_ntvdm_command_misc_set_al(USHORT value)
 { bx_ntvdm_command_misc_set_ax((USHORT)((bx_ntvdm_command_misc_get_ax() & 0xff00u) | (value & 0xffu))); }
@@ -337,6 +431,30 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
     uint32_t bytes;
     uint32_t index;
     if (active == NULL) return NULL;
+    if (active->call->service == BX_NTVDM_COMMAND_MISC_EXEC ||
+        active->call->service == BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32) {
+        uint32_t address = real_mode_address(segment, offset);
+        uint32_t maximum = active->call->service == BX_NTVDM_COMMAND_MISC_EXEC &&
+            segment == active->call->cpu->ds && offset == (USHORT)active->call->cpu->esi ? 124u : 1024u;
+        uint8_t **buffer = active->guest_buffer == NULL ? &active->guest_buffer : &active->guest_buffer2;
+        uint32_t *buffer_address = active->guest_buffer == NULL ? &active->guest_address : &active->guest_address2;
+        uint32_t *buffer_bytes = active->guest_buffer == NULL ? &active->guest_bytes : &active->guest_bytes2;
+        if (address > 0x100000u - maximum || *buffer != NULL) return NULL;
+        *buffer = (uint8_t *)calloc(maximum, 1u);
+        if (*buffer == NULL || !active->call->guest_read(active->call->guest_state,
+                address, *buffer, maximum)) return NULL;
+        *buffer_address = address;
+        *buffer_bytes = maximum;
+        if (maximum == 1024u) {
+            for (index = 1u; index < maximum; ++index) {
+                if ((*buffer)[index - 1u] == 0u && (*buffer)[index] == 0u) {
+                    *buffer_bytes = index + 1u; return *buffer;
+                }
+            }
+            return NULL;
+        }
+        return *buffer;
+    }
     if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT) {
         CMDINFO *info;
         uint32_t address = real_mode_address(segment, offset);
@@ -537,6 +655,12 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         body = cmdGetInitEnvironment;
     else if (call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY)
         body = cmdCheckBinary;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_EXEC)
+        body = cmdExec;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32)
+        body = cmdExecComspec32;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_RETURN_EXIT_CODE)
+        body = cmdReturnExitCode;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO)
         body = cmdGetStartInfo;
     else if (call->service == 0x06u)
@@ -580,6 +704,11 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         pFDAccess = &call->session->fd_access;
     }
     if (setjmp(active.terminal_exit) == 0) body();
+    if (call->service == BX_NTVDM_COMMAND_MISC_EXEC && active.guest_buffer != NULL &&
+        !call->guest_write(call->guest_state, active.guest_address,
+            active.guest_buffer, active.guest_bytes)) {
+        free(active.guest_buffer); free(active.guest_buffer2); g_active_call = NULL; return 0;
+    }
     if (call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT && call->session != NULL) {
         call->session->command_source_repeat_pending = IsRepeatCall ? 1u : 0u;
         if (IsRepeatCall && cmdVDMEnvBlk.lpszzEnv != NULL && cmdVDMEnvBlk.cchEnv >= 2u &&
