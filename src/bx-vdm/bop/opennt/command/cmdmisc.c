@@ -629,8 +629,11 @@ VOID cmdSetDirectories (PCHAR lpszzEnv, VDMINFO * pVdmInfo)
 {
 LPSTR   lpszVal;
 CHAR	ch, chDrive, achEnvDrive[] = "=?:";
+int     upperDrive;
 
-    ch = pVdmInfo->CurDrive + 'A';
+    /* `CurDrive` is the historical numeric DOS drive value; the resulting
+     * environment-name character is intentionally the original 8-bit ABI. */
+    ch = (CHAR)(pVdmInfo->CurDrive + 'A');
     if (pVdmInfo->CurDirectoryLen != 0){
 	SetCurrentDirectory(pVdmInfo->CurDirectory);
 	achEnvDrive[1] = ch;
@@ -639,13 +642,13 @@ CHAR	ch, chDrive, achEnvDrive[] = "=?:";
     if (lpszzEnv) {
         while(*lpszzEnv) {
 	    if(*lpszzEnv == '=' &&
-		    (chDrive = toupper(*(lpszzEnv+1))) >= 'A' &&
-		    chDrive <= 'Z' &&
+		    (upperDrive = toupper((unsigned char)*(lpszzEnv+1))) >= 'A' &&
+		    upperDrive <= 'Z' &&
 		    /* DIVERGENCE: the original ULONG casts assumed a 32-bit host
 		     * pointer.  These are bounded, in-buffer multisz offsets, so
 		     * preserve the source traversal with native-width C arithmetic. */
 		    (*(lpszzEnv + 2) == ':') &&
-		    chDrive != ch) {
+		    (chDrive = (CHAR)upperDrive) != ch) {
 		    lpszVal = lpszzEnv + 4;
 		    achEnvDrive[1] = chDrive;
 		    SetEnvironmentVariable (achEnvDrive,lpszVal);
