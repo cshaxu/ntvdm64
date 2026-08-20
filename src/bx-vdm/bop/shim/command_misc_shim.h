@@ -23,6 +23,7 @@ typedef char *LPSTR;
 typedef void *PVOID;
 typedef void *LPVOID;
 typedef uint8_t BOOLEAN;
+typedef void (*PFNSVC)(void);
 
 /* The OpenNT command configuration owner uses these NT string layouts.  They
  * are reproduced here rather than pulling the old ntdll import closure into
@@ -234,6 +235,14 @@ typedef struct bx_ntvdm_command_misc_call {
 
 int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call);
 int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call);
+
+/* Original COMMAND service entries retained by cmddisp.c's table. */
+void cmdExitVDM(void); void cmdGetNextCmd(void); void cmdComSpec(void);
+void cmdSaveWorld(void); void cmdGetCurrentDir(void); void cmdSetInfo(void);
+void cmdGetStdHandle(void); void cmdCheckBinary(void); void cmdExec(void);
+void cmdInitConsole(void); void cmdExecComspec32(void); void cmdReturnExitCode(void);
+void cmdGetConfigSys(void); void cmdGetAutoexecBat(void); void cmdGetKbdLayout(void);
+void cmdGetInitEnvironment(void); void cmdGetStartInfo(void);
 
 USHORT bx_ntvdm_command_misc_get_dx(void);
 USHORT bx_ntvdm_command_misc_get_bx(void);

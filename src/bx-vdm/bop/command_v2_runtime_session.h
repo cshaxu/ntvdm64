@@ -1,0 +1,7 @@
+#ifndef BX_NTVDM_BOP_COMMAND_V2_RUNTIME_SESSION_H
+#define BX_NTVDM_BOP_COMMAND_V2_RUNTIME_SESSION_H
+
+int bx_ntvdm_command_v2_runtime_session_bind(void);
+void bx_ntvdm_command_v2_runtime_session_reset(void);
+
+#endif

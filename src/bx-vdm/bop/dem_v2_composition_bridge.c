@@ -2,13 +2,14 @@
  * Direct-only DEM composition entry.
  *
  * The mantle knows only this fixed mechanical ABI.  BOP selector recognition
- * remains in bx-vdm.  A valid C4 C4 50 xx window is terminally owned by the
- * imported OpenNT DEM session: a missing or failing session declines to the
- * CPU exception path and must never enter bop-v1.  Non-DEM selectors also
- * decline until their own OpenNT-shaped package is composed here.
+ * remains in bx-vdm.  A valid C4 C4 50 xx or C4 C4 54 xx window is terminally
+ * owned by its imported OpenNT owner session: a missing or failing session
+ * declines to the CPU exception path and must never enter bop-v1.  Other
+ * selectors decline until their own OpenNT-shaped package is composed here.
  */
 
 #include "dem_v2_generic_ud_bridge.h"
+#include "command_v2_generic_ud_bridge.h"
 #include "bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h"
 
@@ -18,14 +19,20 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
 {
     struct bx_ntvdm_generic_ud_outcome_v1 declined = {0};
     int accepted;
-    if (!bx_ntvdm_dem_v2_generic_ud_recognizes(event)) {
+    if (!bx_ntvdm_dem_v2_generic_ud_recognizes(event) &&
+        !bx_ntvdm_command_v2_generic_ud_recognizes(event)) {
         declined.abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
         declined.disposition = BX_NTVDM_GENERIC_UD_PASS_THROUGH;
         bx_ntvdm_bop_sequence_observation_v1_consider(event, &declined);
         bx_ntvdm_generic_ud_sequence_observation_v1_consider(event, &declined);
         return 0;
     }
-    accepted = bx_ntvdm_dem_v2_generic_ud_dispatch(event, outcome);
+    /* Selector recognition and owner dispatch remain adapter work.  The
+     * mantle calls one opaque mechanical entry and never learns either the
+     * DEM or COMMAND selector. */
+    accepted = bx_ntvdm_dem_v2_generic_ud_recognizes(event) ?
+        bx_ntvdm_dem_v2_generic_ud_dispatch(event, outcome) :
+        bx_ntvdm_command_v2_generic_ud_dispatch(event, outcome);
     if (accepted) {
         bx_ntvdm_bop_sequence_observation_v1_consider(event, outcome);
         bx_ntvdm_generic_ud_sequence_observation_v1_consider(event, outcome);

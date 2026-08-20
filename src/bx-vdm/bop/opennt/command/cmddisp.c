@@ -6,10 +6,10 @@
  *  Sudeepb 17-Sep-1991 Created
  */
 
-#include "cmd.h"
-
-#include <cmdsvc.h>
-#include <softpc.h>
+/* DIVERGENCE: the historical cmd.h/cmdsvc.h/softpc.h include closure binds
+ * CCPU/SAS and the NT4 product host.  The neutral shim preserves the original
+ * service-table layout and supplies only its fixed-width boundary contract. */
+#include "../../shim/command_misc_shim.h"
 
 
 PFNSVC	apfnSVCCmd [] = {

@@ -197,13 +197,16 @@
         "src/bx-vdm/bop/opennt/dem/demioctl.c",
         "src/bx-vdm/bop/opennt/dem/demsrch.c",
         "src/bx-vdm/bop/opennt/command/cmdmisc.c",
+        "src/bx-vdm/bop/opennt/command/cmddisp.c",
         "src/bx-vdm/bop/opennt/command/cmdexit.c",
         "src/bx-vdm/bop/opennt/command/cmdconf.c",
         "src/bx-vdm/bop/opennt/command/cmdenv.c",
         "src/bx-vdm/bop/opennt/command/cmdexec.c",
         "src/bx-vdm/bop/opennt/command/cmdkeyb.c",
         "src/bx-vdm/bop/opennt/command/cmdredir.c",
-        "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
+    "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
+    "src/bx-vdm/bop/command_v2_generic_ud_bridge.c",
+    "src/bx-vdm/bop/command_v2_runtime_session.c",
         "src/bx-vdm/bop/dem_v2_composition_bridge.c",
         "src/bx-vdm/bop/dem_v2_runtime_session.c",
         "src/bx-vdm/bop/dem_v2_startup_composition.c",
@@ -222,7 +225,8 @@
         "src/bx-vdm/bop/shim/demmisc_shim.c",
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
-        "src/bx-vdm/bop/shim/command_misc_shim.c",
+    "src/bx-vdm/bop/shim/command_misc_shim.c",
+    "src/bx-vdm/bop/shim/command_native_session_shim.c",
         "src/bx-vdm/bop/shim/command_config_shim.c",
         "src/bx-vdm/bop/shim/command_environment_shim.c",
         "src/bx-vdm/bop/shim/command_binary_shim.c",
@@ -821,6 +825,23 @@
         "kernel32.lib",
         "advapi32.lib",
         "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t231-s10-command-native-session-fixture",
+      "source": "tests/bx-vdm/t231_s10_command_native_session_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
         "bcrypt.lib",
         "ntdll.lib",
         "user32.lib"

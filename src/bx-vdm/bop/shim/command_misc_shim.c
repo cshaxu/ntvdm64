@@ -20,6 +20,7 @@ void cmdExec(void);
 void cmdExecComspec32(void);
 void cmdReturnExitCode(void);
 void cmdExitVDM(void);
+BOOL CmdDispatch(ULONG service);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -631,46 +632,12 @@ BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value)
 int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
 {
     bx_ntvdm_command_misc_active_call active;
-    void (*body)(void);
     if (!bx_ntvdm_command_misc_call_valid(call) || g_active_call != NULL ||
-        call->boundary->fault_rip > UINT64_MAX - 4u) return 0;
+        call->boundary->fault_rip > UINT64_MAX - 4u || call->service >= 17u)
+        return 0;
     if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC &&
         !validate_comspec_input(call)) return 0;
     memset(&active, 0, sizeof(active));
-    if (call->service == BX_NTVDM_COMMAND_MISC_EXIT)
-        body = cmdExitVDM;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT)
-        body = cmdGetNextCmd;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC)
-        body = cmdComSpec;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR)
-        body = cmdGetCurrentDir;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_SET_INFO)
-        body = cmdSetInfo;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_INIT_CONSOLE)
-        body = cmdInitConsole;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT)
-        body = cmdGetKbdLayout;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS)
-        body = cmdGetConfigSys;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT)
-        body = cmdGetAutoexecBat;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT)
-        body = cmdGetInitEnvironment;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY)
-        body = cmdCheckBinary;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_EXEC)
-        body = cmdExec;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32)
-        body = cmdExecComspec32;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_RETURN_EXIT_CODE)
-        body = cmdReturnExitCode;
-    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO)
-        body = cmdGetStartInfo;
-    else if (call->service == 0x06u)
-        body = cmdGetStdHandle;
-    else
-        body = cmdSaveWorld;
     IsFirstCall = call->first_call ? TRUE : FALSE;
     IsRepeatCall = call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT && call->session != NULL &&
         call->session->command_source_repeat_pending != 0u;
@@ -707,7 +674,14 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         pIsDosBinary = &call->session->is_dos_binary;
         pFDAccess = &call->session->fd_access;
     }
-    if (setjmp(active.terminal_exit) == 0) body();
+    /* Preserve OpenNT's original 17-slot cmddisp.c table rather than growing
+     * an adapter-owned service recognizer.  The preceding range guard is the
+     * required modern boundary check because the retail body checked this
+     * index only in DBG builds. */
+    if (setjmp(active.terminal_exit) == 0 && !CmdDispatch(call->service)) {
+        g_active_call = NULL;
+        return 0;
+    }
     if (call->service == BX_NTVDM_COMMAND_MISC_EXEC && active.guest_buffer != NULL &&
         !call->guest_write(call->guest_state, active.guest_address,
             active.guest_buffer, active.guest_bytes)) {

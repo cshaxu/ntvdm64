@@ -48,6 +48,8 @@
 
 > **T231 S9 complete:** [direct `cmdExitVDM` witness](etc/evidence/t231-s9-command-exit-direct-001.md) records original `54:00` through the existing typed controlled-stop seam with no resume/write result.  It is local Direct source parity, not whole COMMAND closure.
 
+> **T231 S10 progress:** [COMMAND v2 route admission](etc/evidence/t231-s10-command-v2-route-admission-001.md) records adapter-only `54:00..10` ownership, original `cmddisp.c` table admission and the rebuilt local Direct matrix.  Formal Ninja execution, registry-capable S4 success, product-v1 deletion and bounded native observation remain open; this is not T231 closure.
+
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 
 > **T230 S1 P1:** [203-entry Chinese BOP implementation tracker](etc/operations/opennt-bop-implementation-tracker-001.md) records instruction entry, original handler, high-level purpose, actual strict status and historical disposition; it establishes zero fully complete entries at this baseline.
