@@ -85,15 +85,24 @@ from the tree, and the formal Ninja manifest contains no `bop-v1` source or
 COMMAND-v1 fixture input.  The active source-built route is therefore the
 OpenNT mirror plus neutral v2 shims; v1 is not an alternate product path.
 
-Fresh `build/M0-T231-S10/formal-r3` generation accepted that manifest and
-`ninja -n all` enumerated its complete 382-edge module/fixture/CLI graph,
+Fresh `build/M0-T231-S10/formal-r4` generation accepted that manifest and
+`ninja -n all` enumerated its complete 380-edge module/fixture/CLI graph,
 including the final `ntdos64-native.exe` link, without a missing v1 source.
 This is graph-admission evidence only: the runner's actual action-dispatch
 stall remains separately recorded above.
 
-Several pre-governance composition wrappers remain under `bop-v1` because
-they co-own other historical BOP-family experiments.  Their references to the
-removed COMMAND APIs are now explicitly a legacy-debt diagnostic, not a build
-or product route.  They must be either removed as a whole historical
-composition slice or separately rehomed before any such experiment is made
-buildable; S10 neither restores nor invokes them.
+The remaining pre-governance boot-namespace/adapter-runtime composition slice
+was subsequently removed as a whole, together with the seven fixtures that
+exercised it.  It directly included the removed COMMAND v1 headers and was
+therefore neither an independent non-COMMAND owner nor a viable product/build
+route.  A focused post-removal search finds no `bx_ntvdm_cmd_*` or
+`bx_ntvdm_command_*` v1 symbol in `src/bx-vdm/bop-v1` or its legacy fixtures.
+The retained historical build/probe scripts still name their old inputs only
+as evidence of their historic experiment; they are not formal-manifest inputs.
+
+The first generator invocation after this removal correctly rejected the
+stale `t225-s6-four-image-profile` fixture admission.  Its manifest entry was
+removed with the fixture; regenerated `formal-r4` then enumerated the complete
+graph successfully.  This makes the formal graph reject a reintroduction of
+the removed v1 fixture by normal input validation rather than leaving a stale
+path hidden in a historical build list.
