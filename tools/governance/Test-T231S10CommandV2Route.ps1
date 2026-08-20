@@ -36,7 +36,7 @@ $dispatcher = Read-Required 'src/bx-vdm/bop/opennt/command/cmddisp.c'
 $shim = Read-Required 'src/bx-vdm/bop/shim/command_misc_shim.c'
 Require ($composition -match 'bx_ntvdm_command_v2_generic_ud_recognizes' -and
     $composition -match 'bx_ntvdm_command_v2_generic_ud_dispatch') 'Composition does not own the COMMAND v2 route.'
-Require ($engine -match 'bx_ntvdm_command_v2_runtime_session_bind\(\)' -and
+Require ($engine -match 'bx_ntvdm_command_v2_runtime_session_bind_from_startup\(\)' -and
     $engine -match 'bx_ntvdm_command_v2_runtime_session_reset\(\)') 'Engine does not bind/reset COMMAND v2 runtime state.'
 Require ($dispatcher -match 'PFNSVC\s+apfnSVCCmd\s*\[\]' -and
     $dispatcher -match 'cmdExitVDM' -and $dispatcher -match 'cmdGetStartInfo') 'Original CMD dispatcher table is absent.'

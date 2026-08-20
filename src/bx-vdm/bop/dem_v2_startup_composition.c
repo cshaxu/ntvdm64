@@ -2,6 +2,7 @@
 
 #include "shim/demmisc_shim.h"
 #include "byob_image.h"
+#include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
 #include "bx_ntvdm_cpu_state_abi.h"
 #include "bx_ntvdm_guest_write_abi.h"
@@ -15,6 +16,9 @@
 typedef struct bx_ntvdm_dem_v2_startup {
     byob_image ntio, ntdos, command, target, terminal_quit;
     bx_ntvdm_initial_state_v1 initial_state;
+    byob_launch_plan_v2 launch;
+    char command_application[MAX_PATH + 1u];
+    uint16_t command_drive;
     int installed;
 } bx_ntvdm_dem_v2_startup;
 
@@ -60,6 +64,29 @@ static int configure_opennt_dos_directory(const wchar_t *root,
     return 1;
 }
 
+static int configure_command_source(const uint16_t *launch_input,
+    uint32_t launch_chars, const byob_profile_selection *selection)
+{
+    wchar_t launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
+    size_t bytes;
+    if (launch_input == NULL || selection == NULL ||
+        !descriptor_to_wide(launch_input, launch_chars, launch_text,
+            BYOB_LAUNCH_PLAN_V2_ENV_CHARS) ||
+        !byob_launch_plan_v2_from_environment(&runtime.launch, launch_text) ||
+        runtime.launch.slot_count != selection->declared_target_count ||
+        runtime.launch.first.target_kind !=
+            (wcscmp(selection->target.file_name, L"TARGET.COM") == 0 ?
+                BYOB_LAUNCH_TARGET_KIND_V1_COM :
+             wcscmp(selection->target.file_name, L"TARGET.EXE") == 0 ?
+                BYOB_LAUNCH_TARGET_KIND_V1_EXE : 0u)) return 0;
+    bytes = (size_t)WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS,
+        selection->target.file_name, -1, runtime.command_application,
+        (int)sizeof(runtime.command_application), NULL, NULL);
+    if (bytes == 0u || bytes > sizeof(runtime.command_application)) return 0;
+    runtime.command_drive = (uint16_t)selection->target_placement.drive_index;
+    return 1;
+}
+
 void bx_ntvdm_dem_v2_startup_reset(void)
 {
     byob_image_release(&runtime.ntio);
@@ -81,7 +108,7 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     wchar_t profile[261], root[261];
     byob_profile_selection selection;
 
-    (void)launch; (void)include_mask; (void)exclude_mask;
+    (void)include_mask; (void)exclude_mask;
     if (runtime.installed) return 1;
     /* v2 is intentionally Direct-only; legacy mutation profiles are not a
      * substitute for an OpenNT owner contract. */
@@ -98,7 +125,8 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
         (selection.declared_target_count == 2u &&
          byob_image_load_exact(root, &selection.terminal_quit,
              &runtime.terminal_quit) != BYOB_IMAGE_OK) ||
-        !configure_opennt_dos_directory(root, &selection)) {
+        !configure_opennt_dos_directory(root, &selection) ||
+        !configure_command_source(launch, launch_chars, &selection)) {
         bx_ntvdm_dem_v2_startup_reset();
         return 0;
     }
@@ -111,6 +139,29 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
         return 0;
     }
     runtime.installed = 1;
+    return 1;
+}
+
+int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,
+    uint32_t application_capacity, char *tail, uint32_t tail_capacity,
+    uint16_t *drive, uint16_t *code_page)
+{
+    uint32_t tail_bytes;
+    if (!runtime.installed || application == NULL || tail == NULL || drive == NULL ||
+        code_page == NULL || application_capacity == 0u || tail_capacity == 0u ||
+        runtime.command_application[0] == '\0') return 0;
+    tail_bytes = runtime.launch.first.tail_bytes;
+    if (tail_bytes + 1u > tail_capacity ||
+        strlen(runtime.command_application) + 1u > application_capacity) return 0;
+    memcpy(application, runtime.command_application,
+        strlen(runtime.command_application) + 1u);
+    memcpy(tail, runtime.launch.first.tail, tail_bytes);
+    tail[tail_bytes] = '\0';
+    *drive = runtime.command_drive;
+    /* OpenNT cmdMapCodePage maps the normal Western host code page to DOS 437.
+     * The restricted launch declaration is ASCII, so this fixed initial value
+     * preserves that original command-side contract without host-locale data. */
+    *code_page = 437u;
     return 1;
 }
 

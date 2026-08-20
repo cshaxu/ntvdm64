@@ -46,6 +46,23 @@ of `HKCU\\Software\\ntdos64-t231-kbd` was denied.  This is an external
 host-permission limitation, not a substituted or skipped product branch; the
 fixture retains that original public-Win32 registry test unchanged.
 
+## Native launch-input binding
+
+The native engine now uses `bx_ntvdm_command_v2_runtime_session_bind_from_startup`,
+not the test-only empty-session bind.  That entry copies the already admitted
+launch descriptor and profile-declared `TARGET.COM` or `TARGET.EXE` identity
+from `dem_v2_startup_composition` into the existing OpenNT-shaped
+`GetNextVDMCommand` session.  It retains the original `cmdGetNextCmd` owner
+body and keeps the mantle selector- and COMMAND-blind.
+
+This seam intentionally transfers only a bounded OEM application name, ASCII
+tail, profile drive index and the initial DOS code page 437.  It transfers no
+host path, guest pointer, host handle, ambient command line or legacy v1
+session.  The three changed source units compile under the formal MSVC x64
+`/W4 /WX /MT` configuration.  A native observation that reaches `54:01`
+remains pending the earlier machine-continuity boundary; this compile witness
+does not claim that observation.
+
 ## Formal graph status
 
 The formal Ninja graph was freshly generated in

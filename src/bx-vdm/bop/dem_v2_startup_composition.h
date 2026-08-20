@@ -19,5 +19,11 @@ int bx_ntvdm_dem_v2_startup_prepare_machine_stage_request(
 int bx_ntvdm_dem_v2_startup_prepare_machine_stage_entry(
     struct bx_ntvdm_machine_stage_v1_entry *entry);
 int bx_ntvdm_dem_v2_startup_copy_ordinary_terminal(void);
+/* Copy the one profile-declared CLI launch input for the directly imported
+ * COMMAND host-service plane.  The result is ordinary OEM data; it is never
+ * a host pathname, guest pointer, or mantle object. */
+int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,
+    uint32_t application_capacity, char *tail, uint32_t tail_capacity,
+    uint16_t *drive, uint16_t *code_page);
 
 #endif

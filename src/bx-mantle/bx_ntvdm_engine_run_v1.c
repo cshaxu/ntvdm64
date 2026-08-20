@@ -52,7 +52,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
        Bind the Direct OpenNT DEM session before any machine stage exists;
        its checked-RAM callbacks can succeed only while that stage is active. */
     if (!bx_ntvdm_dem_v2_runtime_session_bind() ||
-        !bx_ntvdm_command_v2_runtime_session_bind()) {
+        !bx_ntvdm_command_v2_runtime_session_bind_from_startup()) {
         bx_ntvdm_command_v2_runtime_session_reset();
         bx_ntvdm_dem_v2_runtime_session_reset();
         bx_ntvdm_dem_v2_startup_reset();
