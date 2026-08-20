@@ -8,48 +8,41 @@ static int valid(const bx_ntvdm_dem_direct_host_session *session)
 {
     return session != NULL && session->magic == BX_NTVDM_DEM_DIRECT_HOST_SESSION_MAGIC &&
         session->abi_version == BX_NTVDM_DEM_DIRECT_HOST_SESSION_VERSION &&
-        session->struct_bytes == sizeof(*session) && session->bound <= 1u;
+        session->struct_bytes == sizeof(*session) && session->bound <= 1u &&
+        bx_ntvdm_host_handle_manager_valid(&session->handles);
 }
 
 static int publish(void *state, HANDLE handle, uint32_t *token, DWORD *error)
 {
     bx_ntvdm_dem_direct_host_session *session = state;
-    uint32_t index;
+    uint16_t guest_handle;
     if (token) *token = 0u;
-    if (error) *error = ERROR_TOO_MANY_OPEN_FILES;
-    if (!valid(session) || handle == NULL || handle == INVALID_HANDLE_VALUE) return 0;
-    for (index = 0u; index < BX_NTVDM_DEM_DIRECT_HOST_SESSION_HANDLES; ++index)
-        if (session->handles[index] == NULL) {
-            session->handles[index] = handle;
-            if (token) *token = index + 1u;
-            if (error) *error = ERROR_SUCCESS;
-            return 1;
-        }
-    return 0;
+    if (!valid(session) || !bx_ntvdm_host_handle_manager_publish(&session->handles,
+            handle, BX_NTVDM_HOST_HANDLE_OWNED, &guest_handle, error)) return 0;
+    if (token) *token = guest_handle;
+    return 1;
 }
 
 static int lookup(void *state, uint32_t token, HANDLE *handle)
 {
     bx_ntvdm_dem_direct_host_session *session = state;
-    if (handle) *handle = INVALID_HANDLE_VALUE;
-    if (!valid(session) || token == 0u || token > BX_NTVDM_DEM_DIRECT_HOST_SESSION_HANDLES ||
-        session->handles[token - 1u] == NULL) return 0;
-    if (handle) *handle = session->handles[token - 1u];
-    return 1;
+    if (!valid(session) || token == 0u || token > UINT16_MAX) {
+        if (handle) *handle = INVALID_HANDLE_VALUE;
+        return 0;
+    }
+    return bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+        (uint16_t)token, handle);
 }
 
 static int release(void *state, uint32_t token, DWORD *error)
 {
     bx_ntvdm_dem_direct_host_session *session = state;
-    HANDLE handle;
-    if (error) *error = ERROR_INVALID_HANDLE;
-    if (!lookup(session, token, &handle) || !CloseHandle(handle)) {
-        if (error && GetLastError() != ERROR_SUCCESS) *error = GetLastError();
+    if (!valid(session) || token == 0u || token > UINT16_MAX) {
+        if (error) *error = ERROR_INVALID_HANDLE;
         return 0;
     }
-    session->handles[token - 1u] = NULL;
-    if (error) *error = ERROR_SUCCESS;
-    return 1;
+    return bx_ntvdm_host_handle_manager_release(&session->handles,
+        (uint16_t)token, error);
 }
 
 static int query_attributes(void *state, uint8_t drive, const wchar_t *path,
@@ -102,6 +95,7 @@ int bx_ntvdm_dem_direct_host_session_initialize(
     session->magic = BX_NTVDM_DEM_DIRECT_HOST_SESSION_MAGIC;
     session->abi_version = BX_NTVDM_DEM_DIRECT_HOST_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
+    if (!bx_ntvdm_host_handle_manager_initialize(&session->handles)) return 0;
     session->context.magic = BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
     session->context.abi_version = BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION;
     session->context.struct_bytes = sizeof(session->context);
@@ -117,13 +111,8 @@ int bx_ntvdm_dem_direct_host_session_initialize(
 void bx_ntvdm_dem_direct_host_session_reset(
     bx_ntvdm_dem_direct_host_session *session)
 {
-    uint32_t index;
     if (!valid(session)) return;
-    for (index = 0u; index < BX_NTVDM_DEM_DIRECT_HOST_SESSION_HANDLES; ++index)
-        if (session->handles[index] != NULL) {
-            CloseHandle(session->handles[index]);
-            session->handles[index] = NULL;
-        }
+    bx_ntvdm_host_handle_manager_reset(&session->handles);
 }
 
 bx_ntvdm_dem_direct_context *bx_ntvdm_dem_direct_host_session_context(

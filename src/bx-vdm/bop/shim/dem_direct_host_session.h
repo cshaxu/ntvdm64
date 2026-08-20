@@ -2,14 +2,14 @@
 #define BX_NTVDM_BOP_SHIM_DEM_DIRECT_HOST_SESSION_H
 
 #include "bx_ntvdm_dem_direct_context.h"
+#include "bx_ntvdm_host_handle_manager.h"
 
 #define BX_NTVDM_DEM_DIRECT_HOST_SESSION_MAGIC 0x42584448u
 #define BX_NTVDM_DEM_DIRECT_HOST_SESSION_VERSION 1u
-#define BX_NTVDM_DEM_DIRECT_HOST_SESSION_HANDLES 64u
 
 typedef struct bx_ntvdm_dem_direct_host_session {
     uint32_t magic, abi_version, struct_bytes, bound;
-    HANDLE handles[BX_NTVDM_DEM_DIRECT_HOST_SESSION_HANDLES];
+    bx_ntvdm_host_handle_manager handles;
     bx_ntvdm_dem_direct_context context;
 } bx_ntvdm_dem_direct_host_session;
 

@@ -217,10 +217,19 @@ int main(void)
         result.cpu_delta.gpr16_values[0] != ERROR_INVALID_HANDLE ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u) return 11;
 
+    /* The original register pair remains the ABI shape, but a unified modern
+     * session accepts only its low-word opaque guest ID. */
+    cpu.eax = 1u; cpu.ebp = 1u;
+    if (!invoke(&state, &direct, &event, &cpu, &result,
+            BX_NTVDM_DEMHNDL_CHG_FILE_PTR) ||
+        result.cpu_delta.gpr16_values[0] != ERROR_INVALID_HANDLE ||
+        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u) return 12;
+
+    cpu.eax = 0u;
     cpu.ebp = 1u;
     cpu.ecx = 0xffffu; cpu.edx = 0xffffu;
     if (!invoke(&state, &direct, &event, &cpu, &result,
-            BX_NTVDM_DEMHNDL_CLOSE) || !state.released) return 12;
+            BX_NTVDM_DEMHNDL_CLOSE) || !state.released) return 13;
     DeleteFileW(path);
     puts("T230 S2 direct OpenNT demhndl import: handle, guest-memory and result seam verified");
     return 0;

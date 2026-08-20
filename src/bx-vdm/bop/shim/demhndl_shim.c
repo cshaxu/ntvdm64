@@ -228,7 +228,10 @@ HANDLE bx_ntvdm_demhndl_get_handle(USHORT high, USHORT low)
     if (active == 0 || active->call == 0) return NULL;
     token = ((uint32_t)high << 16) | low;
     active->handle_token = token;
-    if (token == 0u) return NULL;
+    /* The OpenNT ABI keeps the AX:BP pair.  Its current composition uses a
+     * 16-bit opaque session ID in the low word, never the historical 32-bit
+     * host HANDLE, so reject a nonzero high word before provider lookup. */
+    if (token == 0u || (token & 0xffff0000u) != 0u) return NULL;
     if (!active->call->direct->lookup_handle(active->call->direct->state, token,
             &handle)) {
         SetLastError(ERROR_INVALID_HANDLE);
