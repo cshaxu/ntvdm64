@@ -19,6 +19,7 @@ void cmdGetNextCmd(void);
 void cmdExec(void);
 void cmdExecComspec32(void);
 void cmdReturnExitCode(void);
+void cmdExitVDM(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -295,7 +296,8 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
     return call != NULL && call->magic == BX_NTVDM_COMMAND_MISC_CALL_MAGIC &&
         call->abi_version == BX_NTVDM_COMMAND_MISC_CALL_VERSION &&
         call->struct_bytes == sizeof(*call) &&
-         (call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT ||
+         (call->service == BX_NTVDM_COMMAND_MISC_EXIT ||
+          call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT ||
           call->service == BX_NTVDM_COMMAND_MISC_COMSPEC ||
          call->service == BX_NTVDM_COMMAND_MISC_SAVE_WORLD ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR ||
@@ -635,7 +637,9 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC &&
         !validate_comspec_input(call)) return 0;
     memset(&active, 0, sizeof(active));
-    if (call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT)
+    if (call->service == BX_NTVDM_COMMAND_MISC_EXIT)
+        body = cmdExitVDM;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT)
         body = cmdGetNextCmd;
     else if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC)
         body = cmdComSpec;

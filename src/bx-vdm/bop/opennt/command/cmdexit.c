@@ -7,11 +7,11 @@
  *  Sudeepb 05-Jul-1991 Created
  */
 
-#include "cmd.h"
-
-#include <cmdsvc.h>
-#include <softpc.h>
-#include <winbase.h>
+/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdexit.c.
+ * DIVERGENCE: the historical include closure pulled CCPU/SoftPC product
+ * headers; the directly imported original body needs only the existing typed
+ * COMMAND stop seam. */
+#include "../../shim/command_misc_shim.h"
 
 /* cmdExitVDM - Terminate the VDM
  *

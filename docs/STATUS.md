@@ -2,29 +2,29 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T231 S9.** T231's original host-child lifecycle state machine is locally complete; controlled COMMAND session exit is next.
+> **Current effective packet: M0 T231 S10.** All T231 owner slices have local Direct witnesses; whole-package routing, legacy retirement and bounded native verification remain.
 
-**Active: M0 T231 S9 -- COMMAND controlled session exit (`54:00`).**
+**Active: M0 T231 S10 -- COMMAND whole-package closure.**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T231 S9, Ordinary Mode. |
+| Identifier Mode | M0 T231 S10, Ordinary Mode. |
 | Admission And Approval | Owner direction: “按照规划，实现COMMAND族的所有BOP，采用原生OpenNT源代码文件结构和代码结构，尽可能采用相同逻辑，并彻底清理该族的v1实现。” |
-| Objective | Recover original `54:00` `cmdExitVDM` as the declared CLI controlled-stop and cleanup contract. |
-| Non-goals | No trace-selected leaf patch, no v1 extension, no Bochs intrusion, no guest-image mutation, no child-lifecycle expansion, and no COMMAND-family closure claim. |
-| Reference Baseline | Original `cmdexit.c`/`cmd.h`/`cmdsvc.h` exit owner, completed T231 S1--S8 evidence and v1 comparison sources. |
-| Files And ABI Surface | admitted OpenNT `cmdexit.c`, existing typed controlled-stop seam, focused fixture, formal manifest and retained v1 sources. |
+| Objective | Close all seventeen COMMAND services: execute the full local regression matrix, bind the original owner route, remove product COMMAND-v1 implementation routes, rebuild the formal source graph and perform one bounded native observation. |
+| Non-goals | No trace-selected leaf patch, no Bochs intrusion beyond registered mechanics, no guest-image mutation, and no claim of unrestricted multi-program guest completion. |
+| Reference Baseline | Completed T231 S1--S9 witnesses; original `cmddisp.c` service table; current route/runtime inventory; v1 comparison sources and formal module manifest. |
+| Files And ABI Surface | all admitted OpenNT COMMAND mirrors, neutral shims, common BOP routing, v1 retirement map, full fixture matrix, formal Ninja graph and bounded native probe inputs. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding boundaries, original OpenNT ordering/layout/failure behavior, formal Ninja and documentation governance. |
-| Verification | The selected original body compiles with MSVC `/W4 /WX /MT`; a focused fixture proves typed controlled stop and no resume/write result. |
-| Expected Markers | Original `cmdExitVDM` remains the single owner body; no raw host exit or process-wide termination occurs; v1 is comparison-only. |
-| Asset Needs | Pinned OpenNT source, existing typed controlled-stop seam, formal Ninja graph and retained v1 sources. |
-| Reporting Requirements | Record any source delta inline and distinguish local exit parity from native guest proof. |
-| Stop Conditions | Missing historical layout, a needed Bochs intrusion, or a required new behavior is recorded without silently changing the original contract. |
-| Exit Criteria | Original `54:00` is source-admitted with a zero-exit typed-stop fixture; its v1 route is not extended. |
+| Verification | All 17 local fixtures zero-exit through original owner bodies; no product `bop-v1` COMMAND implementation route remains; formal Ninja source build succeeds; one bounded native observation enters the v2 COMMAND route without v1 fallback. |
+| Expected Markers | No service is omitted or replaced by a trace leaf patch; every remaining divergence is inline-documented; v1 is comparison-only or physically removed from the product graph. |
+| Asset Needs | Pinned OpenNT source, common ingress/runtime map, checked guest-memory ABI, formal Ninja graph, bounded native input bundle and retained v1 comparison sources. |
+| Reporting Requirements | Distinguish all-local source parity, runtime route closure and bounded native observation; do not claim continuous guest execution unless separately proved. |
+| Stop Conditions | A missing runtime binding, formal graph failure, a required Bochs intrusion, or a native semantic divergence is recorded without silently retaining v1 fallback. |
+| Exit Criteria | The complete T231 plan's S10 exit criteria are met; only then may T231 close. |
 | Original Owner Request | “S2把所有简单的BOP解除注释，局部测试完成code complete；每个疑难BOP自己独立出一个S任务来做。” |
-| Similar-Issue Sweep | `cmdExitVDM`, `TerminateVDM`, typed stop/resume exclusions, old `54:00` v1 route and formal manifest membership. |
+| Similar-Issue Sweep | all `54:00..54:10` rows, `cmddisp.c`, source-mirror manifest, common ingress/provider registry, v1 route/tree/manifests, all T231 fixtures, formal Ninja target and bounded native observation. |
 
 > **T231 S1 progress:** [COMMAND owner-package plan](etc/operations/m0-t231-command-owner-package-plan-001.md), [service ledger](etc/operations/m0-t231-s1-command-service-ledger-001.md), and the [source-mirror manifest](../src/bx-vdm/bop/opennt/command/command-import-manifest.md) establish the original 17-slot package boundary. The admitted `Sync-OpenNtCommandMirror.ps1` copy verified byte-identical hashes for all fifteen listed original source/header inputs. Each remains outside the build until its own neutral COMMAND shim admission; S2 is the first such admission.
 
@@ -45,6 +45,8 @@
 > **T231 S7 complete:** [direct `cmdGetNextCmd` witness](etc/evidence/t231-s7-command-get-next-direct-001.md) records the original `54:01` body, declared CLI command-source seam, original environment-size/re-entry contract, `CMDINFO` handoff and exhausted-source terminal behavior.  It is local Direct source parity, not host-child or native-guest closure.
 
 > **T231 S8 complete:** [direct COMMAND lifecycle witness](etc/evidence/t231-s8-command-lifecycle-direct-001.md) records the original coupled `54:08`/`54:0A`/`54:0B` bodies, the sole CCPU-thread/process-global-handle replacement seam, public Win32 child wait/exit behavior, tokenized standard-handle projection and zero-exit state-machine regression.  It is local Direct source parity, not native-guest closure.
+
+> **T231 S9 complete:** [direct `cmdExitVDM` witness](etc/evidence/t231-s9-command-exit-direct-001.md) records original `54:00` through the existing typed controlled-stop seam with no resume/write result.  It is local Direct source parity, not whole COMMAND closure.
 
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 

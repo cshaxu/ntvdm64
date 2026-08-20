@@ -197,6 +197,7 @@
         "src/bx-vdm/bop/opennt/dem/demioctl.c",
         "src/bx-vdm/bop/opennt/dem/demsrch.c",
         "src/bx-vdm/bop/opennt/command/cmdmisc.c",
+        "src/bx-vdm/bop/opennt/command/cmdexit.c",
         "src/bx-vdm/bop/opennt/command/cmdconf.c",
         "src/bx-vdm/bop/opennt/command/cmdenv.c",
         "src/bx-vdm/bop/opennt/command/cmdexec.c",
@@ -797,6 +798,12 @@
     {
       "name": "t231-s8-command-lifecycle-direct-fixture",
       "source": "tests/bx-vdm/t231_s8_command_lifecycle_direct_fixture.c",
+      "libraries": [ "bx-vdm" ],
+      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+    },
+    {
+      "name": "t231-s9-command-exit-direct-fixture",
+      "source": "tests/bx-vdm/t231_s9_command_exit_direct_fixture.c",
       "libraries": [ "bx-vdm" ],
       "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
     },
