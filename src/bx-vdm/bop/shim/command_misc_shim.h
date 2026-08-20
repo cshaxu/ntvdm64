@@ -22,14 +22,50 @@ typedef char *LPSTR;
 typedef void *PVOID;
 typedef void *LPVOID;
 
+#pragma pack(push, 1)
+typedef struct _PARAMBLOCK {
+    USHORT SegEnv;
+    USHORT OffCmdTail;
+    USHORT SegCmdTail;
+    ULONG pFCB1;
+    ULONG pFCB2;
+} PARAMBLOCK, *PPARAMBLOCK;
+typedef struct _SCSINFO {
+    CHAR SCS_ComSpec[64];
+    CHAR SCS_CmdTail[128];
+    PARAMBLOCK SCS_ParamBlock;
+    CHAR SCS_ToSync;
+} SCSINFO, *PSCSINFO;
+#pragma pack(pop)
+
 #define MAXIMUM_VDM_CURRENT_DIR 64u
 #define BX_NTVDM_COMMAND_MISC_COMSPEC_MAX 64u
 #define BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES (MAXIMUM_VDM_CURRENT_DIR + 3u)
 
 enum bx_ntvdm_command_misc_service {
     BX_NTVDM_COMMAND_MISC_COMSPEC = 0x02u,
-    BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR = 0x04u
+    BX_NTVDM_COMMAND_MISC_SAVE_WORLD = 0x03u,
+    BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR = 0x04u,
+    BX_NTVDM_COMMAND_MISC_SET_INFO = 0x05u
 };
+
+typedef struct bx_ntvdm_command_misc_session {
+    uint32_t magic;
+    uint32_t abi_version;
+    uint32_t struct_bytes;
+    uint32_t scs_info_address;
+    uint32_t is_dos_binary_address;
+    uint32_t fd_access_address;
+    SCSINFO scs_info;
+    BYTE is_dos_binary;
+    WORD fd_access;
+} bx_ntvdm_command_misc_session;
+
+#define BX_NTVDM_COMMAND_MISC_SESSION_MAGIC 0x42584353u
+#define BX_NTVDM_COMMAND_MISC_SESSION_VERSION 1u
+
+void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *session);
+int bx_ntvdm_command_misc_session_valid(const bx_ntvdm_command_misc_session *session);
 
 typedef int (*bx_ntvdm_command_misc_guest_read_fn)(void *state,
     uint32_t physical_address, uint8_t *buffer, uint32_t bytes);
@@ -47,6 +83,7 @@ typedef struct bx_ntvdm_command_misc_call {
     void *guest_state;
     bx_ntvdm_command_misc_guest_read_fn guest_read;
     bx_ntvdm_command_misc_guest_write_fn guest_write;
+    bx_ntvdm_command_misc_session *session;
     uint32_t first_call;
     uint32_t vdm_for_wow;
 } bx_ntvdm_command_misc_call;
@@ -58,6 +95,8 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call);
 int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call);
 
 USHORT bx_ntvdm_command_misc_get_dx(void);
+USHORT bx_ntvdm_command_misc_get_bx(void);
+USHORT bx_ntvdm_command_misc_get_cx(void);
 USHORT bx_ntvdm_command_misc_get_si(void);
 USHORT bx_ntvdm_command_misc_get_ds(void);
 USHORT bx_ntvdm_command_misc_get_ax(void);
@@ -76,8 +115,14 @@ extern CHAR lpszComSpec[64 + 8];
 extern USHORT cbComSpec;
 extern BOOL IsFirstCall;
 extern BOOL VDMForWOW;
+extern PSCSINFO pSCSInfo;
+extern PCHAR pSCS_ToSync;
+extern BYTE *pIsDosBinary;
+extern WORD *pFDAccess;
 
 #define getDX() bx_ntvdm_command_misc_get_dx()
+#define getBX() bx_ntvdm_command_misc_get_bx()
+#define getCX() bx_ntvdm_command_misc_get_cx()
 #define getSI() bx_ntvdm_command_misc_get_si()
 #define getDS() bx_ntvdm_command_misc_get_ds()
 #define getAL() bx_ntvdm_command_misc_get_al()

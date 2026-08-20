@@ -737,6 +737,20 @@
       ]
     },
     {
+      "name": "t231-s3-command-misc-registration-fixture",
+      "source": "tests/bx-vdm/t231_s3_command_misc_registration_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
       "name": "t230-s7-demdasd-ioctl-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s7_demdasd_ioctl_direct_import_fixture.c",
       "libraries": [

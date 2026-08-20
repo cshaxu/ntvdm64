@@ -16,6 +16,8 @@
  * original source bodies, order and comments remain here for later COMMAND
  * owner-package admission. */
 #define BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE 1
+#define BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO 1
+#define BX_NTVDM_COMMAND_MISC_ADMIT_SAVE_WORLD 1
 #include "../../shim/command_misc_shim.h"
 
 #if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
@@ -589,7 +591,7 @@ UINT  DriveType;
  *  EXIT  - None
  */
 
-#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSetInfo (VOID)
 {
 
@@ -602,8 +604,9 @@ VOID cmdSetInfo (VOID)
     pFDAccess = (WORD *) GetVDMAddr(getDS(), getCX());
     return;
 }
+#endif /* BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO */
 
-
+#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSetDirectories (PCHAR lpszzEnv, VDMINFO * pVdmInfo)
 {
 LPSTR   lpszVal;
@@ -658,7 +661,7 @@ LPSTR   lpszCS;
 }
 
 
-#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_SAVE_WORLD) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSaveWorld (VOID)
 {
 #ifdef CHECK_IT_LATER
@@ -722,6 +725,7 @@ DWORD   dwBytesWritten;
     return;
 }
 
+#endif /* BX_NTVDM_COMMAND_MISC_ADMIT_SAVE_WORLD */
 
 /* cmdInitConsole - Let Video VDD know that it can start console output
  *                  operations.
@@ -734,6 +738,7 @@ DWORD   dwBytesWritten;
  *
  */
 
+#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdInitConsole (VOID)
 {
     if (fConOutput == FALSE) {

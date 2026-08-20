@@ -4,12 +4,18 @@
 #include <string.h>
 
 void cmdComSpec(void);
+void cmdSaveWorld(void);
 void cmdGetCurrentDir(void);
+void cmdSetInfo(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
 BOOL IsFirstCall;
 BOOL VDMForWOW;
+PSCSINFO pSCSInfo;
+PCHAR pSCS_ToSync;
+BYTE *pIsDosBinary;
+WORD *pFDAccess;
 
 typedef struct bx_ntvdm_command_misc_active_call {
     bx_ntvdm_command_misc_call *call;
@@ -31,6 +37,22 @@ static int set_ax(USHORT value)
     return g_active_call != NULL &&
         bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta,
             0u, value);
+}
+
+void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *session)
+{
+    if (session == NULL) return;
+    memset(session, 0, sizeof(*session));
+    session->magic = BX_NTVDM_COMMAND_MISC_SESSION_MAGIC;
+    session->abi_version = BX_NTVDM_COMMAND_MISC_SESSION_VERSION;
+    session->struct_bytes = sizeof(*session);
+}
+
+int bx_ntvdm_command_misc_session_valid(const bx_ntvdm_command_misc_session *session)
+{
+    return session != NULL && session->magic == BX_NTVDM_COMMAND_MISC_SESSION_MAGIC &&
+        session->abi_version == BX_NTVDM_COMMAND_MISC_SESSION_VERSION &&
+        session->struct_bytes == sizeof(*session);
 }
 
 static int validate_comspec_input(const bx_ntvdm_command_misc_call *call)
@@ -55,14 +77,20 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
         call->abi_version == BX_NTVDM_COMMAND_MISC_CALL_VERSION &&
         call->struct_bytes == sizeof(*call) &&
         (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC ||
-         call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR) &&
+         call->service == BX_NTVDM_COMMAND_MISC_SAVE_WORLD ||
+         call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR ||
+         call->service == BX_NTVDM_COMMAND_MISC_SET_INFO) &&
         call->boundary != NULL && bx_ntvdm_exception_event_v1_valid(call->boundary) &&
         call->cpu != NULL && bx_ntvdm_cpu_state_v1_valid(call->cpu) &&
         call->cpu->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
-        call->result != NULL && call->guest_read != NULL && call->guest_write != NULL;
+        call->result != NULL && call->guest_read != NULL && call->guest_write != NULL &&
+        (call->service != BX_NTVDM_COMMAND_MISC_SET_INFO ||
+         bx_ntvdm_command_misc_session_valid(call->session));
 }
 
 USHORT bx_ntvdm_command_misc_get_dx(void) { return (USHORT)g_active_call->call->cpu->edx; }
+USHORT bx_ntvdm_command_misc_get_bx(void) { return (USHORT)g_active_call->call->cpu->ebx; }
+USHORT bx_ntvdm_command_misc_get_cx(void) { return (USHORT)g_active_call->call->cpu->ecx; }
 USHORT bx_ntvdm_command_misc_get_si(void) { return (USHORT)g_active_call->call->cpu->esi; }
 USHORT bx_ntvdm_command_misc_get_ds(void) { return g_active_call->call->cpu->ds; }
 USHORT bx_ntvdm_command_misc_get_ax(void) { return (USHORT)g_active_call->call->cpu->eax; }
@@ -78,8 +106,39 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
     bx_ntvdm_command_misc_active_call *active = g_active_call;
     uint32_t bytes;
     uint32_t index;
-    if (active == NULL || active->guest_buffer != NULL) return NULL;
+    if (active == NULL) return NULL;
     active->guest_address = real_mode_address(segment, offset);
+    if (active->call->service == BX_NTVDM_COMMAND_MISC_SET_INFO) {
+        bx_ntvdm_command_misc_session *session = active->call->session;
+        if (active->guest_address > 0x100000u - sizeof(SCSINFO)) return NULL;
+        if (active->guest_bytes == 0u) {
+            if (!active->call->guest_read(active->call->guest_state,
+                    active->guest_address, (uint8_t *)&session->scs_info,
+                    sizeof(session->scs_info))) return NULL;
+            session->scs_info_address = active->guest_address;
+            active->guest_bytes = 1u;
+            return &session->scs_info;
+        }
+        if (active->guest_bytes == 1u) {
+            if (active->guest_address >= 0x100000u) return NULL;
+            if (!active->call->guest_read(active->call->guest_state,
+                    active->guest_address, &session->is_dos_binary, 1u)) return NULL;
+            session->is_dos_binary_address = active->guest_address;
+            active->guest_bytes = 2u;
+            return &session->is_dos_binary;
+        }
+        if (active->guest_bytes == 2u) {
+            if (active->guest_address > 0x100000u - sizeof(WORD)) return NULL;
+            if (!active->call->guest_read(active->call->guest_state,
+                    active->guest_address, (uint8_t *)&session->fd_access,
+                    sizeof(session->fd_access))) return NULL;
+            session->fd_access_address = active->guest_address;
+            active->guest_bytes = 3u;
+            return &session->fd_access;
+        }
+        return NULL;
+    }
+    if (active->guest_buffer != NULL) return NULL;
     bytes = active->call->service == BX_NTVDM_COMMAND_MISC_COMSPEC ?
         BX_NTVDM_COMMAND_MISC_COMSPEC_MAX + 1u :
         BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES;
@@ -146,8 +205,12 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     memset(&active, 0, sizeof(active));
     if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC)
         body = cmdComSpec;
-    else
+    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR)
         body = cmdGetCurrentDir;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_SET_INFO)
+        body = cmdSetInfo;
+    else
+        body = cmdSaveWorld;
     IsFirstCall = call->first_call ? TRUE : FALSE;
     VDMForWOW = call->vdm_for_wow ? TRUE : FALSE;
     memset(lpszComSpec, 0, sizeof(lpszComSpec));
@@ -158,6 +221,10 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     active.call = call;
     g_active_call = &active;
     body();
+    if (call->service == BX_NTVDM_COMMAND_MISC_SET_INFO && active.guest_bytes != 3u) {
+        g_active_call = NULL;
+        return 0;
+    }
     if (active.write_back && active.guest_buffer != NULL &&
         !call->guest_write(call->guest_state, active.guest_address,
             active.guest_buffer, active.guest_bytes)) {

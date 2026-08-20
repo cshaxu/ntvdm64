@@ -33,7 +33,7 @@ but its documented shim/include divergence is applied after that exact copy.
 
 | Mirror | Admission | Delta from exact copy | Reason |
 | --- | --- | --- | --- |
-| `cmdmisc.c` | T231 S2 (`54:02`, `54:04`) | replaces only the unavailable historical include closure; excludes unadmitted sibling functions with a translation-unit guard; adds one bounded `size_t`→`USHORT` cast | preserves the original `cmdComSpec` and `cmdGetCurrentDir` bodies while preventing the legacy CCPU/PIF/console composition from becoming accidental product input. |
+| `cmdmisc.c` | T231 S2/S3 (`54:02`--`54:05`) | replaces only the unavailable historical include closure; selectively admits original bodies with translation-unit guards; adds one bounded `size_t`→`USHORT` cast | preserves `cmdComSpec`, `cmdGetCurrentDir`, `cmdSaveWorld` and `cmdSetInfo` while preventing legacy CCPU/PIF/console composition from becoming accidental product input. |
 
 The source files remain governed by the source-policy recovery ladder.  Their
 historical NT4 CCPU/SAS, scheduler and process-host dependencies must be
