@@ -48,7 +48,7 @@
 
 > **T231 S9 complete:** [direct `cmdExitVDM` witness](etc/evidence/t231-s9-command-exit-direct-001.md) records original `54:00` through the existing typed controlled-stop seam with no resume/write result.  It is local Direct source parity, not whole COMMAND closure.
 
-> **T231 S10 progress:** [COMMAND v2 route admission](etc/evidence/t231-s10-command-v2-route-admission-001.md) records adapter-only `54:00..10` ownership, original `cmddisp.c` table admission, the rebuilt local Direct matrix, the native engine's bounded copied launch-input bind for original `54:01`, and physical deletion of the direct COMMAND-v1 implementation/fixture closure.  Formal Ninja execution, registry-capable S4 success, retirement of dangling pre-governance composition wrappers and bounded native observation remain open; this is not T231 closure.
+> **T231 S10 progress:** [COMMAND v2 route admission](etc/evidence/t231-s10-command-v2-route-admission-001.md) records adapter-only `54:00..10` ownership, original `cmddisp.c` table admission, the rebuilt local Direct matrix, the native engine's bounded copied launch-input bind for original `54:01`, and physical deletion of the full COMMAND-v1 implementation/fixture/composition closure (including the former CMDINFO codec).  The fresh formal-r5 graph admits no `bop-v1` input and dry-runs 378 edges. Actual formal Ninja execution, registry-capable S4 success and bounded native observation remain open; this is not T231 closure.
 
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 
