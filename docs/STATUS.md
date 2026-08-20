@@ -2,15 +2,13 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T230 S15.** T229 demonstrated only a 73-row local route/disposition closure. T230 reopens DEM under a no-transfer rule: no callable `50:00..48` endpoint or native observation may be handed to a later task as T230 completion.
+> **No active packet.** M0 T230 is closed; see [the T230 closure record](history/m0-t230-closure-20260819.md). A new packet requires ordinary queue admission.
 
-**Active: M0 T230 S15 P4 -- v2 DEM generic-bridge precedence.**
-
-## Active Packet
+## Most Recently Closed Packet Evidence
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T230 S15 P4, Ordinary Mode. |
+| Identifier Mode | M0 T230, closed Ordinary Mode. |
 | Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
 | Objective | Compose the v2 Direct DEM bridge ahead of every legacy route and prove every valid `C4 C4 50 00..48` window cannot fall through to a `bop-v1` DEM provider, dispatcher or result bridge. |
 | Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected leaf implementation, or repair of legacy v1/partial v2 comparison code. |
@@ -54,7 +52,7 @@
 
 > **T230 S10 (local Direct matrix):** [DEM Direct matrix and legacy exclusion](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md) records the fresh direct OpenNT `demdisp.c` 73-slot dispatcher fixture, all eight imported-owner Direct fixtures, and the removal of the source-derived CWD experiment from the formal `bx-vdm` module. It does not claim bounded native observation or final legacy deletion.
 
-> **T230 S10 (native Direct gap):** [native Direct DEM composition gap](etc/research/t230-s10-native-direct-dem-composition-gap-001.md) records that the native engine still installs the retained v1 composition runtime.  A bounded v1-free Direct session now converts copied #UD events to the original dispatcher; binding it to the existing machine checked-memory transport remains the gap, not a DEM source/provider gap.
+> **T230 S10 (former native Direct gap):** [native Direct DEM composition gap](etc/research/t230-s10-native-direct-dem-composition-gap-001.md) preserves the admission evidence. The engine binding and v1 DEM retirement were completed by S15/S16; the final bounded observation is recorded below.
 
 > **T230 S11--S16:** [whole-DEM completion sequence](etc/operations/m0-t230-dem-completion-sequence-002.md) makes individual original-slot semantics, v1 DEM-route retirement and native checked-memory composition mandatory T230 exit criteria. The pre-existing S10 table-compilation fixture is not a substitute for those requirements.
 
@@ -68,14 +66,9 @@
 
 > **T230 S15 P3:** [v2 Direct host session](etc/evidence/t230-s15-p3-v2-direct-host-session-001.md) binds token ownership and checked RAM to the v2 native DEM session with zero-exit local evidence and no v1 input.
 
-> **T230 S15 P4 (partial local composition):** [v2 DEM composition entry](etc/evidence/t230-s15-p4-v2-dem-composition-entry-001.md) source-builds the v2-only external generic-UD entry and proves its bound/non-DEM/unbound behavior. It explicitly does not close the old native-engine binding or v1 deletion requirements.
+> **T230 S15 P4 (local composition):** [v2 DEM composition entry](etc/evidence/t230-s15-p4-v2-dem-composition-entry-001.md) source-builds the v2-only external generic-UD entry and proves its bound/non-DEM/unbound behavior. The former action-ABI initializer omission was corrected; S16 provides the resulting native evidence.
 
-> **T230 S15 P4 (startup replacement):** the native engine now calls the v2
-> startup composition rather than `bop-v1`'s composition runtime; the fresh
-> formal Ninja CLI target links.  The first source-built primary input
-> observation rejects before machine-stage creation (`terminal=2 detail=3`),
-> so this is route-retirement progress, not native DEM execution or T230
-> closure.  The successor details are retained in the linked P4 evidence.
+> **T230 S15 P4 (startup replacement):** the native engine calls the v2 startup composition rather than `bop-v1`'s composition runtime. The initial pre-stage rejection (`terminal=2 detail=3`) exposed an omitted selector-blind mechanical-action ABI initializer; after correction, the identical primary input enters the machine (`terminal=4 detail=0`).
 
 > **T230 S15 P4 (legacy DEM deletion):** all 140 tracked handwritten
 > `bop-v1/bx_ntvdm_dem_*` implementation/header files are deleted after a
@@ -83,10 +76,9 @@
 > is now non-DEM historical debt only; this deletion does not assert the v2
 > 73-slot runtime/native closure.
 
-> **T230 S15 P4 (post-deletion matrix):** the formal Ninja graph built and
-> ran all 14 T230 OpenNT-DEM fixtures with zero exit, including the original
-> 73-slot dispatcher table and v2 copied-UD composition.  It is local v2
-> regression evidence; native guest observation remains open.
+> **T230 S15 P4 (post-deletion matrix):** the formal Ninja graph built and ran all 14 T230 OpenNT-DEM fixtures with zero exit, including the original 73-slot dispatcher table and v2 copied-UD composition.
+
+> **T230 S16 (bounded native Direct observation):** [native Direct DEM observation](etc/evidence/t230-s16-native-direct-dem-observation-001.md) shows real guest `50:11` reaching the v2 Direct route and resuming with no v1 DEM fallback. The next `12:00` and subsequent machine-level #UD sequence are non-DEM, explicitly outside T230 rather than a transferred DEM obligation.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

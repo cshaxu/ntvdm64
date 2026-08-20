@@ -145,6 +145,10 @@ int bx_ntvdm_dem_v2_startup_prepare_machine_stage_request(
     bx_ntvdm_machine_stage_v1_request_clear(request);
     if (!bx_ntvdm_initial_state_action_v1_prepare(&runtime.initial_state,
             &request->initial_state_action)) return 0;
+    /* This is the selector-blind mantle ABI initializer.  Request clear owns
+     * the enclosing record only; each embedded action still needs its fixed
+     * ABI identity before the copied OpenNT NTIO bytes are assigned. */
+    bx_ntvdm_mechanical_action_v1_clear(&request->startup_action);
     request->startup_action.action_id = 2u;
     request->startup_action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
     request->startup_action.range_count = 1u;

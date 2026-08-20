@@ -87,12 +87,13 @@ linked `bin/ntdos64-native.exe`.  The route-precedence gate passed with no
 and returned 2, proving the formal executable's normal CLI front door.
 
 The hash-locked primary original-toolchain input set was staged only below the
-disposable `build/M0-T230-S15/v2-startup-inputs-r1` and invoked with a 128-tick
-budget.  It returned `terminal=2 detail=3`, i.e. rejected composition while
-preparing the machine-stage request.  This proves neither successful guest
-execution nor native DEM dispatch.  It is retained as a v1-free startup
-replacement observation; the pre-stage rejection must be diagnosed before
-claiming the S16 native observation.
+disposable `build/M0-T230-S15/v2-startup-inputs-r1`.  Its first 128-tick run
+returned `terminal=2 detail=3`: the new v2 code had omitted initialization of
+the embedded `startup_action` fixed ABI.  After the selector-blind action
+initializer was added, the same run reached native execution and returned the
+watchdog result `terminal=4 detail=0`.  The bounded S16 trace subsequently
+records real `50:11` v2 acceptance; see
+[`t230-s16-native-direct-dem-observation-001`](t230-s16-native-direct-dem-observation-001.md).
 
 ## Remaining S15 work
 
