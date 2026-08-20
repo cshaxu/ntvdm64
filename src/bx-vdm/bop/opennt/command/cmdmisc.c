@@ -20,9 +20,10 @@
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SAVE_WORLD 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO 1
+#define BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT 1
 #include "../../shim/command_misc_shim.h"
 
-#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID GetWowKernelCmdLine(VOID);
 extern ULONG fSeparateWow;
 
@@ -115,11 +116,13 @@ char    CmdLine[MAX_PATH];
 		        strcat (achTitle, "Inactive ");
                     else
                         strcat(achTitle, achInactive);
-		    cb = strlen(achTitle);
+		    /* DIVERGENCE: ULONG is the historical width; make the
+		     * size_t-to-ULONG boundary explicit for x86/x64 warnings. */
+		    cb = (ULONG)strlen(achTitle);
 		    // GetConsoleTitleA and SetConsoleTitleA
 		    // are working on OEM character set.
 		    GetConsoleTitleA(achTitle + cb, MAX_PATH - cb - 1);
-		    cb = strlen(achTitle);
+		    cb = (ULONG)strlen(achTitle);
 		    achTitle[cb] = ']';
 		    achTitle[cb + 1] = '\0';
 		    SetConsoleTitleA(achTitle);
@@ -143,7 +146,10 @@ char    CmdLine[MAX_PATH];
     VDMInfo.VDMState |= ASKING_FOR_DOS_BINARY;
 
     if (!IsFirstCall && !(VDMInfo.VDMState & ASKING_FOR_SECOND_TIME)) {
-        pRdrInfo = (PREDIRCOMPLETE_INFO) FETCHDWORD(pCMDInfo->pRdrInfo);
+        /* DIVERGENCE: pRdrInfo is a 32-bit guest token in the original
+         * CMDINFO record.  Resolve it through the typed session table rather
+         * than casting it to a host pointer on x86/x64. */
+        pRdrInfo = bx_ntvdm_command_misc_redirection_from_guest(pCMDInfo->pRdrInfo);
         if (cmdCheckCopyForRedirection (pRdrInfo) == FALSE)
             VDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;
     }
@@ -306,7 +312,7 @@ char    CmdLine[MAX_PATH];
     while (*pSrc && *pSrc != '.') {
          *pDst++ = *pSrc++;
          }
-    cb = strlen(CmdLine);
+     cb = (ULONG)strlen(CmdLine); /* DIVERGENCE: preserve historical ULONG. */
 
     // cmd line must be terminated with "\0xd\0xa\0". This is either done
     // by BASE or cmdCheckForPif function(cmdpif.c).
@@ -359,14 +365,22 @@ char    CmdLine[MAX_PATH];
 
     // Handle Standard IO redirection
     pRdrInfo = cmdCheckStandardHandles (&VDMInfo,&pCMDInfo->bStdHandles);
-    STOREDWORD(pCMDInfo->pRdrInfo,(ULONG)pRdrInfo);
+    /* DIVERGENCE: retain the original CMDINFO slot but publish a fixed guest
+     * token; an x64 host HANDLE/pointer never crosses this 32-bit field. */
+    pCMDInfo->pRdrInfo = bx_ntvdm_command_misc_redirection_token(pRdrInfo);
 
     // Tell DOS that it has to invalidate the CDSs
-    *pSCS_ToSync = (CHAR)0xff;
+    *pSCS_ToSync = (CHAR)-1; /* DIVERGENCE: same 8-bit 0xff without x64 warning. */
     setCF(0);
 
     return;
 }
+
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT)
+/* The directly imported cmdGetNextCmd body above is the admitted S7 slice.
+ * GetWowKernelCmdLine below retains the historical separate-WOW product
+ * composition and is deliberately not pulled into the CLI command source. */
+#else
 
 
 
@@ -516,6 +530,7 @@ LPSTR    pszCmdLine;
 
     return;
 }
+#endif /* BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT */
 #endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
 

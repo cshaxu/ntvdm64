@@ -22,6 +22,7 @@ typedef char *PCHAR;
 typedef char *LPSTR;
 typedef void *PVOID;
 typedef void *LPVOID;
+typedef uint8_t BOOLEAN;
 
 /* The OpenNT command configuration owner uses these NT string layouts.  They
  * are reproduced here rather than pulling the old ntdll import closure into
@@ -68,7 +69,45 @@ typedef struct _RedirComplete_Info {
     PPIPE_INPUT ri_pPipeStdIn;
     PPIPE_OUTPUT ri_pPipeStdOut, ri_pPipeStdErr;
 } REDIRCOMPLETE_INFO, *PREDIRCOMPLETE_INFO;
-typedef struct _VDMINFO { HANDLE StdIn, StdOut, StdErr; } VDMINFO, *PVDMINFO;
+/* Exact OpenNT vdmapi.h and cmdsvc.h records used by cmdGetNextCmd.  Pointer
+ * members remain host-private; guest access is always copied by this shim. */
+#define ASKING_FOR_FIRST_COMMAND 0x0001u
+#define ASKING_FOR_DOS_BINARY    0x0004u
+#define ASKING_FOR_SECOND_TIME   0x0008u
+#define ASKING_FOR_ENVIRONMENT   0x0400u
+#ifndef CREATE_FORCEDOS
+#define CREATE_FORCEDOS          0x00000200u
+#endif
+#define EXE_EXTENTION_STRING ".EXE"
+#define COM_EXTENTION_STRING ".COM"
+#define BAT_EXTENTION_STRING ".BAT"
+#define EXTENTION_STRING_LEN 4u
+#define EXE_EXTENTION 4u
+#define COM_EXTENTION 8u
+#define BAT_EXTENTION 2u
+#define UNKNOWN_EXTENTION 9u
+#pragma pack(push, 2)
+typedef struct _CMDINFO {
+    USHORT EnvSeg, EnvSize, CurDrive, NumDrives, CmdLineSeg, CmdLineOff;
+    USHORT CmdLineSize, ReturnCode, bStdHandles;
+    ULONG pRdrInfo;
+    USHORT CodePage, fTSRExit, fBatStatus, ExecPathSeg, ExecPathOff;
+    USHORT ExecPathSize, ExecExtType;
+} CMDINFO, *PCMDINFO;
+#pragma pack(pop)
+typedef struct _VDMINFO {
+    ULONG iTask, dwCreationFlags, ErrorCode, CodePage;
+    HANDLE StdIn, StdOut, StdErr;
+    LPVOID CmdLine, AppName, PifFile, CurDirectory, Enviornment;
+    ULONG EnviornmentSize;
+    STARTUPINFOA StartupInfo;
+    LPVOID Desktop; ULONG DesktopLen; LPVOID Title; ULONG TitleLen;
+    LPVOID Reserved; ULONG ReservedLen;
+    USHORT CmdSize, AppLen, PifLen, CurDirectoryLen, VDMState, CurDrive;
+    BOOLEAN fComingFromBat;
+} VDMINFO, *PVDMINFO;
+typedef struct _VDMENVBLK { DWORD cchEnv, cchRemain; CHAR *lpszzEnv; } VDMENVBLK, *PVDMENVBLK;
+typedef struct _BX_NTVDM_PIF_DATA { BOOL CloseOnExit; } PIF_DATA;
 #define MASK_STDIN  1u
 #define MASK_STDOUT 2u
 #define MASK_STDERR 4u
@@ -77,6 +116,8 @@ typedef struct _VDMINFO { HANDLE StdIn, StdOut, StdErr; } VDMINFO, *PVDMINFO;
 #define HANDLE_STDOUT 1u
 #define HANDLE_STDERR 2u
 #define EG_MALLOC_FAILURE ERROR_NOT_ENOUGH_MEMORY
+#define EG_ENVIRONMENT_ERR ERROR_ENVVAR_NOT_FOUND
+#define EXIT_NO_CLOSE 0u
 #define RMB_ICON_BANG 0x00000010u
 #define RMB_ABORT 0x00000002u
 
@@ -101,6 +142,7 @@ typedef struct _SCSINFO {
 #define BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES (MAXIMUM_VDM_CURRENT_DIR + 3u)
 
 enum bx_ntvdm_command_misc_service {
+    BX_NTVDM_COMMAND_MISC_GET_NEXT = 0x01u,
     BX_NTVDM_COMMAND_MISC_COMSPEC = 0x02u,
     BX_NTVDM_COMMAND_MISC_SAVE_WORLD = 0x03u,
     BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR = 0x04u,
@@ -133,6 +175,18 @@ typedef struct bx_ntvdm_command_misc_session {
     SCSINFO scs_info;
     BYTE is_dos_binary;
     WORD fd_access;
+    /* Direct CLI input at the historical BaseSrv GetNextVDMCommand seam. */
+    CHAR command_source_app[MAX_PATH + 1u];
+    CHAR command_source_tail[128u];
+    USHORT command_source_drive;
+    USHORT command_source_code_page;
+    uint32_t command_source_ready;
+    uint32_t command_source_delivered;
+    uint32_t command_source_repeat_pending;
+    uint32_t command_source_environment_bytes;
+    CHAR command_source_environment[1024u];
+    uint32_t command_source_vdm_environment_bytes;
+    CHAR command_source_vdm_environment[1024u];
 } bx_ntvdm_command_misc_session;
 
 #define BX_NTVDM_COMMAND_MISC_SESSION_MAGIC 0x42584353u
@@ -140,6 +194,12 @@ typedef struct bx_ntvdm_command_misc_session {
 
 void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *session);
 int bx_ntvdm_command_misc_session_valid(const bx_ntvdm_command_misc_session *session);
+int bx_ntvdm_command_misc_session_set_command_source(
+    bx_ntvdm_command_misc_session *session, const CHAR *application,
+    const CHAR *tail, USHORT drive, USHORT code_page);
+int bx_ntvdm_command_misc_session_set_command_environment(
+    bx_ntvdm_command_misc_session *session, const CHAR *environment,
+    uint32_t bytes);
 
 typedef int (*bx_ntvdm_command_misc_guest_read_fn)(void *state,
     uint32_t physical_address, uint8_t *buffer, uint32_t bytes);
@@ -204,6 +264,20 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
 void nt_init_event_thread(void);
 UINT bx_ntvdm_command_misc_get_system_directory(LPSTR buffer, UINT bytes);
 void bx_ntvdm_command_misc_set_test_system_directory(const CHAR *path);
+BOOL GetNextVDMCommand(PVDMINFO vdm_info);
+void host_lpt_flush_initialize(void);
+void cmdUpdateCurrentDirectories(BYTE current_drive);
+void cmdSetDirectories(PCHAR environment, PVDMINFO vdm_info);
+BOOL cmdCheckCopyForRedirection(PREDIRCOMPLETE_INFO info);
+BOOL cmdCreateVDMEnvironment(PVDMENVBLK block);
+void cmdCheckForPIF(PVDMINFO vdm_info);
+USHORT cmdMapCodePage(ULONG code_page);
+PREDIRCOMPLETE_INFO cmdCheckStandardHandles(PVDMINFO vdm_info,
+    USHORT UNALIGNED *standard_handles);
+void cmdPushExitInConsoleBuffer(void);
+void demCloseAllPSPRecords(void);
+void nt_block_event_thread(int block);
+void nt_resume_event_thread(void);
 VOID cmdInitConsole(VOID);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
 #define GetConsoleKeyboardLayoutName GetConsoleKeyboardLayoutNameA
@@ -260,14 +334,25 @@ extern BYTE *pIsDosBinary;
 extern WORD *pFDAccess;
 extern BOOL bPifFastPaste;
 extern ULONG DosSessionId;
-extern BOOL fSeparateWow;
 extern CHAR comspec[];
 extern CHAR *lpszzInitEnvironment;
 extern WORD cchInitEnvironment;
 extern CHAR *lpszzVDMEnv32;
 extern DWORD cchVDMEnv32;
+extern BOOL IsRepeatCall;
+extern BOOL DosEnvCreated;
+extern BOOL IsFirstVDM;
+extern BOOL fBlock;
+extern WORD Exe32ActiveCount;
+extern USHORT nDrives;
+extern VDMINFO VDMInfo;
+extern VDMENVBLK cmdVDMEnvBlk;
+extern CHAR cmdHomeDirectory[MAX_PATH + 1u];
+extern PIF_DATA pfdata;
+extern UINT VdmExitCode;
 extern BOOL DontCheckDosBinaryType;
 extern BOOL IsFirstWOWCheckBinary;
+ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info);
 
 #define getDX() bx_ntvdm_command_misc_get_dx()
 #define getBX() bx_ntvdm_command_misc_get_bx()

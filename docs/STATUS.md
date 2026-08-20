@@ -2,29 +2,29 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T231 S6.** T231's original CONFIG/AUTOEXEC, initialization-environment and start-information group is locally complete; binary admission is next.
+> **Current effective packet: M0 T231 S8.** T231's original command-source/session group is locally complete; the next coherent owner slice is the host-child lifecycle state machine.
 
-**Active: M0 T231 S6 -- COMMAND binary-admission package (`54:07`).**
+**Active: M0 T231 S8 -- COMMAND host-child lifecycle package (`54:08`, `54:0A`, `54:0B`).**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T231 S6, Ordinary Mode. |
+| Identifier Mode | M0 T231 S8, Ordinary Mode. |
 | Admission And Approval | Owner direction: “按照规划，实现COMMAND族的所有BOP，采用原生OpenNT源代码文件结构和代码结构，尽可能采用相同逻辑，并彻底清理该族的v1实现。” |
-| Objective | Recover original `54:07` binary-admission semantics, including extension/path/error distinctions and the required checked COMMAND session boundary. |
-| Non-goals | No trace-selected leaf patch, no v1 extension, no Bochs intrusion, no guest-image mutation, no child-process lifecycle work, and no COMMAND-family closure claim. |
-| Reference Baseline | Original COMMAND binary-admission owner/source, `cmd.h`, `cmdsvc.h`; completed T231 S1--S5 evidence and v1 comparison sources. |
-| Files And ABI Surface | admitted OpenNT command mirrors, narrowly named binary/path shim, persistent COMMAND session, focused fixture, formal manifest and retained v1 sources. |
+| Objective | Recover original `54:08`, `54:0A` and `54:0B` as one command launch, host-child wait, exit-code and parent-session restoration state machine. |
+| Non-goals | No trace-selected leaf patch, no v1 extension, no Bochs intrusion, no guest-image mutation, no `54:00` controlled-exit work, and no COMMAND-family closure claim. |
+| Reference Baseline | Original `cmdexec.c`/`cmdexit.c`/`cmdredir.c`/`cmd.h` lifecycle owners, completed T231 S1--S7 evidence and v1 comparison sources. |
+| Files And ABI Surface | admitted OpenNT lifecycle source mirrors, narrowly named process/handle/session shims, persistent COMMAND session, state-machine fixture, formal manifest and retained v1 sources. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding boundaries, original OpenNT ordering/layout/failure behavior, formal Ninja and documentation governance. |
-| Verification | The selected original body compiles with MSVC `/W4 /WX /MT`; a focused fixture proves extension/path/error cases and result ABI. |
-| Expected Markers | No parallel service implementation; all platform changes are in named shims; no raw host handle or guest pointer crosses the typed ABI; v1 is comparison-only. |
-| Asset Needs | Pinned OpenNT source, host path/file APIs, checked CPU/guest-memory ABI, formal Ninja graph and retained v1 sources. |
-| Reporting Requirements | Record all original source deltas inline and distinguish local service parity from child execution, engine routing and native guest proof. |
-| Stop Conditions | Missing historical layout, unavailable host capability, a needed Bochs intrusion, or a required new behavior is recorded without silently changing the original contract. |
-| Exit Criteria | Original `54:07` is source-admitted with focused zero-exit extension/path/error regression; its v1 route is not extended. |
+| Verification | The selected original state-machine bodies compile with MSVC `/W4 /WX /MT`; a focused fixture proves launch disposition, wait/exit return, handle restoration and guest resume/terminal branches. |
+| Expected Markers | `54:08`/`0A`/`0B` remain one state machine; all historical host composition changes are in named shims; no raw host handle or guest pointer crosses the typed ABI; v1 is comparison-only. |
+| Asset Needs | Pinned OpenNT source, declared CLI launch input, public Win32 process/handle APIs, checked CPU/guest-memory ABI, formal Ninja graph and retained v1 sources. |
+| Reporting Requirements | Record all original source deltas inline and distinguish local lifecycle parity from target-process completion, engine routing and native guest proof. |
+| Stop Conditions | Missing historical layout, unavailable public host capability, a needed Bochs intrusion, or a required new behavior is recorded without silently changing the original contract. |
+| Exit Criteria | The original three-service state machine is source-admitted with focused zero-exit lifecycle regression; no product COMMAND-v1 route is extended. |
 | Original Owner Request | “S2把所有简单的BOP解除注释，局部测试完成code complete；每个疑难BOP自己独立出一个S任务来做。” |
-| Similar-Issue Sweep | `cmdGetStdHandle`, `cmdInitConsole`, `cmdGetKbdLayout`, `cmdredir.c`, `cmdkeyb.c`, source guest layouts, console/keyboard/handle APIs, old `54:06`/`54:09`/`54:0E` v1 routes and formal manifest membership. |
+| Similar-Issue Sweep | `cmdExec`, `cmdExecComspec32`, `cmdReturnExitCode`, `cmdCreateProcess`, `CreateProcess`, wait/exit APIs, `CMDINFO`/`SCSINFO` layouts, original redirection restoration, old `54:08`/`0A`/`0B` v1 routes and formal manifest membership. |
 
 > **T231 S1 progress:** [COMMAND owner-package plan](etc/operations/m0-t231-command-owner-package-plan-001.md), [service ledger](etc/operations/m0-t231-s1-command-service-ledger-001.md), and the [source-mirror manifest](../src/bx-vdm/bop/opennt/command/command-import-manifest.md) establish the original 17-slot package boundary. The admitted `Sync-OpenNtCommandMirror.ps1` copy verified byte-identical hashes for all fifteen listed original source/header inputs. Each remains outside the build until its own neutral COMMAND shim admission; S2 is the first such admission.
 
@@ -41,6 +41,8 @@
 > **T231 S5 complete:** [initial-environment witness](etc/evidence/t231-s5-command-init-environment-direct-001.md) records direct original `cmdenv.c` `54:0F` sizing, COMSPEC/WINDIR filtering, OEM multi-string output and non-initialization no-op.  Together with the three preceding S5 records, all four S5 endpoints have zero-exit focused witnesses.
 
 > **T231 S6 complete:** [binary-admission witness](etc/evidence/t231-s6-command-check-binary-direct-001.md) records original `cmdexec.c` `54:07`, including host binary classification, DOS bypass, checked CMDINFO handoff, DS/ES typed delta and guest writeback.
+
+> **T231 S7 complete:** [direct `cmdGetNextCmd` witness](etc/evidence/t231-s7-command-get-next-direct-001.md) records the original `54:01` body, declared CLI command-source seam, original environment-size/re-entry contract, `CMDINFO` handoff and exhausted-source terminal behavior.  It is local Direct source parity, not host-child or native-guest closure.
 
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 
