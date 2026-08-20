@@ -118,3 +118,28 @@ After the CMDINFO fixture removal, `formal-r5` generation and its complete
 378-edge `ninja -n all` graph succeeded.  Its admitted COMMAND sources are
 the eight original-mirror files plus the explicitly listed v2 bridges and
 neutral shims; `bop-v1` is absent from both modules and fixtures.
+
+## Registry-success replay
+
+The scoped S4 `54:0E` registry-success fixture was replayed outside the
+restricted runner.  It exited zero and printed:
+
+```text
+T231 S4 direct OpenNT console, keyboard fallback/success, and standard-handle token ABI verified
+```
+
+The fixture uses only its process-local HKLM override, disposable KB16/keyboard
+inputs and temporary `HKCU\\Software\\ntdos64-t231-kbd` key, then removes all
+three before exit.  This closes the former host-permission gap without adding
+a fallback or changing the imported `cmdkeyb.c` behavior.
+
+## Current-source compilation replay
+
+Because the installed Ninja runners still stall before creating any child
+process, the exact MSVC commands emitted by `formal-r5` were invoked from its
+own build root for the following fifteen admitted COMMAND units.  All returned
+zero under `/W4 /WX /MT`: the eight imported OpenNT translation units
+(`cmdmisc`, `cmddisp`, `cmdexit`, `cmdconf`, `cmdenv`, `cmdexec`, `cmdkeyb`,
+`cmdredir`), the two COMMAND v2 bridges/session units, and all five neutral
+COMMAND shims.  This is a current-source compilation witness derived from the
+formal graph, not a claim that the Ninja executor itself has passed.

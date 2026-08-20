@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1986 |
 | --- | --- |
-| Generated UTC | 2026-08-20T14:29:42Z |
+| Generated UTC | 2026-08-20T14:37:56Z |
 
 ## Entries
 
@@ -227,7 +227,7 @@ content-divergent entries.
 | etc/evidence/t230-s7-demdasd-demioctl-direct-import-map-001.md | indexed supporting material | 801e226f238e9c2b6cd6b5cc81a6d23e42b6e27cfb6fa83f5cd6bd88c0b813b0 |
 | etc/evidence/t230-s8-demerror-demlock-direct-import-map-001.md | indexed supporting material | fa0cfe2d0f414e55ab99fddb3269031d0c76a1f6299dfcd583d50aa531f8e120 |
 | etc/evidence/t230-s9-demmisc-direct-import-map-001.md | indexed supporting material | 91824686a6822d83cb715c8d88d6958084b904d764b98d8d98339f8846acc393 |
-| etc/evidence/t231-s10-command-v2-route-admission-001.md | indexed supporting material | f0b0dc45f5a921024c96dc6b1611afeaa16cc6b80ad63d02ebca9fcbd903ae3f |
+| etc/evidence/t231-s10-command-v2-route-admission-001.md | indexed supporting material | c218ba138516d2da1afbe705c56e64f3123cc3050295f893833df20d6062d7e5 |
 | etc/evidence/t231-s2-command-cmdmisc-direct-import-001.md | indexed supporting material | bd6bc4ae09f164ffe1385fd92f23c9fb540cfbc2ebad59329c621bfd4681eec2 |
 | etc/evidence/t231-s3-command-cmdmisc-registration-001.md | indexed supporting material | 9fe27bd77117cc61ce13f38b34515eb388ffb6c967bf21bc2e86caf5f7ba71c7 |
 | etc/evidence/t231-s4-console-keyboard-partial-001.md | indexed supporting material | 0f1e5e2b922eefd60cf07e9fdce0e08780d08b48a3f674ff9cc3e1aa546b030c |
@@ -2000,7 +2000,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4beaaafebbf3370be373afaee84c4143d6e5b0b4fb7d79b5aa3d0501c678ac01 |
+| STATUS.md | principal control document | 572481a8ba819d1f84713ebf1daf2bb35a9266d22eafb17842f37d81a80acf58 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |
