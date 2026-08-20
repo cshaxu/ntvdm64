@@ -85,8 +85,8 @@ from the tree, and the formal Ninja manifest contains no `bop-v1` source or
 COMMAND-v1 fixture input.  The active source-built route is therefore the
 OpenNT mirror plus neutral v2 shims; v1 is not an alternate product path.
 
-Fresh `build/M0-T231-S10/formal-r4` generation accepted that manifest and
-`ninja -n all` enumerated its complete 380-edge module/fixture/CLI graph,
+Fresh `build/M0-T231-S10/formal-r5` generation accepted that manifest and
+`ninja -n all` enumerated its complete 378-edge module/fixture/CLI graph,
 including the final `ntdos64-native.exe` link, without a missing v1 source.
 This is graph-admission evidence only: the runner's actual action-dispatch
 stall remains separately recorded above.
@@ -106,3 +106,15 @@ removed with the fixture; regenerated `formal-r4` then enumerated the complete
 graph successfully.  This makes the formal graph reject a reintroduction of
 the removed v1 fixture by normal input validation rather than leaving a stale
 path hidden in a historical build list.
+
+The final command-specific legacy leaf, `bx_ntvdm_cmdinfo_v1`, was also
+removed with its header, dedicated fixture, and the historical native-boundary
+fixture that consumed its self-authored wire codec.  `54:01` is consequently
+represented only by the imported OpenNT `cmdGetNextCmd` implementation and its
+v2 session/checked-RAM seam; the project no longer retains a parallel local
+CMDINFO provider as a fallback.
+
+After the CMDINFO fixture removal, `formal-r5` generation and its complete
+378-edge `ninja -n all` graph succeeded.  Its admitted COMMAND sources are
+the eight original-mirror files plus the explicitly listed v2 bridges and
+neutral shims; `bop-v1` is absent from both modules and fixtures.
