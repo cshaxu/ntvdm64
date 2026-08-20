@@ -12,6 +12,7 @@
 #include "../../bx_ntvdm_cpu_result_v2.h"
 #include "../../bx_ntvdm_cpu_state_abi.h"
 #include "../../bx_ntvdm_exception_abi.h"
+#include "bx_ntvdm_host_handle_manager.h"
 
 typedef uint16_t USHORT;
 typedef uint16_t WORD;
@@ -179,7 +180,7 @@ typedef struct bx_ntvdm_command_misc_session {
     CHAR autoexec_input_path[MAX_PATH + 13u];
     uint32_t redirection_token;
     REDIRCOMPLETE_INFO redirection_info;
-    HANDLE handle_tokens[64];
+    bx_ntvdm_host_handle_manager handles;
     SCSINFO scs_info;
     BYTE is_dos_binary;
     WORD fd_access;

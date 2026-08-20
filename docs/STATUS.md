@@ -2,39 +2,41 @@
 
 ## Current Work
 
-**Active: M0 T232 S3** — migrate COMMAND standard-handle and launch paths to
-the unified manager; XMS remains queued.
+**Active: M0 T233 S1** — map the complete OpenNT XMS owner package, its
+machine prerequisites, and its inherited host-handle boundary before code
+recovery begins.
 
 ## Active Packet
 
-### M0 T232 S3 — COMMAND unified-handle migration
+### M0 T233 S1 — XMS package source and ABI admission map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T232 S3`, Ordinary Mode. |
-| Admission And Approval | T232 S2 DEM migration has passed its local source-built proof. Owner request requires the same manager implementation to replace COMMAND's private standard-handle table. |
-| Objective | Move COMMAND `54:06` standard-handle publication and launch/redirection lookup to the unified manager; preserve the original `BX:CX` layout while using only the low-word opaque ID; remove `handle_tokens[64]`. |
-| Non-goals | Do not admit XMS. Do not change original COMMAND provider control flow, console semantics, Bochs, or DOS JFN/SFT behavior. Do not claim the later cross-family top-level session merge until S4. |
-| Reference Baseline | S1 manager foundation is delivered as `9ac61269`; S2 DEM migration is locally built in `build/M0-T232-S1/formal-r1`; COMMAND retains `command_misc_session.handle_tokens[64]`. |
-| Files And ABI Surface | `command_misc_shim.{h,c}`, `cmdredir.c`, COMMAND focused fixtures, formal Ninja manifest and S3 evidence. |
-| Applicable Rules | `docs/rules/EXECUTION.md` source-recovery and closure rules; `docs/rules/ARCHITECTURE.md`; `docs/rules/CODING.md`; source policy. This is adapter-owned modern ABI safety infrastructure, not a replacement OpenNT provider. |
-| Verification | COMMAND standard-handle publication and execute/redirection fixture verifies manager ID lookup, zero high word enforcement, borrowed-handle lifetime and original error result. Run its formal Ninja target plus manager and DEM regressions. |
-| Expected Markers | No `handle_tokens[64]` field or 64-entry allocation limit remains in COMMAND; `BX:CX` carries low-word ID plus zero high word; borrowed standard handles are not closed by manager cleanup. |
-| Asset Needs | S1 manager, direct OpenNT COMMAND mirror/shims, MSVC x64 formal Ninja closure. |
-| Reporting Requirements | Record exact COMMAND ownership rules and clearly distinguish common implementation from pending top-level cross-family session ownership. |
-| Stop Conditions | Pause for owner direction if COMMAND requires a host pointer or nonzero high word in guest-visible state, a changed process/console semantic, or cross-session identity before S4's owner design. |
-| Exit Criteria | COMMAND private table is removed; standard-handle and launch routes use the manager; focused and formal regressions pass. |
-| Original Owner Request | “请你新开一个T任务，开始设计和实现这个统一句柄管理器。” |
-| Similar-Issue Sweep | COMMAND `54:06`, `54:08`, `54:0A` and redirection/child launch helpers. DEM is regression-only after S2; XMS handles remain excluded. |
-
-Detailed sequence: [T232 host-handle manager plan](etc/operations/m0-t232-unified-host-handle-manager-plan-001.md).
+| Identifier Mode | `M0 T233 S1`, Ordinary Mode. |
+| Admission And Approval | The owner approved global task ordering and requested T232 closure; the first ordered candidate is the OpenNT XMS owner package. This S admits only its source/ABI map before recovery implementation. |
+| Objective | Produce the complete `52:xx` service-to-original-source map, identify A20/UMB/INT 15 and host-handle dependencies by owner, and choose the source-first recovery route for every service. |
+| Non-goals | Do not implement an XMS service, enable a Bochs device, alter CPU/machine behavior, or use guest trace hits to select individual leaf work. |
+| Reference Baseline | M0 T232 is closed by [its closure record](history/m0-t232-closure-20260820.md); XMS is queue order one and must use its unified host-handle manager rather than create a token table. |
+| Files And ABI Surface | OpenNT XMS source inventory, current BOP catalogue, `bx-vdm` ingress/provider boundaries, bx-core/bx-mantle A20/INT 15/UMB ownership records, and S1 evidence. |
+| Applicable Rules | `docs/rules/EXECUTION.md` source-recovery and package-completion gates; `docs/rules/ARCHITECTURE.md`; `docs/rules/CODING.md`; source policy. |
+| Verification | Cross-check every `52:xx` selector entry against original dispatcher/source ownership; independently review all declared prerequisites and run documentation governance verification. |
+| Expected Markers | One exhaustive service ledger, one source-recovery disposition per service, and explicit transfer boundaries for machine-owned prerequisites and adapter-only ABI seams. |
+| Asset Needs | Existing imported OpenNT XMS materials, BOP tracker, machine source map, formal Ninja manifest, and no new host or third-party input. |
+| Reporting Requirements | State exact source paths, original failure rules, uncomposable dependencies, retained ABI layouts, and whether T232's manager is applicable or deliberately out of scope. |
+| Stop Conditions | Pause for owner direction if the source map requires an unapproved host mutation policy, a Bochs semantic intrusion, or a historical source asset absent from the approved inputs. |
+| Exit Criteria | The complete XMS package is classified under the mandatory source-first ladder; implementation can be decomposed by owner component rather than trace-leaf BOP. |
+| Original Owner Request | “请你在当前T任务中收口，bop-v1不用管，但是所有其他地方都要清理干净！” |
+| Similar-Issue Sweep | All `52:xx` services, A20/UMB/INT 15 routes, XMS allocation/descriptor handle representations, and the T232 manager handoff. |
 
 ## Current Work Record
 
 M0 T231 closed as the COMMAND `54:00..10` code-complete/v2 product-route
 package; see the [T231 closure](history/m0-t231-closure-20260820.md). Native
 `54:xx` reachability remains transferred to the queued bx machine/BIOS owner
-package. XMS remains queued and is not admitted by T232.
+package. XMS was excluded from T232 and is now admitted as M0 T233 S1.
+
+M0 T232 is closed as the unified host-handle representation and cleanup
+package; see [the closure record](history/m0-t232-closure-20260820.md).
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

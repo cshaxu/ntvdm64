@@ -4,9 +4,10 @@
 
 #include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demfile_shim.h"
+#include "bop/shim/bx_ntvdm_host_handle_manager.h"
 
 typedef struct fixture_context {
-    HANDLE handles[8];
+    bx_ntvdm_host_handle_manager handles;
     uint8_t guest[0x20000];
 } fixture_context;
 
@@ -14,22 +15,18 @@ static int publish_handle(void *state, HANDLE handle, uint32_t *token_out,
     DWORD *error_out)
 {
     fixture_context *context = (fixture_context *)state;
-    uint32_t index;
+    uint16_t guest_handle;
     if (token_out != NULL) *token_out = 0u;
     if (error_out != NULL) *error_out = ERROR_TOO_MANY_OPEN_FILES;
-    if (context == NULL || handle == INVALID_HANDLE_VALUE) return 0;
-    for (index = 0u; index < 8u; ++index) if (context->handles[index] == NULL) {
-        context->handles[index] = handle;
-        if (token_out != NULL) *token_out = index + 1u;
-        if (error_out != NULL) *error_out = ERROR_SUCCESS;
-        return 1;
-    }
-    return 0;
+    if (context == NULL || !bx_ntvdm_host_handle_manager_publish(&context->handles,
+            handle, BX_NTVDM_HOST_HANDLE_OWNED, &guest_handle, error_out)) return 0;
+    if (token_out != NULL) *token_out = guest_handle;
+    return 1;
 }
 static int lookup_handle(void *state, uint32_t token, HANDLE *out)
-{ fixture_context *c = state; if (out) *out = INVALID_HANDLE_VALUE; if (!c || token == 0u || token > 8u || c->handles[token - 1u] == NULL) return 0; *out = c->handles[token - 1u]; return 1; }
+{ fixture_context *c = state; if (out) *out = INVALID_HANDLE_VALUE; return c != NULL && token != 0u && token <= UINT16_MAX && bx_ntvdm_host_handle_manager_lookup_handle(&c->handles, (uint16_t)token, out); }
 static int release_handle(void *state, uint32_t token, DWORD *error)
-{ fixture_context *c = state; if (error) *error = ERROR_INVALID_HANDLE; if (!c || token == 0u || token > 8u || c->handles[token - 1u] == NULL || !CloseHandle(c->handles[token - 1u])) return 0; c->handles[token - 1u] = NULL; if (error) *error = ERROR_SUCCESS; return 1; }
+{ fixture_context *c = state; if (error) *error = ERROR_INVALID_HANDLE; return c != NULL && token != 0u && token <= UINT16_MAX && bx_ntvdm_host_handle_manager_release(&c->handles, (uint16_t)token, error); }
 static int attr_get(void *s, uint8_t d, const wchar_t *p, DWORD *a, DWORD *e)
 { (void)s; (void)d; (void)p; if (a) *a = FILE_ATTRIBUTE_NORMAL; if (e) *e = ERROR_SUCCESS; return 1; }
 static int attr_set(void *s, uint8_t d, const wchar_t *p, DWORD a, DWORD *e)
@@ -58,7 +55,7 @@ static int invoke(fixture_context *state, bx_ntvdm_dem_direct_context *direct,
 static void reset_cpu(bx_ntvdm_cpu_state_v1 *cpu)
 { bx_ntvdm_cpu_state_v1_initialize(cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu->ds = 0x100u; cpu->es = 0x100u; }
 static void close_published(fixture_context *c)
-{ uint32_t i; for (i = 0u; i < 8u; ++i) if (c->handles[i] != NULL) { CloseHandle(c->handles[i]); c->handles[i] = NULL; } }
+{ if (c != NULL) bx_ntvdm_host_handle_manager_reset(&c->handles); }
 
 int main(void)
 {
@@ -69,6 +66,7 @@ int main(void)
     if (GetTempPathA(MAX_PATH, directory) == 0u || GetTempFileNameA(directory, "dfs", 0u, base) == 0u) return 1;
     DeleteFileA(base); sprintf_s(source, sizeof(source), "%s.src", base); sprintf_s(destination, sizeof(destination), "%s.dst", base);
     memset(&state, 0, sizeof(state)); memset(&direct, 0, sizeof(direct));
+    if (!bx_ntvdm_host_handle_manager_initialize(&state.handles)) return 2;
     direct.magic = BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC; direct.abi_version = BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION; direct.struct_bytes = sizeof(direct); direct.state = &state;
     direct.publish_handle = publish_handle; direct.lookup_handle = lookup_handle; direct.release_handle = release_handle; direct.query_attributes = attr_get; direct.set_attributes = attr_set;
     memset(&event, 0, sizeof(event)); event.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC; event.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION; event.struct_bytes = sizeof(event); event.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION; event.fault_rip = 0x1000u;

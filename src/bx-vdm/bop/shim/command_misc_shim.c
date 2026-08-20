@@ -91,13 +91,15 @@ void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *ses
     session->magic = BX_NTVDM_COMMAND_MISC_SESSION_MAGIC;
     session->abi_version = BX_NTVDM_COMMAND_MISC_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
+    (void)bx_ntvdm_host_handle_manager_initialize(&session->handles);
 }
 
 int bx_ntvdm_command_misc_session_valid(const bx_ntvdm_command_misc_session *session)
 {
     return session != NULL && session->magic == BX_NTVDM_COMMAND_MISC_SESSION_MAGIC &&
         session->abi_version == BX_NTVDM_COMMAND_MISC_SESSION_VERSION &&
-        session->struct_bytes == sizeof(*session);
+        session->struct_bytes == sizeof(*session) &&
+        bx_ntvdm_host_handle_manager_valid(&session->handles);
 }
 
 int bx_ntvdm_command_misc_session_set_command_source(
@@ -253,10 +255,10 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
              * decoded guest handles into the parent process.  Resolve the
              * fixed token directly into STARTUPINFO instead. */
             if ((token >> 16u) != 0u || (token & 0xffffu) == 0u ||
-                (token & 0xffffu) > 64u || session->handle_tokens[(token & 0xffffu) - 1u] == NULL) {
+                !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+                    (uint16_t)token, targets[index])) {
                 bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_INVALID_HANDLE); return;
             }
-            *targets[index] = session->handle_tokens[(token & 0xffffu) - 1u];
         }
     }
     if (!CreateProcessA(NULL, command_copy, NULL, NULL, TRUE, CREATE_DEFAULT_ERROR_MODE,
@@ -367,17 +369,14 @@ PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token)
 int bx_ntvdm_command_misc_publish_handle(HANDLE handle)
 {
     bx_ntvdm_command_misc_session *session;
-    uint32_t index;
+    uint16_t guest_handle;
+    DWORD error;
     if (g_active_call == NULL || (session = g_active_call->call->session) == NULL ||
-        handle == NULL || handle == INVALID_HANDLE_VALUE) return 0;
-    for (index = 0u; index < 64u; ++index) {
-        if (session->handle_tokens[index] == handle) break;
-        if (session->handle_tokens[index] == NULL) { session->handle_tokens[index] = handle; break; }
-    }
-    if (index == 64u) return 0;
+        !bx_ntvdm_host_handle_manager_publish(&session->handles, handle,
+            BX_NTVDM_HOST_HANDLE_BORROWED, &guest_handle, &error)) return 0;
     /* The original guest ABI is BX:CX. Preserve it as a fixed-width token,
      * never as a truncated host HANDLE. */
-    bx_ntvdm_command_misc_set_cx((USHORT)(index + 1u));
+    bx_ntvdm_command_misc_set_cx(guest_handle);
     bx_ntvdm_command_misc_set_bx(0u);
     return 1;
 }

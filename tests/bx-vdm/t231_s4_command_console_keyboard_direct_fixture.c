@@ -27,12 +27,15 @@ int main(void)
     cpu.eax=0u;cpu.ebx=1u;cpu.ecx=HANDLE_STDOUT;
     if(!invoke(&c,&e,&cpu,&r,&s,0x06u)||r.cpu_delta.gpr16_values[1]!=1u||r.cpu_delta.gpr16_values[3]!=0u)return 4;
     CloseHandle(s.redirection_info.ri_hStdOut);
+    bx_ntvdm_host_handle_manager_reset(&s.handles);
     bx_ntvdm_command_misc_session_initialize(&s);
     if(!CreatePipe(&pipe_read,&pipe_write,NULL,0u))return 5;
     s.redirection_token=1u;s.redirection_info.ri_hStdOut=pipe_write;
     cpu.eax=0u;cpu.ebx=1u;cpu.ecx=HANDLE_STDOUT;
     if(!invoke(&c,&e,&cpu,&r,&s,0x06u)||s.redirection_info.ri_pPipeStdOut==NULL)return 6;
-    if(!WriteFile(s.handle_tokens[0],"X",1u,&bytes,NULL)||bytes!=1u)return 7;
+    if(!bx_ntvdm_host_handle_manager_lookup_handle(&s.handles,
+        r.cpu_delta.gpr16_values[1],&pipe_write)||
+        !WriteFile(pipe_write,"X",1u,&bytes,NULL)||bytes!=1u)return 7;
     SetEvent(s.redirection_info.ri_pPipeStdOut->hExitEvent);
     if(WaitForSingleObject(s.redirection_info.ri_hStdOutThread,2000u)!=WAIT_OBJECT_0)return 8;
     if(!ReadFile(pipe_read,received,1u,&bytes,NULL)||bytes!=1u||received[0]!='X')return 9;
@@ -48,5 +51,6 @@ int main(void)
     bx_ntvdm_command_misc_set_test_system_directory(directory);bPifFastPaste=FALSE;cpu.edx=1u;cpu.ds=0x100u;cpu.esi=0x100u;cpu.ecx=0x200u;
     if(!invoke(&c,&e,&cpu,&r,&s,BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT)||r.cpu_delta.gpr16_values[2]!=1u||strstr((CHAR *)c.guest+0x1100,"KB16.COM")==NULL){fprintf(stderr,"kbd dx=%u program=%s options=%s\n",r.cpu_delta.gpr16_values[2],c.guest+0x1100,c.guest+0x1200);return 17;}
     RegOverridePredefKey(HKEY_LOCAL_MACHINE,NULL);RegCloseKey(root);RegDeleteTreeA(HKEY_CURRENT_USER,"Software\\ntdos64-t231-kbd");bx_ntvdm_command_misc_set_test_system_directory(NULL);CloseHandle(kb16);CloseHandle(keyboard);DeleteFileA(kb16_path);DeleteFileA(keyboard_path);
+    bx_ntvdm_host_handle_manager_reset(&s.handles);
     puts("T231 S4 direct OpenNT console, keyboard fallback/success, and standard-handle token ABI verified");return 0;
 }

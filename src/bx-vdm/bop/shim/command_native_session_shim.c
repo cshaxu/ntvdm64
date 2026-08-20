@@ -41,7 +41,10 @@ void bx_ntvdm_command_native_session_unbind(
     bx_ntvdm_command_native_session *session)
 {
     if (session != NULL && g_active_session == session) g_active_session = NULL;
-    if (session_valid(session)) session->bound = 0u;
+    if (session_valid(session)) {
+        bx_ntvdm_host_handle_manager_reset(&session->direct.handles);
+        session->bound = 0u;
+    }
 }
 
 static int event_valid(const struct bx_ntvdm_generic_ud_event_v1 *event)

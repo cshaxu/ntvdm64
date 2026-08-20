@@ -34,7 +34,7 @@ allocation handles.
 | S1 | Manager ABI, bidirectional indexes, ownership/reset behavior and focused regression | Formal source-built fixture proves allocation, lookup, idempotence, error and ownership cases. |
 | S2 | DEM context/session migration | DEM `50:xx` host-file handle publication, lookup and close use the shared manager; private DEM 64-slot table is deleted. |
 | S3 | COMMAND session migration | COMMAND `54:06`/redirection and launch lookup use the shared manager; private COMMAND 64-slot table is deleted. |
-| S4 | Cross-family closure | Direct DEM and COMMAND fixtures prove one manager contract, formal full graph passes, stale/high-word/cross-session/cleanup regressions pass, and no duplicate private host-handle table remains. |
+| S4 | Cross-family closure | Direct DEM and COMMAND fixtures prove the one manager contract, formal full graph passes, stale/high-word/cleanup regressions pass, and no duplicate private host-handle table remains. A combined native session is recorded as a future owner requirement, not claimed before it exists. |
 
 ## Source-Recovery Classification
 
