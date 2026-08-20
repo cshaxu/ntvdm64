@@ -12,7 +12,7 @@ manager; XMS remains queued.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T232 S2`, Ordinary Mode. |
-| Admission And Approval | T232 S1 is source-built and pending its reviewed P1 delivery; owner request requires the resulting unified manager to replace the DEM private table before XMS is admitted. |
+| Admission And Approval | T232 S1 source-built manager foundation was delivered as `9ac61269`; owner request requires it to replace the DEM private table before XMS is admitted. |
 | Objective | Inject the session-owned manager into DEM direct context/session, make DEM publication/lookup/release use it, preserve the original register-pair layout with a zero high word, and remove DEM's private 64-slot table. |
 | Non-goals | Do not admit XMS. Do not migrate COMMAND in this S. Do not change OpenNT DEM service logic, Bochs, guest DOS JFN/SFT semantics, or guest-visible BOP layouts. |
 | Reference Baseline | S1 manager fixture is source-built under `build/M0-T232-S1/formal-r1`; DEM currently owns `dem_direct_host_session.handles[64]` and exposes uint32 tokens through the direct context. |
