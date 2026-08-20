@@ -163,6 +163,8 @@ extern BOOL fSoftpcRedirection;
 #define ASSERT(value) ((void)(value))
 LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
 void nt_init_event_thread(void);
+UINT bx_ntvdm_command_misc_get_system_directory(LPSTR buffer, UINT bytes);
+void bx_ntvdm_command_misc_set_test_system_directory(const CHAR *path);
 VOID cmdInitConsole(VOID);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
 #define GetConsoleKeyboardLayoutName GetConsoleKeyboardLayoutNameA
@@ -196,5 +198,10 @@ extern BOOL bPifFastPaste;
 #define setBX(value) bx_ntvdm_command_misc_set_bx(value)
 #define setCX(value) bx_ntvdm_command_misc_set_cx(value)
 #define GetVDMAddr(segment, offset) bx_ntvdm_command_misc_get_vdm_addr(segment, offset)
+/* The production default is the public Win32 system directory.  The narrow
+ * test override only supplies historical KB16 fixture media; cmdkeyb.c keeps
+ * its original registry, file-presence and result algorithm. */
+#undef GetSystemDirectory
+#define GetSystemDirectory(buffer, bytes) bx_ntvdm_command_misc_get_system_directory((buffer), (bytes))
 
 #endif

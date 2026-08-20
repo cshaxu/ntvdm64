@@ -28,9 +28,13 @@ typedef struct bx_ntvdm_command_misc_active_call {
     uint32_t guest_address;
     uint32_t guest_bytes;
     uint32_t write_back;
+    uint8_t *guest_buffer2;
+    uint32_t guest_address2;
+    uint32_t guest_bytes2;
 } bx_ntvdm_command_misc_active_call;
 
 static __declspec(thread) bx_ntvdm_command_misc_active_call *g_active_call;
+static CHAR g_test_system_directory[MAX_PATH + 1];
 
 static uint32_t real_mode_address(USHORT segment, USHORT offset)
 {
@@ -150,6 +154,24 @@ void nt_init_event_thread(void)
         g_active_call->call->session->console_initialized = 1u;
 }
 
+UINT bx_ntvdm_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
+{
+    if (g_test_system_directory[0] != '\0') {
+        size_t length = strlen(g_test_system_directory);
+        if (buffer == NULL || bytes == 0u) return (UINT)length;
+        if (length >= bytes) return (UINT)length;
+        memcpy(buffer, g_test_system_directory, length + 1u);
+        return (UINT)length;
+    }
+    return GetSystemDirectoryA(buffer, bytes);
+}
+void bx_ntvdm_command_misc_set_test_system_directory(const CHAR *path)
+{
+    if (path == NULL) { g_test_system_directory[0] = '\0'; return; }
+    strncpy(g_test_system_directory, path, MAX_PATH);
+    g_test_system_directory[MAX_PATH] = '\0';
+}
+
 /* OpenNT cmdkeyb.c called the old NTVDM console-composition export
  * GetConsoleKeyboardLayoutNameA.  It is not linkable from the modern public
  * Win32 import libraries.  GetKeyboardLayoutNameA is the public supported
@@ -166,6 +188,18 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
     uint32_t bytes;
     uint32_t index;
     if (active == NULL) return NULL;
+    if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT) {
+        uint32_t keyboard_bytes = active->guest_buffer == NULL ? 128u : 300u;
+        uint8_t **buffer = active->guest_buffer == NULL ? &active->guest_buffer : &active->guest_buffer2;
+        uint32_t *address = active->guest_buffer == NULL ? &active->guest_address : &active->guest_address2;
+        uint32_t *size = active->guest_buffer == NULL ? &active->guest_bytes : &active->guest_bytes2;
+        *address = real_mode_address(segment, offset);
+        if (*address > 0x100000u - keyboard_bytes || *buffer != NULL) return NULL;
+        *buffer = (uint8_t *)calloc(keyboard_bytes, 1u);
+        if (*buffer == NULL) return NULL;
+        *size = keyboard_bytes;
+        return *buffer;
+    }
     active->guest_address = real_mode_address(segment, offset);
     if (active->call->service == BX_NTVDM_COMMAND_MISC_SET_INFO) {
         bx_ntvdm_command_misc_session *session = active->call->session;
@@ -295,7 +329,13 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
             active.guest_buffer, active.guest_bytes)) {
         free(active.guest_buffer); g_active_call = NULL; return 0;
     }
+    if (call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT &&
+        ((active.guest_buffer != NULL && !call->guest_write(call->guest_state, active.guest_address, active.guest_buffer, active.guest_bytes)) ||
+         (active.guest_buffer2 != NULL && !call->guest_write(call->guest_state, active.guest_address2, active.guest_buffer2, active.guest_bytes2)))) {
+        free(active.guest_buffer); free(active.guest_buffer2); g_active_call = NULL; return 0;
+    }
     free(active.guest_buffer);
+    free(active.guest_buffer2);
     g_active_call = NULL;
     return bx_ntvdm_cpu_result_v2_valid(call->result);
 }

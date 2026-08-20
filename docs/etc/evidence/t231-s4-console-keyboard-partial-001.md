@@ -16,15 +16,18 @@ closure is replaced by `command_misc_shim`. The old private
 no-install path and reported zero exit:
 
 ```text
-T231 S4 direct OpenNT console, keyboard fallback, and standard-handle token ABI verified
+T231 S4 direct OpenNT console, keyboard fallback/success, and standard-handle token ABI verified
 ```
 
 ## Limit
 
-This remains a partial S4 witness. `54:06 cmdGetStdHandle` and its complete
+`54:06 cmdGetStdHandle` and its complete
 original `cmdredir.c` pipe helper lifecycle are source-admitted: historical
 AX:BX host-pointer input and BX:CX 32-bit handle output are transported as
 checked session and handle tokens; a focused fixture covers both a `NUL`
 non-pipe stdout handle and an anonymous stdout pipe, including the original
-temporary-file/output-thread transfer. The complete keyboard-layout success
-route remains unadmitted, so S4 is open.
+temporary-file/output-thread transfer. The `54:0E` fixture also proves the
+original success branch through a process-local HKLM registry override and
+disposable `KB16.COM`/`KEYBOARD.SYS` inputs: it returns `DX=1` and separately
+writes both original guest output buffers. The fixture removes its override,
+temporary key and files before exit. S4 is complete.
