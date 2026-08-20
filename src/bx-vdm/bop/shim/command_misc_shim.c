@@ -8,6 +8,7 @@ void cmdSaveWorld(void);
 void cmdGetCurrentDir(void);
 void cmdSetInfo(void);
 void cmdGetKbdLayout(void);
+void cmdGetStdHandle(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -83,7 +84,8 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
          call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR ||
          call->service == BX_NTVDM_COMMAND_MISC_SET_INFO ||
          call->service == BX_NTVDM_COMMAND_MISC_INIT_CONSOLE ||
-         call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT) &&
+         call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT ||
+         call->service == 0x06u) &&
         call->boundary != NULL && bx_ntvdm_exception_event_v1_valid(call->boundary) &&
         call->cpu != NULL && bx_ntvdm_cpu_state_v1_valid(call->cpu) &&
         call->cpu->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
@@ -106,6 +108,44 @@ void bx_ntvdm_command_misc_set_cf(int value)
 { (void)bx_ntvdm_cpu_result_v2_set_cf(g_active_call->call->result, value); }
 void bx_ntvdm_command_misc_set_dx(USHORT value)
 { (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 2u, value); }
+void bx_ntvdm_command_misc_set_bx(USHORT value)
+{ (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 3u, value); }
+void bx_ntvdm_command_misc_set_cx(USHORT value)
+{ (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 1u, value); }
+
+PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token)
+{
+    bx_ntvdm_command_misc_session *session;
+    if (g_active_call == NULL || (session = g_active_call->call->session) == NULL ||
+        token == 0u || token != session->redirection_token) return NULL;
+    return &session->redirection_info;
+}
+
+int bx_ntvdm_command_misc_publish_handle(HANDLE handle)
+{
+    bx_ntvdm_command_misc_session *session;
+    uint32_t index;
+    if (g_active_call == NULL || (session = g_active_call->call->session) == NULL ||
+        handle == NULL || handle == INVALID_HANDLE_VALUE) return 0;
+    for (index = 0u; index < 64u; ++index) {
+        if (session->handle_tokens[index] == handle) break;
+        if (session->handle_tokens[index] == NULL) { session->handle_tokens[index] = handle; break; }
+    }
+    if (index == 64u) return 0;
+    /* The original guest ABI is BX:CX. Preserve it as a fixed-width token,
+     * never as a truncated host HANDLE. */
+    bx_ntvdm_command_misc_set_cx((USHORT)(index + 1u));
+    bx_ntvdm_command_misc_set_bx(0u);
+    return 1;
+}
+
+BOOL cmdHandleStdinWithPipe(PREDIRCOMPLETE_INFO pRdrInfo)
+{ (void)pRdrInfo; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
+BOOL cmdHandleStdOutErrWithPipe(PREDIRCOMPLETE_INFO pRdrInfo, USHORT handle_type)
+{ (void)pRdrInfo; (void)handle_type; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
+void RcErrorDialogBox(UINT error, PVOID first, PVOID second)
+{ (void)error; (void)first; (void)second; }
+void TerminateVDM(void) { }
 void nt_init_event_thread(void)
 {
     if (g_active_call != NULL && g_active_call->call->session != NULL)
@@ -234,6 +274,8 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         body = cmdInitConsole;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT)
         body = cmdGetKbdLayout;
+    else if (call->service == 0x06u)
+        body = cmdGetStdHandle;
     else
         body = cmdSaveWorld;
     IsFirstCall = call->first_call ? TRUE : FALSE;

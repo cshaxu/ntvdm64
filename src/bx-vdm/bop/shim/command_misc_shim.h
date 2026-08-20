@@ -23,6 +23,18 @@ typedef char *LPSTR;
 typedef void *PVOID;
 typedef void *LPVOID;
 
+typedef struct _RedirComplete_Info {
+    HANDLE ri_hStdErr, ri_hStdOut, ri_hStdIn;
+    HANDLE ri_hStdErrFile, ri_hStdOutFile, ri_hStdInFile;
+    HANDLE ri_hStdOutThread, ri_hStdErrThread;
+    void *ri_pPipeStdIn, *ri_pPipeStdOut, *ri_pPipeStdErr;
+} REDIRCOMPLETE_INFO, *PREDIRCOMPLETE_INFO;
+
+#define HANDLE_STDIN  0u
+#define HANDLE_STDOUT 1u
+#define HANDLE_STDERR 2u
+#define EG_MALLOC_FAILURE ERROR_NOT_ENOUGH_MEMORY
+
 #pragma pack(push, 1)
 typedef struct _PARAMBLOCK {
     USHORT SegEnv;
@@ -60,6 +72,9 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t is_dos_binary_address;
     uint32_t fd_access_address;
     uint32_t console_initialized;
+    uint32_t redirection_token;
+    REDIRCOMPLETE_INFO redirection_info;
+    HANDLE handle_tokens[64];
     SCSINFO scs_info;
     BYTE is_dos_binary;
     WORD fd_access;
@@ -109,6 +124,14 @@ void bx_ntvdm_command_misc_set_ax(USHORT value);
 void bx_ntvdm_command_misc_set_al(USHORT value);
 void bx_ntvdm_command_misc_set_cf(int value);
 void bx_ntvdm_command_misc_set_dx(USHORT value);
+void bx_ntvdm_command_misc_set_bx(USHORT value);
+void bx_ntvdm_command_misc_set_cx(USHORT value);
+PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token);
+int bx_ntvdm_command_misc_publish_handle(HANDLE handle);
+BOOL cmdHandleStdinWithPipe(PREDIRCOMPLETE_INFO pRdrInfo);
+BOOL cmdHandleStdOutErrWithPipe(PREDIRCOMPLETE_INFO pRdrInfo, USHORT handle_type);
+void RcErrorDialogBox(UINT error, PVOID first, PVOID second);
+void TerminateVDM(void);
 LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
 void nt_init_event_thread(void);
 VOID cmdInitConsole(VOID);
@@ -136,10 +159,13 @@ extern BOOL bPifFastPaste;
 #define getSI() bx_ntvdm_command_misc_get_si()
 #define getDS() bx_ntvdm_command_misc_get_ds()
 #define getAL() bx_ntvdm_command_misc_get_al()
+#define getAX() bx_ntvdm_command_misc_get_ax()
 #define setAX(value) bx_ntvdm_command_misc_set_ax(value)
 #define setAL(value) bx_ntvdm_command_misc_set_al(value)
 #define setCF(value) bx_ntvdm_command_misc_set_cf(value)
 #define setDX(value) bx_ntvdm_command_misc_set_dx(value)
+#define setBX(value) bx_ntvdm_command_misc_set_bx(value)
+#define setCX(value) bx_ntvdm_command_misc_set_cx(value)
 #define GetVDMAddr(segment, offset) bx_ntvdm_command_misc_get_vdm_addr(segment, offset)
 
 #endif

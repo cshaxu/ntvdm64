@@ -6,16 +6,22 @@
  *  Sudeepb 22-Apr-1992 Created
  */
 
-#include "cmd.h"
+/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdredir.c.
+ * Divergence: only cmdGetStdHandle is admitted.  The shim replaces the
+ * historical CCPU include closure and transports session tokens, never raw
+ * host pointers or truncated HANDLE values. */
+#include "../../shim/command_misc_shim.h"
 
-#include <cmdsvc.h>
-#include <softpc.h>
-#include <mvdm.h>
-#include <ctype.h>
+#define BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE 1
+
+#if !defined(BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE)
 
 #define CMDREDIR_DEBUG	1
 
 PPIPE_INPUT   cmdPipeList = NULL;
+#endif
+
+#if !defined(BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE)
 
 BOOL cmdCheckCopyForRedirection (pRdrInfo)
 PREDIRCOMPLETE_INFO pRdrInfo;
@@ -222,6 +228,8 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     return pRdrInfo;
 }
 
+#endif /* !BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE */
+
 /* cmdGetStdHandle - Get the 32 bit NT standard handle for the VDM
  *
  *
@@ -238,7 +246,10 @@ USHORT iStdHandle;
 PREDIRCOMPLETE_INFO pRdrInfo;
 
     iStdHandle = getCX();
-    pRdrInfo = (PREDIRCOMPLETE_INFO) (((ULONG)getAX() << 16) + (ULONG)getBX());
+    /* Divergence: AX:BX is a checked session token, rather than a host pointer. */
+    pRdrInfo = bx_ntvdm_command_misc_redirection_from_guest(
+        ((ULONG)getAX() << 16) + (ULONG)getBX());
+    if (pRdrInfo == NULL) { setCF(1); return; }
 
     switch (iStdHandle) {
 
@@ -251,12 +262,10 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-		setCX ((USHORT)pRdrInfo->ri_hStdInFile);
-		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdInFile >> 16));
+		if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdInFile)) { setCF(1); return; }
 	    }
 	    else {
-		setCX ((USHORT)pRdrInfo->ri_hStdIn);
-		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdIn >> 16));
+		if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdIn)) { setCF(1); return; }
 	    }
 	    break;
 
@@ -268,8 +277,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-		setCX ((USHORT)pRdrInfo->ri_hStdOutFile);
-		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOutFile >> 16));
+		if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdOutFile)) { setCF(1); return; }
 
 	    }
 	    else {
@@ -278,8 +286,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		// inherit the 32 bit handle of lpt1, so the ouput will
 		// directly go to the LPT1 and a DOS TSR/APP hooking int17
 		// wont see this printing. Is this a big deal???
-		setCX ((USHORT)pRdrInfo->ri_hStdOut);
-		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOut >> 16));
+		if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdOut)) { setCF(1); return; }
 	    }
 	    break;
 
@@ -287,8 +294,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 
             if (pRdrInfo->ri_hStdErr == pRdrInfo->ri_hStdOut
                               && pRdrInfo->ri_hStdOutFile != 0) {
-                setCX ((USHORT)pRdrInfo->ri_hStdOutFile);
-                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOutFile >> 16));
+                if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdOutFile)) { setCF(1); return; }
                 pRdrInfo->ri_hStdErrFile = pRdrInfo->ri_hStdOutFile;
 		break;
 	    }
@@ -300,12 +306,10 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-                setCX ((USHORT)pRdrInfo->ri_hStdErrFile);
-                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdErrFile >> 16));
+                if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdErrFile)) { setCF(1); return; }
 	    }
 	    else {
-                setCX ((USHORT)pRdrInfo->ri_hStdErr);
-                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdErr >> 16));
+                if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdErr)) { setCF(1); return; }
 	    }
 	    break;
     }
@@ -314,6 +318,8 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     setCF(0);
     return;
 }
+
+#if !defined(BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE)
 
 BOOL cmdHandleStdOutErrWithPipe(
     PREDIRCOMPLETE_INFO pRdrInfo,
@@ -662,3 +668,4 @@ BOOL cmdPipeFileEOF(HANDLE hFile)
     }
     return (fEOF);
 }
+#endif /* !BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE */

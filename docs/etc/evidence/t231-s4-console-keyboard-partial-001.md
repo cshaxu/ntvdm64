@@ -16,11 +16,14 @@ closure is replaced by `command_misc_shim`. The old private
 no-install path and reported zero exit:
 
 ```text
-T231 S4 direct OpenNT console and keyboard fallback: original no-install path verified
+T231 S4 direct OpenNT console, keyboard fallback, and standard-handle token ABI verified
 ```
 
 ## Limit
 
-This is only a partial S4 witness. `54:06 cmdGetStdHandle` remains unadmitted:
-its historical AX:BX host-pointer input and BX:CX 32-bit handle output require
-a session token ABI before the original source may be invoked. S4 is open.
+This remains a partial S4 witness. `54:06 cmdGetStdHandle` is source-admitted
+for its original non-pipe standard-handle branches: historical AX:BX
+host-pointer input and BX:CX 32-bit handle output are transported as checked
+session and handle tokens, and stdout is tested through an explicit `NUL`
+handle. Pipe composition and the complete keyboard-layout success route remain
+unadmitted, so S4 is open.

@@ -20,5 +20,10 @@ int main(void)
     if(!invoke(&c,&e,&cpu,&r,&s,BX_NTVDM_COMMAND_MISC_INIT_CONSOLE)||s.console_initialized!=1u)return 1;
     bPifFastPaste=TRUE;cpu.edx=0u;cpu.ds=0x100u;cpu.esi=0u;cpu.ecx=0x80u;
     if(!invoke(&c,&e,&cpu,&r,&s,BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT)||r.cpu_delta.gpr16_values[2]!=0u||s.console_initialized!=1u)return 2;
-    puts("T231 S4 direct OpenNT console and keyboard fallback: original no-install path verified");return 0;
+    s.redirection_token=1u;s.redirection_info.ri_hStdOut=CreateFileA("NUL",GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
+    if(s.redirection_info.ri_hStdOut==INVALID_HANDLE_VALUE)return 3;
+    cpu.eax=0u;cpu.ebx=1u;cpu.ecx=HANDLE_STDOUT;
+    if(!invoke(&c,&e,&cpu,&r,&s,0x06u)||r.cpu_delta.gpr16_values[1]!=1u||r.cpu_delta.gpr16_values[3]!=0u)return 4;
+    CloseHandle(s.redirection_info.ri_hStdOut);
+    puts("T231 S4 direct OpenNT console, keyboard fallback, and standard-handle token ABI verified");return 0;
 }

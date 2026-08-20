@@ -197,6 +197,8 @@
         "src/bx-vdm/bop/opennt/dem/demioctl.c",
         "src/bx-vdm/bop/opennt/dem/demsrch.c",
         "src/bx-vdm/bop/opennt/command/cmdmisc.c",
+        "src/bx-vdm/bop/opennt/command/cmdkeyb.c",
+        "src/bx-vdm/bop/opennt/command/cmdredir.c",
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/dem_v2_composition_bridge.c",
         "src/bx-vdm/bop/dem_v2_runtime_session.c",
@@ -749,6 +751,12 @@
         "ntdll.lib",
         "advapi32.lib"
       ]
+    },
+    {
+      "name": "t231-s4-command-console-keyboard-direct-fixture",
+      "source": "tests/bx-vdm/t231_s4_command_console_keyboard_direct_fixture.c",
+      "libraries": [ "bx-vdm" ],
+      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
     },
     {
       "name": "t230-s7-demdasd-ioctl-direct-import-fixture",
