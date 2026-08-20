@@ -17,7 +17,18 @@ int bx_ntvdm_cpu_delta_v1_valid(const bx_ntvdm_cpu_delta_v1 *delta)
         delta->abi_version == BX_NTVDM_CPU_DELTA_ABI_VERSION &&
         delta->struct_bytes == sizeof(*delta) &&
         (delta->gpr16_write_mask & ~BX_NTVDM_CPU_DELTA_V1_GPR16_MASK) == 0u &&
+        (delta->segment_write_mask & ~((1u << BX_NTVDM_CPU_DELTA_V1_SEGMENT_COUNT) - 1u)) == 0u &&
         delta->reserved0 == 0u;
+}
+
+int bx_ntvdm_cpu_delta_v1_set_segment(bx_ntvdm_cpu_delta_v1 *delta,
+    uint32_t segment_index, uint16_t value)
+{
+    if (!bx_ntvdm_cpu_delta_v1_valid(delta) ||
+        segment_index >= BX_NTVDM_CPU_DELTA_V1_SEGMENT_COUNT) return 0;
+    delta->segment_values[segment_index] = value;
+    delta->segment_write_mask |= 1u << segment_index;
+    return 1;
 }
 
 int bx_ntvdm_cpu_delta_v1_set_gpr16(bx_ntvdm_cpu_delta_v1 *delta,

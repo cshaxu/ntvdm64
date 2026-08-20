@@ -40,6 +40,8 @@
 
 > **T231 S5 complete:** [initial-environment witness](etc/evidence/t231-s5-command-init-environment-direct-001.md) records direct original `cmdenv.c` `54:0F` sizing, COMSPEC/WINDIR filtering, OEM multi-string output and non-initialization no-op.  Together with the three preceding S5 records, all four S5 endpoints have zero-exit focused witnesses.
 
+> **T231 S6 complete:** [binary-admission witness](etc/evidence/t231-s6-command-check-binary-direct-001.md) records original `cmdexec.c` `54:07`, including host binary classification, DOS bypass, checked CMDINFO handoff, DS/ES typed delta and guest writeback.
+
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 
 > **T230 S1 P1:** [203-entry Chinese BOP implementation tracker](etc/operations/opennt-bop-implementation-tracker-001.md) records instruction entry, original handler, high-level purpose, actual strict status and historical disposition; it establishes zero fully complete entries at this baseline.

@@ -932,6 +932,11 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
         if ((mantle_outcome.gpr16_write_mask & (1u << reg)) != 0u)
           BX_CPU_THIS_PTR set_reg16(reg, mantle_outcome.gpr16_values[reg]);
       }
+      for (unsigned seg = 0; seg < 6u; ++seg) {
+        if ((mantle_outcome.segment_write_mask & (1u << seg)) != 0u)
+          BX_CPU_THIS_PTR load_seg_reg(&BX_CPU_THIS_PTR sregs[seg],
+            mantle_outcome.segment_values[seg]);
+      }
       if ((mantle_outcome.eflags_write_mask & 1u) != 0u)
         BX_CPU_THIS_PTR set_CF((mantle_outcome.eflags_values & 1u) != 0u);
       if ((mantle_outcome.eflags_write_mask & 0x40u) != 0u)

@@ -81,6 +81,9 @@ static int copy_outcome(const bx_ntvdm_cpu_result_v2 *result,
     outcome->gpr16_write_mask = result->cpu_delta.gpr16_write_mask;
     memcpy(outcome->gpr16_values, result->cpu_delta.gpr16_values,
         sizeof(outcome->gpr16_values));
+    outcome->segment_write_mask = result->cpu_delta.segment_write_mask;
+    memcpy(outcome->segment_values, result->cpu_delta.segment_values,
+        sizeof(outcome->segment_values));
     outcome->eflags_write_mask = result->eflags_write_mask;
     outcome->eflags_values = result->eflags_values;
     return 1;

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 1981 |
+| Documentation records | 1982 |
 | --- | --- |
-| Generated UTC | 2026-08-20T05:56:11Z |
+| Generated UTC | 2026-08-20T06:07:59Z |
 
 ## Entries
 
@@ -233,6 +233,7 @@ content-divergent entries.
 | etc/evidence/t231-s5-command-config-direct-001.md | indexed supporting material | d05324e0756a3b25ba97b2af96270bb975675562b3765db2bf2d91a067345041 |
 | etc/evidence/t231-s5-command-init-environment-direct-001.md | indexed supporting material | 04615a1706e1f6ecae1d03587ac177baf3100bf4a5647131edbca7daeea7a786 |
 | etc/evidence/t231-s5-command-start-info-direct-001.md | indexed supporting material | a32c69fd30db2c53e274cb2444f90cce380116c76ef6eb560ff651f7e601429c |
+| etc/evidence/t231-s6-command-check-binary-direct-001.md | indexed supporting material | 4900125d26713a5ae17fe9777c3d91af889fa6ff20a80ee697d455a0678bf629 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |
@@ -300,7 +301,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 17975e64872b0927bc3d3cadb9d301733f696247c72eff66f1956c07add55df9 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 14c6bcb7cc6cf7b834a359df81e103462dfb95a1bf9673f5db3f5838ed05d347 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -1995,7 +1996,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | b106ae4ff834d84f51527ac4ff72b1ff504003d7ab25e8e7468685fb15ccc7f1 |
+| STATUS.md | principal control document | 2b64266f1315a82fa72f6dd8b0efb0ac93f103c5ac24f06cc6073b7034ba5dce |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

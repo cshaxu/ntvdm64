@@ -46,6 +46,7 @@ int bx_ntvdm_cpu_result_v2_valid(const bx_ntvdm_cpu_result_v2 *result)
             BX_NTVDM_CPU_RESULT_V2_EFLAGS_ZF)) == 0u &&
         (result->disposition != BX_NTVDM_CPU_RESULT_V2_STOP ||
          (result->resume_rip == 0u && result->cpu_delta.gpr16_write_mask == 0u &&
+          result->cpu_delta.segment_write_mask == 0u &&
           result->eflags_write_mask == 0u && result->eflags_values == 0u));
 }
 

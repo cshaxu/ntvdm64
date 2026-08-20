@@ -1275,6 +1275,27 @@ are structurally identical because no host mutation occurs.
 **Review condition.** Reject/remove this entry if it needs a selector branch,
 a port-range policy, an arbitrary-width or batch API, a second device,
 firmware, callback/object export, or any bx-core change.
+### BX-CORE-084: Selector-Blind Typed Segment Resume Delta
+
+**Need.** Original OpenNT `cmdexec.c` `cmdCheckBinary` returns real-mode
+DS:DX and ES:BX locations inside its SCSINFO handoff.  The existing generic
+UD result carried GPR and flags but not segment updates, so omitting them
+would change the original return contract.
+
+**Procedure and boundary.** Extend only the fixed CPU delta and generic-UD
+outcome with a six-entry segment write mask/value array.  `exception.cc`
+applies an accepted entry through Bochs' existing `load_seg_reg`; it remains
+selector-, BOP-, DOS-, OpenNT- and provider-blind.  No device, firmware,
+memory, callback or host pointer is added.
+
+**Verification.** T231 S6's focused command fixture proves the typed DS/ES
+delta values produced by the original body; the formal native closure must
+compile the changed core source before any native execution claim.
+
+**Review condition.** Remove/reject if this transport acquires selector or
+service recognition, guest-memory inspection, host capabilities, or any
+semantic branch beyond applying a typed native segment update.
+
 ## OpenNT Intrusions
 
 None authorized or implemented. OpenNT remains unmodified by the adapter

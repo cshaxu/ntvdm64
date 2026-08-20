@@ -33,6 +33,7 @@ typedef struct _ANSI_STRING {
     PCHAR Buffer;
 } ANSI_STRING, *PANSI_STRING;
 typedef ANSI_STRING OEM_STRING, *POEM_STRING;
+typedef ANSI_STRING STRING, *PSTRING;
 typedef struct _UNICODE_STRING {
     USHORT Length;
     USHORT MaximumLength;
@@ -109,6 +110,7 @@ enum bx_ntvdm_command_misc_service {
     BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT = 0x0du,
     BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT = 0x0eu,
     BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT = 0x0fu,
+    BX_NTVDM_COMMAND_MISC_CHECK_BINARY = 0x07u,
     BX_NTVDM_COMMAND_MISC_GET_START_INFO = 0x10u
 };
 
@@ -180,6 +182,8 @@ void bx_ntvdm_command_misc_set_cf(int value);
 void bx_ntvdm_command_misc_set_dx(USHORT value);
 void bx_ntvdm_command_misc_set_bx(USHORT value);
 void bx_ntvdm_command_misc_set_cx(USHORT value);
+void bx_ntvdm_command_misc_set_ds(USHORT value);
+void bx_ntvdm_command_misc_set_es(USHORT value);
 bx_ntvdm_command_misc_session *bx_ntvdm_command_misc_active_session(void);
 PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token);
 int bx_ntvdm_command_misc_publish_handle(HANDLE handle);
@@ -224,6 +228,26 @@ NTSTATUS RtlAnsiStringToUnicodeString(PUNICODE_STRING destination,
 NTSTATUS RtlUnicodeStringToOemString(POEM_STRING destination,
     const PUNICODE_STRING source, BOOL allocate_destination);
 void RtlFreeUnicodeString(PUNICODE_STRING string);
+void RtlInitString(PSTRING destination, const CHAR *source);
+NTSTATUS RtlOemStringToUnicodeString(PUNICODE_STRING destination,
+    const POEM_STRING source, BOOL allocate_destination);
+NTSTATUS RtlUnicodeStringToAnsiString(PANSI_STRING destination,
+    const PUNICODE_STRING source, BOOL allocate_destination);
+void RtlFreeAnsiString(PANSI_STRING string);
+ULONG RtlNtStatusToDosError(NTSTATUS status);
+uint32_t bx_ntvdm_command_binary_scs_address(uint32_t offset);
+BOOL IsWowAppRunnable(LPSTR app_name);
+
+#ifndef SCS_DOS_BINARY
+#define SCS_DOS_BINARY 1u
+#endif
+#ifndef SCS_WOW_BINARY
+#define SCS_WOW_BINARY 2u
+#endif
+#define WOWCF_NOTDOSSPAWNABLE 0x00000001u
+#define FETCHWORD(value) (value)
+#define STOREWORD(target, value) ((target) = (USHORT)(value))
+#define STOREDWORD(target, value) ((target) = (ULONG)(value))
 extern PCHAR lpszzcmdEnv16;
 
 extern CHAR lpszComSpec[64 + 8];
@@ -242,6 +266,8 @@ extern CHAR *lpszzInitEnvironment;
 extern WORD cchInitEnvironment;
 extern CHAR *lpszzVDMEnv32;
 extern DWORD cchVDMEnv32;
+extern BOOL DontCheckDosBinaryType;
+extern BOOL IsFirstWOWCheckBinary;
 
 #define getDX() bx_ntvdm_command_misc_get_dx()
 #define getBX() bx_ntvdm_command_misc_get_bx()
@@ -257,6 +283,8 @@ extern DWORD cchVDMEnv32;
 #define setDX(value) bx_ntvdm_command_misc_set_dx(value)
 #define setBX(value) bx_ntvdm_command_misc_set_bx(value)
 #define setCX(value) bx_ntvdm_command_misc_set_cx(value)
+#define setDS(value) bx_ntvdm_command_misc_set_ds(value)
+#define setES(value) bx_ntvdm_command_misc_set_es(value)
 #define GetVDMAddr(segment, offset) bx_ntvdm_command_misc_get_vdm_addr(segment, offset)
 /* The production default is the public Win32 system directory.  The narrow
  * test override only supplies historical KB16 fixture media; cmdkeyb.c keeps

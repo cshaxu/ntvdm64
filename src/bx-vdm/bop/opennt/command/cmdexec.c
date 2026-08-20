@@ -7,14 +7,12 @@
  *  Sudeepb 22-Apr-1992 Created
  */
 
-#include "cmd.h"
-
-#include <cmdsvc.h>
-#include <softpc.h>
-#include <mvdm.h>
-#include <ctype.h>
-#include <oemuni.h>
-#include <wowcmpat.h>
+/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdexec.c.
+ * Divergence: the admitted binary classifier uses the narrow COMMAND binary
+ * shim for the unavailable CCPU/SAS/RTL include closure. */
+#define BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY 1
+#define BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE 1
+#include "../../shim/command_misc_shim.h"
 
 //*****************************************************************************
 // IsWowAppRunnable
@@ -29,6 +27,7 @@
 //
 //*****************************************************************************
 
+#if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
 BOOL IsWowAppRunnable(LPSTR lpAppName)
 {
     BOOL Result = TRUE;
@@ -84,7 +83,7 @@ BOOL IsWowAppRunnable(LPSTR lpAppName)
                               szModName,
                               0,
                               &dwType,
-                              szHexAsciiFlags,
+                              (LPBYTE)szHexAsciiFlags,
                               &cbData
                               );
 
@@ -138,9 +137,12 @@ VOID cmdCheckBinary (VOID)
 {
 
     LPSTR  lpAppName;
-    ULONG  BinaryType;
+    /* The historical error/return paths do not continue after a failed
+     * classifier.  Initialize for modern analysis of that non-returning
+     * control flow. */
+    ULONG  BinaryType = 0;
     PPARAMBLOCK lpParamBlock;
-    PCHAR  lpCommandTail,lpTemp;
+    PCHAR  lpCommandTail = NULL;
     ULONG  AppNameLen,CommandTailLen = 0;
     USHORT CommandTailOff,CommandTailSeg,usTemp;
     NTSTATUS       Status;
@@ -166,7 +168,7 @@ VOID cmdCheckBinary (VOID)
     if ( !NT_SUCCESS(Status) ) {
         Status = RtlNtStatusToDosError(Status);
         }
-    else if (GetBinaryType (AnsiString.Buffer,(LPLONG)&BinaryType) == FALSE)
+    else if (GetBinaryTypeA(AnsiString.Buffer,(LPDWORD)&BinaryType) == FALSE)
        {
         Status =  GetLastError();
         }
@@ -219,7 +221,7 @@ VOID cmdCheckBinary (VOID)
     // Its a 32bit exe, replace the command with "command.com /z" and add the
     // original binary name to command tail.
 
-    AppNameLen = strlen (lpAppName);
+    AppNameLen = (ULONG)strlen (lpAppName);
 
     lpParamBlock = (PPARAMBLOCK) GetVDMAddr (getES(),getBX());
 
@@ -248,11 +250,15 @@ VOID cmdCheckBinary (VOID)
 
     // copy the stub command.com name
     strcpy ((PCHAR)&pSCSInfo->SCS_ComSpec,lpszComSpec+8);
-    lpTemp = (PCHAR) &pSCSInfo->SCS_ComSpec;
-    lpTemp = (PCHAR)((ULONG)lpTemp - (ULONG)GetVDMAddr(0,0));
-    usTemp = (USHORT)((ULONG)lpTemp >> 4);
+    /* x86/x64 divergence: original CCPU computed a segment from a host SAS
+     * base pointer.  The checked session retains the original guest SCSINFO
+     * address, so recover the equivalent guest address without host-pointer
+     * arithmetic. */
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_ComSpec)) >> 4);
     setDS(usTemp);
-    usTemp = (USHORT)((ULONG)lpTemp & 0x0f);
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_ComSpec)) & 0x0fu);
     setDX((usTemp));
 
     // Form the command tail, first "3" is for "/z "
@@ -263,7 +269,7 @@ VOID cmdCheckBinary (VOID)
     strcpy ((PCHAR)&pSCSInfo->SCS_CmdTail[4],lpAppName);
     if (CommandTailLen) {
         pSCSInfo->SCS_CmdTail[4+AppNameLen] = ' ';
-        RtlCopyMemory ((PCHAR)((ULONG)&pSCSInfo->SCS_CmdTail[4]+AppNameLen+1),
+        RtlCopyMemory (&pSCSInfo->SCS_CmdTail[4 + AppNameLen + 1u],
                 lpCommandTail,
                 CommandTailLen);
     }
@@ -283,24 +289,27 @@ VOID cmdCheckBinary (VOID)
         STOREDWORD(pSCSInfo->SCS_ParamBlock.pFCB2,0);
     }
 
-    lpTemp = (PCHAR) &pSCSInfo->SCS_CmdTail;
-    lpTemp = (PCHAR)((ULONG)lpTemp - (ULONG)GetVDMAddr(0,0));
-    usTemp = (USHORT)((ULONG)lpTemp & 0x0f);
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_CmdTail)) & 0x0fu);
     STOREWORD(pSCSInfo->SCS_ParamBlock.OffCmdTail,usTemp);
-    usTemp = (USHORT)((ULONG)lpTemp >> 4);
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_CmdTail)) >> 4);
     STOREWORD(pSCSInfo->SCS_ParamBlock.SegCmdTail,usTemp);
 
-    lpTemp = (PCHAR) &pSCSInfo->SCS_ParamBlock;
-    lpTemp = (PCHAR)((ULONG)lpTemp - (ULONG)GetVDMAddr(0,0));
-    usTemp = (USHORT)((ULONG)lpTemp >> 4);
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_ParamBlock)) >> 4);
     setES (usTemp);
-    usTemp = (USHORT)((ULONG)lpTemp & 0x0f);
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_ParamBlock)) & 0x0fu);
     setBX (usTemp);
 
     setCF(0);
     return;
 }
 
+#endif /* BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY */
+
+#if !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
 #define MAX_DIR 68
 
 VOID cmdCreateProcess ( VOID )
@@ -648,3 +657,4 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 
     return;
 }
+#endif /* !BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE */

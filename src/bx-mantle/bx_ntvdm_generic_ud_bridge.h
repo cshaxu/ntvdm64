@@ -37,6 +37,8 @@ struct bx_ntvdm_generic_ud_outcome_v1 {
   uint64_t resume_rip;
   uint32_t gpr16_write_mask;
   uint16_t gpr16_values[BX_NTVDM_GENERIC_UD_GPR16_COUNT];
+  uint32_t segment_write_mask;
+  uint16_t segment_values[6];
   uint32_t eflags_write_mask, eflags_values;
 };
 

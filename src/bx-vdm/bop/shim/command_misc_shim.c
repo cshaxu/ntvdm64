@@ -14,6 +14,7 @@ void cmdGetStartInfo(void);
 void cmdGetConfigSys(void);
 void cmdGetAutoexecBat(void);
 void cmdGetInitEnvironment(void);
+void cmdCheckBinary(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -28,6 +29,8 @@ ULONG DosSessionId;
 BOOL fSoftpcRedirection;
 void nt_std_handle_notification(BOOL enabled) { (void)enabled; }
 
+#pragma warning(push)
+#pragma warning(disable: 4324) /* jmp_buf has platform-required alignment; this private stack record never crosses an ABI. */
 typedef struct bx_ntvdm_command_misc_active_call {
     bx_ntvdm_command_misc_call *call;
     uint8_t *guest_buffer;
@@ -35,10 +38,12 @@ typedef struct bx_ntvdm_command_misc_active_call {
     uint32_t guest_bytes;
     uint32_t write_back;
     uint8_t *guest_buffer2;
+    uint8_t *guest_buffer3;
     uint32_t guest_address2;
     uint32_t guest_bytes2;
     jmp_buf terminal_exit;
 } bx_ntvdm_command_misc_active_call;
+#pragma warning(pop)
 
 static __declspec(thread) bx_ntvdm_command_misc_active_call *g_active_call;
 static CHAR g_test_system_directory[MAX_PATH + 1];
@@ -100,6 +105,7 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
          call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT ||
+         call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO ||
          call->service == 0x06u) &&
@@ -132,6 +138,10 @@ void bx_ntvdm_command_misc_set_bx(USHORT value)
 { (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 3u, value); }
 void bx_ntvdm_command_misc_set_cx(USHORT value)
 { (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 1u, value); }
+void bx_ntvdm_command_misc_set_ds(USHORT value)
+{ (void)bx_ntvdm_cpu_delta_v1_set_segment(&g_active_call->call->result->cpu_delta, 3u, value); }
+void bx_ntvdm_command_misc_set_es(USHORT value)
+{ (void)bx_ntvdm_cpu_delta_v1_set_segment(&g_active_call->call->result->cpu_delta, 0u, value); }
 
 bx_ntvdm_command_misc_session *bx_ntvdm_command_misc_active_session(void)
 {
@@ -215,6 +225,22 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
     uint32_t bytes;
     uint32_t index;
     if (active == NULL) return NULL;
+    if (active->call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY) {
+        uint32_t address = real_mode_address(segment, offset);
+        uint32_t binary_bytes = active->guest_bytes == 0u ? MAX_PATH :
+            active->guest_bytes == MAX_PATH ? sizeof(PARAMBLOCK) : 129u;
+        uint8_t **buffer = active->guest_bytes == 0u ? &active->guest_buffer :
+            active->guest_bytes == MAX_PATH ? &active->guest_buffer2 : &active->guest_buffer3;
+        if (address > 0x100000u - binary_bytes || *buffer != NULL) return NULL;
+        *buffer = (uint8_t *)calloc(binary_bytes, 1u);
+        if (*buffer == NULL || !active->call->guest_read(active->call->guest_state,
+                address, *buffer, binary_bytes)) return NULL;
+        if (active->guest_bytes == 0u) {
+            if (memchr(*buffer, 0, binary_bytes) == NULL) return NULL;
+            active->guest_bytes = MAX_PATH;
+        } else if (active->guest_bytes == MAX_PATH) active->guest_bytes = MAX_PATH + 1u;
+        return *buffer;
+    }
     if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT) {
         uint32_t requested = (uint32_t)(USHORT)active->call->cpu->ebx << 4;
         active->guest_address = real_mode_address(segment, offset);
@@ -355,6 +381,8 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         body = cmdGetAutoexecBat;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT)
         body = cmdGetInitEnvironment;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY)
+        body = cmdCheckBinary;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO)
         body = cmdGetStartInfo;
     else if (call->service == 0x06u)
@@ -375,7 +403,20 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         return 0;
     active.call = call;
     g_active_call = &active;
+    if (call->session != NULL) {
+        pSCSInfo = &call->session->scs_info;
+        pSCS_ToSync = &call->session->scs_info.SCS_ToSync;
+        pIsDosBinary = &call->session->is_dos_binary;
+        pFDAccess = &call->session->fd_access;
+    }
     if (setjmp(active.terminal_exit) == 0) body();
+    if (call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY && call->session != NULL &&
+        call->session->scs_info_address != 0u &&
+        !call->guest_write(call->guest_state, call->session->scs_info_address,
+            (const uint8_t *)&call->session->scs_info, sizeof(call->session->scs_info))) {
+        free(active.guest_buffer); free(active.guest_buffer2); free(active.guest_buffer3);
+        g_active_call = NULL; return 0;
+    }
     if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC && call->session != NULL) {
         memcpy(call->session->comspec, lpszComSpec, sizeof(lpszComSpec));
         call->session->comspec_bytes = cbComSpec;
@@ -410,6 +451,7 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     }
     free(active.guest_buffer);
     free(active.guest_buffer2);
+    free(active.guest_buffer3);
     g_active_call = NULL;
     return bx_ntvdm_cpu_result_v2_valid(call->result);
 }
