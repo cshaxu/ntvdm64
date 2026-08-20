@@ -2,31 +2,33 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T231 S1.** T230 is closed; see [the T230 closure record](history/m0-t230-closure-20260819.md). T231 begins the queued COMMAND owner package with its full original-source and ABI map.
+> **Current effective packet: M0 T231 S2.** T230 is closed; see [the T230 closure record](history/m0-t230-closure-20260819.md). T231 has completed the COMMAND source/ABI map and has admitted the first original `cmdmisc.c` slice.
 
-**Active: M0 T231 S1 -- COMMAND source mirror, ABI and v1-retirement map.**
+**Active: M0 T231 S2 -- COMMAND `cmdmisc.c` Direct parity (`54:02`, `54:04`).**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T231 S1, Ordinary Mode. |
+| Identifier Mode | M0 T231 S2, Ordinary Mode. |
 | Admission And Approval | Owner direction: “按照规划，实现COMMAND族的所有BOP，采用原生OpenNT源代码文件结构和代码结构，尽可能采用相同逻辑，并彻底清理该族的v1实现。” |
-| Objective | Establish the complete original-source, ABI, failure, dependency and v1-retirement map for every `54:00..10` service; prepare the source-shaped COMMAND mirror and shim boundary. |
-| Non-goals | No trace-selected leaf patch, no v1 feature extension, no Bochs intrusion, no guest-image mutation, and no claim that individual COMMAND endpoints close the family. |
-| Reference Baseline | Original `base/mvdm/dos/command/{cmd*.c,cmd*.h}`, `base/mvdm/inc/cmdsvc.h`, `softpc.new/host/src/nt_bop.c`; closed T230 direct-DEM composition; current retained `bop-v1` COMMAND comparison files. |
-| Files And ABI Surface | `src/bx-vdm/bop/opennt/command/`, `src/bx-vdm/bop/shim/command_*`, formal Ninja manifest, COMMAND fixtures, and legacy `src/bx-vdm/bop-v1/bx_ntvdm_cmd_*`/`bx_ntvdm_command_*` membership. |
+| Objective | Compile and locally verify the original `cmdComSpec` (`54:02`) and `cmdGetCurrentDir` (`54:04`) bodies from `cmdmisc.c` through one bounded Direct CLI shim. |
+| Non-goals | No trace-selected leaf patch, no v1 feature extension, no Bochs intrusion, no guest-image mutation, no sibling `cmdmisc.c` service admission, and no claim that either endpoint closes COMMAND. |
+| Reference Baseline | Original `base/mvdm/dos/command/cmdmisc.c`, `cmd.h`, `cmddata.c`, `base/mvdm/inc/cmdsvc.h`; completed T231 S1 ledger and retained `bop-v1` COMMAND comparison files. |
+| Files And ABI Surface | `src/bx-vdm/bop/opennt/command/cmdmisc.c`, `src/bx-vdm/bop/shim/command_misc_shim.*`, formal Ninja manifest, the focused `t231_s2_command_misc_direct_import_fixture`, and retained COMMAND v1 comparison sources. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding boundaries, original OpenNT ordering/layout/failure behavior, formal Ninja and documentation governance. |
-| Verification | Account for all 17 `CmdDispatch` entries, their original owner functions, guest register/memory ABI, host dependency, continuation/failure result, port disposition and matching v1 references; reject unproven classifications. |
-| Expected Markers | One original-file mirror manifest; one service ledger; explicit simple versus state-machine clusters; shim-only divergence boundaries; a deletion map proving the final v1 target set. |
-| Asset Needs | Pinned in-tree OpenNT source, existing 203-entry BOP tracker, formal MSVC Ninja graph, and retained v1 comparison source. |
-| Reporting Requirements | Retain source paths and exact original dispatch order; record all proposed divergence points and do not make runtime or code-complete claims in S1. |
-| Stop Conditions | Missing original source, unproved ABI, unavailable host API, or a new Bochs intrusion is recorded as an audit result and cannot be silently replaced by new provider behavior. |
-| Exit Criteria | All 17 services and all relevant original files are classified with source/ABI/failure/dependency rows; the mirror/shim file plan and S2--S10 owner-package sequence are fixed; every retained COMMAND v1 product reference is mapped for retirement. |
-| Original Owner Request | “S1把当前BOP的COMMAND族的原始文件拿进来……先给他们分类：简单的BOP和疑难的BOP；S2把所有简单的BOP……局部测试完成code complete；每个疑难BOP……最后所有本族BOP收口，清理掉v1代码。” |
-| Similar-Issue Sweep | All `54:00..10`, `CmdDispatch`, `CMDINFO`, `SAVEWORLD`, `STD_HANDLES`, host process/console/environment APIs, nt_bop route, all COMMAND v1 provider/session/launch/console/lifecycle files and formal manifest references. |
+| Verification | The original bodies compile with MSVC `/W4 /WX /MT`; focused local fixture proves first/repeat COMSPEC behavior, Direct host `C:` current-directory discovery, invalid-drive CF/AX failure, and checked guest result transport. |
+| Expected Markers | Original function bodies remain in `cmdmisc.c`; only one `command_misc_shim` carries CCPU/SAS replacement; unadmitted sibling routines are not emitted; no v1 call is linked. |
+| Asset Needs | Pinned in-tree OpenNT source, formal MSVC Ninja graph, host Direct drive/environment APIs, and checked fixed-width CPU/guest-memory ABI. |
+| Reporting Requirements | Record every import delta inline and in the import manifest; distinguish local Direct parity from engine routing and native guest proof. |
+| Stop Conditions | Missing original ABI, unavailable host API, a needed Bochs intrusion, or a required new provider behavior is recorded and leaves the S incomplete. |
+| Exit Criteria | Both original bodies are in the formal source list, a focused fixture exits zero, malformed/unbounded guest input is rejected at the shim, and no old `54:02`/`54:04` product route is extended. |
+| Original Owner Request | “S2把所有简单的BOP解除注释，局部测试完成code complete；每个疑难BOP自己独立出一个S任务来做。” |
+| Similar-Issue Sweep | `cmdComSpec`, `cmdGetCurrentDir`, `cmdSetInfo`, `cmdSaveWorld`, host OEM conversion/environment API, Direct C: behavior, the old `54:02` and `54:04` v1 routes, and formal manifest membership. |
 
-> **T231 S1 progress:** [COMMAND owner-package plan](etc/operations/m0-t231-command-owner-package-plan-001.md), [service ledger](etc/operations/m0-t231-s1-command-service-ledger-001.md), and the [source-mirror manifest](../src/bx-vdm/bop/opennt/command/command-import-manifest.md) establish the original 17-slot package boundary. The admitted `Sync-OpenNtCommandMirror.ps1` copy verified byte-identical hashes for all fifteen listed original source/header inputs. They intentionally remain outside the build until the neutral COMMAND shim foundation is admitted.
+> **T231 S1 progress:** [COMMAND owner-package plan](etc/operations/m0-t231-command-owner-package-plan-001.md), [service ledger](etc/operations/m0-t231-s1-command-service-ledger-001.md), and the [source-mirror manifest](../src/bx-vdm/bop/opennt/command/command-import-manifest.md) establish the original 17-slot package boundary. The admitted `Sync-OpenNtCommandMirror.ps1` copy verified byte-identical hashes for all fifteen listed original source/header inputs. Each remains outside the build until its own neutral COMMAND shim admission; S2 is the first such admission.
+
+> **T231 S2 progress:** [the cmdmisc admission boundary](etc/operations/m0-t231-s2-cmdmisc-admission-boundary-001.md) and [Direct-import witness](etc/evidence/t231-s2-command-cmdmisc-direct-import-001.md) record the first two original COMMAND bodies (`54:02`, `54:04`), their scoped shim and zero-exit local MSVC witness. This is not a full COMMAND or native-guest claim.
 
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 

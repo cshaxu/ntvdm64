@@ -6,19 +6,19 @@
  *  Sudeepb 17-Sep-1991 Created
  */
 
-#include "cmd.h"
+/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdmisc.c.
+ *
+ * Divergence: this first admitted slice is built without the retired NT4
+ * CCPU/SAS, VDD and PIF product composition.  command_misc_shim.h supplies
+ * the original register spellings, bounded guest spans, OEM environment API
+ * and Direct host-drive capability only.  The unadmitted routines below are
+ * excluded at translation-unit scope rather than replaced with stubs.  Their
+ * original source bodies, order and comments remain here for later COMMAND
+ * owner-package admission. */
+#define BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE 1
+#include "../../shim/command_misc_shim.h"
 
-#include <cmdsvc.h>
-#include <demexp.h>
-#include <softpc.h>
-#include <mvdm.h>
-#include <ctype.h>
-#include <memory.h>
-#include "oemuni.h"
-#include "nt_pif.h"
-#include "nt_uis.h"	  // For resource id
-
-
+#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID GetWowKernelCmdLine(VOID);
 extern ULONG fSeparateWow;
 
@@ -512,6 +512,7 @@ LPSTR    pszCmdLine;
 
     return;
 }
+#endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
 
 /* cmdGetCurrentDir - Return the current directory for a drive.
@@ -588,6 +589,7 @@ UINT  DriveType;
  *  EXIT  - None
  */
 
+#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSetInfo (VOID)
 {
 
@@ -629,6 +631,7 @@ CHAR	ch, chDrive, achEnvDrive[] = "=?:";
         }
     }
 }
+#endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
 static BOOL fConOutput = FALSE;
 
@@ -643,7 +646,11 @@ LPSTR   lpszCS;
     lpszCS =    (LPVOID) GetVDMAddr ((USHORT)getDS(),(USHORT)getDX());
     strcpy(lpszComSpec,"COMSPEC=");
     strcpy(lpszComSpec+8,lpszCS);
-    cbComSpec = strlen(lpszComSpec) +1;
+    /* Divergence: original Win32 used a 16-bit destination but its legacy
+     * headers did not diagnose this conversion.  The admitted shim bounds
+     * the source string to 64 bytes, so the explicit cast preserves the
+     * original 16-bit COMMAND layout under modern /W4 /WX. */
+    cbComSpec = (USHORT)(strlen(lpszComSpec) + 1u);
 
     setAL((BYTE)(!fConOutput || VDMForWOW));
 
@@ -651,6 +658,7 @@ LPSTR   lpszCS;
 }
 
 
+#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSaveWorld (VOID)
 {
 #ifdef CHECK_IT_LATER
@@ -895,3 +903,4 @@ VOID cmdGetStartInfo (VOID)
     setAL((BYTE) (DosSessionId ? 1 : 0));
     return;
 }
+#endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
