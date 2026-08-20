@@ -7,11 +7,11 @@
 
 typedef struct fixture_context { uint8_t guest[0x20000]; bx_ntvdm_host_handle_manager handles; } fixture_context;
 static int publish(void *s, HANDLE h, uint32_t *t, DWORD *e)
-{ fixture_context *c = s; uint16_t guest_handle; if (!c || !bx_ntvdm_host_handle_manager_publish(&c->handles, h, BX_NTVDM_HOST_HANDLE_OWNED, &guest_handle, e)) return 0; if (t) *t = guest_handle; return 1; }
+{ fixture_context *c = s; uint32_t guest_handle; if (!c || !bx_ntvdm_host_handle_manager_publish(&c->handles, h, BX_NTVDM_HOST_HANDLE_OWNED, &guest_handle, e)) return 0; if (t) *t = guest_handle; return 1; }
 static int lookup(void *s, uint32_t t, HANDLE *h)
-{ fixture_context *c = s; if (h) *h = INVALID_HANDLE_VALUE; return c != NULL && t != 0u && t <= UINT16_MAX && bx_ntvdm_host_handle_manager_lookup_handle(&c->handles, (uint16_t)t, h); }
+{ fixture_context *c = s; if (h) *h = INVALID_HANDLE_VALUE; return c != NULL && t != 0u && t != UINT32_MAX && bx_ntvdm_host_handle_manager_lookup_handle(&c->handles, t, h); }
 static int release(void *s, uint32_t t, DWORD *e)
-{ fixture_context *c = s; if (!c || t == 0u || t > UINT16_MAX) { if (e) *e = ERROR_INVALID_HANDLE; return 0; } return bx_ntvdm_host_handle_manager_release(&c->handles, (uint16_t)t, e); }
+{ fixture_context *c = s; if (!c || t == 0u || t == UINT32_MAX) { if (e) *e = ERROR_INVALID_HANDLE; return 0; } return bx_ntvdm_host_handle_manager_release(&c->handles, t, e); }
 static int attribute_get(void *s, uint8_t d, const wchar_t *p, DWORD *a, DWORD *e)
 { (void)s; (void)d; (void)p; if (a) *a = FILE_ATTRIBUTE_NORMAL; if (e) *e = ERROR_SUCCESS; return 1; }
 static int attribute_set(void *s, uint8_t d, const wchar_t *p, DWORD a, DWORD *e)
@@ -26,7 +26,7 @@ int main(void)
     fixture_context state; bx_ntvdm_dem_direct_context direct;
     bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 result; bx_ntvdm_demhndl_call call;
-    CHAR temporary[MAX_PATH], temporary_second[MAX_PATH], temporary_directory[MAX_PATH], pattern[MAX_PATH], renamed[MAX_PATH], created[MAX_PATH], first_name[14]; ULONG dta_location; USHORT current_pdb = 0x50u; USHORT fcb_handle; HANDLE seed; DWORD seed_bytes;
+    CHAR temporary[MAX_PATH], temporary_second[MAX_PATH], temporary_directory[MAX_PATH], pattern[MAX_PATH], renamed[MAX_PATH], created[MAX_PATH], first_name[14]; ULONG dta_location; USHORT current_pdb = 0x50u; uint32_t fcb_handle; HANDLE seed; DWORD seed_bytes;
     memset(&state, 0, sizeof(state)); memset(&direct, 0, sizeof(direct));
     if (!bx_ntvdm_host_handle_manager_initialize(&state.handles)) return 1;
     direct.magic = BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
@@ -93,6 +93,7 @@ int main(void)
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         state.guest[0x1201u] == 0u ||
         memcmp(first_name, state.guest + 0x1201u, 11u) == 0) return 6;
+    state.handles.next_guest_handle = 0x10000u;
     memcpy(state.guest + 0x1000u, temporary, strlen(temporary) + 1u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.ds = 0x100u;
@@ -100,13 +101,15 @@ int main(void)
     if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         (result.cpu_delta.gpr16_write_mask & ((1u << 0) | (1u << 5))) !=
-            ((1u << 0) | (1u << 5)) || result.cpu_delta.gpr16_values[5] == 0u ||
+            ((1u << 0) | (1u << 5)) ||
         !bx_ntvdm_host_handle_manager_valid(&state.handles)) return 7;
-    fcb_handle = result.cpu_delta.gpr16_values[5];
+    fcb_handle = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16u) |
+        result.cpu_delta.gpr16_values[5];
+    if (fcb_handle != 0x10000u) return 7;
     memset(state.guest + 0x2000u, 0, 2u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-    cpu.eax = result.cpu_delta.gpr16_values[0];
-    cpu.ebp = result.cpu_delta.gpr16_values[5];
+    cpu.eax = fcb_handle >> 16u;
+    cpu.ebp = fcb_handle;
     cpu.ebx = 1u;
     cpu.ecx = 2u;
     call.service = 0x2fu;
@@ -145,10 +148,11 @@ int main(void)
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         GetFileAttributesA(created) == INVALID_FILE_ATTRIBUTES ||
         !bx_ntvdm_host_handle_manager_valid(&state.handles)) return 11;
-    fcb_handle = result.cpu_delta.gpr16_values[5];
+    fcb_handle = ((uint32_t)result.cpu_delta.gpr16_values[0] << 16u) |
+        result.cpu_delta.gpr16_values[5];
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-    cpu.eax = result.cpu_delta.gpr16_values[0];
-    cpu.esi = result.cpu_delta.gpr16_values[5];
+    cpu.eax = fcb_handle >> 16u;
+    cpu.esi = fcb_handle;
     call.service = 0x2eu;
     if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||

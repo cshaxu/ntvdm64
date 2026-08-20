@@ -51,18 +51,19 @@ the original provider bodies remain reusable.
 
 **Procedure.** `src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.{h,c}` owns
 one session-scoped bidirectional map between a private native `HANDLE` and a
-nonzero `uint16_t` guest ID. DEM publishes owned handles and COMMAND publishes
+32-bit opaque guest ID. DEM publishes owned handles and COMMAND publishes
 borrowed standard/redirection handles. Original register layouts remain in
-place, but the high 16 bits must be zero and the low 16 bits carry the opaque
-ID. The manager owns only representation and lifetime; it has no BOP,
+place and both 16-bit halves carry the same-width opaque ID; zero is invalid
+and `UINT32_MAX` remains the historical COMMAND default-handle sentinel. The
+manager owns only representation and lifetime; it has no BOP,
 OpenNT-service, DOS, path, drive, device, CPU, or Bochs policy.
 
 **Retained behavior and failure rule.** The original DEM/COMMAND dispatcher,
 provider order, parameter layout, result registers, carry/error paths, and
-host capability calls remain their original owners. A zero, unknown, or
-nonzero-high-half guest token follows the existing invalid-handle failure
-route; no raw host pointer is reconstructed. Owned entries close on release or
-session reset; borrowed entries are forgotten but never closed. A future
+host capability calls remain their original owners. A zero, reserved, or
+unknown guest token follows the existing invalid-handle failure route; no raw
+host pointer is reconstructed. Owned entries close on release or session
+reset; borrowed entries are forgotten but never closed. A future
 combined DEM/COMMAND runtime session must inject one manager instance rather
 than add a new private table.
 

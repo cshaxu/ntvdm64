@@ -30,11 +30,12 @@ int main(void)
     bx_ntvdm_host_handle_manager_reset(&s.handles);
     bx_ntvdm_command_misc_session_initialize(&s);
     if(!CreatePipe(&pipe_read,&pipe_write,NULL,0u))return 5;
-    s.redirection_token=1u;s.redirection_info.ri_hStdOut=pipe_write;
+    s.handles.next_guest_handle=0x10000u;s.redirection_token=1u;s.redirection_info.ri_hStdOut=pipe_write;
     cpu.eax=0u;cpu.ebx=1u;cpu.ecx=HANDLE_STDOUT;
     if(!invoke(&c,&e,&cpu,&r,&s,0x06u)||s.redirection_info.ri_pPipeStdOut==NULL)return 6;
-    if(!bx_ntvdm_host_handle_manager_lookup_handle(&s.handles,
-        r.cpu_delta.gpr16_values[1],&pipe_write)||
+    if(r.cpu_delta.gpr16_values[3]!=1u||r.cpu_delta.gpr16_values[1]!=0u||
+        !bx_ntvdm_host_handle_manager_lookup_handle(&s.handles,
+        ((uint32_t)r.cpu_delta.gpr16_values[3]<<16u)|r.cpu_delta.gpr16_values[1],&pipe_write)||
         !WriteFile(pipe_write,"X",1u,&bytes,NULL)||bytes!=1u)return 7;
     SetEvent(s.redirection_info.ri_pPipeStdOut->hExitEvent);
     if(WaitForSingleObject(s.redirection_info.ri_hStdOutThread,2000u)!=WAIT_OBJECT_0)return 8;

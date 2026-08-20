@@ -15,7 +15,7 @@ static int publish_handle(void *state, HANDLE handle, uint32_t *token_out,
     DWORD *error_out)
 {
     fixture_context *context = (fixture_context *)state;
-    uint16_t guest_handle;
+    uint32_t guest_handle;
     if (token_out != NULL) *token_out = 0u;
     if (error_out != NULL) *error_out = ERROR_TOO_MANY_OPEN_FILES;
     if (context == NULL || !bx_ntvdm_host_handle_manager_publish(&context->handles,
@@ -24,9 +24,9 @@ static int publish_handle(void *state, HANDLE handle, uint32_t *token_out,
     return 1;
 }
 static int lookup_handle(void *state, uint32_t token, HANDLE *out)
-{ fixture_context *c = state; if (out) *out = INVALID_HANDLE_VALUE; return c != NULL && token != 0u && token <= UINT16_MAX && bx_ntvdm_host_handle_manager_lookup_handle(&c->handles, (uint16_t)token, out); }
+{ fixture_context *c = state; if (out) *out = INVALID_HANDLE_VALUE; return c != NULL && token != 0u && token != UINT32_MAX && bx_ntvdm_host_handle_manager_lookup_handle(&c->handles, token, out); }
 static int release_handle(void *state, uint32_t token, DWORD *error)
-{ fixture_context *c = state; if (error) *error = ERROR_INVALID_HANDLE; return c != NULL && token != 0u && token <= UINT16_MAX && bx_ntvdm_host_handle_manager_release(&c->handles, (uint16_t)token, error); }
+{ fixture_context *c = state; if (error) *error = ERROR_INVALID_HANDLE; return c != NULL && token != 0u && token != UINT32_MAX && bx_ntvdm_host_handle_manager_release(&c->handles, token, error); }
 static int attr_get(void *s, uint8_t d, const wchar_t *p, DWORD *a, DWORD *e)
 { (void)s; (void)d; (void)p; if (a) *a = FILE_ATTRIBUTE_NORMAL; if (e) *e = ERROR_SUCCESS; return 1; }
 static int attr_set(void *s, uint8_t d, const wchar_t *p, DWORD a, DWORD *e)

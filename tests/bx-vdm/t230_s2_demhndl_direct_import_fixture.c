@@ -166,7 +166,7 @@ int main(void)
     if (GetTempPathW(MAX_PATH, directory) == 0u ||
         GetTempFileNameW(directory, L"dhs", 0u, path) == 0u) return 1;
     memset(&state, 0, sizeof(state));
-    state.token = 1u;
+    state.token = 0x00010001u;
     state.handle = CreateFileW(path, GENERIC_READ | GENERIC_WRITE, 0u, NULL,
         OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (state.handle == INVALID_HANDLE_VALUE) { DeleteFileW(path); return 2; }
@@ -178,7 +178,7 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.eflags = BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF;
     if (!invoke_dispatch_noop(&state, &direct, &event, &cpu, &result)) return 4;
-    cpu.eax = 0u; cpu.ebp = 1u; cpu.ds = 0x100u; cpu.edx = 0u;
+    cpu.eax = 1u; cpu.ebp = 1u; cpu.ds = 0x100u; cpu.edx = 0u;
     memcpy(state.guest + address, "hello", 5u);
     cpu.ecx = 5u; cpu.eflags = 0x40u;
     if (!invoke(&state, &direct, &event, &cpu, &result,
@@ -211,21 +211,21 @@ int main(void)
 
     /* Original demClientError route: invalid native token must be surfaced as
      * AX=ERROR_INVALID_HANDLE with CF, not a shim-local success. */
-    cpu.ebp = 2u;
+    cpu.eax = 1u; cpu.ebp = 2u;
     if (!invoke(&state, &direct, &event, &cpu, &result,
             BX_NTVDM_DEMHNDL_CHG_FILE_PTR) ||
         result.cpu_delta.gpr16_values[0] != ERROR_INVALID_HANDLE ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u) return 11;
 
-    /* The original register pair remains the ABI shape, but a unified modern
-     * session accepts only its low-word opaque guest ID. */
-    cpu.eax = 1u; cpu.ebp = 1u;
+    /* The complete original pair is a same-width opaque ID. An unknown
+     * high-word value follows the original invalid-handle failure path. */
+    cpu.eax = 2u; cpu.ebp = 1u;
     if (!invoke(&state, &direct, &event, &cpu, &result,
             BX_NTVDM_DEMHNDL_CHG_FILE_PTR) ||
         result.cpu_delta.gpr16_values[0] != ERROR_INVALID_HANDLE ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u) return 12;
 
-    cpu.eax = 0u;
+    cpu.eax = 1u;
     cpu.ebp = 1u;
     cpu.ecx = 0xffffu; cpu.edx = 0xffffu;
     if (!invoke(&state, &direct, &event, &cpu, &result,

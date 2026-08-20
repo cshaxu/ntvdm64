@@ -1,5 +1,9 @@
 # M0 T232 S3 — COMMAND Unified-Handle Migration Result
 
+> **Superseded ABI detail:** M0 T234 replaces this record's initial low-word
+> ID/high-word-zero representation with a same-width 32-bit opaque ID. See
+> [the successor result](t234-s1-32bit-opaque-host-handle-abi-result-001.md).
+
 ## Question
 
 Can the direct COMMAND `54:06` publication and `54:08` launch/redirection

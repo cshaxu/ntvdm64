@@ -6,8 +6,8 @@
 
 struct bx_ntvdm_host_handle_entry {
     HANDLE host_handle;
-    uint16_t guest_handle;
-    uint16_t ownership;
+    uint32_t guest_handle;
+    uint32_t ownership;
     struct bx_ntvdm_host_handle_entry *next_host;
     struct bx_ntvdm_host_handle_entry *next_guest;
 };
@@ -17,7 +17,7 @@ static uint32_t host_bucket(HANDLE handle)
     return (uint32_t)(((uintptr_t)handle >> 3u) % BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS);
 }
 
-static uint32_t guest_bucket(uint16_t handle)
+static uint32_t guest_bucket(uint32_t handle)
 {
     return ((uint32_t)handle) % BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS;
 }
@@ -34,10 +34,11 @@ static bx_ntvdm_host_handle_entry *find_host(
 }
 
 static bx_ntvdm_host_handle_entry *find_guest(
-    const bx_ntvdm_host_handle_manager *manager, uint16_t handle)
+    const bx_ntvdm_host_handle_manager *manager, uint32_t handle)
 {
     bx_ntvdm_host_handle_entry *entry;
-    if (!bx_ntvdm_host_handle_manager_valid(manager) || handle == 0u) return NULL;
+    if (!bx_ntvdm_host_handle_manager_valid(manager) || handle == 0u ||
+        handle == UINT32_MAX) return NULL;
     for (entry = manager->by_guest[guest_bucket(handle)]; entry != NULL;
         entry = entry->next_guest)
         if (entry->guest_handle == handle) return entry;
@@ -62,15 +63,15 @@ int bx_ntvdm_host_handle_manager_valid(
     return manager != NULL && manager->magic == BX_NTVDM_HOST_HANDLE_MANAGER_MAGIC &&
         manager->abi_version == BX_NTVDM_HOST_HANDLE_MANAGER_VERSION &&
         manager->struct_bytes == sizeof(*manager) && manager->next_guest_handle >= 1u &&
-        manager->next_guest_handle <= 0x10000u && manager->entry_count < 0x10000u;
+        manager->entry_count < UINT32_MAX;
 }
 
 int bx_ntvdm_host_handle_manager_publish(
     bx_ntvdm_host_handle_manager *manager, HANDLE host_handle,
-    uint32_t ownership, uint16_t *guest_handle_out, DWORD *error_out)
+    uint32_t ownership, uint32_t *guest_handle_out, DWORD *error_out)
 {
     bx_ntvdm_host_handle_entry *entry;
-    uint16_t guest_handle;
+    uint32_t guest_handle;
     uint32_t bucket;
     if (guest_handle_out != NULL) *guest_handle_out = 0u;
     if (error_out != NULL) *error_out = ERROR_INVALID_HANDLE;
@@ -84,7 +85,7 @@ int bx_ntvdm_host_handle_manager_publish(
         if (error_out != NULL) *error_out = ERROR_SUCCESS;
         return 1;
     }
-    if (manager->next_guest_handle > UINT16_MAX) {
+    if (manager->next_guest_handle == UINT32_MAX) {
         if (error_out != NULL) *error_out = ERROR_TOO_MANY_OPEN_FILES;
         return 0;
     }
@@ -93,10 +94,10 @@ int bx_ntvdm_host_handle_manager_publish(
         if (error_out != NULL) *error_out = ERROR_NOT_ENOUGH_MEMORY;
         return 0;
     }
-    guest_handle = (uint16_t)manager->next_guest_handle++;
+    guest_handle = manager->next_guest_handle++;
     entry->host_handle = host_handle;
     entry->guest_handle = guest_handle;
-    entry->ownership = (uint16_t)ownership;
+    entry->ownership = ownership;
     bucket = host_bucket(host_handle);
     entry->next_host = manager->by_host[bucket];
     manager->by_host[bucket] = entry;
@@ -110,7 +111,7 @@ int bx_ntvdm_host_handle_manager_publish(
 }
 
 int bx_ntvdm_host_handle_manager_lookup_handle(
-    const bx_ntvdm_host_handle_manager *manager, uint16_t guest_handle,
+    const bx_ntvdm_host_handle_manager *manager, uint32_t guest_handle,
     HANDLE *host_handle_out)
 {
     bx_ntvdm_host_handle_entry *entry = find_guest(manager, guest_handle);
@@ -122,7 +123,7 @@ int bx_ntvdm_host_handle_manager_lookup_handle(
 
 int bx_ntvdm_host_handle_manager_lookup_guest(
     const bx_ntvdm_host_handle_manager *manager, HANDLE host_handle,
-    uint16_t *guest_handle_out)
+    uint32_t *guest_handle_out)
 {
     bx_ntvdm_host_handle_entry *entry = find_host(manager, host_handle);
     if (guest_handle_out != NULL) *guest_handle_out = 0u;
@@ -145,7 +146,7 @@ static void unlink_entry(bx_ntvdm_host_handle_manager *manager,
 }
 
 int bx_ntvdm_host_handle_manager_release(
-    bx_ntvdm_host_handle_manager *manager, uint16_t guest_handle,
+    bx_ntvdm_host_handle_manager *manager, uint32_t guest_handle,
     DWORD *error_out)
 {
     bx_ntvdm_host_handle_entry *entry;

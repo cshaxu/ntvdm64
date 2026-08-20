@@ -2,31 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T233 S1** — map the complete OpenNT XMS owner package, its
-machine prerequisites, and its inherited host-handle boundary before code
-recovery begins.
+**Active: M0 T234 S1** — correct the unified host-handle manager to preserve
+the complete original 32-bit guest token ABI as opaque IDs.
 
 ## Active Packet
 
-### M0 T233 S1 — XMS package source and ABI admission map
+### M0 T234 S1 — 32-bit opaque host-handle ABI correction
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T233 S1`, Ordinary Mode. |
-| Admission And Approval | The owner approved global task ordering and requested T232 closure; the first ordered candidate is the OpenNT XMS owner package. This S admits only its source/ABI map before recovery implementation. |
-| Objective | Produce the complete `52:xx` service-to-original-source map, identify A20/UMB/INT 15 and host-handle dependencies by owner, and choose the source-first recovery route for every service. |
-| Non-goals | Do not implement an XMS service, enable a Bochs device, alter CPU/machine behavior, or use guest trace hits to select individual leaf work. |
-| Reference Baseline | M0 T232 is closed by [its closure record](history/m0-t232-closure-20260820.md); XMS is queue order one and must use its unified host-handle manager rather than create a token table. |
-| Files And ABI Surface | OpenNT XMS source inventory, current BOP catalogue, `bx-vdm` ingress/provider boundaries, bx-core/bx-mantle A20/INT 15/UMB ownership records, and S1 evidence. |
-| Applicable Rules | `docs/rules/EXECUTION.md` source-recovery and package-completion gates; `docs/rules/ARCHITECTURE.md`; `docs/rules/CODING.md`; source policy. |
-| Verification | Cross-check every `52:xx` selector entry against original dispatcher/source ownership; independently review all declared prerequisites and run documentation governance verification. |
-| Expected Markers | One exhaustive service ledger, one source-recovery disposition per service, and explicit transfer boundaries for machine-owned prerequisites and adapter-only ABI seams. |
-| Asset Needs | Existing imported OpenNT XMS materials, BOP tracker, machine source map, formal Ninja manifest, and no new host or third-party input. |
-| Reporting Requirements | State exact source paths, original failure rules, uncomposable dependencies, retained ABI layouts, and whether T232's manager is applicable or deliberately out of scope. |
-| Stop Conditions | Pause for owner direction if the source map requires an unapproved host mutation policy, a Bochs semantic intrusion, or a historical source asset absent from the approved inputs. |
-| Exit Criteria | The complete XMS package is classified under the mandatory source-first ladder; implementation can be decomposed by owner component rather than trace-leaf BOP. |
-| Original Owner Request | “请你在当前T任务中收口，bop-v1不用管，但是所有其他地方都要清理干净！” |
-| Similar-Issue Sweep | All `52:xx` services, A20/UMB/INT 15 routes, XMS allocation/descriptor handle representations, and the T232 manager handoff. |
+| Identifier Mode | `M0 T234 S1`, Ordinary Mode. |
+| Admission And Approval | The owner approved the explicit correction: internal IDs become 32-bit opaque values so OpenNT's full `AX:BP` and `BX:CX` ABI shapes remain usable; raw host handles remain private. |
+| Objective | Replace the 16-bit guest ID seam with a 32-bit opaque ID seam, preserving both register halves and the COMMAND `0xffffffff` default-handle sentinel. |
+| Non-goals | Do not pass raw host handles, modify OpenNT mirror provider bodies, add BOP semantics to Bochs, implement XMS, or change host capability behavior. |
+| Reference Baseline | T232's 16-bit manager closure is `1c069141` and its exception registration is `8d9f316f`; both are superseded only in their ID-width conclusion. |
+| Files And ABI Surface | `bx_ntvdm_host_handle_manager.{h,c}`, DEM direct-session/context/shim, COMMAND misc/session shim, focused fixtures, T232 closure/evidence, and T234 evidence. |
+| Applicable Rules | `docs/rules/EXECUTION.md` source-recovery and closure rules; `docs/rules/ARCHITECTURE.md`; `docs/rules/CODING.md`; source policy. This remains adapter-owned ABI safety infrastructure. |
+| Verification | Formal Ninja build; manager, DEM, and COMMAND fixtures prove 32-bit round trips, `0xffffffff` reservation, unknown-ID failure, borrowed/owned cleanup, and preserved original register pairs. |
+| Expected Markers | No high-word-zero rejection remains for valid opaque IDs; no native host pointer crosses guest state; the only reserved guest values are documented. |
+| Asset Needs | Existing T232 manager, OpenNT mirrors, formal Ninja graph, and no new external source or host dependency. |
+| Reporting Requirements | Amend `BX-VDM-001` to state the same-width 32-bit opaque substitution and distinguish it from raw NT4 handle passage. |
+| Stop Conditions | Pause if any reached original caller proves it treats a host-handle bit pattern as more than an opaque key, or if a 32-bit guest token conflicts with an established sentinel beyond `0xffffffff`. |
+| Exit Criteria | All non-v1 manager consumers use `uint32_t` opaque IDs; focused/formal regressions pass; evidence and the exception register accurately replace the prior 16-bit claim. |
+| Original Owner Request | “没错！好，就这样办理！” |
+| Similar-Issue Sweep | DEM AX:BP publisher/consumer paths, COMMAND BX:CX and stack token paths, fixture-local adapters, all high-word rejection checks, and reserved-token handling. |
+
+Detailed result evidence: [T234 S1 32-bit opaque handle ABI](etc/evidence/t234-s1-32bit-opaque-host-handle-abi-result-001.md).
 
 ## Current Work Record
 
@@ -35,8 +36,10 @@ package; see the [T231 closure](history/m0-t231-closure-20260820.md). Native
 `54:xx` reachability remains transferred to the queued bx machine/BIOS owner
 package. XMS was excluded from T232 and is now admitted as M0 T233 S1.
 
-M0 T232 is closed as the unified host-handle representation and cleanup
-package; see [the closure record](history/m0-t232-closure-20260820.md).
+M0 T232 is closed as the initial unified host-handle cleanup package; its
+16-bit ID conclusion is being corrected by active M0 T234. M0 T233/S1 was
+admitted but received no source or evidence work before the owner superseded
+it with this ABI correction; XMS returns to the unnumbered candidate queue.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

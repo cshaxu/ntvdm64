@@ -15,7 +15,7 @@ static int valid(const bx_ntvdm_dem_direct_host_session *session)
 static int publish(void *state, HANDLE handle, uint32_t *token, DWORD *error)
 {
     bx_ntvdm_dem_direct_host_session *session = state;
-    uint16_t guest_handle;
+    uint32_t guest_handle;
     if (token) *token = 0u;
     if (!valid(session) || !bx_ntvdm_host_handle_manager_publish(&session->handles,
             handle, BX_NTVDM_HOST_HANDLE_OWNED, &guest_handle, error)) return 0;
@@ -26,23 +26,22 @@ static int publish(void *state, HANDLE handle, uint32_t *token, DWORD *error)
 static int lookup(void *state, uint32_t token, HANDLE *handle)
 {
     bx_ntvdm_dem_direct_host_session *session = state;
-    if (!valid(session) || token == 0u || token > UINT16_MAX) {
+    if (!valid(session) || token == 0u || token == UINT32_MAX) {
         if (handle) *handle = INVALID_HANDLE_VALUE;
         return 0;
     }
-    return bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
-        (uint16_t)token, handle);
+    return bx_ntvdm_host_handle_manager_lookup_handle(&session->handles, token,
+        handle);
 }
 
 static int release(void *state, uint32_t token, DWORD *error)
 {
     bx_ntvdm_dem_direct_host_session *session = state;
-    if (!valid(session) || token == 0u || token > UINT16_MAX) {
+    if (!valid(session) || token == 0u || token == UINT32_MAX) {
         if (error) *error = ERROR_INVALID_HANDLE;
         return 0;
     }
-    return bx_ntvdm_host_handle_manager_release(&session->handles,
-        (uint16_t)token, error);
+    return bx_ntvdm_host_handle_manager_release(&session->handles, token, error);
 }
 
 static int query_attributes(void *state, uint8_t drive, const wchar_t *path,

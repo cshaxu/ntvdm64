@@ -7,9 +7,8 @@ int main(void)
 {
     bx_ntvdm_host_handle_manager manager;
     HANDLE owned, borrowed, returned;
-    uint16_t owned_id, owned_again, borrowed_id, found_id;
+    uint32_t owned_id, owned_again, borrowed_id, found_id;
     DWORD error;
-    uint32_t index;
     if (!bx_ntvdm_host_handle_manager_initialize(&manager) ||
         !bx_ntvdm_host_handle_manager_valid(&manager)) return 1;
     owned = CreateEventW(NULL, FALSE, FALSE, NULL);
@@ -26,6 +25,8 @@ int main(void)
             owned, &found_id) || found_id != owned_id) return 5;
     if (bx_ntvdm_host_handle_manager_lookup_handle(&manager, 0u, &returned) ||
         bx_ntvdm_host_handle_manager_release(&manager, 0u, &error) ||
+        bx_ntvdm_host_handle_manager_lookup_handle(&manager, UINT32_MAX, &returned) ||
+        bx_ntvdm_host_handle_manager_release(&manager, UINT32_MAX, &error) ||
         error != ERROR_INVALID_HANDLE) return 6;
     if (!bx_ntvdm_host_handle_manager_publish(&manager, borrowed,
             BX_NTVDM_HOST_HANDLE_BORROWED, &borrowed_id, &error) || borrowed_id != 2u ||
@@ -35,14 +36,14 @@ int main(void)
     if (!bx_ntvdm_host_handle_manager_release(&manager, owned_id, &error) ||
         WaitForSingleObject(owned, 0u) != WAIT_FAILED ||
         bx_ntvdm_host_handle_manager_release(&manager, owned_id, &error)) return 9;
-    /* Borrowed synthetic values make the monotonic 16-bit boundary test
-     * independent of kernel-handle quotas and ownership side effects. */
-    for (index = 3u; index <= UINT16_MAX; ++index) {
-        if (!bx_ntvdm_host_handle_manager_publish(&manager,
-                (HANDLE)(uintptr_t)index, BX_NTVDM_HOST_HANDLE_BORROWED,
-                &found_id, &error) || found_id != (uint16_t)index) return 10;
-    }
-    if (bx_ntvdm_host_handle_manager_publish(&manager, (HANDLE)(uintptr_t)0x10000u,
+    /* Synthetic borrowed values reach the high-word and sentinel boundaries
+     * without requiring billions of kernel handles. */
+    manager.next_guest_handle = 0x10000u;
+    if (!bx_ntvdm_host_handle_manager_publish(&manager, (HANDLE)(uintptr_t)3u,
+            BX_NTVDM_HOST_HANDLE_BORROWED, &found_id, &error) ||
+        found_id != 0x10000u) return 10;
+    manager.next_guest_handle = UINT32_MAX;
+    if (bx_ntvdm_host_handle_manager_publish(&manager, (HANDLE)(uintptr_t)4u,
             BX_NTVDM_HOST_HANDLE_BORROWED, &found_id, &error) ||
         error != ERROR_TOO_MANY_OPEN_FILES) return 11;
     bx_ntvdm_host_handle_manager_reset(&manager);

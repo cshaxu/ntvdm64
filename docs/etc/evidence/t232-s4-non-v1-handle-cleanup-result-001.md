@@ -1,5 +1,9 @@
 # M0 T232 S4 — Non-v1 Host-Handle Cleanup Result
 
+> **Superseded ABI detail:** the cleanup result remains valid, but its
+> 16-bit ID interpretation is replaced by M0 T234's
+> [same-width 32-bit successor](t234-s1-32bit-opaque-host-handle-abi-result-001.md).
+
 ## Question
 
 After DEM and COMMAND migrate, does any non-v1 product route or formal

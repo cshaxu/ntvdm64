@@ -254,9 +254,9 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
             /* DIVERGENCE: original cmdCreateProcess temporarily installed the
              * decoded guest handles into the parent process.  Resolve the
              * fixed token directly into STARTUPINFO instead. */
-            if ((token >> 16u) != 0u || (token & 0xffffu) == 0u ||
+            if (token == 0u || token == UINT32_MAX ||
                 !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
-                    (uint16_t)token, targets[index])) {
+                    token, targets[index])) {
                 bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_INVALID_HANDLE); return;
             }
         }
@@ -369,15 +369,15 @@ PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token)
 int bx_ntvdm_command_misc_publish_handle(HANDLE handle)
 {
     bx_ntvdm_command_misc_session *session;
-    uint16_t guest_handle;
+    uint32_t guest_handle;
     DWORD error;
     if (g_active_call == NULL || (session = g_active_call->call->session) == NULL ||
         !bx_ntvdm_host_handle_manager_publish(&session->handles, handle,
             BX_NTVDM_HOST_HANDLE_BORROWED, &guest_handle, &error)) return 0;
     /* The original guest ABI is BX:CX. Preserve it as a fixed-width token,
      * never as a truncated host HANDLE. */
-    bx_ntvdm_command_misc_set_cx(guest_handle);
-    bx_ntvdm_command_misc_set_bx(0u);
+    bx_ntvdm_command_misc_set_cx((USHORT)guest_handle);
+    bx_ntvdm_command_misc_set_bx((USHORT)(guest_handle >> 16u));
     return 1;
 }
 
