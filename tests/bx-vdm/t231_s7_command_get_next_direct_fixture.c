@@ -14,12 +14,15 @@ static int invoke(fixture_context *context, bx_ntvdm_exception_event_v1 *event,
     bx_ntvdm_cpu_state_v1 *cpu, bx_ntvdm_cpu_result_v2 *result,
     bx_ntvdm_command_misc_session *session, uint32_t first_call)
 { bx_ntvdm_command_misc_call call; memset(&call, 0, sizeof(call)); call.magic = BX_NTVDM_COMMAND_MISC_CALL_MAGIC; call.abi_version = BX_NTVDM_COMMAND_MISC_CALL_VERSION; call.struct_bytes = sizeof(call); call.service = BX_NTVDM_COMMAND_MISC_GET_NEXT; call.boundary = event; call.cpu = cpu; call.result = result; call.guest_state = context; call.guest_read = read_guest; call.guest_write = write_guest; call.session = session; call.first_call = first_call; return bx_ntvdm_command_misc_invoke(&call); }
+static int has_prefix(const CHAR *strings, uint32_t bytes, const CHAR *prefix)
+{ const CHAR *cursor = strings, *end = strings + bytes; size_t prefix_bytes = strlen(prefix); while (cursor < end && *cursor != '\0') { size_t current_bytes = strlen(cursor) + 1u; if (current_bytes > (size_t)(end - cursor)) return 0; if (strncmp(cursor, prefix, prefix_bytes) == 0) return 1; cursor += current_bytes; } return 0; }
 
 int main(void)
 {
     fixture_context context; bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 result; bx_ntvdm_command_misc_session session, retry_session; CMDINFO *info;
-    uint32_t info_address = 0x1000u, command_address = 0x4000u, app_address = 0x5000u;
+    uint32_t info_address = 0x1000u, command_address = 0x4000u, app_address = 0x5000u, required_environment;
+    CHAR large_environment[1400];
     memset(&context, 0, sizeof(context)); event_initialize(&event);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.ds = 0x100u;
     bx_ntvdm_command_misc_session_initialize(&session);
@@ -42,10 +45,12 @@ int main(void)
     if (!invoke(&context, &event, &cpu, &result, &session, 0u) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_STOP) { fprintf(stderr, "terminal\n"); return 4; }
     bx_ntvdm_command_misc_session_initialize(&retry_session);
+    memset(large_environment, 0, sizeof(large_environment));
+    memcpy(large_environment, "FOO=", 4u); memset(large_environment + 4u, 'E', 1300u);
     if (!bx_ntvdm_command_misc_session_set_command_source(&retry_session,
             "C:\\TOOLS\\RETRY.EXE", "", 2u, 437u) ||
         !bx_ntvdm_command_misc_session_set_command_environment(&retry_session,
-            "FOO=BAR\0\0", 9u)) return 5;
+            large_environment, 1306u)) return 5;
     memset(&context, 0, sizeof(context));
     info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 4u;
     info->CmdLineSeg = 0x400u; info->CmdLineSize = 128u;
@@ -53,15 +58,18 @@ int main(void)
     if (!invoke(&context, &event, &cpu, &result, &retry_session, 0u) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
-        result.cpu_delta.gpr16_values[0] != 9u || retry_session.command_source_repeat_pending == 0u ||
+        result.cpu_delta.gpr16_values[0] <= 1024u || retry_session.command_source_repeat_pending == 0u ||
         retry_session.command_source_delivered != 0u) return 6;
-    info->EnvSize = 9u;
+    required_environment = result.cpu_delta.gpr16_values[0];
+    info->EnvSize = (USHORT)required_environment;
     if (!invoke(&context, &event, &cpu, &result, &retry_session, 0u) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         retry_session.command_source_repeat_pending != 0u || retry_session.command_source_delivered != 1u ||
         strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\RETRY.EXE") != 0 ||
-        memcmp(context.guest + 0x3000u, "FOO=BAR\0\0", 9u) != 0) return 7;
+        !has_prefix((CHAR *)context.guest + 0x3000u, required_environment, "FOO=")) return 7;
+    bx_ntvdm_command_misc_session_dispose(&session);
+    bx_ntvdm_command_misc_session_dispose(&retry_session);
     puts("T231 S7 direct OpenNT cmdGetNextCmd CLI-source handoff, environment retry/re-entry, and no-command terminal behavior verified");
     return 0;
 }

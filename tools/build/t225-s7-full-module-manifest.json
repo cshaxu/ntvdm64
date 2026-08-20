@@ -642,6 +642,30 @@
       ]
     },
     {
+      "name": "t234-s2-command-dynamic-environment-fixture",
+      "source": "tests/bx-vdm/t234_s2_command_dynamic_environment_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t234-s2-command-set-directories-fixture",
+      "source": "tests/bx-vdm/t234_s2_command_set_directories_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
       "name": "t231-s6-command-check-binary-direct-fixture",
       "source": "tests/bx-vdm/t231_s6_command_check_binary_direct_fixture.c",
       "libraries": [

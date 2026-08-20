@@ -1,0 +1,77 @@
+# M0 T234 S2 — Dynamic COMMAND Environment Composition Result
+
+## Question
+
+Can the v2 OpenNT COMMAND mirror remove its fixed 1024-byte session-environment
+limit while retaining the original `cmdenv.c` owner, merge order, and failure
+rules?
+
+## Inputs
+
+- OpenNT mirror: `src/bx-vdm/bop/opennt/command/cmdenv.c`, specifically
+  `cmdXformEnvironment`, `cmdCreateVDMEnvironment`, `cmdSetEnvironmentVariable`,
+  `cmdExpandEnvironmentStrings`, and `cmdGetEnvironmentVariable`.
+- Session seam: `src/bx-vdm/bop/shim/command_misc_shim.{h,c}`.
+- Formal source membership: `tools/build/t225-s7-full-module-manifest.json`.
+
+## Procedure
+
+1. Admitted the existing original `cmdenv.c` dynamic bodies instead of the
+   former shim-only memcpy implementation.
+2. Replaced both fixed session multisz arrays with session-owned dynamically
+   allocated copied multisz values, plus explicit dispose/reset ownership.
+3. Replaced the separate `54:08/0A` 1 KiB guest environment probe with a
+   bounded, exact double-NUL guest multisz copy (maximum `USHRT_MAX` bytes).
+4. Preserved the original `DWORD` count fields and documented the required
+   modern warning/length conversions inline.  The historical 512-byte growth
+   increment now grows by at least one complete input string, because a valid
+   modern PATH can exceed that historical per-string assumption.
+5. **P2:** admitted the original `cmdXformEnvironment` body. Its historical
+   process-environment snapshot is now a copied Unicode view of the active
+   session multisz; its RTL environment calls use one private compatible shim
+   while retaining the original filtering, replacement and sort algorithm.
+
+## Observations
+
+- `t234-s2-command-dynamic-environment-fixture.exe` exited `0`: a source
+  environment above 1024 bytes is copied into session storage, the original
+  merge returns a result above 1024 bytes, inserts the supplied COMSPEC,
+  filters WINDIR in the DOS case, and expands an AUTOEXEC pair.
+- Updated `t231-s7-command-get-next-direct-fixture-s2.exe` exited `0`: the
+  original `cmdGetNextCmd` capacity/retry route requests an environment above
+  1024 bytes, preserves it across repeat state, and writes the merged value
+  back to guest memory.
+- Updated `t231-s8-command-lifecycle-direct-fixture-s2.exe` exited `0` with a
+  1306-byte guest environment.  The Direct child lifecycle keeps its existing
+  result and standard-handle behavior.
+- The changed `cmdenv.c`, `cmdmisc.c`, `command_misc_shim.c`, and the two
+  fixtures compiled under MSVC x64 `/MT`, `/W4 /WX`.
+- **P2:** `command_environment_shim.c`, the newly admitted transform body,
+  and the focused dynamic-environment fixture compile under the same flags.
+  Its link/run remains pending because the shared formal Ninja root is held
+  by existing Ninja processes.
+
+## Formal Build Limitation
+
+A fresh formal Ninja graph was generated at `build/M0-T234-S2/formal-r2`.
+In this session its Ninja executor starts the first object and then makes no
+child-compiler progress, even when the parent MSVC environment is preloaded.
+The disposable run was stopped after verifying no compiler/linker child was
+active.  This is not treated as a source-build failure or as a formal build
+pass.  The direct MSVC compilation/link commands above are only focused local
+verification; formal Ninja closure remains required by the active packet.
+
+## Interpretation And Confidence
+
+The product route no longer has a 1024-byte COMMAND environment storage or
+child-launch limit. It now directly reuses the original OpenNT transform,
+merge, lookup, set and expansion algorithms, with a bounded session/guest-
+memory seam only where historical BaseSrv and SAS composition cannot link.
+P2 source compilation is positive; its fixture link/run and formal graph are
+still verification gates.
+
+## Follow-Up
+
+After existing Ninja processes release the formal root, run the P2 fixture and
+affected formal graph, then the documentation gate before accepting T234 S2
+closure.

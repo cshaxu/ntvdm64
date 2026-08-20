@@ -21,6 +21,7 @@
 #define BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT 1
+#define BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES 1
 #include "../../shim/command_misc_shim.h"
 
 #if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
@@ -623,7 +624,7 @@ VOID cmdSetInfo (VOID)
 }
 #endif /* BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO */
 
-#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSetDirectories (PCHAR lpszzEnv, VDMINFO * pVdmInfo)
 {
 LPSTR   lpszVal;
@@ -640,9 +641,12 @@ CHAR	ch, chDrive, achEnvDrive[] = "=?:";
 	    if(*lpszzEnv == '=' &&
 		    (chDrive = toupper(*(lpszzEnv+1))) >= 'A' &&
 		    chDrive <= 'Z' &&
-		    (*(PCHAR)((ULONG)lpszzEnv+2) == ':') &&
+		    /* DIVERGENCE: the original ULONG casts assumed a 32-bit host
+		     * pointer.  These are bounded, in-buffer multisz offsets, so
+		     * preserve the source traversal with native-width C arithmetic. */
+		    (*(lpszzEnv + 2) == ':') &&
 		    chDrive != ch) {
-		    lpszVal = (PCHAR)((ULONG)lpszzEnv + 4);
+		    lpszVal = lpszzEnv + 4;
 		    achEnvDrive[1] = chDrive;
 		    SetEnvironmentVariable (achEnvDrive,lpszVal);
             }
@@ -651,7 +655,7 @@ CHAR	ch, chDrive, achEnvDrive[] = "=?:";
         }
     }
 }
-#endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
+#endif /* BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES || !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
 static BOOL fConOutput = FALSE;
 

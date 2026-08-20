@@ -2,32 +2,40 @@
 
 ## Current Work
 
-**Active: M0 T234 S1** — correct the unified host-handle manager to preserve
-the complete original 32-bit guest token ABI as opaque IDs.
+**Active: M0 T234 S2** — restore OpenNT-shaped dynamic COMMAND environment
+composition and remove the fixed 1024-byte session limit.
 
 ## Active Packet
 
-### M0 T234 S1 — 32-bit opaque host-handle ABI correction
+### M0 T234 S2 — dynamic COMMAND environment composition recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T234 S1`, Ordinary Mode. |
-| Admission And Approval | The owner approved the explicit correction: internal IDs become 32-bit opaque values so OpenNT's full `AX:BP` and `BX:CX` ABI shapes remain usable; raw host handles remain private. |
-| Objective | Replace the 16-bit guest ID seam with a 32-bit opaque ID seam, preserving both register halves and the COMMAND `0xffffffff` default-handle sentinel. |
-| Non-goals | Do not pass raw host handles, modify OpenNT mirror provider bodies, add BOP semantics to Bochs, implement XMS, or change host capability behavior. |
-| Reference Baseline | T232's 16-bit manager closure is `1c069141` and its exception registration is `8d9f316f`; both are superseded only in their ID-width conclusion. |
-| Files And ABI Surface | `bx_ntvdm_host_handle_manager.{h,c}`, DEM direct-session/context/shim, COMMAND misc/session shim, focused fixtures, T232 closure/evidence, and T234 evidence. |
-| Applicable Rules | `docs/rules/EXECUTION.md` source-recovery and closure rules; `docs/rules/ARCHITECTURE.md`; `docs/rules/CODING.md`; source policy. This remains adapter-owned ABI safety infrastructure. |
-| Verification | Formal Ninja build; manager, DEM, and COMMAND fixtures prove 32-bit round trips, `0xffffffff` reservation, unknown-ID failure, borrowed/owned cleanup, and preserved original register pairs. |
-| Expected Markers | No high-word-zero rejection remains for valid opaque IDs; no native host pointer crosses guest state; the only reserved guest values are documented. |
-| Asset Needs | Existing T232 manager, OpenNT mirrors, formal Ninja graph, and no new external source or host dependency. |
-| Reporting Requirements | Amend `BX-VDM-001` to state the same-width 32-bit opaque substitution and distinguish it from raw NT4 handle passage. |
-| Stop Conditions | Pause if any reached original caller proves it treats a host-handle bit pattern as more than an opaque key, or if a 32-bit guest token conflicts with an established sentinel beyond `0xffffffff`. |
-| Exit Criteria | All non-v1 manager consumers use `uint32_t` opaque IDs; focused/formal regressions pass; evidence and the exception register accurately replace the prior 16-bit claim. |
-| Original Owner Request | “没错！好，就这样办理！” |
-| Similar-Issue Sweep | DEM AX:BP publisher/consumer paths, COMMAND BX:CX and stack token paths, fixture-local adapters, all high-word rejection checks, and reserved-token handling. |
+| Identifier Mode | `M0 T234 S2`, Ordinary Mode. |
+| Admission And Approval | The owner directed immediate repair of the current v2 mirror's fixed 1024-byte COMMAND environment limitation. |
+| Objective | Restore the reusable OpenNT `cmdenv.c` dynamic environment composition bodies, including `cmdXformEnvironment`, and replace session-owned fixed multisz buffers with dynamically owned, bounded multisz storage. |
+| Non-goals | Do not import BaseSrv/PIF product composition, alter BOP routing, change child-process lifecycle, add host mutation policy, or introduce a raw host pointer into guest state. |
+| Reference Baseline | T234 S1 (`4047b400`) retains OpenNT's 32-bit opaque handle ABI. The current `command_misc_shim.c` contains a 1024-byte source-environment and saved-VDM-environment limit, while imported `cmdenv.c` retains the original dynamic algorithms behind an admission guard. |
+| Files And ABI Surface | `bop/opennt/command/cmdenv.c`, `bop/shim/command_misc_shim.{h,c}`, environment compatibility globals, focused COMMAND environment fixture, formal module manifest if source membership changes, and T234 S2 evidence. |
+| Applicable Rules | `docs/rules/EXECUTION.md` historical recovery gate; `docs/rules/ARCHITECTURE.md`; `docs/rules/CODING.md`; and source policy. The selected recovery rung is original OpenNT source through the smallest session-storage compatibility seam. |
+| Verification | Focused fixture proves a double-NUL environment exceeding 1024 bytes, original filtering/COMSPEC and AUTOEXEC merge behavior, repeat-call preservation, and explicit malformed/allocation failure. Run the affected formal Ninja target plus governance and diff checks. |
+| Expected Markers | No 1024-byte command-environment capacity check remains; the original `cmdenv.c` transform/create/set/expand/get bodies are compiled; environment state has explicit session ownership and cleanup; guest receives only bounded copied bytes. |
+| Asset Needs | Existing imported OpenNT COMMAND mirror, command-environment shim, formal Ninja graph, and no new external source or host dependency. |
+| Reporting Requirements | Record the retained original algorithms, every required compatibility seam, maximum practical allocation/failure rule, and test inputs/results. |
+| Stop Conditions | Pause if original environment bytes exceed a fixed guest/DOS ABI field without its original error path, or if enabling the bodies requires BaseSrv/PIF/CCPU behavior rather than a local environment capability seam. |
+| Exit Criteria | Dynamic source and saved VDM multisz buffers replace both fixed arrays; the original dynamic environment algorithms, including the DOS-to-32-bit transform, are directly compiled; >1024-byte and merge/repeat regressions pass; formal build, documentation gate, and diff check pass. |
+| Original Owner Request | “当前 session 环境硬限制为 1024 字节；原始 `cmdenv.c` 按 `cchVDMEnv32 + cbComSpec + 1` 动态分配并合并 COMSPEC、AUTOEXEC/32 位环境。这是仍未达到 OpenNT 语义的真实缺口。这个问题，现在就开S任务在当前T里面修复。开始。” |
+| Similar-Issue Sweep | Both session environment stores, `GetNextVDMCommand` capacity negotiation, repeat-call preservation, child execution environment copying, COMSPEC insertion, `WINDIR` filtering, AUTOEXEC pairs, and all direct `malloc/realloc` ownership paths. |
 
-Detailed result evidence: [T234 S1 32-bit opaque handle ABI](etc/evidence/t234-s1-32bit-opaque-host-handle-abi-result-001.md).
+Prior delivery evidence: [T234 S1 32-bit opaque handle ABI](etc/evidence/t234-s1-32bit-opaque-host-handle-abi-result-001.md).
+
+Current detailed result: [T234 S2 dynamic COMMAND environment](etc/evidence/t234-s2-dynamic-command-environment-result-001.md). Local implementation and focused regression are complete; formal Ninja execution remains an active verification gate.
+
+**P2 progress:** `cmdXformEnvironment` is directly admitted with a
+session-owned multisz snapshot and a private RTL-compatible environment shim.
+Its changed translation units compile under MSVC x64 `/MT`; final fixture
+link/run remains an active verification gate while existing Ninja processes
+hold the shared formal root.
 
 ## Current Work Record
 

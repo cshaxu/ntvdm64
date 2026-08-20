@@ -13,6 +13,8 @@
  * product include closure.  The original body retains all filtering, OEM
  * conversion, buffer-size and result rules. */
 #define BX_NTVDM_COMMAND_ENV_ADMIT_INIT_ENV 1
+#define BX_NTVDM_COMMAND_ENV_ADMIT_DYNAMIC 1
+#define BX_NTVDM_COMMAND_ENV_ADMIT_XFORM 1
 #define BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE 1
 #include "../../shim/command_misc_shim.h"
 
@@ -21,7 +23,7 @@
 CHAR windir[] = "windir";
 extern BOOL fSeparateWow;
 
-#if !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_ENV_ADMIT_XFORM) || !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
 
 // Transform the given DOS environment to 32bits environment.
 // WARNING!! The environment block we passed to 32bits must be in sort order.
@@ -43,7 +45,14 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
     // !!!! Do we allow two or more comspec in environment????????
     fFoundComSpec = FALSE;
 
-    CurEnv = GetEnvironmentStringsW();
+    /* DIVERGENCE: the original body snapshots the NT4 process environment.
+     * The CLI owns this environment per VDM session instead, so the shim
+     * materializes an equivalent private Unicode multisz.  The original
+     * filtering, RtlSetEnvironmentVariable ordering, and OEM conversion
+     * below remain unchanged. */
+    CurEnv = bx_ntvdm_command_environment_snapshot();
+    if (CurEnv == NULL)
+	return FALSE;
     pwch = CurEnv;
     // figure how long the environment strings is
     while (*pwch != UNICODE_NULL || *(pwch + 1) != UNICODE_NULL)
@@ -51,13 +60,16 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 
     // plus 2  to include the last two NULL chars
     CurEnvCopy = malloc((pwch - CurEnv + 2) * sizeof(WCHAR));
-    if (!CurEnvCopy)
+    if (!CurEnvCopy) {
+	bx_ntvdm_command_environment_free_snapshot(CurEnv);
 	return FALSE;
+    }
 
     // make a copy of current process environment so we can walk through
     // it. The environment can be changed by any threads in the process
     // thus is not safe to walk through without a local copy
     RtlMoveMemory(CurEnvCopy, CurEnv, (pwch - CurEnv + 2) * sizeof(WCHAR));
+    bx_ntvdm_command_environment_free_snapshot(CurEnv);
 
     // create a new environment block. We don't want to change
     // any currnt process environment variables, instead, we are
@@ -81,8 +93,13 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 	    // variable names started with L'=' are current directroy settings
 	    pTmp = wcschr(pwch + 1, L'=');
 	    if (pTmp) {
+		if ((size_t)(pTmp - pwch) > USHRT_MAX / sizeof(WCHAR)) {
+		    RtlDestroyEnvironment(NewEnv);
+		    free(CurEnvCopy);
+		    return FALSE;
+		}
 		Name_U.Buffer = pwch;
-		Name_U.Length = (pTmp - pwch) * sizeof(WCHAR);
+		Name_U.Length = (USHORT)((pTmp - pwch) * sizeof(WCHAR));
 		RtlInitUnicodeString(&Value_U, pTmp + 1);
 		Status = RtlSetEnvironmentVariable(&NewEnv, &Name_U, &Value_U);
 		if (!NT_SUCCESS(Status)) {
@@ -91,6 +108,11 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 		    return FALSE;
 		}
 		// <name> + <'='> + <value> + <'\0'>
+		if (NewEnvLen > USHRT_MAX - Name_U.Length - Value_U.Length - 2 * sizeof(WCHAR)) {
+		    RtlDestroyEnvironment(NewEnv);
+		    free(CurEnvCopy);
+		    return FALSE;
+		}
 		NewEnvLen += Name_U.Length + Value_U.Length + 2 * sizeof(WCHAR);
 	    }
 	}
@@ -105,6 +127,11 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 						       &Value_U
 						       );
 		    if (!NT_SUCCESS(Status)) {
+			RtlDestroyEnvironment(NewEnv);
+			free(CurEnvCopy);
+			return FALSE;
+		    }
+		    if (NewEnvLen > USHRT_MAX - Name_U.Length - Value_U.Length - 2 * sizeof(WCHAR)) {
 			RtlDestroyEnvironment(NewEnv);
 			free(CurEnvCopy);
 			return FALSE;
@@ -140,12 +167,21 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 	}
 	pwch = wcschr(Temp_U.Buffer, L'=');
 	if (pwch) {
+	    if ((size_t)(pwch - Temp_U.Buffer) > USHRT_MAX / sizeof(WCHAR)) {
+		RtlFreeUnicodeString(&Temp_U);
+		RtlDestroyEnvironment(NewEnv);
+		return FALSE;
+	    }
 	    Name_U.Buffer = Temp_U.Buffer;
-	    Name_U.Length = (pwch - Temp_U.Buffer) * sizeof(WCHAR);
+	    Name_U.Length = (USHORT)((pwch - Temp_U.Buffer) * sizeof(WCHAR));
 	    RtlInitUnicodeString(&Value_U, pwch + 1);
 	    Status = RtlSetEnvironmentVariable( &NewEnv, &Name_U, &Value_U);
 	    RtlFreeUnicodeString(&Temp_U);
 	    if (!NT_SUCCESS(Status)) {
+		RtlDestroyEnvironment(NewEnv);
+		return FALSE;
+	    }
+	    if (NewEnvLen > USHRT_MAX - Name_U.Length - Value_U.Length - 2 * sizeof(WCHAR)) {
 		RtlDestroyEnvironment(NewEnv);
 		return FALSE;
 	    }
@@ -161,7 +197,7 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
     return(NT_SUCCESS(Status));
 }
 
-#endif /* !BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE */
+#endif /* BX_NTVDM_COMMAND_ENV_ADMIT_XFORM || !BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE */
 
 
 
@@ -357,7 +393,7 @@ WARINING !!! The changes made by applications through directly manipulation
 	     in command.com environment segment will be lost.
 
 **/
-#if !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_ENV_ADMIT_DYNAMIC) || !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
 BOOL cmdCreateVDMEnvironment(
 PVDMENVBLK  pVDMEnvBlk
 )
@@ -401,7 +437,9 @@ CHAR	achBuffer[MAX_PATH + 1];
 	lpszzEnv = lpszzVDMEnv32;
 
 	while (*lpszzEnv) {
-	    Length = strlen(lpszzEnv) + 1;
+	    /* DIVERGENCE: the original DWORD field carries bounded multisz byte
+	     * counts.  Keep that ABI width explicit on x86/x64. */
+	    Length = (DWORD)(strlen(lpszzEnv) + 1u);
 	    if (*lpszzEnv != '=' &&
 		(p1 = strchr(lpszzEnv, '=')) != NULL &&
 		(fFoundComSpec || !(fFoundComSpec = _strnicmp(lpszzEnv,
@@ -416,16 +454,24 @@ CHAR	achBuffer[MAX_PATH + 1];
 		}
 		if (!fVarIsWindir || fSeparateWow) {
 		    if (Length >= pVDMEnvBlk->cchRemain) {
+			/* DIVERGENCE: the original fixed 512-byte increment assumes a
+			 * single source variable never exceeds that increment.  Modern
+			 * session input is length-bounded but may legitimately contain a
+			 * larger PATH; retain the same realloc/ownership path while
+			 * growing enough for this one source string plus its terminator. */
+			DWORD Increment = VDM_ENV_INC_SIZE;
+			if (Length >= pVDMEnvBlk->cchRemain + Increment)
+			    Increment = Length - pVDMEnvBlk->cchRemain + 1u;
 			lpszzVDMEnv = realloc(pVDMEnvBlk->lpszzEnv,
 					      pVDMEnvBlk->cchEnv +
 					      pVDMEnvBlk->cchRemain +
-					      VDM_ENV_INC_SIZE
+					      Increment
 					     );
 			if (lpszzVDMEnv == NULL){
 			    free(pVDMEnvBlk->lpszzEnv);
 			    return FALSE;
 			}
-			pVDMEnvBlk->cchRemain += VDM_ENV_INC_SIZE;
+			pVDMEnvBlk->cchRemain += Increment;
 			pVDMEnvBlk->lpszzEnv = lpszzVDMEnv;
 			lpszzVDMEnv += pVDMEnvBlk->cchEnv;
 		    }
@@ -505,7 +551,9 @@ PCHAR	lpszName,
 PCHAR	lpszValue
 )
 {
-    PCHAR   p, p1, pEnd;
+    /* DIVERGENCE: initialize the historical search temporary so modern
+     * flow analysis recognizes the source's short-circuit lookup ordering. */
+    PCHAR   p, p1 = NULL, pEnd;
     DWORD   ExtraLength, Length, cchValue, cchOldValue;
 
     pVDMEnvBlk = (pVDMEnvBlk) ? pVDMEnvBlk : &cmdVDMEnvBlk;
@@ -516,9 +564,11 @@ PCHAR	lpszValue
 	return FALSE;
     pEnd = p + pVDMEnvBlk->cchEnv - 1;
 
-    cchValue = (lpszValue) ? strlen(lpszValue) : 0;
+	    /* DIVERGENCE: these are original DWORD environment-count fields, not
+	     * host pointer arithmetic; retain their historical width explicitly. */
+	    cchValue = (lpszValue) ? (DWORD)strlen(lpszValue) : 0u;
 
-    Length = strlen(lpszName);
+	    Length = (DWORD)strlen(lpszName);
     while (*p && ((p1 = strchr(p, '=')) == NULL ||
 		  (DWORD)(p1 - p) != Length ||
 		  _strnicmp(p, lpszName, Length)))
@@ -527,7 +577,7 @@ PCHAR	lpszValue
     if (*p) {
 	// name was found in the base environment, replace it
 	p1++;
-	cchOldValue = strlen(p1);
+		cchOldValue = (DWORD)strlen(p1);
 	if (cchValue <= cchOldValue) {
 	    if (!cchValue) {
 		RtlMoveMemory(p,
@@ -672,14 +722,17 @@ DWORD	cchValue
 {
 
     DWORD   RequiredLength, Length;
-    PCHAR   p, p1;
+    /* DIVERGENCE: p1 is assigned by the original short-circuit search before
+     * use; initialize it for modern flow analysis without changing that flow. */
+    PCHAR   p, p1 = NULL;
 
     pVDMEnvBlk = (pVDMEnvBlk) ? pVDMEnvBlk : &cmdVDMEnvBlk;
     if (pVDMEnvBlk == NULL || lpszName == NULL)
 	return 0;
 
     RequiredLength = 0;
-    Length = strlen(lpszName);
+    /* DIVERGENCE: preserve OpenNT's DWORD count ABI on x86/x64 hosts. */
+    Length = (DWORD)strlen(lpszName);
 
     // if the name is "windir", get its value from ntvdm process's environment
     // for DOS because we took it out of the environment block the application
@@ -688,13 +741,13 @@ DWORD	cchValue
 	return(GetEnvironmentVariableOem(lpszName, lpszValue, cchValue));
     }
 
-    if (p = pVDMEnvBlk->lpszzEnv) {
+    if ((p = pVDMEnvBlk->lpszzEnv) != NULL) {
        while (*p && ((p1 = strchr(p, '=')) == NULL ||
 		     (DWORD)(p1 - p) != Length ||
 		     _strnicmp(lpszName, p, Length)))
 	    p += strlen(p) + 1;
        if (*p) {
-	    RequiredLength = strlen(p1 + 1);
+	    RequiredLength = (DWORD)strlen(p1 + 1);
 	    if (cchValue > RequiredLength && lpszValue)
 		RtlCopyMemory(lpszValue, p1 + 1, RequiredLength + 1);
 	    else
@@ -704,4 +757,4 @@ DWORD	cchValue
     return RequiredLength;
 }
 
-#endif /* !BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE */
+#endif /* BX_NTVDM_COMMAND_ENV_ADMIT_DYNAMIC || !BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE */

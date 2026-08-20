@@ -193,15 +193,16 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t command_source_delivered;
     uint32_t command_source_repeat_pending;
     uint32_t command_source_environment_bytes;
-    CHAR command_source_environment[1024u];
+    CHAR *command_source_environment;
     uint32_t command_source_vdm_environment_bytes;
-    CHAR command_source_vdm_environment[1024u];
+    CHAR *command_source_vdm_environment;
 } bx_ntvdm_command_misc_session;
 
 #define BX_NTVDM_COMMAND_MISC_SESSION_MAGIC 0x42584353u
 #define BX_NTVDM_COMMAND_MISC_SESSION_VERSION 1u
 
 void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *session);
+void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *session);
 int bx_ntvdm_command_misc_session_valid(const bx_ntvdm_command_misc_session *session);
 int bx_ntvdm_command_misc_session_set_command_source(
     bx_ntvdm_command_misc_session *session, const CHAR *application,
@@ -290,6 +291,12 @@ void cmdUpdateCurrentDirectories(BYTE current_drive);
 void cmdSetDirectories(PCHAR environment, PVDMINFO vdm_info);
 BOOL cmdCheckCopyForRedirection(PREDIRCOMPLETE_INFO info);
 BOOL cmdCreateVDMEnvironment(PVDMENVBLK block);
+BOOL cmdXformEnvironment(PCHAR environment16, PANSI_STRING environment_a);
+BOOL cmdSetEnvironmentVariable(PVDMENVBLK block, PCHAR name, PCHAR value);
+DWORD cmdExpandEnvironmentStrings(PVDMENVBLK block, PCHAR source, PCHAR destination,
+    DWORD destination_bytes);
+DWORD cmdGetEnvironmentVariable(PVDMENVBLK block, PCHAR name, PCHAR value,
+    DWORD value_bytes);
 void cmdCheckForPIF(PVDMINFO vdm_info);
 USHORT cmdMapCodePage(ULONG code_page);
 PREDIRCOMPLETE_INFO cmdCheckStandardHandles(PVDMINFO vdm_info,
@@ -317,6 +324,11 @@ void cmdGetInitEnvironment(void);
 void bx_ntvdm_command_config_set_inputs(bx_ntvdm_command_misc_session *session,
     const CHAR *config_path, const CHAR *autoexec_path);
 void RtlInitAnsiString(PANSI_STRING destination, const CHAR *source);
+void RtlInitUnicodeString(PUNICODE_STRING destination, const WCHAR *source);
+NTSTATUS RtlCreateEnvironment(BOOLEAN clone_current, PVOID *environment);
+NTSTATUS RtlSetEnvironmentVariable(PVOID *environment,
+    const PUNICODE_STRING name, const PUNICODE_STRING value);
+void RtlDestroyEnvironment(PVOID environment);
 NTSTATUS RtlAnsiStringToUnicodeString(PUNICODE_STRING destination,
     const PANSI_STRING source, BOOL allocate_destination);
 NTSTATUS RtlUnicodeStringToOemString(POEM_STRING destination,
@@ -329,6 +341,13 @@ NTSTATUS RtlUnicodeStringToAnsiString(PANSI_STRING destination,
     const PUNICODE_STRING source, BOOL allocate_destination);
 void RtlFreeAnsiString(PANSI_STRING string);
 ULONG RtlNtStatusToDosError(NTSTATUS status);
+/* `cmdXformEnvironment` historically snapshots the process environment.
+ * These helpers instead expose a caller-owned copy of the active session's
+ * ANSI multisz; it never aliases guest memory or ambient host state. */
+PWCHAR bx_ntvdm_command_environment_snapshot(void);
+PWCHAR bx_ntvdm_command_environment_snapshot_session(
+    const bx_ntvdm_command_misc_session *session);
+void bx_ntvdm_command_environment_free_snapshot(PWCHAR snapshot);
 uint32_t bx_ntvdm_command_binary_scs_address(uint32_t offset);
 BOOL IsWowAppRunnable(LPSTR app_name);
 void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment);

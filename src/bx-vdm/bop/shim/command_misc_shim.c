@@ -71,10 +71,43 @@ typedef struct bx_ntvdm_command_misc_active_call {
 
 static __declspec(thread) bx_ntvdm_command_misc_active_call *g_active_call;
 static CHAR g_test_system_directory[MAX_PATH + 1];
+static const CHAR g_empty_environment[2] = { '\0', '\0' };
 
 static uint32_t real_mode_address(USHORT segment, USHORT offset)
 {
     return ((uint32_t)segment << 4) + (uint32_t)offset;
+}
+
+static int copy_guest_multisz(bx_ntvdm_command_misc_active_call *active,
+    uint32_t address, uint8_t **buffer_out, uint32_t *bytes_out)
+{
+    uint8_t *buffer;
+    uint32_t index;
+    if (active == NULL || buffer_out == NULL || bytes_out == NULL || *buffer_out != NULL ||
+        address > 0x100000u - 2u) return 0;
+    buffer = (uint8_t *)malloc(256u);
+    if (buffer == NULL) return 0;
+    for (index = 0u; index < USHRT_MAX; ++index) {
+        uint8_t value;
+        if (address > 0x100000u - 1u - index ||
+            !active->call->guest_read(active->call->guest_state, address + index, &value, 1u)) {
+            free(buffer);
+            return 0;
+        }
+        if (index == 256u || (index > 256u && (index & (index - 1u)) == 0u)) {
+            uint8_t *expanded = (uint8_t *)realloc(buffer, index * 2u);
+            if (expanded == NULL) { free(buffer); return 0; }
+            buffer = expanded;
+        }
+        buffer[index] = value;
+        if (index != 0u && buffer[index - 1u] == 0u && value == 0u) {
+            *buffer_out = buffer;
+            *bytes_out = index + 1u;
+            return 1;
+        }
+    }
+    free(buffer);
+    return 0;
 }
 
 static int set_ax(USHORT value)
@@ -92,6 +125,34 @@ void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *ses
     session->abi_version = BX_NTVDM_COMMAND_MISC_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
     (void)bx_ntvdm_host_handle_manager_initialize(&session->handles);
+}
+
+void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *session)
+{
+    if (!bx_ntvdm_command_misc_session_valid(session)) return;
+    free(session->command_source_environment);
+    free(session->command_source_vdm_environment);
+    session->command_source_environment = NULL;
+    session->command_source_environment_bytes = 0u;
+    session->command_source_vdm_environment = NULL;
+    session->command_source_vdm_environment_bytes = 0u;
+    bx_ntvdm_host_handle_manager_reset(&session->handles);
+}
+
+static int replace_environment(CHAR **destination, uint32_t *destination_bytes,
+    const CHAR *source, uint32_t bytes)
+{
+    CHAR *replacement;
+    if (destination == NULL || destination_bytes == NULL || source == NULL ||
+        bytes < 2u || bytes > USHRT_MAX || source[bytes - 2u] != '\0' ||
+        source[bytes - 1u] != '\0') return 0;
+    replacement = (CHAR *)malloc(bytes);
+    if (replacement == NULL) return 0;
+    memcpy(replacement, source, bytes);
+    free(*destination);
+    *destination = replacement;
+    *destination_bytes = bytes;
+    return 1;
 }
 
 int bx_ntvdm_command_misc_session_valid(const bx_ntvdm_command_misc_session *session)
@@ -125,12 +186,9 @@ int bx_ntvdm_command_misc_session_set_command_environment(
     bx_ntvdm_command_misc_session *session, const CHAR *environment,
     uint32_t bytes)
 {
-    if (!bx_ntvdm_command_misc_session_valid(session) || environment == NULL ||
-        bytes < 2u || bytes > sizeof(session->command_source_environment) ||
-        environment[bytes - 1u] != '\0' || environment[bytes - 2u] != '\0') return 0;
-    memcpy(session->command_source_environment, environment, bytes);
-    session->command_source_environment_bytes = bytes;
-    return 1;
+    if (!bx_ntvdm_command_misc_session_valid(session)) return 0;
+    return replace_environment(&session->command_source_environment,
+        &session->command_source_environment_bytes, environment, bytes);
 }
 
 BOOL GetNextVDMCommand(PVDMINFO vdm_info)
@@ -141,12 +199,16 @@ BOOL GetNextVDMCommand(PVDMINFO vdm_info)
         return FALSE;
     if ((vdm_info->VDMState & ASKING_FOR_ENVIRONMENT) != 0u) {
         uint32_t bytes = session->command_source_environment_bytes;
-        if (bytes == 0u) { session->command_source_environment[0] = '\0'; session->command_source_environment[1] = '\0'; bytes = 2u; }
+        const CHAR *environment = session->command_source_environment;
+        if (bytes == 0u || environment == NULL) {
+            environment = g_empty_environment;
+            bytes = sizeof(g_empty_environment);
+        }
         if (vdm_info->Enviornment == NULL || vdm_info->EnviornmentSize < bytes) {
             vdm_info->EnviornmentSize = bytes;
             return FALSE;
         }
-        memcpy(vdm_info->Enviornment, session->command_source_environment, bytes);
+        memcpy(vdm_info->Enviornment, environment, bytes);
         vdm_info->EnviornmentSize = bytes;
         return TRUE;
     }
@@ -173,20 +235,6 @@ void host_lpt_flush_initialize(void) { }
 void cmdUpdateCurrentDirectories(BYTE current_drive) { (void)current_drive; }
 void cmdSetDirectories(PCHAR environment, PVDMINFO vdm_info)
 { (void)environment; (void)vdm_info; }
-BOOL cmdCreateVDMEnvironment(PVDMENVBLK block)
-{
-    /* DIVERGENCE: the original merger is tied to historical BaseSrv/PIF
-     * environment composition.  Preserve its ownership/error contract using
-     * the already-copied session environment; no ambient process environment
-     * is consulted here. */
-    if (block == NULL || lpszzVDMEnv32 == NULL || cchVDMEnv32 == 0u) return FALSE;
-    block->lpszzEnv = (CHAR *)malloc(cchVDMEnv32);
-    if (block->lpszzEnv == NULL) return FALSE;
-    memcpy(block->lpszzEnv, lpszzVDMEnv32, cchVDMEnv32);
-    block->cchEnv = cchVDMEnv32;
-    block->cchRemain = 0u;
-    return TRUE;
-}
 void cmdCheckForPIF(PVDMINFO vdm_info) { (void)vdm_info; }
 USHORT cmdMapCodePage(ULONG code_page) { return (USHORT)code_page; }
 void cmdPushExitInConsoleBuffer(void) { }
@@ -202,7 +250,7 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
     PROCESS_INFORMATION process;
     VDMINFO next;
     CHAR command_copy[1024u];
-    CHAR environment_copy[1024u];
+    CHAR *environment_copy = NULL;
     DWORD environment_bytes = 0u;
     DWORD exit_code = ERROR_BAD_FORMAT;
     uint32_t standard_handles[3];
@@ -218,16 +266,23 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
      * same declared command synchronously with explicit inherited handles,
      * keeping the caller's host process untouched. */
     if (environment != NULL) {
-        while (environment_bytes + 1u < sizeof(environment_copy)) {
-            if (environment[environment_bytes] == '\0' && environment[environment_bytes + 1u] == '\0') {
-                environment_bytes += 2u; break;
-            }
-            ++environment_bytes;
+        const uint8_t *environment_bytes_source = NULL;
+        if (g_active_call != NULL && environment == (CHAR *)g_active_call->guest_buffer) {
+            environment_bytes = g_active_call->guest_bytes;
+            environment_bytes_source = g_active_call->guest_buffer;
+        } else if (g_active_call != NULL && environment == (CHAR *)g_active_call->guest_buffer2) {
+            environment_bytes = g_active_call->guest_bytes2;
+            environment_bytes_source = g_active_call->guest_buffer2;
         }
-        if (environment_bytes == 0u || environment_bytes > sizeof(environment_copy)) {
+        if (environment_bytes_source == NULL || environment_bytes < 2u ||
+            environment_bytes_source[environment_bytes - 2u] != '\0' ||
+            environment_bytes_source[environment_bytes - 1u] != '\0') {
             bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_BAD_ENVIRONMENT); return;
         }
-        if (!OemToCharBuffA(environment, environment_copy, environment_bytes)) {
+        environment_copy = (CHAR *)malloc(environment_bytes);
+        if (environment_copy == NULL ||
+            !OemToCharBuffA(environment, environment_copy, environment_bytes)) {
+            free(environment_copy);
             bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_BAD_ENVIRONMENT); return;
         }
     }
@@ -269,6 +324,7 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
         if (!GetExitCodeProcess(process.hProcess, &exit_code)) exit_code = GetLastError();
         CloseHandle(process.hThread); CloseHandle(process.hProcess);
     }
+    free(environment_copy);
     dwExitCode32 = exit_code;
     memset(&next, 0, sizeof(next));
     next.VDMState = 0x00c0u; /* NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND */
@@ -436,24 +492,23 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         active->call->service == BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32) {
         uint32_t address = real_mode_address(segment, offset);
         uint32_t maximum = active->call->service == BX_NTVDM_COMMAND_MISC_EXEC &&
-            segment == active->call->cpu->ds && offset == (USHORT)active->call->cpu->esi ? 124u : 1024u;
+            segment == active->call->cpu->ds && offset == (USHORT)active->call->cpu->esi ? 124u : USHRT_MAX;
         uint8_t **buffer = active->guest_buffer == NULL ? &active->guest_buffer : &active->guest_buffer2;
         uint32_t *buffer_address = active->guest_buffer == NULL ? &active->guest_address : &active->guest_address2;
         uint32_t *buffer_bytes = active->guest_buffer == NULL ? &active->guest_bytes : &active->guest_bytes2;
-        if (address > 0x100000u - maximum || *buffer != NULL) return NULL;
+        if (*buffer != NULL || (maximum == 124u && address > 0x100000u - maximum)) return NULL;
+        *buffer_address = address;
+        if (maximum != 124u) {
+            /* DIVERGENCE: the old 1 KiB probe was an adapter limit, not an
+             * OpenNT environment contract.  Read a bounded DOS multisz and
+             * retain only its exact copied extent for the CLI backend. */
+            if (!copy_guest_multisz(active, address, buffer, buffer_bytes)) return NULL;
+            return *buffer;
+        }
         *buffer = (uint8_t *)calloc(maximum, 1u);
         if (*buffer == NULL || !active->call->guest_read(active->call->guest_state,
                 address, *buffer, maximum)) return NULL;
-        *buffer_address = address;
         *buffer_bytes = maximum;
-        if (maximum == 1024u) {
-            for (index = 1u; index < maximum; ++index) {
-                if ((*buffer)[index - 1u] == 0u && (*buffer)[index] == 0u) {
-                    *buffer_bytes = index + 1u; return *buffer;
-                }
-            }
-            return NULL;
-        }
         return *buffer;
     }
     if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT) {
@@ -645,6 +700,8 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     memset(&cmdVDMEnvBlk, 0, sizeof(cmdVDMEnvBlk));
     if (IsRepeatCall) {
         cmdVDMEnvBlk.cchEnv = call->session->command_source_vdm_environment_bytes;
+        if (cmdVDMEnvBlk.cchEnv < 2u || call->session->command_source_vdm_environment == NULL)
+            return 0;
         cmdVDMEnvBlk.lpszzEnv = (CHAR *)malloc(cmdVDMEnvBlk.cchEnv);
         if (cmdVDMEnvBlk.lpszzEnv == NULL) return 0;
         memcpy(cmdVDMEnvBlk.lpszzEnv, call->session->command_source_vdm_environment,
@@ -684,11 +741,15 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     }
     if (call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT && call->session != NULL) {
         call->session->command_source_repeat_pending = IsRepeatCall ? 1u : 0u;
-        if (IsRepeatCall && cmdVDMEnvBlk.lpszzEnv != NULL && cmdVDMEnvBlk.cchEnv >= 2u &&
-            cmdVDMEnvBlk.cchEnv <= sizeof(call->session->command_source_vdm_environment)) {
-            memcpy(call->session->command_source_vdm_environment, cmdVDMEnvBlk.lpszzEnv,
-                cmdVDMEnvBlk.cchEnv);
-            call->session->command_source_vdm_environment_bytes = cmdVDMEnvBlk.cchEnv;
+        if (IsRepeatCall && cmdVDMEnvBlk.lpszzEnv != NULL && cmdVDMEnvBlk.cchEnv >= 2u) {
+            if (!replace_environment(&call->session->command_source_vdm_environment,
+                    &call->session->command_source_vdm_environment_bytes,
+                    cmdVDMEnvBlk.lpszzEnv, cmdVDMEnvBlk.cchEnv)) {
+                free(cmdVDMEnvBlk.lpszzEnv);
+                cmdVDMEnvBlk.lpszzEnv = NULL;
+                g_active_call = NULL;
+                return 0;
+            }
             free(cmdVDMEnvBlk.lpszzEnv);
             cmdVDMEnvBlk.lpszzEnv = NULL;
         }
