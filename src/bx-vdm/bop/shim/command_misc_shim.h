@@ -23,6 +23,27 @@ typedef char *LPSTR;
 typedef void *PVOID;
 typedef void *LPVOID;
 
+/* The OpenNT command configuration owner uses these NT string layouts.  They
+ * are reproduced here rather than pulling the old ntdll import closure into
+ * the modern in-process target. */
+typedef LONG NTSTATUS;
+typedef struct _ANSI_STRING {
+    USHORT Length;
+    USHORT MaximumLength;
+    PCHAR Buffer;
+} ANSI_STRING, *PANSI_STRING;
+typedef ANSI_STRING OEM_STRING, *POEM_STRING;
+typedef struct _UNICODE_STRING {
+    USHORT Length;
+    USHORT MaximumLength;
+    PWSTR Buffer;
+} UNICODE_STRING, *PUNICODE_STRING;
+
+#define NT_SUCCESS(status) ((NTSTATUS)(status) >= 0)
+#define ED_BADSYSFILE 336u
+#define ED_INITMEMERR 337u
+#define ED_INITTMPFILE 338u
+
 /* Exact OpenNT cmd.h pipe layouts, admitted only for cmdredir.c's original
  * ownership.  They remain host-private and never cross the guest boundary. */
 #define PIPE_INPUT_BUFFER_SIZE 512u
@@ -82,6 +103,8 @@ enum bx_ntvdm_command_misc_service {
     BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR = 0x04u,
     BX_NTVDM_COMMAND_MISC_SET_INFO = 0x05u,
     BX_NTVDM_COMMAND_MISC_INIT_CONSOLE = 0x09u,
+    BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS = 0x0cu,
+    BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT = 0x0du,
     BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT = 0x0eu,
     BX_NTVDM_COMMAND_MISC_GET_START_INFO = 0x10u
 };
@@ -95,6 +118,8 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t fd_access_address;
     uint32_t console_initialized;
     uint32_t dos_session_id;
+    CHAR config_input_path[MAX_PATH + 13u];
+    CHAR autoexec_input_path[MAX_PATH + 13u];
     uint32_t redirection_token;
     REDIRCOMPLETE_INFO redirection_info;
     HANDLE handle_tokens[64];
@@ -149,6 +174,7 @@ void bx_ntvdm_command_misc_set_cf(int value);
 void bx_ntvdm_command_misc_set_dx(USHORT value);
 void bx_ntvdm_command_misc_set_bx(USHORT value);
 void bx_ntvdm_command_misc_set_cx(USHORT value);
+bx_ntvdm_command_misc_session *bx_ntvdm_command_misc_active_session(void);
 PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token);
 int bx_ntvdm_command_misc_publish_handle(HANDLE handle);
 BOOL cmdHandleStdinWithPipe(PREDIRCOMPLETE_INFO pRdrInfo);
@@ -175,6 +201,22 @@ UINT demGetPhysicalDriveType(UCHAR drive);
 UINT GetDriveTypeOem(LPSTR root);
 DWORD GetEnvironmentVariableOem(LPSTR name, LPSTR buffer, DWORD bytes);
 BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value);
+
+/* command_config_shim.c is the smallest source-derived replacement for the
+ * non-composable SoftPC/PIF/CCPU closure consumed by cmdconf.c. */
+void GetPIFConfigFiles(BOOL bConfig, CHAR *file_name);
+void cmdGetConfigSys(void);
+void cmdGetAutoexecBat(void);
+void DeleteConfigFiles(void);
+void bx_ntvdm_command_config_set_inputs(bx_ntvdm_command_misc_session *session,
+    const CHAR *config_path, const CHAR *autoexec_path);
+void RtlInitAnsiString(PANSI_STRING destination, const CHAR *source);
+NTSTATUS RtlAnsiStringToUnicodeString(PUNICODE_STRING destination,
+    const PANSI_STRING source, BOOL allocate_destination);
+NTSTATUS RtlUnicodeStringToOemString(POEM_STRING destination,
+    const PUNICODE_STRING source, BOOL allocate_destination);
+void RtlFreeUnicodeString(PUNICODE_STRING string);
+extern PCHAR lpszzcmdEnv16;
 
 extern CHAR lpszComSpec[64 + 8];
 extern USHORT cbComSpec;

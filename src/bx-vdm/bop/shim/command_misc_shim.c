@@ -1,5 +1,6 @@
 #include "command_misc_shim.h"
 
+#include <setjmp.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,6 +11,8 @@ void cmdSetInfo(void);
 void cmdGetKbdLayout(void);
 void cmdGetStdHandle(void);
 void cmdGetStartInfo(void);
+void cmdGetConfigSys(void);
+void cmdGetAutoexecBat(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -33,6 +36,7 @@ typedef struct bx_ntvdm_command_misc_active_call {
     uint8_t *guest_buffer2;
     uint32_t guest_address2;
     uint32_t guest_bytes2;
+    jmp_buf terminal_exit;
 } bx_ntvdm_command_misc_active_call;
 
 static __declspec(thread) bx_ntvdm_command_misc_active_call *g_active_call;
@@ -92,6 +96,8 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
          call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR ||
          call->service == BX_NTVDM_COMMAND_MISC_SET_INFO ||
          call->service == BX_NTVDM_COMMAND_MISC_INIT_CONSOLE ||
+         call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
+         call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO ||
          call->service == 0x06u) &&
@@ -99,7 +105,9 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
         call->cpu != NULL && bx_ntvdm_cpu_state_v1_valid(call->cpu) &&
         call->cpu->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
         call->result != NULL && call->guest_read != NULL && call->guest_write != NULL &&
-        (call->service != BX_NTVDM_COMMAND_MISC_SET_INFO ||
+        ((call->service != BX_NTVDM_COMMAND_MISC_SET_INFO &&
+          call->service != BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS &&
+          call->service != BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT) ||
          bx_ntvdm_command_misc_session_valid(call->session));
 }
 
@@ -121,6 +129,11 @@ void bx_ntvdm_command_misc_set_bx(USHORT value)
 { (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 3u, value); }
 void bx_ntvdm_command_misc_set_cx(USHORT value)
 { (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 1u, value); }
+
+bx_ntvdm_command_misc_session *bx_ntvdm_command_misc_active_session(void)
+{
+    return g_active_call == NULL ? NULL : g_active_call->call->session;
+}
 
 PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token)
 {
@@ -150,7 +163,15 @@ int bx_ntvdm_command_misc_publish_handle(HANDLE handle)
 
 void RcErrorDialogBox(UINT error, PVOID first, PVOID second)
 { (void)error; (void)first; (void)second; }
-void TerminateVDM(void) { }
+void TerminateVDM(void)
+{
+    /* OpenNT's terminal path does not return.  The typed composition models
+     * that directly as a controlled stop instead of resuming after an error. */
+    if (g_active_call != NULL) {
+        (void)bx_ntvdm_cpu_result_v2_stop(g_active_call->call->result);
+        longjmp(g_active_call->terminal_exit, 1);
+    }
+}
 void nt_init_event_thread(void)
 {
     if (g_active_call != NULL && g_active_call->call->session != NULL)
@@ -237,12 +258,16 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
     if (active->guest_buffer != NULL) return NULL;
     bytes = active->call->service == BX_NTVDM_COMMAND_MISC_COMSPEC ?
         BX_NTVDM_COMMAND_MISC_COMSPEC_MAX + 1u :
-        BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES;
+        (active->call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
+         active->call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT) ?
+        64u : BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES;
     if (active->guest_address > 0x100000u - bytes) return NULL;
     active->guest_buffer = (uint8_t *)calloc(bytes, 1u);
     if (active->guest_buffer == NULL) return NULL;
     active->guest_bytes = bytes;
-    active->write_back = active->call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR;
+    active->write_back = active->call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR ||
+        active->call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
+        active->call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT;
     if (active->write_back) return active->guest_buffer;
     for (index = 0u; index < bytes; ++index) {
         if (!active->call->guest_read(active->call->guest_state,
@@ -309,6 +334,10 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         body = cmdInitConsole;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT)
         body = cmdGetKbdLayout;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS)
+        body = cmdGetConfigSys;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT)
+        body = cmdGetAutoexecBat;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO)
         body = cmdGetStartInfo;
     else if (call->service == 0x06u)
@@ -325,7 +354,7 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         return 0;
     active.call = call;
     g_active_call = &active;
-    body();
+    if (setjmp(active.terminal_exit) == 0) body();
     if (call->service == BX_NTVDM_COMMAND_MISC_SET_INFO && active.guest_bytes != 3u) {
         g_active_call = NULL;
         return 0;

@@ -197,6 +197,7 @@
         "src/bx-vdm/bop/opennt/dem/demioctl.c",
         "src/bx-vdm/bop/opennt/dem/demsrch.c",
         "src/bx-vdm/bop/opennt/command/cmdmisc.c",
+        "src/bx-vdm/bop/opennt/command/cmdconf.c",
         "src/bx-vdm/bop/opennt/command/cmdkeyb.c",
         "src/bx-vdm/bop/opennt/command/cmdredir.c",
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
@@ -219,6 +220,7 @@
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
         "src/bx-vdm/bop/shim/command_misc_shim.c",
+        "src/bx-vdm/bop/shim/command_config_shim.c",
         "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_observation_v1.c",
         "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_ledger_v1.c",
         "src/bx-vdm/bx_ntvdm_bulk_result_transaction.c",
@@ -761,6 +763,12 @@
     {
       "name": "t231-s5-command-start-info-direct-fixture",
       "source": "tests/bx-vdm/t231_s5_command_start_info_direct_fixture.c",
+      "libraries": [ "bx-vdm" ],
+      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+    },
+    {
+      "name": "t231-s5-command-config-direct-fixture",
+      "source": "tests/bx-vdm/t231_s5_command_config_direct_fixture.c",
       "libraries": [ "bx-vdm" ],
       "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
     },

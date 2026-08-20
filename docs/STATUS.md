@@ -36,6 +36,8 @@
 
 > **T231 S5 partial:** [start-info witness](etc/evidence/t231-s5-command-start-info-direct-001.md) records direct original `54:10` (`cmdGetStartInfo`) through the persistent COMMAND session.  `cmdconf.c` and `cmdenv.c` remain the active S5 recovery work.
 
+> **T231 S5 partial:** [configuration witness](etc/evidence/t231-s5-command-config-direct-001.md) records original `cmdconf.c` `54:0C`/`54:0D`: CONFIG.SYS/AUTOEXEC.NT preprocessing, checked 64-byte OEM output, temporary-file lifecycle and the original terminal failure path.  `54:0F` remains active.
+
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 
 > **T230 S1 P1:** [203-entry Chinese BOP implementation tracker](etc/operations/opennt-bop-implementation-tracker-001.md) records instruction entry, original handler, high-level purpose, actual strict status and historical disposition; it establishes zero fully complete entries at this baseline.

@@ -5,13 +5,12 @@
  *  21-Nov-1992 Jonle , Created
  */
 
-#include "cmd.h"
-#include <cmdsvc.h>
-#include <demexp.h>
-#include <softpc.h>
-#include <mvdm.h>
-#include <ctype.h>
-#include <oemuni.h>
+/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdconf.c.
+ * Divergence: the historical CCPU/SAS/PIF include closure is unavailable in
+ * the standalone composition.  The COMMAND configuration shim supplies only
+ * its checked guest span and named host-capability contracts; the original
+ * preprocessor below remains the owner of all filtering and file logic. */
+#include "../../shim/command_misc_shim.h"
 
 //
 // local stuff
@@ -192,7 +191,10 @@ PCHAR IsConfigCommand(PCHAR pConfigCommand, int CmdLen, PCHAR pLine)
  */
 void ExpandConfigFiles(BOOLEAN bConfig)
 {
-   DWORD  dw, dwRawFileSize;
+   /* Modern C control-flow analysis cannot infer the historical non-returning
+    * TerminateVDM contract.  These initial values are unreachable after that
+    * path but retain a defined x64 compilation state. */
+   DWORD  dw, dwRawFileSize = 0;
 
    HANDLE hRawFile;
    HANDLE hTmpFile;
@@ -203,8 +205,8 @@ void ExpandConfigFiles(BOOLEAN bConfig)
    CHAR *pEnvParam= NULL;
    CHAR *pPartyShell=NULL;
    CHAR achRawFile[MAX_PATH+12];
-   CHAR *lpszzEnv, *lpszName;
-   CHAR cchEnv;
+   CHAR *lpszzEnv = NULL, *lpszName;
+   CHAR cchEnv = 0;
 
    dw = GetWindowsDirectory(achRawFile, sizeof(achRawFile));
    dwLenSysRoot = GetShortPathNameA(achRawFile, achSysRoot, sizeof(achSysRoot));
@@ -223,7 +225,9 @@ void ExpandConfigFiles(BOOLEAN bConfig)
                          FILE_ATTRIBUTE_NORMAL,
                          NULL );
 
-   if (hRawFile == (HANDLE)0xFFFFFFFF
+   /* x64 divergence: retain the original invalid-handle predicate without
+    * narrowing the Win32 HANDLE value to the historical 32-bit sentinel. */
+   if (hRawFile == INVALID_HANDLE_VALUE
        || !dwLenSysRoot
        || dwLenSysRoot >= sizeof(achSysRoot)
        || !(dwRawFileSize = GetFileSize(hRawFile, NULL))
@@ -322,7 +326,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
                    }
                else if (!_strnicmp(achSysRoot,pTmp, strlen(achSysRoot)))
                   {
-                   dw = strlen(achSysRoot);
+                    dw = (DWORD)strlen(achSysRoot);
                    }
                else  {
                    dw = 0;
@@ -487,7 +491,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
         sprintf(achRawFile,
                 "%s=%3.3u,%3.3u,%s\\system32\\%s.sys%s",
                 achCOUNTRY, CtryId, OemCP, achSysRoot, achCOUNTRY, achEOL);
-        WriteFileAssert(hTmpFile,achRawFile,strlen(achRawFile));
+        WriteFileAssert(hTmpFile,achRawFile,(DWORD)strlen(achRawFile));
 
 
 
@@ -507,7 +511,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
         sprintf(achRawFile,
                 "%s=%s%s /p %s\\system32",
                 achSHELL,achSysRoot, achCOMMAND, achSysRoot);
-        WriteFileAssert(hTmpFile,achRawFile,strlen(achRawFile));
+        WriteFileAssert(hTmpFile,achRawFile,(DWORD)strlen(achRawFile));
 
            // write extra string (/c ... or /e:nnn)
         if (pPartyShell && isgraph(*pPartyShell)) {
@@ -536,7 +540,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
                 strcat(achRawFile, pEnvParam);
                 }
 
-            WriteExpanded(hTmpFile, achRawFile, strlen(achRawFile));
+            WriteExpanded(hTmpFile, achRawFile, (DWORD)strlen(achRawFile));
             }
 
         WriteFileAssert(hTmpFile,achEOL,sizeof(achEOL) - sizeof(CHAR));
@@ -584,7 +588,9 @@ DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwChars)
         if (*pch == '%' &&
             !_strnicmp(pch, achSYSROOT, sizeof(achSYSROOT)-sizeof(CHAR)) )
            {
-            dw = pch - pSave;
+             /* The input is bounded by the DWORD file-size result above;
+              * make that original bound explicit for x64 pointer arithmetic. */
+             dw = (DWORD)(pch - pSave);
             if (dw)  {
                 WriteFileAssert(hFile, pSave, dw);
                 }
@@ -601,7 +607,7 @@ DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwChars)
             }
         }
 
-  dw = pch - pSave;
+   dw = (DWORD)(pch - pSave);
   if (dw) {
       WriteFileAssert(hFile, pSave, dw);
       }
