@@ -23,8 +23,8 @@ calls `CmdDispatch`; it does not replace the owner dispatcher.
 | `54:09` | `cmdInitConsole`, `cmdmisc.c` | console initialization | S4 | host console and standard-handle capability |
 | `54:0A` | `cmdExecComspec32`, `cmdexec.c` | host `%COMSPEC%` launch | S8 | same `cmdExec32` lifecycle as `54:08` |
 | `54:0B` | `cmdReturnExitCode`, `cmdexec.c` | child completion/re-entry | S8 | redirection completion, queue/re-entry, resume |
-| `54:0C` | `cmdGetConfigSys`, `cmdconf.c` | CONFIG.SYS path | S2 | declared boot/input path policy and guest write |
-| `54:0D` | `cmdGetAutoexecBat`, `cmdconf.c` | AUTOEXEC.BAT path | S2 | declared boot/input path policy and guest write |
+| `54:0C` | `cmdGetConfigSys`, `cmdconf.c` | CONFIG.SYS preprocessing | S5 | PIF input, transformed temporary file, OEM guest write, terminal failure |
+| `54:0D` | `cmdGetAutoexecBat`, `cmdconf.c` | AUTOEXEC preprocessing/environment extraction | S5 | PIF input, transformed temporary file, OEM guest write, terminal failure |
 | `54:0E` | `cmdGetKbdLayout`, `cmdkeyb.c` | keyboard layout | S4 | host layout/code-page capability and guest write |
 | `54:0F` | `cmdGetInitEnvironment`, `cmdenv.c` | initial environment block | S5 | OEM/ANSI, DOS-size bounds, checked guest write |
 | `54:10` | `cmdGetStartInfo`, `cmdmisc.c` plus `cmdpif.*` | startup/session information | S5 | historical PIF/session state → admitted CLI startup contract |
@@ -42,7 +42,10 @@ product-forbidden from S1 onward.
 
 ## Classification
 
-The simple query/bootstrap group is only `54:02`, `54:04`, `54:0C`, `54:0D`.
+The simple query/bootstrap group is only `54:02` and `54:04`.  Original
+`cmdconf.c` proves that `54:0C/0D` create and transform temporary boot files,
+so they belong with environment/startup configuration in S5 rather than a
+synthetic path-query implementation.
 All remaining services either own a persistent guest/host state boundary or
 belong to a coherent lifecycle cluster.  This classification is intentionally
 conservative: a service is not made simple merely because a prior v1 fixture
