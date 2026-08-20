@@ -2,15 +2,39 @@
 
 ## Current Work
 
-> **No active packet.** M0 T231 is closed; see the current work record below.
+**Active: M0 T232 S2** — migrate DEM host-file handle paths to the unified
+manager; XMS remains queued.
+
+## Active Packet
+
+### M0 T232 S2 — DEM unified-handle migration
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T232 S2`, Ordinary Mode. |
+| Admission And Approval | T232 S1 is source-built and pending its reviewed P1 delivery; owner request requires the resulting unified manager to replace the DEM private table before XMS is admitted. |
+| Objective | Inject the session-owned manager into DEM direct context/session, make DEM publication/lookup/release use it, preserve the original register-pair layout with a zero high word, and remove DEM's private 64-slot table. |
+| Non-goals | Do not admit XMS. Do not migrate COMMAND in this S. Do not change OpenNT DEM service logic, Bochs, guest DOS JFN/SFT semantics, or guest-visible BOP layouts. |
+| Reference Baseline | S1 manager fixture is source-built under `build/M0-T232-S1/formal-r1`; DEM currently owns `dem_direct_host_session.handles[64]` and exposes uint32 tokens through the direct context. |
+| Files And ABI Surface | `dem_direct_host_session.{h,c}`, `bx_ntvdm_dem_direct_context.h`, `demhndl_shim.c`, DEM focused fixtures, formal Ninja manifest and S2 evidence. |
+| Applicable Rules | `docs/rules/EXECUTION.md` source-recovery and closure rules; `docs/rules/ARCHITECTURE.md`; `docs/rules/CODING.md`; source policy. This is adapter-owned modern ABI safety infrastructure, not a replacement OpenNT provider. |
+| Verification | DEM open/lookup/close fixture verifies manager IDs, rejects a nonzero high word, preserves failure routes, and verifies owned session cleanup. Run its formal Ninja target and the S1 manager regression. |
+| Expected Markers | No `handles[64]` field or 64-entry allocation limit remains in DEM; external handles remain host-private; AX:BP carries low-word ID plus zero high word. |
+| Asset Needs | S1 manager, existing original DEM mirror/shims, MSVC x64 formal Ninja closure. |
+| Reporting Requirements | Record each migrated direct-context callback and its lifetime/ownership rule; distinguish S2 DEM closure from pending COMMAND migration. |
+| Stop Conditions | Pause for owner direction if original DEM needs a non-file pointer as a guest token, a guest-visible high word, a real DOS JFN/SFT table, or a changed error/provider semantic. |
+| Exit Criteria | DEM private table is removed; the source-built DEM direct route uses the unified manager and its focused plus formal regressions pass. |
+| Original Owner Request | “请你新开一个T任务，开始设计和实现这个统一句柄管理器。” |
+| Similar-Issue Sweep | DEM `50:xx` open/create/close/read/write/seek/time/lock/commit/pipe handle routes. COMMAND `54:06` is inventoried but reserved for S3; XMS handles remain excluded. |
+
+Detailed sequence: [T232 host-handle manager plan](etc/operations/m0-t232-unified-host-handle-manager-plan-001.md).
 
 ## Current Work Record
 
-**No active M/T/S packet.** M0 T231 closed as the COMMAND `54:00..10`
-code-complete/v2 product-route package; see the
-[T231 closure](history/m0-t231-closure-20260820.md). The next candidate is
-OpenNT XMS owner-package completion in [Queue](QUEUE.md). Native `54:xx`
-reachability remains transferred to the queued bx machine/BIOS owner package.
+M0 T231 closed as the COMMAND `54:00..10` code-complete/v2 product-route
+package; see the [T231 closure](history/m0-t231-closure-20260820.md). Native
+`54:xx` reachability remains transferred to the queued bx machine/BIOS owner
+package. XMS remains queued and is not admitted by T232.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search

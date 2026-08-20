@@ -213,6 +213,7 @@
         "src/bx-vdm/bop/observation/bx_ntvdm_bop_sequence_observation_v1.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/bx-vdm/bop/shim/dem_direct_host_session.c",
+        "src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_dem_direct_context.c",
         "src/bx-vdm/bop/shim/demdir_shim.c",
         "src/bx-vdm/bop/shim/demfile_shim.c",
@@ -316,6 +317,20 @@
         "bcrypt.lib",
         "ntdll.lib",
         "user32.lib"
+      ]
+    },
+    {
+      "name": "t232-s1-host-handle-manager-fixture",
+      "source": "tests/bx-vdm/t232-s1-host-handle-manager-fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
       ]
     },
     {

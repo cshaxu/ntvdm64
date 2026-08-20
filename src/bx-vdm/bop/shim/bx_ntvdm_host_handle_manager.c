@@ -1,0 +1,185 @@
+#include "bx_ntvdm_host_handle_manager.h"
+
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct bx_ntvdm_host_handle_entry {
+    HANDLE host_handle;
+    uint16_t guest_handle;
+    uint16_t ownership;
+    struct bx_ntvdm_host_handle_entry *next_host;
+    struct bx_ntvdm_host_handle_entry *next_guest;
+};
+
+static uint32_t host_bucket(HANDLE handle)
+{
+    return (uint32_t)(((uintptr_t)handle >> 3u) % BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS);
+}
+
+static uint32_t guest_bucket(uint16_t handle)
+{
+    return ((uint32_t)handle) % BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS;
+}
+
+static bx_ntvdm_host_handle_entry *find_host(
+    const bx_ntvdm_host_handle_manager *manager, HANDLE handle)
+{
+    bx_ntvdm_host_handle_entry *entry;
+    if (!bx_ntvdm_host_handle_manager_valid(manager)) return NULL;
+    for (entry = manager->by_host[host_bucket(handle)]; entry != NULL;
+        entry = entry->next_host)
+        if (entry->host_handle == handle) return entry;
+    return NULL;
+}
+
+static bx_ntvdm_host_handle_entry *find_guest(
+    const bx_ntvdm_host_handle_manager *manager, uint16_t handle)
+{
+    bx_ntvdm_host_handle_entry *entry;
+    if (!bx_ntvdm_host_handle_manager_valid(manager) || handle == 0u) return NULL;
+    for (entry = manager->by_guest[guest_bucket(handle)]; entry != NULL;
+        entry = entry->next_guest)
+        if (entry->guest_handle == handle) return entry;
+    return NULL;
+}
+
+int bx_ntvdm_host_handle_manager_initialize(
+    bx_ntvdm_host_handle_manager *manager)
+{
+    if (manager == NULL) return 0;
+    memset(manager, 0, sizeof(*manager));
+    manager->magic = BX_NTVDM_HOST_HANDLE_MANAGER_MAGIC;
+    manager->abi_version = BX_NTVDM_HOST_HANDLE_MANAGER_VERSION;
+    manager->struct_bytes = sizeof(*manager);
+    manager->next_guest_handle = 1u;
+    return bx_ntvdm_host_handle_manager_valid(manager);
+}
+
+int bx_ntvdm_host_handle_manager_valid(
+    const bx_ntvdm_host_handle_manager *manager)
+{
+    return manager != NULL && manager->magic == BX_NTVDM_HOST_HANDLE_MANAGER_MAGIC &&
+        manager->abi_version == BX_NTVDM_HOST_HANDLE_MANAGER_VERSION &&
+        manager->struct_bytes == sizeof(*manager) && manager->next_guest_handle >= 1u &&
+        manager->next_guest_handle <= 0x10000u && manager->entry_count < 0x10000u;
+}
+
+int bx_ntvdm_host_handle_manager_publish(
+    bx_ntvdm_host_handle_manager *manager, HANDLE host_handle,
+    uint32_t ownership, uint16_t *guest_handle_out, DWORD *error_out)
+{
+    bx_ntvdm_host_handle_entry *entry;
+    uint16_t guest_handle;
+    uint32_t bucket;
+    if (guest_handle_out != NULL) *guest_handle_out = 0u;
+    if (error_out != NULL) *error_out = ERROR_INVALID_HANDLE;
+    if (!bx_ntvdm_host_handle_manager_valid(manager) || host_handle == NULL ||
+        host_handle == INVALID_HANDLE_VALUE ||
+        (ownership != BX_NTVDM_HOST_HANDLE_BORROWED &&
+         ownership != BX_NTVDM_HOST_HANDLE_OWNED)) return 0;
+    entry = find_host(manager, host_handle);
+    if (entry != NULL) {
+        if (guest_handle_out != NULL) *guest_handle_out = entry->guest_handle;
+        if (error_out != NULL) *error_out = ERROR_SUCCESS;
+        return 1;
+    }
+    if (manager->next_guest_handle > UINT16_MAX) {
+        if (error_out != NULL) *error_out = ERROR_TOO_MANY_OPEN_FILES;
+        return 0;
+    }
+    entry = (bx_ntvdm_host_handle_entry *)calloc(1u, sizeof(*entry));
+    if (entry == NULL) {
+        if (error_out != NULL) *error_out = ERROR_NOT_ENOUGH_MEMORY;
+        return 0;
+    }
+    guest_handle = (uint16_t)manager->next_guest_handle++;
+    entry->host_handle = host_handle;
+    entry->guest_handle = guest_handle;
+    entry->ownership = (uint16_t)ownership;
+    bucket = host_bucket(host_handle);
+    entry->next_host = manager->by_host[bucket];
+    manager->by_host[bucket] = entry;
+    bucket = guest_bucket(guest_handle);
+    entry->next_guest = manager->by_guest[bucket];
+    manager->by_guest[bucket] = entry;
+    ++manager->entry_count;
+    if (guest_handle_out != NULL) *guest_handle_out = guest_handle;
+    if (error_out != NULL) *error_out = ERROR_SUCCESS;
+    return 1;
+}
+
+int bx_ntvdm_host_handle_manager_lookup_handle(
+    const bx_ntvdm_host_handle_manager *manager, uint16_t guest_handle,
+    HANDLE *host_handle_out)
+{
+    bx_ntvdm_host_handle_entry *entry = find_guest(manager, guest_handle);
+    if (host_handle_out != NULL) *host_handle_out = INVALID_HANDLE_VALUE;
+    if (entry == NULL) return 0;
+    if (host_handle_out != NULL) *host_handle_out = entry->host_handle;
+    return 1;
+}
+
+int bx_ntvdm_host_handle_manager_lookup_guest(
+    const bx_ntvdm_host_handle_manager *manager, HANDLE host_handle,
+    uint16_t *guest_handle_out)
+{
+    bx_ntvdm_host_handle_entry *entry = find_host(manager, host_handle);
+    if (guest_handle_out != NULL) *guest_handle_out = 0u;
+    if (entry == NULL) return 0;
+    if (guest_handle_out != NULL) *guest_handle_out = entry->guest_handle;
+    return 1;
+}
+
+static void unlink_entry(bx_ntvdm_host_handle_manager *manager,
+    bx_ntvdm_host_handle_entry *entry)
+{
+    bx_ntvdm_host_handle_entry **cursor;
+    cursor = &manager->by_host[host_bucket(entry->host_handle)];
+    while (*cursor != NULL && *cursor != entry) cursor = &(*cursor)->next_host;
+    if (*cursor == entry) *cursor = entry->next_host;
+    cursor = &manager->by_guest[guest_bucket(entry->guest_handle)];
+    while (*cursor != NULL && *cursor != entry) cursor = &(*cursor)->next_guest;
+    if (*cursor == entry) *cursor = entry->next_guest;
+    --manager->entry_count;
+}
+
+int bx_ntvdm_host_handle_manager_release(
+    bx_ntvdm_host_handle_manager *manager, uint16_t guest_handle,
+    DWORD *error_out)
+{
+    bx_ntvdm_host_handle_entry *entry;
+    if (error_out != NULL) *error_out = ERROR_INVALID_HANDLE;
+    if (!bx_ntvdm_host_handle_manager_valid(manager) ||
+        (entry = find_guest(manager, guest_handle)) == NULL) return 0;
+    if (entry->ownership == BX_NTVDM_HOST_HANDLE_OWNED &&
+        !CloseHandle(entry->host_handle)) {
+        if (error_out != NULL) *error_out = GetLastError();
+        return 0;
+    }
+    unlink_entry(manager, entry);
+    free(entry);
+    if (error_out != NULL) *error_out = ERROR_SUCCESS;
+    return 1;
+}
+
+void bx_ntvdm_host_handle_manager_reset(
+    bx_ntvdm_host_handle_manager *manager)
+{
+    uint32_t bucket;
+    if (!bx_ntvdm_host_handle_manager_valid(manager)) return;
+    for (bucket = 0u; bucket < BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS; ++bucket) {
+        bx_ntvdm_host_handle_entry *entry = manager->by_guest[bucket];
+        while (entry != NULL) {
+            bx_ntvdm_host_handle_entry *next = entry->next_guest;
+            if (entry->ownership == BX_NTVDM_HOST_HANDLE_OWNED)
+                CloseHandle(entry->host_handle);
+            free(entry);
+            entry = next;
+        }
+        manager->by_guest[bucket] = NULL;
+        manager->by_host[bucket] = NULL;
+    }
+    manager->entry_count = 0u;
+    manager->next_guest_handle = 1u;
+}
