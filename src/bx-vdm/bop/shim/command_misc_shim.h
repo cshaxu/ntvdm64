@@ -76,6 +76,8 @@ typedef struct _VDMINFO { HANDLE StdIn, StdOut, StdErr; } VDMINFO, *PVDMINFO;
 #define HANDLE_STDOUT 1u
 #define HANDLE_STDERR 2u
 #define EG_MALLOC_FAILURE ERROR_NOT_ENOUGH_MEMORY
+#define RMB_ICON_BANG 0x00000010u
+#define RMB_ABORT 0x00000002u
 
 #pragma pack(push, 1)
 typedef struct _PARAMBLOCK {
@@ -106,6 +108,7 @@ enum bx_ntvdm_command_misc_service {
     BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS = 0x0cu,
     BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT = 0x0du,
     BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT = 0x0eu,
+    BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT = 0x0fu,
     BX_NTVDM_COMMAND_MISC_GET_START_INFO = 0x10u
 };
 
@@ -118,6 +121,8 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t fd_access_address;
     uint32_t console_initialized;
     uint32_t dos_session_id;
+    CHAR comspec[64 + 8];
+    USHORT comspec_bytes;
     CHAR config_input_path[MAX_PATH + 13u];
     CHAR autoexec_input_path[MAX_PATH + 13u];
     uint32_t redirection_token;
@@ -166,6 +171,7 @@ USHORT bx_ntvdm_command_misc_get_bx(void);
 USHORT bx_ntvdm_command_misc_get_cx(void);
 USHORT bx_ntvdm_command_misc_get_si(void);
 USHORT bx_ntvdm_command_misc_get_ds(void);
+USHORT bx_ntvdm_command_misc_get_es(void);
 USHORT bx_ntvdm_command_misc_get_ax(void);
 UCHAR bx_ntvdm_command_misc_get_al(void);
 void bx_ntvdm_command_misc_set_ax(USHORT value);
@@ -185,6 +191,7 @@ VOID cmdPipeInThread(LPVOID parameter);
 BOOL cmdPipeFileDataEOF(HANDLE file, BOOL *eof_out);
 BOOL cmdPipeFileEOF(HANDLE file);
 void RcErrorDialogBox(UINT error, PVOID first, PVOID second);
+void RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags);
 void TerminateVDM(void);
 void nt_std_handle_notification(BOOL enabled);
 extern BOOL fSoftpcRedirection;
@@ -208,6 +215,7 @@ void GetPIFConfigFiles(BOOL bConfig, CHAR *file_name);
 void cmdGetConfigSys(void);
 void cmdGetAutoexecBat(void);
 void DeleteConfigFiles(void);
+void cmdGetInitEnvironment(void);
 void bx_ntvdm_command_config_set_inputs(bx_ntvdm_command_misc_session *session,
     const CHAR *config_path, const CHAR *autoexec_path);
 void RtlInitAnsiString(PANSI_STRING destination, const CHAR *source);
@@ -228,12 +236,19 @@ extern BYTE *pIsDosBinary;
 extern WORD *pFDAccess;
 extern BOOL bPifFastPaste;
 extern ULONG DosSessionId;
+extern BOOL fSeparateWow;
+extern CHAR comspec[];
+extern CHAR *lpszzInitEnvironment;
+extern WORD cchInitEnvironment;
+extern CHAR *lpszzVDMEnv32;
+extern DWORD cchVDMEnv32;
 
 #define getDX() bx_ntvdm_command_misc_get_dx()
 #define getBX() bx_ntvdm_command_misc_get_bx()
 #define getCX() bx_ntvdm_command_misc_get_cx()
 #define getSI() bx_ntvdm_command_misc_get_si()
 #define getDS() bx_ntvdm_command_misc_get_ds()
+#define getES() bx_ntvdm_command_misc_get_es()
 #define getAL() bx_ntvdm_command_misc_get_al()
 #define getAX() bx_ntvdm_command_misc_get_ax()
 #define setAX(value) bx_ntvdm_command_misc_set_ax(value)

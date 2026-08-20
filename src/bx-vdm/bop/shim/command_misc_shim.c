@@ -13,6 +13,7 @@ void cmdGetStdHandle(void);
 void cmdGetStartInfo(void);
 void cmdGetConfigSys(void);
 void cmdGetAutoexecBat(void);
+void cmdGetInitEnvironment(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -99,6 +100,7 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
          call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT ||
+         call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO ||
          call->service == 0x06u) &&
         call->boundary != NULL && bx_ntvdm_exception_event_v1_valid(call->boundary) &&
@@ -116,6 +118,7 @@ USHORT bx_ntvdm_command_misc_get_bx(void) { return (USHORT)g_active_call->call->
 USHORT bx_ntvdm_command_misc_get_cx(void) { return (USHORT)g_active_call->call->cpu->ecx; }
 USHORT bx_ntvdm_command_misc_get_si(void) { return (USHORT)g_active_call->call->cpu->esi; }
 USHORT bx_ntvdm_command_misc_get_ds(void) { return g_active_call->call->cpu->ds; }
+USHORT bx_ntvdm_command_misc_get_es(void) { return g_active_call->call->cpu->es; }
 USHORT bx_ntvdm_command_misc_get_ax(void) { return (USHORT)g_active_call->call->cpu->eax; }
 UCHAR bx_ntvdm_command_misc_get_al(void) { return (UCHAR)(g_active_call->call->cpu->eax & 0xffu); }
 void bx_ntvdm_command_misc_set_ax(USHORT value) { (void)set_ax(value); }
@@ -212,6 +215,18 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
     uint32_t bytes;
     uint32_t index;
     if (active == NULL) return NULL;
+    if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT) {
+        uint32_t requested = (uint32_t)(USHORT)active->call->cpu->ebx << 4;
+        active->guest_address = real_mode_address(segment, offset);
+        if (active->guest_address > 0x100000u ||
+            requested > 0x100000u - active->guest_address || active->guest_buffer != NULL)
+            return NULL;
+        active->guest_buffer = (uint8_t *)calloc(requested == 0u ? 1u : requested, 1u);
+        if (active->guest_buffer == NULL) return NULL;
+        active->guest_bytes = requested;
+        active->write_back = 1u;
+        return active->guest_buffer;
+    }
     if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT) {
         uint32_t keyboard_bytes = active->guest_buffer == NULL ? 128u : 300u;
         uint8_t **buffer = active->guest_buffer == NULL ? &active->guest_buffer : &active->guest_buffer2;
@@ -338,6 +353,8 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         body = cmdGetConfigSys;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT)
         body = cmdGetAutoexecBat;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT)
+        body = cmdGetInitEnvironment;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO)
         body = cmdGetStartInfo;
     else if (call->service == 0x06u)
@@ -349,12 +366,34 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     DosSessionId = call->session != NULL ? call->session->dos_session_id : 0u;
     memset(lpszComSpec, 0, sizeof(lpszComSpec));
     cbComSpec = 0u;
+    if (call->service != BX_NTVDM_COMMAND_MISC_COMSPEC && call->session != NULL) {
+        memcpy(lpszComSpec, call->session->comspec, sizeof(lpszComSpec));
+        cbComSpec = call->session->comspec_bytes;
+    }
     bx_ntvdm_cpu_result_v2_pass_through(call->result);
     if (!bx_ntvdm_cpu_result_v2_resume(call->result, call->boundary->fault_rip + 4u))
         return 0;
     active.call = call;
     g_active_call = &active;
     if (setjmp(active.terminal_exit) == 0) body();
+    if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC && call->session != NULL) {
+        memcpy(call->session->comspec, lpszComSpec, sizeof(lpszComSpec));
+        call->session->comspec_bytes = cbComSpec;
+    }
+    if (call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT) {
+        uint32_t index;
+        /* cmdenv.c receives only a segment pointer.  Recover the exact
+         * multi-string extent it populated so a successful bounded request
+         * does not write arbitrary zeroed capacity back into guest RAM. */
+        active.write_back = 0u;
+        for (index = 0u; index + 1u < active.guest_bytes; ++index) {
+            if (active.guest_buffer[index] == 0u && active.guest_buffer[index + 1u] == 0u) {
+                active.guest_bytes = index + 2u;
+                active.write_back = 1u;
+                break;
+            }
+        }
+    }
     if (call->service == BX_NTVDM_COMMAND_MISC_SET_INFO && active.guest_bytes != 3u) {
         g_active_call = NULL;
         return 0;

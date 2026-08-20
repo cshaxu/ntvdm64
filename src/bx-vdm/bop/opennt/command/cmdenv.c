@@ -7,20 +7,21 @@
  *  williamh 13-May-1993 Created
  */
 
-#include "cmd.h"
-
-#include <cmdsvc.h>
-#include <demexp.h>
-#include <softpc.h>
-#include <mvdm.h>
-#include <ctype.h>
-#include <memory.h>
-#include <oemuni.h>
+/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdenv.c.
+ * Divergence: the admitted init-environment body is composed through the
+ * narrow COMMAND environment shim rather than the historical CCPU/SAS/RTL
+ * product include closure.  The original body retains all filtering, OEM
+ * conversion, buffer-size and result rules. */
+#define BX_NTVDM_COMMAND_ENV_ADMIT_INIT_ENV 1
+#define BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE 1
+#include "../../shim/command_misc_shim.h"
 
 #define VDM_ENV_INC_SIZE    512
 
 CHAR windir[] = "windir";
 extern BOOL fSeparateWow;
+
+#if !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
 
 // Transform the given DOS environment to 32bits environment.
 // WARNING!! The environment block we passed to 32bits must be in sort order.
@@ -160,6 +161,8 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
     return(NT_SUCCESS(Status));
 }
 
+#endif /* !BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE */
+
 
 
 
@@ -176,9 +179,12 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
  *	  (BX) > given size, (BX) has the required size
  */
 
+#if defined(BX_NTVDM_COMMAND_ENV_ADMIT_INIT_ENV) || !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
 VOID cmdGetInitEnvironment(VOID)
 {
-    CHAR *lpszzEnvBuffer, *lpszEnv;
+    /* Defined initial state for modern analysis; original control flow assigns
+     * this before use whenever the 16-bit environment is emitted. */
+    CHAR *lpszzEnvBuffer = NULL, *lpszEnv;
     WORD cchEnvBuffer;
     CHAR *lpszzEnvStrings, * lpszz;
     WORD cchString;
@@ -213,7 +219,8 @@ VOID cmdGetInitEnvironment(VOID)
 	lpszEnv =
 	lpszzEnvStrings = GetEnvironmentStrings();
 	while (*lpszEnv) {
-	    cchString = strlen(lpszEnv) + 1;
+	    /* `cchString` is the original 16-bit COMMAND/DOS layout field. */
+	    cchString = (WORD)(strlen(lpszEnv) + 1u);
 	    cchVDMEnv32 += cchString;
 	    lpszEnv += cchString;
 	}
@@ -231,7 +238,7 @@ VOID cmdGetInitEnvironment(VOID)
         RtlMoveMemory(lpszzVDMEnv32, lpszzEnvStrings, cchVDMEnv32);
 
 	while (*lpszz != '\0') {
-	    cchString = strlen(lpszz) + 1;
+	    cchString = (WORD)(strlen(lpszz) + 1u);
 	    if (*lpszz != '=') {
 
 		if (!fFoundComSpec && !_strnicmp(lpszz, comspec, 8)){
@@ -330,6 +337,8 @@ VOID cmdGetInitEnvironment(VOID)
     return;
 }
 
+#endif /* BX_NTVDM_COMMAND_ENV_ADMIT_INIT_ENV */
+
 
 
 /** create a DOS environment for DOS.
@@ -348,6 +357,7 @@ WARINING !!! The changes made by applications through directly manipulation
 	     in command.com environment segment will be lost.
 
 **/
+#if !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
 BOOL cmdCreateVDMEnvironment(
 PVDMENVBLK  pVDMEnvBlk
 )
@@ -653,7 +663,6 @@ DWORD	cchDst
     return RequiredLength;
 }
 
-
 DWORD cmdGetEnvironmentVariable(
 PVDMENVBLK pVDMEnvBlk,
 PCHAR	lpszName,
@@ -694,3 +703,5 @@ DWORD	cchValue
     }
     return RequiredLength;
 }
+
+#endif /* !BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE */

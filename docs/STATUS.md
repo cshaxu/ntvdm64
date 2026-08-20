@@ -2,27 +2,27 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T231 S5.** T230 is closed; see [the T230 closure record](history/m0-t230-closure-20260819.md). T231 has completed its console/handle/layout package and moves to OpenNT configuration, environment and startup ownership.
+> **Current effective packet: M0 T231 S6.** T231's original CONFIG/AUTOEXEC, initialization-environment and start-information group is locally complete; binary admission is next.
 
-**Active: M0 T231 S5 -- COMMAND configuration, environment and startup package (`54:0C`, `54:0D`, `54:0F`, `54:10`).**
+**Active: M0 T231 S6 -- COMMAND binary-admission package (`54:07`).**
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T231 S5, Ordinary Mode. |
+| Identifier Mode | M0 T231 S6, Ordinary Mode. |
 | Admission And Approval | Owner direction: “按照规划，实现COMMAND族的所有BOP，采用原生OpenNT源代码文件结构和代码结构，尽可能采用相同逻辑，并彻底清理该族的v1实现。” |
-| Objective | Recover the original configuration, environment and startup package through `cmdconf.c` and `cmdenv.c`, retaining original APIs, layouts, failure behavior and service order. |
+| Objective | Recover original `54:07` binary-admission semantics, including extension/path/error distinctions and the required checked COMMAND session boundary. |
 | Non-goals | No trace-selected leaf patch, no v1 extension, no Bochs intrusion, no guest-image mutation, no child-process lifecycle work, and no COMMAND-family closure claim. |
-| Reference Baseline | Original `cmdconf.c`, `cmdenv.c`, `cmd.h`, `cmddata.c`; completed T231 S1--S4 evidence and v1 comparison sources. |
-| Files And ABI Surface | admitted OpenNT command mirrors, narrowly named console/handle/layout shims, persistent COMMAND session, focused fixtures, formal manifest and retained v1 sources. |
+| Reference Baseline | Original COMMAND binary-admission owner/source, `cmd.h`, `cmdsvc.h`; completed T231 S1--S5 evidence and v1 comparison sources. |
+| Files And ABI Surface | admitted OpenNT command mirrors, narrowly named binary/path shim, persistent COMMAND session, focused fixture, formal manifest and retained v1 sources. |
 | Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding boundaries, original OpenNT ordering/layout/failure behavior, formal Ninja and documentation governance. |
-| Verification | Every selected original body compiles with MSVC `/W4 /WX /MT`; focused fixtures prove configuration transforms, environment bounds, startup data/result ABI and original failure returns. |
+| Verification | The selected original body compiles with MSVC `/W4 /WX /MT`; a focused fixture proves extension/path/error cases and result ABI. |
 | Expected Markers | No parallel service implementation; all platform changes are in named shims; no raw host handle or guest pointer crosses the typed ABI; v1 is comparison-only. |
-| Asset Needs | Pinned OpenNT source, host console/standard-handle APIs, existing opaque-handle seam, checked CPU/guest-memory ABI, formal Ninja graph and retained v1 sources. |
+| Asset Needs | Pinned OpenNT source, host path/file APIs, checked CPU/guest-memory ABI, formal Ninja graph and retained v1 sources. |
 | Reporting Requirements | Record all original source deltas inline and distinguish local service parity from child execution, engine routing and native guest proof. |
 | Stop Conditions | Missing historical layout, unavailable host capability, a needed Bochs intrusion, or a required new behavior is recorded without silently changing the original contract. |
-| Exit Criteria | Original `54:0C`, `54:0D`, `54:0F`, `54:10` are source-admitted with focused zero-exit tests and exact failure disposition; their v1 routes are not extended. |
+| Exit Criteria | Original `54:07` is source-admitted with focused zero-exit extension/path/error regression; its v1 route is not extended. |
 | Original Owner Request | “S2把所有简单的BOP解除注释，局部测试完成code complete；每个疑难BOP自己独立出一个S任务来做。” |
 | Similar-Issue Sweep | `cmdGetStdHandle`, `cmdInitConsole`, `cmdGetKbdLayout`, `cmdredir.c`, `cmdkeyb.c`, source guest layouts, console/keyboard/handle APIs, old `54:06`/`54:09`/`54:0E` v1 routes and formal manifest membership. |
 
@@ -34,9 +34,11 @@
 
 > **T231 S4 complete:** [console/keyboard witness](etc/evidence/t231-s4-console-keyboard-partial-001.md) records original `54:09`, both `54:0E` fallback and success paths, and the complete `54:06` standard-handle/pipe lifecycle through the original `cmdredir.c` bodies.
 
-> **T231 S5 partial:** [start-info witness](etc/evidence/t231-s5-command-start-info-direct-001.md) records direct original `54:10` (`cmdGetStartInfo`) through the persistent COMMAND session.  `cmdconf.c` and `cmdenv.c` remain the active S5 recovery work.
+> **T231 S5 partial:** [start-info witness](etc/evidence/t231-s5-command-start-info-direct-001.md) records direct original `54:10` (`cmdGetStartInfo`) through the persistent COMMAND session.
 
-> **T231 S5 partial:** [configuration witness](etc/evidence/t231-s5-command-config-direct-001.md) records original `cmdconf.c` `54:0C`/`54:0D`: CONFIG.SYS/AUTOEXEC.NT preprocessing, checked 64-byte OEM output, temporary-file lifecycle and the original terminal failure path.  `54:0F` remains active.
+> **T231 S5 partial:** [configuration witness](etc/evidence/t231-s5-command-config-direct-001.md) records original `cmdconf.c` `54:0C`/`54:0D`: CONFIG.SYS/AUTOEXEC.NT preprocessing, checked 64-byte OEM output, temporary-file lifecycle and the original terminal failure path.
+
+> **T231 S5 complete:** [initial-environment witness](etc/evidence/t231-s5-command-init-environment-direct-001.md) records direct original `cmdenv.c` `54:0F` sizing, COMSPEC/WINDIR filtering, OEM multi-string output and non-initialization no-op.  Together with the three preceding S5 records, all four S5 endpoints have zero-exit focused witnesses.
 
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 
