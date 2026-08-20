@@ -16,6 +16,7 @@ int main(void)
 {
     fixture_context c; bx_ntvdm_exception_event_v1 e; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 r; bx_ntvdm_command_misc_session s;
+    HANDLE pipe_read, pipe_write; DWORD bytes; CHAR received[2];
     memset(&c,0,sizeof(c));event_initialize(&e);bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);bx_ntvdm_command_misc_session_initialize(&s);
     if(!invoke(&c,&e,&cpu,&r,&s,BX_NTVDM_COMMAND_MISC_INIT_CONSOLE)||s.console_initialized!=1u)return 1;
     bPifFastPaste=TRUE;cpu.edx=0u;cpu.ds=0x100u;cpu.esi=0u;cpu.ecx=0x80u;
@@ -25,5 +26,15 @@ int main(void)
     cpu.eax=0u;cpu.ebx=1u;cpu.ecx=HANDLE_STDOUT;
     if(!invoke(&c,&e,&cpu,&r,&s,0x06u)||r.cpu_delta.gpr16_values[1]!=1u||r.cpu_delta.gpr16_values[3]!=0u)return 4;
     CloseHandle(s.redirection_info.ri_hStdOut);
+    bx_ntvdm_command_misc_session_initialize(&s);
+    if(!CreatePipe(&pipe_read,&pipe_write,NULL,0u))return 5;
+    s.redirection_token=1u;s.redirection_info.ri_hStdOut=pipe_write;
+    cpu.eax=0u;cpu.ebx=1u;cpu.ecx=HANDLE_STDOUT;
+    if(!invoke(&c,&e,&cpu,&r,&s,0x06u)||s.redirection_info.ri_pPipeStdOut==NULL)return 6;
+    if(!WriteFile(s.handle_tokens[0],"X",1u,&bytes,NULL)||bytes!=1u)return 7;
+    SetEvent(s.redirection_info.ri_pPipeStdOut->hExitEvent);
+    if(WaitForSingleObject(s.redirection_info.ri_hStdOutThread,2000u)!=WAIT_OBJECT_0)return 8;
+    if(!ReadFile(pipe_read,received,1u,&bytes,NULL)||bytes!=1u||received[0]!='X')return 9;
+    CloseHandle(s.redirection_info.ri_hStdOutThread);CloseHandle(pipe_read);
     puts("T231 S4 direct OpenNT console, keyboard fallback, and standard-handle token ABI verified");return 0;
 }

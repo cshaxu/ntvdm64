@@ -32,7 +32,7 @@
 
 > **T231 S3 progress:** [the CMDINFO registration witness](etc/evidence/t231-s3-command-cmdmisc-registration-001.md) records direct original `54:03`/`54:05`, the checked persistent COMMAND session and its zero-exit local MSVC fixture. It does not claim later CMDINFO consumer or engine-route closure.
 
-> **T231 S4 partial progress:** [console/keyboard witness](etc/evidence/t231-s4-console-keyboard-partial-001.md) records original `54:09`, the `54:0E` no-install fallback, and `54:06` non-pipe standard-handle token transport. Pipe composition and full keyboard-layout success remain required before S4 closes.
+> **T231 S4 partial progress:** [console/keyboard witness](etc/evidence/t231-s4-console-keyboard-partial-001.md) records original `54:09`, the `54:0E` no-install fallback, and the complete `54:06` standard-handle/pipe lifecycle through the original `cmdredir.c` bodies. Full keyboard-layout success remains required before S4 closes.
 
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 

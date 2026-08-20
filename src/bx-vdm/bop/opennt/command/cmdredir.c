@@ -12,16 +12,23 @@
  * host pointers or truncated HANDLE values. */
 #include "../../shim/command_misc_shim.h"
 
-#define BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE 1
+/* DIVERGENCE: OpenNT's K&R function definitions and retained diagnostic
+ * locals are preserved byte-for-byte within this imported owner file.
+ * Modern /W4 diagnoses them although they do not affect the original
+ * algorithm, so scope the diagnostic compatibility to this translation unit. */
+#pragma warning(disable: 4131 4101)
 
-#if !defined(BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE)
+#define BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE 1
+#define BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE 1
+
+#if defined(BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE)
 
 #define CMDREDIR_DEBUG	1
 
 PPIPE_INPUT   cmdPipeList = NULL;
 #endif
 
-#if !defined(BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE)
 
 BOOL cmdCheckCopyForRedirection (pRdrInfo)
 PREDIRCOMPLETE_INFO pRdrInfo;
@@ -228,7 +235,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     return pRdrInfo;
 }
 
-#endif /* !BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE */
+#endif /* BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE */
 
 /* cmdGetStdHandle - Get the 32 bit NT standard handle for the VDM
  *
@@ -319,7 +326,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     return;
 }
 
-#if !defined(BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE)
 
 BOOL cmdHandleStdOutErrWithPipe(
     PREDIRCOMPLETE_INFO pRdrInfo,

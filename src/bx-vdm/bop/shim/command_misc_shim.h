@@ -23,12 +23,33 @@ typedef char *LPSTR;
 typedef void *PVOID;
 typedef void *LPVOID;
 
+/* Exact OpenNT cmd.h pipe layouts, admitted only for cmdredir.c's original
+ * ownership.  They remain host-private and never cross the guest boundary. */
+#define PIPE_INPUT_BUFFER_SIZE 512u
+#define PIPE_OUTPUT_BUFFER_SIZE PIPE_INPUT_BUFFER_SIZE
+#define PIPE_INPUT_TIMEOUT 55u
+#define PIPE_OUTPUT_TIMEOUT PIPE_INPUT_TIMEOUT
+typedef struct _PIPE_INPUT {
+    struct _PIPE_INPUT *Next;
+    HANDLE hFileRead, hFileWrite, hPipe, hDataEvent, hThread;
+    CHAR *pFileName; DWORD BufferSize; BOOL fEOF, WaitData; BYTE *Buffer;
+    CRITICAL_SECTION CriticalSection;
+} PIPE_INPUT, *PPIPE_INPUT;
+typedef struct _PIPE_OUTPUT {
+    HANDLE hFile, hPipe, hExitEvent; CHAR *pFileName; DWORD BufferSize; BYTE *Buffer;
+} PIPE_OUTPUT, *PPIPE_OUTPUT;
+
 typedef struct _RedirComplete_Info {
     HANDLE ri_hStdErr, ri_hStdOut, ri_hStdIn;
     HANDLE ri_hStdErrFile, ri_hStdOutFile, ri_hStdInFile;
     HANDLE ri_hStdOutThread, ri_hStdErrThread;
-    void *ri_pPipeStdIn, *ri_pPipeStdOut, *ri_pPipeStdErr;
+    PPIPE_INPUT ri_pPipeStdIn;
+    PPIPE_OUTPUT ri_pPipeStdOut, ri_pPipeStdErr;
 } REDIRCOMPLETE_INFO, *PREDIRCOMPLETE_INFO;
+typedef struct _VDMINFO { HANDLE StdIn, StdOut, StdErr; } VDMINFO, *PVDMINFO;
+#define MASK_STDIN  1u
+#define MASK_STDOUT 2u
+#define MASK_STDERR 4u
 
 #define HANDLE_STDIN  0u
 #define HANDLE_STDOUT 1u
@@ -130,8 +151,16 @@ PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token)
 int bx_ntvdm_command_misc_publish_handle(HANDLE handle);
 BOOL cmdHandleStdinWithPipe(PREDIRCOMPLETE_INFO pRdrInfo);
 BOOL cmdHandleStdOutErrWithPipe(PREDIRCOMPLETE_INFO pRdrInfo, USHORT handle_type);
+BOOL cmdCreateTempFile(PHANDLE handle, PCHAR *name);
+VOID cmdPipeOutThread(LPVOID parameter);
+VOID cmdPipeInThread(LPVOID parameter);
+BOOL cmdPipeFileDataEOF(HANDLE file, BOOL *eof_out);
+BOOL cmdPipeFileEOF(HANDLE file);
 void RcErrorDialogBox(UINT error, PVOID first, PVOID second);
 void TerminateVDM(void);
+void nt_std_handle_notification(BOOL enabled);
+extern BOOL fSoftpcRedirection;
+#define ASSERT(value) ((void)(value))
 LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
 void nt_init_event_thread(void);
 VOID cmdInitConsole(VOID);

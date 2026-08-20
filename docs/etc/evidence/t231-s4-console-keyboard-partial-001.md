@@ -21,9 +21,10 @@ T231 S4 direct OpenNT console, keyboard fallback, and standard-handle token ABI 
 
 ## Limit
 
-This remains a partial S4 witness. `54:06 cmdGetStdHandle` is source-admitted
-for its original non-pipe standard-handle branches: historical AX:BX
-host-pointer input and BX:CX 32-bit handle output are transported as checked
-session and handle tokens, and stdout is tested through an explicit `NUL`
-handle. Pipe composition and the complete keyboard-layout success route remain
-unadmitted, so S4 is open.
+This remains a partial S4 witness. `54:06 cmdGetStdHandle` and its complete
+original `cmdredir.c` pipe helper lifecycle are source-admitted: historical
+AX:BX host-pointer input and BX:CX 32-bit handle output are transported as
+checked session and handle tokens; a focused fixture covers both a `NUL`
+non-pipe stdout handle and an anonymous stdout pipe, including the original
+temporary-file/output-thread transfer. The complete keyboard-layout success
+route remains unadmitted, so S4 is open.

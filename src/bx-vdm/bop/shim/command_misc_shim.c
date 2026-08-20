@@ -19,6 +19,8 @@ PCHAR pSCS_ToSync;
 BYTE *pIsDosBinary;
 WORD *pFDAccess;
 BOOL bPifFastPaste;
+BOOL fSoftpcRedirection;
+void nt_std_handle_notification(BOOL enabled) { (void)enabled; }
 
 typedef struct bx_ntvdm_command_misc_active_call {
     bx_ntvdm_command_misc_call *call;
@@ -139,10 +141,6 @@ int bx_ntvdm_command_misc_publish_handle(HANDLE handle)
     return 1;
 }
 
-BOOL cmdHandleStdinWithPipe(PREDIRCOMPLETE_INFO pRdrInfo)
-{ (void)pRdrInfo; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
-BOOL cmdHandleStdOutErrWithPipe(PREDIRCOMPLETE_INFO pRdrInfo, USHORT handle_type)
-{ (void)pRdrInfo; (void)handle_type; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
 void RcErrorDialogBox(UINT error, PVOID first, PVOID second)
 { (void)error; (void)first; (void)second; }
 void TerminateVDM(void) { }
