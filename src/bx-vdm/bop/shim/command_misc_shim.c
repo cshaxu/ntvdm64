@@ -188,7 +188,6 @@ BOOL cmdCreateVDMEnvironment(PVDMENVBLK block)
 void cmdCheckForPIF(PVDMINFO vdm_info) { (void)vdm_info; }
 USHORT cmdMapCodePage(ULONG code_page) { return (USHORT)code_page; }
 void cmdPushExitInConsoleBuffer(void) { }
-void demCloseAllPSPRecords(void) { }
 void nt_block_event_thread(int block) { (void)block; }
 void nt_resume_event_thread(void) { }
 void GetWowKernelCmdLine(void) { TerminateVDM(); }
@@ -592,12 +591,6 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
     return NULL;
 }
 
-UINT demGetPhysicalDriveType(UCHAR drive)
-{
-    (void)drive;
-    return DRIVE_UNKNOWN;
-}
-
 UINT GetDriveTypeOem(LPSTR root)
 {
     CHAR ansi[4];
@@ -618,6 +611,9 @@ DWORD GetEnvironmentVariableOem(LPSTR name, LPSTR buffer, DWORD bytes)
     return result;
 }
 
+/* Shared OEM environment capability for the directly imported DEM and
+ * COMMAND owners.  OpenNT exposed one process environment to both owners;
+ * keeping the only definition here prevents test-local shim duplicates. */
 BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value)
 {
     CHAR ansi_name[4];

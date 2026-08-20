@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 1986 |
 | --- | --- |
-| Generated UTC | 2026-08-20T14:37:56Z |
+| Generated UTC | 2026-08-20T17:12:15Z |
 
 ## Entries
 
@@ -206,7 +206,7 @@ content-divergent entries.
 | etc/evidence/t229-s2-p7-dem-delete-direct-readonly-001.md | indexed supporting material | 06d64962801ff69cb04d658e3150765b82587786353dc941021aa24258b2844b |
 | etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md | indexed supporting material | 148a377518db6d37b07add573ec9d0e9b8b8e43db0b9c859aa56119ec1036308 |
 | etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md | indexed supporting material | 609a30412820d1550d9b93023498c209c56e2e93bca476dd994985c741f31010 |
-| etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md | indexed supporting material | ce7fac5928e1d05bd55fc6ca225935ed9ebc2e979b4ba369ee64b53497a04c73 |
+| etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md | indexed supporting material | 7d032bb1543e90454680b39c562217ea5a8ff7c54a35a7324ff8713aea635ae0 |
 | etc/evidence/t230-s11-dem-73-slot-local-execution-audit-001.md | indexed supporting material | f90f81325eac30717355c4fddd18fb3e054d5415e2f5942185803bd5a965cf3d |
 | etc/evidence/t230-s12-s14-shared-demdispatch-local-matrix-001.md | indexed supporting material | 960488087f97208040d2b9e0b01240b9ef89c41baf4ac231fe2f192deb905256 |
 | etc/evidence/t230-s15-p1-v1-dem-route-retirement-map-001.md | indexed supporting material | f85a4032d1dd71fcfbbc02ef0fafdb641c3be666e55bfe800c3793485ed8ef32 |
@@ -227,7 +227,7 @@ content-divergent entries.
 | etc/evidence/t230-s7-demdasd-demioctl-direct-import-map-001.md | indexed supporting material | 801e226f238e9c2b6cd6b5cc81a6d23e42b6e27cfb6fa83f5cd6bd88c0b813b0 |
 | etc/evidence/t230-s8-demerror-demlock-direct-import-map-001.md | indexed supporting material | fa0cfe2d0f414e55ab99fddb3269031d0c76a1f6299dfcd583d50aa531f8e120 |
 | etc/evidence/t230-s9-demmisc-direct-import-map-001.md | indexed supporting material | 91824686a6822d83cb715c8d88d6958084b904d764b98d8d98339f8846acc393 |
-| etc/evidence/t231-s10-command-v2-route-admission-001.md | indexed supporting material | c218ba138516d2da1afbe705c56e64f3123cc3050295f893833df20d6062d7e5 |
+| etc/evidence/t231-s10-command-v2-route-admission-001.md | indexed supporting material | 54ce449edfa632a6cb3613ff73a504e0b2bcd58a0e185d9a7049f10081c413e9 |
 | etc/evidence/t231-s2-command-cmdmisc-direct-import-001.md | indexed supporting material | bd6bc4ae09f164ffe1385fd92f23c9fb540cfbc2ebad59329c621bfd4681eec2 |
 | etc/evidence/t231-s3-command-cmdmisc-registration-001.md | indexed supporting material | 9fe27bd77117cc61ce13f38b34515eb388ffb6c967bf21bc2e86caf5f7ba71c7 |
 | etc/evidence/t231-s4-console-keyboard-partial-001.md | indexed supporting material | 0f1e5e2b922eefd60cf07e9fdce0e08780d08b48a3f674ff9cc3e1aa546b030c |
@@ -2000,7 +2000,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 572481a8ba819d1f84713ebf1daf2bb35a9266d22eafb17842f37d81a80acf58 |
+| STATUS.md | principal control document | adad8a578aad60d0c91e31cae53f42e08200d0907439106660e54e74c2025ed5 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

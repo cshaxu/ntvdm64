@@ -17,7 +17,7 @@ int main(void)
     fixture_context c; bx_ntvdm_exception_event_v1 e; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 r; bx_ntvdm_command_misc_session s;
     HANDLE pipe_read, pipe_write; DWORD bytes; CHAR received[2];
-    HKEY root,key; HANDLE kb16, keyboard; CHAR directory[MAX_PATH], kb16_path[MAX_PATH], keyboard_path[MAX_PATH]; DWORD disposition;
+    HKEY root,key; HANDLE kb16, keyboard; CHAR directory[MAX_PATH], kb16_path[MAX_PATH], keyboard_path[MAX_PATH], layout[KL_NAMELENGTH]; DWORD disposition;
     memset(&c,0,sizeof(c));event_initialize(&e);bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);bx_ntvdm_command_misc_session_initialize(&s);
     if(!invoke(&c,&e,&cpu,&r,&s,BX_NTVDM_COMMAND_MISC_INIT_CONSOLE)||s.console_initialized!=1u)return 1;
     bPifFastPaste=TRUE;cpu.edx=0u;cpu.ds=0x100u;cpu.esi=0u;cpu.ecx=0x80u;
@@ -41,8 +41,9 @@ int main(void)
     sprintf(kb16_path,"%sKB16.COM",directory);kb16=CreateFileA(kb16_path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,0,NULL);if(kb16==INVALID_HANDLE_VALUE)return 11;
     sprintf(keyboard_path,"%sKEYBOARD.SYS",directory);keyboard=CreateFileA(keyboard_path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,0,NULL);if(keyboard==INVALID_HANDLE_VALUE)return 12;
     if(RegCreateKeyExA(HKEY_CURRENT_USER,"Software\\ntdos64-t231-kbd",0,NULL,0,KEY_ALL_ACCESS,NULL,&root,&disposition)!=ERROR_SUCCESS)return 13;
-    if(RegCreateKeyExA(root,"System\\CurrentControlSet\\Control\\Keyboard Layout\\DosKeybCodes",0,NULL,0,KEY_ALL_ACCESS,NULL,&key,&disposition)!=ERROR_SUCCESS)return 14;
-    if(RegSetValueExA(key,"00000409",0,REG_SZ,(const BYTE *)"US",3u)!=ERROR_SUCCESS)return 15;RegCloseKey(key);
+    if(!GetKeyboardLayoutNameA(layout))return 14;
+    if(RegCreateKeyExA(root,"System\\CurrentControlSet\\Control\\Keyboard Layout\\DosKeybCodes",0,NULL,0,KEY_ALL_ACCESS,NULL,&key,&disposition)!=ERROR_SUCCESS)return 15;
+    if(RegSetValueExA(key,layout,0,REG_SZ,(const BYTE *)"US",3u)!=ERROR_SUCCESS)return 16;RegCloseKey(key);
     if(RegOverridePredefKey(HKEY_LOCAL_MACHINE,root)!=ERROR_SUCCESS)return 16;
     bx_ntvdm_command_misc_set_test_system_directory(directory);bPifFastPaste=FALSE;cpu.edx=1u;cpu.ds=0x100u;cpu.esi=0x100u;cpu.ecx=0x200u;
     if(!invoke(&c,&e,&cpu,&r,&s,BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT)||r.cpu_delta.gpr16_values[2]!=1u||strstr((CHAR *)c.guest+0x1100,"KB16.COM")==NULL){fprintf(stderr,"kbd dx=%u program=%s options=%s\n",r.cpu_delta.gpr16_values[2],c.guest+0x1100,c.guest+0x1200);return 17;}

@@ -143,3 +143,33 @@ zero under `/W4 /WX /MT`: the eight imported OpenNT translation units
 `cmdredir`), the two COMMAND v2 bridges/session units, and all five neutral
 COMMAND shims.  This is a current-source compilation witness derived from the
 formal graph, not a claim that the Ninja executor itself has passed.
+
+## Formal-r11 current-source closure
+
+The formal graph was regenerated from the current manifest in
+`build/M0-T231-S10/formal-r11`. Its 316 actions completed with MSVC x64
+`/MT`: 270 compilation actions, five owned static libraries and 41 linked
+fixture/CLI targets. A subsequent `ninja all` and `ninja -n all` both
+reported `no work to do`.
+
+This closure removed stale historical fixture admissions rather than
+restoring their dependencies: the old boot-namespace composition and three
+XMS-v1 fixtures require provider/ingress objects absent from current product
+modules. Their sources remain historical evidence, but not formal inputs.
+The graph records `advapi32.lib`, `gdi32.lib` and `ntdll.lib` as common public
+host-capability libraries for the direct OpenNT DEM/COMMAND imports.
+
+The shared bridge headers now expose only the selector-blind generic-UD ABI;
+their package-specific session headers are private to implementation units.
+This eliminates the common composition CCPU/SAS collision. The unified
+library also retains one definition each for original `cmdredir.c` pipe
+helpers, `demsrch.c` PSP cleanup and `demgset.c` physical-drive ownership.
+
+All eleven T231 COMMAND fixtures and ten OpenNT DEM fixtures built by this
+graph returned zero. The keyboard fixture creates its temporary registry value
+for the actual public Win32 current-layout name, not a hard-coded US layout.
+The DEM-handle fixture asserts the original `cmdredir.c` unmanaged-handle EOF
+behavior, not the superseded local pipe callback.
+
+This is formal source/build and focused owner-package evidence only. It does
+not prove a native guest has reached `54:xx`, or continuous guest execution.

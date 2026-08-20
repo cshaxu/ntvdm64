@@ -21,7 +21,6 @@ void demGetDPB(void);
 void demGetComputerName(void);
 void demGetDPBList(void);
 
-UINT GetDriveTypeOem(LPCSTR root) { return GetDriveTypeA(root); }
 BOOL GetComputerNameOem(LPSTR name, LPDWORD chars)
 { return GetComputerNameA(name, chars); }
 BOOL GetDiskFreeSpaceOem(LPCSTR root, LPDWORD sectors_per_cluster,
@@ -68,7 +67,7 @@ int bx_ntvdm_demgset_register_dta(USHORT ds, USHORT dta_offset,
     g_current_pdb = current_pdb;
     memset(&g_extended_error, 0, sizeof(g_extended_error));
     pulDTALocation = &g_dta_location;
-    pusCurrentPDB = (PSHORT)&g_current_pdb;
+    pusCurrentPDB = (PUSHORT)&g_current_pdb;
     pExtendedError = &g_extended_error;
     return 1;
 }

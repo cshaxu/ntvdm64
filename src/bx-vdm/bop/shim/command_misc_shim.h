@@ -301,7 +301,7 @@ VOID cmdInitConsole(VOID);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
 #define GetConsoleKeyboardLayoutName GetConsoleKeyboardLayoutNameA
 
-UINT demGetPhysicalDriveType(UCHAR drive);
+UCHAR demGetPhysicalDriveType(UCHAR drive);
 UINT GetDriveTypeOem(LPSTR root);
 DWORD GetEnvironmentVariableOem(LPSTR name, LPSTR buffer, DWORD bytes);
 BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value);

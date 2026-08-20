@@ -56,7 +56,7 @@ typedef struct _DOSWOWDATA {
 extern ULONG UNALIGNED *pulDTALocation;
 typedef bx_ntvdm_demhndl_extended_error *PDEMEXTERR;
 
-UINT GetDriveTypeOem(LPCSTR root);
+UINT GetDriveTypeOem(LPSTR root);
 BOOL GetComputerNameOem(LPSTR name, LPDWORD chars);
 BOOL GetDiskFreeSpaceOem(LPCSTR root, LPDWORD sectors_per_cluster,
     LPDWORD bytes_per_sector, LPDWORD free_clusters,

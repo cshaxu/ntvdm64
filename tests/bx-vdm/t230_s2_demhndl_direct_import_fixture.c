@@ -204,7 +204,8 @@ int main(void)
     if (!invoke(&state, &direct, &event, &cpu, &result,
             BX_NTVDM_DEMHNDL_PIPE_DATA_EOF) ||
         (result.eflags_write_mask & BX_NTVDM_CPU_RESULT_V2_EFLAGS_ZF) == 0u ||
-        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_ZF) == 0u) return 9;
+        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_ZF) != 0u ||
+        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u) return 9;
     if (!invoke(&state, &direct, &event, &cpu, &result,
             BX_NTVDM_DEMHNDL_PIPE_EOF)) return 10;
 

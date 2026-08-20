@@ -40,6 +40,7 @@ foreach ($input in @($manifestPath, $vs, (Join-Path $root 'tools\build\Project-B
     if (!(Test-Path -LiteralPath $input -PathType Leaf)) { throw "Required graph input missing: $input" }
 }
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+$requiredPlatformLibraries = @('advapi32.lib', 'gdi32.lib', 'ntdll.lib')
 if ($InstructionHistoryDiagnostic -or $InstructionHistoryProvenanceDiagnostic) {
     $mantle = @($manifest.modules | Where-Object { $_.name -eq 'bx-mantle' })
     if ($mantle.Count -ne 1) { throw 'Diagnostic graph requires one bx-mantle module.' }
@@ -107,6 +108,7 @@ $buildManifest = [ordered]@{
     ninja = [ordered]@{ path = $ninja.Source; version = (& $ninja.Source --version).Trim() }
     architecture = 'x64'; runtimeLibrary = '/MT'; cpuConfiguration = $manifest.cpuConfiguration
     modules = $manifest.modules; fixtures = $manifest.fixtures; targets = $manifest.targets
+    requiredPlatformLibraries = $requiredPlatformLibraries
     forbiddenInputs = $manifest.forbiddenInputs
     instructionHistoryDiagnostic = [bool]$InstructionHistoryDiagnostic
     instructionHistoryProvenanceDiagnostic = [bool]$InstructionHistoryProvenanceDiagnostic
@@ -172,11 +174,12 @@ foreach ($entry in @($manifest.fixtures) + @($manifest.targets)) {
     $output = 'bin/' + $entry.name + '.exe'
     $libraries = @($entry.libraries | ForEach-Object { if (!$moduleLibraries.ContainsKey($_)) { throw "Target $($entry.name) references unknown module $_" }; $moduleLibraries[$_] })
     $linkResponse = Join-Path $build ($output + '.rsp')
-    $linkInputs = @($object) + $libraries + @($entry.platformLibraries)
+    $platformLibraries = @($entry.platformLibraries + $requiredPlatformLibraries | Select-Object -Unique)
+    $linkInputs = @($object) + $libraries + $platformLibraries
     [IO.File]::WriteAllText($linkResponse, (($linkInputs -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
     $graph.Add('build ' + $object + ': ' + $rule + ' ' + $source)
     $graph.Add('build ' + $output + ': link ' + $object + ' ' + ($libraries -join ' '))
-    $graph.Add('  platform = ' + (@($entry.platformLibraries) -join ' '))
+    $graph.Add('  platform = ' + ($platformLibraries -join ' '))
     $graph.Add('')
     $outputs.Add($output)
 }

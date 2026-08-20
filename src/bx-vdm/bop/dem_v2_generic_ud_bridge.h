@@ -5,7 +5,7 @@
  * bop-v1 provider: a recognized DEM window is accepted only by the imported
  * OpenNT DEM session, never by a legacy fallback. */
 
-#include "shim/dem_native_session_shim.h"
+#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
 
 /* Recognition is exported separately so the composition entry can make DEM
  * ownership terminal before any other BOP family is considered. */

@@ -135,3 +135,13 @@ This witness does not authorize deletion of all `bop-v1` material: other BOP
 families and retained historical probes remain outside the DEM mirror.  The
 remaining S10 work is the exact superseded-DEM reference deletion audit and
 the separately bounded native observation required by `STATUS.md`.
+
+## Current shared-closure revalidation
+
+The later `formal-r11` full-module graph source-builds the current DEM and
+COMMAND owners together, then has no remaining Ninja action. Its ten DEM
+fixtures all return zero after the shared-owner merge. This revalidation
+corrected one retained DEM type mismatch: `pusCurrentPDB` is OpenNT's
+`PUSHORT`, not a signed pointer. DEM pipe checks now call directly imported
+`cmdredir.c` helpers; no DEM test-local pipe provider remains in the product
+library.

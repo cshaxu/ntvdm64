@@ -451,11 +451,6 @@ int VrReadNamedPipe(HANDLE file, LPVOID buffer, DWORD count, DWORD *read_out, DW
 { (void)file; (void)buffer; (void)count; if (read_out) *read_out = 0u; if (error_out) *error_out = ERROR_CALL_NOT_IMPLEMENTED; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return 0; }
 int VrWriteNamedPipe(HANDLE file, LPVOID buffer, DWORD count, DWORD *written_out)
 { (void)file; (void)buffer; (void)count; if (written_out) *written_out = 0u; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return 0; }
-int cmdPipeFileDataEOF(HANDLE file, BOOL *eof_out)
-{ bx_ntvdm_demhndl_active_call *active = active_call(); if (eof_out) *eof_out = FALSE; return active != NULL && active->call->pipe_data_eof != NULL ? active->call->pipe_data_eof(active->call->pipe_state, file, eof_out) : 0; }
-int cmdPipeFileEOF(HANDLE file)
-{ bx_ntvdm_demhndl_active_call *active = active_call(); return active != NULL && active->call->pipe_eof != NULL ? active->call->pipe_eof(active->call->pipe_state, file) : 0; }
-
 int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
     void (*body)(void))
 {

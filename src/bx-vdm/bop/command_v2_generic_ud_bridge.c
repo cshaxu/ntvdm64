@@ -1,4 +1,5 @@
 #include "command_v2_generic_ud_bridge.h"
+#include "shim/command_native_session_shim.h"
 
 int bx_ntvdm_command_v2_generic_ud_recognizes(
     const struct bx_ntvdm_generic_ud_event_v1 *event)

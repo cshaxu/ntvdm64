@@ -24,9 +24,6 @@ BOOL RemoveDirectoryOem(LPSTR name)
 { LPSTR ansi = ansi_copy(name); BOOL result; if (!ansi) return FALSE; result = RemoveDirectoryA(ansi); free(ansi); return result; }
 BOOL SetCurrentDirectoryOem(LPSTR name)
 { LPSTR ansi = ansi_copy(name); BOOL result; if (!ansi) return FALSE; result = SetCurrentDirectoryA(ansi); free(ansi); return result; }
-BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value)
-{ LPSTR ansi_name = ansi_copy(name); LPSTR ansi_value = value == NULL ? NULL : ansi_copy(value); BOOL result; if (!ansi_name || (value != NULL && !ansi_value)) { free(ansi_name); free(ansi_value); return FALSE; } result = SetEnvironmentVariableA(ansi_name, ansi_value); free(ansi_name); free(ansi_value); return result; }
-
 int bx_ntvdm_demdir_invoke(bx_ntvdm_demhndl_call *call)
 {
     void (*body)(void) = NULL;

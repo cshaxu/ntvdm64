@@ -32,7 +32,7 @@ typedef struct _DOSSFT { WORD SFT_Ref_Count; WORD SFT_Mode; WORD SFT_Attr;
     WORD SFT_Flags; ULONG SFT_Devptr; ULONG SFT_NTHandle; } DOSSFT, *PDOSSFT;
 typedef struct _DOSSF { WORD SFCount; ULONG SFLink; DOSSFT SFTable[1]; } DOSSF, *PDOSSF;
 typedef struct _DOSPDB { ULONG PDB_JFN_Pointer; WORD PDB_JFN_Length; } DOSPDB, *PDOSPDB;
-extern PSHORT pusCurrentPDB;
+extern PUSHORT pusCurrentPDB;
 
 enum bx_ntvdm_demfile_service {
     BX_NTVDM_DEMFILE_CHMOD = 0x01u,
