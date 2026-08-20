@@ -1,3 +1,0 @@
-#include "bop-v1/bx_ntvdm_cmd_keyboard_layout_service.h"
-#include <stdio.h>
-int main(void) { bx_ntvdm_exception_event_v1 e={BX_NTVDM_EXCEPTION_ABI_MAGIC,BX_NTVDM_EXCEPTION_ABI_VERSION,sizeof(e),BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION,0,6,0,0,0x5d9u}; bx_ntvdm_cpu_state_v1 c; bx_ntvdm_instruction_window_v1 w; bx_ntvdm_cpu_result_v2 r; const uint8_t bytes[]={0xc4u,0xc4u,0x54u,0x0eu}; bx_ntvdm_cpu_state_v1_initialize(&c,BX_NTVDM_CPU_EXECUTION_REAL); c.edx=0xffffu; bx_ntvdm_instruction_window_v1_capture(&w,bytes,4u); if(!bx_ntvdm_cmd_keyboard_layout_v1_dispatch(&e,&c,&w,&r)||r.resume_rip!=0x5ddu||r.cpu_delta.gpr16_write_mask!=(1u<<2u)||r.cpu_delta.gpr16_values[2]!=0u) return 1; puts("bx-ntvdm keyboard-layout: fixed EN-US no-KB16 response verified"); return 0; }

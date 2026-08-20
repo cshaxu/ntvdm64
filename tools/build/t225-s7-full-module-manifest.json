@@ -204,9 +204,9 @@
         "src/bx-vdm/bop/opennt/command/cmdexec.c",
         "src/bx-vdm/bop/opennt/command/cmdkeyb.c",
         "src/bx-vdm/bop/opennt/command/cmdredir.c",
-    "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
-    "src/bx-vdm/bop/command_v2_generic_ud_bridge.c",
-    "src/bx-vdm/bop/command_v2_runtime_session.c",
+        "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/command_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/command_v2_runtime_session.c",
         "src/bx-vdm/bop/dem_v2_composition_bridge.c",
         "src/bx-vdm/bop/dem_v2_runtime_session.c",
         "src/bx-vdm/bop/dem_v2_startup_composition.c",
@@ -225,8 +225,8 @@
         "src/bx-vdm/bop/shim/demmisc_shim.c",
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
-    "src/bx-vdm/bop/shim/command_misc_shim.c",
-    "src/bx-vdm/bop/shim/command_native_session_shim.c",
+        "src/bx-vdm/bop/shim/command_misc_shim.c",
+        "src/bx-vdm/bop/shim/command_native_session_shim.c",
         "src/bx-vdm/bop/shim/command_config_shim.c",
         "src/bx-vdm/bop/shim/command_environment_shim.c",
         "src/bx-vdm/bop/shim/command_binary_shim.c",
@@ -281,38 +281,102 @@
     {
       "name": "t230-s15-v2-runtime-session-fixture",
       "source": "tests/bx-vdm/t230_s15_v2_runtime_session_fixture.c",
-      "libraries": [ "bx-vdm", "bx-mantle", "bx-core" ],
-      "platformLibraries": [ "libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "advapi32.lib", "gdi32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib" ]
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
     },
     {
       "name": "t230-s15-direct-host-session-fixture",
       "source": "tests/bx-vdm/t230_s15_direct_host_session_fixture.c",
-      "libraries": [ "bx-vdm", "bx-mantle", "bx-core" ],
-      "platformLibraries": [ "libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib" ]
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
     },
     {
       "name": "t230-s15-checked-ram-fixture",
       "source": "tests/bx-mantle/t230_s15_checked_ram_fixture.cc",
-      "libraries": [ "bx-core", "bx-mantle" ],
-      "platformLibraries": [ "libcmt.lib", "libvcruntime.lib", "libucrt.lib", "legacy_stdio_definitions.lib", "kernel32.lib", "bcrypt.lib", "ntdll.lib", "user32.lib" ]
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
     },
     {
       "name": "t230-s6-demgset-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s6_demgset_direct_import_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "gdi32.lib", "user32.lib", "ntdll.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t230-s5-demsrch-fcb-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s5_demsrch_fcb_direct_import_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "gdi32.lib", "user32.lib", "ntdll.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t230-s4-demdir-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s4_demdir_direct_import_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "gdi32.lib", "user32.lib", "ntdll.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t230-s3-demfile-direct-import-fixture",
@@ -574,87 +638,10 @@
       ]
     },
     {
-      "name": "t225-s55-command-image-materialization-fixture",
-      "source": "tests/bx-vdm/t225_s55_command_image_materialization_fixture.c",
-      "libraries": [
-        "bx-vdm"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
       "name": "t225-s19-dem-package-lifecycle-fixture",
       "source": "tests/bx-vdm/bx_ntvdm_dem_package_family_v1_test.c",
       "libraries": [
         "bx-vdm"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t225-s27-command-parent-return-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_cmd_get_next_service_test.c",
-      "libraries": [
-        "bx-vdm",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t225-s27-command-parent-return-composition-fixture",
-      "source": "tests/bx-vdm/t225_s27_command_parent_return_composition_fixture.c",
-      "libraries": [
-        "bx-core",
-        "bx-mantle",
-        "bx-vdm",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t225-s20-command-package-family-fixture",
-      "source": "tests/bx-vdm/t225_s20_command_package_family_fixture.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -766,50 +753,98 @@
     {
       "name": "t231-s4-command-console-keyboard-direct-fixture",
       "source": "tests/bx-vdm/t231_s4_command_console_keyboard_direct_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t231-s5-command-start-info-direct-fixture",
       "source": "tests/bx-vdm/t231_s5_command_start_info_direct_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t231-s5-command-config-direct-fixture",
       "source": "tests/bx-vdm/t231_s5_command_config_direct_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t231-s5-command-init-environment-direct-fixture",
       "source": "tests/bx-vdm/t231_s5_command_init_environment_direct_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t231-s6-command-check-binary-direct-fixture",
       "source": "tests/bx-vdm/t231_s6_command_check_binary_direct_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t231-s7-command-get-next-direct-fixture",
       "source": "tests/bx-vdm/t231_s7_command_get_next_direct_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t231-s8-command-lifecycle-direct-fixture",
       "source": "tests/bx-vdm/t231_s8_command_lifecycle_direct_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t231-s9-command-exit-direct-fixture",
       "source": "tests/bx-vdm/t231_s9_command_exit_direct_fixture.c",
-      "libraries": [ "bx-vdm" ],
-      "platformLibraries": [ "kernel32.lib", "user32.lib", "advapi32.lib" ]
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
     },
     {
       "name": "t230-s7-demdasd-ioctl-direct-import-fixture",
@@ -1166,302 +1201,8 @@
       ]
     },
     {
-      "name": "t226-s3-command-bootstrap-provider-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_bootstrap_provider_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-bootstrap-session-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_bootstrap_profile_session_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-console-keyboard-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_console_keyboard_provider_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-environment-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_initial_environment_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-launch-execution-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_launch_execution_provider_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-lifecycle-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_lifecycle_provider_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-child-redirection-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_child_redirection_package_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
       "name": "t226-s3-command-cmdinfo-fixture",
       "source": "tests/bx-vdm/bx_ntvdm_cmdinfo_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-current-dir-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_cmd_current_dir_service_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-keyboard-layout-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_cmd_keyboard_layout_service_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-set-info-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_cmd_set_info_service_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-launch-envelope-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_cmd_launch_envelope_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-comspec-bootstrap-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_cmd_comspec_bootstrap_service_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-plane-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_plane_v1_test.c",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t226-s3-command-provider-fixture",
-      "source": "tests/bx-vdm/bx_ntvdm_command_provider_v1_test.c",
       "libraries": [
         "bx-vdm",
         "bx-mantle",

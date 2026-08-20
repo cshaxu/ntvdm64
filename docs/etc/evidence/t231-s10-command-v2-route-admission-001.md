@@ -74,5 +74,26 @@ space-separated form as an invalid forced-include argument.
 The installed Ninja 1.13.2 runners still become idle without executing child
 actions in this environment.  This record therefore does **not** call the
 formal graph a passing build.  S10 remains active pending a runner resolution,
-the full registry-capable matrix, final product-v1 deletion and a bounded
-native guest observation.
+the full registry-capable matrix and a bounded native guest observation.
+
+## COMMAND v1 direct implementation retirement
+
+The 51 tracked `bop-v1/bx_ntvdm_cmd_*` and `bop-v1/bx_ntvdm_command_*`
+implementation/header files have been physically removed.  The 18
+COMMAND-specific v1 fixtures that invoked those owners have also been removed
+from the tree, and the formal Ninja manifest contains no `bop-v1` source or
+COMMAND-v1 fixture input.  The active source-built route is therefore the
+OpenNT mirror plus neutral v2 shims; v1 is not an alternate product path.
+
+Fresh `build/M0-T231-S10/formal-r3` generation accepted that manifest and
+`ninja -n all` enumerated its complete 382-edge module/fixture/CLI graph,
+including the final `ntdos64-native.exe` link, without a missing v1 source.
+This is graph-admission evidence only: the runner's actual action-dispatch
+stall remains separately recorded above.
+
+Several pre-governance composition wrappers remain under `bop-v1` because
+they co-own other historical BOP-family experiments.  Their references to the
+removed COMMAND APIs are now explicitly a legacy-debt diagnostic, not a build
+or product route.  They must be either removed as a whole historical
+composition slice or separately rehomed before any such experiment is made
+buildable; S10 neither restores nor invokes them.
