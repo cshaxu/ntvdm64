@@ -9,6 +9,7 @@ void cmdGetCurrentDir(void);
 void cmdSetInfo(void);
 void cmdGetKbdLayout(void);
 void cmdGetStdHandle(void);
+void cmdGetStartInfo(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -19,6 +20,7 @@ PCHAR pSCS_ToSync;
 BYTE *pIsDosBinary;
 WORD *pFDAccess;
 BOOL bPifFastPaste;
+ULONG DosSessionId;
 BOOL fSoftpcRedirection;
 void nt_std_handle_notification(BOOL enabled) { (void)enabled; }
 
@@ -91,6 +93,7 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
          call->service == BX_NTVDM_COMMAND_MISC_SET_INFO ||
          call->service == BX_NTVDM_COMMAND_MISC_INIT_CONSOLE ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT ||
+         call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO ||
          call->service == 0x06u) &&
         call->boundary != NULL && bx_ntvdm_exception_event_v1_valid(call->boundary) &&
         call->cpu != NULL && bx_ntvdm_cpu_state_v1_valid(call->cpu) &&
@@ -306,12 +309,15 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         body = cmdInitConsole;
     else if (call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT)
         body = cmdGetKbdLayout;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO)
+        body = cmdGetStartInfo;
     else if (call->service == 0x06u)
         body = cmdGetStdHandle;
     else
         body = cmdSaveWorld;
     IsFirstCall = call->first_call ? TRUE : FALSE;
     VDMForWOW = call->vdm_for_wow ? TRUE : FALSE;
+    DosSessionId = call->session != NULL ? call->session->dos_session_id : 0u;
     memset(lpszComSpec, 0, sizeof(lpszComSpec));
     cbComSpec = 0u;
     bx_ntvdm_cpu_result_v2_pass_through(call->result);

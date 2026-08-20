@@ -19,6 +19,7 @@
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SAVE_WORLD 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE 1
+#define BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO 1
 #include "../../shim/command_misc_shim.h"
 
 #if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
@@ -895,6 +896,8 @@ VOID cmdUpdateCurrentDirectories(BYTE CurDrive)
     }
 }
 
+#endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
+
 /* This SVC function tells command.com, if the VDM was started without an
  * existing console. If so, on finding a TSR, command.com will return
  * back to GetNextVDMCommand, rather than putting its own popup.
@@ -905,9 +908,10 @@ VOID cmdUpdateCurrentDirectories(BYTE CurDrive)
  *         Client (AL) = 1 if started with new console
  */
 
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdGetStartInfo (VOID)
 {
     setAL((BYTE) (DosSessionId ? 1 : 0));
     return;
 }
-#endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
+#endif /* BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO */

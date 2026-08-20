@@ -82,7 +82,8 @@ enum bx_ntvdm_command_misc_service {
     BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR = 0x04u,
     BX_NTVDM_COMMAND_MISC_SET_INFO = 0x05u,
     BX_NTVDM_COMMAND_MISC_INIT_CONSOLE = 0x09u,
-    BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT = 0x0eu
+    BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT = 0x0eu,
+    BX_NTVDM_COMMAND_MISC_GET_START_INFO = 0x10u
 };
 
 typedef struct bx_ntvdm_command_misc_session {
@@ -93,6 +94,7 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t is_dos_binary_address;
     uint32_t fd_access_address;
     uint32_t console_initialized;
+    uint32_t dos_session_id;
     uint32_t redirection_token;
     REDIRCOMPLETE_INFO redirection_info;
     HANDLE handle_tokens[64];
@@ -183,6 +185,7 @@ extern PCHAR pSCS_ToSync;
 extern BYTE *pIsDosBinary;
 extern WORD *pFDAccess;
 extern BOOL bPifFastPaste;
+extern ULONG DosSessionId;
 
 #define getDX() bx_ntvdm_command_misc_get_dx()
 #define getBX() bx_ntvdm_command_misc_get_bx()
