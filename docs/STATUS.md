@@ -2,109 +2,15 @@
 
 ## Current Work
 
-> **Current effective packet: M0 T231 S10.** All T231 owner slices have local Direct witnesses; whole-package routing, legacy retirement and bounded native verification remain.
+> **No active packet.** M0 T231 is closed; see the current work record below.
 
-**Active: M0 T231 S10 -- COMMAND whole-package closure.**
+## Current Work Record
 
-## Active Packet
-
-| Field | Required record |
-| --- | --- |
-| Identifier Mode | M0 T231 S10, Ordinary Mode. |
-| Admission And Approval | Owner direction: “按照规划，实现COMMAND族的所有BOP，采用原生OpenNT源代码文件结构和代码结构，尽可能采用相同逻辑，并彻底清理该族的v1实现。” |
-| Objective | Close all seventeen COMMAND services: execute the full local regression matrix, bind the original owner route, remove product COMMAND-v1 implementation routes, rebuild the formal source graph and perform one bounded native observation. |
-| Non-goals | No trace-selected leaf patch, no Bochs intrusion beyond registered mechanics, no guest-image mutation, and no claim of unrestricted multi-program guest completion. |
-| Reference Baseline | Completed T231 S1--S9 witnesses; original `cmddisp.c` service table; current route/runtime inventory; v1 comparison sources and formal module manifest. |
-| Files And ABI Surface | all admitted OpenNT COMMAND mirrors, neutral shims, common BOP routing, v1 retirement map, full fixture matrix, formal Ninja graph and bounded native probe inputs. |
-| Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding boundaries, original OpenNT ordering/layout/failure behavior, formal Ninja and documentation governance. |
-| Verification | All 17 local fixtures zero-exit through original owner bodies; no product `bop-v1` COMMAND implementation route remains; formal Ninja source build succeeds; one bounded native observation enters the v2 COMMAND route without v1 fallback. |
-| Expected Markers | No service is omitted or replaced by a trace leaf patch; every remaining divergence is inline-documented; v1 is comparison-only or physically removed from the product graph. |
-| Asset Needs | Pinned OpenNT source, common ingress/runtime map, checked guest-memory ABI, formal Ninja graph, bounded native input bundle and retained v1 comparison sources. |
-| Reporting Requirements | Distinguish all-local source parity, runtime route closure and bounded native observation; do not claim continuous guest execution unless separately proved. |
-| Stop Conditions | A missing runtime binding, formal graph failure, a required Bochs intrusion, or a native semantic divergence is recorded without silently retaining v1 fallback. |
-| Exit Criteria | The complete T231 plan's S10 exit criteria are met; only then may T231 close. |
-| Original Owner Request | “S2把所有简单的BOP解除注释，局部测试完成code complete；每个疑难BOP自己独立出一个S任务来做。” |
-| Similar-Issue Sweep | all `54:00..54:10` rows, `cmddisp.c`, source-mirror manifest, common ingress/provider registry, v1 route/tree/manifests, all T231 fixtures, formal Ninja target and bounded native observation. |
-
-> **T231 S1 progress:** [COMMAND owner-package plan](etc/operations/m0-t231-command-owner-package-plan-001.md), [service ledger](etc/operations/m0-t231-s1-command-service-ledger-001.md), and the [source-mirror manifest](../src/bx-vdm/bop/opennt/command/command-import-manifest.md) establish the original 17-slot package boundary. The admitted `Sync-OpenNtCommandMirror.ps1` copy verified byte-identical hashes for all fifteen listed original source/header inputs. Each remains outside the build until its own neutral COMMAND shim admission; S2 is the first such admission.
-
-> **T231 S2 progress:** [the cmdmisc admission boundary](etc/operations/m0-t231-s2-cmdmisc-admission-boundary-001.md) and [Direct-import witness](etc/evidence/t231-s2-command-cmdmisc-direct-import-001.md) record the first two original COMMAND bodies (`54:02`, `54:04`), their scoped shim and zero-exit local MSVC witness. This is not a full COMMAND or native-guest claim.
-
-> **T231 S3 progress:** [the CMDINFO registration witness](etc/evidence/t231-s3-command-cmdmisc-registration-001.md) records direct original `54:03`/`54:05`, the checked persistent COMMAND session and its zero-exit local MSVC fixture. It does not claim later CMDINFO consumer or engine-route closure.
-
-> **T231 S4 complete:** [console/keyboard witness](etc/evidence/t231-s4-console-keyboard-partial-001.md) records original `54:09`, both `54:0E` fallback and success paths, and the complete `54:06` standard-handle/pipe lifecycle through the original `cmdredir.c` bodies.
-
-> **T231 S5 partial:** [start-info witness](etc/evidence/t231-s5-command-start-info-direct-001.md) records direct original `54:10` (`cmdGetStartInfo`) through the persistent COMMAND session.
-
-> **T231 S5 partial:** [configuration witness](etc/evidence/t231-s5-command-config-direct-001.md) records original `cmdconf.c` `54:0C`/`54:0D`: CONFIG.SYS/AUTOEXEC.NT preprocessing, checked 64-byte OEM output, temporary-file lifecycle and the original terminal failure path.
-
-> **T231 S5 complete:** [initial-environment witness](etc/evidence/t231-s5-command-init-environment-direct-001.md) records direct original `cmdenv.c` `54:0F` sizing, COMSPEC/WINDIR filtering, OEM multi-string output and non-initialization no-op.  Together with the three preceding S5 records, all four S5 endpoints have zero-exit focused witnesses.
-
-> **T231 S6 complete:** [binary-admission witness](etc/evidence/t231-s6-command-check-binary-direct-001.md) records original `cmdexec.c` `54:07`, including host binary classification, DOS bypass, checked CMDINFO handoff, DS/ES typed delta and guest writeback.
-
-> **T231 S7 complete:** [direct `cmdGetNextCmd` witness](etc/evidence/t231-s7-command-get-next-direct-001.md) records the original `54:01` body, declared CLI command-source seam, original environment-size/re-entry contract, `CMDINFO` handoff and exhausted-source terminal behavior.  It is local Direct source parity, not host-child or native-guest closure.
-
-> **T231 S8 complete:** [direct COMMAND lifecycle witness](etc/evidence/t231-s8-command-lifecycle-direct-001.md) records the original coupled `54:08`/`54:0A`/`54:0B` bodies, the sole CCPU-thread/process-global-handle replacement seam, public Win32 child wait/exit behavior, tokenized standard-handle projection and zero-exit state-machine regression.  It is local Direct source parity, not native-guest closure.
-
-> **T231 S9 complete:** [direct `cmdExitVDM` witness](etc/evidence/t231-s9-command-exit-direct-001.md) records original `54:00` through the existing typed controlled-stop seam with no resume/write result.  It is local Direct source parity, not whole COMMAND closure.
-
-> **T231 S10 progress:** [COMMAND v2 route admission](etc/evidence/t231-s10-command-v2-route-admission-001.md) records adapter-only `54:00..10` ownership, original `cmddisp.c` table admission, the rebuilt local Direct matrix, the native engine's bounded copied launch-input bind for original `54:01`, and physical deletion of the full COMMAND-v1 implementation/fixture/composition closure (including the former CMDINFO codec). Fresh `formal-r11` completes all 316 MSVC x64 `/MT` Ninja actions and has no remaining work; its current outputs pass all eleven COMMAND and ten OpenNT DEM focused fixtures. The stale boot-namespace/XMS-v1 fixtures are comparison evidence, not current formal inputs. Bounded native observation remains open; this is not T231 closure.
-
-> **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
-
-> **T230 S1 P1:** [203-entry Chinese BOP implementation tracker](etc/operations/opennt-bop-implementation-tracker-001.md) records instruction entry, original handler, high-level purpose, actual strict status and historical disposition; it establishes zero fully complete entries at this baseline.
-
-> **T230 S1 P2:** [50:00 OpenNT-shaped v2 provider evidence](etc/evidence/t230-s1-bop-50-00-opennt-shaped-v2-provider-evidence-001.md) records the smallest source-derived seam, all divergences and focused Direct/Readonly regression. It is an implementation practice, not DEM, native or T230 closure.
-
-> **T230 S1 P3:** [50:00--50:02 Direct parity scope correction](etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md) records the owner decision: v2 is Direct-only OpenNT source parity; it contains no Readonly, Overlay or Virtual behavior, and v1 remains retained.
-
-> **T230 S1 P4:** [DEM common-foundation witness](etc/evidence/t230-s1-p4-dem-common-foundation-witness-001.md) records the `opennt/dem` / neutral-shim layout and initial foundation. The active common files and dispatcher have subsequently been replaced by direct OpenNT translation-unit mirrors; see the [S10 correction record](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md). It is not full DEM or native closure.
-
-> **T230 S2:** [direct `demhndl.c` import map](etc/evidence/t230-s2-demhndl-direct-import-map-001.md) records the source baseline, the six adjacent imported-file divergences, the scoped token/guest-memory/typed-result seam, all eight local service invocations and the zero-exit formal Ninja witness. It is local Direct source parity only—not selector routing, Redirector/COMMAND pipe composition, INT 24 composition or native guest proof.
-
-> **T230 S3:** [direct `demfile.c` / `demlabel.c` import map](etc/evidence/t230-s3-demfile-direct-import-map-001.md) records the direct imported files, the neutral OEM/guest/token seam, all seven file services plus the safe volume-label failure branch, and the zero-exit formal Ninja witness. It is local Direct source parity only—not Redirector, VDD process-table, selector-routing or native guest proof.
-
-> **T230 S4:** [direct `demdir.c` import map](etc/evidence/t230-s4-demdir-direct-import-map-001.md) records the imported directory owner, its checked CDS/OEM seam, all four local Direct service witnesses and the zero-exit formal Ninja result. It is local source parity only—not global DOS current-directory or native guest proof.
-
-> **T230 S5:** [direct `demsrch.c` / `demfcb.c` import map](etc/evidence/t230-s5-demsrch-demfcb-direct-import-map-001.md) records the two imported source files, the x64-safe search/token/guest-buffer seams, every owned service's focused Direct witness, and the zero-exit formal Ninja result. It is local source parity only—not whole DEM, selector routing, or native guest proof.
-
-> **T230 S6:** [direct `demgset.c` import map](etc/evidence/t230-s6-demgset-direct-import-map-001.md) records the imported source, 32-bit guest DPB/DTA and Direct-clock seams, every owned service's focused Direct witness, and the zero-exit formal Ninja result. It is local source parity only—not whole DEM, raw-DASD/IOCTL ownership, selector routing, or native guest proof.
-
-> **T230 S7:** [direct `demdasd.c` / `demioctl.c` import map](etc/evidence/t230-s7-demdasd-demioctl-direct-import-map-001.md) records the direct owner mirrors, their formal static-library closure and the bounded IOCTL/absolute-disk local witness. Raw-device transfer remains an explicit OpenNT host-capability dependency, not a bx-vdm implementation claim.
-
-> **T230 S8:** [direct `demerror.c` / `demlock.c` import map](etc/evidence/t230-s8-demerror-demlock-direct-import-map-001.md) records the original owner mirrors, persistent fixed hard-error guest layouts, the explicit unbound retry failure and the temporary-file lock/unlock witness. It is local Direct source parity only—not an INT 24, whole dispatcher or native guest claim.
-
-> **T230 S9:** [direct `demmisc.c` import map](etc/evidence/t230-s9-demmisc-direct-import-map-001.md) records the complete imported lifecycle owner, its x86/x64 loader-pointer seam and the 13-service Direct fixture. It is local Direct source parity only—not whole DEM or native guest closure.
-
-> **T230 S10 (local Direct matrix):** [DEM Direct matrix and legacy exclusion](etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md) records the fresh direct OpenNT `demdisp.c` 73-slot dispatcher fixture, all eight imported-owner Direct fixtures, and the removal of the source-derived CWD experiment from the formal `bx-vdm` module. It does not claim bounded native observation or final legacy deletion.
-
-> **T230 S10 (former native Direct gap):** [native Direct DEM composition gap](etc/research/t230-s10-native-direct-dem-composition-gap-001.md) preserves the admission evidence. The engine binding and v1 DEM retirement were completed by S15/S16; the final bounded observation is recorded below.
-
-> **T230 S11--S16:** [whole-DEM completion sequence](etc/operations/m0-t230-dem-completion-sequence-002.md) makes individual original-slot semantics, v1 DEM-route retirement and native checked-memory composition mandatory T230 exit criteria. The pre-existing S10 table-compilation fixture is not a substitute for those requirements.
-
-> **T230 S11:** [73-slot local-execution audit](etc/evidence/t230-s11-dem-73-slot-local-execution-audit-001.md) proves imported ownership and owner-level local witnesses for every slot.
-
-> **T230 S12--S14:** [shared dispatcher local matrix](etc/evidence/t230-s12-s14-shared-demdispatch-local-matrix-001.md) proves every owner fixture now enters the original `DemDispatch` table; it explicitly leaves v1-route retirement and native checked-memory composition to S15--S16.
-
-> **T230 S15 P1:** [v1 DEM route-retirement map](etc/evidence/t230-s15-p1-v1-dem-route-retirement-map-001.md) identifies the real engine/runtime dependency boundary and admits P2--P5; it does not claim v1 retirement.
-
-> **T230 S15 P2:** [checked-RAM transport](etc/evidence/t230-s15-p2-checked-ram-transport-001.md) is source-built and locally verified for active-stage bounds and lifecycle. It remains selector-blind and does not itself bind DEM.
-
-> **T230 S15 P3:** [v2 Direct host session](etc/evidence/t230-s15-p3-v2-direct-host-session-001.md) binds token ownership and checked RAM to the v2 native DEM session with zero-exit local evidence and no v1 input.
-
-> **T230 S15 P4 (local composition):** [v2 DEM composition entry](etc/evidence/t230-s15-p4-v2-dem-composition-entry-001.md) source-builds the v2-only external generic-UD entry and proves its bound/non-DEM/unbound behavior. The former action-ABI initializer omission was corrected; S16 provides the resulting native evidence.
-
-> **T230 S15 P4 (startup replacement):** the native engine calls the v2 startup composition rather than `bop-v1`'s composition runtime. The initial pre-stage rejection (`terminal=2 detail=3`) exposed an omitted selector-blind mechanical-action ABI initializer; after correction, the identical primary input enters the machine (`terminal=4 detail=0`).
-
-> **T230 S15 P4 (legacy DEM deletion):** all 140 tracked handwritten
-> `bop-v1/bx_ntvdm_dem_*` implementation/header files are deleted after a
-> source and formal-manifest exclusion audit.  The retained `bop-v1` directory
-> is now non-DEM historical debt only; this deletion does not assert the v2
-> 73-slot runtime/native closure.
-
-> **T230 S15 P4 (post-deletion matrix):** the formal Ninja graph built and ran all 14 T230 OpenNT-DEM fixtures with zero exit, including the original 73-slot dispatcher table and v2 copied-UD composition.
-
-> **T230 S16 (bounded native Direct observation):** [native Direct DEM observation](etc/evidence/t230-s16-native-direct-dem-observation-001.md) shows real guest `50:11` reaching the v2 Direct route and resuming with no v1 DEM fallback. The next `12:00` and subsequent machine-level #UD sequence are non-DEM, explicitly outside T230 rather than a transferred DEM obligation.
+**No active M/T/S packet.** M0 T231 closed as the COMMAND `54:00..10`
+code-complete/v2 product-route package; see the
+[T231 closure](history/m0-t231-closure-20260820.md). The next candidate is
+OpenNT XMS owner-package completion in [Queue](QUEUE.md). Native `54:xx`
+reachability remains transferred to the queued bx machine/BIOS owner package.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
