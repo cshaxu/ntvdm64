@@ -6,13 +6,11 @@
  *  YST 14-Jan_1993 Created
  */
 
-#include "cmd.h"
-#include <winconp.h>
-#include <cmdsvc.h>
-#include <softpc.h>
-#include <mvdm.h>
-#include <ctype.h>
-#include <string.H>
+/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdkeyb.c.
+ * Divergence: the historical CCPU/SoftPC include closure is unavailable to
+ * the standalone CLI.  command_misc_shim.h exposes only the original
+ * register, checked guest-buffer and console capability spellings. */
+#include "../../shim/command_misc_shim.h"
 #include "cmdkeyb.h"
 
 CHAR szPrev[5] = "US";
@@ -71,6 +69,10 @@ VOID cmdGetKbdLayout( VOID )
   DWORD  cbData;
   OFSTRUCT  ofstr;
 
+  /* Divergence: this old local was retained by the imported source but was
+   * unused even in the historical implementation; modern /W4 diagnoses it. */
+  (void)ofstr;
+
 
 
 // Get information about 16 bit KEYB.COM from VDM
@@ -117,7 +119,7 @@ VOID cmdGetKbdLayout( VOID )
 				szKeybCode,
 				NULL,
 				&dwType,
-				szBuf,
+				(LPBYTE)szBuf,
 				&cbData);
 
   RegCloseKey(hKey);
@@ -143,7 +145,7 @@ VOID cmdGetKbdLayout( VOID )
 			     szKeybCode,
 			     NULL,
 			     &dwType,
-			     szNewKbdID,
+				 (LPBYTE)szNewKbdID,
 			     &cbData
 			     ) != ERROR_SUCCESS)
 	    szNewKbdID[0] = '\0';
@@ -225,13 +227,15 @@ VOID cmdGetKbdLayout( VOID )
         szDir,              // System directory
 	KEYBOARD_SYS	    // keyboard.sys
 	);
-    iSize = strlen(szAutoLine);
+    /* Divergence: the original declaration predates modern size_t warnings;
+     * `szAutoLine` is fixed at 300 bytes, so this retains the INT contract. */
+    iSize = (INT)strlen(szAutoLine);
     if (szNewKbdID[0] != '\0') {
 	sprintf(&szAutoLine[iSize], " /ID:%s", szNewKbdID);
-	iSize = strlen(szAutoLine);
+	iSize = (INT)strlen(szAutoLine);
     }
     szAutoLine[iSize] = 0xd;
-    *pVDMKeyb = iSize;
+    *pVDMKeyb = (CHAR)iSize;
     RtlMoveMemory(pVDMKeyb + 1, szAutoLine, iSize + 1);
 
 

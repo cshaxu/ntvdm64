@@ -7,6 +7,7 @@ void cmdComSpec(void);
 void cmdSaveWorld(void);
 void cmdGetCurrentDir(void);
 void cmdSetInfo(void);
+void cmdGetKbdLayout(void);
 
 CHAR lpszComSpec[64 + 8];
 USHORT cbComSpec;
@@ -16,6 +17,7 @@ PSCSINFO pSCSInfo;
 PCHAR pSCS_ToSync;
 BYTE *pIsDosBinary;
 WORD *pFDAccess;
+BOOL bPifFastPaste;
 
 typedef struct bx_ntvdm_command_misc_active_call {
     bx_ntvdm_command_misc_call *call;
@@ -79,7 +81,9 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
         (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC ||
          call->service == BX_NTVDM_COMMAND_MISC_SAVE_WORLD ||
          call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR ||
-         call->service == BX_NTVDM_COMMAND_MISC_SET_INFO) &&
+         call->service == BX_NTVDM_COMMAND_MISC_SET_INFO ||
+         call->service == BX_NTVDM_COMMAND_MISC_INIT_CONSOLE ||
+         call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT) &&
         call->boundary != NULL && bx_ntvdm_exception_event_v1_valid(call->boundary) &&
         call->cpu != NULL && bx_ntvdm_cpu_state_v1_valid(call->cpu) &&
         call->cpu->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
@@ -100,6 +104,23 @@ void bx_ntvdm_command_misc_set_al(USHORT value)
 { bx_ntvdm_command_misc_set_ax((USHORT)((bx_ntvdm_command_misc_get_ax() & 0xff00u) | (value & 0xffu))); }
 void bx_ntvdm_command_misc_set_cf(int value)
 { (void)bx_ntvdm_cpu_result_v2_set_cf(g_active_call->call->result, value); }
+void bx_ntvdm_command_misc_set_dx(USHORT value)
+{ (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 2u, value); }
+void nt_init_event_thread(void)
+{
+    if (g_active_call != NULL && g_active_call->call->session != NULL)
+        g_active_call->call->session->console_initialized = 1u;
+}
+
+/* OpenNT cmdkeyb.c called the old NTVDM console-composition export
+ * GetConsoleKeyboardLayoutNameA.  It is not linkable from the modern public
+ * Win32 import libraries.  GetKeyboardLayoutNameA is the public supported
+ * capability with the same current-layout-name result; keep this replacement
+ * at the host shim and leave cmdkeyb.c's registry/failure algorithm intact. */
+BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name)
+{
+    return GetKeyboardLayoutNameA(name);
+}
 
 LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
 {
@@ -209,6 +230,10 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         body = cmdGetCurrentDir;
     else if (call->service == BX_NTVDM_COMMAND_MISC_SET_INFO)
         body = cmdSetInfo;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_INIT_CONSOLE)
+        body = cmdInitConsole;
+    else if (call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT)
+        body = cmdGetKbdLayout;
     else
         body = cmdSaveWorld;
     IsFirstCall = call->first_call ? TRUE : FALSE;

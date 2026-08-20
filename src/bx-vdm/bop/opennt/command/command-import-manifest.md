@@ -34,6 +34,7 @@ but its documented shim/include divergence is applied after that exact copy.
 | Mirror | Admission | Delta from exact copy | Reason |
 | --- | --- | --- | --- |
 | `cmdmisc.c` | T231 S2/S3 (`54:02`--`54:05`) | replaces only the unavailable historical include closure; selectively admits original bodies with translation-unit guards; adds one bounded `size_t`→`USHORT` cast | preserves `cmdComSpec`, `cmdGetCurrentDir`, `cmdSaveWorld` and `cmdSetInfo` while preventing legacy CCPU/PIF/console composition from becoming accidental product input. |
+| `cmdkeyb.c` | T231 S4 partial (`54:0E`) | replaces only the old include closure and maps the unavailable console-layout export to a public Win32 capability | preserves the original keyboard registry/file checks and `NoInstallkb16` failure path. |
 
 The source files remain governed by the source-policy recovery ladder.  Their
 historical NT4 CCPU/SAS, scheduler and process-host dependencies must be

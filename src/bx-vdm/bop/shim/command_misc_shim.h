@@ -7,6 +7,7 @@
 
 #include <windows.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #include "../../bx_ntvdm_cpu_result_v2.h"
 #include "../../bx_ntvdm_cpu_state_abi.h"
@@ -46,7 +47,9 @@ enum bx_ntvdm_command_misc_service {
     BX_NTVDM_COMMAND_MISC_COMSPEC = 0x02u,
     BX_NTVDM_COMMAND_MISC_SAVE_WORLD = 0x03u,
     BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR = 0x04u,
-    BX_NTVDM_COMMAND_MISC_SET_INFO = 0x05u
+    BX_NTVDM_COMMAND_MISC_SET_INFO = 0x05u,
+    BX_NTVDM_COMMAND_MISC_INIT_CONSOLE = 0x09u,
+    BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT = 0x0eu
 };
 
 typedef struct bx_ntvdm_command_misc_session {
@@ -56,6 +59,7 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t scs_info_address;
     uint32_t is_dos_binary_address;
     uint32_t fd_access_address;
+    uint32_t console_initialized;
     SCSINFO scs_info;
     BYTE is_dos_binary;
     WORD fd_access;
@@ -104,7 +108,12 @@ UCHAR bx_ntvdm_command_misc_get_al(void);
 void bx_ntvdm_command_misc_set_ax(USHORT value);
 void bx_ntvdm_command_misc_set_al(USHORT value);
 void bx_ntvdm_command_misc_set_cf(int value);
+void bx_ntvdm_command_misc_set_dx(USHORT value);
 LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
+void nt_init_event_thread(void);
+VOID cmdInitConsole(VOID);
+BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
+#define GetConsoleKeyboardLayoutName GetConsoleKeyboardLayoutNameA
 
 UINT demGetPhysicalDriveType(UCHAR drive);
 UINT GetDriveTypeOem(LPSTR root);
@@ -119,6 +128,7 @@ extern PSCSINFO pSCSInfo;
 extern PCHAR pSCS_ToSync;
 extern BYTE *pIsDosBinary;
 extern WORD *pFDAccess;
+extern BOOL bPifFastPaste;
 
 #define getDX() bx_ntvdm_command_misc_get_dx()
 #define getBX() bx_ntvdm_command_misc_get_bx()
@@ -129,6 +139,7 @@ extern WORD *pFDAccess;
 #define setAX(value) bx_ntvdm_command_misc_set_ax(value)
 #define setAL(value) bx_ntvdm_command_misc_set_al(value)
 #define setCF(value) bx_ntvdm_command_misc_set_cf(value)
+#define setDX(value) bx_ntvdm_command_misc_set_dx(value)
 #define GetVDMAddr(segment, offset) bx_ntvdm_command_misc_get_vdm_addr(segment, offset)
 
 #endif

@@ -18,6 +18,7 @@
 #define BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SAVE_WORLD 1
+#define BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE 1
 #include "../../shim/command_misc_shim.h"
 
 #if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
@@ -738,7 +739,7 @@ DWORD   dwBytesWritten;
  *
  */
 
-#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdInitConsole (VOID)
 {
     if (fConOutput == FALSE) {
@@ -747,8 +748,9 @@ VOID cmdInitConsole (VOID)
         }
     return;
 }
+#endif /* BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE */
 
-
+#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 /* cmdMapCodePage - Map the Win32 Code page to DOS code page
  */
 
