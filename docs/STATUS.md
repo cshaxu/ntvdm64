@@ -2,27 +2,31 @@
 
 ## Current Work
 
-> **No active packet.** M0 T230 is closed; see [the T230 closure record](history/m0-t230-closure-20260819.md). A new packet requires ordinary queue admission.
+> **Current effective packet: M0 T231 S1.** T230 is closed; see [the T230 closure record](history/m0-t230-closure-20260819.md). T231 begins the queued COMMAND owner package with its full original-source and ABI map.
 
-## Most Recently Closed Packet Evidence
+**Active: M0 T231 S1 -- COMMAND source mirror, ABI and v1-retirement map.**
+
+## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T230, closed Ordinary Mode. |
-| Admission And Approval | Owner direction: “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” This supersedes only T229's transfer disposition; T229 history remains an immutable record of its narrower local-code result. |
-| Objective | Compose the v2 Direct DEM bridge ahead of every legacy route and prove every valid `C4 C4 50 00..48` window cannot fall through to a `bop-v1` DEM provider, dispatcher or result bridge. |
-| Non-goals | No generic DOS kernel, CPU/device/firmware semantics in bx-vdm, guest-image patching, trace-selected leaf implementation, or repair of legacy v1/partial v2 comparison code. |
-| Reference Baseline | T229 S1 73-row ledger; T229 S2 P23/P24; original `demdisp.c` and DEM owner sources; current OpenNT mirror/provider graph; retained v1 comparison branches/tests; T229 closure transfer correction. |
-| Files And ABI Surface | whole `src/bx-vdm/bop/opennt/dem/`, neutral `bop/shim/*`, original `demdisp.c`, formal Ninja manifest and all Direct fixtures. `bop-v1/` is comparison-only and is not a formal DEM runtime input. |
-| Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding ownership boundaries, original OpenNT host-service semantics, formal Ninja and documentation governance rules. |
-| Verification | For all 73 slots, prove source owner plus local register/guest-memory/failure behavior; then prove no product route enters v1 DEM code, source-build the formal Ninja all-DEM matrix, and record one bounded native observation through the Direct session. |
-| Expected Markers | One source-shaped mirror owner and one exact local witness per `demdisp.c` identity; v1 DEM product routes are deleted or unreachable; no project-authored mutation policy enters the mirror. |
-| Asset Needs | Pinned OpenNT DEM source; T229 ledger/evidence; formal MSVC x64 `/MT` Ninja graph; declared host namespace roots; retained v1 source/test membership; bounded native observation fixture. |
-| Reporting Requirements | Reconcile the tracker and every package map, record deletion decisions and the bounded native observation separately from local Direct evidence. |
-| Stop Conditions | A requirement needs a new Bochs intrusion, guest-image mutation, host modification merely to install the product, or cannot retain source ABI/failure semantics. Such a fact pauses implementation for owner decision; it does not silently become a deferred T230 endpoint or transfer item. |
-| Exit Criteria | All 73 original `demdisp.c` slots have source/ABI/failure-ledger rows and exact local witnesses; all implemented slots run their recovered original behavior or exact original failure path, and all original ordinary/no-op slots retain that exact behavior. The full Direct mirror and every required shim source-build. No native or formal product route can invoke v1 DEM providers, dispatcher, result bridge or composition runtime for `50:00..48`; retained v1 comparison code is unreachable or removed. The native engine binds the Direct DEM session through the mantle checked-memory transport and one bounded native observation is recorded. No DEM completion work is transferred to another T. |
-| Original Owner Request | “完整实现DEM族BOP指令，不得遗漏。优先采用opennt原始代码、逻辑，除非与CLI目标相冲突。” plus “禁止移交任务，每次都留个尾巴 最后变成烂摊子！重开T任务 把东西给我做彻底了。” |
-| Similar-Issue Sweep | All 73 `demdisp.c` identities; current source-derived terminals; `50:47/48` pipe routes; legacy profile consumers, CLI parsing, v1 enum/backend/token/provider/build-manifest/fixture membership; whole-provider/all-73/native observation paths. |
+| Identifier Mode | M0 T231 S1, Ordinary Mode. |
+| Admission And Approval | Owner direction: “按照规划，实现COMMAND族的所有BOP，采用原生OpenNT源代码文件结构和代码结构，尽可能采用相同逻辑，并彻底清理该族的v1实现。” |
+| Objective | Establish the complete original-source, ABI, failure, dependency and v1-retirement map for every `54:00..10` service; prepare the source-shaped COMMAND mirror and shim boundary. |
+| Non-goals | No trace-selected leaf patch, no v1 feature extension, no Bochs intrusion, no guest-image mutation, and no claim that individual COMMAND endpoints close the family. |
+| Reference Baseline | Original `base/mvdm/dos/command/{cmd*.c,cmd*.h}`, `base/mvdm/inc/cmdsvc.h`, `softpc.new/host/src/nt_bop.c`; closed T230 direct-DEM composition; current retained `bop-v1` COMMAND comparison files. |
+| Files And ABI Surface | `src/bx-vdm/bop/opennt/command/`, `src/bx-vdm/bop/shim/command_*`, formal Ninja manifest, COMMAND fixtures, and legacy `src/bx-vdm/bop-v1/bx_ntvdm_cmd_*`/`bx_ntvdm_command_*` membership. |
+| Applicable Rules | Execution, source-policy four-rung recovery ladder, architecture/coding boundaries, original OpenNT ordering/layout/failure behavior, formal Ninja and documentation governance. |
+| Verification | Account for all 17 `CmdDispatch` entries, their original owner functions, guest register/memory ABI, host dependency, continuation/failure result, port disposition and matching v1 references; reject unproven classifications. |
+| Expected Markers | One original-file mirror manifest; one service ledger; explicit simple versus state-machine clusters; shim-only divergence boundaries; a deletion map proving the final v1 target set. |
+| Asset Needs | Pinned in-tree OpenNT source, existing 203-entry BOP tracker, formal MSVC Ninja graph, and retained v1 comparison source. |
+| Reporting Requirements | Retain source paths and exact original dispatch order; record all proposed divergence points and do not make runtime or code-complete claims in S1. |
+| Stop Conditions | Missing original source, unproved ABI, unavailable host API, or a new Bochs intrusion is recorded as an audit result and cannot be silently replaced by new provider behavior. |
+| Exit Criteria | All 17 services and all relevant original files are classified with source/ABI/failure/dependency rows; the mirror/shim file plan and S2--S10 owner-package sequence are fixed; every retained COMMAND v1 product reference is mapped for retirement. |
+| Original Owner Request | “S1把当前BOP的COMMAND族的原始文件拿进来……先给他们分类：简单的BOP和疑难的BOP；S2把所有简单的BOP……局部测试完成code complete；每个疑难BOP……最后所有本族BOP收口，清理掉v1代码。” |
+| Similar-Issue Sweep | All `54:00..10`, `CmdDispatch`, `CMDINFO`, `SAVEWORLD`, `STD_HANDLES`, host process/console/environment APIs, nt_bop route, all COMMAND v1 provider/session/launch/console/lifecycle files and formal manifest references. |
+
+> **T231 S1 progress:** [COMMAND owner-package plan](etc/operations/m0-t231-command-owner-package-plan-001.md), [service ledger](etc/operations/m0-t231-s1-command-service-ledger-001.md), and the [source-mirror manifest](../src/bx-vdm/bop/opennt/command/command-import-manifest.md) establish the original 17-slot package boundary. The admitted `Sync-OpenNtCommandMirror.ps1` copy verified byte-identical hashes for all fifteen listed original source/header inputs. They intentionally remain outside the build until the neutral COMMAND shim foundation is admitted.
 
 > **T230 S sequence:** [OpenNT DEM parallel-mirror S plan](etc/operations/m0-t230-opennt-dem-parallel-mirror-s-plan-001.md) supersedes the previous route/disposition implementation sequence. It orders work by original DEM source-file package, with Direct-only v2 source parity.
 

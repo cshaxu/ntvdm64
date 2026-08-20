@@ -21,8 +21,8 @@ the selected OpenNT owner; no historical GUI/NT4 host composition is loaded.
 2. **S2 — code complete:** close the complete bootstrap/launch/console/
    environment/lifecycle provider package, preserving original ordering and
    rejecting unsupported capabilities explicitly.
-3. **S3 — verification:** execute whole-package Direct/Readonly local
-   regressions and one source-built COMMAND native integration run.
+3. **S3 — verification:** execute whole-package Direct local regressions and
+   one source-built COMMAND native integration run.
 
 ## Exit Rule
 
