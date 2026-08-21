@@ -22,6 +22,7 @@
 #define BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES 1
+#define BX_NTVDM_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES 1
 #include "../../shim/command_misc_shim.h"
 
 #if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
@@ -812,7 +813,9 @@ BOOL GetWOWShortCutInfo (PULONG Bufsize, PVOID Buf)
         return FALSE;
     }
 }
+#endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdUpdateCurrentDirectories(BYTE CurDrive)
 {
     DWORD cchRemain, cchCurDir;
@@ -918,7 +921,7 @@ VOID cmdUpdateCurrentDirectories(BYTE CurDrive)
     }
 }
 
-#endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
+#endif /* BX_NTVDM_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES || !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
 /* This SVC function tells command.com, if the VDM was started without an
  * existing console. If so, on finding a TSR, command.com will return

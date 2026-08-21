@@ -51,6 +51,13 @@ The formal Ninja target completed all 79 required edges and the produced
 failure is not yet established; it must not be described as a mapped-drive
 failure.
 
+**P5 progress:** `cmdUpdateCurrentDirectories` is now directly admitted from
+the OpenNT `cmdmisc.c` mirror.  The former no-op is gone; its only unavailable
+NT4 endpoint, `SetVDMCurrentDirectories`, copies the original double-NUL
+publication into the active COMMAND session.  The formal lifecycle fixture
+rebuilds and verifies that the `54:0B` return path publishes the selected
+drive's current-directory entry.
+
 ## Current Work Record
 
 M0 T231 closed as the COMMAND `54:00..10` code-complete/v2 product-route

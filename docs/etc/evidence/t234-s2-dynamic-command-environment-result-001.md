@@ -117,6 +117,31 @@ local root is disposable build output only; source, manifests, evidence, and
 release inputs remain in the repository. The prior `O:` root limitation is
 retained as a superseded host-execution observation, not a product failure.
 
+## P5 — `cmdUpdateCurrentDirectories` binding closure
+
+The OpenNT `cmdmisc.c::cmdUpdateCurrentDirectories` body is now directly
+admitted.  It retains the source algorithm exactly: selected-drive entry
+first, physical-drive classification, per-drive `=X:` lookup, bounded growth,
+the final extra NUL, and the original allocation failure exits.  The prior
+same-named no-op in `command_misc_shim.c` was removed.
+
+Its terminal `SetVDMCurrentDirectories` call cannot directly link: in OpenNT
+it is a Win32 client wrapper that packages the double-NUL bytes for BaseSrv/CSR
+and a console-bound VDM.  `command_misc_shim.c` therefore supplies the sole
+source-derived seam.  It copies the published bytes into the active COMMAND
+session and frees them on session disposal; it does not alter the imported
+directory algorithm, inspect guest memory, or create a BaseSrv dependency.
+
+The existing formal `t231-s8-command-lifecycle-direct-fixture` was extended
+to seed the selected drive via the directly admitted `cmdSetDirectories`, then
+take the original `54:0B` return path.  In
+`D:\tmp\ntdos64-M0-T234-S2-formal-r7`, MSVC x64 `/MT` Ninja rebuilt the 18
+affected edges, including `cmdmisc.c`, the COMMAND shim, `bx-vdm.lib`, and the
+fixture.  The produced fixture exited zero and verified the session-owned
+double-NUL output begins with the selected `=X:` entry and has its required
+terminator.  This is a local COMMAND owner regression; it makes no native
+guest-continuity claim.
+
 ## Interpretation And Confidence
 
 The product route no longer has a 1024-byte COMMAND environment storage or

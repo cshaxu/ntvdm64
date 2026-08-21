@@ -196,6 +196,11 @@ typedef struct bx_ntvdm_command_misc_session {
     CHAR *command_source_environment;
     uint32_t command_source_vdm_environment_bytes;
     CHAR *command_source_vdm_environment;
+    /* OpenNT cmdUpdateCurrentDirectories publishes this double-NUL list at
+     * the BaseSrv boundary.  The portable composition keeps that publication
+     * session-owned rather than retaining a process-global CSR dependency. */
+    uint32_t command_source_current_directories_bytes;
+    CHAR *command_source_current_directories;
 } bx_ntvdm_command_misc_session;
 
 #define BX_NTVDM_COMMAND_MISC_SESSION_MAGIC 0x42584353u
@@ -288,6 +293,10 @@ void bx_ntvdm_command_misc_set_test_system_directory(const CHAR *path);
 BOOL GetNextVDMCommand(PVDMINFO vdm_info);
 void host_lpt_flush_initialize(void);
 void cmdUpdateCurrentDirectories(BYTE current_drive);
+BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
+    LPSTR current_directories);
+extern CHAR *lpszzCurrentDirectories;
+extern DWORD cchCurrentDirectories;
 void cmdSetDirectories(PCHAR environment, PVDMINFO vdm_info);
 BOOL cmdCheckCopyForRedirection(PREDIRCOMPLETE_INFO info);
 BOOL cmdCreateVDMEnvironment(PVDMENVBLK block);

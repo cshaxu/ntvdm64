@@ -48,6 +48,11 @@ DWORD dwExitCode32;
 CHAR chDefaultDrive;
 BOOL fSoftpcRedirectionOnShellOut;
 ULONG CntrlHandlerState;
+/* OpenNT cmddata.c owns these scratch globals.  cmddata.c itself is not a
+ * composable COMMAND input here; retain the exact storage contract in the
+ * session shim so the directly admitted cmdmisc.c body remains unchanged. */
+CHAR *lpszzCurrentDirectories;
+DWORD cchCurrentDirectories;
 void nt_std_handle_notification(BOOL enabled) { (void)enabled; }
 
 #pragma warning(push)
@@ -132,10 +137,13 @@ void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *sessio
     if (!bx_ntvdm_command_misc_session_valid(session)) return;
     free(session->command_source_environment);
     free(session->command_source_vdm_environment);
+    free(session->command_source_current_directories);
     session->command_source_environment = NULL;
     session->command_source_environment_bytes = 0u;
     session->command_source_vdm_environment = NULL;
     session->command_source_vdm_environment_bytes = 0u;
+    session->command_source_current_directories = NULL;
+    session->command_source_current_directories_bytes = 0u;
     bx_ntvdm_host_handle_manager_reset(&session->handles);
 }
 
@@ -232,7 +240,19 @@ BOOL GetNextVDMCommand(PVDMINFO vdm_info)
 }
 
 void host_lpt_flush_initialize(void) { }
-void cmdUpdateCurrentDirectories(BYTE current_drive) { (void)current_drive; }
+BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
+    LPSTR current_directories)
+{
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    /* DIVERGENCE: OpenNT's client stub sends these bytes to BaseSrv/CSR for a
+     * console-bound VDM.  That NT4 product service is not independently
+     * composable in the CLI; retain its copied multisz publication contract in
+     * the active session instead. */
+    return session != NULL && replace_environment(
+        &session->command_source_current_directories,
+        &session->command_source_current_directories_bytes,
+        current_directories, current_directory_bytes);
+}
 void cmdCheckForPIF(PVDMINFO vdm_info) { (void)vdm_info; }
 USHORT cmdMapCodePage(ULONG code_page) { return (USHORT)code_page; }
 void cmdPushExitInConsoleBuffer(void) { }
