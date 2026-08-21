@@ -37,6 +37,12 @@ Its changed translation units compile under MSVC x64 `/MT`; final fixture
 link/run remains an active verification gate while existing Ninja processes
 hold the shared formal root.
 
+**P3 progress:** the duplicate `cmdSetDirectories` no-op has been removed so
+the formally admitted OpenNT body is the only product definition.  Its focused
+fixture now checks both the selected drive's current directory and a separate
+inherited `=X:` entry in an isolated fixture process; formal link/run remains
+the acceptance gate.
+
 ## Current Work Record
 
 M0 T231 closed as the COMMAND `54:00..10` code-complete/v2 product-route

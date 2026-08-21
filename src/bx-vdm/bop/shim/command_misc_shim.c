@@ -233,8 +233,6 @@ BOOL GetNextVDMCommand(PVDMINFO vdm_info)
 
 void host_lpt_flush_initialize(void) { }
 void cmdUpdateCurrentDirectories(BYTE current_drive) { (void)current_drive; }
-void cmdSetDirectories(PCHAR environment, PVDMINFO vdm_info)
-{ (void)environment; (void)vdm_info; }
 void cmdCheckForPIF(PVDMINFO vdm_info) { (void)vdm_info; }
 USHORT cmdMapCodePage(ULONG code_page) { return (USHORT)code_page; }
 void cmdPushExitInConsoleBuffer(void) { }

@@ -61,6 +61,37 @@ active.  This is not treated as a source-build failure or as a formal build
 pass.  The direct MSVC compilation/link commands above are only focused local
 verification; formal Ninja closure remains required by the active packet.
 
+## P3 — `cmdSetDirectories` binding closure
+
+The imported OpenNT body in
+`src/bx-vdm/bop/opennt/command/cmdmisc.c::cmdSetDirectories` was already
+admitted. `command_misc_shim.c` nevertheless still exported an identically
+named no-op, leaving the final archive/member selection ambiguous. The
+duplicate definition was removed; no replacement implementation was authored.
+
+This retains the first recovery rung: the original COMMAND owner, its
+`CurDrive` / `CurDirectory` ordering, and its traversal of `=X:` multisz
+entries. The existing COMMAND shim remains only the named compatibility seam
+for the unavailable CCPU/SAS include closure. No Bochs intrusion, adapter
+rewrite, or new BOP behavior was used.
+
+Focused verification used a fresh `build/M0-T234-S2/formal-r5` graph. MSVC
+x64 `/MT` compiled the changed imported translation unit, shim, and isolated
+`t234_s2_command_set_directories_fixture.c`. The fixture then linked with the
+already verified r4 `bx-vdm` dependency archive and the standard formal
+platform libraries. Its link map resolves `cmdSetDirectories` specifically to
+`formal-r5/focused/cmdmisc.obj`, not to an archive member. The fixture exited
+zero after confirming both: (1) the selected drive's `=X:` value and current
+directory are synchronized from `VDMINFO`; and (2) a distinct inherited
+`=Y:` entry from the supplied multisz survives the original loop. The fixture
+runs in its own process, so neither its current-directory nor environment
+updates persist in the invoking shell.
+
+The r5 Ninja graph was generated successfully, but Ninja again retained an
+idle parent without a compiler/linker child; it was stopped. This is a
+formal-Ninja verification limitation, not a passing formal build. The source
+and focused link/run facts above close the duplicate-symbol ambiguity only.
+
 ## Interpretation And Confidence
 
 The product route no longer has a 1024-byte COMMAND environment storage or
