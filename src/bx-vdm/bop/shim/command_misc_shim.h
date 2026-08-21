@@ -252,6 +252,11 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t local_child_error;
     uint32_t local_child_events_blocked;
     uint32_t local_child_console_notification;
+    /* OpenNT's nt_std_handle_notification records redirection state for the
+     * host console/display layer.  Retain its non-graphical state per session;
+     * no host-console mutation is implied. */
+    uint32_t local_child_stdout_redirected;
+    uint32_t local_child_std_handle_notification_count;
     uint32_t local_child_reentrancy;
     uint32_t local_child_reentrancy_peak;
     uint32_t create_process_attempted;
@@ -271,7 +276,7 @@ enum bx_ntvdm_command_local_child_state {
 };
 
 #define BX_NTVDM_COMMAND_MISC_SESSION_MAGIC 0x42584353u
-#define BX_NTVDM_COMMAND_MISC_SESSION_VERSION 3u
+#define BX_NTVDM_COMMAND_MISC_SESSION_VERSION 4u
 
 void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *session);
 void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *session);

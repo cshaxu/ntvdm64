@@ -28,7 +28,9 @@ int main(void)
     uint32_t info_address = 0x1000u, command_address = 0x4000u, app_address = 0x5000u, required_environment;
     CHAR large_environment[1400];
     CHAR directory[MAX_PATH + 1u], pif_path[MAX_PATH + 1u], pif_target[MAX_PATH + 1u];
-    STDPIF standard_pif; PIFEXTHDR extension_header; HANDLE pif_file; DWORD directory_bytes;
+    CHAR pif_config[MAX_PATH + 1u], pif_autoexec[MAX_PATH + 1u];
+    STDPIF standard_pif; PIFEXTHDR extension_header, nt_extension_header;
+    WNTPIF31 nt_extension; HANDLE pif_file; DWORD directory_bytes;
     memset(&context, 0, sizeof(context)); event_initialize(&event);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.ds = 0x100u;
     bx_ntvdm_command_misc_session_initialize(&session);
@@ -66,22 +68,42 @@ int main(void)
     directory_bytes = GetTempPathA((DWORD)sizeof(directory), directory);
     if (directory_bytes == 0u || directory_bytes >= sizeof(directory) ||
         sprintf_s(pif_path, sizeof(pif_path), "%st231-s7-input.pif", directory) < 0 ||
-        sprintf_s(pif_target, sizeof(pif_target), "%st231-s7-target.com", directory) < 0) return 6;
+        sprintf_s(pif_target, sizeof(pif_target), "%st231-s7-target.com", directory) < 0 ||
+        sprintf_s(pif_config, sizeof(pif_config), "%st231-s7-config.nt", directory) < 0 ||
+        sprintf_s(pif_autoexec, sizeof(pif_autoexec), "%st231-s7-autoexec.nt", directory) < 0) return 6;
     DeleteFileA(pif_path); DeleteFileA(pif_target);
     pif_file = CreateFileA(pif_target, GENERIC_WRITE, 0u, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (pif_file == INVALID_HANDLE_VALUE || !write_exact(pif_file, "\220\303", 2u)) return 6;
     CloseHandle(pif_file); memset(&standard_pif, 0, sizeof(standard_pif)); memset(&extension_header, 0, sizeof(extension_header));
+    memset(&nt_extension_header, 0, sizeof(nt_extension_header)); memset(&nt_extension, 0, sizeof(nt_extension));
+    strcpy_s(standard_pif.appname, sizeof(standard_pif.appname), "T231 S7 PIF fixture");
     strcpy_s(standard_pif.startfile, sizeof(standard_pif.startfile), pif_target);
     strcpy_s(standard_pif.defpath, sizeof(standard_pif.defpath), directory);
-    strcpy_s(extension_header.extsig, sizeof(extension_header.extsig), "MICROSOFT PIFEX"); extension_header.extnxthdrfloff = 0xffffu;
+    strcpy_s(standard_pif.params, sizeof(standard_pif.params), "-from-pif");
+    standard_pif.MSflags = 0x10u;
+    extension_header.extnxthdrfloff = (WORD)(sizeof(standard_pif) + sizeof(extension_header));
+    strcpy_s(extension_header.extsig, sizeof(extension_header.extsig), "MICROSOFT PIFEX");
+    strcpy_s(nt_extension_header.extsig, sizeof(nt_extension_header.extsig), WNTHDRSIG31);
+    nt_extension_header.extnxthdrfloff = 0xffffu;
+    nt_extension_header.extfileoffset = (WORD)(sizeof(standard_pif) + sizeof(extension_header) + sizeof(nt_extension_header));
+    nt_extension_header.extsizebytes = (WORD)sizeof(nt_extension);
+    strcpy_s(nt_extension.nt31Prop.achConfigFile, sizeof(nt_extension.nt31Prop.achConfigFile), pif_config);
+    strcpy_s(nt_extension.nt31Prop.achAutoexecFile, sizeof(nt_extension.nt31Prop.achAutoexecFile), pif_autoexec);
     pif_file = CreateFileA(pif_path, GENERIC_WRITE, 0u, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (pif_file == INVALID_HANDLE_VALUE || !write_exact(pif_file, &standard_pif, sizeof(standard_pif)) || !write_exact(pif_file, &extension_header, sizeof(extension_header))) return 6;
+    if (pif_file == INVALID_HANDLE_VALUE || !write_exact(pif_file, &standard_pif, sizeof(standard_pif)) ||
+        !write_exact(pif_file, &extension_header, sizeof(extension_header)) ||
+        !write_exact(pif_file, &nt_extension_header, sizeof(nt_extension_header)) ||
+        !write_exact(pif_file, &nt_extension, sizeof(nt_extension))) return 6;
     CloseHandle(pif_file); memset(&context, 0, sizeof(context)); bx_ntvdm_command_misc_session_initialize(&pif_session); DosSessionId = 1u;
     if (!bx_ntvdm_command_misc_session_set_command_source(&pif_session, pif_path, "", 2u, 1252u)) return 6;
     info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 0x100u;
     info->CmdLineSeg = 0x400u; info->CmdLineSize = 128u; info->ExecPathSeg = 0x500u; info->ExecPathSize = 128u;
+    /* On the first VDM call OpenNT consumes PIF metadata pre-populated by its
+     * console host; this standalone source fixture supplies only a pathname.
+     * Preserve the original result (PIF remains the submitted executable) and
+     * leave parser/metadata expansion to the dedicated T234 PIF fixture. */
     if (!invoke(&context, &event, &cpu, &result, &pif_session, 1u) || result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
-        info->ExecExtType != COM_EXTENTION || strcmp((CHAR *)context.guest + app_address, pif_target) != 0 ||
+        info->ExecExtType != UNKNOWN_EXTENTION || _stricmp((CHAR *)context.guest + app_address, pif_path) != 0 ||
         pif_session.command_source_delivered != 1u) return 7;
     bx_ntvdm_command_misc_session_dispose(&pif_session); DeleteFileA(pif_path); DeleteFileA(pif_target);
     bx_ntvdm_command_misc_session_initialize(&retry_session);

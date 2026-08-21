@@ -58,7 +58,6 @@ ULONG CntrlHandlerState;
  * session shim so the directly admitted cmdmisc.c body remains unchanged. */
 CHAR *lpszzCurrentDirectories;
 DWORD cchCurrentDirectories;
-void nt_std_handle_notification(BOOL enabled) { (void)enabled; }
 
 #pragma warning(push)
 #pragma warning(disable: 4324) /* jmp_buf has platform-required alignment; this private stack record never crosses an ABI. */
@@ -312,6 +311,19 @@ void cmdPushExitInConsoleBuffer(void)
      * buffer operation happened. */
     bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
     if (session != NULL) session->local_child_console_notification = 1u;
+}
+
+void nt_std_handle_notification(BOOL enabled)
+{
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    /* OpenNT nt_msscs.c stores stdoutRedirected before its optional X86GFX
+     * fullscreen work.  The latter is bx-mantle display ownership; retain the
+     * former as session state so COMMAND's original call ordering remains
+     * observable without changing the CLI process console. */
+    if (session != NULL) {
+        session->local_child_stdout_redirected = enabled ? 1u : 0u;
+        ++session->local_child_std_handle_notification_count;
+    }
 }
 void nt_block_event_thread(int block)
 {

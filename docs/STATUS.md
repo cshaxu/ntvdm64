@@ -2,32 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T236 S2** — active; pending session-lifecycle recovery.
+**Active: M0 T236 S3** — active; DEM hard-error/retry source recovery.
 
 ## Active Packet
 
-### M0 T236 S2 — COMMAND historical-worker and host-broker source recovery
+### M0 T236 S3 — DEM hard-error/retry source recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T236 S2`, Ordinary Mode, single-person dual-role review. |
-| Closure | Reopened by owner correction. The prior closure is retained as P1 source-admission evidence only; it does not close the required detached-worker/pending lifecycle. |
-| Admission And Approval | The owner corrected the recovery target: preserve the maximum usable original OpenNT code; treat Bochs as the SoftPC-equivalent execution engine and a `bx-vdm` single-session worker as the CCPU-equivalent composition; audit CSR/BaseSrv before replacing any portion. The owner approved design, implementation and closure of this session work. |
-| Objective | Recover the maximum directly composable original `cmdCreateProcess` worker and its `cmdExec32`/`cmdReturnExitCode` lifecycle. Preserve the original detached-worker ordering through a fixed-width `PENDING` continuation, controlled machine suspension/resume, copied inputs and opaque handle IDs; replace only CCPU/SAS/private broker transport and process-global handle installation with the smallest single-session seam. |
-| Non-goals | Do not place COMMAND meaning in Bochs; do not require CCPU, CSR/BaseSrv, CSRSS private APIs, multiple sessions, Redirector remote/named-pipe protocol, WOW composition, host-system modification or raw host values in guest state. Do not add a project-authored command interpreter. |
-| Reference Baseline | Closed S1 restored an imported `cmdExec32` body but still replaced the entire historical `cmdCreateProcess` worker through `bx_ntvdm_command_local_child_execute`. The original worker is present in the imported mirror and uses CCPU thread detachment, `GetNextVDMCommand`, process-global `SetStdHandle`, and public `CreateProcess`/wait primitives. |
-| Files And ABI Surface | `bop/opennt/command/{cmdexec,cmdmisc,cmdredir,cmddata}.c`, corresponding COMMAND shim header/source, fixed-width session record and host-handle manager, lifecycle fixtures, module manifest and S2 evidence. |
-| Applicable Rules | Historical source-recovery audit gate; source-first coding/architecture rules; fixed-width adapter ABI; MSVC x64 `/MT`; one session may own host process operations but CLI standard handles remain independent. |
-| Verification | Four-rung dependency ledger for every worker dependency; focused completed/failed/pending/cancellation/double-completion tests, Direct/COMSPEC/standard-stream/exit/reentrancy cases and negative raw-handle/private-broker/multi-session cases; selector-blind controlled suspend/resume witness; a native `C4 C4 54:08` pending-to-resume fixture; affected formal Ninja graph and source-current focused build; documentation governance and `git diff --check`. |
-| Expected Markers | `cmdCreateProcess` is compiled from the imported OpenNT mirror and runs on the recovered session worker; `cmdExec32` retains its `CreateThread`/completion structure through a documented `PENDING` composition rather than a replacement child algorithm; `SetStdHandle` is not used against the CLI process; every external object crossing the asynchronous boundary is an opaque session-handle ID; every CSR/BaseSrv call site has a direct/shim/unavailable disposition. |
-| Asset Needs | Existing imported OpenNT COMMAND mirror and T234/S1 session, opaque-handle, environment and current-directory seams; no new external source or host dependency. |
-| Reporting Requirements | Name each retained original body, each changed line and why; distinguish public Win32 reuse from private-service unavailability; report session worker lifecycle, child I/O isolation, all failures and remaining transfers. |
-| Stop Conditions | Pause for re-admission if direct source recovery requires a raw host pointer/handle in guest state, changes Bochs/machine semantics, requires an NT private protocol/kernel modification, or requires multiple concurrent sessions. |
-| Exit Criteria | The original worker body is in the formal source closure with only documented narrow divergences; pending worker, completion, cancellation, double-completion, controlled suspend/resume, native `54:08` pending-to-resume and all direct local child/stream tests pass; source/ABI/failure ledger accounts for CCPU/CSR/BaseSrv/standard-handle operations; S2 evidence, governance checks, reviewed commit and push are complete. |
-| Original Owner Request | “请你采用单人双角色模式，设计实现收口该session处理任务。” |
-| Similar-Issue Sweep | `cmdCreateProcess`, `cmdExec32`, `cmdExec`, `cmdExecComspec32`, `cmdReturnExitCode`, `cmdXformEnvironment`, `cmdSetDirectories`, `cmdGetStdHandle`, `cmdredir` pipe workers, `GetNextVDMCommand`, CCPU reentrancy and every CSR/BaseSrv-bound operation. |
+| Identifier Mode | `M0 T236 S3`, Ordinary Mode, single-person dual-role review. |
+| Admission And Approval | S3 is the next owner-approved item in the existing T236 plan after S2 closure. |
+| Objective | Recover and classify the imported DEM `50:32`/`50:33` hard-error/retry path, retaining original retry selector/register restoration wherever it fits the typed bx-vdm result boundary. |
+| Non-goals | Do not add CPU, interrupt, BIOS, disk-controller or guest-DOS semantics to bx-vdm; do not use a trace hit as a leaf implementation mandate. |
+| Reference Baseline | T236 S2 is closed at [its closure record](history/m0-t236-s2-closure-20260821.md). The imported DEM source and fixed typed CPU result boundary are already present. |
+| Files And ABI Surface | Imported DEM error/retry sources, DEM shim, typed CPU result and focused fixture(s) selected only after source/ABI/failure mapping. |
+| Applicable Rules | Source-first recovery, fixed-width adapter ABI, bx-core/bx-mantle machine ownership, formal Ninja verification and documented divergences. |
+| Verification | Source/ABI/failure map; focused Direct result and rejected/unavailable paths; formal source-current Ninja target; governance and diff checks. |
+| Expected Markers | The imported DEM retry owner remains authoritative; accepted restoration uses the existing typed result only, while machine-dependent or unsupported paths are explicit rather than silently resumed. |
+| Asset Needs | Existing imported DEM sources, DEM shim, typed CPU-result seam and formal Ninja graph; no new external source or host dependency. |
+| Reporting Requirements | Record retained source body, every divergence, all rejected machine dependencies and transferred owner work. |
+| Stop Conditions | Re-admit if recovery requires unbounded CPU/Bochs semantics, raw host state in guest ABI, private NT protocol or a machine-owner change. |
+| Exit Criteria | Every `50:32`/`50:33` path has a source-backed direct/shim/unavailable disposition, no adapter-owned machine behavior, and passing focused formal regression. |
+| Original Owner Request | T236 plan: determine and, if mechanically admissible, carry original hard-error/retry restoration through the typed result boundary. |
+| Similar-Issue Sweep | DEM error dialogs, retry selectors, register restoration, DPMI/protected-mode rejection and other DEM paths that delegate to machine ownership. |
 
-Detailed T sequence and the S1/S2 source-recovery ledgers are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). S1 evidence is [the local child source-recovery result](etc/evidence/t236-s1-command-local-child-source-recovery-result-001.md); S2 evidence is [the worker/broker recovery result](etc/evidence/t236-s2-command-worker-host-broker-recovery-001.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
+Detailed T sequence and closure ledgers are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). S2 is closed at [its worker/broker closure](history/m0-t236-s2-closure-20260821.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
 
 ## Current Work Record
 

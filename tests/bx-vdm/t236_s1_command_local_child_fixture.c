@@ -104,6 +104,10 @@ int main(void)
     standard_handles[0] = UINT32_MAX;
     standard_handles[1] = UINT32_MAX;
     standard_handles[2] = UINT32_MAX;
+    /* Model cmdCheckStandardHandles' already-established redirection state.
+     * cmdExec32 must preserve that source value through its completion
+     * notification without changing the CLI process standard handles. */
+    fSoftpcRedirection = TRUE;
     memcpy(context.guest + 0x1000u, "exit 37\r", 8u);
     memcpy(context.guest + 0x2000u, "T236=local\0\0", 12u);
 
@@ -117,6 +121,8 @@ int main(void)
     if (session.local_child_generation != 1u) return 17;
     if (session.local_child_exit_code != 37u) return 18;
     if (session.local_child_events_blocked != 0u) return 19;
+    if (session.local_child_stdout_redirected != 1u ||
+        session.local_child_std_handle_notification_count == 0u) return 23;
     if (session.local_child_reentrancy != 0u || session.local_child_reentrancy_peak != 1u)
         return 20;
     if (GetStdHandle(STD_INPUT_HANDLE) != host_stdin ||
@@ -132,6 +138,7 @@ int main(void)
         session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED)
         return 22;
 
+    fSoftpcRedirection = FALSE;
     old_comspec_bytes = GetEnvironmentVariableA("COMSPEC", old_comspec,
         (DWORD)sizeof(old_comspec));
     if (old_comspec_bytes == 0u || old_comspec_bytes >= sizeof(old_comspec) ||
@@ -145,7 +152,9 @@ int main(void)
         result.cpu_delta.gpr16_values[0] != 41u ||
         session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED ||
         session.local_child_generation != 2u ||
-        session.local_child_exit_code != 41u) {
+        session.local_child_exit_code != 41u ||
+        session.local_child_stdout_redirected != 0u ||
+        session.local_child_std_handle_notification_count < 2u) {
         SetEnvironmentVariableA("COMSPEC", old_comspec);
         return 2;
     }

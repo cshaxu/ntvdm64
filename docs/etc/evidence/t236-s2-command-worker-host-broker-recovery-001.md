@@ -69,6 +69,16 @@ process's standard handles?
   pipe, balanced reentrancy, CLI standard-handle isolation, negative
   double-completion, and dispose/cancellation with zero remaining opaque
   tokens.
+- `nt_std_handle_notification` now retains the exact non-graphical OpenNT
+  state transition (`stdoutRedirected = fIsRedirection`) as a session-owned
+  flag and count. The fixture proves a true-to-false transition across two
+  completions without changing the CLI process standard handles. `X86GFX`
+  fullscreen mouse-buffer work remains bx-mantle display ownership.
+- The imported `54:01` `cmdGetNextCmd` fixture passes normal COM/BAT handoff,
+  bounded environment retry/re-entry and no-command terminal behavior. The
+  separate original PIF parser fixture passes metadata expansion; a first-VDM
+  handoff without pre-populated console-host PIF metadata correctly retains
+  the PIF pathname.
 - `cmdexec.c`, `command_misc_shim.c`, `command_native_session_shim.c`, the
   typed-result object, and the changed selector-blind core/mantle units compile
   under the formal MSVC x64 `/MT /W4 /WX` command shape.  A source-current
