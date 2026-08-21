@@ -16,28 +16,30 @@ routine calls them.
 
 | S | Owner package | Intended result | Dependencies / explicit transfer |
 | --- | --- | --- | --- |
-| S1 | COMMAND child lifecycle (`54:08`, `54:0A`, `54:0B`) | Recover the minimal Direct non-pipe child/completion state around the imported `cmdExec`, `cmdExecComspec32` and `cmdReturnExitCode` bodies. | Requires existing session environment, opaque handles and current-directory publication. Excludes pipe/Redirector, nested children and WOW. |
+| S1 | COMMAND local child execution (`54:06`, `54:08`, `54:0A`, `54:0B`; local `50:47/48`) | Recover the complete locally composable child/completion/standard-stream path around imported `cmdCreateProcess`, `cmdExec32`, `cmdExec`, `cmdExecComspec32`, `cmdReturnExitCode` and local pipe call sites. | Requires existing session environment, opaque handles and current-directory publication. Uses public Win32 process/event/Job/anonymous-pipe APIs. Excludes Redirector protocol, remote/named-pipe semantics, concurrent-session scheduling and WOW. |
 | S2 | DEM hard-error/retry (`50:32`, `50:33`) | Determine and, if mechanically admissible, carry the original retry selector/register restoration through the typed result boundary. | Stops if it requires an unbounded CPU/Bochs semantic expansion. |
-| S3 | DEM/COMMAND pipe boundary (`50:47`, `50:48`, `54:06`) | Recover only the original source paths that can use the S1 session child record without exposing a host handle. | Redirector protocol itself remains transferred to the Redirector owner package. |
-| S4 | DEM DASD/IOCTL source seam | Separate public Win32 raw-volume capability from uncomposable floppy/FDC/DMA/CMOS and `host_simulate` machine ownership; remove any avoidable replacement where original host source composes. | Floppy/machine mechanics transfer to bx machine/BIOS package. |
-| S5 | COMMAND WOW source disposition | Reassess `GetWowKernelCmdLine` and `GetWOWShortCutInfo`; reuse only what fits the fixed WOW root/session ABI or record a source-shaped unavailable outcome. | WOW guest loading/execution transfers to the WOW16 owner package. |
-| S6 | DEM search `NtVdmControl` disposition | Recheck whether a public modern host capability can preserve the original fallback ordering; otherwise retain the explicit unavailable provider and document it. | No kernel/API reconstruction or host modification. |
-| S7 | T236 closure | Reconcile every item in the T236 audit list, remove superseded no-op claims, run package-local regression and transfer remaining external owners. | Native guest trace is integration-only after package-local closure. |
+| S3 | DEM DASD/IOCTL source seam | Separate public Win32 raw-volume capability from uncomposable floppy/FDC/DMA/CMOS and `host_simulate` machine ownership; remove any avoidable replacement where original host source composes. | Floppy/machine mechanics transfer to bx machine/BIOS package. |
+| S4 | COMMAND WOW source disposition | Reassess `GetWowKernelCmdLine` and `GetWOWShortCutInfo`; reuse only what fits the fixed WOW root/session ABI or record a source-shaped unavailable outcome. | WOW guest loading/execution transfers to the WOW16 owner package. |
+| S5 | DEM search `NtVdmControl` disposition | Recheck whether a public modern host capability can preserve the original fallback ordering; otherwise retain the explicit unavailable provider and document it. | No kernel/API reconstruction or host modification. |
+| S6 | T236 closure | Reconcile every item in the T236 audit list, remove superseded no-op claims, run package-local regression and transfer remaining external owners. | Native guest trace is integration-only after package-local closure. |
 
 ## S1 Source-Recovery Ledger
 
 | Rung | Disposition |
 | --- | --- |
-| Original OpenNT source | Retain `base/mvdm/dos/command/cmdexec.c`: `cmdExec`, `cmdExecComspec32`, `cmdReturnExitCode`, and the source ordering/CF/AL paths around `cmdExec32`; retain `cmdmisc.c` event call sites. The original `cmdCreateProcess` and `cmdExec32` translation-unit bodies are presently excluded by their named CCPU/BaseSrv/CSR/event-thread/process-global-handle dependencies. |
-| Smallest seam | A session-owned child record may replace only the unavailable broker/worker boundary: copied command/environment/opaque stream IDs, pending/completed state, exit byte, and cleanup. It must keep the original COMMAND entry and completion bodies as owners. |
+| Original OpenNT source | Retain `base/mvdm/dos/command/cmdexec.c`: `cmdCreateProcess`, `cmdExec32`, `cmdExec`, `cmdExecComspec32`, `cmdReturnExitCode`, and their ordering/CF/AL paths; retain `cmdmisc.c` event call sites and local `cmdredir.c`/DEM pipe call sites. The original `cmdCreateProcess` and `cmdExec32` bodies are presently excluded by named CCPU/BaseSrv/CSR/event-thread/process-global-handle dependencies. S1 must attempt their direct admission before replacing an individual dependency. |
+| Smallest seam | A session-owned child record replaces only the unavailable broker/worker boundary: copied command/environment, opaque stream IDs, pending/completed/cancelled state, exit code, event/wait and cleanup. Public Win32 `CreateProcess`, event/wait, Job and anonymous-pipe APIs may back it. It must keep original COMMAND entry, process setup where composable, and completion bodies as owners. |
 | External intrusion | Rejected. No Bochs, adopted OpenNT, host system, kernel or registry modification is required. |
-| New behavior | Restricted to the typed session record and its lifecycle mechanics, because no independently composable historical broker exists. It cannot parse COMMAND input, expose a `HANDLE`, inspect arbitrary guest memory, or manufacture an external command queue. |
+| New behavior | Restricted to typed session lifecycle mechanics, because no independently composable historical broker exists. It cannot parse COMMAND input, expose a `HANDLE`, inspect arbitrary guest memory, manufacture an external command queue, or implement Redirector/WOW policy. |
 
 ## S1 Completion Profile
 
-The only positive profile is one Direct session, one non-pipe host child, one
-completion, and one source-ordered `54:0B` consumption.  It must cover normal
-exit and source-defined malformed command/environment/standard-token failures.
-It must clean its record on both paths.  Pipe/Redirector, repeat command
-injection, nested launch, TSR console injection and `VDMForWOW` are negative
-or explicitly unavailable paths in S1, not silently successful shortcuts.
+The positive profile is one serialized local session and all of its
+source-reachable public-API child paths: direct command and COMSPEC launch,
+completion/exit return, session-local standard streams and anonymous pipes.
+It must cover normal exit plus source-defined malformed
+command/environment/standard-token failures, pipe cleanup and host executable
+architecture admission. Redirector/remote or named-pipe protocol, repeat
+command injection beyond the imported local queue, concurrent sessions, TSR
+console injection and `VDMForWOW` are negative or explicitly unavailable S1
+paths, not silently successful shortcuts.

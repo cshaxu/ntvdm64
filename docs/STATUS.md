@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T236 S1** — OpenNT COMMAND minimal child-lifecycle source recovery.
+**Active: M0 T236 S1** — OpenNT COMMAND local child-execution source recovery.
 
 ## Active Packet
 
-### M0 T236 S1 — COMMAND `54:08/0A/0B` minimal original-lifecycle recovery
+### M0 T236 S1 — COMMAND local child-execution original-lifecycle recovery
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T236 S1`, Ordinary Mode. |
 | Admission And Approval | The owner approved a new T dedicated to minimum-modification recovery of the currently imported OpenNT DEM and COMMAND source, and selected the present COMMAND child-lifecycle gap as S1. |
-| Objective | Replace the current synchronous `cmdExec32` macro shortcut with the smallest session-owned lifecycle seam that permits the imported OpenNT `cmdExec`, `cmdExecComspec32`, and `cmdReturnExitCode` bodies to preserve their source ordering, child-completion state, and checked guest result contract for one Direct, non-pipe, non-WOW child. |
-| Non-goals | Do not implement Redirector/named pipes, worker-thread/CSR/BaseSrv internals, multi-child nesting, WOW startup, DEM retry, raw DASD/floppy, host-system modification, or a new CLI COMMAND interpreter. Do not alter Bochs, bx-mantle, BOP ingress, or guest-memory ownership. |
+| Objective | Replace the synchronous `cmdExec32` shortcut with the smallest session-owned modern host composition that permits the imported OpenNT `cmdCreateProcess`, `cmdExec32`, `cmdExec`, `cmdExecComspec32`, `cmdReturnExitCode`, and their local pipe/event call sites to retain source ordering, child completion, standard-stream and checked guest-result contracts. The declared profile is one serialized local COMMAND session using public Win32 process, wait/event, Job and anonymous-pipe APIs; host x86/x64 executable admission is recorded explicitly. |
+| Non-goals | Do not re-create CCPU, CSR/BaseSrv, process-global standard-handle replacement, Redirector protocol/remote or named-pipe semantics, WOW startup, DEM retry, raw DASD/floppy, host-system modification, or a new CLI COMMAND interpreter. Do not alter Bochs, bx-mantle, BOP ingress, or guest-memory ownership. |
 | Reference Baseline | `cmdexec.c::cmdCreateProcess` and `cmdExec32` remain excluded by `BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE`; the active macro redirects to synchronous `bx_ntvdm_command_lifecycle_exec`. `nt_block_event_thread`, `nt_resume_event_thread`, `nt_std_handle_notification`, and `cmdPushExitInConsoleBuffer` are no-ops. T234 closed the session multisz, 32-bit opaque handle, PIF and current-directory prerequisites. |
-| Files And ABI Surface | `bop/opennt/command/cmdexec.c`, `bop/opennt/command/cmdmisc.c`, `bop/shim/command_misc_shim.{h,c}`, the COMMAND session structure and focused lifecycle fixtures; module manifest only if source membership changes; T236 S1 evidence. |
+| Files And ABI Surface | `bop/opennt/command/{cmdexec,cmdmisc,cmdredir}.c`, DEM local pipe call sites, `bop/shim/command_misc_shim.{h,c}`, the COMMAND session structure, host-handle manager and focused lifecycle fixtures; module manifest only if source membership changes; T236 S1 evidence. |
 | Applicable Rules | Historical source-recovery audit gate; adapter/boundary rules; source-first coding rules; MSVC x64 `/MT` in-process ABI; no host pointer or host handle may enter guest state. |
-| Verification | Source/ABI/failure ledger; focused Direct non-pipe `54:08 -> completion -> 54:0B` and `54:0A` fixture cases; negative malformed command/environment/token cases; affected formal Ninja target; documentation governance and `git diff --check`. |
-| Expected Markers | `cmdExec32` no longer directly selects the old terminal synchronous shortcut; an explicit session-owned child record represents pending/completed state; original `54:0B` consumes it; event/console helper disposition is explicit rather than an unlabelled no-op; no raw `HANDLE`, BaseSrv, CSR or CCPU dependency enters the product. |
+| Verification | Source/ABI/failure ledger; focused `54:08 -> local child -> 54:0B`, `54:0A`, standard-stream and `54:06`/`50:47/48` anonymous-pipe cases; host x86/x64 executable-admission matrix; negative malformed command/environment/token and unsupported remote/named-pipe/WOW cases; affected formal Ninja target; documentation governance and `git diff --check`. |
+| Expected Markers | `cmdExec32` no longer selects the old terminal synchronous shortcut; an explicit session-owned child record represents pending/completed/cancelled state, opaque standard-stream IDs and cleanup; original `54:0B` consumes it; event/console helper disposition is explicit rather than an unlabelled no-op; no raw `HANDLE`, BaseSrv, CSR or CCPU dependency enters the product. |
 | Asset Needs | Existing imported OpenNT COMMAND mirror, T234 session/handle/environment seams, formal Ninja manifest and existing fixtures; no new source, firmware, guest media, or host dependency. |
 | Reporting Requirements | State exactly which original bodies were compiled, which historical dependencies remain replaced, Direct failure/order semantics, session cleanup ownership, and all deferred branches. |
-| Stop Conditions | Pause for re-admission if correct source ordering requires a host-child-to-DOS command producer, pipe/Redirector state, multiple concurrent children, a raw host handle/pointer in guest state, or changed Bochs/machine behavior. |
-| Exit Criteria | One bounded Direct non-pipe child lifecycle retains original COMMAND entry/return ordering and errors through an explicit session record; all child state is cleaned on success/failure; unsupported re-entry/pipe/WOW branches fail explicitly; focused and affected formal checks pass. |
+| Stop Conditions | Pause for re-admission only if correct source ordering requires a host-child-to-DOS command producer beyond the imported local path, Redirector protocol/remote or named-pipe state, multiple concurrent session scheduling, a raw host handle/pointer in guest state, or changed Bochs/machine behavior. |
+| Exit Criteria | The declared serialized local COMMAND child profile retains original entry/return ordering and errors through an explicit session record; local standard streams and anonymous pipes have opaque-token, cleanup and failure tests; unsupported Redirector/WOW/remote branches fail explicitly; focused and affected formal checks pass. |
 | Original Owner Request | “这样吧，你开一个T任务，就专门做当前DEM和COMMAND族的opennt源代码最小修改复通任务，这是其中的S1.” |
-| Similar-Issue Sweep | `54:06/08/0A/0B`, event/console notification helpers, current-directory publication, standard-handle token ownership, child environment conversion, `50:47/48` pipe continuations, and Direct/non-Direct dispositions. |
+| Similar-Issue Sweep | `54:06/08/0A/0B`, event/console notification helpers, current-directory publication, standard-handle token ownership, child environment conversion, `50:47/48` local pipe continuations, host executable-architecture admission and Redirector/WOW disposition boundaries. |
 
 Detailed T sequence and the S1 source-recovery ledger are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
 
