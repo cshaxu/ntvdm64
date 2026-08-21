@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T235 S4** — make the fixed YAML file the sole product startup configuration and remove the retired JSON profile mechanism.
+**Active: M0 T235 S4 (closed)** — fixed YAML is the sole product startup configuration; the retired JSON profile mechanism is removed.
 
 ## Active Packet
 
@@ -26,7 +26,7 @@
 | Original Owner Request | “请在T235做好这个！” following the owner direction to clear unused `profile.json` machinery and consolidate it into YAML. |
 | Similar-Issue Sweep | Parser sources, profile-specific command switches, CMake targets, full manifests, active tools/tests, runtime environment names, and generated product configuration. |
 
-P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). S4 cleanup evidence: [fixed-YAML profile cleanup result](etc/evidence/t235-s4-yaml-profile-cleanup-result-001.md). The prior [T235 closure](history/m0-t235-closure-20260821.md) is superseded for this owner-approved S4 cleanup only.
+P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). S4 is closed by its [fixed-YAML cleanup result](etc/evidence/t235-s4-yaml-profile-cleanup-result-001.md) and [closure record](history/m0-t235-s4-p1-closure-20260821.md). The prior [T235 closure](history/m0-t235-closure-20260821.md) is superseded for this owner-approved S4 cleanup only; no further T235 source work is authorized.
 
 ## Current Work Record
 
