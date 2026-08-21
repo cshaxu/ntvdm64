@@ -94,11 +94,12 @@ and focused link/run facts above close the duplicate-symbol ambiguity only.
 
 ## P4 — Local-NTFS formal Ninja resolution
 
-The owner approved a disposable local NTFS exception after `cmd.exe` proved
-that the mapped `O:` build root could not execute even a one-edge Ninja probe:
-Ninja remained idle without creating its `cmd.exe` child, while that exact
-child command succeeded when entered directly. This is a build-host execution
-limitation, not an OpenNT or MSVC failure.
+The owner approved a disposable local NTFS alternative after `cmd.exe` proved
+that the repository-local `O:` build root could not execute even a one-edge
+Ninja probe: Ninja remained idle without creating its `cmd.exe` child, while
+that exact child command succeeded when entered directly. This is a
+root-specific build-host execution observation, not an OpenNT or MSVC failure.
+The observation does not establish that `O:` is a mapped drive.
 
 `D:\tmp\ntdos64-M0-T234-S2-formal-r7` was generated from the same formal
 manifest, with the Visual Studio supplied Ninja selected explicitly. From
@@ -113,7 +114,7 @@ T234 S2 OpenNT cmdSetDirectories synchronization verified
 
 This is the formal Ninja positive result for the P3 binding closure. The
 local root is disposable build output only; source, manifests, evidence, and
-release inputs remain in the repository. The prior mapped-root limitation is
+release inputs remain in the repository. The prior `O:` root limitation is
 retained as a superseded host-execution observation, not a product failure.
 
 ## Interpretation And Confidence
