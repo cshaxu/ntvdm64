@@ -10,6 +10,7 @@
 static int bx_ntvdm_generic_ud_fixture_stop_enabled = 0;
 static int bx_ntvdm_generic_ud_fixture_stop_was_observed = 0;
 static int bx_ntvdm_generic_ud_stop_was_observed = 0;
+static int bx_ntvdm_generic_ud_pending_was_observed = 0;
 
 extern "C" void bx_ntvdm_mantle_generic_ud_stop_observation_reset(void)
 {
@@ -24,6 +25,21 @@ extern "C" void bx_ntvdm_mantle_generic_ud_stop_observation_mark(void)
 extern "C" int bx_ntvdm_mantle_generic_ud_stop_observed(void)
 {
   return bx_ntvdm_generic_ud_stop_was_observed;
+}
+
+extern "C" void bx_ntvdm_mantle_generic_ud_pending_observation_reset(void)
+{
+  bx_ntvdm_generic_ud_pending_was_observed = 0;
+}
+
+extern "C" void bx_ntvdm_mantle_generic_ud_pending_observation_mark(void)
+{
+  bx_ntvdm_generic_ud_pending_was_observed = 1;
+}
+
+extern "C" int bx_ntvdm_mantle_generic_ud_pending_observed(void)
+{
+  return bx_ntvdm_generic_ud_pending_was_observed;
 }
 
 extern "C" void bx_ntvdm_mantle_generic_ud_fixture_stop(int enabled)

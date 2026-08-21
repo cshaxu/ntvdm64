@@ -81,6 +81,11 @@ typedef struct bx_ntvdm_command_misc_active_call {
 #pragma warning(pop)
 
 static __declspec(thread) bx_ntvdm_command_misc_active_call *g_active_call;
+/* The product currently admits exactly one session.  This host-private
+ * binding gives the imported worker a scoped session without retaining the
+ * active BOP call, a guest pointer, or a raw HANDLE in its continuation. */
+static bx_ntvdm_command_misc_session *g_pending_session;
+static __declspec(thread) bx_ntvdm_command_misc_session *g_worker_session;
 static CHAR g_test_system_directory[MAX_PATH + 1];
 static const CHAR g_empty_environment[2] = { '\0', '\0' };
 
@@ -140,7 +145,33 @@ void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *ses
 
 void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *session)
 {
+    int cancelled = 0;
     if (!bx_ntvdm_command_misc_session_valid(session)) return;
+    if (session == g_pending_session) {
+        HANDLE job = INVALID_HANDLE_VALUE;
+        HANDLE worker = INVALID_HANDLE_VALUE;
+        if (session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING) {
+            /* A dispose can race CreateProcess.  Record intent in the fixed
+             * continuation so worker_attach_process terminates a job which
+             * is published after this point. */
+            session->pending.cancel_requested = 1u;
+            cancelled = 1;
+            if (session->pending.job_token != 0u &&
+                bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+                    session->pending.job_token, &job))
+                (void)TerminateJobObject(job, ERROR_CANCELLED);
+        }
+        if (session->pending.worker_token != 0u &&
+            bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+                session->pending.worker_token, &worker))
+            (void)WaitForSingleObject(worker, INFINITE);
+        if (cancelled) {
+            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED;
+            session->local_child_error = ERROR_CANCELLED;
+            session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED;
+        }
+        g_pending_session = NULL;
+    }
     free(session->command_source_environment);
     free(session->command_source_vdm_environment);
     free(session->command_source_current_directories);
@@ -299,32 +330,19 @@ ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info)
 BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
 {
     bx_ntvdm_command_misc_session *session;
-    uint32_t standard_handles[3], address, index;
+    uint32_t index;
     HANDLE *targets[3];
-    if (g_active_call == NULL || startup == NULL ||
-        (session = g_active_call->call->session) == NULL) return FALSE;
-    session->local_child_generation++;
-    session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_STARTING;
-    session->local_child_error = ERROR_SUCCESS;
-    session->local_child_exit_code = ERROR_BAD_FORMAT;
+    if (startup == NULL ||
+        (session = bx_ntvdm_command_misc_active_session()) == NULL) return FALSE;
     startup->dwFlags |= STARTF_USESTDHANDLES;
     startup->hStdInput = GetStdHandle(STD_INPUT_HANDLE);
     startup->hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     startup->hStdError = GetStdHandle(STD_ERROR_HANDLE);
-    if (g_active_call->call->service != BX_NTVDM_COMMAND_MISC_EXEC) return TRUE;
-    address = real_mode_address(g_active_call->call->cpu->ss,
-        (USHORT)g_active_call->call->cpu->ebp);
     targets[0] = &startup->hStdError;
     targets[1] = &startup->hStdOutput;
     targets[2] = &startup->hStdInput;
-    if (address > 0x100000u - sizeof(standard_handles) ||
-        !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
-            (uint8_t *)standard_handles, sizeof(standard_handles))) {
-        SetLastError(ERROR_INVALID_HANDLE);
-        return FALSE;
-    }
     for (index = 0u; index < 3u; ++index) {
-        uint32_t token = standard_handles[index];
+        uint32_t token = session->pending.standard_handle_tokens[index];
         if (token == UINT32_MAX) continue;
         /* DIVERGENCE (T236 S2): retain OpenNT's three-handle ordering but bind
          * endpoints to this child only. SetStdHandle would alter the CLI. */
@@ -339,24 +357,195 @@ BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
 
 void bx_ntvdm_command_worker_attach_process(HANDLE process)
 {
-    if (g_active_call == NULL || process == NULL || process == INVALID_HANDLE_VALUE) return;
-    g_active_call->local_child_job = CreateJobObjectA(NULL, NULL);
-    if (g_active_call->local_child_job != NULL)
-        (void)AssignProcessToJobObject(g_active_call->local_child_job, process);
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    HANDLE job;
+    DWORD error = ERROR_NOT_ENOUGH_MEMORY;
+    if (session == NULL || process == NULL || process == INVALID_HANDLE_VALUE) return;
+    job = CreateJobObjectA(NULL, NULL);
+    if (job != NULL && AssignProcessToJobObject(job, process) &&
+        bx_ntvdm_host_handle_manager_publish(&session->handles, job,
+            BX_NTVDM_HOST_HANDLE_OWNED, &session->pending.job_token, &error)) {
+        if (session->pending.cancel_requested != 0u)
+            (void)TerminateJobObject(job, ERROR_CANCELLED);
+        return;
+    }
+    if (job != NULL) CloseHandle(job);
 }
 
 void bx_ntvdm_command_worker_finish(BOOL child_created, DWORD exit_code)
 {
     bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
-    if (g_active_call != NULL && g_active_call->local_child_job != NULL) {
-        CloseHandle(g_active_call->local_child_job);
-        g_active_call->local_child_job = NULL;
-    }
+    HANDLE event = INVALID_HANDLE_VALUE;
+    DWORD ignored;
     if (session == NULL) return;
+    if (session->pending.job_token != 0u) {
+        (void)bx_ntvdm_host_handle_manager_release(&session->handles,
+            session->pending.job_token, &ignored);
+        session->pending.job_token = 0u;
+    }
     session->local_child_exit_code = exit_code;
     session->local_child_error = exit_code;
     session->local_child_state = child_created ?
         BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED : BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+    session->pending.state = session->local_child_state;
+    if (session->pending.completion_event_token != 0u &&
+        bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+            session->pending.completion_event_token, &event))
+        (void)SetEvent(event);
+}
+
+static int copy_pending_environment(CHAR *destination, uint32_t *bytes_out,
+    const CHAR *source)
+{
+    uint32_t index;
+    if (destination == NULL || bytes_out == NULL || source == NULL) return 0;
+    for (index = 1u; index < BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX; ++index) {
+        destination[index - 1u] = source[index - 1u];
+        if (source[index - 1u] == '\0' && source[index] == '\0') {
+            destination[index] = '\0';
+            *bytes_out = index + 1u;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
+{
+    bx_ntvdm_command_misc_session *session;
+    uint32_t tokens[3] = { UINT32_MAX, UINT32_MAX, UINT32_MAX };
+    uint32_t address, index, command_bytes;
+    HANDLE event, worker;
+    DWORD error = ERROR_NOT_ENOUGH_MEMORY;
+    if (g_active_call == NULL || command == NULL || environment == NULL ||
+        (session = g_active_call->call->session) == NULL ||
+        g_pending_session != NULL ||
+        session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING) return FALSE;
+    command_bytes = (uint32_t)strlen(command) + 1u;
+    if (command_bytes == 0u || command_bytes > sizeof(session->pending.command)) {
+        SetLastError(ERROR_BAD_ENVIRONMENT);
+        return FALSE;
+    }
+    /* The copied OpenNT worker must receive the same immutable command and
+     * double-NUL environment snapshot after the BOP call has returned. */
+    memset(&session->pending, 0, sizeof(session->pending));
+    if (!copy_pending_environment(session->pending.environment,
+            &session->pending.environment_bytes, environment)) {
+        SetLastError(ERROR_BAD_ENVIRONMENT);
+        return FALSE;
+    }
+    /* OpenNT's cmdenv.c snapshots the VDM's host environment before merging
+     * this DOS block.  In the standalone single-session composition that
+     * snapshot is session-owned, never the CLI process environment. */
+    if (!replace_environment(&session->command_source_environment,
+            &session->command_source_environment_bytes,
+            session->pending.environment, session->pending.environment_bytes)) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    if (g_active_call->call->service == BX_NTVDM_COMMAND_MISC_EXEC) {
+        address = real_mode_address(g_active_call->call->cpu->ss,
+            (USHORT)g_active_call->call->cpu->ebp);
+        if (address > 0x100000u - sizeof(tokens) ||
+            !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
+                (uint8_t *)tokens, sizeof(tokens))) {
+            SetLastError(ERROR_INVALID_HANDLE);
+            return FALSE;
+        }
+        for (index = 0u; index < 3u; ++index) {
+            HANDLE unused;
+            if (tokens[index] != UINT32_MAX && (tokens[index] == 0u ||
+                !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+                    tokens[index], &unused))) {
+                SetLastError(ERROR_INVALID_HANDLE);
+                return FALSE;
+            }
+        }
+    }
+    session->pending.generation = ++session->local_child_generation;
+    session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING;
+    session->pending.service = g_active_call->call->service;
+    session->pending.command_bytes = command_bytes;
+    memcpy(session->pending.command, command, command_bytes);
+    memcpy(session->pending.standard_handle_tokens, tokens, sizeof(tokens));
+    event = CreateEventA(NULL, TRUE, FALSE, NULL);
+    if (event == NULL || !bx_ntvdm_host_handle_manager_publish(&session->handles,
+            event, BX_NTVDM_HOST_HANDLE_OWNED,
+            &session->pending.completion_event_token, &error)) {
+        if (event != NULL) CloseHandle(event);
+        memset(&session->pending, 0, sizeof(session->pending));
+        SetLastError(error);
+        return FALSE;
+    }
+    g_pending_session = session;
+    session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING;
+    session->local_child_error = ERROR_SUCCESS;
+    worker = CreateThread(NULL, 0u, bx_ntvdm_command_worker_thread, NULL, 0u, NULL);
+    if (worker == NULL || !bx_ntvdm_host_handle_manager_publish(&session->handles,
+            worker, BX_NTVDM_HOST_HANDLE_OWNED, &session->pending.worker_token,
+            &error)) {
+        if (worker != NULL) {
+            (void)WaitForSingleObject(worker, INFINITE);
+            CloseHandle(worker);
+        }
+        (void)bx_ntvdm_host_handle_manager_release(&session->handles,
+            session->pending.completion_event_token, &error);
+        memset(&session->pending, 0, sizeof(session->pending));
+        g_pending_session = NULL;
+        SetLastError(error);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+DWORD WINAPI bx_ntvdm_command_worker_thread(LPVOID ignored)
+{
+    (void)ignored;
+    g_worker_session = g_pending_session;
+    if (g_worker_session == NULL) return ERROR_INVALID_STATE;
+    pCommand32 = g_worker_session->pending.command;
+    pEnv32 = g_worker_session->pending.environment;
+    cmdCreateProcess();
+    g_worker_session = NULL;
+    return 0u;
+}
+
+BOOL bx_ntvdm_command_worker_complete(void)
+{
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    HANDLE worker;
+    DWORD ignored;
+    if (session == NULL || session != g_pending_session ||
+        (session->pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING &&
+         session->pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED &&
+         session->pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED) ||
+        session->pending.worker_token == 0u ||
+        !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+            session->pending.worker_token, &worker)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    if (WaitForSingleObject(worker, 0u) != WAIT_OBJECT_0) {
+        SetLastError(ERROR_IO_INCOMPLETE);
+        return FALSE;
+    }
+    (void)bx_ntvdm_host_handle_manager_release(&session->handles,
+        session->pending.worker_token, &ignored);
+    session->pending.worker_token = 0u;
+    if (session->pending.completion_event_token != 0u) {
+        (void)bx_ntvdm_host_handle_manager_release(&session->handles,
+            session->pending.completion_event_token, &ignored);
+        session->pending.completion_event_token = 0u;
+    }
+    g_pending_session = NULL;
+    return session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED ||
+        session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+}
+
+BOOL bx_ntvdm_command_misc_set_pending(void)
+{
+    return g_active_call != NULL && bx_ntvdm_cpu_result_v2_pending(
+        g_active_call->call->result);
 }
 
 static int validate_comspec_input(const bx_ntvdm_command_misc_call *call)
@@ -440,7 +629,8 @@ void bx_ntvdm_command_misc_set_es(USHORT value)
 
 bx_ntvdm_command_misc_session *bx_ntvdm_command_misc_active_session(void)
 {
-    return g_active_call == NULL ? NULL : g_active_call->call->session;
+    return g_active_call != NULL ? g_active_call->call->session :
+        g_worker_session;
 }
 
 PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token)

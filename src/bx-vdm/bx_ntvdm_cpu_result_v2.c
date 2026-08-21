@@ -31,6 +31,14 @@ int bx_ntvdm_cpu_result_v2_stop(bx_ntvdm_cpu_result_v2 *result)
     return 1;
 }
 
+int bx_ntvdm_cpu_result_v2_pending(bx_ntvdm_cpu_result_v2 *result)
+{
+    if (result == 0) return 0;
+    bx_ntvdm_cpu_result_v2_pass_through(result);
+    result->disposition = BX_NTVDM_CPU_RESULT_V2_PENDING;
+    return 1;
+}
+
 int bx_ntvdm_cpu_result_v2_valid(const bx_ntvdm_cpu_result_v2 *result)
 {
     return result != 0 && result->magic == BX_NTVDM_CPU_RESULT_V2_MAGIC &&
@@ -38,13 +46,15 @@ int bx_ntvdm_cpu_result_v2_valid(const bx_ntvdm_cpu_result_v2 *result)
         result->struct_bytes == sizeof(*result) &&
         (result->disposition == BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH ||
          result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME ||
-         result->disposition == BX_NTVDM_CPU_RESULT_V2_STOP) &&
+         result->disposition == BX_NTVDM_CPU_RESULT_V2_STOP ||
+         result->disposition == BX_NTVDM_CPU_RESULT_V2_PENDING) &&
         bx_ntvdm_cpu_delta_v1_valid(&result->cpu_delta) &&
         (result->eflags_write_mask & ~(BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF |
             BX_NTVDM_CPU_RESULT_V2_EFLAGS_ZF)) == 0u &&
         (result->eflags_values & ~(BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF |
             BX_NTVDM_CPU_RESULT_V2_EFLAGS_ZF)) == 0u &&
-        (result->disposition != BX_NTVDM_CPU_RESULT_V2_STOP ||
+        ((result->disposition != BX_NTVDM_CPU_RESULT_V2_STOP &&
+          result->disposition != BX_NTVDM_CPU_RESULT_V2_PENDING) ||
          (result->resume_rip == 0u && result->cpu_delta.gpr16_write_mask == 0u &&
           result->cpu_delta.segment_write_mask == 0u &&
           result->eflags_write_mask == 0u && result->eflags_values == 0u));

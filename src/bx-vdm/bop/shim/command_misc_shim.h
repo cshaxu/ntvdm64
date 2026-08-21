@@ -175,6 +175,19 @@ typedef struct _SCSINFO {
 #define MAXIMUM_VDM_CURRENT_DIR 64u
 #define BX_NTVDM_COMMAND_MISC_COMSPEC_MAX 64u
 #define BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES (MAXIMUM_VDM_CURRENT_DIR + 3u)
+#define BX_NTVDM_COMMAND_CONTINUATION_COMMAND_MAX 256u
+#define BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX 65535u
+
+/* Fixed-width, session-owned continuation.  It stores only copied OpenNT
+ * inputs and opaque IDs; every native HANDLE remains in `handles`. */
+typedef struct bx_ntvdm_command_pending_continuation {
+    uint32_t generation, state, service, error, cancel_requested;
+    uint32_t worker_token, completion_event_token, job_token;
+    uint32_t standard_handle_tokens[3];
+    uint32_t command_bytes, environment_bytes;
+    CHAR command[BX_NTVDM_COMMAND_CONTINUATION_COMMAND_MAX];
+    CHAR environment[BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX];
+} bx_ntvdm_command_pending_continuation;
 
 enum bx_ntvdm_command_misc_service {
     BX_NTVDM_COMMAND_MISC_EXIT = 0x00u,
@@ -241,17 +254,20 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t local_child_console_notification;
     uint32_t local_child_reentrancy;
     uint32_t local_child_reentrancy_peak;
+    bx_ntvdm_command_pending_continuation pending;
 } bx_ntvdm_command_misc_session;
 
 enum bx_ntvdm_command_local_child_state {
     BX_NTVDM_COMMAND_LOCAL_CHILD_IDLE = 0u,
     BX_NTVDM_COMMAND_LOCAL_CHILD_STARTING = 1u,
     BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED = 2u,
-    BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED = 3u
+    BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED = 3u,
+    BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING = 4u,
+    BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED = 5u
 };
 
 #define BX_NTVDM_COMMAND_MISC_SESSION_MAGIC 0x42584353u
-#define BX_NTVDM_COMMAND_MISC_SESSION_VERSION 1u
+#define BX_NTVDM_COMMAND_MISC_SESSION_VERSION 3u
 
 void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *session);
 void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *session);
@@ -292,6 +308,7 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call);
 
 /* Original COMMAND service entries retained by cmddisp.c's table. */
 void cmdExitVDM(void); void cmdGetNextCmd(void); void cmdComSpec(void);
+void cmdCreateProcess(void);
 void cmdSaveWorld(void); void cmdGetCurrentDir(void); void cmdSetInfo(void);
 void cmdGetStdHandle(void); void cmdCheckBinary(void); void cmdExec(void);
 void cmdInitConsole(void); void cmdExecComspec32(void); void cmdReturnExitCode(void);
@@ -408,12 +425,18 @@ PWCHAR bx_ntvdm_command_environment_snapshot_session(
 void bx_ntvdm_command_environment_free_snapshot(PWCHAR snapshot);
 uint32_t bx_ntvdm_command_binary_scs_address(uint32_t offset);
 BOOL IsWowAppRunnable(LPSTR app_name);
-/* T236 S2 composes the imported cmdCreateProcess body in the active one-session
- * call. These seams replace only detached CCPU threading and process-global
- * standard-handle installation; no HANDLE enters guest/session ABI. */
+/* T236 S2 preserves the imported detached cmdCreateProcess body. These seams
+ * replace only CCPU/CSR transport and process-global standard-handle
+ * installation; no HANDLE enters guest/session ABI. */
 BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup);
 void bx_ntvdm_command_worker_attach_process(HANDLE process);
 void bx_ntvdm_command_worker_finish(BOOL child_created, DWORD exit_code);
+/* These are the bounded replacement for the NT4 CCPU/CSR transport.  They
+ * preserve cmdExec32's worker ordering while retaining no active BOP call. */
+BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment);
+BOOL bx_ntvdm_command_worker_complete(void);
+DWORD WINAPI bx_ntvdm_command_worker_thread(LPVOID ignored);
+BOOL bx_ntvdm_command_misc_set_pending(void);
 
 #ifndef SCS_DOS_BINARY
 #define SCS_DOS_BINARY 1u

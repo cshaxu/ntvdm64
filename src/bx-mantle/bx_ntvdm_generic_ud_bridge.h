@@ -18,7 +18,10 @@
 enum bx_ntvdm_generic_ud_disposition_v1 {
   BX_NTVDM_GENERIC_UD_PASS_THROUGH = 0u,
   BX_NTVDM_GENERIC_UD_RESUME = 1u,
-  BX_NTVDM_GENERIC_UD_STOP = 2u
+  BX_NTVDM_GENERIC_UD_STOP = 2u,
+  /* Mechanical retained-state suspension.  No provider/BOP meaning crosses
+   * this record. */
+  BX_NTVDM_GENERIC_UD_PENDING = 3u
 };
 
 struct bx_ntvdm_generic_ud_event_v1 {
@@ -59,6 +62,9 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
 void bx_ntvdm_mantle_generic_ud_stop_observation_reset(void);
 void bx_ntvdm_mantle_generic_ud_stop_observation_mark(void);
 int bx_ntvdm_mantle_generic_ud_stop_observed(void);
+void bx_ntvdm_mantle_generic_ud_pending_observation_reset(void);
+void bx_ntvdm_mantle_generic_ud_pending_observation_mark(void);
+int bx_ntvdm_mantle_generic_ud_pending_observed(void);
 
 /* Private finite-run fixture control.  It is not a CLI, guest, composition, or
  * service interface; production composition leaves it disabled. */

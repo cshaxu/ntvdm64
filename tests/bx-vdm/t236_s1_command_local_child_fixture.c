@@ -48,6 +48,22 @@ static int invoke(t236_fixture_context *context,
     return bx_ntvdm_command_misc_invoke(&call);
 }
 
+static int invoke_pending_completion(t236_fixture_context *context,
+    bx_ntvdm_exception_event_v1 *event, bx_ntvdm_cpu_state_v1 *cpu,
+    bx_ntvdm_cpu_result_v2 *result, bx_ntvdm_command_misc_session *session,
+    uint32_t service)
+{
+    uint32_t attempt;
+    if (!invoke(context, event, cpu, result, session, service) ||
+        result->disposition != BX_NTVDM_CPU_RESULT_V2_PENDING) return 0;
+    for (attempt = 0u; attempt < 100u; ++attempt) {
+        Sleep(10u);
+        if (!invoke(context, event, cpu, result, session, service)) return 0;
+        if (result->disposition != BX_NTVDM_CPU_RESULT_V2_PENDING) return 1;
+    }
+    return 0;
+}
+
 int main(void)
 {
     t236_fixture_context context;
@@ -91,7 +107,7 @@ int main(void)
     memcpy(context.guest + 0x1000u, "exit 37\r", 8u);
     memcpy(context.guest + 0x2000u, "T236=local\0\0", 12u);
 
-    if (!invoke(&context, &event, &cpu, &result, &session,
+    if (!invoke_pending_completion(&context, &event, &cpu, &result, &session,
             BX_NTVDM_COMMAND_MISC_EXEC)) return 11;
     if (result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME) return 12;
     if ((result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u) return 13;
@@ -107,6 +123,15 @@ int main(void)
         GetStdHandle(STD_OUTPUT_HANDLE) != host_stdout ||
         GetStdHandle(STD_ERROR_HANDLE) != host_stderr) return 21;
 
+    /* The guest instruction would already have resumed here.  Deliberately
+     * reinvoking the same route must not consume completion twice or launch
+     * another child from stale continuation state. */
+    if (!invoke(&context, &event, &cpu, &result, &session,
+            BX_NTVDM_COMMAND_MISC_EXEC) ||
+        session.local_child_generation != 1u ||
+        session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED)
+        return 22;
+
     old_comspec_bytes = GetEnvironmentVariableA("COMSPEC", old_comspec,
         (DWORD)sizeof(old_comspec));
     if (old_comspec_bytes == 0u || old_comspec_bytes >= sizeof(old_comspec) ||
@@ -114,7 +139,7 @@ int main(void)
             "%s /c exit 41", old_comspec) < 0 ||
         !SetEnvironmentVariableA("COMSPEC", test_comspec)) return 2;
     cpu.eax = 0x0002u;
-    if (!invoke(&context, &event, &cpu, &result, &session,
+    if (!invoke_pending_completion(&context, &event, &cpu, &result, &session,
             BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         result.cpu_delta.gpr16_values[0] != 41u ||
@@ -147,7 +172,7 @@ int main(void)
     standard_handles[1] = standard_token;
     cpu.eax = 0x0102u;
     memcpy(context.guest + 0x1000u, "echo T236\r", 10u);
-    if (!invoke(&context, &event, &cpu, &result, &session,
+    if (!invoke_pending_completion(&context, &event, &cpu, &result, &session,
             BX_NTVDM_COMMAND_MISC_EXEC)) return 51;
     if ((result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u) return 52;
     if (session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED) return 53;
@@ -164,7 +189,21 @@ int main(void)
     }
     CloseHandle(pipe_read);
 
-    puts("T236 S2 imported worker, reentrancy, stream isolation, direct/COMSPEC, failure and anonymous-pipe contracts verified");
+    standard_handles[1] = UINT32_MAX;
+    memcpy(context.guest + 0x1000u, "ping -n 5 127.0.0.1 >nul\r", 26u);
+    if (!invoke(&context, &event, &cpu, &result, &session,
+            BX_NTVDM_COMMAND_MISC_EXEC) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_PENDING) return 57;
+    /* Disposing a single-session host composition is cancellation, not a
+     * detached host process.  The worker receives the intent even if this
+     * call races before its Job object has been published. */
+    Sleep(50u);
     bx_ntvdm_command_misc_session_dispose(&session);
+    if (session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED ||
+        session.local_child_error != ERROR_CANCELLED ||
+        session.pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED ||
+        session.handles.entry_count != 0u) return 58;
+
+    puts("T236 S2 pending imported worker, opaque-handle stream isolation, direct/COMSPEC, failure, pipe, double-completion and cancellation contracts verified");
     return 0;
 }

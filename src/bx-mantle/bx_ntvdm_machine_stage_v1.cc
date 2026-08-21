@@ -478,6 +478,7 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
   }
   bx_ntvdm_mantle_generic_ud_stop_observation_reset();
+  bx_ntvdm_mantle_generic_ud_pending_observation_reset();
   bx_ntvdm_mantle_first_fault_observation_reset();
   bx_ntvdm_machine_stage_v1_terminal_position_clear();
   bx_ntvdm_machine_stage_v1_terminal_history_clear();
@@ -553,6 +554,8 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_FIRST_FAULT_STOP;
   if (bx_ntvdm_mantle_generic_ud_stop_observed())
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP;
+  if (bx_ntvdm_mantle_generic_ud_pending_observed())
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_PENDING;
   if (stop_state.cancellation_fired)
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_HOST_CANCELLATION;
   return stop_state.watchdog_fired ? BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET :

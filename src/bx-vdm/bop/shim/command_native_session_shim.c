@@ -89,7 +89,9 @@ static int copy_outcome(const bx_ntvdm_cpu_result_v2 *result,
     memset(outcome, 0, sizeof(*outcome));
     outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
     outcome->disposition = result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME ?
-        BX_NTVDM_GENERIC_UD_RESUME : BX_NTVDM_GENERIC_UD_STOP;
+        BX_NTVDM_GENERIC_UD_RESUME :
+        (result->disposition == BX_NTVDM_CPU_RESULT_V2_PENDING ?
+            BX_NTVDM_GENERIC_UD_PENDING : BX_NTVDM_GENERIC_UD_STOP);
     outcome->resume_rip = result->resume_rip;
     outcome->gpr16_write_mask = result->cpu_delta.gpr16_write_mask;
     memcpy(outcome->gpr16_values, result->cpu_delta.gpr16_values,

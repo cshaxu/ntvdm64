@@ -422,8 +422,9 @@ VOID cmdCreateProcess ( VOID )
     // one less 32 executable active
     Exe32ActiveCount--;
 
-    /* DIVERGENCE (T236 S2): execute in the active typed BOP call rather than
-     * a detached CCPU thread, so checked guest-copy state remains valid. */
+    /* DIVERGENCE (T236 S2): this imported body now returns to the bounded
+     * bx-vdm worker wrapper.  Its historical CCPU thread boundary is carried
+     * by the fixed pending continuation, not an active BOP-call pointer. */
     return;
 }
 
@@ -494,12 +495,33 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 #endif /* worker admission */
 
 #if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
-/* DIVERGENCE (T236 S2): retain the imported cmdCreateProcess worker, but call
- * it in the active single-session typed BOP context instead of detaching a
- * CCPU thread. Its child-only stream seam prevents the historical global
- * standard-handle mutation from affecting the standalone CLI. */
+/* DIVERGENCE (T236 S2): retain OpenNT's detached-worker topology.  CCPU and
+ * its private BaseSrv transport are replaced only by a fixed bx-vdm pending
+ * continuation: copied inputs and opaque stream IDs are session-owned, while
+ * the child worker remains the original cmdCreateProcess body. */
 VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 {
+    bx_ntvdm_command_misc_session *Session = bx_ntvdm_command_misc_active_session();
+
+    /* A pending BOP intentionally re-enters at the original instruction. Do
+     * not create a second child: first observe the worker, then resume the
+     * original post-CreateThread GetNextVDMCommand/return sequence below. */
+    if (Session != NULL &&
+        (Session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING ||
+         Session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED ||
+         Session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED)) {
+        if (!bx_ntvdm_command_worker_complete()) {
+            if (GetLastError() == ERROR_IO_INCOMPLETE)
+                (void)bx_ntvdm_command_misc_set_pending();
+            else {
+                setCF(0);
+                setAL((UCHAR)GetLastError());
+            }
+            return;
+        }
+        goto WorkerComplete;
+    }
+
     pCommand32 = pCmd32;
     pEnv32 = pEnv;
     CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
@@ -509,8 +531,20 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
 
-    cmdCreateProcess();
+    if (!bx_ntvdm_command_worker_begin(pCmd32, pEnv32)) {
+        setCF(0);
+        setAL((UCHAR)GetLastError());
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+        CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+        return;
+    }
+    (void)bx_ntvdm_command_misc_set_pending();
+    return;
 
+WorkerComplete:
     VDMInfo.VDMState = NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND;
     VDMInfo.EnviornmentSize = 0;
     VDMInfo.ErrorCode = 0;

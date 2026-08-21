@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T236 S2** — complete; T236 awaits admission of S3.
+**Active: M0 T236 S2** — active; pending session-lifecycle recovery.
 
 ## Active Packet
 
@@ -11,19 +11,19 @@
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T236 S2`, Ordinary Mode, single-person dual-role review. |
-| Closure | Complete; see [T236 S2 closure](history/m0-t236-s2-closure-20260821.md). |
+| Closure | Reopened by owner correction. The prior closure is retained as P1 source-admission evidence only; it does not close the required detached-worker/pending lifecycle. |
 | Admission And Approval | The owner corrected the recovery target: preserve the maximum usable original OpenNT code; treat Bochs as the SoftPC-equivalent execution engine and a `bx-vdm` single-session worker as the CCPU-equivalent composition; audit CSR/BaseSrv before replacing any portion. The owner approved design, implementation and closure of this session work. |
-| Objective | Recover the maximum directly composable original `cmdCreateProcess` worker and its `cmdExec32`/`cmdReturnExitCode` lifecycle. Preserve source ordering, reentrancy, environment, current-directory, suspended child launch, wait, exit and failure paths; replace only historical thread detachment, private host broker calls and process-global handle installation with the smallest single-session seam. |
+| Objective | Recover the maximum directly composable original `cmdCreateProcess` worker and its `cmdExec32`/`cmdReturnExitCode` lifecycle. Preserve the original detached-worker ordering through a fixed-width `PENDING` continuation, controlled machine suspension/resume, copied inputs and opaque handle IDs; replace only CCPU/SAS/private broker transport and process-global handle installation with the smallest single-session seam. |
 | Non-goals | Do not place COMMAND meaning in Bochs; do not require CCPU, CSR/BaseSrv, CSRSS private APIs, multiple sessions, Redirector remote/named-pipe protocol, WOW composition, host-system modification or raw host values in guest state. Do not add a project-authored command interpreter. |
 | Reference Baseline | Closed S1 restored an imported `cmdExec32` body but still replaced the entire historical `cmdCreateProcess` worker through `bx_ntvdm_command_local_child_execute`. The original worker is present in the imported mirror and uses CCPU thread detachment, `GetNextVDMCommand`, process-global `SetStdHandle`, and public `CreateProcess`/wait primitives. |
 | Files And ABI Surface | `bop/opennt/command/{cmdexec,cmdmisc,cmdredir,cmddata}.c`, corresponding COMMAND shim header/source, fixed-width session record and host-handle manager, lifecycle fixtures, module manifest and S2 evidence. |
 | Applicable Rules | Historical source-recovery audit gate; source-first coding/architecture rules; fixed-width adapter ABI; MSVC x64 `/MT`; one session may own host process operations but CLI standard handles remain independent. |
-| Verification | Four-rung dependency ledger for every worker dependency; focused Direct/COMSPEC/standard-stream/exit/reentrancy/failure tests; negative raw-handle, unsupported private-broker and unsupported multi-session cases; affected formal Ninja graph and source-current focused build; documentation governance and `git diff --check`. |
-| Expected Markers | `cmdCreateProcess` is compiled from the imported OpenNT mirror; `cmdExec32` calls that worker through a documented in-session composition rather than a replacement child algorithm; `SetStdHandle` is not used against the CLI process, while the original child-stream ordering is retained; every CSR/BaseSrv call site has a direct/shim/unavailable disposition. |
+| Verification | Four-rung dependency ledger for every worker dependency; focused completed/failed/pending/cancellation/double-completion tests, Direct/COMSPEC/standard-stream/exit/reentrancy cases and negative raw-handle/private-broker/multi-session cases; selector-blind controlled suspend/resume witness; affected formal Ninja graph and source-current focused build; documentation governance and `git diff --check`. |
+| Expected Markers | `cmdCreateProcess` is compiled from the imported OpenNT mirror and runs on the recovered session worker; `cmdExec32` retains its `CreateThread`/completion structure through a documented `PENDING` composition rather than a replacement child algorithm; `SetStdHandle` is not used against the CLI process; every external object crossing the asynchronous boundary is an opaque session-handle ID; every CSR/BaseSrv call site has a direct/shim/unavailable disposition. |
 | Asset Needs | Existing imported OpenNT COMMAND mirror and T234/S1 session, opaque-handle, environment and current-directory seams; no new external source or host dependency. |
 | Reporting Requirements | Name each retained original body, each changed line and why; distinguish public Win32 reuse from private-service unavailability; report session worker lifecycle, child I/O isolation, all failures and remaining transfers. |
 | Stop Conditions | Pause for re-admission if direct source recovery requires a raw host pointer/handle in guest state, changes Bochs/machine semantics, requires an NT private protocol/kernel modification, or requires multiple concurrent sessions. |
-| Exit Criteria | The original worker body is in the formal source closure with only documented narrow divergences; all direct local child lifecycle and stream tests pass; source/ABI/failure ledger accounts for CCPU/CSR/BaseSrv/standard-handle operations; S2 evidence, governance checks, reviewed commit and push are complete. |
+| Exit Criteria | The original worker body is in the formal source closure with only documented narrow divergences; pending worker, completion, cancellation, double-completion, controlled suspend/resume and all direct local child/stream tests pass; source/ABI/failure ledger accounts for CCPU/CSR/BaseSrv/standard-handle operations; S2 evidence, governance checks, reviewed commit and push are complete. |
 | Original Owner Request | “请你采用单人双角色模式，设计实现收口该session处理任务。” |
 | Similar-Issue Sweep | `cmdCreateProcess`, `cmdExec32`, `cmdExec`, `cmdExecComspec32`, `cmdReturnExitCode`, `cmdXformEnvironment`, `cmdSetDirectories`, `cmdGetStdHandle`, `cmdredir` pipe workers, `GetNextVDMCommand`, CCPU reentrancy and every CSR/BaseSrv-bound operation. |
 

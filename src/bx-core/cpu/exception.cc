@@ -916,7 +916,8 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&mantle_event, &mantle_outcome) &&
         mantle_outcome.abi_version == BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION &&
         (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_RESUME ||
-         mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP)) {
+         mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP ||
+         mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_PENDING)) {
       if (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP) {
         /* Record only the accepted generic outcome, immediately before the
          * existing mechanical stop transfer. */
@@ -925,6 +926,15 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
         /* cpu_loop tests the finite stop latch only while servicing an
          * asynchronous event after this longjmp.  Request that native check
          * without adding any selector or guest semantic. */
+        BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
+        longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
+      }
+      if (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_PENDING) {
+        /* This is a selector-blind retained-machine suspend.  Keep RIP and
+         * register state untouched so a later controlled execute re-enters
+         * the exact same faulting instruction. */
+        bx_ntvdm_mantle_generic_ud_pending_observation_mark();
+        bx_pc_system.kill_bochs_request = 1;
         BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
         longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
       }

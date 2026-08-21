@@ -2,10 +2,10 @@
 
 ## Status And Purpose
 
-This is a candidate S-level design record only.  It does not allocate an S
-identifier, change the active packet, or admit implementation.  Its purpose is
+This design is admitted as the reopening scope for M0 T236 S2. Its purpose is
 to prevent the current synchronous typed-BOP transaction from becoming a
-permanent COMMAND/DEM architectural constraint.
+permanent COMMAND/DEM architectural constraint. The previous S2 closure is
+P1 source-admission evidence, not this lifecycle's closure.
 
 The target is a bounded `bx-vdm` session lifecycle which can represent a BOP
 whose OpenNT-owned host operation completes later.  It is the modern
@@ -121,6 +121,21 @@ Do not admit this S until all of the following are evidenced:
 - one imported OpenNT COMMAND child lifecycle fixture proving source ordering
   across pending and completion;
 - formal MSVC x64 `/MT` closure, documentation governance and diff review.
+
+## Active Recovery Observation
+
+The recovered P2 path compiles the changed `bx-vdm`, `bx-mantle` and
+`bx-core` units under the formal MSVC x64 `/MT /W4 /WX` shape. The focused
+COMMAND fixture now crosses `PENDING`, executes the detached imported worker,
+and returns through opaque worker/event/job IDs. The former
+`ERROR_INVALID_DATA` was an adapter initialization defect: it cleared the
+copied double-NUL environment before the worker entered the retained OpenNT
+environment conversion. The corrected ordering passes Direct, COMSPEC, pipe,
+failure, double-completion and cancellation coverage. A separate selector-
+blind real-machine fixture now proves `PENDING` suspension and controlled
+re-entry at the faulting instruction. This is still not S2 closure until the
+final source/ABI/failure-ledger review and formal-graph execution are
+evidenced.
 
 ## Explicit Non-goals
 
