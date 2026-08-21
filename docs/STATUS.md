@@ -26,7 +26,7 @@
 | Original Owner Request | “实施完成T235任务：cli 按照opennt原始代码的最小修改版本接纳可执行文件”. |
 | Similar-Issue Sweep | Launch-plan serialization, target identity, OEM conversion, length bounds, command tail, session reset/rebind, `GetNextVDMCommand`, PIF owner call order, direct host PE and NE boundaries. |
 
-P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). Current S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). S2 supersedes the unreleased runner configuration protocol; its configuration work is separate from the proposal's later initial-COMMAND transport.
+P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). The complete T235 result is recorded in [the T235 closure](history/m0-t235-closure-20260821.md); this retained active marker authorizes no additional source work until the owner selects the next queued package.
 
 ## Current Work Record
 
