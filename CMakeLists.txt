@@ -62,12 +62,20 @@ endfunction()
 
 add_executable(ntdos64-run
     src/cli/ntdos64_run.c
-    src/cli/byob_profile.c
+    src/cli/ntdos64_config.c
     src/cli/byob_identity.c
     src/cli/byob_target_selection.c
     src/cli/byob_launch_declaration_v1.c
     src/cli/byob_launch_plan_v2.c
 )
+set_target_properties(ntdos64-run PROPERTIES
+    OUTPUT_NAME "ntvdm64-0235"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/output")
+file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/build/output")
+if(NOT EXISTS "${CMAKE_SOURCE_DIR}/build/output/ntvdmcfg.yaml")
+    file(WRITE "${CMAKE_SOURCE_DIR}/build/output/ntvdmcfg.yaml"
+"# Fixed runner configuration. All referenced files are siblings of this file.\n# Replace the four component byte counts and SHA-256 values before use.\n# No schema or version selector exists.\nntio_file: NTIO.SYS\nntio_bytes: 1\nntio_sha256: 0000000000000000000000000000000000000000000000000000000000000000\nntdos_file: NTDOS.SYS\nntdos_bytes: 1\nntdos_sha256: 0000000000000000000000000000000000000000000000000000000000000000\ncommand_file: COMMAND.COM\ncommand_bytes: 1\ncommand_sha256: 0000000000000000000000000000000000000000000000000000000000000000\ntarget_file: TARGET.COM\ntarget_bytes: 1\ntarget_sha256: 0000000000000000000000000000000000000000000000000000000000000000\nconfig_file: CONFIG.NT\nautoexec_file: AUTOEXEC.NT\n")
+endif()
 
 # Test-only external-engine argument verifier. It is never linked to the CLI.
 add_executable(runner-engine-probe

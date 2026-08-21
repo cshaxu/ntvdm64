@@ -1,4 +1,6 @@
 #include "bop/shim/command_misc_shim.h"
+#define WINNT 1
+#include <pif.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -8,6 +10,8 @@ static int read_guest(void *state, uint32_t address, uint8_t *buffer, uint32_t b
 { fixture_context *context = (fixture_context *)state; if (context == NULL || address > sizeof(context->guest) || bytes > sizeof(context->guest) - address) return 0; memcpy(buffer, context->guest + address, bytes); return 1; }
 static int write_guest(void *state, uint32_t address, const uint8_t *buffer, uint32_t bytes)
 { fixture_context *context = (fixture_context *)state; if (context == NULL || address > sizeof(context->guest) || bytes > sizeof(context->guest) - address) return 0; memcpy(context->guest + address, buffer, bytes); return 1; }
+static int write_exact(HANDLE file, const void *data, DWORD bytes)
+{ DWORD written = 0u; return WriteFile(file, data, bytes, &written, NULL) && written == bytes; }
 static void event_initialize(bx_ntvdm_exception_event_v1 *event)
 { memset(event, 0, sizeof(*event)); event->magic = BX_NTVDM_EXCEPTION_ABI_MAGIC; event->abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION; event->struct_bytes = sizeof(*event); event->kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION; event->vector = 6u; event->fault_rip = 0x500u; }
 static int invoke(fixture_context *context, bx_ntvdm_exception_event_v1 *event,
@@ -20,9 +24,11 @@ static int has_prefix(const CHAR *strings, uint32_t bytes, const CHAR *prefix)
 int main(void)
 {
     fixture_context context; bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
-    bx_ntvdm_cpu_result_v2 result; bx_ntvdm_command_misc_session session, retry_session; CMDINFO *info;
+    bx_ntvdm_cpu_result_v2 result; bx_ntvdm_command_misc_session session, retry_session, batch_session, pif_session; CMDINFO *info;
     uint32_t info_address = 0x1000u, command_address = 0x4000u, app_address = 0x5000u, required_environment;
     CHAR large_environment[1400];
+    CHAR directory[MAX_PATH + 1u], pif_path[MAX_PATH + 1u], pif_target[MAX_PATH + 1u];
+    STDPIF standard_pif; PIFEXTHDR extension_header; HANDLE pif_file; DWORD directory_bytes;
     memset(&context, 0, sizeof(context)); event_initialize(&event);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.ds = 0x100u;
     bx_ntvdm_command_misc_session_initialize(&session);
@@ -44,13 +50,47 @@ int main(void)
         session.command_source_delivered != 1u) { fprintf(stderr, "result ext=%u path=%u drive=%u cp=%u app=%s cnt=%u line=%s delivered=%u\n", info->ExecExtType, info->ExecPathSize, info->CurDrive, info->CodePage, context.guest + app_address, context.guest[command_address + 1u], context.guest + command_address + 2u, session.command_source_delivered); return 3; }
     if (!invoke(&context, &event, &cpu, &result, &session, 0u) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_STOP) { fprintf(stderr, "terminal\n"); return 4; }
+    bx_ntvdm_command_misc_session_initialize(&batch_session);
+    memset(&context, 0, sizeof(context));
+    if (!bx_ntvdm_command_misc_session_set_command_source(&batch_session,
+            "C:\\TOOLS\\START.BAT", "/q", 2u, 1252u)) return 5;
+    info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 0x100u;
+    info->CmdLineSeg = 0x400u; info->CmdLineSize = 128u;
+    info->ExecPathSeg = 0x500u; info->ExecPathSize = 128u;
+    if (!invoke(&context, &event, &cpu, &result, &batch_session, 1u) ||
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        info->ExecExtType != BAT_EXTENTION ||
+        strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\START.BAT") != 0 ||
+        strcmp((CHAR *)context.guest + command_address + 2u, "START /q\r\n") != 0 ||
+        batch_session.command_source_delivered != 1u) return 5;
+    directory_bytes = GetTempPathA((DWORD)sizeof(directory), directory);
+    if (directory_bytes == 0u || directory_bytes >= sizeof(directory) ||
+        sprintf_s(pif_path, sizeof(pif_path), "%st231-s7-input.pif", directory) < 0 ||
+        sprintf_s(pif_target, sizeof(pif_target), "%st231-s7-target.com", directory) < 0) return 6;
+    DeleteFileA(pif_path); DeleteFileA(pif_target);
+    pif_file = CreateFileA(pif_target, GENERIC_WRITE, 0u, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (pif_file == INVALID_HANDLE_VALUE || !write_exact(pif_file, "\220\303", 2u)) return 6;
+    CloseHandle(pif_file); memset(&standard_pif, 0, sizeof(standard_pif)); memset(&extension_header, 0, sizeof(extension_header));
+    strcpy_s(standard_pif.startfile, sizeof(standard_pif.startfile), pif_target);
+    strcpy_s(standard_pif.defpath, sizeof(standard_pif.defpath), directory);
+    strcpy_s(extension_header.extsig, sizeof(extension_header.extsig), "MICROSOFT PIFEX"); extension_header.extnxthdrfloff = 0xffffu;
+    pif_file = CreateFileA(pif_path, GENERIC_WRITE, 0u, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (pif_file == INVALID_HANDLE_VALUE || !write_exact(pif_file, &standard_pif, sizeof(standard_pif)) || !write_exact(pif_file, &extension_header, sizeof(extension_header))) return 6;
+    CloseHandle(pif_file); memset(&context, 0, sizeof(context)); bx_ntvdm_command_misc_session_initialize(&pif_session); DosSessionId = 1u;
+    if (!bx_ntvdm_command_misc_session_set_command_source(&pif_session, pif_path, "", 2u, 1252u)) return 6;
+    info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 0x100u;
+    info->CmdLineSeg = 0x400u; info->CmdLineSize = 128u; info->ExecPathSeg = 0x500u; info->ExecPathSize = 128u;
+    if (!invoke(&context, &event, &cpu, &result, &pif_session, 1u) || result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        info->ExecExtType != COM_EXTENTION || strcmp((CHAR *)context.guest + app_address, pif_target) != 0 ||
+        pif_session.command_source_delivered != 1u) return 7;
+    bx_ntvdm_command_misc_session_dispose(&pif_session); DeleteFileA(pif_path); DeleteFileA(pif_target);
     bx_ntvdm_command_misc_session_initialize(&retry_session);
     memset(large_environment, 0, sizeof(large_environment));
     memcpy(large_environment, "FOO=", 4u); memset(large_environment + 4u, 'E', 1300u);
     if (!bx_ntvdm_command_misc_session_set_command_source(&retry_session,
             "C:\\TOOLS\\RETRY.EXE", "", 2u, 932u) ||
         !bx_ntvdm_command_misc_session_set_command_environment(&retry_session,
-            large_environment, 1306u)) return 5;
+            large_environment, 1306u)) return 8;
     memset(&context, 0, sizeof(context));
     info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 4u;
     info->CmdLineSeg = 0x400u; info->CmdLineSize = 128u;
@@ -68,9 +108,10 @@ int main(void)
         retry_session.command_source_repeat_pending != 0u || retry_session.command_source_delivered != 1u ||
         info->CodePage != 932u ||
         strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\RETRY.EXE") != 0 ||
-        !has_prefix((CHAR *)context.guest + 0x3000u, required_environment, "FOO=")) return 7;
+        !has_prefix((CHAR *)context.guest + 0x3000u, required_environment, "FOO=")) return 9;
     bx_ntvdm_command_misc_session_dispose(&session);
     bx_ntvdm_command_misc_session_dispose(&retry_session);
+    bx_ntvdm_command_misc_session_dispose(&batch_session);
     puts("T231 S7 direct OpenNT cmdGetNextCmd CLI-source handoff, environment retry/re-entry, and no-command terminal behavior verified");
     return 0;
 }

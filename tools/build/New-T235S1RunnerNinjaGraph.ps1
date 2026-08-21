@@ -21,7 +21,7 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 $ninja = Get-Command ninja -ErrorAction Stop
 $runnerSources = @(
     'src/cli/ntdos64_run.c',
-    'src/cli/byob_profile.c',
+    'src/cli/ntdos64_config.c',
     'src/cli/byob_identity.c',
     'src/cli/byob_target_selection.c',
     'src/cli/byob_launch_declaration_v1.c',
@@ -87,9 +87,9 @@ foreach ($relative in $runnerSources) {
 }
 $probeObject = 'obj/tests_runner_runner_engine_probe_c.obj'
 $graph.Add('build ' + $probeObject + ': cc ' + (NinjaPath (Join-Path $root $probeSource)))
-$graph.Add('build ntdos64-run.exe: link_runner ' + ($runnerObjects -join ' '))
+$graph.Add('build ntvdm64-0235.exe: link_runner ' + ($runnerObjects -join ' '))
 $graph.Add('build runner-engine-probe.exe: link_probe ' + $probeObject)
-$graph.Add('build all: phony ntdos64-run.exe runner-engine-probe.exe')
+$graph.Add('build all: phony ntvdm64-0235.exe runner-engine-probe.exe')
 $graph.Add('default all')
 $graph | Set-Content -LiteralPath (Join-Path $build 'build.ninja') -Encoding ascii
 Write-Host "Generated M0 T235 S1 runner Ninja graph: $build"

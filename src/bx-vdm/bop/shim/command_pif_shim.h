@@ -31,6 +31,10 @@ DWORD bx_ntvdm_command_pif_search_path_oem(LPCSTR path, LPCSTR file_name,
 BOOL bx_ntvdm_command_pif_set_console_title_oem(LPCSTR title);
 void *ch_malloc(unsigned int bytes);
 BOOL GetPIFData(PIF_DATA *data, char *pif_name);
+/* Execute the unmodified nt_pif.c CONFIG/AUTOEXEC selection while the
+ * startup PIF is still the initial host input. */
+BOOL bx_ntvdm_command_pif_select_config_files(char *pif_name,
+    char *config_path, char *autoexec_path);
 DWORD GetFileAttributesOem(LPSTR name);
 BOOL SetCurrentDirectoryOem(LPSTR name);
 

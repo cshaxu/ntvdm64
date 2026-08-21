@@ -10,8 +10,8 @@ static int valid(const byob_launch_plan_v2 *value)
     if (!value || value->version != BYOB_LAUNCH_PLAN_V2_VERSION ||
         (value->slot_count != 1u && value->slot_count != 2u) ||
         value->first.version != 1u || value->first.tail_bytes > BYOB_LAUNCH_DECLARATION_V1_TAIL_BYTES ||
-        (value->first.target_kind != BYOB_LAUNCH_TARGET_KIND_V1_COM &&
-         value->first.target_kind != BYOB_LAUNCH_TARGET_KIND_V1_EXE)) return 0;
+        (value->first.target_kind < BYOB_LAUNCH_TARGET_KIND_V1_COM ||
+         value->first.target_kind > BYOB_LAUNCH_TARGET_KIND_V1_PIF)) return 0;
     for (i = 0u; i < value->first.tail_bytes; ++i)
         if (value->first.tail[i] < 0x20u || value->first.tail[i] > 0x7eu || value->first.tail[i] == '=') return 0;
     return 1;
@@ -39,7 +39,9 @@ int byob_launch_plan_v2_to_environment(const byob_launch_plan_v2 *value,
     uint32_t i, at = 8u;
     if (!output || !valid(value)) return 0;
     output[0] = L'2'; output[1] = L','; output[2] = (wchar_t)(L'0' + value->slot_count); output[3] = L',';
-    output[4] = value->first.target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L'c' : L'e';
+    output[4] = value->first.target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L'c' :
+        value->first.target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE ? L'e' :
+        value->first.target_kind == BYOB_LAUNCH_TARGET_KIND_V1_BAT ? L'b' : L'p';
     output[5] = L','; output[6] = digits[value->first.tail_bytes >> 4];
     output[7] = digits[value->first.tail_bytes & 15u];
     for (i = 0u; i < value->first.tail_bytes; ++i) {
@@ -56,7 +58,7 @@ int byob_launch_plan_v2_from_environment(byob_launch_plan_v2 *out_value,
     uint32_t i, bytes; wchar_t kind;
     if (!out_value || !input || wcsncmp(input, L"2,", 2u) != 0 ||
         (input[2] != L'1' && input[2] != L'2') || input[3] != L',' ||
-        (input[4] != L'c' && input[4] != L'e') || input[5] != L',' ||
+        (input[4] != L'c' && input[4] != L'e' && input[4] != L'b' && input[4] != L'p') || input[5] != L',' ||
         input[6] < L'0' || input[6] > L'7' ||
         !((input[7] >= L'0' && input[7] <= L'9') || (input[7] >= L'a' && input[7] <= L'f'))) return 0;
     kind = input[4]; bytes = (uint32_t)((input[6] <= L'9' ? input[6] - L'0' : input[6] - L'a' + 10) << 4) |
@@ -64,7 +66,9 @@ int byob_launch_plan_v2_from_environment(byob_launch_plan_v2 *out_value,
     if (bytes > BYOB_LAUNCH_DECLARATION_V1_TAIL_BYTES || wcslen(input) != 8u + bytes * 2u) return 0;
     memset(out_value, 0, sizeof(*out_value)); out_value->version = BYOB_LAUNCH_PLAN_V2_VERSION;
     out_value->slot_count = (uint32_t)(input[2] - L'0'); out_value->first.version = 1u;
-    out_value->first.target_kind = kind == L'c' ? BYOB_LAUNCH_TARGET_KIND_V1_COM : BYOB_LAUNCH_TARGET_KIND_V1_EXE;
+    out_value->first.target_kind = kind == L'c' ? BYOB_LAUNCH_TARGET_KIND_V1_COM :
+        kind == L'e' ? BYOB_LAUNCH_TARGET_KIND_V1_EXE :
+        kind == L'b' ? BYOB_LAUNCH_TARGET_KIND_V1_BAT : BYOB_LAUNCH_TARGET_KIND_V1_PIF;
     out_value->first.tail_bytes = bytes;
     for (i = 0u; i < bytes; ++i) {
         wchar_t a = input[8u + i * 2u], b = input[9u + i * 2u];

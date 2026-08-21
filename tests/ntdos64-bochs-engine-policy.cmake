@@ -1,5 +1,5 @@
 if(NOT DEFINED RUNNER OR NOT EXISTS "${RUNNER}")
-    message(FATAL_ERROR "RUNNER must name ntdos64-run.exe")
+    message(FATAL_ERROR "RUNNER must name the fixed T235 executable")
 endif()
 if(NOT DEFINED SHIM OR NOT EXISTS "${SHIM}")
     message(FATAL_ERROR "SHIM must name ntdos64-bochs-engine.exe")

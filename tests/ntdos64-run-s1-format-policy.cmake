@@ -1,5 +1,5 @@
 if(NOT DEFINED RUNNER OR NOT EXISTS "${RUNNER}")
-    message(FATAL_ERROR "RUNNER must name ntdos64-run.exe")
+    message(FATAL_ERROR "RUNNER must name the fixed T235 executable")
 endif()
 if(NOT DEFINED ENV{ComSpec} OR "$ENV{ComSpec}" STREQUAL "")
     message(FATAL_ERROR "ComSpec is required for the PE handoff check")

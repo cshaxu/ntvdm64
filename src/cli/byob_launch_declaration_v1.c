@@ -17,8 +17,12 @@ static int append_ascii(uint8_t *out, uint32_t *used, const wchar_t *text)
 static int kind_from_file_name(const wchar_t *file_name, uint32_t *out_kind)
 {
     if (file_name == 0 || out_kind == 0) return 0;
-    if (wcscmp(file_name, L"TARGET.COM") == 0) { *out_kind = BYOB_LAUNCH_TARGET_KIND_V1_COM; return 1; }
-    if (wcscmp(file_name, L"TARGET.EXE") == 0) { *out_kind = BYOB_LAUNCH_TARGET_KIND_V1_EXE; return 1; }
+    const wchar_t *extension = wcsrchr(file_name, L'.');
+    if (extension == NULL) return 0;
+    if (_wcsicmp(extension, L".COM") == 0) { *out_kind = BYOB_LAUNCH_TARGET_KIND_V1_COM; return 1; }
+    if (_wcsicmp(extension, L".EXE") == 0) { *out_kind = BYOB_LAUNCH_TARGET_KIND_V1_EXE; return 1; }
+    if (_wcsicmp(extension, L".BAT") == 0) { *out_kind = BYOB_LAUNCH_TARGET_KIND_V1_BAT; return 1; }
+    if (_wcsicmp(extension, L".PIF") == 0) { *out_kind = BYOB_LAUNCH_TARGET_KIND_V1_PIF; return 1; }
     return 0;
 }
 
@@ -53,7 +57,9 @@ int byob_launch_declaration_v1_to_environment(
         value->tail_bytes > BYOB_LAUNCH_DECLARATION_V1_TAIL_BYTES ||
         tail_capacity <= value->tail_bytes) return 0;
     kind_value = value->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_COM ? L"com" :
-        value->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE ? L"exe" : 0;
+        value->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_EXE ? L"exe" :
+        value->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_BAT ? L"bat" :
+        value->target_kind == BYOB_LAUNCH_TARGET_KIND_V1_PIF ? L"pif" : 0;
     if (kind_value == 0 || kind_capacity < 4u) return 0;
     wcscpy(kind, kind_value);
     for (index = 0u; index < value->tail_bytes; ++index) {
@@ -73,6 +79,8 @@ int byob_launch_declaration_v1_from_environment(
     out_value->version = BYOB_LAUNCH_DECLARATION_V1_VERSION;
     if (wcscmp(kind, L"com") == 0) out_value->target_kind = BYOB_LAUNCH_TARGET_KIND_V1_COM;
     else if (wcscmp(kind, L"exe") == 0) out_value->target_kind = BYOB_LAUNCH_TARGET_KIND_V1_EXE;
+    else if (wcscmp(kind, L"bat") == 0) out_value->target_kind = BYOB_LAUNCH_TARGET_KIND_V1_BAT;
+    else if (wcscmp(kind, L"pif") == 0) out_value->target_kind = BYOB_LAUNCH_TARGET_KIND_V1_PIF;
     else return 0;
     if (!append_ascii(out_value->tail, &used, tail)) return 0;
     out_value->tail_bytes = used;

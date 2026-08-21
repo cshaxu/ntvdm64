@@ -2,31 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T235 S1** — closed P1 format-admission record; it authorizes no further implementation.
+**Active: M0 T235 S3** — carry one copied initial COMMAND input and PIF configuration choice through the existing session seam to the original owners.
 
 ## Active Packet
 
-### M0 T235 S1 — CLI target grammar and COMMAND-input admission
+### M0 T235 S3 — copied initial COMMAND input seam
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T235 S1`, Ordinary Mode. |
-| Admission And Approval | The owner selected Queue item 1 after closing T234 and approved execution, including the current uncommitted worktree changes in the final reviewed delivery. |
-| Objective | Retain the established grammar in which the first non-option argument is the target path, and classify `.com`, DOS MZ `.exe`, `.bat`, and `.pif` as bounded COMMAND initial-input candidates without assigning their semantics to the CLI. |
-| Non-goals | Do not create the versioned initial-COMMAND record, hand input to `GetNextVDMCommand`, parse PIF or BAT, alter COMMAND/BOP/guest-memory behavior, implement WOW, or change host mutation policy. |
-| Reference Baseline | T234 is closed. `src/cli/ntdos64_run.c` treats the first non-option as a target; `.bat` and `.pif` are unknown, and `byob_target_selection` admits only `TARGET.COM` and `TARGET.EXE`. |
-| Files And ABI Surface | `src/cli/ntdos64_run.c`, CLI image/target helpers only if their existing contract must expose a format disposition, a focused runner fixture and its formal manifest entry, S1 evidence, Status, and document inventory. |
-| Applicable Rules | `docs/rules/EXECUTION.md`, `docs/rules/ARCHITECTURE.md`, `docs/rules/CODING.md`, source policy, and the queued COMMAND launch/PIF proposal. CLI ownership is parsing and immutable admission only. |
-| Verification | Focused CLI fixture covers target-first grammar, malformed/duplicate option rejection, `.com`, DOS MZ `.exe`, `.bat`, `.pif`, and PE32/PE64 direct-host preservation. Source review preserves the unchanged NE WOW-unavailable branch; P8 owns its formal outcome fixture. Run the affected formal target, governance gate, and diff check. |
-| Expected Markers | The first non-option remains the target; CLI classification does not read PIF content or BAT lines; COMMAND candidates are not sent to direct `CreateProcessW`; all unsupported forms report a named disposition. |
-| Asset Needs | Existing CLI runner, BYOB identity admission, original OpenNT COMMAND/PIF mirrors as ownership evidence, and no new external source, guest media, or host dependency. |
-| Reporting Requirements | Record the format matrix, exact source-recovery rung, CLI/COMMAND ownership boundary, positive and negative inputs/results, and transfer to S2--S9. |
-| Stop Conditions | Pause if an initial input cannot stay bounded and session-owned, if the target-first grammar weakens current declared-component identity, or if PIF/BAT semantics would enter CLI code. |
-| Exit Criteria | **Met for P1.** The target-first grammar and deterministic format matrix are source-built and fixture-verified; PE/NE behavior is preserved or explicitly transferred; no PIF/BAT parser or guest write is introduced; formal affected target, governance gate, and diff check pass. |
-| Original Owner Request | “读取队列中的下一条任务 准备开始” followed by “批准执行 未提交改动也要一并提交”. |
-| Similar-Issue Sweep | Existing option order/duplication handling, target canonicalization, direct host launch, native-engine entry, BYOB target identity, `.com` and MZ classification, `.bat`/`.pif` extension handling, PE and NE outcomes, help/usage text, and fixture manifest membership. |
+| Identifier Mode | `M0 T235 S3`, Ordinary Mode. |
+| Admission And Approval | The owner approved T235 execution. S2's fixed YAML runner input and output naming are source-built; this S carries the admitted initial input to the original COMMAND owner. |
+| Objective | Replace the COM/EXE-only startup-plan projection with a bounded, session-owned copied initial pathname and tail that `GetNextVDMCommand` supplies to the existing original `cmdGetNextCmd`; when that copied source is PIF, complete the original PIF CONFIG/AUTOEXEC selection before `54:0C/0D`. |
+| Non-goals | Do not parse BAT or PIF in the CLI; do not reimplement `cmdGetNextCmd`, `cmdCheckForPIF`, `nt_pif.c`, guest loading, child lifecycle, WOW, or PIF data semantics. |
+| Reference Baseline | `command_v2_runtime_session` already binds a copied COMMAND source through `bx_ntvdm_dem_v2_startup_copy_command_source`, but `byob_launch_plan_v2` accepts only COM/EXE declared targets. |
+| Files And ABI Surface | Startup input contract, `dem_v2_startup_composition`, `command_v2_runtime_session`, COMMAND session shim/fixture, and S3 evidence. |
+| Applicable Rules | Source policy and recovery ladder. Original owner: `base/mvdm/dos/command/cmdmisc.c:cmdGetNextCmd`, then `cmdpif.c:cmdCheckForPIF` and `nt_pif.c`. |
+| Verification | Focused fixtures prove copied COM, DOS EXE, BAT, and PIF initial paths/tails reach `GetNextVDMCommand`; the PIF fixture now proves original `nt_pif.c` selects CONFIG/AUTOEXEC before COMMAND config services. Fresh formal Ninja, governance, and diff checks follow. |
+| Expected Markers | No host pointer crosses into session state; only bounded copied OEM bytes enter `VDMINFO.AppName/CmdLine`; BAT/PIF are not classified or parsed by CLI after admission. |
+| Asset Needs | Existing original COMMAND mirror and current session seam; no external source, guest media, or new parser. |
+| Reporting Requirements | Record original source order, copied-record layout/lifetime, format matrix, positive/negative transfer evidence, and P4/P5 lifecycle transfer. |
+| Stop Conditions | Pause if the original owner requires a raw host pointer, if PIF selection must run before the session seam, or if BAT/PIF semantics would enter CLI code. |
+| Exit Criteria | All four initial formats are delivered through the copied session record to original COMMAND; original PIF owner fixture observes PIF and prior CONFIG/AUTOEXEC selection; no CLI semantics or guest writes are added; formal and governance checks pass. |
+| Original Owner Request | “实施完成T235任务：cli 按照opennt原始代码的最小修改版本接纳可执行文件”. |
+| Similar-Issue Sweep | Launch-plan serialization, target identity, OEM conversion, length bounds, command tail, session reset/rebind, `GetNextVDMCommand`, PIF owner call order, direct host PE and NE boundaries. |
 
-P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). P2 remains the separately admitted versioned initial-COMMAND transport; no P2 implementation is authorized by this closure.
+P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). Current S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). S2 supersedes the unreleased runner configuration protocol; its configuration work is separate from the proposal's later initial-COMMAND transport.
 
 ## Current Work Record
 

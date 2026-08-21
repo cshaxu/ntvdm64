@@ -67,3 +67,21 @@ BOOL GetPIFData(PIF_DATA *data, char *pif_name)
     return bx_ntvdm_command_pif_parse_original(
         (BX_NTVDM_OPENNT_PARSER_PIF_DATA *)data, pif_name);
 }
+
+BOOL bx_ntvdm_command_pif_select_config_files(char *pif_name,
+    char *config_path, char *autoexec_path)
+{
+    PIF_DATA data;
+    if (pif_name == NULL || config_path == NULL || autoexec_path == NULL) return FALSE;
+    memset(&data, 0, sizeof(data));
+    /* This is deliberately before cmdGetNextCmd/cmdCheckForPIF, whose
+     * historical IgnoreConfigAutoexec setting prevents a second selection. */
+    if (!GetPIFData(&data, pif_name)) return FALSE;
+    bx_ntvdm_command_pif_original_get_config_files(TRUE, config_path);
+    bx_ntvdm_command_pif_original_get_config_files(FALSE, autoexec_path);
+    free(data.CmdLine);
+    free(data.StartDir);
+    free(data.StartFile);
+    free(data.WinTitle);
+    return TRUE;
+}

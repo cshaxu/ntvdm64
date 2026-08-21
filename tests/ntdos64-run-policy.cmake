@@ -1,5 +1,5 @@
 if(NOT DEFINED RUNNER OR NOT EXISTS "${RUNNER}")
-    message(FATAL_ERROR "RUNNER must name ntdos64-run.exe")
+    message(FATAL_ERROR "RUNNER must name the fixed T235 executable")
 endif()
 if(NOT DEFINED ENGINE_PROBE OR NOT EXISTS "${ENGINE_PROBE}")
     message(FATAL_ERROR "ENGINE_PROBE must name runner-engine-probe.exe")
@@ -30,7 +30,8 @@ if(NOT dos_exit EQUAL 3)
 endif()
 
 set(byob_root "${CMAKE_CURRENT_BINARY_DIR}/ntdos64-run-policy-root")
-set(byob_manifest "${CMAKE_CURRENT_BINARY_DIR}/ntdos64-run-policy.json")
+get_filename_component(runner_root "${RUNNER}" DIRECTORY)
+set(byob_config "${runner_root}/ntvdmcfg.yaml")
 file(MAKE_DIRECTORY "${byob_root}")
 file(WRITE "${byob_root}/NTIO.SYS" "abc")
 file(WRITE "${byob_root}/NTDOS.SYS" "abc")
@@ -39,21 +40,47 @@ file(WRITE "${byob_root}/TARGET.COM" "abc")
 file(WRITE "${byob_root}/CONFIG.NT" "rem runner policy\n")
 file(WRITE "${byob_root}/AUTOEXEC.NT" "rem runner policy\n")
 set(abc_sha256 "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad")
-file(WRITE "${byob_manifest}"
-    "{\"schema\":\"ntdos64-byob-profile-v3\",\"profile\":\"nt4-en-us-command-smoke-v3\",\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"runner-policy-owned\",\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null}],\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},\"guest_target_placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2},\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}}}")
+file(COPY "${byob_root}/NTIO.SYS" "${byob_root}/NTDOS.SYS" "${byob_root}/COMMAND.COM"
+    "${byob_root}/TARGET.COM" "${byob_root}/CONFIG.NT" "${byob_root}/AUTOEXEC.NT"
+    DESTINATION "${runner_root}")
+file(WRITE "${byob_config}"
+    "ntio_file: NTIO.SYS\nntio_bytes: 3\nntio_sha256: ${abc_sha256}\nntdos_file: NTDOS.SYS\nntdos_bytes: 3\nntdos_sha256: ${abc_sha256}\ncommand_file: COMMAND.COM\ncommand_bytes: 3\ncommand_sha256: ${abc_sha256}\ntarget_file: TARGET.COM\ntarget_bytes: 3\ntarget_sha256: ${abc_sha256}\nconfig_file: CONFIG.NT\nautoexec_file: AUTOEXEC.NT\n")
 execute_process(
-    COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}" --byob-profile "${byob_manifest}"
-        --byob-root "${byob_root}" --include-drives c,d,e --exclude-drives e
-        --config-source "${byob_root}/CONFIG.NT" --autoexec-source "${byob_root}/AUTOEXEC.NT"
-        "${byob_root}/TARGET.COM" /c smoke
+    COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}" --include-drives c,d,e --exclude-drives e
+        "${runner_root}/TARGET.COM" /c smoke
     RESULT_VARIABLE engine_exit)
-file(REMOVE "${byob_manifest}" "${byob_root}/NTIO.SYS" "${byob_root}/NTDOS.SYS"
+file(WRITE "${runner_root}/TARGET.PIF" "abc")
+file(WRITE "${byob_config}"
+    "ntio_file: NTIO.SYS\nntio_bytes: 3\nntio_sha256: ${abc_sha256}\nntdos_file: NTDOS.SYS\nntdos_bytes: 3\nntdos_sha256: ${abc_sha256}\ncommand_file: COMMAND.COM\ncommand_bytes: 3\ncommand_sha256: ${abc_sha256}\ntarget_file: TARGET.PIF\ntarget_bytes: 3\ntarget_sha256: ${abc_sha256}\nconfig_file: CONFIG.NT\nautoexec_file: AUTOEXEC.NT\n")
+execute_process(COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}" --include-drives c,d,e --exclude-drives e "${runner_root}/TARGET.PIF"
+    RESULT_VARIABLE pif_engine_exit)
+file(WRITE "${byob_config}"
+    "ntio_file: NTIO.SYS\nntio_bytes: 3\nntio_sha256: ${abc_sha256}\nntdos_file: NTDOS.SYS\nntdos_bytes: 3\nntdos_sha256: ${abc_sha256}\ncommand_file: COMMAND.COM\ncommand_bytes: 3\ncommand_sha256: ${abc_sha256}\ntarget_file: TARGET.PIF\ntarget_bytes: 3\ntarget_sha256: ${abc_sha256}\nconfig_file: CONFIG.NT\nconfig_file: CONFIG.NT\nautoexec_file: AUTOEXEC.NT\n")
+execute_process(COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}" "${runner_root}/TARGET.PIF"
+    RESULT_VARIABLE duplicate_config_exit)
+file(REMOVE "${byob_config}" "${runner_root}/NTIO.SYS" "${runner_root}/NTDOS.SYS"
+    "${runner_root}/COMMAND.COM" "${runner_root}/TARGET.COM" "${runner_root}/CONFIG.NT"
+    "${runner_root}/AUTOEXEC.NT" "${runner_root}/TARGET.PIF" "${byob_root}/NTIO.SYS" "${byob_root}/NTDOS.SYS"
     "${byob_root}/COMMAND.COM" "${byob_root}/TARGET.COM" "${byob_root}/CONFIG.NT"
     "${byob_root}/AUTOEXEC.NT")
 file(REMOVE_RECURSE "${byob_root}")
 file(REMOVE "${fake_dos}")
 if(NOT engine_exit EQUAL 47)
     message(FATAL_ERROR "engine profile/root handoff exit was ${engine_exit}, expected 47")
+endif()
+if(NOT pif_engine_exit EQUAL 47)
+    message(FATAL_ERROR "PIF engine handoff exit was ${pif_engine_exit}, expected 47")
+endif()
+if(NOT duplicate_config_exit EQUAL 3)
+    message(FATAL_ERROR "duplicate YAML key exit was ${duplicate_config_exit}, expected 3")
+endif()
+file(WRITE "${runner_root}/UNKNOWN.COM" "MZ")
+file(WRITE "${byob_config}" "unknown_key: rejected\n")
+execute_process(COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}" "${runner_root}/UNKNOWN.COM"
+    RESULT_VARIABLE unknown_config_exit)
+file(REMOVE "${runner_root}/UNKNOWN.COM" "${byob_config}")
+if(NOT unknown_config_exit EQUAL 3)
+    message(FATAL_ERROR "unknown YAML key exit was ${unknown_config_exit}, expected 3")
 endif()
 execute_process(
     COMMAND "${RUNNER}" --include-drives c,,d "$ENV{ComSpec}" /d /s /c "exit 0"

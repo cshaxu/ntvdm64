@@ -10,7 +10,9 @@
 
 typedef enum byob_launch_target_kind_v1 {
     BYOB_LAUNCH_TARGET_KIND_V1_COM = 1,
-    BYOB_LAUNCH_TARGET_KIND_V1_EXE = 2
+    BYOB_LAUNCH_TARGET_KIND_V1_EXE = 2,
+    BYOB_LAUNCH_TARGET_KIND_V1_BAT = 3,
+    BYOB_LAUNCH_TARGET_KIND_V1_PIF = 4
 } byob_launch_target_kind_v1;
 
 /* Copied launch metadata.  It intentionally has no host path, handle, guest

@@ -7,6 +7,7 @@
 #include <wctype.h>
 
 #include "byob_profile.h"
+#include "ntdos64_config.h"
 #include "byob_target_selection.h"
 #include "byob_launch_plan_v2.h"
 
@@ -393,10 +394,10 @@ int wmain(void)
     wchar_t **argv = CommandLineToArgvW(GetCommandLineW(), &argc);
     const wchar_t *engine = NULL;
     const wchar_t *bochs = NULL;
-    const wchar_t *byob_profile = NULL;
-    const wchar_t *byob_root = NULL;
-    const wchar_t *config_source = NULL;
-    const wchar_t *autoexec_source = NULL;
+    wchar_t config_path[MAX_PATH];
+    wchar_t config_root[MAX_PATH];
+    wchar_t config_source[MAX_PATH];
+    wchar_t autoexec_source[MAX_PATH];
     const wchar_t *mutation_mode = L"direct";
     int has_mutation_mode = 0;
     wchar_t include_drives[52] = {0};
@@ -411,7 +412,7 @@ int wmain(void)
     int result;
 
     if (argv == NULL || argc < 2) {
-        fwprintf(stderr, L"usage: ntdos64-run [--byob-profile profile.json --byob-root directory --config-source config.nt --autoexec-source autoexec.nt] [--mutation-mode direct|readonly] [--include-drives c,d] [--exclude-drives e] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
+        fwprintf(stderr, L"usage: ntvdm64-0235 [--mutation-mode direct|readonly] [--include-drives c,d] [--exclude-drives e] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
         if (argv != NULL) LocalFree(argv);
         return 2;
     }
@@ -424,14 +425,6 @@ int wmain(void)
             target_index + 1 < argc && bochs == NULL) {
             bochs = argv[target_index + 1];
             target_index += 2;
-        } else if (_wcsicmp(argv[target_index], L"--byob-profile") == 0 &&
-            target_index + 1 < argc && byob_profile == NULL) {
-            byob_profile = argv[target_index + 1];
-            target_index += 2;
-        } else if (_wcsicmp(argv[target_index], L"--byob-root") == 0 &&
-            target_index + 1 < argc && byob_root == NULL) {
-            byob_root = argv[target_index + 1];
-            target_index += 2;
         } else if (_wcsicmp(argv[target_index], L"--include-drives") == 0 &&
             target_index + 1 < argc && include_drives[0] == L'\0' &&
             normalize_drive_list(argv[target_index + 1], include_drives)) {
@@ -439,14 +432,6 @@ int wmain(void)
         } else if (_wcsicmp(argv[target_index], L"--exclude-drives") == 0 &&
             target_index + 1 < argc && exclude_drives[0] == L'\0' &&
             normalize_drive_list(argv[target_index + 1], exclude_drives)) {
-            target_index += 2;
-        } else if (_wcsicmp(argv[target_index], L"--config-source") == 0 &&
-            target_index + 1 < argc && config_source == NULL) {
-            config_source = argv[target_index + 1];
-            target_index += 2;
-        } else if (_wcsicmp(argv[target_index], L"--autoexec-source") == 0 &&
-            target_index + 1 < argc && autoexec_source == NULL) {
-            autoexec_source = argv[target_index + 1];
             target_index += 2;
         } else if (_wcsicmp(argv[target_index], L"--mutation-mode") == 0 &&
             target_index + 1 < argc && !has_mutation_mode &&
@@ -486,27 +471,21 @@ int wmain(void)
             fwprintf(stderr, L"ntdos64-run: DOS profile options require a BYOB DOS engine\n");
             result = 2;
         } else {
-            if (config_source != NULL || autoexec_source != NULL) {
-                fwprintf(stderr, L"ntdos64-run: configuration sources require a BYOB DOS engine\n");
-                result = 2;
-            } else result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+            result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         }
-    } else if (kind == IMAGE_KIND_DOS && engine != NULL) {
+    } else if ((kind == IMAGE_KIND_DOS || kind == IMAGE_KIND_COMMAND_INPUT) && engine != NULL) {
         int engine_argc = bochs == NULL ? 6 : 8;
         wchar_t **engine_argv = NULL;
         int index;
 
-        if (byob_profile == NULL || byob_root == NULL ||
-            (config_source == NULL) != (autoexec_source == NULL)) {
-            fwprintf(stderr, L"ntdos64-run: DOS engine requires --byob-profile and --byob-root\n");
-            result = 3;
-        } else if (byob_profile_validate_file_select(byob_profile, byob_root, &selection) != BYOB_PROFILE_ACCEPTED ||
+        if (!ntdos64_config_load_sibling(config_path, config_root, config_source,
+                autoexec_source, &selection) ||
             !selection.has_target_placement ||
-            !byob_target_selection_matches(byob_root, &selection, full_path) ||
+            !byob_target_selection_matches(config_root, &selection, full_path) ||
             !byob_launch_plan_v2_from_arguments(&launch, &selection,
                 argc - target_index - 1, argv + target_index + 1) ||
             !byob_launch_plan_v2_to_environment(&launch, launch_plan)) {
-            fwprintf(stderr, L"ntdos64-run: BYOB profile validation failed\n");
+            fwprintf(stderr, L"ntvdm64-0235: sibling ntvdmcfg.yaml validation failed\n");
             result = 3;
         }
         else {
@@ -518,10 +497,10 @@ int wmain(void)
                 engine_argv[0] = (wchar_t *)engine;
                 /* The selected identity set is part of the explicit engine
                  * handoff. The runner does not open or retain guest bytes. */
-                engine_argv[1] = L"--byob-profile";
-                engine_argv[2] = (wchar_t *)byob_profile;
-                engine_argv[3] = L"--byob-root";
-                engine_argv[4] = (wchar_t *)byob_root;
+                engine_argv[1] = L"--ntvdmcfg";
+                engine_argv[2] = config_path;
+                engine_argv[3] = L"--config-root";
+                engine_argv[4] = config_root;
                 if (bochs != NULL) {
                     /* This remains runner-to-shim metadata. A native Bochs
                      * parser never receives a BYOB option or the bundle path. */
@@ -532,18 +511,17 @@ int wmain(void)
                     engine_argv[5] = L"--";
                 }
                 (void)index;
-                result = run_process(engine_argc, engine_argv, byob_profile, byob_root,
+                result = run_process(engine_argc, engine_argv, config_path, config_root,
                     include_drives, exclude_drives, launch_plan, config_source, autoexec_source,
                     mutation_mode);
                 HeapFree(GetProcessHeap(), 0, engine_argv);
             }
         }
     } else if (kind == IMAGE_KIND_COMMAND_INPUT) {
-        /* S1 admits the form but deliberately stops before S2's bounded,
-         * session-owned initial-COMMAND record.  PIF and BAT semantics remain
-         * with imported OpenNT COMMAND; no CLI parser or host-launch fallback
-         * is permitted here. */
-        fwprintf(stderr, L"ntdos64-run: COMMAND initial input requires the unavailable S2 handoff\n");
+        /* BAT/PIF are now valid COMMAND initial inputs, but the copied session
+         * record is owned by the explicit DOS engine.  The CLI still neither
+         * parses their bytes nor falls back to a host launch. */
+        fwprintf(stderr, L"ntvdm64-0235: COMMAND initial input requires an explicit engine\n");
         result = 3;
     } else if (kind == IMAGE_KIND_NE) {
         fwprintf(stderr, L"ntdos64-run: NE targets require an unavailable Win16/WOW host path\n");

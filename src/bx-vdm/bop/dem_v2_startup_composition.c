@@ -68,17 +68,20 @@ static int configure_command_source(const uint16_t *launch_input,
     uint32_t launch_chars, const byob_profile_selection *selection)
 {
     wchar_t launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
+    const wchar_t *extension;
+    uint32_t expected_kind;
     size_t bytes;
     if (launch_input == NULL || selection == NULL ||
         !descriptor_to_wide(launch_input, launch_chars, launch_text,
             BYOB_LAUNCH_PLAN_V2_ENV_CHARS) ||
         !byob_launch_plan_v2_from_environment(&runtime.launch, launch_text) ||
-        runtime.launch.slot_count != selection->declared_target_count ||
-        runtime.launch.first.target_kind !=
-            (wcscmp(selection->target.file_name, L"TARGET.COM") == 0 ?
-                BYOB_LAUNCH_TARGET_KIND_V1_COM :
-             wcscmp(selection->target.file_name, L"TARGET.EXE") == 0 ?
-                BYOB_LAUNCH_TARGET_KIND_V1_EXE : 0u)) return 0;
+        runtime.launch.slot_count != selection->declared_target_count) return 0;
+    extension = wcsrchr(selection->target.file_name, L'.');
+    expected_kind = extension != NULL && _wcsicmp(extension, L".COM") == 0 ? BYOB_LAUNCH_TARGET_KIND_V1_COM :
+        extension != NULL && _wcsicmp(extension, L".EXE") == 0 ? BYOB_LAUNCH_TARGET_KIND_V1_EXE :
+        extension != NULL && _wcsicmp(extension, L".BAT") == 0 ? BYOB_LAUNCH_TARGET_KIND_V1_BAT :
+        extension != NULL && _wcsicmp(extension, L".PIF") == 0 ? BYOB_LAUNCH_TARGET_KIND_V1_PIF : 0u;
+    if (runtime.launch.first.target_kind != expected_kind) return 0;
     bytes = (size_t)WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS,
         selection->target.file_name, -1, runtime.command_application,
         (int)sizeof(runtime.command_application), NULL, NULL);

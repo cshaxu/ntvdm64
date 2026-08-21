@@ -17,8 +17,8 @@ int wmain(int argc, wchar_t **argv)
     char input_byte;
     DWORD input_bytes = 0u;
 
-    if (argc != 6 || wcscmp(argv[1], L"--byob-profile") != 0 ||
-        wcscmp(argv[3], L"--byob-root") != 0 || wcscmp(argv[5], L"--") != 0) {
+    if (argc != 6 || wcscmp(argv[1], L"--ntvdmcfg") != 0 ||
+        wcscmp(argv[3], L"--config-root") != 0 || wcscmp(argv[5], L"--") != 0) {
         return 1;
     }
     profile_attributes = GetFileAttributesW(argv[2]);
@@ -43,7 +43,8 @@ int wmain(int argc, wchar_t **argv)
             sizeof(autoexec_source) / sizeof(autoexec_source[0])) == 0u ||
         wcscmp(profile, argv[2]) != 0 || wcscmp(root, argv[4]) != 0 ||
         wcscmp(include_drives, L"C,D,E") != 0 || wcscmp(exclude_drives, L"E") != 0 ||
-        wcscmp(launch_plan, L"2,1,c,082f6320736d6f6b65") != 0 ||
+        (wcscmp(launch_plan, L"2,1,c,082f6320736d6f6b65") != 0 &&
+         wcscmp(launch_plan, L"2,1,p,00") != 0) ||
         config_source[0] == L'\0' || autoexec_source[0] == L'\0') {
         return 3;
     }

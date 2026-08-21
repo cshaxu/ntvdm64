@@ -13,8 +13,6 @@ int byob_target_selection_matches(const wchar_t *byob_root,
 
     if (byob_root == NULL || selection == NULL || target_path == NULL ||
         !selection->has_target_placement || selection->target.file_name[0] == L'\0' ||
-        (wcscmp(selection->target.file_name, L"TARGET.COM") != 0 &&
-         wcscmp(selection->target.file_name, L"TARGET.EXE") != 0) ||
         swprintf(declared, MAX_PATH, L"%ls\\%ls", byob_root,
             selection->target.file_name) < 0) return 0;
     declared_length = GetFullPathNameW(declared, MAX_PATH, expected, NULL);
