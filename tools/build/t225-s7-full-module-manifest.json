@@ -15,6 +15,10 @@
     "src/bx-vdm",
     "src/bx-mantle",
     "src/opennt/local/compat/host",
+    "src/opennt/base/mvdm/inc",
+    "src/opennt/base/mvdm/softpc.new/base/inc",
+    "src/opennt/base/mvdm/softpc.new/host/inc",
+    "src/opennt/public/internal/windows/inc",
     "refs/bochs",
     "refs/bochs/instrument/stubs",
     "src/bx-core",
@@ -197,6 +201,7 @@
         "src/bx-vdm/bop/opennt/dem/demioctl.c",
         "src/bx-vdm/bop/opennt/dem/demsrch.c",
         "src/bx-vdm/bop/opennt/command/cmdmisc.c",
+        "src/bx-vdm/bop/opennt/command/cmdpif.c",
         "src/bx-vdm/bop/opennt/command/cmddisp.c",
         "src/bx-vdm/bop/opennt/command/cmdexit.c",
         "src/bx-vdm/bop/opennt/command/cmdconf.c",
@@ -227,6 +232,8 @@
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
         "src/bx-vdm/bop/shim/command_misc_shim.c",
+        "src/bx-vdm/bop/shim/command_pif_shim.c",
+        "src/bx-vdm/bop/shim/command_opennt_pif_parser.c",
         "src/bx-vdm/bop/shim/command_native_session_shim.c",
         "src/bx-vdm/bop/shim/command_config_shim.c",
         "src/bx-vdm/bop/shim/command_environment_shim.c",
@@ -680,6 +687,18 @@
     {
       "name": "t231-s7-command-get-next-direct-fixture",
       "source": "tests/bx-vdm/t231_s7_command_get_next_direct_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t234-s2-command-pif-direct-fixture",
+      "source": "tests/bx-vdm/t234_s2_command_pif_direct_fixture.c",
       "libraries": [
         "bx-vdm"
       ],

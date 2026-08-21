@@ -161,6 +161,36 @@ affected edges (`cmdmisc.c`, shim, `bx-vdm.lib`, fixture object and executable)
 and the fixture exited zero.  This validates the original function's two
 defined branches without making an unsupported broader code-page claim.
 
+## P7 — `cmdCheckForPIF` source recovery
+
+The former `command_misc_shim.c::cmdCheckForPIF` no-op is removed. The
+directly retained OpenNT `base/mvdm/dos/command/cmdpif.c` owner now compiles in
+the formal `bx-vdm` module with its original detection, PIF result handling,
+path, command-tail, start-directory, close-on-exit, and cleanup logic.
+
+Its paired original parser,
+`base/mvdm/softpc.new/host/src/nt_pif.c`, is compiled through a narrow
+translation-unit compatibility wrapper. The wrapper retains the parser body
+and records the required NT4-to-CLI differences: private legacy type/global
+names avoid an incompatible header universe; OEM path/environment/console
+calls map to current Win32 APIs; and the historical interactive allocation
+retry dialog explicitly takes its original ignore/failure exit in a CLI host.
+The pre-existing CLI configuration-input seam retains its own
+`GetPIFConfigFiles` export, so the parser's colliding historical export is
+kept translation-unit private.
+
+`D:\\tmp\\ntdos64-M0-T234-S2-formal-r10` was freshly generated from the
+formal manifest. MSVC x64 `/MT`, `/W4 /WX` Ninja built the entire dependency
+closure and `t234-s2-command-pif-direct-fixture.exe` exited zero. That fixture
+creates an owned PIF and target file, then verifies the original parser
+extracts its title, command, start directory, target, and close-on-exit bit.
+
+This closes the former no-op and establishes the PIF record/provider path; it
+does **not** claim that a PIF extension's CONFIG/AUTOEXEC selection has already
+been applied to the earlier CLI startup-image composition lifecycle. That
+ordering is a separate source-lifecycle recovery item and is intentionally not
+hidden behind this parser admission.
+
 ## Interpretation And Confidence
 
 The product route no longer has a 1024-byte COMMAND environment storage or

@@ -9,14 +9,11 @@
  *  williamh 27-May-1993 almost rewrote for better pif support
  */
 
-#include "cmd.h"
+/* OpenNT source: base/mvdm/dos/command/cmdpif.c.  The original owner body
+ * below is compiled through the smallest COMMAND/PIF host capability seam;
+ * the paired original nt_pif.c parser is included by command_opennt_pif_parser.c. */
+#include "../../shim/command_pif_shim.h"
 #include <ctype.h>
-#include <pif.h>
-#include <cmdsvc.h>
-#include <softpc.h>
-#include <mvdm.h>
-#include <oemuni.h>
-#include "nt_pif.h"
 
 VOID cmdCheckForPIF (PVDMINFO pvi)
 {
@@ -30,6 +27,13 @@ CHAR	FullPathName[MAX_PATH + 1];
 CHAR	* pFilePart;
 BOOL	IsPIFFile, IsFromForceDos;
 CHAR	AppFullPathName[MAX_PATH + 1];
+
+    /* DIVERGENCE: these historical locals belonged to removed ForceDos-era
+     * branches. Keep source declaration order while making the retained body
+     * warning-clean under the formal /W4 /WX build. */
+    (void)size;
+    (void)ch;
+    (void)IsFromForceDos;
 
     //
     // Advance CmdLine pointer to beg of command tail
@@ -119,7 +123,7 @@ CHAR	AppFullPathName[MAX_PATH + 1];
 	    lpszEnvDir[1] = pfdata.StartDir[0];
 	    SetEnvironmentVariableOem(lpszEnvDir, pfdata.StartDir);
 	    SetCurrentDirectoryOem(pfdata.StartDir);
-	    pvi->CurDrive = toupper(pfdata.StartDir[0]) - 'A';
+	    pvi->CurDrive = (USHORT)(toupper((unsigned char)pfdata.StartDir[0]) - 'A');
         }
 
 	if (pfdata.WinTitle) {
@@ -224,7 +228,9 @@ CHAR	AppFullPathName[MAX_PATH + 1];
             goto CleanUpAndReturn;
         }
 	// update the application path name length(including the terminate NULL)
-	pvi->AppLen = strlen(pvi->AppName) + 1;
+	/* DIVERGENCE: AppName is bounded by the original MAX_PATH buffer; make
+	 * the historical 16-bit CMDINFO field conversion explicit for /W4 /WX. */
+	pvi->AppLen = (USHORT)(strlen(pvi->AppName) + 1u);
 
 	// pvi->AppName contains the application short name.
 	// verify that it has the correct extension(.EXE, .COM or .BAT).
@@ -255,7 +261,8 @@ CHAR	AppFullPathName[MAX_PATH + 1];
 
 	}
 	strcpy(pvi->CmdLine, FullPathName);
-	pvi->CmdSize = strlen(FullPathName) + 1;
+	/* DIVERGENCE: FullPathName is the original bounded MAX_PATH local. */
+	pvi->CmdSize = (USHORT)(strlen(FullPathName) + 1u);
     }
 
     if (IsPIFFile)

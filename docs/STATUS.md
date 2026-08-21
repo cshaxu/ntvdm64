@@ -63,6 +63,12 @@ the historical US-only `1252 -> 437` conversion is restored while all other
 values preserve the original `USHORT` pass-through.  The `54:01` fixture
 verifies both paths through `cmdGetNextCmd` under formal Ninja.
 
+**P7 progress:** `cmdCheckForPIF` now uses the original COMMAND owner body
+and the original OpenNT `nt_pif.c` parser through an OEM/CLI compatibility
+seam. A formal local fixture verifies PIF title, command tail, start
+directory, target, and close-on-exit extraction. PIF-provided CONFIG/AUTOEXEC
+selection remains explicitly outside this packet's later startup lifecycle.
+
 ## Current Work Record
 
 M0 T231 closed as the COMMAND `54:00..10` code-complete/v2 product-route

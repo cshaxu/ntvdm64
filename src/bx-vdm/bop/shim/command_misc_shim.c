@@ -253,7 +253,6 @@ BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
         &session->command_source_current_directories_bytes,
         current_directories, current_directory_bytes);
 }
-void cmdCheckForPIF(PVDMINFO vdm_info) { (void)vdm_info; }
 void cmdPushExitInConsoleBuffer(void) { }
 void nt_block_event_thread(int block) { (void)block; }
 void nt_resume_event_thread(void) { }

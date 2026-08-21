@@ -112,7 +112,35 @@ typedef struct _VDMINFO {
     BOOLEAN fComingFromBat;
 } VDMINFO, *PVDMINFO;
 typedef struct _VDMENVBLK { DWORD cchEnv, cchRemain; CHAR *lpszzEnv; } VDMENVBLK, *PVDMENVBLK;
-typedef struct _BX_NTVDM_PIF_DATA { BOOL CloseOnExit; } PIF_DATA;
+/* OpenNT command/cmdpif.h: retain the original PIF record layout because
+ * cmdpif.c and the original nt_pif.c parser exchange it directly. */
+typedef struct _BX_NTVDM_PIF_DATA {
+    char *WinTitle;
+    char *CmdLine;
+    char *StartDir;
+    char *StartFile;
+    WORD fullorwin;
+    WORD graphicsortext;
+    WORD memreq;
+    WORD memdes;
+    WORD emsreq;
+    WORD emsdes;
+    WORD xmsreq;
+    WORD xmsdes;
+    char menuclose;
+    char reskey;
+    WORD ShortMod;
+    WORD ShortScan;
+    char idledetect;
+    char CloseOnExit;
+    char AppHasPIFFile;
+    char IgnoreTitleInPIF;
+    char IgnoreStartDirInPIF;
+    char IgnoreShortKeyInPIF;
+    char IgnoreCmdLineInPIF;
+    char IgnoreConfigAutoexec;
+    char SubSysId;
+} PIF_DATA;
 #define MASK_STDIN  1u
 #define MASK_STDOUT 2u
 #define MASK_STDERR 4u
