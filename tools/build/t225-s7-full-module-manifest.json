@@ -14,16 +14,16 @@
     "src/cli",
     "src/bx-vdm",
     "src/bx-mantle",
+    "src/bx-core",
+    "src/bx-core/cpu",
+    "refs/bochs",
+    "refs/bochs/instrument/stubs",
+    "refs/bochs/iodev",
     "src/opennt/local/compat/host",
     "src/opennt/base/mvdm/inc",
     "src/opennt/base/mvdm/softpc.new/base/inc",
     "src/opennt/base/mvdm/softpc.new/host/inc",
-    "src/opennt/public/internal/windows/inc",
-    "refs/bochs",
-    "refs/bochs/instrument/stubs",
-    "src/bx-core",
-    "src/bx-core/cpu",
-    "refs/bochs/iodev"
+    "src/opennt/public/internal/windows/inc"
   ],
   "modules": [
     {

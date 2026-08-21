@@ -61,11 +61,13 @@ CONFIG/AUTOEXEC paths to the existing session binding.
 
 Fresh runner graph r3 rebuilt and passed both runner policy scripts.  Fresh
 full graph r3 compiled the changed YAML loader, native CLI, DEM startup
-composition, and COMMAND runtime-session objects.  Linking the complete
-native executable remains blocked before these changes execute by the retained
-CPU C++/OpenNT header closure (`error.h`/`config.h` macro types); this is a
-pre-existing whole-core graph frontier, not evidence of a successful native
-guest run.
+composition, and COMMAND runtime-session objects.  The first native-target
+attempt then exposed a formal-graph include collision: core `<config.h>` was
+resolving to the legacy OpenNT header.  Putting the Bochs roots ahead of the
+OpenNT roots in the formal graph corrected that collision; r5 began compiling
+the complete core normally.  A completed native executable/guest-run witness
+is still required, so this is not yet evidence of successful native guest
+execution.
 
 ## Follow-up
 
