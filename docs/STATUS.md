@@ -58,6 +58,11 @@ publication into the active COMMAND session.  The formal lifecycle fixture
 rebuilds and verifies that the `54:0B` return path publishes the selected
 drive's current-directory entry.
 
+**P6 progress:** `cmdMapCodePage` now directly uses the retained OpenNT body:
+the historical US-only `1252 -> 437` conversion is restored while all other
+values preserve the original `USHORT` pass-through.  The `54:01` fixture
+verifies both paths through `cmdGetNextCmd` under formal Ninja.
+
 ## Current Work Record
 
 M0 T231 closed as the COMMAND `54:00..10` code-complete/v2 product-route

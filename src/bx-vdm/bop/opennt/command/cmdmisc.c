@@ -23,6 +23,7 @@
 #define BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES 1
+#define BX_NTVDM_COMMAND_MISC_ADMIT_MAP_CODE_PAGE 1
 #include "../../shim/command_misc_shim.h"
 
 #if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
@@ -774,7 +775,7 @@ VOID cmdInitConsole (VOID)
 }
 #endif /* BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE */
 
-#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_MAP_CODE_PAGE) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 /* cmdMapCodePage - Map the Win32 Code page to DOS code page
  */
 
@@ -787,8 +788,9 @@ USHORT cmdMapCodePage (ULONG CodePage)
         return ((USHORT)CodePage);
 }
 
+#endif /* BX_NTVDM_COMMAND_MISC_ADMIT_MAP_CODE_PAGE || !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
-
+#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 /* GetWOWShortCutInfo - returns the startupinf.reserved field of
  *                      vdminfo for the first wow task.
  *

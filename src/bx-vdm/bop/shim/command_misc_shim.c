@@ -254,7 +254,6 @@ BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
         current_directories, current_directory_bytes);
 }
 void cmdCheckForPIF(PVDMINFO vdm_info) { (void)vdm_info; }
-USHORT cmdMapCodePage(ULONG code_page) { return (USHORT)code_page; }
 void cmdPushExitInConsoleBuffer(void) { }
 void nt_block_event_thread(int block) { (void)block; }
 void nt_resume_event_thread(void) { }

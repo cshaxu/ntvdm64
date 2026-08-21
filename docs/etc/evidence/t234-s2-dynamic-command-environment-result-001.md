@@ -142,6 +142,25 @@ double-NUL output begins with the selected `=X:` entry and has its required
 terminator.  This is a local COMMAND owner regression; it makes no native
 guest-continuity claim.
 
+## P6 — `cmdMapCodePage` source binding closure
+
+The former shim was a direct `ULONG`-to-`USHORT` cast.  It omitted the sole
+special case in OpenNT `cmdmisc.c::cmdMapCodePage`: the historical
+US-only `1252` Windows code page must be returned to DOS as `437`.  The
+original body is now independently admitted from the COMMAND mirror and the
+same-named shim definition is removed.  No new mapping table or modern
+locale policy was introduced; non-1252 inputs retain OpenNT's original
+`USHORT` conversion.
+
+The formal `t231-s7-command-get-next-direct-fixture` now passes `1252` through
+the real `54:01`/`cmdGetNextCmd` handoff and verifies the guest `CMDINFO`
+receives `437`.  Its environment retry/re-entry case supplies `932` and
+verifies the guest receives `932`.  In
+`D:\tmp\ntdos64-M0-T234-S2-formal-r7`, MSVC x64 `/MT` Ninja rebuilt all five
+affected edges (`cmdmisc.c`, shim, `bx-vdm.lib`, fixture object and executable)
+and the fixture exited zero.  This validates the original function's two
+defined branches without making an unsupported broader code-page claim.
+
 ## Interpretation And Confidence
 
 The product route no longer has a 1024-byte COMMAND environment storage or

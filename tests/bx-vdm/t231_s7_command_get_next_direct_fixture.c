@@ -27,7 +27,7 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.ds = 0x100u;
     bx_ntvdm_command_misc_session_initialize(&session);
     if (!bx_ntvdm_command_misc_session_set_command_source(&session,
-            "C:\\TOOLS\\HELLO.COM", "-x", 2u, 437u)) { fprintf(stderr, "source\n"); return 1; }
+            "C:\\TOOLS\\HELLO.COM", "-x", 2u, 1252u)) { fprintf(stderr, "source\n"); return 1; }
     info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 0x100u;
     info->CmdLineSeg = 0x400u; info->CmdLineOff = 0u; info->CmdLineSize = 128u;
     info->ExecPathSeg = 0x500u; info->ExecPathOff = 0u; info->ExecPathSize = 128u;
@@ -48,7 +48,7 @@ int main(void)
     memset(large_environment, 0, sizeof(large_environment));
     memcpy(large_environment, "FOO=", 4u); memset(large_environment + 4u, 'E', 1300u);
     if (!bx_ntvdm_command_misc_session_set_command_source(&retry_session,
-            "C:\\TOOLS\\RETRY.EXE", "", 2u, 437u) ||
+            "C:\\TOOLS\\RETRY.EXE", "", 2u, 932u) ||
         !bx_ntvdm_command_misc_session_set_command_environment(&retry_session,
             large_environment, 1306u)) return 5;
     memset(&context, 0, sizeof(context));
@@ -66,6 +66,7 @@ int main(void)
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         retry_session.command_source_repeat_pending != 0u || retry_session.command_source_delivered != 1u ||
+        info->CodePage != 932u ||
         strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\RETRY.EXE") != 0 ||
         !has_prefix((CHAR *)context.guest + 0x3000u, required_environment, "FOO=")) return 7;
     bx_ntvdm_command_misc_session_dispose(&session);
