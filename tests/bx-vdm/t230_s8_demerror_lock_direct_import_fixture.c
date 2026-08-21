@@ -89,15 +89,22 @@ int main(void)
     reset_cpu(&cpu); cpu.edx=0x0200u; cpu.ebx=0x0220u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x32u) || carry(&result)) return 3;
 
-    /* Original demRetry restores the saved service identity and reinvokes the
-     * original table entry.  Retry a historical ordinary-return slot: this
-     * proves the dispatcher-owned table is used, without inventing a retry
-     * provider or taking an unrecorded host action. */
+    /* Original demRetry restores the saved register image and reinvokes the
+     * real demdisp.c table.  Retry demChgFilePtr: this proves the saved
+     * AX:BP opaque-handle token is resolved through the unified manager and
+     * that the restored CX:DX/DS/ES values are visible to the nested owner. */
     memset(&RetryInfo, 0, sizeof(RetryInfo));
-    RetryInfo.iSVC = 0x1fu;
+    RetryInfo.ax = 0x1234u; RetryInfo.bp = 0x5678u;
+    RetryInfo.cx = 0u; RetryInfo.dx = 1u;
+    RetryInfo.ds = 0x1111u; RetryInfo.es = 0x2222u;
+    RetryInfo.iSVC = 0x00u;
     reset_cpu(&cpu);
     if (!invoke(&state,&direct,&event,&cpu,&result,0x33u) || carry(&result) ||
-        CurrentISVC != 0x1fu) return 4;
+        CurrentISVC != 0x00u || result.cpu_delta.gpr16_values[0] != 1u ||
+        (result.cpu_delta.segment_write_mask & ((1u << 0u) | (1u << 3u))) !=
+            ((1u << 0u) | (1u << 3u)) ||
+        result.cpu_delta.segment_values[0] != 0x2222u ||
+        result.cpu_delta.segment_values[3] != 0x1111u) return 4;
 
     /* Original demlock.c obtains an opaque token through BX:BP and calls
      * Win32 LockFile/UnlockFile, preserving its own success/failure flow. */

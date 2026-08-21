@@ -2,34 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T236 S3** — active; DEM hard-error/retry source recovery.
+**Active: M0 T236 S4** — active; DEM DASD/IOCTL source seam.
 
 ## Active Packet
 
-### M0 T236 S3 — DEM hard-error/retry source recovery
+### M0 T236 S4 — DEM DASD/IOCTL source seam
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T236 S3`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | S3 is the next owner-approved item in the existing T236 plan after S2 closure. |
-| Objective | Recover and classify the imported DEM `50:32`/`50:33` hard-error/retry path, retaining original retry selector/register restoration wherever it fits the typed bx-vdm result boundary. |
-| Non-goals | Do not add CPU, interrupt, BIOS, disk-controller or guest-DOS semantics to bx-vdm; do not use a trace hit as a leaf implementation mandate. |
-| Reference Baseline | T236 S2 is closed at [its closure record](history/m0-t236-s2-closure-20260821.md). The imported DEM source and fixed typed CPU result boundary are already present. |
-| Files And ABI Surface | Imported DEM error/retry sources, DEM shim, typed CPU result and focused fixture(s) selected only after source/ABI/failure mapping. |
+| Identifier Mode | `M0 T236 S4`, Ordinary Mode, single-person dual-role review. |
+| Admission And Approval | S4 is the next owner-approved item in the existing T236 plan after [S3 closure](history/m0-t236-s3-closure-20260821.md). |
+| Objective | Separate directly composable DEM DASD/IOCTL source from floppy/FDC/DMA/CMOS and `host_simulate` machine ownership; remove only an avoidable source replacement. |
+| Non-goals | Do not add CPU, interrupt, BIOS, disk-controller, raw host-volume policy, or guest-DOS semantics to bx-vdm; do not use a trace hit as a leaf implementation mandate. |
+| Reference Baseline | T236 S1--S3 are closed.  Imported DEM DASD/IOCTL sources and the fixed typed CPU result boundary are present, while machine mechanics retain bx-core/bx-mantle ownership. |
+| Files And ABI Surface | Imported DEM DASD/IOCTL sources, their smallest compatibility seams, typed CPU result, public-Win32 capability boundary, and focused fixture(s) selected only after source/ABI/failure mapping. |
 | Applicable Rules | Source-first recovery, fixed-width adapter ABI, bx-core/bx-mantle machine ownership, formal Ninja verification and documented divergences. |
-| Verification | Source/ABI/failure map; focused Direct result and rejected/unavailable paths; formal source-current Ninja target; governance and diff checks. |
-| Expected Markers | The imported DEM retry owner remains authoritative; accepted restoration uses the existing typed result only, while machine-dependent or unsupported paths are explicit rather than silently resumed. |
-| Asset Needs | Existing imported DEM sources, DEM shim, typed CPU-result seam and formal Ninja graph; no new external source or host dependency. |
-| Reporting Requirements | Record retained source body, every divergence, all rejected machine dependencies and transferred owner work. |
-| Stop Conditions | Re-admit if recovery requires unbounded CPU/Bochs semantics, raw host state in guest ABI, private NT protocol or a machine-owner change. |
-| Exit Criteria | Every `50:32`/`50:33` path has a source-backed direct/shim/unavailable disposition, no adapter-owned machine behavior, and passing focused formal regression. |
-| Original Owner Request | T236 plan: determine and, if mechanically admissible, carry original hard-error/retry restoration through the typed result boundary. |
-| Similar-Issue Sweep | DEM error dialogs, retry selectors, register restoration, DPMI/protected-mode rejection and other DEM paths that delegate to machine ownership. |
+| Verification | Source/ABI/failure map; focused Direct result and explicit unavailable/machine transfers; formal source-current Ninja target; governance and diff checks. |
+| Expected Markers | Original DEM source remains authoritative wherever public composition fits; machine-dependent mechanics remain explicit rather than silently rehosted. |
+| Asset Needs | Existing imported DEM sources, compatibility seams, typed CPU-result seam, formal Ninja graph, and public Windows capability evidence; no new external source. |
+| Reporting Requirements | Record retained source body, every divergence, rejected machine dependencies, public host capability disposition, and transferred owner work. |
+| Stop Conditions | Re-admit if recovery requires unbounded CPU/Bochs semantics, raw host state in guest ABI, private NT protocol, host modification, or a machine-owner change. |
+| Exit Criteria | Every S4 DASD/IOCTL path has a source-backed direct/shim/unavailable/machine-owner disposition, no adapter-owned machine behavior, and passing focused formal regression for every admitted path. |
+| Original Owner Request | T236 plan: separate public Win32 raw-volume capability from uncomposable floppy/FDC/DMA/CMOS and `host_simulate` machine ownership, retaining original source where composable. |
+| Similar-Issue Sweep | DEM device/drive IOCTL forms, raw volumes, floppy media, DMA, CMOS, `host_simulate`, and any source-derived adapter replacement. |
 
 Detailed T sequence and closure ledgers are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). S2 is closed at [its worker/broker closure](history/m0-t236-s2-closure-20260821.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
 
 ## Current Work Record
 
+M0 T236 S3 is closed as the direct OpenNT DEM `50:32`/`50:33` recovery: its
+single imported dispatcher table, copied-register retry seam and unified
+opaque-handle route are recorded in the [S3 closure](history/m0-t236-s3-closure-20260821.md).
 M0 T234 is closed as the OpenNT-shaped dynamic COMMAND-environment and
 32-bit opaque-handle correction package; see the [T234 closure](history/m0-t234-closure-20260820.md).
 T235 subsequently closed the PIF CONFIG/AUTOEXEC startup selection and fixed

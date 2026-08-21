@@ -73,8 +73,6 @@ typedef struct bx_ntvdm_demhndl_call {
     void *pipe_state;
     bx_ntvdm_demhndl_pipe_data_eof_fn pipe_data_eof;
     bx_ntvdm_demhndl_pipe_eof_fn pipe_eof;
-    uint32_t hard_error_pending;
-    uint32_t hard_error_code;
 } bx_ntvdm_demhndl_call;
 
 #define BX_NTVDM_DEMHNDL_CALL_MAGIC 0x42584448u
@@ -114,6 +112,8 @@ void bx_ntvdm_demhndl_set_al(USHORT value);
 void bx_ntvdm_demhndl_set_bx(USHORT value);
 void bx_ntvdm_demhndl_set_bl(USHORT value);
 void bx_ntvdm_demhndl_set_bp(USHORT value);
+void bx_ntvdm_demhndl_set_ds(USHORT value);
+void bx_ntvdm_demhndl_set_es(USHORT value);
 void bx_ntvdm_demhndl_set_si(USHORT value);
 void bx_ntvdm_demhndl_set_di(USHORT value);
 void bx_ntvdm_demhndl_set_cx(USHORT value);
@@ -148,7 +148,9 @@ void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back);
 void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back);
-void bx_ntvdm_demhndl_client_error(HANDLE file, CHAR drive);
+/* The original demerror.c owns this failure algorithm, including the saved
+ * retry register image.  A bound 50:32 VHE is its historical prerequisite. */
+void demClientError(HANDLE file, CHAR drive);
 BOOL bx_ntvdm_demhndl_close_handle(HANDLE file);
 BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
 
@@ -189,7 +191,6 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
     bx_ntvdm_demhndl_flush_vdm_pointer(far_pointer, bytes, pointer, write_back)
 #define Sim32FreeVDMPointer(far_pointer, bytes, pointer, write_back) \
     bx_ntvdm_demhndl_free_vdm_pointer(far_pointer, bytes, pointer, write_back)
-#define demClientError(file, drive) bx_ntvdm_demhndl_client_error(file, drive)
 
 int IsVdmRedirLoaded(void);
 void VrRemoveOpenNamedPipeInfo(HANDLE file);

@@ -23,8 +23,17 @@ void demCommit(void);
 void demPipeFileDataEOF(void);
 void demPipeFileEOF(void);
 
+/* jmp_buf has toolchain-mandated alignment; this call-private record never
+ * crosses the fixed bx-vdm ABI. */
+#pragma warning(push)
+#pragma warning(disable: 4324)
 typedef struct bx_ntvdm_demhndl_active_call {
     bx_ntvdm_demhndl_call *call;
+    /* Imported DEM bodies can restore registers and immediately consume the
+     * restored values (notably demRetry -> apfnSVC[]).  Keep the bounded
+     * copied CPU state mutable inside this call while emitting only the
+     * existing typed low-16/segment result delta. */
+    bx_ntvdm_cpu_state_v1 cpu;
     uint32_t handle_token;
     uint32_t guest_address;
     uint32_t guest_bytes;
@@ -36,6 +45,7 @@ typedef struct bx_ntvdm_demhndl_active_call {
     int loader_mode;
     jmp_buf terminate_jump;
 } bx_ntvdm_demhndl_active_call;
+#pragma warning(pop)
 
 static __declspec(thread) bx_ntvdm_demhndl_active_call *g_active_call;
 static __declspec(thread) bx_ntvdm_demhndl_extended_error g_extended_error;
@@ -158,9 +168,42 @@ static LPVOID acquire_guest_oem_path(bx_ntvdm_demhndl_active_call *active,
 static int set_register(uint32_t register_index, USHORT value)
 {
     bx_ntvdm_demhndl_active_call *active = active_call();
-    return active != 0 && active->call != 0 &&
-        bx_ntvdm_cpu_delta_v1_set_gpr16(&active->call->result->cpu_delta,
-            register_index, value);
+    uint32_t *target = NULL;
+    if (active == 0 || active->call == 0) return 0;
+    switch (register_index) {
+    case 0u: target = &active->cpu.eax; break;
+    case 1u: target = &active->cpu.ecx; break;
+    case 2u: target = &active->cpu.edx; break;
+    case 3u: target = &active->cpu.ebx; break;
+    case 4u: target = &active->cpu.esp; break;
+    case 5u: target = &active->cpu.ebp; break;
+    case 6u: target = &active->cpu.esi; break;
+    case 7u: target = &active->cpu.edi; break;
+    default: return 0;
+    }
+    *target = (*target & 0xffff0000u) | value;
+    return bx_ntvdm_cpu_delta_v1_set_gpr16(&active->call->result->cpu_delta,
+        register_index, value);
+}
+
+static int set_segment(uint32_t segment_index, USHORT value)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    USHORT *target = NULL;
+    if (active == 0 || active->call == 0) return 0;
+    /* Bochs sregs[] order, carried unchanged by the generic-UD record. */
+    switch (segment_index) {
+    case 0u: target = &active->cpu.es; break;
+    case 1u: target = &active->cpu.cs; break;
+    case 2u: target = &active->cpu.ss; break;
+    case 3u: target = &active->cpu.ds; break;
+    case 4u: target = &active->cpu.fs; break;
+    case 5u: target = &active->cpu.gs; break;
+    default: return 0;
+    }
+    *target = value;
+    return bx_ntvdm_cpu_delta_v1_set_segment(&active->call->result->cpu_delta,
+        segment_index, value);
 }
 
 int bx_ntvdm_demhndl_call_valid(const bx_ntvdm_demhndl_call *call)
@@ -175,23 +218,23 @@ int bx_ntvdm_demhndl_call_valid(const bx_ntvdm_demhndl_call *call)
         call->result != 0 && call->guest_read != 0 && call->guest_write != 0;
 }
 
-USHORT bx_ntvdm_demhndl_get_ax(void) { return low16(active_call()->call->cpu->eax); }
-USHORT bx_ntvdm_demhndl_get_bx(void) { return low16(active_call()->call->cpu->ebx); }
-USHORT bx_ntvdm_demhndl_get_cx(void) { return low16(active_call()->call->cpu->ecx); }
-USHORT bx_ntvdm_demhndl_get_dx(void) { return low16(active_call()->call->cpu->edx); }
-USHORT bx_ntvdm_demhndl_get_si(void) { return low16(active_call()->call->cpu->esi); }
-USHORT bx_ntvdm_demhndl_get_di(void) { return low16(active_call()->call->cpu->edi); }
-USHORT bx_ntvdm_demhndl_get_bp(void) { return low16(active_call()->call->cpu->ebp); }
-USHORT bx_ntvdm_demhndl_get_ds(void) { return active_call()->call->cpu->ds; }
-USHORT bx_ntvdm_demhndl_get_es(void) { return active_call()->call->cpu->es; }
-USHORT bx_ntvdm_demhndl_get_al(void) { return (USHORT)(active_call()->call->cpu->eax & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_cl(void) { return (USHORT)(active_call()->call->cpu->ecx & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_ch(void) { return (USHORT)((active_call()->call->cpu->ecx >> 8) & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_bl(void) { return (USHORT)(active_call()->call->cpu->ebx & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_dh(void) { return (USHORT)((active_call()->call->cpu->edx >> 8) & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_dl(void) { return (USHORT)(active_call()->call->cpu->edx & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_ah(void) { return (USHORT)((active_call()->call->cpu->eax >> 8) & 0xffu); }
-int bx_ntvdm_demhndl_get_zf(void) { return (active_call()->call->cpu->eflags & 0x40u) != 0u; }
+USHORT bx_ntvdm_demhndl_get_ax(void) { return low16(active_call()->cpu.eax); }
+USHORT bx_ntvdm_demhndl_get_bx(void) { return low16(active_call()->cpu.ebx); }
+USHORT bx_ntvdm_demhndl_get_cx(void) { return low16(active_call()->cpu.ecx); }
+USHORT bx_ntvdm_demhndl_get_dx(void) { return low16(active_call()->cpu.edx); }
+USHORT bx_ntvdm_demhndl_get_si(void) { return low16(active_call()->cpu.esi); }
+USHORT bx_ntvdm_demhndl_get_di(void) { return low16(active_call()->cpu.edi); }
+USHORT bx_ntvdm_demhndl_get_bp(void) { return low16(active_call()->cpu.ebp); }
+USHORT bx_ntvdm_demhndl_get_ds(void) { return active_call()->cpu.ds; }
+USHORT bx_ntvdm_demhndl_get_es(void) { return active_call()->cpu.es; }
+USHORT bx_ntvdm_demhndl_get_al(void) { return (USHORT)(active_call()->cpu.eax & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_cl(void) { return (USHORT)(active_call()->cpu.ecx & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_ch(void) { return (USHORT)((active_call()->cpu.ecx >> 8) & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_bl(void) { return (USHORT)(active_call()->cpu.ebx & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_dh(void) { return (USHORT)((active_call()->cpu.edx >> 8) & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_dl(void) { return (USHORT)(active_call()->cpu.edx & 0xffu); }
+USHORT bx_ntvdm_demhndl_get_ah(void) { return (USHORT)((active_call()->cpu.eax >> 8) & 0xffu); }
+int bx_ntvdm_demhndl_get_zf(void) { return (active_call()->cpu.eflags & 0x40u) != 0u; }
 void bx_ntvdm_demhndl_set_ax(USHORT value) { (void)set_register(0u, value); }
 void bx_ntvdm_demhndl_set_al(USHORT value)
 { bx_ntvdm_demhndl_set_ax((USHORT)((bx_ntvdm_demhndl_get_ax() & 0xff00u) | (value & 0xffu))); }
@@ -201,6 +244,8 @@ void bx_ntvdm_demhndl_set_bx(USHORT value) { (void)set_register(3u, value); }
 void bx_ntvdm_demhndl_set_bl(USHORT value)
 { bx_ntvdm_demhndl_set_bx((USHORT)((bx_ntvdm_demhndl_get_bx() & 0xff00u) | (value & 0xffu))); }
 void bx_ntvdm_demhndl_set_bp(USHORT value) { (void)set_register(5u, value); }
+void bx_ntvdm_demhndl_set_ds(USHORT value) { (void)set_segment(3u, value); }
+void bx_ntvdm_demhndl_set_es(USHORT value) { (void)set_segment(0u, value); }
 /* The copied-result GPR numbering is Bochs AX,CX,DX,BX,SP,BP,SI,DI; keep
  * the historical helper spellings at this neutral boundary rather than make
  * imported DEM code depend on Bochs headers. */
@@ -430,22 +475,6 @@ void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
     }
 }
 
-void bx_ntvdm_demhndl_client_error(HANDLE file, CHAR drive)
-{
-    bx_ntvdm_demhndl_active_call *active = active_call();
-    DWORD error = GetLastError();
-    (void)file; (void)drive;
-    if (error == ERROR_SUCCESS) error = ERROR_ACCESS_DENIED;
-    if ((error >= ERROR_WRITE_PROTECT && error <= ERROR_GEN_FAILURE) ||
-        error == ERROR_WRONG_DISK) {
-        active->call->hard_error_pending = 1u;
-        active->call->hard_error_code = error;
-    } else {
-        bx_ntvdm_demhndl_set_ax((USHORT)error);
-    }
-    bx_ntvdm_demhndl_set_cf(1);
-}
-
 int IsVdmRedirLoaded(void) { return 0; }
 void VrRemoveOpenNamedPipeInfo(HANDLE file) { (void)file; }
 int VrIsNamedPipeHandle(HANDLE file) { (void)file; return 0; }
@@ -462,9 +491,8 @@ int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
         call->boundary->fault_rip > UINT64_MAX - 4u) return 0;
     memset(&active, 0, sizeof(active));
     active.call = call;
+    active.cpu = *call->cpu;
     active.transfer_from_guest = call->service == BX_NTVDM_DEMHNDL_WRITE;
-    call->hard_error_pending = 0u;
-    call->hard_error_code = ERROR_SUCCESS;
     memset(&g_extended_error, 0, sizeof(g_extended_error));
     pExtendedError = &g_extended_error;
     bx_ntvdm_cpu_result_v2_pass_through(call->result);

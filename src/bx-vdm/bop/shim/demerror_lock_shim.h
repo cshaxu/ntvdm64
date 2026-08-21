@@ -28,10 +28,13 @@ VOID demSaveHardErrInfo(VOID);
 VOID demRestoreHardErrInfo(VOID);
 #define GetVDMAddr(segment, offset) bx_ntvdm_demerror_get_vdm_addr(segment, offset)
 #define GETULONG(hi, lo) ((DWORD)((((DWORD)(USHORT)(hi)) << 16) | (USHORT)(lo)))
-/* Retry restores DS/ES only around its original handler call.  The current
- * typed result ABI has no selector delta, so a Direct retry retains the
- * copied selector and must decline unsupported cross-segment changes. */
-#define setDS(value) ((void)(value))
+/* demRestoreHardErrInfo restores these before it invokes the original
+ * demdisp.c handler.  They are copied selector values in the existing typed
+ * result ABI, never host pointers or descriptor-cache state. */
+#undef setDS
+#undef setES
+#define setDS(value) bx_ntvdm_demhndl_set_ds(value)
+#define setES(value) bx_ntvdm_demhndl_set_es(value)
 #define SVC_DEMLASTSVC 0x49u
 
 /* Declared by the original NT native runtime; modern SDK headers do not
@@ -47,7 +50,6 @@ BOOLEAN bx_ntvdm_demerror_equal_unicode(const UNICODE_STRING *,
 #define NtOpenSymbolicLinkObject bx_ntvdm_demerror_open_symbolic_link
 #define NtQuerySymbolicLinkObject bx_ntvdm_demerror_query_symbolic_link
 #define RtlEqualUnicodeString bx_ntvdm_demerror_equal_unicode
-int bx_ntvdm_demerror_lock_invoke(bx_ntvdm_demhndl_call *call);
 LPVOID bx_ntvdm_demerror_get_vdm_addr(USHORT segment, USHORT offset);
 void bx_ntvdm_demerror_flush_hard_error(void);
 

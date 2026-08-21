@@ -63,31 +63,6 @@ void bx_ntvdm_demerror_flush_hard_error(void)
     (void)pDeviceChain;
 }
 
-/* demdisp.c owns CurrentISVC.  This is only the legacy-shaped callback array
- * consumed by the directly imported demRetry body.  The historical table
- * pointed at every DEM handler, but typed bx-vdm calls do not yet compose
- * that whole table.  An unbound retry must fail through the original handler
- * contract, never call a NULL pointer or impersonate successful retry. */
-static void dem_retry_unavailable(void)
-{
-    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
-    bx_ntvdm_demhndl_set_ax((USHORT)ERROR_CALL_NOT_IMPLEMENTED);
-    bx_ntvdm_demhndl_set_cf(1);
-}
-
-PFNSVC apfnSVC[SVC_DEMLASTSVC];
-
-static void dem_retry_table_initialize(void)
-{
-    static __declspec(thread) int initialized;
-    ULONG index;
-
-    if (initialized) return;
-    for (index = 0u; index < SVC_DEMLASTSVC; ++index)
-        apfnSVC[index] = dem_retry_unavailable;
-    initialized = 1;
-}
-
 NTSTATUS bx_ntvdm_demerror_append_unicode(PUNICODE_STRING s, PCWSTR tail)
 { (void)s; (void)tail; return STATUS_NOT_SUPPORTED; }
 NTSTATUS bx_ntvdm_demerror_open_symbolic_link(PHANDLE h, ULONG a, POBJECT_ATTRIBUTES o)
@@ -96,19 +71,3 @@ NTSTATUS bx_ntvdm_demerror_query_symbolic_link(HANDLE h, PUNICODE_STRING s, PULO
 { (void)h; (void)s; (void)n; return STATUS_NOT_SUPPORTED; }
 BOOLEAN bx_ntvdm_demerror_equal_unicode(const UNICODE_STRING *a,const UNICODE_STRING *b,BOOLEAN c)
 { (void)a;(void)b;(void)c; return FALSE; }
-
-int bx_ntvdm_demerror_lock_invoke(bx_ntvdm_demhndl_call *call)
-{
-    void (*body)(void);
-    if (!bx_ntvdm_demhndl_call_valid(call)) return 0;
-    switch (call->service) {
-    case 0x32u: body=demSetHardErrorInfo; break;
-    case 0x33u: body=demRetry; break;
-    case 0x3fu: body=demLockOper; break;
-    default: return 0;
-    }
-    /* The imported demRetry indexes the saved historical service identity. */
-    dem_retry_table_initialize();
-    CurrentISVC=call->service;
-    return bx_ntvdm_demhndl_invoke_body(call,body);
-}
