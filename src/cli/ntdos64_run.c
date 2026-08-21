@@ -145,7 +145,7 @@ static image_kind classify_image(const wchar_t *path)
     }
     CloseHandle(file);
     if (bytes_read < 2u || header[0] != 'M' || header[1] != 'Z') {
-        const wchar_t *extension = wcsrchr(path, L'.');
+        extension = wcsrchr(path, L'.');
         return extension != NULL && _wcsicmp(extension, L".com") == 0 ?
             IMAGE_KIND_DOS : IMAGE_KIND_UNKNOWN;
     }

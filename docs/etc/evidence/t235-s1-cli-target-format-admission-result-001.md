@@ -35,21 +35,23 @@ intrusion or new guest/COMMAND algorithm was used.
 
 ## Focused Result
 
-`tests/ntdos64-run-s1-format-policy.cmake` was run against a fresh disposable
-`build/M0-T235-S1/r1/ntdos64-run.exe`. It passed the no-target,
-duplicate-option, PE host handoff, DOS COM/EXE, MZ-looking BAT/PIF, and
-malformed-drive-list cases. The runner source compiled with MinGW only as an
-out-of-process CLI check; it emitted the pre-existing unused
-`json_skip_value` warning in `byob_profile.c`.
+The formal fresh Ninja graph at `D:\tmp\ntdos64-M0-T235-S1-formal-r3` built
+`ntdos64-run.exe` and `runner-engine-probe.exe` from the current sources in
+nine MSVC x64 `/MT` actions. Both `tests/ntdos64-run-policy.cmake` and
+`tests/ntdos64-run-s1-format-policy.cmake` then passed against those outputs.
+The graph generator is `tools/build/New-T235S1RunnerNinjaGraph.ps1`; its
+manifest records the isolated runner/probe source set and excludes Bochs,
+OpenNT runtime objects, guest media, and artifact builds.
 
-## Remaining Gate
+## Closure Checks
 
-The repository CMake graph could not generate its formal runner target: it
-still declares missing historical v1 source files such as
-`src/bx-vdm/bx_ntvdm_readonly_namespace.c`. This is outside S1's CLI boundary
-and remains an unclosed formal-build gate. S1 stays active until the affected
-formal target, documentation governance, and diff checks can pass; this
-result is not an acceptance or package closure.
+The first formal attempt exposed two existing runner-island defects: v3/v4
+profiles validated their single `target_placement` but did not project it into
+the v2 launch-plan's `declared_targets` input, and the retained policy fixture
+required nonempty CONFIG/AUTOEXEC handoff values without supplying the paired
+options. The compatibility projection and fixture inputs were corrected; the
+formal Ninja run passed. Documentation governance and `git diff --check` pass
+at P1 closure.
 
 ## Transfer
 

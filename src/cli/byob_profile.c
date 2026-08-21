@@ -1260,6 +1260,15 @@ static byob_profile_result validate_document(const byob_profile_document *docume
             return BYOB_PROFILE_FORMAT_INVALID;
         selection->target_placement.drive_index = document->target_placement.drive_index;
         selection->has_target_placement = 1u;
+        /* v3/v4 have the older one-target placement rather than v5's
+         * declared-target array.  Keep that source-validated target visible
+         * to the v2 launch-plan seam as its exact one-entry compatibility
+         * projection; otherwise a valid legacy profile reaches the runner
+         * with no launchable target. */
+        selection->declared_target_count = 1u;
+        selection->declared_targets[0].component = selection->target;
+        selection->declared_targets[0].placement = selection->target_placement;
+        selection->declared_targets[0].terminal = 0u;
     }
     if (selection != NULL && (is_v4 || is_v5 || is_v6 || is_v7 || is_v8)) {
         selection->has_guest_search_metadata = 1u;

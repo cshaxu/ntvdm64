@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T235 S1** — admit COMMAND initial-input format classification.
+**Active: M0 T235 S1** — closed P1 format-admission record; it authorizes no further implementation.
 
 ## Active Packet
 
@@ -22,11 +22,11 @@
 | Asset Needs | Existing CLI runner, BYOB identity admission, original OpenNT COMMAND/PIF mirrors as ownership evidence, and no new external source, guest media, or host dependency. |
 | Reporting Requirements | Record the format matrix, exact source-recovery rung, CLI/COMMAND ownership boundary, positive and negative inputs/results, and transfer to S2--S9. |
 | Stop Conditions | Pause if an initial input cannot stay bounded and session-owned, if the target-first grammar weakens current declared-component identity, or if PIF/BAT semantics would enter CLI code. |
-| Exit Criteria | The target-first grammar and deterministic format matrix are source-built and fixture-verified; PE/NE behavior is preserved or explicitly transferred; no PIF/BAT parser or guest write is introduced; formal affected target, governance gate, and diff check pass. |
+| Exit Criteria | **Met for P1.** The target-first grammar and deterministic format matrix are source-built and fixture-verified; PE/NE behavior is preserved or explicitly transferred; no PIF/BAT parser or guest write is introduced; formal affected target, governance gate, and diff check pass. |
 | Original Owner Request | “读取队列中的下一条任务 准备开始” followed by “批准执行 未提交改动也要一并提交”. |
 | Similar-Issue Sweep | Existing option order/duplication handling, target canonicalization, direct host launch, native-engine entry, BYOB target identity, `.com` and MZ classification, `.bat`/`.pif` extension handling, PE and NE outcomes, help/usage text, and fixture manifest membership. |
 
-Supporting plan: [COMMAND launch/PIF proposal](etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md). T234 closure facts are retained in [history](history/m0-t234-closure-20260820.md).
+P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). P2 remains the separately admitted versioned initial-COMMAND transport; no P2 implementation is authorized by this closure.
 
 ## Current Work Record
 

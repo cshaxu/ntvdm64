@@ -36,15 +36,20 @@ file(WRITE "${byob_root}/NTIO.SYS" "abc")
 file(WRITE "${byob_root}/NTDOS.SYS" "abc")
 file(WRITE "${byob_root}/COMMAND.COM" "abc")
 file(WRITE "${byob_root}/TARGET.COM" "abc")
+file(WRITE "${byob_root}/CONFIG.NT" "rem runner policy\n")
+file(WRITE "${byob_root}/AUTOEXEC.NT" "rem runner policy\n")
 set(abc_sha256 "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad")
 file(WRITE "${byob_manifest}"
     "{\"schema\":\"ntdos64-byob-profile-v3\",\"profile\":\"nt4-en-us-command-smoke-v3\",\"architecture\":\"x86\",\"locale\":\"en-US\",\"compatibility_group\":\"runner-policy-owned\",\"components\":[{\"role\":\"ntio\",\"file_name\":\"NTIO.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"ntdos\",\"file_name\":\"NTDOS.SYS\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"command\",\"file_name\":\"COMMAND.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null},{\"role\":\"target\",\"file_name\":\"TARGET.COM\",\"required\":true,\"bytes\":3,\"sha256\":\"${abc_sha256}\",\"version\":null}],\"features\":[],\"owner_note\":null,\"guest_command_placement\":{\"path\":\"\\\\COMMAND.COM\",\"drive_index\":2},\"guest_target_placement\":{\"path\":\"\\\\TARGET.COM\",\"drive_index\":2},\"guest_boot_files\":{\"config\":{\"path\":\"\\\\CONFIG.SYS\",\"materialization\":\"minimal-comment-v1\"},\"autoexec\":{\"path\":\"\\\\AUTOEXEC.BAT\",\"materialization\":\"empty-v1\"}}}")
 execute_process(
     COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}" --byob-profile "${byob_manifest}"
-        --byob-root "${byob_root}" --include-drives c,d,e --exclude-drives e "${byob_root}/TARGET.COM" /c smoke
+        --byob-root "${byob_root}" --include-drives c,d,e --exclude-drives e
+        --config-source "${byob_root}/CONFIG.NT" --autoexec-source "${byob_root}/AUTOEXEC.NT"
+        "${byob_root}/TARGET.COM" /c smoke
     RESULT_VARIABLE engine_exit)
 file(REMOVE "${byob_manifest}" "${byob_root}/NTIO.SYS" "${byob_root}/NTDOS.SYS"
-    "${byob_root}/COMMAND.COM" "${byob_root}/TARGET.COM")
+    "${byob_root}/COMMAND.COM" "${byob_root}/TARGET.COM" "${byob_root}/CONFIG.NT"
+    "${byob_root}/AUTOEXEC.NT")
 file(REMOVE_RECURSE "${byob_root}")
 file(REMOVE "${fake_dos}")
 if(NOT engine_exit EQUAL 47)
