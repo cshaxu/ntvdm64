@@ -133,9 +133,11 @@ copied double-NUL environment before the worker entered the retained OpenNT
 environment conversion. The corrected ordering passes Direct, COMSPEC, pipe,
 failure, double-completion and cancellation coverage. A separate selector-
 blind real-machine fixture now proves `PENDING` suspension and controlled
-re-entry at the faulting instruction. This is still not S2 closure until the
-final source/ABI/failure-ledger review and formal-graph execution are
-evidenced.
+re-entry at the faulting instruction. A native `C4 C4 54:08` fixture now
+proves the complete composition path from real Bochs `#UD` through the
+adapter, detached imported worker, same-instruction re-entry, guest register
+return and bounded continuation. This is still not S2 closure until the final
+source/ABI/failure-ledger review and formal-graph execution are evidenced.
 
 ## Explicit Non-goals
 

@@ -70,6 +70,11 @@ process's standard handles?
   new mechanical `PENDING` terminal state, retains the machine, then performs
   another controlled execute which reaches the same faulting instruction and
   accepts a test-only generic `STOP`.  It contains no BOP/provider vocabulary.
+- The native `54:08` fixture initializes an actual real-mode Bochs stage with
+  `C4 C4 54 08`, its original `DS:SI`, `ES`, and `SS:BP` inputs, and the real
+  adapter composition bridge.  It observes `PENDING`, waits for the imported
+  worker, resumes the exact BOP, verifies `AX=0125` (`AL=37`) and the original
+  CR-to-NUL command-tail mutation, then reaches the bounded guest `HLT`.
 - A fresh formal Ninja graph at `build/M0-T236-S2/001` dry-runs the affected
   source closure.  Its executor retains the known `cmd.exe` stall; no full
   Ninja execution pass is claimed.

@@ -751,6 +751,27 @@
       ]
     },
     {
+      "name": "t236-s2-native-cmdexec32-fixture",
+      "source": "tests/bx-mantle/t236_s2_native_cmdexec32_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
       "name": "t231-s9-command-exit-direct-fixture",
       "source": "tests/bx-vdm/t231_s9_command_exit_direct_fixture.c",
       "libraries": [
