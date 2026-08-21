@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2014 |
+| Documentation records | 2016 |
 | --- | --- |
-| Generated UTC | 2026-08-21T21:51:17Z |
+| Generated UTC | 2026-08-21T22:10:55Z |
 
 ## Entries
 
@@ -293,8 +293,10 @@ content-divergent entries.
 | etc/operations/proposal-bx-vdm-pending-bop-session-lifecycle-001.md | indexed supporting material | b3c5072c395c22475973085e337d757366b49e1769c3fb81fde9c12a38f7adf2 |
 | etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md | indexed supporting material | 472164739c7fe38ba4ccb20c64a0b72c13aa81d8df972786371c50c762c8393a |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 142a93fef99ec618565c294f911416b78836dc14591e962a70fe716e45de8fcc |
+| etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 49535864fe38f658afc1184eff855cb669f3a9cc050d19cb12d43aa4a939d1c2 |
+| etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 217c84cac96e2ba0c23e4fb078d6d3bf8ac47d525694ce5a36be807861d71444 |
 | etc/operations/proposal-opennt-command-owner-package-completion-001.md | indexed supporting material | 7ba4a2f4fb70d2d67c4c2434281e2914a7da4cce2cf457169df7a9cfe7dce1ea |
-| etc/operations/proposal-opennt-debugger-vdd-top-level-owner-package-completion-001.md | indexed supporting material | 94858789c968c1178c6e800ccb50123af1607f9e6b0fb467dc001804432cd9fe |
+| etc/operations/proposal-opennt-debugger-vdd-top-level-owner-package-completion-001.md | indexed supporting material | b4e8929d76e8bffdd739d926c379cf4e37e554c8541809392e3044744f53d18f |
 | etc/operations/proposal-opennt-dem-owner-package-completion-001.md | indexed supporting material | 30ba01ae5f5d06d404443369c717b3f8ed682c582454401a117b7852db767731 |
 | etc/operations/proposal-opennt-dpmi-owner-package-completion-001.md | indexed supporting material | 17c7f33b022c7743850473a93ed828f0b35af17c5f6512a603af5e3f1339d89f |
 | etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | 849cc6a36f5ba6760ac7485ba7b4e53eed46d32c31a9fc9244f56750edabb81c |
@@ -1902,7 +1904,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | c6ad36ab70e0c4cd3fb51646f290b5eccf09216c666b7cbc705f63f89a60837e |
+| QUEUE.md | principal control document | 03497a575ae6f68e1e0b1f36398aad087a15ab80332a7bdb058bdd4cfc8741b2 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
