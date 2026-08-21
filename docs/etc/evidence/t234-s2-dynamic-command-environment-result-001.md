@@ -92,6 +92,30 @@ idle parent without a compiler/linker child; it was stopped. This is a
 formal-Ninja verification limitation, not a passing formal build. The source
 and focused link/run facts above close the duplicate-symbol ambiguity only.
 
+## P4 — Local-NTFS formal Ninja resolution
+
+The owner approved a disposable local NTFS exception after `cmd.exe` proved
+that the mapped `O:` build root could not execute even a one-edge Ninja probe:
+Ninja remained idle without creating its `cmd.exe` child, while that exact
+child command succeeded when entered directly. This is a build-host execution
+limitation, not an OpenNT or MSVC failure.
+
+`D:\tmp\ntdos64-M0-T234-S2-formal-r7` was generated from the same formal
+manifest, with the Visual Studio supplied Ninja selected explicitly. From
+`cmd.exe`, after `VsDevCmd.bat -arch=x64 -host_arch=x64`, Ninja completed all
+79 edges needed by `bin/t234-s2-command-set-directories-fixture.exe`, including
+the fresh `bx-vdm.lib` containing the imported `cmdmisc.c` and its revised
+shim. The generated fixture then exited zero and printed:
+
+```text
+T234 S2 OpenNT cmdSetDirectories synchronization verified
+```
+
+This is the formal Ninja positive result for the P3 binding closure. The
+local root is disposable build output only; source, manifests, evidence, and
+release inputs remain in the repository. The prior mapped-root limitation is
+retained as a superseded host-execution observation, not a product failure.
+
 ## Interpretation And Confidence
 
 The product route no longer has a 1024-byte COMMAND environment storage or

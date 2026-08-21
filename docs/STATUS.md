@@ -43,6 +43,12 @@ fixture now checks both the selected drive's current directory and a separate
 inherited `=X:` entry in an isolated fixture process; formal link/run remains
 the acceptance gate.
 
+**P4 progress:** an owner-approved disposable NTFS build root,
+`D:\\tmp\\ntdos64-M0-T234-S2-formal-r7`, resolves the mapped-drive Ninja
+executor failure. The formal Ninja target completed all 79 required edges and
+the produced `cmdSetDirectories` fixture exited zero. The mapped `O:` build
+root remains rejected for Ninja execution; it is not used as build evidence.
+
 ## Current Work Record
 
 M0 T231 closed as the COMMAND `54:00..10` code-complete/v2 product-route
