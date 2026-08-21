@@ -501,6 +501,57 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 #endif /* !BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE */
 
 #if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
+/* DIVERGENCE (T236): OpenNT launches cmdCreateProcess on a CCPU worker and
+ * changes process-global standard handles. That composition is not available
+ * to a standalone CLI. Keep the original cmdExec32 event/GetNext/CF/AL
+ * ordering, but delegate only child creation and host-local stream setup to
+ * the session-owned public-Win32 seam. */
+VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
+{
+    CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
+
+    nt_block_event_thread(0);
+    fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
+    fBlock = TRUE;
+
+    if (!bx_ntvdm_command_local_child_execute(pCmd32, pEnv)) {
+        setCF(0);
+        setAL((UCHAR)bx_ntvdm_command_misc_active_session()->local_child_error);
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+        CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+        return;
+    }
+
+    VDMInfo.VDMState = NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND;
+    VDMInfo.EnviornmentSize = 0;
+    VDMInfo.ErrorCode = 0;
+    VDMInfo.CmdSize = 0;
+    VDMInfo.TitleLen = 0;
+    VDMInfo.ReservedLen = 0;
+    VDMInfo.DesktopLen = 0;
+    VDMInfo.CurDirectoryLen = 0;
+    GetNextVDMCommand (&VDMInfo);
+    if (VDMInfo.CmdSize > 0){
+        setCF(1);
+        IsRepeatCall = TRUE;
+    }
+    else {
+        setCF(0);
+        setAL((UCHAR)dwExitCode32);
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+    }
+
+    CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+    return;
+}
+
 /* cmdExecComspec32 - Exec 32bit COMSPEC
  *
  *

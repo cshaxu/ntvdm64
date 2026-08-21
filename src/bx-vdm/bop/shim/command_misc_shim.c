@@ -253,28 +253,52 @@ BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
         &session->command_source_current_directories_bytes,
         current_directories, current_directory_bytes);
 }
-void cmdPushExitInConsoleBuffer(void) { }
-void nt_block_event_thread(int block) { (void)block; }
-void nt_resume_event_thread(void) { }
+void cmdPushExitInConsoleBuffer(void)
+{
+    /* No host-console injection is admitted. Preserve a visible session
+     * notification instead of silently claiming that the historical console
+     * buffer operation happened. */
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    if (session != NULL) session->local_child_console_notification = 1u;
+}
+void nt_block_event_thread(int block)
+{
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    if (session != NULL) session->local_child_events_blocked = block ? 2u : 1u;
+}
+void nt_resume_event_thread(void)
+{
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    if (session != NULL) session->local_child_events_blocked = 0u;
+}
 void GetWowKernelCmdLine(void) { TerminateVDM(); }
 ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info)
 { return info == NULL ? 0u : bx_ntvdm_command_misc_active_session()->redirection_token; }
 
-void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
+BOOL bx_ntvdm_command_local_child_execute(LPSTR command, LPSTR environment)
 {
     STARTUPINFOA startup;
     PROCESS_INFORMATION process;
-    VDMINFO next;
     CHAR command_copy[1024u];
     CHAR *environment_copy = NULL;
     DWORD environment_bytes = 0u;
     DWORD exit_code = ERROR_BAD_FORMAT;
     uint32_t standard_handles[3];
     size_t command_bytes;
-    if (g_active_call == NULL || command == NULL) return;
+    bx_ntvdm_command_misc_session *session;
+    HANDLE job = NULL;
+    BOOL child_created = FALSE;
+    if (g_active_call == NULL || command == NULL ||
+        (session = g_active_call->call->session) == NULL) return FALSE;
+    session->local_child_generation++;
+    session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_STARTING;
+    session->local_child_error = ERROR_SUCCESS;
+    session->local_child_exit_code = ERROR_BAD_FORMAT;
     command_bytes = strlen(command);
     if (command_bytes == 0u || command_bytes >= sizeof(command_copy)) {
-        bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_BAD_FORMAT); return;
+        session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+        session->local_child_error = ERROR_BAD_FORMAT;
+        return FALSE;
     }
     memcpy(command_copy, command, command_bytes + 1u);
     /* DIVERGENCE: cmdCreateProcess used a CCPU worker thread and temporarily
@@ -293,13 +317,17 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
         if (environment_bytes_source == NULL || environment_bytes < 2u ||
             environment_bytes_source[environment_bytes - 2u] != '\0' ||
             environment_bytes_source[environment_bytes - 1u] != '\0') {
-            bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_BAD_ENVIRONMENT); return;
+            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+            session->local_child_error = ERROR_BAD_ENVIRONMENT;
+            return FALSE;
         }
         environment_copy = (CHAR *)malloc(environment_bytes);
         if (environment_copy == NULL ||
             !OemToCharBuffA(environment, environment_copy, environment_bytes)) {
             free(environment_copy);
-            bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_BAD_ENVIRONMENT); return;
+            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+            session->local_child_error = ERROR_BAD_ENVIRONMENT;
+            return FALSE;
         }
     }
     memset(&startup, 0, sizeof(startup)); memset(&process, 0, sizeof(process));
@@ -309,7 +337,6 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
     startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
     if (g_active_call->call->service == BX_NTVDM_COMMAND_MISC_EXEC) {
-        bx_ntvdm_command_misc_session *session = g_active_call->call->session;
         uint32_t address = real_mode_address(g_active_call->call->cpu->ss,
             (USHORT)g_active_call->call->cpu->ebp);
         HANDLE *targets[3] = { &startup.hStdError, &startup.hStdOutput, &startup.hStdInput };
@@ -317,7 +344,10 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
         if (session == NULL || address > 0x100000u - sizeof(standard_handles) ||
             !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
                 (uint8_t *)standard_handles, sizeof(standard_handles))) {
-            bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_INVALID_HANDLE); return;
+            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+            session->local_child_error = ERROR_INVALID_HANDLE;
+            free(environment_copy);
+            return FALSE;
         }
         for (index = 0u; index < 3u; ++index) {
             uint32_t token = standard_handles[index];
@@ -328,7 +358,10 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
             if (token == 0u || token == UINT32_MAX ||
                 !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
                     token, targets[index])) {
-                bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)ERROR_INVALID_HANDLE); return;
+                session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+                session->local_child_error = ERROR_INVALID_HANDLE;
+                free(environment_copy);
+                return FALSE;
             }
         }
     }
@@ -336,17 +369,21 @@ void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment)
             environment == NULL ? NULL : environment_copy, NULL, &startup, &process)) {
         exit_code = GetLastError();
     } else {
+        child_created = TRUE;
+        job = CreateJobObjectA(NULL, NULL);
+        if (job != NULL) (void)AssignProcessToJobObject(job, process.hProcess);
         (void)WaitForSingleObject(process.hProcess, INFINITE);
         if (!GetExitCodeProcess(process.hProcess, &exit_code)) exit_code = GetLastError();
         CloseHandle(process.hThread); CloseHandle(process.hProcess);
     }
+    if (job != NULL) CloseHandle(job);
     free(environment_copy);
     dwExitCode32 = exit_code;
-    memset(&next, 0, sizeof(next));
-    next.VDMState = 0x00c0u; /* NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND */
-    (void)GetNextVDMCommand(&next);
-    if (next.CmdSize > 0u) { IsRepeatCall = TRUE; bx_ntvdm_command_misc_set_cf(1); }
-    else { IsRepeatCall = FALSE; bx_ntvdm_command_misc_set_cf(0); bx_ntvdm_command_misc_set_al((UCHAR)dwExitCode32); }
+    session->local_child_exit_code = exit_code;
+    session->local_child_error = exit_code;
+    session->local_child_state = !child_created ?
+        BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED : BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED;
+    return session->local_child_state == BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED;
 }
 
 static int validate_comspec_input(const bx_ntvdm_command_misc_call *call)
@@ -393,6 +430,9 @@ int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
         call->result != NULL && call->guest_read != NULL && call->guest_write != NULL &&
          ((call->service != BX_NTVDM_COMMAND_MISC_SET_INFO &&
            call->service != BX_NTVDM_COMMAND_MISC_GET_NEXT &&
+          call->service != BX_NTVDM_COMMAND_MISC_EXEC &&
+          call->service != BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32 &&
+          call->service != BX_NTVDM_COMMAND_MISC_RETURN_EXIT_CODE &&
           call->service != BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS &&
           call->service != BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT) ||
          bx_ntvdm_command_misc_session_valid(call->session));
@@ -480,6 +520,23 @@ UINT bx_ntvdm_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
         return (UINT)length;
     }
     return GetSystemDirectoryA(buffer, bytes);
+}
+
+DWORD bx_ntvdm_command_misc_get_environment_variable(LPSTR name,
+    LPSTR buffer, DWORD bytes)
+{
+    DWORD result;
+    if (name == NULL || buffer == NULL || bytes == 0u) return 0u;
+    result = GetEnvironmentVariableA(name, buffer, bytes);
+    if (result != 0u || name[0] != '=' || name[1] < 'A' || name[1] > 'Z' ||
+        name[2] != ':' || name[3] != '\0') return result;
+    /* There is no ambient hidden-drive environment entry. The active process
+     * directory is the only public Win32 equivalent for the source fallback. */
+    result = GetCurrentDirectoryA(bytes, buffer);
+    if (result == 0u || result >= bytes || buffer[1] != ':' ||
+        (buffer[0] != name[1] && buffer[0] != (CHAR)(name[1] + ('a' - 'A'))))
+        return 0u;
+    return result;
 }
 void bx_ntvdm_command_misc_set_test_system_directory(const CHAR *path)
 {

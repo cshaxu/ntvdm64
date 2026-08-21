@@ -229,7 +229,22 @@ typedef struct bx_ntvdm_command_misc_session {
      * session-owned rather than retaining a process-global CSR dependency. */
     uint32_t command_source_current_directories_bytes;
     CHAR *command_source_current_directories;
+    /* T236: host-child mechanics are session-local. These are fixed-width
+     * observations only; a host HANDLE never enters this record or guest RAM. */
+    uint32_t local_child_state;
+    uint32_t local_child_generation;
+    uint32_t local_child_exit_code;
+    uint32_t local_child_error;
+    uint32_t local_child_events_blocked;
+    uint32_t local_child_console_notification;
 } bx_ntvdm_command_misc_session;
+
+enum bx_ntvdm_command_local_child_state {
+    BX_NTVDM_COMMAND_LOCAL_CHILD_IDLE = 0u,
+    BX_NTVDM_COMMAND_LOCAL_CHILD_STARTING = 1u,
+    BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED = 2u,
+    BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED = 3u
+};
 
 #define BX_NTVDM_COMMAND_MISC_SESSION_MAGIC 0x42584353u
 #define BX_NTVDM_COMMAND_MISC_SESSION_VERSION 1u
@@ -318,6 +333,8 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
 void nt_init_event_thread(void);
 UINT bx_ntvdm_command_misc_get_system_directory(LPSTR buffer, UINT bytes);
 void bx_ntvdm_command_misc_set_test_system_directory(const CHAR *path);
+DWORD bx_ntvdm_command_misc_get_environment_variable(LPSTR name,
+    LPSTR buffer, DWORD bytes);
 BOOL GetNextVDMCommand(PVDMINFO vdm_info);
 void host_lpt_flush_initialize(void);
 void cmdUpdateCurrentDirectories(BYTE current_drive);
@@ -387,7 +404,9 @@ PWCHAR bx_ntvdm_command_environment_snapshot_session(
 void bx_ntvdm_command_environment_free_snapshot(PWCHAR snapshot);
 uint32_t bx_ntvdm_command_binary_scs_address(uint32_t offset);
 BOOL IsWowAppRunnable(LPSTR app_name);
-void bx_ntvdm_command_lifecycle_exec(LPSTR command, LPSTR environment);
+/* This is the sole modern replacement for the unavailable CCPU/CSR worker.
+ * Imported cmdExec32 retains event, GetNextVDMCommand and CF/AL ordering. */
+BOOL bx_ntvdm_command_local_child_execute(LPSTR command, LPSTR environment);
 
 #ifndef SCS_DOS_BINARY
 #define SCS_DOS_BINARY 1u
@@ -455,13 +474,17 @@ ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info);
 #define setDS(value) bx_ntvdm_command_misc_set_ds(value)
 #define setES(value) bx_ntvdm_command_misc_set_es(value)
 #define GetVDMAddr(segment, offset) bx_ntvdm_command_misc_get_vdm_addr(segment, offset)
-#if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE)
-#define cmdExec32(command, environment) bx_ntvdm_command_lifecycle_exec((command), (environment))
-#endif
 /* The production default is the public Win32 system directory.  The narrow
  * test override only supplies historical KB16 fixture media; cmdkeyb.c keeps
  * its original registry, file-presence and result algorithm. */
 #undef GetSystemDirectory
 #define GetSystemDirectory(buffer, bytes) bx_ntvdm_command_misc_get_system_directory((buffer), (bytes))
+/* DIVERGENCE (T236): the NT4 environment carried hidden `=X:` current-drive
+ * entries. Public modern process environments do not reliably expose those
+ * entries, so preserve cmdUpdateCurrentDirectories' source order through a
+ * checked session/process-current-directory fallback. */
+#undef GetEnvironmentVariable
+#define GetEnvironmentVariable(name, buffer, bytes) \
+    bx_ntvdm_command_misc_get_environment_variable((name), (buffer), (bytes))
 
 #endif

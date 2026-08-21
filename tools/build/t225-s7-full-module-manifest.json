@@ -721,6 +721,18 @@
       ]
     },
     {
+      "name": "t236-s1-command-local-child-fixture",
+      "source": "tests/bx-vdm/t236_s1_command_local_child_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
       "name": "t231-s9-command-exit-direct-fixture",
       "source": "tests/bx-vdm/t231_s9_command_exit_direct_fixture.c",
       "libraries": [
