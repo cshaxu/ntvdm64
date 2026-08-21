@@ -277,6 +277,7 @@
         "src/cli/byob_image.c",
         "src/cli/byob_launch_declaration_v1.c",
         "src/cli/byob_launch_plan_v2.c",
+        "src/cli/ntdos64_config.c",
         "src/cli/byob_profile.c",
         "src/cli/byob_target_selection.c",
         "src/cli/ntdos64_console_cancellation_v1.c",

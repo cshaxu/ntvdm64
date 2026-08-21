@@ -10,8 +10,8 @@
 #include "bx_ntvdm_guest_exec_lifecycle_ledger_v1.h"
 #include "bx_ntvdm_segment_access_observation_v1.h"
 #include "byob_launch_plan_v2.h"
-#include "byob_profile.h"
 #include "byob_target_selection.h"
+#include "ntdos64_config.h"
 #include "ntdos64_lifecycle_v1.h"
 #include "ntdos64_console_cancellation_v1.h"
 #include "ntdos64_engine_worker_v1.h"
@@ -173,7 +173,7 @@ static int result_exit(const struct ntdos64_lifecycle_v1_audit *audit)
 
 int wmain(int argc, wchar_t **argv)
 {
-    const wchar_t *profile = 0, *root = 0, *target;
+    const wchar_t *config = 0, *root = 0, *target;
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     uint32_t include_mask = 0u, exclude_mask = 0u;
     int has_include = 0, has_exclude = 0, has_mutation_mode = 0, has_tick_budget = 0,
@@ -209,6 +209,7 @@ int wmain(int argc, wchar_t **argv)
         ;
     int index = 1;
     byob_profile_selection selection;
+    wchar_t loaded_root[MAX_PATH], config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_launch_plan_v2 launch;
     struct bx_ntvdm_engine_request_v1 request;
     struct bx_ntvdm_engine_result_v1 result;
@@ -219,9 +220,9 @@ int wmain(int argc, wchar_t **argv)
 
     if (argc < 6) goto usage;
     while (index < argc && wcsncmp(argv[index], L"--", 2u) == 0) {
-        if (wcscmp(argv[index], L"--byob-profile") == 0 && index + 1 < argc && !profile)
-            profile = argv[index + 1], index += 2;
-        else if (wcscmp(argv[index], L"--byob-root") == 0 && index + 1 < argc && !root)
+        if (wcscmp(argv[index], L"--ntvdmcfg") == 0 && index + 1 < argc && !config)
+            config = argv[index + 1], index += 2;
+        else if (wcscmp(argv[index], L"--config-root") == 0 && index + 1 < argc && !root)
             root = argv[index + 1], index += 2;
         else if (wcscmp(argv[index], L"--include-drives") == 0 && index + 1 < argc &&
             !has_include && argv[index + 1][0] != L'\0' &&
@@ -271,21 +272,25 @@ int wmain(int argc, wchar_t **argv)
             validate_only = 1, ++index;
         else goto usage;
     }
-    if (!profile || !root || index >= argc) goto usage;
+    if (!config || !root || index >= argc) goto usage;
     target = argv[index];
     if (!GetFullPathNameW(target, MAX_PATH, target_full, 0) ||
-        byob_profile_validate_file_select(profile, root, &selection) != BYOB_PROFILE_ACCEPTED ||
+        !ntdos64_config_load_file(config, loaded_root, config_source, autoexec_source,
+            &selection) || _wcsicmp(root, loaded_root) != 0 ||
         !byob_target_selection_matches(root, &selection, target_full) ||
         !byob_launch_plan_v2_from_arguments(&launch, &selection, argc - index - 1, argv + index + 1) ||
         !byob_launch_plan_v2_to_environment(&launch, launch_text)) {
         fwprintf(stderr, L"ntdos64-native: BYOB admission failed\n"); return 3;
     }
+    if (!SetEnvironmentVariableW(L"NTVDM_CONFIG_SOURCE", config_source) ||
+        !SetEnvironmentVariableW(L"NTVDM_AUTOEXEC_SOURCE", autoexec_source) ||
+        !SetEnvironmentVariableW(L"NTVDM_CONFIG_ROOT", root)) return 3;
     ntdos64_lifecycle_v1_policy_clear(&lifecycle_policy);
     lifecycle_policy.instruction_tick_budget = instruction_tick_budget;
     if (!ntdos64_lifecycle_v1_policy_valid(&lifecycle_policy)) return 3;
     bx_ntvdm_engine_request_v1_clear(&request);
     if (!copied_text(request.profile_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
-            profile, &request.profile_descriptor_chars) ||
+            config, &request.profile_descriptor_chars) ||
         !copied_text(request.root_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
             root, &request.root_descriptor_chars) ||
         !copied_text(request.launch_descriptor, BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS,
@@ -520,7 +525,7 @@ int wmain(int argc, wchar_t **argv)
         (unsigned long long)request.instruction_tick_budget);
     return result_exit(&lifecycle_audit);
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --byob-profile profile.json --byob-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
+    fwprintf(stderr, L"usage: ntdos64-native --ntvdmcfg ntvdmcfg.yaml --config-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         L" [--observe-software-interrupts]"
 #endif

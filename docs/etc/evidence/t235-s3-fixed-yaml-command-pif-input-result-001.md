@@ -48,6 +48,25 @@ the source-owned selection first and keeps only copied path bytes in its
 session record.  It is not a claim of completed guest loading, child/parent
 lifecycle, WOW, or a full T235 closure.
 
+## Native-Engine Contract Correction
+
+The first S3 result found a real end-to-end mismatch: the runner already
+passed `--ntvdmcfg` and `--config-root`, while `ntdos64-native` and
+`dem_v2_startup_composition` still required a versioned JSON
+`--byob-profile`.  They now use the same fixed YAML loader.  The copied engine
+request keeps its existing descriptor ABI, but its profile-descriptor bytes
+now name `ntvdmcfg.yaml`; the root descriptor is checked against the root
+derived from that YAML pathname.  Native CLI also publishes the validated
+CONFIG/AUTOEXEC paths to the existing session binding.
+
+Fresh runner graph r3 rebuilt and passed both runner policy scripts.  Fresh
+full graph r3 compiled the changed YAML loader, native CLI, DEM startup
+composition, and COMMAND runtime-session objects.  Linking the complete
+native executable remains blocked before these changes execute by the retained
+CPU C++/OpenNT header closure (`error.h`/`config.h` macro types); this is a
+pre-existing whole-core graph frontier, not evidence of a successful native
+guest run.
+
 ## Follow-up
 
 Complete S3's remaining end-to-end startup execution and governance checks,

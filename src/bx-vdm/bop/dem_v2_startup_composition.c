@@ -4,6 +4,7 @@
 #include "byob_image.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
+#include "ntdos64_config.h"
 #include "bx_ntvdm_cpu_state_abi.h"
 #include "bx_ntvdm_guest_write_abi.h"
 #include "bx_ntvdm_initial_state_catalog_v1.h"
@@ -108,7 +109,7 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     const uint16_t *launch, uint32_t launch_chars, uint32_t include_mask,
     uint32_t exclude_mask, uint32_t mutation_mode)
 {
-    wchar_t profile[261], root[261];
+    wchar_t profile[261], root[261], loaded_root[MAX_PATH], config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_profile_selection selection;
 
     (void)include_mask; (void)exclude_mask;
@@ -118,8 +119,9 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     if (mutation_mode != 1u || launch_chars == 0u ||
         !descriptor_to_wide(profile_input, profile_chars, profile, 261u) ||
         !descriptor_to_wide(root_input, root_chars, root, 261u) ||
-        byob_profile_validate_file_select(profile, root, &selection) !=
-            BYOB_PROFILE_ACCEPTED || selection.machine_startup_plan_enabled == 0u ||
+        !ntdos64_config_load_file(profile, loaded_root, config_source, autoexec_source,
+            &selection) || _wcsicmp(root, loaded_root) != 0 ||
+        selection.machine_startup_plan_enabled == 0u ||
         selection.machine_startup_entry_ntio_v0 == 0u ||
         byob_image_load_exact(root, &selection.ntio, &runtime.ntio) != BYOB_IMAGE_OK ||
         byob_image_load_exact(root, &selection.ntdos, &runtime.ntdos) != BYOB_IMAGE_OK ||

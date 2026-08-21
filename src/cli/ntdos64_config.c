@@ -87,27 +87,27 @@ static int valid_component(const wchar_t *root, const config_component *componen
         component->hash) == BYOB_IDENTITY_OK;
 }
 
-int ntdos64_config_load_sibling(wchar_t config_path[MAX_PATH], wchar_t root[MAX_PATH],
+int ntdos64_config_load_file(const wchar_t *input_path, wchar_t root[MAX_PATH],
     wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH],
     byob_profile_selection *selection)
 {
     char bytes[8193] = {0}, *line, *next;
-    DWORD read = 0u, path_length;
+    DWORD read = 0u;
     HANDLE file;
     config_component ntio = {0}, ntdos = {0}, command = {0}, target = {0};
     wchar_t config_name[64] = {0}, autoexec_name[64] = {0};
     char *value;
     uint32_t seen = 0u;
-    if (!config_path || !root || !config_source || !autoexec_source || !selection) return 0;
+    wchar_t config_path[MAX_PATH];
+    if (!input_path || !root || !config_source || !autoexec_source || !selection ||
+        wcslen(input_path) >= MAX_PATH) return 0;
     memset(selection, 0, sizeof(*selection));
-    path_length = GetModuleFileNameW(NULL, config_path, MAX_PATH);
-    if (path_length == 0u || path_length >= MAX_PATH) return 0;
+    wcscpy(config_path, input_path);
     { wchar_t *slash = wcsrchr(config_path, L'\\');
       if (!slash) return 0;
       *slash = L'\0';
-      if (wcslen(config_path) + 14u >= MAX_PATH) return 0;
       wcscpy(root, config_path);
-      wcscat(config_path, L"\\ntvdmcfg.yaml"); }
+      *slash = L'\\'; }
     file = CreateFileW(config_path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING,
         FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE || !ReadFile(file, bytes, sizeof(bytes) - 1u, &read, NULL) ||
@@ -140,7 +140,25 @@ int ntdos64_config_load_sibling(wchar_t config_path[MAX_PATH], wchar_t root[MAX_
     (void)swprintf(selection->target_placement.path, BYOB_PROFILE_GUEST_PATH_MAX_CHARS, L"\\%ls", target.file);
     selection->declared_target_count = 1u; selection->declared_targets[0].component = selection->target;
     selection->declared_targets[0].placement = selection->target_placement;
+    selection->machine_startup_plan_enabled = 1u;
+    selection->machine_startup_entry_ntio_v0 = 1u;
     if (swprintf(config_source, MAX_PATH, L"%ls\\%ls", root, config_name) < 0 ||
         swprintf(autoexec_source, MAX_PATH, L"%ls\\%ls", root, autoexec_name) < 0) return 0;
     return 1;
+}
+
+int ntdos64_config_load_sibling(wchar_t config_path[MAX_PATH], wchar_t root[MAX_PATH],
+    wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH],
+    byob_profile_selection *selection)
+{
+    DWORD path_length;
+    wchar_t *slash;
+    if (!config_path) return 0;
+    path_length = GetModuleFileNameW(NULL, config_path, MAX_PATH);
+    if (path_length == 0u || path_length >= MAX_PATH ||
+        (slash = wcsrchr(config_path, L'\\')) == NULL ||
+        (size_t)(slash - config_path) + 14u >= MAX_PATH) return 0;
+    wcscpy(slash + 1u, L"ntvdmcfg.yaml");
+    return ntdos64_config_load_file(config_path, root, config_source,
+        autoexec_source, selection);
 }
