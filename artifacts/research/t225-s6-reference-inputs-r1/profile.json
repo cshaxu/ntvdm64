@@ -1,0 +1,92 @@
+﻿{
+    "schema":  "ntdos64-byob-profile-v8",
+    "profile":  "t225-s6-reference-identity-fixture-v1",
+    "architecture":  "x86",
+    "locale":  "en-US",
+    "compatibility_group":  "t225-s6-reference-identity-fixture",
+    "components":  [
+                       {
+                           "role":  "ntio",
+                           "file_name":  "NTIO.SYS",
+                           "required":  true,
+                           "bytes":  33792,
+                           "sha256":  "cfc8be16576bb6acd16bb8fc9b2d9a080f544bbfdd2d2d2df07ed908b3ab4937",
+                           "version":  null
+                       },
+                       {
+                           "role":  "ntdos",
+                           "file_name":  "NTDOS.SYS",
+                           "required":  true,
+                           "bytes":  27858,
+                           "sha256":  "957662320654ad5251c3a8b228a5dadec28aa65dddbcba38c3658a6e7f93bc84",
+                           "version":  null
+                       },
+                       {
+                           "role":  "command",
+                           "file_name":  "COMMAND.COM",
+                           "required":  true,
+                           "bytes":  50384,
+                           "sha256":  "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43",
+                           "version":  null
+                       },
+                       {
+                           "role":  "target",
+                           "file_name":  "SHARE.EXE",
+                           "required":  true,
+                           "bytes":  882,
+                           "sha256":  "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc",
+                           "version":  null
+                       }
+                   ],
+    "features":  [
+
+                 ],
+    "owner_note":  "Approved local reference-binary research input; identity matches retained source-built ledger but this stage is not a new source build.",
+    "guest_command_placement":  {
+                                    "path":  "\\COMMAND.COM",
+                                    "drive_index":  2
+                                },
+    "guest_boot_files":  {
+                             "config":  {
+                                            "path":  "\\CONFIG.SYS",
+                                            "materialization":  "minimal-comment-v1"
+                                        },
+                             "autoexec":  {
+                                              "path":  "\\AUTOEXEC.BAT",
+                                              "materialization":  "empty-v1"
+                                          }
+                         },
+    "guest_declared_targets":  [
+                                   {
+                                       "role":  "target",
+                                       "placement":  {
+                                                         "path":  "\\SHARE.EXE",
+                                                         "drive_index":  2
+                                                     }
+                                   }
+                               ],
+    "guest_search_metadata":  {
+                                  "command":  {
+                                                  "attributes":  32,
+                                                  "dos_time":  1,
+                                                  "dos_date":  33
+                                              },
+                                  "target":  {
+                                                 "attributes":  32,
+                                                 "dos_time":  2,
+                                                 "dos_date":  34
+                                             },
+                                  "config":  {
+                                                 "attributes":  32,
+                                                 "dos_time":  3,
+                                                 "dos_date":  35
+                                             },
+                                  "autoexec":  {
+                                                   "attributes":  32,
+                                                   "dos_time":  4,
+                                                   "dos_date":  36
+                                               }
+                              },
+    "guest_display_state":  "stream-io-v1",
+    "machine_external_initial_state_evidence_sha256":  "168219f4c7d73abee06b62b1423298a2f111685e1bf36da23b2c16a642310195"
+}

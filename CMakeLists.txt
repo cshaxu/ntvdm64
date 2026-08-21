@@ -1199,6 +1199,10 @@ add_test(NAME ntdos64-run-policy
         -DRUNNER=$<TARGET_FILE:ntdos64-run>
         -DENGINE_PROBE=$<TARGET_FILE:runner-engine-probe>
         -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/ntdos64-run-policy.cmake)
+add_test(NAME ntdos64-run-s1-format-policy
+    COMMAND ${CMAKE_COMMAND}
+        -DRUNNER=$<TARGET_FILE:ntdos64-run>
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/ntdos64-run-s1-format-policy.cmake)
 add_test(NAME ntdos64-bochs-engine-policy
     COMMAND ${CMAKE_COMMAND}
         -DRUNNER=$<TARGET_FILE:ntdos64-run>

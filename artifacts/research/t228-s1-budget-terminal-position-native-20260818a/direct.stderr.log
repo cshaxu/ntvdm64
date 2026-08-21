@@ -1,0 +1,11 @@
+00000000000i[CPU0 ] cpu hardware reset
+00000000000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
+00000000000i[CPU0 ] CPUID[0x00000000]: 00000001 756e6547 6c65746e 49656e69
+00000000000i[CPU0 ] CPUID[0x00000001]: 00000543 00000000 00000000 008203bf
+00000000000i[MEM0 ] allocate_block: block=0x0 used 0x1 of 0x1
+00003088925i[CPU0 ] math_abort: MSDOS compatibility FPU exception
+00003121672i[CPU0 ] math_abort: MSDOS compatibility FPU exception
+00003154360i[CPU0 ] math_abort: MSDOS compatibility FPU exception
+00003187071i[CPU0 ] math_abort: MSDOS compatibility FPU exception
+00003219777i[CPU0 ] math_abort: MSDOS compatibility FPU exception
+00003534286i[CPU0 ] LOCK prefix unallowed (op1=0xf1, modrm=0x00)

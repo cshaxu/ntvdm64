@@ -6,7 +6,7 @@ Admit one future owner package that restores the public CLI entry contract and
 the complete reachable OpenNT COMMAND launch plane:
 
 ```text
-ntvdm64.exe run [global-options] <file> [args...]
+ntdos64-run [global-options] <file> [args...]
 ```
 
 The CLI owns only parsing, immutable launch-input admission, and engine
@@ -53,18 +53,20 @@ gaps as owner packages, rather than leaving them as unrelated adapter work.
 | Original source reuse | Reuse OpenNT `cmdGetNextCmd` and `cmdCheckForPIF` unchanged in ownership and ordering. |
 | Smallest seam | Replace only historical BaseSrv `GetNextVDMCommand` input with a versioned session-owned copied initial-command record; use existing bounded guest-memory/CPU seams. |
 | External intrusion | Rejected: no Bochs or OpenNT external-source intrusion is required. |
-| New behavior | The `run` verb and modern CLI argument parser are unavoidable project-owned input mechanics.  They carry no PIF, BAT, DOS, or COMMAND semantic. |
+| New behavior | The existing modern CLI option parser and target-path admission are project-owned input mechanics. They carry no PIF, BAT, DOS, or COMMAND semantic. |
 
 ## Proposed Sequential Deliveries After Admission
 
-### P1 — `run` Grammar And Format Admission
+### P1 — Target Grammar And Format Admission
 
-Accept `run` as the explicit public verb.  Classify `.com`, DOS MZ `.exe`,
-`.bat`, and `.pif` as COMMAND-initial-input candidates.  Preserve current
-PE32/PE64 direct host launch and NE explicit WOW-unavailable behavior.
+Retain the target-first grammar: the first non-option argument is the target
+path. Classify `.com`, DOS MZ `.exe`, `.bat`, and `.pif` as COMMAND-initial-
+input candidates. Preserve current PE32/PE64 direct host launch and NE
+explicit WOW-unavailable behavior.
 
-**Acceptance:** `run` never becomes an accidental target; malformed invocations
-fail deterministically; the format matrix has focused CLI tests.
+**Acceptance:** option parsing cannot consume or reinterpret the first target;
+malformed invocations fail deterministically; the format matrix has focused
+CLI tests.
 
 ### P2 — Versioned Initial-COMMAND Input Contract
 

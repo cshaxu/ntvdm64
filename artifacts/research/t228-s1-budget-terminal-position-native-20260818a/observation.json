@@ -1,0 +1,41 @@
+{
+    "schema":  "ntdos64.t228.s1.guest-exec-integration-observation.v1",
+    "nativeExecutable":  {
+                             "path":  "O:\\repos.hobby\\ntdos64\\build\\M0-T228-S1\\terminal-position-20260818a\\bin\\ntdos64-native.exe",
+                             "sha256":  "b48068d92efad476c885012d28be39633b6585b19fc70bd9efd795aae9039665"
+                         },
+    "inputRoot":  "O:\\repos.hobby\\ntdos64\\build\\M0-T228-S1\\guest-exec-inputs-20260817a",
+    "inputManifestSha256":  "c888239b9de415f5c5f38b8d8dcacf5a30c102ab1465189c1ffc1a97fb1b9b6a",
+    "watchdogSeconds":  60,
+    "instructionTickBudget":  100000000,
+    "observation":  {
+                        "guestExecLifecycleLedger":  true,
+                        "budgetTerminalPosition":  true
+                    },
+    "runs":  [
+                 {
+                     "mode":  "direct",
+                     "startedUtc":  "2026-08-18T07:43:29.1761435Z",
+                     "elapsedMilliseconds":  13068.9537,
+                     "exitedWithinWatchdog":  true,
+                     "killedByWatchdog":  false,
+                     "exitCode":  4,
+                     "stdout":  "direct.stdout.log",
+                     "stderr":  "direct.stderr.log",
+                     "stdoutSha256":  "9ef1ee348fff5830f4d8614c3462ec3a980fb7679c2fdb8ef67cfba95a610c88",
+                     "stderrSha256":  "905ddf181613eb9b79dfeec0a507def81b0c26ffb1a1518ce10e4a19b0166406"
+                 },
+                 {
+                     "mode":  "readonly",
+                     "startedUtc":  "2026-08-18T07:43:42.4706740Z",
+                     "elapsedMilliseconds":  12999.671100000001,
+                     "exitedWithinWatchdog":  true,
+                     "killedByWatchdog":  false,
+                     "exitCode":  4,
+                     "stdout":  "readonly.stdout.log",
+                     "stderr":  "readonly.stderr.log",
+                     "stdoutSha256":  "9ef1ee348fff5830f4d8614c3462ec3a980fb7679c2fdb8ef67cfba95a610c88",
+                     "stderrSha256":  "905ddf181613eb9b79dfeec0a507def81b0c26ffb1a1518ce10e4a19b0166406"
+                 }
+             ]
+}

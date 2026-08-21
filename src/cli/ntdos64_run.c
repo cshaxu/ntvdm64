@@ -13,6 +13,7 @@
 typedef enum image_kind {
     IMAGE_KIND_UNKNOWN,
     IMAGE_KIND_DOS,
+    IMAGE_KIND_COMMAND_INPUT,
     IMAGE_KIND_NE,
     IMAGE_KIND_PE32,
     IMAGE_KIND_PE64
@@ -118,8 +119,8 @@ static wchar_t *build_command_line(int argc, wchar_t **argv)
 
 static image_kind classify_image(const wchar_t *path)
 {
-    HANDLE file = CreateFileW(path, GENERIC_READ, FILE_SHARE_READ, NULL,
-        OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    const wchar_t *extension;
+    HANDLE file;
     uint8_t header[64] = {0};
     DWORD bytes_read = 0u;
     uint32_t offset;
@@ -127,6 +128,16 @@ static image_kind classify_image(const wchar_t *path)
     LARGE_INTEGER file_offset;
     uint16_t optional_magic;
 
+    /* PIF and BAT are COMMAND-owned initial-input forms.  Classify solely by
+     * their suffix before opening the file: the CLI must neither parse PIF
+     * records nor inspect BAT content, and an MZ-looking byte prefix cannot
+     * turn either form into a direct host launch. */
+    extension = wcsrchr(path, L'.');
+    if (extension != NULL && (_wcsicmp(extension, L".bat") == 0 ||
+        _wcsicmp(extension, L".pif") == 0)) return IMAGE_KIND_COMMAND_INPUT;
+
+    file = CreateFileW(path, GENERIC_READ, FILE_SHARE_READ, NULL,
+        OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE || !ReadFile(file, header, sizeof(header),
         &bytes_read, NULL)) {
         if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
@@ -401,6 +412,7 @@ int wmain(void)
 
     if (argv == NULL || argc < 2) {
         fwprintf(stderr, L"usage: ntdos64-run [--byob-profile profile.json --byob-root directory --config-source config.nt --autoexec-source autoexec.nt] [--mutation-mode direct|readonly] [--include-drives c,d] [--exclude-drives e] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
+        if (argv != NULL) LocalFree(argv);
         return 2;
     }
     while (target_index < argc && wcsncmp(argv[target_index], L"--", 2u) == 0) {
@@ -526,6 +538,13 @@ int wmain(void)
                 HeapFree(GetProcessHeap(), 0, engine_argv);
             }
         }
+    } else if (kind == IMAGE_KIND_COMMAND_INPUT) {
+        /* S1 admits the form but deliberately stops before S2's bounded,
+         * session-owned initial-COMMAND record.  PIF and BAT semantics remain
+         * with imported OpenNT COMMAND; no CLI parser or host-launch fallback
+         * is permitted here. */
+        fwprintf(stderr, L"ntdos64-run: COMMAND initial input requires the unavailable S2 handoff\n");
+        result = 3;
     } else if (kind == IMAGE_KIND_NE) {
         fwprintf(stderr, L"ntdos64-run: NE targets require an unavailable Win16/WOW host path\n");
         result = 3;

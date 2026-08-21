@@ -56,3 +56,19 @@ execute_process(
 if(NOT malformed_drive_exit EQUAL 2)
     message(FATAL_ERROR "malformed drive-list exit was ${malformed_drive_exit}, expected 2")
 endif()
+
+set(fake_bat "${CMAKE_CURRENT_BINARY_DIR}/ntdos64-run-policy.bat")
+set(fake_pif "${CMAKE_CURRENT_BINARY_DIR}/ntdos64-run-policy.pif")
+# Deliberately MZ-looking bytes prove suffix classification is prior to any
+# BAT/PIF content inspection or host image classification.
+file(WRITE "${fake_bat}" "MZ")
+file(WRITE "${fake_pif}" "MZ")
+execute_process(COMMAND "${RUNNER}" "${fake_bat}" RESULT_VARIABLE bat_exit)
+execute_process(COMMAND "${RUNNER}" "${fake_pif}" RESULT_VARIABLE pif_exit)
+file(REMOVE "${fake_bat}" "${fake_pif}")
+if(NOT bat_exit EQUAL 3)
+    message(FATAL_ERROR "BAT COMMAND-input disposition was ${bat_exit}, expected 3")
+endif()
+if(NOT pif_exit EQUAL 3)
+    message(FATAL_ERROR "PIF COMMAND-input disposition was ${pif_exit}, expected 3")
+endif()

@@ -1,0 +1,4 @@
+ntdos64-native: guest-exec-ledger count=1 overflow=0
+ntdos64-native: guest-exec-ledger[0] phase=1 cs=0041 eip=00005a70 ds=0c41 esi=00000100 disposition=1 resume=5a74
+ntdos64-native: budget-terminal-position cs=5a5f eip=00009f51
+ntdos64-native: terminal=4 detail=0 lifecycle=5 presentation=5 cancellation=0 budget=100000000

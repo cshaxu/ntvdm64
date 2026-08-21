@@ -2,70 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T234 S2** — closed as a validator-compatible closure record;
-it authorizes no further implementation.
+**Active: M0 T235 S1** — admit COMMAND initial-input format classification.
 
 ## Active Packet
 
-### M0 T234 S2 — dynamic COMMAND environment composition recovery
+### M0 T235 S1 — CLI target grammar and COMMAND-input admission
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T234 S2`, Ordinary Mode. |
-| Admission And Approval | The owner directed immediate repair of the current v2 mirror's fixed 1024-byte COMMAND environment limitation. |
-| Objective | Restore the reusable OpenNT `cmdenv.c` dynamic environment composition bodies, including `cmdXformEnvironment`, and replace session-owned fixed multisz buffers with dynamically owned, bounded multisz storage. |
-| Non-goals | Do not import BaseSrv/PIF product composition, alter BOP routing, change child-process lifecycle, add host mutation policy, or introduce a raw host pointer into guest state. |
-| Reference Baseline | T234 S1 (`4047b400`) retains OpenNT's 32-bit opaque handle ABI. The current `command_misc_shim.c` contains a 1024-byte source-environment and saved-VDM-environment limit, while imported `cmdenv.c` retains the original dynamic algorithms behind an admission guard. |
-| Files And ABI Surface | `bop/opennt/command/cmdenv.c`, `bop/shim/command_misc_shim.{h,c}`, environment compatibility globals, focused COMMAND environment fixture, formal module manifest if source membership changes, and T234 S2 evidence. |
-| Applicable Rules | `docs/rules/EXECUTION.md` historical recovery gate; `docs/rules/ARCHITECTURE.md`; `docs/rules/CODING.md`; and source policy. The selected recovery rung is original OpenNT source through the smallest session-storage compatibility seam. |
-| Verification | Focused fixture proves a double-NUL environment exceeding 1024 bytes, original filtering/COMSPEC and AUTOEXEC merge behavior, repeat-call preservation, and explicit malformed/allocation failure. Run the affected formal Ninja target plus governance and diff checks. |
-| Expected Markers | No 1024-byte command-environment capacity check remains; the original `cmdenv.c` transform/create/set/expand/get bodies are compiled; environment state has explicit session ownership and cleanup; guest receives only bounded copied bytes. |
-| Asset Needs | Existing imported OpenNT COMMAND mirror, command-environment shim, formal Ninja graph, and no new external source or host dependency. |
-| Reporting Requirements | Record the retained original algorithms, every required compatibility seam, maximum practical allocation/failure rule, and test inputs/results. |
-| Stop Conditions | Pause if original environment bytes exceed a fixed guest/DOS ABI field without its original error path, or if enabling the bodies requires BaseSrv/PIF/CCPU behavior rather than a local environment capability seam. |
-| Exit Criteria | Dynamic source and saved VDM multisz buffers replace both fixed arrays; the original dynamic environment algorithms, including the DOS-to-32-bit transform, are directly compiled; >1024-byte and merge/repeat regressions pass; formal build, documentation gate, and diff check pass. |
-| Original Owner Request | “当前 session 环境硬限制为 1024 字节；原始 `cmdenv.c` 按 `cchVDMEnv32 + cbComSpec + 1` 动态分配并合并 COMSPEC、AUTOEXEC/32 位环境。这是仍未达到 OpenNT 语义的真实缺口。这个问题，现在就开S任务在当前T里面修复。开始。” |
-| Similar-Issue Sweep | Both session environment stores, `GetNextVDMCommand` capacity negotiation, repeat-call preservation, child execution environment copying, COMSPEC insertion, `WINDIR` filtering, AUTOEXEC pairs, and all direct `malloc/realloc` ownership paths. |
+| Identifier Mode | `M0 T235 S1`, Ordinary Mode. |
+| Admission And Approval | The owner selected Queue item 1 after closing T234 and approved execution, including the current uncommitted worktree changes in the final reviewed delivery. |
+| Objective | Retain the established grammar in which the first non-option argument is the target path, and classify `.com`, DOS MZ `.exe`, `.bat`, and `.pif` as bounded COMMAND initial-input candidates without assigning their semantics to the CLI. |
+| Non-goals | Do not create the versioned initial-COMMAND record, hand input to `GetNextVDMCommand`, parse PIF or BAT, alter COMMAND/BOP/guest-memory behavior, implement WOW, or change host mutation policy. |
+| Reference Baseline | T234 is closed. `src/cli/ntdos64_run.c` treats the first non-option as a target; `.bat` and `.pif` are unknown, and `byob_target_selection` admits only `TARGET.COM` and `TARGET.EXE`. |
+| Files And ABI Surface | `src/cli/ntdos64_run.c`, CLI image/target helpers only if their existing contract must expose a format disposition, a focused runner fixture and its formal manifest entry, S1 evidence, Status, and document inventory. |
+| Applicable Rules | `docs/rules/EXECUTION.md`, `docs/rules/ARCHITECTURE.md`, `docs/rules/CODING.md`, source policy, and the queued COMMAND launch/PIF proposal. CLI ownership is parsing and immutable admission only. |
+| Verification | Focused CLI fixture covers target-first grammar, malformed/duplicate option rejection, `.com`, DOS MZ `.exe`, `.bat`, `.pif`, and PE32/PE64 direct-host preservation. Source review preserves the unchanged NE WOW-unavailable branch; P8 owns its formal outcome fixture. Run the affected formal target, governance gate, and diff check. |
+| Expected Markers | The first non-option remains the target; CLI classification does not read PIF content or BAT lines; COMMAND candidates are not sent to direct `CreateProcessW`; all unsupported forms report a named disposition. |
+| Asset Needs | Existing CLI runner, BYOB identity admission, original OpenNT COMMAND/PIF mirrors as ownership evidence, and no new external source, guest media, or host dependency. |
+| Reporting Requirements | Record the format matrix, exact source-recovery rung, CLI/COMMAND ownership boundary, positive and negative inputs/results, and transfer to S2--S9. |
+| Stop Conditions | Pause if an initial input cannot stay bounded and session-owned, if the target-first grammar weakens current declared-component identity, or if PIF/BAT semantics would enter CLI code. |
+| Exit Criteria | The target-first grammar and deterministic format matrix are source-built and fixture-verified; PE/NE behavior is preserved or explicitly transferred; no PIF/BAT parser or guest write is introduced; formal affected target, governance gate, and diff check pass. |
+| Original Owner Request | “读取队列中的下一条任务 准备开始” followed by “批准执行 未提交改动也要一并提交”. |
+| Similar-Issue Sweep | Existing option order/duplication handling, target canonicalization, direct host launch, native-engine entry, BYOB target identity, `.com` and MZ classification, `.bat`/`.pif` extension handling, PE and NE outcomes, help/usage text, and fixture manifest membership. |
 
-Prior delivery evidence: [T234 S1 32-bit opaque handle ABI](etc/evidence/t234-s1-32bit-opaque-host-handle-abi-result-001.md).
-
-Current detailed result: [T234 S2 dynamic COMMAND environment](etc/evidence/t234-s2-dynamic-command-environment-result-001.md). The formal affected target, governance gate, and diff check pass. The package is closed; see [T234 closure](history/m0-t234-closure-20260820.md).
-
-**P2 progress:** `cmdXformEnvironment` is directly admitted with a
-session-owned multisz snapshot and a private RTL-compatible environment shim.
-Its changed translation units and focused fixture now compile, link, and run
-under MSVC x64 `/MT` in the recorded NTFS formal root.
-
-**P3 progress:** the duplicate `cmdSetDirectories` no-op has been removed so
-the formally admitted OpenNT body is the only product definition.  Its focused
-fixture now checks both the selected drive's current directory and a separate
-inherited `=X:` entry in an isolated fixture process; formal link/run passed.
-
-**P4 progress:** an owner-approved disposable NTFS build root,
-`D:\\tmp\\ntdos64-M0-T234-S2-formal-r7`, provides a working alternative to
-the observed Ninja executor failure at the repository-local `O:` build root.
-The formal Ninja target completed all 79 required edges and the produced
-`cmdSetDirectories` fixture exited zero. The root-specific cause of the `O:`
-failure is not yet established; it must not be described as a mapped-drive
-failure.
-
-**P5 progress:** `cmdUpdateCurrentDirectories` is now directly admitted from
-the OpenNT `cmdmisc.c` mirror.  The former no-op is gone; its only unavailable
-NT4 endpoint, `SetVDMCurrentDirectories`, copies the original double-NUL
-publication into the active COMMAND session.  The formal lifecycle fixture
-rebuilds and verifies that the `54:0B` return path publishes the selected
-drive's current-directory entry.
-
-**P6 progress:** `cmdMapCodePage` now directly uses the retained OpenNT body:
-the historical US-only `1252 -> 437` conversion is restored while all other
-values preserve the original `USHORT` pass-through.  The `54:01` fixture
-verifies both paths through `cmdGetNextCmd` under formal Ninja.
-
-**P7 progress:** `cmdCheckForPIF` now uses the original COMMAND owner body
-and the original OpenNT `nt_pif.c` parser through an OEM/CLI compatibility
-seam. A formal local fixture verifies PIF title, command tail, start
-directory, target, and close-on-exit extraction. PIF-provided CONFIG/AUTOEXEC
-selection remains explicitly outside this packet's later startup lifecycle.
+Supporting plan: [COMMAND launch/PIF proposal](etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md). T234 closure facts are retained in [history](history/m0-t234-closure-20260820.md).
 
 ## Current Work Record
 
