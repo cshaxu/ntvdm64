@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T235 S5** — derive the fixed DOS/WOW layout from the executable directory, with no external configuration file.
+**Active: M0 T235 S5** — fixed executable-relative DOS/WOW package, complete and awaiting the next owner-admitted packet.
 
 ## Active Packet
 
@@ -11,6 +11,7 @@
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T235 S5`, Ordinary Mode. |
+| Closure | Complete and pushed as `dafc7e60`; see [T235 S5 closure](history/m0-t235-s5-closure-20260821.md). |
 | Admission And Approval | The owner selected a new S and approved the fixed executable-relative layout: `dos\\` owns all DOS/NTVDM system files, `wow16\\` owns WOW16 files, and `dos\\CONFIG.NT` / `dos\\AUTOEXEC.NT` are fixed defaults. |
 | Objective | Remove `ntvdmcfg.yaml` and its SHA/byte identity contract. Derive product roots from `ntvdm64.exe`, select fixed DOS bootstrap names under `dos\\`, carry DOS/WOW roots to the existing startup seam, and stage the catalogued guest package beside the executable from original OpenNT products or reproducible project builds. |
 | Non-goals | Do not implement arbitrary DOS filesystem access, WOW16 loading, child lifecycle, or replace original COMMAND/PIF behavior. This S establishes fixed bundle roots and reproducible packaging only. |
