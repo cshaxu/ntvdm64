@@ -26,7 +26,7 @@ execute_process(
     COMMAND "${RUNNER}" --engine "$ENV{ComSpec}" "${fake_dos}"
     RESULT_VARIABLE dos_exit)
 if(NOT dos_exit EQUAL 3)
-    message(FATAL_ERROR "DOS without BYOB profile exit was ${dos_exit}, expected 3")
+    message(FATAL_ERROR "DOS without YAML configuration exit was ${dos_exit}, expected 3")
 endif()
 
 set(byob_root "${CMAKE_CURRENT_BINARY_DIR}/ntdos64-run-policy-root")

@@ -2,31 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T235 S3** — carry one copied initial COMMAND input and PIF configuration choice through the existing session seam to the original owners.
+**Active: M0 T235 S4** — make the fixed YAML file the sole product startup configuration and remove the retired JSON profile mechanism.
 
 ## Active Packet
 
-### M0 T235 S3 — copied initial COMMAND input seam
+### M0 T235 S4 — fixed YAML configuration cleanup
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T235 S3`, Ordinary Mode. |
-| Admission And Approval | The owner approved T235 execution. S2's fixed YAML runner input and output naming are source-built; this S carries the admitted initial input to the original COMMAND owner. |
-| Objective | Replace the COM/EXE-only startup-plan projection with a bounded, session-owned copied initial pathname and tail that `GetNextVDMCommand` supplies to the existing original `cmdGetNextCmd`; when that copied source is PIF, complete the original PIF CONFIG/AUTOEXEC selection before `54:0C/0D`. |
-| Non-goals | Do not parse BAT or PIF in the CLI; do not reimplement `cmdGetNextCmd`, `cmdCheckForPIF`, `nt_pif.c`, guest loading, child lifecycle, WOW, or PIF data semantics. |
-| Reference Baseline | The runner, native CLI, and DEM startup composition now share the fixed YAML selection. `command_v2_runtime_session` binds the copied COMMAND source through `bx_ntvdm_dem_v2_startup_copy_command_source`; launch declaration admits COM, EXE, BAT, and PIF. |
-| Files And ABI Surface | Startup input contract, `dem_v2_startup_composition`, `command_v2_runtime_session`, COMMAND session shim/fixture, and S3 evidence. |
-| Applicable Rules | Source policy and recovery ladder. Original owner: `base/mvdm/dos/command/cmdmisc.c:cmdGetNextCmd`, then `cmdpif.c:cmdCheckForPIF` and `nt_pif.c`. |
-| Verification | Focused fixtures prove copied COM, DOS EXE, BAT, and PIF initial paths/tails reach `GetNextVDMCommand`; the PIF fixture proves original `nt_pif.c` selects CONFIG/AUTOEXEC before COMMAND config services. Formal runner r3 passes; native CLI/YAML/DEM/COMMAND objects compile in the full graph. |
-| Expected Markers | No host pointer crosses into session state; only bounded copied OEM bytes enter `VDMINFO.AppName/CmdLine`; BAT/PIF are not classified or parsed by CLI after admission. |
-| Asset Needs | Existing original COMMAND mirror and current session seam; no external source, guest media, or new parser. |
-| Reporting Requirements | Record original source order, copied-record layout/lifetime, format matrix, positive/negative transfer evidence, and P4/P5 lifecycle transfer. |
-| Stop Conditions | Pause if the original owner requires a raw host pointer, if PIF selection must run before the session seam, or if BAT/PIF semantics would enter CLI code. |
-| Exit Criteria | All four initial formats are delivered through the copied session record to original COMMAND; original PIF owner fixture observes PIF and prior CONFIG/AUTOEXEC selection; no CLI semantics or guest writes are added; formal and governance checks pass. |
-| Original Owner Request | “实施完成T235任务：cli 按照opennt原始代码的最小修改版本接纳可执行文件”. |
-| Similar-Issue Sweep | Launch-plan serialization, target identity, OEM conversion, length bounds, command tail, session reset/rebind, `GetNextVDMCommand`, PIF owner call order, direct host PE and NE boundaries. |
+| Identifier Mode | `M0 T235 S4`, Ordinary Mode. |
+| Admission And Approval | The owner explicitly directs that the YAML consolidation and obsolete profile cleanup complete inside T235. |
+| Objective | Make sibling `ntvdmcfg.yaml` the only product configuration, remove JSON-profile parsing and product entrypoints, and name the retained copied startup selection independently of BYOB/profile terminology. |
+| Non-goals | Do not alter original COMMAND/PIF source ownership, parse PIF in the CLI, remove indexed historical evidence, or expand guest execution/lifecycle behavior. |
+| Reference Baseline | T235 S3 passed the fixed-YAML runner, native CLI, DEM and original PIF selection path. The old parser still remains in the full graph solely through prior experiment/fixture surfaces. |
+| Files And ABI Surface | CLI configuration/selection headers and sources, CMake and formal full-graph manifest, obsolete JSON-only fixtures and tests, and S4 evidence. |
+| Applicable Rules | Product CLI exception and build hygiene; no recovered OpenNT behavior changes. Original PIF owners remain `cmdpif.c` and `nt_pif.c`. |
+| Verification | A fresh formal runner and full graph must compile without `byob_profile.c`; fixed YAML format-policy and native validation checks must pass; source sweep must find no JSON profile parser or product `--byob-profile` entrypoint. |
+| Expected Markers | `ntvdmcfg.yaml` is the sole product configuration; retained startup transport is named `ntdos64_startup_selection`; no JSON schema/version parser links into a product target. |
+| Asset Needs | Existing T235 YAML fixtures and no external input. |
+| Reporting Requirements | Record deleted product surfaces, intentional retained historical evidence, source sweep, build and fixture result. |
+| Stop Conditions | Pause if removing the parser changes a live PIF/COMMAND semantic route, or if a source-built formal graph has an unreplaceable JSON dependency. |
+| Exit Criteria | No product target, active test, or formal graph compiles the JSON profile parser; YAML runner/native/PIF tests pass; governance and review pass. |
+| Original Owner Request | “请在T235做好这个！” following the owner direction to clear unused `profile.json` machinery and consolidate it into YAML. |
+| Similar-Issue Sweep | Parser sources, profile-specific command switches, CMake targets, full manifests, active tools/tests, runtime environment names, and generated product configuration. |
 
-P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). The complete T235 result is recorded in [the T235 closure](history/m0-t235-closure-20260821.md); this retained active marker authorizes no additional source work until the owner selects the next queued package.
+P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). S4 cleanup evidence: [fixed-YAML profile cleanup result](etc/evidence/t235-s4-yaml-profile-cleanup-result-001.md). The prior [T235 closure](history/m0-t235-closure-20260821.md) is superseded for this owner-approved S4 cleanup only.
 
 ## Current Work Record
 

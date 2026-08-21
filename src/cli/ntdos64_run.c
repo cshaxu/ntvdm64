@@ -6,7 +6,7 @@
 #include <wchar.h>
 #include <wctype.h>
 
-#include "byob_profile.h"
+#include "ntdos64_startup_selection.h"
 #include "ntdos64_config.h"
 #include "byob_target_selection.h"
 #include "byob_launch_plan_v2.h"
@@ -406,7 +406,7 @@ int wmain(void)
     image_kind kind;
     wchar_t full_path[MAX_PATH];
     wchar_t launch_plan[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
-    byob_profile_selection selection;
+    ntdos64_startup_selection selection;
     byob_launch_plan_v2 launch;
     DWORD path_length;
     int result;
@@ -468,7 +468,7 @@ int wmain(void)
     if (kind == IMAGE_KIND_PE32 || kind == IMAGE_KIND_PE64) {
         if (include_drives[0] != L'\0' || exclude_drives[0] != L'\0' || bochs != NULL ||
             has_mutation_mode) {
-            fwprintf(stderr, L"ntdos64-run: DOS profile options require a BYOB DOS engine\n");
+            fwprintf(stderr, L"ntdos64-run: DOS configuration options require an explicit DOS engine\n");
             result = 2;
         } else {
             result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -527,7 +527,7 @@ int wmain(void)
         fwprintf(stderr, L"ntdos64-run: NE targets require an unavailable Win16/WOW host path\n");
         result = 3;
     } else {
-        fwprintf(stderr, L"ntdos64-run: target requires an explicit BYOB DOS engine\n");
+        fwprintf(stderr, L"ntdos64-run: target requires an explicit DOS engine\n");
         result = 3;
     }
     LocalFree(argv);

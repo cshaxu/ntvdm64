@@ -208,7 +208,7 @@ int wmain(int argc, wchar_t **argv)
 #endif
         ;
     int index = 1;
-    byob_profile_selection selection;
+    ntdos64_startup_selection selection;
     wchar_t loaded_root[MAX_PATH], config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_launch_plan_v2 launch;
     struct bx_ntvdm_engine_request_v1 request;
@@ -280,7 +280,7 @@ int wmain(int argc, wchar_t **argv)
         !byob_target_selection_matches(root, &selection, target_full) ||
         !byob_launch_plan_v2_from_arguments(&launch, &selection, argc - index - 1, argv + index + 1) ||
         !byob_launch_plan_v2_to_environment(&launch, launch_text)) {
-        fwprintf(stderr, L"ntdos64-native: BYOB admission failed\n"); return 3;
+        fwprintf(stderr, L"ntdos64-native: YAML configuration admission failed\n"); return 3;
     }
     if (!SetEnvironmentVariableW(L"NTVDM_CONFIG_SOURCE", config_source) ||
         !SetEnvironmentVariableW(L"NTVDM_AUTOEXEC_SOURCE", autoexec_source) ||

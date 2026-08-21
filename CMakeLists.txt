@@ -82,16 +82,6 @@ add_executable(runner-engine-probe
     tests/runner/runner_engine_probe.c
 )
 
-# This process boundary owns only fixed bundle validation and native Bochs
-# argv/config materialization. It contains no Bochs or adapter object.
-add_executable(ntdos64-bochs-engine
-    src/cli/ntdos64_bochs_engine.c
-)
-
-add_executable(bochs-engine-probe
-    tests/runner/bochs_engine_probe.c
-)
-
 add_executable(byob-identity-test EXCLUDE_FROM_ALL
     src/cli/byob_identity.c
     tests/runner/byob_identity_test.c
@@ -101,18 +91,6 @@ target_compile_features(byob-identity-test PRIVATE c_std_11)
 target_compile_definitions(byob-identity-test PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
 target_link_libraries(byob-identity-test PRIVATE bcrypt)
 ntdos64_use_wide_console_entry(byob-identity-test)
-
-add_executable(byob-profile-test EXCLUDE_FROM_ALL
-    src/cli/byob_profile.c
-    src/cli/byob_identity.c
-    src/cli/byob_image.c
-    tests/runner/byob_profile_test.c
-)
-
-target_include_directories(byob-profile-test PRIVATE src/cli)
-target_compile_features(byob-profile-test PRIVATE c_std_11)
-target_compile_definitions(byob-profile-test PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
-target_link_libraries(byob-profile-test PRIVATE bcrypt)
 
 add_executable(byob-target-selection-test EXCLUDE_FROM_ALL
     src/cli/byob_target_selection.c
@@ -1069,88 +1047,6 @@ target_compile_features(bx-ntvdm-host-namespace-test PRIVATE c_std_11)
 target_compile_definitions(bx-ntvdm-host-namespace-test PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
 target_link_libraries(bx-ntvdm-host-namespace-test PRIVATE ntdll)
 
-add_executable(bx-vdm-runtime-test EXCLUDE_FROM_ALL
-    src/cli/byob_profile.c
-    src/cli/byob_identity.c
-    src/cli/byob_image.c
-    src/cli/byob_launch_declaration_v1.c
-    src/cli/byob_launch_plan_v2.c
-    src/bx-vdm/bx_ntvdm_cpu_state_abi.c
-    src/bx-vdm/bx_ntvdm_instruction_window_abi.c
-    src/bx-vdm/bx_ntvdm_guest_range.c
-    src/bx-vdm/bx_ntvdm_guest_write_abi.c
-    src/bx-vdm/bx_ntvdm_multi_write_abi.c
-    src/bx-vdm/bx_ntvdm_multi_write_transaction.c
-    src/bx-vdm/bx_ntvdm_observation_transaction_abi.c
-    src/bx-vdm/bx_ntvdm_startup_snapshot_abi.c
-    src/bx-vdm/bx_ntvdm_startup_plan_abi.c
-    src/bx-vdm/bx_ntvdm_startup_snapshot_evidence.c
-    src/bx-vdm/bx_ntvdm_machine_profile_abi.c
-    src/bx-vdm/bx_ntvdm_host_service_catalog.c
-    src/bx-vdm/bx_ntvdm_host_transaction_abi.c
-    src/bx-vdm/bx_ntvdm_session_resource_abi.c
-    src/bx-vdm/bx_ntvdm_host_service_plane.c
-    src/bx-vdm/bx_ntvdm_host_session.c
-    src/bx-vdm/bx_ntvdm_bulk_result_transaction.c
-    src/bx-vdm/bx_ntvdm_readonly_namespace.c
-    src/bx-vdm/bx_ntvdm_dem_readonly_file_service.c
-    src/bx-vdm/bx_ntvdm_exception_abi.c
-    src/bx-vdm/bx_ntvdm_cpu_delta_abi.c
-    src/bx-vdm/bx_ntvdm_cpu_result_v2.c
-    src/bx-vdm/bx_ntvdm_guest_read_action_v1.c
-    src/bx-vdm/bx_ntvdm_guest_gather_read_action_v1.c
-    src/bx-vdm/bx_ntvdm_adapter_runtime.c
-    src/bx-vdm/bx_ntvdm_exception_observer_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_bop_catalog_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_boot_namespace_provider_v1.c
-    src/bx-vdm/bx_ntvdm_profile_search_snapshot_v1.c
-    src/bx-vdm/bx_ntvdm_search_session.c
-    src/bx-vdm/bx_ntvdm_search_result_v1.c
-    src/bx-vdm/bx_ntvdm_search_plan_v1.c
-    src/bx-vdm/bx_ntvdm_search_request_v1.c
-    src/bx-vdm/bx_ntvdm_search_transaction_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_dem_path_search_service_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_bop_ingress_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_bop_provider_registry_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_dem_plane_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_dem_provider_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_dem_session_lifecycle_provider_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_dem_drive_provider_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_dem_fastio_provider_v1.c
-    src/bx-vdm/bop-v1/bx_ntvdm_command_plane_v1.c
-    src/bx-vdm/bx_ntvdm_legacy_plane_gate_v1.c
-    src/bx-vdm/bx_ntvdm_bios_memory_service.c
-    src/bx-vdm/bx_ntvdm_dem_boot_drive_service.c
-    src/bx-vdm/bx_ntvdm_dem_debug_service.c
-    src/bx-vdm/bx_ntvdm_emm_unavailable_service.c
-    src/bx-vdm/bx_ntvdm_mouse_install1_mapping_service.c
-    src/bx-vdm/bx_ntvdm_printer_unavailable_service.c
-    src/bx-vdm/bx_ntvdm_config_done_service.c
-    src/bx-vdm/bx_ntvdm_cmd_comspec_bootstrap_service.c
-    src/bx-vdm/bx_ntvdm_cmd_get_next_service.c
-    src/bx-vdm/bop-v1/bx_ntvdm_cmdinfo_v1.c
-    src/bx-vdm/bx_ntvdm_cmd_keyboard_layout_service.c
-    src/bx-vdm/bx_ntvdm_controlled_stop_service.c
-    src/bx-vdm/bx_ntvdm_vdd_create_user_notify_service.c
-    src/bx-vdm/bx_ntvdm_spckbd_init_service.c
-    src/bx-vdm/bx_ntvdm_wait_if_idle_service.c
-    src/bx-vdm/bx_ntvdm_dem_drive_service.c
-    src/bx-vdm/bop-v1/bx_ntvdm_dem_ioctl_metadata_provider_v1.c
-    src/bx-vdm/bx_ntvdm_dem_dta_service.c
-    src/bx-vdm/bx_ntvdm_dem_hard_error_service.c
-    src/bx-vdm/bx_ntvdm_cmd_boot_file_service.c
-    src/bx-vdm/bx_ntvdm_cmd_current_dir_service.c
-    src/bx-vdm/bx_ntvdm_cmd_set_info_service.c
-    src/bx-vdm/bx_ntvdm_dem_dpb_service.c
-    src/bx-vdm/bx_ntvdm_host_drive_policy.c
-    tests/bx-vdm/bx_ntvdm_adapter_runtime_test.c
-)
-target_include_directories(bx-vdm-runtime-test PRIVATE
-    src/cli src/bx-vdm)
-target_compile_features(bx-vdm-runtime-test PRIVATE c_std_11)
-target_compile_definitions(bx-vdm-runtime-test PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
-target_link_libraries(bx-vdm-runtime-test PRIVATE bcrypt)
-
 add_executable(ntdos64-historical-transport-v2-pipe-test EXCLUDE_FROM_ALL
     tests/historical_transport_v2_pipe_test.c
 )
@@ -1191,17 +1087,9 @@ ntdos64_use_wide_console_entry(ntdos64-run)
 target_compile_features(runner-engine-probe PRIVATE c_std_11)
 target_compile_definitions(runner-engine-probe PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
 ntdos64_use_wide_console_entry(runner-engine-probe)
-target_compile_features(ntdos64-bochs-engine PRIVATE c_std_11)
-target_compile_definitions(ntdos64-bochs-engine PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
-target_link_libraries(ntdos64-bochs-engine PRIVATE bcrypt)
-ntdos64_use_wide_console_entry(ntdos64-bochs-engine)
-target_compile_features(bochs-engine-probe PRIVATE c_std_11)
-target_compile_definitions(bochs-engine-probe PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN)
-ntdos64_use_wide_console_entry(bochs-engine-probe)
 
 enable_testing()
 add_test(NAME byob-identity COMMAND $<TARGET_FILE:byob-identity-test>)
-add_test(NAME byob-profile COMMAND $<TARGET_FILE:byob-profile-test>)
 add_test(NAME ntdos64-run-policy
     COMMAND ${CMAKE_COMMAND}
         -DRUNNER=$<TARGET_FILE:ntdos64-run>
@@ -1211,9 +1099,3 @@ add_test(NAME ntdos64-run-s1-format-policy
     COMMAND ${CMAKE_COMMAND}
         -DRUNNER=$<TARGET_FILE:ntdos64-run>
         -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/ntdos64-run-s1-format-policy.cmake)
-add_test(NAME ntdos64-bochs-engine-policy
-    COMMAND ${CMAKE_COMMAND}
-        -DRUNNER=$<TARGET_FILE:ntdos64-run>
-        -DSHIM=$<TARGET_FILE:ntdos64-bochs-engine>
-        -DFAKE_BOCHS=$<TARGET_FILE:bochs-engine-probe>
-        -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/ntdos64-bochs-engine-policy.cmake)

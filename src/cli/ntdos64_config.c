@@ -89,7 +89,7 @@ static int valid_component(const wchar_t *root, const config_component *componen
 
 int ntdos64_config_load_file(const wchar_t *input_path, wchar_t root[MAX_PATH],
     wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH],
-    byob_profile_selection *selection)
+    ntdos64_startup_selection *selection)
 {
     char bytes[8193] = {0}, *line, *next;
     DWORD read = 0u;
@@ -149,7 +149,7 @@ int ntdos64_config_load_file(const wchar_t *input_path, wchar_t root[MAX_PATH],
 
 int ntdos64_config_load_sibling(wchar_t config_path[MAX_PATH], wchar_t root[MAX_PATH],
     wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH],
-    byob_profile_selection *selection)
+    ntdos64_startup_selection *selection)
 {
     DWORD path_length;
     wchar_t *slash;

@@ -7,7 +7,7 @@ minimal Bochs machine, and `bx-vdm` composition boundary.
 It owns only:
 
 - command-line parsing and image classification;
-- immutable BYOB profile and component-identity admission;
+- fixed YAML configuration and component-identity admission;
 - child-engine launch environment, cancellation, exit status, and diagnostics.
 
 It must not include Bochs headers, manipulate guest memory or CPU state, or

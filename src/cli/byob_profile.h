@@ -9,18 +9,6 @@
 #define BYOB_PROFILE_GUEST_PATH_MAX_CHARS 64u
 #define BYOB_PROFILE_MAX_DECLARED_TARGETS 2u
 
-typedef enum byob_profile_result {
-    BYOB_PROFILE_ACCEPTED,
-    BYOB_PROFILE_FORMAT_INVALID,
-    BYOB_PROFILE_TARGET_MISMATCH,
-    BYOB_PROFILE_ROLE_MISSING_OR_DUPLICATE,
-    BYOB_PROFILE_FEATURE_DECLARATION_INVALID,
-    BYOB_PROFILE_COMPONENT_NAME_UNSAFE,
-    BYOB_PROFILE_COMPONENT_OPEN_REJECTED,
-    BYOB_PROFILE_COMPONENT_IDENTITY_MISMATCH,
-    BYOB_PROFILE_COMPATIBILITY_GROUP_MISMATCH
-} byob_profile_result;
-
 typedef struct byob_component_descriptor {
     wchar_t file_name[64];
     wchar_t sha256[65];
@@ -154,14 +142,5 @@ typedef struct byob_profile_selection {
     byob_declared_target_descriptor
         declared_targets[BYOB_PROFILE_MAX_DECLARED_TARGETS];
 } byob_profile_selection;
-
-const char *byob_profile_result_name(byob_profile_result result);
-
-/* The manifest and BYOB root are caller-selected local paths. Validation is
- * read-only and never writes guest memory or retains guest file content. */
-byob_profile_result byob_profile_validate_file(const wchar_t *manifest_path,
-    const wchar_t *byob_root);
-byob_profile_result byob_profile_validate_file_select(const wchar_t *manifest_path,
-    const wchar_t *byob_root, byob_profile_selection *out_selection);
 
 #endif
