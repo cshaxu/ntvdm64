@@ -2,39 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T235 S5** — fixed executable-relative DOS/WOW package, complete and awaiting the next owner-admitted packet.
+**Active: M0 T236 S1** — OpenNT COMMAND minimal child-lifecycle source recovery.
 
 ## Active Packet
 
-### M0 T235 S5 — fixed sibling DOS/WOW layout
+### M0 T236 S1 — COMMAND `54:08/0A/0B` minimal original-lifecycle recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T235 S5`, Ordinary Mode. |
-| Closure | Complete and pushed as `dafc7e60`; see [T235 S5 closure](history/m0-t235-s5-closure-20260821.md). |
-| Admission And Approval | The owner selected a new S and approved the fixed executable-relative layout: `dos\\` owns all DOS/NTVDM system files, `wow16\\` owns WOW16 files, and `dos\\CONFIG.NT` / `dos\\AUTOEXEC.NT` are fixed defaults. |
-| Objective | Remove `ntvdmcfg.yaml` and its SHA/byte identity contract. Derive product roots from `ntvdm64.exe`, select fixed DOS bootstrap names under `dos\\`, carry DOS/WOW roots to the existing startup seam, and stage the catalogued guest package beside the executable from original OpenNT products or reproducible project builds. |
-| Non-goals | Do not implement arbitrary DOS filesystem access, WOW16 loading, child lifecycle, or replace original COMMAND/PIF behavior. This S establishes fixed bundle roots and reproducible packaging only. |
-| Reference Baseline | S4 removed JSON profile code but YAML currently supplies component identity, target and CONFIG/AUTOEXEC paths. Original NTVDM placed CONFIG.NT and AUTOEXEC.NT below `%SystemRoot%\\System32`; this package maps that system directory role to `dos\\`. |
-| Files And ABI Surface | CLI bundle loader, runner/native/DEM startup handoff, COMMAND environment paths, CMake/output template, catalogued DOS/WOW staging tool and fixtures, plus S5 evidence. |
-| Applicable Rules | Owner-approved CLI layout exception; original COMMAND/PIF ownership remains unchanged. |
-| Verification | Fresh strict runner compile and fixed-layout COM/PIF fixture pass; the deterministic manifest verifies 115 staged DOS/WOW files (87 OpenNT original, 26 OpenNT-4.5 original, two original-toolchain rebuilds) against source/destination SHA-256; PIF direct fixture retains early CONFIG/AUTOEXEC behavior. |
-| Expected Markers | No `ntvdmcfg.yaml`, YAML parser, SHA-256/byte fields or config file argument remains in the product path; `NTVDM_CONFIG_ROOT` names sibling `dos\\` and a distinct `NTVDM_WOW16_ROOT` names sibling `wow16\\`. |
-| Asset Needs | Existing repository OpenNT sources and existing project build recipes only; no new Windows media or download. |
-| Reporting Requirements | Record fixed names, root derivation, default CONFIG/AUTOEXEC mapping, each staged artifact origin, missing-file rejection and explicit WOW transfer limitation. |
-| Stop Conditions | Pause if fixed root discovery changes original PIF order, requires a new generic host filesystem provider, or a purported guest artifact is only an untracked/disposable build result with no reproducible source/build route. |
-| Exit Criteria | YAML is absent from product build/runtime and output; the staged package has a reproducible origin manifest; fixed DOS directory positive/negative tests, formal runner/full graph and original PIF fixture pass. |
-| Original Owner Request | “就这么决定了，新开一个S任务实施。” and “当前项目可用的guest dos和wow16的二进制文件都复制/编译到那个地方去，如果opennt有原始编译好的文件，直接用；否则用我们自己编译的版本。” |
-| Similar-Issue Sweep | YAML filenames/parser, output generation, CLI/native/DEM handoff, environment names, fixed bootstrap lookup, CONFIG/AUTOEXEC paths and future WOW root transport. |
+| Identifier Mode | `M0 T236 S1`, Ordinary Mode. |
+| Admission And Approval | The owner approved a new T dedicated to minimum-modification recovery of the currently imported OpenNT DEM and COMMAND source, and selected the present COMMAND child-lifecycle gap as S1. |
+| Objective | Replace the current synchronous `cmdExec32` macro shortcut with the smallest session-owned lifecycle seam that permits the imported OpenNT `cmdExec`, `cmdExecComspec32`, and `cmdReturnExitCode` bodies to preserve their source ordering, child-completion state, and checked guest result contract for one Direct, non-pipe, non-WOW child. |
+| Non-goals | Do not implement Redirector/named pipes, worker-thread/CSR/BaseSrv internals, multi-child nesting, WOW startup, DEM retry, raw DASD/floppy, host-system modification, or a new CLI COMMAND interpreter. Do not alter Bochs, bx-mantle, BOP ingress, or guest-memory ownership. |
+| Reference Baseline | `cmdexec.c::cmdCreateProcess` and `cmdExec32` remain excluded by `BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE`; the active macro redirects to synchronous `bx_ntvdm_command_lifecycle_exec`. `nt_block_event_thread`, `nt_resume_event_thread`, `nt_std_handle_notification`, and `cmdPushExitInConsoleBuffer` are no-ops. T234 closed the session multisz, 32-bit opaque handle, PIF and current-directory prerequisites. |
+| Files And ABI Surface | `bop/opennt/command/cmdexec.c`, `bop/opennt/command/cmdmisc.c`, `bop/shim/command_misc_shim.{h,c}`, the COMMAND session structure and focused lifecycle fixtures; module manifest only if source membership changes; T236 S1 evidence. |
+| Applicable Rules | Historical source-recovery audit gate; adapter/boundary rules; source-first coding rules; MSVC x64 `/MT` in-process ABI; no host pointer or host handle may enter guest state. |
+| Verification | Source/ABI/failure ledger; focused Direct non-pipe `54:08 -> completion -> 54:0B` and `54:0A` fixture cases; negative malformed command/environment/token cases; affected formal Ninja target; documentation governance and `git diff --check`. |
+| Expected Markers | `cmdExec32` no longer directly selects the old terminal synchronous shortcut; an explicit session-owned child record represents pending/completed state; original `54:0B` consumes it; event/console helper disposition is explicit rather than an unlabelled no-op; no raw `HANDLE`, BaseSrv, CSR or CCPU dependency enters the product. |
+| Asset Needs | Existing imported OpenNT COMMAND mirror, T234 session/handle/environment seams, formal Ninja manifest and existing fixtures; no new source, firmware, guest media, or host dependency. |
+| Reporting Requirements | State exactly which original bodies were compiled, which historical dependencies remain replaced, Direct failure/order semantics, session cleanup ownership, and all deferred branches. |
+| Stop Conditions | Pause for re-admission if correct source ordering requires a host-child-to-DOS command producer, pipe/Redirector state, multiple concurrent children, a raw host handle/pointer in guest state, or changed Bochs/machine behavior. |
+| Exit Criteria | One bounded Direct non-pipe child lifecycle retains original COMMAND entry/return ordering and errors through an explicit session record; all child state is cleaned on success/failure; unsupported re-entry/pipe/WOW branches fail explicitly; focused and affected formal checks pass. |
+| Original Owner Request | “这样吧，你开一个T任务，就专门做当前DEM和COMMAND族的opennt源代码最小修改复通任务，这是其中的S1.” |
+| Similar-Issue Sweep | `54:06/08/0A/0B`, event/console notification helpers, current-directory publication, standard-handle token ownership, child environment conversion, `50:47/48` pipe continuations, and Direct/non-Direct dispositions. |
 
-P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). S4 closed fixed-YAML cleanup, then the owner explicitly admitted S5 to replace that temporary contract with the final sibling `dos\\`/`wow16\\` layout. S5 bundle evidence: [115-file provenance result](etc/evidence/t235-s5-guest-bundle-result-001.md).
+Detailed T sequence and the S1 source-recovery ledger are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
 
 ## Current Work Record
 
 M0 T234 is closed as the OpenNT-shaped dynamic COMMAND-environment and
 32-bit opaque-handle correction package; see the [T234 closure](history/m0-t234-closure-20260820.md).
-The queued COMMAND launch/PIF owner package owns PIF CONFIG/AUTOEXEC startup
-ordering. M0 T231 closed as the COMMAND `54:00..10` code-complete/v2
+T235 subsequently closed the PIF CONFIG/AUTOEXEC startup selection and fixed
+guest bundle. M0 T236 now owns the remaining minimum-modification DEM/COMMAND
+source recovery. M0 T231 closed as the COMMAND `54:00..10` code-complete/v2
 product-route package; see the [T231 closure](history/m0-t231-closure-20260820.md).
 Native `54:xx` reachability remains transferred to the queued bx machine/BIOS
 owner package. XMS remains a candidate package.
