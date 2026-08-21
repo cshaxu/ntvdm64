@@ -197,11 +197,34 @@ The product route no longer has a 1024-byte COMMAND environment storage or
 child-launch limit. It now directly reuses the original OpenNT transform,
 merge, lookup, set and expansion algorithms, with a bounded session/guest-
 memory seam only where historical BaseSrv and SAS composition cannot link.
-P2 source compilation is positive; its fixture link/run and formal graph are
-still verification gates.
+P2 source compilation, formal fixture link/run, and its affected formal graph
+are positive.
+
+## P8 — Formal Dynamic-Environment Acceptance
+
+On 2026-08-20, a fresh graph at
+`D:\\tmp\\ntdos64-M0-T234-S2-formal-r11` was generated from the current
+formal manifest. The repository-local `O:` root again left Ninja idle before
+creating an output, so the already evidenced disposable NTFS root was used;
+this is a build-root executor observation, not a source result.
+
+`ninja -C D:\\tmp\\ntdos64-M0-T234-S2-formal-r11
+bin/t234-s2-command-dynamic-environment-fixture.exe` completed all 82
+required actions. It rebuilt the admitted `cmdenv.c`, `cmdmisc.c`, COMMAND
+environment/misc seams, full `bx-vdm` archive, and the focused fixture. The
+resulting `t234-s2-command-dynamic-environment-fixture.exe` exited zero.
+
+The subsequent unconstrained `ninja all` attempt is retained as a limitation,
+not a pass: independent `bx-core` C++ translation units selected the retained
+OpenNT `softpc.new/base/inc/config.h` and failed on its historical `IMPORT`/
+`IPT*` declarations. The failure occurs before a T234 source unit and lies
+outside the packet's affected formal target. No bx-core or historical-header
+change is admitted by this packet.
+
+`Verify-DocumentationGovernance.ps1` passed, and `git diff --check` passed.
 
 ## Follow-Up
 
-After existing Ninja processes release the formal root, run the P2 fixture and
-affected formal graph, then the documentation gate before accepting T234 S2
-closure.
+T234 S2 is ready for package closure. PIF-selected CONFIG/AUTOEXEC startup
+ordering remains explicitly transferred to the queued OpenNT COMMAND launch,
+PIF and child-lifecycle owner package; it is not hidden in this result.

@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T234 S2** — restore OpenNT-shaped dynamic COMMAND environment
-composition and remove the fixed 1024-byte session limit.
+**Active: M0 T234 S2** — closed as a validator-compatible closure record;
+it authorizes no further implementation.
 
 ## Active Packet
 
@@ -29,19 +29,17 @@ composition and remove the fixed 1024-byte session limit.
 
 Prior delivery evidence: [T234 S1 32-bit opaque handle ABI](etc/evidence/t234-s1-32bit-opaque-host-handle-abi-result-001.md).
 
-Current detailed result: [T234 S2 dynamic COMMAND environment](etc/evidence/t234-s2-dynamic-command-environment-result-001.md). Local implementation and focused regression are complete; formal Ninja execution remains an active verification gate.
+Current detailed result: [T234 S2 dynamic COMMAND environment](etc/evidence/t234-s2-dynamic-command-environment-result-001.md). The formal affected target, governance gate, and diff check pass. The package is closed; see [T234 closure](history/m0-t234-closure-20260820.md).
 
 **P2 progress:** `cmdXformEnvironment` is directly admitted with a
 session-owned multisz snapshot and a private RTL-compatible environment shim.
-Its changed translation units compile under MSVC x64 `/MT`; final fixture
-link/run remains an active verification gate while existing Ninja processes
-hold the shared formal root.
+Its changed translation units and focused fixture now compile, link, and run
+under MSVC x64 `/MT` in the recorded NTFS formal root.
 
 **P3 progress:** the duplicate `cmdSetDirectories` no-op has been removed so
 the formally admitted OpenNT body is the only product definition.  Its focused
 fixture now checks both the selected drive's current directory and a separate
-inherited `=X:` entry in an isolated fixture process; formal link/run remains
-the acceptance gate.
+inherited `=X:` entry in an isolated fixture process; formal link/run passed.
 
 **P4 progress:** an owner-approved disposable NTFS build root,
 `D:\\tmp\\ntdos64-M0-T234-S2-formal-r7`, provides a working alternative to
@@ -71,15 +69,18 @@ selection remains explicitly outside this packet's later startup lifecycle.
 
 ## Current Work Record
 
-M0 T231 closed as the COMMAND `54:00..10` code-complete/v2 product-route
-package; see the [T231 closure](history/m0-t231-closure-20260820.md). Native
-`54:xx` reachability remains transferred to the queued bx machine/BIOS owner
-package. XMS was excluded from T232 and is now admitted as M0 T233 S1.
+M0 T234 is closed as the OpenNT-shaped dynamic COMMAND-environment and
+32-bit opaque-handle correction package; see the [T234 closure](history/m0-t234-closure-20260820.md).
+The queued COMMAND launch/PIF owner package owns PIF CONFIG/AUTOEXEC startup
+ordering. M0 T231 closed as the COMMAND `54:00..10` code-complete/v2
+product-route package; see the [T231 closure](history/m0-t231-closure-20260820.md).
+Native `54:xx` reachability remains transferred to the queued bx machine/BIOS
+owner package. XMS remains a candidate package.
 
 M0 T232 is closed as the initial unified host-handle cleanup package; its
-16-bit ID conclusion is being corrected by active M0 T234. M0 T233/S1 was
-admitted but received no source or evidence work before the owner superseded
-it with this ABI correction; XMS returns to the unnumbered candidate queue.
+16-bit ID conclusion was corrected by closed M0 T234. M0 T233/S1 was admitted
+but received no source or evidence work before the owner superseded it with
+this ABI correction; XMS returns to the unnumbered candidate queue.
 ## Current Technical Baseline
 
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
