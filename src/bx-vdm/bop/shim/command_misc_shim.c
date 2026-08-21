@@ -45,6 +45,11 @@ CHAR cmdHomeDirectory[MAX_PATH + 1];
 PIF_DATA pfdata;
 UINT VdmExitCode;
 DWORD dwExitCode32;
+/* cmddata.c owns these source globals. The full translation unit cannot enter
+ * while this shim provides its remaining historical product globals, so retain
+ * just the direct worker inputs until cmddata recovery is separately admitted. */
+PCHAR pCommand32;
+PCHAR pEnv32;
 CHAR chDefaultDrive;
 BOOL fSoftpcRedirectionOnShellOut;
 ULONG CntrlHandlerState;
@@ -70,6 +75,7 @@ typedef struct bx_ntvdm_command_misc_active_call {
     uint32_t guest_bytes2;
     uint32_t guest_address3;
     uint32_t guest_bytes3;
+    HANDLE local_child_job;
     jmp_buf terminal_exit;
 } bx_ntvdm_command_misc_active_call;
 #pragma warning(pop)
@@ -203,8 +209,23 @@ BOOL GetNextVDMCommand(PVDMINFO vdm_info)
 {
     bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
     size_t application_bytes, tail_bytes;
-    if (vdm_info == NULL || session == NULL || session->command_source_ready == 0u)
+    if (vdm_info == NULL || session == NULL)
         return FALSE;
+    /* OpenNT's vdm.c client routes these two records to BaseSrv, which adjusts
+     * a console VDM reentrancy count.  The public CLI has no BaseSrv client;
+     * retain the exact ordered count in the only supported session instead. */
+    if (vdm_info->VDMState == INCREMENT_REENTER_COUNT) {
+        session->local_child_reentrancy++;
+        if (session->local_child_reentrancy > session->local_child_reentrancy_peak)
+            session->local_child_reentrancy_peak = session->local_child_reentrancy;
+        return TRUE;
+    }
+    if (vdm_info->VDMState == DECREMENT_REENTER_COUNT) {
+        if (session->local_child_reentrancy == 0u) return FALSE;
+        session->local_child_reentrancy--;
+        return TRUE;
+    }
+    if (session->command_source_ready == 0u) return FALSE;
     if ((vdm_info->VDMState & ASKING_FOR_ENVIRONMENT) != 0u) {
         uint32_t bytes = session->command_source_environment_bytes;
         const CHAR *environment = session->command_source_environment;
@@ -275,115 +296,67 @@ void GetWowKernelCmdLine(void) { TerminateVDM(); }
 ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info)
 { return info == NULL ? 0u : bx_ntvdm_command_misc_active_session()->redirection_token; }
 
-BOOL bx_ntvdm_command_local_child_execute(LPSTR command, LPSTR environment)
+BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
 {
-    STARTUPINFOA startup;
-    PROCESS_INFORMATION process;
-    CHAR command_copy[1024u];
-    CHAR *environment_copy = NULL;
-    DWORD environment_bytes = 0u;
-    DWORD exit_code = ERROR_BAD_FORMAT;
-    uint32_t standard_handles[3];
-    size_t command_bytes;
     bx_ntvdm_command_misc_session *session;
-    HANDLE job = NULL;
-    BOOL child_created = FALSE;
-    if (g_active_call == NULL || command == NULL ||
+    uint32_t standard_handles[3], address, index;
+    HANDLE *targets[3];
+    if (g_active_call == NULL || startup == NULL ||
         (session = g_active_call->call->session) == NULL) return FALSE;
     session->local_child_generation++;
     session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_STARTING;
     session->local_child_error = ERROR_SUCCESS;
     session->local_child_exit_code = ERROR_BAD_FORMAT;
-    command_bytes = strlen(command);
-    if (command_bytes == 0u || command_bytes >= sizeof(command_copy)) {
-        session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
-        session->local_child_error = ERROR_BAD_FORMAT;
+    startup->dwFlags |= STARTF_USESTDHANDLES;
+    startup->hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    startup->hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    startup->hStdError = GetStdHandle(STD_ERROR_HANDLE);
+    if (g_active_call->call->service != BX_NTVDM_COMMAND_MISC_EXEC) return TRUE;
+    address = real_mode_address(g_active_call->call->cpu->ss,
+        (USHORT)g_active_call->call->cpu->ebp);
+    targets[0] = &startup->hStdError;
+    targets[1] = &startup->hStdOutput;
+    targets[2] = &startup->hStdInput;
+    if (address > 0x100000u - sizeof(standard_handles) ||
+        !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
+            (uint8_t *)standard_handles, sizeof(standard_handles))) {
+        SetLastError(ERROR_INVALID_HANDLE);
         return FALSE;
     }
-    memcpy(command_copy, command, command_bytes + 1u);
-    /* DIVERGENCE: cmdCreateProcess used a CCPU worker thread and temporarily
-     * changed process-global standard handles.  The portable CLI executes the
-     * same declared command synchronously with explicit inherited handles,
-     * keeping the caller's host process untouched. */
-    if (environment != NULL) {
-        const uint8_t *environment_bytes_source = NULL;
-        if (g_active_call != NULL && environment == (CHAR *)g_active_call->guest_buffer) {
-            environment_bytes = g_active_call->guest_bytes;
-            environment_bytes_source = g_active_call->guest_buffer;
-        } else if (g_active_call != NULL && environment == (CHAR *)g_active_call->guest_buffer2) {
-            environment_bytes = g_active_call->guest_bytes2;
-            environment_bytes_source = g_active_call->guest_buffer2;
-        }
-        if (environment_bytes_source == NULL || environment_bytes < 2u ||
-            environment_bytes_source[environment_bytes - 2u] != '\0' ||
-            environment_bytes_source[environment_bytes - 1u] != '\0') {
-            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
-            session->local_child_error = ERROR_BAD_ENVIRONMENT;
-            return FALSE;
-        }
-        environment_copy = (CHAR *)malloc(environment_bytes);
-        if (environment_copy == NULL ||
-            !OemToCharBuffA(environment, environment_copy, environment_bytes)) {
-            free(environment_copy);
-            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
-            session->local_child_error = ERROR_BAD_ENVIRONMENT;
+    for (index = 0u; index < 3u; ++index) {
+        uint32_t token = standard_handles[index];
+        if (token == UINT32_MAX) continue;
+        /* DIVERGENCE (T236 S2): retain OpenNT's three-handle ordering but bind
+         * endpoints to this child only. SetStdHandle would alter the CLI. */
+        if (token == 0u || !bx_ntvdm_host_handle_manager_lookup_handle(
+                &session->handles, token, targets[index])) {
+            SetLastError(ERROR_INVALID_HANDLE);
             return FALSE;
         }
     }
-    memset(&startup, 0, sizeof(startup)); memset(&process, 0, sizeof(process));
-    startup.cb = sizeof(startup);
-    startup.dwFlags = STARTF_USESTDHANDLES;
-    startup.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
-    startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
-    if (g_active_call->call->service == BX_NTVDM_COMMAND_MISC_EXEC) {
-        uint32_t address = real_mode_address(g_active_call->call->cpu->ss,
-            (USHORT)g_active_call->call->cpu->ebp);
-        HANDLE *targets[3] = { &startup.hStdError, &startup.hStdOutput, &startup.hStdInput };
-        uint32_t index;
-        if (session == NULL || address > 0x100000u - sizeof(standard_handles) ||
-            !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
-                (uint8_t *)standard_handles, sizeof(standard_handles))) {
-            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
-            session->local_child_error = ERROR_INVALID_HANDLE;
-            free(environment_copy);
-            return FALSE;
-        }
-        for (index = 0u; index < 3u; ++index) {
-            uint32_t token = standard_handles[index];
-            if (token == UINT32_MAX) continue;
-            /* DIVERGENCE: original cmdCreateProcess temporarily installed the
-             * decoded guest handles into the parent process.  Resolve the
-             * fixed token directly into STARTUPINFO instead. */
-            if (token == 0u || token == UINT32_MAX ||
-                !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
-                    token, targets[index])) {
-                session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
-                session->local_child_error = ERROR_INVALID_HANDLE;
-                free(environment_copy);
-                return FALSE;
-            }
-        }
+    return TRUE;
+}
+
+void bx_ntvdm_command_worker_attach_process(HANDLE process)
+{
+    if (g_active_call == NULL || process == NULL || process == INVALID_HANDLE_VALUE) return;
+    g_active_call->local_child_job = CreateJobObjectA(NULL, NULL);
+    if (g_active_call->local_child_job != NULL)
+        (void)AssignProcessToJobObject(g_active_call->local_child_job, process);
+}
+
+void bx_ntvdm_command_worker_finish(BOOL child_created, DWORD exit_code)
+{
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    if (g_active_call != NULL && g_active_call->local_child_job != NULL) {
+        CloseHandle(g_active_call->local_child_job);
+        g_active_call->local_child_job = NULL;
     }
-    if (!CreateProcessA(NULL, command_copy, NULL, NULL, TRUE, CREATE_DEFAULT_ERROR_MODE,
-            environment == NULL ? NULL : environment_copy, NULL, &startup, &process)) {
-        exit_code = GetLastError();
-    } else {
-        child_created = TRUE;
-        job = CreateJobObjectA(NULL, NULL);
-        if (job != NULL) (void)AssignProcessToJobObject(job, process.hProcess);
-        (void)WaitForSingleObject(process.hProcess, INFINITE);
-        if (!GetExitCodeProcess(process.hProcess, &exit_code)) exit_code = GetLastError();
-        CloseHandle(process.hThread); CloseHandle(process.hProcess);
-    }
-    if (job != NULL) CloseHandle(job);
-    free(environment_copy);
-    dwExitCode32 = exit_code;
+    if (session == NULL) return;
     session->local_child_exit_code = exit_code;
     session->local_child_error = exit_code;
-    session->local_child_state = !child_created ?
-        BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED : BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED;
-    return session->local_child_state == BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED;
+    session->local_child_state = child_created ?
+        BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED : BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
 }
 
 static int validate_comspec_input(const bx_ntvdm_command_misc_call *call)

@@ -310,7 +310,7 @@ VOID cmdCheckBinary (VOID)
 
 #endif /* BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY */
 
-#if !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
+#if !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE) || defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE)
 #define MAX_DIR 68
 
 VOID cmdCreateProcess ( VOID )
@@ -319,7 +319,6 @@ VOID cmdCreateProcess ( VOID )
     VDMINFO VDMInfoForCount;
     STARTUPINFO StartupInfo;
     PROCESS_INFORMATION ProcessInformation;
-    HANDLE hStd16In,hStd16Out,hStd16Err;
     CHAR CurDirVar [] = "=?:";
     CHAR Buffer [MAX_DIR];
     CHAR *CurDir = Buffer;
@@ -328,8 +327,8 @@ VOID cmdCreateProcess ( VOID )
     NTSTATUS NtStatus;
     UNICODE_STRING Unicode;
     OEM_STRING	   OemString;
-    LPVOID lpNewEnv=NULL;
-    PSTD_HANDLES pStdHandles;
+    /* `lpNewEnv` was an unused historical local; omit it for the admitted
+     * /W4 /WX build without changing worker state or control flow. */
     ANSI_STRING Env_A;
 
     // we have one more 32 executable active
@@ -340,6 +339,7 @@ VOID cmdCreateProcess ( VOID )
     GetNextVDMCommand (&VDMInfoForCount);
 
     RtlZeroMemory((PVOID)&StartupInfo,sizeof(STARTUPINFO));
+    RtlZeroMemory((PVOID)&ProcessInformation,sizeof(PROCESS_INFORMATION));
     StartupInfo.cb = sizeof(STARTUPINFO);
 
     CurDirVar [1] = chDefaultDrive;
@@ -349,15 +349,10 @@ VOID cmdCreateProcess ( VOID )
     if (dwRet == 0 || dwRet == MAX_DIR)
 	CurDir = NULL;
 
-    pStdHandles = (PSTD_HANDLES) GetVDMAddr (getSS(), getBP());
-    if ((hStd16In = (HANDLE) FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
-        SetStdHandle (STD_INPUT_HANDLE, hStd16In);
-
-    if ((hStd16Out = (HANDLE) FETCHDWORD(pStdHandles->hStdOut)) != (HANDLE)-1)
-        SetStdHandle (STD_OUTPUT_HANDLE, hStd16Out);
-
-    if ((hStd16Err = (HANDLE) FETCHDWORD(pStdHandles->hStdErr)) != (HANDLE)-1)
-        SetStdHandle (STD_ERROR_HANDLE, hStd16Err);
+    /* DIVERGENCE (T236 S2): original code temporarily installs three
+     * guest-derived handles process-wide. Preserve its order, but bind them
+     * only to the child through the active session's opaque handle table. */
+    Status = bx_ntvdm_command_worker_prepare_startup(&StartupInfo);
 
     /*
      *  Warning, pEnv32 currently points to an ansi environment.
@@ -370,6 +365,7 @@ VOID cmdCreateProcess ( VOID )
 
     Env_A.Buffer = NULL;
 
+    if (Status) {
     RtlInitString((PSTRING)&OemString, pCommand32);
     NtStatus = RtlOemStringToUnicodeString(&Unicode,&OemString,TRUE);
     if (NT_SUCCESS(NtStatus)) {
@@ -400,26 +396,21 @@ VOID cmdCreateProcess ( VOID )
 			   &ProcessInformation);
 	}
     }
+    }
 
     if (Status == FALSE)
         dwExitCode32 = GetLastError ();
 
-    if (hStd16In != (HANDLE)-1)
-        SetStdHandle (STD_INPUT_HANDLE, SCS_hStdIn);
-
-    if (hStd16Out != (HANDLE)-1)
-        SetStdHandle (STD_OUTPUT_HANDLE, SCS_hStdOut);
-
-    if (hStd16Err != (HANDLE)-1)
-        SetStdHandle (STD_ERROR_HANDLE, SCS_hStdErr);
-
     if (Status) {
+	bx_ntvdm_command_worker_attach_process(ProcessInformation.hProcess);
 	ResumeThread (ProcessInformation.hThread);
         WaitForSingleObject(ProcessInformation.hProcess, (DWORD)-1);
         GetExitCodeProcess (ProcessInformation.hProcess, &dwExitCode32);
         CloseHandle (ProcessInformation.hProcess);
-        CloseHandle (ProcessInformation.hThread);
+	CloseHandle (ProcessInformation.hThread);
     }
+
+    bx_ntvdm_command_worker_finish(Status, dwExitCode32);
 
     if (Env_A.Buffer)
 	RtlFreeAnsiString(&Env_A);
@@ -431,11 +422,12 @@ VOID cmdCreateProcess ( VOID )
     // one less 32 executable active
     Exe32ActiveCount--;
 
-    // Kill this thread
-    ExitThread (0);
+    /* DIVERGENCE (T236 S2): execute in the active typed BOP call rather than
+     * a detached CCPU thread, so checked guest-copy state remains valid. */
+    return;
 }
 
-
+#if !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
 VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 {
 
@@ -497,17 +489,19 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
     return;
 }
-
 #endif /* !BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE */
 
+#endif /* worker admission */
+
 #if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
-/* DIVERGENCE (T236): OpenNT launches cmdCreateProcess on a CCPU worker and
- * changes process-global standard handles. That composition is not available
- * to a standalone CLI. Keep the original cmdExec32 event/GetNext/CF/AL
- * ordering, but delegate only child creation and host-local stream setup to
- * the session-owned public-Win32 seam. */
+/* DIVERGENCE (T236 S2): retain the imported cmdCreateProcess worker, but call
+ * it in the active single-session typed BOP context instead of detaching a
+ * CCPU thread. Its child-only stream seam prevents the historical global
+ * standard-handle mutation from affecting the standalone CLI. */
 VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 {
+    pCommand32 = pCmd32;
+    pEnv32 = pEnv;
     CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
 
@@ -515,16 +509,7 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
 
-    if (!bx_ntvdm_command_local_child_execute(pCmd32, pEnv)) {
-        setCF(0);
-        setAL((UCHAR)bx_ntvdm_command_misc_active_session()->local_child_error);
-        nt_resume_event_thread();
-        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
-        fBlock = FALSE;
-        CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
-                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
-        return;
-    }
+    cmdCreateProcess();
 
     VDMInfo.VDMState = NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND;
     VDMInfo.EnviornmentSize = 0;

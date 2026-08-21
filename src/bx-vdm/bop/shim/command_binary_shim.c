@@ -21,13 +21,21 @@ NTSTATUS RtlUnicodeStringToAnsiString(PANSI_STRING destination,
     const PUNICODE_STRING source, BOOL allocate_destination)
 {
     int bytes;
-    if (destination == NULL || source == NULL || source->Buffer == NULL || !allocate_destination)
+    if (destination == NULL || source == NULL || source->Buffer == NULL)
         return (NTSTATUS)-1;
     bytes = WideCharToMultiByte(CP_ACP, 0, source->Buffer,
         source->Length / (USHORT)sizeof(WCHAR), NULL, 0, NULL, NULL);
     if (bytes <= 0 || bytes > 0x7ffe) return (NTSTATUS)-1;
-    destination->Buffer = (PCHAR)malloc((size_t)bytes + 1u);
-    if (destination->Buffer == NULL) return (NTSTATUS)-1;
+    if (!allocate_destination) {
+        /* OpenNT cmdCreateProcess initializes OEM_STRING with the existing
+         * command buffer, then asks RTL to overwrite that bounded buffer.
+         * Preserve that non-allocating contract rather than rejecting it. */
+        if (destination->Buffer == NULL || destination->MaximumLength < bytes + 1u)
+            return (NTSTATUS)-1;
+    } else {
+        destination->Buffer = (PCHAR)malloc((size_t)bytes + 1u);
+        if (destination->Buffer == NULL) return (NTSTATUS)-1;
+    }
     if (WideCharToMultiByte(CP_ACP, 0, source->Buffer,
             source->Length / (USHORT)sizeof(WCHAR), destination->Buffer,
             bytes, NULL, NULL) != bytes) {

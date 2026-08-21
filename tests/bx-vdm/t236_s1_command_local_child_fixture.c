@@ -61,6 +61,7 @@ int main(void)
     DWORD old_comspec_bytes;
     CHAR old_comspec[MAX_PATH], test_comspec[MAX_PATH], pipe_text[64];
     HANDLE pipe_read, pipe_write;
+    HANDLE host_stdin, host_stdout, host_stderr;
     SECURITY_ATTRIBUTES security;
 
     memset(&context, 0, sizeof(context));
@@ -73,6 +74,9 @@ int main(void)
     event.fault_rip = 0x500u;
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     bx_ntvdm_command_misc_session_initialize(&session);
+    host_stdin = GetStdHandle(STD_INPUT_HANDLE);
+    host_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
+    host_stderr = GetStdHandle(STD_ERROR_HANDLE);
 
     cpu.ds = 0x100u;
     cpu.esi = 0u;
@@ -88,15 +92,20 @@ int main(void)
     memcpy(context.guest + 0x2000u, "T236=local\0\0", 12u);
 
     if (!invoke(&context, &event, &cpu, &result, &session,
-            BX_NTVDM_COMMAND_MISC_EXEC) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
-        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
-        result.cpu_delta.gpr16_values[0] != (0x0100u | 37u) ||
-        context.guest[0x1007u] != 0u ||
-        session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED ||
-        session.local_child_generation != 1u ||
-        session.local_child_exit_code != 37u ||
-        session.local_child_events_blocked != 0u) return 1;
+            BX_NTVDM_COMMAND_MISC_EXEC)) return 11;
+    if (result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME) return 12;
+    if ((result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u) return 13;
+    if (result.cpu_delta.gpr16_values[0] != (0x0100u | 37u)) return 14;
+    if (context.guest[0x1007u] != 0u) return 15;
+    if (session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED) return 16;
+    if (session.local_child_generation != 1u) return 17;
+    if (session.local_child_exit_code != 37u) return 18;
+    if (session.local_child_events_blocked != 0u) return 19;
+    if (session.local_child_reentrancy != 0u || session.local_child_reentrancy_peak != 1u)
+        return 20;
+    if (GetStdHandle(STD_INPUT_HANDLE) != host_stdin ||
+        GetStdHandle(STD_OUTPUT_HANDLE) != host_stdout ||
+        GetStdHandle(STD_ERROR_HANDLE) != host_stderr) return 21;
 
     old_comspec_bytes = GetEnvironmentVariableA("COMSPEC", old_comspec,
         (DWORD)sizeof(old_comspec));
@@ -155,7 +164,7 @@ int main(void)
     }
     CloseHandle(pipe_read);
 
-    puts("T236 S1 imported cmdExec32 direct/COMSPEC, failure and anonymous-pipe contracts verified");
+    puts("T236 S2 imported worker, reentrancy, stream isolation, direct/COMSPEC, failure and anonymous-pipe contracts verified");
     bx_ntvdm_command_misc_session_dispose(&session);
     return 0;
 }

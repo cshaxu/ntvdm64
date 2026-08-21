@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2010 |
+| Documentation records | 2013 |
 | --- | --- |
-| Generated UTC | 2026-08-21T18:18:19Z |
+| Generated UTC | 2026-08-21T18:59:22Z |
 
 ## Entries
 
@@ -249,6 +249,7 @@ content-divergent entries.
 | etc/evidence/t235-s4-yaml-profile-cleanup-result-001.md | indexed supporting material | 57b9241afbddfc7dac89e3ebc47e868145e29a448b50d1332da7a96bd73e52d2 |
 | etc/evidence/t235-s5-guest-bundle-result-001.md | indexed supporting material | 5cb03a29e91eb8cd71ef404c5e13cdf0198b01eea3492a7bfe83baa37d04e4e0 |
 | etc/evidence/t236-s1-command-local-child-source-recovery-result-001.md | indexed supporting material | 96fe6aeab03d899dca4ea1f8404dbaf29a82cdcc0559f7c6cf0845f69ee074ca |
+| etc/evidence/t236-s2-command-worker-host-broker-recovery-001.md | indexed supporting material | 525e38481d1e453de5e885ba43b1cc81ff4ea591174309da7188de423c2df89d |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |
@@ -279,7 +280,7 @@ content-divergent entries.
 | etc/operations/m0-t231-s1-command-service-ledger-001.md | indexed supporting material | 730708a4921b213962520cb9c17948da911b1d2577b7133228e120f9c3f68eb0 |
 | etc/operations/m0-t231-s2-cmdmisc-admission-boundary-001.md | indexed supporting material | 19a7cd2a320a012ad45677081ed763e86346efb2625221e68099f32eb4a1a9dd |
 | etc/operations/m0-t232-unified-host-handle-manager-plan-001.md | indexed supporting material | 7eff5fc84931922de738507dcf657c9f9bd57be4f564ea2d99430f100fcb972d |
-| etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md | indexed supporting material | 4a2cf886671d51634eb6cd99954d3f65e7b44f4605772d95e2cdcba038541f2f |
+| etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md | indexed supporting material | b3a58b19fd54bdcb617f27a758e7748e666e0c4ec722a3aefa9e5d18d179bc2a |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -288,6 +289,7 @@ content-divergent entries.
 | etc/operations/policy/source-policy.md | indexed supporting material | 975baa0c066a65b04b6ec317ae6065d70b13643a4c50ada5fadd1c7466f3b4a4 |
 | etc/operations/proposal-bop-cross-family-completion-audit-001.md | indexed supporting material | 5e027d741a68f4ac044b52087b53611d931695dc57401514f2b32778d9d63646 |
 | etc/operations/proposal-bx-machine-bios-selector-owner-package-completion-001.md | indexed supporting material | 40a7cbf4902abcb5f1b542ffc2b7f9199c27de83f5491a7b6dfd796128d7d885 |
+| etc/operations/proposal-bx-vdm-pending-bop-session-lifecycle-001.md | indexed supporting material | c1a9ca8dfafcd12c9aa441dbcfab1f9793a3acb7c72482eb44fb805bdeafe077 |
 | etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md | indexed supporting material | 472164739c7fe38ba4ccb20c64a0b72c13aa81d8df972786371c50c762c8393a |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 142a93fef99ec618565c294f911416b78836dc14591e962a70fe716e45de8fcc |
 | etc/operations/proposal-opennt-command-owner-package-completion-001.md | indexed supporting material | 7ba4a2f4fb70d2d67c4c2434281e2914a7da4cce2cf457169df7a9cfe7dce1ea |
@@ -1742,6 +1744,7 @@ content-divergent entries.
 | history/m0-t235-s4-p1-closure-20260821.md | closed task history | e94250df1ef8e5e303c7f3ef6986cabc37405854bd3b086b14c21cc5f0e90e13 |
 | history/m0-t235-s5-closure-20260821.md | closed task history | 0d17b5309d06408f43e6d6660a5807e487ff4f83f522bde7230afda550439fce |
 | history/m0-t236-s1-closure-20260821.md | closed task history | 0fdd96a00c4155e8b321544617af73717b429479d33f3500c5e032d3405cd38c |
+| history/m0-t236-s2-closure-20260821.md | closed task history | 201a064de3283ab4b6128603ca58faca4b878af2a1eea6902fd0d9eaaff961fa |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2024,7 +2027,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 75fb7bceb3e09c829c72f95a48396e2c55e1a1ee7dcddde80c585dd706be429a |
+| STATUS.md | principal control document | 1b1ab9c37c5d6b3442740afb050c495992d99977a07e3f46c23f99d34aa26123 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

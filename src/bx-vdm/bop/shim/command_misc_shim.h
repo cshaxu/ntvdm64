@@ -77,6 +77,8 @@ typedef struct _RedirComplete_Info {
 #define ASKING_FOR_DOS_BINARY    0x0004u
 #define ASKING_FOR_SECOND_TIME   0x0008u
 #define ASKING_FOR_ENVIRONMENT   0x0400u
+#define INCREMENT_REENTER_COUNT  0x0010u /* OpenNT public/internal/base/inc/vdmapi.h */
+#define DECREMENT_REENTER_COUNT  0x0020u /* OpenNT public/internal/base/inc/vdmapi.h */
 #define NO_PARENT_TO_WAKE        0x0040u
 #define RETURN_ON_NO_COMMAND     0x0080u
 #define CNTRL_SHELLCOUNT         0x0000ffffu
@@ -237,6 +239,8 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t local_child_error;
     uint32_t local_child_events_blocked;
     uint32_t local_child_console_notification;
+    uint32_t local_child_reentrancy;
+    uint32_t local_child_reentrancy_peak;
 } bx_ntvdm_command_misc_session;
 
 enum bx_ntvdm_command_local_child_state {
@@ -404,9 +408,12 @@ PWCHAR bx_ntvdm_command_environment_snapshot_session(
 void bx_ntvdm_command_environment_free_snapshot(PWCHAR snapshot);
 uint32_t bx_ntvdm_command_binary_scs_address(uint32_t offset);
 BOOL IsWowAppRunnable(LPSTR app_name);
-/* This is the sole modern replacement for the unavailable CCPU/CSR worker.
- * Imported cmdExec32 retains event, GetNextVDMCommand and CF/AL ordering. */
-BOOL bx_ntvdm_command_local_child_execute(LPSTR command, LPSTR environment);
+/* T236 S2 composes the imported cmdCreateProcess body in the active one-session
+ * call. These seams replace only detached CCPU threading and process-global
+ * standard-handle installation; no HANDLE enters guest/session ABI. */
+BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup);
+void bx_ntvdm_command_worker_attach_process(HANDLE process);
+void bx_ntvdm_command_worker_finish(BOOL child_created, DWORD exit_code);
 
 #ifndef SCS_DOS_BINARY
 #define SCS_DOS_BINARY 1u
@@ -419,6 +426,8 @@ BOOL bx_ntvdm_command_local_child_execute(LPSTR command, LPSTR environment);
 #define STOREWORD(target, value) ((target) = (USHORT)(value))
 #define STOREDWORD(target, value) ((target) = (ULONG)(value))
 extern PCHAR lpszzcmdEnv16;
+extern PCHAR pCommand32;
+extern PCHAR pEnv32;
 
 extern CHAR lpszComSpec[64 + 8];
 extern USHORT cbComSpec;
