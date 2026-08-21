@@ -254,6 +254,10 @@ typedef struct bx_ntvdm_command_misc_session {
     uint32_t local_child_console_notification;
     uint32_t local_child_reentrancy;
     uint32_t local_child_reentrancy_peak;
+    uint32_t create_process_attempted;
+    uint32_t create_process_last_error;
+    uint32_t create_process_environment_bytes;
+    uint32_t create_process_environment_flags;
     bx_ntvdm_command_pending_continuation pending;
 } bx_ntvdm_command_misc_session;
 
@@ -429,6 +433,11 @@ BOOL IsWowAppRunnable(LPSTR app_name);
  * replace only CCPU/CSR transport and process-global standard-handle
  * installation; no HANDLE enters guest/session ABI. */
 BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup);
+BOOL bx_ntvdm_command_worker_reentry_pending(void);
+BOOL bx_ntvdm_command_create_process(LPCSTR application, LPSTR command,
+    LPSECURITY_ATTRIBUTES process_attributes, LPSECURITY_ATTRIBUTES thread_attributes,
+    BOOL inherit_handles, DWORD creation_flags, LPVOID environment, LPCSTR current_directory,
+    LPSTARTUPINFOA startup, LPPROCESS_INFORMATION process_information);
 void bx_ntvdm_command_worker_attach_process(HANDLE process);
 void bx_ntvdm_command_worker_finish(BOOL child_created, DWORD exit_code);
 /* These are the bounded replacement for the NT4 CCPU/CSR transport.  They

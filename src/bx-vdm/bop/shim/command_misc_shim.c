@@ -331,13 +331,10 @@ BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
 {
     bx_ntvdm_command_misc_session *session;
     uint32_t index;
+    uint32_t explicit_streams = 0u;
     HANDLE *targets[3];
     if (startup == NULL ||
         (session = bx_ntvdm_command_misc_active_session()) == NULL) return FALSE;
-    startup->dwFlags |= STARTF_USESTDHANDLES;
-    startup->hStdInput = GetStdHandle(STD_INPUT_HANDLE);
-    startup->hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    startup->hStdError = GetStdHandle(STD_ERROR_HANDLE);
     targets[0] = &startup->hStdError;
     targets[1] = &startup->hStdOutput;
     targets[2] = &startup->hStdInput;
@@ -351,8 +348,56 @@ BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
             SetLastError(ERROR_INVALID_HANDLE);
             return FALSE;
         }
+        ++explicit_streams;
     }
+    /* The original worker receives VDM-installed standard handles.  A sentinel
+     * means this BOP supplied none, so do not force unrelated CLI handles into
+     * the child; retain CreateProcess's normal default-stream behavior. */
+    if (explicit_streams != 0u) startup->dwFlags |= STARTF_USESTDHANDLES;
     return TRUE;
+}
+
+BOOL bx_ntvdm_command_create_process(LPCSTR application, LPSTR command,
+    LPSECURITY_ATTRIBUTES process_attributes, LPSECURITY_ATTRIBUTES thread_attributes,
+    BOOL inherit_handles, DWORD creation_flags, LPVOID environment, LPCSTR current_directory,
+    LPSTARTUPINFOA startup, LPPROCESS_INFORMATION process_information)
+{
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    const CHAR *entry = (const CHAR *)environment;
+    uint32_t environment_bytes = 0u;
+    uint32_t environment_flags = 0u;
+    BOOL created;
+    if (session != NULL) {
+        session->create_process_attempted = 1u;
+        session->create_process_last_error = ERROR_SUCCESS;
+        if (entry != NULL) {
+            while (environment_bytes < BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX) {
+                size_t entry_bytes = strlen(entry);
+                if (entry_bytes == 0u) {
+                    ++environment_bytes;
+                    break;
+                }
+                if (entry_bytes >= BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX - environment_bytes)
+                    break;
+                if (_strnicmp(entry, "COMSPEC=", 8u) == 0) environment_flags |= 0x01u;
+                if (_strnicmp(entry, "SystemRoot=", 11u) == 0) environment_flags |= 0x02u;
+                if (_strnicmp(entry, "PATH=", 5u) == 0) environment_flags |= 0x04u;
+                environment_bytes += (uint32_t)entry_bytes + 1u;
+                entry += entry_bytes + 1u;
+            }
+        }
+        session->create_process_environment_bytes = environment_bytes;
+        session->create_process_environment_flags = environment_flags;
+    }
+    /* DIVERGENCE (T236 S2): cmdexec.c's source buffers are explicitly ANSI.
+     * Bind that historical contract to public CreateProcessA, avoiding a
+     * build-wide TCHAR setting while preserving every original argument. */
+    created = CreateProcessA(application, command, process_attributes,
+        thread_attributes, inherit_handles, creation_flags, environment,
+        current_directory, startup, process_information);
+    if (session != NULL) session->create_process_last_error = created ?
+        ERROR_SUCCESS : GetLastError();
+    return created;
 }
 
 void bx_ntvdm_command_worker_attach_process(HANDLE process)
@@ -410,6 +455,36 @@ static int copy_pending_environment(CHAR *destination, uint32_t *bytes_out,
     return 0;
 }
 
+static int snapshot_host_environment(bx_ntvdm_command_misc_session *session)
+{
+    LPCH source;
+    uint32_t bytes = 0u;
+    if (session == NULL) return 0;
+    source = GetEnvironmentStringsA();
+    if (source == NULL) return 0;
+    for (;;) {
+        if (bytes >= BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX) {
+            FreeEnvironmentStringsA(source);
+            return 0;
+        }
+        if (source[bytes++] == '\0' && source[bytes] == '\0') {
+            ++bytes;
+            break;
+        }
+    }
+    /* DIVERGENCE (T236 S2): cmdXformEnvironment originally snapshots the
+     * NTVDM process environment. Preserve that source input as a copied,
+     * session-owned public Win32 snapshot: the guest DOS multisz remains the
+     * separate pEnv32 input and is never substituted for the host snapshot. */
+    if (!replace_environment(&session->command_source_environment,
+            &session->command_source_environment_bytes, source, bytes)) {
+        FreeEnvironmentStringsA(source);
+        return 0;
+    }
+    FreeEnvironmentStringsA(source);
+    return 1;
+}
+
 BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
 {
     bx_ntvdm_command_misc_session *session;
@@ -429,17 +504,16 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
     /* The copied OpenNT worker must receive the same immutable command and
      * double-NUL environment snapshot after the BOP call has returned. */
     memset(&session->pending, 0, sizeof(session->pending));
+    /* A generation identifies an admitted BOP attempt, including an input
+     * rejection before CreateThread.  This prevents a failed stream-token
+     * request from being observationally invisible between two child runs. */
+    session->pending.generation = ++session->local_child_generation;
     if (!copy_pending_environment(session->pending.environment,
             &session->pending.environment_bytes, environment)) {
         SetLastError(ERROR_BAD_ENVIRONMENT);
         return FALSE;
     }
-    /* OpenNT's cmdenv.c snapshots the VDM's host environment before merging
-     * this DOS block.  In the standalone single-session composition that
-     * snapshot is session-owned, never the CLI process environment. */
-    if (!replace_environment(&session->command_source_environment,
-            &session->command_source_environment_bytes,
-            session->pending.environment, session->pending.environment_bytes)) {
+    if (!snapshot_host_environment(session)) {
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return FALSE;
     }
@@ -450,6 +524,10 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
             !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
                 (uint8_t *)tokens, sizeof(tokens))) {
             SetLastError(ERROR_INVALID_HANDLE);
+            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+            session->local_child_error = ERROR_INVALID_HANDLE;
+            session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+            session->pending.error = ERROR_INVALID_HANDLE;
             return FALSE;
         }
         for (index = 0u; index < 3u; ++index) {
@@ -458,11 +536,14 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
                 !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
                     tokens[index], &unused))) {
                 SetLastError(ERROR_INVALID_HANDLE);
+                session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+                session->local_child_error = ERROR_INVALID_HANDLE;
+                session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+                session->pending.error = ERROR_INVALID_HANDLE;
                 return FALSE;
             }
         }
     }
-    session->pending.generation = ++session->local_child_generation;
     session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING;
     session->pending.service = g_active_call->call->service;
     session->pending.command_bytes = command_bytes;
@@ -540,6 +621,19 @@ BOOL bx_ntvdm_command_worker_complete(void)
     g_pending_session = NULL;
     return session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED ||
         session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+}
+
+BOOL bx_ntvdm_command_worker_reentry_pending(void)
+{
+    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    /* A completed record is historical state until a worker token still owns
+     * the pending continuation.  cmdExec32 releases that token as it consumes
+     * the exact BOP re-entry; a later 54:08 is a fresh request, not a replay. */
+    return session != NULL && session->pending.worker_token != 0u &&
+        (session->pending.state ==
+        BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING || session->pending.state ==
+        BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED || session->pending.state ==
+        BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED);
 }
 
 BOOL bx_ntvdm_command_misc_set_pending(void)

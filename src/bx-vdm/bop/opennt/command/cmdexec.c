@@ -383,7 +383,10 @@ VOID cmdCreateProcess ( VOID )
 	}
 	else {
 
-	    Status = CreateProcess (
+	    /* DIVERGENCE (T236 S2): source arguments are ANSI. The narrow shim
+	     * selects public CreateProcessA explicitly and records only the session
+	     * result needed to diagnose the detached worker boundary. */
+	    Status = bx_ntvdm_command_create_process (
                            NULL,
                            (LPTSTR)pCommand32,
                            NULL,
@@ -506,10 +509,7 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     /* A pending BOP intentionally re-enters at the original instruction. Do
      * not create a second child: first observe the worker, then resume the
      * original post-CreateThread GetNextVDMCommand/return sequence below. */
-    if (Session != NULL &&
-        (Session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING ||
-         Session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED ||
-         Session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED)) {
+    if (Session != NULL && bx_ntvdm_command_worker_reentry_pending()) {
         if (!bx_ntvdm_command_worker_complete()) {
             if (GetLastError() == ERROR_IO_INCOMPLETE)
                 (void)bx_ntvdm_command_misc_set_pending();
@@ -626,6 +626,16 @@ VOID cmdExec (VOID)
     PCHAR   pCommandTail;
     PCHAR   pEnv;
     CHAR Buffer[MAX_PATH];
+
+    /* DIVERGENCE (T236 S2): the historical CCPU suspension returns through
+     * cmdExec32 after the worker finishes.  The finite mantle re-enters the
+     * BOP instruction, whose first pass has already converted the tail CR to
+     * NUL.  Preserve source ordering by routing only that recorded pending
+     * re-entry to cmdExec32 before the original one-shot tail scan. */
+    if (bx_ntvdm_command_worker_reentry_pending()) {
+        cmdExec32(NULL, NULL);
+        return;
+    }
 
     pCommandTail = (PCHAR) GetVDMAddr ((USHORT)getDS(),(USHORT)getSI());
     pEnv = (PCHAR) GetVDMAddr ((USHORT)getES(),0);

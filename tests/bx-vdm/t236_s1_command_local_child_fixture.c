@@ -160,7 +160,9 @@ int main(void)
             (ERROR_INVALID_HANDLE & 0xffu) ||
         session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED ||
         session.local_child_error != ERROR_INVALID_HANDLE ||
-        session.local_child_events_blocked != 0u) return 3;
+        session.local_child_events_blocked != 0u) {
+        return 3;
+    }
 
     security.nLength = sizeof(security);
     security.lpSecurityDescriptor = NULL;
@@ -190,7 +192,12 @@ int main(void)
     CloseHandle(pipe_read);
 
     standard_handles[1] = UINT32_MAX;
-    memcpy(context.guest + 0x1000u, "ping -n 5 127.0.0.1 >nul\r", 26u);
+    /* Do not rely on PATH: the worker deliberately receives the current
+     * session's bounded environment, and this cancellation case needs a
+     * child that remains alive long enough to cancel on every host. */
+    if (GetSystemDirectoryA(pipe_text, (DWORD)sizeof(pipe_text)) == 0u ||
+        _snprintf_s((CHAR *)(context.guest + 0x1000u), 124u, _TRUNCATE,
+            "%s\\ping.exe -n 5 127.0.0.1 >nul\r", pipe_text) < 0) return 57;
     if (!invoke(&context, &event, &cpu, &result, &session,
             BX_NTVDM_COMMAND_MISC_EXEC) ||
         result.disposition != BX_NTVDM_CPU_RESULT_V2_PENDING) return 57;

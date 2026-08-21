@@ -34,6 +34,13 @@ process's standard handles?
 5. Compiled changed sources under the formal MSVC x64 `/MT /W4 /WX` command
    shape.  Linked the changed objects into a source-current `bx-vdm` archive
    and ran the focused T236, retained T231 and T234 fixtures.
+6. Diagnosed the native `54:08` failure which returned `AX=000B`: the first
+   imported `cmdExec` changes the command-tail CR to NUL before it requests
+   `PENDING`; re-entry at the original BOP then scanned that already-consumed
+   tail a second time.  The narrow lifecycle seam now recognizes only the
+   still-owned worker-token continuation and routes it straight to the
+   imported `cmdExec32` completion path.  A completed record with no worker
+   token is a later, fresh COMMAND request.
 
 ## Dependency Ledger
 
@@ -73,21 +80,21 @@ process's standard handles?
 - The native `54:08` fixture initializes an actual real-mode Bochs stage with
   `C4 C4 54 08`, its original `DS:SI`, `ES`, and `SS:BP` inputs, and the real
   adapter composition bridge.  It observes `PENDING`, waits for the imported
-  worker, resumes the exact BOP, verifies `AX=0125` (`AL=37`) and the original
+  worker, resumes the exact BOP, verifies `AX=0025` (`AL=37`) for the
+  fixture's direct-executable (`AH=0`) input and the original
   CR-to-NUL command-tail mutation, then reaches the bounded guest `HLT`.
-- A fresh formal Ninja graph at `build/M0-T236-S2/001` dry-runs the affected
-  source closure.  Its executor retains the known `cmd.exe` stall; no full
-  Ninja execution pass is claimed.
+- A fresh formal Ninja graph at `build/M0-T236-S2/007` compiles, links and
+  executes all three focused fixtures: local child/COMSPEC/stream/cancellation,
+  selector-blind pending-machine, and native `C4 C4 54:08` pending-to-resume.
+  An immediate Ninja dry-run reports `no work to do`.
 
 ## Interpretation And Confidence
 
-The imported worker is now exercised through the intended detached topology,
-not the prior synchronous P1 bridge.  The pending/resume machine witness is
-also present.  The remaining S2 work is the final source/ABI/failure-ledger
-review and formal graph execution; it is not a claim of CCPU, CSR/BaseSrv,
-multi-session, Redirector or WOW recovery.
+The imported worker is exercised through the intended detached topology, not
+the prior synchronous P1 bridge.  The pending/resume machine witness and the
+formal source-current fixture closure are present.  This remains no claim of
+CCPU, CSR/BaseSrv, multi-session, Redirector or WOW recovery.
 
 ## Follow-Up
 
-Finalize the source/ABI/failure ledger and formal graph execution, then close
-S2.  T236 S3 owns DEM hard-error/retry.
+S2 is ready for governance closure.  T236 S3 owns DEM hard-error/retry.

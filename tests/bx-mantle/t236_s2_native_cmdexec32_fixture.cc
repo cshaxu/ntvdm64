@@ -6,7 +6,10 @@ extern "C" {
 }
 
 #include <string.h>
+#include <stdio.h>
 #include <windows.h>
+
+static Bit32u g_command_cr_index;
 
 static int action_append(struct bx_ntvdm_mechanical_action_v1 *action,
   Bit64u physical, const void *bytes, Bit32u byte_count)
@@ -27,13 +30,35 @@ static int action_append(struct bx_ntvdm_mechanical_action_v1 *action,
 static int begin_native_cmdexec_stage(void)
 {
   static const Bit8u code[] = { 0xc4u, 0xc4u, 0x54u, 0x08u, 0xf4u };
-  static const char command[] = "exit 37\r";
-  static const char environment[] = "T236=NATIVE\0\0";
   static const Bit32u standard_handles[3] = {
     UINT32_MAX, UINT32_MAX, UINT32_MAX
   };
   static const Bit8u preserved[] = { 0x10u, 0x20u, 0x30u, 0x40u };
+  char command[MAX_PATH + 16u];
+  char environment[MAX_PATH + 32u];
+  DWORD system_root_bytes;
+  DWORD comspec_bytes;
+  Bit32u command_bytes;
   struct bx_ntvdm_machine_stage_v1_request request;
+
+  /* Direct `54:08` preserves OpenNT's direct-executable path: the guest tail
+   * names the public COMSPEC executable, while AH=0 avoids conflating this
+   * worker witness with the separately audited shell-expansion branch. */
+  comspec_bytes = GetEnvironmentVariableA("COMSPEC", command,
+    (DWORD)sizeof(command));
+  if (comspec_bytes == 0u || comspec_bytes >= sizeof(command) -
+      sizeof(" /c exit 37\r")) return 0;
+  memcpy(command + comspec_bytes, " /c exit 37\r", sizeof(" /c exit 37\r"));
+  command_bytes = comspec_bytes + (Bit32u)sizeof(" /c exit 37\r");
+  g_command_cr_index = command_bytes - 2u;
+  system_root_bytes = GetEnvironmentVariableA("SystemRoot", environment +
+    sizeof("T236=NATIVE\0SystemRoot=") - 1u,
+    (DWORD)(sizeof(environment) - (sizeof("T236=NATIVE\0SystemRoot=") - 1u)));
+  if (system_root_bytes == 0u || system_root_bytes >=
+      sizeof(environment) - (sizeof("T236=NATIVE\0SystemRoot=") - 1u)) return 0;
+  memcpy(environment, "T236=NATIVE\0SystemRoot=", sizeof("T236=NATIVE\0SystemRoot=") - 1u);
+  environment[sizeof("T236=NATIVE\0SystemRoot=") - 1u + system_root_bytes] = '\0';
+  environment[sizeof("T236=NATIVE\0SystemRoot=") + system_root_bytes] = '\0';
 
   bx_ntvdm_machine_stage_v1_request_clear(&request);
   bx_ntvdm_mechanical_action_v1_clear(&request.initial_state_action);
@@ -46,9 +71,9 @@ static int begin_native_cmdexec_stage(void)
   request.startup_action.action_id = 2u;
   request.startup_action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
   if (!action_append(&request.startup_action, 0x700u, code, sizeof(code)) ||
-      !action_append(&request.startup_action, 0x1000u, command, sizeof(command)) ||
+      !action_append(&request.startup_action, 0x1000u, command, command_bytes) ||
       !action_append(&request.startup_action, 0x2000u, environment,
-          sizeof(environment)) ||
+          (Bit32u)(sizeof("T236=NATIVE\0SystemRoot=") + system_root_bytes + 1u)) ||
       !action_append(&request.startup_action, 0x6000u, standard_handles,
           sizeof(standard_handles))) return 0;
   request.preserved_state_address = 0x714u;
@@ -60,7 +85,7 @@ static int begin_native_cmdexec_stage(void)
   /* Test-only direct core state setup.  The product's public mantle contract
    * remains CS:IP-only; this fixture supplies the historical 54:08 input
    * registers so the actual CPU can raise its own #UD. */
-  bx_cpu.apply_real_mode_state(0x0102u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 2u,
+  bx_cpu.apply_real_mode_state(0x0002u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u, 2u,
     0x70u, 0x100u, 0x200u, 0x600u, 0u, 0u);
   return 1;
 }
@@ -77,7 +102,7 @@ static uint32_t execute_slice(void)
 int main()
 {
   uint32_t attempt, status = 0u;
-  Bit8u observed_command[sizeof("exit 37\r")];
+  Bit8u observed_command[MAX_PATH + 16u];
   bx_ntvdm_command_native_session session;
   if (!begin_native_cmdexec_stage() ||
       !bx_ntvdm_command_native_session_initialize(&session) ||
@@ -88,10 +113,24 @@ int main()
     status = execute_slice();
     if (status != BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_PENDING) break;
   }
+  /* cmdExec documents AL as the child return code.  This fixture selects
+   * AH=0 (the direct-executable branch), so the untouched high byte remains
+   * zero: AX is 0025, not the former AH=1 test input's 0125. */
   if (status != BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET ||
-      bx_cpu.get_reg16(0u) != 0x0125u ||
-      !bx_mem.copy_from_ordinary_ram(0x1000u, sizeof(observed_command),
-        observed_command) || observed_command[7] != 0u) return 3;
+      bx_cpu.get_reg16(0u) != 0x0025u ||
+      !bx_mem.copy_from_ordinary_ram(0x1000u, g_command_cr_index + 2u,
+        observed_command) || observed_command[g_command_cr_index] != 0u) {
+    fprintf(stderr, "native cmdexec32 failure: status=%lu ax=%04x child=%lu command-cr=%02x create=%lu error=%lu env=%lu/%02lx command=\"%s\"\\n",
+      (unsigned long)status, (unsigned)bx_cpu.get_reg16(0u),
+      (unsigned long)session.direct.local_child_exit_code,
+      (unsigned)observed_command[g_command_cr_index],
+      (unsigned long)session.direct.create_process_attempted,
+      (unsigned long)session.direct.create_process_last_error,
+      (unsigned long)session.direct.create_process_environment_bytes,
+      (unsigned long)session.direct.create_process_environment_flags,
+      session.direct.pending.command);
+    return 3;
+  }
   bx_ntvdm_command_native_session_unbind(&session);
   return bx_ntvdm_machine_stage_v1_reset() == BX_NTVDM_MACHINE_STAGE_V1_OK ? 0 : 4;
 }
