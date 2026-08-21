@@ -13,6 +13,19 @@ The CLI may use ordinary user-mode Win32 file, network, named-pipe and IPC
 capabilities under normal permissions without modifying the host.  No raw
 host handle, callback, thread identity or Win32 structure crosses guest RAM.
 
+## COMMAND Lifecycle Dependency
+
+T236 owns the prerequisite COMMAND child record for the bounded Direct,
+non-pipe `54:08`/`54:0A`/`54:0B` lifecycle. Redirector must not recreate a
+second child broker or change that record's command, environment, completion,
+exit-code or cleanup ordering. Its later admission may extend the declared
+record only with opaque stream/redirection state needed by original
+`50:47`/`50:48`, `54:06`, and `57:xx` protocol paths. Those extensions must
+remain session-owned and carry opaque IDs only; host `HANDLE`s, callbacks and
+thread identities remain host-local. Until this package closes those remote
+or named-pipe branches retain their explicit unavailable outcome; they are
+not inferred from the Direct child path.
+
 ## Admission Plan
 
 1. **S1 — audit:** map all `57:00..31` services by lifecycle, pipes,

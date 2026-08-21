@@ -16,6 +16,9 @@ integration task, not a ninth implementation family.
 - Complete Direct and Readonly package regressions, including explicit
   unavailable/deferred outcomes.
 - Declared native integration profiles and the resulting trace evidence.
+- The T236 COMMAND lifecycle ledger: its bounded Direct child record, later
+  pipe/Redirector extensions, and separate WOW exclusion must reconcile as one
+  ownership chain rather than count as independent `cmdExec32` implementations.
 
 ## Required outcome
 
