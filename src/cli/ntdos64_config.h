@@ -4,15 +4,14 @@
 #include <windows.h>
 #include "ntdos64_startup_selection.h"
 
-/* Loads the fixed flat YAML form.  The root is always derived from the config
- * pathname; callers may compare it with a copied transport descriptor. */
-int ntdos64_config_load_file(const wchar_t *config_path, wchar_t root[MAX_PATH],
-    wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH],
-    ntdos64_startup_selection *selection);
+/* The executable directory owns the fixed product layout: dos\ contains
+ * bootstrap/configuration files and wow16\ is the separately named WOW root. */
+int ntdos64_bundle_load_sibling(wchar_t product_root[MAX_PATH],
+    wchar_t dos_root[MAX_PATH], wchar_t wow16_root[MAX_PATH],
+    wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH]);
 
-/* Runner entry: resolve only the fixed sibling ntvdmcfg.yaml. */
-int ntdos64_config_load_sibling(wchar_t config_path[MAX_PATH], wchar_t root[MAX_PATH],
-    wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH],
-    ntdos64_startup_selection *selection);
+/* Native entry receives the copied dos root from the runner. */
+int ntdos64_bundle_load_roots(const wchar_t *dos_root,
+    wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH]);
 
 #endif

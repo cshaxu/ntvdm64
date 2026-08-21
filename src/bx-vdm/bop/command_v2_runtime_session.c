@@ -12,7 +12,6 @@ static int configure_startup_config_inputs(const char *application)
 {
     char config[MAX_PATH + 13u] = {0};
     char autoexec[MAX_PATH + 13u] = {0};
-    char root[MAX_PATH] = {0};
     char pif_path[MAX_PATH + 1u];
     const char *extension;
     DWORD config_bytes, autoexec_bytes, root_bytes;
@@ -27,12 +26,8 @@ static int configure_startup_config_inputs(const char *application)
         bx_ntvdm_command_config_set_inputs(&runtime.direct, config, autoexec);
         return 1;
     }
-    root_bytes = GetEnvironmentVariableA("NTVDM_CONFIG_ROOT", root, (DWORD)sizeof(root));
-    if (root_bytes == 0u || root_bytes >= sizeof(root) ||
-        (size_t)root_bytes + strlen(application) + 2u > sizeof(pif_path)) return 0;
-    strcpy_s(pif_path, sizeof(pif_path), root);
-    if (pif_path[strlen(pif_path) - 1u] != '\\') strcat_s(pif_path, sizeof(pif_path), "\\");
-    strcat_s(pif_path, sizeof(pif_path), application);
+    root_bytes = GetEnvironmentVariableA("NTVDM_TARGET_PATH", pif_path, (DWORD)sizeof(pif_path));
+    if (root_bytes == 0u || root_bytes >= sizeof(pif_path)) return 0;
     if (!bx_ntvdm_command_pif_select_config_files(pif_path, config, autoexec)) return 0;
     bx_ntvdm_command_config_set_inputs(&runtime.direct, config, autoexec);
     return 1;

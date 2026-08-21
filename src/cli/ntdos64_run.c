@@ -394,8 +394,9 @@ int wmain(void)
     wchar_t **argv = CommandLineToArgvW(GetCommandLineW(), &argc);
     const wchar_t *engine = NULL;
     const wchar_t *bochs = NULL;
-    wchar_t config_path[MAX_PATH];
-    wchar_t config_root[MAX_PATH];
+    wchar_t product_root[MAX_PATH];
+    wchar_t dos_root[MAX_PATH];
+    wchar_t wow16_root[MAX_PATH];
     wchar_t config_source[MAX_PATH];
     wchar_t autoexec_source[MAX_PATH];
     const wchar_t *mutation_mode = L"direct";
@@ -478,14 +479,22 @@ int wmain(void)
         wchar_t **engine_argv = NULL;
         int index;
 
-        if (!ntdos64_config_load_sibling(config_path, config_root, config_source,
-                autoexec_source, &selection) ||
-            !selection.has_target_placement ||
-            !byob_target_selection_matches(config_root, &selection, full_path) ||
-            !byob_launch_plan_v2_from_arguments(&launch, &selection,
+        memset(&selection, 0, sizeof(selection));
+        selection.declared_target_count = 1u;
+        selection.has_target_placement = 1u;
+        selection.target_placement.drive_index = 2u;
+        if (wcslen(wcsrchr(full_path, L'\\') != NULL ? wcsrchr(full_path, L'\\') + 1u : full_path) >=
+                sizeof(selection.target.file_name) / sizeof(selection.target.file_name[0]) ||
+            swprintf(selection.target.file_name,
+                sizeof(selection.target.file_name) / sizeof(selection.target.file_name[0]),
+                L"%ls", wcsrchr(full_path, L'\\') != NULL ? wcsrchr(full_path, L'\\') + 1u : full_path) < 0 ||
+            (selection.declared_targets[0].component = selection.target,
+             selection.declared_targets[0].placement = selection.target_placement, 0) ||
+            !ntdos64_bundle_load_sibling(product_root, dos_root, wow16_root, config_source,
+                autoexec_source) || !byob_launch_plan_v2_from_arguments(&launch, &selection,
                 argc - target_index - 1, argv + target_index + 1) ||
             !byob_launch_plan_v2_to_environment(&launch, launch_plan)) {
-            fwprintf(stderr, L"ntvdm64-0235: sibling ntvdmcfg.yaml validation failed\n");
+            fwprintf(stderr, L"ntvdm64-0235: sibling dos/wow16 bundle validation failed\n");
             result = 3;
         }
         else {
@@ -495,12 +504,10 @@ int wmain(void)
                 result = 1;
             } else {
                 engine_argv[0] = (wchar_t *)engine;
-                /* The selected identity set is part of the explicit engine
-                 * handoff. The runner does not open or retain guest bytes. */
-                engine_argv[1] = L"--ntvdmcfg";
-                engine_argv[2] = config_path;
-                engine_argv[3] = L"--config-root";
-                engine_argv[4] = config_root;
+                engine_argv[1] = L"--dos-root";
+                engine_argv[2] = dos_root;
+                engine_argv[3] = L"--wow16-root";
+                engine_argv[4] = wow16_root;
                 if (bochs != NULL) {
                     /* This remains runner-to-shim metadata. A native Bochs
                      * parser never receives a BYOB option or the bundle path. */
@@ -511,7 +518,7 @@ int wmain(void)
                     engine_argv[5] = L"--";
                 }
                 (void)index;
-                result = run_process(engine_argc, engine_argv, config_path, config_root,
+                result = run_process(engine_argc, engine_argv, full_path, dos_root,
                     include_drives, exclude_drives, launch_plan, config_source, autoexec_source,
                     mutation_mode);
                 HeapFree(GetProcessHeap(), 0, engine_argv);

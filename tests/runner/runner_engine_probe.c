@@ -1,12 +1,12 @@
 #include <windows.h>
 #include <wchar.h>
 
-/* Test-only child. Its exit code proves the runner handed a validated profile
- * and root to an external engine before the target separator. */
+/* Test-only child. Its exit code proves the runner handed sibling DOS/WOW
+ * roots to an external engine before the target separator. */
 int wmain(int argc, wchar_t **argv)
 {
-    DWORD profile_attributes;
-    DWORD root_attributes;
+    DWORD dos_attributes;
+    DWORD wow_attributes;
     wchar_t profile[MAX_PATH];
     wchar_t root[MAX_PATH];
     wchar_t include_drives[64];
@@ -17,14 +17,14 @@ int wmain(int argc, wchar_t **argv)
     char input_byte;
     DWORD input_bytes = 0u;
 
-    if (argc != 6 || wcscmp(argv[1], L"--ntvdmcfg") != 0 ||
-        wcscmp(argv[3], L"--config-root") != 0 || wcscmp(argv[5], L"--") != 0) {
+    if (argc != 6 || wcscmp(argv[1], L"--dos-root") != 0 ||
+        wcscmp(argv[3], L"--wow16-root") != 0 || wcscmp(argv[5], L"--") != 0) {
         return 1;
     }
-    profile_attributes = GetFileAttributesW(argv[2]);
-    root_attributes = GetFileAttributesW(argv[4]);
-    if (profile_attributes == INVALID_FILE_ATTRIBUTES ||
-        (root_attributes & FILE_ATTRIBUTE_DIRECTORY) == 0u) {
+    dos_attributes = GetFileAttributesW(argv[2]);
+    wow_attributes = GetFileAttributesW(argv[4]);
+    if ((dos_attributes & FILE_ATTRIBUTE_DIRECTORY) == 0u ||
+        (wow_attributes & FILE_ATTRIBUTE_DIRECTORY) == 0u) {
         return 2;
     }
     if (GetEnvironmentVariableW(L"NTDOS64_ADAPTER_PROFILE", profile,
@@ -41,7 +41,7 @@ int wmain(int argc, wchar_t **argv)
             sizeof(config_source) / sizeof(config_source[0])) == 0u ||
         GetEnvironmentVariableW(L"NTDOS64_STARTUP_AUTOEXEC_SOURCE", autoexec_source,
             sizeof(autoexec_source) / sizeof(autoexec_source[0])) == 0u ||
-        wcscmp(profile, argv[2]) != 0 || wcscmp(root, argv[4]) != 0 ||
+        wcscmp(root, argv[2]) != 0 || profile[0] == L'\0' ||
         wcscmp(include_drives, L"C,D,E") != 0 || wcscmp(exclude_drives, L"E") != 0 ||
         (wcscmp(launch_plan, L"2,1,c,082f6320736d6f6b65") != 0 &&
          wcscmp(launch_plan, L"2,1,p,00") != 0) ||

@@ -15,7 +15,7 @@
 #include <wchar.h>
 
 typedef struct bx_ntvdm_dem_v2_startup {
-    byob_image ntio, ntdos, command, target, terminal_quit;
+    byob_image ntio, ntdos, command, target;
     bx_ntvdm_initial_state_v1 initial_state;
     byob_launch_plan_v2 launch;
     char command_application[MAX_PATH + 1u];
@@ -58,8 +58,7 @@ static int configure_opennt_dos_directory(const wchar_t *root,
         return 0;
     }
     /* Divergence from OpenNT dem.c: DemInit uses the installed Windows system
-     * directory.  The unpack-and-run CLI instead uses the validated BYOB
-     * root, whose identity-checked ntdos.sys is the declared guest input. */
+     * directory. The unpack-and-run CLI maps that role to sibling dos\. */
     free(pszDefaultDOSDirectory);
     pszDefaultDOSDirectory = oem;
     return 1;
@@ -97,7 +96,6 @@ void bx_ntvdm_dem_v2_startup_reset(void)
     byob_image_release(&runtime.ntdos);
     byob_image_release(&runtime.command);
     byob_image_release(&runtime.target);
-    byob_image_release(&runtime.terminal_quit);
     bx_ntvdm_initial_state_v1_clear(&runtime.initial_state);
     memset(&runtime, 0, sizeof(runtime));
     free(pszDefaultDOSDirectory);
@@ -109,7 +107,7 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     const uint16_t *launch, uint32_t launch_chars, uint32_t include_mask,
     uint32_t exclude_mask, uint32_t mutation_mode)
 {
-    wchar_t profile[261], root[261], loaded_root[MAX_PATH], config_source[MAX_PATH], autoexec_source[MAX_PATH];
+    wchar_t profile[261], root[261], config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_profile_selection selection;
 
     (void)include_mask; (void)exclude_mask;
@@ -119,17 +117,21 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     if (mutation_mode != 1u || launch_chars == 0u ||
         !descriptor_to_wide(profile_input, profile_chars, profile, 261u) ||
         !descriptor_to_wide(root_input, root_chars, root, 261u) ||
-        !ntdos64_config_load_file(profile, loaded_root, config_source, autoexec_source,
-            &selection) || _wcsicmp(root, loaded_root) != 0 ||
-        selection.machine_startup_plan_enabled == 0u ||
-        selection.machine_startup_entry_ntio_v0 == 0u ||
-        byob_image_load_exact(root, &selection.ntio, &runtime.ntio) != BYOB_IMAGE_OK ||
-        byob_image_load_exact(root, &selection.ntdos, &runtime.ntdos) != BYOB_IMAGE_OK ||
-        byob_image_load_exact(root, &selection.command, &runtime.command) != BYOB_IMAGE_OK ||
-        byob_image_load_exact(root, &selection.target, &runtime.target) != BYOB_IMAGE_OK ||
-        (selection.declared_target_count == 2u &&
-         byob_image_load_exact(root, &selection.terminal_quit,
-             &runtime.terminal_quit) != BYOB_IMAGE_OK) ||
+        !ntdos64_bundle_load_roots(root, config_source, autoexec_source) ||
+        (memset(&selection, 0, sizeof(selection)), 0) ||
+        swprintf(selection.ntio.file_name, 64u, L"NTIO.SYS") < 0 ||
+        swprintf(selection.ntdos.file_name, 64u, L"NTDOS.SYS") < 0 ||
+        swprintf(selection.command.file_name, 64u, L"COMMAND.COM") < 0 ||
+        swprintf(selection.target.file_name, 64u, L"%ls", wcsrchr(profile, L'\\') != NULL ? wcsrchr(profile, L'\\') + 1u : profile) < 0 ||
+        (selection.declared_target_count = 1u, selection.has_target_placement = 1u,
+         selection.target_placement.drive_index = 2u,
+         selection.declared_targets[0].component = selection.target,
+         selection.declared_targets[0].placement = selection.target_placement,
+         selection.machine_startup_plan_enabled = 1u,
+         selection.machine_startup_entry_ntio_v0 = 1u, 0) ||
+        byob_image_load_named(root, L"NTIO.SYS", &runtime.ntio) != BYOB_IMAGE_OK ||
+        byob_image_load_named(root, L"NTDOS.SYS", &runtime.ntdos) != BYOB_IMAGE_OK ||
+        byob_image_load_named(root, L"COMMAND.COM", &runtime.command) != BYOB_IMAGE_OK ||
         !configure_opennt_dos_directory(root, &selection) ||
         !configure_command_source(launch, launch_chars, &selection)) {
         bx_ntvdm_dem_v2_startup_reset();

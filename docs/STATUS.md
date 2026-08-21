@@ -2,31 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T235 S4 (closed)** — fixed YAML is the sole product startup configuration; the retired JSON profile mechanism is removed.
+**Active: M0 T235 S5** — derive the fixed DOS/WOW layout from the executable directory, with no external configuration file.
 
 ## Active Packet
 
-### M0 T235 S4 — fixed YAML configuration cleanup
+### M0 T235 S5 — fixed sibling DOS/WOW layout
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T235 S4`, Ordinary Mode. |
-| Admission And Approval | The owner explicitly directs that the YAML consolidation and obsolete profile cleanup complete inside T235. |
-| Objective | Make sibling `ntvdmcfg.yaml` the only product configuration, remove JSON-profile parsing and product entrypoints, and name the retained copied startup selection independently of BYOB/profile terminology. |
-| Non-goals | Do not alter original COMMAND/PIF source ownership, parse PIF in the CLI, remove indexed historical evidence, or expand guest execution/lifecycle behavior. |
-| Reference Baseline | T235 S3 passed the fixed-YAML runner, native CLI, DEM and original PIF selection path. The old parser still remains in the full graph solely through prior experiment/fixture surfaces. |
-| Files And ABI Surface | CLI configuration/selection headers and sources, CMake and formal full-graph manifest, obsolete JSON-only fixtures and tests, and S4 evidence. |
-| Applicable Rules | Product CLI exception and build hygiene; no recovered OpenNT behavior changes. Original PIF owners remain `cmdpif.c` and `nt_pif.c`. |
-| Verification | A fresh formal runner and full graph must compile without `byob_profile.c`; fixed YAML format-policy and native validation checks must pass; source sweep must find no JSON profile parser or product `--byob-profile` entrypoint. |
-| Expected Markers | `ntvdmcfg.yaml` is the sole product configuration; retained startup transport is named `ntdos64_startup_selection`; no JSON schema/version parser links into a product target. |
-| Asset Needs | Existing T235 YAML fixtures and no external input. |
-| Reporting Requirements | Record deleted product surfaces, intentional retained historical evidence, source sweep, build and fixture result. |
-| Stop Conditions | Pause if removing the parser changes a live PIF/COMMAND semantic route, or if a source-built formal graph has an unreplaceable JSON dependency. |
-| Exit Criteria | No product target, active test, or formal graph compiles the JSON profile parser; YAML runner/native/PIF tests pass; governance and review pass. |
-| Original Owner Request | “请在T235做好这个！” following the owner direction to clear unused `profile.json` machinery and consolidate it into YAML. |
-| Similar-Issue Sweep | Parser sources, profile-specific command switches, CMake targets, full manifests, active tools/tests, runtime environment names, and generated product configuration. |
+| Identifier Mode | `M0 T235 S5`, Ordinary Mode. |
+| Admission And Approval | The owner selected a new S and approved the fixed executable-relative layout: `dos\\` owns all DOS/NTVDM system files, `wow16\\` owns WOW16 files, and `dos\\CONFIG.NT` / `dos\\AUTOEXEC.NT` are fixed defaults. |
+| Objective | Remove `ntvdmcfg.yaml` and its SHA/byte identity contract. Derive product roots from `ntvdm64.exe`, select fixed DOS bootstrap names under `dos\\`, carry DOS/WOW roots to the existing startup seam, and stage the catalogued guest package beside the executable from original OpenNT products or reproducible project builds. |
+| Non-goals | Do not implement arbitrary DOS filesystem access, WOW16 loading, child lifecycle, or replace original COMMAND/PIF behavior. This S establishes fixed bundle roots and reproducible packaging only. |
+| Reference Baseline | S4 removed JSON profile code but YAML currently supplies component identity, target and CONFIG/AUTOEXEC paths. Original NTVDM placed CONFIG.NT and AUTOEXEC.NT below `%SystemRoot%\\System32`; this package maps that system directory role to `dos\\`. |
+| Files And ABI Surface | CLI bundle loader, runner/native/DEM startup handoff, COMMAND environment paths, CMake/output template, catalogued DOS/WOW staging tool and fixtures, plus S5 evidence. |
+| Applicable Rules | Owner-approved CLI layout exception; original COMMAND/PIF ownership remains unchanged. |
+| Verification | Fresh strict runner compile and fixed-layout COM/PIF fixture pass; the deterministic manifest verifies 115 staged DOS/WOW files (87 OpenNT original, 26 OpenNT-4.5 original, two original-toolchain rebuilds) against source/destination SHA-256; PIF direct fixture retains early CONFIG/AUTOEXEC behavior. |
+| Expected Markers | No `ntvdmcfg.yaml`, YAML parser, SHA-256/byte fields or config file argument remains in the product path; `NTVDM_CONFIG_ROOT` names sibling `dos\\` and a distinct `NTVDM_WOW16_ROOT` names sibling `wow16\\`. |
+| Asset Needs | Existing repository OpenNT sources and existing project build recipes only; no new Windows media or download. |
+| Reporting Requirements | Record fixed names, root derivation, default CONFIG/AUTOEXEC mapping, each staged artifact origin, missing-file rejection and explicit WOW transfer limitation. |
+| Stop Conditions | Pause if fixed root discovery changes original PIF order, requires a new generic host filesystem provider, or a purported guest artifact is only an untracked/disposable build result with no reproducible source/build route. |
+| Exit Criteria | YAML is absent from product build/runtime and output; the staged package has a reproducible origin manifest; fixed DOS directory positive/negative tests, formal runner/full graph and original PIF fixture pass. |
+| Original Owner Request | “就这么决定了，新开一个S任务实施。” and “当前项目可用的guest dos和wow16的二进制文件都复制/编译到那个地方去，如果opennt有原始编译好的文件，直接用；否则用我们自己编译的版本。” |
+| Similar-Issue Sweep | YAML filenames/parser, output generation, CLI/native/DEM handoff, environment names, fixed bootstrap lookup, CONFIG/AUTOEXEC paths and future WOW root transport. |
 
-P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). S4 is closed by its [fixed-YAML cleanup result](etc/evidence/t235-s4-yaml-profile-cleanup-result-001.md) and [closure record](history/m0-t235-s4-p1-closure-20260821.md). The prior [T235 closure](history/m0-t235-closure-20260821.md) is superseded for this owner-approved S4 cleanup only; no further T235 source work is authorized.
+P1 closure: [T235 S1 result](etc/evidence/t235-s1-cli-target-format-admission-result-001.md) and [closure record](history/m0-t235-s1-p1-closure-20260821.md). S3 implementation evidence: [fixed YAML and copied COMMAND/PIF input result](etc/evidence/t235-s3-fixed-yaml-command-pif-input-result-001.md). S4 closed fixed-YAML cleanup, then the owner explicitly admitted S5 to replace that temporary contract with the final sibling `dos\\`/`wow16\\` layout. S5 bundle evidence: [115-file provenance result](etc/evidence/t235-s5-guest-bundle-result-001.md).
 
 ## Current Work Record
 

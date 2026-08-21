@@ -17,6 +17,28 @@ void byob_image_release(byob_image *image)
     }
 }
 
+byob_image_result byob_image_load_named(const wchar_t *root, const wchar_t *file_name,
+    byob_image *out_image)
+{
+    wchar_t path[MAX_PATH]; HANDLE file = INVALID_HANDLE_VALUE; LARGE_INTEGER size;
+    DWORD read = 0u; byob_image_result result = BYOB_IMAGE_OPEN_REJECTED;
+    if (!root || !file_name || !out_image || !byob_component_name_safe(file_name) ||
+        swprintf(path, MAX_PATH, L"%ls\\%ls", root, file_name) < 0) return BYOB_IMAGE_INVALID_ARGUMENT;
+    memset(out_image, 0, sizeof(*out_image));
+    file = CreateFileW(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING,
+        FILE_ATTRIBUTE_NORMAL, NULL);
+    if (file == INVALID_HANDLE_VALUE || !GetFileSizeEx(file, &size) || size.QuadPart <= 0 ||
+        (uint64_t)size.QuadPart > BYOB_IMAGE_MAX_BYTES) goto done;
+    out_image->bytes = (uint8_t *)HeapAlloc(GetProcessHeap(), 0u, (SIZE_T)size.QuadPart);
+    if (!out_image->bytes) { result = BYOB_IMAGE_NO_MEMORY; goto done; }
+    if (!ReadFile(file, out_image->bytes, (DWORD)size.QuadPart, &read, NULL) || read != (DWORD)size.QuadPart) goto done;
+    out_image->byte_count = (size_t)size.QuadPart; result = BYOB_IMAGE_OK;
+done:
+    if (file != INVALID_HANDLE_VALUE) CloseHandle(file);
+    if (result != BYOB_IMAGE_OK) byob_image_release(out_image);
+    return result;
+}
+
 byob_image_result byob_image_load_exact(const wchar_t *root,
     const byob_component_descriptor *descriptor, byob_image *out_image)
 {

@@ -209,7 +209,7 @@ int wmain(int argc, wchar_t **argv)
         ;
     int index = 1;
     ntdos64_startup_selection selection;
-    wchar_t loaded_root[MAX_PATH], config_source[MAX_PATH], autoexec_source[MAX_PATH];
+    wchar_t config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_launch_plan_v2 launch;
     struct bx_ntvdm_engine_request_v1 request;
     struct bx_ntvdm_engine_result_v1 result;
@@ -220,9 +220,9 @@ int wmain(int argc, wchar_t **argv)
 
     if (argc < 6) goto usage;
     while (index < argc && wcsncmp(argv[index], L"--", 2u) == 0) {
-        if (wcscmp(argv[index], L"--ntvdmcfg") == 0 && index + 1 < argc && !config)
+        if (wcscmp(argv[index], L"--dos-root") == 0 && index + 1 < argc && !config)
             config = argv[index + 1], index += 2;
-        else if (wcscmp(argv[index], L"--config-root") == 0 && index + 1 < argc && !root)
+        else if (wcscmp(argv[index], L"--wow16-root") == 0 && index + 1 < argc && !root)
             root = argv[index + 1], index += 2;
         else if (wcscmp(argv[index], L"--include-drives") == 0 && index + 1 < argc &&
             !has_include && argv[index + 1][0] != L'\0' &&
@@ -275,24 +275,34 @@ int wmain(int argc, wchar_t **argv)
     if (!config || !root || index >= argc) goto usage;
     target = argv[index];
     if (!GetFullPathNameW(target, MAX_PATH, target_full, 0) ||
-        !ntdos64_config_load_file(config, loaded_root, config_source, autoexec_source,
-            &selection) || _wcsicmp(root, loaded_root) != 0 ||
-        !byob_target_selection_matches(root, &selection, target_full) ||
+        !ntdos64_bundle_load_roots(config, config_source, autoexec_source) ||
+        (memset(&selection, 0, sizeof(selection)), 0) ||
+        wcslen(wcsrchr(target_full, L'\\') != NULL ? wcsrchr(target_full, L'\\') + 1u : target_full) >=
+            sizeof(selection.target.file_name) / sizeof(selection.target.file_name[0]) ||
+        swprintf(selection.target.file_name,
+            sizeof(selection.target.file_name) / sizeof(selection.target.file_name[0]), L"%ls",
+            wcsrchr(target_full, L'\\') != NULL ? wcsrchr(target_full, L'\\') + 1u : target_full) < 0 ||
+        (selection.declared_target_count = 1u, selection.has_target_placement = 1u,
+         selection.target_placement.drive_index = 2u,
+         selection.declared_targets[0].component = selection.target,
+         selection.declared_targets[0].placement = selection.target_placement, 0) ||
         !byob_launch_plan_v2_from_arguments(&launch, &selection, argc - index - 1, argv + index + 1) ||
         !byob_launch_plan_v2_to_environment(&launch, launch_text)) {
-        fwprintf(stderr, L"ntdos64-native: YAML configuration admission failed\n"); return 3;
+        fwprintf(stderr, L"ntdos64-native: sibling dos/wow16 bundle admission failed\n"); return 3;
     }
     if (!SetEnvironmentVariableW(L"NTVDM_CONFIG_SOURCE", config_source) ||
         !SetEnvironmentVariableW(L"NTVDM_AUTOEXEC_SOURCE", autoexec_source) ||
-        !SetEnvironmentVariableW(L"NTVDM_CONFIG_ROOT", root)) return 3;
+        !SetEnvironmentVariableW(L"NTVDM_CONFIG_ROOT", config) ||
+        !SetEnvironmentVariableW(L"NTVDM_TARGET_PATH", target_full) ||
+        !SetEnvironmentVariableW(L"NTVDM_WOW16_ROOT", root)) return 3;
     ntdos64_lifecycle_v1_policy_clear(&lifecycle_policy);
     lifecycle_policy.instruction_tick_budget = instruction_tick_budget;
     if (!ntdos64_lifecycle_v1_policy_valid(&lifecycle_policy)) return 3;
     bx_ntvdm_engine_request_v1_clear(&request);
     if (!copied_text(request.profile_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
-            config, &request.profile_descriptor_chars) ||
+            target_full, &request.profile_descriptor_chars) ||
         !copied_text(request.root_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
-            root, &request.root_descriptor_chars) ||
+            config, &request.root_descriptor_chars) ||
         !copied_text(request.launch_descriptor, BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS,
             launch_text, &request.launch_descriptor_chars)) return 3;
     request.admitted_drive_mask = include_mask;
@@ -525,7 +535,7 @@ int wmain(int argc, wchar_t **argv)
         (unsigned long long)request.instruction_tick_budget);
     return result_exit(&lifecycle_audit);
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --ntvdmcfg ntvdmcfg.yaml --config-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
+    fwprintf(stderr, L"usage: ntdos64-native --dos-root directory --wow16-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-ud-sequence] [--observe-guest-exec-lifecycle] [--observe-guest-exec-lifecycle-ledger] [--observe-first-fault] [--observe-budget-terminal-position]"
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         L" [--observe-software-interrupts]"
 #endif

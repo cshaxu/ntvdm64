@@ -24,5 +24,7 @@ typedef struct byob_image {
 byob_image_result byob_image_load_exact(const wchar_t *root,
     const byob_component_descriptor *descriptor, byob_image *out_image);
 void byob_image_release(byob_image *image);
+byob_image_result byob_image_load_named(const wchar_t *root, const wchar_t *file_name,
+    byob_image *out_image);
 
 #endif
