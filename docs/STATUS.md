@@ -2,49 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T237 S3** — active; retire XMS v1 and verify the recovered package.
+**Active: M0 T237 S4** — active; manual XMS source-mirror and v1-retirement audit.
 
 ## Active Packet
 
-### M0 T237 S3 — retire XMS v1 and verify recovered XMS package
+### M0 T237 S4 — manual XMS recovery audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T237 S3`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | S2 compiled the complete OpenNT XMS mirror and its fixed-width bridge; a local 52:xx fixture linked and passed after its public Win32 import was declared. |
-| Objective | Remove all executable/test/dead XMS v1 provider code, rehome the DPMI-only historical classifier, and verify the recovered 52:xx package from a fresh manifest-derived Ninja graph. |
-| Non-goals | Do not add Bochs CPU/BIOS/device behavior, invent a UMB/INT15 mechanic, or reintroduce v1 as a fallback. |
-| Reference Baseline | [T237 S1 audit](etc/operations/m0-t237-s1-xms-source-abi-failure-audit-001.md) and [S2 source-mirror result](etc/operations/m0-t237-s2-xms-source-mirror-result-001.md). |
-| Files And ABI Surface | Source mirror under `bop/opennt/xms`, fixed-width bx-vdm ingress/session seam, v1 XMS package/test/probe inputs, and DPMI's separate historical classification evidence. |
-| Applicable Rules | Source-first recovery, owner boundaries, fixed-width adapter ABI, Bochs deny-by-default and documented divergence. |
-| Verification | No executable XMS v1 references, full fixture link/run from a fresh manifest-derived Ninja graph, source identity/divergence review, documentation governance and diff checks. |
-| Expected Markers | Every 52:xx endpoint has the S2 direct-source/explicit-unavailable disposition; no executable v1 XMS route or test remains. |
-| Asset Needs | Existing OpenNT and Bochs imports, existing BOP inventory and no new external source. |
-| Reporting Requirements | Record S2's explicit A20/UMB/INT15 dispositions, every v1 deletion/rehome, public import declaration, and whole-family test result without claiming guest continuity. |
-| Stop Conditions | Re-admit if a required capability needs host modification to install the product, a private NT protocol, raw host state in the guest ABI, or an adapter-owned allocator/A20/BIOS implementation. |
-| Exit Criteria | XMS v1 is physically absent from executable/test inputs; any retained DPMI-only evidence is rehomed without an XMS identity; the regenerated formal graph links/runs the fixture. |
-| Original Owner Request | Continue BOP work as complete owner packages, using original OpenNT source before shims and deferring cross-owner semantics to their named packages. |
-| Similar-Issue Sweep | Every XMS v1 include, composition field, test/probe, shared classifier, manifest input, `52:xx` caller and historical document reference. |
+| Identifier Mode | `M0 T237 S4`, Ordinary Mode, single-person dual-role review. |
+| Admission And Approval | Owner explicitly reopens T237 for manual audit and explicitly declines DPMI admission. |
+| Objective | Independently inspect every `52:00..0B` source mirror, divergence, route, fixture and retired v1 identity; record any contradiction before another closure claim. |
+| Non-goals | Do not admit DPMI, implement a new XMS feature, restore v1, or claim that UMB/INT15/native guest continuity is complete. |
+| Reference Baseline | T237 S1/S2/S3 records, committed `4a711706`, the original `src/opennt/base/mvdm/xms.486/` sources, and the current formal manifest. |
+| Files And ABI Surface | `bop/opennt/xms`, `bop/shim/xms_*`, `bop/xms_v2_*`, XMS fixtures, `dem_v2_composition_bridge`, formal manifest, and every former XMS v1 path. |
+| Applicable Rules | Source-first recovery, owner boundaries, fixed-width adapter ABI, documentary separation of current status from closed history. |
+| Verification | Manual source-to-mirror comparison; all-service dispatch/ABI review; v1/provider/manifest sweep; independently rerun repeatable retirement gates and record exact results. |
+| Expected Markers | A human-readable per-service audit ledger: original owner, retained body, divergence, live route, test evidence, and named unresolved owner. |
+| Asset Needs | Existing OpenNT source, current committed tree, formal Ninja manifest and no new imported source. |
+| Reporting Requirements | Record contradictions and corrections; distinguish source/package proof from machine/guest execution; do not infer closure from a prior fixture alone. |
+| Stop Conditions | Pause if a mirror lacks an original owner, an undocumented divergence changes semantics, a v1 provider remains live, or an unresolved prerequisite is being reported as success. |
+| Exit Criteria | Manual ledger covers all twelve slots; every divergence/owner/route/v1 result is classified and any discovered defect is either corrected and verified or explicitly retained as an open T237 item. |
+| Original Owner Request | `暂不准入，重开T237 我要手动审计`。 |
+| Similar-Issue Sweep | Original source files, dispatch table, all shims, generic ingress, fixtures, formal membership, generic legacy catalog metadata and retired paths. |
 
-**S2 result:** the directly mirrored OpenNT dispatcher, seven XMS source files
-and source suballocator compile under formal MSVC x64 `/MT`.  The local fixture
-passes `52:01..05`, `52:07..08`, `52:0A..0B`; `52:00` explicitly declines
-without an active mantle A20 lifecycle, `52:06` declines pending a durable
-checked HIMEM-state/UMB seam, and `52:09` declines until the keyboard/BIOS
-owner supplies `UpdateKbdInt15`.  This is source/package closure only: it
-does not claim native guest continuity or an extended-RAM machine aperture.
+M0 T236 is closed at [its reconciliation and owner-transfer record](history/m0-t236-closure-20260821.md).
 
-**S3 progress:** XMS v1 session/provider, its tests and obsolete probe are
-physically removed.  The former shared classifier is rehomed as DPMI-only
-historical evidence.  Fresh formal graph `build/M0-T237-S3/001` builds and
-runs the complete fixture; its bounded generic-UD `52:05` witness enters the
-source dispatcher and returns the source result.  Fresh formal graph
-`build/M0-T237-S3/002` builds/runs the real-minimal-machine `52:00` A20
-success fixture and its full `all` graph passes after an explicit fixture ABI
-include correction.  See the [S3 regression/retirement result](etc/operations/m0-t237-s3-xms-regression-and-v1-retirement-result-001.md).
-Acceptance/closure is pending the required reviewed commit and push.
-
-M0 T236 is closed at [its reconciliation and owner-transfer record](history/m0-t236-closure-20260821.md). The active XMS plan is [M0 T237](etc/operations/m0-t237-xms-owner-package-plan.md).
+**S4 manual-audit progress:** the first independent per-slot review is
+recorded in [T237 S4 manual audit](etc/operations/m0-t237-s4-manual-xms-audit-001.md).
+It confirms a precise distinction: `52:06` declines before the source body
+because a durable guest-byte seam is absent, whereas `52:07/08` execute their
+mirrored source bodies and return original empty-UMB `B1/B2` failures.
 
 ## Current Work Record
 
