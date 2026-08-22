@@ -26,6 +26,12 @@
 | Original Owner Request | T236 plan: separate public Win32 raw-volume capability from uncomposable floppy/FDC/DMA/CMOS and `host_simulate` machine ownership, retaining original source where composable. |
 | Similar-Issue Sweep | DEM device/drive IOCTL forms, raw volumes, floppy media, DMA, CMOS, `host_simulate`, and any source-derived adapter replacement. |
 
+**Current S4 progress:** P1--P3 establish the source-shaped fixed-volume
+lifecycle, checked transport and an authorized VHDX raw read/verify/write/
+restore success witness; see [P3 evidence](etc/evidence/t236-s4-p3-authorized-vhdx-raw-volume-success-001.md).
+Floppy/INT-13/FDC/DMA/CMOS and destructive media operations remain explicitly
+separated for disposition during S4 closure.
+
 Detailed T sequence and closure ledgers are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). S2 is closed at [its worker/broker closure](history/m0-t236-s2-closure-20260821.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
 
 ## Current Work Record
