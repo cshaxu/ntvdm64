@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This candidate is admitted only after the first three dependency-driven candidate packages close: low-dependency source closure, internal-BOP dependency closure, and external compatibility/machine/legacy-composition closure.  It is a closure audit and
+This candidate is admitted only after the first two dependency-driven BOP implementation packages close: no-external-dependency source closure and external compatibility/machine/legacy-composition closure. It is a closure audit and
 integration task, not a ninth implementation family.
 
 ## Required inputs

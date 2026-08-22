@@ -32,6 +32,6 @@ they cannot independently close this proposal.
 ## Queue relationship
 
 COMMAND source/ABI recovery is recorded in the tracker rather than reserved
-as an independent queue position. Remaining branches enter candidate 1, 2 or
-3 strictly by their `BOP-DEPENDENCY-…` prerequisites; guest parent-return and
+as an independent queue position. Remaining branches enter candidate 1 or 2
+strictly by their `BOP-DEPENDENCY-…` prerequisites; guest parent-return and
 external broker/pipe/WOW branches cannot be claimed by an internal slice.

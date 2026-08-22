@@ -2,8 +2,8 @@
 
 ## Purpose
 
-Resolve the BOP tracker’s hard dependencies after the low-dependency and
-internal-only layers: selector-blind bx machine/BIOS mechanics, modern x64
+Resolve the BOP tracker’s hard dependencies after the no-external-dependency
+layer: selector-blind bx machine/BIOS mechanics, modern x64
 compatibility for historical host composition, DPMI, Redirector, WOW16,
 VDD/debugger, and NTDOS EXEC/PSP/parent return.
 
@@ -44,5 +44,5 @@ obtain an owner decision.
 
 Each selected hard dependency has a tested owner closure or explicit,
 source-proven unavailable disposition. Remaining cross-owner lifecycle work
-is transferred only to the post-code-complete proposal, then candidate 4
+is transferred only to the post-code-complete proposal, then candidate 3
 reconciles the full tracker.

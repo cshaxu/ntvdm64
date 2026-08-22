@@ -2,31 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T237 S5 P2** — bounded `BOP_NOSUPPORT` source-derived CLI
-recovery and tracker closure.
+**Active: M0 T237 S5** — closure delivery verified and pushed; no successor
+numeric T is admitted. M0 Td S1 P5 aligns the candidate boundary below.
 
 ## Active Packet
 
-### M0 T237 S5 P2 — `BOP_NOSUPPORT` closure
+### M0 T237 S5 — closure delivery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T237 S5 P2`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | Owner directs this one-P `59` closure and tracker update. |
-| Objective | Recover the original `MS_bop_9 -> host_direct_access_error(AX)` Abort/Ignore contract through a narrow non-WOW, single-session source-derived route. |
-| Non-goals | Do not implement WOW hard-error boxes, NT4 console-window placement, CSRSS/BaseSrv worker shell, other top-level selectors, or device policy. |
-| Reference Baseline | `bop.h`, `nt_bop.c:MS_bop_9`, `nt_error.c:host_direct_access_error`, `nt_event.c:nt_resume_event_thread`, and tracker row `BOP-TOP-59`. |
-| Files And ABI Surface | One bx-vdm top-level recognizer/route, thread-local direct-access shim, session reset, typed generic outcome, focused fixture, manifest and tracker. |
-| Applicable Rules | Source-first recovery, selector-blind core/mantle, fixed-width checked boundary, and T/S/P closure rules. |
-| Verification | Focused selector/reason/RIP/register-negative fixture, formal Ninja membership/build, documentation governance and diff review. |
-| Expected Markers | Ignore: `C4 C4 59` resumes at RIP+3 without guest-register mutation. Terminate: adapter returns typed controlled stop; neither path terminates the host process. Low AX is the reason; same-thread same-reason notices are deduplicated. |
-| Asset Needs | Existing OpenNT source, public `TaskDialogIndirect` capability, existing generic outcome ABI and formal manifest. |
-| Reporting Requirements | State the retained non-WOW dialog semantics and the deferred WOW/NT4 product-shell differences in `bop-list.md`. |
-| Stop Conditions | Stop rather than reconstruct WOW hard-error behavior, historical console positioning/CSRSS product shell, or move selector knowledge to core/mantle. |
-| Exit Criteria | Ignore/Terminate/dedup/reset and malformed/non-59 cases pass; formal membership builds; tracker is updated; one P is committed/pushed. |
-| Original Owner Request | `你单独为此条收口，并更新审计文档 bop-list.md 使用一个P提交即可`。 |
-| Similar-Issue Sweep | `nt_bop.c`, `nt_error.c`, guest 59 caller, existing direct-access shim, current generic ingress and all `0x59` references outside `bop-v1`. |
-| Exit Status | Fresh formal r3 built the corrected graph; `t237-s5-bop-nosupport-fixture` returned zero for the seven reason values, same-reason suppression, Terminate typed stop and non-59 decline. P2 is ready to commit/push. |
+| Identifier Mode | `M0 T237 S5 P1--P2`, Ordinary Mode, single-person dual-role review. |
+| Admission And Approval | Owner-approved XMS S5 closure and owner-directed P2 `59` follow-up; Td P5 changes governance only. |
+| Objective | Close the XMS source/ABI package and the owner-directed `BOP_NOSUPPORT` follow-up without expanding into machine UMB allocation, keyboard/IVT, or other top-level selectors. |
+| Non-goals | Do not add physical UMB, keyboard/IVT, WOW product-shell, other top-level, or cross-family execution behavior. |
+| Reference Baseline | Imported OpenNT XMS and `nt_bop.c`/`nt_error.c` source, formal manifest, tracker and T237 closure evidence. |
+| Files And ABI Surface | Existing XMS source/shim/session seams; P2 generic-UD/top-level shim and typed outcome only. |
+| Applicable Rules | Source-first recovery, selector-blind machine boundary, fixed-width checked ABI, MTSP/Td governance. |
+| Verification | Formal Ninja r7/r3, focused XMS/`59` fixtures, documentation governance and diff review. |
+| Expected Markers | XMS source/failure routes preserve owner semantics; `59` Ignore resumes and Terminate returns typed stop without host-process termination. |
+| Asset Needs | Existing OpenNT source and formal MSVC/Ninja closure only. |
+| Reporting Requirements | Record remaining machine/top-level transfers and update tracker completion counts. |
+| Stop Conditions | Stop rather than add DOS/BOP semantics to bx-core/bx-mantle or recreate NT4 private product shells. |
+| Exit Criteria | Required formal and focused evidence pass; closure history/tracker are committed and pushed. |
+| Original Owner Request | Close T237 and prepare the dependency-driven next stage; then correct BOP `59` to the original visible Terminate/Ignore contract. |
+| Similar-Issue Sweep | XMS dispatcher/shims, `59` source caller/error seam, manifest membership, tracker aggregates and queue/proposal references. |
+| Exit Status | P1: formal r7 and XMS gates passed. P2: formal r3 and `t237-s5-bop-nosupport-fixture` passed reason, dedup, Ignore, Terminate and negative cases; committed/pushed as `e59681c2`. |
+| Next Admission | Select the queue-head no-external-dependency candidate, allocate the next global T serial, and replace this closure packet before implementation. |
 
 ## Latest Closure
 

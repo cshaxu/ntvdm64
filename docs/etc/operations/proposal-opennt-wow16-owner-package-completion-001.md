@@ -9,7 +9,7 @@ contract.  WOW16 is a target capability, not a permanent negative fixture.
 ## Queue relationship
 
 This is a supporting owner-workstream plan, not an independent queue position.
-The dependency-driven queue admits it only inside candidate 3,
+The dependency-driven queue admits it only inside candidate 2,
 **External compatibility, machine and legacy-composition BOP closure**, after
 its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
 follow the tracker’s Win32/x64 compatibility decision rule and may not use its

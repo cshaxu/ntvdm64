@@ -34,5 +34,5 @@ service implementation.
 ## Queue relationship
 
 DEM source/ABI recovery is recorded in the tracker rather than reserved as an
-independent queue position. Remaining DEM branches enter candidate 1, 2 or 3
+independent queue position. Remaining DEM branches enter candidate 1 or 2
 strictly by their `BOP-DEPENDENCY-…` prerequisites.

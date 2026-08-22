@@ -10,6 +10,8 @@ numeric T or displacing the active product packet in Status:
 | M0 Td S1 P1 | Initial local documentation-governance delivery. |
 | M0 Td S1 P2 | MTSP realignment: single active S, T-only Queue, and retained status ledger. |
 | M0 Td S1 P3 | Complete-document inventory and hash-verified migration control. |
+| M0 Td S1 P4 | BOP owner-package sequencing governance. |
+| M0 Td S1 P5 | Merge no/low-dependency and purely internal BOP closure into one no-external-dependency candidate T; reconcile T237 and tracker closure facts. |
 
 ## Hierarchy
 

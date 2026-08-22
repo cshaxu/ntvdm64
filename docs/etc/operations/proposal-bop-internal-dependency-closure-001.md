@@ -1,4 +1,6 @@
-# Proposal: Internal-BOP Dependency Closure
+# Retained Proposal: Internal-BOP Dependency Closure (Superseded)
+
+> **Superseded by:** [No-external-dependency OpenNT BOP closure](proposal-bop-low-dependency-source-closure-001.md). The owner-directed governance decision is that no/low-dependency leaves and all purely internal BOP/lifecycle chains are one candidate T, not two sequential candidate T packages. This retained record preserves the former boundary rationale and is not independently admissible.
 
 ## Purpose
 
@@ -19,7 +21,7 @@ complete internal links among its own source-owner groups. It must not:
   behavior merely because an internal BOP reaches their boundary.
 
 When a source branch names one of those dependencies, the item remains
-partial and transfers to candidate 3 with a tracker row. It is not made
+partial and transfers to the later external-compatibility candidate with a tracker row. It is not made
 successful by an adapter fallback.
 
 ## Admission plan

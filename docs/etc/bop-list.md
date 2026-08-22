@@ -22,7 +22,7 @@
 | **部分 code complete** | source 已导入或入口可达，但当前局部 contract 尚有已知缺口、未跑测试或 active recovery。 | 不得因旧 fixture、selector 译码或“将来有 machine capability”而计为完成。 |
 | **端到端集成** | source-built guest 映像实际穿过跨族、机器和 host contract 并继续执行。 | 这是后续集成验证，不是本 tracker 的 BOP code-complete 门槛。 |
 
-**本次重审快照。** 按此标准，`50:xx` 的 73 项、`54:xx` 的 17 项，以及 XMS 的 10 项已达 code complete/local pass，共 **100/203**。`52:06`、`52:09`，以及 top-level 的 `59`、`FE` 是部分 code complete；其余 **99 项**仍是入口浅表或仅 v1。`52:06` 的 S5 正在进行，不以旧 S3 witness 冒充本次完成。依赖台账不把整个 OpenNT 树误说成 BOP 依赖：它覆盖当前已导入、已定位或已由 handler/lifecycle 证明为前置的源码；每当新发现可达 OpenNT 调用，必须先新增一条依赖记录，再接入或 defer。
+**本次重审快照。** 按此标准，`50:xx` 的 73 项、`54:xx` 的 17 项、XMS 的 11 项与 top-level `59` 已达 code complete/local pass，共 **102/203**。仅 `52:09` 和 top-level `FE` 是部分 code complete；其余 **99 项**仍是入口浅表或仅 v1。依赖台账不把整个 OpenNT 树误说成 BOP 依赖：它覆盖当前已导入、已定位或已由 handler/lifecycle 证明为前置的源码；每当新发现可达 OpenNT 调用，必须先新增一条依赖记录，再接入或 defer。
 
 ## 依赖优先实施顺序
 
@@ -412,13 +412,13 @@ OpenNT 原始调用遇到 NT4 私有 API、已删除 API、现代 Win32 不再�
 | --- | ---: | --- | --- |
 | DEM | 73 | **73 code complete / 局部测试通过**：原始 73-slot dispatcher 与 owner files 已镜像并在 active route；跨族/机器分支不倒扣此结论。 | 跨族、机器和完整 guest 生命周期的集成验证。 |
 | COMMAND | 17 | **17 code complete / 局部测试通过**：原始 17-slot dispatcher/owner files 已镜像；单会话 child lifecycle 有局部通过证据。 | DOS EXEC/PSP parent return、Redirector、WOW、console-input 的后续集成。 |
-| XMS | 12 | **10 code complete / 局部测试通过，2 项部分**：`52:06`、`52:09` 尚有 active recovery/机器前置。 | 真实 extended-memory aperture、UMB physical span、keyboard/INT15。 |
+| XMS | 12 | **11 code complete / 局部测试通过，1 项部分**：`52:09` 尚待 keyboard/IVT machine prerequisite。 | 真实 extended-memory aperture、UMB physical span、keyboard/INT15。 |
 | DPMI | 25 | **0 complete**：原始 source 已定位，当前没有 active v2 source mirror。 | protected-mode CPU/LDT/IDT/exception/memory 的整包闭包。 |
 | Redirector | 50 | **0 complete**：service definitions 与 explicit unavailable route 已有；未恢复原始 host composition。 | complete VDMREDIR/IPC/network provider，随后扩展 COMMAND/DEM pipe。 |
 | WOW16 | 1 | **0 complete**：selector 已知、组合 deferred。 | NE/WOW guest and host composition package。 |
 | Debugger/VDD | 16 | **0 complete**：selectors 已知、全部 deferred。 | debugger/VDD/event/console package。 |
 | Top-level/machine | 9 | **1 complete**：`59` 已按原始 Ignore/return 合同接入；其余 device/firmware lifecycle 未整体恢复。 | bx machine/BIOS/top-level package。 |
 
-**重审计数（code complete / 局部测试标准）：** **101 complete、3 partial、99 未完成**，合计 203 个 BOP。非 BOP 依赖共 90 行，其中 **38 complete、3 partial、49 未进入 code route**。完整 CLI/外部二进制的连续执行是后续集成资料，不会倒扣上述 code-complete 数量。
+**重审计数（code complete / 局部测试标准）：** **102 complete、2 partial、99 未完成**，合计 203 个 BOP。非 BOP 依赖共 90 行，其中 **38 complete、3 partial、49 未进入 code route**。完整 CLI/外部二进制的连续执行是后续集成资料，不会倒扣上述 code-complete 数量。
 
 **一致性门槛：** 下列脚本/数据应始终同本表一致：`docs/etc/research/t219-s2-t200-canonical-endpoint-inventory-001.json`、`docs/etc/research/t225-s57-bop-owner-package-profile-ledger-001.json`、各 owner-package proposal、formal Ninja manifest。当前本表的可调用条目数必须为 **203**。
