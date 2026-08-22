@@ -42,6 +42,15 @@ typedef struct bx_ntvdm_demhndl_active_call {
     uint32_t path_buffer_count;
     int transfer_from_guest;
     int flush_guest_buffer_on_return;
+    /* OpenNT DASD paths may map a small packed request plus one sector
+     * payload in the same SVC.  Keep both checked spans call-private; neither
+     * is a guest pointer or a new DEM provider. */
+    struct {
+        uint32_t address, bytes;
+        uint8_t *buffer;
+    } dasd_payload[2];
+    uint32_t dasd_payload_count;
+    uint32_t dasd_mapping_count;
     int loader_mode;
     jmp_buf terminate_jump;
 } bx_ntvdm_demhndl_active_call;
@@ -87,6 +96,69 @@ static LPVOID acquire_fixed_guest_span(bx_ntvdm_demhndl_active_call *active,
     }
     active->flush_guest_buffer_on_return = 1;
     return active->guest_buffer;
+}
+
+static LPVOID acquire_dasd_payload_span(bx_ntvdm_demhndl_active_call *active,
+    uint32_t address, uint32_t bytes)
+{
+    uint32_t index;
+    uint8_t *buffer;
+    if (active == NULL || active->call == NULL || bytes == 0u ||
+        active->dasd_payload_count >= 2u) return NULL;
+    buffer = (uint8_t *)malloc(bytes);
+    if (buffer == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
+    if (!active->call->guest_read(active->call->guest_state, address, buffer, bytes)) {
+        free(buffer); SetLastError(ERROR_INVALID_ADDRESS); return NULL;
+    }
+    index = active->dasd_payload_count++;
+    active->dasd_payload[index].address = address;
+    active->dasd_payload[index].bytes = bytes;
+    active->dasd_payload[index].buffer = buffer;
+    return buffer;
+}
+
+static uint16_t packed_u16(const uint8_t *bytes, uint32_t offset)
+{
+    return (uint16_t)((uint16_t)bytes[offset] | ((uint16_t)bytes[offset + 1u] << 8));
+}
+
+static uint32_t dasd_mapping_bytes(bx_ntvdm_demhndl_active_call *active)
+{
+    uint32_t service, mapping;
+    uint16_t sectors;
+    if (active == NULL || active->call == NULL) return 0u;
+    service = active->call->service;
+    mapping = active->dasd_mapping_count++;
+    if (service == 0x29u || service == 0x2au) {
+        if (mapping == 0u) {
+            if (bx_ntvdm_demhndl_get_cx() == 0xffffu) return 10u; /* DISKIO */
+            return (uint32_t)bx_ntvdm_demhndl_get_cx() * 512u;
+        }
+        if (mapping == 1u && bx_ntvdm_demhndl_get_cx() == 0xffffu &&
+            active->guest_buffer != NULL && active->guest_bytes == 10u) {
+            sectors = packed_u16(active->guest_buffer, 4u);
+            return (uint32_t)sectors * 512u;
+        }
+        return 0u;
+    }
+    if (service != 0x21u) return 0u;
+    if (mapping == 0u) {
+        switch (bx_ntvdm_demhndl_get_cl()) {
+        case 0x40u: case 0x60u: return 32u; /* DEVICEPARAMETERS */
+        case 0x41u: case 0x61u: return 13u; /* RW_BLOCK */
+        case 0x42u: case 0x62u: return 5u;  /* FMT_BLOCK */
+        case 0x46u: case 0x66u: return 25u; /* MID */
+        case 0x47u: case 0x67u: return 2u;  /* ACCESSCTRL */
+        default: return 0u;
+        }
+    }
+    if (mapping == 1u && active->guest_buffer != NULL &&
+        active->guest_bytes == 13u &&
+        (bx_ntvdm_demhndl_get_cl() == 0x41u || bx_ntvdm_demhndl_get_cl() == 0x61u)) {
+        sectors = packed_u16(active->guest_buffer, 7u);
+        return (uint32_t)sectors * 512u;
+    }
+    return 0u;
 }
 
 static uint32_t real_mode_address(USHORT segment, USHORT offset)
@@ -321,6 +393,14 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
 
     if (active == 0 || active->call == 0) return NULL;
     active->guest_address = real_mode_address(segment, offset);
+    if (active->call->service == 0x21u || active->call->service == 0x29u ||
+        active->call->service == 0x2au) {
+        bytes = dasd_mapping_bytes(active);
+        if (bytes == 0u) { SetLastError(ERROR_INVALID_ADDRESS); return NULL; }
+        if (active->guest_buffer == NULL)
+            return acquire_fixed_guest_span(active, bytes);
+        return acquire_dasd_payload_span(active, active->guest_address, bytes);
+    }
     if (active->call->service == 0x11u) {
         /* Original demLoadDos increments its initial SAS pointer as it reads
          * NTDOS.SYS in 16 KiB chunks.  Reserve the remaining real-mode
@@ -511,6 +591,13 @@ int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
             active.guest_buffer, active.guest_bytes))
         SetLastError(ERROR_INVALID_ADDRESS);
     if (active.guest_buffer != NULL) free(active.guest_buffer);
+    while (active.dasd_payload_count != 0u) {
+        uint32_t index = --active.dasd_payload_count;
+        if (!call->guest_write(call->guest_state, active.dasd_payload[index].address,
+                active.dasd_payload[index].buffer, active.dasd_payload[index].bytes))
+            SetLastError(ERROR_INVALID_ADDRESS);
+        free(active.dasd_payload[index].buffer);
+    }
     while (active.path_buffer_count != 0u)
         free(active.path_buffers[--active.path_buffer_count]);
     g_active_call = NULL;

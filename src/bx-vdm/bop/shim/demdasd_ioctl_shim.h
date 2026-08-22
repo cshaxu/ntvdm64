@@ -44,6 +44,12 @@ void bx_ntvdm_demdasd_set_es(USHORT value);
 void bx_ntvdm_demdasd_set_ah(USHORT value);
 void bx_ntvdm_demdasd_host_simulate(void);
 void diskette_io(void);
+/* Directly retained `nt_fdisk.c` host lifecycle.  The imported DEM reset and
+ * process-termination owners use these spellings; no machine behavior is
+ * implied by them. */
+void fdisk_heart_beat(void);
+void FdiskTerminatePDB(USHORT pdb);
+void HostFdiskReset(void);
 
 int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call);
 

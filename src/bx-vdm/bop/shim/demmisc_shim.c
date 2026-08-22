@@ -4,6 +4,10 @@
  * shim itself must call the real Win32 primitive after the bridge has been
  * declared. */
 #undef ReadFile
+/* Keep the imported demmisc.c spelling mapped to this shim, but let the shim
+ * itself call the recovered nt_fdisk lifecycle rather than recursively call
+ * its exported compatibility wrapper. */
+#undef HostFdiskReset
 
 void demLoadDos(void); void demDiskReset(void); void demLoadDosAppSym(void);
 void demFreeDosAppSym(void); void demEntryDosApp(void); void demDOSDispCall(void);
@@ -56,7 +60,10 @@ void bx_ntvdm_demmisc_dbg_prompt(LPCSTR prompt,LPSTR buffer,DWORD bytes)
 void bx_ntvdm_demmisc_rc_error_dialog(WORD error,LPCSTR text,LPVOID reserved)
 { (void)error;(void)text;(void)reserved; }
 void bx_ntvdm_demmisc_host_floppy_reset(void) {}
-void bx_ntvdm_demmisc_host_fdisk_reset(void) {}
+/* The imported demDiskReset owns the ordering: reset host disk handles, then
+ * clear DOSDATA's FDAccess word.  FDISK is a composable host-volume lifecycle
+ * rather than a floppy/controller operation, so preserve that original call. */
+void bx_ntvdm_demmisc_host_fdisk_reset(void) { HostFdiskReset(); }
 
 int bx_ntvdm_demmisc_invoke(bx_ntvdm_demhndl_call *call)
 {

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2019 |
+| Documentation records | 2020 |
 | --- | --- |
-| Generated UTC | 2026-08-22T01:03:03Z |
+| Generated UTC | 2026-08-22T01:15:54Z |
 
 ## Entries
 
@@ -253,6 +253,7 @@ content-divergent entries.
 | etc/evidence/t236-s2-nonclosure-transfer-ledger-001.md | indexed supporting material | aa0a99e748149b01ba43391c1ef4a284e4feb6d1c3ac72c575c455dd3e31d30b |
 | etc/evidence/t236-s3-dem-hard-error-retry-source-recovery-result-001.md | indexed supporting material | c89c16a99eff826060998504fdce1b4e19e000ce61f1f3383df7c2600df50532 |
 | etc/evidence/t236-s4-p1-ntfdisk-source-recovery-001.md | indexed supporting material | e6d5bba202bfdb55d7357b496d6bfbdbe68c11bd511e0ee5df9c603e2944a04e |
+| etc/evidence/t236-s4-p2-fixed-volume-lifecycle-and-transport-001.md | indexed supporting material | c237f8379a6f8dbdefa92d3d6cfd87679228778e305b79c3323cace5d792ebd3 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |

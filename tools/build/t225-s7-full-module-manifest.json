@@ -803,6 +803,25 @@
       ]
     },
     {
+      "name": "t236-s4-ntfdisk-readonly-fixture",
+      "source": "tests/bx-vdm/t236_s4_ntfdisk_readonly_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
       "name": "t231-s10-command-native-session-fixture",
       "source": "tests/bx-vdm/t231_s10_command_native_session_fixture.c",
       "libraries": [

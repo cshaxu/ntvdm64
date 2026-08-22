@@ -259,7 +259,31 @@ BOOL nt_fdisk_verify(BYTE drive, PLARGE_INTEGER offset, ULONG size)
         NULL, 0, &bytes, NULL);
 }
 BOOL nt_fdisk_close(BYTE drive) { return close_fdisk(get_fdisk_data(drive)); }
-void HostFdiskReset(void) { BYTE i; for (i=0u;i<number_of_fdisk;++i) close_fdisk(&fdisk_data_table[i]); }
+void fdisk_heart_beat(void)
+{
+    BYTE index;
+    /* Same idle-close rule as nt_fdisk.c: only open fixed-volume handles
+     * participate, and each source-owned access resets its countdown. */
+    if (fdisk_open_count == 0u) return;
+    for (index = 0u; index < number_of_fdisk; ++index) {
+        bx_ntvdm_opennt_fdisk_data *data = &fdisk_data_table[index];
+        if (data->fdisk_fd != INVALID_HANDLE_VALUE && data->idle_counter != 0u &&
+            --data->idle_counter == 0u) close_fdisk(data);
+    }
+}
+
+void FdiskTerminatePDB(USHORT pdb)
+{
+    BYTE index;
+    if (fdisk_open_count == 0u) return;
+    for (index = 0u; index < number_of_fdisk; ++index) {
+        bx_ntvdm_opennt_fdisk_data *data = &fdisk_data_table[index];
+        if (data->fdisk_fd != INVALID_HANDLE_VALUE &&
+            (pdb == 0u || data->owner_pdb == pdb)) close_fdisk(data);
+    }
+}
+
+void HostFdiskReset(void) { FdiskTerminatePDB(0u); }
 
 int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call)
 {

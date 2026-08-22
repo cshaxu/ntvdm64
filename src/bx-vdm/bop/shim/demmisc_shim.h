@@ -39,6 +39,7 @@ void bx_ntvdm_demmisc_dbg_prompt(LPCSTR prompt, LPSTR buffer, DWORD bytes);
 void bx_ntvdm_demmisc_rc_error_dialog(WORD error, LPCSTR text, LPVOID reserved);
 void bx_ntvdm_demmisc_host_floppy_reset(void);
 void bx_ntvdm_demmisc_host_fdisk_reset(void);
+void HostFdiskReset(void);
 int bx_ntvdm_demmisc_invoke(bx_ntvdm_demhndl_call *call);
 
 #define CreateFileOem bx_ntvdm_demmisc_create_file_oem
