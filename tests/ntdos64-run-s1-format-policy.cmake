@@ -42,8 +42,8 @@ foreach(result IN ITEMS com_exit exe_exit bat_exit pif_exit)
 endforeach()
 
 execute_process(
-    COMMAND "${RUNNER}" --include-drives c,,d "$ENV{ComSpec}" /d /s /c "exit 0"
-    RESULT_VARIABLE malformed_drive_exit)
-if(NOT malformed_drive_exit EQUAL 2)
-    message(FATAL_ERROR "malformed drive-list exit was ${malformed_drive_exit}, expected 2")
+    COMMAND "${RUNNER}" --exclude-drives c "$ENV{ComSpec}" /d /s /c "exit 0"
+    RESULT_VARIABLE removed_drive_option_exit)
+if(NOT removed_drive_option_exit EQUAL 2)
+    message(FATAL_ERROR "removed drive-option exit was ${removed_drive_option_exit}, expected 2")
 endif()

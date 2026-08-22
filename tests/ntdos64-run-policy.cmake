@@ -22,11 +22,11 @@ set(fake_pif "${CMAKE_CURRENT_BINARY_DIR}/ntdos64-run-policy.pif")
 file(WRITE "${fake_dos}" "MZ")
 file(WRITE "${fake_pif}" "MZ")
 execute_process(
-    COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}" --include-drives c,d,e --exclude-drives e
+    COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}"
         "${fake_dos}" /c smoke
     RESULT_VARIABLE engine_exit)
 execute_process(
-    COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}" --include-drives c,d,e --exclude-drives e
+    COMMAND "${RUNNER}" --engine "${ENGINE_PROBE}"
         "${fake_pif}"
     RESULT_VARIABLE pif_engine_exit)
 file(REMOVE "${fake_dos}" "${fake_pif}")
@@ -38,8 +38,8 @@ if(NOT pif_engine_exit EQUAL 47)
 endif()
 
 execute_process(
-    COMMAND "${RUNNER}" --include-drives c,,d "$ENV{ComSpec}" /d /s /c "exit 0"
-    RESULT_VARIABLE malformed_drive_exit)
-if(NOT malformed_drive_exit EQUAL 2)
-    message(FATAL_ERROR "malformed drive-list exit was ${malformed_drive_exit}, expected 2")
+    COMMAND "${RUNNER}" --include-drives c "$ENV{ComSpec}" /d /s /c "exit 0"
+    RESULT_VARIABLE removed_drive_option_exit)
+if(NOT removed_drive_option_exit EQUAL 2)
+    message(FATAL_ERROR "removed drive-option exit was ${removed_drive_option_exit}, expected 2")
 endif()

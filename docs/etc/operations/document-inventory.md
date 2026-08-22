@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2018 |
+| Documentation records | 2019 |
 | --- | --- |
-| Generated UTC | 2026-08-21T23:25:16Z |
+| Generated UTC | 2026-08-22T01:03:03Z |
 
 ## Entries
 
@@ -69,7 +69,7 @@ content-divergent entries.
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | 3d55ee174e229e89da3ab9f31e65ebbd832a1f48c4f2eb487ce48dc25043703f |
 | design/CODING.md | current design authority | 17b632130000f4c23a68645befe9ef9a90bd316bce90be50bbbb2cfdeea811ec |
 | design/GOAL.md | current design authority | 3b5642eeb665207682931849afd514f30bc027f7b025beaab5f1aabd04d28c20 |
-| design/HOST-NAMESPACE-CAPABILITY.md | retained pre-governance evidence | c242c3a0b7c31891ce80e063bd903c03b1e547aa1177e755106c8e6a43951d6e |
+| design/HOST-NAMESPACE-CAPABILITY.md | retained pre-governance evidence | d8f6df52c8bdc9527526d14756c05465136571bfbd90ee17f5798c766c256bd5 |
 | design/ROADMAP.md | current design authority | f5ea2a1374680d8388f8418aa513ec3d396c35f5d92989441f1c20a7b6679cc2 |
 | design/STOCK-FIRMWARE-STARTUP-PROBE.md | retained pre-governance evidence | 2f5c8b2de1329fa7c500552229840dcf9c5c5b780aeb73797a84a004e79088c0 |
 | design/UI.md | current design authority | abfc0cc66e9e889e854a7370d0dd9ad694348d6692b0f8bcfdbbd93979d16760 |
@@ -252,6 +252,7 @@ content-divergent entries.
 | etc/evidence/t236-s2-command-worker-host-broker-recovery-001.md | indexed supporting material | 9ef6c75c0beef2c2f1d48c555d6e502af5643d30cb7cac796902f6208b3e0e35 |
 | etc/evidence/t236-s2-nonclosure-transfer-ledger-001.md | indexed supporting material | aa0a99e748149b01ba43391c1ef4a284e4feb6d1c3ac72c575c455dd3e31d30b |
 | etc/evidence/t236-s3-dem-hard-error-retry-source-recovery-result-001.md | indexed supporting material | c89c16a99eff826060998504fdce1b4e19e000ce61f1f3383df7c2600df50532 |
+| etc/evidence/t236-s4-p1-ntfdisk-source-recovery-001.md | indexed supporting material | e6d5bba202bfdb55d7357b496d6bfbdbe68c11bd511e0ee5df9c603e2944a04e |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
 | etc/operations/governance-migration.md | indexed supporting material | 946d64f2a53bf7eee73cf0d6d42ed892d8bd4f9ec59fa02af0c847abdc3973f7 |

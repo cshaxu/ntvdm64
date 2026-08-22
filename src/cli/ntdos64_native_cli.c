@@ -1,5 +1,4 @@
 #include "bx_ntvdm_engine_contract_v1.h"
-#include "bx_ntvdm_host_drive_policy.h"
 #include "bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "bx_ntvdm_first_fault_observation_v1.h"
@@ -175,8 +174,7 @@ int wmain(int argc, wchar_t **argv)
 {
     const wchar_t *config = 0, *root = 0, *target;
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
-    uint32_t include_mask = 0u, exclude_mask = 0u;
-    int has_include = 0, has_exclude = 0, has_mutation_mode = 0, has_tick_budget = 0,
+    int has_mutation_mode = 0, has_tick_budget = 0,
         has_bop_observation = 0, has_generic_ud_observation = 0, has_first_fault_observation = 0, has_guest_exec_observation = 0, has_guest_exec_ledger = 0, has_budget_terminal_position_observation = 0
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         , has_software_interrupt_observation = 0
@@ -224,14 +222,6 @@ int wmain(int argc, wchar_t **argv)
             config = argv[index + 1], index += 2;
         else if (wcscmp(argv[index], L"--wow16-root") == 0 && index + 1 < argc && !root)
             root = argv[index + 1], index += 2;
-        else if (wcscmp(argv[index], L"--include-drives") == 0 && index + 1 < argc &&
-            !has_include && argv[index + 1][0] != L'\0' &&
-            bx_ntvdm_host_drive_policy_v1_parse(argv[index + 1], &include_mask))
-            has_include = 1, index += 2;
-        else if (wcscmp(argv[index], L"--exclude-drives") == 0 && index + 1 < argc &&
-            !has_exclude && argv[index + 1][0] != L'\0' &&
-            bx_ntvdm_host_drive_policy_v1_parse(argv[index + 1], &exclude_mask))
-            has_exclude = 1, index += 2;
         else if (wcscmp(argv[index], L"--mutation-mode") == 0 && index + 1 < argc &&
             !has_mutation_mode && parse_mutation_mode(argv[index + 1], &mutation_mode))
             has_mutation_mode = 1, index += 2;
@@ -305,8 +295,10 @@ int wmain(int argc, wchar_t **argv)
             config, &request.root_descriptor_chars) ||
         !copied_text(request.launch_descriptor, BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS,
             launch_text, &request.launch_descriptor_chars)) return 3;
-    request.admitted_drive_mask = include_mask;
-    request.excluded_drive_mask = exclude_mask;
+    /* OpenNT parity: host-drive enumeration is not a CLI capability filter.
+     * The retained request fields are zero, which means no added exclusion. */
+    request.admitted_drive_mask = 0u;
+    request.excluded_drive_mask = 0u;
     request.mutation_mode = mutation_mode;
     request.instruction_tick_budget = lifecycle_policy.instruction_tick_budget;
     if (!bx_ntvdm_engine_request_v1_valid(&request)) return 3;
@@ -548,6 +540,6 @@ usage:
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         L" [--observe-budget-terminal-provenance]"
 #endif
-        L" [--include-drives c,d] [--exclude-drives e] [--validate-only] target [args...]\n");
+        L" [--validate-only] target [args...]\n");
     return 2;
 }

@@ -186,20 +186,17 @@ static int environment_name_compare(const wchar_t *entry, const wchar_t *name)
  * selected resources immutable to this invocation by constructing a child-only
  * environment. This does not expose guest payloads or add a Bochs option. */
 static wchar_t *build_adapter_environment(const wchar_t *profile,
-    const wchar_t *root, const wchar_t *include_drives,
-    const wchar_t *exclude_drives, const wchar_t *launch_plan,
+    const wchar_t *root, const wchar_t *launch_plan,
     const wchar_t *config_source, const wchar_t *autoexec_source,
     const wchar_t *mutation_mode)
 {
     /* CreateProcess requires its Unicode environment block sorted by name. */
     static const wchar_t *const names[] = {
         L"NTDOS64_ADAPTER_LAUNCH_PLAN", L"NTDOS64_ADAPTER_PROFILE",
-        L"NTDOS64_ADAPTER_ROOT", L"NTDOS64_HOST_EXCLUDE_DRIVES",
-        L"NTDOS64_HOST_INCLUDE_DRIVES", L"NTDOS64_MUTATION_MODE",
+        L"NTDOS64_ADAPTER_ROOT", L"NTDOS64_MUTATION_MODE",
         L"NTDOS64_STARTUP_AUTOEXEC_SOURCE", L"NTDOS64_STARTUP_CONFIG_SOURCE"
     };
-    const wchar_t *values[] = { launch_plan, profile, root, exclude_drives,
-        include_drives, mutation_mode,
+    const wchar_t *values[] = { launch_plan, profile, root, mutation_mode,
         autoexec_source != NULL ? autoexec_source : L"",
         config_source != NULL ? config_source : L"" };
     LPWCH inherited;
@@ -209,8 +206,7 @@ static wchar_t *build_adapter_environment(const wchar_t *profile,
     wchar_t *environment;
     wchar_t *cursor;
 
-    if (profile == NULL || root == NULL || include_drives == NULL || exclude_drives == NULL ||
-        launch_plan == NULL || mutation_mode == NULL ||
+    if (profile == NULL || root == NULL || launch_plan == NULL || mutation_mode == NULL ||
         *profile == L'\0' || *root == L'\0') return NULL;
     inherited = GetEnvironmentStringsW();
     if (inherited == NULL) return NULL;
@@ -273,8 +269,7 @@ static wchar_t *build_adapter_environment(const wchar_t *profile,
 }
 
 static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
-    const wchar_t *adapter_root, const wchar_t *include_drives,
-    const wchar_t *exclude_drives, const wchar_t *launch_plan,
+    const wchar_t *adapter_root, const wchar_t *launch_plan,
     const wchar_t *config_source, const wchar_t *autoexec_source,
     const wchar_t *mutation_mode)
 {
@@ -290,10 +285,9 @@ static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
     HANDLE eof_input = INVALID_HANDLE_VALUE;
 
     if (line == NULL) return 1;
-    if (adapter_profile != NULL || adapter_root != NULL || include_drives != NULL || exclude_drives != NULL ||
-        launch_plan != NULL || mutation_mode != NULL) {
+    if (adapter_profile != NULL || adapter_root != NULL || launch_plan != NULL || mutation_mode != NULL) {
         environment = build_adapter_environment(adapter_profile, adapter_root,
-            include_drives, exclude_drives, launch_plan, config_source, autoexec_source,
+            launch_plan, config_source, autoexec_source,
             mutation_mode);
         if (environment == NULL) {
             HeapFree(GetProcessHeap(), 0, line);
@@ -359,35 +353,6 @@ static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
     return (int)exit_code;
 }
 
-/* Normalizes a non-empty comma-separated DOS-drive set to upper-case letters.
- * A later adapter consumer applies exclusion after inclusion; this parser only
- * admits stable, unambiguous CLI input and has no host-drive side effects. */
-static int normalize_drive_list(const wchar_t *input, wchar_t output[52])
-{
-    unsigned char seen[26] = {0};
-    size_t input_index = 0u, output_index = 0u;
-    unsigned count = 0u;
-
-    if (input == NULL || *input == L'\0') return 0;
-    while (input[input_index] != L'\0') {
-        wchar_t letter = input[input_index++];
-        unsigned index;
-        if ((letter < L'a' || letter > L'z') && (letter < L'A' || letter > L'Z')) return 0;
-        if (letter >= L'a') letter = (wchar_t)(letter - L'a' + L'A');
-        index = (unsigned)(letter - L'A');
-        if (seen[index]) return 0;
-        seen[index] = 1u;
-        if (count != 0u) output[output_index++] = L',';
-        output[output_index++] = letter;
-        ++count;
-        if (input[input_index] == L'\0') break;
-        if (input[input_index++] != L',') return 0;
-        if (input[input_index] == L'\0') return 0;
-    }
-    output[output_index] = L'\0';
-    return count != 0u;
-}
-
 int wmain(void)
 {
     int argc;
@@ -401,8 +366,6 @@ int wmain(void)
     wchar_t autoexec_source[MAX_PATH];
     const wchar_t *mutation_mode = L"direct";
     int has_mutation_mode = 0;
-    wchar_t include_drives[52] = {0};
-    wchar_t exclude_drives[52] = {0};
     int target_index = 1;
     image_kind kind;
     wchar_t full_path[MAX_PATH];
@@ -413,7 +376,7 @@ int wmain(void)
     int result;
 
     if (argv == NULL || argc < 2) {
-        fwprintf(stderr, L"usage: ntvdm64-0235 [--mutation-mode direct|readonly] [--include-drives c,d] [--exclude-drives e] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
+        fwprintf(stderr, L"usage: ntvdm64-0235 [--mutation-mode direct|readonly] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
         if (argv != NULL) LocalFree(argv);
         return 2;
     }
@@ -425,14 +388,6 @@ int wmain(void)
         } else if (_wcsicmp(argv[target_index], L"--bochs") == 0 &&
             target_index + 1 < argc && bochs == NULL) {
             bochs = argv[target_index + 1];
-            target_index += 2;
-        } else if (_wcsicmp(argv[target_index], L"--include-drives") == 0 &&
-            target_index + 1 < argc && include_drives[0] == L'\0' &&
-            normalize_drive_list(argv[target_index + 1], include_drives)) {
-            target_index += 2;
-        } else if (_wcsicmp(argv[target_index], L"--exclude-drives") == 0 &&
-            target_index + 1 < argc && exclude_drives[0] == L'\0' &&
-            normalize_drive_list(argv[target_index + 1], exclude_drives)) {
             target_index += 2;
         } else if (_wcsicmp(argv[target_index], L"--mutation-mode") == 0 &&
             target_index + 1 < argc && !has_mutation_mode &&
@@ -467,12 +422,11 @@ int wmain(void)
     argv[target_index] = full_path;
     kind = classify_image(full_path);
     if (kind == IMAGE_KIND_PE32 || kind == IMAGE_KIND_PE64) {
-        if (include_drives[0] != L'\0' || exclude_drives[0] != L'\0' || bochs != NULL ||
-            has_mutation_mode) {
+        if (bochs != NULL || has_mutation_mode) {
             fwprintf(stderr, L"ntdos64-run: DOS configuration options require an explicit DOS engine\n");
             result = 2;
         } else {
-            result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+            result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL);
         }
     } else if ((kind == IMAGE_KIND_DOS || kind == IMAGE_KIND_COMMAND_INPUT) && engine != NULL) {
         int engine_argc = bochs == NULL ? 6 : 8;
@@ -519,7 +473,7 @@ int wmain(void)
                 }
                 (void)index;
                 result = run_process(engine_argc, engine_argv, full_path, dos_root,
-                    include_drives, exclude_drives, launch_plan, config_source, autoexec_source,
+                    launch_plan, config_source, autoexec_source,
                     mutation_mode);
                 HeapFree(GetProcessHeap(), 0, engine_argv);
             }

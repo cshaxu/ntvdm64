@@ -36,18 +36,31 @@ typedef struct bx_ntvdm_demdasd_cpu_shadow {
 
 static __declspec(thread) bx_ntvdm_demdasd_cpu_shadow g_cpu_shadow;
 
-typedef struct bx_ntvdm_opennt_raw_volume {
-    CHAR root[8];
-    BYTE logical_drive;
-} bx_ntvdm_opennt_raw_volume;
+/* Directly shaped from OpenNT softpc.new/host/src/nt_fdisk.c.  Keep its
+ * physical-drive table, PDB ownership and handle lifecycle intact.  The
+ * documented divergence is public Win32 volume/geometry queries in place of
+ * NT4's private Nt* entry points. */
+#define FDISK_IDLE_PERIOD 30u
+typedef struct bx_ntvdm_opennt_fdisk_data {
+    BYTE drive, idle_counter;
+    CHAR drive_letter;
+    BOOLEAN auto_locked;
+    HANDLE fdisk_fd;
+    DWORD num_heads;
+    LARGE_INTEGER num_cylinders;
+    DWORD sectors_per_track, bytes_per_sector, align_factor;
+    USHORT owner_pdb;
+    CHAR device_name[9];
+} bx_ntvdm_opennt_fdisk_data;
 
-/* Source-derived replacement for the reached nt_fdisk.c subset.  Original
- * nt_fdisk.c bound its data table to a historical SoftPC host product shell;
- * this table preserves its physical-index-to-logical-drive contract while
- * binding the direct CLI to real Win32 volume paths. */
-static bx_ntvdm_opennt_raw_volume g_raw_volumes[26];
-static BYTE g_raw_volume_count;
+static bx_ntvdm_opennt_fdisk_data *fdisk_data_table;
+static BYTE number_of_fdisk;
+static DWORD max_align_factor, cur_align_factor;
+static WORD fdisk_open_count;
 static int g_dasd_initialized;
+
+extern PUSHORT pusCurrentPDB;
+extern WORD *pFDAccess;
 
 USHORT bx_ntvdm_demdasd_get_cs(void) { return g_cpu_shadow.cs; }
 USHORT bx_ntvdm_demdasd_get_ip(void) { return g_cpu_shadow.ip; }
@@ -105,16 +118,6 @@ MEDIA_TYPE nt_floppy_get_media_type(BYTE drive, WORD cylinders, WORD sectors, WO
 { (void)drive; (void)cylinders; (void)sectors; (void)heads; SetLastError(ERROR_NOT_SUPPORTED); return Unknown; }
 BOOL nt_floppy_verify(BYTE drive, DWORD offset, DWORD size)
 { (void)drive; (void)offset; (void)size; SetLastError(ERROR_NOT_SUPPORTED); return FALSE; }
-static int raw_volume(BYTE physical, bx_ntvdm_opennt_raw_volume **out)
-{
-    if (physical >= g_raw_volume_count || out == NULL) {
-        SetLastError(ERROR_INVALID_DRIVE);
-        return 0;
-    }
-    *out = &g_raw_volumes[physical];
-    return 1;
-}
-
 /* Divergence from nt_fdisk.c: use documented Win32 handles in place of its
  * NT native `\\DosDevices` opens and FAT-only FSCTL.  The original output
  * BPB/geometry contract and failure propagation remain with demdasd.c. */
@@ -122,14 +125,21 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)
 {
     CHAR root[] = "A:\\";
     CHAR volume[] = "\\\\.\\A:";
+    bx_ntvdm_opennt_fdisk_data *data;
     HANDLE handle;
     DWORD bytes;
     DWORD spc, bps, free_clusters, total_clusters;
+    DWORD alignment_requirement = 0u;
 
-    if (drive >= 26u || bpb == NULL || geometry == NULL ||
-        g_raw_volume_count >= 26u) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    if (drive >= 26u || bpb == NULL || geometry == NULL) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
     root[0] = (CHAR)('A' + drive); volume[4] = root[0];
-    if (GetDriveTypeA(root) != DRIVE_FIXED) { SetLastError(ERROR_INVALID_DRIVE); return FALSE; }
+    /* This is the original nt_fdisk/demFdiskInit eligibility rule: every
+     * host fixed letter is attempted.  bx-vdm adds no CLI drive filter. */
+    if (GetDriveTypeA(root) != DRIVE_FIXED) {
+        SetLastError(ERROR_INVALID_DRIVE); return FALSE;
+    }
     handle = CreateFileA(volume, FILE_READ_ATTRIBUTES | SYNCHRONIZE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
     if (handle == INVALID_HANDLE_VALUE) return FALSE;
@@ -145,52 +155,111 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)
     bpb->MediaID = 0xf8u; bpb->TrackSize = (WORD)geometry->SectorsPerTrack;
     bpb->Heads = (WORD)geometry->TracksPerCylinder;
     bpb->BigSectors = total_clusters * spc;
-    g_raw_volumes[g_raw_volume_count].root[0] = root[0];
-    g_raw_volumes[g_raw_volume_count].root[1] = ':';
-    g_raw_volumes[g_raw_volume_count].root[2] = '\\';
-    g_raw_volumes[g_raw_volume_count].root[3] = 0;
-    g_raw_volumes[g_raw_volume_count].logical_drive = drive;
-    ++g_raw_volume_count;
+    /* Divergence from the FAT-only FSCTL_QUERY_FAT_BPB in nt_fdisk.c: modern
+     * fixed volumes can be NTFS/ReFS.  The existing OpenNT BPB contract is
+     * populated from public Win32 geometry/free-space data, then its original
+     * BDS/read/write/verify logic remains untouched in demdasd.c. */
+    data = (bx_ntvdm_opennt_fdisk_data *)realloc(fdisk_data_table,
+        (number_of_fdisk + 1u) * sizeof(*data));
+    if (data == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
+    fdisk_data_table = data;
+    data = &fdisk_data_table[number_of_fdisk];
+    memset(data, 0, sizeof(*data));
+    data->drive_letter = root[0]; data->drive = number_of_fdisk;
+    data->fdisk_fd = INVALID_HANDLE_VALUE;
+    data->num_heads = geometry->TracksPerCylinder;
+    data->sectors_per_track = geometry->SectorsPerTrack;
+    data->bytes_per_sector = geometry->BytesPerSector;
+    data->num_cylinders = geometry->Cylinders;
+    /* Divergence from nt_fdisk.c's NtQueryInformationFile(
+     * FileAlignmentInformation): this pinned historical public-header surface
+     * cannot name that newer structure.  Buffered public volume handles do
+     * not require caller alignment, so retain the original zero-alignment
+     * branch rather than introduce a private NT declaration. */
+    data->align_factor = alignment_requirement;
+    memcpy(data->device_name, volume, sizeof(volume));
+    if (data->align_factor > max_align_factor) max_align_factor = data->align_factor;
+    ++number_of_fdisk;
     return TRUE;
 }
 
-static ULONG raw_transfer(BYTE physical, PLARGE_INTEGER offset, ULONG size,
-    PBYTE buffer, int write)
+static bx_ntvdm_opennt_fdisk_data *get_fdisk_data(BYTE drive)
 {
-    bx_ntvdm_opennt_raw_volume *volume;
-    CHAR path[] = "\\\\.\\A:";
-    HANDLE handle;
-    DWORD transferred = 0u;
-    DWORD access = write ? (GENERIC_READ | GENERIC_WRITE) : GENERIC_READ;
+    BYTE index;
+    for (index = 0u; index < number_of_fdisk; ++index)
+        if (fdisk_data_table[index].drive == drive) return &fdisk_data_table[index];
+    SetLastError(ERROR_INVALID_DRIVE); return NULL;
+}
 
-    if (!raw_volume(physical, &volume) || offset == NULL || buffer == NULL)
-        return 0u;
-    path[4] = volume->root[0];
-    handle = CreateFileA(path, access, FILE_SHARE_READ | FILE_SHARE_WRITE,
-        NULL, OPEN_EXISTING, FILE_FLAG_WRITE_THROUGH, NULL);
-    if (handle == INVALID_HANDLE_VALUE) return 0u;
-    if (!SetFilePointerEx(handle, *offset, NULL, FILE_BEGIN) ||
-        !(write ? WriteFile(handle, buffer, size, &transferred, NULL) :
-                  ReadFile(handle, buffer, size, &transferred, NULL)))
-        transferred = 0u;
-    CloseHandle(handle);
-    return transferred;
+static BOOL close_fdisk(bx_ntvdm_opennt_fdisk_data *data)
+{
+    if (data == NULL) return FALSE;
+    if (data->fdisk_fd != INVALID_HANDLE_VALUE) {
+        CloseHandle(data->fdisk_fd); data->fdisk_fd = INVALID_HANDLE_VALUE;
+        data->auto_locked = FALSE; data->owner_pdb = 0u;
+        if (fdisk_open_count != 0u) --fdisk_open_count;
+        if (pFDAccess != NULL && *pFDAccess != 0u) --*pFDAccess;
+    }
+    return TRUE;
+}
+
+static BOOL get_fdisk_handle(bx_ntvdm_opennt_fdisk_data *data, USHORT pdb,
+    BOOL auto_lock)
+{
+    DWORD access, share;
+    if (data == NULL) return FALSE;
+    if (data->fdisk_fd != INVALID_HANDLE_VALUE &&
+        ((auto_lock && !data->auto_locked) || data->owner_pdb != pdb)) close_fdisk(data);
+    access = GENERIC_READ | (auto_lock ? GENERIC_WRITE : 0u);
+    share = auto_lock ? FILE_SHARE_READ : FILE_SHARE_READ | FILE_SHARE_WRITE;
+    if (data->fdisk_fd == INVALID_HANDLE_VALUE) {
+        data->fdisk_fd = CreateFileA(data->device_name, access, share, NULL,
+            OPEN_EXISTING, FILE_FLAG_WRITE_THROUGH, NULL);
+        if (data->fdisk_fd == INVALID_HANDLE_VALUE) return FALSE;
+        data->auto_locked = auto_lock; data->owner_pdb = pdb;
+        ++fdisk_open_count; if (pFDAccess != NULL) ++*pFDAccess;
+    }
+    data->idle_counter = FDISK_IDLE_PERIOD;
+    cur_align_factor = data->align_factor;
+    return TRUE;
+}
+
+static ULONG disk_transfer(HANDLE handle, PLARGE_INTEGER offset, ULONG size,
+    PBYTE buffer, BOOL write)
+{
+    DWORD done = 0u, total = 0u, chunk;
+    if (handle == INVALID_HANDLE_VALUE || offset == NULL || buffer == NULL ||
+        !SetFilePointerEx(handle, *offset, NULL, FILE_BEGIN)) return 0u;
+    while (size != 0u) {
+        chunk = size > 0x9000u ? 0x9000u : size;
+        if (!(write ? WriteFile(handle, buffer, chunk, &done, NULL) :
+              ReadFile(handle, buffer, chunk, &done, NULL)) || done != chunk) break;
+        size -= chunk; total += done; buffer += done;
+    }
+    return total;
 }
 
 ULONG nt_fdisk_read(BYTE drive, PLARGE_INTEGER offset, ULONG size, PBYTE buffer)
-{ return raw_transfer(drive, offset, size, buffer, 0); }
+{ bx_ntvdm_opennt_fdisk_data *d = get_fdisk_data(drive); return d != NULL &&
+    get_fdisk_handle(d, pusCurrentPDB != NULL ? *pusCurrentPDB : 0u, FALSE) ?
+    disk_transfer(d->fdisk_fd, offset, size, buffer, FALSE) : 0u; }
 ULONG nt_fdisk_write(BYTE drive, PLARGE_INTEGER offset, ULONG size, PBYTE buffer)
-{ return raw_transfer(drive, offset, size, buffer, 1); }
+{ bx_ntvdm_opennt_fdisk_data *d = get_fdisk_data(drive); return d != NULL &&
+    get_fdisk_handle(d, pusCurrentPDB != NULL ? *pusCurrentPDB : 0u, TRUE) ?
+    disk_transfer(d->fdisk_fd, offset, size, buffer, TRUE) : 0u; }
 BOOL nt_fdisk_verify(BYTE drive, PLARGE_INTEGER offset, ULONG size)
 {
-    bx_ntvdm_opennt_raw_volume *volume; CHAR path[]="\\\\.\\A:"; HANDLE h; DWORD bytes;
+    bx_ntvdm_opennt_fdisk_data *d; DWORD bytes;
     VERIFY_INFORMATION info;
-    if (!raw_volume(drive,&volume)||offset==NULL) return FALSE;
-    path[4]=volume->root[0]; h=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-    if(h==INVALID_HANDLE_VALUE)return FALSE; info.StartingOffset=*offset; info.Length=size;
-    if(!DeviceIoControl(h,IOCTL_DISK_VERIFY,&info,sizeof(info),NULL,0,&bytes,NULL)){CloseHandle(h);return FALSE;} CloseHandle(h);return TRUE;
+    d = get_fdisk_data(drive);
+    if (d == NULL || offset == NULL || !get_fdisk_handle(d,
+        pusCurrentPDB != NULL ? *pusCurrentPDB : 0u, FALSE)) return FALSE;
+    info.StartingOffset = *offset; info.Length = size;
+    return DeviceIoControl(d->fdisk_fd, IOCTL_DISK_VERIFY, &info, sizeof(info),
+        NULL, 0, &bytes, NULL);
 }
-BOOL nt_fdisk_close(BYTE drive) { bx_ntvdm_opennt_raw_volume *volume; return raw_volume(drive,&volume); }
+BOOL nt_fdisk_close(BYTE drive) { return close_fdisk(get_fdisk_data(drive)); }
+void HostFdiskReset(void) { BYTE i; for (i=0u;i<number_of_fdisk;++i) close_fdisk(&fdisk_data_table[i]); }
 
 int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call)
 {
