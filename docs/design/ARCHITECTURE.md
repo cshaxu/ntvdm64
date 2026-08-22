@@ -71,8 +71,8 @@ CRT may enter this in-process composition.
 - The product has no project-authored host-mutation profile. It recovers the
   applicable original OpenNT host-service semantics, with only the smallest
   necessary composition shim. Retained legacy profile, overlay, and virtual
-  code is comparison material under `bx-vdm/bop-v1/`; it is not selectable or
-  extensible product behavior.
+  code is retained only in version history; it is not selectable or extensible
+  product behavior.
 - Historical code is normative source and ownership evidence. It is reused
   only through a bounded, independently auditable composition boundary; it is
   not a dependency on the unavailable historical product shell.

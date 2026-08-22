@@ -22,7 +22,7 @@
 | **部分 code complete** | source 已导入或入口可达，但当前局部 contract 尚有已知缺口、未跑测试或 active recovery。 | 不得因旧 fixture、selector 译码或“将来有 machine capability”而计为完成。 |
 | **端到端集成** | source-built guest 映像实际穿过跨族、机器和 host contract 并继续执行。 | 这是后续集成验证，不是本 tracker 的 BOP code-complete 门槛。 |
 
-**本次重审快照。** 按此标准，`50:xx` 的 73 项、`54:xx` 的 17 项、XMS 的 11 项与 top-level `59` 已达 code complete/local pass，共 **102/203**。仅 `52:09` 和 top-level `FE` 是部分 code complete；其余 **99 项**仍是入口浅表或仅 v1。依赖台账不把整个 OpenNT 树误说成 BOP 依赖：它覆盖当前已导入、已定位或已由 handler/lifecycle 证明为前置的源码；每当新发现可达 OpenNT 调用，必须先新增一条依赖记录，再接入或 defer。
+**本次重审快照。** 按此标准，`50:xx` 的 73 项、`54:xx` 的 17 项、XMS 的 11 项与 top-level `59` 已达 code complete/local pass，共 **102/203**。仅 `52:09` 和 top-level `FE` 是部分 code complete；其余 **99 项**仍是入口浅表或仅 v1。依赖台账不把整个 OpenNT 树误说成 BOP 依赖：它覆盖当前已导入、已定位或已由 handler/lifecycle 证明为前置的源码；每当新发现可达 OpenNT 调用，必须先新增一条依赖记录，再接入或 defer。M0 T239 已退役整个工作树中的旧 `bop-v1` provider/catalog/facade 及其测试；本表中的“仅 v1”仅表示历史证据或旧审计分级，绝不表示存在可达的 v1 实现。
 
 ## 依赖优先实施顺序
 
@@ -71,7 +71,7 @@ S 必须进行 source/route/fixture 的 no-bypass 复核，而不是预设仍有
 
 - 每行更新必须同时复核：原始 source 位置、active build-manifest 成员资格、实际 route、ABI/失败 witness、所依赖的 owner package。
 - 只允许把 SAS/CCPU/NT4 private ABI、host pointer、Win32 公开能力等差异放在有注释的 `src/bx-vdm/bop/shim/` 边界；不得把 DOS/BOP 语义移入 `bx-core` 或 `bx-mantle`。
-- `v1` 只能作为迁移证据；若 active v2 source mirror 已取代它，记录“仅 v1”不得被用作完成证据。
+- `v1` 只能作为版本历史中的迁移证据；若 active source mirror 已取代它，对应旧实现、测试和死工具必须随 code-complete 退役。记录“仅 v1”不得被用作完成证据，也不得暗示工作树仍保留旧 provider。
 - 每个 package 的 code-complete/local-pass 闭合先更新本表；native trace 只作为后续集成证据，不能反过来否定已通过局部测试的 code-complete 结论，且不得由 trace 命中自动创建零散 service patch。
 
 ### 现代 Win32 / x64 兼容性决策规则

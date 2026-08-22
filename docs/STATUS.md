@@ -2,34 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T238 S1** — closure delivery verified; no successor numeric T is
-admitted. The owner requested a stop before the next T admission.
+**Active: M0 T239 S1** — closed owner-approved retirement of superseded
+BOP-v1 code; awaiting the owner's next task admission.
 
 ## Active Packet
 
-### M0 T238 S1 — no-external-dependency no-bypass audit
+### M0 T239 S1 — code-complete BOP-v1 retirement
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T238 S1`, Ordinary Mode, single-person dual-role audit and closure. |
-| Admission And Approval | Owner instruction: “你现在就验，验完了关闭该T，在下一个T准入前停下”; the queue-head no-external candidate is formally admitted only for this audit. |
-| Objective | Independently revalidate the Td P6 frozen local slice—75 BOP rows plus 30 dependency rows—against active source routes, formal-manifest membership, declared local fixtures and no-v1/no-bypass selection; close the T if the freeze holds. |
-| Non-goals | Do not implement a new BOP, expand a local contract into a transferred machine/legacy/private-API owner, run trace-led recovery, or admit the external-compatibility candidate. |
-| Reference Baseline | Td P6 freeze in `etc/bop-list.md`, no-external proposal, formal MSVC x64 `/MT` Ninja manifest, T230/T231/T237 closure records. |
-| Files And ABI Surface | Documentation/evidence, formal disposable build root and existing fixtures; a discovered `59` P0 local loader defect may receive the smallest source-derived public-Win32 composition repair, without changing any BOP ABI or entering a transferred owner domain. |
-| Applicable Rules | Source-first recovery, selector-blind machine boundary, fixed-width checked ABI, MTSP/Td governance and disposable-build hygiene. |
-| Verification | Recount frozen tracker rows; inspect active dispatcher/manifest routes and v1 exclusion; execute a fresh formal Ninja graph and all declared in-slice focused fixtures; run documentation governance and diff review. |
-| Expected Markers | Exact 75+30 cardinality; every source unit/header has an active manifest/compiler route; no `bop-v1` source is selected by production ingress; focused fixtures and formal graph return zero. |
-| Asset Needs | Existing tracked OpenNT mirrors, formal manifest, MSVC x64 and Ninja only. |
-| Reporting Requirements | Record commands, scope, observations, confidence and any transfer in a supporting audit record and history; remove disposable build output after extracting the concise result. |
-| Stop Conditions | A real non-`59` local gap, a bypass into `bop-v1`, or a failed formal/fixture gate after the bounded `59` loader repair pauses closure; do not silently classify it as an external dependency or start candidate 2. |
-| Exit Criteria | All 105 frozen rows pass the stated source/route/fixture audit; T238 closure is committed and pushed; queue advances only as an unadmitted candidate list. |
-| Original Owner Request | “算了吧 你现在就验 验完了关闭该T 在下一个T准入前停下”. |
-| Similar-Issue Sweep | All frozen BOP and dependency owner groups, generic ingress/manifest, `bop-v1` selection, formal fixture declarations and tracker/queue cardinality. |
-| Exit Status | P1 audit/r1 exposed the BOP 59 Common Controls v5 ordinal load defect; the local v6 activation repair made r2 executable. The two remaining COMMAND failures were corrected as multisz and pending/re-entry test interpretations. Fresh r3 built 353 edges and the complete frozen sweep passed 31/31. T238 is **closed**; see [audit record](etc/operations/m0-t238-s1-no-external-no-bypass-audit-001.md) and [closure history](history/m0-t238-closure-20260822.md). |
-| Next Admission | None. Stop here and await owner direction before admitting the next queue candidate. |
+| Identifier Mode | `M0 T239 S1`, Ordinary Mode, single-person dual-role audit, deletion and closure. |
+| Admission And Approval | Owner instruction: “要求你每实现一个bop code complete就必须删除对应v1的代码，除非有被其他无法删除的v1代码使用。重开T任务完成清理。” |
+| Objective | Remove every superseded v1 provider, facade, registry branch, header, fixture and dead reference corresponding to a BOP now code-complete through the current OpenNT-derived route; record any narrowly retained v1 file and its still-unretired v1 consumer. |
+| Non-goals | Do not delete versioned mechanical ABI records merely because their names end in `_v1`; do not delete a v1 path serving an unfinished BOP without an owner-approved replacement; do not implement new BOP semantics. |
+| Reference Baseline | T238 closure, `etc/bop-list.md` code-complete ledger, current `src/bx-vdm/bop-v1/` inventory and formal manifest. |
+| Files And ABI Surface | `src/bx-vdm/bop-v1/`, dependent non-product headers/tests/manifests, the active tracker/status/history and a retirement ledger. No active BOP ABI may change. |
+| Applicable Rules | Source-first recovery, v1-not-product architecture rule, selector-blind machine boundary, MTSP governance and destructive-change hygiene. |
+| Verification | Establish reverse file/consumer map; delete eligible v1 code and tests; scan for residual selected references; formal Ninja build and focused current-v2 fixtures; documentation governance and diff review. |
+| Expected Markers | No code-complete BOP reaches a v1 provider or retains its v1-only tests/dead sources; every remaining v1 file names an unfinished consumer and a reason it cannot yet retire. |
+| Asset Needs | Current source tree, tracker, formal MSVC/Ninja graph and no external inputs. |
+| Reporting Requirements | Publish a per-file retain/delete ledger, including each shared v1 component's remaining consumer set; update tracker/closure history. |
+| Stop Conditions | A proposed deletion has an active current-v2 or unfinished-v1 consumer not covered by the stated rule; stop and record it rather than delete shared behavior blindly. |
+| Exit Criteria | All eligible code-complete BOP v1 material is deleted, residual v1 material is justified by named unfinished consumers, and formal/current-v2 checks pass; commit and push closure. |
+| Original Owner Request | “要求你每实现一个bop code complete就必须删除对应v1的代码 除非有被其他无法删除的v1代码使用。重开T任务完成清理。” |
+| Similar-Issue Sweep | Production manifest, generic ingress, all test sources, legacy headers, provider registry/catalog/facades and tracker claims. |
+| Exit Status | Closed: retirement inventory and deletion complete; formal-r3 `353/353`, 31/31 eligible current-route fixtures, all retained negative-route gates, documentation governance and diff review pass. |
+| Next Admission | None; owner direction required. |
 
 ## Latest Closure
+
+M0 T239 closes the working-tree retirement of every experimental BOP-v1
+provider, catalog, facade, legacy fixture and dead build/probe helper. The
+sole useful fixed-width request record is current provider-neutral ABI, not a
+legacy route. See the [T239 closure](history/m0-t239-closure-20260822.md).
 
 M0 T238 closes the no-external OpenNT BOP validation slice: the frozen 75 BOP
 and 30 dependency local contracts have a fresh 353-edge formal Ninja build and

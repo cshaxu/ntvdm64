@@ -4,7 +4,8 @@
  * The mantle knows only this fixed mechanical ABI.  BOP selector recognition
  * remains in bx-vdm.  A valid C4 C4 50 xx or C4 C4 54 xx window is terminally
  * owned by its imported OpenNT owner session: a missing or failing session
- * declines to the CPU exception path and must never enter bop-v1.  Other
+ * declines to the CPU exception path and must never enter a legacy provider.
+ * Other
  * selectors decline until their own OpenNT-shaped package is composed here.
  */
 
