@@ -11,10 +11,10 @@
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T236 S5`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | S5 is the next owner-approved item in the existing T236 plan after [S4 closure](history/m0-t236-s4-closure-20260821.md). |
+| Admission And Approval | S5 resumes after the owner-directed S6 closure. |
 | Objective | Reassess the imported COMMAND WOW helper calls, retaining directly composable OpenNT code and recording source-shaped unavailable results for unavailable historical composition. |
 | Non-goals | Do not implement WOW guest loading/execution, re-create private NT4 broker protocols, add a second session model, or use a trace hit to choose a leaf implementation. |
-| Reference Baseline | T236 S1--S4 are closed. Imported COMMAND worker/session and DEM DASD paths have their respective source-first closure records; full WOW ownership remains queued. |
+| Reference Baseline | T236 S1--S4 and S6 are closed. Imported COMMAND worker/session and DEM search paths have their respective source-first closure records; full WOW ownership remains queued. |
 | Files And ABI Surface | Imported COMMAND WOW call sites, their smallest compatibility seam, fixed-width session ABI, and focused source/current fixture(s) selected only after source/ABI/failure mapping. |
 | Applicable Rules | Source-first recovery, fixed-width adapter ABI, host non-intrusion, formal Ninja verification and documented divergences. |
 | Verification | Source/ABI/failure map; focused direct or explicit-unavailable result; formal source-current Ninja target; governance and diff checks. |
@@ -26,7 +26,7 @@
 | Original Owner Request | T236 plan: reassess `GetWowKernelCmdLine` and `GetWOWShortCutInfo`; reuse only what fits the fixed WOW root/session ABI or record a source-shaped unavailable outcome. |
 | Similar-Issue Sweep | COMMAND WOW helper calls, shortcut and kernel command-line paths, session ABI crossings, private broker imports, and any source-derived fallback. |
 
-**Current S5 progress:** admitted after S4's fixed-volume/machine-boundary
+**Current S5 progress:** resumed after S6's `VdmQueryDir` fallback-disposition
 closure; no S5 source or runtime result is claimed yet.
 
 Detailed T sequence and closure ledgers are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). S2 is closed at [its worker/broker closure](history/m0-t236-s2-closure-20260821.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
@@ -37,6 +37,10 @@ M0 T236 S4 is closed as the direct OpenNT DEM DASD/IOCTL recovery: imported
 `50:21`/`50:29`/`50:2A` source now has a full direct/source-failure/machine
 transfer ledger, a guarded malformed-IOCTL boundary, and a real disposable
 VHDX fixed-volume lifecycle witness. See the [S4 closure](history/m0-t236-s4-closure-20260821.md).
+M0 T236 S6 is closed as the OpenNT DEM search fallback disposition: the
+removed `VdmQueryDir` fast path is explicitly unavailable, while the imported
+slow reset resumes and exhausts search correctly after a source-owned handle
+eviction. See the [S6 closure](history/m0-t236-s6-closure-20260821.md).
 M0 T236 S3 is closed as the direct OpenNT DEM `50:32`/`50:33` recovery: its
 single imported dispatcher table, copied-register retry seam and unified
 opaque-handle route are recorded in the [S3 closure](history/m0-t236-s3-closure-20260821.md).

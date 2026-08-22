@@ -6,6 +6,7 @@
 #include "bop/shim/bx_ntvdm_host_handle_manager.h"
 
 typedef struct fixture_context { uint8_t guest[0x20000]; bx_ntvdm_host_handle_manager handles; } fixture_context;
+void DemHeartBeat(void);
 static int publish(void *s, HANDLE h, uint32_t *t, DWORD *e)
 { fixture_context *c = s; uint32_t guest_handle; if (!c || !bx_ntvdm_host_handle_manager_publish(&c->handles, h, BX_NTVDM_HOST_HANDLE_OWNED, &guest_handle, e)) return 0; if (t) *t = guest_handle; return 1; }
 static int lookup(void *s, uint32_t t, HANDLE *h)
@@ -26,7 +27,7 @@ int main(void)
     fixture_context state; bx_ntvdm_dem_direct_context direct;
     bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
     bx_ntvdm_cpu_result_v2 result; bx_ntvdm_demhndl_call call;
-    CHAR temporary[MAX_PATH], temporary_second[MAX_PATH], temporary_directory[MAX_PATH], pattern[MAX_PATH], renamed[MAX_PATH], created[MAX_PATH], first_name[14]; ULONG dta_location; USHORT current_pdb = 0x50u; uint32_t fcb_handle; HANDLE seed; DWORD seed_bytes;
+    CHAR temporary[MAX_PATH], temporary_second[MAX_PATH], temporary_directory[MAX_PATH], pattern[MAX_PATH], renamed[MAX_PATH], created[MAX_PATH], first_name[14]; ULONG dta_location; USHORT current_pdb = 0x50u; uint32_t fcb_handle; HANDLE seed; DWORD seed_bytes; unsigned tick;
     memset(&state, 0, sizeof(state)); memset(&direct, 0, sizeof(direct));
     if (!bx_ntvdm_host_handle_manager_initialize(&state.handles)) return 1;
     direct.magic = BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
@@ -71,12 +72,21 @@ int main(void)
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         state.guest[0x2000u + 30u] == 0u) return 3;
     memcpy(first_name, state.guest + 0x2000u + 30u, sizeof(first_name));
+    /* OpenNT's search heartbeat evicts an idle directory handle after 8640
+     * ticks.  The next original FindNext must reopen and FileFindReset.  On
+     * this product NtVdmControl(VdmQueryDir) is explicitly unavailable, so
+     * that original reset takes its in-source slow enumeration path. */
+    for (tick = 0u; tick < 8640u; ++tick) DemHeartBeat();
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     call.service = 0x0bu;
     if (!bx_ntvdm_demdisp_invoke(&call) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         state.guest[0x2000u + 30u] == 0u ||
         memcmp(first_name, state.guest + 0x2000u + 30u, sizeof(first_name)) == 0) return 4;
+    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
+    if (!bx_ntvdm_demdisp_invoke(&call) ||
+        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
+        result.cpu_delta.gpr16_values[0] != ERROR_NO_MORE_FILES) return 4;
     memcpy(state.guest + 0x1000u, pattern, strlen(pattern) + 1u);
     memset(state.guest + 0x1200u, 0, 52u);
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
@@ -166,6 +176,6 @@ int main(void)
     DeleteFileA(temporary);
     DeleteFileA(temporary_second);
     DeleteFileA(created);
-    puts("T230 S5 direct OpenNT demsrch/demfcb import: search lifecycle, tokenized FCB operations and PDB cleanup verified");
+    puts("T230 S5 direct OpenNT demsrch/demfcb import: slow-reset search lifecycle, tokenized FCB operations and PDB cleanup verified");
     return 0;
 }
