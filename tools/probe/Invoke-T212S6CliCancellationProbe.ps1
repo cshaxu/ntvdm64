@@ -9,7 +9,7 @@ $build = [IO.Path]::GetFullPath($BuildRoot)
 if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build directory: $build" }
 New-Item -ItemType Directory -Path $build | Out-Null
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$sources = @('src\cli\ntdos64_engine_worker_v1.c', 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c', 'tests\runner\ntdos64_engine_worker_v1_test.c') | ForEach-Object { Join-Path $root $_ }
+$sources = @('src\cli\ntdos64_engine_worker_v1.c', 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c', 'tests\runner\ntdos64_engine_worker_v1_test.c') | ForEach-Object { Join-Path $root $_ }
 foreach ($path in $sources + $vs) { if (-not (Test-Path -LiteralPath $path)) { throw "Missing T212 S6 input: $path" } }
 $exe = Join-Path $build 't212-s6-cli-cancellation.exe'
 $command = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' + (Join-Path $root 'src') + '" /I "' + (Join-Path $root 'src\cli') + '" /I "' + (Join-Path $root 'src\bx-mantle') + '" /Fe:"' + $exe + '" "' + ($sources -join '" "') + '"'

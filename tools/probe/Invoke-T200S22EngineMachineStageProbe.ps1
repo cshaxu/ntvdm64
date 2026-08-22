@@ -22,8 +22,8 @@ $profile = Join-Path $composition 'prepared\profile-v7.json'
 $byobRoot = Join-Path $root 'artifacts\inputs\t194-v6-normal-return-root-r1'
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 foreach ($input in @($baseline, $manifestPath, $objects, $profile, $byobRoot, $vs,
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c'),
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_run_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_run_v1.c'),
     (Join-Path $root 'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c'),
     (Join-Path $root 'src\bx-vdm\bx_ntvdm_normal_terminal_sequence_observation_v1.c'),
     (Join-Path $root 'tests\bx-mantle\bx_ntvdm_engine_direct_composition_v1_test.c'))) {
@@ -46,8 +46,8 @@ $includes = @('src', 'refs\bochs', 'refs\bochs\instrument\stubs', 'src\bx-core',
 $compile = 'cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 /D_CRT_SECURE_NO_WARNINGS ' +
     ($includes -join ' ') + ' /FI "' + $config + '" '
 $sources = @(
-    @{ Object = 'engine-contract.obj'; Source = 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c' },
-    @{ Object = 'engine-run.obj'; Source = 'src\bx-mantle\bx_ntvdm_engine_run_v1.c' },
+    @{ Object = 'engine-contract.obj'; Source = 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c' },
+    @{ Object = 'engine-run.obj'; Source = 'src\bx-vdm\bx_ntvdm_engine_run_v1.c' },
     @{ Object = 'generic-ud-bridge.obj'; Source = 'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c' },
     @{ Object = 'terminal-observation.obj'; Source = 'src\bx-vdm\bx_ntvdm_terminal_observation_v1.c' },
     @{ Object = 'normal-terminal-sequence-observation.obj'; Source = 'src\bx-vdm\bx_ntvdm_normal_terminal_sequence_observation_v1.c' },

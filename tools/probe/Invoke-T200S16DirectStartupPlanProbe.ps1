@@ -12,7 +12,7 @@ $baseline = Join-Path $root 'artifacts\build\t198-s74-dem-pdb-termination-r1'
 $manifestPath = Join-Path $root 'tools\build\t198-s50-bx-vdm-composition-manifest.json'
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 foreach ($path in @($s14, $baseline, $manifestPath, $vs,
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c'),
     (Join-Path $root 'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c'),
     (Join-Path $root 'tests\bx-mantle\bx_ntvdm_engine_direct_startup_plan_v1_test.c'))) {
     if (-not (Test-Path -LiteralPath $path)) { throw "Required S16 input missing: $path" }
@@ -35,7 +35,7 @@ $batch = Join-Path $build 'compile-s16.cmd'
 $batchLines = [System.Collections.Generic.List[string]]::new()
 $batchLines.Add('@echo off')
 $batchLines.Add('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul')
-$batchLines.Add($compile + '/Fo"' + $contractObject + '" "' + (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c') + '"')
+$batchLines.Add($compile + '/Fo"' + $contractObject + '" "' + (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c') + '"')
 $batchLines.Add('if errorlevel 1 exit /b %errorlevel%')
 $batchLines.Add($compile + '/Fo"' + $genericBridgeObject + '" "' + (Join-Path $root 'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c') + '"')
 $batchLines.Add('if errorlevel 1 exit /b %errorlevel%')

@@ -45,6 +45,30 @@ the formal manifest and retained generic catalog metadata.
 
 ## Outcome
 
-The audit confirms the original S3 result with the above precision.  No code
-defect was found.  `52:06..08` and `52:09` remain named cross-owner limits,
-not XMS-v1 gaps or completed guest-machine behavior.
+The audit confirms the original S3 result with the above XMS-source precision.
+`52:06..08` and `52:09` remain named cross-owner limits, not XMS-v1 gaps or
+completed guest-machine behavior.  The separate machine-boundary defect found
+by the broader sweep is corrected below.
+
+## Machine-boundary correction
+
+The related formal-machine sweep found two independent ownership defects that
+would otherwise make the preceding conclusion misleading:
+
+1. `bx_ntvdm_engine_run_v1` and its copied engine contract were compiled into
+   `bx-mantle` while directly binding DEM and COMMAND runtime sessions.  They
+   are composition code, not a mechanical Bochs lifecycle.  They are moved to
+   `bx-vdm`; the mantle now receives only the prepared selector-blind machine
+   stage records.
+2. `bx_ntvdm_extended_memory_v1` independently implemented handles, first-fit
+   allocation, reallocation, free-space accounting, and guest-address policy
+   inside `bx-mantle`.  It was not used by the admitted XMS mirror, whose
+   original `suballoc.c` already owns that policy.  The duplicate standalone
+   implementation and its fixture are removed rather than renamed as a
+   purportedly generic machine feature.
+
+The new `Test-T237S4MachineSemanticBoundary.ps1` checks the formal manifest
+and all formal core/mantle sources for these service terms.  A future UMB
+implementation may request a selector-blind physical-span capability, but it
+must be separately admitted with no XMS, UMB, DOS, BOP, handle or allocation
+policy in `bx-core` or `bx-mantle`.

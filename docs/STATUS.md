@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T237 S4** — active; manual XMS source-mirror and v1-retirement audit.
+**Active: M0 T237 S4** — active; manual XMS source-mirror, v1-retirement, and discovered machine-boundary repair audit.
 
 ## Active Packet
 
@@ -12,19 +12,19 @@
 | --- | --- |
 | Identifier Mode | `M0 T237 S4`, Ordinary Mode, single-person dual-role review. |
 | Admission And Approval | Owner explicitly reopens T237 for manual audit and explicitly declines DPMI admission. |
-| Objective | Independently inspect every `52:00..0B` source mirror, divergence, route, fixture and retired v1 identity; record any contradiction before another closure claim. |
+| Objective | Independently inspect every `52:00..0B` source mirror, divergence, route, fixture and retired v1 identity; correct any discovered `bx-core`/`bx-mantle` business-semantic contamination before another closure claim. |
 | Non-goals | Do not admit DPMI, implement a new XMS feature, restore v1, or claim that UMB/INT15/native guest continuity is complete. |
 | Reference Baseline | T237 S1/S2/S3 records, committed `4a711706`, the original `src/opennt/base/mvdm/xms.486/` sources, and the current formal manifest. |
-| Files And ABI Surface | `bop/opennt/xms`, `bop/shim/xms_*`, `bop/xms_v2_*`, XMS fixtures, `dem_v2_composition_bridge`, formal manifest, and every former XMS v1 path. |
+| Files And ABI Surface | `bop/opennt/xms`, `bop/shim/xms_*`, `bop/xms_v2_*`, XMS fixtures, engine composition contract/run entry, formal manifest, and every former XMS v1 path. |
 | Applicable Rules | Source-first recovery, owner boundaries, fixed-width adapter ABI, documentary separation of current status from closed history. |
-| Verification | Manual source-to-mirror comparison; all-service dispatch/ABI review; v1/provider/manifest sweep; independently rerun repeatable retirement gates and record exact results. |
+| Verification | Manual source-to-mirror comparison; all-service dispatch/ABI review; v1/provider/manifest sweep; enforce a formal core/mantle semantic-vocabulary gate; independently rerun repeatable retirement gates and record exact results. |
 | Expected Markers | A human-readable per-service audit ledger: original owner, retained body, divergence, live route, test evidence, and named unresolved owner. |
 | Asset Needs | Existing OpenNT source, current committed tree, formal Ninja manifest and no new imported source. |
 | Reporting Requirements | Record contradictions and corrections; distinguish source/package proof from machine/guest execution; do not infer closure from a prior fixture alone. |
 | Stop Conditions | Pause if a mirror lacks an original owner, an undocumented divergence changes semantics, a v1 provider remains live, or an unresolved prerequisite is being reported as success. |
 | Exit Criteria | Manual ledger covers all twelve slots; every divergence/owner/route/v1 result is classified and any discovered defect is either corrected and verified or explicitly retained as an open T237 item. |
 | Original Owner Request | `暂不准入，重开T237 我要手动审计`。 |
-| Similar-Issue Sweep | Original source files, dispatch table, all shims, generic ingress, fixtures, formal membership, generic legacy catalog metadata and retired paths. |
+| Similar-Issue Sweep | Original source files, dispatch table, all shims, generic ingress, fixtures, formal membership, generic legacy catalog metadata, retired paths, and all formal `bx-core`/`bx-mantle` sources. |
 
 M0 T236 is closed at [its reconciliation and owner-transfer record](history/m0-t236-closure-20260821.md).
 
@@ -33,6 +33,9 @@ recorded in [T237 S4 manual audit](etc/operations/m0-t237-s4-manual-xms-audit-00
 It confirms a precise distinction: `52:06` declines before the source body
 because a durable guest-byte seam is absent, whereas `52:07/08` execute their
 mirrored source bodies and return original empty-UMB `B1/B2` failures.
+The same review found and is correcting a real layering defect: engine/session
+composition is bx-vdm-owned, and the retired mantle extended-memory allocator
+must not remain as a parallel XMS-like policy.
 
 ## Current Work Record
 

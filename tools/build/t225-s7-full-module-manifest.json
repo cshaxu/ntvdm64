@@ -158,9 +158,6 @@
       "sources": [
         "src/bx-mantle/bx_ntvdm_a20_capability_v1.cc",
         "src/bx-mantle/bx_ntvdm_cancellation_controller_v1.cc",
-        "src/bx-mantle/bx_ntvdm_engine_contract_v1.c",
-        "src/bx-mantle/bx_ntvdm_engine_run_v1.c",
-        "src/bx-mantle/bx_ntvdm_extended_memory_v1.cc",
         "src/bx-mantle/bx_ntvdm_finite_run.cc",
         "src/bx-mantle/bx_ntvdm_generic_ud_bridge.cc",
         "src/bx-mantle/bx_ntvdm_first_fault_observation_v1.cc",
@@ -183,6 +180,8 @@
     {
       "name": "bx-vdm",
       "sources": [
+        "src/bx-vdm/bx_ntvdm_engine_contract_v1.c",
+        "src/bx-vdm/bx_ntvdm_engine_run_v1.c",
         "src/bx-vdm/bx_ntvdm_bios_memory_service.c",
         "src/bx-vdm/bop/opennt/xms/xms.c",
         "src/bx-vdm/bop/opennt/xms/suballoc.c",
@@ -992,27 +991,6 @@
         "ntdll.lib",
         "user32.lib"
       ]
-    },
-    {
-      "name": "t226-s4-extended-memory-mantle-fixture",
-      "source": "tests/bx-mantle/t199_s24_extended_memory_fixture.cc",
-      "libraries": [
-        "bx-vdm",
-        "bx-mantle",
-        "bx-core",
-        "opennt-host",
-        "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
     }
   ],
   "forbiddenInputs": [
@@ -1029,9 +1007,9 @@
       "source": "src/cli/ntdos64_native_cli.c",
       "libraries": [
         "cli",
+        "bx-vdm",
         "bx-mantle",
         "bx-core",
-        "bx-vdm",
         "opennt-host"
       ],
       "platformLibraries": [

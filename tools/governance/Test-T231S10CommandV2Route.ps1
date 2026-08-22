@@ -31,7 +31,7 @@ foreach ($source in @(
 Require ((@($bxVdm[0].sources) -join "`n") -notmatch 'bop-v1') 'Formal bx-vdm module retains a bop-v1 source.'
 
 $composition = Read-Required 'src/bx-vdm/bop/dem_v2_composition_bridge.c'
-$engine = Read-Required 'src/bx-mantle/bx_ntvdm_engine_run_v1.c'
+$engine = Read-Required 'src/bx-vdm/bx_ntvdm_engine_run_v1.c'
 $dispatcher = Read-Required 'src/bx-vdm/bop/opennt/command/cmddisp.c'
 $shim = Read-Required 'src/bx-vdm/bop/shim/command_misc_shim.c'
 Require ($composition -match 'bx_ntvdm_command_v2_generic_ud_recognizes' -and

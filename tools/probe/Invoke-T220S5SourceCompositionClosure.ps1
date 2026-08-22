@@ -43,7 +43,6 @@ New-Item -ItemType Directory -Force -Path $objects | Out-Null
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
 $seedOwnedSources = @(
     'src/bx-mantle/bx_ntvdm_a20_capability_v1.cc',
-    'src/bx-mantle/bx_ntvdm_extended_memory_v1.cc',
     'src/bx-core/memory/misc_mem.cc'
 )
 $sources = @($manifest.compileSources | Where-Object {

@@ -12,8 +12,8 @@ $baseline = Join-Path $root 'artifacts\build\t198-s74-dem-pdb-termination-r1'
 $manifestPath = Join-Path $root 'tools\build\t198-s50-bx-vdm-composition-manifest.json'
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 foreach ($path in @($s94, $baseline, $manifestPath, $vs,
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c'),
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_run_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_run_v1.c'),
     (Join-Path $root 'tests\bx-mantle\t214_s3_composition_owner_fixture.c'))) {
     if (-not (Test-Path -LiteralPath $path)) { throw "Missing T214 S3 input: $path" }
 }
@@ -37,9 +37,9 @@ $includes = @('src', 'refs\bochs', 'refs\bochs\instrument\stubs', 'src\bx-core',
 $compile = 'cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 /D_CRT_SECURE_NO_WARNINGS ' + ($includes -join ' ') + ' /FI "' + $config + '" '
 $commands = [System.Collections.Generic.List[string]]::new()
 $commands.Add($compile + '/Fo"' + $contractObject + '" "' +
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c') + '"')
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c') + '"')
 $commands.Add($compile + '/Fo"' + $entryObject + '" "' +
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_run_v1.c') + '"')
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_run_v1.c') + '"')
 $commands.Add($compile + '/Fo"' + $testObject + '" "' +
     (Join-Path $root 'tests\bx-mantle\t214_s3_composition_owner_fixture.c') + '"')
 $commands.Add($compile + '/Fo"' + $genericBridgeObject + '" "' +

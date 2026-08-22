@@ -12,7 +12,7 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 if (-not (Test-Path -LiteralPath $vs)) { throw "Missing MSVC environment: $vs" }
 $sources = @(
     'src\cli\ntdos64_lifecycle_v1.c',
-    'src\bx-mantle\bx_ntvdm_engine_contract_v1.c',
+    'src\bx-vdm\bx_ntvdm_engine_contract_v1.c',
     'tests\runner\ntdos64_lifecycle_v1_test.c'
 ) | ForEach-Object { Join-Path $root $_ }
 foreach ($source in $sources) { if (-not (Test-Path -LiteralPath $source)) { throw "Missing S2 source: $source" } }

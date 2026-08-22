@@ -10,8 +10,8 @@ if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build
 New-Item -ItemType Directory -Path $build | Out-Null
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (-not (Test-Path -LiteralPath $vs)) { throw "Missing MSVC environment: $vs" }
-$contract = Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c'
-$entry = Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_run_v1.c'
+$contract = Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c'
+$entry = Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_run_v1.c'
 $test = Join-Path $root 'tests\bx-mantle\bx_ntvdm_engine_run_v1_test.c'
 $exe = Join-Path $build 't200-s13-native-engine-lifecycle.exe'
 $command = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' +

@@ -23,8 +23,8 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 foreach ($path in @($baseline, $objects, $profile, $byobRoot, $target, $vs,
     (Join-Path $root 'src\cli\ntdos64_native_cli.c'),
     (Join-Path $root 'src\cli\byob_target_selection.c'),
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_contract_v1.c'),
-    (Join-Path $root 'src\bx-mantle\bx_ntvdm_engine_run_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c'),
+    (Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_run_v1.c'),
     (Join-Path $root 'src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c'))) {
     if (-not (Test-Path -LiteralPath $path)) { throw "Required S27 input missing: $path" }
 }
@@ -49,8 +49,8 @@ $compile = 'cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 /D_CRT_SECURE_NO_
 $sources = @(
     @{ Object='native-cli.obj'; Source='src\cli\ntdos64_native_cli.c' },
     @{ Object='target-selection.obj'; Source='src\cli\byob_target_selection.c' },
-    @{ Object='engine-contract.obj'; Source='src\bx-mantle\bx_ntvdm_engine_contract_v1.c' },
-    @{ Object='engine-run.obj'; Source='src\bx-mantle\bx_ntvdm_engine_run_v1.c' },
+    @{ Object='engine-contract.obj'; Source='src\bx-vdm\bx_ntvdm_engine_contract_v1.c' },
+    @{ Object='engine-run.obj'; Source='src\bx-vdm\bx_ntvdm_engine_run_v1.c' },
     @{ Object='generic-ud-bridge.obj'; Source='src\bx-vdm\bx_ntvdm_vdm_generic_ud_bridge_v1.c' }
 )
 foreach ($relative in $AdditionalCliSources) {

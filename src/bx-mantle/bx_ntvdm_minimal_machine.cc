@@ -14,7 +14,6 @@
 #include "bx_ntvdm_minimal_sim.h"
 #include "bx_ntvdm_minimal_machine.h"
 #include "bx_ntvdm_a20_capability_v1.h"
-#include "bx_ntvdm_extended_memory_v1.h"
 #include "bx_ntvdm_port_action_v1.h"
 
 static logfunctions bx_ntvdm_minimal_machine_log;
@@ -85,7 +84,6 @@ bx_ntvdm_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
   bx_pc_system.set_enable_a20(1);
   bx_cpu.reset(BX_RESET_HARDWARE);
   bx_ntvdm_a20_capability_v1_set_lifecycle_active(1u);
-  bx_ntvdm_extended_memory_v1_set_lifecycle_active(1u);
   bx_ntvdm_port_action_v1_set_lifecycle_active(1u);
 
   return BX_NTVDM_MINIMAL_MACHINE_OK;
@@ -133,7 +131,6 @@ bx_ntvdm_minimal_machine_status bx_ntvdm_minimal_machine_c::cleanup(void)
     memory_owned = 0;
   }
   bx_ntvdm_a20_capability_v1_set_lifecycle_active(0u);
-  bx_ntvdm_extended_memory_v1_set_lifecycle_active(0u);
 
   return BX_NTVDM_MINIMAL_MACHINE_OK;
 }
