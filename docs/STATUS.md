@@ -3,7 +3,7 @@
 ## Current Work
 
 **Active: M0 T237 S5** — closure delivery verified and pushed; no successor
-numeric T is admitted. M0 Td S1 P5 aligns the candidate boundary below.
+numeric T is admitted. M0 Td S1 P6 freezes the candidate inventory below.
 
 ## Active Packet
 
@@ -12,7 +12,7 @@ numeric T is admitted. M0 Td S1 P5 aligns the candidate boundary below.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T237 S5 P1--P2`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | Owner-approved XMS S5 closure and owner-directed P2 `59` follow-up; Td P5 changes governance only. |
+| Admission And Approval | Owner-approved XMS S5 closure and owner-directed P2 `59` follow-up; Td P5/P6 change governance and freeze the next candidate inventory only. |
 | Objective | Close the XMS source/ABI package and the owner-directed `BOP_NOSUPPORT` follow-up without expanding into machine UMB allocation, keyboard/IVT, or other top-level selectors. |
 | Non-goals | Do not add physical UMB, keyboard/IVT, WOW product-shell, other top-level, or cross-family execution behavior. |
 | Reference Baseline | Imported OpenNT XMS and `nt_bop.c`/`nt_error.c` source, formal manifest, tracker and T237 closure evidence. |

@@ -30,8 +30,9 @@ leaf profile and preserves its original failure rule.
 
 ## Admission plan
 
-1. Freeze the eligible tracker-ID set, including its internal dependency DAG,
-   and record the source/ABI/failure map for every node.
+1. Start from the Td P6 frozen local slice: 75 BOP entries and 30 OpenNT
+   dependency rows. Recompute the set if the tracker changes; do not infer
+   eligibility from a selector number or trace hit.
 2. Recover each shared original owner file as one group, using original source
    and a named shim only for already-supported public host ABI differences.
 3. Close each producer/consumer chain inside the frozen slice, preserving
@@ -46,3 +47,13 @@ Every frozen ID is either source/ABI complete with its declared local
 lifecycle, or has a source-proven original failure/no-op. Any newly exposed
 machine, legacy API or external cross-owner dependency transfers—not
 silently—to candidate 2 through the tracker.
+
+## Current admission fact
+
+The current frozen slice is already recorded code-complete/local-pass. Its
+first S is therefore a source/route/fixture no-bypass audit: it either finds a
+real missing local contract and recovers it within this T, or closes without
+inventing implementation work and advances the queue to external
+compatibility. `BOP-DEPENDENCY-042` is explicitly excluded because its
+historical CCPU/SAS/DLL/CSR composition is external, despite its retained
+source-defined failure reference.

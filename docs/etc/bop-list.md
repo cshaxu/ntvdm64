@@ -47,6 +47,26 @@
 
 **当前重排结论。** 下一轮队列不应机械按 `52 → 53 → 57 → WOW` 的族编号推进；应先从 P1/P2 中尚未达到“原始 body + ABI 回归”的 leaf/group 取包，再按 P3–P8 建立本地执行连续性。P7 是多个高层包的共同阻塞项，但它应只提供 selector-blind machine capability，绝不实现 BOP/DOS 语义。
 
+## 无外部依赖候选 T 准入冻结（M0 Td S1 P6，2026-08-22）
+
+这里的“无外部依赖”是**已声明 local contract**的资格，不是假装一个
+同一 BOP 没有未来 machine/Redirector/WOW/guest 分支。某行的最低优先级为
+`P0..P6` 时，它的本地 source/ABI/lifecycle 路径属于本候选；同一行标出的
+`P7+` 扩展仍明确转移到外部兼容候选。这个口径与本表的
+code-complete/local-pass 定义一致，且不按 trace 选择服务。
+
+| 行类 | 冻结范围 | 行数 | 当前 local-pass | 外部转移 |
+| --- | --- | ---: | ---: | --- |
+| BOP 入口 | DEM：`50:00..10`、`12..1C`、`1E..20`、`22`、`24..28`、`2B..33`、`3B..3C`、`3F..44`、`46`；COMMAND：`54:00..10`；XMS：`52:04..05`；top-level：`59` | **75** | **75** | 每行现有 `P7+` 成功/设备/远程/WOW/guest-extension 分支。 |
+| OpenNT 底层依赖 | DEM `BOP-DEPENDENCY-001..014`、`018`；COMMAND `019..033` | **30** | **30** | 每行现有 `P7+` 分支按原 tracker owner 转移。 |
+| 排除的近似匹配 | `BOP-DEPENDENCY-042` (`nt_bop.c`) | **1** | 0 | 依赖 CCPU/SAS/DLL/CSR 私有历史宿主组合；即使带 `P0` 失败语义，也不是本地可组合 source body。 |
+
+**冻结结论：** 当前首包共有 **105 行（75 BOP + 30 dependency）**，其已声明
+local contract 已全部有 code-complete/local-pass 记录。因此它若被准入，首个
+S 必须进行 source/route/fixture 的 no-bypass 复核，而不是预设仍有 105 行待
+实现；若复核未发现缺口，应立即收口并将实施重心移至外部兼容候选。任何新发现
+的本地依赖必须先以 `BOP-DEPENDENCY-…` 行加入本表，再重新计算冻结数。
+
 ## 更新规则
 
 - 每行更新必须同时复核：原始 source 位置、active build-manifest 成员资格、实际 route、ABI/失败 witness、所依赖的 owner package。

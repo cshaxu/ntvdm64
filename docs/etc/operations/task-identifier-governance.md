@@ -12,6 +12,7 @@ numeric T or displacing the active product packet in Status:
 | M0 Td S1 P3 | Complete-document inventory and hash-verified migration control. |
 | M0 Td S1 P4 | BOP owner-package sequencing governance. |
 | M0 Td S1 P5 | Merge no/low-dependency and purely internal BOP closure into one no-external-dependency candidate T; reconcile T237 and tracker closure facts. |
+| M0 Td S1 P6 | Freeze the no-external-dependency local slice at 75 BOP entries plus 30 dependency rows, and record its current all-local-pass disposition. |
 
 ## Hierarchy
 
