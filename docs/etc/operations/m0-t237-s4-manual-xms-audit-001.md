@@ -56,10 +56,11 @@ The related formal-machine sweep found two independent ownership defects that
 would otherwise make the preceding conclusion misleading:
 
 1. `bx_ntvdm_engine_run_v1` and its copied engine contract were compiled into
-   `bx-mantle` while directly binding DEM and COMMAND runtime sessions.  They
-   are composition code, not a mechanical Bochs lifecycle.  They are moved to
-   `bx-vdm`; the mantle now receives only the prepared selector-blind machine
-   stage records.
+   `bx-mantle` while directly binding DEM and COMMAND runtime sessions.  The
+   contract and VDM composition wrapper move to `bx-vdm`; the pure Bochs
+   stage/entry/execute/reset/cancellation sequence remains in a mantle-owned,
+   selector-blind machine runner.  Thus mantle receives prepared machine-stage
+   records but owns their native mechanical execution.
 2. `bx_ntvdm_extended_memory_v1` independently implemented handles, first-fit
    allocation, reallocation, free-space accounting, and guest-address policy
    inside `bx-mantle`.  It was not used by the admitted XMS mirror, whose

@@ -165,6 +165,7 @@
         "src/bx-mantle/bx_ntvdm_software_interrupt_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_interrupt_return_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
+        "src/bx-mantle/bx_ntvdm_machine_engine_v1.c",
         "src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc",
         "src/bx-mantle/bx_ntvdm_port_action_v1.cc",
         "src/bx-mantle/bx_ntvdm_minimal_machine.cc",
