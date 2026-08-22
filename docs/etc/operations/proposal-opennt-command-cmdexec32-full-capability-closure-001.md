@@ -17,11 +17,10 @@ that its cross-owner lifecycle has closed.
 
 ## Queue relationship
 
-This is a P13 supporting workstream inside candidate 2,
-**External compatibility, machine and legacy-composition BOP closure**. It is
-admitted only after the required native owner contracts are complete; it is no
-longer an independent queue position. Candidate 4 then audits its integrated
-result against the complete tracker.
+This is the admission plan for queue candidate 9, **COMMAND `cmdExec32`
+full-capability composition closure**.  It is admitted only after the
+required native owner contracts are complete; candidate 10 then audits its
+integrated result against the complete tracker.
 ## Boundary
 
 This is a late composition and closure package, not a place to reimplement a

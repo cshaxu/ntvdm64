@@ -8,12 +8,10 @@ disposition for genuinely diagnostic-only or excluded facilities.
 
 ## Queue relationship
 
-This is a supporting owner-workstream plan, not an independent queue position.
-The dependency-driven queue admits it only inside candidate 2,
-**External compatibility, machine and legacy-composition BOP closure**, after
-its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
-follow the tracker’s Win32/x64 compatibility decision rule and may not use its
-former family position to bypass lower-dependency work.
+This is the admission plan for queue candidate 7, **OpenNT VDD, debugger and
+top-level event/console recovery**.  It may be admitted only after its
+machine event/device prerequisites and product-visible endpoint slice have
+been frozen.
 ## Boundary
 
 OpenNT remains owner of debugger/VDD lifecycle and failure contracts.  The

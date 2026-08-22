@@ -46,7 +46,7 @@ leaf profile and preserves its original failure rule.
 Every frozen ID is either source/ABI complete with its declared local
 lifecycle, or has a source-proven original failure/no-op. Any newly exposed
 machine, legacy API or external cross-owner dependency transfers—not
-silently—to candidate 2 through the tracker.
+silently—to the applicable later queue candidate through the tracker.
 
 ## Current admission fact
 

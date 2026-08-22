@@ -2,18 +2,16 @@
 
 ## Purpose
 
-Recover the complete OpenNT XMS family (`52:xx`) for one declared profile,
-including A20, extended-memory allocation/move/lock, UMB and the relevant
-INT 15 coordination.
+The XMS mirror is code-complete except `52:09`; recover its remaining original
+keyboard/INT 15 coordination for the declared profile.  The already-closed
+A20, allocation/move/lock and empty-UMB failure contracts are not reopened.
 
 ## Queue relationship
 
-This is a supporting owner-workstream plan, not an independent queue position.
-The dependency-driven queue admits it only inside candidate 2,
-**External compatibility, machine and legacy-composition BOP closure**, after
-its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
-follow the tracker’s Win32/x64 compatibility decision rule and may not use its
-former family position to bypass lower-dependency work.
+This is supporting owner guidance for queue candidate 2, **PC keyboard, IVT
+and INT 15h compatibility recovery**.  Its admission freezes `52:09` and the
+corresponding keyboard/INT15 dependency rows; it does not reopen the other 11
+locally closed XMS endpoints.
 ## Boundary
 
 Bochs owns CPU/memory/A20 machine mechanics through `bx-core` and

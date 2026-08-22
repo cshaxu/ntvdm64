@@ -7,12 +7,9 @@ collection of protected-mode service stubs.
 
 ## Queue relationship
 
-This is a supporting owner-workstream plan, not an independent queue position.
-The dependency-driven queue admits it only inside candidate 2,
-**External compatibility, machine and legacy-composition BOP closure**, after
-its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
-follow the tracker’s Win32/x64 compatibility decision rule and may not use its
-former family position to bypass lower-dependency work.
+This is the admission plan for queue candidate 5, **OpenNT DPMI protected-mode
+owner-package recovery**.  It may be admitted only after the protected-mode
+machine dependency slice and every `53:xx` source/ABI/failure row are frozen.
 ## Boundary
 
 Bochs owns protected-mode execution, descriptor checks and architectural

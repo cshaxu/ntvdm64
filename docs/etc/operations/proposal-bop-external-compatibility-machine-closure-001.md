@@ -1,11 +1,12 @@
-# Proposal: External Compatibility, Machine And Legacy-Composition BOP Closure
+# Proposal: External Compatibility, Machine And Legacy-Composition Dependency Map
 
 ## Purpose
 
-Resolve the BOP tracker’s hard dependencies after the no-external-dependency
-layer: selector-blind bx machine/BIOS mechanics, modern x64
-compatibility for historical host composition, DPMI, Redirector, WOW16,
-VDD/debugger, and NTDOS EXEC/PSP/parent return.
+Record the BOP tracker’s hard-dependency topology after the
+no-external-dependency layer.  It coordinates selector-blind machine/BIOS
+mechanics, modern x64 compatibility for historical host composition, DPMI,
+Redirector, WOW16, VDD/debugger, and NTDOS EXEC/PSP/parent return; it is not a
+single implementation package.
 
 ## Boundary
 
@@ -17,11 +18,22 @@ reuse original source first, use an equivalent public-API shim only when it
 preserves the observable contract, otherwise retain original failure/defer or
 obtain an owner decision.
 
+## Candidate relationship
+
+This document is a dependency map, not a queue candidate and not an admission
+brief.  The queue now admits the following bounded packages separately: first
+the `BOP 12h` conventional-memory reset/query component; then keyboard/IVT/
+INT 15; guest EXEC; Redirector; DPMI; WOW16; debugger/VDD; evidence-admitted
+remaining machine devices; and finally `cmdExec32` cross-owner composition.
+Each package freezes its own tracker rows and exit rule before it obtains a
+numeric T identifier.
+
 ## Workstreams
 
 | Workstream | Tracker dependency class | Supporting proposal |
 | --- | --- | --- |
-| bx machine/BIOS | P7 mechanical prerequisites | `proposal-bx-machine-bios-selector-owner-package-completion-001.md` |
+| SoftPC conventional memory | earliest reached machine dependency | `proposal-softpc-bios-conventional-memory-recovery-001.md` |
+| bx machine/BIOS device work | later P7 mechanics, individually admitted | `proposal-bx-machine-bios-selector-owner-package-completion-001.md` |
 | XMS | P7 A20/extended-memory/UMB/INT15 | `proposal-opennt-xms-owner-package-completion-001.md` |
 | guest EXEC/parent return | P8 NTDOS PSP/arena/JFN lifecycle | `proposal-ntdos-command-guest-exec-parent-return-001.md` |
 | DPMI | P9 protected mode/LDT/IDT/exception/memory | `proposal-opennt-dpmi-owner-package-completion-001.md` |
@@ -30,19 +42,10 @@ obtain an owner decision.
 | VDD/debug/top-level | P12 events, console/input and notifications | `proposal-opennt-debugger-vdd-top-level-owner-package-completion-001.md` |
 | cross-owner lifecycle | P13 only after native owners are complete | `proposal-opennt-command-cmdexec32-full-capability-closure-001.md` |
 
-## Admission plan
+## Planning rule
 
-1. Freeze the target tracker slice and make an API/ABI/machine decision ledger
-   for each dependency: direct reuse, minimal public-API shim, source-defined
-   failure/defer, or owner decision.
-2. Complete one workstream at a time with original owner source, its declared
-   machine or host seam, and full local family regression.
-3. After each workstream, update its BOP/dependency rows and run one bounded
-   native observation; do not create a service patch from a trace hit.
-
-## Exit rule
-
-Each selected hard dependency has a tested owner closure or explicit,
-source-proven unavailable disposition. Remaining cross-owner lifecycle work
-is transferred only to the post-code-complete proposal, then candidate 3
-reconciles the full tracker.
+For every later workstream, freeze its target tracker rows and make an
+API/ABI/machine decision ledger: direct reuse, minimal public-API shim,
+source-defined failure/defer, or owner decision.  Complete one original-owner
+package at a time; after it closes, update its rows and run at most one bounded
+native observation.  A trace hit never creates an unplanned leaf patch.

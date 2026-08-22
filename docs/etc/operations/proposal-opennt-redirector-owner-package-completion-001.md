@@ -8,12 +8,10 @@ unavailable fallback.
 
 ## Queue relationship
 
-This is a supporting owner-workstream plan, not an independent queue position.
-The dependency-driven queue admits it only inside candidate 2,
-**External compatibility, machine and legacy-composition BOP closure**, after
-its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
-follow the tracker’s Win32/x64 compatibility decision rule and may not use its
-former family position to bypass lower-dependency work.
+This is the admission plan for queue candidate 4, **OpenNT Redirector
+owner-package recovery**.  It may be admitted only after its whole `57:xx`
+and related dependency slice has been frozen; it may not turn local DEM access
+or the existing COMMAND child record into an implicit redirector.
 ## Boundary
 
 The original `VDMREDIR`/`VrDispatch` tables and layouts remain the authority.

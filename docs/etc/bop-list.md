@@ -37,7 +37,9 @@
 | P4 | DTA/FCB search 与 PDB 清理：在 P2/P3 的 namespace/handle seam 上恢复整组状态机。 | `50:07/09..0C/20/2C..2F/3C` |
 | P5 | COMMAND 单会话 bootstrap/registration/console-local state：先建立命令、stream token 与 session 的同一合同。 | `54:00/01/03/06/07/09`（真实 console-input 注入仍转 P12） |
 | P6 | 本地 child lifecycle：save-world → child record → pending/resume → exit result；不假装 DOS 父进程恢复。 | `54:08/0A/0B` |
-| P7 | selector-blind machine prerequisite：RAM/A20、interrupt/IVT、BIOS、keyboard/video、block-media、run/stop/resume。 | `50:11/1D/21/23/29/2A`、`52:00..03/06..0B`、`5A/5C/5D/5F/FD/FE` |
+| P7a | first reached selector-blind machine prerequisite：SoftPC reset-owned conventional-memory state and `BIOS[12] -> memory_size`。 | `BOP-DEPENDENCY-091`；its only admitted guest caller is the `50:11` post-return bootstrap path. |
+| P7b | selector-blind keyboard/IVT/INT 15 prerequisite。 | `52:09` and the corresponding keyboard dependency; `5C` only if the source audit proves shared ownership. |
+| P7c | later individually admitted selector-blind machine prerequisites：PIC/IRQ、video、block-media、idle/stop and mode transition。 | remaining `50:xx` machine branches、`5A/5D/5F/FD/FE`；never one blanket device enablement. |
 | P8 | guest-owned DOS `EXEC` / PSP / arena / JFN / parent-return；消费 P6 和 P7，不向 host worker 倒灌 DOS 语义。 | guest `EXEC` + ordinary `54:0B` continuation |
 | P9 | 完整 DPMI：必须先有 P7 的 protected-mode、LDT/IDT、fault/IRET 与 extended-memory base。 | `53:00..18` |
 | P10 | Redirector IPC/network：在 P3/P6 的 handle/stream 合同上扩展 pipe、mailslot、network completion。 | `57:00..31`、`50:47/48` |
@@ -182,6 +184,7 @@ OpenNT 原始调用遇到 NT4 私有 API、已删除 API、现代 Win32 不再�
 | `BOP-DEPENDENCY-088` | `src/opennt/base/mvdm/dos/v86/doskrnl/dos/msdata.asm` | NTDOS guest EXEC/PSP/JFN/parent-return source package; consumes ordinary COMMAND completion | 未接入 code route / 仅依赖证据；等待对应 owner package。 | guest-owned P8 package; cannot be absorbed into `cmdexec.c` or bx-mantle | P8 |
 | `BOP-DEPENDENCY-089` | `src/opennt/base/mvdm/dos/v86/doskrnl/dos/dostab.asm` | NTDOS guest EXEC/PSP/JFN/parent-return source package; consumes ordinary COMMAND completion | 未接入 code route / 仅依赖证据；等待对应 owner package。 | guest-owned P8 package; cannot be absorbed into `cmdexec.c` or bx-mantle | P8 |
 | `BOP-DEPENDENCY-090` | `src/opennt/base/mvdm/dos/v86/doskrnl/{dos/*.asm,bios/*.asm} reachable dependency set` | remaining DOS kernel/BIOS source closure for EXEC, parent restore, INT/boot lifecycle | 未接入 code route / 仅依赖证据；等待对应 owner package。 | P8 guest EXEC plus P7 machine/BIOS; add individual rows when an exact caller is reached | P7/P8 |
+| `BOP-DEPENDENCY-091` | `src/opennt/base/mvdm/softpc.new/base/bios/{bios.c,mem_size.c,reset.c}` plus `base/inc/{bios.h,sas.h}` | Reached SoftPC BIOS conventional-memory contract: guest bootstrap's `C4 C4 12` selects `BIOS[0x12] -> memory_size`, which loads reset-owned `MEMORY_VAR` and sets low-16-bit `AX`. | 未接入 current source route：existing adapter-local hard-coded helper is evidence only and also recognizes unrelated `15h/AH=88h`; it is not the source-shaped active provider. | First machine candidate must import/recover the original owner through a smallest SAS/CCPU compatibility seam, with a reset-owned opaque mantle value. No keyboard, PIC, video, media or generic BIOS scope is implied. | P7a |
 
 ## 1. DEM / DOS（73）
 
@@ -439,6 +442,6 @@ OpenNT 原始调用遇到 NT4 私有 API、已删除 API、现代 Win32 不再�
 | Debugger/VDD | 16 | **0 complete**：selectors 已知、全部 deferred。 | debugger/VDD/event/console package。 |
 | Top-level/machine | 9 | **1 complete**：`59` 已按原始 Ignore/return 合同接入；其余 device/firmware lifecycle 未整体恢复。 | bx machine/BIOS/top-level package。 |
 
-**重审计数（code complete / 局部测试标准）：** **102 complete、2 partial、99 未完成**，合计 203 个 BOP。非 BOP 依赖共 90 行，其中 **38 complete、3 partial、49 未进入 code route**。完整 CLI/外部二进制的连续执行是后续集成资料，不会倒扣上述 code-complete 数量。
+**重审计数（code complete / 局部测试标准）：** **102 complete、2 partial、99 未完成**，合计 203 个 BOP。非 BOP 依赖共 91 行，其中 **38 complete、3 partial、50 未进入 code route**。完整 CLI/外部二进制的连续执行是后续集成资料，不会倒扣上述 code-complete 数量。
 
 **一致性门槛：** 下列脚本/数据应始终同本表一致：`docs/etc/research/t219-s2-t200-canonical-endpoint-inventory-001.json`、`docs/etc/research/t225-s57-bop-owner-package-profile-ledger-001.json`、各 owner-package proposal、formal Ninja manifest。当前本表的可调用条目数必须为 **203**。

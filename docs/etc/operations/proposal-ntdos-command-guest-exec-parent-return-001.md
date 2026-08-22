@@ -9,12 +9,10 @@ between a closed host `cmdExec32` worker and continuous guest execution.
 
 ## Queue relationship
 
-This is a supporting owner-workstream plan, not an independent queue position.
-The dependency-driven queue admits it only inside candidate 2,
-**External compatibility, machine and legacy-composition BOP closure**, after
-its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
-follow the tracker’s Win32/x64 compatibility decision rule and may not use its
-former family position to bypass lower-dependency work.
+This is the admission plan for queue candidate 3, **NTDOS guest EXEC and
+parent-return recovery**.  It may be admitted only after its tracker rows and
+machine prerequisites are frozen; its package boundary may not expand into a
+COMMAND host broker or a machine-device task.
 ## Boundary
 
 NTDOS/COMMAND guest sources own DOS process semantics. `bx-vdm` may only pass

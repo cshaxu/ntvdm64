@@ -8,12 +8,9 @@ contract.  WOW16 is a target capability, not a permanent negative fixture.
 
 ## Queue relationship
 
-This is a supporting owner-workstream plan, not an independent queue position.
-The dependency-driven queue admits it only inside candidate 2,
-**External compatibility, machine and legacy-composition BOP closure**, after
-its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
-follow the tracker’s Win32/x64 compatibility decision rule and may not use its
-former family position to bypass lower-dependency work.
+This is the admission plan for queue candidate 6, **OpenNT WOW16 owner-package
+recovery**.  It may be admitted only after its NE guest, COMMAND and required
+DPMI dependency rows have a declared closure/disposition.
 ## Boundary
 
 Guest NE loader/runtime and DPMI guest code remain OpenNT guest owners.

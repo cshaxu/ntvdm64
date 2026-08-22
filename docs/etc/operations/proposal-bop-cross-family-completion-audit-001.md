@@ -2,8 +2,10 @@
 
 ## Purpose
 
-This candidate is admitted only after the first two dependency-driven BOP implementation packages close: no-external-dependency source closure and external compatibility/machine/legacy-composition closure. It is a closure audit and
-integration task, not a ninth implementation family.
+This candidate is admitted only after the selected dependency-driven owner
+packages in queue candidates 1 through 9 have their declared
+code/ABI-complete or source-proven unavailable disposition. It is a closure
+audit and integration task, not another implementation family.
 
 ## Required inputs
 
