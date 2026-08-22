@@ -12,6 +12,14 @@
 #include <windows.h>
 #include <commctrl.h>
 
+/* Modern common-controls v5 exports no TaskDialogIndirect entry.  The OpenNT
+ * source used a host-owned Abort/Ignore dialog; this is the smallest public
+ * Win32 composition needed to retain its two-choice contract without a
+ * private NT4 resource/CSRSS shell.  Keep this activation request local to
+ * the source-derived seam: bx-core/bx-mantle and unrelated BOP providers
+ * remain independent of GUI controls. */
+#pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+
 #include "top_level_nosupport_shim.h"
 
 static __declspec(thread) DWORD g_seen_reasons;

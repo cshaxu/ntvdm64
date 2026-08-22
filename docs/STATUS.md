@@ -2,32 +2,33 @@
 
 ## Current Work
 
-**Active: M0 T237 S5** — closure delivery verified and pushed; no successor
-numeric T is admitted. M0 Td S1 P6 freezes the candidate inventory below.
+**Active: M0 T238 S1** — owner-approved final no-external-slice validation.
+This packet closes after its one no-bypass audit; no successor numeric T is
+admitted before the owner reviews that closure.
 
 ## Active Packet
 
-### M0 T237 S5 — closure delivery
+### M0 T238 S1 — no-external-dependency no-bypass audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T237 S5 P1--P2`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | Owner-approved XMS S5 closure and owner-directed P2 `59` follow-up; Td P5/P6 change governance and freeze the next candidate inventory only. |
-| Objective | Close the XMS source/ABI package and the owner-directed `BOP_NOSUPPORT` follow-up without expanding into machine UMB allocation, keyboard/IVT, or other top-level selectors. |
-| Non-goals | Do not add physical UMB, keyboard/IVT, WOW product-shell, other top-level, or cross-family execution behavior. |
-| Reference Baseline | Imported OpenNT XMS and `nt_bop.c`/`nt_error.c` source, formal manifest, tracker and T237 closure evidence. |
-| Files And ABI Surface | Existing XMS source/shim/session seams; P2 generic-UD/top-level shim and typed outcome only. |
-| Applicable Rules | Source-first recovery, selector-blind machine boundary, fixed-width checked ABI, MTSP/Td governance. |
-| Verification | Formal Ninja r7/r3, focused XMS/`59` fixtures, documentation governance and diff review. |
-| Expected Markers | XMS source/failure routes preserve owner semantics; `59` Ignore resumes and Terminate returns typed stop without host-process termination. |
-| Asset Needs | Existing OpenNT source and formal MSVC/Ninja closure only. |
-| Reporting Requirements | Record remaining machine/top-level transfers and update tracker completion counts. |
-| Stop Conditions | Stop rather than add DOS/BOP semantics to bx-core/bx-mantle or recreate NT4 private product shells. |
-| Exit Criteria | Required formal and focused evidence pass; closure history/tracker are committed and pushed. |
-| Original Owner Request | Close T237 and prepare the dependency-driven next stage; then correct BOP `59` to the original visible Terminate/Ignore contract. |
-| Similar-Issue Sweep | XMS dispatcher/shims, `59` source caller/error seam, manifest membership, tracker aggregates and queue/proposal references. |
-| Exit Status | P1: formal r7 and XMS gates passed. P2: formal r3 and `t237-s5-bop-nosupport-fixture` passed reason, dedup, Ignore, Terminate and negative cases; committed/pushed as `e59681c2`. |
-| Next Admission | Select the queue-head no-external-dependency candidate, allocate the next global T serial, and replace this closure packet before implementation. |
+| Identifier Mode | `M0 T238 S1`, Ordinary Mode, single-person dual-role audit and closure. |
+| Admission And Approval | Owner instruction: “你现在就验，验完了关闭该T，在下一个T准入前停下”; the queue-head no-external candidate is formally admitted only for this audit. |
+| Objective | Independently revalidate the Td P6 frozen local slice—75 BOP rows plus 30 dependency rows—against active source routes, formal-manifest membership, declared local fixtures and no-v1/no-bypass selection; close the T if the freeze holds. |
+| Non-goals | Do not implement a new BOP, expand a local contract into a transferred machine/legacy/private-API owner, run trace-led recovery, or admit the external-compatibility candidate. |
+| Reference Baseline | Td P6 freeze in `etc/bop-list.md`, no-external proposal, formal MSVC x64 `/MT` Ninja manifest, T230/T231/T237 closure records. |
+| Files And ABI Surface | Documentation/evidence, formal disposable build root and existing fixtures; a discovered `59` P0 local loader defect may receive the smallest source-derived public-Win32 composition repair, without changing any BOP ABI or entering a transferred owner domain. |
+| Applicable Rules | Source-first recovery, selector-blind machine boundary, fixed-width checked ABI, MTSP/Td governance and disposable-build hygiene. |
+| Verification | Recount frozen tracker rows; inspect active dispatcher/manifest routes and v1 exclusion; execute a fresh formal Ninja graph and all declared in-slice focused fixtures; run documentation governance and diff review. |
+| Expected Markers | Exact 75+30 cardinality; every source unit/header has an active manifest/compiler route; no `bop-v1` source is selected by production ingress; focused fixtures and formal graph return zero. |
+| Asset Needs | Existing tracked OpenNT mirrors, formal manifest, MSVC x64 and Ninja only. |
+| Reporting Requirements | Record commands, scope, observations, confidence and any transfer in a supporting audit record and history; remove disposable build output after extracting the concise result. |
+| Stop Conditions | A real non-`59` local gap, a bypass into `bop-v1`, or a failed formal/fixture gate after the bounded `59` loader repair pauses closure; do not silently classify it as an external dependency or start candidate 2. |
+| Exit Criteria | All 105 frozen rows pass the stated source/route/fixture audit; T238 closure is committed and pushed; queue advances only as an unadmitted candidate list. |
+| Original Owner Request | “算了吧 你现在就验 验完了关闭该T 在下一个T准入前停下”. |
+| Similar-Issue Sweep | All frozen BOP and dependency owner groups, generic ingress/manifest, `bop-v1` selection, formal fixture declarations and tracker/queue cardinality. |
+| Exit Status | P1 audit: r1 built 353 edges but 29 fixture loader failures exposed BOP 59's Common Controls v5 ordinal import. A local v6 activation repair made r2 build 353 edges and 29/31 focused fixtures pass. `t234-s2-command-dynamic-environment-fixture` (exit 10) and `t231-s8-command-lifecycle-direct-fixture` (exit 1) remain real local COMMAND regressions, so T238 is **not closed**. See [audit record](etc/operations/m0-t238-s1-no-external-no-bypass-audit-001.md). |
+| Next Admission | None. Do not admit the next queue candidate. Await owner direction on the two in-slice COMMAND regressions. |
 
 ## Latest Closure
 
