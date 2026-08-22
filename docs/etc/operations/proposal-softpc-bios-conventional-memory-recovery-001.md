@@ -30,12 +30,11 @@ not be promoted unchanged into this recovery.
 ## Boundary
 
 - `bx-core` remains CPU, RAM/ROM and exception owner.
-- `bx-mantle` may own an opaque, fixed-width conventional-memory profile value
-  and its reset lifetime, but contains no BOP, BIOS, DOS, OpenNT or SoftPC
-  selector vocabulary.
+- `bx-mantle` owns machine RAM lifecycle and only selector-blind checked RAM
+  actions. It contains no BOP, BIOS, DOS, OpenNT or SoftPC selector vocabulary.
 - `bx-vdm` alone recognizes the exact copied `C4 C4 12` window and translates
-  an admitted machine response into the source-shaped low-16-bit `AX` result
-  and `RIP + 3` resume.
+  a checked read of the original BDA word at physical `0x413` into the
+  source-shaped low-16-bit `AX` result and `RIP + 3` resume.
 - The original `mem_size.c` body is the source/layout/ordering authority.  If
   its SAS/CCPU calls cannot link, retain its structure in an imported mirror
   and use only the smallest named shim for the bounded read and AX write.  The
@@ -51,9 +50,10 @@ inspection crosses this boundary.
    actual current `BOP 12h` ingress.  Add a stable machine dependency row to
    `docs/etc/bop-list.md`; decide the exact declared first-profile KiB value
    from reset/source/snapshot evidence rather than convenience constants.
-2. **S2 — selector-blind machine profile seam.** Give the mantle a reset-owned
-   typed query contract with strict lifetime/range/teardown negatives.  It
-   may not write a BOP result register or inspect guest instruction bytes.
+2. **S2 — selector-blind RAM seam.** Bind the existing checked RAM read
+   contract to the provider with strict lifetime/range/teardown negatives.
+   Mantle may not write a BOP result register, inspect guest instruction bytes
+   or identify the BDA address.
 3. **S3 — original-source-shaped provider.** Import/activate the smallest
    `mem_size` recovery through `bx-vdm`; preserve its low-16-bit AX-only
    outcome and decline non-exact/malformed/missing-profile paths.

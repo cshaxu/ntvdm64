@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2047 |
+| Documentation records | 2049 |
 | --- | --- |
-| Generated UTC | 2026-08-22T23:02:51Z |
+| Generated UTC | 2026-08-22T23:37:45Z |
 
 ## Entries
 
@@ -82,7 +82,7 @@ content-divergent entries.
 | DOS-WOW16-SOURCE-CLOSURE-RESULT.md | retained pre-governance evidence | 843f0bb11b298a6d80efca687fdf056dfdc9104026d53676c4052a216c17387c |
 | DOS-WOW16-SOURCE-CLOSURE-TASK-BRIEF.md | retained pre-governance evidence | 5ea19abcd564854c1c21c6dff2714b204303e935ca5385345a3f3e23ee0ecb85 |
 | ENGINE-CONTRACT.md | retained pre-governance evidence | d57785469d3221d45b6931f4ab0f40c2cc6f78ab4ecd8425daaa338931d7ca3c |
-| etc/bop-list.md | indexed supporting material | 2f69e17df88ce881818a4befa1348560e58fc37e84c2eb27eac8c19cd11e34e2 |
+| etc/bop-list.md | indexed supporting material | 2deae1bd5bf6b9413a40e861a888cca605b2e17f25f49b3fceb3528e0196f906 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
@@ -299,6 +299,7 @@ content-divergent entries.
 | etc/operations/m0-t237-xms-owner-package-plan.md | indexed supporting material | 4ba67b929166147012cd29473590d53e8d22ed90509d86276c4a01888e0f307c |
 | etc/operations/m0-t238-s1-no-external-no-bypass-audit-001.md | indexed supporting material | 19eca4fe11e7e5e02714ea051dd1cf3cc87791db24c54c38a226716f200af223 |
 | etc/operations/m0-t239-s1-code-complete-bop-v1-retirement-plan-001.md | indexed supporting material | 401cb4f24a31709c1831edb19ef838346dc388c183252cf52aa8f3b53e575cb0 |
+| etc/operations/m0-t240-softpc-bios-conventional-memory-recovery-plan-001.md | indexed supporting material | b35f0469fd69dfbce44c363bcf1ccc14e77e959e6557f5b8ffb5f7dc23c208cd |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -323,7 +324,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | a041c10705221c3d6512f3935749c1c345e1c08304828ffe5d30c72fb8f6c8c7 |
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 4379d6d7dc01969e310c6b7715611fd582e041a0ab4b3e909bc6c88eba92ca6f |
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
-| etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md | indexed supporting material | d7ce3170fc6b7fc5accb8df280f84d484b8b0884c5f89ba7b7924811fcaa9bfe |
+| etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md | indexed supporting material | 3e4c68d258fa9e18ef6fbec2513bf52fc928f13afd9ddfd81f5de217cfa71a6b |
 | etc/operations/t188-bop-ingress-composition-plan.md | indexed supporting material | 76e13591247ef15c3c3999216011ffee2799de1b5e7fb1ccac98f053ed8c2402 |
 | etc/operations/t199-s37-dem-package-completion-proposal-001.md | indexed supporting material | d8bf32ab641bb0148d37c6da42db51bdf834c960bf00b53bbfdf692a21caba05 |
 | etc/operations/t202-s4-dem-fcb-wildcard-provider-plan-001.md | indexed supporting material | c7a025a850246501fec1b88ae7c8deaa8553c83d0f11889b4ae56e86f84ee618 |
@@ -381,6 +382,7 @@ content-divergent entries.
 | etc/research/cpu-archive-single-diagnostic-reproducibility-contract-001.md | indexed supporting material | bf3225a4db872431b588ca843c517c9d7a69841ffc9cc0026cb03d359b58da62 |
 | etc/research/first-guest-startup-descriptor-v0.md | indexed supporting material | 682a9d388af21cdbc6e0b3f07223bd0a1e65df0399894047e5164464751ddca8 |
 | etc/research/first-owner-transaction-closure-audit.md | indexed supporting material | 9dc6fbee17ad527ff69b8792a5a60e8dbca112606145362a1405b8d0a3ae1795 |
+| etc/research/m0-t240-s1-softpc-bios-memory-source-reset-abi-audit-001.md | indexed supporting material | 302c9b7acc121cc36b478f550281c96c78b46f6cb09c9c74ff4ba91e8bee92e9 |
 | etc/research/opennt-bop-definition-inventory-001.md | indexed supporting material | 2d0595ecf9b49e713b372da95a5898627f1bf6cbe609bd1b14233cb5086a79f0 |
 | etc/research/opennt-bop-entry-contract.md | indexed supporting material | 3a6093a69b85fa9bd7856fe0aca3fc2c4a5f3349bbdc6cc9e3dcc34e323ef14c |
 | etc/research/proposal-cli-interactive-command-session-001.md | indexed supporting material | b0d0454ddf0be218f836574368326f466d11a4d0a147044d9cf6c8a12d47e39d |
@@ -2061,7 +2063,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | da394829f7e9e2b6581e98096e93111c4e50e66e2ad28f1c499d08523304ca37 |
+| STATUS.md | principal control document | b508756da5f8ccbd9e0753d63090e2318a906405f33c550180670e8803b55f2a |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

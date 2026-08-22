@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T239 S1** — closed owner-approved retirement of superseded
-BOP-v1 code; awaiting the owner's next task admission.
+**Active: M0 T240 S1** — source, reset-state and ABI audit is closed; awaiting
+owner review of the corrected S2 boundary before machine-seam implementation.
 
 ## Active Packet
 
-### M0 T239 S1 — code-complete BOP-v1 retirement
+### M0 T240 S1 — SoftPC BOP 12h source/reset/ABI admission ledger
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T239 S1`, Ordinary Mode, single-person dual-role audit, deletion and closure. |
-| Admission And Approval | Owner instruction: “要求你每实现一个bop code complete就必须删除对应v1的代码，除非有被其他无法删除的v1代码使用。重开T任务完成清理。” |
-| Objective | Remove every superseded v1 provider, facade, registry branch, header, fixture and dead reference corresponding to a BOP now code-complete through the current OpenNT-derived route; record any narrowly retained v1 file and its still-unretired v1 consumer. |
-| Non-goals | Do not delete versioned mechanical ABI records merely because their names end in `_v1`; do not delete a v1 path serving an unfinished BOP without an owner-approved replacement; do not implement new BOP semantics. |
-| Reference Baseline | T238 closure, `etc/bop-list.md` code-complete ledger, current `src/bx-vdm/bop-v1/` inventory and formal manifest. |
-| Files And ABI Surface | `src/bx-vdm/bop-v1/`, dependent non-product headers/tests/manifests, the active tracker/status/history and a retirement ledger. No active BOP ABI may change. |
-| Applicable Rules | Source-first recovery, v1-not-product architecture rule, selector-blind machine boundary, MTSP governance and destructive-change hygiene. |
-| Verification | Establish reverse file/consumer map; delete eligible v1 code and tests; scan for residual selected references; formal Ninja build and focused current-v2 fixtures; documentation governance and diff review. |
-| Expected Markers | No code-complete BOP reaches a v1 provider or retains its v1-only tests/dead sources; every remaining v1 file names an unfinished consumer and a reason it cannot yet retire. |
-| Asset Needs | Current source tree, tracker, formal MSVC/Ninja graph and no external inputs. |
-| Reporting Requirements | Publish a per-file retain/delete ledger, including each shared v1 component's remaining consumer set; update tracker/closure history. |
-| Stop Conditions | A proposed deletion has an active current-v2 or unfinished-v1 consumer not covered by the stated rule; stop and record it rather than delete shared behavior blindly. |
-| Exit Criteria | All eligible code-complete BOP v1 material is deleted, residual v1 material is justified by named unfinished consumers, and formal/current-v2 checks pass; commit and push closure. |
-| Original Owner Request | “要求你每实现一个bop code complete就必须删除对应v1的代码 除非有被其他无法删除的v1代码使用。重开T任务完成清理。” |
-| Similar-Issue Sweep | Production manifest, generic ingress, all test sources, legacy headers, provider registry/catalog/facades and tracker claims. |
-| Exit Status | Closed: retirement inventory and deletion complete; formal-r3 `353/353`, 31/31 eligible current-route fixtures, all retained negative-route gates, documentation governance and diff review pass. |
-| Next Admission | None; owner direction required. |
+| Identifier Mode | `M0 T240 S1`, Ordinary Mode, single-person dual-role source/ABI audit. |
+| Admission And Approval | Owner approved the dependency-driven queue split and then approved this task brief for implementation. |
+| Objective | Establish the exact original SoftPC reset, memory-data and `BOP 12h` query contract needed to recover the first reached post-`50:11` native bootstrap dependency. |
+| Non-goals | Do not implement a BOP result route, change `bx-core`/`bx-mantle`, enable keyboard/INT15/PIC/FPU/CMOS/video/block media, restore `15h/AH=88h`, or use the native trace to select another feature. |
+| Reference Baseline | T239 closure; `etc/bop-list.md` `BOP-DEPENDENCY-091`; `etc/research/bop-12-memory-size-contract-r20.md`; `etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md`. |
+| Files And ABI Surface | Read-only audit of SoftPC BIOS source/headers, current mantle lifecycle, current adapter helper/ingress, tracker and evidence. No production ABI change in S1. |
+| Applicable Rules | Source-first recovery, selector-blind bx boundary, no BOP/DOS/OpenNT vocabulary in core/mantle, MTSP governance and documentation evidence rules. |
+| Verification | Exact source/caller/reset/memory-map/ABI cross-reference; active-manifest/route inspection; boundary vocabulary scan; documentation governance and diff review. |
+| Expected Markers | A four-rung source-recovery ledger; one exact first-profile conventional-memory value/provenance decision; declared ownership of reset data, BOP recognition and typed CPU result; explicit rejected scope. |
+| Asset Needs | Pinned OpenNT/SoftPC and adopted Bochs sources, current mantle/adapter sources, prior snapshot/trace evidence, tracker and formal manifest. |
+| Reporting Requirements | Write a concise evidence record with inputs, procedure, observations, confidence and a bounded S2 seam recommendation; update tracker only if new exact dependency facts are found. |
+| Stop Conditions | Original `mem_size.c` is not the reached owner; reset/value provenance conflicts without a resolvable first-profile decision; current ingress requires a broader machine/device feature; or the smallest seam would carry BOP/DOS/OpenNT vocabulary into core/mantle. Stop and re-admit rather than design around it. |
+| Exit Criteria | The source/reset/ABI/failure ledger identifies the first usable recovery rung and a bounded selector-blind S2 seam, with all non-goals and deferred owners recorded; commit/push the evidence and governance update. |
+| Original Owner Request | “批准 模式实施”. |
+| Similar-Issue Sweep | Existing `BOP 12h` helper, `15h/AH=88h` coupling, BIOS-data reset source, machine-profile ownership, ingress/manifest membership, and all tracker references to P7/BOP 12. |
+| Exit Status | Closed P1: direct source audit confirms a mutable BDA `0040:0013` read-to-AX contract, not a mantle-private constant; the active helper is fixture-only and has no production caller. |
+| Next Admission | S2 requires owner review of the corrected boundary: bx-vdm uses a generic checked RAM read at source-defined `0x413`; mantle remains selector-blind and owns no conventional-memory/BOP semantics. |
 
 ## Latest Closure
 
