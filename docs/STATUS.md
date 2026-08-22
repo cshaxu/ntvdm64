@@ -2,40 +2,41 @@
 
 ## Current Work
 
-**Active: M0 T236 S4** — active; DEM DASD/IOCTL source seam.
+**Active: M0 T236 S5** — active; COMMAND WOW source disposition.
 
 ## Active Packet
 
-### M0 T236 S4 — DEM DASD/IOCTL source seam
+### M0 T236 S5 — COMMAND WOW source disposition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T236 S4`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | S4 is the next owner-approved item in the existing T236 plan after [S3 closure](history/m0-t236-s3-closure-20260821.md). |
-| Objective | Separate directly composable DEM DASD/IOCTL source from floppy/FDC/DMA/CMOS and `host_simulate` machine ownership; remove only an avoidable source replacement. |
-| Non-goals | Do not add CPU, interrupt, BIOS, disk-controller, raw host-volume policy, or guest-DOS semantics to bx-vdm; do not use a trace hit as a leaf implementation mandate. |
-| Reference Baseline | T236 S1--S3 are closed.  Imported DEM DASD/IOCTL sources and the fixed typed CPU result boundary are present, while machine mechanics retain bx-core/bx-mantle ownership. |
-| Files And ABI Surface | Imported DEM DASD/IOCTL sources, their smallest compatibility seams, typed CPU result, public-Win32 capability boundary, and focused fixture(s) selected only after source/ABI/failure mapping. |
-| Applicable Rules | Source-first recovery, fixed-width adapter ABI, bx-core/bx-mantle machine ownership, formal Ninja verification and documented divergences. |
-| Verification | Source/ABI/failure map; focused Direct result and explicit unavailable/machine transfers; formal source-current Ninja target; governance and diff checks. |
-| Expected Markers | Original DEM source remains authoritative wherever public composition fits; machine-dependent mechanics remain explicit rather than silently rehosted. |
-| Asset Needs | Existing imported DEM sources, compatibility seams, typed CPU-result seam, formal Ninja graph, and public Windows capability evidence; no new external source. |
-| Reporting Requirements | Record retained source body, every divergence, rejected machine dependencies, public host capability disposition, and transferred owner work. |
-| Stop Conditions | Re-admit if recovery requires unbounded CPU/Bochs semantics, raw host state in guest ABI, private NT protocol, host modification, or a machine-owner change. |
-| Exit Criteria | Every S4 DASD/IOCTL path has a source-backed direct/shim/unavailable/machine-owner disposition, no adapter-owned machine behavior, and passing focused formal regression for every admitted path. |
-| Original Owner Request | T236 plan: separate public Win32 raw-volume capability from uncomposable floppy/FDC/DMA/CMOS and `host_simulate` machine ownership, retaining original source where composable. |
-| Similar-Issue Sweep | DEM device/drive IOCTL forms, raw volumes, floppy media, DMA, CMOS, `host_simulate`, and any source-derived adapter replacement. |
+| Identifier Mode | `M0 T236 S5`, Ordinary Mode, single-person dual-role review. |
+| Admission And Approval | S5 is the next owner-approved item in the existing T236 plan after [S4 closure](history/m0-t236-s4-closure-20260821.md). |
+| Objective | Reassess the imported COMMAND WOW helper calls, retaining directly composable OpenNT code and recording source-shaped unavailable results for unavailable historical composition. |
+| Non-goals | Do not implement WOW guest loading/execution, re-create private NT4 broker protocols, add a second session model, or use a trace hit to choose a leaf implementation. |
+| Reference Baseline | T236 S1--S4 are closed. Imported COMMAND worker/session and DEM DASD paths have their respective source-first closure records; full WOW ownership remains queued. |
+| Files And ABI Surface | Imported COMMAND WOW call sites, their smallest compatibility seam, fixed-width session ABI, and focused source/current fixture(s) selected only after source/ABI/failure mapping. |
+| Applicable Rules | Source-first recovery, fixed-width adapter ABI, host non-intrusion, formal Ninja verification and documented divergences. |
+| Verification | Source/ABI/failure map; focused direct or explicit-unavailable result; formal source-current Ninja target; governance and diff checks. |
+| Expected Markers | Original COMMAND ordering remains authoritative; unavailable WOW composition fails explicitly without a substitute WOW implementation in bx-vdm. |
+| Asset Needs | Existing imported COMMAND sources, current session seam, formal Ninja graph, and no new external source. |
+| Reporting Requirements | Record retained source body, every divergence, unavailable dependency, public capability disposition, and transferred owner work. |
+| Stop Conditions | Re-admit if recovery requires private NT protocol, host modification to install this product, raw host state in the guest ABI, or a WOW/machine-owner change. |
+| Exit Criteria | Every reached S5 helper branch has a source-backed direct/shim/unavailable/WOW-owner disposition, no fabricated WOW success, and passing focused formal regression for every admitted path. |
+| Original Owner Request | T236 plan: reassess `GetWowKernelCmdLine` and `GetWOWShortCutInfo`; reuse only what fits the fixed WOW root/session ABI or record a source-shaped unavailable outcome. |
+| Similar-Issue Sweep | COMMAND WOW helper calls, shortcut and kernel command-line paths, session ABI crossings, private broker imports, and any source-derived fallback. |
 
-**Current S4 progress:** P1--P3 establish the source-shaped fixed-volume
-lifecycle, checked transport and an authorized VHDX raw read/verify/write/
-restore success witness; see [P3 evidence](etc/evidence/t236-s4-p3-authorized-vhdx-raw-volume-success-001.md).
-Floppy/INT-13/FDC/DMA/CMOS and destructive media operations remain explicitly
-separated for disposition during S4 closure.
+**Current S5 progress:** admitted after S4's fixed-volume/machine-boundary
+closure; no S5 source or runtime result is claimed yet.
 
 Detailed T sequence and closure ledgers are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). S2 is closed at [its worker/broker closure](history/m0-t236-s2-closure-20260821.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
 
 ## Current Work Record
 
+M0 T236 S4 is closed as the direct OpenNT DEM DASD/IOCTL recovery: imported
+`50:21`/`50:29`/`50:2A` source now has a full direct/source-failure/machine
+transfer ledger, a guarded malformed-IOCTL boundary, and a real disposable
+VHDX fixed-volume lifecycle witness. See the [S4 closure](history/m0-t236-s4-closure-20260821.md).
 M0 T236 S3 is closed as the direct OpenNT DEM `50:32`/`50:33` recovery: its
 single imported dispatcher table, copied-register retry seam and unified
 opaque-handle route are recorded in the [S3 closure](history/m0-t236-s3-closure-20260821.md).

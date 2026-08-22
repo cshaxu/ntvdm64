@@ -291,7 +291,15 @@ int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call)
 
     if (!bx_ntvdm_demhndl_call_valid(call)) return 0;
     switch (call->service) {
-    case 0x21u: body = demIOCTL; break;
+    case 0x21u:
+        /* OpenNT demIOCTL performs this range check only under DBG.  The
+         * imported release body would otherwise index apfnSVCIoctl beyond
+         * its 18-entry source table when a copied modern guest boundary
+         * supplies a malformed AL.  Keep the original failure body and its
+         * AX/CF contract; this is boundary validation, not a new IOCTL
+         * policy or a change to the mirrored source's dispatch order. */
+        body = ((call->cpu->eax & 0xffu) >= 18u) ? demIoctlInvalid : demIOCTL;
+        break;
     case 0x29u: body = demAbsRead; break;
     case 0x2au: body = demAbsWrite; break;
     default: return 0;

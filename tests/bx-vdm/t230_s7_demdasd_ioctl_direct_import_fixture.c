@@ -62,16 +62,24 @@ int main(void)
     if (!invoke(&state,&direct,&event,&cpu,&result,0x21u) || carry(&result) ||
         result.cpu_delta.gpr16_values[0] != 1u) return 2;
 
+    /* The historical range check was DBG-only.  The modern copied boundary
+     * must preserve demIoctlInvalid's error contract instead of indexing the
+     * imported 18-entry dispatch table out of bounds. */
+    bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);
+    cpu.eax=0x12u;
+    if (!invoke(&state,&direct,&event,&cpu,&result,0x21u) || !carry(&result) ||
+        result.cpu_delta.gpr16_values[0] != ERROR_INVALID_FUNCTION) return 3;
+
     /* Original demAbsRead/Write both reject an unregistered raw BDS before
      * any raw-device shim is reached, returning DOS_DRIVE_NOT_READY. */
     bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.eax=2u; cpu.ecx=1u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x29u) || !carry(&result) ||
-        result.cpu_delta.gpr16_values[0] != DOS_DRIVE_NOT_READY) return 3;
+        result.cpu_delta.gpr16_values[0] != DOS_DRIVE_NOT_READY) return 4;
     bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);
     cpu.eax=2u; cpu.ecx=1u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x2au) || !carry(&result) ||
-        result.cpu_delta.gpr16_values[0] != DOS_DRIVE_NOT_READY) return 4;
-    puts("T230 S7 direct OpenNT DASD/IOCTL import: IOCTL query and raw-drive failure contracts verified");
+        result.cpu_delta.gpr16_values[0] != DOS_DRIVE_NOT_READY) return 5;
+    puts("T230 S7 direct OpenNT DASD/IOCTL import: IOCTL, boundary and raw-drive failure contracts verified");
     return 0;
 }
