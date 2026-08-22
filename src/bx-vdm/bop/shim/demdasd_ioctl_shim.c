@@ -7,6 +7,7 @@
  */
 
 #include "demdasd_ioctl_shim.h"
+#include "top_level_nosupport_shim.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -98,10 +99,7 @@ void sas_loadw(DWORD address, WORD *value)
 
 void host_direct_access_error(ULONG type)
 {
-    (void)type;
-    /* Original source: src/opennt/base/mvdm/softpc.new/host/src/nt_error.c.
-     * Its action was a product GUI dialog; the CLI preserves the following
-     * original DOS failure return without requiring a GUI product shell. */
+    bx_ntvdm_top_level_nosupport_v2_direct_access_error((uint32_t)type);
 }
 
 /* The floppy source is a distinct FDC/DMA/CMOS device component, not a volume

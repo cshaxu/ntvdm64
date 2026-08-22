@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2040 |
 | --- | --- |
-| Generated UTC | 2026-08-22T18:49:35Z |
+| Generated UTC | 2026-08-22T19:25:53Z |
 
 ## Entries
 
@@ -82,7 +82,7 @@ content-divergent entries.
 | DOS-WOW16-SOURCE-CLOSURE-RESULT.md | retained pre-governance evidence | 843f0bb11b298a6d80efca687fdf056dfdc9104026d53676c4052a216c17387c |
 | DOS-WOW16-SOURCE-CLOSURE-TASK-BRIEF.md | retained pre-governance evidence | 5ea19abcd564854c1c21c6dff2714b204303e935ca5385345a3f3e23ee0ecb85 |
 | ENGINE-CONTRACT.md | retained pre-governance evidence | d57785469d3221d45b6931f4ab0f40c2cc6f78ab4ecd8425daaa338931d7ca3c |
-| etc/bop-list.md | indexed supporting material | e7931bf00251b82ef1a3c339f6dafd4edbe58dc90b468608355a3d8b2757e29d |
+| etc/bop-list.md | indexed supporting material | ed5269d287f6a3d210e551279306d8dffd9acdeb0c80a567f03cd3936752e6f1 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
@@ -1771,7 +1771,7 @@ content-divergent entries.
 | history/m0-t236-s4-closure-20260821.md | closed task history | d345dfb6bd15137005199c6497691935370b622e4f7f5c05ca04e140760556e5 |
 | history/m0-t236-s5-closure-20260821.md | closed task history | 4576cb6abef3a7f8a29c569c2f74b23e3ff68cb82a659ca047ea45547ed4be58 |
 | history/m0-t236-s6-closure-20260821.md | closed task history | e682d38ad8855e95bc3e033cbcd81aeb46973990b8af6442a969b18c6f8b6663 |
-| history/m0-t237-closure-20260822.md | closed task history | 7bcc287dd88c61117bbc7fa26cf31b8b1deaaf930afdb1b42624717630dae9c6 |
+| history/m0-t237-closure-20260822.md | closed task history | 790098e6b2f2a9c435bd3728feb4b6189dcbf2cb6da90cafbfb46038ebed1759 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2054,7 +2054,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | f84cfd86c16aa06c63f6647444239c28ca2554876aa108907b0d743e2175d6c9 |
+| STATUS.md | principal control document | fc233c87e5838093f91c4d323152be52a4c1a3f7d1a0b87c4c7fb9e9c41cf66b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

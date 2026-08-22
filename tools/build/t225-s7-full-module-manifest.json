@@ -220,6 +220,8 @@
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/command_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/xms_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/top_level_nosupport_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/shim/top_level_nosupport_shim.c",
         "src/bx-vdm/bop/command_v2_runtime_session.c",
         "src/bx-vdm/bop/xms_v2_runtime_session.c",
         "src/bx-vdm/bop/dem_v2_composition_bridge.c",
@@ -297,6 +299,22 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t237-s5-bop-nosupport-fixture",
+      "source": "tests/bx-vdm/t237_s5_bop_nosupport_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
     {
       "name": "t237-s3-xms-a20-source-mirror-fixture",
       "source": "tests/bx-mantle/t237_s3_xms_a20_source_mirror_fixture.cc",

@@ -40,7 +40,7 @@ foreach ($input in @($manifestPath, $vs, (Join-Path $root 'tools\build\Project-B
     if (!(Test-Path -LiteralPath $input -PathType Leaf)) { throw "Required graph input missing: $input" }
 }
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-$requiredPlatformLibraries = @('advapi32.lib', 'gdi32.lib', 'ntdll.lib')
+$requiredPlatformLibraries = @('advapi32.lib', 'comctl32.lib', 'gdi32.lib', 'ntdll.lib')
 if ($InstructionHistoryDiagnostic -or $InstructionHistoryProvenanceDiagnostic) {
     $mantle = @($manifest.modules | Where-Object { $_.name -eq 'bx-mantle' })
     if ($mantle.Count -ne 1) { throw 'Diagnostic graph requires one bx-mantle module.' }
