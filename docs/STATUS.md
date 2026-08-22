@@ -2,9 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T238 S1** — owner-approved final no-external-slice validation.
-This packet closes after its one no-bypass audit; no successor numeric T is
-admitted before the owner reviews that closure.
+**Active: M0 T238 S1** — closure delivery verified; no successor numeric T is
+admitted. The owner requested a stop before the next T admission.
 
 ## Active Packet
 
@@ -27,10 +26,16 @@ admitted before the owner reviews that closure.
 | Exit Criteria | All 105 frozen rows pass the stated source/route/fixture audit; T238 closure is committed and pushed; queue advances only as an unadmitted candidate list. |
 | Original Owner Request | “算了吧 你现在就验 验完了关闭该T 在下一个T准入前停下”. |
 | Similar-Issue Sweep | All frozen BOP and dependency owner groups, generic ingress/manifest, `bop-v1` selection, formal fixture declarations and tracker/queue cardinality. |
-| Exit Status | P1 audit: r1 built 353 edges but 29 fixture loader failures exposed BOP 59's Common Controls v5 ordinal import. A local v6 activation repair made r2 build 353 edges and 29/31 focused fixtures pass. `t234-s2-command-dynamic-environment-fixture` (exit 10) and `t231-s8-command-lifecycle-direct-fixture` (exit 1) remain real local COMMAND regressions, so T238 is **not closed**. See [audit record](etc/operations/m0-t238-s1-no-external-no-bypass-audit-001.md). |
-| Next Admission | None. Do not admit the next queue candidate. Await owner direction on the two in-slice COMMAND regressions. |
+| Exit Status | P1 audit/r1 exposed the BOP 59 Common Controls v5 ordinal load defect; the local v6 activation repair made r2 executable. The two remaining COMMAND failures were corrected as multisz and pending/re-entry test interpretations. Fresh r3 built 353 edges and the complete frozen sweep passed 31/31. T238 is **closed**; see [audit record](etc/operations/m0-t238-s1-no-external-no-bypass-audit-001.md) and [closure history](history/m0-t238-closure-20260822.md). |
+| Next Admission | None. Stop here and await owner direction before admitting the next queue candidate. |
 
 ## Latest Closure
+
+M0 T238 closes the no-external OpenNT BOP validation slice: the frozen 75 BOP
+and 30 dependency local contracts have a fresh 353-edge formal Ninja build and
+31/31 focused fixture sweep, with no selected `bop-v1` product route. Its
+Common Controls v6 activation repair is confined to the source-derived BOP 59
+dialog seam. See the [T238 closure](history/m0-t238-closure-20260822.md).
 
 M0 T237 closes the XMS source-mirror package: `52:06` now reaches the
 imported `xmsInitUMB` source body through a checked AX:BX state-byte seam;

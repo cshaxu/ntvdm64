@@ -21,6 +21,23 @@ static int multisz_has_prefix(const CHAR *strings, DWORD bytes, const CHAR *pref
     return 0;
 }
 
+/* This is a double-NUL multi-string, not one C string.  wcsstr would stop at
+ * COMSPEC's NUL and falsely fail to observe the following PATH entry. */
+static int wide_multisz_has_prefix(const WCHAR *strings, size_t characters,
+    const WCHAR *prefix)
+{
+    const WCHAR *cursor = strings;
+    const WCHAR *end = strings + characters;
+    size_t prefix_characters = wcslen(prefix);
+    while (cursor < end && *cursor != L'\0') {
+        size_t characters_here = wcslen(cursor) + 1u;
+        if (characters_here > (size_t)(end - cursor)) return 0;
+        if (wcsncmp(cursor, prefix, prefix_characters) == 0) return 1;
+        cursor += characters_here;
+    }
+    return 0;
+}
+
 int main(void)
 {
     bx_ntvdm_command_misc_session session;
@@ -52,8 +69,10 @@ int main(void)
             session.command_source_environment_bytes, "PATH=")) return 1;
 
     snapshot = bx_ntvdm_command_environment_snapshot_session(&session);
-    if (snapshot == NULL || wcsstr(snapshot, L"COMSPEC=C:\\STALE.COM") == NULL ||
-        wcsstr(snapshot, L"PATH=") == NULL) return 10;
+    if (snapshot == NULL || !wide_multisz_has_prefix(snapshot,
+            session.command_source_environment_bytes, L"COMSPEC=C:\\STALE.COM") ||
+        !wide_multisz_has_prefix(snapshot,
+            session.command_source_environment_bytes, L"PATH=")) return 10;
     bx_ntvdm_command_environment_free_snapshot(snapshot);
 
     memset(&transformed, 0, sizeof(transformed));

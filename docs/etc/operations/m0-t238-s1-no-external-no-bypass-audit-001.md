@@ -77,3 +77,25 @@ must not be closed or advance the queue. Its next bounded work, if the owner
 approves it, is to diagnose and repair those two COMMAND source/shim local
 contracts before rerunning the same 31-fixture sweep. No external
 compatibility/machine candidate is admitted by this finding.
+
+## Repair and final result
+
+The owner approved repair within T238.  The source review showed that neither
+failure justified replacing an OpenNT body:
+
+- The dynamic-environment fixture used `wcsstr` on a double-NUL wide
+  environment and therefore could never find `PATH` after the first `COMSPEC`
+  entry.  It now performs a bounded multi-string scan; imported `cmdenv.c` and
+  the session snapshot seam are unchanged.
+- The lifecycle fixture asserted an obsolete synchronous result.  It now
+  requires the imported `cmdExec32` sequence—first `PENDING`, then original
+  BOP re-entry and `RESUME` after worker completion—for direct, COMSPEC and
+  valid standard-stream-token paths.  Imported `cmdexec.c` is unchanged.
+
+Fresh r3 built all 353 formal MSVC x64 `/MT`, CPU5/P-MMX edges. Both repaired
+fixtures pass, followed by the complete frozen-slice sweep: **31/31 pass**.
+The two r1/r2 build roots were already removed; r3 is removed after this
+concise result is recorded. Confidence is high for the declared local
+contracts of the 105 frozen tracker rows. This does not claim machine,
+Redirector, WOW or guest EXEC continuity, which remain explicit candidate-2
+work.
