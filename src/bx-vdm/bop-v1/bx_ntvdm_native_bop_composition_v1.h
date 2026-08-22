@@ -2,7 +2,6 @@
 #define BX_NTVDM_NATIVE_BOP_COMPOSITION_V1_H
 
 #include "bx_ntvdm_dpmi_package_session_v1.h"
-#include "bx_ntvdm_xms_package_session_v1.h"
 #include "bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_NATIVE_BOP_COMPOSITION_V1_MAGIC 0x42584e42u
@@ -12,7 +11,6 @@
  * machine lifetime and exposes C1/C2 through their fixed C records. */
 typedef struct bx_ntvdm_native_bop_composition_v1 {
   uint32_t magic, abi_version, struct_bytes, bound;
-  bx_ntvdm_xms_package_session_v1 xms;
   bx_ntvdm_dpmi_package_session_v1 dpmi;
 } bx_ntvdm_native_bop_composition_v1;
 

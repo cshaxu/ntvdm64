@@ -11,15 +11,13 @@ static int valid(const bx_ntvdm_native_bop_composition_v1 *c)
 { return c && c->magic==BX_NTVDM_NATIVE_BOP_COMPOSITION_V1_MAGIC &&
   c->abi_version==BX_NTVDM_NATIVE_BOP_COMPOSITION_V1_VERSION &&
   c->struct_bytes==sizeof(*c) && c->bound<=1u &&
-  bx_ntvdm_xms_package_session_v1_valid(&c->xms) &&
   bx_ntvdm_dpmi_package_session_v1_valid(&c->dpmi); }
 
 int bx_ntvdm_native_bop_composition_v1_initialize(
   bx_ntvdm_native_bop_composition_v1 *c)
 { if(!c)return 0;memset(c,0,sizeof(*c));c->magic=BX_NTVDM_NATIVE_BOP_COMPOSITION_V1_MAGIC;
   c->abi_version=BX_NTVDM_NATIVE_BOP_COMPOSITION_V1_VERSION;c->struct_bytes=(uint32_t)sizeof(*c);
-  return bx_ntvdm_xms_package_session_v1_initialize(&c->xms) &&
-    bx_ntvdm_dpmi_package_session_v1_initialize(&c->dpmi) && valid(c); }
+  return bx_ntvdm_dpmi_package_session_v1_initialize(&c->dpmi) && valid(c); }
 
 int bx_ntvdm_native_bop_composition_v1_bind(
   bx_ntvdm_native_bop_composition_v1 *c)
@@ -51,6 +49,5 @@ int bx_ntvdm_native_bop_composition_v1_handle(
   const struct bx_ntvdm_generic_ud_event_v1 *e,struct bx_ntvdm_generic_ud_outcome_v1 *o)
 { bx_ntvdm_exception_event_v1 b;bx_ntvdm_cpu_state_v1 c;bx_ntvdm_instruction_window_v1 w;bx_ntvdm_bop_ingress_v1 i;bx_ntvdm_bop_provider_selection_v1 p;bx_ntvdm_cpu_result_v2 r;
   if(!valid(active)||!active->bound||!o||!unpack(e,&b,&c,&w))return 0; if(int06(e,&r))return publish(&r,o); if(!bx_ntvdm_bop_ingress_v1_dispatch(&b,&c,&w,&i,&r)||r.disposition!=BX_NTVDM_CPU_RESULT_V2_PASS_THROUGH||!bx_ntvdm_bop_provider_registry_v1_select(&i,&p))return 0;
-  if(bx_ntvdm_xms_package_session_v1_dispatch(&active->xms,&i,&p,&b,&c,&w,&r))return publish(&r,o);
   if(bx_ntvdm_dpmi_package_session_v1_dispatch(&active->dpmi,&i,&p,&b,&c,&w,&r))return publish(&r,o);
   return 0; }

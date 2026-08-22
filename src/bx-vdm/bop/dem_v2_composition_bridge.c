@@ -10,6 +10,7 @@
 
 #include "dem_v2_generic_ud_bridge.h"
 #include "command_v2_generic_ud_bridge.h"
+#include "xms_v2_generic_ud_bridge.h"
 #include "bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h"
 
@@ -20,7 +21,8 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
     struct bx_ntvdm_generic_ud_outcome_v1 declined = {0};
     int accepted;
     if (!bx_ntvdm_dem_v2_generic_ud_recognizes(event) &&
-        !bx_ntvdm_command_v2_generic_ud_recognizes(event)) {
+        !bx_ntvdm_command_v2_generic_ud_recognizes(event) &&
+        !bx_ntvdm_xms_v2_generic_ud_recognizes(event)) {
         declined.abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
         declined.disposition = BX_NTVDM_GENERIC_UD_PASS_THROUGH;
         bx_ntvdm_bop_sequence_observation_v1_consider(event, &declined);
@@ -32,7 +34,9 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
      * DEM or COMMAND selector. */
     accepted = bx_ntvdm_dem_v2_generic_ud_recognizes(event) ?
         bx_ntvdm_dem_v2_generic_ud_dispatch(event, outcome) :
-        bx_ntvdm_command_v2_generic_ud_dispatch(event, outcome);
+        (bx_ntvdm_command_v2_generic_ud_recognizes(event) ?
+            bx_ntvdm_command_v2_generic_ud_dispatch(event, outcome) :
+            bx_ntvdm_xms_v2_generic_ud_dispatch(event, outcome));
     if (accepted) {
         bx_ntvdm_bop_sequence_observation_v1_consider(event, outcome);
         bx_ntvdm_generic_ud_sequence_observation_v1_consider(event, outcome);

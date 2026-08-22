@@ -2,7 +2,7 @@
 #define BX_NTVDM_BOP_DEM_V2_GENERIC_UD_BRIDGE_H
 
 /* v2 DEM-only generic-UD route.  It is intentionally independent of every
- * bop-v1 provider: a recognized DEM window is accepted only by the imported
+ * earlier provider: a recognized DEM window is accepted only by the imported
  * OpenNT DEM session, never by a legacy fallback. */
 
 #include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"

@@ -2,34 +2,49 @@
 
 ## Current Work
 
-**Active: M0 T236 S7** — active; T236 closure reconciliation.
+**Active: M0 T237 S3** — active; retire XMS v1 and verify the recovered package.
 
 ## Active Packet
 
-### M0 T236 S7 — T236 closure reconciliation
+### M0 T237 S3 — retire XMS v1 and verify recovered XMS package
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T236 S7`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | S7 follows closed S1--S6 under the admitted T236 recovery plan. |
-| Objective | Reconcile the completed T236 DEM/COMMAND minimum-modification recovery ledger, remove superseded no-op claims, run the declared package-local regression, and leave every external owner as an explicit transfer. |
-| Non-goals | Do not implement WOW, Redirector, BIOS/device, complete BaseSrv/CSR brokerage, guest EXEC/PSP return, or use a native trace to select a leaf implementation. |
-| Reference Baseline | S1, S2, S3, S4, S5 and S6 each have a source-first closure record; S5 now proves the VDMForWOW branch terminates without fabricating a WOW launch. |
-| Files And ABI Surface | T236 closure records, imported DEM/COMMAND sources, their existing fixed-width adapter seams, and the focused formal fixtures already selected by each closed S. |
-| Applicable Rules | Source-first recovery, fixed-width adapter ABI, host non-intrusion, formal Ninja verification and documented divergences. |
-| Verification | Reconciled source/ABI/failure ledger; designated package-local formal Ninja targets; documentation governance and diff checks. |
-| Expected Markers | No obsolete no-op claim remains; every unfinished historical product dependency is either a named owner transfer or explicit unavailable disposition. |
-| Asset Needs | Existing imported sources, prior S evidence, formal Ninja graph, and no new external source. |
-| Reporting Requirements | Publish the reconciled T236 closure ledger, regression result and owner-transfer list without claiming whole-guest continuity. |
-| Stop Conditions | Re-admit if reconciliation requires a new behavior, a private NT protocol, host modification to install this product, raw host state in the guest ABI, or an owner-boundary change. |
-| Exit Criteria | All six preceding S records are reconciled against current source and focused regression; T236 can close only with explicit follow-up owner transfers and no claim beyond its minimum-modification scope. |
-| Original Owner Request | T236 plan S7: reconcile every audit item, remove superseded no-op claims, run package-local regression, and transfer remaining external owners. |
-| Similar-Issue Sweep | Every T236 source-derived seam, old no-op/fallback assertion, fixture marker, and queued external-owner dependency. |
+| Identifier Mode | `M0 T237 S3`, Ordinary Mode, single-person dual-role review. |
+| Admission And Approval | S2 compiled the complete OpenNT XMS mirror and its fixed-width bridge; a local 52:xx fixture linked and passed after its public Win32 import was declared. |
+| Objective | Remove all executable/test/dead XMS v1 provider code, rehome the DPMI-only historical classifier, and verify the recovered 52:xx package from a fresh manifest-derived Ninja graph. |
+| Non-goals | Do not add Bochs CPU/BIOS/device behavior, invent a UMB/INT15 mechanic, or reintroduce v1 as a fallback. |
+| Reference Baseline | [T237 S1 audit](etc/operations/m0-t237-s1-xms-source-abi-failure-audit-001.md) and [S2 source-mirror result](etc/operations/m0-t237-s2-xms-source-mirror-result-001.md). |
+| Files And ABI Surface | Source mirror under `bop/opennt/xms`, fixed-width bx-vdm ingress/session seam, v1 XMS package/test/probe inputs, and DPMI's separate historical classification evidence. |
+| Applicable Rules | Source-first recovery, owner boundaries, fixed-width adapter ABI, Bochs deny-by-default and documented divergence. |
+| Verification | No executable XMS v1 references, full fixture link/run from a fresh manifest-derived Ninja graph, source identity/divergence review, documentation governance and diff checks. |
+| Expected Markers | Every 52:xx endpoint has the S2 direct-source/explicit-unavailable disposition; no executable v1 XMS route or test remains. |
+| Asset Needs | Existing OpenNT and Bochs imports, existing BOP inventory and no new external source. |
+| Reporting Requirements | Record S2's explicit A20/UMB/INT15 dispositions, every v1 deletion/rehome, public import declaration, and whole-family test result without claiming guest continuity. |
+| Stop Conditions | Re-admit if a required capability needs host modification to install the product, a private NT protocol, raw host state in the guest ABI, or an adapter-owned allocator/A20/BIOS implementation. |
+| Exit Criteria | XMS v1 is physically absent from executable/test inputs; any retained DPMI-only evidence is rehomed without an XMS identity; the regenerated formal graph links/runs the fixture. |
+| Original Owner Request | Continue BOP work as complete owner packages, using original OpenNT source before shims and deferring cross-owner semantics to their named packages. |
+| Similar-Issue Sweep | Every XMS v1 include, composition field, test/probe, shared classifier, manifest input, `52:xx` caller and historical document reference. |
 
-**Current S7 progress:** admitted after S5's source/fixture closure. No T236
-final reconciliation or whole-guest execution result is claimed yet.
+**S2 result:** the directly mirrored OpenNT dispatcher, seven XMS source files
+and source suballocator compile under formal MSVC x64 `/MT`.  The local fixture
+passes `52:01..05`, `52:07..08`, `52:0A..0B`; `52:00` explicitly declines
+without an active mantle A20 lifecycle, `52:06` declines pending a durable
+checked HIMEM-state/UMB seam, and `52:09` declines until the keyboard/BIOS
+owner supplies `UpdateKbdInt15`.  This is source/package closure only: it
+does not claim native guest continuity or an extended-RAM machine aperture.
 
-Detailed T sequence and closure ledgers are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). S2 is closed at [its worker/broker closure](history/m0-t236-s2-closure-20260821.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
+**S3 progress:** XMS v1 session/provider, its tests and obsolete probe are
+physically removed.  The former shared classifier is rehomed as DPMI-only
+historical evidence.  Fresh formal graph `build/M0-T237-S3/001` builds and
+runs the complete fixture; its bounded generic-UD `52:05` witness enters the
+source dispatcher and returns the source result.  Fresh formal graph
+`build/M0-T237-S3/002` builds/runs the real-minimal-machine `52:00` A20
+success fixture and its full `all` graph passes after an explicit fixture ABI
+include correction.  See the [S3 regression/retirement result](etc/operations/m0-t237-s3-xms-regression-and-v1-retirement-result-001.md).
+Acceptance/closure is pending the required reviewed commit and push.
+
+M0 T236 is closed at [its reconciliation and owner-transfer record](history/m0-t236-closure-20260821.md). The active XMS plan is [M0 T237](etc/operations/m0-t237-xms-owner-package-plan.md).
 
 ## Current Work Record
 

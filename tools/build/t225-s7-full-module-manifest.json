@@ -184,6 +184,14 @@
       "name": "bx-vdm",
       "sources": [
         "src/bx-vdm/bx_ntvdm_bios_memory_service.c",
+        "src/bx-vdm/bop/opennt/xms/xms.c",
+        "src/bx-vdm/bop/opennt/xms/suballoc.c",
+        "src/bx-vdm/bop/opennt/xms/xmsa20.c",
+        "src/bx-vdm/bop/opennt/xms/xmsblock.c",
+        "src/bx-vdm/bop/opennt/xms/xmsdisp.c",
+        "src/bx-vdm/bop/opennt/xms/xmsmisc.c",
+        "src/bx-vdm/bop/opennt/xms/xmsumb.c",
+        "src/bx-vdm/bop/shim/xms_shim.c",
         "src/bx-vdm/bop/opennt/dem/demhndl.c",
         "src/bx-vdm/bop/opennt/dem/dem.c",
         "src/bx-vdm/bop/opennt/dem/demdata.c",
@@ -211,7 +219,9 @@
         "src/bx-vdm/bop/opennt/command/cmdredir.c",
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/command_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/xms_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/command_v2_runtime_session.c",
+        "src/bx-vdm/bop/xms_v2_runtime_session.c",
         "src/bx-vdm/bop/dem_v2_composition_bridge.c",
         "src/bx-vdm/bop/dem_v2_runtime_session.c",
         "src/bx-vdm/bop/dem_v2_startup_composition.c",
@@ -228,6 +238,7 @@
         "src/bx-vdm/bop/shim/demdisp_shim.c",
         "src/bx-vdm/bop/shim/dem_ingress_shim.c",
         "src/bx-vdm/bop/shim/dem_native_session_shim.c",
+        "src/bx-vdm/bop/shim/xms_native_session_shim.c",
         "src/bx-vdm/bop/shim/demmisc_shim.c",
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
@@ -286,6 +297,32 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t237-s3-xms-a20-source-mirror-fixture",
+      "source": "tests/bx-mantle/t237_s3_xms_a20_source_mirror_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t237-s2-xms-source-mirror-fixture",
+      "source": "tests/bx-vdm/t237_s2_xms_source_mirror_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib"
+      ]
+    },
     {
       "name": "t230-s15-v2-runtime-session-fixture",
       "source": "tests/bx-vdm/t230_s15_v2_runtime_session_fixture.c",

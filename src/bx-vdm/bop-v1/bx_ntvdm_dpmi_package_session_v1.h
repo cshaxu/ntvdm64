@@ -1,7 +1,7 @@
 #ifndef BX_NTVDM_DPMI_PACKAGE_SESSION_V1_H
 #define BX_NTVDM_DPMI_PACKAGE_SESSION_V1_H
 
-#include "bx_ntvdm_xms_dpmi_plane_v1.h"
+#include "bx_ntvdm_dpmi_plane_v1.h"
 
 #define BX_NTVDM_DPMI_PACKAGE_SESSION_V1_MAGIC 0x42584450u
 #define BX_NTVDM_DPMI_PACKAGE_SESSION_V1_VERSION 1u
