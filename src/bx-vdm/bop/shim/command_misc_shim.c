@@ -335,7 +335,18 @@ void nt_resume_event_thread(void)
     bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
     if (session != NULL) session->local_child_events_blocked = 0u;
 }
-void GetWowKernelCmdLine(void) { TerminateVDM(); }
+void GetWowKernelCmdLine(void)
+{
+    /* DIVERGENCE (T236 S5): the directly imported cmdGetNextCmd preserves
+     * OpenNT's VDMForWOW branch and its non-returning terminal convention.
+     * The original helper publishes krnl386 startup input for the separate
+     * WOWEXEC/WOW32/NE-loader product composition.  This one-session CLI has
+     * no admitted WOW root or consumer, so resuming would fabricate a WOW
+     * launch.  Preserve the original terminal shape as a typed controlled
+     * stop; the complete input/publication/loader contract transfers to the
+     * OpenNT WOW16 owner package. */
+    TerminateVDM();
+}
 ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info)
 { return info == NULL ? 0u : bx_ntvdm_command_misc_active_session()->redirection_token; }
 

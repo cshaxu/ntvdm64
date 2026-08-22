@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T236 S5** — active; COMMAND WOW source disposition.
+**Active: M0 T236 S7** — active; T236 closure reconciliation.
 
 ## Active Packet
 
-### M0 T236 S5 — COMMAND WOW source disposition
+### M0 T236 S7 — T236 closure reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T236 S5`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | S5 resumes after the owner-directed S6 closure. |
-| Objective | Reassess the imported COMMAND WOW helper calls, retaining directly composable OpenNT code and recording source-shaped unavailable results for unavailable historical composition. |
-| Non-goals | Do not implement WOW guest loading/execution, re-create private NT4 broker protocols, add a second session model, or use a trace hit to choose a leaf implementation. |
-| Reference Baseline | T236 S1--S4 and S6 are closed. Imported COMMAND worker/session and DEM search paths have their respective source-first closure records; full WOW ownership remains queued. |
-| Files And ABI Surface | Imported COMMAND WOW call sites, their smallest compatibility seam, fixed-width session ABI, and focused source/current fixture(s) selected only after source/ABI/failure mapping. |
+| Identifier Mode | `M0 T236 S7`, Ordinary Mode, single-person dual-role review. |
+| Admission And Approval | S7 follows closed S1--S6 under the admitted T236 recovery plan. |
+| Objective | Reconcile the completed T236 DEM/COMMAND minimum-modification recovery ledger, remove superseded no-op claims, run the declared package-local regression, and leave every external owner as an explicit transfer. |
+| Non-goals | Do not implement WOW, Redirector, BIOS/device, complete BaseSrv/CSR brokerage, guest EXEC/PSP return, or use a native trace to select a leaf implementation. |
+| Reference Baseline | S1, S2, S3, S4, S5 and S6 each have a source-first closure record; S5 now proves the VDMForWOW branch terminates without fabricating a WOW launch. |
+| Files And ABI Surface | T236 closure records, imported DEM/COMMAND sources, their existing fixed-width adapter seams, and the focused formal fixtures already selected by each closed S. |
 | Applicable Rules | Source-first recovery, fixed-width adapter ABI, host non-intrusion, formal Ninja verification and documented divergences. |
-| Verification | Source/ABI/failure map; focused direct or explicit-unavailable result; formal source-current Ninja target; governance and diff checks. |
-| Expected Markers | Original COMMAND ordering remains authoritative; unavailable WOW composition fails explicitly without a substitute WOW implementation in bx-vdm. |
-| Asset Needs | Existing imported COMMAND sources, current session seam, formal Ninja graph, and no new external source. |
-| Reporting Requirements | Record retained source body, every divergence, unavailable dependency, public capability disposition, and transferred owner work. |
-| Stop Conditions | Re-admit if recovery requires private NT protocol, host modification to install this product, raw host state in the guest ABI, or a WOW/machine-owner change. |
-| Exit Criteria | Every reached S5 helper branch has a source-backed direct/shim/unavailable/WOW-owner disposition, no fabricated WOW success, and passing focused formal regression for every admitted path. |
-| Original Owner Request | T236 plan: reassess `GetWowKernelCmdLine` and `GetWOWShortCutInfo`; reuse only what fits the fixed WOW root/session ABI or record a source-shaped unavailable outcome. |
-| Similar-Issue Sweep | COMMAND WOW helper calls, shortcut and kernel command-line paths, session ABI crossings, private broker imports, and any source-derived fallback. |
+| Verification | Reconciled source/ABI/failure ledger; designated package-local formal Ninja targets; documentation governance and diff checks. |
+| Expected Markers | No obsolete no-op claim remains; every unfinished historical product dependency is either a named owner transfer or explicit unavailable disposition. |
+| Asset Needs | Existing imported sources, prior S evidence, formal Ninja graph, and no new external source. |
+| Reporting Requirements | Publish the reconciled T236 closure ledger, regression result and owner-transfer list without claiming whole-guest continuity. |
+| Stop Conditions | Re-admit if reconciliation requires a new behavior, a private NT protocol, host modification to install this product, raw host state in the guest ABI, or an owner-boundary change. |
+| Exit Criteria | All six preceding S records are reconciled against current source and focused regression; T236 can close only with explicit follow-up owner transfers and no claim beyond its minimum-modification scope. |
+| Original Owner Request | T236 plan S7: reconcile every audit item, remove superseded no-op claims, run package-local regression, and transfer remaining external owners. |
+| Similar-Issue Sweep | Every T236 source-derived seam, old no-op/fallback assertion, fixture marker, and queued external-owner dependency. |
 
-**Current S5 progress:** resumed after S6's `VdmQueryDir` fallback-disposition
-closure; no S5 source or runtime result is claimed yet.
+**Current S7 progress:** admitted after S5's source/fixture closure. No T236
+final reconciliation or whole-guest execution result is claimed yet.
 
 Detailed T sequence and closure ledgers are in [the T236 minimum-modification recovery plan](etc/operations/m0-t236-dem-command-minimum-source-recovery-plan.md). S2 is closed at [its worker/broker closure](history/m0-t236-s2-closure-20260821.md). T235 S5 remains closed at [its fixed bundle closure](history/m0-t235-s5-closure-20260821.md).
 
@@ -41,6 +41,11 @@ M0 T236 S6 is closed as the OpenNT DEM search fallback disposition: the
 removed `VdmQueryDir` fast path is explicitly unavailable, while the imported
 slow reset resumes and exhausts search correctly after a source-owned handle
 eviction. See the [S6 closure](history/m0-t236-s6-closure-20260821.md).
+M0 T236 S5 is closed as the COMMAND WOW source disposition: direct imported
+`cmdGetNextCmd` remains the normal local path; its original `VDMForWOW` branch
+has a verified source-shaped controlled stop rather than a fabricated WOW
+launch, while kernel publication and shortcut consumption transfer to the
+queued WOW16 owner package. See the [S5 closure](history/m0-t236-s5-closure-20260821.md).
 M0 T236 S3 is closed as the direct OpenNT DEM `50:32`/`50:33` recovery: its
 single imported dispatcher table, copied-register retry seam and unified
 opaque-handle route are recorded in the [S3 closure](history/m0-t236-s3-closure-20260821.md).
