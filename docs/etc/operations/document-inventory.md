@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2027 |
 | --- | --- |
-| Generated UTC | 2026-08-22T05:00:53Z |
+| Generated UTC | 2026-08-22T05:06:08Z |
 
 ## Entries
 
@@ -295,13 +295,13 @@ content-divergent entries.
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
 | etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | 11d4a0cd06dc670513084704cd78aa4625d039cf3fbde55194d6d66ef7bd947e |
 | etc/operations/policy/source-policy.md | indexed supporting material | 975baa0c066a65b04b6ec317ae6065d70b13643a4c50ada5fadd1c7466f3b4a4 |
-| etc/operations/proposal-bop-cross-family-completion-audit-001.md | indexed supporting material | 5e027d741a68f4ac044b52087b53611d931695dc57401514f2b32778d9d63646 |
+| etc/operations/proposal-bop-cross-family-completion-audit-001.md | indexed supporting material | 119d16906b747acc59c15f42404e76c6860eeb980fe9df94f4c48c2e1e6c84a8 |
 | etc/operations/proposal-bx-machine-bios-selector-owner-package-completion-001.md | indexed supporting material | 40a7cbf4902abcb5f1b542ffc2b7f9199c27de83f5491a7b6dfd796128d7d885 |
 | etc/operations/proposal-bx-vdm-pending-bop-session-lifecycle-001.md | indexed supporting material | b3c5072c395c22475973085e337d757366b49e1769c3fb81fde9c12a38f7adf2 |
 | etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md | indexed supporting material | 472164739c7fe38ba4ccb20c64a0b72c13aa81d8df972786371c50c762c8393a |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 142a93fef99ec618565c294f911416b78836dc14591e962a70fe716e45de8fcc |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 49535864fe38f658afc1184eff855cb669f3a9cc050d19cb12d43aa4a939d1c2 |
-| etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 365ec72b4fe169dfba464e0295c67ad145d7252e1d97093c7ed025533e34d11c |
+| etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2d19ba62ee9233121c247d02a7335d9ae5bf66f001834f4b26ecb1f9915d4e8a |
 | etc/operations/proposal-opennt-command-owner-package-completion-001.md | indexed supporting material | 7ba4a2f4fb70d2d67c4c2434281e2914a7da4cce2cf457169df7a9cfe7dce1ea |
 | etc/operations/proposal-opennt-debugger-vdd-top-level-owner-package-completion-001.md | indexed supporting material | b4e8929d76e8bffdd739d926c379cf4e37e554c8541809392e3044744f53d18f |
 | etc/operations/proposal-opennt-dem-owner-package-completion-001.md | indexed supporting material | 30ba01ae5f5d06d404443369c717b3f8ed682c582454401a117b7852db767731 |
@@ -1915,7 +1915,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | b1891e551dbac2be048028044b6e1d6930be10c8ef6bbf3d813d81da6fbf8500 |
+| QUEUE.md | principal control document | 0d34f80feedeb131aca92f2df6c0f841f099442da9f8e1274bb47bf29cff76bb |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
