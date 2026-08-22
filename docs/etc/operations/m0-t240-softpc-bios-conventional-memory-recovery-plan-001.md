@@ -14,10 +14,8 @@ dependency, not a new member of the canonical 203 host-service BOP inventory.
 
 | S | Scope | Required exit before the next S |
 | --- | --- | --- |
-| S1 | Audit `bios.c`, `mem_size.c`, `reset.c`, their memory macros, the guest caller, current mantle lifecycle, current adapter helper/ingress and formal manifest. Produce a four-rung source-recovery, reset/value and ABI ledger. | Exact original ownership and first-profile value provenance are reconciled; a minimal typed seam is specified; all unrelated current helper behavior is classified. |
-| S2 | Bind the source-shaped query to the existing selector-blind checked-RAM read action. `bx-mantle` sees only physical address/length; the BDA address and original read-to-AX meaning remain in `bx-vdm`. | Positive/negative RAM-read, lifetime and teardown contracts pass; a guest write to BDA `0040:0013` changes the next returned AX; no BOP/BIOS/DOS/OpenNT vocabulary enters core/mantle. |
-| S3 | Recover the source-shaped `memory_size` provider in `bx-vdm`, reusing or mirroring the original body with only recorded SAS/CCPU compatibility changes. | Exact real-mode `C4 C4 12` accepts; AX-only and `RIP+3` result behavior pass; nonexact/invalid/missing-profile cases decline. |
-| S4 | Run component regression, formal build and one bounded source-built NTIO observation. | The declared `50:11 -> 12h -> next boundary` observation is recorded without automatically admitting the next selector. |
+| S1 | Audit `bios.c`, `mem_size.c`, `reset.c`, their memory macros, the guest caller, current mantle lifecycle, current adapter helper/ingress and formal manifest. Produce a four-rung source-recovery, reset/value and ABI ledger. | **Complete.** Exact original ownership and first-profile value provenance are reconciled; a minimal typed seam is specified; all unrelated current helper behavior is classified. |
+| S2 | Bind and recover the source-shaped query through the existing selector-blind checked-RAM read action. `bx-mantle` sees only physical address/length; the BDA address and original read-to-AX meaning remain in `bx-vdm`. | **Implementation complete.** The direct `mem_size.c` mirror, its uniquely named SAS/AX shim and active generic-UD route pass mutation/negative local tests and the formal Ninja fixture. One bounded native observation remains the S2 integration exit. |
 
 ## Non-negotiable exclusions
 

@@ -40,6 +40,17 @@ routes and formal-manifest membership.
    It hard-codes `0x027f` and combines selector `12h` with a separate
    `15h/AH=88h` experiment. It is inactive evidence/fixture material, not an
    active source-shaped route.
+
+## Successor implementation note
+
+T240 S2 retired that helper and its isolated fixture. The active source mirror
+is `src/bx-vdm/bop/opennt/softpc/mem_size.c`; its narrow shim maps only the
+historical SAS word-read and CPU AX-write spellings to the existing
+selector-blind checked-RAM action and typed generic-UD result. The mirror reads
+live BDA `0x413`; it neither freezes the old `0x027f` snapshot nor admits the
+unrelated `15h/AH=88h` experiment. Historical SAS names are private-prefixed
+at preprocessing time to avoid a linker collision with independently mirrored
+DEM code; the mirrored function body and call order are unchanged.
 6. The current mantle initializes native RAM and exposes generic checked RAM
    actions. It has no need to own or name the BDA word. A fixed-width checked
    read of physical address/length is sufficient for the source provider;

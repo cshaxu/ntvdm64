@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T240 S1** — source, reset-state and ABI audit is closed; awaiting
-owner review of the corrected S2 boundary before machine-seam implementation.
+**Active: M0 T240 S2** — recover the original SoftPC `memory_size` query
+through the existing selector-blind checked-RAM action.
 
 ## Active Packet
 
-### M0 T240 S1 — SoftPC BOP 12h source/reset/ABI admission ledger
+### M0 T240 S2 — source-shaped SoftPC BOP 12h RAM-read recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T240 S1`, Ordinary Mode, single-person dual-role source/ABI audit. |
-| Admission And Approval | Owner approved the dependency-driven queue split and then approved this task brief for implementation. |
-| Objective | Establish the exact original SoftPC reset, memory-data and `BOP 12h` query contract needed to recover the first reached post-`50:11` native bootstrap dependency. |
-| Non-goals | Do not implement a BOP result route, change `bx-core`/`bx-mantle`, enable keyboard/INT15/PIC/FPU/CMOS/video/block media, restore `15h/AH=88h`, or use the native trace to select another feature. |
-| Reference Baseline | T239 closure; `etc/bop-list.md` `BOP-DEPENDENCY-091`; `etc/research/bop-12-memory-size-contract-r20.md`; `etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md`. |
-| Files And ABI Surface | Read-only audit of SoftPC BIOS source/headers, current mantle lifecycle, current adapter helper/ingress, tracker and evidence. No production ABI change in S1. |
-| Applicable Rules | Source-first recovery, selector-blind bx boundary, no BOP/DOS/OpenNT vocabulary in core/mantle, MTSP governance and documentation evidence rules. |
-| Verification | Exact source/caller/reset/memory-map/ABI cross-reference; active-manifest/route inspection; boundary vocabulary scan; documentation governance and diff review. |
-| Expected Markers | A four-rung source-recovery ledger; one exact first-profile conventional-memory value/provenance decision; declared ownership of reset data, BOP recognition and typed CPU result; explicit rejected scope. |
-| Asset Needs | Pinned OpenNT/SoftPC and adopted Bochs sources, current mantle/adapter sources, prior snapshot/trace evidence, tracker and formal manifest. |
-| Reporting Requirements | Write a concise evidence record with inputs, procedure, observations, confidence and a bounded S2 seam recommendation; update tracker only if new exact dependency facts are found. |
-| Stop Conditions | Original `mem_size.c` is not the reached owner; reset/value provenance conflicts without a resolvable first-profile decision; current ingress requires a broader machine/device feature; or the smallest seam would carry BOP/DOS/OpenNT vocabulary into core/mantle. Stop and re-admit rather than design around it. |
-| Exit Criteria | The source/reset/ABI/failure ledger identifies the first usable recovery rung and a bounded selector-blind S2 seam, with all non-goals and deferred owners recorded; commit/push the evidence and governance update. |
-| Original Owner Request | “批准 模式实施”. |
-| Similar-Issue Sweep | Existing `BOP 12h` helper, `15h/AH=88h` coupling, BIOS-data reset source, machine-profile ownership, ingress/manifest membership, and all tracker references to P7/BOP 12. |
-| Exit Status | Closed P1: direct source audit confirms a mutable BDA `0040:0013` read-to-AX contract, not a mantle-private constant; the active helper is fixture-only and has no production caller. |
-| Next Admission | S2 requires owner review of the corrected boundary: bx-vdm uses a generic checked RAM read at source-defined `0x413`; mantle remains selector-blind and owns no conventional-memory/BOP semantics. |
+| Identifier Mode | `M0 T240 S2`, Ordinary Mode, single-person dual-role source recovery and review. |
+| Admission And Approval | Owner correction: this is not a Bochs intrusion or a material boundary expansion. The existing generic checked-RAM action is the approved selector-blind mechanical seam; proceed without an additional approval stop. |
+| Objective | Recover original `mem_size.c` behavior: exact real-mode `C4 C4 12` reads mutable BDA word `0040:0013` through the existing checked-RAM action, writes only low-16-bit AX and resumes at RIP+3. |
+| Non-goals | Do not alter bx-core/bx-mantle ABI or source; do not add BOP/BIOS/DOS/OpenNT terms to mantle; do not recover `15h/AH=88h`, keyboard/INT15, PIC/FPU/CMOS/video/media or a general BIOS dispatcher. |
+| Reference Baseline | T240 S1 P1 audit; `BOP-DEPENDENCY-091`; existing mechanical action ABI and current inactive helper/fixture. |
+| Files And ABI Surface | `src/bx-vdm/bop/opennt/` source mirror and named bx-vdm shim/route, the current obsolete helper/fixture and formal manifest/tests. The existing mantle mechanical-action ABI is consumed unchanged. |
+| Applicable Rules | Source-first recovery, selector-blind bx boundary, direct original-owner layout/order/failure preservation, v1 retirement and MTSP governance. |
+| Verification | Local source-mirror provider fixture: exact window/mode, BDA little-endian read, guest mutation visibility, AX-only/RIP+3, inactive/out-of-range/teardown/nonexact decline; formal Ninja build; boundary scan; one bounded native observation only after local closure. |
+| Expected Markers | Active OpenNT-shaped provider, no hard-coded conventional-memory result, no coupled `15h/AH=88h` path, no production caller of the superseded helper, and no new mantle/core source. |
+| Asset Needs | T240 S1 source ledger; existing checked-RAM action; active generic-UD ingress; current formal Ninja manifest and source-built NTIO fixture. |
+| Reporting Requirements | Record original/source-mirror/shim divergence, removal ledger for old helper/test, local result matrix and native-observation limitation. |
+| Stop Conditions | The active ingress cannot transport a synchronous checked read without new core/mantle semantics; the original source requires an unrepresented state mutation; or an implementation would expand to another selector/device. |
+| Exit Criteria | Original `memory_size` behavior is active and locally tested through the existing mechanical seam; obsolete coupled helper/fixture is retired; formal build and bounded native observation are recorded; commit/push closure. |
+| Original Owner Request | “像这种情况 甚至连对bochs的侵入都没有 为啥需要我批准”. |
+| Similar-Issue Sweep | All current callers of the legacy helper, `15h/AH=88h` coupling, BDA address handling, generic RAM action action-id use, ingress order, manifest membership and mantle vocabulary scan. |
+| Exit Status | Active — P1 source mirror, private SAS/AX shim, direct ingress, v1-helper retirement and focused formal fixture are complete. The remaining S2 exit work is one bounded native observation using the rebuilt product target; it may classify only the completed `12h` component and must not allocate the next selector. |
+| Next Admission | S3 only if S2 proves that the source-shaped provider needs a separately bounded ingress/result integration change. |
 
 ## Latest Closure
 

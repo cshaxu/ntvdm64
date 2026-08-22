@@ -183,7 +183,9 @@
       "sources": [
         "src/bx-vdm/bx_ntvdm_engine_contract_v1.c",
         "src/bx-vdm/bx_ntvdm_engine_run_v1.c",
-        "src/bx-vdm/bx_ntvdm_bios_memory_service.c",
+        "src/bx-vdm/bop/opennt/softpc/mem_size.c",
+        "src/bx-vdm/bop/shim/softpc_memory_size_shim.c",
+        "src/bx-vdm/bop/softpc_memory_size_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/opennt/xms/xms.c",
         "src/bx-vdm/bop/opennt/xms/suballoc.c",
         "src/bx-vdm/bop/opennt/xms/xmsa20.c",
@@ -299,6 +301,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t240-s2-softpc-memory-size-fixture",
+      "source": "tests/bx-vdm/t240_s2_softpc_memory_size_fixture.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": []
+    },
     {
       "name": "t237-s5-bop-nosupport-fixture",
       "source": "tests/bx-vdm/t237_s5_bop_nosupport_fixture.c",
