@@ -6,6 +6,14 @@ Recover the OpenNT debugger, VDD, console/input, and top-level notification/serv
 that are part of declared CLI NTVDM profiles, with separate explicit
 disposition for genuinely diagnostic-only or excluded facilities.
 
+## Queue relationship
+
+This is a supporting owner-workstream plan, not an independent queue position.
+The dependency-driven queue admits it only inside candidate 3,
+**External compatibility, machine and legacy-composition BOP closure**, after
+its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
+follow the tracker’s Win32/x64 compatibility decision rule and may not use its
+former family position to bypass lower-dependency work.
 ## Boundary
 
 OpenNT remains owner of debugger/VDD lifecycle and failure contracts.  The

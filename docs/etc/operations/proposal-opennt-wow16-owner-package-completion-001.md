@@ -6,6 +6,14 @@ Recover a complete, declared WOW16 profile: source-built guest NE artifacts,
 WOW/DPMI transition, host hooks, lifecycle and a bounded non-GUI execution
 contract.  WOW16 is a target capability, not a permanent negative fixture.
 
+## Queue relationship
+
+This is a supporting owner-workstream plan, not an independent queue position.
+The dependency-driven queue admits it only inside candidate 3,
+**External compatibility, machine and legacy-composition BOP closure**, after
+its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
+follow the tracker’s Win32/x64 compatibility decision rule and may not use its
+former family position to bypass lower-dependency work.
 ## Boundary
 
 Guest NE loader/runtime and DPMI guest code remain OpenNT guest owners.
@@ -15,10 +23,10 @@ capability seams.  Neither Bochs nor `bx-vdm` implements Win16 APIs.
 
 ## COMMAND Lifecycle Dependency
 
-T236 owns the bounded Direct, non-pipe COMMAND child record used by
+T236 owns the bounded local, non-pipe COMMAND child record used by
 `54:08`/`54:0A`/`54:0B`. It deliberately excludes `VDMForWOW`, WOW command
 line publication and the historical WOWEXEC/WOW32 broker. This package may
-not silently reinterpret the Direct child record as WOW support or add WOW
+not silently reinterpret the local child record as WOW support or add WOW
 policy to COMMAND. Its admission must source-map the separate
 `GetWowKernelCmdLine`/shortcut and host-hook contracts, then either consume a
 future explicitly versioned session capability or produce the original-shaped

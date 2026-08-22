@@ -15,6 +15,13 @@ owner-package closures may add similarly documented pending paths before
 admission. A local shim or a code-complete dispatcher is never itself a claim
 that its cross-owner lifecycle has closed.
 
+## Queue relationship
+
+This is a P13 supporting workstream inside candidate 3,
+**External compatibility, machine and legacy-composition BOP closure**. It is
+admitted only after the required native owner contracts are complete; it is no
+longer an independent queue position. Candidate 4 then audits its integrated
+result against the complete tracker.
 ## Boundary
 
 This is a late composition and closure package, not a place to reimplement a

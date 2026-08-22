@@ -94,7 +94,6 @@ int main(void)
      * standalone source fixture has neither and must decline rather than
      * silently claim that a source action occurred. */
     if (invoke(&memory, 0u, 2u, 0u, 0u, &result) ||
-        invoke(&memory, 6u, 0u, 0u, 0u, &result) ||
         invoke(&memory, 9u, 0u, 0u, 0u, &result)) return 9;
 
     if (!invoke(&memory, 4u, 0u, 0u, 0u, &result) ||

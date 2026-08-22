@@ -21,10 +21,17 @@ the selected OpenNT owner; no historical GUI/NT4 host composition is loaded.
 2. **S2 — code complete:** close the complete bootstrap/launch/console/
    environment/lifecycle provider package, preserving original ordering and
    rejecting unsupported capabilities explicitly.
-3. **S3 — verification:** execute whole-package Direct local regressions and
+3. **S3 — verification:** execute whole-package declared-capability local regressions and
    one source-built COMMAND native integration run.
 
 ## Exit Rule
 
 Individual endpoints such as `54:04` or `54:0E` count only as package tests;
 they cannot independently close this proposal.
+
+## Queue relationship
+
+COMMAND source/ABI recovery is recorded in the tracker rather than reserved
+as an independent queue position. Remaining branches enter candidate 1, 2 or
+3 strictly by their `BOP-DEPENDENCY-…` prerequisites; guest parent-return and
+external broker/pipe/WOW branches cannot be claimed by an internal slice.

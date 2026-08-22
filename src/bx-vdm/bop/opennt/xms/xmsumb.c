@@ -78,7 +78,8 @@ VOID  xmsInitUMB(VOID)
 	    xmsUMB = xmsUMBNew;
     }
     xmsIsON = TRUE;
-    pHimemA20State = (PBYTE) GetVDMAddr(getAX(), getBX());
+    /* DIVERGENCE (T237 S5): retain the original AX:BX input and operation
+     * order, but bind it as a checked guest byte rather than a host pointer. */
     xmsEnableA20Wrapping();
 
 

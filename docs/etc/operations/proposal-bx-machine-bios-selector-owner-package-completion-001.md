@@ -6,6 +6,14 @@ Complete BOP-reachable SoftPC/BIOS selector mechanics as a native machine
 package: reset/lifecycle, ROM/RAM, default port-space, PIC/IRQ, FPU, CMOS,
 BIOS helpers and typed mechanical requests.
 
+## Queue relationship
+
+This is a supporting owner-workstream plan, not an independent queue position.
+The dependency-driven queue admits it only inside candidate 3,
+**External compatibility, machine and legacy-composition BOP closure**, after
+its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
+follow the tracker’s Win32/x64 compatibility decision rule and may not use its
+former family position to bypass lower-dependency work.
 ## Boundary
 
 `bx-core` owns adopted Bochs CPU, memory, exceptions and devices;

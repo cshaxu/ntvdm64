@@ -2,40 +2,45 @@
 
 ## Current Work
 
-**Active: M0 T237 S4** — active; manual XMS source-mirror, v1-retirement, and discovered machine-boundary repair audit.
+**Active: M0 T237 S5** — closure delivery verified; T237 is recorded closed
+and the dependency-driven queue awaits owner admission of a successor.
 
 ## Active Packet
 
-### M0 T237 S4 — manual XMS recovery audit
+### M0 T237 S5 — closure delivery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T237 S4`, Ordinary Mode, single-person dual-role review. |
-| Admission And Approval | Owner explicitly reopens T237 for manual audit and explicitly declines DPMI admission. |
-| Objective | Independently inspect every `52:00..0B` source mirror, divergence, route, fixture and retired v1 identity; correct any discovered `bx-core`/`bx-mantle` business-semantic contamination before another closure claim. |
-| Non-goals | Do not admit DPMI, implement a new XMS feature, restore v1, or claim that UMB/INT15/native guest continuity is complete. |
-| Reference Baseline | T237 S1/S2/S3 records, committed `4a711706`, the original `src/opennt/base/mvdm/xms.486/` sources, and the current formal manifest. |
-| Files And ABI Surface | `bop/opennt/xms`, `bop/shim/xms_*`, `bop/xms_v2_*`, XMS fixtures, engine composition contract/run entry, formal manifest, and every former XMS v1 path. |
-| Applicable Rules | Source-first recovery, owner boundaries, fixed-width adapter ABI, documentary separation of current status from closed history. |
-| Verification | Manual source-to-mirror comparison; all-service dispatch/ABI review; v1/provider/manifest sweep; enforce a formal core/mantle semantic-vocabulary gate; independently rerun repeatable retirement gates and record exact results. |
-| Expected Markers | A human-readable per-service audit ledger: original owner, retained body, divergence, live route, test evidence, and named unresolved owner. |
-| Asset Needs | Existing OpenNT source, current committed tree, formal Ninja manifest and no new imported source. |
-| Reporting Requirements | Record contradictions and corrections; distinguish source/package proof from machine/guest execution; do not infer closure from a prior fixture alone. |
-| Stop Conditions | Pause if a mirror lacks an original owner, an undocumented divergence changes semantics, a v1 provider remains live, or an unresolved prerequisite is being reported as success. |
-| Exit Criteria | Manual ledger covers all twelve slots; every divergence/owner/route/v1 result is classified and any discovered defect is either corrected and verified or explicitly retained as an open T237 item. |
-| Original Owner Request | `暂不准入，重开T237 我要手动审计`。 |
-| Similar-Issue Sweep | Original source files, dispatch table, all shims, generic ingress, fixtures, formal membership, generic legacy catalog metadata, retired paths, and all formal `bx-core`/`bx-mantle` sources. |
+| Identifier Mode | `M0 T237 S5`, Ordinary Mode, single-person dual-role review. |
+| Admission And Approval | Owner directed T237 closure and authorized normal commit/push delivery. |
+| Objective | Deliver the already verified T237 source/ABI closure without expanding into machine UMB allocation or keyboard/IVT behavior. |
+| Non-goals | Do not add a UMB aperture, keyboard/IVT capability, DPMI, or a continuous-guest claim. |
+| Reference Baseline | T237 S4 audit, imported OpenNT XMS sources, current tracker, and formal Ninja manifest. |
+| Files And ABI Surface | XMS mirror/shim, scoped state-byte seam, source fixtures, tracker and closure records. |
+| Applicable Rules | Source-first recovery, selector-blind core/mantle, fixed-width checked boundary, and T/S/P closure rules. |
+| Verification | Fresh formal r7 full graph; two XMS fixtures; v1-retirement and machine-semantic gates; documentation governance; diff review. |
+| Expected Markers | Checked AX:BX state byte, source-order A20 writes, B1/B2 empty-map failures, no core/mantle service vocabulary. |
+| Asset Needs | Existing OpenNT source and formal manifest only. |
+| Reporting Requirements | Record the exact pointer divergence, positive local witness, and named machine/keyboard transfers. |
+| Stop Conditions | Stop rather than put XMS/UMB/DOS policy or raw guest pointers into core/mantle. |
+| Exit Criteria | All stated verification passes and the closure/history/tracker disposition is committed and pushed. |
+| Original Owner Request | `帮我做好这几项退出条件的收口任务，并完成T237，准备好进入下一阶段。` |
+| Similar-Issue Sweep | XMS source table, UMB/A20 sources, shim/session reset paths, direct/native fixtures, formal membership, tracker and semantic gate. |
+| Exit Status | All stated exit checks pass; history and evidence are recorded below. No successor work is admitted by this closure packet. |
+| Next Admission | Select the next unnumbered dependency-driven candidate from `QUEUE.md`, allocate a new global T number, and replace this packet before implementation. |
 
-M0 T236 is closed at [its reconciliation and owner-transfer record](history/m0-t236-closure-20260821.md).
+## Latest Closure
 
-**S4 manual-audit progress:** the first independent per-slot review is
-recorded in [T237 S4 manual audit](etc/operations/m0-t237-s4-manual-xms-audit-001.md).
-It confirms a precise distinction: `52:06` declines before the source body
-because a durable guest-byte seam is absent, whereas `52:07/08` execute their
-mirrored source bodies and return original empty-UMB `B1/B2` failures.
-The same review found and is correcting a real layering defect: engine/session
-composition is bx-vdm-owned, and the retired mantle extended-memory allocator
-must not remain as a parallel XMS-like policy.
+M0 T237 closes the XMS source-mirror package: `52:06` now reaches the
+imported `xmsInitUMB` source body through a checked AX:BX state-byte seam;
+later original A20 calls publish to that byte; and `52:07/08` retain their
+empty-map `B1/B2` behavior. Fresh formal Ninja r7, both XMS fixtures, the
+v1-retirement gate and the machine-semantic boundary gate pass. The detailed
+record is [T237 S5 closure evidence](etc/operations/m0-t237-s5-xms-umb-a20-closure-001.md);
+the closed package is in [T237 history](history/m0-t237-closure-20260822.md).
+
+Successful physical UMB reservation and `52:09` keyboard/IVT behavior remain
+explicitly transferred to the future selector-blind machine/BIOS owner.
 
 ## Current Work Record
 

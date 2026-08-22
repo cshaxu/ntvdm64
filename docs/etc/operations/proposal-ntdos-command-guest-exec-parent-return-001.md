@@ -7,6 +7,14 @@ completion: PSP/arena/JFN/environment setup, child execution, parent state
 restoration and ordinary `54:0B` return. This is the missing owner package
 between a closed host `cmdExec32` worker and continuous guest execution.
 
+## Queue relationship
+
+This is a supporting owner-workstream plan, not an independent queue position.
+The dependency-driven queue admits it only inside candidate 3,
+**External compatibility, machine and legacy-composition BOP closure**, after
+its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
+follow the tracker’s Win32/x64 compatibility decision rule and may not use its
+former family position to bypass lower-dependency work.
 ## Boundary
 
 NTDOS/COMMAND guest sources own DOS process semantics. `bx-vdm` may only pass

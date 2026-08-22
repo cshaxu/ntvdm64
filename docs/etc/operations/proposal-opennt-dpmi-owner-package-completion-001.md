@@ -5,6 +5,14 @@
 Recover one complete OpenNT-derived DPMI profile (`53:xx`) rather than a
 collection of protected-mode service stubs.
 
+## Queue relationship
+
+This is a supporting owner-workstream plan, not an independent queue position.
+The dependency-driven queue admits it only inside candidate 3,
+**External compatibility, machine and legacy-composition BOP closure**, after
+its applicable BOP-… / BOP-DEPENDENCY-… rows have been frozen. It must
+follow the tracker’s Win32/x64 compatibility decision rule and may not use its
+former family position to bypass lower-dependency work.
 ## Boundary
 
 Bochs owns protected-mode execution, descriptor checks and architectural

@@ -12,6 +12,11 @@ typedef struct bx_ntvdm_xms_active_call {
 static __declspec(thread) bx_ntvdm_xms_active_call *g_active_call;
 static ULONG g_configured_memory_kib;
 static int g_xms_initialized;
+/* DIVERGENCE (T237 S5): OpenNT's xmsa20.c retained a host-mapped pointer
+ * from GetVDMAddr.  A x64-safe composition retains the real-mode physical
+ * byte address and writes it through the existing checked guest boundary. */
+static __declspec(thread) uint32_t g_himem_a20_state_address;
+static __declspec(thread) int g_himem_a20_state_bound;
 
 static bx_ntvdm_xms_active_call *active_call(void)
 {
@@ -73,6 +78,36 @@ PVOID bx_ntvdm_xms_get_vdm_addr(USHORT segment, USHORT offset)
     /* Deliberately unavailable until the checked bounce-span seam is wired.
      * A raw guest pointer is not permitted to escape this adapter boundary. */
     return NULL;
+}
+
+int bx_ntvdm_xms_bind_himem_a20_state(USHORT segment, USHORT offset)
+{
+    uint8_t value;
+    uint32_t address = ((uint32_t)segment << 4) + (uint32_t)offset;
+    bx_ntvdm_xms_active_call *active = active_call();
+    if (active == NULL || active->call == NULL ||
+        !active->call->guest_read(active->call->guest_state, address, &value, 1u))
+        return 0;
+    g_himem_a20_state_address = address;
+    g_himem_a20_state_bound = 1;
+    return 1;
+}
+
+void bx_ntvdm_xms_write_himem_a20_state(BYTE value)
+{
+    bx_ntvdm_xms_active_call *active = active_call();
+    if (active == NULL || active->call == NULL || !g_himem_a20_state_bound)
+        return;
+    /* The source body has already performed the A20 transition.  A failed
+     * publication is never treated as a host-pointer fallback. */
+    (void)active->call->guest_write(active->call->guest_state,
+        g_himem_a20_state_address, &value, 1u);
+}
+
+void bx_ntvdm_xms_clear_himem_a20_state(void)
+{
+    g_himem_a20_state_address = 0u;
+    g_himem_a20_state_bound = 0;
 }
 
 int bx_ntvdm_xms_copy_physical(uint32_t source, uint32_t destination,
@@ -194,6 +229,7 @@ void bx_ntvdm_xms_reset(void)
     g_xms_initialized = 0;
     xmsMemorySize = 0u;
     ExtMemSA = NULL;
+    bx_ntvdm_xms_clear_himem_a20_state();
 }
 
 int bx_ntvdm_xms_initialize(void)
@@ -262,10 +298,10 @@ int bx_ntvdm_xms_invoke(bx_ntvdm_xms_call *call)
      * mechanism exists and supplies no failure register contract.  Do not
      * turn an inactive mantle lifecycle into a false source success. */
     if (call->service == 0u && !bx_ntvdm_xms_a20_available()) return 0;
-    /* 52:06 also publishes a HIMEM state byte via GetVDMAddr(AX:BX).  The
-     * current adapter deliberately refuses raw guest pointers, so reject the
-     * whole service until a checked durable-byte mechanic is admitted. */
-    if (call->service == 6u) return 0;
+    /* 52:06 stores the HIMEM state byte across future A20 calls.  Bind its
+     * real-mode address before entering the source body; no raw host pointer
+     * is exposed or retained. */
+    if (call->service == 6u && !bx_ntvdm_xms_a20_available()) return 0;
     /* 52:09 calls keybd_io.c:UpdateKbdInt15.  It validates the real IVT and
      * updates the keyboard's INT15 optimization state.  No such state belongs
      * to bx-vdm, and the source exposes no error result; keep it explicitly
@@ -280,6 +316,12 @@ int bx_ntvdm_xms_invoke(bx_ntvdm_xms_call *call)
         return 0;
     g_active_call = &active;
     if (!g_xms_initialized) {
+        g_active_call = NULL;
+        return 0;
+    }
+    if (call->service == 6u &&
+        !bx_ntvdm_xms_bind_himem_a20_state(low16(active.cpu.eax),
+            low16(active.cpu.ebx))) {
         g_active_call = NULL;
         return 0;
     }

@@ -63,6 +63,11 @@ void bx_ntvdm_xms_set_ax(USHORT value); void bx_ntvdm_xms_set_bx(USHORT value);
 void bx_ntvdm_xms_set_bl(USHORT value); void bx_ntvdm_xms_set_cx(USHORT value);
 void bx_ntvdm_xms_set_dx(USHORT value); void bx_ntvdm_xms_set_cf(int value);
 PVOID bx_ntvdm_xms_get_vdm_addr(USHORT segment, USHORT offset);
+/* The historical source retained a host pointer returned by GetVDMAddr.
+ * The modern boundary retains only a checked, fixed-width guest address. */
+int bx_ntvdm_xms_bind_himem_a20_state(USHORT segment, USHORT offset);
+void bx_ntvdm_xms_write_himem_a20_state(BYTE value);
+void bx_ntvdm_xms_clear_himem_a20_state(void);
 int bx_ntvdm_xms_copy_physical(uint32_t source, uint32_t destination,
     uint32_t bytes);
 int bx_ntvdm_xms_move_block_from_guest(USHORT segment, USHORT offset);
@@ -91,7 +96,6 @@ VOID xmsInsertUMB(PVOID address, ULONG bytes);
 
 extern ULONG xmsMemorySize;
 extern PVOID ExtMemSA;
-extern BYTE *pHimemA20State;
 
 /* The original suballocator remains the policy implementation.  These
  * declarations are deliberately source-shaped; its backing callbacks are
