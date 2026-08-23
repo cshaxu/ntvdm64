@@ -187,15 +187,19 @@
       "sources": [
         "src/bx-vdm/bx_ntvdm_engine_contract_v1.c",
         "src/bx-vdm/bx_ntvdm_engine_run_v1.c",
+        "src/bx-vdm/bx_ntvdm_ntdos_exec_observation_v1.c",
         "src/bx-vdm/bop/opennt/softpc/mem_size.c",
         "src/bx-vdm/bop/opennt/softpc/tape_io.c",
+        "src/bx-vdm/bop/opennt/softpc/emm_fncs.c",
         "src/bx-vdm/bop/opennt/softpc/update_kbd_int15.c",
         "src/bx-vdm/bop/opennt/softpc/spckbd_handoff.c",
         "src/bx-vdm/bop/shim/softpc_memory_size_shim.c",
         "src/bx-vdm/bop/shim/softpc_tape_io_shim.c",
+        "src/bx-vdm/bop/shim/softpc_emm_unavailable_shim.c",
         "src/bx-vdm/bop/shim/spckbd_handoff_shim.c",
         "src/bx-vdm/bop/softpc_memory_size_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/softpc_tape_io_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/softpc_emm_unavailable_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/spckbd_handoff_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/opennt/xms/xms.c",
         "src/bx-vdm/bop/opennt/xms/suballoc.c",
@@ -310,6 +314,26 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t245-s3-softpc-emm-unavailable-fixture",
+      "source": "tests/bx-vdm/t245_s3_softpc_emm_unavailable_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t245-s2-ntdos-exec-observation-fixture",
+      "source": "tests/bx-vdm/t245_s2_ntdos_exec_observation_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
+    },
     {
       "name": "t240-s2-softpc-memory-size-fixture",
       "source": "tests/bx-vdm/t240_s2_softpc_memory_size_fixture.c",

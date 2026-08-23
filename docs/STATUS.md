@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T245 S1** — NTDOS guest EXEC and parent-return source/ABI map.
+**Active: M0 T245 S4** — Headless mouse-vector owner-package map.
 
 ## Active Packet
 
-### M0 T245 S1 — NTDOS guest EXEC and parent-return source/ABI map
+### M0 T245 S4 — Headless mouse-vector owner-package map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S1`, Ordinary Mode, single-person dual-role guest-owner recovery. |
-| Admission And Approval | Owner's standing instruction to implement queue-ordered OpenNT source recovery admits the queue head after T244 closure. |
-| Objective | Freeze the original NTDOS `EXEC` / PSP / arena / JFN / environment / parent-return call map, its staged guest-image paths, and each host BOP/machine prerequisite before editing guest-owner behavior. |
-| Non-goals | No COMMAND host-broker rewrite; no BOP leaf patch selected by trace; no DPMI/Redirector/WOW/console implementation; no bx-core/bx-mantle semantic intrusion. |
-| Reference Baseline | [Guest EXEC proposal](etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md), `BOP-DEPENDENCY-002/012/018/019..033`, `BOP-COMMAND-54-08/0A/0B`, T236 and T244 closures. |
-| Files And ABI Surface | Read-only OpenNT/NTDOS source and staged guest-image maps; `docs/etc/bop-list.md`; no production source change in S1. |
+| Identifier Mode | `M0 T245 S4`, Ordinary Mode, single-person dual-role package source/ABI mapping. |
+| Admission And Approval | Closed S3 evidence identifies `C8` as the next complete owner package; mapping and ordinary queue work require no renewed approval. |
+| Objective | Map the complete OpenNT headless mouse-vector package reached through `BOP C8`: first/second host installer phases, guest table/IVT contract, native device edges and explicit unavailable behavior. |
+| Non-goals | No trace-led single-selector patch, host mouse/UI/input, IRQ/EOI, GUI, EMS expansion, COMMAND rewrite, or bx-core/bx-mantle semantic intrusion. |
+| Reference Baseline | [S3 closure](etc/evidence/m0-t245-s3-softpc-emm-unavailable-closure-001.md), `BOP-DEPENDENCY-108`, T243/T244 closures and retained C8 source evidence. |
+| Files And ABI Surface | Read-only source/ABI map and tracker/queue transfer only; no production provider in S4. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, fixed-width bridge, no trace-led work and MTSP governance. |
-| Verification | Source/caller/ABI/failure matrix names executable source paths, caller-to-return control transfer and every receiving owner; tracker has no unrecorded prerequisite. |
-| Expected Markers | A declared one-child DOS→parent profile, explicit `54:0B` consumption point, and a bounded S2 source-mirror scope. |
+| Verification | Source-map consistency check against guest caller, SoftPC dispatch and retained C8 evidence; no native trace or new runtime route. |
+| Expected Markers | One owner package, its required source files and dependency graph, and an explicit future-owner disposition for native machine and host-input concerns. |
 | Asset Needs | Existing OpenNT NTOS/COMMAND mirrors, source-built DOS guest images and existing COMMAND child-lifecycle evidence; no new external source. |
 | Reporting Requirements | Record source path, guest layout/ordering, failure rule, source-recovery ladder and transfer owner for each unavailable prerequisite. |
-| Stop Conditions | Need to modify a machine device, recreate a COMMAND broker, or use a host pointer/handle in guest state. Record and transfer instead. |
-| Exit Criteria | Met: the source map selects an `AL=0` guest profile, freezes its original owner boundaries and records the reached EMS predecessor as `BOP-DEPENDENCY-107`; P1 is being formed. |
+| Stop Conditions | Need to implement a route before mapping all installer phases, enable host input/UI/IRQ, modify a machine device, or infer source behavior from the trace. Record and transfer instead. |
+| Exit Criteria | The map identifies source ownership, source files, copied guest data, required machine seams and unavailable/device policy; the queued package can be admitted without rediscovering C8 from a trace. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 
