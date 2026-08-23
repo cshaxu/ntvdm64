@@ -14,7 +14,7 @@
 | Admission And Approval | S6 is closed by the formal [geometry evidence](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md). S7 is analysis only until a new selector-blind reservation record is prospectively registered. |
 | Objective | Define the smallest generic ordinary-RAM reservation lifecycle that can use an explicitly composed interval without encoding DPMI, BOP, selector or host-pointer policy. |
 | Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, allocator implementation, pointer/object, trace-driven patch, or adopted-code change. |
-| Reference Baseline | [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S5 geometry map](etc/evidence/m0-t256-s5-guest-ram-geometry-impact-map-001.md), [S6 closure](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md), and tracker. |
+| Reference Baseline | [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S5 geometry map](etc/evidence/m0-t256-s5-guest-ram-geometry-impact-map-001.md), [S6 closure](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md), [S7 design](etc/evidence/m0-t256-s7-ordinary-ram-reservation-design-001.md), and tracker. |
 | Files And ABI Surface | Evidence and tracker only unless a later registered S defines a selector-blind reservation record. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
 | Verification | Source/ownership map, explicit reservation-record proposal, collision and lifecycle rules, and an admission/defer decision. |
