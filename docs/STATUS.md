@@ -2,9 +2,45 @@
 
 ## Current Work
 
-**Active: M0 T259 S4** — host/machine source-shaped facade reconciliation.
+**Active: M0 T260 S1** — eight-component source-layout reorganization and
+build closure.
 
 ## Active Packet
+
+### M0 T260 S1 — Complete owner/provenance/build manifest
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T260 S1`, Ordinary Mode with a single-person dual-role review. T260 is one architecture reorganization package with eight sequential S tasks; it is not eight component tasks. |
+| Admission And Approval | Owner approved the queue head and prescribed the complete S1--S8 sequence: manifest; roots/registers; stable Bochs owners; app/guest; BOP; host/Win32; bx adapter; tests/Ninja/legacy-path exit. |
+| Objective | Produce the complete file-level owner, provenance, build-input and migration-disposition manifest required to move every live product input from the transitional tree into exactly one of `bx-core`, `bx-mantle`, `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-win32`, `adapter-bx`, or `app`. |
+| Non-goals | No `git mv` yet; no BOP/provider enablement; no guest, Bochs, host-capability or compatibility-semantic change; no new facade; no opportunistic test repair. |
+| Reference Baseline | [Component-reorganization proposal](etc/operations/proposal-seven-component-source-layout-reorganization-001.md), current `t225-s7-full-module-manifest.json`, live BOP tracker, T258 mapping manager and T259 facade closure. |
+| Files And ABI Surface | Current `src/cli`, `src/bx-vdm`, live portions of `src/opennt`, `src/bx-core`, `src/bx-mantle`, tests, and formal Ninja/manifest inputs. S1 changes only the migration manifest and supporting governance evidence. |
+| Applicable Rules | Target-component dependency direction; source-first recovery; one mapping-manager implementation with three session instances; no Bochs/OpenNT semantic intrusion; transition paths are not precedent. |
+| Verification | File enumeration cross-check against formal manifest and Ninja inputs; owner/provenance uniqueness audit; reverse scan for undeclared legacy production inputs; documentation governance verification and `git diff --check`. |
+| Expected Markers | Every live source/header/test/build input has one target owner, provenance class, migration method (`retain`, `git mv`, split, archive, or delete-after-callers`), and a declared S destination. |
+| Asset Needs | Current source tree; BOP tracker; build manifest and generator; component proposal; existing exception register and T259 evidence. |
+| Reporting Requirements | State all mixed files, especially `bop/shim`, unresolved classification facts, source provenance, and every item that cannot be moved without a later S. |
+| Stop Conditions | A requested move would change a BOP/guest/machine semantic; a file has no defensible owner; a cyclic dependency would be introduced; or a legacy source is found to be a second live provider. Pause and revise the S brief. |
+| Exit Criteria | The manifest is complete and unique; its component graph is acyclic and matches the proposal; every current live input has an S2--S8 disposition; no source is moved. |
+| Original Owner Request | “应使用 1 个 T 任务，例如：M0 T260：七/八组件源码布局重整与构建闭合……这个 T 应拆成约 8 个 S。” |
+| Similar-Issue Sweep | Headers, fixtures, generated Ninja input, include roots, legacy v1/test-only code, OpenNT source provenance and the shared mapping-manager placement. |
+
+### Planned T260 S sequence
+
+| S | Bounded outcome |
+| --- | --- |
+| S1 | Complete owner/provenance/build manifest. |
+| S2 | Target roots, READMEs, exception registers and public library/include boundaries. |
+| S3 | Stable in-place `bx-core`/`bx-mantle` owner confirmation and register migration. |
+| S4 | `app` and `opennt-guest` migration. |
+| S5 | `opennt-bop` mirror, ingress and route migration. |
+| S6 | `opennt-host` and `adapter-win32` classification/split migration. |
+| S7 | `adapter-bx` mechanical-boundary and shared-mapping-manager migration. |
+| S8 | Tests, formal Ninja graph, legacy-path exit and whole-package acceptance. |
+
+## Previous Active Packet — M0 T259
 
 ### M0 T259 S4 — Host/machine source-shaped facade reconciliation
 
@@ -91,11 +127,9 @@ from the erroneous `2` to OpenNT's `1`.  A full fresh r17 graph produces all
 79 declared outputs, and PIF parser, COMMAND misc and DEM hard-error fixtures
 pass; see [S4 P5 evidence](etc/evidence/m0-t259-s4-p5-command-pif-dialog-facade-closure-001.md).
 
-**T259 technical closure state:** all admitted S1--S4 exit criteria are now
-met, and the [formal T259 closure](history/m0-t259-closure-20260823.md) is
-recorded. The packet remains the active Status pointer only because the
-governance verifier requires one admitted `M/T/S` record until a successor is
-chosen; that pointer does not reopen T259's completed scope.
+**T259 technical closure state:** all admitted S1--S4 exit criteria are met,
+and the [formal T259 closure](history/m0-t259-closure-20260823.md) is
+recorded. T260 succeeds it; this retained record does not reopen T259's scope.
 
 ## Latest Closure
 

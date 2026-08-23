@@ -1,12 +1,14 @@
 # Seven-component source-layout reorganization proposal
 
-## Decision requested
+## Admitted task scope
 
-Admit a bounded repository reorganization task which moves the transitional
-source tree into the following target components. The task changes ownership,
-build inputs and documentation only; it does not use the move as authorization
-to change a BOP provider, guest behavior, machine feature, or compatibility
-semantic.
+M0 T260 is a single bounded repository reorganization task: **eight-component
+source-layout reorganization and build closure**. Its components are not
+separate T tasks because their headers, library names, link order and source
+ownership must change as one auditable dependency graph. The task changes
+ownership, build inputs and documentation only; it does not use a move as
+authorization to change a BOP provider, guest behavior, machine feature, or
+compatibility semantic.
 
 | Target component | Contract |
 | --- | --- |
@@ -66,21 +68,61 @@ remain in the OpenNT owner and only the bounded mechanical conversion moves.
 
 ## Migration method
 
-1. Produce a file-level owner/provenance/build-input manifest for every live
+### S1 — Complete owner/provenance/build manifest
+
+Produce a file-level owner/provenance/build-input manifest for every live
    source, header, test, generated input and build-list entry below the current
    transitional `src/cli`, `src/bx-vdm`, and `src/opennt` paths.
-2. Create the target component README/register roots before moving source.
+
+### S2 — Target roots, registers and library boundaries
+
+Create the target component README/register roots and declared public include
+and static-library boundaries before moving source.
+
+### S3 — Stable in-place Bochs components
+
+Confirm `bx-core` and `bx-mantle` ownership in place; migrate their required
+register evidence and prove no external VDM/OpenNT meaning has entered mantle.
+
+### S4 — `app` and `opennt-guest`
+
+Move `src/cli` to `src/app` and move live DOS/WOW source/artifact inputs to
+`src/opennt-guest`, then repair only their independent build-path references.
+
+### S5 — `opennt-bop`
+
+Move the original DEM/COMMAND/XMS/DPMI/SoftPC mirrors and BOP ingress/route
+logic out of `bx-vdm` without changing provider semantics.
+
+### S6 — `opennt-host` and `adapter-win32`
+
+Classify every remaining mixed legacy `shim` file: host capability moves to
+`opennt-host`; unavailable API same-shape facade moves to `adapter-win32`.
+
+### S7 — `adapter-bx`
+
+Move CPU frames, checked RAM, typed results, engine contracts and the one
+mapping-manager implementation with its three session instances to
+`adapter-bx`.
+
+### S8 — Tests, Ninja and legacy-path exit
+
+Move fixtures by tested owner; replace every formal Ninja module/include/link
+input; verify no live product input uses `src/bx-vdm`, `src/cli`, or generic
+`src/opennt`.
+
+Across S2--S8, create the target component README/register roots before moving source.
    Their exception records must link source identity, reason, replacement seam
    and focused verification.
-3. Move pure-owner files with `git mv`; update include paths, manifest entries
+Move pure-owner files with `git mv`; update include paths, manifest entries
    and Ninja module lists in the same change. Do not copy imported sources as a
    substitute for preserving history.
-4. For intertwined files, split only after their individual statements have
+For intertwined files, split only after their individual statements have
    been classified by owner. Record every necessary source edit; imported
    OpenNT mirror expressions receive `DIVERGENCE:` comments.
-5. Rebuild each static-library/module closure and then the composed fixture or
+Rebuild each static-library/module closure and then the composed fixture or
    CLI target. A build repair must not silently introduce a semantic shim.
-6. Retire transitional production paths only after every live caller and build
+Retire transitional production paths only after every live caller and build
    manifest points at the target component. Historical evidence may remain
    under its indexed evidence path, never as a second product provider.
 

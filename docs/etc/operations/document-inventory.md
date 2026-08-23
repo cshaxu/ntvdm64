@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2193 |
 | --- | --- |
-| Generated UTC | 2026-08-23T21:02:19Z |
+| Generated UTC | 2026-08-23T21:10:26Z |
 
 ## Entries
 
@@ -443,7 +443,7 @@ content-divergent entries.
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |
-| etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | bbde6f08a2ba40d71124c2f8883a76e12bd24cbcf60e9c19c53e0283d2b785cc |
+| etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | 579f5fcd5aed4dfe7c747c59a7cdae64e57c40279e42c5dde787f7c75eddeb4b |
 | etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md | indexed supporting material | 3e4c68d258fa9e18ef6fbec2513bf52fc928f13afd9ddfd81f5de217cfa71a6b |
 | etc/operations/proposal-source-built-guest-low-memory-runtime-provenance-001.md | indexed supporting material | 02ed77f18bf4e4018a96be67bcf25b637185eda97c0f132316718a8def3639a4 |
 | etc/operations/t188-bop-ingress-composition-plan.md | indexed supporting material | 76e13591247ef15c3c3999216011ffee2799de1b5e7fb1ccac98f053ed8c2402 |
@@ -2081,7 +2081,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | 00e10950bcf714bd929f8b22863318093f3a90a2c047489f75b5fc7a1a74fc02 |
+| QUEUE.md | principal control document | 94c6b47db32783230c445fe4815f26208c81c6d6a24890f953de3d48df5277bd |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -2207,7 +2207,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 1cdf99daa64e1d8bc6c99bc60dcc29973611cf203d7a617a2f4dcd0410f7a1e1 |
+| STATUS.md | principal control document | 742faa847732b1cc725ccad03895d483b497a2d12981bc5b2cf8a3636bee01e6 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |
