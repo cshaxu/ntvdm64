@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2130 |
+| Documentation records | 2131 |
 | --- | --- |
-| Generated UTC | 2026-08-23T09:30:53Z |
+| Generated UTC | 2026-08-23T09:34:30Z |
 
 ## Entries
 
@@ -140,6 +140,7 @@ content-divergent entries.
 | etc/evidence/m0-t252-s1-guest-sft-opaque-token-audit-001.md | indexed supporting material | a6e173127596f618b1531c44c9c21ef9ae2baf40428bfc3081e32ca7ab4a3db1 |
 | etc/evidence/m0-t253-s1-selector-blind-async-delivery-mechanics-map-001.md | indexed supporting material | 57043f243b8609f68d3774b2f6e3ae7df9fb18cffb1140ee1446421c91d3072b |
 | etc/evidence/m0-t253-s2-physical-irq-mechanical-closure-001.md | indexed supporting material | 7fa973a55c26b3ed370e0a85f3e18ae47811f762961dc7774317e984095190f4 |
+| etc/evidence/m0-t253-s3-async-completion-ingress-audit-001.md | indexed supporting material | 8627fa4b42df42fdf100a61b4aa0e900853cce4e4f3f5d66fb9f8361a855252e |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
@@ -414,7 +415,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | e6d2b18e0858de703e1715d2c984aa4afec2dfe87ccb8ffab0b917cb11605c81 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | cf72587423bc50e22d7a4ff51e8aeeed3b970379b8a371d922559e0ca3d7652a |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
