@@ -12,3 +12,12 @@ fixture bound an empty synthetic drive snapshot, dispatched AL=0 at `0x1234`,
 and exited zero after verifying typed resume at `0x1237` with no GPR delta.
 This proves local source/ABI closure only; it is not a guest-continuity or
 floppy-device claim.
+
+## One Native Integration Observation
+
+The same formal-r3 `ntdos64-native.exe` ran the source-built DOS/WOW16 bundle
+with a 1,000,000-tick budget and BOP/UD sequence observation.  Entry 25 was
+the expected `5E` at `8e08:08af`, accepted with disposition 1.  Execution
+then reached a separate DEM `50:3D` owner at `8e08:0984`, which declined
+(disposition 2).  This confirms the `5E` continuation; it neither makes
+`50:3D` an automatic implementation task nor claims continuous execution.
