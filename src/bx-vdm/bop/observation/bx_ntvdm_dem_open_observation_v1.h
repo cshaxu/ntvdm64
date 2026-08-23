@@ -13,7 +13,7 @@
 /* Original demfile.c:demOpen receives DS:SI full path and BL open mode. */
 struct bx_ntvdm_dem_open_observation_v1 {
     uint32_t magic, abi_version, struct_bytes;
-    uint32_t enabled, observed, read_failed;
+    uint32_t enabled, observed, read_failed, observed_count;
     uint16_t ds, mode;
     uint32_t esi, physical_address;
     uint32_t disposition, gpr16_write_mask, eflags_write_mask, eflags_values;

@@ -123,10 +123,11 @@ static void print_dem_open_observation(const struct bx_ntvdm_dem_open_observatio
 {
     uint32_t index;
     if (!observation) return;
-    wprintf(L"ntdos64-native: dem-open observed=%u read-failed=%u ds=%04x esi=%08x mode=%u physical=%08x disposition=%u gpr-mask=%08x flags-mask=%08x flags=%08x path=",
-        observation->observed, observation->read_failed, observation->ds, observation->esi,
+    wprintf(L"ntdos64-native: dem-open observed=%u count=%u read-failed=%u ds=%04x esi=%08x mode=%u physical=%08x disposition=%u gpr-mask=%08x ax=%04x bp=%04x flags-mask=%08x flags=%08x path=",
+        observation->observed, observation->observed_count, observation->read_failed, observation->ds, observation->esi,
         observation->mode, observation->physical_address, observation->disposition,
-        observation->gpr16_write_mask, observation->eflags_write_mask, observation->eflags_values);
+        observation->gpr16_write_mask, observation->gpr16_values[0], observation->gpr16_values[6],
+        observation->eflags_write_mask, observation->eflags_values);
     for (index = 0u; index < BX_NTVDM_DEM_OPEN_OBSERVATION_V1_PATH_BYTES; ++index) wprintf(L"%02x", observation->path[index]);
     wprintf(L"\n");
 }

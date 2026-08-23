@@ -2,31 +2,38 @@
 
 ## Current Work
 
-**Active: M0 T245 S19** — Post-CONFIG guest interrupt/error classification.
+**Active: M0 T245 S20** — Permanent-command DEM-open input/result observation.
 
 ## Active Packet
 
-### M0 T245 S19 — Post-CONFIG guest interrupt/error classification
+### M0 T245 S20 — Permanent-command DEM-open input/result observation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S19`, Ordinary Mode, single-person dual-role existing diagnostic usage and source-owner classification. |
-| Admission And Approval | S18 removes current `50:12 demOpen` from the hypothesis: temporary CONFIG input opens with CF clear. The only bounded way to identify the later original `comerr` path is to reuse the already registered default-off real-mode interrupt record against the corrected root/config sequence. |
-| Objective | Observe the final relevant `INT 21h` calls after successful temporary CONFIG open, and classify the retained `50:3D` predecessor without changing production source or behavior. |
-| Non-goals | No new Bochs source, guest mutation, virtual drive, CWD rewrite, DEM/COMMAND modification, fabricated DOS result or host mutation. |
-| Reference Baseline | S15 earlier open-failure classification, S16 root correction, S18 successful temporary CONFIG open and original `sysinit1.asm` launch path. |
-| Files And ABI Surface | Existing default-off mantle interrupt observer and existing CLI output only; diagnostic compilation is not a production semantic change. |
+| Identifier Mode | `M0 T245 S20`, Ordinary Mode, single-person dual-role bx-vdm observation refinement. |
+| Admission And Approval | S19 proves the permanent `commnd` `INT 21h/3D00h` remains the terminal precursor, while S18's one-shot accepted-`50:12` record necessarily retains the earlier temporary CONFIG open. A bounded per-run sequence of accepted original `50:12 demOpen` records is the smallest evidence needed before changing the Direct namespace seam. |
+| Objective | Observe both temporary-CONFIG and permanent-`commnd` original DEM-open arguments/outcomes, then source-map the actual Direct-file failure contract. |
+| Non-goals | No Bochs source, guest mutation, virtual drive/root alias, CWD rewrite, DEM/COMMAND semantic change, fabricated file result or host mutation. |
+| Reference Baseline | S18 one-shot first `50:12`, S19 permanent `INT 21h/3D00h`, original `file.asm:OpenCall → SVC_DEMOPEN` and imported `demfile.c:demOpen`. |
+| Files And ABI Surface | Default-off bx-vdm bounded `50:12` observation and existing CLI diagnostic output only; no machine ABI or provider behavior changes. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Existing focused interrupt-observation fixture plus exactly one corrected source-built native run. |
-| Expected Markers | The final source call identifies open, read, close, memory, or `AX=4B00h` EXEC; any unrecognized value is source-mapped before repair. |
+| Verification | Focused observation fixture covers ordered accepted `50:12` records and bounded overflow; one corrected source-built native run proves whether permanent `commnd` reaches imported demOpen and records its result. |
+| Expected Markers | First record remains temporary SCS success; a later `commnd` record either yields the source-shaped error or proves no `SVC_DEMOPEN` reaches the host provider. |
 | Asset Needs | Existing sources, bundles and formal Ninja generator; no new external asset. |
-| Reporting Requirements | Record diagnostic configuration, final call records, source mapping and precise next owner. |
-| Stop Conditions | Existing bounded diagnostic cannot capture the relevant call, and a replacement would require new machine semantics or unbounded tracing. |
-| Exit Criteria | The post-CONFIG guest predecessor is directly classified, or its capture limit is documented with no repair claim. |
+| Reporting Requirements | Record ordered guest path/mode/outcome facts, source map and precise repair owner; do not turn an observation into a namespace repair. |
+| Stop Conditions | A bounded sequence requires unbounded guest scanning, provider result mutation or a Bochs semantic change. |
+| Exit Criteria | The permanent `commnd` `50:12` disposition is directly observed, or direct absence of that host ingress is documented with its guest owner. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S20 closes permanent-command DEM-open attribution. The bounded
+adapter-only record retains four accepted `50:12` calls; the final original
+`demOpen` receives the full source-built `COMMAND.COM` host path but returns
+source-shaped `AX=3/CF`. The path exists and equivalent public host open
+succeeds, assigning the issue to the current OEM file shim rather than BOP,
+guest EXEC or Bochs; see [S20 evidence](etc/evidence/m0-t245-s20-permanent-command-dem-open-observation-001.md).
 
 M0 T245 S19 closes post-CONFIG interrupt classification.  After the
 successful temporary SCS open, the permanent `commnd` `INT 21h/AX=3D00h` is
