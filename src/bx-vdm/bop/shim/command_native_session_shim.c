@@ -42,7 +42,7 @@ void bx_ntvdm_command_native_session_unbind(
 {
     if (session != NULL && g_active_session == session) g_active_session = NULL;
     if (session_valid(session)) {
-        bx_ntvdm_host_handle_manager_reset(&session->direct.handles);
+        bx_ntvdm_host_handle_manager_reset(session->direct.handles);
         session->bound = 0u;
     }
 }

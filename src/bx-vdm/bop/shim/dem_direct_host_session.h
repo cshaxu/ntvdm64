@@ -9,7 +9,7 @@
 
 typedef struct bx_ntvdm_dem_direct_host_session {
     uint32_t magic, abi_version, struct_bytes, bound;
-    bx_ntvdm_host_handle_manager handles;
+    bx_ntvdm_host_handle_manager *handles;
     bx_ntvdm_dem_direct_context context;
 } bx_ntvdm_dem_direct_host_session;
 

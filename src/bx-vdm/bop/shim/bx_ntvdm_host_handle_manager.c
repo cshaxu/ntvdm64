@@ -8,6 +8,8 @@ struct bx_ntvdm_host_handle_entry {
     HANDLE host_handle;
     uint32_t guest_handle;
     uint32_t ownership;
+    void *data_value;
+    bx_ntvdm_session_data_release_fn data_release;
     struct bx_ntvdm_host_handle_entry *next_host;
     struct bx_ntvdm_host_handle_entry *next_guest;
 };
@@ -33,6 +35,11 @@ static bx_ntvdm_host_handle_entry *find_host(
     return NULL;
 }
 
+bx_ntvdm_host_handle_manager *bx_ntvdm_host_handle_manager_session(void)
+{
+    return bx_ntvdm_guest_pointer_manager_session_host_handle();
+}
+
 static bx_ntvdm_host_handle_entry *find_guest(
     const bx_ntvdm_host_handle_manager *manager, uint32_t handle)
 {
@@ -45,24 +52,38 @@ static bx_ntvdm_host_handle_entry *find_guest(
     return NULL;
 }
 
+static int data_valid(const bx_ntvdm_guest_pointer_manager *manager)
+{
+    return manager == bx_ntvdm_guest_pointer_manager_session_data() &&
+        manager->instance_kind == BX_NTVDM_MAPPING_INSTANCE_SESSION_DATA &&
+        manager->next_guest_handle >= 1u && manager->entry_count < UINT32_MAX;
+}
+
+static bx_ntvdm_host_handle_entry *find_data(
+    const bx_ntvdm_guest_pointer_manager *manager, uint32_t guest_id)
+{
+    bx_ntvdm_host_handle_entry *entry;
+    if (!data_valid(manager) || guest_id == 0u || guest_id == UINT32_MAX) return NULL;
+    for (entry = manager->by_guest[guest_bucket(guest_id)]; entry != NULL;
+        entry = entry->next_guest)
+        if (entry->guest_handle == guest_id) return entry;
+    return NULL;
+}
+
 int bx_ntvdm_host_handle_manager_initialize(
     bx_ntvdm_host_handle_manager *manager)
 {
-    if (manager == NULL) return 0;
-    memset(manager, 0, sizeof(*manager));
-    manager->magic = BX_NTVDM_HOST_HANDLE_MANAGER_MAGIC;
-    manager->abi_version = BX_NTVDM_HOST_HANDLE_MANAGER_VERSION;
-    manager->struct_bytes = sizeof(*manager);
-    manager->next_guest_handle = 1u;
+    if (manager == NULL || manager != bx_ntvdm_host_handle_manager_session()) return 0;
+    if (manager->next_guest_handle == 0u) manager->next_guest_handle = 1u;
     return bx_ntvdm_host_handle_manager_valid(manager);
 }
 
 int bx_ntvdm_host_handle_manager_valid(
     const bx_ntvdm_host_handle_manager *manager)
 {
-    return manager != NULL && manager->magic == BX_NTVDM_HOST_HANDLE_MANAGER_MAGIC &&
-        manager->abi_version == BX_NTVDM_HOST_HANDLE_MANAGER_VERSION &&
-        manager->struct_bytes == sizeof(*manager) && manager->next_guest_handle >= 1u &&
+    return manager == bx_ntvdm_host_handle_manager_session() &&
+        manager->instance_kind == BX_NTVDM_MAPPING_INSTANCE_HOST_HANDLE &&
+        manager->next_guest_handle >= 1u &&
         manager->entry_count < UINT32_MAX;
 }
 
@@ -175,6 +196,73 @@ void bx_ntvdm_host_handle_manager_reset(
             bx_ntvdm_host_handle_entry *next = entry->next_guest;
             if (entry->ownership == BX_NTVDM_HOST_HANDLE_OWNED)
                 CloseHandle(entry->host_handle);
+            free(entry);
+            entry = next;
+        }
+        manager->by_guest[bucket] = NULL;
+        manager->by_host[bucket] = NULL;
+    }
+    manager->entry_count = 0u;
+    manager->next_guest_handle = 1u;
+}
+
+int bx_ntvdm_session_data_publish(bx_ntvdm_guest_pointer_manager *manager,
+    void *value, bx_ntvdm_session_data_release_fn release, uint32_t *guest_id_out)
+{
+    bx_ntvdm_host_handle_entry *entry;
+    uint32_t guest_id, bucket;
+    if (guest_id_out != NULL) *guest_id_out = 0u;
+    if (!data_valid(manager) || value == NULL || manager->next_guest_handle == UINT32_MAX)
+        return 0;
+    entry = (bx_ntvdm_host_handle_entry *)calloc(1u, sizeof(*entry));
+    if (entry == NULL) return 0;
+    guest_id = manager->next_guest_handle++;
+    entry->guest_handle = guest_id;
+    entry->data_value = value;
+    entry->data_release = release;
+    bucket = guest_bucket(guest_id);
+    entry->next_guest = manager->by_guest[bucket];
+    manager->by_guest[bucket] = entry;
+    ++manager->entry_count;
+    if (guest_id_out != NULL) *guest_id_out = guest_id;
+    return 1;
+}
+
+int bx_ntvdm_session_data_lookup(const bx_ntvdm_guest_pointer_manager *manager,
+    uint32_t guest_id, void **value_out)
+{
+    bx_ntvdm_host_handle_entry *entry = find_data(manager, guest_id);
+    if (value_out != NULL) *value_out = NULL;
+    if (entry == NULL) return 0;
+    if (value_out != NULL) *value_out = entry->data_value;
+    return 1;
+}
+
+int bx_ntvdm_session_data_release(bx_ntvdm_guest_pointer_manager *manager,
+    uint32_t guest_id)
+{
+    bx_ntvdm_host_handle_entry *entry = find_data(manager, guest_id);
+    bx_ntvdm_host_handle_entry **cursor;
+    if (entry == NULL) return 0;
+    cursor = &manager->by_guest[guest_bucket(entry->guest_handle)];
+    while (*cursor != NULL && *cursor != entry) cursor = &(*cursor)->next_guest;
+    if (*cursor != entry) return 0;
+    *cursor = entry->next_guest;
+    if (entry->data_release != NULL) entry->data_release(entry->data_value);
+    free(entry);
+    --manager->entry_count;
+    return 1;
+}
+
+void bx_ntvdm_session_data_reset(bx_ntvdm_guest_pointer_manager *manager)
+{
+    uint32_t bucket;
+    if (!data_valid(manager)) return;
+    for (bucket = 0u; bucket < BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS; ++bucket) {
+        bx_ntvdm_host_handle_entry *entry = manager->by_guest[bucket];
+        while (entry != NULL) {
+            bx_ntvdm_host_handle_entry *next = entry->next_guest;
+            if (entry->data_release != NULL) entry->data_release(entry->data_value);
             free(entry);
             entry = next;
         }

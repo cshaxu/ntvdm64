@@ -140,7 +140,8 @@ void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *ses
     session->magic = BX_NTVDM_COMMAND_MISC_SESSION_MAGIC;
     session->abi_version = BX_NTVDM_COMMAND_MISC_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
-    (void)bx_ntvdm_host_handle_manager_initialize(&session->handles);
+    session->handles = bx_ntvdm_host_handle_manager_session();
+    (void)bx_ntvdm_host_handle_manager_initialize(session->handles);
 }
 
 void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *session)
@@ -157,12 +158,12 @@ void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *sessio
             session->pending.cancel_requested = 1u;
             cancelled = 1;
             if (session->pending.job_token != 0u &&
-                bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+                bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
                     session->pending.job_token, &job))
                 (void)TerminateJobObject(job, ERROR_CANCELLED);
         }
         if (session->pending.worker_token != 0u &&
-            bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+            bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
                 session->pending.worker_token, &worker))
             (void)WaitForSingleObject(worker, INFINITE);
         if (cancelled) {
@@ -181,7 +182,7 @@ void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *sessio
     session->command_source_vdm_environment_bytes = 0u;
     session->command_source_current_directories = NULL;
     session->command_source_current_directories_bytes = 0u;
-    bx_ntvdm_host_handle_manager_reset(&session->handles);
+    bx_ntvdm_host_handle_manager_reset(session->handles);
 }
 
 static int replace_environment(CHAR **destination, uint32_t *destination_bytes,
@@ -205,7 +206,7 @@ int bx_ntvdm_command_misc_session_valid(const bx_ntvdm_command_misc_session *ses
     return session != NULL && session->magic == BX_NTVDM_COMMAND_MISC_SESSION_MAGIC &&
         session->abi_version == BX_NTVDM_COMMAND_MISC_SESSION_VERSION &&
         session->struct_bytes == sizeof(*session) &&
-        bx_ntvdm_host_handle_manager_valid(&session->handles);
+        bx_ntvdm_host_handle_manager_valid(session->handles);
 }
 
 int bx_ntvdm_command_misc_session_set_command_source(
@@ -368,7 +369,7 @@ BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
         /* DIVERGENCE (T236 S2): retain OpenNT's three-handle ordering but bind
          * endpoints to this child only. SetStdHandle would alter the CLI. */
         if (token == 0u || !bx_ntvdm_host_handle_manager_lookup_handle(
-                &session->handles, token, targets[index])) {
+                session->handles, token, targets[index])) {
             SetLastError(ERROR_INVALID_HANDLE);
             return FALSE;
         }
@@ -432,7 +433,7 @@ void bx_ntvdm_command_worker_attach_process(HANDLE process)
     if (session == NULL || process == NULL || process == INVALID_HANDLE_VALUE) return;
     job = CreateJobObjectA(NULL, NULL);
     if (job != NULL && AssignProcessToJobObject(job, process) &&
-        bx_ntvdm_host_handle_manager_publish(&session->handles, job,
+        bx_ntvdm_host_handle_manager_publish(session->handles, job,
             BX_NTVDM_HOST_HANDLE_OWNED, &session->pending.job_token, &error)) {
         if (session->pending.cancel_requested != 0u)
             (void)TerminateJobObject(job, ERROR_CANCELLED);
@@ -448,7 +449,7 @@ void bx_ntvdm_command_worker_finish(BOOL child_created, DWORD exit_code)
     DWORD ignored;
     if (session == NULL) return;
     if (session->pending.job_token != 0u) {
-        (void)bx_ntvdm_host_handle_manager_release(&session->handles,
+        (void)bx_ntvdm_host_handle_manager_release(session->handles,
             session->pending.job_token, &ignored);
         session->pending.job_token = 0u;
     }
@@ -458,7 +459,7 @@ void bx_ntvdm_command_worker_finish(BOOL child_created, DWORD exit_code)
         BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED : BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
     session->pending.state = session->local_child_state;
     if (session->pending.completion_event_token != 0u &&
-        bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+        bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
             session->pending.completion_event_token, &event))
         (void)SetEvent(event);
 }
@@ -557,7 +558,7 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
         for (index = 0u; index < 3u; ++index) {
             HANDLE unused;
             if (tokens[index] != UINT32_MAX && (tokens[index] == 0u ||
-                !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+                !bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
                     tokens[index], &unused))) {
                 SetLastError(ERROR_INVALID_HANDLE);
                 session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
@@ -574,7 +575,7 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
     memcpy(session->pending.command, command, command_bytes);
     memcpy(session->pending.standard_handle_tokens, tokens, sizeof(tokens));
     event = CreateEventA(NULL, TRUE, FALSE, NULL);
-    if (event == NULL || !bx_ntvdm_host_handle_manager_publish(&session->handles,
+    if (event == NULL || !bx_ntvdm_host_handle_manager_publish(session->handles,
             event, BX_NTVDM_HOST_HANDLE_OWNED,
             &session->pending.completion_event_token, &error)) {
         if (event != NULL) CloseHandle(event);
@@ -586,14 +587,14 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
     session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING;
     session->local_child_error = ERROR_SUCCESS;
     worker = CreateThread(NULL, 0u, bx_ntvdm_command_worker_thread, NULL, 0u, NULL);
-    if (worker == NULL || !bx_ntvdm_host_handle_manager_publish(&session->handles,
+    if (worker == NULL || !bx_ntvdm_host_handle_manager_publish(session->handles,
             worker, BX_NTVDM_HOST_HANDLE_OWNED, &session->pending.worker_token,
             &error)) {
         if (worker != NULL) {
             (void)WaitForSingleObject(worker, INFINITE);
             CloseHandle(worker);
         }
-        (void)bx_ntvdm_host_handle_manager_release(&session->handles,
+        (void)bx_ntvdm_host_handle_manager_release(session->handles,
             session->pending.completion_event_token, &error);
         memset(&session->pending, 0, sizeof(session->pending));
         g_pending_session = NULL;
@@ -625,7 +626,7 @@ BOOL bx_ntvdm_command_worker_complete(void)
          session->pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED &&
          session->pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED) ||
         session->pending.worker_token == 0u ||
-        !bx_ntvdm_host_handle_manager_lookup_handle(&session->handles,
+        !bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
             session->pending.worker_token, &worker)) {
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
@@ -634,11 +635,11 @@ BOOL bx_ntvdm_command_worker_complete(void)
         SetLastError(ERROR_IO_INCOMPLETE);
         return FALSE;
     }
-    (void)bx_ntvdm_host_handle_manager_release(&session->handles,
+    (void)bx_ntvdm_host_handle_manager_release(session->handles,
         session->pending.worker_token, &ignored);
     session->pending.worker_token = 0u;
     if (session->pending.completion_event_token != 0u) {
-        (void)bx_ntvdm_host_handle_manager_release(&session->handles,
+        (void)bx_ntvdm_host_handle_manager_release(session->handles,
             session->pending.completion_event_token, &ignored);
         session->pending.completion_event_token = 0u;
     }
@@ -765,7 +766,7 @@ int bx_ntvdm_command_misc_publish_handle(HANDLE handle)
     uint32_t guest_handle;
     DWORD error;
     if (g_active_call == NULL || (session = g_active_call->call->session) == NULL ||
-        !bx_ntvdm_host_handle_manager_publish(&session->handles, handle,
+        !bx_ntvdm_host_handle_manager_publish(session->handles, handle,
             BX_NTVDM_HOST_HANDLE_BORROWED, &guest_handle, &error)) return 0;
     /* The original guest ABI is BX:CX. Preserve it as a fixed-width token,
      * never as a truncated host HANDLE. */

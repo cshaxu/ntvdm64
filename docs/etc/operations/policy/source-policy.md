@@ -25,7 +25,9 @@ layout/order/failure rules and the reason the original translation unit cannot
 be composed. Prefer an OpenNT-shaped compatibility facade: keep the original
 function/macro/structure form in the mirror, then map unavailable historical
 dependencies through a named bounded session seam. Internal implementation may
-be namespaced, but same naming alone never proves behavioral equivalence. The
+be isolated, but same naming alone never proves behavioral equivalence. Where
+mapping is required, the session owns separate fixed mapping-manager instances
+rather than one shared numeric namespace. The
 sole permitted historical guest-pointer compatibility route is the
 `bx-vdm` session-owned mapping manager: it may return a native pointer for an
 exact `GetVDMAddr`/`Sim32GetVDMPointer` call only under a bounded synchronous

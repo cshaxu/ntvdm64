@@ -9,6 +9,7 @@
 
 #include "demhndl_shim.h"
 #include "redir_session_shim.h"
+#include "bx_ntvdm_guest_pointer_manager.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -39,6 +40,7 @@ typedef struct bx_ntvdm_demhndl_active_call {
     uint32_t guest_address;
     uint32_t guest_bytes;
     uint8_t *guest_buffer;
+    bx_ntvdm_guest_pointer_lease *guest_buffer_lease;
     uint8_t *path_buffers[4];
     uint32_t path_buffer_count;
     int transfer_from_guest;
@@ -82,21 +84,28 @@ static int is_demfcb_path_service(uint32_t service)
         service == 0x2du || service == 0x31u;
 }
 
-static LPVOID acquire_fixed_guest_span(bx_ntvdm_demhndl_active_call *active,
-    uint32_t bytes)
+static LPVOID acquire_guest_span(bx_ntvdm_demhndl_active_call *active,
+    uint32_t bytes, int flush_on_return)
 {
     if (active == NULL || active->call == NULL || active->guest_buffer != NULL)
         return NULL;
     active->guest_bytes = bytes;
-    active->guest_buffer = (uint8_t *)malloc(bytes);
-    if (active->guest_buffer == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
-    if (!active->call->guest_read(active->call->guest_state, active->guest_address,
-            active->guest_buffer, bytes)) {
-        free(active->guest_buffer); active->guest_buffer = NULL;
+    if (!bx_ntvdm_guest_pointer_manager_acquire_real_mode(
+            bx_ntvdm_guest_pointer_manager_session(),
+            (USHORT)(active->guest_address >> 4),
+            (USHORT)(active->guest_address & 0x0fu), bytes,
+            BX_NTVDM_GUEST_POINTER_READ | BX_NTVDM_GUEST_POINTER_WRITE,
+            &active->guest_buffer_lease, (void **)&active->guest_buffer)) {
         SetLastError(ERROR_INVALID_ADDRESS); return NULL;
     }
-    active->flush_guest_buffer_on_return = 1;
+    active->flush_guest_buffer_on_return = flush_on_return;
     return active->guest_buffer;
+}
+
+static LPVOID acquire_fixed_guest_span(bx_ntvdm_demhndl_active_call *active,
+    uint32_t bytes)
+{
+    return acquire_guest_span(active, bytes, 1);
 }
 
 static LPVOID acquire_dasd_payload_span(bx_ntvdm_demhndl_active_call *active,
@@ -446,41 +455,17 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
         /* OpenNT demdir.c maps the packed 71-byte CDS in place.  Copy its
          * fixed historical layout through checked RAM and write it back after
          * the imported body, rather than exporting a guest pointer. */
-        bytes = 71u;
-        active->guest_bytes = bytes;
-        active->guest_buffer = (uint8_t *)malloc(bytes);
-        if (active->guest_buffer == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
-        if (!active->call->guest_read(active->call->guest_state, active->guest_address,
-                active->guest_buffer, bytes)) {
-            free(active->guest_buffer); active->guest_buffer = NULL;
-            SetLastError(ERROR_INVALID_ADDRESS); return NULL;
-        }
-        return active->guest_buffer;
+        return acquire_fixed_guest_span(active, 71u);
     }
     bytes = demgset_fixed_guest_bytes(active->call->service);
     if (bytes != 0u)
         return acquire_fixed_guest_span(active, bytes);
     bytes = bx_ntvdm_demhndl_get_cx();
-    active->guest_bytes = bytes;
-    /* A zero-length DOS transfer still supplies a valid historical pointer:
-     * demWrite may use it before its CX==0 truncate/extend branch. */
-    active->guest_buffer = (uint8_t *)malloc(bytes == 0u ? 1u : bytes);
-    if (active->guest_buffer == NULL) {
-        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-        return NULL;
-    }
-    /* Sim32GetVDMPointer historically returned the guest's actual backing
-     * span.  Seed every bounce span from checked guest RAM, including a read
-     * destination: a failed or short host read must not overwrite bytes that
-     * the original direct mapping would have left intact. */
-    if (bytes != 0u && !active->call->guest_read(active->call->guest_state,
-            active->guest_address, active->guest_buffer, bytes)) {
-        free(active->guest_buffer);
-        active->guest_buffer = NULL;
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return NULL;
-    }
-    return active->guest_buffer;
+    /* Sim32GetVDMPointer historically returns a mutable backing span.  The
+     * session's guest-memory mapping-manager instance supplies that exact
+     * bounded bounce lease; the
+     * imported owner still controls explicit Sim32Flush/Sim32Free ordering. */
+    return acquire_guest_span(active, bytes, 0);
 }
 
 int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
@@ -550,7 +535,16 @@ void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
 {
     bx_ntvdm_demhndl_active_call *active = active_call();
     (void)far_pointer; (void)bytes; (void)write_back;
-    if (active != 0 && pointer == active->guest_buffer) {
+    if (active != 0 && pointer == active->guest_buffer &&
+        active->guest_buffer_lease != NULL) {
+        /* The original caller flushed first.  Retire only the synchronous
+         * lease: a second write-back would change the source ordering. */
+        (void)bx_ntvdm_guest_pointer_manager_release(
+            bx_ntvdm_guest_pointer_manager_session(),
+            active->guest_buffer_lease, 0);
+        active->guest_buffer_lease = NULL;
+        active->guest_buffer = NULL;
+    } else if (active != 0 && pointer == active->guest_buffer) {
         free(active->guest_buffer);
         active->guest_buffer = NULL;
     }
@@ -587,6 +581,9 @@ int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
     if (!bx_ntvdm_cpu_result_v2_resume(call->result,
             call->boundary->fault_rip + resume_bytes))
         return 0;
+    if (!bx_ntvdm_guest_pointer_manager_begin(
+            bx_ntvdm_guest_pointer_manager_session(), call->guest_state,
+            call->guest_read, call->guest_write)) return 0;
     g_active_call = &active;
     if (setjmp(active.terminate_jump) == 0)
         body();
@@ -594,12 +591,21 @@ int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
      * VHE address across calls.  Its shim flushes that fixed guest layout
      * while this checked-call context is still live. */
     bx_ntvdm_demerror_flush_hard_error();
-    if ((is_demdir_cds_service(call->service) || active.flush_guest_buffer_on_return) &&
+    if (active.guest_buffer_lease == NULL &&
+        (is_demdir_cds_service(call->service) || active.flush_guest_buffer_on_return) &&
         active.guest_buffer != NULL &&
         !call->guest_write(call->guest_state, active.guest_address,
             active.guest_buffer, active.guest_bytes))
         SetLastError(ERROR_INVALID_ADDRESS);
-    if (active.guest_buffer != NULL) free(active.guest_buffer);
+    if (active.guest_buffer_lease != NULL) {
+        if (!bx_ntvdm_guest_pointer_manager_release(
+                bx_ntvdm_guest_pointer_manager_session(),
+                active.guest_buffer_lease,
+                is_demdir_cds_service(call->service) || active.flush_guest_buffer_on_return))
+            SetLastError(ERROR_INVALID_ADDRESS);
+        active.guest_buffer = NULL;
+        active.guest_buffer_lease = NULL;
+    } else if (active.guest_buffer != NULL) free(active.guest_buffer);
     while (active.dasd_payload_count != 0u) {
         uint32_t index = --active.dasd_payload_count;
         if (!call->guest_write(call->guest_state, active.dasd_payload[index].address,
@@ -609,6 +615,7 @@ int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
     }
     while (active.path_buffer_count != 0u)
         free(active.path_buffers[--active.path_buffer_count]);
+    bx_ntvdm_guest_pointer_manager_end(bx_ntvdm_guest_pointer_manager_session());
     g_active_call = NULL;
     return bx_ntvdm_cpu_result_v2_valid(call->result);
 }

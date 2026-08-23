@@ -19,8 +19,10 @@
 - For rung-2 recovery, prefer an **OpenNT-shaped compatibility facade** over
   rewriting an imported OpenNT body around project-authored APIs.  Keep the
   original call/macro/structure form in the mirror and provide a named
-  compatibility header that maps it to bounded, session-owned, internally
-  namespaced implementation.  Every changed line in an imported source file
+  compatibility header that maps it to a bounded, session-owned, isolated
+  implementation.  Where mapping is required, use the applicable fixed
+  mapping-manager instance rather than a shared numeric namespace. Every
+  changed line in an imported source file
   must carry `DIVERGENCE:` with the unavailable historical dependency and the
   reason the facade cannot preserve that exact expression.  Do not call a
   self-authored provider “recovered” or “code complete” while the original

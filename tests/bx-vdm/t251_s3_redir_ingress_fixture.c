@@ -40,16 +40,16 @@ static uint16_t get16(const uint8_t *bytes)
 { return (uint16_t)(bytes[0] | ((uint16_t)bytes[1] << 8)); }
 
 typedef struct mailslot_fixture_state {
-    bx_ntvdm_host_handle_manager handles;
+    bx_ntvdm_host_handle_manager *handles;
     uint8_t memory[2048];
 } mailslot_fixture_state;
 
 static int fixture_publish(void *state, HANDLE handle, uint32_t *token, DWORD *error)
-{ return bx_ntvdm_host_handle_manager_publish(&((mailslot_fixture_state *)state)->handles, handle, BX_NTVDM_HOST_HANDLE_OWNED, token, error); }
+{ return bx_ntvdm_host_handle_manager_publish(((mailslot_fixture_state *)state)->handles, handle, BX_NTVDM_HOST_HANDLE_OWNED, token, error); }
 static int fixture_lookup(void *state, uint32_t token, HANDLE *handle)
-{ return bx_ntvdm_host_handle_manager_lookup_handle(&((mailslot_fixture_state *)state)->handles, token, handle); }
+{ return bx_ntvdm_host_handle_manager_lookup_handle(((mailslot_fixture_state *)state)->handles, token, handle); }
 static int fixture_release(void *state, uint32_t token, DWORD *error)
-{ return bx_ntvdm_host_handle_manager_release(&((mailslot_fixture_state *)state)->handles, token, error); }
+{ return bx_ntvdm_host_handle_manager_release(((mailslot_fixture_state *)state)->handles, token, error); }
 static int fixture_attr(void *state, uint8_t drive, const wchar_t *path, DWORD *value, DWORD *error)
 { (void)state; (void)drive; (void)path; if (value) *value = 0u; if (error) *error = ERROR_FILE_NOT_FOUND; return 0; }
 static int fixture_set_attr(void *state, uint8_t drive, const wchar_t *path, DWORD value, DWORD *error)
@@ -69,7 +69,8 @@ static int mailslot_regression(void)
     const char name[] = "\\MAILSLOT\\ntdos64-t251-s4";
     static const uint8_t message[] = { 'b', 'x', '-', 'v', 'd', 'm' };
     memset(&state, 0, sizeof(state));
-    if (!bx_ntvdm_host_handle_manager_initialize(&state.handles)) return 0;
+    state.handles = bx_ntvdm_host_handle_manager_session();
+    if (!bx_ntvdm_host_handle_manager_initialize(state.handles)) return 0;
     memcpy(state.memory + 0x100u, name, sizeof(name));
     memset(&direct, 0, sizeof(direct));
     direct.magic = BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
@@ -165,7 +166,7 @@ static int mailslot_regression(void)
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         (outcome.eflags_values & 1u) == 0u || outcome.gpr16_values[0] != ERROR_INVALID_HANDLE) return 0;
     bx_ntvdm_redir_native_session_unbind(&session);
-    bx_ntvdm_host_handle_manager_reset(&state.handles);
+    bx_ntvdm_host_handle_manager_reset(state.handles);
     return 1;
 }
 

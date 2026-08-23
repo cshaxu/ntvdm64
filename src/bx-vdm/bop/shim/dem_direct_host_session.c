@@ -9,7 +9,7 @@ static int valid(const bx_ntvdm_dem_direct_host_session *session)
     return session != NULL && session->magic == BX_NTVDM_DEM_DIRECT_HOST_SESSION_MAGIC &&
         session->abi_version == BX_NTVDM_DEM_DIRECT_HOST_SESSION_VERSION &&
         session->struct_bytes == sizeof(*session) && session->bound <= 1u &&
-        bx_ntvdm_host_handle_manager_valid(&session->handles);
+        bx_ntvdm_host_handle_manager_valid(session->handles);
 }
 
 static int publish(void *state, HANDLE handle, uint32_t *token, DWORD *error)
@@ -17,7 +17,7 @@ static int publish(void *state, HANDLE handle, uint32_t *token, DWORD *error)
     bx_ntvdm_dem_direct_host_session *session = state;
     uint32_t guest_handle;
     if (token) *token = 0u;
-    if (!valid(session) || !bx_ntvdm_host_handle_manager_publish(&session->handles,
+    if (!valid(session) || !bx_ntvdm_host_handle_manager_publish(session->handles,
             handle, BX_NTVDM_HOST_HANDLE_OWNED, &guest_handle, error)) return 0;
     if (token) *token = guest_handle;
     return 1;
@@ -30,7 +30,7 @@ static int lookup(void *state, uint32_t token, HANDLE *handle)
         if (handle) *handle = INVALID_HANDLE_VALUE;
         return 0;
     }
-    return bx_ntvdm_host_handle_manager_lookup_handle(&session->handles, token,
+    return bx_ntvdm_host_handle_manager_lookup_handle(session->handles, token,
         handle);
 }
 
@@ -41,7 +41,7 @@ static int release(void *state, uint32_t token, DWORD *error)
         if (error) *error = ERROR_INVALID_HANDLE;
         return 0;
     }
-    return bx_ntvdm_host_handle_manager_release(&session->handles, token, error);
+    return bx_ntvdm_host_handle_manager_release(session->handles, token, error);
 }
 
 static int query_attributes(void *state, uint8_t drive, const wchar_t *path,
@@ -94,7 +94,8 @@ int bx_ntvdm_dem_direct_host_session_initialize(
     session->magic = BX_NTVDM_DEM_DIRECT_HOST_SESSION_MAGIC;
     session->abi_version = BX_NTVDM_DEM_DIRECT_HOST_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
-    if (!bx_ntvdm_host_handle_manager_initialize(&session->handles)) return 0;
+    session->handles = bx_ntvdm_host_handle_manager_session();
+    if (!bx_ntvdm_host_handle_manager_initialize(session->handles)) return 0;
     session->context.magic = BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
     session->context.abi_version = BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION;
     session->context.struct_bytes = sizeof(session->context);
@@ -111,7 +112,7 @@ void bx_ntvdm_dem_direct_host_session_reset(
     bx_ntvdm_dem_direct_host_session *session)
 {
     if (!valid(session)) return;
-    bx_ntvdm_host_handle_manager_reset(&session->handles);
+    bx_ntvdm_host_handle_manager_reset(session->handles);
 }
 
 bx_ntvdm_dem_direct_context *bx_ntvdm_dem_direct_host_session_context(

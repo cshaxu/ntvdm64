@@ -2,31 +2,45 @@
 
 ## Current Work
 
-**Active: M0 T257 S5** — DOSX/DPMI typed protected-frame transaction design.
+**Active: M0 T258 S1** — shared guest-pointer mapping-manager recovery.
 
 ## Active Packet
 
-### M0 T257 S5 — DOSX/DPMI typed protected-frame transaction design
+### M0 T258 S1 — shared guest-pointer mapping-manager recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T257 S5`, Ordinary Mode, single-person dual-role source-first typed-frame transaction design; **frozen for Td S2 interface-conformance audit**. |
-| Admission And Approval | S4 closes the [complete protected-frame map](etc/evidence/m0-t257-s4-dosx-protected-frame-map-001.md) and proves the existing result ABI insufficient; this S admits only the replacement ABI/design and its local mechanical proof. |
-| Objective | After Td S2 records whether an OpenNT-shaped facade can preserve the reached historical pointer/CCPU/SoftPC calls, design and locally prove the smallest versioned, selector-blind typed transaction that can atomically validate/commit the full protected CPU frame. Until that audit closes, S5 is design-only and no new ABI is authored. |
-| Non-goals | No active DPMI leaf route, raw pointer/frame mapping, `NtVdmControl`/`VdmInstall*`/emulator-hook import, adapter-owned exception or IRET semantics, DPMI-aware mantle/core branch, or guest policy in the opaque mechanical executor. |
-| Reference Baseline | S4 protected-frame map, S3 startup/table composition, T256 S14 classification, existing protected range action and CPU result/exception ABIs. |
-| Files And ABI Surface | New versioned frame action ABI plus bx-vdm source-facing session shim and selector-blind bx-mantle executor only if the design proves feasible. No `dpmiint.c` body or BOP ingress is imported in S5. |
-| Applicable Rules | Source-first recovery, guest/machine hard boundary, Bochs rewrite stop rule, CPU-profile completion gate, live-tracker sequencing and ordinary-mode independent final review. |
-| Verification | ABI layout and validation test, all-or-nothing state/memory commit test, lifecycle refusal test, machine semantic-boundary test and formal Ninja build. |
-| Expected Markers | No partial CPU update after a rejected frame; no raw host pointer; core/mantle remain selector/DOS/BOP blind; typed request cannot identify DPMI or any BOP. |
-| Asset Needs | S4 evidence, current formal manifest, `bx_ntvdm_protected_range_action_v1`, CPU-result/exception ABI sources and native protected fixture. |
-| Reporting Requirements | Record all frame fields, validation order, lifecycle rules, source-first disposition and whether a mechanical boundary exception is required. |
-| Stop Conditions | An active BOP, historical hook import, a policy-bearing mantle/core field, raw host pointer, non-atomic result, any unregistered Bochs intrusion, or implementation before Td S2's interface disposition is recorded. |
-| Exit Criteria | A tested, generic transaction ABI can atomically commit a bounded guest byte-write set plus the required typed CPU state—or is rejected with proof; S6 may only compose original `dpmiint.c` if this exit is positive. |
-| Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
-| Similar-Issue Sweep | Existing exception result, context/resume result, protected range action, native LDT fixture and every caller requiring state beyond low GPR/selector/CF/ZF. |
+| Identifier Mode | `M0 T258 S1`, Ordinary Mode with a single-person dual-role review: source-first shared mapping-manager recovery. |
+| Admission And Approval | Owner approved the shared guest-pointer mapping-manager implementation after Td S2 P7; dependency 118 is the sole common prerequisite selected for recovery. |
+| Objective | Establish one bx-vdm session-scoped mapping-lease facade that retains the historical `GetVDMAddr`/`Sim32*` call forms, map every active family-local implementation, and migrate the smallest bounded synchronous source callers without enabling new BOPs. |
+| Non-goals | No DPMI `53:xx`, persistent/protected pointer mapping, raw pointer across an ABI or worker, Bochs/mantle change, guest-handle change, CCPU/SAS recreation, or new provider semantics. |
+| Reference Baseline | Td P1 mapping governance, Td P3/P4/P5 interface dispositions, `BOP-DEPENDENCY-118`, and the closed T257 rejection record. |
+| Files And ABI Surface | `src/bx-vdm` session mapping manager, OpenNT-shaped shim declarations and focused fixtures; historical source-body call forms remain unchanged wherever a named facade can express them. |
+| Applicable Rules | Source-first recovery, mapping-lease rule, guest/machine hard boundary, no family-private mapper, and ordinary-mode independent final review. |
+| Verification | Source/ABI ledger; direct and bounce lease positive tests; bounds, expired-epoch, write-back and no-ABI-escape negative tests; focused migrated-caller tests; formal Ninja build when the first implementation delivery is ready. |
+| Expected Markers | Every migrated call has address/span/access/epoch evidence; native pointer dies before resume; no pointer becomes a guest token, HANDLE, fixed-width result, or Bochs object. |
+| Asset Needs | Original OpenNT pointer call sites, present family shims, checked guest-memory mechanics, formal Ninja manifest and existing DEM/COMMAND/XMS fixtures. |
+| Reporting Requirements | Record direct-versus-bounce choice, original call shape, rejected historical product dependency, migration/deletion disposition and x86/x64 pointer-width safety. |
+| Stop Conditions | Any required persistent/asynchronous/protected pointer, a request to add DOS/BOP semantics to bx-mantle/core, a new pointer ABI without a recovery exception, or a source call whose span/access cannot be proved. |
+| Exit Criteria | One tested session manager and named historical-shaped facade exist; first bounded caller(s) use it; all active private helpers are inventoried with a staged migrate/refuse/delete disposition; no new BOP route is enabled. |
+| Original Owner Request | “批准实施” the recommended unified guest-host pointer mapping manager, with source-first OpenNT compatibility and single-person dual-role execution. |
+| Similar-Issue Sweep | DEM/COMMAND/XMS family helpers, Redirector async paths, DPMI protected pointers, host-token manager, fixed-width bx↔machine actions and any raw `GetVDMAddr`/`Sim32*` macro. |
+
+**Current progress:** S1 P1 establishes the one mapping-manager implementation
+and its three fixed session instances: `guest_memory`, `host_handle`, and
+`session_data`.  DEM bounded synchronous spans now use `guest_memory`; a fresh
+formal Ninja graph and focused DEM/COMMAND regressions pass. COMMAND/XMS
+family-local pointer helpers remain the next staged migration work; no new BOP
+route is enabled. See the [P1 source/ABI map](etc/evidence/m0-t258-s1-pointer-manager-source-abi-map-001.md).
 
 ## Latest Closure
+
+M0 T257 closes as a source-first design rejection. Td S2 P7 proves that a
+new generic protected-frame ABI would bypass unresolved DPMI pointer,
+frame/IRET, LDT and memory-lifecycle owner dependencies. Its retained
+source-import and failure-map evidence transfers to a future whole DPMI
+package; it enables no new `53:xx` route. M0 T258 now owns only the
+cross-family synchronous mapping prerequisite.
 
 M0 Td S2 P1 closes the governing source-recovery decision: an original OpenNT
 translation unit now requires direct composition or a recorded OpenNT-shaped

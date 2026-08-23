@@ -274,6 +274,7 @@
         "src/bx-vdm/bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/bx-vdm/bop/shim/dem_direct_host_session.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.c",
+        "src/bx-vdm/bop/shim/bx_ntvdm_guest_pointer_manager.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_dem_direct_context.c",
         "src/bx-vdm/bop/shim/demdir_shim.c",
         "src/bx-vdm/bop/shim/demfile_shim.c",
@@ -342,6 +343,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t258-s1-guest-pointer-manager-fixture",
+      "source": "tests/bx-vdm/t258-s1-guest-pointer-manager-fixture.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": []
+    },
     {
       "name": "t255-s2-generic-context-resume-fixture",
       "source": "tests/bx-mantle/t255_s2_generic_context_resume_fixture.cc",
@@ -666,7 +673,10 @@
       "name": "t230-s5-demsrch-fcb-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s5_demsrch_fcb_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -694,7 +704,10 @@
       "name": "t230-s3-demfile-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s3_demfile_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -708,7 +721,10 @@
       "name": "t230-s2-demhndl-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s2_demhndl_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -869,7 +885,10 @@
       "name": "t231-s4-command-console-keyboard-direct-fixture",
       "source": "tests/bx-vdm/t231_s4_command_console_keyboard_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -977,7 +996,10 @@
       "name": "t231-s8-command-lifecycle-direct-fixture",
       "source": "tests/bx-vdm/t231_s8_command_lifecycle_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -989,7 +1011,10 @@
       "name": "t236-s1-command-local-child-fixture",
       "source": "tests/bx-vdm/t236_s1_command_local_child_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",

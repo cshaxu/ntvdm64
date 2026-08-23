@@ -227,7 +227,7 @@ typedef struct bx_ntvdm_command_misc_session {
     CHAR bootstrap_command_path[64u];
     uint32_t redirection_token;
     REDIRCOMPLETE_INFO redirection_info;
-    bx_ntvdm_host_handle_manager handles;
+    bx_ntvdm_host_handle_manager *handles;
     SCSINFO scs_info;
     BYTE is_dos_binary;
     WORD fd_access;

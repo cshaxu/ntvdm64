@@ -178,7 +178,7 @@ int main(void)
     security.bInheritHandle = TRUE;
     if (!CreatePipe(&pipe_read, &pipe_write, &security, 0u) ||
         !SetHandleInformation(pipe_read, HANDLE_FLAG_INHERIT, 0u) ||
-        !bx_ntvdm_host_handle_manager_publish(&session.handles, pipe_write,
+        !bx_ntvdm_host_handle_manager_publish(session.handles, pipe_write,
             BX_NTVDM_HOST_HANDLE_BORROWED, &standard_token, &error)) return 4;
     standard_handles[1] = standard_token;
     cpu.eax = 0x0102u;
@@ -189,7 +189,7 @@ int main(void)
     if (session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED) return 53;
     if (session.local_child_generation != 4u) return 54;
     if (session.local_child_events_blocked != 0u) return 55;
-    if (!bx_ntvdm_host_handle_manager_release(&session.handles, standard_token,
+    if (!bx_ntvdm_host_handle_manager_release(session.handles, standard_token,
             &error)) return 56;
     CloseHandle(pipe_write);
     memset(pipe_text, 0, sizeof(pipe_text));
@@ -218,7 +218,7 @@ int main(void)
     if (session.local_child_state != BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED ||
         session.local_child_error != ERROR_CANCELLED ||
         session.pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED ||
-        session.handles.entry_count != 0u) return 58;
+        session.handles->entry_count != 0u) return 58;
 
     puts("T236 S2 pending imported worker, opaque-handle stream isolation, direct/COMSPEC, failure, pipe, double-completion and cancellation contracts verified");
     return 0;

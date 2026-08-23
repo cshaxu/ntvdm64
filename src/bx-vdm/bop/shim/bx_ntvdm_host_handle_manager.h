@@ -17,29 +17,14 @@
  * It is not a DOS JFN/SFT implementation and has no BOP/service knowledge.
  */
 
-#include <stdint.h>
-#include <windows.h>
+#include "bx_ntvdm_guest_pointer_manager.h"
 
-#define BX_NTVDM_HOST_HANDLE_MANAGER_MAGIC 0x4258484du
-#define BX_NTVDM_HOST_HANDLE_MANAGER_VERSION 2u
-#define BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS 257u
+/* Historical facade only.  It aliases the bx-vdm session's HOST_HANDLE
+ * mapping-manager instance; no caller may allocate or embed a second
+ * manager. */
+typedef bx_ntvdm_guest_pointer_manager bx_ntvdm_host_handle_manager;
 
-enum bx_ntvdm_host_handle_ownership {
-    BX_NTVDM_HOST_HANDLE_BORROWED = 0u,
-    BX_NTVDM_HOST_HANDLE_OWNED = 1u
-};
-
-typedef struct bx_ntvdm_host_handle_entry bx_ntvdm_host_handle_entry;
-
-typedef struct bx_ntvdm_host_handle_manager {
-    uint32_t magic;
-    uint32_t abi_version;
-    uint32_t struct_bytes;
-    uint32_t entry_count;
-    uint32_t next_guest_handle;
-    bx_ntvdm_host_handle_entry *by_host[BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS];
-    bx_ntvdm_host_handle_entry *by_guest[BX_NTVDM_HOST_HANDLE_MANAGER_BUCKETS];
-} bx_ntvdm_host_handle_manager;
+bx_ntvdm_host_handle_manager *bx_ntvdm_host_handle_manager_session(void);
 
 int bx_ntvdm_host_handle_manager_initialize(
     bx_ntvdm_host_handle_manager *manager);
