@@ -48,13 +48,11 @@ BX_NTVDM_OPENNT_PARSER_PIF_DATA bx_ntvdm_command_pif_parser_global;
 int bx_ntvdm_command_pif_parser_message_box(UINT error, CHAR *first,
     CHAR *second, ULONG options)
 {
-    (void)error;
-    (void)first;
-    (void)second;
-    (void)options;
-    /* The original retry UI is unavailable in a non-interactive CLI host;
-     * preserve its explicit allocation-failure exit instead of faking retry. */
-    return RMB_IGNORE;
+    /* Preserve nt_pif.c's source-visible allocation/retry decision through
+     * the single shared RcMessageBox facade.  The public Win32 dialog maps
+     * the historical Abort/Retry/Ignore result set; the explicitly deferred
+     * editable PIF branch remains a deterministic Abort in that facade. */
+    return bx_ntvdm_opennt_rc_message_box(error, first, second, options);
 }
 
 BOOL GetPIFData(PIF_DATA *data, char *pif_name)

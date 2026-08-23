@@ -158,7 +158,10 @@ typedef struct _BX_NTVDM_PIF_DATA {
 #define EG_ENVIRONMENT_ERR ERROR_ENVVAR_NOT_FOUND
 #define EXIT_NO_CLOSE 0u
 #define RMB_ICON_BANG 0x00000010u
-#define RMB_ABORT 0x00000002u
+/* OpenNT softpc.new/host/inc/error.h keeps the dialog result and option bit
+ * at one.  This same source-visible spelling is shared by cmdenv/cmdpif and
+ * nt_pif; do not translate it per caller. */
+#define RMB_ABORT 0x00000001u
 
 #pragma pack(push, 1)
 typedef struct _PARAMBLOCK {

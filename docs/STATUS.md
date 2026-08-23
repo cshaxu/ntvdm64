@@ -84,6 +84,13 @@ and records direct parity for the original empty `UMBNotify` body.  The fresh
 454-node r16 formal graph is clean; focused DEM search/FCB and DASD fixtures
 pass.  S4 is complete; see [S4 P4 evidence](etc/evidence/m0-t259-s4-p4-final-host-machine-reconciliation-001.md).
 
+S4 P5 closes a reverse-audit correction in the directly imported OpenNT PIF
+parser: its `RcMessageBox` wrapper now uses the one shared source-shaped
+facade, and the common historical `RMB_ABORT` option/result value is restored
+from the erroneous `2` to OpenNT's `1`.  A full fresh r17 graph produces all
+79 declared outputs, and PIF parser, COMMAND misc and DEM hard-error fixtures
+pass; see [S4 P5 evidence](etc/evidence/m0-t259-s4-p5-command-pif-dialog-facade-closure-001.md).
+
 **T259 technical closure state:** all admitted S1--S4 exit criteria are now
 met.  The packet remains the formally active record only because the current
 governance verifier requires one admitted `M/T/S` packet at all times; no

@@ -1,4 +1,5 @@
 #include "bop/shim/command_pif_shim.h"
+#include "bop/shim/opennt_error_dialog_facade.h"
 
 #define WINNT 1
 #include <pif.h>
@@ -26,6 +27,12 @@ int main(void)
     PIF_DATA parsed;
     const CHAR target_bytes[] = { 0x90, 0xc3 };
     DWORD directory_bytes;
+
+    bx_ntvdm_opennt_error_dialog_fixture_suppress(TRUE);
+    if (bx_ntvdm_command_pif_parser_message_box(0x2468u, "", "",
+            RMB_ABORT | RMB_RETRY | RMB_IGNORE | RMB_ICON_STOP) != RMB_ABORT ||
+        bx_ntvdm_opennt_error_dialog_fixture_last_error() != 0x2468u) return 6;
+    bx_ntvdm_opennt_error_dialog_fixture_suppress(FALSE);
 
     directory_bytes = GetTempPathA((DWORD)sizeof(directory), directory);
     if (directory_bytes == 0u || directory_bytes >= sizeof(directory) ||
