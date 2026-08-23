@@ -2,42 +2,41 @@
 
 ## Current Work
 
-**Active: M0 T240 S2** — record and deliver the completed SoftPC
-`memory_size` source-route closure through the existing selector-blind
-checked-RAM action.
+**Active: M0 T241 S1** — audit the original keyboard/IVT/INT15 lifecycle
+needed to recover XMS `52:09`, before admitting any machine change.
 
 ## Active Packet
 
-### M0 T240 S2 — source-shaped SoftPC BOP 12h RAM-read recovery
+### M0 T241 S1 — keyboard/IVT/INT15 source and ABI audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T240 S2`, Ordinary Mode, single-person dual-role source recovery and review. |
-| Admission And Approval | Owner correction: this is not a Bochs intrusion or a material boundary expansion. The existing generic checked-RAM action is the approved selector-blind mechanical seam; proceed without an additional approval stop. |
-| Objective | Recover original `mem_size.c` behavior: exact real-mode `C4 C4 12` reads mutable BDA word `0040:0013` through the existing checked-RAM action, writes only low-16-bit AX and resumes at RIP+3. |
-| Non-goals | Do not alter bx-core/bx-mantle ABI or source; do not add BOP/BIOS/DOS/OpenNT terms to mantle; do not recover `15h/AH=88h`, keyboard/INT15, PIC/FPU/CMOS/video/media or a general BIOS dispatcher. |
-| Reference Baseline | T240 S1 P1 audit; `BOP-DEPENDENCY-091`; existing mechanical action ABI and current inactive helper/fixture. |
-| Files And ABI Surface | `src/bx-vdm/bop/opennt/` source mirror and named bx-vdm shim/route, the current obsolete helper/fixture and formal manifest/tests. The existing mantle mechanical-action ABI is consumed unchanged. |
-| Applicable Rules | Source-first recovery, selector-blind bx boundary, direct original-owner layout/order/failure preservation, v1 retirement and MTSP governance. |
-| Verification | Local source-mirror provider fixture: exact window/mode, BDA little-endian read, guest mutation visibility, AX-only/RIP+3, inactive/out-of-range/teardown/nonexact decline; formal Ninja build; boundary scan; one bounded native observation only after local closure. |
-| Expected Markers | Active OpenNT-shaped provider, no hard-coded conventional-memory result, no coupled `15h/AH=88h` path, no production caller of the superseded helper, and no new mantle/core source. |
-| Asset Needs | T240 S1 source ledger; existing checked-RAM action; active generic-UD ingress; current formal Ninja manifest and source-built NTIO fixture. |
-| Reporting Requirements | Record original/source-mirror/shim divergence, removal ledger for old helper/test, local result matrix and native-observation limitation. |
-| Stop Conditions | The active ingress cannot transport a synchronous checked read without new core/mantle semantics; the original source requires an unrepresented state mutation; or an implementation would expand to another selector/device. |
-| Exit Criteria | Original `memory_size` behavior is active and locally tested through the existing mechanical seam; obsolete coupled helper/fixture is retired; formal build and bounded native observation are recorded; commit/push closure. |
-| Original Owner Request | “像这种情况 甚至连对bochs的侵入都没有 为啥需要我批准”. |
-| Similar-Issue Sweep | All current callers of the legacy helper, `15h/AH=88h` coupling, BDA address handling, generic RAM action action-id use, ingress order, manifest membership and mantle vocabulary scan. |
-| Exit Status | P2 delivery active — P1 source mirror, private SAS/AX shim, direct ingress, v1-helper retirement, focused/formal fixture and one bounded native observation are complete. The native run stopped before BOP ingress; this is a recorded integration limitation and does not allocate the next selector. |
-| Next Admission | S3 only if S2 proves that the source-shaped provider needs a separately bounded ingress/result integration change. |
+| Identifier Mode | `M0 T241 S1`, Ordinary Mode, single-person dual-role source audit and review. |
+| Admission And Approval | Queue order and standing owner authority to proceed by dependency; S1 is read-only source/ABI/lifecycle analysis and cannot add a Bochs feature or a BOP implementation. |
+| Objective | Prove the smallest original-owner boundary for `xmsNotifyHookI15` / `52:09`: IVT reads, keyboard optimization state, initialization/reset ownership, exact update/failure behavior and any required selector-blind mechanic. |
+| Non-goals | No code import, device enablement, Bochs intrusion, `BOP 5C`, console input, IRQ1/PPI/PS2, timer/mouse/video, `host_simulate`, or general INT15 implementation. |
+| Reference Baseline | `BOP-XMS-52-09`, `BOP-DEPENDENCY-039/044`, XMS source mirror, current explicit 52:09 decline and the T241 supporting proposals. |
+| Files And ABI Surface | Read-only: original `xmsmisc.c`, `xmsdisp.c`, `keybd_io.c`, relevant SoftPC headers/reset/startup code and current bx-vdm/mantle seams. |
+| Applicable Rules | Source-first recovery, selector-blind bx boundary, no trace-driven leaf expansion, MTSP governance and v1 retirement. |
+| Verification | Four-rung ledger, original source line map, current-route/dead-symbol search, core/mantle vocabulary scan and documentation governance checks. |
+| Expected Markers | A minimal owner-correct state/lifecycle description; explicit classification of what is required for 52:09 versus later keyboard/console features. |
+| Asset Needs | T241 plan, XMS and machine proposals, live tracker and original OpenNT/SoftPC source. |
+| Reporting Requirements | Record dependencies, source composition candidates, impossible historical product dependencies, failure rule and S2 recommendation; update tracker only where evidence changes. |
+| Stop Conditions | Source requires an unrecoverable material product shell; minimum route would add BOP/DOS/OpenNT semantics to core/mantle; or S1 discovers a different owner package. |
+| Exit Criteria | Reviewed audit and S2 admission recommendation are committed/pushed; no implementation occurs before the recommended boundary is explicit. |
+| Original Owner Request | Persistent goal: queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation. |
+| Similar-Issue Sweep | `54:0E`, top-level `5C`, XMS A20/UMB state, IVT 08/09/1C/13 references, keyboard reset and all existing no-op/shim symbols. |
+| Exit Status | P1 delivery active — audit identifies one bounded mechanical state and source-composition seam. |
+| Next Admission | S2 may admit only the audited IVT-watch lifecycle and direct `UpdateKbdInt15` mirror. |
 
 ## Latest Closure
 
-M0 T240 S2 P1 recovers the OpenNT-shaped SoftPC conventional-memory query:
+M0 T240 closes the OpenNT-shaped SoftPC conventional-memory query:
 the active `mem_size.c` mirror reads mutable BDA `0040:0013` through the
 existing selector-blind checked-RAM action, then returns AX/RIP+3. No Bochs
 intrusion was required. Its one bounded native run stopped before a BOP was
 reached, so it is not a guest-continuity claim; see the
-[S2 evidence](etc/evidence/m0-t240-s2-softpc-memory-size-closure-001.md).
+[T240 closure](history/m0-t240-closure-20260822.md).
 
 M0 T239 closes the working-tree retirement of every experimental BOP-v1
 provider, catalog, facade, legacy fixture and dead build/probe helper. The
