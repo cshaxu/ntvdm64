@@ -3,6 +3,7 @@
 #include "bx-mantle/bx_ntvdm_a20_capability_v1.h"
 #include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
 #include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
+#include "bx-mantle/bx_ntvdm_ivt_watch_v1.h"
 
 extern "C" {
 #include "bop/xms_v2_runtime_session.h"
@@ -70,10 +71,29 @@ int main()
   machine_request.startup_action.payload[0] = 0xf4u;
   machine_request.preserved_state_address = 0x2010u;
   machine_request.preserved_state_bytes = 1u;
+  machine_request.ivt_watch_enabled = 1u;
+  machine_request.ivt_watch_vector = 0x15u;
   if (!bx_ntvdm_machine_stage_v1_request_valid(&machine_request) ||
       bx_ntvdm_machine_stage_v1_begin(&machine_request) != BX_NTVDM_MACHINE_STAGE_V1_OK)
     return 1;
   if (!bx_ntvdm_xms_v2_runtime_session_bind(8192u)) return 2;
+
+  /* The imported xmsmisc.c body calls the direct keybd_io.c fragment before
+   * setting CX.  With the sampled IVT15 pair still 0000:0000, the first call
+   * takes the original match/update path; the second observes the stale IVT
+   * and takes the original clear path. */
+  if (invoke_xms(9u, 0x4567u, 0u, 2u, 0u) != 0) return 13;
+  {
+    uint16_t offset = 0u, segment = 0u;
+    if (!bx_ntvdm_ivt_watch_v1_copy_expected(0x15u, &offset, &segment) ||
+        offset != 0x4567u || segment != 0u) return 14;
+  }
+  if (invoke_xms(9u, 0x1234u, 0u, 2u, 0u) != 0) return 15;
+  {
+    uint16_t offset = 1u, segment = 1u;
+    if (!bx_ntvdm_ivt_watch_v1_copy_expected(0x15u, &offset, &segment) ||
+        offset != 0u || segment != 0u) return 16;
+  }
 
   /* 52:06 remains in its original xmsInitUMB body.  Its AX:BX target is
    * retained as a checked real-mode address, then xmsa20.c writes the state

@@ -152,6 +152,8 @@ struct bx_ntvdm_machine_stage_v1_request {
   struct bx_ntvdm_mechanical_action_v1 startup_action;
   uint64_t preserved_state_address;
   uint64_t preserved_state_bytes;
+  uint32_t ivt_watch_enabled;
+  uint32_t ivt_watch_vector;
 };
 
 #ifdef __cplusplus

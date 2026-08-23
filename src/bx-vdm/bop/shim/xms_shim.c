@@ -1,6 +1,8 @@
 #include "xms_shim.h"
 
 #include "bx-mantle/bx_ntvdm_a20_capability_v1.h"
+#include "bx-mantle/bx_ntvdm_ivt_watch_v1.h"
+#include "softpc_int15_watch_shim.h"
 
 #include <string.h>
 
@@ -17,6 +19,12 @@ static int g_xms_initialized;
  * byte address and writes it through the existing checked guest boundary. */
 static __declspec(thread) uint32_t g_himem_a20_state_address;
 static __declspec(thread) int g_himem_a20_state_bound;
+
+/* The direct SoftPC fragment stages only its historical expected pair here;
+ * its opaque storage is owned by the selector-blind mantle watch. */
+int bx_ntvdm_softpc_int15_watch_source_begin(void);
+int bx_ntvdm_softpc_int15_watch_source_end(void);
+void bx_ntvdm_softpc_int15_watch_source_reset(void);
 
 static bx_ntvdm_xms_active_call *active_call(void)
 {
@@ -230,6 +238,7 @@ void bx_ntvdm_xms_reset(void)
     xmsMemorySize = 0u;
     ExtMemSA = NULL;
     bx_ntvdm_xms_clear_himem_a20_state();
+    bx_ntvdm_softpc_int15_watch_source_reset();
 }
 
 int bx_ntvdm_xms_initialize(void)
@@ -273,20 +282,33 @@ int bx_ntvdm_xms_a20_available(void)
     return result.status == BX_NTVDM_A20_CAPABILITY_OK;
 }
 
-void bx_ntvdm_xms_update_kbd_int15(WORD segment, WORD offset)
+void bx_ntvdm_softpc_int15_sas_loadw(uint32_t address, WORD *value)
 {
-    (void)segment; (void)offset;
-    /* This compatibility symbol remains link-only: xms_invoke rejects 52:09
-     * before XMSDispatch can reach it.  A future keyboard/BIOS owner must
-     * replace the rejection and this symbol together; it is never an admitted
-     * silent-success route. */
+    uint8_t bytes[2];
+    bx_ntvdm_xms_active_call *active = active_call();
+    if (value == NULL || active == NULL || active->call == NULL ||
+        (address != 0x54u && address != 0x56u) ||
+        !active->call->guest_read(active->call->guest_state, address, bytes,
+            (uint32_t)sizeof(bytes))) {
+        if (value != NULL) *value = 0u;
+        return;
+    }
+    *value = (WORD)((WORD)bytes[0] | ((WORD)bytes[1] << 8));
+}
+
+int bx_ntvdm_softpc_int15_watch_state_load(WORD *offset, WORD *segment)
+{
+    return bx_ntvdm_ivt_watch_v1_copy_expected(0x15u, offset, segment);
+}
+
+int bx_ntvdm_softpc_int15_watch_state_store(WORD offset, WORD segment)
+{
+    return bx_ntvdm_ivt_watch_v1_store_expected(0x15u, offset, segment);
 }
 
 void sas_enable_20_bit_wrapping(void) { bx_ntvdm_xms_a20_set(0); }
 void sas_disable_20_bit_wrapping(void) { bx_ntvdm_xms_a20_set(1); }
 BOOL sas_twenty_bit_wrapping_enabled(void) { return bx_ntvdm_xms_a20_enabled() ? FALSE : TRUE; }
-void UpdateKbdInt15(WORD segment, WORD offset)
-{ bx_ntvdm_xms_update_kbd_int15(segment, offset); }
 
 int bx_ntvdm_xms_invoke(bx_ntvdm_xms_call *call)
 {
@@ -302,12 +324,6 @@ int bx_ntvdm_xms_invoke(bx_ntvdm_xms_call *call)
      * real-mode address before entering the source body; no raw host pointer
      * is exposed or retained. */
     if (call->service == 6u && !bx_ntvdm_xms_a20_available()) return 0;
-    /* 52:09 calls keybd_io.c:UpdateKbdInt15.  It validates the real IVT and
-     * updates the keyboard's INT15 optimization state.  No such state belongs
-     * to bx-vdm, and the source exposes no error result; keep it explicitly
-     * unavailable until its bx-mantle keyboard/BIOS owner supplies the named
-     * mechanic rather than retaining a silent no-op. */
-    if (call->service == 9u) return 0;
     memset(&active, 0, sizeof(active));
     active.call = call;
     active.cpu = *call->cpu;
@@ -325,7 +341,17 @@ int bx_ntvdm_xms_invoke(bx_ntvdm_xms_call *call)
         g_active_call = NULL;
         return 0;
     }
+    /* Original xmsNotifyHookI15 has no error register path.  Therefore the
+     * typed provider must prove the configured IVT watch is live before it
+     * enters XMSDispatch, rather than letting a missing state turn into a
+     * silent source success. */
+    if (call->service == 9u && !bx_ntvdm_softpc_int15_watch_source_begin()) {
+        g_active_call = NULL;
+        return 0;
+    }
     invoked = XMSDispatch(call->service);
+    if (call->service == 9u && !bx_ntvdm_softpc_int15_watch_source_end())
+        invoked = 0;
     g_active_call = NULL;
     return invoked && bx_ntvdm_cpu_result_v2_valid(call->result);
 }

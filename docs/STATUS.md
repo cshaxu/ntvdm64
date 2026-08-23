@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T241 S1** — audit the original keyboard/IVT/INT15 lifecycle
-needed to recover XMS `52:09`, before admitting any machine change.
+**Active: M0 T241 S2** — recover the original XMS `52:09` IVT-watch state
+without enabling keyboard hardware or modifying adopted Bochs code.
 
 ## Active Packet
 
-### M0 T241 S1 — keyboard/IVT/INT15 source and ABI audit
+### M0 T241 S2 — source-shaped `UpdateKbdInt15` IVT-watch recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T241 S1`, Ordinary Mode, single-person dual-role source audit and review. |
-| Admission And Approval | Queue order and standing owner authority to proceed by dependency; S1 is read-only source/ABI/lifecycle analysis and cannot add a Bochs feature or a BOP implementation. |
-| Objective | Prove the smallest original-owner boundary for `xmsNotifyHookI15` / `52:09`: IVT reads, keyboard optimization state, initialization/reset ownership, exact update/failure behavior and any required selector-blind mechanic. |
-| Non-goals | No code import, device enablement, Bochs intrusion, `BOP 5C`, console input, IRQ1/PPI/PS2, timer/mouse/video, `host_simulate`, or general INT15 implementation. |
-| Reference Baseline | `BOP-XMS-52-09`, `BOP-DEPENDENCY-039/044`, XMS source mirror, current explicit 52:09 decline and the T241 supporting proposals. |
-| Files And ABI Surface | Read-only: original `xmsmisc.c`, `xmsdisp.c`, `keybd_io.c`, relevant SoftPC headers/reset/startup code and current bx-vdm/mantle seams. |
-| Applicable Rules | Source-first recovery, selector-blind bx boundary, no trace-driven leaf expansion, MTSP governance and v1 retirement. |
-| Verification | Four-rung ledger, original source line map, current-route/dead-symbol search, core/mantle vocabulary scan and documentation governance checks. |
-| Expected Markers | A minimal owner-correct state/lifecycle description; explicit classification of what is required for 52:09 versus later keyboard/console features. |
-| Asset Needs | T241 plan, XMS and machine proposals, live tracker and original OpenNT/SoftPC source. |
-| Reporting Requirements | Record dependencies, source composition candidates, impossible historical product dependencies, failure rule and S2 recommendation; update tracker only where evidence changes. |
-| Stop Conditions | Source requires an unrecoverable material product shell; minimum route would add BOP/DOS/OpenNT semantics to core/mantle; or S1 discovers a different owner package. |
-| Exit Criteria | Reviewed audit and S2 admission recommendation are committed/pushed; no implementation occurs before the recommended boundary is explicit. |
+| Identifier Mode | `M0 T241 S2`, Ordinary Mode, single-person dual-role source recovery and review. |
+| Admission And Approval | T241 S1 P1 audit admits only the smallest selector-blind IVT-watch lifecycle and the original `UpdateKbdInt15` fragment. No adopted-Bochs intrusion is indicated. |
+| Objective | Replace `52:09`'s explicit decline and link-only no-op with the original source-order IVT compare/clear/update plus XMS CX result. |
+| Non-goals | No keyboard controller, console input, IRQ1/PPI/PS2, timer/mouse/video, `host_simulate`, `BOP 5C`, general INT15 or direct BOP semantics in core/mantle. |
+| Reference Baseline | T241 S1 audit, `BOP-XMS-52-09`, `BOP-DEPENDENCY-039/044`, imported XMS mirror and generic checked-RAM action. |
+| Files And ABI Surface | New selector-blind mantle IVT-watch state; source mirror of `keybd_io.c:UpdateKbdInt15`; named bx-vdm shim; existing XMS provider; focused fixture and formal manifest. |
+| Applicable Rules | Source-first recovery, selector-blind bx boundary, direct original fragment/order/failure preservation, v1 retirement and MTSP governance. |
+| Verification | Matching/mismatching IVT branches, initial state, reset/teardown, unavailable decline, CS:AX input/CX output, formal Ninja fixture and boundary scan. |
+| Expected Markers | `52:09` reaches original XMS source body; no link-only no-op; core/mantle have no BOP/DOS/OpenNT/SoftPC terms. |
+| Asset Needs | T241 S1 audit, current machine stage, checked RAM action and XMS native-session fixture patterns. |
+| Reporting Requirements | Record source mirror divergence, machine state lifecycle, no-op removal, test matrix and any native integration limitation. |
+| Stop Conditions | Capability requires keyboard hardware or CCPU recursion; source fragment cannot preserve initialization/reset semantics; or a Bochs source change becomes necessary. |
+| Exit Criteria | Exact source fragment is active and locally/formally tested; old no-op/decline is retired; formal build and bounded native observation are recorded; commit/push closure. |
 | Original Owner Request | Persistent goal: queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation. |
 | Similar-Issue Sweep | `54:0E`, top-level `5C`, XMS A20/UMB state, IVT 08/09/1C/13 references, keyboard reset and all existing no-op/shim symbols. |
-| Exit Status | P1 delivery active — audit identifies one bounded mechanical state and source-composition seam. |
-| Next Admission | S2 may admit only the audited IVT-watch lifecycle and direct `UpdateKbdInt15` mirror. |
+| Exit Status | Active. |
+| Next Admission | S3 only if S2 proves a separately bounded integration gap. |
 
 ## Latest Closure
 

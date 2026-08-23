@@ -216,6 +216,10 @@ int bx_ntvdm_dem_v2_startup_prepare_machine_stage_request(
     memcpy(request->startup_action.payload, payload, (size_t)payload_bytes);
     request->preserved_state_address = plan.preserved_state_address;
     request->preserved_state_bytes = plan.preserved_state_bytes;
+    /* The mantle sees only a configured IVT entry.  The provider-specific
+     * use of this selector-blind watch remains in bx-vdm. */
+    request->ivt_watch_enabled = 1u;
+    request->ivt_watch_vector = 0x15u;
     return bx_ntvdm_machine_stage_v1_request_valid(request);
 }
 

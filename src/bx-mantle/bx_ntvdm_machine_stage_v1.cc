@@ -6,6 +6,7 @@
 #include "bx_ntvdm_first_fault_observation_v1.h"
 #include "bx_ntvdm_cancellation_controller_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
+#include "bx_ntvdm_ivt_watch_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
 #include "bx_ntvdm_instruction_history.h"
 
@@ -197,6 +198,9 @@ extern "C" int bx_ntvdm_machine_stage_v1_request_valid(
     request->struct_bytes == sizeof(*request) && request->reserved0 == 0u &&
     bx_ntvdm_mechanical_action_v1_valid(&request->initial_state_action) &&
     bx_ntvdm_mechanical_action_v1_valid(&request->startup_action) &&
+    request->ivt_watch_enabled <= 1u &&
+    (request->ivt_watch_enabled != 0u || request->ivt_watch_vector == 0u) &&
+    request->ivt_watch_vector <= 0xffu &&
     bx_ntvdm_machine_stage_preserved_range_valid(
       request->preserved_state_address, request->preserved_state_bytes);
 }
@@ -246,6 +250,11 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_begin(
     bx_ntvdm_machine_stage_v1_reset();
     return BX_NTVDM_MACHINE_STAGE_V1_PRESERVE_FAILURE;
   }
+  if (request->ivt_watch_enabled != 0u &&
+      !bx_ntvdm_ivt_watch_v1_initialize(request->ivt_watch_vector)) {
+    bx_ntvdm_machine_stage_v1_reset();
+    return BX_NTVDM_MACHINE_STAGE_V1_ACTION_FAILURE;
+  }
   return BX_NTVDM_MACHINE_STAGE_V1_OK;
 }
 
@@ -253,6 +262,7 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_reset(void)
 {
   bx_ntvdm_minimal_machine_c *machine = bx_ntvdm_machine_stage_machine;
   bx_ntvdm_machine_stage_machine = 0;
+  bx_ntvdm_ivt_watch_v1_reset();
   if (machine == 0) return BX_NTVDM_MACHINE_STAGE_V1_OK;
   if (machine->cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
     delete machine;

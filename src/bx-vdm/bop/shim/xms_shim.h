@@ -77,7 +77,6 @@ void bx_ntvdm_xms_reset(void);
 void bx_ntvdm_xms_a20_set(int enabled);
 int bx_ntvdm_xms_a20_enabled(void);
 int bx_ntvdm_xms_a20_available(void);
-void bx_ntvdm_xms_update_kbd_int15(WORD segment, WORD offset);
 void sas_enable_20_bit_wrapping(void);
 void sas_disable_20_bit_wrapping(void);
 BOOL sas_twenty_bit_wrapping_enabled(void);
