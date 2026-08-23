@@ -168,6 +168,7 @@
         "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
         "src/bx-mantle/bx_ntvdm_machine_engine_v1.c",
         "src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc",
+        "src/bx-mantle/bx_ntvdm_physical_irq_v1.cc",
         "src/bx-mantle/bx_ntvdm_physical_write_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_headless_8042.cc",
         "src/bx-mantle/bx_ntvdm_port_action_v1.cc",
@@ -333,6 +334,18 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t253-s2-physical-irq-fixture",
+      "source": "tests/bx-mantle/t253_s2_physical_irq_fixture.cc",
+      "libraries": [
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib"
+      ]
+    },
     {
       "name": "t245-s22-dos-safe-alias-fixture",
       "source": "tests/runner/t245_s22_dos_safe_alias_fixture.c",
