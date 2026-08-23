@@ -10,6 +10,7 @@
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_software_interrupt_observation_v1.h"
 #include "bx_ntvdm_interrupt_return_observation_v1.h"
+#include "bx_ntvdm_physical_write_observation_v1.h"
 #include "bx_ntvdm_segment_access_observation_v1.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_target_selection.h"
@@ -33,6 +34,10 @@
 
 #ifndef BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
 #define BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION 0
+#endif
+
+#ifndef BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#define BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION 0
 #endif
 
 static int copied_text(uint16_t *out, uint32_t maximum, const wchar_t *text,
@@ -230,6 +235,9 @@ int wmain(int argc, wchar_t **argv)
 #if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
         , has_interrupt_return_observation = 0
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+        , has_physical_write_observation = 0
+#endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         , has_terminal_history_observation = 0, has_terminal_cs_transitions_observation = 0
 #endif
@@ -246,6 +254,9 @@ int wmain(int argc, wchar_t **argv)
 #if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
         , observe_interrupt_returns = 0
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+        , observe_physical_write = 0
+#endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         , observe_terminal_history = 0, observe_terminal_cs_transitions = 0
 #endif
@@ -253,6 +264,9 @@ int wmain(int argc, wchar_t **argv)
         , observe_terminal_provenance = 0
 #endif
         ;
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+    uint64_t physical_write_address = 0u, physical_write_bytes = 0u;
+#endif
     int index = 1;
     ntdos64_startup_selection selection;
     wchar_t config_full[MAX_PATH], root_full[MAX_PATH];
@@ -301,6 +315,12 @@ int wmain(int argc, wchar_t **argv)
 #if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
         else if (wcscmp(argv[index], L"--observe-interrupt-returns") == 0 && !has_interrupt_return_observation)
             has_interrupt_return_observation = 1, observe_interrupt_returns = 1, ++index;
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+        else if (wcscmp(argv[index], L"--observe-physical-write-range") == 0 && index + 2 < argc &&
+            !has_physical_write_observation && parse_instruction_tick_budget(argv[index + 1], &physical_write_address) &&
+            parse_instruction_tick_budget(argv[index + 2], &physical_write_bytes))
+            has_physical_write_observation = 1, observe_physical_write = 1, index += 3;
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         else if (wcscmp(argv[index], L"--observe-budget-terminal-history") == 0 && !has_terminal_history_observation)
@@ -408,6 +428,13 @@ int wmain(int argc, wchar_t **argv)
         return 1;
     }
 #endif
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+    if (observe_physical_write && !bx_ntvdm_physical_write_observation_v1_configure(
+            physical_write_address, physical_write_bytes)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return 1;
+    }
+#endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
     if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(1u);
     if (observe_terminal_cs_transitions) bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(1u);
@@ -493,6 +520,25 @@ int wmain(int argc, wchar_t **argv)
     if (observe_interrupt_returns) {
         print_interrupt_return_observation();
         bx_ntvdm_mantle_interrupt_return_observation_v1_configure(0u);
+    }
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+    if (observe_physical_write) {
+        struct bx_ntvdm_physical_write_observation_v1 physical_write;
+        if (bx_ntvdm_physical_write_observation_v1_copy(&physical_write)) {
+            uint32_t physical_write_index;
+            wprintf(L"ntdos64-native: physical-write address=%llx bytes=%u captured=%u sequence=%llu cs=%04x base=%llx eip=%llx ss=%04x sp=%04x data=",
+                (unsigned long long)physical_write.physical_address,
+                physical_write.byte_count, physical_write.captured_bytes,
+                (unsigned long long)physical_write.sequence, physical_write.cs,
+                (unsigned long long)physical_write.cs_base,
+                (unsigned long long)physical_write.rip, physical_write.ss,
+                physical_write.sp);
+            for (physical_write_index = 0u; physical_write_index < physical_write.captured_bytes; ++physical_write_index)
+                wprintf(L"%02x", physical_write.bytes[physical_write_index]);
+            wprintf(L"\n");
+        } else wprintf(L"ntdos64-native: physical-write unavailable\n");
+        bx_ntvdm_physical_write_observation_v1_reset();
     }
 #endif
     if (observe_bop_sequence) {
@@ -651,6 +697,9 @@ usage:
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
         L" [--observe-interrupt-returns]"
+#endif
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+        L" [--observe-physical-write-range positive-decimal-address positive-decimal-bytes]"
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
         L" [--observe-budget-terminal-history] [--observe-budget-terminal-cs-transitions]"

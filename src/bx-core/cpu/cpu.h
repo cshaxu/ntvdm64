@@ -24,6 +24,14 @@
 
 #include <setjmp.h>
 
+#ifndef BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#define BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION 0
+#endif
+
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#include "bx-mantle/bx_ntvdm_physical_write_observation_v1.h"
+#endif
+
 // <TAG-DEFINES-DECODE-START>
 // segment register encoding
 #define BX_SEG_REG_ES    0
@@ -521,9 +529,26 @@ BOCHSAPI extern BX_CPU_C   bx_cpu;
 #endif
 
 // notify internal debugger/instrumentation about memory access
+#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#define BX_NTVDM_OBSERVE_LIN_MEMORY_WRITE(paddr, size, rw, dataptr) {                  \
+  if ((rw) == BX_WRITE) {                                                               \
+    bx_ntvdm_physical_write_observation_v1_record((uint64_t)(paddr),                  \
+      (uint32_t)(size), (dataptr), (uint64_t)BX_CPU_THIS_PTR get_icount(),             \
+      (uint64_t)BX_CPU_THIS_PTR prev_rip,                                               \
+      (uint64_t)BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].cache.u.segment.base,             \
+      BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value,                             \
+      BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value,                             \
+      BX_CPU_THIS_PTR get_reg16(BX_16BIT_REG_SP));                                      \
+  }                                                                                      \
+}
+#else
+#define BX_NTVDM_OBSERVE_LIN_MEMORY_WRITE(paddr, size, rw, dataptr) ((void)0)
+#endif
+
 #define BX_NOTIFY_LIN_MEMORY_ACCESS(laddr, paddr, size, pl, rw, dataptr) {              \
   BX_INSTR_LIN_ACCESS(BX_CPU_ID, (laddr), (paddr), (size), (rw));                       \
   BX_DBG_LIN_MEMORY_ACCESS(BX_CPU_ID, (laddr), (paddr), (size), (pl), (rw), (dataptr)); \
+  BX_NTVDM_OBSERVE_LIN_MEMORY_WRITE((paddr), (size), (rw), (dataptr));                  \
 }
 
 #define BX_NOTIFY_PHY_MEMORY_ACCESS(paddr, size, rw, why, dataptr) {            \

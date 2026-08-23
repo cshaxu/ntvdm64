@@ -15,7 +15,7 @@
 | Objective | Implement and verify the smallest default-off physical-write observation capable of attributing writes in the fixed `0x0A87` range without altering CPU/RAM semantics. |
 | Non-goals | No BOP provider change, guest PSP/PDB logic, device/firmware enablement, guest semantic decoding, or arbitrary memory tracing. |
 | Reference Baseline | [T249 S1 seam audit](etc/evidence/m0-t249-s1-low-memory-provenance-seam-audit-001.md), [T248 S4 attribution](etc/evidence/m0-t248-s4-post-exec-final-position-attribution-001.md), `BOP-DEPENDENCY-115`. |
-| Files And ABI Surface | Adopted `BX_MEM_C` ordinary CPU-write path; fixed-width mantle observation ABI; CLI diagnostic presentation; exception registry, focused fixture and tracker/evidence. |
+| Files And ABI Surface | Adopted Bochs physical-write slow path plus existing CPU linear-memory fast-path notification; fixed-width mantle observation ABI; CLI diagnostic presentation; exception registry, focused fixture and tracker/evidence. |
 | Applicable Rules | Source-first ladder, selector-blind machine boundary, no trace-led BOP patch and fixed-width observation discipline. |
 | Verification | Focused disabled/overlap/non-overlap write fixture, one bounded source-built observation, documentation governance and `git diff --check`. |
 | Expected Markers | First relevant write physical range, copied preceding CPU position and fixed captured bytes; no behavior change with observer disabled. |

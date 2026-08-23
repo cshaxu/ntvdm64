@@ -168,6 +168,7 @@
         "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
         "src/bx-mantle/bx_ntvdm_machine_engine_v1.c",
         "src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc",
+        "src/bx-mantle/bx_ntvdm_physical_write_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_headless_8042.cc",
         "src/bx-mantle/bx_ntvdm_port_action_v1.cc",
         "src/bx-mantle/bx_ntvdm_minimal_machine.cc",
@@ -644,6 +645,15 @@
       "source": "tests/opennt/opennt_int06_provider_v1_test.c",
       "libraries": [
         "opennt-host"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t249-s3-physical-write-observation-fixture",
+      "source": "tests/bx-mantle/t249_s3_physical_write_observation_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
       ],
       "platformLibraries": []
     },
