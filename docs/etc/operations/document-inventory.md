@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2153 |
+| Documentation records | 2154 |
 | --- | --- |
-| Generated UTC | 2026-08-23T11:43:03Z |
+| Generated UTC | 2026-08-23T11:45:06Z |
 
 ## Entries
 
@@ -82,7 +82,7 @@ content-divergent entries.
 | DOS-WOW16-SOURCE-CLOSURE-RESULT.md | retained pre-governance evidence | 843f0bb11b298a6d80efca687fdf056dfdc9104026d53676c4052a216c17387c |
 | DOS-WOW16-SOURCE-CLOSURE-TASK-BRIEF.md | retained pre-governance evidence | 5ea19abcd564854c1c21c6dff2714b204303e935ca5385345a3f3e23ee0ecb85 |
 | ENGINE-CONTRACT.md | retained pre-governance evidence | d57785469d3221d45b6931f4ab0f40c2cc6f78ab4ecd8425daaa338931d7ca3c |
-| etc/bop-list.md | indexed supporting material | a1dfa2e0d7f44533da6f21ce3875420a0d53a46516ada7e90a32ff745d778aa5 |
+| etc/bop-list.md | indexed supporting material | 5600b67cae339cf93423dd9ff5258780ca5a3735714f306b08b8b54846b55710 |
 | etc/evidence/m0-t240-s2-softpc-memory-size-closure-001.md | indexed supporting material | 3e0c56fab1d88442fa48813bee1d97d26bc12d4d49ff24dd5ff8c4efa179aba3 |
 | etc/evidence/m0-t241-s2-ivt-watch-source-recovery-001.md | indexed supporting material | dc7cfee2ac868e9e664cb4da58d58bdf73aa0dec2d6a9f5085b35bd9ede2217f |
 | etc/evidence/m0-t241-s3-xms-ivt-watch-regression-001.md | indexed supporting material | 82a407226439c8e5a5703e2560fb19ac6716f6d525a328f7ee4e955217d05082 |
@@ -149,6 +149,7 @@ content-divergent entries.
 | etc/evidence/m0-t256-s11-xmem-reallocation-closure-001.md | indexed supporting material | 4eacff5f6eb3f0b140f787bd7722171191111b832718a10ce0436fc50dfdf98b |
 | etc/evidence/m0-t256-s12-dpmi-descriptor-guest-linear-identity-map-001.md | indexed supporting material | 3f1908d3372d64c19b8abae91ec63935a23fcec2bc5428edc67ee58c206b110b |
 | etc/evidence/m0-t256-s13-native-descriptor-table-lifecycle-admission-001.md | indexed supporting material | 4238d7188e398c031cfbbf8b64c32213950edeaba4ac13ca09161899ca0d8c78 |
+| etc/evidence/m0-t256-s14-protected-interrupt-fault-iret-continuity-map-001.md | indexed supporting material | 3e1859cff5bb5d9d57971b5b24237aaa7088770754e03fcd3ac709ea1ac0660c |
 | etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md | indexed supporting material | 57811b016c1cb356eab229bdddeff8b241a61c17d03259ebbd035a4fd41ca014 |
 | etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md | indexed supporting material | fee680777bef69d8f93fc453ca4d9506c5589da856b6801ee242630d958c82bc |
 | etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md | indexed supporting material | 58578665a462d87dcd9424eddf2b81264b2b1f38f66273688399724a1d9f91fb |
@@ -2167,7 +2168,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 9260164524bb5e889bd1b670b0652b3a9d0230f4a3181efe7e9c322acb2dbedc |
+| STATUS.md | principal control document | 39052f70c4a7fb750be8a92b837e0cd60a5636b1f2f43fd241ce74f9d088a6cb |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

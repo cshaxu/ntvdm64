@@ -2,31 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T256 S14** — Protected interrupt/fault/IRET continuity map.
+**Active: M0 T256 S15** — Protected substrate closure and DPMI handoff.
 
 ## Active Packet
 
-### M0 T256 S14 — Protected interrupt/fault/IRET continuity map
+### M0 T256 S15 — Protected substrate closure and DPMI handoff
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S14`, Ordinary Mode, single-person dual-role source/ABI map. |
-| Admission And Approval | S13 closes the descriptor-table lifecycle admission with [source evidence](etc/evidence/m0-t256-s13-native-descriptor-table-lifecycle-admission-001.md). |
-| Objective | Map OpenNT DOSX/DPMI protected interrupt, fault handler and IRET paths onto the existing native Bochs exception/IRET mechanics and identify any genuinely selector-blind prerequisite. |
+| Identifier Mode | `M0 T256 S15`, Ordinary Mode, single-person dual-role closure audit. |
+| Admission And Approval | S14 closes protected interrupt/fault/IRET classification with [source evidence](etc/evidence/m0-t256-s14-protected-interrupt-fault-iret-continuity-map-001.md). |
+| Objective | Audit the completed T256 generic substrate against its original admission, verify artifacts/tracker/status consistency, and hand the exact remaining work to the queued whole DPMI/DOSX owner package. |
 | Non-goals | No `53:xx` ingress, DPMI provider activation, raw pointer/flat-address emulation, paging implementation, descriptor-cache copy, arbitrary CR0 setter, DPMI-aware mantle API, or unregistered core change. |
-| Reference Baseline | `dpmiint.c`, `dpmimscr.c`, `i386/dpmi386.c`, DOSX `dxstrt.asm`, native exception/IRET sources, S12/S13 evidence and `BOP-DEPENDENCY-117`. |
-| Files And ABI Surface | Evidence/tracker only unless a separately registered selector-blind mechanical ABI is selected. |
+| Reference Baseline | T256 S1--S14 evidence, current module manifest/fixtures, `BOP-DEPENDENCY-117`, and queued DPMI proposal. |
+| Files And ABI Surface | Evidence/tracker/status/history only; no product behavior change. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Field-by-field protected interrupt/exception stack, frame, handler and IRET source map with exact retain/adapt/defer disposition. |
-| Expected Markers | No BOP/DOS semantics in bx-core/bx-mantle and no invented adapter exception dispatcher. |
-| Asset Needs | S4/S5/S6/S12/S13 evidence, DOSX guest source/image map, engine/startup composition, machine stage and formal Ninja manifest. |
-| Reporting Requirements | Separate CPU-native fault delivery from OpenNT host hook/product composition; do not claim DPMI interrupt support. |
-| Stop Conditions | Paging support, raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write, premature `53:xx` provider, or external-code patch without a registered exception. |
-| Exit Criteria | Source-proven native/adapter/guest ownership map and an explicit next prerequisite or defer, without activating a DPMI leaf. |
+| Verification | Fresh formal Ninja closure of the touched generic module/test set; evidence/tracker/queue cardinality and boundary audit. |
+| Expected Markers | No BOP/DOS semantics in bx-core/bx-mantle, no v1 route, and no invented adapter exception dispatcher. |
+| Asset Needs | T256 S1--S14 evidence, formal Ninja manifest, tracker and DPMI proposal. |
+| Reporting Requirements | State the exact difference between closed generic substrate and still-deferred DPMI/DOSX source package; do not claim DPMI runtime support. |
+| Stop Conditions | Any active `53:xx`, raw host pointer, DPMI-aware mantle/core branch, unregistered external intrusion, or unrelated product modification. |
+| Exit Criteria | T256 closure evidence, history/status transition and a source-precise queue handoff to the DPMI owner package. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
 ## Latest Closure
+
+M0 T256 S14 closes protected interrupt/fault/IRET classification. OpenNT uses
+historical `NtVdmControl`, emulator hooks and locked DPMI stack frames, while
+native Bochs remains CPU exception/IRET owner; see [S14 evidence](etc/evidence/m0-t256-s14-protected-interrupt-fault-iret-continuity-map-001.md).
 
 M0 T256 S13 closes native descriptor-table lifecycle admission. DOSX `selGDT`
 is a historical process-LDT alias: table mutation plus `53:00` host install is
