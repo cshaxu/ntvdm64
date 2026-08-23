@@ -10,14 +10,16 @@ or make a machine capability available.
 ## Authoritative inventory
 
 The audit overlay lives in `docs/etc/bop-list.md`. It covers all 203 canonical
-BOP rows and all 117 `BOP-DEPENDENCY-*` rows. A row may not be called
+BOP rows and all 118 `BOP-DEPENDENCY-*` rows.  P3 adds dependency 118 because
+the four historical guest-pointer APIs are a shared interface family, not a
+family-private implementation detail.  A row may not be called
 interface-conformant merely because its provider returns a compatible result.
 
 Each row receives these five fields:
 
 | Field | Required content |
 | --- | --- |
-| Interface disposition | `direct-public-api`, `opennt-shaped-facade`, `registered-exception`, `deferred`, or `not-applicable-guest`. |
+| Interface disposition | `direct-public-api`, `opennt-shaped-facade`, `registered-exception`, `migration-debt`, `deferred`, or `not-applicable-guest`. |
 | Original interface evidence | Exact original function/macro/structure and source call site, or `none` for a pure guest artifact. |
 | Divergence | Pointer, signature, layout, ordering, lifetime, host API, or failure-semantic difference; `none proven` is permitted only with a citation. |
 | Exception | Registered recovery/intrusion record ID, or `none`. |
@@ -25,7 +27,7 @@ Each row receives these five fields:
 
 ## Execution sequence
 
-1. Establish the overlay schema and derive its full 320-row inventory from the
+1. Establish the overlay schema and derive its full 321-row inventory from the
    existing tracker without changing any current BOP status claim.
 2. Audit shared guest-pointer, handle/token, CPU-result and generic machine
    records first. These rows are common prerequisites and may not be hidden
@@ -49,7 +51,7 @@ Each row receives these five fields:
 
 ## Exit criteria
 
-Td S2 P2 closes only when all 320 rows have exactly one disposition and one
+Td S2 P2 closes only when all 321 rows have exactly one disposition and one
 migration conclusion; every `registered-exception` cites an existing record;
 every direct/facade claim cites an original interface; and every row left
 deferred identifies its receiving owner package. A cardinality check, the

@@ -16,7 +16,7 @@ numeric T or displacing the active product packet in Status:
 | M0 Td S1 P7 | Replace the monolithic external-compatibility candidate with ordered bounded owner/machine candidates; add the first reached SoftPC BOP 12h dependency and its source-first recovery proposal. |
 | M0 Td S2 P1 | Adopt the OpenNT-shaped compatibility-facade rule, the project-defined recovery-exception gate, and the bounded guest-pointer mapping-lease governance; freeze T257 S5 pending interface audit. |
 | M0 Td S2 P2 | Establish the whole-tracker interface-conformance audit schema, cardinality baseline and ordered audit plan; no row is yet classified by this planning part. |
-| M0 Td S2 P3 | Audit shared guest-pointer, handle/token, CPU-result and generic machine interfaces. |
+| M0 Td S2 P3 | Close the shared guest-pointer, handle/token, CPU-result and generic-machine interface audit; add dependency 118 and record the five common dispositions. |
 | M0 Td S2 P4 | Audit DEM and COMMAND interface dispositions. |
 | M0 Td S2 P5 | Audit XMS and DPMI interface dispositions. |
 | M0 Td S2 P6 | Audit Redirector, WOW16, Debugger/VDD and top-level/machine interface dispositions. |
