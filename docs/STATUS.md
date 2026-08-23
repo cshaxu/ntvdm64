@@ -2,9 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T242 S3** — recover the declared local guest EXEC path through
-source-proven machine prerequisites without moving DOS process semantics into a
-host provider.
+**Active: M0 T242 S3 (paused at stop condition)** — source-proven guest EXEC
+prerequisite recovery has reached a distinct BOP-5F keyboard/IVT machine owner.
 
 ## Active Packet
 
@@ -13,22 +12,22 @@ host provider.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T242 S3`, Ordinary Mode, single-person dual-role guest EXEC recovery. |
-| Admission And Approval | S1 source/ABI audit and S2 native classification admit only the source-proven prerequisites on the declared local `AL=0` path; they do not authorize a host-side DOS process model. |
-| Objective | Recover the local source-built DOS-binary load/child/exit path by composing only original guest code and individually proven machine prerequisites, beginning with `BOP-DEPENDENCY-102` (`BIOS[15]`, `AH=88h`). |
-| Non-goals | No adapter-owned DOS process emulator; no COMMAND broker rewrite; no blanket BIOS/device enablement; no Bochs/core/mantle business semantics; no host 32-bit child, Redirector, WOW, debugger, overlay or HMA claim. |
-| Reference Baseline | [S1 source/ABI audit](etc/evidence/m0-t242-s1-ntdos-exec-source-abi-audit-001.md), [S2 bootstrap observation](etc/evidence/m0-t242-s2-source-built-bootstrap-observation-001.md), [ordered recovery plan](etc/operations/m0-t242-ntdos-guest-exec-recovery-plan-001.md), tracker `BOP-DEPENDENCY-092..102`, source-built DOS/NTDOS/COMMAND assets, and T241 closure. |
-| Files And ABI Surface | Active original guest bytes; `BIOS[15]` source map; existing selector-blind checked RAM/action, typed register result/resume and finite machine lifecycle only. |
+| Admission And Approval | S1 source/ABI audit and S2 native classification admit only source-proven prerequisites on the local `AL=0` path; no host-side DOS process model. |
+| Objective | Recover the local source-built DOS-binary load/child/exit path by composing original guest code with individually proven machine or existing DEM prerequisites. |
+| Non-goals | No adapter DOS-process emulator, COMMAND broker rewrite, blanket device enablement, or Bochs/mantle business semantics. |
+| Reference Baseline | T242 S1/S2 evidence, recovery plan, `BOP-DEPENDENCY-092..104`, and staged source-built guest assets. |
+| Files And ABI Surface | Original guest bytes; existing fixed-width result/RAM/lifecycle boundaries; direct imported DEM/SoftPC source only. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, queue order, no trace-driven scope growth and MTSP governance. |
-| Verification | Formal Ninja build plus focused source/body/ABI fixtures for each admitted prerequisite and one bounded source-built guest observation after a coherent prerequisite group, never one trace-led provider patch. |
-| Expected Markers | Original guest bytes own all DOS mutations; original machine source supplies only selector-blind mechanical result; host COMMAND and machine work are consumed prerequisites, not reimplemented. |
-| Asset Needs | Existing local OpenNT tree and staged source-built guest artifacts; no new import or host mutation. |
-| Reporting Requirements | Record exact image digest, original source edge, source-body/shim differences, tested register/flags/RIP result, and owner-bounded disposition. |
-| Stop Conditions | Required source/staged artifact cannot be identified; a required observation cannot cross the typed existing boundary; a prerequisite requires an undeclared broad device/product shell; or the remaining work is a different owner package. |
-| Exit Criteria | Original `$Exec`, `$CREATE_PROCESS_DATA_BLOCK`, `$Exit/$Abort` execute in guest ownership for the declared profile, with error exits retaining source behavior; otherwise every reached residual is classified and transferred by owner. |
-| Original Owner Request | Persistent goal: queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation. |
-| Similar-Issue Sweep | `INT 21h AH=4B`, PSP/arena/JFN/environment/return flows, `54:01/08/0A/0B`, BIOS `12/15`, reset BDA/extended-memory and real-mode interrupt/memory contracts. |
-| Exit Status | Active. S1 froze guest ownership/provenance/profile. S2 closed as bounded bootstrap classification: it retired selector-only probes, proved BDA/reset and reached machine `15/AH=88h`. S3 P1 restores the exact original non-PM `15/AH=88h` branch. S3 P2 then source-maps the reached x86 `50:42` composition gap and routes only that selector to the identically shaped imported `demRead` body; its formal fixture proves data/AX/CF/RIP. The coherent bounded native observation accepts the group through `50:02`, has no fault, and reaches `8e08:2f57` at the 100,000-tick budget (rather than the former `0800:0000` loop). See [P1](etc/evidence/m0-t242-s3-int15-ems-source-mirror-001.md) and [P2](etc/evidence/m0-t242-s3-fastread-source-recovery-001.md). It makes no NTDOS EXEC claim. |
-| Next Admission | T242 S4 only after S3 executes the declared original guest EXEC load/exit path or transfers a remaining external owner prerequisite with complete evidence. |
+| Verification | Formal Ninja focused fixtures and bounded source-built observations after coherent source groups. |
+| Expected Markers | Guest retains all DOS mutations; machine remains selector-blind; each residual has a named owner disposition. |
+| Asset Needs | Existing OpenNT tree and staged source-built guest artifacts; no new import or host mutation. |
+| Reporting Requirements | Exact source edge, ABI/failure difference, fixture result, native observation and owner-bounded transfer. |
+| Stop Conditions | A prerequisite requires an undeclared broad device/product shell or belongs to a different owner package. **Reached:** `BOP-TOP-5F` keyboard/IVT composition. |
+| Exit Criteria | Original `$Exec`, `$CREATE_PROCESS_DATA_BLOCK`, `$Exit/$Abort` execute in guest ownership, or every residual is classified and transferred by owner. The current governance mechanism requires a successor admission before numeric-T closure; this S is paused pending that decision. |
+| Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation. |
+| Similar-Issue Sweep | `INT 21h AH=4B`, PSP/arena/JFN/environment/return, BIOS `12/15`, reset BDA, FastRead and NTIO keyboard/IVT initialization. |
+| Exit Status | P1 restores `15/AH=88h`; P2 restores selected x86 `50:42` via imported `demRead`; P3 proves 100,000 ticks remain in original NTIO CONFIG parsing, then reaches `5F/AX=BEEF` at 1,000,000 ticks. `5F` is classified and queued as a separate machine package. See [P1](etc/evidence/m0-t242-s3-int15-ems-source-mirror-001.md), [P2](etc/evidence/m0-t242-s3-fastread-source-recovery-001.md), and [P3](etc/evidence/m0-t242-s3-ntio-config-and-keyboard-transfer-001.md). |
+| Next Admission | Owner selection of queue candidate 1: PC keyboard/IVT BOP-5F machine composition. |
 
 ## Latest Closure
 

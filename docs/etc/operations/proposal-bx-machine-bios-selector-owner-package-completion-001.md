@@ -9,12 +9,12 @@ not permission to enable those components as one product-sized machine.
 
 ## Queue relationship
 
-This is supporting admission guidance for queue candidate 2 (keyboard/IVT/INT
-15) and candidate 8 (remaining evidence-admitted PC device expansion).  The
-separate first candidate owns only BOP 12h conventional-memory reset/query;
-it is governed by `proposal-softpc-bios-conventional-memory-recovery-001.md`.
-No candidate may consume this plan until its applicable BOP-… /
-BOP-DEPENDENCY-… rows have been frozen.
+This is supporting admission guidance for queue candidate 1 (the reached
+keyboard/IVT `BOP-5F` handoff) and candidate 7 (remaining evidence-admitted
+PC device expansion).  The former is constrained to
+`BOP-DEPENDENCY-104` / `BOP-TOP-5F`; it is not permission to enable any other
+machine component.  No candidate may consume this plan until its applicable
+`BOP-…` / `BOP-DEPENDENCY-…` rows have been frozen.
 ## Boundary
 
 `bx-core` owns adopted Bochs CPU, memory, exceptions and devices;
