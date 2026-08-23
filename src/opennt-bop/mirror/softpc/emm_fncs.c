@@ -9,7 +9,7 @@
  * body keeps the original DS:DX publication, `get_total_pages`, `setBX`, and
  * conditional DMA ordering; it returns the source-defined `BX=0` outcome.
  */
-#include "../../shim/softpc_emm_unavailable_shim.h"
+#include "../../../adapter-softpc/softpc_emm_unavailable_shim.h"
 
 word segment68;
 word offset68;

@@ -10,7 +10,7 @@
  * every other branch is marked unavailable instead of fabricating printer
  * behavior.
  */
-#include "../../shim/softpc_printer_openclose_shim.h"
+#include "../../../adapter-softpc/softpc_printer_openclose_shim.h"
 
 #define NUM_PARALLEL_PORTS 3
 

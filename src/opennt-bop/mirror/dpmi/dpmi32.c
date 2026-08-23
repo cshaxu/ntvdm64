@@ -23,7 +23,7 @@ Revision History:
 /* DIVERGENCE (T257 S3): the NT4 `precomp.h`/`softpc.h` product shell exposes
  * VdmTib, Sim32GetVDMPointer and a process LDT.  The named shim retains only
  * the original startup/table calls through fixed-width session records. */
-#include "../../shim/dpmi_startup_source_shim.h"
+#include "../../../adapter-softpc/dpmi_startup_source_shim.h"
 //
 // Information about the current PSP
 //

@@ -33,7 +33,7 @@ Revision History:
  * ordering; that final call publishes to guest RAM rather than an NT4 host
  * process LDT. */
 #define i386 1
-#include "../../shim/dpmi_descriptor_source_shim.h"
+#include "../../../adapter-softpc/dpmi_descriptor_source_shim.h"
 #pragma hdrstop
 
 #if DBG

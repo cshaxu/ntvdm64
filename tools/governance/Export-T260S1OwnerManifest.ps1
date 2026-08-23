@@ -83,6 +83,13 @@ function Resolve-T260LivePath([string]$Path) {
         $candidate = 'src/opennt-bop/route/' + [System.IO.Path]::GetFileName($p)
         if (Test-Path -LiteralPath (Join-Path $root $candidate)) { return $candidate }
     }
+    if ($p -like 'src/bx-vdm/bx_ntvdm_*') {
+        $name = [System.IO.Path]::GetFileName($p)
+        $startup = $name -match '^bx_ntvdm_(initial_state|preentry|ntio_preentry|startup_)'
+        if ($startup) { $candidate = 'src/app/' + $name }
+        else { $candidate = 'src/adapter-softpc/' + $name }
+        if (Test-Path -LiteralPath (Join-Path $root $candidate)) { return $candidate }
+    }
     return $p
 }
 

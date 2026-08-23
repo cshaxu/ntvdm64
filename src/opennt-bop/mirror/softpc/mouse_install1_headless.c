@@ -10,7 +10,7 @@
  * vector handoff.  The retained fragment is exactly the first table pair
  * consumed by the NTVDM MONITOR body and its INT 33h publication.
  */
-#include "../../shim/softpc_mouse_vector_shim.h"
+#include "../../../adapter-softpc/softpc_mouse_vector_shim.h"
 
 #define int_addr(int_no) ((int_no) * 4)
 

@@ -8,7 +8,7 @@
  * local data, access order, and application-mutable BDA semantics remain.
  */
 
-#include "../../shim/softpc_memory_size_shim.h"
+#include "../../../adapter-softpc/softpc_memory_size_shim.h"
 
 void memory_size()
 {

@@ -10,7 +10,7 @@
  * machine package rather than fabricated here.
  */
 
-#include "../../shim/softpc_tape_io_shim.h"
+#include "../../../adapter-softpc/softpc_tape_io_shim.h"
 
 void cassette_io(void)
 {

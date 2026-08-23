@@ -11,7 +11,7 @@
  * named shim maps only checked copied RAM and typed CF output; no Bochs object
  * or pointer crosses the boundary.
  */
-#include "../../shim/spckbd_handoff_shim.h"
+#include "../../../adapter-softpc/spckbd_handoff_shim.h"
 
 #include <stdint.h>
 

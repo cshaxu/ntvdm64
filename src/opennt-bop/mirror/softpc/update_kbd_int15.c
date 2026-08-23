@@ -7,7 +7,7 @@
  * are therefore staged by the named selector-blind IVT-watch shim around the
  * unchanged comparison/clear/update body below.
  */
-#include "../../shim/softpc_int15_watch_shim.h"
+#include "../../../adapter-softpc/softpc_int15_watch_shim.h"
 
 static word sp_int15_handler_off;
 static word sp_int15_handler_seg;
