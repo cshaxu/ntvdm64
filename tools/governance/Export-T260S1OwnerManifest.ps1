@@ -46,11 +46,54 @@ function Add-Row(
     })
 }
 
+# The formal Ninja manifest is deliberately switched only in T260/S8.  During
+# the preceding layout packets, report the existing source input at its live
+# component path when a content-preserving git move has already happened.  The
+# build-graph declaration itself remains an S8 obligation; this only prevents
+# the ownership inventory from representing a non-existent transitional file.
+function Resolve-T260LivePath([string]$Path) {
+    $p = $Path.Replace('\\', '/')
+    if (Test-Path -LiteralPath (Join-Path $root $p)) { return $p }
+
+    $prefixes = @(
+        @('src/cli/', 'src/app/'),
+        @('src/bx-mantle/bx_ntvdm_', 'src/adapter-softpc/bx_ntvdm_'),
+        @('src/opennt/base/mvdm/dos/v86/', 'src/opennt-guest/dos-v86/'),
+        @('src/opennt/base/mvdm/wow16/', 'src/opennt-guest/wow16/'),
+        @('src/bx-vdm/bop/opennt/', 'src/opennt-bop/mirror/'),
+        @('src/opennt/base/mvdm/dos/dem/', 'src/opennt-bop/original/dem/'),
+        @('src/opennt/base/mvdm/dos/command/', 'src/opennt-bop/original/command/'),
+        @('src/opennt/base/mvdm/xms.486/', 'src/opennt-bop/original/xms/'),
+        @('src/opennt/base/mvdm/dpmi32/', 'src/opennt-bop/original/dpmi32/'),
+        @('src/opennt/base/mvdm/dpmi/', 'src/opennt-bop/original/dpmi/')
+    )
+    foreach ($prefix in $prefixes) {
+        if (-not $p.StartsWith($prefix[0], [System.StringComparison]::OrdinalIgnoreCase)) { continue }
+        $candidate = $prefix[1] + $p.Substring($prefix[0].Length)
+        if (Test-Path -LiteralPath (Join-Path $root $candidate)) { return $candidate }
+    }
+
+    if ($p -like 'src/bx-vdm/bop/*' -and
+        $p -notlike 'src/bx-vdm/bop/shim/*' -and
+        $p -notlike 'src/bx-vdm/bop/observation/*') {
+        $candidate = 'src/opennt-bop/route/' + [System.IO.Path]::GetFileName($p)
+        if (Test-Path -LiteralPath (Join-Path $root $candidate)) { return $candidate }
+    }
+    if ($p -like 'src/bx-vdm/bx_ntvdm_bios_selector_map*') {
+        $candidate = 'src/opennt-bop/route/' + [System.IO.Path]::GetFileName($p)
+        if (Test-Path -LiteralPath (Join-Path $root $candidate)) { return $candidate }
+    }
+    return $p
+}
+
 function Get-SourceDisposition([string]$Path, [string]$CurrentModule) {
     $p = $Path.Replace('\', '/')
     if ($p -like 'src/app/*') { return @('app', 'project-authored app component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/adapter-softpc/*') { return @('adapter-softpc', 'project-authored SoftPC adapter record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/adapter-win32/*') { return @('adapter-win32', 'project-authored Win32 adapter record', 'retain', 'S2', 'target component root record') }
+    if ($p -like 'src/opennt-bop/original/*') { return @('opennt-bop', 'immutable imported OpenNT BOP source', 'retain', 'S5', 'original source identity retained beside the adapted mirror') }
+    if ($p -like 'src/opennt-bop/mirror/*') { return @('opennt-bop', 'minimal-change OpenNT BOP mirror', 'retain', 'S5', 'adapted source mirror; local divergence register required') }
+    if ($p -like 'src/opennt-bop/route/*') { return @('opennt-bop', 'project-authored BOP ingress/route', 'retain', 'S5', 'selector/service routing and provider composition') }
     if ($p -like 'src/opennt-bop/*') { return @('opennt-bop', 'OpenNT BOP component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/opennt-guest/*') { return @('opennt-guest', 'OpenNT guest component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/opennt-host/*') { return @('opennt-host', 'OpenNT host component record', 'retain', 'S2', 'target component root record') }
@@ -160,9 +203,14 @@ $seedPaths = [System.Collections.Generic.List[string]]::new()
 
 foreach ($module in $manifest.modules) {
     foreach ($source in @($module.sources)) {
-        $d = Get-SourceDisposition $source $module.name
-        Add-Row $source 'source' $module.name $d[0] $d[1] $d[2] $d[3] $d[4]
-        $seedPaths.Add($source)
+        $liveSource = Resolve-T260LivePath $source
+        $d = Get-SourceDisposition $liveSource $module.name
+        $reason = $d[4]
+        if ($liveSource -ne $source) {
+            $reason += '; formal Ninja declaration remains at ' + $source.Replace('\\', '/') + ' until S8'
+        }
+        Add-Row $liveSource 'source' $module.name $d[0] $d[1] $d[2] $d[3] $reason
+        $seedPaths.Add($liveSource)
     }
 }
 

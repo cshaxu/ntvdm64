@@ -2,28 +2,28 @@
 
 ## Current Work
 
-**Active: M0 T260 S4** — eight-component source-layout reorganization and
+**Active: M0 T260 S5** — eight-component source-layout reorganization and
 build closure.
 
 ## Active Packet
 
-### M0 T260 S4 — app and OpenNT guest migration
+### M0 T260 S5 — OpenNT BOP mirror, ingress and route migration
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T260 S4`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | S1--S3 are closed. The owner requires original guest content to remain guest-owned and requires OpenNT DEM/COMMAND host provider sources not to be misclassified as guest files. |
-| Objective | Move the product CLI/composition sources into `app`; move intact DOS V86 and WOW16 source/build inputs into `opennt-guest`; correct the owner-manifest distinction between guest input and future OpenNT BOP provider mirrors. |
-| Non-goals | No guest source modification or rebuild; no BOP/provider implementation; no host-capability recovery; no formal Ninja switch until S8. |
-| Reference Baseline | S1 manifest, `app/README.md`, `opennt-guest/README.md`, source policy, guest artifact inventory and current formal module closure. |
-| Files And ABI Surface | `src/cli`, `src/app`, `src/opennt/base/mvdm/dos/v86`, `src/opennt/base/mvdm/wow16`, `src/opennt-guest`, manifest generator and source references. |
-| Applicable Rules | Prebuilt OpenNT guest artifacts remain default; source trees retain original content and are not host libraries; `app` is composition-only. |
-| Verification | Git-rename/content identity scan; guest/source-owner classification scan; `git diff --check`; documentation governance verification. |
-| Expected Markers | No live `src/cli`; intact DOS V86/WOW16 source under `opennt-guest`; DEM/COMMAND are marked `opennt-bop`, not guest; no formal build closure claim before S8. |
-| Asset Needs | Original OpenNT source trees, guest artifact/source inventory, S1 manifest and formal module manifest. |
-| Reporting Requirements | Record exact moved source roots, zero guest modifications, retained prebuilt-artifact policy and the host-provider classification correction. |
-| Stop Conditions | A candidate source is both an in-process host provider and a guest build input, an artifact/source provenance mismatch is found, or the move would modify source text. Pause for a targeted ownership decision. |
-| Exit Criteria | CLI/app and guest roots have a unique owner, guest imports are byte-preserving moves, no DEM/COMMAND source is listed as a guest input, and the live manifest/docs verify the disposition. |
+| Identifier Mode | `M0 T260 S5`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S1--S4 are closed. Owner requires OpenNT BOP implementation meaning to leave the transitional `bx-vdm` tree, without dragging host capability, Win32 facade, SoftPC mechanics or observation ownership into `opennt-bop`. |
+| Objective | Move immutable OpenNT DEM/COMMAND/XMS/DPMI source inputs, minimal-change BOP mirrors, selector/service routes and BIOS-selector map into `opennt-bop`, with explicit original/mirror/route provenance. |
+| Non-goals | No BOP behavior implementation or enablement; no shim migration; no formal Ninja switch; no runtime claim; no change to original source content. |
+| Reference Baseline | S1 manifest, source policy, `opennt-bop/README.md`, the existing original/mirror inputs and current formal module closure. |
+| Files And ABI Surface | `src/opennt-bop/{original,mirror,route}`, transitional `src/bx-vdm/bop`, original OpenNT BOP roots and BOP provider include edges. |
+| Applicable Rules | Original source and minimal-change mirror are distinct; all mirror divergences remain registered; BOP owns route/meaning but never Bochs-object mechanics. |
+| Verification | Git-rename/content identity scan; route/mirror/original owner scan; retained-shim negative scan; `git diff --check`; documentation governance verification. |
+| Expected Markers | No BOP route or mirror remains under transitional `bx-vdm`; `original/`, `mirror/` and `route/` have unambiguous roles; shims/observations remain for S6/S7. |
+| Asset Needs | OpenNT source roots, current BOP mirror/route tree, owner manifest and formal module manifest. |
+| Reporting Requirements | Record exact moved roots/counts, no-source-edit proof, retained later-owner shim/observation inventory and remaining S8 build switch. |
+| Stop Conditions | A file combines BOP meaning with host capability/Win32/SoftPC mechanics such that it cannot be split without behavior change, or an original source identity cannot be proved. Pause for a targeted split decision. |
+| Exit Criteria | BOP original/mirror/route files have one `opennt-bop` home; no non-BOP shim/observation is misclassified; every move preserves content/history and the live manifest verifies the boundary. |
 | Original Owner Request | “应使用 1 个 T 任务，例如：M0 T260：七/八组件源码布局重整与构建闭合……这个 T 应拆成约 8 个 S。” |
 | Similar-Issue Sweep | Headers, fixtures, generated Ninja input, include roots, legacy v1/test-only code, OpenNT source provenance and the shared mapping-manager placement. |
 
@@ -39,6 +39,16 @@ build closure.
 | S6 | `opennt-host` and `adapter-win32` classification/split migration. |
 | S7 | `adapter-softpc` same-shaped SoftPC/CCPU boundary and shared-mapping-manager migration. |
 | S8 | Tests, formal Ninja graph, legacy-path exit and whole-package acceptance. |
+
+### T260 S5 completion record
+
+S5 moved OpenNT BOP identity, minimal-change mirrors and BOP routes into
+`src/opennt-bop/{original,mirror,route,overlay}` without a source-body edit.
+The content-preserving move and inherited-overlay register are recorded in the
+[S5 layout evidence](etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).
+The formal Ninja source declarations are intentionally still historical until
+S8; S6/S7 next classify and migrate the remaining host/API and SoftPC/mechanical
+seams.
 
 **Current progress:** S1 is closed. The current reproducible manifest covers
 all 3,542 `src/` files in 3,735 rows with zero missing paths, duplicate paths
