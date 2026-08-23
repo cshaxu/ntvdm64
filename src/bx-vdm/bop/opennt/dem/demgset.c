@@ -234,6 +234,15 @@ demGetPhysicalDriveType(
 UCHAR GetPhysicalDriveType(UCHAR DriveNum)
 {
 
+    /* Divergence from the NT4 VDM process-wide drive view: the current
+     * bx-vdm session may not inspect a letter excluded by its copied CLI
+     * policy.  For an admitted letter the original NT-native classification
+     * body below remains intact, including its SUBST/remote rejection. */
+    if (bx_ntvdm_demdasd_drive_policy_bound() &&
+        !bx_ntvdm_demdasd_drive_policy_admits(DriveNum)) {
+        return DRIVE_UNKNOWN;
+    }
+
     NTSTATUS Status;
     HANDLE Handle;
     UCHAR  uchRet;

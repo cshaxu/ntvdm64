@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T245 S9** — DEM DASD admitted-drive policy recovery.
+**Active: M0 T245 S10** — DEM physical-drive table and no-floppy source map.
 
 ## Active Packet
 
-### M0 T245 S9 — DEM DASD admitted-drive policy recovery
+### M0 T245 S10 — DEM physical-drive table and no-floppy source map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S9`, Ordinary Mode, single-person dual-role source-first seam repair. |
-| Admission And Approval | S8 proves that the imported `demFdiskInit` body is reusable only after its existing Win32 shim consumes the immutable CLI drive-admission snapshot. Ordinary queue work requires no renewed approval. |
-| Objective | Carry the copied CLI include/exclude policy into the one active bx-vdm DEM session; ensure `nt_fdisk_init` rejects every unadmitted drive before any host volume query, while retaining the imported `demdasd.c` enumeration and failure order. |
+| Identifier Mode | `M0 T245 S10`, Ordinary Mode, single-person dual-role source-first owner/data-flow map. |
+| Admission And Approval | S9 closes the `nt_fdisk_init` guard but exposes the upstream original `demGetDrives -> PhysicalDriveTypes[] -> demFdiskInit` data dependency. Mapping it precedes a `5E` route; ordinary queue work requires no renewed approval. |
+| Objective | Map all writers/readers of the imported `PhysicalDriveTypes[]` table, determine how the copied CLI snapshot can be the one session-owned source without losing OpenNT's physical/subst classification, and prove the exact no-floppy failure/restore sequence in `demFloppyInit`. |
 | Non-goals | No `5E` route, raw-media I/O, floppy enablement, UMB reservation, new drive policy, generic ignore, BOP handler or bx-core/bx-mantle semantic intrusion. |
-| Reference Baseline | `BOP-DEPENDENCY-110`, OpenNT `demdasd.c:demFdiskInit`, current `nt_fdisk_init` public-Win32 divergence, and `bx_ntvdm_host_drive_snapshot_v1`. |
-| Files And ABI Surface | bx-vdm session-private immutable drive snapshot, named DASD shim bind/reset/query seam, startup/runtime propagation, focused synthetic-policy fixture and tracker/evidence. |
+| Reference Baseline | `BOP-DEPENDENCY-110/111`, OpenNT `demgset.c:demGetDrives/GetPhysicalDriveType`, `demdasd.c:demDasdInit/demFloppyInit/demFdiskInit`, and current DEM mirrors/shims. |
+| Files And ABI Surface | Evidence/tracker only until a complete writer/readers/failure map selects the smallest named bx-vdm seam. |
 | Applicable Rules | Source-first recovery, host-drive admission policy, no ambient guest-time drive discovery, guest-owner boundary, selector-blind machine boundary and MTSP governance. |
-| Verification | Synthetic include/exclude/default snapshots; unbound and excluded fixed drives fail before probing; admitted-drive eligibility is the only new shim condition; fresh formal Ninja link and focused fixture. |
-| Expected Markers | `nt_fdisk_init` has no path to `GetDriveTypeA`/`CreateFileA` for a drive not admitted by the immutable session snapshot. |
-| Asset Needs | Existing OpenNT tree/current bx-vdm mirrors and host-drive policy code; no new source, firmware or host mutation. |
-| Reporting Requirements | Record the exact policy handoff, retained original enumeration, source-derived guard and the still-blocked floppy disposition. |
+| Verification | Cross-check every imported table write and `GetDriveType`/NT native call against the immutable snapshot; trace register restore around unavailable `diskette_io`; classify each needed compatibility seam. |
+| Expected Markers | A source-order recommendation that does not let `5E` observe an unadmitted drive and does not mistake a zero-floppy source failure for an FDC implementation. |
+| Asset Needs | Existing OpenNT tree/current bx-vdm mirrors and host-drive policy evidence; no new source, firmware or host mutation. |
+| Reporting Requirements | Record writer/readers, original classification purpose, policy interaction, no-floppy call/restore sequence, selected/rejected seams and transfer owners. |
 | Stop Conditions | Need to query an unadmitted drive, make host-drive state ambient or guest-controlled, enable floppy/UMB behavior, or add a `5E` return. Record and transfer instead. |
-| Exit Criteria | The formal product route carries an immutable drive snapshot into the direct DEM session; excluded/unbound drive guards are locally proven; source and build evidence states that `5E` remains blocked solely on its distinct floppy disposition. |
+| Exit Criteria | A complete physical-drive/no-floppy source map exists and identifies one smallest policy-compliant source-order route or an explicit remaining machine dependency. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 

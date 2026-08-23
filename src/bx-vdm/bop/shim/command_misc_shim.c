@@ -1,4 +1,5 @@
 #include "command_misc_shim.h"
+#include "dem_drive_policy_shim.h"
 
 #include <setjmp.h>
 #include <stdlib.h>
@@ -1001,7 +1002,17 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
 UINT GetDriveTypeOem(LPSTR root)
 {
     CHAR ansi[4];
+    BYTE drive;
     if (root == NULL || !OemToCharBuffA(root, ansi, 4u)) return DRIVE_UNKNOWN;
+    drive = root[0] >= 'a' && root[0] <= 'z' ?
+        (BYTE)(root[0] - 'a') : root[0] >= 'A' && root[0] <= 'Z' ?
+        (BYTE)(root[0] - 'A') : 26u;
+    /* OpenNT's shared OEM helper was process-wide.  When a bx-vdm session is
+     * active, retain the source fallback shape but suppress the host query
+     * for an unadmitted letter; unbound standalone source fixtures preserve
+     * the historical direct Win32 helper. */
+    if (bx_ntvdm_demdasd_drive_policy_bound() &&
+        !bx_ntvdm_demdasd_drive_policy_admits(drive)) return DRIVE_UNKNOWN;
     return GetDriveTypeA(ansi);
 }
 

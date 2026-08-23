@@ -80,11 +80,16 @@ void bx_ntvdm_demdasd_drive_policy_reset(void)
     g_drive_snapshot_bound = 0;
 }
 
+int bx_ntvdm_demdasd_drive_policy_bound(void)
+{
+    return g_drive_snapshot_bound &&
+        bx_ntvdm_host_drive_snapshot_v1_valid(&g_drive_snapshot);
+}
+
 int bx_ntvdm_demdasd_drive_policy_admits(BYTE drive)
 {
     uint32_t bit;
-    if (!g_drive_snapshot_bound || drive >= 26u ||
-        !bx_ntvdm_host_drive_snapshot_v1_valid(&g_drive_snapshot)) return 0;
+    if (!bx_ntvdm_demdasd_drive_policy_bound() || drive >= 26u) return 0;
     bit = UINT32_C(1) << drive;
     return (g_drive_snapshot.admitted_mask & bit) != 0u;
 }

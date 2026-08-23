@@ -6,7 +6,7 @@
  * compile probes admit each remaining historical raw-device dependency. */
 
 #include "demgset_shim.h"
-#include "bx_ntvdm_host_drive_policy.h"
+#include "dem_drive_policy_shim.h"
 
 /* Original source: src/opennt/base/mvdm/dos/dem/dem.h and dosdef.h.
  * The imported units need only these dispatcher spellings; their selection
@@ -51,14 +51,6 @@ void diskette_io(void);
 void fdisk_heart_beat(void);
 void FdiskTerminatePDB(USHORT pdb);
 void HostFdiskReset(void);
-
-/* A single active bx-vdm DEM session owns this copied policy.  The imported
- * OpenNT body continues to enumerate letters; the named modern shim only
- * prevents it from probing a letter that the CLI did not admit. */
-int bx_ntvdm_demdasd_drive_policy_bind(
-    const bx_ntvdm_host_drive_snapshot_v1 *snapshot);
-void bx_ntvdm_demdasd_drive_policy_reset(void);
-int bx_ntvdm_demdasd_drive_policy_admits(BYTE drive);
 
 int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call);
 
