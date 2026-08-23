@@ -202,6 +202,7 @@
         "src/bx-vdm/bop/shim/softpc_printer_openclose_shim.c",
         "src/bx-vdm/bop/shim/spckbd_handoff_shim.c",
         "src/bx-vdm/bop/softpc_memory_size_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/softpc_machine_interrupt_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/softpc_tape_io_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/softpc_emm_unavailable_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/softpc_mouse_vector_v2_generic_ud_bridge.c",
@@ -1122,6 +1123,19 @@
         "bx-vdm"
       ],
       "platformLibraries": []
+    },
+    {
+      "name": "t246-s2-softpc-machine-interrupt-ingress-fixture",
+      "source": "tests/bx-mantle/t246_s2_softpc_machine_interrupt_ingress_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
     },
     {
       "name": "t244-s2-headless-8042-lifecycle-fixture",

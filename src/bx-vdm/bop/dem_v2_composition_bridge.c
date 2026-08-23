@@ -11,6 +11,7 @@
 
 #include "dem_v2_generic_ud_bridge.h"
 #include "command_v2_generic_ud_bridge.h"
+#include "softpc_machine_interrupt_v2_generic_ud_bridge.h"
 #include "softpc_memory_size_v2_generic_ud_bridge.h"
 #include "softpc_tape_io_v2_generic_ud_bridge.h"
 #include "softpc_emm_unavailable_v2_generic_ud_bridge.h"
@@ -42,7 +43,8 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
 {
     struct bx_ntvdm_generic_ud_outcome_v1 declined = {0};
     int accepted;
-    if (!bx_ntvdm_softpc_memory_size_v2_generic_ud_recognizes(event) &&
+    if (!bx_ntvdm_softpc_machine_interrupt_v2_generic_ud_recognizes(event) &&
+        !bx_ntvdm_softpc_memory_size_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_softpc_tape_io_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_softpc_emm_unavailable_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_softpc_mouse_vector_v2_generic_ud_recognizes(event) &&
@@ -62,7 +64,9 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
     /* Selector recognition and owner dispatch remain adapter work.  The
      * mantle calls one opaque mechanical entry and never learns either the
      * DEM or COMMAND selector. */
-    accepted = bx_ntvdm_softpc_memory_size_v2_generic_ud_recognizes(event) ?
+    accepted = bx_ntvdm_softpc_machine_interrupt_v2_generic_ud_recognizes(event) ?
+        bx_ntvdm_softpc_machine_interrupt_v2_generic_ud_dispatch(event, outcome) :
+        (bx_ntvdm_softpc_memory_size_v2_generic_ud_recognizes(event) ?
         bx_ntvdm_softpc_memory_size_v2_generic_ud_dispatch(event, outcome) :
         (bx_ntvdm_softpc_tape_io_v2_generic_ud_recognizes(event) ?
         bx_ntvdm_softpc_tape_io_v2_generic_ud_dispatch(event, outcome) :
@@ -82,7 +86,7 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
             bx_ntvdm_command_v2_generic_ud_dispatch(event, outcome) :
             (bx_ntvdm_xms_v2_generic_ud_recognizes(event) ?
                 bx_ntvdm_xms_v2_generic_ud_dispatch(event, outcome) :
-                bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(event, outcome))))))))));
+                bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(event, outcome)))))))))));
     if (accepted) {
         bx_ntvdm_command_bootstrap_observation_v1_consider(event, outcome,
             command_bootstrap_read, NULL);

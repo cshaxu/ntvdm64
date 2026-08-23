@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T246 S2** — SoftPC machine interrupt active ingress recovery.
+**Active: M0 T246 S3** — SoftPC machine interrupt package regression and native checkpoint.
 
 ## Active Packet
 
-### M0 T246 S2 — SoftPC machine interrupt active ingress recovery
+### M0 T246 S3 — SoftPC machine interrupt package regression and native checkpoint
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T246 S2`, Ordinary Mode, single-person dual-role existing-route recovery. |
-| Admission And Approval | S1 proves original SoftPC `02/06` source behavior has a compiled source-derived provider and sufficient typed RAM/port mechanics; only the active bx-vdm registry omits it. |
-| Objective | Attach the shared `02/06` provider to generic ingress through one explicit result/outcome bridge. |
+| Admission And Approval | S2 routes the whole original `02/06` pair through the active bx-vdm registry and passes its native focused ingress fixture. |
+| Objective | Regress the complete package, then execute one bounded source-built native checkpoint to establish that the repeated `06` has advanced to a distinct owner. |
 | Non-goals | No Bochs change, direct legacy handler callback, full PIC/device enablement, DOS semantics, or product-shell diagnostic/UI reconstruction. |
-| Reference Baseline | S1 owner map; OpenNT `bios.c`, `illegalp.c`, `unexp_nt.c`; existing `opennt_int06_provider_v1` and `startup_machine_interrupt_v1`. |
-| Files And ABI Surface | New bx-vdm machine-package generic bridge and registry entry only; existing fixed-width event/outcome, RAM and port action ABIs. |
+| Reference Baseline | S1 owner map and S2 active-ingress closure; OpenNT `bios.c`, `illegalp.c`, `unexp_nt.c`; existing `opennt_int06_provider_v1`. |
+| Files And ABI Surface | Existing fixed-width event/outcome, RAM and port action ABIs; no new runtime ABI. |
 | Applicable Rules | Source-first recovery, selector-blind machine boundary and one package-level provider route. |
-| Verification | Existing provider/transaction fixture plus dedicated generic-ingress `02/06` regression; formal Ninja and one bounded native checkpoint in S3. |
-| Expected Markers | Both selector forms produce source-shaped typed outcome; malformed/preflight failures stop rather than fall through; no core/mantle file changes. |
+| Verification | Re-run source/provider and active-ingress fixtures, then one bounded source-built native run with BOP observation. |
+| Expected Markers | No repeated `06`; next distinct selector/owner is recorded without an implied continuity claim; no core/mantle file changes. |
 | Asset Needs | Existing sources and Ninja graph; no external asset. |
 | Reporting Requirements | Name retained source operations, conversion ABI and all rejected legacy paths. |
 | Stop Conditions | Existing typed actions fail to express a required source operation, which would require a separate Bochs exception decision. |
-| Exit Criteria | The active registry selects the package solely for real-mode `C4 C4 02/06`, with focused positive/negative evidence. |
+| Exit Criteria | Formal package regression passes and a bounded native checkpoint proves the `06` route advances or records an independently attributable next edge. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
 | Similar-Issue Sweep | `BOP-DEPENDENCY-091/102/104..114`, machine composition gates, original BOP `02`, source `illegal_op_int`, reset/RAM and default port-space lifecycle. |
 
@@ -32,6 +32,12 @@ M0 T246 S1 closes the `02/06` owner/ABI map. The repeated `06` is an active
 registry omission: the original shared operation stream, its named provider,
 typed RAM/port actions and local transaction fixture already exist. No Bochs
 intrusion is justified; see [S1 evidence](etc/evidence/m0-t246-s1-softpc-machine-interrupt-owner-map-001.md).
+
+M0 T246 S2 closes active generic-ingress recovery for the shared original
+SoftPC `02/06` pair.  The adapter-only bridge converts the existing typed
+provider result; its native fixture proves both source paths, controlled
+preflight stop and selector rejection.  S3 alone owns the bounded
+source-built checkpoint; see [S2 evidence](etc/evidence/m0-t246-s2-softpc-machine-interrupt-active-ingress-closure-001.md).
 
 M0 T245 closes source-built permanent-command bootstrap continuity through the
 first distinct post-COMMAND machine edge. It fixes the actual Direct host path
