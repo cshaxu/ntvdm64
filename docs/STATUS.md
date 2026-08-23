@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S10** — Source-derived XMEM record adapter.
+**Active: M0 T256 S11** — Source-derived XMEM reallocation transfer.
 
 ## Active Packet
 
-### M0 T256 S10 — Source-derived XMEM record adapter
+### M0 T256 S11 — Source-derived XMEM reallocation transfer
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S10`, Ordinary Mode, single-person dual-role bx-vdm-only source-derived implementation. |
-| Admission And Approval | S9's [field-level identity map](etc/evidence/m0-t256-s9-opennt-xmem-record-identity-map-001.md) fixes the required divergence; no Bochs exception is needed. |
-| Objective | Implement the bx-vdm session record adapter which maps source-shaped XMEM ownership and register identity to the existing selector-blind mantle reservation action. |
-| Non-goals | No `53:xx` ingress, no DPMI provider activation, no bx-core/mantle change, raw pointer, flat-address emulation, LDT/paging work, host allocator, or adopted-source rewrite. |
-| Reference Baseline | [S9 identity map](etc/evidence/m0-t256-s9-opennt-xmem-record-identity-map-001.md), retained `dpmi32/xmem.c`, `BX-MANTLE-097`, and `BOP-DEPENDENCY-117`. |
-| Files And ABI Surface | New bx-vdm-only fixed session record/action adapter and focused fixture; no imported body changes. |
+| Identifier Mode | `M0 T256 S11`, Ordinary Mode, single-person dual-role bx-vdm-only source-derived implementation. |
+| Admission And Approval | S10 is closed by [adapter evidence](etc/evidence/m0-t256-s10-xmem-record-adapter-closure-001.md); no Bochs exception is needed. |
+| Objective | Recover `DpmiReallocateXmem`'s allocation/copy/release transaction through the S10 record adapter and existing bounded ordinary-RAM copies. |
+| Non-goals | No `53:xx` ingress, no DPMI provider activation, no bx-core/mantle change, host virtual allocation, raw pointer, LDT/paging work, or imported-source rewrite. |
+| Reference Baseline | Retained `xmem.c` and `i386/dpmimem.c`, [S10 closure](etc/evidence/m0-t256-s10-xmem-record-adapter-closure-001.md), and `BOP-DEPENDENCY-117`. |
+| Files And ABI Surface | bx-vdm adapter extension and focused fixture only; no active ingress. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Allocation, stale-ID, owner sweep, all cleanup and reset tests; no active ingress and no host-pointer/source scan. |
-| Expected Markers | Original insertion/deletion/owner semantics, session-local nonpointer ID, and mantle-ID privacy. |
+| Verification | grow/equal/shrink source-shaped outcomes, bounded copied preservation, allocation failure rollback, stale ID and lifecycle cleanup. |
+| Expected Markers | New allocation first, bounded copy, old release only after success, stable session record identity. |
 | Asset Needs | S4/S5/S6 evidence, engine/startup composition, machine stage and formal Ninja manifest. |
 | Reporting Requirements | Distinguish capacity from reservation/mapping; do not claim a DPMI allocation yet. |
 | Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | The adapter is local code/test complete; `53:07/08/09` activation remains deferred until the complete DPMI context/LDT package. |
+| Exit Criteria | The reallocation transaction is local code/test complete; `53:07/08/09` activation remains deferred until the complete DPMI context/LDT package. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 

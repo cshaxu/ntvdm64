@@ -220,6 +220,7 @@
         "src/bx-vdm/bop/opennt/xms/xmsmisc.c",
         "src/bx-vdm/bop/opennt/xms/xmsumb.c",
         "src/bx-vdm/bop/shim/xms_shim.c",
+        "src/bx-vdm/bop/shim/dpmi_xmem_record_adapter.c",
         "src/bx-vdm/bop/opennt/dem/demhndl.c",
         "src/bx-vdm/bop/opennt/dem/dem.c",
         "src/bx-vdm/bop/opennt/dem/demdata.c",
@@ -361,6 +362,12 @@
         "bx-mantle",
         "bx-core"
       ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t256-s10-xmem-record-adapter-fixture",
+      "source": "tests/bx-vdm/t256_s10_xmem_record_adapter_fixture.cc",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
       "platformLibraries": []
     },
     {
