@@ -255,8 +255,6 @@
         "src/bx-vdm/bop/shim/command_config_shim.c",
         "src/bx-vdm/bop/shim/command_environment_shim.c",
         "src/bx-vdm/bop/shim/command_binary_shim.c",
-        "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_observation_v1.c",
-        "src/bx-vdm/bx_ntvdm_guest_exec_lifecycle_ledger_v1.c",
         "src/bx-vdm/bx_ntvdm_bulk_result_transaction.c",
         "src/bx-vdm/bx_ntvdm_cpu_delta_abi.c",
         "src/bx-vdm/bx_ntvdm_cpu_result_v2.c",
@@ -502,40 +500,6 @@
         "bx-vdm",
         "opennt-host",
         "cli"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t225-s48-guest-exec-lifecycle-ledger-fixture",
-      "source": "tests/bx-vdm/t225_s48_guest_exec_lifecycle_ledger_fixture.c",
-      "libraries": [
-        "bx-vdm"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t225-s46-guest-exec-lifecycle-observation-fixture",
-      "source": "tests/bx-vdm/t225_s46_guest_exec_lifecycle_observation_fixture.c",
-      "libraries": [
-        "bx-vdm"
       ],
       "platformLibraries": [
         "libcmt.lib",
