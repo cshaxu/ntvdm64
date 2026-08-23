@@ -8,6 +8,7 @@
  */
 
 #include "demhndl_shim.h"
+#include "redir_session_shim.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -555,13 +556,13 @@ void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
     }
 }
 
-int IsVdmRedirLoaded(void) { return 0; }
-void VrRemoveOpenNamedPipeInfo(HANDLE file) { (void)file; }
-int VrIsNamedPipeHandle(HANDLE file) { (void)file; return 0; }
+int IsVdmRedirLoaded(void) { return bx_ntvdm_redir_loaded(); }
+void VrRemoveOpenNamedPipeInfo(HANDLE file) { (void)bx_ntvdm_redir_remove_open_named_pipe_info(file); }
+int VrIsNamedPipeHandle(HANDLE file) { return bx_ntvdm_redir_is_named_pipe_handle(file); }
 int VrReadNamedPipe(HANDLE file, LPVOID buffer, DWORD count, DWORD *read_out, DWORD *error_out)
-{ (void)file; (void)buffer; (void)count; if (read_out) *read_out = 0u; if (error_out) *error_out = ERROR_CALL_NOT_IMPLEMENTED; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return 0; }
+{ return bx_ntvdm_redir_read_named_pipe(file, buffer, count, read_out, error_out); }
 int VrWriteNamedPipe(HANDLE file, LPVOID buffer, DWORD count, DWORD *written_out)
-{ (void)file; (void)buffer; (void)count; if (written_out) *written_out = 0u; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return 0; }
+{ return bx_ntvdm_redir_write_named_pipe(file, buffer, count, written_out); }
 int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
     void (*body)(void))
 {

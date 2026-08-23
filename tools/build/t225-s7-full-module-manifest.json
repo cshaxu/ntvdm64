@@ -246,6 +246,7 @@
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/command_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/xms_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/redir_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/config_complete_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/top_level_nosupport_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/shim/top_level_nosupport_shim.c",
@@ -274,6 +275,7 @@
         "src/bx-vdm/bop/shim/dem_ingress_shim.c",
         "src/bx-vdm/bop/shim/dem_native_session_shim.c",
         "src/bx-vdm/bop/shim/xms_native_session_shim.c",
+        "src/bx-vdm/bop/shim/redir_session_shim.c",
         "src/bx-vdm/bop/shim/demmisc_shim.c",
         "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
         "src/bx-vdm/bop/shim/demhndl_shim.c",
@@ -420,6 +422,23 @@
         "bx-vdm"
       ],
       "platformLibraries": []
+    },
+    {
+      "name": "t251-s3-redir-ingress-fixture",
+      "source": "tests/bx-vdm/t251_s3_redir_ingress_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib"
+      ]
     },
     {
       "name": "t245-s2-ntdos-exec-observation-fixture",

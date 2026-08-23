@@ -5,6 +5,7 @@
  * DEM ordering and failure handling in its original translation unit. */
 
 #include "demfile_shim.h"
+#include "redir_session_shim.h"
 #include "bop/observation/bx_ntvdm_demfile_create_observation_v1.h"
 
 void demChMod(void);
@@ -110,16 +111,12 @@ void OutputDebugStringOem(LPSTR text)
 
 BOOL LoadVdmRedir(void)
 {
-    /* VDMREDIR.DLL is a separate historical Redirector composition package.
-     * Do not make demfile fabricate it; the imported demOpen error path owns
-     * the resulting failure. */
-    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
-    return FALSE;
+    return bx_ntvdm_redir_load();
 }
 LPSTR VrConvertLocalNtPipeName(LPSTR existing, LPSTR name)
-{ (void)existing; (void)name; SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return NULL; }
+{ return bx_ntvdm_redir_convert_local_nt_pipe_name(existing, name); }
 void VrAddOpenNamedPipeInfo(HANDLE file, LPSTR name)
-{ (void)file; (void)name; }
+{ (void)bx_ntvdm_redir_add_open_named_pipe_info(file, name); }
 
 void *Sim32GetVDMPointer(ULONG address, ULONG bytes, int protect)
 {

@@ -21,6 +21,7 @@
 #include "spckbd_handoff_v2_generic_ud_bridge.h"
 #include "top_level_nosupport_v2_generic_ud_bridge.h"
 #include "xms_v2_generic_ud_bridge.h"
+#include "redir_v2_generic_ud_bridge.h"
 #include "bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bop/observation/bx_ntvdm_command_bootstrap_observation_v1.h"
 #include "bop/observation/bx_ntvdm_command_current_dir_observation_v1.h"
@@ -55,6 +56,7 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         !bx_ntvdm_dem_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_command_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_xms_v2_generic_ud_recognizes(event) &&
+        !bx_ntvdm_redir_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_top_level_nosupport_v2_generic_ud_recognizes(event)) {
         declined.abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
         declined.disposition = BX_NTVDM_GENERIC_UD_PASS_THROUGH;
@@ -87,7 +89,9 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
             bx_ntvdm_command_v2_generic_ud_dispatch(event, outcome) :
             (bx_ntvdm_xms_v2_generic_ud_recognizes(event) ?
                 bx_ntvdm_xms_v2_generic_ud_dispatch(event, outcome) :
-                bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(event, outcome)))))))))));
+                (bx_ntvdm_redir_v2_generic_ud_recognizes(event) ?
+                    bx_ntvdm_redir_v2_generic_ud_dispatch(event, outcome) :
+                    bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(event, outcome))))))))))));
     if (accepted) {
         bx_ntvdm_command_bootstrap_observation_v1_consider(event, outcome,
             command_bootstrap_read, NULL);
