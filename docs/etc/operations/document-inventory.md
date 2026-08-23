@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2140 |
+| Documentation records | 2141 |
 | --- | --- |
-| Generated UTC | 2026-08-23T10:27:38Z |
+| Generated UTC | 2026-08-23T10:30:26Z |
 
 ## Entries
 
@@ -146,6 +146,7 @@ content-divergent entries.
 | etc/evidence/m0-t255-s2-generic-context-resume-closure-001.md | indexed supporting material | 7c21eda4acb02e5bf235aac00dd812eb25a5cab0af3e46b1f676013fc1246ef8 |
 | etc/evidence/m0-t255-s3-protected-substrate-admission-decision-001.md | indexed supporting material | 8612801b88d40562250be6158886efdf53abc6f688a24b71045f0a7eb0cefac5 |
 | etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md | indexed supporting material | 57811b016c1cb356eab229bdddeff8b241a61c17d03259ebbd035a4fd41ca014 |
+| etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md | indexed supporting material | fee680777bef69d8f93fc453ca4d9506c5589da856b6801ee242630d958c82bc |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
@@ -421,7 +422,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 28d65981ed40cff4855f7fb3607d3dea3d6f4ac6e2e0f5208a8a913e92f4c95c |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 8824719b6aba0e5427b32bf4959e48bdb516bf86d1d95f0102394153b259bdb8 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -2154,7 +2155,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 1aa9c6f51bfc80d42d1f6f3d7aab50a6f33ddc6133e0b68ca3ca8e29e16bc1d3 |
+| STATUS.md | principal control document | 597658c3c5216b8116ebb6681878dccf070728080aee8a61d8a3a4e8a4c86542 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

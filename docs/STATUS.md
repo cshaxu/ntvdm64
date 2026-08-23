@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S2** — No-fault protected virtual-access design and admission.
+**Active: M0 T256 S3** — Non-paged protected range action implementation.
 
 ## Active Packet
 
-### M0 T256 S2 — No-fault protected virtual-access design and admission
+### M0 T256 S3 — Non-paged protected range action implementation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S2`, Ordinary Mode, single-person dual-role no-fault access design before any adopted-code patch. |
-| Admission And Approval | S1 proves no existing public primitive is directly admissible. S2 may design but not patch a new no-fault preflight/copy seam; any external-code patch must be prospectively registered. |
-| Objective | Determine whether normal Bochs protected segment/page semantics can be factored into a bounded copied transaction with no guest exception delivery, then define the smallest viable seam or precise rejection. |
+| Identifier Mode | `M0 T256 S3`, Ordinary Mode, single-person dual-role project-owned mantle implementation. |
+| Admission And Approval | S2 selects only the no-paging ordinary-RAM subprofile and registers `BX-MANTLE-095` before code. No adopted Bochs or OpenNT source change is admitted. |
+| Objective | Implement and test the fixed-width, all-or-nothing non-paged protected segment range action through existing native checks and copied RAM primitives. |
 | Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, LDT policy, guest-linear allocator, raw pointer/object, trace-driven patch, or unregistered intrusion. |
-| Reference Baseline | [T255 S3 decision](etc/evidence/m0-t255-s3-protected-substrate-admission-decision-001.md), [T256 S1 map](etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md), [substrate proposal](etc/operations/proposal-selector-blind-protected-mode-substrate-001.md), and live [BOP tracker](etc/bop-list.md). |
-| Files And ABI Surface | Read-only adopted CPU/memory paths, existing mantle fixed-width records, original DPMI source map and tracker only. |
+| Reference Baseline | [T256 S1 map](etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md), [T256 S2 design](etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md), `BX-MANTLE-095`, and live [BOP tracker](etc/bop-list.md). |
+| Files And ABI Surface | New project-owned mantle range-action record/source and focused fixture; existing native CPU/memory methods only. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Locate a shared no-fault native translation candidate or prove none exists; show preflight/commit atomicity; verify no raw pointer or semantic term is needed; write a patch admission or rejection decision. |
-| Expected Markers | Narrow fixed-width request/result candidate, exact fault containment ownership, and an exception-register-ready scope if code is justified. |
-| Asset Needs | Existing formal Ninja manifest, closed context evidence, T256 S1 call map, adopted CPU/memory source and original DPMI source map. |
+| Verification | Formal Ninja build and fixture: inactive/real/paged/malformed/limit/A20/handler rejection, ordinary read/write, cross-page all-or-nothing write, and source-boundary scan. |
+| Expected Markers | Versioned fixed-width record, no-fault typed rejection, copied-only read result, and retained no-paging disposition. |
+| Asset Needs | Existing formal Ninja manifest, minimal machine lifecycle, closed context fixture/seam and T256 S2 design. |
 | Reporting Requirements | Distinguish generic access mechanics from DPMI/LDT allocation policy; record every remaining original dependency before code admission. |
-| Stop Conditions | A design requires a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | A bounded generic design is proven safe enough to register and implement, or its exact native fault/lifecycle blocker is evidenced without admitting DPMI. |
+| Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
+| Exit Criteria | The narrow action is source-built and fully regression-tested; paged access/mapping identity remain explicitly transferred rather than silently emulated. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
