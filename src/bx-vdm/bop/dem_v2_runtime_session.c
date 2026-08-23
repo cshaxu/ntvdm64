@@ -1,6 +1,8 @@
 #include "dem_v2_runtime_session.h"
+#include "dem_v2_startup_composition.h"
 
 #include "shim/dem_direct_host_session.h"
+#include "shim/demdasd_ioctl_shim.h"
 #include "shim/dem_native_session_shim.h"
 
 #include <string.h>
@@ -17,13 +19,18 @@ void bx_ntvdm_dem_v2_runtime_session_reset(void)
 {
     if (runtime.bound) bx_ntvdm_dem_native_session_unbind(&runtime.native);
     bx_ntvdm_dem_direct_host_session_reset(&runtime.host);
+    bx_ntvdm_demdasd_drive_policy_reset();
     memset(&runtime, 0, sizeof(runtime));
 }
 
 int bx_ntvdm_dem_v2_runtime_session_bind(void)
 {
+    const bx_ntvdm_host_drive_snapshot_v1 *drive_snapshot =
+        bx_ntvdm_dem_v2_startup_drive_snapshot();
     bx_ntvdm_dem_v2_runtime_session_reset();
-    if (!bx_ntvdm_dem_direct_host_session_initialize(&runtime.host) ||
+    if (drive_snapshot == NULL ||
+        !bx_ntvdm_demdasd_drive_policy_bind(drive_snapshot) ||
+        !bx_ntvdm_dem_direct_host_session_initialize(&runtime.host) ||
         !bx_ntvdm_dem_native_session_initialize(&runtime.native,
             bx_ntvdm_dem_direct_host_session_context(&runtime.host),
             &runtime.host, bx_ntvdm_dem_direct_host_session_guest_read,

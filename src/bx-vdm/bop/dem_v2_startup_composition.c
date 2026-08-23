@@ -19,6 +19,7 @@ typedef struct bx_ntvdm_dem_v2_startup {
     byob_image ntio, ntdos, command, target;
     bx_ntvdm_initial_state_v1 initial_state;
     byob_launch_plan_v2 launch;
+    bx_ntvdm_host_drive_snapshot_v1 drive_snapshot;
     char command_application[MAX_PATH + 1u];
     uint16_t command_drive;
     int installed;
@@ -112,7 +113,6 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     wchar_t profile[261], root[261], config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_profile_selection selection;
 
-    (void)include_mask; (void)exclude_mask;
     if (runtime.installed) return 1;
     /* v2 is intentionally Direct-only; legacy mutation profiles are not a
      * substitute for an OpenNT owner contract. */
@@ -135,6 +135,8 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
         byob_image_load_named(root, L"NTIO.SYS", &runtime.ntio) != BYOB_IMAGE_OK ||
         byob_image_load_named(root, L"NTDOS.SYS", &runtime.ntdos) != BYOB_IMAGE_OK ||
         byob_image_load_named(root, L"COMMAND.COM", &runtime.command) != BYOB_IMAGE_OK ||
+        !bx_ntvdm_host_drive_snapshot_v1_capture(include_mask, exclude_mask,
+            &runtime.drive_snapshot) ||
         !configure_opennt_dos_directory(root, &selection) ||
         !configure_command_source(launch, launch_chars, &selection)) {
         bx_ntvdm_dem_v2_startup_reset();
@@ -152,6 +154,14 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     bx_ntvdm_spckbd_handoff_v2_display_state_set(
         (uint8_t)selection.guest_display_state);
     return 1;
+}
+
+const bx_ntvdm_host_drive_snapshot_v1 *
+bx_ntvdm_dem_v2_startup_drive_snapshot(void)
+{
+    return runtime.installed &&
+        bx_ntvdm_host_drive_snapshot_v1_valid(&runtime.drive_snapshot) ?
+        &runtime.drive_snapshot : NULL;
 }
 
 int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,

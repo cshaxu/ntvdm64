@@ -321,6 +321,16 @@
   ],
   "fixtures": [
     {
+      "name": "t245-s9-demdasd-drive-policy-fixture",
+      "source": "tests/bx-vdm/t245_s9_demdasd_drive_policy_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
+    },
+    {
       "name": "t245-s7-printer-openclose-fixture",
       "source": "tests/bx-vdm/t245_s7_printer_openclose_fixture.c",
       "libraries": [

@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "bx_ntvdm_host_drive_policy.h"
 #include "bx_ntvdm_initial_state_abi.h"
 #include "bx_ntvdm_initial_state_action_v1.h"
 #include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
@@ -25,5 +26,10 @@ int bx_ntvdm_dem_v2_startup_copy_ordinary_terminal(void);
 int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,
     uint32_t application_capacity, char *tail, uint32_t tail_capacity,
     uint16_t *drive, uint16_t *code_page);
+
+/* The native engine captures this once at composition admission.  It is
+ * adapter-private session data, never a guest or mantle ABI. */
+const bx_ntvdm_host_drive_snapshot_v1 *
+bx_ntvdm_dem_v2_startup_drive_snapshot(void);
 
 #endif
