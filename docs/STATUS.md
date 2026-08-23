@@ -2,31 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T251 S4** — Redirector async-pipe and mailslot owner groups.
+**Active: M0 T252 S1** — OpenNT guest SFT opaque-handle source/ABI audit.
 
 ## Active Packet
 
-### M0 T251 S4 — Redirector async-pipe and mailslot owner groups
+### M0 T252 S1 — OpenNT guest SFT opaque-handle source/ABI audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T251 S4`, Ordinary Mode, single-person dual-role source-derived provider implementation. |
-| Admission And Approval | T251 S2 selected the public-Win32 single-session profile; T251 S3 closed its lifecycle and synchronous helper seam. |
-| Objective | Recover `57:23/24` async named-pipe completion and `57:09..0F` mailslot lifecycle as two complete, session/PDB-owned Redirector groups. |
-| Non-goals | No NetAPI/identity, NetBIOS/DLC, VDM window, duplicate COMMAND broker, raw guest HANDLE/callback, Bochs change, or trace-directed leaf patch. |
-| Reference Baseline | [T251 S2 decision](etc/evidence/m0-t251-s2-redirector-profile-source-recovery-decision-001.md), [T251 S3 closure](etc/evidence/m0-t251-s3-redirector-ingress-named-pipe-closure-001.md), `vrnmpipe.h`, `vrmslot.h`, and guest callers. |
-| Files And ABI Surface | Existing `src/bx-vdm/bop/redir_v2_generic_ud_bridge.*`, named `bop/shim/redir_*` seams, focused fixtures and tracker/evidence. |
-| Applicable Rules | Source-derived fallback after proven provider-source absence, typed ingress, checked guest RAM, session-owned opaque token rule, per-PDB records, and bx-core/bx-mantle blindness. |
-| Verification | Packed guest descriptor bounds/failure regressions, async completion and mailslot lifecycle fixtures, formal Ninja target outside sandbox, documentation gates and `git diff --check`. |
-| Expected Markers | `57:23/24` use session completion records without host callback/thread leakage; `57:09..0F` own mailslots with original-shaped errors and explicit terminate behavior. |
-| Asset Needs | Existing Redirector session ABI, opaque handle manager, public overlapped-I/O/events/mailslot APIs, original headers and guest caller layouts. |
-| Reporting Requirements | Record each divergence caused by absent VDMREDIR bodies; keep NetAPI/network-device groups explicitly deferred. |
-| Stop Conditions | Any needed protocol layout is absent, requires a raw guest callback, changes guest/machine semantics, or requires a new public-host profile decision. |
-| Exit Criteria | Both owner groups have source/ABI/failure maps, one provider route and focused formal regressions; no protocol state leaks into DEM/COMMAND or Bochs. |
-| Original Owner Request | Continue ordinary work without repeated approval; recover OpenNT source by whole owner package and preserve hard component boundaries. |
-| Similar-Issue Sweep | `50:47/48`, `54:06`, COMMAND standard-stream/session records, VDD/top-level events, named pipe/network APIs and the entire current `57:xx` family. |
+| Identifier Mode | `M0 T252 S1`, Ordinary Mode, single-person dual-role source/ABI audit. |
+| Admission And Approval | T251 source evidence proves the guest-SFT token seam is the first lower-dependency prerequisite. The owner authorized dependency-first BOP recovery and ordinary implementation without repeated approval. |
+| Objective | Map each original SFT raw-handle producer, consumer and lifecycle path, then select the smallest opaque-token replacement boundary. |
+| Non-goals | No async pipe completion, interrupt delivery, DPMI/WOW, raw guest HANDLE, Bochs change, or trace-directed patch. |
+| Reference Baseline | [T251 async boundary](etc/evidence/m0-t251-s4-p2-async-named-pipe-source-boundary-001.md), `namepipe.asm:MapNtHandle`, `sf.inc`, and the shared host-handle manager. |
+| Files And ABI Surface | Original guest DOS SFT sources; `src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.*`; tracker/evidence, and possible minimal guest overlay only after S1. |
+| Applicable Rules | Original-source-first audit, fixed-width opaque token, checked guest RAM, guest/adapter/machine ownership separation. |
+| Verification | Static source/ABI ledger, current token-manager inspection, negative raw-handle scan, documentation gates and `git diff --check`. |
+| Expected Markers | One exact producer/consumer/close matrix; each raw `sf_NtHandle` dependency is retained, shimmed, deferred or rejected with a named source reason. |
+| Asset Needs | Retained DOS SFT/JFN sources, compiled guest provenance and existing Direct-session handle manager. |
+| Reporting Requirements | Identify x86/x64 assumptions and whether guest code actually needs an overlay; do not call a token seam implemented until lifecycle fixtures exist. |
+| Stop Conditions | The only workable route requires a raw host handle in guest memory, a Bochs semantic change, or a source/layout fact absent from retained material. |
+| Exit Criteria | Source/ABI/failure map and selected smallest composable seam are documented; subsequent S2 scope is bounded without opening async I/O itself. |
+| Original Owner Request | Continue OpenNT-mirror BOP recovery by dependency, keeping v1 retired and preserving hard machine/adapter/guest boundaries. |
+| Similar-Issue Sweep | DEM/COMMAND handle consumers, `57:02..08/20/21/23/24`, guest close/dup/terminate and PSP/PDB cleanup. |
 
 ## Latest Closure
+
+M0 T251 closes the composable Redirector lifecycle/mailslot slice and the
+source-shaped async-pipe boundary.  `57:09..0F` are fully recovered through a
+session/PDB-owned provider; `57:23/24` correctly remain explicit failure
+terminals until guest SFT opaque-token and `int5c` delivery owners exist. See
+the [T251 closure](history/m0-t251-closure-20260823.md).
 
 M0 T250 closes the apparent low-memory far-target question.  `0x0A87` is
 original relocated `DOSDATA:OPENBUF+0x0F`, not an NTDOS code entry; the
