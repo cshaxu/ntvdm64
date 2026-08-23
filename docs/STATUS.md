@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T248 S2** — Selector-blind post-EXEC real-mode bounded replay.
+**Active: M0 T248 S3** — Selector-blind unexpected-return terminal observation recovery.
 
 ## Active Packet
 
-### M0 T248 S2 — Selector-blind post-EXEC real-mode bounded replay
+### M0 T248 S3 — Selector-blind unexpected-return terminal observation recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T248 S2`, Ordinary Mode, single-person dual-role bounded mechanical replay. |
+| Identifier Mode | `M0 T248 S3`, Ordinary Mode, single-person dual-role selector-blind observation recovery. |
 | Admission And Approval | Standing owner delegation selects the new queue-leading selector-blind continuity prerequisite discovered and tracked by completed T247; ordinary recovery work requires no repeated approval. |
-| Objective | Use the existing default-off selector-blind software-INT and IRET observation surfaces to replay the T247 post-`50:36` bounded input once and assign the exact remaining mechanical edge. |
+| Objective | Recover the smallest selector-blind terminal-position observation gap exposed by completed S2: copy the final CPU position for an enabled unexpected `cpu_loop()` return without changing its classification or execution semantics. |
 | Non-goals | No DEM/COMMAND/Redirector/WOW leaf patch, guest PDB/arena/JFN implementation, BOP selector interpretation in bx-core/bx-mantle, device enablement, or unsupported continuity claim. |
-| Reference Baseline | Completed [T248 S1 map](etc/evidence/m0-t248-s1-post-exec-realmode-continuity-owner-map-001.md), T247 source-built `50:36` PDB checkpoint, `BOP-DEPENDENCY-115`, T246 `02/06` source package and active finite mantle contract. |
-| Files And ABI Surface | Formal Ninja diagnostic configuration and existing fixed-width observation ABI only; no service ABI or Bochs semantic change. |
+| Reference Baseline | Completed [T248 S1 map](etc/evidence/m0-t248-s1-post-exec-realmode-continuity-owner-map-001.md), completed [T248 S2 replay](etc/evidence/m0-t248-s2-post-exec-interrupt-replay-001.md), T247 source-built `50:36` checkpoint and active finite mantle contract. |
+| Files And ABI Surface | Existing bx-mantle terminal-position observation implementation and focused fixture; no service ABI, CPU result, device, or Bochs semantic change. |
 | Applicable Rules | Source-first ladder, guest/machine/adapter owner separation and no trace-led leaf selection. |
-| Verification | Fresh formal Ninja build with the two diagnostics, one bounded source-built native run, captured INT/IRET facts, documentation governance and `git diff --check`. |
-| Expected Markers | The record distinguishes an original guest transfer, BOP `06` stack rewrite/IRET, HLT/event return, or another exact mechanical stop cause; no BOP service is selected as an implementation task. |
-| Asset Needs | Existing OpenNT guest/SoftPC source, adopted bx-core/bx-mantle sources, T247 source-built checkpoint, current formal manifest and Ninja generator. |
-| Reporting Requirements | Name captured CPU facts, the retained mechanical semantics, source-first rung decision and any exact owner transfer. |
-| Stop Conditions | The needed effect would require importing DOS/BOP/OpenNT semantics into machine mechanics, or the diagnostic cannot distinguish CPU/mantle from guest behavior. |
-| Exit Criteria | One bounded replay record assigns the next exact continuity edge or justifies the smallest source-proven S3 mechanical recovery. |
+| Verification | Focused terminal-position fixture plus one fresh formal native replay with terminal observation enabled, documentation governance and `git diff --check`. |
+| Expected Markers | The copied final `CS:EIP` identifies the next exact guest/CPU/firmware edge while `UNEXPECTED_LOOP_RETURN` remains unchanged; no BOP service is selected as an implementation task. |
+| Asset Needs | Existing T248 S2 graph/input, bx-mantle terminal-position surface, current formal manifest and Ninja generator. |
+| Reporting Requirements | Name the copied final CPU facts, prove unchanged result classification, and name the next owner without inferring DOS policy. |
+| Stop Conditions | The change would alter CPU execution, add a BOP selector, or require guest/DOS semantics in bx-core/bx-mantle. |
+| Exit Criteria | Focused and source-built replay evidence proves final-position capture with unchanged mechanical classification, or assigns a source-proven external owner. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
 | Similar-Issue Sweep | `BOP-DEPENDENCY-093/102/104/114/115`, original `msproc.asm:$Exec/$Exit`, SoftPC BIOS interrupt handlers, adopted CPU exception/iret/stack mechanics and mantle run/stop lifecycle. |
 
