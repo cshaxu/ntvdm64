@@ -2,31 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T256 S15** — Protected substrate closure and DPMI handoff.
+**Active: M0 T257 S1** — DPMI/DOSX whole-package source, ABI and failure map.
 
 ## Active Packet
 
-### M0 T256 S15 — Protected substrate closure and DPMI handoff
+### M0 T257 S1 — DPMI/DOSX whole-package source, ABI and failure map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S15`, Ordinary Mode, single-person dual-role closure audit. |
-| Admission And Approval | S14 closes protected interrupt/fault/IRET classification with [source evidence](etc/evidence/m0-t256-s14-protected-interrupt-fault-iret-continuity-map-001.md). |
-| Objective | Audit the completed T256 generic substrate against its original admission, verify artifacts/tracker/status consistency, and hand the exact remaining work to the queued whole DPMI/DOSX owner package. |
-| Non-goals | No `53:xx` ingress, DPMI provider activation, raw pointer/flat-address emulation, paging implementation, descriptor-cache copy, arbitrary CR0 setter, DPMI-aware mantle API, or unregistered core change. |
-| Reference Baseline | T256 S1--S14 evidence, current module manifest/fixtures, `BOP-DEPENDENCY-117`, and queued DPMI proposal. |
-| Files And ABI Surface | Evidence/tracker/status/history only; no product behavior change. |
+| Identifier Mode | `M0 T257 S1`, Ordinary Mode, single-person dual-role source/ABI/failure map. |
+| Admission And Approval | T256 is closed by the [final substrate evidence](etc/evidence/m0-t256-s15-protected-substrate-closure-001.md) and [history](history/m0-t256-closure-20260823.md). |
+| Objective | Establish the complete OpenNT DOSX/`dpmi32` module, caller, data-layout, ABI and failure map needed to recover one coherent protected-mode DPMI profile using T256's closed substrate. |
+| Non-goals | No isolated `53:xx` activation, raw pointer/flat-address emulation, paging implementation, descriptor-cache copy, arbitrary CR0 setter, DPMI-aware mantle API, NT4 process-LDT/CCPU/VDM hook import, or unregistered core change. |
+| Reference Baseline | `proposal-opennt-dpmi-owner-package-completion-001.md`, T254/T255/T256 evidence, DOSX `dx*.asm`, `dpmi32/*.c`, and `BOP-DEPENDENCY-117`. |
+| Files And ABI Surface | Evidence/tracker only in S1; no source import or product behavior change. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Fresh formal Ninja closure of the touched generic module/test set; evidence/tracker/queue cardinality and boundary audit. |
-| Expected Markers | No BOP/DOS semantics in bx-core/bx-mantle, no v1 route, and no invented adapter exception dispatcher. |
-| Asset Needs | T256 S1--S14 evidence, formal Ninja manifest, tracker and DPMI proposal. |
-| Reporting Requirements | State the exact difference between closed generic substrate and still-deferred DPMI/DOSX source package; do not claim DPMI runtime support. |
+| Verification | Module-to-BOP-to-guest-caller-to-host-dependency ledger; identify which original files can be imported with named shims and which remain explicitly unavailable/deferred. |
+| Expected Markers | Complete source-package inventory, zero trace-led leaf plan, no BOP/DOS semantics in bx-core/bx-mantle, and no invented adapter exception dispatcher. |
+| Asset Needs | T256 evidence, DPMI proposal, source tree, current module manifest and live tracker. |
+| Reporting Requirements | Separate direct original source, source-derived rehost, unavailable NT4 product dependency and native Bochs ownership; do not claim DPMI runtime support. |
 | Stop Conditions | Any active `53:xx`, raw host pointer, DPMI-aware mantle/core branch, unregistered external intrusion, or unrelated product modification. |
-| Exit Criteria | T256 closure evidence, history/status transition and a source-precise queue handoff to the DPMI owner package. |
+| Exit Criteria | A complete S1 owner/ABI/failure map and ordered bounded S plan for the whole package, before any source body or ingress is admitted. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
 ## Latest Closure
+
+M0 T256 closes the selector-blind protected virtual-access and guest-linear
+substrate. Its final fresh 278-node formal Ninja build and XMEM fixture pass;
+it deliberately does not claim DPMI activation. See [S15 evidence](etc/evidence/m0-t256-s15-protected-substrate-closure-001.md) and the [T256 closure](history/m0-t256-closure-20260823.md).
 
 M0 T256 S14 closes protected interrupt/fault/IRET classification. OpenNT uses
 historical `NtVdmControl`, emulator hooks and locked DPMI stack frames, while
