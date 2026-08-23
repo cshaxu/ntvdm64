@@ -56,6 +56,9 @@ uint32_t bx_ntvdm_dpmi_xmem_record_adapter_allocate(
   uint32_t *record_id_out);
 uint32_t bx_ntvdm_dpmi_xmem_record_adapter_release(
   struct bx_ntvdm_dpmi_xmem_record_adapter *adapter, uint32_t record_id);
+uint32_t bx_ntvdm_dpmi_xmem_record_adapter_reallocate(
+  struct bx_ntvdm_dpmi_xmem_record_adapter *adapter, uint32_t record_id,
+  uint32_t new_byte_count, uint32_t *ordinary_ram_address_out);
 uint32_t bx_ntvdm_dpmi_xmem_record_adapter_release_owner(
   struct bx_ntvdm_dpmi_xmem_record_adapter *adapter, uint16_t owner);
 uint32_t bx_ntvdm_dpmi_xmem_record_adapter_reset(

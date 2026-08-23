@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S11** — Source-derived XMEM reallocation transfer.
+**Active: M0 T256 S12** — DPMI descriptor and guest-linear identity map.
 
 ## Active Packet
 
-### M0 T256 S11 — Source-derived XMEM reallocation transfer
+### M0 T256 S12 — DPMI descriptor and guest-linear identity map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S11`, Ordinary Mode, single-person dual-role bx-vdm-only source-derived implementation. |
-| Admission And Approval | S10 is closed by [adapter evidence](etc/evidence/m0-t256-s10-xmem-record-adapter-closure-001.md); no Bochs exception is needed. |
-| Objective | Recover `DpmiReallocateXmem`'s allocation/copy/release transaction through the S10 record adapter and existing bounded ordinary-RAM copies. |
-| Non-goals | No `53:xx` ingress, no DPMI provider activation, no bx-core/mantle change, host virtual allocation, raw pointer, LDT/paging work, or imported-source rewrite. |
-| Reference Baseline | Retained `xmem.c` and `i386/dpmimem.c`, [S10 closure](etc/evidence/m0-t256-s10-xmem-record-adapter-closure-001.md), and `BOP-DEPENDENCY-117`. |
-| Files And ABI Surface | bx-vdm adapter extension and focused fixture only; no active ingress. |
+| Identifier Mode | `M0 T256 S12`, Ordinary Mode, single-person dual-role source/ABI map. |
+| Admission And Approval | S11 is closed by [fresh reallocation evidence](etc/evidence/m0-t256-s11-xmem-reallocation-closure-001.md). |
+| Objective | Map the remaining OpenNT `Ldt`, `FlatAddress[]`, descriptor-install and protected guest-linear requirements onto a minimal bx-vdm/bx-mantle ownership decision. |
+| Non-goals | No `53:xx` ingress, no DPMI provider activation, no raw pointer, flat-address emulation, paging implementation, descriptor cache copy, or unregistered core change. |
+| Reference Baseline | `dpmiselr.c`, `dpmi32.c`, `i386/dpmi386.c`, S4/S9/S11 evidence and `BOP-DEPENDENCY-117`. |
+| Files And ABI Surface | Evidence/tracker only unless an independently registered mechanical ABI is selected. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | grow/equal/shrink source-shaped outcomes, bounded copied preservation, allocation failure rollback, stale ID and lifecycle cleanup. |
-| Expected Markers | New allocation first, bounded copy, old release only after success, stable session record identity. |
+| Verification | Field-by-field LDT/base/selector source map and exact retain/adapt/defer disposition. |
+| Expected Markers | No direct `FlatAddress` pointer seam and no descriptor policy inside bx-mantle. |
 | Asset Needs | S4/S5/S6 evidence, engine/startup composition, machine stage and formal Ninja manifest. |
 | Reporting Requirements | Distinguish capacity from reservation/mapping; do not claim a DPMI allocation yet. |
 | Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | The reallocation transaction is local code/test complete; `53:07/08/09` activation remains deferred until the complete DPMI context/LDT package. |
+| Exit Criteria | A minimal implementation sequence or explicit machine prerequisite is source-proven without activating a DPMI leaf. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 

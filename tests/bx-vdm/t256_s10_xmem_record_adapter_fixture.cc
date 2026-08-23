@@ -1,6 +1,7 @@
 #include "bochs.h"
 #include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
 #include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
+#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 #include "bop/shim/dpmi_xmem_record_adapter.h"
 
 #include <string.h>
@@ -38,6 +39,9 @@ int main(void)
 {
   struct bx_ntvdm_dpmi_xmem_record_adapter adapter;
   uint32_t first_address, first_id, second_address, second_id;
+  uint32_t replacement_address;
+  Bit8u written[] = { 0x13u, 0x57u, 0x9bu, 0xdfu };
+  Bit8u observed[sizeof(written)] = { 0 };
   bx_ntvdm_dpmi_xmem_record_adapter_clear(&adapter);
   if (!bx_ntvdm_dpmi_xmem_record_adapter_valid(&adapter)) return 1;
   if (bx_ntvdm_dpmi_xmem_record_adapter_allocate(&adapter, 0x10u, 0x10000u,
@@ -47,16 +51,26 @@ int main(void)
   if (bx_ntvdm_dpmi_xmem_record_adapter_allocate(&adapter, 0x10u, 0x10000u,
       &first_address, &first_id) != BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_OK ||
       first_address != 0x100000u || first_id == 0u) return 4;
+  if (!bx_ntvdm_mantle_checked_ram_write_v1(first_address, written,
+      sizeof(written))) return 5;
+  if (bx_ntvdm_dpmi_xmem_record_adapter_reallocate(&adapter, first_id, 0x20000u,
+      &replacement_address) != BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_OK ||
+      replacement_address != 0x110000u || adapter.records[0].record_id != first_id ||
+      !bx_ntvdm_mantle_checked_ram_read_v1(replacement_address, observed,
+        sizeof(observed)) || memcmp(written, observed, sizeof(written)) != 0) return 6;
+  if (bx_ntvdm_dpmi_xmem_record_adapter_reallocate(&adapter, first_id, 0x1f000u,
+      &replacement_address) != BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_OK ||
+      replacement_address != 0x110000u) return 7;
   if (bx_ntvdm_dpmi_xmem_record_adapter_allocate(&adapter, 0x20u, 0x10000u,
       &second_address, &second_id) != BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_OK ||
-      second_address != 0x110000u || second_id == first_id) return 5;
+      second_address != 0x100000u || second_id == first_id) return 8;
   if (bx_ntvdm_dpmi_xmem_record_adapter_release(&adapter, first_id + 100u) !=
-      BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_REJECTED_ID || adapter.record_count != 2u) return 6;
+      BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_REJECTED_ID || adapter.record_count != 2u) return 9;
   if (bx_ntvdm_dpmi_xmem_record_adapter_release_owner(&adapter, 0x10u) !=
-      BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_OK || adapter.record_count != 1u) return 7;
+      BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_OK || adapter.record_count != 1u) return 10;
   if (bx_ntvdm_dpmi_xmem_record_adapter_reset(&adapter) !=
       BX_NTVDM_DPMI_XMEM_RECORD_ADAPTER_OK || adapter.record_count != 0u ||
-      adapter.next_record_id != 1u) return 8;
-  if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 9;
+      adapter.next_record_id != 1u) return 11;
+  if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 12;
   return 0;
 }
