@@ -19,6 +19,9 @@
 | Applicable Rules | Source-first recovery, immutable host-drive admission, guest-owner boundary, selector-blind machine boundary and MTSP governance. |
 | Verification | Fresh formal Ninja compile/link and a synthetic empty-drive session fixture proving AL=0 invokes the source body and resumes at `RIP+3` without guest-register delta. |
 | Expected Markers | 5E is handled only with a bound Direct DEM session; wrong shape/mode and unbound sessions decline. |
+| Asset Needs | Existing admitted OpenNT tree, current bx-vdm mirrors and formal build graph; no new source, firmware or host mutation. |
+| Reporting Requirements | Record source body/order, policy/no-floppy disposition, typed resume, local test and the absence of guest-continuity claim. |
+| Stop Conditions | Need to enable floppy/UMB behavior, bypass admitted-drive policy, invent a generic success, or modify bx-core/bx-mantle. Record and transfer instead. |
 | Exit Criteria | The source body, typed `+3` resume and zero-floppy source path are locally verified and documented; native trace is separately optional integration evidence. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
