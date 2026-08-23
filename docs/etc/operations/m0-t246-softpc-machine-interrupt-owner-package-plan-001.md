@@ -13,7 +13,7 @@ RAM/port actions. This is a machine package, not a COMMAND/DEM trace patch.
 | --- | --- | --- |
 | S1 | Read-only source/ABI/lifecycle map of `bios.c` dispatch table, `illegal_op_int`, `opennt_int06_provider_v1`, generic ingress, legacy `startup_machine_interrupt_v1`, and mantle action capabilities. | One route map names active versus dead composition, source owner, state/memory/port effects, exact `02/06` failure behavior, and whether a Bochs intrusion is genuinely required. |
 | S2 | Attach the smallest source-shaped `02/06` provider route to the active generic ingress, if S1 proves its existing typed mechanics suffice. | Local source/provider fixture covers both selectors, preflight failure, source completion and typed resume/stop; no BOP/DOS vocabulary enters core or mantle. |
-| S3 | Package regression and bounded native checkpoint. | Formal Ninja link and dedicated fixtures pass; one source-built run proves `06` no longer repeats and records the next distinct owner. |
+| S3 | Package regression and bounded native checkpoint. | Formal Ninja link and dedicated fixtures pass; one source-built run proves `06` is accepted rather than a registry pass-through and records the next distinct owner. Later independent `06` calls are not ruled out. |
 | S4 | Closure/transfer. | Tracker rows, evidence and task closure distinguish completed machine sub-contract from all remaining device/firmware features. |
 
 ## Boundary

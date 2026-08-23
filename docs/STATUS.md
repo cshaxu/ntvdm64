@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T246 S3** — SoftPC machine interrupt package regression and native checkpoint.
+**Active: M0 T246 S4** — SoftPC machine interrupt closure and transfer.
 
 ## Active Packet
 
-### M0 T246 S3 — SoftPC machine interrupt package regression and native checkpoint
+### M0 T246 S4 — SoftPC machine interrupt closure and transfer
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T246 S2`, Ordinary Mode, single-person dual-role existing-route recovery. |
-| Admission And Approval | S2 routes the whole original `02/06` pair through the active bx-vdm registry and passes its native focused ingress fixture. |
-| Objective | Regress the complete package, then execute one bounded source-built native checkpoint to establish that the repeated `06` has advanced to a distinct owner. |
+| Admission And Approval | S3 formal regression and bounded native observation prove that the active registry accepts `06` and reaches a later distinct owner. |
+| Objective | Close the source-shaped `02/06` machine sub-contract and transfer only the later native continuity edge. |
 | Non-goals | No Bochs change, direct legacy handler callback, full PIC/device enablement, DOS semantics, or product-shell diagnostic/UI reconstruction. |
-| Reference Baseline | S1 owner map and S2 active-ingress closure; OpenNT `bios.c`, `illegalp.c`, `unexp_nt.c`; existing `opennt_int06_provider_v1`. |
-| Files And ABI Surface | Existing fixed-width event/outcome, RAM and port action ABIs; no new runtime ABI. |
+| Reference Baseline | S1 owner map, S2 active-ingress closure and S3 native checkpoint. |
+| Files And ABI Surface | No new code or runtime ABI; tracker/history/evidence only. |
 | Applicable Rules | Source-first recovery, selector-blind machine boundary and one package-level provider route. |
-| Verification | Re-run source/provider and active-ingress fixtures, then one bounded source-built native run with BOP observation. |
-| Expected Markers | No repeated `06`; next distinct selector/owner is recorded without an implied continuity claim; no core/mantle file changes. |
+| Verification | Governance consistency, tracker disposition and checked clean worktree after closure. |
+| Expected Markers | Source package completion is separated from later repeated calls and unexpected-loop terminal; no continuity claim or core/mantle change. |
 | Asset Needs | Existing sources and Ninja graph; no external asset. |
 | Reporting Requirements | Name retained source operations, conversion ABI and all rejected legacy paths. |
 | Stop Conditions | Existing typed actions fail to express a required source operation, which would require a separate Bochs exception decision. |
-| Exit Criteria | Formal package regression passes and a bounded native checkpoint proves the `06` route advances or records an independently attributable next edge. |
+| Exit Criteria | History closes T246 and records its transfer to future native-continuity work. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
 | Similar-Issue Sweep | `BOP-DEPENDENCY-091/102/104..114`, machine composition gates, original BOP `02`, source `illegal_op_int`, reset/RAM and default port-space lifecycle. |
 
@@ -38,6 +38,11 @@ SoftPC `02/06` pair.  The adapter-only bridge converts the existing typed
 provider result; its native fixture proves both source paths, controlled
 preflight stop and selector rejection.  S3 alone owns the bounded
 source-built checkpoint; see [S2 evidence](etc/evidence/m0-t246-s2-softpc-machine-interrupt-active-ingress-closure-001.md).
+
+M0 T246 S3 closes package regression and the bounded native checkpoint. Every
+observed `06` now has typed resume disposition and the first group reaches a
+later `50:1E` owner. Later `06` calls and the final unexpected-loop return
+are not a registry-miss recurrence; see [S3 evidence](etc/evidence/m0-t246-s3-softpc-machine-interrupt-native-checkpoint-001.md).
 
 M0 T245 closes source-built permanent-command bootstrap continuity through the
 first distinct post-COMMAND machine edge. It fixes the actual Direct host path
