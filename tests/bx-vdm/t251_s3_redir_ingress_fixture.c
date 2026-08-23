@@ -154,6 +154,12 @@ int main(void)
     make_event(&event, 0x20u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 6;
+    make_event(&event, 0x23u);
+    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 9;
+    make_event(&event, 0x24u);
+    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 10;
     make_event(&event, 0x01u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 0, 0u) || bx_ntvdm_redir_loaded()) return 7;

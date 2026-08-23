@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2122 |
+| Documentation records | 2123 |
 | --- | --- |
-| Generated UTC | 2026-08-23T09:04:30Z |
+| Generated UTC | 2026-08-23T09:08:04Z |
 
 ## Entries
 
@@ -82,7 +82,7 @@ content-divergent entries.
 | DOS-WOW16-SOURCE-CLOSURE-RESULT.md | retained pre-governance evidence | 843f0bb11b298a6d80efca687fdf056dfdc9104026d53676c4052a216c17387c |
 | DOS-WOW16-SOURCE-CLOSURE-TASK-BRIEF.md | retained pre-governance evidence | 5ea19abcd564854c1c21c6dff2714b204303e935ca5385345a3f3e23ee0ecb85 |
 | ENGINE-CONTRACT.md | retained pre-governance evidence | d57785469d3221d45b6931f4ab0f40c2cc6f78ab4ecd8425daaa338931d7ca3c |
-| etc/bop-list.md | indexed supporting material | 8f102c84e3518ce2a6c7b32f12fe06777f61145bfad226d1679a7c144c9a24d9 |
+| etc/bop-list.md | indexed supporting material | 218588c44834e98e550bd48664b1135fddff2de4f00b1748d14dee1ca8fbc12c |
 | etc/evidence/m0-t240-s2-softpc-memory-size-closure-001.md | indexed supporting material | 3e0c56fab1d88442fa48813bee1d97d26bc12d4d49ff24dd5ff8c4efa179aba3 |
 | etc/evidence/m0-t241-s2-ivt-watch-source-recovery-001.md | indexed supporting material | dc7cfee2ac868e9e664cb4da58d58bdf73aa0dec2d6a9f5085b35bd9ede2217f |
 | etc/evidence/m0-t241-s3-xms-ivt-watch-regression-001.md | indexed supporting material | 82a407226439c8e5a5703e2560fb19ac6716f6d525a328f7ee4e955217d05082 |
@@ -136,6 +136,7 @@ content-divergent entries.
 | etc/evidence/m0-t251-s3-redirector-ingress-named-pipe-closure-001.md | indexed supporting material | 50d2bcadcc1807bc3c542fe1fbe55e420b9294d75b364c19d7361bb64860ced0 |
 | etc/evidence/m0-t251-s4-async-mailslot-source-abi-map-001.md | indexed supporting material | 30b957f2e0a451c808ff206b807e11a2a076c9d9c1a6a122ac55c1860148e952 |
 | etc/evidence/m0-t251-s4-p1-mailslot-lifecycle-closure-001.md | indexed supporting material | 68a8f4103625793b41acd1fcd8ed4e5b5fe0ff7b4804cf69e0b8c0fddcdbe9b6 |
+| etc/evidence/m0-t251-s4-p2-async-named-pipe-source-boundary-001.md | indexed supporting material | 604be9e64f2394cd2358f4ab128467528640a82d735e992c5d73cca5b61cebe1 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |

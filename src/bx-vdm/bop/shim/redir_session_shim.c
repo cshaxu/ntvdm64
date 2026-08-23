@@ -476,6 +476,14 @@ int bx_ntvdm_redir_native_session_dispatch(
     case 0x0fu: /* SVC_RDRTERMINATE / NetResetEnvironment */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
         return mailslot_terminate(event, outcome);
+    case 0x23u: /* SVC_RDRREADASYNCNMPIPE */
+    case 0x24u: /* SVC_RDRWRITEASYNCNMPIPE */
+        /* `namepipe.asm:MapNtHandle` obtains BP:BX from a guest SFT, and
+         * `int5c.asm` later calls the 16-bit ANR.  Neither a raw SFT HANDLE
+         * nor a raw guest callback may cross this shim.  Keep the source
+         * failure result until those two proper owners publish typed seams. */
+        resume_with_error(event, outcome, ERROR_INVALID_FUNCTION);
+        return 1;
     default:
         /* 02..08 and 20/21 are intentionally one typed provider route, but
          * their VDMREDIR protocol body is absent.  Returning this original
