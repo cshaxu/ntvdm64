@@ -2,31 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T245 S21** — OpenNT OEM CreateFile compatibility recovery.
+**Active: M0 T245 S22** — DOS-safe bootstrap alias admission.
 
 ## Active Packet
 
-### M0 T245 S21 — OpenNT OEM CreateFile compatibility recovery
+### M0 T245 S22 — DOS-safe bootstrap alias admission
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S21`, Ordinary Mode, single-person dual-role original-owner shim recovery. |
-| Admission And Approval | S20 proves accepted permanent `50:12 demOpen` receives the exact existing host path but returns `ERROR_PATH_NOT_FOUND`, while equivalent public host open succeeds. The present `demfile_shim.c` independently authored OEM-to-ANSI/`CreateFileA` wrapper diverges from directly relevant OpenNT `oemuni/file.c:CreateFileOem`. |
-| Objective | Replace only the reached `CreateFileOem` compatibility seam with the original source's OEM-to-Unicode → `CreateFileW` ordering and its generic-read attribute retry; then prove the imported `demOpen` route handles the permanent command path. |
-| Non-goals | No guest path rewrite, virtual volume/root alias, new DOS filesystem, BOP dispatch change, DEM body rewrite, Bochs change, or mutation profile. |
-| Reference Baseline | OpenNT `base/mvdm/oemuni/file.c:CreateFileOem`, imported `demfile.c:demOpen`, S20 exact path/error evidence, and the existing opaque handle manager. |
-| Files And ABI Surface | `demfile_shim.c` only; its external OEM `CreateFileOem` declaration and the existing Direct host-handle contract are retained. |
+| Identifier Mode | `M0 T245 S22`, Ordinary Mode, single-person dual-role CLI/startup admission recovery. |
+| Admission And Approval | S21 proves `CreateFileOem` now follows the original source but the guest has already reduced `REPOS.HOBBY` to `REPOS.HOB`; the actual host volume supplies no 8.3 alias. |
+| Objective | Admit the real source-built DOS root under a session-owned, DOS-representable host spelling when the existing host spelling cannot fit the original guest `SHELL=` contract. |
+| Non-goals | No guest-path rewrite, file copy, virtual boot volume, DEM/BOP dispatch change, Bochs change, or mutation profile. |
+| Reference Baseline | Original `cmdconf.c → SHELL=` producer and `sysconf.asm/sysinit2.asm:commnd` fixed guest storage; S21 native path evidence. |
+| Files And ABI Surface | CLI admission only; the engine receives an existing host directory spelling and the original OpenNT DEM/COMMAND source remains unchanged. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Focused `demfile` source fixture plus a dedicated OEM `CreateFile` conversion/retry fixture; fresh formal Ninja link; one bounded source-built native Direct run with the existing observation. |
-| Expected Markers | Existing direct `demfile` fixture remains green; an OEM pathname reaches `CreateFileW` with source-shaped generic-read fallback; native permanent `commnd` opens with CF clear and advances beyond its former `comerr`. |
+| Verification | Focused session-alias fixture; fresh formal Ninja link; one bounded source-built native Direct run with existing `demOpen`/`CreateFileOem` observation. |
+| Expected Markers | A temporary alias opens the original target without copying it and is removed without touching the target; native permanent `commnd` opens with CF clear and advances beyond its former `comerr`. |
 | Asset Needs | Existing sources, bundles and formal Ninja generator; no new external asset. |
 | Reporting Requirements | State exact retained original function structure, the named NT4-only helper replacement, fixture outcome, native observed outcome, and any remaining owner. |
-| Stop Conditions | Correct recovery needs a virtual path policy, guest modification, a Bochs change, or behavior beyond `CreateFileOem`'s source contract. |
-| Exit Criteria | The original file-owner conversion/call order is locally recovered through its smallest modern seam and the permanent-command native outcome is directly observed. |
+| Stop Conditions | A DOS-safe session alias cannot be supplied through public Win32 APIs, or recovery requires guest modification, a virtual volume, DEM/BOP change, or Bochs change. |
+| Exit Criteria | The real root is admitted under a bounded DOS-safe spelling, cleanup is local to the session link, and the permanent-command native outcome is directly observed. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S22 closes the session-scoped DOS-safe startup alias.  The CLI first
+retains a suitable host short spelling, otherwise creates only a temporary
+directory link to the real bundle root and removes that link on teardown.
+The focused fixture exercises the no-symlink-privilege junction fallback; the
+bounded native source-built run clears the former permanent-command
+`ERROR_PATH_NOT_FOUND` and reaches original COMMAND services before an
+independent machine `BOP 06` edge. See [S22 evidence](etc/evidence/m0-t245-s22-dos-safe-bootstrap-alias-closure-001.md).
 
 M0 T245 S21 closes the OpenNT-shaped OEM `CreateFileOem` recovery. The
 imported DEM body now uses the original OEM-to-Unicode/`CreateFileW` ordering

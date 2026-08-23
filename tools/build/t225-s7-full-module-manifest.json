@@ -319,6 +319,7 @@
         "src/cli/byob_launch_declaration_v1.c",
         "src/cli/byob_launch_plan_v2.c",
         "src/cli/ntdos64_config.c",
+        "src/cli/ntdos64_dos_safe_alias_v1.c",
         "src/cli/byob_target_selection.c",
         "src/cli/ntdos64_console_cancellation_v1.c",
         "src/cli/ntdos64_engine_worker_v1.c",
@@ -327,6 +328,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t245-s22-dos-safe-alias-fixture",
+      "source": "tests/runner/t245_s22_dos_safe_alias_fixture.c",
+      "libraries": ["cli"],
+      "platformLibraries": ["kernel32.lib"]
+    },
     {
       "name": "t245-s21-oem-create-file-fixture",
       "source": "tests/bx-vdm/t245_s21_oem_create_file_fixture.c",

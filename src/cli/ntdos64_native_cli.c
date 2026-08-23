@@ -13,6 +13,7 @@
 #include "byob_launch_plan_v2.h"
 #include "byob_target_selection.h"
 #include "ntdos64_config.h"
+#include "ntdos64_dos_safe_alias_v1.h"
 #include "ntdos64_lifecycle_v1.h"
 #include "ntdos64_console_cancellation_v1.h"
 #include "ntdos64_engine_worker_v1.h"
@@ -243,6 +244,7 @@ int wmain(int argc, wchar_t **argv)
     int index = 1;
     ntdos64_startup_selection selection;
     wchar_t config_full[MAX_PATH], root_full[MAX_PATH];
+    struct ntdos64_dos_safe_alias_v1 dos_root_alias;
     wchar_t config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_launch_plan_v2 launch;
     struct bx_ntvdm_engine_request_v1 request;
@@ -304,10 +306,16 @@ int wmain(int argc, wchar_t **argv)
     }
     if (!config || !root || index >= argc) goto usage;
     target = argv[index];
+    ntdos64_dos_safe_alias_v1_clear(&dos_root_alias);
     if (!GetFullPathNameW(target, MAX_PATH, target_full, 0) ||
         !GetFullPathNameW(config, MAX_PATH, config_full, 0) ||
         !GetFullPathNameW(root, MAX_PATH, root_full, 0) ||
-        !ntdos64_bundle_load_roots(config_full, config_source, autoexec_source) ||
+        /* sysconf.asm writes SHELL= into the fixed 64-byte `commnd` buffer.
+         * This admission supplies a real session-local host spelling, not a
+         * guest rewrite or a virtual boot volume. */
+        !ntdos64_dos_safe_alias_v1_admit(config_full,
+            63u - (uint32_t)wcslen(L"\\COMMAND.COM"), &dos_root_alias) ||
+        !ntdos64_bundle_load_roots(dos_root_alias.admitted_root, config_source, autoexec_source) ||
         (memset(&selection, 0, sizeof(selection)), 0) ||
         wcslen(wcsrchr(target_full, L'\\') != NULL ? wcsrchr(target_full, L'\\') + 1u : target_full) >=
             sizeof(selection.target.file_name) / sizeof(selection.target.file_name[0]) ||
@@ -320,36 +328,50 @@ int wmain(int argc, wchar_t **argv)
          selection.declared_targets[0].placement = selection.target_placement, 0) ||
         !byob_launch_plan_v2_from_arguments(&launch, &selection, argc - index - 1, argv + index + 1) ||
         !byob_launch_plan_v2_to_environment(&launch, launch_text)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
         fwprintf(stderr, L"ntdos64-native: sibling dos/wow16 bundle admission failed\n"); return 3;
     }
     if (!SetEnvironmentVariableW(L"NTVDM_CONFIG_SOURCE", config_source) ||
         !SetEnvironmentVariableW(L"NTVDM_AUTOEXEC_SOURCE", autoexec_source) ||
-        !SetEnvironmentVariableW(L"NTVDM_CONFIG_ROOT", config_full) ||
+        !SetEnvironmentVariableW(L"NTVDM_CONFIG_ROOT", dos_root_alias.admitted_root) ||
         !SetEnvironmentVariableW(L"NTVDM_TARGET_PATH", target_full) ||
-        !SetEnvironmentVariableW(L"NTVDM_WOW16_ROOT", root_full)) return 3;
+        !SetEnvironmentVariableW(L"NTVDM_WOW16_ROOT", root_full)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return 3;
+    }
     ntdos64_lifecycle_v1_policy_clear(&lifecycle_policy);
     lifecycle_policy.instruction_tick_budget = instruction_tick_budget;
-    if (!ntdos64_lifecycle_v1_policy_valid(&lifecycle_policy)) return 3;
+    if (!ntdos64_lifecycle_v1_policy_valid(&lifecycle_policy)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return 3;
+    }
     bx_ntvdm_engine_request_v1_clear(&request);
     if (!copied_text(request.profile_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
             target_full, &request.profile_descriptor_chars) ||
         !copied_text(request.root_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
-            config_full, &request.root_descriptor_chars) ||
+            dos_root_alias.admitted_root, &request.root_descriptor_chars) ||
         !copied_text(request.launch_descriptor, BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS,
-            launch_text, &request.launch_descriptor_chars)) return 3;
+            launch_text, &request.launch_descriptor_chars)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return 3;
+    }
     /* OpenNT parity: host-drive enumeration is not a CLI capability filter.
      * The retained request fields are zero, which means no added exclusion. */
     request.admitted_drive_mask = 0u;
     request.excluded_drive_mask = 0u;
     request.mutation_mode = mutation_mode;
     request.instruction_tick_budget = lifecycle_policy.instruction_tick_budget;
-    if (!bx_ntvdm_engine_request_v1_valid(&request)) return 3;
+    if (!bx_ntvdm_engine_request_v1_valid(&request)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return 3;
+    }
     if (validate_only) {
         wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu observe-bop-sequence=%u observe-command-bootstrap=%u observe-ud-sequence=%u observe-first-fault=%u observe-budget-terminal-position=%u\n",
             request.admitted_drive_mask, request.excluded_drive_mask,
             request.mutation_mode, (unsigned long long)request.instruction_tick_budget,
             observe_bop_sequence ? 1u : 0u, observe_command_bootstrap ? 1u : 0u, observe_generic_ud_sequence ? 1u : 0u,
             observe_first_fault ? 1u : 0u, observe_budget_terminal_position ? 1u : 0u);
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
         return 0;
     }
     if (observe_bop_sequence) bx_ntvdm_bop_sequence_observation_v1_enable(1u);
@@ -360,10 +382,16 @@ int wmain(int argc, wchar_t **argv)
     if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(1u);
     if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(1u);
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
-    if (observe_software_interrupts && !bx_ntvdm_mantle_software_interrupt_observation_v1_configure(BX_NTVDM_SOFTWARE_INTERRUPT_OBSERVATION_V1_CAPACITY_MAX)) return 1;
+    if (observe_software_interrupts && !bx_ntvdm_mantle_software_interrupt_observation_v1_configure(BX_NTVDM_SOFTWARE_INTERRUPT_OBSERVATION_V1_CAPACITY_MAX)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return 1;
+    }
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
-    if (observe_interrupt_returns && !bx_ntvdm_mantle_interrupt_return_observation_v1_configure(BX_NTVDM_INTERRUPT_RETURN_OBSERVATION_V1_CAPACITY_MAX)) return 1;
+    if (observe_interrupt_returns && !bx_ntvdm_mantle_interrupt_return_observation_v1_configure(BX_NTVDM_INTERRUPT_RETURN_OBSERVATION_V1_CAPACITY_MAX)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return 1;
+    }
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
     if (observe_terminal_history) bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(1u);
@@ -403,6 +431,7 @@ int wmain(int argc, wchar_t **argv)
             bx_ntvdm_mantle_segment_access_observation_enable(0);
             bx_ntvdm_mantle_first_fault_observation_enable(0);
         }
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
         return 1;
     }
     if (!ntdos64_engine_worker_v1_run(&request, cancellation_event, &result,
@@ -433,6 +462,7 @@ int wmain(int argc, wchar_t **argv)
             bx_ntvdm_mantle_segment_access_observation_enable(0);
             bx_ntvdm_mantle_first_fault_observation_enable(0);
         }
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
         return 1;
     }
     ntdos64_console_cancellation_v1_end();
@@ -577,12 +607,19 @@ int wmain(int argc, wchar_t **argv)
         NTDOS64_LIFECYCLE_V1_CANCELLATION_REQUESTED :
         NTDOS64_LIFECYCLE_V1_CANCELLATION_NONE;
     if (!ntdos64_lifecycle_v1_classify(&lifecycle_policy, &result,
-            &lifecycle_audit) || !ntdos64_lifecycle_v1_audit_valid(&lifecycle_audit)) return 1;
+            &lifecycle_audit) || !ntdos64_lifecycle_v1_audit_valid(&lifecycle_audit)) {
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return 1;
+    }
     wprintf(L"ntdos64-native: terminal=%u detail=%u lifecycle=%u presentation=%u cancellation=%u budget=%llu\n",
         result.terminal_kind, result.detail_code, lifecycle_audit.lifecycle_terminal,
         lifecycle_audit.presentation, lifecycle_audit.cancellation_request,
         (unsigned long long)request.instruction_tick_budget);
-    return result_exit(&lifecycle_audit);
+    {
+        int exit_code = result_exit(&lifecycle_audit);
+        ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
+        return exit_code;
+    }
 usage:
     fwprintf(stderr, L"usage: ntdos64-native --dos-root directory --wow16-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-command-bootstrap] [--observe-command-current-dir] [--observe-dem-open] [--observe-demfile-create] [--observe-ud-sequence] [--observe-first-fault] [--observe-budget-terminal-position]"
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
