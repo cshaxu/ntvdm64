@@ -68,6 +68,11 @@ void bx_ntvdm_guest_pointer_manager_initialize(bx_ntvdm_guest_pointer_manager *m
 bx_ntvdm_guest_pointer_manager *bx_ntvdm_guest_pointer_manager_session(void);
 bx_ntvdm_guest_pointer_manager *bx_ntvdm_guest_pointer_manager_session_host_handle(void);
 bx_ntvdm_guest_pointer_manager *bx_ntvdm_guest_pointer_manager_session_data(void);
+/* Outer bx-vdm session lifecycle only: retire every lease and release the
+ * session's host-handle and opaque-data entries.  Family shims must not
+ * manufacture a replacement registry or use this to reset another owner
+ * mid-call. */
+void bx_ntvdm_session_mapping_registry_reset(void);
 int bx_ntvdm_guest_pointer_manager_begin(bx_ntvdm_guest_pointer_manager *manager,
     void *guest_state, bx_ntvdm_guest_pointer_read_fn read, bx_ntvdm_guest_pointer_write_fn write);
 void bx_ntvdm_guest_pointer_manager_end(bx_ntvdm_guest_pointer_manager *manager);

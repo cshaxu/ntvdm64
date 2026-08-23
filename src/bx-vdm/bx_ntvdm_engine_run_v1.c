@@ -4,6 +4,7 @@
 #include "bop/dem_v2_runtime_session.h"
 #include "bop/dem_v2_startup_composition.h"
 #include "bop/command_v2_runtime_session.h"
+#include "bop/shim/bx_ntvdm_guest_pointer_manager.h"
 #include "bop/shim/top_level_nosupport_shim.h"
 
 int bx_ntvdm_engine_request_cancellation_v1(uint32_t reason)
@@ -21,6 +22,9 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     struct bx_ntvdm_machine_engine_v1_result machine_result;
     int ordinary_terminal = 0;
     if (result == 0) return 0;
+    /* The one supported runtime session starts with fresh, distinct guest
+       memory, host-handle and session-data manager instances. */
+    bx_ntvdm_session_mapping_registry_reset();
     if (!bx_ntvdm_engine_request_v1_valid(request))
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_REQUEST, 1u);
@@ -35,6 +39,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     {
         bx_ntvdm_dem_v2_startup_reset();
         bx_ntvdm_top_level_nosupport_v2_reset_thread();
+        bx_ntvdm_session_mapping_registry_reset();
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION,
             install_status < 0 ? (uint32_t)(-install_status) : 2u);
@@ -48,6 +53,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         bx_ntvdm_dem_v2_runtime_session_reset();
         bx_ntvdm_top_level_nosupport_v2_reset_thread();
         bx_ntvdm_dem_v2_startup_reset();
+        bx_ntvdm_session_mapping_registry_reset();
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION, 5u);
     }
@@ -57,6 +63,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         bx_ntvdm_dem_v2_runtime_session_reset();
         bx_ntvdm_top_level_nosupport_v2_reset_thread();
         bx_ntvdm_dem_v2_startup_reset();
+        bx_ntvdm_session_mapping_registry_reset();
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION, 3u);
     }
@@ -68,6 +75,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         bx_ntvdm_dem_v2_runtime_session_reset();
         bx_ntvdm_top_level_nosupport_v2_reset_thread();
         bx_ntvdm_dem_v2_startup_reset();
+        bx_ntvdm_session_mapping_registry_reset();
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION, 4u);
     }
@@ -79,6 +87,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         bx_ntvdm_command_v2_runtime_session_reset();
         bx_ntvdm_dem_v2_runtime_session_reset();
         bx_ntvdm_dem_v2_startup_reset();
+        bx_ntvdm_session_mapping_registry_reset();
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_MACHINE_FAILURE, 4u);
     }
@@ -91,6 +100,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     bx_ntvdm_dem_v2_runtime_session_reset();
     bx_ntvdm_top_level_nosupport_v2_reset_thread();
     bx_ntvdm_dem_v2_startup_reset();
+    bx_ntvdm_session_mapping_registry_reset();
     if (machine_result.begin_status != BX_NTVDM_MACHINE_STAGE_V1_OK ||
         machine_result.entry_status != BX_NTVDM_MACHINE_STAGE_V1_OK ||
         machine_result.reset_status != BX_NTVDM_MACHINE_STAGE_V1_OK)

@@ -29,10 +29,10 @@
 **Current progress:** All stated S1 exit criteria are technically evidenced:
 one manager implementation exposes the three fixed session instances
 `guest_memory`, `host_handle`, and `session_data`; no shared numeric namespace
-exists. DEM bounded synchronous spans use `guest_memory`; formal Ninja and
-focused regression fixtures pass. The closure record is ready, but this packet
-remains active until the owner admits a successor M/T/S packet, as required by
-the governance verifier.
+exists. The outer engine owns their unified teardown. DEM bounded synchronous
+spans use `guest_memory`; formal Ninja and focused regression fixtures pass.
+The closure record is ready, but this packet remains active until the owner
+admits a successor M/T/S packet, as required by the governance verifier.
 
 ## Latest Closure
 

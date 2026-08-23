@@ -42,6 +42,9 @@ int main(void)
     uint8_t *pointer;
     uint32_t data_id;
     void *data_value;
+    HANDLE owned_handle;
+    uint32_t handle_id;
+    DWORD handle_error;
     memset(&guest, 0, sizeof(guest));
     guest.memory[0x12350u] = 0x11u;
     guest.memory[0x12351u] = 0x22u;
@@ -85,5 +88,15 @@ int main(void)
             BX_NTVDM_GUEST_POINTER_READ, &lease, (void **)&pointer)) return 9;
     bx_ntvdm_guest_pointer_manager_end(manager);
     if (bx_ntvdm_guest_pointer_manager_release(manager, lease, 0)) return 10;
+    if (!bx_ntvdm_session_data_publish(data, &data_marker, release_data, &data_id) ||
+        data_id != 2u) return 13;
+    owned_handle = CreateEventW(NULL, FALSE, FALSE, NULL);
+    if (owned_handle == NULL || !bx_ntvdm_host_handle_manager_publish(handles,
+            owned_handle, BX_NTVDM_HOST_HANDLE_OWNED, &handle_id, &handle_error) ||
+        handle_id != 1u || handle_error != ERROR_SUCCESS) return 15;
+    bx_ntvdm_session_mapping_registry_reset();
+    if (data_release_count != 2 || bx_ntvdm_session_data_lookup(data, data_id, &data_value) ||
+        WaitForSingleObject(owned_handle, 0u) != WAIT_FAILED)
+        return 14;
     return 0;
 }

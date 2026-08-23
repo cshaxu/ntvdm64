@@ -1,4 +1,5 @@
 #include "bx_ntvdm_guest_pointer_manager.h"
+#include "bx_ntvdm_host_handle_manager.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -56,6 +57,14 @@ bx_ntvdm_guest_pointer_manager *bx_ntvdm_guest_pointer_manager_session_data(void
 {
     bx_ntvdm_guest_pointer_manager_ensure_session();
     return &g_session_registry.session_data_manager;
+}
+
+void bx_ntvdm_session_mapping_registry_reset(void)
+{
+    bx_ntvdm_guest_pointer_manager_ensure_session();
+    bx_ntvdm_guest_pointer_manager_end(&g_session_registry.guest_memory_manager);
+    bx_ntvdm_host_handle_manager_reset(&g_session_registry.host_handle_manager);
+    bx_ntvdm_session_data_reset(&g_session_registry.session_data_manager);
 }
 
 int bx_ntvdm_guest_pointer_manager_begin(bx_ntvdm_guest_pointer_manager *manager,

@@ -72,6 +72,19 @@ internally multiplexed key namespace; no family may create a look-alike
 instance.  COMMAND and XMS pointer helpers remain staged according to the
 migration matrix above.
 
+## P2 Session-Lifecycle Verification
+
+P1 review found that the fixed instances also need one outer lifecycle point;
+family-local handle reset is not a substitute for session ownership.  The
+manager now exposes `bx_ntvdm_session_mapping_registry_reset()`, which retires
+all guest-memory leases and releases the session's host-handle and session-data
+entries together. `bx_ntvdm_engine_run_v1` invokes it before admission and on
+every engine cleanup path. The T258 fixture publishes a second opaque data
+object and an owned native event, proves teardown invokes the data release
+callback, proves its former ID no longer resolves, and proves the host handle
+has been closed. The native runner and affected DEM/COMMAND fixtures relinked
+and passed.
+
 ## Follow-up
 
 After the DEM regression passes, update dependency 118 and the affected DEM
