@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S9** — OpenNT XMEM record-identity map.
+**Active: M0 T256 S10** — Source-derived XMEM record adapter.
 
 ## Active Packet
 
-### M0 T256 S9 — OpenNT XMEM record-identity map
+### M0 T256 S10 — Source-derived XMEM record adapter
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S9`, Ordinary Mode, single-person dual-role source/ABI map. |
-| Admission And Approval | S8 is closed by its [formal reservation evidence](etc/evidence/m0-t256-s8-ordinary-ram-reservation-closure-001.md). |
-| Objective | Map the retained OpenNT `xmem.c` block/address fields and callbacks onto a bx-vdm-owned source-derived record without exposing a mantle opaque ID or host pointer through the original ABI. |
-| Non-goals | No `53:xx` ingress, no DPMI provider activation, no bx-core/mantle semantic term, no raw pointer or flat-address emulation, no LDT/paging work, and no adopted-code change. |
-| Reference Baseline | [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S8 closure](etc/evidence/m0-t256-s8-ordinary-ram-reservation-closure-001.md), retained `dpmi32/xmem.c`, and `BOP-DEPENDENCY-117`. |
-| Files And ABI Surface | Evidence and bx-vdm-only source/ABI map; no code unless a later S separately admits a record adapter. |
+| Identifier Mode | `M0 T256 S10`, Ordinary Mode, single-person dual-role bx-vdm-only source-derived implementation. |
+| Admission And Approval | S9's [field-level identity map](etc/evidence/m0-t256-s9-opennt-xmem-record-identity-map-001.md) fixes the required divergence; no Bochs exception is needed. |
+| Objective | Implement the bx-vdm session record adapter which maps source-shaped XMEM ownership and register identity to the existing selector-blind mantle reservation action. |
+| Non-goals | No `53:xx` ingress, no DPMI provider activation, no bx-core/mantle change, raw pointer, flat-address emulation, LDT/paging work, host allocator, or adopted-source rewrite. |
+| Reference Baseline | [S9 identity map](etc/evidence/m0-t256-s9-opennt-xmem-record-identity-map-001.md), retained `dpmi32/xmem.c`, `BX-MANTLE-097`, and `BOP-DEPENDENCY-117`. |
+| Files And ABI Surface | New bx-vdm-only fixed session record/action adapter and focused fixture; no imported body changes. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Every original pointer/address field has an owner, width/lifetime analysis, and an exact retain/adapt/defer disposition. |
-| Expected Markers | No mantle opaque ID in OpenNT-shaped ABI; no host pointer or NT4 flat-address assumption retained. |
+| Verification | Allocation, stale-ID, owner sweep, all cleanup and reset tests; no active ingress and no host-pointer/source scan. |
+| Expected Markers | Original insertion/deletion/owner semantics, session-local nonpointer ID, and mantle-ID privacy. |
 | Asset Needs | S4/S5/S6 evidence, engine/startup composition, machine stage and formal Ninja manifest. |
 | Reporting Requirements | Distinguish capacity from reservation/mapping; do not claim a DPMI allocation yet. |
 | Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | An implementation-ready bx-vdm record contract is either source-proven or explicitly deferred by the LDT/paging prerequisite. |
+| Exit Criteria | The adapter is local code/test complete; `53:07/08/09` activation remains deferred until the complete DPMI context/LDT package. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
