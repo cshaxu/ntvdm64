@@ -33,7 +33,9 @@ S2 P1 has centralized the active COMMAND `HOST-07` declaration surface and
 recovered source-visible NTSTATUS-to-DOS error differentiation through the
 current same-named `ntdll` export; its formal 286-node link and source-mirror
 fixture pass are recorded in [P1 evidence](etc/evidence/m0-t259-s2-p1-rtl-contract-status-recovery-001.md).
-P2 now reconciles remaining COMMAND/DEM conversion and allocation ownership;
+P2 has restored caller-owned ANSI output semantics, and P3 proves the imported
+`cmdenv.c` dynamic session-environment transform in a fresh formal graph;
+remaining S2 work reconciles COMMAND/DEM conversion and allocation ownership;
 this remains neither a new BOP survey nor an NT4 product-shell recreation.
 
 ## Latest Closure

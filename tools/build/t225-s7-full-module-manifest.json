@@ -936,7 +936,10 @@
       "name": "t234-s2-command-dynamic-environment-fixture",
       "source": "tests/bx-vdm/t234_s2_command_dynamic_environment_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
