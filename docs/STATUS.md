@@ -2,33 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T244 S2** — selector-blind headless 8042 keyboard-controller
-source severance and native lifecycle composition; verification and P delivery
-are complete, pending owner selection of the next candidate T.
+**Active: M0 T245 S1** — NTDOS guest EXEC and parent-return source/ABI map.
 
 ## Active Packet
 
-### M0 T244 S2 — Headless native 8042 lifecycle composition
+### M0 T245 S1 — NTDOS guest EXEC and parent-return source/ABI map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T244 S2`, Ordinary Mode, single-person dual-role native machine composition. |
-| Admission And Approval | Owner's standing queue authorization admits the S1-selected headless 8042 slice. The required adopted-source exception was registered before its patch. |
-| Objective | Compose a source-shaped, selector-blind native 8042 controller beside the existing PIC: ports `60h/64h`, normal IRQ1 and controller timer, with a clean machine lifecycle and no host input. |
-| Non-goals | No BOP/DOS/OpenNT term in bx-core/bx-mantle; no monitor IRET/ICA/CCPU recreation; no host input, GUI, mouse, paste, CMOS, PIT/IRQ0, video, firmware, `BOP 5C`, COMMAND console or trace-led selector patch. |
-| Reference Baseline | `BOP-DEPENDENCY-104..106`, `BOP-TOP-5F`, T243 closure and T244 S1 audit. |
-| Files And ABI Surface | Adopted Bochs keyboard source, mantle-private factory/lifecycle, existing port space, PIC and PC timer APIs. |
-| Applicable Rules | Source-first recovery, selector-blind machine boundary, feature deny-by-default, mandatory exception registration, native cleanup and MTSP governance. |
-| Verification | Formal MSVC x64 `/MT` Ninja r2 fixture passes inactive/live port, `F2h`, IRQ1/IAC/EOI, cleanup and two-lifecycle checks. |
-| Expected Markers | `60h/64h` exist only while the minimal machine owns the device; IRQ1 reaches PIC; cleanup restores the port map and singleton state. |
-| Asset Needs | Existing Bochs 2.6 source identity and mantle PIC/port/timer seams; no new external source, host mutation or GUI dependency. |
-| Reporting Requirements | Register every adopted-source severance, retain original line-level rationale, record source/ABI/failure matrix and explicit rejected product-shell paths. |
-| Stop Conditions | Need for GUI, CMOS, mouse, plugin manager, PIT, video, firmware, host input, a BOP-specific request, or any unregistered Bochs patch. Record and transfer rather than infer. |
-| Exit Criteria | Met; P delivery is committed and pushed as `a3b40455` plus `d1f3647d`. |
+| Identifier Mode | `M0 T245 S1`, Ordinary Mode, single-person dual-role guest-owner recovery. |
+| Admission And Approval | Owner's standing instruction to implement queue-ordered OpenNT source recovery admits the queue head after T244 closure. |
+| Objective | Freeze the original NTDOS `EXEC` / PSP / arena / JFN / environment / parent-return call map, its staged guest-image paths, and each host BOP/machine prerequisite before editing guest-owner behavior. |
+| Non-goals | No COMMAND host-broker rewrite; no BOP leaf patch selected by trace; no DPMI/Redirector/WOW/console implementation; no bx-core/bx-mantle semantic intrusion. |
+| Reference Baseline | [Guest EXEC proposal](etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md), `BOP-DEPENDENCY-002/012/018/019..033`, `BOP-COMMAND-54-08/0A/0B`, T236 and T244 closures. |
+| Files And ABI Surface | Read-only OpenNT/NTDOS source and staged guest-image maps; `docs/etc/bop-list.md`; no production source change in S1. |
+| Applicable Rules | Source-first recovery, guest-owner boundary, fixed-width bridge, no trace-led work and MTSP governance. |
+| Verification | Source/caller/ABI/failure matrix names executable source paths, caller-to-return control transfer and every receiving owner; tracker has no unrecorded prerequisite. |
+| Expected Markers | A declared one-child DOS→parent profile, explicit `54:0B` consumption point, and a bounded S2 source-mirror scope. |
+| Asset Needs | Existing OpenNT NTOS/COMMAND mirrors, source-built DOS guest images and existing COMMAND child-lifecycle evidence; no new external source. |
+| Reporting Requirements | Record source path, guest layout/ordering, failure rule, source-recovery ladder and transfer owner for each unavailable prerequisite. |
+| Stop Conditions | Need to modify a machine device, recreate a COMMAND broker, or use a host pointer/handle in guest state. Record and transfer instead. |
+| Exit Criteria | Met: the source map selects an `AL=0` guest profile, freezes its original owner boundaries and records the reached EMS predecessor as `BOP-DEPENDENCY-107`; P1 is being formed. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
-| Similar-Issue Sweep | T243 headless subset, T241 IVT watch, BOP 5C/5D, INT15 keyboard hooks, PIC/IRQ/timer lifecycle, monitor iret table and existing mantle port-space/device seams. |
+| Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 
 ## Latest Closure
+
+M0 T244 closes the headless native 8042 lifecycle. Its formal fixture proves
+ports `60h/64h`, timer, ordinary IRQ1/PIC and two clean lifecycles without the
+Bochs product shell; see the [T244 closure](history/m0-t244-closure-20260822.md).
 
 M0 T243 closes the source-shaped, headless `STREAM_IO=2` BOP-5F sub-contract:
 the `AX=BEEF` table guard and original `useHostInt10` publication now reach the
