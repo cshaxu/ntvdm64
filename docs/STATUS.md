@@ -2,31 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T245 S11** — Config-complete source-body composition.
+**Active: M0 T245 S12** — Source-built COMMAND bootstrap-path disposition.
 
 ## Active Packet
 
-### M0 T245 S11 — Config-complete source-body composition
+### M0 T245 S12 — Source-built COMMAND bootstrap-path disposition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S11`, Ordinary Mode, single-person dual-role source-first composition closure. |
-| Admission And Approval | S10 proves the original `MS_bop_E` can use an empty admitted-drive set and the existing zero-floppy source failure. It needs only a bx-vdm scoped three-byte body-call seam; no renewed approval is required. |
-| Objective | Compose the original `MS_bop_E` body (`UMBNotify(0); demDasdInit();`) through the active Direct DEM session, preserving the exact three-byte `RIP+3` continuation and no-floppy failure/restore path. |
-| Non-goals | No FDC/DMA/CMOS/media enablement, UMB reservation, raw-media I/O, policy expansion, generic ignore, guest EXEC claim or bx-core/bx-mantle change. |
-| Reference Baseline | `BOP-DEPENDENCY-110/111`, OpenNT `nt_bop.c:MS_bop_E`, `nt_umb.c:UMBNotify`, `demdasd.c:demDasdInit/demFloppyInit`. |
-| Files And ABI Surface | Named bx-vdm source mirror, no-op UMB shim, selector-owning bridge, and provider-neutral scoped three/four-byte body-call helper. |
-| Applicable Rules | Source-first recovery, immutable host-drive admission, guest-owner boundary, selector-blind machine boundary and MTSP governance. |
-| Verification | Fresh formal Ninja compile/link and a synthetic empty-drive session fixture proving AL=0 invokes the source body and resumes at `RIP+3` without guest-register delta. |
-| Expected Markers | 5E is handled only with a bound Direct DEM session; wrong shape/mode and unbound sessions decline. |
-| Asset Needs | Existing admitted OpenNT tree, current bx-vdm mirrors and formal build graph; no new source, firmware or host mutation. |
-| Reporting Requirements | Record source body/order, policy/no-floppy disposition, typed resume, local test and the absence of guest-continuity claim. |
-| Stop Conditions | Need to enable floppy/UMB behavior, bypass admitted-drive policy, invent a generic success, or modify bx-core/bx-mantle. Record and transfer instead. |
-| Exit Criteria | The source body, typed `+3` resume and zero-floppy source path are locally verified and documented; native trace is separately optional integration evidence. |
+| Identifier Mode | `M0 T245 S12`, Ordinary Mode, single-person dual-role source/ABI disposition closure. |
+| Admission And Approval | The source-built trace has reached the original `sysinit1.asm` `comerr → SVC_DEMEXITVDM` path after accepted `5E`. This S maps that exact failure against the current Direct startup composition; it adds no product capability or Bochs change. |
+| Objective | Prove whether the declared source-built `COMMAND.COM` is published to the original guest `\COMMAND.COM` lookup path, and classify the smallest owner-correct recovery rather than treating `50:3D` as a missing BOP success route. |
+| Non-goals | No virtual boot volume implementation, host-drive policy change, guest-byte mutation, synthetic EXEC/PSP/parent-return, extra device, or bx-core/bx-mantle modification. |
+| Reference Baseline | `BOP-DEPENDENCY-080..100/110`, OpenNT `sysinit1.asm:ConfigDone/comerr/stall`, `sysinit2.asm:commnd`, direct `demfile`/host-session seams, and the source-built S11 observation. |
+| Files And ABI Surface | Evidence and tracker only: original guest pathname/EXEC flow, Direct host path seam, and current source-built image admission are compared without changing their ABI. |
+| Applicable Rules | Source-first recovery, guest-owner boundary, Direct host-path semantics, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
+| Verification | Reconcile original `\COMMAND.COM` producer/consumer source with the active composition's image loading and Direct host file primitives; independently confirm the native `50:3D` is the typed source terminal, not a dispatch decline. |
+| Expected Markers | `5E` resumes; `50:3D` dispatches the imported `demExitVDM` body and yields typed stop. The map states whether an admitted host path supplies the required `\COMMAND.COM`. |
+| Asset Needs | Existing OpenNT tree, current bx-vdm source, retained S11 native observation and source-built artifacts; no new source, firmware, guest media or host mutation. |
+| Reporting Requirements | Record the original command pathname, all source conditions before `comerr`, current Direct lookup boundary, exact gap classification and the owning future package. Do not claim guest EXEC reachability. |
+| Stop Conditions | Evidence would require a guest-byte patch, an implicit root-to-C mapping, a virtual boot-volume policy, host C: mutation, a fabricated BOP result, or a Bochs change. Stop and transfer that design work. |
+| Exit Criteria | Tracker and evidence distinguish accepted source terminal from decline and identify the missing command-publication contract and its owner; the next implementation task is bounded without inventing a filesystem behavior. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 
 ## Latest Closure
+
+M0 T245 S11 closes the source-shaped `5E` config-complete body: the active
+Direct DEM session executes `UMBNotify(0); demDasdInit();`, resumes at `RIP+3`
+and preserves the source zero-floppy path.  One source-built run reaches and
+accepts `5E`; its subsequent original `50:3D` terminal is separately owned by
+the active S12 bootstrap-path disposition, not a 5E defect.
 
 M0 T244 closes the headless native 8042 lifecycle. Its formal fixture proves
 ports `60h/64h`, timer, ordinary IRQ1/PIC and two clean lifecycles without the
