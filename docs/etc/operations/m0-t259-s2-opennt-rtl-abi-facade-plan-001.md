@@ -4,9 +4,11 @@
 
 Create one source-shaped declaration and ownership surface for the directly
 recoverable OpenNT `Rtl*` / `NTSTATUS` calls currently spread through the
-COMMAND and DEM mirrors.  This is a consolidation of the existing admitted
-`HOST-07` seam, not a replacement runtime and not a change to imported OpenNT
-algorithm bodies.
+COMMAND and DEM mirrors. This is a consolidation of the existing admitted
+`HOST-07` seam: original interface shape and source call order stay intact
+while a modern public-API implementation supplies unavailable historical
+internals. It is not a replacement runtime and does not rewrite imported
+OpenNT algorithm bodies.
 
 ## Admission
 
@@ -30,9 +32,9 @@ algorithm bodies.
 3. Public Win32 conversions/heap functions remain implementation details of
    the facade.  The imported OpenNT body retains its original function calls,
    order and failure branches.
-4. Unsupported private interfaces are declared neither as fake successes nor
-   as new globally visible substitutes; their `HOST-*` deferred disposition
-   remains explicit.
+4. A historical implementation with no direct export receives a source-shaped
+   public-Win32 facade when its observable contract can be proven. Only an
+   unproven remainder stays explicitly deferred; it is never a fake success.
 5. Focused fixture coverage proves ANSI/OEM/Unicode conversion, allocated and
    caller-owned output, MULTI_SZ environment construction and deterministic
    status-to-DOS-error behavior on the formal target.

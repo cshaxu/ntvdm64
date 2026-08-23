@@ -89,7 +89,7 @@ OpenNT 原始调用遇到 NT4 私有 API、已删除 API、现代 Win32 不再�
 | --- | --- | --- |
 | 公开 API 仍等价可用 | 原始 owner 保留，shim 只做类型宽度、Unicode、结构布局或受控句柄转换。 | 否。 |
 | 公开 API 可实现同一可观察合同但时序/资源归属不同 | 在 `bx-vdm/bop/shim/` 做 session-owned seam；保留原始参数检查、顺序与失败码，并增加局部回归。 | 否，前提是合同不变。 |
-| 仅 NT4 私有组合可提供，现代公开 API 无等价物 | 不自行重建 CSRSS/CSR、BaseSrv、CCPU、SAS 或宿主内核组合；标为 `deferred` 或保留原始可证明失败，并写入 receiving owner。 | 是：若要改变产品能力或失败语义。 |
+| 仅 NT4 私有组合可直接提供，现代公开 API 无同名等价物 | 先保留原始接口形状与可观察合同；若源码足以证明语义，在 `bx-vdm` 以公开 Win32 或 selector-blind Bochs mechanics 做最小 source-shaped facade。不得重建 CSRSS/CSR、BaseSrv、CCPU、SAS 或宿主内核产品壳；仅无可验证替代的余项标为 `deferred`/原始失败，并写入 receiving owner。 | 否，前提是合同不变；若改变产品能力或失败语义则需要。 |
 | x86 与 x64 宽度/调用约定不兼容 | 保持 guest ABI 固定宽度；外部 `HANDLE`/指针永不跨 guest 边界，使用统一句柄管理器或 named compatibility shim。 | 否，除非原始 32 位可观察布局无法保留。 |
 | 现代安全/权限模型禁止原始行为 | 不绕过系统保护；保留原始失败或采用公开 API 的最接近失败合同。 | 是：若产品要求不同的授权、隔离或 mutation 语义。 |因此，后续任务的 admission 必须先从本表筛出可直接复用的 source leaf；若发现 API/ABI 断裂，先新增或更新对应 `BOP-DEPENDENCY-…` 行，再决定 shim、defer 或单独 proposal。这个顺序同样适用于已经“源码/ABI 接入完成”但仍有历史分支未复通的 DEM/COMMAND 条目。
 

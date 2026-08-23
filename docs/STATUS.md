@@ -13,7 +13,7 @@
 | Identifier Mode | `M0 T259 S2`, Ordinary Mode with a single-person dual-role review: source-first ABI-facade consolidation. |
 | Admission And Approval | T259 S1 has completed the canonical `HOST-*`/`MACH-*` catalog and current-facade reconciliation. S2 is its directly ordered, no-new-provider continuation. |
 | Objective | Give the existing OpenNT COMMAND/DEM mirrors one canonical `HOST-07` RTL/NTDLL declaration, ownership, allocation and x86/x64 width contract while retaining their source call order and failure paths. |
-| Non-goals | No BOP/provider enablement; no CCPU/SAS/CSR/BaseSrv recreation; no `NtVdmControl`, VDD, WOW or Redirector product implementation; no Bochs semantic intrusion; no invented replacement behavior. |
+| Non-goals | No BOP/provider enablement; no wholesale CCPU/SAS/CSR/BaseSrv product-shell recreation; no Bochs semantic intrusion; no invented behavior without source evidence. Where a historical private implementation is unavailable, a source-shaped facade may use public Win32 or typed Bochs mechanics to preserve the original observable contract. |
 | Reference Baseline | `HOST-07` in the T259 catalog; current COMMAND `cmdconf.c`, `cmdenv.c`, `cmdexec.c`, `cmdmisc.c`; DEM `demsrch.c`; T258 mapping manager. |
 | Files And ABI Surface | One canonical internal RTL/NTDLL facade header and its implementation where necessary; affected source-shaped COMMAND/DEM shim declarations and focused fixture. |
 | Applicable Rules | Source-first recovery, public-Win32/x64 decision rule, guest/machine hard boundary, one shared mapping manager, and no family-private product shell. |
