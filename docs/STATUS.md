@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S8** — Explicit ordinary-RAM reservation lifecycle.
+**Active: M0 T256 S9** — OpenNT XMEM record-identity map.
 
 ## Active Packet
 
-### M0 T256 S8 — Explicit ordinary-RAM reservation lifecycle
+### M0 T256 S9 — OpenNT XMEM record-identity map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S8`, Ordinary Mode, single-person dual-role implementation and formal verification. |
-| Admission And Approval | S7 selected an explicit interval; `BX-MANTLE-097` is registered before any implementation. |
-| Objective | Implement the smallest selector-blind ordinary-RAM reservation lifecycle over a copied, explicitly composed interval. |
-| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, host allocation/pointer, paging, descriptor change, automatic high-memory claim, trace-driven patch, or adopted-code change. |
-| Reference Baseline | [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S5 geometry map](etc/evidence/m0-t256-s5-guest-ram-geometry-impact-map-001.md), [S6 closure](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md), and [S7 design](etc/evidence/m0-t256-s7-ordinary-ram-reservation-design-001.md). |
-| Files And ABI Surface | Project-owned bx-mantle reservation record, machine-stage/engine copied configuration and CLI admission only. |
+| Identifier Mode | `M0 T256 S9`, Ordinary Mode, single-person dual-role source/ABI map. |
+| Admission And Approval | S8 is closed by its [formal reservation evidence](etc/evidence/m0-t256-s8-ordinary-ram-reservation-closure-001.md). |
+| Objective | Map the retained OpenNT `xmem.c` block/address fields and callbacks onto a bx-vdm-owned source-derived record without exposing a mantle opaque ID or host pointer through the original ABI. |
+| Non-goals | No `53:xx` ingress, no DPMI provider activation, no bx-core/mantle semantic term, no raw pointer or flat-address emulation, no LDT/paging work, and no adopted-code change. |
+| Reference Baseline | [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S8 closure](etc/evidence/m0-t256-s8-ordinary-ram-reservation-closure-001.md), retained `dpmi32/xmem.c`, and `BOP-DEPENDENCY-117`. |
+| Files And ABI Surface | Evidence and bx-vdm-only source/ABI map; no code unless a later S separately admits a record adapter. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Default/no-reservation rejection, valid allocate/release/reuse, malformed/collision rejection, reset clearing, checked-RAM backing, and engine/CLI contract tests in a fresh formal Ninja graph. |
-| Expected Markers | Composed interval, non-overlap first-fit, opaque ID and copied address only. |
+| Verification | Every original pointer/address field has an owner, width/lifetime analysis, and an exact retain/adapt/defer disposition. |
+| Expected Markers | No mantle opaque ID in OpenNT-shaped ABI; no host pointer or NT4 flat-address assumption retained. |
 | Asset Needs | S4/S5/S6 evidence, engine/startup composition, machine stage and formal Ninja manifest. |
 | Reporting Requirements | Distinguish capacity from reservation/mapping; do not claim a DPMI allocation yet. |
 | Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | A registered, selector-blind reservation ABI is code/build/test closed with no hidden xmem shortcut. |
+| Exit Criteria | An implementation-ready bx-vdm record contract is either source-proven or explicitly deferred by the LDT/paging prerequisite. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
