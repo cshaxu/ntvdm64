@@ -2,48 +2,53 @@
 
 ## Architectural Goal
 
-NTDOS64 is a layered composition of an adopted guest machine, an OpenNT guest
-environment, and a modern contained host. Its design objective is to preserve
-each layer's native responsibility rather than recreate one layer inside
-another.
+NTDOS64 is a composition of an adopted guest machine, OpenNT source mirrors,
+and a modern contained host. Its design objective is to preserve each layer's
+native responsibility rather than recreate one layer inside another. The
+product has eight named source components; a source file has exactly one of
+these owners.
 
 ## Components And Ownership
 
 | Component | Owns | Does not own |
 | --- | --- | --- |
-| OpenNT layer (`src/opennt`) | Original NTVDM host-service source, DOS/WOW guest source, and their source-derived contracts | CPU execution, firmware, PC-device emulation, or Bochs lifecycle |
-| VDM adapter (`src/bx-vdm`) | Typed bx↔VDM contracts, BOP ingress/egress, compatibility adaptation, and explicit composition of OpenNT host/guest contracts | CPU execution, firmware, PIC, memory model, device model, DOS/WOW kernel algorithms, or ambient-host policy |
+| `bx-core` | Adopted Bochs CPU/decode, memory, exceptions, and admitted no-device mechanics | VDM/guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
 | Bochs mantle (`src/bx-mantle`) | Minimal native Bochs lifecycle composition: SIM/logging/no-device time state and assembly of admitted core mechanics | VDM, BOP, OpenNT, DOS, host policy, GUI, plugins, or unadmitted PC devices |
-| Bochs core (`src/bx-core`) | Adopted Bochs CPU/decode, memory, exceptions, and admitted no-device mechanics | VDM/guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
-| Host-capability seam | Modern user-mode Win32, device, path, disk, port and registry facilities selected by CLI policy and invoked by the VDM adapter | Guest protocol meaning, CPU/device behavior, Bochs internals, host installation, or host system-file modification |
-| Historical machine-handler islands | Individually admitted original machine-facing behavior under adapter selection | A replacement SoftPC/CCPU backend or general host-service plane |
+| `opennt-guest` | OpenNT DOS and WOW16 guest source and its immutable guest-image inputs | Host service dispatch, host Win32 capability, or machine mechanics |
+| `opennt-host` | Independently composable original OpenNT host-capability components and narrowly source-derived substitutes for unavailable historical capabilities | BOP routing, machine mechanics, or guest algorithms |
+| `opennt-bop` | Minimal-change mirrors of the original OpenNT BOP providers and their original interface, parameter and failure contracts | Bochs mechanics, modern Win32 reconstruction, or product entry composition |
+| `adapter-win32` | Source-shaped modern public-Win32 implementations of unavailable historical Win32 interfaces | OpenNT BOP/service policy or Bochs mechanics |
+| `adapter-bx` | Typed, bounded conversion between the Bochs machine contract and VDM-facing OpenNT-shaped calls | BOP selector/service meaning, DOS/WOW algorithms, or host capability policy |
+| `app` | The `ntvdm64` executable entry point, CLI, and explicit composition/loading of the selected components | CPU/device mechanics, BOP providers, OpenNT host algorithms, or compatibility facades |
 | Research fixtures | Reproducible evidence for a bounded question | Product behavior or implicit runtime dependencies |
 
 ## Composition
 
 ```text
-command-line invocation shell
-  -> OpenNT host and guest layer
-  -> bx-vdm adapter
-      -> bx-mantle -> bx-core
-      -> selected contained host capability
+app
+  -> opennt-guest                         (guest-image input)
+  -> opennt-bop -> opennt-host
+  -> opennt-bop -> adapter-win32
+  -> opennt-bop -> adapter-bx -> bx-mantle -> bx-core
 ```
 
-The VDM adapter is the composition boundary between machine events and host-side
-meaning. It receives and returns versioned, fixed-width values and checked
-guest-memory ranges. It does not pass C++ objects, host pointers, CRT-owned
-memory, implicit handle ownership, or cross-architecture callbacks across that
-boundary.
+`adapter-bx` is the mechanical composition boundary between machine events and
+VDM-facing calls. It receives and returns versioned, fixed-width values and
+checked guest-memory ranges. It does not pass C++ objects, host pointers,
+CRT-owned memory, implicit handle ownership, or cross-architecture callbacks
+across that boundary. `opennt-bop`, not either adapter, owns the interpretation
+of an OpenNT BOP service contract.
 
 ### Guest-Pointer Mapping
 
-`bx-vdm` owns one session-scoped guest-pointer mapping manager.  It is the
+`adapter-bx` owns the VDM-facing session-scoped guest-pointer mapping manager.
+It is the
 single compatibility boundary for historical OpenNT pointer APIs such as
 `GetVDMAddr`, `Sim32GetVDMPointer`, `Sim32FlushVDMPointer`, and
 `Sim32FreeVDMPointer`.  For a synchronous, admitted OpenNT call it may acquire
 a bounded, epoch-scoped direct mapping of stable Bochs guest RAM and return the
 native process pointer required by the historical call shape.  That pointer is
-valid only inside the active `bx-vdm` call: it is never serialized into guest
+valid only inside the active `adapter-bx` call: it is never serialized into guest
 memory, returned through the bx↔machine ABI, retained by an asynchronous
 worker, or exposed as a Bochs object.
 
@@ -56,8 +61,8 @@ ownership and lifecycle bookkeeping with host-handle and child-event tables,
 but these remain distinct resource kinds: a guest address is never a Windows
 `HANDLE`, and a native pointer is never a guest-visible token.
 
-The first runtime process is MSVC x64 throughout: its command-line invocation
-shell, VDM adapter, mantle and adopted Bochs core share one static CRT. The
+The first runtime process is MSVC x64 throughout: `app`, adapters, OpenNT host
+composition, mantle and adopted Bochs core share one static CRT. The
 invocation shell is an outer product boundary, not a semantic architecture
 layer. The guest CPU architecture is an
 emulation property, not a host-process property; CPU5/Pentium-MMX guest code
@@ -66,14 +71,15 @@ CRT may enter this in-process composition.
 
 ## Boundary Invariants
 
-- Machine mechanics stay in the Bochs core. The VDM adapter may request bounded mechanical
+- Machine mechanics stay in the Bochs core. `adapter-bx` may request bounded mechanical
   operations through typed contracts but does not reproduce CPU, memory,
   firmware, interrupt, or device algorithms.
 - The mantle is Bochs-internal assembly only. It reuses native Bochs code and
   data structures, extracting only product-shell paths that prevent independent
   minimal operation. It has no VDM or guest meaning.
-- Guest and host-service meaning stays outside Bochs. The VDM adapter owns the
-  interpretation and routing needed to compose OpenNT-derived host behavior.
+- Guest and host-service meaning stays outside Bochs. `opennt-bop` owns the
+  OpenNT-derived interpretation and routing; `opennt-host` owns independently
+  composable host capability; the adapters only translate bounded contracts.
 - The guest owns DOS and WOW behavior. Neither the invocation shell nor the
   adapter becomes a replacement DOS kernel or filesystem implementation.
 - Modern host capability is explicit and policy-governed. It may deeply
@@ -103,12 +109,15 @@ CRT may enter this in-process composition.
 Dependencies point inward through declared contracts:
 
 ```text
-src/opennt -> bx-vdm -> bx-mantle -> bx-core
-bx-vdm -> contained host-capability seam
-bx-vdm -> src/opennt host/guest contract or historical machine-handler island
+app -> opennt-guest
+app -> opennt-bop -> opennt-host
+opennt-bop -> adapter-win32
+opennt-bop -> adapter-bx -> bx-mantle -> bx-core
+opennt-host -> adapter-win32                 (only through declared facades)
 ```
 
 No component may reverse these directions by importing another component's
 private execution state. In particular, the Bochs core and mantle remain
-reusable as a guest machine, and the VDM adapter remains reusable as the
-explicit NTVDM composition boundary for future hosts.
+reusable as a guest machine; `adapter-bx` remains a mechanical boundary; and
+the original OpenNT BOP and host ownership remains visible rather than being
+absorbed by either adapter.

@@ -85,25 +85,42 @@
   `build/` tree. Do not place generated output beside a tool. Existing
   top-level tools are migration debt, not a precedent.
 - Keep adopted Bochs upstream files and license notices intact under `src/bx-core/`.
-  Put project code in `src/bx-mantle/` or `src/bx-vdm/` by ownership; any exception is an explicit patch
+  Put Bochs-only project code in `src/bx-mantle/`; place every other project
+  source in its declared target owner rather than the transitional legacy tree.
+  Any exception is an explicit patch
   with upstream path/revision, rationale and focused test, registered in
   `docs/etc/research/adapter-external-intrusion-exceptions.md` before it is
   applied. Avoid such exceptions; admit one only when an adapter/build wrapper
   cannot solve the problem. Distribution review is deferred until a release is
   considered.
-- The adapter may translate typed machine events and checked memory ranges
-  only. It may additionally identify a BOP selector and catalogued service ID
-  from the already copied bounded instruction window, solely to select an
-  explicitly source-admitted adapter contract or record an unimplemented
-  invocation. It must not use unbounded guest-memory inspection, emulate DOS
-  interrupts, own device policy, or turn the catalogue into a generic
-  historical dispatcher.
+- Place each source file in its named target component: Bochs mechanics in
+  `bx-core`; Bochs-only native assembly in `bx-mantle`; guest image source in
+  `opennt-guest`; independently composable OpenNT host capability in
+  `opennt-host`; OpenNT BOP mirrors in `opennt-bop`; unavailable public-Win32
+  facades in `adapter-win32`; bounded Bochs/VDM conversion in `adapter-bx`; and
+  CLI/final composition in `app`. Transitional legacy paths are not a
+  precedent for new code. Do not move a file across these owners as an
+  incidental feature change; the admitted reorganization package inventories
+  it and uses `git mv` whenever ownership is pure.
+- Keep imported OpenNT mirrors recognizable. Preserve source names, interfaces,
+  data structures and ordering, and annotate each required edited expression
+  with `DIVERGENCE:`. A replacement of an unavailable Win32, CCPU or SoftPC
+  dependency must first be offered through an equivalently shaped
+  `adapter-win32`, `adapter-bx`, or `opennt-host` facade. A self-authored
+  alternate interface remains a registered last-resort exception.
+- `adapter-bx` may translate typed machine events and checked memory ranges
+  only. It may transport a copied bounded instruction window to `opennt-bop`,
+  but does not interpret a BOP selector or service ID. `opennt-bop` performs
+  that source-owned interpretation. Neither adapter may use unbounded
+  guest-memory inspection, emulate DOS interrupts, own device policy, or turn
+  a catalogue into a generic historical dispatcher.
 - Keep Bochs feature selection deny-by-default. A configuration addition must
   name its reached OpenNT caller, the Bochs owner, the boundary impact, and a
   negative test; do not enable a feature merely because upstream provides it.
-- Do not move historical OpenNT service behavior into Bochs or the adapter.
-  Preserve the original owner's calling convention, layout, dispatch order,
-  and failure semantics; unsupported cases fail explicitly.
+- Do not move historical OpenNT service behavior into Bochs or either adapter.
+  Keep it in the matching `opennt-bop` or `opennt-host` owner; preserve the
+  original calling convention, layout, dispatch order and failure semantics;
+  unsupported cases fail explicitly.
 - Do not move Bochs CPU, exception, memory, firmware, device, configuration,
   or other machine semantics into NTVDM/OpenNT code or the adapter. The
   boundary transports typed facts; it does not duplicate either side.
