@@ -2,31 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T245 S15** — Guest command-open versus EXEC failure classification.
+**Active: M0 T245 S16** — Canonical source-built COMMAND bootstrap root.
 
 ## Active Packet
 
-### M0 T245 S15 — Guest command-open versus EXEC failure classification
+### M0 T245 S16 — Canonical source-built COMMAND bootstrap root
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S15`, Ordinary Mode, single-person dual-role source/ABI observation and guest-owner classification. |
-| Admission And Approval | S14 proves the source-built token reaches `sysinit2.asm:commnd`, but `sysinit1.asm:comerr` has two original incoming paths: the command-file `INT 21h/AH=3Dh` open and `INT 21h/AH=4Bh` EXEC.  Existing default-off mantle interrupt observation can distinguish them without a new code intrusion. |
-| Objective | On one bounded Direct source-built run, classify the last guest `INT 21h` request before `comerr` as command open or EXEC, then assign the actual next owner without repairing it prematurely. |
-| Non-goals | No virtual boot volume, host-drive policy change, guest-byte mutation, synthetic EXEC/PSP/parent-return, new Bochs source, alternate filesystem mapping, or new BOP behavior. |
-| Reference Baseline | S14 exact `commnd` observation, source-built NTIO map, original `sysinit1.asm:1517..1630`, and the already registered default-off software-interrupt observation. |
-| Files And ABI Surface | Existing optional, fixed-capacity mantle interrupt log only.  S15 changes no production core source: the formal diagnostic build merely enables its already registered compile switch; bx-vdm/CLI prints its copied records. |
-| Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Build the existing focused interrupt-observation fixture with the diagnostic switch; then make exactly one bounded native run and inspect the final real-mode `INT 21h` records. |
-| Expected Markers | `AX=3D00h` immediately before the terminal proves the original command-file open route failed; `AX=4B00h` proves guest EXEC was reached and failed; any other result remains evidence-only and gets source mapped. |
-| Asset Needs | Existing OpenNT tree, source-built bundles, registered observation source and formal Ninja graph; no new source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record source/map identity, diagnostic build configuration, focused/native result and named next owner. Do not claim a repair merely from classification. |
-| Stop Conditions | The required signal cannot be observed through the existing default-off bounded record, or any alternative requires a new semantic Bochs change, arbitrary memory scanning, guest mutation, virtual C:, or fabricated result. |
-| Exit Criteria | One of the two original command-launch routes is directly classified, or a third named route is source-mapped; no production behavior changes. |
+| Identifier Mode | `M0 T245 S16`, Ordinary Mode, single-person dual-role CLI admission correction and guest-owner validation. |
+| Admission And Approval | S15 proves the current `AX=3D00h` request uses relative `BUILD\\OUTPUT\\DOS\\COMMAND.COM`: the CLI passed relative `--dos-root` unchanged into the existing startup root descriptor.  The correction is bounded normal CLI argument canonicalization, not a BOP or Bochs semantic change. |
+| Objective | Canonicalize accepted DOS/WOW16 root arguments to absolute paths before existing bundle admission, startup composition and environment publication, then repeat the existing passive guest observation. |
+| Non-goals | No virtual boot volume, drive alias, guest-byte mutation, synthetic file success, EXEC/PSP/parent-return implementation, host-system mutation, new Bochs source, or BOP behavior. |
+| Reference Baseline | S13 source producer, S14 `commnd` copy, S15 `AX=3D00h` classification, and current CLI `target` absolute-path handling. |
+| Files And ABI Surface | CLI-local path canonicalization only.  The original `cmdconf.c → SHELL= → sysconf.asm` route, DEM/COMMAND provider ABIs and selector-blind machine boundary remain unchanged. |
+| Applicable Rules | Source-first recovery, Direct host-path semantics, guest-owner boundary, no trace-led leaf repair and MTSP governance. |
+| Verification | Formal graph links the CLI.  One bounded source-built run invoked with relative bundle arguments must show an absolute drive-qualified `commnd`; any next BOP/terminal is evidence, not an unearned completion claim. |
+| Expected Markers | The observed buffer begins with the host drive and no longer begins `BUILD`; the earlier `AX=3D00h` open may then enter its existing DEM owner route or expose a distinct guest/host prerequisite. |
+| Asset Needs | Current source-built bundles and existing S14 observer; no new source, firmware or guest media. |
+| Reporting Requirements | Record pre/post guest bytes, focused build result, native BOP/interrupt change and owner of any new terminal. |
+| Stop Conditions | Canonicalization cannot be represented in the original 64-byte `commnd` field, or an apparent fix requires an implicit DOS drive mapping, virtual volume, guest patch or Bochs modification. |
+| Exit Criteria | Relative CLI input is canonically published through the existing source route, and one native observation establishes the next unmodified original path. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S16 closes the relative-root bootstrap defect. CLI admission now
+canonicalizes DOS/WOW16 roots before the unchanged original COMMAND source
+route; a relative-input native run observes an absolute guest `commnd` and
+newly reaches/resumes `54:04`. The later `50:3D` is a distinct unmodified
+path; see [S16 evidence](etc/evidence/m0-t245-s16-canonical-command-bootstrap-root-001.md).
 
 M0 T245 S15 closes classification of the `comerr` incoming edge: existing
 default-off real-mode interrupt observation shows `INT 21h AX=3D00h` at

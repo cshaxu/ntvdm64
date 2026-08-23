@@ -202,6 +202,7 @@ int wmain(int argc, wchar_t **argv)
         ;
     int index = 1;
     ntdos64_startup_selection selection;
+    wchar_t config_full[MAX_PATH], root_full[MAX_PATH];
     wchar_t config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_launch_plan_v2 launch;
     struct bx_ntvdm_engine_request_v1 request;
@@ -258,7 +259,9 @@ int wmain(int argc, wchar_t **argv)
     if (!config || !root || index >= argc) goto usage;
     target = argv[index];
     if (!GetFullPathNameW(target, MAX_PATH, target_full, 0) ||
-        !ntdos64_bundle_load_roots(config, config_source, autoexec_source) ||
+        !GetFullPathNameW(config, MAX_PATH, config_full, 0) ||
+        !GetFullPathNameW(root, MAX_PATH, root_full, 0) ||
+        !ntdos64_bundle_load_roots(config_full, config_source, autoexec_source) ||
         (memset(&selection, 0, sizeof(selection)), 0) ||
         wcslen(wcsrchr(target_full, L'\\') != NULL ? wcsrchr(target_full, L'\\') + 1u : target_full) >=
             sizeof(selection.target.file_name) / sizeof(selection.target.file_name[0]) ||
@@ -275,9 +278,9 @@ int wmain(int argc, wchar_t **argv)
     }
     if (!SetEnvironmentVariableW(L"NTVDM_CONFIG_SOURCE", config_source) ||
         !SetEnvironmentVariableW(L"NTVDM_AUTOEXEC_SOURCE", autoexec_source) ||
-        !SetEnvironmentVariableW(L"NTVDM_CONFIG_ROOT", config) ||
+        !SetEnvironmentVariableW(L"NTVDM_CONFIG_ROOT", config_full) ||
         !SetEnvironmentVariableW(L"NTVDM_TARGET_PATH", target_full) ||
-        !SetEnvironmentVariableW(L"NTVDM_WOW16_ROOT", root)) return 3;
+        !SetEnvironmentVariableW(L"NTVDM_WOW16_ROOT", root_full)) return 3;
     ntdos64_lifecycle_v1_policy_clear(&lifecycle_policy);
     lifecycle_policy.instruction_tick_budget = instruction_tick_budget;
     if (!ntdos64_lifecycle_v1_policy_valid(&lifecycle_policy)) return 3;
@@ -285,7 +288,7 @@ int wmain(int argc, wchar_t **argv)
     if (!copied_text(request.profile_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
             target_full, &request.profile_descriptor_chars) ||
         !copied_text(request.root_descriptor, BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS,
-            config, &request.root_descriptor_chars) ||
+            config_full, &request.root_descriptor_chars) ||
         !copied_text(request.launch_descriptor, BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS,
             launch_text, &request.launch_descriptor_chars)) return 3;
     /* OpenNT parity: host-drive enumeration is not a CLI capability filter.
