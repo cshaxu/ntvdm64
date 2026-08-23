@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T259 S2** — OpenNT RTL/NTDLL ABI facade consolidation.
+**Active: M0 T259 S3** — SoftPC/CCPU-to-Bochs mechanical contract recovery.
 
 ## Active Packet
 
-### M0 T259 S2 — OpenNT RTL/NTDLL ABI facade consolidation
+### M0 T259 S3 — SoftPC/CCPU-to-Bochs mechanical contract recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T259 S2`, Ordinary Mode with a single-person dual-role review: source-first ABI-facade consolidation. |
-| Admission And Approval | T259 S1 has completed the canonical `HOST-*`/`MACH-*` catalog and current-facade reconciliation. S2 is its directly ordered, no-new-provider continuation. |
-| Objective | Recover the full reached `HOST-07` RTL/NTDLL contract for existing OpenNT COMMAND/DEM mirrors—declaration, ownership, allocation and x86/x64 width—while keeping modern host recovery behind `bx-vdm` so imported OpenNT bodies and Bochs need only minimal invasive change. |
+| Identifier Mode | `M0 T259 S3`, Ordinary Mode with a single-person dual-role review: source-first selector-blind machine contract recovery. |
+| Admission And Approval | T259 S1 catalog and S2 active RTL/environment seams are established. S3 now defines the exact SoftPC/CCPU-to-Bochs contract before any machine-side facade correction. |
+| Objective | Preserve reached SoftPC/CCPU interface shape and recover its observable run, register, memory, A20, interrupt and reset contract through typed selector-blind Bochs mechanics, without rebuilding a CCPU or product shell. |
 | Non-goals | No BOP/provider enablement; no wholesale CCPU/SAS/CSR/BaseSrv product-shell recreation; no Bochs semantic intrusion; no invented behavior without source evidence. Where a historical private implementation is unavailable, a source-shaped facade may use public Win32 or typed Bochs mechanics to preserve the original observable contract. |
-| Reference Baseline | `HOST-07` in the T259 catalog; current COMMAND `cmdconf.c`, `cmdenv.c`, `cmdexec.c`, `cmdmisc.c`; DEM `demsrch.c`; T258 mapping manager. |
-| Files And ABI Surface | One canonical internal RTL/NTDLL facade header and its implementation where necessary; affected source-shaped COMMAND/DEM shim declarations and focused fixture. |
+| Reference Baseline | `MACH-01..08` in the T259 catalog; OpenNT `softpc.new/host/src/{nt_cpu.c,nt_cprgs.c,nt_aorc.c}`, `keybd_io.c`; active SoftPC/DEM/XMS source mirrors; T258 mapping manager. |
+| Files And ABI Surface | The source-shaped SoftPC/CCPU facade contract in `bx-vdm`; affected `host_simulate`, register-frame, checked-memory, A20, IVT/keyboard and typed machine-action seams. |
 | Applicable Rules | Source-first recovery, public-Win32/x64 decision rule, guest/machine hard boundary, one shared mapping manager, and no family-private product shell. |
-| Verification | Signature/layout/ownership audit; focused conversion and environment tests; forbidden-private-import scan; formal Ninja build/link; documentation gate and independent review. |
-| Expected Markers | One `HOST-07` ABI contract is used by every active mirror consumer; public APIs retain source-visible ordering/failure; bx-core/mantle stay selector/DOS/CCPU blind. |
-| Asset Needs | OpenNT source mirrors, current COMMAND/DEM shims, catalog, exception register and formal build manifest. |
-| Reporting Requirements | Record original interface spelling and call site, calling convention/width/lifetime, public API implementation, allocation pairing, status-error rule and any exception ID. |
-| Stop Conditions | A helper exposes host pointers to the guest, changes imported OpenNT control flow, recreates private NT4 product interfaces, or lacks a source/ABI evidence entry. |
-| Exit Criteria | One named `HOST-07` facade contract is used by every active direct mirror consumer; duplicate declarations are removed or thin aliases; focused tests and formal Ninja build/link pass. |
+| Verification | Original call-site and fixed-width ABI audit; focused seam fixture; negative selector/DOS/CCPU boundary scan of bx-core/bx-mantle; formal Ninja build/link; documentation gate and independent review. |
+| Expected Markers | Reached historical spelling remains at the mirror boundary; `bx-vdm` performs copied-state translation; bx-core/mantle remain selector/DOS/CCPU blind; no CCPU loop or host pointer crosses the boundary. |
+| Asset Needs | OpenNT SoftPC/CCPU source and active mirrors, current bx-vdm/mantle API, T258 mapping manager, catalog, exception register and formal build manifest. |
+| Reporting Requirements | Record original interface spelling and call site, calling convention/width/lifetime, typed mechanical request/result, no-op/failure disposition and any exception ID. |
+| Stop Conditions | A helper exposes host pointers to the guest, changes imported OpenNT control flow, recreates a CCPU/product shell, imports BOP/DOS/SoftPC terms into bx-core/mantle, or lacks a source/ABI evidence entry. |
+| Exit Criteria | Every reached `MACH-*` call site has a source-shaped facade or explicit source-proven decline; one changed seam has focused proof and formal Ninja build/link passes; all residual product-shell semantics are queued rather than silently recreated. |
 | Original Owner Request | “接下来，是关于我们全面恢复opennt的win32api宿主方面和 softpc/ccpu 核心机方面的接口规范的任务。你已经审计过。” |
 | Similar-Issue Sweep | `ANSI_STRING`, `OEM_STRING`, `UNICODE_STRING`, `Rtl*` conversion/heap/environment helpers, `NTSTATUS` to DOS error mapping and existing COMMAND/DEM declaration copies. |
 
@@ -34,9 +34,12 @@ recovered source-visible NTSTATUS-to-DOS error differentiation through the
 current same-named `ntdll` export; its formal 286-node link and source-mirror
 fixture pass are recorded in [P1 evidence](etc/evidence/m0-t259-s2-p1-rtl-contract-status-recovery-001.md).
 P2 has restored caller-owned ANSI output semantics, and P3 proves the imported
-`cmdenv.c` dynamic session-environment transform in a fresh formal graph;
-remaining S2 work reconciles COMMAND/DEM conversion and allocation ownership;
-this remains neither a new BOP survey nor an NT4 product-shell recreation.
+`cmdenv.c` dynamic session-environment transform in a fresh formal graph. S2's
+COMMAND slice is closed; any additional DEM consumer migration is tracked as
+S4 reconciliation work rather than a reason to fork another RTL contract.
+S3 now records the SoftPC/CCPU mechanical contract before correcting its first
+reached facade. This remains neither a new BOP survey nor an NT4 product-shell
+recreation.
 
 ## Latest Closure
 
