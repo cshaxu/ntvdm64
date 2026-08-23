@@ -2,31 +2,38 @@
 
 ## Current Work
 
-**Active: M0 T247 S3** — Source-built local DOS child ordinary-return profile.
+**Active: M0 T248 S1** — Selector-blind post-EXEC real-mode continuity source/ABI map.
 
 ## Active Packet
 
-### M0 T247 S3 — Source-built local DOS child ordinary-return profile
+### M0 T248 S1 — Selector-blind post-EXEC real-mode continuity source/ABI map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T247 S3`, Ordinary Mode, single-person dual-role source/ABI recovery. |
-| Admission And Approval | Standing owner delegation selects the current queue-leading NTDOS guest EXEC and parent-return candidate after T246's first reached machine package. |
-| Objective | Recover one source-built local DOS binary `AL=0` child entry and ordinary return through original `$Exec`, `$Exit/$Abort` and `reset_environment`, recording parent/PDB facts without host-side DOS process behavior. |
-| Non-goals | No COMMAND host-worker rewrite, unknown/32-bit/WOW launch, Redirector JFN behavior, guest PDB/arena/JFN implementation, Bochs intrusion, device enablement, or unsupported multi-program continuity claim. |
-| Reference Baseline | S1 owner map; S2 checked `50:36` PDB observation closure; T236 COMMAND worker closure; T245 source-built permanent COMMAND continuity; T246 active `02/06` route. |
-| Files And ABI Surface | Source-built `NTIO.SYS`/`NTDOS.SYS`/`COMMAND.COM` plus one unchanged source-built local DOS target; existing fixed observation and typed machine/host seams only. |
+| Identifier Mode | `M0 T248 S1`, Ordinary Mode, single-person dual-role source/ABI recovery map. |
+| Admission And Approval | Standing owner delegation selects the new queue-leading selector-blind continuity prerequisite discovered and tracked by completed T247; ordinary recovery work requires no repeated approval. |
+| Objective | Map exact post-`50:36` real-mode instruction, interrupt/exception, stack and return edges against original NTDOS/SoftPC and adopted Bochs sources, without importing BOP/DOS semantics into machine layers. |
+| Non-goals | No DEM/COMMAND/Redirector/WOW leaf patch, guest PDB/arena/JFN implementation, BOP selector interpretation in bx-core/bx-mantle, device enablement, or unsupported continuity claim. |
+| Reference Baseline | T247 source-built `50:36` PDB checkpoint and `BOP-DEPENDENCY-115`; T246 `02/06` source package; active finite mantle contract. |
+| Files And ABI Surface | Tracker/evidence/operation plan and read-only source maps only; no runtime ABI or Bochs change in S1. |
 | Applicable Rules | Source-first ladder, guest/machine/adapter owner separation and no trace-led leaf selection. |
-| Verification | Source-built input identity; PDB pre-child/parent-return observations; focused formal/native evidence; documentation governance and `git diff --check`. |
-| Expected Markers | Original child entry reaches the S2 handoff; original child exit restores parent PDB/vector/environment facts or stops at a named machine/host owner. |
-| Asset Needs | Existing OpenNT guest source tree, staged DOS/COMMAND/target images, S2 observation, current typed machine and Direct-host seams. |
-| Reporting Requirements | Name exact guest source edge, source-built image identity, observed before/after facts and every explicit transfer. |
-| Stop Conditions | A required transition needs adapter-owned DOS state, an unapproved machine semantics change, or an unavailable service without a named owner. |
-| Exit Criteria | Either source-built child-to-parent return is observed with guest-state proof, or the first blocking owner is demonstrated and transferred with no invented workaround. |
+| Verification | Source/ABI/call-chain citations, existing source-built trace and tracker dependency review, documentation governance and `git diff --check`. |
+| Expected Markers | Every reached post-entry edge is assigned to original guest, adopted CPU, mantle lifecycle, existing typed seam or explicit external owner; no BOP service is selected as an implementation task. |
+| Asset Needs | Existing OpenNT guest/SoftPC source, adopted bx-core/bx-mantle sources, T247 source-built checkpoint, current tracker and formal build manifests. |
+| Reporting Requirements | Name original source paths, retained mechanical semantics, source-first rung decision and any prerequisite transfer. |
+| Stop Conditions | A needed effect cannot be placed in machine mechanics without adopting DOS/BOP/OpenNT semantics, or source evidence cannot distinguish a CPU/mantle defect from guest behavior. |
+| Exit Criteria | One source/ABI map proves a bounded selector-blind S2 replay candidate or names a transferred external owner. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
-| Similar-Issue Sweep | `BOP-DEPENDENCY-018/027/028/092..101`, `50:36`, `54:07/08/0A/0B`, NTDOS EXEC/PSP/arena/JFN/environment source, staged guest images, machine-stage contracts and source-built local target. |
+| Similar-Issue Sweep | `BOP-DEPENDENCY-093/102/104/114/115`, original `msproc.asm:$Exec/$Exit`, SoftPC BIOS interrupt handlers, adopted CPU exception/iret/stack mechanics and mantle run/stop lifecycle. |
 
 ## Latest Closure
+
+M0 T247 closes the NTDOS guest EXEC entry/parent-return boundary.  Its
+source-built native checkpoint proves original `$Exec` PDB construction and
+the accepted `50:36` child-entry handoff; the pre-return unexpected-loop
+terminal transfers to active M0 T248's selector-blind machine-continuity
+package, not to `50:1E demWrite` or an adapter DOS implementation. See the
+[T247 closure](history/m0-t247-closure-20260822.md).
 
 M0 T246 closes the shared SoftPC `02/06` machine interrupt package. Its
 adapter-only active route preserves the source-derived stack/PIC/BDA mechanics
