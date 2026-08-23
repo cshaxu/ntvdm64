@@ -64,6 +64,12 @@ symbolic-link open/query. The original `demerror.c` ordering remains intact;
 a fresh 286-object formal graph and source-mirror fixture pass. See
 [S4 P1 evidence](etc/evidence/m0-t259-s4-p1-demerror-ntdll-facade-001.md).
 
+S4 P2 closes formal static-library reconciliation: a fresh 453-node Ninja
+graph links all 78 fixtures plus the native target using exact per-fixture
+module closures, and focused regressions pass.  The canonical RTL facade now
+keeps its counted-string layout checks in both C11 and C++14; no OpenNT mirror
+or Bochs source changed. See [S4 P2 evidence](etc/evidence/m0-t259-s4-p2-formal-static-closure-001.md).
+
 ## Latest Closure
 
 M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager

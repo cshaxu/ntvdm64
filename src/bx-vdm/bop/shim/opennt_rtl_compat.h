@@ -16,19 +16,24 @@
 
 #if defined(__cplusplus)
 extern "C" {
+#define BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(condition, message) \
+    static_assert((condition), message)
+#else
+#define BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(condition, message) \
+    _Static_assert((condition), message)
 #endif
 
 /* The following layout checks document the x86/x64 host boundary.  The
  * counted-string records carry native pointers and are valid only inside a
  * synchronous host facade; they must never be copied into guest memory. */
-_Static_assert(sizeof(USHORT) == 2u, "OpenNT counted-string length width");
-_Static_assert(offsetof(ANSI_STRING, Length) == 0u,
+BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(sizeof(USHORT) == 2u, "OpenNT counted-string length width");
+BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(offsetof(ANSI_STRING, Length) == 0u,
     "OpenNT ANSI_STRING Length offset");
-_Static_assert(offsetof(ANSI_STRING, MaximumLength) == sizeof(USHORT),
+BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(offsetof(ANSI_STRING, MaximumLength) == sizeof(USHORT),
     "OpenNT ANSI_STRING MaximumLength offset");
-_Static_assert(offsetof(UNICODE_STRING, Length) == 0u,
+BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(offsetof(UNICODE_STRING, Length) == 0u,
     "OpenNT UNICODE_STRING Length offset");
-_Static_assert(offsetof(UNICODE_STRING, MaximumLength) == sizeof(USHORT),
+BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(offsetof(UNICODE_STRING, MaximumLength) == sizeof(USHORT),
     "OpenNT UNICODE_STRING MaximumLength offset");
 
 void RtlInitAnsiString(PANSI_STRING destination, const CHAR *source);
@@ -53,5 +58,7 @@ ULONG RtlNtStatusToDosError(NTSTATUS status);
 #if defined(__cplusplus)
 }
 #endif
+
+#undef BX_NTVDM_OPENNT_RTL_STATIC_ASSERT
 
 #endif

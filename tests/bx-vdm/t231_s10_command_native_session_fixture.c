@@ -4,23 +4,6 @@
 #include "bop/command_v2_generic_ud_bridge.h"
 #include "bop/shim/command_native_session_shim.h"
 
-/* The focused adapter fixture does not create a Bochs machine stage.  These
- * fixed mechanical callbacks prove the COMMAND bridge's link boundary while
- * the separate mantle lifecycle fixtures own real checked-RAM evidence. */
-int bx_ntvdm_mantle_checked_ram_read_v1(uint64_t address, uint8_t *bytes,
-    uint32_t byte_count)
-{
-    (void)address; (void)bytes; (void)byte_count;
-    return 0;
-}
-
-int bx_ntvdm_mantle_checked_ram_write_v1(uint64_t address,
-    const uint8_t *bytes, uint32_t byte_count)
-{
-    (void)address; (void)bytes; (void)byte_count;
-    return 0;
-}
-
 static void event_initialize(struct bx_ntvdm_generic_ud_event_v1 *event,
     uint8_t service)
 {

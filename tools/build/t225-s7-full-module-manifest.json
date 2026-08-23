@@ -429,7 +429,7 @@
     {
       "name": "t245-s21-oem-create-file-fixture",
       "source": "tests/bx-vdm/t245_s21_oem_create_file_fixture.c",
-      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host"],
       "platformLibraries": ["user32.lib"]
     },
     {
@@ -453,14 +453,17 @@
     {
       "name": "t245-s11-config-complete-fixture",
       "source": "tests/bx-vdm/t245_s11_config_complete_fixture.c",
-      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host"],
       "platformLibraries": ["user32.lib"]
     },
     {
       "name": "t245-s9-demdasd-drive-policy-fixture",
       "source": "tests/bx-vdm/t245_s9_demdasd_drive_policy_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -472,7 +475,8 @@
       "libraries": [
         "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -484,7 +488,8 @@
       "libraries": [
         "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -496,7 +501,8 @@
       "libraries": [
         "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -547,7 +553,8 @@
       "libraries": [
         "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -563,7 +570,8 @@
       "libraries": [
         "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -576,7 +584,8 @@
       "libraries": [
         "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -588,8 +597,11 @@
       "source": "tests/bx-vdm/t230_s15_v2_runtime_session_fixture.c",
       "libraries": [
         "bx-vdm",
+        "cli",
+        "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -659,7 +671,10 @@
       "name": "t230-s6-demgset-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s6_demgset_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -690,7 +705,10 @@
       "name": "t230-s4-demdir-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s4_demdir_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -857,7 +875,10 @@
       "name": "t231-s2-command-misc-direct-import-fixture",
       "source": "tests/bx-vdm/t231_s2_command_misc_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -871,7 +892,10 @@
       "name": "t231-s3-command-misc-registration-fixture",
       "source": "tests/bx-vdm/t231_s3_command_misc_registration_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -900,7 +924,10 @@
       "name": "t231-s5-command-start-info-direct-fixture",
       "source": "tests/bx-vdm/t231_s5_command_start_info_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -912,7 +939,10 @@
       "name": "t231-s5-command-config-direct-fixture",
       "source": "tests/bx-vdm/t231_s5_command_config_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -924,7 +954,10 @@
       "name": "t231-s5-command-init-environment-direct-fixture",
       "source": "tests/bx-vdm/t231_s5_command_init_environment_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -951,7 +984,10 @@
       "name": "t234-s2-command-set-directories-fixture",
       "source": "tests/bx-vdm/t234_s2_command_set_directories_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -978,7 +1014,10 @@
       "name": "t231-s7-command-get-next-direct-fixture",
       "source": "tests/bx-vdm/t231_s7_command_get_next_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -990,7 +1029,10 @@
       "name": "t234-s2-command-pif-direct-fixture",
       "source": "tests/bx-vdm/t234_s2_command_pif_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1052,7 +1094,8 @@
       "libraries": [
         "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1071,7 +1114,10 @@
       "name": "t231-s9-command-exit-direct-fixture",
       "source": "tests/bx-vdm/t231_s9_command_exit_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1105,7 +1151,10 @@
       "name": "t236-s4-ntfdisk-readonly-fixture",
       "source": "tests/bx-vdm/t236_s4_ntfdisk_readonly_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1124,7 +1173,10 @@
       "name": "t231-s10-command-native-session-fixture",
       "source": "tests/bx-vdm/t231_s10_command_native_session_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1163,7 +1215,10 @@
       "name": "t230-s9-demmisc-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s9_demmisc_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1182,7 +1237,10 @@
       "name": "t230-s10-demdisp-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s10_demdisp_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1201,7 +1259,10 @@
       "name": "t230-s10-dem-ingress-direct-fixture",
       "source": "tests/bx-vdm/t230_s10_dem_ingress_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1222,7 +1283,8 @@
       "libraries": [
         "bx-vdm",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1265,7 +1327,8 @@
         "bx-vdm",
         "bx-mantle",
         "bx-core",
-        "bx-vdm"
+        "bx-vdm",
+        "opennt-host"
       ],
       "platformLibraries": [
         "user32.lib"
