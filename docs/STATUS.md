@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T255 S1** — Selector-blind protected-mode substrate source/ABI map.
+**Active: M0 T255 S2** — Selector-blind generic protected-context resume ABI.
 
 ## Active Packet
 
-### M0 T255 S1 — Selector-blind protected-mode substrate source/ABI map
+### M0 T255 S2 — Selector-blind generic protected-context resume ABI
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T255 S1`, Ordinary Mode, single-person dual-role source-first mechanical prerequisite admission. |
-| Admission And Approval | T254 evidence rejects a DPMI implementation before its generic machine substrate exists. The first dependency-ordered successor is admitted under the standing request; S1 is read-only source/ABI mapping. |
-| Objective | Prove the smallest selector-blind protected-mode operations required to admit the retained OpenNT DPMI owner package, and determine whether existing Bochs/mantle mechanics can provide them without a bx-core patch. |
-| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, trace-driven patch, raw guest pointer, LDT policy, or unregistered external-code intrusion. |
-| Reference Baseline | [substrate proposal](etc/operations/proposal-selector-blind-protected-mode-substrate-001.md), [T254 admission map](etc/evidence/m0-t254-s1-dpmi-profile-source-abi-admission-map-001.md), and live [BOP tracker](etc/bop-list.md). |
-| Files And ABI Surface | Read-only adopted bx-core/bx-mantle mechanical code, copied event/result ABIs and retained DPMI source; later typed seam definitions are deferred until this map selects them. |
-| Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule and live-tracker sequencing. |
-| Verification | Existing-call-site inventory; boundary-gap map; negative ownership audit; documented four-rung disposition; documentation governance and `git diff --check`. |
-| Expected Markers | Exact generic operation candidates, owner/call path, rejected broad interfaces, explicit determination of whether a registered core intrusion is required. |
-| Asset Needs | Retained OpenNT DPMI source/headers, adopted Bochs protected-mode code, mantle bridge and current ABI records. |
-| Reporting Requirements | Separate existing internal Bochs capability from typed product-boundary capability; report no inferred DPMI behavior. |
-| Stop Conditions | The only apparent route exposes raw pointers/objects, embeds DPMI policy in machine layers, or requires a core patch without an evidence-backed exception record. |
-| Exit Criteria | A reviewed substrate map supports bounded S2 composition or explicitly rejects it; no source behavior is changed by S1. |
+| Identifier Mode | `M0 T255 S2`, Ordinary Mode, single-person dual-role source-first generic context seam. |
+| Admission And Approval | S1 maps the required native call path and registers `BX-ABI-094` before editing adopted code. The standing request permits this selector-blind mechanical recovery without a separate owner approval. |
+| Objective | Extend the existing generic #UD result path with one versioned, bounded protected-context resume result, applied solely through native Bochs CPU methods. |
+| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, virtual-memory action, LDT policy, guest-linear allocator, raw pointer/object, trace-driven patch, or any unregistered intrusion. |
+| Reference Baseline | [substrate proposal](etc/operations/proposal-selector-blind-protected-mode-substrate-001.md), [S1 call map](etc/evidence/m0-t255-s1-protected-mode-substrate-call-map-001.md), `BX-ABI-094`, and live [BOP tracker](etc/bop-list.md). |
+| Files And ABI Surface | Adopted `src/bx-core/cpu/exception.cc`; existing generic bridge/result headers; a project-owned fixture. Existing v1 outcome ABI remains source and binary compatible. |
+| Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
+| Verification | Disabled/v1 compatibility; real→protected and protected→real native context changes; invalid target rejection; no semantic terms in bx-core/mantle; formal Ninja and `git diff --check`. |
+| Expected Markers | Versioned fixed-width record, generic native `SetCR0`/segment/register/FLAGS application, and focused negative tests. |
+| Asset Needs | Existing generic #UD fixture/build graph and adopted CPU context operations. |
+| Reporting Requirements | Prove no raw Bochs object/pointer or DPMI selector/service logic crosses the boundary; distinguish this mechanical capability from DPMI admission. |
+| Stop Conditions | A required operation needs descriptor-cache copying, arbitrary CR0 write, a provider-specific core branch or a broad memory interface. |
+| Exit Criteria | The v2 result is source-built and tested with v1 compatibility; the protected-memory next question is separately mapped. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
