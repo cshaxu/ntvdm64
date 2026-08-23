@@ -84,6 +84,13 @@ and records direct parity for the original empty `UMBNotify` body.  The fresh
 454-node r16 formal graph is clean; focused DEM search/FCB and DASD fixtures
 pass.  S4 is complete; see [S4 P4 evidence](etc/evidence/m0-t259-s4-p4-final-host-machine-reconciliation-001.md).
 
+**T259 technical closure state:** all admitted S1--S4 exit criteria are now
+met.  The packet remains the formally active record only because the current
+governance verifier requires one admitted `M/T/S` packet at all times; no
+successor candidate has been admitted merely to make this record disappear.
+Its closure history entry is therefore the next governance action when the
+owner selects and admits the next T package.
+
 ## Latest Closure
 
 M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager
