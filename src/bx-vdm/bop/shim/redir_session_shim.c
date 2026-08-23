@@ -5,7 +5,7 @@
 #include <string.h>
 #include <intrin.h>
 
-#include "bx-mantle/bx_ntvdm_physical_irq_v1.h"
+#include "adapter-softpc/bx_ntvdm_physical_irq_v1.h"
 
 /* This is intentionally not a replacement VDMREDIR.DLL.  The provider body
  * was not recovered with OpenNT; the admitted first group supplies the

@@ -8,12 +8,26 @@ OpenNT, DOS, VDM, WOW, BOP, SoftPC/CCPU or Win32 policy.
 
 ## Local intrusion register
 
-Every modification to adopted source is registered here with upstream path and
-identity, exception identifier, necessity and focused verification. The
-existing detailed register remains
-[`adapter-external-intrusion-exceptions.md`](../../docs/etc/research/adapter-external-intrusion-exceptions.md)
-until S3 transfers each applicable record into this component register. No new
-core modification is admitted without a row here.
+Every modification to adopted Bochs source has one exception identifier.  The
+table is the component-local index; the linked central record retains the
+upstream identity, need, exact procedure, boundary and verification evidence.
+No new core modification is admitted without both records.
+
+| Exception | Adopted upstream surface | Narrow purpose |
+| --- | --- | --- |
+| `BX-MEM-024` | `memory/memory.h`, `memory/misc_mem.cc` | SIM-free reset-window RAM initialization. |
+| `BX-UD-001` | `cpu/exception.cc`, `cpu/bx_ntvdm_exception_intercept.h` | Default-off generic copied-state `#UD` hand-off. |
+| `BX-ABI-004`, `BX-ABI-005`, `BX-ABI-006`, `BX-ABI-008`, `BX-ABI-015`, `BX-ABI-018`, `BX-ABI-019`, `BX-ABI-036`, `BX-CORE-084` | `cpu/exception.cc` and its fixed copied-record headers | Selector-blind typed mechanical request/result transport only. |
+| `BX-MEM-007`, `BX-MEM-010`, `BX-MEM-011`, `BX-MEM-012`, `BX-MEM-013`, `BX-MEM-020` | Bochs memory access boundary | Checked, copied ordinary-RAM mechanics with no host pointer export. |
+| `BX-ABI-022`, `BX-ABI-027`, `BX-TRACE-017`, `BX-TRACE-035` | CPU observation/opt-in boundary | Default-off diagnostic and bounded observation controls. |
+| `BX-MACH-023`, `BX-IO-025`, `BX-IO-029`, `BX-IO-030`, `BX-MACH-026`, `BX-MACH-009`, `BX-EXEC-014`, `BX-EXEC-016`, `BX-EXEC-032`, `BX-EXEC-034`, `BX-ABI-053` | Native reset/machine/port composition | Minimal Bochs-native composition; no BOP or OpenNT semantics. |
+| `BX-BUILD-002`, `BX-ABI-028` | Adopted build/source compatibility edge | Toolchain lexical compatibility only. |
+
+The canonical detailed register is
+[`adapter-external-intrusion-exceptions.md`](../../docs/etc/research/adapter-external-intrusion-exceptions.md).
+The S3 rename of `native_port_is_registered` is a mantle-local neutralization
+of a project-specific name; its declaration remains in the adopted `iodev.h`
+surface and is covered by `BX-IO-025`.
 
 The future static library name is `bx-core` and its public include surface is
 only the explicitly declared Bochs mechanical API consumed by `bx-mantle`.

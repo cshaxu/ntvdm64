@@ -1,7 +1,7 @@
 #include "xms_native_session_shim.h"
 
 #include "xms_shim.h"
-#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 
 #include <string.h>
 

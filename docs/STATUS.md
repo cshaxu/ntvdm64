@@ -2,28 +2,28 @@
 
 ## Current Work
 
-**Active: M0 T260 S2** — eight-component source-layout reorganization and
+**Active: M0 T260 S3** — eight-component source-layout reorganization and
 build closure.
 
 ## Active Packet
 
-### M0 T260 S2 — Target roots, registers and public boundaries
+### M0 T260 S3 — bx-core confirmation and bx-mantle purification
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T260 S2`, Ordinary Mode with a single-person dual-role review. T260 is one architecture reorganization package with eight sequential S tasks; it is not eight component tasks. |
-| Admission And Approval | S1 is closed by the complete 3,707-row manifest. Owner-approved T260 requires target roots, README exception registers and public library/include boundaries before source movement. |
-| Objective | Create the eight target component roots and their boundary documentation: `bx-core`, `bx-mantle`, `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-softpc`, `adapter-win32`, and `app`. |
-| Non-goals | No `git mv` of product source; no BOP/provider enablement; no guest, Bochs, host-capability or compatibility-semantic change; no new facade; no Ninja source-list switch. |
-| Reference Baseline | [S1 manifest](etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv), [component proposal](etc/operations/proposal-seven-component-source-layout-reorganization-001.md), current formal manifest, BOP tracker and exception records. |
-| Files And ABI Surface | New target-root README/public-include boundary records only, plus T260 governance evidence. Existing source files remain at current paths. |
-| Applicable Rules | Target dependency direction; four imported-source component exception registers; `bx-mantle` Bochs-only restriction; adapter same-shaped interface rules; transition paths are not precedent. |
-| Verification | README contract review against architecture; negative scan proving no product source moved; target-root ownership/layout scan; documentation governance verification and `git diff --check`. |
-| Expected Markers | Each target root declares responsibility, permitted dependencies, forbidden semantics, source provenance/exception policy, and future library/public-include name. |
-| Asset Needs | S1 manifest, architecture/coding authorities, existing external intrusion register, BOP tracker and formal Ninja manifest. |
-| Reporting Requirements | Record any boundary that cannot be expressed without a source move, every inherited exception-register reference, and unresolved public-header ownership for later S. |
-| Stop Conditions | A root README attempts to redefine semantics, make a source-derived replacement, introduce a reverse dependency, or normalize an existing source edit without an exception record. Pause and re-admit if needed. |
-| Exit Criteria | All eight roots exist with correct README/register contract; the four imported-source owners have explicit exception-register locations; public include/library names and allowed edge directions are declared; no production source is moved. |
+| Identifier Mode | `M0 T260 S3`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S1 owner map and S2 roots are closed. Owner requires `bx-mantle` to remain pure Bochs and all external semantics to leave for their uniquely mapped owner. |
+| Objective | Verify `bx-core` provenance/exception records and split the current mantle so only Bochs-native assembly remains; move foreign VDM/OpenNT/DOS/WOW/Win32 mechanics to `adapter-softpc` as classified by S1. |
+| Non-goals | No Bochs algorithm change; no BOP/provider implementation; no Win32 capability recovery; no change to source-visible historical semantics; no formal Ninja switch until S8. |
+| Reference Baseline | S1 manifest, `bx-core/README.md`, `bx-mantle/README.md`, existing Bochs intrusion register, current formal module closure and architecture boundary. |
+| Files And ABI Surface | `src/bx-core`, `src/bx-mantle`, `src/adapter-softpc`; their README exception records and mantle-to-adapter include dependencies. |
+| Applicable Rules | bx-core minimal intrusion register; bx-mantle contains no OpenNT/DOS/VDM/WOW/Win32 semantics; adapter-softpc preserves same-shaped SoftPC/CCPU mechanical interfaces. |
+| Verification | File/content owner scan; `git diff --check`; focused compile/fixture inventory only after the moved headers are repaired; documentation governance verification. |
+| Expected Markers | Every retained mantle file is Bochs-only; every moved file retains Git history and has an adapter-softpc owner; bx-core exception inventory is reconciled. |
+| Asset Needs | S1 manifest, current Bochs source and exception ledger, formal module manifest and existing mantle fixtures. |
+| Reporting Requirements | Record retained/moved/removed disposition per mantle file and every inherited bx-core exception, with no semantic claim beyond the move. |
+| Stop Conditions | A candidate mantle file contains inseparable Bochs plus external semantics, requires a Bochs algorithm edit, or introduces an adapter→app/BOP reverse dependency. Pause for a targeted split decision. |
+| Exit Criteria | Mantle scan has no external semantic ownership; core exception register is complete; moved files live under adapter-softpc with repaired includes; source-only/focused verification proves the new boundary. |
 | Original Owner Request | “应使用 1 个 T 任务，例如：M0 T260：七/八组件源码布局重整与构建闭合……这个 T 应拆成约 8 个 S。” |
 | Similar-Issue Sweep | Headers, fixtures, generated Ninja input, include roots, legacy v1/test-only code, OpenNT source provenance and the shared mapping-manager placement. |
 
@@ -40,10 +40,10 @@ build closure.
 | S7 | `adapter-softpc` same-shaped SoftPC/CCPU boundary and shared-mapping-manager migration. |
 | S8 | Tests, formal Ninja graph, legacy-path exit and whole-package acceptance. |
 
-**Current progress:** S1 is closed. Its reproducible manifest covers all 3,534
-current `src/` files in 3,715 rows with zero missing paths, duplicate paths or
-unresolved owners; 2,332 non-product OpenNT inputs are explicitly destined for
-`refs/opennt`. No source has moved. See the
+**Current progress:** S1 is closed. The current reproducible manifest covers
+all 3,542 `src/` files in 3,735 rows with zero missing paths, duplicate paths
+or unresolved owners; 2,332 non-product OpenNT inputs are explicitly destined
+for `refs/opennt`. See the
 [baseline record](etc/operations/m0-t260-s1-owner-manifest-baseline-001.md).
 
 S2 P1 has created all eight target-root README contracts. They declare the
@@ -51,6 +51,13 @@ exception registers for `bx-core`, `opennt-guest`, `opennt-bop` and
 `opennt-host`; restrict mantle to Bochs-only mechanics; and declare each future
 library/public-include boundary. No product source or formal Ninja input has
 moved.
+
+S3 has moved all 42 former `bx-mantle/bx_ntvdm_*` bridge files to
+`adapter-softpc` with Git history, repaired product include ownership, and
+made the remaining mantle source scan free of external product semantics.
+The local bx-core exception index now points to every active exception family.
+The one coherent formal Ninja/fixture path switch remains S8 work; see the
+[S3 evidence](etc/evidence/m0-t260-s3-mantle-purification-001.md).
 
 ## Previous Active Packet — M0 T259
 

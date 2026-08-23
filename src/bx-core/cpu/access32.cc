@@ -31,7 +31,7 @@
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-#include "bx-mantle/bx_ntvdm_segment_access_observation_v1.h"
+#include "adapter-softpc/bx_ntvdm_segment_access_observation_v1.h"
 
 static void bx_ntvdm_observe_virtual_word_failure(unsigned segment_index,
   const bx_segment_reg_t *segment, Bit32u offset, Bit32u branch_kind)

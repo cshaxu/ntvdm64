@@ -1,7 +1,7 @@
 #ifndef BX_NTVDM_BOP_SHIM_XMS_NATIVE_SESSION_SHIM_H
 #define BX_NTVDM_BOP_SHIM_XMS_NATIVE_SESSION_SHIM_H
 
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 typedef struct bx_ntvdm_xms_native_session {
     uint32_t magic, abi_version, struct_bytes, bound;

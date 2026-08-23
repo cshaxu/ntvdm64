@@ -710,6 +710,21 @@ refs/bochs/ltdl.h	header	reached-include	bx-core	pinned Bochs 2.6 reference head
 refs/bochs/osdep.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
 refs/bochs/param_names.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
 refs/bochs/plugin.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+src/adapter-softpc/bx_ntvdm_a20_capability_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_first_fault_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_generic_ud_bridge.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_instruction_history.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_interrupt_return_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_ivt_watch_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_machine_stage_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_mechanical_action_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_ordinary_ram_reservation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_physical_irq_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_physical_write_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_port_action_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_protected_range_action_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_segment_access_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
+src/adapter-softpc/bx_ntvdm_software_interrupt_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record
 src/bx-core/cpu/apic.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
 src/bx-core/cpu/cpu.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
 src/bx-core/cpu/cpudb/amd_k6_2_chomper.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
@@ -756,27 +771,6 @@ src/bx-core/fpu/softfloatx80.h	header	reached-include	bx-core	adopted Bochs 2.6	
 src/bx-core/fpu/status_w.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
 src/bx-core/fpu/tag_w.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
 src/bx-core/memory/memory.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
-src/bx-mantle/bx_ntvdm_a20_capability_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_cancellation_controller_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_finite_run.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_first_fault_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_generic_ud_bridge.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_headless_8042.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_instruction_history.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_interrupt_return_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_ivt_watch_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_machine_engine_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_machine_stage_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_mechanical_action_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_minimal_machine.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_minimal_sim.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_ordinary_ram_reservation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_physical_irq_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_physical_write_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_port_action_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_protected_range_action_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_segment_access_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
-src/bx-mantle/bx_ntvdm_software_interrupt_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
 src/bx-mantle/keyboard.h	header	reached-include	bx-mantle	project-authored Bochs-only assembly	retain	S3	candidate native Bochs-only source; S3 semantic scan required
 src/bx-mantle/paramtree.h	header	reached-include	bx-mantle	project-authored Bochs-only assembly	retain	S3	candidate native Bochs-only source; S3 semantic scan required
 src/bx-mantle/pc_system.h	header	reached-include	bx-mantle	project-authored Bochs-only assembly	retain	S3	candidate native Bochs-only source; S3 semantic scan required
@@ -3302,6 +3296,33 @@ src/opennt/sdktools/masm/ui.c	nonformal-evidence-input	OpenNT source import	refs
 src/opennt/sdktools/masm/version.c	nonformal-evidence-input	OpenNT source import	refs/opennt	unreached imported OpenNT source	git mv to evidence input	S8	not a declared product input; retain immutable source provenance outside src/
 src/opennt/sdktools/masm/version.inc	nonformal-evidence-input	OpenNT source import	refs/opennt	unreached imported OpenNT source	git mv to evidence input	S8	not a declared product input; retain immutable source provenance outside src/
 src/opennt/SOURCE-MANIFEST.json	nonformal-evidence-input	OpenNT source import	refs/opennt	unreached imported OpenNT source	git mv to evidence input	S8	not a declared product input; retain immutable source provenance outside src/
+src/adapter-softpc/bx_ntvdm_a20_capability_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_cancellation_controller_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_cancellation_controller_v1.h	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_finite_run.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_finite_run.h	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_first_fault_observation_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_generic_ud_bridge.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_headless_8042.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_headless_8042.h	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_instruction_history.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_interrupt_return_observation_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_ivt_watch_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_machine_engine_v1.c	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_machine_engine_v1.h	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_machine_stage_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_mechanical_action_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_minimal_machine.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_minimal_machine.h	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_minimal_sim.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_minimal_sim.h	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_ordinary_ram_reservation_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_physical_irq_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_physical_write_observation_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_port_action_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_protected_range_action_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_segment_access_observation_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
+src/adapter-softpc/bx_ntvdm_software_interrupt_observation_v1.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
 src/adapter-softpc/README.md	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored SoftPC adapter record	retain	S2	target component root record; not present in formal module graph
 src/adapter-win32/README.md	nonformal-legacy-input	legacy source tree	adapter-win32	project-authored Win32 adapter record	retain	S2	target component root record; not present in formal module graph
 src/app/README.md	nonformal-legacy-input	legacy source tree	app	project-authored app component record	retain	S2	target component root record; not present in formal module graph
@@ -3366,7 +3387,6 @@ src/bx-core/fpu/todo	nonformal-legacy-input	legacy source tree	bx-core	adopted B
 src/bx-core/memory/Makefile	nonformal-legacy-input	legacy source tree	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required; not present in formal module graph
 src/bx-core/memory/Makefile.in	nonformal-legacy-input	legacy source tree	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required; not present in formal module graph
 src/bx-core/README.md	nonformal-legacy-input	legacy source tree	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required; not present in formal module graph
-src/bx-mantle/bx_ntvdm_instruction_history.cc	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only; not present in formal module graph
 src/bx-mantle/README.md	nonformal-legacy-input	legacy source tree	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only; not present in formal module graph
 src/bx-vdm/bop/opennt/command/cmd.c	nonformal-legacy-input	legacy source tree	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror; not present in formal module graph
 src/bx-vdm/bop/opennt/command/cmd.h	nonformal-legacy-input	legacy source tree	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror; not present in formal module graph

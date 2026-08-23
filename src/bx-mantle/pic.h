@@ -96,7 +96,7 @@ private:
 };
 
 // BX-MANTLE-082: mantle-private fixed PIC lifecycle; no plugin registry.
-bx_pic_c *bx_ntvdm_mantle_pic_create_v1(void);
-void bx_ntvdm_mantle_pic_destroy_v1(bx_pic_c *pic);
+bx_pic_c *bx_mantle_pic_create(void);
+void bx_mantle_pic_destroy(bx_pic_c *pic);
 
 #endif

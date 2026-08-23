@@ -69,7 +69,7 @@ bx_ntvdm_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
   // BX-MANTLE-082-BEGIN
   // Fixed native 8259 assembly: no plugin registry, device discovery or
   // state-registration path is entered.
-  pic = bx_ntvdm_mantle_pic_create_v1();
+  pic = bx_mantle_pic_create();
   if (pic == NULL) {
     bx_devices.cleanup_empty_port_space();
     port_space_owned = 0;
@@ -134,7 +134,7 @@ bx_ntvdm_minimal_machine_status bx_ntvdm_minimal_machine_c::cleanup(void)
       return BX_NTVDM_MINIMAL_MACHINE_PIC_CLEANUP_FAILED;
     }
     bx_devices.pluginPicDevice = &bx_devices.stubPic;
-    bx_ntvdm_mantle_pic_destroy_v1(pic);
+    bx_mantle_pic_destroy(pic);
     pic = NULL;
     pic_owned = 0;
   }

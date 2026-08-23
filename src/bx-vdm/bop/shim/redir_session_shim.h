@@ -11,7 +11,7 @@
  */
 
 #include "demhndl_shim.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_REDIR_NATIVE_SESSION_MAGIC 0x42585244u
 #define BX_NTVDM_REDIR_NATIVE_SESSION_VERSION 1u

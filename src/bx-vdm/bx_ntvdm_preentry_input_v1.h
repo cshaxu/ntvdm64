@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 
 #define BX_NTVDM_PREENTRY_INPUT_V1_MAGIC 0x42585049u
 #define BX_NTVDM_PREENTRY_INPUT_V1_VERSION 1u

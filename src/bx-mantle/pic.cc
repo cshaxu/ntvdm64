@@ -30,14 +30,14 @@ bx_pic_c *thePic = NULL;
 // The original plugin wrapper owns discovery and registry side effects.  The
 // finite mantle instead owns a single fixed PIC and, for BX_USE_PIC_SMF,
 // establishes the original translation unit's private instance before init().
-bx_pic_c *bx_ntvdm_mantle_pic_create_v1(void)
+bx_pic_c *bx_mantle_pic_create(void)
 {
   if (thePic != NULL) return NULL;
   thePic = new bx_pic_c();
   return thePic;
 }
 
-void bx_ntvdm_mantle_pic_destroy_v1(bx_pic_c *pic)
+void bx_mantle_pic_destroy(bx_pic_c *pic)
 {
   if (pic != thePic) return;
   delete thePic;

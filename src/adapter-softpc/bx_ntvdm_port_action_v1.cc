@@ -10,7 +10,7 @@ extern "C" void bx_ntvdm_port_action_v1_set_lifecycle_active(uint32_t active)
 { bx_ntvdm_port_action_v1_lifecycle_active = active == 1u ? 1u : 0u; }
 static int bx_ntvdm_port_action_v1_registered(const struct bx_ntvdm_port_action_v1 *action)
 {
-  return bx_devices.ntdos64_port_is_registered(action->port,
+  return bx_devices.native_port_is_registered(action->port,
     action->kind == BX_NTVDM_PORT_ACTION_V1_WRITE8);
 }
 extern "C" int bx_ntvdm_mantle_execute_port_action_v1(struct bx_ntvdm_port_action_v1 *action)

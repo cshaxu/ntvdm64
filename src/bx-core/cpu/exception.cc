@@ -34,11 +34,11 @@
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
-#include "bx-mantle/bx_ntvdm_first_fault_observation_v1.h"
+#include "adapter-softpc/bx_ntvdm_first_fault_observation_v1.h"
 #endif
 
 

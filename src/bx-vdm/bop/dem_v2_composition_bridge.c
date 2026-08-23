@@ -28,7 +28,7 @@
 #include "bop/observation/bx_ntvdm_dem_open_observation_v1.h"
 #include "bop/observation/bx_ntvdm_ntdos_exec_entry_observation_v1.h"
 #include "bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h"
-#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 
 /* This adapter-owned observation calls the existing opaque, checked RAM
  * mechanism.  It neither changes RAM nor gives the mantle BOP vocabulary. */

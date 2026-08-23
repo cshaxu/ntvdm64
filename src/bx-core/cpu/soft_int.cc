@@ -29,7 +29,7 @@
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
-#include "bx-mantle/bx_ntvdm_software_interrupt_observation_v1.h"
+#include "adapter-softpc/bx_ntvdm_software_interrupt_observation_v1.h"
 #define BX_NTVDM_RECORD_SOFTWARE_INTERRUPT(vector_value) do { \
   if (BX_CPU_THIS_PTR real_mode() || BX_CPU_THIS_PTR v8086_mode()) { \
     struct bx_ntvdm_software_interrupt_observation_v1_record record; \

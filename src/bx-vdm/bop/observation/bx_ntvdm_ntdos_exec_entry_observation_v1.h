@@ -5,7 +5,7 @@
 
 #include "bx_ntvdm_cpu_state_abi.h"
 #include "bx_ntvdm_ntdos_exec_observation_v1.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_NTDOS_EXEC_ENTRY_OBSERVATION_V1_MAGIC UINT32_C(0x42584545)
 #define BX_NTVDM_NTDOS_EXEC_ENTRY_OBSERVATION_V1_VERSION UINT32_C(1)

@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 #include "bx_ntvdm_cpu_state_abi.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_COMMAND_BOOTSTRAP_OBSERVATION_V1_MAGIC UINT32_C(0x42584342)
 #define BX_NTVDM_COMMAND_BOOTSTRAP_OBSERVATION_V1_VERSION UINT32_C(1)

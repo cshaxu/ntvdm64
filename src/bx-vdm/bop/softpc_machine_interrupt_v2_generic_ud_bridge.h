@@ -1,7 +1,7 @@
 #ifndef BX_NTVDM_SOFTPC_MACHINE_INTERRUPT_V2_GENERIC_UD_BRIDGE_H
 #define BX_NTVDM_SOFTPC_MACHINE_INTERRUPT_V2_GENERIC_UD_BRIDGE_H
 
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 /*
  * Adapter-owned ingress for the historical SoftPC BOP 02/06 interrupt

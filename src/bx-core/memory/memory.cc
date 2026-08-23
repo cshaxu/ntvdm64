@@ -41,7 +41,7 @@
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#include "bx-mantle/bx_ntvdm_physical_write_observation_v1.h"
+#include "adapter-softpc/bx_ntvdm_physical_write_observation_v1.h"
 #endif
 
 void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned len, void *data)

@@ -29,7 +29,7 @@
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#include "bx-mantle/bx_ntvdm_physical_write_observation_v1.h"
+#include "adapter-softpc/bx_ntvdm_physical_write_observation_v1.h"
 #endif
 
 // <TAG-DEFINES-DECODE-START>

@@ -1,7 +1,7 @@
 #include "dpmi_xmem_record_adapter.h"
 
-#include "bx-mantle/bx_ntvdm_ordinary_ram_reservation_v1.h"
-#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_ordinary_ram_reservation_v1.h"
+#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 
 #include <string.h>
 

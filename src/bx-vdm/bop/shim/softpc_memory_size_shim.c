@@ -1,6 +1,6 @@
 #include "softpc_memory_size_shim.h"
 
-#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 
 struct bx_ntvdm_softpc_memory_size_call {
     uint16_t ax;

@@ -43,6 +43,14 @@ paths and zero unresolved owner markers. Every formal source, reached header,
 fixture, target, build input, guest candidate and non-formal legacy/evidence
 input has one target owner and migration disposition.
 
-S1 is closed. It does not claim that a later S has performed any `git mv`,
+S1 is closed. It did not claim that a later S had performed any `git mv`,
 created a component root, or made a source/build closure valid under the new
 paths.
+
+## Live manifest refresh
+
+The manifest is a live generated input to T260.  After S2 root creation and
+S3's 42 history-preserving moves, the refresh contains 3,735 rows for 3,542
+`src/` files, still with zero missing paths, duplicate paths or unresolved
+owners.  The changed count is a layout update, not a change to the S1
+classification rule or a build-closure claim.

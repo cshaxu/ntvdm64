@@ -1,7 +1,7 @@
 #include "xms_shim.h"
 
-#include "bx-mantle/bx_ntvdm_a20_capability_v1.h"
-#include "bx-mantle/bx_ntvdm_ivt_watch_v1.h"
+#include "adapter-softpc/bx_ntvdm_a20_capability_v1.h"
+#include "adapter-softpc/bx_ntvdm_ivt_watch_v1.h"
 #include "softpc_int15_watch_shim.h"
 
 #include <string.h>

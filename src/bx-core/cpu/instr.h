@@ -35,7 +35,7 @@ typedef void BX_INSF_TYPE;
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
-#include "bx-mantle/bx_ntvdm_instruction_history.h"
+#include "adapter-softpc/bx_ntvdm_instruction_history.h"
 #define BX_NTVDM_RECORD_INSTRUCTION_HISTORY() do { \
   bx_ntvdm_instruction_history_record_v1 bx_ntvdm_history_record; \
   bx_ntvdm_history_record.version = BX_NTVDM_INSTRUCTION_HISTORY_V1_VERSION; \

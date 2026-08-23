@@ -2,7 +2,7 @@
 #define BX_NTVDM_NTIO_PREENTRY_V1_H
 
 #include "byob_image.h"
-#include "bx-mantle/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/bx_ntvdm_finite_run.h"
 #include "bx_ntvdm_preentry_input_v1.h"
 
 /* Adapter-owned conversion of an already identity-checked NTIO image into

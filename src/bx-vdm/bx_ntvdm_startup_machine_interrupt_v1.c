@@ -2,8 +2,8 @@
 
 #include <string.h>
 
-#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
-#include "bx-mantle/bx_ntvdm_port_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_port_action_v1.h"
 #include "opennt_int06_provider_v1.h"
 
 static int is_real_machine_bop(const struct bx_ntvdm_generic_ud_event_v1 *event,
