@@ -2,31 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T245 S22** — DOS-safe bootstrap alias admission.
+**Active: M0 T246 S1** — SoftPC machine interrupt owner-package map.
 
 ## Active Packet
 
-### M0 T245 S22 — DOS-safe bootstrap alias admission
+### M0 T246 S1 — SoftPC machine interrupt owner-package map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S22`, Ordinary Mode, single-person dual-role CLI/startup admission recovery. |
-| Admission And Approval | S21 proves `CreateFileOem` now follows the original source but the guest has already reduced `REPOS.HOBBY` to `REPOS.HOB`; the actual host volume supplies no 8.3 alias. |
-| Objective | Admit the real source-built DOS root under a session-owned, DOS-representable host spelling when the existing host spelling cannot fit the original guest `SHELL=` contract. |
-| Non-goals | No guest-path rewrite, file copy, virtual boot volume, DEM/BOP dispatch change, Bochs change, or mutation profile. |
-| Reference Baseline | Original `cmdconf.c → SHELL=` producer and `sysconf.asm/sysinit2.asm:commnd` fixed guest storage; S21 native path evidence. |
-| Files And ABI Surface | CLI admission only; the engine receives an existing host directory spelling and the original OpenNT DEM/COMMAND source remains unchanged. |
-| Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Focused session-alias fixture; fresh formal Ninja link; one bounded source-built native Direct run with existing `demOpen`/`CreateFileOem` observation. |
-| Expected Markers | A temporary alias opens the original target without copying it and is removed without touching the target; native permanent `commnd` opens with CF clear and advances beyond its former `comerr`. |
-| Asset Needs | Existing sources, bundles and formal Ninja generator; no new external asset. |
-| Reporting Requirements | State exact retained original function structure, the named NT4-only helper replacement, fixture outcome, native observed outcome, and any remaining owner. |
-| Stop Conditions | A DOS-safe session alias cannot be supplied through public Win32 APIs, or recovery requires guest modification, a virtual volume, DEM/BOP change, or Bochs change. |
-| Exit Criteria | The real root is admitted under a bounded DOS-safe spelling, cleanup is local to the session link, and the permanent-command native outcome is directly observed. |
-| Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
-| Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
+| Identifier Mode | `M0 T246 S1`, Ordinary Mode, single-person dual-role source/ABI/lifecycle audit. |
+| Admission And Approval | T245 now reaches legacy SoftPC `BOP 06` after permanent source-built `COMMAND.COM` open. The active generic ingress declines it repeatedly, while a bounded existing source/provider route for shared `02/06` is present elsewhere in the tree. |
+| Objective | Establish the complete original-owner route and activation gap for the shared SoftPC `02/06` interrupt package before implementation. |
+| Non-goals | No trace-led COMMAND/DEM patch, full BIOS/device enablement, CCPU/CSR reconstruction, DOS semantics in mantle/core, or Bochs intrusion. |
+| Reference Baseline | OpenNT SoftPC `bios.c`, `illegal_op_int`, existing `opennt_int06_provider_v1`, generic ingress and `startup_machine_interrupt_v1`; `BOP-DEPENDENCY-114`. |
+| Files And ABI Surface | Read-only in S1; only active/legacy route mapping and current fixed-width state, checked-RAM and port-action contracts. |
+| Applicable Rules | Source-first recovery, selector-blind machine boundary, complete owner-package planning before trace validation, and MTSP governance. |
+| Verification | Static call/ABI map plus existing fixture/build membership audit; no new native behavior claim. |
+| Expected Markers | Exact active-vs-dead route, original memory/port state effects, and a yes/no evidence decision on whether existing mechanics suffice. |
+| Asset Needs | Existing imported OpenNT/SoftPC source, current formal manifest and fixtures; no external asset. |
+| Reporting Requirements | Name every source file, current composition hook, effect/failure edge and future owner; distinguish source evidence from live wiring. |
+| Stop Conditions | The only route needs unregistered Bochs semantic change or inventing non-source behavior. |
+| Exit Criteria | A package-level map supports or rejects S2 without treating `06` as a trace-led leaf patch. |
+| Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
+| Similar-Issue Sweep | `BOP-DEPENDENCY-091/102/104..114`, machine composition gates, original BOP `02`, source `illegal_op_int`, reset/RAM and default port-space lifecycle. |
 
 ## Latest Closure
+
+M0 T245 closes source-built permanent-command bootstrap continuity through the
+first distinct post-COMMAND machine edge. It fixes the actual Direct host path
+admission without guest rewrite/copy or Bochs change, then transfers the
+independent BOP-06 machine owner to M0 T246; see [T245 closure](history/m0-t245-closure-20260822.md).
 
 M0 T245 S22 closes the session-scoped DOS-safe startup alias.  The CLI first
 retains a suitable host short spelling, otherwise creates only a temporary
