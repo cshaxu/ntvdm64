@@ -2,38 +2,42 @@
 
 ## Current Work
 
-**Active: M0 T249 S4** — Source-built guest low-memory provenance reconciliation and T249 closure.
+**Active: M0 T251 S1** — Redirector owner source/ABI/profile inventory.
 
 ## Active Packet
 
-### M0 T249 S4 — Source-built guest low-memory provenance reconciliation and T249 closure
+### M0 T251 S1 — Redirector owner source/ABI/profile inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T249 S4`, Ordinary Mode, single-person dual-role evidence reconciliation and closure. |
-| Admission And Approval | T249's approved proposal schedules reconciliation after S3. S3 attributes the first byte mutation to original NTDOS `DOSCODE`; no further source or Bochs change is admitted. |
-| Objective | Reconcile `BOP-DEPENDENCY-115`, original source/image facts and the physical-write result; prepare the T closure and precise next owner boundary. |
-| Non-goals | No BOP provider change, guest PSP/PDB logic, device/firmware enablement, additional diagnostics, target-pointer fabrication or arbitrary guest trace. |
-| Reference Baseline | [T249 S1 seam audit](etc/evidence/m0-t249-s1-low-memory-provenance-seam-audit-001.md), [T249 S3 closure](etc/evidence/m0-t249-s3-physical-write-provenance-closure-001.md), `BOP-DEPENDENCY-115`. |
-| Files And ABI Surface | Tracker, T249 closure history, STATUS, QUEUE and supporting evidence only. |
-| Applicable Rules | Source-first ladder, selector-blind machine boundary, no trace-led BOP patch and evidence/closure discipline. |
-| Verification | Re-read the tracker and original `NTDOS.MAP`; documentation governance and `git diff --check`. |
-| Expected Markers | Original NTDOS runtime ownership of the write; explicit exclusion of Bochs/BOP/adapter repair; one concrete next source-built guest control-flow question. |
-| Asset Needs | S3 native output, original primary `NTDOS.MAP`, T247/T248 evidence and T249 proposal. |
-| Reporting Requirements | State attribution confidence and exact remaining limitation; do not overclaim a symbol-level source label absent from the original map. |
-| Stop Conditions | Any proposed repair needs a new guest semantic implementation, machine capability, BOP service or extra Bochs diagnostic. |
-| Exit Criteria | `BOP-DEPENDENCY-115` is updated, a closure names the next owner question, and no unreviewed T249 changes remain. |
-| Original Owner Request | Continue ordinary recovery without repeated approval; preserve original OpenNT source ownership and Bochs selector blindness. |
-| Similar-Issue Sweep | `BOP-DEPENDENCY-093/095/098/115`, NTIO `sysinit*.asm`, NTDOS `DOSCODE`, and prior post-EXEC provenance records. |
+| Identifier Mode | `M0 T251 S1`, Ordinary Mode, single-person dual-role component-first source/ABI audit. |
+| Admission And Approval | Owner delegated queue ordering and next-task admission.  T250 has closed the preceding low-memory target premise; the ordered Redirector candidate is now admitted. |
+| Objective | Map all `57:00..31` Redirector entries and direct lifecycle dependencies before selecting any capability profile or implementation seam. |
+| Non-goals | No leaf BOP implementation, host network/pipe activation, second COMMAND broker, guest HANDLE exposure, machine change, or trace-directed scope selection. |
+| Reference Baseline | [Redirector proposal](etc/operations/proposal-opennt-redirector-owner-package-completion-001.md), [T251 plan](etc/operations/m0-t251-redirector-source-abi-profile-map-plan-001.md), live BOP tracker, completed DEM/COMMAND source mirrors. |
+| Files And ABI Surface | `src/opennt` Redirector/VDMREDIR source, relevant existing bx-vdm routes, tracker, evidence and governance documents only. |
+| Applicable Rules | Source-first recovery ladder, OpenNT owner-package sequencing, opaque host-handle rule, bx-core/bx-mantle selector blindness and no trace-led BOP patching. |
+| Verification | Source and dispatcher/table inventory; route search; tracker cardinality review; documentation governance and `git diff --check`. |
+| Expected Markers | One source/ABI/failure record for every `57:xx` entry and each direct non-BOP dependency; no claimed capability without its owner map. |
+| Asset Needs | OpenNT `VDMREDIR`/dispatcher sources, existing proposals, tracker and any current bx-vdm ingress code. |
+| Reporting Requirements | Separate directly composable source, smallest-shim candidate, unavailable/deferred historical dependency, and cross-owner prerequisite. |
+| Stop Conditions | Any implementation would require a new capability profile, raw host-handle guest ABI, an invented child broker, or Bochs/guest semantic change before the inventory is complete. |
+| Exit Criteria | Complete 57-family owner/source/ABI/failure map with an explicit recommendation for the next S and no trace-derived leaf selection. |
+| Original Owner Request | Continue ordinary work without repeated approval; recover OpenNT source by whole owner package and preserve hard component boundaries. |
+| Similar-Issue Sweep | `50:47/48`, `54:06`, COMMAND standard-stream/session records, VDD/top-level events, named pipe/network APIs and the entire current `57:xx` family. |
 
 ## Latest Closure
 
-M0 T249 S3 closes low-memory writer provenance.  The initial `0x0A87 <- FF`
+M0 T250 closes the apparent low-memory far-target question.  `0x0A87` is
+original relocated `DOSDATA:OPENBUF+0x0F`, not an NTDOS code entry; the
+subsequent far call is accidental execution of uninitialised guest storage.
+It selects no BOP, Bochs or machine repair.  See the
+[T250 closure](history/m0-t250-closure-20260823.md).
+
+M0 T249 closes low-memory writer provenance.  The initial `0x0A87 <- FF`
 mutation is a source-built original NTDOS `DOSCODE` CPU write at
 `CS:base:EIP=9386:93860:7424`, not a Bochs, adapter or BOP-provider write.
-The remaining owner question is original guest far-target publication and
-control flow, for M0 T249 S4 reconciliation.  See the
-[T249 closure draft](history/m0-t249-closure-20260823.md).
+See the [T249 closure](history/m0-t249-closure-20260823.md).
 
 M0 T248 closes selector-blind post-EXEC real-mode continuity attribution. The
 source-built checkpoint reaches accepted `50:36` and `50:1E`, then makes a

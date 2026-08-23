@@ -8,8 +8,8 @@ unavailable fallback.
 
 ## Queue relationship
 
-This is the admission plan for queue candidate 4, **OpenNT Redirector
-owner-package recovery**.  It may be admitted only after its whole `57:xx`
+This is the admission plan for the unnumbered queue candidate **OpenNT
+Redirector owner-package recovery**.  It may be admitted only after its whole `57:xx`
 and related dependency slice has been frozen; it may not turn local DEM access
 or the existing COMMAND child record into an implicit redirector.
 ## Boundary
