@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2165 |
 | --- | --- |
-| Generated UTC | 2026-08-23T14:46:50Z |
+| Generated UTC | 2026-08-23T14:47:53Z |
 
 ## Entries
 
@@ -168,7 +168,7 @@ content-divergent entries.
 | etc/evidence/m0-t257-s3-native-guest-ldt-fixture-004.md | indexed supporting material | 99e4f6720c0b7bd588a147c423976b0e0408ec3c55d1e8c47c34e254f55a1fdd |
 | etc/evidence/m0-t257-s3-opennt-dpmi32-source-composition-002.md | indexed supporting material | c432c4854ab1ef5397ca81333efca1ea1d01ddd48267a8b8a3264b18547e5739 |
 | etc/evidence/m0-t257-s3-opennt-dpmiselr-source-composition-005.md | indexed supporting material | 5fa95d710ce7122b3d4a89f16584bb6dbe686a9d9fe338a0d9c0dfdd0f6eef70 |
-| etc/evidence/m0-t257-s4-dosx-protected-frame-map-001.md | indexed supporting material | 75b3cd642331a57d26554e520619ac6372eb3b45edb951610b3d587ba461ed99 |
+| etc/evidence/m0-t257-s4-dosx-protected-frame-map-001.md | indexed supporting material | 903d02c2edbac8a57d9f1c63a2f0b85113464b698fedebdfad9a7331de45a65a |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |

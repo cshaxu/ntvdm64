@@ -6,9 +6,12 @@ This is a source/ABI/failure map, not activation of a `53:xx` route.  It
 closes the protected interrupt, fault and IRET *admission* question for the
 selected non-WOW i386 DOSX profile.  The original frame family cannot yet be
 composed safely through the current generic ABI: it requires one atomic,
-source-shaped protected CPU/frame transaction, while the existing result ABI
-can update only low GPRs, selector values and CF/ZF.  It cannot publish the
-coupled EIP/ESP/EFLAGS/SS state used below.
+source-shaped protected CPU/frame transaction. The ordinary BOP result ABI
+can update only low GPRs, selector values and CF/ZF. The existing wider
+`generic_ud_outcome_v2` can also carry 32-bit GPRs, segments, a restricted
+full EFLAGS mask and RIP, but is a #UD-only sequential context-result path:
+it cannot validate and commit the coupled guest-frame byte writes with that
+CPU state as one transaction.
 
 Consequently no `53:02`, `53:0A`, `53:0C`, `53:0D`, `53:11`, or `53:14..18`
 ingress is admitted in S4.  Native Bochs remains the exclusive architectural
@@ -49,12 +52,14 @@ separately designed, tested and registered; it must not add DPMI policy to
 ## Minimum seam decision
 
 The existing `bx_ntvdm_protected_range_action_v1` is sufficient only for a
-bounded, selector-blind byte copy.  The existing `bx_ntvdm_cpu_result_v2`
-contains a 16-bit GPR/selector delta and only CF/ZF flag writes.  Neither can
-atomically carry the 16/32-bit frame fields above: EIP, ESP, full EFLAGS, SS,
-CS, nesting outcome and the matching checked guest-memory writes.  Combining
-multiple existing calls would expose an observable partially-restored guest
-state on validation failure.
+bounded, selector-blind byte copy. `bx_ntvdm_cpu_result_v2` contains a 16-bit
+GPR/selector delta and only CF/ZF flag writes. The pre-existing
+`generic_ud_outcome_v2` can express the larger CPU subset, but is restricted
+to the #UD bridge and applies fields independently; it has no bounded,
+all-or-nothing guest-frame write set. None of these forms can atomically bind
+the 16/32-bit CPU frame fields to the matching checked guest-memory writes.
+Combining them would expose an observable partially-restored guest state on
+validation failure.
 
 Therefore S4 rejects a speculative “frame-session shim” implementation.  The
 future minimum must instead be one versioned, selector-blind typed request
@@ -70,8 +75,9 @@ The review rejects three tempting but invalid shortcuts:
 
 1. Treating `53:0C/0D` as successful no-ops would claim that IRET hooks are
    enabled without the frame contract that makes them safe.
-2. Reusing the exception interception ABI would turn a CPU-exception callback
-   into an OpenNT DPMI dispatcher and still lacks full state restoration.
+2. Reusing either the exception ABI or `generic_ud_outcome_v2` directly would
+   turn a CPU-exception/#UD callback into an OpenNT DPMI dispatcher and still
+   lacks the matching all-or-nothing guest-frame write set.
 3. Publishing the old `VdmTib.PmStackInfo` pointer or `Ldt[]` address would
    leak host pointers into guest-visible ABI and fail on x64.
 
