@@ -2,31 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T246 S4** — SoftPC machine interrupt closure and transfer.
+**No active numeric T.** M0 T246 is closed; the next candidate requires owner admission from `QUEUE.md`.
 
 ## Active Packet
 
-### M0 T246 S4 — SoftPC machine interrupt closure and transfer
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T246 S2`, Ordinary Mode, single-person dual-role existing-route recovery. |
-| Admission And Approval | S3 formal regression and bounded native observation prove that the active registry accepts `06` and reaches a later distinct owner. |
-| Objective | Close the source-shaped `02/06` machine sub-contract and transfer only the later native continuity edge. |
-| Non-goals | No Bochs change, direct legacy handler callback, full PIC/device enablement, DOS semantics, or product-shell diagnostic/UI reconstruction. |
-| Reference Baseline | S1 owner map, S2 active-ingress closure and S3 native checkpoint. |
-| Files And ABI Surface | No new code or runtime ABI; tracker/history/evidence only. |
-| Applicable Rules | Source-first recovery, selector-blind machine boundary and one package-level provider route. |
-| Verification | Governance consistency, tracker disposition and checked clean worktree after closure. |
-| Expected Markers | Source package completion is separated from later repeated calls and unexpected-loop terminal; no continuity claim or core/mantle change. |
-| Asset Needs | Existing sources and Ninja graph; no external asset. |
-| Reporting Requirements | Name retained source operations, conversion ABI and all rejected legacy paths. |
-| Stop Conditions | Existing typed actions fail to express a required source operation, which would require a separate Bochs exception decision. |
-| Exit Criteria | History closes T246 and records its transfer to future native-continuity work. |
-| Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
-| Similar-Issue Sweep | `BOP-DEPENDENCY-091/102/104..114`, machine composition gates, original BOP `02`, source `illegal_op_int`, reset/RAM and default port-space lifecycle. |
-
 ## Latest Closure
+
+M0 T246 closes the shared SoftPC `02/06` machine interrupt package. Its
+adapter-only active route preserves the source-derived stack/PIC/BDA mechanics
+and records typed native resume before the distinct later `50:1E` owner. Later
+native continuity remains explicitly transferred; see the [T246 closure](history/m0-t246-closure-20260822.md).
 
 M0 T246 S1 closes the `02/06` owner/ABI map. The repeated `06` is an active
 registry omission: the original shared operation stream, its named provider,
