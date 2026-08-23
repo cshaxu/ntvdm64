@@ -2,31 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T246 S1** — SoftPC machine interrupt owner-package map.
+**Active: M0 T246 S2** — SoftPC machine interrupt active ingress recovery.
 
 ## Active Packet
 
-### M0 T246 S1 — SoftPC machine interrupt owner-package map
+### M0 T246 S2 — SoftPC machine interrupt active ingress recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T246 S1`, Ordinary Mode, single-person dual-role source/ABI/lifecycle audit. |
-| Admission And Approval | T245 now reaches legacy SoftPC `BOP 06` after permanent source-built `COMMAND.COM` open. The active generic ingress declines it repeatedly, while a bounded existing source/provider route for shared `02/06` is present elsewhere in the tree. |
-| Objective | Establish the complete original-owner route and activation gap for the shared SoftPC `02/06` interrupt package before implementation. |
-| Non-goals | No trace-led COMMAND/DEM patch, full BIOS/device enablement, CCPU/CSR reconstruction, DOS semantics in mantle/core, or Bochs intrusion. |
-| Reference Baseline | OpenNT SoftPC `bios.c`, `illegal_op_int`, existing `opennt_int06_provider_v1`, generic ingress and `startup_machine_interrupt_v1`; `BOP-DEPENDENCY-114`. |
-| Files And ABI Surface | Read-only in S1; only active/legacy route mapping and current fixed-width state, checked-RAM and port-action contracts. |
-| Applicable Rules | Source-first recovery, selector-blind machine boundary, complete owner-package planning before trace validation, and MTSP governance. |
-| Verification | Static call/ABI map plus existing fixture/build membership audit; no new native behavior claim. |
-| Expected Markers | Exact active-vs-dead route, original memory/port state effects, and a yes/no evidence decision on whether existing mechanics suffice. |
-| Asset Needs | Existing imported OpenNT/SoftPC source, current formal manifest and fixtures; no external asset. |
-| Reporting Requirements | Name every source file, current composition hook, effect/failure edge and future owner; distinguish source evidence from live wiring. |
-| Stop Conditions | The only route needs unregistered Bochs semantic change or inventing non-source behavior. |
-| Exit Criteria | A package-level map supports or rejects S2 without treating `06` as a trace-led leaf patch. |
+| Identifier Mode | `M0 T246 S2`, Ordinary Mode, single-person dual-role existing-route recovery. |
+| Admission And Approval | S1 proves original SoftPC `02/06` source behavior has a compiled source-derived provider and sufficient typed RAM/port mechanics; only the active bx-vdm registry omits it. |
+| Objective | Attach the shared `02/06` provider to generic ingress through one explicit result/outcome bridge. |
+| Non-goals | No Bochs change, direct legacy handler callback, full PIC/device enablement, DOS semantics, or product-shell diagnostic/UI reconstruction. |
+| Reference Baseline | S1 owner map; OpenNT `bios.c`, `illegalp.c`, `unexp_nt.c`; existing `opennt_int06_provider_v1` and `startup_machine_interrupt_v1`. |
+| Files And ABI Surface | New bx-vdm machine-package generic bridge and registry entry only; existing fixed-width event/outcome, RAM and port action ABIs. |
+| Applicable Rules | Source-first recovery, selector-blind machine boundary and one package-level provider route. |
+| Verification | Existing provider/transaction fixture plus dedicated generic-ingress `02/06` regression; formal Ninja and one bounded native checkpoint in S3. |
+| Expected Markers | Both selector forms produce source-shaped typed outcome; malformed/preflight failures stop rather than fall through; no core/mantle file changes. |
+| Asset Needs | Existing sources and Ninja graph; no external asset. |
+| Reporting Requirements | Name retained source operations, conversion ABI and all rejected legacy paths. |
+| Stop Conditions | Existing typed actions fail to express a required source operation, which would require a separate Bochs exception decision. |
+| Exit Criteria | The active registry selects the package solely for real-mode `C4 C4 02/06`, with focused positive/negative evidence. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
 | Similar-Issue Sweep | `BOP-DEPENDENCY-091/102/104..114`, machine composition gates, original BOP `02`, source `illegal_op_int`, reset/RAM and default port-space lifecycle. |
 
 ## Latest Closure
+
+M0 T246 S1 closes the `02/06` owner/ABI map. The repeated `06` is an active
+registry omission: the original shared operation stream, its named provider,
+typed RAM/port actions and local transaction fixture already exist. No Bochs
+intrusion is justified; see [S1 evidence](etc/evidence/m0-t246-s1-softpc-machine-interrupt-owner-map-001.md).
 
 M0 T245 closes source-built permanent-command bootstrap continuity through the
 first distinct post-COMMAND machine edge. It fixes the actual Direct host path
