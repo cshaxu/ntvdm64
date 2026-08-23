@@ -121,6 +121,30 @@ function Get-HeaderDisposition([string]$Path) {
     return @('HEADER-REVIEW', 'unknown reached header', 'review', 'S1', 'manual unique owner decision required')
 }
 
+function Get-FixtureDisposition($Fixture) {
+    $p = $Fixture.source.Replace('\', '/').ToLowerInvariant()
+    $name = [System.IO.Path]::GetFileName($p)
+    if ($p -like 'tests/runner/*') {
+        return @('app', 'project-authored app fixture', 'git mv', 'S8', 'CLI/final-composition fixture')
+    }
+    if ($p -like 'tests/opennt/*') {
+        return @('opennt-host', 'OpenNT host component fixture', 'git mv', 'S8', 'host-capability provider fixture')
+    }
+    if ($p -like 'tests/bx-mantle/*') {
+        if ($name -match 'native_pic|mantle_watchdog|budget_terminal|large_reverse|software_interrupt|interrupt_return|segment_access|headless_8042') {
+            return @('bx-mantle', 'Bochs-only mantle fixture', 'git mv', 'S8', 'tests pure mantle/core mechanics')
+        }
+        return @('adapter-softpc', 'SoftPC/CCPU adapter fixture', 'git mv', 'S8', 'tests a VDM-facing or legacy-machine contract')
+    }
+    if ($p -like 'tests/bx-vdm/*') {
+        if ($name -match 'guest-pointer|host-handle|xmem|dpmi|softpc|machine_pending|engine_contract|physical|headless_mouse|printer') {
+            return @('adapter-softpc', 'SoftPC/CCPU adapter fixture', 'git mv', 'S8', 'tests same-shaped machine or mapping contract')
+        }
+        return @('opennt-bop', 'OpenNT BOP fixture', 'git mv', 'S8', 'tests BOP ingress, provider mirror, or owner package route')
+    }
+    return @('TEST-REVIEW', 'unknown formal fixture', 'review', 'S1', 'manual unique owner decision required')
+}
+
 $seedPaths = [System.Collections.Generic.List[string]]::new()
 
 foreach ($module in $manifest.modules) {
@@ -132,7 +156,8 @@ foreach ($module in $manifest.modules) {
 }
 
 foreach ($fixture in $manifest.fixtures) {
-    Add-Row $fixture.source 'fixture' 'formal-fixture' 'TEST-CLASSIFY' 'project-authored test' 'review/move-with-owner' 'S8' ("libraries: " + ($fixture.libraries -join ', '))
+    $d = Get-FixtureDisposition $fixture
+    Add-Row $fixture.source 'fixture' 'formal-fixture' $d[0] $d[1] $d[2] $d[3] ($d[4] + '; libraries: ' + ($fixture.libraries -join ', '))
     $seedPaths.Add($fixture.source)
 }
 

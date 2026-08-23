@@ -45,8 +45,9 @@ baseline through `Export-T260S1OwnerManifest.ps1`: 386 rows cover 291 module
 sources, 78 fixtures, one target, 14 include roots and two build inputs.
 S1 P2 expands those inputs to 1,263 rows by adding 618 DOS/WOW guest-source
 candidates and 259 recursively reached headers. Header owners are now initial
-unique dispositions; guest closure membership and final fixture ownership
-remain active S1 work. No source has moved. See the
+unique dispositions. S1 P3 gives all 78 fixtures a unique target owner; the
+remaining S1 work is the non-formal legacy/evidence sweep. No source has moved.
+See the
 [baseline record](etc/operations/m0-t260-s1-owner-manifest-baseline-001.md).
 
 ## Previous Active Packet — M0 T259

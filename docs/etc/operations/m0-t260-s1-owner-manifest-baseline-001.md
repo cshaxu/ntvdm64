@@ -27,17 +27,18 @@ The current generated baseline contains 1,263 unique rows:
 
 The first classified source distribution is: `bx-core` 122, `bx-mantle` 8,
 `adapter-softpc` 58, `adapter-win32` 1, `opennt-bop` 60, `opennt-host` 27,
-`opennt-guest` 618, and `app` 16. All reached headers have an initial target
-owner. Rows marked `review/split` still require their owning S to confirm the
-file split; fixtures are deliberately not inferred from their historical
-`bx-vdm` link list.
+`opennt-guest` 618, `opennt-bop` 176, `adapter-softpc` 152, `bx-core` 181,
+`opennt-host` 61, `app` 34, `bx-mantle` 21, `tools/build` 16, and
+`adapter-win32` 4. All formal sources, reached headers, fixtures, targets and
+build inputs now have one target owner. Rows marked `review/split` still
+require their owning S to confirm the file split.
 
 ## Remaining S1 work
 
 1. Add guest source/artifact build inputs which are intentionally outside the
    modern formal runtime graph.
-2. Replace every `TEST-CLASSIFY` marker with one target owner and one migration
-   disposition.
+2. Enumerate non-formal legacy product/evidence inputs so old paths cannot
+   survive as an undeclared second provider.
 3. Reconcile the resulting rows against the BOP tracker, build generator, and
    current live-call scan before any source move is admitted.
 

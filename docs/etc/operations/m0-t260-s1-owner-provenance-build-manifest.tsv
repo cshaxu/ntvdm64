@@ -1,84 +1,84 @@
 ﻿path	kind	current_owner	target_owner	provenance	disposition	planned_s	reason
 tools/build/New-T225S7FullNinjaGraph.ps1	build-input	build-tool	tools/build	project-authored build tool	retain/update-paths	S8	formal build graph input
 tools/build/t225-s7-full-module-manifest.json	build-input	build-tool	tools/build	project-authored build tool	retain/update-paths	S8	formal build graph input
-tests/bx-mantle/bx_ntvdm_engine_contract_v1_test.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/bx-mantle/t199_s22_a20_capability_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host, cli
-tests/bx-mantle/t200_s22_machine_stage_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, bx-vdm, opennt-host
-tests/bx-mantle/t225_s23_native_pic_lifecycle_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t225_s23_ram_preflight_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t225_s30_segment_access_observation_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t225_s40_mantle_watchdog_normal_loop_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t225_s50_realmode_handoff_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle, bx-vdm, opennt-host, cli
-tests/bx-mantle/t225_s56_realmode_segment_limit_compatibility_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t228_s1_budget_terminal_position_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t228_s1_interrupt_return_observation_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t228_s1_large_reverse_copy_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t228_s1_software_interrupt_observation_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t230_s15_checked_ram_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t236_s2_machine_pending_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t236_s2_native_cmdexec32_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-mantle/t237_s3_xms_a20_source_mirror_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-mantle/t244_s2_headless_8042_lifecycle_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t246_s2_softpc_machine_interrupt_ingress_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-mantle/t249_s3_physical_write_observation_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-core, bx-mantle
-tests/bx-mantle/t253_s2_physical_irq_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-mantle, bx-core
-tests/bx-mantle/t255_s2_generic_context_resume_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-mantle, bx-core
-tests/bx-mantle/t256_s6_guest_memory_geometry_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-mantle, bx-core
-tests/bx-mantle/t256_s8_ordinary_ram_reservation_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-mantle, bx-core
-tests/bx-mantle/t257_s3_native_guest_ldt_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-mantle, bx-core
-tests/bx-vdm/t230_s10_dem_ingress_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s10_dem_native_session_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s10_demdisp_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s15_direct_host_session_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core
-tests/bx-vdm/t230_s15_v2_runtime_session_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, cli, bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s2_demhndl_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s3_demfile_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s4_demdir_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s5_demsrch_fcb_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s6_demgset_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s7_demdasd_ioctl_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s8_demerror_lock_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t230_s9_demmisc_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s10_command_native_session_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s2_command_misc_direct_import_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s3_command_misc_registration_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s4_command_console_keyboard_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s5_command_config_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s5_command_init_environment_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s5_command_start_info_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s6_command_check_binary_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s7_command_get_next_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s8_command_lifecycle_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t231_s9_command_exit_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t232-s1-host-handle-manager-fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/bx-vdm/t234_s2_command_dynamic_environment_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t234_s2_command_pif_direct_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t234_s2_command_set_directories_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t236_s1_command_local_child_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t236_s4_ntfdisk_readonly_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t237_s2_xms_source_mirror_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t237_s5_bop_nosupport_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t240_s2_softpc_memory_size_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/bx-vdm/t242_s3_softpc_tape_io_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/bx-vdm/t243_s2_spckbd_handoff_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/bx-vdm/t245_s11_config_complete_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t245_s14_command_bootstrap_observation_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core
-tests/bx-vdm/t245_s17_command_current_dir_observation_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core
-tests/bx-vdm/t245_s18_dem_open_observation_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core
-tests/bx-vdm/t245_s2_ntdos_exec_observation_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/bx-vdm/t245_s21_oem_create_file_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t245_s3_softpc_emm_unavailable_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t245_s5_headless_mouse_vector_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t245_s7_printer_openclose_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t245_s9_demdasd_drive_policy_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t247_s2_ntdos_exec_entry_observation_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/bx-vdm/t251_s3_redir_ingress_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core, opennt-host
-tests/bx-vdm/t256_s10_xmem_record_adapter_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core
-tests/bx-vdm/t257_s3_dpmi_descriptor_source_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/bx-vdm/t257_s3_dpmi_startup_session_fixture.cc	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm, bx-mantle, bx-core
-tests/bx-vdm/t258-s1-guest-pointer-manager-fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: bx-vdm
-tests/opennt/opennt_int06_provider_v1_test.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: opennt-host
-tests/runner/t245_s22_dos_safe_alias_fixture.c	fixture	formal-fixture	TEST-CLASSIFY	project-authored test	review/move-with-owner	S8	libraries: cli
+tests/bx-mantle/bx_ntvdm_engine_contract_v1_test.c	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-vdm
+tests/bx-mantle/t199_s22_a20_capability_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-vdm, bx-mantle, bx-core, opennt-host, cli
+tests/bx-mantle/t200_s22_machine_stage_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-vdm, bx-mantle, bx-core, bx-vdm, opennt-host
+tests/bx-mantle/t225_s23_native_pic_lifecycle_fixture.cc	fixture	formal-fixture	bx-mantle	Bochs-only mantle fixture	git mv	S8	tests pure mantle/core mechanics; libraries: bx-core, bx-mantle
+tests/bx-mantle/t225_s23_ram_preflight_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-core, bx-mantle
+tests/bx-mantle/t225_s30_segment_access_observation_fixture.cc	fixture	formal-fixture	bx-mantle	Bochs-only mantle fixture	git mv	S8	tests pure mantle/core mechanics; libraries: bx-core, bx-mantle
+tests/bx-mantle/t225_s40_mantle_watchdog_normal_loop_fixture.cc	fixture	formal-fixture	bx-mantle	Bochs-only mantle fixture	git mv	S8	tests pure mantle/core mechanics; libraries: bx-core, bx-mantle
+tests/bx-mantle/t225_s50_realmode_handoff_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-core, bx-mantle, bx-vdm, opennt-host, cli
+tests/bx-mantle/t225_s56_realmode_segment_limit_compatibility_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-core, bx-mantle
+tests/bx-mantle/t228_s1_budget_terminal_position_fixture.cc	fixture	formal-fixture	bx-mantle	Bochs-only mantle fixture	git mv	S8	tests pure mantle/core mechanics; libraries: bx-core, bx-mantle
+tests/bx-mantle/t228_s1_interrupt_return_observation_fixture.cc	fixture	formal-fixture	bx-mantle	Bochs-only mantle fixture	git mv	S8	tests pure mantle/core mechanics; libraries: bx-core, bx-mantle
+tests/bx-mantle/t228_s1_large_reverse_copy_fixture.cc	fixture	formal-fixture	bx-mantle	Bochs-only mantle fixture	git mv	S8	tests pure mantle/core mechanics; libraries: bx-core, bx-mantle
+tests/bx-mantle/t228_s1_software_interrupt_observation_fixture.cc	fixture	formal-fixture	bx-mantle	Bochs-only mantle fixture	git mv	S8	tests pure mantle/core mechanics; libraries: bx-core, bx-mantle
+tests/bx-mantle/t230_s15_checked_ram_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-core, bx-mantle
+tests/bx-mantle/t236_s2_machine_pending_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-core, bx-mantle
+tests/bx-mantle/t236_s2_native_cmdexec32_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-mantle/t237_s3_xms_a20_source_mirror_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-mantle/t244_s2_headless_8042_lifecycle_fixture.cc	fixture	formal-fixture	bx-mantle	Bochs-only mantle fixture	git mv	S8	tests pure mantle/core mechanics; libraries: bx-core, bx-mantle
+tests/bx-mantle/t246_s2_softpc_machine_interrupt_ingress_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-mantle/t249_s3_physical_write_observation_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-core, bx-mantle
+tests/bx-mantle/t253_s2_physical_irq_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-mantle, bx-core
+tests/bx-mantle/t255_s2_generic_context_resume_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-mantle, bx-core
+tests/bx-mantle/t256_s6_guest_memory_geometry_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-mantle, bx-core
+tests/bx-mantle/t256_s8_ordinary_ram_reservation_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-mantle, bx-core
+tests/bx-mantle/t257_s3_native_guest_ldt_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests a VDM-facing or legacy-machine contract; libraries: bx-mantle, bx-core
+tests/bx-vdm/t230_s10_dem_ingress_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s10_dem_native_session_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s10_demdisp_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s15_direct_host_session_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core
+tests/bx-vdm/t230_s15_v2_runtime_session_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, cli, bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s2_demhndl_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s3_demfile_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s4_demdir_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s5_demsrch_fcb_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s6_demgset_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s7_demdasd_ioctl_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s8_demerror_lock_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t230_s9_demmisc_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s10_command_native_session_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s2_command_misc_direct_import_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s3_command_misc_registration_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s4_command_console_keyboard_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s5_command_config_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s5_command_init_environment_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s5_command_start_info_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s6_command_check_binary_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s7_command_get_next_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s8_command_lifecycle_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t231_s9_command_exit_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t232-s1-host-handle-manager-fixture.c	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm
+tests/bx-vdm/t234_s2_command_dynamic_environment_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t234_s2_command_pif_direct_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t234_s2_command_set_directories_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t236_s1_command_local_child_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t236_s4_ntfdisk_readonly_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t237_s2_xms_source_mirror_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t237_s5_bop_nosupport_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t240_s2_softpc_memory_size_fixture.c	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm
+tests/bx-vdm/t242_s3_softpc_tape_io_fixture.c	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm
+tests/bx-vdm/t243_s2_spckbd_handoff_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm
+tests/bx-vdm/t245_s11_config_complete_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t245_s14_command_bootstrap_observation_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core
+tests/bx-vdm/t245_s17_command_current_dir_observation_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core
+tests/bx-vdm/t245_s18_dem_open_observation_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core
+tests/bx-vdm/t245_s2_ntdos_exec_observation_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm
+tests/bx-vdm/t245_s21_oem_create_file_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t245_s3_softpc_emm_unavailable_fixture.c	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t245_s5_headless_mouse_vector_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t245_s7_printer_openclose_fixture.c	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t245_s9_demdasd_drive_policy_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t247_s2_ntdos_exec_entry_observation_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm
+tests/bx-vdm/t251_s3_redir_ingress_fixture.c	fixture	formal-fixture	opennt-bop	OpenNT BOP fixture	git mv	S8	tests BOP ingress, provider mirror, or owner package route; libraries: bx-vdm, bx-mantle, bx-core, opennt-host
+tests/bx-vdm/t256_s10_xmem_record_adapter_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm, bx-mantle, bx-core
+tests/bx-vdm/t257_s3_dpmi_descriptor_source_fixture.c	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm
+tests/bx-vdm/t257_s3_dpmi_startup_session_fixture.cc	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm, bx-mantle, bx-core
+tests/bx-vdm/t258-s1-guest-pointer-manager-fixture.c	fixture	formal-fixture	adapter-softpc	SoftPC/CCPU adapter fixture	git mv	S8	tests same-shaped machine or mapping contract; libraries: bx-vdm
+tests/opennt/opennt_int06_provider_v1_test.c	fixture	formal-fixture	opennt-host	OpenNT host component fixture	git mv	S8	host-capability provider fixture; libraries: opennt-host
+tests/runner/t245_s22_dos_safe_alias_fixture.c	fixture	formal-fixture	app	project-authored app fixture	git mv	S8	CLI/final-composition fixture; libraries: cli
 src/opennt/base/mvdm/dos/command/cmd.c	guest-source-candidate	OpenNT guest import	opennt-guest	imported OpenNT guest source/input	git mv or retain-as-guest-artifact-input	S4	S4 identifies source-built closure membership versus retained source evidence
 src/opennt/base/mvdm/dos/command/cmd.h	guest-source-candidate	OpenNT guest import	opennt-guest	imported OpenNT guest source/input	git mv or retain-as-guest-artifact-input	S4	S4 identifies source-built closure membership versus retained source evidence
 src/opennt/base/mvdm/dos/command/cmdconf.c	guest-source-candidate	OpenNT guest import	opennt-guest	imported OpenNT guest source/input	git mv or retain-as-guest-artifact-input	S4	S4 identifies source-built closure membership versus retained source evidence
