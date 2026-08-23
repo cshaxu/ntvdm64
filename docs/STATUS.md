@@ -14,7 +14,7 @@
 | Admission And Approval | S3 is closed by the formal [range-action evidence](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md). S4 is analysis only; no provider or adopted-code change is admitted. |
 | Objective | Map the original DPMI guest-linear allocation/mapping identity and determine the smallest selector-blind, source-shaped prerequisite still needed before any `53:xx` source body can enter. |
 | Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, LDT policy implementation, raw pointer/object, trace-driven patch, or unregistered intrusion. |
-| Reference Baseline | [T256 S1 map](etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md), [T256 S2 design](etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md), [T256 S3 closure](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md), and live [BOP tracker](etc/bop-list.md). |
+| Reference Baseline | [T256 S1 map](etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md), [T256 S2 design](etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md), [T256 S3 closure](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md), [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), and live [BOP tracker](etc/bop-list.md). |
 | Files And ABI Surface | Evidence and tracker only unless a later approved S records a new selector-blind ABI. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
 | Verification | Source call/representation map, owner classification, and an explicit admission/defer decision. |
