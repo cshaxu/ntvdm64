@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2135 |
 | --- | --- |
-| Generated UTC | 2026-08-23T09:59:33Z |
+| Generated UTC | 2026-08-23T10:01:39Z |
 
 ## Entries
 
@@ -141,7 +141,7 @@ content-divergent entries.
 | etc/evidence/m0-t253-s1-selector-blind-async-delivery-mechanics-map-001.md | indexed supporting material | 57043f243b8609f68d3774b2f6e3ae7df9fb18cffb1140ee1446421c91d3072b |
 | etc/evidence/m0-t253-s2-physical-irq-mechanical-closure-001.md | indexed supporting material | 7fa973a55c26b3ed370e0a85f3e18ae47811f762961dc7774317e984095190f4 |
 | etc/evidence/m0-t253-s3-async-completion-ingress-audit-001.md | indexed supporting material | 27d0680a1513aafd2f4122a7d8a7fb5651eda5e0e7ac3a09036411c0e2c9458f |
-| etc/evidence/m0-t254-s1-dpmi-profile-source-abi-admission-map-001.md | indexed supporting material | 71de0de32d425fccbb372dc4a61607e560686e59da9dc48a1da373bb200788e9 |
+| etc/evidence/m0-t254-s1-dpmi-profile-source-abi-admission-map-001.md | indexed supporting material | 095b6990a2e26828e9e0b92db97ebe942a9761a96fe3656811277bb45a625039 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |

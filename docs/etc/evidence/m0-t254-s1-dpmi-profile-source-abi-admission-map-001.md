@@ -67,8 +67,11 @@ descriptors and exceptions.  That does **not** make the current product
 boundary DPMI-capable.  Its copied CPU record contains register values and
 selector values only; its comment explicitly excludes descriptor caches,
 page tables, mappings and host pointers.  The accepted result ABI can resume,
-stop, pend, update selected GPR values and CF/ZF; it cannot make the original
-`setMSW`, segment-load, descriptor or IRET state transition.  Current active
+stop, pend, update selected GPR values, CF/ZF and segment selectors; the
+existing core interception path applies an accepted selector through Bochs's
+native `load_seg_reg`.  It still cannot make the original atomic `setMSW`
+mode transition, construct/consume an entire 16/32-bit IRET context, or carry
+a checked protected virtual-memory operation.  Current active
 DEM/COMMAND/XMS shims require real mode, and no active `53:xx` source mirror
 is linked.
 
