@@ -2,31 +2,38 @@
 
 ## Current Work
 
-**Active: M0 T245 S18** — Native DEM open input/result observation.
+**Active: M0 T245 S19** — Post-CONFIG guest interrupt/error classification.
 
 ## Active Packet
 
-### M0 T245 S18 — Native DEM open input/result observation
+### M0 T245 S19 — Post-CONFIG guest interrupt/error classification
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S18`, Ordinary Mode, single-person dual-role adapter-only DEM input/result observation. |
-| Admission And Approval | S17 proves `54:04` returns its original Direct host current directory and the same native path reaches `50:12 demOpen`. Original `demfile.c` defines its precise `DS:SI` pathname, `BL` mode and `AX:BP` handle/failure contract. |
-| Objective | Copy the bounded original `demOpen` input pathname and its typed outcome at accepted `50:12`, then classify the actual file-service result before changing any DEM or guest logic. |
-| Non-goals | No modification to demOpen, guest RAM, CWD, drive mapping, file result, handle manager, BOP outcome, Bochs source or machine semantics. |
-| Reference Baseline | Original `demfile.c:118..180`, S17 reachability, existing checked-RAM ABI and fixed typed outcome record. |
-| Files And ABI Surface | Default-off bx-vdm record; one checked copy of the source-provided `DS:SI` string (bounded by `MAX_PATH+1`) and copy of the already produced outcome. |
+| Identifier Mode | `M0 T245 S19`, Ordinary Mode, single-person dual-role existing diagnostic usage and source-owner classification. |
+| Admission And Approval | S18 removes current `50:12 demOpen` from the hypothesis: temporary CONFIG input opens with CF clear. The only bounded way to identify the later original `comerr` path is to reuse the already registered default-off real-mode interrupt record against the corrected root/config sequence. |
+| Objective | Observe the final relevant `INT 21h` calls after successful temporary CONFIG open, and classify the retained `50:3D` predecessor without changing production source or behavior. |
+| Non-goals | No new Bochs source, guest mutation, virtual drive, CWD rewrite, DEM/COMMAND modification, fabricated DOS result or host mutation. |
+| Reference Baseline | S15 earlier open-failure classification, S16 root correction, S18 successful temporary CONFIG open and original `sysinit1.asm` launch path. |
+| Files And ABI Surface | Existing default-off mantle interrupt observer and existing CLI output only; diagnostic compilation is not a production semantic change. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Focused fixture covers selector/mode/path address, outcome copy and negative selector; one bounded native run correlates the actual path/mode/result with the next guest behavior. |
-| Expected Markers | Evidence shows a concrete OEM pathname and either an assigned opaque handle or source-shaped failure flags/code, then names the next owner. |
-| Asset Needs | Existing source-built bundles and Direct session; no new source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record registers, exact path copy address/bytes, outcome masks/values, source relation and next owner. Do not turn an observation into a file-service repair. |
-| Stop Conditions | Observation requires unbounded scanning, mutation, an invented handle/result, virtual mapping or a Bochs semantic change. |
-| Exit Criteria | Native `50:12` input and typed result are directly observed or its source-shaped failure is recorded, and the next issue is assigned to a named owner. |
+| Verification | Existing focused interrupt-observation fixture plus exactly one corrected source-built native run. |
+| Expected Markers | The final source call identifies open, read, close, memory, or `AX=4B00h` EXEC; any unrecognized value is source-mapped before repair. |
+| Asset Needs | Existing sources, bundles and formal Ninja generator; no new external asset. |
+| Reporting Requirements | Record diagnostic configuration, final call records, source mapping and precise next owner. |
+| Stop Conditions | Existing bounded diagnostic cannot capture the relevant call, and a replacement would require new machine semantics or unbounded tracing. |
+| Exit Criteria | The post-CONFIG guest predecessor is directly classified, or its capture limit is documented with no repair claim. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S19 closes post-CONFIG interrupt classification.  After the
+successful temporary SCS open, the permanent `commnd` `INT 21h/AX=3D00h` is
+still the final file operation: no seek, close or `4B00` EXEC follows before
+the original `comerr → 50:3D` terminal.  The remaining owner is the guest
+DOS-name to Direct-host namespace boundary, not cmdExec32 or Bochs; see
+[S19 evidence](etc/evidence/m0-t245-s19-post-config-interrupt-classification-001.md).
 
 M0 T245 S18 closes native DEM `50:12` observation. It opens the original
 temporary SCS configuration file with CF clear, so neither `demOpen` nor
