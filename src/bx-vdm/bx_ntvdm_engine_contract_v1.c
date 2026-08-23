@@ -23,6 +23,12 @@ static int terminal_kind_valid(uint32_t terminal_kind)
     return terminal_kind <= BX_NTVDM_ENGINE_TERMINAL_V1_HOST_CANCELLATION;
 }
 
+static int guest_memory_bytes_valid(uint64_t bytes)
+{
+    return bytes >= UINT64_C(0x100000) && bytes <= UINT64_C(0x1000000) &&
+        bytes % UINT64_C(0x10000) == 0u;
+}
+
 void bx_ntvdm_engine_request_v1_clear(struct bx_ntvdm_engine_request_v1 *request)
 {
     if (request == 0) return;
@@ -31,6 +37,7 @@ void bx_ntvdm_engine_request_v1_clear(struct bx_ntvdm_engine_request_v1 *request
     request->abi_version = BX_NTVDM_ENGINE_CONTRACT_V1_VERSION;
     request->struct_bytes = (uint32_t) sizeof(*request);
     request->mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
+    request->guest_memory_bytes = UINT64_C(0x100000);
 }
 
 int bx_ntvdm_engine_request_v1_valid(const struct bx_ntvdm_engine_request_v1 *request)
@@ -40,6 +47,7 @@ int bx_ntvdm_engine_request_v1_valid(const struct bx_ntvdm_engine_request_v1 *re
         request->struct_bytes != sizeof(*request) || request->reserved0 != 0u ||
         !mutation_mode_valid(request->mutation_mode) ||
         request->instruction_tick_budget == 0u ||
+        !guest_memory_bytes_valid(request->guest_memory_bytes) ||
         !descriptor_valid(request->profile_descriptor,
             request->profile_descriptor_chars,
             BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS) ||

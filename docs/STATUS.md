@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S5** — Guest-RAM geometry and reservation admission map.
+**Active: M0 T256 S7** — Generic ordinary-RAM reservation design.
 
 ## Active Packet
 
-### M0 T256 S5 — Guest-RAM geometry and reservation admission map
+### M0 T256 S7 — Generic ordinary-RAM reservation design
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S5`, Ordinary Mode, single-person dual-role source/ABI mapping. |
-| Admission And Approval | S4 closes the historical identity map. S5 is analysis only; no allocator, provider or adopted-code change is admitted. |
-| Objective | Map current guest-RAM geometry ownership and identify the required generic memory-capacity contract before a safe ordinary-RAM reservation ABI can be designed. |
-| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, allocator implementation, raw pointer/object, trace-driven patch, or unregistered intrusion. |
-| Reference Baseline | [T256 S3 closure](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md), [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S5 geometry map](etc/evidence/m0-t256-s5-guest-ram-geometry-impact-map-001.md), and live [BOP tracker](etc/bop-list.md). |
-| Files And ABI Surface | Evidence and tracker only unless a later admitted S records a copied geometry contract. |
+| Identifier Mode | `M0 T256 S7`, Ordinary Mode, single-person dual-role source/ABI design. |
+| Admission And Approval | S6 is closed by the formal [geometry evidence](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md). S7 is analysis only until a new selector-blind reservation record is prospectively registered. |
+| Objective | Define the smallest generic ordinary-RAM reservation lifecycle that can use an explicitly composed interval without encoding DPMI, BOP, selector or host-pointer policy. |
+| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, allocator implementation, pointer/object, trace-driven patch, or adopted-code change. |
+| Reference Baseline | [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S5 geometry map](etc/evidence/m0-t256-s5-guest-ram-geometry-impact-map-001.md), [S6 closure](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md), and tracker. |
+| Files And ABI Surface | Evidence and tracker only unless a later registered S defines a selector-blind reservation record. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Current initializer/consumer map, bounded-constant classification plan, and an explicit admission/defer decision. |
-| Expected Markers | Exact current 1 MiB owners and the required session geometry contract before any reservation can exist. |
-| Asset Needs | Closed context/range-action substrate, S4 identity map, engine/startup composition and formal Ninja manifest. |
-| Reporting Requirements | Distinguish conventional-only validation from whole-guest bounds; do not imply the S3 action or current one-MiB stage provides extended memory. |
+| Verification | Source/ownership map, explicit reservation-record proposal, collision and lifecycle rules, and an admission/defer decision. |
+| Expected Markers | Composed interval source, non-overlap rule and opaque ID without allocator or DPMI terms. |
+| Asset Needs | S4/S5/S6 evidence, engine/startup composition, machine stage and formal Ninja manifest. |
+| Reporting Requirements | Distinguish capacity from reservation/mapping; do not claim a DPMI allocation yet. |
 | Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | The current fixed geometry is source-mapped and a specific geometry-contract implementation package is either prospectively admitted or explicitly transferred without an allocator shortcut. |
+| Exit Criteria | A minimal reservation ABI is either prospectively admitted with exact lifecycle tests or explicitly deferred without a hidden xmem shortcut. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 

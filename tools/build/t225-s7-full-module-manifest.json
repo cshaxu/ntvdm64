@@ -345,6 +345,23 @@
       "platformLibraries": []
     },
     {
+      "name": "t256-s6-guest-memory-geometry-fixture",
+      "source": "tests/bx-mantle/t256_s6_guest_memory_geometry_fixture.cc",
+      "libraries": [
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t256-s6-engine-geometry-contract-fixture",
+      "source": "tests/bx-mantle/bx_ntvdm_engine_contract_v1_test.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
+    },
+    {
       "name": "t253-s2-physical-irq-fixture",
       "source": "tests/bx-mantle/t253_s2_physical_irq_fixture.cc",
       "libraries": [

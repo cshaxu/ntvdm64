@@ -36,6 +36,14 @@ int main(void)
     request.mutation_mode = 3u;
     if (bx_ntvdm_engine_request_v1_valid(&request)) return 3;
     request.mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
+    if (request.guest_memory_bytes != UINT64_C(0x100000)) return 7;
+    request.guest_memory_bytes = UINT64_C(0x1ff000);
+    if (bx_ntvdm_engine_request_v1_valid(&request)) return 8;
+    request.guest_memory_bytes = UINT64_C(0x200000);
+    if (!bx_ntvdm_engine_request_v1_valid(&request)) return 9;
+    request.guest_memory_bytes = UINT64_C(0x1010000);
+    if (bx_ntvdm_engine_request_v1_valid(&request)) return 10;
+    request.guest_memory_bytes = UINT64_C(0x100000);
     request.launch_descriptor[request.launch_descriptor_chars] = 1u;
     if (bx_ntvdm_engine_request_v1_valid(&request)) return 2;
     request.launch_descriptor[request.launch_descriptor_chars] = 0u;

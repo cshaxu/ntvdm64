@@ -15,6 +15,9 @@
 
 #define BX_NTVDM_MACHINE_STAGE_V1_MAGIC UINT32_C(0x42584d53)
 #define BX_NTVDM_MACHINE_STAGE_V1_VERSION UINT32_C(1)
+#define BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_MIN_BYTES UINT64_C(0x100000)
+#define BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_MAX_BYTES UINT64_C(0x1000000)
+#define BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_GRANULARITY UINT64_C(0x10000)
 
 enum bx_ntvdm_machine_stage_v1_status {
   BX_NTVDM_MACHINE_STAGE_V1_OK = 0u,
@@ -148,6 +151,7 @@ struct bx_ntvdm_machine_stage_v1_request {
   uint32_t abi_version;
   uint32_t struct_bytes;
   uint32_t reserved0;
+  uint64_t guest_memory_bytes;
   struct bx_ntvdm_mechanical_action_v1 initial_state_action;
   struct bx_ntvdm_mechanical_action_v1 startup_action;
   uint64_t preserved_state_address;

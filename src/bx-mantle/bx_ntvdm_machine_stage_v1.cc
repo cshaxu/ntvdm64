@@ -220,6 +220,7 @@ extern "C" void bx_ntvdm_machine_stage_v1_request_clear(
   request->magic = BX_NTVDM_MACHINE_STAGE_V1_MAGIC;
   request->abi_version = BX_NTVDM_MACHINE_STAGE_V1_VERSION;
   request->struct_bytes = sizeof(*request);
+  request->guest_memory_bytes = BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_MIN_BYTES;
 }
 
 extern "C" int bx_ntvdm_machine_stage_v1_request_valid(
@@ -228,6 +229,9 @@ extern "C" int bx_ntvdm_machine_stage_v1_request_valid(
   return request != 0 && request->magic == BX_NTVDM_MACHINE_STAGE_V1_MAGIC &&
     request->abi_version == BX_NTVDM_MACHINE_STAGE_V1_VERSION &&
     request->struct_bytes == sizeof(*request) && request->reserved0 == 0u &&
+    request->guest_memory_bytes >= BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_MIN_BYTES &&
+    request->guest_memory_bytes <= BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_MAX_BYTES &&
+    request->guest_memory_bytes % BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_GRANULARITY == 0u &&
     bx_ntvdm_machine_stage_optional_action_valid(&request->initial_state_action) &&
     bx_ntvdm_mechanical_action_v1_valid(&request->startup_action) &&
     request->ivt_watch_enabled <= 1u &&
@@ -250,7 +254,8 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_begin(
     return BX_NTVDM_MACHINE_STAGE_V1_REJECTED_ACTIVE;
   bx_ntvdm_machine_stage_machine = new bx_ntvdm_minimal_machine_c;
   if (bx_ntvdm_machine_stage_machine == 0 ||
-      bx_ntvdm_machine_stage_machine->initialize(0x100000u, 0x100000u) !=
+      bx_ntvdm_machine_stage_machine->initialize(request->guest_memory_bytes,
+        request->guest_memory_bytes) !=
         BX_NTVDM_MINIMAL_MACHINE_OK) {
     delete bx_ntvdm_machine_stage_machine;
     bx_ntvdm_machine_stage_machine = 0;
