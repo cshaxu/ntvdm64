@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T245 S7** — Printer/LPT session open-close recovery.
+**Active: M0 T245 S8** — Config-complete notification source and capability map.
 
 ## Active Packet
 
-### M0 T245 S7 — Printer/LPT session open-close recovery
+### M0 T245 S8 — Config-complete notification source and capability map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S7`, Ordinary Mode, single-person dual-role source-first owner-subpackage recovery. |
-| Admission And Approval | Closed S6 proves the reached SI=1 and its SI=2 lifecycle pair are a self-contained original session-state package. Ordinary queue work requires no renewed approval. |
-| Objective | Recover OpenNT `printer_io` SI=1/2 dispatch and `printer_bop_openclose` through a named bx-vdm session-owned LPT-state shim, preserving original `DX % 3` selection and typed resume. |
-| Non-goals | No SI=0 flush, AH=0/1/2 BIOS I/O, LPT port device, host print job/handle, printer UI, raw port I/O, monitor/direct-access path or bx-core/bx-mantle semantic intrusion. |
-| Reference Baseline | [S6 map](etc/evidence/m0-t245-s6-printer-lpt-owner-package-map-001.md), `BOP-DEPENDENCY-109`, OpenNT `printer_.c:printer_io/printer_bop_openclose` and `nt_lpt.c:host_lpt_dos_open/close`. |
-| Files And ABI Surface | One source-shaped printer open-close mirror, copied SI/DX state shim and exact real-mode `C4 C4 17` route; no host handle or new mantle ABI. |
-| Applicable Rules | Source-first recovery, host-mutation classification, guest-owner boundary, selector-blind machine boundary, no trace-led work and MTSP governance. |
-| Verification | Formal Ninja positive open/close and modulo tests; negative SI=0, protected-mode and RIP-overflow tests; one finite source-built observation after the subpackage. |
-| Expected Markers | SI=1 records the selected session LPT as DOS-open; SI=2 clears it; both resume RIP+3 with no unrelated register/flag update; all other printer paths decline. |
-| Asset Needs | Existing admitted OpenNT tree and source-built guest images; no host printer or new external source. |
-| Reporting Requirements | Record exact source ordering, state lifetime, all deliberately deferred printer branches and the next reached predecessor without follow-on implementation. |
-| Stop Conditions | Any need for a host printer handle, buffer, port-space device, synthetic BIOS status or externally visible print output. Record and transfer instead. |
-| Exit Criteria | Direct/global local tests and one source-built observation prove only the SI=1/2 subpackage; every other printer branch remains explicitly deferred. |
+| Identifier Mode | `M0 T245 S8`, Ordinary Mode, single-person dual-role source-first owner-package mapping. |
+| Admission And Approval | S7's bounded observation reaches 5E/AL=0. This maps the complete original notification package before any route can be admitted; ordinary queue work requires no renewed approval. |
+| Objective | Map the complete `MS_bop_E` config-complete operation: direct UMB notification, DEM DASD reset/probe, physical-drive policy, floppy/machine requirements and every source-derived failure or defer disposition. |
+| Non-goals | No automatic host-drive scan, raw-disk probe, floppy enablement, UMB reservation, generic ignore, BOP handler or bx-core/bx-mantle semantic intrusion before the map selects a package. |
+| Reference Baseline | `BOP-DEPENDENCY-110`, OpenNT `nt_bop.c:MS_bop_E`, `nt_umb.c:UMBNotify`, `demdasd.c:demDasdInit/demFloppyInit/demFdiskInit` and current direct-DASD shim. |
+| Files And ABI Surface | Documentation/evidence only until the map identifies a policy-compliant source-owned seam. No new ABI is presumed. |
+| Applicable Rules | Source-first recovery, host-mutation classification, host-drive admission policy, guest-owner boundary, selector-blind machine boundary and MTSP governance. |
+| Verification | Cross-check source call order against current UMB and DEM mirrors; identify every host API/device action, include/exclude-drive interaction and direct source failure. |
+| Expected Markers | A clear distinction between original no-op UMBNotify, direct DEM initialization, floppy-specific machinery, fixed-volume enumeration and a policy-compliant composition recommendation. |
+| Asset Needs | Existing admitted OpenNT tree/current bx-vdm mirrors and host-drive policy evidence; no new source or host mutation. |
+| Reporting Requirements | Record exact source order, mutation classification, existing workaround retain/migrate/replace disposition, blocked seams and transfer owners. |
+| Stop Conditions | Need to scan unadmitted volumes, bypass include/exclude policy, access raw physical media, invent an UMB reservation, or add a generic 5E return. Record and transfer instead. |
+| Exit Criteria | Complete source/ABI/mutation map with a smallest-composable recommendation exists; no 5E code route is added before that decision. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 
