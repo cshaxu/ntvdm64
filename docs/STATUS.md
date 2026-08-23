@@ -3,7 +3,8 @@
 ## Current Work
 
 **Active: M0 T244 S2** — selector-blind headless 8042 keyboard-controller
-source severance and native lifecycle composition.
+source severance and native lifecycle composition; verification is complete
+and its single P delivery is being formed.
 
 ## Active Packet
 
@@ -12,22 +13,20 @@ source severance and native lifecycle composition.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T244 S2`, Ordinary Mode, single-person dual-role native machine composition. |
-| Admission And Approval | Owner's standing queue authorization admits the S1-selected headless 8042 slice. Any adopted-Bochs source patch must be entered in the exception register before it is made. |
+| Admission And Approval | Owner's standing queue authorization admits the S1-selected headless 8042 slice. The required adopted-source exception was registered before its patch. |
 | Objective | Compose a source-shaped, selector-blind native 8042 controller beside the existing PIC: ports `60h/64h`, normal IRQ1 and controller timer, with a clean machine lifecycle and no host input. |
 | Non-goals | No BOP/DOS/OpenNT term in bx-core/bx-mantle; no monitor IRET/ICA/CCPU recreation; no host input, GUI, mouse, paste, CMOS, PIT/IRQ0, video, firmware, `BOP 5C`, COMMAND console or trace-led selector patch. |
-| Reference Baseline | `BOP-DEPENDENCY-104..106`, `BOP-TOP-5F`, [T243 closure](history/m0-t243-closure-20260822.md), [T244 S1 audit](etc/evidence/m0-t244-s1-pc-keyboard-ivt-machine-audit-001.md), and the machine owner-package proposal. |
-| Files And ABI Surface | Adopted Bochs keyboard source, mantle-private factory/lifecycle and minimum finite SIM configuration only; existing `bx_devices` port registration, PIC and PC timer APIs. |
+| Reference Baseline | `BOP-DEPENDENCY-104..106`, `BOP-TOP-5F`, T243 closure and T244 S1 audit. |
+| Files And ABI Surface | Adopted Bochs keyboard source, mantle-private factory/lifecycle, existing port space, PIC and PC timer APIs. |
 | Applicable Rules | Source-first recovery, selector-blind machine boundary, feature deny-by-default, mandatory exception registration, native cleanup and MTSP governance. |
-| Verification | Focused inactive/active/cleanup port and IRQ1 tests; two clean lifecycles; formal Ninja link; boundary scan that rejects GUI/CMOS/mouse/plugin/BOP vocabulary. A native trace follows only after package regression. |
-| Expected Markers | `60h/64h` are registered only while the minimal machine owns the device; ordinary native IRQ1 can reach the existing PIC; all ports and singleton state restore on cleanup. |
+| Verification | Formal MSVC x64 `/MT` Ninja r2 fixture passes inactive/live port, `F2h`, IRQ1/IAC/EOI, cleanup and two-lifecycle checks. |
+| Expected Markers | `60h/64h` exist only while the minimal machine owns the device; IRQ1 reaches PIC; cleanup restores the port map and singleton state. |
 | Asset Needs | Existing Bochs 2.6 source identity and mantle PIC/port/timer seams; no new external source, host mutation or GUI dependency. |
 | Reporting Requirements | Register every adopted-source severance, retain original line-level rationale, record source/ABI/failure matrix and explicit rejected product-shell paths. |
 | Stop Conditions | Need for GUI, CMOS, mouse, plugin manager, PIT, video, firmware, host input, a BOP-specific request, or any unregistered Bochs patch. Record and transfer rather than infer. |
-| Exit Criteria | The one headless controller lifecycle is source/test/link complete and tracker records its remaining input/console/device exclusions. |
+| Exit Criteria | Met; P closure is being committed and pushed. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | T243 headless subset, T241 IVT watch, BOP 5C/5D, INT15 keyboard hooks, PIC/IRQ/timer lifecycle, monitor iret table and existing mantle port-space/device seams. |
-| Exit Status | S1 complete: full source/ABI/failure map selects this one headless native device slice; S2 in progress. |
-| Next Admission | S3 only after the required exception is registered and S2 proves native lifecycle without product-shell expansion. |
 
 ## Latest Closure
 

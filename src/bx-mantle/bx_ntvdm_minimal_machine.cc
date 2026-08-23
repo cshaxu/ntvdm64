@@ -13,6 +13,7 @@
 #include "bx-mantle/pc_system.h"
 #include "bx_ntvdm_minimal_sim.h"
 #include "bx_ntvdm_minimal_machine.h"
+#include "bx_ntvdm_headless_8042.h"
 #include "bx_ntvdm_a20_capability_v1.h"
 #include "bx_ntvdm_port_action_v1.h"
 
@@ -31,6 +32,7 @@ bx_ntvdm_minimal_machine_c::bx_ntvdm_minimal_machine_c()
   memory_owned = 0;
   port_space_owned = 0;
   pic_owned = 0;
+  keyboard_owned = 0;
   cpu_initialized = 0;
   pic = NULL;
 }
@@ -89,6 +91,19 @@ bx_ntvdm_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
   return BX_NTVDM_MINIMAL_MACHINE_OK;
 }
 
+bx_ntvdm_minimal_machine_status
+bx_ntvdm_minimal_machine_c::compose_headless_8042(void)
+{
+  if (keyboard_owned)
+    return BX_NTVDM_MINIMAL_MACHINE_OK;
+  if (!port_space_owned || !pic_owned)
+    return BX_NTVDM_MINIMAL_MACHINE_KEYBOARD_FAILED;
+  if (!bx_ntvdm_headless_8042_create_v1())
+    return BX_NTVDM_MINIMAL_MACHINE_KEYBOARD_FAILED;
+  keyboard_owned = 1;
+  return BX_NTVDM_MINIMAL_MACHINE_OK;
+}
+
 bx_bool bx_ntvdm_minimal_machine_c::set_realmode_segment_limit_compatibility(
   bx_bool enabled)
 {
@@ -117,6 +132,11 @@ bx_ntvdm_minimal_machine_status bx_ntvdm_minimal_machine_c::cleanup(void)
     bx_ntvdm_mantle_pic_destroy_v1(pic);
     pic = NULL;
     pic_owned = 0;
+  }
+  if (keyboard_owned) {
+    if (!bx_ntvdm_headless_8042_destroy_v1())
+      return BX_NTVDM_MINIMAL_MACHINE_KEYBOARD_CLEANUP_FAILED;
+    keyboard_owned = 0;
   }
 
   if (port_space_owned) {

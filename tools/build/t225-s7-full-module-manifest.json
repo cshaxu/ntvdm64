@@ -168,6 +168,7 @@
         "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
         "src/bx-mantle/bx_ntvdm_machine_engine_v1.c",
         "src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc",
+        "src/bx-mantle/bx_ntvdm_headless_8042.cc",
         "src/bx-mantle/bx_ntvdm_port_action_v1.cc",
         "src/bx-mantle/bx_ntvdm_minimal_machine.cc",
         "src/bx-mantle/bx_ntvdm_minimal_sim.cc",
@@ -176,7 +177,9 @@
         "src/bx-mantle/minimal_product_shell.cc",
         "src/bx-mantle/paramtree.cc",
         "src/bx-mantle/pc_system.cc",
-        "src/bx-mantle/pic.cc"
+        "src/bx-mantle/pic.cc",
+        "src/bx-mantle/keyboard.cc",
+        "src/bx-mantle/scancodes.cc"
       ]
     },
     {
@@ -1009,6 +1012,15 @@
       "source": "tests/bx-vdm/t242_s3_softpc_tape_io_fixture.c",
       "libraries": [
         "bx-vdm"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t244-s2-headless-8042-lifecycle-fixture",
+      "source": "tests/bx-mantle/t244_s2_headless_8042_lifecycle_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
       ],
       "platformLibraries": []
     },

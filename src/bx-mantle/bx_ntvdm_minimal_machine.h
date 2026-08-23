@@ -17,6 +17,8 @@ enum bx_ntvdm_minimal_machine_status {
   BX_NTVDM_MINIMAL_MACHINE_MEMORY_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_PORT_SPACE_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_PIC_FAILED,
+  BX_NTVDM_MINIMAL_MACHINE_KEYBOARD_FAILED,
+  BX_NTVDM_MINIMAL_MACHINE_KEYBOARD_CLEANUP_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_PIC_CLEANUP_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_PORT_SPACE_CLEANUP_FAILED,
   BX_NTVDM_MINIMAL_MACHINE_CPU_CONFIGURATION_FAILED
@@ -29,6 +31,9 @@ public:
   bx_ntvdm_minimal_machine_c();
 
   bx_ntvdm_minimal_machine_status initialize(Bit64u guest, Bit64u host);
+  // Compose the selector-blind 8042 only after the caller has initialized
+  // the native PC timer base for its selected IPS.
+  bx_ntvdm_minimal_machine_status compose_headless_8042(void);
   bx_ntvdm_minimal_machine_status cleanup(void);
 
   // Private mantle lifecycle control for the CPU compatibility gate.
@@ -41,6 +46,7 @@ private:
   bx_bool memory_owned;
   bx_bool port_space_owned;
   bx_bool pic_owned;
+  bx_bool keyboard_owned;
   bx_bool cpu_initialized;
   bx_pic_c *pic;
 };

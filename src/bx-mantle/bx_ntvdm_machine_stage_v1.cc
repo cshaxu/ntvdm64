@@ -498,6 +498,11 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
       BX_NTVDM_CANCELLATION_V1_NONE)
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_HOST_CANCELLATION;
   bx_pc_system.initialize(request->ips);
+  if (bx_ntvdm_machine_stage_machine->compose_headless_8042() !=
+      BX_NTVDM_MINIMAL_MACHINE_OK) {
+    bx_ntvdm_machine_stage_v1_reset();
+    return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
+  }
   stop_state.watchdog_fired = 0;
   stop_state.cancellation_fired = 0;
   stop_timer = bx_pc_system.register_timer_ticks(&stop_state,

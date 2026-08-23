@@ -47,7 +47,6 @@
 #define BX_PLUGGABLE
 
 #include "iodev.h"
-#include "gui/keymap.h"
 #include <math.h>
 #include "keyboard.h"
 #include "scancodes.h"
@@ -58,23 +57,6 @@
 
 bx_keyb_c *theKeyboard = NULL;
 
-int libkeyboard_LTX_plugin_init(plugin_t *plugin, plugintype_t type, int argc, char *argv[])
-{
-  // Create one instance of the keyboard device object.
-  theKeyboard = new bx_keyb_c();
-  // Before this plugin was loaded, pluginKeyboard pointed to a stub.
-  // Now make it point to the real thing.
-  bx_devices.pluginKeyboard = theKeyboard;
-  // Register this device.
-  BX_REGISTER_DEVICE_DEVMODEL(plugin, type, theKeyboard, BX_PLUGIN_KEYBOARD);
-  return(0); // Success
-}
-
-void libkeyboard_LTX_plugin_fini(void)
-{
-  delete theKeyboard;
-}
-
 bx_keyb_c::bx_keyb_c()
 {
   put("keyboard", "KBD");
@@ -84,13 +66,12 @@ bx_keyb_c::bx_keyb_c()
 
 bx_keyb_c::~bx_keyb_c()
 {
-  // remove runtime parameter handlers
-  SIM->get_param_num(BXPN_KBD_PASTE_DELAY)->set_handler(NULL);
-  SIM->get_param_num(BXPN_MOUSE_ENABLED)->set_handler(NULL);
+  // BX-MANTLE-091: this adopted, headless controller is owned by the
+  // mantle factory.  The original runtime-parameter registrations are not
+  // composed, so there are no SIM handlers or parameter-tree nodes to undo.
   if (pastebuf != NULL) {
     delete [] pastebuf;
   }
-  SIM->get_bochs_root()->remove("keyboard");
   BX_DEBUG(("Exit"));
 }
 
@@ -120,8 +101,8 @@ void bx_keyb_c::init(void)
   BX_DEBUG(("Init $Id: keyboard.cc 11346 2012-08-19 08:16:20Z vruppert $"));
   Bit32u   i;
 
-  DEV_register_irq(1, "8042 Keyboard controller");
-  DEV_register_irq(12, "8042 Keyboard controller (PS/2 mouse)");
+  // BX-MANTLE-091: the existing native PIC does not need the upstream
+  // product device-registry annotation to carry IRQ1.
 
   DEV_register_ioread_handler(this, read_handler,
                                       0x0060, "8042 Keyboard controller", 1);
@@ -131,8 +112,11 @@ void bx_keyb_c::init(void)
                                       0x0060, "8042 Keyboard controller", 1);
   DEV_register_iowrite_handler(this, write_handler,
                                       0x0064, "8042 Keyboard controller", 1);
+  // BX-MANTLE-091: Bochs' default controller serial cadence is kept as the
+  // fixed 1-usec native machine timing.  The historical GUI/SIM parameter
+  // surface is deliberately absent from this headless composition.
   BX_KEY_THIS timer_handle = bx_pc_system.register_timer(this, timer_handler,
-                                 SIM->get_param_num(BXPN_KBD_SERIAL_DELAY)->get(), 1, 1,
+                                 1, 1, 1,
 				 "8042 Keyboard controller");
 
   resetinternals(1);
@@ -157,7 +141,7 @@ void bx_keyb_c::init(void)
   BX_KEY_THIS s.kbd_controller.kbd_clock_enabled = 1;
   BX_KEY_THIS s.kbd_controller.aux_clock_enabled = 0;
   BX_KEY_THIS s.kbd_controller.allow_irq1 = 1;
-  BX_KEY_THIS s.kbd_controller.allow_irq12 = 1;
+  BX_KEY_THIS s.kbd_controller.allow_irq12 = 0;
   BX_KEY_THIS s.kbd_controller.kbd_output_buffer = 0;
   BX_KEY_THIS s.kbd_controller.aux_output_buffer = 0;
   BX_KEY_THIS s.kbd_controller.last_comm = 0;
@@ -170,8 +154,9 @@ void bx_keyb_c::init(void)
 
   BX_KEY_THIS s.kbd_controller.timer_pending = 0;
 
-  // Mouse initialization stuff
-  BX_KEY_THIS s.mouse.type            = SIM->get_param_enum(BXPN_MOUSE_TYPE)->get();
+  // Preserve the upstream controller state layout, but compose no mouse
+  // endpoint, IRQ12 registration, or host-input route.
+  BX_KEY_THIS s.mouse.type            = BX_MOUSE_TYPE_NONE;
   BX_KEY_THIS s.mouse.sample_rate     = 100; // reports per second
   BX_KEY_THIS s.mouse.resolution_cpmm = 4;   // 4 counts per millimeter
   BX_KEY_THIS s.mouse.scaling         = 1;   /* 1:1 (default) */
@@ -192,28 +177,13 @@ void bx_keyb_c::init(void)
   BX_KEY_THIS pastebuf = NULL;
   BX_KEY_THIS pastebuf_len = 0;
   BX_KEY_THIS pastebuf_ptr = 0;
-  BX_KEY_THIS paste_delay_changed(SIM->get_param_num(BXPN_KBD_PASTE_DELAY)->get());
+  BX_KEY_THIS pastedelay = 0;
   BX_KEY_THIS paste_service = 0;
   BX_KEY_THIS stop_paste = 0;
 
-  // mouse port installed on system board
-  DEV_cmos_set_reg(0x14, DEV_cmos_get_reg(0x14) | 0x04);
-
-  // add keyboard LEDs to the statusbar
-  BX_KEY_THIS statusbar_id[0] = bx_gui->register_statusitem("NUM");
-  BX_KEY_THIS statusbar_id[1] = bx_gui->register_statusitem("CAPS");
-  BX_KEY_THIS statusbar_id[2] = bx_gui->register_statusitem("SCRL");
-
-  if ((BX_KEY_THIS s.mouse.type == BX_MOUSE_TYPE_PS2) ||
-      (BX_KEY_THIS s.mouse.type == BX_MOUSE_TYPE_IMPS2)) {
-    DEV_register_default_mouse(this, mouse_enq_static, mouse_enabled_changed_static);
-  }
-
-  // init runtime parameter
-  SIM->get_param_num(BXPN_KBD_PASTE_DELAY)->set_handler(kbd_param_handler);
-  SIM->get_param_num(BXPN_KBD_PASTE_DELAY)->set_runtime_param(1);
-  SIM->get_param_num(BXPN_MOUSE_ENABLED)->set_handler(kbd_param_handler);
-  SIM->get_param_num(BXPN_MOUSE_ENABLED)->set_runtime_param(1);
+  // GUI LEDs, CMOS publication, default mouse attachment, paste injection
+  // and SIM runtime parameters are Bochs product-shell facilities.  They are
+  // intentionally not part of the selector-blind native machine.
 }
 
 void bx_keyb_c::reset(unsigned type)
@@ -225,6 +195,10 @@ void bx_keyb_c::reset(unsigned type)
 
 void bx_keyb_c::register_state(void)
 {
+  // BX-MANTLE-091: no product snapshot/configuration tree is composed.
+  // The headless lifecycle is process-local and has no restore contract.
+  return;
+#if 0
   int i;
   char name[4];
   bx_list_c *buffer;
@@ -296,34 +270,18 @@ void bx_keyb_c::register_state(void)
   }
   BXRS_DEC_PARAM_FIELD(list, controller_Qsize, BX_KEY_THIS s.controller_Qsize);
   BXRS_DEC_PARAM_FIELD(list, controller_Qsource, BX_KEY_THIS s.controller_Qsource);
+#endif
 }
 
 void bx_keyb_c::after_restore_state(void)
 {
-  Bit8u value = BX_KEY_THIS s.kbd_internal_buffer.led_status;
-  if (value != 0) {
-    bx_gui->statusbar_setitem(BX_KEY_THIS statusbar_id[0], value & 0x02);
-    bx_gui->statusbar_setitem(BX_KEY_THIS statusbar_id[1], value & 0x04);
-    bx_gui->statusbar_setitem(BX_KEY_THIS statusbar_id[2], value & 0x01);
-  }
+  // BX-MANTLE-091: restoration previously only repainted product GUI LEDs.
 }
 
 Bit64s bx_keyb_c::kbd_param_handler(bx_param_c *param, int set, Bit64s val)
 {
-  if (set) {
-    char pname[BX_PATHNAME_LEN];
-    param->get_param_path(pname, BX_PATHNAME_LEN);
-    if (!strcmp(pname, BXPN_KBD_PASTE_DELAY)) {
-      BX_KEY_THIS paste_delay_changed((Bit32u)val);
-    } else if (!strcmp(pname, BXPN_MOUSE_ENABLED)) {
-      if (set) {
-        bx_gui->mouse_enabled_changed(val!=0);
-        DEV_mouse_enabled_changed(val!=0);
-      }
-    } else {
-      BX_PANIC(("kbd_param_handler called with unexpected parameter '%s'", pname));
-    }
-  }
+  UNUSED(param); UNUSED(set);
+  // BX-MANTLE-091: no runtime parameter surface is installed.
   return val;
 }
 
@@ -517,15 +475,14 @@ void bx_keyb_c::write(Bit32u address, Bit32u value, unsigned io_len)
             }
             break;
           case 0xd4: // Write to mouse
-            // I don't think this enables the AUX clock
-            //set_aux_clock_enable(1); // enable aux clock line
-            kbd_ctrl_to_mouse(value);
-            // ??? should I reset to previous value of aux enable?
+            // BX-MANTLE-091: this composition has no auxiliary device.
+            // Do not fabricate an ACK, queue or IRQ12; leave the guest's
+            // original controller-timeout/error branch observable.
             break;
 
           case 0xd3: // write mouse output buffer
-            // Queue in mouse output buffer
-            controller_enQ(value, 1);
+            // BX-MANTLE-091: reject synthetic auxiliary output for the same
+            // no-mouse contract; ordinary keyboard output remains 0xd2.
             break;
 
 	  case 0xd2:
@@ -737,6 +694,10 @@ void bx_keyb_c::write(Bit32u address, Bit32u value, unsigned io_len)
 // chars require a shift or other modifier.
 void bx_keyb_c::service_paste_buf()
 {
+  // BX-MANTLE-091: clipboard/paste is a Bochs host-input product feature.
+  return;
+}
+#if 0
   if (!BX_KEY_THIS pastebuf) return;
   BX_DEBUG(("service_paste_buf: ptr at %d out of %d", BX_KEY_THIS pastebuf_ptr, BX_KEY_THIS pastebuf_len));
   int fill_threshold = BX_KBD_ELEMENTS - 8;
@@ -769,6 +730,7 @@ void bx_keyb_c::service_paste_buf()
   BX_KEY_THIS stop_paste = 0;
   BX_KEY_THIS paste_service = 0;
 }
+#endif
 
 // paste_bytes schedules an arbitrary number of ASCII characters to be
 // inserted into the hardware queue as it become available.  Any previous
@@ -777,6 +739,11 @@ void bx_keyb_c::service_paste_buf()
 // is complete, the keyboard code will call delete [] bytes;
 void bx_keyb_c::paste_bytes(Bit8u *bytes, Bit32s length)
 {
+  UNUSED(bytes); UNUSED(length);
+  // BX-MANTLE-091: no host paste endpoint is composed in this machine.
+  return;
+}
+#if 0
   BX_DEBUG(("paste_bytes: %d bytes", length));
   if (BX_KEY_THIS pastebuf) {
     BX_ERROR(("previous paste was not completed!  %d chars lost",
@@ -788,9 +755,15 @@ void bx_keyb_c::paste_bytes(Bit8u *bytes, Bit32s length)
   BX_KEY_THIS pastebuf_len = length;
   BX_KEY_THIS service_paste_buf();
 }
+#endif
 
 void bx_keyb_c::gen_scancode(Bit32u key)
 {
+  UNUSED(key);
+  // BX-MANTLE-091: host key injection is deliberately unavailable.
+  return;
+}
+#if 0
   unsigned char *scancode;
   Bit8u  i;
 
@@ -845,6 +818,7 @@ void bx_keyb_c::gen_scancode(Bit32u key)
     }
   }
 }
+#endif
 
 
   void BX_CPP_AttrRegparmN(1)
@@ -1036,9 +1010,7 @@ void bx_keyb_c::kbd_ctrl_to_kbd(Bit8u value)
     BX_KEY_THIS s.kbd_internal_buffer.led_status = value;
     BX_DEBUG(("LED status set to %02x",
       (unsigned) BX_KEY_THIS s.kbd_internal_buffer.led_status));
-    bx_gui->statusbar_setitem(BX_KEY_THIS statusbar_id[0], value & 0x02);
-    bx_gui->statusbar_setitem(BX_KEY_THIS statusbar_id[1], value & 0x04);
-    bx_gui->statusbar_setitem(BX_KEY_THIS statusbar_id[2], value & 0x01);
+    // BX-MANTLE-091: retain protocol ACK/order, omit product GUI LEDs.
     kbd_enQ(0xFA); // send ACK %%%
     return;
   }
@@ -1096,17 +1068,14 @@ void bx_keyb_c::kbd_ctrl_to_kbd(Bit8u value)
       // XT sends nothing, AT sends ACK
       // MFII with translation sends ACK+ABh+41h
       // MFII without translation sends ACK+ABh+83h
-      if (SIM->get_param_enum(BXPN_KBD_TYPE)->get() != BX_KBD_XT_TYPE) {
-        kbd_enQ(0xFA);
-        if (SIM->get_param_enum(BXPN_KBD_TYPE)->get() == BX_KBD_MF_TYPE) {
-          kbd_enQ(0xAB);
-
-          if(BX_KEY_THIS s.kbd_controller.scancodes_translate)
-            kbd_enQ(0x41);
-          else
-            kbd_enQ(0x83);
-        }
-      }
+      // BX-MANTLE-091: use Bochs' upstream MF default without exposing the
+      // product configuration tree.  The response ordering remains original.
+      kbd_enQ(0xFA);
+      kbd_enQ(0xAB);
+      if(BX_KEY_THIS s.kbd_controller.scancodes_translate)
+        kbd_enQ(0x41);
+      else
+        kbd_enQ(0x83);
       break;
 
     case 0xf3:  // typematic info
