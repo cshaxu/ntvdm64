@@ -259,6 +259,7 @@
         "src/bx-vdm/bop/observation/bx_ntvdm_command_current_dir_observation_v1.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_dem_open_observation_v1.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_demfile_create_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_ntdos_exec_entry_observation_v1.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/bx-vdm/bop/shim/dem_direct_host_session.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.c",
@@ -410,6 +411,14 @@
       "platformLibraries": [
         "user32.lib"
       ]
+    },
+    {
+      "name": "t247-s2-ntdos-exec-entry-observation-fixture",
+      "source": "tests/bx-vdm/t247_s2_ntdos_exec_entry_observation_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
     },
     {
       "name": "t245-s2-ntdos-exec-observation-fixture",

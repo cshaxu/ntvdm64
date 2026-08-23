@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T247 S2** — NTDOS guest EXEC entry PDB observation composition.
+**Active: M0 T247 S3** — Source-built local DOS child ordinary-return profile.
 
 ## Active Packet
 
-### M0 T247 S2 — NTDOS guest EXEC entry PDB observation composition
+### M0 T247 S3 — Source-built local DOS child ordinary-return profile
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T247 S2`, Ordinary Mode, single-person dual-role source/ABI recovery. |
+| Identifier Mode | `M0 T247 S3`, Ordinary Mode, single-person dual-role source/ABI recovery. |
 | Admission And Approval | Standing owner delegation selects the current queue-leading NTDOS guest EXEC and parent-return candidate after T246's first reached machine package. |
-| Objective | Connect the existing fixed-width PDB observer only to the imported original `50:36 demEntryDosApp` handoff, proving the source-built guest has completed original `$Exec` PDB setup without adapter-owned DOS process behavior. |
-| Non-goals | No COMMAND host-worker rewrite, BOP leaf implementation, guest PDB/arena/JFN implementation, Bochs intrusion, device enablement, or unsupported continuity claim. |
-| Reference Baseline | S1 owner map; queue-leading guest EXEC proposal; T236 COMMAND worker closure; T245 source-built permanent COMMAND continuity; T246 active `02/06` route. |
-| Files And ABI Surface | Existing `bx_ntvdm_ntdos_exec_observation_v1` and imported `demEntryDosApp` composition only; fixed 16-bit PDB fact, fixed 50-byte checked copy, no new mutable guest ABI. |
+| Objective | Recover one source-built local DOS binary `AL=0` child entry and ordinary return through original `$Exec`, `$Exit/$Abort` and `reset_environment`, recording parent/PDB facts without host-side DOS process behavior. |
+| Non-goals | No COMMAND host-worker rewrite, unknown/32-bit/WOW launch, Redirector JFN behavior, guest PDB/arena/JFN implementation, Bochs intrusion, device enablement, or unsupported multi-program continuity claim. |
+| Reference Baseline | S1 owner map; S2 checked `50:36` PDB observation closure; T236 COMMAND worker closure; T245 source-built permanent COMMAND continuity; T246 active `02/06` route. |
+| Files And ABI Surface | Source-built `NTIO.SYS`/`NTDOS.SYS`/`COMMAND.COM` plus one unchanged source-built local DOS target; existing fixed observation and typed machine/host seams only. |
 | Applicable Rules | Source-first ladder, guest/machine/adapter owner separation and no trace-led leaf selection. |
-| Verification | Original source/layout citations; focused positive/negative composition fixture; formal Ninja closure; documentation governance and `git diff --check`. |
-| Expected Markers | A successful `50:36` route yields only the fixed copied PDB facts; disabled/invalid/OOB paths leave guest state unchanged and do not widen selector handling. |
-| Asset Needs | Existing OpenNT guest source tree, staged DOS/COMMAND images, existing typed checked-RAM/observation seam and formal build manifest. |
-| Reporting Requirements | Name retained source handoff order, fixed copied fields, source-first decision and every transfer. |
-| Stop Conditions | The imported route cannot provide the PDB segment/copy without changing guest state or widening the bx boundary. |
-| Exit Criteria | A bounded fixture proves the `50:36` observation composition and no source-owned lifecycle effect is replaced. |
+| Verification | Source-built input identity; PDB pre-child/parent-return observations; focused formal/native evidence; documentation governance and `git diff --check`. |
+| Expected Markers | Original child entry reaches the S2 handoff; original child exit restores parent PDB/vector/environment facts or stops at a named machine/host owner. |
+| Asset Needs | Existing OpenNT guest source tree, staged DOS/COMMAND/target images, S2 observation, current typed machine and Direct-host seams. |
+| Reporting Requirements | Name exact guest source edge, source-built image identity, observed before/after facts and every explicit transfer. |
+| Stop Conditions | A required transition needs adapter-owned DOS state, an unapproved machine semantics change, or an unavailable service without a named owner. |
+| Exit Criteria | Either source-built child-to-parent return is observed with guest-state proof, or the first blocking owner is demonstrated and transferred with no invented workaround. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
-| Similar-Issue Sweep | `BOP-DEPENDENCY-018/027/028/092..101`, `50:36`, `54:07/08/0A/0B`, NTDOS EXEC/PSP/arena/JFN/environment source, staged guest images and machine-stage contracts. |
+| Similar-Issue Sweep | `BOP-DEPENDENCY-018/027/028/092..101`, `50:36`, `54:07/08/0A/0B`, NTDOS EXEC/PSP/arena/JFN/environment source, staged guest images, machine-stage contracts and source-built local target. |
 
 ## Latest Closure
 
