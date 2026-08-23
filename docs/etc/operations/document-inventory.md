@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2193 |
 | --- | --- |
-| Generated UTC | 2026-08-23T20:49:03Z |
+| Generated UTC | 2026-08-23T21:02:19Z |
 
 ## Entries
 
@@ -443,7 +443,7 @@ content-divergent entries.
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |
-| etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | 6033623b4f15fbffa33ce8b48c26948bf8cb1ff2ff58d25f10d3703f5018342a |
+| etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | bbde6f08a2ba40d71124c2f8883a76e12bd24cbcf60e9c19c53e0283d2b785cc |
 | etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md | indexed supporting material | 3e4c68d258fa9e18ef6fbec2513bf52fc928f13afd9ddfd81f5de217cfa71a6b |
 | etc/operations/proposal-source-built-guest-low-memory-runtime-provenance-001.md | indexed supporting material | 02ed77f18bf4e4018a96be67bcf25b637185eda97c0f132316718a8def3639a4 |
 | etc/operations/t188-bop-ingress-composition-plan.md | indexed supporting material | 76e13591247ef15c3c3999216011ffee2799de1b5e7fb1ccac98f053ed8c2402 |
