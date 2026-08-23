@@ -2,31 +2,38 @@
 
 ## Current Work
 
-**Active: M0 T249 S3** — Selector-blind low-memory physical-write observation design and closure.
+**Active: M0 T249 S4** — Source-built guest low-memory provenance reconciliation and T249 closure.
 
 ## Active Packet
 
-### M0 T249 S3 — Selector-blind low-memory physical-write observation design and closure
+### M0 T249 S4 — Source-built guest low-memory provenance reconciliation and T249 closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T249 S3`, Ordinary Mode, single-person dual-role selector-blind mechanical observation closure. |
-| Admission And Approval | Completed S1 proves no existing seam can identify the writer. Standing owner authorization covers the required minimal registered external-code exception and ordinary verification. |
-| Objective | Implement and verify the smallest default-off physical-write observation capable of attributing writes in the fixed `0x0A87` range without altering CPU/RAM semantics. |
-| Non-goals | No BOP provider change, guest PSP/PDB logic, device/firmware enablement, guest semantic decoding, or arbitrary memory tracing. |
-| Reference Baseline | [T249 S1 seam audit](etc/evidence/m0-t249-s1-low-memory-provenance-seam-audit-001.md), [T248 S4 attribution](etc/evidence/m0-t248-s4-post-exec-final-position-attribution-001.md), `BOP-DEPENDENCY-115`. |
-| Files And ABI Surface | Adopted Bochs physical-write slow path plus existing CPU linear-memory fast-path notification; fixed-width mantle observation ABI; CLI diagnostic presentation; exception registry, focused fixture and tracker/evidence. |
-| Applicable Rules | Source-first ladder, selector-blind machine boundary, no trace-led BOP patch and fixed-width observation discipline. |
-| Verification | Focused disabled/overlap/non-overlap write fixture, one bounded source-built observation, documentation governance and `git diff --check`. |
-| Expected Markers | First relevant write physical range, copied preceding CPU position and fixed captured bytes; no behavior change with observer disabled. |
-| Asset Needs | Current formal Ninja graph, original source/image map, `BX_MEM_C` write path and existing instruction-history ABI. |
-| Reporting Requirements | Register the intrusion before code change; record watched range, byte/lifecycle semantics, negative coverage, native output and owner disposition. |
-| Stop Conditions | The design needs a guest pointer, BOP/DOS selector, arbitrary trace buffer, or observable write-result alteration. |
-| Exit Criteria | A default-off registered observer passes negative coverage and yields one bounded checkpoint attribution, or an evidence-backed mechanical limitation is recorded. |
+| Identifier Mode | `M0 T249 S4`, Ordinary Mode, single-person dual-role evidence reconciliation and closure. |
+| Admission And Approval | T249's approved proposal schedules reconciliation after S3. S3 attributes the first byte mutation to original NTDOS `DOSCODE`; no further source or Bochs change is admitted. |
+| Objective | Reconcile `BOP-DEPENDENCY-115`, original source/image facts and the physical-write result; prepare the T closure and precise next owner boundary. |
+| Non-goals | No BOP provider change, guest PSP/PDB logic, device/firmware enablement, additional diagnostics, target-pointer fabrication or arbitrary guest trace. |
+| Reference Baseline | [T249 S1 seam audit](etc/evidence/m0-t249-s1-low-memory-provenance-seam-audit-001.md), [T249 S3 closure](etc/evidence/m0-t249-s3-physical-write-provenance-closure-001.md), `BOP-DEPENDENCY-115`. |
+| Files And ABI Surface | Tracker, T249 closure history, STATUS, QUEUE and supporting evidence only. |
+| Applicable Rules | Source-first ladder, selector-blind machine boundary, no trace-led BOP patch and evidence/closure discipline. |
+| Verification | Re-read the tracker and original `NTDOS.MAP`; documentation governance and `git diff --check`. |
+| Expected Markers | Original NTDOS runtime ownership of the write; explicit exclusion of Bochs/BOP/adapter repair; one concrete next source-built guest control-flow question. |
+| Asset Needs | S3 native output, original primary `NTDOS.MAP`, T247/T248 evidence and T249 proposal. |
+| Reporting Requirements | State attribution confidence and exact remaining limitation; do not overclaim a symbol-level source label absent from the original map. |
+| Stop Conditions | Any proposed repair needs a new guest semantic implementation, machine capability, BOP service or extra Bochs diagnostic. |
+| Exit Criteria | `BOP-DEPENDENCY-115` is updated, a closure names the next owner question, and no unreviewed T249 changes remain. |
 | Original Owner Request | Continue ordinary recovery without repeated approval; preserve original OpenNT source ownership and Bochs selector blindness. |
-| Similar-Issue Sweep | `BOP-DEPENDENCY-093/095/098/115`, NTIO `sysinit*.asm` relocation code, mantle RAM/staging lifecycle and existing instruction/terminal provenance records. |
+| Similar-Issue Sweep | `BOP-DEPENDENCY-093/095/098/115`, NTIO `sysinit*.asm`, NTDOS `DOSCODE`, and prior post-EXEC provenance records. |
 
 ## Latest Closure
+
+M0 T249 S3 closes low-memory writer provenance.  The initial `0x0A87 <- FF`
+mutation is a source-built original NTDOS `DOSCODE` CPU write at
+`CS:base:EIP=9386:93860:7424`, not a Bochs, adapter or BOP-provider write.
+The remaining owner question is original guest far-target publication and
+control flow, for M0 T249 S4 reconciliation.  See the
+[T249 closure draft](history/m0-t249-closure-20260823.md).
 
 M0 T248 closes selector-blind post-EXEC real-mode continuity attribution. The
 source-built checkpoint reaches accepted `50:36` and `50:1E`, then makes a
