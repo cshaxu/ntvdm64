@@ -77,6 +77,13 @@ fixtures and all 79 outputs pass; custom editable PIF UI, VDD/debugger,
 printer and floppy product semantics remain explicitly outside this facade.
 See [S4 P3 evidence](etc/evidence/m0-t259-s4-p3-host-dialog-oem-facade-closure-001.md).
 
+S4 P4 completes the final reached-seam reconciliation.  It restores the
+directly composable `FdiskTerminatePDB` half of the original
+`HostTerminatePDB` order, makes the unavailable VDD/floppy halves explicit,
+and records direct parity for the original empty `UMBNotify` body.  The fresh
+454-node r16 formal graph is clean; focused DEM search/FCB and DASD fixtures
+pass.  S4 is complete; see [S4 P4 evidence](etc/evidence/m0-t259-s4-p4-final-host-machine-reconciliation-001.md).
+
 ## Latest Closure
 
 M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager

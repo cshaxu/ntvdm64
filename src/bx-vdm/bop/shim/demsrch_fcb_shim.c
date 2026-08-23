@@ -23,6 +23,10 @@ void demGetFileInfo(void);
 void demOpenFCB(void);
 void demRenameFCB(void);
 
+/* Original nt_msscs.c carries this exact lifecycle spelling.  Do not import
+ * demdasd's unrelated macro domain merely to name the one FDISK teardown. */
+void FdiskTerminatePDB(USHORT pdb);
+
 /* OpenNT's standalone source expected this process-global lifecycle marker
  * from its historical VDM host.  A newly composed CLI session starts in the
  * same first-call state; session wiring will own later transitions. */
@@ -57,12 +61,17 @@ BOOL FindNextFileOem(HANDLE find, LPWIN32_FIND_DATAA data)
     return FindNextFileA(find, data);
 }
 
-/* Original dependency: VDDTerminateUserHook/HostTerminatePDB from the
- * invasive NT VDM host process.  The Direct CLI composition has no VDD or
- * per-PDB host table yet; preserve the imported cleanup ordering while this
- * narrow no-owner seam intentionally has no additional side effect. */
+/* DIVERGENCE: nt_msscs.c:VDDTerminateUserHook walks the private VDD user-hook
+ * list. The CLI does not recreate the VDD callback broker; do not report a
+ * fabricated callback completion. */
 void VDDTerminateUserHook(USHORT pdb) { (void)pdb; }
-void HostTerminatePDB(USHORT pdb) { (void)pdb; }
+void HostTerminatePDB(USHORT pdb)
+{
+    /* nt_msscs.c orders FloppyTerminatePDB(PDB), then FdiskTerminatePDB(PDB).
+     * The floppy half remains the explicit FDC/DMA/CMOS unavailable owner;
+     * retain the directly composable FDISK half in its original second slot. */
+    FdiskTerminatePDB(pdb);
+}
 
 /* RtlProcessHeap was an OpenNT-era exported helper.  The current public
  * process heap has the same role for the imported RtlAllocate/FreeHeap calls.
