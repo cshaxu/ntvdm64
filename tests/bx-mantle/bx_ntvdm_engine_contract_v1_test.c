@@ -44,6 +44,18 @@ int main(void)
     request.guest_memory_bytes = UINT64_C(0x1010000);
     if (bx_ntvdm_engine_request_v1_valid(&request)) return 10;
     request.guest_memory_bytes = UINT64_C(0x100000);
+    request.reserved_memory_base = UINT64_C(0x100000);
+    request.reserved_memory_bytes = UINT64_C(0x10000);
+    if (bx_ntvdm_engine_request_v1_valid(&request)) return 11;
+    request.guest_memory_bytes = UINT64_C(0x200000);
+    if (!bx_ntvdm_engine_request_v1_valid(&request)) return 12;
+    request.reserved_memory_base = UINT64_C(0x101000);
+    if (bx_ntvdm_engine_request_v1_valid(&request)) return 13;
+    request.reserved_memory_base = UINT64_C(0x100000);
+    request.reserved_memory_bytes = UINT64_C(0x110000);
+    if (bx_ntvdm_engine_request_v1_valid(&request)) return 14;
+    request.reserved_memory_bytes = 0u;
+    request.reserved_memory_base = 0u;
     request.launch_descriptor[request.launch_descriptor_chars] = 1u;
     if (bx_ntvdm_engine_request_v1_valid(&request)) return 2;
     request.launch_descriptor[request.launch_descriptor_chars] = 0u;

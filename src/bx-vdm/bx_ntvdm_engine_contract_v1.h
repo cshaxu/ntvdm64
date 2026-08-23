@@ -13,7 +13,7 @@
 
 #define BX_NTVDM_ENGINE_REQUEST_V1_MAGIC UINT32_C(0x42584551)
 #define BX_NTVDM_ENGINE_RESULT_V1_MAGIC  UINT32_C(0x42584552)
-#define BX_NTVDM_ENGINE_CONTRACT_V1_VERSION UINT32_C(3)
+#define BX_NTVDM_ENGINE_CONTRACT_V1_VERSION UINT32_C(4)
 #define BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS UINT32_C(260)
 #define BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS UINT32_C(256)
 
@@ -48,6 +48,8 @@ struct bx_ntvdm_engine_request_v1 {
     uint32_t launch_descriptor_chars;
     uint64_t instruction_tick_budget;
     uint64_t guest_memory_bytes;
+    uint64_t reserved_memory_base;
+    uint64_t reserved_memory_bytes;
     uint16_t profile_descriptor[BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS + 1u];
     uint16_t root_descriptor[BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS + 1u];
     uint16_t launch_descriptor[BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS + 1u];

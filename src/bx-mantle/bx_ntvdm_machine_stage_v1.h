@@ -152,6 +152,8 @@ struct bx_ntvdm_machine_stage_v1_request {
   uint32_t struct_bytes;
   uint32_t reserved0;
   uint64_t guest_memory_bytes;
+  uint64_t reserved_memory_base;
+  uint64_t reserved_memory_bytes;
   struct bx_ntvdm_mechanical_action_v1 initial_state_action;
   struct bx_ntvdm_mechanical_action_v1 startup_action;
   uint64_t preserved_state_address;

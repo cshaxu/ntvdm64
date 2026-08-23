@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S7** — Generic ordinary-RAM reservation design.
+**Active: M0 T256 S8** — Explicit ordinary-RAM reservation lifecycle.
 
 ## Active Packet
 
-### M0 T256 S7 — Generic ordinary-RAM reservation design
+### M0 T256 S8 — Explicit ordinary-RAM reservation lifecycle
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S7`, Ordinary Mode, single-person dual-role source/ABI design. |
-| Admission And Approval | S6 is closed by the formal [geometry evidence](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md). S7 is analysis only until a new selector-blind reservation record is prospectively registered. |
-| Objective | Define the smallest generic ordinary-RAM reservation lifecycle that can use an explicitly composed interval without encoding DPMI, BOP, selector or host-pointer policy. |
-| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, allocator implementation, pointer/object, trace-driven patch, or adopted-code change. |
-| Reference Baseline | [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S5 geometry map](etc/evidence/m0-t256-s5-guest-ram-geometry-impact-map-001.md), [S6 closure](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md), [S7 design](etc/evidence/m0-t256-s7-ordinary-ram-reservation-design-001.md), and tracker. |
-| Files And ABI Surface | Evidence and tracker only unless a later registered S defines a selector-blind reservation record. |
+| Identifier Mode | `M0 T256 S8`, Ordinary Mode, single-person dual-role implementation and formal verification. |
+| Admission And Approval | S7 selected an explicit interval; `BX-MANTLE-097` is registered before any implementation. |
+| Objective | Implement the smallest selector-blind ordinary-RAM reservation lifecycle over a copied, explicitly composed interval. |
+| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, host allocation/pointer, paging, descriptor change, automatic high-memory claim, trace-driven patch, or adopted-code change. |
+| Reference Baseline | [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S5 geometry map](etc/evidence/m0-t256-s5-guest-ram-geometry-impact-map-001.md), [S6 closure](etc/evidence/m0-t256-s6-guest-memory-geometry-closure-001.md), and [S7 design](etc/evidence/m0-t256-s7-ordinary-ram-reservation-design-001.md). |
+| Files And ABI Surface | Project-owned bx-mantle reservation record, machine-stage/engine copied configuration and CLI admission only. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Source/ownership map, explicit reservation-record proposal, collision and lifecycle rules, and an admission/defer decision. |
-| Expected Markers | Composed interval source, non-overlap rule and opaque ID without allocator or DPMI terms. |
+| Verification | Default/no-reservation rejection, valid allocate/release/reuse, malformed/collision rejection, reset clearing, checked-RAM backing, and engine/CLI contract tests in a fresh formal Ninja graph. |
+| Expected Markers | Composed interval, non-overlap first-fit, opaque ID and copied address only. |
 | Asset Needs | S4/S5/S6 evidence, engine/startup composition, machine stage and formal Ninja manifest. |
 | Reporting Requirements | Distinguish capacity from reservation/mapping; do not claim a DPMI allocation yet. |
 | Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | A minimal reservation ABI is either prospectively admitted with exact lifecycle tests or explicitly deferred without a hidden xmem shortcut. |
+| Exit Criteria | A registered, selector-blind reservation ABI is code/build/test closed with no hidden xmem shortcut. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 

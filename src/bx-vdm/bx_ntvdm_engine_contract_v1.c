@@ -29,6 +29,15 @@ static int guest_memory_bytes_valid(uint64_t bytes)
         bytes % UINT64_C(0x10000) == 0u;
 }
 
+static int reserved_memory_valid(uint64_t capacity, uint64_t base,
+    uint64_t bytes)
+{
+    return (base == 0u && bytes == 0u) ||
+        (base >= UINT64_C(0x100000) && bytes != 0u &&
+         base % UINT64_C(0x10000) == 0u && bytes % UINT64_C(0x10000) == 0u &&
+         base + bytes > base && base + bytes <= capacity);
+}
+
 void bx_ntvdm_engine_request_v1_clear(struct bx_ntvdm_engine_request_v1 *request)
 {
     if (request == 0) return;
@@ -48,6 +57,8 @@ int bx_ntvdm_engine_request_v1_valid(const struct bx_ntvdm_engine_request_v1 *re
         !mutation_mode_valid(request->mutation_mode) ||
         request->instruction_tick_budget == 0u ||
         !guest_memory_bytes_valid(request->guest_memory_bytes) ||
+        !reserved_memory_valid(request->guest_memory_bytes,
+            request->reserved_memory_base, request->reserved_memory_bytes) ||
         !descriptor_valid(request->profile_descriptor,
             request->profile_descriptor_chars,
             BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS) ||

@@ -16,6 +16,7 @@
 #include "bx_ntvdm_headless_8042.h"
 #include "bx_ntvdm_a20_capability_v1.h"
 #include "bx_ntvdm_protected_range_action_v1.h"
+#include "bx_ntvdm_ordinary_ram_reservation_v1.h"
 #include "bx_ntvdm_port_action_v1.h"
 
 static logfunctions bx_ntvdm_minimal_machine_log;
@@ -123,6 +124,7 @@ bx_ntvdm_minimal_machine_status bx_ntvdm_minimal_machine_c::cleanup(void)
 {
   bx_ntvdm_port_action_v1_set_lifecycle_active(0u);
   bx_ntvdm_protected_range_action_v1_set_lifecycle_active(0u);
+  bx_ntvdm_ordinary_ram_reservation_v1_set_lifecycle_active(0u);
   if (cpu_initialized) {
     bx_cpu.set_realmode_segment_limit_compatibility(0);
     cpu_initialized = 0;

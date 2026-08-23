@@ -61,6 +61,8 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION, 3u);
     }
     machine_stage.guest_memory_bytes = request->guest_memory_bytes;
+    machine_stage.reserved_memory_base = request->reserved_memory_base;
+    machine_stage.reserved_memory_bytes = request->reserved_memory_bytes;
     if (!bx_ntvdm_dem_v2_startup_prepare_machine_stage_entry(&machine_entry)) {
         bx_ntvdm_command_v2_runtime_session_reset();
         bx_ntvdm_dem_v2_runtime_session_reset();

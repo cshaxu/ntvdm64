@@ -98,6 +98,18 @@ static int parse_guest_memory_kib(const wchar_t *text, uint64_t *out_bytes)
         *out_bytes <= UINT64_C(0x1000000) &&
         *out_bytes % UINT64_C(0x10000) == 0u;
 }
+
+/* A reservation is a copied machine-admission interval, not an allocation
+ * request or a provider policy.  Its final containment check remains in the
+ * engine contract because that contract owns the selected RAM capacity. */
+static int parse_reserved_memory_kib(const wchar_t *text, uint64_t *out_bytes)
+{
+    uint64_t kib;
+    if (!parse_instruction_tick_budget(text, &kib) || kib > UINT64_MAX / 1024u)
+        return 0;
+    *out_bytes = kib * 1024u;
+    return *out_bytes != 0u && *out_bytes % UINT64_C(0x10000) == 0u;
+}
 static void print_bop_sequence(const struct bx_ntvdm_bop_sequence_observation_v1 *sequence)
 {
     uint32_t index;
@@ -239,6 +251,7 @@ int wmain(int argc, wchar_t **argv)
     const wchar_t *config = 0, *root = 0, *target;
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     int has_mutation_mode = 0, has_tick_budget = 0, has_guest_memory = 0,
+        has_reserved_memory_base = 0, has_reserved_memory = 0,
         has_bop_observation = 0, has_command_bootstrap_observation = 0, has_command_current_dir_observation = 0, has_dem_open_observation = 0, has_demfile_create_observation = 0, has_ntdos_exec_entry_observation = 0, has_generic_ud_observation = 0, has_first_fault_observation = 0, has_terminal_position_observation = 0
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         , has_software_interrupt_observation = 0
@@ -259,6 +272,7 @@ int wmain(int argc, wchar_t **argv)
     uint32_t mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
     uint64_t instruction_tick_budget = UINT64_C(1000000);
     uint64_t guest_memory_bytes = UINT64_C(0x100000);
+    uint64_t reserved_memory_base = 0u, reserved_memory_bytes = 0u;
     int validate_only = 0, observe_bop_sequence = 0, observe_command_bootstrap = 0, observe_command_current_dir = 0, observe_dem_open = 0, observe_demfile_create = 0, observe_ntdos_exec_entry = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_terminal_position = 0
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         , observe_software_interrupts = 0
@@ -307,6 +321,12 @@ int wmain(int argc, wchar_t **argv)
         else if (wcscmp(argv[index], L"--guest-memory-kib") == 0 && index + 1 < argc &&
             !has_guest_memory && parse_guest_memory_kib(argv[index + 1], &guest_memory_bytes))
             has_guest_memory = 1, index += 2;
+        else if (wcscmp(argv[index], L"--reserved-memory-base-kib") == 0 && index + 1 < argc &&
+            !has_reserved_memory_base && parse_reserved_memory_kib(argv[index + 1], &reserved_memory_base))
+            has_reserved_memory_base = 1, index += 2;
+        else if (wcscmp(argv[index], L"--reserved-memory-kib") == 0 && index + 1 < argc &&
+            !has_reserved_memory && parse_reserved_memory_kib(argv[index + 1], &reserved_memory_bytes))
+            has_reserved_memory = 1, index += 2;
         else if (wcscmp(argv[index], L"--observe-ud-sequence") == 0 && !has_generic_ud_observation)
             has_generic_ud_observation = 1, observe_generic_ud_sequence = 1, ++index;
         else if (wcscmp(argv[index], L"--observe-bop-sequence") == 0 && !has_bop_observation)
@@ -411,15 +431,19 @@ int wmain(int argc, wchar_t **argv)
     request.mutation_mode = mutation_mode;
     request.instruction_tick_budget = lifecycle_policy.instruction_tick_budget;
     request.guest_memory_bytes = guest_memory_bytes;
+    request.reserved_memory_base = reserved_memory_base;
+    request.reserved_memory_bytes = reserved_memory_bytes;
     if (!bx_ntvdm_engine_request_v1_valid(&request)) {
         ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
         return 3;
     }
     if (validate_only) {
-        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu guest-memory=%llu observe-bop-sequence=%u observe-command-bootstrap=%u observe-ud-sequence=%u observe-first-fault=%u observe-terminal-position=%u\n",
+        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu guest-memory=%llu reserved-base=%llu reserved-bytes=%llu observe-bop-sequence=%u observe-command-bootstrap=%u observe-ud-sequence=%u observe-first-fault=%u observe-terminal-position=%u\n",
             request.admitted_drive_mask, request.excluded_drive_mask,
             request.mutation_mode, (unsigned long long)request.instruction_tick_budget,
             (unsigned long long)request.guest_memory_bytes,
+            (unsigned long long)request.reserved_memory_base,
+            (unsigned long long)request.reserved_memory_bytes,
             observe_bop_sequence ? 1u : 0u, observe_command_bootstrap ? 1u : 0u, observe_generic_ud_sequence ? 1u : 0u,
             observe_first_fault ? 1u : 0u, observe_terminal_position ? 1u : 0u);
         ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
@@ -724,6 +748,6 @@ usage:
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
         L" [--observe-budget-terminal-provenance]"
 #endif
-        L" [--observe-ntdos-exec-entry] [--guest-memory-kib 1024..16384] [--validate-only] target [args...]\n");
+        L" [--observe-ntdos-exec-entry] [--guest-memory-kib 1024..16384] [--reserved-memory-base-kib 1024..] [--reserved-memory-kib 64..] [--validate-only] target [args...]\n");
     return 2;
 }

@@ -9,6 +9,7 @@
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_ivt_watch_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
+#include "bx_ntvdm_ordinary_ram_reservation_v1.h"
 #include "bx_ntvdm_instruction_history.h"
 
 #include <string.h>
@@ -181,6 +182,14 @@ static bx_bool bx_ntvdm_machine_stage_preserved_range_valid(
   return bytes != 0 && bytes <= 64u && address <= 0x100000u - bytes;
 }
 
+static bx_bool bx_ntvdm_machine_stage_reservation_valid(Bit64u capacity,
+  Bit64u base, Bit64u bytes)
+{
+  return (base == 0u && bytes == 0u) ||
+    (base >= 0x100000u && bytes != 0u && base % 0x10000u == 0u &&
+     bytes % 0x10000u == 0u && base + bytes > base && base + bytes <= capacity);
+}
+
 /* Timer callbacks execute from the native CPU timing path.  This consumes
  * only selector-blind physical-line publications made by another host thread;
  * the existing PIC remains the sole owner of masking, cascade and INTR. */
@@ -232,6 +241,8 @@ extern "C" int bx_ntvdm_machine_stage_v1_request_valid(
     request->guest_memory_bytes >= BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_MIN_BYTES &&
     request->guest_memory_bytes <= BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_MAX_BYTES &&
     request->guest_memory_bytes % BX_NTVDM_MACHINE_STAGE_V1_GUEST_MEMORY_GRANULARITY == 0u &&
+    bx_ntvdm_machine_stage_reservation_valid(request->guest_memory_bytes,
+      request->reserved_memory_base, request->reserved_memory_bytes) &&
     bx_ntvdm_machine_stage_optional_action_valid(&request->initial_state_action) &&
     bx_ntvdm_mechanical_action_v1_valid(&request->startup_action) &&
     request->ivt_watch_enabled <= 1u &&
@@ -270,6 +281,13 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_begin(
     bx_ntvdm_machine_stage_v1_reset();
     return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
   }
+  if (bx_ntvdm_ordinary_ram_reservation_v1_configure(
+      request->reserved_memory_base, request->reserved_memory_bytes) !=
+      BX_NTVDM_ORDINARY_RAM_RESERVATION_V1_OK) {
+    bx_ntvdm_machine_stage_v1_reset();
+    return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
+  }
+  bx_ntvdm_ordinary_ram_reservation_v1_set_lifecycle_active(1u);
 
   initial_state_action = request->initial_state_action;
   startup_action = request->startup_action;
@@ -306,6 +324,7 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_reset(void)
   bx_ntvdm_machine_stage_machine = 0;
   bx_ntvdm_mantle_clear_posted_physical_irqs_v1();
   bx_ntvdm_ivt_watch_v1_reset();
+  bx_ntvdm_ordinary_ram_reservation_v1_set_lifecycle_active(0u);
   if (machine == 0) return BX_NTVDM_MACHINE_STAGE_V1_OK;
   if (machine->cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
     delete machine;
