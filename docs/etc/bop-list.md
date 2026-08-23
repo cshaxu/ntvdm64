@@ -484,6 +484,153 @@ not a DPMI provider or authorization to recreate an NT4 process LDT.
 | `BOP-DPMI-53-17` | `deferred` | D:17 `DpmiFaultHandlerIret32` in `dpmiint.c`. | Needs atomic fault-frame commit. | none | `deferred-owner-package` |
 | `BOP-DPMI-53-18` | `deferred` | D:18 `DpmiUnhandledExceptionHandler` in `dpmiint.c`. | Needs full fault/descriptor/stack lifecycle. | none | `deferred-owner-package` |
 
+### Td S2 P6 — remaining owner-package dispositions
+
+`R:n` denotes the original `rdrsvc.h` service definition; `G` denotes a
+source-built guest assembly/TU (therefore no host interface is applicable).
+No `deferred` row is a silent success route.  `migration-debt` identifies an
+active project-shaped source-derived seam with no direct provider body or
+registered replacement-interface admission.
+
+#### Remaining dependency rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-DEPENDENCY-043` | `deferred` | `nt_umb.c` physical UMB model. | UMB semantics may not enter mantle. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-045` | `deferred` | `nt_vdd.c` / `nt_vddp.h`. | Historical VDD product shell absent. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-046` | `deferred` | `dbgsvc.h` debugger ABI. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-047` | `migration-debt` | `rdrsvc.h` definitions and local Redirector lifecycle. | VDMREDIR provider body is absent; local provider is source-derived. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-048` | `deferred` | `vdmredir.h` ABI. | Dynamic VDMREDIR composition is unavailable. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-049` | `deferred` | G: `redir/int2a.asm`. | Guest resident protocol is not a host facade. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-050` | `migration-debt` | G: `redir/int5c.asm` / copied async completion ABI. | Local queue/overlapped bridge is source-derived and uses opaque H. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-DEPENDENCY-051` | `not-applicable-guest` | G: `mailslot.asm`. | Guest protocol only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-052` | `not-applicable-guest` | G: `msgapi.asm`. | Guest protocol only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-053` | `not-applicable-guest` | G: `namepipe.asm`. | Guest protocol only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-054` | `not-applicable-guest` | G: `netapis.asm`. | Guest protocol only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-055` | `not-applicable-guest` | G: `neterror.asm`. | Guest protocol only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-056` | `not-applicable-guest` | G: `redir.asm`. | Guest protocol only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-057` | `not-applicable-guest` | G: `resident.asm`. | Guest protocol only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-058` | `not-applicable-guest` | G: Redirector include/layout set. | Guest source layout only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-078` | `deferred` | WOW `dosx.inc`. | Full NE/WOW owner package absent. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-079` | `deferred` | WOW `int31.inc`. | Requires both DPMI and WOW owner packages. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-080` | `not-applicable-guest` | G: `msdisp.asm`. | Guest INT21 dispatcher. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-081` | `not-applicable-guest` | G: `msproc.asm`. | Guest EXEC/Exit/Abort lifecycle. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-082` | `not-applicable-guest` | G: `alloc.asm`. | Guest DOS arena owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-083` | `not-applicable-guest` | G: JFN/SFT/PDB guest sources. | Guest child state owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-084` | `not-applicable-guest` | G: open/file/path sources. | Guest child-load owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-085` | `not-applicable-guest` | G: PDB data/layout sources. | Guest PDB layout owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-086` | `not-applicable-guest` | G: `exepatch.asm` / `getset.asm`. | Guest EXEC support owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-087` | `not-applicable-guest` | G: `mssw.asm` SVC macro bridge. | Guest caller, not host lifecycle. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-088` | `not-applicable-guest` | G: COMMAND `init.asm` / `tcode.asm`. | Guest COMMAND caller. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-089` | `not-applicable-guest` | G: `msinit.asm` / `sysinit1.asm`. | Guest bootstrap predecessor. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-090` | `not-applicable-guest` | G: exact reachable DOS/BIOS closure. | Guest source inventory only. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-091` | `opennt-shaped-facade` | `mem_size.c` direct mirror. | Checked BDA read replaces SAS pointer only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-092` | `not-applicable-guest` | Source-built image provenance. | Build identity, not a host interface. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-093` | `registered-exception` | Native real-mode CPU/RAM/reset/run mechanics. | Selector-blind bx boundary is governed mechanical substrate. | `BX-ABI-094` | `retain-generic-mechanics` |
+| `BOP-DEPENDENCY-094` | `not-applicable-guest` | G: `$Exec` classification/load. | Guest source owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-095` | `not-applicable-guest` | G: PDB copy/child handoff. | Guest source owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-096` | `not-applicable-guest` | G: DOS arena lifetime. | Guest source owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-097` | `not-applicable-guest` | G: JFN/SFT duplication. | Guest source owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-098` | `not-applicable-guest` | G: `$Exit/$Abort`. | Guest source owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-099` | `not-applicable-guest` | G: guest SVC callers. | Guest caller contracts. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-100` | `opennt-shaped-facade` | DEM/COMMAND source completion route. | Host provider ordering retained; guest parent return stays separate. | none | `retain-facade` |
+| `BOP-DEPENDENCY-101` | `not-applicable-guest` | G: `SVC_DEMFREEDOSAPPSYM` caller. | Guest source owner. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-102` | `opennt-shaped-facade` | `sysinit1.asm` → SoftPC `bios.c/tape_io.c` BOP 15. | Bounded original mirror through checked mechanical state. | none | `retain-facade` |
+| `BOP-DEPENDENCY-103` | `migration-debt` | G fast-read → DEM `demRead`. | Inherits private DEM buffer mapping. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEPENDENCY-104` | `opennt-shaped-facade` | G `spckbd.asm` → `MS_bop_F` fragment. | Bounded original table/CF subset only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-105` | `migration-debt` | SoftPC keyboard/interrupt release lifecycle. | Current headless slice is incomplete product composition. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-106` | `registered-exception` | Mantle 8042/PIC/timer mechanics. | Selector-blind machine code only; unresolved auxiliary status remains explicit. | `BX-MANTLE-091` | `retain-generic-mechanics` |
+| `BOP-DEPENDENCY-107` | `deferred` | G EMS → SoftPC BOP 66. | EMS owner package absent. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-108` | `deferred` | G mouse → SoftPC BOP C8. | Mouse owner package absent. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-109` | `deferred` | SoftPC printer/LPT path. | Printer/host LPT composition absent. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-110` | `opennt-shaped-facade` | `MS_bop_E` config-done source mirror. | Named UMB/config seam retains reached body. | none | `retain-facade` |
+| `BOP-DEPENDENCY-111` | `migration-debt` | CLI → Direct DEM startup route. | Project-shaped engine/startup call must be reconciled with original session facade. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-112` | `opennt-shaped-facade` | Original `cmdconf.c:SHELL=` guest bootstrap route. | CLI only supplies admitted bundle root. | none | `retain-facade` |
+| `BOP-DEPENDENCY-113` | `opennt-shaped-facade` | Original `cmdconf.c` through DOS-safe root alias. | Public directory-link capability preserves guest spelling. | none | `retain-facade` |
+| `BOP-DEPENDENCY-114` | `migration-debt` | SoftPC BOP 02/06 original operation stream. | Typed generic ingress is source-derived composition. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-115` | `not-applicable-guest` | G child `retf`/return continuity. | Guest CPU/control-flow owner. | none | `not-applicable-guest` |
+
+#### Redirector, WOW, Debugger and top-level BOP rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-REDIR-57-00` | `migration-debt` | R:00 initialize. | Local lifecycle has no original VDMREDIR body. | none | `migrate-facade` |
+| `BOP-REDIR-57-01` | `migration-debt` | R:01 uninitialize. | Local lifecycle has no original VDMREDIR body. | none | `migrate-facade` |
+| `BOP-REDIR-57-02` | `deferred` | R:02 named-pipe info. | VDMREDIR provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-03` | `deferred` | R:03 pipe state. | VDMREDIR provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-04` | `deferred` | R:04 pipe state. | VDMREDIR provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-05` | `deferred` | R:05 pipe peek. | VDMREDIR provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-06` | `deferred` | R:06 pipe transact. | VDMREDIR provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-07` | `deferred` | R:07 pipe call. | VDMREDIR provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-08` | `deferred` | R:08 pipe wait. | VDMREDIR provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-09` | `migration-debt` | R:09 mailslot delete. | Source-shaped local provider lacks original host body. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-0A` | `migration-debt` | R:0A mailslot info. | Source-shaped local provider lacks original host body. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-0B` | `migration-debt` | R:0B mailslot create. | Source-shaped local provider lacks original host body. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-0C` | `migration-debt` | R:0C mailslot peek. | Source-derived cache is not original provider code. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-0D` | `migration-debt` | R:0D mailslot read. | Source-shaped local provider owns copied guest output. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-0E` | `migration-debt` | R:0E mailslot write. | Source-shaped local provider owns copied guest input. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-0F` | `migration-debt` | R:0F terminate. | Source-shaped local provider lacks original host body. | none | `migrate-facade` |
+| `BOP-REDIR-57-10` | `deferred` | R:10 transact API. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-11` | `deferred` | R:11 remote API. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-12` | `deferred` | R:12 null transact. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-13` | `deferred` | R:13 server enum. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-14` | `deferred` | R:14 use add. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-15` | `deferred` | R:15 use delete. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-16` | `deferred` | R:16 use enum. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-17` | `deferred` | R:17 use info. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-18` | `deferred` | R:18 workstation info. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-19` | `deferred` | R:19 workstation set. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-1A` | `deferred` | R:1A message buffer. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-1B` | `deferred` | R:1B DC names. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-1C` | `deferred` | R:1C computer name. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-1D` | `deferred` | R:1D user name. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-1E` | `deferred` | R:1E domain name. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-1F` | `deferred` | R:1F logon server. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-20` | `deferred` | R:20 handle info. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-21` | `deferred` | R:21 handle state. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-22` | `deferred` | R:22 DC name. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-23` | `migration-debt` | R:23 async named-pipe read. | Local overlapped queue/guest descriptor bridge is source-derived. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-24` | `migration-debt` | R:24 async named-pipe write. | Local overlapped queue/guest descriptor bridge is source-derived. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-25` | `deferred` | R:25 NetBIOS. | NetBIOS owner absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-26` | `migration-debt` | R:26 async completion. | Copied queue/IRQ handoff is source-derived. | `BX-VDM-001` | `migrate-facade` |
+| `BOP-REDIR-57-27` | `deferred` | R:27 DLC. | DLC owner absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-28` | `deferred` | R:28 VDM window. | Historical window product shell absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-29` | `deferred` | R:29 return mode. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-2A` | `deferred` | R:2A set mode. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-2B` | `deferred` | R:2B assignment list. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-2C` | `deferred` | R:2C define macro. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-2D` | `deferred` | R:2D break macro. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-2E` | `deferred` | R:2E service control. | Remote provider absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-2F` | `deferred` | R:2F interrupt ack. | NetBIOS/DLC owner absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-30` | `deferred` | R:30 interrupt ack2. | NetBIOS/DLC owner absent. | none | `deferred-owner-package` |
+| `BOP-REDIR-57-31` | `deferred` | R:31 NetBIOS check. | NetBIOS owner absent. | none | `deferred-owner-package` |
+| `BOP-WOW-51` | `deferred` | Original WOW selector/NE contract. | WOW product composition absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-00` | `deferred` | `dbgsvc.h` debug init. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-01` | `deferred` | `dbgsvc.h` segment move. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-02` | `deferred` | `dbgsvc.h` segment free. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-03` | `deferred` | `dbgsvc.h` module load. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-04` | `deferred` | `dbgsvc.h` module free. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-05` | `deferred` | `dbgsvc.h` single step. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-06` | `deferred` | `dbgsvc.h` break. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-07` | `deferred` | `dbgsvc.h` GP fault. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-08` | `deferred` | `dbgsvc.h` divide overflow. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-09` | `deferred` | `dbgsvc.h` instruction fault. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-0A` | `deferred` | `dbgsvc.h` task start. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-0B` | `deferred` | `dbgsvc.h` task stop. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-0C` | `deferred` | `dbgsvc.h` DLL start. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-0D` | `deferred` | `dbgsvc.h` DLL stop. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-0E` | `deferred` | `dbgsvc.h` attach. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-DEBUGGER-56-0F` | `deferred` | `dbgsvc.h` Toolhelp. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
+| `BOP-TOP-5A` | `migration-debt` | `BOP_WAITIFIDLE`. | Existing idle placeholder lacks original scheduler facade. | none | `migrate-facade` |
+| `BOP-TOP-5F` | `opennt-shaped-facade` | `MS_bop_F` / `kb_setup_vectors` reached fragment. | Headless bounded subset only. | none | `retain-facade` |
+| `BOP-TOP-FE` | `migration-debt` | `BOP_UNSIMULATE`. | Typed stop exists without original terminal lifecycle facade. | none | `migrate-facade` |
+| `BOP-TOP-5E` | `opennt-shaped-facade` | `MS_bop_E` direct source mirror. | Bounded config-done body only. | none | `retain-facade` |
+| `BOP-TOP-FD` | `deferred` | `BOP_SWITCHTOREALMODE`. | Protected/firmware owner absent. | none | `deferred-owner-package` |
+| `BOP-TOP-59` | `migration-debt` | `MS_bop_9` / direct-access-error contract. | Current public-dialog route is source-derived, not imported body/facade. | none | `migrate-facade` |
+| `BOP-TOP-5C` | `deferred` | `BOP_KBD`. | Full keyboard/BIOS input owner absent. | none | `deferred-owner-package` |
+| `BOP-TOP-5B` | `deferred` | `BOP_DBGBREAKPOINT`. | Debugger owner absent. | none | `deferred-owner-package` |
+| `BOP-TOP-5D` | `deferred` | `BOP_VIDEO`. | Video/BIOS owner absent. | none | `deferred-owner-package` |
+
 ## 1. DEM / DOS（73）
 
 | Tracker ID | BOP 入口 | 原始 handler / 高层作用 | OpenNT 源码与可复通性 | 当前 code / 局部测试状态 | 已接入但待前置分支 | lifecycle / 其他 BOP 依赖 | bx / host / guest 前置 | 优先级 |

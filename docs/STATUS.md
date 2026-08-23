@@ -58,6 +58,13 @@ migration debts, and defers all 30 DPMI product-shell/frame/LDT/VDD paths;
 see the [P5 audit](etc/evidence/td-s2-p5-xms-dpmi-interface-conformance-audit-001.md).
 No `53:xx` ingress is admitted and S5 remains frozen.
 
+M0 Td S2 P6 closes the remaining owner-package audit: every remaining 76 BOP
+and 53 dependency rows has an explicit disposition.  It separates 28
+guest-owned source/build rows from host composition, records 21 active
+source-derived migration debts, and keeps 69 unavailable product-shell paths
+deferred; see the [P6 audit](etc/evidence/td-s2-p6-remaining-interface-conformance-audit-001.md).
+P7 must reconcile the whole 321-row matrix before S5 can be reconsidered.
+
 M0 T256 closes the selector-blind protected virtual-access and guest-linear
 substrate. Its final fresh 278-node formal Ninja build and XMEM fixture pass;
 it deliberately does not claim DPMI activation. See [S15 evidence](etc/evidence/m0-t256-s15-protected-substrate-closure-001.md) and the [T256 closure](history/m0-t256-closure-20260823.md).
