@@ -43,8 +43,10 @@ build closure.
 **Current progress:** S1 P1 establishes the reproducible formal-graph owner
 baseline through `Export-T260S1OwnerManifest.ps1`: 386 rows cover 291 module
 sources, 78 fixtures, one target, 14 include roots and two build inputs.
-Header closure, guest build inputs and final fixture ownership remain active
-S1 work; no source has moved. See the
+S1 P2 expands those inputs to 1,263 rows by adding 618 DOS/WOW guest-source
+candidates and 259 recursively reached headers. Header owners are now initial
+unique dispositions; guest closure membership and final fixture ownership
+remain active S1 work. No source has moved. See the
 [baseline record](etc/operations/m0-t260-s1-owner-manifest-baseline-001.md).
 
 ## Previous Active Packet — M0 T259

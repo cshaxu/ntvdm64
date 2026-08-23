@@ -98,23 +98,51 @@ function Get-SourceDisposition([string]$Path, [string]$CurrentModule) {
     return @('UNCLASSIFIED', 'unknown', 'review', 'S1', 'manual owner decision required')
 }
 
+function Get-HeaderDisposition([string]$Path) {
+    $d = Get-SourceDisposition $Path ''
+    if ($d[0] -ne 'UNCLASSIFIED') { return $d }
+    $p = $Path.Replace('\', '/')
+    if ($p -like 'refs/bochs/*') {
+        return @('bx-core', 'pinned Bochs 2.6 reference header', 'retain-reference', 'S3', 'adopted Bochs include input')
+    }
+    if ($p -like 'src/opennt/base/mvdm/softpc.new/*') {
+        return @('adapter-softpc', 'imported SoftPC/CCPU header', 'git mv', 'S7', 'same-shaped SoftPC/CCPU interface input')
+    }
+    if ($p -like 'src/opennt/base/mvdm/inc/*') {
+        $name = [System.IO.Path]::GetFileName($p).ToLowerInvariant()
+        if ($name -match '^(bop|cmd|command|dem|xms|dpmi|rdr|dbg)') {
+            return @('opennt-bop', 'imported OpenNT BOP header', 'git mv', 'S5', 'BOP/provider interface input')
+        }
+        return @('opennt-host', 'imported OpenNT host ABI header', 'review/split', 'S6', 'host ABI default; S6 resolves shared declarations')
+    }
+    if ($p -like 'src/opennt/public/internal/windows/inc/*') {
+        return @('adapter-win32', 'imported historical Win32/NTDLL header', 'review/split', 'S6', 'historical API facade declaration')
+    }
+    return @('HEADER-REVIEW', 'unknown reached header', 'review', 'S1', 'manual unique owner decision required')
+}
+
+$seedPaths = [System.Collections.Generic.List[string]]::new()
+
 foreach ($module in $manifest.modules) {
     foreach ($source in @($module.sources)) {
         $d = Get-SourceDisposition $source $module.name
         Add-Row $source 'source' $module.name $d[0] $d[1] $d[2] $d[3] $d[4]
+        $seedPaths.Add($source)
     }
 }
 
 foreach ($fixture in $manifest.fixtures) {
     Add-Row $fixture.source 'fixture' 'formal-fixture' 'TEST-CLASSIFY' 'project-authored test' 'review/move-with-owner' 'S8' ("libraries: " + ($fixture.libraries -join ', '))
+    $seedPaths.Add($fixture.source)
 }
 
 foreach ($target in $manifest.targets) {
     Add-Row $target.source 'target' 'formal-target' 'app' 'project-authored executable entry' 'git mv' 'S4' ("libraries: " + ($target.libraries -join ', '))
+    $seedPaths.Add($target.source)
 }
 
 foreach ($includeRoot in $manifest.includeRoots) {
-    Add-Row $includeRoot 'include-root' 'formal-include-root' 'HEADER-CLASSIFY' 'mixed include-root' 'expand-to-live-headers' 'S1' 'S1 must expand reached headers from this root; directory ownership is not inferred from the root name'
+    Add-Row $includeRoot 'include-root' 'formal-include-root' 'tools/build' 'formal build include-root' 'retain/update-paths' 'S8' 'reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification'
 }
 
 foreach ($toolPath in @($ManifestPath, 'tools/build/New-T225S7FullNinjaGraph.ps1')) {
@@ -127,6 +155,31 @@ foreach ($guestRoot in @('src/opennt/base/mvdm/dos', 'src/opennt/base/mvdm/wow16
     Get-ChildItem -LiteralPath $guestFullPath -Recurse -File | ForEach-Object {
         $relativePath = $_.FullName.Substring($root.Length).TrimStart('\').Replace('\', '/')
         Add-Row $relativePath 'guest-source-candidate' 'OpenNT guest import' 'opennt-guest' 'imported OpenNT guest source/input' 'git mv or retain-as-guest-artifact-input' 'S4' 'S4 identifies source-built closure membership versus retained source evidence'
+    }
+}
+
+$includeDirectories = @($manifest.includeRoots | ForEach-Object { Join-Path $root $_ })
+$pending = [System.Collections.Generic.Queue[string]]::new()
+$queued = @{}
+foreach ($seedPath in $seedPaths) {
+    if (-not $queued.ContainsKey($seedPath)) { $pending.Enqueue($seedPath); $queued[$seedPath] = $true }
+}
+while ($pending.Count -gt 0) {
+    $includingPath = $pending.Dequeue()
+    $includingFullPath = Join-Path $root $includingPath
+    if (-not (Test-Path -LiteralPath $includingFullPath -PathType Leaf)) { continue }
+    foreach ($line in Get-Content -LiteralPath $includingFullPath) {
+        if ($line -notmatch '^\s*#\s*include\s*[<"]([^>"]+)[>"]') { continue }
+        $includeName = $Matches[1]
+        $candidates = [System.Collections.Generic.List[string]]::new()
+        $candidates.Add((Join-Path (Split-Path -Parent $includingFullPath) $includeName))
+        foreach ($includeDirectory in $includeDirectories) { $candidates.Add((Join-Path $includeDirectory $includeName)) }
+        $resolved = $candidates | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1
+        if ($null -eq $resolved) { continue }
+        $relativePath = $resolved.Substring($root.Length).TrimStart('\').Replace('\', '/')
+        $d = Get-HeaderDisposition $relativePath
+        Add-Row $relativePath 'header' 'reached-include' $d[0] $d[1] $d[2] $d[3] $d[4]
+        if (-not $queued.ContainsKey($relativePath)) { $pending.Enqueue($relativePath); $queued[$relativePath] = $true }
     }
 }
 

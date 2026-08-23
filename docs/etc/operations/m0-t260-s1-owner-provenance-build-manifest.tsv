@@ -697,20 +697,279 @@ src/opennt/base/mvdm/dos/v86/tools/src/stripz/stripz.c	guest-source-candidate	Op
 src/opennt/base/mvdm/dos/v86/tools/src/stripz/stripz.def	guest-source-candidate	OpenNT guest import	opennt-guest	imported OpenNT guest source/input	git mv or retain-as-guest-artifact-input	S4	S4 identifies source-built closure membership versus retained source evidence
 src/opennt/base/mvdm/wow16/inc/dosx.inc	guest-source-candidate	OpenNT guest import	opennt-guest	imported OpenNT guest source/input	git mv or retain-as-guest-artifact-input	S4	S4 identifies source-built closure membership versus retained source evidence
 src/opennt/base/mvdm/wow16/inc/int31.inc	guest-source-candidate	OpenNT guest import	opennt-guest	imported OpenNT guest source/input	git mv or retain-as-guest-artifact-input	S4	S4 identifies source-built closure membership versus retained source evidence
-refs/bochs	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-refs/bochs/instrument/stubs	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-refs/bochs/iodev	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/bx-core	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/bx-core/cpu	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/bx-mantle	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/bx-vdm	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/cli	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/opennt/base/mvdm/inc	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/opennt/base/mvdm/softpc.new/base/inc	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/opennt/base/mvdm/softpc.new/host/inc	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/opennt/local/compat/host	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
-src/opennt/public/internal/windows/inc	include-root	formal-include-root	HEADER-CLASSIFY	mixed include-root	expand-to-live-headers	S1	S1 must expand reached headers from this root; directory ownership is not inferred from the root name
+refs/bochs/bochs.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/bx_debug/debug.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/config.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/extplugin.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/gui/gui.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/gui/siminterface.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/instrument/stubs/instrument.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/iodev/../bx_debug/debug.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/iodev/iodev.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/ltdl.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/osdep.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/param_names.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+refs/bochs/plugin.h	header	reached-include	bx-core	pinned Bochs 2.6 reference header	retain-reference	S3	adopted Bochs include input
+src/bx-core/cpu/apic.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/cpu.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/cpudb/amd_k6_2_chomper.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/cpudb/pentium_mmx.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/cpuid.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/crregs.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/descriptor.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/fetchdecode.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/fetchdecode_avx.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/fetchdecode_sse.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/fetchdecode_x87.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/fetchdecode_xop.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/generic_cpuid.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/i387.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/ia_opcodes.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/icache.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/instr.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/lazy_flags.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/simd_compare.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/simd_int.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/simd_pfp.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/smm.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/stack.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/svm.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/vmx.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpu/xmm.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/cpudb.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/disasm/dis_tables.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/disasm/dis_tables.inc	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/disasm/dis_tables_avx.inc	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/disasm/dis_tables_sse.inc	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/disasm/dis_tables_x87.inc	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/disasm/dis_tables_xop.inc	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/disasm/disasm.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/disasm/opcodes.inc	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/control_w.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/fpu_constant.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/softfloat.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/softfloat-compare.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/softfloat-macros.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/softfloat-round-pack.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/softfloat-specialize.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/softfloatx80.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/status_w.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/fpu/tag_w.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-core/memory/memory.h	header	reached-include	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
+src/bx-mantle/bx_ntvdm_a20_capability_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_cancellation_controller_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_finite_run.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_first_fault_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_generic_ud_bridge.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_headless_8042.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_instruction_history.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_interrupt_return_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_ivt_watch_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_machine_engine_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_machine_stage_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_mechanical_action_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_minimal_machine.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_minimal_sim.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_ordinary_ram_reservation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_physical_irq_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_physical_write_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_port_action_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_protected_range_action_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_segment_access_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/bx_ntvdm_software_interrupt_observation_v1.h	header	reached-include	adapter-softpc	project-authored legacy machine boundary	git mv	S3	candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only
+src/bx-mantle/keyboard.h	header	reached-include	bx-mantle	project-authored Bochs-only assembly	retain	S3	candidate native Bochs-only source; S3 semantic scan required
+src/bx-mantle/paramtree.h	header	reached-include	bx-mantle	project-authored Bochs-only assembly	retain	S3	candidate native Bochs-only source; S3 semantic scan required
+src/bx-mantle/pc_system.h	header	reached-include	bx-mantle	project-authored Bochs-only assembly	retain	S3	candidate native Bochs-only source; S3 semantic scan required
+src/bx-mantle/pic.h	header	reached-include	bx-mantle	project-authored Bochs-only assembly	retain	S3	candidate native Bochs-only source; S3 semantic scan required
+src/bx-mantle/scancodes.h	header	reached-include	bx-mantle	project-authored Bochs-only assembly	retain	S3	candidate native Bochs-only source; S3 semantic scan required
+src/bx-vdm/bop/command_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/command_v2_runtime_session.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/config_complete_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/dem_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/dem_v2_runtime_session.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/dem_v2_startup_composition.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/observation/bx_ntvdm_bop_sequence_observation_v1.h	header	reached-include	adapter-softpc	project-authored mechanical observation	git mv	S7	bounded machine observation; no BOP meaning
+src/bx-vdm/bop/observation/bx_ntvdm_command_bootstrap_observation_v1.h	header	reached-include	adapter-softpc	project-authored mechanical observation	git mv	S7	bounded machine observation; no BOP meaning
+src/bx-vdm/bop/observation/bx_ntvdm_command_current_dir_observation_v1.h	header	reached-include	adapter-softpc	project-authored mechanical observation	git mv	S7	bounded machine observation; no BOP meaning
+src/bx-vdm/bop/observation/bx_ntvdm_dem_open_observation_v1.h	header	reached-include	adapter-softpc	project-authored mechanical observation	git mv	S7	bounded machine observation; no BOP meaning
+src/bx-vdm/bop/observation/bx_ntvdm_demfile_create_observation_v1.h	header	reached-include	adapter-softpc	project-authored mechanical observation	git mv	S7	bounded machine observation; no BOP meaning
+src/bx-vdm/bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h	header	reached-include	adapter-softpc	project-authored mechanical observation	git mv	S7	bounded machine observation; no BOP meaning
+src/bx-vdm/bop/observation/bx_ntvdm_ntdos_exec_entry_observation_v1.h	header	reached-include	adapter-softpc	project-authored mechanical observation	git mv	S7	bounded machine observation; no BOP meaning
+src/bx-vdm/bop/opennt/command/../../shim/../../bx_ntvdm_cpu_delta_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/../../bx_ntvdm_cpu_result_v2.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/../../bx_ntvdm_cpu_state_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/../../bx_ntvdm_exception_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/../../bx_ntvdm_instruction_window_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/bx_ntvdm_guest_pointer_manager.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/bx_ntvdm_host_handle_manager.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/command_misc_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/command_pif_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/opennt_error_dialog_facade.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/../../shim/opennt_rtl_compat.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/command/cmdkeyb.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/../../../opennt/local/compat/compiler/opennt_dem_ntdecl_compat.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/../../../opennt/local/compat/compiler/vdm.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/../../bx_ntvdm_cpu_delta_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/../../bx_ntvdm_cpu_result_v2.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/../../bx_ntvdm_cpu_state_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/../../bx_ntvdm_exception_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/../../bx_ntvdm_instruction_window_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/../opennt/dem/demdasd.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/bx_ntvdm_dem_direct_context.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/dem_common_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/dem_drive_policy_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demdasd_ioctl_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demdir_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demdisp_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demerror_lock_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demfile_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demgset_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demhndl_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demmisc_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/demsrch_fcb_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dem/../../shim/opennt_error_dialog_facade.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dpmi/../../shim/dpmi_descriptor_source_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dpmi/../../shim/dpmi_startup_session_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/dpmi/../../shim/dpmi_startup_source_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/../../bx_ntvdm_cpu_delta_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/../../bx_ntvdm_cpu_result_v2.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/../../bx_ntvdm_cpu_state_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/../../bx_ntvdm_exception_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/../../bx_ntvdm_instruction_window_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/bx_ntvdm_dem_direct_context.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/demhndl_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/softpc_emm_unavailable_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/softpc_int15_watch_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/softpc_memory_size_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/softpc_mouse_vector_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/softpc_printer_openclose_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/softpc_tape_io_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/spckbd_handoff_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/softpc/../../shim/xms_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/xms/../../shim/../../bx_ntvdm_cpu_delta_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/xms/../../shim/../../bx_ntvdm_cpu_result_v2.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/xms/../../shim/../../bx_ntvdm_cpu_state_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/xms/../../shim/../../bx_ntvdm_exception_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/xms/../../shim/../../bx_ntvdm_instruction_window_abi.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/xms/../../shim/xms_shim.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/opennt/xms/suballcp.h	header	reached-include	opennt-bop	imported OpenNT BOP mirror	git mv	S5	original BOP/provider mirror
+src/bx-vdm/bop/redir_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/shim/../../../opennt/local/compat/compiler/opennt_dem_ntdecl_compat.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/../../../opennt/local/compat/compiler/vdm.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/../../bx_ntvdm_cpu_delta_abi.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/../../bx_ntvdm_cpu_result_v2.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/../../bx_ntvdm_cpu_state_abi.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/../../bx_ntvdm_exception_abi.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/../../bx_ntvdm_instruction_window_abi.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/../opennt/dem/demdasd.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/bx_ntvdm_dem_direct_context.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/bx_ntvdm_guest_pointer_manager.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/command_misc_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/command_native_session_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/command_pif_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/dem_direct_host_session.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/dem_drive_policy_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/dem_ingress_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/dem_native_session_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demdasd_ioctl_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demdir_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demdisp_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demerror_lock_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demfile_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demgset_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demhndl_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demmisc_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/demsrch_fcb_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/dpmi_descriptor_source_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/dpmi_startup_session_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/dpmi_startup_source_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/dpmi_xmem_record_adapter.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/opennt_error_dialog_facade.h	header	reached-include	adapter-win32	project-authored source-shaped Win32/NTDLL facade	git mv	S6	same-shaped unavailable API recovery
+src/bx-vdm/bop/shim/opennt_rtl_compat.h	header	reached-include	adapter-win32	project-authored source-shaped Win32/NTDLL facade	git mv	S6	same-shaped unavailable API recovery
+src/bx-vdm/bop/shim/redir_session_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/softpc_emm_unavailable_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/softpc_int15_watch_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/softpc_memory_size_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/softpc_mouse_vector_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/softpc_printer_openclose_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/softpc_tape_io_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/spckbd_handoff_shim.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	same-shaped Bochs-backed machine adaptation
+src/bx-vdm/bop/shim/top_level_nosupport_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/xms_native_session_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/shim/xms_shim.h	header	reached-include	opennt-host	project-authored OpenNT host capability shim	review/split	S6	default host-capability classification; S6 verifies no route or API facade semantics
+src/bx-vdm/bop/softpc_emm_unavailable_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/softpc_machine_interrupt_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/softpc_memory_size_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/softpc_mouse_vector_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/softpc_printer_openclose_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/softpc_tape_io_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/spckbd_handoff_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/top_level_nosupport_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/xms_v2_generic_ud_bridge.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bop/xms_v2_runtime_session.h	header	reached-include	opennt-bop	project-authored BOP route/composition	git mv	S5	BOP ingress or provider routing
+src/bx-vdm/bx_ntvdm_bulk_result_transaction.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_cpu_delta_abi.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_cpu_result_v2.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_cpu_state_abi.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_engine_contract_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_exception_abi.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_guest_gather_read_action_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_guest_range.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_guest_read_action_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_guest_write_abi.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_host_drive_policy.h	header	reached-include	opennt-host	project-authored host capability	git mv	S6	host path/drive namespace semantics
+src/bx-vdm/bx_ntvdm_host_namespace.h	header	reached-include	opennt-host	project-authored host capability	git mv	S6	host path/drive namespace semantics
+src/bx-vdm/bx_ntvdm_initial_state_abi.h	header	reached-include	app	project-authored product composition	review/split	S4	final startup/image/component composition; S4 separates mechanical subrecords
+src/bx-vdm/bx_ntvdm_initial_state_action_v1.h	header	reached-include	app	project-authored product composition	review/split	S4	final startup/image/component composition; S4 separates mechanical subrecords
+src/bx-vdm/bx_ntvdm_initial_state_catalog_v1.h	header	reached-include	app	project-authored product composition	review/split	S4	final startup/image/component composition; S4 separates mechanical subrecords
+src/bx-vdm/bx_ntvdm_instruction_window_abi.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_multi_write_abi.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_multi_write_transaction.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_normal_return_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_normal_terminal_sequence_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_ntdos_exec_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/bx-vdm/bx_ntvdm_startup_machine_interrupt_v1.h	header	reached-include	app	project-authored product composition	review/split	S4	final startup/image/component composition; S4 separates mechanical subrecords
+src/bx-vdm/bx_ntvdm_startup_plan_abi.h	header	reached-include	app	project-authored product composition	review/split	S4	final startup/image/component composition; S4 separates mechanical subrecords
+src/bx-vdm/bx_ntvdm_terminal_observation_v1.h	header	reached-include	adapter-softpc	project-authored SoftPC/CCPU facade	git mv	S7	typed mechanical CCPU/SoftPC-to-Bochs boundary
+src/cli/byob_identity.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/byob_image.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/byob_launch_declaration_v1.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/byob_launch_plan_v2.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/byob_profile.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/byob_target_selection.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/ntdos64_config.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/ntdos64_console_cancellation_v1.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/ntdos64_dos_safe_alias_v1.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/ntdos64_engine_worker_v1.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/ntdos64_lifecycle_v1.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/cli/ntdos64_startup_selection.h	header	reached-include	app	project-authored CLI/composition	git mv	S4	CLI and final component composition
+src/opennt/base/mvdm/inc/oemuni.h	header	reached-include	opennt-host	imported OpenNT host ABI header	review/split	S6	host ABI default; S6 resolves shared declarations
+src/opennt/base/mvdm/softpc.new/base/inc/../../host/inc/error.h	header	reached-include	adapter-softpc	imported SoftPC/CCPU header	git mv	S7	same-shaped SoftPC/CCPU interface input
+src/opennt/base/mvdm/softpc.new/base/inc/base_def.h	header	reached-include	adapter-softpc	imported SoftPC/CCPU header	git mv	S7	same-shaped SoftPC/CCPU interface input
+src/opennt/base/mvdm/softpc.new/base/inc/error.h	header	reached-include	adapter-softpc	imported SoftPC/CCPU header	git mv	S7	same-shaped SoftPC/CCPU interface input
+src/opennt/base/mvdm/softpc.new/base/inc/host_gwi.h	header	reached-include	adapter-softpc	imported SoftPC/CCPU header	git mv	S7	same-shaped SoftPC/CCPU interface input
+src/opennt/base/mvdm/softpc.new/host/inc/host_def.h	header	reached-include	adapter-softpc	imported SoftPC/CCPU header	git mv	S7	same-shaped SoftPC/CCPU interface input
+src/opennt/base/mvdm/softpc.new/host/inc/insignia.h	header	reached-include	adapter-softpc	imported SoftPC/CCPU header	git mv	S7	same-shaped SoftPC/CCPU interface input
+src/opennt/base/mvdm/softpc.new/host/inc/nt_pif.h	header	reached-include	adapter-softpc	imported SoftPC/CCPU header	git mv	S7	same-shaped SoftPC/CCPU interface input
+src/opennt/base/mvdm/softpc.new/host/inc/nt_reset.h	header	reached-include	adapter-softpc	imported SoftPC/CCPU header	git mv	S7	same-shaped SoftPC/CCPU interface input
+src/opennt/local/compat/host/../../../../opennt/base/mvdm/softpc.new/host/src/nt_pif.c	header	reached-include	opennt-host	OpenNT host capability/source-derived host component	git mv	S6	host capability owner
+src/opennt/local/compat/host/opennt_int06_provider_v1.h	header	reached-include	opennt-host	OpenNT host capability/source-derived host component	git mv	S6	host capability owner
+src/opennt/public/internal/windows/inc/pif.h	header	reached-include	adapter-win32	imported historical Win32/NTDLL header	review/split	S6	historical API facade declaration
+refs/bochs	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+refs/bochs/instrument/stubs	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+refs/bochs/iodev	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/bx-core	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/bx-core/cpu	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/bx-mantle	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/bx-vdm	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/cli	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/opennt/base/mvdm/inc	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/opennt/base/mvdm/softpc.new/base/inc	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/opennt/base/mvdm/softpc.new/host/inc	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/opennt/local/compat/host	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
+src/opennt/public/internal/windows/inc	include-root	formal-include-root	tools/build	formal build include-root	retain/update-paths	S8	reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification
 src/bx-core/cpu/3dnow.cc	source	bx-core	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
 src/bx-core/cpu/access.cc	source	bx-core	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
 src/bx-core/cpu/access32.cc	source	bx-core	bx-core	adopted Bochs 2.6	retain	S3	adopted core; README exception register required
