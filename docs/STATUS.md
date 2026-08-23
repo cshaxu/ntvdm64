@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T245 S5** — Headless mouse-vector first-profile recovery.
+**Active: M0 T245 S6** — Printer/LPT owner-package source and ABI map.
 
 ## Active Packet
 
-### M0 T245 S5 — Headless mouse-vector first-profile recovery
+### M0 T245 S6 — Printer/LPT owner-package source and ABI map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S5`, Ordinary Mode, single-person dual-role source-first owner-package recovery. |
-| Admission And Approval | Closed S4 package map establishes the complete first-profile C8/C9 boundary; ordinary queue work requires no renewed approval. |
-| Objective | Recover the original C8 table-to-INT33 vector handoff through a named bx-vdm source mirror/shim, retain C9's explicit no-route disposition, and verify no mouse device behavior is enabled. |
-| Non-goals | No host mouse/UI/input, IRQ/EOI, PIC mask changes, GUI, INT71, video, B8..BF runtime services, EMS expansion, COMMAND rewrite, or bx-core/bx-mantle semantic intrusion. |
-| Reference Baseline | [S4 map](etc/evidence/m0-t245-s4-headless-mouse-vector-package-map-001.md), `BOP-DEPENDENCY-108`, T243/T244 closures and retained C8 evidence. |
-| Files And ABI Surface | One source-shaped C8 mirror plus a fixed four-byte checked-read/atomic-IVT-write shim; no host pointer, handle, device object or new mantle ABI. |
-| Applicable Rules | Source-first recovery, guest-owner boundary, fixed-width bridge, no trace-led work and MTSP governance. |
-| Verification | Formal Ninja positive/negative C8/C9 fixture plus one finite source-built observation after the package, without a further implementation selected by that observation. |
-| Expected Markers | C8 copies exactly `CS:BX[0..3]` into IVT `33h`, resumes at `RIP+3`; C9 remains declined; no IRQ/input/UI/device marker exists. |
-| Asset Needs | Existing OpenNT NTOS/COMMAND mirrors, source-built DOS guest images and existing COMMAND child-lifecycle evidence; no new external source. |
-| Reporting Requirements | Record source path, guest layout/ordering, failure rule, source-recovery ladder and transfer owner for each unavailable prerequisite. |
-| Stop Conditions | Need to extend beyond the first four table bytes, enable host input/UI/IRQ, modify a machine device, or infer new behavior from the trace. Record and transfer instead. |
-| Exit Criteria | C8 local and source-built regressions pass with exactly the mapped copy; C9/B8..BF/device edges remain explicitly unavailable/deferred; the next source-built predecessor is classified without a follow-on patch. |
+| Identifier Mode | `M0 T245 S6`, Ordinary Mode, single-person dual-role source-first owner-package recovery. |
+| Admission And Approval | S5's completed bounded observation classifies selector `17` as the next distinct SoftPC printer/LPT owner. Mapping that complete package is ordinary queue work and requires no renewed approval. |
+| Objective | Establish the original selector-17 printer/LPT source graph, guest ABI, lifecycle, host API dependencies, machine-port requirements and smallest viable source-first recovery boundary before any code route is admitted. |
+| Non-goals | No LPT device enablement, host print job, raw port I/O, monitor/direct-access path, printer UI, generic `17` placeholder, bx-core/bx-mantle semantic intrusion, or implementation selected solely from the preceding trace. |
+| Reference Baseline | `BOP-DEPENDENCY-109`, S5 closure, OpenNT `bios.c:printer_io`, `printer_.c`, `printer.c` and `nt_lpt.c`. |
+| Files And ABI Surface | Documentation/evidence only until the map identifies a fixed source-owned seam. No new ABI is presumed. |
+| Applicable Rules | Source-first recovery, host-mutation classification, guest-owner boundary, selector-blind machine boundary, no trace-led work and MTSP governance. |
+| Verification | Cross-check selector table, guest BOP caller, all printer subfunctions, guest table layout, source lifecycles and current bx port-space ownership; record the recovery ladder for every edge. |
+| Expected Markers | A package map distinguishes BIOS AH=0/1/2, DOS open/close/flush subfunctions, LPT host lifecycle, monitor/direct-access branches and any exact no-printer source failure behavior. |
+| Asset Needs | Existing admitted OpenNT tree and current source-built observation only; no new external source or host device. |
+| Reporting Requirements | Record source paths, register/table ABI, ownership, externally mutable capabilities, transfer recipients and a clear `implement / explicit unavailable / defer` decision. |
+| Stop Conditions | Any need to synthesize printer success, use raw host pointers/handles in guest ABI, introduce device semantics into bx-core/bx-mantle, or mutate host printer configuration. Record and transfer instead. |
+| Exit Criteria | A complete owner-package source/ABI/failure map and a smallest-composable recommendation exist; no selector-17 handler is added before that decision. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 
