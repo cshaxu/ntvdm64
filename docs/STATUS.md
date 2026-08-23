@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T251 S3** — Redirector session ingress and named-pipe owner group.
+**Active: M0 T251 S4** — Redirector async-pipe and mailslot owner groups.
 
 ## Active Packet
 
-### M0 T251 S3 — Redirector session ingress and named-pipe owner group
+### M0 T251 S4 — Redirector async-pipe and mailslot owner groups
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T251 S3`, Ordinary Mode, single-person dual-role source-derived provider implementation. |
-| Admission And Approval | T251 S2 selects the public-Win32 single-session Redirector profile and approves its first complete owner group: lifecycle plus synchronous named pipes. |
-| Objective | Add one typed selector-57 ingress, session-owned Redirector lifecycle, and named-pipe provider shared by the Redirector route and existing DEM pipe helper sites. |
-| Non-goals | No mailslot, NetAPI, async completion, NetBIOS/DLC, VDM window, duplicate COMMAND broker, raw guest HANDLE, Bochs change, or trace-directed service patch. |
-| Reference Baseline | [T251 S1 map](etc/evidence/m0-t251-s1-redirector-owner-source-abi-map-001.md), [T251 S2 decision](etc/evidence/m0-t251-s2-redirector-profile-source-recovery-decision-001.md), existing DEM/COMMAND session and handle ABI. |
-| Files And ABI Surface | `src/bx-vdm/bop/opennt/redir/`, named `bop/shim/redir_*` seams, generic adapter ingress/build manifest, focused fixtures and tracker/evidence. |
-| Applicable Rules | Source-derived fallback after proven source absence, typed ingress, session-owned opaque token rule, no duplicate lifecycle owner and bx-core/bx-mantle blindness. |
-| Verification | Focused ingress/lifecycle/named-pipe positive and unavailable regressions; DEM shared-helper regression; formal Ninja build outside sandbox; documentation gates and `git diff --check`. |
-| Expected Markers | `57:00/01`, `02..08`, `20/21` have one provider and original-shaped unavailable result; old DEM placeholder helpers are removed or forwarded. |
-| Asset Needs | Current adapter BOP ingress, opaque handle manager, public named-pipe APIs, original `rdrsvc.h`/`vrnmpipe.h` and guest caller layouts. |
-| Reporting Requirements | Identify every divergence from absent VDMREDIR bodies in shim comments; explicitly leave async/mailslot/NetAPI/network-device groups deferred. |
-| Stop Conditions | Any needed protocol layout is absent, requires a raw guest handle/host callback, changes a guest/machine semantic, or needs a new profile decision. |
-| Exit Criteria | One shared source-derived provider closes the admitted group with formal focused tests; no DEM-local fake Redirector state remains. |
+| Identifier Mode | `M0 T251 S4`, Ordinary Mode, single-person dual-role source-derived provider implementation. |
+| Admission And Approval | T251 S2 selected the public-Win32 single-session profile; T251 S3 closed its lifecycle and synchronous helper seam. |
+| Objective | Recover `57:23/24` async named-pipe completion and `57:09..0F` mailslot lifecycle as two complete, session/PDB-owned Redirector groups. |
+| Non-goals | No NetAPI/identity, NetBIOS/DLC, VDM window, duplicate COMMAND broker, raw guest HANDLE/callback, Bochs change, or trace-directed leaf patch. |
+| Reference Baseline | [T251 S2 decision](etc/evidence/m0-t251-s2-redirector-profile-source-recovery-decision-001.md), [T251 S3 closure](etc/evidence/m0-t251-s3-redirector-ingress-named-pipe-closure-001.md), `vrnmpipe.h`, `vrmslot.h`, and guest callers. |
+| Files And ABI Surface | Existing `src/bx-vdm/bop/redir_v2_generic_ud_bridge.*`, named `bop/shim/redir_*` seams, focused fixtures and tracker/evidence. |
+| Applicable Rules | Source-derived fallback after proven provider-source absence, typed ingress, checked guest RAM, session-owned opaque token rule, per-PDB records, and bx-core/bx-mantle blindness. |
+| Verification | Packed guest descriptor bounds/failure regressions, async completion and mailslot lifecycle fixtures, formal Ninja target outside sandbox, documentation gates and `git diff --check`. |
+| Expected Markers | `57:23/24` use session completion records without host callback/thread leakage; `57:09..0F` own mailslots with original-shaped errors and explicit terminate behavior. |
+| Asset Needs | Existing Redirector session ABI, opaque handle manager, public overlapped-I/O/events/mailslot APIs, original headers and guest caller layouts. |
+| Reporting Requirements | Record each divergence caused by absent VDMREDIR bodies; keep NetAPI/network-device groups explicitly deferred. |
+| Stop Conditions | Any needed protocol layout is absent, requires a raw guest callback, changes guest/machine semantics, or requires a new public-host profile decision. |
+| Exit Criteria | Both owner groups have source/ABI/failure maps, one provider route and focused formal regressions; no protocol state leaks into DEM/COMMAND or Bochs. |
 | Original Owner Request | Continue ordinary work without repeated approval; recover OpenNT source by whole owner package and preserve hard component boundaries. |
 | Similar-Issue Sweep | `50:47/48`, `54:06`, COMMAND standard-stream/session records, VDD/top-level events, named pipe/network APIs and the entire current `57:xx` family. |
 
