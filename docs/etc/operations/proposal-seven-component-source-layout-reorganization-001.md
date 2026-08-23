@@ -28,7 +28,9 @@ app -> opennt-guest                         (guest image input)
 app -> opennt-bop -> opennt-host
 opennt-bop -> adapter-win32
 opennt-bop -> adapter-softpc -> bx-mantle -> bx-core
-opennt-host -> adapter-win32                (declared facade only)
+app -> adapter-softpc                       (session assembly/run only)
+opennt-host -> adapter-win32                (declared Win32 facade only)
+opennt-host -> adapter-softpc               (declared SoftPC/CCPU facade only)
 ```
 
 No reverse edge is permitted. In particular, `bx-core` and `bx-mantle` do not

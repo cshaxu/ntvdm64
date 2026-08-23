@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2195 |
 | --- | --- |
-| Generated UTC | 2026-08-23T21:29:59Z |
+| Generated UTC | 2026-08-23T21:31:35Z |
 
 ## Entries
 
@@ -65,7 +65,7 @@ content-divergent entries.
 | design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | 3153c9a36e43d8efc1234879d4c8f76f83dc3a61a766ecdceaa8da6e7f410e45 |
 | design/ADAPTER-STARTUP-SNAPSHOT-EVIDENCE-EXPORT.md | retained pre-governance evidence | 744618843058cbcf0c9074019f755ebdb573be5a9b33ff454da224537edd0cbd |
 | design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | d1898c127b918240c3ce7eb32ed2efc04caf11f04b5a061060d4c2a0254c1861 |
-| design/ARCHITECTURE.md | current design authority | 3665b22df31041c3189dfdafcbeb7cee04e02dabdefb4a540527d5f89d3ca078 |
+| design/ARCHITECTURE.md | current design authority | 9bf42c6936313f5e05aa6483b75840e77c4bef6c3e8946da6cbc0d64819536d0 |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | 3d55ee174e229e89da3ab9f31e65ebbd832a1f48c4f2eb487ce48dc25043703f |
 | design/CODING.md | current design authority | 9f9ac3c90cfc25f972c7b35c4aa796e018c95331365beaededf336c29bfc553c |
 | design/GOAL.md | current design authority | 66cd59f5fd1f785ec2f802486dfe768adf705dfe92887619b2e2b70f7f33e22b |
@@ -445,7 +445,7 @@ content-divergent entries.
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |
-| etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | 02ba3fe48ede0710bc50f077e63258db6a927e36eff8dcbb5d422f113df10559 |
+| etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | 777b0ae8ceb65c0dfc6c369dcc25e89b92b66569f883acc9e464d096080a4c62 |
 | etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md | indexed supporting material | 3e4c68d258fa9e18ef6fbec2513bf52fc928f13afd9ddfd81f5de217cfa71a6b |
 | etc/operations/proposal-source-built-guest-low-memory-runtime-provenance-001.md | indexed supporting material | 02ed77f18bf4e4018a96be67bcf25b637185eda97c0f132316718a8def3639a4 |
 | etc/operations/t188-bop-ingress-composition-plan.md | indexed supporting material | 76e13591247ef15c3c3999216011ffee2799de1b5e7fb1ccac98f053ed8c2402 |

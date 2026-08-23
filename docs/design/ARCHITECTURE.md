@@ -30,6 +30,9 @@ app
   -> opennt-bop -> opennt-host
   -> opennt-bop -> adapter-win32
   -> opennt-bop -> adapter-softpc -> bx-mantle -> bx-core
+  -> adapter-softpc
+opennt-host -> adapter-win32
+opennt-host -> adapter-softpc
 ```
 
 `adapter-softpc` is the mechanical composition boundary between machine events
@@ -115,7 +118,9 @@ app -> opennt-guest
 app -> opennt-bop -> opennt-host
 opennt-bop -> adapter-win32
 opennt-bop -> adapter-softpc -> bx-mantle -> bx-core
-opennt-host -> adapter-win32                 (only through declared facades)
+app -> adapter-softpc                         (session assembly/run only)
+opennt-host -> adapter-win32                  (declared Win32 facade only)
+opennt-host -> adapter-softpc                 (declared SoftPC/CCPU facade only)
 ```
 
 No component may reverse these directions by importing another component's
