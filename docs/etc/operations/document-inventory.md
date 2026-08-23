@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2160 |
+| Documentation records | 2161 |
 | --- | --- |
-| Generated UTC | 2026-08-23T12:18:24Z |
+| Generated UTC | 2026-08-23T12:20:17Z |
 
 ## Entries
 
@@ -163,6 +163,7 @@ content-divergent entries.
 | etc/evidence/m0-t256-s9-opennt-xmem-record-identity-map-001.md | indexed supporting material | 7f488da889b84396ca71b7763e99239950e63429809d383ba0d74d71dd61f51a |
 | etc/evidence/m0-t257-s1-dpmi-dosx-owner-abi-failure-map-001.md | indexed supporting material | 5fe884a59ae619694eecd23d28490954b9f236e9024cbe856f6ac1d6bd30321f |
 | etc/evidence/m0-t257-s3-dosx-startup-session-seam-001.md | indexed supporting material | c54224b424ddd21b0609b906bc39a6daefc9fcf80fde45d80ce724c23b266030 |
+| etc/evidence/m0-t257-s3-native-descriptor-lifecycle-ownership-map-003.md | indexed supporting material | 5df365ead3bacc55d9161eea1edb69a396272d4030b832e6cf3b048092de8508 |
 | etc/evidence/m0-t257-s3-opennt-dpmi32-source-composition-002.md | indexed supporting material | c432c4854ab1ef5397ca81333efca1ea1d01ddd48267a8b8a3264b18547e5739 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
