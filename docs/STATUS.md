@@ -14,7 +14,7 @@
 | Admission And Approval | Closed S3 evidence identifies `C8` as the next complete owner package; mapping and ordinary queue work require no renewed approval. |
 | Objective | Map the complete OpenNT headless mouse-vector package reached through `BOP C8`: first/second host installer phases, guest table/IVT contract, native device edges and explicit unavailable behavior. |
 | Non-goals | No trace-led single-selector patch, host mouse/UI/input, IRQ/EOI, GUI, EMS expansion, COMMAND rewrite, or bx-core/bx-mantle semantic intrusion. |
-| Reference Baseline | [S3 closure](etc/evidence/m0-t245-s3-softpc-emm-unavailable-closure-001.md), `BOP-DEPENDENCY-108`, T243/T244 closures and retained C8 source evidence. |
+| Reference Baseline | [S3 closure](etc/evidence/m0-t245-s3-softpc-emm-unavailable-closure-001.md), [S4 map](etc/evidence/m0-t245-s4-headless-mouse-vector-package-map-001.md), `BOP-DEPENDENCY-108`, T243/T244 closures and retained C8 source evidence. |
 | Files And ABI Surface | Read-only source/ABI map and tracker/queue transfer only; no production provider in S4. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, fixed-width bridge, no trace-led work and MTSP governance. |
 | Verification | Source-map consistency check against guest caller, SoftPC dispatch and retained C8 evidence; no native trace or new runtime route. |
