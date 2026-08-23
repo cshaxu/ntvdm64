@@ -41,3 +41,10 @@
     signature/call shape in the compatibility facade whenever possible; a new
     shaped boundary requires rule 12's exception and may expose only the
     state required by the reached call.
+14. Intrusion is minimized independently for adopted Bochs (`bx-core` and
+    `bx-mantle`) and imported OpenNT mirrors (`bop` and tracked
+    BOP-dependencies). Prefer a `bx-vdm` boundary header/shim that preserves
+    the original call shape. An edit to either adopted source side requires a
+    source-proven necessity, the smallest feasible diff, and the existing
+    divergence/exception record; convenience or a local trace result is never
+    sufficient.

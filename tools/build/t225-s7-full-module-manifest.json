@@ -960,7 +960,10 @@
       "name": "t231-s6-command-check-binary-direct-fixture",
       "source": "tests/bx-vdm/t231_s6_command_check_binary_direct_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "kernel32.lib",

@@ -43,6 +43,8 @@ typedef struct _UNICODE_STRING {
     PWSTR Buffer;
 } UNICODE_STRING, *PUNICODE_STRING;
 
+#include "opennt_rtl_compat.h"
+
 #define NT_SUCCESS(status) ((NTSTATUS)(status) >= 0)
 #define ED_BADSYSFILE 336u
 #define ED_INITMEMERR 337u
@@ -414,24 +416,6 @@ void bx_ntvdm_command_config_set_inputs(bx_ntvdm_command_misc_session *session,
 int bx_ntvdm_command_config_set_bootstrap_command(
     bx_ntvdm_command_misc_session *session, const CHAR *command_path);
 const CHAR *bx_ntvdm_command_config_bootstrap_command(void);
-void RtlInitAnsiString(PANSI_STRING destination, const CHAR *source);
-void RtlInitUnicodeString(PUNICODE_STRING destination, const WCHAR *source);
-NTSTATUS RtlCreateEnvironment(BOOLEAN clone_current, PVOID *environment);
-NTSTATUS RtlSetEnvironmentVariable(PVOID *environment,
-    const PUNICODE_STRING name, const PUNICODE_STRING value);
-void RtlDestroyEnvironment(PVOID environment);
-NTSTATUS RtlAnsiStringToUnicodeString(PUNICODE_STRING destination,
-    const PANSI_STRING source, BOOL allocate_destination);
-NTSTATUS RtlUnicodeStringToOemString(POEM_STRING destination,
-    const PUNICODE_STRING source, BOOL allocate_destination);
-void RtlFreeUnicodeString(PUNICODE_STRING string);
-void RtlInitString(PSTRING destination, const CHAR *source);
-NTSTATUS RtlOemStringToUnicodeString(PUNICODE_STRING destination,
-    const POEM_STRING source, BOOL allocate_destination);
-NTSTATUS RtlUnicodeStringToAnsiString(PANSI_STRING destination,
-    const PUNICODE_STRING source, BOOL allocate_destination);
-void RtlFreeAnsiString(PANSI_STRING string);
-ULONG RtlNtStatusToDosError(NTSTATUS status);
 /* `cmdXformEnvironment` historically snapshots the process environment.
  * These helpers instead expose a caller-owned copy of the active session's
  * ANSI multisz; it never aliases guest memory or ambient host state. */

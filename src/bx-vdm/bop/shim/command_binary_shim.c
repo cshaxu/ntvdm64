@@ -56,6 +56,34 @@ void RtlFreeAnsiString(PANSI_STRING string)
 
 ULONG RtlNtStatusToDosError(NTSTATUS status)
 {
-    (void)status;
-    return ERROR_INVALID_DATA;
+    typedef ULONG (NTAPI *bx_ntvdm_rtl_ntstatus_to_dos_error_fn)(NTSTATUS);
+    static bx_ntvdm_rtl_ntstatus_to_dos_error_fn native_converter;
+    static int native_converter_probed;
+
+    /* DIVERGENCE: the imported OpenNT caller directly linked ntdll's
+     * RtlNtStatusToDosError.  The standalone target owns the same-shaped
+     * facade, so resolve the current OS export once and preserve the original
+     * status-to-Win32/DOS conversion instead of collapsing every failure to
+     * ERROR_INVALID_DATA.  The fallback covers the exact statuses emitted by
+     * the local facade if a future host omits that export. */
+    if (!native_converter_probed) {
+        HMODULE ntdll = GetModuleHandleW(L"ntdll.dll");
+        native_converter = ntdll == NULL ? NULL :
+            (bx_ntvdm_rtl_ntstatus_to_dos_error_fn)GetProcAddress(ntdll,
+                "RtlNtStatusToDosError");
+        native_converter_probed = 1;
+    }
+    if (native_converter != NULL)
+        return native_converter(status);
+
+    switch ((ULONG)status) {
+    case 0x00000000u: return ERROR_SUCCESS;
+    case 0xc000000du: return ERROR_INVALID_PARAMETER;
+    case 0xc0000017u: return ERROR_NOT_ENOUGH_MEMORY;
+    case 0xc0000034u: return ERROR_FILE_NOT_FOUND;
+    case 0xc000003au: return ERROR_PATH_NOT_FOUND;
+    case 0xc0000022u: return ERROR_ACCESS_DENIED;
+    case 0xc0000008u: return ERROR_INVALID_HANDLE;
+    default: return ERROR_INVALID_DATA;
+    }
 }

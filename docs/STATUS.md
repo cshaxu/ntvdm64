@@ -12,7 +12,7 @@
 | --- | --- |
 | Identifier Mode | `M0 T259 S2`, Ordinary Mode with a single-person dual-role review: source-first ABI-facade consolidation. |
 | Admission And Approval | T259 S1 has completed the canonical `HOST-*`/`MACH-*` catalog and current-facade reconciliation. S2 is its directly ordered, no-new-provider continuation. |
-| Objective | Give the existing OpenNT COMMAND/DEM mirrors one canonical `HOST-07` RTL/NTDLL declaration, ownership, allocation and x86/x64 width contract while retaining their source call order and failure paths. |
+| Objective | Recover the full reached `HOST-07` RTL/NTDLL contract for existing OpenNT COMMAND/DEM mirrors—declaration, ownership, allocation and x86/x64 width—while keeping modern host recovery behind `bx-vdm` so imported OpenNT bodies and Bochs need only minimal invasive change. |
 | Non-goals | No BOP/provider enablement; no wholesale CCPU/SAS/CSR/BaseSrv product-shell recreation; no Bochs semantic intrusion; no invented behavior without source evidence. Where a historical private implementation is unavailable, a source-shaped facade may use public Win32 or typed Bochs mechanics to preserve the original observable contract. |
 | Reference Baseline | `HOST-07` in the T259 catalog; current COMMAND `cmdconf.c`, `cmdenv.c`, `cmdexec.c`, `cmdmisc.c`; DEM `demsrch.c`; T258 mapping manager. |
 | Files And ABI Surface | One canonical internal RTL/NTDLL facade header and its implementation where necessary; affected source-shaped COMMAND/DEM shim declarations and focused fixture. |
@@ -29,7 +29,11 @@
 **Current progress:** S1 closed the canonical
 [`HOST-*`/`MACH-*` interface catalog](etc/evidence/m0-t259-s1-host-machine-interface-catalog-001.md)
 and [active-facade reconciliation](etc/evidence/m0-t259-s1-current-facade-reconciliation-001.md).
-S2 now consolidates the directly recoverable `HOST-07` RTL/NTDLL surface;
+S2 P1 has centralized the active COMMAND `HOST-07` declaration surface and
+recovered source-visible NTSTATUS-to-DOS error differentiation through the
+current same-named `ntdll` export; its formal 286-node link and source-mirror
+fixture pass are recorded in [P1 evidence](etc/evidence/m0-t259-s2-p1-rtl-contract-status-recovery-001.md).
+P2 now reconciles remaining COMMAND/DEM conversion and allocation ownership;
 this remains neither a new BOP survey nor an NT4 product-shell recreation.
 
 ## Latest Closure

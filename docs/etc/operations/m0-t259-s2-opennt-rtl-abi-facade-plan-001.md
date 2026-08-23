@@ -5,10 +5,11 @@
 Create one source-shaped declaration and ownership surface for the directly
 recoverable OpenNT `Rtl*` / `NTSTATUS` calls currently spread through the
 COMMAND and DEM mirrors. This is a consolidation of the existing admitted
-`HOST-07` seam: original interface shape and source call order stay intact
-while a modern public-API implementation supplies unavailable historical
-internals. It is not a replacement runtime and does not rewrite imported
-OpenNT algorithm bodies.
+`HOST-07` seam: recover the full reached interface contract while original
+interface shape and source call order stay intact, so the imported bodies and
+Bochs need no corresponding invasive edit. A modern public-API implementation
+supplies unavailable historical internals. It is not a replacement runtime and
+does not rewrite imported OpenNT algorithm bodies.
 
 ## Admission
 
@@ -38,6 +39,16 @@ OpenNT algorithm bodies.
 5. Focused fixture coverage proves ANSI/OEM/Unicode conversion, allocated and
    caller-owned output, MULTI_SZ environment construction and deterministic
    status-to-DOS-error behavior on the formal target.
+
+## P1 progress
+
+P1 has centralized the active COMMAND declarations in
+`opennt_rtl_compat.h`, added layout assertions, and recovered
+`RtlNtStatusToDosError` through the same-named current `ntdll` export plus a
+bounded source-relevant fallback. Its formal build and fixture evidence is
+[`m0-t259-s2-p1-rtl-contract-status-recovery-001.md`](../evidence/m0-t259-s2-p1-rtl-contract-status-recovery-001.md).
+P2 will reconcile remaining allocation/conversion ownership across COMMAND
+and DEM without modifying imported bodies.
 
 ## Stop conditions
 

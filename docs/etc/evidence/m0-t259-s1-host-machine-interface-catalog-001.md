@@ -13,14 +13,19 @@ The active-source reconciliation that closes S1 is recorded in
 `bop-list.md` tracks every BOP and dependency at the work-item level.  This
 catalog gives those rows one stable answer for each historical host or machine
 interface: its OpenNT source family, current owner, allowed modern treatment,
-and the boundary beyond which it must remain deferred.  A later provider must
-cite both its BOP/dependency row and the applicable catalog ID.
+and the boundary beyond which it must remain deferred. The objective is to
+recover those interfaces as completely as their source evidence permits. The
+same-shaped `bx-vdm` facade is the method that keeps imported
+`bop`/dependency bodies and adopted Bochs code minimally modified while that
+recovery proceeds. A later provider must cite both its BOP/dependency row and
+the applicable catalog ID.
 
 ## Interpretation rules
 
 - OpenNT source remains the semantic reference.  Preserve its call ordering,
   data layout, success/failure contract and ownership wherever a public API or
-  narrow compatibility facade permits it.
+  narrow compatibility facade permits it. This preservation is the preferred
+  way to avoid invasive edits to the imported OpenNT body and to Bochs.
 - “Non-intrusive CLI” permits ordinary public Win32 APIs, host files, devices,
   registry and console integration.  It forbids requiring users to rebuild or
   patch Windows/kernel components merely to run this program.
