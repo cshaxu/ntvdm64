@@ -5,6 +5,9 @@ Scope: OpenNT host-composition and SoftPC/CCPU interfaces reached by the
 tracked BOP providers and their dependencies.  This is evidence and a routing
 catalog, not a license to recreate the historical NT4 product shell.
 
+The active-source reconciliation that closes S1 is recorded in
+[m0-t259-s1-current-facade-reconciliation-001.md](m0-t259-s1-current-facade-reconciliation-001.md).
+
 ## Purpose
 
 `bop-list.md` tracks every BOP and dependency at the work-item level.  This

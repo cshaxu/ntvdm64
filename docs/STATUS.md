@@ -2,34 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T259 S1** — OpenNT host and SoftPC/CCPU interface-specification recovery.
+**Active: M0 T259 S2** — OpenNT RTL/NTDLL ABI facade consolidation.
 
 ## Active Packet
 
-### M0 T259 S1 — canonical host/machine interface specification
+### M0 T259 S2 — OpenNT RTL/NTDLL ABI facade consolidation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T259 S1`, Ordinary Mode with a single-person dual-role review: source-first canonical interface recovery. |
-| Admission And Approval | Owner selected the next task after T258: comprehensively recover the OpenNT Win32-host and SoftPC/CCPU core-machine interface specifications already audited, before further owner-package implementation. |
-| Objective | Turn the completed 321-row interface audit into one authoritative source/ABI/failure specification for historical OpenNT host APIs and SoftPC/CCPU machine calls: exact source shape, modern disposition, owner, width/lifetime boundary, and receiving package. |
-| Non-goals | No BOP/provider enablement, CCPU/SAS/CSR/BaseSrv recreation, new NT4-private API emulation, Bochs semantic intrusion, or invented replacement behavior. This S defines interfaces and failure ownership; it does not implement every receiving package. |
-| Reference Baseline | Td S2 P3--P7 full interface audit, `BOP-DEPENDENCY-042..045`, `BOP-DEPENDENCY-117..118`, T258 mapping manager and the external compatibility/machine dependency map. |
-| Files And ABI Surface | New authoritative host/machine interface specification and tracker links; active `bx-vdm` compatibility headers only where an existing source-shaped facade needs an exact contract correction. |
+| Identifier Mode | `M0 T259 S2`, Ordinary Mode with a single-person dual-role review: source-first ABI-facade consolidation. |
+| Admission And Approval | T259 S1 has completed the canonical `HOST-*`/`MACH-*` catalog and current-facade reconciliation. S2 is its directly ordered, no-new-provider continuation. |
+| Objective | Give the existing OpenNT COMMAND/DEM mirrors one canonical `HOST-07` RTL/NTDLL declaration, ownership, allocation and x86/x64 width contract while retaining their source call order and failure paths. |
+| Non-goals | No BOP/provider enablement; no CCPU/SAS/CSR/BaseSrv recreation; no `NtVdmControl`, VDD, WOW or Redirector product implementation; no Bochs semantic intrusion; no invented replacement behavior. |
+| Reference Baseline | `HOST-07` in the T259 catalog; current COMMAND `cmdconf.c`, `cmdenv.c`, `cmdexec.c`, `cmdmisc.c`; DEM `demsrch.c`; T258 mapping manager. |
+| Files And ABI Surface | One canonical internal RTL/NTDLL facade header and its implementation where necessary; affected source-shaped COMMAND/DEM shim declarations and focused fixture. |
 | Applicable Rules | Source-first recovery, public-Win32/x64 decision rule, guest/machine hard boundary, one shared mapping manager, and no family-private product shell. |
-| Verification | Exact source-path/signature/owner audit; 321-row tracker reconciliation; direct-versus-facade/deferred classification; forbidden-private-import scan; documentation gate and independent review. |
-| Expected Markers | Every historical host/machine interface has one owner and disposition; public APIs retain source-visible ordering/failure; unavailable NT4/private paths state a receiver and do not silently succeed; bx-core/mantle stay selector/DOS/CCPU blind. |
-| Asset Needs | OpenNT source mirrors, SoftPC source evidence, current shim headers, existing Td audits, tracker, exception register and formal build manifest. |
-| Reporting Requirements | Record original interface spelling and call site, calling convention/width/lifetime, direct public equivalent or exact reason unavailable, shim/failure disposition, owner package and any exception ID. |
-| Stop Conditions | A proposed replacement recreates CCPU/SAS/CSR/BaseSrv, an interface needs guest/BOP vocabulary in bx-core/mantle, a public API changes observable failure semantics, or a new ABI lacks a registered exception. |
-| Exit Criteria | A canonical spec covers every active/reachable OpenNT Win32-host and SoftPC/CCPU interface family recorded by the tracker; all current facades reconcile to it; every unavailable path has an explicit failure/deferred receiver; all needed follow-on packages are ordered by dependency. |
+| Verification | Signature/layout/ownership audit; focused conversion and environment tests; forbidden-private-import scan; formal Ninja build/link; documentation gate and independent review. |
+| Expected Markers | One `HOST-07` ABI contract is used by every active mirror consumer; public APIs retain source-visible ordering/failure; bx-core/mantle stay selector/DOS/CCPU blind. |
+| Asset Needs | OpenNT source mirrors, current COMMAND/DEM shims, catalog, exception register and formal build manifest. |
+| Reporting Requirements | Record original interface spelling and call site, calling convention/width/lifetime, public API implementation, allocation pairing, status-error rule and any exception ID. |
+| Stop Conditions | A helper exposes host pointers to the guest, changes imported OpenNT control flow, recreates private NT4 product interfaces, or lacks a source/ABI evidence entry. |
+| Exit Criteria | One named `HOST-07` facade contract is used by every active direct mirror consumer; duplicate declarations are removed or thin aliases; focused tests and formal Ninja build/link pass. |
 | Original Owner Request | “接下来，是关于我们全面恢复opennt的win32api宿主方面和 softpc/ccpu 核心机方面的接口规范的任务。你已经审计过。” |
-| Similar-Issue Sweep | `nt_bop.c`, `nt_umb.c`, `nt_vdd.c`, CCPU/SAS macros, host simulation, VDM control/hooks, keyboard/IVT, machine interrupt bridge, current Win32/RTL shims, and x86/x64 pointer/HANDLE/calling-convention seams. |
+| Similar-Issue Sweep | `ANSI_STRING`, `OEM_STRING`, `UNICODE_STRING`, `Rtl*` conversion/heap/environment helpers, `NTSTATUS` to DOS error mapping and existing COMMAND/DEM declaration copies. |
 
-**Current progress:** S1 has converted the completed Td audit into the
-canonical [`HOST-*`/`MACH-*` interface catalog](etc/evidence/m0-t259-s1-host-machine-interface-catalog-001.md).
-It now reconciles active facades to that catalog; this is not a new
-BOP-by-BOP survey.
+**Current progress:** S1 closed the canonical
+[`HOST-*`/`MACH-*` interface catalog](etc/evidence/m0-t259-s1-host-machine-interface-catalog-001.md)
+and [active-facade reconciliation](etc/evidence/m0-t259-s1-current-facade-reconciliation-001.md).
+S2 now consolidates the directly recoverable `HOST-07` RTL/NTDLL surface;
+this remains neither a new BOP survey nor an NT4 product-shell recreation.
 
 ## Latest Closure
 
