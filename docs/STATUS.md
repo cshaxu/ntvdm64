@@ -2,19 +2,19 @@
 
 ## Current Work
 
-**Active: M0 T259 S3** — SoftPC/CCPU-to-Bochs mechanical contract recovery.
+**Active: M0 T259 S4** — host/machine source-shaped facade reconciliation.
 
 ## Active Packet
 
-### M0 T259 S3 — SoftPC/CCPU-to-Bochs mechanical contract recovery
+### M0 T259 S4 — Host/machine source-shaped facade reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T259 S3`, Ordinary Mode with a single-person dual-role review: source-first selector-blind machine contract recovery. |
-| Admission And Approval | T259 S1 catalog and S2 active RTL/environment seams are established. S3 now defines the exact SoftPC/CCPU-to-Bochs contract before any machine-side facade correction. |
-| Objective | Preserve reached SoftPC/CCPU interface shape and recover its observable run, register, memory, A20, interrupt and reset contract through typed selector-blind Bochs mechanics, without rebuilding a CCPU or product shell. |
-| Non-goals | No BOP/provider enablement; no wholesale CCPU/SAS/CSR/BaseSrv product-shell recreation; no Bochs semantic intrusion; no invented behavior without source evidence. Where a historical private implementation is unavailable, a source-shaped facade may use public Win32 or typed Bochs mechanics to preserve the original observable contract. |
-| Reference Baseline | `MACH-01..08` in the T259 catalog; OpenNT `softpc.new/host/src/{nt_cpu.c,nt_cprgs.c,nt_aorc.c}`, `keybd_io.c`; active SoftPC/DEM/XMS source mirrors; T258 mapping manager. |
+| Identifier Mode | `M0 T259 S4`, Ordinary Mode with a single-person dual-role review: source-first facade reconciliation. |
+| Admission And Approval | T259 S1 catalog, S2 RTL/environment seams and S3 machine-contract closure are established. S4 reconciles the remaining reached host/machine facades and their formal static-link closure. |
+| Objective | Recover each reached original OpenNT/SoftPC interface shape and its observable semantics through the smallest source-shaped compatibility facade or direct public API, while independently minimizing edits to OpenNT mirrors and `bx-core`/`bx-mantle`. |
+| Non-goals | No BOP/provider enablement; no wholesale CCPU/SAS/CSR/BaseSrv product-shell recreation; no Bochs semantic intrusion; no invented behavior without source evidence. A facade is not permission to substitute a convenient new ABI. |
+| Reference Baseline | `MACH-01..09` in the T259 catalog; OpenNT `softpc.new/host/src/{nt_cpu.c,nt_cprgs.c,nt_aorc.c}`, `keybd_io.c`; active SoftPC/DEM/XMS source mirrors; T258 mapping manager. |
 | Files And ABI Surface | The source-shaped SoftPC/CCPU facade contract in `bx-vdm`; affected `host_simulate`, register-frame, checked-memory, A20, IVT/keyboard and typed machine-action seams. |
 | Applicable Rules | Source-first recovery, public-Win32/x64 decision rule, guest/machine hard boundary, one shared mapping manager, and no family-private product shell. |
 | Verification | Original call-site and fixed-width ABI audit; focused seam fixture; negative selector/DOS/CCPU boundary scan of bx-core/bx-mantle; formal Ninja build/link; documentation gate and independent review. |
@@ -22,7 +22,7 @@
 | Asset Needs | OpenNT SoftPC/CCPU source and active mirrors, current bx-vdm/mantle API, T258 mapping manager, catalog, exception register and formal build manifest. |
 | Reporting Requirements | Record original interface spelling and call site, calling convention/width/lifetime, typed mechanical request/result, no-op/failure disposition and any exception ID. |
 | Stop Conditions | A helper exposes host pointers to the guest, changes imported OpenNT control flow, recreates a CCPU/product shell, imports BOP/DOS/SoftPC terms into bx-core/mantle, or lacks a source/ABI evidence entry. |
-| Exit Criteria | Every reached `MACH-*` call site has a source-shaped facade or explicit source-proven decline; one changed seam has focused proof and formal Ninja build/link passes; all residual product-shell semantics are queued rather than silently recreated. |
+| Exit Criteria | Every remaining reached `HOST-*`/`MACH-*` seam has a source-shaped facade, direct public-API composition, or explicit source-proven decline; the formal static-library closure is sound for each affected fixture; all residual product-shell semantics are queued rather than silently recreated. |
 | Original Owner Request | “接下来，是关于我们全面恢复opennt的win32api宿主方面和 softpc/ccpu 核心机方面的接口规范的任务。你已经审计过。” |
 | Similar-Issue Sweep | `ANSI_STRING`, `OEM_STRING`, `UNICODE_STRING`, `Rtl*` conversion/heap/environment helpers, `NTSTATUS` to DOS error mapping and existing COMMAND/DEM declaration copies. |
 
@@ -49,6 +49,14 @@ until a future source-proven continuation contract consumes it. A fresh
 [S3 P1 evidence](etc/evidence/m0-t259-s3-p1-ccpu-copied-state-facade-001.md).
 This is deliberately not a claim that the recursive `host_simulate` lifecycle
 is already restored.
+
+S3 P2 closes the reached machine-facade disposition audit.  It proves that
+original CCPU `host_cpu_reset`/`host_cpu_interrupt` are no-ops, that the
+recursive `host_simulate` branch is a truthful unavailable result rather than
+a false CPU success, and that finite SAS/IVT/A20 paths retain source-shaped
+checked facades.  It also records the combined recovery rule: retaining the
+original interface contract and minimizing intrusion are simultaneous gates.
+See [S3 P2 evidence](etc/evidence/m0-t259-s3-p2-machine-facade-disposition-closure-001.md).
 
 S4 P1 has replaced the false DEM hard-error NTDLL stubs with same-named,
 host-only `ntdll.dll` facades for Unicode append/compare and DOS-device

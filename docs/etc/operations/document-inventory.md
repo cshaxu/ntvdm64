@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2186 |
+| Documentation records | 2187 |
 | --- | --- |
-| Generated UTC | 2026-08-23T18:39:41Z |
+| Generated UTC | 2026-08-23T18:44:53Z |
 
 ## Entries
 
@@ -176,6 +176,7 @@ content-divergent entries.
 | etc/evidence/m0-t259-s2-p2-rtl-caller-buffer-ownership-001.md | indexed supporting material | 17633e396cb611c009077899999b7e3fea4a9bf88dd1e2f00332be56c8d00d5a |
 | etc/evidence/m0-t259-s2-p3-command-environment-regression-001.md | indexed supporting material | c95b85b048db15b1ccf17b9075888ae3874658e4899379c6bfaae0ea8ba6191f |
 | etc/evidence/m0-t259-s3-p1-ccpu-copied-state-facade-001.md | indexed supporting material | e20756fbbc65f71f976542ab1044cec1173a7e86ae04a4c3fd107866d60e4627 |
+| etc/evidence/m0-t259-s3-p2-machine-facade-disposition-closure-001.md | indexed supporting material | c9c0108b8722a053b64683cf8b94f86a23bd2af28f2d9f01c0de00a957de8270 |
 | etc/evidence/m0-t259-s4-p1-demerror-ntdll-facade-001.md | indexed supporting material | b90b51efac627462e636834c8302327638fead7943cb2c7207f6a061b7fe0dd2 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -409,7 +410,7 @@ content-divergent entries.
 | etc/operations/m0-t258-s1-shared-mapping-manager-plan-001.md | indexed supporting material | 107ee56f10b80cb00fe85feb715aec6858e779f94bbdeec7a9f99287306cd2a5 |
 | etc/operations/m0-t259-s1-host-machine-interface-specification-plan-001.md | indexed supporting material | f4a143b6c51a26ba5f0e709dc09026601113a19a4de0163326a4a9ab00881185 |
 | etc/operations/m0-t259-s2-opennt-rtl-abi-facade-plan-001.md | indexed supporting material | 6975399ea97591926089c797df7653b751882cca8e3b946017e3cd83ece21259 |
-| etc/operations/m0-t259-s3-softpc-ccpu-bochs-mechanical-contract-001.md | indexed supporting material | 104eb6971e5852f973c59fd035b80e7e959ab5a0ae22f8dc76965f13611d324e |
+| etc/operations/m0-t259-s3-softpc-ccpu-bochs-mechanical-contract-001.md | indexed supporting material | 9433986a1665a5f9f2412c31cbff2ebcb59fd14c4cf87c9f0fbc82c8bc430d95 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2200,7 +2201,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a67de80d6e3d15ffad29d882ba16a4d9db027838fd2d1153c8ffab8ec2c59de1 |
+| STATUS.md | principal control document | 531cb06d399d2ac3c49044292747bc9a6657a824100348f485ac42ad114f3d86 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

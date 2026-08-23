@@ -6,7 +6,12 @@ Recover the reached historical SoftPC/CCPU interface contracts without
 importing their CPU/product shell.  The same source spelling remains at the
 OpenNT mirror boundary; `bx-vdm` translates it to typed, selector-blind Bochs
 mechanics.  This both restores interface semantics and minimizes edits to
-OpenNT mirrors and `bx-core`/`bx-mantle`.
+OpenNT mirrors and `bx-core`/`bx-mantle`.  These are concurrent gates: a
+facade is acceptable only when it retains the reached original interface
+shape, ordering, layout and failure result *and* avoids an otherwise
+unnecessary edit to either adopted source side.  Interface recovery is not a
+permission to substitute a convenient new ABI; low intrusion is not a reason
+to leave an available original interface unrecovered.
 
 ## Source map and disposition
 
