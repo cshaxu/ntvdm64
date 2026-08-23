@@ -29,10 +29,8 @@ WORD int13h_caller_off;
 WORD int13h_caller_seg;
 
 typedef struct bx_ntvdm_demdasd_cpu_shadow {
-    const bx_ntvdm_demhndl_call *call;
     USHORT cs;
     USHORT ip;
-    USHORT es;
 } bx_ntvdm_demdasd_cpu_shadow;
 
 static __declspec(thread) bx_ntvdm_demdasd_cpu_shadow g_cpu_shadow;
@@ -96,11 +94,11 @@ int bx_ntvdm_demdasd_drive_policy_admits(BYTE drive)
 
 USHORT bx_ntvdm_demdasd_get_cs(void) { return g_cpu_shadow.cs; }
 USHORT bx_ntvdm_demdasd_get_ip(void) { return g_cpu_shadow.ip; }
-int bx_ntvdm_demdasd_get_cf(void) { return 1; }
+int bx_ntvdm_demdasd_get_cf(void) { return bx_ntvdm_demhndl_get_cf(); }
 USHORT bx_ntvdm_demdasd_get_ah(void) { return bx_ntvdm_demhndl_get_ah(); }
 void bx_ntvdm_demdasd_set_cs(USHORT value) { g_cpu_shadow.cs = value; }
 void bx_ntvdm_demdasd_set_ip(USHORT value) { g_cpu_shadow.ip = value; }
-void bx_ntvdm_demdasd_set_es(USHORT value) { g_cpu_shadow.es = value; }
+void bx_ntvdm_demdasd_set_es(USHORT value) { bx_ntvdm_demhndl_set_es(value); }
 void bx_ntvdm_demdasd_set_ah(USHORT value) { bx_ntvdm_demhndl_set_ah(value); }
 
 void bx_ntvdm_demdasd_host_simulate(void)
@@ -342,15 +340,13 @@ int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call)
     }
     /* See the host_simulate divergence above: this shadow is private to the
      * imported routine's save/restore protocol and never crosses bx-vdm. */
-    g_cpu_shadow.call = call;
     g_cpu_shadow.cs = call->cpu->cs;
     g_cpu_shadow.ip = (USHORT)call->cpu->eip;
-    g_cpu_shadow.es = call->cpu->es;
     /* Original demDasdInit also probes floppy hardware through the historical
      * SoftPC BIOS path.  This direct host-volume composition admits only its
      * fixed-disk half; retain the original demFdiskInit owner verbatim. */
     if (!g_dasd_initialized) { demFdiskInit(); g_dasd_initialized = 1; }
     if (!bx_ntvdm_demhndl_invoke_body(call, body)) return 0;
-    g_cpu_shadow.call = NULL;
+    memset(&g_cpu_shadow, 0, sizeof(g_cpu_shadow));
     return 1;
 }

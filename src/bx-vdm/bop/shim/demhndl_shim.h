@@ -108,6 +108,8 @@ USHORT bx_ntvdm_demhndl_get_di(void);
 USHORT bx_ntvdm_demhndl_get_bp(void);
 USHORT bx_ntvdm_demhndl_get_ds(void);
 USHORT bx_ntvdm_demhndl_get_es(void);
+USHORT bx_ntvdm_demhndl_get_cs(void);
+USHORT bx_ntvdm_demhndl_get_ip(void);
 USHORT bx_ntvdm_demhndl_get_al(void);
 USHORT bx_ntvdm_demhndl_get_cl(void);
 USHORT bx_ntvdm_demhndl_get_ch(void);
@@ -115,6 +117,7 @@ USHORT bx_ntvdm_demhndl_get_bl(void);
 USHORT bx_ntvdm_demhndl_get_dh(void);
 USHORT bx_ntvdm_demhndl_get_dl(void);
 int bx_ntvdm_demhndl_get_zf(void);
+int bx_ntvdm_demhndl_get_cf(void);
 void bx_ntvdm_demhndl_set_ax(USHORT value);
 void bx_ntvdm_demhndl_set_al(USHORT value);
 void bx_ntvdm_demhndl_set_bx(USHORT value);
@@ -122,6 +125,11 @@ void bx_ntvdm_demhndl_set_bl(USHORT value);
 void bx_ntvdm_demhndl_set_bp(USHORT value);
 void bx_ntvdm_demhndl_set_ds(USHORT value);
 void bx_ntvdm_demhndl_set_es(USHORT value);
+/* These two accessors retain the historical CCPU helper shape for callers
+ * that stage a real-mode BIOS continuation.  They update only the scoped
+ * source-call copy: ordinary BOP resumption still owns its own RIP contract. */
+void bx_ntvdm_demhndl_set_cs(USHORT value);
+void bx_ntvdm_demhndl_set_ip(USHORT value);
 void bx_ntvdm_demhndl_set_si(USHORT value);
 void bx_ntvdm_demhndl_set_di(USHORT value);
 void bx_ntvdm_demhndl_set_cx(USHORT value);
@@ -171,6 +179,8 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
 #define getBP() bx_ntvdm_demhndl_get_bp()
 #define getDS() bx_ntvdm_demhndl_get_ds()
 #define getES() bx_ntvdm_demhndl_get_es()
+#define getCS() bx_ntvdm_demhndl_get_cs()
+#define getIP() bx_ntvdm_demhndl_get_ip()
 #define getAL() bx_ntvdm_demhndl_get_al()
 #define getCL() bx_ntvdm_demhndl_get_cl()
 #define getCH() bx_ntvdm_demhndl_get_ch()
@@ -178,6 +188,7 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
 #define getDH() bx_ntvdm_demhndl_get_dh()
 #define getDL() bx_ntvdm_demhndl_get_dl()
 #define getZF() bx_ntvdm_demhndl_get_zf()
+#define getCF() bx_ntvdm_demhndl_get_cf()
 #define setAX(value) bx_ntvdm_demhndl_set_ax(value)
 #define setAL(value) bx_ntvdm_demhndl_set_al(value)
 #define setBX(value) bx_ntvdm_demhndl_set_bx(value)
@@ -193,6 +204,8 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
 #define setDH(value) bx_ntvdm_demhndl_set_dh(value)
 #define setCF(value) bx_ntvdm_demhndl_set_cf(value)
 #define setZF(value) bx_ntvdm_demhndl_set_zf(value)
+#define setCS(value) bx_ntvdm_demhndl_set_cs(value)
+#define setIP(value) bx_ntvdm_demhndl_set_ip(value)
 #define GETHANDLE(high, low) bx_ntvdm_demhndl_get_handle(high, low)
 #define GetVDMAddr(segment, offset) bx_ntvdm_demhndl_get_vdm_addr(segment, offset)
 #define Sim32FlushVDMPointer(far_pointer, bytes, pointer, write_back) \

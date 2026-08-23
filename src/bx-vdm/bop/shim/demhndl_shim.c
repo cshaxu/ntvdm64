@@ -309,6 +309,8 @@ USHORT bx_ntvdm_demhndl_get_di(void) { return low16(active_call()->cpu.edi); }
 USHORT bx_ntvdm_demhndl_get_bp(void) { return low16(active_call()->cpu.ebp); }
 USHORT bx_ntvdm_demhndl_get_ds(void) { return active_call()->cpu.ds; }
 USHORT bx_ntvdm_demhndl_get_es(void) { return active_call()->cpu.es; }
+USHORT bx_ntvdm_demhndl_get_cs(void) { return active_call()->cpu.cs; }
+USHORT bx_ntvdm_demhndl_get_ip(void) { return (USHORT)active_call()->cpu.eip; }
 USHORT bx_ntvdm_demhndl_get_al(void) { return (USHORT)(active_call()->cpu.eax & 0xffu); }
 USHORT bx_ntvdm_demhndl_get_cl(void) { return (USHORT)(active_call()->cpu.ecx & 0xffu); }
 USHORT bx_ntvdm_demhndl_get_ch(void) { return (USHORT)((active_call()->cpu.ecx >> 8) & 0xffu); }
@@ -317,6 +319,7 @@ USHORT bx_ntvdm_demhndl_get_dh(void) { return (USHORT)((active_call()->cpu.edx >
 USHORT bx_ntvdm_demhndl_get_dl(void) { return (USHORT)(active_call()->cpu.edx & 0xffu); }
 USHORT bx_ntvdm_demhndl_get_ah(void) { return (USHORT)((active_call()->cpu.eax >> 8) & 0xffu); }
 int bx_ntvdm_demhndl_get_zf(void) { return (active_call()->cpu.eflags & 0x40u) != 0u; }
+int bx_ntvdm_demhndl_get_cf(void) { return (active_call()->cpu.eflags & 0x01u) != 0u; }
 void bx_ntvdm_demhndl_set_ax(USHORT value) { (void)set_register(0u, value); }
 void bx_ntvdm_demhndl_set_al(USHORT value)
 { bx_ntvdm_demhndl_set_ax((USHORT)((bx_ntvdm_demhndl_get_ax() & 0xff00u) | (value & 0xffu))); }
@@ -328,6 +331,19 @@ void bx_ntvdm_demhndl_set_bl(USHORT value)
 void bx_ntvdm_demhndl_set_bp(USHORT value) { (void)set_register(5u, value); }
 void bx_ntvdm_demhndl_set_ds(USHORT value) { (void)set_segment(3u, value); }
 void bx_ntvdm_demhndl_set_es(USHORT value) { (void)set_segment(0u, value); }
+void bx_ntvdm_demhndl_set_cs(USHORT value)
+{
+    /* DIVERGENCE (T259 S3): a BOP completion cannot replace its outer
+     * continuation CS:IP.  Preserve the historical accessor against the
+     * scoped source-call image; a later source-proven nested-run facade must
+     * consume this copied value through a typed mechanical request. */
+    if (active_call() != NULL) active_call()->cpu.cs = value;
+}
+void bx_ntvdm_demhndl_set_ip(USHORT value)
+{
+    if (active_call() != NULL)
+        active_call()->cpu.eip = (active_call()->cpu.eip & 0xffff0000u) | value;
+}
 /* The copied-result GPR numbering is Bochs AX,CX,DX,BX,SP,BP,SI,DI; keep
  * the historical helper spellings at this neutral boundary rather than make
  * imported DEM code depend on Bochs headers. */
@@ -343,8 +359,22 @@ void bx_ntvdm_demhndl_set_dh(USHORT value)
 { bx_ntvdm_demhndl_set_dx((USHORT)((bx_ntvdm_demhndl_get_dx() & 0x00ffu) | ((value & 0xffu) << 8))); }
 void bx_ntvdm_demhndl_set_si(USHORT value) { (void)set_register(6u, value); }
 void bx_ntvdm_demhndl_set_di(USHORT value) { (void)set_register(7u, value); }
-void bx_ntvdm_demhndl_set_cf(int value) { (void)bx_ntvdm_cpu_result_v2_set_cf(active_call()->call->result, value); }
-void bx_ntvdm_demhndl_set_zf(int value) { (void)bx_ntvdm_cpu_result_v2_set_zf(active_call()->call->result, value); }
+void bx_ntvdm_demhndl_set_cf(int value)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    if (active == NULL) return;
+    if (value) active->cpu.eflags |= 0x01u;
+    else active->cpu.eflags &= ~0x01u;
+    (void)bx_ntvdm_cpu_result_v2_set_cf(active->call->result, value);
+}
+void bx_ntvdm_demhndl_set_zf(int value)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    if (active == NULL) return;
+    if (value) active->cpu.eflags |= 0x40u;
+    else active->cpu.eflags &= ~0x40u;
+    (void)bx_ntvdm_cpu_result_v2_set_zf(active->call->result, value);
+}
 
 HANDLE bx_ntvdm_demhndl_get_handle(USHORT high, USHORT low)
 {

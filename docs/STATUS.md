@@ -41,6 +41,15 @@ S3 now records the SoftPC/CCPU mechanical contract before correcting its first
 reached facade. This remains neither a new BOP survey nor an NT4 product-shell
 recreation.
 
+S3 P1 has recovered the call-local CCPU register/flag accessor semantics used
+by directly imported DEM code: writes to CF/ZF now update the copied image as
+well as the existing typed result, and CS:IP staging remains explicitly local
+until a future source-proven continuation contract consumes it. A fresh
+286-object formal graph and the direct DASD/IOCTL fixture pass; see
+[S3 P1 evidence](etc/evidence/m0-t259-s3-p1-ccpu-copied-state-facade-001.md).
+This is deliberately not a claim that the recursive `host_simulate` lifecycle
+is already restored.
+
 ## Latest Closure
 
 M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager

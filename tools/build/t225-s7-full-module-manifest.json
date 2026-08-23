@@ -1083,7 +1083,10 @@
       "name": "t230-s7-demdasd-ioctl-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s7_demdasd_ioctl_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",

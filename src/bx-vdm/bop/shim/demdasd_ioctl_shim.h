@@ -54,6 +54,14 @@ void HostFdiskReset(void);
 
 int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call);
 
+/* demhndl_shim exports the common CCPU spelling for other imported DEM
+ * bodies.  DASD owns a separate local CS:IP staging pair around the original
+ * recursive BIOS call, so rebind only those spellings here deliberately. */
+#undef getCS
+#undef getIP
+#undef getCF
+#undef setCS
+#undef setIP
 #define getCS() bx_ntvdm_demdasd_get_cs()
 #define getIP() bx_ntvdm_demdasd_get_ip()
 #define getCF() bx_ntvdm_demdasd_get_cf()
