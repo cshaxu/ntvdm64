@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2117 |
+| Documentation records | 2118 |
 | --- | --- |
-| Generated UTC | 2026-08-23T08:12:54Z |
+| Generated UTC | 2026-08-23T08:17:09Z |
 
 ## Entries
 
@@ -82,7 +82,7 @@ content-divergent entries.
 | DOS-WOW16-SOURCE-CLOSURE-RESULT.md | retained pre-governance evidence | 843f0bb11b298a6d80efca687fdf056dfdc9104026d53676c4052a216c17387c |
 | DOS-WOW16-SOURCE-CLOSURE-TASK-BRIEF.md | retained pre-governance evidence | 5ea19abcd564854c1c21c6dff2714b204303e935ca5385345a3f3e23ee0ecb85 |
 | ENGINE-CONTRACT.md | retained pre-governance evidence | d57785469d3221d45b6931f4ab0f40c2cc6f78ab4ecd8425daaa338931d7ca3c |
-| etc/bop-list.md | indexed supporting material | fb74fd88502f581c2fe3ce0d843610002ce29e7f6f2560720d2ae06678ba5bc2 |
+| etc/bop-list.md | indexed supporting material | 54356008fb0c40864702b8995516b88631c8e6bf0a14e0c6994deacc984ef303 |
 | etc/evidence/m0-t240-s2-softpc-memory-size-closure-001.md | indexed supporting material | 3e0c56fab1d88442fa48813bee1d97d26bc12d4d49ff24dd5ff8c4efa179aba3 |
 | etc/evidence/m0-t241-s2-ivt-watch-source-recovery-001.md | indexed supporting material | dc7cfee2ac868e9e664cb4da58d58bdf73aa0dec2d6a9f5085b35bd9ede2217f |
 | etc/evidence/m0-t241-s3-xms-ivt-watch-regression-001.md | indexed supporting material | 82a407226439c8e5a5703e2560fb19ac6716f6d525a328f7ee4e955217d05082 |
@@ -131,6 +131,7 @@ content-divergent entries.
 | etc/evidence/m0-t249-s1-low-memory-provenance-seam-audit-001.md | indexed supporting material | 4107501834c739155522672461b80de0a599acc58ace3a33241f33f1c5668627 |
 | etc/evidence/m0-t249-s3-physical-write-provenance-closure-001.md | indexed supporting material | 2fe994185f2478329579ffa3a4838b53610f78f6b9515ed158ef3c2dde0f6a3a |
 | etc/evidence/m0-t250-s1-source-built-low-memory-control-flow-map-001.md | indexed supporting material | 09790be808f8aa5cd5207dc234bac11a14e14ccf217e8cd7eb6efc7a9157b023 |
+| etc/evidence/m0-t251-s1-redirector-owner-source-abi-map-001.md | indexed supporting material | 159dbfcff336cc717907fd952778f902e86fde29fb618fec19f6791a471b49a6 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
@@ -2131,7 +2132,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | cf5e726a6a013a64f07130b1e9407c14d64afd596f00cfb2a8302c16047016f5 |
+| STATUS.md | principal control document | ee1ab4be16c14ab0416033114025209b14b9740b2dc3bf6d4e911d95aa25b79c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

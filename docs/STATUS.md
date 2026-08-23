@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T251 S1** — Redirector owner source/ABI/profile inventory.
+**Active: M0 T251 S2** — Redirector capability-profile and source-recovery disposition.
 
 ## Active Packet
 
-### M0 T251 S1 — Redirector owner source/ABI/profile inventory
+### M0 T251 S2 — Redirector capability-profile and source-recovery disposition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T251 S1`, Ordinary Mode, single-person dual-role component-first source/ABI audit. |
-| Admission And Approval | Owner delegated queue ordering and next-task admission.  T250 has closed the preceding low-memory target premise; the ordered Redirector candidate is now admitted. |
-| Objective | Map all `57:00..31` Redirector entries and direct lifecycle dependencies before selecting any capability profile or implementation seam. |
-| Non-goals | No leaf BOP implementation, host network/pipe activation, second COMMAND broker, guest HANDLE exposure, machine change, or trace-directed scope selection. |
-| Reference Baseline | [Redirector proposal](etc/operations/proposal-opennt-redirector-owner-package-completion-001.md), [T251 plan](etc/operations/m0-t251-redirector-source-abi-profile-map-plan-001.md), live BOP tracker, completed DEM/COMMAND source mirrors. |
-| Files And ABI Surface | `src/opennt` Redirector/VDMREDIR source, relevant existing bx-vdm routes, tracker, evidence and governance documents only. |
-| Applicable Rules | Source-first recovery ladder, OpenNT owner-package sequencing, opaque host-handle rule, bx-core/bx-mantle selector blindness and no trace-led BOP patching. |
-| Verification | Source and dispatcher/table inventory; route search; tracker cardinality review; documentation governance and `git diff --check`. |
-| Expected Markers | One source/ABI/failure record for every `57:xx` entry and each direct non-BOP dependency; no claimed capability without its owner map. |
-| Asset Needs | OpenNT `VDMREDIR`/dispatcher sources, existing proposals, tracker and any current bx-vdm ingress code. |
-| Reporting Requirements | Separate directly composable source, smallest-shim candidate, unavailable/deferred historical dependency, and cross-owner prerequisite. |
-| Stop Conditions | Any implementation would require a new capability profile, raw host-handle guest ABI, an invented child broker, or Bochs/guest semantic change before the inventory is complete. |
-| Exit Criteria | Complete 57-family owner/source/ABI/failure map with an explicit recommendation for the next S and no trace-derived leaf selection. |
+| Identifier Mode | `M0 T251 S2`, Ordinary Mode, single-person dual-role whole-profile recovery decision. |
+| Admission And Approval | T251 S1 completes the 57-family source/body audit. Owner delegated component-first queue execution; choose the first viable source-recovery rung before changing any shim. |
+| Objective | Freeze one bounded Redirector capability profile and record a four-rung original-source/shim/intrusion/new-code disposition for every Redirector owner group. |
+| Non-goals | No individual service patch, raw guest `HANDLE`, replacement COMMAND child broker, CCPU/CSR recreation, Bochs change, or activation of an undeclared host network capability. |
+| Reference Baseline | [T251 S1 map](etc/evidence/m0-t251-s1-redirector-owner-source-abi-map-001.md), [Redirector proposal](etc/operations/proposal-opennt-redirector-owner-package-completion-001.md), completed DEM/COMMAND source mirrors and opaque handle manager. |
+| Files And ABI Surface | Redirector headers/callers, existing `demfile`/`demhndl` no-op seams, session/handle ABI, tracker and evidence documents only. |
+| Applicable Rules | Historical source-recovery ladder, explicit profile disposition, session-owned host handles, no trace-led service selection and bx-core/bx-mantle blindness. |
+| Verification | Per-group source-first ledger; review of current no-op helper call sites; tracker cross-owner dependency check; documentation governance and `git diff --check`. |
+| Expected Markers | A declared included/excluded capability set, retained original layouts/order/failure semantics, and a reason no earlier recovery rung can serve each source-body-absent group. |
+| Asset Needs | S1 source inventory, original VDMREDIR headers, current session/handle manager and public Win32 API availability classification. |
+| Reporting Requirements | Distinguish original source absence from modern API availability; identify later machine/DPMI/VDD dependencies without silently implementing them. |
+| Stop Conditions | A profile requires a private NT4 API, a product-wide system change, a Bochs semantic, or invented guest protocol not justified by source. |
+| Exit Criteria | Complete four-rung decision and S3 owner-group implementation order; no current no-op helper is changed without its complete group disposition. |
 | Original Owner Request | Continue ordinary work without repeated approval; recover OpenNT source by whole owner package and preserve hard component boundaries. |
 | Similar-Issue Sweep | `50:47/48`, `54:06`, COMMAND standard-stream/session records, VDD/top-level events, named pipe/network APIs and the entire current `57:xx` family. |
 
