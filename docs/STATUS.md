@@ -2,27 +2,23 @@
 
 ## Current Work
 
-**Active: M0 T245 S10** — DEM physical-drive table and no-floppy source map.
+**Active: M0 T245 S11** — Config-complete source-body composition.
 
 ## Active Packet
 
-### M0 T245 S10 — DEM physical-drive table and no-floppy source map
+### M0 T245 S11 — Config-complete source-body composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S10`, Ordinary Mode, single-person dual-role source-first owner/data-flow map. |
-| Admission And Approval | S9 closes the `nt_fdisk_init` guard but exposes the upstream original `demGetDrives -> PhysicalDriveTypes[] -> demFdiskInit` data dependency. Mapping it precedes a `5E` route; ordinary queue work requires no renewed approval. |
-| Objective | Map all writers/readers of the imported `PhysicalDriveTypes[]` table, determine how the copied CLI snapshot can be the one session-owned source without losing OpenNT's physical/subst classification, and prove the exact no-floppy failure/restore sequence in `demFloppyInit`. |
-| Non-goals | No `5E` route, raw-media I/O, floppy enablement, UMB reservation, new drive policy, generic ignore, BOP handler or bx-core/bx-mantle semantic intrusion. |
-| Reference Baseline | `BOP-DEPENDENCY-110/111`, OpenNT `demgset.c:demGetDrives/GetPhysicalDriveType`, `demdasd.c:demDasdInit/demFloppyInit/demFdiskInit`, and current DEM mirrors/shims. |
-| Files And ABI Surface | Evidence/tracker only until a complete writer/readers/failure map selects the smallest named bx-vdm seam. |
-| Applicable Rules | Source-first recovery, host-drive admission policy, no ambient guest-time drive discovery, guest-owner boundary, selector-blind machine boundary and MTSP governance. |
-| Verification | Cross-check every imported table write and `GetDriveType`/NT native call against the immutable snapshot; trace register restore around unavailable `diskette_io`; classify each needed compatibility seam. |
-| Expected Markers | A source-order recommendation that does not let `5E` observe an unadmitted drive and does not mistake a zero-floppy source failure for an FDC implementation. |
-| Asset Needs | Existing OpenNT tree/current bx-vdm mirrors and host-drive policy evidence; no new source, firmware or host mutation. |
-| Reporting Requirements | Record writer/readers, original classification purpose, policy interaction, no-floppy call/restore sequence, selected/rejected seams and transfer owners. |
-| Stop Conditions | Need to query an unadmitted drive, make host-drive state ambient or guest-controlled, enable floppy/UMB behavior, or add a `5E` return. Record and transfer instead. |
-| Exit Criteria | A complete physical-drive/no-floppy source map exists and identifies one smallest policy-compliant source-order route or an explicit remaining machine dependency. |
+| Identifier Mode | `M0 T245 S11`, Ordinary Mode, single-person dual-role source-first composition closure. |
+| Admission And Approval | S10 proves the original `MS_bop_E` can use an empty admitted-drive set and the existing zero-floppy source failure. It needs only a bx-vdm scoped three-byte body-call seam; no renewed approval is required. |
+| Objective | Compose the original `MS_bop_E` body (`UMBNotify(0); demDasdInit();`) through the active Direct DEM session, preserving the exact three-byte `RIP+3` continuation and no-floppy failure/restore path. |
+| Non-goals | No FDC/DMA/CMOS/media enablement, UMB reservation, raw-media I/O, policy expansion, generic ignore, guest EXEC claim or bx-core/bx-mantle change. |
+| Reference Baseline | `BOP-DEPENDENCY-110/111`, OpenNT `nt_bop.c:MS_bop_E`, `nt_umb.c:UMBNotify`, `demdasd.c:demDasdInit/demFloppyInit`. |
+| Files And ABI Surface | Named bx-vdm source mirror, no-op UMB shim, selector-owning bridge, and provider-neutral scoped three/four-byte body-call helper. |
+| Verification | Fresh formal Ninja compile/link and a synthetic empty-drive session fixture proving AL=0 invokes the source body and resumes at `RIP+3` without guest-register delta. |
+| Expected Markers | 5E is handled only with a bound Direct DEM session; wrong shape/mode and unbound sessions decline. |
+| Exit Criteria | The source body, typed `+3` resume and zero-floppy source path are locally verified and documented; native trace is separately optional integration evidence. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 

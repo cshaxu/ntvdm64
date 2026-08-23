@@ -16,6 +16,7 @@
 #include "softpc_emm_unavailable_v2_generic_ud_bridge.h"
 #include "softpc_mouse_vector_v2_generic_ud_bridge.h"
 #include "softpc_printer_openclose_v2_generic_ud_bridge.h"
+#include "config_complete_v2_generic_ud_bridge.h"
 #include "spckbd_handoff_v2_generic_ud_bridge.h"
 #include "top_level_nosupport_v2_generic_ud_bridge.h"
 #include "xms_v2_generic_ud_bridge.h"
@@ -33,6 +34,7 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         !bx_ntvdm_softpc_emm_unavailable_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_softpc_mouse_vector_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_softpc_printer_openclose_v2_generic_ud_recognizes(event) &&
+        !bx_ntvdm_config_complete_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_spckbd_handoff_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_dem_v2_generic_ud_recognizes(event) &&
         !bx_ntvdm_command_v2_generic_ud_recognizes(event) &&
@@ -57,6 +59,8 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
         bx_ntvdm_softpc_mouse_vector_v2_generic_ud_dispatch(event, outcome) :
         (bx_ntvdm_softpc_printer_openclose_v2_generic_ud_recognizes(event) ?
         bx_ntvdm_softpc_printer_openclose_v2_generic_ud_dispatch(event, outcome) :
+        (bx_ntvdm_config_complete_v2_generic_ud_recognizes(event) ?
+        bx_ntvdm_config_complete_v2_generic_ud_dispatch(event, outcome) :
         (bx_ntvdm_spckbd_handoff_v2_generic_ud_recognizes(event) ?
         bx_ntvdm_spckbd_handoff_v2_generic_ud_dispatch(event, outcome) :
         (bx_ntvdm_dem_v2_generic_ud_recognizes(event) ?
@@ -65,7 +69,7 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
             bx_ntvdm_command_v2_generic_ud_dispatch(event, outcome) :
             (bx_ntvdm_xms_v2_generic_ud_recognizes(event) ?
                 bx_ntvdm_xms_v2_generic_ud_dispatch(event, outcome) :
-                bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(event, outcome)))))))));
+                bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(event, outcome))))))))));
     if (accepted) {
         bx_ntvdm_bop_sequence_observation_v1_consider(event, outcome);
         bx_ntvdm_generic_ud_sequence_observation_v1_consider(event, outcome);

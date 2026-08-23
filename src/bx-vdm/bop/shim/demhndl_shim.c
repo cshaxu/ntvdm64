@@ -565,10 +565,17 @@ int VrWriteNamedPipe(HANDLE file, LPVOID buffer, DWORD count, DWORD *written_out
 int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
     void (*body)(void))
 {
+    return bx_ntvdm_demhndl_invoke_body_with_resume(call, body, 4u);
+}
+
+int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
+    void (*body)(void), uint32_t resume_bytes)
+{
     bx_ntvdm_demhndl_active_call active;
 
     if (!bx_ntvdm_demhndl_call_valid(call) || body == NULL || g_active_call != NULL ||
-        call->boundary->fault_rip > UINT64_MAX - 4u) return 0;
+        (resume_bytes != 3u && resume_bytes != 4u) ||
+        call->boundary->fault_rip > UINT64_MAX - resume_bytes) return 0;
     memset(&active, 0, sizeof(active));
     active.call = call;
     active.cpu = *call->cpu;
@@ -576,7 +583,8 @@ int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
     memset(&g_extended_error, 0, sizeof(g_extended_error));
     pExtendedError = &g_extended_error;
     bx_ntvdm_cpu_result_v2_pass_through(call->result);
-    if (!bx_ntvdm_cpu_result_v2_resume(call->result, call->boundary->fault_rip + 4u))
+    if (!bx_ntvdm_cpu_result_v2_resume(call->result,
+            call->boundary->fault_rip + resume_bytes))
         return 0;
     g_active_call = &active;
     if (setjmp(active.terminate_jump) == 0)

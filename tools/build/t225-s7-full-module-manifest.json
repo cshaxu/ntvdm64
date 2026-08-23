@@ -231,6 +231,7 @@
         "src/bx-vdm/bop/opennt/dem/demgset.c",
         "src/bx-vdm/bop/opennt/dem/demioctl.c",
         "src/bx-vdm/bop/opennt/dem/demsrch.c",
+        "src/bx-vdm/bop/opennt/softpc/nt_bop_config_done.c",
         "src/bx-vdm/bop/opennt/command/cmdmisc.c",
         "src/bx-vdm/bop/opennt/command/cmdpif.c",
         "src/bx-vdm/bop/opennt/command/cmddisp.c",
@@ -243,8 +244,10 @@
         "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/command_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/xms_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/config_complete_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/top_level_nosupport_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/shim/top_level_nosupport_shim.c",
+        "src/bx-vdm/bop/shim/config_complete_shim.c",
         "src/bx-vdm/bop/command_v2_runtime_session.c",
         "src/bx-vdm/bop/xms_v2_runtime_session.c",
         "src/bx-vdm/bop/dem_v2_composition_bridge.c",
@@ -320,6 +323,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t245-s11-config-complete-fixture",
+      "source": "tests/bx-vdm/t245_s11_config_complete_fixture.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "platformLibraries": ["user32.lib"]
+    },
     {
       "name": "t245-s9-demdasd-drive-policy-fixture",
       "source": "tests/bx-vdm/t245_s9_demdasd_drive_policy_fixture.c",

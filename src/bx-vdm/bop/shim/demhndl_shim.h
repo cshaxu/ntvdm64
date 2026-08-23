@@ -91,6 +91,8 @@ int bx_ntvdm_demhndl_invoke_fast_read(bx_ntvdm_demhndl_call *call);
  * owns service selection and the imported function owns its DEM semantics. */
 int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
     void (*body)(void));
+int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
+    void (*body)(void), uint32_t resume_bytes);
 
 #define errLOC_Net 2u
 #define errCLASS_TempSit 0x0bu

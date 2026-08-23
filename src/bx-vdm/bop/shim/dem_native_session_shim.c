@@ -120,3 +120,35 @@ int bx_ntvdm_dem_native_session_dispatch(
     call.guest_write = g_active_session->guest_write;
     return bx_ntvdm_dem_ingress_dispatch(&window, &call) && copy_outcome(&result, outcome);
 }
+
+int bx_ntvdm_dem_native_session_invoke_scoped_body(
+    const struct bx_ntvdm_generic_ud_event_v1 *event,
+    struct bx_ntvdm_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    uint32_t resume_bytes)
+{
+    bx_ntvdm_exception_event_v1 boundary;
+    bx_ntvdm_cpu_state_v1 cpu;
+    bx_ntvdm_cpu_result_v2 result;
+    bx_ntvdm_demhndl_call call;
+    if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
+        !event_valid(event) || outcome == NULL || body == NULL ||
+        (resume_bytes != 3u && resume_bytes != 4u)) return 0;
+    memset(&boundary, 0, sizeof(boundary));
+    boundary.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
+    boundary.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
+    boundary.struct_bytes = sizeof(boundary);
+    boundary.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;
+    boundary.cpu_id = event->cpu_id; boundary.vector = event->vector;
+    boundary.error_code = event->error_code; boundary.fault_rip = event->fault_rip;
+    copy_cpu(event, &cpu);
+    memset(&call, 0, sizeof(call));
+    call.magic = BX_NTVDM_DEMHNDL_CALL_MAGIC;
+    call.abi_version = BX_NTVDM_DEMHNDL_CALL_VERSION;
+    call.struct_bytes = sizeof(call);
+    call.direct = g_active_session->direct; call.boundary = &boundary;
+    call.cpu = &cpu; call.result = &result; call.guest_state = g_active_session->guest_state;
+    call.guest_read = g_active_session->guest_read;
+    call.guest_write = g_active_session->guest_write;
+    return bx_ntvdm_demhndl_invoke_body_with_resume(&call, body, resume_bytes) &&
+        copy_outcome(&result, outcome);
+}

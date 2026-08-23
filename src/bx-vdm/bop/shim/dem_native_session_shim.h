@@ -32,4 +32,13 @@ int bx_ntvdm_dem_native_session_dispatch(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome);
 
+/* A source-owner bridge may use this only after it has recognized its own
+ * non-DEM BOP.  This helper contributes no selector or service meaning: it
+ * scopes a copied CPU state around one imported source body and returns its
+ * typed three- or four-byte resume result. */
+int bx_ntvdm_dem_native_session_invoke_scoped_body(
+    const struct bx_ntvdm_generic_ud_event_v1 *event,
+    struct bx_ntvdm_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    uint32_t resume_bytes);
+
 #endif
