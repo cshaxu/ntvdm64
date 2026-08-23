@@ -13,7 +13,7 @@ module manifest, `tools/build/t225-s7-full-module-manifest.json`, and records
 every declared module source, fixture source, executable source, include root,
 and generator input.
 
-The current generated baseline contains 1,263 unique rows:
+The completed S1 manifest contains 3,715 unique rows:
 
 | Kind | Count | S1 disposition |
 | --- | ---: | --- |
@@ -24,6 +24,8 @@ The current generated baseline contains 1,263 unique rows:
 | Include root | 14 | Formal build-graph input retained under `tools/build`; it is not a source-owner placeholder. |
 | Build input | 2 | Retain under `tools/build`; update paths in S8. |
 | DOS/WOW guest source candidate | 618 | `opennt-guest`; S4 must distinguish source-build membership from retained guest-source evidence. |
+| Non-formal legacy product input | 112 | Classified to a target component although absent from the current formal module graph. |
+| Non-formal OpenNT evidence input | 2,332 | `refs/opennt`; explicitly retained provenance, never a product provider. |
 
 The first classified source distribution is: `bx-core` 122, `bx-mantle` 8,
 `adapter-softpc` 58, `adapter-win32` 1, `opennt-bop` 60, `opennt-host` 27,
@@ -33,13 +35,14 @@ The first classified source distribution is: `bx-core` 122, `bx-mantle` 8,
 build inputs now have one target owner. Rows marked `review/split` still
 require their owning S to confirm the file split.
 
-## Remaining S1 work
+## S1 closure evidence
 
-1. Add guest source/artifact build inputs which are intentionally outside the
-   modern formal runtime graph.
-2. Enumerate non-formal legacy product/evidence inputs so old paths cannot
-   survive as an undeclared second provider.
-3. Reconcile the resulting rows against the BOP tracker, build generator, and
-   current live-call scan before any source move is admitted.
+The final current-tree cross-check finds 3,542 files below `src/`; all 3,542
+occur exactly once in the manifest. There are zero missing paths, zero duplicate
+paths and zero unresolved owner markers. Every formal source, reached header,
+fixture, target, build input, guest candidate and non-formal legacy/evidence
+input has one target owner and migration disposition.
 
-The manifest is therefore **in progress**, not an S1 closure claim.
+S1 is closed. It does not claim that a later S has performed any `git mv`,
+created a component root, or made a source/build closure valid under the new
+paths.

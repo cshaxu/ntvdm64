@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2195 |
 | --- | --- |
-| Generated UTC | 2026-08-23T21:41:22Z |
+| Generated UTC | 2026-08-23T21:46:56Z |
 
 ## Entries
 
@@ -415,8 +415,8 @@ content-divergent entries.
 | etc/operations/m0-t259-s1-host-machine-interface-specification-plan-001.md | indexed supporting material | f4a143b6c51a26ba5f0e709dc09026601113a19a4de0163326a4a9ab00881185 |
 | etc/operations/m0-t259-s2-opennt-rtl-abi-facade-plan-001.md | indexed supporting material | 6975399ea97591926089c797df7653b751882cca8e3b946017e3cd83ece21259 |
 | etc/operations/m0-t259-s3-softpc-ccpu-bochs-mechanical-contract-001.md | indexed supporting material | 9433986a1665a5f9f2412c31cbff2ebcb59fd14c4cf87c9f0fbc82c8bc430d95 |
-| etc/operations/m0-t260-s1-owner-manifest-baseline-001.md | indexed supporting material | 8769126d695ea337e46a2090186916c2f4a5c09518b321fe027447354092e85e |
-| etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv | indexed supporting material | 46de16fdbd0513c5ffdb565f65210ab8ce7e9046896efb19a0e84c3c35d7ca70 |
+| etc/operations/m0-t260-s1-owner-manifest-baseline-001.md | indexed supporting material | 499aded032d0bd5f6b3079818d71d33a237d422c6b6497c3c89458b6424327f1 |
+| etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv | indexed supporting material | c2548c68bd89f45121b0a91748b635d7c387a8296197421b67ec01547f30bc43 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2209,7 +2209,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 3f776a9f2df52b0cca3fd3e9e1dbc28b0e9f5022817823c483283d1900982983 |
+| STATUS.md | principal control document | d966dc3adf9e1580ab4261b8f1714d3a09f035d454f5e0ceaa0ababfcc523967 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

@@ -2,28 +2,28 @@
 
 ## Current Work
 
-**Active: M0 T260 S1** — eight-component source-layout reorganization and
+**Active: M0 T260 S2** — eight-component source-layout reorganization and
 build closure.
 
 ## Active Packet
 
-### M0 T260 S1 — Complete owner/provenance/build manifest
+### M0 T260 S2 — Target roots, registers and public boundaries
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T260 S1`, Ordinary Mode with a single-person dual-role review. T260 is one architecture reorganization package with eight sequential S tasks; it is not eight component tasks. |
-| Admission And Approval | Owner approved the queue head and prescribed the complete S1--S8 sequence: manifest; roots/registers; pure Bochs owners; app/guest; BOP; host/Win32; SoftPC adapter; tests/Ninja/legacy-path exit. |
-| Objective | Produce the complete file-level owner, provenance, build-input and migration-disposition manifest required to move every live product input from the transitional tree into exactly one of `bx-core`, `bx-mantle`, `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-softpc`, `adapter-win32`, or `app`. |
-| Non-goals | No `git mv` yet; no BOP/provider enablement; no guest, Bochs, host-capability or compatibility-semantic change; no new facade; no opportunistic test repair. |
-| Reference Baseline | [Component-reorganization proposal](etc/operations/proposal-seven-component-source-layout-reorganization-001.md), current `t225-s7-full-module-manifest.json`, live BOP tracker, T258 mapping manager and T259 facade closure. |
-| Files And ABI Surface | Current `src/cli`, `src/bx-vdm`, live portions of `src/opennt`, `src/bx-core`, `src/bx-mantle`, tests, and formal Ninja/manifest inputs. S1 changes only the migration manifest and supporting governance evidence. |
-| Applicable Rules | Target-component dependency direction; source-first recovery; one mapping-manager implementation with three session instances; minimal changes plus exception registers for the four imported-source components; `bx-mantle` is Bochs-only; transition paths are not precedent. |
-| Verification | File enumeration cross-check against formal manifest and Ninja inputs; owner/provenance uniqueness audit; reverse scan for undeclared legacy production inputs; documentation governance verification and `git diff --check`. |
-| Expected Markers | Every live source/header/test/build input has one target owner, provenance class, migration method (`retain`, `git mv`, split, archive, or delete-after-callers`), and a declared S destination. |
-| Asset Needs | Current source tree; BOP tracker; build manifest and generator; component proposal; existing exception register and T259 evidence. |
-| Reporting Requirements | State all mixed files, especially `bop/shim`, unresolved classification facts, source provenance, and every item that cannot be moved without a later S. |
-| Stop Conditions | A requested move would change a BOP/guest/machine semantic; a file has no defensible owner; a cyclic dependency would be introduced; or a legacy source is found to be a second live provider. Pause and revise the S brief. |
-| Exit Criteria | The manifest is complete and unique; its component graph is acyclic and matches the proposal; every current live input has an S2--S8 disposition; no source is moved. |
+| Identifier Mode | `M0 T260 S2`, Ordinary Mode with a single-person dual-role review. T260 is one architecture reorganization package with eight sequential S tasks; it is not eight component tasks. |
+| Admission And Approval | S1 is closed by the complete 3,707-row manifest. Owner-approved T260 requires target roots, README exception registers and public library/include boundaries before source movement. |
+| Objective | Create the eight target component roots and their boundary documentation: `bx-core`, `bx-mantle`, `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-softpc`, `adapter-win32`, and `app`. |
+| Non-goals | No `git mv` of product source; no BOP/provider enablement; no guest, Bochs, host-capability or compatibility-semantic change; no new facade; no Ninja source-list switch. |
+| Reference Baseline | [S1 manifest](etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv), [component proposal](etc/operations/proposal-seven-component-source-layout-reorganization-001.md), current formal manifest, BOP tracker and exception records. |
+| Files And ABI Surface | New target-root README/public-include boundary records only, plus T260 governance evidence. Existing source files remain at current paths. |
+| Applicable Rules | Target dependency direction; four imported-source component exception registers; `bx-mantle` Bochs-only restriction; adapter same-shaped interface rules; transition paths are not precedent. |
+| Verification | README contract review against architecture; negative scan proving no product source moved; target-root ownership/layout scan; documentation governance verification and `git diff --check`. |
+| Expected Markers | Each target root declares responsibility, permitted dependencies, forbidden semantics, source provenance/exception policy, and future library/public-include name. |
+| Asset Needs | S1 manifest, architecture/coding authorities, existing external intrusion register, BOP tracker and formal Ninja manifest. |
+| Reporting Requirements | Record any boundary that cannot be expressed without a source move, every inherited exception-register reference, and unresolved public-header ownership for later S. |
+| Stop Conditions | A root README attempts to redefine semantics, make a source-derived replacement, introduce a reverse dependency, or normalize an existing source edit without an exception record. Pause and re-admit if needed. |
+| Exit Criteria | All eight roots exist with correct README/register contract; the four imported-source owners have explicit exception-register locations; public include/library names and allowed edge directions are declared; no production source is moved. |
 | Original Owner Request | “应使用 1 个 T 任务，例如：M0 T260：七/八组件源码布局重整与构建闭合……这个 T 应拆成约 8 个 S。” |
 | Similar-Issue Sweep | Headers, fixtures, generated Ninja input, include roots, legacy v1/test-only code, OpenNT source provenance and the shared mapping-manager placement. |
 
@@ -40,15 +40,17 @@ build closure.
 | S7 | `adapter-softpc` same-shaped SoftPC/CCPU boundary and shared-mapping-manager migration. |
 | S8 | Tests, formal Ninja graph, legacy-path exit and whole-package acceptance. |
 
-**Current progress:** S1 P1 establishes the reproducible formal-graph owner
-baseline through `Export-T260S1OwnerManifest.ps1`: 386 rows cover 291 module
-sources, 78 fixtures, one target, 14 include roots and two build inputs.
-S1 P2 expands those inputs to 1,263 rows by adding 618 DOS/WOW guest-source
-candidates and 259 recursively reached headers. Header owners are now initial
-unique dispositions. S1 P3 gives all 78 fixtures a unique target owner; the
-remaining S1 work is the non-formal legacy/evidence sweep. No source has moved.
-See the
+**Current progress:** S1 is closed. Its reproducible manifest covers all 3,534
+current `src/` files in 3,715 rows with zero missing paths, duplicate paths or
+unresolved owners; 2,332 non-product OpenNT inputs are explicitly destined for
+`refs/opennt`. No source has moved. See the
 [baseline record](etc/operations/m0-t260-s1-owner-manifest-baseline-001.md).
+
+S2 P1 has created all eight target-root README contracts. They declare the
+exception registers for `bx-core`, `opennt-guest`, `opennt-bop` and
+`opennt-host`; restrict mantle to Bochs-only mechanics; and declare each future
+library/public-include boundary. No product source or formal Ninja input has
+moved.
 
 ## Previous Active Packet — M0 T259
 

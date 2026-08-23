@@ -17,6 +17,7 @@ $outputFullPath = Join-Path $root $OutputPath
 $manifest = Get-Content -LiteralPath $manifestFullPath -Raw | ConvertFrom-Json
 $rows = [System.Collections.Generic.List[object]]::new()
 $seen = @{}
+$representedPaths = @{}
 
 function Add-Row(
     [string]$Path,
@@ -32,6 +33,7 @@ function Add-Row(
     $key = "$Kind|$normalized"
     if ($seen.ContainsKey($key)) { return }
     $seen[$key] = $true
+    $representedPaths[$normalized] = $true
     $rows.Add([pscustomobject]@{
         Path = $normalized
         Kind = $Kind
@@ -46,6 +48,12 @@ function Add-Row(
 
 function Get-SourceDisposition([string]$Path, [string]$CurrentModule) {
     $p = $Path.Replace('\', '/')
+    if ($p -like 'src/app/*') { return @('app', 'project-authored app component record', 'retain', 'S2', 'target component root record') }
+    if ($p -like 'src/adapter-softpc/*') { return @('adapter-softpc', 'project-authored SoftPC adapter record', 'retain', 'S2', 'target component root record') }
+    if ($p -like 'src/adapter-win32/*') { return @('adapter-win32', 'project-authored Win32 adapter record', 'retain', 'S2', 'target component root record') }
+    if ($p -like 'src/opennt-bop/*') { return @('opennt-bop', 'OpenNT BOP component record', 'retain', 'S2', 'target component root record') }
+    if ($p -like 'src/opennt-guest/*') { return @('opennt-guest', 'OpenNT guest component record', 'retain', 'S2', 'target component root record') }
+    if ($p -like 'src/opennt-host/*') { return @('opennt-host', 'OpenNT host component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/bx-core/*') {
         return @('bx-core', 'adopted Bochs 2.6', 'retain', 'S3', 'adopted core; README exception register required')
     }
@@ -205,6 +213,21 @@ while ($pending.Count -gt 0) {
         $d = Get-HeaderDisposition $relativePath
         Add-Row $relativePath 'header' 'reached-include' $d[0] $d[1] $d[2] $d[3] $d[4]
         if (-not $queued.ContainsKey($relativePath)) { $pending.Enqueue($relativePath); $queued[$relativePath] = $true }
+    }
+}
+
+foreach ($legacyRoot in @('src/bx-core', 'src/bx-mantle', 'src/bx-vdm', 'src/cli', 'src/opennt', 'src/app', 'src/adapter-softpc', 'src/adapter-win32', 'src/opennt-bop', 'src/opennt-guest', 'src/opennt-host')) {
+    $legacyFullPath = Join-Path $root $legacyRoot
+    if (-not (Test-Path -LiteralPath $legacyFullPath)) { continue }
+    Get-ChildItem -LiteralPath $legacyFullPath -Recurse -File | ForEach-Object {
+        $relativePath = $_.FullName.Substring($root.Length).TrimStart('\').Replace('\', '/')
+        if ($representedPaths.ContainsKey($relativePath)) { return }
+        if ($relativePath -like 'src/opennt/*') {
+            Add-Row $relativePath 'nonformal-evidence-input' 'OpenNT source import' 'refs/opennt' 'unreached imported OpenNT source' 'git mv to evidence input' 'S8' 'not a declared product input; retain immutable source provenance outside src/'
+            return
+        }
+        $d = Get-SourceDisposition $relativePath ''
+        Add-Row $relativePath 'nonformal-legacy-input' 'legacy source tree' $d[0] $d[1] $d[2] $d[3] ($d[4] + '; not present in formal module graph')
     }
 }
 
