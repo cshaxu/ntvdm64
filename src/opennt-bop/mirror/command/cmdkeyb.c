@@ -10,7 +10,7 @@
  * Divergence: the historical CCPU/SoftPC include closure is unavailable to
  * the standalone CLI.  command_misc_shim.h exposes only the original
  * register, checked guest-buffer and console capability spellings. */
-#include "../../shim/command_misc_shim.h"
+#include "../../../opennt-host/capability/command_misc_shim.h"
 #include "cmdkeyb.h"
 
 CHAR szPrev[5] = "US";

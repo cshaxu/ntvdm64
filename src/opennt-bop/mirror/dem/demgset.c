@@ -26,7 +26,7 @@
  * the original spellings and exposes only the checked bx-vdm call boundary;
  * it does not replace any drive, DPB, date/time or machine-name algorithm.
  */
-#include "../../shim/demgset_shim.h"
+#include "../../../opennt-host/capability/demgset_shim.h"
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"
 #define BOOTDRIVE_VALUE "BootDir"

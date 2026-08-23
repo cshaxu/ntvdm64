@@ -16,7 +16,7 @@
 #define BX_NTVDM_COMMAND_ENV_ADMIT_DYNAMIC 1
 #define BX_NTVDM_COMMAND_ENV_ADMIT_XFORM 1
 #define BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE 1
-#include "../../shim/command_misc_shim.h"
+#include "../../../opennt-host/capability/command_misc_shim.h"
 
 #define VDM_ENV_INC_SIZE    512
 

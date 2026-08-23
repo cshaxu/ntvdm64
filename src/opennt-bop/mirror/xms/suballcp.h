@@ -22,7 +22,7 @@ Revision History:
 
 
 --*/
-#include "../../shim/xms_shim.h"
+#include "../../../opennt-host/capability/xms_shim.h"
 
 /* OpenNT suballoc.h: the declared i386 XMS provider commits in 4 KiB units.
  * The original public header arrived through the removed NT product include

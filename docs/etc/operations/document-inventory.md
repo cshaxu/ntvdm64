@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2198 |
+| Documentation records | 2199 |
 | --- | --- |
-| Generated UTC | 2026-08-23T22:12:08Z |
+| Generated UTC | 2026-08-23T22:19:19Z |
 
 ## Entries
 
@@ -185,6 +185,7 @@ content-divergent entries.
 | etc/evidence/m0-t260-s3-mantle-purification-001.md | indexed supporting material | d03871669d0396d32e2ad44aed62424026dd48b6c1ec275b32e9cf9a036d709c |
 | etc/evidence/m0-t260-s4-app-guest-migration-001.md | indexed supporting material | 6ddba2b4b5935a102ab3dc5f4a6e87b0b7abf2241238b8ddf7fd15c5e3c3459b |
 | etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md | indexed supporting material | 18ffd6475d4ca89c7f135b7e78101ebd2c581081e596721232871bb1c5c19173 |
+| etc/evidence/m0-t260-s6-host-win32-layout-migration-001.md | indexed supporting material | fe60f223518cb10e421f0bba5261ff03bb5a9c7039f7655f80e0613cdd90c12f |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
@@ -419,7 +420,7 @@ content-divergent entries.
 | etc/operations/m0-t259-s2-opennt-rtl-abi-facade-plan-001.md | indexed supporting material | 6975399ea97591926089c797df7653b751882cca8e3b946017e3cd83ece21259 |
 | etc/operations/m0-t259-s3-softpc-ccpu-bochs-mechanical-contract-001.md | indexed supporting material | 9433986a1665a5f9f2412c31cbff2ebcb59fd14c4cf87c9f0fbc82c8bc430d95 |
 | etc/operations/m0-t260-s1-owner-manifest-baseline-001.md | indexed supporting material | 5a841f759498a20a4170e680a148e36b64a47ae3f7dbcb1e771ff636b0ceb30a |
-| etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv | indexed supporting material | 3b0619bbab7b119e087241ebb6345c53ade190616591376463ea28848fac21b8 |
+| etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv | indexed supporting material | 86d86ef0c8d28ec958b4c203b6c2acc226c90c1e66c47e28abdfd6c23829ee17 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2212,7 +2213,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 58a7986b732bf960ed54e929f3549c1571e00f1267df4c16d4553e2cbd6399aa |
+| STATUS.md | principal control document | 4b915e4d89c4842bd53b89b54ce22d9307bcd7f58f12fa80dd6be3b79ffff4fb |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

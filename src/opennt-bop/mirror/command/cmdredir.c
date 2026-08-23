@@ -10,7 +10,7 @@
  * Divergence: only cmdGetStdHandle is admitted.  The shim replaces the
  * historical CCPU include closure and transports session tokens, never raw
  * host pointers or truncated HANDLE values. */
-#include "../../shim/command_misc_shim.h"
+#include "../../../opennt-host/capability/command_misc_shim.h"
 
 /* DIVERGENCE: OpenNT's K&R function definitions and retained diagnostic
  * locals are preserved byte-for-byte within this imported owner file.

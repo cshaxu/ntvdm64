@@ -19,7 +19,7 @@
 /* OpenNT source: src/opennt/base/mvdm/dos/dem/demfcb.c.  Its unavailable
  * historical DEM/SoftPC include closure is named by the common package shim;
  * imported FCB algorithms remain below unchanged. */
-#include "../../shim/demsrch_fcb_shim.h"
+#include "../../../opennt-host/capability/demsrch_fcb_shim.h"
 
 #define DOT '.'
 #define QMARK '?'

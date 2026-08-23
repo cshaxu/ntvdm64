@@ -8,7 +8,7 @@
 
 /* Direct import from src/opennt/base/mvdm/dos/dem/demdasd.c.  Its original
  * SoftPC/SAS/raw-device headers are supplied only as named ABI seams. */
-#include "../../shim/demdasd_ioctl_shim.h"
+#include "../../../opennt-host/capability/demdasd_ioctl_shim.h"
 
 PBDS	demBDS;
 BYTE	NumberOfFloppy;

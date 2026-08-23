@@ -11,7 +11,7 @@
 
 /* OpenNT source: src/opennt/base/mvdm/dos/dem/demlabel.c; see the matching
  * neutral demfile shim for the unavailable historical host include closure. */
-#include "../../shim/demfile_shim.h"
+#include "../../../opennt-host/capability/demfile_shim.h"
 
 USHORT demDeleteLabel(BYTE Drive)
 {

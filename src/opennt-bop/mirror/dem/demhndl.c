@@ -16,7 +16,7 @@
  * dem.h/softpc/SAS/VdmRedir include closure is unavailable in the standalone
  * CLI composition; demhndl_shim.h supplies only those imported-file symbols
  * through the named neutral adapter boundary. */
-#include "../../shim/demhndl_shim.h"
+#include "../../../opennt-host/capability/demhndl_shim.h"
 
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL IsVdmRedirLoaded(VOID);

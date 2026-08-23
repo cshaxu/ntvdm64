@@ -14,7 +14,7 @@
 /* OpenNT source: src/opennt/base/mvdm/dos/dem/demsrch.c.  Its unavailable
  * historical DEM/SoftPC/NT-native include closure is named by the neutral
  * package shim; imported search algorithms remain below unchanged. */
-#include "../../shim/demsrch_fcb_shim.h"
+#include "../../../opennt-host/capability/demsrch_fcb_shim.h"
 
 extern BOOL IsFirstCall;
 

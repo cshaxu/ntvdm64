@@ -8,7 +8,7 @@
  * Divergence: the historical io.h/dem.h closure is unavailable outside the
  * NTVDM product shell; dem_common_shim.h supplies only its declarations and
  * exact diagnostic constants. */
-#include "../../shim/dem_common_shim.h"
+#include "../../../opennt-host/capability/dem_common_shim.h"
 
 /* DemInit - DEM Initialiazation routine. (This name may change when DEM is
  *           converted to DLL). */

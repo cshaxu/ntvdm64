@@ -9,7 +9,7 @@
 
 /* Divergence from src/opennt/base/mvdm/dos/dem/demlock.c: replace the
  * historical CCPU/SAS product headers with the neutral ABI-only shim. */
-#include "../../shim/demerror_lock_shim.h"
+#include "../../../opennt-host/capability/demerror_lock_shim.h"
 
 /* demLockOper - Lock or Unlock the file data
  *

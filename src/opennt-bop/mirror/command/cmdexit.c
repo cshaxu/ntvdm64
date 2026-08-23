@@ -11,7 +11,7 @@
  * DIVERGENCE: the historical include closure pulled CCPU/SoftPC product
  * headers; the directly imported original body needs only the existing typed
  * COMMAND stop seam. */
-#include "../../shim/command_misc_shim.h"
+#include "../../../opennt-host/capability/command_misc_shim.h"
 
 /* cmdExitVDM - Terminate the VDM
  *

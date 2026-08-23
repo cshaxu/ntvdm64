@@ -6,7 +6,7 @@
 /* Direct import from src/opennt/base/mvdm/dos/dem/demdata.c.
  * Divergence: the historical dem.h closure is represented by the declaration
  * only dem_common_shim.h; the original state identities and types remain. */
-#include "../../shim/dem_common_shim.h"
+#include "../../../opennt-host/capability/dem_common_shim.h"
 
 /** VDM's DTA Address **/
 ULONG  UNALIGNED *pulDTALocation;

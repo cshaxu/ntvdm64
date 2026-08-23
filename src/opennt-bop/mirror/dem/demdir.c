@@ -13,7 +13,7 @@
 /* OpenNT source: src/opennt/base/mvdm/dos/dem/demdir.c.  The historical
  * DEM/SoftPC/OEM include closure is unavailable to the standalone CLI;
  * demdir_shim.h supplies only its named ABI and OEM capability declarations. */
-#include "../../shim/demdir_shim.h"
+#include "../../../opennt-host/capability/demdir_shim.h"
 
 /* demCreateDir - Create a directory
  *

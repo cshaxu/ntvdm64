@@ -16,7 +16,7 @@
  * Divergence: the historical demmsg.h/dem.h include closure is supplied by
  * dem_common_shim.h; no message selection or debug-output logic is replaced. */
 #include <stdio.h>
-#include "../../shim/dem_common_shim.h"
+#include "../../../opennt-host/capability/dem_common_shim.h"
 
 PCHAR aMsg [] = {
     "DOS Location Not Found. Using Default.\n",

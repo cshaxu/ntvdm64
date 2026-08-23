@@ -11,7 +11,7 @@
  * removed NTVDM product composition.  demdisp_shim.h supplies only the same
  * declarations and the typed checked-call entry boundary; the table, dispatch
  * order, CurrentISVC and original ordinary-return bodies remain unchanged. */
-#include "../../shim/demdisp_shim.h"
+#include "../../../opennt-host/capability/demdisp_shim.h"
 #include <stdio.h>
 
 #if DBG

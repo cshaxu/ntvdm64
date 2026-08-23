@@ -3,7 +3,7 @@
  * by the fixed bx-vdm compatibility surface in xms_shim.h.  Service order
  * and original function bodies remain below; each later code divergence is
  * documented at its exact point. */
-#include "../../shim/xms_shim.h"
+#include "../../../opennt-host/capability/xms_shim.h"
 
 
 /*++

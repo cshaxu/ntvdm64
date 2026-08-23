@@ -10,7 +10,7 @@
  * the standalone composition.  The COMMAND configuration shim supplies only
  * its checked guest span and named host-capability contracts; the original
  * preprocessor below remains the owner of all filtering and file logic. */
-#include "../../shim/command_misc_shim.h"
+#include "../../../opennt-host/capability/command_misc_shim.h"
 
 //
 // local stuff

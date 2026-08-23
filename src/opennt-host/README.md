@@ -14,3 +14,11 @@ component is recorded here with original source identity, exception identifier,
 unavailable dependency, retained observable semantics and focused verification.
 The future static library name is `opennt-host`; its public include surface is
 the explicitly declared OpenNT host ABI consumed by `opennt-bop` and `app`.
+
+## T260/S6 component register
+
+`capability/` is the sole live host-capability home. It contains the
+pre-existing COMMAND/DEM/XMS/Redirector/top-level session and file/path
+providers, plus the host-drive, namespace and namespace-root records moved
+from the transitional `bx-vdm` tree. T260/S6 changes only their pathname; it
+introduces no provider-body divergence.

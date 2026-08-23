@@ -24,7 +24,7 @@
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_MAP_CODE_PAGE 1
-#include "../../shim/command_misc_shim.h"
+#include "../../../opennt-host/capability/command_misc_shim.h"
 
 #if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID GetWowKernelCmdLine(VOID);

@@ -13,7 +13,7 @@
 #define BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY 1
 #define BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE 1
 #define BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE 1
-#include "../../shim/command_misc_shim.h"
+#include "../../../opennt-host/capability/command_misc_shim.h"
 
 //*****************************************************************************
 // IsWowAppRunnable

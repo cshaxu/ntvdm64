@@ -2,19 +2,19 @@
 
 ## Current Work
 
-**Active: M0 T260 S5** — eight-component source-layout reorganization and
+**Active: M0 T260 S6** — eight-component source-layout reorganization and
 build closure.
 
 ## Active Packet
 
-### M0 T260 S5 — OpenNT BOP mirror, ingress and route migration
+### M0 T260 S6 — OpenNT host capability and Win32-facade split migration
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T260 S5`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | S1--S4 are closed. Owner requires OpenNT BOP implementation meaning to leave the transitional `bx-vdm` tree, without dragging host capability, Win32 facade, SoftPC mechanics or observation ownership into `opennt-bop`. |
-| Objective | Move immutable OpenNT DEM/COMMAND/XMS/DPMI source inputs, minimal-change BOP mirrors, selector/service routes and BIOS-selector map into `opennt-bop`, with explicit original/mirror/route provenance. |
-| Non-goals | No BOP behavior implementation or enablement; no shim migration; no formal Ninja switch; no runtime claim; no change to original source content. |
+| Identifier Mode | `M0 T260 S6`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S5 is closed. Owner requires the residual host capability and unavailable historical Win32/NTDLL facade code to leave transitional `bx-vdm` without moving any SoftPC/CCPU or BOP selector semantics into either component. |
+| Objective | Give each residual host-facing source a unique `opennt-host` or `adapter-win32` home, retaining OpenNT-shaped host semantics and old API shapes at the right boundary. |
+| Non-goals | No BOP behavior implementation or enablement; no SoftPC/CCPU migration; no formal Ninja switch; no runtime claim; no source-body semantic change. |
 | Reference Baseline | S1 manifest, source policy, `opennt-bop/README.md`, the existing original/mirror inputs and current formal module closure. |
 | Files And ABI Surface | `src/opennt-bop/{original,mirror,route}`, transitional `src/bx-vdm/bop`, original OpenNT BOP roots and BOP provider include edges. |
 | Applicable Rules | Original source and minimal-change mirror are distinct; all mirror divergences remain registered; BOP owns route/meaning but never Bochs-object mechanics. |
@@ -23,7 +23,7 @@ build closure.
 | Asset Needs | OpenNT source roots, current BOP mirror/route tree, owner manifest and formal module manifest. |
 | Reporting Requirements | Record exact moved roots/counts, no-source-edit proof, retained later-owner shim/observation inventory and remaining S8 build switch. |
 | Stop Conditions | A file combines BOP meaning with host capability/Win32/SoftPC mechanics such that it cannot be split without behavior change, or an original source identity cannot be proved. Pause for a targeted split decision. |
-| Exit Criteria | BOP original/mirror/route files have one `opennt-bop` home; no non-BOP shim/observation is misclassified; every move preserves content/history and the live manifest verifies the boundary. |
+| Exit Criteria | Every S6 host/API file has one owner; no BOP selector/provider or SoftPC/CCPU mechanic is misclassified; every move preserves content/history and the live manifest verifies the boundary. |
 | Original Owner Request | “应使用 1 个 T 任务，例如：M0 T260：七/八组件源码布局重整与构建闭合……这个 T 应拆成约 8 个 S。” |
 | Similar-Issue Sweep | Headers, fixtures, generated Ninja input, include roots, legacy v1/test-only code, OpenNT source provenance and the shared mapping-manager placement. |
 
@@ -49,6 +49,15 @@ The content-preserving move and inherited-overlay register are recorded in the
 The formal Ninja source declarations are intentionally still historical until
 S8; S6/S7 next classify and migrate the remaining host/API and SoftPC/mechanical
 seams.
+
+### T260 S6 completion record
+
+S6 separated the pre-existing OpenNT host-capability files and same-shaped
+Win32/NTDLL facade from the former generic shim tree. All affected DEM,
+COMMAND and XMS mirrors now name their host component dependency directly.
+The S6 evidence records the deliberately deferred formal Ninja-graph update
+and the exclusive S7 ownership of the remaining mechanical seam files; see
+[S6 layout evidence](etc/evidence/m0-t260-s6-host-win32-layout-migration-001.md).
 
 **Current progress:** S1 is closed. The current reproducible manifest covers
 all 3,542 `src/` files in 3,735 rows with zero missing paths, duplicate paths

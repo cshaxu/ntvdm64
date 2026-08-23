@@ -16,7 +16,7 @@
  * DEM/SoftPC/VdmRedir/VDD product include closure is unavailable to the
  * standalone CLI composition; demfile_shim.h supplies only its named ABI
  * declarations while retaining the imported service bodies below. */
-#include "../../shim/demfile_shim.h"
+#include "../../../opennt-host/capability/demfile_shim.h"
 
 extern PDOSSF pSFTHead;
 

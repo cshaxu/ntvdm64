@@ -9,7 +9,7 @@
  */
 
 /* Direct import from src/opennt/base/mvdm/dos/dem/demioctl.c. */
-#include "../../shim/demdasd_ioctl_shim.h"
+#include "../../../opennt-host/capability/demdasd_ioctl_shim.h"
 
 PFNSVC	apfnSVCIoctl [] = {
     demIoctlInvalid,		// IOCTL_GET_DEVICE_INFO    0
