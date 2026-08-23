@@ -2,31 +2,38 @@
 
 ## Current Work
 
-**Active: M0 T248 S4** — Selector-blind post-EXEC final-position attribution and checkpoint reconciliation.
+**Active: M0 T249 S1** — Source-built guest low-memory source/ABI and existing-observation seam audit.
 
 ## Active Packet
 
-### M0 T248 S4 — Selector-blind post-EXEC final-position attribution and checkpoint reconciliation
+### M0 T249 S1 — Source-built guest low-memory source/ABI and existing-observation seam audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T248 S4`, Ordinary Mode, single-person dual-role final-position source attribution. |
-| Admission And Approval | Standing owner delegation selects the new queue-leading selector-blind continuity prerequisite discovered and tracked by completed T247; ordinary recovery work requires no repeated approval. |
-| Objective | Attribute the current source-built post-`50:36` final physical position (`CS:EIP=5859:78B0`, physical `0x5FE40`) to original guest/firmware or a selector-blind machine contract, then reconcile `BOP-DEPENDENCY-115`. |
-| Non-goals | No DEM/COMMAND/Redirector/WOW leaf patch, guest PDB/arena/JFN implementation, BOP selector interpretation in bx-core/bx-mantle, device enablement, or unsupported continuity claim. |
-| Reference Baseline | Completed T248 S1/S2 maps and [S3 terminal/lifecycle recovery](etc/evidence/m0-t248-s3-terminal-position-lifecycle-recovery-001.md), T247 source-built `50:36` checkpoint and `BOP-DEPENDENCY-115`. |
-| Files And ABI Surface | Read-only source/image/map attribution, current bounded observation surfaces and tracker/closure evidence; no service ABI or BOP provider change. |
-| Applicable Rules | Source-first ladder, guest/machine/adapter owner separation and no trace-led leaf selection. |
-| Verification | Original guest image/map/source comparison, one bounded source-built checkpoint if a passive diagnostic is required, tracker reconciliation, documentation governance and `git diff --check`. |
-| Expected Markers | Exact final physical bytes/source owner and a clear disposition: advance, source-proven selector-blind mechanical recovery, or external owner transfer. No BOP leaf is selected from trace alone. |
-| Asset Needs | Current T248 formal graph, source-built images/maps, original OpenNT/SoftPC sources and existing default-off observation surfaces. |
-| Reporting Requirements | Name physical address/bytes, source or unmapped classification, retained mechanical contract and any precise transfer. |
-| Stop Conditions | Attribution would require guest-policy decoding in machine layers, or no original/image evidence can distinguish guest bytes from a machine boundary. |
-| Exit Criteria | `BOP-DEPENDENCY-115` is reconciled to a precise next owner or T248 closes with an evidence-backed non-BOP transfer. |
-| Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
-| Similar-Issue Sweep | `BOP-DEPENDENCY-093/102/104/114/115`, original `msproc.asm:$Exec/$Exit`, SoftPC BIOS interrupt handlers, adopted CPU exception/iret/stack mechanics and mantle run/stop lifecycle. |
+| Identifier Mode | `M0 T249 S1`, Ordinary Mode, single-person dual-role source and observation-seam audit. |
+| Admission And Approval | T248 closure supplies the exact boundary; standing owner authorization covers ordinary source, documentation and existing-diagnostic work. |
+| Objective | Map the source-built NTIO low-memory relocation context for runtime `0000:0A87`, its far indirect call ABI, and every existing selector-blind RAM-write/provenance observation seam. |
+| Non-goals | No BOP provider change, guest PSP/PDB logic, device/firmware enablement, or new observer until the seam audit proves it necessary. |
+| Reference Baseline | [T248 closure](history/m0-t248-closure-20260823.md), [S4 attribution](etc/evidence/m0-t248-s4-post-exec-final-position-attribution-001.md), `BOP-DEPENDENCY-115`. |
+| Files And ABI Surface | Original NTIO source/image/map, existing default-off bx-core/bx-mantle observation surfaces, tracker and evidence only. |
+| Applicable Rules | Source-first ladder, selector-blind machine boundary, no trace-led BOP patch and fixed-width observation discipline. |
+| Verification | Source/image comparison, existing seam audit, documentation governance and `git diff --check`. |
+| Expected Markers | Exact source/load/relocation context and a determination whether an existing seam can identify writer/pointer provenance. |
+| Asset Needs | Current source-built NTIO image/map, T248 formal graph/log, original OpenNT NTIO sources and existing mantle observation interfaces. |
+| Reporting Requirements | Record physical addresses, before/after image bytes, exact transfer ABI, owner classification and whether any observation is existing or would require registration. |
+| Stop Conditions | A proposed observation needs guest-policy decoding or alters guest execution; stop and record the seam requirement instead. |
+| Exit Criteria | One evidence map either admits a bounded existing-seam replay or specifies the smallest separately registered mechanical observation. |
+| Original Owner Request | Continue ordinary recovery without repeated approval; preserve original OpenNT source ownership and Bochs selector blindness. |
+| Similar-Issue Sweep | `BOP-DEPENDENCY-093/095/098/115`, NTIO `sysinit*.asm` relocation code, mantle RAM/staging lifecycle and existing instruction/terminal provenance records. |
 
 ## Latest Closure
+
+M0 T248 closes selector-blind post-EXEC real-mode continuity attribution. The
+source-built checkpoint reaches accepted `50:36` and `50:1E`, then makes a
+guest far indirect call from runtime-modified low NTIO memory
+`0000:0A87 → 5859:5F04`; the target is zero RAM and reaches the bounded
+execution budget. This is neither a BOP provider nor a missing Bochs machine
+mechanic. See the [T248 closure](history/m0-t248-closure-20260823.md).
 
 M0 T247 closes the NTDOS guest EXEC entry/parent-return boundary.  Its
 source-built native checkpoint proves original `$Exec` PDB construction and
