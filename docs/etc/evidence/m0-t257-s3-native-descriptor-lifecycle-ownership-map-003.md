@@ -34,14 +34,14 @@ DOSX guest writes LDT descriptor bytes
 ```
 
 `bx-vdm` may carry only the bounded `53:00` request/result and must not cache
-or inject descriptors.  `bx-mantle` must not become DPMI-aware.  The sole
-remaining proof needed before activation is a focused guest table/LLDT fixture
-which demonstrates that the source-built DOSX table location is ordinary
-guest memory visible to native Bochs.
+or inject descriptors.  `bx-mantle` must not become DPMI-aware.  The focused
+guest table/LLDT fixture has now supplied the required mechanical proof; see
+[fixture evidence 004](m0-t257-s3-native-guest-ldt-fixture-004.md).  Active
+service admission still requires the source-shaped DOSX table lifecycle and
+must not be inferred from this machine-only proof.
 
 ## Consequence
 
-No Bochs intrusion is selected by this map.  If the focused fixture disproves
-the ordinary guest-table path, a separate registered mechanical exception
-decision is required; no ad-hoc `FlatAddress[]`, host-LDT, or descriptor-cache
-workaround is admissible.
+No Bochs intrusion is selected by this map.  The fixture passes, so there is
+no basis for a separate mechanical exception.  No ad-hoc `FlatAddress[]`,
+host-LDT, or descriptor-cache workaround is admissible.

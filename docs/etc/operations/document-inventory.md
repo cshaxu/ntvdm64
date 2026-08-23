@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2161 |
+| Documentation records | 2162 |
 | --- | --- |
-| Generated UTC | 2026-08-23T12:20:17Z |
+| Generated UTC | 2026-08-23T12:30:25Z |
 
 ## Entries
 
@@ -82,7 +82,7 @@ content-divergent entries.
 | DOS-WOW16-SOURCE-CLOSURE-RESULT.md | retained pre-governance evidence | 843f0bb11b298a6d80efca687fdf056dfdc9104026d53676c4052a216c17387c |
 | DOS-WOW16-SOURCE-CLOSURE-TASK-BRIEF.md | retained pre-governance evidence | 5ea19abcd564854c1c21c6dff2714b204303e935ca5385345a3f3e23ee0ecb85 |
 | ENGINE-CONTRACT.md | retained pre-governance evidence | d57785469d3221d45b6931f4ab0f40c2cc6f78ab4ecd8425daaa338931d7ca3c |
-| etc/bop-list.md | indexed supporting material | 65d6fd41ff61d7ff35bdeb9a73ff5d53b8a8afc16483e694f8882ecac228310d |
+| etc/bop-list.md | indexed supporting material | 3600b42429f42bc08d440b90604468080a64513c462d89a4fd3454219eafde00 |
 | etc/evidence/m0-t240-s2-softpc-memory-size-closure-001.md | indexed supporting material | 3e0c56fab1d88442fa48813bee1d97d26bc12d4d49ff24dd5ff8c4efa179aba3 |
 | etc/evidence/m0-t241-s2-ivt-watch-source-recovery-001.md | indexed supporting material | dc7cfee2ac868e9e664cb4da58d58bdf73aa0dec2d6a9f5085b35bd9ede2217f |
 | etc/evidence/m0-t241-s3-xms-ivt-watch-regression-001.md | indexed supporting material | 82a407226439c8e5a5703e2560fb19ac6716f6d525a328f7ee4e955217d05082 |
@@ -163,7 +163,8 @@ content-divergent entries.
 | etc/evidence/m0-t256-s9-opennt-xmem-record-identity-map-001.md | indexed supporting material | 7f488da889b84396ca71b7763e99239950e63429809d383ba0d74d71dd61f51a |
 | etc/evidence/m0-t257-s1-dpmi-dosx-owner-abi-failure-map-001.md | indexed supporting material | 5fe884a59ae619694eecd23d28490954b9f236e9024cbe856f6ac1d6bd30321f |
 | etc/evidence/m0-t257-s3-dosx-startup-session-seam-001.md | indexed supporting material | c54224b424ddd21b0609b906bc39a6daefc9fcf80fde45d80ce724c23b266030 |
-| etc/evidence/m0-t257-s3-native-descriptor-lifecycle-ownership-map-003.md | indexed supporting material | 5df365ead3bacc55d9161eea1edb69a396272d4030b832e6cf3b048092de8508 |
+| etc/evidence/m0-t257-s3-native-descriptor-lifecycle-ownership-map-003.md | indexed supporting material | 023e295d46f0f584fa45090bb6a6ecea991c79d80affe47bff506f1fa3f4c69b |
+| etc/evidence/m0-t257-s3-native-guest-ldt-fixture-004.md | indexed supporting material | 99e4f6720c0b7bd588a147c423976b0e0408ec3c55d1e8c47c34e254f55a1fdd |
 | etc/evidence/m0-t257-s3-opennt-dpmi32-source-composition-002.md | indexed supporting material | c432c4854ab1ef5397ca81333efca1ea1d01ddd48267a8b8a3264b18547e5739 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |

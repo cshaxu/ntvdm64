@@ -380,6 +380,12 @@
       "platformLibraries": []
     },
     {
+      "name": "t257-s3-native-guest-ldt-fixture",
+      "source": "tests/bx-mantle/t257_s3_native_guest_ldt_fixture.cc",
+      "libraries": ["bx-mantle", "bx-core"],
+      "platformLibraries": []
+    },
+    {
       "name": "t256-s6-engine-geometry-contract-fixture",
       "source": "tests/bx-mantle/bx_ntvdm_engine_contract_v1_test.c",
       "libraries": [
