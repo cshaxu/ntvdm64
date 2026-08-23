@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2175 |
+| Documentation records | 2177 |
 | --- | --- |
-| Generated UTC | 2026-08-23T17:35:11Z |
+| Generated UTC | 2026-08-23T17:39:55Z |
 
 ## Entries
 
@@ -400,6 +400,7 @@ content-divergent entries.
 | etc/operations/m0-t251-redirector-source-abi-profile-map-plan-001.md | indexed supporting material | fd3c9a3817fb5a21033bd74d9cf2e6732e6683e19c002e07b51f2d1c8274108d |
 | etc/operations/m0-t257-s2-dpmi-dosx-source-import-ledger-001.md | indexed supporting material | 000ffe4335f1f34483767057754223101daf72c85d788f12af9a917fff473a26 |
 | etc/operations/m0-t258-s1-shared-mapping-manager-plan-001.md | indexed supporting material | 107ee56f10b80cb00fe85feb715aec6858e779f94bbdeec7a9f99287306cd2a5 |
+| etc/operations/m0-t259-s1-host-machine-interface-specification-plan-001.md | indexed supporting material | f4a143b6c51a26ba5f0e709dc09026601113a19a4de0163326a4a9ab00881185 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -1905,6 +1906,7 @@ content-divergent entries.
 | history/m0-t255-closure-20260823.md | closed task history | 623ae1e1495d496ba5a130af051621d4e5f745299e8aa1db8a032b9637cf95c6 |
 | history/m0-t256-closure-20260823.md | closed task history | 2122212a229c436eb4235da035ffe6623f014ba4c79bead4c92efdb8df792278 |
 | history/m0-t257-closure-20260823.md | closed task history | 3b9ea0596da85761eccccd4ed8ff740b92b4b48ccafe959faf2e322133510e9b |
+| history/m0-t258-closure-20260823.md | closed task history | 9876dcf2c7cdf5ea987cb102600f5a8c007a5258f567133cd5aee552378e27a3 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2189,7 +2191,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | f07682df5d2ad6a0077355176db7e26d129277932a8051cb6cbafaa435d2d98d |
+| STATUS.md | principal control document | ba92f0d55f29c738879fc758bb582b9e504a8998a6d7100fee54755c02c757d8 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

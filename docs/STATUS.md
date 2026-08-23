@@ -2,39 +2,42 @@
 
 ## Current Work
 
-**Active: M0 T258 S1** — shared guest-pointer mapping-manager recovery.
+**Active: M0 T259 S1** — OpenNT host and SoftPC/CCPU interface-specification recovery.
 
 ## Active Packet
 
-### M0 T258 S1 — shared guest-pointer mapping-manager recovery
+### M0 T259 S1 — canonical host/machine interface specification
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T258 S1`, Ordinary Mode with a single-person dual-role review: source-first shared mapping-manager recovery. |
-| Admission And Approval | Owner approved the shared guest-pointer mapping-manager implementation after Td S2 P7; dependency 118 is the sole common prerequisite selected for recovery. |
-| Objective | Establish one bx-vdm session-scoped mapping-lease facade that retains the historical `GetVDMAddr`/`Sim32*` call forms, map every active family-local implementation, and migrate the smallest bounded synchronous source callers without enabling new BOPs. |
-| Non-goals | No DPMI `53:xx`, persistent/protected pointer mapping, raw pointer across an ABI or worker, Bochs/mantle change, guest-handle change, CCPU/SAS recreation, or new provider semantics. |
-| Reference Baseline | Td P1 mapping governance, Td P3/P4/P5 interface dispositions, `BOP-DEPENDENCY-118`, and the closed T257 rejection record. |
-| Files And ABI Surface | `src/bx-vdm` session mapping manager, OpenNT-shaped shim declarations and focused fixtures; historical source-body call forms remain unchanged wherever a named facade can express them. |
-| Applicable Rules | Source-first recovery, mapping-lease rule, guest/machine hard boundary, no family-private mapper, and ordinary-mode independent final review. |
-| Verification | Source/ABI ledger; direct and bounce lease positive tests; bounds, expired-epoch, write-back and no-ABI-escape negative tests; focused migrated-caller tests; formal Ninja build when the first implementation delivery is ready. |
-| Expected Markers | Every migrated call has address/span/access/epoch evidence; native pointer dies before resume; no pointer becomes a guest token, HANDLE, fixed-width result, or Bochs object. |
-| Asset Needs | Original OpenNT pointer call sites, present family shims, checked guest-memory mechanics, formal Ninja manifest and existing DEM/COMMAND/XMS fixtures. |
-| Reporting Requirements | Record direct-versus-bounce choice, original call shape, rejected historical product dependency, migration/deletion disposition and x86/x64 pointer-width safety. |
-| Stop Conditions | Any required persistent/asynchronous/protected pointer, a request to add DOS/BOP semantics to bx-mantle/core, a new pointer ABI without a recovery exception, or a source call whose span/access cannot be proved. |
-| Exit Criteria | One tested session manager and named historical-shaped facade exist; first bounded caller(s) use it; all active private helpers are inventoried with a staged migrate/refuse/delete disposition; no new BOP route is enabled. |
-| Original Owner Request | “批准实施” the recommended unified guest-host pointer mapping manager, with source-first OpenNT compatibility and single-person dual-role execution. |
-| Similar-Issue Sweep | DEM/COMMAND/XMS family helpers, Redirector async paths, DPMI protected pointers, host-token manager, fixed-width bx↔machine actions and any raw `GetVDMAddr`/`Sim32*` macro. |
+| Identifier Mode | `M0 T259 S1`, Ordinary Mode with a single-person dual-role review: source-first canonical interface recovery. |
+| Admission And Approval | Owner selected the next task after T258: comprehensively recover the OpenNT Win32-host and SoftPC/CCPU core-machine interface specifications already audited, before further owner-package implementation. |
+| Objective | Turn the completed 321-row interface audit into one authoritative source/ABI/failure specification for historical OpenNT host APIs and SoftPC/CCPU machine calls: exact source shape, modern disposition, owner, width/lifetime boundary, and receiving package. |
+| Non-goals | No BOP/provider enablement, CCPU/SAS/CSR/BaseSrv recreation, new NT4-private API emulation, Bochs semantic intrusion, or invented replacement behavior. This S defines interfaces and failure ownership; it does not implement every receiving package. |
+| Reference Baseline | Td S2 P3--P7 full interface audit, `BOP-DEPENDENCY-042..045`, `BOP-DEPENDENCY-117..118`, T258 mapping manager and the external compatibility/machine dependency map. |
+| Files And ABI Surface | New authoritative host/machine interface specification and tracker links; active `bx-vdm` compatibility headers only where an existing source-shaped facade needs an exact contract correction. |
+| Applicable Rules | Source-first recovery, public-Win32/x64 decision rule, guest/machine hard boundary, one shared mapping manager, and no family-private product shell. |
+| Verification | Exact source-path/signature/owner audit; 321-row tracker reconciliation; direct-versus-facade/deferred classification; forbidden-private-import scan; documentation gate and independent review. |
+| Expected Markers | Every historical host/machine interface has one owner and disposition; public APIs retain source-visible ordering/failure; unavailable NT4/private paths state a receiver and do not silently succeed; bx-core/mantle stay selector/DOS/CCPU blind. |
+| Asset Needs | OpenNT source mirrors, SoftPC source evidence, current shim headers, existing Td audits, tracker, exception register and formal build manifest. |
+| Reporting Requirements | Record original interface spelling and call site, calling convention/width/lifetime, direct public equivalent or exact reason unavailable, shim/failure disposition, owner package and any exception ID. |
+| Stop Conditions | A proposed replacement recreates CCPU/SAS/CSR/BaseSrv, an interface needs guest/BOP vocabulary in bx-core/mantle, a public API changes observable failure semantics, or a new ABI lacks a registered exception. |
+| Exit Criteria | A canonical spec covers every active/reachable OpenNT Win32-host and SoftPC/CCPU interface family recorded by the tracker; all current facades reconcile to it; every unavailable path has an explicit failure/deferred receiver; all needed follow-on packages are ordered by dependency. |
+| Original Owner Request | “接下来，是关于我们全面恢复opennt的win32api宿主方面和 softpc/ccpu 核心机方面的接口规范的任务。你已经审计过。” |
+| Similar-Issue Sweep | `nt_bop.c`, `nt_umb.c`, `nt_vdd.c`, CCPU/SAS macros, host simulation, VDM control/hooks, keyboard/IVT, machine interrupt bridge, current Win32/RTL shims, and x86/x64 pointer/HANDLE/calling-convention seams. |
 
-**Current progress:** All stated S1 exit criteria are technically evidenced:
-one manager implementation exposes the three fixed session instances
-`guest_memory`, `host_handle`, and `session_data`; no shared numeric namespace
-exists. The outer engine owns their unified teardown. DEM bounded synchronous
-spans use `guest_memory`; formal Ninja and focused regression fixtures pass.
-The closure record is ready, but this packet remains active until the owner
-admits a successor M/T/S packet, as required by the governance verifier.
+**Current progress:** S1 is admitted. It begins from the completed Td audit,
+not a new BOP-by-BOP survey; the first deliverable is the canonical interface
+specification and reconciled receiving-owner matrix.
 
 ## Latest Closure
+
+M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager
+prerequisite. One implementation supplies the session's separate
+`guest_memory`, `host_handle`, and `session_data` instances; the outer engine
+owns their reset. Its 16:16/32-linear lease, opaque host-handle/data IDs,
+private-instance rejection and affected DEM/COMMAND regressions have focused
+proof. See [T258 closure](history/m0-t258-closure-20260823.md).
 
 M0 T257 closes as a source-first design rejection. Td S2 P7 proves that a
 new generic protected-frame ABI would bypass unresolved DPMI pointer,
