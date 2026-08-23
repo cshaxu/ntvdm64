@@ -1141,7 +1141,10 @@
       "name": "t230-s8-demerror-lock-direct-import-fixture",
       "source": "tests/bx-vdm/t230_s8_demerror_lock_direct_import_fixture.c",
       "libraries": [
-        "bx-vdm"
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
       ],
       "platformLibraries": [
         "libcmt.lib",

@@ -79,15 +79,32 @@ int main(void)
     if (!bx_ntvdm_dem_direct_context_valid(&direct) ||
         !GetTempPathA(MAX_PATH,directory) ||
         !GetTempFileNameA(directory,"s8",0u,path)) return 1;
+
+    /* These are direct same-named NTDLL source contracts, not a local
+     * case-folding replacement.  The active demerror source needs them while
+     * resolving a host DOS-device link for its error report. */
+    {
+        WCHAR left_buffer[8] = L"C";
+        WCHAR right_buffer[8] = L"c\\";
+        UNICODE_STRING left, right;
+        left.Buffer=left_buffer; left.Length=(USHORT)sizeof(WCHAR);
+        left.MaximumLength=(USHORT)sizeof(left_buffer);
+        right.Buffer=right_buffer; right.Length=(USHORT)(2u*sizeof(WCHAR));
+        right.MaximumLength=(USHORT)sizeof(right_buffer);
+        if (!NT_SUCCESS(bx_ntvdm_demerror_append_unicode(&left,L"\\")) ||
+            left.Length != right.Length ||
+            !bx_ntvdm_demerror_equal_unicode(&left,&right,TRUE) ||
+            bx_ntvdm_demerror_equal_unicode(&left,&right,FALSE)) return 2;
+    }
     state.file=CreateFileA(path,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
-    if (state.file==INVALID_HANDLE_VALUE || !WriteFile(state.file,"x",1u,&written,NULL) || written!=1u) return 2;
+    if (state.file==INVALID_HANDLE_VALUE || !WriteFile(state.file,"x",1u,&written,NULL) || written!=1u) return 3;
     state.token=0x12345678u;
 
     /* Original demSetHardErrorInfo records the DOS kernel's two guest
      * addresses.  This bounded invocation verifies that the source body is
      * reachable; hard-error continuation needs whole-DEM dispatcher binding. */
     reset_cpu(&cpu); cpu.edx=0x0200u; cpu.ebx=0x0220u;
-    if (!invoke(&state,&direct,&event,&cpu,&result,0x32u) || carry(&result)) return 3;
+    if (!invoke(&state,&direct,&event,&cpu,&result,0x32u) || carry(&result)) return 4;
 
     /* Original demRetry restores the saved register image and reinvokes the
      * real demdisp.c table.  Retry demChgFilePtr: this proves the saved
@@ -104,15 +121,15 @@ int main(void)
         (result.cpu_delta.segment_write_mask & ((1u << 0u) | (1u << 3u))) !=
             ((1u << 0u) | (1u << 3u)) ||
         result.cpu_delta.segment_values[0] != 0x2222u ||
-        result.cpu_delta.segment_values[3] != 0x1111u) return 4;
+        result.cpu_delta.segment_values[3] != 0x1111u) return 5;
 
     /* Original demlock.c obtains an opaque token through BX:BP and calls
      * Win32 LockFile/UnlockFile, preserving its own success/failure flow. */
     reset_cpu(&cpu); cpu.ebx=0x1234u; cpu.ebp=0x5678u; cpu.esi=0u; cpu.edi=1u;
-    if (!invoke(&state,&direct,&event,&cpu,&result,0x3fu) || carry(&result)) return 5;
-    reset_cpu(&cpu); cpu.eax=1u; cpu.ebx=0x1234u; cpu.ebp=0x5678u; cpu.esi=0u; cpu.edi=1u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x3fu) || carry(&result)) return 6;
+    reset_cpu(&cpu); cpu.eax=1u; cpu.ebx=0x1234u; cpu.ebp=0x5678u; cpu.esi=0u; cpu.edi=1u;
+    if (!invoke(&state,&direct,&event,&cpu,&result,0x3fu) || carry(&result)) return 7;
     CloseHandle(state.file); DeleteFileA(path);
-    puts("T230 S8 direct OpenNT demerror/demlock import: hard-error setup, dispatcher retry and file lock contracts verified");
+    puts("T230 S8 direct OpenNT demerror/demlock import: NTDLL Unicode, hard-error setup, dispatcher retry and file lock contracts verified");
     return 0;
 }

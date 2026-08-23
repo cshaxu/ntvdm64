@@ -50,6 +50,12 @@ until a future source-proven continuation contract consumes it. A fresh
 This is deliberately not a claim that the recursive `host_simulate` lifecycle
 is already restored.
 
+S4 P1 has replaced the false DEM hard-error NTDLL stubs with same-named,
+host-only `ntdll.dll` facades for Unicode append/compare and DOS-device
+symbolic-link open/query. The original `demerror.c` ordering remains intact;
+a fresh 286-object formal graph and source-mirror fixture pass. See
+[S4 P1 evidence](etc/evidence/m0-t259-s4-p1-demerror-ntdll-facade-001.md).
+
 ## Latest Closure
 
 M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager

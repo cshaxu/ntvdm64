@@ -63,11 +63,58 @@ void bx_ntvdm_demerror_flush_hard_error(void)
     (void)pDeviceChain;
 }
 
-NTSTATUS bx_ntvdm_demerror_append_unicode(PUNICODE_STRING s, PCWSTR tail)
-{ (void)s; (void)tail; return STATUS_NOT_SUPPORTED; }
-NTSTATUS bx_ntvdm_demerror_open_symbolic_link(PHANDLE h, ULONG a, POBJECT_ATTRIBUTES o)
-{ (void)h; (void)a; (void)o; return STATUS_NOT_SUPPORTED; }
-NTSTATUS bx_ntvdm_demerror_query_symbolic_link(HANDLE h, PUNICODE_STRING s, PULONG n)
-{ (void)h; (void)s; (void)n; return STATUS_NOT_SUPPORTED; }
-BOOLEAN bx_ntvdm_demerror_equal_unicode(const UNICODE_STRING *a,const UNICODE_STRING *b,BOOLEAN c)
-{ (void)a;(void)b;(void)c; return FALSE; }
+/* The original demerror.c body reaches these same-named NTDLL contracts while
+ * resolving a DOS drive letter for a hard-error report.  They are host-only
+ * counted strings/object handles; no member is guest-visible.  Resolve the
+ * existing host spelling dynamically so this x86/x64 facade does not depend
+ * on private SDK declarations or replace the original source algorithm. */
+typedef NTSTATUS (NTAPI *bx_ntvdm_rtl_append_unicode_fn)(PUNICODE_STRING, PCWSTR);
+typedef NTSTATUS (NTAPI *bx_ntvdm_nt_open_symbolic_link_fn)(PHANDLE, ULONG,
+    POBJECT_ATTRIBUTES);
+typedef NTSTATUS (NTAPI *bx_ntvdm_nt_query_symbolic_link_fn)(HANDLE,
+    PUNICODE_STRING, PULONG);
+typedef BOOLEAN (NTAPI *bx_ntvdm_rtl_equal_unicode_fn)(const UNICODE_STRING *,
+    const UNICODE_STRING *, BOOLEAN);
+
+static FARPROC bx_ntvdm_demerror_ntdll_proc(const char *name)
+{
+    HMODULE ntdll = GetModuleHandleW(L"ntdll.dll");
+    return ntdll == NULL ? NULL : GetProcAddress(ntdll, name);
+}
+
+NTSTATUS bx_ntvdm_demerror_append_unicode(PUNICODE_STRING string, PCWSTR tail)
+{
+    bx_ntvdm_rtl_append_unicode_fn routine =
+        (bx_ntvdm_rtl_append_unicode_fn)bx_ntvdm_demerror_ntdll_proc(
+            "RtlAppendUnicodeToString");
+    return routine == NULL ? STATUS_NOT_IMPLEMENTED : routine(string, tail);
+}
+
+NTSTATUS bx_ntvdm_demerror_open_symbolic_link(PHANDLE handle, ULONG access,
+    POBJECT_ATTRIBUTES attributes)
+{
+    bx_ntvdm_nt_open_symbolic_link_fn routine =
+        (bx_ntvdm_nt_open_symbolic_link_fn)bx_ntvdm_demerror_ntdll_proc(
+            "NtOpenSymbolicLinkObject");
+    return routine == NULL ? STATUS_NOT_IMPLEMENTED :
+        routine(handle, access, attributes);
+}
+
+NTSTATUS bx_ntvdm_demerror_query_symbolic_link(HANDLE handle,
+    PUNICODE_STRING string, PULONG returned_length)
+{
+    bx_ntvdm_nt_query_symbolic_link_fn routine =
+        (bx_ntvdm_nt_query_symbolic_link_fn)bx_ntvdm_demerror_ntdll_proc(
+            "NtQuerySymbolicLinkObject");
+    return routine == NULL ? STATUS_NOT_IMPLEMENTED :
+        routine(handle, string, returned_length);
+}
+
+BOOLEAN bx_ntvdm_demerror_equal_unicode(const UNICODE_STRING *left,
+    const UNICODE_STRING *right, BOOLEAN case_insensitive)
+{
+    bx_ntvdm_rtl_equal_unicode_fn routine =
+        (bx_ntvdm_rtl_equal_unicode_fn)bx_ntvdm_demerror_ntdll_proc(
+            "RtlEqualUnicodeString");
+    return routine == NULL ? FALSE : routine(left, right, case_insensitive);
+}
