@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T245 S6** — Printer/LPT owner-package source and ABI map.
+**Active: M0 T245 S7** — Printer/LPT session open-close recovery.
 
 ## Active Packet
 
-### M0 T245 S6 — Printer/LPT owner-package source and ABI map
+### M0 T245 S7 — Printer/LPT session open-close recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S6`, Ordinary Mode, single-person dual-role source-first owner-package recovery. |
-| Admission And Approval | S5's completed bounded observation classifies selector `17` as the next distinct SoftPC printer/LPT owner. Mapping that complete package is ordinary queue work and requires no renewed approval. |
-| Objective | Establish the original selector-17 printer/LPT source graph, guest ABI, lifecycle, host API dependencies, machine-port requirements and smallest viable source-first recovery boundary before any code route is admitted. |
-| Non-goals | No LPT device enablement, host print job, raw port I/O, monitor/direct-access path, printer UI, generic `17` placeholder, bx-core/bx-mantle semantic intrusion, or implementation selected solely from the preceding trace. |
-| Reference Baseline | `BOP-DEPENDENCY-109`, S5 closure, OpenNT `bios.c:printer_io`, `printer_.c`, `printer.c` and `nt_lpt.c`. |
-| Files And ABI Surface | Documentation/evidence only until the map identifies a fixed source-owned seam. No new ABI is presumed. |
+| Identifier Mode | `M0 T245 S7`, Ordinary Mode, single-person dual-role source-first owner-subpackage recovery. |
+| Admission And Approval | Closed S6 proves the reached SI=1 and its SI=2 lifecycle pair are a self-contained original session-state package. Ordinary queue work requires no renewed approval. |
+| Objective | Recover OpenNT `printer_io` SI=1/2 dispatch and `printer_bop_openclose` through a named bx-vdm session-owned LPT-state shim, preserving original `DX % 3` selection and typed resume. |
+| Non-goals | No SI=0 flush, AH=0/1/2 BIOS I/O, LPT port device, host print job/handle, printer UI, raw port I/O, monitor/direct-access path or bx-core/bx-mantle semantic intrusion. |
+| Reference Baseline | [S6 map](etc/evidence/m0-t245-s6-printer-lpt-owner-package-map-001.md), `BOP-DEPENDENCY-109`, OpenNT `printer_.c:printer_io/printer_bop_openclose` and `nt_lpt.c:host_lpt_dos_open/close`. |
+| Files And ABI Surface | One source-shaped printer open-close mirror, copied SI/DX state shim and exact real-mode `C4 C4 17` route; no host handle or new mantle ABI. |
 | Applicable Rules | Source-first recovery, host-mutation classification, guest-owner boundary, selector-blind machine boundary, no trace-led work and MTSP governance. |
-| Verification | Cross-check selector table, guest BOP caller, all printer subfunctions, guest table layout, source lifecycles and current bx port-space ownership; record the recovery ladder for every edge. |
-| Expected Markers | A package map distinguishes BIOS AH=0/1/2, DOS open/close/flush subfunctions, LPT host lifecycle, monitor/direct-access branches and any exact no-printer source failure behavior. |
-| Asset Needs | Existing admitted OpenNT tree and current source-built observation only; no new external source or host device. |
-| Reporting Requirements | Record source paths, register/table ABI, ownership, externally mutable capabilities, transfer recipients and a clear `implement / explicit unavailable / defer` decision. |
-| Stop Conditions | Any need to synthesize printer success, use raw host pointers/handles in guest ABI, introduce device semantics into bx-core/bx-mantle, or mutate host printer configuration. Record and transfer instead. |
-| Exit Criteria | A complete owner-package source/ABI/failure map and a smallest-composable recommendation exist; no selector-17 handler is added before that decision. |
+| Verification | Formal Ninja positive open/close and modulo tests; negative SI=0, protected-mode and RIP-overflow tests; one finite source-built observation after the subpackage. |
+| Expected Markers | SI=1 records the selected session LPT as DOS-open; SI=2 clears it; both resume RIP+3 with no unrelated register/flag update; all other printer paths decline. |
+| Asset Needs | Existing admitted OpenNT tree and source-built guest images; no host printer or new external source. |
+| Reporting Requirements | Record exact source ordering, state lifetime, all deliberately deferred printer branches and the next reached predecessor without follow-on implementation. |
+| Stop Conditions | Any need for a host printer handle, buffer, port-space device, synthetic BIOS status or externally visible print output. Record and transfer instead. |
+| Exit Criteria | Direct/global local tests and one source-built observation prove only the SI=1/2 subpackage; every other printer branch remains explicitly deferred. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 

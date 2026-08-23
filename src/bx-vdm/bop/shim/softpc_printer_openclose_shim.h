@@ -1,0 +1,19 @@
+#ifndef BX_NTVDM_BOP_SHIM_SOFTPC_PRINTER_OPENCLOSE_SHIM_H
+#define BX_NTVDM_BOP_SHIM_SOFTPC_PRINTER_OPENCLOSE_SHIM_H
+
+#include <stdint.h>
+
+/* Compatibility seam for the original no-I/O `host_lpt_dos_open/close`
+ * lifecycle.  The host LPT HANDLE, buffer and port device are deliberately
+ * outside this first subpackage. */
+int bx_ntvdm_softpc_printer_openclose_begin(uint16_t si, uint16_t dx);
+int bx_ntvdm_softpc_printer_openclose_end(void);
+uint16_t bx_ntvdm_softpc_printer_get_si(void);
+uint16_t bx_ntvdm_softpc_printer_get_dx(void);
+void bx_ntvdm_softpc_printer_host_lpt_dos_open(int adapter);
+void bx_ntvdm_softpc_printer_host_lpt_dos_close(int adapter);
+void bx_ntvdm_softpc_printer_unsupported(void);
+void bx_ntvdm_softpc_printer_openclose_reset(void);
+int bx_ntvdm_softpc_printer_dos_open_copy(uint16_t adapter, uint32_t *opened);
+
+#endif
