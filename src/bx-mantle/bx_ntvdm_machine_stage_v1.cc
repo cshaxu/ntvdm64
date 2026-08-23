@@ -180,6 +180,28 @@ static bx_bool bx_ntvdm_machine_stage_preserved_range_valid(
   return bytes != 0 && bytes <= 64u && address <= 0x100000u - bytes;
 }
 
+/* Seed the fixed PC BIOS conventional-memory datum before optional external
+ * bytes.  This finite stage owns 640 KiB below A0000 and publishes the
+ * little-endian size as machine lifecycle state. */
+static bx_bool bx_ntvdm_machine_stage_seed_conventional_memory(void)
+{
+  static const Bit8u conventional_kib[] = { 0x80u, 0x02u };
+  return bx_mem.copy_to_ordinary_ram(0x413u, sizeof(conventional_kib),
+    conventional_kib);
+}
+
+/* The pre-entry state action is optional.  A caller which has no external
+ * bytes to seed supplies the all-clear record from request_clear; this stage
+ * still preserves its declared ordinary-RAM range before the startup action.
+ * The distinction is mechanical only: it carries no guest or service policy. */
+static bx_bool bx_ntvdm_machine_stage_optional_action_valid(
+  const struct bx_ntvdm_mechanical_action_v1 *action)
+{
+  return action != 0 &&
+    (action->action_id == 0u ? action->magic == 0u :
+      bx_ntvdm_mechanical_action_v1_valid(action));
+}
+
 extern "C" void bx_ntvdm_machine_stage_v1_request_clear(
   struct bx_ntvdm_machine_stage_v1_request *request)
 {
@@ -196,7 +218,7 @@ extern "C" int bx_ntvdm_machine_stage_v1_request_valid(
   return request != 0 && request->magic == BX_NTVDM_MACHINE_STAGE_V1_MAGIC &&
     request->abi_version == BX_NTVDM_MACHINE_STAGE_V1_VERSION &&
     request->struct_bytes == sizeof(*request) && request->reserved0 == 0u &&
-    bx_ntvdm_mechanical_action_v1_valid(&request->initial_state_action) &&
+    bx_ntvdm_machine_stage_optional_action_valid(&request->initial_state_action) &&
     bx_ntvdm_mechanical_action_v1_valid(&request->startup_action) &&
     request->ivt_watch_enabled <= 1u &&
     (request->ivt_watch_enabled != 0u || request->ivt_watch_vector == 0u) &&
@@ -229,10 +251,15 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_begin(
     bx_ntvdm_machine_stage_v1_reset();
     return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
   }
+  if (!bx_ntvdm_machine_stage_seed_conventional_memory()) {
+    bx_ntvdm_machine_stage_v1_reset();
+    return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
+  }
 
   initial_state_action = request->initial_state_action;
   startup_action = request->startup_action;
-  if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&initial_state_action)) {
+  if (initial_state_action.action_id != 0u &&
+      !bx_ntvdm_mantle_execute_mechanical_action_v1(&initial_state_action)) {
     bx_ntvdm_machine_stage_v1_reset();
     return BX_NTVDM_MACHINE_STAGE_V1_ACTION_FAILURE;
   }

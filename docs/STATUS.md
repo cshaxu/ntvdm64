@@ -26,7 +26,7 @@ without moving DOS process semantics into a host provider.
 | Exit Criteria | A reproducible, source-built guest observation fixture establishes the next implementable original EXEC edge without constructing guest semantics in bx-vdm. |
 | Original Owner Request | Persistent goal: queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation. |
 | Similar-Issue Sweep | `INT 21h AH=4B`, PSP/arena/JFN/environment/return flows, `54:01/08/0A/0B`, BOP 50/54 dependencies and real-mode interrupt/memory contracts. |
-| Exit Status | Active. S1 is complete: it freezes guest ownership, exact staged-image provenance, the local `AL=0` first profile and `BOP-DEPENDENCY-092..101`. S2 P1 retires the old selector-only guest-lifecycle observers; see [retirement evidence](etc/evidence/m0-t242-s2-retired-selector-ledger-001.md). |
+| Exit Status | Active. S1 is complete: it freezes guest ownership, exact staged-image provenance, the local `AL=0` first profile and `BOP-DEPENDENCY-092..101`. S2 P1 retires the old selector-only guest-lifecycle observers; see [retirement evidence](etc/evidence/m0-t242-s2-retired-selector-ledger-001.md). S2 P2 proves the source-built bundle reaches accepted `50:11`, `12`, six subsequent original bootstrap BOPs, then owner-classified machine `15/AH=88h`; see [bootstrap observation](etc/evidence/m0-t242-s2-source-built-bootstrap-observation-001.md). It does not yet reach NTDOS EXEC. |
 | Next Admission | T242 S3 only after S2 proves or cleanly classifies the first original guest execution edge. |
 
 ## Latest Closure

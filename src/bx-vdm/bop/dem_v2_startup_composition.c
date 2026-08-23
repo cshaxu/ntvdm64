@@ -201,7 +201,8 @@ int bx_ntvdm_dem_v2_startup_prepare_machine_stage_request(
     if (request == NULL || !startup_plan(&plan, &payload, &payload_bytes) ||
         payload_bytes > BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES) return 0;
     bx_ntvdm_machine_stage_v1_request_clear(request);
-    if (!bx_ntvdm_initial_state_action_v1_prepare(&runtime.initial_state,
+    if (runtime.initial_state.range_count != 0u &&
+        !bx_ntvdm_initial_state_action_v1_prepare(&runtime.initial_state,
             &request->initial_state_action)) return 0;
     /* This is the selector-blind mantle ABI initializer.  Request clear owns
      * the enclosing record only; each embedded action still needs its fixed

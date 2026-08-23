@@ -984,6 +984,19 @@
         "ntdll.lib",
         "user32.lib"
       ]
+    },
+    {
+      "name": "t242-s2-machine-stage-reset-fixture",
+      "source": "tests/bx-mantle/t200_s22_machine_stage_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
     }
   ],
   "forbiddenInputs": [

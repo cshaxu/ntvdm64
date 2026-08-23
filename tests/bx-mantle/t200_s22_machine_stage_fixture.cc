@@ -43,6 +43,8 @@ int main()
   if (!bx_ntvdm_machine_stage_v1_request_valid(&request) ||
       bx_ntvdm_machine_stage_v1_begin(&request) != BX_NTVDM_MACHINE_STAGE_V1_OK ||
       !bx_ntvdm_machine_stage_v1_active()) return 2;
+  if (!bx_mem.copy_from_ordinary_ram(0x413u, 2u, preserved) ||
+      preserved[0] != 0x80u || preserved[1] != 0x02u) return 10;
   if (bx_ntvdm_machine_stage_v1_begin(&request) !=
       BX_NTVDM_MACHINE_STAGE_V1_REJECTED_ACTIVE) return 3;
   bx_ntvdm_machine_stage_v1_entry_clear(&entry);
@@ -69,5 +71,21 @@ int main()
       BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET) return 7;
   if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK ||
       bx_ntvdm_machine_stage_v1_active()) return 8;
+  /* A source-built startup may have no external initial-state bytes.  That
+   * must remain a selector-blind omission, not a rejected machine stage. */
+  bx_ntvdm_machine_stage_v1_request_clear(&request);
+  bx_ntvdm_mechanical_action_v1_clear(&request.startup_action);
+  request.startup_action.action_id = 2u;
+  request.startup_action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+  request.startup_action.range_count = 1u;
+  request.startup_action.payload_bytes = 1u;
+  request.startup_action.ranges[0].physical_address = 0x700u;
+  request.startup_action.ranges[0].byte_count = 1u;
+  request.startup_action.payload[0] = 0xf4u;
+  request.preserved_state_address = 0x714u;
+  request.preserved_state_bytes = sizeof(preserved);
+  if (!bx_ntvdm_machine_stage_v1_request_valid(&request) ||
+      bx_ntvdm_machine_stage_v1_begin(&request) != BX_NTVDM_MACHINE_STAGE_V1_OK ||
+      bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 9;
   return 0;
 }
