@@ -13,7 +13,7 @@ the guest or adapter.
 | S | Scope | Exit evidence |
 | --- | --- | --- |
 | S1 | Source/ABI/lifecycle map of original guest `EXEC`, PSP/arena/JFN/environment and parent-return paths against staged source-built NTDOS/COMMAND images and current `54:0B` seam. | One tracker/evidence map names the exact guest sources, call/return states, staging symbols, direct reusable pieces, and every machine/host owner transfer. |
-| S2 | Recover the smallest source-defined guest EXEC setup/return slice that S1 proves composable without new machine semantics. | Original guest source or a documented smallest compatibility seam preserves structures, order and failure behavior; local guest-image or equivalent bounded fixture passes. |
+| S2 | Compose an opt-in, fixed-width observation at the original `SVC_DEMENTRYDOSAPP` handoff that S1 proves follows `$Dup_PDB` and precedes guest child entry. | Existing checked-RAM observer records the source PDB prefix after imported `demEntryDosApp`; local positive/negative fixture proves no guest mutation, no selector widening and no host-side PSP/arena/JFN implementation. |
 | S3 | Extend through the declared one-child ordinary-return profile, only if S2 proves the prerequisite path. | Source-built child → parent state restoration is observed with PSP/JFN/environment evidence; non-composable prerequisites fail/transfer explicitly. |
 | S4 | Package regression, native checkpoint and closure transfer. | Formal package regression and bounded native evidence distinguish guest lifecycle completion from remaining machine/Redirector/WOW work. |
 

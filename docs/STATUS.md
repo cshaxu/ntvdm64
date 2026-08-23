@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T247 S1** — NTDOS guest EXEC and parent-return source/ABI map.
+**Active: M0 T247 S2** — NTDOS guest EXEC entry PDB observation composition.
 
 ## Active Packet
 
-### M0 T247 S1 — NTDOS guest EXEC and parent-return source/ABI map
+### M0 T247 S2 — NTDOS guest EXEC entry PDB observation composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T247 S1`, Ordinary Mode, single-person dual-role source/ABI recovery map. |
+| Identifier Mode | `M0 T247 S2`, Ordinary Mode, single-person dual-role source/ABI recovery. |
 | Admission And Approval | Standing owner delegation selects the current queue-leading NTDOS guest EXEC and parent-return candidate after T246's first reached machine package. |
-| Objective | Map the original NTDOS/COMMAND guest `EXEC`, PSP, arena, JFN, environment and parent-return lifecycle against staged source-built images and the existing `54:0B` contract. |
-| Non-goals | No COMMAND host-worker rewrite, BOP leaf implementation, Bochs intrusion, device enablement, or unsupported continuity claim. |
-| Reference Baseline | Queue-leading guest EXEC proposal; T236 COMMAND worker closure; T245 source-built permanent COMMAND continuity; T246 active `02/06` route. |
-| Files And ABI Surface | Tracker/evidence/operation plan and read-only source maps only; no new runtime ABI in S1. |
+| Objective | Connect the existing fixed-width PDB observer only to the imported original `50:36 demEntryDosApp` handoff, proving the source-built guest has completed original `$Exec` PDB setup without adapter-owned DOS process behavior. |
+| Non-goals | No COMMAND host-worker rewrite, BOP leaf implementation, guest PDB/arena/JFN implementation, Bochs intrusion, device enablement, or unsupported continuity claim. |
+| Reference Baseline | S1 owner map; queue-leading guest EXEC proposal; T236 COMMAND worker closure; T245 source-built permanent COMMAND continuity; T246 active `02/06` route. |
+| Files And ABI Surface | Existing `bx_ntvdm_ntdos_exec_observation_v1` and imported `demEntryDosApp` composition only; fixed 16-bit PDB fact, fixed 50-byte checked copy, no new mutable guest ABI. |
 | Applicable Rules | Source-first ladder, guest/machine/adapter owner separation and no trace-led leaf selection. |
-| Verification | Source/ABI/call-chain citations, current staged image identity, tracker dependency review, documentation governance and `git diff --check`. |
-| Expected Markers | Every required lifecycle transition is assigned either to directly reusable guest source, a smallest named seam, or a transferred machine/host owner. |
-| Asset Needs | Existing OpenNT guest source tree, staged DOS/COMMAND images, current BOP tracker and formal build manifests. |
-| Reporting Requirements | Name original source paths, retained layouts/order/failure rules, and explain each source-first rung decision. |
-| Stop Conditions | A needed guest source/image is absent, or a required effect cannot cross the existing typed boundary without an unapproved owner/boundary change. |
-| Exit Criteria | One source/ABI/lifecycle map and tracker update prove a bounded composable S2 candidate or explicit owner transfers. |
+| Verification | Original source/layout citations; focused positive/negative composition fixture; formal Ninja closure; documentation governance and `git diff --check`. |
+| Expected Markers | A successful `50:36` route yields only the fixed copied PDB facts; disabled/invalid/OOB paths leave guest state unchanged and do not widen selector handling. |
+| Asset Needs | Existing OpenNT guest source tree, staged DOS/COMMAND images, existing typed checked-RAM/observation seam and formal build manifest. |
+| Reporting Requirements | Name retained source handoff order, fixed copied fields, source-first decision and every transfer. |
+| Stop Conditions | The imported route cannot provide the PDB segment/copy without changing guest state or widening the bx boundary. |
+| Exit Criteria | A bounded fixture proves the `50:36` observation composition and no source-owned lifecycle effect is replaced. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
-| Similar-Issue Sweep | `BOP-DEPENDENCY-018/027/028`, `54:08/0A/0B`, NTDOS EXEC/PSP/arena/JFN/environment source, staged guest images and machine-stage contracts. |
+| Similar-Issue Sweep | `BOP-DEPENDENCY-018/027/028/092..101`, `50:36`, `54:07/08/0A/0B`, NTDOS EXEC/PSP/arena/JFN/environment source, staged guest images and machine-stage contracts. |
 
 ## Latest Closure
 
