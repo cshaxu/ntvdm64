@@ -2,31 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T256 S13** — Native descriptor-table lifecycle admission.
+**Active: M0 T256 S14** — Protected interrupt/fault/IRET continuity map.
 
 ## Active Packet
 
-### M0 T256 S13 — Native descriptor-table lifecycle admission
+### M0 T256 S14 — Protected interrupt/fault/IRET continuity map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S13`, Ordinary Mode, single-person dual-role source/ABI admission. |
-| Admission And Approval | S12 is closed by the [descriptor/guest-linear identity map](etc/evidence/m0-t256-s12-dpmi-descriptor-guest-linear-identity-map-001.md). |
-| Objective | Determine whether original DPMI/DOSX guest setup can establish a valid guest GDT/LDT/LDTR through native Bochs execution, or whether a new selector-blind startup lifecycle is required; record the exact minimum ABI and owner. |
-| Non-goals | No `53:xx` ingress, DPMI provider activation, raw pointer or `FlatAddress[]` emulation, paging implementation, descriptor-cache copy, arbitrary CR0 setter, DPMI-aware mantle API, or unregistered core change. |
-| Reference Baseline | `dpmiselr.c`, `dpmi32.c`, `i386/dpmi386.c`, `protect_ctrl.cc`, `segment_ctrl_pro.cc`, S12 evidence and `BOP-DEPENDENCY-117`. |
+| Identifier Mode | `M0 T256 S14`, Ordinary Mode, single-person dual-role source/ABI map. |
+| Admission And Approval | S13 closes the descriptor-table lifecycle admission with [source evidence](etc/evidence/m0-t256-s13-native-descriptor-table-lifecycle-admission-001.md). |
+| Objective | Map OpenNT DOSX/DPMI protected interrupt, fault handler and IRET paths onto the existing native Bochs exception/IRET mechanics and identify any genuinely selector-blind prerequisite. |
+| Non-goals | No `53:xx` ingress, DPMI provider activation, raw pointer/flat-address emulation, paging implementation, descriptor-cache copy, arbitrary CR0 setter, DPMI-aware mantle API, or unregistered core change. |
+| Reference Baseline | `dpmiint.c`, `dpmimscr.c`, `i386/dpmi386.c`, DOSX `dxstrt.asm`, native exception/IRET sources, S12/S13 evidence and `BOP-DEPENDENCY-117`. |
 | Files And ABI Surface | Evidence/tracker only unless a separately registered selector-blind mechanical ABI is selected. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Caller-to-table-to-CPU lifecycle map: table bytes, GDT/LDT descriptor, load operation, reset/restart teardown and each fault/decline boundary. |
-| Expected Markers | No direct `FlatAddress` pointer seam, no descriptor policy inside bx-mantle, and no invented adapter descriptor cache. |
-| Asset Needs | S4/S5/S6/S12 evidence, DOSX guest source/image map, engine/startup composition, machine stage and formal Ninja manifest. |
-| Reporting Requirements | Distinguish ordinary-RAM capacity/reservation from a valid native GDT/LDT/LDTR lifecycle; do not claim a DPMI allocation or provider. |
-| Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write, premature `53:xx` provider, or an external-code patch without a registered exception. |
-| Exit Criteria | Source-proven selection of native guest setup, a precisely bounded selector-blind lifecycle proposal, or an explicit prerequisite/defer; no DPMI leaf activation. |
+| Verification | Field-by-field protected interrupt/exception stack, frame, handler and IRET source map with exact retain/adapt/defer disposition. |
+| Expected Markers | No BOP/DOS semantics in bx-core/bx-mantle and no invented adapter exception dispatcher. |
+| Asset Needs | S4/S5/S6/S12/S13 evidence, DOSX guest source/image map, engine/startup composition, machine stage and formal Ninja manifest. |
+| Reporting Requirements | Separate CPU-native fault delivery from OpenNT host hook/product composition; do not claim DPMI interrupt support. |
+| Stop Conditions | Paging support, raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write, premature `53:xx` provider, or external-code patch without a registered exception. |
+| Exit Criteria | Source-proven native/adapter/guest ownership map and an explicit next prerequisite or defer, without activating a DPMI leaf. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
 ## Latest Closure
+
+M0 T256 S13 closes native descriptor-table lifecycle admission. DOSX `selGDT`
+is a historical process-LDT alias: table mutation plus `53:00` host install is
+DPMI package semantics, not a selector-blind mantle lifecycle. Native Bochs
+retains GDT/LDT/LLDT behavior; see [S13 evidence](etc/evidence/m0-t256-s13-native-descriptor-table-lifecycle-admission-001.md).
 
 M0 T256 S12 closes the DPMI descriptor/guest-linear identity map. OpenNT's
 `FlatAddress[]`, `Ldt`, `IntelBase` and x86 process-LDT calls are historical
