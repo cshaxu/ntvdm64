@@ -20,10 +20,11 @@ policy into Bochs layers?
 ## Observations
 
 1. Bochs has the required *internal* architectural operations.  `SetCR0`
-   validates and changes CPU mode, `load_seg_reg` uses the native descriptor
-   loader, and `exception.cc` already uses that loader for an accepted
-   generic segment delta.  No adapter-side LDT, selector-cache or IRET
-   implementation is justified.
+   validates and changes CPU mode; `load_seg_reg` owns data/stack selector
+   loading; and native `jump_protected` owns validated protected-mode CS
+   transfer.  `exception.cc` already uses the segment loader for an accepted
+   generic delta.  No adapter-side LDT, selector-cache or IRET implementation
+   is justified.
 2. The current generic output is deliberately insufficient for DPMI:
    it has low-16-bit GPR deltas, segment-selector deltas, CF/ZF and a resume
    RIP.  It lacks full ESP/EFLAGS restoration and a target execution-mode
@@ -44,7 +45,7 @@ policy into Bochs layers?
 
 | Need | Existing native owner | Current boundary | Candidate addition | Owner disposition |
 | --- | --- | --- | --- | --- |
-| Load validated segment selectors | `BX_CPU_C::load_seg_reg` | Already accepted through generic v1 segment mask | None | Keep existing core generic behavior. |
+| Load validated segment selectors | `BX_CPU_C::load_seg_reg`; native `jump_protected` for protected CS | v1 already carries selector mask, but its generic loop cannot use `load_seg_reg` for protected CS | v2 must retain native data/stack loading and use native protected branch for CS | Keep descriptor validation in core; no cache copy. |
 | Switch PE state and restore 32-bit CPU context | `BX_CPU_C::SetCR0`, native register/flag setters | Missing target-mode, 32-bit GPR and full FLAGS fields | Versioned generic context-resume result; core applies only typed fields through existing native methods | Requires one registered extension of `exception.cc`; no DPMI names. |
 | Read/write a bounded PM selector:offset range | Native segment validation, address translation and memory access | Ordinary physical-RAM action is insufficient | New mantle mechanical request must preflight selector/offset/length and perform an all-or-nothing copied access without leaking a pointer | Mantle design/proof required; no core change is selected by S1. |
 | DPMI memory allocation identity | Bochs configured guest RAM/mapping | No current contract | A later bx-vdm DPMI compatibility shim owns the original allocation list and uses an explicitly admitted generic guest-linear mapping resource | Deferred to the DPMI owner package after substrate admission. |

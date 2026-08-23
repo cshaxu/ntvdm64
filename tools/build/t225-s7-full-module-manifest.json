@@ -335,6 +335,15 @@
   ],
   "fixtures": [
     {
+      "name": "t255-s2-generic-context-resume-fixture",
+      "source": "tests/bx-mantle/t255_s2_generic_context_resume_fixture.cc",
+      "libraries": [
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": []
+    },
+    {
       "name": "t253-s2-physical-irq-fixture",
       "source": "tests/bx-mantle/t253_s2_physical_irq_fixture.cc",
       "libraries": [

@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T255 S2** — Selector-blind generic protected-context resume ABI.
+**Active: M0 T255 S3** — Protected-mode substrate regression and DPMI admission decision.
 
 ## Active Packet
 
-### M0 T255 S2 — Selector-blind generic protected-context resume ABI
+### M0 T255 S3 — Protected-mode substrate regression and DPMI admission decision
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T255 S2`, Ordinary Mode, single-person dual-role source-first generic context seam. |
-| Admission And Approval | S1 maps the required native call path and registers `BX-ABI-094` before editing adopted code. The standing request permits this selector-blind mechanical recovery without a separate owner approval. |
-| Objective | Extend the existing generic #UD result path with one versioned, bounded protected-context resume result, applied solely through native Bochs CPU methods. |
-| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, virtual-memory action, LDT policy, guest-linear allocator, raw pointer/object, trace-driven patch, or any unregistered intrusion. |
-| Reference Baseline | [substrate proposal](etc/operations/proposal-selector-blind-protected-mode-substrate-001.md), [S1 call map](etc/evidence/m0-t255-s1-protected-mode-substrate-call-map-001.md), `BX-ABI-094`, and live [BOP tracker](etc/bop-list.md). |
-| Files And ABI Surface | Adopted `src/bx-core/cpu/exception.cc`; existing generic bridge/result headers; a project-owned fixture. Existing v1 outcome ABI remains source and binary compatible. |
+| Identifier Mode | `M0 T255 S3`, Ordinary Mode, single-person dual-role regression and admission decision. |
+| Admission And Approval | S1 mapped the required native path; S2 registered and implemented `BX-ABI-094`. The standing request permits this selector-blind mechanical recovery without a separate owner approval. |
+| Objective | Independently verify the completed context seam, reconcile it with the remaining protected-memory and mapping gaps, and decide whether any original DPMI provider can be admitted. |
+| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, virtual-memory action, LDT policy, guest-linear allocator, raw pointer/object, trace-driven patch, or unregistered intrusion. |
+| Reference Baseline | [substrate proposal](etc/operations/proposal-selector-blind-protected-mode-substrate-001.md), [S1 map](etc/evidence/m0-t255-s1-protected-mode-substrate-call-map-001.md), [S2 closure](etc/evidence/m0-t255-s2-generic-context-resume-closure-001.md), `BX-ABI-094`, and live [BOP tracker](etc/bop-list.md). |
+| Files And ABI Surface | Existing v1/v2 generic bridge, adopted exception seam, formal graph and tracker only. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Disabled/v1 compatibility; real→protected and protected→real native context changes; invalid target rejection; no semantic terms in bx-core/mantle; formal Ninja and `git diff --check`. |
-| Expected Markers | Versioned fixed-width record, generic native `SetCR0`/segment/register/FLAGS application, and focused negative tests. |
-| Asset Needs | Existing generic #UD fixture/build graph and adopted CPU context operations. |
-| Reporting Requirements | Prove no raw Bochs object/pointer or DPMI selector/service logic crosses the boundary; distinguish this mechanical capability from DPMI admission. |
+| Verification | Fresh formal Ninja generation/build; static semantic-boundary scan; v1 compatibility; negative mode result; and a written DPMI admission/no-admission decision. |
+| Expected Markers | Reproduced v2 fixture, explicit protected-memory/mapping disposition, and a tracker/queue-compatible DPMI admission decision. |
+| Asset Needs | Existing formal Ninja manifest, generic context fixture, original DPMI source map, and the retained S1/S2 evidence. |
+| Reporting Requirements | Distinguish the completed generic machine seam from unadmitted DPMI lifecycle semantics; record every residual owner and no-admission reason in the tracker. |
 | Stop Conditions | A required operation needs descriptor-cache copying, arbitrary CR0 write, a provider-specific core branch or a broad memory interface. |
-| Exit Criteria | The v2 result is source-built and tested with v1 compatibility; the protected-memory next question is separately mapped. |
+| Exit Criteria | S2 is independently reproduced; protected-memory and guest-linear gaps have an explicit disposition; no DPMI leaf is prematurely admitted. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 

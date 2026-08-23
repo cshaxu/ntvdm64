@@ -844,6 +844,7 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
 #if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
   bx_ntvdm_generic_ud_event_v1 mantle_event;
   bx_ntvdm_generic_ud_outcome_v1 mantle_outcome;
+  bx_ntvdm_generic_ud_outcome_v2 mantle_context_outcome;
 #endif
 #if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
   bx_ntvdm_first_fault_observation_v1 first_fault_event;
@@ -911,6 +912,59 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
         BX_NTVDM_GENERIC_UD_WINDOW_BYTES : available;
       memcpy(mantle_event.window, BX_CPU_THIS_PTR eipFetchPtr + offset,
         mantle_event.window_bytes);
+    }
+    memset(&mantle_context_outcome, 0, sizeof(mantle_context_outcome));
+    if (bx_ntvdm_mantle_generic_ud_bridge_v2(&mantle_event,
+          &mantle_context_outcome) &&
+        mantle_context_outcome.abi_version ==
+          BX_NTVDM_GENERIC_UD_OUTCOME_V2_VERSION &&
+        mantle_context_outcome.disposition == BX_NTVDM_GENERIC_UD_RESUME &&
+        mantle_context_outcome.gpr32_write_mask <= 0xffu &&
+        mantle_context_outcome.segment_write_mask <= 0x3fu &&
+        (mantle_context_outcome.eflags_write_mask &
+          ~BX_NTVDM_GENERIC_UD_EFLAGS_WRITE_MASK) == 0u &&
+        (mantle_context_outcome.context_mode ==
+          BX_NTVDM_GENERIC_UD_CONTEXT_UNCHANGED ||
+         mantle_context_outcome.context_mode ==
+          BX_NTVDM_GENERIC_UD_CONTEXT_REAL ||
+         mantle_context_outcome.context_mode ==
+          BX_NTVDM_GENERIC_UD_CONTEXT_PROTECTED)) {
+      bx_address context_cr0 = BX_CPU_THIS_PTR read_CR0();
+      if (mantle_context_outcome.context_mode ==
+          BX_NTVDM_GENERIC_UD_CONTEXT_REAL)
+        context_cr0 &= ~1u;
+      else if (mantle_context_outcome.context_mode ==
+          BX_NTVDM_GENERIC_UD_CONTEXT_PROTECTED)
+        context_cr0 |= 1u;
+      if (mantle_context_outcome.context_mode ==
+          BX_NTVDM_GENERIC_UD_CONTEXT_UNCHANGED ||
+          BX_CPU_THIS_PTR SetCR0(context_cr0)) {
+        for (unsigned reg = 0; reg < BX_NTVDM_GENERIC_UD_GPR32_COUNT; ++reg) {
+          if ((mantle_context_outcome.gpr32_write_mask & (1u << reg)) != 0u)
+            BX_CPU_THIS_PTR set_reg32(reg, mantle_context_outcome.gpr32_values[reg]);
+        }
+        for (unsigned seg = 0; seg < 6u; ++seg) {
+          if (seg != BX_SEG_REG_CS &&
+              (mantle_context_outcome.segment_write_mask & (1u << seg)) != 0u)
+            BX_CPU_THIS_PTR load_seg_reg(&BX_CPU_THIS_PTR sregs[seg],
+              mantle_context_outcome.segment_values[seg]);
+        }
+        if (mantle_context_outcome.eflags_write_mask != 0u)
+          BX_CPU_THIS_PTR writeEFlags(mantle_context_outcome.eflags_values,
+            mantle_context_outcome.eflags_write_mask);
+        if ((mantle_context_outcome.segment_write_mask &
+              (1u << BX_SEG_REG_CS)) != 0u) {
+          if (BX_CPU_THIS_PTR protected_mode())
+            BX_CPU_THIS_PTR jump_protected(0,
+              mantle_context_outcome.segment_values[BX_SEG_REG_CS],
+              mantle_context_outcome.resume_rip);
+          else
+            BX_CPU_THIS_PTR load_seg_reg(&BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS],
+              mantle_context_outcome.segment_values[BX_SEG_REG_CS]);
+        }
+        RIP = mantle_context_outcome.resume_rip;
+        longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
+      }
     }
     memset(&mantle_outcome, 0, sizeof(mantle_outcome));
     if (bx_ntvdm_mantle_generic_ud_bridge_v1(&mantle_event, &mantle_outcome) &&
