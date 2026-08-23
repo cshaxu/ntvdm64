@@ -53,16 +53,20 @@ static int begin_stage(void)
 int main(void)
 {
   if (bx_ntvdm_mantle_request_physical_irq_v1(14u)) return 1;
+  if (bx_ntvdm_mantle_post_physical_irq_v1(14u)) return 12;
   if (bx_ntvdm_mantle_request_physical_irq_v1(16u)) return 2;
   if (!begin_stage()) return 3;
   if (bx_devices.pluginPicDevice == &bx_devices.stubPic) return 4;
+  if (bx_ntvdm_mantle_post_physical_irq_v1(16u)) return 13;
   /* Default slave mask keeps the valid line pending, not spuriously injected. */
-  if (!bx_ntvdm_mantle_request_physical_irq_v1(14u)) return 5;
+  if (!bx_ntvdm_mantle_post_physical_irq_v1(14u)) return 5;
+  if (bx_ntvdm_mantle_drain_posted_physical_irqs_v1() != 1u) return 14;
   if (bx_pc_system.IAC() == 0x76u) return 6;
   /* Unmask slave IRQ6: the retained request now acknowledges as vector 76h. */
   if (!write8(0xa1u, 0xbfu)) return 7;
   if (bx_pc_system.IAC() != 0x76u) return 8;
-  if (bx_ntvdm_mantle_request_physical_irq_v1(16u)) return 9;
+  if (bx_ntvdm_mantle_post_physical_irq_v1(16u)) return 9;
   if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 10;
+  if (bx_ntvdm_mantle_drain_posted_physical_irqs_v1() != 0u) return 15;
   return bx_ntvdm_mantle_request_physical_irq_v1(14u) ? 11 : 0;
 }

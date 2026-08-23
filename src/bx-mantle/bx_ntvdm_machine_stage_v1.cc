@@ -5,6 +5,7 @@
 #include "bx_ntvdm_generic_ud_bridge.h"
 #include "bx_ntvdm_first_fault_observation_v1.h"
 #include "bx_ntvdm_cancellation_controller_v1.h"
+#include "bx_ntvdm_physical_irq_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_ivt_watch_v1.h"
 #include "bx_ntvdm_minimal_machine.h"
@@ -180,6 +181,15 @@ static bx_bool bx_ntvdm_machine_stage_preserved_range_valid(
   return bytes != 0 && bytes <= 64u && address <= 0x100000u - bytes;
 }
 
+/* Timer callbacks execute from the native CPU timing path.  This consumes
+ * only selector-blind physical-line publications made by another host thread;
+ * the existing PIC remains the sole owner of masking, cascade and INTR. */
+static void bx_ntvdm_machine_stage_v1_physical_irq_poll(void *opaque)
+{
+  (void)opaque;
+  (void)bx_ntvdm_mantle_drain_posted_physical_irqs_v1();
+}
+
 /* Seed the fixed PC BIOS conventional-memory datum before optional external
  * bytes.  This finite stage owns 640 KiB below A0000 and publishes the
  * little-endian size as machine lifecycle state. */
@@ -289,6 +299,7 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_reset(void)
 {
   bx_ntvdm_minimal_machine_c *machine = bx_ntvdm_machine_stage_machine;
   bx_ntvdm_machine_stage_machine = 0;
+  bx_ntvdm_mantle_clear_posted_physical_irqs_v1();
   bx_ntvdm_ivt_watch_v1_reset();
   if (machine == 0) return BX_NTVDM_MACHINE_STAGE_V1_OK;
   if (machine->cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
@@ -488,7 +499,7 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   const struct bx_ntvdm_machine_stage_v1_execution_request *request)
 {
   bx_ntvdm_machine_stage_v1_stop_state stop_state;
-  int stop_timer, cancellation_timer;
+  int stop_timer, cancellation_timer, physical_irq_timer;
 
   if (bx_ntvdm_machine_stage_machine == 0)
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_REJECTED_INACTIVE;
@@ -505,6 +516,7 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   }
   stop_state.watchdog_fired = 0;
   stop_state.cancellation_fired = 0;
+  bx_ntvdm_mantle_clear_posted_physical_irqs_v1();
   stop_timer = bx_pc_system.register_timer_ticks(&stop_state,
     bx_ntvdm_machine_stage_v1_stop, request->instruction_tick_budget, 0, 1,
     "machine-stage-stop");
@@ -515,6 +527,17 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
     bx_ntvdm_machine_stage_v1_cancellation_poll_ticks, 1, 1,
     "machine-stage-cancel");
   if (cancellation_timer <= 0) {
+    bx_pc_system.deactivate_timer((unsigned) stop_timer);
+    bx_pc_system.unregisterTimer((unsigned) stop_timer);
+    return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
+  }
+  physical_irq_timer = bx_pc_system.register_timer_ticks(&stop_state,
+    bx_ntvdm_machine_stage_v1_physical_irq_poll,
+    bx_ntvdm_machine_stage_v1_cancellation_poll_ticks, 1, 1,
+    "machine-stage-physical-irq");
+  if (physical_irq_timer <= 0) {
+    bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
+    bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
     bx_pc_system.deactivate_timer((unsigned) stop_timer);
     bx_pc_system.unregisterTimer((unsigned) stop_timer);
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
@@ -530,6 +553,8 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   bx_ntvdm_machine_stage_v1_instruction_history_configure();
 #endif
   bx_cpu.cpu_loop();
+  bx_pc_system.deactivate_timer((unsigned) physical_irq_timer);
+  bx_pc_system.unregisterTimer((unsigned) physical_irq_timer);
   bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
   bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
   bx_pc_system.deactivate_timer((unsigned) stop_timer);

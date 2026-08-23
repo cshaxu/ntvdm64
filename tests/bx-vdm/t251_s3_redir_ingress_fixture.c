@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <windows.h>
 
 #include "bop/shim/dem_direct_host_session.h"
 #include "bop/shim/bx_ntvdm_host_handle_manager.h"
@@ -32,6 +33,11 @@ static int expect(struct bx_ntvdm_generic_ud_outcome_v1 *outcome, int carry,
         (outcome->gpr16_write_mask & 1u) != 0u &&
         outcome->gpr16_values[0] == ax;
 }
+
+static void put32(uint8_t *bytes, uint32_t value)
+{ bytes[0] = (uint8_t)value; bytes[1] = (uint8_t)(value >> 8); bytes[2] = (uint8_t)(value >> 16); bytes[3] = (uint8_t)(value >> 24); }
+static uint16_t get16(const uint8_t *bytes)
+{ return (uint16_t)(bytes[0] | ((uint16_t)bytes[1] << 8)); }
 
 typedef struct mailslot_fixture_state {
     bx_ntvdm_host_handle_manager handles;
@@ -76,6 +82,56 @@ static int mailslot_regression(void)
             fixture_read, fixture_write) || !bx_ntvdm_redir_native_session_bind(&session)) return 0;
     make_event(&event, 0x00u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
+    /* `namepipe.asm` passes BP:BX as an opaque 32-bit token and DS:SI as the
+     * packed descriptor.  The original `int5c.asm` later consumes 57:26;
+     * this fixture proves the source-shaped queue writes results before that
+     * guest-owned continuation receives only copied 16:16 values. */
+    {
+        HANDLE server = INVALID_HANDLE_VALUE, client = INVALID_HANDLE_VALUE;
+        DWORD error = ERROR_SUCCESS, wrote = 0u;
+        uint32_t token = 0u;
+        uint32_t spins;
+        server = CreateNamedPipeW(L"\\\\.\\pipe\\ntdos64-t253-async", PIPE_ACCESS_OUTBOUND,
+            PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT, 1u, 64u, 64u, 0u, NULL);
+        if (server == INVALID_HANDLE_VALUE) return 0;
+        client = CreateFileW(L"\\\\.\\pipe\\ntdos64-t253-async", GENERIC_READ, 0u,
+            NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
+        if (client == INVALID_HANDLE_VALUE ||
+            (ConnectNamedPipe(server, NULL) == FALSE && GetLastError() != ERROR_PIPE_CONNECTED) ||
+            !direct.publish_handle(direct.state, client, &token, &error) || token == 0u ||
+            !WriteFile(server, "go", 2u, &wrote, NULL) || wrote != 2u) {
+            if (client != INVALID_HANDLE_VALUE) CloseHandle(client);
+            CloseHandle(server); return 0;
+        }
+        memset(state.memory + 0x300u, 0, 24u);
+        put32(state.memory + 0x300u, 0x00100300u); /* bytes -> linear 400 */
+        state.memory[0x304u] = 2u;
+        put32(state.memory + 0x306u, 0x00100320u); /* buffer -> linear 420 */
+        put32(state.memory + 0x30au, 0x00100302u); /* error -> linear 402 */
+        put32(state.memory + 0x30eu, 0x00200400u); /* ANR is guest-owned only */
+        make_event(&event, 0x23u);
+        event.eax = 0x0086u; event.ebx = token & 0xffffu; event.ebp = token >> 16;
+        event.ds = 0x0010u; event.esi = 0x0200u;
+        if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) {
+            CloseHandle(server); return 0;
+        }
+        for (spins = 0u; spins < 100u; ++spins) {
+            make_event(&event, 0x26u);
+            if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome)) { CloseHandle(server); return 0; }
+            if ((outcome.eflags_values & 1u) != 0u) break;
+            Sleep(1u);
+        }
+        if (spins == 100u || (outcome.eflags_values & 0x40u) != 0u ||
+            outcome.gpr16_values[0] != 0u || outcome.gpr16_values[1] != 0x0400u ||
+            outcome.gpr16_values[2] != 0x0020u || outcome.gpr16_values[4] != 0x0320u ||
+            ((outcome.segment_write_mask & ((1u << 0) | (1u << 3))) != ((1u << 0) | (1u << 3)) ||
+             outcome.segment_values[3] != 0x0010u) ||
+            memcmp(state.memory + 0x420u, "go", 2u) != 0 ||
+            get16(state.memory + 0x400u) != 2u || get16(state.memory + 0x402u) != ERROR_SUCCESS) {
+            CloseHandle(server); return 0;
+        }
+        CloseHandle(server);
+    }
     make_event(&event, 0x0bu);
     event.eax = 0x0042u; event.ebx = 64u; event.ecx = 64u;
     event.ds = 0x0010u; event.esi = 0u; event.es = 0x0020u; event.edi = 0x0004u;
@@ -156,10 +212,10 @@ int main(void)
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 6;
     make_event(&event, 0x23u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 9;
+        !expect(&outcome, 1, ERROR_INVALID_HANDLE)) return 9;
     make_event(&event, 0x24u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 10;
+        !expect(&outcome, 1, ERROR_INVALID_HANDLE)) return 10;
     make_event(&event, 0x01u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 0, 0u) || bx_ntvdm_redir_loaded()) return 7;

@@ -2,31 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T253 S3** — Redirector copied async-pipe completion composition.
+**Active: M0 T254 S1** — OpenNT DPMI profile source/ABI admission map.
 
 ## Active Packet
 
-### M0 T253 S3 — Redirector copied async-pipe completion composition
+### M0 T254 S1 — OpenNT DPMI profile source/ABI admission map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T253 S3`, Ordinary Mode, single-person dual-role original Redirector composition. |
-| Admission And Approval | S2 closes the selector-blind native IRQ14 request using existing PIC behavior. S3 may recover copied async-pipe records in bx-vdm; it may not alter CPU/PIC/IVT semantics. |
-| Objective | Recover the retained `57:23/24` serialized async named-pipe completion queue, checked descriptor/result I/O, public overlapped wait and native IRQ14 request, leaving `int5c.asm` as guest continuation owner. |
-| Non-goals | No direct vector injection, IVT write, ANR synthesis, raw callback/handle, CCPU/CSR/BaseSrv, DPMI/WOW or bx-core change. |
-| Reference Baseline | [S2 closure](etc/evidence/m0-t253-s2-physical-irq-mechanical-closure-001.md), `namepipe.asm`, `vrnmpipe.h`, `vdmredir.h`, `int5c.asm`, current Redirector session shim. |
-| Files And ABI Surface | bx-vdm Redirector session queue/provider, checked guest descriptor/result spans, existing opaque manager, physical-IRQ request, focused async fixture and tracker/evidence. |
-| Applicable Rules | Source-first recovery, guest/machine hard boundary, Bochs rewrite stop rule, selector blindness and external-intrusion registry. |
-| Verification | Source-shaped async descriptor/lifecycle fixture, native PIC delivery fixture, negative raw-pointer/invalid-descriptor cases, documentation gates and `git diff --check`. |
-| Expected Markers | One copied completion requests IRQ14; original `int5c.asm` remains sole ANR/IRET owner; invalid input never publishes a callback. |
-| Asset Needs | Retained `int5c.asm`, VDMREDIR headers, current core/mantle lifecycle/PIC code and existing interrupt tests. |
-| Reporting Requirements | State whether any candidate would expose a BOP/DOS name in Bochs; reject it if so. |
-| Stop Conditions | Required change needs direct vector/IVT/guest-state bypass, a raw host handle/callback, or an unavailable historical broker. |
-| Exit Criteria | `57:23/24` source-shaped async completion group has accepted and failure evidence; T253 may close without claiming NetBIOS/DLC. |
-| Original Owner Request | Continue original-code recovery by dependency; Bochs and mantle must remain free of DOS/VDM/BOP semantics. |
-| Similar-Issue Sweep | `02/06` machine interrupt package, existing PIC/8042 paths, VDD/top-level events, NetBIOS/DLC and DPMI exception/IRET routing. |
+| Identifier Mode | `M0 T254 S1`, Ordinary Mode, single-person dual-role source-first DPMI admission. |
+| Admission And Approval | The next dependency-ordered candidate is admitted under the standing request to recover original OpenNT BOP packages while keeping Bochs/mantle free of DOS/VDM semantics. S1 is read-only source/ABI/failure mapping before any DPMI implementation. |
+| Objective | Select one bounded OpenNT DPMI profile and prove the complete owner/source, protected-mode transition, LDT/IDT/exception/IRET, memory and BOP dependency graph required to recover it. |
+| Non-goals | No DPMI leaf implementation, trace-driven patch, new CPU compatibility behavior, guest pointer shortcut, DPMI term in bx-core/mantle, or unregistered Bochs intrusion. |
+| Reference Baseline | [DPMI proposal](etc/operations/proposal-opennt-dpmi-owner-package-completion-001.md), live [BOP tracker](etc/bop-list.md), adopted protected-mode/exception and XMS/memory evidence. |
+| Files And ABI Surface | Read-only `src/opennt` DPMI/guest source, tracker/proposal/evidence; any later fixed-width seams are deferred until this map chooses them. |
+| Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule and live-tracker sequencing. |
+| Verification | Source inventory and caller graph; BOP/dependency cross-check; documented four-rung disposition; documentation governance and `git diff --check`. |
+| Expected Markers | One named profile, every required BOP/dependency owner, ordered prerequisites, explicit unavailable historical composition and no implied implementation. |
+| Asset Needs | Retained OpenNT DPMI source/headers, current protected-mode bridge records, XMS/memory capability evidence and tracker rows. |
+| Reporting Requirements | Distinguish directly composable source from the smallest required adapter seam, absent historical product dependencies and any candidate Bochs mechanics. |
+| Stop Conditions | A proposed implementation needs a CPU/device semantic change, an unbounded guest-memory interface, an undocumented old NT internal API or a profile choice not supported by source evidence. |
+| Exit Criteria | A reviewed profile map supports a bounded S2 implementation decision or explicitly rejects admission; no source behavior is changed by S1. |
+| Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
+| Similar-Issue Sweep | XMS A20/UMB, WOW16 NE lifecycle, DPMI exception/IRET, COMMAND protected-mode caller paths and existing machine-memory capabilities. |
 
 ## Latest Closure
+
+M0 T253 closes the selector-blind local async named-pipe completion slice.
+`57:23/24` and the pipe-only `57:26` disposition recover the retained
+descriptor/queue/ANR contract through a bounded bx-vdm seam; the native PIC
+remains unchanged and NetBIOS/DLC remain deferred. See the
+[T253 closure](history/m0-t253-closure-20260823.md).
 
 M0 T251 closes the composable Redirector lifecycle/mailslot slice and the
 source-shaped async-pipe boundary.  `57:09..0F` are fully recovered through a
