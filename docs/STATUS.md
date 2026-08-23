@@ -92,13 +92,18 @@ from the erroneous `2` to OpenNT's `1`.  A full fresh r17 graph produces all
 pass; see [S4 P5 evidence](etc/evidence/m0-t259-s4-p5-command-pif-dialog-facade-closure-001.md).
 
 **T259 technical closure state:** all admitted S1--S4 exit criteria are now
-met.  The packet remains the formally active record only because the current
-governance verifier requires one admitted `M/T/S` packet at all times; no
-successor candidate has been admitted merely to make this record disappear.
-Its closure history entry is therefore the next governance action when the
-owner selects and admits the next T package.
+met, and the [formal T259 closure](history/m0-t259-closure-20260823.md) is
+recorded. The packet remains the active Status pointer only because the
+governance verifier requires one admitted `M/T/S` record until a successor is
+chosen; that pointer does not reopen T259's completed scope.
 
 ## Latest Closure
+
+M0 T259 closes the source-first host/machine compatibility-facade baseline.
+Every reached `HOST-*`/`MACH-*` seam now has direct original composition, a
+smallest OpenNT-shaped public-API facade, or an explicit source-proven
+decline; imported OpenNT mirrors and bx-core/mantle remain unmodified. See
+[T259 closure](history/m0-t259-closure-20260823.md).
 
 M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager
 prerequisite. One implementation supplies the session's separate
