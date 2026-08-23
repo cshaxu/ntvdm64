@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2118 |
+| Documentation records | 2119 |
 | --- | --- |
-| Generated UTC | 2026-08-23T08:17:09Z |
+| Generated UTC | 2026-08-23T08:19:17Z |
 
 ## Entries
 
@@ -132,6 +132,7 @@ content-divergent entries.
 | etc/evidence/m0-t249-s3-physical-write-provenance-closure-001.md | indexed supporting material | 2fe994185f2478329579ffa3a4838b53610f78f6b9515ed158ef3c2dde0f6a3a |
 | etc/evidence/m0-t250-s1-source-built-low-memory-control-flow-map-001.md | indexed supporting material | 09790be808f8aa5cd5207dc234bac11a14e14ccf217e8cd7eb6efc7a9157b023 |
 | etc/evidence/m0-t251-s1-redirector-owner-source-abi-map-001.md | indexed supporting material | 159dbfcff336cc717907fd952778f902e86fde29fb618fec19f6791a471b49a6 |
+| etc/evidence/m0-t251-s2-redirector-profile-source-recovery-decision-001.md | indexed supporting material | 24bc23ce1f88395030d086b1da7703fbac2121063542cf54c30744f3d29697b5 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
