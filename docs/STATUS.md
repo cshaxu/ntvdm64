@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T249 S1** — Source-built guest low-memory source/ABI and existing-observation seam audit.
+**Active: M0 T249 S3** — Selector-blind low-memory physical-write observation design and closure.
 
 ## Active Packet
 
-### M0 T249 S1 — Source-built guest low-memory source/ABI and existing-observation seam audit
+### M0 T249 S3 — Selector-blind low-memory physical-write observation design and closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T249 S1`, Ordinary Mode, single-person dual-role source and observation-seam audit. |
-| Admission And Approval | T248 closure supplies the exact boundary; standing owner authorization covers ordinary source, documentation and existing-diagnostic work. |
-| Objective | Map the source-built NTIO low-memory relocation context for runtime `0000:0A87`, its far indirect call ABI, and every existing selector-blind RAM-write/provenance observation seam. |
-| Non-goals | No BOP provider change, guest PSP/PDB logic, device/firmware enablement, or new observer until the seam audit proves it necessary. |
-| Reference Baseline | [T248 closure](history/m0-t248-closure-20260823.md), [S4 attribution](etc/evidence/m0-t248-s4-post-exec-final-position-attribution-001.md), `BOP-DEPENDENCY-115`. |
-| Files And ABI Surface | Original NTIO source/image/map, existing default-off bx-core/bx-mantle observation surfaces, tracker and evidence only. |
+| Identifier Mode | `M0 T249 S3`, Ordinary Mode, single-person dual-role selector-blind mechanical observation closure. |
+| Admission And Approval | Completed S1 proves no existing seam can identify the writer. Standing owner authorization covers the required minimal registered external-code exception and ordinary verification. |
+| Objective | Implement and verify the smallest default-off physical-write observation capable of attributing writes in the fixed `0x0A87` range without altering CPU/RAM semantics. |
+| Non-goals | No BOP provider change, guest PSP/PDB logic, device/firmware enablement, guest semantic decoding, or arbitrary memory tracing. |
+| Reference Baseline | [T249 S1 seam audit](etc/evidence/m0-t249-s1-low-memory-provenance-seam-audit-001.md), [T248 S4 attribution](etc/evidence/m0-t248-s4-post-exec-final-position-attribution-001.md), `BOP-DEPENDENCY-115`. |
+| Files And ABI Surface | Adopted `BX_MEM_C` ordinary CPU-write path; fixed-width mantle observation ABI; CLI diagnostic presentation; exception registry, focused fixture and tracker/evidence. |
 | Applicable Rules | Source-first ladder, selector-blind machine boundary, no trace-led BOP patch and fixed-width observation discipline. |
-| Verification | Source/image comparison, existing seam audit, documentation governance and `git diff --check`. |
-| Expected Markers | Exact source/load/relocation context and a determination whether an existing seam can identify writer/pointer provenance. |
-| Asset Needs | Current source-built NTIO image/map, T248 formal graph/log, original OpenNT NTIO sources and existing mantle observation interfaces. |
-| Reporting Requirements | Record physical addresses, before/after image bytes, exact transfer ABI, owner classification and whether any observation is existing or would require registration. |
-| Stop Conditions | A proposed observation needs guest-policy decoding or alters guest execution; stop and record the seam requirement instead. |
-| Exit Criteria | One evidence map either admits a bounded existing-seam replay or specifies the smallest separately registered mechanical observation. |
+| Verification | Focused disabled/overlap/non-overlap write fixture, one bounded source-built observation, documentation governance and `git diff --check`. |
+| Expected Markers | First relevant write physical range, copied preceding CPU position and fixed captured bytes; no behavior change with observer disabled. |
+| Asset Needs | Current formal Ninja graph, original source/image map, `BX_MEM_C` write path and existing instruction-history ABI. |
+| Reporting Requirements | Register the intrusion before code change; record watched range, byte/lifecycle semantics, negative coverage, native output and owner disposition. |
+| Stop Conditions | The design needs a guest pointer, BOP/DOS selector, arbitrary trace buffer, or observable write-result alteration. |
+| Exit Criteria | A default-off registered observer passes negative coverage and yields one bounded checkpoint attribution, or an evidence-backed mechanical limitation is recorded. |
 | Original Owner Request | Continue ordinary recovery without repeated approval; preserve original OpenNT source ownership and Bochs selector blindness. |
 | Similar-Issue Sweep | `BOP-DEPENDENCY-093/095/098/115`, NTIO `sysinit*.asm` relocation code, mantle RAM/staging lifecycle and existing instruction/terminal provenance records. |
 
