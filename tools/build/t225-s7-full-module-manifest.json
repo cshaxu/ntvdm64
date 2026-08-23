@@ -222,6 +222,8 @@
         "src/bx-vdm/bop/shim/xms_shim.c",
         "src/bx-vdm/bop/shim/dpmi_xmem_record_adapter.c",
         "src/bx-vdm/bop/shim/dpmi_startup_session_shim.c",
+        "src/bx-vdm/bop/shim/dpmi_startup_source_shim.c",
+        "src/bx-vdm/bop/opennt/dpmi/dpmi32.c",
         "src/bx-vdm/bop/opennt/dem/demhndl.c",
         "src/bx-vdm/bop/opennt/dem/dem.c",
         "src/bx-vdm/bop/opennt/dem/demdata.c",

@@ -4,6 +4,14 @@
 
 #include <string.h>
 
+static struct bx_ntvdm_dpmi_startup_session runtime_session;
+static bx_ntvdm_cpu_state_v1 runtime_cpu;
+static uint32_t runtime_shared_data_linear;
+static uint32_t runtime_current_dta_linear;
+static uint32_t runtime_selector_table_linear;
+static uint32_t runtime_dispatch_index;
+static uint32_t runtime_dispatch_valid;
+
 static uint16_t read_u16(const uint8_t *bytes, uint32_t offset)
 {
   return (uint16_t)((uint16_t)bytes[offset] | ((uint16_t)bytes[offset + 1u] << 8));
@@ -93,4 +101,91 @@ uint32_t bx_ntvdm_dpmi_startup_session_publish_selector_table(
    * remains the descriptor-table owner; no LDT cache or host pointer exists. */
   session->selector_table_linear = selector_table_linear;
   return BX_NTVDM_DPMI_STARTUP_SESSION_OK;
+}
+
+void bx_ntvdm_dpmi_startup_session_runtime_reset(void)
+{
+  bx_ntvdm_dpmi_startup_session_clear(&runtime_session);
+  memset(&runtime_cpu, 0, sizeof(runtime_cpu));
+  runtime_shared_data_linear = 0u;
+  runtime_current_dta_linear = 0u;
+  runtime_selector_table_linear = 0u;
+  runtime_dispatch_index = 0u;
+  runtime_dispatch_valid = 0u;
+}
+
+int bx_ntvdm_dpmi_startup_session_runtime_stage_dosx(uint32_t shared_data_linear)
+{
+  if (!bx_ntvdm_dpmi_startup_session_valid(&runtime_session) || shared_data_linear == 0u)
+    return 0;
+  runtime_shared_data_linear = shared_data_linear;
+  return 1;
+}
+
+int bx_ntvdm_dpmi_startup_session_runtime_stage_app(
+  const bx_ntvdm_cpu_state_v1 *cpu_state, uint32_t current_dta_linear)
+{
+  if (!bx_ntvdm_dpmi_startup_session_valid(&runtime_session) ||
+      !bx_ntvdm_cpu_state_v1_valid(cpu_state)) return 0;
+  runtime_cpu = *cpu_state;
+  runtime_current_dta_linear = current_dta_linear;
+  return 1;
+}
+
+int bx_ntvdm_dpmi_startup_session_runtime_stage_selector_table(
+  uint32_t selector_table_linear)
+{
+  if (!bx_ntvdm_dpmi_startup_session_valid(&runtime_session) || selector_table_linear == 0u)
+    return 0;
+  runtime_selector_table_linear = selector_table_linear;
+  return 1;
+}
+
+int bx_ntvdm_dpmi_startup_session_runtime_stage_dispatch(
+  const bx_ntvdm_cpu_state_v1 *cpu_state, uint32_t index)
+{
+  if (!bx_ntvdm_dpmi_startup_session_runtime_stage_app(cpu_state, 0u) ||
+      index >= 25u) return 0;
+  runtime_dispatch_index = index;
+  runtime_dispatch_valid = 1u;
+  return 1;
+}
+
+int bx_ntvdm_dpmi_startup_session_runtime_take_dispatch(uint32_t *index)
+{
+  if (!bx_ntvdm_dpmi_startup_session_valid(&runtime_session) ||
+      index == 0 || runtime_dispatch_valid == 0u) return 0;
+  *index = runtime_dispatch_index;
+  runtime_dispatch_valid = 0u;
+  return 1;
+}
+
+void bx_ntvdm_dpmi_startup_session_runtime_advance_ip(uint32_t bytes)
+{
+  runtime_cpu.eip += bytes;
+}
+
+void bx_ntvdm_dpmi_startup_session_runtime_initialize_dosx(void)
+{
+  (void)bx_ntvdm_dpmi_startup_session_initialize_dosx(&runtime_session,
+    runtime_shared_data_linear);
+}
+
+void bx_ntvdm_dpmi_startup_session_runtime_initialize_app(void)
+{
+  (void)bx_ntvdm_dpmi_startup_session_initialize_app(&runtime_session,
+    &runtime_cpu, runtime_current_dta_linear);
+}
+
+void bx_ntvdm_dpmi_startup_session_runtime_publish_selector_table(void)
+{
+  (void)bx_ntvdm_dpmi_startup_session_publish_selector_table(&runtime_session,
+    runtime_selector_table_linear);
+}
+
+const struct bx_ntvdm_dpmi_startup_session *
+bx_ntvdm_dpmi_startup_session_runtime_current(void)
+{
+  return bx_ntvdm_dpmi_startup_session_valid(&runtime_session) ?
+    &runtime_session : 0;
 }

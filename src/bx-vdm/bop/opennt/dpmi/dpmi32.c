@@ -20,9 +20,10 @@ Revision History:
     Neil Sandlin (neilsa) 31-Jul-1995 - Updates for the 486 emulator
 
 --*/
-#include "precomp.h"
-#pragma hdrstop
-#include "softpc.h"
+/* DIVERGENCE (T257 S3): the NT4 `precomp.h`/`softpc.h` product shell exposes
+ * VdmTib, Sim32GetVDMPointer and a process LDT.  The named shim retains only
+ * the original startup/table calls through fixed-width session records. */
+#include "../../shim/dpmi_startup_source_shim.h"
 //
 // Information about the current PSP
 //
@@ -90,12 +91,14 @@ Return Value:
 --*/
 {
 
-    Index = *(Sim32GetVDMPointer(
-        ((getCS() << 16) | getIP()),
-        1,
-        (UCHAR) (getMSW() & MSW_PE)));
-
-    setIP((getIP() + 1));           // take care of subfn.
+    /* DIVERGENCE (T257 S3): the generic BOP ingress is not admitted here.
+     * A later bounded ingress stages the already-copied selector byte; this
+     * keeps the original table dispatch/one-byte IP advance ordering without
+     * exporting an NT4 guest pointer. */
+    if (!bx_ntvdm_dpmi_startup_source_take_dispatch(&Index)) {
+        return;
+    }
+    bx_ntvdm_dpmi_startup_source_advance_ip(1u); // take care of subfn.
 
     DBGTRACE(DPMI_DISPATCH_ENTRY, Index, 0, 0);
 
@@ -132,19 +135,9 @@ Return Value:
 
 --*/
 {
-   char szFormat[] = "NtVdm: Invalid DPMI BOP 0x%x from CS:IP %4.4x:%4.4x (%s mode), could be i386 dosx.exe.\n";
-   char szMsg[sizeof(szFormat)+64];
-
-   wsprintf(
-       szMsg,
-       szFormat,
-       Index,
-       (int)getCS(),
-       (int)getIP(),
-       (getMSW() & MSW_PE) ? "prot" : "real"
-       );
-
-   OutputDebugString(szMsg);
+   /* DIVERGENCE (T257 S3): retain the table's invalid-service terminal but
+    * do not import NT4 debugger/window output plumbing. */
+   bx_ntvdm_dpmi_startup_source_note_illegal(Index);
 }
 
 VOID
@@ -169,39 +162,10 @@ Return Value:
 
 --*/
 {
-    PUCHAR SharedData;
-
-    ASSERT((getMSW() & MSW_PE));
-
-    SharedData = Sim32GetVDMPointer(((getDS() << 16) | getSI()), 2, TRUE);
-
-    DosxStackSegment = *((PWORD16)SharedData);
-
-    SmallXlatBuffer = Sim32GetVDMPointer(*((PDWORD16)(SharedData+2)), 4, TRUE);
-
-    LargeXlatBuffer = Sim32GetVDMPointer(*((PDWORD16)(SharedData+6)), 4, TRUE);
-
-    DosxStackFramePointer = (PWORD16)((PULONG)Sim32GetVDMPointer(
-                                     *((PDWORD16)(SharedData + 10)), 4, TRUE));
-
-    DosxStackFrameSize = *((PWORD16)(SharedData + 14));
-
-    RmBopFe = *((PDWORD16)(SharedData + 16));
-
-    DosxRmCodeSegment = *((PWORD16)(SharedData + 20));
-
-    DosxDtaBuffer = Sim32GetVDMPointer(*(PDWORD16)(SharedData+22), 4, TRUE);
-
-    DosxPmDataSelector = *(PWORD16)(SharedData + 26);
-    DosxRmCodeSelector = *(PWORD16)(SharedData + 28);
-    DosxSegmentToSelector = *(PDWORD16)(SharedData + 30);
-
-    DosxFaultHandlerIret = *(PDWORD16)(SharedData + 34);
-    DosxFaultHandlerIretd= *(PDWORD16)(SharedData + 38);
-    DosxIntHandlerIret   = *(PDWORD16)(SharedData + 42);
-    DosxIntHandlerIretd  = *(PDWORD16)(SharedData + 46);
-    DosxIret             = *(PDWORD16)(SharedData + 50);
-    DosxIretd            = *(PDWORD16)(SharedData + 54);
+    /* DIVERGENCE (T257 S3): original field order is retained by the named
+     * session seam, but pointer-valued Sim32GetVDMPointer results become
+     * checked fixed-width guest-linear values. */
+    bx_ntvdm_dpmi_startup_source_initialize_dosx();
 
 }
 
@@ -233,37 +197,10 @@ Notes:
 
 --*/
 {
-    PWORD16 Data;
-
-    Data = (PWORD16)Sim32GetVDMPointer(
-        ((ULONG)getSS() << 16) | getSP(),
-        1,
-        TRUE
-        );
-
-
-    // Only 1 bit defined in dpmi
-    CurrentAppFlags = getAX() & DPMI_32BIT;
-#if defined(i386)
-    VdmTib.PmStackInfo.Flags = CurrentAppFlags;
-    if (CurrentAppFlags & DPMI_32BIT) {
-        *pNtVDMState |= VDM_32BIT_APP;
-    }
-#endif
-
-    DpmiInitRegisterSize();
-
-    CurrentDta = Sim32GetVDMPointer(
-        *(PDWORD16)(Data),
-        1,
-        TRUE
-        );
-
-    CurrentDosDta = (PUCHAR) NULL;
-
-    CurrentDtaOffset = *Data;
-    CurrentDtaSelector = *(Data + 1);
-    CurrentPSPSelector = *(Data + 2);
+    /* DIVERGENCE (T257 S3): preserve `AX & DPMI_32BIT` and startup frame
+     * record ordering through the staged copied CPU/frame request.  NT4's
+     * VdmTib/SS:SP pointer translation is unavailable and is not recreated. */
+    bx_ntvdm_dpmi_startup_source_initialize_app();
 }
 VOID DpmiPassTableAddress(
     VOID
@@ -286,12 +223,9 @@ Return Value:
 --*/
 {
 
-    Ldt = (PVOID)Sim32GetVDMPointer(
-        (getAX() << 16),
-        0,
-        (UCHAR) (getMSW() & MSW_PE)
-        );
-
-    IntelBase = (ULONG) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
+    /* DIVERGENCE (T257 S3): retain only the source's selGDT publication
+     * event.  Native Bochs owns descriptor tables; no `Ldt`/`IntelBase` host
+     * address or copied descriptor cache is created. */
+    bx_ntvdm_dpmi_startup_source_publish_selector_table();
 
 }

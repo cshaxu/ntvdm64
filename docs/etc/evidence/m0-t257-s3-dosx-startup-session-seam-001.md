@@ -40,6 +40,7 @@ native Bochs descriptor behavior.
 
 This is partial source-composition evidence for `53:04`, `53:05` and `53:0F`,
 not active BOP support.  The exact OpenNT translation units are staged but not
-yet formal build members.  The next S3 step is to introduce their smallest
-common compile closure while preserving dispatch ordering; S4 remains owner
-of protected interrupt/fault/IRET frames.
+yet formal build members at the time of this record.  Its successor,
+[source-composition evidence 002](m0-t257-s3-opennt-dpmi32-source-composition-002.md),
+records the later formal `dpmi32.c` admission.  S4 remains owner of protected
+interrupt/fault/IRET frames.

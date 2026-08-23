@@ -1,14 +1,15 @@
 # OpenNT DPMI Startup/Table Source Mirror
 
 This is the T257 S3 exact-copy staging manifest.  The sources below were
-copied byte-for-byte by `tools/import/Sync-OpenNtDpmiStartupMirror.ps1` from
-`src/opennt/base/mvdm/dpmi32/`.  They are not formal build members yet.
+initially copied byte-for-byte by `tools/import/Sync-OpenNtDpmiStartupMirror.ps1`
+from `src/opennt/base/mvdm/dpmi32/`.  A mirror remains outside the formal
+build until its smallest named shim has been reviewed.
 
 | OpenNT source | Mirror | Original role | Next composition boundary |
 | --- | --- | --- | --- |
 | `data.c` | `data.c` | shared DOSX/DPMI state | replace only historical pointer-valued state with a fixed-width session record. |
 | `debug.c` | `debug.c` | diagnostic declarations | common header closure only. |
-| `dpmi32.c` | `dpmi32.c` | dispatcher, DOSX initialisation, table/stack publication | bounded guest copy and session state; no `Sim32GetVDMPointer` export. |
+| `dpmi32.c` | `dpmi32.c` | dispatcher, DOSX initialisation, table/stack publication | **formal bx-vdm member (T257 S3)** through `dpmi_startup_source_shim`; bounded guest copy/session state, no `Sim32GetVDMPointer` export. |
 | `dpmiselr.c` | `dpmiselr.c` | descriptor-table update policy | native Bochs descriptor authority; refuse old process-LDT imports. |
 | `dpmidata.h`, `dpmi32p.h` | same | original data layout and context macros | `dpmi_session_shim` replaces unavailable NT4 context representation. |
 | `precomp.h` | same | original compilation closure | replaced only when the source units are admitted to the modern build. |
@@ -17,3 +18,7 @@ copied byte-for-byte by `tools/import/Sync-OpenNtDpmiStartupMirror.ps1` from
 The staged files preserve their original notices and order.  Before a C file
 enters the formal Ninja source membership, any local change carries an inline
 `DIVERGENCE:` rationale and names the shim declared in the T257 S2 ledger.
+`dpmi32.c` is the first admitted unit: it retains the 25-slot original table
+and its three startup/table bodies, while its four old NT4 pointer/product
+boundaries are routed only through `dpmi_startup_source_shim` and
+`dpmi_startup_session_shim`.

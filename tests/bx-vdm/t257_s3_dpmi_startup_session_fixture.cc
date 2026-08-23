@@ -2,6 +2,7 @@
 #include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
 #include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
 #include "bx-vdm/bop/shim/dpmi_startup_session_shim.h"
+#include "bx-vdm/bop/shim/dpmi_startup_source_shim.h"
 
 #include <string.h>
 
@@ -50,7 +51,7 @@ static int begin_stage(void)
 
 int main(void)
 {
-  struct bx_ntvdm_dpmi_startup_session session;
+  const struct bx_ntvdm_dpmi_startup_session *session;
   bx_ntvdm_cpu_state_v1 cpu;
   uint8_t shared[BX_NTVDM_DPMI_STARTUP_SESSION_SHARED_DATA_BYTES];
   const uint32_t address = 0x2800u;
@@ -75,27 +76,28 @@ int main(void)
   put32(shared, 50u, 0x25262728u);
   put32(shared, 54u, 0x292a2b2cu);
   if (!bx_ntvdm_mantle_checked_ram_write_v1(address, shared, sizeof(shared))) return 2;
-  bx_ntvdm_dpmi_startup_session_clear(&session);
-  if (!bx_ntvdm_dpmi_startup_session_valid(&session)) return 3;
-  if (bx_ntvdm_dpmi_startup_session_initialize_dosx(&session, address) !=
-      BX_NTVDM_DPMI_STARTUP_SESSION_OK) return 4;
-  if (session.dosx_stack_segment != 0x1234u ||
-      session.small_xlat_buffer_linear != 0x00112233u ||
-      session.dosx_stack_frame_size != 0x0102u ||
-      session.dosx_iretd != 0x292a2b2cu) return 5;
-  if (bx_ntvdm_dpmi_startup_session_publish_selector_table(&session, 0x3000u) !=
-      BX_NTVDM_DPMI_STARTUP_SESSION_OK || session.selector_table_linear != 0x3000u)
-    return 6;
+  bx_ntvdm_dpmi_startup_session_runtime_reset();
+  if (!bx_ntvdm_dpmi_startup_session_runtime_stage_dosx(address)) return 3;
+  /* This invokes the imported OpenNT dpmi32.c body, not the seam directly. */
+  DpmiInitDosx();
+  session = bx_ntvdm_dpmi_startup_session_runtime_current();
+  if (session == 0 || session->dosx_stack_segment != 0x1234u ||
+      session->small_xlat_buffer_linear != 0x00112233u ||
+      session->dosx_stack_frame_size != 0x0102u ||
+      session->dosx_iretd != 0x292a2b2cu) return 4;
+  if (!bx_ntvdm_dpmi_startup_session_runtime_stage_selector_table(0x3000u)) return 5;
+  DpmiPassTableAddress();
+  if (session->selector_table_linear != 0x3000u) return 6;
   bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_PROTECTED);
   cpu.eax = 1u;
-  if (bx_ntvdm_dpmi_startup_session_initialize_app(&session, &cpu, 0x3300u) !=
-      BX_NTVDM_DPMI_STARTUP_SESSION_OK || session.current_app_flags != 1u ||
-      session.current_dta_linear != 0x3300u) return 7;
+  if (!bx_ntvdm_dpmi_startup_session_runtime_stage_app(&cpu, 0x3300u)) return 7;
+  DpmiInitApp();
+  if (session->current_app_flags != 1u || session->current_dta_linear != 0x3300u)
+    return 8;
   bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-  if (bx_ntvdm_dpmi_startup_session_initialize_app(&session, &cpu, 0x3300u) !=
-      BX_NTVDM_DPMI_STARTUP_SESSION_REJECTED_CPU_MODE) return 8;
-  if (bx_ntvdm_dpmi_startup_session_initialize_dosx(&session, 0u) !=
-      BX_NTVDM_DPMI_STARTUP_SESSION_REJECTED_INPUT) return 9;
-  if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 10;
+  if (!bx_ntvdm_dpmi_startup_session_runtime_stage_app(&cpu, 0x3300u)) return 9;
+  DpmiInitApp();
+  if (session->current_app_flags != 1u) return 10;
+  if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 11;
   return 0;
 }
