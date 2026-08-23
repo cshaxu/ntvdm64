@@ -7,7 +7,7 @@ collection of protected-mode service stubs.
 
 ## Queue relationship
 
-This is the admission plan for queue candidate 5, **OpenNT DPMI protected-mode
+This is the admission plan for queue candidate 2, **OpenNT DPMI protected-mode
 owner-package recovery**.  It may be admitted only after the protected-mode
 machine dependency slice and every `53:xx` source/ABI/failure row are frozen.
 ## Boundary
@@ -19,13 +19,15 @@ CR0, LDT internals or manufacture a DPMI server.
 
 ## Admission Plan
 
-1. **S1 — audit:** select the first DPMI guest profile and map every reached
-   `53:xx` service, LDT dependency, exception/IRET, memory, transition and
-   cleanup contract.
-2. **S2 — code complete:** recover the whole selected DPMI composition by
-   original-source reuse or smallest capability seam; explicitly record any
-   profile exclusion before coding.
-3. **S3 — verification:** run protected/real transition, descriptor,
+1. **S1 — audit:** select the DOSX/DPMI profile and map all `53:00..18`, its
+   guest callers, host data layout, historical NT4 dependencies and failure
+   terminals.
+2. **S2 — import boundary:** create the original-source mirror/compile
+   manifest and named compatibility-shim ledger; no ingress or leaf route.
+3. **S3--S6 — coherent subcontracts:** recover startup/table, frame/IRET,
+   XMEM/memory and PM-to-DOS translation as ordered package units; retain VDD
+   and debug terminals explicitly until their owner packages exist.
+4. **S7 — verification:** run protected/real transition, descriptor,
    exception, memory and termination regression as one suite, then one native
    profile run.
 
