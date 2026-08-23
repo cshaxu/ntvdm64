@@ -21,7 +21,18 @@
 #include "top_level_nosupport_v2_generic_ud_bridge.h"
 #include "xms_v2_generic_ud_bridge.h"
 #include "bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
+#include "bop/observation/bx_ntvdm_command_bootstrap_observation_v1.h"
 #include "bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h"
+#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
+
+/* This adapter-owned observation calls the existing opaque, checked RAM
+ * mechanism.  It neither changes RAM nor gives the mantle BOP vocabulary. */
+static int command_bootstrap_read(void *state, uint64_t physical_address,
+    uint8_t *bytes, uint32_t byte_count)
+{
+    (void)state;
+    return bx_ntvdm_mantle_checked_ram_read_v1(physical_address, bytes, byte_count);
+}
 
 int bx_ntvdm_mantle_generic_ud_bridge_v1(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
@@ -71,6 +82,8 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
                 bx_ntvdm_xms_v2_generic_ud_dispatch(event, outcome) :
                 bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(event, outcome))))))))));
     if (accepted) {
+        bx_ntvdm_command_bootstrap_observation_v1_consider(event, outcome,
+            command_bootstrap_read, NULL);
         bx_ntvdm_bop_sequence_observation_v1_consider(event, outcome);
         bx_ntvdm_generic_ud_sequence_observation_v1_consider(event, outcome);
     } else {

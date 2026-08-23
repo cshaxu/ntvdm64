@@ -2,31 +2,46 @@
 
 ## Current Work
 
-**Active: M0 T245 S13** — Source-built COMMAND `SHELL=`-path recovery.
+**Active: M0 T245 S14** — Guest `commnd` to `INT 21h/EXEC` observation closure.
 
 ## Active Packet
 
-### M0 T245 S13 — Source-built COMMAND `SHELL=`-path recovery
+### M0 T245 S14 — Guest `commnd` to `INT 21h/EXEC` observation closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S13`, Ordinary Mode, single-person dual-role OpenNT source-mirror and ABI closure. |
-| Admission And Approval | S12 proved that the observed `50:3D` is the source-shaped terminal and identified publication as its suspected prerequisite.  The original `cmdconf.c → SHELL= → sysconf.asm:commnd` route is now source-proven; ordinary queue progress authorizes this bounded recovery without a Bochs or host-system change. |
-| Objective | Reuse the original COMMAND configuration producer so an admitted source-built `COMMAND.COM` pathname becomes the guest's original `SHELL=` executable token, with the exact `commnd` capacity and grammar enforced rather than adding a virtual drive or guest-byte patch. |
-| Non-goals | No virtual boot volume, host-drive policy change, guest-byte mutation, synthetic EXEC/PSP/parent-return, extra device, bx-core/bx-mantle change, or alternate filesystem mapping. |
-| Reference Baseline | S12 disposition; OpenNT `cmdconf.c`, `sysconf.asm:trys/storeshell`, `sysinit2.asm:commnd`, `sysinit1.asm:ConfigDone/comerr`; Direct COMMAND native-session and source-built S11 observation. |
-| Files And ABI Surface | `cmdconf.c` retains its original filtering/order and only receives a bounded bootstrap-path source; the bx-vdm session/startup seam passes one OEM path (maximum 63 characters plus NUL) and rejects a literal space because `sysconf.asm` has no quoting grammar. |
+| Identifier Mode | `M0 T245 S14`, Ordinary Mode, single-person dual-role source/ABI observation and guest-owner classification. |
+| Admission And Approval | Closed S13 now proves the original `cmdconf.c → SHELL= → sysconf.asm:commnd` source route is emitted and formally linked, yet the one native run still reaches typed `50:3D`.  The active T245 guest-EXEC package owns the next bounded observation. |
+| Objective | Establish whether the source-built `SHELL=` token reaches guest `commnd` and owner-classify the original NTDOS terminal path without changing guest execution or treating the terminal as a BOP defect. |
+| Non-goals | No virtual boot volume, host-drive policy change, guest-byte mutation, synthetic EXEC/PSP/parent-return, extra device, bx-core/bx-mantle change, alternate filesystem mapping, or new BOP behavior. |
+| Reference Baseline | S1 guest EXEC source map, S11 accepted `5E`, S12 terminal attribution, S13 formal `SHELL=` producer and unchanged native terminal, plus existing T225 guest lifecycle observations. |
+| Files And ABI Surface | Default-off bx-vdm observation only if source/map evidence identifies one existing checked RAM read point. Any record is copied, fixed-width and selector-neutral; original NTDOS `commnd`, path parsing and `EXEC` remain guest-owned. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, Direct host-path semantics, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Focused `cmdconf` fixture must prove source `SHELL=` production, no truncation, and rejection of overlong/space-containing paths. Formal Ninja must link both fixture and native executable. One bounded source-built native observation records whether the existing `50:3D` terminal advances; an unchanged terminal is a valid diagnostic result, not a passing continuity claim. |
-| Expected Markers | The generated configuration contains `shell=<admitted path> /p` plus original optional arguments. The native run either advances beyond the old terminal or records the remaining guest EXEC/path-resolution predecessor with no fabricated result. |
+| Verification | First complete the source/loaded-image address map for `commnd`, `sysinit1` command launch and nearest observable BOP/interrupt boundary. Then build one focused observation fixture and make one bounded source-built native run only if the observation remains checked, passive and ABI-neutral. |
+| Expected Markers | Evidence distinguishes whether `SHELL` reached `commnd`, and identifies whether the retained terminal is a guest-owned original path rather than an adapter or machine terminal. |
 | Asset Needs | Existing OpenNT tree, current bx-vdm source, retained S11 native observation and source-built artifacts; no new source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record the original producer/consumer route, exact session seam, focused and native result, and the remaining owner if guest EXEC still cannot reach a host file. Do not claim guest EXEC reachability unless observed. |
-| Stop Conditions | Recovery would require a guest-byte patch, implicit root-to-C mapping, virtual boot-volume policy, host C: mutation, fabricated BOP result, or Bochs change. Stop and transfer that design work. |
-| Exit Criteria | The original path is generated through the current native session, all grammar/capacity failures are explicit, formal sources link, and native observation is classified without treating `50:3D` as a BOP implementation defect. |
+| Reporting Requirements | Record exact source and loaded-image identity, observation surface, focused/native result, and named owner of any next failure. Do not claim guest EXEC reachability unless observed. |
+| Stop Conditions | The only possible observation would require arbitrary guest-memory scanning, a guest-byte patch, an implicit root-to-C mapping, virtual boot-volume policy, host C: mutation, fabricated BOP result, or a Bochs change. Stop and retain the source-only map. |
+| Exit Criteria | The `commnd` handoff is directly observed or its absence is source/ABI-proven; the terminal's immediate guest owner is classified; no machine or host behavior changes. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
-| Similar-Issue Sweep | COMMAND `54:0C`, Direct guest path resolution, guest `INT 21h/AH=4Bh`, PSP/arena/JFN/environment/parent return, and host-drive admission; no BOP selector or Bochs surface enters this S. |
+| Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S14 closes the passive source-mapped `commnd` observation.  A formal
+fixture and one source-built native Direct run prove the original S13
+`SHELL=` value reaches guest `sysinit2.asm:commnd` before accepted `5E`;
+the retained `50:3D` maps to `sysinit1.asm:comerr → stall`.  The observation
+does not distinguish the original pre-EXEC open-error and EXEC-error incoming
+branches, so that later guest interrupt/error classification remains separate;
+see [S14 evidence](etc/evidence/m0-t245-s14-command-bootstrap-observation-001.md).
+
+M0 T245 S13 closes source-built `COMMAND.COM` publication through the original
+`cmdconf.c → SHELL= → sysconf.asm:commnd` route. Its formal source-mirror
+fixture passes bounds/grammar cases and the full native graph links. The one
+native run remains at the pre-existing `5E → 50:3D` source terminal, so it
+transfers only the guest `commnd`/`INT 21h` predecessor observation to S14;
+see [S13 evidence](etc/evidence/m0-t245-s13-command-bootstrap-shell-recovery-001.md).
 
 M0 T245 S12 closes the bootstrap-path attribution only: the original
 `50:3D` `demExitVDM` route is a typed source terminal following accepted `5E`,
