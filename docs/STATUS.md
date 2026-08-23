@@ -2,34 +2,46 @@
 
 ## Current Work
 
-**Active: M0 T242 S3 (paused at stop condition)** — source-proven guest EXEC
-prerequisite recovery has reached a distinct BOP-5F keyboard/IVT machine owner.
+**Active: M0 T244 S1** — PC keyboard/IVT BOP-5F machine-composition source,
+ABI, lifecycle and failure audit.
 
 ## Active Packet
 
-### M0 T242 S3 — source-proven guest EXEC prerequisite recovery
+### M0 T244 S1 — PC keyboard/IVT BOP-5F machine-composition audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T242 S3`, Ordinary Mode, single-person dual-role guest EXEC recovery. |
-| Admission And Approval | S1 source/ABI audit and S2 native classification admit only source-proven prerequisites on the local `AL=0` path; no host-side DOS process model. |
-| Objective | Recover the local source-built DOS-binary load/child/exit path by composing original guest code with individually proven machine or existing DEM prerequisites. |
-| Non-goals | No adapter DOS-process emulator, COMMAND broker rewrite, blanket device enablement, or Bochs/mantle business semantics. |
-| Reference Baseline | T242 S1/S2 evidence, recovery plan, `BOP-DEPENDENCY-092..104`, and staged source-built guest assets. |
-| Files And ABI Surface | Original guest bytes; existing fixed-width result/RAM/lifecycle boundaries; direct imported DEM/SoftPC source only. |
-| Applicable Rules | Source-first recovery, guest-owner boundary, queue order, no trace-driven scope growth and MTSP governance. |
-| Verification | Formal Ninja focused fixtures and bounded source-built observations after coherent source groups. |
-| Expected Markers | Guest retains all DOS mutations; machine remains selector-blind; each residual has a named owner disposition. |
-| Asset Needs | Existing OpenNT tree and staged source-built guest artifacts; no new import or host mutation. |
-| Reporting Requirements | Exact source edge, ABI/failure difference, fixture result, native observation and owner-bounded transfer. |
-| Stop Conditions | A prerequisite requires an undeclared broad device/product shell or belongs to a different owner package. **Reached:** `BOP-TOP-5F` keyboard/IVT composition. |
-| Exit Criteria | Original `$Exec`, `$CREATE_PROCESS_DATA_BLOCK`, `$Exit/$Abort` execute in guest ownership, or every residual is classified and transferred by owner. The current governance mechanism requires a successor admission before numeric-T closure; this S is paused pending that decision. |
-| Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation. |
-| Similar-Issue Sweep | `INT 21h AH=4B`, PSP/arena/JFN/environment/return, BIOS `12/15`, reset BDA, FastRead and NTIO keyboard/IVT initialization. |
-| Exit Status | P1 restores `15/AH=88h`; P2 restores selected x86 `50:42` via imported `demRead`; P3 proves 100,000 ticks remain in original NTIO CONFIG parsing, then reaches `5F/AX=BEEF` at 1,000,000 ticks. `5F` is classified and queued as a separate machine package. See [P1](etc/evidence/m0-t242-s3-int15-ems-source-mirror-001.md), [P2](etc/evidence/m0-t242-s3-fastread-source-recovery-001.md), and [P3](etc/evidence/m0-t242-s3-ntio-config-and-keyboard-transfer-001.md). |
-| Next Admission | Owner selection of queue candidate 1: PC keyboard/IVT BOP-5F machine composition. |
+| Identifier Mode | `M0 T244 S1`, Ordinary Mode, single-person dual-role source/ABI audit. |
+| Admission And Approval | Owner's standing queue authorization selects former queue candidate 1. This S performs no device enablement or Bochs modification. |
+| Objective | Freeze the complete original `spckbd` / `MS_bop_F` / `kb_setup_vectors` keyboard and IVT lifecycle: table fields, device owners, interrupt/timer/PIC relationships, lifecycle ordering, viable source reuse and negative boundary. |
+| Non-goals | No implementation, no feature enablement, no BOP/DOS/OpenNT term in bx-core/bx-mantle, no unregistered Bochs intrusion, and no trace-led selector patch. |
+| Reference Baseline | `BOP-DEPENDENCY-104`, `BOP-TOP-5F`, [T243 closure](history/m0-t243-closure-20260822.md), and the machine owner-package proposal. |
+| Files And ABI Surface | Audit documents and tracker only; source inspection may cover OpenNT SoftPC keyboard, BIOS, PIC/timer and existing selector-blind mantle seams. |
+| Applicable Rules | Source-first recovery, selector-blind machine boundary, feature deny-by-default, checked guest-memory transport, exception registration, and MTSP governance. |
+| Verification | Cross-check every intended field/effect against original source, current source and tracker; validate documentation governance. No native trace is an implementation selector. |
+| Expected Markers | A bounded component graph names the native owner of each effect and distinguishes reusable original code, small shims, required registered invasions, and explicitly unavailable paths. |
+| Asset Needs | Existing OpenNT/Bochs sources and current local build manifests only; no new external source or host mutation. |
+| Reporting Requirements | Publish source/ABI/failure ledger, tracker updates, reusable-versus-product-shell classification and S2 admission recommendation. |
+| Stop Conditions | Any evidence that the requested result requires a new unrelated device, unbounded Bochs product shell, or a missing source identity; record and transfer rather than infer. |
+| Exit Criteria | The full lifecycle and failure map supports one bounded S2 implementation plan with exact owner boundaries and no silent feature admission. |
+| Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
+| Similar-Issue Sweep | T243 headless subset, BOP 5C/5D, INT15 keyboard hooks, PIC/IRQ/timer lifecycle, monitor iret table and existing mantle port-space/device seams. |
+| Exit Status | T243 has closed; T244 S1 is active. |
+| Next Admission | S2 only after S1 freezes an owner-specific, selector-blind implementation slice and any necessary Bochs exception is registered. |
 
 ## Latest Closure
+
+M0 T243 closes the source-shaped, headless `STREAM_IO=2` BOP-5F sub-contract:
+the `AX=BEEF` table guard and original `useHostInt10` publication now reach the
+source-built path, then resume with CF to the original NTIO branch. Physical
+keyboard/IVT/PIC/timer behavior remains explicitly transferred to M0 T244;
+see the [T243 closure](history/m0-t243-closure-20260822.md).
+
+M0 T242 closes the local guest EXEC prerequisite recovery: original
+`INT 15h AH=88h` and x86 `50:42` fast-read source groups are composed and
+observed, while the reached `5F/AX=BEEF` handoff is transferred intact to the
+now-active keyboard/IVT machine package. See the
+[T242 closure](history/m0-t242-closure-20260822.md).
 
 M0 T241 closes the XMS `52:09` IVT-watch dependency: the direct
 `UpdateKbdInt15` fragment now preserves original compare/clear/update order

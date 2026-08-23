@@ -1,4 +1,5 @@
 #include "dem_v2_startup_composition.h"
+#include "spckbd_handoff_v2_generic_ud_bridge.h"
 
 #include "shim/demmisc_shim.h"
 #include "byob_image.h"
@@ -97,6 +98,7 @@ void bx_ntvdm_dem_v2_startup_reset(void)
     byob_image_release(&runtime.command);
     byob_image_release(&runtime.target);
     bx_ntvdm_initial_state_v1_clear(&runtime.initial_state);
+    bx_ntvdm_spckbd_handoff_v2_display_state_reset();
     memset(&runtime, 0, sizeof(runtime));
     free(pszDefaultDOSDirectory);
     pszDefaultDOSDirectory = NULL;
@@ -127,6 +129,7 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
          selection.target_placement.drive_index = 2u,
          selection.declared_targets[0].component = selection.target,
          selection.declared_targets[0].placement = selection.target_placement,
+         selection.guest_display_state = BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1,
          selection.machine_startup_plan_enabled = 1u,
          selection.machine_startup_entry_ntio_v0 = 1u, 0) ||
         byob_image_load_named(root, L"NTIO.SYS", &runtime.ntio) != BYOB_IMAGE_OK ||
@@ -146,6 +149,8 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
         return 0;
     }
     runtime.installed = 1;
+    bx_ntvdm_spckbd_handoff_v2_display_state_set(
+        (uint8_t)selection.guest_display_state);
     return 1;
 }
 

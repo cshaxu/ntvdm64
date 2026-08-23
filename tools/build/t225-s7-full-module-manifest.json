@@ -187,10 +187,13 @@
         "src/bx-vdm/bop/opennt/softpc/mem_size.c",
         "src/bx-vdm/bop/opennt/softpc/tape_io.c",
         "src/bx-vdm/bop/opennt/softpc/update_kbd_int15.c",
+        "src/bx-vdm/bop/opennt/softpc/spckbd_handoff.c",
         "src/bx-vdm/bop/shim/softpc_memory_size_shim.c",
         "src/bx-vdm/bop/shim/softpc_tape_io_shim.c",
+        "src/bx-vdm/bop/shim/spckbd_handoff_shim.c",
         "src/bx-vdm/bop/softpc_memory_size_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/softpc_tape_io_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/spckbd_handoff_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/opennt/xms/xms.c",
         "src/bx-vdm/bop/opennt/xms/suballoc.c",
         "src/bx-vdm/bop/opennt/xms/xmsa20.c",
@@ -1004,6 +1007,14 @@
     {
       "name": "t242-s3-softpc-tape-io-fixture",
       "source": "tests/bx-vdm/t242_s3_softpc_tape_io_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t243-s2-spckbd-handoff-fixture",
+      "source": "tests/bx-vdm/t243_s2_spckbd_handoff_fixture.c",
       "libraries": [
         "bx-vdm"
       ],
