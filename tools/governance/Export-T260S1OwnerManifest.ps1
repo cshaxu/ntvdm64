@@ -121,6 +121,15 @@ foreach ($toolPath in @($ManifestPath, 'tools/build/New-T225S7FullNinjaGraph.ps1
     Add-Row $toolPath 'build-input' 'build-tool' 'tools/build' 'project-authored build tool' 'retain/update-paths' 'S8' 'formal build graph input'
 }
 
+foreach ($guestRoot in @('src/opennt/base/mvdm/dos', 'src/opennt/base/mvdm/wow16')) {
+    $guestFullPath = Join-Path $root $guestRoot
+    if (-not (Test-Path -LiteralPath $guestFullPath)) { continue }
+    Get-ChildItem -LiteralPath $guestFullPath -Recurse -File | ForEach-Object {
+        $relativePath = $_.FullName.Substring($root.Length).TrimStart('\').Replace('\', '/')
+        Add-Row $relativePath 'guest-source-candidate' 'OpenNT guest import' 'opennt-guest' 'imported OpenNT guest source/input' 'git mv or retain-as-guest-artifact-input' 'S4' 'S4 identifies source-built closure membership versus retained source evidence'
+    }
+}
+
 $header = 'path', 'kind', 'current_owner', 'target_owner', 'provenance', 'disposition', 'planned_s', 'reason' -join "`t"
 
 $body = $rows |

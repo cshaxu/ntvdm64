@@ -13,7 +13,7 @@ module manifest, `tools/build/t225-s7-full-module-manifest.json`, and records
 every declared module source, fixture source, executable source, include root,
 and generator input.
 
-The first run contains 386 unique rows:
+The current generated baseline contains 1,004 unique rows:
 
 | Kind | Count | S1 disposition |
 | --- | ---: | --- |
@@ -22,11 +22,12 @@ The first run contains 386 unique rows:
 | Executable target source | 1 | `app`, S4. |
 | Include root | 14 | `HEADER-CLASSIFY`; S1 must replace roots with the reached header closure. |
 | Build input | 2 | Retain under `tools/build`; update paths in S8. |
+| DOS/WOW guest source candidate | 618 | `opennt-guest`; S4 must distinguish source-build membership from retained guest-source evidence. |
 
 The first classified source distribution is: `bx-core` 122, `bx-mantle` 8,
 `adapter-softpc` 58, `adapter-win32` 1, `opennt-bop` 60, `opennt-host` 27,
-and `app` 16. These are provisional only where a row says `review/split` or
-where the target is a classification marker.
+`opennt-guest` 618, and `app` 16. These are provisional only where a row says
+`review/split` or where the target is a classification marker.
 
 ## Remaining S1 work
 
