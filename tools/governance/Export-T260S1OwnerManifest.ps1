@@ -63,8 +63,11 @@ function Get-SourceDisposition([string]$Path, [string]$CurrentModule) {
     if ($p -like 'src/opennt/local/compat/host/*') {
         return @('opennt-host', 'OpenNT host capability/source-derived host component', 'git mv', 'S6', 'host capability owner')
     }
-    if ($p -like 'src/opennt/base/mvdm/dos/*' -or $p -like 'src/opennt/base/mvdm/wow16/*') {
+    if ($p -like 'src/opennt/base/mvdm/dos/v86/*' -or $p -like 'src/opennt/base/mvdm/wow16/*') {
         return @('opennt-guest', 'imported OpenNT guest source', 'git mv', 'S4', 'guest DOS/WOW source or build input')
+    }
+    if ($p -like 'src/opennt/base/mvdm/dos/dem/*' -or $p -like 'src/opennt/base/mvdm/dos/command/*' -or $p -like 'src/opennt/base/mvdm/xms.486/*' -or $p -like 'src/opennt/base/mvdm/dpmi*/*') {
+        return @('opennt-bop', 'imported OpenNT BOP/provider mirror', 'git mv', 'S5', 'host BOP dispatcher/provider source; never guest image input')
     }
     if ($p -like 'src/bx-mantle/*') {
         $name = [System.IO.Path]::GetFileName($p)
@@ -182,7 +185,7 @@ foreach ($toolPath in @($ManifestPath, 'tools/build/New-T225S7FullNinjaGraph.ps1
     Add-Row $toolPath 'build-input' 'build-tool' 'tools/build' 'project-authored build tool' 'retain/update-paths' 'S8' 'formal build graph input'
 }
 
-foreach ($guestRoot in @('src/opennt/base/mvdm/dos', 'src/opennt/base/mvdm/wow16')) {
+foreach ($guestRoot in @('src/opennt-guest/dos-v86', 'src/opennt-guest/wow16')) {
     $guestFullPath = Join-Path $root $guestRoot
     if (-not (Test-Path -LiteralPath $guestFullPath)) { continue }
     Get-ChildItem -LiteralPath $guestFullPath -Recurse -File | ForEach-Object {
@@ -222,11 +225,15 @@ foreach ($legacyRoot in @('src/bx-core', 'src/bx-mantle', 'src/bx-vdm', 'src/cli
     Get-ChildItem -LiteralPath $legacyFullPath -Recurse -File | ForEach-Object {
         $relativePath = $_.FullName.Substring($root.Length).TrimStart('\').Replace('\', '/')
         if ($representedPaths.ContainsKey($relativePath)) { return }
+        $d = Get-SourceDisposition $relativePath ''
+        if ($relativePath -like 'src/opennt/*' -and $d[0] -ne 'UNCLASSIFIED') {
+            Add-Row $relativePath 'nonformal-legacy-input' 'OpenNT source import' $d[0] $d[1] $d[2] $d[3] ($d[4] + '; not present in formal module graph')
+            return
+        }
         if ($relativePath -like 'src/opennt/*') {
             Add-Row $relativePath 'nonformal-evidence-input' 'OpenNT source import' 'refs/opennt' 'unreached imported OpenNT source' 'git mv to evidence input' 'S8' 'not a declared product input; retain immutable source provenance outside src/'
             return
         }
-        $d = Get-SourceDisposition $relativePath ''
         Add-Row $relativePath 'nonformal-legacy-input' 'legacy source tree' $d[0] $d[1] $d[2] $d[3] ($d[4] + '; not present in formal module graph')
     }
 }

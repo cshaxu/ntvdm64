@@ -2,28 +2,28 @@
 
 ## Current Work
 
-**Active: M0 T260 S3** — eight-component source-layout reorganization and
+**Active: M0 T260 S4** — eight-component source-layout reorganization and
 build closure.
 
 ## Active Packet
 
-### M0 T260 S3 — bx-core confirmation and bx-mantle purification
+### M0 T260 S4 — app and OpenNT guest migration
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T260 S3`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | S1 owner map and S2 roots are closed. Owner requires `bx-mantle` to remain pure Bochs and all external semantics to leave for their uniquely mapped owner. |
-| Objective | Verify `bx-core` provenance/exception records and split the current mantle so only Bochs-native assembly remains; move foreign VDM/OpenNT/DOS/WOW/Win32 mechanics to `adapter-softpc` as classified by S1. |
-| Non-goals | No Bochs algorithm change; no BOP/provider implementation; no Win32 capability recovery; no change to source-visible historical semantics; no formal Ninja switch until S8. |
-| Reference Baseline | S1 manifest, `bx-core/README.md`, `bx-mantle/README.md`, existing Bochs intrusion register, current formal module closure and architecture boundary. |
-| Files And ABI Surface | `src/bx-core`, `src/bx-mantle`, `src/adapter-softpc`; their README exception records and mantle-to-adapter include dependencies. |
-| Applicable Rules | bx-core minimal intrusion register; bx-mantle contains no OpenNT/DOS/VDM/WOW/Win32 semantics; adapter-softpc preserves same-shaped SoftPC/CCPU mechanical interfaces. |
-| Verification | File/content owner scan; `git diff --check`; focused compile/fixture inventory only after the moved headers are repaired; documentation governance verification. |
-| Expected Markers | Every retained mantle file is Bochs-only; every moved file retains Git history and has an adapter-softpc owner; bx-core exception inventory is reconciled. |
-| Asset Needs | S1 manifest, current Bochs source and exception ledger, formal module manifest and existing mantle fixtures. |
-| Reporting Requirements | Record retained/moved/removed disposition per mantle file and every inherited bx-core exception, with no semantic claim beyond the move. |
-| Stop Conditions | A candidate mantle file contains inseparable Bochs plus external semantics, requires a Bochs algorithm edit, or introduces an adapter→app/BOP reverse dependency. Pause for a targeted split decision. |
-| Exit Criteria | Mantle scan has no external semantic ownership; core exception register is complete; moved files live under adapter-softpc with repaired includes; source-only/focused verification proves the new boundary. |
+| Identifier Mode | `M0 T260 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S1--S3 are closed. The owner requires original guest content to remain guest-owned and requires OpenNT DEM/COMMAND host provider sources not to be misclassified as guest files. |
+| Objective | Move the product CLI/composition sources into `app`; move intact DOS V86 and WOW16 source/build inputs into `opennt-guest`; correct the owner-manifest distinction between guest input and future OpenNT BOP provider mirrors. |
+| Non-goals | No guest source modification or rebuild; no BOP/provider implementation; no host-capability recovery; no formal Ninja switch until S8. |
+| Reference Baseline | S1 manifest, `app/README.md`, `opennt-guest/README.md`, source policy, guest artifact inventory and current formal module closure. |
+| Files And ABI Surface | `src/cli`, `src/app`, `src/opennt/base/mvdm/dos/v86`, `src/opennt/base/mvdm/wow16`, `src/opennt-guest`, manifest generator and source references. |
+| Applicable Rules | Prebuilt OpenNT guest artifacts remain default; source trees retain original content and are not host libraries; `app` is composition-only. |
+| Verification | Git-rename/content identity scan; guest/source-owner classification scan; `git diff --check`; documentation governance verification. |
+| Expected Markers | No live `src/cli`; intact DOS V86/WOW16 source under `opennt-guest`; DEM/COMMAND are marked `opennt-bop`, not guest; no formal build closure claim before S8. |
+| Asset Needs | Original OpenNT source trees, guest artifact/source inventory, S1 manifest and formal module manifest. |
+| Reporting Requirements | Record exact moved source roots, zero guest modifications, retained prebuilt-artifact policy and the host-provider classification correction. |
+| Stop Conditions | A candidate source is both an in-process host provider and a guest build input, an artifact/source provenance mismatch is found, or the move would modify source text. Pause for a targeted ownership decision. |
+| Exit Criteria | CLI/app and guest roots have a unique owner, guest imports are byte-preserving moves, no DEM/COMMAND source is listed as a guest input, and the live manifest/docs verify the disposition. |
 | Original Owner Request | “应使用 1 个 T 任务，例如：M0 T260：七/八组件源码布局重整与构建闭合……这个 T 应拆成约 8 个 S。” |
 | Similar-Issue Sweep | Headers, fixtures, generated Ninja input, include roots, legacy v1/test-only code, OpenNT source provenance and the shared mapping-manager placement. |
 
@@ -58,6 +58,14 @@ made the remaining mantle source scan free of external product semantics.
 The local bx-core exception index now points to every active exception family.
 The one coherent formal Ninja/fixture path switch remains S8 work; see the
 [S3 evidence](etc/evidence/m0-t260-s3-mantle-purification-001.md).
+
+S4 has moved the 24 former `src/cli` implementation files into `app` and 579
+original DOS V86/WOW16 source files into `opennt-guest`, all as 100% Git
+renames.  The live owner map now records 580 guest candidates with no
+DEM/COMMAND entry and separately classifies 38 DEM/COMMAND source inputs for
+future `opennt-bop` migration.  Formal Ninja paths remain intentionally
+unchanged until S8; see the
+[S4 evidence](etc/evidence/m0-t260-s4-app-guest-migration-001.md).
 
 ## Previous Active Packet — M0 T259
 

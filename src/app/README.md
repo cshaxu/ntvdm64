@@ -4,6 +4,12 @@
 and final composition of the selected guest, BOP, host, adapter and Bochs
 components.
 
+The former `src/cli` C sources are this component's implementation.  They own
+argument parsing, validated configuration/profile admission, image identity,
+child-engine launch environment, cancellation, exit status and diagnostics.
+They must not implement guest DOS/BOP semantics or manipulate Bochs CPU/RAM
+objects directly.
+
 It may compose `opennt-guest`, `opennt-bop`, `opennt-host`, `adapter-win32` and
 `adapter-softpc`, but does not implement their semantics. Its final executable
 target is `ntdos64-native`; no component may import `app`.
