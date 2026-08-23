@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S3** — Non-paged protected range action implementation.
+**Active: M0 T256 S4** — Guest-linear mapping identity source/ABI map.
 
 ## Active Packet
 
-### M0 T256 S3 — Non-paged protected range action implementation
+### M0 T256 S4 — Guest-linear mapping identity source/ABI map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S3`, Ordinary Mode, single-person dual-role project-owned mantle implementation. |
-| Admission And Approval | S2 selects only the no-paging ordinary-RAM subprofile and registers `BX-MANTLE-095` before code. No adopted Bochs or OpenNT source change is admitted. |
-| Objective | Implement and test the fixed-width, all-or-nothing non-paged protected segment range action through existing native checks and copied RAM primitives. |
-| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, LDT policy, guest-linear allocator, raw pointer/object, trace-driven patch, or unregistered intrusion. |
-| Reference Baseline | [T256 S1 map](etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md), [T256 S2 design](etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md), `BX-MANTLE-095`, and live [BOP tracker](etc/bop-list.md). |
-| Files And ABI Surface | New project-owned mantle range-action record/source and focused fixture; existing native CPU/memory methods only. |
+| Identifier Mode | `M0 T256 S4`, Ordinary Mode, single-person dual-role source/ABI mapping. |
+| Admission And Approval | S3 is closed by the formal [range-action evidence](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md). S4 is analysis only; no provider or adopted-code change is admitted. |
+| Objective | Map the original DPMI guest-linear allocation/mapping identity and determine the smallest selector-blind, source-shaped prerequisite still needed before any `53:xx` source body can enter. |
+| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, LDT policy implementation, raw pointer/object, trace-driven patch, or unregistered intrusion. |
+| Reference Baseline | [T256 S1 map](etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md), [T256 S2 design](etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md), [T256 S3 closure](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md), and live [BOP tracker](etc/bop-list.md). |
+| Files And ABI Surface | Evidence and tracker only unless a later approved S records a new selector-blind ABI. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Formal Ninja build and fixture: inactive/real/paged/malformed/limit/A20/handler rejection, ordinary read/write, cross-page all-or-nothing write, and source-boundary scan. |
-| Expected Markers | Versioned fixed-width record, no-fault typed rejection, copied-only read result, and retained no-paging disposition. |
-| Asset Needs | Existing formal Ninja manifest, minimal machine lifecycle, closed context fixture/seam and T256 S2 design. |
-| Reporting Requirements | Distinguish generic access mechanics from DPMI/LDT allocation policy; record every remaining original dependency before code admission. |
+| Verification | Source call/representation map, owner classification, and an explicit admission/defer decision. |
+| Expected Markers | Exact OpenNT mapping identities, current missing representation, and a bounded candidate seam or a documented defer. |
+| Asset Needs | Closed context and range-action substrate, original `dpmi32` sources, formal Ninja manifest and tracker. |
+| Reporting Requirements | Distinguish copied access from mapping identity; do not imply the S3 action supplies a host pointer or a DPMI allocator. |
 | Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | The narrow action is source-built and fully regression-tested; paged access/mapping identity remain explicitly transferred rather than silently emulated. |
+| Exit Criteria | The remaining mapping identity is source-mapped and either prospectively admitted or explicitly transferred without a hidden provider shortcut. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 

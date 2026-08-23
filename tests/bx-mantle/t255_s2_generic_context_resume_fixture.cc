@@ -1,6 +1,9 @@
 #include "bochs.h"
+#include "bx-core/cpu/cpu.h"
+#include "bx-mantle/bx_ntvdm_a20_capability_v1.h"
 #include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
 #include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
+#include "bx-mantle/bx_ntvdm_protected_range_action_v1.h"
 
 #include <string.h>
 
@@ -30,8 +33,8 @@ static int begin_stage(const uint8_t *code, uint32_t code_bytes)
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
-    0xff, 0xff, 0x00, 0x00, 0x00, 0x9a, 0x00, 0x00,
-    0xff, 0xff, 0x00, 0x00, 0x00, 0x92, 0x00, 0x00
+    0xff, 0xff, 0x00, 0x00, 0x00, 0x9a, 0xcf, 0x00,
+    0xff, 0xff, 0x00, 0x00, 0x00, 0x92, 0xcf, 0x00
   };
   struct bx_ntvdm_machine_stage_v1_request request;
   struct bx_ntvdm_machine_stage_v1_entry entry;
@@ -101,17 +104,92 @@ static int configure_context(uint32_t expected_mode, uint32_t target_mode,
   return bx_ntvdm_mantle_generic_ud_context_fixture_v2_configure(&fixture);
 }
 
+static int set_a20(uint32_t enabled)
+{
+  struct bx_ntvdm_a20_capability_request_v1 request;
+  struct bx_ntvdm_a20_capability_result_v1 result;
+  request.version = BX_NTVDM_A20_CAPABILITY_V1_VERSION;
+  request.operation = BX_NTVDM_A20_CAPABILITY_SET;
+  request.requested_enabled = enabled;
+  bx_ntvdm_a20_capability_v1_dispatch(&request, &result);
+  return result.status == BX_NTVDM_A20_CAPABILITY_OK && result.enabled == enabled;
+}
+
 static int test_real_to_protected(void)
 {
   static const uint8_t code[] = { 0x0f, 0x01, 0x16, 0x00, 0x08, 0x0f, 0x0b };
   static const uint8_t target[] = { 0x0f, 0x0b };
+  static const uint8_t source[] = { 0x12, 0x34, 0x56, 0x78 };
+  static const uint8_t replacement[] = { 0x87, 0x65, 0x43, 0x21 };
+  uint8_t observed[sizeof(replacement)];
+  uint8_t edge_before[2] = { 0x31, 0x42 };
+  uint8_t edge_after[2];
+  struct bx_ntvdm_protected_range_action_v1 action;
   if (!begin_stage(code, sizeof(code)) ||
       !bx_ntvdm_mantle_checked_ram_write_v1(0x900u, target, sizeof(target)) ||
+      !bx_ntvdm_mantle_checked_ram_write_v1(0xa00u, source, sizeof(source)) ||
+      !bx_ntvdm_mantle_checked_ram_write_v1(0x9fffeu, edge_before,
+        sizeof(edge_before)) ||
       !configure_context(1u, BX_NTVDM_GENERIC_UD_CONTEXT_PROTECTED,
         0x900u, 0x11223344u)) return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_READ;
+  action.segment = 3u; action.offset = 0xa00u; action.byte_count = sizeof(source);
+  if (bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_REJECTED_MODE) return 0;
   v1_calls = 0u;
   if (!execute_to_stop() || v1_calls != 1u || v1_execution_mode != 2u ||
       v1_eax != 0x11223344u) return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_READ;
+  action.segment = 3u; action.offset = 0xa00u; action.byte_count = sizeof(source);
+  if (bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_OK || memcmp(action.bytes, source, sizeof(source))) return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_WRITE;
+  action.segment = 3u; action.offset = 0xa10u; action.byte_count = sizeof(replacement);
+  memcpy(action.bytes, replacement, sizeof(replacement));
+  if (bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_OK ||
+      !bx_ntvdm_mantle_checked_ram_read_v1(0xa10u, observed, sizeof(observed)) ||
+      memcmp(observed, replacement, sizeof(observed))) return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_WRITE;
+  action.segment = 1u; action.offset = 0xa10u; action.byte_count = 1u;
+  if (bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_REJECTED_ACCESS) return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_READ;
+  action.segment = 6u; action.offset = 0xa00u; action.byte_count = 1u;
+  if (bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_REJECTED_INPUT) return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_READ;
+  action.segment = 3u; action.offset = 0x100000u; action.byte_count = 1u;
+  if (!set_a20(0u) || bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_REJECTED_MEMORY || !set_a20(1u))
+    return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_READ;
+  action.segment = 3u; action.offset = 0xa0000u; action.byte_count = 1u;
+  if (bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_REJECTED_MEMORY) return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_WRITE;
+  action.segment = 3u; action.offset = 0x9fffeu; action.byte_count = sizeof(replacement);
+  memcpy(action.bytes, replacement, sizeof(replacement));
+  if (bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_REJECTED_MEMORY ||
+      !bx_ntvdm_mantle_checked_ram_read_v1(0x9fffeu, edge_after,
+        sizeof(edge_after)) || memcmp(edge_after, edge_before, sizeof(edge_before)))
+    return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_READ;
+  action.segment = 3u; action.offset = 0xa00u; action.byte_count = 1u;
+  bx_cpu.SetCR0(bx_cpu.read_CR0() | 0x80000000u);
+  if (bx_ntvdm_mantle_execute_protected_range_action_v1(&action) !=
+      BX_NTVDM_PROTECTED_RANGE_ACTION_V1_REJECTED_MODE) return 0;
+  bx_cpu.SetCR0(bx_cpu.read_CR0() & ~0x80000000u);
   return bx_ntvdm_machine_stage_v1_reset() == BX_NTVDM_MACHINE_STAGE_V1_OK;
 }
 
@@ -138,16 +216,24 @@ static int test_protected_to_real(void)
 static int test_invalid_context_rejected(void)
 {
   struct bx_ntvdm_generic_ud_context_fixture_v2 fixture;
+  struct bx_ntvdm_protected_range_action_v1 action;
   bx_ntvdm_mantle_generic_ud_context_fixture_v2_clear(&fixture);
   fixture.expected_execution_mode = 1u;
   fixture.outcome.abi_version = BX_NTVDM_GENERIC_UD_OUTCOME_V2_VERSION;
   fixture.outcome.disposition = BX_NTVDM_GENERIC_UD_RESUME;
   fixture.outcome.context_mode = 3u;
-  return !bx_ntvdm_mantle_generic_ud_context_fixture_v2_configure(&fixture);
+  if (bx_ntvdm_mantle_generic_ud_context_fixture_v2_configure(&fixture)) return 0;
+  bx_ntvdm_protected_range_action_v1_clear(&action);
+  action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_READ;
+  action.segment = 3u; action.offset = 0u; action.byte_count = 1u;
+  return bx_ntvdm_mantle_execute_protected_range_action_v1(&action) ==
+    BX_NTVDM_PROTECTED_RANGE_ACTION_V1_REJECTED_LIFECYCLE;
 }
 
 int main(void)
 {
-  return test_invalid_context_rejected() && test_real_to_protected() &&
-    test_protected_to_real() ? 0 : 1;
+  if (!test_invalid_context_rejected()) return 1;
+  if (!test_real_to_protected()) return 2;
+  if (!test_protected_to_real()) return 3;
+  return 0;
 }

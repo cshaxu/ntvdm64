@@ -172,6 +172,7 @@
         "src/bx-mantle/bx_ntvdm_physical_write_observation_v1.cc",
         "src/bx-mantle/bx_ntvdm_headless_8042.cc",
         "src/bx-mantle/bx_ntvdm_port_action_v1.cc",
+        "src/bx-mantle/bx_ntvdm_protected_range_action_v1.cc",
         "src/bx-mantle/bx_ntvdm_minimal_machine.cc",
         "src/bx-mantle/bx_ntvdm_minimal_sim.cc",
         "src/bx-mantle/logio.cc",
