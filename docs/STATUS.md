@@ -2,16 +2,37 @@
 
 ## Current Work
 
-**No active numeric T.** M0 T246 is closed; the next candidate requires owner admission from `QUEUE.md`.
+**Active: M0 T246 S4** — SoftPC machine interrupt closure and owner-directed transfer.
 
 ## Active Packet
 
+### M0 T246 S4 — SoftPC machine interrupt closure and owner-directed transfer
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T246 S4`, Ordinary Mode, single-person dual-role closure review. |
+| Admission And Approval | S1–S3 are committed and pushed; S4 performs no new recovery and waits for owner selection of the next candidate before final T transition. |
+| Objective | Preserve the completed `02/06` package record, verify governance, and transfer only the later native-continuity fact without self-admitting a new numeric T. |
+| Non-goals | No new provider, Bochs change, trace-led patch, or automatic admission of a queue candidate. |
+| Reference Baseline | T246 S1 source map, S2 active-ingress evidence, S3 formal/native checkpoint and prepared T246 history. |
+| Files And ABI Surface | Status/history/tracker evidence only; no runtime ABI. |
+| Applicable Rules | Active-packet and owner-admission requirements in `docs/rules/EXECUTION.md`. |
+| Verification | Documentation governance, `git diff --check`, and clean worktree after the corrective P. |
+| Expected Markers | T246 remains the one valid active packet; a future numeric T is admitted only after owner selection. |
+| Asset Needs | No external asset. |
+| Reporting Requirements | Report closure evidence and the exact owner decision still required. |
+| Stop Conditions | Any attempt to start a queue candidate without explicit owner admission. |
+| Exit Criteria | The owner selects and admits the next candidate, at which point T246's prepared closure becomes final. |
+| Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
+| Similar-Issue Sweep | Status/Queue/Execution governance alignment and T246 source/provider/native evidence. |
+
 ## Latest Closure
 
-M0 T246 closes the shared SoftPC `02/06` machine interrupt package. Its
+M0 T246 S1–S3 close the shared SoftPC `02/06` machine interrupt package. Its
 adapter-only active route preserves the source-derived stack/PIC/BDA mechanics
 and records typed native resume before the distinct later `50:1E` owner. Later
-native continuity remains explicitly transferred; see the [T246 closure](history/m0-t246-closure-20260822.md).
+native continuity remains explicitly transferred. The prepared [T246 closure](history/m0-t246-closure-20260822.md)
+becomes final only when the owner admits the next queue candidate.
 
 M0 T246 S1 closes the `02/06` owner/ABI map. The repeated `06` is an active
 registry omission: the original shared operation stream, its named provider,
