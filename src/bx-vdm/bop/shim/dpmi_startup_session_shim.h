@@ -82,6 +82,9 @@ int bx_ntvdm_dpmi_startup_session_runtime_stage_selector_table(
 int bx_ntvdm_dpmi_startup_session_runtime_stage_dispatch(
   const bx_ntvdm_cpu_state_v1 *cpu_state, uint32_t index);
 int bx_ntvdm_dpmi_startup_session_runtime_take_dispatch(uint32_t *index);
+int bx_ntvdm_dpmi_startup_session_runtime_copy_cpu(
+  bx_ntvdm_cpu_state_v1 *cpu_state);
+void bx_ntvdm_dpmi_startup_session_runtime_set_ax(uint16_t value);
 void bx_ntvdm_dpmi_startup_session_runtime_advance_ip(uint32_t bytes);
 void bx_ntvdm_dpmi_startup_session_runtime_initialize_dosx(void);
 void bx_ntvdm_dpmi_startup_session_runtime_initialize_app(void);

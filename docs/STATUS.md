@@ -15,7 +15,7 @@
 | Objective | Exact-copy the admitted DOSX/DPMI startup/table source set, introduce only the named session and bounded guest-memory seams, and prove the original startup/table ordering without activating independent `53:xx` leaf services. |
 | Non-goals | No raw pointer/flat-address emulation, paging implementation, descriptor-cache copy, arbitrary CR0 setter, DPMI-aware mantle API, NT4 process-LDT/CCPU/VDM hook import, interrupt/fault ingress, or unregistered core change. |
 | Reference Baseline | T257 S1/S2 evidence, proposal, T254/T255/T256 evidence, DOSX `dx*.asm`, `dpmi32.c`, `dpmiselr.c`, `data.c`, `debug.c`, and `BOP-DEPENDENCY-117`. |
-| Files And ABI Surface | `src/bx-vdm/bop/opennt/dpmi/` exact source mirror, `dpmi_session_shim` and `dpmi_guest_memory_shim`; no bx-core/bx-mantle DPMI API. |
+| Files And ABI Surface | `src/bx-vdm/bop/opennt/dpmi/` exact source mirror, `dpmi_startup_session_shim`, `dpmi_startup_source_shim` and `dpmi_descriptor_source_shim`; no bx-core/bx-mantle DPMI API. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
 | Verification | Exact-copy identity check, a focused source-shaped startup/table fixture, formal build membership, and negative evidence that refused NT4 LDT imports cannot link. |
 | Expected Markers | No trace-led leaf plan, no BOP/DOS semantics in bx-core/bx-mantle, no invented adapter exception dispatcher, and every source divergence locally commented. |

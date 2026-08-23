@@ -223,7 +223,9 @@
         "src/bx-vdm/bop/shim/dpmi_xmem_record_adapter.c",
         "src/bx-vdm/bop/shim/dpmi_startup_session_shim.c",
         "src/bx-vdm/bop/shim/dpmi_startup_source_shim.c",
+        "src/bx-vdm/bop/shim/dpmi_descriptor_source_shim.c",
         "src/bx-vdm/bop/opennt/dpmi/dpmi32.c",
+        "src/bx-vdm/bop/opennt/dpmi/dpmiselr.c",
         "src/bx-vdm/bop/opennt/dem/demhndl.c",
         "src/bx-vdm/bop/opennt/dem/dem.c",
         "src/bx-vdm/bop/opennt/dem/demdata.c",
@@ -383,6 +385,12 @@
       "name": "t257-s3-native-guest-ldt-fixture",
       "source": "tests/bx-mantle/t257_s3_native_guest_ldt_fixture.cc",
       "libraries": ["bx-mantle", "bx-core"],
+      "platformLibraries": []
+    },
+    {
+      "name": "t257-s3-dpmi-descriptor-source-fixture",
+      "source": "tests/bx-vdm/t257_s3_dpmi_descriptor_source_fixture.c",
+      "libraries": ["bx-vdm"],
       "platformLibraries": []
     },
     {

@@ -160,6 +160,20 @@ int bx_ntvdm_dpmi_startup_session_runtime_take_dispatch(uint32_t *index)
   return 1;
 }
 
+int bx_ntvdm_dpmi_startup_session_runtime_copy_cpu(
+  bx_ntvdm_cpu_state_v1 *cpu_state)
+{
+  if (cpu_state == 0 || !bx_ntvdm_dpmi_startup_session_valid(&runtime_session) ||
+      !bx_ntvdm_cpu_state_v1_valid(&runtime_cpu)) return 0;
+  *cpu_state = runtime_cpu;
+  return 1;
+}
+
+void bx_ntvdm_dpmi_startup_session_runtime_set_ax(uint16_t value)
+{
+  runtime_cpu.eax = (runtime_cpu.eax & UINT32_C(0xffff0000)) | value;
+}
+
 void bx_ntvdm_dpmi_startup_session_runtime_advance_ip(uint32_t bytes)
 {
   runtime_cpu.eip += bytes;
