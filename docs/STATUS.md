@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T245 S4** — Headless mouse-vector owner-package map.
+**Active: M0 T245 S5** — Headless mouse-vector first-profile recovery.
 
 ## Active Packet
 
-### M0 T245 S4 — Headless mouse-vector owner-package map
+### M0 T245 S5 — Headless mouse-vector first-profile recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S4`, Ordinary Mode, single-person dual-role package source/ABI mapping. |
-| Admission And Approval | Closed S3 evidence identifies `C8` as the next complete owner package; mapping and ordinary queue work require no renewed approval. |
-| Objective | Map the complete OpenNT headless mouse-vector package reached through `BOP C8`: first/second host installer phases, guest table/IVT contract, native device edges and explicit unavailable behavior. |
-| Non-goals | No trace-led single-selector patch, host mouse/UI/input, IRQ/EOI, GUI, EMS expansion, COMMAND rewrite, or bx-core/bx-mantle semantic intrusion. |
-| Reference Baseline | [S3 closure](etc/evidence/m0-t245-s3-softpc-emm-unavailable-closure-001.md), [S4 map](etc/evidence/m0-t245-s4-headless-mouse-vector-package-map-001.md), `BOP-DEPENDENCY-108`, T243/T244 closures and retained C8 source evidence. |
-| Files And ABI Surface | Read-only source/ABI map and tracker/queue transfer only; no production provider in S4. |
+| Identifier Mode | `M0 T245 S5`, Ordinary Mode, single-person dual-role source-first owner-package recovery. |
+| Admission And Approval | Closed S4 package map establishes the complete first-profile C8/C9 boundary; ordinary queue work requires no renewed approval. |
+| Objective | Recover the original C8 table-to-INT33 vector handoff through a named bx-vdm source mirror/shim, retain C9's explicit no-route disposition, and verify no mouse device behavior is enabled. |
+| Non-goals | No host mouse/UI/input, IRQ/EOI, PIC mask changes, GUI, INT71, video, B8..BF runtime services, EMS expansion, COMMAND rewrite, or bx-core/bx-mantle semantic intrusion. |
+| Reference Baseline | [S4 map](etc/evidence/m0-t245-s4-headless-mouse-vector-package-map-001.md), `BOP-DEPENDENCY-108`, T243/T244 closures and retained C8 evidence. |
+| Files And ABI Surface | One source-shaped C8 mirror plus a fixed four-byte checked-read/atomic-IVT-write shim; no host pointer, handle, device object or new mantle ABI. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, fixed-width bridge, no trace-led work and MTSP governance. |
-| Verification | Source-map consistency check against guest caller, SoftPC dispatch and retained C8 evidence; no native trace or new runtime route. |
-| Expected Markers | One owner package, its required source files and dependency graph, and an explicit future-owner disposition for native machine and host-input concerns. |
+| Verification | Formal Ninja positive/negative C8/C9 fixture plus one finite source-built observation after the package, without a further implementation selected by that observation. |
+| Expected Markers | C8 copies exactly `CS:BX[0..3]` into IVT `33h`, resumes at `RIP+3`; C9 remains declined; no IRQ/input/UI/device marker exists. |
 | Asset Needs | Existing OpenNT NTOS/COMMAND mirrors, source-built DOS guest images and existing COMMAND child-lifecycle evidence; no new external source. |
 | Reporting Requirements | Record source path, guest layout/ordering, failure rule, source-recovery ladder and transfer owner for each unavailable prerequisite. |
-| Stop Conditions | Need to implement a route before mapping all installer phases, enable host input/UI/IRQ, modify a machine device, or infer source behavior from the trace. Record and transfer instead. |
-| Exit Criteria | The map identifies source ownership, source files, copied guest data, required machine seams and unavailable/device policy; the queued package can be admitted without rediscovering C8 from a trace. |
+| Stop Conditions | Need to extend beyond the first four table bytes, enable host input/UI/IRQ, modify a machine device, or infer new behavior from the trace. Record and transfer instead. |
+| Exit Criteria | C8 local and source-built regressions pass with exactly the mapped copy; C9/B8..BF/device edges remain explicitly unavailable/deferred; the next source-built predecessor is classified without a follow-on patch. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
 
