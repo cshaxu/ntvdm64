@@ -1,5 +1,7 @@
 #include "bochs.h"
+#include "bx-core/cpu/cpu.h"
 #include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
+#include "bx-mantle/pc_system.h"
 #include "bx-mantle/bx_ntvdm_instruction_history.h"
 #include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
 
@@ -10,6 +12,14 @@
 #endif
 
 static int stop_on_ud;
+static int untracked_stop_fired;
+
+static void untracked_stop(void *)
+{
+  untracked_stop_fired = 1;
+  bx_pc_system.kill_bochs_request = 1;
+  bx_cpu.async_event = 1;
+}
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *event,
@@ -73,13 +83,13 @@ int main()
   bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
   bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);
   bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_enable(0u);
-  if (!prepare(&request, loop, sizeof(loop)) ||
-      bx_ntvdm_machine_stage_v1_execute(&execution) !=
-        BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET ||
-      bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(&position) ||
-      bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(&history) ||
-      bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_copy(&transitions) ||
-      bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 1;
+  if (!prepare(&request, loop, sizeof(loop))) return 1;
+  if (bx_ntvdm_machine_stage_v1_execute(&execution) !=
+      BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_BUDGET) return 2;
+  if (bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(&position)) return 3;
+  if (bx_ntvdm_machine_stage_v1_terminal_history_observation_copy(&history)) return 4;
+  if (bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_copy(&transitions)) return 5;
+  if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 6;
 
   bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(1u);
   bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(1u);
@@ -120,6 +130,26 @@ int main()
       bx_ntvdm_machine_stage_v1_terminal_cs_transitions_observation_copy(&transitions) ||
       bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 3;
   stop_on_ud = 0;
+
+  /* This timer is intentionally outside the stage stop state.  It exercises
+   * the existing cpu_loop unexpected-return classification and proves that
+   * terminal-position observation copies only the final mechanical fact. */
+  {
+    int untracked_stop_timer;
+    untracked_stop_fired = 0;
+    if (!prepare(&request, loop, sizeof(loop)) ||
+        (untracked_stop_timer = bx_pc_system.register_timer_ticks(
+            &untracked_stop_fired, untracked_stop, 1u, 0, 1,
+            "fixture-untracked-stop")) <= 0 ||
+        bx_ntvdm_machine_stage_v1_execute(&execution) !=
+          BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_UNEXPECTED_LOOP_RETURN ||
+        !untracked_stop_fired ||
+        !bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(&position) ||
+        position.valid != 1u || position.cs != 0x70u || position.eip > 1u) return 9;
+    bx_pc_system.deactivate_timer((unsigned)untracked_stop_timer);
+    bx_pc_system.unregisterTimer((unsigned)untracked_stop_timer);
+    if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK) return 10;
+  }
 
   bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
   bx_ntvdm_machine_stage_v1_terminal_history_observation_enable(0u);

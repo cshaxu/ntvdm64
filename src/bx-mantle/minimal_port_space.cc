@@ -392,6 +392,18 @@ bx_bool bx_devices_c::unregister_io_write_handler(void *this_ptr, bx_write_handl
 }
 // BX-MANTLE-082-END
 
+// BX-IO-025: fixed-width mantle callers need to distinguish a native
+// registered device endpoint from the retained original default handler.
+// This query neither changes dispatch nor gives the caller an object pointer.
+bx_bool bx_devices_c::ntdos64_port_is_registered(Bit16u addr, bx_bool write) const
+{
+  if (write)
+    return write_port_to_handler != NULL &&
+      write_port_to_handler[addr] != &io_write_handlers;
+  return read_port_to_handler != NULL &&
+    read_port_to_handler[addr] != &io_read_handlers;
+}
+
 // BX-MANTLE-065-DISPATCH-BEGIN
 Bit32u BX_CPP_AttrRegparmN(2)
 bx_devices_c::inp(Bit16u addr, unsigned io_len)

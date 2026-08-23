@@ -534,10 +534,14 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
   bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
   bx_pc_system.deactivate_timer((unsigned) stop_timer);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
+  /* A terminal position is a selector-blind CPU fact.  Capture it for either
+   * finite watchdog expiry or the otherwise-classified cpu_loop return; this
+   * observation never changes the return disposition or CPU state. */
   if (bx_ntvdm_machine_stage_v1_terminal_position_enabled &&
-      stop_state.watchdog_fired && !stop_state.cancellation_fired &&
+      !stop_state.cancellation_fired &&
       !bx_ntvdm_mantle_first_fault_observation_observed() &&
-      !bx_ntvdm_mantle_generic_ud_stop_observed()) {
+      !bx_ntvdm_mantle_generic_ud_stop_observed() &&
+      !bx_ntvdm_mantle_generic_ud_pending_observed()) {
     bx_ntvdm_machine_stage_v1_terminal_position.cs =
       bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
     bx_ntvdm_machine_stage_v1_terminal_position.eip = bx_cpu.get_eip();

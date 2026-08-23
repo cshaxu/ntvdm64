@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T248 S3** — Selector-blind unexpected-return terminal observation recovery.
+**Active: M0 T248 S4** — Selector-blind post-EXEC final-position attribution and checkpoint reconciliation.
 
 ## Active Packet
 
-### M0 T248 S3 — Selector-blind unexpected-return terminal observation recovery
+### M0 T248 S4 — Selector-blind post-EXEC final-position attribution and checkpoint reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T248 S3`, Ordinary Mode, single-person dual-role selector-blind observation recovery. |
+| Identifier Mode | `M0 T248 S4`, Ordinary Mode, single-person dual-role final-position source attribution. |
 | Admission And Approval | Standing owner delegation selects the new queue-leading selector-blind continuity prerequisite discovered and tracked by completed T247; ordinary recovery work requires no repeated approval. |
-| Objective | Recover the smallest selector-blind terminal-position observation gap exposed by completed S2: copy the final CPU position for an enabled unexpected `cpu_loop()` return without changing its classification or execution semantics. |
+| Objective | Attribute the current source-built post-`50:36` final physical position (`CS:EIP=5859:78B0`, physical `0x5FE40`) to original guest/firmware or a selector-blind machine contract, then reconcile `BOP-DEPENDENCY-115`. |
 | Non-goals | No DEM/COMMAND/Redirector/WOW leaf patch, guest PDB/arena/JFN implementation, BOP selector interpretation in bx-core/bx-mantle, device enablement, or unsupported continuity claim. |
-| Reference Baseline | Completed [T248 S1 map](etc/evidence/m0-t248-s1-post-exec-realmode-continuity-owner-map-001.md), completed [T248 S2 replay](etc/evidence/m0-t248-s2-post-exec-interrupt-replay-001.md), T247 source-built `50:36` checkpoint and active finite mantle contract. |
-| Files And ABI Surface | Existing bx-mantle terminal-position observation implementation and focused fixture; no service ABI, CPU result, device, or Bochs semantic change. |
+| Reference Baseline | Completed T248 S1/S2 maps and [S3 terminal/lifecycle recovery](etc/evidence/m0-t248-s3-terminal-position-lifecycle-recovery-001.md), T247 source-built `50:36` checkpoint and `BOP-DEPENDENCY-115`. |
+| Files And ABI Surface | Read-only source/image/map attribution, current bounded observation surfaces and tracker/closure evidence; no service ABI or BOP provider change. |
 | Applicable Rules | Source-first ladder, guest/machine/adapter owner separation and no trace-led leaf selection. |
-| Verification | Focused terminal-position fixture plus one fresh formal native replay with terminal observation enabled, documentation governance and `git diff --check`. |
-| Expected Markers | The copied final `CS:EIP` identifies the next exact guest/CPU/firmware edge while `UNEXPECTED_LOOP_RETURN` remains unchanged; no BOP service is selected as an implementation task. |
-| Asset Needs | Existing T248 S2 graph/input, bx-mantle terminal-position surface, current formal manifest and Ninja generator. |
-| Reporting Requirements | Name the copied final CPU facts, prove unchanged result classification, and name the next owner without inferring DOS policy. |
-| Stop Conditions | The change would alter CPU execution, add a BOP selector, or require guest/DOS semantics in bx-core/bx-mantle. |
-| Exit Criteria | Focused and source-built replay evidence proves final-position capture with unchanged mechanical classification, or assigns a source-proven external owner. |
+| Verification | Original guest image/map/source comparison, one bounded source-built checkpoint if a passive diagnostic is required, tracker reconciliation, documentation governance and `git diff --check`. |
+| Expected Markers | Exact final physical bytes/source owner and a clear disposition: advance, source-proven selector-blind mechanical recovery, or external owner transfer. No BOP leaf is selected from trace alone. |
+| Asset Needs | Current T248 formal graph, source-built images/maps, original OpenNT/SoftPC sources and existing default-off observation surfaces. |
+| Reporting Requirements | Name physical address/bytes, source or unmapped classification, retained mechanical contract and any precise transfer. |
+| Stop Conditions | Attribution would require guest-policy decoding in machine layers, or no original/image evidence can distinguish guest bytes from a machine boundary. |
+| Exit Criteria | `BOP-DEPENDENCY-115` is reconciled to a precise next owner or T248 closes with an evidence-backed non-BOP transfer. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
 | Similar-Issue Sweep | `BOP-DEPENDENCY-093/102/104/114/115`, original `msproc.asm:$Exec/$Exit`, SoftPC BIOS interrupt handlers, adopted CPU exception/iret/stack mechanics and mantle run/stop lifecycle. |
 

@@ -446,6 +446,7 @@ public:
   bx_bool unregister_irq(unsigned irq, const char *name);
   Bit32u inp(Bit16u addr, unsigned io_len) BX_CPP_AttrRegparmN(2);
   void   outp(Bit16u addr, Bit32u value, unsigned io_len) BX_CPP_AttrRegparmN(3);
+  bx_bool ntdos64_port_is_registered(Bit16u addr, bx_bool write) const;
 
   void register_removable_keyboard(void *dev, bx_keyb_enq_t keyb_enq);
   void unregister_removable_keyboard(void *dev);

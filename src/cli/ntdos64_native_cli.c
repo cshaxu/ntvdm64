@@ -223,7 +223,7 @@ int wmain(int argc, wchar_t **argv)
     const wchar_t *config = 0, *root = 0, *target;
     wchar_t target_full[MAX_PATH], launch_text[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
     int has_mutation_mode = 0, has_tick_budget = 0,
-        has_bop_observation = 0, has_command_bootstrap_observation = 0, has_command_current_dir_observation = 0, has_dem_open_observation = 0, has_demfile_create_observation = 0, has_ntdos_exec_entry_observation = 0, has_generic_ud_observation = 0, has_first_fault_observation = 0, has_budget_terminal_position_observation = 0
+        has_bop_observation = 0, has_command_bootstrap_observation = 0, has_command_current_dir_observation = 0, has_dem_open_observation = 0, has_demfile_create_observation = 0, has_ntdos_exec_entry_observation = 0, has_generic_ud_observation = 0, has_first_fault_observation = 0, has_terminal_position_observation = 0
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         , has_software_interrupt_observation = 0
 #endif
@@ -239,7 +239,7 @@ int wmain(int argc, wchar_t **argv)
         ;
     uint32_t mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT;
     uint64_t instruction_tick_budget = UINT64_C(1000000);
-    int validate_only = 0, observe_bop_sequence = 0, observe_command_bootstrap = 0, observe_command_current_dir = 0, observe_dem_open = 0, observe_demfile_create = 0, observe_ntdos_exec_entry = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_budget_terminal_position = 0
+    int validate_only = 0, observe_bop_sequence = 0, observe_command_bootstrap = 0, observe_command_current_dir = 0, observe_dem_open = 0, observe_demfile_create = 0, observe_ntdos_exec_entry = 0, observe_generic_ud_sequence = 0, observe_first_fault = 0, observe_terminal_position = 0
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         , observe_software_interrupts = 0
 #endif
@@ -292,8 +292,8 @@ int wmain(int argc, wchar_t **argv)
             has_demfile_create_observation = 1, observe_demfile_create = 1, ++index;
         else if (wcscmp(argv[index], L"--observe-ntdos-exec-entry") == 0 && !has_ntdos_exec_entry_observation)
             has_ntdos_exec_entry_observation = 1, observe_ntdos_exec_entry = 1, ++index;
-        else if (wcscmp(argv[index], L"--observe-budget-terminal-position") == 0 && !has_budget_terminal_position_observation)
-            has_budget_terminal_position_observation = 1, observe_budget_terminal_position = 1, ++index;
+        else if (wcscmp(argv[index], L"--observe-terminal-position") == 0 && !has_terminal_position_observation)
+            has_terminal_position_observation = 1, observe_terminal_position = 1, ++index;
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         else if (wcscmp(argv[index], L"--observe-software-interrupts") == 0 && !has_software_interrupt_observation)
             has_software_interrupt_observation = 1, observe_software_interrupts = 1, ++index;
@@ -380,11 +380,11 @@ int wmain(int argc, wchar_t **argv)
         return 3;
     }
     if (validate_only) {
-        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu observe-bop-sequence=%u observe-command-bootstrap=%u observe-ud-sequence=%u observe-first-fault=%u observe-budget-terminal-position=%u\n",
+        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu observe-bop-sequence=%u observe-command-bootstrap=%u observe-ud-sequence=%u observe-first-fault=%u observe-terminal-position=%u\n",
             request.admitted_drive_mask, request.excluded_drive_mask,
             request.mutation_mode, (unsigned long long)request.instruction_tick_budget,
             observe_bop_sequence ? 1u : 0u, observe_command_bootstrap ? 1u : 0u, observe_generic_ud_sequence ? 1u : 0u,
-            observe_first_fault ? 1u : 0u, observe_budget_terminal_position ? 1u : 0u);
+            observe_first_fault ? 1u : 0u, observe_terminal_position ? 1u : 0u);
         ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
         return 0;
     }
@@ -395,7 +395,7 @@ int wmain(int argc, wchar_t **argv)
     if (observe_demfile_create) bx_ntvdm_demfile_create_observation_v1_enable(1u);
     if (observe_ntdos_exec_entry) bx_ntvdm_ntdos_exec_entry_observation_v1_enable(1u);
     if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(1u);
-    if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(1u);
+    if (observe_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(1u);
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
     if (observe_software_interrupts && !bx_ntvdm_mantle_software_interrupt_observation_v1_configure(BX_NTVDM_SOFTWARE_INTERRUPT_OBSERVATION_V1_CAPACITY_MAX)) {
         ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
@@ -428,7 +428,7 @@ int wmain(int argc, wchar_t **argv)
         if (observe_demfile_create) bx_ntvdm_demfile_create_observation_v1_enable(0u);
         if (observe_ntdos_exec_entry) bx_ntvdm_ntdos_exec_entry_observation_v1_enable(0u);
         if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(0u);
-        if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
+        if (observe_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         if (observe_software_interrupts) bx_ntvdm_mantle_software_interrupt_observation_v1_configure(0u);
 #endif
@@ -460,7 +460,7 @@ int wmain(int argc, wchar_t **argv)
         if (observe_demfile_create) bx_ntvdm_demfile_create_observation_v1_enable(0u);
         if (observe_ntdos_exec_entry) bx_ntvdm_ntdos_exec_entry_observation_v1_enable(0u);
         if (observe_generic_ud_sequence) bx_ntvdm_generic_ud_sequence_observation_v1_enable(0u);
-        if (observe_budget_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
+        if (observe_terminal_position) bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         if (observe_software_interrupts) bx_ntvdm_mantle_software_interrupt_observation_v1_configure(0u);
 #endif
@@ -554,11 +554,11 @@ int wmain(int argc, wchar_t **argv)
         bx_ntvdm_mantle_segment_access_observation_enable(0);
         bx_ntvdm_mantle_first_fault_observation_enable(0);
     }
-    if (observe_budget_terminal_position) {
+    if (observe_terminal_position) {
         struct bx_ntvdm_machine_stage_v1_terminal_position position;
         if (bx_ntvdm_machine_stage_v1_terminal_position_observation_copy(&position))
-            wprintf(L"ntdos64-native: budget-terminal-position cs=%04x eip=%08x\n", position.cs, position.eip);
-        else wprintf(L"ntdos64-native: budget-terminal-position unavailable\n");
+            wprintf(L"ntdos64-native: terminal-position cs=%04x eip=%08x\n", position.cs, position.eip);
+        else wprintf(L"ntdos64-native: terminal-position unavailable\n");
         bx_ntvdm_machine_stage_v1_terminal_position_observation_enable(0u);
     }
 #if BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
@@ -645,7 +645,7 @@ int wmain(int argc, wchar_t **argv)
         return exit_code;
     }
 usage:
-    fwprintf(stderr, L"usage: ntdos64-native --dos-root directory --wow16-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-command-bootstrap] [--observe-command-current-dir] [--observe-dem-open] [--observe-demfile-create] [--observe-ud-sequence] [--observe-first-fault] [--observe-budget-terminal-position]"
+    fwprintf(stderr, L"usage: ntdos64-native --dos-root directory --wow16-root directory [--mutation-mode direct|readonly] [--instruction-tick-budget positive-decimal] [--observe-bop-sequence] [--observe-command-bootstrap] [--observe-command-current-dir] [--observe-dem-open] [--observe-demfile-create] [--observe-ud-sequence] [--observe-first-fault] [--observe-terminal-position]"
 #if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
         L" [--observe-software-interrupts]"
 #endif

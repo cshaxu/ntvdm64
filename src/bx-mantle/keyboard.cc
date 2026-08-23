@@ -62,6 +62,7 @@ bx_keyb_c::bx_keyb_c()
   put("keyboard", "KBD");
   memset(&s, 0, sizeof(s));
   pastebuf = NULL;
+  timer_handle = BX_NULL_TIMER_HANDLE;
 }
 
 bx_keyb_c::~bx_keyb_c()
@@ -184,6 +185,25 @@ void bx_keyb_c::init(void)
   // GUI LEDs, CMOS publication, default mouse attachment, paste injection
   // and SIM runtime parameters are Bochs product-shell facilities.  They are
   // intentionally not part of the selector-blind native machine.
+}
+
+/* BX-MANTLE-091: the headless factory owns the four port registrations and
+ * one controller timer made by init().  Upstream product teardown normally
+ * supplies this work through its broader device shell; keep the same native
+ * unregister primitives local to the adopted controller before destruction. */
+bx_bool bx_keyb_c::fini(void)
+{
+  bx_bool ok = 1;
+  if (BX_KEY_THIS timer_handle != BX_NULL_TIMER_HANDLE) {
+    bx_pc_system.deactivate_timer((unsigned) BX_KEY_THIS timer_handle);
+    ok = bx_pc_system.unregisterTimer((unsigned) BX_KEY_THIS timer_handle) && ok;
+    BX_KEY_THIS timer_handle = BX_NULL_TIMER_HANDLE;
+  }
+  ok = bx_devices.unregister_io_read_handler(this, read_handler, 0x0060, 1) && ok;
+  ok = bx_devices.unregister_io_read_handler(this, read_handler, 0x0064, 1) && ok;
+  ok = bx_devices.unregister_io_write_handler(this, write_handler, 0x0060, 1) && ok;
+  ok = bx_devices.unregister_io_write_handler(this, write_handler, 0x0064, 1) && ok;
+  return ok;
 }
 
 void bx_keyb_c::reset(unsigned type)

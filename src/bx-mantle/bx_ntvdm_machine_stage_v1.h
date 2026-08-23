@@ -34,7 +34,7 @@ enum bx_ntvdm_machine_stage_v1_status {
 #define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_POSITION_MAGIC UINT32_C(0x42584d54)
 #define BX_NTVDM_MACHINE_STAGE_V1_TERMINAL_POSITION_VERSION UINT32_C(1)
 
-/* Default-off, copied budget-terminal position. It exposes no Bochs object,
+/* Default-off, copied finite-terminal position. It exposes no Bochs object,
  * guest byte, selector/service identity, or register state beyond CS:IP. */
 struct bx_ntvdm_machine_stage_v1_terminal_position {
   uint32_t magic;

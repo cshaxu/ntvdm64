@@ -43,6 +43,7 @@ public:
   virtual ~bx_keyb_c();
   // implement bx_devmodel_c interface
   virtual void init(void);
+  bx_bool fini(void);
   virtual void reset(unsigned type);
   // override stubs from bx_keyb_stub_c
   virtual void gen_scancode(Bit32u key);

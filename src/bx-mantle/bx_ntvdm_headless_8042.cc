@@ -22,6 +22,7 @@ bx_bool bx_ntvdm_headless_8042_create_v1(void)
 bx_bool bx_ntvdm_headless_8042_destroy_v1(void)
 {
   if (theKeyboard == NULL || bx_devices.pluginKeyboard != theKeyboard) return 0;
+  if (!theKeyboard->fini()) return 0;
   delete theKeyboard;
   theKeyboard = NULL;
   bx_devices.pluginKeyboard = &bx_devices.stubKeyboard;
