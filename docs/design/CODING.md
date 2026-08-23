@@ -7,8 +7,8 @@ src/
   opennt-guest/           imported OpenNT DOS/WOW source and guest-image inputs
   opennt-host/            imported OpenNT host-capability components
   opennt-bop/             minimal-change OpenNT BOP source mirrors
+  adapter-softpc/         source-shaped Bochs-backed SoftPC/CCPU compatibility
   adapter-win32/          source-shaped modern Win32 compatibility facades
-  adapter-bx/             typed Bochs-to-VDM conversion only
   app/                    ntvdm64 CLI and final component composition
 refs/                     read-only comparison, historical and archival inputs
   bochs/                  pinned Bochs 2.6 imported source tree
@@ -20,7 +20,7 @@ refs/                     read-only comparison, historical and archival inputs
   archive/                retired probes, adapters and reconstruction fixtures
 tests/
   runner/                 CLI integration tests (historical test-path name)
-  adapter-bx/             bridge, memory, stop, and negative boundary tests
+  adapter-softpc/         bridge, memory, stop, and negative boundary tests
 tools/                    tracked tools, arranged by declared responsibility
   build/                  build/publish entry points
   governance/             inventory and governance verification
@@ -39,8 +39,8 @@ notices and source identity. Its `README.md` is the complete local-intrusion
 register: every modification records upstream identity, necessity, exception
 identifier and focused verification. `src/bx-mantle/` is project-owned,
 Bochs-internal lifecycle assembly; it may use native Bochs structures but has
-no VDM, OpenNT, DOS or host meaning. It is a deliberately cropped Bochs product
-assembly layer, not an adopted-source exception surface.
+no OpenNT, DOS, VDM, WOW or Win32 meaning. It is a deliberately cropped Bochs
+product assembly layer, not an adopted-source exception surface.
 
 `src/opennt-guest/` contains the original DOS/WOW guest sources and guest-image
 inputs. Original prebuilt OpenNT images are the default packaging input;
@@ -58,14 +58,16 @@ for both changed original and newly authored capability components.
 function names, parameters, data layout, control flow and observable failure
 semantics. A mirror may redirect an unavailable historical Win32, CCPU or
 SoftPC reference only to its declared `opennt-host`, `adapter-win32`, or
-`adapter-bx` counterpart. Every edited source expression carries a
+`adapter-softpc` counterpart. Its `README.md` is the complete exception
+register for an imported BOP mirror; every edited source expression carries a
 `DIVERGENCE:` comment naming that replacement and why it is necessary.
 `src/adapter-win32/` owns source-shaped implementations of unavailable Win32
-interfaces using public modern Win32 APIs. `src/adapter-bx/` owns only bounded,
-typed Bochs/VDM translation; it never owns BOP or DOS meaning. `src/app/` owns
-the CLI, loading and final composition, not the semantics of the components it
-assembles. This is an internal research repository: distribution/license review
-is deferred until a release is considered.
+interfaces using public modern Win32 APIs. `src/adapter-softpc/` owns only
+same-shaped SoftPC/CCPU-to-Bochs mechanical adaptation; it never owns BOP or
+DOS meaning. `src/app/` owns the CLI, loading and final composition, not the
+semantics of the components it assembles. This is an internal research
+repository: distribution/license review is deferred until a release is
+considered.
 
 `src/bx-core` is the manifest-verified local Bochs 2.6 adoption from
 `O:\repos.external\bochs-2.6-compat\bochs-2.6`; its pinned full imported tree
@@ -79,7 +81,7 @@ They are not precedents for new source placement. The reorganization task must
 use `git mv` for pure-owner material and classify every intertwined file before
 any semantic rewrite.
 
-All current modern runtime sources below `src/app/`, `src/adapter-bx/`,
+All current modern runtime sources below `src/app/`, `src/adapter-softpc/`,
 `src/adapter-win32/`, `src/opennt-host/`, `src/opennt-bop/`,
 `src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64
 and the static `/MT` CRT. Generated build artifacts record the compiler,

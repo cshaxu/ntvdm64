@@ -17,8 +17,8 @@ these owners.
 | `opennt-guest` | OpenNT DOS and WOW16 guest source and its immutable guest-image inputs | Host service dispatch, host Win32 capability, or machine mechanics |
 | `opennt-host` | Independently composable original OpenNT host-capability components and narrowly source-derived substitutes for unavailable historical capabilities | BOP routing, machine mechanics, or guest algorithms |
 | `opennt-bop` | Minimal-change mirrors of the original OpenNT BOP providers and their original interface, parameter and failure contracts | Bochs mechanics, modern Win32 reconstruction, or product entry composition |
+| `adapter-softpc` | Source-shaped Bochs-backed implementation of reached historical SoftPC/CCPU interfaces: original spelling, parameters, ABI and observable mechanical semantics | BOP selector/service meaning, DOS/WOW algorithms, or host capability policy |
 | `adapter-win32` | Source-shaped modern public-Win32 implementations of unavailable historical Win32 interfaces | OpenNT BOP/service policy or Bochs mechanics |
-| `adapter-bx` | Typed, bounded conversion between the Bochs machine contract and VDM-facing OpenNT-shaped calls | BOP selector/service meaning, DOS/WOW algorithms, or host capability policy |
 | `app` | The `ntvdm64` executable entry point, CLI, and explicit composition/loading of the selected components | CPU/device mechanics, BOP providers, OpenNT host algorithms, or compatibility facades |
 | Research fixtures | Reproducible evidence for a bounded question | Product behavior or implicit runtime dependencies |
 
@@ -29,26 +29,28 @@ app
   -> opennt-guest                         (guest-image input)
   -> opennt-bop -> opennt-host
   -> opennt-bop -> adapter-win32
-  -> opennt-bop -> adapter-bx -> bx-mantle -> bx-core
+  -> opennt-bop -> adapter-softpc -> bx-mantle -> bx-core
 ```
 
-`adapter-bx` is the mechanical composition boundary between machine events and
-VDM-facing calls. It receives and returns versioned, fixed-width values and
-checked guest-memory ranges. It does not pass C++ objects, host pointers,
-CRT-owned memory, implicit handle ownership, or cross-architecture callbacks
-across that boundary. `opennt-bop`, not either adapter, owns the interpretation
-of an OpenNT BOP service contract.
+`adapter-softpc` is the mechanical composition boundary between machine events
+and historical SoftPC/CCPU-facing calls. It preserves the reached historical
+interface spelling, parameters, calling convention and observable result while
+backing it with bounded Bochs operations. It receives and returns versioned,
+fixed-width values and checked guest-memory ranges. It does not pass C++
+objects, host pointers, CRT-owned memory, implicit handle ownership, or
+cross-architecture callbacks across that boundary. `opennt-bop`, not either
+adapter, owns the interpretation of an OpenNT BOP service contract.
 
 ### Guest-Pointer Mapping
 
-`adapter-bx` owns the VDM-facing session-scoped guest-pointer mapping manager.
+`adapter-softpc` owns the VDM-facing session-scoped guest-pointer mapping manager.
 It is the
 single compatibility boundary for historical OpenNT pointer APIs such as
 `GetVDMAddr`, `Sim32GetVDMPointer`, `Sim32FlushVDMPointer`, and
 `Sim32FreeVDMPointer`.  For a synchronous, admitted OpenNT call it may acquire
 a bounded, epoch-scoped direct mapping of stable Bochs guest RAM and return the
 native process pointer required by the historical call shape.  That pointer is
-valid only inside the active `adapter-bx` call: it is never serialized into guest
+valid only inside the active `adapter-softpc` call: it is never serialized into guest
 memory, returned through the bx↔machine ABI, retained by an asynchronous
 worker, or exposed as a Bochs object.
 
@@ -71,7 +73,7 @@ CRT may enter this in-process composition.
 
 ## Boundary Invariants
 
-- Machine mechanics stay in the Bochs core. `adapter-bx` may request bounded mechanical
+- Machine mechanics stay in the Bochs core. `adapter-softpc` may request bounded mechanical
   operations through typed contracts but does not reproduce CPU, memory,
   firmware, interrupt, or device algorithms.
 - The mantle is Bochs-internal assembly only. It reuses native Bochs code and
@@ -112,12 +114,12 @@ Dependencies point inward through declared contracts:
 app -> opennt-guest
 app -> opennt-bop -> opennt-host
 opennt-bop -> adapter-win32
-opennt-bop -> adapter-bx -> bx-mantle -> bx-core
+opennt-bop -> adapter-softpc -> bx-mantle -> bx-core
 opennt-host -> adapter-win32                 (only through declared facades)
 ```
 
 No component may reverse these directions by importing another component's
 private execution state. In particular, the Bochs core and mantle remain
-reusable as a guest machine; `adapter-bx` remains a mechanical boundary; and
+reusable as a guest machine; `adapter-softpc` remains a mechanical boundary; and
 the original OpenNT BOP and host ownership remains visible rather than being
 absorbed by either adapter.

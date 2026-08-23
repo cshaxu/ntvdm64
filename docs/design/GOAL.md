@@ -4,15 +4,16 @@ Deliver an independently buildable, non-invasive command-line NT 4-era DOS envir
 
 The target product separation is: `bx-core` (adopted machine), `bx-mantle`
 (Bochs-only assembly), `opennt-guest` (DOS/WOW guest images), `opennt-host`
-(host capabilities), `opennt-bop` (BOP source mirrors), `adapter-win32`
-(unavailable Win32 compatibility), `adapter-bx` (machine/VDM conversion), and
+(host capabilities), `opennt-bop` (BOP source mirrors), `adapter-softpc`
+(Bochs-backed SoftPC/CCPU interface recovery), `adapter-win32` (unavailable
+Win32 compatibility), and
 `app` (CLI and final composition). This separation exists to make maximal
 original-source reuse and minimal source intrusion mechanically enforceable.
 
 The immediate goal is not to recover the unavailable NT4 x86 V86/CCPU product composition. It is to establish a small, auditable Bochs-to-OpenNT boundary and use it to run the first contained NT4 EN-US DOS profile. No claim about WOW16, broad device compatibility, or a retail-compatible `ntvdm.exe` follows from that first slice.
 
 The modern runtime target is one MSVC x64 `/MT` host process. This constrains
-the command-line invocation shell, `adapter-bx`, `bx-mantle`, and adopted Bochs
+the command-line invocation shell, `adapter-softpc`, `bx-mantle`, and adopted Bochs
 core to one C/C++ ABI and CRT. It does not alter the emulated CPU: the first guest profile remains
 CPU5/Pentium-MMX. Historical OpenNT source remains on its evidenced historical
 toolchain path and is not made a modern runtime-link input merely to achieve

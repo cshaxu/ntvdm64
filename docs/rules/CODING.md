@@ -30,7 +30,7 @@
 - Same spelling and parameters do not prove a safe compatibility replacement.
   A facade must be justified by the reached original call site, ABI layout,
   ordering and failure behavior. Historical guest-pointer APIs may retain
-  their exact pointer-returning shape only through the one `bx-vdm`
+  their exact pointer-returning shape only through the one `adapter-softpc`
   session-owned mapping manager: every mapping has a checked address/span,
   access rule and active-call epoch; its native pointer never crosses a
   component ABI, enters guest state or asynchronous work. A facade must not
@@ -97,7 +97,8 @@
   `bx-core`; Bochs-only native assembly in `bx-mantle`; guest image source in
   `opennt-guest`; independently composable OpenNT host capability in
   `opennt-host`; OpenNT BOP mirrors in `opennt-bop`; unavailable public-Win32
-  facades in `adapter-win32`; bounded Bochs/VDM conversion in `adapter-bx`; and
+  facades in `adapter-win32`; bounded same-shaped SoftPC/CCPU recovery in
+  `adapter-softpc`; and
   CLI/final composition in `app`. Transitional legacy paths are not a
   precedent for new code. Do not move a file across these owners as an
   incidental feature change; the admitted reorganization package inventories
@@ -106,14 +107,16 @@
   data structures and ordering, and annotate each required edited expression
   with `DIVERGENCE:`. A replacement of an unavailable Win32, CCPU or SoftPC
   dependency must first be offered through an equivalently shaped
-  `adapter-win32`, `adapter-bx`, or `opennt-host` facade. A self-authored
+  `adapter-win32`, `adapter-softpc`, or `opennt-host` facade. A self-authored
   alternate interface remains a registered last-resort exception.
-- `adapter-bx` may translate typed machine events and checked memory ranges
-  only. It may transport a copied bounded instruction window to `opennt-bop`,
-  but does not interpret a BOP selector or service ID. `opennt-bop` performs
-  that source-owned interpretation. Neither adapter may use unbounded
-  guest-memory inspection, emulate DOS interrupts, own device policy, or turn
-  a catalogue into a generic historical dispatcher.
+- `adapter-softpc` may implement a reached historical SoftPC/CCPU interface
+  only through the same name, parameters, calling convention and observable
+  mechanical result, backed by bounded Bochs operations. It may transport a
+  copied bounded instruction window to `opennt-bop`, but does not interpret a
+  BOP selector or service ID. `opennt-bop` performs that source-owned
+  interpretation. Neither adapter may use unbounded guest-memory inspection,
+  emulate DOS interrupts, own device policy, or turn a catalogue into a generic
+  historical dispatcher.
 - Keep Bochs feature selection deny-by-default. A configuration addition must
   name its reached OpenNT caller, the Bochs owner, the boundary impact, and a
   negative test; do not enable a feature merely because upstream provides it.

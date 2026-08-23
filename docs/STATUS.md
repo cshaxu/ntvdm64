@@ -12,12 +12,12 @@ build closure.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T260 S1`, Ordinary Mode with a single-person dual-role review. T260 is one architecture reorganization package with eight sequential S tasks; it is not eight component tasks. |
-| Admission And Approval | Owner approved the queue head and prescribed the complete S1--S8 sequence: manifest; roots/registers; stable Bochs owners; app/guest; BOP; host/Win32; bx adapter; tests/Ninja/legacy-path exit. |
-| Objective | Produce the complete file-level owner, provenance, build-input and migration-disposition manifest required to move every live product input from the transitional tree into exactly one of `bx-core`, `bx-mantle`, `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-win32`, `adapter-bx`, or `app`. |
+| Admission And Approval | Owner approved the queue head and prescribed the complete S1--S8 sequence: manifest; roots/registers; pure Bochs owners; app/guest; BOP; host/Win32; SoftPC adapter; tests/Ninja/legacy-path exit. |
+| Objective | Produce the complete file-level owner, provenance, build-input and migration-disposition manifest required to move every live product input from the transitional tree into exactly one of `bx-core`, `bx-mantle`, `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-softpc`, `adapter-win32`, or `app`. |
 | Non-goals | No `git mv` yet; no BOP/provider enablement; no guest, Bochs, host-capability or compatibility-semantic change; no new facade; no opportunistic test repair. |
 | Reference Baseline | [Component-reorganization proposal](etc/operations/proposal-seven-component-source-layout-reorganization-001.md), current `t225-s7-full-module-manifest.json`, live BOP tracker, T258 mapping manager and T259 facade closure. |
 | Files And ABI Surface | Current `src/cli`, `src/bx-vdm`, live portions of `src/opennt`, `src/bx-core`, `src/bx-mantle`, tests, and formal Ninja/manifest inputs. S1 changes only the migration manifest and supporting governance evidence. |
-| Applicable Rules | Target-component dependency direction; source-first recovery; one mapping-manager implementation with three session instances; no Bochs/OpenNT semantic intrusion; transition paths are not precedent. |
+| Applicable Rules | Target-component dependency direction; source-first recovery; one mapping-manager implementation with three session instances; minimal changes plus exception registers for the four imported-source components; `bx-mantle` is Bochs-only; transition paths are not precedent. |
 | Verification | File enumeration cross-check against formal manifest and Ninja inputs; owner/provenance uniqueness audit; reverse scan for undeclared legacy production inputs; documentation governance verification and `git diff --check`. |
 | Expected Markers | Every live source/header/test/build input has one target owner, provenance class, migration method (`retain`, `git mv`, split, archive, or delete-after-callers`), and a declared S destination. |
 | Asset Needs | Current source tree; BOP tracker; build manifest and generator; component proposal; existing exception register and T259 evidence. |
@@ -33,11 +33,11 @@ build closure.
 | --- | --- |
 | S1 | Complete owner/provenance/build manifest. |
 | S2 | Target roots, READMEs, exception registers and public library/include boundaries. |
-| S3 | Stable in-place `bx-core`/`bx-mantle` owner confirmation and register migration. |
+| S3 | `bx-core` confirmation plus `bx-mantle` purification: retain Bochs-only code and assign every foreign-semantics file to its target owner. |
 | S4 | `app` and `opennt-guest` migration. |
 | S5 | `opennt-bop` mirror, ingress and route migration. |
 | S6 | `opennt-host` and `adapter-win32` classification/split migration. |
-| S7 | `adapter-bx` mechanical-boundary and shared-mapping-manager migration. |
+| S7 | `adapter-softpc` same-shaped SoftPC/CCPU boundary and shared-mapping-manager migration. |
 | S8 | Tests, formal Ninja graph, legacy-path exit and whole-package acceptance. |
 
 ## Previous Active Packet — M0 T259

@@ -16,7 +16,7 @@
    capabilities of the selected OpenNT-owned service, without modifying the
    host merely to install or run this product.
 11. A compatibility facade may not recreate an unbounded historical product
-    shell behind a familiar name. An `adapter-bx`-owned, bounded mapping lease may
+    shell behind a familiar name. An `adapter-softpc`-owned, bounded mapping lease may
     return a native pointer for the exact historical `GetVDMAddr` or
     `Sim32GetVDMPointer` call shape, but only while the synchronous admitted
     call is active and only for validated guest RAM. That pointer never crosses
@@ -42,24 +42,24 @@
     shaped boundary requires rule 12's exception and may expose only the
     state required by the reached call.
 14. Intrusion is minimized independently for adopted Bochs `bx-core` and
-    imported OpenNT mirrors (`opennt-bop`, `opennt-host`, and tracked
-    BOP-dependencies). Prefer an `adapter-bx`, `adapter-win32`, or
+    imported OpenNT mirrors (`opennt-guest`, `opennt-bop`, `opennt-host`, and
+    tracked BOP-dependencies). Prefer an `adapter-softpc`, `adapter-win32`, or
     `opennt-host` same-shaped facade that preserves the original call shape.
     An edit to `bx-core` or imported OpenNT source requires a source-proven
     necessity, the smallest feasible diff, and the component's divergence or
     exception record; convenience or a local trace result is never sufficient.
 15. The target source owners are exactly `bx-core`, `bx-mantle`,
-    `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-win32`, `adapter-bx`,
+    `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-softpc`, `adapter-win32`,
     and `app`. Dependencies flow from `app` through declared OpenNT/adapter
     contracts to `bx-mantle` and then `bx-core`; `opennt-guest` is a guest-image
     input and does not become a host-provider library. `opennt-bop` alone owns
-    BOP source meaning. `adapter-bx` is selector-blind mechanical conversion,
-    while `adapter-win32` is an unavailable-Win32 facade, not an OpenNT service
-    owner.
-16. The local-intrusion registers are component-owned. `bx-core/README.md`
-    records every adopted-Bochs change; `opennt-guest/README.md` records every
-    guest-source change (normally none); `opennt-host/README.md` records each
-    modified imported component and every source-derived host capability.
-    `opennt-bop` mirror edits retain the original call form and mark each
-    changed expression with `DIVERGENCE:`. `bx-mantle` may crop and compose
-    native Bochs mechanisms but may not acquire external VDM/OpenNT meaning.
+    BOP source meaning. `adapter-softpc` is selector-blind, same-shaped
+    SoftPC/CCPU mechanical recovery over Bochs; `adapter-win32` is an
+    unavailable-Win32 facade, not an OpenNT service owner.
+16. The local-intrusion registers are component-owned. `bx-core/README.md`,
+    `opennt-guest/README.md`, `opennt-bop/README.md`, and `opennt-host/README.md`
+    record every edit to their imported source and every source-derived component.
+    `opennt-bop` mirror edits additionally retain the original call form and mark
+    each changed expression with `DIVERGENCE:`. `bx-mantle` may crop and compose
+    native Bochs mechanisms but may not acquire OpenNT, DOS, VDM, WOW or Win32
+    meaning.
