@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T244 S1** — PC keyboard/IVT BOP-5F machine-composition source,
-ABI, lifecycle and failure audit.
+**Active: M0 T244 S2** — selector-blind headless 8042 keyboard-controller
+source severance and native lifecycle composition.
 
 ## Active Packet
 
-### M0 T244 S1 — PC keyboard/IVT BOP-5F machine-composition audit
+### M0 T244 S2 — Headless native 8042 lifecycle composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T244 S1`, Ordinary Mode, single-person dual-role source/ABI audit. |
-| Admission And Approval | Owner's standing queue authorization selects former queue candidate 1. This S performs no device enablement or Bochs modification. |
-| Objective | Freeze the complete original `spckbd` / `MS_bop_F` / `kb_setup_vectors` keyboard and IVT lifecycle: table fields, device owners, interrupt/timer/PIC relationships, lifecycle ordering, viable source reuse and negative boundary. |
-| Non-goals | No implementation, no feature enablement, no BOP/DOS/OpenNT term in bx-core/bx-mantle, no unregistered Bochs intrusion, and no trace-led selector patch. |
-| Reference Baseline | `BOP-DEPENDENCY-104`, `BOP-TOP-5F`, [T243 closure](history/m0-t243-closure-20260822.md), and the machine owner-package proposal. |
-| Files And ABI Surface | Audit documents and tracker only; source inspection may cover OpenNT SoftPC keyboard, BIOS, PIC/timer and existing selector-blind mantle seams. |
-| Applicable Rules | Source-first recovery, selector-blind machine boundary, feature deny-by-default, checked guest-memory transport, exception registration, and MTSP governance. |
-| Verification | Cross-check every intended field/effect against original source, current source and tracker; validate documentation governance. No native trace is an implementation selector. |
-| Expected Markers | A bounded component graph names the native owner of each effect and distinguishes reusable original code, small shims, required registered invasions, and explicitly unavailable paths. |
-| Asset Needs | Existing OpenNT/Bochs sources and current local build manifests only; no new external source or host mutation. |
-| Reporting Requirements | Publish source/ABI/failure ledger, tracker updates, reusable-versus-product-shell classification and S2 admission recommendation. |
-| Stop Conditions | Any evidence that the requested result requires a new unrelated device, unbounded Bochs product shell, or a missing source identity; record and transfer rather than infer. |
-| Exit Criteria | The full lifecycle and failure map supports one bounded S2 implementation plan with exact owner boundaries and no silent feature admission. |
+| Identifier Mode | `M0 T244 S2`, Ordinary Mode, single-person dual-role native machine composition. |
+| Admission And Approval | Owner's standing queue authorization admits the S1-selected headless 8042 slice. Any adopted-Bochs source patch must be entered in the exception register before it is made. |
+| Objective | Compose a source-shaped, selector-blind native 8042 controller beside the existing PIC: ports `60h/64h`, normal IRQ1 and controller timer, with a clean machine lifecycle and no host input. |
+| Non-goals | No BOP/DOS/OpenNT term in bx-core/bx-mantle; no monitor IRET/ICA/CCPU recreation; no host input, GUI, mouse, paste, CMOS, PIT/IRQ0, video, firmware, `BOP 5C`, COMMAND console or trace-led selector patch. |
+| Reference Baseline | `BOP-DEPENDENCY-104..106`, `BOP-TOP-5F`, [T243 closure](history/m0-t243-closure-20260822.md), [T244 S1 audit](etc/evidence/m0-t244-s1-pc-keyboard-ivt-machine-audit-001.md), and the machine owner-package proposal. |
+| Files And ABI Surface | Adopted Bochs keyboard source, mantle-private factory/lifecycle and minimum finite SIM configuration only; existing `bx_devices` port registration, PIC and PC timer APIs. |
+| Applicable Rules | Source-first recovery, selector-blind machine boundary, feature deny-by-default, mandatory exception registration, native cleanup and MTSP governance. |
+| Verification | Focused inactive/active/cleanup port and IRQ1 tests; two clean lifecycles; formal Ninja link; boundary scan that rejects GUI/CMOS/mouse/plugin/BOP vocabulary. A native trace follows only after package regression. |
+| Expected Markers | `60h/64h` are registered only while the minimal machine owns the device; ordinary native IRQ1 can reach the existing PIC; all ports and singleton state restore on cleanup. |
+| Asset Needs | Existing Bochs 2.6 source identity and mantle PIC/port/timer seams; no new external source, host mutation or GUI dependency. |
+| Reporting Requirements | Register every adopted-source severance, retain original line-level rationale, record source/ABI/failure matrix and explicit rejected product-shell paths. |
+| Stop Conditions | Need for GUI, CMOS, mouse, plugin manager, PIT, video, firmware, host input, a BOP-specific request, or any unregistered Bochs patch. Record and transfer rather than infer. |
+| Exit Criteria | The one headless controller lifecycle is source/test/link complete and tracker records its remaining input/console/device exclusions. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
-| Similar-Issue Sweep | T243 headless subset, BOP 5C/5D, INT15 keyboard hooks, PIC/IRQ/timer lifecycle, monitor iret table and existing mantle port-space/device seams. |
-| Exit Status | T243 has closed; T244 S1 is active. |
-| Next Admission | S2 only after S1 freezes an owner-specific, selector-blind implementation slice and any necessary Bochs exception is registered. |
+| Similar-Issue Sweep | T243 headless subset, T241 IVT watch, BOP 5C/5D, INT15 keyboard hooks, PIC/IRQ/timer lifecycle, monitor iret table and existing mantle port-space/device seams. |
+| Exit Status | S1 complete: full source/ABI/failure map selects this one headless native device slice; S2 in progress. |
+| Next Admission | S3 only after the required exception is registered and S2 proves native lifecycle without product-shell expansion. |
 
 ## Latest Closure
 
