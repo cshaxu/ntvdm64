@@ -2,24 +2,24 @@
 
 ## Current Work
 
-**Active: M0 T256 S1** — Protected virtual-access and mapping source/ABI map.
+**Active: M0 T256 S2** — No-fault protected virtual-access design and admission.
 
 ## Active Packet
 
-### M0 T256 S1 — Protected virtual-access and mapping source/ABI map
+### M0 T256 S2 — No-fault protected virtual-access design and admission
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S1`, Ordinary Mode, single-person dual-role source/ABI map before any protected-memory code. |
-| Admission And Approval | Closed T255 S3 identifies the next generic prerequisite. S1 is read-only and requires no Bochs patch; any later external-code patch must be prospectively registered. |
-| Objective | Map an all-or-nothing copied protected virtual-range operation and guest-linear mapping identity that can support original DPMI source without raw pointers or provider semantics in Bochs layers. |
+| Identifier Mode | `M0 T256 S2`, Ordinary Mode, single-person dual-role no-fault access design before any adopted-code patch. |
+| Admission And Approval | S1 proves no existing public primitive is directly admissible. S2 may design but not patch a new no-fault preflight/copy seam; any external-code patch must be prospectively registered. |
+| Objective | Determine whether normal Bochs protected segment/page semantics can be factored into a bounded copied transaction with no guest exception delivery, then define the smallest viable seam or precise rejection. |
 | Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, LDT policy, guest-linear allocator, raw pointer/object, trace-driven patch, or unregistered intrusion. |
-| Reference Baseline | [T255 S3 decision](etc/evidence/m0-t255-s3-protected-substrate-admission-decision-001.md), [substrate proposal](etc/operations/proposal-selector-blind-protected-mode-substrate-001.md), and live [BOP tracker](etc/bop-list.md). |
+| Reference Baseline | [T255 S3 decision](etc/evidence/m0-t255-s3-protected-substrate-admission-decision-001.md), [T256 S1 map](etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md), [substrate proposal](etc/operations/proposal-selector-blind-protected-mode-substrate-001.md), and live [BOP tracker](etc/bop-list.md). |
 | Files And ABI Surface | Read-only adopted CPU/memory paths, existing mantle fixed-width records, original DPMI source map and tracker only. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Exact native check/translation/fault call graph; copy atomicity and failure-path analysis; original DPMI pointer/mapping inventory; and a proposed fixed-width seam or explicit no-admission result. |
-| Expected Markers | Fault-containment proof, copied request/result sketch, raw-pointer rejection, and a tracker-compatible dependency order. |
-| Asset Needs | Existing formal Ninja manifest, closed T255 context fixture/evidence, adopted CPU/memory source and original DPMI source map. |
+| Verification | Locate a shared no-fault native translation candidate or prove none exists; show preflight/commit atomicity; verify no raw pointer or semantic term is needed; write a patch admission or rejection decision. |
+| Expected Markers | Narrow fixed-width request/result candidate, exact fault containment ownership, and an exception-register-ready scope if code is justified. |
+| Asset Needs | Existing formal Ninja manifest, closed context evidence, T256 S1 call map, adopted CPU/memory source and original DPMI source map. |
 | Reporting Requirements | Distinguish generic access mechanics from DPMI/LDT allocation policy; record every remaining original dependency before code admission. |
 | Stop Conditions | A design requires a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
 | Exit Criteria | A bounded generic design is proven safe enough to register and implement, or its exact native fault/lifecycle blocker is evidenced without admitting DPMI. |
