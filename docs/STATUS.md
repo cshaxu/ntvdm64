@@ -2,31 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T245 S16** — Canonical source-built COMMAND bootstrap root.
+**Active: M0 T245 S17** — Native COMMAND current-directory observation.
 
 ## Active Packet
 
-### M0 T245 S16 — Canonical source-built COMMAND bootstrap root
+### M0 T245 S17 — Native COMMAND current-directory observation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S16`, Ordinary Mode, single-person dual-role CLI admission correction and guest-owner validation. |
-| Admission And Approval | S15 proves the current `AX=3D00h` request uses relative `BUILD\\OUTPUT\\DOS\\COMMAND.COM`: the CLI passed relative `--dos-root` unchanged into the existing startup root descriptor.  The correction is bounded normal CLI argument canonicalization, not a BOP or Bochs semantic change. |
-| Objective | Canonicalize accepted DOS/WOW16 root arguments to absolute paths before existing bundle admission, startup composition and environment publication, then repeat the existing passive guest observation. |
-| Non-goals | No virtual boot volume, drive alias, guest-byte mutation, synthetic file success, EXEC/PSP/parent-return implementation, host-system mutation, new Bochs source, or BOP behavior. |
-| Reference Baseline | S13 source producer, S14 `commnd` copy, S15 `AX=3D00h` classification, and current CLI `target` absolute-path handling. |
-| Files And ABI Surface | CLI-local path canonicalization only.  The original `cmdconf.c → SHELL= → sysconf.asm` route, DEM/COMMAND provider ABIs and selector-blind machine boundary remain unchanged. |
-| Applicable Rules | Source-first recovery, Direct host-path semantics, guest-owner boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Formal graph links the CLI.  One bounded source-built run invoked with relative bundle arguments must show an absolute drive-qualified `commnd`; any next BOP/terminal is evidence, not an unearned completion claim. |
-| Expected Markers | The observed buffer begins with the host drive and no longer begins `BUILD`; the earlier `AX=3D00h` open may then enter its existing DEM owner route or expose a distinct guest/host prerequisite. |
-| Asset Needs | Current source-built bundles and existing S14 observer; no new source, firmware or guest media. |
-| Reporting Requirements | Record pre/post guest bytes, focused build result, native BOP/interrupt change and owner of any new terminal. |
-| Stop Conditions | Canonicalization cannot be represented in the original 64-byte `commnd` field, or an apparent fix requires an implicit DOS drive mapping, virtual volume, guest patch or Bochs modification. |
-| Exit Criteria | Relative CLI input is canonically published through the existing source route, and one native observation establishes the next unmodified original path. |
+| Identifier Mode | `M0 T245 S17`, Ordinary Mode, single-person dual-role adapter-only observation and owner classification. |
+| Admission And Approval | S16 reaches and resumes original `54:04`; its source body writes the current directory to guest `DS:SI`. The next terminal cannot be assigned without observing that returned fixed buffer. |
+| Objective | Copy at most 64 bytes from the source-owned `54:04` destination after a successful handler result, and classify the current-directory/drive input to the following guest open path. |
+| Non-goals | No change to `cmdGetCurrentDir`, DEM CWD state, guest RAM, virtual drive, host current directory, file result, BOP outcome, Bochs source or machine semantics. |
+| Reference Baseline | S16 absolute `commnd` recovery, original `cmdmisc.c:cmdGetCurrentDir`, existing checked-RAM ABI and S14 fixed-copy observer pattern. |
+| Files And ABI Surface | Default-off bx-vdm record and existing generic checked read only. The observer is called after accepted `54:04` dispatch and preserves all provider/machine behavior. |
+| Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
+| Verification | Focused fixture covers selector/mode/offset/read failure and post-dispatch copy. One bounded source-built run correlates the copied buffer with the subsequent unchanged BOP/terminal. |
+| Expected Markers | Evidence records a source-owned directory string or a source-shaped failure, then names whether the next work belongs to COMMAND CWD, DEM path translation or guest DOS file handling. |
+| Asset Needs | Existing source-built bundles and direct session; no new source, firmware, guest media or host mutation. |
+| Reporting Requirements | Record event registers, exact physical copy address, bytes, source relation and next owner. Do not treat observation as a path repair. |
+| Stop Conditions | The signal requires arbitrary guest-memory scanning, mutation, an invented directory/drive result, a new Bochs semantic change or non-public host mechanism. |
+| Exit Criteria | Native `54:04` output or source-shaped failure is directly observed, and the following failure is assigned to a named original owner. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S17 closes native `54:04` output observation. The existing imported
+COMMAND body returns Direct-host `O:\repos.hobby\ntdos64`, then source-built
+execution reaches/resumes `50:12 demOpen`; see [S17 evidence](etc/evidence/m0-t245-s17-command-current-dir-observation-001.md).
 
 M0 T245 S16 closes the relative-root bootstrap defect. CLI admission now
 canonicalizes DOS/WOW16 roots before the unchanged original COMMAND source

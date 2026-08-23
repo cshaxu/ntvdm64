@@ -255,6 +255,7 @@
         "src/bx-vdm/bop/dem_v2_startup_composition.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_bop_sequence_observation_v1.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_command_bootstrap_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_command_current_dir_observation_v1.c",
         "src/bx-vdm/bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/bx-vdm/bop/shim/dem_direct_host_session.c",
         "src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.c",
@@ -324,6 +325,12 @@
     }
   ],
   "fixtures": [
+    {
+      "name": "t245-s17-command-current-dir-observation-fixture",
+      "source": "tests/bx-vdm/t245_s17_command_current_dir_observation_fixture.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "platformLibraries": ["user32.lib"]
+    },
     {
       "name": "t245-s14-command-bootstrap-observation-fixture",
       "source": "tests/bx-vdm/t245_s14_command_bootstrap_observation_fixture.c",

@@ -22,6 +22,7 @@
 #include "xms_v2_generic_ud_bridge.h"
 #include "bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
 #include "bop/observation/bx_ntvdm_command_bootstrap_observation_v1.h"
+#include "bop/observation/bx_ntvdm_command_current_dir_observation_v1.h"
 #include "bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
 
@@ -83,6 +84,8 @@ int bx_ntvdm_mantle_generic_ud_bridge_v1(
                 bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(event, outcome))))))))));
     if (accepted) {
         bx_ntvdm_command_bootstrap_observation_v1_consider(event, outcome,
+            command_bootstrap_read, NULL);
+        bx_ntvdm_command_current_dir_observation_v1_consider(event, outcome,
             command_bootstrap_read, NULL);
         bx_ntvdm_bop_sequence_observation_v1_consider(event, outcome);
         bx_ntvdm_generic_ud_sequence_observation_v1_consider(event, outcome);
