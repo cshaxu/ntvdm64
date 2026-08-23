@@ -26,9 +26,10 @@
 | Original Owner Request | “接下来，是关于我们全面恢复opennt的win32api宿主方面和 softpc/ccpu 核心机方面的接口规范的任务。你已经审计过。” |
 | Similar-Issue Sweep | `nt_bop.c`, `nt_umb.c`, `nt_vdd.c`, CCPU/SAS macros, host simulation, VDM control/hooks, keyboard/IVT, machine interrupt bridge, current Win32/RTL shims, and x86/x64 pointer/HANDLE/calling-convention seams. |
 
-**Current progress:** S1 is admitted. It begins from the completed Td audit,
-not a new BOP-by-BOP survey; the first deliverable is the canonical interface
-specification and reconciled receiving-owner matrix.
+**Current progress:** S1 has converted the completed Td audit into the
+canonical [`HOST-*`/`MACH-*` interface catalog](etc/evidence/m0-t259-s1-host-machine-interface-catalog-001.md).
+It now reconciles active facades to that catalog; this is not a new
+BOP-by-BOP survey.
 
 ## Latest Closure
 

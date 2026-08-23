@@ -78,6 +78,11 @@ S 必须进行 source/route/fixture 的 no-bypass 复核，而不是预设仍有
 
 ### 现代 Win32 / x64 兼容性决策规则
 
+T259 的跨族接口目录见
+[`m0-t259-s1-host-machine-interface-catalog-001.md`](evidence/m0-t259-s1-host-machine-interface-catalog-001.md)。每个后续
+owner package 除本表 BOP/依赖行外，必须引用其中适用的 `HOST-*` 或
+`MACH-*` 接口族；不得为推进单条 trace 而自行重建 NT4 私有产品壳。
+
 OpenNT 原始调用遇到 NT4 私有 API、已删除 API、现代 Win32 不再支持的组合，或 x64 下不安全的指针/句柄/调用约定时，不得静默删掉、模拟成功或把语义搬进 Bochs。先在受影响的入口行和/或依赖行写明以下五项：原始调用位置、不可直接复用的原因、候选公开 Win32 API、最小 shim 位置、保留的原始返回/失败合同。
 
 | 结论 | 可采取的修复 | 是否需要 owner 决定 |
