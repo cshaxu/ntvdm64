@@ -21,8 +21,12 @@ NTSTATUS RtlUnicodeStringToAnsiString(PANSI_STRING destination,
     const PUNICODE_STRING source, BOOL allocate_destination)
 {
     int bytes;
+    PCHAR original_buffer;
+    USHORT original_maximum;
     if (destination == NULL || source == NULL || source->Buffer == NULL)
         return (NTSTATUS)-1;
+    original_buffer = destination->Buffer;
+    original_maximum = destination->MaximumLength;
     bytes = WideCharToMultiByte(CP_ACP, 0, source->Buffer,
         source->Length / (USHORT)sizeof(WCHAR), NULL, 0, NULL, NULL);
     if (bytes <= 0 || bytes > 0x7ffe) return (NTSTATUS)-1;
@@ -39,11 +43,22 @@ NTSTATUS RtlUnicodeStringToAnsiString(PANSI_STRING destination,
     if (WideCharToMultiByte(CP_ACP, 0, source->Buffer,
             source->Length / (USHORT)sizeof(WCHAR), destination->Buffer,
             bytes, NULL, NULL) != bytes) {
-        free(destination->Buffer); destination->Buffer = NULL; return (NTSTATUS)-1;
+        /* The OpenNT caller owns a non-allocated destination buffer.  Do not
+         * free or clear it on a conversion error; only an RTL-allocated
+         * result belongs to RtlFreeAnsiString. */
+        if (allocate_destination) {
+            free(destination->Buffer);
+            destination->Buffer = NULL;
+            destination->Length = destination->MaximumLength = 0u;
+        } else {
+            destination->Buffer = original_buffer;
+            destination->MaximumLength = original_maximum;
+        }
+        return (NTSTATUS)-1;
     }
     destination->Buffer[bytes] = '\0';
     destination->Length = (USHORT)bytes;
-    destination->MaximumLength = (USHORT)(bytes + 1);
+    if (allocate_destination) destination->MaximumLength = (USHORT)(bytes + 1);
     return 0;
 }
 

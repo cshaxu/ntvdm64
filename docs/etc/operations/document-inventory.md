@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2181 |
+| Documentation records | 2182 |
 | --- | --- |
-| Generated UTC | 2026-08-23T18:11:58Z |
+| Generated UTC | 2026-08-23T18:14:41Z |
 
 ## Entries
 
@@ -173,6 +173,7 @@ content-divergent entries.
 | etc/evidence/m0-t259-s1-current-facade-reconciliation-001.md | indexed supporting material | fd1a67b64e0c08858c31dc80a0cd48d2342b6e558f9587eb432da27ec5065291 |
 | etc/evidence/m0-t259-s1-host-machine-interface-catalog-001.md | indexed supporting material | e733bfc95f1c719a52009a46712eedd821edb3271344e2404399f25b3fa3639b |
 | etc/evidence/m0-t259-s2-p1-rtl-contract-status-recovery-001.md | indexed supporting material | 93016eab299c1f1fa842b9dfd7c67d6e9aaae86f55b2ece63eff75a10f063727 |
+| etc/evidence/m0-t259-s2-p2-rtl-caller-buffer-ownership-001.md | indexed supporting material | 17633e396cb611c009077899999b7e3fea4a9bf88dd1e2f00332be56c8d00d5a |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
