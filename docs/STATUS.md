@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T253 S1** — selector-blind guest async-completion delivery audit.
+**Active: M0 T253 S2** — selector-blind physical-IRQ mechanical seam.
 
 ## Active Packet
 
-### M0 T253 S1 — selector-blind guest async-completion delivery audit
+### M0 T253 S2 — selector-blind physical-IRQ mechanical seam
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T253 S1`, Ordinary Mode, single-person dual-role source/mechanics audit. |
-| Admission And Approval | T252 proves opaque SFT publication is already complete. The dependency-first queue now selects the sole remaining lower-level async completion prerequisite. |
-| Objective | Map original `int5c.asm` ANR delivery and identify the smallest selector-blind native interrupt-delivery seam, or prove the exact required Bochs exception. |
-| Non-goals | No Redirector I/O, BOP provider semantic, guest ANR synthesis, DPMI/WOW, raw callback/handle, or unregistered Bochs change. |
-| Reference Baseline | [T252 closure](history/m0-t252-closure-20260823.md), `int5c.asm`, `vrnmpipe.h`, `vdmredir.h`, adopted PIC/CPU/mantle sources. |
-| Files And ABI Surface | Original guest Redirector interrupt sources, existing bx-mantle mechanical/PIC contracts, tracker/evidence and a proposal-only decision unless S1 finds an existing seam. |
+| Identifier Mode | `M0 T253 S2`, Ordinary Mode, single-person dual-role source/mechanics implementation. |
+| Admission And Approval | S1 proves original guest IRQ14 and existing native PIC/CPU delivery. A mantle wrapper is a composition surface, not a bx-core/Bochs behavior change. |
+| Objective | Expose a lifecycle-checked, selector-blind physical-IRQ request to the existing native PIC; verify acknowledgement, masking and inactive-machine rejection. |
+| Non-goals | No Redirector I/O, BOP provider semantic, guest ANR synthesis, IVT write, DPMI/WOW, raw callback/handle, or bx-core change. |
+| Reference Baseline | [S1 mechanics map](etc/evidence/m0-t253-s1-selector-blind-async-delivery-mechanics-map-001.md), T252 closure, `int5c.asm`, `vdmredir.h`, adopted PIC/CPU/mantle sources. |
+| Files And ABI Surface | Fixed bx-mantle physical-IRQ request/result ABI, minimal-machine lifecycle/PIC path, focused fixture and tracker/evidence. |
 | Applicable Rules | Source-first recovery, guest/machine hard boundary, Bochs rewrite stop rule, selector blindness and external-intrusion registry. |
-| Verification | Source call-frame map, machine API/static ownership audit, existing focused fixture inventory, documentation gates and `git diff --check`. |
-| Expected Markers | Exact original completion frame plus a binary decision: existing generic mechanical seam, bounded new mantle composition, or registered Bochs exception. |
+| Verification | Focused native PIC fixture for accepted/masked/inactive requests, static boundary scan, documentation gates and `git diff --check`. |
+| Expected Markers | Accepted IRQ14 reaches the ordinary PIC path; masked and inactive requests reject without CPU-vector bypass. |
 | Asset Needs | Retained `int5c.asm`, VDMREDIR headers, current core/mantle lifecycle/PIC code and existing interrupt tests. |
 | Reporting Requirements | State whether any candidate would expose a BOP/DOS name in Bochs; reject it if so. |
-| Stop Conditions | Required change affects CPU decoding, PIC/IVT semantics outside a proven existing seam, or lacks a source-layout basis. |
-| Exit Criteria | A source/ABI/failure map and an owner-correct S2 plan; no implementation before the selected seam is evidenced. |
+| Stop Conditions | Required change affects CPU decoding or needs a direct vector/IVT/guest-state bypass. |
+| Exit Criteria | Fixed request ABI/tests source-build; boundary remains selector-blind and T253 S3 is ready for Redirector composition. |
 | Original Owner Request | Continue original-code recovery by dependency; Bochs and mantle must remain free of DOS/VDM/BOP semantics. |
 | Similar-Issue Sweep | `02/06` machine interrupt package, existing PIC/8042 paths, VDD/top-level events, NetBIOS/DLC and DPMI exception/IRET routing. |
 

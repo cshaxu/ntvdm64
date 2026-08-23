@@ -27,13 +27,14 @@ guest far-call frame and returns by IRET. `vrnmpipe.h` defines the retained
 
 ## Admission plan
 
-1. **S1 — source/mechanics audit:** map `int5c.asm` call-frame and native
-   Bochs/PIC interrupt injection candidates; determine whether an existing
-   selector-blind mantle request can deliver a pending external interrupt.
-2. **S2 — minimal mechanical seam:** only if S1 proves a finite existing
-   machine operation or a documented minimum Bochs exception.  Define a
-   fixed-width opaque interrupt request/result ABI with positive and negative
-   tests; no BOP/DOS/OpenNT naming enters bx-core/bx-mantle.
+1. **S1 — source/mechanics audit (closed):** `int5c.inc` and `vdmredir.h`
+   prove physical IRQ14 / slave line 6, and the existing native PIC produces
+   vector `76h` through ordinary acknowledgement. See
+   [S1 mechanics map](../evidence/m0-t253-s1-selector-blind-async-delivery-mechanics-map-001.md).
+2. **S2 — minimal mechanical seam:** add a fixed no-payload physical-IRQ
+   request/result ABI around the existing mantle PIC lifecycle, with positive
+   and negative tests. No BOP/DOS/OpenNT naming enters bx-core/bx-mantle; no
+   Bochs exception is selected.
 3. **S3 — Redirector completion composition:** recover the retained
    `MAXIMUM_ASYNC_PIPES` queue, descriptor validation, public overlapped I/O,
    serialized completion and `int5c` delivery, then test original failure and
