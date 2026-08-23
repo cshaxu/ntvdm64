@@ -16,6 +16,7 @@
 | Non-goals | No FDC/DMA/CMOS/media enablement, UMB reservation, raw-media I/O, policy expansion, generic ignore, guest EXEC claim or bx-core/bx-mantle change. |
 | Reference Baseline | `BOP-DEPENDENCY-110/111`, OpenNT `nt_bop.c:MS_bop_E`, `nt_umb.c:UMBNotify`, `demdasd.c:demDasdInit/demFloppyInit`. |
 | Files And ABI Surface | Named bx-vdm source mirror, no-op UMB shim, selector-owning bridge, and provider-neutral scoped three/four-byte body-call helper. |
+| Applicable Rules | Source-first recovery, immutable host-drive admission, guest-owner boundary, selector-blind machine boundary and MTSP governance. |
 | Verification | Fresh formal Ninja compile/link and a synthetic empty-drive session fixture proving AL=0 invokes the source body and resumes at `RIP+3` without guest-register delta. |
 | Expected Markers | 5E is handled only with a bound Direct DEM session; wrong shape/mode and unbound sessions decline. |
 | Exit Criteria | The source body, typed `+3` resume and zero-floppy source path are locally verified and documented; native trace is separately optional integration evidence. |
