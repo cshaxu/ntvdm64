@@ -40,6 +40,13 @@ build closure.
 | S7 | `adapter-softpc` same-shaped SoftPC/CCPU boundary and shared-mapping-manager migration. |
 | S8 | Tests, formal Ninja graph, legacy-path exit and whole-package acceptance. |
 
+**Current progress:** S1 P1 establishes the reproducible formal-graph owner
+baseline through `Export-T260S1OwnerManifest.ps1`: 386 rows cover 291 module
+sources, 78 fixtures, one target, 14 include roots and two build inputs.
+Header closure, guest build inputs and final fixture ownership remain active
+S1 work; no source has moved. See the
+[baseline record](etc/operations/m0-t260-s1-owner-manifest-baseline-001.md).
+
 ## Previous Active Packet — M0 T259
 
 ### M0 T259 S4 — Host/machine source-shaped facade reconciliation
