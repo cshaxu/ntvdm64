@@ -15,7 +15,7 @@ dependency, not a new member of the canonical 203 host-service BOP inventory.
 | S | Scope | Required exit before the next S |
 | --- | --- | --- |
 | S1 | Audit `bios.c`, `mem_size.c`, `reset.c`, their memory macros, the guest caller, current mantle lifecycle, current adapter helper/ingress and formal manifest. Produce a four-rung source-recovery, reset/value and ABI ledger. | **Complete.** Exact original ownership and first-profile value provenance are reconciled; a minimal typed seam is specified; all unrelated current helper behavior is classified. |
-| S2 | Bind and recover the source-shaped query through the existing selector-blind checked-RAM read action. `bx-mantle` sees only physical address/length; the BDA address and original read-to-AX meaning remain in `bx-vdm`. | **Implementation complete.** The direct `mem_size.c` mirror, its uniquely named SAS/AX shim and active generic-UD route pass mutation/negative local tests and the formal Ninja fixture. One bounded native observation remains the S2 integration exit. |
+| S2 | Bind and recover the source-shaped query through the existing selector-blind checked-RAM read action. `bx-mantle` sees only physical address/length; the BDA address and original read-to-AX meaning remain in `bx-vdm`. | **P2 delivery active.** The direct `mem_size.c` mirror, its uniquely named SAS/AX shim and active generic-UD route pass mutation/negative local tests and the formal Ninja fixture. One bounded native run stopped before BOP ingress; it is retained as an integration limitation, not a source-route failure. |
 
 ## Non-negotiable exclusions
 

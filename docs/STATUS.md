@@ -2,8 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T240 S2** — recover the original SoftPC `memory_size` query
-through the existing selector-blind checked-RAM action.
+**Active: M0 T240 S2** — record and deliver the completed SoftPC
+`memory_size` source-route closure through the existing selector-blind
+checked-RAM action.
 
 ## Active Packet
 
@@ -26,10 +27,17 @@ through the existing selector-blind checked-RAM action.
 | Exit Criteria | Original `memory_size` behavior is active and locally tested through the existing mechanical seam; obsolete coupled helper/fixture is retired; formal build and bounded native observation are recorded; commit/push closure. |
 | Original Owner Request | “像这种情况 甚至连对bochs的侵入都没有 为啥需要我批准”. |
 | Similar-Issue Sweep | All current callers of the legacy helper, `15h/AH=88h` coupling, BDA address handling, generic RAM action action-id use, ingress order, manifest membership and mantle vocabulary scan. |
-| Exit Status | Active — P1 source mirror, private SAS/AX shim, direct ingress, v1-helper retirement and focused formal fixture are complete. The remaining S2 exit work is one bounded native observation using the rebuilt product target; it may classify only the completed `12h` component and must not allocate the next selector. |
+| Exit Status | P2 delivery active — P1 source mirror, private SAS/AX shim, direct ingress, v1-helper retirement, focused/formal fixture and one bounded native observation are complete. The native run stopped before BOP ingress; this is a recorded integration limitation and does not allocate the next selector. |
 | Next Admission | S3 only if S2 proves that the source-shaped provider needs a separately bounded ingress/result integration change. |
 
 ## Latest Closure
+
+M0 T240 S2 P1 recovers the OpenNT-shaped SoftPC conventional-memory query:
+the active `mem_size.c` mirror reads mutable BDA `0040:0013` through the
+existing selector-blind checked-RAM action, then returns AX/RIP+3. No Bochs
+intrusion was required. Its one bounded native run stopped before a BOP was
+reached, so it is not a guest-continuity claim; see the
+[S2 evidence](etc/evidence/m0-t240-s2-softpc-memory-size-closure-001.md).
 
 M0 T239 closes the working-tree retirement of every experimental BOP-v1
 provider, catalog, facade, legacy fixture and dead build/probe helper. The
