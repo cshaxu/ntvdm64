@@ -9,7 +9,7 @@ between a closed host `cmdExec32` worker and continuous guest execution.
 
 ## Queue relationship
 
-This is the admission plan for queue candidate 3, **NTDOS guest EXEC and
+This is the admission plan for the leading queue candidate, **NTDOS guest EXEC and
 parent-return recovery**.  It may be admitted only after its tracker rows and
 machine prerequisites are frozen; its package boundary may not expand into a
 COMMAND host broker or a machine-device task.
