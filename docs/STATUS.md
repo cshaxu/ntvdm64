@@ -10,9 +10,9 @@
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T257 S5`, Ordinary Mode, single-person dual-role source-first typed-frame transaction design. |
+| Identifier Mode | `M0 T257 S5`, Ordinary Mode, single-person dual-role source-first typed-frame transaction design; **frozen for Td S2 interface-conformance audit**. |
 | Admission And Approval | S4 closes the [complete protected-frame map](etc/evidence/m0-t257-s4-dosx-protected-frame-map-001.md) and proves the existing result ABI insufficient; this S admits only the replacement ABI/design and its local mechanical proof. |
-| Objective | Design and locally prove the smallest versioned, selector-blind typed transaction that can atomically validate/commit the full protected CPU frame required by the imported DOSX/DPMI source. It remains inactive: no `53:xx` ingress, hook registration or exception interception. |
+| Objective | After Td S2 records whether an OpenNT-shaped facade can preserve the reached historical pointer/CCPU/SoftPC calls, design and locally prove the smallest versioned, selector-blind typed transaction that can atomically validate/commit the full protected CPU frame. Until that audit closes, S5 is design-only and no new ABI is authored. |
 | Non-goals | No active DPMI leaf route, raw pointer/frame mapping, `NtVdmControl`/`VdmInstall*`/emulator-hook import, adapter-owned exception or IRET semantics, DPMI-aware mantle/core branch, or guest policy in the opaque mechanical executor. |
 | Reference Baseline | S4 protected-frame map, S3 startup/table composition, T256 S14 classification, existing protected range action and CPU result/exception ABIs. |
 | Files And ABI Surface | New versioned frame action ABI plus bx-vdm source-facing session shim and selector-blind bx-mantle executor only if the design proves feasible. No `dpmiint.c` body or BOP ingress is imported in S5. |
@@ -21,12 +21,19 @@
 | Expected Markers | No partial CPU update after a rejected frame; no raw host pointer; core/mantle remain selector/DOS/BOP blind; typed request cannot identify DPMI or any BOP. |
 | Asset Needs | S4 evidence, current formal manifest, `bx_ntvdm_protected_range_action_v1`, CPU-result/exception ABI sources and native protected fixture. |
 | Reporting Requirements | Record all frame fields, validation order, lifecycle rules, source-first disposition and whether a mechanical boundary exception is required. |
-| Stop Conditions | An active BOP, historical hook import, a policy-bearing mantle/core field, raw host pointer, non-atomic result, or any unregistered Bochs intrusion. |
+| Stop Conditions | An active BOP, historical hook import, a policy-bearing mantle/core field, raw host pointer, non-atomic result, any unregistered Bochs intrusion, or implementation before Td S2's interface disposition is recorded. |
 | Exit Criteria | A tested, generic transaction ABI can atomically commit a bounded guest byte-write set plus the required typed CPU state—or is rejected with proof; S6 may only compose original `dpmiint.c` if this exit is positive. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing exception result, context/resume result, protected range action, native LDT fixture and every caller requiring state beyond low GPR/selector/CF/ZF. |
 
 ## Latest Closure
+
+M0 Td S2 P1 closes the governing source-recovery decision: an original OpenNT
+translation unit now requires direct composition or a recorded OpenNT-shaped
+facade before a project-defined replacement is permitted. It also fixes the
+single bounded guest-pointer mapping-lease contract. S5 is frozen pending the
+separate Td S2 P2 whole-tracker interface-conformance audit; see
+[guest-pointer governance](etc/operations/td-guest-pointer-mapping-governance-001.md).
 
 M0 T256 closes the selector-blind protected virtual-access and guest-linear
 substrate. Its final fresh 278-node formal Ninja build and XMEM fixture pass;

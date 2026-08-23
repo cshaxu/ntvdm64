@@ -35,6 +35,27 @@ guest-memory ranges. It does not pass C++ objects, host pointers, CRT-owned
 memory, implicit handle ownership, or cross-architecture callbacks across that
 boundary.
 
+### Guest-Pointer Mapping
+
+`bx-vdm` owns one session-scoped guest-pointer mapping manager.  It is the
+single compatibility boundary for historical OpenNT pointer APIs such as
+`GetVDMAddr`, `Sim32GetVDMPointer`, `Sim32FlushVDMPointer`, and
+`Sim32FreeVDMPointer`.  For a synchronous, admitted OpenNT call it may acquire
+a bounded, epoch-scoped direct mapping of stable Bochs guest RAM and return the
+native process pointer required by the historical call shape.  That pointer is
+valid only inside the active `bx-vdm` call: it is never serialized into guest
+memory, returned through the bx↔machine ABI, retained by an asynchronous
+worker, or exposed as a Bochs object.
+
+The same manager owns the corresponding mapping lease: guest real-mode
+`16:16` and protected/linear `32-bit` addresses, access direction, maximum
+span, mapping epoch, and teardown.  A call which can retain a pointer, execute
+asynchronously, or cannot prove its access span uses a copied/bounce mapping
+or an explicit unavailable result instead.  The manager may share session
+ownership and lifecycle bookkeeping with host-handle and child-event tables,
+but these remain distinct resource kinds: a guest address is never a Windows
+`HANDLE`, and a native pointer is never a guest-visible token.
+
 The first runtime process is MSVC x64 throughout: its command-line invocation
 shell, VDM adapter, mantle and adopted Bochs core share one static CRT. The
 invocation shell is an outer product boundary, not a semantic architecture

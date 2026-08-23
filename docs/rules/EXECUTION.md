@@ -101,7 +101,8 @@ a configure tree, retry root, object cache, or probe.
 Before admitting or changing a recovered OpenNT, guest, or host-service
 behavior, the active S evidence must classify the proposed implementation
 against this mandatory order: (1) directly composable original OpenNT source;
-(2) that source composed through the smallest adapter, compatibility seam, or
+(2) that source composed through the smallest OpenNT-shaped compatibility
+facade, adapter, compatibility seam, or
 build shim; (3) a registered exceptional intrusion into adopted external
 code; (4) newly authored behavior only when no usable historical source
 remains.  The record names the original owner and source path, preserves or
@@ -120,6 +121,32 @@ record why a registered external-code intrusion or newly authored behavior is
 unavoidable.  A passing fixture and the availability of a convenient modern
 Win32 API validate a selected seam; neither substitutes for this source-first
 analysis.
+
+For a BOP/provider closure, a functionally similar local provider is not
+evidence that original OpenNT source has been recovered. The evidence must
+state whether the original translation unit is formally composed directly or
+through an OpenNT-shaped facade; if not, it must record the exact unavailable
+dependency, the retained source fragment and why a facade cannot preserve the
+reached contract. Every imported-source divergence and every retained
+non-mirror provider must have an explicit migrate/replace/retain-as-generic-
+mechanics/delete disposition.
+
+When the reached source uses `GetVDMAddr`, `Sim32GetVDMPointer`,
+`Sim32FlushVDMPointer`, or `Sim32FreeVDMPointer`, provider closure additionally
+records the shared `bx-vdm` mapping-manager disposition: direct synchronous
+lease, copied/bounce lease, explicit refusal, address/span, access direction,
+epoch/teardown, and focused positive and negative proof. A provider may not
+introduce a family-private guest-pointer mapper. Native pointers are local
+implementation state only and never cross the bx↔machine ABI, enter guest
+state, or survive the admitted call.
+
+Any project-defined replacement interface or logic additionally needs a
+registered recovery exception before implementation. That exception names the
+failed direct and same-shaped-facade routes, exact unavailable dependency,
+minimal replacement ABI, retained original observable contract, negative
+behavior, focused verification and a future migration disposition. Otherwise
+the implementation must retain the original interface shape and follow the
+reached source ordering and layout.
 
 ### CPU Compatibility Profile Completion Gate
 

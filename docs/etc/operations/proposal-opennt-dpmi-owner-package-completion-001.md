@@ -23,7 +23,10 @@ CR0, LDT internals or manufacture a DPMI server.
    guest callers, host data layout, historical NT4 dependencies and failure
    terminals.
 2. **S2 — import boundary:** create the original-source mirror/compile
-   manifest and named compatibility-shim ledger; no ingress or leaf route.
+   manifest and named OpenNT-shaped compatibility-facade ledger; no ingress or
+   leaf route.  A facade preserves original call/macro/structure shape and
+   maps only the source-proven session contract to bounded internals; it is
+   not a license to rewrite the source body around a new provider.
 3. **S3--S6 — coherent subcontracts:** recover startup/table, frame/IRET,
    XMEM/memory and PM-to-DOS translation as ordered package units; retain VDD
    and debug terminals explicitly until their owner packages exist.
@@ -34,4 +37,11 @@ CR0, LDT internals or manufacture a DPMI server.
 ## Exit Rule
 
 An x64-incompatible historical LDT call is a source-composition question, not
-authorization for an adapter-owned protected-mode implementation.
+authorization for an adapter-owned protected-mode implementation. A DPMI BOP
+is not code-complete merely because a bx-vdm provider has equivalent-looking
+behavior: its original translation unit must be composed directly or through
+the recorded OpenNT-shaped facade, or the evidence must name the exact
+unavailable dependency and an explicit temporary migration disposition.
+Any project-defined DPMI interface or algorithm requires a registered recovery
+exception first, including the rejected direct/facade routes, minimal ABI,
+retained source-visible behavior and planned migration disposition.

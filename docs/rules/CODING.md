@@ -16,6 +16,40 @@
   then a registered external-code intrusion, and only last new behavior.  A
   modern Win32 API may supply a selected OpenNT owner's host capability, but
   never authorizes bypassing that owner's algorithm or failure contract.
+- For rung-2 recovery, prefer an **OpenNT-shaped compatibility facade** over
+  rewriting an imported OpenNT body around project-authored APIs.  Keep the
+  original call/macro/structure form in the mirror and provide a named
+  compatibility header that maps it to bounded, session-owned, internally
+  namespaced implementation.  Every changed line in an imported source file
+  must carry `DIVERGENCE:` with the unavailable historical dependency and the
+  reason the facade cannot preserve that exact expression.  Do not call a
+  self-authored provider “recovered” or “code complete” while the original
+  translation unit is available but has not been composed through this form.
+- Same spelling and parameters do not prove a safe compatibility replacement.
+  A facade must be justified by the reached original call site, ABI layout,
+  ordering and failure behavior. Historical guest-pointer APIs may retain
+  their exact pointer-returning shape only through the one `bx-vdm`
+  session-owned mapping manager: every mapping has a checked address/span,
+  access rule and active-call epoch; its native pointer never crosses a
+  component ABI, enters guest state or asynchronous work. A facade must not
+  recreate an unbounded CCPU/SAS, CSR/BaseSrv, NTVDM or emulator product shell.
+  Existing non-mirror providers are migration debt: classify them as retain as
+  generic mechanics, migrate behind the facade, replace with the mirror, or
+  delete when their owner package is next changed.
+- A project-defined interface, data layout or algorithm is allowed only as a
+  registered recovery exception. Its admission records the failed direct and
+  same-shaped-facade attempts, exact unavailable dependency, smallest new ABI,
+  source-derived observable behavior, negative/failure contract, focused test
+  and planned migrate/retain/delete disposition. Without that record, an
+  independently implemented routine must use the original interface shape and
+  reproduce the reached original control/data/failure logic as closely as the
+  current platform permits.
+- Minimize project-defined replacement interfaces. Prefer an existing public
+  Win32 API when it preserves the reached OpenNT contract; otherwise keep the
+  unavailable Win32/CCPU/SoftPC call's original signature and call shape in a
+  facade. A newly shaped interface is permitted only under the registered
+  exception above, must expose no more state than the reached call requires,
+  and must not be introduced merely to make a local implementation easier.
 - Keep authored runner code, overlays, host seams, imported material, generated
   files, and fixtures visibly separate.
 - Make the smallest evidence-backed change. Preserve calling conventions,
