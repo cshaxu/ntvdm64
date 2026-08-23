@@ -622,3 +622,15 @@ int bx_ntvdm_demhndl_invoke(bx_ntvdm_demhndl_call *call)
     }
     return bx_ntvdm_demhndl_invoke_body(call, service);
 }
+
+int bx_ntvdm_demhndl_invoke_fast_read(bx_ntvdm_demhndl_call *call)
+{
+    /* OpenNT source map: handle.asm's non-pipe x86 FastOrSlow branch emits
+     * SVC_DEMFASTREAD (42h), while the available demdisp.c table has only the
+     * CF-clear demNotYetImplemented placeholder.  No historical fast worker
+     * exists in the admitted tree.  Its caller ABI is byte-for-byte the
+     * imported demRead ABI, so reuse the original body through the smallest
+     * CCPU/SAS replacement rather than fabricate a second read provider. */
+    if (!bx_ntvdm_demhndl_call_valid(call) || call->service != 0x42u) return 0;
+    return bx_ntvdm_demhndl_invoke_body(call, demRead);
+}

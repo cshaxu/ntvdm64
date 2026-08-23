@@ -80,6 +80,12 @@ typedef struct bx_ntvdm_demhndl_call {
 
 int bx_ntvdm_demhndl_call_valid(const bx_ntvdm_demhndl_call *call);
 int bx_ntvdm_demhndl_invoke(bx_ntvdm_demhndl_call *call);
+/* `demdisp.c` leaves 50:42 as its historical missing worker, although the
+ * original x86 DOS caller selects it and consumes the same read ABI as
+ * demRead.  This narrowly named composition seam retains that caller and
+ * invokes the imported demRead body; it is not a dispatcher-table edit or a
+ * replacement file-I/O algorithm. */
+int bx_ntvdm_demhndl_invoke_fast_read(bx_ntvdm_demhndl_call *call);
 /* A second directly imported DEM owner may execute through the same scoped
  * CCPU/SAS replacement.  This remains a mechanical call boundary: the caller
  * owns service selection and the imported function owns its DEM semantics. */

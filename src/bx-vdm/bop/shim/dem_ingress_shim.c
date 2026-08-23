@@ -10,5 +10,10 @@ int bx_ntvdm_dem_ingress_dispatch(
         window->bytes[2] != 0x50u || call->service != window->bytes[3] ||
         call->service >= SVC_DEMLASTSVC)
         return 0;
+    /* The retained original dispatcher deliberately has no 50:42 worker.
+     * Select the separately source-mapped demRead-body seam only for this
+     * exact BOP; all other services preserve original DemDispatch ordering. */
+    if (call->service == 0x42u)
+        return bx_ntvdm_demhndl_invoke_fast_read(call);
     return bx_ntvdm_demdisp_invoke(call);
 }

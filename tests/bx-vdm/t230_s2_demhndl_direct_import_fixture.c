@@ -4,6 +4,7 @@
 
 #include "bop/shim/demdisp_shim.h"
 #include "bop/shim/demhndl_shim.h"
+#include "bop/shim/dem_ingress_shim.h"
 
 typedef struct fixture_context {
     HANDLE handle;
@@ -153,6 +154,32 @@ static int invoke_dispatch_noop(fixture_context *state,
         (result->eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u;
 }
 
+static int invoke_fast_read(fixture_context *state,
+    bx_ntvdm_dem_direct_context *direct, bx_ntvdm_exception_event_v1 *event,
+    bx_ntvdm_cpu_state_v1 *cpu, bx_ntvdm_cpu_result_v2 *result)
+{
+    bx_ntvdm_demhndl_call call;
+    bx_ntvdm_instruction_window_v1 window;
+    static const uint8_t instruction[] = {0xc4u, 0xc4u, 0x50u, 0x42u};
+    memset(&call, 0, sizeof(call));
+    call.magic = BX_NTVDM_DEMHNDL_CALL_MAGIC;
+    call.abi_version = BX_NTVDM_DEMHNDL_CALL_VERSION;
+    call.struct_bytes = sizeof(call);
+    call.service = 0x42u;
+    call.direct = direct;
+    call.boundary = event;
+    call.cpu = cpu;
+    call.result = result;
+    call.guest_state = state;
+    call.guest_read = guest_read;
+    call.guest_write = guest_write;
+    bx_ntvdm_instruction_window_v1_capture(&window, instruction,
+        (uint32_t)sizeof(instruction));
+    return bx_ntvdm_dem_ingress_dispatch(&window, &call) &&
+        result->disposition == BX_NTVDM_CPU_RESULT_V2_RESUME &&
+        result->resume_rip == event->fault_rip + 4u;
+}
+
 int main(void)
 {
     wchar_t path[MAX_PATH], directory[MAX_PATH];
@@ -194,6 +221,20 @@ int main(void)
     if (!invoke(&state, &direct, &event, &cpu, &result,
             BX_NTVDM_DEMHNDL_READ) || result.cpu_delta.gpr16_values[0] != 5u ||
         memcmp(state.guest + address, "hello", 5u) != 0) return 6;
+
+    /* The historical x86 caller uses 50:42, whose visible dispatcher entry
+     * is a no-op.  The admitted exact-selector seam must instead run the
+     * imported demRead body, copy bytes, return their actual count and resume. */
+    cpu.ebx = 0u; cpu.esi = 0u; cpu.ecx = 0u; cpu.edx = 0u; cpu.eflags = 0u;
+    if (!invoke(&state, &direct, &event, &cpu, &result,
+            BX_NTVDM_DEMHNDL_CHG_FILE_PTR) || result.cpu_delta.gpr16_values[0] != 0u)
+        return 14;
+    memset(state.guest + address, 0, 5u);
+    cpu.ecx = 5u; cpu.eflags = 0x40u;
+    if (!invoke_fast_read(&state, &direct, &event, &cpu, &result) ||
+        result.cpu_delta.gpr16_values[0] != 5u ||
+        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
+        memcmp(state.guest + address, "hello", 5u) != 0) return 15;
 
     cpu.ebx = 0u; cpu.eflags = 0u;
     if (!invoke(&state, &direct, &event, &cpu, &result,
