@@ -26,12 +26,13 @@
 | Original Owner Request | “批准实施” the recommended unified guest-host pointer mapping manager, with source-first OpenNT compatibility and single-person dual-role execution. |
 | Similar-Issue Sweep | DEM/COMMAND/XMS family helpers, Redirector async paths, DPMI protected pointers, host-token manager, fixed-width bx↔machine actions and any raw `GetVDMAddr`/`Sim32*` macro. |
 
-**Current progress:** S1 P1 establishes the one mapping-manager implementation
-and its three fixed session instances: `guest_memory`, `host_handle`, and
-`session_data`.  DEM bounded synchronous spans now use `guest_memory`; a fresh
-formal Ninja graph and focused DEM/COMMAND regressions pass. COMMAND/XMS
-family-local pointer helpers remain the next staged migration work; no new BOP
-route is enabled. See the [P1 source/ABI map](etc/evidence/m0-t258-s1-pointer-manager-source-abi-map-001.md).
+**Current progress:** All stated S1 exit criteria are technically evidenced:
+one manager implementation exposes the three fixed session instances
+`guest_memory`, `host_handle`, and `session_data`; no shared numeric namespace
+exists. DEM bounded synchronous spans use `guest_memory`; formal Ninja and
+focused regression fixtures pass. The closure record is ready, but this packet
+remains active until the owner admits a successor M/T/S packet, as required by
+the governance verifier.
 
 ## Latest Closure
 
