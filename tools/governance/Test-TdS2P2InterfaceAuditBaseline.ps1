@@ -15,7 +15,10 @@ foreach ($path in @($trackerPath, $planPath)) {
 $lines = Get-Content -LiteralPath $trackerPath
 $bop = @($lines | Where-Object { $_ -match '^\| `BOP-(?!DEPENDENCY-)' })
 $dependency = @($lines | Where-Object { $_ -match '^\| `BOP-DEPENDENCY-' })
-if ($bop.Count -ne 203) { throw "Td S2 P2 expected 203 BOP rows, found $($bop.Count)" }
+$bopIds = @($bop | ForEach-Object {
+    if ($_ -match '^\| `(BOP-(?!DEPENDENCY-)[^`]+)`') { $matches[1] }
+} | Sort-Object -Unique)
+if ($bopIds.Count -ne 203) { throw "Td S2 P2 expected 203 unique BOP rows, found $($bopIds.Count)" }
 $dependencyIds = @($dependency | ForEach-Object {
     if ($_ -match '^\| `BOP-DEPENDENCY-(\d{3})`') { [int]$matches[1] }
 } | Sort-Object -Unique)

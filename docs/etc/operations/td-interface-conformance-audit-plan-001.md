@@ -23,7 +23,7 @@ Each row receives these five fields:
 | Original interface evidence | Exact original function/macro/structure and source call site, or `none` for a pure guest artifact. |
 | Divergence | Pointer, signature, layout, ordering, lifetime, host API, or failure-semantic difference; `none proven` is permitted only with a citation. |
 | Exception | Registered recovery/intrusion record ID, or `none`. |
-| Migration conclusion | `retain-generic-mechanics`, `migrate-facade`, `replace-with-mirror`, `delete`, or `deferred-owner-package`. |
+| Migration conclusion | `retain-facade`, `retain-generic-mechanics`, `migrate-facade`, `replace-with-mirror`, `delete`, or `deferred-owner-package`. |
 
 ## Execution sequence
 

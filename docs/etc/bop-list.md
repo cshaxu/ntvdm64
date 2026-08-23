@@ -244,6 +244,159 @@ whether their reached interfaces comply with the source-first facade rule.
 | `BOP-DEPENDENCY-117` | `registered-exception` | `dpmi32` context/range callers; native Bochs uses its own architectural context and descriptor machinery. | The historical process-LDT, direct pointer and emulator-hook composition is unavailable.  Generic fixed-width context/range/capacity records are selector-blind only. | `BX-ABI-094`, `BX-MANTLE-095`, `BX-MANTLE-096`, `BX-MANTLE-097` | `retain-generic-mechanics` — do not expose them as DPMI; source composition remains deferred to the whole DOSX package. |
 | `BOP-DEPENDENCY-118` | `migration-debt` | OpenNT `GetVDMAddr`, `Sim32GetVDMPointer`, `Sim32FlushVDMPointer`, `Sim32FreeVDMPointer` calls in DEM/COMMAND/XMS mirrors. | Family-local, same-spelled shims exist; they have not yet migrated to the one bounded session/epoch mapping manager required by Td S2 P1. | none | `migrate-facade` — use the named shared facade for every next pointer-using owner-package change; direct/bounce lease tests are required before a new pointer-consuming route is enabled. |
 
+### Td S2 P4 — DEM and COMMAND interface dispositions
+
+`D:n` below is the exact original `demdisp.c:apfnSVC[n]` slot; `C:n` is
+`cmddisp.c:apfnSVCCmd[n]`. `P` means the reached body uses one or more of
+`GetVDMAddr`/`Sim32GetVDMPointer`/`Sim32FlushVDMPointer`/
+`Sim32FreeVDMPointer`; its current per-family helper is the migration debt
+recorded by dependency 118. `H` means the source reaches the approved
+32-bit opaque host-token seam `BX-VDM-001`. This notation keeps each row
+explicit while avoiding a second, lossy copy of the original dispatcher maps.
+
+#### DEM dependency rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-DEPENDENCY-001` | `opennt-shaped-facade` | Original `dem.c`; active direct mirror with `dem_common_shim.h`. | Historical include closure is replaced only by named declarations. | none | `retain-facade` |
+| `BOP-DEPENDENCY-002` | `opennt-shaped-facade` | Original `demdata.c`; active direct mirror. | Global/session linkage is bounded by the named common shim. | none | `retain-facade` |
+| `BOP-DEPENDENCY-003` | `opennt-shaped-facade` | Original `demmsg.c`; active direct mirror. | Debug/message host output is shimmed; source selection remains intact. | none | `retain-facade` |
+| `BOP-DEPENDENCY-004` | `opennt-shaped-facade` | Original `demmsg.h` layouts; active mirror. | Compiler/header closure only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-005` | `opennt-shaped-facade` | Original 73-slot `demdisp.c:apfnSVC`; active direct mirror. | Typed ingress replaces CCPU call entry, not table/order/ordinary return. | none | `retain-facade` |
+| `BOP-DEPENDENCY-006` | `migration-debt` | Original `demhndl.c` uses `P` and handle register pairs. | `demhndl_shim` has bounded bounce spans but not the shared lease facade. | `BX-VDM-001` for H only | `migrate-facade` |
+| `BOP-DEPENDENCY-007` | `migration-debt` | Original `demfile.c` uses `P`, SFT/JFT pointers and H. | `demfile_shim` supplies private fallback/bounce paths; it must consume dependency 118. | `BX-VDM-001` for H only | `migrate-facade` |
+| `BOP-DEPENDENCY-008` | `migration-debt` | Original `demdir.c` uses `GetVDMAddr` for names/CDS. | `demdir_shim` has no shared mapping lease. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-009` | `migration-debt` | Original `demlabel.c` uses file/path source contracts. | Inherits `demfile_shim` pointer representation. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-010` | `opennt-shaped-facade` | Original `demlock.c`; active direct mirror. | Named lock/error declarations replace product include closure. | none | `retain-facade` |
+| `BOP-DEPENDENCY-011` | `migration-debt` | Original `demsrch.c` maps DTA/search buffers with `P`. | `demsrch_fcb_shim` has family-local guest mapping. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-012` | `migration-debt` | Original `demfcb.c` maps FCB/DTA buffers with `P`. | `demsrch_fcb_shim` has family-local guest mapping. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-013` | `migration-debt` | Original `demgset.c` maps DPB/volume/name buffers with `P`. | `demgset_shim` has family-local guest mapping. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-014` | `migration-debt` | Original `demerror.c` retains hard-error/device-chain pointers. | Current shim must become bounded lease/copy or explicit refusal. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-015` | `migration-debt` | Original `demioctl.c` maps IOCTL parameter blocks with `P`. | Device capability is separate; pointer interface is not shared yet. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-016` | `migration-debt` | Original `demdasd.c` maps DiskIo and transfer buffers with `P`. | Device/media disposition does not excuse private pointer mapping. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-017` | `opennt-shaped-facade` | Original `demdasd.h` layouts; active mirror. | Compiler/header closure only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-018` | `migration-debt` | Original `demmisc.c` uses `P` for load, stack and notification data. | `demmisc_shim` has family-local pointer helpers and product callbacks. | none | `migrate-facade` |
+
+#### COMMAND dependency rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-DEPENDENCY-019` | `opennt-shaped-facade` | Original `cmd.c`; active direct mirror. | Named COMMAND host declarations replace product include closure. | none | `retain-facade` |
+| `BOP-DEPENDENCY-020` | `opennt-shaped-facade` | Original `cmd.h` layouts; active mirror. | Compiler/header closure only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-021` | `opennt-shaped-facade` | Original `cmddata.c`; active direct mirror. | Single-session state replaces multi-VDM product globals. | none | `retain-facade` |
+| `BOP-DEPENDENCY-022` | `opennt-shaped-facade` | Original 17-slot `cmddisp.c:apfnSVCCmd`; active direct mirror. | Typed ingress replaces CCPU entry, not table/order/ordinary return. | none | `retain-facade` |
+| `BOP-DEPENDENCY-023` | `migration-debt` | Original `cmdmisc.c` uses `P` for CMDINFO/session buffers. | `command_misc_shim` retains family-local address helpers. | `BX-VDM-001` where standard H tokens are used | `migrate-facade` |
+| `BOP-DEPENDENCY-024` | `migration-debt` | Original `cmdconf.c` maps guest CONFIG/AUTOEXEC strings with `GetVDMAddr`. | Session-local path source is valid; pointer form still needs dependency 118. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-025` | `migration-debt` | Original `cmdenv.c` maps the guest environment with `GetVDMAddr`. | Modern multisz/session environment seam is bounded but not shared mapping-manager based. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-026` | `opennt-shaped-facade` | Original `cmdpif.c` plus preserved PIF layout/parser calls. | Public parser/config seams replace UI/product host services. | none | `retain-facade` |
+| `BOP-DEPENDENCY-027` | `migration-debt` | Original `cmdexec.c` maps app name, parameter block, tail and environment with `P`. | Session child worker avoids CCPU/CSR, but pointer helpers must migrate before further route expansion. | `BX-VDM-001` for H streams | `migrate-facade` |
+| `BOP-DEPENDENCY-028` | `opennt-shaped-facade` | Original `cmdexit.c`; active direct mirror. | Session completion replaces CCPU broker; source return ordering retained. | none | `retain-facade` |
+| `BOP-DEPENDENCY-029` | `registered-exception` | Original `cmdredir.c` standard-stream / redirection calls. | Host `HANDLE` is represented by the approved opaque token, never a raw guest value. | `BX-VDM-001` | `retain-generic-mechanics` |
+| `BOP-DEPENDENCY-030` | `migration-debt` | Original `cmdkeyb.c` maps guest keyboard-layout strings with `GetVDMAddr`. | Keyboard hardware remains a later owner; pointer facade is still shared debt. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-031` | `opennt-shaped-facade` | Original `cmdkeyb.h` layouts; active mirror. | Compiler/header closure only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-032` | `opennt-shaped-facade` | Original `cmdpif.h` layouts; active mirror. | Compiler/header closure only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-033` | `opennt-shaped-facade` | Original `cmdsvc.h` service ABI; active mirror. | Typed ingress is outside, not a changed service layout. | none | `retain-facade` |
+
+#### DEM BOP rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-DEM-50-00` | `registered-exception` | D:00 `demChgFilePtr` in `demhndl.c`. | Uses opaque H, not raw host HANDLE. | `BX-VDM-001` | `retain-generic-mechanics` |
+| `BOP-DEM-50-01` | `migration-debt` | D:01 `demChMod` in `demfile.c`; P pathname. | Private file-path mapping precedes public metadata call. | none | `migrate-facade` |
+| `BOP-DEM-50-02` | `registered-exception` | D:02 `demClose` in `demhndl.c`. | Uses opaque H, not raw host HANDLE. | `BX-VDM-001` | `retain-generic-mechanics` |
+| `BOP-DEM-50-03` | `migration-debt` | D:03 `demCreate` in `demfile.c`; P pathname. | Private pathname mapping. | `BX-VDM-001` for output H | `migrate-facade` |
+| `BOP-DEM-50-04` | `migration-debt` | D:04 `demCreateDir` in `demdir.c`; P pathname. | Private pathname mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-05` | `migration-debt` | D:05 `demDelete` in `demfile.c`; P pathname. | Private pathname mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-06` | `migration-debt` | D:06 `demDeleteDir` in `demdir.c`; P pathname. | Private pathname mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-07` | `migration-debt` | D:07 `demDeleteFCB` in `demfcb.c`; P FCB/name. | Private FCB guest mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-08` | `migration-debt` | D:08 `demFileTimes` in `demfile.c`; P pathname. | Private pathname mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-09` | `migration-debt` | D:09 `demFindFirst` in `demsrch.c`; P DTA/name. | Private DTA mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-0A` | `migration-debt` | D:0A `demFindFirstFCB` in `demsrch.c`; P FCB/DTA. | Private FCB/DTA mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-0B` | `migration-debt` | D:0B `demFindNext` in `demsrch.c`; P DTA. | Private DTA mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-0C` | `migration-debt` | D:0C `demFindNextFCB` in `demsrch.c`; P FCB/DTA. | Private FCB/DTA mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-0D` | `opennt-shaped-facade` | D:0D `demGetBootDrive` in `demgset.c`. | Register-only drive result through named session seam. | none | `retain-facade` |
+| `BOP-DEM-50-0E` | `opennt-shaped-facade` | D:0E `demGetDriveFreeSpace` in `demgset.c`. | Public host volume query retains source result/error form. | none | `retain-facade` |
+| `BOP-DEM-50-0F` | `opennt-shaped-facade` | D:0F `demGetDrives` in `demgset.c`. | Public host drive query retains source register result. | none | `retain-facade` |
+| `BOP-DEM-50-10` | `migration-debt` | D:10 `demGSetMediaID` in `demgset.c`; P media data. | Private guest structure mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-11` | `migration-debt` | D:11 `demLoadDos` in `demmisc.c`; P load address. | Private guest load mapping and product startup callbacks. | none | `migrate-facade` |
+| `BOP-DEM-50-12` | `migration-debt` | D:12 `demOpen` in `demfile.c`; P pathname and H result. | Private pathname mapping; H is otherwise approved. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-13` | `migration-debt` | D:13 `demQueryCurrentDir` in `demdir.c`; P output. | Private output-buffer mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-14` | `opennt-shaped-facade` | D:14 `demQueryDate` in `demgset.c`. | Public time query preserves source register order. | none | `retain-facade` |
+| `BOP-DEM-50-15` | `opennt-shaped-facade` | D:15 `demQueryTime` in `demgset.c`. | Public time query preserves source register order. | none | `retain-facade` |
+| `BOP-DEM-50-16` | `migration-debt` | D:16 `demRead` in `demhndl.c`; P buffer and H. | Family bounce buffer not shared lease. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-17` | `migration-debt` | D:17 `demRename` in `demfile.c`; P source/destination. | Private pathname mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-18` | `migration-debt` | D:18 `demSetCurrentDir` in `demdir.c`; P CDS/path. | Private CDS/path mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-19` | `opennt-shaped-facade` | D:19 `demSetDate` in `demgset.c`. | Public time setter retains source error branch. | none | `retain-facade` |
+| `BOP-DEM-50-1A` | `opennt-shaped-facade` | D:1A `demSetDefaultDrive` in `demgset.c`. | Direct public current-directory capability, register-only ABI. | none | `retain-facade` |
+| `BOP-DEM-50-1B` | `opennt-shaped-facade` | D:1B `demSetDTALocation` in `demgset.c`. | Stores a guest address value; no native pointer is exposed. | none | `retain-facade` |
+| `BOP-DEM-50-1C` | `opennt-shaped-facade` | D:1C `demSetTime` in `demgset.c`. | Public time setter retains source error branch. | none | `retain-facade` |
+| `BOP-DEM-50-1D` | `opennt-shaped-facade` | D:1D `demSetV86KernelAddr` original no-op. | Direct mirror preserves no-op. | none | `retain-facade` |
+| `BOP-DEM-50-1E` | `migration-debt` | D:1E `demWrite` in `demhndl.c`; P buffer and H. | Family bounce buffer not shared lease. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-1F` | `opennt-shaped-facade` | D:1F `demNotYetImplemented`. | Original CF-clear terminal remains direct mirror. | none | `retain-facade` |
+| `BOP-DEM-50-20` | `migration-debt` | D:20 `demRenameFCB` in `demfcb.c`; P FCB/name. | Private FCB mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-21` | `migration-debt` | D:21 `demIOCTL` in `demioctl.c`; P IOCTL blocks. | Private parameter-block mapping; device success stays separately deferred. | none | `migrate-facade` |
+| `BOP-DEM-50-22` | `migration-debt` | D:22 `demCreateNew` in `demfile.c`; P pathname and H. | Private pathname mapping. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-23` | `opennt-shaped-facade` | D:23 `demDiskReset` in `demdasd.c`. | Named device/media seam; no active guest pointer result. | none | `retain-facade` |
+| `BOP-DEM-50-24` | `opennt-shaped-facade` | D:24 `demNotYetImplemented`. | Original CF-clear terminal remains direct mirror. | none | `retain-facade` |
+| `BOP-DEM-50-25` | `migration-debt` | D:25 `demGetDPB` in `demgset.c`; P DPB output. | Private DPB mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-26` | `opennt-shaped-facade` | D:26 `demNotYetImplemented`. | Original CF-clear terminal remains direct mirror. | none | `retain-facade` |
+| `BOP-DEM-50-27` | `registered-exception` | D:27 `demCommit` in `demhndl.c`. | Uses opaque H, not raw host HANDLE. | `BX-VDM-001` | `retain-generic-mechanics` |
+| `BOP-DEM-50-28` | `opennt-shaped-facade` | D:28 `demNotYetImplemented`. | Original CF-clear terminal remains direct mirror. | none | `retain-facade` |
+| `BOP-DEM-50-29` | `migration-debt` | D:29 `demAbsRead` in `demdasd.c`; P DiskIo/buffer. | Private transfer mapping; media capability remains separate. | none | `migrate-facade` |
+| `BOP-DEM-50-2A` | `migration-debt` | D:2A `demAbsWrite` in `demdasd.c`; P DiskIo/buffer. | Private transfer mapping; media capability remains separate. | none | `migrate-facade` |
+| `BOP-DEM-50-2B` | `opennt-shaped-facade` | D:2B `demNotYetImplemented`. | Original CF-clear terminal remains direct mirror. | none | `retain-facade` |
+| `BOP-DEM-50-2C` | `migration-debt` | D:2C `demCreateFCB` in `demfcb.c`; P FCB/name. | Private FCB mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-2D` | `migration-debt` | D:2D `demOpenFCB` in `demfcb.c`; P FCB/name. | Private FCB mapping. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-2E` | `migration-debt` | D:2E `demCloseFCB` in `demfcb.c`; P FCB. | Private FCB mapping. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-2F` | `migration-debt` | D:2F `demFCBIO` in `demfcb.c`; P FCB/DTA/buffer. | Private FCB/DTA mapping. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-30` | `opennt-shaped-facade` | D:30 `demDate16` in `demgset.c`. | Register-only date conversion preserves source form. | none | `retain-facade` |
+| `BOP-DEM-50-31` | `migration-debt` | D:31 `demGetFileInfo` in `demfile.c`; P SFT/JFT records. | Private `Sim32GetVDMPointer` fallback is explicitly incomplete. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-32` | `migration-debt` | D:32 `demSetHardErrorInfo` in `demerror.c`; P retained locators. | Persistent raw pointer retention is forbidden; requires lease/copy/refusal decision. | none | `migrate-facade` |
+| `BOP-DEM-50-33` | `migration-debt` | D:33 `demRetry` in `demerror.c`. | Inherits hard-error locator representation. | none | `migrate-facade` |
+| `BOP-DEM-50-34` | `deferred` | D:34 `demLoadDosAppSym` in `demmisc.c`. | Historical debug/VDD product composition has no bounded current facade. | none | `deferred-owner-package` |
+| `BOP-DEM-50-35` | `deferred` | D:35 `demFreeDosAppSym` in `demmisc.c`. | Historical debug/VDD product composition has no bounded current facade. | none | `deferred-owner-package` |
+| `BOP-DEM-50-36` | `deferred` | D:36 `demEntryDosApp` in `demmisc.c`. | Historical VDD/debug event product composition is not re-created. | none | `deferred-owner-package` |
+| `BOP-DEM-50-37` | `deferred` | D:37 `demDOSDispCall` in `demmisc.c`. | Cross-DOS dispatch product protocol lacks admitted owner package. | none | `deferred-owner-package` |
+| `BOP-DEM-50-38` | `deferred` | D:38 `demDOSDispRet` in `demmisc.c`. | Cross-DOS dispatch product protocol lacks admitted owner package. | none | `deferred-owner-package` |
+| `BOP-DEM-50-39` | `migration-debt` | D:39 `demOutputString` in `demmisc.c`; P string. | Pointer facade is not shared; console policy stays top-level. | none | `migrate-facade` |
+| `BOP-DEM-50-3A` | `deferred` | D:3A `demInputString` in `demmisc.c`; P input. | Real console input injection belongs to the later console/device owner. | none | `deferred-owner-package` |
+| `BOP-DEM-50-3B` | `opennt-shaped-facade` | D:3B `demIsDebug` in `demmisc.c`. | Session debug query uses bounded named state. | none | `retain-facade` |
+| `BOP-DEM-50-3C` | `migration-debt` | D:3C `demTerminatePDB` in `demhndl.c`; P PDB/JFT and H. | Private SFT/JFT pointer fallback remains incomplete. | `BX-VDM-001` for H | `migrate-facade` |
+| `BOP-DEM-50-3D` | `opennt-shaped-facade` | D:3D `demExitVDM` in `demmisc.c`. | Typed controlled stop replaces process termination only. | none | `retain-facade` |
+| `BOP-DEM-50-3E` | `deferred` | D:3E `demWOWFiles` in `demmisc.c`. | WOW host composition belongs to the WOW owner package. | none | `deferred-owner-package` |
+| `BOP-DEM-50-3F` | `registered-exception` | D:3F `demLockOper` in `demlock.c`. | File ownership uses opaque H, not raw host HANDLE. | `BX-VDM-001` | `retain-generic-mechanics` |
+| `BOP-DEM-50-40` | `opennt-shaped-facade` | D:40 `demNotYetImplemented`. | Original CF-clear terminal remains direct mirror. | none | `retain-facade` |
+| `BOP-DEM-50-41` | `migration-debt` | D:41 `demGetComputerName` in `demgset.c`; P output buffer. | Private output-buffer mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-42` | `opennt-shaped-facade` | D:42 `demNotYetImplemented`. | Original CF-clear terminal remains direct mirror. | none | `retain-facade` |
+| `BOP-DEM-50-43` | `opennt-shaped-facade` | D:43 `demNotYetImplemented`. | Original CF-clear terminal remains direct mirror. | none | `retain-facade` |
+| `BOP-DEM-50-44` | `migration-debt` | D:44 `demCheckPath` in `demfile.c`; P pathname. | Private pathname mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-45` | `deferred` | D:45 `demSystemSymbolOp` in `demmisc.c`. | System-symbol/VDD product composition is unavailable. | none | `deferred-owner-package` |
+| `BOP-DEM-50-46` | `migration-debt` | D:46 `demGetDPBList` in `demgset.c`; P DPB list. | Private DPB-list mapping. | none | `migrate-facade` |
+| `BOP-DEM-50-47` | `deferred` | D:47 `demPipeFileDataEOF`. | Redirector pipe lifecycle owns the source protocol. | none | `deferred-owner-package` |
+| `BOP-DEM-50-48` | `deferred` | D:48 `demPipeFileEOF`. | Redirector pipe lifecycle owns the source protocol. | none | `deferred-owner-package` |
+
+#### COMMAND BOP rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-COMMAND-54-00` | `opennt-shaped-facade` | C:00 `cmdExitVDM` in `cmdmisc.c`. | Typed session stop replaces process-wide termination. | none | `retain-facade` |
+| `BOP-COMMAND-54-01` | `migration-debt` | C:01 `cmdGetNextCmd` in `cmdmisc.c`; P CMDINFO/environment. | Family-local guest address helpers. | none | `migrate-facade` |
+| `BOP-COMMAND-54-02` | `migration-debt` | C:02 `cmdComSpec` in `cmdpif.c`; guest command data. | Source PIF contract is retained; output mapping must use dependency 118. | none | `migrate-facade` |
+| `BOP-COMMAND-54-03` | `opennt-shaped-facade` | C:03 `cmdSaveWorld` in `cmdmisc.c`. | Bounded session snapshot replaces CCPU product state. | none | `retain-facade` |
+| `BOP-COMMAND-54-04` | `migration-debt` | C:04 `cmdGetCurrentDir` in `cmdmisc.c`; P output. | Family-local output-buffer mapping. | none | `migrate-facade` |
+| `BOP-COMMAND-54-05` | `migration-debt` | C:05 `cmdSetInfo` in `cmdmisc.c`; P registration records. | Family-local guest mappings retain the layout/order but not shared lease ownership. | none | `migrate-facade` |
+| `BOP-COMMAND-54-06` | `registered-exception` | C:06 `cmdGetStdHandle` in `cmdredir.c`. | Uses opaque H in original BX:CX layout. | `BX-VDM-001` | `retain-generic-mechanics` |
+| `BOP-COMMAND-54-07` | `opennt-shaped-facade` | C:07 `cmdCheckBinary` in `cmdpif.c`. | Bounded PIF/parser capability replaces UI product shell. | none | `retain-facade` |
+| `BOP-COMMAND-54-08` | `migration-debt` | C:08 `cmdExec` / `cmdExec32` in `cmdexec.c`; P app/block/tail/environment. | Session worker is bounded, but all guest mappings remain family-local. | `BX-VDM-001` for H streams | `migrate-facade` |
+| `BOP-COMMAND-54-09` | `opennt-shaped-facade` | C:09 `cmdInitConsole` in `cmdmisc.c`. | Single-session notification replaces NT4 event thread; real input remains deferred. | none | `retain-facade` |
+| `BOP-COMMAND-54-0A` | `migration-debt` | C:0A `cmdExecComspec32` in `cmdexec.c`; P app/environment. | Session worker is bounded, but mappings remain family-local. | `BX-VDM-001` for H streams | `migrate-facade` |
+| `BOP-COMMAND-54-0B` | `opennt-shaped-facade` | C:0B `cmdReturnExitCode` in `cmdexit.c`. | Child completion is session-local; DOS PSP return remains a later guest owner. | none | `retain-facade` |
+| `BOP-COMMAND-54-0C` | `migration-debt` | C:0C `cmdGetConfigSys` in `cmdconf.c`; P output. | Family-local output mapping. | none | `migrate-facade` |
+| `BOP-COMMAND-54-0D` | `migration-debt` | C:0D `cmdGetAutoexecBat` in `cmdconf.c`; P output. | Family-local output mapping. | none | `migrate-facade` |
+| `BOP-COMMAND-54-0E` | `migration-debt` | C:0E `cmdGetKbdLayout` in `cmdkeyb.c`; P layout data. | Family-local mapping; keyboard input/device contract remains later owner. | none | `migrate-facade` |
+| `BOP-COMMAND-54-0F` | `migration-debt` | C:0F `cmdGetInitEnvironment` in `cmdconf.c`/`cmdenv.c`; P output. | Session environment is bounded but guest mapping is family-local. | none | `migrate-facade` |
+| `BOP-COMMAND-54-10` | `migration-debt` | C:10 `cmdGetStartInfo` in `cmdpif.c`; P output. | PIF/start-info output mapping is not shared. | none | `migrate-facade` |
+
 ## 1. DEM / DOS（73）
 
 | Tracker ID | BOP 入口 | 原始 handler / 高层作用 | OpenNT 源码与可复通性 | 当前 code / 局部测试状态 | 已接入但待前置分支 | lifecycle / 其他 BOP 依赖 | bx / host / guest 前置 | 优先级 |

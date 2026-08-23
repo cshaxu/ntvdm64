@@ -43,6 +43,14 @@ DPMI mechanics and pointer migration debt without enabling a new route; see
 the [P3 audit](etc/evidence/td-s2-p3-shared-interface-conformance-audit-001.md).
 T257 S5 remains frozen until P4--P7 complete the whole-tracker audit.
 
+M0 Td S2 P4 closes the DEM/COMMAND interface audit: all 90 BOP slots and 33
+direct dependencies have an explicit source-interface disposition.  It finds
+64 pointer-mapping migration debts, 43 retained OpenNT-shaped facades, six
+approved opaque-handle exception routes and ten explicitly deferred product
+paths; see the [P4 audit](etc/evidence/td-s2-p4-dem-command-interface-conformance-audit-001.md).
+No BOP was enabled or reimplemented.  P5 next audits XMS/DPMI; S5 remains
+frozen.
+
 M0 T256 closes the selector-blind protected virtual-access and guest-linear
 substrate. Its final fresh 278-node formal Ninja build and XMEM fixture pass;
 it deliberately does not claim DPMI activation. See [S15 evidence](etc/evidence/m0-t256-s15-protected-substrate-closure-001.md) and the [T256 closure](history/m0-t256-closure-20260823.md).
