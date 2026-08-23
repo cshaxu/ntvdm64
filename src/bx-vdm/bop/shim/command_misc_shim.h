@@ -221,6 +221,10 @@ typedef struct bx_ntvdm_command_misc_session {
     USHORT comspec_bytes;
     CHAR config_input_path[MAX_PATH + 13u];
     CHAR autoexec_input_path[MAX_PATH + 13u];
+    /* The original cmdconf.c writes the NTVDM-installed COMMAND.COM path
+     * into the guest's SHELL= line.  This is the admitted CLI bundle's
+     * equivalent, reduced to the guest sysinit `commnd` 64-byte limit. */
+    CHAR bootstrap_command_path[64u];
     uint32_t redirection_token;
     REDIRCOMPLETE_INFO redirection_info;
     bx_ntvdm_host_handle_manager handles;
@@ -407,6 +411,9 @@ void DeleteConfigFiles(void);
 void cmdGetInitEnvironment(void);
 void bx_ntvdm_command_config_set_inputs(bx_ntvdm_command_misc_session *session,
     const CHAR *config_path, const CHAR *autoexec_path);
+int bx_ntvdm_command_config_set_bootstrap_command(
+    bx_ntvdm_command_misc_session *session, const CHAR *command_path);
+const CHAR *bx_ntvdm_command_config_bootstrap_command(void);
 void RtlInitAnsiString(PANSI_STRING destination, const CHAR *source);
 void RtlInitUnicodeString(PUNICODE_STRING destination, const WCHAR *source);
 NTSTATUS RtlCreateEnvironment(BOOLEAN clone_current, PVOID *environment);

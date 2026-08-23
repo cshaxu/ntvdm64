@@ -2,31 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T245 S12** — Source-built COMMAND bootstrap-path disposition.
+**Active: M0 T245 S13** — Source-built COMMAND `SHELL=`-path recovery.
 
 ## Active Packet
 
-### M0 T245 S12 — Source-built COMMAND bootstrap-path disposition
+### M0 T245 S13 — Source-built COMMAND `SHELL=`-path recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S12`, Ordinary Mode, single-person dual-role source/ABI disposition closure. |
-| Admission And Approval | The source-built trace has reached the original `sysinit1.asm` `comerr → SVC_DEMEXITVDM` path after accepted `5E`. This S maps that exact failure against the current Direct startup composition; it adds no product capability or Bochs change. |
-| Objective | Prove whether the declared source-built `COMMAND.COM` is published to the original guest `\COMMAND.COM` lookup path, and classify the smallest owner-correct recovery rather than treating `50:3D` as a missing BOP success route. |
-| Non-goals | No virtual boot volume implementation, host-drive policy change, guest-byte mutation, synthetic EXEC/PSP/parent-return, extra device, or bx-core/bx-mantle modification. |
-| Reference Baseline | `BOP-DEPENDENCY-080..100/110`, OpenNT `sysinit1.asm:ConfigDone/comerr/stall`, `sysinit2.asm:commnd`, direct `demfile`/host-session seams, and the source-built S11 observation. |
-| Files And ABI Surface | Evidence and tracker only: original guest pathname/EXEC flow, Direct host path seam, and current source-built image admission are compared without changing their ABI. |
+| Identifier Mode | `M0 T245 S13`, Ordinary Mode, single-person dual-role OpenNT source-mirror and ABI closure. |
+| Admission And Approval | S12 proved that the observed `50:3D` is the source-shaped terminal and identified publication as its suspected prerequisite.  The original `cmdconf.c → SHELL= → sysconf.asm:commnd` route is now source-proven; ordinary queue progress authorizes this bounded recovery without a Bochs or host-system change. |
+| Objective | Reuse the original COMMAND configuration producer so an admitted source-built `COMMAND.COM` pathname becomes the guest's original `SHELL=` executable token, with the exact `commnd` capacity and grammar enforced rather than adding a virtual drive or guest-byte patch. |
+| Non-goals | No virtual boot volume, host-drive policy change, guest-byte mutation, synthetic EXEC/PSP/parent-return, extra device, bx-core/bx-mantle change, or alternate filesystem mapping. |
+| Reference Baseline | S12 disposition; OpenNT `cmdconf.c`, `sysconf.asm:trys/storeshell`, `sysinit2.asm:commnd`, `sysinit1.asm:ConfigDone/comerr`; Direct COMMAND native-session and source-built S11 observation. |
+| Files And ABI Surface | `cmdconf.c` retains its original filtering/order and only receives a bounded bootstrap-path source; the bx-vdm session/startup seam passes one OEM path (maximum 63 characters plus NUL) and rejects a literal space because `sysconf.asm` has no quoting grammar. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, Direct host-path semantics, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Reconcile original `\COMMAND.COM` producer/consumer source with the active composition's image loading and Direct host file primitives; independently confirm the native `50:3D` is the typed source terminal, not a dispatch decline. |
-| Expected Markers | `5E` resumes; `50:3D` dispatches the imported `demExitVDM` body and yields typed stop. The map states whether an admitted host path supplies the required `\COMMAND.COM`. |
+| Verification | Focused `cmdconf` fixture must prove source `SHELL=` production, no truncation, and rejection of overlong/space-containing paths. Formal Ninja must link both fixture and native executable. One bounded source-built native observation records whether the existing `50:3D` terminal advances; an unchanged terminal is a valid diagnostic result, not a passing continuity claim. |
+| Expected Markers | The generated configuration contains `shell=<admitted path> /p` plus original optional arguments. The native run either advances beyond the old terminal or records the remaining guest EXEC/path-resolution predecessor with no fabricated result. |
 | Asset Needs | Existing OpenNT tree, current bx-vdm source, retained S11 native observation and source-built artifacts; no new source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record the original command pathname, all source conditions before `comerr`, current Direct lookup boundary, exact gap classification and the owning future package. Do not claim guest EXEC reachability. |
-| Stop Conditions | Evidence would require a guest-byte patch, an implicit root-to-C mapping, a virtual boot-volume policy, host C: mutation, a fabricated BOP result, or a Bochs change. Stop and transfer that design work. |
-| Exit Criteria | Tracker and evidence distinguish accepted source terminal from decline and identify the missing command-publication contract and its owner; the next implementation task is bounded without inventing a filesystem behavior. |
+| Reporting Requirements | Record the original producer/consumer route, exact session seam, focused and native result, and the remaining owner if guest EXEC still cannot reach a host file. Do not claim guest EXEC reachability unless observed. |
+| Stop Conditions | Recovery would require a guest-byte patch, implicit root-to-C mapping, virtual boot-volume policy, host C: mutation, fabricated BOP result, or Bochs change. Stop and transfer that design work. |
+| Exit Criteria | The original path is generated through the current native session, all grammar/capacity failures are explicit, formal sources link, and native observation is classified without treating `50:3D` as a BOP implementation defect. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
-| Similar-Issue Sweep | `54:08/0A/0B`, DEM PDB/FCB cleanup, XMS/UMB allocation, parent PSP/arena/JFN/environment, guest source-built image map and newly completed T244 IRQ1 lifecycle. |
+| Similar-Issue Sweep | COMMAND `54:0C`, Direct guest path resolution, guest `INT 21h/AH=4Bh`, PSP/arena/JFN/environment/parent return, and host-drive admission; no BOP selector or Bochs surface enters this S. |
 
 ## Latest Closure
+
+M0 T245 S12 closes the bootstrap-path attribution only: the original
+`50:3D` `demExitVDM` route is a typed source terminal following accepted `5E`,
+not a missing BOP result. Its former claim that publication necessarily
+requires a new path policy is superseded by active S13's newly verified
+`cmdconf.c → SHELL= → sysconf.asm:commnd` source route.
 
 M0 T245 S11 closes the source-shaped `5E` config-complete body: the active
 Direct DEM session executes `UMBNotify(0); demDasdInit();`, resumes at `RIP+3`

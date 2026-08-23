@@ -98,6 +98,7 @@ int main(void)
     bx_ntvdm_command_misc_session session;
     CHAR directory[MAX_PATH], config_path[MAX_PATH], autoexec_path[MAX_PATH];
     CHAR text[4096];
+    CHAR too_long[65u];
 
     if (!GetTempPathA(MAX_PATH, directory) ||
         !GetTempFileNameA(directory, "cfc", 0u, config_path) ||
@@ -114,6 +115,13 @@ int main(void)
     bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
     bx_ntvdm_command_misc_session_initialize(&session);
     bx_ntvdm_command_config_set_inputs(&session, config_path, autoexec_path);
+    memset(too_long, 'X', sizeof(too_long) - 1u);
+    too_long[sizeof(too_long) - 1u] = '\0';
+    if (bx_ntvdm_command_config_set_bootstrap_command(&session, too_long) ||
+        bx_ntvdm_command_config_set_bootstrap_command(&session,
+            "O:\\NTDOS64\\DOS ROOT\\COMMAND.COM")) return 2;
+    if (!bx_ntvdm_command_config_set_bootstrap_command(&session,
+            "O:\\NTDOS64\\DOS\\COMMAND.COM")) return 2;
     cpu.ds = 0x100u;
     cpu.edx = 0x100u;
 
@@ -122,7 +130,8 @@ int main(void)
         result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
         !read_text_file((CHAR *)context.guest + 0x1100u, text, sizeof(text)) ||
         strstr(text, "country=999") != NULL || strstr(text, "device=keep.sys") == NULL ||
-        strstr(text, "shell=") == NULL || strstr(text, "/e:512") == NULL) return 3;
+        strstr(text, "shell=O:\\NTDOS64\\DOS\\COMMAND.COM /p") == NULL ||
+        strstr(text, "/e:512") == NULL) return 3;
 
     memset(context.guest + 0x1100u, 0, 64u);
     if (!invoke(&context, &event, &cpu, &result, &session,

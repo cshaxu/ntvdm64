@@ -26,6 +26,10 @@ int bx_ntvdm_dem_v2_startup_copy_ordinary_terminal(void);
 int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,
     uint32_t application_capacity, char *tail, uint32_t tail_capacity,
     uint16_t *drive, uint16_t *code_page);
+/* Copy the admitted source-built COMMAND.COM pathname in the exact bounded
+ * form which OpenNT cmdconf's SHELL= producer can pass to guest sysconf. */
+int bx_ntvdm_dem_v2_startup_copy_bootstrap_command(char *command_path,
+    uint32_t command_path_capacity);
 
 /* The native engine captures this once at composition admission.  It is
  * adapter-private session data, never a guest or mantle ABI. */

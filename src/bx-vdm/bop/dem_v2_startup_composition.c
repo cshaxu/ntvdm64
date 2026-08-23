@@ -21,6 +21,7 @@ typedef struct bx_ntvdm_dem_v2_startup {
     byob_launch_plan_v2 launch;
     bx_ntvdm_host_drive_snapshot_v1 drive_snapshot;
     char command_application[MAX_PATH + 1u];
+    char bootstrap_command_path[64u];
     uint16_t command_drive;
     int installed;
 } bx_ntvdm_dem_v2_startup;
@@ -92,6 +93,24 @@ static int configure_command_source(const uint16_t *launch_input,
     return 1;
 }
 
+static int configure_bootstrap_command(const wchar_t *root)
+{
+    wchar_t full_path[MAX_PATH], short_path[MAX_PATH];
+    DWORD short_chars;
+    int bytes;
+    if (root == NULL || swprintf(full_path, MAX_PATH, L"%ls\\COMMAND.COM", root) < 0)
+        return 0;
+    short_chars = GetShortPathNameW(full_path, short_path, MAX_PATH);
+    if (short_chars == 0u || short_chars >= MAX_PATH) return 0;
+    bytes = WideCharToMultiByte(CP_OEMCP, WC_NO_BEST_FIT_CHARS, short_path, -1,
+        runtime.bootstrap_command_path,
+        (int)sizeof(runtime.bootstrap_command_path), NULL, NULL);
+    /* This is the exact guest `commnd` capacity consumed by sysconf.asm.
+     * Direct startup has no unbounded host-path escape hatch. */
+    return bytes > 1 && (uint32_t)bytes <= sizeof(runtime.bootstrap_command_path) &&
+        strchr(runtime.bootstrap_command_path, ' ') == NULL;
+}
+
 void bx_ntvdm_dem_v2_startup_reset(void)
 {
     byob_image_release(&runtime.ntio);
@@ -138,6 +157,7 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
         !bx_ntvdm_host_drive_snapshot_v1_capture(include_mask, exclude_mask,
             &runtime.drive_snapshot) ||
         !configure_opennt_dos_directory(root, &selection) ||
+        !configure_bootstrap_command(root) ||
         !configure_command_source(launch, launch_chars, &selection)) {
         bx_ntvdm_dem_v2_startup_reset();
         return 0;
@@ -153,6 +173,18 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     runtime.installed = 1;
     bx_ntvdm_spckbd_handoff_v2_display_state_set(
         (uint8_t)selection.guest_display_state);
+    return 1;
+}
+
+int bx_ntvdm_dem_v2_startup_copy_bootstrap_command(char *command_path,
+    uint32_t command_path_capacity)
+{
+    size_t bytes;
+    if (!runtime.installed || command_path == NULL || command_path_capacity == 0u ||
+        runtime.bootstrap_command_path[0] == '\0') return 0;
+    bytes = strlen(runtime.bootstrap_command_path) + 1u;
+    if (bytes > command_path_capacity) return 0;
+    memcpy(command_path, runtime.bootstrap_command_path, bytes);
     return 1;
 }
 

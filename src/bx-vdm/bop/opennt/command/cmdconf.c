@@ -206,6 +206,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
    CHAR *pPartyShell=NULL;
    CHAR achRawFile[MAX_PATH+12];
    CHAR *lpszzEnv = NULL, *lpszName;
+   const CHAR *bootstrapCommand;
    CHAR cchEnv = 0;
 
    dw = GetWindowsDirectory(achRawFile, sizeof(achRawFile));
@@ -508,9 +509,20 @@ void ExpandConfigFiles(BOOLEAN bConfig)
           */
 
            // write shell=....
-        sprintf(achRawFile,
-                "%s=%s%s /p %s\\system32",
-                achSHELL,achSysRoot, achCOMMAND, achSysRoot);
+        bootstrapCommand = bx_ntvdm_command_config_bootstrap_command();
+        if (bootstrapCommand != NULL) {
+            /* DIVERGENCE: NT4's installed command interpreter lived at
+             * %SystemRoot%\\System32\\command.com.  The standalone CLI
+             * admits a source-built COMMAND.COM bundle instead.  Preserve
+             * cmdconf's original SHELL filtering, ordering, /p and optional
+             * /c or /e handling; only replace the historical install path.
+             * The shim rejects a path that cannot fit sysconf.asm:commnd. */
+            sprintf(achRawFile, "%s=%s /p", achSHELL, bootstrapCommand);
+        } else {
+            sprintf(achRawFile,
+                    "%s=%s%s /p %s\\system32",
+                    achSHELL,achSysRoot, achCOMMAND, achSysRoot);
+        }
         WriteFileAssert(hTmpFile,achRawFile,(DWORD)strlen(achRawFile));
 
            // write extra string (/c ... or /e:nnn)

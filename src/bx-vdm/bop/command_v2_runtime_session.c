@@ -54,6 +54,7 @@ int bx_ntvdm_command_v2_runtime_session_bind_from_startup(void)
 {
     char application[MAX_PATH + 1u];
     char tail[128u];
+    char bootstrap_command[64u];
     uint16_t drive, code_page;
     bx_ntvdm_command_v2_runtime_session_reset();
     if (!bx_ntvdm_command_native_session_initialize(&runtime) ||
@@ -62,6 +63,10 @@ int bx_ntvdm_command_v2_runtime_session_bind_from_startup(void)
             &drive, &code_page) ||
         !bx_ntvdm_command_misc_session_set_command_source(&runtime.direct,
             application, tail, drive, code_page) ||
+        !bx_ntvdm_dem_v2_startup_copy_bootstrap_command(bootstrap_command,
+            (uint32_t)sizeof(bootstrap_command)) ||
+        !bx_ntvdm_command_config_set_bootstrap_command(&runtime.direct,
+            bootstrap_command) ||
         !configure_startup_config_inputs(application) ||
         !bx_ntvdm_command_native_session_bind(&runtime)) {
         bx_ntvdm_command_v2_runtime_session_reset();
