@@ -2,31 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T245 S14** — Guest `commnd` to `INT 21h/EXEC` observation closure.
+**Active: M0 T245 S15** — Guest command-open versus EXEC failure classification.
 
 ## Active Packet
 
-### M0 T245 S14 — Guest `commnd` to `INT 21h/EXEC` observation closure
+### M0 T245 S15 — Guest command-open versus EXEC failure classification
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S14`, Ordinary Mode, single-person dual-role source/ABI observation and guest-owner classification. |
-| Admission And Approval | Closed S13 now proves the original `cmdconf.c → SHELL= → sysconf.asm:commnd` source route is emitted and formally linked, yet the one native run still reaches typed `50:3D`.  The active T245 guest-EXEC package owns the next bounded observation. |
-| Objective | Establish whether the source-built `SHELL=` token reaches guest `commnd` and owner-classify the original NTDOS terminal path without changing guest execution or treating the terminal as a BOP defect. |
-| Non-goals | No virtual boot volume, host-drive policy change, guest-byte mutation, synthetic EXEC/PSP/parent-return, extra device, bx-core/bx-mantle change, alternate filesystem mapping, or new BOP behavior. |
-| Reference Baseline | S1 guest EXEC source map, S11 accepted `5E`, S12 terminal attribution, S13 formal `SHELL=` producer and unchanged native terminal, plus existing T225 guest lifecycle observations. |
-| Files And ABI Surface | Default-off bx-vdm observation only if source/map evidence identifies one existing checked RAM read point. Any record is copied, fixed-width and selector-neutral; original NTDOS `commnd`, path parsing and `EXEC` remain guest-owned. |
-| Applicable Rules | Source-first recovery, guest-owner boundary, Direct host-path semantics, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | First complete the source/loaded-image address map for `commnd`, `sysinit1` command launch and nearest observable BOP/interrupt boundary. Then build one focused observation fixture and make one bounded source-built native run only if the observation remains checked, passive and ABI-neutral. |
-| Expected Markers | Evidence distinguishes whether `SHELL` reached `commnd`, and identifies whether the retained terminal is a guest-owned original path rather than an adapter or machine terminal. |
-| Asset Needs | Existing OpenNT tree, current bx-vdm source, retained S11 native observation and source-built artifacts; no new source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record exact source and loaded-image identity, observation surface, focused/native result, and named owner of any next failure. Do not claim guest EXEC reachability unless observed. |
-| Stop Conditions | The only possible observation would require arbitrary guest-memory scanning, a guest-byte patch, an implicit root-to-C mapping, virtual boot-volume policy, host C: mutation, fabricated BOP result, or a Bochs change. Stop and retain the source-only map. |
-| Exit Criteria | The `commnd` handoff is directly observed or its absence is source/ABI-proven; the terminal's immediate guest owner is classified; no machine or host behavior changes. |
+| Identifier Mode | `M0 T245 S15`, Ordinary Mode, single-person dual-role source/ABI observation and guest-owner classification. |
+| Admission And Approval | S14 proves the source-built token reaches `sysinit2.asm:commnd`, but `sysinit1.asm:comerr` has two original incoming paths: the command-file `INT 21h/AH=3Dh` open and `INT 21h/AH=4Bh` EXEC.  Existing default-off mantle interrupt observation can distinguish them without a new code intrusion. |
+| Objective | On one bounded Direct source-built run, classify the last guest `INT 21h` request before `comerr` as command open or EXEC, then assign the actual next owner without repairing it prematurely. |
+| Non-goals | No virtual boot volume, host-drive policy change, guest-byte mutation, synthetic EXEC/PSP/parent-return, new Bochs source, alternate filesystem mapping, or new BOP behavior. |
+| Reference Baseline | S14 exact `commnd` observation, source-built NTIO map, original `sysinit1.asm:1517..1630`, and the already registered default-off software-interrupt observation. |
+| Files And ABI Surface | Existing optional, fixed-capacity mantle interrupt log only.  S15 changes no production core source: the formal diagnostic build merely enables its already registered compile switch; bx-vdm/CLI prints its copied records. |
+| Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
+| Verification | Build the existing focused interrupt-observation fixture with the diagnostic switch; then make exactly one bounded native run and inspect the final real-mode `INT 21h` records. |
+| Expected Markers | `AX=3D00h` immediately before the terminal proves the original command-file open route failed; `AX=4B00h` proves guest EXEC was reached and failed; any other result remains evidence-only and gets source mapped. |
+| Asset Needs | Existing OpenNT tree, source-built bundles, registered observation source and formal Ninja graph; no new source, firmware, guest media or host mutation. |
+| Reporting Requirements | Record source/map identity, diagnostic build configuration, focused/native result and named next owner. Do not claim a repair merely from classification. |
+| Stop Conditions | The required signal cannot be observed through the existing default-off bounded record, or any alternative requires a new semantic Bochs change, arbitrary memory scanning, guest mutation, virtual C:, or fabricated result. |
+| Exit Criteria | One of the two original command-launch routes is directly classified, or a third named route is source-mapped; no production behavior changes. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S15 closes classification of the `comerr` incoming edge: existing
+default-off real-mode interrupt observation shows `INT 21h AX=3D00h` at
+`DS:DX=commnd`, with no `AX=4B00h` before `50:3D`.  Thus the current failure
+is permanent COMMAND *open*, caused by the relative bundle-root descriptor;
+see [S15 evidence](etc/evidence/m0-t245-s15-command-open-failure-classification-001.md).
 
 M0 T245 S14 closes the passive source-mapped `commnd` observation.  A formal
 fixture and one source-built native Direct run prove the original S13
