@@ -20,7 +20,7 @@ numeric T or displacing the active product packet in Status:
 | M0 Td S2 P4 | Close the DEM/COMMAND interface audit: classify every 73-slot DEM and 17-slot COMMAND entry plus dependencies 001--033; all private guest-pointer forms are recorded as migration debt. |
 | M0 Td S2 P5 | Close the XMS/DPMI interface audit: classify every 12-slot XMS and 25-slot DPMI entry plus dependencies 034--041 and 059--077; do not admit `53:xx`. |
 | M0 Td S2 P6 | Close the remaining-owner audit: classify all Redirector, WOW16, Debugger/VDD and top-level/machine BOP rows plus dependencies 043, 045--058 and 078--115. |
-| M0 Td S2 P7 | Reconcile all interface rows, exceptions and migrations; publish the Td closure and re-admit or reject T257 S5. |
+| M0 Td S2 P7 | Reconcile all 321 rows and exception references; reject T257 S5 re-admission until a source-first whole DPMI package closes pointer/frame/IRET dependencies. |
 
 ## Hierarchy
 

@@ -65,6 +65,12 @@ source-derived migration debts, and keeps 69 unavailable product-shell paths
 deferred; see the [P6 audit](etc/evidence/td-s2-p6-remaining-interface-conformance-audit-001.md).
 P7 must reconcile the whole 321-row matrix before S5 can be reconsidered.
 
+M0 Td S2 P7 closes the full interface-conformance audit: all 321 tracker IDs
+are uniquely classified and exception references reconcile to the register.
+It rejects re-admission of T257 S5 because DPMI still has migration debt plus
+whole-package deferred frame/IRET/LDT dependencies; see the
+[P7 closure](etc/evidence/td-s2-p7-full-interface-conformance-closure-001.md).
+
 M0 T256 closes the selector-blind protected virtual-access and guest-linear
 substrate. Its final fresh 278-node formal Ninja build and XMEM fixture pass;
 it deliberately does not claim DPMI activation. See [S15 evidence](etc/evidence/m0-t256-s15-protected-substrate-closure-001.md) and the [T256 closure](history/m0-t256-closure-20260823.md).

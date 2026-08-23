@@ -501,7 +501,7 @@ registered replacement-interface admission.
 | `BOP-DEPENDENCY-046` | `deferred` | `dbgsvc.h` debugger ABI. | Debugger/VDD owner absent. | none | `deferred-owner-package` |
 | `BOP-DEPENDENCY-047` | `migration-debt` | `rdrsvc.h` definitions and local Redirector lifecycle. | VDMREDIR provider body is absent; local provider is source-derived. | none | `migrate-facade` |
 | `BOP-DEPENDENCY-048` | `deferred` | `vdmredir.h` ABI. | Dynamic VDMREDIR composition is unavailable. | none | `deferred-owner-package` |
-| `BOP-DEPENDENCY-049` | `deferred` | G: `redir/int2a.asm`. | Guest resident protocol is not a host facade. | none | `not-applicable-guest` |
+| `BOP-DEPENDENCY-049` | `not-applicable-guest` | G: `redir/int2a.asm`. | Guest resident protocol is not a host facade. | none | `not-applicable-guest` |
 | `BOP-DEPENDENCY-050` | `migration-debt` | G: `redir/int5c.asm` / copied async completion ABI. | Local queue/overlapped bridge is source-derived and uses opaque H. | `BX-VDM-001` | `migrate-facade` |
 | `BOP-DEPENDENCY-051` | `not-applicable-guest` | G: `mailslot.asm`. | Guest protocol only. | none | `not-applicable-guest` |
 | `BOP-DEPENDENCY-052` | `not-applicable-guest` | G: `msgapi.asm`. | Guest protocol only. | none | `not-applicable-guest` |
