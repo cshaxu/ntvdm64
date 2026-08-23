@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T257 S3** — DOSX/DPMI startup and descriptor-table composition.
+**Active: M0 T257 S4** — DOSX/DPMI protected interrupt, fault and IRET map.
 
 ## Active Packet
 
-### M0 T257 S3 — DOSX/DPMI startup and descriptor-table composition
+### M0 T257 S4 — DOSX/DPMI protected interrupt, fault and IRET map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T257 S3`, Ordinary Mode, single-person dual-role source-first startup/table recovery. |
-| Admission And Approval | S2 closes the [source import ledger](etc/operations/m0-t257-s2-dpmi-dosx-source-import-ledger-001.md) and its product-boundary scan. |
-| Objective | Exact-copy the admitted DOSX/DPMI startup/table source set, introduce only the named session and bounded guest-memory seams, and prove the original startup/table ordering without activating independent `53:xx` leaf services. |
-| Non-goals | No raw pointer/flat-address emulation, paging implementation, descriptor-cache copy, arbitrary CR0 setter, DPMI-aware mantle API, NT4 process-LDT/CCPU/VDM hook import, interrupt/fault ingress, or unregistered core change. |
-| Reference Baseline | T257 S1/S2 evidence, proposal, T254/T255/T256 evidence, DOSX `dx*.asm`, `dpmi32.c`, `dpmiselr.c`, `data.c`, `debug.c`, and `BOP-DEPENDENCY-117`. |
-| Files And ABI Surface | `src/bx-vdm/bop/opennt/dpmi/` exact source mirror, `dpmi_startup_session_shim`, `dpmi_startup_source_shim` and `dpmi_descriptor_source_shim`; no bx-core/bx-mantle DPMI API. |
-| Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Exact-copy identity check, a focused source-shaped startup/table fixture, formal build membership, and negative evidence that refused NT4 LDT imports cannot link. |
-| Expected Markers | No trace-led leaf plan, no BOP/DOS semantics in bx-core/bx-mantle, no invented adapter exception dispatcher, and every source divergence locally commented. |
-| Asset Needs | S1/S2 evidence, current module manifest, OpenNT source tree, existing shim conventions and live tracker. |
-| Reporting Requirements | Record source identity, every in-file divergence, original ordering retained, and the specific later S that owns frame/IRET, XMEM or DOS translation. |
-| Stop Conditions | Any active leaf `53:xx` route, raw host pointer, DPMI-aware mantle/core branch, unregistered external intrusion, or unrelated product modification. |
-| Exit Criteria | Startup/table source is mirror-identity proven and formally linked through named seams; historical LDT calls are negative-tested/explicitly refused; no descriptor mechanism is duplicated outside native Bochs. |
+| Identifier Mode | `M0 T257 S4`, Ordinary Mode, single-person dual-role source-first protected frame/IRET recovery. |
+| Admission And Approval | S3 closes [startup/table composition](etc/evidence/m0-t257-s3-dosx-startup-table-closure-006.md); S2 already declares this package as its next source-composition boundary. |
+| Objective | Build the complete original protected interrupt/fault/IRET source, ABI and failure map required before any DPMI frame code is composed; define the smallest fixed-width frame-session seam without activating `53:02`, `53:0A`, `53:14..18` or exception ingress. |
+| Non-goals | No active DPMI leaf route, raw pointer/frame mapping, `NtVdmControl`/`VdmInstall*`/emulator-hook import, adapter-owned exception or IRET implementation, DPMI-aware mantle/core branch, or unregistered external change. |
+| Reference Baseline | T257 S1/S2/S3 closure; T256 S14 protected interrupt/fault/IRET classification; DOSX `dxintr.asm`/`dxint31.asm`; `dpmiint.c`, `dpmiint.h`, `stack.c`, `dpmimscr.c`; `BOP-DEPENDENCY-117`. |
+| Files And ABI Surface | Read-only OpenNT/DOSX source initially; later only admitted `src/bx-vdm/bop/opennt/dpmi/` mirror and named frame-session shim. No bx-core/bx-mantle DPMI API. |
+| Applicable Rules | Source-first recovery, guest/machine hard boundary, Bochs rewrite stop rule, CPU-profile completion gate, live-tracker sequencing and ordinary-mode independent final review. |
+| Verification | Complete caller/layout/failure ledger, source import boundary scan, no-bypass manifest audit, focused map validation and mandatory documentation gates. |
+| Expected Markers | Each frame field and transition has one OpenNT/DOSX owner; native Bochs owns architectural exception/IRET; unsupported historical hooks are explicit refused/deferred terminals. |
+| Asset Needs | T257 S1/S2/S3 evidence, current formal manifest, original DPMI/DOSX sources, T256 S14 map and live BOP tracker. |
+| Reporting Requirements | Record source locations, fixed-width layout/order, every NT4 product dependency, source-first rung disposition, receiving owner for unadmitted semantics and whether any later mechanical boundary needs a separate exception. |
+| Stop Conditions | A proposed active leaf BOP, raw host pointer, host descriptor cache, direct old-NT4 hook import, adapter exception/IRET implementation, DPMI wording in core/mantle, or scope outside the frame package. |
+| Exit Criteria | A source/ABI/failure map covers the complete protected frame family and its DOSX callers; every historical hook has a direct reuse/shim/refusal disposition; a minimum frame-session seam is either proven sufficient or explicitly rejected without speculative implementation. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
-| Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
+| Similar-Issue Sweep | `53:01` mode transition, `53:00/0F` descriptor table, XMEM record path, PM-to-DOS translation, native CPU exception/IRET and VDD/debugger hook ownership. |
 
 ## Latest Closure
 
@@ -42,6 +42,11 @@ future mirror set and names every NT4 product import that requires a
 source-derived seam or explicit refusal; the boundary scanner proves no DPMI
 body or mirror is already an accidental product input.  See the
 [S2 ledger](etc/operations/m0-t257-s2-dpmi-dosx-source-import-ledger-001.md).
+
+M0 T257 S3 closes DOSX/DPMI startup and descriptor-table source composition.
+`dpmi32.c` and `dpmiselr.c` now formally link through bounded named seams;
+native Bochs consumes guest GDT/LDT entries directly, and no `53:xx` ingress
+was enabled. See the [S3 closure](etc/evidence/m0-t257-s3-dosx-startup-table-closure-006.md).
 
 M0 T256 S14 closes protected interrupt/fault/IRET classification. OpenNT uses
 historical `NtVdmControl`, emulator hooks and locked DPMI stack frames, while
