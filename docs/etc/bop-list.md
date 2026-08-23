@@ -212,6 +212,26 @@ OpenNT 原始调用遇到 NT4 私有 API、已删除 API、现代 Win32 不再�
 | `BOP-DEPENDENCY-116` | `sf.inc:sf_NTHandle`; `file.asm`/`fcbio2.asm` producers; `handle.asm`/`namepipe.asm:MapNtHandle` consumers | Guest DOS SFT stores the session-owned 32-bit opaque host-token in the original low-word/high-word layout. | **Code complete / formal audit passed:** imported DEM Open/Create publishes `AX:BP`; unchanged guest source stores BP then AX; consumers reconstruct AX:BP or BP:BX and the shared manager resolves/retires the token. | Historical VDD `VDD*NtHandle` APIs remain source-shaped unavailable because they require SAS/flat guest pointers; no active BOP requires them. Functional async pipe completion awaits only selector-blind `int5c` delivery. | `050`, `053`, DEM Open/Close/Read/Write/Seek BOPs. | Existing shared opaque manager; no raw HANDLE guest memory or Bochs dependency. | T252 S1 evidence. |
 | `BOP-DEPENDENCY-117` | OpenNT `dpmi32` protected context and address substrate | Shared prerequisite for all `53:00..18`: protected selector:offset checked access, atomic PM context/IRET transition, guest-linear allocation/mapping identity, source-shaped descriptor-table publication, protected interrupt/fault/IRET lifecycle and native CPU descriptor execution. | **Generic substrate and native descriptor consumption proven; DPMI package remains deferred:** T256 S9--S11 map `xmem.c` identities to ordinary-RAM addresses plus tested bx-vdm record IDs. S12/S13 prove `FlatAddress[]`, `IntelBase`, `Ldt` and `selGDT` are NT4 process-LDT composition. S14 proves `NtVdmControl`/emulator IRET hooks and DPMI locked-stack frames are package semantics. T257 S3 fixture 004 proves native Bochs consumes a guest GDT/LDT through `LGDT → LLDT → DS` without a DPMI-aware Bochs path. | No active DPMI provider; no v1 route survives T239. | Recover `059..077` together with DOSX table, frame and hook lifecycle; do not add a generic LDT/interrupt/fault seam or descriptor cache. Mantle opaque IDs remain private. | `059..077`; all `BOP-DPMI-53-00..18`. | Context is `BX-ABI-094`; copied access is `BX-MANTLE-095`; capacity is `BX-MANTLE-096`; interval lifecycle is `BX-MANTLE-097`; S10/S11 complete local XMEM identity/reallocation; [S12](evidence/m0-t256-s12-dpmi-descriptor-guest-linear-identity-map-001.md), [S13](evidence/m0-t256-s13-native-descriptor-table-lifecycle-admission-001.md), [S14](evidence/m0-t256-s14-protected-interrupt-fault-iret-continuity-map-001.md) and [T257 S3 fixture 004](evidence/m0-t257-s3-native-guest-ldt-fixture-004.md) close generic-admission questions. | P9 prerequisite — whole DPMI/DOSX owner package. |
 
+## Td S2 P2 Interface-Conformance Overlay
+
+This overlay is the live, authoritative interface audit for the existing 203
+canonical BOP rows and 117 dependency rows. It is governed by the
+[Td S2 P2 plan](operations/td-interface-conformance-audit-plan-001.md). The
+existing family tables retain owner and runtime evidence; this overlay records
+whether their reached interfaces comply with the source-first facade rule.
+
+| Interface disposition | Meaning |
+| --- | --- |
+| `direct-public-api` | Original body reaches a public modern Win32 API without an interface replacement. |
+| `opennt-shaped-facade` | Original function/macro/structure shape is retained through a bounded named compatibility facade. |
+| `registered-exception` | A custom interface/algorithm remains only under a named recovery or external-intrusion exception. |
+| `deferred` | No route is claimed; a future owner package must audit it. |
+| `not-applicable-guest` | Source-built guest code executes in guest memory; no host-side interface is represented. |
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- |
+| _All 320 rows_ | _Pending Td S2 P2 family audit; no existing code-complete claim is changed by this initial schema._ | _See existing row until audited._ | _Pending._ | _Pending._ | _Pending._ |
+
 ## 1. DEM / DOS（73）
 
 | Tracker ID | BOP 入口 | 原始 handler / 高层作用 | OpenNT 源码与可复通性 | 当前 code / 局部测试状态 | 已接入但待前置分支 | lifecycle / 其他 BOP 依赖 | bx / host / guest 前置 | 优先级 |

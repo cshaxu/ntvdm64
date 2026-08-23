@@ -15,7 +15,12 @@ numeric T or displacing the active product packet in Status:
 | M0 Td S1 P6 | Freeze the no-external-dependency local slice at 75 BOP entries plus 30 dependency rows, and record its current all-local-pass disposition. |
 | M0 Td S1 P7 | Replace the monolithic external-compatibility candidate with ordered bounded owner/machine candidates; add the first reached SoftPC BOP 12h dependency and its source-first recovery proposal. |
 | M0 Td S2 P1 | Adopt the OpenNT-shaped compatibility-facade rule, the project-defined recovery-exception gate, and the bounded guest-pointer mapping-lease governance; freeze T257 S5 pending interface audit. |
-| M0 Td S2 P2 | Whole-tracker interface-conformance audit: classify all BOP and dependency rows by original interface, facade/exception disposition, divergence and migration conclusion. |
+| M0 Td S2 P2 | Establish the whole-tracker interface-conformance audit schema, cardinality baseline and ordered audit plan; no row is yet classified by this planning part. |
+| M0 Td S2 P3 | Audit shared guest-pointer, handle/token, CPU-result and generic machine interfaces. |
+| M0 Td S2 P4 | Audit DEM and COMMAND interface dispositions. |
+| M0 Td S2 P5 | Audit XMS and DPMI interface dispositions. |
+| M0 Td S2 P6 | Audit Redirector, WOW16, Debugger/VDD and top-level/machine interface dispositions. |
+| M0 Td S2 P7 | Reconcile all interface rows, exceptions and migrations; publish the Td closure and re-admit or reject T257 S5. |
 
 ## Hierarchy
 
