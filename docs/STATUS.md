@@ -2,31 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T245 S17** — Native COMMAND current-directory observation.
+**Active: M0 T245 S18** — Native DEM open input/result observation.
 
 ## Active Packet
 
-### M0 T245 S17 — Native COMMAND current-directory observation
+### M0 T245 S18 — Native DEM open input/result observation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S17`, Ordinary Mode, single-person dual-role adapter-only observation and owner classification. |
-| Admission And Approval | S16 reaches and resumes original `54:04`; its source body writes the current directory to guest `DS:SI`. The next terminal cannot be assigned without observing that returned fixed buffer. |
-| Objective | Copy at most 64 bytes from the source-owned `54:04` destination after a successful handler result, and classify the current-directory/drive input to the following guest open path. |
-| Non-goals | No change to `cmdGetCurrentDir`, DEM CWD state, guest RAM, virtual drive, host current directory, file result, BOP outcome, Bochs source or machine semantics. |
-| Reference Baseline | S16 absolute `commnd` recovery, original `cmdmisc.c:cmdGetCurrentDir`, existing checked-RAM ABI and S14 fixed-copy observer pattern. |
-| Files And ABI Surface | Default-off bx-vdm record and existing generic checked read only. The observer is called after accepted `54:04` dispatch and preserves all provider/machine behavior. |
+| Identifier Mode | `M0 T245 S18`, Ordinary Mode, single-person dual-role adapter-only DEM input/result observation. |
+| Admission And Approval | S17 proves `54:04` returns its original Direct host current directory and the same native path reaches `50:12 demOpen`. Original `demfile.c` defines its precise `DS:SI` pathname, `BL` mode and `AX:BP` handle/failure contract. |
+| Objective | Copy the bounded original `demOpen` input pathname and its typed outcome at accepted `50:12`, then classify the actual file-service result before changing any DEM or guest logic. |
+| Non-goals | No modification to demOpen, guest RAM, CWD, drive mapping, file result, handle manager, BOP outcome, Bochs source or machine semantics. |
+| Reference Baseline | Original `demfile.c:118..180`, S17 reachability, existing checked-RAM ABI and fixed typed outcome record. |
+| Files And ABI Surface | Default-off bx-vdm record; one checked copy of the source-provided `DS:SI` string (bounded by `MAX_PATH+1`) and copy of the already produced outcome. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Focused fixture covers selector/mode/offset/read failure and post-dispatch copy. One bounded source-built run correlates the copied buffer with the subsequent unchanged BOP/terminal. |
-| Expected Markers | Evidence records a source-owned directory string or a source-shaped failure, then names whether the next work belongs to COMMAND CWD, DEM path translation or guest DOS file handling. |
-| Asset Needs | Existing source-built bundles and direct session; no new source, firmware, guest media or host mutation. |
-| Reporting Requirements | Record event registers, exact physical copy address, bytes, source relation and next owner. Do not treat observation as a path repair. |
-| Stop Conditions | The signal requires arbitrary guest-memory scanning, mutation, an invented directory/drive result, a new Bochs semantic change or non-public host mechanism. |
-| Exit Criteria | Native `54:04` output or source-shaped failure is directly observed, and the following failure is assigned to a named original owner. |
+| Verification | Focused fixture covers selector/mode/path address, outcome copy and negative selector; one bounded native run correlates the actual path/mode/result with the next guest behavior. |
+| Expected Markers | Evidence shows a concrete OEM pathname and either an assigned opaque handle or source-shaped failure flags/code, then names the next owner. |
+| Asset Needs | Existing source-built bundles and Direct session; no new source, firmware, guest media or host mutation. |
+| Reporting Requirements | Record registers, exact path copy address/bytes, outcome masks/values, source relation and next owner. Do not turn an observation into a file-service repair. |
+| Stop Conditions | Observation requires unbounded scanning, mutation, an invented handle/result, virtual mapping or a Bochs semantic change. |
+| Exit Criteria | Native `50:12` input and typed result are directly observed or its source-shaped failure is recorded, and the next issue is assigned to a named owner. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S18 closes native DEM `50:12` observation. It opens the original
+temporary SCS configuration file with CF clear, so neither `demOpen` nor
+COMMAND current-directory is the retained failure; see [S18 evidence](etc/evidence/m0-t245-s18-dem-open-observation-001.md).
 
 M0 T245 S17 closes native `54:04` output observation. The existing imported
 COMMAND body returns Direct-host `O:\repos.hobby\ntdos64`, then source-built
