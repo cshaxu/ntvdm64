@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T252 S1** — OpenNT guest SFT opaque-handle source/ABI audit.
+**Active: M0 T253 S1** — selector-blind guest async-completion delivery audit.
 
 ## Active Packet
 
-### M0 T252 S1 — OpenNT guest SFT opaque-handle source/ABI audit
+### M0 T253 S1 — selector-blind guest async-completion delivery audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T252 S1`, Ordinary Mode, single-person dual-role source/ABI audit. |
-| Admission And Approval | T251 source evidence proves the guest-SFT token seam is the first lower-dependency prerequisite. The owner authorized dependency-first BOP recovery and ordinary implementation without repeated approval. |
-| Objective | Map each original SFT raw-handle producer, consumer and lifecycle path, then select the smallest opaque-token replacement boundary. |
-| Non-goals | No async pipe completion, interrupt delivery, DPMI/WOW, raw guest HANDLE, Bochs change, or trace-directed patch. |
-| Reference Baseline | [T251 async boundary](etc/evidence/m0-t251-s4-p2-async-named-pipe-source-boundary-001.md), `namepipe.asm:MapNtHandle`, `sf.inc`, and the shared host-handle manager. |
-| Files And ABI Surface | Original guest DOS SFT sources; `src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.*`; tracker/evidence, and possible minimal guest overlay only after S1. |
-| Applicable Rules | Original-source-first audit, fixed-width opaque token, checked guest RAM, guest/adapter/machine ownership separation. |
-| Verification | Static source/ABI ledger, current token-manager inspection, negative raw-handle scan, documentation gates and `git diff --check`. |
-| Expected Markers | One exact producer/consumer/close matrix; each raw `sf_NtHandle` dependency is retained, shimmed, deferred or rejected with a named source reason. |
-| Asset Needs | Retained DOS SFT/JFN sources, compiled guest provenance and existing Direct-session handle manager. |
-| Reporting Requirements | Identify x86/x64 assumptions and whether guest code actually needs an overlay; do not call a token seam implemented until lifecycle fixtures exist. |
-| Stop Conditions | The only workable route requires a raw host handle in guest memory, a Bochs semantic change, or a source/layout fact absent from retained material. |
-| Exit Criteria | Source/ABI/failure map and selected smallest composable seam are documented; subsequent S2 scope is bounded without opening async I/O itself. |
-| Original Owner Request | Continue OpenNT-mirror BOP recovery by dependency, keeping v1 retired and preserving hard machine/adapter/guest boundaries. |
-| Similar-Issue Sweep | DEM/COMMAND handle consumers, `57:02..08/20/21/23/24`, guest close/dup/terminate and PSP/PDB cleanup. |
+| Identifier Mode | `M0 T253 S1`, Ordinary Mode, single-person dual-role source/mechanics audit. |
+| Admission And Approval | T252 proves opaque SFT publication is already complete. The dependency-first queue now selects the sole remaining lower-level async completion prerequisite. |
+| Objective | Map original `int5c.asm` ANR delivery and identify the smallest selector-blind native interrupt-delivery seam, or prove the exact required Bochs exception. |
+| Non-goals | No Redirector I/O, BOP provider semantic, guest ANR synthesis, DPMI/WOW, raw callback/handle, or unregistered Bochs change. |
+| Reference Baseline | [T252 closure](history/m0-t252-closure-20260823.md), `int5c.asm`, `vrnmpipe.h`, `vdmredir.h`, adopted PIC/CPU/mantle sources. |
+| Files And ABI Surface | Original guest Redirector interrupt sources, existing bx-mantle mechanical/PIC contracts, tracker/evidence and a proposal-only decision unless S1 finds an existing seam. |
+| Applicable Rules | Source-first recovery, guest/machine hard boundary, Bochs rewrite stop rule, selector blindness and external-intrusion registry. |
+| Verification | Source call-frame map, machine API/static ownership audit, existing focused fixture inventory, documentation gates and `git diff --check`. |
+| Expected Markers | Exact original completion frame plus a binary decision: existing generic mechanical seam, bounded new mantle composition, or registered Bochs exception. |
+| Asset Needs | Retained `int5c.asm`, VDMREDIR headers, current core/mantle lifecycle/PIC code and existing interrupt tests. |
+| Reporting Requirements | State whether any candidate would expose a BOP/DOS name in Bochs; reject it if so. |
+| Stop Conditions | Required change affects CPU decoding, PIC/IVT semantics outside a proven existing seam, or lacks a source-layout basis. |
+| Exit Criteria | A source/ABI/failure map and an owner-correct S2 plan; no implementation before the selected seam is evidenced. |
+| Original Owner Request | Continue original-code recovery by dependency; Bochs and mantle must remain free of DOS/VDM/BOP semantics. |
+| Similar-Issue Sweep | `02/06` machine interrupt package, existing PIC/8042 paths, VDD/top-level events, NetBIOS/DLC and DPMI exception/IRET routing. |
 
 ## Latest Closure
 
