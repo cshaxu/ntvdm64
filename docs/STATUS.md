@@ -2,31 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T245 S20** — Permanent-command DEM-open input/result observation.
+**Active: M0 T245 S21** — OpenNT OEM CreateFile compatibility recovery.
 
 ## Active Packet
 
-### M0 T245 S20 — Permanent-command DEM-open input/result observation
+### M0 T245 S21 — OpenNT OEM CreateFile compatibility recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T245 S20`, Ordinary Mode, single-person dual-role bx-vdm observation refinement. |
-| Admission And Approval | S19 proves the permanent `commnd` `INT 21h/3D00h` remains the terminal precursor, while S18's one-shot accepted-`50:12` record necessarily retains the earlier temporary CONFIG open. A bounded per-run sequence of accepted original `50:12 demOpen` records is the smallest evidence needed before changing the Direct namespace seam. |
-| Objective | Observe both temporary-CONFIG and permanent-`commnd` original DEM-open arguments/outcomes, then source-map the actual Direct-file failure contract. |
-| Non-goals | No Bochs source, guest mutation, virtual drive/root alias, CWD rewrite, DEM/COMMAND semantic change, fabricated file result or host mutation. |
-| Reference Baseline | S18 one-shot first `50:12`, S19 permanent `INT 21h/3D00h`, original `file.asm:OpenCall → SVC_DEMOPEN` and imported `demfile.c:demOpen`. |
-| Files And ABI Surface | Default-off bx-vdm bounded `50:12` observation and existing CLI diagnostic output only; no machine ABI or provider behavior changes. |
+| Identifier Mode | `M0 T245 S21`, Ordinary Mode, single-person dual-role original-owner shim recovery. |
+| Admission And Approval | S20 proves accepted permanent `50:12 demOpen` receives the exact existing host path but returns `ERROR_PATH_NOT_FOUND`, while equivalent public host open succeeds. The present `demfile_shim.c` independently authored OEM-to-ANSI/`CreateFileA` wrapper diverges from directly relevant OpenNT `oemuni/file.c:CreateFileOem`. |
+| Objective | Replace only the reached `CreateFileOem` compatibility seam with the original source's OEM-to-Unicode → `CreateFileW` ordering and its generic-read attribute retry; then prove the imported `demOpen` route handles the permanent command path. |
+| Non-goals | No guest path rewrite, virtual volume/root alias, new DOS filesystem, BOP dispatch change, DEM body rewrite, Bochs change, or mutation profile. |
+| Reference Baseline | OpenNT `base/mvdm/oemuni/file.c:CreateFileOem`, imported `demfile.c:demOpen`, S20 exact path/error evidence, and the existing opaque handle manager. |
+| Files And ABI Surface | `demfile_shim.c` only; its external OEM `CreateFileOem` declaration and the existing Direct host-handle contract are retained. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, selector-blind machine boundary, no trace-led leaf repair and MTSP governance. |
-| Verification | Focused observation fixture covers ordered accepted `50:12` records and bounded overflow; one corrected source-built native run proves whether permanent `commnd` reaches imported demOpen and records its result. |
-| Expected Markers | First record remains temporary SCS success; a later `commnd` record either yields the source-shaped error or proves no `SVC_DEMOPEN` reaches the host provider. |
+| Verification | Focused `demfile` source fixture plus a dedicated OEM `CreateFile` conversion/retry fixture; fresh formal Ninja link; one bounded source-built native Direct run with the existing observation. |
+| Expected Markers | Existing direct `demfile` fixture remains green; an OEM pathname reaches `CreateFileW` with source-shaped generic-read fallback; native permanent `commnd` opens with CF clear and advances beyond its former `comerr`. |
 | Asset Needs | Existing sources, bundles and formal Ninja generator; no new external asset. |
-| Reporting Requirements | Record ordered guest path/mode/outcome facts, source map and precise repair owner; do not turn an observation into a namespace repair. |
-| Stop Conditions | A bounded sequence requires unbounded guest scanning, provider result mutation or a Bochs semantic change. |
-| Exit Criteria | The permanent `commnd` `50:12` disposition is directly observed, or direct absence of that host ingress is documented with its guest owner. |
+| Reporting Requirements | State exact retained original function structure, the named NT4-only helper replacement, fixture outcome, native observed outcome, and any remaining owner. |
+| Stop Conditions | Correct recovery needs a virtual path policy, guest modification, a Bochs change, or behavior beyond `CreateFileOem`'s source contract. |
+| Exit Criteria | The original file-owner conversion/call order is locally recovered through its smallest modern seam and the permanent-command native outcome is directly observed. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | Existing T225 guest lifecycle observer, `50:36/50:3C/54:0B`, Direct host-drive admission, `50:00/50:12/50:16/50:02` file routes and current `cmdconf` temporary configuration source. |
 
 ## Latest Closure
+
+M0 T245 S21 closes the OpenNT-shaped OEM `CreateFileOem` recovery. The
+imported DEM body now uses the original OEM-to-Unicode/`CreateFileW` ordering
+and generic-read attribute retry through a named public-API shim; fixtures
+pass. Native call facts prove the remaining `AX=3` comes earlier: DOS
+canonicalizes `REPOS.HOBBY` to nonexistent `REPOS.HOB` and the volume has no
+short alias. The next owner is CLI/startup alias admission, not DEM/BOP/Bochs;
+see [S21 evidence](etc/evidence/m0-t245-s21-opennt-oem-createfile-recovery-001.md).
 
 M0 T245 S20 closes permanent-command DEM-open attribution. The bounded
 adapter-only record retains four accepted `50:12` calls; the final original

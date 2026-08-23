@@ -5,6 +5,7 @@
  * DEM ordering and failure handling in its original translation unit. */
 
 #include "demfile_shim.h"
+#include "bop/observation/bx_ntvdm_demfile_create_observation_v1.h"
 
 void demChMod(void);
 void demCreate(void);
@@ -37,14 +38,56 @@ static LPSTR oem_copy(LPCSTR oem)
     return ansi;
 }
 
+static LPWSTR oem_to_wide_copy(LPCSTR oem)
+{
+    int chars;
+    LPWSTR wide;
+    if (oem == NULL) { SetLastError(ERROR_INVALID_PARAMETER); return NULL; }
+    /* OpenNT oemuni/file.c:CreateFileOem calls
+     * RtlOemStringToUnicodeString into the NT4 TEB static Unicode buffer,
+     * then calls CreateFileW.  That internal TEB/RTL storage is not a public
+     * modern CLI ABI, so this is the minimal replacement: the same OEM code
+     * page conversion with call-local storage. */
+    chars = MultiByteToWideChar(CP_OEMCP, 0, oem, -1, NULL, 0);
+    if (chars <= 0) return NULL;
+    wide = (LPWSTR)malloc((size_t)chars * sizeof(*wide));
+    if (wide == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
+    if (MultiByteToWideChar(CP_OEMCP, 0, oem, -1, wide, chars) != chars) {
+        free(wide);
+        return NULL;
+    }
+    return wide;
+}
+
 HANDLE CreateFileOem(LPSTR name, DWORD access, DWORD share,
     LPSECURITY_ATTRIBUTES security, DWORD creation, DWORD flags, HANDLE template_file)
 {
-    LPSTR ansi = oem_copy(name);
+    LPWSTR wide = oem_to_wide_copy(name);
     HANDLE result;
-    if (ansi == NULL) return INVALID_HANDLE_VALUE;
-    result = CreateFileA(ansi, access, share, security, creation, flags, template_file);
-    free(ansi);
+    DWORD conversion_error = wide == NULL ? GetLastError() : ERROR_SUCCESS;
+    DWORD first_error = ERROR_SUCCESS;
+    DWORD retry_error = ERROR_SUCCESS;
+    if (wide == NULL) {
+        bx_ntvdm_demfile_create_observation_v1_record(NULL, access, share,
+            creation, flags, conversion_error, first_error, retry_error);
+        return INVALID_HANDLE_VALUE;
+    }
+    /* Retain the OpenNT source order: DOS generic-read opens ask first for
+     * FILE_WRITE_ATTRIBUTES, then retry the exact original access if that
+     * historical accommodation is rejected (for example, a read-only share).
+     * No adapter path policy is introduced here. */
+    result = CreateFileW(wide,
+        access == GENERIC_READ ? access | FILE_WRITE_ATTRIBUTES : access,
+        share, security, creation, flags, template_file);
+    if (result == INVALID_HANDLE_VALUE) first_error = GetLastError();
+    if (result == INVALID_HANDLE_VALUE && access == GENERIC_READ) {
+        result = CreateFileW(wide, access, share, security, creation, flags,
+            template_file);
+        if (result == INVALID_HANDLE_VALUE) retry_error = GetLastError();
+    }
+    bx_ntvdm_demfile_create_observation_v1_record(wide, access, share,
+        creation, flags, conversion_error, first_error, retry_error);
+    free(wide);
     return result;
 }
 
