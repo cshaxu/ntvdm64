@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T256 S4** — Guest-linear mapping identity source/ABI map.
+**Active: M0 T256 S5** — Guest-RAM geometry and reservation admission map.
 
 ## Active Packet
 
-### M0 T256 S4 — Guest-linear mapping identity source/ABI map
+### M0 T256 S5 — Guest-RAM geometry and reservation admission map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T256 S4`, Ordinary Mode, single-person dual-role source/ABI mapping. |
-| Admission And Approval | S3 is closed by the formal [range-action evidence](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md). S4 is analysis only; no provider or adopted-code change is admitted. |
-| Objective | Map the original DPMI guest-linear allocation/mapping identity and determine the smallest selector-blind, source-shaped prerequisite still needed before any `53:xx` source body can enter. |
-| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, LDT policy implementation, raw pointer/object, trace-driven patch, or unregistered intrusion. |
-| Reference Baseline | [T256 S1 map](etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md), [T256 S2 design](etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md), [T256 S3 closure](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md), [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), and live [BOP tracker](etc/bop-list.md). |
-| Files And ABI Surface | Evidence and tracker only unless a later approved S records a new selector-blind ABI. |
+| Identifier Mode | `M0 T256 S5`, Ordinary Mode, single-person dual-role source/ABI mapping. |
+| Admission And Approval | S4 closes the historical identity map. S5 is analysis only; no allocator, provider or adopted-code change is admitted. |
+| Objective | Map current guest-RAM geometry ownership and identify the required generic memory-capacity contract before a safe ordinary-RAM reservation ABI can be designed. |
+| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, allocator implementation, raw pointer/object, trace-driven patch, or unregistered intrusion. |
+| Reference Baseline | [T256 S3 closure](etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md), [S4 identity map](etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md), [S5 geometry map](etc/evidence/m0-t256-s5-guest-ram-geometry-impact-map-001.md), and live [BOP tracker](etc/bop-list.md). |
+| Files And ABI Surface | Evidence and tracker only unless a later admitted S records a copied geometry contract. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule, registered external intrusion and live-tracker sequencing. |
-| Verification | Source call/representation map, owner classification, and an explicit admission/defer decision. |
-| Expected Markers | Exact OpenNT mapping identities, current missing representation, and a bounded candidate seam or a documented defer. |
-| Asset Needs | Closed context and range-action substrate, original `dpmi32` sources, formal Ninja manifest and tracker. |
-| Reporting Requirements | Distinguish copied access from mapping identity; do not imply the S3 action supplies a host pointer or a DPMI allocator. |
+| Verification | Current initializer/consumer map, bounded-constant classification plan, and an explicit admission/defer decision. |
+| Expected Markers | Exact current 1 MiB owners and the required session geometry contract before any reservation can exist. |
+| Asset Needs | Closed context/range-action substrate, S4 identity map, engine/startup composition and formal Ninja manifest. |
+| Reporting Requirements | Distinguish conventional-only validation from whole-guest bounds; do not imply the S3 action or current one-MiB stage provides extended memory. |
 | Stop Conditions | Paging support, a raw host pointer, provider-specific core branch, unbounded access API, descriptor-cache copy, arbitrary CR0 write or premature `53:xx` provider. |
-| Exit Criteria | The remaining mapping identity is source-mapped and either prospectively admitted or explicitly transferred without a hidden provider shortcut. |
+| Exit Criteria | The current fixed geometry is source-mapped and a specific geometry-contract implementation package is either prospectively admitted or explicitly transferred without an allocator shortcut. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
 | Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
