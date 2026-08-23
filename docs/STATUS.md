@@ -3,8 +3,8 @@
 ## Current Work
 
 **Active: M0 T244 S2** — selector-blind headless 8042 keyboard-controller
-source severance and native lifecycle composition; verification is complete
-and its single P delivery is being formed.
+source severance and native lifecycle composition; verification and P delivery
+are complete, pending owner selection of the next candidate T.
 
 ## Active Packet
 
@@ -24,7 +24,7 @@ and its single P delivery is being formed.
 | Asset Needs | Existing Bochs 2.6 source identity and mantle PIC/port/timer seams; no new external source, host mutation or GUI dependency. |
 | Reporting Requirements | Register every adopted-source severance, retain original line-level rationale, record source/ABI/failure matrix and explicit rejected product-shell paths. |
 | Stop Conditions | Need for GUI, CMOS, mouse, plugin manager, PIT, video, firmware, host input, a BOP-specific request, or any unregistered Bochs patch. Record and transfer rather than infer. |
-| Exit Criteria | Met; P closure is being committed and pushed. |
+| Exit Criteria | Met; P delivery is committed and pushed as `a3b40455` plus `d1f3647d`. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary queue progress does not require repeated technical approval. |
 | Similar-Issue Sweep | T243 headless subset, T241 IVT watch, BOP 5C/5D, INT15 keyboard hooks, PIC/IRQ/timer lifecycle, monitor iret table and existing mantle port-space/device seams. |
 
