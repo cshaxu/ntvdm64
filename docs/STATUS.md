@@ -51,6 +51,13 @@ paths; see the [P4 audit](etc/evidence/td-s2-p4-dem-command-interface-conformanc
 No BOP was enabled or reimplemented.  P5 next audits XMS/DPMI; S5 remains
 frozen.
 
+M0 Td S2 P5 closes the XMS/DPMI interface audit: all 37 BOP slots and 27
+direct dependencies have an explicit disposition.  It retains only generic
+ordinary-RAM mechanics under existing exceptions, records 17 pointer/seam
+migration debts, and defers all 30 DPMI product-shell/frame/LDT/VDD paths;
+see the [P5 audit](etc/evidence/td-s2-p5-xms-dpmi-interface-conformance-audit-001.md).
+No `53:xx` ingress is admitted and S5 remains frozen.
+
 M0 T256 closes the selector-blind protected virtual-access and guest-linear
 substrate. Its final fresh 278-node formal Ninja build and XMEM fixture pass;
 it deliberately does not claim DPMI activation. See [S15 evidence](etc/evidence/m0-t256-s15-protected-substrate-closure-001.md) and the [T256 closure](history/m0-t256-closure-20260823.md).

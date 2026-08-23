@@ -18,7 +18,7 @@ numeric T or displacing the active product packet in Status:
 | M0 Td S2 P2 | Establish the whole-tracker interface-conformance audit schema, cardinality baseline and ordered audit plan; no row is yet classified by this planning part. |
 | M0 Td S2 P3 | Close the shared guest-pointer, handle/token, CPU-result and generic-machine interface audit; add dependency 118 and record the five common dispositions. |
 | M0 Td S2 P4 | Close the DEM/COMMAND interface audit: classify every 73-slot DEM and 17-slot COMMAND entry plus dependencies 001--033; all private guest-pointer forms are recorded as migration debt. |
-| M0 Td S2 P5 | Audit XMS and DPMI interface dispositions. |
+| M0 Td S2 P5 | Close the XMS/DPMI interface audit: classify every 12-slot XMS and 25-slot DPMI entry plus dependencies 034--041 and 059--077; do not admit `53:xx`. |
 | M0 Td S2 P6 | Audit Redirector, WOW16, Debugger/VDD and top-level/machine interface dispositions. |
 | M0 Td S2 P7 | Reconcile all interface rows, exceptions and migrations; publish the Td closure and re-admit or reject T257 S5. |
 

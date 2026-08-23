@@ -397,6 +397,93 @@ explicit while avoiding a second, lossy copy of the original dispatcher maps.
 | `BOP-COMMAND-54-0F` | `migration-debt` | C:0F `cmdGetInitEnvironment` in `cmdconf.c`/`cmdenv.c`; P output. | Session environment is bounded but guest mapping is family-local. | none | `migrate-facade` |
 | `BOP-COMMAND-54-10` | `migration-debt` | C:10 `cmdGetStartInfo` in `cmdpif.c`; P output. | PIF/start-info output mapping is not shared. | none | `migrate-facade` |
 
+### Td S2 P5 — XMS and DPMI interface dispositions
+
+`X:n` is the original `xmsdisp.c:apfnXMSSvc[n]` slot. `D:n` is the original
+`dpmi32.c:DpmiDispatchTable[n]` slot.  DPMI rows remain source-interface
+audits only: no `53:xx` ingress is admitted.  `M` below identifies existing
+generic mechanical exceptions (`BX-ABI-094`, `BX-MANTLE-095..097`); they are
+not a DPMI provider or authorization to recreate an NT4 process LDT.
+
+#### XMS and DPMI dependency rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-DEPENDENCY-034` | `opennt-shaped-facade` | Original `xms.c`; active mirror and named `xms_shim.h`. | CCPU/SAS entry becomes bounded typed call; XMS table/order retained. | none | `retain-facade` |
+| `BOP-DEPENDENCY-035` | `opennt-shaped-facade` | Original `xmsdisp.c:apfnXMSSvc`; active direct mirror. | Typed ingress replaces historical entry only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-036` | `registered-exception` | Original `xmsblock.c` allocator/mover calls. | Modern ordinary-RAM capacity/reservation replaces NT4 host allocation identity. | `BX-MANTLE-096`, `BX-MANTLE-097` | `retain-generic-mechanics` |
+| `BOP-DEPENDENCY-037` | `migration-debt` | Original `xmsa20.c` `GetVDMAddr`/A20 state writeback. | Current fixed guest byte-address shim avoids raw pointer but is not the shared mapping facade. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-038` | `opennt-shaped-facade` | Original `xmsumb.c`; empty UMB failure bodies are active. | No physical UMB success span is fabricated. | none | `retain-facade` |
+| `BOP-DEPENDENCY-039` | `opennt-shaped-facade` | Original `xmsmisc.c:xmsNotifyHookI15` → `UpdateKbdInt15`. | Bounded keyboard fragment is classified by dependency 044. | none | `retain-facade` |
+| `BOP-DEPENDENCY-040` | `registered-exception` | Original `suballoc.c` allocation layout/callback sequence. | Backing interval is the generic opaque ordinary-RAM reservation, not host memory. | `BX-MANTLE-097` | `retain-generic-mechanics` |
+| `BOP-DEPENDENCY-041` | `opennt-shaped-facade` | Original `suballcp.h` ABI layouts. | Compiler/header closure only. | none | `retain-facade` |
+| `BOP-DEPENDENCY-059` | `deferred` | Original `dpmi32/buffer.c` protected-to-DOS translation. | Needs atomic PM frame plus bounded guest mapping; no source body is active. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-060` | `migration-debt` | Original `dpmi32/data.c` shared state. | `dpmi_startup_session_shim` replaces pointer globals with a new fixed-width record without an individual recovery exception. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-061` | `deferred` | Original `dpmi32/debug.c`. | Requires common DPMI/NT4 debug composition, not an isolated facade. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-062` | `migration-debt` | Original `dpmi32.c` table and `DpmiInitDosx/InitApp/PassTableAddress`. | Existing startup shim preserves field order but is a project-shaped record instead of a complete same-shaped historical facade. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-063` | `deferred` | Original `dpmiint.c` interrupt/fault/IRET lifecycle. | Needs a proven atomic frame contract; historical hooks are unavailable. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-064` | `deferred` | Original `dpmimemr.c`. | Depends on the whole protected memory/table owner, not a leaf seam. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-065` | `deferred` | Original `dpmimscr.c` emulator hook lifecycle. | `VdmInstall*`/emulator IRET hooks are NT4 product-only. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-066` | `migration-debt` | Original `dpmiselr.c: DpmiSetDescriptorEntry`. | Existing descriptor-source shim is project-shaped and cannot recreate process-LDT identity. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-067` | `deferred` | Original `int21map.c`. | Needs the protected-to-DOS frame owner. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-068` | `deferred` | Original `modesw.c`. | Needs native protected/real transition plus DPMI frame lifecycle. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-069` | `deferred` | Original `register.c`. | Requires the whole DPMI context owner. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-070` | `deferred` | Original `savestat.c`. | Requires protected-frame/INT21 translation lifecycle. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-071` | `deferred` | Original `stack.c`. | Raw stack/IVT pointers need atomic frame and mapping lifecycle. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-072` | `deferred` | Original `vxd.c`. | VCD/VDD service composition has a distinct owner package. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-073` | `migration-debt` | Original `xmem.c` record/PSP ownership. | Existing record adapter is generic mechanics, but source-body composition has no same-shaped pointer/session facade. | `BX-MANTLE-096`, `BX-MANTLE-097` | `migrate-facade` |
+| `BOP-DEPENDENCY-074` | `deferred` | Original `i386/dpmi386.c`. | Host LDT/pointer context cannot compose on the current boundary. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-075` | `deferred` | Original `i386/dpmimem.c`. | NT virtual-memory/process identity is unavailable. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-076` | `deferred` | Original `i386/dpmimisc.c`. | Needs the whole protected context/product owner. | none | `deferred-owner-package` |
+| `BOP-DEPENDENCY-077` | `migration-debt` | Original DPMI header/layout set including `dpmi32p.h` and `dpmidata.h`. | Some headers expose `VdmTib`, `Ldt`, `IntelBase` and pointer-valued macros; existing partial mirrors cannot be treated as a whole safe facade. | none | `migrate-facade` |
+
+#### XMS BOP rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-XMS-52-00` | `migration-debt` | X:00 `xmsA20` in `xmsa20.c`. | A20 state uses the local checked byte-address shim, not dependency 118. | none | `migrate-facade` |
+| `BOP-XMS-52-01` | `registered-exception` | X:01 `xmsMoveBlock` in `xmsblock.c`. | Uses generic native ordinary-RAM capacity/reservation mechanics. | `BX-MANTLE-096`, `BX-MANTLE-097` | `retain-generic-mechanics` |
+| `BOP-XMS-52-02` | `registered-exception` | X:02 `xmsAllocBlock` in `xmsblock.c`. | Uses generic native ordinary-RAM reservation mechanics. | `BX-MANTLE-097` | `retain-generic-mechanics` |
+| `BOP-XMS-52-03` | `registered-exception` | X:03 `xmsFreeBlock` in `xmsblock.c`. | Uses generic native ordinary-RAM reservation mechanics. | `BX-MANTLE-097` | `retain-generic-mechanics` |
+| `BOP-XMS-52-04` | `opennt-shaped-facade` | X:04 `xmsSysPageSize` in `xmsblock.c`. | Source register query is retained. | none | `retain-facade` |
+| `BOP-XMS-52-05` | `opennt-shaped-facade` | X:05 `xmsQueryExtMem` in `xmsblock.c`. | Source capacity query is retained through named machine capacity seam. | none | `retain-facade` |
+| `BOP-XMS-52-06` | `migration-debt` | X:06 `xmsInitUMB` in `xmsumb.c` / A20 source state. | Its A20 guest-byte source path still needs dependency 118. | none | `migrate-facade` |
+| `BOP-XMS-52-07` | `opennt-shaped-facade` | X:07 `xmsRequestUMB` in `xmsumb.c`. | Original empty-UMB `B1` failure remains; no fake physical span. | none | `retain-facade` |
+| `BOP-XMS-52-08` | `opennt-shaped-facade` | X:08 `xmsReleaseUMB` in `xmsumb.c`. | Original empty-UMB `B2` failure remains. | none | `retain-facade` |
+| `BOP-XMS-52-09` | `opennt-shaped-facade` | X:09 `xmsNotifyHookI15` in `xmsmisc.c`. | Uses bounded original `UpdateKbdInt15` fragment; full keyboard remains separate. | none | `retain-facade` |
+| `BOP-XMS-52-0A` | `registered-exception` | X:0A `xmsQueryFreeExtMem` in `xmsblock.c`. | Uses generic opaque reservation accounting. | `BX-MANTLE-097` | `retain-generic-mechanics` |
+| `BOP-XMS-52-0B` | `registered-exception` | X:0B `xmsReallocBlock` in `xmsblock.c`. | Uses generic opaque reservation accounting. | `BX-MANTLE-097` | `retain-generic-mechanics` |
+
+#### DPMI BOP rows
+
+| Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
+| --- | --- | --- | --- | --- | --- |
+| `BOP-DPMI-53-00` | `migration-debt` | D:00 `DpmiSetDescriptorEntry` in `dpmiselr.c`. | Existing descriptor-source record has no completed same-shaped facade. | none | `migrate-facade` |
+| `BOP-DPMI-53-01` | `deferred` | D:01 `switch_to_protected_mode`. | Requires complete protected CPU/frame lifecycle. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-02` | `deferred` | D:02 `DpmiSetProtectedmodeInterrupt` in `dpmiint.c`. | Needs atomic frame transaction and unavailable historical hooks. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-03` | `deferred` | D:03 `DpmiGetFastBopEntry`. | Requires DOSX session and guest entry lifecycle. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-04` | `migration-debt` | D:04 `DpmiInitDosx` in `dpmi32.c`. | Existing startup record is project-shaped, not a fully audited same-shaped facade. | none | `migrate-facade` |
+| `BOP-DPMI-53-05` | `migration-debt` | D:05 `DpmiInitApp` in `dpmi32.c`. | Existing startup record is project-shaped, not a fully audited same-shaped facade. | none | `migrate-facade` |
+| `BOP-DPMI-53-06` | `deferred` | D:06 `DpmiXlatInt21Call`. | Needs buffer/int21map/frame owner. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-07` | `migration-debt` | D:07 `DpmiAllocateXmem` in `xmem.c`. | Existing xmem record mechanics need source-shaped pointer/session composition. | `BX-MANTLE-096`, `BX-MANTLE-097` | `migrate-facade` |
+| `BOP-DPMI-53-08` | `migration-debt` | D:08 `DpmiFreeXmem` in `xmem.c`. | Existing xmem record mechanics need source-shaped pointer/session composition. | `BX-MANTLE-097` | `migrate-facade` |
+| `BOP-DPMI-53-09` | `migration-debt` | D:09 `DpmiReallocateXmem` in `xmem.c`. | Existing xmem record mechanics need source-shaped pointer/session composition. | `BX-MANTLE-097` | `migrate-facade` |
+| `BOP-DPMI-53-0A` | `deferred` | D:0A `DpmiSetFaultHandler` in `dpmiint.c`. | Needs atomic frame and fault lifecycle. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-0B` | `deferred` | D:0B `DpmiGetMemoryInfo` in `dpmimemr.c`. | Needs complete protected memory owner. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-0C` | `deferred` | D:0C `DpmiDpmiInUse` in `dpmimscr.c`. | Historical emulator hook lifecycle unavailable. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-0D` | `deferred` | D:0D `DpmiDpmiNoLongerInUse` in `dpmimscr.c`. | Historical emulator hook lifecycle unavailable. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-0E` | `deferred` | D:0E `DpmiSetDebugRegisters`. | Debug context is a later owner package. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-0F` | `migration-debt` | D:0F `DpmiPassTableAddress` in `dpmi32.c`. | Existing startup record is project-shaped. | none | `migrate-facade` |
+| `BOP-DPMI-53-10` | `migration-debt` | D:10 `DpmiFreeAppXmem` in `xmem.c`. | Existing xmem record mechanics need source-shaped composition. | `BX-MANTLE-097` | `migrate-facade` |
+| `BOP-DPMI-53-11` | `deferred` | D:11 `DpmiPassPmStackInfo` in `dpmiint.c`. | Original returns a host-address-bearing VdmTib record. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-12` | `deferred` | D:12 `DpmiVcdPmSvcCall32` in `vxd.c`. | VCD/VDD owner is deferred. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-13` | `migration-debt` | D:13 `DpmiFreeAllXmem` in `xmem.c`. | Existing xmem record mechanics need source-shaped composition. | `BX-MANTLE-097` | `migrate-facade` |
+| `BOP-DPMI-53-14` | `deferred` | D:14 `DpmiIntHandlerIret16` in `dpmiint.c`. | Needs atomic IRET/frame commit. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-15` | `deferred` | D:15 `DpmiIntHandlerIret32` in `dpmiint.c`. | Needs atomic IRET/frame commit. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-16` | `deferred` | D:16 `DpmiFaultHandlerIret16` in `dpmiint.c`. | Needs atomic fault-frame commit. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-17` | `deferred` | D:17 `DpmiFaultHandlerIret32` in `dpmiint.c`. | Needs atomic fault-frame commit. | none | `deferred-owner-package` |
+| `BOP-DPMI-53-18` | `deferred` | D:18 `DpmiUnhandledExceptionHandler` in `dpmiint.c`. | Needs full fault/descriptor/stack lifecycle. | none | `deferred-owner-package` |
+
 ## 1. DEM / DOS（73）
 
 | Tracker ID | BOP 入口 | 原始 handler / 高层作用 | OpenNT 源码与可复通性 | 当前 code / 局部测试状态 | 已接入但待前置分支 | lifecycle / 其他 BOP 依赖 | bx / host / guest 前置 | 优先级 |
