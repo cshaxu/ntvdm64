@@ -200,7 +200,8 @@ WORD cchInitEnvironment;
 CHAR *lpszzVDMEnv32;
 DWORD cchVDMEnv32;
 
-void RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags)
+int RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags)
 {
-    (void)error; (void)first; (void)second; (void)flags;
+    return bx_ntvdm_opennt_rc_message_box(error, (CHAR *)first,
+        (CHAR *)second, (ULONG)flags);
 }

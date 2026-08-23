@@ -5,6 +5,7 @@
  * imported translation unit remains the DEM owner; this seam contains only
  * historic product-host bindings that cannot compose with typed bx-vdm. */
 #include "demerror_lock_shim.h"
+#include "opennt_error_dialog_facade.h"
 
 extern BOOL IsFirstCall;
 extern LPSTR pszBIOSDirectory;

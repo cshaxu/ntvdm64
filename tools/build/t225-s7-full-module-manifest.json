@@ -259,6 +259,7 @@
         "src/bx-vdm/bop/config_complete_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/top_level_nosupport_v2_generic_ud_bridge.c",
         "src/bx-vdm/bop/shim/top_level_nosupport_shim.c",
+        "src/bx-vdm/bop/shim/opennt_error_dialog_facade.c",
         "src/bx-vdm/bop/shim/config_complete_shim.c",
         "src/bx-vdm/bop/command_v2_runtime_session.c",
         "src/bx-vdm/bop/xms_v2_runtime_session.c",

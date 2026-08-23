@@ -292,7 +292,14 @@ BOOL GetNextVDMCommand(PVDMINFO vdm_info)
     return TRUE;
 }
 
-void host_lpt_flush_initialize(void) { }
+void host_lpt_flush_initialize(void)
+{
+    /* DIVERGENCE: nt_lpt.c clears the per-port dos_opened bits.  No LPT
+     * flush queue/port state is admitted in this composition, so creating a
+     * private parallel-port model here would cross the machine boundary.
+     * The reached void call is deliberately a visible no-effect until the
+     * printer/device owner supplies its native state. */
+}
 BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
     LPSTR current_directories)
 {
@@ -776,7 +783,9 @@ int bx_ntvdm_command_misc_publish_handle(HANDLE handle)
 }
 
 void RcErrorDialogBox(UINT error, PVOID first, PVOID second)
-{ (void)error; (void)first; (void)second; }
+{
+    bx_ntvdm_opennt_rc_error_dialog(error, (CHAR *)first, (CHAR *)second);
+}
 void TerminateVDM(void)
 {
     /* OpenNT's terminal path does not return.  The typed composition models

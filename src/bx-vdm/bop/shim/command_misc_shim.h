@@ -1,6 +1,8 @@
 #ifndef BX_NTVDM_BOP_SHIM_COMMAND_MISC_SHIM_H
 #define BX_NTVDM_BOP_SHIM_COMMAND_MISC_SHIM_H
 
+#include "opennt_error_dialog_facade.h"
+
 /* Compatibility surface for the directly imported OpenNT file
  * src/opennt/base/mvdm/dos/command/cmdmisc.c.  It is deliberately a scoped
  * CCPU/SAS replacement, not a COMMAND provider or BOP dispatcher. */
@@ -360,7 +362,7 @@ VOID cmdPipeInThread(LPVOID parameter);
 BOOL cmdPipeFileDataEOF(HANDLE file, BOOL *eof_out);
 BOOL cmdPipeFileEOF(HANDLE file);
 void RcErrorDialogBox(UINT error, PVOID first, PVOID second);
-void RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags);
+int RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags);
 void TerminateVDM(void);
 void nt_std_handle_notification(BOOL enabled);
 extern BOOL fSoftpcRedirection;

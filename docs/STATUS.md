@@ -70,6 +70,13 @@ module closures, and focused regressions pass.  The canonical RTL facade now
 keeps its counted-string layout checks in both C11 and C++14; no OpenNT mirror
 or Bochs source changed. See [S4 P2 evidence](etc/evidence/m0-t259-s4-p2-formal-static-closure-001.md).
 
+S4 P3 restores reached `RcErrorDialogBox`/`RcMessageBox` host facades through
+public Win32 and makes `demmisc` reuse the existing OpenNT-shaped
+OEM-to-Unicode file facade. The fresh 454-node formal graph, three focused
+fixtures and all 79 outputs pass; custom editable PIF UI, VDD/debugger,
+printer and floppy product semantics remain explicitly outside this facade.
+See [S4 P3 evidence](etc/evidence/m0-t259-s4-p3-host-dialog-oem-facade-closure-001.md).
+
 ## Latest Closure
 
 M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager

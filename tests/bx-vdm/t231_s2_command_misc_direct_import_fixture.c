@@ -102,6 +102,10 @@ int main(void)
             BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR, 1u) ||
         (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
         result.cpu_delta.gpr16_values[0] != 0u) return 5;
+    bx_ntvdm_opennt_error_dialog_fixture_suppress(TRUE);
+    if (RcMessageBox(0x1234u, NULL, NULL, 16u | 1u) != 1 ||
+        bx_ntvdm_opennt_error_dialog_fixture_last_error() != 0x1234u) return 6;
+    bx_ntvdm_opennt_error_dialog_fixture_suppress(FALSE);
     puts("T231 S2 direct OpenNT cmdmisc import: COMSPEC and current-directory ABI verified");
     return 0;
 }

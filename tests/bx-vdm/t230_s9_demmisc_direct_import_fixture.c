@@ -109,9 +109,13 @@ int main(void)
 
     /* Original demExitVDM reports then terminates.  The shim expresses that
      * non-returning lifecycle effect through the typed controlled-stop ABI. */
+    bx_ntvdm_opennt_error_dialog_fixture_suppress(TRUE);
     reset_cpu(&cpu);
     if (!invoke(&state, &direct, &event, &cpu, &result, 0x3du) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_STOP) return 17;
+        result.disposition != BX_NTVDM_CPU_RESULT_V2_STOP ||
+        bx_ntvdm_opennt_error_dialog_fixture_last_error() != ED_BADSYSFILE ||
+        bx_ntvdm_opennt_error_dialog_fixture_count() == 0u) return 17;
+    bx_ntvdm_opennt_error_dialog_fixture_suppress(FALSE);
     VDMForWOW = FALSE; bx_ntvdm_demmisc_bind_fd_access(NULL);
     DeleteFileA(dos_path); RemoveDirectoryA(directory);
     puts("T230 S9 direct OpenNT demmisc import: all lifecycle, loader and diagnostic service bodies verified");
