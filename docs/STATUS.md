@@ -2,32 +2,33 @@
 
 ## Current Work
 
-**Active: M0 T242 S2** — establish source-built NTDOS guest-state observation
-without moving DOS process semantics into a host provider.
+**Active: M0 T242 S3** — recover the declared local guest EXEC path through
+source-proven machine prerequisites without moving DOS process semantics into a
+host provider.
 
 ## Active Packet
 
-### M0 T242 S2 — source-built NTDOS guest-state observation
+### M0 T242 S3 — source-proven guest EXEC prerequisite recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T242 S2`, Ordinary Mode, single-person dual-role guest-image observation implementation. |
-| Admission And Approval | S1 source/ABI audit is complete and directly admits this bounded implementation; it does not authorize a host-side DOS process model. |
-| Objective | Prove that the selected source-built guest image reaches the original NTDOS INT 21/EXEC route, recording only checked PDB/vector/parent-state observations needed by the declared local DOS child profile. |
-| Non-goals | No adapter-owned DOS process emulator; no COMMAND broker rewrite; no new BOP leaf patch; no Bochs/core/mantle business semantics; no host 32-bit child, Redirector, WOW, debugger, overlay or HMA claim. |
-| Reference Baseline | [S1 source/ABI audit](etc/evidence/m0-t242-s1-ntdos-exec-source-abi-audit-001.md), [ordered recovery plan](etc/operations/m0-t242-ntdos-guest-exec-recovery-plan-001.md), tracker `BOP-DEPENDENCY-092..101`, source-built DOS/NTDOS/COMMAND assets, and T241 closure. |
-| Files And ABI Surface | A bounded guest-state observation fixture and its minimal build/staging records; checked guest-memory facts only. |
+| Identifier Mode | `M0 T242 S3`, Ordinary Mode, single-person dual-role guest EXEC recovery. |
+| Admission And Approval | S1 source/ABI audit and S2 native classification admit only the source-proven prerequisites on the declared local `AL=0` path; they do not authorize a host-side DOS process model. |
+| Objective | Recover the local source-built DOS-binary load/child/exit path by composing only original guest code and individually proven machine prerequisites, beginning with `BOP-DEPENDENCY-102` (`BIOS[15]`, `AH=88h`). |
+| Non-goals | No adapter-owned DOS process emulator; no COMMAND broker rewrite; no blanket BIOS/device enablement; no Bochs/core/mantle business semantics; no host 32-bit child, Redirector, WOW, debugger, overlay or HMA claim. |
+| Reference Baseline | [S1 source/ABI audit](etc/evidence/m0-t242-s1-ntdos-exec-source-abi-audit-001.md), [S2 bootstrap observation](etc/evidence/m0-t242-s2-source-built-bootstrap-observation-001.md), [ordered recovery plan](etc/operations/m0-t242-ntdos-guest-exec-recovery-plan-001.md), tracker `BOP-DEPENDENCY-092..102`, source-built DOS/NTDOS/COMMAND assets, and T241 closure. |
+| Files And ABI Surface | Active original guest bytes; `BIOS[15]` source map; existing selector-blind checked RAM/action, typed register result/resume and finite machine lifecycle only. |
 | Applicable Rules | Source-first recovery, guest-owner boundary, queue order, no trace-driven scope growth and MTSP governance. |
-| Verification | Formal Ninja build plus a focused fixture that proves image identity and pre/post original guest PDB/vector facts, or records the first missing machine prerequisite without a trace-led leaf patch. |
-| Expected Markers | Original guest bytes own all DOS mutations; observation interfaces are fixed-width/checked; host COMMAND and machine work are consumed prerequisites, not reimplemented. |
+| Verification | Formal Ninja build plus focused source/body/ABI fixtures for each admitted prerequisite and one bounded source-built guest observation after a coherent prerequisite group, never one trace-led provider patch. |
+| Expected Markers | Original guest bytes own all DOS mutations; original machine source supplies only selector-blind mechanical result; host COMMAND and machine work are consumed prerequisites, not reimplemented. |
 | Asset Needs | Existing local OpenNT tree and staged source-built guest artifacts; no new import or host mutation. |
-| Reporting Requirements | Record exact image digest, executed/observed original source edge, guest-memory facts, missing ABI/machine edge, and an owner-bounded disposition. |
-| Stop Conditions | Required source/staged artifact cannot be identified; a required observation cannot cross the typed existing boundary; or a prerequisite belongs to another owner package. |
-| Exit Criteria | A reproducible, source-built guest observation fixture establishes the next implementable original EXEC edge without constructing guest semantics in bx-vdm. |
+| Reporting Requirements | Record exact image digest, original source edge, source-body/shim differences, tested register/flags/RIP result, and owner-bounded disposition. |
+| Stop Conditions | Required source/staged artifact cannot be identified; a required observation cannot cross the typed existing boundary; a prerequisite requires an undeclared broad device/product shell; or the remaining work is a different owner package. |
+| Exit Criteria | Original `$Exec`, `$CREATE_PROCESS_DATA_BLOCK`, `$Exit/$Abort` execute in guest ownership for the declared profile, with error exits retaining source behavior; otherwise every reached residual is classified and transferred by owner. |
 | Original Owner Request | Persistent goal: queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation. |
-| Similar-Issue Sweep | `INT 21h AH=4B`, PSP/arena/JFN/environment/return flows, `54:01/08/0A/0B`, BOP 50/54 dependencies and real-mode interrupt/memory contracts. |
-| Exit Status | Active. S1 is complete: it freezes guest ownership, exact staged-image provenance, the local `AL=0` first profile and `BOP-DEPENDENCY-092..101`. S2 P1 retires the old selector-only guest-lifecycle observers; see [retirement evidence](etc/evidence/m0-t242-s2-retired-selector-ledger-001.md). S2 P2 proves the source-built bundle reaches accepted `50:11`, `12`, six subsequent original bootstrap BOPs, then owner-classified machine `15/AH=88h`; see [bootstrap observation](etc/evidence/m0-t242-s2-source-built-bootstrap-observation-001.md). It does not yet reach NTDOS EXEC. |
-| Next Admission | T242 S3 only after S2 proves or cleanly classifies the first original guest execution edge. |
+| Similar-Issue Sweep | `INT 21h AH=4B`, PSP/arena/JFN/environment/return flows, `54:01/08/0A/0B`, BIOS `12/15`, reset BDA/extended-memory and real-mode interrupt/memory contracts. |
+| Exit Status | Active. S1 froze guest ownership/provenance/profile. S2 closed as bounded bootstrap classification: it retired selector-only probes, proved BDA/reset and reached machine `15/AH=88h`. S3 P1 restores that exact original non-PM branch and proves its AX/RIP/flag contract; the source-built bundle advances through eight more accepted routes before a later `0800:0000` budget loop. See [S3 P1 evidence](etc/evidence/m0-t242-s3-int15-ems-source-mirror-001.md). It does not claim NTDOS EXEC. |
+| Next Admission | T242 S4 only after S3 executes the declared original guest EXEC load/exit path or transfers a remaining external owner prerequisite with complete evidence. |
 
 ## Latest Closure
 
