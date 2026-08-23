@@ -2,31 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T254 S1** — OpenNT DPMI profile source/ABI admission map.
+**Active: M0 T255 S1** — Selector-blind protected-mode substrate source/ABI map.
 
 ## Active Packet
 
-### M0 T254 S1 — OpenNT DPMI profile source/ABI admission map
+### M0 T255 S1 — Selector-blind protected-mode substrate source/ABI map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T254 S1`, Ordinary Mode, single-person dual-role source-first DPMI admission. |
-| Admission And Approval | The next dependency-ordered candidate is admitted under the standing request to recover original OpenNT BOP packages while keeping Bochs/mantle free of DOS/VDM semantics. S1 is read-only source/ABI/failure mapping before any DPMI implementation. |
-| Objective | Select one bounded OpenNT DPMI profile and prove the complete owner/source, protected-mode transition, LDT/IDT/exception/IRET, memory and BOP dependency graph required to recover it. |
-| Non-goals | No DPMI leaf implementation, trace-driven patch, new CPU compatibility behavior, guest pointer shortcut, DPMI term in bx-core/mantle, or unregistered Bochs intrusion. |
-| Reference Baseline | [DPMI proposal](etc/operations/proposal-opennt-dpmi-owner-package-completion-001.md), live [BOP tracker](etc/bop-list.md), adopted protected-mode/exception and XMS/memory evidence. |
-| Files And ABI Surface | Read-only `src/opennt` DPMI/guest source, tracker/proposal/evidence; any later fixed-width seams are deferred until this map chooses them. |
+| Identifier Mode | `M0 T255 S1`, Ordinary Mode, single-person dual-role source-first mechanical prerequisite admission. |
+| Admission And Approval | T254 evidence rejects a DPMI implementation before its generic machine substrate exists. The first dependency-ordered successor is admitted under the standing request; S1 is read-only source/ABI mapping. |
+| Objective | Prove the smallest selector-blind protected-mode operations required to admit the retained OpenNT DPMI owner package, and determine whether existing Bochs/mantle mechanics can provide them without a bx-core patch. |
+| Non-goals | No DPMI source import, `53:xx` dispatch, BOP/DOS/OpenNT term in bx-core/mantle, trace-driven patch, raw guest pointer, LDT policy, or unregistered external-code intrusion. |
+| Reference Baseline | [substrate proposal](etc/operations/proposal-selector-blind-protected-mode-substrate-001.md), [T254 admission map](etc/evidence/m0-t254-s1-dpmi-profile-source-abi-admission-map-001.md), and live [BOP tracker](etc/bop-list.md). |
+| Files And ABI Surface | Read-only adopted bx-core/bx-mantle mechanical code, copied event/result ABIs and retained DPMI source; later typed seam definitions are deferred until this map selects them. |
 | Applicable Rules | Source-first recovery, CPU-profile completion gate, guest/machine hard boundary, Bochs rewrite stop rule and live-tracker sequencing. |
-| Verification | Source inventory and caller graph; BOP/dependency cross-check; documented four-rung disposition; documentation governance and `git diff --check`. |
-| Expected Markers | One named profile, every required BOP/dependency owner, ordered prerequisites, explicit unavailable historical composition and no implied implementation. |
-| Asset Needs | Retained OpenNT DPMI source/headers, current protected-mode bridge records, XMS/memory capability evidence and tracker rows. |
-| Reporting Requirements | Distinguish directly composable source from the smallest required adapter seam, absent historical product dependencies and any candidate Bochs mechanics. |
-| Stop Conditions | A proposed implementation needs a CPU/device semantic change, an unbounded guest-memory interface, an undocumented old NT internal API or a profile choice not supported by source evidence. |
-| Exit Criteria | A reviewed profile map supports a bounded S2 implementation decision or explicitly rejects admission; no source behavior is changed by S1. |
+| Verification | Existing-call-site inventory; boundary-gap map; negative ownership audit; documented four-rung disposition; documentation governance and `git diff --check`. |
+| Expected Markers | Exact generic operation candidates, owner/call path, rejected broad interfaces, explicit determination of whether a registered core intrusion is required. |
+| Asset Needs | Retained OpenNT DPMI source/headers, adopted Bochs protected-mode code, mantle bridge and current ABI records. |
+| Reporting Requirements | Separate existing internal Bochs capability from typed product-boundary capability; report no inferred DPMI behavior. |
+| Stop Conditions | The only apparent route exposes raw pointers/objects, embeds DPMI policy in machine layers, or requires a core patch without an evidence-backed exception record. |
+| Exit Criteria | A reviewed substrate map supports bounded S2 composition or explicitly rejects it; no source behavior is changed by S1. |
 | Original Owner Request | Continue source-first BOP recovery and remove superseded v1 routes; work autonomously within established machine-boundary rules. |
-| Similar-Issue Sweep | XMS A20/UMB, WOW16 NE lifecycle, DPMI exception/IRET, COMMAND protected-mode caller paths and existing machine-memory capabilities. |
+| Similar-Issue Sweep | Existing real-mode resume ABI, XMS machine seams, DPMI exception/IRET and protected-mode observations. |
 
 ## Latest Closure
+
+M0 T254 closes the premature DPMI implementation admission.  The retained
+OpenNT `dpmi32` package requires protected selector/LDT/context/IRET and
+guest-linear memory substrate which the current copied-state boundary does not
+provide; no `53:xx` leaf is independently admissible.  See the
+[T254 closure](history/m0-t254-closure-20260823.md).
 
 M0 T253 closes the selector-blind local async named-pipe completion slice.
 `57:23/24` and the pipe-only `57:26` disposition recover the retained
