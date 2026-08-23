@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T248 S1** — Selector-blind post-EXEC real-mode continuity source/ABI map.
+**Active: M0 T248 S2** — Selector-blind post-EXEC real-mode bounded replay.
 
 ## Active Packet
 
-### M0 T248 S1 — Selector-blind post-EXEC real-mode continuity source/ABI map
+### M0 T248 S2 — Selector-blind post-EXEC real-mode bounded replay
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T248 S1`, Ordinary Mode, single-person dual-role source/ABI recovery map. |
+| Identifier Mode | `M0 T248 S2`, Ordinary Mode, single-person dual-role bounded mechanical replay. |
 | Admission And Approval | Standing owner delegation selects the new queue-leading selector-blind continuity prerequisite discovered and tracked by completed T247; ordinary recovery work requires no repeated approval. |
-| Objective | Map exact post-`50:36` real-mode instruction, interrupt/exception, stack and return edges against original NTDOS/SoftPC and adopted Bochs sources, without importing BOP/DOS semantics into machine layers. |
+| Objective | Use the existing default-off selector-blind software-INT and IRET observation surfaces to replay the T247 post-`50:36` bounded input once and assign the exact remaining mechanical edge. |
 | Non-goals | No DEM/COMMAND/Redirector/WOW leaf patch, guest PDB/arena/JFN implementation, BOP selector interpretation in bx-core/bx-mantle, device enablement, or unsupported continuity claim. |
-| Reference Baseline | T247 source-built `50:36` PDB checkpoint and `BOP-DEPENDENCY-115`; T246 `02/06` source package; active finite mantle contract. |
-| Files And ABI Surface | Tracker/evidence/operation plan and read-only source maps only; no runtime ABI or Bochs change in S1. |
+| Reference Baseline | Completed [T248 S1 map](etc/evidence/m0-t248-s1-post-exec-realmode-continuity-owner-map-001.md), T247 source-built `50:36` PDB checkpoint, `BOP-DEPENDENCY-115`, T246 `02/06` source package and active finite mantle contract. |
+| Files And ABI Surface | Formal Ninja diagnostic configuration and existing fixed-width observation ABI only; no service ABI or Bochs semantic change. |
 | Applicable Rules | Source-first ladder, guest/machine/adapter owner separation and no trace-led leaf selection. |
-| Verification | Source/ABI/call-chain citations, existing source-built trace and tracker dependency review, documentation governance and `git diff --check`. |
-| Expected Markers | Every reached post-entry edge is assigned to original guest, adopted CPU, mantle lifecycle, existing typed seam or explicit external owner; no BOP service is selected as an implementation task. |
-| Asset Needs | Existing OpenNT guest/SoftPC source, adopted bx-core/bx-mantle sources, T247 source-built checkpoint, current tracker and formal build manifests. |
-| Reporting Requirements | Name original source paths, retained mechanical semantics, source-first rung decision and any prerequisite transfer. |
-| Stop Conditions | A needed effect cannot be placed in machine mechanics without adopting DOS/BOP/OpenNT semantics, or source evidence cannot distinguish a CPU/mantle defect from guest behavior. |
-| Exit Criteria | One source/ABI map proves a bounded selector-blind S2 replay candidate or names a transferred external owner. |
+| Verification | Fresh formal Ninja build with the two diagnostics, one bounded source-built native run, captured INT/IRET facts, documentation governance and `git diff --check`. |
+| Expected Markers | The record distinguishes an original guest transfer, BOP `06` stack rewrite/IRET, HLT/event return, or another exact mechanical stop cause; no BOP service is selected as an implementation task. |
+| Asset Needs | Existing OpenNT guest/SoftPC source, adopted bx-core/bx-mantle sources, T247 source-built checkpoint, current formal manifest and Ninja generator. |
+| Reporting Requirements | Name captured CPU facts, the retained mechanical semantics, source-first rung decision and any exact owner transfer. |
+| Stop Conditions | The needed effect would require importing DOS/BOP/OpenNT semantics into machine mechanics, or the diagnostic cannot distinguish CPU/mantle from guest behavior. |
+| Exit Criteria | One bounded replay record assigns the next exact continuity edge or justifies the smallest source-proven S3 mechanical recovery. |
 | Original Owner Request | Queue-ordered, OpenNT original-code minimal-modification recovery with single-person dual-role implementation; ordinary work does not require repeated technical approval. |
 | Similar-Issue Sweep | `BOP-DEPENDENCY-093/102/104/114/115`, original `msproc.asm:$Exec/$Exit`, SoftPC BIOS interrupt handlers, adopted CPU exception/iret/stack mechanics and mantle run/stop lifecycle. |
 
