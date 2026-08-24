@@ -2,11 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T263 S5 — OpenNT optional host extension-package preparation.**
-This packet preserves original VDD/debug/fax host packages without declaring
-their historic NT4 product shells linked or runtime-available.
+**Active: M0 T263 S6 — OpenNT `tools16` historical tool-closure admission.**
+This packet retains original guest-build tool inputs without adding them to
+the modern runtime or formal Ninja graph.
 
 ## Active Packet
+
+### M0 T263 S6 — OpenNT `tools16` historical tool-closure admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S6`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T263 proposal S6; owner classified `tools16` under non-component `tools/opennt`. |
+| Objective | Preserve and source-verify the complete original `tools16` package as a potential guest-build tool closure. |
+| Non-goals | No modern-host link, Ninja edge, implicit tool invocation, guest rebuild or migration of unrelated historical tool material. |
+| Reference Baseline | `O:\\repos.external\\opennt\\base\\mvdm\\tools16`, Git `5c5b979e`; T263/S1 census. |
+| Files And ABI Surface | Seven original historical tool inputs, tool README, S6 evidence and status only; no product ABI. |
+| Applicable Rules | Source policy, historical-tool isolation, guest build provenance and no-runtime-link rule. |
+| Verification | File count plus SHA-256 equality for all seven files; formal graph remains unchanged. |
+| Expected Markers | Seven exact inputs; zero runtime consumers; no Ninja graph expansion. |
+| Asset Needs | Pinned OpenNT source root and Git provenance. |
+| Reporting Requirements | Record the deferred guest-build consumer and distinguish `tools/opennt` from unrelated historical tool material. |
+| Stop Conditions | Hash/path mismatch, tool linked into modern runtime, unapproved invocation or unrelated tool migration pauses the packet. |
+| Exit Criteria | Package is exact, README/evidence agree and no runtime/build behavior is inferred. |
+| Original Owner Request | “`tools16`：历史编译工具资料…属于 tools/opennt，不是组件。” |
+| Similar-Issue Sweep | Historical tool mistaken for host runtime input, hidden tool invocation, provenance collision and broad historical-directory cleanup. |
+
+**S6 P1 completed:** all seven `tools16` files are source-identical and
+SHA-256 verified. See the [admission evidence](etc/evidence/m0-t263-s6-opennt-tools16-closure-admission-001.md).
 
 ### M0 T263 S5 — OpenNT optional host extension-package preparation
 
