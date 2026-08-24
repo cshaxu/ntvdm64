@@ -18,6 +18,8 @@
 #define LOCAL_DEVICE_PREFIX "\\\\."
 #define ARGUMENT_PRESENT(value) ((value) != NULL)
 #define ASSERT(value) ((void)0)
+#define ROUND_UP_COUNT(count, alignment) \
+    (((count) + ((alignment) - 1u)) & ~((alignment) - 1u))
 
 typedef struct _OPEN_NAMED_PIPE_INFO {
     struct _OPEN_NAMED_PIPE_INFO *Next;
@@ -34,52 +36,70 @@ static POPEN_NAMED_PIPE_INFO VrpGetOpenNamedPipeInfo(HANDLE Handle)
 {
     POPEN_NAMED_PIPE_INFO ptr;
     for (ptr = OpenNamedPipeInfoList; ptr != NULL; ptr = ptr->Next) {
-        if (ptr->Handle == Handle) return ptr;
+        if (ptr->Handle == Handle) {
+            break;
+        }
     }
-    return NULL;
+    return ptr;
 }
 
 static BOOL VrpAddOpenNamedPipeInfo(HANDLE Handle, LPSTR Name)
 {
+    POPEN_NAMED_PIPE_INFO PipeInfo;
     DWORD NameLength;
-    POPEN_NAMED_PIPE_INFO ptr;
-    if (VrpGetOpenNamedPipeInfo(Handle) != NULL) return TRUE;
+
     NameLength = (DWORD)strlen(Name) + 1u;
-    ptr = (POPEN_NAMED_PIPE_INFO)LocalAlloc(LMEM_FIXED,
-        sizeof(OPEN_NAMED_PIPE_INFO) + NameLength);
-    if (ptr == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    ptr->Next = NULL;
-    ptr->Handle = Handle;
-    ptr->NameLength = NameLength;
-    strcpy(ptr->Name, Name);
-    if (LastOpenNamedPipeInfo == NULL) {
-        OpenNamedPipeInfoList = ptr;
-    } else {
-        LastOpenNamedPipeInfo->Next = ptr;
+    PipeInfo = (POPEN_NAMED_PIPE_INFO)
+                LocalAlloc(LMEM_FIXED,
+                    ROUND_UP_COUNT((sizeof(OPEN_NAMED_PIPE_INFO) + NameLength),
+                        sizeof(DWORD)
+                        )
+                    );
+    if (PipeInfo == NULL) {
+        return FALSE;
     }
-    LastOpenNamedPipeInfo = ptr;
+
+    PipeInfo->Next = NULL;
+    PipeInfo->Handle = Handle;
+    PipeInfo->NameLength = NameLength;
+    strcpy(PipeInfo->Name, Name);
+    if (LastOpenNamedPipeInfo == NULL) {
+        OpenNamedPipeInfoList = PipeInfo;
+    } else {
+        LastOpenNamedPipeInfo->Next = PipeInfo;
+    }
+    LastOpenNamedPipeInfo = PipeInfo;
     return TRUE;
 }
 
 static BOOL VrpRemoveOpenNamedPipeInfo(HANDLE Handle)
 {
-    POPEN_NAMED_PIPE_INFO *link = &OpenNamedPipeInfoList, previous = NULL;
-    while (*link != NULL) {
-        POPEN_NAMED_PIPE_INFO ptr = *link;
+    POPEN_NAMED_PIPE_INFO ptr, prev = NULL;
+    for (ptr = OpenNamedPipeInfoList; ptr; ) {
         if (ptr->Handle == Handle) {
-            *link = ptr->Next;
-            if (LastOpenNamedPipeInfo == ptr) LastOpenNamedPipeInfo = previous;
+            if (!prev) {
+                OpenNamedPipeInfoList = ptr->Next;
+            } else {
+                prev->Next = ptr->Next;
+            }
+            if (LastOpenNamedPipeInfo == ptr) {
+                LastOpenNamedPipeInfo = prev;
+            }
             LocalFree(ptr);
             return TRUE;
         }
-        previous = ptr;
-        link = &ptr->Next;
+        prev = ptr;
+        ptr = ptr->Next;
     }
     return FALSE;
 }
 
 VOID VrTerminateNamedPipes(VOID)
 {
+    /* DIVERGENCE(HOST-DIV-021): the original
+     * VrTerminateNamedPipes(DosPdb) source body is empty.  This static
+     * single-session boundary still must retire its local metadata at session
+     * teardown; it is not a claimed recovery of the historical DOS-PDB hook. */
     while (OpenNamedPipeInfoList != NULL)
         (void)VrpRemoveOpenNamedPipeInfo(OpenNamedPipeInfoList->Handle);
 }
@@ -118,8 +138,13 @@ BOOL VrIsNamedPipeName(LPSTR Name)
 
 BOOL VrAddOpenNamedPipeInfo(HANDLE Handle, LPSTR lpFileName)
 {
-    if (!bx_ntvdm_vr_initialized_provider() || !VrIsNamedPipeName(lpFileName)) return FALSE;
-    return VrpAddOpenNamedPipeInfo(Handle, lpFileName);
+    BOOL ok;
+    if (VrIsNamedPipeName(lpFileName)) {
+        ok = VrpAddOpenNamedPipeInfo(Handle, lpFileName);
+    } else {
+        ok = FALSE;
+    }
+    return ok;
 }
 
 BOOL VrRemoveOpenNamedPipeInfo(HANDLE Handle)

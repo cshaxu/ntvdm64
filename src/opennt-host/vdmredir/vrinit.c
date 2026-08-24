@@ -19,6 +19,11 @@ BOOLEAN bx_ntvdm_vr_initialized_provider(VOID)
 
 BOOLEAN bx_ntvdm_vr_initialize_provider(VOID)
 {
+    /* DIVERGENCE(HOST-DIV-022): OpenNT VrInitialize registers VDD hooks,
+     * starts NetBIOS/DLC state, initializes ICA queues and writes VDM load
+     * info. Those coupled product services are not a helper-level recovery;
+     * this retained static single-session gate exposes no such fabricated
+     * capability until the later Redirector/VDD lifecycle owner exists. */
     IsVrInitialized = TRUE;
     return TRUE;
 }

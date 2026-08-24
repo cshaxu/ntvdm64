@@ -21,15 +21,16 @@ inside S8, and which require a later whole Redirector/VDD product package?
 | Original provider group | Present live use | S8 disposition | Reason / successor |
 | --- | --- | --- | --- |
 | `VrIsNamedPipeName`, `VrConvertLocalNtPipeName` | DEM named-pipe classification and local-name conversion | Recover next as direct source bodies. | They require only their input buffers and public Win32 computer-name calls; no BOP selector, VDD, ICA, NetBIOS or DLC state. |
-| `VrIsNamedPipeHandle` | local record classification | Recover with its original list lookup when the record group is recovered. | Its source is coupled to `OPEN_NAMED_PIPE_INFO`, not a guest-handle allocator. |
-| `VrpAdd/Get/RemoveOpenNamedPipeInfo`, `VrAdd/RemoveOpenNamedPipeInfo`, `VrTerminateNamedPipes` | current static named-pipe metadata | Recover as one record/PDB lifecycle group. | Original records retain `DosPdb`, while the current subset does not yet bind the caller's original process identity. This needs an existing CCPU/SAS PDB seam, but no new mapping manager. |
-| `VrReadNamedPipe`, `VrWriteNamedPipe` | synchronous DEM pipe interception | Keep their declared S8 source-derived exceptions until the record/PDB group is present. | Original `OVERLAPPED_PIPE_IO` uses VDD cancellation registration and its worker-completion lifecycle; the current bounded session replacement must not be silently relabeled as original. A later Redirector/VDD package owns cancellation/interrupt completion. |
+| `VrIsNamedPipeHandle` | local record classification | Direct original list lookup active. | It is coupled only to `OPEN_NAMED_PIPE_INFO`, not a guest-handle allocator. |
+| `VrpAdd/Get/RemoveOpenNamedPipeInfo`, `VrAdd/RemoveOpenNamedPipeInfo` | current static named-pipe metadata | Direct original record/list bodies active. | The original record's `DosPdb` member is retained, but the source does not initialize or consume it in this reached non-debug group; no new PDB/mapping seam is invented. |
+| `VrTerminateNamedPipes` | current session-uninitialize cleanup | Keep as an explicit source-derived cleanup divergence. | The historical `VrTerminateNamedPipes(DosPdb)` body is intentionally empty. The current all-record teardown cannot be mislabeled as that original body and moves only with the later session/Redirector lifecycle decision. |
+| `VrReadNamedPipe`, `VrWriteNamedPipe` | synchronous DEM pipe interception | Keep their declared S8 source-derived exceptions until the Redirector/VDD lifecycle package is admitted. | Original `OVERLAPPED_PIPE_IO` uses VDD cancellation registration and its worker-completion lifecycle; the current bounded session replacement must not be silently relabeled as original. The recovered metadata record group does not supply cancellation/interrupt completion. |
 | `VrInitialize`, `VrUninitialize` and the rest of `vrinit.c` | 57:00/01 static provider state | Retain the explicit source-derived single-session gate; do not call it direct recovery. | Original body requires `VDDInstallUserHook`, NetBIOS/DLC initialization, VDM load-info guest write, queued ICA interrupts and the historical VDD suspend/resume hooks. These are a whole Redirector/VDD/ICA lifecycle, not an S8 helper seam. |
 
 ## Consequence
 
-S8 may recover the first two helper bodies and then the named-pipe record/PDB
-group only if its original CCPU/SAS identity seam is proven. It must not pull
+S8 may recover the first two helper bodies and the named-pipe record group
+without inventing a CCPU/SAS identity seam. It must not pull
 VDD cancellation, NetBIOS, DLC, ICA or a multi-session broker into
 `opennt-host` merely to inflate source coverage. Those remain explicit
 follow-on owner work, presently represented by the Redirector IPC/network and
@@ -52,3 +53,14 @@ The existing formal Redirector fixture now exercises positive and negative
 pipe-name classification and forward-slash canonicalization. Fresh formal
 `r012` compiles the complete affected graph, links the fixture and the fixture
 exits successfully.
+
+The original `OPEN_NAMED_PIPE_INFO` record (including its historical
+`DosPdb` field), `VrpAddOpenNamedPipeInfo`, `VrpGetOpenNamedPipeInfo`,
+`VrpRemoveOpenNamedPipeInfo`, `VrAddOpenNamedPipeInfo` and
+`VrRemoveOpenNamedPipeInfo` are now active as well. This removes the prior
+duplicate-handle admission and standalone list algorithm. The original
+`VrTerminateNamedPipes(DosPdb)` body is deliberately empty, so the existing
+all-record session cleanup is not rebranded as an original recovery and remains
+the explicitly deferred lifecycle divergence (`HOST-DIV-021`). Likewise the
+small static `vrinit.c` provider is explicitly `HOST-DIV-022`, rather than a
+claim that VDD/ICA/NetBIOS/DLC initialization has been restored.

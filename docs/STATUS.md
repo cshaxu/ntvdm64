@@ -73,9 +73,12 @@ surfaces rather than complete original translation units. P6 records each
 function's exact direct-recovery or later-package disposition. Its first two
 direct bodies, `VrIsNamedPipeName` and `VrConvertLocalNtPipeName`, now retain
 original flow and pass their focused formal fixture checks; only the necessary
-x64-safe spellings are `HOST-DIV-020` registered. VDD/ICA/NetBIOS/DLC and
-cancellation lifecycle are not silently folded into this helper work. See the
-[P6 host-body disposition](etc/evidence/m0-t261-s8-p6-vdmredir-host-body-disposition-001.md).
+x64-safe spellings are `HOST-DIV-020` registered. Its original named-pipe
+metadata record/list and `VrAdd/RemoveOpenNamedPipeInfo` bodies are now active
+too. The historical empty `VrTerminateNamedPipes(DosPdb)` is not misrepresented
+as the current session all-record cleanup. VDD/ICA/NetBIOS/DLC and cancellation
+lifecycle are not silently folded into this helper work. See the [P6 host-body
+disposition](etc/evidence/m0-t261-s8-p6-vdmredir-host-body-disposition-001.md).
 The retained `VrTerminateMailslots` body now also closes the PDB-owned record
 cleanup with the original no-AX-write result; its copied-frame/token divergence
 is `BOP-DIV-059`.  `VrGetMailslotInfo` now uses its original body, backed by
