@@ -1,4 +1,4 @@
-#include "ntdos64_dos_safe_alias_v1.h"
+#include "dos_safe_alias_v1.h"
 
 #include <winioctl.h>
 #include <string.h>

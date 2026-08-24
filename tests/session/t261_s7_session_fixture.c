@@ -1,4 +1,4 @@
-#include "session/ntdos64_session_v1.h"
+#include "session/session_v1.h"
 #include "adapter-softpc/bx_ntvdm_guest_pointer_manager.h"
 
 static unsigned int teardown_calls;

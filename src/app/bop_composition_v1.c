@@ -1,4 +1,4 @@
-#include "ntdos64_bop_composition_v1.h"
+#include "bop_composition_v1.h"
 
 #include "adapter-bop/bx_ntvdm_bop_ingress_v1.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"

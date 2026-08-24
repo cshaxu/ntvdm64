@@ -1,13 +1,13 @@
-#include "bx_ntvdm_engine_contract_v1.h"
+#include "engine_contract_v1.h"
 #include "bx_ntvdm_machine_engine_v1.h"
 #include "opennt-bop/ingress/dem_v2_runtime_session.h"
 #include "opennt-bop/ingress/dem_v2_startup_composition.h"
 #include "opennt-bop/ingress/command_v2_runtime_session.h"
-#include "ntdos64_bop_composition_v1.h"
+#include "bop_composition_v1.h"
 #include "adapter-softpc/bx_ntvdm_guest_pointer_manager.h"
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
-#include "session/ntdos64_session_v1.h"
-#include "session/ntdos64_session_cancellation_v1.h"
+#include "session/session_v1.h"
+#include "session/session_cancellation_v1.h"
 
 int bx_ntvdm_engine_request_cancellation_v1(uint32_t reason)
 {

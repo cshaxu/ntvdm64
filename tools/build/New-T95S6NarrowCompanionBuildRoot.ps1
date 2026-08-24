@@ -57,12 +57,12 @@ Remove-Item -LiteralPath $staleMainObject -Force
 if (Test-Path -LiteralPath $staleMainObject) { throw 'Failed to remove stale build-local main.o' }
 
 $adapterSources = @(
-    'bx_ntvdm_startup_session_environment.c',
-    'bx_ntvdm_startup_session.c',
+    'startup_session_environment.c',
+    'startup_session.c',
     'bx_ntvdm_cpu_state_abi.c',
     'bx_ntvdm_guest_range.c',
     'bx_ntvdm_guest_write_abi.c',
-    'bx_ntvdm_startup_plan_abi.c'
+    'startup_plan_abi.c'
 )
 $cliSources = @('byob_profile.c', 'byob_identity.c', 'byob_image.c')
 $adapterManifest = Copy-DeclaredSources (Join-Path $repository 'src\bx-vdm') (Join-Path $build 'adapter') $adapterSources

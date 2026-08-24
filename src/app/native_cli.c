@@ -1,4 +1,4 @@
-#include "bx_ntvdm_engine_contract_v1.h"
+#include "engine_contract_v1.h"
 #include "opennt-bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
 #include "opennt-bop/observation/bx_ntvdm_command_bootstrap_observation_v1.h"
 #include "opennt-bop/observation/bx_ntvdm_command_current_dir_observation_v1.h"
@@ -14,11 +14,11 @@
 #include "bx_ntvdm_segment_access_observation_v1.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_target_selection.h"
-#include "ntdos64_config.h"
-#include "ntdos64_dos_safe_alias_v1.h"
-#include "ntdos64_lifecycle_v1.h"
-#include "ntdos64_console_cancellation_v1.h"
-#include "ntdos64_engine_worker_v1.h"
+#include "config.h"
+#include "dos_safe_alias_v1.h"
+#include "lifecycle_v1.h"
+#include "console_cancellation_v1.h"
+#include "engine_worker_v1.h"
 
 #include <stdio.h>
 #include <wchar.h>

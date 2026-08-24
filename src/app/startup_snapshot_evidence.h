@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <wchar.h>
 
-#include "bx_ntvdm_startup_snapshot_abi.h"
+#include "startup_snapshot_abi.h"
 
 #ifdef __cplusplus
 extern "C" {

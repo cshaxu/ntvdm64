@@ -1,4 +1,4 @@
-#include "ntdos64_lifecycle_v1.h"
+#include "lifecycle_v1.h"
 
 int main(void)
 {

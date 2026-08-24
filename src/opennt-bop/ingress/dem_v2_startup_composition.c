@@ -5,11 +5,11 @@
 #include "byob_image.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"
-#include "ntdos64_config.h"
+#include "config.h"
 #include "bx_ntvdm_cpu_state_abi.h"
 #include "bx_ntvdm_guest_write_abi.h"
-#include "bx_ntvdm_initial_state_catalog_v1.h"
-#include "bx_ntvdm_startup_plan_abi.h"
+#include "initial_state_catalog_v1.h"
+#include "startup_plan_abi.h"
 
 #include <stdlib.h>
 #include <string.h>

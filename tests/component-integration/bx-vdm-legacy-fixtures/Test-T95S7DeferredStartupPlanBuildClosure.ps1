@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
 $generator = Get-Content (Join-Path $repository 'tools\build\New-T95S7RuntimeTraceBuildRoot.ps1') -Raw
@@ -9,7 +9,7 @@ foreach ($required in @(
         'BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN={0}',
         'BX_NTVDM_ENABLE_EXECUTION_PLAN={0}',
         'bx_ntvdm_adapter_runtime.c',
-        'bx_ntvdm_startup_plan_abi.c',
+        'startup_plan_abi.c',
         'byob_profile.c')) {
     if (-not $generator.Contains($required)) {
         throw "Deferred startup build generator lacks required closure term: $required"

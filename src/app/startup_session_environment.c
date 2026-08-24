@@ -1,8 +1,8 @@
-#include "bx_ntvdm_startup_session_environment.h"
+#include "startup_session_environment.h"
 
 #include <windows.h>
 
-#include "bx_ntvdm_startup_session.h"
+#include "startup_session.h"
 
 #define BX_NTVDM_STARTUP_SESSION_ENV_PROFILE L"NTDOS64_ADAPTER_PROFILE"
 #define BX_NTVDM_STARTUP_SESSION_ENV_ROOT L"NTDOS64_ADAPTER_ROOT"

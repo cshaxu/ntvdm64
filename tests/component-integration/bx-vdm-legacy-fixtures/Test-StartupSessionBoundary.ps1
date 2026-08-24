@@ -1,10 +1,10 @@
 $ErrorActionPreference = 'Stop'
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
-$header = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_session.h') -Raw
-$source = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_session.c') -Raw
-$environmentHeader = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_session_environment.h') -Raw
-$environmentSource = Get-Content (Join-Path $repository 'src\bx-vdm\bx_ntvdm_startup_session_environment.c') -Raw
-foreach ($term in @('byob_image.h', 'bx_ntvdm_startup_plan_abi.h')) {
+$header = Get-Content (Join-Path $repository 'src\bx-vdm\startup_session.h') -Raw
+$source = Get-Content (Join-Path $repository 'src\bx-vdm\startup_session.c') -Raw
+$environmentHeader = Get-Content (Join-Path $repository 'src\bx-vdm\startup_session_environment.h') -Raw
+$environmentSource = Get-Content (Join-Path $repository 'src\bx-vdm\startup_session_environment.c') -Raw
+foreach ($term in @('byob_image.h', 'startup_plan_abi.h')) {
     if (-not $header.Contains($term)) { throw "Missing required startup-session include: $term" }
 }
 foreach ($term in @('byob_profile_validate_file_select', 'byob_image_load_exact', 'byob_image_release', '0x700u', '0x714u', 'entry.cs = 0x70u')) {

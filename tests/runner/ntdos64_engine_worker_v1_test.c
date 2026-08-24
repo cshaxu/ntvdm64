@@ -1,4 +1,4 @@
-#include "ntdos64_engine_worker_v1.h"
+#include "engine_worker_v1.h"
 #include "bx_ntvdm_cancellation_controller_v1.h"
 
 #include <string.h>

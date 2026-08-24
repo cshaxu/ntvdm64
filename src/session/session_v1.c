@@ -1,4 +1,4 @@
-#include "ntdos64_session_v1.h"
+#include "session_v1.h"
 
 #include <string.h>
 

@@ -3,7 +3,7 @@
 
 #include "byob_image.h"
 #include "adapter-softpc/bx_ntvdm_finite_run.h"
-#include "bx_ntvdm_preentry_input_v1.h"
+#include "preentry_input_v1.h"
 
 /* Adapter-owned conversion of an already identity-checked NTIO image into
  * the mantle's opaque v2 request.  It owns the source-derived placement and

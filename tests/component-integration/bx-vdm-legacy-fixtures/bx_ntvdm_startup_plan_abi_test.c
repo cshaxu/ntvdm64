@@ -2,7 +2,7 @@
 
 #include "bx_ntvdm_cpu_state_abi.h"
 #include "bx_ntvdm_guest_write_abi.h"
-#include "bx_ntvdm_startup_plan_abi.h"
+#include "startup_plan_abi.h"
 
 int main(void)
 {

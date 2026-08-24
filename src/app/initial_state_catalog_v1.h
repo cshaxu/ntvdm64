@@ -2,7 +2,7 @@
 #define BX_NTVDM_INITIAL_STATE_CATALOG_V1_H
 
 #include <stdint.h>
-#include "bx_ntvdm_initial_state_abi.h"
+#include "initial_state_abi.h"
 
 #ifdef __cplusplus
 extern "C" {

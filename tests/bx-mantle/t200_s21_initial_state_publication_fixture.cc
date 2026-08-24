@@ -1,7 +1,7 @@
 #include "bochs.h"
 #include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 #include "bx-mantle/minimal_machine.h"
-#include "app/bx_ntvdm_initial_state_action_v1.h"
+#include "app/initial_state_action_v1.h"
 
 #include <string.h>
 

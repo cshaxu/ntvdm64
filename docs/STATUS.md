@@ -2,15 +2,75 @@
 
 ## Current Work
 
-**Active: M0 T263 S9 — closure recorded; no further implementation is
-admitted.** S9 repaired the three OpenNT-host mirrors that were incorrectly
-accepted by S8. Its closure remains the required active-packet record until a
-separate next packet is admitted from [QUEUE.md](QUEUE.md).
+**Active: M0 T264 S3 — adapter filename normalization.** S2 completed the 42
+`app`/`session` Git renames and formal Ninja closure; this packet now renames
+the remaining 77 project-authored adapter files and repairs direct consumers.
 
 ## Active Packet
 
-The packet below is complete and retained as the required active-packet record
-until the next task is separately admitted.
+### M0 T264 S1 — project code filename inventory
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T264 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner direction: “请你执行。app, session, adapter-* 这些组件。清理”. |
+| Objective | Produce the complete in-scope filename/consumer manifest needed to remove `ntdos64`, `ntvdm64`, `bx`, and `bochs` from project-authored and mechanical-adaptation code filenames. |
+| Non-goals | No content/ABI/behavior change; no rename of the six source mirrors or any `*-overlay`; no rename of an imported upstream filename merely because it is temporarily retained as a non-live input. |
+| Reference Baseline | [Filename-normalization proposal](etc/operations/proposal-project-code-filename-normalization-001.md), current formal Ninja manifests, and live source/build consumers. |
+| Files And ABI Surface | `app`, `session`, `adapter-bop`, `adapter-softpc`, `adapter-win32`, in-scope fixtures/build manifests, filename inventory evidence, status and documentation inventory only; no ABI change. |
+| Applicable Rules | Execution closure, component ownership, mirror source identity, `git mv` requirement, and production-only component rules. |
+| Verification | Recursive filename scan, include/build/document consumer scan, live-versus-imported classification review, documentation governance and `git diff --check`. |
+| Expected Markers | Every in-scope matching filename has one retain/rename disposition, proposed neutral basename and consumer set; excluded original files name their source-identity reason. |
+| Asset Needs | Current source tree, Git path history, formal Ninja manifest and source-root ownership registers. |
+| Reporting Requirements | Report separate counts for project-authored code, fixtures/build inputs, and original/external identity exclusions; do not silently omit an adapter path. |
+| Stop Conditions | A rename would alter an original mirror identity, collide with another path, or require an ABI/content change. |
+| Exit Criteria | The manifest completely assigns every matching in-scope file and consumer; S2/S3 can execute only its approved `git mv` rows. |
+| Original Owner Request | “我们文件名不应该包含 ntdos64, ntvdm64，bx，bochs之类的；它们的来源都已经规范到各自的组件目录里面了。请你修复所有类似代码名字；6个镜像组件及其overlay不需要管。” |
+| Similar-Issue Sweep | Imported SoftPC/MVDM headers accidentally treated as project files, stale build/source-list paths, fixture-only stale includes, forbidden mirror renames, and product artifact names mistaken for code filenames. |
+
+The preceding T263/S9 record is closed historical context, retained below until
+the status-history migration supersedes the old compact records.
+
+### M0 T264 S2 — app/session filename normalization
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T264 S2`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T264/S1 inventory closure under the owner-approved filename-normalization task. |
+| Objective | Rename the 38 `app` and four `session` project-code files from redundant `bx_ntvdm_`/`ntdos64_` basenames to neutral owner-local names and repair direct consumers. |
+| Non-goals | No source symbol, ABI, behavior, component-directory, mirror, overlay, or historical-header rename. |
+| Reference Baseline | [S1 inventory](etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md) and the formal Ninja source list. |
+| Files And ABI Surface | `src/app`, `src/session`, direct runner/fixture/build references and naming evidence only; filename paths, no ABI. |
+| Applicable Rules | T264 proposal; `git mv`; no mirror filename change; focused build closure. |
+| Verification | No prohibited basename in `app`/`session`; stale-reference scan; affected formal Ninja target; `git diff --check`. |
+| Expected Markers | All 42 approved paths are Git renames and all direct includes/source lists name the new paths. |
+| Stop Conditions | A collision, non-path semantic replacement, or discovered upstream-source identity file pauses the rename. |
+| Exit Criteria | The scoped scan is clean, direct formal targets compile, and all renamed paths remain traceable as Git moves. |
+| Original Owner Request | “app, session, adapter-* 这些组件。清理”. |
+| Similar-Issue Sweep | Runner tests, Ninja manifests, include paths and stale historical current-path aliases. |
+
+**S2 closure:** all 42 approved paths were moved with `git mv`; 55 direct
+consumer paths changed without a symbol or ABI rename. The fresh formal Ninja
+graph at `build/M0-T264-S2/r001` compiled to completion and a final dry run had
+no work. See the S1/S2 inventory evidence.
+
+### M0 T264 S3 — adapter filename normalization
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T264 S3`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T264/S1 inventory and completed S2 under the owner-approved cleanup task. |
+| Objective | Rename the 77 project-authored `adapter-bop` and top-level `adapter-softpc` files from redundant `bx_ntvdm_` basenames to neutral owner-local names, then repair direct source, fixture and build consumers. |
+| Non-goals | No rename of `adapter-softpc/include/mvdm/**`, `include/softpc.new/**`, original mirror/overlay code, source symbols, ABI, or behavior. |
+| Reference Baseline | [S1/S2 inventory](etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md) and `tools/build/t260-s8-component-manifest.json`. |
+| Files And ABI Surface | `adapter-bop`, top-level project-owned `adapter-softpc` files, direct tests/build references and evidence only; filename paths, no ABI. |
+| Applicable Rules | T264 proposal; `git mv`; source-identity exclusions; no semantic rewrite. |
+| Verification | No prohibited basename in scoped project-owned adapter files; stale-reference scan; fresh formal Ninja closure; `git diff --check`. |
+| Expected Markers | All 77 approved paths are Git renames and direct consumers name only their new paths. |
+| Stop Conditions | A collision, an imported-source identity ambiguity, or a required non-path behavior change pauses the packet. |
+| Exit Criteria | The scoped scan is clean, formal Ninja reaches no-work after completion, and historical headers remain unchanged. |
+| Original Owner Request | “app, session, adapter-* 这些组件。清理”. |
+| Similar-Issue Sweep | Adapter headers, formal source lists, direct component-integration fixtures and imported MVDM/SoftPC headers. |
 
 ### M0 T263 S9 — OpenNT-host three-file original-body recovery
 

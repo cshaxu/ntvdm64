@@ -1,4 +1,4 @@
-#include "bx_ntvdm_startup_snapshot_evidence.h"
+#include "startup_snapshot_evidence.h"
 
 #include "byob_identity.h"
 

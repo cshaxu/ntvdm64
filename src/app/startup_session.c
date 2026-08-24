@@ -1,4 +1,4 @@
-#include "bx_ntvdm_startup_session.h"
+#include "startup_session.h"
 
 #include <string.h>
 

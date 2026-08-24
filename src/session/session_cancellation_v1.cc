@@ -1,4 +1,4 @@
-#include "ntdos64_session_cancellation_v1.h"
+#include "session_cancellation_v1.h"
 
 #include <intrin.h>
 

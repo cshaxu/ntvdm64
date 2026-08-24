@@ -1,4 +1,4 @@
-#include "bx_ntvdm_preentry_input_v1.h"
+#include "preentry_input_v1.h"
 
 #include <string.h>
 

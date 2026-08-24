@@ -1,4 +1,4 @@
-#include "bx_ntvdm_initial_state_catalog_v1.h"
+#include "initial_state_catalog_v1.h"
 int main(void) {
   static const uint16_t good[] = L"168219f4c7d73abee06b62b1423298a2f111685e1bf36da23b2c16a642310195";
   bx_ntvdm_initial_state_v1 v;

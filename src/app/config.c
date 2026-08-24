@@ -1,4 +1,4 @@
-#include "ntdos64_config.h"
+#include "config.h"
 
 #include <windows.h>
 #include <wchar.h>

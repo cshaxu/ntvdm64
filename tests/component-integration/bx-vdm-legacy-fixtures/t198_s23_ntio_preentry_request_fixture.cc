@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "app/bx_ntvdm_ntio_preentry_v1.h"
+#include "app/ntio_preentry_v1.h"
 
 #include <string.h>
 

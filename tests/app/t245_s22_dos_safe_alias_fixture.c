@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <windows.h>
 
-#include "ntdos64_dos_safe_alias_v1.h"
+#include "dos_safe_alias_v1.h"
 
 int main(void)
 {

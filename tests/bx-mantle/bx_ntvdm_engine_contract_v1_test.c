@@ -1,4 +1,4 @@
-#include "bx_ntvdm_engine_contract_v1.h"
+#include "engine_contract_v1.h"
 
 #include <string.h>
 

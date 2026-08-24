@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 #include "bx_ntvdm_observation_transaction_abi.h"
-#include "bx_ntvdm_startup_snapshot_abi.h"
+#include "startup_snapshot_abi.h"
 
 #define BX_NTVDM_MACHINE_PROFILE_ABI_MAGIC 0x42584d50u
 #define BX_NTVDM_MACHINE_PROFILE_ABI_VERSION 1u

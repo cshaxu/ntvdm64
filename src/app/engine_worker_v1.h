@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <windows.h>
 
-#include "bx_ntvdm_engine_contract_v1.h"
+#include "engine_contract_v1.h"
 
 int ntdos64_engine_worker_v1_run(const struct bx_ntvdm_engine_request_v1 *request,
     HANDLE cancellation_event, struct bx_ntvdm_engine_result_v1 *result_out,

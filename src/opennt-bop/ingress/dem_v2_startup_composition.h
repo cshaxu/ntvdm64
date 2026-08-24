@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#include "app/bx_ntvdm_initial_state_abi.h"
-#include "app/bx_ntvdm_initial_state_action_v1.h"
+#include "app/initial_state_abi.h"
+#include "app/initial_state_action_v1.h"
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
 
 /* Direct v2 startup composition.  These are copied CLI descriptors and

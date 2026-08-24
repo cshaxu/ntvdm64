@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <wchar.h>
 
-#include "bx_ntvdm_startup_plan_abi.h"
+#include "startup_plan_abi.h"
 #include "byob_image.h"
 
 #define BX_NTVDM_STARTUP_SESSION_MAGIC 0x42585353u

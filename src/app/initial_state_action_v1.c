@@ -1,4 +1,4 @@
-#include "bx_ntvdm_initial_state_action_v1.h"
+#include "initial_state_action_v1.h"
 
 #include <string.h>
 

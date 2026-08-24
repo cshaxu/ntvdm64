@@ -1,4 +1,4 @@
-#include "bx_ntvdm_initial_state_abi.h"
+#include "initial_state_abi.h"
 
 int main(void)
 {

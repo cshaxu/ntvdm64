@@ -2,7 +2,7 @@
 #define NTDOS64_CONFIG_H
 
 #include <windows.h>
-#include "ntdos64_startup_selection.h"
+#include "startup_selection.h"
 
 /* The executable directory owns the fixed product layout: dos\ contains
  * bootstrap/configuration files and wow16\ is the separately named WOW root. */

@@ -1,4 +1,4 @@
-#include "bx_ntvdm_startup_plan_abi.h"
+#include "startup_plan_abi.h"
 
 #include <string.h>
 

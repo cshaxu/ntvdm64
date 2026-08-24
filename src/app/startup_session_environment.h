@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#include "bx_ntvdm_startup_plan_abi.h"
-#include "bx_ntvdm_startup_session.h"
+#include "startup_plan_abi.h"
+#include "startup_session.h"
 
 #ifdef __cplusplus
 extern "C" {

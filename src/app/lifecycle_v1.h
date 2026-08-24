@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-#include "bx_ntvdm_engine_contract_v1.h"
+#include "engine_contract_v1.h"
 
 #define NTDOS64_LIFECYCLE_V1_POLICY_MAGIC UINT32_C(0x4e4c5031)
 #define NTDOS64_LIFECYCLE_V1_AUDIT_MAGIC  UINT32_C(0x4e4c4131)

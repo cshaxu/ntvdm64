@@ -1,6 +1,6 @@
-#include "ntdos64_engine_worker_v1.h"
+#include "engine_worker_v1.h"
 
-#include "session/ntdos64_session_cancellation_v1.h"
+#include "session/session_cancellation_v1.h"
 
 #include <string.h>
 

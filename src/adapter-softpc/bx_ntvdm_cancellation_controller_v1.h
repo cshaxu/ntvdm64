@@ -9,7 +9,7 @@
 #ifndef BX_NTVDM_CANCELLATION_CONTROLLER_V1_H
 #define BX_NTVDM_CANCELLATION_CONTROLLER_V1_H
 
-#include "session/ntdos64_session_cancellation_v1.h"
+#include "session/session_cancellation_v1.h"
 
 /* Compatibility spelling retained for existing mechanical callers.  The
  * state itself is session-owned and has no SoftPC/CCPU semantics. */

@@ -1,4 +1,4 @@
-#include "ntdos64_console_cancellation_v1.h"
+#include "console_cancellation_v1.h"
 
 static HANDLE ntdos64_console_cancellation_v1_event;
 

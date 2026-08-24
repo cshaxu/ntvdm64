@@ -6,7 +6,7 @@
  * bx-core/bx-mantle object. */
 #include <stdint.h>
 
-#include "session/ntdos64_session_v1.h"
+#include "session/session_v1.h"
 #include <windows.h>
 
 #define BX_NTVDM_GUEST_POINTER_MANAGER_MAX_LEASES 8u

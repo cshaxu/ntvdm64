@@ -6,8 +6,8 @@
 #include <wchar.h>
 #include <wctype.h>
 
-#include "ntdos64_startup_selection.h"
-#include "ntdos64_config.h"
+#include "startup_selection.h"
+#include "config.h"
 #include "byob_target_selection.h"
 #include "byob_launch_plan_v2.h"
 

@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "bx_ntvdm_startup_snapshot_abi.h"
+#include "startup_snapshot_abi.h"
 
 int main(void)
 {
