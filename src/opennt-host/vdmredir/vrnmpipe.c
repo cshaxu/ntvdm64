@@ -91,7 +91,7 @@ BOOL VrIsNamedPipeName(LPSTR Name)
 
 BOOL VrAddOpenNamedPipeInfo(HANDLE Handle, LPSTR lpFileName)
 {
-    if (!VrInitialized() || !VrIsNamedPipeName(lpFileName)) return FALSE;
+    if (!bx_ntvdm_vr_initialized_provider() || !VrIsNamedPipeName(lpFileName)) return FALSE;
     return VrpAddOpenNamedPipeInfo(Handle, lpFileName);
 }
 

@@ -13,9 +13,17 @@ void demOpen(void);
 void demRename(void);
 void demCheckPath(void);
 
+/* The original separate VDMREDIR DLL supplied this imported function pointer.
+ * Static composition retains one shared pointer, populated by LoadVdmRedir. */
+BOOL (*VrInitialized)(VOID);
+
 BOOL LoadVdmRedir(void)
 {
-    return VrInitialize();
+    /* DIVERGENCE(BOP-DIV-039): original NTVDM populated this DLL import
+     * pointer after LoadLibrary.  The static provider keeps the exact source
+     * indirection while binding it to the re-rooted VDMREDIR owner. */
+    VrInitialized = (BOOL (*)(VOID))bx_ntvdm_vr_initialized_provider;
+    return bx_ntvdm_vr_initialize_provider();
 }
 
 void *Sim32GetVDMPointer(ULONG address, ULONG bytes, int protect)

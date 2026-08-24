@@ -9,18 +9,18 @@
 
 static BOOLEAN IsVrInitialized = FALSE;
 
-BOOLEAN VrInitialized(VOID)
+BOOLEAN bx_ntvdm_vr_initialized_provider(VOID)
 {
     return IsVrInitialized;
 }
 
-BOOLEAN VrInitialize(VOID)
+BOOLEAN bx_ntvdm_vr_initialize_provider(VOID)
 {
     IsVrInitialized = TRUE;
     return TRUE;
 }
 
-VOID VrUninitialize(VOID)
+VOID bx_ntvdm_vr_uninitialize_provider(VOID)
 {
     VrTerminateNamedPipes();
     IsVrInitialized = FALSE;

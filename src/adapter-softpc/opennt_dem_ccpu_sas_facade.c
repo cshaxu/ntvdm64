@@ -584,7 +584,7 @@ void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
     }
 }
 
-int IsVdmRedirLoaded(void) { return VrInitialized(); }
+int IsVdmRedirLoaded(void) { return bx_ntvdm_vr_initialized_provider(); }
 int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
     void (*body)(void))
 {

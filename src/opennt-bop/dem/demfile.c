@@ -22,7 +22,9 @@
 
 extern PDOSSF pSFTHead;
 
-BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
+/* DIVERGENCE(BOP-DIV-039): static composition defines this historical DLL
+ * import pointer once in opennt_demfile_composition.c. */
+extern BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
 extern BOOL IsVdmRedirLoaded(VOID);
 

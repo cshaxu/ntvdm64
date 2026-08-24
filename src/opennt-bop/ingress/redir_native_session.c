@@ -151,7 +151,7 @@ void bx_ntvdm_redir_native_session_unbind(bx_ntvdm_redir_native_session *session
 {
     if (session != NULL && g_active_session == session) reset_async_pipes();
     if (session != NULL && g_active_session == session) reset_mailslots();
-    if (session != NULL && g_active_session == session) VrUninitialize();
+    if (session != NULL && g_active_session == session) bx_ntvdm_vr_uninitialize_provider();
     if (session != NULL && g_active_session == session) g_active_session = NULL;
     if (session_valid(session)) {
         session->bound = 0u;
@@ -656,13 +656,13 @@ int bx_ntvdm_redir_native_session_dispatch(
     service = event->window[3];
     switch (service) {
     case 0x00u: /* SVC_RDRINITIALIZE */
-        (void)VrInitialize();
+        (void)bx_ntvdm_vr_initialize_provider();
         g_active_session->loaded = 1u;
         resume_success(event, outcome);
         return 1;
     case 0x01u: /* SVC_RDRUNINITIALIZE */
         reset_mailslots();
-        VrUninitialize();
+        bx_ntvdm_vr_uninitialize_provider();
         g_active_session->loaded = 0u;
         g_active_session->mode = 0u;
         resume_success(event, outcome);
