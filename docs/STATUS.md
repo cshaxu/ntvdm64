@@ -2,13 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T261 S8** — owner-directed OpenNT-host source-fidelity closure.
-It supersedes the formerly planned adapter-residue cleanup, which is deferred
-to S9; S8 restores original owner packages and removes the listed shims.
+**Active: M0 T261 S9** — adapter production-root semantic-residue cleanup.
+S8 is closed: the admitted OpenNT-host source exceptions are re-rooted,
+replaced or explicitly registered; S9 now removes selector-aware and
+fixture-only residue from mechanical adapter production roots.
 
 ## Active Packet
 
-### M0 T261 S8 — OpenNT-host original-source exception closure
+### M0 T261 S9 — adapter production-root semantic-residue cleanup
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T261 S9`, Ordinary Mode with a single-person dual-role review. |
+| Objective | Remove selector-aware BOP/NTDOS/COMMAND observation and fixture-only residue from adapter production roots; retain all source-owned interpretation in `opennt-bop` and generic test hooks in `tests/`. |
+| Scope | `adapter-bop` and `adapter-softpc` production sources, their public headers, build inputs and focused fixtures. |
+| Non-goals | No provider semantic change, no BOP enablement, no OpenNT source rewrite, no new adapter, no Bochs change, and no VDD/Redirector lifecycle implementation. |
+| Required Direction | The mechanical adapters remain selector/service/family/DOS/WOW blind. `opennt-bop` owns every source/provider interpretation; fixture-only code belongs under `tests/`. |
+| Verification | Owner/function map, negative semantic-token scan, focused fixtures, formal Ninja closure, `git diff --check`, and documentation governance. |
+| Exit Criteria | No adapter production root owns selector/service/family/DOS/WOW interpretation or a fixture-only provider; all moved interfaces retain their prior fixed-width mechanical contract. |
+| Admission | T261 proposal S9, after S8 final audit. |
+
+### M0 T261 S8 — closed: OpenNT-host original-source exception closure
+
+S8 restored every admitted host exception through its original owner body or
+an already-declared same-shaped seam, removed the drive policy and obsolete
+host shims, and established statement-level README registration for each
+remaining host difference.  The result and deliberate VDMREDIR/VDD lifecycle
+boundary are recorded in the [S8 final closure audit](etc/evidence/m0-t261-s8-final-opennt-host-exception-closure-001.md).
+
+### M0 T261 S8 — historical packet
 
 | Field | Record |
 | --- | --- |
@@ -50,14 +72,14 @@ than being misrepresented as a direct host import; the selector/session
 composition remains in `opennt-bop`.  See the [P4 VDMREDIR owner-split
 evidence](etc/evidence/m0-t261-s8-p4-vdmredir-owner-split-001.md).
 
-**S8 P5 active:** P4 does not close the original VDMREDIR dispatcher or
+**S8 P5 completed:** P4 did not initially close the original VDMREDIR dispatcher or
 mailslot bodies.  The source-owner intake places `vrdisp.c` and the
 guest-facing portion of `vrmslot.c` in `opennt-bop/vdmredir/`, with only their
 mechanical and modern-API seams below the declared adapters.  Its recovery
 order and explicit limitations are recorded in the [P5 VDMREDIR
 intake](etc/evidence/m0-t261-s8-p5-vdmredir-source-owner-intake-001.md).
 The original `vrdisp.c` table is now the actual bounded `57:xx` route source;
-its individual provider bodies remain the next recovery work.  The first
+its admitted local provider bodies were subsequently recovered.  The first
 direct `vrmslot.c` body, `VrPeekMailslot`, now replaces the former cached-peek
 rehost with OpenNT's explicit `ERROR_NOT_SUPPORTED` result; formal `r010`
 compiled it into `opennt-bop` and the Redirector fixture passed.  The original
@@ -67,7 +89,7 @@ opaque handle map rather than duplicating OpenNT's private bitmap; the focused
 r011 lifecycle fixture passes.  See the [P5 lifecycle
 evidence](etc/evidence/m0-t261-s8-p5-vrmslot-record-lifecycle-recovery-001.md).
 
-**S8 P6 active:** P5 closes the admitted local `vrmslot.c` body group, but the
+**S8 P6 completed:** P5 closes the admitted local `vrmslot.c` body group, but the
 live `opennt-host/vdmredir/vrnmpipe.c` and `vrinit.c` files remain reached
 surfaces rather than complete original translation units. P6 records each
 function's exact direct-recovery or later-package disposition. Its first two

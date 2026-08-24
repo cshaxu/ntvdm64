@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_XMS_SHIM_H
-#define BX_NTVDM_BOP_SHIM_XMS_SHIM_H
+#ifndef NTDOS64_OPENNT_BOP_XMS_COMPAT_H
+#define NTDOS64_OPENNT_BOP_XMS_COMPAT_H
 
 /* Compatibility surface for the directly mirrored OpenNT XMS sources.
  * DIVERGENCE(BOP-DIV-024..031): private NT4 product headers are unavailable;
