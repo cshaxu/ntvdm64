@@ -30,6 +30,10 @@ it returns an allocated/copy-normalized buffer for remote UNC names, maps only
 the local computer name to `\\.`, and canonicalizes forward slashes.  It does
 not return the caller's source pointer as an optimization.
 
+`VrRemoveOpenNamedPipeInfo` likewise uses the OpenNT non-DBG behavior: removal
+is opportunistic and the intercept returns `TRUE` even for an ordinary handle;
+the close path must not gain a new Redirector-specific failure.
+
 ## Recovery ladder
 
 1. Direct compile of the complete historical units was examined first.

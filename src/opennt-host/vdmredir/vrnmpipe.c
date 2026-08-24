@@ -89,7 +89,14 @@ BOOL VrAddOpenNamedPipeInfo(HANDLE Handle, LPSTR lpFileName)
     return VrpAddOpenNamedPipeInfo(Handle, lpFileName);
 }
 
-BOOL VrRemoveOpenNamedPipeInfo(HANDLE Handle) { return VrpRemoveOpenNamedPipeInfo(Handle); }
+BOOL VrRemoveOpenNamedPipeInfo(HANDLE Handle)
+{
+    /* The non-DBG OpenNT body removes opportunistically and returns TRUE;
+     * close of an ordinary DOS handle is therefore not redirected into a
+     * new failure path. */
+    (void)VrpRemoveOpenNamedPipeInfo(Handle);
+    return TRUE;
+}
 BOOL VrIsNamedPipeHandle(HANDLE Handle) { return VrpGetOpenNamedPipeInfo(Handle) != NULL; }
 
 BOOL VrReadNamedPipe(HANDLE Handle, LPBYTE Buffer, DWORD Buflen,
