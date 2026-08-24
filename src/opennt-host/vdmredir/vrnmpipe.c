@@ -29,8 +29,34 @@ typedef struct _OPEN_NAMED_PIPE_INFO {
     CHAR Name[2];
 } OPEN_NAMED_PIPE_INFO, *POPEN_NAMED_PIPE_INFO;
 
+/* Kept in the original local shape so the synchronous read/write bodies below
+ * retain their historical call and failure order. */
+typedef struct _OVERLAPPED_PIPE_IO {
+    struct _OVERLAPPED_PIPE_IO *Next;
+    DWORD Thread;
+    BOOL Cancelled;
+    OVERLAPPED Overlapped;
+} OVERLAPPED_PIPE_IO, *POVERLAPPED_PIPE_IO;
+
 static POPEN_NAMED_PIPE_INFO OpenNamedPipeInfoList;
 static POPEN_NAMED_PIPE_INFO LastOpenNamedPipeInfo;
+
+static VOID RememberPipeIo(POVERLAPPED_PIPE_IO PipeIo)
+{
+    /* DIVERGENCE(HOST-DIV-015): the original body links this stack record to
+     * NTVDM's VDD cancellation list.  The standalone session cannot expose a
+     * raw native pointer to a product-global VDD list, so this bounded,
+     * synchronous path retains the record shape and starts un-cancelled. */
+    PipeIo->Cancelled = FALSE;
+}
+
+static VOID ForgetPipeIo(POVERLAPPED_PIPE_IO PipeIo)
+{
+    /* See HOST-DIV-015 at RememberPipeIo.  There is no VDD list to unlink
+     * from; keeping this source-order call makes the missing lifecycle
+     * explicit rather than silently changing the I/O control flow. */
+    (void)PipeIo;
+}
 
 static POPEN_NAMED_PIPE_INFO VrpGetOpenNamedPipeInfo(HANDLE Handle)
 {
@@ -160,67 +186,107 @@ BOOL VrIsNamedPipeHandle(HANDLE Handle) { return VrpGetOpenNamedPipeInfo(Handle)
 BOOL VrReadNamedPipe(HANDLE Handle, LPBYTE Buffer, DWORD Buflen,
     LPDWORD BytesRead, LPDWORD Error)
 {
-    /* DIVERGENCE(HOST-DIV-015): OpenNT also registers this OVERLAPPED record with the
-     * NTVDM VDD cancellation list.  That product-global list has no public
-     * modern counterpart; the bounded session ingress owns cancellation and
-     * never exposes this native pointer beyond the synchronous call. */
-    OVERLAPPED overlap;
-    DWORD transferred = 0u, error = NO_ERROR;
+    OVERLAPPED_PIPE_IO pipeio;
     BOOL success;
-    if (BytesRead != NULL) *BytesRead = 0u;
-    if (Error != NULL) *Error = ERROR_INVALID_HANDLE;
-    if (!VrIsNamedPipeHandle(Handle)) { SetLastError(ERROR_INVALID_HANDLE); return FALSE; }
-    memset(&overlap, 0, sizeof(overlap));
-    overlap.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-    if (overlap.hEvent == NULL) { if (Error) *Error = ERROR_NOT_ENOUGH_MEMORY; return FALSE; }
-    success = ReadFile(Handle, Buffer, Buflen, &transferred, &overlap);
+    DWORD error;
+    /* DIVERGENCE(HOST-DIV-023): OpenNT leaves this local uninitialized until
+     * GetOverlappedResult.  Current /W4 /WX correctly rejects the possible
+     * later read on a failed provider; zero is not observable on a successful
+     * transfer and preserves the original error/result ordering. */
+    DWORD dwBytesRead = 0u;
+
+    ZeroMemory(&pipeio, sizeof(pipeio));
+    if ((pipeio.Overlapped.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL)) == NULL) {
+        *Error = ERROR_NOT_ENOUGH_MEMORY;
+        return FALSE;
+    }
+
+    RememberPipeIo(&pipeio);
+    success = ReadFile(Handle, Buffer, Buflen, BytesRead, &pipeio.Overlapped);
     if (!success) {
         error = GetLastError();
         if (error == ERROR_IO_PENDING) {
-            error = WaitForSingleObject(overlap.hEvent, INFINITE);
+            error = WaitForSingleObject(pipeio.Overlapped.hEvent, INFINITE);
             if (error == 0xffffffffu) {
                 error = GetLastError();
             } else {
-                success = error == WAIT_OBJECT_0;
+                success = (error == WAIT_OBJECT_0);
             }
-        } else if (error == ERROR_MORE_DATA) success = TRUE;
+        } else if (error == ERROR_MORE_DATA) {
+            success = TRUE;
+        }
+    } else {
+        error = NO_ERROR;
     }
+
+    ForgetPipeIo(&pipeio);
+    if (pipeio.Cancelled) {
+        error = WAIT_TIMEOUT;
+        success = FALSE;
+    }
+
     if (success) {
-        success = GetOverlappedResult(Handle, &overlap, &transferred, FALSE);
+        success = GetOverlappedResult(Handle, &pipeio.Overlapped, &dwBytesRead, FALSE);
         error = success ? NO_ERROR : GetLastError();
-        if (error == ERROR_MORE_DATA) success = TRUE;
+        if (error == ERROR_MORE_DATA) {
+            success = TRUE;
+        }
+    } else if (error == WAIT_TIMEOUT) {
+        /* DIVERGENCE(HOST-DIV-016): original VDMREDIR owns the raw handle and
+         * removes its private record here.  In this composition the session
+         * owns the handle; only bounded session teardown may close/retire it. */
     }
-    CloseHandle(overlap.hEvent);
-    /* DIVERGENCE(HOST-DIV-016): the original WAIT_TIMEOUT branch closes the native handle
-     * and removes its VDMREDIR record.  This handle is session-manager owned
-     * here, so only its owner may close it during bounded teardown. */
-    if (success && error == NO_ERROR && transferred == 0u) { error = ERROR_NO_DATA; success = FALSE; }
-    if (BytesRead) *BytesRead = transferred;
-    if (Error) *Error = error;
-    if (!success) SetLastError(error);
+
+    CloseHandle(pipeio.Overlapped.hEvent);
+
+    if (error == NO_ERROR && dwBytesRead == 0u) {
+        error = ERROR_NO_DATA;
+        success = FALSE;
+    }
+
+    if (!success) {
+        SetLastError(error);
+    } else {
+        *BytesRead = dwBytesRead;
+    }
+
+    *Error = error;
     return success;
 }
 
 BOOL VrWriteNamedPipe(HANDLE Handle, LPBYTE Buffer, DWORD Buflen,
     LPDWORD BytesWritten)
 {
-    OVERLAPPED overlap;
-    DWORD transferred = 0u, error;
+    OVERLAPPED_PIPE_IO pipeio;
     BOOL success;
-    if (BytesWritten) *BytesWritten = 0u;
-    if (!VrIsNamedPipeHandle(Handle)) { SetLastError(ERROR_INVALID_HANDLE); return FALSE; }
-    memset(&overlap, 0, sizeof(overlap));
-    overlap.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-    if (overlap.hEvent == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    success = WriteFile(Handle, Buffer, Buflen, &transferred, &overlap);
-    error = success ? NO_ERROR : GetLastError();
-    if (!success && error == ERROR_IO_PENDING) {
-        success = WaitForSingleObject(overlap.hEvent, INFINITE) == WAIT_OBJECT_0;
-        if (success) success = GetOverlappedResult(Handle, &overlap, &transferred, FALSE);
+    DWORD error;
+
+    ZeroMemory(&pipeio, sizeof(pipeio));
+    if ((pipeio.Overlapped.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL)) == NULL) {
+        error = ERROR_NOT_ENOUGH_MEMORY;
+        success = FALSE;
+    } else {
+        RememberPipeIo(&pipeio);
+        success = WriteFile(Handle, Buffer, Buflen, BytesWritten, &pipeio.Overlapped);
         error = success ? NO_ERROR : GetLastError();
+        if (error == ERROR_IO_PENDING) {
+            error = WaitForSingleObject(pipeio.Overlapped.hEvent, INFINITE);
+            if (error == 0xffffffffu) {
+                error = GetLastError();
+            } else {
+                success = (error == WAIT_OBJECT_0);
+            }
+        }
+        ForgetPipeIo(&pipeio);
+        if (pipeio.Cancelled) {
+            error = WAIT_TIMEOUT;
+            success = FALSE;
+        }
     }
-    CloseHandle(overlap.hEvent);
-    if (BytesWritten) *BytesWritten = transferred;
+    if (success) {
+        (void)GetOverlappedResult(Handle, &pipeio.Overlapped, BytesWritten, FALSE);
+    }
+    CloseHandle(pipeio.Overlapped.hEvent);
     if (!success) SetLastError(error);
     return success;
 }

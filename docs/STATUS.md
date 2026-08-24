@@ -75,8 +75,12 @@ direct bodies, `VrIsNamedPipeName` and `VrConvertLocalNtPipeName`, now retain
 original flow and pass their focused formal fixture checks; only the necessary
 x64-safe spellings are `HOST-DIV-020` registered. Its original named-pipe
 metadata record/list and `VrAdd/RemoveOpenNamedPipeInfo` bodies are now active
-too. The historical empty `VrTerminateNamedPipes(DosPdb)` is not misrepresented
-as the current session all-record cleanup. VDD/ICA/NetBIOS/DLC and cancellation
+too. `VrReadNamedPipe` and `VrWriteNamedPipe` now retain their original
+synchronous `OVERLAPPED_PIPE_IO` issue/wait/result/error ordering; only their
+VDD raw-pointer cancellation registration and timed-out native-handle
+retirement remain `HOST-DIV-015/016` lifecycle divergences. The historical
+empty `VrTerminateNamedPipes(DosPdb)` is not misrepresented as the current
+session all-record cleanup. VDD/ICA/NetBIOS/DLC and async cancellation
 lifecycle are not silently folded into this helper work. See the [P6 host-body
 disposition](etc/evidence/m0-t261-s8-p6-vdmredir-host-body-disposition-001.md).
 The retained `VrTerminateMailslots` body now also closes the PDB-owned record
