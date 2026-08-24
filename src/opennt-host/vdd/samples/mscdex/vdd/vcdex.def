@@ -1,8 +1,0 @@
-LIBRARY VCDEX
-
-DESCRIPTION 'MSCDEX Translation VDD for NT-MVDM'
-
-EXPORTS
-        VDDInitialize
-        VDDRegisterInit
-        VDDDispatch

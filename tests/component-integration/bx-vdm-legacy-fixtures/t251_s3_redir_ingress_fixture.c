@@ -50,6 +50,11 @@ static int named_pipe_helper_regression(void)
     return 1;
 }
 
+/* The source-derived 57:0B..0F/23..26 tests below require the historical
+ * 57:00 initialization substrate.  That substrate is explicitly unavailable
+ * after T263 S9 removes its fabricated loaded state; preserve this test body
+ * as evidence until the Redirector owner package restores it. */
+#if 0
 static void put32(uint8_t *bytes, uint32_t value)
 { bytes[0] = (uint8_t)value; bytes[1] = (uint8_t)(value >> 8); bytes[2] = (uint8_t)(value >> 16); bytes[3] = (uint8_t)(value >> 24); }
 static uint16_t get16(const uint8_t *bytes)
@@ -98,8 +103,12 @@ static int mailslot_regression(void)
     direct.set_attributes = fixture_set_attr;
     if (!bx_ntvdm_redir_native_session_initialize(&session, &direct, &state,
             fixture_read, fixture_write) || !bx_ntvdm_redir_native_session_bind(&session)) return 0;
+    /* 57:00 requires the original VDD/CCPU/DLC/ICA composition.  It must
+     * fail explicitly rather than restore the former artificial loaded bit;
+     * the synchronous source-mirrored helper paths below are independent. */
     make_event(&event, 0x00u);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
+    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 0;
     /* `namepipe.asm` passes BP:BX as an opaque 32-bit token and DS:SI as the
      * packed descriptor.  The original `int5c.asm` later consumes 57:26;
      * this fixture proves the source-shaped queue writes results before that
@@ -209,6 +218,7 @@ static int mailslot_regression(void)
     bx_ntvdm_host_handle_manager_reset(state.handles);
     return 1;
 }
+#endif
 
 int main(void)
 {
@@ -232,7 +242,8 @@ int main(void)
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 2;
     make_event(&event, 0x00u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 0, 0u) || !bx_ntvdm_vr_initialized_provider()) return 3;
+        !expect(&outcome, 1, ERROR_INVALID_FUNCTION) ||
+        bx_ntvdm_vr_initialized_provider()) return 3;
     server = CreateNamedPipeW(L"\\\\.\\pipe\\ntdos64-t251-s3", PIPE_ACCESS_DUPLEX,
         PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT, 1u, 64u, 64u, 0u, NULL);
     if (server == INVALID_HANDLE_VALUE) return 4;
@@ -258,19 +269,17 @@ int main(void)
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 6;
     make_event(&event, 0x23u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        /* No copied guest descriptor was supplied: preserve the bounded
-         * guest-span failure before any token/handle interpretation. */
-        !expect(&outcome, 1, ERROR_INVALID_ADDRESS)) return 9;
+        !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 9;
     make_event(&event, 0x24u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 1, ERROR_INVALID_ADDRESS)) return 10;
+        !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 10;
     make_event(&event, 0x01u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 0, 0u) || bx_ntvdm_vr_initialized_provider()) return 7;
+        !expect(&outcome, 1, ERROR_INVALID_FUNCTION) ||
+        bx_ntvdm_vr_initialized_provider()) return 7;
     bx_ntvdm_redir_native_session_unbind(&session);
     bx_ntvdm_dem_direct_host_session_reset(&host);
-    if (!mailslot_regression()) return 8;
     if (!named_pipe_helper_regression()) return 11;
-    puts("T251 S4 Redirector: typed selector-57 lifecycle and mailslot owner group pass");
+    puts("T263 S9 Redirector: unavailable lifecycle and synchronous pipe helper paths pass");
     return 0;
 }

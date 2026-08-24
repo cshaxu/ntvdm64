@@ -136,6 +136,33 @@ int bx_ntvdm_opennt_direct_access_category_should_prompt(ULONG category)
     g_direct_access_category_bits |= bit;
     return 1;
 }
+DWORD bx_ntvdm_opennt_direct_access_category_bits_get(void)
+{ return g_direct_access_category_bits; }
+void bx_ntvdm_opennt_direct_access_category_bits_set(DWORD bits)
+{ g_direct_access_category_bits = bits; }
+int bx_ntvdm_opennt_direct_access_load_string(UINT resource_id, CHAR *buffer,
+    UINT capacity)
+{
+    const CHAR *text;
+    if (buffer == NULL || capacity == 0u) return 0;
+    /* OpenNT softpc.new/obj.vdm/resource.rc, D_A_MESS through D_A_MOUSEDRVR.
+     * D_A_OLDPIF (304) was intentionally commented out there, so preserve
+     * the original LoadString failure for that historical resource id. */
+    switch (resource_id) {
+    case 300u: text = "An application has attempted to %s, which cannot be supported. This may cause the application to function incorrectly."; break;
+    case 301u: text = "directly access an incompatible diskette format"; break;
+    case 302u: text = "directly access the hard disk"; break;
+    case 303u: text = "load a 16-bit Dos device driver"; break;
+    case 305u: text = "perform an unknown internal 'BOP' opcode"; break;
+    case 306u: text = "allocate Expanded Memory"; break;
+    case 307u: text = "use a third party mouse driver"; break;
+    default: return 0;
+    }
+    (void)strncpy_s(buffer, capacity, text, _TRUNCATE);
+    return (int)strlen(buffer);
+}
+const CHAR *bx_ntvdm_opennt_direct_access_fallback_message(void)
+{ return "NTVDM direct-access error"; }
 void bx_ntvdm_opennt_direct_access_reset_thread(void)
 {
     g_direct_access_fixture_reply = 0;

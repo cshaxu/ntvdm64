@@ -2,11 +2,104 @@
 
 ## Current Work
 
-**Active: M0 T263 S7 — MVDM owner-expansion closure.** This final packet
-reconciles the admitted original-package roots, their exception registers and
-the unchanged formal build boundary before T263 closes.
+**Active: M0 T263 S9 — closure recorded; no further implementation is
+admitted.** S9 repaired the three OpenNT-host mirrors that were incorrectly
+accepted by S8. Its closure remains the required active-packet record until a
+separate next packet is admitted from [QUEUE.md](QUEUE.md).
 
 ## Active Packet
+
+The packet below is complete and retained as the required active-packet record
+until the next task is separately admitted.
+
+### M0 T263 S9 — OpenNT-host three-file original-body recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S9`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner direction: “opennt-host这3个文件肯定都不及格了，打回重写吧…批准，请你开始实施。” |
+| Objective | Rebuild `nt_error.c`, `vrinit.c`, and `vrnmpipe.c` from their exact OpenNT originals: retain the reached original function bodies, associated data and explanatory comments; delete unconnected function blocks with their dedicated support/commentary; use only statement-local same-shaped `adapter-win32` or `adapter-softpc` substitutions where a retained call cannot compose. |
+| Non-goals | No VDD/NetBIOS/DLC/ICA/CSR/WOW product-shell recreation; no new BOP service admission; no fabricated `VrInitialize` success; no Bochs semantic change. |
+| Reference Baseline | `O:\\repos.external\\OpenNT\\base\\mvdm\\{softpc.new\\host\\src\\nt_error.c,vdmredir\\vrinit.c,vdmredir\\vrnmpipe.c}`, current reached callers, `HOST-DIV-012..025`, and the source-first recovery rules. |
+| Files And ABI Surface | The three host mirrors; needed declared `adapter-win32`/`adapter-softpc` same-shaped facades; focused host/Redirector fixtures; host README/evidence/status. `adapter-bop` remains selector-blind ingress only and is not a provider dependency. |
+| Applicable Rules | Source-first ladder; original body/order/layout preservation; statement-local divergence/register rule; no fabricated success; component ownership and bounded mapping rules. |
+| Verification | Per-retained-block original-span ledger; source diff review; positive and negative focused fixture coverage; formal Ninja closure; documentation governance; `git diff --check`. |
+| Expected Markers | Each retained function has a cited original span and unchanged body except registered adapter call sites; every deleted block names its unavailable dependency and owner; `VrInitialize` either retains its required original prerequisites or is not admitted. |
+| Asset Needs | Pinned OpenNT sources, existing public-Win32 facade, bounded SoftPC/CCPU facade, session-owned handle/mapping services, formal Ninja graph. |
+| Reporting Requirements | Separately report original retained lines, adapter substitutions, deleted unconnected blocks, and any capability that must remain unavailable. Do not call a cropped function connected if its original success prerequisites are absent. |
+| Stop Conditions | A retained block would require a new product-shell adapter, an adapter would acquire BOP/Redirector semantics, an original success path cannot be preserved, or a crop bisects retained control flow. |
+| Exit Criteria | The three files are reviewable original-body subsets; no project-authored replacement algorithm remains in a retained block; all substitutions are local and README-indexed; no incomplete historical success is exposed; stated checks pass. |
+| Original Owner Request | “原版文件，保留大段注释部分，删去不需要接通的那些部分及配套注释；保留所有需要接通的部分；然后，这些部分如果依赖 adapter-win32, adapter-bop, adapter-softpc，就在对应地方实现需要的替代接口。” |
+| Similar-Issue Sweep | Rewritten same-name source, blanket divergence claims, include-only but behavior-changing edits, hidden fabricated success, unbounded host pointers, and adapter ownership leaks. |
+
+**S9 closure:** all three files were re-rooted from cited original source
+spans. `nt_error.c` retains the original direct-access body through the
+same-shaped dialog/TLS facade, with only pointer-width-safe transport casts;
+`vrinit.c` retains only original `VrInitialized` and no longer reports an
+unsupported initialization success; and `vrnmpipe.c` retains the original
+synchronous interceptors and source-order list helpers. The former Redirector
+`57:00/57:01` consumers and `LoadVdmRedir` now return explicit failure until
+their full original lifecycle can be admitted, rather than reviving deleted
+host success stubs.
+
+The fresh `build/M0-T263-S9/r001` formal Ninja graph reached `no work to do`.
+Its `opennt-host` mirror, BOP 59, DEM file, and Redirector disposition fixtures
+all exited `0`. The detailed retained/deleted/dependency and verification ledger
+is [S9 recovery evidence](etc/evidence/m0-t263-s9-three-file-original-body-recovery-ledger-001.md).
+
+### M0 T263 S8 — closed: reachable OpenNT host-source similarity repair
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S8`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner direction: “你现在增开一个S任务做这个修复。” This reopens T263 after S7 closure solely for the four composed host subsets. |
+| Objective | Restore OpenNT structure/logic for every currently admitted feature block in `nt_error.c`, `vrinit.c`, `vrnmpipe.c`, and `vrputil.c`; retain only statement-local adapter seams and explicit unconnected feature-block crops. Similarity is judged per needed logical block: restore the original module and algorithm comments together with a retained block where practical, but do not import otherwise-unreachable product code merely to raise a byte count. |
+| Non-goals | No dormant VDD/debug/FAX/WOW package import, no new BOP family, no Bochs semantic change, no recreation of NT4 CSR/CCPU product shells and no fabricated unavailable success. |
+| Reference Baseline | `refs/opennt/base/mvdm/{softpc.new/host/src/nt_error.c,vdmredir/vrinit.c,vdmredir/vrnmpipe.c,vdmredir/vrputil.c}`, `HOST-DIV-012..024`, and T263/S7 P2 withdrawal record. |
+| Files And ABI Surface | The four host mirrors, their original/reached headers, same-shaped `adapter-win32`/`adapter-softpc` facade declarations and implementations, focused fixtures, README/evidence/status; no new cross-component ABI shape. |
+| Applicable Rules | Source-first ladder; component production-only rule; original order/layout/failure preservation; adapter ownership; explicit `DIVERGENCE` and README one-to-one register. |
+| Verification | Per-file original block/line ledger; include/call graph; source similarity review excluding explicit crops; formal Ninja closure; focused positive/negative fixture for every retained provider block. |
+| Expected Markers | Each retained feature block maps to an original span; each platform departure has a same-shaped adapter call and `HOST-DIV` row; each crop names source span, missing dependency and future owner. |
+| Asset Needs | Pinned OpenNT source, current adapter/session interfaces, MSVC/Ninja formal graph and existing focused host fixtures. |
+| Reporting Requirements | Distinguish exact original blocks, local adapter call substitutions and omitted whole feature blocks; do not state an unconnected historical feature is runnable. |
+| Stop Conditions | A required adapter would absorb Redirector/DOS/BOP meaning, a crop bisects a retained control-flow block, an unregistered divergence appears, or a dormant source package would be imported. |
+| Exit Criteria | The four source files contain no project-authored replacement algorithm for an admitted block; all retained blocks preserve original control/data/failure structure through same-shaped facades; crops are source-cited and locally tested; formal closure passes. No unneeded historical feature is restored merely to raise line similarity. |
+| Original Owner Request | “允许裁剪掉暂时没有联通的部分，但是联通的部分不能大规模 diverge。” |
+| Similar-Issue Sweep | Adapter logic leaking into mirrors, partial-block crops, replacement data structures, private Bochs access, hidden host-pointer state and untested original failure paths. |
+
+**S8 P2 complete:** original module/algorithm comments and the reached
+direct-access source form are restored for all four host subsets; the four
+formal MSVC object targets rebuilt cleanly. The exact retained/deferred split
+is recorded in the [P2 recovery
+evidence](etc/evidence/m0-t263-s8-p2-retained-host-comment-and-block-recovery-001.md).
+
+**S8 P3 complete:** a fresh formal graph rooted at `build/M0-T263-S8/r001`
+linked and ran the focused `opennt-host` mirror fixture with exit `0`. It
+exercises the retained path/error helpers, static provider lifecycle, and a
+local named-pipe round trip without relying on the unrelated VDMREDIR mailslot
+fixture branch. See the [P3 focused-closure
+evidence](etc/evidence/m0-t263-s8-p3-focused-host-mirror-fixture-001.md).
+
+**S8 closure:** the four-file repair now satisfies its exit criteria. The
+`nt_error.c` composed BOP 59 route and the direct VDMREDIR mirror fixture both
+exit `0`; all retained local divergences are marked in source and indexed in
+`src/opennt-host/README.md`. Deferred VDD/remote/mailslot work remains out of
+scope, source-cited and owner-bound rather than being represented as a failure
+of the restored synchronous host subset.
+
+**S8 P4 complete:** the owner-required source-layout sweep restored original
+whitespace/layout wherever a retained line has no semantic divergence, and
+removed historical includes or optional diagnostics that were merely present
+but not actually connected. The resulting exact/semantic/cropped split and
+fresh focused fixture result are recorded in the [P4 formatting and dependency
+evidence](etc/evidence/m0-t263-s8-p4-mirror-layout-and-reached-dependency-audit-001.md).
+
+**S8 P4 complete:** the owner-required source-layout sweep restored original
+whitespace/layout wherever a retained line has no semantic divergence, and
+removed historical includes or optional diagnostics that were merely present
+but not actually connected. The resulting exact/semantic/cropped split and
+fresh focused fixture result are recorded in the [P4 formatting and dependency
+evidence](etc/evidence/m0-t263-s8-p4-mirror-layout-and-reached-dependency-audit-001.md).
 
 ### M0 T263 S7 — MVDM owner-expansion closure
 
@@ -20,17 +113,22 @@ the unchanged formal build boundary before T263 closes.
 | Files And ABI Surface | T263 closure evidence/history/status and documentation inventory only; no ABI. |
 | Applicable Rules | Execution closure, source policy, original mirror rule, production-only roots, no generic component and formal-build hygiene. |
 | Verification | Per-packet SHA-256 records, source-owner scan, README register review, `ninja -C build/M0-T262-S5/001 -n`, documentation governance and scoped diff checks. |
-| Expected Markers | Five admitted package groups, six original component registers, no added formal object/archive/link owner. |
+| Expected Markers | Four admitted production package groups plus one non-component tool closure, six original component registers, no added formal object/archive/link owner. |
 | Asset Needs | Pinned OpenNT source, all T263 evidence, existing formal Ninja root and Git metadata. |
-| Reporting Requirements | State exact admitted counts, build-boundary result and deferred original owner packages. |
+| Reporting Requirements | State exact admitted counts, build-boundary result and deferred original owner packages; ensure dormant host extension packages remain outside production components. |
 | Stop Conditions | Missing owner/provenance, unregistered divergence, a generic-root leak or accidental new build edge pauses closure. |
 | Exit Criteria | Every admitted package has exact source/hash evidence and named owner; no new component crosses the mechanical/runtime boundary; closure history is recorded. |
 | Original Owner Request | “将以上架构修改，进行治理文档修正，并开始着手建立 opennt-guest 完整组件、opennt-softpc、opennt-utils 组件，并做好 tools/opennt 工具增补。” |
 | Similar-Issue Sweep | Missing package provenance, source mirror mixed with tests/reference copies, accidental runtime linkage, generic utility growth and firmware/runtime conflation. |
 
 **S7 P1 completed:** T263 package counts, owner registers and the unchanged
-formal graph boundary are reconciled in the [closure evidence](etc/evidence/m0-t263-s7-mvdm-owner-expansion-closure-001.md). T263 is closed; see
-the [history record](history/m0-t263-closure-20260824.md).
+formal graph boundary are reconciled in the [closure evidence](etc/evidence/m0-t263-s7-mvdm-owner-expansion-closure-001.md).
+
+**S7 P2 completed:** the mistakenly preserved-but-unconnected VDD/debug/FAX
+packages have been withdrawn from `opennt-host`; their future owner remains
+recorded without treating source preservation as production admission. See the
+[withdrawal record](etc/evidence/m0-t263-s7-unconnected-host-package-withdrawal-001.md).
+T263 is closed; see the [history record](history/m0-t263-closure-20260824.md).
 
 ### M0 T263 S6 — OpenNT `tools16` historical tool-closure admission
 
@@ -75,9 +173,11 @@ SHA-256 verified. See the [admission evidence](etc/evidence/m0-t263-s6-opennt-to
 | Original Owner Request | “`vdd`、`ieuvddex`、`fax`…属于 opennt-host；`bde`、`dbg`、`vdmdbg`、`vdmexts`…同理。” |
 | Similar-Issue Sweep | Debug source mistaken for Bochs logic, VDD package auto-enable, new generic adapter, host-source divergence and implicit link drift. |
 
-**S5 P1 completed:** 138 original host extension files across the seven
-packages are source-identical and recursively SHA-256 verified. See the
-[admission evidence](etc/evidence/m0-t263-s5-opennt-host-extension-package-admission-001.md).
+**S5 P1 superseded:** the seven original host extension packages were verified
+source-identical, but the owner subsequently ruled that unconnected packages
+must not reside in production `opennt-host`. They were withdrawn in T263/S7
+P2; their earlier provenance record remains
+[historical evidence](etc/evidence/m0-t263-s5-opennt-host-extension-package-admission-001.md).
 
 ### M0 T263 S4 — OpenNT reusable utility-package decision
 

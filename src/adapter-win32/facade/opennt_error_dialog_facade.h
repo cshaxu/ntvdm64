@@ -25,6 +25,11 @@ enum bx_ntvdm_opennt_direct_access_choice_v1 {
 enum bx_ntvdm_opennt_direct_access_choice_v1
 bx_ntvdm_opennt_direct_access_last_choice(void);
 int bx_ntvdm_opennt_direct_access_category_should_prompt(ULONG category);
+DWORD bx_ntvdm_opennt_direct_access_category_bits_get(void);
+void bx_ntvdm_opennt_direct_access_category_bits_set(DWORD bits);
+int bx_ntvdm_opennt_direct_access_load_string(UINT resource_id, CHAR *buffer,
+    UINT capacity);
+const CHAR *bx_ntvdm_opennt_direct_access_fallback_message(void);
 void bx_ntvdm_opennt_direct_access_reset_thread(void);
 UINT bx_ntvdm_opennt_direct_access_prompt_count(void);
 

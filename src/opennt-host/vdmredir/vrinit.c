@@ -1,41 +1,78 @@
-/*
- * Re-rooted from OpenNT base/mvdm/vdmredir/vrinit.c.
- *
- * The admitted single-session initialization retains the original owner gate
- * and named-pipe cleanup order.  NetBIOS/DLC/VDD/ICA product hooks remain
- * explicit later-provider dependencies; this file does not fabricate them.
- */
-/* DIVERGENCE(HOST-DIV-024): static provider composition selects the original
- * VDMREDIR_DLL declaration branch; project binding names remain local to BOP
- * composition rather than altering the original header. */
-#include <windows.h>
-#include <windows.h>
-#define VDMREDIR_DLL
-#include "opennt-host/inc/vrnmpipe.h"
+/*++
 
-static BOOLEAN IsVrInitialized = FALSE;
+Copyright (c) 1991  Microsoft Corporation
 
-/* DIVERGENCE(HOST-DIV-017): OpenNT exported VrInitialized from a separate
- * VDMREDIR DLL.  The static program preserves that original import shape in
- * opennt-bop, so the provider body needs a private link name. */
-BOOLEAN bx_ntvdm_vr_initialized_provider(VOID)
+Module Name:
+
+    vrinit.c
+
+Abstract:
+
+    Contains Vdm Redir (Vr) 32-bit side initialization and uninitialization
+    routines
+
+    Contents:
+        VrInitialized
+
+Author:
+
+    Richard L Firth (rfirth) 13-Sep-1991
+
+Environment:
+
+    32-bit flat address space
+
+Revision History:
+
+    13-Sep-1991 RFirth
+        Created
+
+--*/
+
+#include <windows.h>
+
+/* DIVERGENCE(HOST-DIV-017): OpenNT exports this function from a separately
+ * loaded VDMREDIR DLL. The statically composed importer retains the original
+ * function-pointer ABI, so only the emitted provider symbol is privately
+ * renamed; the retained source spelling below is unchanged. */
+#define VrInitialized bx_ntvdm_vr_initialized_provider
+
+//
+// data
+//
+
+static BOOLEAN IsVrInitialized = FALSE; // set when TSR loaded
+
+
+//
+// routines
+//
+
+BOOLEAN
+VrInitialized(
+    VOID
+    )
+
+/*++
+
+Routine Description:
+
+    Returns whether the VdmRedir support has been initialized yet (ie redir.exe
+    TSR loaded in DOS emulation memory). Principally here because VdmRedir is
+    now a DLL loaded at run-time via LoadLibrary
+
+Arguments:
+
+    None.
+
+Return Value:
+
+    BOOLEAN
+        TRUE    VdmRedir support is active
+        FALSE   VdmRedir support inactive
+
+--*/
+
 {
     return IsVrInitialized;
-}
-
-BOOLEAN bx_ntvdm_vr_initialize_provider(VOID)
-{
-    /* DIVERGENCE(HOST-DIV-022): OpenNT VrInitialize registers VDD hooks,
-     * starts NetBIOS/DLC state, initializes ICA queues and writes VDM load
-     * info. Those coupled product services are not a helper-level recovery;
-     * this retained static single-session gate exposes no such fabricated
-     * capability until the later Redirector/VDD lifecycle owner exists. */
-    IsVrInitialized = TRUE;
-    return TRUE;
-}
-
-VOID bx_ntvdm_vr_uninitialize_provider(VOID)
-{
-    VrTerminateNamedPipes(0u);
-    IsVrInitialized = FALSE;
 }

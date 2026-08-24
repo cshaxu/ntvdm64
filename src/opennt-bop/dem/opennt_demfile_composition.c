@@ -5,7 +5,6 @@
 #include "opennt_demfile_composition.h"
 /* Project-only static binding for the original DLL-import pointer shape. */
 BOOLEAN bx_ntvdm_vr_initialized_provider(VOID);
-BOOLEAN bx_ntvdm_vr_initialize_provider(VOID);
 
 void demChMod(void);
 void demCreate(void);
@@ -25,7 +24,12 @@ BOOL LoadVdmRedir(void)
      * pointer after LoadLibrary.  The static provider keeps the exact source
      * indirection while binding it to the re-rooted VDMREDIR owner. */
     VrInitialized = (BOOL (*)(VOID))bx_ntvdm_vr_initialized_provider;
-    return bx_ntvdm_vr_initialize_provider();
+    /* DIVERGENCE(BOP-DIV-089): loading the historical VDMREDIR DLL also
+     * initialized VDD/ICA/NetBIOS/DLC state.  The direct static query is
+     * retained, but no successful LoadVdmRedir result is possible until that
+     * complete original lifecycle is admitted. */
+    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+    return FALSE;
 }
 
 void *Sim32GetVDMPointer(ULONG address, ULONG bytes, int protect)

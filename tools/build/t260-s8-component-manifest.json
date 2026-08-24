@@ -384,6 +384,16 @@
   },
   "fixtures": [
     {
+      "name": "t263-s8-opennt-host-mirror-fixture",
+      "source": "tests/opennt-host/t263_s8_host_mirror_fixture.c",
+      "libraries": [
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib"
+      ]
+    },
+    {
       "name": "t261-s7-session-fixture",
       "source": "tests/session/t261_s7_session_fixture.c",
       "libraries": [

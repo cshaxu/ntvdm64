@@ -80,6 +80,12 @@ local to its corresponding original unit, carries a `DIVERGENCE:` comment, and
 is recorded in the component exception register; an invented helper cannot
 pose as an upstream mirror file.
 
+An original host package is imported into `src/opennt-host/` only as part of
+an admitted, actually composed provider recovery. Unreached VDD, debugger,
+WOW, FAX or other historical host packages remain in the pinned external
+source baseline; source preservation alone is not a reason to put dormant
+product code in a production component.
+
 `src/opennt-softpc/` contains admitted original OpenNT SoftPC firmware, ROM
 and machine-contract inputs. It is neither a second machine runtime nor a
 dependency from `bx-mantle`: `app` may select opaque admitted bytes for the

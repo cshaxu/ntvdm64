@@ -1,57 +1,101 @@
-/*
- * Direct minimal import of
- * refs/opennt/base/mvdm/softpc.new/host/src/nt_error.c.
- *
- * The original translation unit also implements the full NT4 resource,
- * console-positioning, WOW hard-error and CSRSS product shell.  Only the
- * reached host_direct_access_error() owner is independently composable here.
- */
-
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
 
-#include "error.h"
+#include "nt_uis.h"
+#include "host_rrr.h"
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
-
-/* DIVERGENCE(HOST-DIV-012): OpenNT used a process TLS slot supplied by its
- * NTVDM product initialization.  This one-session host has no such product
- * shell; a compiler TLS bitset preserves the original per-thread repeated
- * category suppression without installing host state. */
-static const char *direct_access_type(ULONG type)
-{
-    static const char *const types[] = {
-        "floppy direct access", "hard-disk direct access",
-        "an unsupported device driver", "an old PIF request",
-        "an illegal BOP request", "a missing resource limit",
-        "a mouse-driver request"
-    };
-    return type < sizeof(types) / sizeof(types[0]) ? types[type] :
-        "an unsupported direct-access request";
-}
-
 /*
- * host_direct_access_error is retained in the original source's order:
- * obtain this-thread state, suppress a repeated category, record it, form the
- * prompt, then call the host dialog.  It remains void: Ignore returns to the
- * caller and Terminate is observed by the typed BOP boundary.
+ * SoftPC Revision 2.0
+ *
+ * Title	: General Error Handler
+ *
+ * Description	: General purpose error handler.  It handles both
+ *		  general SoftPC errors (error numbers 0 - 999) and
+ *		  host specific errors (error numbers >= 1000)
+ *
+ * Author(s)	: Dave Bartlett (based on module by John Shanly)
+ *
+ * Parameters	: int used to index an array of error messages
+ *		  held in message.c, and a bit mask indicating
+ *		  the user's possible options:
+ *                    Quit, Reset, Continue, Setup
+ *
  */
+
+/* DIVERGENCE(HOST-DIV-012): the original NTVDM TLS index is product-global
+ * state. Preserve its TlsGetValue/TlsSetValue call shape through the
+ * session-resettable adapter-owned per-thread category bits. */
+#define TlsGetValue(index) ((LPVOID)(ULONG_PTR) \
+    bx_ntvdm_opennt_direct_access_category_bits_get())
+#define TlsSetValue(index, value) \
+    bx_ntvdm_opennt_direct_access_category_bits_set((DWORD)(ULONG_PTR)(value))
+
+/* DIVERGENCE(HOST-DIV-014): the private NTVDM resource table and dialog
+ * product shell are unavailable to an unpack-and-run process. Keep the
+ * original LoadString/ErrorDialogBox expressions and map only those calls to
+ * the same-shaped public-Win32 facade. */
+#ifdef LoadString
+#undef LoadString
+#endif
+#define LoadString(module, id, buffer, count) \
+    bx_ntvdm_opennt_direct_access_load_string((id), (buffer), (count))
+#define ErrorDialogBox(message, edit, options) \
+    bx_ntvdm_opennt_direct_access_dialog((message))
+#define szDoomMsg bx_ntvdm_opennt_direct_access_fallback_message()
+
+DWORD TlsDirectError;
+//
+// Called directly from C or via bop. Type checked against global 'DirectError'
+// to see if called already in this app. 'DirectError' cleared on VDM resume.
+//
+// This function is expected to be called by 16 bit threads
+// which is doing the unsupported service. For DosApps this is
+// the CPU thread, For WOW this is one of the individual 16 bit tasks.
+//
+//
 VOID host_direct_access_error(ULONG type)
 {
-    CHAR message[260];
-    /* DIVERGENCE(HOST-DIV-012,HOST-DIV-013): OpenNT obtains its per-thread
-     * TlsDirectError bitset from NTVDM initialization. The standalone
-     * adapter-win32 facade owns the equivalent session-resettable state;
-     * its 0..6 result and repeated-category suppression are unchanged, while
-     * arbitrary AX values cannot issue an undefined C shift. */
-    if (!bx_ntvdm_opennt_direct_access_category_should_prompt(type)) return;
+    CHAR message[EHS_MSG_LEN];
+    CHAR acctype[EHS_MSG_LEN];
+    CHAR dames[EHS_MSG_LEN];
+    DWORD dwDirectError;
 
-    /* DIVERGENCE(HOST-DIV-014): OpenNT loaded D_A_MESS resources from
-     * ntvdm.exe.  That private resource table is not part of this unpack-and-
-     * run composition.  Retain the source's one message construction point
-     * and supply the same direct-access category through the Win32 facade. */
-    (void)sprintf_s(message, sizeof(message),
-        "The DOS program requested %s.", direct_access_type(type));
 
-    (void)bx_ntvdm_opennt_direct_access_dialog(message);
+       /*
+        *  Get the direct error record for the current thread
+        *  if TlsGetValue returns NULL
+        *     - could be invalid index (TlsAlloc failed)
+        *     - actual value is 0, (no bits set)
+        *  In both cases we will go ahead with the popup
+        */
+    /* DIVERGENCE(HOST-DIV-026): the original 32-bit TLS payload cast is
+     * pointer-width unsafe on x64.  The stored value remains the original
+     * DWORD category bit mask; only the transport cast is widened. */
+    dwDirectError = (DWORD)(ULONG_PTR)TlsGetValue(TlsDirectError);
+
+       // don't annoy user with repeated popups
+    /* DIVERGENCE(HOST-DIV-013): the original expression has undefined shift
+     * behavior for a guest-provided category >= 32. Historical 0..6 values
+     * retain the exact test/write ordering; other values remain observable. */
+    if (type < 32u && (dwDirectError & (1 << type)) != 0)
+        return;
+
+    if (type < 32u)
+        TlsSetValue(TlsDirectError,
+                    (LPVOID)(ULONG_PTR)(dwDirectError | (1 << type)));
+
+    if (LoadString(GetModuleHandle(NULL), D_A_MESS,
+                   dames, sizeof(dames)/sizeof(CHAR)) &&
+        LoadString(GetModuleHandle(NULL), D_A_MESS + type + 1,
+                   acctype, sizeof(acctype)/sizeof(CHAR))     )
+       {
+        sprintf(message, dames, acctype);
+        }
+    else {
+        strcpy(message, szDoomMsg);
+        }
+
+
+    ErrorDialogBox(message, NULL, RMB_ICON_STOP | RMB_ABORT | RMB_IGNORE);
 }

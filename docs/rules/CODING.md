@@ -115,12 +115,60 @@
   composition components, but `session` remains dependency-free and neutral.
   `adapter-bop` may transfer an opaque machine event only: `bx-core` must not
   identify a BOP or call an OpenNT route directly.
+- **Mirror-component review standard.** Every production file in an
+  original-code mirror component has exactly one of the following audited
+  classifications:
+  1. **Exact original:** its complete content is byte-for-byte the identified
+     upstream file. No local exception is needed.
+  2. **True original subset:** the retained content is a true subset of one
+     identified upstream file. Every deleted logical block is represented at
+     the crop boundary by a `DIVERGENCE:` comment and by one README register
+     row stating the original purpose, why the block is presently unconnected,
+     and its future owner/disposition. A crop may remove only a complete,
+     independently unreachable logical block and its dedicated commentary; it
+     must not bisect retained control flow or silently alter a retained
+     failure path.
+  3. **Same-shaped original/subset modification:** the imported file or its
+     true subset retains the original function names, parameter ABI, return
+     ABI and observable reached semantics. Every deletion and changed
+     expression carries a local `DIVERGENCE:` comment and a README register
+     row. This class normally exists to replace an unavailable include or
+     platform call through the declared same-shaped adapter; it never licenses
+     a rewritten algorithm, renamed API or altered failure contract.
+
+  The selected original file or declared true subset is the comparison
+  baseline. If more than 50 percent of the retained source, preprocessor or
+  data-bearing lines differ from that baseline, the file is not admissible in
+  the mirror component, even if its public function signatures remain the
+  same. Move the entire differing implementation to the corresponding path
+  below a dedicated component-specific `*-overlay/` root (for example
+  `src/bx-core-overlay/cpu/...`) and leave only the smallest declared call
+  boundary in the mirror. Record the measured baseline, changed-line count,
+  percentage, overlay path and call boundary in the mirror README exception
+  register. Do not evade this rule by declaring an artificial subset that
+  removes interdependent retained logic.
+
+  A mirror file may not hide new semantics. If an added semantic intrusion
+  (for example a `bx-core` CPU/RAM mechanical interface) requires more than
+  three executable lines at its actual insertion point, move that added logic
+  out of the mirror into a dedicated component-specific overlay (for example
+  `bx-core-overlay`) and make the mirror call the overlay through the smallest
+  declared boundary. The mirror insertion remains a locally marked and
+  README-registered exception. An overlay does not exempt its call site from
+  the source-first ladder, architecture admission, focused test, or intrusion
+  register; it must not become a generic `compat`/`common` container.
 - Keep imported OpenNT mirrors recognizable. Preserve source names, interfaces,
   data structures and ordering, and annotate each required edited expression
   with `DIVERGENCE:`. A replacement of an unavailable Win32, CCPU or SoftPC
   dependency must first be offered through an equivalently shaped
   `adapter-win32`, `adapter-softpc`, or `opennt-host` facade. A self-authored
   alternate interface remains a registered last-resort exception.
+- A production OpenNT component may retain an original package only when that
+  package is admitted for an actually composed/recovered provider or is a
+  declared guest/firmware/tool input. Do not import dormant VDD, debugger,
+  WOW, FAX or similar host product packages merely as a convenient local
+  source archive; the pinned external OpenNT tree remains their source record
+  until their owner-package task begins.
 - `adapter-softpc` may implement a reached historical SoftPC/CCPU interface
   only through the same name, parameters, calling convention and observable
   mechanical result, backed by bounded Bochs operations. It may transport a

@@ -12,8 +12,6 @@
 /* DIVERGENCE(BOP-DIV-087): original DEM imported VDMREDIR dynamically. This
  * static program keeps provider binding declarations private to BOP
  * composition rather than adding them to an original mirror header. */
-BOOLEAN bx_ntvdm_vr_initialize_provider(VOID);
-VOID bx_ntvdm_vr_uninitialize_provider(VOID);
 
 /* This is intentionally not a replacement VDMREDIR.DLL.  The provider body
  * was not recovered with OpenNT; the admitted first group supplies the
@@ -167,7 +165,6 @@ void bx_ntvdm_redir_native_session_unbind(bx_ntvdm_redir_native_session *session
 {
     if (session != NULL && g_active_session == session) reset_async_pipes();
     if (session != NULL && g_active_session == session) reset_mailslots();
-    if (session != NULL && g_active_session == session) bx_ntvdm_vr_uninitialize_provider();
     if (session != NULL && g_active_session == session) g_active_session = NULL;
     if (session_valid(session)) {
         session->bound = 0u;
@@ -494,16 +491,14 @@ static int dispatch_service(uint8_t service,
 {
     switch (service) {
     case 0x00u: /* SVC_RDRINITIALIZE */
-        (void)bx_ntvdm_vr_initialize_provider();
-        g_active_session->loaded = 1u;
-        resume_success(event, outcome);
-        return 1;
     case 0x01u: /* SVC_RDRUNINITIALIZE */
-        reset_mailslots();
-        bx_ntvdm_vr_uninitialize_provider();
-        g_active_session->loaded = 0u;
-        g_active_session->mode = 0u;
-        resume_success(event, outcome);
+        /* DIVERGENCE(BOP-DIV-088): the imported VrInitialize/VrUninitialize
+         * success path requires VDD hook registration, CCPU guest-state write,
+         * NetBIOS/DLC and ICA lifecycle.  None may be fabricated by this
+         * copied-frame route.  Until the Redirector owner admits that complete
+         * source-shaped substrate, fail both services rather than marking this
+         * session loaded without their original prerequisites. */
+        resume_with_error(event, outcome, ERROR_INVALID_FUNCTION);
         return 1;
     case 0x29u: /* SVC_RDRRETURN_MODE */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }

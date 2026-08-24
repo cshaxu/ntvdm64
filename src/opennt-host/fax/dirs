@@ -1,6 +1,0 @@
-
-DIRS=wowfax \
-     wowfaxui
-
-OPTIONAL_DIRS=
-

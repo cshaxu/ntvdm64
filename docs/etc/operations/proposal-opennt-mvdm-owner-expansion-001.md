@@ -40,12 +40,25 @@ owner.
    `vdmutils` products. Import only a source-identical package with a declared
    caller; put non-production reference material under `docs/etc/legacy_code`.
 5. **S5 — optional host package preparation.** Audit VDD, debugger, fax and
-   WOW host packages for `opennt-host`; preserve qualifying original package
-   layout but add no default link or feature assertion.
+   WOW host packages for their future `opennt-host` owner. Preserve their
+   external-source provenance and package boundaries, but do **not** import
+   them into `src/opennt-host` until a reached provider is admitted for actual
+   composition.
 6. **S6 — original tool closure.** Admit needed `tools16` inputs below
    `tools/opennt` with source hashes and a declared guest-build consumer.
 7. **S7 — closure.** Reconcile owner manifest, README exception registers,
    formal Ninja graph and absence of obsolete/misowned roots.
+8. **S8 — reachable host-source similarity repair.** Re-open T263 for the
+   four currently composed host subsets: `nt_error.c`, `vrinit.c`,
+   `vrnmpipe.c` and `vrputil.c`. For each, restore every currently admitted
+   feature block to original OpenNT ordering, data layout and failure flow;
+   move unavailable historical platform calls behind same-shaped
+   `adapter-win32` or `adapter-softpc` facades; and mark an unconnected whole
+   feature block as an explicit source-cited crop. This is a logical-block
+   standard, not a byte-count target: retain original module/algorithm comments
+   with every restored block where practical, but do not import diagnostics or
+   otherwise unreachable product blocks merely to increase similarity. This packet neither imports
+   dormant VDD/debug/FAX packages nor claims their product capabilities.
 
 ## Non-goals
 
