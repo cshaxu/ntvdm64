@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2235 |
+| Documentation records | 2236 |
 | --- | --- |
-| Generated UTC | 2026-08-24T09:19:12Z |
+| Generated UTC | 2026-08-24T09:22:26Z |
 
 ## Entries
 
@@ -215,6 +215,7 @@ content-divergent entries.
 | etc/evidence/m0-t261-s8-p4-vdmredir-owner-split-001.md | indexed supporting material | 10629a6d3294a8b04dd0bbb49026cca82fe31d43441934c05b1cf760a81f767e |
 | etc/evidence/m0-t261-s8-p5-vdmredir-source-owner-intake-001.md | indexed supporting material | c5df9f99a7c512047aa09d0deca0e062f7d85c08822a3dd51fc12818b6516e29 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
+| etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
 | etc/evidence/t225-s12-adapter-bop-observation-result-001.md | indexed supporting material | 610d7c3bc998fabe1e5b29f0da13f6db19a6f731abc6c2d09bec6f18fe450f09 |
@@ -504,7 +505,7 @@ content-divergent entries.
 | etc/operations/t228-s1-command-transient-owner-package-map-001.md | indexed supporting material | 7fda477e1b5f7a8c249d1a016a286fb294e4ce291e423ce15143d1b6aa24b6d6 |
 | etc/operations/t228-s1-cs-transition-ring-admission-001.md | indexed supporting material | 7de247676a7eaf00e24558c4646edaabefcad845bf4b00df2e9375217f583d6c |
 | etc/operations/t228-s1-large-reverse-copy-admission-001.md | indexed supporting material | 3c17c40f500b9973eb7d529793e16f1f84b74cd4612cc215cd7d5e840e2fc017 |
-| etc/operations/task-identifier-governance.md | indexed supporting material | dfcf6d08a69f4bf8ae8cad01c830d29e1dee26da42f4e8d64131e66b7cfb15ba |
+| etc/operations/task-identifier-governance.md | indexed supporting material | ec66e93097321e80846b3b3151bd37ccab97c268c130ea7cabb215b545f01b69 |
 | etc/operations/td-guest-pointer-mapping-governance-001.md | indexed supporting material | 85668294c4721c073f1cf06067d20f8815340eb040416bc16f148d6b06970476 |
 | etc/operations/td-interface-conformance-audit-plan-001.md | indexed supporting material | c682791e085ba59e9b6045c1e57e2fbe75fbaf43f9b54a381b9908c1012e7677 |
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |

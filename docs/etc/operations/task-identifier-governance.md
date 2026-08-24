@@ -21,6 +21,7 @@ numeric T or displacing the active product packet in Status:
 | M0 Td S2 P5 | Close the XMS/DPMI interface audit: classify every 12-slot XMS and 25-slot DPMI entry plus dependencies 034--041 and 059--077; do not admit `53:xx`. |
 | M0 Td S2 P6 | Close the remaining-owner audit: classify all Redirector, WOW16, Debugger/VDD and top-level/machine BOP rows plus dependencies 043, 045--058 and 078--115. |
 | M0 Td S2 P7 | Reconcile all 321 rows and exception references; reject T257 S5 re-admission until a source-first whole DPMI package closes pointer/frame/IRET dependencies. |
+| M0 Td S3 P1 | Ratify the ten-component owner contract: four original-code mirrors, four mechanical adapters, and `app` plus neutral `session` as project composition. Confirm that `adapter-softpc`, rather than a generic `adapter-bx`, is the sole historical SoftPC/CCPU-to-Bochs compatibility owner. |
 
 ## Hierarchy
 
