@@ -245,7 +245,6 @@
       "sources": [
         "src/opennt-host/dem/bx_ntvdm_host_drive_policy.c",
         "src/opennt-host/dem/bx_ntvdm_host_namespace.c",
-        "src/opennt-host/config/config_complete_shim.c",
         "src/opennt-host/dem/demdasd_ioctl_shim.c",
         "src/opennt-host/dem/demdir_shim.c",
         "src/opennt-host/dem/demerror_lock_shim.c",
@@ -295,6 +294,7 @@
         "src/opennt-bop/softpc/mem_size.c",
         "src/opennt-bop/softpc/mouse_install1_headless.c",
         "src/opennt-bop/softpc/nt_bop_config_done.c",
+        "src/opennt-bop/softpc/opennt_config_complete_composition.c",
         "src/opennt-bop/softpc/printer_openclose.c",
         "src/opennt-bop/softpc/spckbd_handoff.c",
         "src/opennt-bop/softpc/tape_io.c",
