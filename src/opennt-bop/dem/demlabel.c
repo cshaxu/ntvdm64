@@ -11,7 +11,9 @@
 
 /* OpenNT source: src/opennt/base/mvdm/dos/dem/demlabel.c; see the matching
  * neutral demfile shim for the unavailable historical host include closure. */
-#include "../../opennt-host/dem/demfile_shim.h"
+/* DIVERGENCE(BOP-DIV-039): shared demfile composition owns the historical
+ * OEM/CCPU include closure for this directly imported companion body. */
+#include "opennt_demfile_composition.h"
 
 USHORT demDeleteLabel(BYTE Drive)
 {

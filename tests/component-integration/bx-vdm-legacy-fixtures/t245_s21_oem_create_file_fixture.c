@@ -2,7 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
-#include "opennt-host/dem/demfile_shim.h"
+#include "adapter-win32/include/legacy-api/opennt_dem_file_oem_facade.h"
 
 int main(void)
 {

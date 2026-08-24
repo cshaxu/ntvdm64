@@ -74,6 +74,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-036` | COMMAND probes an old 1 KiB DOS environment span. | That limit is not the source provider contract. | Read the exact bounded multisz extent. | `command/opennt_command_composition.c:866` |
 | `BOP-DIV-037` | COMMAND materializes historical SAS pointers. | Raw aliased host access is unsafe. | Use bounded copied spans with alias rejection. | `command/opennt_command_composition.c:908` |
 | `BOP-DIV-038` | `demdir.c` imports the historical DEM/SoftPC/OEM product-header closure. | That closure cannot compose independently with the modern component graph. | Split only the include boundary between BOP composition and same-shaped adapter-win32 OEM calls. | `dem/demdir.c:13` |
+| `BOP-DIV-039` | `demfile.c` and `demlabel.c` import the historical DEM/SoftPC/OEM/VDMREDIR product-header closure. | It cannot link as an independent modern component closure. | Retain source bodies and bind their named OEM, Redirector and scoped CCPU/SAS facades through `opennt_demfile_composition`. | `dem/demfile.c:19`, `dem/demlabel.c:14` |
 
 The migration evidence is
 [`m0-t260-s5-opennt-bop-layout-migration-001.md`](../../docs/etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).

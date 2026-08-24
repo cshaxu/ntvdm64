@@ -14,9 +14,11 @@
 
 /* OpenNT source: src/opennt/base/mvdm/dos/dem/demfile.c. The historical
  * DEM/SoftPC/VdmRedir/VDD product include closure is unavailable to the
- * standalone CLI composition; demfile_shim.h supplies only its named ABI
+ * standalone CLI composition; opennt_demfile_composition.h supplies only its named ABI
  * declarations while retaining the imported service bodies below. */
-#include "../../opennt-host/dem/demfile_shim.h"
+/* DIVERGENCE(BOP-DIV-039): retain the imported body, but bind its historical
+ * OEM/CCPU/VDMREDIR include closure through declared component facades. */
+#include "opennt_demfile_composition.h"
 
 extern PDOSSF pSFTHead;
 

@@ -65,6 +65,10 @@ S4 P2 has split the independent DEM directory group: its source-body invoke
 now belongs to `opennt-bop`, same-named OEM directory calls belong to
 `adapter-win32`, and fresh r010 formal build plus the direct-import fixture
 pass; see the [DEM directory split](etc/evidence/m0-t261-s4-p2-demdir-owner-split-001.md).
+S4 P3 has split the DEM file/label composition from same-shaped OEM Win32
+facades while retaining Redirector as its separately owned lower host
+capability; fresh r011 completes 462 Ninja edges and both direct file/OEM
+fixtures pass; see the [DEM file split](etc/evidence/m0-t261-s4-p3-demfile-owner-split-001.md).
 
 ## Previous Active Packet — M0 T260
 

@@ -8,6 +8,7 @@
  * synthetic CPU interface. */
 
 #include "demhndl_shim.h"
+#include "adapter-win32/include/legacy-api/opennt_dem_file_oem_facade.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,17 +45,6 @@ enum bx_ntvdm_demfile_service {
     BX_NTVDM_DEMFILE_CHECK_PATH = 0x44u
 };
 
-int bx_ntvdm_demfile_invoke(bx_ntvdm_demhndl_call *call);
-
-void *Sim32GetVDMPointer(ULONG, ULONG, int);
-HANDLE CreateFileOem(LPSTR, DWORD, DWORD, LPSECURITY_ATTRIBUTES, DWORD, DWORD, HANDLE);
-BOOL DeleteFileOem(LPSTR); DWORD GetFileAttributesOem(LPSTR);
-BOOL SetFileAttributesOem(LPSTR, DWORD); BOOL MoveFileOem(LPSTR, LPSTR);
-BOOL GetVolumeInformationOem(LPSTR, LPSTR, DWORD, DWORD *, DWORD *, DWORD *, LPSTR, DWORD);
-BOOL RemoveFontResourceOem(LPSTR); void OutputDebugStringOem(LPSTR);
-BOOL LoadVdmRedir(void);
-LPSTR VrConvertLocalNtPipeName(LPSTR, LPSTR); void VrAddOpenNamedPipeInfo(HANDLE, LPSTR);
-BOOL bx_ntvdm_demfile_publish_handle(HANDLE);
 USHORT demCreateLabel(BYTE, LPSTR);
 /* The original C89 translation unit calls these before their K&R-style
  * definitions.  MSVC's C11 mode needs declarations, not reordered bodies. */

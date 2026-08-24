@@ -3,7 +3,7 @@
 #include <windows.h>
 
 #include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-host/dem/demfile_shim.h"
+#include "opennt-bop/dem/opennt_demfile_composition.h"
 #include "adapter-softpc/bx_ntvdm_host_handle_manager.h"
 
 typedef struct fixture_context {
