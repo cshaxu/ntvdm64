@@ -29,7 +29,8 @@ be isolated, but same naming alone never proves behavioral equivalence. Where
 mapping is required, the session owns separate fixed mapping-manager instances
 rather than one shared numeric namespace. The
 sole permitted historical guest-pointer compatibility route is the
-`bx-vdm` session-owned mapping manager: it may return a native pointer for an
+`adapter-softpc` facade using an applicable `session`-owned mapping-manager
+instance: it may return a native pointer for an
 exact `GetVDMAddr`/`Sim32GetVDMPointer` call only under a bounded synchronous
 mapping lease, and that pointer may not enter guest state, cross a component
 ABI, outlive its call epoch, or reach asynchronous work. A facade must not

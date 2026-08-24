@@ -8,7 +8,10 @@ The target product separation is: `bx-core` (adopted machine), `bx-mantle`
 (Bochs-backed SoftPC/CCPU interface recovery), `adapter-win32` (unavailable
 Win32 compatibility), `adapter-bop` (selector-blind copied-frame BOP
 ingress/completion), and
-`app` (CLI and final composition). This separation exists to make maximal
+`app` (CLI and final composition), and `session` (the dependency-free
+per-VDM lifecycle, neutral resource and event foundation). `app` owns
+composition and creates the session; `session` is not another composition
+layer. This separation exists to make maximal
 original-source reuse and minimal source intrusion mechanically enforceable.
 
 The immediate goal is not to recover the unavailable NT4 x86 V86/CCPU product composition. It is to establish a small, auditable Bochs-to-OpenNT boundary and use it to run the first contained NT4 EN-US DOS profile. No claim about WOW16, broad device compatibility, or a retail-compatible `ntvdm.exe` follows from that first slice.

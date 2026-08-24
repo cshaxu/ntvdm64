@@ -42,8 +42,11 @@ source or dependency must be added to that audit before it enters an S.
 | S3 | Recover the PIF/COMMAND host group under re-rooted original `softpc.new/host/...` and `dos/command/...` paths; externalize composition-only files. | Direct imports retain original body; every body edit is source-marked and registered. |
 | S4 | Recover or relocate DEM host support by original source owner; preserve host-file API, error order and handle/mapping contracts. | No `dem/*_shim.*` survives without an explicit original path or source-derived exception. |
 | S5 | Split the selector-blind copied-frame ingress from `opennt-bop` into `adapter-bop`, preserving OpenNT selector/service routing in `opennt-bop`. | `adapter-bop` owns the generic typed ingress/completion ABI; it names no selector, service family, DOS/WOW algorithm or provider, and `opennt-bop` no longer owns generic machine-event mechanics. |
-| S6 | Resolve XMS, Redirector, top-level and configuration support with the same rule. | No generic `xms/`, `redir/`, `top_level/` or `config/` shim remains unclassified. |
-| S7 | Repair manifest/includes/tests, delete superseded host shims, run formal Ninja closure and audit source/README exception one-to-one. | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule. |
+| S6 | Reconcile the ten-component target across architecture, goal, coding, rules and the active-packet terminology. Do not move implementation. | Component count, current build-module count, mapping ownership, adapter terminology and S follow-on ownership are internally consistent. |
+| S7 | Split the dependency-free per-VDM `session` foundation out of current composition/adapter state. Move only neutral lifecycle, resource/token, capability-registration, completion/event and teardown ownership; keep `app` as instance owner and retain all OpenNT/BOP/Win32/Bochs meaning in its existing owner. | `session` has no product-component dependency or service vocabulary; all extracted state has an exact former/new-owner map; no component calls upward into `app` to obtain session state. |
+| S8 | Remove selector-aware BOP/NTDOS/COMMAND observation and fixture-only residue from adapter production roots; relocate source-owned interpretation to `opennt-bop` and generic test hooks to `tests/` without altering provider behavior. | `adapter-bop` and `adapter-softpc` are selector/service/family/DOS/WOW blind in production code; component roots contain no fixture-only provider. |
+| S9 | Resolve XMS, Redirector, top-level and configuration support with the same rule. | No generic `xms/`, `redir/`, `top_level/` or `config/` shim remains unclassified. |
+| S10 | Repair manifest/includes/tests, delete superseded host shims, run formal Ninja closure and audit source/README exception one-to-one. | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule. |
 
 ## Target layout rule
 
@@ -69,7 +72,14 @@ composition name and must not replace the imported `nt_pif.c` body.
   `adapter-softpc` owns SoftPC/CCPU/SAS-to-Bochs mechanical conversion.
 - `adapter-bop` owns selector-blind copied-frame ingress and typed completion;
   `opennt-bop` owns BOP route and selector/service meaning; `app` owns final
-  composition.  This task must move any misplaced file to its true owner.
+  composition and creates each `session`. `session` has no product-component
+  dependency and owns only neutral lifecycle/resource/token/capability/event/
+  teardown contracts. This task must move any misplaced file to its true owner.
+- Do not create generic `adapter-common`, `adapter-host`, or `compat` roots.
+  A VDD/debugger, Redirector or WOW package remains under its original
+  OpenNT owner unless a later source/ABI audit proves that a specialized
+  adapter is necessary beyond `session`, `adapter-win32`, `adapter-softpc`,
+  and `adapter-bop`.
 - A `DIVERGENCE` edit in an imported OpenNT body has one statement-level ID and
   one component-README row.  A source-derived file has a separate recovery
   exception; it is not represented by a blanket README row.

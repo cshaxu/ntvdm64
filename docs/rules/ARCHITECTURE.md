@@ -7,7 +7,7 @@
 5. `ntvdm64` and other comparison repositories remain read-only evidence. Bochs 2.6 is the sole approved third-party internal-research runtime backend once its pinned import record passes T95.
 6. Default product targets cannot depend on unreviewed artifacts, fixtures, or an unpinned third-party source snapshot.
 7. Bochs is deny-by-default. Each enabled feature needs a reached first-profile OpenNT caller, named Bochs owner, boundary rationale, explicit admission record, and focused negative test. Upstream availability is not a reason to enable it.
-8. Preserve original OpenNT service ownership, calling conventions, layouts, dispatch order, and failure behavior. Bochs and both adapters may carry documented bounded contracts but may not recreate that behavior.
+8. Preserve original OpenNT service ownership, calling conventions, layouts, dispatch order, and failure behavior. Bochs and the adapters may carry documented bounded contracts but may not recreate that behavior.
 9. The product has one host-integration contract: the applicable original OpenNT service behavior, recovered through the mandatory source-first ladder. Project-authored mutation profiles, including Direct, Readonly, Overlay and Virtual, are not product behavior. Superseded v1 implementations and their tests are retired from the working tree when their current route is code complete; version history is the comparison record. They may neither be selected nor extended.
 10. Historical recovery uses a mandatory source-recovery precedence: reusable
    OpenNT source first; its smallest contract-preserving adapter/shim second;
@@ -50,14 +50,25 @@
     exception record; convenience or a local trace result is never sufficient.
 15. The target source owners are exactly `bx-core`, `bx-mantle`,
     `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-bop`,
-    `adapter-softpc`, `adapter-win32`, and `app`. Dependencies flow from `app`
+    `adapter-softpc`, `adapter-win32`, `session`, and `app`. `session` is a
+    dependency-free per-VDM foundation: it owns neutral lifecycle, resource/
+    token registry, capability registration, completion/event state and
+    teardown, but has no BOP, DOS/WOW, VDD, Redirector, Win32 or Bochs
+    semantics and never calls a component-specific provider. `app` owns
+    composition and creates/drives each session; other components must depend
+    on the declared `session` contract rather than call upward into `app`.
+    Dependencies flow from `app`
     through `adapter-bop`'s typed, selector-blind ingress and declared OpenNT/adapter
     contracts to `bx-mantle` and then `bx-core`; `opennt-guest` is a guest-image
     input and does not become a host-provider library. `opennt-bop` alone owns
     BOP source meaning. `adapter-bop` is selector-blind copied-frame transport,
     while `adapter-softpc` is selector-blind, same-shaped
     SoftPC/CCPU mechanical recovery over Bochs; `adapter-win32` is an
-    unavailable-Win32 facade, not an OpenNT service owner.
+    unavailable-Win32 facade, not an OpenNT service owner. Do not create a
+    generic `adapter-common`, `adapter-host`, or `compat` component. A future
+    owner-specific adapter is allowed only after source/ABI audit proves that
+    the original owner plus `session`, `adapter-win32`, `adapter-softpc`, and
+    `adapter-bop` cannot preserve the required contract.
 16. The local-intrusion registers are component-owned. `bx-core/README.md`,
     `opennt-guest/README.md`, `opennt-bop/README.md`, and `opennt-host/README.md`
     record every edit to their imported source and every source-derived component.

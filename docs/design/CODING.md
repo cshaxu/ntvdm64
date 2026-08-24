@@ -10,6 +10,7 @@ src/
   adapter-bop/            copied-frame BOP ingress and typed completion transfer
   adapter-softpc/         source-shaped Bochs-backed SoftPC/CCPU compatibility
   adapter-win32/          source-shaped modern Win32 compatibility facades
+  session/                dependency-free per-VDM lifecycle/resource/event foundation
   app/                    ntvdm64 CLI and final component composition
 refs/                     read-only comparison, historical and archival inputs
   bochs/                  pinned Bochs 2.6 imported source tree
@@ -21,11 +22,12 @@ refs/                     read-only comparison, historical and archival inputs
   archive/                retired probes, adapters and reconstruction fixtures
 tests/
   app/                    app-owned CLI fixture inputs
+  adapter-bop/            copied-frame ingress boundary fixtures
   adapter-softpc/         same-shaped SoftPC/CCPU facade fixtures
+  session/                neutral lifecycle/resource/event fixtures
   component-integration/  multi-component composition fixtures
   bx-mantle/              Bochs-machine assembly fixtures
   legacy/opennt/          retained non-product historical fixture/archive inputs
-  adapter-softpc/         bridge, memory, stop, and negative boundary tests
 tools/                    tracked tools, arranged by declared responsibility
   build/                  build/publish entry points
   governance/             inventory and governance verification
@@ -77,6 +79,12 @@ and typed resume/pending/controlled-stop transfer to the exposed OpenNT BOP
 entry. It cannot implement a BOP provider, interpret a selector family, or
 own host capability policy. Generic ingress, session composition and
 project-specific routing must not be placed in `src/opennt-bop/`.
+`src/session/` is project-authored, has no product-component dependency, and
+owns only neutral per-VDM lifecycle, resource/token registry, capability
+registration, completion/event state and teardown. It does not know BOP,
+OpenNT, DOS, WOW, VDD, Redirector, Win32 or Bochs vocabulary. `src/app/`
+owns composition and creates the session instance; no other component imports
+`app` to acquire one.
 `src/adapter-win32/` owns source-shaped implementations of unavailable Win32
 interfaces using public modern Win32 APIs. `src/adapter-softpc/` owns only
 same-shaped SoftPC/CCPU-to-Bochs mechanical adaptation; it never owns BOP or
@@ -97,7 +105,10 @@ the product layout. Historical OpenNT reference material remains under
 `tests/legacy/opennt/`. These roots are not product, formal-build or runtime
 inputs.
 
-All current modern runtime sources below `src/app/`, `src/adapter-softpc/`,
+The target layout has ten source components. The current formal graph has
+eight linkable host-side modules; `opennt-guest` is a guest-image input rather
+than a host library, and `session` joins that graph only when its admitted S7
+implementation exists. All current modern runtime sources below `src/app/`, `src/adapter-softpc/`,
 `src/adapter-win32/`, `src/opennt-host/`, `src/opennt-bop/`,
 `src/adapter-bop/`, `src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64
 and the static `/MT` CRT. Generated build artifacts record the compiler,

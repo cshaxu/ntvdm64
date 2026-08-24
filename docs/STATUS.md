@@ -2,13 +2,42 @@
 
 ## Current Work
 
-**Active: M0 T261 S5 — closed** — selector-blind copied-frame ingress and
-typed completion are split from `opennt-bop` to `adapter-bop`; no S6
-implementation is admitted.
+**Active: M0 T261 S7** — dependency-free `session` owner split. `app` remains
+the sole composition and instance owner; no generic adapter or BOP/provider
+semantic migration is admitted.
 
 ## Active Packet
 
-### M0 T261 S5 — adapter-bop generic ingress ownership split
+### M0 T261 S7 — dependency-free session owner split
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T261 S7`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S6 closed the component-count, ownership and terminology governance. The owner directed that S7, rather than S6, implements the `session` owner split. |
+| Objective | Establish `src/session` as the dependency-free per-VDM lifecycle foundation and move only neutral lifecycle, resource/token, capability-registration, completion/event and teardown ownership into it. |
+| Non-goals | No BOP selector/provider implementation, no OpenNT host-source rewrite, no Win32 facade semantics, no SoftPC/CCPU or Bochs mechanics change, no guest change, and no preemptive `adapter-vdd`, `adapter-debugger`, `adapter-redir`, `adapter-wow`, generic `adapter-common`, `adapter-host`, or `compat` root. |
+| Reference Baseline | T261/S5 closure `ab49a2d4`; current `app`, `adapter-bop`, `adapter-softpc`, `adapter-win32`, `opennt-bop`, and `opennt-host` session-facing sources; T260 mapping-manager boundary. |
+| Files And ABI Surface | New `src/session/*`, precisely inventoried neutral state currently held by component composition/adapters, component public declarations, formal module manifest/generator, and focused session fixtures. |
+| Applicable Rules | `session` has no product-component dependency and no BOP/DOS/WOW/VDD/Redirector/Win32/Bochs vocabulary; `app` creates and wires the instance; source-owned behavior stays in its original owner; cross-component data remains fixed-width or opaque. |
+| Verification | Former/new owner map; include/dependency-direction scan; negative vocabulary scan; mapping-instance ownership proof; focused lifecycle/resource/event teardown tests; formal Ninja closure; `git diff --check`; documentation governance. |
+| Stop Conditions | A candidate extraction requires service/provider/guest interpretation, an OpenNT-body semantic edit, a raw Bochs object or Win32 handle in the public session ABI, an upward import of `app`, or a second mapping-manager implementation. Pause and record the owner conflict. |
+| Exit Criteria | `session` builds as a dependency-free component; `app` alone owns instance creation/composition; all extracted neutral state has one owner; existing component contracts retain their source/machine semantics; the formal graph and focused tests pass; no specialized/generic adapter has been introduced. |
+| Original Owner Request | “非常好，请你治理好文档，以S6身份提交，我们让S7来实施session逻辑抽离。” |
+| Similar-Issue Sweep | Session records, token/handle/event tables, mapping-manager instance lifecycle, app-owned composition callbacks, adapter callbacks, thread/child completion state, build manifest and fixtures. |
+
+### M0 T261 S6 — closed: architecture contract-consistency governance
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T261 S6`, Ordinary Mode with a single-person dual-role review. |
+| Objective | Reconcile the newly admitted `session` component across current architecture, goal, coding and rule authorities without moving production code or claiming that `session` is already built. |
+| Scope | Correct component cardinality and adapter terminology; distinguish ten source components from the current eight linkable modules plus the guest-image input; define `session` as lifecycle/identity owner and `adapter-softpc` as mapping-facade implementation owner; correct production/test-root terminology; and record remaining selector-aware observation/fixture residue as later cleanup rather than silently legitimizing it. |
+| Non-goals | No `src/session` implementation, source move, BOP/provider change, Bochs change, adapter semantic migration, Ninja module addition, or test behavior change. |
+| Verification | [S6 governance evidence](etc/evidence/m0-t261-s6-architecture-contract-consistency-001.md); authority cross-read, targeted terminology/dependency scan, documentation inventory regeneration, documentation-governance verification and `git diff --check`. |
+| Exit Criteria | Architecture, goal, coding and rules agree on the ten-component target; S7 is the sole active implementation packet for `session`; no current build claim is inflated; and the follow-on cleanup has an explicit S owner. |
+| Follow-on | S7 implements only dependency-free `session`; S8 removes selector-aware observation and fixture-only product residue from adapter roots before later XMS/Redirector/top-level recovery. |
+
+### M0 T261 S5 — closed: adapter-bop generic ingress ownership split
 
 | Field | Record |
 | --- | --- |

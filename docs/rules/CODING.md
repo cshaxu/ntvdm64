@@ -30,8 +30,8 @@
 - Same spelling and parameters do not prove a safe compatibility replacement.
   A facade must be justified by the reached original call site, ABI layout,
   ordering and failure behavior. Historical guest-pointer APIs may retain
-  their exact pointer-returning shape only through the one `adapter-softpc`
-  session-owned mapping manager: every mapping has a checked address/span,
+  their exact pointer-returning shape only through the `adapter-softpc`
+  facade using the applicable `session`-owned mapping-manager instance: every mapping has a checked address/span,
   access rule and active-call epoch; its native pointer never crosses a
   component ABI, enters guest state or asynchronous work. A facade must not
   recreate an unbounded CCPU/SAS, CSR/BaseSrv, NTVDM or emulator product shell.
@@ -99,7 +99,8 @@
   `opennt-host`; OpenNT BOP mirrors in `opennt-bop`; unavailable public-Win32
   facades in `adapter-win32`; selector-blind copied-frame BOP ingress and
   typed completion in `adapter-bop`; bounded same-shaped SoftPC/CCPU recovery
-  in `adapter-softpc`; and
+  in `adapter-softpc`; dependency-free per-VDM lifecycle/resource/event state
+  in `session`; and
   CLI/final composition in `app`. Transitional legacy paths are not a
   precedent for new code. Do not move a file across these owners as an
   incidental feature change; the admitted reorganization package inventories
@@ -118,6 +119,12 @@
   interpretation. Neither adapter may use unbounded guest-memory inspection,
   emulate DOS interrupts, own device policy, or turn a catalogue into a generic
   historical dispatcher.
+- `session` has no dependency on a product component and no source-owned
+  service vocabulary. It may provide neutral lifecycle, token/resource,
+  capability-registration, completion/event and teardown contracts only.
+  `app` alone creates and wires an instance. Do not add generic
+  `adapter-common`, `adapter-host`, or `compat` code: a later specialist
+  adapter requires an owner-package source/ABI audit and an explicit admission.
 - Keep Bochs feature selection deny-by-default. A configuration addition must
   name its reached OpenNT caller, the Bochs owner, the boundary impact, and a
   negative test; do not enable a feature merely because upstream provides it.

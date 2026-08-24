@@ -3,8 +3,10 @@
 Adopted Bochs 2.6 core: CPU/decode, memory, exceptions and admitted native
 machine mechanics.
 
-It may depend only on adopted Bochs/internal machine inputs. It must not know
-OpenNT, DOS, VDM, WOW, BOP, SoftPC/CCPU or Win32 policy.
+It may depend only on adopted Bochs/internal machine inputs, except for the
+fixed copied-record declaration admitted by `BX-UD-001`. That declaration
+does not grant core any OpenNT, DOS, VDM, WOW, BOP selector/service,
+SoftPC/CCPU or Win32 policy knowledge.
 
 ## Local intrusion register
 
