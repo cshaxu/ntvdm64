@@ -50,14 +50,11 @@ pass. The pre-existing VDMREDIR mailslot fixture exit `8` was reproduced from
 both pre- and post-move graphs and remains separately recorded as non-P4
 behavior evidence.
 
-**S9 P4 completed:** DEM direct-context/CCPU-SAS source interpretation and
-the reached DPMI source closure now live under `opennt-bop/dem` and
-`opennt-bop/dpmi`; the old `adapter-softpc` aliases and fixture-only XMEM
-record have left production. The cached formal Ninja graph refresh rebuilt the
-affected closure without recompiling `bx-core`; focused DEM and DPMI fixtures
-pass. The pre-existing VDMREDIR mailslot fixture exit `8` was reproduced from
-both pre- and post-move graphs and remains separately recorded as non-P4
-behavior evidence.
+**S9 P5a completed:** the legacy `50:xx`/`54:xx` host-transaction classifier
+had one fixture consumer and no formal production-graph input. It now lives
+entirely under that fixture's `tests/.../support/` directory, leaving
+`adapter-softpc` without this selector/family knowledge. P5b remains to
+isolate the separate generic-UD test controls in `adapter-bop`.
 
 ### M0 T261 S8 — closed: OpenNT-host original-source exception closure
 

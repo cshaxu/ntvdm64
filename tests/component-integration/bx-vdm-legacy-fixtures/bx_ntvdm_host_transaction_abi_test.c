@@ -1,6 +1,11 @@
 #include <stdint.h>
 
-#include "bx_ntvdm_host_transaction_abi.h"
+#include "support/bx_ntvdm_host_transaction_abi.h"
+
+/* This historical transaction classifier is intentionally test-local.  It
+ * models the old 50:xx/54:xx experiment and must not re-enter the
+ * selector-blind adapter production library. */
+#include "support/bx_ntvdm_host_transaction_abi.c"
 
 int main(void)
 {

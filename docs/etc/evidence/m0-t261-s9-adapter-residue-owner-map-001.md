@@ -51,7 +51,8 @@ machine terminal result, not a BOP observer's private static state.
   `adapter-softpc` because it contains only the CCPU/SAS call-local aliases.
 - `bx_ntvdm_host_transaction_abi.{c,h}` and its `host_service_contract`
   identify `50:xx` and `54:xx` ranges. The only direct consumer is a fixture;
-  delete them from the production library and retain/rehome the fixture helper.
+  remove them from the production library and retain the complete historical
+  experiment only under that fixture's `support/` tree.
 - `dpmi_descriptor_source_shim`, `dpmi_startup_source_shim` and
   `dpmi_startup_session_shim` are source-shaped DPMI owner shims and move to
   `opennt-bop/dpmi`. `dpmi_xmem_record_adapter` has no production consumer:
@@ -82,6 +83,16 @@ the five DPMI source objects, the `opennt-bop` library and its two fixtures;
 startup and descriptor fixtures pass.  `t251-s3-redir-ingress-fixture.exe`
 returns `8` identically from the pre-move `s9-r002` and post-move graph, so it
 is recorded as pre-existing Redirector/mailslot behavior, not a P4 regression.
+
+## P5a completion result
+
+The obsolete host-transaction experiment is now entirely fixture-local:
+`bx_ntvdm_host_transaction_abi.{c,h}` and its `host_service_contract` moved
+to `tests/component-integration/bx-vdm-legacy-fixtures/support/`, and the
+sole test includes its support implementation directly. This removes the only
+`50:xx`/`54:xx` classifier from `adapter-softpc`; it was never a formal
+production-graph input. P5b remains: isolate the distinct generic-UD bridge
+fixture controls without changing its generic production ingress ABI.
 
 ## Explicitly retained adapter-softpc content
 
