@@ -13,7 +13,7 @@
 
 #define BX_NTVDM_ENGINE_REQUEST_V1_MAGIC UINT32_C(0x42584551)
 #define BX_NTVDM_ENGINE_RESULT_V1_MAGIC  UINT32_C(0x42584552)
-#define BX_NTVDM_ENGINE_CONTRACT_V1_VERSION UINT32_C(4)
+#define BX_NTVDM_ENGINE_CONTRACT_V1_VERSION UINT32_C(5)
 #define BX_NTVDM_ENGINE_V1_MAX_DESCRIPTOR_CHARS UINT32_C(260)
 #define BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS UINT32_C(256)
 
@@ -39,8 +39,6 @@ struct bx_ntvdm_engine_request_v1 {
     uint32_t magic;
     uint32_t abi_version;
     uint32_t struct_bytes;
-    uint32_t admitted_drive_mask;
-    uint32_t excluded_drive_mask;
     uint32_t mutation_mode;
     uint32_t reserved0;
     uint32_t profile_descriptor_chars;

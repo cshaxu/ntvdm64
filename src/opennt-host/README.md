@@ -29,8 +29,6 @@ departure from an identified OpenNT definition marked in code as
 
 | ID | Original definition purpose | Divergence reason | Replacement implementation | Production file(s) |
 | --- | --- | --- | --- | --- |
-| `HOST-DIV-010` | DEM uses the NT4 VDM process drive/current-directory environment. | CLI admission is session-owned and must not mutate global process state merely to assemble a guest. | Retain the bounded include/exclude-drive snapshot as a host capability; original DEM callers receive its existing failure before a host-volume query. | `dem/bx_ntvdm_host_drive_policy.c`, `dem/bx_ntvdm_host_drive_policy.h` |
-| `HOST-DIV-011` | DEM calls NT4 host namespace, find and file providers. | The historical VDM namespace/product shell is not independently composable. | Retain the bounded direct-host namespace capability with OpenNT-shaped OEM/find facades at its callers; it owns no BOP decode or guest-memory mapping. | `dem/bx_ntvdm_host_namespace.c`, `dem/bx_ntvdm_host_namespace.h` |
 
 The pre-T260 PIF original and other uncompiled historical inputs are evidence,
 not a second provider. They reside under `docs/etc/legacy_code/opennt-host/`.

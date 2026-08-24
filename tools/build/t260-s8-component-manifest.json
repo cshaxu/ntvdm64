@@ -262,8 +262,6 @@
     {
       "name": "opennt-host",
       "sources": [
-        "src/opennt-host/dem/bx_ntvdm_host_drive_policy.c",
-        "src/opennt-host/dem/bx_ntvdm_host_namespace.c",
         "src/opennt-host/redir/redir_session_shim.c",
         "src/opennt-host/top_level/top_level_nosupport_shim.c",
         "src/opennt-host/xms/xms_shim.c"
@@ -656,24 +654,6 @@
     {
       "name": "t245-s11-config-complete-fixture",
       "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s11_config_complete_fixture.c",
-      "libraries": [
-        "app",
-        "opennt-bop",
-        "opennt-host",
-        "adapter-win32",
-        "adapter-softpc",
-        "session",
-        "bx-mantle",
-        "bx-core",
-        "adapter-bop"
-      ],
-      "platformLibraries": [
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t245-s9-demdasd-drive-policy-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s9_demdasd_drive_policy_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",

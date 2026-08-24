@@ -424,10 +424,6 @@ int wmain(int argc, wchar_t **argv)
         ntdos64_dos_safe_alias_v1_release(&dos_root_alias);
         return 3;
     }
-    /* OpenNT parity: host-drive enumeration is not a CLI capability filter.
-     * The retained request fields are zero, which means no added exclusion. */
-    request.admitted_drive_mask = 0u;
-    request.excluded_drive_mask = 0u;
     request.mutation_mode = mutation_mode;
     request.instruction_tick_budget = lifecycle_policy.instruction_tick_budget;
     request.guest_memory_bytes = guest_memory_bytes;
@@ -438,8 +434,7 @@ int wmain(int argc, wchar_t **argv)
         return 3;
     }
     if (validate_only) {
-        wprintf(L"ntdos64-native: request include=%08x exclude=%08x mode=%u budget=%llu guest-memory=%llu reserved-base=%llu reserved-bytes=%llu observe-bop-sequence=%u observe-command-bootstrap=%u observe-ud-sequence=%u observe-first-fault=%u observe-terminal-position=%u\n",
-            request.admitted_drive_mask, request.excluded_drive_mask,
+        wprintf(L"ntdos64-native: request mode=%u budget=%llu guest-memory=%llu reserved-base=%llu reserved-bytes=%llu observe-bop-sequence=%u observe-command-bootstrap=%u observe-ud-sequence=%u observe-first-fault=%u observe-terminal-position=%u\n",
             request.mutation_mode, (unsigned long long)request.instruction_tick_budget,
             (unsigned long long)request.guest_memory_bytes,
             (unsigned long long)request.reserved_memory_base,

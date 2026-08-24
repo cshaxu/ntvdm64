@@ -57,40 +57,9 @@ static BYTE number_of_fdisk;
 static DWORD max_align_factor, cur_align_factor;
 static WORD fdisk_open_count;
 static int g_dasd_initialized;
-static bx_ntvdm_host_drive_snapshot_v1 g_drive_snapshot;
-static int g_drive_snapshot_bound;
 
 extern PUSHORT pusCurrentPDB;
 extern WORD *pFDAccess;
-
-int bx_ntvdm_demdasd_drive_policy_bind(
-    const bx_ntvdm_host_drive_snapshot_v1 *snapshot)
-{
-    if (!bx_ntvdm_host_drive_snapshot_v1_valid(snapshot)) return 0;
-    g_drive_snapshot = *snapshot;
-    g_drive_snapshot_bound = 1;
-    return 1;
-}
-
-void bx_ntvdm_demdasd_drive_policy_reset(void)
-{
-    memset(&g_drive_snapshot, 0, sizeof(g_drive_snapshot));
-    g_drive_snapshot_bound = 0;
-}
-
-int bx_ntvdm_demdasd_drive_policy_bound(void)
-{
-    return g_drive_snapshot_bound &&
-        bx_ntvdm_host_drive_snapshot_v1_valid(&g_drive_snapshot);
-}
-
-int bx_ntvdm_demdasd_drive_policy_admits(BYTE drive)
-{
-    uint32_t bit;
-    if (!bx_ntvdm_demdasd_drive_policy_bound() || drive >= 26u) return 0;
-    bit = UINT32_C(1) << drive;
-    return (g_drive_snapshot.admitted_mask & bit) != 0u;
-}
 
 USHORT bx_ntvdm_demdasd_get_cs(void) { return g_cpu_shadow.cs; }
 USHORT bx_ntvdm_demdasd_get_ip(void) { return g_cpu_shadow.ip; }
@@ -163,16 +132,9 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)
     if (drive >= 26u || bpb == NULL || geometry == NULL) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
-    /* Divergence from nt_fdisk.c: its process host saw every fixed letter.
-     * This CLI session has a copied immutable admission snapshot.  Reject
-     * before the first host volume query so imported demFdiskInit can retain
-     * its original enumeration without observing excluded host media. */
-    if (!bx_ntvdm_demdasd_drive_policy_admits(drive)) {
-        SetLastError(ERROR_INVALID_DRIVE); return FALSE;
-    }
     root[0] = (CHAR)('A' + drive); volume[4] = root[0];
-    /* Original nt_fdisk/demFdiskInit eligibility remains: an admitted letter
-     * still has to be a presently fixed host volume. */
+    /* Original nt_fdisk/demFdiskInit eligibility: a letter must be a present
+     * fixed host volume. */
     if (GetDriveTypeA(root) != DRIVE_FIXED) {
         SetLastError(ERROR_INVALID_DRIVE); return FALSE;
     }

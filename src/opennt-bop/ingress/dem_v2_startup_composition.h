@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-#include "opennt-host/dem/bx_ntvdm_host_drive_policy.h"
 #include "app/bx_ntvdm_initial_state_abi.h"
 #include "app/bx_ntvdm_initial_state_action_v1.h"
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
@@ -12,8 +11,7 @@
  * mechanical stage records only; no legacy BOP provider/session is exposed. */
 int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile, uint32_t profile_chars,
     const uint16_t *root, uint32_t root_chars, const uint16_t *launch,
-    uint32_t launch_chars, uint32_t include_mask, uint32_t exclude_mask,
-    uint32_t mutation_mode);
+    uint32_t launch_chars, uint32_t mutation_mode);
 void bx_ntvdm_dem_v2_startup_reset(void);
 int bx_ntvdm_dem_v2_startup_prepare_machine_stage_request(
     struct bx_ntvdm_machine_stage_v1_request *request);
@@ -30,10 +28,5 @@ int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,
  * form which OpenNT cmdconf's SHELL= producer can pass to guest sysconf. */
 int bx_ntvdm_dem_v2_startup_copy_bootstrap_command(char *command_path,
     uint32_t command_path_capacity);
-
-/* The native engine captures this once at composition admission.  It is
- * adapter-private session data, never a guest or mantle ABI. */
-const bx_ntvdm_host_drive_snapshot_v1 *
-bx_ntvdm_dem_v2_startup_drive_snapshot(void);
 
 #endif

@@ -6,7 +6,6 @@
  * compile probes admit each remaining historical raw-device dependency. */
 
 #include "opennt_demgset_compat.h"
-#include "opennt-bop/dem/opennt_demdasd_ioctl_composition.h"
 
 /* Original source: src/opennt/base/mvdm/dos/dem/dem.h and dosdef.h.
  * The imported units need only these dispatcher spellings; their selection

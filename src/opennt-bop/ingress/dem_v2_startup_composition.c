@@ -19,7 +19,6 @@ typedef struct bx_ntvdm_dem_v2_startup {
     byob_image ntio, ntdos, command, target;
     bx_ntvdm_initial_state_v1 initial_state;
     byob_launch_plan_v2 launch;
-    bx_ntvdm_host_drive_snapshot_v1 drive_snapshot;
     char command_application[MAX_PATH + 1u];
     char bootstrap_command_path[64u];
     uint16_t command_drive;
@@ -126,8 +125,7 @@ void bx_ntvdm_dem_v2_startup_reset(void)
 
 int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     uint32_t profile_chars, const uint16_t *root_input, uint32_t root_chars,
-    const uint16_t *launch, uint32_t launch_chars, uint32_t include_mask,
-    uint32_t exclude_mask, uint32_t mutation_mode)
+    const uint16_t *launch, uint32_t launch_chars, uint32_t mutation_mode)
 {
     wchar_t profile[261], root[261], config_source[MAX_PATH], autoexec_source[MAX_PATH];
     byob_profile_selection selection;
@@ -154,8 +152,6 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
         byob_image_load_named(root, L"NTIO.SYS", &runtime.ntio) != BYOB_IMAGE_OK ||
         byob_image_load_named(root, L"NTDOS.SYS", &runtime.ntdos) != BYOB_IMAGE_OK ||
         byob_image_load_named(root, L"COMMAND.COM", &runtime.command) != BYOB_IMAGE_OK ||
-        !bx_ntvdm_host_drive_snapshot_v1_capture(include_mask, exclude_mask,
-            &runtime.drive_snapshot) ||
         !configure_opennt_dos_directory(root, &selection) ||
         !configure_bootstrap_command(root) ||
         !configure_command_source(launch, launch_chars, &selection)) {
@@ -186,14 +182,6 @@ int bx_ntvdm_dem_v2_startup_copy_bootstrap_command(char *command_path,
     if (bytes > command_path_capacity) return 0;
     memcpy(command_path, runtime.bootstrap_command_path, bytes);
     return 1;
-}
-
-const bx_ntvdm_host_drive_snapshot_v1 *
-bx_ntvdm_dem_v2_startup_drive_snapshot(void)
-{
-    return runtime.installed &&
-        bx_ntvdm_host_drive_snapshot_v1_valid(&runtime.drive_snapshot) ?
-        &runtime.drive_snapshot : NULL;
 }
 
 int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,

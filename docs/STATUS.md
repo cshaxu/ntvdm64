@@ -22,6 +22,12 @@ to S9; S8 restores original owner packages and removes the listed shims.
 | Exit Criteria | No include/exclude-drive policy remains; all host drives use the OpenNT-compatible default projection; the named namespace/XMS/Redirector/top-level shims and misplaced header are gone; original providers and only declared existing-adapter seams are linked and tested; every imported edit is README-registered. |
 | Admission | Owner explicitly directed this reprioritization and source replacement. The former adapter-root cleanup is deferred intact to S9. |
 
+**S8 P1 progress:** the self-authored host namespace and all include/exclude
+drive-policy production/test inputs have been removed.  The preserved original
+DEM paths now directly query present host drives; the unrelated configuration-
+complete fixture remains a separately recorded `exit=2` limitation.  See the
+[P1 removal evidence](etc/evidence/m0-t261-s8-p1-host-namespace-drive-policy-removal-001.md).
+
 ### M0 T261 S7 — closed: dependency-free session owner split
 
 | Field | Record |

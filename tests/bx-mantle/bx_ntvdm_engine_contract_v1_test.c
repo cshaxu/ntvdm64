@@ -27,8 +27,6 @@ int main(void)
     descriptor_set(request.launch_descriptor, "2,1,e,00",
         &request.launch_descriptor_chars);
     request.instruction_tick_budget = UINT64_C(1000);
-    request.admitted_drive_mask = UINT32_C(4);
-    request.excluded_drive_mask = UINT32_C(16);
     if (request.mutation_mode != BX_NTVDM_ENGINE_MUTATION_MODE_V1_DIRECT ||
         !bx_ntvdm_engine_request_v1_valid(&request)) return 1;
     request.mutation_mode = BX_NTVDM_ENGINE_MUTATION_MODE_V1_READONLY;

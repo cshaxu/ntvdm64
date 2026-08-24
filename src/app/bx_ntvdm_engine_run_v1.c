@@ -51,7 +51,6 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         request->profile_descriptor, request->profile_descriptor_chars,
         request->root_descriptor, request->root_descriptor_chars,
         request->launch_descriptor, request->launch_descriptor_chars,
-        request->admitted_drive_mask, request->excluded_drive_mask,
         request->mutation_mode);
     if (install_status != 1)
     {

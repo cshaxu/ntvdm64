@@ -34,7 +34,6 @@ static int request_set(struct bx_ntvdm_engine_request_v1 *request,
             BX_NTVDM_ENGINE_V1_MAX_LAUNCH_CHARS, L"2,1,e,00",
             &request->launch_descriptor_chars)) return 0;
     request->instruction_tick_budget = UINT64_C(1000000);
-    request->admitted_drive_mask = UINT32_C(1) << 2u;
     return bx_ntvdm_engine_request_v1_valid(request);
 }
 
