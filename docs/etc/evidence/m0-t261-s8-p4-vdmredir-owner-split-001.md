@@ -47,6 +47,9 @@ second guest/host handle mapper and never issues guest-visible IDs.
 
 - no production include of `opennt-host/redir/redir_session_shim.h` remains;
 - no production `bx_ntvdm_redir_load/read/write/...` helper remains;
+- native-session teardown calls `VrUninitialize` even when the guest did not
+  first issue service `57:01`, so the original owner list cannot survive a
+  session reset;
 - fresh `r006` MSVC targeted objects passed:
   `vrnmpipe.c`, `opennt_demfile_composition.c`,
   `redir_native_session.c`, and `opennt_dem_ccpu_sas_facade.c`;

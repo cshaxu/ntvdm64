@@ -151,6 +151,7 @@ void bx_ntvdm_redir_native_session_unbind(bx_ntvdm_redir_native_session *session
 {
     if (session != NULL && g_active_session == session) reset_async_pipes();
     if (session != NULL && g_active_session == session) reset_mailslots();
+    if (session != NULL && g_active_session == session) VrUninitialize();
     if (session != NULL && g_active_session == session) g_active_session = NULL;
     if (session_valid(session)) {
         session->bound = 0u;
