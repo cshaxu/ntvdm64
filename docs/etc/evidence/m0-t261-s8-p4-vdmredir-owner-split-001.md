@@ -25,6 +25,11 @@ The reached synchronous DEM named-pipe contract is now owned by re-rooted
 private list is the original VDMREDIR pipe-name metadata list; it is not a
 second guest/host handle mapper and never issues guest-visible IDs.
 
+`VrConvertLocalNtPipeName` also retains the original allocation/copy ordering:
+it returns an allocated/copy-normalized buffer for remote UNC names, maps only
+the local computer name to `\\.`, and canonicalizes forward slashes.  It does
+not return the caller's source pointer as an optimization.
+
 ## Recovery ladder
 
 1. Direct compile of the complete historical units was examined first.

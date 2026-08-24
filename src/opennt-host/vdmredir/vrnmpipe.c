@@ -151,20 +151,39 @@ BOOL VrWriteNamedPipe(HANDLE Handle, LPBYTE Buffer, DWORD Buflen,
 
 LPSTR VrConvertLocalNtPipeName(LPSTR Buffer, LPSTR Name)
 {
-    DWORD computer_bytes = MAX_COMPUTERNAME_LENGTH + 1u;
-    CHAR computer[MAX_COMPUTERNAME_LENGTH + 1u];
-    LPSTR pipe, result;
-    size_t bytes;
-    if (Name == NULL || !VrInitialized()) { SetLastError(ERROR_INVALID_FUNCTION); return NULL; }
-    pipe = strchr(Name + 2, '\\');
-    if (pipe == NULL) pipe = strchr(Name + 2, '/');
-    if (pipe == NULL) { SetLastError(ERROR_BAD_PATHNAME); return NULL; }
-    if (!GetComputerNameA(computer, &computer_bytes) ||
-        _strnicmp(Name + 2, computer, (size_t)(pipe - (Name + 2))) != 0) return Name;
-    bytes = strlen(pipe) + 4u;
-    result = Buffer != NULL ? Buffer : (LPSTR)LocalAlloc(LMEM_FIXED, bytes);
-    if (result == NULL) return NULL;
-    memcpy(result, "\\\\.", 3u);
-    strcpy(result + 3u, pipe);
-    return result;
+    DWORD prefix_length, pipe_length;
+    LPSTR pipe_name;
+    static CHAR this_computer_name[MAX_COMPUTERNAME_LENGTH + 1u];
+    static DWORD this_computer_name_length = 0xffffffffu;
+    BOOL mapped = FALSE;
+    if (Name == NULL || Name[0] == '\0' || Name[1] == '\0') {
+        SetLastError(ERROR_BAD_PATHNAME);
+        return NULL;
+    }
+    if (this_computer_name_length == 0xffffffffu) {
+        this_computer_name_length = (DWORD)sizeof(this_computer_name);
+        if (!GetComputerNameA(this_computer_name, &this_computer_name_length))
+            this_computer_name_length = 0u;
+    }
+    if (Buffer == NULL) Buffer = (LPSTR)LocalAlloc(LMEM_FIXED, strlen(Name) + 1u);
+    if (Buffer == NULL) return NULL;
+    pipe_name = strchr(Name + 2, '\\');
+    if (pipe_name == NULL) pipe_name = strchr(Name + 2, '/');
+    if (pipe_name == NULL) { SetLastError(ERROR_BAD_PATHNAME); return NULL; }
+    pipe_length = (DWORD)strlen(pipe_name);
+    prefix_length = (DWORD)(pipe_name - Name);
+    if (this_computer_name_length != 0u &&
+        prefix_length - 2u == this_computer_name_length &&
+        _strnicmp(this_computer_name, Name + 2, this_computer_name_length) == 0) {
+        strcpy(Buffer, "\\\\.");
+        mapped = TRUE;
+    }
+    if (!mapped) {
+        strncpy(Buffer, Name, prefix_length);
+        Buffer[prefix_length] = '\0';
+    }
+    strcat(Buffer, pipe_name);
+    while ((pipe_name = strchr(Buffer, '/')) != NULL) *pipe_name = '\\';
+    (void)pipe_length;
+    return Buffer;
 }
