@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T262 S4 — opennt-host subset and minimal-edit closure.** This
-packet verifies that every retained host subset/edit has a local marker and
-one README index row.
+**Active: M0 T262 S3 P2 — OpenNT guest deployable and build-input binary
+mirror.** This owner-directed expansion records the original DOS/V86 binary,
+MAP/SYM and library inputs copied under `opennt-guest` before T262 proceeds to
+its final cross-component closure.
 
 ## Active Packet
 
@@ -38,13 +39,13 @@ closure](etc/evidence/m0-t262-s4-opennt-host-subset-marker-closure-001.md).
 | --- | --- |
 | Identifier Mode | `M0 T262 S3`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | T262 proposal S3 and the owner-approved mirror standard; T262/S1 proves `sysmac.lib` is exact OpenNT material but is untracked. |
-| Objective | Make the `opennt-guest` mirror complete and versioned while preserving byte-identical DOS/V86 and WOW16 source/input trees. |
-| Non-goals | No guest source edit, guest rebuild, artifact replacement, toolchain change, packaging change or use of unrelated untracked historical tools. |
+| Objective | Make the `opennt-guest` mirror complete and versioned while preserving byte-identical DOS/V86 and WOW16 source/input trees and their original deployable binaries. |
+| Non-goals | No guest source edit, guest rebuild, artifact replacement, toolchain change, packaging policy or use of unrelated historical tools. |
 | Reference Baseline | T262/S1 hash audit; `refs/opennt/base/mvdm/dos/v86` and `refs/opennt/base/mvdm/wow16`; `opennt-guest/README.md`. |
-| Files And ABI Surface | `src/opennt-guest/dos-v86/cmd/append/sysmac.lib`, guest README, T262 evidence/status and documentation inventory only. |
+| Files And ABI Surface | The exact `sysmac.lib` input plus owner-copied original OpenNT DOS/V86 `*.COM`, `*.EXE`, `*.SYS`, `*.BIN`, `*.LIB`, `*.MAP`, `*.SYM` and `*.OBJ` inputs under the guest source root; guest README, T262 evidence/status and documentation inventory only. |
 | Applicable Rules | Original guest inputs are byte-identical; zero source changes means zero local divergence entries; artifact provenance remains explicit. |
-| Verification | Full guest-path hash comparison, direct hash proof for `sysmac.lib`, Git tracked-file check, no `DIVERGENCE` marker scan, documentation governance and scoped diff check. |
-| Expected Markers | 580/580 source/input paths match OpenNT and are tracked; no non-mirror or modified guest file exists. |
+| Verification | Full guest-path hash comparison, direct hash proof for `sysmac.lib` and every owner-copied binary, build library and MAP/SYM companion, Git tracked-file check, no `DIVERGENCE` marker scan, documentation governance and scoped diff check. |
+| Expected Markers | 580/580 source/input paths and all 99 admitted DOS/V86 package/build inputs match OpenNT or OpenNT-4.5 and are tracked; no non-mirror or modified guest file exists. |
 | Asset Needs | Existing OpenNT reference tree, Git index and current guest README. |
 | Reporting Requirements | Record `sysmac.lib` source path/hash, distinguish it from unrelated untracked artifacts, and state that the empty divergence register remains correct. |
 | Stop Conditions | A byte mismatch, unknown binary provenance, or a build-generated file masquerading as original input. |
@@ -55,6 +56,11 @@ closure](etc/evidence/m0-t262-s4-opennt-host-subset-marker-closure-001.md).
 **S3 P1 completed:** all 580 guest files hash-match OpenNT; the exact
 `sysmac.lib` build input is now governed as a mirror file, with no guest
 source edit or local exception. See the [S3 evidence](etc/evidence/m0-t262-s3-opennt-guest-zero-difference-closure-001.md).
+
+**S3 P2 completed:** the owner-copied DOS/V86 package binaries, build
+libraries, objects and MAP/SYM companions are each byte-identical to an
+OpenNT or OpenNT-4.5 source-root peer; their 99-file provenance ledger is
+[S3 binary-import evidence](etc/evidence/m0-t262-s3-opennt-guest-binary-import-001.md).
 
 ### M0 T262 S2 — bx-core local-exception and non-mirror cleanup
 
