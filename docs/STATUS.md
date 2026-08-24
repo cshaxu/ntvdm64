@@ -2,11 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T263 S4 — OpenNT reusable utility-package decision.** This
-packet admits only the complete original `suballoc` package, and leaves mixed
-`vdmutils` products with their actual guest/host owners.
+**Active: M0 T263 S5 — OpenNT optional host extension-package preparation.**
+This packet preserves original VDD/debug/fax host packages without declaring
+their historic NT4 product shells linked or runtime-available.
 
 ## Active Packet
+
+### M0 T263 S5 — OpenNT optional host extension-package preparation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S5`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T263 proposal S5; owner classified VDD, debugger and fax extension packages as `opennt-host`. |
+| Objective | Retain qualifying original host product packages source-identically with their original internal paths and an explicit non-link disposition. |
+| Non-goals | No VDD/debugger/fax/WOW runtime capability, default link, product-shell recreation, adapter creation or BOP implementation. |
+| Reference Baseline | `O:\\repos.external\\opennt\\base\\mvdm\\{bde,dbg,fax,ieuvddex,vdd,vdmdbg,vdmexts}`, Git `5c5b979e`; T263/S1 census. |
+| Files And ABI Surface | 138 source/input files across seven original host packages, host README, S5 evidence and status only; no ABI change. |
+| Applicable Rules | Source policy, original host mirror rule, optional-provider ownership and no preemptive adapter rule. |
+| Verification | Recursive source-relative counts and SHA-256 equality for all seven packages; no added Ninja edge. |
+| Expected Markers | 138 exact files, zero new `HOST-DIV` entries, zero default link/runtime capability claim. |
+| Asset Needs | Pinned OpenNT source root and Git provenance. |
+| Reporting Requirements | Record package counts, exact owner and explicit absence of a capability claim. |
+| Stop Conditions | Hash/path mismatch, host package mixed into a mechanical adapter, source change without register, new default link or runtime claim pauses the packet. |
+| Exit Criteria | All seven original packages are exact and indexed, host README/evidence agree, and no product behavior expands. |
+| Original Owner Request | “`vdd`、`ieuvddex`、`fax`…属于 opennt-host；`bde`、`dbg`、`vdmdbg`、`vdmexts`…同理。” |
+| Similar-Issue Sweep | Debug source mistaken for Bochs logic, VDD package auto-enable, new generic adapter, host-source divergence and implicit link drift. |
+
+**S5 P1 completed:** 138 original host extension files across the seven
+packages are source-identical and recursively SHA-256 verified. See the
+[admission evidence](etc/evidence/m0-t263-s5-opennt-host-extension-package-admission-001.md).
 
 ### M0 T263 S4 — OpenNT reusable utility-package decision
 

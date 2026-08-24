@@ -17,9 +17,14 @@ the explicitly declared OpenNT host ABI consumed by `opennt-bop` and `app`.
 
 ## Production layout and local divergence register
 
-The live source is grouped by the OpenNT owner that composes it.  Direct host
-imports retain their original `softpc.new/host/...` path; remaining recovery
-work is grouped under `dem/`, `redir/`, `top_level/` and `config/`.
+The live source is grouped by the OpenNT owner that composes it. Direct host
+imports retain their original `softpc.new/host/...` path; the original
+optional host extension packages `bde/`, `dbg/`, `fax/`, `ieuvddex/`, `vdd/`,
+`vdmdbg/` and `vdmexts/` retain their original package paths. Their 138-file
+source-identical import and non-link disposition are recorded in
+`docs/etc/evidence/m0-t263-s5-opennt-host-extension-package-admission-001.md`.
+Remaining recovery work is grouped under `dem/`, `redir/`, `top_level/` and
+`config/`.
 COMMAND BOP/session composition is intentionally owned by `opennt-bop`, not
 this component.  The former generic `capability/` staging directory is not a
 product category.
