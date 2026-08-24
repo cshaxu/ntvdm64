@@ -2,8 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T261 S5** — selector-blind copied-frame ingress and typed
-completion split from `opennt-bop` to `adapter-bop`.
+**Active: M0 T261 S5 — closed** — selector-blind copied-frame ingress and
+typed completion are split from `opennt-bop` to `adapter-bop`; no S6
+implementation is admitted.
 
 ## Active Packet
 
@@ -111,7 +112,7 @@ build root is explicitly excluded from evidence.  See the
 [S4 owner closure](etc/evidence/m0-t261-s4-p7-dem-host-owner-closure-001.md).
 S5 is now admitted as the next bounded owner split.  It must not interpret a
 selector in `adapter-bop` or change the already-closed DEM host boundary.
-S5 P1 has completed that split: `adapter-bop` owns the generic CPU entry and
+S5 P1 is closed in `ab49a2d4`: `adapter-bop` owns the generic CPU entry and
 the unchanged copied record; `opennt-bop` retains the renamed selector route;
 and `app` owns bind/reset around one engine run.  The actual formal r002 native
 link and focused ingress fixture pass; see
