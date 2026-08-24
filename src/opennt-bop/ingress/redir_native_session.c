@@ -89,24 +89,6 @@ typedef struct bx_ntvdm_redir_async_pipe_record {
 static bx_ntvdm_redir_async_pipe_record g_async_pipes[BX_NTVDM_REDIR_ASYNC_PIPE_CAPACITY];
 static volatile long g_async_next_serial = 0;
 
-/* `vrmslot.h:VR_MAILSLOT_INFO` deliberately has both a DOS Handle16 and a
- * native Handle32.  Keep the same two-layer shape: the existing shared
- * manager owns Handle32; this Redirector-only index owns the historical
- * invented 16-bit mailslot number.  It never truncates a native HANDLE. */
-#define BX_NTVDM_REDIR_MAILSLOT_CAPACITY 32u
-typedef struct bx_ntvdm_redir_mailslot_record {
-    uint16_t legacy_handle, pdb, buffer_segment, buffer_offset, selector;
-    uint32_t host_token, message_size, slot_size;
-    /* Win32 mailslots have no non-destructive read primitive.  A successful
-     * Peek therefore owns one copied message until the matching Read, which
-     * preserves the DOS-visible peek/read contract without exposing a host
-     * buffer or HANDLE to the guest. */
-    uint8_t *peek_bytes;
-    uint32_t peek_size, peek_next_size;
-} bx_ntvdm_redir_mailslot_record;
-static bx_ntvdm_redir_mailslot_record g_mailslots[BX_NTVDM_REDIR_MAILSLOT_CAPACITY];
-static uint16_t g_next_mailslot_handle = 1u;
-
 static int session_valid(const bx_ntvdm_redir_native_session *session)
 {
     return session != NULL && session->magic == BX_NTVDM_REDIR_NATIVE_SESSION_MAGIC &&
@@ -147,18 +129,9 @@ int bx_ntvdm_redir_native_session_bind(bx_ntvdm_redir_native_session *session)
 
 static void reset_mailslots(void)
 {
-    uint32_t index;
-    if (g_active_session != NULL && g_active_session->direct != NULL) {
-        for (index = 0u; index < BX_NTVDM_REDIR_MAILSLOT_CAPACITY; ++index) {
-            DWORD error;
-            free(g_mailslots[index].peek_bytes);
-            if (g_mailslots[index].host_token != 0u)
-                (void)g_active_session->direct->release_handle(
-                    g_active_session->direct->state, g_mailslots[index].host_token, &error);
-        }
-    }
-    memset(g_mailslots, 0, sizeof(g_mailslots));
-    g_next_mailslot_handle = 1u;
+    if (g_active_session != NULL && g_active_session->direct != NULL)
+        VrpResetMailslots(g_active_session->direct->state,
+            g_active_session->direct->release_handle);
 }
 
 static void reset_async_pipes(void)
@@ -181,13 +154,6 @@ static void reset_async_pipes(void)
         record->pipe = INVALID_HANDLE_VALUE;
     }
     (void)_InterlockedExchange(&g_async_next_serial, 0);
-}
-
-static void clear_mailslot(bx_ntvdm_redir_mailslot_record *record)
-{
-    if (record == NULL) return;
-    free(record->peek_bytes);
-    memset(record, 0, sizeof(*record));
 }
 
 void bx_ntvdm_redir_native_session_unbind(bx_ntvdm_redir_native_session *session)
@@ -449,32 +415,6 @@ static int local_mailslot_name(const char *oem, wchar_t *wide, uint32_t capacity
     return chars > 0;
 }
 
-static bx_ntvdm_redir_mailslot_record *find_mailslot(uint16_t legacy_handle)
-{
-    uint32_t index;
-    for (index = 0u; index < BX_NTVDM_REDIR_MAILSLOT_CAPACITY; ++index)
-        if (g_mailslots[index].legacy_handle == legacy_handle) return &g_mailslots[index];
-    return NULL;
-}
-
-static bx_ntvdm_redir_mailslot_record *allocate_mailslot(void)
-{
-    uint32_t index, attempts;
-    bx_ntvdm_redir_mailslot_record *record = NULL;
-    for (index = 0u; index < BX_NTVDM_REDIR_MAILSLOT_CAPACITY; ++index)
-        if (g_mailslots[index].legacy_handle == 0u) { record = &g_mailslots[index]; break; }
-    if (record == NULL) return NULL;
-    for (attempts = 0u; attempts < UINT16_MAX; ++attempts) {
-        uint16_t candidate = g_next_mailslot_handle++;
-        if (candidate != 0u && find_mailslot(candidate) == NULL) {
-            memset(record, 0, sizeof(*record));
-            record->legacy_handle = candidate;
-            return record;
-        }
-    }
-    return NULL;
-}
-
 static void set_gpr16(struct bx_ntvdm_generic_ud_outcome_v1 *outcome,
     uint32_t index, uint16_t value)
 {
@@ -485,68 +425,79 @@ static void set_gpr16(struct bx_ntvdm_generic_ud_outcome_v1 *outcome,
 static int mailslot_make(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    char oem[260]; wchar_t name[260]; HANDLE host; DWORD error = ERROR_INVALID_HANDLE; uint32_t token = 0u;
-    bx_ntvdm_redir_mailslot_record *record;
+    char oem[260]; wchar_t name[260]; HANDLE host; DWORD error = ERROR_INVALID_HANDLE;
+    uint32_t token = 0u, name_length;
+    PVR_MAILSLOT_INFO record;
     if (!read_oem_string(word_at(event->ds), word_at(event->esi), oem, sizeof(oem)) ||
         !local_mailslot_name(oem, name, sizeof(name) / sizeof(name[0]))) {
         resume_with_error(event, outcome, GetLastError()); return 1;
     }
-    record = allocate_mailslot();
-    if (record == NULL) { resume_with_error(event, outcome, ERROR_TOO_MANY_OPEN_FILES); return 1; }
+    name_length = (uint32_t)strlen(oem);
+    if (name_length <= 10u) { resume_with_error(event, outcome, ERROR_PATH_NOT_FOUND); return 1; }
+    record = VrpAllocateMailslotStructure(name_length - 10u);
+    if (record == NULL) { resume_with_error(event, outcome, ERROR_PATH_NOT_FOUND); return 1; }
     host = CreateMailslotW(name, (DWORD)word_at(event->ebx),
         MAILSLOT_WAIT_FOREVER, NULL);
     if (host == INVALID_HANDLE_VALUE ||
         !g_active_session->direct->publish_handle(g_active_session->direct->state,
-            host, &token, &error)) {
-        if (host != INVALID_HANDLE_VALUE) CloseHandle(host);
-        clear_mailslot(record);
+            host, &token, &error) || token > UINT16_MAX) {
+        if (host != INVALID_HANDLE_VALUE && token != 0u)
+            (void)g_active_session->direct->release_handle(
+                g_active_session->direct->state, token, &error);
+        else if (host != INVALID_HANDLE_VALUE) CloseHandle(host);
+        VrpFreeMailslotStructure(record);
         resume_with_error(event, outcome, host == INVALID_HANDLE_VALUE ? GetLastError() : error);
         return 1;
     }
-    record->host_token = token;
-    record->pdb = word_at(event->eax);
-    record->message_size = word_at(event->ebx);
-    record->slot_size = word_at(event->ecx);
-    record->selector = word_at(event->edx);
-    record->buffer_segment = word_at(event->es);
-    record->buffer_offset = word_at(event->edi);
+    record->DosPdb = word_at(event->eax);
+    record->Handle16 = (WORD)token;
+    record->Handle32 = host;
+    record->BufferAddress.Selector = word_at(event->es);
+    record->BufferAddress.Offset = word_at(event->edi);
+    record->Selector = word_at(event->edx);
+    if (!GetMailslotInfo(host, &record->MessageSize, NULL, NULL, NULL))
+        record->MessageSize = word_at(event->ecx);
+    record->NameLength = name_length - 10u;
+    memcpy(record->Name, oem + 10u, record->NameLength + 1u);
+    VrpLinkMailslotStructure(record);
     resume_success(event, outcome);
-    set_gpr16(outcome, 0u, record->legacy_handle);
+    set_gpr16(outcome, 0u, record->Handle16);
     return 1;
 }
 
 static int mailslot_delete(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    bx_ntvdm_redir_mailslot_record *record = find_mailslot(word_at(event->ebx));
+    PVR_MAILSLOT_INFO record = VrpMapMailslotHandle16(word_at(event->ebx));
     DWORD error;
-    if (record == NULL || record->pdb != word_at(event->eax)) {
+    if (record == NULL || record->DosPdb != word_at(event->eax)) {
         resume_with_error(event, outcome, ERROR_INVALID_HANDLE); return 1;
     }
     if (!g_active_session->direct->release_handle(g_active_session->direct->state,
-            record->host_token, &error)) { resume_with_error(event, outcome, error); return 1; }
+            record->Handle16, &error)) { resume_with_error(event, outcome, error); return 1; }
+    (void)VrpUnlinkMailslotStructure(record->Handle16);
     resume_success(event, outcome);
-    set_gpr16(outcome, 2u, record->selector); /* DX */
-    set_gpr16(outcome, 7u, record->buffer_offset); /* DI */
+    set_gpr16(outcome, 2u, record->Selector); /* DX */
+    set_gpr16(outcome, 7u, record->BufferAddress.Offset); /* DI */
     outcome->segment_write_mask |= 1u; /* ES */
-    outcome->segment_values[0] = record->buffer_segment;
-    clear_mailslot(record);
+    outcome->segment_values[0] = record->BufferAddress.Selector;
+    VrpFreeMailslotStructure(record);
     return 1;
 }
 
 static int mailslot_info(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    bx_ntvdm_redir_mailslot_record *record = find_mailslot(word_at(event->ebx));
+    PVR_MAILSLOT_INFO record = VrpMapMailslotHandle16(word_at(event->ebx));
     HANDLE host; DWORD maximum, next, count, timeout;
     if (record == NULL || !g_active_session->direct->lookup_handle(
-            g_active_session->direct->state, record->host_token, &host) ||
+            g_active_session->direct->state, record->Handle16, &host) ||
         !GetMailslotInfo(host, &maximum, &next, &count, &timeout)) {
         resume_with_error(event, outcome, record == NULL ? ERROR_INVALID_HANDLE : GetLastError()); return 1;
     }
     resume_success(event, outcome);
     set_gpr16(outcome, 0u, (uint16_t)maximum);
-    set_gpr16(outcome, 3u, (uint16_t)record->slot_size);
+    set_gpr16(outcome, 3u, (uint16_t)maximum);
     set_gpr16(outcome, 1u, next == MAILSLOT_NO_MESSAGE ? 0u : (uint16_t)next);
     set_gpr16(outcome, 2u, 0u);
     set_gpr16(outcome, 6u, (uint16_t)count);
@@ -555,12 +506,12 @@ static int mailslot_info(const struct bx_ntvdm_generic_ud_event_v1 *event,
 
 static int mailslot_get_record(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome,
-    bx_ntvdm_redir_mailslot_record **out_record, HANDLE *out_host)
+    PVR_MAILSLOT_INFO *out_record, HANDLE *out_host)
 {
-    bx_ntvdm_redir_mailslot_record *record = find_mailslot(word_at(event->ebx));
+    PVR_MAILSLOT_INFO record = VrpMapMailslotHandle16(word_at(event->ebx));
     HANDLE host;
     if (record == NULL || !g_active_session->direct->lookup_handle(
-            g_active_session->direct->state, record->host_token, &host)) {
+            g_active_session->direct->state, record->Handle16, &host)) {
         resume_with_error(event, outcome, ERROR_INVALID_HANDLE);
         return 0;
     }
@@ -575,63 +526,36 @@ static int mailslot_query(HANDLE host, DWORD *next, DWORD *count)
     return GetMailslotInfo(host, &maximum, next, count, &timeout) != 0;
 }
 
-/* Read one actual message into an owned record.  The original BOP contract
- * carries no host pointer; this is intentionally bounded by the 16-bit DOS
- * message-size value recorded by VrMakeMailslot. */
-static int mailslot_fill_peek(bx_ntvdm_redir_mailslot_record *record, HANDLE host,
-    DWORD *error)
+static int mailslot_read(const struct bx_ntvdm_generic_ud_event_v1 *event,
+    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    DWORD next, count, read = 0u, following = 0u;
-    uint8_t *bytes;
-    if (record->peek_bytes != NULL) return 1;
-    if (!mailslot_query(host, &next, &count)) { *error = GetLastError(); return 0; }
-    if (next == MAILSLOT_NO_MESSAGE || count == 0u) {
-        record->peek_size = 0u;
-        record->peek_next_size = 0u;
-        return 1;
-    }
-    if (next > record->message_size || next > UINT16_MAX) {
-        *error = ERROR_INSUFFICIENT_BUFFER;
-        return 0;
-    }
-    bytes = (uint8_t *)malloc(next);
-    if (bytes == NULL) { *error = ERROR_NOT_ENOUGH_MEMORY; return 0; }
-    if (!ReadFile(host, bytes, next, &read, NULL)) {
-        *error = GetLastError(); free(bytes); return 0;
-    }
-    if (!mailslot_query(host, &following, &count)) {
-        *error = GetLastError(); free(bytes); return 0;
-    }
-    record->peek_bytes = bytes;
-    record->peek_size = read;
-    record->peek_next_size = following == MAILSLOT_NO_MESSAGE ? 0u : following;
-    return 1;
-}
-
-static int mailslot_peek_or_read(const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome, int destructive)
-{
-    bx_ntvdm_redir_mailslot_record *record;
+    PVR_MAILSLOT_INFO record;
     HANDLE host;
-    DWORD error = ERROR_INVALID_HANDLE;
+    DWORD read = 0u, next = MAILSLOT_NO_MESSAGE, count;
     if (!mailslot_get_record(event, outcome, &record, &host)) return 1;
-    if (!mailslot_fill_peek(record, host, &error)) {
-        resume_with_error(event, outcome, error); return 1;
+    if (!SetMailslotInfo(host, ((DWORD)word_at(event->edx) << 16) | word_at(event->ecx)) ||
+        !GetMailslotInfo(host, NULL, &next, &count, NULL)) {
+        resume_with_error(event, outcome, GetLastError()); return 1;
     }
-    if (record->peek_size != 0u && !guest_write_bytes(word_at(event->es),
-            word_at(event->edi), record->peek_bytes, record->peek_size)) {
+    if (next != MAILSLOT_NO_MESSAGE && next > record->MessageSize) {
+        resume_with_error(event, outcome, ERROR_INSUFFICIENT_BUFFER); return 1;
+    }
+    if (next != MAILSLOT_NO_MESSAGE && next != 0u) {
+        uint8_t *bytes = (uint8_t *)malloc(next);
+        if (bytes == NULL || !ReadFile(host, bytes, next, &read, NULL) ||
+            !guest_write_bytes(word_at(event->es), word_at(event->edi), bytes, read)) {
+            DWORD error = bytes == NULL ? ERROR_NOT_ENOUGH_MEMORY : GetLastError();
+            free(bytes); resume_with_error(event, outcome, error); return 1;
+        }
+        free(bytes);
+    }
+    if (!mailslot_query(host, &next, &count)) {
         resume_with_error(event, outcome, GetLastError()); return 1;
     }
     resume_success(event, outcome);
-    set_gpr16(outcome, 0u, (uint16_t)record->peek_size);
-    set_gpr16(outcome, 1u, (uint16_t)record->peek_next_size);
+    set_gpr16(outcome, 0u, (uint16_t)read);
+    set_gpr16(outcome, 1u, next == MAILSLOT_NO_MESSAGE ? 0u : (uint16_t)next);
     set_gpr16(outcome, 2u, 0u); /* DOS mailslot priority */
-    if (destructive) {
-        free(record->peek_bytes);
-        record->peek_bytes = NULL;
-        record->peek_size = 0u;
-        record->peek_next_size = 0u;
-    }
     return 1;
 }
 
@@ -674,16 +598,8 @@ static int mailslot_write(const struct bx_ntvdm_generic_ud_event_v1 *event,
 static int mailslot_terminate(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    uint32_t index;
-    for (index = 0u; index < BX_NTVDM_REDIR_MAILSLOT_CAPACITY; ++index) {
-        bx_ntvdm_redir_mailslot_record *record = &g_mailslots[index];
-        DWORD error;
-        if (record->legacy_handle != 0u && record->pdb == word_at(event->eax)) {
-            (void)g_active_session->direct->release_handle(
-                g_active_session->direct->state, record->host_token, &error);
-            clear_mailslot(record);
-        }
-    }
+    VrpRemoveProcessMailslots(word_at(event->eax), g_active_session->direct->state,
+        g_active_session->direct->release_handle);
     resume_success(event, outcome);
     return 1;
 }
@@ -731,7 +647,7 @@ static int dispatch_service(uint8_t service,
             VrPeekMailslot, 4u);
     case 0x0du: /* SVC_RDRREADMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
-        return mailslot_peek_or_read(event, outcome, 1);
+        return mailslot_read(event, outcome);
     case 0x0eu: /* SVC_RDRWRITEMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
         return mailslot_write(event, outcome);

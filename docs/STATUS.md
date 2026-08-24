@@ -61,8 +61,13 @@ its individual provider bodies remain the next recovery work.  The first
 direct `vrmslot.c` body, `VrPeekMailslot`, now replaces the former cached-peek
 rehost with OpenNT's explicit `ERROR_NOT_SUPPORTED` result; formal `r010`
 compiled it into `opennt-bop` and the Redirector fixture passed.  The original
-`VR_MAILSLOT_INFO` list and the remaining Make/Delete/Info/Read/Write/
-Terminate bodies are still pending; see the [P5 Peek evidence](etc/evidence/m0-t261-s8-p5-vrmslot-peek-source-recovery-001.md).
+`VR_MAILSLOT_INFO` record/list, token lookup and process-cleanup lifecycle now
+replace the former fixed array.  `BOP-DIV-058` retains the one session-owned
+opaque handle map rather than duplicating OpenNT's private bitmap; the focused
+r011 lifecycle fixture passes.  See the [P5 lifecycle
+evidence](etc/evidence/m0-t261-s8-p5-vrmslot-record-lifecycle-recovery-001.md).
+The remaining Make/Delete/Info/Read/Write/Terminate *source bodies* are still
+pending individual CCPU/SAS-facade recovery.
 
 ### M0 T261 S7 — closed: dependency-free session owner split
 

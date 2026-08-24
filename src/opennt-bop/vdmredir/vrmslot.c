@@ -8,6 +8,9 @@
  * NT mailslots.
  */
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "vrmslot_compat.h" /* DIVERGENCE(BOP-DIV-057): NT4 vdmredir/CCPU
                                * header closure is replaced by the declared
                                * same-shaped adapter-softpc facade. */
@@ -44,4 +47,112 @@ Return Value:
      */
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
+}
+
+/* The following list primitives retain the original vrmslot.c record order,
+ * list traversal and process cleanup ownership.  DIVERGENCE(BOP-DIV-058):
+ * original Handle16Bitmap allocation is replaced by the one session-owned
+ * opaque host-handle manager; the list receives its already-range-checked
+ * 16-bit token and never maps a native HANDLE itself. */
+
+#define MAILSLOT_PREFIX "\\MAILSLOT\\"
+#define MAILSLOT_PREFIX_LENGTH (sizeof(MAILSLOT_PREFIX) - 1u)
+
+static PVR_MAILSLOT_INFO MailslotInfoList = NULL;
+static PVR_MAILSLOT_INFO LastMailslotInfo = NULL;
+
+PVR_MAILSLOT_INFO VrpAllocateMailslotStructure(DWORD name_length)
+{
+    size_t bytes = sizeof(VR_MAILSLOT_INFO) + (size_t)name_length;
+    return (PVR_MAILSLOT_INFO)calloc(1u, bytes);
+}
+
+void VrpFreeMailslotStructure(PVR_MAILSLOT_INFO record)
+{
+    free(record);
+}
+
+void VrpLinkMailslotStructure(PVR_MAILSLOT_INFO record)
+{
+    if (record == NULL) return;
+    if (!LastMailslotInfo) MailslotInfoList = record;
+    else LastMailslotInfo->Next = record;
+    LastMailslotInfo = record;
+    record->Next = NULL;
+}
+
+PVR_MAILSLOT_INFO VrpUnlinkMailslotStructure(WORD handle16)
+{
+    PVR_MAILSLOT_INFO ptr, previous = NULL;
+    for (ptr = MailslotInfoList; ptr; ) {
+        if (ptr->Handle16 == handle16) {
+            if (!previous) MailslotInfoList = ptr->Next;
+            else previous->Next = ptr->Next;
+            if (LastMailslotInfo == ptr) LastMailslotInfo = previous;
+            break;
+        }
+        previous = ptr;
+        ptr = ptr->Next;
+    }
+    return ptr;
+}
+
+PVR_MAILSLOT_INFO VrpMapMailslotHandle16(WORD handle16)
+{
+    PVR_MAILSLOT_INFO ptr;
+    for (ptr = MailslotInfoList; ptr; ptr = ptr->Next)
+        if (ptr->Handle16 == handle16) break;
+    return ptr;
+}
+
+PVR_MAILSLOT_INFO VrpMapMailslotName(LPSTR name)
+{
+    PVR_MAILSLOT_INFO ptr;
+    DWORD name_length;
+    if (name == NULL || strlen(name) < MAILSLOT_PREFIX_LENGTH) return NULL;
+    name_length = (DWORD)(strlen(name) - MAILSLOT_PREFIX_LENGTH);
+    for (ptr = MailslotInfoList; ptr; ptr = ptr->Next)
+        if (ptr->NameLength == name_length &&
+            _stricmp(ptr->Name, name + MAILSLOT_PREFIX_LENGTH) == 0) break;
+    return ptr;
+}
+
+static void VrpReleaseMailslot(PVR_MAILSLOT_INFO ptr, void *state,
+    bx_ntvdm_vrmslot_release_fn release)
+{
+    DWORD ignored_error;
+    if (ptr == NULL) return;
+    if (release != NULL)
+        (void)release(state, (uint32_t)ptr->Handle16, &ignored_error);
+    VrpFreeMailslotStructure(ptr);
+}
+
+void VrpRemoveProcessMailslots(WORD dos_pdb, void *state,
+    bx_ntvdm_vrmslot_release_fn release)
+{
+    PVR_MAILSLOT_INFO ptr = MailslotInfoList, previous = NULL;
+    while (ptr != NULL) {
+        PVR_MAILSLOT_INFO next = ptr->Next;
+        if (ptr->DosPdb == dos_pdb) {
+            if (!previous) MailslotInfoList = next;
+            else previous->Next = next;
+            if (LastMailslotInfo == ptr) LastMailslotInfo = previous;
+            VrpReleaseMailslot(ptr, state, release);
+        } else {
+            previous = ptr;
+        }
+        ptr = next;
+    }
+}
+
+void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release)
+{
+    PVR_MAILSLOT_INFO ptr = MailslotInfoList;
+    MailslotInfoList = NULL;
+    LastMailslotInfo = NULL;
+    while (ptr != NULL) {
+        PVR_MAILSLOT_INFO next = ptr->Next;
+        VrpReleaseMailslot(ptr, state, release);
+        ptr = next;
+    }
 }

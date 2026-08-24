@@ -66,6 +66,7 @@ static int fixture_write(void *state, uint32_t address, const uint8_t *bytes, ui
 
 static int mailslot_regression(void)
 {
+    uint16_t mailslot_handle, second_mailslot_handle;
     mailslot_fixture_state state;
     bx_ntvdm_dem_direct_context direct;
     bx_ntvdm_redir_native_session session;
@@ -144,8 +145,13 @@ static int mailslot_regression(void)
     make_event(&event, 0x0bu);
     event.eax = 0x0042u; event.ebx = 64u; event.ecx = 64u;
     event.ds = 0x0010u; event.esi = 0u; event.es = 0x0020u; event.edi = 0x0004u;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 1u)) return 0;
-    make_event(&event, 0x0au); event.ebx = 1u;
+    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        !expect(&outcome, 0, outcome.gpr16_values[0]) || outcome.gpr16_values[0] == 0u) return 0;
+    /* DIVERGENCE(BOP-DIV-058): the session-owned host-handle map allocates
+     * opaque tokens across owners, so follow the returned token rather than
+     * the original private mailslot bitmap's first value. */
+    mailslot_handle = outcome.gpr16_values[0];
+    make_event(&event, 0x0au); event.ebx = mailslot_handle;
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 64u)) return 0;
     /* DosWriteMailslotStruct = timeout dword + 16:16 source buffer. */
     state.memory[0x200u] = 0u; state.memory[0x201u] = 0u;
@@ -156,24 +162,27 @@ static int mailslot_regression(void)
     make_event(&event, 0x0eu); event.ds = 0x0010u; event.esi = 0u;
     event.es = 0x0020u; event.edi = 0u; event.ecx = sizeof(message);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
-    make_event(&event, 0x0cu); event.ebx = 1u; event.es = 0x0010u; event.edi = 0x0400u;
+    make_event(&event, 0x0cu); event.ebx = mailslot_handle; event.es = 0x0010u; event.edi = 0x0400u;
     /* The original `vrmslot.c` explicitly declines DOS mailslot peek: the
      * Win32 mailslot API has no non-destructive read.  Do not retain the
      * former source-derived peek cache as a second provider. */
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_NOT_SUPPORTED)) return 0;
-    make_event(&event, 0x0du); event.ebx = 1u; event.es = 0x0010u; event.edi = 0x0420u;
+    make_event(&event, 0x0du); event.ebx = mailslot_handle; event.es = 0x0010u; event.edi = 0x0420u;
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, sizeof(message)) ||
         memcmp(state.memory + 0x520u, message, sizeof(message)) != 0) return 0;
-    make_event(&event, 0x09u); event.eax = 0x0042u; event.ebx = 1u;
+    make_event(&event, 0x09u); event.eax = 0x0042u; event.ebx = mailslot_handle;
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
     make_event(&event, 0x0bu);
     event.eax = 0x0042u; event.ebx = 64u; event.ecx = 64u;
     event.ds = 0x0010u; event.esi = 0u; event.es = 0x0020u; event.edi = 4u;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 2u)) return 0;
+    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        !expect(&outcome, 0, outcome.gpr16_values[0]) || outcome.gpr16_values[0] == 0u ||
+        outcome.gpr16_values[0] == mailslot_handle) return 0;
+    second_mailslot_handle = outcome.gpr16_values[0];
     make_event(&event, 0x0fu); event.eax = 0x0042u;
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
-    make_event(&event, 0x0au); event.ebx = 2u;
+    make_event(&event, 0x0au); event.ebx = second_mailslot_handle;
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         (outcome.eflags_values & 1u) == 0u || outcome.gpr16_values[0] != ERROR_INVALID_HANDLE) return 0;
     bx_ntvdm_redir_native_session_unbind(&session);
