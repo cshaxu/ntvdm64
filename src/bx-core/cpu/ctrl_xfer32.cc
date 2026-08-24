@@ -23,6 +23,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-004): retained real/V86 transfer checks and default-off IRET observation. */
 
 #ifndef BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
 #define BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION 0

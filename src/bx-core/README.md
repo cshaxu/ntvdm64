@@ -31,5 +31,28 @@ The S3 rename of `native_port_is_registered` is a mantle-local neutralization
 of a project-specific name; its declaration remains in the adopted `iodev.h`
 surface and is covered by `BX-IO-025`.
 
+## Per-file mirror divergence index
+
+This index is deliberately file-granular: the local `DIVERGENCE(<ID>)` marker
+in each named adopted file identifies the precise retained change group. The
+central register supplies the original admission evidence; this table does not
+authorize additional Bochs semantics.
+
+| Local ID | Original surface and retained minimal change | File |
+| --- | --- | --- |
+| `BX-CORE-DIV-001` | Real/V86 segment-limit compatibility profile guards and its state/entry propagation. | `cpu/access.cc`, `cpu/access32.cc`, `cpu/cpu.cc`, `cpu/cpu.h`, `cpu/ctrl_xfer16.cc`, `cpu/ctrl_xfer32.cc`, `cpu/exception.cc`, `cpu/icache.cc`, `cpu/init.cc`, `cpu/io.cc`, `cpu/stack.cc`, `cpu/string.cc` |
+| `BX-CORE-DIV-002` | Default-off copied segment-access observation around the retained access checks. | `cpu/access32.cc` |
+| `BX-CORE-DIV-003` | Default-off copied instruction, software-interrupt and physical-write observations. | `cpu/cpu.cc`, `cpu/cpu.h`, `cpu/instr.h`, `cpu/soft_int.cc`, `memory/memory.cc` |
+| `BX-CORE-DIV-004` | Default-off copied interrupt-return observation. | `cpu/ctrl_xfer16.cc`, `cpu/ctrl_xfer32.cc` |
+| `BX-UD-001` | Selector-blind copied `#UD` event/result seam. | `cpu/exception.cc` |
+| `BX-EXEC-016` | Typed Bochs-only real-mode entry setters and fetch invalidation. | `cpu/init.cc`, `cpu/cpu.h` |
+| `BX-BUILD-002` | Re-rooted FPU include spelling only; no declaration or behavior change. | `cpu/i387.h` |
+| `BX-MEM-007`, `BX-MEM-010`, `BX-MEM-020` | Checked ordinary-RAM copy/read/preflight declarations. | `memory/memory.h` |
+| `BX-MEM-024` | SIM-free reset-window memory initialization and minimal-machine friendship. | `memory/memory.h`, `memory/misc_mem.cc` |
+
+`cpu/bx_ntvdm_exception_intercept.h` was a project-authored, zero-consumer
+legacy declaration and is intentionally deleted by T262/S2 rather than being
+treated as a mirror exception.
+
 The future static library name is `bx-core` and its public include surface is
 only the explicitly declared Bochs mechanical API consumed by `bx-mantle`.

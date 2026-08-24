@@ -25,6 +25,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-001): retained compatibility-aware instruction-pointer advance. */
 
 #include "param_names.h"
 

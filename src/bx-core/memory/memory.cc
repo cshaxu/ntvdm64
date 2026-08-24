@@ -24,6 +24,7 @@
 #include "cpu/cpu.h"
 #include "iodev/iodev.h"
 #define LOG_THIS BX_MEM_THIS
+/* DIVERGENCE(BX-CORE-DIV-003): retained default-off copied physical-write observation. */
 
 //
 // Memory map inside the 1st megabyte:

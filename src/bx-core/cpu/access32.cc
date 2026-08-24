@@ -25,6 +25,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-002): retained segment profile and default-off observation guards. */
 
 #ifndef BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
 #define BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER 0

@@ -2,11 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T262 S1 — original-component mirror conformance audit.** This
-owner-admitted package audits and repairs the provenance, local divergence
-markers and README indexes for `bx-core`, `opennt-guest` and `opennt-host`.
+**Active: M0 T262 S2 — bx-core local-exception and non-mirror cleanup.**
+This packet repairs only the source-fidelity defects proven by T262/S1; it
+does not change CPU, memory, BOP or machine behavior.
 
 ## Active Packet
+
+### M0 T262 S2 — bx-core local-exception and non-mirror cleanup
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T262 S2`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T262/S1 audit plus owner direction that non-mirror files “不应该存在于该组件内，我们需要逐个审核并决定它们的去向.” |
+| Objective | Remove the unused project-authored `cpu/bx_ntvdm_exception_intercept.h` from `bx-core`, and make every retained modified Bochs file locally marked and individually indexed in `bx-core/README.md`. |
+| Non-goals | No change to any Bochs executable statement, feature predicate, include dependency, build target, runtime result, or central exception decision. |
+| Reference Baseline | [T262/S1 audit](etc/evidence/m0-t262-s1-original-component-mirror-audit-001.md), the pinned Bochs 2.6 tree, and the existing central external-intrusion register. |
+| Files And ABI Surface | The 18 audited `src/bx-core/cpu/*` and `memory/*` files, `src/bx-core/README.md`, the obsolete header and its focused boundary fixture, T262 evidence/status. |
+| Applicable Rules | `bx-core` is original Bochs with only registered minimum intrusions; every retained changed expression carries a nearby `DIVERGENCE(<ID>)`; a component README indexes each source file/exception; non-mirror files leave the component. |
+| Verification | Re-run file hash comparison, prove the obsolete header has no consumer before deletion, scan all non-identical files for local marker coverage, compare README file rows with diff files, run the existing #UD boundary fixture and formal affected Ninja closure. |
+| Expected Markers | Zero unmatched non-mirror `bx-core` files; 18/18 modified files have an explicit local marker and README index; 164 unchanged files retain exact source hashes. |
+| Asset Needs | Pinned Bochs 2.6 source, central exception register, existing #UD boundary fixture and formal Ninja manifest. |
+| Reporting Requirements | State whether each marker covers an existing central exception or a newly registered documentation-only index; report deletion of the obsolete header and every changed fixture path. |
+| Stop Conditions | Any purportedly unused header has a generated/indirect consumer, or any required marker would need a new CPU semantic exception rather than documenting an existing one. |
+| Exit Criteria | The obsolete non-mirror header is deleted or relocated to a proven owner; all 18 changed Bochs files have local markers and exact README rows; focused boundary verification and formal closure pass. |
+| Original Owner Request | “大部分文件应当1-1一致；部分文件可以是原版文件的子集，或者是少部分修改；所有子集文件或者少部分修改的点位，需要在本文件中加入注释，并且README.md提供该例外的索引。” |
+| Similar-Issue Sweep | Generated/include-only references, test-only headers, central/register drift, observation-only code, segment-limit profile branches, copied #UD state, and memory lifecycle helpers. |
+
+**S2 P1 completed:** the zero-consumer non-mirror header is deleted; all 18
+retained modified Bochs files have local markers and README rows. The focused
+boundary test and a 130-edge formal Ninja relink pass. See the [S2
+closure](etc/evidence/m0-t262-s2-bx-core-local-exception-closure-001.md).
 
 ### M0 T262 S1 — original-component mirror conformance audit
 

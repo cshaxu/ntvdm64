@@ -24,6 +24,9 @@
 #ifndef BX_INSTR_H
 #define BX_INSTR_H
 
+/* DIVERGENCE(BX-CORE-DIV-003): retained default-off instruction-history
+ * observation is mechanically copied and does not alter instruction decode. */
+
 class bxInstruction_c;
 
 typedef void BX_INSF_TYPE;

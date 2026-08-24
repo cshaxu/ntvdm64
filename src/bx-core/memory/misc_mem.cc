@@ -27,6 +27,7 @@
 #include "bx-core/cpu/cpu.h"
 #include "iodev/iodev.h"
 #define LOG_THIS BX_MEM(0)->
+/* DIVERGENCE(BX-MEM-024,BX-CORE-DIV-006): retained no-SIM reset-window memory subset. */
 
 // alignment of memory vector, must be a power of 2
 #define BX_MEM_VECTOR_ALIGN 4096

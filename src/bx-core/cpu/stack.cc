@@ -25,6 +25,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-001): retained real/V86 stack-prefetch compatibility guard. */
 
 void BX_CPP_AttrRegparmN(2) BX_CPU_C::stackPrefetch(bx_address offset, unsigned len)
 {

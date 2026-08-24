@@ -22,6 +22,9 @@
 #ifndef BX_CPU_H
 #  define BX_CPU_H 1
 
+/* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-003,BX-EXEC-016): retained profile,
+ * observation and typed mechanical-entry declarations. */
+
 #include <setjmp.h>
 
 #ifndef BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION

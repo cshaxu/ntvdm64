@@ -23,6 +23,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-003): retained segment profile and default-off instruction observation. */
 
 #define InstrumentICACHE 0
 

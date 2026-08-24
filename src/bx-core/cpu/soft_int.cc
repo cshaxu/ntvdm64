@@ -23,6 +23,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-003): retained default-off copied software-interrupt observation. */
 
 #ifndef BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
 #define BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION 0

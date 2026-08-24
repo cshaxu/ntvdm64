@@ -24,6 +24,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-001,BX-EXEC-016): retained real/V86 profile state and typed entry setters. */
 
 #include "param_names.h"
 

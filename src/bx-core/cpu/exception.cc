@@ -24,6 +24,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-001,BX-UD-001): retained real/V86 guard and copied #UD mechanical seam. */
 
 #ifndef BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
 #define BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE 0

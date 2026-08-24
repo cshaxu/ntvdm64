@@ -25,6 +25,9 @@
 #ifndef BX_MEM_H
 #  define BX_MEM_H 1
 
+/* DIVERGENCE(BX-MEM-007,BX-MEM-010,BX-MEM-020,BX-MEM-024): retained checked
+ * RAM and minimal-machine declarations preserve Bochs-only mechanics. */
+
 #if BX_USE_MEM_SMF
 // if static member functions on, then there is only one memory
 #  define BX_MEM_SMF  static

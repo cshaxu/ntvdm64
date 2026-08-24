@@ -24,6 +24,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
+/* DIVERGENCE(BX-CORE-DIV-001): retained real/V86 segment-limit profile guards. */
 
 bx_address bx_asize_mask[] = {
   0xffff,                         // as16 (asize = '00)

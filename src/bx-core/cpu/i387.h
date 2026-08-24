@@ -24,6 +24,9 @@
 #ifndef _BX_I387_RELATED_EXTENSIONS_H_
 #define _BX_I387_RELATED_EXTENSIONS_H_
 
+/* DIVERGENCE(BX-BUILD-002): re-rooted include paths select the adopted FPU
+ * files without changing their declarations. */
+
 #if BX_SUPPORT_FPU
 
 #include "bx-core/fpu/softfloat.h"
