@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2272 |
+| Documentation records | 2273 |
 | --- | --- |
-| Generated UTC | 2026-08-24T21:34:34Z |
+| Generated UTC | 2026-08-24T21:40:44Z |
 
 ## Entries
 
@@ -514,6 +514,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 4379d6d7dc01969e310c6b7715611fd582e041a0ab4b3e909bc6c88eba92ca6f |
 | etc/operations/proposal-original-component-mirror-conformance-001.md | indexed supporting material | faa3f9df4ede9fbc8c66144d7c3b9dedc7b8e41d1ede15997d93c82e29e9f1c1 |
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
+| etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 9bc848f102c718779059609ba91281fab048abbee6d772af90930ef67209507a |
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |
@@ -2160,7 +2161,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | 68bca5c5d9d98dacb7130d275053939e76904a46c47250413ccbf631b1e11685 |
+| QUEUE.md | principal control document | c431ceef4728bac462075b1052f198f305d6d549add61156d434aa43cc900b67 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
