@@ -2,37 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T261 S1** — OpenNT host original-layout source-truth audit.
+**Active: M0 T261 S2** — OpenNT host function-level source/ABI recovery map.
 
 ## Active Packet
 
-### M0 T261 S1 — OpenNT host original-layout source-truth audit
+### M0 T261 S2 — OpenNT host function-level source/ABI recovery map
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T261 S1`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner directed a temporary T task after component review found that `opennt-host` does not retain OpenNT internal relative paths, names or contents except for three PIF files. |
-| Objective | Establish the complete, file-level source of truth and recovery plan for converting `opennt-host` from owner-labelled shims into a re-rooted original OpenNT host layout or an explicitly justified true-owner adapter/composition path. |
-| Non-goals | No BOP enablement, semantic provider rewrite, guest source change, Bochs change, or broad host-product-shell recreation. |
-| Reference Baseline | `refs/opennt`, T259 interface catalog, T260 component manifest/closure, and [T261 proposal](etc/operations/proposal-opennt-host-original-layout-recovery-001.md). |
-| Files And ABI Surface | Every live source/header in `src/opennt-host`; their original paths, interfaces, layouts, ordering, error/failure behavior, adapter dependencies and formal Ninja inputs. |
-| Applicable Rules | Source-recovery ladder; re-rooted-original layout rule; one mapping manager; `adapter-win32`/`adapter-softpc` owner boundaries; `opennt-bop` route ownership. |
-| Verification | Byte/hash comparison, function/source-path mapping, source-family/adapter dependency audit, documentation governance and independent review before moving code. |
-| Expected Markers | One disposition for every live host file; direct imports retain original path/name/body; all exceptions identify why earlier recovery rungs fail. |
-| Asset Needs | OpenNT source tree, current formal manifest, T259 catalog, current host source and component READMEs. |
-| Reporting Requirements | File count, exact-content count, original source paths, target component/path, dependency blockers, migration/delete conclusion and confidence for every file. |
-| Stop Conditions | No original source identity can be proven, a proposed move crosses BOP/adapter/Bochs ownership, or restoring a body would change behavior without a separately approved owner package. |
-| Exit Criteria | The T261 S1 source-truth audit is complete, source-first and independently reviewable; no layout/behavior code has changed. |
-| Original Owner Request | “请你为该任务创建proposal，并对现有 opennt-host进行一次彻底的审计和梳理，用于对这一临时T任务进行规划和收口的source of truth”。 |
-| Similar-Issue Sweep | All `*_shim.*`, `*_session.*`, `bx_ntvdm_*` and direct OpenNT imports in the component; all formal module inputs and existing exception rows. |
+| Identifier Mode | `M0 T261 S2`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner approved implementation after reviewing the T261/S1 source-truth audit. |
+| Objective | Prove, at function/ABI/failure-path level, the first usable source-recovery rung and final component/path for every non-identical `opennt-host` production file. |
+| Non-goals | No source move, BOP enablement, semantic provider rewrite, guest or Bochs change, or recreated NT4 product shell. |
+| Reference Baseline | T261/S1 source-truth audit, `refs/opennt`, T259 interface catalog, current formal manifest and all eight component contracts. |
+| Files And ABI Surface | The 47 non-identical host files; their functions, declarations, original callers/callees, layouts, ordering, failure paths, adapter dependencies and final component/path. |
+| Applicable Rules | Mandatory four-rung recovery ledger; re-rooted-original layout rule; one mapping manager; adapter ownership; BOP route ownership; no generic `*_shim` final category. |
+| Verification | Source/call-site comparison against `refs/opennt`; include and formal-manifest inspection; one row per live source/header; documentation governance and independent review. |
+| Expected Markers | A binding recovery ledger with original path/call, retained contract, unavailable dependency, first usable rung, final owner/path, divergence/exception requirement and migration/delete result. |
+| Asset Needs | Current host tree, `refs/opennt`, T259 catalog, T260 formal manifest and component READMEs. |
+| Reporting Requirements | Exact source and caller evidence, ABI/failure semantics, target owner/path, direct/facade/exception result and confidence for every non-identical file. |
+| Stop Conditions | A body cannot be attributed to a source path, a move crosses owner boundaries ambiguously, or a proposed recovery changes behavior; record it and pause that row rather than guessing. |
+| Exit Criteria | Every S1 non-identical row has a source-first, function-level disposition and no generic shim remains unresolved; S3/S4/S5 may execute without rediscovering ownership. |
+| Original Owner Request | “准入开始实施”。 |
+| Similar-Issue Sweep | All `*_shim.*`, `*_session.*`, `bx_ntvdm_*`, direct imports, their `refs/opennt` candidates, formal Ninja module inputs and component boundary headers. |
 
-**Current progress:** S1 is complete as an audit packet.  The
-[source-truth audit](etc/operations/m0-t261-s1-opennt-host-source-truth-audit-001.md)
-records all 50 files: three exact PIF imports and 47 non-identical
-host/composition/adapter files.  Direct SHA-256 proof, documentation governance
-and whitespace verification pass.  No source layout or behavior has changed;
-S2 requires review of this source-of-truth before it begins function-level
-recovery mapping.
+**Current progress:** S1 is closed in commit `25f817ad`. S2 P1 has completed
+the [function-recovery ledger](etc/operations/m0-t261-s2-opennt-host-function-recovery-ledger-001.md):
+all 47 non-identical files are covered, with original caller/provider evidence,
+unavailable dependency, retained failure rule and binding final owner/path.
+The ledger coverage check reports 47/47. No source layout or behavior has
+changed. The next delivery may admit S3's PIF/COMMAND move only against this
+ledger.
 
 ## Previous Active Packet — M0 T260
 
