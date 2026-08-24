@@ -31,7 +31,9 @@ with a 47/47 recovery ledger. S3 P1 has re-rooted the byte-identical PIF
 triplet and compiled the parser object through its new exact include path; see
 [PIF evidence](etc/evidence/m0-t261-s3-p1-pif-original-re-root-001.md). The
 full-graph run root was interrupted externally and is explicitly non-evidence;
-S3 will use a fresh root for formal closure. No provider behavior has changed.
+S3 P2 has moved the parser layout bridge to `opennt-bop` and its OEM Win32
+facade to `adapter-win32`; both moved objects compile in fresh `r002`. S3 will
+use that fresh root for later formal closure. No provider behavior has changed.
 
 ## Previous Active Packet — M0 T260
 

@@ -68,6 +68,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-029` | `xmsdisp.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xmsdisp.c:2` |
 | `BOP-DIV-030` | `xmsmisc.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xmsmisc.c:2` |
 | `BOP-DIV-031` | `xmsumb.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xmsumb.c:2` |
+| `BOP-DIV-032` | `nt_pif.c` and COMMAND's `cmdpif.h` expose different historical `PIF_DATA` definitions. | Direct linking would cross incompatible layouts. | Keep the host parser source unchanged and translate only its compatible result through a separately named BOP composition unit. | `command/opennt_pif_composition.c:33`, `command/opennt_pif_composition.h` |
 
 The migration evidence is
 [`m0-t260-s5-opennt-bop-layout-migration-001.md`](../../docs/etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).

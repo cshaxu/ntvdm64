@@ -12,7 +12,7 @@
 /* OpenNT source: base/mvdm/dos/command/cmdpif.c.  The original owner body
  * below is compiled through the smallest COMMAND/PIF host capability seam;
  * the paired original nt_pif.c parser is included by command_opennt_pif_parser.c. */
-#include "../../opennt-host/command/command_pif_shim.h"
+#include "opennt_pif_composition.h"
 #include <ctype.h>
 
 VOID cmdCheckForPIF (PVDMINFO pvi)

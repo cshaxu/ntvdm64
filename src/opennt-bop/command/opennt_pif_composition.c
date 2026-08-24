@@ -4,7 +4,7 @@
  * result to the COMMAND-facing record.  This keeps both original owner
  * bodies intact without letting NT4's global header universe leak into the
  * modern CLI composition. */
-#include "command_pif_shim.h"
+#include "opennt_pif_composition.h"
 
 #define WINNT 1
 #define _INSIGNIA_H 1
@@ -30,10 +30,10 @@
 #define ch_malloc bx_ntvdm_command_pif_parser_malloc
 #pragma warning(push)
 #pragma warning(disable:4005 4028 4142 4244)
-/* DIVERGENCE(HOST-DIV-011): the original parser remains compiled verbatim,
+/* DIVERGENCE(BOP-DIV-032): the original parser remains compiled verbatim,
  * but its directly composed source now lives in this owner-family production
  * closure rather than the removed NT4 global source tree. */
-#include "../softpc.new/host/src/nt_pif.c"
+#include "../../opennt-host/softpc.new/host/src/nt_pif.c"
 #pragma warning(pop)
 #undef ch_malloc
 #undef RcMessageBox

@@ -235,7 +235,8 @@
     {
       "name": "adapter-win32",
       "sources": [
-        "src/adapter-win32/facade/opennt_error_dialog_facade.c"
+        "src/adapter-win32/facade/opennt_error_dialog_facade.c",
+        "src/adapter-win32/facade/opennt_pif_oem_facade.c"
       ]
     },
     {
@@ -248,8 +249,6 @@
         "src/opennt-host/command/command_environment_shim.c",
         "src/opennt-host/command/command_misc_shim.c",
         "src/opennt-host/command/command_native_session_shim.c",
-        "src/opennt-host/command/command_opennt_pif_parser.c",
-        "src/opennt-host/command/command_pif_shim.c",
         "src/opennt-host/config/config_complete_shim.c",
         "src/opennt-host/dem/dem_direct_host_session.c",
         "src/opennt-host/dem/dem_native_session_shim.c",
@@ -279,6 +278,7 @@
         "src/opennt-bop/command/cmdkeyb.c",
         "src/opennt-bop/command/cmdmisc.c",
         "src/opennt-bop/command/cmdpif.c",
+        "src/opennt-bop/command/opennt_pif_composition.c",
         "src/opennt-bop/command/cmdredir.c",
         "src/opennt-bop/dem/dem.c",
         "src/opennt-bop/dem/demdasd.c",

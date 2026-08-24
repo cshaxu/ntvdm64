@@ -1,10 +1,11 @@
-#ifndef BX_NTVDM_BOP_SHIM_COMMAND_PIF_SHIM_H
-#define BX_NTVDM_BOP_SHIM_COMMAND_PIF_SHIM_H
+#ifndef NTDOS64_OPENNT_PIF_COMPOSITION_H
+#define NTDOS64_OPENNT_PIF_COMPOSITION_H
 
 /* Smallest modern host-capability seam for the directly imported COMMAND PIF
  * owner and the directly included OpenNT nt_pif.c parser.  It deliberately
  * supplies no PIF policy or parser: those remain original OpenNT code. */
-#include "command_misc_shim.h"
+#include "opennt-host/command/command_misc_shim.h"
+#include "adapter-win32/include/legacy-api/opennt_pif_oem_facade.h"
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
 
 #ifndef SUBSYS_DOS
@@ -39,17 +40,6 @@
 #define RMB_EDIT 128u
 #endif
 
-DWORD bx_ntvdm_command_pif_expand_environment_strings_oem(LPCSTR source,
-    LPSTR destination, DWORD destination_bytes);
-DWORD bx_ntvdm_command_pif_get_full_path_name_oem(LPCSTR source,
-    DWORD destination_bytes, LPSTR destination, LPSTR *file_part);
-DWORD bx_ntvdm_command_pif_get_short_path_name_oem(LPCSTR source,
-    LPSTR destination, DWORD destination_bytes);
-DWORD bx_ntvdm_command_pif_search_path_oem(LPCSTR path, LPCSTR file_name,
-    LPCSTR extension, DWORD destination_bytes, LPSTR destination,
-    LPSTR *file_part);
-BOOL bx_ntvdm_command_pif_set_console_title_oem(LPCSTR title);
-void *ch_malloc(unsigned int bytes);
 BOOL GetPIFData(PIF_DATA *data, char *pif_name);
 /* `nt_pif.c`'s original allocation/error loop calls this exact adapter
  * spelling. It delegates to the shared OpenNT-shaped dialog facade rather

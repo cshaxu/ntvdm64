@@ -1,7 +1,7 @@
 #include "command_v2_runtime_session.h"
 
 #include "dem_v2_startup_composition.h"
-#include "opennt-host/command/command_pif_shim.h"
+#include "opennt-bop/command/opennt_pif_composition.h"
 #include "opennt-host/command/command_native_session_shim.h"
 
 #include <string.h>
