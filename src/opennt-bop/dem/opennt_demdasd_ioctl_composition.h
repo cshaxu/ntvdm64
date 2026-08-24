@@ -1,11 +1,11 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEM_DRIVE_POLICY_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEM_DRIVE_POLICY_SHIM_H
+#ifndef OPENNT_DEMDASD_IOCTL_COMPOSITION_H
+#define OPENNT_DEMDASD_IOCTL_COMPOSITION_H
 
 #include <stdint.h>
 
-#include "bx_ntvdm_host_drive_policy.h"
+#include "opennt-host/dem/bx_ntvdm_host_drive_policy.h"
 
-/* Shared, session-private admission seam for imported DEM and COMMAND drive
+/* Temporary, session-private admission seam for imported DEM and COMMAND drive
  * discovery.  It is intentionally narrower than either owner's register or
  * memory shim, so those source domains never have to include one another. */
 int bx_ntvdm_demdasd_drive_policy_bind(

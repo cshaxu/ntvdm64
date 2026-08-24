@@ -4,7 +4,7 @@
 #include "opennt-bop/ingress/config_complete_v2_generic_ud_bridge.h"
 #include "opennt-bop/ingress/dem_direct_session.h"
 #include "opennt-bop/ingress/dem_native_session.h"
-#include "opennt-host/dem/opennt_dem_drive_policy_facade.h"
+#include "opennt-bop/dem/opennt_demdasd_ioctl_composition.h"
 
 static int read_guest(void *state, uint32_t address, uint8_t *bytes, uint32_t count)
 { (void)state; (void)address; (void)bytes; (void)count; return 0; }
