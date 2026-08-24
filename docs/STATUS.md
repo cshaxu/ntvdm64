@@ -2,12 +2,41 @@
 
 ## Current Work
 
-**Active: M0 T262 S3 P2 — OpenNT guest deployable and build-input binary
-mirror.** This owner-directed expansion records the original DOS/V86 binary,
-MAP/SYM and library inputs copied under `opennt-guest` before T262 proceeds to
-its final cross-component closure.
+**Active: M0 T262 S5 — cross-component final mirror audit and formal-build
+regression.** This final packet repeats every component identity/index check
+after the owner-approved guest binary/object import, then records the formal
+Ninja closure without widening any component's source semantics.
 
 ## Active Packet
+
+### M0 T262 S5 — cross-component final mirror audit and formal-build regression
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T262 S5`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T262 proposal S5, after completed S2, S3 P2 and S4. |
+| Objective | Re-run the three mirror classifications and local exception-index checks, then source-build the formal nine-module graph without changing component boundaries. |
+| Non-goals | No BOP/provider implementation, no Bochs semantic edit, no guest rebuild, no host-subset expansion, no cleanup of unrelated historical tools or artifacts. |
+| Reference Baseline | Pinned Bochs 2.6; OpenNT and OpenNT-4.5 guest roots; named OpenNT host paths; S2/S3/S4 evidence and `tools/build/t260-s8-component-manifest.json`. |
+| Files And ABI Surface | The three component trees, their READMEs, T262 evidence/status/history and the disposable formal Ninja root only; no product ABI change. |
+| Applicable Rules | Mirror classification/marker/register rules, source policy, formal-build hygiene and documentation-governance closure rules. |
+| Verification | Full hash/origin scans; bx-core local-marker scan; host local-marker/README set equality; new `build/M0-T262-S5/001` formal Ninja graph; #UD boundary and focused host fixtures; documentation governance and scoped diff checks. |
+| Expected Markers | 164/18/0 bx-core exact/edit/non-mirror classification; 678/0 matched/unmatched guest inputs; 7/4/0 host exact/subset/extra classification; equal HOST-DIV code/README sets. |
+| Asset Needs | Pinned Bochs/OpenNT trees, the component manifest, Ninja/MSVC x64 `/MT`, focused fixture executables and Git metadata. |
+| Reporting Requirements | Record exact audit totals, build root/edge result, passed fixtures and any failed fixture with an owner-qualified limitation. |
+| Stop Conditions | An unmatched path, unmarked/local-register drift, component-boundary change, or source-build failure pauses closure. |
+| Exit Criteria | Every production file has an allowed mirror classification; no component has an unregistered exception/non-mirror file; formal graph compiles, archives and links; evidence records any unrelated runtime fixture limitation without misclassifying it as a mirror defect. |
+| Original Owner Request | “审核已知的3个镜像包： bx-core, opennt-guest, opennt-host…所有子集文件或者少部分修改的点位，需要在本文件中加入注释，并且README.md提供该例外的索引。” |
+| Similar-Issue Sweep | Imported guest binaries/objects, source-root version collision, local README/register drift, stale component paths, build-output leakage and fixture/environment conflation. |
+
+**S5 P1 completed:** 182 `bx-core` source files classify as 164 exact plus
+18 locally indexed Bochs edits; all 678 `opennt-guest` inputs match an OpenNT
+or OpenNT-4.5 peer; `opennt-host` remains seven exact plus four
+marker/index-equal subsets.  A fresh formal graph completed all 469 edges and
+emitted 80 executables.  The #UD boundary and BOP59 fixtures pass.  The
+Redirector mailslot fixture returns its pre-existing environment-sensitive
+exit `8` in both the new and prior formal roots, which is recorded rather than
+misattributed to the mirror task.  See the [S5 closure evidence](etc/evidence/m0-t262-s5-final-component-mirror-and-build-closure-001.md).
 
 ### M0 T262 S4 — opennt-host subset and minimal-edit closure
 
