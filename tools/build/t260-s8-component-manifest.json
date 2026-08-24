@@ -264,7 +264,7 @@
       "name": "opennt-host",
       "sources": [
         "src/opennt-host/redir/redir_session_shim.c",
-        "src/opennt-host/top_level/top_level_nosupport_shim.c"
+        "src/opennt-host/softpc.new/host/src/nt_error.c"
       ]
     },
     {

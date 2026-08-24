@@ -14,6 +14,7 @@
 static __declspec(thread) BOOL g_fixture_suppress;
 static __declspec(thread) UINT g_last_error;
 static __declspec(thread) UINT g_count;
+static __declspec(thread) int g_direct_access_fixture_reply;
 
 #define BX_NTVDM_RMB_ABORT 1u
 #define BX_NTVDM_RMB_RETRY 2u
@@ -102,9 +103,20 @@ int bx_ntvdm_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
     return (int)BX_NTVDM_RMB_ABORT;
 }
 
+int bx_ntvdm_opennt_direct_access_dialog(const CHAR *message)
+{
+    int reply;
+    if (g_direct_access_fixture_reply != 0) return g_direct_access_fixture_reply;
+    reply = MessageBoxA(NULL, message == NULL ? "NTVDM direct access error" : message,
+        "NTDOS64 unsupported DOS operation", MB_ABORTRETRYIGNORE | MB_ICONSTOP);
+    return reply == IDIGNORE ? IDIGNORE : IDABORT;
+}
+
 void bx_ntvdm_opennt_error_dialog_fixture_suppress(BOOL suppress)
 { g_fixture_suppress = suppress; }
 UINT bx_ntvdm_opennt_error_dialog_fixture_last_error(void)
 { return g_last_error; }
 UINT bx_ntvdm_opennt_error_dialog_fixture_count(void)
 { return g_count; }
+void bx_ntvdm_opennt_direct_access_fixture_reply_set(int reply)
+{ g_direct_access_fixture_reply = reply; }

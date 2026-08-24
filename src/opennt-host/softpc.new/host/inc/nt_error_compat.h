@@ -1,12 +1,11 @@
-#ifndef BX_NTVDM_BOP_SHIM_TOP_LEVEL_NOSUPPORT_SHIM_H
-#define BX_NTVDM_BOP_SHIM_TOP_LEVEL_NOSUPPORT_SHIM_H
+#ifndef BX_NTVDM_OPENNT_HOST_NT_ERROR_COMPAT_H
+#define BX_NTVDM_OPENNT_HOST_NT_ERROR_COMPAT_H
 
 /*
- * Source-derived seam for OpenNT softpc.new/host/src/nt_error.c:
- * host_direct_access_error.  The source function is void; its host dialog
- * terminates the VDM or returns to the source caller.  This seam retains the
- * per-thread reason suppression and exposes the selected result to the
- * typed BOP boundary without exposing any Win32 handle to the guest.
+ * Composition declaration for the directly re-rooted OpenNT
+ * softpc.new/host/src/nt_error.c host_direct_access_error owner.  The source
+ * function is void; this local compatibility declaration exposes its selected
+ * result to the typed BOP boundary without exposing a Win32 handle to guest.
  */
 
 #include <stdint.h>

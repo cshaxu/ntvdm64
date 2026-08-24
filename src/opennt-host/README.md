@@ -29,6 +29,9 @@ departure from an identified OpenNT definition marked in code as
 
 | ID | Original definition purpose | Divergence reason | Replacement implementation | Production file(s) |
 | --- | --- | --- | --- | --- |
+| `HOST-DIV-012` | `nt_error.c` uses the NTVDM product's `TlsDirectError` slot to suppress repeated direct-access warnings per thread. | The standalone session has no NT4 product TLS initialization. | Compiler TLS retains the same per-thread category bitset; it installs no host state. | `softpc.new/host/src/nt_error.c` |
+| `HOST-DIV-013` | `nt_error.c` shifts a direct-access category into that bitset. | An arbitrary modern guest AX must not invoke an undefined C shift. | Preserve the original 0..6 result and leave other categories observable without a bitset index. | `softpc.new/host/src/nt_error.c` |
+| `HOST-DIV-014` | `nt_error.c` formats its prompt from private `ntvdm.exe` resources. | The NT4 resource table is not an unpack-and-run input. | One source-order message construction point supplies the same category to the public-Win32 dialog façade. | `softpc.new/host/src/nt_error.c` |
 
 The pre-T260 PIF original and other uncompiled historical inputs are evidence,
 not a second provider. They reside under `docs/etc/legacy_code/opennt-host/`.

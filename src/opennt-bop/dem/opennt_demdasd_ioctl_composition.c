@@ -7,7 +7,7 @@
  */
 
 #include "opennt_demdasd_ioctl_compat.h"
-#include "opennt-host/top_level/top_level_nosupport_shim.h"
+#include "opennt-host/softpc.new/host/inc/nt_error_compat.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -95,11 +95,6 @@ void sas_loadw(DWORD address, WORD *value)
         if (value != NULL) *value = 0u;
         SetLastError(ERROR_INVALID_ADDRESS);
     }
-}
-
-void host_direct_access_error(ULONG type)
-{
-    bx_ntvdm_top_level_nosupport_v2_direct_access_error((uint32_t)type);
 }
 
 /* DIVERGENCE(BOP-DIV-046): the floppy source is a distinct FDC/DMA/CMOS device component, not a volume

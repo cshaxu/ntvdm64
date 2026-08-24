@@ -5,7 +5,7 @@
 #include "opennt-bop/ingress/command_v2_runtime_session.h"
 #include "ntdos64_bop_composition_v1.h"
 #include "adapter-softpc/bx_ntvdm_guest_pointer_manager.h"
-#include "opennt-host/top_level/top_level_nosupport_shim.h"
+#include "opennt-host/softpc.new/host/inc/nt_error_compat.h"
 #include "session/ntdos64_session_v1.h"
 #include "session/ntdos64_session_cancellation_v1.h"
 
