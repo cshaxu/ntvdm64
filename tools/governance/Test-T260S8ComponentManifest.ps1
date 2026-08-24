@@ -11,7 +11,8 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $manifestFile = Join-Path $root $ManifestPath
 $manifest = Get-Content -LiteralPath $manifestFile -Raw | ConvertFrom-Json
-$owners = @('bx-core','bx-mantle','adapter-softpc','adapter-win32','opennt-host','opennt-bop','app')
+$owners = @('bx-core','bx-mantle','adapter-bop','adapter-softpc','adapter-win32',
+    'opennt-host','opennt-bop','session','app')
 
 if ($manifest.schema -ne 'ntdos64.t260.s8.component-manifest.v1' -or
     @($manifest.modules).Count -ne $owners.Count) {

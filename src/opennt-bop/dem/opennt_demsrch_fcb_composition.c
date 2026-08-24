@@ -29,7 +29,7 @@ void FdiskTerminatePDB(USHORT pdb);
  * same first-call state; session wiring will own later transitions. */
 BOOL IsFirstCall = TRUE;
 
-/* DIVERGENCE(BOP-DIV-041): nt_msscs.c:VDDTerminateUserHook walks the private VDD user-hook
+/* DIVERGENCE(BOP-DIV-053): nt_msscs.c:VDDTerminateUserHook walks the private VDD user-hook
  * list. The CLI does not recreate the VDD callback broker; do not report a
  * fabricated callback completion. */
 void VDDTerminateUserHook(USHORT pdb) { (void)pdb; }

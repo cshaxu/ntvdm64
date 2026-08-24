@@ -11,7 +11,8 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $components = @(
     'bx-core', 'bx-mantle', 'opennt-guest', 'opennt-host',
-    'opennt-bop', 'adapter-win32', 'adapter-softpc', 'app'
+    'opennt-bop', 'adapter-bop', 'adapter-win32', 'adapter-softpc',
+    'session', 'app'
 )
 $nonProductNames = @(
     'original', 'mirror', 'overlay', 'capability', 'example', 'examples',

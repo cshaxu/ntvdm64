@@ -101,6 +101,9 @@ static int mailslot_regression(void)
         if (client == INVALID_HANDLE_VALUE ||
             (ConnectNamedPipe(server, NULL) == FALSE && GetLastError() != ERROR_PIPE_CONNECTED) ||
             !direct.publish_handle(direct.state, client, &token, &error) || token == 0u ||
+            /* OpenNT's VDMREDIR intercept keeps named-pipe metadata before
+             * the asynchronous service may resolve the opaque token. */
+            !VrAddOpenNamedPipeInfo(client, "\\\\.\\PIPE\\ntdos64-t253-async") ||
             !WriteFile(server, "go", 2u, &wrote, NULL) || wrote != 2u) {
             if (client != INVALID_HANDLE_VALUE) CloseHandle(client);
             CloseHandle(server); return 0;
@@ -193,7 +196,7 @@ int main(void)
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 2;
     make_event(&event, 0x00u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 0, 0u) || !VrInitialized()) return 3;
+        !expect(&outcome, 0, 0u) || !bx_ntvdm_vr_initialized_provider()) return 3;
     server = CreateNamedPipeW(L"\\\\.\\pipe\\ntdos64-t251-s3", PIPE_ACCESS_DUPLEX,
         PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT, 1u, 64u, 64u, 0u, NULL);
     if (server == INVALID_HANDLE_VALUE) return 4;
@@ -217,13 +220,15 @@ int main(void)
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 6;
     make_event(&event, 0x23u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 1, ERROR_INVALID_HANDLE)) return 9;
+        /* No copied guest descriptor was supplied: preserve the bounded
+         * guest-span failure before any token/handle interpretation. */
+        !expect(&outcome, 1, ERROR_INVALID_ADDRESS)) return 9;
     make_event(&event, 0x24u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 1, ERROR_INVALID_HANDLE)) return 10;
+        !expect(&outcome, 1, ERROR_INVALID_ADDRESS)) return 10;
     make_event(&event, 0x01u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 0, 0u) || VrInitialized()) return 7;
+        !expect(&outcome, 0, 0u) || bx_ntvdm_vr_initialized_provider()) return 7;
     bx_ntvdm_redir_native_session_unbind(&session);
     bx_ntvdm_dem_direct_host_session_reset(&host);
     if (!mailslot_regression()) return 8;

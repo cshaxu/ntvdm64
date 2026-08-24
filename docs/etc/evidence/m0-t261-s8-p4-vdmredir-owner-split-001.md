@@ -71,7 +71,7 @@ session-owned native handle from inside the source provider.
    units can be brought through the existing `adapter-softpc`/`session`
    mechanical seams without re-creating the NT4 VDD/ICA product shell.
 
-## Verification to date
+## Verification
 
 - no production include of `opennt-host/redir/redir_session_shim.h` remains;
 - no production `bx_ntvdm_redir_load/read/write/...` helper remains;
@@ -85,8 +85,20 @@ session-owned native handle from inside the source provider.
 - fresh `r006` MSVC targeted objects passed:
   `vrnmpipe.c`, `opennt_demfile_composition.c`,
   `redir_native_session.c`, and `opennt_dem_ccpu_sas_facade.c`;
+- a fresh, uncontended formal MSVC x64 `/MT` Ninja root,
+  `build/t261/s8-r008`, completed all **463/463** graph edges after the
+  static-provider import binding was recovered;
+- the final r008 graph has no remaining work, and its focused Redirector,
+  BOP 59, XMS, A20, DEM dispatcher, DEM ingress and native DEM-session
+  fixtures all exit `0`;
+- the Redirector fixture now exercises `VrAddOpenNamedPipeInfo` before
+  asynchronous token lookup, matching the original provider's metadata
+  lifetime rather than the old shim's automatic named-pipe recognition;
+- its deliberately descriptor-less async negative cases now prove
+  `ERROR_INVALID_ADDRESS` before token lookup, which is the original bounded
+  ordering; and
 - `git diff --check` passes (line-ending advisories only).
 
-The first r006 full-graph invocation was contaminated by an independently
+The earlier r006 full-graph invocation was contaminated by an independently
 running Ninja writer, yielding Ninja's `premature end of file` warning.  It is
-not accepted as formal closure; a fresh uncontended full graph remains required.
+retained only as a rejected diagnostic; r008 is the accepted formal closure.

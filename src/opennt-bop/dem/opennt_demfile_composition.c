@@ -19,7 +19,7 @@ BOOL (*VrInitialized)(VOID);
 
 BOOL LoadVdmRedir(void)
 {
-    /* DIVERGENCE(BOP-DIV-039): original NTVDM populated this DLL import
+    /* DIVERGENCE(BOP-DIV-051): original NTVDM populated this DLL import
      * pointer after LoadLibrary.  The static provider keeps the exact source
      * indirection while binding it to the re-rooted VDMREDIR owner. */
     VrInitialized = (BOOL (*)(VOID))bx_ntvdm_vr_initialized_provider;

@@ -18,7 +18,7 @@
  * through the named neutral adapter boundary. */
 #include "adapter-softpc/opennt_dem_ccpu_sas_facade.h"
 
-/* DIVERGENCE(BOP-DIV-039): static composition owns the single historical
+/* DIVERGENCE(BOP-DIV-049): static composition owns the single historical
  * VDMREDIR DLL import pointer. */
 extern BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL IsVdmRedirLoaded(VOID);

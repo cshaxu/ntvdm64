@@ -97,7 +97,7 @@ void sas_loadw(DWORD address, WORD *value)
     }
 }
 
-/* DIVERGENCE(BOP-DIV-046): the floppy source is a distinct FDC/DMA/CMOS device component, not a volume
+    /* DIVERGENCE(BOP-DIV-054): the floppy source is a distinct FDC/DMA/CMOS device component, not a volume
  * capability.  Its uncomposed paths remain explicit failures. */
 BOOL nt_floppy_close(BYTE drive) { (void)drive; SetLastError(ERROR_NOT_SUPPORTED); return FALSE; }
 ULONG nt_floppy_read(BYTE drive, ULONG offset, ULONG size, PBYTE buffer)
@@ -111,7 +111,7 @@ MEDIA_TYPE nt_floppy_get_media_type(BYTE drive, WORD cylinders, WORD sectors, WO
 { (void)drive; (void)cylinders; (void)sectors; (void)heads; SetLastError(ERROR_NOT_SUPPORTED); return Unknown; }
 BOOL nt_floppy_verify(BYTE drive, DWORD offset, DWORD size)
 { (void)drive; (void)offset; (void)size; SetLastError(ERROR_NOT_SUPPORTED); return FALSE; }
-/* DIVERGENCE(BOP-DIV-046): use documented Win32 handles in place of its
+/* DIVERGENCE(BOP-DIV-055): use documented Win32 handles in place of its
  * NT native `\\DosDevices` opens and FAT-only FSCTL.  The original output
  * BPB/geometry contract and failure propagation remain with demdasd.c. */
 BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)

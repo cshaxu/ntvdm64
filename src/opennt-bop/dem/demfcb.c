@@ -19,7 +19,7 @@
 /* OpenNT source: src/opennt/base/mvdm/dos/dem/demfcb.c.  Its unavailable
  * historical DEM/SoftPC include closure is named by the common package shim;
  * imported FCB algorithms remain below unchanged. */
-/* DIVERGENCE(BOP-DIV-041): shared source-body composition preserves the
+/* DIVERGENCE(BOP-DIV-052): shared source-body composition preserves the
  * original body while separating historical host dependency owners. */
 #include "opennt_demsrch_fcb_composition.h"
 
