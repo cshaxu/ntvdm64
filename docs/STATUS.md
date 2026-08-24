@@ -2,11 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T262 S2 — bx-core local-exception and non-mirror cleanup.**
-This packet repairs only the source-fidelity defects proven by T262/S1; it
-does not change CPU, memory, BOP or machine behavior.
+**Active: M0 T262 S3 — opennt-guest zero-difference mirror closure.** This
+packet closes the sole versioning gap found by T262/S1 without modifying guest
+source or artifacts.
 
 ## Active Packet
+
+### M0 T262 S3 — opennt-guest zero-difference mirror closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T262 S3`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T262 proposal S3 and the owner-approved mirror standard; T262/S1 proves `sysmac.lib` is exact OpenNT material but is untracked. |
+| Objective | Make the `opennt-guest` mirror complete and versioned while preserving byte-identical DOS/V86 and WOW16 source/input trees. |
+| Non-goals | No guest source edit, guest rebuild, artifact replacement, toolchain change, packaging change or use of unrelated untracked historical tools. |
+| Reference Baseline | T262/S1 hash audit; `refs/opennt/base/mvdm/dos/v86` and `refs/opennt/base/mvdm/wow16`; `opennt-guest/README.md`. |
+| Files And ABI Surface | `src/opennt-guest/dos-v86/cmd/append/sysmac.lib`, guest README, T262 evidence/status and documentation inventory only. |
+| Applicable Rules | Original guest inputs are byte-identical; zero source changes means zero local divergence entries; artifact provenance remains explicit. |
+| Verification | Full guest-path hash comparison, direct hash proof for `sysmac.lib`, Git tracked-file check, no `DIVERGENCE` marker scan, documentation governance and scoped diff check. |
+| Expected Markers | 580/580 source/input paths match OpenNT and are tracked; no non-mirror or modified guest file exists. |
+| Asset Needs | Existing OpenNT reference tree, Git index and current guest README. |
+| Reporting Requirements | Record `sysmac.lib` source path/hash, distinguish it from unrelated untracked artifacts, and state that the empty divergence register remains correct. |
+| Stop Conditions | A byte mismatch, unknown binary provenance, or a build-generated file masquerading as original input. |
+| Exit Criteria | All guest files are exact/recorded mirrors, the sole untracked original input is governed, and no guest exception row is needed. |
+| Original Owner Request | “大部分文件应当1-1一致；部分文件可以是原版文件的子集，或者是少部分修改；所有子集文件或者少部分修改的点位，需要在本文件中加入注释，并且README.md提供该例外的索引。” |
+| Similar-Issue Sweep | DOS/V86 and WOW16 source roots, untracked binary/source-build inputs, build-output leakage and README exception count. |
+
+**S3 P1 completed:** all 580 guest files hash-match OpenNT; the exact
+`sysmac.lib` build input is now governed as a mirror file, with no guest
+source edit or local exception. See the [S3 evidence](etc/evidence/m0-t262-s3-opennt-guest-zero-difference-closure-001.md).
 
 ### M0 T262 S2 — bx-core local-exception and non-mirror cleanup
 
