@@ -28,23 +28,6 @@ typedef void *LPVOID;
 typedef uint8_t BOOLEAN;
 typedef void (*PFNSVC)(void);
 
-/* The OpenNT command configuration owner uses these NT string layouts.  They
- * are reproduced here rather than pulling the old ntdll import closure into
- * the modern in-process target. */
-typedef LONG NTSTATUS;
-typedef struct _ANSI_STRING {
-    USHORT Length;
-    USHORT MaximumLength;
-    PCHAR Buffer;
-} ANSI_STRING, *PANSI_STRING;
-typedef ANSI_STRING OEM_STRING, *POEM_STRING;
-typedef ANSI_STRING STRING, *PSTRING;
-typedef struct _UNICODE_STRING {
-    USHORT Length;
-    USHORT MaximumLength;
-    PWSTR Buffer;
-} UNICODE_STRING, *PUNICODE_STRING;
-
 #include "adapter-win32/facade/opennt_rtl_compat.h"
 
 #define NT_SUCCESS(status) ((NTSTATUS)(status) >= 0)

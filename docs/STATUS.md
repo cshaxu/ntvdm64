@@ -42,6 +42,10 @@ S3 P4 has moved the remaining project-owned COMMAND composition sources to
 `opennt-bop/command`; fresh `r004` builds all five moved objects and the full
 `opennt-bop` static library.  The remaining `opennt-host` COMMAND input is
 only the unchanged PIF triplet; see [composition-owner evidence](etc/evidence/m0-t261-s3-p4-command-composition-owner-rehome-001.md).
+S3 P5 has extracted the reached RTL/NTDLL compatibility surface from that
+composition to `adapter-win32` without a reverse BOP dependency.  Fresh
+`r005` builds both affected libraries and passes the direct check-binary and
+dynamic-environment fixtures; see [RTL-facade evidence](etc/evidence/m0-t261-s3-p5-command-rtl-facade-extraction-001.md).
 
 ## Previous Active Packet — M0 T260
 

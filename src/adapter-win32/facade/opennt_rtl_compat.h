@@ -4,8 +4,7 @@
 /*
  * Canonical HOST-07 declaration surface for directly imported OpenNT bodies.
  *
- * Include this only after the consuming source's OpenNT-shaped STRING and
- * UNICODE_STRING types are visible.  The types deliberately remain native
+ * OpenNT-shaped STRING and UNICODE_STRING types deliberately remain native
  * host-private records: no member crosses a guest ABI.  The declarations keep
  * the spelling and caller-visible allocation/return contracts used by the
  * imported COMMAND source, while their bounded public-Win32 implementation
@@ -13,6 +12,7 @@
  */
 
 #include <stddef.h>
+#include "adapter-win32/include/legacy-api/opennt_rtl_types.h"
 
 #if defined(__cplusplus)
 extern "C" {
