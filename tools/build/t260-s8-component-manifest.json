@@ -12,6 +12,7 @@
   "includeRoots": [
     "src",
     "src/app",
+    "src/adapter-bop",
     "src/adapter-softpc",
     "src/adapter-win32",
     "src/opennt-host",
@@ -191,7 +192,6 @@
         "src/adapter-softpc/bx_ntvdm_exception_abi.c",
         "src/adapter-softpc/bx_ntvdm_finite_run.cc",
         "src/adapter-softpc/bx_ntvdm_first_fault_observation_v1.cc",
-        "src/adapter-softpc/bx_ntvdm_generic_ud_bridge.cc",
         "src/adapter-softpc/bx_ntvdm_generic_ud_sequence_observation_v1.c",
         "src/adapter-softpc/bx_ntvdm_guest_gather_read_action_v1.c",
         "src/adapter-softpc/bx_ntvdm_guest_pointer_manager.c",
@@ -231,6 +231,13 @@
         "src/adapter-softpc/softpc_printer_openclose_shim.c",
         "src/adapter-softpc/softpc_tape_io_shim.c",
         "src/adapter-softpc/spckbd_handoff_shim.c"
+      ]
+    },
+    {
+      "name": "adapter-bop",
+      "sources": [
+        "src/adapter-bop/bx_ntvdm_bop_ingress_v1.c",
+        "src/adapter-bop/bx_ntvdm_generic_ud_bridge.cc"
       ]
     },
     {
@@ -322,7 +329,7 @@
         "src/opennt-bop/ingress/dem_direct_session.c",
         "src/opennt-bop/ingress/dem_native_session.c",
         "src/opennt-bop/ingress/xms_native_session.c",
-        "src/opennt-bop/ingress/dem_v2_composition_bridge.c",
+        "src/opennt-bop/ingress/opennt_bop_route.c",
         "src/opennt-bop/ingress/dem_v2_generic_ud_bridge.c",
         "src/opennt-bop/ingress/dem_v2_runtime_session.c",
         "src/opennt-bop/ingress/dem_v2_startup_composition.c",
@@ -343,6 +350,7 @@
       "name": "app",
       "sources": [
         "src/app/bx_ntvdm_engine_contract_v1.c",
+        "src/app/ntdos64_bop_composition_v1.c",
         "src/app/bx_ntvdm_engine_run_v1.c",
         "src/app/bx_ntvdm_initial_state_abi.c",
         "src/app/bx_ntvdm_initial_state_action_v1.c",
@@ -369,6 +377,14 @@
   },
   "fixtures": [
     {
+      "name": "t261-s5-bop-ingress-fixture",
+      "source": "tests/adapter-bop/t261_s5_bop_ingress_fixture.c",
+      "libraries": [
+        "adapter-bop"
+      ],
+      "platformLibraries": []
+    },
+    {
       "name": "t258-s1-guest-pointer-manager-fixture",
       "source": "tests/component-integration/bx-vdm-legacy-fixtures/t258-s1-guest-pointer-manager-fixture.c",
       "libraries": [
@@ -378,7 +394,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -392,7 +409,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -406,7 +424,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -420,7 +439,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -434,7 +454,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -448,7 +469,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -462,7 +484,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -476,7 +499,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -490,7 +514,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -504,7 +529,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -521,7 +547,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib"
@@ -537,7 +564,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -553,7 +581,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -569,7 +598,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -585,7 +615,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -601,7 +632,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -617,7 +649,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -633,7 +666,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -649,7 +683,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -665,7 +700,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -681,7 +717,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -695,7 +732,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -715,7 +753,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -729,7 +768,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -743,7 +783,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -763,7 +804,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -780,7 +822,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -797,7 +840,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -822,7 +866,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -845,7 +890,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -865,7 +911,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -888,7 +935,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -908,7 +956,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -928,7 +977,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -948,7 +998,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -968,7 +1019,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -988,7 +1040,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1011,7 +1064,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1025,7 +1079,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1039,7 +1094,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1053,7 +1109,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1067,7 +1124,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1081,7 +1139,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1095,7 +1154,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1109,7 +1169,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1123,7 +1184,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1137,7 +1199,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1151,7 +1214,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1165,7 +1229,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1185,7 +1250,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1205,7 +1271,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1223,7 +1290,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1241,7 +1309,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1259,7 +1328,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1277,7 +1347,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1295,7 +1366,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1313,7 +1385,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1331,7 +1404,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1349,7 +1423,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1367,7 +1442,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1385,7 +1461,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1403,7 +1480,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1426,7 +1504,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1451,7 +1530,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1469,7 +1549,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1494,7 +1575,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1519,7 +1601,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1542,7 +1625,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1567,7 +1651,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1592,7 +1677,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1617,7 +1703,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1642,7 +1729,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1667,7 +1755,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1690,7 +1779,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -1706,7 +1796,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1720,7 +1811,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -1736,7 +1828,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     },
@@ -1750,7 +1843,8 @@
         "adapter-win32",
         "adapter-softpc",
         "bx-mantle",
-        "bx-core"
+        "bx-core",
+        "adapter-bop"
       ],
       "platformLibraries": []
     }
@@ -1765,7 +1859,8 @@
       "adapter-win32",
       "adapter-softpc",
       "bx-mantle",
-      "bx-core"
+      "bx-core",
+      "adapter-bop"
     ],
     "platformLibraries": [
       "libcmt.lib",

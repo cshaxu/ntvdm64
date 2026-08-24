@@ -1,7 +1,7 @@
 #ifndef T198_S23_FASTREAD_ATTEMPT_LEDGER_H
 #define T198_S23_FASTREAD_ATTEMPT_LEDGER_H
 
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 #define T198_S23_FASTREAD_ATTEMPT_LEDGER_CAPACITY 8u
 

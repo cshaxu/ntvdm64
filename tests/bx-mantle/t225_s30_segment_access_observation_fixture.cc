@@ -1,7 +1,7 @@
 #include "adapter-softpc/bx_ntvdm_finite_run.h"
 #include "adapter-softpc/bx_ntvdm_first_fault_observation_v1.h"
 #include "adapter-softpc/bx_ntvdm_segment_access_observation_v1.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *,

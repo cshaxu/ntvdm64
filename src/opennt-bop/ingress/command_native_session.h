@@ -7,7 +7,7 @@
  * or an OpenNT COMMAND type. */
 
 #include "opennt-bop/command/opennt_command_composition.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_COMMAND_NATIVE_SESSION_MAGIC 0x4258434eu
 #define BX_NTVDM_COMMAND_NATIVE_SESSION_VERSION 1u

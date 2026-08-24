@@ -1,6 +1,7 @@
 #include "opennt-host/xms/xms_shim.h"
 #include "opennt-bop/ingress/xms_v2_runtime_session.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -72,6 +73,7 @@ static uint16_t result_gpr16(const bx_ntvdm_cpu_result_v2 *result, uint32_t inde
 
 int main(void)
 {
+    if (!bx_ntvdm_bop_ingress_v1_bind(bx_ntvdm_opennt_bop_route_dispatch_v1, 0)) return 90;
     fixture_memory memory;
     bx_ntvdm_cpu_result_v2 result;
     uint16_t first_base, second_base;

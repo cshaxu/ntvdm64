@@ -6,7 +6,7 @@
  * is supplied as checked callbacks by the composition owner. */
 
 #include "opennt-bop/ingress/dem_ingress_shim.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_DEM_NATIVE_SESSION_MAGIC 0x4258444eu
 #define BX_NTVDM_DEM_NATIVE_SESSION_VERSION 1u

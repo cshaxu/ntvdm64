@@ -1,9 +1,14 @@
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 #include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 #include "opennt-bop/ingress/softpc_mouse_vector_v2_generic_ud_bridge.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 
 #include <stdint.h>
+#include "opennt-bop/ingress/opennt_bop_route.h"
 #include <string.h>
+#include "opennt-bop/ingress/opennt_bop_route.h"
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
@@ -54,6 +59,7 @@ static void initialize(struct bx_ntvdm_generic_ud_event_v1 *event)
 
 int main()
 {
+    if (!bx_ntvdm_bop_ingress_v1_bind(bx_ntvdm_opennt_bop_route_dispatch_v1, 0)) return 90;
     struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     const uint8_t table[4] = { 0x34u, 0x12u, 0x78u, 0x56u };

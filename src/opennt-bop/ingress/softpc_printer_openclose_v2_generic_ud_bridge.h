@@ -1,7 +1,7 @@
 #ifndef BX_NTVDM_SOFTPC_PRINTER_OPENCLOSE_V2_GENERIC_UD_BRIDGE_H
 #define BX_NTVDM_SOFTPC_PRINTER_OPENCLOSE_V2_GENERIC_UD_BRIDGE_H
 
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,4 +1,5 @@
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 #include "opennt-host/top_level/top_level_nosupport_shim.h"
 
 #include <string.h>
@@ -25,6 +26,7 @@ static int invoke(unsigned ax, unsigned selector,
 
 int main(void)
 {
+    if (!bx_ntvdm_bop_ingress_v1_bind(bx_ntvdm_opennt_bop_route_dispatch_v1, 0)) return 90;
     static const unsigned reasons[] = { 0u, 1u, 2u, 3u, 4u, 5u, 6u };
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     unsigned index;

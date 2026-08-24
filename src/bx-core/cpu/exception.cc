@@ -34,7 +34,9 @@
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+/* DIVERGENCE (BX-UD-001): the adopted #UD hook exchanges only its copied
+ * mechanical record with adapter-bop; no selector or provider enters core. */
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 #endif
 
 #if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER

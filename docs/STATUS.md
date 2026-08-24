@@ -2,10 +2,30 @@
 
 ## Current Work
 
-**Active: M0 T261 S4** — closed DEM host-support original-layout recovery;
-P7 delivery is in final governance review and no S5 implementation is admitted.
+**Active: M0 T261 S5** — selector-blind copied-frame ingress and typed
+completion split from `opennt-bop` to `adapter-bop`.
 
 ## Active Packet
+
+### M0 T261 S5 — adapter-bop generic ingress ownership split
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T261 S5`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | The owner explicitly authorized S5: “好的 接下来S5开工？”.  T261’s approved proposal admits this exact split after S4 closure. |
+| Objective | Establish `adapter-bop` as the sole selector-blind fixed-width generic-UD ingress/completion owner; retain every BOP selector/service recognition, provider dispatch and BOP-aware observation in `opennt-bop`. |
+| Non-goals | No new BOP enablement, no provider semantic change, no new CPU-frame ABI, no Bochs change, and no migration of family/session/provider logic into `adapter-bop`. |
+| Reference Baseline | T261/S4 P7 closure `694cf087`; existing `adapter-softpc/bx_ntvdm_generic_ud_bridge.h`; `opennt-bop/ingress/dem_v2_composition_bridge.c`; T260 formal component manifest and architecture/coding authorities. |
+| Files And ABI Surface | New `src/adapter-bop/*`; the generic-UD external bridge symbol; exported `opennt-bop` route callback; app session-composition bind/reset calls; manifest/generator module and link order; focused bridge fixture. |
+| Applicable Rules | `adapter-bop` is selector/service/family/DOS/WOW/provider blind; OpenNT route semantics remain in `opennt-bop`; `app` owns wiring; `adapter-softpc` remains the only SoftPC/CCPU-to-Bochs boundary; fixed-width copied data only. |
+| Verification | Function-level owner map; selector-token negative scan of `adapter-bop`; focused bind/decline/dispatch/reset fixture; formal Ninja closure; component-direction scan; `git diff --check`; documentation governance. |
+| Expected Markers | No selector/service literal or provider include in `adapter-bop`; no exported CPU generic-UD bridge implementation in `opennt-bop`; an unbound bridge declines, a bound route receives the unchanged copied event/outcome, and reset removes the binding. |
+| Asset Needs | Existing fixed-width generic-UD ABI, current route entry, app engine lifecycle, formal Ninja manifest/generator and focused C fixtures. |
+| Reporting Requirements | Exact function ownership map; no-new-ABI proof; retained route/observation source; binding lifetime; source/list/link changes; focused and formal results. |
+| Stop Conditions | A proposed adapter file reads a selector/service/window payload for meaning, names a provider/family/DOS/WOW concept, requires a raw guest/Bochs object pointer, or forces a provider semantic change. Pause and record the boundary conflict. |
+| Exit Criteria | `adapter-bop` owns the externally called generic ingress symbol and only generic registration/validation/forwarding; `opennt-bop` owns one exported route callback and all selector-aware logic; `app` binds/unbinds around one engine session; formal graph names eight linkable libraries and passes stated focused checks. |
+| Original Owner Request | “好的 接下来S5开工？” |
+| Similar-Issue Sweep | Generic-UD v1/v2 symbol definitions, handler registration lifetime, BOP observations, fixtures with bridge stubs, manifest module/source/link lists, old `bx-vdm`/ingress path references, and component READMEs. |
 
 ### M0 T261 S4 — closed: DEM host-support original-layout recovery
 
@@ -89,8 +109,13 @@ drive-policy facade.  Fresh r016 completes 462 Ninja edges; the DASD/IOCTL,
 error/lock and MISC direct-import fixtures pass.  The old r015 concurrent
 build root is explicitly excluded from evidence.  See the
 [S4 owner closure](etc/evidence/m0-t261-s4-p7-dem-host-owner-closure-001.md).
-No S5 implementation is active: its `adapter-bop` split is planned in the
-T261 proposal and awaits the next owner instruction.
+S5 is now admitted as the next bounded owner split.  It must not interpret a
+selector in `adapter-bop` or change the already-closed DEM host boundary.
+S5 P1 has completed that split: `adapter-bop` owns the generic CPU entry and
+the unchanged copied record; `opennt-bop` retains the renamed selector route;
+and `app` owns bind/reset around one engine run.  The actual formal r002 native
+link and focused ingress fixture pass; see
+[S5 ingress evidence](etc/evidence/m0-t261-s5-adapter-bop-ingress-split-001.md).
 
 ## Previous Active Packet — M0 T260
 

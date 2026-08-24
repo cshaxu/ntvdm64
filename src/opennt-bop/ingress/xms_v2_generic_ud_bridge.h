@@ -4,7 +4,7 @@
 /* XMS selector recognition belongs to bx-vdm.  The mantle calls only the
  * opaque generic-UD entry and neither identifies BOP bytes nor learns XMS. */
 
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 int bx_ntvdm_xms_v2_generic_ud_recognizes(
     const struct bx_ntvdm_generic_ud_event_v1 *event);

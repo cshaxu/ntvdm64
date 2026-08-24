@@ -1,8 +1,12 @@
 #include <stdint.h>
+#include "opennt-bop/ingress/opennt_bop_route.h"
 #include <string.h>
+#include "opennt-bop/ingress/opennt_bop_route.h"
 
 #include "opennt-bop/ingress/softpc_printer_openclose_v2_generic_ud_bridge.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 #include "adapter-softpc/softpc_printer_openclose_shim.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 
 int bx_ntvdm_mantle_generic_ud_bridge_v1(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
@@ -28,6 +32,7 @@ static void initialize(struct bx_ntvdm_generic_ud_event_v1 *event,
 
 int main(void)
 {
+    if (!bx_ntvdm_bop_ingress_v1_bind(bx_ntvdm_opennt_bop_route_dispatch_v1, 0)) return 90;
     struct bx_ntvdm_generic_ud_event_v1 event;
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     uint32_t opened = 0u;

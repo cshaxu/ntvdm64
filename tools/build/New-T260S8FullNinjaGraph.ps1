@@ -59,13 +59,13 @@ if ($InstructionHistoryDiagnostic -or $InstructionHistoryProvenanceDiagnostic) {
 if ($manifest.schema -ne 'ntdos64.t260.s8.component-manifest.v1' -or $manifest.architecture -ne 'x64' -or $manifest.runtimeLibrary -ne '/MT') {
     throw 'Unsupported T260 S8 component manifest.'
 }
-if (@($manifest.modules).Count -ne 7) { throw 'T260 S8 requires exactly seven linkable component modules.' }
+if (@($manifest.modules).Count -ne 8) { throw 'T261 S5 requires exactly eight linkable component modules.' }
 foreach ($module in @($manifest.modules)) {
-    if ($module.name -notin @('bx-core', 'bx-mantle', 'adapter-softpc', 'adapter-win32', 'opennt-host', 'opennt-bop', 'app') -or @($module.sources).Count -eq 0) {
+    if ($module.name -notin @('bx-core', 'bx-mantle', 'adapter-bop', 'adapter-softpc', 'adapter-win32', 'opennt-host', 'opennt-bop', 'app') -or @($module.sources).Count -eq 0) {
         throw 'Module ownership or source list is invalid.'
     }
     foreach ($source in @($module.sources)) {
-        if ($source -notmatch '^src/(?:bx-core|bx-mantle|adapter-softpc|adapter-win32|opennt-bop|opennt-host|app)/.+\.(c|cc)$' -or
+        if ($source -notmatch '^src/(?:bx-core|bx-mantle|adapter-bop|adapter-softpc|adapter-win32|opennt-bop|opennt-host|app)/.+\.(c|cc)$' -or
             !(Test-Path -LiteralPath (Join-Path $root $source) -PathType Leaf)) {
             throw "Invalid or missing manifest source: $source"
         }

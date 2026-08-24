@@ -1,7 +1,7 @@
 #ifndef BX_NTVDM_BOP_SPCKBD_HANDOFF_V2_GENERIC_UD_BRIDGE_H
 #define BX_NTVDM_BOP_SPCKBD_HANDOFF_V2_GENERIC_UD_BRIDGE_H
 
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 int bx_ntvdm_spckbd_handoff_v2_generic_ud_recognizes(
     const struct bx_ntvdm_generic_ud_event_v1 *event);

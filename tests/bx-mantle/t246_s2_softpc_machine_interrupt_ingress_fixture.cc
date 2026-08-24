@@ -1,6 +1,7 @@
 #include "bochs.h"
 #include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 #include "bx-mantle/minimal_machine.h"
 
 static void initialize_event(struct bx_ntvdm_generic_ud_event_v1 *event,
@@ -21,6 +22,7 @@ static void initialize_event(struct bx_ntvdm_generic_ud_event_v1 *event,
 
 int main(void)
 {
+    if (!bx_ntvdm_bop_ingress_v1_bind(bx_ntvdm_opennt_bop_route_dispatch_v1, 0)) return 90;
   bx_mantle_minimal_machine_c machine;
   struct bx_ntvdm_generic_ud_event_v1 event;
   struct bx_ntvdm_generic_ud_outcome_v1 outcome;

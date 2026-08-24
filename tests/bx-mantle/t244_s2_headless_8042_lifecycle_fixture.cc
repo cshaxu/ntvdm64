@@ -3,7 +3,7 @@
 #include "bx-mantle/pc_system.h"
 #include "bx-mantle/minimal_machine.h"
 #include "adapter-softpc/bx_ntvdm_port_action_v1.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *,

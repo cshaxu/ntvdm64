@@ -1,7 +1,7 @@
 #ifndef BX_NTVDM_BOP_TOP_LEVEL_NOSUPPORT_V2_GENERIC_UD_BRIDGE_H
 #define BX_NTVDM_BOP_TOP_LEVEL_NOSUPPORT_V2_GENERIC_UD_BRIDGE_H
 
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 /* OpenNT source: softpc.new/host/src/nt_bop.c:MS_bop_9.  This is a
  * top-level adapter route; the mantle sees only its opaque generic event. */

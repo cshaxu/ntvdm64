@@ -1,7 +1,8 @@
 #include "bochs.h"
 #include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
 #include "adapter-softpc/bx_ntvdm_a20_capability_v1.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
 #include "adapter-softpc/bx_ntvdm_ivt_watch_v1.h"
 
@@ -50,6 +51,7 @@ static int invoke_xms(unsigned service, unsigned ax, unsigned bx,
 
 int main()
 {
+    if (!bx_ntvdm_bop_ingress_v1_bind(bx_ntvdm_opennt_bop_route_dispatch_v1, 0)) return 90;
   bx_ntvdm_machine_stage_v1_request machine_request;
   uint8_t zero = 0u;
   bx_ntvdm_machine_stage_v1_request_clear(&machine_request);

@@ -1,7 +1,7 @@
 #ifndef T198_S121_DEM_LIFECYCLE_LEDGER_H
 #define T198_S121_DEM_LIFECYCLE_LEDGER_H
 
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
 
 #define T198_S121_DEM_LIFECYCLE_LEDGER_CAPACITY 16u

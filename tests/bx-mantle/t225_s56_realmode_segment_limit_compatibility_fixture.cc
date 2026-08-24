@@ -10,7 +10,7 @@
 #include "bochs.h"
 #include "adapter-softpc/bx_ntvdm_finite_run.h"
 #include "adapter-softpc/bx_ntvdm_first_fault_observation_v1.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 #include "bx-mantle/minimal_machine.h"
 #include "bx-core/cpu/cpu.h"
 

@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_generic_ud_bridge.h'
-$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_generic_ud_bridge.cc'
+$headerPath = Join-Path $repositoryRoot 'src/adapter-bop/bx_ntvdm_generic_ud_bridge.h'
+$sourcePath = Join-Path $repositoryRoot 'src/adapter-bop/bx_ntvdm_bop_ingress_v1.c'
 $corePath = Join-Path $repositoryRoot 'src/bx-core/cpu/exception.cc'
 foreach ($path in @($headerPath, $sourcePath, $corePath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing generic #UD bridge input: $path" }
@@ -19,8 +19,8 @@ foreach ($pattern in @('struct bx_ntvdm_generic_ud_event_v1',
         'bx_ntvdm_mantle_generic_ud_fixture_stop_observed')) {
     if ($header -notmatch $pattern) { throw "Missing generic #UD bridge invariant: $pattern" }
 }
-foreach ($pattern in @('bx-vdm', '(?-i:adapter)', '(?-i:BOP)', '(?-i:OpenNT)',
-        '(?-i:DOS)', '(?-i:WOW)', 'getenv', 'SIM->', 'bx_gui', 'callback')) {
+foreach ($pattern in @('0x50u', '0x52u', '0x53u', '0x54u', '0x57u', '0x59u',
+        '(?-i:OpenNT)', '(?-i:DOS)', '(?-i:WOW)', 'getenv', 'SIM->', 'bx_gui')) {
     if ($header -match $pattern -or $source -match $pattern) {
         throw "Forbidden generic #UD bridge dependency: $pattern"
     }
@@ -41,4 +41,4 @@ if ($core -notmatch 'bx_ntvdm_mantle_generic_ud_bridge_v1' -or
     $core -notmatch 'bx_pc_system\.kill_bochs_request = 1;') {
     throw 'The core must retain only the fixed mantle bridge and controlled-stop mechanics.'
 }
-Write-Output 'bx-mantle-generic-ud-bridge-boundary: fixed uncomposed bridge verified'
+Write-Output 'adapter-bop-generic-ud-bridge-boundary: selector-blind fixed bridge verified'

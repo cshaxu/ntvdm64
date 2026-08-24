@@ -21,7 +21,7 @@ public include surface is the BOP ingress/provider ABI consumed by `app`.
 | Directory | Contents | Modification rule |
 | --- | --- | --- |
 | `command/`, `dem/`, `xms/`, `dpmi/`, `softpc/` | Compiled, minimal-change OpenNT provider bodies, retained in their original owner-family grouping. | Every changed statement, include or definition is marked `DIVERGENCE:` and registered below. |
-| `ingress/` | Compiled project-owned BOP ingress and selector routing. | May adapt component boundaries, but may not reimplement an imported provider without a source-derived exception. |
+| `ingress/` | Compiled project-owned OpenNT selector routing and session/provider dispatch. | May adapt component boundaries, but may not reimplement an imported provider without a source-derived exception.  The selector-blind copied-frame ingress is in `adapter-bop`. |
 
 Immutable originals, uncompiled mirror fragments, pre-T260 overlays and import
 manifests are evidence rather than production code. They are retained under

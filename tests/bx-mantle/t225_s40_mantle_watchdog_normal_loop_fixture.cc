@@ -1,6 +1,6 @@
 #include "bochs.h"
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 #include <string.h>
 

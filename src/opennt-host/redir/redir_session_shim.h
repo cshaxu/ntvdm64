@@ -11,7 +11,7 @@
  */
 
 #include "adapter-softpc/opennt_dem_ccpu_sas_facade.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_REDIR_NATIVE_SESSION_MAGIC 0x42585244u
 #define BX_NTVDM_REDIR_NATIVE_SESSION_VERSION 1u
