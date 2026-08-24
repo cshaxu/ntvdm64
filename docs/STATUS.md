@@ -2,11 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T263 S6 — OpenNT `tools16` historical tool-closure admission.**
-This packet retains original guest-build tool inputs without adding them to
-the modern runtime or formal Ninja graph.
+**Active: M0 T263 S7 — MVDM owner-expansion closure.** This final packet
+reconciles the admitted original-package roots, their exception registers and
+the unchanged formal build boundary before T263 closes.
 
 ## Active Packet
+
+### M0 T263 S7 — MVDM owner-expansion closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S7`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T263 proposal S7 after completed S1 through S6. |
+| Objective | Reconcile all T263 source-preservation imports, component ownership/README registers and default formal-build non-admission. |
+| Non-goals | No new runtime feature, BOP implementation, tool invocation, static library, firmware activation or source behavior change. |
+| Reference Baseline | T263 S1–S6 evidence; OpenNT Git `5c5b979e`; formal root `build/M0-T262-S5/001`. |
+| Files And ABI Surface | T263 closure evidence/history/status and documentation inventory only; no ABI. |
+| Applicable Rules | Execution closure, source policy, original mirror rule, production-only roots, no generic component and formal-build hygiene. |
+| Verification | Per-packet SHA-256 records, source-owner scan, README register review, `ninja -C build/M0-T262-S5/001 -n`, documentation governance and scoped diff checks. |
+| Expected Markers | Five admitted package groups, six original component registers, no added formal object/archive/link owner. |
+| Asset Needs | Pinned OpenNT source, all T263 evidence, existing formal Ninja root and Git metadata. |
+| Reporting Requirements | State exact admitted counts, build-boundary result and deferred original owner packages. |
+| Stop Conditions | Missing owner/provenance, unregistered divergence, a generic-root leak or accidental new build edge pauses closure. |
+| Exit Criteria | Every admitted package has exact source/hash evidence and named owner; no new component crosses the mechanical/runtime boundary; closure history is recorded. |
+| Original Owner Request | “将以上架构修改，进行治理文档修正，并开始着手建立 opennt-guest 完整组件、opennt-softpc、opennt-utils 组件，并做好 tools/opennt 工具增补。” |
+| Similar-Issue Sweep | Missing package provenance, source mirror mixed with tests/reference copies, accidental runtime linkage, generic utility growth and firmware/runtime conflation. |
+
+**S7 P1 completed:** T263 package counts, owner registers and the unchanged
+formal graph boundary are reconciled in the [closure evidence](etc/evidence/m0-t263-s7-mvdm-owner-expansion-closure-001.md). T263 is closed; see
+the [history record](history/m0-t263-closure-20260824.md).
 
 ### M0 T263 S6 — OpenNT `tools16` historical tool-closure admission
 
