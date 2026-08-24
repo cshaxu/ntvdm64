@@ -2,12 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T261 S12 — closure record awaiting the owner's next task
-admission.** M0 T261 is technically closed: its S12 correction replaces the
-three project-authored OpenNT-host compatibility headers with exact original
-mirrors and completes the last admitted host-layout closure.
+**Active: M0 T262 S1 — original-component mirror conformance audit.** This
+owner-admitted package audits and repairs the provenance, local divergence
+markers and README indexes for `bx-core`, `opennt-guest` and `opennt-host`.
 
 ## Active Packet
+
+### M0 T262 S1 — original-component mirror conformance audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T262 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner: “审核已知的3个镜像包： bx-core, opennt-guest, opennt-host…审核并治理所有涉及的代码文件和README并汇报。” Owner clarification: non-mirror files do not belong in an original component and require an individual destination decision. |
+| Objective | Establish a complete, reproducible per-file mirror ledger and repair plan for the three original components: exact original, original subset, original with minimal edits, or non-mirror relocation/delete. |
+| Non-goals | No BOP feature work, no Bochs semantic expansion, no source import merely to raise file counts, no modification to an original file before its source/diff and owner disposition are recorded. |
+| Reference Baseline | Bochs 2.6 at `O:\repos.external\bochs-2.6-compat\bochs-2.6`; OpenNT at `refs/opennt`; T261/S12 exact-host-header closure; component READMEs and external-intrusion register. |
+| Files And ABI Surface | `src/bx-core/**`, `src/opennt-guest/**`, `src/opennt-host/**`, their three READMEs, one audit evidence ledger, and the T262 proposal/status governance only. |
+| Applicable Rules | Source-first recovery, original-component ownership, statement-local `DIVERGENCE(<ID>)`, README one-to-one exception index, and no non-mirror product file under an original-component root. |
+| Verification | Hash every retained file against its recorded origin; inspect every non-identical diff hunk and marker; compare README IDs against local markers; enumerate Git-untracked production inputs; run governance and scoped diff checks. |
+| Expected Markers | A ledger with every file's origin/disposition; an explicit list of all 18 current bx-core modifications and its one non-mirror header; zero-difference guest result; host subset/exception matrix. |
+| Asset Needs | Existing Bochs/OpenNT source roots, component READMEs, `adapter-external-intrusion-exceptions.md`, Git status and formal source-tree inventory. |
+| Reporting Requirements | Distinguish observed facts from planned remediation; every non-mirror file gets one of move-to-owner, merge-into-original, delete, or retain only after a new architecture decision. |
+| Stop Conditions | An unmatched source identity, a change that would alter machine/BOP semantics, a proposed new adapter, or a non-mirror file with no safe owner pauses implementation and is recorded for owner decision. |
+| Exit Criteria | All three component trees have a complete file-level ledger; every exception has an origin, local-marker/README status and a concrete remediation disposition; no audit result is inferred from directory naming alone. |
+| Original Owner Request | “对于无法和原始文件完全一致的：镜像文件可以是原始文件的子集；不同的实现部分可以存在但是要加注释并标记例外。” |
+| Similar-Issue Sweep | New headers, imported build inputs, untracked guest files, generated artifacts, `*_compat` paths, central versus component exception registers, include-path-only edits and source subsets. |
+
+**S1 baseline observation:** 164/183 non-README `bx-core` files are
+byte-identical to the pinned Bochs source; 18 differ and
+`cpu/bx_ntvdm_exception_intercept.h` is non-mirror. All 580 `opennt-guest`
+files match their OpenNT path byte-for-byte, including one untracked original
+input. `opennt-host` has seven exact files and four declared source
+subsets/minimally edited files. The detailed ledger is the required first P.
+
+**S1 P1 completed:** the complete per-file result and remediation disposition
+are recorded in the [T262 mirror audit](etc/evidence/m0-t262-s1-original-component-mirror-audit-001.md).
+The audit admits no source alteration: `bx-core` marker/non-mirror repair is
+S2, the guest input decision is S3, and host hunk validation is S4.
 
 ### M0 T261 S12 — closed: OpenNT-host original-header and mirror replacement
 

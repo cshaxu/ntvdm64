@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2247 |
+| Documentation records | 2249 |
 | --- | --- |
-| Generated UTC | 2026-08-24T17:23:22Z |
+| Generated UTC | 2026-08-24T17:32:26Z |
 
 ## Entries
 
@@ -224,6 +224,7 @@ content-divergent entries.
 | etc/evidence/m0-t261-s8-p6-vdmredir-host-body-disposition-001.md | indexed supporting material | 18291046bb0a3b7c2d3d1855dbe6851d6bcde8d15bc30e93fa4101ad52f655ad |
 | etc/evidence/m0-t261-s9-adapter-residue-owner-map-001.md | indexed supporting material | 8cca1fc57cd65fc7efae40e778e0d4ad069399af7534efaa8310f7dbc265cfbc |
 | etc/evidence/m0-t261-s9-final-adapter-residue-closure-001.md | indexed supporting material | ef5fc0635b137fb9b027eb984382b6e6821f76c423ae2d806c781b1df0ea2090 |
+| etc/evidence/m0-t262-s1-original-component-mirror-audit-001.md | indexed supporting material | 1428b5ab1a0d2b12ccb6225251aad4d48c3d32f9feaf89b526d03fab6da61c90 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -490,6 +491,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | a94a8dfb72d0625f20e0152dacab24b4aca3862f4d8960290201eeb361e1b129 |
 | etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | a041c10705221c3d6512f3935749c1c345e1c08304828ffe5d30c72fb8f6c8c7 |
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 4379d6d7dc01969e310c6b7715611fd582e041a0ab4b3e909bc6c88eba92ca6f |
+| etc/operations/proposal-original-component-mirror-conformance-001.md | indexed supporting material | faa3f9df4ede9fbc8c66144d7c3b9dedc7b8e41d1ede15997d93c82e29e9f1c1 |
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
@@ -2261,7 +2263,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 01f636dca4a71d7a6ab19866f06066c2f94765ba6247502a207cbb3fe6170c32 |
+| STATUS.md | principal control document | a0ed52e79e5cff5b021a99cded3e5371cd885bbf44e7d3d6ecb990f75a92297e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |
