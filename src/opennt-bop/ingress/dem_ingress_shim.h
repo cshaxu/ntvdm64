@@ -6,7 +6,7 @@
  * replaces only the copied four-byte selection boundary C4 C4 50 <service>.
  * It neither classifies another selector nor implements a DEM service. */
 
-#include "opennt-host/dem/demdisp_shim.h"
+#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 #include "adapter-softpc/bx_ntvdm_instruction_window_abi.h"
 
 /* A non-DEM window, incomplete BOP, mismatched service, or invalid call is

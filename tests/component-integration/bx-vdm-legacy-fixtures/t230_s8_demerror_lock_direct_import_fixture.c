@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-host/dem/demdisp_shim.h"
+#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 #include "opennt-host/dem/demerror_lock_shim.h"
 
 extern SAVEDEMWORLD RetryInfo;

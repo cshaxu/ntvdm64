@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-host/dem/dem_native_session_shim.h"
-#include "opennt-host/dem/dem_direct_host_session.h"
+#include "opennt-bop/ingress/dem_native_session.h"
+#include "opennt-bop/ingress/dem_direct_session.h"
 #include "opennt-bop/ingress/dem_v2_generic_ud_bridge.h"
 
 typedef struct fixture_state { uint8_t bytes[32]; } fixture_state;

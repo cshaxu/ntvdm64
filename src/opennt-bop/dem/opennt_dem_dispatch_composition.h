@@ -7,7 +7,7 @@
  * composition.  This seam supplies only the declared DEM bodies and the
  * bounded typed-call bridge; it performs no BOP classification. */
 
-#include "demerror_lock_shim.h"
+#include "opennt-host/dem/demerror_lock_shim.h"
 
 #define SVC_DEMLASTSVC 0x49u
 #define DEMSVCTRACE 0u

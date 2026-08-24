@@ -1,4 +1,4 @@
-#include "dem_direct_host_session.h"
+#include "dem_direct_session.h"
 
 #include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 

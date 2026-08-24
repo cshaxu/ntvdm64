@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-host/dem/demdisp_shim.h"
+#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 #include "opennt-host/dem/demdasd_ioctl_shim.h"
 
 typedef struct fixture_context { uint8_t guest[0x10000]; } fixture_context;

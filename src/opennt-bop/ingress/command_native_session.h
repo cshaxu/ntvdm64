@@ -3,7 +3,7 @@
 
 /* Adapter-owned bridge from the mantle's copied generic-UD record to the
  * directly imported OpenNT COMMAND bodies.  This is deliberately parallel to
- * dem_native_session_shim: the mantle never receives a selector, a service,
+ * dem_native_session: the mantle never receives a selector, a service,
  * or an OpenNT COMMAND type. */
 
 #include "opennt-bop/command/opennt_command_composition.h"

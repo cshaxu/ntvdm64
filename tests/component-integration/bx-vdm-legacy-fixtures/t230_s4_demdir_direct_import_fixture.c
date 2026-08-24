@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
-#include "opennt-host/dem/demdisp_shim.h"
+#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 #include "opennt-host/dem/demdir_shim.h"
 
 typedef struct context { uint8_t guest[0x20000]; } context;

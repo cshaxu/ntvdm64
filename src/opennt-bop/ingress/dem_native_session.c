@@ -1,4 +1,4 @@
-#include "dem_native_session_shim.h"
+#include "dem_native_session.h"
 
 #include <string.h>
 

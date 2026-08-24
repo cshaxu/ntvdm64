@@ -2,7 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
-#include "opennt-host/dem/demdisp_shim.h"
+#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 #include "opennt-host/dem/demfile_shim.h"
 #include "adapter-softpc/bx_ntvdm_host_handle_manager.h"
 

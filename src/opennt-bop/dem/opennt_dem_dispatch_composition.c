@@ -1,4 +1,4 @@
-#include "demdisp_shim.h"
+#include "opennt_dem_dispatch_composition.h"
 
 static __declspec(thread) bx_ntvdm_demhndl_call *g_demdisp_call;
 

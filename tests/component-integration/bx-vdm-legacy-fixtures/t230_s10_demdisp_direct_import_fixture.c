@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-host/dem/demdisp_shim.h"
+#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 
 typedef struct fixture_context { uint8_t guest[16]; } fixture_context;
 static int publish(void *s,HANDLE h,uint32_t*t,DWORD*e)

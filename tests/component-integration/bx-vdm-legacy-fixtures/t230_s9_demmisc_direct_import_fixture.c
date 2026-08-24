@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "opennt-host/dem/demdisp_shim.h"
+#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 #include "opennt-host/dem/demmisc_shim.h"
 
 typedef struct fixture_context {

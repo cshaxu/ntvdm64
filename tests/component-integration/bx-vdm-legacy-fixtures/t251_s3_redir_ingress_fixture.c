@@ -2,7 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
-#include "opennt-host/dem/dem_direct_host_session.h"
+#include "opennt-bop/ingress/dem_direct_session.h"
 #include "adapter-softpc/bx_ntvdm_host_handle_manager.h"
 #include "opennt-host/redir/redir_session_shim.h"
 #include "opennt-bop/ingress/redir_v2_generic_ud_bridge.h"

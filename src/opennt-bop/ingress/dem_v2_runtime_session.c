@@ -1,9 +1,9 @@
 #include "dem_v2_runtime_session.h"
 #include "dem_v2_startup_composition.h"
 
-#include "opennt-host/dem/dem_direct_host_session.h"
+#include "opennt-bop/ingress/dem_direct_session.h"
 #include "opennt-host/dem/demdasd_ioctl_shim.h"
-#include "opennt-host/dem/dem_native_session_shim.h"
+#include "opennt-bop/ingress/dem_native_session.h"
 #include "opennt-host/redir/redir_session_shim.h"
 
 #include <string.h>

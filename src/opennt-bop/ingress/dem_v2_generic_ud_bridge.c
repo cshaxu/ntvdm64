@@ -1,5 +1,5 @@
 #include "dem_v2_generic_ud_bridge.h"
-#include "opennt-host/dem/dem_native_session_shim.h"
+#include "opennt-bop/ingress/dem_native_session.h"
 
 int bx_ntvdm_dem_v2_generic_ud_recognizes(
     const struct bx_ntvdm_generic_ud_event_v1 *event)

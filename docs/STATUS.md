@@ -46,6 +46,9 @@ S3 P5 has extracted the reached RTL/NTDLL compatibility surface from that
 composition to `adapter-win32` without a reverse BOP dependency.  Fresh
 `r005` builds both affected libraries and passes the direct check-binary and
 dynamic-environment fixtures; see [RTL-facade evidence](etc/evidence/m0-t261-s3-p5-command-rtl-facade-extraction-001.md).
+S3 P6 has moved DEM session and dispatcher composition to `opennt-bop`; fresh
+`r006` compiles its production and affected fixture objects while retaining
+host drive/namespace capability in `opennt-host`; see [DEM composition evidence](etc/evidence/m0-t261-s3-p6-dem-composition-owner-rehome-001.md).
 
 ## Previous Active Packet — M0 T260
 

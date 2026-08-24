@@ -1,5 +1,5 @@
 #include "config_complete_v2_generic_ud_bridge.h"
-#include "opennt-host/dem/dem_native_session_shim.h"
+#include "opennt-bop/ingress/dem_native_session.h"
 
 void MS_bop_E(void);
 
