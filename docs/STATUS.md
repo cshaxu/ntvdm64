@@ -2,28 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T260 S7** — eight-component source-layout reorganization and
-build closure.
+**Active: M0 T260 S8** — closed; the next candidate requires explicit owner
+admission from `QUEUE.md`.
 
 ## Active Packet
 
-### M0 T260 S7 — SoftPC/CCPU mechanical facade migration
+T260 is retained as the last active-packet record solely for governance-tool
+compatibility.  It is closed and does not authorize follow-on implementation.
+
+### M0 T260 S8 P2 — closed: production-tree purification, tests and final closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T260 S7`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | S6 is closed. Owner requires the residual mapping-manager, DPMI seam and SoftPC/CCPU mechanical records to leave transitional `bx-vdm` without moving BOP selector or host capability semantics into the adapter. |
-| Objective | Establish `adapter-softpc` as the unique same-shaped SoftPC/CCPU/SAS-to-Bochs mechanical facade, including the single mapping-manager implementation and its three session instances. |
-| Non-goals | No BOP behavior implementation or enablement; no host capability or Win32 facade migration; no formal Ninja switch; no runtime claim; no source-body semantic change. |
-| Reference Baseline | S1 manifest, source policy, `opennt-bop/README.md`, the existing original/mirror inputs and current formal module closure. |
-| Files And ABI Surface | `src/opennt-bop/{original,mirror,route}`, transitional `src/bx-vdm/bop`, original OpenNT BOP roots and BOP provider include edges. |
-| Applicable Rules | Original source and minimal-change mirror are distinct; all mirror divergences remain registered; BOP owns route/meaning but never Bochs-object mechanics. |
+| Identifier Mode | `M0 T260 S8`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S7 is closed. Owner requires one complete migration of tests, formal Ninja inputs, generated manifests and import/governance scripts to the eight component roots before any build result is claimed. |
+| Objective | Make every eight-component `src/` root production-only: externalize reference/example/fixture/legacy inputs, place live OpenNT code by its original owner-family composition, individually annotate/register every production divergence, then retain the formal Ninja graph and final link closure. |
+| Non-goals | No BOP behavior implementation or enablement; no new Bochs semantic intrusion; no source-provider redesign. |
+| Reference Baseline | S1 manifest, source policy, current component READMEs, the completed r014 formal graph, and the now-superseded original/mirror/overlay staging tree. |
+| Files And ABI Surface | All eight component roots: seven linkable host-side components plus the `opennt-guest` artifact input; their component manifest, formal Ninja graph, test ownership and original OpenNT provenance/include edges. |
+| Applicable Rules | Component roots are production-only; references/examples/fixtures belong outside `src`; every nonzero imported-source edit is source-marked `DIVERGENCE:` and individually registered; BOP owns route/meaning but never Bochs-object mechanics. |
 | Verification | Git-rename/content identity scan; route/mirror/original owner scan; retained-shim negative scan; `git diff --check`; documentation governance verification. |
-| Expected Markers | No BOP route or mirror remains under transitional `bx-vdm`; `original/`, `mirror/` and `route/` have unambiguous roles; shims/observations remain for S6/S7. |
+| Expected Markers | No legacy source root remains; no `original/`, `mirror/`, `overlay/` or generic capability staging tree remains as a product-code category; source-shaped host/SoftPC/Win32 seams name their owner directly. |
 | Asset Needs | OpenNT source roots, current BOP mirror/route tree, owner manifest and formal module manifest. |
 | Reporting Requirements | Record exact moved roots/counts, no-source-edit proof, retained later-owner shim/observation inventory and remaining S8 build switch. |
 | Stop Conditions | A file combines BOP meaning with host capability/Win32/SoftPC mechanics such that it cannot be split without behavior change, or an original source identity cannot be proved. Pause for a targeted split decision. |
-| Exit Criteria | Every S7 mechanical file has one `adapter-softpc` home; no BOP selector/provider or host capability is misclassified; the single mapping-manager implementation remains unique; every move preserves content/history and the live manifest verifies the boundary. |
+| Exit Criteria | Formal graph, tests and tools use only target component paths; all eight static library boundaries and final-link ordering are explicit; no component root contains non-production reference/example/fixture/overlay code; every retained divergence has source and README evidence; no legacy `src/opennt`, `src/bx-vdm` or `src/cli` root remains; documentation, static gates and an actual formal Ninja build verdict are recorded. |
 | Original Owner Request | “应使用 1 个 T 任务，例如：M0 T260：七/八组件源码布局重整与构建闭合……这个 T 应拆成约 8 个 S。” |
 | Similar-Issue Sweep | Headers, fixtures, generated Ninja input, include roots, legacy v1/test-only code, OpenNT source provenance and the shared mapping-manager placement. |
 
@@ -66,6 +69,22 @@ including the one mapping-manager implementation with its three session
 instances. `src/bx-vdm` contains no live product file after the move. The
 remaining old-path references are exclusively S8 test/tool/build-graph work;
 see [S7 layout evidence](etc/evidence/m0-t260-s7-softpc-adapter-layout-migration-001.md).
+
+**S8 P2 amendment:** the prior staging labels `original/`, `mirror/`,
+`overlay/` and generic `capability/` are no longer acceptable inside a
+component root when they contain reference-only or non-linkable code.  S8 now
+purifies those roots, relocates reference/example/test-only material to
+`docs/etc/legacy_code/` or `tests/`, and records every retained production
+divergence at statement level.  The r014 formal Ninja link is a pre-purification
+baseline, not S8 closure evidence.
+
+**S8 P2 verification:** the reclassified graph passed its manifest gate at
+291 sources, 78 fixtures and one native target. Formal Ninja run `r018`
+linked all seven static libraries, every declared fixture and
+`bin/ntdos64-native.exe`; final actual incremental and dry-run invocations
+reported no work. The production-tree gate also passed: no non-production
+staging root or legacy build input remains, and all 46 source divergences are
+individually README-registered. See the [T260 closure](history/m0-t260-closure-20260823.md).
 
 **Current progress:** S1 is closed. The current reproducible manifest covers
 all 3,542 `src/` files in 3,735 rows with zero missing paths, duplicate paths
@@ -186,6 +205,11 @@ and the [formal T259 closure](history/m0-t259-closure-20260823.md) is
 recorded. T260 succeeds it; this retained record does not reopen T259's scope.
 
 ## Latest Closure
+
+M0 T260 closes the eight-component production source layout.  All component
+roots are production-only, legacy/reference code is externalized under
+`docs/etc/legacy_code`, and the formal Ninja closure plus source/README
+divergence register gate pass. See [T260 closure](history/m0-t260-closure-20260823.md).
 
 M0 T259 closes the source-first host/machine compatibility-facade baseline.
 Every reached `HOST-*`/`MACH-*` seam now has direct original composition, a

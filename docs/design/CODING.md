@@ -19,7 +19,11 @@ refs/                     read-only comparison, historical and archival inputs
   ntvdmx64-derived/       fixed NTVDMx64-derived comparison slice
   archive/                retired probes, adapters and reconstruction fixtures
 tests/
-  runner/                 CLI integration tests (historical test-path name)
+  app/                    app-owned CLI fixture inputs
+  adapter-softpc/         same-shaped SoftPC/CCPU facade fixtures
+  component-integration/  multi-component composition fixtures
+  bx-mantle/              Bochs-machine assembly fixtures
+  legacy/opennt/          retained non-product historical fixture/archive inputs
   adapter-softpc/         bridge, memory, stop, and negative boundary tests
 tools/                    tracked tools, arranged by declared responsibility
   build/                  build/publish entry points
@@ -61,6 +65,11 @@ SoftPC reference only to its declared `opennt-host`, `adapter-win32`, or
 `adapter-softpc` counterpart. Its `README.md` is the complete exception
 register for an imported BOP mirror; every edited source expression carries a
 `DIVERGENCE:` comment naming that replacement and why it is necessary.
+Component roots never retain an uncompiled original, overlay, sample or
+fixture merely for comparison: such material belongs in
+`docs/etc/legacy_code/` (or `tests/` for test code). Live imported production
+files are arranged by their original OpenNT owner family rather than by generic
+staging labels such as `original`, `mirror` or `overlay`.
 `src/adapter-win32/` owns source-shaped implementations of unavailable Win32
 interfaces using public modern Win32 APIs. `src/adapter-softpc/` owns only
 same-shaped SoftPC/CCPU-to-Bochs mechanical adaptation; it never owns BOP or
@@ -75,11 +84,11 @@ is under `refs/bochs/`. The unadmitted Bochs 3.0 snapshot was removed and is
 not a runtime input. Any source exception below the imported tree is registered in
 `docs/etc/research/adapter-external-intrusion-exceptions.md`.
 
-The legacy `src/cli/`, `src/bx-vdm/`, and `src/opennt/` paths are transitional
-inventory only until the admitted component-reorganization task moves them.
-They are not precedents for new source placement. The reorganization task must
-use `git mv` for pure-owner material and classify every intertwined file before
-any semantic rewrite.
+No `src/cli/`, `src/bx-vdm/`, or generic `src/opennt/` source root exists in
+the product layout. Historical OpenNT reference material remains under
+`refs/opennt`; retained non-product local fixtures and adapters belong under
+`tests/legacy/opennt/`. These roots are not product, formal-build or runtime
+inputs.
 
 All current modern runtime sources below `src/app/`, `src/adapter-softpc/`,
 `src/adapter-win32/`, `src/opennt-host/`, `src/opennt-bop/`,

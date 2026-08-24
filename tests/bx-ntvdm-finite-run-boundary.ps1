@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $headerPath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_finite_run.h'
@@ -22,7 +22,7 @@ foreach ($pattern in @(
     if ($header -notmatch $pattern) { throw "Missing finite-run contract invariant: $pattern" }
 }
 foreach ($pattern in @(
-        'bx_ntvdm_minimal_machine_c machine;', 'machine\.initialize\(0x100000, 0x100000\)',
+        'bx_mantle_minimal_machine_c machine;', 'machine\.initialize\(0x100000, 0x100000\)',
         'BX_NTVDM_FINITE_RUN_REQUEST_VERSION', 'bx_ntvdm_finite_run_ordinary_range_is_valid', 'bx_mem\.copy_from_ordinary_ram',
         'bx_mem\.copy_to_ordinary_ram', 'bx_pc_system\.initialize\(request->ips\)',
         'bx_cpu\.apply_real_mode_entry', 'bx_pc_system\.register_timer_ticks',

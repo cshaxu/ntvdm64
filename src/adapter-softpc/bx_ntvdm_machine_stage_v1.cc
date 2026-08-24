@@ -8,8 +8,11 @@
 #include "bx_ntvdm_physical_irq_v1.h"
 #include "bx_ntvdm_machine_stage_v1.h"
 #include "bx_ntvdm_ivt_watch_v1.h"
-#include "bx_ntvdm_minimal_machine.h"
+#include "bx-mantle/minimal_machine.h"
+#include "bx_ntvdm_a20_capability_v1.h"
 #include "bx_ntvdm_ordinary_ram_reservation_v1.h"
+#include "bx_ntvdm_port_action_v1.h"
+#include "bx_ntvdm_protected_range_action_v1.h"
 #include "bx_ntvdm_instruction_history.h"
 
 #include <string.h>
@@ -22,7 +25,7 @@
 #define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE 0
 #endif
 
-static bx_ntvdm_minimal_machine_c *bx_ntvdm_machine_stage_machine;
+static bx_mantle_minimal_machine_c *bx_ntvdm_machine_stage_machine;
 static uint32_t bx_ntvdm_machine_stage_v1_terminal_position_enabled;
 static struct bx_ntvdm_machine_stage_v1_terminal_position
   bx_ntvdm_machine_stage_v1_terminal_position;
@@ -263,11 +266,11 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_begin(
     return BX_NTVDM_MACHINE_STAGE_V1_REJECTED_INPUT;
   if (bx_ntvdm_machine_stage_machine != 0)
     return BX_NTVDM_MACHINE_STAGE_V1_REJECTED_ACTIVE;
-  bx_ntvdm_machine_stage_machine = new bx_ntvdm_minimal_machine_c;
+  bx_ntvdm_machine_stage_machine = new bx_mantle_minimal_machine_c;
   if (bx_ntvdm_machine_stage_machine == 0 ||
       bx_ntvdm_machine_stage_machine->initialize(request->guest_memory_bytes,
         request->guest_memory_bytes) !=
-        BX_NTVDM_MINIMAL_MACHINE_OK) {
+        BX_MANTLE_MINIMAL_MACHINE_OK) {
     delete bx_ntvdm_machine_stage_machine;
     bx_ntvdm_machine_stage_machine = 0;
     return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
@@ -288,6 +291,9 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_begin(
     return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
   }
   bx_ntvdm_ordinary_ram_reservation_v1_set_lifecycle_active(1u);
+  bx_ntvdm_a20_capability_v1_set_lifecycle_active(1u);
+  bx_ntvdm_protected_range_action_v1_set_lifecycle_active(1u);
+  bx_ntvdm_port_action_v1_set_lifecycle_active(1u);
 
   initial_state_action = request->initial_state_action;
   startup_action = request->startup_action;
@@ -320,13 +326,16 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_begin(
 
 extern "C" uint32_t bx_ntvdm_machine_stage_v1_reset(void)
 {
-  bx_ntvdm_minimal_machine_c *machine = bx_ntvdm_machine_stage_machine;
+  bx_mantle_minimal_machine_c *machine = bx_ntvdm_machine_stage_machine;
   bx_ntvdm_machine_stage_machine = 0;
   bx_ntvdm_mantle_clear_posted_physical_irqs_v1();
   bx_ntvdm_ivt_watch_v1_reset();
   bx_ntvdm_ordinary_ram_reservation_v1_set_lifecycle_active(0u);
+  bx_ntvdm_a20_capability_v1_set_lifecycle_active(0u);
+  bx_ntvdm_protected_range_action_v1_set_lifecycle_active(0u);
+  bx_ntvdm_port_action_v1_set_lifecycle_active(0u);
   if (machine == 0) return BX_NTVDM_MACHINE_STAGE_V1_OK;
-  if (machine->cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
+  if (machine->cleanup() != BX_MANTLE_MINIMAL_MACHINE_OK) {
     delete machine;
     return BX_NTVDM_MACHINE_STAGE_V1_CLEANUP_FAILURE;
   }
@@ -534,7 +543,7 @@ extern "C" uint32_t bx_ntvdm_machine_stage_v1_execute(
     return BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_HOST_CANCELLATION;
   bx_pc_system.initialize(request->ips);
   if (bx_ntvdm_machine_stage_machine->compose_headless_8042() !=
-      BX_NTVDM_MINIMAL_MACHINE_OK) {
+      BX_MANTLE_MINIMAL_MACHINE_OK) {
     bx_ntvdm_machine_stage_v1_reset();
     return BX_NTVDM_MACHINE_STAGE_V1_MACHINE_FAILURE;
   }

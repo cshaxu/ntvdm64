@@ -1,9 +1,9 @@
 #include "bochs.h"
 #include "iodev/iodev.h"
 #include "bx-mantle/pc_system.h"
-#include "bx-mantle/bx_ntvdm_minimal_machine.h"
-#include "bx-mantle/bx_ntvdm_port_action_v1.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "bx-mantle/minimal_machine.h"
+#include "adapter-softpc/bx_ntvdm_port_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *,
@@ -17,10 +17,10 @@ static int write8(struct bx_ntvdm_port_action_v1 *action, uint16_t port, uint8_t
 
 static int exercise_native_pic(void)
 {
-  bx_ntvdm_minimal_machine_c machine;
+  bx_mantle_minimal_machine_c machine;
   struct bx_ntvdm_port_action_v1 action;
   if (read8(&action, 0x21u)) return 1;
-  if (machine.initialize(0x200000, 0x200000) != BX_NTVDM_MINIMAL_MACHINE_OK) return 2;
+  if (machine.initialize(0x200000, 0x200000) != BX_MANTLE_MINIMAL_MACHINE_OK) return 2;
   if (bx_devices.pluginPicDevice == &bx_devices.stubPic) return 3;
   if (!read8(&action, 0x21u) || action.value != 0xffu) return 4;
   if (!write8(&action, 0x21u, 0xfeu)) return 5;
@@ -31,7 +31,7 @@ static int exercise_native_pic(void)
   if (!read8(&action, 0x20u) || action.value != 0x01u) return 9;
   if (!write8(&action, 0x20u, 0x20u)) return 10;
   if (!read8(&action, 0x20u) || action.value != 0x00u) return 11;
-  if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) return 12;
+  if (machine.cleanup() != BX_MANTLE_MINIMAL_MACHINE_OK) return 12;
   if (bx_devices.pluginPicDevice != &bx_devices.stubPic) return 13;
   if (read8(&action, 0x21u)) return 14;
   return 0;

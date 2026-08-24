@@ -1,7 +1,7 @@
 #include "bochs.h"
-#include "bx-vdm/bx_ntvdm_cpu_state_abi.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
-#include "bx-mantle/bx_ntvdm_minimal_machine.h"
+#include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "bx-mantle/minimal_machine.h"
 
 static void initialize_event(struct bx_ntvdm_generic_ud_event_v1 *event,
     uint8_t selector)
@@ -21,13 +21,13 @@ static void initialize_event(struct bx_ntvdm_generic_ud_event_v1 *event,
 
 int main(void)
 {
-  bx_ntvdm_minimal_machine_c machine;
+  bx_mantle_minimal_machine_c machine;
   struct bx_ntvdm_generic_ud_event_v1 event;
   struct bx_ntvdm_generic_ud_outcome_v1 outcome;
   Bit8u frame[4] = {0x34u, 0x12u, 0x70u, 0u};
   Bit8u value = 0u;
 
-  if (machine.initialize(0x200000u, 0x200000u) != BX_NTVDM_MINIMAL_MACHINE_OK)
+  if (machine.initialize(0x200000u, 0x200000u) != BX_MANTLE_MINIMAL_MACHINE_OK)
     return 1;
   if (!bx_mem.copy_to_ordinary_ram(0xb79u, sizeof(frame), frame)) return 2;
 
@@ -63,5 +63,5 @@ int main(void)
   initialize_event(&event, 0x07u);
   memset(&outcome, 0, sizeof(outcome));
   if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 9;
-  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 10;
+  return machine.cleanup() == BX_MANTLE_MINIMAL_MACHINE_OK ? 0 : 10;
 }

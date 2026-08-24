@@ -13,7 +13,7 @@ typedef uint16_t word;
 int bx_ntvdm_softpc_memory_size_begin(uint16_t *result_ax);
 int bx_ntvdm_softpc_memory_size_end(uint16_t *result_ax);
 
-/* DIVERGENCE: SAS and CPU names are process-global in historical SoftPC and
+/* DIVERGENCE(SOFTPC-DIV-001): SAS and CPU names are process-global in historical SoftPC and
  * collide with independently mirrored OpenNT modules.  The source body keeps
  * its original spellings; these private preprocessor aliases give this mirror
  * unique modern link symbols without changing its call order or data flow. */

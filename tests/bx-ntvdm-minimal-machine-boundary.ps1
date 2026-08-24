@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$machineHeader = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_machine.h'
-$machineSource = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_machine.cc'
+$machineHeader = Join-Path $repositoryRoot 'src/bx-mantle/minimal_machine.h'
+$machineSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_machine.cc'
 $memoryHeader = Join-Path $repositoryRoot 'src/bx-core/memory/memory.h'
 $iodevHeader = Join-Path $repositoryRoot 'refs/bochs/iodev/iodev.h'
 
@@ -14,7 +14,7 @@ foreach ($path in @($machineHeader, $machineSource, $memoryHeader, $iodevHeader)
 
 $header = Get-Content -LiteralPath $machineHeader -Raw
 $source = Get-Content -LiteralPath $machineSource -Raw
-$cleanupMatch = [regex]::Match($source, '(?s)bx_ntvdm_minimal_machine_status bx_ntvdm_minimal_machine_c::cleanup\(void\)\s*\{(.*?)\n\}')
+$cleanupMatch = [regex]::Match($source, '(?s)bx_mantle_minimal_machine_status bx_mantle_minimal_machine_c::cleanup\(void\)\s*\{(.*?)\n\}')
 if (-not $cleanupMatch.Success) {
     throw 'Missing BX-MACH-026 cleanup implementation'
 }
@@ -23,9 +23,9 @@ $memory = Get-Content -LiteralPath $memoryHeader -Raw
 $iodev = Get-Content -LiteralPath $iodevHeader -Raw
 
 foreach ($pattern in @(
-        'class bx_ntvdm_minimal_machine_c',
-        'bx_ntvdm_minimal_machine_status initialize\(Bit64u guest, Bit64u host\);',
-        'bx_ntvdm_minimal_machine_status cleanup\(void\);',
+        'class bx_mantle_minimal_machine_c',
+        'bx_mantle_minimal_machine_status initialize\(Bit64u guest, Bit64u host\);',
+        'bx_mantle_minimal_machine_status cleanup\(void\);',
         'bx_bool attempted;', 'bx_bool memory_owned;', 'bx_bool port_space_owned;')) {
     if ($header -notmatch $pattern) {
         throw "Missing BX-MACH-026 API invariant: $pattern"
@@ -33,7 +33,7 @@ foreach ($pattern in @(
 }
 
 foreach ($declaration in @($memory, $iodev)) {
-    if ($declaration -notmatch 'friend class bx_ntvdm_minimal_machine_c;') {
+    if ($declaration -notmatch 'friend class bx_mantle_minimal_machine_c;') {
         throw 'Missing BX-MACH-026 friend declaration'
     }
 }
@@ -44,7 +44,7 @@ foreach ($pattern in @(
         'BOCHSAPI BX_CPU_C bx_cpu;', 'BOCHSAPI BX_MEM_C bx_mem;',
         'bx_bool bx_user_quit = 0;',
         'SAFE_GET_IOFUNC\(\);', 'SAFE_GET_GENLOG\(\);',
-        'bx_ntvdm_minimal_sim_initialize\(\)',
+        'bx_mantle_minimal_sim_initialize\(\)',
         'bx_mem\.init_memory_without_sim\(guest, host\)',
         'bx_devices\.init_empty_port_space\(\)',
         'bx_cpu\.initialize\(\);', 'bx_pc_system\.set_enable_a20\(1\);',
@@ -64,8 +64,8 @@ function Assert-Ordered([string] $first, [string] $second) {
 }
 
 Assert-Ordered 'SAFE_GET_IOFUNC();' 'SAFE_GET_GENLOG();'
-Assert-Ordered 'SAFE_GET_GENLOG();' 'bx_ntvdm_minimal_sim_initialize()'
-Assert-Ordered 'bx_ntvdm_minimal_sim_initialize()' 'bx_mem.init_memory_without_sim(guest, host)'
+Assert-Ordered 'SAFE_GET_GENLOG();' 'bx_mantle_minimal_sim_initialize()'
+Assert-Ordered 'bx_mantle_minimal_sim_initialize()' 'bx_mem.init_memory_without_sim(guest, host)'
 Assert-Ordered 'bx_mem.init_memory_without_sim(guest, host)' 'bx_devices.init_empty_port_space()'
 Assert-Ordered 'bx_devices.init_empty_port_space()' 'bx_cpu.initialize();'
 Assert-Ordered 'bx_cpu.initialize();' 'bx_pc_system.set_enable_a20(1);'

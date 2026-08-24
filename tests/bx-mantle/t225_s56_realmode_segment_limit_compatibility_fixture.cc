@@ -8,10 +8,10 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "bx-mantle/bx_ntvdm_finite_run.h"
-#include "bx-mantle/bx_ntvdm_first_fault_observation_v1.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
-#include "bx-mantle/bx_ntvdm_minimal_machine.h"
+#include "adapter-softpc/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/bx_ntvdm_first_fault_observation_v1.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "bx-mantle/minimal_machine.h"
 #include "bx-core/cpu/cpu.h"
 
 #include <string.h>
@@ -175,13 +175,13 @@ int main(void)
   }
 
   {
-    bx_ntvdm_minimal_machine_c machine;
+    bx_mantle_minimal_machine_c machine;
     if (machine.initialize(0x100000u, 0x100000u) !=
-        BX_NTVDM_MINIMAL_MACHINE_OK ||
+        BX_MANTLE_MINIMAL_MACHINE_OK ||
         !machine.set_realmode_segment_limit_compatibility(1u)) return 5;
     bx_cpu.cpu_mode = BX_MODE_IA32_PROTECTED;
     if (machine.realmode_segment_limit_compatibility_active() ||
-        machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) return 6;
+        machine.cleanup() != BX_MANTLE_MINIMAL_MACHINE_OK) return 6;
   }
 
   return 0;

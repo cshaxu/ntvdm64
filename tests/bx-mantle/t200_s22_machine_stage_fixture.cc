@@ -1,6 +1,6 @@
 #include "bochs.h"
 #include "bx-core/memory/memory.h"
-#include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
+#include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
 
 #include <string.h>
 

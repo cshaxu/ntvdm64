@@ -3,18 +3,5 @@
 # there is an admitted, reviewable repository artifact.
 /build/
 
-# Leak protection for compiler/linker products accidentally emitted outside
-# the disposable build root.
-*.obj
-*.exe
-*.pdb
-*.ilk
-*.map
-*.lib
-*.a
-stdout.txt
-stderr.txt
-NUL.obj
-
 # External comparison/import checkouts live under refs/.
 refs/

@@ -1,7 +1,7 @@
 #include "bochs.h"
-#include "bx-mantle/bx_ntvdm_mechanical_action_v1.h"
-#include "bx-mantle/bx_ntvdm_minimal_machine.h"
-#include "bx-vdm/bx_ntvdm_initial_state_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
+#include "bx-mantle/minimal_machine.h"
+#include "app/bx_ntvdm_initial_state_action_v1.h"
 
 #include <string.h>
 
@@ -11,7 +11,7 @@ int main()
   struct bx_ntvdm_mechanical_action_v1 action;
   Bit8u bytes[5] = { 0, 0, 0, 0, 0 };
   Bit8u original[3] = { 0, 0, 0 };
-  bx_ntvdm_minimal_machine_c machine;
+  bx_mantle_minimal_machine_c machine;
 
   bx_ntvdm_initial_state_v1_clear(&state);
   state.disposition = BX_NTVDM_INITIAL_STATE_V1_PRESENT;
@@ -24,7 +24,7 @@ int main()
   bytes[3] = 0x40; bytes[4] = 0x50;
   memcpy(state.payload, bytes, sizeof(bytes));
   if (!bx_ntvdm_initial_state_action_v1_prepare(&state, &action)) return 1;
-  if (machine.initialize(0x100000, 0x100000) != BX_NTVDM_MINIMAL_MACHINE_OK)
+  if (machine.initialize(0x100000, 0x100000) != BX_MANTLE_MINIMAL_MACHINE_OK)
     return 2;
 
   /* The generic mantle operation has no profile or service knowledge. */
@@ -43,5 +43,5 @@ int main()
       original[0] != 0u || original[1] != 0u)
     return 4;
 
-  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 5;
+  return machine.cleanup() == BX_MANTLE_MINIMAL_MACHINE_OK ? 0 : 5;
 }

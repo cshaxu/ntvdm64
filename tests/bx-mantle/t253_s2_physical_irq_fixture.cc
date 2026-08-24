@@ -1,9 +1,9 @@
 #include "bochs.h"
 #include "iodev/iodev.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
-#include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
-#include "bx-mantle/bx_ntvdm_physical_irq_v1.h"
-#include "bx-mantle/bx_ntvdm_port_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
+#include "adapter-softpc/bx_ntvdm_physical_irq_v1.h"
+#include "adapter-softpc/bx_ntvdm_port_action_v1.h"
 #include "bx-mantle/pc_system.h"
 
 #include <string.h>

@@ -1,7 +1,7 @@
 #include "bochs.h"
-#include "bx-mantle/bx_ntvdm_finite_run.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
-#include "bx-mantle/bx_ntvdm_instruction_history.h"
+#include "adapter-softpc/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_instruction_history.h"
 
 #ifndef BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
 #define BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY 0

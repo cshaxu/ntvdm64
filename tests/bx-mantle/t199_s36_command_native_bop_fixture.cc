@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "bx-mantle/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/bx_ntvdm_finite_run.h"
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
 #include <string.h>
 

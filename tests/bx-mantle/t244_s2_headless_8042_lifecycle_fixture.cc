@@ -1,9 +1,9 @@
 #include "bochs.h"
 #include "iodev/iodev.h"
 #include "bx-mantle/pc_system.h"
-#include "bx-mantle/bx_ntvdm_minimal_machine.h"
-#include "bx-mantle/bx_ntvdm_port_action_v1.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "bx-mantle/minimal_machine.h"
+#include "adapter-softpc/bx_ntvdm_port_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *,
@@ -17,12 +17,12 @@ static int write8(struct bx_ntvdm_port_action_v1 *a, uint16_t port, uint8_t valu
 
 static int exercise(void)
 {
-  bx_ntvdm_minimal_machine_c machine;
+  bx_mantle_minimal_machine_c machine;
   struct bx_ntvdm_port_action_v1 a;
-  if (machine.initialize(0x200000, 0x200000) != BX_NTVDM_MINIMAL_MACHINE_OK) return 1;
+  if (machine.initialize(0x200000, 0x200000) != BX_MANTLE_MINIMAL_MACHINE_OK) return 1;
   if (read8(&a, 0x64u)) return 2;
   bx_pc_system.initialize(1000000u);
-  if (machine.compose_headless_8042() != BX_NTVDM_MINIMAL_MACHINE_OK) return 3;
+  if (machine.compose_headless_8042() != BX_MANTLE_MINIMAL_MACHINE_OK) return 3;
   if (!read8(&a, 0x64u) || (a.value & 0x18u) != 0x18u) return 4;
   if (!write8(&a, 0x21u, 0xfdu)) return 5; // unmask ordinary IRQ1 only
   if (!write8(&a, 0x60u, 0xf2u)) return 6; // original identify command
@@ -33,7 +33,7 @@ static int exercise(void)
   if (!write8(&a, 0x64u, 0xd4u) || !write8(&a, 0x60u, 0xffu)) return 10;
   bx_pc_system.tickn(64u);
   if (!read8(&a, 0x64u) || (a.value & 0x21u) != 0x00u) return 11;
-  if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) return 12;
+  if (machine.cleanup() != BX_MANTLE_MINIMAL_MACHINE_OK) return 12;
   if (read8(&a, 0x64u)) return 13;
   return 0;
 }

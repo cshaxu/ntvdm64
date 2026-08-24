@@ -11,7 +11,10 @@
 #include "bx_ntvdm_finite_run.h"
 #include "bx_ntvdm_generic_ud_bridge.h"
 #include "bx_ntvdm_first_fault_observation_v1.h"
-#include "bx_ntvdm_minimal_machine.h"
+#include "bx-mantle/minimal_machine.h"
+#include "bx_ntvdm_a20_capability_v1.h"
+#include "bx_ntvdm_port_action_v1.h"
+#include "bx_ntvdm_protected_range_action_v1.h"
 
 struct bx_ntvdm_finite_run_stop_state {
   bx_bool fired;
@@ -52,6 +55,13 @@ static bx_bool bx_ntvdm_finite_run_ordinary_range_is_valid(
     physical_address <= (bx_phy_address) (0x100000 - byte_count);
 }
 
+static void bx_ntvdm_finite_run_adapter_lifecycle_stop(void)
+{
+  bx_ntvdm_port_action_v1_set_lifecycle_active(0u);
+  bx_ntvdm_protected_range_action_v1_set_lifecycle_active(0u);
+  bx_ntvdm_a20_capability_v1_set_lifecycle_active(0u);
+}
+
 bx_bool bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
   bx_phy_address physical_address, Bit8u byte_count)
 {
@@ -69,7 +79,7 @@ bx_bool bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
 bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   const bx_ntvdm_finite_run_request *request)
 {
-  bx_ntvdm_minimal_machine_c machine;
+  bx_mantle_minimal_machine_c machine;
   bx_ntvdm_finite_run_stop_state stop_state;
   Bit8u entry_probe[2];
   Bit8u preserved[64];
@@ -99,12 +109,16 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   terminal_capture_physical_address = 0;
   terminal_capture_byte_count = 0;
 
-  if (machine.initialize(0x100000, 0x100000) != BX_NTVDM_MINIMAL_MACHINE_OK) {
+  if (machine.initialize(0x100000, 0x100000) != BX_MANTLE_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
+  bx_ntvdm_a20_capability_v1_set_lifecycle_active(1u);
+  bx_ntvdm_protected_range_action_v1_set_lifecycle_active(1u);
+  bx_ntvdm_port_action_v1_set_lifecycle_active(1u);
 
   if (!machine.set_realmode_segment_limit_compatibility(
       request->enable_realmode_segment_limit_compatibility)) {
+    bx_ntvdm_finite_run_adapter_lifecycle_stop();
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
@@ -112,6 +126,7 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   if (request->has_preentry_action) {
     struct bx_ntvdm_mechanical_action_v1 action = request->preentry_action;
     if (!bx_ntvdm_mantle_execute_mechanical_action_v1(&action)) {
+      bx_ntvdm_finite_run_adapter_lifecycle_stop();
       machine.cleanup();
       return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
     }
@@ -120,17 +135,20 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
   if (request->preserve_byte_count != 0 &&
       !bx_mem.copy_from_ordinary_ram(request->preserve_physical_address,
         request->preserve_byte_count, preserved)) {
+    bx_ntvdm_finite_run_adapter_lifecycle_stop();
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
   }
   if (!bx_mem.copy_to_ordinary_ram(request->entry_physical_address,
       request->entry_byte_count, request->entry_bytes)) {
+    bx_ntvdm_finite_run_adapter_lifecycle_stop();
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_REJECTED_INPUT;
   }
   if (request->preserve_byte_count != 0 &&
       !bx_mem.copy_to_ordinary_ram(request->preserve_physical_address,
         request->preserve_byte_count, preserved)) {
+    bx_ntvdm_finite_run_adapter_lifecycle_stop();
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
@@ -138,6 +156,7 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
       (!bx_mem.copy_from_ordinary_ram(request->entry_physical_address,
         sizeof(entry_probe), entry_probe) ||
        memcmp(entry_probe, request->entry_bytes, sizeof(entry_probe)) != 0)) {
+    bx_ntvdm_finite_run_adapter_lifecycle_stop();
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_ENTRY_BYTES_MISMATCH;
   }
@@ -149,6 +168,7 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     bx_ntvdm_finite_run_stop, request->instruction_tick_budget, 0,
     1, "finite-run-stop");
   if (stop_timer <= 0) {
+    bx_ntvdm_finite_run_adapter_lifecycle_stop();
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
@@ -163,6 +183,7 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     if (terminal_capture_count != 0) {
       if (!bx_mem.copy_from_ordinary_ram(terminal_capture_address,
           terminal_capture_count, terminal_snapshot.captured_bytes)) {
+        bx_ntvdm_finite_run_adapter_lifecycle_stop();
         machine.cleanup();
         return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
       }
@@ -177,7 +198,8 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
    * timer contract requires explicit deactivation before unregistration. */
   bx_pc_system.deactivate_timer((unsigned) stop_timer);
   bx_pc_system.unregisterTimer((unsigned) stop_timer);
-  if (machine.cleanup() != BX_NTVDM_MINIMAL_MACHINE_OK) {
+  bx_ntvdm_finite_run_adapter_lifecycle_stop();
+  if (machine.cleanup() != BX_MANTLE_MINIMAL_MACHINE_OK) {
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
   if (bx_ntvdm_mantle_generic_ud_stop_observed()) {

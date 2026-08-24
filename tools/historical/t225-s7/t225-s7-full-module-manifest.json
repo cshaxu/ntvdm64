@@ -1,0 +1,1410 @@
+{
+  "schema": "ntdos64.t225.s7.full-module-manifest.v1",
+  "origin": "Frozen from the reviewed T220/S6 current-source closure command records; the manifest itself is the future source-membership authority.",
+  "architecture": "x64",
+  "runtimeLibrary": "/MT",
+  "cpuConfiguration": "CPU5/Pentium-MMX, non-x86-64",
+  "configProjection": {
+    "tool": "tools/build/Project-BochsConfig.ps1",
+    "projection": "tools/build/t197-s6-cpu5-mantle-config-projection.json",
+    "source": "src/bx-core/config.h"
+  },
+  "includeRoots": [
+    "src",
+    "src/cli",
+    "src/bx-vdm",
+    "src/bx-mantle",
+    "src/bx-core",
+    "src/bx-core/cpu",
+    "refs/bochs",
+    "refs/bochs/instrument/stubs",
+    "refs/bochs/iodev",
+    "src/opennt/local/compat/host",
+    "src/opennt/base/mvdm/inc",
+    "src/opennt/base/mvdm/softpc.new/base/inc",
+    "src/opennt/base/mvdm/softpc.new/host/inc",
+    "src/opennt/public/internal/windows/inc"
+  ],
+  "modules": [
+    {
+      "name": "bx-core",
+      "sources": [
+        "src/bx-core/cpu/3dnow.cc",
+        "src/bx-core/cpu/access.cc",
+        "src/bx-core/cpu/access32.cc",
+        "src/bx-core/cpu/access64.cc",
+        "src/bx-core/cpu/aes.cc",
+        "src/bx-core/cpu/apic.cc",
+        "src/bx-core/cpu/arith16.cc",
+        "src/bx-core/cpu/arith32.cc",
+        "src/bx-core/cpu/arith64.cc",
+        "src/bx-core/cpu/arith8.cc",
+        "src/bx-core/cpu/avx_fma.cc",
+        "src/bx-core/cpu/avx_pfp.cc",
+        "src/bx-core/cpu/avx.cc",
+        "src/bx-core/cpu/avx2.cc",
+        "src/bx-core/cpu/bcd.cc",
+        "src/bx-core/cpu/bit.cc",
+        "src/bx-core/cpu/bit16.cc",
+        "src/bx-core/cpu/bit32.cc",
+        "src/bx-core/cpu/bit64.cc",
+        "src/bx-core/cpu/bmi32.cc",
+        "src/bx-core/cpu/bmi64.cc",
+        "src/bx-core/cpu/call_far.cc",
+        "src/bx-core/cpu/cpu.cc",
+        "src/bx-core/cpu/cpudb/amd_k6_2_chomper.cc",
+        "src/bx-core/cpu/cpudb/pentium_mmx.cc",
+        "src/bx-core/cpu/crc32.cc",
+        "src/bx-core/cpu/crregs.cc",
+        "src/bx-core/cpu/ctrl_xfer_pro.cc",
+        "src/bx-core/cpu/ctrl_xfer16.cc",
+        "src/bx-core/cpu/ctrl_xfer32.cc",
+        "src/bx-core/cpu/ctrl_xfer64.cc",
+        "src/bx-core/cpu/data_xfer16.cc",
+        "src/bx-core/cpu/data_xfer32.cc",
+        "src/bx-core/cpu/data_xfer64.cc",
+        "src/bx-core/cpu/data_xfer8.cc",
+        "src/bx-core/cpu/debugstuff.cc",
+        "src/bx-core/cpu/event.cc",
+        "src/bx-core/cpu/exception.cc",
+        "src/bx-core/cpu/fetchdecode.cc",
+        "src/bx-core/cpu/fetchdecode64.cc",
+        "src/bx-core/cpu/flag_ctrl_pro.cc",
+        "src/bx-core/cpu/flag_ctrl.cc",
+        "src/bx-core/cpu/fpu_emu.cc",
+        "src/bx-core/cpu/gather.cc",
+        "src/bx-core/cpu/generic_cpuid.cc",
+        "src/bx-core/cpu/icache.cc",
+        "src/bx-core/cpu/init.cc",
+        "src/bx-core/cpu/io.cc",
+        "src/bx-core/cpu/iret.cc",
+        "src/bx-core/cpu/jmp_far.cc",
+        "src/bx-core/cpu/load.cc",
+        "src/bx-core/cpu/logical16.cc",
+        "src/bx-core/cpu/logical32.cc",
+        "src/bx-core/cpu/logical64.cc",
+        "src/bx-core/cpu/logical8.cc",
+        "src/bx-core/cpu/mmx.cc",
+        "src/bx-core/cpu/msr.cc",
+        "src/bx-core/cpu/mult16.cc",
+        "src/bx-core/cpu/mult32.cc",
+        "src/bx-core/cpu/mult64.cc",
+        "src/bx-core/cpu/mult8.cc",
+        "src/bx-core/cpu/paging.cc",
+        "src/bx-core/cpu/proc_ctrl.cc",
+        "src/bx-core/cpu/protect_ctrl.cc",
+        "src/bx-core/cpu/resolver.cc",
+        "src/bx-core/cpu/ret_far.cc",
+        "src/bx-core/cpu/segment_ctrl_pro.cc",
+        "src/bx-core/cpu/segment_ctrl.cc",
+        "src/bx-core/cpu/shift16.cc",
+        "src/bx-core/cpu/shift32.cc",
+        "src/bx-core/cpu/shift64.cc",
+        "src/bx-core/cpu/shift8.cc",
+        "src/bx-core/cpu/smm.cc",
+        "src/bx-core/cpu/soft_int.cc",
+        "src/bx-core/cpu/sse_move.cc",
+        "src/bx-core/cpu/sse_pfp.cc",
+        "src/bx-core/cpu/sse_rcp.cc",
+        "src/bx-core/cpu/sse_string.cc",
+        "src/bx-core/cpu/sse.cc",
+        "src/bx-core/cpu/stack.cc",
+        "src/bx-core/cpu/stack16.cc",
+        "src/bx-core/cpu/stack32.cc",
+        "src/bx-core/cpu/stack64.cc",
+        "src/bx-core/cpu/string.cc",
+        "src/bx-core/cpu/svm.cc",
+        "src/bx-core/cpu/tasking.cc",
+        "src/bx-core/cpu/tbm32.cc",
+        "src/bx-core/cpu/tbm64.cc",
+        "src/bx-core/cpu/vm8086.cc",
+        "src/bx-core/cpu/vmcs.cc",
+        "src/bx-core/cpu/vmexit.cc",
+        "src/bx-core/cpu/vmfunc.cc",
+        "src/bx-core/cpu/vmx.cc",
+        "src/bx-core/cpu/xop.cc",
+        "src/bx-core/cpu/xsave.cc",
+        "src/bx-core/disasm/dis_decode.cc",
+        "src/bx-core/disasm/dis_groups.cc",
+        "src/bx-core/disasm/resolve.cc",
+        "src/bx-core/disasm/syntax.cc",
+        "src/bx-core/fpu/f2xm1.cc",
+        "src/bx-core/fpu/ferr.cc",
+        "src/bx-core/fpu/fpatan.cc",
+        "src/bx-core/fpu/fprem.cc",
+        "src/bx-core/fpu/fpu_arith.cc",
+        "src/bx-core/fpu/fpu_cmov.cc",
+        "src/bx-core/fpu/fpu_compare.cc",
+        "src/bx-core/fpu/fpu_const.cc",
+        "src/bx-core/fpu/fpu_load_store.cc",
+        "src/bx-core/fpu/fpu_misc.cc",
+        "src/bx-core/fpu/fpu_trans.cc",
+        "src/bx-core/fpu/fpu.cc",
+        "src/bx-core/fpu/fsincos.cc",
+        "src/bx-core/fpu/fyl2x.cc",
+        "src/bx-core/fpu/poly.cc",
+        "src/bx-core/fpu/softfloat-muladd.cc",
+        "src/bx-core/fpu/softfloat-round-pack.cc",
+        "src/bx-core/fpu/softfloat-specialize.cc",
+        "src/bx-core/fpu/softfloat.cc",
+        "src/bx-core/fpu/softfloat16.cc",
+        "src/bx-core/fpu/softfloatx80.cc",
+        "src/bx-core/memory/memory.cc",
+        "src/bx-core/memory/misc_mem.cc"
+      ]
+    },
+    {
+      "name": "bx-mantle",
+      "sources": [
+        "src/bx-mantle/bx_ntvdm_a20_capability_v1.cc",
+        "src/bx-mantle/bx_ntvdm_cancellation_controller_v1.cc",
+        "src/bx-mantle/bx_ntvdm_finite_run.cc",
+        "src/bx-mantle/bx_ntvdm_generic_ud_bridge.cc",
+        "src/bx-mantle/bx_ntvdm_first_fault_observation_v1.cc",
+        "src/bx-mantle/bx_ntvdm_ivt_watch_v1.cc",
+        "src/bx-mantle/bx_ntvdm_segment_access_observation_v1.cc",
+        "src/bx-mantle/bx_ntvdm_software_interrupt_observation_v1.cc",
+        "src/bx-mantle/bx_ntvdm_interrupt_return_observation_v1.cc",
+        "src/bx-mantle/bx_ntvdm_machine_stage_v1.cc",
+        "src/bx-mantle/bx_ntvdm_machine_engine_v1.c",
+        "src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc",
+        "src/bx-mantle/bx_ntvdm_physical_irq_v1.cc",
+        "src/bx-mantle/bx_ntvdm_physical_write_observation_v1.cc",
+        "src/bx-mantle/bx_ntvdm_headless_8042.cc",
+        "src/bx-mantle/bx_ntvdm_port_action_v1.cc",
+        "src/bx-mantle/bx_ntvdm_protected_range_action_v1.cc",
+        "src/bx-mantle/bx_ntvdm_ordinary_ram_reservation_v1.cc",
+        "src/bx-mantle/minimal_machine.cc",
+        "src/bx-mantle/bx_ntvdm_minimal_sim.cc",
+        "src/bx-mantle/logio.cc",
+        "src/bx-mantle/minimal_port_space.cc",
+        "src/bx-mantle/minimal_product_shell.cc",
+        "src/bx-mantle/paramtree.cc",
+        "src/bx-mantle/pc_system.cc",
+        "src/bx-mantle/pic.cc",
+        "src/bx-mantle/keyboard.cc",
+        "src/bx-mantle/scancodes.cc"
+      ]
+    },
+    {
+      "name": "bx-vdm",
+      "sources": [
+        "src/bx-vdm/bx_ntvdm_engine_contract_v1.c",
+        "src/bx-vdm/bx_ntvdm_engine_run_v1.c",
+        "src/bx-vdm/bx_ntvdm_ntdos_exec_observation_v1.c",
+        "src/bx-vdm/bop/opennt/softpc/mem_size.c",
+        "src/bx-vdm/bop/opennt/softpc/tape_io.c",
+        "src/bx-vdm/bop/opennt/softpc/emm_fncs.c",
+        "src/bx-vdm/bop/opennt/softpc/mouse_install1_headless.c",
+        "src/bx-vdm/bop/opennt/softpc/printer_openclose.c",
+        "src/bx-vdm/bop/opennt/softpc/update_kbd_int15.c",
+        "src/bx-vdm/bop/opennt/softpc/spckbd_handoff.c",
+        "src/bx-vdm/bop/shim/softpc_memory_size_shim.c",
+        "src/bx-vdm/bop/shim/softpc_tape_io_shim.c",
+        "src/bx-vdm/bop/shim/softpc_emm_unavailable_shim.c",
+        "src/bx-vdm/bop/shim/softpc_mouse_vector_shim.c",
+        "src/bx-vdm/bop/shim/softpc_printer_openclose_shim.c",
+        "src/bx-vdm/bop/shim/spckbd_handoff_shim.c",
+        "src/bx-vdm/bop/softpc_memory_size_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/softpc_machine_interrupt_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/softpc_tape_io_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/softpc_emm_unavailable_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/softpc_mouse_vector_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/softpc_printer_openclose_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/spckbd_handoff_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/opennt/xms/xms.c",
+        "src/bx-vdm/bop/opennt/xms/suballoc.c",
+        "src/bx-vdm/bop/opennt/xms/xmsa20.c",
+        "src/bx-vdm/bop/opennt/xms/xmsblock.c",
+        "src/bx-vdm/bop/opennt/xms/xmsdisp.c",
+        "src/bx-vdm/bop/opennt/xms/xmsmisc.c",
+        "src/bx-vdm/bop/opennt/xms/xmsumb.c",
+        "src/bx-vdm/bop/shim/xms_shim.c",
+        "src/bx-vdm/bop/shim/dpmi_xmem_record_adapter.c",
+        "src/bx-vdm/bop/shim/dpmi_startup_session_shim.c",
+        "src/bx-vdm/bop/shim/dpmi_startup_source_shim.c",
+        "src/bx-vdm/bop/shim/dpmi_descriptor_source_shim.c",
+        "src/bx-vdm/bop/opennt/dpmi/dpmi32.c",
+        "src/bx-vdm/bop/opennt/dpmi/dpmiselr.c",
+        "src/bx-vdm/bop/opennt/dem/demhndl.c",
+        "src/bx-vdm/bop/opennt/dem/dem.c",
+        "src/bx-vdm/bop/opennt/dem/demdata.c",
+        "src/bx-vdm/bop/opennt/dem/demdasd.c",
+        "src/bx-vdm/bop/opennt/dem/demerror.c",
+        "src/bx-vdm/bop/opennt/dem/demdir.c",
+        "src/bx-vdm/bop/opennt/dem/demdisp.c",
+        "src/bx-vdm/bop/opennt/dem/demfile.c",
+        "src/bx-vdm/bop/opennt/dem/demlabel.c",
+        "src/bx-vdm/bop/opennt/dem/demlock.c",
+        "src/bx-vdm/bop/opennt/dem/demmisc.c",
+        "src/bx-vdm/bop/opennt/dem/demmsg.c",
+        "src/bx-vdm/bop/opennt/dem/demfcb.c",
+        "src/bx-vdm/bop/opennt/dem/demgset.c",
+        "src/bx-vdm/bop/opennt/dem/demioctl.c",
+        "src/bx-vdm/bop/opennt/dem/demsrch.c",
+        "src/bx-vdm/bop/opennt/softpc/nt_bop_config_done.c",
+        "src/bx-vdm/bop/opennt/command/cmdmisc.c",
+        "src/bx-vdm/bop/opennt/command/cmdpif.c",
+        "src/bx-vdm/bop/opennt/command/cmddisp.c",
+        "src/bx-vdm/bop/opennt/command/cmdexit.c",
+        "src/bx-vdm/bop/opennt/command/cmdconf.c",
+        "src/bx-vdm/bop/opennt/command/cmdenv.c",
+        "src/bx-vdm/bop/opennt/command/cmdexec.c",
+        "src/bx-vdm/bop/opennt/command/cmdkeyb.c",
+        "src/bx-vdm/bop/opennt/command/cmdredir.c",
+        "src/bx-vdm/bop/dem_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/command_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/xms_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/redir_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/config_complete_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/top_level_nosupport_v2_generic_ud_bridge.c",
+        "src/bx-vdm/bop/shim/top_level_nosupport_shim.c",
+        "src/bx-vdm/bop/shim/opennt_error_dialog_facade.c",
+        "src/bx-vdm/bop/shim/config_complete_shim.c",
+        "src/bx-vdm/bop/command_v2_runtime_session.c",
+        "src/bx-vdm/bop/xms_v2_runtime_session.c",
+        "src/bx-vdm/bop/dem_v2_composition_bridge.c",
+        "src/bx-vdm/bop/dem_v2_runtime_session.c",
+        "src/bx-vdm/bop/dem_v2_startup_composition.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_bop_sequence_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_command_bootstrap_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_command_current_dir_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_dem_open_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_demfile_create_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_ntdos_exec_entry_observation_v1.c",
+        "src/bx-vdm/bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.c",
+        "src/bx-vdm/bop/shim/dem_direct_host_session.c",
+        "src/bx-vdm/bop/shim/bx_ntvdm_host_handle_manager.c",
+        "src/bx-vdm/bop/shim/bx_ntvdm_guest_pointer_manager.c",
+        "src/bx-vdm/bop/shim/bx_ntvdm_dem_direct_context.c",
+        "src/bx-vdm/bop/shim/demdir_shim.c",
+        "src/bx-vdm/bop/shim/demfile_shim.c",
+        "src/bx-vdm/bop/shim/demgset_shim.c",
+        "src/bx-vdm/bop/shim/demdasd_ioctl_shim.c",
+        "src/bx-vdm/bop/shim/demerror_lock_shim.c",
+        "src/bx-vdm/bop/shim/demdisp_shim.c",
+        "src/bx-vdm/bop/shim/dem_ingress_shim.c",
+        "src/bx-vdm/bop/shim/dem_native_session_shim.c",
+        "src/bx-vdm/bop/shim/xms_native_session_shim.c",
+        "src/bx-vdm/bop/shim/redir_session_shim.c",
+        "src/bx-vdm/bop/shim/demmisc_shim.c",
+        "src/bx-vdm/bop/shim/demsrch_fcb_shim.c",
+        "src/bx-vdm/bop/shim/demhndl_shim.c",
+        "src/bx-vdm/bop/shim/command_misc_shim.c",
+        "src/bx-vdm/bop/shim/command_pif_shim.c",
+        "src/bx-vdm/bop/shim/command_opennt_pif_parser.c",
+        "src/bx-vdm/bop/shim/command_native_session_shim.c",
+        "src/bx-vdm/bop/shim/command_config_shim.c",
+        "src/bx-vdm/bop/shim/command_environment_shim.c",
+        "src/bx-vdm/bop/shim/command_binary_shim.c",
+        "src/bx-vdm/bx_ntvdm_bulk_result_transaction.c",
+        "src/bx-vdm/bx_ntvdm_cpu_delta_abi.c",
+        "src/bx-vdm/bx_ntvdm_cpu_result_v2.c",
+        "src/bx-vdm/bx_ntvdm_cpu_state_abi.c",
+        "src/bx-vdm/bx_ntvdm_exception_abi.c",
+        "src/bx-vdm/bx_ntvdm_guest_gather_read_action_v1.c",
+        "src/bx-vdm/bx_ntvdm_guest_range.c",
+        "src/bx-vdm/bx_ntvdm_guest_read_action_v1.c",
+        "src/bx-vdm/bx_ntvdm_guest_write_abi.c",
+        "src/bx-vdm/bx_ntvdm_host_drive_policy.c",
+        "src/bx-vdm/bx_ntvdm_host_namespace.c",
+        "src/bx-vdm/bx_ntvdm_initial_state_abi.c",
+        "src/bx-vdm/bx_ntvdm_initial_state_action_v1.c",
+        "src/bx-vdm/bx_ntvdm_initial_state_catalog_v1.c",
+        "src/bx-vdm/bx_ntvdm_instruction_window_abi.c",
+        "src/bx-vdm/bx_ntvdm_multi_write_abi.c",
+        "src/bx-vdm/bx_ntvdm_multi_write_transaction.c",
+        "src/bx-vdm/bx_ntvdm_startup_machine_interrupt_v1.c",
+        "src/bx-vdm/bx_ntvdm_normal_return_observation_v1.c",
+        "src/bx-vdm/bx_ntvdm_normal_terminal_sequence_observation_v1.c",
+        "src/bx-vdm/bx_ntvdm_startup_plan_abi.c",
+        "src/bx-vdm/bx_ntvdm_terminal_observation_v1.c"
+      ]
+    },
+    {
+      "name": "opennt-host",
+      "sources": [
+        "src/opennt/local/compat/host/opennt_int06_provider_v1.c"
+      ]
+    },
+    {
+      "name": "cli",
+      "sources": [
+        "src/cli/byob_identity.c",
+        "src/cli/byob_image.c",
+        "src/cli/byob_launch_declaration_v1.c",
+        "src/cli/byob_launch_plan_v2.c",
+        "src/cli/ntdos64_config.c",
+        "src/cli/ntdos64_dos_safe_alias_v1.c",
+        "src/cli/byob_target_selection.c",
+        "src/cli/ntdos64_console_cancellation_v1.c",
+        "src/cli/ntdos64_engine_worker_v1.c",
+        "src/cli/ntdos64_lifecycle_v1.c"
+      ]
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "t258-s1-guest-pointer-manager-fixture",
+      "source": "tests/bx-vdm/t258-s1-guest-pointer-manager-fixture.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": []
+    },
+    {
+      "name": "t255-s2-generic-context-resume-fixture",
+      "source": "tests/bx-mantle/t255_s2_generic_context_resume_fixture.cc",
+      "libraries": [
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t256-s6-guest-memory-geometry-fixture",
+      "source": "tests/bx-mantle/t256_s6_guest_memory_geometry_fixture.cc",
+      "libraries": [
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t256-s8-ordinary-ram-reservation-fixture",
+      "source": "tests/bx-mantle/t256_s8_ordinary_ram_reservation_fixture.cc",
+      "libraries": [
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t256-s10-xmem-record-adapter-fixture",
+      "source": "tests/bx-vdm/t256_s10_xmem_record_adapter_fixture.cc",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "platformLibraries": []
+    },
+    {
+      "name": "t257-s3-dpmi-startup-session-fixture",
+      "source": "tests/bx-vdm/t257_s3_dpmi_startup_session_fixture.cc",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "platformLibraries": []
+    },
+    {
+      "name": "t257-s3-native-guest-ldt-fixture",
+      "source": "tests/bx-mantle/t257_s3_native_guest_ldt_fixture.cc",
+      "libraries": ["bx-mantle", "bx-core"],
+      "platformLibraries": []
+    },
+    {
+      "name": "t257-s3-dpmi-descriptor-source-fixture",
+      "source": "tests/bx-vdm/t257_s3_dpmi_descriptor_source_fixture.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": []
+    },
+    {
+      "name": "t256-s6-engine-geometry-contract-fixture",
+      "source": "tests/bx-mantle/bx_ntvdm_engine_contract_v1_test.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t253-s2-physical-irq-fixture",
+      "source": "tests/bx-mantle/t253_s2_physical_irq_fixture.cc",
+      "libraries": [
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t245-s22-dos-safe-alias-fixture",
+      "source": "tests/runner/t245_s22_dos_safe_alias_fixture.c",
+      "libraries": ["cli"],
+      "platformLibraries": ["kernel32.lib"]
+    },
+    {
+      "name": "t245-s21-oem-create-file-fixture",
+      "source": "tests/bx-vdm/t245_s21_oem_create_file_fixture.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host"],
+      "platformLibraries": ["user32.lib"]
+    },
+    {
+      "name": "t245-s18-dem-open-observation-fixture",
+      "source": "tests/bx-vdm/t245_s18_dem_open_observation_fixture.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "platformLibraries": ["user32.lib"]
+    },
+    {
+      "name": "t245-s17-command-current-dir-observation-fixture",
+      "source": "tests/bx-vdm/t245_s17_command_current_dir_observation_fixture.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "platformLibraries": ["user32.lib"]
+    },
+    {
+      "name": "t245-s14-command-bootstrap-observation-fixture",
+      "source": "tests/bx-vdm/t245_s14_command_bootstrap_observation_fixture.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core"],
+      "platformLibraries": ["user32.lib"]
+    },
+    {
+      "name": "t245-s11-config-complete-fixture",
+      "source": "tests/bx-vdm/t245_s11_config_complete_fixture.c",
+      "libraries": ["bx-vdm", "bx-mantle", "bx-core", "opennt-host"],
+      "platformLibraries": ["user32.lib"]
+    },
+    {
+      "name": "t245-s9-demdasd-drive-policy-fixture",
+      "source": "tests/bx-vdm/t245_s9_demdasd_drive_policy_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t245-s7-printer-openclose-fixture",
+      "source": "tests/bx-vdm/t245_s7_printer_openclose_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t245-s5-headless-mouse-vector-fixture",
+      "source": "tests/bx-vdm/t245_s5_headless_mouse_vector_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t245-s3-softpc-emm-unavailable-fixture",
+      "source": "tests/bx-vdm/t245_s3_softpc_emm_unavailable_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t247-s2-ntdos-exec-entry-observation-fixture",
+      "source": "tests/bx-vdm/t247_s2_ntdos_exec_entry_observation_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t251-s3-redir-ingress-fixture",
+      "source": "tests/bx-vdm/t251_s3_redir_ingress_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib"
+      ]
+    },
+    {
+      "name": "t245-s2-ntdos-exec-observation-fixture",
+      "source": "tests/bx-vdm/t245_s2_ntdos_exec_observation_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t240-s2-softpc-memory-size-fixture",
+      "source": "tests/bx-vdm/t240_s2_softpc_memory_size_fixture.c",
+      "libraries": ["bx-vdm"],
+      "platformLibraries": []
+    },
+    {
+      "name": "t237-s5-bop-nosupport-fixture",
+      "source": "tests/bx-vdm/t237_s5_bop_nosupport_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t237-s3-xms-a20-source-mirror-fixture",
+      "source": "tests/bx-mantle/t237_s3_xms_a20_source_mirror_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t237-s2-xms-source-mirror-fixture",
+      "source": "tests/bx-vdm/t237_s2_xms_source_mirror_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s15-v2-runtime-session-fixture",
+      "source": "tests/bx-vdm/t230_s15_v2_runtime_session_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "cli",
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s15-direct-host-session-fixture",
+      "source": "tests/bx-vdm/t230_s15_direct_host_session_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t232-s1-host-handle-manager-fixture",
+      "source": "tests/bx-vdm/t232-s1-host-handle-manager-fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t230-s15-checked-ram-fixture",
+      "source": "tests/bx-mantle/t230_s15_checked_ram_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s6-demgset-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s6_demgset_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t230-s5-demsrch-fcb-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s5_demsrch_fcb_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t230-s4-demdir-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s4_demdir_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t230-s3-demfile-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s3_demfile_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t230-s2-demhndl-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s2_demhndl_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t225-s50-realmode-handoff-fixture",
+      "source": "tests/bx-mantle/t225_s50_realmode_handoff_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle",
+        "bx-vdm",
+        "opennt-host",
+        "cli"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t225-s23-opennt-int06-provider-fixture",
+      "source": "tests/opennt/opennt_int06_provider_v1_test.c",
+      "libraries": [
+        "opennt-host"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t249-s3-physical-write-observation-fixture",
+      "source": "tests/bx-mantle/t249_s3_physical_write_observation_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t225-s23-ram-preflight-fixture",
+      "source": "tests/bx-mantle/t225_s23_ram_preflight_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t225-s23-native-pic-lifecycle-fixture",
+      "source": "tests/bx-mantle/t225_s23_native_pic_lifecycle_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t225-s40-mantle-watchdog-normal-loop-fixture",
+      "source": "tests/bx-mantle/t225_s40_mantle_watchdog_normal_loop_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t228-s1-budget-terminal-position-fixture",
+      "source": "tests/bx-mantle/t228_s1_budget_terminal_position_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t228-s1-large-reverse-copy-fixture",
+      "source": "tests/bx-mantle/t228_s1_large_reverse_copy_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t228-s1-software-interrupt-observation-fixture",
+      "source": "tests/bx-mantle/t228_s1_software_interrupt_observation_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t228-s1-interrupt-return-observation-fixture",
+      "source": "tests/bx-mantle/t228_s1_interrupt_return_observation_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t225-s30-segment-access-observation-fixture",
+      "source": "tests/bx-mantle/t225_s30_segment_access_observation_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t225-s56-realmode-segment-limit-compatibility-fixture",
+      "source": "tests/bx-mantle/t225_s56_realmode_segment_limit_compatibility_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t231-s2-command-misc-direct-import-fixture",
+      "source": "tests/bx-vdm/t231_s2_command_misc_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t231-s3-command-misc-registration-fixture",
+      "source": "tests/bx-vdm/t231_s3_command_misc_registration_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "gdi32.lib",
+        "user32.lib",
+        "ntdll.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t231-s4-command-console-keyboard-direct-fixture",
+      "source": "tests/bx-vdm/t231_s4_command_console_keyboard_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t231-s5-command-start-info-direct-fixture",
+      "source": "tests/bx-vdm/t231_s5_command_start_info_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t231-s5-command-config-direct-fixture",
+      "source": "tests/bx-vdm/t231_s5_command_config_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t231-s5-command-init-environment-direct-fixture",
+      "source": "tests/bx-vdm/t231_s5_command_init_environment_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t234-s2-command-dynamic-environment-fixture",
+      "source": "tests/bx-vdm/t234_s2_command_dynamic_environment_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t234-s2-command-set-directories-fixture",
+      "source": "tests/bx-vdm/t234_s2_command_set_directories_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t231-s6-command-check-binary-direct-fixture",
+      "source": "tests/bx-vdm/t231_s6_command_check_binary_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t231-s7-command-get-next-direct-fixture",
+      "source": "tests/bx-vdm/t231_s7_command_get_next_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t234-s2-command-pif-direct-fixture",
+      "source": "tests/bx-vdm/t234_s2_command_pif_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t231-s8-command-lifecycle-direct-fixture",
+      "source": "tests/bx-vdm/t231_s8_command_lifecycle_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t236-s1-command-local-child-fixture",
+      "source": "tests/bx-vdm/t236_s1_command_local_child_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t236-s2-machine-pending-fixture",
+      "source": "tests/bx-mantle/t236_s2_machine_pending_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t236-s2-native-cmdexec32-fixture",
+      "source": "tests/bx-mantle/t236_s2_native_cmdexec32_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t231-s9-command-exit-direct-fixture",
+      "source": "tests/bx-vdm/t231_s9_command_exit_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "kernel32.lib",
+        "user32.lib",
+        "advapi32.lib"
+      ]
+    },
+    {
+      "name": "t230-s7-demdasd-ioctl-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s7_demdasd_ioctl_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t236-s4-ntfdisk-readonly-fixture",
+      "source": "tests/bx-vdm/t236_s4_ntfdisk_readonly_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t231-s10-command-native-session-fixture",
+      "source": "tests/bx-vdm/t231_s10_command_native_session_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s8-demerror-lock-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s8_demerror_lock_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s9-demmisc-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s9_demmisc_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s10-demdisp-direct-import-fixture",
+      "source": "tests/bx-vdm/t230_s10_demdisp_direct_import_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s10-dem-ingress-direct-fixture",
+      "source": "tests/bx-vdm/t230_s10_dem_ingress_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t230-s10-dem-native-session-direct-fixture",
+      "source": "tests/bx-vdm/t230_s10_dem_native_session_direct_fixture.c",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t226-s4-a20-mantle-fixture",
+      "source": "tests/bx-mantle/t199_s22_a20_capability_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host",
+        "cli"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t242-s2-machine-stage-reset-fixture",
+      "source": "tests/bx-mantle/t200_s22_machine_stage_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "bx-vdm",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t242-s3-softpc-tape-io-fixture",
+      "source": "tests/bx-vdm/t242_s3_softpc_tape_io_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t246-s2-softpc-machine-interrupt-ingress-fixture",
+      "source": "tests/bx-mantle/t246_s2_softpc_machine_interrupt_ingress_fixture.cc",
+      "libraries": [
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "user32.lib"
+      ]
+    },
+    {
+      "name": "t244-s2-headless-8042-lifecycle-fixture",
+      "source": "tests/bx-mantle/t244_s2_headless_8042_lifecycle_fixture.cc",
+      "libraries": [
+        "bx-core",
+        "bx-mantle"
+      ],
+      "platformLibraries": []
+    },
+    {
+      "name": "t243-s2-spckbd-handoff-fixture",
+      "source": "tests/bx-vdm/t243_s2_spckbd_handoff_fixture.c",
+      "libraries": [
+        "bx-vdm"
+      ],
+      "platformLibraries": []
+    }
+  ],
+  "forbiddenInputs": [
+    "artifacts/build",
+    "bochs.exe",
+    "main.cc",
+    "config.cc",
+    "GUI/plugin/device archives",
+    "prebuilt adapter composition"
+  ],
+  "targets": [
+    {
+      "name": "ntdos64-native",
+      "source": "src/cli/ntdos64_native_cli.c",
+      "libraries": [
+        "cli",
+        "bx-vdm",
+        "bx-mantle",
+        "bx-core",
+        "opennt-host"
+      ],
+      "platformLibraries": [
+        "libcmt.lib",
+        "libvcruntime.lib",
+        "libucrt.lib",
+        "legacy_stdio_definitions.lib",
+        "kernel32.lib",
+        "advapi32.lib",
+        "gdi32.lib",
+        "bcrypt.lib",
+        "ntdll.lib",
+        "user32.lib"
+      ]
+    }
+  ]
+}

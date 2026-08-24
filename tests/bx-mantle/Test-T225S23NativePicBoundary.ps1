@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$machineHeader = Join-Path $repositoryRoot 'src/adapter-softpc/bx_ntvdm_minimal_machine.h'
-$machineSource = Join-Path $repositoryRoot 'src/adapter-softpc/bx_ntvdm_minimal_machine.cc'
+$machineHeader = Join-Path $repositoryRoot 'src/bx-mantle/minimal_machine.h'
+$machineSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_machine.cc'
 $picHeader = Join-Path $repositoryRoot 'src/bx-mantle/pic.h'
 $picSource = Join-Path $repositoryRoot 'src/bx-mantle/pic.cc'
 $portSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_port_space.cc'
@@ -13,7 +13,7 @@ $machineHeaderText = Get-Content -LiteralPath $machineHeader -Raw
 $machine = Get-Content -LiteralPath $machineSource -Raw
 $pic = Get-Content -LiteralPath $picSource -Raw
 $port = Get-Content -LiteralPath $portSource -Raw
-foreach ($pattern in @('BX_NTVDM_MINIMAL_MACHINE_PIC_FAILED', 'bx_bool pic_owned;', 'bx_pic_c \*pic;')) {
+foreach ($pattern in @('BX_MANTLE_MINIMAL_MACHINE_PIC_FAILED', 'bx_bool pic_owned;', 'bx_pic_c \*pic;')) {
     if ($machineHeaderText -notmatch $pattern) { throw "Missing PIC lifecycle status or ownership: $pattern" }
 }
 foreach ($pattern in @('BX-MANTLE-082-BEGIN', 'bx_mantle_pic_create\(\)', 'pic == NULL',

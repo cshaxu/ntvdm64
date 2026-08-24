@@ -35,7 +35,7 @@
 #endif
 
 class BX_CPU_C;
-class bx_ntvdm_minimal_machine_c;
+class bx_mantle_minimal_machine_c;
 
                                        // 512K BIOS ROM @0xfff80000
 #define BIOSROMSZ ((Bit32u)(1 << 21))  //   2M BIOS ROM @0xffe00000, must be a power of 2
@@ -81,7 +81,7 @@ struct memory_handler_struct {
 
 class BOCHSAPI BX_MEM_C : public logfunctions {
 private:
-  friend class bx_ntvdm_minimal_machine_c;
+  friend class bx_mantle_minimal_machine_c;
 
   struct memory_handler_struct **memory_handlers;
   bx_bool pci_enabled;

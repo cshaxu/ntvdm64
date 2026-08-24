@@ -1,4 +1,4 @@
-#include "bop/observation/bx_ntvdm_demfile_create_observation_v1.h"
+#include "bx_ntvdm_demfile_create_observation_v1.h"
 
 #include <string.h>
 

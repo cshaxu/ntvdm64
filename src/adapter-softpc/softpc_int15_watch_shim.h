@@ -1,7 +1,12 @@
 #ifndef BX_NTVDM_BOP_SHIM_SOFTPC_INT15_WATCH_SHIM_H
 #define BX_NTVDM_BOP_SHIM_SOFTPC_INT15_WATCH_SHIM_H
 
-#include "xms_shim.h"
+#include <stdint.h>
+
+/* This is a machine-facing watch seam, not an XMS provider.  It needs only
+ * the original fixed-width word spelling; importing the XMS host-policy shim
+ * here would reverse the adapter-softpc/opennt-host dependency. */
+typedef uint16_t WORD;
 
 typedef WORD word;
 

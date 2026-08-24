@@ -8,6 +8,13 @@ native responsibility rather than recreate one layer inside another. The
 product has eight named source components; a source file has exactly one of
 these owners.
 
+Each component root is production-only. Immutable upstream comparison copies,
+uncompiled experimental mirrors, examples, fixtures and retained overlays are
+evidence outside `src/`—under `refs/`, `docs/etc/legacy_code/` or `tests/`—not
+an alternate product provider. A retained imported production body stays in
+its original owner-family grouping; every necessary source difference is
+marked `DIVERGENCE:` and individually registered by its component README.
+
 ## Components And Ownership
 
 | Component | Owns | Does not own |

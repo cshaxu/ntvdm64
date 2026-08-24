@@ -12,7 +12,7 @@ typedef uint16_t half_word;
 int bx_ntvdm_softpc_tape_io_begin(uint16_t input_ax, uint16_t *result_ax);
 int bx_ntvdm_softpc_tape_io_end(uint16_t *result_ax);
 
-/* DIVERGENCE: historical CPU register macros are process-global.  The mirror
+/* DIVERGENCE(SOFTPC-DIV-002): historical CPU register macros are process-global.  The mirror
  * keeps its original call spellings while these aliases bind them to a
  * synchronous bx-vdm call record with no retained guest pointer or host
  * handle. */

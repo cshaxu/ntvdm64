@@ -1,0 +1,750 @@
+/*  cmdexec.c - Misc SCS routines for non-dos exec and re-entering
+ *              the DOS.
+ *
+ *
+ *  Modification History:
+ *
+ *  Sudeepb 22-Apr-1992 Created
+ */
+
+/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdexec.c.
+ * Divergence: the admitted binary classifier uses the narrow COMMAND binary
+ * shim for the unavailable CCPU/SAS/RTL include closure. */
+#define BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY 1
+#define BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE 1
+#define BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE 1
+#include "../../opennt-host/command/command_misc_shim.h"
+
+//*****************************************************************************
+// IsWowAppRunnable
+//
+//    Returns FALSE if the WOW-specific compatibility flags for the specified
+//    task include the bit WOWCF_NOTDOSSPAWNABLE. This is done mostly for
+//    "dual mode" executables, e.g., Windows apps that have a real program
+//    as a DOS stub. Certain apps that are started via a DOS command shell,
+//    for example PWB, really do expect to be started as a DOS app, not a WOW
+//    app. For these apps, the compatibility bit should be set in the
+//    registry.
+//
+//*****************************************************************************
+
+#if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
+BOOL IsWowAppRunnable(LPSTR lpAppName)
+{
+    BOOL Result = TRUE;
+    LONG lError;
+    HKEY hKey = 0;
+    char szModName[9];
+    char szHexAsciiFlags[12];
+    DWORD dwType = REG_SZ;
+    DWORD cbData = sizeof(szHexAsciiFlags);
+    ULONG ul = 0;
+    LPSTR pStrt, pEnd;
+    SHORT len;
+
+    lError = RegOpenKeyEx(  HKEY_LOCAL_MACHINE,
+                            "Software\\Microsoft\\Windows NT\\CurrentVersion\\WOW\\Compatibility",
+                            0,
+                            KEY_QUERY_VALUE,
+                            &hKey
+                            );
+
+    if (ERROR_SUCCESS != lError) {
+        goto Cleanup;
+    }
+
+    //
+    // The following code strips the file name (<9 chars) out of a dos
+    // path name.
+    //
+
+    pStrt = strrchr (lpAppName, '\\');
+
+    if (pStrt==NULL)
+        pStrt = lpAppName;
+    else
+        pStrt++;
+
+    if ( (pEnd = strchr (pStrt, '.')) == NULL)
+        strncpy (szModName, pStrt, 9);
+
+    else {
+        len = (SHORT) (pEnd - pStrt);
+        if (len>8) goto Cleanup;
+        strncpy (szModName, pStrt, len);
+        szModName[len] = '\0';
+    }
+
+
+    //
+    // Look for the file name in the registry
+    //
+
+    lError = RegQueryValueEx( hKey,
+                              szModName,
+                              0,
+                              &dwType,
+                              (LPBYTE)szHexAsciiFlags,
+                              &cbData
+                              );
+
+    if (ERROR_SUCCESS != lError) {
+        goto Cleanup;
+    }
+
+    if (REG_SZ != dwType) {
+        goto Cleanup;
+    }
+
+    //
+    // Force the string to lowercase for the convenience of sscanf.
+    //
+
+    _strlwr(szHexAsciiFlags);
+
+    //
+    // sscanf() returns the number of fields converted.
+    //
+
+    if (1 != sscanf(szHexAsciiFlags, "0x%lx", &ul)) {
+        goto Cleanup;
+    }
+
+    if ((ul & WOWCF_NOTDOSSPAWNABLE) != 0)
+        Result = FALSE;
+
+Cleanup:
+    if (hKey) {
+        RegCloseKey(hKey);
+    }
+
+    return Result;
+}
+
+/* cmdCheckBinary - check that the supplied binary name is a 32bit binary
+ *
+ *
+ *  Entry - Client (DS:DX) - pointer to pathname for the executable to be tested
+ *          Client (ES:BX) - pointer to parameter block
+ *
+ *  EXIT  - SUCCESS Client (CY) clear
+ *          FAILURE Client (CY) set
+ *                  Client (AX) - error_not_enough_memory if command tail
+ *                                cannot accomodate /z
+ *                              - error_file_not_found if patname not found
+ */
+
+VOID cmdCheckBinary (VOID)
+{
+
+    LPSTR  lpAppName;
+    /* The historical error/return paths do not continue after a failed
+     * classifier.  Initialize for modern analysis of that non-returning
+     * control flow. */
+    ULONG  BinaryType = 0;
+    PPARAMBLOCK lpParamBlock;
+    PCHAR  lpCommandTail = NULL;
+    ULONG  AppNameLen,CommandTailLen = 0;
+    USHORT CommandTailOff,CommandTailSeg,usTemp;
+    NTSTATUS       Status;
+    UNICODE_STRING Unicode;
+    OEM_STRING     OemString;
+    ANSI_STRING    AnsiString;
+
+
+    if(DontCheckDosBinaryType){
+        setCF(0);
+        return;         // DOS Exe
+    }
+
+    lpAppName = (LPSTR) GetVDMAddr (getDS(),getDX());
+
+    Unicode.Buffer = NULL;
+    AnsiString.Buffer = NULL;
+    RtlInitString((PSTRING)&OemString, lpAppName);
+    Status = RtlOemStringToUnicodeString(&Unicode,&OemString,TRUE);
+    if ( NT_SUCCESS(Status) ) {
+        Status = RtlUnicodeStringToAnsiString(&AnsiString, &Unicode, TRUE);
+        }
+    if ( !NT_SUCCESS(Status) ) {
+        Status = RtlNtStatusToDosError(Status);
+        }
+    else if (GetBinaryTypeA(AnsiString.Buffer,(LPDWORD)&BinaryType) == FALSE)
+       {
+        Status =  GetLastError();
+        }
+
+    if (Unicode.Buffer != NULL) {
+        RtlFreeUnicodeString( &Unicode );
+        }
+    if (AnsiString.Buffer != NULL) {
+        RtlFreeAnsiString( &AnsiString);
+        }
+
+    if (Status){
+        setCF(1);
+        setAX((USHORT)Status);
+        return;         // Invalid path
+    }
+
+
+    if (BinaryType == SCS_DOS_BINARY) {
+        setCF(0);
+        return;         // DOS Exe
+    }
+                        // Prevent certain WOW apps from being spawned by DOS exe's
+                        // This is for win31 compatibility
+    else if (BinaryType == SCS_WOW_BINARY) {
+        if (!IsWowAppRunnable(lpAppName)) {
+            setCF(0);
+            return;     // Run as DOS Exe
+        }
+    }
+
+
+    if (VDMForWOW && BinaryType == SCS_WOW_BINARY && IsFirstWOWCheckBinary) {
+        IsFirstWOWCheckBinary = FALSE;
+        setCF(0);
+        return;         // Special Hack for krnl286.exe
+    }
+
+    // dont allow running 32bit binaries from autoexec.nt. Reason is that
+    // running non-dos binary requires that we should have read the actual
+    // command from GetNextVDMCommand. Otherwise the whole design gets into
+    // synchronization problems.
+
+    if (IsFirstCall) {
+        setCF(1);
+        setAX((USHORT)ERROR_FILE_NOT_FOUND);
+        return;
+    }
+
+    // Its a 32bit exe, replace the command with "command.com /z" and add the
+    // original binary name to command tail.
+
+    AppNameLen = (ULONG)strlen (lpAppName);
+
+    lpParamBlock = (PPARAMBLOCK) GetVDMAddr (getES(),getBX());
+
+    if (lpParamBlock) {
+        CommandTailOff = FETCHWORD(lpParamBlock->OffCmdTail);
+        CommandTailSeg = FETCHWORD(lpParamBlock->SegCmdTail);
+
+        lpCommandTail = (PCHAR) GetVDMAddr (CommandTailSeg,CommandTailOff);
+
+        if (lpCommandTail){
+            CommandTailLen = *(PCHAR)lpCommandTail;
+            lpCommandTail++;        // point to the actual command tail
+            if (CommandTailLen)
+                CommandTailLen++;   // For CR
+        }
+
+        // We are adding 3 below for "/z<space>" and anothre space between
+        // AppName and CommandTail.
+
+        if ((3 + AppNameLen + CommandTailLen ) > 128){
+            setCF(1);
+            setAX((USHORT)ERROR_NOT_ENOUGH_MEMORY);
+            return;
+        }
+    }
+
+    // copy the stub command.com name
+    strcpy ((PCHAR)&pSCSInfo->SCS_ComSpec,lpszComSpec+8);
+    /* x86/x64 divergence: original CCPU computed a segment from a host SAS
+     * base pointer.  The checked session retains the original guest SCSINFO
+     * address, so recover the equivalent guest address without host-pointer
+     * arithmetic. */
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_ComSpec)) >> 4);
+    setDS(usTemp);
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_ComSpec)) & 0x0fu);
+    setDX((usTemp));
+
+    // Form the command tail, first "3" is for "/z "
+    pSCSInfo->SCS_CmdTail [0] = (UCHAR)(3 +
+                                        AppNameLen +
+                                        CommandTailLen);
+    RtlCopyMemory ((PCHAR)&pSCSInfo->SCS_CmdTail[1],"/z ",3);
+    strcpy ((PCHAR)&pSCSInfo->SCS_CmdTail[4],lpAppName);
+    if (CommandTailLen) {
+        pSCSInfo->SCS_CmdTail[4+AppNameLen] = ' ';
+        RtlCopyMemory (&pSCSInfo->SCS_CmdTail[4 + AppNameLen + 1u],
+                lpCommandTail,
+                CommandTailLen);
+    }
+    else {
+        pSCSInfo->SCS_CmdTail[4+AppNameLen] = 0xd;
+    }
+
+    // Set the parameter Block
+    if (lpParamBlock) {
+        STOREWORD(pSCSInfo->SCS_ParamBlock.SegEnv,lpParamBlock->SegEnv);
+        STOREDWORD(pSCSInfo->SCS_ParamBlock.pFCB1,lpParamBlock->pFCB1);
+        STOREDWORD(pSCSInfo->SCS_ParamBlock.pFCB2,lpParamBlock->pFCB2);
+    }
+    else {
+        STOREWORD(pSCSInfo->SCS_ParamBlock.SegEnv,0);
+        STOREDWORD(pSCSInfo->SCS_ParamBlock.pFCB1,0);
+        STOREDWORD(pSCSInfo->SCS_ParamBlock.pFCB2,0);
+    }
+
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_CmdTail)) & 0x0fu);
+    STOREWORD(pSCSInfo->SCS_ParamBlock.OffCmdTail,usTemp);
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_CmdTail)) >> 4);
+    STOREWORD(pSCSInfo->SCS_ParamBlock.SegCmdTail,usTemp);
+
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_ParamBlock)) >> 4);
+    setES (usTemp);
+    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+        offsetof(SCSINFO, SCS_ParamBlock)) & 0x0fu);
+    setBX (usTemp);
+
+    setCF(0);
+    return;
+}
+
+#endif /* BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY */
+
+#if !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE) || defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE)
+#define MAX_DIR 68
+
+VOID cmdCreateProcess ( VOID )
+{
+
+    VDMINFO VDMInfoForCount;
+    STARTUPINFO StartupInfo;
+    PROCESS_INFORMATION ProcessInformation;
+    CHAR CurDirVar [] = "=?:";
+    CHAR Buffer [MAX_DIR];
+    CHAR *CurDir = Buffer;
+    DWORD dwRet;
+    BOOL  Status;
+    NTSTATUS NtStatus;
+    UNICODE_STRING Unicode;
+    OEM_STRING	   OemString;
+    /* `lpNewEnv` was an unused historical local; omit it for the admitted
+     * /W4 /WX build without changing worker state or control flow. */
+    ANSI_STRING Env_A;
+
+    // we have one more 32 executable active
+    Exe32ActiveCount++;
+
+    // Increment the Re-enterancy count for the VDM
+    VDMInfoForCount.VDMState = INCREMENT_REENTER_COUNT;
+    GetNextVDMCommand (&VDMInfoForCount);
+
+    RtlZeroMemory((PVOID)&StartupInfo,sizeof(STARTUPINFO));
+    RtlZeroMemory((PVOID)&ProcessInformation,sizeof(PROCESS_INFORMATION));
+    StartupInfo.cb = sizeof(STARTUPINFO);
+
+    CurDirVar [1] = chDefaultDrive;
+
+    dwRet = GetEnvironmentVariable (CurDirVar,Buffer,MAX_DIR);
+
+    if (dwRet == 0 || dwRet == MAX_DIR)
+	CurDir = NULL;
+
+    /* DIVERGENCE (T236 S2): original code temporarily installs three
+     * guest-derived handles process-wide. Preserve its order, but bind them
+     * only to the child through the active session's opaque handle table. */
+    Status = bx_ntvdm_command_worker_prepare_startup(&StartupInfo);
+
+    /*
+     *  Warning, pEnv32 currently points to an ansi environment.
+     *  The DOS is using an ANSI env which isn't quite correct.
+     *  If the DOS is changed to use an OEM env then we will
+     *  have to convert the env back to ansi before spawning
+     *  non-dos exes ?!?
+     *  16-Jan-1993 Jonle
+     */
+
+    Env_A.Buffer = NULL;
+
+    if (Status) {
+    RtlInitString((PSTRING)&OemString, pCommand32);
+    NtStatus = RtlOemStringToUnicodeString(&Unicode,&OemString,TRUE);
+    if (NT_SUCCESS(NtStatus)) {
+        NtStatus = RtlUnicodeStringToAnsiString((PANSI_STRING)&OemString, &Unicode, FALSE);
+        RtlFreeUnicodeString( &Unicode );
+        }
+    if (!NT_SUCCESS(NtStatus)) {
+        SetLastError(RtlNtStatusToDosError(NtStatus));
+        Status = FALSE;
+        }
+    else {
+	if (pEnv32 != NULL && !cmdXformEnvironment (pEnv32, &Env_A)) {
+	    SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+	    Status = FALSE;
+	}
+	else {
+
+	    /* DIVERGENCE (T236 S2): source arguments are ANSI. The narrow shim
+	     * selects public CreateProcessA explicitly and records only the session
+	     * result needed to diagnose the detached worker boundary. */
+	    Status = bx_ntvdm_command_create_process (
+                           NULL,
+                           (LPTSTR)pCommand32,
+                           NULL,
+                           NULL,
+                           TRUE,
+                           CREATE_SUSPENDED | CREATE_DEFAULT_ERROR_MODE,
+			   Env_A.Buffer,
+                           (LPTSTR)CurDir,
+                           &StartupInfo,
+			   &ProcessInformation);
+	}
+    }
+    }
+
+    if (Status == FALSE)
+        dwExitCode32 = GetLastError ();
+
+    if (Status) {
+	bx_ntvdm_command_worker_attach_process(ProcessInformation.hProcess);
+	ResumeThread (ProcessInformation.hThread);
+        WaitForSingleObject(ProcessInformation.hProcess, (DWORD)-1);
+        GetExitCodeProcess (ProcessInformation.hProcess, &dwExitCode32);
+        CloseHandle (ProcessInformation.hProcess);
+	CloseHandle (ProcessInformation.hThread);
+    }
+
+    bx_ntvdm_command_worker_finish(Status, dwExitCode32);
+
+    if (Env_A.Buffer)
+	RtlFreeAnsiString(&Env_A);
+
+    // Decrement the Re-enterancy count for the VDM
+    VDMInfoForCount.VDMState = DECREMENT_REENTER_COUNT;
+    GetNextVDMCommand (&VDMInfoForCount);
+
+    // one less 32 executable active
+    Exe32ActiveCount--;
+
+    /* DIVERGENCE (T236 S2): this imported body now returns to the bounded
+     * bx-vdm worker wrapper.  Its historical CCPU thread boundary is carried
+     * by the fixed pending continuation, not an active BOP-call pointer. */
+    return;
+}
+
+#if !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
+VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
+{
+
+    DWORD dwThreadId;
+    HANDLE hThread;
+
+    pCommand32 = pCmd32;
+    pEnv32 = pEnv;
+
+    CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
+
+    nt_block_event_thread(0);
+    fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
+    fBlock = TRUE;
+
+    if((hThread = CreateThread (NULL,
+                     0,
+                     (LPTHREAD_START_ROUTINE)cmdCreateProcess,
+                     NULL,
+                     0,
+                     &dwThreadId)) == FALSE) {
+        setCF(0);
+	setAL((UCHAR)GetLastError());
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+        CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+        return;
+    }
+    else
+        CloseHandle (hThread);
+
+    // Wait for next command to be re-entered
+    VDMInfo.VDMState = NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND;
+    VDMInfo.EnviornmentSize = 0;
+    VDMInfo.ErrorCode = 0;
+    VDMInfo.CmdSize = 0;
+    VDMInfo.TitleLen = 0;
+    VDMInfo.ReservedLen = 0;
+    VDMInfo.DesktopLen = 0;
+    VDMInfo.CurDirectoryLen = 0;
+    GetNextVDMCommand (&VDMInfo);
+    if (VDMInfo.CmdSize > 0){
+        setCF(1);
+        IsRepeatCall = TRUE;
+    }
+    else {
+        setCF(0);
+        setAL((UCHAR)dwExitCode32);
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+    }
+
+
+    CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+    return;
+}
+#endif /* !BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE */
+
+#endif /* worker admission */
+
+#if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
+/* DIVERGENCE (T236 S2): retain OpenNT's detached-worker topology.  CCPU and
+ * its private BaseSrv transport are replaced only by a fixed bx-vdm pending
+ * continuation: copied inputs and opaque stream IDs are session-owned, while
+ * the child worker remains the original cmdCreateProcess body. */
+VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
+{
+    bx_ntvdm_command_misc_session *Session = bx_ntvdm_command_misc_active_session();
+
+    /* A pending BOP intentionally re-enters at the original instruction. Do
+     * not create a second child: first observe the worker, then resume the
+     * original post-CreateThread GetNextVDMCommand/return sequence below. */
+    if (Session != NULL && bx_ntvdm_command_worker_reentry_pending()) {
+        if (!bx_ntvdm_command_worker_complete()) {
+            if (GetLastError() == ERROR_IO_INCOMPLETE)
+                (void)bx_ntvdm_command_misc_set_pending();
+            else {
+                setCF(0);
+                setAL((UCHAR)GetLastError());
+            }
+            return;
+        }
+        goto WorkerComplete;
+    }
+
+    pCommand32 = pCmd32;
+    pEnv32 = pEnv;
+    CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
+
+    nt_block_event_thread(0);
+    fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
+    fBlock = TRUE;
+
+    if (!bx_ntvdm_command_worker_begin(pCmd32, pEnv32)) {
+        setCF(0);
+        setAL((UCHAR)GetLastError());
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+        CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+        return;
+    }
+    (void)bx_ntvdm_command_misc_set_pending();
+    return;
+
+WorkerComplete:
+    VDMInfo.VDMState = NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND;
+    VDMInfo.EnviornmentSize = 0;
+    VDMInfo.ErrorCode = 0;
+    VDMInfo.CmdSize = 0;
+    VDMInfo.TitleLen = 0;
+    VDMInfo.ReservedLen = 0;
+    VDMInfo.DesktopLen = 0;
+    VDMInfo.CurDirectoryLen = 0;
+    GetNextVDMCommand (&VDMInfo);
+    if (VDMInfo.CmdSize > 0){
+        setCF(1);
+        IsRepeatCall = TRUE;
+    }
+    else {
+        setCF(0);
+        setAL((UCHAR)dwExitCode32);
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+    }
+
+    CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+    return;
+}
+
+/* cmdExecComspec32 - Exec 32bit COMSPEC
+ *
+ *
+ *  Entry - Client (ES) - environment segment
+ *          Client (AL) - default drive
+ *
+ *  EXIT  - SUCCESS Client (CY) Clear - AL has return error code
+ *          FAILURE Client (CY) set - means DOS is being re-entered
+ */
+
+VOID cmdExecComspec32 (VOID)
+{
+
+    CHAR Buffer[MAX_PATH];
+    DWORD dwRet;
+    PCHAR   pEnv;
+
+    dwRet = GetEnvironmentVariable ("COMSPEC",Buffer,MAX_PATH);
+
+    if (dwRet == 0 || dwRet >= MAX_PATH){
+        setCF(0);
+	setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
+	return;
+    }
+
+    pEnv = (PCHAR) GetVDMAddr ((USHORT)getES(),0);
+
+    chDefaultDrive = (CHAR)(getAL() + 'A');
+
+    cmdExec32 (Buffer,pEnv);
+
+    return;
+}
+
+/* cmdExec - Exec a non-dos binary
+ *
+ *
+ *  Entry - Client (DS:SI) - command to execute
+ *          Client (AL) - default drive
+ *          Client (ES) - environment segment
+ *          Client (SS:BP) - Pointer to STD_HANDLES
+ *          Client (AH) - if 1 means do "cmd /c command" else "command"
+ *
+ *  EXIT  - SUCCESS Client (CY) Clear - AL has return error code
+ *          FAILURE Client (CY) set - means DOS is being re-entered
+ */
+
+VOID cmdExec (VOID)
+{
+
+    DWORD   i;
+    DWORD   dwRet;
+    PCHAR   pCommandTail;
+    PCHAR   pEnv;
+    CHAR Buffer[MAX_PATH];
+
+    /* DIVERGENCE (T236 S2): the historical CCPU suspension returns through
+     * cmdExec32 after the worker finishes.  The finite mantle re-enters the
+     * BOP instruction, whose first pass has already converted the tail CR to
+     * NUL.  Preserve source ordering by routing only that recorded pending
+     * re-entry to cmdExec32 before the original one-shot tail scan. */
+    if (bx_ntvdm_command_worker_reentry_pending()) {
+        cmdExec32(NULL, NULL);
+        return;
+    }
+
+    pCommandTail = (PCHAR) GetVDMAddr ((USHORT)getDS(),(USHORT)getSI());
+    pEnv = (PCHAR) GetVDMAddr ((USHORT)getES(),0);
+    for (i=0 ; i<124 ; i++) {
+        if (pCommandTail[i] == 0x0d){
+            pCommandTail[i] = 0;
+            break;
+        }
+    }
+
+    if (i == 124){
+        setCF(0);
+        setAL((UCHAR)ERROR_BAD_FORMAT);
+        return;
+    }
+
+    chDefaultDrive = (CHAR)(getAL() + 'A');
+
+    if (getAH() == 0) {
+        cmdExec32 (pCommandTail,pEnv);
+    }
+    else {
+        dwRet = GetEnvironmentVariable ("COMSPEC",Buffer,MAX_PATH);
+
+        if (dwRet == 0 || dwRet >= MAX_PATH){
+            setCF(0);
+            setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
+            return;
+        }
+
+        if ((dwRet + 4 + strlen(pCommandTail)) > MAX_PATH) {
+            setCF(0);
+            setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
+            return;
+        }
+
+        strcat (Buffer, " /c ");
+        strcat (Buffer, pCommandTail);
+        cmdExec32 (Buffer,pEnv);
+    }
+
+    return;
+}
+
+/* cmdReturnExitCode - command.com has run a dos binary and returing
+ *                     the exit code.
+ *
+ * Entry - Client (DX) - exit code
+ *         Client (AL) - current drive
+ *         Client (BX:CX) - RdrInfo address
+ *
+ * Exit
+ *         Client Carry Set - Reenter i.e. a new DOS binary to execute.
+ *         Client Carry Clear - This shelled out session is over.
+ */
+
+VOID cmdReturnExitCode (VOID)
+{
+/* DIVERGENCE(BOP-DIV-010): cmdmisc.c's admitted original body exports the historical
+ * global VDMInfo.  Keep this function's local return record distinct under
+ * modern /W4 /WX without changing its lifecycle ordering. */
+VDMINFO ReturnVDMInfo;
+PREDIRCOMPLETE_INFO pRdrInfo;
+
+    ReturnVDMInfo.VDMState = RETURN_ON_NO_COMMAND;
+    ReturnVDMInfo.EnviornmentSize = 0;
+    ReturnVDMInfo.ErrorCode = (ULONG)getDX();
+    ReturnVDMInfo.CmdSize = 0;
+    ReturnVDMInfo.TitleLen = 0;
+    ReturnVDMInfo.ReservedLen = 0;
+    ReturnVDMInfo.DesktopLen = 0;
+    ReturnVDMInfo.CurDirectoryLen = 0;
+
+
+    CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
+
+    nt_block_event_thread(0);
+    fBlock = TRUE;
+
+    // a dos program just terminate, inherit its current directories
+    // and tell base too.
+    cmdUpdateCurrentDirectories((BYTE)getAL());
+
+    // Check for any copying needed for redirection
+    /* DIVERGENCE(BOP-DIV-011): BX:CX is a historical 32-bit guest redirection token, not
+     * a host pointer on x86/x64. */
+    pRdrInfo = bx_ntvdm_command_misc_redirection_from_guest(
+        ((ULONG)getBX() << 16) + (ULONG)getCX());
+
+    if (cmdCheckCopyForRedirection (pRdrInfo) == FALSE)
+            ReturnVDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;
+
+    GetNextVDMCommand (&ReturnVDMInfo);
+    if (ReturnVDMInfo.CmdSize > 0){
+        setCF(1);
+        IsRepeatCall = TRUE;
+    }
+    else {
+        setCF(0);
+        setAL((UCHAR)dwExitCode32);
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+    }
+
+    CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+
+    return;
+}
+#endif /* BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE */

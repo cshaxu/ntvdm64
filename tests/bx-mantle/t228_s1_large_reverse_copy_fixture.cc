@@ -1,6 +1,6 @@
 #include "bochs.h"
-#include "bx-mantle/bx_ntvdm_finite_run.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 #include <string.h>
 

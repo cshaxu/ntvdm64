@@ -133,7 +133,7 @@ mechanics/delete disposition.
 
 When the reached source uses `GetVDMAddr`, `Sim32GetVDMPointer`,
 `Sim32FlushVDMPointer`, or `Sim32FreeVDMPointer`, provider closure additionally
-records the shared `bx-vdm` mapping-manager disposition: direct synchronous
+records the shared `adapter-softpc` mapping-manager disposition: direct synchronous
 lease, copied/bounce lease, explicit refusal, address/span, access direction,
 epoch/teardown, and focused positive and negative proof. A provider may not
 introduce a family-private guest-pointer mapper. Native pointers are local
@@ -215,7 +215,7 @@ or CRT graph.
 
 | Island | Required toolchain | Permitted responsibility |
 | --- | --- | --- |
-| CLI, bx-vdm, bx-mantle, bx-core and in-process modern fixtures | MSVC x64 with `/MT` | One modern runtime ABI/CRT: CLI, diagnostics, typed bridge code, provider composition and minimal guest-machine backend. |
+| app, adapter-softpc, bx-mantle, bx-core and in-process modern fixtures | MSVC x64 with `/MT` | One modern runtime ABI/CRT: CLI, diagnostics, typed bridge code, provider composition and minimal guest-machine backend. |
 | PowerShell tools and retained cross-toolchain evidence | Their recorded host/toolchain | Inspection, historical evidence and non-runtime probes only; they never supply an object to the MSVC x64 process. |
 | OpenNT historical guest/service source and narrow overlays | Matching historical Microsoft toolchain or explicitly evidenced compatible island | Original guest/service ownership; never a direct dependency of the modern runner graph. |
 

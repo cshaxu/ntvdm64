@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "bx-mantle/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/bx_ntvdm_finite_run.h"
 
 #include <string.h>
 

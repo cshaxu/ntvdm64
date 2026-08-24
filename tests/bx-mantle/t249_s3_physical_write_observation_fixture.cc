@@ -1,8 +1,8 @@
 #include "bochs.h"
 #include "bx-core/cpu/cpu.h"
 #include "bx-core/memory/memory.h"
-#include "bx-mantle/bx_ntvdm_minimal_machine.h"
-#include "bx-mantle/bx_ntvdm_physical_write_observation_v1.h"
+#include "bx-mantle/minimal_machine.h"
+#include "adapter-softpc/bx_ntvdm_physical_write_observation_v1.h"
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *,
@@ -11,14 +11,14 @@ extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
 
 int main()
 {
-  bx_ntvdm_minimal_machine_c machine;
+  bx_mantle_minimal_machine_c machine;
   struct bx_ntvdm_physical_write_observation_v1 value;
   Bit8u first = 0x5a, second[2] = {0xa5, 0x3c}, actual[2] = {0, 0};
 
   bx_ntvdm_physical_write_observation_v1_reset();
   if (bx_ntvdm_physical_write_observation_v1_configure(0x200u, 0u) ||
       bx_ntvdm_physical_write_observation_v1_copy(&value)) return 1;
-  if (machine.initialize(0x200000u, 0x200000u) != BX_NTVDM_MINIMAL_MACHINE_OK)
+  if (machine.initialize(0x200000u, 0x200000u) != BX_MANTLE_MINIMAL_MACHINE_OK)
     return 2;
   bx_cpu.sregs[BX_SEG_REG_CS].selector.value = 0x1234u;
   bx_cpu.sregs[BX_SEG_REG_CS].cache.u.segment.base = 0x12340u;
@@ -50,5 +50,5 @@ int main()
       value.physical_address != 0x301u || value.bytes[0] != second[0]) return 7;
   bx_ntvdm_physical_write_observation_v1_reset();
   if (bx_ntvdm_physical_write_observation_v1_copy(&value)) return 8;
-  return machine.cleanup() == BX_NTVDM_MINIMAL_MACHINE_OK ? 0 : 9;
+  return machine.cleanup() == BX_MANTLE_MINIMAL_MACHINE_OK ? 0 : 9;
 }

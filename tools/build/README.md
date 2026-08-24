@@ -5,6 +5,12 @@ declared responsibility and may create or consume only disposable output below
 `build/<task-id>/<run-id>/`; it never publishes compiler output to `tools/` or
 `artifacts/`.
 
+Root-level compiler/linker products are prohibited and deliberately are not
+hidden by `.gitignore`.  CMake configuration and the T260 formal Ninja graph
+reject a root containing `.obj`, `.exe`, `.pdb`, `.ilk`, `.map`, `.lib`, `.a`,
+`stdout.txt`, or `stderr.txt`.  Reusable caches remain under their declared
+`build/<task-id>/<run-id>/` roots.
+
 `Invoke-DosBoxBatchWithCompletion.ps1` is the T225 S8 host-process wrapper for
 an already staged DOS batch.  It neither interprets guest/build semantics nor
 supplies tool arguments: the batch owns those.  The wrapper only mounts the

@@ -1,4 +1,4 @@
-#include "bop/observation/bx_ntvdm_dem_open_observation_v1.h"
+#include "bx_ntvdm_dem_open_observation_v1.h"
 
 #include <string.h>
 static uint32_t enabled;

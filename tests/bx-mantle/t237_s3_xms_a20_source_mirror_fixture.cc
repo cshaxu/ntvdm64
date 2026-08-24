@@ -1,12 +1,12 @@
 #include "bochs.h"
-#include "bx-vdm/bx_ntvdm_cpu_state_abi.h"
-#include "bx-mantle/bx_ntvdm_a20_capability_v1.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
-#include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
-#include "bx-mantle/bx_ntvdm_ivt_watch_v1.h"
+#include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
+#include "adapter-softpc/bx_ntvdm_a20_capability_v1.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
+#include "adapter-softpc/bx_ntvdm_ivt_watch_v1.h"
 
 extern "C" {
-#include "bop/xms_v2_runtime_session.h"
+#include "opennt-bop/ingress/xms_v2_runtime_session.h"
 }
 
 #include <string.h>

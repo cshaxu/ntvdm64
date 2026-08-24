@@ -10,6 +10,37 @@ ownership, build inputs and documentation only; it does not use a move as
 authorization to change a BOP provider, guest behavior, machine feature, or
 compatibility semantic.
 
+## Product-tree purity (T260/S8 P2 amendment)
+
+Each of the eight `src/<component>/` roots is a production root.  It may contain
+only a source, header, generated-at-build input, or guest artifact that is part
+of that component's declared product closure.  A file is not production merely
+because it is useful for comparison, a previous experiment, an example, a
+fixture, or a possible later import.
+
+Accordingly:
+
+- immutable upstream copies that are not presently compiled/packaged, prior
+  mirrors, overlays retained only as comparison material, examples and historic
+  build inputs move under `docs/etc/legacy_code/` (with their provenance);
+- tests remain under `tests/`, and build recipes remain under `tools/`;
+- a minimal-change OpenNT source that is actually part of the product moves
+  into its original owner-family directory in `opennt-bop` or `opennt-host`;
+  `original/`, `mirror/`, `overlay/`, and generic `capability/` are not target
+  production-layout categories;
+- project-owned BOP ingress may remain in an explicitly named production
+  ingress/route directory, but it may not host an uncompiled reference copy;
+- compatibility headers that are actually required by a declared public or
+  internal ABI remain production inputs.  Unused historical header closures
+  are legacy code, not an exception to this rule.
+
+For every source-derived or minimally adapted production file, the exact
+statement, branch, include redirection, or definition that differs from the
+identified original carries a `DIVERGENCE:` comment.  The owning component's
+`README.md` has one row per divergence: identifier, original definition's
+purpose, divergence reason, replacement implementation, and affected file(s).
+An aggregate count is not a substitute for these rows.
+
 | Target component | Contract |
 | --- | --- |
 | `src/bx-core` | Adopted Bochs core machine. Upstream layout is retained and every change is exceptional; `README.md` is its local-intrusion register. |
@@ -126,8 +157,17 @@ For intertwined files, split only after their individual statements have
 Rebuild each static-library/module closure and then the composed fixture or
    CLI target. A build repair must not silently introduce a semantic shim.
 Retire transitional production paths only after every live caller and build
-   manifest points at the target component. Historical evidence may remain
+manifest points at the target component. Historical evidence may remain
    under its indexed evidence path, never as a second product provider.
+
+### S8 P2 — production-tree purification
+
+Reclassify the initially moved `original/`, `mirror/`, `overlay/`,
+`capability/`, and historical SoftPC include inputs.  Move every non-product
+copy to `docs/etc/legacy_code/`; move each live minimal-change source into its
+original owner-family production directory; retain only the required interface
+headers.  Repair the manifest, include paths and tests in the same change, then
+record every remaining production divergence in the local registers.
 
 ## Non-goals
 
@@ -148,6 +188,9 @@ Retire transitional production paths only after every live caller and build
   transitional file has a recorded reason.
 - The formal Ninja graph emits component static libraries and its input lists
   contain no undeclared legacy production path.
+- No eight-component production root contains a reference copy, example,
+  fixture, test-only input, or non-linkable historical overlay; each retained
+  production divergence is both source-annotated and individually registered.
 - Focused module builds and one composed link pass; `git diff --check` and the
   documentation-governance verifier pass.
 - `docs/design/ARCHITECTURE.md`, `docs/design/CODING.md`, and the architecture

@@ -21,6 +21,25 @@ if(IS_ABSOLUTE "${_ntdos64_build_relative}" OR
         "Configure only below ${CMAKE_SOURCE_DIR}/build; received ${CMAKE_BINARY_DIR}.")
 endif()
 
+# Root-level compiler and linker products are a build-hygiene failure, not
+# ignored clutter.  Task-scoped caches belong below build/<task>/<run>/.
+file(GLOB _ntdos64_root_build_leaks RELATIVE "${CMAKE_SOURCE_DIR}"
+    "${CMAKE_SOURCE_DIR}/*.obj"
+    "${CMAKE_SOURCE_DIR}/*.exe"
+    "${CMAKE_SOURCE_DIR}/*.pdb"
+    "${CMAKE_SOURCE_DIR}/*.ilk"
+    "${CMAKE_SOURCE_DIR}/*.map"
+    "${CMAKE_SOURCE_DIR}/*.lib"
+    "${CMAKE_SOURCE_DIR}/*.a"
+    "${CMAKE_SOURCE_DIR}/stdout.txt"
+    "${CMAKE_SOURCE_DIR}/stderr.txt")
+if(_ntdos64_root_build_leaks)
+    list(JOIN _ntdos64_root_build_leaks ", " _ntdos64_root_build_leak_list)
+    message(FATAL_ERROR
+        "Remove root-level build products (${_ntdos64_root_build_leak_list}); "
+        "use ${CMAKE_SOURCE_DIR}/build/<task>/<run>/ for cached build output.")
+endif()
+
 if(NOT WIN32)
     message(FATAL_ERROR "ntdos64-run is a Windows research CLI.")
 endif()

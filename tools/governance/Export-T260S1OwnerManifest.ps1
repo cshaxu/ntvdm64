@@ -60,12 +60,16 @@ function Resolve-T260LivePath([string]$Path) {
         @('src/bx-mantle/bx_ntvdm_', 'src/adapter-softpc/bx_ntvdm_'),
         @('src/opennt/base/mvdm/dos/v86/', 'src/opennt-guest/dos-v86/'),
         @('src/opennt/base/mvdm/wow16/', 'src/opennt-guest/wow16/'),
-        @('src/bx-vdm/bop/opennt/', 'src/opennt-bop/mirror/'),
-        @('src/opennt/base/mvdm/dos/dem/', 'src/opennt-bop/original/dem/'),
-        @('src/opennt/base/mvdm/dos/command/', 'src/opennt-bop/original/command/'),
-        @('src/opennt/base/mvdm/xms.486/', 'src/opennt-bop/original/xms/'),
-        @('src/opennt/base/mvdm/dpmi32/', 'src/opennt-bop/original/dpmi32/'),
-        @('src/opennt/base/mvdm/dpmi/', 'src/opennt-bop/original/dpmi/')
+        @('src/bx-vdm/bop/opennt/dem/', 'src/opennt-bop/dem/'),
+        @('src/bx-vdm/bop/opennt/command/', 'src/opennt-bop/command/'),
+        @('src/bx-vdm/bop/opennt/xms/', 'src/opennt-bop/xms/'),
+        @('src/bx-vdm/bop/opennt/dpmi/', 'src/opennt-bop/dpmi/'),
+        @('src/bx-vdm/bop/opennt/softpc/', 'src/opennt-bop/softpc/'),
+        @('src/opennt/base/mvdm/dos/dem/', 'src/opennt-bop/dem/'),
+        @('src/opennt/base/mvdm/dos/command/', 'src/opennt-bop/command/'),
+        @('src/opennt/base/mvdm/xms.486/', 'src/opennt-bop/xms/'),
+        @('src/opennt/base/mvdm/dpmi32/', 'docs/etc/legacy_code/opennt-bop/original/dpmi32/'),
+        @('src/opennt/base/mvdm/dpmi/', 'docs/etc/legacy_code/opennt-bop/original/dpmi/')
     )
     foreach ($prefix in $prefixes) {
         if (-not $p.StartsWith($prefix[0], [System.StringComparison]::OrdinalIgnoreCase)) { continue }
@@ -76,11 +80,11 @@ function Resolve-T260LivePath([string]$Path) {
     if ($p -like 'src/bx-vdm/bop/*' -and
         $p -notlike 'src/bx-vdm/bop/shim/*' -and
         $p -notlike 'src/bx-vdm/bop/observation/*') {
-        $candidate = 'src/opennt-bop/route/' + [System.IO.Path]::GetFileName($p)
+        $candidate = 'src/opennt-bop/ingress/' + [System.IO.Path]::GetFileName($p)
         if (Test-Path -LiteralPath (Join-Path $root $candidate)) { return $candidate }
     }
     if ($p -like 'src/bx-vdm/bx_ntvdm_bios_selector_map*') {
-        $candidate = 'src/opennt-bop/route/' + [System.IO.Path]::GetFileName($p)
+        $candidate = 'src/opennt-bop/ingress/' + [System.IO.Path]::GetFileName($p)
         if (Test-Path -LiteralPath (Join-Path $root $candidate)) { return $candidate }
     }
     if ($p -like 'src/bx-vdm/bx_ntvdm_*') {
@@ -98,9 +102,8 @@ function Get-SourceDisposition([string]$Path, [string]$CurrentModule) {
     if ($p -like 'src/app/*') { return @('app', 'project-authored app component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/adapter-softpc/*') { return @('adapter-softpc', 'project-authored SoftPC adapter record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/adapter-win32/*') { return @('adapter-win32', 'project-authored Win32 adapter record', 'retain', 'S2', 'target component root record') }
-    if ($p -like 'src/opennt-bop/original/*') { return @('opennt-bop', 'immutable imported OpenNT BOP source', 'retain', 'S5', 'original source identity retained beside the adapted mirror') }
-    if ($p -like 'src/opennt-bop/mirror/*') { return @('opennt-bop', 'minimal-change OpenNT BOP mirror', 'retain', 'S5', 'adapted source mirror; local divergence register required') }
-    if ($p -like 'src/opennt-bop/route/*') { return @('opennt-bop', 'project-authored BOP ingress/route', 'retain', 'S5', 'selector/service routing and provider composition') }
+    if ($p -like 'src/opennt-bop/command/*' -or $p -like 'src/opennt-bop/dem/*' -or $p -like 'src/opennt-bop/xms/*' -or $p -like 'src/opennt-bop/dpmi/*' -or $p -like 'src/opennt-bop/softpc/*') { return @('opennt-bop', 'minimal-change OpenNT BOP production source', 'retain', 'S8', 'original owner-family production source; local divergence register required') }
+    if ($p -like 'src/opennt-bop/ingress/*') { return @('opennt-bop', 'project-authored BOP ingress/route', 'retain', 'S5', 'selector/service routing and provider composition') }
     if ($p -like 'src/opennt-bop/*') { return @('opennt-bop', 'OpenNT BOP component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/opennt-guest/*') { return @('opennt-guest', 'OpenNT guest component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/opennt-host/*') { return @('opennt-host', 'OpenNT host component record', 'retain', 'S2', 'target component root record') }

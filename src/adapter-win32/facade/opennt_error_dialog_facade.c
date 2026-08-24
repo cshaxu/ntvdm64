@@ -51,7 +51,7 @@ static void compose_message(UINT error, CHAR *first, CHAR *second,
     used = strlen(message);
     if (LoadStringA(GetModuleHandleA(NULL), error, message + used,
             (int)(capacity - used)) == 0) {
-        /* DIVERGENCE: the original ntvdm resource DLL/string table is not a
+        /* DIVERGENCE(WIN32-DIV-001): the original ntvdm resource DLL/string table is not a
          * composable CLI input.  Keep the same terminal host notification
          * contract with the resource id observable to the user. */
         (void)sprintf_s(message, capacity, "NTVDM error %u", error);
@@ -77,7 +77,7 @@ int bx_ntvdm_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
     compose_message(error, first, second, message, sizeof(message));
     g_last_error = error;
     ++g_count;
-    /* DIVERGENCE: OpenNT's resource dialog supports an editable text control.
+    /* DIVERGENCE(WIN32-DIV-002): OpenNT's resource dialog supports an editable text control.
      * A public MessageBox has no equivalent control.  Keep its call shape and
      * deterministic terminal reply rather than silently pretending it edited
      * msg2; the PIF edit route stays explicitly deferred to its owner. */

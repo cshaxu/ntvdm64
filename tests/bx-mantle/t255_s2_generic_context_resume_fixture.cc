@@ -1,9 +1,9 @@
 #include "bochs.h"
 #include "bx-core/cpu/cpu.h"
-#include "bx-mantle/bx_ntvdm_a20_capability_v1.h"
-#include "bx-mantle/bx_ntvdm_generic_ud_bridge.h"
-#include "bx-mantle/bx_ntvdm_machine_stage_v1.h"
-#include "bx-mantle/bx_ntvdm_protected_range_action_v1.h"
+#include "adapter-softpc/bx_ntvdm_a20_capability_v1.h"
+#include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
+#include "adapter-softpc/bx_ntvdm_protected_range_action_v1.h"
 
 #include <string.h>
 

@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_sim.h'
-$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_minimal_sim.cc'
+$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/minimal_sim.h'
+$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/minimal_sim.cc'
 
 foreach ($path in @($headerPath, $sourcePath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -12,7 +12,7 @@ foreach ($path in @($headerPath, $sourcePath)) {
 
 $source = Get-Content -LiteralPath $sourcePath -Raw
 $required = @(
-    'class bx_ntvdm_minimal_sim_c : public bx_simulator_interface_c',
+    'class bx_mantle_minimal_sim_c : public bx_simulator_interface_c',
     'bx_cpudb_pentium_mmx',
     'Bit32u apic_id_mask = 0x0f',
     'bx_bool simulate_xapic = 0',
@@ -24,7 +24,7 @@ $required = @(
     '"reset_on_triple_fault"',
     '"ignore_bad_msrs"',
     '"msrs"',
-    'BX_NTVDM_MINIMAL_SIM_RESET_PARAM_NOT_FALSE'
+    'BX_MANTLE_MINIMAL_SIM_RESET_PARAM_NOT_FALSE'
 )
 foreach ($pattern in $required) {
     if ($source -notmatch $pattern) {
