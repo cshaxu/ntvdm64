@@ -2,14 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T261 S12** — OpenNT-host original-header and mirror replacement.
-S11 is technically closed subject to the owner-directed correction: the three
-project-authored `*_compat.h` headers must leave `opennt-host`; S12 replaces
-them with original files or explicitly registered reachable original subsets.
+**No active numeric packet.** M0 T261 is closed: its S12 correction replaces
+the three project-authored OpenNT-host compatibility headers with exact
+original mirrors and completes the last admitted host-layout closure.
 
 ## Active Packet
 
-### M0 T261 S12 — OpenNT-host original-header and mirror replacement
+### M0 T261 S12 — closed: OpenNT-host original-header and mirror replacement
 
 | Field | Record |
 | --- | --- |
@@ -29,6 +28,12 @@ state moved to `adapter-win32`.  A fresh `002` formal Ninja graph compiled,
 archived and linked both focused fixtures; BOP59 and the Redirector fixture
 each return `0`.  Full details and exact hashes are in the [S12
 evidence](etc/evidence/m0-t261-s12-opennt-host-original-header-replacement-001.md).
+
+**M0 T261 closed:** all twelve admitted source-layout packets are complete.
+The resulting `opennt-host` tree has no project-authored compatibility header;
+it retains only re-rooted original source, declared reachable subsets, and
+README-registered statement-level divergences. The final closure record is in
+[M0 T261 history](history/m0-t261-closure-20260824.md).
 
 ### M0 T261 S11 — closed: final OpenNT-host manifest, include and exception closure
 
