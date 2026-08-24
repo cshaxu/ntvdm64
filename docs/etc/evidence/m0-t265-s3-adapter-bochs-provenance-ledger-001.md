@@ -18,6 +18,9 @@ pre-move ownership decision for every production source initially below
   `BX-BUILD-002` MSVC adjacent-string-token spelling divergence.  Its two
   local `DIVERGENCE(BX-BUILD-002)` markers and the `bochs-core` README index
   register the exception.
+- `logio.cc` now resides at `src/bochs-core/logio.cc` and uses the original
+  upstream-relative `cpu/cpu.h` include spelling; it is byte-identical to the
+  pinned source.
 
 The manifest compiles these four sources into `bochs-core`, not
 `adapter-bochs`.  The refreshed formal graph initially exposed stale corrupt
@@ -29,8 +32,6 @@ reported no work.
 
 ## Remaining S3 disposition
 
-- `logio.cc`: upstream root source with one include-root spelling change;
-  move to `bochs-core/logio.cc` and restore the upstream-relative include.
 - `pc_system.{cc,h}`: upstream root material, with `pc_system.cc` a true
   subset that omits product reset/teardown.  Its present header is also
   consumed directly by `adapter-softpc`; this is an existing forbidden

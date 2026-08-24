@@ -21,7 +21,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "bochs-core/cpu/cpu.h"
+#include "cpu/cpu.h"
 #include "iodev/iodev.h"
 #include <assert.h>
 
@@ -45,7 +45,6 @@ const char* iofunctions::getlevel(int i) const
   if (i>=0 && i<N_LOGLEV) return loglevel[i];
   else return "?";
 }
-
 const char* iofunctions::getaction(int i) const
 {
   static const char *name[] = { "ignore", "report", "ask", "fatal" };
@@ -605,3 +604,4 @@ void bx_center_print(FILE *file, const char *line, unsigned maxwidth)
   for (size_t i=0; i<imax; i++) fputc(' ', file);
   fputs(line, file);
 }
+
