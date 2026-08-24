@@ -1,10 +1,8 @@
 #include "top_level_nosupport_v2_generic_ud_bridge.h"
-#include "opennt-host/softpc.new/host/inc/nt_error_compat.h"
+#include "adapter-win32/facade/opennt_error_dialog_facade.h"
+#include "opennt-host/softpc.new/host/inc/error.h"
 
 #include <string.h>
-
-/* Source declaration: softpc.new/host/inc/error.h. */
-void host_direct_access_error(unsigned long type);
 
 int bx_ntvdm_top_level_nosupport_v2_generic_ud_recognizes(
     const struct bx_ntvdm_generic_ud_event_v1 *event)
@@ -28,8 +26,8 @@ int bx_ntvdm_top_level_nosupport_v2_generic_ud_dispatch(
     host_direct_access_error((unsigned long)(event->eax & 0xffffu));
     memset(outcome, 0, sizeof(*outcome));
     outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
-    if (bx_ntvdm_top_level_nosupport_v2_last_choice() ==
-        BX_NTVDM_TOP_LEVEL_NOSUPPORT_CHOICE_V1_TERMINATE) {
+    if (bx_ntvdm_opennt_direct_access_last_choice() ==
+        BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_TERMINATE) {
         outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
         return 1;
     }

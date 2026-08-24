@@ -48,6 +48,7 @@ source or dependency must be added to that audit before it enters an S.
 | S9 | Remove selector-aware BOP/NTDOS/COMMAND observation and fixture-only residue from adapter production roots; relocate source-owned interpretation to `opennt-bop` and generic test hooks to `tests/` without altering provider behavior. | `adapter-bop` and `adapter-softpc` are selector/service/family/DOS/WOW blind in production code; component roots contain no fixture-only provider. |
 | S10 | Resolve remaining configuration support and any later-discovered host source-truth row not owned by S8, using the same rule. | No generic configuration or unclassified host shim remains. |
 | S11 | Repair manifest/includes/tests, run formal Ninja closure and audit source/README exception one-to-one. | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule. |
+| S12 | Replace project-authored OpenNT-host compatibility headers with original `error.h`, `vrputil.h` and `vrnmpipe.h` mirrors; move only the necessary non-original composition/test declarations to their real owner. | No `*_compat.h` remains in `opennt-host`; every retained mirror is an exact original file or a reachable original subset with statement-local `DIVERGENCE(<ID>)` entries and one README row per difference. |
 
 ## S8 owner-directed exception disposition
 

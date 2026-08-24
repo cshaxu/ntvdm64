@@ -6,9 +6,14 @@
 #include <intrin.h>
 
 #include "adapter-softpc/bx_ntvdm_physical_irq_v1.h"
-#include "opennt-host/vdmredir/vrnmpipe_compat.h"
 #include "opennt-bop/vdmredir/vrdisp_compat.h"
 #include "opennt-bop/vdmredir/vrmslot_compat.h"
+
+/* DIVERGENCE(BOP-DIV-087): original DEM imported VDMREDIR dynamically. This
+ * static program keeps provider binding declarations private to BOP
+ * composition rather than adding them to an original mirror header. */
+BOOLEAN bx_ntvdm_vr_initialize_provider(VOID);
+VOID bx_ntvdm_vr_uninitialize_provider(VOID);
 
 /* This is intentionally not a replacement VDMREDIR.DLL.  The provider body
  * was not recovered with OpenNT; the admitted first group supplies the

@@ -1,6 +1,6 @@
 #include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
-#include "opennt-host/softpc.new/host/inc/nt_error_compat.h"
+#include "adapter-win32/facade/opennt_error_dialog_facade.h"
 
 #include <string.h>
 
@@ -30,9 +30,8 @@ int main(void)
     static const unsigned reasons[] = { 0u, 1u, 2u, 3u, 4u, 5u, 6u };
     struct bx_ntvdm_generic_ud_outcome_v1 outcome;
     unsigned index;
-    bx_ntvdm_top_level_nosupport_v2_reset_thread();
-    bx_ntvdm_top_level_nosupport_v2_fixture_choice_set(
-        BX_NTVDM_TOP_LEVEL_NOSUPPORT_CHOICE_V1_IGNORE);
+    bx_ntvdm_opennt_direct_access_reset_thread();
+    bx_ntvdm_opennt_direct_access_fixture_reply_set(IDIGNORE);
     for (index = 0u; index < sizeof(reasons) / sizeof(reasons[0]); ++index) {
         if (!invoke(reasons[index] | UINT32_C(0xabcd0000), 0x59u, &outcome) ||
             outcome.abi_version != BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION ||
@@ -41,17 +40,16 @@ int main(void)
             outcome.gpr16_write_mask != 0u || outcome.segment_write_mask != 0u ||
             outcome.eflags_write_mask != 0u) return 1;
     }
-    if (bx_ntvdm_top_level_nosupport_v2_fixture_prompt_count() != 7u) return 2;
+    if (bx_ntvdm_opennt_direct_access_prompt_count() != 7u) return 2;
     if (!invoke(2u, 0x59u, &outcome) ||
-        bx_ntvdm_top_level_nosupport_v2_fixture_prompt_count() != 7u) return 3;
-    bx_ntvdm_top_level_nosupport_v2_reset_thread();
-    bx_ntvdm_top_level_nosupport_v2_fixture_choice_set(
-        BX_NTVDM_TOP_LEVEL_NOSUPPORT_CHOICE_V1_TERMINATE);
+        bx_ntvdm_opennt_direct_access_prompt_count() != 7u) return 3;
+    bx_ntvdm_opennt_direct_access_reset_thread();
+    bx_ntvdm_opennt_direct_access_fixture_reply_set(IDABORT);
     if (!invoke(4u, 0x59u, &outcome) ||
         outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
         outcome.gpr16_write_mask != 0u || outcome.segment_write_mask != 0u ||
         outcome.eflags_write_mask != 0u ||
-        bx_ntvdm_top_level_nosupport_v2_fixture_prompt_count() != 1u) return 4;
+        bx_ntvdm_opennt_direct_access_prompt_count() != 1u) return 4;
     if (invoke(2u, 0x5au, &outcome)) return 5;
     return 0;
 }

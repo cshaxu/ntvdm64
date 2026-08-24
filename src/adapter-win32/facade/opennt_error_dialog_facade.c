@@ -15,6 +15,10 @@ static __declspec(thread) BOOL g_fixture_suppress;
 static __declspec(thread) UINT g_last_error;
 static __declspec(thread) UINT g_count;
 static __declspec(thread) int g_direct_access_fixture_reply;
+static __declspec(thread) UINT g_direct_access_prompt_count;
+static __declspec(thread) DWORD g_direct_access_category_bits;
+static __declspec(thread) enum bx_ntvdm_opennt_direct_access_choice_v1
+    g_direct_access_last_choice = BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE;
 
 #define BX_NTVDM_RMB_ABORT 1u
 #define BX_NTVDM_RMB_RETRY 2u
@@ -106,11 +110,41 @@ int bx_ntvdm_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
 int bx_ntvdm_opennt_direct_access_dialog(const CHAR *message)
 {
     int reply;
-    if (g_direct_access_fixture_reply != 0) return g_direct_access_fixture_reply;
-    reply = MessageBoxA(NULL, message == NULL ? "NTVDM direct access error" : message,
-        "NTDOS64 unsupported DOS operation", MB_ABORTRETRYIGNORE | MB_ICONSTOP);
-    return reply == IDIGNORE ? IDIGNORE : IDABORT;
+    ++g_direct_access_prompt_count;
+    if (g_direct_access_fixture_reply != 0) {
+        reply = g_direct_access_fixture_reply;
+    } else {
+        reply = MessageBoxA(NULL, message == NULL ? "NTVDM direct access error" : message,
+            "NTDOS64 unsupported DOS operation", MB_ABORTRETRYIGNORE | MB_ICONSTOP);
+    }
+    g_direct_access_last_choice = reply == IDIGNORE ?
+        BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE :
+        BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_TERMINATE;
+    return g_direct_access_last_choice == BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE ?
+        IDIGNORE : IDABORT;
 }
+
+enum bx_ntvdm_opennt_direct_access_choice_v1
+bx_ntvdm_opennt_direct_access_last_choice(void)
+{ return g_direct_access_last_choice; }
+int bx_ntvdm_opennt_direct_access_category_should_prompt(ULONG category)
+{
+    DWORD bit;
+    if (category >= 32u) return 1;
+    bit = (DWORD)1u << category;
+    if ((g_direct_access_category_bits & bit) != 0u) return 0;
+    g_direct_access_category_bits |= bit;
+    return 1;
+}
+void bx_ntvdm_opennt_direct_access_reset_thread(void)
+{
+    g_direct_access_fixture_reply = 0;
+    g_direct_access_prompt_count = 0u;
+    g_direct_access_category_bits = 0u;
+    g_direct_access_last_choice = BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE;
+}
+UINT bx_ntvdm_opennt_direct_access_prompt_count(void)
+{ return g_direct_access_prompt_count; }
 
 void bx_ntvdm_opennt_error_dialog_fixture_suppress(BOOL suppress)
 { g_fixture_suppress = suppress; }

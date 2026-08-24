@@ -6,7 +6,13 @@
  * and network/DLC entries remain out of this synchronous helper unit; their
  * BOP delivery composition is owned by opennt-bop ingress.
  */
-#include "vrnmpipe_compat.h"
+/* DIVERGENCE(HOST-DIV-024): the original header expresses the provider ABI
+ * through VDMREDIR_DLL, because NTVDM loaded it as a DLL. This static
+ * composition uses that original provider branch without exposing project
+ * binding declarations in the mirror header. */
+#include <windows.h>
+#define VDMREDIR_DLL
+#include "opennt-host/inc/vrnmpipe.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -20,14 +26,6 @@
 #define ASSERT(value) ((void)0)
 #define ROUND_UP_COUNT(count, alignment) \
     (((count) + ((alignment) - 1u)) & ~((alignment) - 1u))
-
-typedef struct _OPEN_NAMED_PIPE_INFO {
-    struct _OPEN_NAMED_PIPE_INFO *Next;
-    HANDLE Handle;
-    DWORD NameLength;
-    WORD DosPdb;
-    CHAR Name[2];
-} OPEN_NAMED_PIPE_INFO, *POPEN_NAMED_PIPE_INFO;
 
 /* Kept in the original local shape so the synchronous read/write bodies below
  * retain their historical call and failure order. */
@@ -120,14 +118,19 @@ static BOOL VrpRemoveOpenNamedPipeInfo(HANDLE Handle)
     return FALSE;
 }
 
-VOID VrTerminateNamedPipes(VOID)
+VOID VrTerminateNamedPipes(WORD DosPdb)
 {
     /* DIVERGENCE(HOST-DIV-021): the original
      * VrTerminateNamedPipes(DosPdb) source body is empty.  This static
      * single-session boundary still must retire its local metadata at session
      * teardown; it is not a claimed recovery of the historical DOS-PDB hook. */
-    while (OpenNamedPipeInfoList != NULL)
-        (void)VrpRemoveOpenNamedPipeInfo(OpenNamedPipeInfoList->Handle);
+    POPEN_NAMED_PIPE_INFO current = OpenNamedPipeInfoList;
+    while (current != NULL) {
+        POPEN_NAMED_PIPE_INFO next = current->Next;
+        if (DosPdb == 0u || current->DosPdb == DosPdb)
+            (void)VrpRemoveOpenNamedPipeInfo(current->Handle);
+        current = next;
+    }
 }
 
 BOOL VrIsNamedPipeName(LPSTR Name)

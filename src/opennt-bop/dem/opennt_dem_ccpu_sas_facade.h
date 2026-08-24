@@ -17,7 +17,10 @@
 #include "adapter-softpc/bx_ntvdm_cpu_result_v2.h"
 #include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
 #include "adapter-softpc/bx_ntvdm_exception_abi.h"
-#include "opennt-host/vdmredir/vrnmpipe_compat.h"
+/* DIVERGENCE(BOP-DIV-087): static composition selects the original
+ * VDMREDIR DLL-export declaration branch without changing that mirror. */
+#define VDMREDIR_DLL
+#include "opennt-host/inc/vrnmpipe.h"
 
 typedef uint16_t USHORT;
 typedef uint16_t WORD;

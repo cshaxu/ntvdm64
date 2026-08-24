@@ -7,7 +7,7 @@
  */
 
 #include "opennt_demdasd_ioctl_compat.h"
-#include "opennt-host/softpc.new/host/inc/nt_error_compat.h"
+#include "opennt-host/softpc.new/host/inc/error.h"
 
 #include <stdlib.h>
 #include <string.h>

@@ -9,7 +9,7 @@
 #include <lmcons.h>
 #include <lmerr.h>
 
-#include "vrputil_compat.h" /* DIVERGENCE(HOST-DIV-018): private NT4
+#include "vrputil.h" /* DIVERGENCE(HOST-DIV-018): private NT4
                                * product headers are replaced only by the
                                * public Win32/LAN Manager declarations used
                                * by this source body. */

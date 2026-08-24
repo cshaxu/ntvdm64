@@ -25,7 +25,7 @@
     "refs/bochs",
     "refs/bochs/instrument/stubs",
     "refs/bochs/iodev",
-    "src/adapter-softpc/include/mvdm",
+    "src/opennt-host/inc",
     "src/adapter-softpc/include/softpc.new/base/inc",
     "src/adapter-softpc/include/softpc.new/host/inc",
     "src/adapter-win32/include/compiler",

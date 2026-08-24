@@ -6,7 +6,7 @@
 #include "adapter-softpc/bx_ntvdm_host_handle_manager.h"
 #include "opennt-bop/opennt_ccpu_sas_facade.h"
 #include "opennt-bop/ingress/redir_native_session.h"
-#include "opennt-host/vdmredir/vrnmpipe_compat.h"
+BOOLEAN bx_ntvdm_vr_initialized_provider(VOID);
 #include "opennt-bop/ingress/redir_v2_generic_ud_bridge.h"
 
 _Static_assert(sizeof(bx_ntvdm_ccpu_sas_call) == sizeof(bx_ntvdm_demhndl_call),
@@ -236,8 +236,10 @@ int main(void)
     server = CreateNamedPipeW(L"\\\\.\\pipe\\ntdos64-t251-s3", PIPE_ACCESS_DUPLEX,
         PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT, 1u, 64u, 64u, 0u, NULL);
     if (server == INVALID_HANDLE_VALUE) return 4;
+    /* `VrReadNamedPipe` retains OpenNT's overlapped-I/O contract: the
+     * original DEM open path gives it a handle opened with this flag. */
     client = CreateFileW(L"\\\\.\\pipe\\ntdos64-t251-s3", GENERIC_READ | GENERIC_WRITE,
-        0u, NULL, OPEN_EXISTING, 0u, NULL);
+        0u, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
     if (client == INVALID_HANDLE_VALUE ||
         (ConnectNamedPipe(server, NULL) == FALSE && GetLastError() != ERROR_PIPE_CONNECTED) ||
         !VrAddOpenNamedPipeInfo(client, pipe_name) ||

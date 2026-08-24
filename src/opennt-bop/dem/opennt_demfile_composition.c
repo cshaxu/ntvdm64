@@ -3,7 +3,9 @@
  * Redirector protocol stays in its lower host-capability owner. */
 
 #include "opennt_demfile_composition.h"
-#include "opennt-host/vdmredir/vrnmpipe_compat.h"
+/* Project-only static binding for the original DLL-import pointer shape. */
+BOOLEAN bx_ntvdm_vr_initialized_provider(VOID);
+BOOLEAN bx_ntvdm_vr_initialize_provider(VOID);
 
 void demChMod(void);
 void demCreate(void);

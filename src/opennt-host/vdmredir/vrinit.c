@@ -5,7 +5,13 @@
  * and named-pipe cleanup order.  NetBIOS/DLC/VDD/ICA product hooks remain
  * explicit later-provider dependencies; this file does not fabricate them.
  */
-#include "vrnmpipe_compat.h"
+/* DIVERGENCE(HOST-DIV-024): static provider composition selects the original
+ * VDMREDIR_DLL declaration branch; project binding names remain local to BOP
+ * composition rather than altering the original header. */
+#include <windows.h>
+#include <windows.h>
+#define VDMREDIR_DLL
+#include "opennt-host/inc/vrnmpipe.h"
 
 static BOOLEAN IsVrInitialized = FALSE;
 
@@ -30,6 +36,6 @@ BOOLEAN bx_ntvdm_vr_initialize_provider(VOID)
 
 VOID bx_ntvdm_vr_uninitialize_provider(VOID)
 {
-    VrTerminateNamedPipes();
+    VrTerminateNamedPipes(0u);
     IsVrInitialized = FALSE;
 }

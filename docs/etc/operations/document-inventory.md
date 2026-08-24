@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2245 |
+| Documentation records | 2246 |
 | --- | --- |
-| Generated UTC | 2026-08-24T16:12:10Z |
+| Generated UTC | 2026-08-24T17:21:04Z |
 
 ## Entries
 
@@ -193,6 +193,7 @@ content-divergent entries.
 | etc/evidence/m0-t261-s10-configuration-residual-source-truth-audit-001.md | indexed supporting material | 3e0a02e6321803c57ccafb1afcd7b7af5fa991491dc9b3e2c7e49d07eaadba20 |
 | etc/evidence/m0-t261-s11-final-technical-closure-20260824.md | indexed supporting material | 1587210999aae0d6480faef987d709d15559ca8a2587edb3ac016d6ed5a4474e |
 | etc/evidence/m0-t261-s11-opennt-host-final-manifest-exception-audit-001.md | indexed supporting material | 4acf748dbf0aad3d100aa00b62a25e8cd06c2b730e96d14e27c2f4785cdad429 |
+| etc/evidence/m0-t261-s12-opennt-host-original-header-replacement-001.md | indexed supporting material | c4ef3e32e80ace59537b496c10b21daa839deaad43589bca0d5904969d6d5c8a |
 | etc/evidence/m0-t261-s3-p1-pif-original-re-root-001.md | indexed supporting material | 6cb3190b1a1bd05d96e42601f995878897c3499fa79c6e794e328d19165eacf3 |
 | etc/evidence/m0-t261-s3-p2-pif-owner-separation-001.md | indexed supporting material | 699c21c85a66efe011dd59b0b6b089d1c41a9d759145acc6ed836eb22baa8beb |
 | etc/evidence/m0-t261-s3-p3-command-session-ingress-rehome-001.md | indexed supporting material | f400cbd77568e77043f5651319afe5653237b3b5d5de8ca10f11e57ed80d3523 |
@@ -485,7 +486,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-dem-owner-package-completion-001.md | indexed supporting material | 98af7bbe7a84fc28585c3076d6761b25e8b33d3dbe67350d986f0f58cd7edaa5 |
 | etc/operations/proposal-opennt-dpmi-owner-package-completion-001.md | indexed supporting material | a8ab4af95d86a744bd37c52b672248ebba19372aede58726af169ede1d3245a3 |
 | etc/operations/proposal-opennt-guest-sft-opaque-handle-publication-001.md | indexed supporting material | d82bbb255bd3c7d2b70c8bc55ad105141e837455232d248f367d60369ac8a96f |
-| etc/operations/proposal-opennt-host-original-layout-recovery-001.md | indexed supporting material | eeda0fe86b24778329cab0d1b4a17744ee74d77a4f191c840eedb0eda8b1d9dd |
+| etc/operations/proposal-opennt-host-original-layout-recovery-001.md | indexed supporting material | 34e47493845681ffd2c7235c8b96ca6a5bf06d8a71e80ad0783a3c4c49e9d15e |
 | etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | a94a8dfb72d0625f20e0152dacab24b4aca3862f4d8960290201eeb361e1b129 |
 | etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | a041c10705221c3d6512f3935749c1c345e1c08304828ffe5d30c72fb8f6c8c7 |
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 4379d6d7dc01969e310c6b7715611fd582e041a0ab4b3e909bc6c88eba92ca6f |
@@ -2259,7 +2260,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 80059942b91d11578d94bca92bf8a0e2bb0ec0a4ac16cdc4921abb6a2377e25a |
+| STATUS.md | principal control document | d83d13a74f446f912af189e42ed7ac6e55087cfca875adba2cc904ee9b8a7fd0 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

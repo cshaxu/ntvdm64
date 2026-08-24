@@ -22,12 +22,8 @@ void demIoctlDiskGeneric(void);
 void demIoctlDiskQuery(void);
 UCHAR demGetPhysicalDriveType(UCHAR drive);
 
-/* Original source: src/opennt/base/mvdm/inc/softpc.h.  The former call site
- * displayed a product-host dialog.  bx-vdm supplies a neutral diagnostic
- * seam instead; it neither identifies BOPs nor changes disk semantics. */
-#define NOSUPPORT_FLOPPY 0u
-#define NOSUPPORT_HARDDISK 1u
-void host_direct_access_error(ULONG type);
+/* Original SoftPC direct-access categories and host notification ABI. */
+#include "opennt-host/softpc.new/host/inc/error.h"
 
 /* Original source: src/opennt/base/mvdm/inc/softpc.h.  The imported DASD
  * body uses these only while delegating a hooked floppy INT 13h back to the

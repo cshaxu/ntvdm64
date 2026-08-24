@@ -5,7 +5,7 @@
 #include "opennt-bop/ingress/command_v2_runtime_session.h"
 #include "ntdos64_bop_composition_v1.h"
 #include "adapter-softpc/bx_ntvdm_guest_pointer_manager.h"
-#include "opennt-host/softpc.new/host/inc/nt_error_compat.h"
+#include "adapter-win32/facade/opennt_error_dialog_facade.h"
 #include "session/ntdos64_session_v1.h"
 #include "session/ntdos64_session_cancellation_v1.h"
 
@@ -46,7 +46,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         return bx_ntvdm_engine_result_v1_set(result,
             BX_NTVDM_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION, 6u);
     }
-    bx_ntvdm_top_level_nosupport_v2_reset_thread();
+    bx_ntvdm_opennt_direct_access_reset_thread();
     install_status = bx_ntvdm_dem_v2_startup_install(
         request->profile_descriptor, request->profile_descriptor_chars,
         request->root_descriptor, request->root_descriptor_chars,
@@ -55,7 +55,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     if (install_status != 1)
     {
         bx_ntvdm_dem_v2_startup_reset();
-        bx_ntvdm_top_level_nosupport_v2_reset_thread();
+        bx_ntvdm_opennt_direct_access_reset_thread();
         ntdos64_session_v1_reset(&session);
         ntdos64_bop_composition_v1_reset();
         return bx_ntvdm_engine_result_v1_set(result,
@@ -69,7 +69,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         !bx_ntvdm_command_v2_runtime_session_bind_from_startup()) {
         bx_ntvdm_command_v2_runtime_session_reset();
         bx_ntvdm_dem_v2_runtime_session_reset();
-        bx_ntvdm_top_level_nosupport_v2_reset_thread();
+        bx_ntvdm_opennt_direct_access_reset_thread();
         bx_ntvdm_dem_v2_startup_reset();
         ntdos64_session_v1_reset(&session);
         ntdos64_bop_composition_v1_reset();
@@ -80,7 +80,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
             &machine_stage)) {
         bx_ntvdm_command_v2_runtime_session_reset();
         bx_ntvdm_dem_v2_runtime_session_reset();
-        bx_ntvdm_top_level_nosupport_v2_reset_thread();
+        bx_ntvdm_opennt_direct_access_reset_thread();
         bx_ntvdm_dem_v2_startup_reset();
         ntdos64_session_v1_reset(&session);
         ntdos64_bop_composition_v1_reset();
@@ -93,7 +93,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
     if (!bx_ntvdm_dem_v2_startup_prepare_machine_stage_entry(&machine_entry)) {
         bx_ntvdm_command_v2_runtime_session_reset();
         bx_ntvdm_dem_v2_runtime_session_reset();
-        bx_ntvdm_top_level_nosupport_v2_reset_thread();
+        bx_ntvdm_opennt_direct_access_reset_thread();
         bx_ntvdm_dem_v2_startup_reset();
         ntdos64_session_v1_reset(&session);
         ntdos64_bop_composition_v1_reset();
@@ -120,7 +120,7 @@ int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
         ordinary_terminal = bx_ntvdm_dem_v2_startup_copy_ordinary_terminal();
     bx_ntvdm_command_v2_runtime_session_reset();
     bx_ntvdm_dem_v2_runtime_session_reset();
-    bx_ntvdm_top_level_nosupport_v2_reset_thread();
+    bx_ntvdm_opennt_direct_access_reset_thread();
     bx_ntvdm_dem_v2_startup_reset();
     ntdos64_session_v1_complete(&session,
         machine_result.execution_status);

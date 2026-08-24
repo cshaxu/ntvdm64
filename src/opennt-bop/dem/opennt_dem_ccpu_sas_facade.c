@@ -8,7 +8,7 @@
  */
 
 #include "opennt_dem_ccpu_sas_facade.h"
-#include "opennt-host/vdmredir/vrnmpipe_compat.h"
+BOOLEAN bx_ntvdm_vr_initialized_provider(VOID);
 #include "bx_ntvdm_guest_pointer_manager.h"
 
 #include <stdlib.h>

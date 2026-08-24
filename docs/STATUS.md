@@ -2,24 +2,45 @@
 
 ## Current Work
 
-**Active: M0 T261 S11** — final OpenNT-host manifest, include and exception
-closure. All technical exit checks are complete; this packet remains active
-until the owner selects and admits the next Queue candidate, because the
-documentation gate requires one active `M/T/S` packet.
+**Active: M0 T261 S12** — OpenNT-host original-header and mirror replacement.
+S11 is technically closed subject to the owner-directed correction: the three
+project-authored `*_compat.h` headers must leave `opennt-host`; S12 replaces
+them with original files or explicitly registered reachable original subsets.
 
 ## Active Packet
 
-### M0 T261 S11 — final OpenNT-host manifest, include and exception closure
+### M0 T261 S12 — OpenNT-host original-header and mirror replacement
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T261 S12`, Ordinary Mode with a single-person dual-role review. |
+| Objective | Eliminate project-authored `nt_error_compat.h`, `vrputil_compat.h` and `vrnmpipe_compat.h` from `opennt-host` by recovering their original OpenNT header paths, names and applicable content. |
+| Scope | `opennt-host` header/source/include users, `adapter-softpc` mis-rooted exact header, `adapter-win32` direct-access UI state, BOP consumers, fixture-only controls, build manifest and local README divergence register. |
+| Non-goals | No new BOP capability, no full historical CSR/VDD/ICA/SoftPC shell, no Bochs change, no unbounded pointer/handle state and no generic compatibility component. |
+| Required Direction | A mirror may be a reachable original-file subset when the complete translation unit cannot compose. Each retained line/record/order remains original; every omitted/unavailable/replaced expression is statement-local `DIVERGENCE(<ID>)` and has one `opennt-host/README.md` row. A new declaration belongs only to its real adapter/session/test owner, never an OpenNT-mirror path. |
+| Verification | Exact hash comparison for full imported headers; source-span/exception ledger for a subset; include and old-path negative scans; original ABI assertion for `VrTerminateNamedPipes(WORD DosPdb)`; focused BOP59/VDMREDIR fixtures; formal Ninja closure, documentation governance and `git diff --check`. |
+| Exit Criteria | No `*_compat.h` remains below `src/opennt-host`; all consumers include original header paths or their actual non-original owner; original header/subset and every divergence are one-to-one registered; formal closure and focused tests pass or an explicitly owned non-host failure is reproduced. |
+| Admission | Owner direction: “要求你增开一个S任务完成此事。” |
+
+**S12 P1 completed:** exact OpenNT `error.h`, `vrputil.h`, `vrnmpipe.h` and
+the newly reached `oemuni.h` now replace all three project-authored host
+compatibility headers.  The BOP59 fixture passes after non-original dialog
+state moved to `adapter-win32`.  A fresh `002` formal Ninja graph compiled,
+archived and linked both focused fixtures; BOP59 and the Redirector fixture
+each return `0`.  Full details and exact hashes are in the [S12
+evidence](etc/evidence/m0-t261-s12-opennt-host-original-header-replacement-001.md).
+
+### M0 T261 S11 — closed: final OpenNT-host manifest, include and exception closure
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T261 S11`, Ordinary Mode with a single-person dual-role review. |
 | Objective | Prove that the final production `opennt-host` layout, public includes, static-library manifest and local exception register are coherent as one original-source-first build closure. |
-| Scope | `src/opennt-host`, its README, current consumers/includes, component manifest/Ninja graph, all reached focused fixtures and S1/S8/S10 evidence. |
+| Scope | `src/opennt-host`, its README, current consumers/includes, component manifest/Ninja graph, all reached focused fixtures and S1/S8/S10 evidence; recover original `error.h`, `vrputil.h` and `vrnmpipe.h` rather than retaining project-authored compatibility headers. |
 | Non-goals | No new host provider/BOP capability, no configuration or machine feature, no Bochs change, no import merely to increase source count, and no VDD/CSR/WOW product-shell recovery. |
-| Required Direction | Each `opennt-host` production body is either re-rooted original OpenNT source or carries one statement-level README exception. The formal manifest may compile only the admitted reached host bodies; exact retained originals remain production source but are not falsely claimed as reached. |
+| Required Direction | Each `opennt-host` production body and header is either a re-rooted original OpenNT file or carries one statement-level README exception. No `*_compat.h` may replace an existing original OpenNT header; modern BOP/fixture/session state belongs to its actual adapter, `session` or test owner. The formal manifest may compile only the admitted reached host bodies; exact retained originals remain production source but are not falsely claimed as reached. |
 | Verification | One-to-one source/README divergence audit, include/old-path/manifest scan, full existing-Ninja graph execution, direct host fixtures and explicit classification of cross-owner fixture tails, documentation governance and `git diff --check`. |
-| Exit Criteria | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule; manifest/includes/tests agree; no generic or unclassified host shim remains; the formal graph passes; direct host portions pass or a later `opennt-bop`/machine tail is explicitly separated. |
+| Exit Criteria | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule; original `error.h`, `vrputil.h` and `vrnmpipe.h` replace the three project-authored compatibility headers; manifest/includes/tests agree; no generic or unclassified host shim remains; the formal graph passes; direct host portions pass or a later `opennt-bop`/machine tail is explicitly separated. |
 | Admission | T261 proposal S11, after S10 residual-source closure. |
 
 **S11 P2 completed:** the formal graph executed all pending
@@ -28,6 +49,13 @@ the final closure compiled no `bx-core` source. Documentation governance,
 component-manifest, production-tree and generic-UD boundary gates pass. The
 technical-closure record distinguishes the two remaining cross-owner fixture
 tails from host-layout evidence: [T261 technical closure](etc/evidence/m0-t261-s11-final-technical-closure-20260824.md).
+
+**S11 P3 superseded by S12:** the owner rejected the interim
+`nt_error_compat.h`, `vrputil_compat.h` and `vrnmpipe_compat.h` headers. The
+prior technical-closure evidence is superseded as a final source-fidelity
+claim; S12 imports their original OpenNT header counterparts, restores
+original ABI declarations, and moves non-original BOP choice/fixture state to
+its actual owner before rebuilding the affected closure.
 
 **S11 P1 completed:** the final one-to-one audit finds three byte-identical
 re-rooted PIF files; four reached original host C bodies; three include-only
