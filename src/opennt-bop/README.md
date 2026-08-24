@@ -75,6 +75,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-037` | COMMAND materializes historical SAS pointers. | Raw aliased host access is unsafe. | Use bounded copied spans with alias rejection. | `command/opennt_command_composition.c:908` |
 | `BOP-DIV-038` | `demdir.c` imports the historical DEM/SoftPC/OEM product-header closure. | That closure cannot compose independently with the modern component graph. | Split only the include boundary between BOP composition and same-shaped adapter-win32 OEM calls. | `dem/demdir.c:13` |
 | `BOP-DIV-039` | `demfile.c` and `demlabel.c` import the historical DEM/SoftPC/OEM/VDMREDIR product-header closure. | It cannot link as an independent modern component closure. | Retain source bodies and bind their named OEM, Redirector and scoped CCPU/SAS facades through `opennt_demfile_composition`. | `dem/demfile.c:19`, `dem/demlabel.c:14` |
+| `BOP-DIV-040` | `demgset.c` imports historical DEM/SoftPC/OEM product headers. | That product closure cannot independently link in the component graph. | Retain the imported body; isolate BOP selection/DTA state, same-shaped public-Win32 queries and host drive admission at declared boundaries. | `dem/demgset.c:31` |
 
 The migration evidence is
 [`m0-t260-s5-opennt-bop-layout-migration-001.md`](../../docs/etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).

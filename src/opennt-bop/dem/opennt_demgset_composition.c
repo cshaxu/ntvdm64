@@ -1,11 +1,11 @@
-/* Neutral execution and host-ABI seam for the direct OpenNT demgset.c
+/* Project-owned BOP composition and scoped state seam for the direct OpenNT demgset.c
  * import.  Original source: src/opennt/base/mvdm/dos/dem/demgset.c.
  *
  * The direct wrappers deliberately call the corresponding user-mode Win32
  * APIs.  They do not create a virtual drive model or carry legacy-v1 policy.
  */
 
-#include "demgset_shim.h"
+#include "opennt_demgset_composition.h"
 
 void demSetDefaultDrive(void);
 void demGetBootDrive(void);
@@ -20,13 +20,6 @@ void demGSetMediaID(void);
 void demGetDPB(void);
 void demGetComputerName(void);
 void demGetDPBList(void);
-
-BOOL GetComputerNameOem(LPSTR name, LPDWORD chars)
-{ return GetComputerNameA(name, chars); }
-BOOL GetDiskFreeSpaceOem(LPCSTR root, LPDWORD sectors_per_cluster,
-    LPDWORD bytes_per_sector, LPDWORD free_clusters, LPDWORD total_clusters)
-{ return GetDiskFreeSpaceA(root, sectors_per_cluster, bytes_per_sector,
-      free_clusters, total_clusters); }
 
 /* Direct composition uses the real Win32 clock API.  A scoped test writer is
  * intentionally opt-in and exists only to avoid mutating the host clock in a

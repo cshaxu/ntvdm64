@@ -26,7 +26,9 @@
  * the original spellings and exposes only the checked bx-vdm call boundary;
  * it does not replace any drive, DPB, date/time or machine-name algorithm.
  */
-#include "../../opennt-host/dem/demgset_shim.h"
+/* DIVERGENCE(BOP-DIV-040): preserve the imported body while separating its
+ * BOP composition, public Win32 facades and host drive-admission dependency. */
+#include "opennt_demgset_composition.h"
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"
 #define BOOTDRIVE_VALUE "BootDir"

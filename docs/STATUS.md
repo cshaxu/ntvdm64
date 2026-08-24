@@ -69,6 +69,10 @@ S4 P3 has split the DEM file/label composition from same-shaped OEM Win32
 facades while retaining Redirector as its separately owned lower host
 capability; fresh r011 completes 462 Ninja edges and both direct file/OEM
 fixtures pass; see the [DEM file split](etc/evidence/m0-t261-s4-p3-demfile-owner-split-001.md).
+S4 P4 has split DEM global-setting service composition/DTA state from the
+same-shaped public-Win32 host queries while retaining host drive admission;
+fresh r012 completes 460 Ninja edges and the direct `demgset` fixture passes;
+see the [DEM global-setting split](etc/evidence/m0-t261-s4-p4-demgset-owner-split-001.md).
 
 ## Previous Active Packet — M0 T260
 

@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-host/dem/demgset_shim.h"
+#include "opennt-bop/dem/opennt_demgset_composition.h"
 
 /* The fixture crosses the already-imported search owner after DTA
  * registration, but it deliberately imports only the S6 compatibility

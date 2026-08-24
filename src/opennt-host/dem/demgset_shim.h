@@ -18,6 +18,7 @@
 #include "adapter-win32/include/compiler/opennt_dem_ntdecl_compat.h"
 #include "demfile_shim.h"
 #include "adapter-win32/include/legacy-api/opennt_dem_oem_facade.h"
+#include "adapter-win32/include/legacy-api/opennt_dem_gset_facade.h"
 #include "dem_drive_policy_shim.h"
 /* Direct source mirror: shared exact DASD/IOCTL layout and constants. */
 #include "opennt-bop/dem/demdasd.h"
@@ -59,10 +60,6 @@ extern ULONG UNALIGNED *pulDTALocation;
 typedef bx_ntvdm_demhndl_extended_error *PDEMEXTERR;
 
 UINT GetDriveTypeOem(LPSTR root);
-BOOL GetComputerNameOem(LPSTR name, LPDWORD chars);
-BOOL GetDiskFreeSpaceOem(LPCSTR root, LPDWORD sectors_per_cluster,
-    LPDWORD bytes_per_sector, LPDWORD free_clusters,
-    LPDWORD total_clusters);
 PBDS demGetBDS(BYTE drive);
 BOOL demGetBPB(PBDS bds);
 BOOL demGetDiskFreeSpace(BYTE drive, WORD *bytes_per_sector,
@@ -71,7 +68,9 @@ BOOL GetMediaId(CHAR drive, PVOLINFO info);
 typedef BOOL (*bx_ntvdm_demgset_clock_writer)(const SYSTEMTIME *time);
 BOOL bx_ntvdm_demgset_set_local_time(const SYSTEMTIME *time);
 void bx_ntvdm_demgset_set_clock_writer(bx_ntvdm_demgset_clock_writer writer);
-int bx_ntvdm_demgset_invoke(bx_ntvdm_demhndl_call *call);
+/* The direct OpenNT body selects services through opennt-bop composition.
+ * The stable DTA registration surface remains declared here for sibling DEM
+ * host capability headers without a reverse BOP include. */
 int bx_ntvdm_demgset_register_dta(USHORT ds, USHORT dta_offset,
     USHORT pdb_offset, USHORT error_offset, USHORT wow_offset);
 
