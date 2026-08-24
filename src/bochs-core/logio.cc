@@ -604,4 +604,3 @@ void bx_center_print(FILE *file, const char *line, unsigned maxwidth)
   for (size_t i=0; i<imax; i++) fputc(' ', file);
   fputs(line, file);
 }
-
