@@ -2,11 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T263 S1 — OpenNT MVDM owner/provenance census and component-root
-admission.** This packet establishes the twelve-component ownership model and
-the three new production-only roots before any MVDM source body is imported.
+**Active: M0 T263 S2 — OpenNT `bin86` guest-package admission.** This packet
+adds the complete original guest companion package with source identity and
+hash evidence, without asserting any new runtime behavior.
 
 ## Active Packet
+
+### M0 T263 S2 — OpenNT `bin86` guest-package admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S2`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T263 proposal S2; owner classified `bin86` as guest-owned. |
+| Objective | Import the complete source-identical original `base/mvdm/bin86` package below `opennt-guest` and record its source/hash identity. |
+| Non-goals | No driver/configuration auto-loading, guest behavior change, host provider, build-graph expansion or source edit. |
+| Reference Baseline | `O:\\repos.external\\opennt\\base\\mvdm\\bin86`, Git `5c5b979e`; T263/S1 census. |
+| Files And ABI Surface | Ten guest companion/input files, guest README, S2 evidence and status only; no host ABI. |
+| Applicable Rules | Source policy, guest mirror zero-difference rule, production-only root rule and artifact/input provenance rule. |
+| Verification | File count plus SHA-256 equality for every source/target pair; no local divergence row. |
+| Expected Markers | Ten exact files; zero guest-source divergence entries; zero formal-Ninja edges added. |
+| Asset Needs | Pinned OpenNT source root and Git provenance. |
+| Reporting Requirements | Record every file role and state that runtime use remains separately admitted. |
+| Stop Conditions | Missing/hash-mismatched file, non-guest owner, local edit or accidental runtime-link input pauses the packet. |
+| Exit Criteria | Complete package is source-identical, README/evidence agree and no default runtime behavior changes. |
+| Original Owner Request | “`bin86` => 如果属于 opennt-guest，应予搬迁。” |
+| Similar-Issue Sweep | Configuration input mistaken for an auto-loaded boot file, host-provider leakage, source/build companion loss and artifact provenance drift. |
+
+**S2 P1 completed:** all ten `bin86` files were copied source-identically and
+SHA-256 verified. See the [admission evidence](etc/evidence/m0-t263-s2-bin86-guest-input-admission-001.md).
 
 ### M0 T263 S1 — OpenNT MVDM owner/provenance census and component-root admission
 
@@ -28,9 +51,9 @@ the three new production-only roots before any MVDM source body is imported.
 | Original Owner Request | “建立 opennt-guest 完整组件、opennt-softpc、opennt-utils 组件，并做好 tools/opennt 工具增补。” |
 | Similar-Issue Sweep | Misowned `mvdm` files, firmware mistaken for a second emulator, utility catch-all growth, host-extension auto-linking and historical tools leaking into runtime. |
 
-**S1 P1 in progress:** MVDM provenance census and the component/tool skeleton
-are being established under
-`docs/etc/evidence/m0-t263-s1-mvdm-owner-provenance-census-001.md`.
+**S1 P1 completed:** the 24-package MVDM provenance census, 12-component
+ownership model and empty component/tool roots are recorded in the
+[S1 evidence](etc/evidence/m0-t263-s1-mvdm-owner-provenance-census-001.md).
 
 ### M0 T262 S5 — cross-component final mirror audit and formal-build regression
 

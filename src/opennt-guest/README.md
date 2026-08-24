@@ -9,6 +9,12 @@ were moved intact in T260 S4 with no content edit.  Historical documents may
 refer to their former `src/opennt/base/mvdm/...` provenance paths; those are
 source identities, not live product input paths.
 
+The complete source-identical `base/mvdm/bin86/` guest companion package is
+retained below `bin86/`. Its ten-file source identity and per-file role are
+recorded in `docs/etc/evidence/m0-t263-s2-bin86-guest-input-admission-001.md`.
+It is an image/configuration input package, not an in-process host provider
+or an automatic runtime admission.
+
 Original prebuilt DOS/V86 programs, system images, build libraries, objects
 and MAP/SYM companions are retained at the same relative paths below
 `dos-v86/`. They are byte-identical package/build inputs, not generated local
