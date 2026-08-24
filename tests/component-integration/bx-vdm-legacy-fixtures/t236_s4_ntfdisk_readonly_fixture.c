@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-host/dem/demdasd_ioctl_shim.h"
+#include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
 
 /* The test caller must explicitly name a disposable, mounted fixed volume.
  * It performs one 512-byte round trip at 8 MiB, then verifies that the exact

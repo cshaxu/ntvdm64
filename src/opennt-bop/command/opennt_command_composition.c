@@ -1,5 +1,5 @@
 #include "opennt_command_composition.h"
-#include "opennt-host/dem/dem_drive_policy_shim.h"
+#include "opennt-host/dem/opennt_dem_drive_policy_facade.h"
 
 #include <setjmp.h>
 #include <stdlib.h>

@@ -41,8 +41,9 @@ source or dependency must be added to that audit before it enters an S.
 | S2 | Prove the original source/ABI/failure path for every non-identical file and decide its target component/path. | Each row has a first-usable recovery-rung decision and no unresolved generic `shim` category. |
 | S3 | Recover the PIF/COMMAND host group under re-rooted original `softpc.new/host/...` and `dos/command/...` paths; externalize composition-only files. | Direct imports retain original body; every body edit is source-marked and registered. |
 | S4 | Recover or relocate DEM host support by original source owner; preserve host-file API, error order and handle/mapping contracts. | No `dem/*_shim.*` survives without an explicit original path or source-derived exception. |
-| S5 | Resolve XMS, Redirector, top-level and configuration support with the same rule. | No generic `xms/`, `redir/`, `top_level/` or `config/` shim remains unclassified. |
-| S6 | Repair manifest/includes/tests, delete superseded host shims, run formal Ninja closure and audit source/README exception one-to-one. | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule. |
+| S5 | Split the selector-blind copied-frame ingress from `opennt-bop` into `adapter-bop`, preserving OpenNT selector/service routing in `opennt-bop`. | `adapter-bop` owns the generic typed ingress/completion ABI; it names no selector, service family, DOS/WOW algorithm or provider, and `opennt-bop` no longer owns generic machine-event mechanics. |
+| S6 | Resolve XMS, Redirector, top-level and configuration support with the same rule. | No generic `xms/`, `redir/`, `top_level/` or `config/` shim remains unclassified. |
+| S7 | Repair manifest/includes/tests, delete superseded host shims, run formal Ninja closure and audit source/README exception one-to-one. | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule. |
 
 ## Target layout rule
 
@@ -66,7 +67,8 @@ composition name and must not replace the imported `nt_pif.c` body.
   adapter, registered external intrusion, then new behavior.
 - `adapter-win32` owns unavailable Win32/NTDLL API implementations;
   `adapter-softpc` owns SoftPC/CCPU/SAS-to-Bochs mechanical conversion.
-- `opennt-bop` owns BOP route and selector/service meaning; `app` owns final
+- `adapter-bop` owns selector-blind copied-frame ingress and typed completion;
+  `opennt-bop` owns BOP route and selector/service meaning; `app` owns final
   composition.  This task must move any misplaced file to its true owner.
 - A `DIVERGENCE` edit in an imported OpenNT body has one statement-level ID and
   one component-README row.  A source-derived file has a separate recovery

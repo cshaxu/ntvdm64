@@ -1,5 +1,5 @@
-#include "demmisc_shim.h"
-#include "demfile_shim.h"
+#include "opennt_demmisc_compat.h"
+#include "opennt_demfile_compat.h"
 
 /* The imported owner redirects ReadFile to the checked loader bridge.  This
  * shim itself must call the real Win32 primitive after the bridge has been
@@ -57,13 +57,13 @@ DWORD bx_ntvdm_demmisc_get_full_path_name_oem(LPCSTR path, DWORD bytes,
 { return GetFullPathNameA(path,bytes,output,file_part); }
 void bx_ntvdm_demmisc_vdd_create_user_hook(USHORT pdb)
 {
-    /* DIVERGENCE(HOST-DIV-006): VDDCreateUserHook requires the NT4 VDD broker.  Do not
+    /* DIVERGENCE(BOP-DIV-042): VDDCreateUserHook requires the NT4 VDD broker.  Do not
      * recreate that product shell; the VDD/debug owner retains this call. */
     (void)pdb;
 }
 void bx_ntvdm_demmisc_module_load(LPCSTR module,LPCSTR path,WORD segment,DWORD bytes)
 {
-    /* DIVERGENCE(HOST-DIV-007): these symbols are VDD/debugger notifications, not DOS
+    /* DIVERGENCE(BOP-DIV-043): these symbols are VDD/debugger notifications, not DOS
      * loader actions.  Their NT4 receiver is intentionally not recreated. */
     (void)module; (void)path; (void)segment; (void)bytes;
 }
@@ -73,7 +73,7 @@ void bx_ntvdm_demmisc_module_segment_move(LPCSTR module,LPCSTR path,WORD old_seg
 { (void)module; (void)path; (void)old_segment; (void)new_segment; }
 void bx_ntvdm_demmisc_dbg_prompt(LPCSTR prompt,LPSTR buffer,DWORD bytes)
 {
-    /* DIVERGENCE(HOST-DIV-008): a debugger console can write guest-visible input only once
+    /* DIVERGENCE(BOP-DIV-044): a debugger console can write guest-visible input only once
      * its own owner package supplies that lifecycle. */
     (void)prompt; (void)buffer; (void)bytes;
 }
@@ -84,7 +84,7 @@ void bx_ntvdm_demmisc_rc_error_dialog(WORD error,LPCSTR text,LPVOID reserved)
 }
 void bx_ntvdm_demmisc_host_floppy_reset(void)
 {
-    /* DIVERGENCE(HOST-DIV-009): HostFloppyReset is FDC/DMA/CMOS machine behavior, not a
+    /* DIVERGENCE(BOP-DIV-045): HostFloppyReset is FDC/DMA/CMOS machine behavior, not a
      * DEM facade.  No false controller reset is reported here. */
 }
 /* The imported demDiskReset owns the ordering: reset host disk handles, then

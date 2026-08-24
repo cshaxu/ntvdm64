@@ -23,10 +23,10 @@
  * declaration-only compatibility seam, not a legacy BOP provider. */
 #include "adapter-win32/include/compiler/opennt_dem_ntdecl_compat.h"
 
-/* winternl.h must precede demfile_shim.h: the retained OpenNT ACCESS_MASK
+/* winternl.h must precede opennt_demfile_compat.h: the retained OpenNT ACCESS_MASK
  * value macro is source-local DOS open-mode vocabulary, whereas winternl.h
  * uses ACCESS_MASK as an NT declaration type. */
-#include "demfile_shim.h"
+#include "opennt_demfile_compat.h"
 #include "adapter-win32/include/legacy-api/opennt_dem_search_facade.h"
 
 /* Verbatim layout source: base/mvdm/dos/dem/dosdef.h. */

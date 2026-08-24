@@ -5,7 +5,7 @@
  * the demfile/demhndl mechanical ABI and adds only the original directory
  * owner's OEM host calls plus its packed CDS guest layout. */
 
-#include "opennt-host/dem/demfile_shim.h"
+#include "opennt-bop/dem/opennt_demfile_compat.h"
 #include "adapter-win32/include/legacy-api/opennt_dem_oem_facade.h"
 
 #pragma pack(push, 1)

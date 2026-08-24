@@ -49,11 +49,13 @@
     necessity, the smallest feasible diff, and the component's divergence or
     exception record; convenience or a local trace result is never sufficient.
 15. The target source owners are exactly `bx-core`, `bx-mantle`,
-    `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-softpc`, `adapter-win32`,
-    and `app`. Dependencies flow from `app` through declared OpenNT/adapter
+    `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-bop`,
+    `adapter-softpc`, `adapter-win32`, and `app`. Dependencies flow from `app`
+    through `adapter-bop`'s typed, selector-blind ingress and declared OpenNT/adapter
     contracts to `bx-mantle` and then `bx-core`; `opennt-guest` is a guest-image
     input and does not become a host-provider library. `opennt-bop` alone owns
-    BOP source meaning. `adapter-softpc` is selector-blind, same-shaped
+    BOP source meaning. `adapter-bop` is selector-blind copied-frame transport,
+    while `adapter-softpc` is selector-blind, same-shaped
     SoftPC/CCPU mechanical recovery over Bochs; `adapter-win32` is an
     unavailable-Win32 facade, not an OpenNT service owner.
 16. The local-intrusion registers are component-owned. `bx-core/README.md`,

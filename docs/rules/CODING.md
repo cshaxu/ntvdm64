@@ -97,8 +97,9 @@
   `bx-core`; Bochs-only native assembly in `bx-mantle`; guest image source in
   `opennt-guest`; independently composable OpenNT host capability in
   `opennt-host`; OpenNT BOP mirrors in `opennt-bop`; unavailable public-Win32
-  facades in `adapter-win32`; bounded same-shaped SoftPC/CCPU recovery in
-  `adapter-softpc`; and
+  facades in `adapter-win32`; selector-blind copied-frame BOP ingress and
+  typed completion in `adapter-bop`; bounded same-shaped SoftPC/CCPU recovery
+  in `adapter-softpc`; and
   CLI/final composition in `app`. Transitional legacy paths are not a
   precedent for new code. Do not move a file across these owners as an
   incidental feature change; the admitted reorganization package inventories

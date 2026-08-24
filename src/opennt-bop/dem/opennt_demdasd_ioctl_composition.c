@@ -6,7 +6,7 @@
  * recursive-CPU and raw-device module ABI; it never routes BOPs itself.
  */
 
-#include "demdasd_ioctl_shim.h"
+#include "opennt_demdasd_ioctl_compat.h"
 #include "opennt-host/top_level/top_level_nosupport_shim.h"
 
 #include <stdlib.h>
@@ -103,6 +103,8 @@ void bx_ntvdm_demdasd_set_ah(USHORT value) { bx_ntvdm_demhndl_set_ah(value); }
 
 void bx_ntvdm_demdasd_host_simulate(void)
 {
+    /* DIVERGENCE(BOP-DIV-046): recursive SoftPC execution has no bounded
+     * Bochs equivalent at this source call boundary. */
     /* Original source: src/opennt/base/mvdm/dos/dem/demdasd.c.  Its floppy
      * hook path recursively entered SoftPC at an INT 13 continuation.  The
      * copied result ABI intentionally cannot mutate selectors/IP, so fail
@@ -131,7 +133,7 @@ void host_direct_access_error(ULONG type)
     bx_ntvdm_top_level_nosupport_v2_direct_access_error((uint32_t)type);
 }
 
-/* The floppy source is a distinct FDC/DMA/CMOS device component, not a volume
+/* DIVERGENCE(BOP-DIV-046): the floppy source is a distinct FDC/DMA/CMOS device component, not a volume
  * capability.  Its uncomposed paths remain explicit failures. */
 BOOL nt_floppy_close(BYTE drive) { (void)drive; SetLastError(ERROR_NOT_SUPPORTED); return FALSE; }
 ULONG nt_floppy_read(BYTE drive, ULONG offset, ULONG size, PBYTE buffer)
@@ -145,7 +147,7 @@ MEDIA_TYPE nt_floppy_get_media_type(BYTE drive, WORD cylinders, WORD sectors, WO
 { (void)drive; (void)cylinders; (void)sectors; (void)heads; SetLastError(ERROR_NOT_SUPPORTED); return Unknown; }
 BOOL nt_floppy_verify(BYTE drive, DWORD offset, DWORD size)
 { (void)drive; (void)offset; (void)size; SetLastError(ERROR_NOT_SUPPORTED); return FALSE; }
-/* Divergence from nt_fdisk.c: use documented Win32 handles in place of its
+/* DIVERGENCE(BOP-DIV-046): use documented Win32 handles in place of its
  * NT native `\\DosDevices` opens and FAT-only FSCTL.  The original output
  * BPB/geometry contract and failure propagation remain with demdasd.c. */
 BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)

@@ -11,7 +11,7 @@
  * headers bind CCPU/SAS, SoftPC devices, debugger/VDD products and VDM
  * termination.  Preserve the original body below and obtain only that ABI
  * surface from the neutral bx-vdm compatibility seam. */
-#include "../../opennt-host/dem/demmisc_shim.h"
+#include "opennt_demmisc_compat.h"
 
 
 #if DEVL

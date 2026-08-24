@@ -1,4 +1,4 @@
-#include "demerror_lock_shim.h"
+#include "opennt_demerror_lock_composition.h"
 
 void demSetHardErrorInfo(void);
 void demRetry(void);

@@ -1,7 +1,7 @@
 #include "dem_v2_startup_composition.h"
 #include "spckbd_handoff_v2_generic_ud_bridge.h"
 
-#include "opennt-host/dem/demmisc_shim.h"
+#include "opennt-bop/dem/opennt_demmisc_compat.h"
 #include "byob_image.h"
 #include "byob_launch_plan_v2.h"
 #include "byob_profile.h"

@@ -2,7 +2,7 @@
 #include "dem_v2_startup_composition.h"
 
 #include "opennt-bop/ingress/dem_direct_session.h"
-#include "opennt-host/dem/demdasd_ioctl_shim.h"
+#include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
 #include "opennt-bop/ingress/dem_native_session.h"
 #include "opennt-host/redir/redir_session_shim.h"
 

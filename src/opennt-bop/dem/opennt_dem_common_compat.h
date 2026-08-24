@@ -3,12 +3,12 @@
 
 /* Historical include surface for directly imported dem.c.  It contains
  * declarations/constants only; lifecycle policy remains in the imported
- * source and host binding remains in demmisc_shim. */
+ * source and host binding remains in opennt_demmisc_compat. */
 #include <ctype.h>
 #include <stdlib.h>
 #include <windows.h>
 
-#include "demmisc_shim.h"
+#include "opennt_demmisc_compat.h"
 
 /* OpenNT's DEM sources were compiled with their DBG surface available: other
  * directly imported owners call demPrintMsg unconditionally.  The current

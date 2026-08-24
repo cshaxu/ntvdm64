@@ -6,7 +6,8 @@ The target product separation is: `bx-core` (adopted machine), `bx-mantle`
 (Bochs-only assembly), `opennt-guest` (DOS/WOW guest images), `opennt-host`
 (host capabilities), `opennt-bop` (BOP source mirrors), `adapter-softpc`
 (Bochs-backed SoftPC/CCPU interface recovery), `adapter-win32` (unavailable
-Win32 compatibility), and
+Win32 compatibility), `adapter-bop` (selector-blind copied-frame BOP
+ingress/completion), and
 `app` (CLI and final composition). This separation exists to make maximal
 original-source reuse and minimal source intrusion mechanically enforceable.
 

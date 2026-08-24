@@ -4,7 +4,7 @@
 /* Project-owned composition for imported OpenNT demfile.c/demlabel.c.  The
  * body retains OpenNT service semantics; this surface selects that body and
  * binds it to the existing scoped CCPU/SAS-compatible call record. */
-#include "opennt-host/dem/demfile_shim.h"
+#include "opennt-bop/dem/opennt_demfile_compat.h"
 #include "adapter-win32/include/legacy-api/opennt_dem_file_oem_facade.h"
 #include "opennt-host/redir/redir_session_shim.h"
 

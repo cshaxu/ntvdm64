@@ -2,11 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T261 S4** — DEM host-support original-layout recovery.
+**Active: M0 T261 S4** — closed DEM host-support original-layout recovery;
+P7 delivery is in final governance review and no S5 implementation is admitted.
 
 ## Active Packet
 
-### M0 T261 S4 — DEM host-support original-layout recovery
+### M0 T261 S4 — closed: DEM host-support original-layout recovery
 
 | Field | Record |
 | --- | --- |
@@ -81,6 +82,15 @@ S4 P6 has moved the common DEM CCPU/SAS frame, mapping and handle facade to
 `adapter-softpc`; a generic post-body hook removes its former direct demerror
 link. Fresh r014 completes 461 Ninja edges and focused handle/error fixtures
 pass; see the [CCPU/SAS migration](etc/evidence/m0-t261-s4-p6-dem-ccpu-sas-facade-migration-001.md).
+S4 P7 has completed the final owner cleanup: the remaining DEM
+compatibility/composition surfaces now reside under `opennt-bop/dem`, while
+`opennt-host/dem` retains only named drive/namespace capabilities and its
+drive-policy facade.  Fresh r016 completes 462 Ninja edges; the DASD/IOCTL,
+error/lock and MISC direct-import fixtures pass.  The old r015 concurrent
+build root is explicitly excluded from evidence.  See the
+[S4 owner closure](etc/evidence/m0-t261-s4-p7-dem-host-owner-closure-001.md).
+No S5 implementation is active: its `adapter-bop` split is planned in the
+T261 proposal and awaits the next owner instruction.
 
 ## Previous Active Packet — M0 T260
 

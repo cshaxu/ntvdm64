@@ -5,8 +5,8 @@
  * It starts with the proven register/guest-memory/drive layout surface;
  * compile probes admit each remaining historical raw-device dependency. */
 
-#include "demgset_shim.h"
-#include "dem_drive_policy_shim.h"
+#include "opennt_demgset_compat.h"
+#include "opennt-host/dem/opennt_dem_drive_policy_facade.h"
 
 /* Original source: src/opennt/base/mvdm/dos/dem/dem.h and dosdef.h.
  * The imported units need only these dispatcher spellings; their selection

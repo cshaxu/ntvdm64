@@ -6,9 +6,9 @@
 
 /* Direct import from src/opennt/base/mvdm/dos/dem/dem.c.
  * Divergence: the historical io.h/dem.h closure is unavailable outside the
- * NTVDM product shell; dem_common_shim.h supplies only its declarations and
+ * NTVDM product shell; opennt_dem_common_compat.h supplies only its declarations and
  * exact diagnostic constants. */
-#include "../../opennt-host/dem/dem_common_shim.h"
+#include "opennt_dem_common_compat.h"
 
 /* DemInit - DEM Initialiazation routine. (This name may change when DEM is
  *           converted to DLL). */

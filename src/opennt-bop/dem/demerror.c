@@ -13,7 +13,7 @@
  * dem/softpc headers bind CCPU, SAS and the NTVDM product shell.  Keep the
  * original body below intact and obtain only that ABI surface from this
  * neutral bx-vdm compatibility seam. */
-#include "../../opennt-host/dem/demerror_lock_shim.h"
+#include "opennt_demerror_lock_composition.h"
 
 PVHE    pHardErrPacket;
 PSYSDEV pDeviceChain;

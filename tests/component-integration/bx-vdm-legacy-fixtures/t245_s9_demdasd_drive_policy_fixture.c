@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-host/dem/demdasd_ioctl_shim.h"
+#include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
 
 UINT GetDriveTypeOem(LPSTR root);
 UCHAR GetPhysicalDriveType(UCHAR drive);

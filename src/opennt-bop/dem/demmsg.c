@@ -14,9 +14,9 @@
 
 /* Direct import from src/opennt/base/mvdm/dos/dem/demmsg.c.
  * Divergence: the historical demmsg.h/dem.h include closure is supplied by
- * dem_common_shim.h; no message selection or debug-output logic is replaced. */
+ * opennt_dem_common_compat.h; no message selection or debug-output logic is replaced. */
 #include <stdio.h>
-#include "../../opennt-host/dem/dem_common_shim.h"
+#include "opennt_dem_common_compat.h"
 
 PCHAR aMsg [] = {
     "DOS Location Not Found. Using Default.\n",
