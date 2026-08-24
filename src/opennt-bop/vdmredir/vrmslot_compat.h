@@ -13,6 +13,7 @@
 #include "opennt-host/vdmredir/vrputil_compat.h"
 
 #define SET_ERROR(err) { setAX((WORD)(err)); setCF(1); }
+#define setES(value) bx_ntvdm_ccpu_sas_set_es(value)
 /* DIVERGENCE(BOP-DIV-059): OpenNT's record carries a raw process HANDLE;
  * the standalone composition carries only its opaque manager token.  Retain
  * the original close call shape while the existing CCPU/SAS facade releases
@@ -56,6 +57,7 @@ void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release);
 
 void VrPeekMailslot(void);
 void VrGetMailslotInfo(void);
+void VrDeleteMailslot(void);
 void VrTerminateMailslots(WORD DosPdb);
 void bx_ntvdm_vrmslot_terminate_bop_body(void);
 

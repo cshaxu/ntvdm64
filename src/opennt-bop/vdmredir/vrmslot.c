@@ -100,6 +100,58 @@ Return Value:
     }
 }
 
+VOID
+VrDeleteMailslot(
+    VOID
+    )
+
+/*++
+
+Routine Description:
+
+    Performs DosDeleteMailslot request on behalf of VDM redir.
+
+Arguments:
+
+    None. All arguments are extracted from 16-bit context descriptor.
+
+Return Value:
+
+    None. Returns values in VDM Ax and Flags registers.
+
+--*/
+
+{
+    WORD Handle16, DosPdb;
+    PVR_MAILSLOT_INFO ptr;
+
+    DosPdb = getAX();
+    Handle16 = getBX();
+
+    if (!(ptr = VrpMapMailslotHandle16(Handle16))) {
+        SET_ERROR(ERROR_INVALID_HANDLE);
+    } else {
+        if (ptr->DosPdb != DosPdb) {
+            SET_ERROR(ERROR_INVALID_HANDLE);
+        } else {
+            if (!VrpCloseMailslotHandle(Handle16, ptr->Handle32)) {
+                SET_ERROR(VrpMapLastError());
+            } else {
+                VrpUnlinkMailslotStructure(Handle16);
+                /* DIVERGENCE(BOP-DIV-061): CloseMailslotHandle releases the
+                 * session's sole opaque token, replacing the original
+                 * private VrpFreeHandle16 bitmap operation. */
+
+                setES(ptr->BufferAddress.Selector);
+                setDI(ptr->BufferAddress.Offset);
+                setDX(ptr->Selector);
+                VrpFreeMailslotStructure(ptr);
+                setCF(0);
+            }
+        }
+    }
+}
+
 /* The following list primitives retain the original vrmslot.c record order,
  * list traversal and process cleanup ownership.  DIVERGENCE(BOP-DIV-058):
  * original Handle16Bitmap allocation is replaced by the one session-owned

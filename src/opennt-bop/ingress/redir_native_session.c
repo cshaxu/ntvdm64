@@ -465,26 +465,6 @@ static int mailslot_make(const struct bx_ntvdm_generic_ud_event_v1 *event,
     return 1;
 }
 
-static int mailslot_delete(const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
-{
-    PVR_MAILSLOT_INFO record = VrpMapMailslotHandle16(word_at(event->ebx));
-    DWORD error;
-    if (record == NULL || record->DosPdb != word_at(event->eax)) {
-        resume_with_error(event, outcome, ERROR_INVALID_HANDLE); return 1;
-    }
-    if (!g_active_session->direct->release_handle(g_active_session->direct->state,
-            record->Handle16, &error)) { resume_with_error(event, outcome, error); return 1; }
-    (void)VrpUnlinkMailslotStructure(record->Handle16);
-    resume_success(event, outcome);
-    set_gpr16(outcome, 2u, record->Selector); /* DX */
-    set_gpr16(outcome, 7u, record->BufferAddress.Offset); /* DI */
-    outcome->segment_write_mask |= 1u; /* ES */
-    outcome->segment_values[0] = record->BufferAddress.Selector;
-    VrpFreeMailslotStructure(record);
-    return 1;
-}
-
 static int mailslot_get_record(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome,
     PVR_MAILSLOT_INFO *out_record, HANDLE *out_host)
@@ -616,7 +596,8 @@ static int dispatch_service(uint8_t service,
         return mailslot_make(event, outcome);
     case 0x09u: /* SVC_RDRDELETEMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
-        return mailslot_delete(event, outcome);
+        return bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome,
+            VrDeleteMailslot, 4u);
     case 0x0au: /* SVC_RDRGETMAILSLOTINFO */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
         return bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome,

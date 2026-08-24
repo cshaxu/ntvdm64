@@ -38,6 +38,11 @@ dependency, the original `VrpMapLastError`/`VrpMapDosError` utility, is
 re-rooted under `opennt-host/vdmredir/vrputil.c`; no BOP-local error mapper was
 introduced.
 
+`VrDeleteMailslot` is directly retained. It preserves original PDB validation,
+record unlinking and ES:DI/DX restoration. `BOP-DIV-061` replaces only the
+original private bitmap release with retirement through the same opaque manager
+that owns the record's native handle.
+
 ## Verification
 
 Fresh outside-sandbox MSVC x64 `/MT`, CPU5/P-MMX Ninja graph:
@@ -54,15 +59,17 @@ and invalid-token failure.  It consumes returned opaque IDs rather than
 assuming the original private allocator's first/reused numerical values.
 It also proves that `57:0F` resumes with clear CF and leaves AX unwritten, as
 the retained OpenNT cleanup helper does.
+It proves `57:09` likewise leaves AX unwritten while restoring the original
+ES:DI/DX values.
 
 The fresh `r012` graph added the re-rooted `vrputil.c`, completed **314/314**
 actions and reran the same fixture successfully.
 
 ## Boundary
 
-This recovers the original record lifetime, information and simple termination
-bodies, not every original `Vr*` function body.  The guest-frame copy, checked
-guest-RAM copy and public Win32 calls remain in the BOP-owned composition file
-until each individual source body can be routed through the existing
-`adapter-softpc` CCPU/SAS facade.  No new BOP, adapter, mapper or Bochs
-behavior is introduced.
+This recovers the original record lifetime, information, delete and simple
+termination bodies, not every original `Vr*` function body. The guest-frame
+copy, checked guest-RAM copy and public Win32 calls remain in the BOP-owned
+composition file until each individual source body can be routed through the
+existing `adapter-softpc` CCPU/SAS facade. No new BOP, adapter, mapper or
+Bochs behavior is introduced.

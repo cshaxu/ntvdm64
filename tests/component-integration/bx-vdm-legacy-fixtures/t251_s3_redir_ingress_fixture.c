@@ -172,7 +172,12 @@ static int mailslot_regression(void)
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, sizeof(message)) ||
         memcmp(state.memory + 0x520u, message, sizeof(message)) != 0) return 0;
     make_event(&event, 0x09u); event.eax = 0x0042u; event.ebx = mailslot_handle;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
+    /* The original body returns ES:DI/DX but does not stage AX. */
+    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x2404u ||
+        (outcome.eflags_values & 1u) != 0u || (outcome.gpr16_write_mask & 1u) != 0u ||
+        outcome.gpr16_values[2] != 0u || outcome.gpr16_values[7] != 4u ||
+        (outcome.segment_write_mask & 1u) == 0u || outcome.segment_values[0] != 0x0020u) return 0;
     make_event(&event, 0x0bu);
     event.eax = 0x0042u; event.ebx = 64u; event.ecx = 64u;
     event.ds = 0x0010u; event.esi = 0u; event.es = 0x0020u; event.edi = 4u;
