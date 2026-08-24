@@ -80,6 +80,15 @@ closure with exit `0` and 81 linked executables.  See
 | Original Owner Request | “S3. adapter-bochs里面的原版镜像和镜像修改送入 bochs-core 和bochs-core-overlay”. |
 | Similar-Issue Sweep | Root-level Bochs files, `iodev`/`gui` origin material, true subsets, source list ownership, and accidental direct consumers of a private overlay. |
 
+**S3 progress:** P1/P2 returned `gui/paramtree.{cc,h}`,
+`iodev/scancodes.{cc,h}`, and root `logio.cc` to `bochs-core`; see the
+[provenance ledger](etc/evidence/m0-t265-s3-adapter-bochs-provenance-ledger-001.md).
+The required sweep found direct `adapter-softpc` consumption of
+`adapter-bochs`/`bochs-core` objects.  The approved S3 exit rule requires the
+following app/session-bound copied-data mechanical contract before
+`pc_system`, PIC and keyboard provenance moves can close; this is recorded in
+the proposal rather than deferred as an undocumented exception.
+
 ### M0 T264 S1 — project code filename inventory
 
 | Field | Record |

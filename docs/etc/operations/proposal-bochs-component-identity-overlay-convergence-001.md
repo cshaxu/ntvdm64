@@ -45,6 +45,19 @@ production edge to `bochs-core`.
 - No deletion of source merely to improve a similarity percentage; every move
   preserves provenance, a smallest call boundary, and a documented owner.
 
+## S3 required dependency repair
+
+The S3 source audit found existing direct `adapter-softpc` includes of
+`adapter-bochs` and `bochs-core` headers.  Those edges contradict the already
+admitted direction; they cannot be hidden by moving `pc_system` alone.
+Before S3 can close, its final implementation pass therefore creates an
+app/session-bound, copied-data machine callback contract.  `adapter-softpc`
+keeps the historical SoftPC/CCPU-facing interface shape but invokes the bound
+mechanical contract rather than importing Bochs objects.  `app` remains the
+only production caller of `adapter-bochs`, and `adapter-bochs` remains the
+only production caller of `bochs-core`.  This is a behavior-preserving
+dependency inversion, not a BOP or machine-feature expansion.
+
 ## Verification
 
 Each packet uses a source/provenance ledger, `git diff --check`, documentation

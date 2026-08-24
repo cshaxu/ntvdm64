@@ -50,3 +50,24 @@ reported no work.
   the complete S3 vocabulary/provenance sweep.
 
 No BOP, OpenNT, DOS, VDM, WOW, SoftPC/CCPU, or Win32 semantics were added.
+
+## Required dependency repair
+
+The active source scan finds the following `adapter-softpc` files importing a
+Bochs production header or accessing a Bochs global directly:
+
+- `a20_capability.cc`;
+- `finite_run.cc`;
+- `instruction_history.cc`;
+- `ivt_watch.cc`;
+- `machine_stage.cc`;
+- `mechanical_action.cc`;
+- `ordinary_ram_reservation.cc`; and
+- `protected_range_action.cc`.
+
+This is not a license for an exception: it is an existing violation of the
+T265/S1 edge rule.  S3 must replace those direct edges with an
+app/session-bound copied-data mechanical callback contract, then move the
+remaining upstream `pc_system`, keyboard and PIC material according to the
+mirror/overlay rule.  Until that is done, this ledger is P1/P2 evidence only
+and S3 is not closed.
