@@ -57,7 +57,12 @@ mechanical and modern-API seams below the declared adapters.  Its recovery
 order and explicit limitations are recorded in the [P5 VDMREDIR
 intake](etc/evidence/m0-t261-s8-p5-vdmredir-source-owner-intake-001.md).
 The original `vrdisp.c` table is now the actual bounded `57:xx` route source;
-its individual provider bodies remain the next recovery work.
+its individual provider bodies remain the next recovery work.  The first
+direct `vrmslot.c` body, `VrPeekMailslot`, now replaces the former cached-peek
+rehost with OpenNT's explicit `ERROR_NOT_SUPPORTED` result; formal `r010`
+compiled it into `opennt-bop` and the Redirector fixture passed.  The original
+`VR_MAILSLOT_INFO` list and the remaining Make/Delete/Info/Read/Write/
+Terminate bodies are still pending; see the [P5 Peek evidence](etc/evidence/m0-t261-s8-p5-vrmslot-peek-source-recovery-001.md).
 
 ### M0 T261 S7 — closed: dependency-free session owner split
 

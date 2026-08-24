@@ -343,6 +343,7 @@
           "src/opennt-bop/ingress/redir_v2_generic_ud_bridge.c",
           "src/opennt-bop/ingress/redir_native_session.c",
           "src/opennt-bop/vdmredir/vrdisp.c",
+          "src/opennt-bop/vdmredir/vrmslot.c",
           "src/opennt-bop/ingress/softpc_emm_unavailable_v2_generic_ud_bridge.c",
         "src/opennt-bop/ingress/softpc_machine_interrupt_v2_generic_ud_bridge.c",
         "src/opennt-bop/ingress/softpc_memory_size_v2_generic_ud_bridge.c",

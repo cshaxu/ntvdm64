@@ -157,8 +157,11 @@ static int mailslot_regression(void)
     event.es = 0x0020u; event.edi = 0u; event.ecx = sizeof(message);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
     make_event(&event, 0x0cu); event.ebx = 1u; event.es = 0x0010u; event.edi = 0x0400u;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, sizeof(message)) ||
-        memcmp(state.memory + 0x500u, message, sizeof(message)) != 0) return 0;
+    /* The original `vrmslot.c` explicitly declines DOS mailslot peek: the
+     * Win32 mailslot API has no non-destructive read.  Do not retain the
+     * former source-derived peek cache as a second provider. */
+    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        !expect(&outcome, 1, ERROR_NOT_SUPPORTED)) return 0;
     make_event(&event, 0x0du); event.ebx = 1u; event.es = 0x0010u; event.edi = 0x0420u;
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, sizeof(message)) ||
         memcmp(state.memory + 0x520u, message, sizeof(message)) != 0) return 0;

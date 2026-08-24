@@ -37,4 +37,20 @@ int bx_ntvdm_redir_native_session_dispatch(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome);
 
+/* Invoke one imported VDMREDIR body through the one established CCPU/SAS
+ * mechanical facade.  This is BOP composition only: service meaning remains
+ * at the caller and the facade remains selector-blind. */
+int bx_ntvdm_redir_native_session_invoke_scoped_body(
+    const struct bx_ntvdm_generic_ud_event_v1 *event,
+    struct bx_ntvdm_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    uint32_t resume_bytes);
+
+/* Invoke one imported VDMREDIR body through the one established CCPU/SAS
+ * mechanical facade.  This is BOP composition only: service meaning remains
+ * at the caller and the facade remains selector-blind. */
+int bx_ntvdm_redir_native_session_invoke_scoped_body(
+    const struct bx_ntvdm_generic_ud_event_v1 *event,
+    struct bx_ntvdm_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    uint32_t resume_bytes);
+
 #endif

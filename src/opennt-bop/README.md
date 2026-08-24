@@ -20,7 +20,7 @@ public include surface is the BOP ingress/provider ABI consumed by `app`.
 
 | Directory | Contents | Modification rule |
 | --- | --- | --- |
-| `command/`, `dem/`, `xms/`, `dpmi/`, `softpc/` | Compiled, minimal-change OpenNT provider bodies, retained in their original owner-family grouping. | Every changed statement, include or definition is marked `DIVERGENCE:` and registered below. |
+| `command/`, `dem/`, `xms/`, `dpmi/`, `softpc/`, `vdmredir/` | Compiled, minimal-change OpenNT provider bodies, retained in their original owner-family grouping. | Every changed statement, include or definition is marked `DIVERGENCE:` and registered below. |
 | `ingress/` | Compiled project-owned OpenNT selector routing and session/provider dispatch. | May adapt component boundaries, but may not reimplement an imported provider without a source-derived exception.  The selector-blind copied-frame ingress is in `adapter-bop`. |
 
 Immutable originals, uncompiled mirror fragments, pre-T260 overlays and import
@@ -92,6 +92,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-054` | `demdasd.c` closes floppy/FDC state through the NT4 device product shell. | FDC/DMA/CMOS is a separate machine owner, not a host-volume capability. | Retain explicit unsupported failure rather than claiming a controller close. | `dem/opennt_demdasd_ioctl_composition.c:100` |
 | `BOP-DIV-055` | `demdasd.c` opens native `\\DosDevices` paths and FAT-specific FSCTLs. | Those private NT opens are unsuitable for the public modern Win32 host boundary. | Use declared documented-handle capability calls while retaining the original BPB/geometry failure contract. | `dem/opennt_demdasd_ioctl_composition.c:114` |
 | `BOP-DIV-056` | `vrdisp.c` dispatches through the NT4 VDMREDIR product-global CCPU frame. | A modern session cannot retain product-global CPU state or raw guest pointers. | Preserve the original 0x00–0x31 service table and range rule; bind each call only to its copied synchronous frame callback. | `vdmredir/vrdisp.c` |
+| `BOP-DIV-057` | `vrmslot.c` imports NT4 VDMREDIR/CCPU header closure. | That product closure cannot independently compose with the modern component graph. | Preserve the original body and register call shape through the declared `adapter-softpc` CCPU/SAS facade. | `vdmredir/vrmslot.c:11` |
 
 The migration evidence is
 [`m0-t260-s5-opennt-bop-layout-migration-001.md`](../../docs/etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).
