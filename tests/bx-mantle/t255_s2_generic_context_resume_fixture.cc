@@ -4,6 +4,7 @@
 #include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
 #include "adapter-softpc/bx_ntvdm_protected_range_action_v1.h"
+#include "support/t255_s2_generic_ud_context_fixture_bridge.h"
 
 #include <string.h>
 
@@ -80,8 +81,8 @@ static int execute_to_stop(void)
 static int configure_context(uint32_t expected_mode, uint32_t target_mode,
   uint64_t resume_rip, uint32_t eax)
 {
-  struct bx_ntvdm_generic_ud_context_fixture_v2 fixture;
-  bx_ntvdm_mantle_generic_ud_context_fixture_v2_clear(&fixture);
+  struct t255_s2_generic_ud_context_fixture fixture;
+  t255_s2_generic_ud_context_fixture_clear(&fixture);
   fixture.expected_execution_mode = expected_mode;
   fixture.outcome.abi_version = BX_NTVDM_GENERIC_UD_OUTCOME_V2_VERSION;
   fixture.outcome.disposition = BX_NTVDM_GENERIC_UD_RESUME;
@@ -101,7 +102,7 @@ static int configure_context(uint32_t expected_mode, uint32_t target_mode,
   fixture.outcome.eflags_write_mask = 1u;
   fixture.outcome.eflags_values = 1u;
   fixture.outcome.context_mode = target_mode;
-  return bx_ntvdm_mantle_generic_ud_context_fixture_v2_configure(&fixture);
+  return t255_s2_generic_ud_context_fixture_configure(&fixture);
 }
 
 static int set_a20(uint32_t enabled)
@@ -215,14 +216,14 @@ static int test_protected_to_real(void)
 
 static int test_invalid_context_rejected(void)
 {
-  struct bx_ntvdm_generic_ud_context_fixture_v2 fixture;
+  struct t255_s2_generic_ud_context_fixture fixture;
   struct bx_ntvdm_protected_range_action_v1 action;
-  bx_ntvdm_mantle_generic_ud_context_fixture_v2_clear(&fixture);
+  t255_s2_generic_ud_context_fixture_clear(&fixture);
   fixture.expected_execution_mode = 1u;
   fixture.outcome.abi_version = BX_NTVDM_GENERIC_UD_OUTCOME_V2_VERSION;
   fixture.outcome.disposition = BX_NTVDM_GENERIC_UD_RESUME;
   fixture.outcome.context_mode = 3u;
-  if (bx_ntvdm_mantle_generic_ud_context_fixture_v2_configure(&fixture)) return 0;
+  if (t255_s2_generic_ud_context_fixture_configure(&fixture)) return 0;
   bx_ntvdm_protected_range_action_v1_clear(&action);
   action.kind = BX_NTVDM_PROTECTED_RANGE_ACTION_V1_READ;
   action.segment = 3u; action.offset = 0u; action.byte_count = 1u;

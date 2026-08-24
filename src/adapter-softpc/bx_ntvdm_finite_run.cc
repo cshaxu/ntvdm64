@@ -81,7 +81,6 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
 {
   bx_mantle_minimal_machine_c machine;
   bx_ntvdm_finite_run_stop_state stop_state;
-  Bit8u entry_probe[2];
   Bit8u preserved[64];
   bx_phy_address terminal_capture_address;
   Bit8u terminal_capture_count;
@@ -152,15 +151,6 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     machine.cleanup();
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
-  if (request->stop_on_ud_fixture && request->entry_byte_count >= sizeof(entry_probe) &&
-      (!bx_mem.copy_from_ordinary_ram(request->entry_physical_address,
-        sizeof(entry_probe), entry_probe) ||
-       memcmp(entry_probe, request->entry_bytes, sizeof(entry_probe)) != 0)) {
-    bx_ntvdm_finite_run_adapter_lifecycle_stop();
-    machine.cleanup();
-    return BX_NTVDM_FINITE_RUN_ENTRY_BYTES_MISMATCH;
-  }
-
   bx_pc_system.initialize(request->ips);
   bx_cpu.apply_real_mode_entry(request->entry_cs, request->entry_eip);
   stop_state.fired = 0;
@@ -173,7 +163,6 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     return BX_NTVDM_FINITE_RUN_MACHINE_ERROR;
   }
 
-  bx_ntvdm_mantle_generic_ud_fixture_stop(request->stop_on_ud_fixture);
   bx_ntvdm_mantle_first_fault_observation_fixture_stop(request->stop_on_first_fault_fixture);
   bx_ntvdm_mantle_generic_ud_stop_observation_reset();
   bx_cpu.cpu_loop();
@@ -192,7 +181,6 @@ bx_ntvdm_finite_run_status bx_ntvdm_run_finite_bare_bytes(
     }
     terminal_snapshot.valid = 1;
   }
-  bx_ntvdm_mantle_generic_ud_fixture_stop(0);
   bx_ntvdm_mantle_first_fault_observation_fixture_stop(0);
   /* A bridge STOP may return before the finite watchdog fires.  The native
    * timer contract requires explicit deactivation before unregistration. */

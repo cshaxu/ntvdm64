@@ -51,7 +51,6 @@ int main()
   request.entry_eip = 0;
   request.instruction_tick_budget = 64;
   request.ips = 1000000;
-  request.stop_on_ud_fixture = 0;
   request.preserve_physical_address = 0;
   request.preserve_byte_count = 0;
   status = (int) bx_ntvdm_run_finite_bare_bytes(&request);

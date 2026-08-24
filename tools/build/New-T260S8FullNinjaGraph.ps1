@@ -88,6 +88,18 @@ foreach ($entry in @($manifest.fixtures) + @($manifest.targets)) {
         !(Test-Path -LiteralPath (Join-Path $root $entry.source) -PathType Leaf)) {
         throw 'Fixture or target admission is invalid.'
     }
+    $entrySupportSources = if ($null -ne $entry.PSObject.Properties['supportSources']) {
+        @($entry.supportSources)
+    } else {
+        @()
+    }
+    foreach ($supportSource in $entrySupportSources) {
+        if ([string]::IsNullOrWhiteSpace($supportSource) -or
+            $supportSource -notmatch '^tests/.+\.(c|cc)$' -or
+            !(Test-Path -LiteralPath (Join-Path $root $supportSource) -PathType Leaf)) {
+            throw "Target $($entry.name) has an invalid test-only support source."
+        }
+    }
 }
 New-Item -ItemType Directory -Force -Path $build, (Join-Path $build 'obj'), (Join-Path $build 'lib'), (Join-Path $build 'bin') | Out-Null
 foreach ($module in @($manifest.modules)) { New-Item -ItemType Directory -Force -Path (Join-Path $build ('obj\' + $module.name)) | Out-Null }
@@ -197,17 +209,28 @@ foreach ($module in @($manifest.modules)) {
 }
 $outputs = [Collections.Generic.List[string]]::new()
 foreach ($entry in @($manifest.fixtures) + @($manifest.targets)) {
-    $source = NinjaPath (Join-Path $root $entry.source)
-    $object = 'obj/targets/' + (ObjectName $entry.source)
-    $rule = if ($entry.source.EndsWith('.cc')) { 'cxx' } else { 'cc' }
+    $entrySupportSources = if ($null -ne $entry.PSObject.Properties['supportSources']) {
+        @($entry.supportSources)
+    } else {
+        @()
+    }
+    $targetSources = @($entry.source) + $entrySupportSources
+    $objects = [Collections.Generic.List[string]]::new()
+    foreach ($targetSource in $targetSources) {
+        $source = NinjaPath (Join-Path $root $targetSource)
+        $object = 'obj/targets/' + (ObjectName $targetSource)
+        $rule = if ($targetSource.EndsWith('.cc')) { 'cxx' } else { 'cc' }
+        $graph.Add('build ' + $object + ': ' + $rule + ' ' + $source)
+        $objects.Add($object)
+    }
     $output = 'bin/' + $entry.name + '.exe'
     $libraries = @($entry.libraries | ForEach-Object { if (!$moduleLibraries.ContainsKey($_)) { throw "Target $($entry.name) references unknown module $_" }; $moduleLibraries[$_] })
     $linkResponse = Join-Path $build ($output + '.rsp')
     $platformLibraries = @($entry.platformLibraries + $requiredPlatformLibraries | Select-Object -Unique)
-    $linkInputs = @($object) + $libraries + $platformLibraries
+    $targetObjects = @($objects)
+    $linkInputs = $targetObjects + $libraries + $platformLibraries
     [IO.File]::WriteAllText($linkResponse, (($linkInputs -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
-    $graph.Add('build ' + $object + ': ' + $rule + ' ' + $source)
-    $graph.Add('build ' + $output + ': link ' + $object + ' ' + ($libraries -join ' '))
+    $graph.Add('build ' + $output + ': link ' + (($targetObjects + $libraries) -join ' '))
     $graph.Add('  platform = ' + ($platformLibraries -join ' '))
     $graph.Add('')
     $outputs.Add($output)

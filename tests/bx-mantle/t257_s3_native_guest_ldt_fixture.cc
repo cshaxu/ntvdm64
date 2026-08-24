@@ -24,7 +24,6 @@ static void initialize_request(struct bx_ntvdm_finite_run_request *request)
   request->entry_byte_count = 0x800u;
   request->instruction_tick_budget = 128u;
   request->ips = 1u;
-  request->stop_on_ud_fixture = 1u;
 }
 
 int main(void)

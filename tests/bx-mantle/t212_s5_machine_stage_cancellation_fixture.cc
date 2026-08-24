@@ -71,6 +71,16 @@ static DWORD WINAPI request_after_first_poll(void *opaque)
   return 0u;
 }
 
+extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
+  const struct bx_ntvdm_generic_ud_event_v1 *event,
+  struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+{
+  if (event == 0 || outcome == 0 || event->vector != 6u) return 0;
+  outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+  outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
+  return 1;
+}
+
 int main()
 {
   static const Bit8u hlt[] = { 0xf4u };
@@ -124,10 +134,8 @@ int main()
 
   if (!bx_ntvdm_cancellation_controller_v1_activate() ||
       !begin_halted_stage(ud2, sizeof(ud2))) return 7;
-  bx_ntvdm_mantle_generic_ud_fixture_stop(1);
   if (execute(UINT64_C(100000000)) !=
       BX_NTVDM_MACHINE_STAGE_V1_EXECUTION_CONTROLLED_STOP) return 8;
-  bx_ntvdm_mantle_generic_ud_fixture_stop(0);
   if (bx_ntvdm_machine_stage_v1_reset() != BX_NTVDM_MACHINE_STAGE_V1_OK)
     return 9;
   bx_ntvdm_cancellation_controller_v1_deactivate();

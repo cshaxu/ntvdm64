@@ -19,6 +19,12 @@ Ninja's normal source/header dependency checks. It is appropriate after an
 owner-preserving source move; it never imports cache output as a source or
 release input.
 
+An admitted fixture may declare `supportSources`, each constrained to a
+`tests/` source. Ninja compiles those objects immediately before the fixture
+and its libraries. This keeps a test-only replacement of a generic mechanical
+callback out of every production library; it is not a second production build
+variant or a component input.
+
 `Invoke-DosBoxBatchWithCompletion.ps1` is the T225 S8 host-process wrapper for
 an already staged DOS batch.  It neither interprets guest/build semantics nor
 supplies tool arguments: the batch owns those.  The wrapper only mounts the

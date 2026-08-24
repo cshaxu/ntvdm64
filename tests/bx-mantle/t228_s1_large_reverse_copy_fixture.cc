@@ -50,7 +50,6 @@ int main(void)
   request.entry_cs = 0x0e00u;
   request.instruction_tick_budget = 64u;
   request.ips = 1u;
-  request.stop_on_ud_fixture = 1u;
   request.enable_realmode_segment_limit_compatibility = 1u;
   bx_ntvdm_mechanical_action_v1_clear(&action);
   action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;

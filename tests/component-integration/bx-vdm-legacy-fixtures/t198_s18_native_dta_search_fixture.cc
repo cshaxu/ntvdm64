@@ -63,7 +63,7 @@ int main()
   memcpy(request.entry_bytes, bytes, sizeof(bytes)); request.entry_byte_count = sizeof(bytes);
   request.entry_physical_address = 0x1000; request.entry_cs = 0x0100;
   request.entry_eip = 0; request.instruction_tick_budget = 128;
-  request.ips = 1000000; request.stop_on_ud_fixture = 0;
+  request.ips = 1000000;
   request.preserve_physical_address = 0; request.preserve_byte_count = 0;
   status = (unsigned)bx_ntvdm_run_finite_bare_bytes(&request);
   bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);

@@ -96,7 +96,6 @@ int main(void)
   request.entry_cs = 0x0e00u;
   request.instruction_tick_budget = 64u;
   request.ips = 1u;
-  request.stop_on_ud_fixture = 1u;
   request.enable_realmode_segment_limit_compatibility = 1u;
   request.capture_terminal_snapshot = 1u;
   if (!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
@@ -160,7 +159,6 @@ int main(void)
         fault.vector != 13u || fault.cs != 0u || fault.eip != 0xfff0u) return 6;
 
     request.stop_on_first_fault_fixture = 0u;
-    request.stop_on_ud_fixture = 1u;
     request.enable_realmode_segment_limit_compatibility = 1u;
     request.capture_terminal_snapshot = 1u;
     if (!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(

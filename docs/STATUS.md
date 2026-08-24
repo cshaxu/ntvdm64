@@ -56,6 +56,14 @@ entirely under that fixture's `tests/.../support/` directory, leaving
 `adapter-softpc` without this selector/family knowledge. P5b remains to
 isolate the separate generic-UD test controls in `adapter-bop`.
 
+**S9 P5b completed:** generic-UD v2 context injection and the finite-run
+UD-stop switch have left production. `adapter-bop` now has only its default
+mechanical decline plus selector-blind accepted-outcome observations; the
+context fixture uses an explicitly linked test-support object and the
+cancellation fixture now supplies its own v1 callback. Its separate
+`BX_NTVDM_CANCELLATION_TESTING` session-library variant is not falsely added
+to the ordinary formal graph and remains a later test-governance item.
+
 ### M0 T261 S8 — closed: OpenNT-host original-source exception closure
 
 S8 restored every admitted host exception through its original owner body or

@@ -94,6 +94,21 @@ sole test includes its support implementation directly. This removes the only
 production-graph input. P5b remains: isolate the distinct generic-UD bridge
 fixture controls without changing its generic production ingress ABI.
 
+## P5b completion result
+
+`adapter-bop` now exports only its fixed-width generic bridge and default
+v2 decline. The former v2 context record/configuration and its static injected
+outcome moved into `t255`'s test-only supplemental object, which is linked
+before production libraries only for that fixture. The finite-run
+`stop_on_ud_fixture` switch and the bridge's matching global state are gone;
+tests reaching `UD2` provide their own v1 mechanical callback. The existing
+machine-stage cancellation fixture uses a separate
+`BX_NTVDM_CANCELLATION_TESTING` session-library variant, so it is deliberately
+not mis-admitted to the ordinary one-variant formal graph; its variant closure
+remains a later test-governance item. Generic STOP/PENDING result observation
+remains in production because it is the selector-blind CPU-to-machine stop
+contract, not a provider or test injector.
+
 ## Explicitly retained adapter-softpc content
 
 Historical `include/mvdm` and `include/softpc.new` headers remain only as the

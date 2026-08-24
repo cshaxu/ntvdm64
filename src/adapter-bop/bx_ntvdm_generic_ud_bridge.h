@@ -72,15 +72,6 @@ struct bx_ntvdm_generic_ud_outcome_v2 {
   uint32_t context_mode, reserved0;
 };
 
-/* Private fixture input for the otherwise-declining v2 bridge.  It exists so
- * a machine-level regression can prove native context application without
- * composing any higher-layer consumer. */
-#define BX_NTVDM_GENERIC_UD_CONTEXT_FIXTURE_V2_MAGIC 0x42584346u
-struct bx_ntvdm_generic_ud_context_fixture_v2 {
-  uint32_t magic, abi_version, struct_bytes, expected_execution_mode;
-  struct bx_ntvdm_generic_ud_outcome_v2 outcome;
-};
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -97,11 +88,6 @@ int bx_ntvdm_mantle_generic_ud_bridge_v2(
   const struct bx_ntvdm_generic_ud_event_v1 *event,
   struct bx_ntvdm_generic_ud_outcome_v2 *outcome);
 
-void bx_ntvdm_mantle_generic_ud_context_fixture_v2_clear(
-  struct bx_ntvdm_generic_ud_context_fixture_v2 *fixture);
-int bx_ntvdm_mantle_generic_ud_context_fixture_v2_configure(
-  const struct bx_ntvdm_generic_ud_context_fixture_v2 *fixture);
-
 /* Generic-machine stop observation. The CPU invokes this only after it has
  * accepted a typed STOP outcome; no selector, provider, or guest data is
  * carried here. Finite-run uses it solely to distinguish the stop from its
@@ -112,14 +98,6 @@ int bx_ntvdm_mantle_generic_ud_stop_observed(void);
 void bx_ntvdm_mantle_generic_ud_pending_observation_reset(void);
 void bx_ntvdm_mantle_generic_ud_pending_observation_mark(void);
 int bx_ntvdm_mantle_generic_ud_pending_observed(void);
-
-/* Private finite-run fixture control.  It is not a CLI, guest, composition, or
- * service interface; production composition leaves it disabled. */
-void bx_ntvdm_mantle_generic_ud_fixture_stop(int enabled);
-
-/* Private test observation: returns nonzero only after this fixture's own
- * generic STOP was accepted. It is not a composition or guest interface. */
-int bx_ntvdm_mantle_generic_ud_fixture_stop_observed(void);
 
 #ifdef __cplusplus
 }

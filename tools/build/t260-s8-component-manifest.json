@@ -419,6 +419,9 @@
     {
       "name": "t255-s2-generic-context-resume-fixture",
       "source": "tests/bx-mantle/t255_s2_generic_context_resume_fixture.cc",
+      "supportSources": [
+        "tests/bx-mantle/support/t255_s2_generic_ud_context_fixture_bridge.cc"
+      ],
       "libraries": [
         "app",
         "opennt-bop",

@@ -49,10 +49,6 @@ typedef struct _LDT_ENTRY {
 
 _Static_assert(sizeof(LDT_ENTRY) == 8u,
   "OpenNT DPMI selector records retain their eight-byte ABI");
-#pragma pack(pop)
-
-_Static_assert(sizeof(LDT_ENTRY) == 8u,
-  "OpenNT DPMI selector records retain their eight-byte ABI");
 
 #define TRUE 1
 #define FALSE 0

@@ -72,8 +72,10 @@ foreach ($object in $ExternalBridgeObjects) {
     $expandedExternalBridgeObjects += [IO.Path]::GetFullPath($object)
 }
 $ExternalBridgeObjects = $expandedExternalBridgeObjects
-$fixtureBytes = if ($UdStopFixture) { '0x0f, 0x0b' } else { '0xf4' }
-$fixtureStopOnUd = if ($UdStopFixture) { '1' } else { '0' }
+if ($UdStopFixture) {
+    throw 'The legacy generic-UD stop injection is retired. Use -ExternalFixtureSource with an explicit test bridge.'
+}
+$fixtureBytes = '0xf4'
 $replacementExceptionObject = $null
 if ($UdStopFixture -or $externalBridge) {
     $replacementExceptionObject = Join-Path $build 'exception_mantle_ud.obj'
@@ -163,12 +165,10 @@ int main()
   request.entry_eip = 0;
   request.instruction_tick_budget = 64;
   request.ips = 1000000;
-  request.stop_on_ud_fixture = $fixtureStopOnUd;
   request.preserve_physical_address = 0;
   request.preserve_byte_count = 0;
   int status = (int) bx_ntvdm_run_finite_bare_bytes(&request);
-  return $fixtureStopOnUd ?
-    (status == BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ? 0 : status + 1) : status;
+  return status;
 }
 "@ | Set-Content -LiteralPath $probe -Encoding ascii
 }

@@ -57,7 +57,6 @@ int main()
   request.entry_eip = 0u;
   request.instruction_tick_budget = 64u;
   request.ips = 1000000u;
-  request.stop_on_ud_fixture = 0;
   status = bx_ntvdm_run_finite_bare_bytes(&request);
   bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
   return status == BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ? 0 :

@@ -37,7 +37,6 @@ int main(void)
   request.entry_cs = 0x0e00u;
   request.instruction_tick_budget = 64u;
   request.ips = 1u;
-  request.stop_on_ud_fixture = 1u;
   if (!bx_ntvdm_mantle_instruction_history_v1_configure(
       BX_NTVDM_INSTRUCTION_HISTORY_V1_CAPACITY_MAX)) return 2;
   status = bx_ntvdm_run_finite_bare_bytes(&request);

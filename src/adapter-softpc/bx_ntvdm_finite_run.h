@@ -17,8 +17,7 @@ enum bx_ntvdm_finite_run_status {
   BX_NTVDM_FINITE_RUN_MACHINE_ERROR,
   BX_NTVDM_FINITE_RUN_UNEXPECTED_LOOP_RETURN,
   BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP,
-  BX_NTVDM_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP,
-  BX_NTVDM_FINITE_RUN_ENTRY_BYTES_MISMATCH
+  BX_NTVDM_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP
 };
 
 #define BX_NTVDM_FINITE_RUN_REQUEST_VERSION 4
@@ -43,7 +42,6 @@ struct bx_ntvdm_finite_run_request {
   Bit32u entry_eip;
   Bit64u instruction_tick_budget;
   Bit32u ips;
-  bx_bool stop_on_ud_fixture;
   bx_bool stop_on_first_fault_fixture;
   /* Test-only mantle selection of the default-off CPU compatibility gate. */
   bx_bool enable_realmode_segment_limit_compatibility;

@@ -16,7 +16,7 @@ foreach ($pattern in @('struct bx_ntvdm_generic_ud_event_v1',
         'BX_NTVDM_GENERIC_UD_PASS_THROUGH', 'BX_NTVDM_GENERIC_UD_RESUME',
         'BX_NTVDM_GENERIC_UD_STOP', 'BX_NTVDM_GENERIC_UD_CONTEXT_PROTECTED',
         'bx_ntvdm_mantle_generic_ud_bridge_v1', 'bx_ntvdm_mantle_generic_ud_bridge_v2',
-        'bx_ntvdm_mantle_generic_ud_fixture_stop_observed')) {
+        'bx_ntvdm_mantle_generic_ud_stop_observed')) {
     if ($header -notmatch $pattern) { throw "Missing generic #UD bridge invariant: $pattern" }
 }
 foreach ($pattern in @('0x50u', '0x52u', '0x53u', '0x54u', '0x57u', '0x59u',
