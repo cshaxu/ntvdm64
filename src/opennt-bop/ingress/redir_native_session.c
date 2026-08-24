@@ -522,13 +522,13 @@ static int mailslot_terminate(const struct bx_ntvdm_generic_ud_event_v1 *event,
         bx_ntvdm_vrmslot_terminate_bop_body, 4u);
 }
 
-static int invoke_mailslot_span(const struct bx_ntvdm_generic_ud_event_v1 *event,
+static int invoke_mailslot_spans(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome, void (*body)(void),
-    const bx_ntvdm_demhndl_guest_span *span)
+    const bx_ntvdm_demhndl_guest_span *spans, uint32_t count)
 {
     int handled;
-    if (g_scoped_spans != NULL || span == NULL) return 0;
-    g_scoped_spans = span; g_scoped_span_count = 1u;
+    if (g_scoped_spans != NULL || spans == NULL || count == 0u || count > 8u) return 0;
+    g_scoped_spans = spans; g_scoped_span_count = count;
     handled = bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome, body, 4u);
     g_scoped_spans = NULL; g_scoped_span_count = 0u;
     return handled;
@@ -585,7 +585,7 @@ static int dispatch_service(uint8_t service,
           if (record == NULL) { resume_with_error(event, outcome, ERROR_INVALID_HANDLE); return 1; }
           span.segment = word_at(event->es); span.offset = word_at(event->edi);
           span.bytes = record->MessageSize; span.write_back = 1u;
-          return invoke_mailslot_span(event, outcome, VrReadMailslot, &span); }
+          return invoke_mailslot_spans(event, outcome, VrReadMailslot, &span, 1u); }
     case 0x0eu: /* SVC_RDRWRITEMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
         return mailslot_write(event, outcome);
