@@ -1,7 +1,7 @@
-#ifndef BX_NTVDM_BOP_SHIM_DPMI_STARTUP_SOURCE_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DPMI_STARTUP_SOURCE_SHIM_H
+#ifndef BX_NTVDM_OPENNT_BOP_DPMI_STARTUP_SOURCE_SHIM_H
+#define BX_NTVDM_OPENNT_BOP_DPMI_STARTUP_SOURCE_SHIM_H
 
-/* DIVERGENCE (T257 S3): this is the smallest modern compilation closure for
+/* DIVERGENCE(BOP-DIV-068): this is the smallest modern compilation closure for
  * the exact-copy OpenNT dpmi32.c startup/table subset.  It supplies types and
  * named session operations only; it neither provides a process LDT nor makes
  * a DPMI BOP ingress active. */

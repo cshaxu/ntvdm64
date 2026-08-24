@@ -7,7 +7,7 @@
  * demhndl, so it reuses that neutral call record rather than growing a second
  * synthetic CPU interface. */
 
-#include "adapter-softpc/opennt_dem_ccpu_sas_facade.h"
+#include "opennt_dem_ccpu_sas_facade.h"
 #include "adapter-win32/include/legacy-api/opennt_dem_file_oem_facade.h"
 
 #include <stdio.h>

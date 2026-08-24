@@ -6,7 +6,9 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$AnalysisRoot,
 
-    [string]$InputConfigPath = ''
+    [string]$InputConfigPath = '',
+
+    [switch]$Refresh
 )
 
 $ErrorActionPreference = 'Stop'
@@ -36,7 +38,15 @@ function Get-Sha256([string]$Path) {
     }
 }
 if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) { throw "Missing manifest: $ManifestPath" }
-if (Test-Path -LiteralPath $AnalysisRoot) { throw "Analysis root must be fresh: $AnalysisRoot" }
+if (Test-Path -LiteralPath $AnalysisRoot) {
+    if (!$Refresh) { throw "Analysis root must be fresh: $AnalysisRoot" }
+    $unexpected = @(Get-ChildItem -LiteralPath $AnalysisRoot -Force | Where-Object {
+        $_.Name -notin @('config.h', 'projection-report.json')
+    })
+    if ($unexpected.Count -ne 0) {
+        throw "Refresh accepts only an existing config projection root: $AnalysisRoot"
+    }
+}
 
 $manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
 Assert-OnlyProperties $manifest @('schemaVersion', 'sourceConfigSha256', 'replacements', 'additions', 'derivedAssertions') 'Manifest'
@@ -124,7 +134,10 @@ if ($additions.Count -gt 0) {
 $outputText = ($sourceLines -join "`r`n") + "`r`n"
 New-Item -ItemType Directory -Path $AnalysisRoot -Force | Out-Null
 $outputPath = Join-Path $AnalysisRoot 'config.h'
-[System.IO.File]::WriteAllText($outputPath, $outputText, [System.Text.UTF8Encoding]::new($false))
+if (!(Test-Path -LiteralPath $outputPath -PathType Leaf) -or
+    [System.IO.File]::ReadAllText($outputPath) -ne $outputText) {
+    [System.IO.File]::WriteAllText($outputPath, $outputText, [System.Text.UTF8Encoding]::new($false))
+}
 $outputHash = (Get-Sha256 $outputPath).ToUpperInvariant()
 $report = [ordered]@{
     schemaVersion = 1

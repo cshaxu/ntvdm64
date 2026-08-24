@@ -1,8 +1,10 @@
-#include "adapter-softpc/dpmi_descriptor_source_shim.h"
+#include "opennt-bop/dpmi/dpmi_descriptor_source_shim.h"
 #include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 #include "adapter-softpc/bx_ntvdm_protected_range_action_v1.h"
 
 #include <string.h>
+
+void DpmiPassTableAddress(void);
 
 static LDT_ENTRY input_descriptor;
 static uint8_t published[sizeof(LDT_ENTRY)];
@@ -57,6 +59,10 @@ int main(void)
 
   bx_ntvdm_dpmi_startup_session_runtime_reset();
   if (!bx_ntvdm_dpmi_startup_session_runtime_stage_selector_table(0x3000u)) return 1;
+  /* Preserve the source lifecycle: staging the selGDT address is not its
+   * publication.  DpmiPassTableAddress owns the original record update that
+   * DpmiSetDescriptorEntry subsequently consumes. */
+  DpmiPassTableAddress();
   bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_PROTECTED);
   cpu.eax = 0x20u;
   cpu.ebx = 0x100u;

@@ -54,10 +54,9 @@ machine terminal result, not a BOP observer's private static state.
   delete them from the production library and retain/rehome the fixture helper.
 - `dpmi_descriptor_source_shim`, `dpmi_startup_source_shim` and
   `dpmi_startup_session_shim` are source-shaped DPMI owner shims and move to
-  `opennt-bop/dpmi`. `dpmi_xmem_record_adapter` remains to be audited
-  separately: its record is explicitly machine-shaped and has no selector
-  dispatch, so it must not be moved merely because its historical consumer is
-  DPMI.
+  `opennt-bop/dpmi`. `dpmi_xmem_record_adapter` has no production consumer:
+  P4 removes it from `adapter-softpc` and retains its isolated historical
+  allocation exercise only as a test-local helper.
 
 ### Adapter-bop fixture residue
 
@@ -65,6 +64,24 @@ machine terminal result, not a BOP observer's private static state.
 `generic_ud_context_fixture_v2` and terminal-observation controls. These are
 not an ingress ABI. P2 must move them behind test-only compilation or into the
 fixture tree while retaining the selector-blind production bridge signature.
+
+## P4 completion result
+
+P4 moved the DEM direct-context pair and the DEM CCPU/SAS source-shaped pair
+to `opennt-bop/dem`. Its BOP-facing CCPU/SAS aliases now live under
+`opennt-bop`, while `adapter-softpc` retains only the lower machine request
+and checked-memory APIs they call.  The three DPMI source shims moved to
+`opennt-bop/dpmi`; their records now carry statement-local `BOP-DIV-067`
+through `079` evidence.  The P4 audit also proved that
+`dpmi_xmem_record_adapter` had no production consumer, so it is now a
+test-local helper instead of adapter production code.
+
+The cached `s9-r001` formal graph refresh rebuilt 131 affected actions after
+the DEM move, with no `bx-core` object action.  The DPMI follow-up rebuilt only
+the five DPMI source objects, the `opennt-bop` library and its two fixtures;
+startup and descriptor fixtures pass.  `t251-s3-redir-ingress-fixture.exe`
+returns `8` identically from the pre-move `s9-r002` and post-move graph, so it
+is recorded as pre-existing Redirector/mailslot behavior, not a P4 regression.
 
 ## Explicitly retained adapter-softpc content
 
@@ -81,8 +98,8 @@ and the same-shaped SoftPC/CCPU/SAS facades with no family classification.
 2. Delete/rehome the three fixture-only observations and remove their archive
    inputs.
 3. Re-root DEM source interpretation; keep the neutral CCPU/SAS alias seam.
-4. Re-root DPMI source shims; retain or move the xmem adapter only after its
-   mechanical-only review.
+4. Re-root DPMI source shims and remove the fixture-only XMEM record from
+   production after its consumer review.
 5. Remove `adapter-bop` fixture ABI residue, rerun the semantic-token scan,
    then complete formal closure.
 

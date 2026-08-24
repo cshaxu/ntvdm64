@@ -1,7 +1,7 @@
-#ifndef BX_NTVDM_BOP_SHIM_DPMI_DESCRIPTOR_SOURCE_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DPMI_DESCRIPTOR_SOURCE_SHIM_H
+#ifndef BX_NTVDM_OPENNT_BOP_DPMI_DESCRIPTOR_SOURCE_SHIM_H
+#define BX_NTVDM_OPENNT_BOP_DPMI_DESCRIPTOR_SOURCE_SHIM_H
 
-/* DIVERGENCE (T257 S3): OpenNT's 486 DPMI owner installed descriptors in the
+/* DIVERGENCE(BOP-DIV-067): OpenNT's 486 DPMI owner installed descriptors in the
  * NT4 host process LDT.  The modern source boundary instead copies exactly
  * the bounded guest descriptor list through the existing selector-blind
  * protected-range action, then publishes it to the already source-published
@@ -17,6 +17,10 @@ typedef uint32_t ULONG;
 typedef int BOOL;
 typedef void VOID;
 
+/* DIVERGENCE(BOP-DIV-079): the historical 16-bit selector ABI requires an
+ * eight-byte LDT record.  Native x64 alignment would enlarge this source
+ * compatibility record and change dpmiselr.c's original selector stride. */
+#pragma pack(push, 1)
 typedef struct _LDT_ENTRY {
   USHORT LimitLow;
   USHORT BaseLow;
@@ -41,6 +45,14 @@ typedef struct _LDT_ENTRY {
     } Bits;
   } HighWord;
 } LDT_ENTRY, *PLDT_ENTRY;
+#pragma pack(pop)
+
+_Static_assert(sizeof(LDT_ENTRY) == 8u,
+  "OpenNT DPMI selector records retain their eight-byte ABI");
+#pragma pack(pop)
+
+_Static_assert(sizeof(LDT_ENTRY) == 8u,
+  "OpenNT DPMI selector records retain their eight-byte ABI");
 
 #define TRUE 1
 #define FALSE 0

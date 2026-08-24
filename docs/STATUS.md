@@ -41,6 +41,24 @@ their own isolated fixtures (`normal_return`, `normal_terminal_sequence` and
 inputs. The direct engine fixture now asserts only the machine-engine terminal
 contract it actually owns; it no longer introduces BOP observation state.
 
+**S9 P4 completed:** DEM direct-context/CCPU-SAS source interpretation and
+the reached DPMI source closure now live under `opennt-bop/dem` and
+`opennt-bop/dpmi`; the old `adapter-softpc` aliases and fixture-only XMEM
+record have left production. The cached formal Ninja graph refresh rebuilt the
+affected closure without recompiling `bx-core`; focused DEM and DPMI fixtures
+pass. The pre-existing VDMREDIR mailslot fixture exit `8` was reproduced from
+both pre- and post-move graphs and remains separately recorded as non-P4
+behavior evidence.
+
+**S9 P4 completed:** DEM direct-context/CCPU-SAS source interpretation and
+the reached DPMI source closure now live under `opennt-bop/dem` and
+`opennt-bop/dpmi`; the old `adapter-softpc` aliases and fixture-only XMEM
+record have left production. The cached formal Ninja graph refresh rebuilt the
+affected closure without recompiling `bx-core`; focused DEM and DPMI fixtures
+pass. The pre-existing VDMREDIR mailslot fixture exit `8` was reproduced from
+both pre- and post-move graphs and remains separately recorded as non-P4
+behavior evidence.
+
 ### M0 T261 S8 — closed: OpenNT-host original-source exception closure
 
 S8 restored every admitted host exception through its original owner body or

@@ -9,7 +9,7 @@
  */
 #include <windows.h>
 
-#include "adapter-softpc/opennt_ccpu_sas_facade.h"
+#include "opennt-bop/opennt_ccpu_sas_facade.h"
 #include "opennt-host/vdmredir/vrputil_compat.h"
 
 #define SET_ERROR(err) { setAX((WORD)(err)); setCF(1); }

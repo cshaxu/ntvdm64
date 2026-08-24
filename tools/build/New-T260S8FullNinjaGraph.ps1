@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [string]$ManifestPath = '',
+    [switch]$Refresh,
     [switch]$InstructionHistoryDiagnostic,
     [switch]$InstructionHistoryProvenanceDiagnostic,
     [switch]$SoftwareInterruptDiagnostic,
@@ -45,7 +46,17 @@ if ([string]::IsNullOrWhiteSpace($ManifestPath)) { $ManifestPath = Join-Path $ro
 $manifestPath = (Resolve-Path -LiteralPath $ManifestPath).Path
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $ninja = Get-Command ninja -ErrorAction Stop
-if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing Ninja build root: $build" }
+$buildParent = [IO.Path]::GetFullPath((Join-Path $root 'build'))
+if (Test-Path -LiteralPath $build) {
+    if (!$Refresh) { throw "Refusing to overwrite existing Ninja build root: $build" }
+    if (!$build.StartsWith($buildParent + [IO.Path]::DirectorySeparatorChar,
+            [StringComparison]::OrdinalIgnoreCase) -or
+        !(Test-Path -LiteralPath (Join-Path $build 'build.ninja') -PathType Leaf) -or
+        !(Test-Path -LiteralPath (Join-Path $build 't260-s8-component-graph.json') -PathType Leaf)) {
+        throw "Refresh accepts only an existing formal T260 build root below ${buildParent}: $build"
+    }
+    Write-Host "Refreshing formal Ninja graph in-place; existing objects remain available for Ninja dependency reuse: $build"
+}
 foreach ($input in @($manifestPath, $vs, (Join-Path $root 'tools\build\Project-BochsConfig.ps1'))) {
     if (!(Test-Path -LiteralPath $input -PathType Leaf)) { throw "Required graph input missing: $input" }
 }
@@ -84,7 +95,11 @@ New-Item -ItemType Directory -Force -Path (Join-Path $build 'obj\targets') | Out
 
 $projectionTool = Join-Path $root $manifest.configProjection.tool
 $projectionManifest = Join-Path $root $manifest.configProjection.projection
-& powershell.exe -ExecutionPolicy Bypass -File $projectionTool -ManifestPath $projectionManifest -AnalysisRoot (Join-Path $build 'config') -InputConfigPath (Join-Path $root 'refs\bochs\config.h')
+if ($Refresh) {
+    & powershell.exe -ExecutionPolicy Bypass -File $projectionTool -ManifestPath $projectionManifest -AnalysisRoot (Join-Path $build 'config') -InputConfigPath (Join-Path $root 'refs\bochs\config.h') -Refresh
+} else {
+    & powershell.exe -ExecutionPolicy Bypass -File $projectionTool -ManifestPath $projectionManifest -AnalysisRoot (Join-Path $build 'config') -InputConfigPath (Join-Path $root 'refs\bochs\config.h')
+}
 if ($LASTEXITCODE -ne 0) { throw 'CPU5 config projection failed.' }
 $config = Join-Path $build 'config\config.h'
 if (!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'CPU5 config projection emitted no config.h.' }

@@ -2,7 +2,7 @@
  * The historical product dispatcher is intentionally not linked; bx-vdm
  * recognizes the selector and scopes this source body through a copied CPU
  * call.  UMBNotify remains the original no-op. */
-#include "adapter-softpc/opennt_dem_ccpu_sas_facade.h"
+#include "opennt-bop/dem/opennt_dem_ccpu_sas_facade.h"
 
 void demDasdInit(void);
 void UMBNotify(unsigned long base);

@@ -1,7 +1,7 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEM_DIRECT_HOST_SESSION_H
-#define BX_NTVDM_BOP_SHIM_DEM_DIRECT_HOST_SESSION_H
+#ifndef BX_NTVDM_OPENNT_BOP_DEM_DIRECT_HOST_SESSION_H
+#define BX_NTVDM_OPENNT_BOP_DEM_DIRECT_HOST_SESSION_H
 
-#include "bx_ntvdm_dem_direct_context.h"
+#include "opennt-bop/dem/bx_ntvdm_dem_direct_context.h"
 #include "bx_ntvdm_host_handle_manager.h"
 
 #define BX_NTVDM_DEM_DIRECT_HOST_SESSION_MAGIC 0x42584448u

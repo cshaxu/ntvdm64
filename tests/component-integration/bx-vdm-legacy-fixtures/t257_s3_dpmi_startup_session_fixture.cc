@@ -1,8 +1,8 @@
 #include "bochs.h"
 #include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
-#include "adapter-softpc/dpmi_startup_session_shim.h"
-#include "adapter-softpc/dpmi_startup_source_shim.h"
+#include "opennt-bop/dpmi/dpmi_startup_session_shim.h"
+#include "opennt-bop/dpmi/dpmi_startup_source_shim.h"
 
 #include <string.h>
 

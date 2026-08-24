@@ -10,7 +10,7 @@
  * while selector 57 sees only copied CPU state and checked guest RAM.
  */
 
-#include "adapter-softpc/opennt_dem_ccpu_sas_facade.h"
+#include "opennt-bop/dem/opennt_dem_ccpu_sas_facade.h"
 #include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_REDIR_NATIVE_SESSION_MAGIC 0x42585244u
@@ -36,14 +36,6 @@ void bx_ntvdm_redir_native_session_unbind(bx_ntvdm_redir_native_session *session
 int bx_ntvdm_redir_native_session_dispatch(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome);
-
-/* Invoke one imported VDMREDIR body through the one established CCPU/SAS
- * mechanical facade.  This is BOP composition only: service meaning remains
- * at the caller and the facade remains selector-blind. */
-int bx_ntvdm_redir_native_session_invoke_scoped_body(
-    const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome, void (*body)(void),
-    uint32_t resume_bytes);
 
 /* Invoke one imported VDMREDIR body through the one established CCPU/SAS
  * mechanical facade.  This is BOP composition only: service meaning remains

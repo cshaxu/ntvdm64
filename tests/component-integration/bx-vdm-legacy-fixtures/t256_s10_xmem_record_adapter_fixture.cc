@@ -2,9 +2,14 @@
 #include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
 #include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
-#include "adapter-softpc/dpmi_xmem_record_adapter.h"
+#include "support/dpmi_xmem_record_adapter.h"
 
 #include <string.h>
+
+/* This source-derived record has no production consumer.  Keep its historic
+ * allocation/lifetime exercise test-local rather than leave a DPMI-named
+ * service record in the selector-blind adapter library. */
+#include "support/dpmi_xmem_record_adapter.c"
 
 extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
   const struct bx_ntvdm_generic_ud_event_v1 *event,

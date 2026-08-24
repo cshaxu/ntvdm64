@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DPMI_STARTUP_SESSION_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DPMI_STARTUP_SESSION_SHIM_H
+#ifndef BX_NTVDM_OPENNT_BOP_DPMI_STARTUP_SESSION_SHIM_H
+#define BX_NTVDM_OPENNT_BOP_DPMI_STARTUP_SESSION_SHIM_H
 
 /*
  * T257 S3 source-derived seam for OpenNT dpmi32.c's DpmiInitDosx,
@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-#include "bx_ntvdm_cpu_state_abi.h"
+#include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
 
 #define BX_NTVDM_DPMI_STARTUP_SESSION_MAGIC UINT32_C(0x42584453)
 #define BX_NTVDM_DPMI_STARTUP_SESSION_VERSION UINT32_C(1)

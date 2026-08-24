@@ -28,12 +28,12 @@ Revision History:
 
 --*/
 
-/* DIVERGENCE (T257 S3): compile the original 486 path against the named
+/* DIVERGENCE(BOP-DIV-070): compile the original 486 path against the named
  * descriptor seam.  `i386` selects its original `DpmiSetX86Descriptor`
  * ordering; that final call publishes to guest RAM rather than an NT4 host
  * process LDT. */
 #define i386 1
-#include "../../adapter-softpc/dpmi_descriptor_source_shim.h"
+#include "dpmi_descriptor_source_shim.h"
 #pragma hdrstop
 
 #if DBG
@@ -110,7 +110,7 @@ Return Value:
     }
 
     registerCX =  getCX();
-    /* DIVERGENCE (T257 S3): preserve the original ES:BX descriptor-input
+    /* DIVERGENCE(BOP-DIV-071): preserve the original ES:BX descriptor-input
      * contract through a bounded selector-blind read rather than an NT4 raw
      * `Sim32GetVDMPointer`.  The loop and its limit repair below are intact. */
     Descriptors = DescriptorBuffer;
@@ -160,7 +160,7 @@ Return Value:
             }
 #endif
 
-            /* DIVERGENCE (T257 S3): `FlatAddress[]` was the NT4 host
+            /* DIVERGENCE(BOP-DIV-072): `FlatAddress[]` was the NT4 host
              * process-LDT address cache.  Native Bochs consumes the guest
              * LDT directly, so retaining a parallel adapter cache would be
              * both unused and architecturally wrong. */

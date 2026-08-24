@@ -1,15 +1,15 @@
-#ifndef BX_NTVDM_OPENNT_CCPU_SAS_FACADE_H
-#define BX_NTVDM_OPENNT_CCPU_SAS_FACADE_H
+#ifndef BX_NTVDM_OPENNT_BOP_CCPU_SAS_FACADE_H
+#define BX_NTVDM_OPENNT_BOP_CCPU_SAS_FACADE_H
 
 /*
- * Source-shaped CCPU/SAS mechanical facade for directly imported OpenNT
- * provider bodies.  This is deliberately an alias surface over the one
- * existing call-scoped implementation: it allocates no second frame, guest
- * pointer mapper, or handle table.  The historical provider selects its own
- * service semantics; this component transports only copied registers, checked
- * spans and opaque handles for the duration of that one call.
+ * Source-facing aliases for the existing call-scoped CCPU/SAS bridge.
+ *
+ * This header belongs to opennt-bop because it names the source-owned DEM
+ * call record.  Its implementation reaches Bochs only through declared
+ * adapter-softpc ABI and deliberately allocates no frame, mapping manager,
+ * or handle table.
  */
-#include "opennt_dem_ccpu_sas_facade.h"
+#include "opennt-bop/dem/opennt_dem_ccpu_sas_facade.h"
 
 typedef bx_ntvdm_demhndl_call bx_ntvdm_ccpu_sas_call;
 

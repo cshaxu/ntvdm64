@@ -4,7 +4,7 @@
 
 #include "opennt-bop/ingress/dem_direct_session.h"
 #include "adapter-softpc/bx_ntvdm_host_handle_manager.h"
-#include "adapter-softpc/opennt_ccpu_sas_facade.h"
+#include "opennt-bop/opennt_ccpu_sas_facade.h"
 #include "opennt-bop/ingress/redir_native_session.h"
 #include "opennt-host/vdmredir/vrnmpipe_compat.h"
 #include "opennt-bop/ingress/redir_v2_generic_ud_bridge.h"

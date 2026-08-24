@@ -360,7 +360,7 @@ void bx_ntvdm_demhndl_set_ds(USHORT value) { (void)set_segment(3u, value); }
 void bx_ntvdm_demhndl_set_es(USHORT value) { (void)set_segment(0u, value); }
 void bx_ntvdm_demhndl_set_cs(USHORT value)
 {
-    /* DIVERGENCE (T259 S3): a BOP completion cannot replace its outer
+    /* DIVERGENCE(BOP-DIV-066): a BOP completion cannot replace its outer
      * continuation CS:IP.  Preserve the historical accessor against the
      * scoped source-call image; a later source-proven nested-run facade must
      * consume this copied value through a typed mechanical request. */

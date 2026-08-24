@@ -51,7 +51,7 @@ uint32_t bx_ntvdm_dpmi_startup_session_initialize_dosx(
   if (!bx_ntvdm_mantle_checked_ram_read_v1(shared_data_linear, shared, sizeof(shared)))
     return BX_NTVDM_DPMI_STARTUP_SESSION_GUEST_READ_FAILED;
 
-  /* DIVERGENCE (T257 S3): this is DpmiInitDosx's original field order, but
+  /* DIVERGENCE(BOP-DIV-069): this is DpmiInitDosx's original field order, but
    * each Sim32GetVDMPointer result is retained as a fixed-width guest-linear
    * address instead of a raw host pointer. */
   session->shared_data_linear = shared_data_linear;

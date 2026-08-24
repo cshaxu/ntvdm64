@@ -20,10 +20,10 @@ Revision History:
     Neil Sandlin (neilsa) 31-Jul-1995 - Updates for the 486 emulator
 
 --*/
-/* DIVERGENCE (T257 S3): the NT4 `precomp.h`/`softpc.h` product shell exposes
+/* DIVERGENCE(BOP-DIV-073): the NT4 `precomp.h`/`softpc.h` product shell exposes
  * VdmTib, Sim32GetVDMPointer and a process LDT.  The named shim retains only
  * the original startup/table calls through fixed-width session records. */
-#include "../../adapter-softpc/dpmi_startup_source_shim.h"
+#include "dpmi_startup_source_shim.h"
 //
 // Information about the current PSP
 //
@@ -91,7 +91,7 @@ Return Value:
 --*/
 {
 
-    /* DIVERGENCE (T257 S3): the generic BOP ingress is not admitted here.
+    /* DIVERGENCE(BOP-DIV-074): the generic BOP ingress is not admitted here.
      * A later bounded ingress stages the already-copied selector byte; this
      * keeps the original table dispatch/one-byte IP advance ordering without
      * exporting an NT4 guest pointer. */
@@ -135,7 +135,7 @@ Return Value:
 
 --*/
 {
-   /* DIVERGENCE (T257 S3): retain the table's invalid-service terminal but
+   /* DIVERGENCE(BOP-DIV-075): retain the table's invalid-service terminal but
     * do not import NT4 debugger/window output plumbing. */
    bx_ntvdm_dpmi_startup_source_note_illegal(Index);
 }
@@ -162,7 +162,7 @@ Return Value:
 
 --*/
 {
-    /* DIVERGENCE (T257 S3): original field order is retained by the named
+    /* DIVERGENCE(BOP-DIV-076): original field order is retained by the named
      * session seam, but pointer-valued Sim32GetVDMPointer results become
      * checked fixed-width guest-linear values. */
     bx_ntvdm_dpmi_startup_source_initialize_dosx();
@@ -197,7 +197,7 @@ Notes:
 
 --*/
 {
-    /* DIVERGENCE (T257 S3): preserve `AX & DPMI_32BIT` and startup frame
+    /* DIVERGENCE(BOP-DIV-077): preserve `AX & DPMI_32BIT` and startup frame
      * record ordering through the staged copied CPU/frame request.  NT4's
      * VdmTib/SS:SP pointer translation is unavailable and is not recreated. */
     bx_ntvdm_dpmi_startup_source_initialize_app();
@@ -223,7 +223,7 @@ Return Value:
 --*/
 {
 
-    /* DIVERGENCE (T257 S3): retain only the source's selGDT publication
+    /* DIVERGENCE(BOP-DIV-078): retain only the source's selGDT publication
      * event.  Native Bochs owns descriptor tables; no `Ldt`/`IntelBase` host
      * address or copied descriptor cache is created. */
     bx_ntvdm_dpmi_startup_source_publish_selector_table();

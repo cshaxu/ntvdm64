@@ -11,6 +11,14 @@ reject a root containing `.obj`, `.exe`, `.pdb`, `.ilk`, `.map`, `.lib`, `.a`,
 `stdout.txt`, or `stderr.txt`.  Reusable caches remain under their declared
 `build/<task-id>/<run-id>/` roots.
 
+`New-T260S8FullNinjaGraph.ps1` normally creates an immutable formal graph in a
+new build root. Its explicit `-Refresh` switch is the controlled incremental
+path for an existing formal root below `build/`: it regenerates only the graph,
+manifest, response files and projected config, retaining object files for
+Ninja's normal source/header dependency checks. It is appropriate after an
+owner-preserving source move; it never imports cache output as a source or
+release input.
+
 `Invoke-DosBoxBatchWithCompletion.ps1` is the T225 S8 host-process wrapper for
 an already staged DOS batch.  It neither interprets guest/build semantics nor
 supplies tool arguments: the batch owns those.  The wrapper only mounts the
