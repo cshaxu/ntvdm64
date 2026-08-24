@@ -8,7 +8,7 @@
 
 #include "bochs.h"
 #include "bochs-core/cpu/cpu.h"
-#include "adapter-bochs/paramtree.h"
+#include "bochs-core/gui/paramtree.h"
 #include "adapter-bochs/pc_system.h"
 
 #define LOG_THIS bx_pc_system.

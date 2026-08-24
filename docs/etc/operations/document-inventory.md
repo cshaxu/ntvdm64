@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2277 |
+| Documentation records | 2278 |
 | --- | --- |
-| Generated UTC | 2026-08-24T23:34:21Z |
+| Generated UTC | 2026-08-24T23:46:10Z |
 
 ## Entries
 
@@ -246,6 +246,7 @@ content-divergent entries.
 | etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md | indexed supporting material | 50262bf383306601488941ad18eb2f8ad2a6a43929f4c271ccb59e3bf37e3712 |
 | etc/evidence/m0-t265-s1-component-identity-governance-001.md | indexed supporting material | 24688e7379990c59a62a01581fcdef1b3e7f36476eef4c321c975a38833ad3cd |
 | etc/evidence/m0-t265-s2-bochs-production-root-rename-001.md | indexed supporting material | d3da7a8431a3b96dacdb4b1868cbd7710905698e7e633b8dd0922eac751b6c4a |
+| etc/evidence/m0-t265-s3-adapter-bochs-provenance-ledger-001.md | indexed supporting material | 5a0d3678ed6ac9f07795c6b31f3bd79e51ea9475ed889083be11064736a0613d |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |

@@ -156,7 +156,9 @@
         "src/bochs-core/fpu/softfloat-specialize.cc",
         "src/bochs-core/fpu/softfloatx80.cc",
         "src/bochs-core/memory/memory.cc",
-        "src/bochs-core/memory/misc_mem.cc"
+        "src/bochs-core/memory/misc_mem.cc",
+        "src/bochs-core/gui/paramtree.cc",
+        "src/bochs-core/iodev/scancodes.cc"
       ]
     },
     {
@@ -169,10 +171,8 @@
         "src/adapter-bochs/minimal_port_space.cc",
         "src/adapter-bochs/minimal_product_shell.cc",
         "src/adapter-bochs/minimal_sim.cc",
-        "src/adapter-bochs/paramtree.cc",
         "src/adapter-bochs/pc_system.cc",
-        "src/adapter-bochs/pic.cc",
-        "src/adapter-bochs/scancodes.cc"
+        "src/adapter-bochs/pic.cc"
       ]
     },
     {

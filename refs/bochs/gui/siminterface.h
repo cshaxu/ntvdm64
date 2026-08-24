@@ -433,7 +433,7 @@ typedef struct {
   } u;
 } BxEvent;
 
-#include "adapter-bochs/paramtree.h"
+#include "bochs-core/gui/paramtree.h"
 
 // These are the different start modes.
 enum {

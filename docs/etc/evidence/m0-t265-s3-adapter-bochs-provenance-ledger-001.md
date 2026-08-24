@@ -1,0 +1,51 @@
+# M0 T265 S3 adapter-Bochs provenance ledger
+
+## Pinned comparison input
+
+The baseline is the local pinned Bochs 2.6 tree at
+`O:/repos.external/bochs-2.6-compat/bochs-2.6`.  This ledger records the
+pre-move ownership decision for every production source initially below
+`src/adapter-bochs`; it is a source-layout record, not a runtime claim.
+
+## P1 moved now
+
+- `scancodes.cc`, `scancodes.h` are byte-identical to
+  `iodev/scancodes.{cc,h}` and now reside at
+  `src/bochs-core/iodev/`.
+- `paramtree.h` is byte-identical to `gui/paramtree.h` and now resides at
+  `src/bochs-core/gui/`.
+- `paramtree.cc` is the original same-shaped source with only the
+  `BX-BUILD-002` MSVC adjacent-string-token spelling divergence.  Its two
+  local `DIVERGENCE(BX-BUILD-002)` markers and the `bochs-core` README index
+  register the exception.
+
+The manifest compiles these four sources into `bochs-core`, not
+`adapter-bochs`.  The refreshed formal graph initially exposed stale corrupt
+objects left by the earlier concurrent build attempt; after verifying that no
+Ninja process existed, only `obj/bochs-core` and `lib/bochs-core.lib` under
+the disposable S2 formal root were regenerated.  The resulting single-process
+203-step formal build completed with exit `0`, and its subsequent dry run
+reported no work.
+
+## Remaining S3 disposition
+
+- `logio.cc`: upstream root source with one include-root spelling change;
+  move to `bochs-core/logio.cc` and restore the upstream-relative include.
+- `pc_system.{cc,h}`: upstream root material, with `pc_system.cc` a true
+  subset that omits product reset/teardown.  Its present header is also
+  consumed directly by `adapter-softpc`; this is an existing forbidden
+  production edge under T265/S1 and must be removed through the approved
+  app/session machine-wiring boundary before final relocation.
+- `keyboard.{cc,h}`: adopted `iodev` controller with headless product-shell
+  omissions and local teardown.  It requires a per-hunk mirror/overlay
+  disposition before moving.
+- `pic.{cc,h}`: adopted `iodev` PIC with a project factory/teardown body.
+  The factory is new executable mechanics, so the body requires the S4
+  overlay disposition rather than an unmarked mirror move.
+- `headless_8042.{cc,h}`, `minimal_machine.{cc,h}`,
+  `minimal_port_space.cc`, `minimal_product_shell.cc`, and
+  `minimal_sim.{cc,h}`: no upstream file identity.  They remain the only
+  candidate `adapter-bochs` self-authored, Bochs-only assembly files, pending
+  the complete S3 vocabulary/provenance sweep.
+
+No BOP, OpenNT, DOS, VDM, WOW, SoftPC/CCPU, or Win32 semantics were added.

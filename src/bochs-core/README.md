@@ -47,6 +47,7 @@ authorize additional Bochs semantics.
 | `BX-UD-001` | Selector-blind copied `#UD` event/result seam. | `cpu/exception.cc` |
 | `BX-EXEC-016` | Typed Bochs-only real-mode entry setters and fetch invalidation. | `cpu/init.cc`, `cpu/cpu.h` |
 | `BX-BUILD-002` | Re-rooted FPU include spelling only; no declaration or behavior change. | `cpu/i387.h` |
+| `BX-BUILD-002` | MSVC token-separation spelling for the original `FMT_LL` hex format; no format or runtime behavior change. | `gui/paramtree.cc` |
 | `BX-MEM-007`, `BX-MEM-010`, `BX-MEM-020` | Checked ordinary-RAM copy/read/preflight declarations. | `memory/memory.h` |
 | `BX-MEM-024` | SIM-free reset-window memory initialization and minimal-machine friendship. | `memory/memory.h`, `memory/misc_mem.cc` |
 

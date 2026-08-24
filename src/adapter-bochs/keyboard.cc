@@ -49,7 +49,7 @@
 #include "iodev.h"
 #include <math.h>
 #include "keyboard.h"
-#include "scancodes.h"
+#include "bochs-core/iodev/scancodes.h"
 
 #define LOG_THIS  theKeyboard->
 #define VERBOSE_KBD_DEBUG 0
