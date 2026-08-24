@@ -47,6 +47,17 @@ size and passes its existing lifecycle regression.  This is only a mechanical
 precondition; it does not claim that either original `vrdisp.c` or
 `vrmslot.c` is composed yet.
 
+## Dispatcher recovery progress
+
+The reached `vrdisp.c` service-table structure is now compiled at
+`opennt-bop/vdmredir/vrdisp.c` and is the actual `57:xx` routing source:
+the existing ingress binds one copied frame and calls `VrDispatch(service)`.
+The original 0x00–0x31 order and range rejection are retained.  Each table
+entry presently forwards to the existing bounded service body through the
+single synchronous callback; this is `BOP-DIV-056`, not a claim that all 50
+original provider bodies have been recovered.  Fresh formal r009 compiled and
+linked the target fixture in 312/312 edges, and that fixture passed.
+
 ## Non-conclusion
 
 The passing P4 fixture proves only the re-rooted named-pipe helper lifecycle

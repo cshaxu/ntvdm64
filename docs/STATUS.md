@@ -56,6 +56,8 @@ guest-facing portion of `vrmslot.c` in `opennt-bop/vdmredir/`, with only their
 mechanical and modern-API seams below the declared adapters.  Its recovery
 order and explicit limitations are recorded in the [P5 VDMREDIR
 intake](etc/evidence/m0-t261-s8-p5-vdmredir-source-owner-intake-001.md).
+The original `vrdisp.c` table is now the actual bounded `57:xx` route source;
+its individual provider bodies remain the next recovery work.
 
 ### M0 T261 S7 — closed: dependency-free session owner split
 

@@ -91,6 +91,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-053` | `VDDTerminateUserHook` walks the NT4 private VDD user-hook list. | The standalone product does not recreate a VDD callback broker. | Preserve the named source call boundary as a deferred no-op; it cannot report fabricated callback completion. | `dem/opennt_demsrch_fcb_composition.c:32` |
 | `BOP-DIV-054` | `demdasd.c` closes floppy/FDC state through the NT4 device product shell. | FDC/DMA/CMOS is a separate machine owner, not a host-volume capability. | Retain explicit unsupported failure rather than claiming a controller close. | `dem/opennt_demdasd_ioctl_composition.c:100` |
 | `BOP-DIV-055` | `demdasd.c` opens native `\\DosDevices` paths and FAT-specific FSCTLs. | Those private NT opens are unsuitable for the public modern Win32 host boundary. | Use declared documented-handle capability calls while retaining the original BPB/geometry failure contract. | `dem/opennt_demdasd_ioctl_composition.c:114` |
+| `BOP-DIV-056` | `vrdisp.c` dispatches through the NT4 VDMREDIR product-global CCPU frame. | A modern session cannot retain product-global CPU state or raw guest pointers. | Preserve the original 0x00–0x31 service table and range rule; bind each call only to its copied synchronous frame callback. | `vdmredir/vrdisp.c` |
 
 The migration evidence is
 [`m0-t260-s5-opennt-bop-layout-migration-001.md`](../../docs/etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).

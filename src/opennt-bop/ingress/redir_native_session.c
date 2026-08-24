@@ -7,6 +7,7 @@
 
 #include "adapter-softpc/bx_ntvdm_physical_irq_v1.h"
 #include "opennt-host/vdmredir/vrnmpipe_compat.h"
+#include "opennt-bop/vdmredir/vrdisp_compat.h"
 
 /* This is intentionally not a replacement VDMREDIR.DLL.  The provider body
  * was not recovered with OpenNT; the admitted first group supplies the
@@ -645,15 +646,10 @@ static int mailslot_terminate(const struct bx_ntvdm_generic_ud_event_v1 *event,
     return 1;
 }
 
-int bx_ntvdm_redir_native_session_dispatch(
+static int dispatch_service(uint8_t service,
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    uint8_t service;
-    if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
-        event == NULL || outcome == NULL || event->window_bytes < 4u ||
-        event->fault_rip > UINT64_MAX - 4u) return 0;
-    service = event->window[3];
     switch (service) {
     case 0x00u: /* SVC_RDRINITIALIZE */
         (void)bx_ntvdm_vr_initialize_provider();
@@ -716,4 +712,15 @@ int bx_ntvdm_redir_native_session_dispatch(
         resume_with_error(event, outcome, ERROR_INVALID_FUNCTION);
         return 1;
     }
+}
+
+int bx_ntvdm_redir_native_session_dispatch(
+    const struct bx_ntvdm_generic_ud_event_v1 *event,
+    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+{
+    if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
+        event == NULL || outcome == NULL || event->window_bytes < 4u ||
+        event->fault_rip > UINT64_MAX - 4u) return 0;
+    return bx_ntvdm_vr_dispatch_with_frame(event->window[3], event, outcome,
+        dispatch_service);
 }
