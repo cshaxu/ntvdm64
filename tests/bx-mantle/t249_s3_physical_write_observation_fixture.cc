@@ -1,7 +1,7 @@
 #include "bochs.h"
-#include "bx-core/cpu/cpu.h"
-#include "bx-core/memory/memory.h"
-#include "bx-mantle/minimal_machine.h"
+#include "bochs-core/cpu/cpu.h"
+#include "bochs-core/memory/memory.h"
+#include "adapter-bochs/minimal_machine.h"
 #include "adapter-softpc/physical_write_observation.h"
 
 extern "C" int runtime_mantle_generic_ud_bridge_v1(

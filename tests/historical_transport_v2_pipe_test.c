@@ -19,8 +19,8 @@ int main(int argc, char **argv)
     HANDLE pipe = INVALID_HANDLE_VALUE;
     STARTUPINFOA startup = { .cb = sizeof(startup) };
     PROCESS_INFORMATION process = {0};
-    ntdos64_historical_transport_v2_request request = {0};
-    ntdos64_historical_transport_v2_response response = {0};
+    app_historical_transport_v2_request request = {0};
+    app_historical_transport_v2_response response = {0};
     const uint32_t token = 0x13579bdfu;
     DWORD exit_code = 1u;
     int result = 1;
@@ -37,8 +37,8 @@ int main(int argc, char **argv)
             &startup, &process)) goto cleanup;
     if (!ConnectNamedPipe(pipe, NULL) && GetLastError() != ERROR_PIPE_CONNECTED) goto cleanup;
 
-    request.magic = NTDOS64_HISTORICAL_TRANSPORT_V2_MAGIC;
-    request.abi_version = NTDOS64_HISTORICAL_TRANSPORT_V2_ABI;
+    request.magic = APP_HISTORICAL_TRANSPORT_V2_MAGIC;
+    request.abi_version = APP_HISTORICAL_TRANSPORT_V2_ABI;
     request.struct_bytes = (uint32_t)sizeof(request);
     request.session_token = token;
     request.sequence = 1u;
@@ -52,10 +52,10 @@ int main(int argc, char **argv)
     request.state.flags = 0x0002u;
     if (!io_exact(1, pipe, &request, (DWORD)sizeof(request)) ||
         !io_exact(0, pipe, &response, (DWORD)sizeof(response))) goto cleanup;
-    if (response.magic != NTDOS64_HISTORICAL_TRANSPORT_V2_MAGIC ||
-        response.abi_version != NTDOS64_HISTORICAL_TRANSPORT_V2_ABI ||
+    if (response.magic != APP_HISTORICAL_TRANSPORT_V2_MAGIC ||
+        response.abi_version != APP_HISTORICAL_TRANSPORT_V2_ABI ||
         response.struct_bytes != sizeof(response) || response.session_token != token ||
-        response.sequence != 1u || response.disposition != NTDOS64_HISTORICAL_TRANSPORT_V2_COMPLETED ||
+        response.sequence != 1u || response.disposition != APP_HISTORICAL_TRANSPORT_V2_COMPLETED ||
         response.state.ip != 0x0479u || (response.state.eax & 0xffff0000u) != 0xc0de0000u ||
         (response.state.ecx & 0xffffu) < 1980u) goto cleanup;
     result = 0;

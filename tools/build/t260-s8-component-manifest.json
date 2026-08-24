@@ -7,7 +7,7 @@
   "configProjection": {
     "tool": "tools/build/Project-BochsConfig.ps1",
     "projection": "tools/build/t197-s6-cpu5-mantle-config-projection.json",
-    "source": "src/bx-core/config.h"
+    "source": "src/bochs-core/config.h"
   },
   "includeRoots": [
     "src",
@@ -19,9 +19,9 @@
     "src/opennt-host",
     "src/opennt-host/softpc.new/host/inc",
     "src/opennt-bop",
-    "src/bx-mantle",
-    "src/bx-core",
-    "src/bx-core/cpu",
+    "src/adapter-bochs",
+    "src/bochs-core",
+    "src/bochs-core/cpu",
     "refs/bochs",
     "refs/bochs/instrument/stubs",
     "refs/bochs/iodev",
@@ -33,146 +33,146 @@
   ],
   "modules": [
     {
-      "name": "bx-core",
+      "name": "bochs-core",
       "sources": [
-        "src/bx-core/cpu/3dnow.cc",
-        "src/bx-core/cpu/access.cc",
-        "src/bx-core/cpu/access32.cc",
-        "src/bx-core/cpu/access64.cc",
-        "src/bx-core/cpu/aes.cc",
-        "src/bx-core/cpu/apic.cc",
-        "src/bx-core/cpu/arith16.cc",
-        "src/bx-core/cpu/arith32.cc",
-        "src/bx-core/cpu/arith64.cc",
-        "src/bx-core/cpu/arith8.cc",
-        "src/bx-core/cpu/avx.cc",
-        "src/bx-core/cpu/avx_fma.cc",
-        "src/bx-core/cpu/avx_pfp.cc",
-        "src/bx-core/cpu/avx2.cc",
-        "src/bx-core/cpu/bcd.cc",
-        "src/bx-core/cpu/bit.cc",
-        "src/bx-core/cpu/bit16.cc",
-        "src/bx-core/cpu/bit32.cc",
-        "src/bx-core/cpu/bit64.cc",
-        "src/bx-core/cpu/bmi32.cc",
-        "src/bx-core/cpu/bmi64.cc",
-        "src/bx-core/cpu/call_far.cc",
-        "src/bx-core/cpu/cpu.cc",
-        "src/bx-core/cpu/cpudb/amd_k6_2_chomper.cc",
-        "src/bx-core/cpu/cpudb/pentium_mmx.cc",
-        "src/bx-core/cpu/crc32.cc",
-        "src/bx-core/cpu/crregs.cc",
-        "src/bx-core/cpu/ctrl_xfer_pro.cc",
-        "src/bx-core/cpu/ctrl_xfer16.cc",
-        "src/bx-core/cpu/ctrl_xfer32.cc",
-        "src/bx-core/cpu/ctrl_xfer64.cc",
-        "src/bx-core/cpu/data_xfer16.cc",
-        "src/bx-core/cpu/data_xfer32.cc",
-        "src/bx-core/cpu/data_xfer64.cc",
-        "src/bx-core/cpu/data_xfer8.cc",
-        "src/bx-core/cpu/debugstuff.cc",
-        "src/bx-core/cpu/event.cc",
-        "src/bx-core/cpu/exception.cc",
-        "src/bx-core/cpu/fetchdecode.cc",
-        "src/bx-core/cpu/fetchdecode64.cc",
-        "src/bx-core/cpu/flag_ctrl.cc",
-        "src/bx-core/cpu/flag_ctrl_pro.cc",
-        "src/bx-core/cpu/fpu_emu.cc",
-        "src/bx-core/cpu/gather.cc",
-        "src/bx-core/cpu/generic_cpuid.cc",
-        "src/bx-core/cpu/icache.cc",
-        "src/bx-core/cpu/init.cc",
-        "src/bx-core/cpu/io.cc",
-        "src/bx-core/cpu/iret.cc",
-        "src/bx-core/cpu/jmp_far.cc",
-        "src/bx-core/cpu/load.cc",
-        "src/bx-core/cpu/logical16.cc",
-        "src/bx-core/cpu/logical32.cc",
-        "src/bx-core/cpu/logical64.cc",
-        "src/bx-core/cpu/logical8.cc",
-        "src/bx-core/cpu/mmx.cc",
-        "src/bx-core/cpu/msr.cc",
-        "src/bx-core/cpu/mult16.cc",
-        "src/bx-core/cpu/mult32.cc",
-        "src/bx-core/cpu/mult64.cc",
-        "src/bx-core/cpu/mult8.cc",
-        "src/bx-core/cpu/paging.cc",
-        "src/bx-core/cpu/proc_ctrl.cc",
-        "src/bx-core/cpu/protect_ctrl.cc",
-        "src/bx-core/cpu/resolver.cc",
-        "src/bx-core/cpu/ret_far.cc",
-        "src/bx-core/cpu/segment_ctrl.cc",
-        "src/bx-core/cpu/segment_ctrl_pro.cc",
-        "src/bx-core/cpu/shift16.cc",
-        "src/bx-core/cpu/shift32.cc",
-        "src/bx-core/cpu/shift64.cc",
-        "src/bx-core/cpu/shift8.cc",
-        "src/bx-core/cpu/smm.cc",
-        "src/bx-core/cpu/soft_int.cc",
-        "src/bx-core/cpu/sse.cc",
-        "src/bx-core/cpu/sse_move.cc",
-        "src/bx-core/cpu/sse_pfp.cc",
-        "src/bx-core/cpu/sse_rcp.cc",
-        "src/bx-core/cpu/sse_string.cc",
-        "src/bx-core/cpu/stack.cc",
-        "src/bx-core/cpu/stack16.cc",
-        "src/bx-core/cpu/stack32.cc",
-        "src/bx-core/cpu/stack64.cc",
-        "src/bx-core/cpu/string.cc",
-        "src/bx-core/cpu/svm.cc",
-        "src/bx-core/cpu/tasking.cc",
-        "src/bx-core/cpu/tbm32.cc",
-        "src/bx-core/cpu/tbm64.cc",
-        "src/bx-core/cpu/vm8086.cc",
-        "src/bx-core/cpu/vmcs.cc",
-        "src/bx-core/cpu/vmexit.cc",
-        "src/bx-core/cpu/vmfunc.cc",
-        "src/bx-core/cpu/vmx.cc",
-        "src/bx-core/cpu/xop.cc",
-        "src/bx-core/cpu/xsave.cc",
-        "src/bx-core/disasm/dis_decode.cc",
-        "src/bx-core/disasm/dis_groups.cc",
-        "src/bx-core/disasm/resolve.cc",
-        "src/bx-core/disasm/syntax.cc",
-        "src/bx-core/fpu/f2xm1.cc",
-        "src/bx-core/fpu/ferr.cc",
-        "src/bx-core/fpu/fpatan.cc",
-        "src/bx-core/fpu/fprem.cc",
-        "src/bx-core/fpu/fpu.cc",
-        "src/bx-core/fpu/fpu_arith.cc",
-        "src/bx-core/fpu/fpu_cmov.cc",
-        "src/bx-core/fpu/fpu_compare.cc",
-        "src/bx-core/fpu/fpu_const.cc",
-        "src/bx-core/fpu/fpu_load_store.cc",
-        "src/bx-core/fpu/fpu_misc.cc",
-        "src/bx-core/fpu/fpu_trans.cc",
-        "src/bx-core/fpu/fsincos.cc",
-        "src/bx-core/fpu/fyl2x.cc",
-        "src/bx-core/fpu/poly.cc",
-        "src/bx-core/fpu/softfloat.cc",
-        "src/bx-core/fpu/softfloat16.cc",
-        "src/bx-core/fpu/softfloat-muladd.cc",
-        "src/bx-core/fpu/softfloat-round-pack.cc",
-        "src/bx-core/fpu/softfloat-specialize.cc",
-        "src/bx-core/fpu/softfloatx80.cc",
-        "src/bx-core/memory/memory.cc",
-        "src/bx-core/memory/misc_mem.cc"
+        "src/bochs-core/cpu/3dnow.cc",
+        "src/bochs-core/cpu/access.cc",
+        "src/bochs-core/cpu/access32.cc",
+        "src/bochs-core/cpu/access64.cc",
+        "src/bochs-core/cpu/aes.cc",
+        "src/bochs-core/cpu/apic.cc",
+        "src/bochs-core/cpu/arith16.cc",
+        "src/bochs-core/cpu/arith32.cc",
+        "src/bochs-core/cpu/arith64.cc",
+        "src/bochs-core/cpu/arith8.cc",
+        "src/bochs-core/cpu/avx.cc",
+        "src/bochs-core/cpu/avx_fma.cc",
+        "src/bochs-core/cpu/avx_pfp.cc",
+        "src/bochs-core/cpu/avx2.cc",
+        "src/bochs-core/cpu/bcd.cc",
+        "src/bochs-core/cpu/bit.cc",
+        "src/bochs-core/cpu/bit16.cc",
+        "src/bochs-core/cpu/bit32.cc",
+        "src/bochs-core/cpu/bit64.cc",
+        "src/bochs-core/cpu/bmi32.cc",
+        "src/bochs-core/cpu/bmi64.cc",
+        "src/bochs-core/cpu/call_far.cc",
+        "src/bochs-core/cpu/cpu.cc",
+        "src/bochs-core/cpu/cpudb/amd_k6_2_chomper.cc",
+        "src/bochs-core/cpu/cpudb/pentium_mmx.cc",
+        "src/bochs-core/cpu/crc32.cc",
+        "src/bochs-core/cpu/crregs.cc",
+        "src/bochs-core/cpu/ctrl_xfer_pro.cc",
+        "src/bochs-core/cpu/ctrl_xfer16.cc",
+        "src/bochs-core/cpu/ctrl_xfer32.cc",
+        "src/bochs-core/cpu/ctrl_xfer64.cc",
+        "src/bochs-core/cpu/data_xfer16.cc",
+        "src/bochs-core/cpu/data_xfer32.cc",
+        "src/bochs-core/cpu/data_xfer64.cc",
+        "src/bochs-core/cpu/data_xfer8.cc",
+        "src/bochs-core/cpu/debugstuff.cc",
+        "src/bochs-core/cpu/event.cc",
+        "src/bochs-core/cpu/exception.cc",
+        "src/bochs-core/cpu/fetchdecode.cc",
+        "src/bochs-core/cpu/fetchdecode64.cc",
+        "src/bochs-core/cpu/flag_ctrl.cc",
+        "src/bochs-core/cpu/flag_ctrl_pro.cc",
+        "src/bochs-core/cpu/fpu_emu.cc",
+        "src/bochs-core/cpu/gather.cc",
+        "src/bochs-core/cpu/generic_cpuid.cc",
+        "src/bochs-core/cpu/icache.cc",
+        "src/bochs-core/cpu/init.cc",
+        "src/bochs-core/cpu/io.cc",
+        "src/bochs-core/cpu/iret.cc",
+        "src/bochs-core/cpu/jmp_far.cc",
+        "src/bochs-core/cpu/load.cc",
+        "src/bochs-core/cpu/logical16.cc",
+        "src/bochs-core/cpu/logical32.cc",
+        "src/bochs-core/cpu/logical64.cc",
+        "src/bochs-core/cpu/logical8.cc",
+        "src/bochs-core/cpu/mmx.cc",
+        "src/bochs-core/cpu/msr.cc",
+        "src/bochs-core/cpu/mult16.cc",
+        "src/bochs-core/cpu/mult32.cc",
+        "src/bochs-core/cpu/mult64.cc",
+        "src/bochs-core/cpu/mult8.cc",
+        "src/bochs-core/cpu/paging.cc",
+        "src/bochs-core/cpu/proc_ctrl.cc",
+        "src/bochs-core/cpu/protect_ctrl.cc",
+        "src/bochs-core/cpu/resolver.cc",
+        "src/bochs-core/cpu/ret_far.cc",
+        "src/bochs-core/cpu/segment_ctrl.cc",
+        "src/bochs-core/cpu/segment_ctrl_pro.cc",
+        "src/bochs-core/cpu/shift16.cc",
+        "src/bochs-core/cpu/shift32.cc",
+        "src/bochs-core/cpu/shift64.cc",
+        "src/bochs-core/cpu/shift8.cc",
+        "src/bochs-core/cpu/smm.cc",
+        "src/bochs-core/cpu/soft_int.cc",
+        "src/bochs-core/cpu/sse.cc",
+        "src/bochs-core/cpu/sse_move.cc",
+        "src/bochs-core/cpu/sse_pfp.cc",
+        "src/bochs-core/cpu/sse_rcp.cc",
+        "src/bochs-core/cpu/sse_string.cc",
+        "src/bochs-core/cpu/stack.cc",
+        "src/bochs-core/cpu/stack16.cc",
+        "src/bochs-core/cpu/stack32.cc",
+        "src/bochs-core/cpu/stack64.cc",
+        "src/bochs-core/cpu/string.cc",
+        "src/bochs-core/cpu/svm.cc",
+        "src/bochs-core/cpu/tasking.cc",
+        "src/bochs-core/cpu/tbm32.cc",
+        "src/bochs-core/cpu/tbm64.cc",
+        "src/bochs-core/cpu/vm8086.cc",
+        "src/bochs-core/cpu/vmcs.cc",
+        "src/bochs-core/cpu/vmexit.cc",
+        "src/bochs-core/cpu/vmfunc.cc",
+        "src/bochs-core/cpu/vmx.cc",
+        "src/bochs-core/cpu/xop.cc",
+        "src/bochs-core/cpu/xsave.cc",
+        "src/bochs-core/disasm/dis_decode.cc",
+        "src/bochs-core/disasm/dis_groups.cc",
+        "src/bochs-core/disasm/resolve.cc",
+        "src/bochs-core/disasm/syntax.cc",
+        "src/bochs-core/fpu/f2xm1.cc",
+        "src/bochs-core/fpu/ferr.cc",
+        "src/bochs-core/fpu/fpatan.cc",
+        "src/bochs-core/fpu/fprem.cc",
+        "src/bochs-core/fpu/fpu.cc",
+        "src/bochs-core/fpu/fpu_arith.cc",
+        "src/bochs-core/fpu/fpu_cmov.cc",
+        "src/bochs-core/fpu/fpu_compare.cc",
+        "src/bochs-core/fpu/fpu_const.cc",
+        "src/bochs-core/fpu/fpu_load_store.cc",
+        "src/bochs-core/fpu/fpu_misc.cc",
+        "src/bochs-core/fpu/fpu_trans.cc",
+        "src/bochs-core/fpu/fsincos.cc",
+        "src/bochs-core/fpu/fyl2x.cc",
+        "src/bochs-core/fpu/poly.cc",
+        "src/bochs-core/fpu/softfloat.cc",
+        "src/bochs-core/fpu/softfloat16.cc",
+        "src/bochs-core/fpu/softfloat-muladd.cc",
+        "src/bochs-core/fpu/softfloat-round-pack.cc",
+        "src/bochs-core/fpu/softfloat-specialize.cc",
+        "src/bochs-core/fpu/softfloatx80.cc",
+        "src/bochs-core/memory/memory.cc",
+        "src/bochs-core/memory/misc_mem.cc"
       ]
     },
     {
-      "name": "bx-mantle",
+      "name": "adapter-bochs",
       "sources": [
-        "src/bx-mantle/keyboard.cc",
-        "src/bx-mantle/headless_8042.cc",
-        "src/bx-mantle/logio.cc",
-        "src/bx-mantle/minimal_machine.cc",
-        "src/bx-mantle/minimal_port_space.cc",
-        "src/bx-mantle/minimal_product_shell.cc",
-        "src/bx-mantle/minimal_sim.cc",
-        "src/bx-mantle/paramtree.cc",
-        "src/bx-mantle/pc_system.cc",
-        "src/bx-mantle/pic.cc",
-        "src/bx-mantle/scancodes.cc"
+        "src/adapter-bochs/keyboard.cc",
+        "src/adapter-bochs/headless_8042.cc",
+        "src/adapter-bochs/logio.cc",
+        "src/adapter-bochs/minimal_machine.cc",
+        "src/adapter-bochs/minimal_port_space.cc",
+        "src/adapter-bochs/minimal_product_shell.cc",
+        "src/adapter-bochs/minimal_sim.cc",
+        "src/adapter-bochs/paramtree.cc",
+        "src/adapter-bochs/pc_system.cc",
+        "src/adapter-bochs/pic.cc",
+        "src/adapter-bochs/scancodes.cc"
       ]
     },
     {
@@ -420,8 +420,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -439,8 +439,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -455,8 +455,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -471,8 +471,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -487,8 +487,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -503,8 +503,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -519,8 +519,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -535,8 +535,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -551,8 +551,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -567,8 +567,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -586,8 +586,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -604,8 +604,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -622,8 +622,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -640,8 +640,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -658,8 +658,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -676,8 +676,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -694,8 +694,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -712,8 +712,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -730,8 +730,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -748,8 +748,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -764,8 +764,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -786,8 +786,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -802,8 +802,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -818,8 +818,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -840,8 +840,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -859,8 +859,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -878,8 +878,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -905,8 +905,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -930,8 +930,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -952,8 +952,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -977,8 +977,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -999,8 +999,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1021,8 +1021,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1043,8 +1043,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1065,8 +1065,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1087,8 +1087,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1112,8 +1112,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1128,8 +1128,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1144,8 +1144,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1160,8 +1160,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1176,8 +1176,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1192,8 +1192,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1208,8 +1208,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1224,8 +1224,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1240,8 +1240,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1256,8 +1256,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1272,8 +1272,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1288,8 +1288,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1310,8 +1310,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1332,8 +1332,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1352,8 +1352,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1372,8 +1372,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1392,8 +1392,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1412,8 +1412,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1432,8 +1432,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1452,8 +1452,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1472,8 +1472,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1492,8 +1492,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1512,8 +1512,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1532,8 +1532,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1552,8 +1552,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1577,8 +1577,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1604,8 +1604,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1624,8 +1624,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1651,8 +1651,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1678,8 +1678,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1703,8 +1703,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1730,8 +1730,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1757,8 +1757,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1784,8 +1784,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1811,8 +1811,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1838,8 +1838,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1863,8 +1863,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1881,8 +1881,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1897,8 +1897,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": [
@@ -1915,8 +1915,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1931,8 +1931,8 @@
         "adapter-win32",
         "adapter-softpc",
         "session",
-        "bx-mantle",
-        "bx-core",
+        "adapter-bochs",
+        "bochs-core",
         "adapter-bop"
       ],
       "platformLibraries": []
@@ -1948,8 +1948,8 @@
       "adapter-win32",
       "adapter-softpc",
       "session",
-      "bx-mantle",
-      "bx-core",
+      "adapter-bochs",
+      "bochs-core",
       "adapter-bop"
     ],
     "platformLibraries": [

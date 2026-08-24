@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $headerPath = Join-Path $repositoryRoot 'src/adapter-bop/generic_ud_bridge.h'
 $sourcePath = Join-Path $repositoryRoot 'src/adapter-bop/bop_ingress.c'
-$corePath = Join-Path $repositoryRoot 'src/bx-core/cpu/exception.cc'
+$corePath = Join-Path $repositoryRoot 'src/bochs-core/cpu/exception.cc'
 foreach ($path in @($headerPath, $sourcePath, $corePath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing generic #UD bridge input: $path" }
 }

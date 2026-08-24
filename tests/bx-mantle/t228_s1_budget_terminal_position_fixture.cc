@@ -1,7 +1,7 @@
 #include "bochs.h"
-#include "bx-core/cpu/cpu.h"
+#include "bochs-core/cpu/cpu.h"
 #include "adapter-softpc/machine_stage.h"
-#include "bx-mantle/pc_system.h"
+#include "adapter-bochs/pc_system.h"
 #include "adapter-softpc/instruction_history.h"
 #include "adapter-bop/generic_ud_bridge.h"
 

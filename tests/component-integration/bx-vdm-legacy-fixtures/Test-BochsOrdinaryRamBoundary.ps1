@@ -8,7 +8,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
 }
 
-$path = Join-Path $RepositoryRoot 'src\bx-core\memory\misc_mem.cc'
+$path = Join-Path $RepositoryRoot 'src\bochs-core\memory\misc_mem.cc'
 if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing Bochs memory source: $path" }
 $text = Get-Content -LiteralPath $path -Raw
 $preflightStart = $text.IndexOf('bx_bool BX_MEM_C::ordinary_ram_readable')

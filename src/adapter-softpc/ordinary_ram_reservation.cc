@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "bx-core/memory/memory.h"
+#include "bochs-core/memory/memory.h"
 #include "ordinary_ram_reservation.h"
 
 #include <string.h>

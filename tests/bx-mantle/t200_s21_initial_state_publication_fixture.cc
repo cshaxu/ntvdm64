@@ -1,6 +1,6 @@
 #include "bochs.h"
 #include "adapter-softpc/mechanical_action.h"
-#include "bx-mantle/minimal_machine.h"
+#include "adapter-bochs/minimal_machine.h"
 #include "app/initial_state_action.h"
 
 #include <string.h>

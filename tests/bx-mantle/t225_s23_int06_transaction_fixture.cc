@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "bx-mantle/minimal_machine.h"
+#include "adapter-bochs/minimal_machine.h"
 #include "bx-vdm/bx_ntvdm_native_bop_composition.h"
 extern "C" int runtime_mantle_generic_ud_bridge_v1(const struct runtime_generic_ud_event_v1*,struct runtime_generic_ud_outcome_v1*){return 0;}
 int main(){bx_mantle_minimal_machine_c m;runtime_native_bop_composition_v1 c;runtime_generic_ud_event_v1 e={0};runtime_generic_ud_outcome_v1 o={0};Bit8u f[4]={0x34,0x12,0x70,0};Bit8u b=0;if(m.initialize(0x200000,0x200000)!=BX_MANTLE_MINIMAL_MACHINE_OK)return 1;if(!runtime_native_bop_composition_v1_initialize(&c)||!runtime_native_bop_composition_v1_bind(&c))return 2;if(!bx_mem.copy_to_ordinary_ram(0xb79,4,f))return 3;e.magic=RUNTIME_GENERIC_UD_EVENT_V1_MAGIC;e.abi_version=RUNTIME_GENERIC_UD_EVENT_V1_VERSION;e.struct_bytes=sizeof(e);e.vector=6;e.execution_mode=RUNTIME_CPU_EXECUTION_REAL;e.ss=0x70;e.esp=0x479;e.fault_rip=0x100;e.window_bytes=3;e.window[0]=0xc4;e.window[1]=0xc4;e.window[2]=0x06;if(!runtime_native_bop_composition_v1_handle(&e,&o)||o.disposition!=RUNTIME_GENERIC_UD_RESUME||o.resume_rip!=0x103)return 4;if(!bx_mem.copy_from_ordinary_ram(0xb79,1,&b)||b!=0x35)return 5;if(!bx_mem.copy_from_ordinary_ram(0x46b,1,&b)||b!=0xff)return 6;runtime_native_bop_composition_v1_unbind(&c);return m.cleanup()==BX_MANTLE_MINIMAL_MACHINE_OK?0:7;}

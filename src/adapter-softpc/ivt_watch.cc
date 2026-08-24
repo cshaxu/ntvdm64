@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "bx-core/memory/memory.h"
+#include "bochs-core/memory/memory.h"
 #include "ivt_watch.h"
 #include "machine_stage.h"
 

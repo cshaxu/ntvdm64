@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "bx-core/memory/memory.h"
+#include "bochs-core/memory/memory.h"
 #include "mechanical_action.h"
 #include "machine_stage.h"
 

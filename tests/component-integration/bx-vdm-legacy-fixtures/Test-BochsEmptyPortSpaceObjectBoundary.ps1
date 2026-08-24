@@ -9,7 +9,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 
 $devicesPath = Join-Path $RepositoryRoot 'refs\bochs\iodev\devices.cc'
-$isolatedPath = Join-Path $RepositoryRoot 'src\bx-mantle\minimal_port_space.cc'
+$isolatedPath = Join-Path $RepositoryRoot 'src\adapter-bochs\minimal_port_space.cc'
 foreach ($path in @($devicesPath, $isolatedPath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
         throw "Missing BX-IO-029 source: $path"

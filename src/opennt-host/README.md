@@ -5,7 +5,7 @@ their smallest source-derived replacements where a historical host facility no
 longer exists. It does not own BOP dispatch or Bochs machine mechanics.
 
 It may use declared same-shaped interfaces from `adapter-win32` and
-`adapter-softpc`; it must not access `bx-mantle` or `bx-core` directly.
+`adapter-softpc`; it must not access `adapter-bochs` or `bochs-core` directly.
 
 ## Local intrusion register
 

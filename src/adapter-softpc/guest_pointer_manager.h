@@ -3,7 +3,7 @@
 
 /* Session-scoped SAS-pointer compatibility. Its native pointer is private to
  * an active OpenNT call: never guest state, an ABI field, a HANDLE or a
- * bx-core/bx-mantle object. */
+ * bochs-core/adapter-bochs object. */
 #include <stdint.h>
 
 #include "session/session.h"

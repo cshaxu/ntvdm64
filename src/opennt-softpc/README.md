@@ -6,11 +6,11 @@ packages. The source-identical initial admission is the 27-file
 Their source identity and per-package boundary are recorded in
 `docs/etc/evidence/m0-t263-s3-opennt-softpc-firmware-rom-admission-001.md`.
 
-This component is not a second emulator.  Bochs mechanics remain in `bx-core`
-and `bx-mantle`; same-shaped reached SoftPC/CCPU calls are provided only by
+This component is not a second emulator.  Bochs mechanics remain in `bochs-core`
+and `adapter-bochs`; same-shaped reached SoftPC/CCPU calls are provided only by
 `adapter-softpc`.  `app` may select admitted firmware/ROM bytes and pass them
-through a declared opaque mechanical loading contract.  Neither `bx-mantle`
-nor `bx-core` imports this component or learns OpenNT terminology.
+through a declared opaque mechanical loading contract.  Neither `adapter-bochs`
+nor `bochs-core` imports this component or learns OpenNT terminology.
 
 ## Local intrusion register
 

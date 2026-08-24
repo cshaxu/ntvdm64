@@ -3,7 +3,7 @@
 Bochs-backed recovery of reached historical SoftPC, CCPU, SAS and VDM-facing
 mechanical interfaces. A recovered interface retains the original name,
 parameters, calling convention and observable mechanical semantics while using
-bounded `bx-mantle` operations.
+bounded `adapter-bochs` operations.
 
 It is selector/service blind: it does not own BOP, DOS, WOW, OpenNT host policy
 or Win32 capability. It is the only OpenNT-facing component allowed to request

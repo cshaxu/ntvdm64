@@ -4,7 +4,7 @@
 #include "adapter-softpc/machine_stage.h"
 #include "adapter-softpc/physical_irq.h"
 #include "adapter-softpc/port_action.h"
-#include "bx-mantle/pc_system.h"
+#include "adapter-bochs/pc_system.h"
 
 #include <string.h>
 

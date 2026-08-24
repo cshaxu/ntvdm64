@@ -35,7 +35,7 @@ Revision History:
  * loaded VDMREDIR DLL. The statically composed importer retains the original
  * function-pointer ABI, so only the emitted provider symbol is privately
  * renamed; the retained source spelling below is unchanged. */
-#define VrInitialized bx_ntvdm_vr_initialized_provider
+#define VrInitialized runtime_vr_initialized_provider
 
 //
 // data

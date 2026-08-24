@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/mechanical_action.cc'
-$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/mechanical_action.h'
+$sourcePath = Join-Path $repositoryRoot 'src/adapter-bochs/mechanical_action.cc'
+$headerPath = Join-Path $repositoryRoot 'src/adapter-bochs/mechanical_action.h'
 $source = Get-Content -LiteralPath $sourcePath -Raw
 $header = Get-Content -LiteralPath $headerPath -Raw
 
@@ -20,4 +20,4 @@ foreach ($pattern in @('bop', 'selector', 'service', 'provider', 'OpenNT', 'DOS'
         throw "Forbidden mantle mechanical-action dependency: $pattern"
     }
 }
-Write-Output 'bx-mantle-mechanical-action-boundary: selector-blind copied RAM action verified'
+Write-Output 'adapter-bochs-mechanical-action-boundary: selector-blind copied RAM action verified'

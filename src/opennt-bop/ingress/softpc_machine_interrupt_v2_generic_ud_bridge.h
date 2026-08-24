@@ -5,7 +5,7 @@
 
 /*
  * Adapter-owned ingress for the historical SoftPC BOP 02/06 interrupt
- * package.  The selector is recognized here, never by bx-core or bx-mantle.
+ * package.  The selector is recognized here, never by bochs-core or adapter-bochs.
  */
 int runtime_softpc_machine_interrupt_v2_generic_ud_recognizes(
     const struct runtime_generic_ud_event_v1 *event);

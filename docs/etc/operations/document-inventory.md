@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2276 |
+| Documentation records | 2277 |
 | --- | --- |
-| Generated UTC | 2026-08-24T22:51:57Z |
+| Generated UTC | 2026-08-24T23:33:00Z |
 
 ## Entries
 
@@ -68,7 +68,7 @@ content-divergent entries.
 | design/ARCHITECTURE.md | current design authority | b63cab58d2c08607d9fb68530a9ca2db84492137d1139dd7b11f5acceb2ca7b7 |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | 3d55ee174e229e89da3ab9f31e65ebbd832a1f48c4f2eb487ce48dc25043703f |
 | design/CODING.md | current design authority | e8f4c68b2b7c67f5a0948feed48278c5e063d40c05e17fd1f6daaff0bea6873f |
-| design/GOAL.md | current design authority | 53ee109a0f56deb5c1750ffaf5a24ff053ce13fb26c9d4a8a52972fa02a9baa7 |
+| design/GOAL.md | current design authority | b7e0eb85952f02719e4b12675b47356187e5097f1c5a21be55bac127dae4e760 |
 | design/HOST-NAMESPACE-CAPABILITY.md | retained pre-governance evidence | d8f6df52c8bdc9527526d14756c05465136571bfbd90ee17f5798c766c256bd5 |
 | design/ROADMAP.md | current design authority | f5ea2a1374680d8388f8418aa513ec3d396c35f5d92989441f1c20a7b6679cc2 |
 | design/STOCK-FIRMWARE-STARTUP-PROBE.md | retained pre-governance evidence | 2f5c8b2de1329fa7c500552229840dcf9c5c5b780aeb73797a84a004e79088c0 |
@@ -245,6 +245,7 @@ content-divergent entries.
 | etc/evidence/m0-t263-s9-three-file-original-body-recovery-ledger-001.md | indexed supporting material | 114fda046ae5cdcca8d94e4c4a5440c97113e9fa8dbe7ef403988b1287226f43 |
 | etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md | indexed supporting material | 50262bf383306601488941ad18eb2f8ad2a6a43929f4c271ccb59e3bf37e3712 |
 | etc/evidence/m0-t265-s1-component-identity-governance-001.md | indexed supporting material | 24688e7379990c59a62a01581fcdef1b3e7f36476eef4c321c975a38833ad3cd |
+| etc/evidence/m0-t265-s2-bochs-production-root-rename-001.md | indexed supporting material | d3da7a8431a3b96dacdb4b1868cbd7710905698e7e633b8dd0922eac751b6c4a |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -2265,7 +2266,7 @@ content-divergent entries.
 | rules/ARCHITECTURE.md | current rule authority | 8a9d9ee3e1f83a3533d9fa8782b1a1de45e87a3452893bf8f1e77e4195f74922 |
 | rules/CODING.md | current rule authority | 759987d676d880620c26411a930b9367e1b4c093ecd9940587e86070ce446194 |
 | rules/DOCUMENT.md | current rule authority | 9f55864347f265afe78af803a67df10bfa20fb273fca6594803c8e64c4a4cbda |
-| rules/EXECUTION.md | current rule authority | 66b3cee027ec91537c1f131a0131098799d00d06e33d1ddf926c330582b82c5b |
+| rules/EXECUTION.md | current rule authority | 5f0149dff78677432bd232ca9ff64ed3d0cf57030dafdbad41aff7f280f2ae7c |
 | S1-HISTORICAL-HOST-CLOSURE.md | retained pre-governance evidence | 0796b7bf5f0a780fbd7a989938474045ed2d3aa2a6b68b8697605393bd2e1bb8 |
 | S2-HISTORICAL-BRIDGE-RECORD-CONTRACT.md | retained pre-governance evidence | 87cfbdc12b2efd572fda88091b6ca9707d4bcc6dfe2b9efcf39fd2e4374f8805 |
 | S3-RECONSTRUCTED-MONITOR-SEMANTICS.md | retained pre-governance evidence | 78db2e8e9c0665b39852cc3739a142cb81304d44b6110c33c51a771aac599ffb |
@@ -2290,7 +2291,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 3f558e1d83deb5e9fe4fe7cbbf0f533478b975bdbff9761f36f2402f119202f8 |
+| STATUS.md | principal control document | ccce2a2913a360f9010a7de7016fe98e2422df2bd315380a070c7d92ca369e34 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "bx-mantle/pc_system.h"
+#include "adapter-bochs/pc_system.h"
 #include "a20_capability.h"
 
 static bx_bool runtime_a20_capability_lifecycle_active = 0;

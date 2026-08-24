@@ -1,6 +1,6 @@
 #include "bochs.h"
 #include "adapter-softpc/a20_capability.h"
-#include "bx-mantle/minimal_machine.h"
+#include "adapter-bochs/minimal_machine.h"
 
 static int call(unsigned operation, unsigned value, unsigned status,
   unsigned enabled)

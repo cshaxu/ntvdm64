@@ -5,13 +5,13 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "bx-core/cpu/cpu.h"
-#include "bx-core/memory/memory.h"
-#include "bx-mantle/pc_system.h"
+#include "bochs-core/cpu/cpu.h"
+#include "bochs-core/memory/memory.h"
+#include "adapter-bochs/pc_system.h"
 #include "finite_run.h"
 #include "generic_ud_bridge.h"
 #include "first_fault_observation.h"
-#include "bx-mantle/minimal_machine.h"
+#include "adapter-bochs/minimal_machine.h"
 #include "a20_capability.h"
 #include "port_action.h"
 #include "protected_range_action.h"

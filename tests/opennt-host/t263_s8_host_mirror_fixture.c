@@ -7,7 +7,7 @@
 #include "opennt-host/inc/vrnmpipe.h"
 #include "opennt-host/vdmredir/vrputil.h"
 
-BOOLEAN bx_ntvdm_vr_initialized_provider(VOID);
+BOOLEAN runtime_vr_initialized_provider(VOID);
 
 static int pipe_round_trip(void)
 {
@@ -61,7 +61,7 @@ int main(void)
         strcmp(output, "\\\\SERVER\\SHARE") != 0) return 3;
     if (!VrIsNamedPipeName("\\\\remote\\PIPE\\name") ||
         VrIsNamedPipeName("\\MAILSLOT\\name")) return 4;
-    if (bx_ntvdm_vr_initialized_provider()) return 5;
+    if (runtime_vr_initialized_provider()) return 5;
     if (!pipe_round_trip()) return 6;
     puts("T263 S9 OpenNT host mirror: utility and synchronous pipe paths pass");
     return 0;

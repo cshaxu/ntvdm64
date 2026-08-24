@@ -31,10 +31,10 @@ static int read_exact_image(const char *path, uint8_t *out_image)
 int main(int argc, char **argv)
 {
     uint8_t *ram;
-    ntdos64_s4_monitor monitor;
-    ntdos64_s4_state state;
-    ntdos64_s4_stop_event stop;
-    ntdos64_s4_run_result run_result;
+    app_s4_monitor monitor;
+    app_s4_state state;
+    app_s4_stop_event stop;
+    app_s4_run_result run_result;
     uint32_t ptrsav;
     int result = 1;
 
@@ -53,9 +53,9 @@ int main(int argc, char **argv)
         fprintf(stderr, "NTIO strategy byte signature does not match the fixed source-built image\n");
         goto done;
     }
-    if (ntdos64_s4_monitor_initialize(&monitor, ram, real_mode_ram_bytes, NULL, NULL) !=
-        NTDOS64_S4_BUDGET_EXHAUSTED ||
-        ntdos64_s4_monitor_get_state(&monitor, &state) != NTDOS64_S4_BUDGET_EXHAUSTED) {
+    if (app_s4_monitor_initialize(&monitor, ram, real_mode_ram_bytes, NULL, NULL) !=
+        APP_S4_BUDGET_EXHAUSTED ||
+        app_s4_monitor_get_state(&monitor, &state) != APP_S4_BUDGET_EXHAUSTED) {
         goto done;
     }
     state.eax = state.ecx = state.edx = state.esi = state.edi = state.ebp = 0u;
@@ -67,13 +67,13 @@ int main(int argc, char **argv)
     state.ss = 0u;
     state.ip = ntio_strategy_offset;
     state.flags = 0x0002u;
-    if (ntdos64_s4_monitor_set_state(&monitor, &state) != NTDOS64_S4_BUDGET_EXHAUSTED) {
+    if (app_s4_monitor_set_state(&monitor, &state) != APP_S4_BUDGET_EXHAUSTED) {
         fprintf(stderr, "could not set the strategy entry state\n");
         goto done;
     }
-    run_result = ntdos64_s4_monitor_run(&monitor, 2u);
-    if (run_result != NTDOS64_S4_BUDGET_EXHAUSTED ||
-        ntdos64_s4_monitor_get_last_stop(&monitor, &stop) != NTDOS64_S4_NO_STOP_EVENT) {
+    run_result = app_s4_monitor_run(&monitor, 2u);
+    if (run_result != APP_S4_BUDGET_EXHAUSTED ||
+        app_s4_monitor_get_last_stop(&monitor, &stop) != APP_S4_NO_STOP_EVENT) {
         fprintf(stderr, "strategy run stopped with result %d\n", (int)run_result);
         goto done;
     }

@@ -13,7 +13,7 @@
 #endif
 
 #if RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
-#include "bx-core/memory/memory.h"
+#include "bochs-core/memory/memory.h"
 #endif
 
 static struct runtime_instruction_history_record_v1

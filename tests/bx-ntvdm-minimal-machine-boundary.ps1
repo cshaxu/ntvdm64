@@ -1,9 +1,9 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$machineHeader = Join-Path $repositoryRoot 'src/bx-mantle/minimal_machine.h'
-$machineSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_machine.cc'
-$memoryHeader = Join-Path $repositoryRoot 'src/bx-core/memory/memory.h'
+$machineHeader = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_machine.h'
+$machineSource = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_machine.cc'
+$memoryHeader = Join-Path $repositoryRoot 'src/bochs-core/memory/memory.h'
 $iodevHeader = Join-Path $repositoryRoot 'refs/bochs/iodev/iodev.h'
 
 foreach ($path in @($machineHeader, $machineSource, $memoryHeader, $iodevHeader)) {

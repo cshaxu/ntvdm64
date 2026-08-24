@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$header = Get-Content -LiteralPath (Join-Path $repositoryRoot 'src/bx-mantle/port_action.h') -Raw
-$source = Get-Content -LiteralPath (Join-Path $repositoryRoot 'src/bx-mantle/port_action.cc') -Raw
+$header = Get-Content -LiteralPath (Join-Path $repositoryRoot 'src/adapter-bochs/port_action.h') -Raw
+$source = Get-Content -LiteralPath (Join-Path $repositoryRoot 'src/adapter-bochs/port_action.cc') -Raw
 foreach ($required in @('BX_NTVDM_PORT_ACTION_V1_READ8','BX_NTVDM_PORT_ACTION_V1_WRITE8','bx_devices.inp','bx_devices.outp','bx_ntvdm_port_action_v1_lifecycle_active')) {
   if ($header.IndexOf($required,[StringComparison]::OrdinalIgnoreCase) -lt 0 -and $source.IndexOf($required,[StringComparison]::OrdinalIgnoreCase) -lt 0) { throw "Missing BX-MANTLE-083 invariant: $required" }
 }

@@ -1,11 +1,11 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$machineHeader = Join-Path $repositoryRoot 'src/bx-mantle/minimal_machine.h'
-$machineSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_machine.cc'
-$picHeader = Join-Path $repositoryRoot 'src/bx-mantle/pic.h'
-$picSource = Join-Path $repositoryRoot 'src/bx-mantle/pic.cc'
-$portSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_port_space.cc'
+$machineHeader = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_machine.h'
+$machineSource = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_machine.cc'
+$picHeader = Join-Path $repositoryRoot 'src/adapter-bochs/pic.h'
+$picSource = Join-Path $repositoryRoot 'src/adapter-bochs/pic.cc'
+$portSource = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_port_space.cc'
 foreach ($path in @($machineHeader, $machineSource, $picHeader, $picSource, $portSource)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing native PIC boundary input: $path" }
 }

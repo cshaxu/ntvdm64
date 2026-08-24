@@ -28,8 +28,8 @@ int wmain(int argc, wchar_t **argv)
     uint8_t *view = NULL;
     STARTUPINFOW startup = {0};
     PROCESS_INFORMATION process = {0};
-    ntdos64_s4_monitor monitor;
-    ntdos64_s4_state state;
+    app_s4_monitor monitor;
+    app_s4_state state;
     DWORD exit_code;
     int result = 1;
 
@@ -42,12 +42,12 @@ int wmain(int argc, wchar_t **argv)
     if (mapping == NULL || GetLastError() == ERROR_ALREADY_EXISTS) goto cleanup;
     view = MapViewOfFile(mapping, FILE_MAP_READ | FILE_MAP_WRITE, 0u, 0u, aperture_bytes);
     if (view == NULL) goto cleanup;
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_MAGIC,
-        NTDOS64_SHARED_APERTURE_V1_MAGIC);
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_VERSION,
-        NTDOS64_SHARED_APERTURE_V1_VERSION);
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_BYTES, aperture_bytes);
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HOST_READY, 1u);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_MAGIC,
+        APP_SHARED_APERTURE_V1_MAGIC);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_VERSION,
+        APP_SHARED_APERTURE_V1_VERSION);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_BYTES, aperture_bytes);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_HOST_READY, 1u);
     view[0x1000u] = 0x90u;
 
     if (swprintf(command_line, sizeof(command_line) / sizeof(command_line[0]),
@@ -66,19 +66,19 @@ int wmain(int argc, wchar_t **argv)
     }
     CloseHandle(process.hThread);
     CloseHandle(process.hProcess);
-    if (read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_SAS_READY) != 1u ||
-        view[NTDOS64_SHARED_APERTURE_V1_OFFSET_SAS_PROBE] != 0x5au || view[0x1000u] != 0x90u) {
+    if (read_u32(view, APP_SHARED_APERTURE_V1_OFFSET_SAS_READY) != 1u ||
+        view[APP_SHARED_APERTURE_V1_OFFSET_SAS_PROBE] != 0x5au || view[0x1000u] != 0x90u) {
         goto cleanup;
     }
 
-    if (ntdos64_s4_monitor_initialize(&monitor, view, aperture_bytes, NULL, NULL) !=
-        NTDOS64_S4_BUDGET_EXHAUSTED) goto cleanup;
-    if (ntdos64_s4_monitor_get_state(&monitor, &state) != NTDOS64_S4_BUDGET_EXHAUSTED) goto cleanup;
+    if (app_s4_monitor_initialize(&monitor, view, aperture_bytes, NULL, NULL) !=
+        APP_S4_BUDGET_EXHAUSTED) goto cleanup;
+    if (app_s4_monitor_get_state(&monitor, &state) != APP_S4_BUDGET_EXHAUSTED) goto cleanup;
     state.cs = 0x0100u;
     state.ip = 0u;
-    if (ntdos64_s4_monitor_set_state(&monitor, &state) != NTDOS64_S4_BUDGET_EXHAUSTED ||
-        ntdos64_s4_monitor_run(&monitor, 1u) != NTDOS64_S4_BUDGET_EXHAUSTED ||
-        ntdos64_s4_monitor_get_state(&monitor, &state) != NTDOS64_S4_BUDGET_EXHAUSTED ||
+    if (app_s4_monitor_set_state(&monitor, &state) != APP_S4_BUDGET_EXHAUSTED ||
+        app_s4_monitor_run(&monitor, 1u) != APP_S4_BUDGET_EXHAUSTED ||
+        app_s4_monitor_get_state(&monitor, &state) != APP_S4_BUDGET_EXHAUSTED ||
         state.cs != 0x0100u || state.ip != 1u) goto cleanup;
     result = 0;
 

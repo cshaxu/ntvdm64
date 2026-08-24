@@ -27,9 +27,9 @@
  * state. Preserve its TlsGetValue/TlsSetValue call shape through the
  * session-resettable adapter-owned per-thread category bits. */
 #define TlsGetValue(index) ((LPVOID)(ULONG_PTR) \
-    bx_ntvdm_opennt_direct_access_category_bits_get())
+    runtime_opennt_direct_access_category_bits_get())
 #define TlsSetValue(index, value) \
-    bx_ntvdm_opennt_direct_access_category_bits_set((DWORD)(ULONG_PTR)(value))
+    runtime_opennt_direct_access_category_bits_set((DWORD)(ULONG_PTR)(value))
 
 /* DIVERGENCE(HOST-DIV-014): the private NTVDM resource table and dialog
  * product shell are unavailable to an unpack-and-run process. Keep the
@@ -39,10 +39,10 @@
 #undef LoadString
 #endif
 #define LoadString(module, id, buffer, count) \
-    bx_ntvdm_opennt_direct_access_load_string((id), (buffer), (count))
+    runtime_opennt_direct_access_load_string((id), (buffer), (count))
 #define ErrorDialogBox(message, edit, options) \
-    bx_ntvdm_opennt_direct_access_dialog((message))
-#define szDoomMsg bx_ntvdm_opennt_direct_access_fallback_message()
+    runtime_opennt_direct_access_dialog((message))
+#define szDoomMsg runtime_opennt_direct_access_fallback_message()
 
 DWORD TlsDirectError;
 //

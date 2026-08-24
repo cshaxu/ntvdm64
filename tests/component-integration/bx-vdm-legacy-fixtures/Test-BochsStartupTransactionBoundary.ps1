@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
-$exception = Get-Content (Join-Path $repository 'src\bx-core\cpu\exception.cc') -Raw
+$exception = Get-Content (Join-Path $repository 'src\bochs-core\cpu\exception.cc') -Raw
 $main = Get-Content (Join-Path $repository 'refs\bochs\main.cc') -Raw
 $default = '#ifndef BX_NTVDM_ENABLE_STARTUP_TRANSACTION' + "`n" +
            '#define BX_NTVDM_ENABLE_STARTUP_TRANSACTION 0' + "`n" + '#endif'

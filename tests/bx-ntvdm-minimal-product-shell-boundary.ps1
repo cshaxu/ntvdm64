@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/minimal_product_shell.cc'
-$pcSystemPath = Join-Path $repositoryRoot 'src/bx-mantle/pc_system.cc'
+$sourcePath = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_product_shell.cc'
+$pcSystemPath = Join-Path $repositoryRoot 'src/adapter-bochs/pc_system.cc'
 
 $source = Get-Content -LiteralPath $sourcePath -Raw
 $pcSystem = Get-Content -LiteralPath $pcSystemPath -Raw

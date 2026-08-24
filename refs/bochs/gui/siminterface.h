@@ -128,7 +128,7 @@
 
 enum {
 #define bx_define_cpudb(model) bx_cpudb_##model,
-#include "bx-core/cpudb.h"
+#include "bochs-core/cpudb.h"
   bx_cpudb_model_last
 };
 #undef bx_define_cpudb
@@ -433,7 +433,7 @@ typedef struct {
   } u;
 } BxEvent;
 
-#include "bx-mantle/paramtree.h"
+#include "adapter-bochs/paramtree.h"
 
 // These are the different start modes.
 enum {

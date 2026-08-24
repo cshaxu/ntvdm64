@@ -325,7 +325,7 @@ void nt_std_handle_notification(BOOL enabled)
 {
     runtime_command_misc_session *session = runtime_command_misc_active_session();
     /* OpenNT nt_msscs.c stores stdoutRedirected before its optional X86GFX
-     * fullscreen work.  The latter is bx-mantle display ownership; retain the
+     * fullscreen work.  The latter is adapter-bochs display ownership; retain the
      * former as session state so COMMAND's original call ordering remains
      * observable without changing the CLI process console. */
     if (session != NULL) {

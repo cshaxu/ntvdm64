@@ -1,10 +1,10 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$memoryHeader = Join-Path $repositoryRoot 'src/bx-core/memory/memory.h'
-$memorySource = Join-Path $repositoryRoot 'src/bx-core/memory/misc_mem.cc'
+$memoryHeader = Join-Path $repositoryRoot 'src/bochs-core/memory/memory.h'
+$memorySource = Join-Path $repositoryRoot 'src/bochs-core/memory/misc_mem.cc'
 $iodevHeader = Join-Path $repositoryRoot 'refs/bochs/iodev/iodev.h'
-$portSpaceSource = Join-Path $repositoryRoot 'src/bx-mantle/minimal_port_space.cc'
+$portSpaceSource = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_port_space.cc'
 $devicesSource = Join-Path $repositoryRoot 'refs/bochs/iodev/devices.cc'
 
 function Get-RegisteredBlock([string] $path, [string] $name) {

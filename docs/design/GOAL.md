@@ -2,7 +2,7 @@
 
 Deliver an independently buildable, non-invasive command-line NT 4-era DOS environment. OpenNT NT4 remains the normative source for the guest operating environment: NTDOS/DOS utilities, WOW16, and the historically observed NTVDM service contracts. Bochs 2.6 is the selected guest-machine backend: it owns x86 execution, PC memory, firmware and emulated-device mechanics.
 
-The target product separation is: `bx-core` (adopted machine), `bx-mantle`
+The target product separation is: `bochs-core` (adopted machine), `adapter-bochs`
 (Bochs-only assembly), `opennt-guest` (DOS/WOW guest images), `opennt-host`
 (host capabilities), `opennt-bop` (BOP source mirrors), `opennt-softpc`
 (original SoftPC firmware/ROM and machine-contract inputs), `opennt-utils`
@@ -19,7 +19,7 @@ original-source reuse and minimal source intrusion mechanically enforceable.
 The immediate goal is not to recover the unavailable NT4 x86 V86/CCPU product composition. It is to establish a small, auditable Bochs-to-OpenNT boundary and use it to run the first contained NT4 EN-US DOS profile. No claim about WOW16, broad device compatibility, or a retail-compatible `ntvdm.exe` follows from that first slice.
 
 The modern runtime target is one MSVC x64 `/MT` host process. This constrains
-the command-line invocation shell, `adapter-softpc`, `bx-mantle`, and adopted Bochs
+the command-line invocation shell, `adapter-softpc`, `adapter-bochs`, and adopted Bochs
 core to one C/C++ ABI and CRT. It does not alter the emulated CPU: the first guest profile remains
 CPU5/Pentium-MMX. Historical OpenNT source remains on its evidenced historical
 toolchain path and is not made a modern runtime-link input merely to achieve

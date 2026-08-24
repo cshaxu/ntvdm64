@@ -14,8 +14,8 @@ typedef struct refused_bridge_observation {
 
 static int refused_bridge(
     void *context,
-    const ntdos64_s4_bridge_request *request,
-    ntdos64_s4_bridge_response *response)
+    const app_s4_bridge_request *request,
+    app_s4_bridge_response *response)
 {
     refused_bridge_observation *observation = context;
 
@@ -30,8 +30,8 @@ static int refused_bridge(
 
 static int demgetdrives_shape_bridge(
     void *context,
-    const ntdos64_s4_bridge_request *request,
-    ntdos64_s4_bridge_response *response)
+    const app_s4_bridge_request *request,
+    app_s4_bridge_response *response)
 {
     unsigned *calls = context;
 
@@ -39,8 +39,8 @@ static int demgetdrives_shape_bridge(
     assert(request->next_byte == 0x0fu);
     assert(request->state.ip == 3u);
     ++*calls;
-    response->write_mask = NTDOS64_S4_BRIDGE_WRITE_AX |
-        NTDOS64_S4_BRIDGE_WRITE_IP | NTDOS64_S4_BRIDGE_WRITE_CF;
+    response->write_mask = APP_S4_BRIDGE_WRITE_AX |
+        APP_S4_BRIDGE_WRITE_IP | APP_S4_BRIDGE_WRITE_CF;
     response->ax = 5u;
     response->ip = 4u;
     response->carry = 0u;
@@ -49,14 +49,14 @@ static int demgetdrives_shape_bridge(
 
 static int invalid_carry_bridge(
     void *context,
-    const ntdos64_s4_bridge_request *request,
-    ntdos64_s4_bridge_response *response)
+    const app_s4_bridge_request *request,
+    app_s4_bridge_response *response)
 {
     (void)context;
     assert(request->selector == 0x50u);
     assert(request->next_byte == 0x0fu);
-    response->write_mask = NTDOS64_S4_BRIDGE_WRITE_AX |
-        NTDOS64_S4_BRIDGE_WRITE_CF;
+    response->write_mask = APP_S4_BRIDGE_WRITE_AX |
+        APP_S4_BRIDGE_WRITE_CF;
     response->ax = 5u;
     response->carry = 2u;
     return 1;
@@ -107,106 +107,106 @@ int main(void)
         0x11u
     };
     uint8_t ntio_prefix_ram[0x2000] = {0};
-    ntdos64_s4_monitor monitor;
-    ntdos64_s4_state state;
-    ntdos64_s4_stop_event stop;
+    app_s4_monitor monitor;
+    app_s4_state state;
+    app_s4_stop_event stop;
     refused_bridge_observation observation = {0};
 
     {
         uint8_t demgetdrives_ram[] = {0xc4u, 0xc4u, 0x50u, 0x0fu};
         unsigned bridge_calls = 0u;
 
-        assert(ntdos64_s4_monitor_initialize(&monitor, demgetdrives_ram,
+        assert(app_s4_monitor_initialize(&monitor, demgetdrives_ram,
             sizeof(demgetdrives_ram), demgetdrives_shape_bridge, &bridge_calls) ==
-            NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+            APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         state.eax = 0xa5a50000u;
-        state.flags = NTDOS64_S4_FLAG_CF | NTDOS64_S4_FLAG_IF | 0x0002u;
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        state.flags = APP_S4_FLAG_CF | APP_S4_FLAG_IF | 0x0002u;
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
         assert(bridge_calls == 1u);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.eax == 0xa5a50005u && state.ip == 4u);
-        assert((state.flags & NTDOS64_S4_FLAG_CF) == 0u);
-        assert((state.flags & (NTDOS64_S4_FLAG_IF | 0x0002u)) ==
-            (NTDOS64_S4_FLAG_IF | 0x0002u));
-        assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_NO_STOP_EVENT);
+        assert((state.flags & APP_S4_FLAG_CF) == 0u);
+        assert((state.flags & (APP_S4_FLAG_IF | 0x0002u)) ==
+            (APP_S4_FLAG_IF | 0x0002u));
+        assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_NO_STOP_EVENT);
     }
 
     {
         uint8_t invalid_carry_ram[] = {0xc4u, 0xc4u, 0x50u, 0x0fu};
 
-        assert(ntdos64_s4_monitor_initialize(&monitor, invalid_carry_ram,
+        assert(app_s4_monitor_initialize(&monitor, invalid_carry_ram,
             sizeof(invalid_carry_ram), invalid_carry_bridge, NULL) ==
-            NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+            APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         state.eax = 0xa5a50000u;
-        state.flags = NTDOS64_S4_FLAG_CF | NTDOS64_S4_FLAG_IF | 0x0002u;
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BRIDGE_REFUSED);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        state.flags = APP_S4_FLAG_CF | APP_S4_FLAG_IF | 0x0002u;
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BRIDGE_REFUSED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.eax == 0xa5a50000u && state.ip == 3u);
-        assert(state.flags == (NTDOS64_S4_FLAG_CF | NTDOS64_S4_FLAG_IF | 0x0002u));
+        assert(state.flags == (APP_S4_FLAG_CF | APP_S4_FLAG_IF | 0x0002u));
     }
 
-    assert(ntdos64_s4_monitor_initialize(&monitor, ram, sizeof(ram), refused_bridge, &observation) ==
-        NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_NO_STOP_EVENT);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_initialize(&monitor, ram, sizeof(ram), refused_bridge, &observation) ==
+        APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_NO_STOP_EVENT);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 1u && state.flags == 0x0002u);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BRIDGE_REFUSED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BRIDGE_REFUSED);
     assert(observation.calls == 1u && observation.selector == 0x27u && observation.next_byte == 0xaau);
     assert(observation.physical_fetch == 1u && observation.physical_next == 3u);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 3u);
-    assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(stop.reason == NTDOS64_S4_BRIDGE_REFUSED);
-    assert(stop.bridge_disposition == NTDOS64_S4_BRIDGE_DISPOSITION_REFUSED);
+    assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+    assert(stop.reason == APP_S4_BRIDGE_REFUSED);
+    assert(stop.bridge_disposition == APP_S4_BRIDGE_DISPOSITION_REFUSED);
     assert(stop.cs == 0u && stop.ip == 1u && stop.physical_fetch_valid == 1u);
     assert(stop.physical_fetch == 1u && stop.opcode_bytes == 3u);
     assert(stop.opcode_window[0] == 0xd6u && stop.opcode_window[1] == 0x27u &&
         stop.opcode_window[2] == 0xaau);
 
-    assert(ntdos64_s4_monitor_initialize(&monitor, exit_ram, sizeof(exit_ram), NULL, NULL) ==
-        NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BOP_EXIT);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_initialize(&monitor, exit_ram, sizeof(exit_ram), NULL, NULL) ==
+        APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BOP_EXIT);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 3u);
-    assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(stop.reason == NTDOS64_S4_BOP_EXIT);
-    assert(stop.bridge_disposition == NTDOS64_S4_BRIDGE_DISPOSITION_NOT_ATTEMPTED);
+    assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+    assert(stop.reason == APP_S4_BOP_EXIT);
+    assert(stop.bridge_disposition == APP_S4_BRIDGE_DISPOSITION_NOT_ATTEMPTED);
     assert(stop.cs == 0u && stop.ip == 0u && stop.physical_fetch == 0u);
     assert(stop.opcode_bytes == 3u && stop.opcode_window[0] == 0xc4u &&
         stop.opcode_window[1] == 0xc4u && stop.opcode_window[2] == 0xfeu);
 
-    assert(ntdos64_s4_monitor_initialize(&monitor, fast_bop_ram, sizeof(fast_bop_ram), NULL, NULL) ==
-        NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_UNSUPPORTED_BOP);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_initialize(&monitor, fast_bop_ram, sizeof(fast_bop_ram), NULL, NULL) ==
+        APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_UNSUPPORTED_BOP);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 4u);
-    assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(stop.reason == NTDOS64_S4_UNSUPPORTED_BOP && stop.opcode_bytes == 4u);
+    assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+    assert(stop.reason == APP_S4_UNSUPPORTED_BOP && stop.opcode_bytes == 4u);
 
-    assert(ntdos64_s4_monitor_initialize(&monitor, unknown_ram, sizeof(unknown_ram), NULL, NULL) ==
-        NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_UNKNOWN_OPCODE);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_initialize(&monitor, unknown_ram, sizeof(unknown_ram), NULL, NULL) ==
+        APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_UNKNOWN_OPCODE);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0u);
-    assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(stop.reason == NTDOS64_S4_UNKNOWN_OPCODE && stop.opcode_bytes == 1u);
+    assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+    assert(stop.reason == APP_S4_UNKNOWN_OPCODE && stop.opcode_bytes == 1u);
 
-    assert(ntdos64_s4_monitor_initialize(&monitor, xor_ram, sizeof(xor_ram), NULL, NULL) ==
-        NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_initialize(&monitor, xor_ram, sizeof(xor_ram), NULL, NULL) ==
+        APP_S4_BUDGET_EXHAUSTED);
     state.eax = 0xa5a51234u;
     state.ebx = state.ecx = state.edx = state.esi = state.edi = state.ebp = state.esp = 0u;
     state.cs = state.ds = state.es = state.ss = state.ip = 0u;
-    state.flags = (uint16_t)(0x0002u | NTDOS64_S4_FLAG_IF);
-    assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    state.flags = (uint16_t)(0x0002u | APP_S4_FLAG_IF);
+    assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 2u && state.eax == 0xa5a50000u);
-    assert((state.flags & NTDOS64_S4_FLAG_ZF) != 0u);
+    assert((state.flags & APP_S4_FLAG_ZF) != 0u);
 
     memcpy(ntio_prefix_ram + 0x700u, ntio_entry_bytes, sizeof(ntio_entry_bytes));
     memcpy(ntio_prefix_ram + 0xa70u, ntio_init_prefix_bytes, sizeof(ntio_init_prefix_bytes));
@@ -224,8 +224,8 @@ int main(void)
     ntio_prefix_ram[0x66u] = 0xc9u; ntio_prefix_ram[0x67u] = 0xf9u;
     ntio_prefix_ram[0x6cu] = 0xadu; ntio_prefix_ram[0x6du] = 0x1bu;
     ntio_prefix_ram[0x6eu] = 0xddu; ntio_prefix_ram[0x6fu] = 0xfbu;
-    assert(ntdos64_s4_monitor_initialize(&monitor, ntio_prefix_ram, sizeof(ntio_prefix_ram), NULL, NULL) ==
-        NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_initialize(&monitor, ntio_prefix_ram, sizeof(ntio_prefix_ram), NULL, NULL) ==
+        APP_S4_BUDGET_EXHAUSTED);
     state.eax = 0xbeef1234u;
     state.ebx = state.ecx = state.edx = state.esi = state.edi = state.ebp = 0u;
     state.esp = 0x00000080u;
@@ -234,42 +234,42 @@ int main(void)
     state.es = 0x5678u;
     state.ss = 0u;
     state.ip = 0u;
-    state.flags = (uint16_t)(0x0002u | NTDOS64_S4_FLAG_IF);
-    assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 6u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    state.flags = (uint16_t)(0x0002u | APP_S4_FLAG_IF);
+    assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 6u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x0378u && state.ds == 0x0040u && state.es == 0x5678u && state.cs == 0x0070u);
     assert(state.esp == 0x0000007cu && state.eax == 0xbeef0240u);
-    assert((state.flags & NTDOS64_S4_FLAG_IF) != 0u);
-    assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_NO_STOP_EVENT);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(state.ip == 0x037eu && (state.flags & NTDOS64_S4_FLAG_ZF) != 0u);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert((state.flags & APP_S4_FLAG_IF) != 0u);
+    assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_NO_STOP_EVENT);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+    assert(state.ip == 0x037eu && (state.flags & APP_S4_FLAG_ZF) != 0u);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x0380u);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
     assert(ntio_prefix_ram[0x714u] == 0u && ntio_prefix_ram[0x715u] == 0u);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x039bu && state.eax == 0xbeef0000u && state.ecx == 4u && state.esi == 0xeau);
     assert(state.ds == 0u && state.es == 0x0070u && state.esp == 0x00000080u);
-    assert((state.flags & (NTDOS64_S4_FLAG_IF | NTDOS64_S4_FLAG_ZF)) ==
-        (NTDOS64_S4_FLAG_IF | NTDOS64_S4_FLAG_ZF));
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert((state.flags & (APP_S4_FLAG_IF | APP_S4_FLAG_ZF)) ==
+        (APP_S4_FLAG_IF | APP_S4_FLAG_ZF));
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x039du && state.eax == 0xbeef0010u && state.esi == 0x00ebu);
-    assert(ntdos64_s4_monitor_run(&monitor, 47u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 47u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x03aeu && state.ecx == 0u && state.esi == 0x00feu && state.edi == 0x0070u);
     assert(ntio_prefix_ram[0x7ebu] == 0xa0u && ntio_prefix_ram[0x7ecu] == 0x10u &&
         ntio_prefix_ram[0x7edu] == 0xc0u && ntio_prefix_ram[0x7eeu] == 0xf0u);
@@ -279,33 +279,33 @@ int main(void)
         ntio_prefix_ram[0x7f7u] == 0xc9u && ntio_prefix_ram[0x7f8u] == 0xf9u);
     assert(ntio_prefix_ram[0x7fau] == 0xadu && ntio_prefix_ram[0x7fbu] == 0x1bu &&
         ntio_prefix_ram[0x7fcu] == 0xddu && ntio_prefix_ram[0x7fdu] == 0xfbu);
-    assert(ntdos64_s4_monitor_run(&monitor, 7u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 7u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x03c9u && state.edx == 0u && state.ss == 0u && state.esp == 0x00000700u);
     assert(ntio_prefix_ram[0x54u] == 0xedu && ntio_prefix_ram[0x55u] == 0x02u &&
         ntio_prefix_ram[0x56u] == 0x70u && ntio_prefix_ram[0x57u] == 0u);
     assert(ntio_prefix_ram[0x64u] == 0xa8u && ntio_prefix_ram[0x65u] == 0x02u &&
         ntio_prefix_ram[0x66u] == 0x70u && ntio_prefix_ram[0x67u] == 0u);
-    assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_NO_STOP_EVENT);
-    assert(ntdos64_s4_monitor_run(&monitor, 14u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_NO_STOP_EVENT);
+    assert(app_s4_monitor_run(&monitor, 14u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x03f0u && state.ds == 0u && state.esp == 0x00000700u &&
         state.eax == 0xbeeffbddu);
     assert(ntio_prefix_ram[0x714u] == 0u && ntio_prefix_ram[0x715u] == 0x02u);
-    assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x03f2u && state.edx == 0u);
-    assert(ntdos64_s4_monitor_run(&monitor, 52u) == NTDOS64_S4_BRIDGE_REFUSED);
-    assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+    assert(app_s4_monitor_run(&monitor, 52u) == APP_S4_BRIDGE_REFUSED);
+    assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
     assert(state.ip == 0x0478u && state.ds == 0x0070u && state.es == 0x0070u &&
         state.edi == 0x08b0u && state.eax == 0xbeef0070u);
     assert(ntio_prefix_ram[0x6cu] == 0x85u && ntio_prefix_ram[0x6du] == 0x01u &&
         ntio_prefix_ram[0x6eu] == 0x70u && ntio_prefix_ram[0x6fu] == 0u);
     assert(ntio_prefix_ram[0xa4u] == 0x54u && ntio_prefix_ram[0xa5u] == 0x02u &&
         ntio_prefix_ram[0xa6u] == 0x70u && ntio_prefix_ram[0xa7u] == 0u);
-    assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-    assert(stop.reason == NTDOS64_S4_BRIDGE_REFUSED && stop.bridge_disposition ==
-        NTDOS64_S4_BRIDGE_DISPOSITION_REFUSED);
+    assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+    assert(stop.reason == APP_S4_BRIDGE_REFUSED && stop.bridge_disposition ==
+        APP_S4_BRIDGE_DISPOSITION_REFUSED);
     assert(stop.cs == 0x0070u && stop.ip == 0x0475u && stop.physical_fetch == 0x0b75u);
     assert(stop.opcode_bytes == 4u && stop.opcode_window[0] == 0xc4u &&
         stop.opcode_window[1] == 0xc4u && stop.opcode_window[2] == 0x50u &&
@@ -337,8 +337,8 @@ int main(void)
         }
         dosinit_ram[0x14021u] = 0x4du;
 
-        assert(ntdos64_s4_monitor_initialize(&monitor, dosinit_ram, sizeof(dosinit_ram),
-            refused_bridge, &dosinit_observation) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_initialize(&monitor, dosinit_ram, sizeof(dosinit_ram),
+            refused_bridge, &dosinit_observation) == APP_S4_BUDGET_EXHAUSTED);
         state.eax = 0xa5a50000u;
         state.ebx = state.ecx = 0u;
         state.edx = 0x0280u;
@@ -351,25 +351,25 @@ int main(void)
         state.es = 0x1400u;
         state.ss = 0x1500u;
         state.ip = 0u;
-        state.flags = (uint16_t)(0x0002u | NTDOS64_S4_FLAG_DF);
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 31u) == NTDOS64_S4_BRIDGE_REFUSED);
+        state.flags = (uint16_t)(0x0002u | APP_S4_FLAG_DF);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 31u) == APP_S4_BRIDGE_REFUSED);
         assert(dosinit_observation.calls == 1u && dosinit_observation.selector == 0x50u &&
             dosinit_observation.next_byte == 0x0fu);
         assert(dosinit_observation.physical_fetch == 0x10000u + sizeof(dosinit_prefix) - 4u &&
             dosinit_observation.physical_next == 0x10000u + sizeof(dosinit_prefix) - 1u);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.cs == 0x1000u && state.ds == 0x1200u && state.es == 0x1300u &&
             state.ss == 0x1500u && state.ip == sizeof(dosinit_prefix) - 1u);
         assert(state.edx == 0x0280u && state.esi == 0x0010u && state.edi == 0x0020u &&
             state.esp == 0x0100u && (uint16_t)state.ecx == 0u);
-        assert((state.flags & NTDOS64_S4_FLAG_DF) == 0u);
+        assert((state.flags & APP_S4_FLAG_DF) == 0u);
         assert(dosinit_ram[0x13480u] == 0x4du);
         assert(memcmp(dosinit_ram + 0x12000u, dosinit_ram + 0x17940u, 0x1480u) == 0);
         assert(memcmp(dosinit_ram + 0x13481u, dosinit_ram + 0x18dc1u, 0x15e2u - 0x1481u) == 0);
-        assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(stop.reason == NTDOS64_S4_BRIDGE_REFUSED && stop.bridge_disposition ==
-            NTDOS64_S4_BRIDGE_DISPOSITION_REFUSED);
+        assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+        assert(stop.reason == APP_S4_BRIDGE_REFUSED && stop.bridge_disposition ==
+            APP_S4_BRIDGE_DISPOSITION_REFUSED);
         assert(stop.cs == 0x1000u && stop.ip == sizeof(dosinit_prefix) - 4u &&
             stop.physical_fetch == 0x10000u + sizeof(dosinit_prefix) - 4u);
         assert(stop.opcode_bytes == 4u && stop.opcode_window[0] == 0xc4u &&
@@ -394,9 +394,9 @@ int main(void)
         memcpy(dosinit_after_drives + 0x10000u, prefix, sizeof(prefix));
         memcpy(dosinit_after_drives + 0x10000u + sizeof(prefix) + 0x2eu, normal_path,
             sizeof(normal_path));
-        assert(ntdos64_s4_monitor_initialize(&monitor, dosinit_after_drives,
+        assert(app_s4_monitor_initialize(&monitor, dosinit_after_drives,
             sizeof(dosinit_after_drives), refused_bridge, &after_drives_observation) ==
-            NTDOS64_S4_BUDGET_EXHAUSTED);
+            APP_S4_BUDGET_EXHAUSTED);
         state.eax = 0xa5a50005u; /* AL is the original demGetDrives result. */
         state.ebx = 0u;
         state.ecx = 0x00001234u;
@@ -406,13 +406,13 @@ int main(void)
         state.esp = 0x00000100u;
         state.cs = 0x1000u;
         state.ds = state.es = state.ss = state.ip = 0u;
-        state.flags = (uint16_t)(0x0002u | NTDOS64_S4_FLAG_IF);
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 11u) == NTDOS64_S4_BRIDGE_REFUSED);
+        state.flags = (uint16_t)(0x0002u | APP_S4_FLAG_IF);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 11u) == APP_S4_BRIDGE_REFUSED);
         assert(after_drives_observation.calls == 1u &&
             after_drives_observation.selector == 0x50u &&
             after_drives_observation.next_byte == 0x1bu);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.ip == (uint16_t)(sizeof(prefix) + 0x2eu + sizeof(normal_path) - 1u));
         assert((uint16_t)state.eax == 0x032eu);
         assert((uint16_t)state.edx == 0x0332u);
@@ -420,9 +420,9 @@ int main(void)
         assert((uint16_t)state.esi == 0x1482u);
         assert((uint16_t)state.esp == 0x00fau);
         assert(dosinit_after_drives[0x0046u] == 5u &&
-            (state.flags & NTDOS64_S4_FLAG_ZF) != 0u);
-        assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(stop.reason == NTDOS64_S4_BRIDGE_REFUSED && stop.cs == 0x1000u &&
+            (state.flags & APP_S4_FLAG_ZF) != 0u);
+        assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+        assert(stop.reason == APP_S4_BRIDGE_REFUSED && stop.cs == 0x1000u &&
             stop.ip == (uint16_t)(sizeof(prefix) + 0x2eu + sizeof(normal_path) - 4u));
     }
 
@@ -438,8 +438,8 @@ int main(void)
         memcpy(after_dta_ram + 0x10000u, after_dta, sizeof(after_dta));
         after_dta_ram[0x00fau] = 0xbcu;
         after_dta_ram[0x00fbu] = 0x9au;
-        assert(ntdos64_s4_monitor_initialize(&monitor, after_dta_ram, sizeof(after_dta_ram),
-            refused_bridge, &after_dta_observation) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_initialize(&monitor, after_dta_ram, sizeof(after_dta_ram),
+            refused_bridge, &after_dta_observation) == APP_S4_BUDGET_EXHAUSTED);
         state.eax = 0xa5a5032eu;
         state.ebx = 0xface4567u;
         state.ecx = 0xbeef0325u;
@@ -449,18 +449,18 @@ int main(void)
         state.esp = 0x000000fau;
         state.cs = 0x1000u;
         state.ds = state.es = state.ss = state.ip = 0u;
-        state.flags = (uint16_t)(0x0002u | NTDOS64_S4_FLAG_IF | NTDOS64_S4_FLAG_ZF);
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 5u) == NTDOS64_S4_BRIDGE_REFUSED);
+        state.flags = (uint16_t)(0x0002u | APP_S4_FLAG_IF | APP_S4_FLAG_ZF);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 5u) == APP_S4_BRIDGE_REFUSED);
         assert(after_dta_observation.calls == 1u && after_dta_observation.selector == 0x50u &&
             after_dta_observation.next_byte == 0x32u);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.ip == sizeof(after_dta) - 1u && (uint16_t)state.esi == 0x9abcu &&
             (uint16_t)state.edx == 0x12f9u && (uint16_t)state.ebx == 0x0048u &&
             (uint16_t)state.esp == 0x00fau);
         assert(after_dta_ram[0x00fau] == 0x67u && after_dta_ram[0x00fbu] == 0x45u);
-        assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(stop.reason == NTDOS64_S4_BRIDGE_REFUSED && stop.cs == 0x1000u && stop.ip == 8u &&
+        assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+        assert(stop.reason == APP_S4_BRIDGE_REFUSED && stop.cs == 0x1000u && stop.ip == 8u &&
             stop.opcode_bytes == 4u && stop.opcode_window[0] == 0xc4u &&
             stop.opcode_window[1] == 0xc4u && stop.opcode_window[2] == 0x50u &&
             stop.opcode_window[3] == 0x32u);
@@ -476,9 +476,9 @@ int main(void)
         refused_bridge_observation after_hard_error_observation = {0};
 
         memcpy(after_hard_error_ram + 0x10000u, after_hard_error, sizeof(after_hard_error));
-        assert(ntdos64_s4_monitor_initialize(&monitor, after_hard_error_ram,
+        assert(app_s4_monitor_initialize(&monitor, after_hard_error_ram,
             sizeof(after_hard_error_ram), refused_bridge, &after_hard_error_observation) ==
-            NTDOS64_S4_BUDGET_EXHAUSTED);
+            APP_S4_BUDGET_EXHAUSTED);
         state.eax = 0xa5a5032eu;
         state.ebx = 0xface0048u;
         state.ecx = 0xbeef0325u;
@@ -487,17 +487,17 @@ int main(void)
         state.edi = state.ebp = state.esp = 0u;
         state.cs = 0x1000u;
         state.ds = state.es = state.ss = state.ip = 0u;
-        state.flags = (uint16_t)(0x0002u | NTDOS64_S4_FLAG_IF);
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 4u) == NTDOS64_S4_BRIDGE_REFUSED);
+        state.flags = (uint16_t)(0x0002u | APP_S4_FLAG_IF);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 4u) == APP_S4_BRIDGE_REFUSED);
         assert(after_hard_error_observation.calls == 1u &&
             after_hard_error_observation.selector == 0x54u &&
             after_hard_error_observation.next_byte == 0x05u);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.ip == sizeof(after_hard_error) - 1u && (uint16_t)state.edx == 0x12fcu &&
             (uint16_t)state.ebx == 0x13ccu && (uint16_t)state.ecx == 0x13d0u);
-        assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(stop.reason == NTDOS64_S4_BRIDGE_REFUSED && stop.cs == 0x1000u && stop.ip == 9u &&
+        assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_BUDGET_EXHAUSTED);
+        assert(stop.reason == APP_S4_BRIDGE_REFUSED && stop.cs == 0x1000u && stop.ip == 9u &&
             stop.opcode_bytes == 4u && stop.opcode_window[0] == 0xc4u &&
             stop.opcode_window[1] == 0xc4u && stop.opcode_window[2] == 0x54u &&
             stop.opcode_window[3] == 0x05u);
@@ -510,15 +510,15 @@ int main(void)
         far_call_ram[0x11u] = 0u;
         far_call_ram[0x12u] = 0u;
         far_call_ram[0x13u] = 0u;
-        assert(ntdos64_s4_monitor_initialize(&monitor, far_call_ram, sizeof(far_call_ram), NULL, NULL) ==
-            NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_initialize(&monitor, far_call_ram, sizeof(far_call_ram), NULL, NULL) ==
+            APP_S4_BUDGET_EXHAUSTED);
         memset(&state, 0, sizeof(state));
         state.ss = 0u;
         state.esp = 0x20u;
         state.flags = 0x0002u;
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 2u) == NTDOS64_S4_BOP_EXIT);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 2u) == APP_S4_BOP_EXIT);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.cs == 0u && state.ip == 7u && (uint16_t)state.esp == 0x1cu);
         assert(far_call_ram[0x1cu] == 4u && far_call_ram[0x1du] == 0u &&
             far_call_ram[0x1eu] == 0u && far_call_ram[0x1fu] == 0u);
@@ -528,17 +528,17 @@ int main(void)
         uint8_t far_call_fault_ram[32] = {0xffu, 0x1eu, 0x10u, 0x00u, 0x90u};
 
         far_call_fault_ram[0x10u] = 4u;
-        assert(ntdos64_s4_monitor_initialize(&monitor, far_call_fault_ram,
-            sizeof(far_call_fault_ram), NULL, NULL) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_initialize(&monitor, far_call_fault_ram,
+            sizeof(far_call_fault_ram), NULL, NULL) == APP_S4_BUDGET_EXHAUSTED);
         memset(&state, 0, sizeof(state));
         state.ss = 0u;
         state.esp = 2u;
         state.cs = 0u;
         state.ip = 0u;
         state.flags = 0x0002u;
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_MEMORY_FAULT);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_MEMORY_FAULT);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.cs == 0u && state.ip == 0u && (uint16_t)state.esp == 2u);
     }
 
@@ -546,32 +546,32 @@ int main(void)
         uint8_t retf_ram[] = {0xcbu, 0x90u, 0x90u, 0xc4u, 0xc4u, 0xfeu,
             0u, 0u, 3u, 0u, 0u, 0u};
 
-        assert(ntdos64_s4_monitor_initialize(&monitor, retf_ram, sizeof(retf_ram), NULL, NULL) ==
-            NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_initialize(&monitor, retf_ram, sizeof(retf_ram), NULL, NULL) ==
+            APP_S4_BUDGET_EXHAUSTED);
         memset(&state, 0, sizeof(state));
         state.ss = 0u;
         state.esp = 8u;
         state.flags = 0x0002u;
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 2u) == NTDOS64_S4_BOP_EXIT);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 2u) == APP_S4_BOP_EXIT);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.cs == 0u && state.ip == 6u && (uint16_t)state.esp == 12u);
     }
 
     {
         uint8_t retf_fault_ram[] = {0xcbu, 0x90u, 0x90u};
 
-        assert(ntdos64_s4_monitor_initialize(&monitor, retf_fault_ram, sizeof(retf_fault_ram), NULL, NULL) ==
-            NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_initialize(&monitor, retf_fault_ram, sizeof(retf_fault_ram), NULL, NULL) ==
+            APP_S4_BUDGET_EXHAUSTED);
         memset(&state, 0, sizeof(state));
         state.ss = 0u;
         state.esp = 2u;
         state.cs = 0u;
         state.ip = 0u;
         state.flags = 0x0002u;
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 1u) == NTDOS64_S4_MEMORY_FAULT);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 1u) == APP_S4_MEMORY_FAULT);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.cs == 0u && state.ip == 0u && (uint16_t)state.esp == 2u);
     }
 
@@ -598,8 +598,8 @@ int main(void)
 
         memcpy(after_cmdsetinfo_ram + 0x10000u, after_cmdsetinfo, sizeof(after_cmdsetinfo));
         after_cmdsetinfo_ram[0x10000u + charinit_ip] = 0x90u;
-        assert(ntdos64_s4_monitor_initialize(&monitor, after_cmdsetinfo_ram,
-            sizeof(after_cmdsetinfo_ram), NULL, NULL) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_initialize(&monitor, after_cmdsetinfo_ram,
+            sizeof(after_cmdsetinfo_ram), NULL, NULL) == APP_S4_BUDGET_EXHAUSTED);
         memset(&state, 0, sizeof(state));
         state.cs = 0x1000u;
         state.es = 0x0200u;
@@ -607,22 +607,22 @@ int main(void)
         state.esp = 0x0100u;
         state.esi = 0x2222u;
         state.edi = 0x1357u;
-        state.flags = (uint16_t)(0x0002u | NTDOS64_S4_FLAG_IF);
+        state.flags = (uint16_t)(0x0002u | APP_S4_FLAG_IF);
         after_cmdsetinfo_ram[0x0100u] = 0x56u;
         after_cmdsetinfo_ram[0x0101u] = 0x34u;
         after_cmdsetinfo_ram[0x0102u] = 0x67u;
         after_cmdsetinfo_ram[0x0103u] = 0x45u;
         after_cmdsetinfo_ram[0x0104u] = 0x78u;
         after_cmdsetinfo_ram[0x0105u] = 0x56u;
-        assert(ntdos64_s4_monitor_set_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_run(&monitor, 76u) == NTDOS64_S4_BUDGET_EXHAUSTED);
-        assert(ntdos64_s4_monitor_get_state(&monitor, &state) == NTDOS64_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_set_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_run(&monitor, 76u) == APP_S4_BUDGET_EXHAUSTED);
+        assert(app_s4_monitor_get_state(&monitor, &state) == APP_S4_BUDGET_EXHAUSTED);
         assert(state.ip == charinit_ip && state.ss == 0u && (uint16_t)state.esp == 0x0920u &&
             after_cmdsetinfo_ram[0x0920u] == (uint8_t)sizeof(after_cmdsetinfo) &&
             after_cmdsetinfo_ram[0x0921u] == (uint8_t)(sizeof(after_cmdsetinfo) >> 8));
         assert(after_cmdsetinfo_ram[0x101eu] == 0x57u && after_cmdsetinfo_ram[0x101fu] == 0x13u &&
             after_cmdsetinfo_ram[0x1020u] == 0x56u && after_cmdsetinfo_ram[0x1021u] == 0x34u);
-        assert(ntdos64_s4_monitor_get_last_stop(&monitor, &stop) == NTDOS64_S4_NO_STOP_EVENT);
+        assert(app_s4_monitor_get_last_stop(&monitor, &stop) == APP_S4_NO_STOP_EVENT);
     }
     return 0;
 }

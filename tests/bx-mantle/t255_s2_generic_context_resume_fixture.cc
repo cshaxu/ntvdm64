@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "bx-core/cpu/cpu.h"
+#include "bochs-core/cpu/cpu.h"
 #include "adapter-softpc/a20_capability.h"
 #include "adapter-bop/generic_ud_bridge.h"
 #include "adapter-softpc/machine_stage.h"

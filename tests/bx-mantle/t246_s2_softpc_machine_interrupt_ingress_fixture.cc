@@ -3,7 +3,7 @@
 #include "adapter-softpc/port_action.h"
 #include "adapter-bop/generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
-#include "bx-mantle/minimal_machine.h"
+#include "adapter-bochs/minimal_machine.h"
 
 static void initialize_event(struct runtime_generic_ud_event_v1 *event,
     uint8_t selector)

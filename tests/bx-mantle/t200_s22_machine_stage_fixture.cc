@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "bx-core/memory/memory.h"
+#include "bochs-core/memory/memory.h"
 #include "adapter-softpc/machine_stage.h"
 
 #include <string.h>

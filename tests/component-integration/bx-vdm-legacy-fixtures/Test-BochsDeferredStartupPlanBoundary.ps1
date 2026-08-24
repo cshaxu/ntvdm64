@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $repository = Split-Path -Parent (Split-Path $PSScriptRoot)
 $main = Get-Content (Join-Path $repository 'refs\bochs\main.cc') -Raw
-$exception = Get-Content (Join-Path $repository 'src\bx-core\cpu\exception.cc') -Raw
+$exception = Get-Content (Join-Path $repository 'src\bochs-core\cpu\exception.cc') -Raw
 
 $default = '#ifndef BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN' + "`n" +
     '#define BX_NTVDM_ENABLE_DEFERRED_STARTUP_PLAN 0' + "`n" + '#endif'

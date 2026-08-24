@@ -34,7 +34,7 @@ int wmain(int argc, wchar_t **argv)
 
     if (argc != 2) return 2;
     aperture_bytes = wcsstr(argv[1], L"sas") != NULL ?
-        2u * 1024u * 1024u : NTDOS64_SHARED_APERTURE_V1_MINIMUM_BYTES;
+        2u * 1024u * 1024u : APP_SHARED_APERTURE_V1_MINIMUM_BYTES;
     if (swprintf(mapping_name, sizeof(mapping_name) / sizeof(mapping_name[0]),
         L"Local\\ntdos64-s4-aperture-%lu-%lu", (unsigned long)GetCurrentProcessId(),
         (unsigned long)GetTickCount()) < 0) return 3;
@@ -44,13 +44,13 @@ int wmain(int argc, wchar_t **argv)
     view = MapViewOfFile(mapping, FILE_MAP_READ | FILE_MAP_WRITE, 0u, 0u, aperture_bytes);
     if (view == NULL) goto cleanup;
 
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_MAGIC,
-        NTDOS64_SHARED_APERTURE_V1_MAGIC);
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_VERSION,
-        NTDOS64_SHARED_APERTURE_V1_VERSION);
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_BYTES, aperture_bytes);
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HOST_READY, 1u);
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HOST_PROBE, 0x13579bdfu);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_MAGIC,
+        APP_SHARED_APERTURE_V1_MAGIC);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_VERSION,
+        APP_SHARED_APERTURE_V1_VERSION);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_BYTES, aperture_bytes);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_HOST_READY, 1u);
+    write_u32(view, APP_SHARED_APERTURE_V1_OFFSET_HOST_PROBE, 0x13579bdfu);
 
     if (swprintf(command_line, sizeof(command_line) / sizeof(command_line[0]),
         L"\"%ls\" \"%ls\" %lu", argv[1], mapping_name, (unsigned long)aperture_bytes) < 0) {
@@ -66,14 +66,14 @@ int wmain(int argc, wchar_t **argv)
         !GetExitCodeProcess(helper, &exit_code) || exit_code != 0u) {
         goto cleanup;
     }
-    if (read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HOST_PROBE) != 0x13579bdfu) {
+    if (read_u32(view, APP_SHARED_APERTURE_V1_OFFSET_HOST_PROBE) != 0x13579bdfu) {
         goto cleanup;
     }
     if (wcsstr(argv[1], L"sas") != NULL) {
-        if (read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_SAS_READY) != 1u ||
-            view[NTDOS64_SHARED_APERTURE_V1_OFFSET_SAS_PROBE] != 0x5au) goto cleanup;
-    } else if (read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HELPER_READY) != 1u ||
-        read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HELPER_PROBE) != 0x2468ace0u) {
+        if (read_u32(view, APP_SHARED_APERTURE_V1_OFFSET_SAS_READY) != 1u ||
+            view[APP_SHARED_APERTURE_V1_OFFSET_SAS_PROBE] != 0x5au) goto cleanup;
+    } else if (read_u32(view, APP_SHARED_APERTURE_V1_OFFSET_HELPER_READY) != 1u ||
+        read_u32(view, APP_SHARED_APERTURE_V1_OFFSET_HELPER_PROBE) != 0x2468ace0u) {
         goto cleanup;
     }
     result = 0;

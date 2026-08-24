@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "bx-mantle/minimal_machine.h"
+#include "adapter-bochs/minimal_machine.h"
 #include "adapter-softpc/mechanical_action.h"
 #include "adapter-bop/generic_ud_bridge.h"
 extern "C" int runtime_mantle_generic_ud_bridge_v1(const struct runtime_generic_ud_event_v1 *, struct runtime_generic_ud_outcome_v1 *) { return 0; }

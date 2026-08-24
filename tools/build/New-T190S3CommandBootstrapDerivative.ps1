@@ -20,7 +20,7 @@ if ((Hash $baseEngine) -ne 'A008832FBE0E6094A1F91D196E14ED9527BDAAE99FDE1042EC50
 & robocopy $base $build /E /COPY:DAT /DCOPY:DAT /R:1 /W:1 /XJ /NFL /NDL /NJH /NJS | Out-Null
 if ($LASTEXITCODE -gt 7) { throw "Base copy failed: $LASTEXITCODE" }
 
-$exceptionHash = Copy-Verified (Join-Path $repository 'src\bx-core\cpu\exception.cc') (Join-Path $build 'cpu\exception.cc')
+$exceptionHash = Copy-Verified (Join-Path $repository 'src\bochs-core\cpu\exception.cc') (Join-Path $build 'cpu\exception.cc')
 $runtimeHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_adapter_runtime.c') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.c')
 $runtimeHeaderHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_adapter_runtime.h') (Join-Path $build 'adapter\bx_ntvdm_adapter_runtime.h')
 $comspecHash = Copy-Verified (Join-Path $repository 'src\bx-vdm\bx_ntvdm_cmd_comspec_bootstrap_service.c') (Join-Path $build 'adapter\bx_ntvdm_cmd_comspec_bootstrap_service.c')

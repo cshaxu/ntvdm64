@@ -5,7 +5,7 @@
  * Public copied-data contract between the CLI-owned native-engine executable
  * and the bx-vdm composition entry.  This header intentionally depends only
  * on fixed-width C types: it exposes no Bochs object, guest locator, provider
- * identity, host handle, or retained caller pointer.  bx-mantle accepts only
+ * identity, host handle, or retained caller pointer.  adapter-bochs accepts only
  * already-assembled selector-blind machine-stage records from that entry.
  */
 

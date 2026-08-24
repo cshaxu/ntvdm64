@@ -2,10 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T265 S1 — Bochs component identity and dependency governance.**
-Owner admitted the queue-leading Bochs component identity and mirror-overlay
-convergence package. S1 changes authorities and task records only; it does not
-move or modify production source.
+**Active: M0 T265 S2 — Bochs production-root rename.** S1 governance closed
+in `ff2d0d70`; S2 performs only the approved `git mv` root rename and exact
+consumer/build-reference repair, without behavior expansion.
 
 ## Active Packet
 
@@ -28,6 +27,37 @@ move or modify production source.
 | Exit Criteria | All listed authorities and proposal agree on final names/directions; queue no longer contains the admitted candidate; no source move exists in the S1 diff. |
 | Original Owner Request | “新增队列最优先T任务，包含以下S任务：S1. 治理文档：组件改名：bx-mantle => adapter-bochs，… bx-core => bochs-core，… `*-overlay` 组件仅允许被它的原生镜像组件调用。” |
 | Similar-Issue Sweep | Old component names in authorities, direct core consumers, overlay reachability, and accidental OpenNT/Win32 vocabulary in the assembly component. |
+
+**S1 closure:** `ff2d0d70` establishes the target names, direct dependency
+directions and overlay privacy rule across all current authorities. The S1
+diff contains no production source or build input.
+
+### M0 T265 S2 — Bochs production-root rename
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T265 S2`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T265 proposal S2 after completed S1 governance closure. |
+| Objective | Rename `src/bx-core` to `src/bochs-core` and `src/bx-mantle` to `src/adapter-bochs` with `git mv`, then make every live production/build/document consumer resolve the new roots. |
+| Non-goals | No source-body/ABI/behavior change, no test-history mass rename, no component reassignment beyond the two roots, and no overlay implementation. |
+| Reference Baseline | T265/S1 authority `ff2d0d70`, formal Ninja manifest, root ownership scan and current exact Git paths. |
+| Files And ABI Surface | Both source roots, direct include/build/manifests, focused fixture paths and authority references; pathname/build graph only, no runtime ABI. |
+| Applicable Rules | T265 proposal, `git mv`, component ownership and dependency direction, source identity, production-only roots, and build hygiene. |
+| Verification | Pre/post live-reference inventory, no old production-root input, regenerated formal Ninja graph, exact target build/no-work, governance and `git diff --check`. |
+| Expected Markers | No live source/build input below `src/bx-core` or `src/bx-mantle`; all formal component/module names and include paths resolve the renamed roots. |
+| Asset Needs | Current formal manifest, generator, focused fixture set and existing Bochs provenance register. |
+| Reporting Requirements | Report moved-path counts, every retained historical/test old-name exclusion, build graph repair, and whether any root content changes were required. |
+| Stop Conditions | A move would alter imported content, produce a destination collision, expose an unclassified reverse dependency, or require behavior change. |
+| Exit Criteria | Both roots are Git renames, source/build consumers are repaired, source identity unchanged, stated formal closure passes, and no prohibited old production path remains. |
+| Original Owner Request | “S2. 实施这两个bx组件的重命名工作”. |
+| Similar-Issue Sweep | Formal manifest module names, include roots, generator checks, fixture sources, README/doc links, and stale root-path string literals. |
+
+**S2 closure:** Both production roots are recorded by Git as renames.  Live
+source, formal build inputs and support-header references use
+`bochs-core`/`adapter-bochs`; the historical fixture directory names are not
+production roots.  Fresh `build/M0-T265-S2/r001` completed its final 471-step Ninja
+closure with exit `0` and 81 linked executables.  See
+[S2 evidence](etc/evidence/m0-t265-s2-bochs-production-root-rename-001.md).
 
 ### M0 T264 S1 — project code filename inventory
 

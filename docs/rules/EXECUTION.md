@@ -215,7 +215,7 @@ or CRT graph.
 
 | Island | Required toolchain | Permitted responsibility |
 | --- | --- | --- |
-| app, adapter-softpc, bx-mantle, bx-core and in-process modern fixtures | MSVC x64 with `/MT` | One modern runtime ABI/CRT: CLI, diagnostics, typed bridge code, provider composition and minimal guest-machine backend. |
+| app, adapter-softpc, adapter-bochs, bochs-core and in-process modern fixtures | MSVC x64 with `/MT` | One modern runtime ABI/CRT: CLI, diagnostics, typed bridge code, provider composition and minimal guest-machine backend. |
 | PowerShell tools and retained cross-toolchain evidence | Their recorded host/toolchain | Inspection, historical evidence and non-runtime probes only; they never supply an object to the MSVC x64 process. |
 | OpenNT historical guest/service source and narrow overlays | Matching historical Microsoft toolchain or explicitly evidenced compatible island | Original guest/service ownership; never a direct dependency of the modern runner graph. |
 

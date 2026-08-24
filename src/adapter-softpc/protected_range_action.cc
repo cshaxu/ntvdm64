@@ -1,7 +1,7 @@
 #include "bochs.h"
-#include "bx-core/cpu/cpu.h"
-#include "bx-core/memory/memory.h"
-#include "bx-mantle/pc_system.h"
+#include "bochs-core/cpu/cpu.h"
+#include "bochs-core/memory/memory.h"
+#include "adapter-bochs/pc_system.h"
 #include "protected_range_action.h"
 
 static uint32_t runtime_protected_range_action_v1_lifecycle_active;
